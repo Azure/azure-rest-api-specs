@@ -137,413 +137,216 @@ model AccessRulePropertiesSubscriptionsItem {
   "go,python"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op mongoDBResourcesCreateUpdateMongoRoleDefinitionCustomized(
-  ...Azure.ResourceManager.ApiVersionParameter,
-  ...Azure.ResourceManager.SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  mongoRoleDefinitionId: string,
-
-  ...Azure.ResourceManager.ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
-  @minLength(3)
-  @maxLength(50)
-  accountName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @body
-  createUpdateMongoRoleDefinitionParameters: MongoRoleDefinitionCreateUpdateParameters,
-):
-  | Azure.ResourceManager.ArmResourceUpdatedResponse<MongoRoleDefinitionGetResults>
-  | Azure.ResourceManager.ArmAcceptedLroResponse<LroHeaders = Azure.ResourceManager.ArmLroLocationHeader<FinalResult = MongoRoleDefinitionGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader>;
-
 @@override(
   MongoRoleDefinitionGetResultsOperationGroup.createUpdateMongoRoleDefinition,
-  mongoDBResourcesCreateUpdateMongoRoleDefinitionCustomized,
+  reorderParameters(
+    MongoRoleDefinitionGetResultsOperationGroup.createUpdateMongoRoleDefinition,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "mongoRoleDefinitionId",
+      "resourceGroupName",
+      "accountName",
+      "resource"
+    ]
+  ),
   "go,java,python"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op mongoUserDefinitionCreateUpdateMongoUserDefinitionCustomized(
-  ...Azure.ResourceManager.ApiVersionParameter,
-  ...Azure.ResourceManager.SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  mongoUserDefinitionId: string,
-
-  ...Azure.ResourceManager.ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
-  @minLength(3)
-  @maxLength(50)
-  accountName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @body
-  createUpdateMongoUserDefinitionParameters: MongoUserDefinitionCreateUpdateParameters,
-):
-  | Azure.ResourceManager.ArmResourceUpdatedResponse<MongoUserDefinitionGetResults>
-  | Azure.ResourceManager.ArmAcceptedLroResponse<LroHeaders = Azure.ResourceManager.ArmLroLocationHeader<FinalResult = MongoUserDefinitionGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader>;
+@@clientName(
+  MongoRoleDefinitionGetResultsOperationGroup.createUpdateMongoRoleDefinition::parameters.resource,
+  "createUpdateMongoRoleDefinitionParameters",
+  "go,java,python"
+);
 
 @@override(
   MongoUserDefinitionGetResultsOperationGroup.createUpdateMongoUserDefinition,
-  mongoUserDefinitionCreateUpdateMongoUserDefinitionCustomized,
+  reorderParameters(
+    MongoUserDefinitionGetResultsOperationGroup.createUpdateMongoUserDefinition,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "mongoUserDefinitionId",
+      "resourceGroupName",
+      "accountName",
+      "resource"
+    ]
+  ),
   "go,java,python"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op mongoDBResourcesDeleteMongoRoleDefinitionCustomized(
-  ...Azure.ResourceManager.ApiVersionParameter,
-  ...Azure.ResourceManager.SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  mongoRoleDefinitionId: string,
-
-  ...Azure.ResourceManager.ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
-  @minLength(3)
-  @maxLength(50)
-  accountName: string,
-):
-  | Azure.ResourceManager.ArmDeletedResponse
-  | Azure.ResourceManager.ArmDeleteAcceptedLroResponse
-  | Azure.ResourceManager.ArmDeletedNoContentResponse;
+@@clientName(
+  MongoUserDefinitionGetResultsOperationGroup.createUpdateMongoUserDefinition::parameters.resource,
+  "createUpdateMongoUserDefinitionParameters",
+  "go,java,python"
+);
 
 @@override(
   MongoRoleDefinitionGetResultsOperationGroup.deleteMongoRoleDefinition,
-  mongoDBResourcesDeleteMongoRoleDefinitionCustomized,
+  reorderParameters(
+    MongoRoleDefinitionGetResultsOperationGroup.deleteMongoRoleDefinition,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "mongoRoleDefinitionId",
+      "resourceGroupName",
+      "accountName"
+    ]
+  ),
   "go,java,python"
 );
-
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op mongoDBResourcesDeleteMongoUserDefinitionCustomized(
-  ...Azure.ResourceManager.ApiVersionParameter,
-  ...Azure.ResourceManager.SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  mongoUserDefinitionId: string,
-
-  ...Azure.ResourceManager.ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
-  @minLength(3)
-  @maxLength(50)
-  accountName: string,
-):
-  | Azure.ResourceManager.ArmDeletedResponse
-  | Azure.ResourceManager.ArmDeleteAcceptedLroResponse
-  | Azure.ResourceManager.ArmDeletedNoContentResponse;
-
 @@override(
   MongoUserDefinitionGetResultsOperationGroup.deleteMongoUserDefinition,
-  mongoDBResourcesDeleteMongoUserDefinitionCustomized,
+  reorderParameters(
+    MongoUserDefinitionGetResultsOperationGroup.deleteMongoUserDefinition,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "mongoUserDefinitionId",
+      "resourceGroupName",
+      "accountName"
+    ]
+  ),
   "go,java,python"
 );
-
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op mongoDBResourcesGetMongoRoleDefinitionCustomized(
-  ...Azure.ResourceManager.ApiVersionParameter,
-  ...Azure.ResourceManager.SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  mongoRoleDefinitionId: string,
-
-  ...Azure.ResourceManager.ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
-  @minLength(3)
-  @maxLength(50)
-  accountName: string,
-): Azure.ResourceManager.ArmResponse<MongoRoleDefinitionGetResults>;
-
 @@override(
   MongoRoleDefinitionGetResultsOperationGroup.getMongoRoleDefinition,
-  mongoDBResourcesGetMongoRoleDefinitionCustomized,
+  reorderParameters(
+    MongoRoleDefinitionGetResultsOperationGroup.getMongoRoleDefinition,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "mongoRoleDefinitionId",
+      "resourceGroupName",
+      "accountName"
+    ]
+  ),
   "go,java,python"
 );
-
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op mongoDBResourcesGetMongoUserDefinitionCustomized(
-  ...Azure.ResourceManager.ApiVersionParameter,
-  ...Azure.ResourceManager.SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  mongoUserDefinitionId: string,
-
-  ...Azure.ResourceManager.ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
-  @minLength(3)
-  @maxLength(50)
-  accountName: string,
-): Azure.ResourceManager.ArmResponse<MongoUserDefinitionGetResults>;
-
 @@override(
   MongoUserDefinitionGetResultsOperationGroup.getMongoUserDefinition,
-  mongoDBResourcesGetMongoUserDefinitionCustomized,
+  reorderParameters(
+    MongoUserDefinitionGetResultsOperationGroup.getMongoUserDefinition,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "mongoUserDefinitionId",
+      "resourceGroupName",
+      "accountName"
+    ]
+  ),
   "go,java,python"
 );
-
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op sqlResourcesCreateUpdateSqlRoleAssignmentCustomized(
-  ...Azure.ResourceManager.ApiVersionParameter,
-  ...Azure.ResourceManager.SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  roleAssignmentId: string,
-
-  ...Azure.ResourceManager.ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
-  @minLength(3)
-  @maxLength(50)
-  accountName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @body
-  createUpdateSqlRoleAssignmentParameters: SqlRoleAssignmentCreateUpdateParameters,
-):
-  | Azure.ResourceManager.ArmResourceUpdatedResponse<SqlRoleAssignmentGetResults>
-  | Azure.ResourceManager.ArmAcceptedLroResponse<LroHeaders = Azure.ResourceManager.ArmLroLocationHeader<FinalResult = SqlRoleAssignmentGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader>;
 
 @@override(
   SqlRoleAssignmentGetResultsOperationGroup.createUpdateSqlRoleAssignment,
-  sqlResourcesCreateUpdateSqlRoleAssignmentCustomized,
+  reorderParameters(
+    SqlRoleAssignmentGetResultsOperationGroup.createUpdateSqlRoleAssignment,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "roleAssignmentId",
+      "resourceGroupName",
+      "accountName",
+      "resource"
+    ]
+  ),
   "go,java,python"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op sqlResourcesCreateUpdateSqlRoleDefinitionCustomized(
-  ...Azure.ResourceManager.ApiVersionParameter,
-  ...Azure.ResourceManager.SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  roleDefinitionId: string,
-
-  ...Azure.ResourceManager.ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
-  @minLength(3)
-  @maxLength(50)
-  accountName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @body
-  createUpdateSqlRoleDefinitionParameters: SqlRoleDefinitionCreateUpdateParameters,
-):
-  | Azure.ResourceManager.ArmResourceUpdatedResponse<SqlRoleDefinitionGetResults>
-  | Azure.ResourceManager.ArmAcceptedLroResponse<LroHeaders = Azure.ResourceManager.ArmLroLocationHeader<FinalResult = SqlRoleDefinitionGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader>;
+@@clientName(
+  SqlRoleAssignmentGetResultsOperationGroup.createUpdateSqlRoleAssignment::parameters.resource,
+  "createUpdateSqlRoleAssignmentParameters",
+  "go,java,python"
+);
 
 @@override(
   SqlRoleDefinitionGetResultsOperationGroup.createUpdateSqlRoleDefinition,
-  sqlResourcesCreateUpdateSqlRoleDefinitionCustomized,
+  reorderParameters(
+    SqlRoleDefinitionGetResultsOperationGroup.createUpdateSqlRoleDefinition,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "roleDefinitionId",
+      "resourceGroupName",
+      "accountName",
+      "resource"
+    ]
+  ),
   "go,java,python"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op sqlResourcesDeleteSqlRoleAssignmentCustomized(
-  ...Azure.ResourceManager.ApiVersionParameter,
-  ...Azure.ResourceManager.SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  roleAssignmentId: string,
-
-  ...Azure.ResourceManager.ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
-  @minLength(3)
-  @maxLength(50)
-  accountName: string,
-):
-  | Azure.ResourceManager.ArmDeletedResponse
-  | Azure.ResourceManager.ArmDeleteAcceptedLroResponse
-  | Azure.ResourceManager.ArmDeletedNoContentResponse;
-
+@@clientName(
+  SqlRoleDefinitionGetResultsOperationGroup.createUpdateSqlRoleDefinition::parameters.resource,
+  "createUpdateSqlRoleDefinitionParameters",
+  "go,java,python"
+);
 @@override(
   SqlRoleAssignmentGetResultsOperationGroup.deleteSqlRoleAssignment,
-  sqlResourcesDeleteSqlRoleAssignmentCustomized,
+  reorderParameters(
+    SqlRoleAssignmentGetResultsOperationGroup.deleteSqlRoleAssignment,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "roleAssignmentId",
+      "resourceGroupName",
+      "accountName"
+    ]
+  ),
   "go,java,python"
 );
-
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op sqlResourcesDeleteSqlRoleDefinitionCustomized(
-  ...Azure.ResourceManager.ApiVersionParameter,
-  ...Azure.ResourceManager.SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  roleDefinitionId: string,
-
-  ...Azure.ResourceManager.ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
-  @minLength(3)
-  @maxLength(50)
-  accountName: string,
-):
-  | Azure.ResourceManager.ArmDeletedResponse
-  | Azure.ResourceManager.ArmDeleteAcceptedLroResponse
-  | Azure.ResourceManager.ArmDeletedNoContentResponse;
-
 @@override(
   SqlRoleDefinitionGetResultsOperationGroup.deleteSqlRoleDefinition,
-  sqlResourcesDeleteSqlRoleDefinitionCustomized,
+  reorderParameters(
+    SqlRoleDefinitionGetResultsOperationGroup.deleteSqlRoleDefinition,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "roleDefinitionId",
+      "resourceGroupName",
+      "accountName"
+    ]
+  ),
   "go,java,python"
 );
-
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op sqlResourcesGetSqlRoleAssignmentCustomized(
-  ...Azure.ResourceManager.ApiVersionParameter,
-  ...Azure.ResourceManager.SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  roleAssignmentId: string,
-
-  ...Azure.ResourceManager.ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
-  @minLength(3)
-  @maxLength(50)
-  accountName: string,
-): Azure.ResourceManager.ArmResponse<SqlRoleAssignmentGetResults>;
-
 @@override(
   SqlRoleAssignmentGetResultsOperationGroup.getSqlRoleAssignment,
-  sqlResourcesGetSqlRoleAssignmentCustomized,
+  reorderParameters(
+    SqlRoleAssignmentGetResultsOperationGroup.getSqlRoleAssignment,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "roleAssignmentId",
+      "resourceGroupName",
+      "accountName"
+    ]
+  ),
   "go,java,python"
 );
-
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "override"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op sqlResourcesGetSqlRoleDefinitionCustomized(
-  ...Azure.ResourceManager.ApiVersionParameter,
-  ...Azure.ResourceManager.SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  roleDefinitionId: string,
-
-  ...Azure.ResourceManager.ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
-  @minLength(3)
-  @maxLength(50)
-  accountName: string,
-): Azure.ResourceManager.ArmResponse<SqlRoleDefinitionGetResults>;
-
 @@override(
   SqlRoleDefinitionGetResultsOperationGroup.getSqlRoleDefinition,
-  sqlResourcesGetSqlRoleDefinitionCustomized,
+  reorderParameters(
+    SqlRoleDefinitionGetResultsOperationGroup.getSqlRoleDefinition,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "roleDefinitionId",
+      "resourceGroupName",
+      "accountName"
+    ]
+  ),
   "go,java,python"
 );
 

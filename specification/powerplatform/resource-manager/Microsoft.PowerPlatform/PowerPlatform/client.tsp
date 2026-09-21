@@ -57,172 +57,117 @@ using TypeSpec.Http;
 @@alternateType(KeyVaultProperties.id, url, "csharp");
 @@alternateType(VirtualNetworkProperties.id, armResourceIdentifier, "csharp");
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op accountsCreateOrUpdate(
-  /**
-   * Name of the account.
-   */
-  @path
-  accountName: string,
+@@override(
+  Accounts.createOrUpdate,
+  reorderParameters(
+    Accounts.createOrUpdate,
+    #[
+      "accountName",
+      "subscriptionId",
+      "resourceGroupName",
+      "apiVersion",
+      "provider",
+      "resource"
+    ]
+  )
+);
 
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...ApiVersionParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
+@@clientName(Accounts.createOrUpdate::parameters.resource, "parameters");
 
-  /**
-   * Parameters supplied to create or update an account.
-   */
-  @body
-  parameters: Account,
-):
-  | ArmResourceUpdatedResponse<Account>
-  | ArmResourceCreatedSyncResponse<Account>;
+@@override(
+  Accounts.delete,
+  reorderParameters(
+    Accounts.delete,
+    #[
+      "accountName",
+      "subscriptionId",
+      "resourceGroupName",
+      "apiVersion",
+      "provider"
+    ]
+  )
+);
 
-@@override(Accounts.createOrUpdate, accountsCreateOrUpdate);
+@@override(
+  Accounts.get,
+  reorderParameters(
+    Accounts.get,
+    #[
+      "accountName",
+      "subscriptionId",
+      "resourceGroupName",
+      "apiVersion",
+      "provider"
+    ]
+  )
+);
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op accountsDelete(
-  /**
-   * Name of the account.
-   */
-  @path
-  accountName: string,
+@@override(
+  Accounts.update,
+  reorderParameters(
+    Accounts.update,
+    #[
+      "accountName",
+      "subscriptionId",
+      "resourceGroupName",
+      "apiVersion",
+      "provider",
+      "properties"
+    ]
+  )
+);
 
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...ApiVersionParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-): ArmDeletedResponse | ArmDeletedNoContentResponse;
+@@clientName(Accounts.update::parameters.properties, "parameters");
 
-@@override(Accounts.delete, accountsDelete);
+@@override(
+  EnterprisePolicies.createOrUpdate,
+  reorderParameters(
+    EnterprisePolicies.createOrUpdate,
+    #[
+      "enterprisePolicyName",
+      "subscriptionId",
+      "resourceGroupName",
+      "apiVersion",
+      "provider",
+      "resource"
+    ]
+  )
+);
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op accountsGet(
-  /**
-   * Name of the account.
-   */
-  @path
-  accountName: string,
+@@clientName(
+  EnterprisePolicies.createOrUpdate::parameters.resource,
+  "parameters"
+);
 
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...ApiVersionParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-): ArmResponse<Account>;
+@@override(
+  EnterprisePolicies.get,
+  reorderParameters(
+    EnterprisePolicies.get,
+    #[
+      "enterprisePolicyName",
+      "subscriptionId",
+      "resourceGroupName",
+      "apiVersion",
+      "provider"
+    ]
+  )
+);
 
-@@override(Accounts.get, accountsGet);
+@@override(
+  EnterprisePolicies.update,
+  reorderParameters(
+    EnterprisePolicies.update,
+    #[
+      "enterprisePolicyName",
+      "subscriptionId",
+      "resourceGroupName",
+      "apiVersion",
+      "provider",
+      "properties"
+    ]
+  )
+);
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op accountsUpdate(
-  /**
-   * Name of the account.
-   */
-  @path
-  accountName: string,
-
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...ApiVersionParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  /**
-   * Parameters supplied to update an account.
-   */
-  @body
-  parameters: PatchAccount,
-): ArmResponse<Account>;
-
-@@override(Accounts.update, accountsUpdate);
-
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op enterpriseCreateOrUpdate(
-  /**
-   * Name of the EnterprisePolicy.
-   */
-  @path
-  enterprisePolicyName: string,
-
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...ApiVersionParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  /**
-   * Parameters supplied to create or update EnterprisePolicy.
-   */
-  @body
-  parameters: EnterprisePolicy,
-):
-  | ArmResourceUpdatedResponse<EnterprisePolicy>
-  | ArmResourceCreatedSyncResponse<EnterprisePolicy>;
-
-@@override(EnterprisePolicies.createOrUpdate, enterpriseCreateOrUpdate);
-
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op enterpriseGet(
-  /**
-   * Name of the EnterprisePolicy.
-   */
-  @path
-  enterprisePolicyName: string,
-
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...ApiVersionParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-): ArmResponse<EnterprisePolicy>;
-
-@@override(EnterprisePolicies.get, enterpriseGet);
-
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op enterpriseUpdate(
-  /**
-   * Name of the EnterprisePolicy.
-   */
-  @path
-  enterprisePolicyName: string,
-
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...ApiVersionParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  /**
-   * Parameters supplied to update EnterprisePolicy.
-   */
-  @body
-  parameters: PatchEnterprisePolicy,
-): ArmResponse<EnterprisePolicy>;
-
-@@override(EnterprisePolicies.update, enterpriseUpdate);
+@@clientName(EnterprisePolicies.update::parameters.properties, "parameters");
 
 @@clientName(Microsoft.PowerPlatform, "PowerPlatformMgmtClient", "python");

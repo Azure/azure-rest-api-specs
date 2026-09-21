@@ -47,1722 +47,1148 @@ using Http;
   "javascript, python"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op UsersDeleteCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  name: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): void;
-
-@@override(Users.delete, UsersDeleteCustomized, "python,go,javascript");
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op UsersListByDataBoxEdgeDeviceCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<User>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @query("$filter")
-  $filter?: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): UserList;
+@@override(
+  Users.delete,
+  reorderParameters(
+    Users.delete,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "name",
+      "resourceGroupName"
+    ]
+  ),
+  "python,go,javascript"
+);
 
 @@override(
   Users.listByDataBoxEdgeDevice,
-  UsersListByDataBoxEdgeDeviceCustomized,
+  reorderParameters(
+    Users.listByDataBoxEdgeDevice,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "$filter",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op UsersGetCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<User>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  name: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): User;
-
-@@override(Users.get, UsersGetCustomized, "python,go,javascript");
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op UsersCreateOrUpdateCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  name: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-  @body
-  user: User,
-): void;
+@@override(
+  Users.get,
+  reorderParameters(
+    Users.get,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "name",
+      "resourceGroupName"
+    ]
+  ),
+  "python,go,javascript"
+);
 
 @@override(
   Users.createOrUpdate,
-  UsersCreateOrUpdateCustomized,
+  reorderParameters(
+    Users.createOrUpdate,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "name",
+      "resourceGroupName",
+      "resource"
+    ]
+  ),
   "python,go,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op StorageAccountsDeleteCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<StorageAccount>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  storageAccountName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): void;
+@@clientName(
+  Users.createOrUpdate::parameters.resource,
+  "user",
+  "python,go,javascript"
+);
 
 @@override(
   StorageAccounts.delete,
-  StorageAccountsDeleteCustomized,
+  reorderParameters(
+    StorageAccounts.delete,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "storageAccountName",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op StorageAccountsListByDataBoxEdgeDeviceCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<StorageAccount>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): StorageAccountList;
 
 @@override(
   StorageAccounts.listByDataBoxEdgeDevice,
-  StorageAccountsListByDataBoxEdgeDeviceCustomized,
+  reorderParameters(
+    StorageAccounts.listByDataBoxEdgeDevice,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op StorageAccountsGetCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  storageAccountName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): StorageAccount;
 
 @@override(
   StorageAccounts.get,
-  StorageAccountsGetCustomized,
+  reorderParameters(
+    StorageAccounts.get,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "storageAccountName",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op StorageAccountsCreateOrUpdateCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  storageAccountName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-  @body
-  storageAccount: StorageAccount,
-): void;
 
 @@override(
   StorageAccounts.createOrUpdate,
-  StorageAccountsCreateOrUpdateCustomized,
+  reorderParameters(
+    StorageAccounts.createOrUpdate,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "storageAccountName",
+      "resourceGroupName",
+      "resource"
+    ]
+  ),
   "python,go,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op MonitoringMetricConfigurationsDeleteCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<MonitoringMetricConfiguration>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  roleName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): void;
+@@clientName(
+  StorageAccounts.createOrUpdate::parameters.resource,
+  "storageAccount",
+  "python,go,javascript"
+);
 
 @@override(
   MonitoringMetricConfigurations.delete,
-  MonitoringMetricConfigurationsDeleteCustomized,
+  reorderParameters(
+    MonitoringMetricConfigurations.delete,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "roleName",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op MonitoringMetricConfigurationsListCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<MonitoringMetricConfiguration>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  roleName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): MonitoringMetricConfigurationList;
 
 @@override(
   MonitoringMetricConfigurations.list,
-  MonitoringMetricConfigurationsListCustomized,
+  reorderParameters(
+    MonitoringMetricConfigurations.list,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "roleName",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op MonitoringMetricConfigurationsGetCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  roleName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): MonitoringMetricConfiguration;
 
 @@override(
   MonitoringMetricConfigurations.get,
-  MonitoringMetricConfigurationsGetCustomized,
+  reorderParameters(
+    MonitoringMetricConfigurations.get,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "roleName",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op MonitoringMetricConfigurationsCreateOrUpdateCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  roleName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-  @body
-  monitoringMetricConfiguration: MonitoringMetricConfiguration,
-): void;
 
 @@override(
   MonitoringMetricConfigurations.createOrUpdate,
-  MonitoringMetricConfigurationsCreateOrUpdateCustomized,
+  reorderParameters(
+    MonitoringMetricConfigurations.createOrUpdate,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "roleName",
+      "resourceGroupName",
+      "resource"
+    ]
+  ),
   "python,go,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op OperationsStatusGetCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<Job>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  name: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): OperationsStatus;
+@@clientName(
+  MonitoringMetricConfigurations.createOrUpdate::parameters.resource,
+  "monitoringMetricConfiguration",
+  "python,go,javascript"
+);
 
 @@override(
   OperationsStatus.get,
-  OperationsStatusGetCustomized,
+  reorderParameters(
+    OperationsStatus.get,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "name",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,javascript"
 );
 
 // Core lib supports query operation status, so scope out this operation for .NET.
 @@scope(OperationsStatus.get, "!csharp");
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op JobsGetCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<Job>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+@@override(
+  Jobs.get,
+  reorderParameters(
+    Jobs.get,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "name",
+      "resourceGroupName"
+    ]
+  ),
+  "python,go,javascript"
+);
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  name: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): Job;
-
-@@override(Jobs.get, JobsGetCustomized, "python,go,javascript");
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op RolesDeleteCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<Role>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  name: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): void;
-
-@@override(Roles.delete, RolesDeleteCustomized, "python,go,javascript");
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op RolesListByDataBoxEdgeDeviceCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<Role>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): RoleList;
+@@override(
+  Roles.delete,
+  reorderParameters(
+    Roles.delete,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "name",
+      "resourceGroupName"
+    ]
+  ),
+  "python,go,javascript"
+);
 
 @@override(
   Roles.listByDataBoxEdgeDevice,
-  RolesListByDataBoxEdgeDeviceCustomized,
+  reorderParameters(
+    Roles.listByDataBoxEdgeDevice,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op RolesGetCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<Role>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  name: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): Role;
-
-@@override(Roles.get, RolesGetCustomized, "python,go,javascript");
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op RolesCreateOrUpdateCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<Role>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  name: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-  @body
-  role: Role,
-): void;
+@@override(
+  Roles.get,
+  reorderParameters(
+    Roles.get,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "name",
+      "resourceGroupName"
+    ]
+  ),
+  "python,go,javascript"
+);
 
 @@override(
   Roles.createOrUpdate,
-  RolesCreateOrUpdateCustomized,
+  reorderParameters(
+    Roles.createOrUpdate,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "name",
+      "resourceGroupName",
+      "resource"
+    ]
+  ),
   "python,go,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op SharesDeleteCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<Share>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+@@clientName(
+  Roles.createOrUpdate::parameters.resource,
+  "role",
+  "python,go,javascript"
+);
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  name: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): void;
-
-@@override(Shares.delete, SharesDeleteCustomized, "python,go,javascript");
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op SharesListByDataBoxEdgeDeviceCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<Share>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): ShareList;
+@@override(
+  Shares.delete,
+  reorderParameters(
+    Shares.delete,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "name",
+      "resourceGroupName"
+    ]
+  ),
+  "python,go,javascript"
+);
 
 @@override(
   Shares.listByDataBoxEdgeDevice,
-  SharesListByDataBoxEdgeDeviceCustomized,
+  reorderParameters(
+    Shares.listByDataBoxEdgeDevice,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op SharesRefreshCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<Share>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+@@override(
+  Shares.refresh,
+  reorderParameters(
+    Shares.refresh,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "name",
+      "body",
+      "resourceGroupName"
+    ]
+  ),
+  "python,go,javascript"
+);
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  name: string,
-
-  @body
-  body: void,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): void;
-
-@@override(Shares.refresh, SharesRefreshCustomized, "python,go,javascript");
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op SharesGetCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<Share>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  name: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): Share;
-
-@@override(Shares.get, SharesGetCustomized, "python,go,javascript");
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op SharesCreateOrUpdateCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<Share>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  name: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-  @body
-  share: Share,
-): void;
+@@override(
+  Shares.get,
+  reorderParameters(
+    Shares.get,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "name",
+      "resourceGroupName"
+    ]
+  ),
+  "python,go,javascript"
+);
 
 @@override(
   Shares.createOrUpdate,
-  SharesCreateOrUpdateCustomized,
+  reorderParameters(
+    Shares.createOrUpdate,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "name",
+      "resourceGroupName",
+      "resource"
+    ]
+  ),
   "python,go,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op ContainersDeleteCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<Container>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  storageAccountName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  containerName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): void;
+@@clientName(
+  Shares.createOrUpdate::parameters.resource,
+  "share",
+  "python,go,javascript"
+);
 
 @@override(
   Containers.delete,
-  ContainersDeleteCustomized,
+  reorderParameters(
+    Containers.delete,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "storageAccountName",
+      "containerName",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op ContainersRefreshCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<Container>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  storageAccountName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  containerName: string,
-
-  @body
-  body: void,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): void;
 
 @@override(
   Containers.refresh,
-  ContainersRefreshCustomized,
+  reorderParameters(
+    Containers.refresh,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "storageAccountName",
+      "containerName",
+      "body",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op ContainersListByStorageAccountCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<Container>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  storageAccountName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): ContainerList;
 
 @@override(
   Containers.listByStorageAccount,
-  ContainersListByStorageAccountCustomized,
+  reorderParameters(
+    Containers.listByStorageAccount,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "storageAccountName",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op ContainersGetCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  storageAccountName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  containerName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): Container;
-
-@@override(Containers.get, ContainersGetCustomized, "python,go,javascript");
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op ContainersCreateOrUpdateCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  storageAccountName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  containerName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-  @body
-  container: Container,
-): void;
+@@override(
+  Containers.get,
+  reorderParameters(
+    Containers.get,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "storageAccountName",
+      "containerName",
+      "resourceGroupName"
+    ]
+  ),
+  "python,go,javascript"
+);
 
 @@override(
   Containers.createOrUpdate,
-  ContainersCreateOrUpdateCustomized,
+  reorderParameters(
+    Containers.createOrUpdate,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "storageAccountName",
+      "containerName",
+      "resourceGroupName",
+      "resource"
+    ]
+  ),
   "python,go,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op OrdersDeleteCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+@@clientName(
+  Containers.createOrUpdate::parameters.resource,
+  "container",
+  "python,go,javascript"
+);
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  orderName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): void;
-
-@@override(Orders.delete, OrdersDeleteCustomized, "python,go,javascript");
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op OrderslistDCAccessCodeCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  orderName: string,
-
-  @body
-  body: void,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): DCAccessCode;
+@@override(
+  Orders.delete,
+  reorderParameters(
+    Orders.delete,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "orderName",
+      "resourceGroupName"
+    ]
+  ),
+  "python,go,javascript"
+);
 
 @@override(
   Orders.listDCAccessCode,
-  OrderslistDCAccessCodeCustomized,
+  reorderParameters(
+    Orders.listDCAccessCode,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "orderName",
+      "body",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op OrdersListByDataBoxEdgeDeviceCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): OrderList;
 
 @@override(
   Orders.listByDataBoxEdgeDevice,
-  OrdersListByDataBoxEdgeDeviceCustomized,
+  reorderParameters(
+    Orders.listByDataBoxEdgeDevice,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op OrdersGetCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<Order>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  orderName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): Order;
-
-@@override(Orders.get, OrdersGetCustomized, "python,go,javascript");
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op OrdersCreateOrUpdateCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<Order>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  orderName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-  @body
-  order: Order,
-): void;
+@@override(
+  Orders.get,
+  reorderParameters(
+    Orders.get,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "orderName",
+      "resourceGroupName"
+    ]
+  ),
+  "python,go,javascript"
+);
 
 @@override(
   Orders.createOrUpdate,
-  OrdersCreateOrUpdateCustomized,
+  reorderParameters(
+    Orders.createOrUpdate,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "orderName",
+      "resourceGroupName",
+      "resource"
+    ]
+  ),
   "python,go,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op TriggersDeleteCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<Trigger>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+@@clientName(
+  Orders.createOrUpdate::parameters.resource,
+  "order",
+  "python,go,javascript"
+);
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  name: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): void;
-
-@@override(Triggers.delete, TriggersDeleteCustomized, "python,go,javascript");
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op TriggersListByDataBoxEdgeDeviceCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<Trigger>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @query("$filter")
-  $filter?: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): TriggerList;
+@@override(
+  Triggers.delete,
+  reorderParameters(
+    Triggers.delete,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "name",
+      "resourceGroupName"
+    ]
+  ),
+  "python,go,javascript"
+);
 
 @@override(
   Triggers.listByDataBoxEdgeDevice,
-  TriggersListByDataBoxEdgeDeviceCustomized,
+  reorderParameters(
+    Triggers.listByDataBoxEdgeDevice,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "$filter",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op TriggersGetCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<Trigger>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  name: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): Trigger;
-
-@@override(Triggers.get, TriggersGetCustomized, "python,go,javascript");
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op TriggersCreateOrUpdateCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<Trigger>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  name: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-  @body
-  trigger: Trigger,
-): void;
+@@override(
+  Triggers.get,
+  reorderParameters(
+    Triggers.get,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "name",
+      "resourceGroupName"
+    ]
+  ),
+  "python,go,javascript"
+);
 
 @@override(
   Triggers.createOrUpdate,
-  TriggersCreateOrUpdateCustomized,
+  reorderParameters(
+    Triggers.createOrUpdate,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "name",
+      "resourceGroupName",
+      "resource"
+    ]
+  ),
   "python,go,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op AddonsDeleteCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<Addon>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+@@clientName(
+  Triggers.createOrUpdate::parameters.resource,
+  "trigger",
+  "python,go,javascript"
+);
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  roleName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  addonName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): void;
-
-@@override(Addons.delete, AddonsDeleteCustomized, "python,go,javascript");
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op AddonsListByRoleCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<Addon>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  roleName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): AddonList;
+@@override(
+  Addons.delete,
+  reorderParameters(
+    Addons.delete,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "roleName",
+      "addonName",
+      "resourceGroupName"
+    ]
+  ),
+  "python,go,javascript"
+);
 
 @@override(
   Addons.listByRole,
-  AddonsListByRoleCustomized,
+  reorderParameters(
+    Addons.listByRole,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "roleName",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op AddonsGetCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  roleName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  addonName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): Addon;
-
-@@override(Addons.get, AddonsGetCustomized, "python,go,javascript");
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op AddonsCreateOrUpdateCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<Addon>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  roleName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  addonName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-  @body
-  addon: Addon,
-): void;
+@@override(
+  Addons.get,
+  reorderParameters(
+    Addons.get,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "roleName",
+      "addonName",
+      "resourceGroupName"
+    ]
+  ),
+  "python,go,javascript"
+);
 
 @@override(
   Addons.createOrUpdate,
-  AddonsCreateOrUpdateCustomized,
+  reorderParameters(
+    Addons.createOrUpdate,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "roleName",
+      "addonName",
+      "resourceGroupName",
+      "resource"
+    ]
+  ),
   "python,go,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op AlertsListByDataBoxEdgeDeviceCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<Alert>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): AlertList;
+@@clientName(
+  Addons.createOrUpdate::parameters.resource,
+  "addon",
+  "python,go,javascript"
+);
 
 @@override(
   Alerts.listByDataBoxEdgeDevice,
-  AlertsListByDataBoxEdgeDeviceCustomized,
+  reorderParameters(
+    Alerts.listByDataBoxEdgeDevice,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op AlertsGetCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<Alert>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  name: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): Alert;
-
-@@override(Alerts.get, AlertsGetCustomized, "python,go,javascript");
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op BandwidthSchedulesDeleteCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<BandwidthSchedule>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  name: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): void;
+@@override(
+  Alerts.get,
+  reorderParameters(
+    Alerts.get,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "name",
+      "resourceGroupName"
+    ]
+  ),
+  "python,go,javascript"
+);
 
 @@override(
   BandwidthSchedules.delete,
-  BandwidthSchedulesDeleteCustomized,
+  reorderParameters(
+    BandwidthSchedules.delete,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "name",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op BandwidthSchedulesListByDataBoxEdgeDeviceCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<BandwidthSchedule>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): BandwidthSchedulesList;
 
 @@override(
   BandwidthSchedules.listByDataBoxEdgeDevice,
-  BandwidthSchedulesListByDataBoxEdgeDeviceCustomized,
+  reorderParameters(
+    BandwidthSchedules.listByDataBoxEdgeDevice,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op BandwidthSchedulesGetCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<BandwidthSchedule>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  name: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): BandwidthSchedule;
 
 @@override(
   BandwidthSchedules.get,
-  BandwidthSchedulesGetCustomized,
+  reorderParameters(
+    BandwidthSchedules.get,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "name",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op BandwidthSchedulesCreateOrUpdateCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<BandwidthSchedule>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  name: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-  @body
-  parameters: BandwidthSchedule,
-): void;
 
 @@override(
   BandwidthSchedules.createOrUpdate,
-  BandwidthSchedulesCreateOrUpdateCustomized,
+  reorderParameters(
+    BandwidthSchedules.createOrUpdate,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "name",
+      "resourceGroupName",
+      "resource"
+    ]
+  ),
   "python,go,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op StorageAccountCredentialsDeleteCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<StorageAccountCredential>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  name: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): void;
+@@clientName(
+  BandwidthSchedules.createOrUpdate::parameters.resource,
+  "parameters",
+  "python,go,javascript"
+);
 
 @@override(
   StorageAccountCredentials.delete,
-  StorageAccountCredentialsDeleteCustomized,
+  reorderParameters(
+    StorageAccountCredentials.delete,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "name",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op StorageAccountCredentialsListByDataBoxEdgeDeviceCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<StorageAccountCredential>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): StorageAccountCredentialList;
 
 @@override(
   StorageAccountCredentials.listByDataBoxEdgeDevice,
-  StorageAccountCredentialsListByDataBoxEdgeDeviceCustomized,
+  reorderParameters(
+    StorageAccountCredentials.listByDataBoxEdgeDevice,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op StorageAccountCredentialsGetCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<StorageAccount>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  name: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): StorageAccountCredential;
 
 @@override(
   StorageAccountCredentials.get,
-  StorageAccountCredentialsGetCustomized,
+  reorderParameters(
+    StorageAccountCredentials.get,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "name",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op StorageAccountCredentialsCreateOrUpdateCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  name: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-  @body
-  storageAccountCredential: StorageAccountCredential,
-): void;
 
 @@override(
   StorageAccountCredentials.createOrUpdate,
-  StorageAccountCredentialsCreateOrUpdateCustomized,
+  reorderParameters(
+    StorageAccountCredentials.createOrUpdate,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "name",
+      "resourceGroupName",
+      "resource"
+    ]
+  ),
   "python,go,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op DataBoxEdgeDevicesListByDataBoxEdgeDeviceCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  @body
-  body: void,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): NodeList;
+@@clientName(
+  StorageAccountCredentials.createOrUpdate::parameters.resource,
+  "storageAccountCredential",
+  "python,go,javascript"
+);
 
 @@override(
   DataBoxEdgeDevices.listByDataBoxEdgeDevice,
-  DataBoxEdgeDevicesListByDataBoxEdgeDeviceCustomized,
+  reorderParameters(
+    DataBoxEdgeDevices.listByDataBoxEdgeDevice,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "body",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op DataBoxEdgeDevicesDeleteCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): void;
 
 @@override(
   DataBoxEdgeDevices.delete,
-  DataBoxEdgeDevicesDeleteCustomized,
+  reorderParameters(
+    DataBoxEdgeDevices.delete,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op DataBoxEdgeDevicesCreateOrUpdateSecuritySettingsCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-  @body
-  securitySettings: SecuritySettings,
-): void;
 
 @@override(
   DataBoxEdgeDevices.createOrUpdateSecuritySettings,
-  DataBoxEdgeDevicesCreateOrUpdateSecuritySettingsCustomized,
+  reorderParameters(
+    DataBoxEdgeDevices.createOrUpdateSecuritySettings,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "resourceGroupName",
+      "body"
+    ]
+  ),
   "python,go,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op DataBoxEdgeDevicesUploadCertificateCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-  @body
-  parameters: UploadCertificateRequest,
-): UploadCertificateResponse;
+@@clientName(
+  DataBoxEdgeDevices.createOrUpdateSecuritySettings::parameters.body,
+  "securitySettings",
+  "python,go,javascript"
+);
 
 @@override(
   DataBoxEdgeDevices.uploadCertificate,
-  DataBoxEdgeDevicesUploadCertificateCustomized,
+  reorderParameters(
+    DataBoxEdgeDevices.uploadCertificate,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "resourceGroupName",
+      "body"
+    ]
+  ),
   "python,go,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op DataBoxEdgeDevicesInstallUpdatesCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  @body
-  body: void,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): void;
+@@clientName(
+  DataBoxEdgeDevices.uploadCertificate::parameters.body,
+  "parameters",
+  "python,go,javascript"
+);
 
 @@override(
   DataBoxEdgeDevices.installUpdates,
-  DataBoxEdgeDevicesInstallUpdatesCustomized,
+  reorderParameters(
+    DataBoxEdgeDevices.installUpdates,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "body",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op DataBoxEdgeDevicesGetNetworkSettingsCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<NetworkSettings>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  networkSetting: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): NetworkSettings;
 
 @@override(
   Devices.getNetworkSettings,
-  DataBoxEdgeDevicesGetNetworkSettingsCustomized,
+  reorderParameters(
+    Devices.getNetworkSettings,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "networkSetting",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op DataBoxEdgeDevicesGenerateCertificateCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  ...Azure.ResourceManager.ProviderNamespace<DataBoxEdgeDevice>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-  @body
-  body: void,
-): GenerateCertResponse;
 
 @@override(
   DataBoxEdgeDevices.generateCertificate,
-  DataBoxEdgeDevicesGenerateCertificateCustomized,
+  reorderParameters(
+    DataBoxEdgeDevices.generateCertificate,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "resourceGroupName",
+      "body"
+    ]
+  ),
   "python,go,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op DataBoxEdgeDevicesScanForUpdatesCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<DataBoxEdgeDevice>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  @body
-  body: void,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): void;
 
 @@override(
   DataBoxEdgeDevices.scanForUpdates,
-  DataBoxEdgeDevicesScanForUpdatesCustomized,
+  reorderParameters(
+    DataBoxEdgeDevices.scanForUpdates,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "body",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op DataBoxEdgeDevicesGetCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<DataBoxEdgeDevice>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): DataBoxEdgeDevices;
 
 @@override(
   DataBoxEdgeDevices.get,
-  DataBoxEdgeDevicesGetCustomized,
+  reorderParameters(
+    DataBoxEdgeDevices.get,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op DataBoxEdgeDevicesUpdateCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<DataBoxEdgeDevice>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-  @body
-  parameters: DataBoxEdgeDevicePatch,
-): DataBoxEdgeDevices;
 
 @@override(
   DataBoxEdgeDevices.update,
-  DataBoxEdgeDevicesUpdateCustomized,
+  reorderParameters(
+    DataBoxEdgeDevices.update,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "resourceGroupName",
+      "properties"
+    ]
+  ),
   "python,go,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op DataBoxEdgeDevicesGetUpdateSummaryCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<UpdateSummary>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  updateSummary: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): UpdateSummary;
+@@clientName(
+  DataBoxEdgeDevices.update::parameters.properties,
+  "parameters",
+  "python,go,javascript"
+);
 
 @@override(
   UpdateSummaries.getUpdateSummary,
-  DataBoxEdgeDevicesGetUpdateSummaryCustomized,
+  reorderParameters(
+    UpdateSummaries.getUpdateSummary,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "updateSummary",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op DataBoxEdgeDevicesUpdateExtendedInformationCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<DataBoxEdgeDevice>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-  @body
-  parameters: DataBoxEdgeDeviceExtendedInfoPatch,
-): DataBoxEdgeDeviceExtendedInfo;
 
 @@override(
   DataBoxEdgeDevices.updateExtendedInformation,
-  DataBoxEdgeDevicesUpdateExtendedInformationCustomized,
+  reorderParameters(
+    DataBoxEdgeDevices.updateExtendedInformation,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "resourceGroupName",
+      "body"
+    ]
+  ),
   "python,go,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op DataBoxEdgeDevicesDownloadUpdatesCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<DataBoxEdgeDevice>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  @body
-  body: void,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): void;
+@@clientName(
+  DataBoxEdgeDevices.updateExtendedInformation::parameters.body,
+  "parameters",
+  "python,go,javascript"
+);
 
 @@override(
   DataBoxEdgeDevices.downloadUpdates,
-  DataBoxEdgeDevicesDownloadUpdatesCustomized,
+  reorderParameters(
+    DataBoxEdgeDevices.downloadUpdates,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "body",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op DataBoxEdgeDevicesGetExtendedInformationCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<DataBoxEdgeDevice>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  @body
-  body: void,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): DataBoxEdgeDeviceExtendedInfo;
-
 @@override(
   DataBoxEdgeDevices.getExtendedInformation,
-  DataBoxEdgeDevicesGetExtendedInformationCustomized,
+  reorderParameters(
+    DataBoxEdgeDevices.getExtendedInformation,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "deviceName",
+      "body",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,javascript"
 );
 
@@ -2382,204 +1808,137 @@ op DataBoxEdgeDevicesGetExtendedInformationCustomized(
 );
 @@alternateType(MECRoleProperties.roleStatus, RoleStatus | null, "csharp");
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op DataBoxEdgeDevicesCheckResourceCreationFeasibilityCustomized(
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-  ...Azure.ResourceManager.ProviderNamespace<DataBoxEdgeDevice>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @body
-  deviceCapacityRequestInfo: DeviceCapacityRequestInfo,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @query("capacityName")
-  capacityName?: string,
-):
-  | OkResponse
-  | Azure.ResourceManager.ArmAcceptedLroResponse<LroHeaders = Azure.ResourceManager.ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>
-  | CloudError;
-
 @@override(
   DataBoxEdgeDevices.checkResourceCreationFeasibility,
-  DataBoxEdgeDevicesCheckResourceCreationFeasibilityCustomized
+  reorderParameters(
+    DataBoxEdgeDevices.checkResourceCreationFeasibility,
+    #[
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "apiVersion",
+      "deviceName",
+      "body",
+      "capacityName"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op DataBoxEdgeDevicesCreateOrUpdateCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<DataBoxEdgeDevice>,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-  @body
-  dataBoxEdgeDevice: DataBoxEdgeDevice,
-
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-): DataBoxEdgeDevice;
+@@clientName(
+  DataBoxEdgeDevices.checkResourceCreationFeasibility::parameters.body,
+  "deviceCapacityRequestInfo"
+);
 
 @@override(
   DataBoxEdgeDevices.createOrUpdate,
-  DataBoxEdgeDevicesCreateOrUpdateCustomized
+  reorderParameters(
+    DataBoxEdgeDevices.createOrUpdate,
+    #[
+      "provider",
+      "subscriptionId",
+      "deviceName",
+      "resourceGroupName",
+      "resource",
+      "apiVersion"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op DiagnosticSettingsGetDiagnosticProactiveLogCollectionSettingsCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<DiagnosticProactiveLogCollectionSettings>,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  diagnosticProactiveLogCollectionSetting: string,
-
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-): DiagnosticProactiveLogCollectionSettings;
+@@clientName(
+  DataBoxEdgeDevices.createOrUpdate::parameters.resource,
+  "dataBoxEdgeDevice"
+);
 
 @@override(
   DiagnosticSettings.getDiagnosticProactiveLogCollectionSettings,
-  DiagnosticSettingsGetDiagnosticProactiveLogCollectionSettingsCustomized
+  reorderParameters(
+    DiagnosticSettings.getDiagnosticProactiveLogCollectionSettings,
+    #[
+      "provider",
+      "deviceName",
+      "diagnosticProactiveLogCollectionSetting",
+      "subscriptionId",
+      "resourceGroupName",
+      "apiVersion"
+    ]
+  )
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "customization"
-op DiagnosticSettingsUpdateDiagnosticProactiveLogCollectionSettingsCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<DiagnosticProactiveLogCollectionSettings>,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  diagnosticProactiveLogCollectionSetting: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-  @body
-  proactiveLogCollectionSettings: DiagnosticProactiveLogCollectionSettings,
-
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-): void;
 
 @@override(
   DiagnosticSettings.updateDiagnosticProactiveLogCollectionSettings,
-  DiagnosticSettingsUpdateDiagnosticProactiveLogCollectionSettingsCustomized
+  reorderParameters(
+    DiagnosticSettings.updateDiagnosticProactiveLogCollectionSettings,
+    #[
+      "provider",
+      "deviceName",
+      "diagnosticProactiveLogCollectionSetting",
+      "resourceGroupName",
+      "resource",
+      "subscriptionId",
+      "apiVersion"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op DiagnosticSettingsGetDiagnosticRemoteSupportSettingsCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<DiagnosticRemoteSupportSettings>,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  diagnosticRemoteSupportSetting: string,
-
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-): DiagnosticRemoteSupportSettings;
+@@clientName(
+  DiagnosticSettings.updateDiagnosticProactiveLogCollectionSettings::parameters.resource,
+  "proactiveLogCollectionSettings"
+);
 
 @@override(
   DiagnosticRemoteSupportSettingsOperationGroup.getDiagnosticRemoteSupportSettings,
-  DiagnosticSettingsGetDiagnosticRemoteSupportSettingsCustomized
+  reorderParameters(
+    DiagnosticRemoteSupportSettingsOperationGroup.getDiagnosticRemoteSupportSettings,
+    #[
+      "provider",
+      "deviceName",
+      "diagnosticRemoteSupportSetting",
+      "subscriptionId",
+      "resourceGroupName",
+      "apiVersion"
+    ]
+  )
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "customization"
-op DiagnosticSettingsUpdateDiagnosticRemoteSupportSettingsCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<DiagnosticRemoteSupportSettings>,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  diagnosticRemoteSupportSetting: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-  @body
-  diagnosticRemoteSupportSettings: DiagnosticRemoteSupportSettings,
-
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-): void;
 
 @@override(
   DiagnosticRemoteSupportSettingsOperationGroup.updateDiagnosticRemoteSupportSettings,
-  DiagnosticSettingsUpdateDiagnosticRemoteSupportSettingsCustomized
+  reorderParameters(
+    DiagnosticRemoteSupportSettingsOperationGroup.updateDiagnosticRemoteSupportSettings,
+    #[
+      "provider",
+      "deviceName",
+      "diagnosticRemoteSupportSetting",
+      "resourceGroupName",
+      "resource",
+      "subscriptionId",
+      "apiVersion"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op DataBoxEdgeDevicesTriggerSupportPackageCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<DataBoxEdgeDevice>,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  deviceName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-  @body
-  triggerSupportPackageRequest: TriggerSupportPackageRequest,
-
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-): void;
+@@clientName(
+  DiagnosticRemoteSupportSettingsOperationGroup.updateDiagnosticRemoteSupportSettings::parameters.resource,
+  "diagnosticRemoteSupportSettings"
+);
 
 @@override(
   DataBoxEdgeDevices.triggerSupportPackage,
-  DataBoxEdgeDevicesTriggerSupportPackageCustomized
+  reorderParameters(
+    DataBoxEdgeDevices.triggerSupportPackage,
+    #[
+      "provider",
+      "deviceName",
+      "resourceGroupName",
+      "body",
+      "subscriptionId",
+      "apiVersion"
+    ]
+  )
+);
+
+@@clientName(
+  DataBoxEdgeDevices.triggerSupportPackage::parameters.body,
+  "triggerSupportPackageRequest"
 );
 
 @@clientName(DataBoxEdgeSku, "ResourceTypeSku", "java");

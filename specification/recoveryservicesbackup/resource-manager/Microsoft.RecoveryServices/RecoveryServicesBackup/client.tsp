@@ -466,1760 +466,1098 @@ using Microsoft.RecoveryServices;
 
 // Custom operations to reorder parameters (resourceGroupName after vaultName) for various operations
 
-// BMSPrepareDataMoveOperationResult operations
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op bmsPrepareDataMoveOperationResultGet(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  backupStorageConfigName: "vaultstorageconfig",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  operationId: string,
-): VaultStorageConfigOperationResultResponse;
-
 @@override(
   BMSPrepareDataMoveOperationResult.get,
-  bmsPrepareDataMoveOperationResultGet,
+  reorderParameters(
+    BMSPrepareDataMoveOperationResult.get,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "backupStorageConfigName",
+      "operationId"
+    ]
+  ),
   "java,go,python,javascript"
 );
 
-// BackupEngines operations
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op backupEnginesGet(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
+@@override(
+  BackupEngines.get,
+  reorderParameters(
+    BackupEngines.get,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "backupEngineName",
+      "$filter",
+      "$skipToken"
+    ]
+  ),
+  "java,go,python,javascript"
+);
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
+@@override(
+  BackupEngines.list,
+  reorderParameters(
+    BackupEngines.list,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "$filter",
+      "$skipToken"
+    ]
+  ),
+  "java,go,python,javascript"
+);
 
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  backupEngineName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  $filter?: string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  $skipToken?: string,
-): BackupEngineBaseResource;
-
-@@override(BackupEngines.get, backupEnginesGet, "java,go,python,javascript");
-
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op backupEnginesList(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  $filter?: string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  $skipToken?: string,
-): ArmResponse<BackupEngineBaseResourceList>;
-
-@@override(BackupEngines.list, backupEnginesList, "java,go,python,javascript");
-
-// BackupJobs operations
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op backupJobsList(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  $filter?: string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  $skipToken?: string,
-): ArmResponse<JobResourceList>;
-
-@@override(BackupJobs.list, backupJobsList, "java,go,python,javascript");
-
-// BackupPolicies operations
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op backupPoliciesList(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  $filter?: string,
-): ArmResponse<ProtectionPolicyResourceList>;
+@@override(
+  BackupJobs.list,
+  reorderParameters(
+    BackupJobs.list,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "$filter",
+      "$skipToken"
+    ]
+  ),
+  "java,go,python,javascript"
+);
 
 @@override(
   BackupPolicies.list,
-  backupPoliciesList,
+  reorderParameters(
+    BackupPolicies.list,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "$filter"
+    ]
+  ),
   "java,go,python,javascript"
 );
-
-// BackupResourceEncryptionConfigs operations
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op backupResourceEncryptionConfigsGet(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  backupEncryptionConfig: string,
-): BackupResourceEncryptionConfigExtendedResource;
 
 @@override(
   BackupResourceEncryptionConfigs.get,
-  backupResourceEncryptionConfigsGet,
+  reorderParameters(
+    BackupResourceEncryptionConfigs.get,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "backupEncryptionConfig"
+    ]
+  ),
   "java,go,python,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op backupResourceEncryptionConfigsUpdate(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  backupEncryptionConfig: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  parameters: BackupResourceEncryptionConfigResource,
-): ArmResponse<BackupResourceEncryptionConfig>;
 
 @@override(
   BackupResourceEncryptionConfigs.update,
-  backupResourceEncryptionConfigsUpdate,
+  reorderParameters(
+    BackupResourceEncryptionConfigs.update,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "backupEncryptionConfig",
+      "resource"
+    ]
+  ),
   "java,go,python,javascript"
 );
 
-// BackupResourceStorageConfigsNonCRR operations
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-op backupResourceStorageConfigsNonCRRGet(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.ProviderNamespace<BackupResourceConfigResource>,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  backupstorageconfig: string,
-): BackupResourceConfigResource;
+@@clientName(
+  BackupResourceEncryptionConfigs.update::parameters.resource,
+  "parameters",
+  "java,go,python,javascript"
+);
 
 @@override(
   BackupResourceStorageConfigsNonCRR.get,
-  backupResourceStorageConfigsNonCRRGet,
+  reorderParameters(
+    BackupResourceStorageConfigsNonCRR.get,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "backupstorageconfig"
+    ]
+  ),
   "java,go,python,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-op backupResourceStorageConfigsNonCRRPatch(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.ProviderNamespace<BackupResourceConfigResource>,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  backupstorageconfig: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  parameters: BackupResourceConfigResource,
-): ArmNoContentResponse;
 
 @@override(
   BackupResourceStorageConfigsNonCRR.patch,
-  backupResourceStorageConfigsNonCRRPatch,
+  reorderParameters(
+    BackupResourceStorageConfigsNonCRR.patch,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "backupstorageconfig",
+      "properties"
+    ]
+  ),
   "java,go,python,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-op backupResourceStorageConfigsNonCRRUpdate(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.ProviderNamespace<BackupResourceConfigResource>,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  backupstorageconfig: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  parameters: BackupResourceConfigResource,
-): ArmResourceUpdatedResponse<BackupResourceConfigResource>;
+@@clientName(
+  BackupResourceStorageConfigsNonCRR.patch::parameters.properties,
+  "parameters",
+  "java,go,python,javascript"
+);
 
 @@override(
   BackupResourceStorageConfigsNonCRR.update,
-  backupResourceStorageConfigsNonCRRUpdate,
+  reorderParameters(
+    BackupResourceStorageConfigsNonCRR.update,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "backupstorageconfig",
+      "resource"
+    ]
+  ),
   "java,go,python,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-op backupResourceStorageConfigsNonCRRBmsPrepareDataMove(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.ProviderNamespace<BackupResourceConfigResource>,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  backupstorageconfig: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  parameters: PrepareDataMoveRequest,
-): ArmAcceptedLroResponse;
+@@clientName(
+  BackupResourceStorageConfigsNonCRR.update::parameters.resource,
+  "parameters",
+  "java,go,python,javascript"
+);
 
 @@override(
   BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove,
-  backupResourceStorageConfigsNonCRRBmsPrepareDataMove,
+  reorderParameters(
+    BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "backupstorageconfig",
+      "body"
+    ]
+  ),
   "java,go,python,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-op backupResourceStorageConfigsNonCRRBmsTriggerDataMove(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.ProviderNamespace<BackupResourceConfigResource>,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  backupstorageconfig: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  parameters: TriggerDataMoveRequest,
-): ArmAcceptedLroResponse;
+@@clientName(
+  BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove::parameters.body,
+  "parameters",
+  "java,go,python,javascript"
+);
 
 @@override(
   BackupResourceStorageConfigsNonCRR.bmsTriggerDataMove,
-  backupResourceStorageConfigsNonCRRBmsTriggerDataMove,
+  reorderParameters(
+    BackupResourceStorageConfigsNonCRR.bmsTriggerDataMove,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "backupstorageconfig",
+      "body"
+    ]
+  ),
   "java,go,python,javascript"
 );
 
-// BackupResourceVaultConfigs operations
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op backupResourceVaultConfigsGet(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  backupconfig: string,
-): BackupResourceVaultConfigResource;
+@@clientName(
+  BackupResourceStorageConfigsNonCRR.bmsTriggerDataMove::parameters.body,
+  "parameters",
+  "java,go,python,javascript"
+);
 
 @@override(
   BackupResourceVaultConfigs.get,
-  backupResourceVaultConfigsGet,
+  reorderParameters(
+    BackupResourceVaultConfigs.get,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "backupconfig"
+    ]
+  ),
   "java,go,python,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op backupResourceVaultConfigsPut(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  backupconfig: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  parameters: BackupResourceVaultConfigResource,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-  `x-ms-authorization-auxiliary`?: string,
-): ArmResourceUpdatedResponse<BackupResourceVaultConfigResource>;
 
 @@override(
   BackupResourceVaultConfigs.put,
-  backupResourceVaultConfigsPut,
+  reorderParameters(
+    BackupResourceVaultConfigs.put,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "backupconfig",
+      "resource",
+      "x-ms-authorization-auxiliary"
+    ]
+  ),
   "java,go,python,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op backupResourceVaultConfigsUpdate(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  backupconfig: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  parameters: BackupResourceVaultConfigResource,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-  `x-ms-authorization-auxiliary`?: string,
-): ArmNoContentResponse;
+@@clientName(
+  BackupResourceVaultConfigs.put::parameters.resource,
+  "parameters",
+  "java,go,python,javascript"
+);
 
 @@override(
   BackupResourceVaultConfigs.update,
-  backupResourceVaultConfigsUpdate,
+  reorderParameters(
+    BackupResourceVaultConfigs.update,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "backupconfig",
+      "properties",
+      "x-ms-authorization-auxiliary"
+    ]
+  ),
   "java,go,python,javascript"
 );
 
-// BackupWorkloadItems operations
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op backupWorkloadItemsList(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  fabricName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  containerName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  $filter?: string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  $skipToken?: string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  body: void,
-): ArmResponse<WorkloadItemResourceList>;
+@@clientName(
+  BackupResourceVaultConfigs.update::parameters.properties,
+  "parameters",
+  "java,go,python,javascript"
+);
 
 @@override(
   BackupWorkloadItems.list,
-  backupWorkloadItemsList,
+  reorderParameters(
+    BackupWorkloadItems.list,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "fabricName",
+      "containerName",
+      "$filter",
+      "$skipToken",
+      "body"
+    ]
+  ),
   "java,go,python,javascript"
 );
 
-// Backups operations
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op backupsTrigger(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
+@@override(
+  Backups.trigger,
+  reorderParameters(
+    Backups.trigger,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "fabricName",
+      "containerName",
+      "protectedItemName",
+      "body"
+    ]
+  ),
+  "java,go,python,javascript"
+);
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
+@@clientName(
+  Backups.trigger::parameters.body,
+  "parameters",
+  "java,go,python,javascript"
+);
 
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  fabricName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  containerName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  protectedItemName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  parameters: BackupRequestResource,
-): void;
-
-@@override(Backups.trigger, backupsTrigger, "java,go,python,javascript");
-
-// RecoveryPoints operations
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op recoveryPointsGet(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  fabricName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  containerName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  protectedItemName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  recoveryPointId: string,
-): RecoveryPointResource;
-
-@@override(RecoveryPoints.get, recoveryPointsGet, "java,go,python,javascript");
-
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op recoveryPointsList(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  fabricName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  containerName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  protectedItemName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  $filter?: string,
-): ArmResponse<RecoveryPointResourceList>;
+@@override(
+  RecoveryPoints.get,
+  reorderParameters(
+    RecoveryPoints.get,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "fabricName",
+      "containerName",
+      "protectedItemName",
+      "recoveryPointId"
+    ]
+  ),
+  "java,go,python,javascript"
+);
 
 @@override(
   RecoveryPoints.list,
-  recoveryPointsList,
+  reorderParameters(
+    RecoveryPoints.list,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "fabricName",
+      "containerName",
+      "protectedItemName",
+      "$filter"
+    ]
+  ),
   "java,go,python,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op recoveryPointsMoveRecoveryPoint(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  fabricName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  containerName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  protectedItemName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  recoveryPointId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  parameters: MoveRPAcrossTiersRequest,
-): ArmAcceptedLroResponse;
 
 @@override(
   RecoveryPoints.moveRecoveryPoint,
-  recoveryPointsMoveRecoveryPoint,
+  reorderParameters(
+    RecoveryPoints.moveRecoveryPoint,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "fabricName",
+      "containerName",
+      "protectedItemName",
+      "recoveryPointId",
+      "body"
+    ]
+  ),
   "java,go,python,javascript"
 );
 
-// RecoveryPointsRecommendedForMove operations
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op recoveryPointsRecommendedForMoveList(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  fabricName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  containerName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  protectedItemName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  parameters: ListRecoveryPointsRecommendedForMoveRequest,
-): ArmResponse<RecoveryPointResourceList>;
+@@clientName(
+  RecoveryPoints.moveRecoveryPoint::parameters.body,
+  "parameters",
+  "java,go,python,javascript"
+);
 
 @@override(
   RecoveryPointsRecommendedForMove.list,
-  recoveryPointsRecommendedForMoveList,
+  reorderParameters(
+    RecoveryPointsRecommendedForMove.list,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "fabricName",
+      "containerName",
+      "protectedItemName",
+      "body"
+    ]
+  ),
   "java,go,python,javascript"
 );
 
-// BackupResourceConfigOperationStatuses operations
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op backupResourceConfigOperationStatusesGetOperationStatus(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  backupStorageConfigName: "vaultstorageconfig",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  operationId: string,
-): ArmResponse<OperationStatus>;
+@@clientName(
+  RecoveryPointsRecommendedForMove.list::parameters.body,
+  "parameters",
+  "java,go,python,javascript"
+);
 
 @@override(
   BackupResourceConfigOperationStatuses.getOperationStatus,
-  backupResourceConfigOperationStatusesGetOperationStatus,
+  reorderParameters(
+    BackupResourceConfigOperationStatuses.getOperationStatus,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "backupStorageConfigName",
+      "operationId"
+    ]
+  ),
   "java,go,python,javascript"
 );
-
-// ExportJobsOperationResults operations
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op exportJobsOperationResultsGet(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  operationId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  backupJobs: "backupJobs",
-): OperationResultInfoBaseResource;
 
 @@override(
   ExportJobsOperationResults.get,
-  exportJobsOperationResultsGet,
+  reorderParameters(
+    ExportJobsOperationResults.get,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "operationId",
+      "backupJobs"
+    ]
+  ),
   "java,go,python,javascript"
 );
-
-// ItemLevelRecoveryConnections operations
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op itemLevelRecoveryConnectionsProvision(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  fabricName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  containerName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  protectedItemName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  recoveryPointId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  parameters: ILRRequestResource,
-): void;
 
 @@override(
   ItemLevelRecoveryConnections.provision,
-  itemLevelRecoveryConnectionsProvision,
+  reorderParameters(
+    ItemLevelRecoveryConnections.provision,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "fabricName",
+      "containerName",
+      "protectedItemName",
+      "recoveryPointId",
+      "body"
+    ]
+  ),
   "java,go,python,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op itemLevelRecoveryConnectionsRevoke(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  fabricName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  containerName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  protectedItemName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  recoveryPointId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  body: void,
-): void;
+@@clientName(
+  ItemLevelRecoveryConnections.provision::parameters.body,
+  "parameters",
+  "java,go,python,javascript"
+);
 
 @@override(
   ItemLevelRecoveryConnections.revoke,
-  itemLevelRecoveryConnectionsRevoke,
+  reorderParameters(
+    ItemLevelRecoveryConnections.revoke,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "fabricName",
+      "containerName",
+      "protectedItemName",
+      "recoveryPointId",
+      "body"
+    ]
+  ),
   "java,go,python,javascript"
 );
-
-// JobCancellations operations
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op jobCancellationsTrigger(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  jobName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  body: void,
-): void;
 
 @@override(
   JobCancellations.trigger,
-  jobCancellationsTrigger,
+  reorderParameters(
+    JobCancellations.trigger,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "jobName",
+      "body"
+    ]
+  ),
   "java,go,python,javascript"
 );
 
-// JobDetails operations
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op jobDetailsGet(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  jobName: string,
-): JobResource;
-
-@@override(JobDetails.get, jobDetailsGet, "java,go,python,javascript");
-
-// JobOperationResults operations
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op jobOperationResultsGet(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  jobName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  operationId: string,
-): JobResource;
+@@override(
+  JobDetails.get,
+  reorderParameters(
+    JobDetails.get,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "jobName"
+    ]
+  ),
+  "java,go,python,javascript"
+);
 
 @@override(
   JobOperationResults.get,
-  jobOperationResultsGet,
+  reorderParameters(
+    JobOperationResults.get,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "jobName",
+      "operationId"
+    ]
+  ),
   "java,go,python,javascript"
 );
-
-// PrivateEndpointConnectionResources operations
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op privateEndpointConnectionResourcesGet(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  privateEndpointConnectionName: string,
-): Microsoft.RecoveryServices.PrivateEndpointConnectionResource;
 
 @@override(
   PrivateEndpointConnectionResources.get,
-  privateEndpointConnectionResourcesGet,
+  reorderParameters(
+    PrivateEndpointConnectionResources.get,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "privateEndpointConnectionName"
+    ]
+  ),
   "java,go,python,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op privateEndpointConnectionResourcesPut(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  privateEndpointConnectionName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  parameters: Microsoft.RecoveryServices.PrivateEndpointConnectionResource,
-):
-  | Microsoft.RecoveryServices.PrivateEndpointConnectionResource
-  | ArmAcceptedLroResponse;
 
 @@override(
   PrivateEndpointConnectionResources.put,
-  privateEndpointConnectionResourcesPut,
+  reorderParameters(
+    PrivateEndpointConnectionResources.put,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "privateEndpointConnectionName",
+      "resource"
+    ]
+  ),
   "java,go,python,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op privateEndpointConnectionResourcesDelete(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  privateEndpointConnectionName: string,
-): ArmDeletedNoContentResponse;
+@@clientName(
+  PrivateEndpointConnectionResources.put::parameters.resource,
+  "parameters",
+  "java,go,python,javascript"
+);
 
 @@override(
   PrivateEndpointConnectionResources.delete,
-  privateEndpointConnectionResourcesDelete,
+  reorderParameters(
+    PrivateEndpointConnectionResources.delete,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "privateEndpointConnectionName"
+    ]
+  ),
   "java,go,python,javascript"
 );
-
-// PrivateEndpointOperationStatuses operations
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op privateEndpointOperationStatusesGetOperationStatus(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  privateEndpointConnectionName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  operationId: string,
-): ArmResponse<OperationStatus>;
 
 @@override(
   PrivateEndpointOperationStatuses.getOperationStatus,
-  privateEndpointOperationStatusesGetOperationStatus,
+  reorderParameters(
+    PrivateEndpointOperationStatuses.getOperationStatus,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "privateEndpointConnectionName",
+      "operationId"
+    ]
+  ),
   "java,go,python,javascript"
 );
-
-// ProtectedItemOperationResults operations
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op protectedItemOperationResultsGet(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  fabricName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  containerName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  protectedItemName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  operationId: string,
-): ProtectedItemResource;
 
 @@override(
   ProtectedItemOperationResults.get,
-  protectedItemOperationResultsGet,
+  reorderParameters(
+    ProtectedItemOperationResults.get,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "fabricName",
+      "containerName",
+      "protectedItemName",
+      "operationId"
+    ]
+  ),
   "java,go,python,javascript"
 );
-
-// ProtectedItemOperationStatuses operations
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op protectedItemOperationStatusesGet(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  fabricName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  containerName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  protectedItemName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  operationId: string,
-): ArmResponse<OperationStatus>;
 
 @@override(
   ProtectedItemOperationStatuses.get,
-  protectedItemOperationStatusesGet,
+  reorderParameters(
+    ProtectedItemOperationStatuses.get,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "fabricName",
+      "containerName",
+      "protectedItemName",
+      "operationId"
+    ]
+  ),
   "java,go,python,javascript"
 );
-
-// ProtectedItems operations
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op protectedItemsCreateOrUpdate(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  fabricName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  containerName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  protectedItemName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  parameters: ProtectedItemResource,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-  `x-ms-authorization-auxiliary`?: string,
-): ProtectedItemResource;
 
 @@override(
   ProtectedItems.createOrUpdate,
-  protectedItemsCreateOrUpdate,
+  reorderParameters(
+    ProtectedItems.createOrUpdate,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "fabricName",
+      "containerName",
+      "protectedItemName",
+      "resource",
+      "x-ms-authorization-auxiliary"
+    ]
+  ),
   "java,go,python,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op protectedItemsDelete(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  fabricName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  containerName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  protectedItemName: string,
-): ArmDeletedNoContentResponse;
+@@clientName(
+  ProtectedItems.createOrUpdate::parameters.resource,
+  "parameters",
+  "java,go,python,javascript"
+);
 
 @@override(
   ProtectedItems.delete,
-  protectedItemsDelete,
+  reorderParameters(
+    ProtectedItems.delete,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "fabricName",
+      "containerName",
+      "protectedItemName"
+    ]
+  ),
   "java,go,python,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op protectedItemsGet(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  fabricName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  containerName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  protectedItemName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  $filter?: string,
-): ProtectedItemResource;
-
-@@override(ProtectedItems.get, protectedItemsGet, "java,go,python,javascript");
-
-// ProtectionContainerOperationResults operations
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op protectionContainerOperationResultsGet(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  fabricName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  containerName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  operationId: string,
-): ProtectionContainerResource;
+@@override(
+  ProtectedItems.get,
+  reorderParameters(
+    ProtectedItems.get,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "fabricName",
+      "containerName",
+      "protectedItemName",
+      "$filter"
+    ]
+  ),
+  "java,go,python,javascript"
+);
 
 @@override(
   ProtectionContainerOperationResults.get,
-  protectionContainerOperationResultsGet,
+  reorderParameters(
+    ProtectionContainerOperationResults.get,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "fabricName",
+      "containerName",
+      "operationId"
+    ]
+  ),
   "java,go,python,javascript"
 );
-
-// ProtectionContainers operations
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op protectionContainersRegister(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  fabricName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  containerName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  parameters: ProtectionContainerResource,
-): ProtectionContainerResource;
 
 @@override(
   ProtectionContainers.register,
-  protectionContainersRegister,
+  reorderParameters(
+    ProtectionContainers.register,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "fabricName",
+      "containerName",
+      "resource"
+    ]
+  ),
   "java,go,python,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op protectionContainersGet(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  fabricName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  containerName: string,
-): ProtectionContainerResource;
+@@clientName(
+  ProtectionContainers.register::parameters.resource,
+  "parameters",
+  "java,go,python,javascript"
+);
 
 @@override(
   ProtectionContainers.get,
-  protectionContainersGet,
+  reorderParameters(
+    ProtectionContainers.get,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "fabricName",
+      "containerName"
+    ]
+  ),
   "java,go,python,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op protectionContainersInquire(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  fabricName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  containerName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  $filter?: string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  body: void,
-): void;
 
 @@override(
   ProtectionContainers.inquire,
-  protectionContainersInquire,
+  reorderParameters(
+    ProtectionContainers.inquire,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "fabricName",
+      "containerName",
+      "$filter",
+      "body"
+    ]
+  ),
   "java,go,python,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op protectionContainersUnregister(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  fabricName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  containerName: string,
-): void;
 
 @@override(
   ProtectionContainers.unregister,
-  protectionContainersUnregister,
+  reorderParameters(
+    ProtectionContainers.unregister,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "fabricName",
+      "containerName"
+    ]
+  ),
   "java,go,python,javascript"
 );
-
-// ProtectionIntentResources operations
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op protectionIntentResourcesCreateOrUpdate(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  fabricName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  intentObjectName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  parameters: ProtectionIntentResource,
-): ProtectionIntentResource;
 
 @@override(
   ProtectionIntentResources.createOrUpdate,
-  protectionIntentResourcesCreateOrUpdate,
+  reorderParameters(
+    ProtectionIntentResources.createOrUpdate,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "fabricName",
+      "intentObjectName",
+      "resource"
+    ]
+  ),
   "java,go,python,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op protectionIntentResourcesDelete(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  fabricName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  intentObjectName: string,
-): ArmDeletedNoContentResponse;
+@@clientName(
+  ProtectionIntentResources.createOrUpdate::parameters.resource,
+  "parameters",
+  "java,go,python,javascript"
+);
 
 @@override(
   ProtectionIntentResources.delete,
-  protectionIntentResourcesDelete,
+  reorderParameters(
+    ProtectionIntentResources.delete,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "fabricName",
+      "intentObjectName"
+    ]
+  ),
   "java,go,python,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op protectionIntentResourcesGet(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  fabricName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  intentObjectName: string,
-): ProtectionIntentResource;
 
 @@override(
   ProtectionIntentResources.get,
-  protectionIntentResourcesGet,
+  reorderParameters(
+    ProtectionIntentResources.get,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "fabricName",
+      "intentObjectName"
+    ]
+  ),
   "java,go,python,javascript"
 );
-
-// ProtectionPolicies operations
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op protectionPoliciesGet(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  policyName: string,
-): ProtectionPolicyResource;
 
 @@override(
   ProtectionPolicies.get,
-  protectionPoliciesGet,
+  reorderParameters(
+    ProtectionPolicies.get,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "policyName"
+    ]
+  ),
   "java,go,python,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op protectionPoliciesCreateOrUpdate(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  policyName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  parameters: ProtectionPolicyResource,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-  `x-ms-authorization-auxiliary`?: string,
-): ArmResourceUpdatedResponse<ProtectionPolicyResource>;
 
 @@override(
   ProtectionPolicies.createOrUpdate,
-  protectionPoliciesCreateOrUpdate,
+  reorderParameters(
+    ProtectionPolicies.createOrUpdate,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "policyName",
+      "resource",
+      "x-ms-authorization-auxiliary"
+    ]
+  ),
   "java,go,python,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op protectionPoliciesDelete(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  policyName: string,
-): ArmDeletedNoContentResponse;
+@@clientName(
+  ProtectionPolicies.createOrUpdate::parameters.resource,
+  "parameters",
+  "java,go,python,javascript"
+);
 
 @@override(
   ProtectionPolicies.delete,
-  protectionPoliciesDelete,
+  reorderParameters(
+    ProtectionPolicies.delete,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "policyName"
+    ]
+  ),
   "java,go,python,javascript"
 );
-
-// ProtectionPolicyOperationResults operations
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op protectionPolicyOperationResultsGet(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  policyName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  operationId: string,
-): ProtectionPolicyResource;
 
 @@override(
   ProtectionPolicyOperationResults.get,
-  protectionPolicyOperationResultsGet,
+  reorderParameters(
+    ProtectionPolicyOperationResults.get,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "policyName",
+      "operationId"
+    ]
+  ),
   "java,go,python,javascript"
 );
-
-// ResourceGuardProxies operations
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op resourceGuardProxiesGet(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-): ArmResponse<ResourceGuardProxyBaseResourceList>;
 
 @@override(
   ResourceGuardProxies.get,
-  resourceGuardProxiesGet,
+  reorderParameters(
+    ResourceGuardProxies.get,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName"
+    ]
+  ),
   "java,go,python,javascript"
 );
-
-// ResourceGuardProxy operations
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op resourceGuardProxyDelete(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  resourceGuardProxyName: string,
-): ArmDeletedNoContentResponse;
 
 @@override(
   ResourceGuardProxy.delete,
-  resourceGuardProxyDelete,
+  reorderParameters(
+    ResourceGuardProxy.delete,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "resourceGuardProxyName"
+    ]
+  ),
   "java,go,python,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op resourceGuardProxyGet(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  resourceGuardProxyName: string,
-): ResourceGuardProxyBaseResource;
 
 @@override(
   ResourceGuardProxy.get,
-  resourceGuardProxyGet,
+  reorderParameters(
+    ResourceGuardProxy.get,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "resourceGuardProxyName"
+    ]
+  ),
   "java,go,python,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op resourceGuardProxyPut(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  resourceGuardProxyName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  parameters: ResourceGuardProxyBaseResource,
-): ResourceGuardProxyBaseResource;
 
 @@override(
   ResourceGuardProxy.put,
-  resourceGuardProxyPut,
+  reorderParameters(
+    ResourceGuardProxy.put,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "resourceGuardProxyName",
+      "resource"
+    ]
+  ),
   "java,go,python,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op resourceGuardProxyUnlockDelete(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  resourceGuardProxyName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  parameters: UnlockDeleteRequest,
-): UnlockDeleteResponse;
+@@clientName(
+  ResourceGuardProxy.put::parameters.resource,
+  "parameters",
+  "java,go,python,javascript"
+);
 
 @@override(
   ResourceGuardProxy.unlockDelete,
-  resourceGuardProxyUnlockDelete,
+  reorderParameters(
+    ResourceGuardProxy.unlockDelete,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "resourceGuardProxyName",
+      "body"
+    ]
+  ),
   "java,go,python,javascript"
 );
 
-// Restores operations
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op restoresTrigger(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
+@@clientName(
+  ResourceGuardProxy.unlockDelete::parameters.body,
+  "parameters",
+  "java,go,python,javascript"
+);
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
+@@override(
+  Restores.trigger,
+  reorderParameters(
+    Restores.trigger,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "fabricName",
+      "containerName",
+      "protectedItemName",
+      "recoveryPointId",
+      "body",
+      "x-ms-authorization-auxiliary"
+    ]
+  ),
+  "java,go,python,javascript"
+);
 
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  fabricName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  containerName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  protectedItemName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  recoveryPointId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  parameters: RestoreRequestResource,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "override"
-  `x-ms-authorization-auxiliary`?: string,
-): ArmAcceptedLroResponse;
-
-@@override(Restores.trigger, restoresTrigger, "java,go,python,javascript");
-
-// ProtectionPolicyOperationStatuses operations
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op protectionPolicyOperationStatusesGet(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  vaultName: string,
-
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  policyName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  operationId: string,
-): ArmAcceptedLroResponse;
+@@clientName(
+  Restores.trigger::parameters.body,
+  "parameters",
+  "java,go,python,javascript"
+);
 
 @@override(
   ProtectionPolicyOperationStatuses.get,
-  protectionPolicyOperationStatusesGet,
+  reorderParameters(
+    ProtectionPolicyOperationStatuses.get,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "vaultName",
+      "resourceGroupName",
+      "policyName",
+      "operationId"
+    ]
+  ),
   "java,go,python,javascript"
 );
 

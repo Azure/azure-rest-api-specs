@@ -25,218 +25,107 @@ namespace Customization;
 @@clientName(SignalRProperties.hostName, "hostname", "java");
 @@clientName(SignalRProperties.hostNamePrefix, "hostnamePrefix", "java");
 
-// Override the order of path parameters
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op SignalRPrivateEndpointConnectionsGetCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<PrivateEndpointConnection>,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @query("api-version")
-  apiVersion: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  subscriptionId: uuid,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  privateEndpointConnectionName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  resourceGroupName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  resourceName: string,
-): PrivateEndpointConnection;
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op SignalRPrivateEndpointConnectionsUpdateCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<PrivateEndpointConnection>,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @query("api-version")
-  apiVersion: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  subscriptionId: uuid,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  privateEndpointConnectionName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  resourceGroupName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  resourceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @body
-  parameters: PrivateEndpointConnection,
-): PrivateEndpointConnection;
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op SignalRPrivateEndpointConnectionsDeleteCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<PrivateEndpointConnection>,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @query("api-version")
-  apiVersion: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  subscriptionId: uuid,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  privateEndpointConnectionName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  resourceGroupName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  resourceName: string,
-): void;
-
+// Override the order and names of path and body parameters.
 @@override(
   PrivateEndpointConnections.get,
-  SignalRPrivateEndpointConnectionsGetCustomized,
+  reorderParameters(
+    PrivateEndpointConnections.get,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "privateEndpointConnectionName",
+      "resourceGroupName",
+      "resourceName"
+    ]
+  ),
   "java,go,python,javascript"
 );
 @@override(
   PrivateEndpointConnections.update,
-  SignalRPrivateEndpointConnectionsUpdateCustomized,
+  reorderParameters(
+    PrivateEndpointConnections.update,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "privateEndpointConnectionName",
+      "resourceGroupName",
+      "resourceName",
+      "resource"
+    ]
+  ),
+  "java,go,python,javascript"
+);
+@@clientName(
+  PrivateEndpointConnections.update::parameters.resource,
+  "parameters",
   "java,go,python,javascript"
 );
 @@override(
   PrivateEndpointConnections.delete,
-  SignalRPrivateEndpointConnectionsDeleteCustomized,
+  reorderParameters(
+    PrivateEndpointConnections.delete,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "privateEndpointConnectionName",
+      "resourceGroupName",
+      "resourceName"
+    ]
+  ),
   "java,go,python,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op SignalRSharedPrivateLinkResourcesCreateOrUpdateCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<SharedPrivateLinkResource>,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @query("api-version")
-  apiVersion: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  subscriptionId: uuid,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  sharedPrivateLinkResourceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  resourceGroupName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  resourceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @body
-  parameters: SharedPrivateLinkResource,
-): SharedPrivateLinkResource;
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op SignalRSharedPrivateLinkResourcesGetCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<SharedPrivateLinkResource>,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @query("api-version")
-  apiVersion: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  subscriptionId: uuid,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  sharedPrivateLinkResourceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  resourceGroupName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  resourceName: string,
-): SharedPrivateLinkResource;
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op SignalRSharedPrivateLinkResourcesDeleteCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<SharedPrivateLinkResource>,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @query("api-version")
-  apiVersion: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  subscriptionId: uuid,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  sharedPrivateLinkResourceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  resourceGroupName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  resourceName: string,
-): void;
-
 @@override(
   SignalRSharedPrivateLinkResources.createOrUpdate,
-  SignalRSharedPrivateLinkResourcesCreateOrUpdateCustomized,
+  reorderParameters(
+    SignalRSharedPrivateLinkResources.createOrUpdate,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "sharedPrivateLinkResourceName",
+      "resourceGroupName",
+      "resourceName",
+      "resource"
+    ]
+  ),
+  "java,go,python,javascript"
+);
+@@clientName(
+  SignalRSharedPrivateLinkResources.createOrUpdate::parameters.resource,
+  "parameters",
   "java,go,python,javascript"
 );
 @@override(
   SignalRSharedPrivateLinkResources.get,
-  SignalRSharedPrivateLinkResourcesGetCustomized,
+  reorderParameters(
+    SignalRSharedPrivateLinkResources.get,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "sharedPrivateLinkResourceName",
+      "resourceGroupName",
+      "resourceName"
+    ]
+  ),
   "java,go,python,javascript"
 );
 @@override(
   SignalRSharedPrivateLinkResources.delete,
-  SignalRSharedPrivateLinkResourcesDeleteCustomized,
+  reorderParameters(
+    SignalRSharedPrivateLinkResources.delete,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "sharedPrivateLinkResourceName",
+      "resourceGroupName",
+      "resourceName"
+    ]
+  ),
   "java,go,python,javascript"
 );
 
