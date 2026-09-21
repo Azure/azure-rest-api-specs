@@ -13,6 +13,10 @@ on:
         description: "SDK language"
         required: true
         type: string
+      trigger_comment_id:
+        description: "Pull request comment to update with mitigation status and results"
+        required: false
+        type: string
 
 permissions:
   actions: read
@@ -26,26 +30,17 @@ jobs:
     if: >-
       (github.event_name == 'issue_comment' &&
       github.event.issue.pull_request != null &&
-      contains(fromJSON('["OWNER", "MEMBER", "COLLABORATOR"]'), github.event.comment.author_association) &&
-      startsWith(github.event.comment.body, '/azsdk sdk-breaking-mitigate')) ||
+      contains(fromJSON('["/azsdk sdk-breaking-mitigate Go", "/azsdk sdk-breaking-mitigate Python", "/azsdk sdk-breaking-mitigate Java", "/azsdk sdk-breaking-mitigate Js", "/azsdk sdk-breaking-mitigate .Net"]'), github.event.comment.body)) ||
       github.event_name == 'workflow_dispatch'
     concurrency:
       group: >-
         sdk-breaking-mitigate-${{ github.event.issue.number || inputs.pr_number }}-${{
         inputs.sdk_language ||
-        (startsWith(github.event.comment.body, '/azsdk sdk-breaking-mitigate javascript') && 'JavaScript') ||
-        (startsWith(github.event.comment.body, '/azsdk sdk-breaking-mitigate typescript') && 'JavaScript') ||
-        (startsWith(github.event.comment.body, '/azsdk sdk-breaking-mitigate dotnet') && 'DotNet') ||
-        (startsWith(github.event.comment.body, '/azsdk sdk-breaking-mitigate csharp') && 'DotNet') ||
-        (startsWith(github.event.comment.body, '/azsdk sdk-breaking-mitigate .net') && 'DotNet') ||
-        (startsWith(github.event.comment.body, '/azsdk sdk-breaking-mitigate android') && 'Android') ||
-        (startsWith(github.event.comment.body, '/azsdk sdk-breaking-mitigate cpp') && 'Cpp') ||
-        (startsWith(github.event.comment.body, '/azsdk sdk-breaking-mitigate java') && 'Java') ||
-        (startsWith(github.event.comment.body, '/azsdk sdk-breaking-mitigate python') && 'Python') ||
-        (startsWith(github.event.comment.body, '/azsdk sdk-breaking-mitigate rust') && 'Rust') ||
-        (startsWith(github.event.comment.body, '/azsdk sdk-breaking-mitigate go') && 'Go') ||
-        (startsWith(github.event.comment.body, '/azsdk sdk-breaking-mitigate js') && 'JavaScript') ||
-        (startsWith(github.event.comment.body, '/azsdk sdk-breaking-mitigate ts') && 'JavaScript') ||
+        (github.event.comment.body == '/azsdk sdk-breaking-mitigate Go' && 'Go') ||
+        (github.event.comment.body == '/azsdk sdk-breaking-mitigate Python' && 'Python') ||
+        (github.event.comment.body == '/azsdk sdk-breaking-mitigate Java' && 'Java') ||
+        (github.event.comment.body == '/azsdk sdk-breaking-mitigate Js' && 'JavaScript') ||
+        (github.event.comment.body == '/azsdk sdk-breaking-mitigate .Net' && 'DotNet') ||
         'unknown' }}
       cancel-in-progress: true
     runs-on: ubuntu-latest
@@ -77,19 +72,22 @@ jobs:
                 throw new Error(`Invalid pull request number: ${context.payload.inputs.pr_number}`);
               }
               sdkLanguage = context.payload.inputs.sdk_language?.trim() ?? "";
+              triggerCommentId = context.payload.inputs.trigger_comment_id?.trim() ?? "";
               core.setOutput("should-run", "true");
             } else if (context.eventName === "issue_comment") {
-              const command = context.payload.comment.body.split(/\r?\n/, 1)[0].trim();
-              const parts = command.split(/\s+/);
-              if (
-                parts.length !== 3 ||
-                parts[0] !== "/azsdk" ||
-                parts[1] !== "sdk-breaking-mitigate"
-              ) {
-                throw new Error("Expected comment: /azsdk sdk-breaking-mitigate <sdk-language>");
+              const command = context.payload.comment.body.toLowerCase();
+              const supportedCommands = new Map([
+                ["/azsdk sdk-breaking-mitigate go", "Go"],
+                ["/azsdk sdk-breaking-mitigate python", "Python"],
+                ["/azsdk sdk-breaking-mitigate java", "Java"],
+                ["/azsdk sdk-breaking-mitigate js", "JavaScript"],
+                ["/azsdk sdk-breaking-mitigate .net", "DotNet"],
+              ]);
+              sdkLanguage = supportedCommands.get(command);
+              if (!sdkLanguage) {
+                throw new Error("Expected an exact supported SDK breaking-change mitigation command.");
               }
               pullNumber = context.payload.issue.number;
-              sdkLanguage = parts[2];
               triggerCommentId = String(context.payload.comment.id);
               core.setOutput("should-run", "true");
             }
@@ -99,16 +97,23 @@ jobs:
             core.setOutput("trigger-comment-id", triggerCommentId);
 
       - name: Mark mitigation in progress
-        if: github.event_name == 'issue_comment'
+        if: steps.resolve-trigger.outputs.trigger-comment-id != ''
         uses: actions/github-script@v9
+        env:
+          TRIGGER_COMMENT_ID: ${{ steps.resolve-trigger.outputs.trigger-comment-id }}
         with:
           github-token: ${{ github.token }}
           script: |
-            const command = context.payload.comment.body.split(/\r?\n/, 1)[0].trim();
+            const triggerCommentId = Number(process.env.TRIGGER_COMMENT_ID);
             try {
+              const { data: comment } = await github.rest.issues.getComment({
+                ...context.repo,
+                comment_id: triggerCommentId,
+              });
+              const command = comment.body.split(/\r?\n/, 1)[0].trim();
               await github.rest.issues.updateComment({
                 ...context.repo,
-                comment_id: context.payload.comment.id,
+                comment_id: triggerCommentId,
                 body: `${command}\n\nMitigating SDK breaking changes ...`,
               });
             } catch (error) {

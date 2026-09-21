@@ -19,6 +19,7 @@ on:
         type: string
 
 permissions:
+  actions: write
   contents: read
   copilot-requests: write
   issues: write
@@ -619,6 +620,64 @@ jobs:
               ...context.repo,
               issue_number: pullNumber,
               body: report,
+            });
+
+      - name: Trigger SDK breaking-change mitigation
+        if: success() && steps.check-analysis-freshness.outputs.is-current == 'true'
+        uses: actions/github-script@v9
+        env:
+          PR_NUMBER: ${{ github.event.issue.number || inputs.pr_number }}
+          SDK_LANGUAGE: ${{ steps.resolve-source.outputs.sdk-language }}
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const pullNumber = Number(process.env.PR_NUMBER);
+            const sdkLanguage = process.env.SDK_LANGUAGE;
+            const command = `/azsdk sdk-breaking-mitigate ${sdkLanguage}`;
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              ...context.repo,
+              issue_number: pullNumber,
+              per_page: 100,
+            });
+            const existingComment = comments
+              .filter(
+                ({ body }) =>
+                  body?.split(/\r?\n/, 1)[0].trim().toLowerCase() === command.toLowerCase(),
+              )
+              .sort((left, right) => right.id - left.id)[0];
+
+            let comment;
+            if (existingComment) {
+              try {
+                ({ data: comment } = await github.rest.issues.updateComment({
+                  ...context.repo,
+                  comment_id: existingComment.id,
+                  body: command,
+                }));
+              } catch (error) {
+                if (error.status !== 403) throw error;
+                core.warning(
+                  "The workflow token cannot edit the existing mitigation command; creating a new comment instead.",
+                );
+              }
+            }
+            if (!comment) {
+              ({ data: comment } = await github.rest.issues.createComment({
+                ...context.repo,
+                issue_number: pullNumber,
+                body: command,
+              }));
+            }
+
+            await github.rest.actions.createWorkflowDispatch({
+              ...context.repo,
+              workflow_id: "sdk-breaking-change-mitigate.yaml",
+              ref: context.payload.repository.default_branch,
+              inputs: {
+                pr_number: String(pullNumber),
+                sdk_language: sdkLanguage,
+                trigger_comment_id: String(comment.id),
+              },
             });
 
       - name: Report breaking-change analysis failure
