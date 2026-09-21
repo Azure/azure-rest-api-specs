@@ -50,6 +50,12 @@ suppressions:
       passthrough API and will deliver the object as is to compute.
     from: Bulkactions.json
     where: $.definitions.BulkActionVmExtensionProperties.properties.protectedSettings
+  - code: AvoidAdditionalProperties
+    reason:
+      additionalCreateParameters is a free-form JSON object, bulkactions is a
+      passthrough API and will deliver the object as is to compute.
+    from: Bulkactions.json
+    where: $.definitions.ExecutionParameters.properties.additionalCreateParameters
 ```
 
 ### Tag: package-2026-10-06-preview
