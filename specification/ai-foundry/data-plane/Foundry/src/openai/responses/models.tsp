@@ -698,3 +698,171 @@ namespace Azure.AI.Projects {
     }
   );
 }
+
+@@doc(
+  OpenAI.MCPToolRequireApproval.always,
+  "The filter identifying tools that always require approval before execution."
+);
+@@doc(
+  OpenAI.MCPToolRequireApproval.`never`,
+  "The filter identifying tools that never require approval before execution."
+);
+@@doc(
+  OpenAI.CodeInterpreterTool.allowed_callers,
+  "The execution contexts allowed to invoke this tool."
+);
+@@doc(
+  OpenAI.CustomToolParam.allowed_callers,
+  "The execution contexts allowed to invoke this tool."
+);
+@@doc(
+  OpenAI.WebSearchPreviewTool.search_content_types,
+  "The types of content to include in web search results."
+);
+@@doc(
+  OpenAI.ApplyPatchToolParam.allowed_callers,
+  "The execution contexts allowed to invoke this tool."
+);
+@@doc(
+  OpenAI.FunctionToolParam.name,
+  "The name of the function the model can call."
+);
+@@doc(
+  OpenAI.FunctionToolParam.description,
+  "A description of the function that helps the model decide when to call it."
+);
+@@doc(
+  OpenAI.FunctionToolParam.parameters,
+  "The JSON Schema describing the function's input parameters."
+);
+@@doc(
+  OpenAI.FunctionToolParam.strict,
+  "Whether to require generated function arguments to match the parameter schema exactly."
+);
+@@doc(
+  OpenAI.FunctionToolParam.type,
+  "The tool type, which is always `function`."
+);
+@@doc(
+  OpenAI.FunctionToolParam.output_schema,
+  "The JSON Schema describing the function's output."
+);
+@@doc(
+  OpenAI.FunctionToolParam.allowed_callers,
+  "The execution contexts allowed to invoke this tool."
+);
+@@doc(
+  OpenAI.ToolSearchToolParam.description,
+  "A description of the tool search implementation and the tools it can discover."
+);
+@@doc(
+  OpenAI.ToolSearchToolParam.parameters,
+  "The JSON Schema describing the input accepted by the tool search implementation."
+);
+@@doc(
+  OpenAI.Reasoning.effort,
+  "The amount of reasoning effort the model should use when generating a response."
+);
+@@doc(
+  OpenAI.Reasoning.summary,
+  "The requested level of detail for the reasoning summary."
+);
+@@doc(
+  OpenAI.Reasoning.context,
+  "The conversation turns to include in the reasoning context."
+);
+@@doc(
+  OpenAI.Reasoning.generate_summary,
+  "The format of the reasoning summary to generate."
+);
+@@doc(OpenAI.ToolChoiceParam.type, "The type of tool the model should use.");
+@@doc(
+  OpenAI.ToolChoiceMCP.name,
+  "The name of the tool to call on the specified MCP server."
+);
+@@doc(
+  OpenAI.ToolChoiceFileSearch.type,
+  "The selected tool type, which is always `file_search`."
+);
+@@doc(
+  OpenAI.ToolChoiceWebSearchPreview.type,
+  "The selected tool type, which is always `web_search_preview`."
+);
+@@doc(
+  OpenAI.ToolChoiceComputerUsePreview.type,
+  "The selected tool type, which is always `computer_use_preview`."
+);
+@@doc(
+  OpenAI.ToolChoiceWebSearchPreview20250311.type,
+  "The selected tool type, which is always `web_search_preview_2025_03_11`."
+);
+@@doc(
+  OpenAI.ToolChoiceImageGeneration.type,
+  "The selected tool type, which is always `image_generation`."
+);
+@@doc(
+  OpenAI.ToolChoiceCodeInterpreter.type,
+  "The selected tool type, which is always `code_interpreter`."
+);
+@@doc(
+  OpenAI.ToolChoiceComputer.type,
+  "The selected tool type, which is always `computer`."
+);
+@@doc(
+  OpenAI.ToolChoiceComputerUse.type,
+  "The selected tool type, which is always `computer_use`."
+);
+@@doc(
+  OpenAI.TextResponseFormatConfiguration.type,
+  "The format that the model must use for its text response."
+);
+@@doc(
+  OpenAI.TextResponseFormatJsonSchema.schema,
+  "The JSON Schema that the model's response must follow."
+);
+@@doc(
+  OpenAI.TextResponseFormatJsonSchema.strict,
+  "Whether to require responses to match the JSON Schema exactly."
+);
+@@doc(OpenAI.FileSearchTool.filters, "Filters to apply to the file search.");
+@@doc(OpenAI.WebSearchTool.filters, "Filters to apply to web search results.");
+@@doc(
+  OpenAI.WebSearchTool.user_location,
+  "The approximate location of the user for search relevance."
+);
+@@doc(
+  OpenAI.MCPTool.headers,
+  "Custom headers to include in requests to the MCP server."
+);
+@@doc(
+  OpenAI.MCPTool.allowed_tools,
+  "The tool names or filter identifying which MCP tools are available."
+);
+@@doc(
+  OpenAI.MCPTool.allowed_callers,
+  "The execution contexts allowed to invoke this tool."
+);
+@@doc(
+  OpenAI.MCPTool.require_approval,
+  "The approval requirements for invoking tools on the MCP server."
+);
+@@doc(
+  OpenAI.ResponseUsageOutputTokensDetails.reasoning_tokens,
+  "The number of output tokens used for reasoning."
+);
+@@doc(
+  OpenAI.FunctionShellToolParam.allowed_callers,
+  "The execution contexts allowed to invoke this tool."
+);
+@@doc(
+  OpenAI.ContainerAutoParam.memory_limit,
+  "The memory limit for the automatically provisioned container."
+);
+@@doc(
+  OpenAI.MCPListToolsTool.description,
+  "A description of the tool's purpose and behavior."
+);
+@@doc(
+  OpenAI.MCPListToolsTool.annotations,
+  "Annotations describing the tool's behavior, such as whether it is read-only."
+);

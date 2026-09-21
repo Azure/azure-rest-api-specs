@@ -185,6 +185,7 @@ model AgentObject {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
   @doc("The latest version of the agent.")
   versions: {
+    /** The latest version of this agent. */
     latest: AgentVersionObject;
   };
 
@@ -214,6 +215,7 @@ model AgentObject {
   @visibility(Lifecycle.Read)
   blueprint_reference?: AgentBlueprintReference;
 
+  /** The agent card describing the agent's capabilities. */
   agent_card?: AgentCard;
 }
 
@@ -405,6 +407,7 @@ model AgentDefinition {
 
 @doc("The prompt agent definition")
 model PromptAgentDefinition extends AgentDefinition {
+  /** The agent kind, which is always `prompt`. */
   kind: AgentKind.prompt;
 
   @doc("The managed runtime and agent loop used to execute this prompt agent.")
@@ -448,6 +451,7 @@ model PromptAgentDefinition extends AgentDefinition {
   @maxValue(1)
   top_p?: float32 | null = 1;
 
+  /** The reasoning configuration for models that support reasoning. */
   reasoning?: OpenAI.Reasoning | null;
 
   @doc("""
@@ -508,6 +512,7 @@ model SkillReference {
  */
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PromptAgentDefinitionTextOptions {
+  /** The format of the model's text response, such as plain text or structured JSON. */
   format?: OpenAI.TextResponseFormatConfiguration;
 }
 
@@ -522,6 +527,7 @@ model PromptAgentDefinitionTextOptions {
   #{ required_previews: #[AgentDefinitionOptInKeys.workflow_agents_v1_preview] }
 )
 model WorkflowAgentDefinition extends AgentDefinition {
+  /** The agent kind, which is always `workflow`. */
   kind: AgentKind.workflow;
 
   @doc("The CSDL YAML definition of the workflow.")
@@ -601,6 +607,7 @@ union CodeDependencyResolution {
   #{ required_previews: #[AgentDefinitionOptInKeys.external_agents_v1_preview] }
 )
 model ExternalAgentDefinition extends AgentDefinition {
+  /** The agent kind, which is always `external`. */
   kind: AgentKind.external;
 
   @doc("""
@@ -615,6 +622,7 @@ model ExternalAgentDefinition extends AgentDefinition {
 
 @doc("The hosted agent definition.")
 model HostedAgentDefinition extends AgentDefinition {
+  /** The agent kind, which is always `hosted`. */
   kind: AgentKind.hosted;
 
   /**
@@ -772,11 +780,13 @@ union VersionSelectorType {
 }
 
 model VersionSelector {
+  /** The rules used to select which agent version handles a request. */
   version_selection_rules: VersionSelectionRule[];
 }
 
 @discriminator("type")
 model VersionSelectionRule {
+  /** The type of rule used to select an agent version. */
   type: VersionSelectorType;
 
   @doc("The agent version to route traffic to")
@@ -784,6 +794,7 @@ model VersionSelectionRule {
 }
 
 model FixedRatioVersionSelectionRule extends VersionSelectionRule {
+  /** The version selection rule type, which is always `FixedRatio`. */
   type: VersionSelectorType.FixedRatio;
 
   @doc("The percentage of traffic to route to the version. Must be between 0 and 100.")
@@ -794,24 +805,29 @@ model FixedRatioVersionSelectionRule extends VersionSelectionRule {
 
 @discriminator("type")
 model AgentEndpointAuthorizationScheme {
+  /** The type of authorization scheme used by the agent endpoint. */
   type: AgentEndpointAuthorizationSchemeType;
 }
 
 model EntraAuthorizationScheme extends AgentEndpointAuthorizationScheme {
+  /** The authorization scheme type, which is always `Entra`. */
   type: AgentEndpointAuthorizationSchemeType.Entra;
 }
 
 model BotServiceAuthorizationScheme extends AgentEndpointAuthorizationScheme {
+  /** The authorization scheme type, which is always `BotService`. */
   type: AgentEndpointAuthorizationSchemeType.BotService;
 }
 
 model BotServiceRbacAuthorizationScheme
   extends AgentEndpointAuthorizationScheme {
+  /** The authorization scheme type, which is always `BotServiceRbac`. */
   type: AgentEndpointAuthorizationSchemeType.BotServiceRbac;
 }
 
 model BotServiceTenantAuthorizationScheme
   extends AgentEndpointAuthorizationScheme {
+  /** The authorization scheme type, which is always `BotServiceTenant`. */
   type: AgentEndpointAuthorizationSchemeType.BotServiceTenant;
 }
 
@@ -996,10 +1012,12 @@ union AgentBlueprintReferenceType {
 
 @discriminator("type")
 model AgentBlueprintReference {
+  /** The type of agent blueprint reference. */
   type: AgentBlueprintReferenceType;
 }
 
 model ManagedAgentIdentityBlueprintReference extends AgentBlueprintReference {
+  /** The blueprint reference type, which is always `ManagedAgentIdentityBlueprint`. */
   type: AgentBlueprintReferenceType.ManagedAgentIdentityBlueprint;
 
   @doc("The ID of the managed blueprint")

@@ -34749,7 +34749,8 @@
             "type": "string",
             "enum": [
               "a2a_preview"
-            ]
+            ],
+            "description": "The tool type, which is always `a2a_preview`."
           },
           "base_url": {
             "type": "string",
@@ -34944,7 +34945,8 @@
             "type": "string",
             "enum": [
               "a2a"
-            ]
+            ],
+            "description": "The tool type, which is always `a2a`."
           },
           "base_url": {
             "type": "string",
@@ -35063,7 +35065,8 @@
         ],
         "properties": {
           "type": {
-            "$ref": "#/components/schemas/AgentBlueprintReferenceType"
+            "$ref": "#/components/schemas/AgentBlueprintReferenceType",
+            "description": "The type of agent blueprint reference."
           }
         },
         "discriminator": {
@@ -35526,7 +35529,8 @@
         ],
         "properties": {
           "type": {
-            "$ref": "#/components/schemas/AgentEndpointAuthorizationSchemeType"
+            "$ref": "#/components/schemas/AgentEndpointAuthorizationSchemeType",
+            "description": "The type of authorization scheme used by the agent endpoint."
           }
         },
         "discriminator": {
@@ -37037,7 +37041,8 @@
             "type": "object",
             "properties": {
               "latest": {
-                "$ref": "#/components/schemas/AgentVersionObject"
+                "$ref": "#/components/schemas/AgentVersionObject",
+                "description": "The latest version of this agent."
               }
             },
             "required": [
@@ -37074,7 +37079,8 @@
             "readOnly": true
           },
           "agent_card": {
-            "$ref": "#/components/schemas/AgentCard"
+            "$ref": "#/components/schemas/AgentCard",
+            "description": "The agent card describing the agent's capabilities."
           }
         }
       },
@@ -38605,7 +38611,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/OpenAI.Tool"
-            }
+            },
+            "description": "The tools available to the agent during evaluation."
           }
         },
         "allOf": [
@@ -38644,7 +38651,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/OpenAI.Tool"
-            }
+            },
+            "description": "The tools available to the agent during evaluation."
           }
         },
         "allOf": [
@@ -39057,7 +39065,8 @@
             "type": "string",
             "enum": [
               "azure_ai_search"
-            ]
+            ],
+            "description": "The tool type, which is always `azure_ai_search`."
           },
           "azure_ai_search": {
             "$ref": "#/components/schemas/AzureAISearchToolResource",
@@ -40082,7 +40091,8 @@
             "type": "string",
             "enum": [
               "BotService"
-            ]
+            ],
+            "description": "The authorization scheme type, which is always `BotService`."
           }
         },
         "allOf": [
@@ -40101,7 +40111,8 @@
             "type": "string",
             "enum": [
               "BotServiceRbac"
-            ]
+            ],
+            "description": "The authorization scheme type, which is always `BotServiceRbac`."
           }
         },
         "allOf": [
@@ -40120,7 +40131,8 @@
             "type": "string",
             "enum": [
               "BotServiceTenant"
-            ]
+            ],
+            "description": "The authorization scheme type, which is always `BotServiceTenant`."
           }
         },
         "allOf": [
@@ -40171,7 +40183,8 @@
             "type": "string",
             "enum": [
               "browser_automation_preview"
-            ]
+            ],
+            "description": "The tool type, which is always `browser_automation_preview`."
           },
           "browser_automation_preview": {
             "$ref": "#/components/schemas/BrowserAutomationToolParameters",
@@ -40625,7 +40638,8 @@
             "type": "string",
             "enum": [
               "code_interpreter"
-            ]
+            ],
+            "description": "The tool type, which is always `code_interpreter`."
           },
           "allowed_callers": {
             "anyOf": [
@@ -40638,7 +40652,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The execution contexts allowed to invoke this tool."
           },
           "container": {
             "anyOf": [
@@ -43002,7 +43017,8 @@
             "type": "string",
             "enum": [
               "endpoint"
-            ]
+            ],
+            "description": "The evaluator definition type, which is always `endpoint`."
           },
           "connection_name": {
             "type": "string",
@@ -43027,7 +43043,8 @@
             "type": "string",
             "enum": [
               "Entra"
-            ]
+            ],
+            "description": "The authorization scheme type, which is always `Entra`."
           }
         },
         "allOf": [
@@ -45928,7 +45945,8 @@
             "type": "string",
             "enum": [
               "external"
-            ]
+            ],
+            "description": "The agent kind, which is always `external`."
           },
           "otel_agent_id": {
             "type": "string",
@@ -46111,7 +46129,8 @@
             "type": "string",
             "enum": [
               "fabric_iq_preview"
-            ]
+            ],
+            "description": "The tool type, which is always `fabric_iq_preview`."
           },
           "project_connection_id": {
             "type": "string",
@@ -46275,7 +46294,8 @@
             "type": "string",
             "enum": [
               "file_search"
-            ]
+            ],
+            "description": "The tool type, which is always `file_search`."
           },
           "max_num_results": {
             "$ref": "#/components/schemas/OpenAI.integer",
@@ -46293,7 +46313,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "Filters to apply to the file search."
           },
           "vector_store_ids": {
             "type": "array",
@@ -46336,7 +46357,8 @@
             "type": "string",
             "enum": [
               "FixedRatio"
-            ]
+            ],
+            "description": "The version selection rule type, which is always `FixedRatio`."
           },
           "traffic_percentage": {
             "type": "integer",
@@ -46915,7 +46937,8 @@
             "type": "string",
             "enum": [
               "hosted"
-            ]
+            ],
+            "description": "The agent kind, which is always `hosted`."
           },
           "cpu": {
             "type": "string",
@@ -47881,7 +47904,8 @@
             "type": "string",
             "enum": [
               "mcp"
-            ]
+            ],
+            "description": "The tool type, which is always `mcp`."
           },
           "server_label": {
             "type": "string",
@@ -47930,7 +47954,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "Custom headers to include in requests to the MCP server."
           },
           "allowed_tools": {
             "anyOf": [
@@ -47946,7 +47971,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The tool names or filter identifying which MCP tools are available."
           },
           "allowed_callers": {
             "anyOf": [
@@ -47959,7 +47985,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The execution contexts allowed to invoke this tool."
           },
           "require_approval": {
             "anyOf": [
@@ -47977,6 +48004,7 @@
                 "type": "null"
               }
             ],
+            "description": "The approval requirements for invoking tools on the MCP server.",
             "default": "always"
           },
           "defer_loading": {
@@ -48018,7 +48046,8 @@
             "type": "string",
             "enum": [
               "ManagedAgentIdentityBlueprint"
-            ]
+            ],
+            "description": "The blueprint reference type, which is always `ManagedAgentIdentityBlueprint`."
           },
           "blueprint_id": {
             "type": "string",
@@ -49971,7 +50000,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The execution contexts allowed to invoke this tool."
           }
         },
         "allOf": [
@@ -52751,7 +52781,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The execution contexts allowed to invoke this tool."
           },
           "name": {
             "type": "string",
@@ -53375,7 +53406,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The memory limit for the automatically provisioned container."
           },
           "skills": {
             "type": "array",
@@ -59843,7 +59875,8 @@
         ],
         "properties": {
           "type": {
-            "$ref": "#/components/schemas/OpenAI.CreateTranscriptionResponseJsonUsageType"
+            "$ref": "#/components/schemas/OpenAI.CreateTranscriptionResponseJsonUsageType",
+            "description": "The type of resource usage reported for the transcription."
           }
         },
         "discriminator": {
@@ -60531,7 +60564,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The execution contexts allowed to invoke this tool."
           }
         },
         "allOf": [
@@ -62449,7 +62483,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "Filters to apply to the file search."
           },
           "name": {
             "type": "string",
@@ -64021,7 +64056,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The execution contexts allowed to invoke this tool."
           },
           "name": {
             "type": "string",
@@ -64244,7 +64280,8 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 128,
-            "pattern": "^[a-zA-Z0-9_-]+$"
+            "pattern": "^[a-zA-Z0-9_-]+$",
+            "description": "The name of the function the model can call."
           },
           "description": {
             "anyOf": [
@@ -64254,7 +64291,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "A description of the function that helps the model decide when to call it."
           },
           "parameters": {
             "anyOf": [
@@ -64264,7 +64302,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The JSON Schema describing the function's input parameters."
           },
           "strict": {
             "anyOf": [
@@ -64274,13 +64313,15 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "Whether to require generated function arguments to match the parameter schema exactly."
           },
           "type": {
             "type": "string",
             "enum": [
               "function"
             ],
+            "description": "The tool type, which is always `function`.",
             "x-stainless-const": true,
             "default": "function"
           },
@@ -64297,7 +64338,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The JSON Schema describing the function's output."
           },
           "defer_loading": {
             "type": "boolean",
@@ -64314,7 +64356,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The execution contexts allowed to invoke this tool."
           }
         }
       },
@@ -73322,7 +73365,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "A description of the tool's purpose and behavior."
           },
           "input_schema": {
             "$ref": "#/components/schemas/OpenAI.MCPListToolsToolInputSchema",
@@ -73336,7 +73380,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "Annotations describing the tool's behavior, such as whether it is read-only."
           }
         },
         "description": "A tool available on an MCP server.",
@@ -73410,7 +73455,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "Custom headers to include in requests to the MCP server."
           },
           "allowed_tools": {
             "anyOf": [
@@ -73426,7 +73472,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The tool names or filter identifying which MCP tools are available."
           },
           "allowed_callers": {
             "anyOf": [
@@ -73439,7 +73486,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The execution contexts allowed to invoke this tool."
           },
           "require_approval": {
             "anyOf": [
@@ -73457,6 +73505,7 @@
                 "type": "null"
               }
             ],
+            "description": "The approval requirements for invoking tools on the MCP server.",
             "default": "always"
           },
           "defer_loading": {
@@ -73517,10 +73566,12 @@
         "type": "object",
         "properties": {
           "always": {
-            "$ref": "#/components/schemas/OpenAI.MCPToolFilter"
+            "$ref": "#/components/schemas/OpenAI.MCPToolFilter",
+            "description": "The filter identifying tools that always require approval before execution."
           },
           "never": {
-            "$ref": "#/components/schemas/OpenAI.MCPToolFilter"
+            "$ref": "#/components/schemas/OpenAI.MCPToolFilter",
+            "description": "The filter identifying tools that never require approval before execution."
           }
         }
       },
@@ -77599,7 +77650,8 @@
         ],
         "properties": {
           "type": {
-            "$ref": "#/components/schemas/OpenAI.RealtimeAudioFormatsType"
+            "$ref": "#/components/schemas/OpenAI.RealtimeAudioFormatsType",
+            "description": "The media type identifying the audio encoding."
           }
         },
         "discriminator": {
@@ -77621,13 +77673,15 @@
             "type": "string",
             "enum": [
               "audio/pcm"
-            ]
+            ],
+            "description": "The audio media type, which is always `audio/pcm`."
           },
           "rate": {
             "type": "number",
             "enum": [
               24000
-            ]
+            ],
+            "description": "The PCM sample rate in hertz. The supported value is 24000."
           }
         },
         "allOf": [
@@ -77646,7 +77700,8 @@
             "type": "string",
             "enum": [
               "audio/pcma"
-            ]
+            ],
+            "description": "The audio media type, which is always `audio/pcma`."
           }
         },
         "allOf": [
@@ -77665,7 +77720,8 @@
             "type": "string",
             "enum": [
               "audio/pcmu"
-            ]
+            ],
+            "description": "The audio media type, which is always `audio/pcmu`."
           }
         },
         "allOf": [
@@ -77741,7 +77797,8 @@
         ],
         "properties": {
           "type": {
-            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemType"
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemType",
+            "description": "The type of item in the realtime conversation."
           }
         },
         "discriminator": {
@@ -77917,13 +77974,15 @@
         ],
         "properties": {
           "role": {
-            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemMessageType"
+            "$ref": "#/components/schemas/OpenAI.RealtimeConversationItemMessageType",
+            "description": "The role of the participant that authored the message."
           },
           "type": {
             "type": "string",
             "enum": [
               "message"
-            ]
+            ],
+            "description": "The conversation item type, which is always `message`."
           }
         },
         "discriminator": {
@@ -78029,16 +78088,20 @@
             "enum": [
               "output_text",
               "output_audio"
-            ]
+            ],
+            "description": "The type of output content in the assistant message."
           },
           "text": {
-            "type": "string"
+            "type": "string",
+            "description": "The text content of the assistant message."
           },
           "audio": {
-            "type": "string"
+            "type": "string",
+            "description": "The base64-encoded output audio."
           },
           "transcript": {
-            "type": "string"
+            "type": "string",
+            "description": "The text transcript associated with the output audio."
           }
         }
       },
@@ -78126,10 +78189,12 @@
             "enum": [
               "input_text"
             ],
+            "description": "The content type, which is always `input_text`.",
             "x-stainless-const": true
           },
           "text": {
-            "type": "string"
+            "type": "string",
+            "description": "The text of the system message."
           }
         }
       },
@@ -78233,17 +78298,21 @@
               "input_text",
               "input_audio",
               "input_image"
-            ]
+            ],
+            "description": "The type of input content in the user message."
           },
           "text": {
-            "type": "string"
+            "type": "string",
+            "description": "The text content of the user message."
           },
           "audio": {
-            "type": "string"
+            "type": "string",
+            "description": "The base64-encoded input audio."
           },
           "image_url": {
             "type": "string",
-            "format": "uri"
+            "format": "uri",
+            "description": "The URL of the input image."
           },
           "detail": {
             "type": "string",
@@ -78252,10 +78321,12 @@
               "low",
               "high"
             ],
+            "description": "The level of detail used when processing the input image.",
             "default": "auto"
           },
           "transcript": {
-            "type": "string"
+            "type": "string",
+            "description": "The text transcript associated with the input audio."
           }
         }
       },
@@ -78470,7 +78541,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The reason for approving or rejecting the MCP tool call."
           },
           "created_at": {
             "$ref": "#/components/schemas/FoundryTimestamp",
@@ -78503,7 +78575,8 @@
         ],
         "properties": {
           "type": {
-            "$ref": "#/components/schemas/OpenAI.RealtimeMcpErrorType"
+            "$ref": "#/components/schemas/OpenAI.RealtimeMcpErrorType",
+            "description": "The category of MCP error."
           }
         },
         "discriminator": {
@@ -78528,13 +78601,16 @@
             "enum": [
               "http_error"
             ],
+            "description": "The error type, which is always `http_error`.",
             "x-stainless-const": true
           },
           "code": {
-            "$ref": "#/components/schemas/OpenAI.integer"
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The HTTP error code returned by the MCP server."
           },
           "message": {
-            "type": "string"
+            "type": "string",
+            "description": "A description of the HTTP error."
           }
         },
         "allOf": [
@@ -78612,13 +78688,16 @@
             "enum": [
               "protocol_error"
             ],
+            "description": "The error type, which is always `protocol_error`.",
             "x-stainless-const": true
           },
           "code": {
-            "$ref": "#/components/schemas/OpenAI.integer"
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The MCP protocol error code."
           },
           "message": {
-            "type": "string"
+            "type": "string",
+            "description": "A description of the MCP protocol error."
           }
         },
         "allOf": [
@@ -78670,7 +78749,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The ID of the approval request associated with this tool call."
           },
           "output": {
             "anyOf": [
@@ -78680,10 +78760,12 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The output returned by the MCP tool."
           },
           "error": {
-            "$ref": "#/components/schemas/OpenAI.RealtimeMCPError"
+            "$ref": "#/components/schemas/OpenAI.RealtimeMCPError",
+            "description": "The error returned if the MCP tool call failed."
           },
           "created_at": {
             "$ref": "#/components/schemas/FoundryTimestamp",
@@ -78721,10 +78803,12 @@
             "enum": [
               "tool_execution_error"
             ],
+            "description": "The error type, which is always `tool_execution_error`.",
             "x-stainless-const": true
           },
           "message": {
-            "type": "string"
+            "type": "string",
+            "description": "A description of the tool execution failure."
           }
         },
         "allOf": [
@@ -78753,7 +78837,8 @@
         "type": "object",
         "properties": {
           "effort": {
-            "$ref": "#/components/schemas/OpenAI.RealtimeReasoningEffort"
+            "$ref": "#/components/schemas/OpenAI.RealtimeReasoningEffort",
+            "description": "The amount of reasoning effort the realtime model should use."
           }
         },
         "description": "Configuration for reasoning-capable Realtime models such as `gpt-realtime-2`.",
@@ -78780,7 +78865,8 @@
               "cancelled",
               "failed",
               "incomplete"
-            ]
+            ],
+            "description": "The terminal status of the response."
           },
           "reason": {
             "type": "string",
@@ -78789,10 +78875,12 @@
               "client_cancelled",
               "max_output_tokens",
               "content_filter"
-            ]
+            ],
+            "description": "The reason the response was cancelled or left incomplete."
           },
           "error": {
-            "$ref": "#/components/schemas/OpenAI.RealtimeResponseStatusDetailsError"
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponseStatusDetailsError",
+            "description": "Details of the error that caused the response to fail."
           }
         }
       },
@@ -78800,10 +78888,12 @@
         "type": "object",
         "properties": {
           "type": {
-            "type": "string"
+            "type": "string",
+            "description": "The category of error that caused the response to fail."
           },
           "code": {
-            "type": "string"
+            "type": "string",
+            "description": "The machine-readable error code."
           }
         }
       },
@@ -78811,19 +78901,24 @@
         "type": "object",
         "properties": {
           "total_tokens": {
-            "$ref": "#/components/schemas/OpenAI.integer"
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The total number of input and output tokens used by the response."
           },
           "input_tokens": {
-            "$ref": "#/components/schemas/OpenAI.integer"
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The number of input tokens used by the response."
           },
           "output_tokens": {
-            "$ref": "#/components/schemas/OpenAI.integer"
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The number of output tokens generated by the response."
           },
           "input_token_details": {
-            "$ref": "#/components/schemas/OpenAI.RealtimeResponseUsageInputTokenDetails"
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponseUsageInputTokenDetails",
+            "description": "The input token counts broken down by modality and cache usage."
           },
           "output_token_details": {
-            "$ref": "#/components/schemas/OpenAI.RealtimeResponseUsageOutputTokenDetails"
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponseUsageOutputTokenDetails",
+            "description": "The output token counts broken down by modality."
           }
         }
       },
@@ -78831,19 +78926,24 @@
         "type": "object",
         "properties": {
           "cached_tokens": {
-            "$ref": "#/components/schemas/OpenAI.integer"
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The number of input tokens retrieved from the cache."
           },
           "text_tokens": {
-            "$ref": "#/components/schemas/OpenAI.integer"
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The number of text input tokens."
           },
           "image_tokens": {
-            "$ref": "#/components/schemas/OpenAI.integer"
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The number of image input tokens."
           },
           "audio_tokens": {
-            "$ref": "#/components/schemas/OpenAI.integer"
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The number of audio input tokens."
           },
           "cached_tokens_details": {
-            "$ref": "#/components/schemas/OpenAI.RealtimeResponseUsageInputTokenDetailsCachedTokensDetails"
+            "$ref": "#/components/schemas/OpenAI.RealtimeResponseUsageInputTokenDetailsCachedTokensDetails",
+            "description": "The cached input token counts broken down by modality."
           }
         }
       },
@@ -78851,13 +78951,16 @@
         "type": "object",
         "properties": {
           "text_tokens": {
-            "$ref": "#/components/schemas/OpenAI.integer"
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The number of cached text input tokens."
           },
           "image_tokens": {
-            "$ref": "#/components/schemas/OpenAI.integer"
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The number of cached image input tokens."
           },
           "audio_tokens": {
-            "$ref": "#/components/schemas/OpenAI.integer"
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The number of cached audio input tokens."
           }
         }
       },
@@ -78865,10 +78968,12 @@
         "type": "object",
         "properties": {
           "text_tokens": {
-            "$ref": "#/components/schemas/OpenAI.integer"
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The number of text output tokens."
           },
           "audio_tokens": {
-            "$ref": "#/components/schemas/OpenAI.integer"
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The number of audio output tokens."
           }
         }
       },
@@ -80134,14 +80239,17 @@
               "high",
               "auto"
             ],
+            "description": "How eagerly the detector decides that the user has finished speaking.",
             "default": "auto"
           },
           "create_response": {
             "type": "boolean",
+            "description": "Whether to automatically create a response when a speech turn ends.",
             "default": true
           },
           "interrupt_response": {
             "type": "boolean",
+            "description": "Whether to interrupt an ongoing response when speech starts.",
             "default": true
           }
         },
@@ -80164,20 +80272,25 @@
             ]
           },
           "threshold": {
-            "$ref": "#/components/schemas/OpenAI.numeric"
+            "$ref": "#/components/schemas/OpenAI.numeric",
+            "description": "The voice activity detection threshold used to identify speech."
           },
           "prefix_padding_ms": {
-            "$ref": "#/components/schemas/OpenAI.integer"
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The amount of audio, in milliseconds, to include before detected speech."
           },
           "silence_duration_ms": {
-            "$ref": "#/components/schemas/OpenAI.integer"
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The duration of silence, in milliseconds, that marks the end of a speech turn."
           },
           "create_response": {
             "type": "boolean",
+            "description": "Whether to automatically create a response when a speech turn ends.",
             "default": true
           },
           "interrupt_response": {
             "type": "boolean",
+            "description": "Whether to interrupt an ongoing response when speech starts.",
             "default": true
           },
           "idle_timeout_ms": {
@@ -80188,7 +80301,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The duration of inactivity, in milliseconds, before an idle timeout is triggered."
           }
         },
         "allOf": [
@@ -80226,7 +80340,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The amount of reasoning effort the model should use when generating a response."
           },
           "summary": {
             "anyOf": [
@@ -80241,7 +80356,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The requested level of detail for the reasoning summary."
           },
           "context": {
             "anyOf": [
@@ -80256,7 +80372,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The conversation turns to include in the reasoning context."
           },
           "generate_summary": {
             "anyOf": [
@@ -80271,7 +80388,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The format of the reasoning summary to generate."
           }
         },
         "description": "Configuration options for\n[reasoning models](https://platform.openai.com/docs/guides/reasoning).",
@@ -83783,7 +83901,8 @@
         ],
         "properties": {
           "reasoning_tokens": {
-            "$ref": "#/components/schemas/OpenAI.integer"
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The number of output tokens used for reasoning."
           }
         }
       },
@@ -85584,7 +85703,8 @@
         ],
         "properties": {
           "type": {
-            "$ref": "#/components/schemas/OpenAI.TextResponseFormatConfigurationType"
+            "$ref": "#/components/schemas/OpenAI.TextResponseFormatConfigurationType",
+            "description": "The format that the model must use for its text response."
           }
         },
         "discriminator": {
@@ -85683,7 +85803,8 @@
             "description": "The name of the response format. Must be a-z, A-Z, 0-9, or contain\n  underscores and dashes, with a maximum length of 64."
           },
           "schema": {
-            "$ref": "#/components/schemas/OpenAI.ResponseFormatJsonSchemaSchema"
+            "$ref": "#/components/schemas/OpenAI.ResponseFormatJsonSchemaSchema",
+            "description": "The JSON Schema that the model's response must follow."
           },
           "strict": {
             "anyOf": [
@@ -85693,7 +85814,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "Whether to require responses to match the JSON Schema exactly."
           }
         },
         "allOf": [
@@ -85972,7 +86094,8 @@
             "type": "string",
             "enum": [
               "code_interpreter"
-            ]
+            ],
+            "description": "The selected tool type, which is always `code_interpreter`."
           }
         },
         "allOf": [
@@ -85992,7 +86115,8 @@
             "type": "string",
             "enum": [
               "computer"
-            ]
+            ],
+            "description": "The selected tool type, which is always `computer`."
           }
         },
         "allOf": [
@@ -86012,7 +86136,8 @@
             "type": "string",
             "enum": [
               "computer_use"
-            ]
+            ],
+            "description": "The selected tool type, which is always `computer_use`."
           }
         },
         "allOf": [
@@ -86032,7 +86157,8 @@
             "type": "string",
             "enum": [
               "computer_use_preview"
-            ]
+            ],
+            "description": "The selected tool type, which is always `computer_use_preview`."
           }
         },
         "allOf": [
@@ -86080,7 +86206,8 @@
             "type": "string",
             "enum": [
               "file_search"
-            ]
+            ],
+            "description": "The selected tool type, which is always `file_search`."
           }
         },
         "allOf": [
@@ -86128,7 +86255,8 @@
             "type": "string",
             "enum": [
               "image_generation"
-            ]
+            ],
+            "description": "The selected tool type, which is always `image_generation`."
           }
         },
         "allOf": [
@@ -86165,7 +86293,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The name of the tool to call on the specified MCP server."
           }
         },
         "allOf": [
@@ -86193,7 +86322,8 @@
         ],
         "properties": {
           "type": {
-            "$ref": "#/components/schemas/OpenAI.ToolChoiceParamType"
+            "$ref": "#/components/schemas/OpenAI.ToolChoiceParamType",
+            "description": "The type of tool the model should use."
           }
         },
         "discriminator": {
@@ -86255,7 +86385,8 @@
             "type": "string",
             "enum": [
               "web_search_preview"
-            ]
+            ],
+            "description": "The selected tool type, which is always `web_search_preview`."
           }
         },
         "allOf": [
@@ -86275,7 +86406,8 @@
             "type": "string",
             "enum": [
               "web_search_preview_2025_03_11"
-            ]
+            ],
+            "description": "The selected tool type, which is always `web_search_preview_2025_03_11`."
           }
         },
         "allOf": [
@@ -86318,7 +86450,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "A description of the tool search implementation and the tools it can discover."
           },
           "parameters": {
             "anyOf": [
@@ -86328,7 +86461,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The JSON Schema describing the input accepted by the tool search implementation."
           }
         },
         "allOf": [
@@ -86493,10 +86627,12 @@
         "type": "object",
         "properties": {
           "text_tokens": {
-            "$ref": "#/components/schemas/OpenAI.integer"
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The number of text input tokens used for transcription."
           },
           "audio_tokens": {
-            "$ref": "#/components/schemas/OpenAI.integer"
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The number of audio input tokens used for transcription."
           }
         }
       },
@@ -88233,7 +88369,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/OpenAI.SearchContentType"
-            }
+            },
+            "description": "The types of content to include in web search results."
           }
         },
         "allOf": [
@@ -88270,7 +88407,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "Filters to apply to web search results."
           },
           "user_location": {
             "anyOf": [
@@ -88280,7 +88418,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The approximate location of the user for search relevance."
           },
           "search_context_size": {
             "type": "string",
@@ -88699,7 +88838,8 @@
             "type": "string",
             "enum": [
               "openapi"
-            ]
+            ],
+            "description": "The tool type, which is always `openapi`."
           },
           "openapi": {
             "$ref": "#/components/schemas/OpenApiFunctionDefinition",
@@ -89258,7 +89398,8 @@
             "type": "string",
             "enum": [
               "prompt"
-            ]
+            ],
+            "description": "The agent kind, which is always `prompt`."
           },
           "harness": {
             "$ref": "#/components/schemas/AgentHarness",
@@ -89334,7 +89475,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The reasoning configuration for models that support reasoning."
           },
           "tools": {
             "type": "array",
@@ -89377,7 +89519,8 @@
         "type": "object",
         "properties": {
           "format": {
-            "$ref": "#/components/schemas/OpenAI.TextResponseFormatConfiguration"
+            "$ref": "#/components/schemas/OpenAI.TextResponseFormatConfiguration",
+            "description": "The format of the model's text response, such as plain text or structured JSON."
           }
         },
         "description": "Configuration options for a text response from the model. Can be plain text or structured JSON data."
@@ -90050,7 +90193,8 @@
             "type": "string",
             "enum": [
               "reminder_preview"
-            ]
+            ],
+            "description": "The tool type, which is always `reminder_preview`."
           }
         },
         "allOf": [
@@ -90622,7 +90766,8 @@
             "type": "string",
             "enum": [
               "rubric"
-            ]
+            ],
+            "description": "The evaluator definition type, which is always `rubric`."
           },
           "dimensions": {
             "type": "array",
@@ -91471,7 +91616,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The execution contexts allowed to invoke this tool."
           },
           "environment": {
             "$ref": "#/components/schemas/ToolboxShellEnvironment",
@@ -94063,7 +94209,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The memory limit for the automatically provisioned container."
           },
           "skills": {
             "type": "array",
@@ -95419,7 +95566,8 @@
         ],
         "properties": {
           "type": {
-            "$ref": "#/components/schemas/VersionSelectorType"
+            "$ref": "#/components/schemas/VersionSelectorType",
+            "description": "The type of rule used to select an agent version."
           },
           "agent_version": {
             "type": "string",
@@ -95443,7 +95591,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/VersionSelectionRule"
-            }
+            },
+            "description": "The rules used to select which agent version handles a request."
           }
         }
       },
@@ -95467,7 +95616,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/VersionSelectionRule"
-            }
+            },
+            "description": "The rules used to select which agent version handles a request."
           }
         }
       },
@@ -95711,7 +95861,8 @@
             "items": {
               "type": "string",
               "format": "uri"
-            }
+            },
+            "description": "The STUN or TURN server URLs used for ICE negotiation."
           },
           "username": {
             "anyOf": [
@@ -95721,7 +95872,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The username used to authenticate with the ICE server."
           },
           "credential": {
             "anyOf": [
@@ -95732,7 +95884,8 @@
                 "type": "null"
               }
             ],
-            "format": "password"
+            "format": "password",
+            "description": "The credential used to authenticate with the ICE server."
           }
         },
         "description": "An ICE server used for avatar WebRTC negotiation.",
@@ -95768,6 +95921,7 @@
           "zoom": {
             "type": "number",
             "format": "float",
+            "description": "The zoom applied to the avatar in the scene.",
             "exclusiveMinimum": 0,
             "default": 1
           },
@@ -95776,6 +95930,7 @@
             "format": "float",
             "minimum": -1,
             "maximum": 1,
+            "description": "The horizontal position of the avatar in the scene.",
             "default": 0
           },
           "position_y": {
@@ -95783,6 +95938,7 @@
             "format": "float",
             "minimum": -1,
             "maximum": 1,
+            "description": "The vertical position of the avatar in the scene.",
             "default": 0
           },
           "rotation_x": {
@@ -95790,6 +95946,7 @@
             "format": "float",
             "minimum": -3.141592653589793,
             "maximum": 3.141592653589793,
+            "description": "The rotation of the avatar around the x-axis.",
             "default": 0
           },
           "rotation_y": {
@@ -95797,6 +95954,7 @@
             "format": "float",
             "minimum": -3.141592653589793,
             "maximum": 3.141592653589793,
+            "description": "The rotation of the avatar around the y-axis.",
             "default": 0
           },
           "rotation_z": {
@@ -95804,12 +95962,14 @@
             "format": "float",
             "minimum": -3.141592653589793,
             "maximum": 3.141592653589793,
+            "description": "The rotation of the avatar around the z-axis.",
             "default": 0
           },
           "amplitude": {
             "type": "number",
             "format": "float",
             "maximum": 1,
+            "description": "The amplitude of the avatar's motion.",
             "exclusiveMinimum": 0,
             "default": 1
           }
@@ -95846,10 +96006,12 @@
         "properties": {
           "image_url": {
             "type": "string",
-            "format": "uri"
+            "format": "uri",
+            "description": "The URL of the image used as the video background."
           },
           "color": {
-            "type": "string"
+            "type": "string",
+            "description": "The color used as the video background."
           }
         },
         "description": "The avatar video background.",
@@ -95873,7 +96035,8 @@
               "format": "uint32"
             },
             "minItems": 2,
-            "maxItems": 2
+            "maxItems": 2,
+            "description": "The coordinates of the bottom-right corner of the crop rectangle."
           },
           "top_left": {
             "type": "array",
@@ -95882,7 +96045,8 @@
               "format": "uint32"
             },
             "minItems": 2,
-            "maxItems": 2
+            "maxItems": 2,
+            "description": "The coordinates of the top-left corner of the crop rectangle."
           }
         },
         "description": "The rectangular crop applied to avatar video.",
@@ -95902,19 +96066,23 @@
             "default": 2000000
           },
           "crop": {
-            "$ref": "#/components/schemas/VoiceAgentAvatarVideoCrop"
+            "$ref": "#/components/schemas/VoiceAgentAvatarVideoCrop",
+            "description": "The rectangular crop applied to the avatar video."
           },
           "resolution": {
-            "$ref": "#/components/schemas/VoiceAgentAvatarVideoResolution"
+            "$ref": "#/components/schemas/VoiceAgentAvatarVideoResolution",
+            "description": "The dimensions of the avatar video."
           },
           "background": {
-            "$ref": "#/components/schemas/VoiceAgentAvatarVideoBackground"
+            "$ref": "#/components/schemas/VoiceAgentAvatarVideoBackground",
+            "description": "The background image or color for the avatar video."
           },
           "gop_size": {
             "type": "integer",
             "format": "int32",
             "minimum": 1,
             "maximum": 2000,
+            "description": "The group-of-pictures (GOP) size for the encoded video.",
             "default": 10
           }
         },
@@ -95935,12 +96103,14 @@
           "width": {
             "type": "integer",
             "format": "int32",
-            "minimum": 1
+            "minimum": 1,
+            "description": "The video width in pixels."
           },
           "height": {
             "type": "integer",
             "format": "int32",
-            "minimum": 1
+            "minimum": 1,
+            "description": "The video height in pixels."
           }
         },
         "description": "The avatar video resolution.",
@@ -95960,7 +96130,8 @@
             "type": "string",
             "enum": [
               "azure_semantic_vad_en"
-            ]
+            ],
+            "description": "The turn detection type, which is always `azure_semantic_vad_en`."
           },
           "threshold": {
             "type": "number",
@@ -96034,7 +96205,8 @@
             "type": "string",
             "enum": [
               "azure_semantic_vad_multilingual"
-            ]
+            ],
+            "description": "The turn detection type, which is always `azure_semantic_vad_multilingual`."
           },
           "threshold": {
             "type": "number",
@@ -96115,7 +96287,8 @@
             "type": "string",
             "enum": [
               "azure_semantic_vad"
-            ]
+            ],
+            "description": "The turn detection type, which is always `azure_semantic_vad`."
           },
           "threshold": {
             "type": "number",
@@ -96459,7 +96632,8 @@
             "type": "string",
             "enum": [
               "function"
-            ]
+            ],
+            "description": "The tool type, which is always `function`."
           },
           "name": {
             "type": "string",
@@ -96669,7 +96843,8 @@
             "type": "string",
             "enum": [
               "llm_generated"
-            ]
+            ],
+            "description": "The greeting type, which is always `llm_generated`."
           },
           "prompt": {
             "type": "string",
@@ -96704,7 +96879,8 @@
             "type": "string",
             "enum": [
               "llm_interim_response"
-            ]
+            ],
+            "description": "The interim response type, which is always `llm_interim_response`."
           },
           "model": {
             "type": "string",
@@ -96784,7 +96960,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "Custom headers to include in requests to the MCP server."
           },
           "allowed_tools": {
             "anyOf": [
@@ -96800,7 +96977,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The tool names or filter identifying which MCP tools are available."
           },
           "allowed_callers": {
             "anyOf": [
@@ -96813,7 +96991,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The execution contexts allowed to invoke this tool."
           },
           "require_approval": {
             "anyOf": [
@@ -96831,6 +97010,7 @@
                 "type": "null"
               }
             ],
+            "description": "The approval requirements for invoking tools on the MCP server.",
             "default": "always"
           },
           "defer_loading": {
@@ -96853,7 +97033,8 @@
             "type": "string",
             "enum": [
               "mcp"
-            ]
+            ],
+            "description": "The tool type, which is always `mcp`."
           },
           "server_url": {
             "type": "string",
@@ -96931,21 +97112,25 @@
               "high",
               "auto"
             ],
+            "description": "How eagerly the detector decides that the user has finished speaking.",
             "default": "auto"
           },
           "create_response": {
             "type": "boolean",
+            "description": "Whether to automatically create a response when a speech turn ends.",
             "default": true
           },
           "interrupt_response": {
             "type": "boolean",
+            "description": "Whether to interrupt an ongoing response when speech starts.",
             "default": true
           },
           "type": {
             "type": "string",
             "enum": [
               "semantic_vad"
-            ]
+            ],
+            "description": "The turn detection type, which is always `semantic_vad`."
           }
         },
         "allOf": [
@@ -96967,20 +97152,25 @@
         ],
         "properties": {
           "threshold": {
-            "$ref": "#/components/schemas/OpenAI.numeric"
+            "$ref": "#/components/schemas/OpenAI.numeric",
+            "description": "The voice activity detection threshold used to identify speech."
           },
           "prefix_padding_ms": {
-            "$ref": "#/components/schemas/OpenAI.integer"
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The amount of audio, in milliseconds, to include before detected speech."
           },
           "silence_duration_ms": {
-            "$ref": "#/components/schemas/OpenAI.integer"
+            "$ref": "#/components/schemas/OpenAI.integer",
+            "description": "The duration of silence, in milliseconds, that marks the end of a speech turn."
           },
           "create_response": {
             "type": "boolean",
+            "description": "Whether to automatically create a response when a speech turn ends.",
             "default": true
           },
           "interrupt_response": {
             "type": "boolean",
+            "description": "Whether to interrupt an ongoing response when speech starts.",
             "default": true
           },
           "idle_timeout_ms": {
@@ -96991,13 +97181,15 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The duration of inactivity, in milliseconds, before an idle timeout is triggered."
           },
           "type": {
             "type": "string",
             "enum": [
               "server_vad"
-            ]
+            ],
+            "description": "The turn detection type, which is always `server_vad`."
           },
           "speech_duration_ms": {
             "$ref": "#/components/schemas/FoundryDurationMilliseconds",
@@ -97041,7 +97233,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The ICE servers used to establish the avatar's WebRTC connection."
           }
         },
         "allOf": [
@@ -97080,7 +97273,8 @@
             "type": "string",
             "enum": [
               "static_interim_response"
-            ]
+            ],
+            "description": "The interim response type, which is always `static_interim_response`."
           },
           "texts": {
             "type": "array",
@@ -97279,7 +97473,8 @@
             "type": "string",
             "enum": [
               "template"
-            ]
+            ],
+            "description": "The greeting type, which is always `template`."
           },
           "text": {
             "type": "string",
@@ -98190,7 +98385,8 @@
             "type": "string",
             "enum": [
               "web_iq_preview"
-            ]
+            ],
+            "description": "The tool type, which is always `web_iq_preview`."
           },
           "project_connection_id": {
             "type": "string",
@@ -98256,7 +98452,8 @@
             "type": "string",
             "enum": [
               "web_search"
-            ]
+            ],
+            "description": "The tool type, which is always `web_search`."
           },
           "external_web_access": {
             "type": "boolean",
@@ -98271,7 +98468,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "Filters to apply to web search results."
           },
           "user_location": {
             "anyOf": [
@@ -98281,7 +98479,8 @@
               {
                 "type": "null"
               }
-            ]
+            ],
+            "description": "The approximate location of the user for search relevance."
           },
           "search_context_size": {
             "type": "string",
@@ -98381,7 +98580,8 @@
             "type": "string",
             "enum": [
               "work_iq_preview"
-            ]
+            ],
+            "description": "The tool type, which is always `work_iq_preview`."
           },
           "project_connection_id": {
             "type": "string",
@@ -98458,7 +98658,8 @@
             "type": "string",
             "enum": [
               "workflow"
-            ]
+            ],
+            "description": "The agent kind, which is always `workflow`."
           },
           "workflow": {
             "type": "string",

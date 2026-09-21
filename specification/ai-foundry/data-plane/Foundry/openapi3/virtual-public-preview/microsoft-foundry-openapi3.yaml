@@ -43630,6 +43630,7 @@ components:
           type: string
           enum:
             - a2a_preview
+          description: The tool type, which is always `a2a_preview`.
         base_url:
           type: string
           format: uri
@@ -43776,6 +43777,7 @@ components:
           type: string
           enum:
             - a2a
+          description: The tool type, which is always `a2a`.
         base_url:
           type: string
           format: uri
@@ -43870,6 +43872,7 @@ components:
       properties:
         type:
           $ref: '#/components/schemas/AgentBlueprintReferenceType'
+          description: The type of agent blueprint reference.
       discriminator:
         propertyName: type
         mapping:
@@ -44201,6 +44204,7 @@ components:
       properties:
         type:
           $ref: '#/components/schemas/AgentEndpointAuthorizationSchemeType'
+          description: The type of authorization scheme used by the agent endpoint.
       discriminator:
         propertyName: type
         mapping:
@@ -45275,6 +45279,7 @@ components:
           properties:
             latest:
               $ref: '#/components/schemas/AgentVersionObject'
+              description: The latest version of this agent.
           required:
             - latest
           description: The latest version of the agent.
@@ -45301,6 +45306,7 @@ components:
           readOnly: true
         agent_card:
           $ref: '#/components/schemas/AgentCard'
+          description: The agent card describing the agent's capabilities.
     AgentOptimizationCandidate:
       type: object
       required:
@@ -46386,6 +46392,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/OpenAI.Tool'
+          description: The tools available to the agent during evaluation.
       allOf:
         - $ref: '#/components/schemas/FoundryEvaluationTarget'
       description: Represents a target specifying an Azure AI agent.
@@ -46412,6 +46419,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/OpenAI.Tool'
+          description: The tools available to the agent during evaluation.
       allOf:
         - $ref: '#/components/schemas/FoundryEvaluationTargetUpdate'
       description: Represents a target specifying an Azure AI agent.
@@ -46691,6 +46699,7 @@ components:
           type: string
           enum:
             - azure_ai_search
+          description: The tool type, which is always `azure_ai_search`.
         azure_ai_search:
           $ref: '#/components/schemas/AzureAISearchToolResource'
           description: The azure ai search index resource.
@@ -47416,6 +47425,7 @@ components:
           type: string
           enum:
             - BotService
+          description: The authorization scheme type, which is always `BotService`.
       allOf:
         - $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
     BotServiceRbacAuthorizationScheme:
@@ -47427,6 +47437,7 @@ components:
           type: string
           enum:
             - BotServiceRbac
+          description: The authorization scheme type, which is always `BotServiceRbac`.
       allOf:
         - $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
     BotServiceTenantAuthorizationScheme:
@@ -47438,6 +47449,7 @@ components:
           type: string
           enum:
             - BotServiceTenant
+          description: The authorization scheme type, which is always `BotServiceTenant`.
       allOf:
         - $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
     BrowserAutomationPreviewTool:
@@ -47470,6 +47482,7 @@ components:
           type: string
           enum:
             - browser_automation_preview
+          description: The tool type, which is always `browser_automation_preview`.
         browser_automation_preview:
           $ref: '#/components/schemas/BrowserAutomationToolParameters'
           description: The Browser Automation Tool parameters.
@@ -47799,12 +47812,14 @@ components:
           type: string
           enum:
             - code_interpreter
+          description: The tool type, which is always `code_interpreter`.
         allowed_callers:
           anyOf:
             - type: array
               items:
                 $ref: '#/components/schemas/OpenAI.CallableToolAllowedCaller'
             - type: 'null'
+          description: The execution contexts allowed to invoke this tool.
         container:
           anyOf:
             - type: string
@@ -49484,6 +49499,7 @@ components:
           type: string
           enum:
             - endpoint
+          description: The evaluator definition type, which is always `endpoint`.
         connection_name:
           type: string
           minLength: 1
@@ -49500,6 +49516,7 @@ components:
           type: string
           enum:
             - Entra
+          description: The authorization scheme type, which is always `Entra`.
       allOf:
         - $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
     EntraIDCredentials:
@@ -51820,6 +51837,7 @@ components:
           type: string
           enum:
             - external
+          description: The agent kind, which is always `external`.
         otel_agent_id:
           type: string
           description: |-
@@ -51949,6 +51967,7 @@ components:
           type: string
           enum:
             - fabric_iq_preview
+          description: The tool type, which is always `fabric_iq_preview`.
         project_connection_id:
           type: string
           description: The ID of the FabricIQ project connection.
@@ -52053,6 +52072,7 @@ components:
           type: string
           enum:
             - file_search
+          description: The tool type, which is always `file_search`.
         max_num_results:
           $ref: '#/components/schemas/OpenAI.integer'
           description: The maximum number of results to return. This number should be between 1 and 50 inclusive.
@@ -52063,6 +52083,7 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.Filters'
             - type: 'null'
+          description: Filters to apply to the file search.
         vector_store_ids:
           type: array
           items:
@@ -52089,6 +52110,7 @@ components:
           type: string
           enum:
             - FixedRatio
+          description: The version selection rule type, which is always `FixedRatio`.
         traffic_percentage:
           type: integer
           format: int32
@@ -52476,6 +52498,7 @@ components:
           type: string
           enum:
             - hosted
+          description: The agent kind, which is always `hosted`.
         cpu:
           type: string
           description: The CPU configuration for the hosted agent.
@@ -53145,6 +53168,7 @@ components:
           type: string
           enum:
             - mcp
+          description: The tool type, which is always `mcp`.
         server_label:
           type: string
           description: A label for this MCP server, used to identify it in tool calls.
@@ -53199,6 +53223,7 @@ components:
               unevaluatedProperties:
                 type: string
             - type: 'null'
+          description: Custom headers to include in requests to the MCP server.
         allowed_tools:
           anyOf:
             - type: array
@@ -53206,12 +53231,14 @@ components:
                 type: string
             - $ref: '#/components/schemas/OpenAI.MCPToolFilter'
             - type: 'null'
+          description: The tool names or filter identifying which MCP tools are available.
         allowed_callers:
           anyOf:
             - type: array
               items:
                 $ref: '#/components/schemas/OpenAI.CallableToolAllowedCaller'
             - type: 'null'
+          description: The execution contexts allowed to invoke this tool.
         require_approval:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.MCPToolRequireApproval'
@@ -53220,6 +53247,7 @@ components:
                 - always
                 - never
             - type: 'null'
+          description: The approval requirements for invoking tools on the MCP server.
           default: always
         defer_loading:
           type: boolean
@@ -53248,6 +53276,7 @@ components:
           type: string
           enum:
             - ManagedAgentIdentityBlueprint
+          description: The blueprint reference type, which is always `ManagedAgentIdentityBlueprint`.
         blueprint_id:
           type: string
           description: The ID of the managed blueprint
@@ -54635,6 +54664,7 @@ components:
               items:
                 $ref: '#/components/schemas/OpenAI.CallableToolAllowedCaller'
             - type: 'null'
+          description: The execution contexts allowed to invoke this tool.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: Allows the assistant to create, delete, or update files using unified diffs.
@@ -56659,6 +56689,7 @@ components:
               items:
                 $ref: '#/components/schemas/OpenAI.CallableToolAllowedCaller'
             - type: 'null'
+          description: The execution contexts allowed to invoke this tool.
         name:
           type: string
           description: Deprecated. This property is deprecated and will be removed in a future version.
@@ -57072,6 +57103,7 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.ContainerMemoryLimit'
             - type: 'null'
+          description: The memory limit for the automatically provisioned container.
         skills:
           type: array
           items:
@@ -61642,6 +61674,7 @@ components:
       properties:
         type:
           $ref: '#/components/schemas/OpenAI.CreateTranscriptionResponseJsonUsageType'
+          description: The type of resource usage reported for the transcription.
       discriminator:
         propertyName: type
         mapping:
@@ -62130,6 +62163,7 @@ components:
               items:
                 $ref: '#/components/schemas/OpenAI.CallableToolAllowedCaller'
             - type: 'null'
+          description: The execution contexts allowed to invoke this tool.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A custom tool that processes input using a specified format. Learn more about   [custom tools](/docs/guides/function-calling#custom-tools)
@@ -63466,6 +63500,7 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.Filters'
             - type: 'null'
+          description: Filters to apply to the file search.
         name:
           type: string
           description: Deprecated. This property is deprecated and will be removed in a future version.
@@ -64527,6 +64562,7 @@ components:
               items:
                 $ref: '#/components/schemas/OpenAI.CallableToolAllowedCaller'
             - type: 'null'
+          description: The execution contexts allowed to invoke this tool.
         name:
           type: string
           description: Deprecated. This property is deprecated and will be removed in a future version.
@@ -64665,22 +64701,27 @@ components:
           minLength: 1
           maxLength: 128
           pattern: ^[a-zA-Z0-9_-]+$
+          description: The name of the function the model can call.
         description:
           anyOf:
             - type: string
             - type: 'null'
+          description: A description of the function that helps the model decide when to call it.
         parameters:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.EmptyModelParam'
             - type: 'null'
+          description: The JSON Schema describing the function's input parameters.
         strict:
           anyOf:
             - type: boolean
             - type: 'null'
+          description: Whether to require generated function arguments to match the parameter schema exactly.
         type:
           type: string
           enum:
             - function
+          description: The tool type, which is always `function`.
           x-stainless-const: true
           default: function
         async:
@@ -64691,6 +64732,7 @@ components:
             - type: object
               unevaluatedProperties: {}
             - type: 'null'
+          description: The JSON Schema describing the function's output.
         defer_loading:
           type: boolean
           description: Whether this function should be deferred and discovered via tool search.
@@ -64700,6 +64742,7 @@ components:
               items:
                 $ref: '#/components/schemas/OpenAI.CallableToolAllowedCaller'
             - type: 'null'
+          description: The execution contexts allowed to invoke this tool.
     OpenAI.GraderLabelModel:
       type: object
       required:
@@ -71032,6 +71075,7 @@ components:
           anyOf:
             - type: string
             - type: 'null'
+          description: A description of the tool's purpose and behavior.
         input_schema:
           $ref: '#/components/schemas/OpenAI.MCPListToolsToolInputSchema'
           description: The JSON schema describing the tool's input.
@@ -71039,6 +71083,7 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.MCPListToolsToolAnnotations'
             - type: 'null'
+          description: Annotations describing the tool's behavior, such as whether it is read-only.
       description: A tool available on an MCP server.
       title: MCP list tools tool
     OpenAI.MCPListToolsToolAnnotations:
@@ -71111,6 +71156,7 @@ components:
               unevaluatedProperties:
                 type: string
             - type: 'null'
+          description: Custom headers to include in requests to the MCP server.
         allowed_tools:
           anyOf:
             - type: array
@@ -71118,12 +71164,14 @@ components:
                 type: string
             - $ref: '#/components/schemas/OpenAI.MCPToolFilter'
             - type: 'null'
+          description: The tool names or filter identifying which MCP tools are available.
         allowed_callers:
           anyOf:
             - type: array
               items:
                 $ref: '#/components/schemas/OpenAI.CallableToolAllowedCaller'
             - type: 'null'
+          description: The execution contexts allowed to invoke this tool.
         require_approval:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.MCPToolRequireApproval'
@@ -71132,6 +71180,7 @@ components:
                 - always
                 - never
             - type: 'null'
+          description: The approval requirements for invoking tools on the MCP server.
           default: always
         defer_loading:
           type: boolean
@@ -71181,8 +71230,10 @@ components:
       properties:
         always:
           $ref: '#/components/schemas/OpenAI.MCPToolFilter'
+          description: The filter identifying tools that always require approval before execution.
         never:
           $ref: '#/components/schemas/OpenAI.MCPToolFilter'
+          description: The filter identifying tools that never require approval before execution.
     OpenAI.MessageContent:
       type: object
       required:
@@ -73994,6 +74045,7 @@ components:
       properties:
         type:
           $ref: '#/components/schemas/OpenAI.RealtimeAudioFormatsType'
+          description: The media type identifying the audio encoding.
       discriminator:
         propertyName: type
         mapping:
@@ -74009,10 +74061,12 @@ components:
           type: string
           enum:
             - audio/pcm
+          description: The audio media type, which is always `audio/pcm`.
         rate:
           type: number
           enum:
             - 24000
+          description: The PCM sample rate in hertz. The supported value is 24000.
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeAudioFormats'
     OpenAI.RealtimeAudioFormatsAudioPcma:
@@ -74024,6 +74078,7 @@ components:
           type: string
           enum:
             - audio/pcma
+          description: The audio media type, which is always `audio/pcma`.
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeAudioFormats'
     OpenAI.RealtimeAudioFormatsAudioPcmu:
@@ -74035,6 +74090,7 @@ components:
           type: string
           enum:
             - audio/pcmu
+          description: The audio media type, which is always `audio/pcmu`.
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeAudioFormats'
     OpenAI.RealtimeAudioFormatsType:
@@ -74091,6 +74147,7 @@ components:
       properties:
         type:
           $ref: '#/components/schemas/OpenAI.RealtimeConversationItemType'
+          description: The type of item in the realtime conversation.
       discriminator:
         propertyName: type
         mapping:
@@ -74219,10 +74276,12 @@ components:
       properties:
         role:
           $ref: '#/components/schemas/OpenAI.RealtimeConversationItemMessageType'
+          description: The role of the participant that authored the message.
         type:
           type: string
           enum:
             - message
+          description: The conversation item type, which is always `message`.
       discriminator:
         propertyName: role
         mapping:
@@ -74297,12 +74356,16 @@ components:
           enum:
             - output_text
             - output_audio
+          description: The type of output content in the assistant message.
         text:
           type: string
+          description: The text content of the assistant message.
         audio:
           type: string
+          description: The base64-encoded output audio.
         transcript:
           type: string
+          description: The text transcript associated with the output audio.
     OpenAI.RealtimeConversationItemMessageSystem:
       type: object
       required:
@@ -74365,9 +74428,11 @@ components:
           type: string
           enum:
             - input_text
+          description: The content type, which is always `input_text`.
           x-stainless-const: true
         text:
           type: string
+          description: The text of the system message.
     OpenAI.RealtimeConversationItemMessageType:
       anyOf:
         - type: string
@@ -74440,22 +74505,28 @@ components:
             - input_text
             - input_audio
             - input_image
+          description: The type of input content in the user message.
         text:
           type: string
+          description: The text content of the user message.
         audio:
           type: string
+          description: The base64-encoded input audio.
         image_url:
           type: string
           format: uri
+          description: The URL of the input image.
         detail:
           type: string
           enum:
             - auto
             - low
             - high
+          description: The level of detail used when processing the input image.
           default: auto
         transcript:
           type: string
+          description: The text transcript associated with the input audio.
     OpenAI.RealtimeConversationItemType:
       anyOf:
         - type: string
@@ -74671,6 +74742,7 @@ components:
           anyOf:
             - type: string
             - type: 'null'
+          description: The reason for approving or rejecting the MCP tool call.
         created_at:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the item was persisted.
@@ -74693,6 +74765,7 @@ components:
       properties:
         type:
           $ref: '#/components/schemas/OpenAI.RealtimeMcpErrorType'
+          description: The category of MCP error.
       discriminator:
         propertyName: type
         mapping:
@@ -74710,11 +74783,14 @@ components:
           type: string
           enum:
             - http_error
+          description: The error type, which is always `http_error`.
           x-stainless-const: true
         code:
           $ref: '#/components/schemas/OpenAI.integer'
+          description: The HTTP error code returned by the MCP server.
         message:
           type: string
+          description: A description of the HTTP error.
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeMCPError'
       title: Realtime MCP HTTP error
@@ -74768,11 +74844,14 @@ components:
           type: string
           enum:
             - protocol_error
+          description: The error type, which is always `protocol_error`.
           x-stainless-const: true
         code:
           $ref: '#/components/schemas/OpenAI.integer'
+          description: The MCP protocol error code.
         message:
           type: string
+          description: A description of the MCP protocol error.
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeMCPError'
       title: Realtime MCP protocol error
@@ -74807,12 +74886,15 @@ components:
           anyOf:
             - type: string
             - type: 'null'
+          description: The ID of the approval request associated with this tool call.
         output:
           anyOf:
             - type: string
             - type: 'null'
+          description: The output returned by the MCP tool.
         error:
           $ref: '#/components/schemas/OpenAI.RealtimeMCPError'
+          description: The error returned if the MCP tool call failed.
         created_at:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The Unix timestamp (in seconds) for when the item was persisted.
@@ -74838,9 +74920,11 @@ components:
           type: string
           enum:
             - tool_execution_error
+          description: The error type, which is always `tool_execution_error`.
           x-stainless-const: true
         message:
           type: string
+          description: A description of the tool execution failure.
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeMCPError'
       title: Realtime MCP tool execution error
@@ -74857,6 +74941,7 @@ components:
       properties:
         effort:
           $ref: '#/components/schemas/OpenAI.RealtimeReasoningEffort'
+          description: The amount of reasoning effort the realtime model should use.
       description: Configuration for reasoning-capable Realtime models such as `gpt-realtime-2`.
       title: Realtime reasoning configuration
     OpenAI.RealtimeReasoningEffort:
@@ -74880,6 +74965,7 @@ components:
             - cancelled
             - failed
             - incomplete
+          description: The terminal status of the response.
         reason:
           type: string
           enum:
@@ -74887,57 +74973,76 @@ components:
             - client_cancelled
             - max_output_tokens
             - content_filter
+          description: The reason the response was cancelled or left incomplete.
         error:
           $ref: '#/components/schemas/OpenAI.RealtimeResponseStatusDetailsError'
+          description: Details of the error that caused the response to fail.
     OpenAI.RealtimeResponseStatusDetailsError:
       type: object
       properties:
         type:
           type: string
+          description: The category of error that caused the response to fail.
         code:
           type: string
+          description: The machine-readable error code.
     OpenAI.RealtimeResponseUsage:
       type: object
       properties:
         total_tokens:
           $ref: '#/components/schemas/OpenAI.integer'
+          description: The total number of input and output tokens used by the response.
         input_tokens:
           $ref: '#/components/schemas/OpenAI.integer'
+          description: The number of input tokens used by the response.
         output_tokens:
           $ref: '#/components/schemas/OpenAI.integer'
+          description: The number of output tokens generated by the response.
         input_token_details:
           $ref: '#/components/schemas/OpenAI.RealtimeResponseUsageInputTokenDetails'
+          description: The input token counts broken down by modality and cache usage.
         output_token_details:
           $ref: '#/components/schemas/OpenAI.RealtimeResponseUsageOutputTokenDetails'
+          description: The output token counts broken down by modality.
     OpenAI.RealtimeResponseUsageInputTokenDetails:
       type: object
       properties:
         cached_tokens:
           $ref: '#/components/schemas/OpenAI.integer'
+          description: The number of input tokens retrieved from the cache.
         text_tokens:
           $ref: '#/components/schemas/OpenAI.integer'
+          description: The number of text input tokens.
         image_tokens:
           $ref: '#/components/schemas/OpenAI.integer'
+          description: The number of image input tokens.
         audio_tokens:
           $ref: '#/components/schemas/OpenAI.integer'
+          description: The number of audio input tokens.
         cached_tokens_details:
           $ref: '#/components/schemas/OpenAI.RealtimeResponseUsageInputTokenDetailsCachedTokensDetails'
+          description: The cached input token counts broken down by modality.
     OpenAI.RealtimeResponseUsageInputTokenDetailsCachedTokensDetails:
       type: object
       properties:
         text_tokens:
           $ref: '#/components/schemas/OpenAI.integer'
+          description: The number of cached text input tokens.
         image_tokens:
           $ref: '#/components/schemas/OpenAI.integer'
+          description: The number of cached image input tokens.
         audio_tokens:
           $ref: '#/components/schemas/OpenAI.integer'
+          description: The number of cached audio input tokens.
     OpenAI.RealtimeResponseUsageOutputTokenDetails:
       type: object
       properties:
         text_tokens:
           $ref: '#/components/schemas/OpenAI.integer'
+          description: The number of text output tokens.
         audio_tokens:
           $ref: '#/components/schemas/OpenAI.integer'
+          description: The number of audio output tokens.
     OpenAI.RealtimeSessionCreateRequest:
       type: object
       required:
@@ -76006,12 +76111,15 @@ components:
             - medium
             - high
             - auto
+          description: How eagerly the detector decides that the user has finished speaking.
           default: auto
         create_response:
           type: boolean
+          description: Whether to automatically create a response when a speech turn ends.
           default: true
         interrupt_response:
           type: boolean
+          description: Whether to interrupt an ongoing response when speech starts.
           default: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeTurnDetection'
@@ -76026,20 +76134,26 @@ components:
             - server_vad
         threshold:
           $ref: '#/components/schemas/OpenAI.numeric'
+          description: The voice activity detection threshold used to identify speech.
         prefix_padding_ms:
           $ref: '#/components/schemas/OpenAI.integer'
+          description: The amount of audio, in milliseconds, to include before detected speech.
         silence_duration_ms:
           $ref: '#/components/schemas/OpenAI.integer'
+          description: The duration of silence, in milliseconds, that marks the end of a speech turn.
         create_response:
           type: boolean
+          description: Whether to automatically create a response when a speech turn ends.
           default: true
         interrupt_response:
           type: boolean
+          description: Whether to interrupt an ongoing response when speech starts.
           default: true
         idle_timeout_ms:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
             - type: 'null'
+          description: The duration of inactivity, in milliseconds, before an idle timeout is triggered.
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeTurnDetection'
     OpenAI.RealtimeTurnDetectionType:
@@ -76061,6 +76175,7 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.ReasoningEffort'
             - type: 'null'
+          description: The amount of reasoning effort the model should use when generating a response.
         summary:
           anyOf:
             - type: string
@@ -76069,6 +76184,7 @@ components:
                 - concise
                 - detailed
             - type: 'null'
+          description: The requested level of detail for the reasoning summary.
         context:
           anyOf:
             - type: string
@@ -76077,6 +76193,7 @@ components:
                 - current_turn
                 - all_turns
             - type: 'null'
+          description: The conversation turns to include in the reasoning context.
         generate_summary:
           anyOf:
             - type: string
@@ -76085,6 +76202,7 @@ components:
                 - concise
                 - detailed
             - type: 'null'
+          description: The format of the reasoning summary to generate.
       description: |-
         Configuration options for
         [reasoning models](https://platform.openai.com/docs/guides/reasoning).
@@ -79169,6 +79287,7 @@ components:
       properties:
         reasoning_tokens:
           $ref: '#/components/schemas/OpenAI.integer'
+          description: The number of output tokens used for reasoning.
     OpenAI.ResponseWebSearchCallCompletedEvent:
       type: object
       required:
@@ -80462,6 +80581,7 @@ components:
       properties:
         type:
           $ref: '#/components/schemas/OpenAI.TextResponseFormatConfigurationType'
+          description: The format that the model must use for its text response.
       discriminator:
         propertyName: type
         mapping:
@@ -80545,10 +80665,12 @@ components:
               underscores and dashes, with a maximum length of 64.
         schema:
           $ref: '#/components/schemas/OpenAI.ResponseFormatJsonSchemaSchema'
+          description: The JSON Schema that the model's response must follow.
         strict:
           anyOf:
             - type: boolean
             - type: 'null'
+          description: Whether to require responses to match the JSON Schema exactly.
       allOf:
         - $ref: '#/components/schemas/OpenAI.TextResponseFormatConfiguration'
       description: |-
@@ -80762,6 +80884,7 @@ components:
           type: string
           enum:
             - code_interpreter
+          description: The selected tool type, which is always `code_interpreter`.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
       description: |-
@@ -80776,6 +80899,7 @@ components:
           type: string
           enum:
             - computer
+          description: The selected tool type, which is always `computer`.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
       description: |-
@@ -80790,6 +80914,7 @@ components:
           type: string
           enum:
             - computer_use
+          description: The selected tool type, which is always `computer_use`.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
       description: |-
@@ -80804,6 +80929,7 @@ components:
           type: string
           enum:
             - computer_use_preview
+          description: The selected tool type, which is always `computer_use_preview`.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
       description: |-
@@ -80837,6 +80963,7 @@ components:
           type: string
           enum:
             - file_search
+          description: The selected tool type, which is always `file_search`.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
       description: |-
@@ -80870,6 +80997,7 @@ components:
           type: string
           enum:
             - image_generation
+          description: The selected tool type, which is always `image_generation`.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
       description: |-
@@ -80894,6 +81022,7 @@ components:
           anyOf:
             - type: string
             - type: 'null'
+          description: The name of the tool to call on the specified MCP server.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
       description: Use this option to force the model to call a specific tool on a remote MCP server.
@@ -80918,6 +81047,7 @@ components:
       properties:
         type:
           $ref: '#/components/schemas/OpenAI.ToolChoiceParamType'
+          description: The type of tool the model should use.
       discriminator:
         propertyName: type
         mapping:
@@ -80969,6 +81099,7 @@ components:
           type: string
           enum:
             - web_search_preview
+          description: The selected tool type, which is always `web_search_preview`.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
       description: |-
@@ -80983,6 +81114,7 @@ components:
           type: string
           enum:
             - web_search_preview_2025_03_11
+          description: The selected tool type, which is always `web_search_preview_2025_03_11`.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ToolChoiceParam'
       description: |-
@@ -81011,10 +81143,12 @@ components:
           anyOf:
             - type: string
             - type: 'null'
+          description: A description of the tool search implementation and the tools it can discover.
         parameters:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.EmptyModelParam'
             - type: 'null'
+          description: The JSON Schema describing the input accepted by the tool search implementation.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: Hosted or BYOT tool search configuration for deferred tools.
@@ -81152,8 +81286,10 @@ components:
       properties:
         text_tokens:
           $ref: '#/components/schemas/OpenAI.integer'
+          description: The number of text input tokens used for transcription.
         audio_tokens:
           $ref: '#/components/schemas/OpenAI.integer'
+          description: The number of audio input tokens used for transcription.
     OpenAI.TranscriptionDiarizedSegment:
       type: object
       required:
@@ -82412,6 +82548,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/OpenAI.SearchContentType'
+          description: The types of content to include in web search results.
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: This tool searches the web for relevant results to use in a response. Learn more about the [web search tool](https://platform.openai.com/docs/guides/tools-web-search).
@@ -82434,10 +82571,12 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.WebSearchToolFilters'
             - type: 'null'
+          description: Filters to apply to web search results.
         user_location:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.WebSearchApproximateLocation'
             - type: 'null'
+          description: The approximate location of the user for search relevance.
         search_context_size:
           type: string
           enum:
@@ -82730,6 +82869,7 @@ components:
           type: string
           enum:
             - openapi
+          description: The tool type, which is always `openapi`.
         openapi:
           $ref: '#/components/schemas/OpenApiFunctionDefinition'
           description: The openapi function definition.
@@ -83121,6 +83261,7 @@ components:
           type: string
           enum:
             - prompt
+          description: The agent kind, which is always `prompt`.
         harness:
           $ref: '#/components/schemas/AgentHarness'
           description: The managed runtime and agent loop used to execute this prompt agent.
@@ -83172,6 +83313,7 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.Reasoning'
             - type: 'null'
+          description: The reasoning configuration for models that support reasoning.
         tools:
           type: array
           items:
@@ -83202,6 +83344,7 @@ components:
       properties:
         format:
           $ref: '#/components/schemas/OpenAI.TextResponseFormatConfiguration'
+          description: The format of the model's text response, such as plain text or structured JSON.
       description: Configuration options for a text response from the model. Can be plain text or structured JSON data.
     PromptBasedEvaluatorDefinition:
       type: object
@@ -83666,6 +83809,7 @@ components:
           type: string
           enum:
             - reminder_preview
+          description: The tool type, which is always `reminder_preview`.
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: A reminder tool stored in a toolbox.
@@ -84055,6 +84199,7 @@ components:
           type: string
           enum:
             - rubric
+          description: The evaluator definition type, which is always `rubric`.
         dimensions:
           type: array
           items:
@@ -84654,6 +84799,7 @@ components:
               items:
                 $ref: '#/components/schemas/OpenAI.CallableToolAllowedCaller'
             - type: 'null'
+          description: The execution contexts allowed to invoke this tool.
         environment:
           $ref: '#/components/schemas/ToolboxShellEnvironment'
           description: The environment in which shell commands are executed. Specify an automatically provisioned container or an existing container.
@@ -86465,6 +86611,7 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.ContainerMemoryLimit'
             - type: 'null'
+          description: The memory limit for the automatically provisioned container.
         skills:
           type: array
           items:
@@ -87426,6 +87573,7 @@ components:
       properties:
         type:
           $ref: '#/components/schemas/VersionSelectorType'
+          description: The type of rule used to select an agent version.
         agent_version:
           type: string
           description: The agent version to route traffic to
@@ -87442,6 +87590,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VersionSelectionRule'
+          description: The rules used to select which agent version handles a request.
     VersionSelectorType:
       anyOf:
         - type: string
@@ -87455,6 +87604,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/VersionSelectionRule'
+          description: The rules used to select which agent version handles a request.
     VoiceAgentAudioConfig:
       type: object
       properties:
@@ -87630,15 +87780,18 @@ components:
           items:
             type: string
             format: uri
+          description: The STUN or TURN server URLs used for ICE negotiation.
         username:
           anyOf:
             - type: string
             - type: 'null'
+          description: The username used to authenticate with the ICE server.
         credential:
           anyOf:
             - type: string
             - type: 'null'
           format: password
+          description: The credential used to authenticate with the ICE server.
       description: An ICE server used for avatar WebRTC negotiation.
       x-ms-foundry-meta:
         required_previews:
@@ -87660,6 +87813,7 @@ components:
         zoom:
           type: number
           format: float
+          description: The zoom applied to the avatar in the scene.
           exclusiveMinimum: 0
           default: 1
         position_x:
@@ -87667,35 +87821,41 @@ components:
           format: float
           minimum: -1
           maximum: 1
+          description: The horizontal position of the avatar in the scene.
           default: 0
         position_y:
           type: number
           format: float
           minimum: -1
           maximum: 1
+          description: The vertical position of the avatar in the scene.
           default: 0
         rotation_x:
           type: number
           format: float
           minimum: -3.141592653589793
           maximum: 3.141592653589793
+          description: The rotation of the avatar around the x-axis.
           default: 0
         rotation_y:
           type: number
           format: float
           minimum: -3.141592653589793
           maximum: 3.141592653589793
+          description: The rotation of the avatar around the y-axis.
           default: 0
         rotation_z:
           type: number
           format: float
           minimum: -3.141592653589793
           maximum: 3.141592653589793
+          description: The rotation of the avatar around the z-axis.
           default: 0
         amplitude:
           type: number
           format: float
           maximum: 1
+          description: The amplitude of the avatar's motion.
           exclusiveMinimum: 0
           default: 1
       description: Avatar placement and motion settings.
@@ -87719,8 +87879,10 @@ components:
         image_url:
           type: string
           format: uri
+          description: The URL of the image used as the video background.
         color:
           type: string
+          description: The color used as the video background.
       description: The avatar video background.
       x-ms-foundry-meta:
         required_previews:
@@ -87738,6 +87900,7 @@ components:
             format: uint32
           minItems: 2
           maxItems: 2
+          description: The coordinates of the bottom-right corner of the crop rectangle.
         top_left:
           type: array
           items:
@@ -87745,6 +87908,7 @@ components:
             format: uint32
           minItems: 2
           maxItems: 2
+          description: The coordinates of the top-left corner of the crop rectangle.
       description: The rectangular crop applied to avatar video.
       x-ms-foundry-meta:
         required_previews:
@@ -87759,15 +87923,19 @@ components:
           default: 2000000
         crop:
           $ref: '#/components/schemas/VoiceAgentAvatarVideoCrop'
+          description: The rectangular crop applied to the avatar video.
         resolution:
           $ref: '#/components/schemas/VoiceAgentAvatarVideoResolution'
+          description: The dimensions of the avatar video.
         background:
           $ref: '#/components/schemas/VoiceAgentAvatarVideoBackground'
+          description: The background image or color for the avatar video.
         gop_size:
           type: integer
           format: int32
           minimum: 1
           maximum: 2000
+          description: The group-of-pictures (GOP) size for the encoded video.
           default: 10
       description: Avatar video encoder and presentation settings.
       x-ms-foundry-meta:
@@ -87783,10 +87951,12 @@ components:
           type: integer
           format: int32
           minimum: 1
+          description: The video width in pixels.
         height:
           type: integer
           format: int32
           minimum: 1
+          description: The video height in pixels.
       description: The avatar video resolution.
       x-ms-foundry-meta:
         required_previews:
@@ -87800,6 +87970,7 @@ components:
           type: string
           enum:
             - azure_semantic_vad_en
+          description: The turn detection type, which is always `azure_semantic_vad_en`.
         threshold:
           type: number
           format: float
@@ -87850,6 +88021,7 @@ components:
           type: string
           enum:
             - azure_semantic_vad_multilingual
+          description: The turn detection type, which is always `azure_semantic_vad_multilingual`.
         threshold:
           type: number
           format: float
@@ -87905,6 +88077,7 @@ components:
           type: string
           enum:
             - azure_semantic_vad
+          description: The turn detection type, which is always `azure_semantic_vad`.
         threshold:
           type: number
           format: float
@@ -88162,6 +88335,7 @@ components:
           type: string
           enum:
             - function
+          description: The tool type, which is always `function`.
         name:
           type: string
           minLength: 1
@@ -88321,6 +88495,7 @@ components:
           type: string
           enum:
             - llm_generated
+          description: The greeting type, which is always `llm_generated`.
         prompt:
           type: string
           minLength: 1
@@ -88344,6 +88519,7 @@ components:
           type: string
           enum:
             - llm_interim_response
+          description: The interim response type, which is always `llm_interim_response`.
         model:
           type: string
           description: The model used to generate interim responses.
@@ -88397,6 +88573,7 @@ components:
               unevaluatedProperties:
                 type: string
             - type: 'null'
+          description: Custom headers to include in requests to the MCP server.
         allowed_tools:
           anyOf:
             - type: array
@@ -88404,12 +88581,14 @@ components:
                 type: string
             - $ref: '#/components/schemas/OpenAI.MCPToolFilter'
             - type: 'null'
+          description: The tool names or filter identifying which MCP tools are available.
         allowed_callers:
           anyOf:
             - type: array
               items:
                 $ref: '#/components/schemas/OpenAI.CallableToolAllowedCaller'
             - type: 'null'
+          description: The execution contexts allowed to invoke this tool.
         require_approval:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.MCPToolRequireApproval'
@@ -88418,6 +88597,7 @@ components:
                 - always
                 - never
             - type: 'null'
+          description: The approval requirements for invoking tools on the MCP server.
           default: always
         defer_loading:
           type: boolean
@@ -88435,6 +88615,7 @@ components:
           type: string
           enum:
             - mcp
+          description: The tool type, which is always `mcp`.
         server_url:
           type: string
           format: uri
@@ -88485,17 +88666,21 @@ components:
             - medium
             - high
             - auto
+          description: How eagerly the detector decides that the user has finished speaking.
           default: auto
         create_response:
           type: boolean
+          description: Whether to automatically create a response when a speech turn ends.
           default: true
         interrupt_response:
           type: boolean
+          description: Whether to interrupt an ongoing response when speech starts.
           default: true
         type:
           type: string
           enum:
             - semantic_vad
+          description: The turn detection type, which is always `semantic_vad`.
       allOf:
         - $ref: '#/components/schemas/VoiceAgentTurnDetectionConfig'
       description: OpenAI semantic VAD turn-detection settings.
@@ -88509,24 +88694,31 @@ components:
       properties:
         threshold:
           $ref: '#/components/schemas/OpenAI.numeric'
+          description: The voice activity detection threshold used to identify speech.
         prefix_padding_ms:
           $ref: '#/components/schemas/OpenAI.integer'
+          description: The amount of audio, in milliseconds, to include before detected speech.
         silence_duration_ms:
           $ref: '#/components/schemas/OpenAI.integer'
+          description: The duration of silence, in milliseconds, that marks the end of a speech turn.
         create_response:
           type: boolean
+          description: Whether to automatically create a response when a speech turn ends.
           default: true
         interrupt_response:
           type: boolean
+          description: Whether to interrupt an ongoing response when speech starts.
           default: true
         idle_timeout_ms:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.integer'
             - type: 'null'
+          description: The duration of inactivity, in milliseconds, before an idle timeout is triggered.
         type:
           type: string
           enum:
             - server_vad
+          description: The turn detection type, which is always `server_vad`.
         speech_duration_ms:
           $ref: '#/components/schemas/FoundryDurationMilliseconds'
           description: Minimum speech duration required to trigger detection, in milliseconds.
@@ -88550,6 +88742,7 @@ components:
               items:
                 $ref: '#/components/schemas/VoiceAgentAvatarIceServer'
             - type: 'null'
+          description: The ICE servers used to establish the avatar's WebRTC connection.
       allOf:
         - $ref: '#/components/schemas/VoiceAgentAvatarConfig'
       description: Avatar settings accepted by the stable voice-agent WebSocket contract.
@@ -88575,6 +88768,7 @@ components:
           type: string
           enum:
             - static_interim_response
+          description: The interim response type, which is always `static_interim_response`.
         texts:
           type: array
           items:
@@ -88711,6 +88905,7 @@ components:
           type: string
           enum:
             - template
+          description: The greeting type, which is always `template`.
         text:
           type: string
           minLength: 1
@@ -89360,6 +89555,7 @@ components:
           type: string
           enum:
             - web_iq_preview
+          description: The tool type, which is always `web_iq_preview`.
         project_connection_id:
           type: string
           description: The ID of the WebIQ project connection.
@@ -89401,6 +89597,7 @@ components:
           type: string
           enum:
             - web_search
+          description: The tool type, which is always `web_search`.
         external_web_access:
           type: boolean
           description: Allow live internet access for web search. Defaults to true when omitted. When false, the web search tool runs in offline/cache-only mode and will not fetch new external content.
@@ -89409,10 +89606,12 @@ components:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.WebSearchToolFilters'
             - type: 'null'
+          description: Filters to apply to web search results.
         user_location:
           anyOf:
             - $ref: '#/components/schemas/OpenAI.WebSearchApproximateLocation'
             - type: 'null'
+          description: The approximate location of the user for search relevance.
         search_context_size:
           type: string
           enum:
@@ -89481,6 +89680,7 @@ components:
           type: string
           enum:
             - work_iq_preview
+          description: The tool type, which is always `work_iq_preview`.
         project_connection_id:
           type: string
           description: The ID of the WorkIQ project connection.
@@ -89533,6 +89733,7 @@ components:
           type: string
           enum:
             - workflow
+          description: The agent kind, which is always `workflow`.
         workflow:
           type: string
           description: The CSDL YAML definition of the workflow.

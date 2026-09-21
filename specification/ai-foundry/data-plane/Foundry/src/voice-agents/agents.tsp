@@ -75,6 +75,7 @@ model VoiceAgentInterimResponseConfig {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentStaticInterimResponseConfig
   extends VoiceAgentInterimResponseConfig {
+  /** The interim response type, which is always `static_interim_response`. */
   type: "static_interim_response";
 
   @doc("Candidate text values for the interim response.")
@@ -85,6 +86,7 @@ model VoiceAgentStaticInterimResponseConfig
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLlmInterimResponseConfig
   extends VoiceAgentInterimResponseConfig {
+  /** The interim response type, which is always `llm_interim_response`. */
   type: "llm_interim_response";
 
   @doc("The model used to generate interim responses.")
@@ -253,6 +255,7 @@ model VoiceAgentGreetingConfig {
 @doc("A deterministic greeting rendered with the voice agent's structured inputs and synthesized without model-authored generation.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentTemplateGreetingConfig extends VoiceAgentGreetingConfig {
+  /** The greeting type, which is always `template`. */
   type: "template";
 
   @doc("The Handlebars text template spoken at session start.")
@@ -263,6 +266,7 @@ model VoiceAgentTemplateGreetingConfig extends VoiceAgentGreetingConfig {
 @doc("A greeting authored by the session model from a scoped opening-turn prompt.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentLlmGeneratedGreetingConfig extends VoiceAgentGreetingConfig {
+  /** The greeting type, which is always `llm_generated`. */
   type: "llm_generated";
 
   @doc("The Handlebars prompt that guides the opening turn.")
@@ -328,6 +332,8 @@ model VoiceAgentTool {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentFunctionTool extends VoiceAgentTool {
   ...OmitProperties<OpenAI.RealtimeFunctionTool, "type" | "name">;
+
+  /** The tool type, which is always `function`. */
   type: "function";
 
   @doc("The function name.")
@@ -372,6 +378,8 @@ model VoiceAgentMcpTool extends VoiceAgentTool {
     OpenAI.MCPTool,
     "type" | "connector_id" | "tunnel_id" | "server_url"
   >;
+
+  /** The tool type, which is always `mcp`. */
   type: "mcp";
 
   @doc("The URL for the MCP server.")
@@ -607,6 +615,8 @@ model VoiceAgentTurnDetectionConfig {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentServerVadTurnDetection extends VoiceAgentTurnDetectionConfig {
   ...OmitProperties<OpenAI.RealtimeTurnDetectionServerVad, "type">;
+
+  /** The turn detection type, which is always `server_vad`. */
   type: VoiceAgentTurnDetectionType.server_vad;
 
   @doc("Minimum speech duration required to trigger detection, in milliseconds.")
@@ -701,7 +711,9 @@ alias VoiceAgentAzureSemanticVadOptions = {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentAzureSemanticVadTurnDetection
   extends VoiceAgentTurnDetectionConfig {
+  /** The turn detection type, which is always `azure_semantic_vad`. */
   type: VoiceAgentTurnDetectionType.azure_semantic_vad;
+
   ...VoiceAgentAzureSemanticVadOptions;
 
   @doc("BCP-47 language codes used for speech detection.")
@@ -712,7 +724,9 @@ model VoiceAgentAzureSemanticVadTurnDetection
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentAzureSemanticVadEnTurnDetection
   extends VoiceAgentTurnDetectionConfig {
+  /** The turn detection type, which is always `azure_semantic_vad_en`. */
   type: VoiceAgentTurnDetectionType.azure_semantic_vad_en;
+
   ...VoiceAgentAzureSemanticVadOptions;
 }
 
@@ -720,7 +734,9 @@ model VoiceAgentAzureSemanticVadEnTurnDetection
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentAzureSemanticVadMultilingualTurnDetection
   extends VoiceAgentTurnDetectionConfig {
+  /** The turn detection type, which is always `azure_semantic_vad_multilingual`. */
   type: VoiceAgentTurnDetectionType.azure_semantic_vad_multilingual;
+
   ...VoiceAgentAzureSemanticVadOptions;
 
   @doc("BCP-47 language codes used for speech detection.")
@@ -731,6 +747,8 @@ model VoiceAgentAzureSemanticVadMultilingualTurnDetection
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSemanticVadTurnDetection extends VoiceAgentTurnDetectionConfig {
   ...OmitProperties<OpenAI.RealtimeTurnDetectionSemanticVad, "type">;
+
+  /** The turn detection type, which is always `semantic_vad`. */
   type: VoiceAgentTurnDetectionType.semantic_vad;
 }
 
@@ -814,9 +832,11 @@ model VoiceAgentInputTranscription {
 @doc("The avatar video resolution.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentAvatarVideoResolution {
+  /** The video width in pixels. */
   @minValue(1)
   width: int32;
 
+  /** The video height in pixels. */
   @minValue(1)
   height: int32;
 }
@@ -824,10 +844,12 @@ model VoiceAgentAvatarVideoResolution {
 @doc("The rectangular crop applied to avatar video.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentAvatarVideoCrop {
+  /** The coordinates of the bottom-right corner of the crop rectangle. */
   @minItems(2)
   @maxItems(2)
   bottom_right: uint32[];
 
+  /** The coordinates of the top-left corner of the crop rectangle. */
   @minItems(2)
   @maxItems(2)
   top_left: uint32[];
@@ -836,7 +858,10 @@ model VoiceAgentAvatarVideoCrop {
 @doc("The avatar video background.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentAvatarVideoBackground {
+  /** The URL of the image used as the video background. */
   image_url?: url;
+
+  /** The color used as the video background. */
   color?: string;
 }
 
@@ -846,10 +871,16 @@ model VoiceAgentAvatarVideoParams {
   @doc("The target video bitrate in bits per second.")
   bitrate?: int32 = 2000000;
 
+  /** The rectangular crop applied to the avatar video. */
   crop?: VoiceAgentAvatarVideoCrop;
+
+  /** The dimensions of the avatar video. */
   resolution?: VoiceAgentAvatarVideoResolution;
+
+  /** The background image or color for the avatar video. */
   background?: VoiceAgentAvatarVideoBackground;
 
+  /** The group-of-pictures (GOP) size for the encoded video. */
   @minValue(1)
   @maxValue(2000)
   gop_size?: int32 = 10;
@@ -858,29 +889,36 @@ model VoiceAgentAvatarVideoParams {
 @doc("Avatar placement and motion settings.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentAvatarScene {
+  /** The zoom applied to the avatar in the scene. */
   @minValueExclusive(0)
   zoom?: float32 = 1;
 
+  /** The horizontal position of the avatar in the scene. */
   @minValue(-1)
   @maxValue(1)
   position_x?: float32 = 0;
 
+  /** The vertical position of the avatar in the scene. */
   @minValue(-1)
   @maxValue(1)
   position_y?: float32 = 0;
 
+  /** The rotation of the avatar around the x-axis. */
   @minValue(-3.141592653589793)
   @maxValue(3.141592653589793)
   rotation_x?: float32 = 0;
 
+  /** The rotation of the avatar around the y-axis. */
   @minValue(-3.141592653589793)
   @maxValue(3.141592653589793)
   rotation_y?: float32 = 0;
 
+  /** The rotation of the avatar around the z-axis. */
   @minValue(-3.141592653589793)
   @maxValue(3.141592653589793)
   rotation_z?: float32 = 0;
 
+  /** The amplitude of the avatar's motion. */
   @minValueExclusive(0)
   @maxValue(1)
   amplitude?: float32 = 1;
@@ -1000,3 +1038,431 @@ model GenerateVoiceAgentRequest {
 union GenerateAgentRequest {
   voice: GenerateVoiceAgentRequest,
 }
+
+@@doc(
+  OpenAI.RealtimeAudioFormats.type,
+  "The media type identifying the audio encoding."
+);
+@@doc(
+  OpenAI.RealtimeAudioFormatsAudioPcm.type,
+  "The audio media type, which is always `audio/pcm`."
+);
+@@doc(
+  OpenAI.RealtimeAudioFormatsAudioPcm.rate,
+  "The PCM sample rate in hertz. The supported value is 24000."
+);
+@@doc(
+  OpenAI.RealtimeAudioFormatsAudioPcmu.type,
+  "The audio media type, which is always `audio/pcmu`."
+);
+@@doc(
+  OpenAI.RealtimeAudioFormatsAudioPcma.type,
+  "The audio media type, which is always `audio/pcma`."
+);
+@@doc(
+  OpenAI.RealtimeTurnDetectionServerVad.threshold,
+  "The voice activity detection threshold used to identify speech."
+);
+@@doc(
+  OpenAI.RealtimeTurnDetectionServerVad.prefix_padding_ms,
+  "The amount of audio, in milliseconds, to include before detected speech."
+);
+@@doc(
+  OpenAI.RealtimeTurnDetectionServerVad.silence_duration_ms,
+  "The duration of silence, in milliseconds, that marks the end of a speech turn."
+);
+@@doc(
+  OpenAI.RealtimeTurnDetectionServerVad.create_response,
+  "Whether to automatically create a response when a speech turn ends."
+);
+@@doc(
+  OpenAI.RealtimeTurnDetectionServerVad.interrupt_response,
+  "Whether to interrupt an ongoing response when speech starts."
+);
+@@doc(
+  OpenAI.RealtimeTurnDetectionServerVad.idle_timeout_ms,
+  "The duration of inactivity, in milliseconds, before an idle timeout is triggered."
+);
+@@doc(
+  OpenAI.RealtimeTurnDetectionSemanticVad.eagerness,
+  "How eagerly the detector decides that the user has finished speaking."
+);
+@@doc(
+  OpenAI.RealtimeTurnDetectionSemanticVad.create_response,
+  "Whether to automatically create a response when a speech turn ends."
+);
+@@doc(
+  OpenAI.RealtimeTurnDetectionSemanticVad.interrupt_response,
+  "Whether to interrupt an ongoing response when speech starts."
+);
+@@doc(
+  OpenAI.RealtimeResponseUsage.total_tokens,
+  "The total number of input and output tokens used by the response."
+);
+@@doc(
+  OpenAI.RealtimeResponseUsage.input_tokens,
+  "The number of input tokens used by the response."
+);
+@@doc(
+  OpenAI.RealtimeResponseUsage.output_tokens,
+  "The number of output tokens generated by the response."
+);
+@@doc(
+  OpenAI.RealtimeResponseUsage.input_token_details,
+  "The input token counts broken down by modality and cache usage."
+);
+@@doc(
+  OpenAI.RealtimeResponseUsage.output_token_details,
+  "The output token counts broken down by modality."
+);
+@@doc(
+  OpenAI.RealtimeResponseUsageInputTokenDetails.cached_tokens,
+  "The number of input tokens retrieved from the cache."
+);
+@@doc(
+  OpenAI.RealtimeResponseUsageInputTokenDetails.text_tokens,
+  "The number of text input tokens."
+);
+@@doc(
+  OpenAI.RealtimeResponseUsageInputTokenDetails.image_tokens,
+  "The number of image input tokens."
+);
+@@doc(
+  OpenAI.RealtimeResponseUsageInputTokenDetails.audio_tokens,
+  "The number of audio input tokens."
+);
+@@doc(
+  OpenAI.RealtimeResponseUsageInputTokenDetails.cached_tokens_details,
+  "The cached input token counts broken down by modality."
+);
+@@doc(
+  OpenAI.RealtimeResponseUsageInputTokenDetailsCachedTokensDetails.text_tokens,
+  "The number of cached text input tokens."
+);
+@@doc(
+  OpenAI.RealtimeResponseUsageInputTokenDetailsCachedTokensDetails.image_tokens,
+  "The number of cached image input tokens."
+);
+@@doc(
+  OpenAI.RealtimeResponseUsageInputTokenDetailsCachedTokensDetails.audio_tokens,
+  "The number of cached audio input tokens."
+);
+@@doc(
+  OpenAI.RealtimeResponseUsageOutputTokenDetails.text_tokens,
+  "The number of text output tokens."
+);
+@@doc(
+  OpenAI.RealtimeResponseUsageOutputTokenDetails.audio_tokens,
+  "The number of audio output tokens."
+);
+@@doc(
+  OpenAI.RealtimeConversationItem.type,
+  "The type of item in the realtime conversation."
+);
+@@doc(
+  OpenAI.RealtimeConversationItemMessage.role,
+  "The role of the participant that authored the message."
+);
+@@doc(
+  OpenAI.RealtimeConversationItemMessage.type,
+  "The conversation item type, which is always `message`."
+);
+@@doc(
+  OpenAI.RealtimeConversationItemMessageSystemContent.type,
+  "The content type, which is always `input_text`."
+);
+@@doc(
+  OpenAI.RealtimeConversationItemMessageSystemContent.text,
+  "The text of the system message."
+);
+@@doc(
+  OpenAI.RealtimeConversationItemMessageUserContent.type,
+  "The type of input content in the user message."
+);
+@@doc(
+  OpenAI.RealtimeConversationItemMessageUserContent.text,
+  "The text content of the user message."
+);
+@@doc(
+  OpenAI.RealtimeConversationItemMessageUserContent.audio,
+  "The base64-encoded input audio."
+);
+@@doc(
+  OpenAI.RealtimeConversationItemMessageUserContent.image_url,
+  "The URL of the input image."
+);
+@@doc(
+  OpenAI.RealtimeConversationItemMessageUserContent.detail,
+  "The level of detail used when processing the input image."
+);
+@@doc(
+  OpenAI.RealtimeConversationItemMessageUserContent.transcript,
+  "The text transcript associated with the input audio."
+);
+@@doc(
+  OpenAI.RealtimeConversationItemMessageAssistantContent.type,
+  "The type of output content in the assistant message."
+);
+@@doc(
+  OpenAI.RealtimeConversationItemMessageAssistantContent.text,
+  "The text content of the assistant message."
+);
+@@doc(
+  OpenAI.RealtimeConversationItemMessageAssistantContent.audio,
+  "The base64-encoded output audio."
+);
+@@doc(
+  OpenAI.RealtimeConversationItemMessageAssistantContent.transcript,
+  "The text transcript associated with the output audio."
+);
+@@doc(
+  OpenAI.RealtimeMCPApprovalResponse.reason,
+  "The reason for approving or rejecting the MCP tool call."
+);
+@@doc(
+  OpenAI.RealtimeMCPToolCall.approval_request_id,
+  "The ID of the approval request associated with this tool call."
+);
+@@doc(
+  OpenAI.RealtimeMCPToolCall.output,
+  "The output returned by the MCP tool."
+);
+@@doc(
+  OpenAI.RealtimeMCPToolCall.error,
+  "The error returned if the MCP tool call failed."
+);
+@@doc(OpenAI.RealtimeMCPError.type, "The category of MCP error.");
+@@doc(
+  OpenAI.RealtimeMCPProtocolError.type,
+  "The error type, which is always `protocol_error`."
+);
+@@doc(OpenAI.RealtimeMCPProtocolError.code, "The MCP protocol error code.");
+@@doc(
+  OpenAI.RealtimeMCPProtocolError.message,
+  "A description of the MCP protocol error."
+);
+@@doc(
+  OpenAI.RealtimeMCPToolExecutionError.type,
+  "The error type, which is always `tool_execution_error`."
+);
+@@doc(
+  OpenAI.RealtimeMCPToolExecutionError.message,
+  "A description of the tool execution failure."
+);
+@@doc(
+  OpenAI.RealtimeMCPHTTPError.type,
+  "The error type, which is always `http_error`."
+);
+@@doc(
+  OpenAI.RealtimeMCPHTTPError.code,
+  "The HTTP error code returned by the MCP server."
+);
+@@doc(OpenAI.RealtimeMCPHTTPError.message, "A description of the HTTP error.");
+@@doc(
+  OpenAI.RealtimeResponseStatusDetails.type,
+  "The terminal status of the response."
+);
+@@doc(
+  OpenAI.RealtimeResponseStatusDetails.reason,
+  "The reason the response was cancelled or left incomplete."
+);
+@@doc(
+  OpenAI.RealtimeResponseStatusDetails.error,
+  "Details of the error that caused the response to fail."
+);
+@@doc(
+  OpenAI.RealtimeResponseStatusDetailsError.type,
+  "The category of error that caused the response to fail."
+);
+@@doc(
+  OpenAI.RealtimeResponseStatusDetailsError.code,
+  "The machine-readable error code."
+);
+@@doc(
+  OpenAI.RealtimeReasoning.effort,
+  "The amount of reasoning effort the realtime model should use."
+);
+@@doc(
+  OpenAI.RealtimeClientEvent.type,
+  "The type of realtime event sent by the client."
+);
+@@doc(
+  OpenAI.RealtimeClientEventConversationItemCreate.item,
+  "The conversation item to create."
+);
+@@doc(
+  OpenAI.RealtimeClientEventResponseCreate.response,
+  "Configuration that overrides the session settings for this response."
+);
+@@doc(
+  OpenAI.RealtimeResponseCreateParams.reasoning,
+  "The reasoning configuration for this response."
+);
+@@doc(
+  OpenAI.RealtimeResponseCreateParams.metadata,
+  "Caller-defined metadata attached to the response."
+);
+@@doc(
+  OpenAI.RealtimeServerEvent.type,
+  "The type of realtime event sent by the server."
+);
+@@doc(
+  OpenAI.RealtimeServerEventConversationItemCreated.previous_item_id,
+  "The ID of the preceding item in the conversation, if any."
+);
+@@doc(
+  OpenAI.RealtimeServerEventConversationItemCreated.item,
+  "The conversation item that was created."
+);
+@@doc(
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionCompleted.logprobs,
+  "Log probabilities for the transcribed tokens."
+);
+@@doc(
+  OpenAI.TranscriptTextUsageTokensInputTokenDetails.text_tokens,
+  "The number of text input tokens used for transcription."
+);
+@@doc(
+  OpenAI.TranscriptTextUsageTokensInputTokenDetails.audio_tokens,
+  "The number of audio input tokens used for transcription."
+);
+@@doc(
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionDelta.logprobs,
+  "Log probabilities for the transcription tokens in this event."
+);
+@@doc(
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionFailedError.type,
+  "The category of transcription error."
+);
+@@doc(
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionFailedError.code,
+  "The machine-readable transcription error code."
+);
+@@doc(
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionFailedError.message,
+  "A description of the transcription failure."
+);
+@@doc(
+  OpenAI.RealtimeServerEventConversationItemInputAudioTranscriptionFailedError.param,
+  "The request parameter associated with the error, if any."
+);
+@@doc(
+  OpenAI.RealtimeServerEventConversationItemRetrieved.item,
+  "The server's representation of the retrieved conversation item."
+);
+@@doc(
+  OpenAI.RealtimeServerEventInputAudioBufferCommitted.previous_item_id,
+  "The ID of the conversation item preceding the newly committed audio item, if any."
+);
+@@doc(
+  OpenAI.RealtimeServerEventRateLimitsUpdatedRateLimits.name,
+  "The resource governed by this rate limit."
+);
+@@doc(
+  OpenAI.RealtimeServerEventRateLimitsUpdatedRateLimits.limit,
+  "The maximum number of requests or tokens allowed in the rate-limit window."
+);
+@@doc(
+  OpenAI.RealtimeServerEventRateLimitsUpdatedRateLimits.remaining,
+  "The number of requests or tokens remaining in the current window."
+);
+@@doc(
+  OpenAI.RealtimeServerEventRateLimitsUpdatedRateLimits.reset_seconds,
+  "The number of seconds until the rate limit resets."
+);
+@@doc(
+  OpenAI.RealtimeServerEventResponseContentPartAddedPart.type,
+  "The type of content in this response part."
+);
+@@doc(
+  OpenAI.RealtimeServerEventResponseContentPartAddedPart.text,
+  "The text content of this response part."
+);
+@@doc(
+  OpenAI.RealtimeServerEventResponseContentPartAddedPart.audio,
+  "The base64-encoded audio content of this response part."
+);
+@@doc(
+  OpenAI.RealtimeServerEventResponseContentPartAddedPart.transcript,
+  "The text transcript associated with this part's audio."
+);
+@@doc(
+  OpenAI.RealtimeServerEventResponseContentPartDonePart.type,
+  "The type of content in this completed response part."
+);
+@@doc(
+  OpenAI.RealtimeServerEventResponseContentPartDonePart.text,
+  "The completed text content of this response part."
+);
+@@doc(
+  OpenAI.RealtimeServerEventResponseContentPartDonePart.audio,
+  "The base64-encoded audio content of this response part."
+);
+@@doc(
+  OpenAI.RealtimeServerEventResponseContentPartDonePart.transcript,
+  "The completed text transcript associated with this part's audio."
+);
+@@doc(
+  OpenAI.RealtimeServerEventResponseCreated.response,
+  "The newly created response in its initial state."
+);
+@@doc(
+  OpenAI.RealtimeServerEventResponseDone.response,
+  "The final response, including its status and output items but excluding raw audio data."
+);
+@@doc(
+  OpenAI.RealtimeServerEventResponseOutputItemAdded.item,
+  "The output item added to the response."
+);
+@@doc(
+  OpenAI.RealtimeServerEventResponseOutputItemDone.item,
+  "The output item that has finished streaming."
+);
+@@doc(
+  OpenAI.RealtimeServerEventConversationItemAdded.previous_item_id,
+  "The ID of the preceding item in the conversation, if any."
+);
+@@doc(
+  OpenAI.RealtimeServerEventConversationItemAdded.item,
+  "The item added to the conversation."
+);
+@@doc(
+  OpenAI.RealtimeServerEventConversationItemDone.previous_item_id,
+  "The ID of the preceding item in the conversation, if any."
+);
+@@doc(
+  OpenAI.RealtimeServerEventConversationItemDone.item,
+  "The finalized conversation item."
+);
+@@doc(
+  OpenAI.RealtimeServerEventResponseMCPCallArgumentsDelta.obfuscation,
+  "Indicates that the streamed arguments delta was obfuscated, when present."
+);
+@@doc(
+  OpenAI.CreateTranscriptionResponseJsonUsage.type,
+  "The type of resource usage reported for the transcription."
+);
+@@doc(
+  OpenAI.RealtimeResponse.metadata,
+  "Caller-defined metadata attached to the response."
+);
+@@doc(
+  OpenAI.RealtimeServerEventErrorError.type,
+  "The category of realtime error."
+);
+@@doc(
+  OpenAI.RealtimeServerEventErrorError.code,
+  "The machine-readable error code."
+);
+@@doc(
+  OpenAI.RealtimeServerEventErrorError.message,
+  "A description of the error."
+);
+@@doc(
+  OpenAI.RealtimeServerEventErrorError.param,
+  "The request parameter associated with the error, if any."
+);
+@@doc(
+  OpenAI.RealtimeServerEventErrorError.event_id,
+  "The ID of the client event that caused the error, if available."
+);
