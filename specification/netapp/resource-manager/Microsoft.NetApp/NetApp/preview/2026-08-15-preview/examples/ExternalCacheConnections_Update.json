@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contosoNetAppRg",
+    "externalCacheConnectionName": "contosoCacheConnection",
+    "api-version": "2026-08-15-preview",
+    "properties": {
+      "tags": {
+        "env": "prod"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/externalCacheConnections/contosoCacheConnection",
+        "name": "contosoCacheConnection",
+        "type": "Microsoft.NetApp/externalCacheConnections",
+        "location": "eastus",
+        "tags": {
+          "env": "prod"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "originVolumeResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/netAppAccounts/contosoAccount/capacityPools/contosoPool/volumes/contosoVolume",
+          "externalCacheName": "contosoCache",
+          "externalSvmResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/externalClusters/contosoExternalCluster/externalSvms/contosoExternalSvm",
+          "clusterPeerSubnetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.Network/virtualNetworks/contosoVnet/subnets/contosoSubnet",
+          "clusterPeerResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/externalClusters/contosoExternalCluster/clusterPeers/peerA",
+          "svmPeerResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoNetAppRg/providers/Microsoft.NetApp/externalClusters/contosoExternalCluster/clusterPeers/peerA/svmPeers/contosoSvmPeerA",
+          "setupInformation": {
+            "setupStatus": "NoActionRequired",
+            "statusInformation": "Setup is complete.",
+            "command": ""
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/00000000-0000-0000-0000-000000000000?api-version=2026-08-15-preview",
+        "Retry-After": 60
+      }
+    }
+  },
+  "operationId": "ExternalCacheConnections_Update",
+  "title": "ExternalCacheConnections_Update"
+}

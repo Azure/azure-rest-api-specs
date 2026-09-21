@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myRG",
+    "policyGroupName": "policyGroup1",
+    "extendedSnapshotRetentionPolicyName": "extendedSnapshotRetentionPolicy1",
+    "api-version": "2026-08-15-preview",
+    "properties": {
+      "properties": {
+        "rules": {
+          "hourly": {
+            "snapshotsToKeep": 48
+          },
+          "daily": {
+            "snapshotsToKeep": 14
+          },
+          "weekly": {
+            "snapshotsToKeep": 8
+          },
+          "monthly": {
+            "snapshotsToKeep": 24
+          },
+          "yearly": {
+            "snapshotsToKeep": 10
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/policyGroups/policyGroup1/extendedSnapshotRetentionPolicies/extendedSnapshotRetentionPolicy1",
+        "name": "policyGroup1/extendedSnapshotRetentionPolicy1",
+        "type": "Microsoft.NetApp/policyGroups/extendedSnapshotRetentionPolicies",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "rules": {
+            "hourly": {
+              "snapshotsToKeep": 48
+            },
+            "daily": {
+              "snapshotsToKeep": 14
+            },
+            "weekly": {
+              "snapshotsToKeep": 8
+            },
+            "monthly": {
+              "snapshotsToKeep": 24
+            },
+            "yearly": {
+              "snapshotsToKeep": 10
+            }
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/616ee961-4042-4935-b4a0-ed6f4dae0172?api-version=2026-08-15-preview&operationResultResponseType=Location"
+      }
+    }
+  },
+  "operationId": "ExtendedSnapshotRetentionPolicies_Update",
+  "title": "ExtendedSnapshotRetentionPolicies_Update"
+}
