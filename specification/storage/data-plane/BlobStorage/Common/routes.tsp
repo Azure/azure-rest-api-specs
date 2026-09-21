@@ -2463,7 +2463,7 @@ interface BlockBlob {
       /** Specifies whether to return the list of committed blocks, the list of uncommitted blocks, or both lists together. */
       @query
       @clientName("listType")
-      blocklisttype: BlockListType;
+      blocklisttype?: BlockListType;
 
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;

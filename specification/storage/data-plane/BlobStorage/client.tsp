@@ -1355,9 +1355,10 @@ scalar HttpRange extends string;
 @@alternateType(BlockLookupList.latest, string[], "java");
 @@alternateType(BlockIdParameter.blockid, string, "java");
 
-// The shipped java BlobPrefix exposes the name as a plain String; BlobName is an implementation model, and a
-// public accessor may not return one.
-@@alternateType(BlobPrefix.name, string, "java");
+// BlobPrefix follows BlobItem: the generated model is internal and carries the BlobName, so the Encoded
+// attribute survives and ModelHelper can decode it; the public BlobPrefix is hand-owned and exposes a String.
+@@clientName(BlobPrefix, "BlobPrefixInternal", "java");
+@@access(BlobPrefix, Access.internal, "java");
 
 // The shipped java accessors spell these out; the spec's abbreviated property names would rename the public API.
 @@clientName(UserDelegationKey.signedOid, "signedObjectId", "java");
