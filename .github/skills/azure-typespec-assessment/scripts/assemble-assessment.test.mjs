@@ -650,7 +650,7 @@ void test("assembler rejects Agent-authored documentation decisions", () => {
       () =>
         assembleTestAssessment({
           work,
-          judgment: /** @type {AssessmentJudgment} */ (/** @type {unknown} */ (malformedJudgment)),
+          judgment: malformedJudgment,
         }),
       /unknown fields: documentQualityDecisions/,
     );

@@ -1022,7 +1022,7 @@ function factRole(fact) {
 function referencedTypeNames(value, names = new Set(), seen = new WeakSet()) {
   if (!value || typeof value !== "object" || seen.has(value)) return names;
   seen.add(value);
-  const identity = typeIdentity(/** @type {NormalizedTcgcType} */ (value));
+  const identity = typeIdentity(value);
   if (identity) names.add(identity);
   for (const [key, child] of Object.entries(value)) {
     if (["id", "projectId", "sourceCommit", "operation", "httpOperation"].includes(key)) continue;

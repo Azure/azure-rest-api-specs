@@ -176,7 +176,7 @@ export function discoverAutorestDocuments({ workRoot = process.cwd(), artifact }
   const candidates = new Map();
   /**
    * @param {string} file
-   * @param {string | undefined} [documentRole]
+   * @param {string} [documentRole]
    */
   const add = (file, documentRole) => {
     const absolute = path.resolve(workRoot, file);
@@ -193,9 +193,10 @@ export function discoverAutorestDocuments({ workRoot = process.cwd(), artifact }
   if (artifact.serviceManifestPath) {
     const serviceManifest = path.resolve(workRoot, artifact.serviceManifestPath);
     if (fs.existsSync(serviceManifest)) {
-      const content = /** @type {unknown} */ (
-        parseYaml(fs.readFileSync(serviceManifest, "utf8"), { maxAliasCount: 100 })
-      );
+      /** @type {unknown} */
+      const content = parseYaml(fs.readFileSync(serviceManifest, "utf8"), {
+        maxAliasCount: 100,
+      });
       for (const item of yamlJsonPaths(content))
         add(path.resolve(path.dirname(serviceManifest), item));
     }
@@ -218,7 +219,7 @@ export function discoverAutorestDocuments({ workRoot = process.cwd(), artifact }
       let document;
       try {
         const value = readJsonObject(item.absolutePath);
-        document = /** @type {OpenApiDocument} */ (value);
+        document = value;
       } catch (error) {
         const message = error instanceof Error ? error.message : String(error);
         throw unsupported(
@@ -555,7 +556,7 @@ function normalizeParameter(parameter, context) {
     if (!isRecord(resolved.value)) {
       throw unsupported(`parameter at ${context.pointer} must resolve to an object`);
     }
-    raw = /** @type {OpenApiParameter} */ (resolved.value);
+    raw = resolved.value;
     context = { ...context, document: resolved.document, pointer: resolved.pointer };
   }
   if (!raw || typeof raw !== "object" || !raw.name || !raw.in) {
@@ -707,7 +708,7 @@ function normalizeOperation(operation, operationContext, inheritedParameters) {
             `response ${status} for ${operation.operationId} must resolve to an object`,
           );
         }
-        response = /** @type {OpenApiResponse} */ (resolved.value);
+        response = resolved.value;
         responseContext = {
           ...responseContext,
           document: resolved.document,
@@ -810,13 +811,15 @@ export function normalizeAutorestDocuments(entries) {
   for (const document of documents.sort((left, right) => left.path.localeCompare(right.path))) {
     if (!document.document.info?.version)
       throw unsupported(`${document.path} is missing info.version`);
-    for (const routeSource of /** @type {const} */ (["paths", "x-ms-paths"])) {
+    for (const routeSource of ["paths", "x-ms-paths"]) {
       const routes = document.document[routeSource] ?? {};
       for (const [route, pathItem] of Object.entries(routes).sort(([left], [right]) =>
         left.localeCompare(right),
       )) {
         if (!isRecord(pathItem)) throw unsupported(`${routeSource}.${route} must be an object`);
-        const typedPathItem = /** @type {OpenApiPathItem} */ (pathItem);
+        const inheritedParameters = Array.isArray(pathItem.parameters)
+          ? pathItem.parameters
+          : undefined;
         for (const [method, operation] of Object.entries(pathItem)
           .filter(([name]) => HTTP_METHODS.has(name.toLowerCase()))
           .sort(([left], [right]) => left.localeCompare(right))) {
@@ -825,7 +828,7 @@ export function normalizeAutorestDocuments(entries) {
           }
           operations.push(
             normalizeOperation(
-              /** @type {OpenApiOperation} */ (operation),
+              operation,
               {
                 document,
                 registry,
@@ -834,7 +837,7 @@ export function normalizeAutorestDocuments(entries) {
                 method: method.toLowerCase(),
                 pointer: `#/${routeSource}/${route.replaceAll("~", "~0").replaceAll("/", "~1")}/${method}`,
               },
-              typedPathItem.parameters,
+              inheritedParameters,
             ),
           );
         }

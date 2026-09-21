@@ -1230,7 +1230,7 @@ export function normalizeTcgcPackage(root) {
   const clientVisited = new WeakSet();
   /**
    * @param {unknown} raw
-   * @param {string | undefined} [owner]
+   * @param {string} [owner]
    */
   const visitClient = (raw, owner) => {
     if (!raw || typeof raw !== "object" || clientVisited.has(raw)) return;

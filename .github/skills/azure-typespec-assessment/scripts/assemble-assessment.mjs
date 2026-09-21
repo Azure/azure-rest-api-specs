@@ -947,9 +947,7 @@ export function assembleAssessment({ work, judgment }) {
       : judgment;
   const modelInputPath = path.join(work, "model-input.json");
   /** @type {Partial<AssessmentModelInput>} */
-  const modelInput = fs.existsSync(modelInputPath)
-    ? /** @type {AssessmentModelInput} */ (readJsonObject(modelInputPath))
-    : {};
+  const modelInput = fs.existsSync(modelInputPath) ? readJsonObject(modelInputPath) : {};
   /**
    * @template {{id: string}} T
    * @param {T[]} canonicalCandidates

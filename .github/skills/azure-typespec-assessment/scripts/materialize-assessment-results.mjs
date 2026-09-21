@@ -1119,7 +1119,7 @@ function validateIndexCoverage(index, modelInput) {
 
 /**
  * @param {string} root
- * @param {Iterable<[string, unknown | undefined]>} artifacts
+ * @param {Iterable<[string, unknown]>} artifacts
  */
 function writeArtifactsAtomically(root, artifacts) {
   const transaction = `${process.pid}.${Date.now()}`;
@@ -1254,7 +1254,7 @@ export function materializeAssessmentResults({ work, decisions: decisionsPath = 
         sourceChanges,
       });
     }
-    /** @type {[string, unknown | undefined][]} */
+    /** @type {[string, unknown][]} */
     const outputArtifacts = [
       ["inference.json", inference],
       ["compliance-search-evidence.json", evidence],
