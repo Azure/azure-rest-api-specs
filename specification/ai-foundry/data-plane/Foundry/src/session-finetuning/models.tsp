@@ -27,6 +27,7 @@ union FineTuningSessionStatus {
 
 /** Supported loss functions for forward-backward passes. */
 union FineTuningLossFn {
+  string,
   /** Standard language-model cross-entropy loss. */
   cross_entropy: "cross_entropy",
   /** REINFORCE-style importance-sampled policy gradient loss. */
@@ -50,12 +51,14 @@ union FineTuningCheckpointType {
 
 /** Fine-tuning session type. */
 union FineTuningSessionType {
+  string,
   /** A training session for fine-tuning a model. */
   training: "training",
 }
 
 /** Training tiers available for fine-tuning sessions. */
 union FineTuningTrainingType {
+  string,
   /** Standard training using globally available capacity. */
   GlobalStandard: "GlobalStandard",
   /** Standard training constrained to the applicable data zone. */
@@ -66,6 +69,7 @@ union FineTuningTrainingType {
 
 /** Supported encodings for an image supplied as model input. */
 union FineTuningImageFormat {
+  string,
   /** JPEG image encoding. */
   jpeg: "jpeg",
   /** PNG image encoding. */

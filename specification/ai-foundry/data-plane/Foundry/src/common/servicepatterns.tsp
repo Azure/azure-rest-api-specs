@@ -88,6 +88,7 @@ op FoundryDataPlaneOperation<
 
 /** Feature opt-in keys for agent definition operations supporting conditional preview features. */
 union AgentDefinitionOptInKeys {
+  string,
   workflow_agents_v1_preview: "WorkflowAgents=V1Preview",
   external_agents_v1_preview: "ExternalAgents=V1Preview",
   draft_agents_v1_preview: "DraftAgents=V1Preview",
@@ -104,6 +105,7 @@ union AgentDefinitionOptInKeys {
 }
 
 union FoundryFeaturesOptInKeys {
+  string,
   evaluations_v1_preview: "Evaluations=V1Preview",
   schedules_v1_preview: "Schedules=V1Preview",
   red_teams_v1_preview: "RedTeams=V1Preview",
@@ -216,6 +218,7 @@ alias PageLimitQueryParameter = {
   @query limit?: int32 = 20;
 };
 
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "PageOrder is the two directions of ordering by created_at (ascending or descending); this value set is inherently immutable."
 union PageOrder {
   "asc",
   "desc",
