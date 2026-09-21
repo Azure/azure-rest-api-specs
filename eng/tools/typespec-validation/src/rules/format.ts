@@ -25,8 +25,8 @@ export class FormatRule implements Rule {
     errorOutput += stderr;
 
     [err, stdout, stderr] = await runNodeBin(
-      "prettier",
-      ["prettier", "--write", "tspconfig.yaml"],
+      "oxfmt",
+      ["oxfmt", "--write", "tspconfig.yaml"],
       folder,
     );
     if (err) {
@@ -42,7 +42,7 @@ export class FormatRule implements Rule {
       if (!gitDiffResult.success) {
         success = false;
         errorOutput += gitDiffResult.errorOutput;
-        errorOutput += `\nFiles have been changed after \`tsp format\`. Run \`tsp format\` and ensure all files are included in your change.`;
+        errorOutput += `\nFiles have been changed by formatting. Run \`pnpm exec tsp format "../**/*.tsp"\` and \`pnpm exec oxfmt --write tspconfig.yaml\` from the project folder and include the changes.`;
       }
     }
 

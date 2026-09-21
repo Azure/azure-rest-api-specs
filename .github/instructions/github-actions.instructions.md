@@ -1,7 +1,7 @@
 ---
 applyTo:
   - ".github/*.config.{js,ts}"
-  - ".github/.prettier*"
+  - ".oxfmtrc.json"
   - ".github/cspell.yaml"
   - ".github/package*.json"
   - ".github/tsconfig.json"
@@ -32,7 +32,7 @@ The `.github` directory contains all the code and configuration for GitHub Actio
 - **Workflows**: Workflow files in `.github/workflows/`
 - **Shared utilities**: Common TypeScript modules in `.github/shared/src/`
 - **Tests**: Test files in `.github/workflows/test/` and `.github/shared/test/`
-- **Configuration**: Root oxlint, Prettier, TypeScript, and Vitest configs
+- **Configuration**: Root oxlint, Oxfmt, TypeScript, and Vitest configs
 
 ## Technology Stack
 
@@ -41,7 +41,7 @@ The `.github` directory contains all the code and configuration for GitHub Actio
 - **Type Checking**: `tsc --noEmit`; Node.js executes the `.ts` sources directly
 - **Testing**: Vitest for unit and integration tests
 - **Linting**: oxlint with type-aware rules from `oxlint-tsgolint`, configured in the root `.oxlintrc.json`
-- **Formatting**: Prettier with organize-imports plugin
+- **Formatting**: Oxfmt using the root `.oxfmtrc.json`; import organization and package.json sorting are disabled
 - **Package Manager**: pnpm workspaces (`pnpm ci` for clean installs)
 
 ## Project Structure
@@ -64,8 +64,7 @@ The `.github` directory contains all the code and configuration for GitHub Actio
 ├── matchers/                  # Problem matchers for CI output
 ├── package.json               # Root dependencies (superset of shared/)
 ├── tsconfig.json              # TypeScript config (type-checking only)
-├── vitest.config.ts           # Vitest test configuration
-└── .prettierrc.yaml           # Prettier formatting rules
+└── vitest.config.ts           # Vitest test configuration
 ```
 
 ## Coding Standards
@@ -75,9 +74,9 @@ The `.github` directory contains all the code and configuration for GitHub Actio
 - **File extension**: Use `.ts` for source, tests, CLI entry points, and Vitest configuration
 - **Module system**: ES modules (`import`/`export`), not CommonJS
 - **Type annotations**: Use native TypeScript declarations. Keep comments for documentation, not types
-- **Indentation**: 2 spaces (enforced by Prettier)
-- **Quote style**: Double quotes for strings (enforced by Prettier)
-- **Line length**: Max 100 characters (enforced by Prettier)
+- **Indentation**: 2 spaces (enforced by Oxfmt)
+- **Quote style**: Double quotes for strings (enforced by Oxfmt)
+- **Line length**: Max 100 characters (enforced by Oxfmt)
 - **Naming conventions**:
   - Functions and variables: `camelCase`
   - Constants: `UPPER_SNAKE_CASE` for true constants
@@ -113,12 +112,13 @@ export async function getChangedFiles(options: ChangedFilesOptions = {}): Promis
 - Import types with `import type`; use frozen objects and value-union type aliases instead of enums
 - Type injected `github`, `context`, and `core` values using `AsyncFunctionArguments` from `@actions/github-script`
 - For helpers that take `core` separately, import the shared `Core` type from `workflows/src/github.ts`
+- Type webhook payloads with `WebhookEvent<"pull-request", "labeled">` from `workflows/src/github.ts`, using GitHub OpenAPI event and action names. Omit the action to accept all actions for an event.
 - Inline `actions/github-script` YAML snippets remain JavaScript; they dynamically import the `.ts` modules
 
 ### YAML Style for Actions/Workflows
 
 - **Indentation**: 2 spaces
-- **String values**: Use double quotes (e.g., `cache: "pnpm"`) per Prettier conventions
+- **String values**: Use double quotes (e.g., `cache: "pnpm"`) per Oxfmt conventions
 - **Descriptions**: All inputs must have clear descriptions
 - **naming**: Use kebab-case for YAML keys (e.g., `working-directory`, not `workingDirectory`)
 
@@ -144,7 +144,7 @@ From `package.json` comments:
 - `vitest`: Testing framework
 - `oxlint`, `oxlint-tsgolint`: Root development dependencies for linting
 - `typescript`: Type checking
-- `prettier`: Code formatting
+- `oxfmt`: Code formatting
 
 ## Build, Test, and Validation
 
@@ -157,9 +157,8 @@ pnpm run check           # Run all checks (lint + format:check + test:ci)
 pnpm run lint            # Run both oxlint and TypeScript checks
 pnpm run lint:oxlint     # Run oxlint only
 pnpm run lint:tsc        # Run TypeScript type checking only
-pnpm run format          # Format code with Prettier
+pnpm run format          # Format code with Oxfmt
 pnpm run format:check    # Check formatting without modifying files
-pnpm run format:check:ci # Check formatting with verbose debug output (for CI)
 pnpm run test            # Run tests in watch mode
 pnpm run test:ci         # Run tests once with coverage report
 pnpm run validate        # Alias for 'check' (legacy)
@@ -170,7 +169,7 @@ In `.github/shared/` directory:
 ```bash
 pnpm run check           # Run all checks
 pnpm run lint            # Run oxlint and TypeScript checks
-pnpm run format          # Format code with Prettier
+pnpm run format          # Format code with Oxfmt
 pnpm run format:check    # Check formatting
 pnpm run test            # Run tests in watch mode
 pnpm run test:ci         # Run tests once with coverage report
@@ -179,8 +178,12 @@ pnpm run perf            # Run performance benchmarks
 
 CI runs `pnpm lint` once from the repository root in `lint.yaml`, covering `.github`
 and `eng/tools`. Do not add lint steps to package/OS test matrices. `github-test.yaml`
-retains `pnpm lint:tsc`, tests, formatting, and actionlint for workflow YAML.
-See [the engineering guide](../../eng/README.md#linting-and-prettier) for package
+retains `pnpm lint:tsc`, tests, and actionlint for workflow YAML.
+`.github/workflows/format.yaml` runs `pnpm format:check` once from the repository
+root for `.github` and `eng/tools`. Do not add formatting steps to package/OS
+test matrices. Package-local format commands inherit the root `.oxfmtrc.json`,
+including fixture, generated-file, and unmanaged-content exclusions.
+See [the engineering guide](../../eng/README.md#linting-and-formatting) for package
 exclusions that preserve the previous ESLint coverage.
 
 ### Before Committing

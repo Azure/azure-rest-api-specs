@@ -1,62 +1,90 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { FormatRule } from "../src/rules/format.ts";
-import * as utils from "../src/utils.ts";
+import { gitDiffTopSpecFolder, runNodeBin } from "../src/utils.ts";
+import { mockFolder } from "./mocks.ts";
 
 vi.mock("../src/utils.ts", () => ({
   runNodeBin: vi.fn(),
   gitDiffTopSpecFolder: vi.fn(),
 }));
 
-describe("format", () => {
-  const folder = "specification/foo/Foo";
-
-  beforeEach(() => {
-    vi.resetAllMocks();
-    vi.mocked(utils.runNodeBin).mockResolvedValue([null, "", ""]);
-    vi.mocked(utils.gitDiffTopSpecFolder).mockResolvedValue({
-      success: true,
-      stdOutput: "",
-      errorOutput: "",
-    });
+beforeEach(() => {
+  vi.resetAllMocks();
+  vi.mocked(runNodeBin).mockResolvedValue([null, "", ""]);
+  vi.mocked(gitDiffTopSpecFolder).mockResolvedValue({
+    success: true,
+    stdOutput: "git output",
+    errorOutput: undefined,
   });
+});
 
-  it("runs both formatters directly with the project as their working directory", async () => {
-    await expect(new FormatRule().execute(folder)).resolves.toMatchObject({ success: true });
-    expect(utils.runNodeBin).toHaveBeenNthCalledWith(
+describe("FormatRule", () => {
+  it("formats TypeSpec and YAML directly from the project folder before checking for changes", async () => {
+    vi.mocked(runNodeBin)
+      .mockResolvedValueOnce([null, "tsp output\n", "tsp warning\n"])
+      .mockResolvedValueOnce([null, "yaml output\n", "yaml warning\n"]);
+
+    const result = await new FormatRule().execute(mockFolder);
+
+    expect(runNodeBin).toHaveBeenNthCalledWith(
       1,
       "@typespec/compiler",
       ["tsp", "format", "../**/*.tsp"],
-      folder,
+      mockFolder,
     );
-    expect(utils.runNodeBin).toHaveBeenNthCalledWith(
+    expect(runNodeBin).toHaveBeenNthCalledWith(
       2,
-      "prettier",
-      ["prettier", "--write", "tspconfig.yaml"],
-      folder,
+      "oxfmt",
+      ["oxfmt", "--write", "tspconfig.yaml"],
+      mockFolder,
     );
-    expect(utils.gitDiffTopSpecFolder).toHaveBeenCalledWith(folder);
+    expect(runNodeBin).toHaveBeenCalledTimes(2);
+    expect(gitDiffTopSpecFolder).toHaveBeenCalledWith(mockFolder);
+    expect(result).toEqual({
+      success: true,
+      stdOutput: "tsp output\nyaml output\ngit output",
+      errorOutput: "tsp warning\nyaml warning\n",
+    });
   });
 
-  it("preserves formatter errors and still runs the second formatter", async () => {
-    vi.mocked(utils.runNodeBin).mockResolvedValueOnce([new Error("format failed"), "out", "err"]);
-    await expect(new FormatRule().execute(folder)).resolves.toMatchObject({
-      success: false,
-      stdOutput: "out",
-      errorOutput: "format failederr",
-    });
-    expect(utils.runNodeBin).toHaveBeenCalledTimes(2);
-    expect(utils.gitDiffTopSpecFolder).not.toHaveBeenCalled();
+  it.each(["TypeSpec", "YAML", "both"])("reports %s formatter failures", async (failure) => {
+    vi.mocked(runNodeBin)
+      .mockResolvedValueOnce([
+        failure === "YAML" ? null : new Error("tsp failure\n"),
+        "tsp output\n",
+        "tsp stderr\n",
+      ])
+      .mockResolvedValueOnce([
+        failure === "TypeSpec" ? null : new Error("yaml failure\n"),
+        "yaml output\n",
+        "yaml stderr\n",
+      ]);
+
+    const result = await new FormatRule().execute(mockFolder);
+
+    expect(result.success).toBe(false);
+    expect(result.stdOutput).toBe("tsp output\nyaml output\n");
+    expect(result.errorOutput).toContain("tsp stderr\n");
+    expect(result.errorOutput).toContain("yaml stderr\n");
+    if (failure !== "YAML") expect(result.errorOutput).toContain("tsp failure\n");
+    if (failure !== "TypeSpec") expect(result.errorOutput).toContain("yaml failure\n");
+    expect(runNodeBin).toHaveBeenCalledTimes(2);
+    expect(gitDiffTopSpecFolder).not.toHaveBeenCalled();
   });
 
-  it("still fails if formatting changes tracked files", async () => {
-    vi.mocked(utils.gitDiffTopSpecFolder).mockResolvedValue({
+  it("reports changed files and both fix commands", async () => {
+    vi.mocked(gitDiffTopSpecFolder).mockResolvedValue({
       success: false,
-      stdOutput: "diff",
-      errorOutput: "changed files",
+      stdOutput: "git output",
+      errorOutput: "changed tspconfig.yaml",
     });
-    await expect(new FormatRule().execute(folder)).resolves.toMatchObject({
-      success: false,
-      errorOutput: expect.stringContaining("changed files") as unknown,
-    });
+
+    const result = await new FormatRule().execute(mockFolder);
+
+    expect(result.success).toBe(false);
+    expect(result.stdOutput).toBe("git output");
+    expect(result.errorOutput).toContain("changed tspconfig.yaml");
+    expect(result.errorOutput).toContain('pnpm exec tsp format "../**/*.tsp"');
+    expect(result.errorOutput).toContain("pnpm exec oxfmt --write tspconfig.yaml");
   });
 });
