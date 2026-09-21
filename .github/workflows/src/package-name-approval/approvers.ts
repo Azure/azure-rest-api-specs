@@ -6,6 +6,16 @@ export type ApproversConfig = {
   "management-plane"?: {
     all?: string[];
   };
+  authorization?: {
+    global: string[];
+    labels: Record<
+      string,
+      {
+        "data-plane": string[];
+        "management-plane": string[];
+      }
+    >;
+  };
   tier1?: {
     "data-plane"?: string[];
     "management-plane"?: string[];
@@ -29,6 +39,7 @@ export async function loadApproversConfig(
   const config = yaml.load(content) as Record<string, unknown>;
 
   const dataPlane: Record<string, string[]> = {};
+  const labelApprovers: NonNullable<ApproversConfig["authorization"]>["labels"] = {};
 
   let mgmtAll: string[] = [];
 
@@ -52,6 +63,10 @@ export async function loadApproversConfig(
     // Flat entry (backward compat) - treat all users as data-plane
     if (Array.isArray(entry)) {
       const users = entry as unknown as string[];
+      labelApprovers[label] = {
+        "data-plane": users,
+        "management-plane": users,
+      };
       if (lang === "all") {
         dataPlane.global = users;
       } else {
@@ -65,6 +80,10 @@ export async function loadApproversConfig(
       const planeEntry = entry as {
         "management-plane"?: string[];
         "data-plane"?: string[];
+      };
+      labelApprovers[label] = {
+        "data-plane": planeEntry["data-plane"] ?? [],
+        "management-plane": planeEntry["management-plane"] ?? [],
       };
       if (planeEntry["management-plane"]) {
         // Collect unique mgmt approvers across all namespace labels
@@ -93,6 +112,10 @@ export async function loadApproversConfig(
     // Intentionally unions all mgmt approvers into one list - any mgmt approver
     // for any language can approve any other language on mgmt plane.
     "management-plane": { all: mgmtAll },
+    authorization: {
+      global: globalApprovers,
+      labels: labelApprovers,
+    },
     tier1: tier1Config,
   };
 }

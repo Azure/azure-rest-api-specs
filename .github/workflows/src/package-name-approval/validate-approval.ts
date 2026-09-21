@@ -28,6 +28,26 @@ function getAllApprovers(approversConfig: import("./approvers.ts").ApproversConf
   return [...new Set([...mgmtApprovers, ...dpValues.flat()])];
 }
 
+function isAuthorizedApprover({
+  approversConfig,
+  targetLabel,
+  actor,
+  isMgmt,
+}: Pick<ValidateContext, "approversConfig" | "targetLabel" | "actor" | "isMgmt">): boolean {
+  if (ALLOWED_BOT_LOGINS.includes(actor)) {
+    return true;
+  }
+
+  const authorization = approversConfig.authorization;
+  const plane = isMgmt ? "management-plane" : "data-plane";
+  const authorizedUsers = [
+    ...(authorization?.global ?? []),
+    ...(authorization?.labels[targetLabel]?.[plane] ?? []),
+  ];
+  const actorLower = actor.toLowerCase();
+  return authorizedUsers.some((user) => user.toLowerCase() === actorLower);
+}
+
 /**
  * Handle unlabeled event: re-apply pending labels if removed by unauthorized user.
  */
@@ -90,6 +110,7 @@ async function handleLabeled({
   prNumber,
   isMgmt,
   labels,
+  approversConfig,
 }: ValidateContext & { labels: string[] }) {
   let langsToApprove: string[];
 
@@ -129,6 +150,12 @@ async function handleLabeled({
     // State reconciles on the next event (label removal triggers unlabeled handler).
     const lang = match[1];
     langsToApprove = [lang];
+  }
+
+  if (!isAuthorizedApprover({ approversConfig, targetLabel, actor, isMgmt })) {
+    core.warning(`${actor} is not authorized to apply ${targetLabel}, removing`);
+    await removeLabelIfPresent(github, owner, repo, prNumber, targetLabel);
+    return;
   }
 
   core.info(`Approving languages: ${langsToApprove.join(", ")} by ${actor}`);
