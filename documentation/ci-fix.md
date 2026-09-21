@@ -115,17 +115,17 @@ If the SDK breaking changes haven't been reviewed after two additional business 
 
 ## `Swagger APIView`
 
-Various APIViews are generated as part of the Azure REST API specs PR build. Among these are TypeSpec and Swagger as well as any other language that is being generated in the run. When everything is successful you should see a comment box similar to the picture below showing the APIViews generated for TypeSpec or Swagger, plus all other languages being generated.
+Swagger and SDK language APIViews are generated as part of the Azure REST API specs PR build. When everything is successful you should see a comment box similar to the picture below showing the generated APIViews.
 
 ![alt text](image-3.png)
 
 ### If an expected APIView was not generated, follow the step below to troubleshoot.
 
 - On the CI check click on `details` > `View Azure DevOps build log for more details` to view the devOps logs.
-- Investigate the CI job for the language with error. TypeSpec and Swagger APIViews are generated as part of the `AzureRestApiSpecsPipeline` stage in the `TypeSpecAPIView` and `SwaggerAPIView` jobs respectively, while APIViews for other SDK languages are generated in their respective language jobs in the `SDK Automation` stage.
+- Investigate the CI job for the language with error. Swagger APIViews are generated in the `SwaggerAPIView` job, while APIViews for SDK languages are generated in their respective language jobs in the `SDK Automation` stage.
 - Ensure that all previous checks in the job are green before proceeding.
 
-### Diagnosing APIView failure for SDK Language (not Swagger or TypeSpec)
+### Diagnosing APIView failure for SDK Language (not Swagger)
 
 1. Check for an unexpected skip of the `Publish SDK APIView Artifact to Pipeline Artifacts` and `Generate SDK APIView` step.
 2. Look in `SDK Automation` step to verify that the API token generation completed successfully.
