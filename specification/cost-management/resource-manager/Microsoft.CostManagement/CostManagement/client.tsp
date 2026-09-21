@@ -86,60 +86,20 @@ using Microsoft.CostManagement;
 @@clientName(Term.P1Y, "P1_Y", "python");
 @@clientName(Term.P3Y, "P3_Y", "python");
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op GetGenerateDetailedCostReportOperationResultCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  extensionProvider: "Microsoft.CostManagement",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @query("api-version")
-  apiVersion: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path("operationId")
-  operationId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path(#{ allowReserved: true })
-  scope: string,
-): GenerateDetailedCostReportOperationResult;
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op GetGenerateDetailedCostReportOperationStatusCustomized(
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  extensionProvider: "Microsoft.CostManagement",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @query("api-version")
-  apiVersion: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path("operationId")
-  operationId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path(#{ allowReserved: true })
-  scope: string,
-): GenerateDetailedCostReportOperationStatus;
-
 @@override(
   GenerateDetailedCostReportOperationResults.get,
-  GetGenerateDetailedCostReportOperationResultCustomized,
+  reorderParameters(
+    GenerateDetailedCostReportOperationResults.get,
+    #["extensionProvider", "apiVersion", "operationId", "scope"]
+  ),
   "python,go,java,javascript"
 );
 @@override(
   GenerateDetailedCostReportOperationStatus.get,
-  GetGenerateDetailedCostReportOperationStatusCustomized,
+  reorderParameters(
+    GenerateDetailedCostReportOperationStatus.get,
+    #["extensionProvider", "apiVersion", "operationId", "scope"]
+  ),
   "python,go,java,javascript"
 );
 @@clientName(

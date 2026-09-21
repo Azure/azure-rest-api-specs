@@ -208,120 +208,42 @@ using Azure.Core;
 @@clientName(JsonWebKeyType.`RSA-HSM`, "RSA_HSM", "python");
 @@clientName(JsonWebKeyType.`oct-HSM`, "oct_HSM", "python");
 
-// Override the order of path parameters
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op VaultsGetDeletedCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<DeletedVault>,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @query("api-version")
-  apiVersion: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path subscriptionId: uuid,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path vaultName: string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path location: azureLocation,
-): DeletedVault;
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op VaultsPurgeDeletedCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<DeletedVault>,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @query("api-version")
-  apiVersion: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path subscriptionId: uuid,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path vaultName: string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path location: azureLocation,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @body body: void,
-): void;
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op ManagedHsmsGetDeletedCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<DeletedManagedHsm>,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @query("api-version")
-  apiVersion: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  subscriptionId: uuid,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  location: azureLocation,
-): DeletedManagedHsm;
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op ManagedHsmsPurgeDeletedCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<DeletedManagedHsm>,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @query("api-version")
-  apiVersion: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  subscriptionId: uuid,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  location: azureLocation,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @body
-  body: void,
-): void;
-
 @@override(
   DeletedVaults.getDeleted,
-  VaultsGetDeletedCustomized,
+  reorderParameters(
+    DeletedVaults.getDeleted,
+    #["provider", "apiVersion", "subscriptionId", "vaultName", "location"]
+  ),
   "python,go,java,javascript"
 );
 @@override(
   DeletedVaults.purgeDeleted,
-  VaultsPurgeDeletedCustomized,
+  reorderParameters(
+    DeletedVaults.purgeDeleted,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "vaultName",
+      "location",
+      "body"
+    ]
+  ),
   "python,go,java,javascript"
 );
 @@override(
   DeletedManagedHsms.getDeleted,
-  ManagedHsmsGetDeletedCustomized,
+  reorderParameters(
+    DeletedManagedHsms.getDeleted,
+    #["provider", "apiVersion", "subscriptionId", "name", "location"]
+  ),
   "python,go,java,javascript"
 );
 @@override(
   DeletedManagedHsms.purgeDeleted,
-  ManagedHsmsPurgeDeletedCustomized,
+  reorderParameters(
+    DeletedManagedHsms.purgeDeleted,
+    #["provider", "apiVersion", "subscriptionId", "name", "location", "body"]
+  ),
   "python,go,java,javascript"
 );

@@ -346,82 +346,65 @@ using Http;
 @@clientName(TestResultStatus, "IotHubTestResultStatus", "csharp");
 @@clientLocation(IotHubDescriptions.manualFailover, "IotHubResource", "csharp");
 
-/**
- * override for IotHubDescriptions.manualFailover
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op replaceManualFailover(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-
-  @path
-  iotHubName: string,
-
-  ...Azure.ResourceManager.ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-  @body body: Microsoft.Devices.FailoverInput,
-):
-  | (ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader)
-  | Microsoft.Devices.ErrorDetails
-  | Azure.ResourceManager.ArmResponse<void>;
-
-@@override(IotHubDescriptions.manualFailover, replaceManualFailover);
+@@override(
+  IotHubDescriptions.manualFailover,
+  reorderParameters(
+    IotHubDescriptions.manualFailover,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "iotHubName",
+      "resourceGroupName",
+      "provider",
+      "body"
+    ]
+  )
+);
 @@clientName(
-  replaceManualFailover::parameters.body,
+  IotHubDescriptions.manualFailover::parameters.body,
   "failoverInput",
   "go,javascript"
 );
 
-/**
- * override for IotHubDescriptions.testAllRoutes
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op replaceTestAllRoutes(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
+@@override(
+  IotHubDescriptions.testAllRoutes,
+  reorderParameters(
+    IotHubDescriptions.testAllRoutes,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "iotHubName",
+      "resourceGroupName",
+      "provider",
+      "body"
+    ]
+  )
+);
+@@clientName(
+  IotHubDescriptions.testAllRoutes::parameters.body,
+  "input",
+  "go,javascript"
+);
 
-  @path
-  iotHubName: string,
-
-  ...Azure.ResourceManager.ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-  @body body: Microsoft.Devices.TestAllRoutesInput,
-):
-  | Azure.ResourceManager.ArmResponse<Microsoft.Devices.TestAllRoutesResult>
-  | Microsoft.Devices.ErrorDetails;
-
-@@override(IotHubDescriptions.testAllRoutes, replaceTestAllRoutes);
-@@clientName(replaceTestAllRoutes::parameters.body, "input", "go,javascript");
-
-/**
- * override for IotHubDescriptions.testRoute
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op replaceTestRoute(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-
-  @path
-  iotHubName: string,
-
-  ...Azure.ResourceManager.ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-  @body body: Microsoft.Devices.TestRouteInput,
-):
-  | Azure.ResourceManager.ArmResponse<Microsoft.Devices.TestRouteResult>
-  | Microsoft.Devices.ErrorDetails;
-
-@@override(IotHubDescriptions.testRoute, replaceTestRoute);
-@@clientName(replaceTestRoute::parameters.body, "input", "go,javascript");
+@@override(
+  IotHubDescriptions.testRoute,
+  reorderParameters(
+    IotHubDescriptions.testRoute,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "iotHubName",
+      "resourceGroupName",
+      "provider",
+      "body"
+    ]
+  )
+);
+@@clientName(
+  IotHubDescriptions.testRoute::parameters.body,
+  "input",
+  "go,javascript"
+);
 
 @@clientLocation(
   GroupIdInformations.get,
