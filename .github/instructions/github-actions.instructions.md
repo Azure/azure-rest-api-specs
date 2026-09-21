@@ -113,6 +113,7 @@ export async function getChangedFiles(options: ChangedFilesOptions = {}): Promis
 - Import types with `import type`; use frozen objects and value-union type aliases instead of enums
 - Type injected `github`, `context`, and `core` values using `AsyncFunctionArguments` from `@actions/github-script`
 - For helpers that take `core` separately, import the shared `Core` type from `workflows/src/github.ts`
+- Type webhook payloads with `WebhookEvent<"pull-request", "labeled">` from `workflows/src/github.ts`, using GitHub OpenAPI event and action names. Omit the action to accept all actions for an event.
 - Inline `actions/github-script` YAML snippets remain JavaScript; they dynamically import the `.ts` modules
 
 ### YAML Style for Actions/Workflows

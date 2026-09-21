@@ -1,8 +1,8 @@
 import { filterAsync } from "@azure-tools/specs-shared/array";
 import { readFile } from "fs/promises";
+import { stripVTControlCharacters } from "node:util";
 import path, { basename, dirname, normalize } from "path";
 import pc from "picocolors";
-import stripAnsi from "strip-ansi";
 import { globFiles } from "../glob.ts";
 import { type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
@@ -47,7 +47,7 @@ export class CompileRule implements Rule {
           // Compilation completed successfully.
 
           // Remove ANSI color codes, handle windows and linux line endings
-          const lines = stripAnsi(stdout).split(/\r?\n/);
+          const lines = stripVTControlCharacters(stdout).split(/\r?\n/);
 
           // TODO: Use helpers in /.github once they support platform-specific paths
           // Header, footer, and empty lines should be excluded by JSON filter
