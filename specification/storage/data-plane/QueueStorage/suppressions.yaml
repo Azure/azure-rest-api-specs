@@ -16,3 +16,10 @@
     - options.@azure-tools/typespec-csharp.clear-output-folder
     - options.@azure-tools/typespec-csharp.emitter-output-dir
   reason: 'Suppress SDK configuration validation until TypeSpec conversion is ready. Go options suppressed until service team is ready to update the go package with typespec.'
+
+- tool: TypeSpecRequirement
+  path: ./preview/2023-10-30-preview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./preview/2023-12-13-preview/*.json
+  reason: Brownfield service not ready to migrate
