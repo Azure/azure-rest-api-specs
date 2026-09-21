@@ -30,7 +30,7 @@ The top-level `eng/tools` directory holds shared configuration that the individu
 - `package.json` — aggregates every tool as a `file:` devDependency and provides a root `build` script
 - `tsconfig.json` — base TypeScript config plus the `include` list of every tool's `src`/`test` files
 - Lint configuration is shared by all packages in the repository-root `.oxlintrc.json`
-- `vitest.base.config.js` — base Vitest config that each tool extends
+- `vitest.base.config.ts` — base Vitest config that each tool extends
 - `.prettierrc.yaml` / `.prettierignore` — shared Prettier configuration
 
 ## Technology Stack
@@ -49,13 +49,13 @@ The top-level `eng/tools` directory holds shared configuration that the individu
 eng/tools/
 ├── package.json               # Aggregates all tools as file: devDependencies; root "build"
 ├── tsconfig.json              # Base TS config + include list for all tools
-├── vitest.base.config.js      # Base Vitest config (extended per tool)
+├── vitest.base.config.ts      # Base Vitest config (extended per tool)
 ├── .prettierrc.yaml           # Shared Prettier config (keep in sync with .github)
 ├── .prettierignore            # Shared Prettier ignore list
 └── <tool>/                    # One directory per tool package
     ├── package.json           # @azure-tools/<tool>; scripts, deps, bin entry
     ├── tsconfig.json          # Extends ../tsconfig.json; include src/test
-    ├── vitest.config.js       # Extends ../vitest.base.config.js (or vitest.config.ts / vite.config.ts)
+    ├── vitest.config.ts       # Extends ../vitest.base.config.ts
     ├── README.md              # Optional, recommended for user-facing tools
     ├── cmd/                   # Thin CLI wrappers (*.js) declared under package.json "bin"
     ├── src/                   # TypeScript source
@@ -143,7 +143,13 @@ those packages in a separate change rather than adding migration-only suppressio
 
 ### Vitest config
 
-Extend the shared base (`vitest.config.js`) or define a tool-specific config (`vitest.config.ts` / `vite.config.ts`) when you need extra options such as `testTimeout` or custom coverage excludes. Tests must live under `./test`.
+Use `vitest.config.ts` and re-export the shared base:
+
+```typescript
+export { baseConfig as default } from "../vitest.base.config.ts";
+```
+
+For tool-specific options such as `testTimeout` or coverage exclusions, use Vitest's `mergeConfig` to extend the base. Tests must live under `./test`. Keep explicit per-tool configs: Vitest 5 does not search ancestor directories for a config.
 
 ### CLI wrappers (`cmd/`)
 
@@ -231,7 +237,7 @@ When adding a new tool:
 2. Add `package.json` (name `@azure-tools/<tool>`, `"type": "module"`, scripts and `engines` matching the template above).
 3. Add `tsconfig.json` extending `../tsconfig.json`.
 4. Use the repository-root `.oxlintrc.json` without adding a per-tool lint config.
-5. Add a Vitest config (extend `../vitest.base.config.js` or provide a tool-specific config).
+5. Add `vitest.config.ts` extending `../vitest.base.config.ts`.
 6. Add CLI wrapper(s) under `cmd/` and declare them in the `bin` field.
 7. Register the package in `eng/tools/package.json` (`workspace:*` devDependency) and `eng/tools/tsconfig.json` (`include` globs).
 8. Add a `.github/workflows/<tool>-test.yaml` workflow calling `_reusable-eng-tools-test.yaml`.
@@ -270,7 +276,7 @@ When modifying `eng/tools` code:
 
 ### Critical Do's
 
-- ✅ Do extend the shared base configs (`tsconfig`, `vitest.base.config.js`, `.prettierrc.yaml`) and use the root oxlint config.
+- ✅ Do extend the shared base configs (`tsconfig`, `vitest.base.config.ts`, `.prettierrc.yaml`) and use the root oxlint config.
 - ✅ Do write Vitest tests for new functionality under `test/`.
 - ✅ Do use `import type` for type-only imports.
 - ✅ Do reuse `@azure-tools/specs-shared` utilities instead of duplicating them.

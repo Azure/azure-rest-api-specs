@@ -1,5 +1,4 @@
-import { mockAll, mockFolder } from "./mocks.ts";
-mockAll();
+import { mockFolder } from "./mocks.ts";
 
 import { afterEach, beforeEach, describe, expect, it, type MockInstance, vi } from "vitest";
 
