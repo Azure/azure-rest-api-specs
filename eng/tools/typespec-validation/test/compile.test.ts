@@ -1,11 +1,10 @@
-import { mockAll, mockFolder } from "./mocks.ts";
-mockAll();
+import { mockFolder } from "./mocks.ts";
 
 import { afterEach, beforeEach, describe, expect, it, type MockInstance, vi } from "vitest";
 
 import * as fsPromises from "fs/promises";
-import * as globby from "globby";
 import path from "path";
+import * as nativeGlob from "../src/glob.ts";
 import { type RuleResult } from "../src/rule-result.ts";
 import { CompileRule } from "../src/rules/compile.ts";
 
@@ -59,7 +58,7 @@ describe("compile", function () {
     );
 
     // ensure handwritten swaggers are ignored
-    vi.mocked(globby.globby).mockImplementation(() =>
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
       Promise.resolve([swaggerPath, handwrittenSwaggerPath]),
     );
     vi.mocked(fsPromises.readFile).mockImplementation((path) =>
@@ -69,6 +68,27 @@ describe("compile", function () {
     await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
       success: true,
     });
+  });
+
+  it.each([
+    ["ANSI colors", `\u001b[32m${swaggerPath}\u001b[0m`],
+    ["OSC hyperlinks with BEL", `\u001b]8;;file:///foo.json\u0007${swaggerPath}\u001b]8;;\u0007`],
+    [
+      "OSC hyperlinks with ST",
+      `\u001b]8;;file:///foo.json\u001b\\${swaggerPath}\u001b]8;;\u001b\\`,
+    ],
+  ])("should recognize generated paths wrapped in %s", async (_name, output) => {
+    runPnpmSpy.mockResolvedValue([null, `${output}\r\n`, ""]);
+    vi.mocked(nativeGlob.globFiles).mockResolvedValue([swaggerPath]);
+    vi.mocked(fsPromises.readFile).mockResolvedValue('{"info": {"x-typespec-generated": true}}');
+
+    const result = await new CompileRule().execute(mockFolder);
+
+    expect(result.success).toBe(true);
+    expect(nativeGlob.globFiles).toHaveBeenCalledWith("data-plane/Azure.Foo/**/foo.json", {
+      exclude: ["**/examples/**"],
+    });
+    expect(result.stdOutput).toContain(`\nGenerated Swaggers:\n${path.normalize(swaggerPath)}\n`);
   });
 
   it("should succeed if output has no generated swaggers", async function () {
@@ -89,7 +109,7 @@ describe("compile", function () {
     );
 
     // Simulate extra swagger
-    vi.mocked(globby.globby).mockImplementation(() =>
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
       Promise.resolve([
         swaggerPath,
         swaggerPath.replace("2022", "2023"),
@@ -119,8 +139,8 @@ describe("compile", function () {
         Promise.resolve([null, latestPreviewPath, ""]),
     );
 
-    // Simulate extra older preview swagger (globby always returns posix paths)
-    vi.mocked(globby.globby).mockImplementation(() =>
+    // Simulate extra older preview swagger (using POSIX paths)
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
       Promise.resolve([latestPreviewPath, olderPreviewPath]),
     );
 
@@ -144,8 +164,8 @@ describe("compile", function () {
         Promise.resolve([null, latestPreviewPath, ""]),
     );
 
-    // Simulate extra swagger from the latest preview (globby always returns posix paths)
-    vi.mocked(globby.globby).mockImplementation(() =>
+    // Simulate extra swagger from the latest preview (using POSIX paths)
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
       Promise.resolve([latestPreviewPath, anotherLatestPreviewPath]),
     );
 
@@ -167,8 +187,10 @@ describe("compile", function () {
       async (): Promise<[Error | null, string, string]> => Promise.resolve([null, previewPath, ""]),
     );
 
-    // Simulate extra stable swagger (globby always returns posix paths)
-    vi.mocked(globby.globby).mockImplementation(() => Promise.resolve([previewPath, stablePath]));
+    // Simulate extra stable swagger (using POSIX paths)
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
+      Promise.resolve([previewPath, stablePath]),
+    );
 
     vi.mocked(fsPromises.readFile).mockImplementation(() =>
       Promise.resolve('{"info": {"x-typespec-generated": true}}'),
@@ -190,8 +212,8 @@ describe("compile", function () {
       async (): Promise<[Error | null, string, string]> => Promise.resolve([null, stablePath, ""]),
     );
 
-    // Simulate extra older preview swagger (globby always returns posix paths)
-    vi.mocked(globby.globby).mockImplementation(() =>
+    // Simulate extra older preview swagger (using POSIX paths)
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
       Promise.resolve([stablePath, olderPreviewPath]),
     );
 
@@ -216,8 +238,8 @@ describe("compile", function () {
       async (): Promise<[Error | null, string, string]> => Promise.resolve([null, stablePath, ""]),
     );
 
-    // Simulate extra newer preview swagger (globby always returns posix paths)
-    vi.mocked(globby.globby).mockImplementation(() =>
+    // Simulate extra newer preview swagger (using POSIX paths)
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
       Promise.resolve([stablePath, newerPreviewPath]),
     );
 
@@ -241,8 +263,8 @@ describe("compile", function () {
         Promise.resolve([null, latestPreviewPath, ""]),
     );
 
-    // Simulate multiple extra older preview swaggers (globby always returns posix paths)
-    vi.mocked(globby.globby).mockImplementation(() =>
+    // Simulate multiple extra older preview swaggers (using POSIX paths)
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
       Promise.resolve([latestPreviewPath, olderPreview1Path, olderPreview2Path]),
     );
 
@@ -266,8 +288,8 @@ describe("compile", function () {
       async (): Promise<[Error | null, string, string]> => Promise.resolve([null, previewPath, ""]),
     );
 
-    // Simulate extra swaggers with mix of preview and stable (globby always returns posix paths)
-    vi.mocked(globby.globby).mockImplementation(() =>
+    // Simulate extra swaggers with mix of preview and stable (using POSIX paths)
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
       Promise.resolve([previewPath, olderPreviewPath, stablePath]),
     );
 
@@ -287,7 +309,7 @@ describe("compile", function () {
     );
 
     // Simulate extra swagger
-    vi.mocked(globby.globby).mockImplementation(() =>
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
       Promise.resolve([
         swaggerPath,
         swaggerPath.replace("2022", "2023"),
@@ -365,7 +387,7 @@ describe("compile", function () {
       async (): Promise<[Error | null, string, string]> => Promise.resolve([null, swaggerPath, ""]),
     );
 
-    vi.mocked(globby.globby).mockImplementation(() => Promise.resolve([swaggerPath]));
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() => Promise.resolve([swaggerPath]));
 
     gitDiffTopSpecFolderSpy.mockImplementation((folder: string): Promise<RuleResult> => {
       const stdOut = `Running git diff on folder ${folder}`;
@@ -388,7 +410,7 @@ describe("compile", function () {
       async (): Promise<[Error | null, string, string]> => Promise.resolve([null, swaggerPath, ""]),
     );
 
-    vi.mocked(globby.globby).mockImplementation(() => Promise.resolve([swaggerPath]));
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() => Promise.resolve([swaggerPath]));
 
     gitDiffTopSpecFolderSpy.mockImplementation((folder: string): Promise<RuleResult> => {
       const stdOut = `Running git diff on folder ${folder}`;

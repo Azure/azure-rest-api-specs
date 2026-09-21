@@ -101,6 +101,11 @@ interface WebPubSubChatServiceClient
   "maxPageSize",
   "javascript"
 );
+@@clientName(
+  Azure.Core.MaxPageSizeQueryParameter.maxpagesize,
+  "max_page_size",
+  "python"
+);
 
 @@clientInitialization(
   WebPubSubChatServiceClient,
