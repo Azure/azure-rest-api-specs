@@ -1,4 +1,4 @@
-import { afterEach, expect, test, vi } from "vitest";
+import { afterEach, expect, it, vi } from "vitest";
 import { parseYamlContent } from "../src/common.ts";
 import { validateSdkSuppressionsFile } from "../src/sdkSuppressions.ts";
 
@@ -6,7 +6,7 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 
-test("passes parsed suppressions to schema validation", () => {
+it("passes parsed suppressions to schema validation", () => {
   const parsed = parseYamlContent("suppressions: {}", "sdk-suppressions.yaml");
 
   expect(parsed).toEqual({
@@ -16,7 +16,7 @@ test("passes parsed suppressions to schema validation", () => {
   expect(validateSdkSuppressionsFile(parsed.result).result).toBe(true);
 });
 
-test.each(["", "# no suppressions", "null", "false", "0"])(
+it.each(["", "# no suppressions", "null", "false", "0"])(
   "preserves empty-content handling for %j",
   (content) => {
     const log = vi.spyOn(console, "info").mockImplementation(() => {});
@@ -31,7 +31,7 @@ test.each(["", "# no suppressions", "null", "false", "0"])(
   },
 );
 
-test.each([
+it.each([
   { content: "true", result: true },
   { content: "42", result: 42 },
   { content: "text", result: "text" },
@@ -47,7 +47,7 @@ test.each([
   });
 });
 
-test("reports parse failures without treating them as empty files", () => {
+it("reports parse failures without treating them as empty files", () => {
   const log = vi.spyOn(console, "error").mockImplementation(() => {});
   const parsed = parseYamlContent("suppressions: [", "sdk-suppressions.yaml");
 
