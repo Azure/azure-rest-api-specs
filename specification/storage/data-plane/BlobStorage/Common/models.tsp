@@ -1797,7 +1797,7 @@ enum BlockListType {
 alias SourceContentCrc64Parameter = {
   /** Specifies the CRC64 calculated for the range of bytes that must be read from the source. */
   @header("x-ms-source-content-crc64")
-  sourceContentCrc64?: bytes;
+  sourceContentCrc64?: base64Bytes;
 };
 
 /** The source range parameter. */
@@ -1848,7 +1848,7 @@ alias SkuNameResponseHeader = {
 alias ContentCrc64ResponseHeader = {
   /** The CRC64 hash of the content. */
   @header("x-ms-content-crc64")
-  contentCrc64?: bytes;
+  contentCrc64?: base64Bytes;
 };
 
 /** The content CRC64 response header. */
@@ -1856,7 +1856,7 @@ alias ContentCrc64ResponseHeaderV2026_10_06 = {
   /** The CRC64 hash of the content. */
   @added(Versions.v2026_10_06)
   @header("x-ms-content-crc64")
-  contentCrc64?: bytes;
+  contentCrc64?: base64Bytes;
 };
 
 /** The copy status response header. */
@@ -2063,7 +2063,7 @@ alias ContentRangeResponseHeader = {
 /** The Content-MD5 response header. */
 alias ContentMd5ResponseHeader = {
   /** The blob content MD5 hash. Only returned if the full blob is read. */
-  @header("Content-MD5") contentMd5: bytes;
+  @header("Content-MD5") contentMd5: base64Bytes;
 };
 
 /** The Content-Length response header. */
@@ -2211,7 +2211,7 @@ alias CopySourceParameter = {
 alias SourceContentMd5Parameter = {
   /** Specifies the MD5 hash calculated for the range of bytes that must be read from the copy source. */
   @header("x-ms-source-content-md5")
-  sourceContentMd5?: bytes;
+  sourceContentMd5?: base64Bytes;
 };
 
 /** The source if tags parameter. */
@@ -2248,7 +2248,7 @@ alias SourceIfModifiedSinceParameter = {
 alias ContentCrc64Parameter = {
   /** Specifies the transactional CRC64 hash for the body. */
   @header("x-ms-content-crc64")
-  transactionalContentCrc64?: bytes;
+  transactionalContentCrc64?: base64Bytes;
 };
 
 /** The access tier optional parameter. */
@@ -2262,7 +2262,7 @@ alias AccessTierHeader = {
 alias ContentMd5Parameter = {
   /** Specifies the transactional MD5 hash for the body. */
   @header("Content-MD5")
-  transactionalContentMd5?: bytes;
+  transactionalContentMd5?: base64Bytes;
 };
 
 /** The legal hold optional parameter. */
@@ -2345,14 +2345,14 @@ alias BlobCacheControlParameter = {
 alias BlobContentMd5Parameter = {
   /** The MD5 hash of the blob content that is stored as a property on the blob. Note: This hash is not validated. */
   @header("x-ms-blob-content-md5")
-  blobContentMd5?: bytes;
+  blobContentMd5?: base64Bytes;
 };
 
 /** The blob content MD5 response header. */
 alias BlobContentMd5ResponseHeader = {
   /** MD5 hash of the full blob content only returned for ranged reads. This is the hash of the complete blob, not just the requested range. */
   @header("x-ms-blob-content-md5")
-  blobContentMd5?: bytes;
+  blobContentMd5?: base64Bytes;
 };
 
 /** The blob content language parameter. */
@@ -2515,14 +2515,14 @@ alias IfNoneMatchParameter = {
 /** The range parameter. */
 alias RangeParameter = {
   /** Specifies the range of the blob to operate on. */
-  @header("Range")
+  @header("x-ms-range")
   range?: string;
 };
 
 /** The required range parameter. */
 alias RangeParameterRequired = {
   /** Specifies the range of the blob to operate on. */
-  @header("Range")
+  @header("x-ms-range")
   range: string;
 };
 
