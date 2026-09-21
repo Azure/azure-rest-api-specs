@@ -1,4 +1,4 @@
-name: Workspace Validation
+name: Engineering
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - pnpm-workspace.yaml
       - pnpm-lock.yaml
       - .github/actions/setup-node-install-deps/**
-      - .github/workflows/workspace-validation.yaml
+      - .github/workflows/eng.yml
       - .github/workflows/src/validate-workspace.ts
   pull_request:
     paths:
@@ -17,7 +17,7 @@ on:
       - pnpm-workspace.yaml
       - pnpm-lock.yaml
       - .github/actions/setup-node-install-deps/**
-      - .github/workflows/workspace-validation.yaml
+      - .github/workflows/eng.yml
       - .github/workflows/src/validate-workspace.ts
   workflow_dispatch:
 
@@ -25,7 +25,8 @@ permissions:
   contents: read
 
 jobs:
-  catalog:
+  workspace-validation:
+    name: Workspace validation
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v7
