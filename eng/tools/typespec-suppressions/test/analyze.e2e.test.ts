@@ -179,6 +179,192 @@ interface Widgets {
     expect(report.changedSuppressions[0].after.justification).toBe("updated reason");
   });
 
+  it("preserves suppressions when a TypeSpec project directory is renamed", async () => {
+    const repoRoot = await initTempRepo();
+    tempRepos.push(repoRoot);
+
+    const baseSpecPath = "specification/demo/old/Demo";
+    const headSpecPath = "specification/demo/new/Demo";
+    const baseSpecFolder = path.join(repoRoot, baseSpecPath);
+    await mkdir(baseSpecFolder, { recursive: true });
+    await writeFile(
+      path.join(baseSpecFolder, "tspconfig.yaml"),
+      `linter:
+  disable:
+    "@azure-tools/rule-config": "existing config reason"
+`,
+    );
+    await writeFile(
+      path.join(baseSpecFolder, "main.tsp"),
+      `namespace Demo;
+
+model Widget {
+  #suppress "@azure-tools/rule-inline" "existing inline reason"
+  name: string;
+}
+`,
+    );
+
+    git(repoRoot, ["add", "."]);
+    git(repoRoot, ["commit", "-m", "base"]);
+    const baseRevision = git(repoRoot, ["rev-parse", "HEAD"]);
+
+    await mkdir(path.dirname(path.join(repoRoot, headSpecPath)), { recursive: true });
+    git(repoRoot, ["mv", baseSpecPath, headSpecPath]);
+    git(repoRoot, ["commit", "-m", "move project"]);
+    const headRevision = git(repoRoot, ["rev-parse", "HEAD"]);
+
+    const report = await analyzeTypeSpecSuppressions({
+      cwd: repoRoot,
+      baseRevision,
+      headRevision,
+      specPaths: [headSpecPath],
+    });
+
+    expect(report.requiresApproval).toBe(false);
+    expect(report.counts).toEqual({
+      specs: 1,
+      base: 2,
+      head: 2,
+      new: 0,
+      removed: 0,
+      changed: 0,
+      unchanged: 2,
+    });
+    expect(report.specs[0].baseSuppressions.map((suppression) => suppression.sourceFile)).toEqual([
+      `${headSpecPath}/main.tsp`,
+      `${headSpecPath}/tspconfig.yaml`,
+    ]);
+
+    await writeFile(
+      path.join(repoRoot, headSpecPath, "main.tsp"),
+      `namespace Demo;
+
+model Widget {
+  #suppress "@azure-tools/rule-inline" "existing inline reason"
+  name: string;
+  #suppress "@azure-tools/rule-new" "new suppression after move"
+  description: string;
+}
+`,
+    );
+    git(repoRoot, ["add", "."]);
+    git(repoRoot, ["commit", "-m", "add suppression after move"]);
+    const suppressionHeadRevision = git(repoRoot, ["rev-parse", "HEAD"]);
+
+    const changedReport = await analyzeTypeSpecSuppressions({
+      cwd: repoRoot,
+      baseRevision,
+      headRevision: suppressionHeadRevision,
+      specPaths: [headSpecPath],
+    });
+
+    expect(changedReport.requiresApproval).toBe(true);
+    expect(changedReport.counts).toEqual({
+      specs: 1,
+      base: 2,
+      head: 3,
+      new: 1,
+      removed: 0,
+      changed: 0,
+      unchanged: 2,
+    });
+    expect(changedReport.newSuppressions.map((suppression) => suppression.ruleName)).toEqual([
+      "@azure-tools/rule-new",
+    ]);
+  }, 60_000);
+
+  it("preserves unscoped suppressions when a TypeSpec file is renamed", async () => {
+    const repoRoot = await initTempRepo();
+    tempRepos.push(repoRoot);
+
+    const specPath = "specification/demo/Demo";
+    const specFolder = path.join(repoRoot, specPath);
+    const baseFilePath = path.join(specFolder, "back-compatible.tsp");
+    const headFilePath = path.join(specFolder, "compatibility.tsp");
+    await mkdir(specFolder, { recursive: true });
+    await writeFile(path.join(specFolder, "tspconfig.yaml"), "linter:\n  disable: {}\n");
+    await writeFile(
+      baseFilePath,
+      `model Widget {
+  name: string;
+  description: string;
+}
+
+#suppress "@azure-tools/rule-existing" "existing compatibility suppression"
+@@Legacy.flattenProperty(Widget.name);
+`,
+    );
+
+    git(repoRoot, ["add", "."]);
+    git(repoRoot, ["commit", "-m", "base"]);
+    const baseRevision = git(repoRoot, ["rev-parse", "HEAD"]);
+
+    git(repoRoot, ["mv", baseFilePath, headFilePath]);
+    git(repoRoot, ["commit", "-m", "rename compatibility file"]);
+    const renamedRevision = git(repoRoot, ["rev-parse", "HEAD"]);
+
+    const renamedReport = await analyzeTypeSpecSuppressions({
+      cwd: repoRoot,
+      baseRevision,
+      headRevision: renamedRevision,
+      specPaths: [specPath],
+    });
+
+    expect(renamedReport.requiresApproval).toBe(false);
+    expect(renamedReport.counts).toEqual({
+      specs: 1,
+      base: 1,
+      head: 1,
+      new: 0,
+      removed: 0,
+      changed: 0,
+      unchanged: 1,
+    });
+    expect(renamedReport.specs[0].baseSuppressions[0].sourceFile).toBe(
+      `${specPath}/compatibility.tsp`,
+    );
+
+    await writeFile(
+      headFilePath,
+      `model Widget {
+  name: string;
+  description: string;
+}
+
+#suppress "@azure-tools/rule-existing" "existing compatibility suppression"
+@@Legacy.flattenProperty(Widget.name);
+
+#suppress "@azure-tools/rule-new" "new compatibility suppression"
+@@Legacy.flattenProperty(Widget.description);
+`,
+    );
+    git(repoRoot, ["add", "."]);
+    git(repoRoot, ["commit", "-m", "add suppression after file rename"]);
+    const suppressionHeadRevision = git(repoRoot, ["rev-parse", "HEAD"]);
+
+    const changedReport = await analyzeTypeSpecSuppressions({
+      cwd: repoRoot,
+      baseRevision,
+      headRevision: suppressionHeadRevision,
+      specPaths: [specPath],
+    });
+
+    expect(changedReport.requiresApproval).toBe(true);
+    expect(changedReport.counts).toEqual({
+      specs: 1,
+      base: 1,
+      head: 2,
+      new: 1,
+      removed: 0,
+      changed: 0,
+      unchanged: 1,
+    });
+    expect(changedReport.newSuppressions.map((suppression) => suppression.ruleName)).toEqual([
+      "@azure-tools/rule-new",
+    ]);
+  }, 60_000);
+
   it("omits checkedSuppressions in legacy mode (no checkRules)", async () => {
     const repoRoot = await initTempRepo();
     tempRepos.push(repoRoot);

@@ -3752,6 +3752,11 @@ op protectionPolicyOperationStatusesGet(
 @@clientName(SourceSideScanStatus, "BackupSourceSideScanStatus", "csharp");
 @@clientName(SourceSideScanSummary, "BackupSourceSideScanSummary", "csharp");
 @@clientName(VMWorkloadPolicyType, "VmWorkloadPolicyType", "csharp");
+@@clientName(
+  InstantItemRecoveryOperationResultRequest,
+  "InstantItemRecoveryOperationResultContent",
+  "csharp"
+);
 
 // JavaScript backward compatibility with the last stable SDK.
 @@clientLocation(

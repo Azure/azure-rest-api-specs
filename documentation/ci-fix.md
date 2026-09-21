@@ -13,6 +13,7 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
 - [Table of Contents](#table-of-contents)
 - [Prerequisites](#prerequisites)
 - [Checks troubleshooting guides](#checks-troubleshooting-guides)
+  - [`Format`](#format)
   - [`CredScan`](#credscan)
   - [`PoliCheck`](#policheck)
   - [`SDK Validation *` checks, like `SDK Validation - Go`](#sdk-validation--checks-like-sdk-validation---go)
@@ -43,6 +44,19 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
 Most guides here require for you to have `npm` installed, which you can get by installing [Node.js](https://nodejs.org/en/download).
 
 # Checks troubleshooting guides
+
+## `Format`
+
+This check covers repository tooling in `.github` and `eng/tools`. To reproduce
+and fix a formatting failure, run from the repository root:
+
+``` powershell
+pnpm install
+pnpm format:check
+pnpm format
+```
+
+Tooling formatting uses Oxfmt and excludes Swagger JSON.
 
 ## `CredScan`
 
@@ -191,13 +205,13 @@ cd <local_repo_clone_root>
 cd specification/contosowidgetmanager
 
 # Install the dependencies to the local 'node_modules' folder.
-npm install
+pnpm install
 
 # Run 'prettier --check' to verify the problems can be reproduced locally
-npx prettier --check **/*.json
+pnpm prettier --check **/*.json
 
 # Run 'prettier --write' to fix the problems.
-npx prettier --write **/*.json
+pnpm prettier --write **/*.json
 ```
 
 Then please commit and push changes made by prettier.
