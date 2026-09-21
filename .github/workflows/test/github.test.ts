@@ -1,13 +1,38 @@
 import type { AsyncFunctionArguments } from "@actions/github-script";
+import type { components } from "@octokit/openapi-webhooks-types";
 import { afterEach } from "node:test";
 import { beforeEach, describe, expect, expectTypeOf, it, vi } from "vitest";
 import { add, Duration } from "../../shared/src/time.ts";
-import { createLogHook, createRateLimitHook, type Core } from "../src/github.ts";
+import { createLogHook, createRateLimitHook, type Core, type WebhookEvent } from "../src/github.ts";
 import { createMockLogger } from "./mocks.ts";
 
 describe("Core", () => {
   it("matches the toolkit provided by GitHub Script", () => {
     expectTypeOf<Core>().toEqualTypeOf<AsyncFunctionArguments["core"]>();
+  });
+});
+
+describe("WebhookEvent", () => {
+  it("selects a specific action's payload", () => {
+    expectTypeOf<WebhookEvent<"pull-request", "labeled">>().toEqualTypeOf<
+      components["schemas"]["webhook-pull-request-labeled"]
+    >();
+  });
+
+  it("combines actions without including similarly named events", () => {
+    expectTypeOf<Extract<WebhookEvent<"pull-request">, { action: "opened" }>>().toEqualTypeOf<
+      components["schemas"]["webhook-pull-request-opened"]
+    >();
+    expectTypeOf<Extract<WebhookEvent<"pull-request">, { action: "submitted" }>>().toBeNever();
+    expectTypeOf<WebhookEvent<"pull-request", "labeled" | "unlabeled">["action"]>().toEqualTypeOf<
+      "labeled" | "unlabeled"
+    >();
+  });
+
+  it("supports events without an action", () => {
+    expectTypeOf<WebhookEvent<"workflow-dispatch">>().toEqualTypeOf<
+      components["schemas"]["webhook-workflow-dispatch"]
+    >();
   });
 });
 
