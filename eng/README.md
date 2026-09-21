@@ -33,8 +33,20 @@ Below are code convention we strive to follow in `eng` directory:
 - Install dependencies from the repo root with `pnpm install`. There is a single
   top-level `pnpm-lock.yaml`; do not add other lock files.
 - We maintain a single `pnpm-workspace.yaml` at the root that lists workspace packages
-  and a shared dependency `catalog:`. Align dependency versions through the catalog
-  rather than per-package version strings where possible.
+  and a shared dependency `catalog:`. All external dependencies must reference the
+  catalog with `catalog:` (or `catalog:<name>` for a named catalog); use `workspace:`
+  for local workspace dependencies.
+- Run `pnpm check:workspace` from the repo root to validate catalog usage and lockfile
+  portability. The [Eng workflow](../.github/workflows/eng.yml) runs these checks in CI.
+  It checks `dependencies`, `devDependencies`, `peerDependencies`, and
+  `optionalDependencies` in the root and all packages selected by pnpm. Manifests
+  outside the workspace, including test fixtures and specification projects, are
+  not checked. pnpm validates catalog entries themselves during installation.
+  `catalogMode: strict` only controls `pnpm add`, so it does not replace this check.
+  Unused entries in default and named catalogs produce warnings, not failures.
+  The lockfile check rejects explicit tarball resolutions for registry packages,
+  which can point to environment-specific proxies. Git-hosted dependencies
+  (`gitHosted: true`) are allowed to retain their tarball URLs.
 - When you add, modify, or remove `package.json` dependencies, run `pnpm install` and
   commit the resulting `pnpm-lock.yaml` changes so the lock file stays in sync and free
   of unused dependencies.
