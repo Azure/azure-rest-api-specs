@@ -1,5 +1,7 @@
 # Contributing
 
+<!-- cspell:ignore tocstop Poli -->
+
 This file provides general guidance for developers that are creating or updating REST API definitions for Azure.
 
 ## Table of Contents
@@ -79,7 +81,6 @@ Every PR in this repo will go through a series of PR checks, including:
 - PoliCheck -
 - CredScan -
 - SpellCheck -
-- PrettierCheck - 
 - SDK Breaking Change -
 
 When any of these PR checks fails it will post a comment to the PR with links to information on how to resolve the problem.

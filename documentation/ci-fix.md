@@ -27,8 +27,6 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
   - [`Swagger LintDiff` and `Swagger Lint(RPaaS)`](#swagger-lintdiff-and-swagger-lintrpaas)
   - [`Swagger LintDiff` for TypeSpec: troubleshooting guides](#swagger-lintdiff-for-typespec-troubleshooting-guides)
   - [`Swagger ModelValidation`](#swagger-modelvalidation)
-  - [`Swagger PrettierCheck`](#swagger-prettiercheck)
-    - [Prettier reference](#prettier-reference)
   - [`Swagger SemanticValidation`](#swagger-semanticvalidation)
   - [Spell Check](#spell-check)
   - [`TypeSpec Validation`](#typespec-validation)
@@ -176,37 +174,6 @@ oav validate-example <openapi-spec-path>
 Please see [readme](https://github.com/Azure/oav/blob/bd04e228b4181c53769ed88e561dec5212e77253/README.md) for how to install or run tool in details.
 Refer to [Semantic and Model Violations Reference](https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/Semantic-and-Model-Violations-Reference.md) for detailed description of validations and how-to-fix guidance.
 Refer to [Swagger-Example-Generation](https://github.com/Azure/oav/blob/develop/documentation/example-generation.md) for example automatic generation.
-
-## `Swagger PrettierCheck`
-
-First, ensure you have fulfilled `Prerequisites` as explained above.
-
-To update all the spec files for a given service run the following:
-
-``` powershell
-# To fix all the files in the repo run from the root of the repo
-cd <local_repo_clone_root>
-
-# OPTIONAL STEP: To fix a particular service OpenAPI spec cd to that directory like
-cd specification/contosowidgetmanager
-
-# Install the dependencies to the local 'node_modules' folder.
-pnpm install
-
-# Run 'prettier --check' to verify the problems can be reproduced locally
-pnpm prettier --check **/*.json
-
-# Run 'prettier --write' to fix the problems.
-pnpm prettier --write **/*.json
-```
-
-Then please commit and push changes made by prettier.
-
-### Prettier reference
-
-- [`prettier` npm package](https://www.npmjs.com/package/prettier)
-- [Source: Swagger-Prettier-Check.ps1](https://github.com/Azure/azure-rest-api-specs/blob/main/eng/scripts/Swagger-Prettier-Check.ps1)
-- [Pipeline: Swagger PrettierCheck](https://dev.azure.com/azure-sdk/public/_build?definitionId=6405)
 
 ## `Swagger SemanticValidation`
 
