@@ -3544,12 +3544,6 @@ model IPConfigInputDetails {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tfoLBBackendAddressPoolIds?: string[];
-
-  /**
-   * The IP version (IPv4 / IPv6) of the ip-config. Orthogonal to the allocation type (static / dynamic); a missing value is treated as IPv4.
-   */
-  @added(Versions.v2026_10_01)
-  ipVersion?: IPVersion;
 }
 
 /**
