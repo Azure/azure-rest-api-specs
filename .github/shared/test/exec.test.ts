@@ -1,9 +1,10 @@
 import { mkdir, mkdtemp, realpath, rm, writeFile } from "node:fs/promises";
+import { findPackageJSON } from "node:module";
 import { tmpdir } from "node:os";
 import { dirname, join } from "path";
 import semver from "semver";
 import { fileURLToPath } from "url";
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   execFile,
   execNodeBin,
@@ -14,6 +15,11 @@ import {
   isExecError,
 } from "../src/exec.ts";
 import { debugLogger } from "../src/logger.ts";
+
+vi.mock("node:module", async (importOriginal) => {
+  const original = await importOriginal<typeof import("node:module")>();
+  return { ...original, findPackageJSON: vi.fn(original.findPackageJSON) };
+});
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -63,12 +69,13 @@ describe("execNodeBin", () => {
     folder: string,
     bin: string | Record<string, string> = { cli: "cli.cjs" },
     source = "console.log(JSON.stringify({ args: process.argv.slice(2), cwd: process.cwd(), node: process.execPath }))",
+    exports: Record<string, string> = { "./package.json": "./package.json" },
   ) {
     const packageDir = join(folder, "node_modules", "@test", "cli");
     await mkdir(packageDir, { recursive: true });
     await writeFile(
       join(packageDir, "package.json"),
-      JSON.stringify({ name: "@test/cli", exports: { "./package.json": "./package.json" }, bin }),
+      JSON.stringify({ name: "@test/cli", exports, bin }),
     );
     await writeFile(join(packageDir, "cli.cjs"), source);
   }
@@ -83,7 +90,7 @@ describe("execNodeBin", () => {
     "resolves ancestor packages and preserves cwd and arguments with bin %j",
     async (bin) => {
       await installCli(root, bin);
-      const cwd = join(root, "project with spaces");
+      const cwd = join(root, "project with spaces # and %");
       await mkdir(cwd);
       const args = ["a b", '{"value":"quoted"}', "../**/*.tsp", "", "--", "a&b|c"];
       const result = await execNodeBin("@test/cli", ["cli", ...args], { cwd });
@@ -113,8 +120,26 @@ describe("execNodeBin", () => {
 
   it("does not install a missing package or fall back to PATH", async () => {
     await expect(execNodeBin("@test/missing", ["node"], { cwd: root })).rejects.toMatchObject({
-      code: "MODULE_NOT_FOUND",
+      code: "ERR_MODULE_NOT_FOUND",
     });
+  });
+
+  it.each<Record<string, string>>([{}, { ".": "./cli.cjs" }])(
+    "runs a binary without a package.json export (exports: %j)",
+    async (exports) => {
+      await installCli(root, "cli.cjs", "console.log('not exported')", exports);
+      await expect(execNodeBin("@test/cli", ["cli"], { cwd: root })).resolves.toEqual({
+        stdout: "not exported\n",
+        stderr: "",
+      });
+    },
+  );
+
+  it("reports when the resolver cannot find a package manifest", async () => {
+    vi.mocked(findPackageJSON).mockReturnValueOnce(undefined);
+    await expect(execNodeBin("@test/cli", ["cli"], { cwd: root })).rejects.toThrow(
+      'Cannot find package.json for "@test/cli".',
+    );
   });
 
   it.each([{ cli: "cli.cjs" }, "cli.cjs"])("rejects an unknown binary with bin %j", async (bin) => {

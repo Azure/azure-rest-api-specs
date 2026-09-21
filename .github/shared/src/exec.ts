@@ -1,7 +1,8 @@
 import child_process from "child_process";
 import spawn from "cross-spawn";
 import { readFile } from "node:fs/promises";
-import { createRequire } from "node:module";
+import { findPackageJSON } from "node:module";
+import { pathToFileURL } from "node:url";
 import { basename, dirname, join, resolve } from "path";
 import { promisify } from "util";
 import * as z from "zod";
@@ -84,7 +85,7 @@ const nodeBinSchema = z.object({
 /**
  * Runs an installed package's Node.js binary without a package-manager or shell shim.
  * Resolves the package from options.cwd (or process.cwd()), including ancestor node_modules.
- * The package must expose package.json; args starts with the name of its binary.
+ * Uses Node's built-in package resolver; args starts with the name of the package's binary.
  * @throws {ExecError}
  */
 export async function execNodeBin(
@@ -92,8 +93,11 @@ export async function execNodeBin(
   [binary, ...args]: [string, ...string[]],
   options: ExecOptions = {},
 ): Promise<ExecResult> {
-  const require = createRequire(resolve(options.cwd ?? process.cwd(), "package.json"));
-  const packageJsonPath = require.resolve(`${packageName}/package.json`);
+  const base = pathToFileURL(resolve(options.cwd ?? process.cwd(), "__resolve__.mjs"));
+  const packageJsonPath = findPackageJSON(packageName, base);
+  if (!packageJsonPath) {
+    throw new Error(`Cannot find package.json for "${packageName}".`);
+  }
   const { bin } = nodeBinSchema.parse(JSON.parse(await readFile(packageJsonPath, "utf8")));
   const entrypoint =
     typeof bin === "string" ? (binary === basename(packageName) ? bin : undefined) : bin[binary];
