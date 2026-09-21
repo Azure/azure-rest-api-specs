@@ -36,6 +36,14 @@ These settings apply only when `--tag=package-2026-09-01` is specified on the co
 ```yaml $(tag) == 'package-2026-09-01'
 input-file:
   - stable/2026-09-01/redisenterprise.json
+
+directive:
+  - suppress: PostResponseCodes
+    from: redisenterprise.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/migrations/default/unlinkMigratedEndpoint"].post
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cache/redisEnterprise/{clusterName}/unlinkMigratedEndpoint"].post
+    reason: These long-running POST actions never return a 204. The service responds with 202 and reports the terminal state through the Azure-AsyncOperation / Location endpoints, so declaring a 204 on the action URL would misrepresent the service contract.
 ```
 
 ### Tag: package-preview-2026-06-01
