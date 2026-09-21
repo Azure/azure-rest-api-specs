@@ -4,7 +4,7 @@ import { readFile, writeFile } from "fs/promises";
 import { dirname, join } from "path";
 import { promisify } from "util";
 import { getChangedFilesStatuses, tspconfig } from "../../../shared/src/changed-files.ts";
-import type { Core } from "../github.ts";
+import type { Core, WebhookEvent } from "../github.ts";
 import { loadFormatRules, validateAllNamespaces } from "./validate-format.ts";
 
 const execFileAsync = promisify(execFileCb);
@@ -224,7 +224,7 @@ export default async function detectNamespaces({
   context,
   core,
 }: import("@actions/github-script").AsyncFunctionArguments) {
-  const payload = context.payload as import("@octokit/webhooks-types").PullRequestEvent;
+  const payload = context.payload as WebhookEvent<"pull-request">;
 
   const cwd = process.env.GITHUB_WORKSPACE ?? process.cwd();
   const baseRefDir = process.env.BASE_REF_DIR ?? join(cwd, "..", "base-ref");
