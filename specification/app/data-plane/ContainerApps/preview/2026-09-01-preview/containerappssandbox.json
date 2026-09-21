@@ -7285,7 +7285,7 @@
         }
       },
       "put": {
-        "operationId": "VolumesOperations_PutVolume",
+        "operationId": "VolumesOperations_CreateVolume",
         "tags": [
           "volumes"
         ],
@@ -7323,7 +7323,7 @@
         ],
         "responses": {
           "201": {
-            "description": "The HTTP 201 response for the putVolume operation.",
+            "description": "The HTTP 201 response for the createVolume operation.",
             "schema": {
               "$ref": "#/definitions/Volume"
             }
@@ -7383,7 +7383,7 @@
         },
         "x-ms-examples": {
           "Creates a new volume.": {
-            "$ref": "./examples/VolumesOperations_PutVolume.json"
+            "$ref": "./examples/VolumesOperations_CreateVolume.json"
           }
         }
       },
@@ -9823,6 +9823,19 @@
           }
         }
       }
+    },
+    "CreateVolumeResult": {
+      "type": "object",
+      "description": "The HTTP 201 response for the createVolume operation.",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/Volume",
+          "description": "The returned volume."
+        }
+      },
+      "required": [
+        "body"
+      ]
     },
     "DataDiskPodVolume": {
       "type": "object",
@@ -12958,19 +12971,6 @@
         "body": {
           "$ref": "#/definitions/VolumePathItem",
           "description": "The returned file or directory metadata."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "PutVolumeResult": {
-      "type": "object",
-      "description": "The HTTP 201 response for the putVolume operation.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/Volume",
-          "description": "The returned volume."
         }
       },
       "required": [

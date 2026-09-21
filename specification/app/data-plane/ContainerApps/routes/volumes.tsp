@@ -156,8 +156,8 @@ alias VolumeForkOperations = ResourceOperations<
   PostVolumeForkErrors
 >;
 
-/** The HTTP 201 response for the putVolume operation. */
-model PutVolumeResult {
+/** The HTTP 201 response for the createVolume operation. */
+model CreateVolumeResult {
   /** The HTTP 201 status code. */
   @statusCode statusCode: 201;
 
@@ -165,8 +165,8 @@ model PutVolumeResult {
   @body body: Volume;
 }
 
-/** Error responses for the putVolume operation. */
-alias PutVolumeErrors =
+/** Error responses for the createVolume operation. */
+alias CreateVolumeErrors =
   | BadRequestErrorResult
   | UnauthorizedErrorResult
   | ConflictErrorResult
@@ -305,11 +305,10 @@ interface VolumesOperations {
   >;
 
   /** Creates a new volume. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "The existing client method mirrors PUT /volumes/{volumeName} and is intentionally named putVolume."
   @summary("Creates a new volume.")
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/volumes/{volumeName}")
   @put
-  putVolume is Foundations.Operation<
+  createVolume is Foundations.Operation<
     {
       ...AzureResourceScope;
 
@@ -319,9 +318,9 @@ interface VolumesOperations {
       /** The volume configuration to create. */
       @body body: Volume;
     },
-    PutVolumeResult,
+    CreateVolumeResult,
     DataPlaneStandardTraits,
-    PutVolumeErrors
+    CreateVolumeErrors
   >;
 
   /** Upload a file to a volume. */
