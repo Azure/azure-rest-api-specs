@@ -1755,12 +1755,32 @@ alias EnableSmbDirectoryLeaseHeader = {
   enableSmbDirectoryLease?: boolean;
 };
 
-/** Enable change feed header. */
-alias EnableChangeFeedHeader = {
-  /** Optional. Used to enable change feed on the share. */
-  @added(Versions.v2027_03_07)
-  @header("x-ms-file-enable-change-feed")
-  enableChangeFeed?: boolean;
+/** Change feed request headers for share operations. */
+alias ChangeFeedRequestHeaders = {
+  /** Optional. Boolean. Default if not specified is false. This property enables change feed on the share. */
+  @header("x-ms-file-enable-change-feed") enableChangeFeed?: boolean;
+
+  /** Optional. Integer. Specifies the number of days that change feed records are retained, between 1 and 365. Default if not specified is 7 days. */
+  @maxValue(365)
+  @minValue(1)
+  @header("x-ms-file-change-feed-retention-in-days")
+  changeFeedRetentionInDays?: int32;
+};
+
+/** Change feed response headers for share get properties. */
+alias ChangeFeedResponseHeaders = {
+  /** Whether change feed is enabled. */
+  @header("x-ms-file-enable-change-feed") enableChangeFeed?: boolean;
+
+  /** The number of days that change feed records are retained. */
+  @maxValue(365)
+  @minValue(1)
+  @header("x-ms-file-change-feed-retention-in-days")
+  changeFeedRetentionInDays?: int32;
+
+  /** The blob container in which change feed records are stored, in the format "$fileschangefeed-<guid>". */
+  @header("x-ms-file-blob-container-for-xfiles-change-feed")
+  changeFeedBlobContainerName?: string;
 };
 
 /** Destination lease ID parameter. */
