@@ -28,7 +28,10 @@ union HostType {
   VmssInstance: "VmssInstance",
 
   /**
-   * A non-ARM machine represented by a virtual surrogate resource.
+   * A machine that is not an Azure (ARM) resource - for example an on-premises or
+   * non-Azure VM running the Chaos agent. Having no Azure resource id, it is
+   * represented by a synthetic virtual surrogate resource under the workspace so it
+   * can be targeted like any other discovered resource.
    */
   VirtualSurrogateResource: "VirtualSurrogateResource",
 }
@@ -64,7 +67,7 @@ model SubscriberHost {
    * The ARM resource identifier of the host, for an ARM machine.
    */
   @visibility(Lifecycle.Read)
-  armResourceId?: string;
+  armResourceId?: Azure.Core.armResourceIdentifier;
 
   /**
    * The ARM-shaped external identifier (`.../virtualSurrogateResources/{hostHint}`)
@@ -84,7 +87,7 @@ model SubscriberProperties {
    * The ARM identifier of the parent workspace this subscriber is registered to.
    */
   @visibility(Lifecycle.Read)
-  workspaceId: string;
+  workspaceId: Azure.Core.armResourceIdentifier;
 
   /**
    * The `.../connections/{name}` connection that authorizes this subscriber.
@@ -92,7 +95,7 @@ model SubscriberProperties {
    * which are authorized by the workspace's system-managed allowance.
    */
   @visibility(Lifecycle.Read)
-  connectionResourceId?: string;
+  connectionResourceId?: Azure.Core.armResourceIdentifier;
 
   /**
    * The connection's per-create grant stamp this registration is bound to.
@@ -143,16 +146,19 @@ model SubscriberProperties {
    * workspace-scoped agent.
    */
   @visibility(Lifecycle.Read)
-  scope: string;
+  scope: Azure.Core.armResourceIdentifier;
 
   /**
    * The `discoveredResources/{id}` this agent maps to.
    */
   @visibility(Lifecycle.Read)
-  discoveredResourceId: string;
+  discoveredResourceId: Azure.Core.armResourceIdentifier;
 
   /**
-   * The agent's fault vocabulary - the capabilities it supports.
+   * The fault vocabulary this specific agent instance supports, used to recommend
+   * scenarios for it. This is the per-agent capability set reported at registration,
+   * distinct from the target-type `capabilityTypes` (actions) API, which describes what
+   * a resource type supports rather than what this live agent supports.
    */
   @visibility(Lifecycle.Read)
   capabilities: string[];

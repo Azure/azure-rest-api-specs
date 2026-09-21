@@ -5036,7 +5036,9 @@
           "type": "array",
           "description": "The subscribers (agents) registered on this discovered resource, as\n`.../workspaces/{workspaceName}/subscribers/{subscriberName}` identifiers.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
           },
           "readOnly": true
         }
@@ -5491,7 +5493,7 @@
           {
             "name": "VirtualSurrogateResource",
             "value": "VirtualSurrogateResource",
-            "description": "A non-ARM machine represented by a virtual surrogate resource."
+            "description": "A machine that is not an Azure (ARM) resource - for example an on-premises or\nnon-Azure VM running the Chaos agent. Having no Azure resource id, it is\nrepresented by a synthetic virtual surrogate resource under the workspace so it\ncan be targeted like any other discovered resource."
           }
         ]
       }
@@ -7208,6 +7210,7 @@
       "properties": {
         "armResourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The ARM resource identifier of the host, for an ARM machine.",
           "readOnly": true
         },
@@ -7245,11 +7248,13 @@
       "properties": {
         "workspaceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The ARM identifier of the parent workspace this subscriber is registered to.",
           "readOnly": true
         },
         "connectionResourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The `.../connections/{name}` connection that authorizes this subscriber.\nPresent only for below-ARM subscribers; omitted for above-ARM subscribers,\nwhich are authorized by the workspace's system-managed allowance.",
           "readOnly": true
         },
@@ -7292,17 +7297,19 @@
         },
         "scope": {
           "type": "string",
+          "format": "arm-id",
           "description": "Where this agent surfaces - an ARM scope, or the workspace ARM path for a\nworkspace-scoped agent.",
           "readOnly": true
         },
         "discoveredResourceId": {
           "type": "string",
+          "format": "arm-id",
           "description": "The `discoveredResources/{id}` this agent maps to.",
           "readOnly": true
         },
         "capabilities": {
           "type": "array",
-          "description": "The agent's fault vocabulary - the capabilities it supports.",
+          "description": "The fault vocabulary this specific agent instance supports, used to recommend\nscenarios for it. This is the per-agent capability set reported at registration,\ndistinct from the target-type `capabilityTypes` (actions) API, which describes what\na resource type supports rather than what this live agent supports.",
           "items": {
             "type": "string"
           },

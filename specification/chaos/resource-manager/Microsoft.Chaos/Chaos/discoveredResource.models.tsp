@@ -74,7 +74,7 @@ model DiscoveredResourceProperties {
    */
   @added(Microsoft.Chaos.Versions.v2026_11_01)
   @visibility(Lifecycle.Read)
-  subscribers?: string[];
+  subscribers?: Azure.Core.armResourceIdentifier[];
 }
 
 /**
