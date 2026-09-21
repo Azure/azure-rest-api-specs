@@ -36,13 +36,6 @@ and followed the instructions by checking all the boxes:
 ## Additional information
 
 <details>
-<summary> Viewing API changes</summary>
-
-For convenient view of the API changes made by this PR, refer to the URLs provided in the table 
-in the `Generated ApiView` comment added to this PR. You can use ApiView to show API versions diff. 
-
-</details>
-<details>
 <summary>Suppressing failures</summary>
 
 If one or multiple validation error/warning suppression(s) is detected in your PR, please follow the 
