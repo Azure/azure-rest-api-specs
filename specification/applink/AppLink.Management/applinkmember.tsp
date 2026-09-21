@@ -117,7 +117,7 @@ model ConnectivityProfile {
   @doc("Private connect profile.")
   privateConnect?: PrivateConnectProfile;
 
-  @doc("AppNetMember network name.")
+  @doc("The network name for an Azure Kubernetes Application Network member.")
   @added(Microsoft.AppLink.Versions.v2026_08_01_preview)
   network?: string;
 }
@@ -196,7 +196,7 @@ model ConnectivityProfileUpdate {
   @doc("East-West gateway profile.")
   eastWestGateway?: EastWestGatewayProfileUpdate;
 
-  @doc("AppNetMember network name.")
+  @doc("The network name for an Azure Kubernetes Application Network member.")
   network?: string;
 }
 
