@@ -108,9 +108,17 @@ model PatchRequestBrowserSession {
 @added(Versions.v2026_10_01_preview)
 @doc("The artifact configuration and finalized artifacts for a browser session.")
 model BrowserSessionArtifacts {
-  @doc("Indicates whether artifact collection is enabled for the browser session. When specified in a create or update request, this value overrides the workspace-level recording setting for the session.")
+  @doc("Indicates whether artifact collection is enabled for the browser session. When specified in a create or update request, this value overrides the workspace-level session artifact setting for the session.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   enabled: boolean = false;
+
+  @doc("The status of artifact collection for the browser session.")
+  @visibility(Lifecycle.Read)
+  status: BrowserSessionArtifactsStatus;
+
+  @doc("The error that occurred while collecting artifacts for the browser session.")
+  @visibility(Lifecycle.Read)
+  error?: BrowserSessionArtifactsError;
 
   @doc("The shared access signature (SAS) URL of the blob container that stores the artifacts for the browser session.")
   @visibility(Lifecycle.Read)
@@ -119,6 +127,34 @@ model BrowserSessionArtifacts {
   @doc("The finalized artifacts uploaded for the browser session.")
   @visibility(Lifecycle.Read)
   artifacts?: BrowserSessionArtifact[];
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The status of artifact collection for a browser session.")
+union BrowserSessionArtifactsStatus {
+  string,
+
+  @doc("Artifact collection has not started.")
+  NotStarted: "NotStarted",
+
+  @doc("Artifact collection is in progress.")
+  InProgress: "InProgress",
+
+  @doc("Artifact collection completed successfully.")
+  Completed: "Completed",
+
+  @doc("Artifact collection failed.")
+  Failed: "Failed",
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("An error that occurred while collecting artifacts for a browser session.")
+model BrowserSessionArtifactsError {
+  @doc("The error code.")
+  code: string;
+
+  @doc("The error message.")
+  message: string;
 }
 
 @added(Versions.v2026_10_01_preview)

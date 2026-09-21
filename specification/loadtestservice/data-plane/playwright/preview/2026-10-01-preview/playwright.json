@@ -1312,13 +1312,23 @@
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "Indicates whether artifact collection is enabled for the browser session. When specified in a create or update request, this value overrides the workspace-level recording setting for the session.",
+          "description": "Indicates whether artifact collection is enabled for the browser session. When specified in a create or update request, this value overrides the workspace-level session artifact setting for the session.",
           "default": false,
           "x-ms-mutability": [
             "read",
             "update",
             "create"
           ]
+        },
+        "status": {
+          "$ref": "#/definitions/BrowserSessionArtifactsStatus",
+          "description": "The status of artifact collection for the browser session.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/BrowserSessionArtifactsError",
+          "description": "The error that occurred while collecting artifacts for the browser session.",
+          "readOnly": true
         },
         "containerUrl": {
           "type": "string",
@@ -1336,7 +1346,8 @@
         }
       },
       "required": [
-        "enabled"
+        "enabled",
+        "status"
       ]
     },
     "BrowserSessionArtifactsCreateOrUpdate": {
@@ -1345,7 +1356,7 @@
       "properties": {
         "enabled": {
           "type": "boolean",
-          "description": "Indicates whether artifact collection is enabled for the browser session. When specified in a create or update request, this value overrides the workspace-level recording setting for the session.",
+          "description": "Indicates whether artifact collection is enabled for the browser session. When specified in a create or update request, this value overrides the workspace-level session artifact setting for the session.",
           "default": false,
           "x-ms-mutability": [
             "read",
@@ -1353,6 +1364,60 @@
             "create"
           ]
         }
+      }
+    },
+    "BrowserSessionArtifactsError": {
+      "type": "object",
+      "description": "An error that occurred while collecting artifacts for a browser session.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "BrowserSessionArtifactsStatus": {
+      "type": "string",
+      "description": "The status of artifact collection for a browser session.",
+      "enum": [
+        "NotStarted",
+        "InProgress",
+        "Completed",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "BrowserSessionArtifactsStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "Artifact collection has not started."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "Artifact collection is in progress."
+          },
+          {
+            "name": "Completed",
+            "value": "Completed",
+            "description": "Artifact collection completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Artifact collection failed."
+          }
+        ]
       }
     },
     "BrowserSessionSource": {
