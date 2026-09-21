@@ -226,6 +226,13 @@ directive:
     reason: API stewardship board recommend to use format "unixtime" which is not supported by linter at the moment. 
 ```
 
+## AzureOpenAI 2024-02-01
+These settings apply only when `--tag=release_2024_02_01` is specified on the command line.
+
+``` yaml $(tag) == 'release_2024_02_01'
+input-file: stable/2024-02-01/azureopenai.json
+```
+
 ## AzureOpenAI 2024-02-15-preview
 These settings apply only when `--tag=release_2024_02_15_preview` is specified on the command line.
 
@@ -244,6 +251,27 @@ directive:
     reason: API stewardship board recommend to use format "unixtime" which is not supported by linter at the moment. 
   - suppress: IntegerTypeMustHaveFormat
     reason: API stewardship board recommend to use format "unixtime" which is not supported by linter at the moment. 
+```
+
+## AzureOpenAI 2025-02-01-preview
+These settings apply only when `--tag=release_2025_02_01_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2025_02_01_preview'
+input-file: preview/2025-02-01-preview/azureopenai.json
+```
+
+## AzureOpenAI 2025-03-01-preview
+These settings apply only when `--tag=release_2025_03_01_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2025_03_01_preview'
+input-file: preview/2025-03-01-preview/azureopenai.json
+```
+
+## AzureOpenAI 2025-04-01-preview
+These settings apply only when `--tag=release_2025_04_01_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2025_04_01_preview'
+input-file: preview/2025-04-01-preview/azureopenai.json
 ```
 
 

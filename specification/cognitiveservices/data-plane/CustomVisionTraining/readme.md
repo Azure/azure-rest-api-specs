@@ -20,6 +20,13 @@ These settings apply only when `--tag=release_1_0` is specified on the command l
 input-file: stable/v2.0/Training.json
 ```
 
+### Release 1.2
+These settings apply only when `--tag=release_1_2` is specified on the command line.
+
+``` yaml $(tag) == 'release_1_2'
+input-file: stable/v1.2/Training.json
+```
+
 ### Release 2.1
 These settings apply only when `--tag=release_2_1` is specified on the command line.
 

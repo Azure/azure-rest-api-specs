@@ -106,6 +106,13 @@ directive:
     reason: Parameter is read only
 ```
 
+## AzureOpenAI 2023-07-01-preview
+These settings apply only when `--tag=release_2023_07_01_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2023_07_01_preview'
+input-file: preview/2023-07-01-preview/inference.json
+```
+
 ## AzureOpenAI 2023-07-01-preview (generated)
 These settings apply only when `--tag=release_2023_07_01_preview_autogen` is specified on the command line.
 
@@ -122,6 +129,13 @@ directive:
     reason: https://github.com/Azure/typespec-azure/issues/3194
   - suppress: RequiredReadOnlyProperties
     reason: Parameter is read only
+```
+
+## AzureOpenAI 2023-08-01-preview
+These settings apply only when `--tag=release_2023_08_01_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2023_08_01_preview'
+input-file: preview/2023-08-01-preview/inference.json
 ```
 
 ## AzureOpenAI 2023-08-01-preview (generated)
@@ -148,6 +162,14 @@ These settings apply only when `--tag=release_2023_09_01_preview` is specified o
 ``` yaml $(tag) == 'release_2023_09_01_preview'
 input-file: preview/2023-09-01-preview/inference.json
 ```
+
+## AzureOpenAI 2023-09-01-preview (generated)
+These settings apply only when `--tag=release_2023_09_01_preview_autogen` is specified on the command line.
+
+``` yaml $(tag) == 'release_2023_09_01_preview_autogen'
+input-file: preview/2023-09-01-preview/generated.json
+```
+
 AutoRest-Linter Suppressions
 
 ``` yaml
@@ -165,6 +187,21 @@ These settings apply only when `--tag=release_2023_10_01_preview` is specified o
 ``` yaml $(tag) == 'release_2023_10_01_preview'
 input-file: preview/2023-10-01-preview/inference.json
 ```
+
+## AzureOpenAI 2023-12-01-preview
+These settings apply only when `--tag=release_2023_12_01_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2023_12_01_preview'
+input-file: preview/2023-12-01-preview/inference.json
+```
+
+## AzureOpenAI 2023-12-01-preview (generated)
+These settings apply only when `--tag=release_2023_12_01_preview_autogen` is specified on the command line.
+
+``` yaml $(tag) == 'release_2023_12_01_preview_autogen'
+input-file: preview/2023-12-01-preview/generated.json
+```
+
 AutoRest-Linter Suppressions
 
 ``` yaml
@@ -190,11 +227,25 @@ These settings apply only when `--tag=release_2024_02_01_autogen` is specified o
 input-file: stable/2024-02-01/generated.json
 ```
 
+## AzureOpenAI 2024-02-15-preview
+These settings apply only when `--tag=release_2024_02_15_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2024_02_15_preview'
+input-file: preview/2024-02-15-preview/inference.json
+```
+
 ## AzureOpenAI 2024-02-15-preview (generated)
 These settings apply only when `--tag=release_2024_02_15_preview_autogen` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2024_02_15_preview_autogen'
 input-file: preview/2024-02-15-preview/generated.json
+```
+
+## AzureOpenAI 2024-03-01-preview
+These settings apply only when `--tag=release_2024_03_01_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2024_03_01_preview'
+input-file: preview/2024-03-01-preview/inference.json
 ```
 
 ## AzureOpenAI 2024-03-01-preview (generated)
@@ -209,6 +260,13 @@ These settings apply only when `--tag=release_2024_04_01_preview` is specified o
 
 ``` yaml $(tag) == 'release_2024_04_01_preview'
 input-file: preview/2024-04-01-preview/inference.json
+```
+
+## AzureOpenAI 2024-04-01-preview (generated)
+These settings apply only when `--tag=release_2024_04_01_preview_autogen` is specified on the command line.
+
+``` yaml $(tag) == 'release_2024_04_01_preview_autogen'
+input-file: preview/2024-04-01-preview/generated.json
 ```
 
 ## AzureOpenAI 2024-05-01-preview
@@ -321,4 +379,25 @@ These settings apply only when `--tag=release_2025_01_01_preview_autogen` is spe
 
 ``` yaml $(tag) == 'release_2025_01_01_preview_autogen'
 input-file: preview/2025-01-01-preview/generated.json
+```
+
+## AzureOpenAI 2025-02-01-preview
+These settings apply only when `--tag=release_2025_02_01_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2025_02_01_preview'
+input-file: preview/2025-02-01-preview/inference.json
+```
+
+## AzureOpenAI 2025-03-01-preview
+These settings apply only when `--tag=release_2025_03_01_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2025_03_01_preview'
+input-file: preview/2025-03-01-preview/inference.json
+```
+
+## AzureOpenAI 2025-04-01-preview
+These settings apply only when `--tag=release_2025_04_01_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2025_04_01_preview'
+input-file: preview/2025-04-01-preview/inference.json
 ```

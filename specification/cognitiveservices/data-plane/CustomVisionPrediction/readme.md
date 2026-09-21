@@ -20,6 +20,13 @@ These settings apply only when `--tag=release_1_0` is specified on the command l
 input-file: stable/v2.0/Prediction.json
 ```
 
+### Release 1.1
+These settings apply only when `--tag=release_1_1` is specified on the command line.
+
+``` yaml $(tag) == 'release_1_1'
+input-file: stable/v1.1/Prediction.json
+```
+
 ### Release 3.0
 These settings apply only when `--tag=release_3_0` is specified on the command line.
 
