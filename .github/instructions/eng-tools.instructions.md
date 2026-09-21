@@ -31,7 +31,7 @@ The top-level `eng/tools` directory holds shared configuration that the individu
 - `tsconfig.json` — base TypeScript config plus the `include` list of every tool's `src`/`test` files
 - Lint configuration is shared by all packages in the repository-root `.oxlintrc.json`
 - `vitest.base.config.ts` — base Vitest config that each tool extends
-- `.prettierrc.yaml` / `.prettierignore` — shared Prettier configuration
+- Root `.oxfmtrc.json` — shared Oxfmt configuration and subtree-scoped ignore patterns
 
 ## Technology Stack
 
@@ -40,7 +40,7 @@ The top-level `eng/tools` directory holds shared configuration that the individu
 - **Type Checking**: `tsc --noEmit` (the `build` script only type-checks; it does not emit JavaScript)
 - **Testing**: Vitest for unit and integration tests
 - **Linting**: oxlint with type-aware rules from `oxlint-tsgolint`
-- **Formatting**: Prettier with the organize-imports plugin (shared config)
+- **Formatting**: Oxfmt using the root `.oxfmtrc.json`; import organization and package.json sorting are disabled
 - **Package Manager**: pnpm workspaces (`pnpm ci` for clean installs)
 
 ## Project Structure
@@ -50,8 +50,6 @@ eng/tools/
 ├── package.json               # Aggregates all tools as file: devDependencies; root "build"
 ├── tsconfig.json              # Base TS config + include list for all tools
 ├── vitest.base.config.ts      # Base Vitest config (extended per tool)
-├── .prettierrc.yaml           # Shared Prettier config (keep in sync with .github)
-├── .prettierignore            # Shared Prettier ignore list
 └── <tool>/                    # One directory per tool package
     ├── package.json           # @azure-tools/<tool>; scripts, deps, bin entry
     ├── tsconfig.json          # Extends ../tsconfig.json; include src/test
@@ -70,9 +68,9 @@ eng/tools/
 - **Module system**: ES modules (`import`/`export`), `"type": "module"` in every `package.json`.
 - **Erasable syntax only**: Source is run directly by Node's type stripping, so the base `tsconfig.json` sets `erasableSyntaxOnly` and `verbatimModuleSyntax`. Do **not** use TypeScript features that require runtime transformation — no `enum`, no parameter properties (`constructor(private x)`), no namespaces with runtime members, and no non-`import type` type-only imports that would emit. Use `import type { ... }` for type-only imports.
 - **Import extensions**: Import local modules using their real `.ts` extension (e.g. `import { main } from "../src/index.ts"`); `allowImportingTsExtensions` is enabled.
-- **Indentation**: 2 spaces (enforced by Prettier).
-- **Quote style**: Double quotes for strings (enforced by Prettier).
-- **Line length**: Max 100 characters (`printWidth: 100`, enforced by Prettier).
+- **Indentation**: 2 spaces (enforced by Oxfmt).
+- **Quote style**: Double quotes for strings (enforced by Oxfmt).
+- **Line length**: Max 100 characters (`printWidth: 100`, enforced by Oxfmt).
 - **Naming conventions**:
   - Functions and variables: `camelCase`
   - Types, interfaces, and classes: `PascalCase`
@@ -102,9 +100,8 @@ Every tool package is a thin extension of the shared `eng/tools` configuration. 
   "scripts": {
     "build": "tsc --noEmit",
     "check": "pnpm run build && pnpm run lint && pnpm run format:check && pnpm run test:ci",
-    "format": "prettier . --ignore-path ../.prettierignore --write",
-    "format:check": "prettier . --ignore-path ../.prettierignore --check",
-    "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
+    "format": "oxfmt . --write",
+    "format:check": "oxfmt . --check",
     "lint": "oxlint .",
     "test": "vitest",
     "test:ci": "vitest run --coverage --reporter=verbose"
@@ -137,7 +134,7 @@ dependencies. The root package provides `oxlint` and `oxlint-tsgolint`. A local
 `"lint": "oxlint ."` script can lint one tool during development; `pnpm lint` from
 the repository root lints the previously linted packages in one invocation.
 
-See [the engineering guide](../../eng/README.md#linting-and-prettier) for the
+See [the engineering guide](../../eng/README.md#linting-and-formatting) for the
 packages excluded to preserve the previous ESLint coverage. Enable linting for
 those packages in a separate change rather than adding migration-only suppressions.
 
@@ -175,9 +172,8 @@ Run these from within an individual tool directory (`eng/tools/<tool>`):
 pnpm run build           # Type-check with tsc --noEmit (no JS emitted)
 pnpm run check           # build + lint + format:check + test:ci (run this before committing)
 pnpm run lint            # Run oxlint for this package
-pnpm run format          # Format code with Prettier
+pnpm run format          # Format code with Oxfmt
 pnpm run format:check    # Check formatting without modifying files
-pnpm run format:check:ci # Check formatting with verbose debug output (for CI)
 pnpm run test            # Run tests (watch by default; some tools use --run)
 pnpm run test:ci         # Run tests once with coverage report
 ```
@@ -198,7 +194,7 @@ This runs the type-check, lint, format check, and tests. All must pass before co
 
 - **Framework**: Vitest
 - **Test files**: `*.test.ts` files under each tool's `test/` directory
-- **Fixtures**: Place test fixtures under `test/` (the shared `.prettierignore` excludes `fixtures` and `specification`)
+- **Fixtures**: Place test fixtures under `test/` (the root `.oxfmtrc.json` excludes `fixtures` and `specification` directories under tooling)
 - **Assertions**: Use `expect()` from Vitest
 - **Coverage**: Generated by `pnpm run test:ci`; exclude `cmd/**` and entry files (e.g. `src/index.ts`) from coverage where appropriate
 - **Test structure**: Use `describe()` and `it()` blocks
@@ -219,7 +215,9 @@ describe("myFunction", () => {
 
 ### CI Integration
 
-Each tool is tested by a dedicated workflow (`.github/workflows/<tool>-test.yaml`) that calls the shared reusable workflow `.github/workflows/_reusable-eng-tools-test.yaml`. The reusable workflow runs `pnpm run build`, `pnpm run test:ci`, and `pnpm run format:check:ci` against the tool's `working-directory`, on a matrix of Ubuntu (Node 24) and Windows (Node 24).
+Each tool is tested by a dedicated workflow (`.github/workflows/<tool>-test.yaml`) that calls the shared reusable workflow `.github/workflows/_reusable-eng-tools-test.yaml`. The reusable workflow runs `pnpm run build` and `pnpm run test:ci` against the tool's `working-directory`, on a matrix of Ubuntu (Node 24) and Windows (Node 24).
+
+`.github/workflows/format.yaml` runs `pnpm format:check` once from the repository root for `.github` and `eng/tools`. Do not add formatting steps to package/OS test matrices. Package-local formatting commands remain available and use the same root configuration.
 
 Code linting runs once for all packages in `.github/workflows/lint.yaml`. Do not add
 lint steps or a lint input to the per-package reusable workflow.
@@ -276,7 +274,7 @@ When modifying `eng/tools` code:
 
 ### Critical Do's
 
-- ✅ Do extend the shared base configs (`tsconfig`, `vitest.base.config.ts`, `.prettierrc.yaml`) and use the root oxlint config.
+- ✅ Do extend the shared base configs (`tsconfig`, `vitest.base.config.ts`) and use the root oxlint and Oxfmt configs.
 - ✅ Do write Vitest tests for new functionality under `test/`.
 - ✅ Do use `import type` for type-only imports.
 - ✅ Do reuse `@azure-tools/specs-shared` utilities instead of duplicating them.
