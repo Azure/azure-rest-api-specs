@@ -1761,42 +1761,42 @@ enum MigrationRollbackReason {
   /**
    * The target cache did not meet the expected performance characteristics.
    */
-  Performance: "Performance",
+  Performance: "performance",
 
   /**
    * The target cache was not compatible with the client application or workload.
    */
-  Compatibility: "Compatibility",
+  Compatibility: "compatibility",
 
   /**
    * The client application was unable to connect to the target cache.
    */
-  ClientConnection: "ClientConnection",
+  ClientConnection: "clientConnection",
 
   /**
    * The target cache did not meet the expected cost characteristics.
    */
-  Cost: "Cost",
+  Cost: "cost",
 
   /**
    * The migration was performed as a test and is being reverted.
    */
-  Testing: "Testing",
+  Testing: "testing",
 
   /**
    * The target cache did not meet the expected stability characteristics.
    */
-  Stability: "Stability",
+  Stability: "stability",
 
   /**
    * Data was lost during or after the migration.
    */
-  DataLoss: "DataLoss",
+  DataLoss: "dataLoss",
 
   /**
    * The migration is being undone for a reason not covered by the other values.
    */
-  Other: "Other",
+  Other: "other",
 }
 
 /**
