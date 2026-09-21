@@ -45,6 +45,7 @@ model ManagedComputeDeployment
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Cognitive Services uses its existing Identity contract for managed compute deployments"
   @added(Versions.v2026_09_15_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   identity?: Identity;
 
   /**
