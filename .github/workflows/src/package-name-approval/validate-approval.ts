@@ -1,6 +1,12 @@
 import { extractInputs } from "../context.ts";
 import type { Core, WebhookEvent } from "../github.ts";
-import { loadApproversConfig } from "./approvers.ts";
+import {
+  ALLOWED_BOT_LOGINS,
+  evaluateLabelAuthorization,
+  loadProtectedLabelsConfig,
+  type ProtectedLabelsConfig,
+} from "../protected-labels/authorization.ts";
+import { createApproversConfig } from "./approvers.ts";
 import { removeLabelIfPresent } from "./labels.ts";
 
 export type ValidateContext = {
@@ -16,8 +22,6 @@ export type ValidateContext = {
   isMgmt: boolean;
 };
 
-const ALLOWED_BOT_LOGINS: string[] = ["github-actions[bot]", "azure-sdk"];
-
 /**
  * Get all authorized approvers as a flat list.
  */
@@ -26,26 +30,6 @@ function getAllApprovers(approversConfig: import("./approvers.ts").ApproversConf
 
   const dpValues: string[][] = Object.values(approversConfig["data-plane"] ?? {});
   return [...new Set([...mgmtApprovers, ...dpValues.flat()])];
-}
-
-function isAuthorizedApprover({
-  approversConfig,
-  targetLabel,
-  actor,
-  isMgmt,
-}: Pick<ValidateContext, "approversConfig" | "targetLabel" | "actor" | "isMgmt">): boolean {
-  if (ALLOWED_BOT_LOGINS.includes(actor)) {
-    return true;
-  }
-
-  const authorization = approversConfig.authorization;
-  const plane = isMgmt ? "management-plane" : "data-plane";
-  const authorizedUsers = [
-    ...(authorization?.global ?? []),
-    ...(authorization?.labels[targetLabel]?.[plane] ?? []),
-  ];
-  const actorLower = actor.toLowerCase();
-  return authorizedUsers.some((user) => user.toLowerCase() === actorLower);
 }
 
 /**
@@ -110,8 +94,8 @@ async function handleLabeled({
   prNumber,
   isMgmt,
   labels,
-  approversConfig,
-}: ValidateContext & { labels: string[] }) {
+  protectedLabelsConfig,
+}: ValidateContext & { labels: string[]; protectedLabelsConfig: ProtectedLabelsConfig }) {
   let langsToApprove: string[];
 
   if (targetLabel === "package-name-approved-all") {
@@ -152,7 +136,14 @@ async function handleLabeled({
     langsToApprove = [lang];
   }
 
-  if (!isAuthorizedApprover({ approversConfig, targetLabel, actor, isMgmt })) {
+  const authorization = evaluateLabelAuthorization({
+    config: protectedLabelsConfig,
+    labelName: targetLabel,
+    actor,
+    prLabels: labels,
+    plane: isMgmt ? "management-plane" : "data-plane",
+  });
+  if (authorization.status !== "authorized" && authorization.status !== "trusted-bot") {
     core.warning(`${actor} is not authorized to apply ${targetLabel}, removing`);
     await removeLabelIfPresent(github, owner, repo, prNumber, targetLabel);
     return;
@@ -276,7 +267,8 @@ export default async function validateApproval({
   context,
   core,
 }: import("@actions/github-script").AsyncFunctionArguments) {
-  const approversConfig = await loadApproversConfig();
+  const protectedLabelsConfig = await loadProtectedLabelsConfig();
+  const approversConfig = createApproversConfig(protectedLabelsConfig);
 
   const { owner, repo, issue_number } = await extractInputs(github, context, core);
 
@@ -322,5 +314,6 @@ export default async function validateApproval({
     prNumber: issue_number,
     isMgmt,
     labels,
+    protectedLabelsConfig,
   });
 }
