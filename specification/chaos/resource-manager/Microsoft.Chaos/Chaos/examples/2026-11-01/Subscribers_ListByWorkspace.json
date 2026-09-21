@@ -1,0 +1,82 @@
+{
+  "parameters": {
+    "api-version": "2026-11-01",
+    "workspaceName": "exampleWorkspace",
+    "resourceGroupName": "exampleRG",
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/subscribers/a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "name": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+            "type": "Microsoft.Chaos/workspaces/subscribers",
+            "properties": {
+              "workspaceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace",
+              "connectionResourceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/connections/exampleConnection",
+              "grantIncarnation": "b7f3a1c2-0000-4a1b-9c2d-1e2f3a4b5c6d",
+              "workspaceIncarnation": "d4c3b2a1-1111-4b2c-8d3e-2f3a4b5c6d7e",
+              "kind": "VirtualSurrogateResource",
+              "status": "Connected",
+              "registeredAt": "2026-11-10T10:30:00.000Z",
+              "lastSeenAt": "2026-11-10T10:35:00.000Z",
+              "host": {
+                "externalId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/virtualSurrogateResources/node-a19f"
+              },
+              "scope": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace",
+              "discoveredResourceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/discoveredResources/node-a19f",
+              "capabilities": [
+                "microsoft-agent-shutdown/1.0",
+                "microsoft-agent-cpuPressure/1.0"
+              ],
+              "customGroup": "frontend-nodes"
+            },
+            "systemData": {
+              "createdAt": "2026-11-10T10:30:00.000Z",
+              "createdBy": "system",
+              "createdByType": "Application",
+              "lastModifiedAt": "2026-11-10T10:35:00.000Z",
+              "lastModifiedBy": "system",
+              "lastModifiedByType": "Application"
+            }
+          },
+          {
+            "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/subscribers/c3d4e5f6-a7b8-9012-cdef-123456789012",
+            "name": "c3d4e5f6-a7b8-9012-cdef-123456789012",
+            "type": "Microsoft.Chaos/workspaces/subscribers",
+            "properties": {
+              "workspaceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace",
+              "workspaceIncarnation": "d4c3b2a1-1111-4b2c-8d3e-2f3a4b5c6d7e",
+              "kind": "VirtualMachine",
+              "status": "Connected",
+              "registeredAt": "2026-11-10T09:00:00.000Z",
+              "lastSeenAt": "2026-11-10T10:36:00.000Z",
+              "host": {
+                "armResourceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/myVirtualMachine"
+              },
+              "scope": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG",
+              "discoveredResourceId": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace/discoveredResources/b2c3d4e5-f6a7-8901-bcde-f12345678901",
+              "capabilities": [
+                "microsoft-agent-shutdown/1.0"
+              ]
+            },
+            "systemData": {
+              "createdAt": "2026-11-10T09:00:00.000Z",
+              "createdBy": "system",
+              "createdByType": "Application",
+              "lastModifiedAt": "2026-11-10T10:36:00.000Z",
+              "lastModifiedBy": "system",
+              "lastModifiedByType": "Application"
+            }
+          }
+        ],
+        "nextLink": null
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Subscribers_ListByWorkspace",
+  "title": "Get a list of subscribers for a workspace."
+}

@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.Core;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Chaos;
 
@@ -66,6 +67,14 @@ model DiscoveredResourceProperties {
    */
   @visibility(Lifecycle.Read)
   scope: string;
+
+  /**
+   * The subscribers (agents) registered on this discovered resource, as
+   * `.../workspaces/{workspaceName}/subscribers/{subscriberName}` identifiers.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  @visibility(Lifecycle.Read)
+  subscribers?: string[];
 }
 
 /**
