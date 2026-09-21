@@ -528,11 +528,7 @@ using Azure.AI.Projects;
   "idleTimeout",
   "java"
 );
-@@clientName(
-  VoiceAgentEndOfUtteranceDetection.timeout_ms,
-  "timeout",
-  "java"
-);
+@@clientName(VoiceAgentEndOfUtteranceDetection.timeout_ms, "timeout", "java");
 @@clientName(
   VoiceAgentServerEventResponseAudioTimestampDelta.audio_duration_ms,
   "audioDuration",
@@ -553,11 +549,7 @@ using Azure.AI.Projects;
   "idleTimeout",
   "java"
 );
-@@clientName(
-  OpenAI.TranscriptTextUsageDuration.seconds,
-  "duration",
-  "java"
-);
+@@clientName(OpenAI.TranscriptTextUsageDuration.seconds, "duration", "java");
 @@clientName(VoiceAgentDefinition.subagent_config, "subagentConfiguration");
 @@clientName(
   VoiceAgentEndOfUtteranceDetectionModel.semantic_detection_v1_en,
