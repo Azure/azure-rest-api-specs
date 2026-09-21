@@ -45,5 +45,7 @@ options:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
   disable:
+    "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix": "Preserve existing C# property names while enabling client SDK linting."
     "@azure-tools/typespec-azure-resource-manager/arm-common-types-version": "New rule"
