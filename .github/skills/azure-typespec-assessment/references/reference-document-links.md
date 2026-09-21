@@ -4,21 +4,6 @@ Prefer explanatory guidance and its embedded examples. Keep a standalone
 official sample only when it clarifies a distinct pattern, such as extension
 resource scopes; samples illustrate usage, not additional requirements.
 
-## ARM Resource Type
-
-- [ARM resource types and modeling](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-type/): Define tracked, proxy, tenant, extension, and child resources with the standard ARM resource templates.
-- [Specific extension resource sample](https://azure.github.io/typespec-azure/docs/samples/resource-manager/resource-types/specific-extension/): Define an extension resource and its scoped operations with the `Extension.*` templates.
-- [Private endpoints](https://azure.github.io/typespec-azure/docs/howtos/arm/private-endpoints/): Add private endpoint connection resources and their standard operations to an ARM resource provider.
-- [Private links](https://azure.github.io/typespec-azure/docs/howtos/arm/private-links/): Add private link resources and their standard operations to an ARM resource provider.
-- [Network security perimeter](https://azure.github.io/typespec-azure/docs/howtos/arm/network-security-perimeter/): Add network security perimeter configuration resources and operations to an ARM service.
-- [TypeSpec.Rest decorators](https://typespec.io/docs/libraries/rest/reference/decorators/): Identify resource models and parent relationships with `@resource`, `@parentResource`, and related resource decorators.
-
-## ARM Resource Operation
-
-- [ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/): Use standard lifecycle and action templates, including `ArmResourceListByParent` and `ArmListBySubscription` for ARM lists.
-- [Azure.ResourceManager interface reference](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/reference/interfaces/): Look up exact signatures and parameters for ARM resource and extension operation templates.
-- [Azure.ResourceManager decorators](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/reference/decorators/): Identify ARM lifecycle roles through `@armResourceRead`, `@armResourceCreateOrUpdate`, `@armResourceUpdate`, `@armResourceDelete`, and `@armResourceList`.
-
 ## API Versioning
 
 - [Evolving APIs](https://azure.github.io/typespec-azure/docs/howtos/versioning/06-evolving-apis/): Primary guidance for changing existing versioned APIs: add, remove, rename, or modify resources, operations, parameters, and properties.
@@ -28,18 +13,39 @@ resource scopes; samples illustrate usage, not additional requirements.
 - [Add preview after stable](https://azure.github.io/typespec-azure/docs/howtos/versioning/04-preview-after-stable/): Add a preview version after the latest stable version.
 - [Add stable after stable](https://azure.github.io/typespec-azure/docs/howtos/versioning/05-stable-after-stable/): Add a stable version after the latest stable version.
 
+## Add ARM Resource Type
+
+- [ARM resource types and modeling](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-type/): Define tracked, proxy, tenant, extension, and child resources with the standard ARM resource templates.
+- [Specific extension resource sample](https://azure.github.io/typespec-azure/docs/samples/resource-manager/resource-types/specific-extension/): Define an extension resource and its scoped operations with the `Extension.*` templates.
+- [Private endpoints](https://azure.github.io/typespec-azure/docs/howtos/arm/private-endpoints/): Add private endpoint connection resources and their standard operations to an ARM resource provider.
+- [Private links](https://azure.github.io/typespec-azure/docs/howtos/arm/private-links/): Add private link resources and their standard operations to an ARM resource provider.
+- [Network security perimeter](https://azure.github.io/typespec-azure/docs/howtos/arm/network-security-perimeter/): Add network security perimeter configuration resources and operations to an ARM service.
+
+## Add ARM Resource Operation
+
+- [ARM resource operations](https://azure.github.io/typespec-azure/docs/howtos/arm/resource-operations/): Use standard lifecycle and action templates, including `ArmResourceListByParent` and `ArmListBySubscription` for ARM lists.
+- [Azure.ResourceManager interface reference](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/reference/interfaces/): Look up exact signatures and parameters for ARM resource and extension operation templates.
+
+## Resource Semantics
+
+- [TypeSpec.Rest decorators](https://typespec.io/docs/libraries/rest/reference/decorators/): Identify resource models, parents, lifecycle roles, and actions with `@resource`, `@parentResource`, `@readsResource`, `@listsResource`, and related decorators.
+- [Azure.ResourceManager decorators](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/reference/decorators/): Identify ARM lifecycle roles through `@armResourceRead`, `@armResourceCreateOrUpdate`, `@armResourceUpdate`, `@armResourceDelete`, and `@armResourceList`.
+
 ## Long-Running Operations (LRO)
 
 - [ARM long-running operations](https://azure.github.io/typespec-azure/docs/howtos/arm/long-running-operations/): Define ARM LROs and customize Azure-AsyncOperation, Location, and Retry-After response headers.
 - [Azure.Core long-running operations](https://azure.github.io/typespec-azure/docs/howtos/azure-core/long-running-operations/): Define polling and status-monitor patterns for Azure.Core asynchronous operations.
 
-## Paging
+## ARM Paging
 
 ARM list operations normally use the standard resource-operation templates
 above. Assess the template, resource scope, and paged response; do not require
 authors to repeat the low-level paging decorators supplied by templates.
 
 - [Azure.ResourceManager data types](https://azure.github.io/typespec-azure/docs/libraries/azure-resource-manager/reference/data-types/): Use standard ARM paging parameters such as `ArmTopParameter` and `ArmSkipParameter`.
+
+## Data-Plane Paging
+
 - [TypeSpec pagination](https://typespec.io/docs/standard-library/pagination/): Model data-plane paging with low-level `@list`, `@pageItems`, `@nextLink`, `@continuationToken`, `@pageSize`, and `@offset` decorators.
 
 ## Models and Enums

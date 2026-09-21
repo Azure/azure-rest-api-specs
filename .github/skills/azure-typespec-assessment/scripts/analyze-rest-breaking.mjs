@@ -1,7 +1,19 @@
 import path from "node:path";
 import { normalizeAutorestContract } from "./autorest-contract.mjs";
-import { parseArgs, isMain, readJson, runMain, writeJson } from "./cli.mjs";
+import { isMain, parseArgs, readJsonObject, runMain, writeJson } from "./cli.mjs";
 import { canonicalJson, stableId } from "./stable-id.mjs";
+
+/** @typedef {import("./runtime-types.js").AssessmentFact} AssessmentFact */
+/** @typedef {import("./runtime-types.js").AutorestArtifact} AutorestArtifact */
+/** @typedef {import("./runtime-types.js").BreakingAnalysis} BreakingAnalysis */
+/** @typedef {import("./runtime-types.js").BreakingCandidate} BreakingCandidate */
+/** @typedef {import("./runtime-types.js").BreakingChange} BreakingChange */
+/** @typedef {import("./runtime-types.js").NormalizedAutorestOperation} NormalizedAutorestOperation */
+/** @typedef {import("./runtime-types.js").NormalizedSchema} NormalizedSchema */
+/** @typedef {import("./runtime-types.js").PreparationBlocker} PreparationBlocker */
+/** @typedef {import("./runtime-types.js").PreparationManifest} PreparationManifest */
+/** @typedef {import("./runtime-types.js").PreparationProject} PreparationProject */
+/** @typedef {import("./runtime-types.js").SourceIndex} SourceIndex */
 
 const WIRE_CONSTRAINT_FIELDS = [
   "maximum",
@@ -19,61 +31,106 @@ const WIRE_CONSTRAINT_FIELDS = [
   "multipleOf",
 ];
 
+/**
+ * @param {{
+ *   manifest: string | PreparationManifest,
+ *   manifestPath?: string,
+ *   workRoot?: string,
+ *   sourceIndex?: SourceIndex,
+ *   output?: string
+ * }} options
+ */
 function loadInputs(options) {
-  const manifestPath = typeof options.manifest === "string" ? path.resolve(options.manifest) : undefined;
-  const workRoot = path.resolve(options.workRoot ?? (manifestPath ? path.dirname(manifestPath) : process.cwd()));
+  const manifestPath =
+    typeof options.manifest === "string" ? path.resolve(options.manifest) : undefined;
+  const workRoot = path.resolve(
+    options.workRoot ?? (manifestPath ? path.dirname(manifestPath) : process.cwd()),
+  );
   return {
     workRoot,
-    manifest: typeof options.manifest === "object" ? options.manifest : readJson(manifestPath),
-    sourceIndex: options.sourceIndex ?? readJson(path.join(workRoot, "source", "source-index.json")),
+    manifest:
+      typeof options.manifest === "object"
+        ? options.manifest
+        : /** @type {PreparationManifest} */ (
+            /** @type {unknown} */ (readJsonObject(path.resolve(options.manifest)))
+          ),
+    sourceIndex:
+      options.sourceIndex ??
+      /** @type {SourceIndex} */ (
+        /** @type {unknown} */ (readJsonObject(path.join(workRoot, "source", "source-index.json")))
+      ),
   };
 }
 
+/** @param {(AutorestArtifact & {status?: string}) | undefined} artifact */
 function artifactReady(artifact) {
-  return artifact && (!artifact.status || artifact.status === "succeeded") && artifact.files?.length;
+  return (
+    artifact && (!artifact.status || artifact.status === "succeeded") && artifact.files?.length
+  );
 }
 
+/**
+ * @param {PreparationProject} project
+ * @param {SourceIndex} sourceIndex
+ */
 function evidence(project, sourceIndex) {
   const sourceById = new Map(sourceIndex.sourceChanges.map((item) => [item.id, item]));
   const sourceChangeIds = (project.sourceChangeIds ?? []).filter((id) => sourceById.has(id)).sort();
   return {
     sourceChangeIds,
     declarationIds: sourceChangeIds
-      .flatMap((id) => sourceById.get(id).declarations ?? [])
+      .flatMap((id) => sourceById.get(id)?.declarations ?? [])
       .map((item) => item.id)
       .filter(Boolean)
       .sort(),
   };
 }
 
+/** @param {NormalizedAutorestOperation} operation */
 function logicalKey(operation) {
   return operation.operationId;
 }
 
+/**
+ * @param {Record<string, AssessmentFact>} facts
+ * @param {PreparationProject} project
+ * @param {"baseline" | "target"} comparisonRole
+ * @param {NormalizedAutorestOperation} operation
+ */
 function operationFact(facts, project, comparisonRole, operation) {
   const selection = project.artifactComparison?.[comparisonRole];
   const value = {
     projectId: project.id,
     comparisonRole,
-    sourceRevision: selection?.sourceRevision ?? (comparisonRole === "baseline" ? "base" : "current"),
+    sourceRevision:
+      selection?.sourceRevision ?? (comparisonRole === "baseline" ? "base" : "current"),
     sourceCommit: selection?.commit,
     apiVersion: selection?.apiVersion ?? operation.apiVersion,
     ...operation,
   };
   const id = stableId("rest-fact", value);
-  facts[id] = { id, ...value };
+  facts[id] = /** @type {AssessmentFact} */ (/** @type {unknown} */ ({ id, ...value }));
   return id;
 }
 
+/**
+ * @param {unknown} left
+ * @param {unknown} right
+ */
 function same(left, right) {
   return left === undefined || right === undefined
     ? left === right
     : canonicalJson(left) === canonicalJson(right);
 }
 
+/**
+ * @param {NormalizedAutorestOperation[]} base
+ * @param {NormalizedAutorestOperation[]} current
+ */
 function pairs(base, current) {
   const currentByKey = new Map(current.map((item) => [logicalKey(item), item]));
   const used = new Set();
+  /** @type {{before?: NormalizedAutorestOperation, after?: NormalizedAutorestOperation}[]} */
   const result = [];
   for (const before of base) {
     const after = currentByKey.get(logicalKey(before));
@@ -84,19 +141,29 @@ function pairs(base, current) {
   return result;
 }
 
+/**
+ * @param {NormalizedSchema | undefined} before
+ * @param {NormalizedSchema | undefined} after
+ * @param {string} [location]
+ * @returns {BreakingChange[]}
+ */
 function schemaChanges(before, after, location = "body") {
   if (same(before, after)) return [];
   if (!before || !after) return [{ rule: "wire-schema-changed", location }];
+  /** @type {BreakingChange[]} */
   const changes = [];
   if (before.kind !== after.kind || before.type !== after.type) {
     return [{ rule: "wire-type-changed", location }];
   }
   if (before.nullable && !after.nullable) changes.push({ rule: "nullable-restricted", location });
-  const constraints = (schema) => Object.fromEntries(
-    WIRE_CONSTRAINT_FIELDS
-      .filter((field) => schema[field] !== undefined)
-      .map((field) => [field, schema[field]]),
-  );
+  /** @param {NormalizedSchema} schema */
+  const constraints = (schema) =>
+    Object.fromEntries(
+      WIRE_CONSTRAINT_FIELDS.filter((field) => schema[field] !== undefined).map((field) => [
+        field,
+        schema[field],
+      ]),
+    );
   if (!same(constraints(before), constraints(after))) {
     changes.push({ rule: "wire-schema-changed", location });
   }
@@ -106,13 +173,18 @@ function schemaChanges(before, after, location = "body") {
     for (const property of before.properties ?? []) {
       const current = afterProperties.get(property.name);
       if (!current) {
-        changes.push({ rule: "serialized-property-removed", location: `${location}.${property.name}` });
+        changes.push({
+          rule: "serialized-property-removed",
+          location: `${location}.${property.name}`,
+        });
         continue;
       }
       if (!property.required && current.required) {
         changes.push({ rule: "property-required", location: `${location}.${property.name}` });
       }
-      changes.push(...schemaChanges(property.schema, current.schema, `${location}.${property.name}`));
+      changes.push(
+        ...schemaChanges(property.schema, current.schema, `${location}.${property.name}`),
+      );
     }
     for (const property of after.properties ?? []) {
       if (!beforeProperties.has(property.name) && property.required) {
@@ -148,45 +220,106 @@ function schemaChanges(before, after, location = "body") {
   return changes;
 }
 
+/**
+ * @param {string} rule
+ * @returns {"high" | "medium"}
+ */
 function severity(rule) {
   return ["paging-behavior-changed", "lro-behavior-changed", "enum-closed"].includes(rule)
     ? "medium"
     : "high";
 }
 
+/**
+ * @param {BreakingChange} change
+ * @param {string} operationId
+ */
 function description(change, operationId) {
   const subject = change.location ? ` ${change.location}` : "";
   const removed = change.removed?.length ? ` Removed values: ${change.removed.join(", ")}.` : "";
+  /** @type {Record<string, [string, string]>} */
   const messages = {
-    "operation-removed": [`Operation ${operationId} is no longer emitted.`, `Existing ${operationId} requests remain available.`],
-    "method-changed": [`Operation ${operationId} uses a different HTTP method.`, `Operation ${operationId} keeps its existing HTTP method.`],
-    "path-changed": [`Operation ${operationId} uses a different route.`, `Operation ${operationId} keeps its existing route.`],
-    "parameter-removed": [`Operation ${operationId} no longer accepts parameter${subject}.`, `Existing callers can continue sending parameter${subject}.`],
-    "required-parameter-added": [`Operation ${operationId} now requires parameter${subject}.`, `Existing calls remain valid without parameter${subject}.`],
-    "parameter-required": [`Parameter${subject} is now required by ${operationId}.`, `Parameter${subject} remains optional.`],
-    "parameter-location-changed": [`Parameter${subject} moved to another wire location.`, `Parameter${subject} remains at its existing wire location.`],
-    "parameter-wire-type-changed": [`Parameter${subject} has a different wire type.`, `Parameter${subject} keeps its existing wire type.`],
-    "request-body-required": [`Operation ${operationId} now requires a request body.`, `Existing body-less requests remain valid.`],
-    "response-status-removed": [`Operation ${operationId} no longer defines response${subject}.`, `Operation ${operationId} preserves response${subject}.`],
-    "response-header-removed": [`Operation ${operationId} no longer returns header${subject}.`, `Operation ${operationId} preserves header${subject}.`],
-    "response-header-changed": [`Operation ${operationId} changed header${subject}.`, `Operation ${operationId} preserves header${subject}.`],
-    "paging-behavior-changed": [`Operation ${operationId} changed paging wire behavior.`, `Existing paging wire behavior is preserved.`],
-    "lro-behavior-changed": [`Operation ${operationId} changed long-running HTTP behavior.`, `Existing long-running HTTP behavior is preserved.`],
+    "operation-removed": [
+      `Operation ${operationId} is no longer emitted.`,
+      `Existing ${operationId} requests remain available.`,
+    ],
+    "method-changed": [
+      `Operation ${operationId} uses a different HTTP method.`,
+      `Operation ${operationId} keeps its existing HTTP method.`,
+    ],
+    "path-changed": [
+      `Operation ${operationId} uses a different route.`,
+      `Operation ${operationId} keeps its existing route.`,
+    ],
+    "parameter-removed": [
+      `Operation ${operationId} no longer accepts parameter${subject}.`,
+      `Existing callers can continue sending parameter${subject}.`,
+    ],
+    "required-parameter-added": [
+      `Operation ${operationId} now requires parameter${subject}.`,
+      `Existing calls remain valid without parameter${subject}.`,
+    ],
+    "parameter-required": [
+      `Parameter${subject} is now required by ${operationId}.`,
+      `Parameter${subject} remains optional.`,
+    ],
+    "parameter-location-changed": [
+      `Parameter${subject} moved to another wire location.`,
+      `Parameter${subject} remains at its existing wire location.`,
+    ],
+    "parameter-wire-type-changed": [
+      `Parameter${subject} has a different wire type.`,
+      `Parameter${subject} keeps its existing wire type.`,
+    ],
+    "request-body-required": [
+      `Operation ${operationId} now requires a request body.`,
+      `Existing body-less requests remain valid.`,
+    ],
+    "response-status-removed": [
+      `Operation ${operationId} no longer defines response${subject}.`,
+      `Operation ${operationId} preserves response${subject}.`,
+    ],
+    "response-header-removed": [
+      `Operation ${operationId} no longer returns header${subject}.`,
+      `Operation ${operationId} preserves header${subject}.`,
+    ],
+    "response-header-changed": [
+      `Operation ${operationId} changed header${subject}.`,
+      `Operation ${operationId} preserves header${subject}.`,
+    ],
+    "paging-behavior-changed": [
+      `Operation ${operationId} changed paging wire behavior.`,
+      `Existing paging wire behavior is preserved.`,
+    ],
+    "lro-behavior-changed": [
+      `Operation ${operationId} changed long-running HTTP behavior.`,
+      `Existing long-running HTTP behavior is preserved.`,
+    ],
   };
-  if (messages[change.rule]) return { actual: messages[change.rule][0], expected: messages[change.rule][1] };
+  if (messages[change.rule])
+    return { actual: messages[change.rule][0], expected: messages[change.rule][1] };
   return {
     actual: `Operation ${operationId} changed${subject}.${removed}`.trim(),
     expected: `Operation ${operationId} preserves the existing wire contract for${subject || " the affected schema"}.`,
   };
 }
 
+/**
+ * @param {NormalizedAutorestOperation} before
+ * @param {NormalizedAutorestOperation | undefined} after
+ * @returns {BreakingChange[]}
+ */
 function compareOperation(before, after) {
   if (!after) return [{ rule: "operation-removed" }];
+  /** @type {BreakingChange[]} */
   const changes = [];
   if (before.method !== after.method) changes.push({ rule: "method-changed" });
-  if (before.path !== after.path || before.routeSource !== after.routeSource) changes.push({ rule: "path-changed" });
+  if (before.path !== after.path || before.routeSource !== after.routeSource)
+    changes.push({ rule: "path-changed" });
 
-  const afterParameters = new Map(after.parameters.map((item) => [`${item.in}:${item.name}`, item]));
+  const afterParameters = new Map(
+    after.parameters.map((item) => [`${item.in}:${item.name}`, item]),
+  );
   const afterByName = new Map(after.parameters.map((item) => [item.name, item]));
   const beforeKeys = new Set(before.parameters.map((item) => `${item.in}:${item.name}`));
   for (const parameter of before.parameters) {
@@ -203,39 +336,63 @@ function compareOperation(before, after) {
     if (!parameter.required && current.required) {
       changes.push({ rule: "parameter-required", location: parameter.name });
     }
-    if (schemaChanges(parameter.schema, current.schema, parameter.name).length ||
-        parameter.collectionFormat !== current.collectionFormat) {
+    if (
+      schemaChanges(parameter.schema, current.schema, parameter.name).length ||
+      parameter.collectionFormat !== current.collectionFormat
+    ) {
       changes.push({ rule: "parameter-wire-type-changed", location: parameter.name });
     }
   }
   for (const parameter of after.parameters) {
-    if (!beforeKeys.has(`${parameter.in}:${parameter.name}`) && parameter.required && !before.parameters.some((item) => item.name === parameter.name)) {
+    if (
+      !beforeKeys.has(`${parameter.in}:${parameter.name}`) &&
+      parameter.required &&
+      !before.parameters.some((item) => item.name === parameter.name)
+    ) {
       changes.push({ rule: "required-parameter-added", location: parameter.name });
     }
   }
 
   if (!before.request && after.request?.required) changes.push({ rule: "request-body-required" });
   if (before.request && after.request) {
-    if (!before.request.required && after.request.required) changes.push({ rule: "request-body-required" });
-    if (before.request.kind !== after.request.kind) changes.push({ rule: "wire-schema-changed", location: "request body" });
+    if (!before.request.required && after.request.required)
+      changes.push({ rule: "request-body-required" });
+    if (before.request.kind !== after.request.kind)
+      changes.push({ rule: "wire-schema-changed", location: "request body" });
     else if (before.request.kind === "body") {
       changes.push(...schemaChanges(before.request.schema, after.request.schema, "request body"));
     } else {
-      const beforeMembers = { kind: "object", properties: before.request.members.map((item) => ({
-        name: item.name,
-        required: item.required,
-        schema: item.schema,
-      })) };
-      const afterMembers = { kind: "object", properties: after.request.members.map((item) => ({
-        name: item.name,
-        required: item.required,
-        schema: item.schema,
-      })) };
+      const beforeRequestMembers = before.request.members;
+      const afterRequestMembers = after.request.members;
+      if (!beforeRequestMembers || !afterRequestMembers) {
+        throw new TypeError("Multipart requests must define members.");
+      }
+      const beforeMembers = /** @type {NormalizedSchema} */ (
+        /** @type {unknown} */ ({
+          kind: "object",
+          properties: beforeRequestMembers.map((item) => ({
+            name: item.name,
+            required: item.required,
+            schema: item.schema,
+          })),
+        })
+      );
+      const afterMembers = /** @type {NormalizedSchema} */ (
+        /** @type {unknown} */ ({
+          kind: "object",
+          properties: afterRequestMembers.map((item) => ({
+            name: item.name,
+            required: item.required,
+            schema: item.schema,
+          })),
+        })
+      );
       changes.push(...schemaChanges(beforeMembers, afterMembers, "multipart request"));
     }
   }
 
   const afterResponses = new Map(after.responses.map((item) => [item.status, item]));
+  /** @param {string} status */
   const matchingResponse = (status) => {
     const exact = afterResponses.get(status);
     if (exact) return exact;
@@ -274,15 +431,31 @@ function compareOperation(before, after) {
   });
 }
 
+/**
+ * @param {{
+ *   manifest: string | PreparationManifest,
+ *   manifestPath?: string,
+ *   workRoot?: string,
+ *   sourceIndex?: SourceIndex,
+ *   output?: string
+ * }} options
+ * @returns {BreakingAnalysis}
+ */
 export function analyzeRestBreaking(options) {
   const { workRoot, manifest, sourceIndex } = loadInputs(options);
+  /** @type {Record<string, AssessmentFact>} */
   const facts = {};
+  /** @type {BreakingCandidate[]} */
   const candidates = [];
+  /** @type {PreparationBlocker[]} */
   const blockers = [];
   let analyzedProjects = 0;
-  for (const project of [...(manifest.projects ?? [])].sort((left, right) => left.id.localeCompare(right.id))) {
+  for (const project of [...(manifest.projects ?? [])].sort((left, right) =>
+    left.id.localeCompare(right.id),
+  )) {
     const baseArtifact = project.artifacts?.baseline?.autorest ?? project.artifacts?.base?.autorest;
-    const currentArtifact = project.artifacts?.target?.autorest ?? project.artifacts?.current?.autorest;
+    const currentArtifact =
+      project.artifacts?.target?.autorest ?? project.artifacts?.current?.autorest;
     if (!artifactReady(baseArtifact) || !artifactReady(currentArtifact)) {
       blockers.push({
         code: "autorest-artifacts-unavailable",
@@ -304,6 +477,7 @@ export function analyzeRestBreaking(options) {
         const afterFactId = after ? operationFact(facts, project, "target", after) : undefined;
         for (const change of changes) {
           const text = description(change, before.operationId);
+          /** @type {Omit<BreakingCandidate, "id" | "contractChange">} */
           const candidate = {
             rule: change.rule,
             defaultSeverity: severity(change.rule),
@@ -312,7 +486,7 @@ export function analyzeRestBreaking(options) {
             operationIds: [before.operationId],
             sourceChangeIds: source.sourceChangeIds,
             declarationIds: source.declarationIds,
-            evidenceFactIds: [beforeFactId, afterFactId].filter(Boolean),
+            evidenceFactIds: [beforeFactId, afterFactId].filter((id) => id !== undefined),
             reviewRequired: true,
           };
           const id = stableId("rest", candidate);
@@ -321,14 +495,21 @@ export function analyzeRestBreaking(options) {
       }
       analyzedProjects += 1;
     } catch (error) {
-      blockers.push({ code: "autorest-contract-unsupported", projectId: project.id, message: error.message });
+      blockers.push({
+        code: "autorest-contract-unsupported",
+        projectId: project.id,
+        message: error instanceof Error ? error.message : String(error),
+      });
     }
   }
   candidates.sort((left, right) => left.id.localeCompare(right.id));
+  /** @type {BreakingAnalysis} */
   const result = {
     schemaVersion: 1,
     status: analyzedProjects ? "ready" : "blocked",
-    facts: Object.fromEntries(Object.entries(facts).sort(([left], [right]) => left.localeCompare(right))),
+    facts: Object.fromEntries(
+      Object.entries(facts).sort(([left], [right]) => left.localeCompare(right)),
+    ),
     candidates,
     blockers,
   };
@@ -337,10 +518,15 @@ export function analyzeRestBreaking(options) {
 }
 
 if (isMain(import.meta.url)) {
-  runMain(async () => {
+  void runMain(() => {
     const args = parseArgs(process.argv.slice(2), { required: ["manifest", "output"] });
-    const result = analyzeRestBreaking(args);
-    console.log(path.resolve(args.output));
+    const manifest = args.manifest;
+    const output = args.output;
+    if (typeof manifest !== "string" || typeof output !== "string") {
+      throw new TypeError("--manifest and --output must be strings.");
+    }
+    const result = analyzeRestBreaking({ manifest, output });
+    console.log(path.resolve(output));
     if (result.status === "blocked") process.exitCode = 1;
   });
 }

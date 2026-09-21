@@ -20,8 +20,7 @@ Also read only:
   [downstream cases](../downstream-breaking-cases.md) and
   [candidate rules](../downstream-candidate-rules.md);
 - the [agentic search procedure](../agentic-search.md);
-- the [official document catalog](../reference-document-links.md) when targeted
-  discovery or missing canonical metadata requires it;
+- the [official document catalog](../reference-document-links.md);
 - the [documentation checks](../document-quality.md).
 
 Do not recursively list the work directory, broadly search report artifacts,
@@ -40,12 +39,8 @@ operations, facts, and allowed dimensions. Never modify `model-input.json`.
 The compact decision file must contain one concise result per supplied Semantic
 review unit and exact deterministic and inferred REST/downstream candidate
 coverage. Write one Azure Guidelines decision per supplied compliance search
-request. Treat category tags and required routing as immutable. Complete
-discovery gaps, retrieve or reuse required documents, and record the documents
-actually reviewed for each intent. Batch independent scoped evidence reads and
-When there are no compliance search
-requests, leave discovery results, retrieval results, search blockers, and
-compliance judgments empty. Do not read
+request. When there are no compliance search requests, leave catalog scores,
+retrieval results, search blockers, and compliance judgments empty. Do not read
 raw AutoRest/TCGC output, compiler logs, unrelated unchanged source, prior
 answers, or use catalog descriptions as guidance. Candidate and review-unit
 evidence omitted from the bounded input is available only through declared

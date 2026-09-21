@@ -14,8 +14,8 @@ Included:
 - semantic understanding from changed TypeSpec and AutoRest;
 - REST breaking candidates from AutoRest;
 - downstream SDK breaking candidates from TCGC;
-- documentation-grounded Azure Guidelines assessment using deterministic
-  reference-category tags, required-document routing, and targeted discovery;
+- documentation-grounded Azure Guidelines assessment from four official
+  documents ranked and fetched once across all Semantic intents;
 - one deterministic check that each changed compiler declaration has nonempty
   effective documentation;
 - optional bounded AI inference for source hunks that deterministic analysis
@@ -494,11 +494,7 @@ File: `source/source-index.json`
             "startLine": 10,
             "endLine": 15
           },
-          "lines": [
-            " model Widget {",
-            "-  name: string;",
-            "+  name: WidgetName;"
-          ],
+          "lines": [" model Widget {", "-  name: string;", "+  name: WidgetName;"],
           "declarationOccurrenceIds": ["declaration-occurrence-<hash>"],
           "normalizedChanges": [
             {
@@ -607,8 +603,7 @@ The original plan used AutoRest-change-first review units:
       "changedAspects": ["responses"],
       "sourceChangeIds": ["source-<hash>"],
       "declarationIds": ["declaration-<hash>"],
-      "referenceCategories": ["arm-resource-type"],
-      "referenceCategoryEvidence": [],
+      "catalogRanking": [],
       "operationIds": ["operation-<hash>"],
       "beforeFactIds": ["operation-<hash>"],
       "afterFactIds": ["operation-<hash>"]
@@ -1224,39 +1219,40 @@ traceability, but the Azure Guidelines prompt is bounded to the compact intent
 profile above. Operation facts are excluded because Azure Guidelines evaluates the
 TypeSpec design intent, not each compiled operation.
 
-### Select guidance from category tags
+### Select the four highest-scoring documents
 
-After existing grouping, publication consolidation, and intent-type assignment
-finish, deterministic annotation adds `referenceCategories` and supporting
-evidence without changing IDs, hunk membership, or operation mappings. The
-three existing `intentType` values remain unchanged.
+Combine all Semantic query profiles and score every entry in
+`reference-document-links.md` once for the assessment:
 
-Eight tags map to the catalog headings: `arm-resource-type`,
-`arm-resource-operation`, `api-versioning`, `long-running-operation`, `paging`,
-`models-and-enums`, `decorators`, and `warnings`. An intent may have several
-tags. An empty array creates targeted discovery rather than an assumed pass.
-Informational version intents retain their exclusions despite descriptive tags.
+| Signal           | Points | Meaning                                                                                                                                    |
+| ---------------- | -----: | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Exact symbol     |      4 | Catalog title or description names a changed decorator, template, base type, interface, or other exact TypeSpec construct.                 |
+| Pattern/category |      3 | The catalog section directly matches the changed resource, operation, versioning, LRO, paging, model, enum, decorator, or warning pattern. |
+| Service plane    |      2 | The document applies to one or more intents' ARM or data-plane service kind.                                                               |
+| Change context   |      1 | The document matches the add/remove/modify action or the stable/preview version transition.                                                |
 
-Canonical routing chooses documents from tags, service plane, and changed
-constructs. Global scoring, ranking, and the four-document quota are removed.
-Required selections cannot be displaced by unrelated documents. **Evolving
-APIs** is primary for existing-version evolution, even without changed version
-decorators. ARM paging requires ARM template guidance, not low-level data-plane
-decorators.
+Scores are additive, from 0 through 10. Rank the complete catalog by descending
+score and break ties by catalog order. Select the first four retrievable
+documents, recording each score component and a concise selection rationale.
+Do not allow the Agent to add an uncataloged URL.
 
-Deduplicate required URLs and retrieve missing content concurrently. Reuse
-sufficient content and original provenance already available in the Agent
-session; `retrievalSource` distinguishes `network` from `session-reuse`.
-Preserve original timestamps and content hashes. No persistent cache or loader
-is introduced. Missing sections, lost context, or explicit refresh requests
-require retrieval rather than unsupported citations.
+Evolving APIs is the primary versioning reference for changes to existing
+versioned APIs, including changes that omit a version decorator. It appears
+first in the catalog for ties; relevance scoring still determines selection.
+Distinguish ARM template-based lists from data-plane low-level paging when
+scoring service-plane and pattern matches.
 
-For explicit uncovered concerns, the Agent searches the canonical catalog and
-records selected/no-match/blocked discovery outcomes. Necessary references
-outside the catalog are explicit coverage gaps, not invented catalog IDs.
-Missing required content or blocked discovery affects its owning intents.
-Do not fetch filler documents, repeat cyclic references, or silently discard
-required guidance to meet a budget.
+For an intent that adds an ARM child resource in a new API version, relevant
+guidance includes resource modeling, lifecycle operations, resource decorators,
+and Evolving APIs. Select and order documents from the actual changed constructs
+using the rubric, not a fixed example ranking. Fetched sections must still prove
+applicability.
+
+Fetch the initial four URLs concurrently with `web_fetch` exactly once. Store
+the fetched markdown by canonical URL and content hash for the assessment run. When
+retrieval fails, retain the failed attempt as provenance and fetch the
+next-ranked catalog entry until four documents have been retrieved or the
+catalog is exhausted.
 
 ### Extract applicable guidance
 
@@ -1271,8 +1267,8 @@ section. Retain:
 - `no-relevant-guidance` when the fetched page does not govern the intent.
 
 Do not treat the catalog description, a search-result summary, or a generated
-code example as documentation evidence. Additional selections require targeted
-discovery provenance from the canonical catalog.
+code example as documentation evidence. Do not broaden beyond the ranked
+catalog during this phase.
 
 ### Assess the Semantic intent once
 
@@ -1321,7 +1317,8 @@ the same expected behavior. This is a presentation-only projection:
 - `failed`: one or more intent decisions are `applicable-fail`.
 - `passed`: every Semantic intent is `applicable-pass` or
   `no-applicable-guidance`, with no incomplete evidence.
-- `not-assessed`: required retrieval/review or targeted discovery is incomplete.
+- `not-assessed`: retrieval/evidence is insufficient or fewer than four
+  documents can be retrieved after catalog exhaustion.
 
 Documents with `no-relevant-guidance` support a
 `no-applicable-guidance` decision but do not support a pass against a specific
@@ -1331,7 +1328,7 @@ REST/downstream scoped code safety.
 
 ### Bounded Agent behavior
 
-The Agent performs targeted discovery, document search, excerpt selection, and
+The Agent performs catalog scoring, document search, excerpt selection, and
 one intent-level evidence comparison in the existing bounded judgment phase.
 It may not change Semantic intent membership, invent source IDs, invent URLs,
 or use unfetched knowledge. The judgment schema requires exactly one
@@ -1341,15 +1338,16 @@ unknown, duplicate, or missing intent decisions.
 The same Agent phase records one shared retrieval and extracted evidence set
 with its per-intent choices in
 `agent-workspace/agent-decisions.json`. The compact versioned contract keeps
-only Agent-authored summaries, decisions, discovery outcomes, original document
-provenance and byte counts, extracted guidance, reviewed catalog IDs, failed
-retrievals, confidence, and blockers. It does not repeat canonical catalog
-metadata, query profiles, source/hunk IDs, accounting, or final output wrappers.
+only Agent-authored summaries, decisions, score signals and rationale keyed by
+stable catalog ID, supplied `web_fetch` provenance and byte counts, extracted
+guidance, failed retrievals, confidence, and blockers. It does not repeat
+canonical catalog metadata, query profiles, source/hunk IDs, calculated
+totals/ranks, accounting, or final output wrappers.
 
 `materialize-assessment-results.mjs` then verifies canonical artifact hashes
-and exact ID coverage/ownership. It joins canonical metadata, verifies required
-selection and review coverage and targeted discovery outcomes, derives
-accounting, and atomically writes `inference.json`
+and exact ID coverage/ownership. It joins canonical metadata, calculates score
+totals and stable ordering, verifies the first four retrievable documents and
+fallback sequence, derives accounting, and atomically writes `inference.json`
 when required, `compliance-search-evidence.json`, and
 `assessment-judgment.json`. It preserves Agent-supplied retrieval provenance
 and derives each retained guidance excerpt's declaration applicability as the
@@ -1362,20 +1360,93 @@ suppression analysis, or semantic judgment.
 Guarded finalization remains authoritative for final assembly, validation, and
 rendering.
 
-The authoritative shared-evidence shape is defined in
-`scripts/compliance-search-evidence.schema.json`. Version 3 replaces global
-rankings with per-intent `documentSelections`, shared `documents`, discovery
-results, retrieval attempts, and accounting. Selection records retain the
-owning intent and deterministic rule or discovery rationale. Shared documents
-contain original retrieval provenance and only cited normative excerpts.
-Required selections are reconstructed from immutable requests; the Agent
-cannot waive them. Older ranked evidence must be regenerated before entering
-this workflow, not silently accepted as complete required-document coverage.
+The materialized shared evidence has this existing authoritative shape:
+
+```json
+{
+  "schemaVersion": 2,
+  "queryProfiles": [
+    {
+      "reviewUnitId": "semantic-<hash>",
+      "queryProfile": {}
+    }
+  ],
+  "catalogRanking": [
+    {
+      "rank": 1,
+      "catalogOrder": 3,
+      "title": "ARM resource types and modeling",
+      "canonicalUrl": "https://azure.github.io/typespec-azure/docs/...",
+      "score": {
+        "exactSymbol": 4,
+        "patternCategory": 3,
+        "servicePlane": 2,
+        "changeContext": 1,
+        "total": 10
+      },
+      "selectionRationale": "Matches the changed ARM child-resource pattern."
+    }
+  ],
+  "rankedDocuments": [
+    {
+      "rank": 1,
+      "catalogOrder": 3,
+      "title": "ARM resource types and modeling",
+      "canonicalUrl": "https://azure.github.io/typespec-azure/docs/...",
+      "score": {
+        "exactSymbol": 4,
+        "patternCategory": 3,
+        "servicePlane": 2,
+        "changeContext": 1,
+        "total": 10
+      },
+      "selectionRationale": "Matches the changed ARM child-resource pattern.",
+      "retrieval": {
+        "status": "fetched",
+        "retrievedAt": "2026-01-01T00:00:00.000Z",
+        "contentHash": "sha256:<hash>"
+      },
+      "guidance": [
+        {
+          "section": "Resource types",
+          "excerpt": "Concise normative guidance.",
+          "queryTerms": ["TrackedResource"],
+          "examples": ["model Widget is TrackedResource<WidgetProperties> {}"],
+          "applicableDeclarationIds": ["declaration-<hash>"]
+        }
+      ],
+      "noRelevantGuidance": false
+    }
+  ],
+  "retrievalAttempts": [
+    {
+      "rank": 4,
+      "canonicalUrl": "https://azure.github.io/typespec-azure/docs/...",
+      "status": "failed",
+      "error": "Fetch failure."
+    }
+  ],
+  "blockers": [],
+  "inputAccounting": {
+    "catalogEntriesScored": 0,
+    "documentsFetched": 0,
+    "documentBytesFetched": 0,
+    "guidanceExcerptsRetained": 0,
+    "guidanceExcerptBytesRetained": 0
+  }
+}
+```
+
+`catalogRanking` contains every catalog URL in score order once.
+`rankedDocuments` contains the first four successfully fetched entries from
+that shared ranking unless catalog exhaustion is recorded as a blocker.
+`retrievalAttempts` retains failed top-ranked URLs and their replacement
+history.
 
 The HTML report will show Azure Guidelines by Semantic intent:
 
 - overall status and coverage;
-- selected documents, selection provenance, and session-reuse indicators;
+- the four ranked documents and selection scores;
 - one intent-level expected/actual comparison with supporting TypeSpec
   evidence;
 - failing intent assessments expanded by default;
@@ -1744,7 +1815,7 @@ deterministic aggregation evidence and are not Agent decision units.
 
 Every Semantic intent must have exactly one Azure Guidelines decision. Every
 applicable guidance catalog ID in the compact input must identify a
-successfully retrieved or session-reused `documents` entry, and all source, hunk, and
+successfully fetched `rankedDocuments` entry, and all source, hunk, and
 declaration IDs must already exist in canonical requests. Decisions may quote
 only guidance recorded in compact fetched-document evidence; the Agent cannot
 add URLs, evidence,
@@ -1930,10 +2001,17 @@ File: `assessment.json`
           "declarationIds": ["declaration-<hash>"],
           "documents": [
             {
+              "rank": 1,
               "catalogOrder": 3,
               "title": "ARM resource types and modeling",
               "canonicalUrl": "https://azure.github.io/typespec-azure/docs/...",
-              "retrievalSource": "network",
+              "score": {
+                "exactSymbol": 4,
+                "patternCategory": 3,
+                "servicePlane": 2,
+                "changeContext": 1,
+                "total": 10
+              },
               "retrievedAt": "2026-01-01T00:00:00.000Z",
               "contentHash": "sha256:<hash>",
               "guidance": [
@@ -2104,10 +2182,11 @@ evidence. Final validation independently checks:
 7. reciprocal semantic/finding relationships;
 8. complete downstream aggregation traceability;
 9. derived counts, dimension status, and scoped safety;
-10. required and positively discovered documents retrieved or reused and
-    reviewed for each owning intent, or explicit incomplete-coverage blockers;
-11. unique canonical documents, selection provenance, completed discovery
-    requests, and query profiles identical to deterministic requests;
+10. exactly four successfully fetched ranked documents shared by all Semantic intents,
+    or an explicit catalog-exhaustion blocker;
+11. valid 0-10 score components, exact totals, unique catalog URLs, rank
+    ordering, catalog-order tie breaking, and query profiles identical to
+    their deterministic requests;
 12. canonical URL, retrieval timestamp, content hash, section, excerpt, and
     matched-term provenance for every guidance item;
 13. exact one-time Azure Guidelines decision coverage for every Semantic intent;
@@ -2222,8 +2301,8 @@ Azure Guidelines rendering is source-first:
 - render one shared expected/guidance block and one actual-evidence entry per
   affected Semantic intent, preserving every finding anchor and intent link;
 - under **Actual**, show at most two changed-code snippets ranked by relevance;
-- show category badges on Semantic intents and shared selected documents with
-  selection reasons, original retrieval provenance, and canonical source links;
+- under each Semantic intent, show the four ranked documents, score
+  components, fetched section, and canonical source link;
 - show one fetched-guidance synthesis beside the intent's representative
   changed TypeSpec evidence;
 - expand `applicable-fail` intent assessments by default;
@@ -2476,9 +2555,9 @@ Preserve local assessment reports and user-owned eval changes.
 - Every Semantic intent produces one bounded Azure Guidelines query profile from its
   changed constructs, representative source evidence, and aggregate operation
   counts.
-- Deterministic category routing selects required official documents with
-  targeted discovery for gaps, shared same-session content reuse, and explicit
-  failures rather than a global document-count cutoff.
+- Catalog scoring selects the four highest-ranked retrievable official
+  documents once across all intents, with failed attempts and
+  replacements preserved.
 - Fetched guidance has canonical URL, content hash, section, excerpt, and
   query-term provenance.
 - Every Semantic review unit records deterministic hunk coverage directly in
@@ -2496,14 +2575,14 @@ Preserve local assessment reports and user-owned eval changes.
 - Documentation findings do not introduce guessed severity or change scoped
   REST/downstream safety.
 - Final JSON rejects unsupported or incomplete results.
-- HTML presents selected documentation and intent-level Azure Guidelines results
+- HTML presents ranked documentation and intent-level Azure Guidelines results
   without conflating them with scoped REST/downstream code safety.
 - Focused tests, 12 retained report replays, strict skill lint, and real PR
   43308, 44882, and 44988 smoke tests pass.
 - PR 44988 produces 11 coherent Semantic intents, no REST breaking finding for
   the new-version transition, and two grouped Service Gateway downstream SDK
-  method breaks. ARM resource-operation intents retrieve and review the
-  governing operation-template guidance without changing their group boundaries.
+  method breaks, and ranks the expected four documents for the AddressPrefixSet
+  intent.
 
 ## 14. Technical challenges
 

@@ -16,27 +16,18 @@ Resolve that path relative to the skill directory and do not search for it.
 
 Write `agent-workspace\agent-decisions.json` conforming to
 `scripts\agent-decisions.schema.json`. It contains only Agent-authored
-summaries, REST/downstream choices, optional inference, targeted discovery
-results keyed by supplied request IDs, document provenance and bytes,
+summaries, REST/downstream choices, optional inference, four score signals and
+rationale keyed by stable `catalogId`, fetched-document provenance and bytes,
 extracted guidance, failed retrievals, compliance judgments, confidence, and
 blockers. Do not repeat catalog metadata, query profiles, source/hunk IDs,
-canonical category/routing evidence, calculated accounting, or final output wrappers. Guidance excerpts
+calculated totals/ranks/accounting, or final output wrappers. Guidance excerpts
 omit declaration IDs. Each compliance judgment selects from its prefilled
 intent-scoped qualified `declarationNames` and cites guidance by `catalogId`
-plus section. The materializer requires every name to resolve to an unambiguous
-compiler declaration identity within that owning intent, retaining its matching
-before/current declaration IDs.
-
-Version 2 uses `discoveryResults` (`requestId`, `intentId`, `outcome`,
-`catalogIds`, `rationale`) for canonical requests. `additionalSelections` records
-`intentId`, `sourceCatalogId`, `sourceSection`, `trigger` (`linked-reference` or
-`uncovered-concern`), `outcome`, `catalogIds`, and `rationale`. Outcomes are
-`selected`, `no-match`, or `blocked`. Deterministic `classification-blocked`
-requests require `blocked`; the Agent cannot clear missing/conflicting evidence
-with a no-match. Search blockers are scoped by `reviewUnitId`.
+plus section. The materializer requires every name to resolve to exactly one
+canonical declaration ID within that owning intent.
 
 Run `materialize-assessment-results.mjs --work <work-directory>`. It verifies
-canonical hashes, required selection/review coverage, and exact ownership; derives canonical
+canonical hashes and exact coverage/ownership; derives ranks, canonical
 linkage, guidance applicability, and accounting; drops uncited excerpts; and
 atomically writes the existing inference, evidence, and judgment formats. It
 never fetches documents or invents provenance, evidence, or judgment.
@@ -54,13 +45,11 @@ relationships from other findings.
 
 The materializer writes `compliance-search-evidence.json` conforming to
 `scripts\compliance-search-evidence.schema.json`. Preserve one unchanged query
-profile per `complianceSearchRequests` item, then store intent-scoped
-`documentSelections`, shared `documents`, and targeted discovery outcomes.
-There are no scores, ranks, or minimum document counts. The shared search
-records original retrieval provenance, `retrievalSource` (`network` or
-`session-reuse`), declaration applicability, guidance, and actual failed
-attempts. Every required or discovered document must be reviewed before a
-completed owning-intent decision. Catalog descriptions select documents but never serve
+profile per `complianceSearchRequests` item, then store one complete catalog
+ranking and four shared fetched catalog documents, or an explicit
+catalog-exhaustion blocker. The shared search records score components, retrieval
+provenance, declaration applicability, relevant guidance, and failed
+replacement attempts. Catalog descriptions select documents but never serve
 as guidance.
 
 ## Optional inference
@@ -81,7 +70,7 @@ The materializer writes one `assessment-judgment.json` conforming to `scripts\as
 
 ```json
 {
-  "schemaVersion": 2,
+  "schemaVersion": 1,
   "semanticIntents": [
     {
       "reviewUnitId": "semantic-...",
@@ -107,7 +96,6 @@ The materializer writes one `assessment-judgment.json` conforming to `scripts\as
   "complianceDecisions": [
     {
       "reviewUnitId": "semantic-...",
-      "reviewedCatalogIds": ["catalog-entry-..."],
       "applicableGuidance": [
         {
           "canonicalDocumentUrl": "https://...",
@@ -134,18 +122,9 @@ Coverage must be exact: one concise semantic result per supplied review unit,
 one decision per supplied deterministic or inferred REST/downstream candidate,
 and one Azure Guidelines decision per Semantic intent. Applicable Azure Guidelines
 decisions cite fetched guidance sections and synthesize their expected pattern.
-`versioned-api-evolution-guidance` is always governing for its owning intent:
-completed decisions cite Evolving APIs, and existing-version evolution without
-a changed versioning decorator is `applicable-fail`, even when the REST wire
-shape is unchanged.
-Added models, interfaces, or operations that directly or transitively use
-`Azure.ResourceManager.Legacy` constructs are also deterministic
-`applicable-fail` decisions. They cite current standard ARM modeling or
-operation guidance; suppressions and valid static routes do not clear the
-violation.
 Use `no-applicable-guidance` when search completed but no fetched section
 governs the intent; use `not-assessed` only for incomplete or blocked
-Azure Guidelines assessment.
+the Azure Guidelines assessment.
 All IDs and URLs must come from the bounded inputs or validated inference
 output. Every `applicable-fail` decision must also provide a concise finding
 title and `high`, `medium`, or `low` severity for structured assessment data.
@@ -181,13 +160,6 @@ into `typeImpacts` with deterministic TCGC `affectedMethods`.
 HTML finding cards must not display `high`, `medium`, or `low` severity labels
 or severity-colored borders. Severity remains available in `assessment.json`
 for validation and machine consumers.
-
-Semantic items preserve canonical `referenceCategories` and their evidence
-without changing group boundaries. HTML displays human-readable category
-badges, shared document selections with owning intent links, selection rules,
-and original network/session-reuse provenance. `no-applicable-guidance` means
-the completed required review/discovery found no governing section, not that
-every Azure Guideline has been proved satisfied.
 
 Dimension statuses are derived, not authored:
 

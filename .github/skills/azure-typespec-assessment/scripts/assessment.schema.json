@@ -2,14 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "TypeSpec Assessment",
   "type": "object",
-  "required": [
-    "schemaVersion",
-    "comparison",
-    "confidence",
-    "safety",
-    "dimensions",
-    "blockers"
-  ],
+  "required": ["schemaVersion", "comparison", "confidence", "safety", "dimensions", "blockers"],
   "properties": {
     "schemaVersion": { "const": 1 },
     "pullRequest": {
@@ -42,29 +35,8 @@
     },
     "dimensions": {
       "type": "object",
-      "required": [
-        "semantic",
-        "rest",
-        "downstream",
-        "compliance",
-        "documentQuality"
-      ],
+      "required": ["semantic", "rest", "downstream", "compliance", "documentQuality"],
       "properties": {
-        "semantic": {
-          "type": "object",
-          "properties": {
-            "items": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "referenceCategories": { "$ref": "compliance-search-evidence.schema.json#/$defs/referenceCategories" },
-                  "referenceCategoryEvidence": { "type": "array", "items": { "type": "object" } }
-                }
-              }
-            }
-          }
-        },
         "compliance": {
           "type": "object",
           "additionalProperties": false,
@@ -89,34 +61,8 @@
                 "unassessedIntentIds"
               ]
             },
-            "intentAssessments": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "required": ["semanticIntentId", "referenceCategories", "requiredCatalogIds", "selectedCatalogIds", "reviewedCatalogIds", "guidanceRouting", "queryProfile", "decision", "blockers"],
-                "properties": {
-                  "referenceCategories": { "$ref": "compliance-search-evidence.schema.json#/$defs/referenceCategories" },
-                  "requiredCatalogIds": { "$ref": "agent-decisions.schema.json#/$defs/catalogIds" },
-                  "selectedCatalogIds": { "$ref": "agent-decisions.schema.json#/$defs/catalogIds" },
-                  "reviewedCatalogIds": { "$ref": "agent-decisions.schema.json#/$defs/catalogIds" },
-                  "guidanceRouting": { "type": "object", "required": ["mandatoryCatalogIds", "selections", "discoveryRequests"] },
-                  "queryProfile": { "type": "object" },
-                  "decision": { "enum": ["applicable-pass", "applicable-fail", "no-applicable-guidance", "not-assessed"] },
-                  "blockers": { "type": "array", "items": { "type": "string" } }
-                }
-              }
-            },
-            "sharedSearch": {
-              "type": "object",
-              "additionalProperties": false,
-              "required": ["documents", "documentSelections", "discoveryResults", "additionalSelections"],
-              "properties": {
-                "documents": { "type": "array", "items": { "type": "object", "required": ["catalogId", "catalogOrder", "title", "canonicalUrl", "retrieval", "retrievedAt", "contentHash", "retrievalSource", "bytes", "guidance", "noRelevantGuidance"], "properties": { "retrieval": { "$ref": "compliance-search-evidence.schema.json#/$defs/document/properties/retrieval" } } } },
-                "documentSelections": { "$ref": "compliance-search-evidence.schema.json#/properties/documentSelections" },
-                "discoveryResults": { "$ref": "agent-decisions.schema.json#/properties/discoveryResults" },
-                "additionalSelections": { "$ref": "agent-decisions.schema.json#/properties/additionalSelections" }
-              }
-            },
+            "intentAssessments": { "type": "array" },
+            "sharedSearch": { "type": "object" },
             "findings": { "type": "array" },
             "retrievalFailures": { "type": "array" },
             "blockers": { "type": "array" }
@@ -201,17 +147,29 @@
         "expected": { "$ref": "#/$defs/nonemptyString" },
         "docQuote": { "$ref": "#/$defs/nonemptyString" }
       },
-      "allOf": [{
-        "if": { "properties": { "decision": { "const": "fail" } } },
-        "then": { "required": ["title", "expected", "docQuote"] }
-      }]
+      "allOf": [
+        {
+          "if": { "properties": { "decision": { "const": "fail" } } },
+          "then": { "required": ["title", "expected", "docQuote"] }
+        }
+      ]
     },
     "documentFinding": {
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "id", "reviewUnitId", "documentId", "check", "title", "expected",
-        "actual", "rationale", "docQuote", "semanticIntentIds", "sources", "document"
+        "id",
+        "reviewUnitId",
+        "documentId",
+        "check",
+        "title",
+        "expected",
+        "actual",
+        "rationale",
+        "docQuote",
+        "semanticIntentIds",
+        "sources",
+        "document"
       ],
       "properties": {
         "id": { "type": "string", "pattern": "^document-finding-" },
@@ -363,9 +321,14 @@
           "type": "object",
           "additionalProperties": false,
           "required": [
-            "semanticIntentCount", "assessedIntentCount", "documentCount",
-            "assessedDocumentCount", "checkCount", "assessedCheckCount",
-            "unassessedIntentIds", "notApplicableIntentIds"
+            "semanticIntentCount",
+            "assessedIntentCount",
+            "documentCount",
+            "assessedDocumentCount",
+            "checkCount",
+            "assessedCheckCount",
+            "unassessedIntentIds",
+            "notApplicableIntentIds"
           ],
           "properties": {
             "semanticIntentCount": { "type": "integer", "minimum": 0 },
@@ -414,57 +377,95 @@
         "findings": { "type": "array", "items": { "$ref": "#/$defs/documentFinding" } },
         "blockers": { "type": "array" }
       },
-      "allOf": [{
-        "if": { "required": ["assessmentVersion"] },
-        "then": {
-          "properties": {
-            "intentAssessments": { "items": { "properties": {
-              "checks": { "items": { "properties": { "check": { "const": "description" } } } }
-            } } },
-            "findings": { "items": { "properties": { "check": { "const": "description" } } } }
+      "allOf": [
+        {
+          "if": { "required": ["assessmentVersion"] },
+          "then": {
+            "properties": {
+              "intentAssessments": {
+                "items": {
+                  "properties": {
+                    "checks": { "items": { "properties": { "check": { "const": "description" } } } }
+                  }
+                }
+              },
+              "findings": { "items": { "properties": { "check": { "const": "description" } } } }
+            }
+          },
+          "else": {
+            "properties": {
+              "status": { "enum": ["passed", "failed", "not-assessed"] },
+              "intentAssessments": {
+                "items": {
+                  "properties": {
+                    "checks": {
+                      "items": { "properties": { "check": { "enum": ["correctness", "meaning"] } } }
+                    }
+                  }
+                }
+              },
+              "findings": {
+                "items": { "properties": { "check": { "enum": ["correctness", "meaning"] } } }
+              }
+            }
           }
         },
-        "else": {
-          "properties": {
-            "status": { "enum": ["passed", "failed", "not-assessed"] },
-            "intentAssessments": { "items": { "properties": {
-              "checks": { "items": { "properties": { "check": { "enum": ["correctness", "meaning"] } } } }
-            } } },
-            "findings": { "items": { "properties": { "check": { "enum": ["correctness", "meaning"] } } } }
+        {
+          "if": {
+            "required": ["assessmentVersion"],
+            "properties": { "assessmentVersion": { "const": 3 } }
+          },
+          "then": {
+            "properties": {
+              "coverage": { "required": ["inheritedDocumentCount"] },
+              "intentAssessments": {
+                "items": {
+                  "properties": {
+                    "documents": {
+                      "items": {
+                        "properties": {
+                          "after": { "not": { "required": ["documentationOrigin"] } }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "findings": {
+                "items": {
+                  "properties": {
+                    "document": {
+                      "properties": {
+                        "after": { "not": { "required": ["documentationOrigin"] } }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "coverage": { "not": { "required": ["inheritedDocumentCount"] } },
+              "intentAssessments": {
+                "items": {
+                  "not": { "required": ["inheritedDocumentIds"] },
+                  "properties": {
+                    "documents": { "items": { "$ref": "#/$defs/localDocument" } }
+                  }
+                }
+              },
+              "findings": {
+                "items": {
+                  "properties": {
+                    "document": { "$ref": "#/$defs/localDocument" }
+                  }
+                }
+              }
+            }
           }
         }
-      }, {
-        "if": {
-          "required": ["assessmentVersion"],
-          "properties": { "assessmentVersion": { "const": 3 } }
-        },
-        "then": {
-          "properties": {
-            "coverage": { "required": ["inheritedDocumentCount"] },
-            "intentAssessments": { "items": { "properties": {
-              "documents": { "items": { "properties": {
-                "after": { "not": { "required": ["documentationOrigin"] } }
-              } } }
-            } } },
-            "findings": { "items": { "properties": {
-              "document": { "properties": {
-                "after": { "not": { "required": ["documentationOrigin"] } }
-              } }
-            } } }
-          }
-        },
-        "else": {
-          "properties": {
-            "coverage": { "not": { "required": ["inheritedDocumentCount"] } },
-            "intentAssessments": { "items": { "not": { "required": ["inheritedDocumentIds"] }, "properties": {
-              "documents": { "items": { "$ref": "#/$defs/localDocument" } }
-            } } },
-            "findings": { "items": { "properties": {
-              "document": { "$ref": "#/$defs/localDocument" }
-            } } }
-          }
-        }
-      }]
+      ]
     },
     "localDocument": {
       "properties": {

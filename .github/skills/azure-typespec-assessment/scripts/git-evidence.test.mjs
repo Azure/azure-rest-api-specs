@@ -1,25 +1,26 @@
 import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { spawnSync } from "node:child_process";
 import test from "node:test";
 import {
   collectChanges,
   createSparseWorktree,
   deriveServiceRoot,
-  normalizeSpecification,
   normalizeSparseRoots,
+  normalizeSpecification,
   resolveComparison,
 } from "./git-evidence.mjs";
 
+/** @param {string} repo @param {...string} args */
 function git(repo, ...args) {
   const result = spawnSync("git", ["-C", repo, ...args], { encoding: "utf8" });
   assert.equal(result.status, 0, result.stderr);
   return result.stdout.trim();
 }
 
-test("collectChanges combines committed, staged, unstaged, and untracked TypeSpec", () => {
+void test("collectChanges combines committed, staged, unstaged, and untracked TypeSpec", () => {
   const repo = fs.mkdtempSync(path.join(os.tmpdir(), "typespec-git-"));
   git(repo, "init", "-q");
   git(repo, "config", "user.email", "test@example.com");
@@ -56,7 +57,7 @@ test("collectChanges combines committed, staged, unstaged, and untracked TypeSpe
   );
 });
 
-test("collectChanges compares an explicit head without local overlays", () => {
+void test("collectChanges compares an explicit head without local overlays", () => {
   const repo = fs.mkdtempSync(path.join(os.tmpdir(), "typespec-head-"));
   try {
     git(repo, "init", "-q");
@@ -76,12 +77,10 @@ test("collectChanges compares an explicit head without local overlays", () => {
     fs.writeFileSync(path.join(root, "untracked.tsp"), "model Untracked {}\n");
 
     const comparison = resolveComparison(repo, base, head);
-    const changes = collectChanges(
-      repo,
-      comparison.mergeBaseCommit,
-      "specification/widget",
-      { headRef: head, includeWorkingTree: false },
-    );
+    const changes = collectChanges(repo, comparison.mergeBaseCommit, "specification/widget", {
+      headRef: head,
+      includeWorkingTree: false,
+    });
 
     assert.deepEqual(
       changes.map((item) => [item.path, item.origins]),
@@ -92,7 +91,7 @@ test("collectChanges compares an explicit head without local overlays", () => {
   }
 });
 
-test("deriveServiceRoot rejects paths outside specification", () => {
+void test("deriveServiceRoot rejects paths outside specification", () => {
   assert.equal(deriveServiceRoot("specification"), "specification");
   assert.equal(
     deriveServiceRoot("specification/widget/resource-manager/Widget"),
@@ -101,7 +100,7 @@ test("deriveServiceRoot rejects paths outside specification", () => {
   assert.throws(() => deriveServiceRoot("tools/widget"), /specification/);
 });
 
-test("normalizes absolute and relative specification paths within the repository", () => {
+void test("normalizes absolute and relative specification paths within the repository", () => {
   const repo = path.join(os.tmpdir(), "typespec-scope");
   const relative = "specification/widget/resource-manager/Widget";
   assert.equal(normalizeSpecification(repo, path.join(repo, relative)), relative);
@@ -118,7 +117,7 @@ test("normalizes absolute and relative specification paths within the repository
   }
 });
 
-test("normalizes explicit sparse roots without collapsing them", () => {
+void test("normalizes explicit sparse roots without collapsing them", () => {
   assert.deepEqual(
     normalizeSparseRoots(
       [
@@ -131,17 +130,11 @@ test("normalizes explicit sparse roots without collapsing them", () => {
     ["specification/recoveryservices", "specification/recoveryservicesbackup"],
   );
   assert.deepEqual(
-    normalizeSparseRoots(
-      undefined,
-      "specification/widget/resource-manager/Widget",
-    ),
+    normalizeSparseRoots(undefined, "specification/widget/resource-manager/Widget"),
     ["specification/widget"],
   );
   assert.deepEqual(
-    normalizeSparseRoots(
-      ["./specification//widget/./resource-manager/"],
-      "specification/widget",
-    ),
+    normalizeSparseRoots(["./specification//widget/./resource-manager/"], "specification/widget"),
     ["specification/widget/resource-manager"],
   );
   for (const root of [
@@ -158,7 +151,7 @@ test("normalizes explicit sparse roots without collapsing them", () => {
   }
 });
 
-test("collectChanges classifies both sides of TypeSpec renames across sparse roots", () => {
+void test("collectChanges classifies both sides of TypeSpec renames across sparse roots", () => {
   const repo = fs.mkdtempSync(path.join(os.tmpdir(), "typespec-renames-"));
   try {
     git(repo, "init", "-q");
@@ -181,12 +174,10 @@ test("collectChanges classifies both sides of TypeSpec renames across sparse roo
     git(repo, "commit", "-qam", "rename files");
     const head = git(repo, "rev-parse", "HEAD");
 
-    const changes = collectChanges(
-      repo,
-      base,
-      ["specification/one", "specification/two"],
-      { headRef: head, includeWorkingTree: false },
-    );
+    const changes = collectChanges(repo, base, ["specification/one", "specification/two"], {
+      headRef: head,
+      includeWorkingTree: false,
+    });
 
     assert.deepEqual(
       changes.map(({ path: file, previousPath, status }) => ({
@@ -217,13 +208,9 @@ test("collectChanges classifies both sides of TypeSpec renames across sparse roo
   }
 });
 
-test("creates a worktree with multiple sparse roots", () => {
-  const repo = fs.mkdtempSync(
-    path.join(os.tmpdir(), "typespec-sparse-source-"),
-  );
-  const worktreeRoot = fs.mkdtempSync(
-    path.join(os.tmpdir(), "typespec-sparse-worktree-"),
-  );
+void test("creates a worktree with multiple sparse roots", () => {
+  const repo = fs.mkdtempSync(path.join(os.tmpdir(), "typespec-sparse-source-"));
+  const worktreeRoot = fs.mkdtempSync(path.join(os.tmpdir(), "typespec-sparse-worktree-"));
   const destination = path.join(worktreeRoot, "checkout");
   try {
     git(repo, "init", "-q");
@@ -232,10 +219,7 @@ test("creates a worktree with multiple sparse roots", () => {
     for (const service of ["one", "two", "excluded"]) {
       const directory = path.join(repo, "specification", service);
       fs.mkdirSync(directory, { recursive: true });
-      fs.writeFileSync(
-        path.join(directory, "main.tsp"),
-        `namespace ${service};\n`,
-      );
+      fs.writeFileSync(path.join(directory, "main.tsp"), `namespace ${service};\n`);
     }
     git(repo, "add", ".");
     git(repo, "commit", "-qm", "base");
@@ -249,29 +233,14 @@ test("creates a worktree with multiple sparse roots", () => {
     );
 
     assert.deepEqual(roots, ["specification/one", "specification/two"]);
+    assert.equal(fs.existsSync(path.join(destination, "specification", "one", "main.tsp")), true);
+    assert.equal(fs.existsSync(path.join(destination, "specification", "two", "main.tsp")), true);
     assert.equal(
-      fs.existsSync(path.join(destination, "specification", "one", "main.tsp")),
-      true,
-    );
-    assert.equal(
-      fs.existsSync(path.join(destination, "specification", "two", "main.tsp")),
-      true,
-    );
-    assert.equal(
-      fs.existsSync(
-        path.join(destination, "specification", "excluded", "main.tsp"),
-      ),
+      fs.existsSync(path.join(destination, "specification", "excluded", "main.tsp")),
       false,
     );
   } finally {
-    spawnSync("git", [
-      "-C",
-      repo,
-      "worktree",
-      "remove",
-      "--force",
-      destination,
-    ]);
+    spawnSync("git", ["-C", repo, "worktree", "remove", "--force", destination]);
     fs.rmSync(repo, { recursive: true, force: true });
     fs.rmSync(worktreeRoot, { recursive: true, force: true });
   }

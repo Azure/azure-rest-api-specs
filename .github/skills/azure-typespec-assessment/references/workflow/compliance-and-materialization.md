@@ -1,25 +1,20 @@
 # Azure Guidelines Search and Materialization
 
 This phase completes `agent-workspace\agent-decisions.json` and converts it into
-validated deterministic artifacts.
-
-Follow the [agentic search procedure](../agentic-search.md) and use only the
+validated deterministic artifacts. Follow the
+[agentic search procedure](../agentic-search.md) and use only the
 [official document catalog](../reference-document-links.md).
 
 Resolve every `complianceSearchRequest` through the referenced
-`dimensions/compliance-search-requests.json` when full evidence is needed.
-Read canonical required-document selections from bounded `guidanceRouting`,
-resolve their URLs through `mandatoryGuidanceCatalog`, and reuse sufficient
-deduplicated content already available in this
-session. Fetch missing documents concurrently with `web_fetch`. Complete
-explicit targeted-discovery requests without full-catalog scoring or a
-four-document quota. Record selections, original retrieval provenance and
-bytes, actual retrieval source, failed attempts, extracted guidance, and
-per-intent `reviewedCatalogIds`. Missing required content blocks the owning
-intent; an unrelated fetched document is not a replacement.
+`dimensions/compliance-search-requests.json`. Combine query profiles, score the
+complete catalog once, fetch the four highest-ranked retrievable documents once
+with `web_fetch`, and record compact scores, retrieval provenance and bytes,
+failed attempts, and extracted guidance in the decision file. Preserve failed
+retrievals and use the next-ranked catalog entry as the search procedure
+specifies.
 
-When there are no compliance search requests, skip discovery and document
-retrieval. Leave discovery results, retrieval results, search blockers, and
+When there are no compliance search requests, skip catalog scoring and document
+retrieval. Leave catalog scores, retrieval results, search blockers, and
 compliance judgments empty.
 
 Do not place declaration IDs on guidance excerpts or reconstruct opaque IDs.
@@ -40,12 +35,12 @@ node (Join-Path $Skill "scripts\materialize-assessment-results.mjs") `
   --work $Work
 ```
 
-It verifies canonical hashes, selection/review coverage, and exact ID ownership;
-derives provenance and accounting; resolves each qualified name to an
-unambiguous declaration identity in its canonical request; derives retained guidance applicability from citing
+It verifies canonical hashes and exact ID ownership; calculates score totals,
+ranks, and accounting; resolves each qualified declaration name uniquely in
+its canonical request; derives retained guidance applicability from citing
 judgments; drops uncited excerpts; and atomically writes `inference.json` when
 required, `compliance-search-evidence.json`, and
-`assessment-judgment.json`. It preserves original network or session-reuse provenance and
+`assessment-judgment.json`. It preserves supplied `web_fetch` provenance and
 never retrieves network content or authors judgment.
 
 After successful materialization, proceed directly to

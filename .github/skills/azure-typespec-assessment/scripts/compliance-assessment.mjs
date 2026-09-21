@@ -3,54 +3,118 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { canonicalJson, stableId } from "./stable-id.mjs";
 
-const CATALOG_PATH = path.resolve(
-  path.dirname(fileURLToPath(import.meta.url)), "..", "references", "reference-document-links.md",
-);
-const REFERENCE_HEADINGS = [
-  "ARM Resource Type", "ARM Resource Operation", "API Versioning",
-  "Long-Running Operations (LRO)", "Paging", "Models and Enums", "Decorators", "Warnings",
-];
-export const REFERENCE_CATEGORIES = [
-  "arm-resource-type", "arm-resource-operation", "api-versioning",
-  "long-running-operation", "paging", "models-and-enums", "decorators", "warnings",
-];
-const DECISIONS = ["applicable-pass", "applicable-fail", "no-applicable-guidance", "not-assessed"];
+/** @typedef {import("./compliance-search-evidence.schema.js").Document} ComplianceDocument */
+/** @typedef {import("./compliance-search-evidence.schema.js").Guidance} ComplianceGuidance */
+/** @typedef {import("./compliance-search-evidence.schema.js").RankedCatalogEntry} RankedCatalogEntry */
+/** @typedef {import("./compliance-search-evidence.schema.js").RetrievalAttempt} RetrievalAttempt */
+/** @typedef {import("./compliance-search-evidence.schema.js").Score} ComplianceScore */
+/** @typedef {import("./compliance-search-evidence.schema.js").TypeSpecAzureGuidelinesSearchEvidence} SearchEvidence */
+/** @typedef {import("./runtime-types.js").ComplianceAssessment} ComplianceAssessment */
+/** @typedef {import("./runtime-types.js").ComplianceDecision} ComplianceDecision */
+/** @typedef {import("./runtime-types.js").ComplianceSearchRequest} ComplianceSearchRequest */
+/** @typedef {import("./runtime-types.js").SourceChange} SourceChange */
+/**
+ * @typedef {{
+ *   catalogId: string,
+ *   catalogOrder: number,
+ *   category: string,
+ *   title: string,
+ *   canonicalUrl: string,
+ *   description: string
+ * }} CatalogEntry
+ * @typedef {{
+ *   reviewUnitId: string,
+ *   queryProfile: Record<string, unknown>,
+ *   catalogRanking: RankedCatalogEntry[],
+ *   rankedDocuments: ComplianceDocument[],
+ *   retrievalAttempts: RetrievalAttempt[],
+ *   blockers: string[]
+ * }} LegacyIntentEvidence
+ * @typedef {{
+ *   schemaVersion: 1,
+ *   intents: LegacyIntentEvidence[],
+ *   inputAccounting: SearchEvidence["inputAccounting"]
+ * }} LegacySearchEvidence
+ * @typedef {Omit<ComplianceDocument, "retrieval"> & {
+ *   retrievedAt: string,
+ *   contentHash: string
+ * }} FinalComplianceDocument
+ */
 
+const CATALOG_PATH = path.resolve(
+  path.dirname(fileURLToPath(import.meta.url)),
+  "..",
+  "references",
+  "reference-document-links.md",
+);
+const SCORE_FIELDS = /** @type {const} */ ([
+  "exactSymbol",
+  "patternCategory",
+  "servicePlane",
+  "changeContext",
+]);
+const SCORE_VALUES = {
+  exactSymbol: [0, 4],
+  patternCategory: [0, 3],
+  servicePlane: [0, 2],
+  changeContext: [0, 1],
+};
+const DECISIONS = /** @type {const} */ ([
+  "applicable-pass",
+  "applicable-fail",
+  "no-applicable-guidance",
+  "not-assessed",
+]);
+
+/**
+ * @template T
+ * @param {T[]} values
+ * @returns {T[]}
+ */
 function duplicates(values) {
-  return values.filter((value, index) => values.indexOf(value) !== index);
+  /** @type {Set<T>} */
+  const seen = new Set();
+  return [
+    ...new Set(values.filter((value) => (seen.has(value) ? true : (seen.add(value), false)))),
+  ];
 }
 
+/**
+ * @param {object} value
+ * @param {string[]} allowed
+ * @param {string} label
+ */
 function assertKeys(value, allowed, label) {
-  if (!value || typeof value !== "object" || Array.isArray(value)) {
-    throw new Error(`${label} must be an object.`);
-  }
-  const unknown = Object.keys(value).filter((key) => !allowed.includes(key));
+  const unknown = Object.keys(value ?? {}).filter((key) => !allowed.includes(key));
   if (unknown.length) throw new Error(`${label} contains unknown fields: ${unknown.join(", ")}.`);
 }
 
-function text(value, label) {
-  if (typeof value !== "string" || !value.trim()) throw new Error(`${label} must be nonempty.`);
-}
-
-function array(value, label) {
-  if (!Array.isArray(value)) throw new Error(`${label} must be an array.`);
-}
-
-function subset(actual, expected, label) {
-  array(actual, label);
-  if (duplicates(actual).length || actual.some((value) => !expected.includes(value))) {
-    throw new Error(`${label} contains an unknown or duplicate ID.`);
+/**
+ * @template T
+ * @param {T[]} expected
+ * @param {T[]} actual
+ * @param {string} label
+ */
+function exactCoverage(expected, actual, label) {
+  const duplicate = duplicates(actual);
+  const expectedSet = new Set(expected);
+  const unknown = actual.filter((item) => !expectedSet.has(item));
+  const missing = expected.filter((item) => !actual.includes(item));
+  if (duplicate.length || unknown.length || missing.length) {
+    throw new Error(
+      `${label} coverage mismatch. Missing: ${missing.join(", ") || "none"}; ` +
+        `unknown: ${unknown.join(", ") || "none"}; duplicate: ${duplicate.join(", ") || "none"}.`,
+    );
   }
 }
 
-function exactCoverage(expected, actual, label) {
-  subset(actual, expected, label);
-  if (expected.some((value) => !actual.includes(value))) throw new Error(`${label} coverage mismatch.`);
-}
-
+/**
+ * @param {string} [file]
+ * @returns {CatalogEntry[]}
+ */
 export function readComplianceCatalog(file = CATALOG_PATH) {
+  /** @type {CatalogEntry[]} */
   const entries = [];
-  const headings = [];
   const urls = new Set();
   let catalogOrder = 0;
   let category = "";
@@ -58,464 +122,761 @@ export function readComplianceCatalog(file = CATALOG_PATH) {
     const heading = line.match(/^##\s+(.+)$/);
     if (heading) {
       category = heading[1];
-      headings.push(category);
       continue;
     }
     const entry = line.match(/^- \[([^\]]+)\]\((https?:\/\/[^)]+)\):\s*(.+)$/);
     if (!entry) continue;
     catalogOrder += 1;
-    if (urls.has(entry[2])) throw new Error(`Reference catalog contains duplicate canonical URL ${entry[2]}.`);
+    if (urls.has(entry[2])) continue;
     urls.add(entry[2]);
     entries.push({
-      catalogId: stableId("catalog-entry", entry[2], 12), catalogOrder, category,
-      title: entry[1], canonicalUrl: entry[2], description: entry[3],
+      catalogId: stableId("catalog-entry", entry[2], 12),
+      catalogOrder,
+      category,
+      title: entry[1],
+      canonicalUrl: entry[2],
+      description: entry[3],
     });
-  }
-  if (canonicalJson(headings) !== canonicalJson(REFERENCE_HEADINGS)) {
-    throw new Error("Reference catalog must contain exactly the eight canonical category headings, each once and in category order.");
   }
   return entries;
 }
 
-export function validateGuidanceRouting(requests, catalog = readComplianceCatalog()) {
-  const catalogIds = catalog.map((entry) => entry.catalogId);
-  const discoveryIds = [];
-  const owners = requests.map((request) => request.reviewUnitId);
-  if (duplicates(owners).length) throw new Error("Duplicate guidance routing ownership.");
-  for (const request of requests) {
-    const label = `Guidance routing ${request.reviewUnitId}`;
-    if (!Array.isArray(request.referenceCategories) || !request.guidanceRouting) {
-      throw new Error(`${label} is missing reference categories or mandatory routing; rerun deterministic analysis and rebuild the Agent workspace.`);
+/**
+ * @param {ComplianceScore} score
+ * @param {string} label
+ */
+function validateScore(score, label) {
+  assertKeys(score, [...SCORE_FIELDS, "total"], `${label} score`);
+  let total = 0;
+  for (const field of SCORE_FIELDS) {
+    if (!SCORE_VALUES[field].includes(score?.[field])) {
+      throw new Error(`${label} has invalid ${field} score.`);
     }
-    subset(request.referenceCategories, REFERENCE_CATEGORIES, `${label} categories`);
-    const routing = request.guidanceRouting;
-    assertKeys(routing, ["mandatoryCatalogIds", "selections", "discoveryRequests"], label);
-    subset(routing.mandatoryCatalogIds, catalogIds, `${label} mandatoryCatalogIds`);
-    array(routing.selections, `${label} selections`);
-    array(routing.discoveryRequests, `${label} discoveryRequests`);
-    for (const selection of routing.selections) {
-      assertKeys(selection, ["catalogId", "category", "ruleId"], `${label} selection`);
-      if (!request.referenceCategories.includes(selection.category)) throw new Error(`${label} selection has an unowned category.`);
-      text(selection.ruleId, `${label} ruleId`);
-    }
-    exactCoverage(routing.mandatoryCatalogIds, [...new Set(routing.selections.map((item) => item.catalogId))], `${label} selection`);
-    if (duplicates(routing.selections.map(canonicalJson)).length) throw new Error(`${label} has duplicate selections.`);
-    for (const discovery of routing.discoveryRequests) {
-      if (!discovery.requestId?.startsWith("discovery-request-") || discovery.reviewUnitId !== request.reviewUnitId) {
-        throw new Error(`${label} discovery has invalid ownership.`);
-      }
-      text(discovery.trigger, `${label} discovery trigger`);
-      array(discovery.queryTerms, `${label} discovery queryTerms`);
-      discovery.queryTerms.forEach((term) => text(term, `${label} discovery query term`));
-      discoveryIds.push(discovery.requestId);
-    }
+    total += score[field];
   }
-  if (duplicates(discoveryIds).length) throw new Error("Duplicate canonical discovery requests.");
+  if (score.total !== total) {
+    throw new Error(`${label} score total must be ${total}.`);
+  }
 }
 
-export function resolveDocumentSelections({
-  requests, discoveryResults, additionalSelections, documents = [], catalog = readComplianceCatalog(),
-}) {
-  validateGuidanceRouting(requests, catalog);
-  array(discoveryResults, "Discovery results");
-  array(additionalSelections, "Additional selections");
-  const catalogIds = catalog.map((entry) => entry.catalogId);
-  const requestsByIntent = new Map(requests.map((request) => [request.reviewUnitId, request]));
-  const canonicalDiscovery = new Map(requests.flatMap((request) =>
-    request.guidanceRouting.discoveryRequests.map((item) => [item.requestId, item]),
-  ));
-  const documentSelections = requests.flatMap((request) =>
-    request.guidanceRouting.selections.map((item) => ({
-      reviewUnitId: request.reviewUnitId, ...item, basis: "category-rule",
-      ...(request.evidenceSetId ? { evidenceSetId: request.evidenceSetId } : {}),
-    })),
+/**
+ * @param {ComplianceGuidance} guidance
+ * @param {string[]} declarationIds
+ * @param {string} label
+ */
+function validateGuidance(guidance, declarationIds, label) {
+  assertKeys(
+    guidance,
+    ["section", "excerpt", "queryTerms", "examples", "applicableDeclarationIds"],
+    label,
   );
-  const blockers = [];
-  const validateOutcome = (result, label) => {
-    if (!requestsByIntent.has(result.intentId)) throw new Error(`${label} has unknown intent ownership.`);
-    if (!["selected", "no-match", "blocked"].includes(result.outcome)) throw new Error(`${label} has an invalid outcome.`);
-    text(result.rationale, `${label} rationale`);
-    subset(result.catalogIds, catalogIds, `${label} catalogIds`);
-    if ((result.outcome === "selected") !== (result.catalogIds.length > 0)) {
-      throw new Error(`${label} selected outcome must have catalog IDs; no-match and blocked must not.`);
-    }
-    if (result.outcome === "blocked") blockers.push({ reviewUnitId: result.intentId, message: `${label}: ${result.rationale}` });
-  };
-  if (duplicates(discoveryResults.map((item) => item.requestId)).length) throw new Error("Duplicate discovery results.");
-  for (const result of discoveryResults) {
-    assertKeys(result, ["requestId", "intentId", "outcome", "catalogIds", "rationale"], "Discovery result");
-    const request = canonicalDiscovery.get(result.requestId);
-    if (!request || request.reviewUnitId !== result.intentId) throw new Error(`Discovery result ${result.requestId} has unknown or cross-intent ownership.`);
-    validateOutcome(result, `Discovery ${result.requestId}`);
-    if ((request.trigger === "classification-blocked" ||
-      request.queryTerms.some((term) => term.startsWith("classification-diagnostic:"))) &&
-      result.outcome !== "blocked") {
-      throw new Error(`Discovery ${result.requestId} has blocked canonical classification evidence; rerun deterministic analysis rather than claiming selected or no-match.`);
-    }
-    documentSelections.push(...result.catalogIds.map((catalogId) => ({
-      reviewUnitId: result.intentId, catalogId, basis: "discovery",
-      requestId: result.requestId, trigger: request.trigger, rationale: result.rationale,
-    })));
+  if (!guidance.section?.trim() || !guidance.excerpt?.trim()) {
+    throw new Error(`${label} requires a section and excerpt.`);
   }
-  for (const request of canonicalDiscovery.values()) {
-    if (!discoveryResults.some((item) => item.requestId === request.requestId)) {
-      blockers.push({ reviewUnitId: request.reviewUnitId, message: `Discovery ${request.requestId} has no outcome.` });
+  if (!Array.isArray(guidance.queryTerms) || !Array.isArray(guidance.examples)) {
+    throw new Error(`${label} requires queryTerms and examples arrays.`);
+  }
+  if (
+    !Array.isArray(guidance.applicableDeclarationIds) ||
+    !guidance.applicableDeclarationIds.length ||
+    guidance.applicableDeclarationIds.some((id) => !declarationIds.includes(id)) ||
+    duplicates(guidance.applicableDeclarationIds).length
+  ) {
+    throw new Error(`${label} has invalid declaration applicability.`);
+  }
+  if (guidance.examples.length > 2) {
+    throw new Error(`${label} may retain at most two examples.`);
+  }
+  for (const example of guidance.examples) {
+    if (String(example).split(/\r?\n/).length > 12) {
+      throw new Error(`${label} examples may contain at most 12 lines.`);
     }
   }
-  const additionalKeys = [];
-  for (const result of additionalSelections) {
-    assertKeys(result, ["intentId", "sourceCatalogId", "sourceSection", "trigger", "outcome", "catalogIds", "rationale"], "Additional selection");
-    validateOutcome(result, "Additional discovery");
-    if (!["linked-reference", "uncovered-concern"].includes(result.trigger)) throw new Error("Additional discovery has an invalid trigger.");
-    text(result.sourceSection, "Additional discovery sourceSection");
-    const source = documents.find((document) => document.catalogId === result.sourceCatalogId);
-    if (!source?.guidance?.some((item) => item.section === result.sourceSection)) {
-      throw new Error("Additional discovery requires a retained source document and section.");
-    }
-    additionalKeys.push(canonicalJson([result.intentId, result.sourceCatalogId, result.sourceSection, result.trigger, result.catalogIds]));
-  }
-  if (duplicates(additionalKeys).length) throw new Error("Duplicate additional discoveries.");
-  // Only references rooted in already selected content can extend an intent's document set.
-  const pending = [...additionalSelections];
-  while (pending.length) {
-    const index = pending.findIndex((result) => documentSelections.some(
-      (item) => item.reviewUnitId === result.intentId && item.catalogId === result.sourceCatalogId,
-    ));
-    if (index < 0) throw new Error("Additional discovery has unselected or cyclic source provenance.");
-    const [result] = pending.splice(index, 1);
-    documentSelections.push(...result.catalogIds.map((catalogId) => ({
-      reviewUnitId: result.intentId, catalogId, basis: "linked-reference",
-      sourceCatalogId: result.sourceCatalogId, sourceSection: result.sourceSection,
-      trigger: result.trigger, rationale: result.rationale,
-    })));
-  }
-  for (const request of requests) {
-    if (!request.guidanceRouting.mandatoryCatalogIds.length && !request.guidanceRouting.discoveryRequests.length) {
-      blockers.push({ reviewUnitId: request.reviewUnitId, message: "No mandatory guidance or completed targeted discovery is available." });
-    }
-  }
-  return { documentSelections, blockers };
 }
 
-function validateDocument(document, catalogById, declarations) {
-  const label = `Azure Guidelines document ${document.catalogId}`;
-  assertKeys(document, ["catalogId", "catalogOrder", "title", "canonicalUrl", "retrieval", "guidance", "noRelevantGuidance"], label);
-  const catalog = catalogById.get(document.catalogId);
-  if (!catalog || ["catalogOrder", "title", "canonicalUrl"].some((field) => catalog[field] !== document[field])) {
-    throw new Error(`${label} does not match canonical catalog identity.`);
+/**
+ * @param {ComplianceDocument} document
+ * @param {Map<string, CatalogEntry>} catalogByUrl
+ * @param {string[]} declarationIds
+ * @param {string} label
+ */
+function validateDocument(document, catalogByUrl, declarationIds, label) {
+  assertKeys(
+    document,
+    [
+      "rank",
+      "catalogOrder",
+      "title",
+      "canonicalUrl",
+      "score",
+      "selectionRationale",
+      "retrieval",
+      "guidance",
+      "noRelevantGuidance",
+    ],
+    label,
+  );
+  const catalog = catalogByUrl.get(document.canonicalUrl);
+  if (!catalog) throw new Error(`${label} uses an uncataloged URL.`);
+  if (document.catalogOrder !== catalog.catalogOrder || document.title !== catalog.title) {
+    throw new Error(`${label} does not match catalog identity or order.`);
   }
-  assertKeys(document.retrieval, ["status", "retrievedAt", "contentHash", "retrievalSource", "bytes"], `${label} retrieval`);
-  const retrieval = document.retrieval;
-  if (retrieval.status !== "fetched" || Number.isNaN(Date.parse(retrieval.retrievedAt ?? "")) ||
-    !/^sha256:[0-9a-f]{64}$/i.test(retrieval.contentHash ?? "") ||
-    !["network", "session-reuse"].includes(retrieval.retrievalSource) ||
-    !Number.isInteger(retrieval.bytes) || retrieval.bytes < 1) {
-    throw new Error(`${label} requires retained content and valid network or session-reuse provenance.`);
+  if (!Number.isInteger(document.rank) || document.rank < 1) {
+    throw new Error(`${label} has an invalid rank.`);
   }
-  array(document.guidance, `${label} guidance`);
-  if (typeof document.noRelevantGuidance !== "boolean" || document.noRelevantGuidance === (document.guidance.length > 0)) {
+  validateScore(document.score, label);
+  if (!document.selectionRationale?.trim()) {
+    throw new Error(`${label} requires a selection rationale.`);
+  }
+  if (
+    document.retrieval?.status !== "fetched" ||
+    Number.isNaN(Date.parse(document.retrieval.retrievedAt ?? "")) ||
+    !/^sha256:[0-9a-f]{64}$/i.test(document.retrieval.contentHash ?? "")
+  ) {
+    throw new Error(`${label} requires fetched-content provenance.`);
+  }
+  if (!Array.isArray(document.guidance) || typeof document.noRelevantGuidance !== "boolean") {
+    throw new Error(`${label} requires guidance and noRelevantGuidance.`);
+  }
+  if (document.noRelevantGuidance === document.guidance.length > 0) {
     throw new Error(`${label} must contain guidance or declare no relevant guidance, not both.`);
   }
-  if (duplicates(document.guidance.map((item) => item.section)).length) throw new Error(`${label} has duplicate sections.`);
-  for (const guidance of document.guidance) {
-    assertKeys(guidance, ["section", "excerpt", "queryTerms", "examples", "applicableDeclarationIds"], `${label} guidance`);
-    text(guidance.section, `${label} section`);
-    text(guidance.excerpt, `${label} excerpt`);
-    array(guidance.queryTerms, `${label} queryTerms`);
-    guidance.queryTerms.forEach((term) => text(term, `${label} query term`));
-    array(guidance.examples, `${label} examples`);
-    subset(guidance.applicableDeclarationIds, declarations, `${label} declaration applicability`);
-    if (guidance.examples.length > 2 || guidance.examples.some((example) => typeof example !== "string" || example.split(/\r?\n/).length > 12)) {
-      throw new Error(`${label} may retain at most two examples of at most 12 lines.`);
-    }
+  document.guidance.forEach((item, index) =>
+    validateGuidance(item, declarationIds, `${label} guidance ${index + 1}`),
+  );
+}
+
+/**
+ * @param {RankedCatalogEntry} entry
+ * @param {Map<string, CatalogEntry>} catalogByUrl
+ * @param {number} expectedRank
+ * @param {string} label
+ */
+function validateRankingEntry(entry, catalogByUrl, expectedRank, label) {
+  assertKeys(
+    entry,
+    ["rank", "catalogOrder", "title", "canonicalUrl", "score", "selectionRationale"],
+    label,
+  );
+  const catalog = catalogByUrl.get(entry.canonicalUrl);
+  if (!catalog || entry.catalogOrder !== catalog.catalogOrder || entry.title !== catalog.title) {
+    throw new Error(`${label} does not match a catalog entry.`);
+  }
+  if (entry.rank !== expectedRank) throw new Error(`${label} has an invalid rank.`);
+  validateScore(entry.score, label);
+  if (!entry.selectionRationale?.trim()) {
+    throw new Error(`${label} requires a selection rationale.`);
   }
 }
 
-export function searchInputAccounting(evidence) {
-  const network = evidence.documents.filter((item) => item.retrieval.retrievalSource === "network");
-  const guidance = evidence.documents.flatMap((document) => document.guidance);
-  return {
-    documentSelectionCount: evidence.documentSelections.length,
-    uniqueDocumentsSelected: new Set(evidence.documentSelections.map((item) => item.catalogId)).size,
-    documentsFetched: network.length,
-    documentsReused: evidence.documents.length - network.length,
-    documentBytesFetched: network.reduce((sum, item) => sum + item.retrieval.bytes, 0),
-    documentBytesProcessed: evidence.documents.reduce((sum, item) => sum + item.retrieval.bytes, 0),
-    discoveryOutcomeCount: evidence.discoveryResults.length + evidence.additionalSelections.length,
-    guidanceExcerptsRetained: guidance.length,
-    guidanceExcerptBytesRetained: guidance.reduce((sum, item) => sum + Buffer.byteLength(item.excerpt, "utf8"), 0),
-  };
-}
-
-function relevantDeclarationSnippet(declaration, actual, action) {
-  const snippet = declaration.sourceSnippet;
-  if (!snippet?.lines?.length || !["add", "remove"].includes(action)) {
-    return undefined;
-  }
-  const tokens = [
-    ...new Set(
-      `${actual ?? ""} ${declaration.qualifiedName ?? ""}`
-        .toLowerCase()
-        .match(/[a-z][a-z0-9_.@-]{3,}/g) ?? [],
-    ),
-  ];
-  const shortName = declaration.qualifiedName?.split(".").at(-1)?.toLowerCase();
-  const scores = snippet.lines.map((line) => {
-    const normalized = line.toLowerCase();
-    let score = tokens.reduce(
-      (total, token) => total + (normalized.includes(token) ? 1 : 0),
-      0,
-    );
-    if (/azure\.resourcemanager\.legacy/i.test(line)) score += 20;
-    if (shortName && normalized.includes(shortName)) score += 8;
-    if (/^\s*(?:model|interface|op|alias)\b/.test(line)) score += 4;
-    if (/^\s*(?:import|using)\b/.test(line)) score -= 8;
-    return score;
-  });
-  const best = scores.indexOf(Math.max(...scores));
-  const start = Math.max(0, best - 3);
-  const end = Math.min(snippet.lines.length, start + 12);
-  const prefix = declaration.source?.revision === "base" ||
-    (declaration.source?.revision === undefined && action === "remove")
-    ? "-"
-    : "+";
-  return {
-    path: declaration.sourcePath,
-    hunkId: declaration.hunkIds?.[0],
-    startLine: snippet.startLine + start,
-    endLine: snippet.startLine + end - 1,
-    lines: snippet.lines.slice(start, end).map((line) => `${prefix}${line}`),
-  };
-}
-
-function legacyUsageSnippets(sources, hunkIds, declarationIds) {
-  const allowed = new Set(hunkIds);
-  const allowedDeclarations = new Set(declarationIds);
-  const changedLines = sources
+/**
+ * @param {ComplianceSearchRequest} request
+ * @param {string[]} declarationIds
+ * @param {string[]} hunkIds
+ * @param {Map<string, SourceChange>} sourceMap
+ */
+function sourceEvidence(request, declarationIds, hunkIds, sourceMap) {
+  const sources = request.sourceChangeIds
+    .map((id) => sourceMap.get(id))
+    .filter(/** @returns {item is SourceChange} */ (item) => item !== undefined);
+  const selectedDeclarations = sources.flatMap((source) =>
+    (source.declarations ?? [])
+      .filter((item) => declarationIds.includes(item.id))
+      .map((item) => ({ ...item, sourcePath: source.path })),
+  );
+  const selectedHunks = new Set(hunkIds);
+  const snippets = sources
     .flatMap((source) =>
       (source.hunks ?? [])
-        .filter((hunk) => allowed.has(hunk.id))
-        .flatMap((hunk) => {
-          const lines = hunk.lines ?? [];
-          const index = lines.findIndex((line) => {
-            if (!/^[+-](?![+-])/.test(line)) return false;
-            const code = line.slice(1).trim();
-            return (
-              code.includes("Azure.ResourceManager.Legacy.") &&
-              !code.startsWith("#suppress") &&
-              !code.startsWith("//") &&
-              !code.startsWith("*")
-            );
-          });
-          if (index < 0) return [];
-          const start = Math.max(0, index - 1);
-          return [{
-            path: source.path,
-            hunkId: hunk.id,
-            lines: lines.slice(start, Math.min(lines.length, index + 4)),
-          }];
-        }),
+        .filter((hunk) => selectedHunks.has(hunk.id))
+        .map((hunk) => ({
+          path: source.path,
+          hunkId: hunk.id,
+          lines: (hunk.lines ?? []).filter((line) => /^[+-](?![+-])/.test(line)).slice(0, 12),
+        })),
     )
     .filter((snippet) => snippet.lines.length);
-  const declarationLines = sources.flatMap((source) =>
-    (source.declarations ?? [])
-      .filter(
-        (declaration) =>
-          allowedDeclarations.has(declaration.id) &&
-          declaration.sourceSnippet?.lines?.length,
-      )
-      .flatMap((declaration) =>
-        declaration.sourceSnippet.lines.flatMap((line, index) => {
-          const code = line.trim();
-          if (
-            !code.includes("Azure.ResourceManager.Legacy.") ||
-            code.startsWith("#suppress") ||
-            code.startsWith("//") ||
-            code.startsWith("*")
-          ) {
-            return [];
-          }
-          const prefix = declaration.source?.revision === "base" ? "-" : "+";
-          const start = Math.max(0, index - 1);
-          const end = Math.min(
-            declaration.sourceSnippet.lines.length,
-            index + 4,
-          );
-          return [{
-            path: source.path,
-            hunkId: declaration.hunkIds?.find((id) => allowed.has(id)),
-            startLine: declaration.sourceSnippet.startLine + start,
-            endLine: declaration.sourceSnippet.startLine + end - 1,
-            lines: declaration.sourceSnippet.lines
-              .slice(start, end)
-              .map((context) => `${prefix}${context}`),
-          }];
-        }),
-      ),
-  );
-  return [
-    ...new Map(
-      [...changedLines, ...declarationLines].map((snippet) => [
-        `${snippet.path}\u0000${snippet.lines.join("\n")}`,
-        snippet,
-      ]),
-    ).values(),
-  ].slice(0, 2);
-}
-
-function sourceEvidence(request, declarationIds, hunkIds, sourceMap, actual) {
-  const sources = request.sourceChangeIds.map((id) => sourceMap.get(id)).filter(Boolean);
-  const declarations = sources.flatMap((source) => (source.declarations ?? [])
-    .filter((item) => declarationIds.includes(item.id)).map((item) => ({ ...item, sourcePath: source.path })));
-  const legacySnippets = /Azure\.ResourceManager\.Legacy/.test(actual ?? "")
-    ? legacyUsageSnippets(sources, hunkIds, request.declarationIds)
-    : [];
-  const declarationSnippets = declarations
-    .map((declaration) =>
-      relevantDeclarationSnippet(
-        declaration,
-        actual,
-        request.queryProfile.action,
-      ),
-    )
-    .filter(Boolean);
   return {
-    sourceLinks: declarations.map((item) => ({
-      path: item.sourcePath, startLine: item.source?.startLine, endLine: item.source?.endLine, link: item.source?.link,
+    sourceLinks: selectedDeclarations.map((declaration) => ({
+      path: declaration.sourcePath,
+      startLine: declaration.source?.startLine,
+      endLine: declaration.source?.endLine,
+      link: declaration.source?.link,
     })),
-    codeSnippets: legacySnippets.length
-      ? legacySnippets
-      : declarationSnippets.length
-      ? declarationSnippets.slice(0, 2)
-      : sources.flatMap((source) => (source.hunks ?? []).filter((hunk) => hunkIds.includes(hunk.id)).map((hunk) => ({
-          path: source.path, hunkId: hunk.id,
-          lines: (hunk.lines ?? []).filter((line) => /^[+-](?![+-])/.test(line)).slice(0, 12),
-        }))).filter((snippet) => snippet.lines.length),
+    codeSnippets: snippets,
   };
 }
 
-export function assembleCompliance({ requests, evidence, decisions, sourceChanges, initialBlockers = [] }) {
-  if (evidence?.schemaVersion !== 3) {
-    throw new Error("Unsupported ranked Azure Guidelines evidence; rerun deterministic analysis and Agent judgment with search evidence schemaVersion 3.");
+/**
+ * @param {{
+ *   requests: ComplianceSearchRequest[],
+ *   evidence: SearchEvidence | LegacySearchEvidence,
+ *   decisions: ComplianceDecision[],
+ *   sourceChanges: SourceChange[],
+ *   initialBlockers?: unknown[]
+ * }} options
+ * @returns {ComplianceAssessment}
+ */
+export function assembleCompliance({
+  requests,
+  evidence,
+  decisions,
+  sourceChanges,
+  initialBlockers = [],
+}) {
+  if (
+    !evidence ||
+    ![1, 2].includes(evidence.schemaVersion) ||
+    (evidence.schemaVersion === 1 && !Array.isArray(evidence.intents))
+  ) {
+    throw new Error("Azure Guidelines search evidence is missing or has an unsupported schema.");
   }
-  assertKeys(evidence, ["schemaVersion", "queryProfiles", "documentSelections", "documents", "discoveryResults", "additionalSelections", "retrievalAttempts", "blockers", "inputAccounting"], "Azure Guidelines search evidence");
-  for (const field of ["queryProfiles", "documentSelections", "documents", "discoveryResults", "additionalSelections", "retrievalAttempts", "blockers"]) array(evidence[field], `Azure Guidelines ${field}`);
-  array(decisions, "Judgment.complianceDecisions");
+  if (!Array.isArray(decisions)) {
+    throw new Error("Judgment.complianceDecisions must be an array.");
+  }
   const catalog = readComplianceCatalog();
-  const catalogById = new Map(catalog.map((item) => [item.catalogId, item]));
-  const requestsById = new Map(requests.map((item) => [item.reviewUnitId, item]));
-  const resolved = resolveDocumentSelections({ requests, ...evidence, catalog });
-  if (canonicalJson(evidence.documentSelections) !== canonicalJson(resolved.documentSelections)) {
-    throw new Error("Azure Guidelines document selections differ from immutable canonical routing or discovery provenance.");
-  }
-  exactCoverage(requests.map((item) => item.reviewUnitId), evidence.queryProfiles.map((item) => item.reviewUnitId), "Azure Guidelines query profile");
-  for (const profile of evidence.queryProfiles) {
-    assertKeys(profile, ["reviewUnitId", "queryProfile"], "Azure Guidelines query profile");
-    if (canonicalJson(profile.queryProfile) !== canonicalJson(requestsById.get(profile.reviewUnitId).queryProfile)) throw new Error(`Azure Guidelines intent ${profile.reviewUnitId} changed its query profile.`);
-  }
-  const selectedIds = [...new Set(evidence.documentSelections.map((item) => item.catalogId))];
-  subset(evidence.documents.map((item) => item.catalogId), selectedIds, "Fetched document selection provenance");
-  const declarations = [...new Set(requests.flatMap((item) => item.declarationIds))];
-  evidence.documents.forEach((item) => validateDocument(item, catalogById, declarations));
-  subset(evidence.retrievalAttempts.map((item) => item.catalogId), selectedIds, "Failed retrieval selection provenance");
-  for (const failure of evidence.retrievalAttempts) {
-    assertKeys(failure, ["catalogId", "canonicalUrl", "status", "error"], "Failed retrieval");
-    if (failure.canonicalUrl !== catalogById.get(failure.catalogId)?.canonicalUrl || failure.status !== "failed") throw new Error("Invalid retrieval failure.");
-    text(failure.error, "Retrieval failure error");
-    if (evidence.documents.some((item) => item.catalogId === failure.catalogId)) throw new Error("A document cannot be both fetched and failed.");
-  }
-  const blockers = initialBlockers.map((item) => ({
-    ...(item?.reviewUnitId ? { reviewUnitId: item.reviewUnitId } : {}),
-    message: String(item?.message ?? item),
-  }));
-  for (const blocker of evidence.blockers) {
-    assertKeys(blocker, ["reviewUnitId", "message"], "Search blocker");
-    if (!requestsById.has(blocker.reviewUnitId)) throw new Error("Search blocker has unknown intent ownership.");
-    text(blocker.message, "Search blocker message");
-  }
-  blockers.push(...evidence.blockers, ...resolved.blockers);
-  if (canonicalJson(evidence.inputAccounting) !== canonicalJson(searchInputAccounting(evidence))) throw new Error("Azure Guidelines search input accounting is inconsistent.");
-  exactCoverage(requests.map((item) => item.reviewUnitId), decisions.map((item) => item.reviewUnitId), "Azure Guidelines decision");
+  const catalogByUrl = new Map(catalog.map((item) => [item.canonicalUrl, item]));
+  const requestMap = new Map(requests.map((item) => [item.reviewUnitId, item]));
+  /** @param {string} reviewUnitId */
+  const requireRequest = (reviewUnitId) => {
+    const request = requestMap.get(reviewUnitId);
+    if (!request) throw new Error(`Unknown Azure Guidelines intent ${reviewUnitId}.`);
+    return request;
+  };
+
   const sourceMap = new Map(sourceChanges.map((item) => [item.id, item]));
-  const finalDocuments = evidence.documents.map(({ retrieval, ...document }) => {
-    const { status: _status, ...provenance } = retrieval;
-    return { ...document, retrieval, ...provenance };
-  });
-  const findings = [];
-  const intentAssessments = requests.map((request) => {
-    const decision = decisions.find((item) => item.reviewUnitId === request.reviewUnitId);
-    const label = `Azure Guidelines decision ${request.reviewUnitId}`;
-    assertKeys(decision, ["reviewUnitId", "reviewedCatalogIds", "applicableGuidance", "sourceChangeIds", "hunkIds", "declarationIds", "decision", "title", "severity", "expected", "actual", "rationale"], label);
-    if (!DECISIONS.includes(decision.decision)) throw new Error(`${label} is incomplete.`);
-    text(decision.actual, `${label} actual`);
-    text(decision.rationale, `${label} rationale`);
-    array(decision.applicableGuidance, `${label} applicableGuidance`);
-    for (const field of ["sourceChangeIds", "hunkIds", "declarationIds"]) subset(decision[field], request[field], `${label} ${field}`);
-    const selectedCatalogIds = [...new Set(evidence.documentSelections.filter((item) => item.reviewUnitId === request.reviewUnitId).map((item) => item.catalogId))];
-    const availableIds = evidence.documents.map((item) => item.catalogId).filter((id) => selectedCatalogIds.includes(id));
-    subset(decision.reviewedCatalogIds, availableIds, `${label} reviewedCatalogIds (fetched and selected)`);
-    const missing = selectedCatalogIds.filter((id) => !decision.reviewedCatalogIds.includes(id));
-    const intentBlockers = blockers.filter((item) => item.reviewUnitId === request.reviewUnitId).map((item) => item.message);
-    if (missing.length) intentBlockers.push(`Required or discovered documents have not been retrieved and reviewed: ${missing.join(", ")}.`);
-    if (intentBlockers.length && decision.decision !== "not-assessed") throw new Error(`${label} falsely claims completed review with missing mandatory coverage or blocked discovery: ${intentBlockers.join(" ")}`);
-    if (decision.decision === "not-assessed" && !intentBlockers.length) intentBlockers.push(decision.rationale);
-    for (const message of intentBlockers) {
-      if (!blockers.some((item) => item.reviewUnitId === request.reviewUnitId && item.message === message)) blockers.push({ reviewUnitId: request.reviewUnitId, message });
-    }
-    if (decision.decision.startsWith("applicable-")) {
-      if (!decision.expected?.trim() || !decision.applicableGuidance.length || !decision.sourceChangeIds.length || !decision.hunkIds.length || !decision.declarationIds.length) throw new Error(`${label} lacks applicable evidence.`);
-    } else if (decision.applicableGuidance.length || decision.expected !== undefined) throw new Error(`${label} has inapplicable guidance.`);
-    if (decision.decision === "applicable-fail") {
-      if (!decision.title?.trim() || !["high", "medium", "low"].includes(decision.severity)) throw new Error(`${label} lacks finding presentation.`);
-    } else if (decision.title !== undefined || decision.severity !== undefined) throw new Error(`${label} has unexpected finding presentation.`);
-    if (duplicates(decision.applicableGuidance.map(canonicalJson)).length) throw new Error(`${label} has duplicate guidance references.`);
-    const applicableGuidance = decision.applicableGuidance.map((reference) => {
-      assertKeys(reference, ["canonicalDocumentUrl", "guidanceSection"], `${label} guidance`);
-      const document = evidence.documents.find((item) => item.canonicalUrl === reference.canonicalDocumentUrl && decision.reviewedCatalogIds.includes(item.catalogId));
-      const guidance = document?.guidance.find((item) => item.section === reference.guidanceSection && item.applicableDeclarationIds.some((id) => decision.declarationIds.includes(id)));
-      if (!guidance) throw new Error(`${label} uses unfetched, unreviewed, or unowned normative guidance.`);
-      return { ...reference, excerpt: guidance.excerpt };
-    });
-    const source = sourceEvidence(
-      request,
-      decision.declarationIds,
-      decision.hunkIds,
-      sourceMap,
-      decision.actual,
+  /** @type {Map<string, FinalComplianceDocument[]>} */
+  const documentsByIntent = new Map();
+  /** @type {Map<string, RankedCatalogEntry[]>} */
+  const catalogRankingByIntent = new Map();
+  /** @type {Map<string, string[]>} */
+  const blockersByIntent = new Map();
+  const blockers = initialBlockers.map((message) => ({
+    message: String(
+      message && typeof message === "object" && "message" in message ? message.message : message,
+    ),
+  }));
+  /** @type {(RetrievalAttempt & {reviewUnitId?: string})[]} */
+  const retrievalFailures = [];
+  let guidanceExcerptCount = 0;
+
+  if (evidence.schemaVersion === 2) {
+    assertKeys(
+      evidence,
+      [
+        "schemaVersion",
+        "queryProfiles",
+        "catalogRanking",
+        "rankedDocuments",
+        "retrievalAttempts",
+        "blockers",
+        "inputAccounting",
+      ],
+      "Azure Guidelines search evidence",
     );
-    if (decision.decision === "applicable-fail") findings.push({
-      id: stableId("compliance", { reviewUnitId: request.reviewUnitId }), semanticIntentId: request.reviewUnitId,
-      title: decision.title, severity: decision.severity, applicableGuidance,
-      declarationIds: decision.declarationIds, sourceChangeIds: decision.sourceChangeIds, hunkIds: decision.hunkIds,
-      expected: decision.expected, actual: decision.actual, gap: decision.rationale, ...source,
+    for (const field of /** @type {const} */ ([
+      "queryProfiles",
+      "catalogRanking",
+      "rankedDocuments",
+      "retrievalAttempts",
+      "blockers",
+    ])) {
+      if (!Array.isArray(evidence[field])) {
+        throw new Error(`Azure Guidelines ${field} must be an array.`);
+      }
+    }
+    exactCoverage(
+      requests.map((item) => item.reviewUnitId),
+      evidence.queryProfiles.map((item) => item.reviewUnitId),
+      "Azure Guidelines query profile",
+    );
+    for (const profile of evidence.queryProfiles) {
+      assertKeys(
+        profile,
+        ["reviewUnitId", "queryProfile"],
+        `Azure Guidelines query profile ${profile.reviewUnitId}`,
+      );
+      const request = requireRequest(profile.reviewUnitId);
+      if (canonicalJson(profile.queryProfile) !== canonicalJson(request.queryProfile)) {
+        throw new Error(
+          `Azure Guidelines intent ${profile.reviewUnitId} changed its query profile.`,
+        );
+      }
+    }
+    const hasCatalogExhaustion = evidence.blockers.some((item) =>
+      item.startsWith("catalog-exhausted:"),
+    );
+    if (evidence.rankedDocuments.length !== 4 && !hasCatalogExhaustion) {
+      throw new Error(
+        "Azure Guidelines shared search requires four documents or catalog exhaustion.",
+      );
+    }
+    const selectedUrls = evidence.rankedDocuments.map((item) => item.canonicalUrl);
+    const selectedRanks = evidence.rankedDocuments.map((item) => item.rank);
+    if (duplicates(selectedUrls).length) {
+      throw new Error("Azure Guidelines shared search selected duplicate documents.");
+    }
+    if (selectedUrls.some((url) => !catalogByUrl.has(url))) {
+      throw new Error("Azure Guidelines shared search uses an uncataloged URL.");
+    }
+    if (duplicates(selectedRanks).length) {
+      throw new Error("Azure Guidelines shared search selected duplicate ranks.");
+    }
+    exactCoverage(
+      catalog.map((item) => item.canonicalUrl),
+      evidence.catalogRanking.map((item) => item.canonicalUrl),
+      "Azure Guidelines shared catalog ranking",
+    );
+    evidence.catalogRanking.forEach((entry, index) =>
+      validateRankingEntry(
+        entry,
+        catalogByUrl,
+        index + 1,
+        `Azure Guidelines shared ranking[${index}]`,
+      ),
+    );
+    const orderedRanking = [...evidence.catalogRanking].sort(
+      (left, right) =>
+        right.score.total - left.score.total || left.catalogOrder - right.catalogOrder,
+    );
+    if (
+      canonicalJson(orderedRanking.map((item) => item.canonicalUrl)) !==
+      canonicalJson(evidence.catalogRanking.map((item) => item.canonicalUrl))
+    ) {
+      throw new Error("Azure Guidelines shared catalog is not score ordered.");
+    }
+    for (const attempt of evidence.retrievalAttempts) {
+      if (
+        !catalogByUrl.has(attempt.canonicalUrl) ||
+        attempt.status !== "failed" ||
+        !attempt.error?.trim()
+      ) {
+        throw new Error("Azure Guidelines shared search has an invalid retrieval attempt.");
+      }
+      retrievalFailures.push(attempt);
+    }
+    const failedUrls = new Set(evidence.retrievalAttempts.map((item) => item.canonicalUrl));
+    const expectedDocuments = evidence.catalogRanking
+      .filter((item) => !failedUrls.has(item.canonicalUrl))
+      .slice(0, 4);
+    if (
+      canonicalJson(expectedDocuments.map((item) => item.canonicalUrl)) !==
+      canonicalJson(evidence.rankedDocuments.map((item) => item.canonicalUrl))
+    ) {
+      throw new Error(
+        "Azure Guidelines shared search did not select the first four retrievable documents.",
+      );
+    }
+    const declarationIds = [...new Set(requests.flatMap((request) => request.declarationIds))];
+    evidence.rankedDocuments.forEach((document, index) => {
+      validateDocument(
+        document,
+        catalogByUrl,
+        declarationIds,
+        `Azure Guidelines shared document[${index}]`,
+      );
+      const ranking = expectedDocuments[index];
+      for (const field of /** @type {const} */ ([
+        "rank",
+        "catalogOrder",
+        "title",
+        "canonicalUrl",
+        "score",
+        "selectionRationale",
+      ])) {
+        if (canonicalJson(document[field]) !== canonicalJson(ranking[field])) {
+          throw new Error(`Azure Guidelines shared document[${index}] differs from its ranking.`);
+        }
+      }
     });
-    return {
-      semanticIntentId: request.reviewUnitId, ...decision, gap: decision.rationale, ...source,
-      ...(request.evidenceSetId ? { evidenceSetId: request.evidenceSetId } : {}),
-      referenceCategories: request.referenceCategories,
-      requiredCatalogIds: request.guidanceRouting.mandatoryCatalogIds,
-      selectedCatalogIds, guidanceRouting: request.guidanceRouting, queryProfile: request.queryProfile,
-      blockers: [...new Set(intentBlockers)],
+    const finalDocuments = evidence.rankedDocuments.map(({ retrieval, ...document }) => ({
+      ...document,
+      retrievedAt: retrieval.retrievedAt,
+      contentHash: retrieval.contentHash,
+    }));
+    guidanceExcerptCount = finalDocuments.reduce(
+      (total, document) => total + document.guidance.length,
+      0,
+    );
+    for (const request of requests) {
+      documentsByIntent.set(request.reviewUnitId, finalDocuments);
+      catalogRankingByIntent.set(request.reviewUnitId, evidence.catalogRanking);
+      blockersByIntent.set(request.reviewUnitId, [...evidence.blockers]);
+    }
+    blockers.push(...evidence.blockers.map((message) => ({ message })));
+  } else {
+    exactCoverage(
+      requests.map((item) => item.reviewUnitId),
+      evidence.intents.map((item) => item.reviewUnitId),
+      "Azure Guidelines intent",
+    );
+    for (const intent of evidence.intents) {
+      const request = requireRequest(intent.reviewUnitId);
+      assertKeys(
+        intent,
+        [
+          "reviewUnitId",
+          "queryProfile",
+          "catalogRanking",
+          "rankedDocuments",
+          "retrievalAttempts",
+          "blockers",
+        ],
+        `Azure Guidelines intent ${intent.reviewUnitId}`,
+      );
+      if (canonicalJson(intent.queryProfile) !== canonicalJson(request.queryProfile)) {
+        throw new Error(
+          `Azure Guidelines intent ${intent.reviewUnitId} changed its query profile.`,
+        );
+      }
+      if (
+        !Array.isArray(intent.rankedDocuments) ||
+        !Array.isArray(intent.catalogRanking) ||
+        !Array.isArray(intent.retrievalAttempts) ||
+        !Array.isArray(intent.blockers)
+      ) {
+        throw new Error(
+          `Azure Guidelines intent ${intent.reviewUnitId} has invalid evidence arrays.`,
+        );
+      }
+      const hasCatalogExhaustion = intent.blockers.some((item) =>
+        item.startsWith("catalog-exhausted:"),
+      );
+      if (intent.rankedDocuments.length !== 4 && !hasCatalogExhaustion) {
+        throw new Error(
+          `Azure Guidelines intent ${intent.reviewUnitId} requires four documents or catalog exhaustion.`,
+        );
+      }
+      const urls = intent.rankedDocuments.map((item) => item.canonicalUrl);
+      const ranks = intent.rankedDocuments.map((item) => item.rank);
+      if (duplicates(urls).length) {
+        throw new Error(
+          `Azure Guidelines intent ${intent.reviewUnitId} selected duplicate documents.`,
+        );
+      }
+      if (urls.some((url) => !catalogByUrl.has(url))) {
+        throw new Error(`Azure Guidelines intent ${intent.reviewUnitId} uses an uncataloged URL.`);
+      }
+      if (duplicates(ranks).length) {
+        throw new Error(`Azure Guidelines intent ${intent.reviewUnitId} selected duplicate ranks.`);
+      }
+      exactCoverage(
+        catalog.map((item) => item.canonicalUrl),
+        intent.catalogRanking.map((item) => item.canonicalUrl),
+        `Azure Guidelines catalog ranking ${intent.reviewUnitId}`,
+      );
+      intent.catalogRanking.forEach((entry, index) =>
+        validateRankingEntry(
+          entry,
+          catalogByUrl,
+          index + 1,
+          `Azure Guidelines ranking ${intent.reviewUnitId}[${index}]`,
+        ),
+      );
+      const orderedRanking = [...intent.catalogRanking].sort(
+        (left, right) =>
+          right.score.total - left.score.total || left.catalogOrder - right.catalogOrder,
+      );
+      if (
+        canonicalJson(orderedRanking.map((item) => item.canonicalUrl)) !==
+        canonicalJson(intent.catalogRanking.map((item) => item.canonicalUrl))
+      ) {
+        throw new Error(
+          `Azure Guidelines intent ${intent.reviewUnitId} catalog is not score ordered.`,
+        );
+      }
+      for (const attempt of intent.retrievalAttempts) {
+        if (
+          !catalogByUrl.has(attempt.canonicalUrl) ||
+          attempt.status !== "failed" ||
+          !attempt.error?.trim()
+        ) {
+          throw new Error(
+            `Azure Guidelines intent ${intent.reviewUnitId} has an invalid retrieval attempt.`,
+          );
+        }
+        retrievalFailures.push({ reviewUnitId: intent.reviewUnitId, ...attempt });
+      }
+      const failedUrls = new Set(intent.retrievalAttempts.map((item) => item.canonicalUrl));
+      const expectedDocuments = intent.catalogRanking
+        .filter((item) => !failedUrls.has(item.canonicalUrl))
+        .slice(0, 4);
+      if (
+        canonicalJson(expectedDocuments.map((item) => item.canonicalUrl)) !== canonicalJson(urls)
+      ) {
+        throw new Error(
+          `Azure Guidelines intent ${intent.reviewUnitId} did not select the first four retrievable documents.`,
+        );
+      }
+      intent.rankedDocuments.forEach((document, index) => {
+        validateDocument(
+          document,
+          catalogByUrl,
+          request.declarationIds,
+          `Azure Guidelines document ${intent.reviewUnitId}[${index}]`,
+        );
+        const ranking = expectedDocuments[index];
+        for (const field of /** @type {const} */ ([
+          "rank",
+          "catalogOrder",
+          "title",
+          "canonicalUrl",
+          "score",
+          "selectionRationale",
+        ])) {
+          if (canonicalJson(document[field]) !== canonicalJson(ranking[field])) {
+            throw new Error(
+              `Azure Guidelines document ${intent.reviewUnitId}[${index}] differs from its ranking.`,
+            );
+          }
+        }
+      });
+      const intentBlockers = [...intent.blockers];
+      blockersByIntent.set(intent.reviewUnitId, intentBlockers);
+      blockers.push(
+        ...intentBlockers.map((message) => ({
+          reviewUnitId: intent.reviewUnitId,
+          message,
+        })),
+      );
+      const finalDocuments = intent.rankedDocuments.map(({ retrieval, ...document }) => ({
+        ...document,
+        retrievedAt: retrieval.retrievedAt,
+        contentHash: retrieval.contentHash,
+      }));
+      catalogRankingByIntent.set(intent.reviewUnitId, intent.catalogRanking);
+      guidanceExcerptCount += finalDocuments.reduce(
+        (total, document) => total + document.guidance.length,
+        0,
+      );
+      documentsByIntent.set(intent.reviewUnitId, finalDocuments);
+    }
+  }
+
+  exactCoverage(
+    requests.map((item) => item.reviewUnitId),
+    decisions.map((item) => item.reviewUnitId),
+    "Azure Guidelines decision",
+  );
+  const selectedDocumentCount =
+    evidence.schemaVersion === 2
+      ? evidence.rankedDocuments.length
+      : [...documentsByIntent.values()].reduce((total, documents) => total + documents.length, 0);
+  const accounting = evidence.inputAccounting;
+  if (
+    !accounting ||
+    accounting.catalogEntriesScored !==
+      catalog.length * (evidence.schemaVersion === 2 ? 1 : requests.length) ||
+    accounting.documentsFetched !== selectedDocumentCount ||
+    accounting.guidanceExcerptsRetained !== guidanceExcerptCount ||
+    !Number.isInteger(accounting.documentBytesFetched) ||
+    accounting.documentBytesFetched < 0 ||
+    !Number.isInteger(accounting.guidanceExcerptBytesRetained) ||
+    accounting.guidanceExcerptBytesRetained < 0
+  ) {
+    throw new Error("Azure Guidelines search input accounting is inconsistent.");
+  }
+
+  /** @type {Map<string, ComplianceDecision>} */
+  const decisionsByIntent = new Map();
+  /** @type {Record<string, unknown>[]} */
+  const findings = [];
+  for (const decision of decisions) {
+    assertKeys(
+      decision,
+      [
+        "reviewUnitId",
+        "applicableGuidance",
+        "sourceChangeIds",
+        "hunkIds",
+        "declarationIds",
+        "decision",
+        "title",
+        "severity",
+        "expected",
+        "actual",
+        "rationale",
+      ],
+      `Azure Guidelines decision ${decision.reviewUnitId}`,
+    );
+    if (
+      !DECISIONS.includes(decision.decision) ||
+      !Array.isArray(decision.applicableGuidance) ||
+      !Array.isArray(decision.sourceChangeIds) ||
+      !Array.isArray(decision.hunkIds) ||
+      !Array.isArray(decision.declarationIds) ||
+      !decision.actual?.trim() ||
+      !decision.rationale?.trim()
+    ) {
+      throw new Error(`Azure Guidelines decision ${decision.reviewUnitId} is incomplete.`);
+    }
+    if (
+      decision.decision === "applicable-fail" &&
+      (!decision.title?.trim() ||
+        typeof decision.severity !== "string" ||
+        !["high", "medium", "low"].includes(decision.severity))
+    ) {
+      throw new Error(
+        `Azure Guidelines decision ${decision.reviewUnitId} lacks finding presentation.`,
+      );
+    }
+    if (
+      decision.decision === "no-applicable-guidance" &&
+      (decision.applicableGuidance.length ||
+        (blockersByIntent.get(decision.reviewUnitId) ?? []).length)
+    ) {
+      throw new Error(
+        `Azure Guidelines decision ${decision.reviewUnitId} cannot use no-applicable-guidance with applicable guidance or blockers.`,
+      );
+    }
+    const request = requireRequest(decision.reviewUnitId);
+    /**
+     * @param {string[]} actual
+     * @param {string[]} expected
+     */
+    const subset = (actual, expected) =>
+      !duplicates(actual).length && actual.every((item) => expected.includes(item));
+    if (
+      !subset(decision.sourceChangeIds, request.sourceChangeIds) ||
+      !subset(decision.hunkIds, request.hunkIds) ||
+      !subset(decision.declarationIds, request.declarationIds)
+    ) {
+      throw new Error(
+        `Azure Guidelines decision ${decision.reviewUnitId} has incorrect source evidence.`,
+      );
+    }
+    if (
+      decision.decision.startsWith("applicable-") &&
+      (!decision.expected?.trim() ||
+        !decision.applicableGuidance.length ||
+        !decision.sourceChangeIds.length ||
+        !decision.hunkIds.length ||
+        !decision.declarationIds.length)
+    ) {
+      throw new Error(
+        `Azure Guidelines decision ${decision.reviewUnitId} lacks applicable evidence.`,
+      );
+    }
+    for (const applicable of decision.applicableGuidance) {
+      assertKeys(
+        applicable,
+        ["canonicalDocumentUrl", "guidanceSection"],
+        `Azure Guidelines guidance ${decision.reviewUnitId}`,
+      );
+      const document = documentsByIntent
+        .get(decision.reviewUnitId)
+        ?.find((item) => item.canonicalUrl === applicable.canonicalDocumentUrl);
+      const guidance = document?.guidance.find(
+        (item) =>
+          item.section === applicable.guidanceSection &&
+          item.applicableDeclarationIds.some((id) => decision.declarationIds.includes(id)),
+      );
+      if (!guidance) {
+        throw new Error(
+          `Azure Guidelines decision ${decision.reviewUnitId} uses unfetched guidance.`,
+        );
+      }
+    }
+    const source = sourceEvidence(request, decision.declarationIds, decision.hunkIds, sourceMap);
+    const assessment = {
+      ...decision,
+      gap: decision.rationale,
+      ...source,
     };
-  });
-  const unassessedIntentIds = intentAssessments.filter((item) => item.decision === "not-assessed").map((item) => item.reviewUnitId);
-  const status = findings.length ? "failed" : blockers.length || unassessedIntentIds.length ? "not-assessed" : "passed";
+    decisionsByIntent.set(decision.reviewUnitId, assessment);
+    if (decision.decision === "applicable-fail") {
+      findings.push({
+        id: stableId("compliance", {
+          reviewUnitId: decision.reviewUnitId,
+        }),
+        semanticIntentId: decision.reviewUnitId,
+        title: decision.title,
+        severity: decision.severity,
+        applicableGuidance: decision.applicableGuidance.map((item) => {
+          const document = documentsByIntent
+            .get(decision.reviewUnitId)
+            ?.find((candidate) => candidate.canonicalUrl === item.canonicalDocumentUrl);
+          const guidance = document?.guidance.find(
+            (candidate) => candidate.section === item.guidanceSection,
+          );
+          if (!guidance) {
+            throw new Error(
+              `Azure Guidelines decision ${decision.reviewUnitId} uses missing guidance.`,
+            );
+          }
+          return {
+            ...item,
+            excerpt: guidance.excerpt,
+          };
+        }),
+        declarationIds: decision.declarationIds,
+        sourceChangeIds: decision.sourceChangeIds,
+        hunkIds: decision.hunkIds,
+        expected: decision.expected,
+        actual: decision.actual,
+        gap: decision.rationale,
+        ...source,
+      });
+    }
+  }
+
+  const intentAssessments = requests.map((request) => ({
+    semanticIntentId: request.reviewUnitId,
+    ...decisionsByIntent.get(request.reviewUnitId),
+    sourceChangeIds: request.sourceChangeIds,
+    hunkIds: request.hunkIds,
+    declarationIds: request.declarationIds,
+    ...(evidence.schemaVersion === 1
+      ? {
+          catalogRanking: catalogRankingByIntent.get(request.reviewUnitId),
+          documents: documentsByIntent.get(request.reviewUnitId),
+        }
+      : {}),
+    blockers: blockersByIntent.get(request.reviewUnitId),
+  }));
+  const assessedIntentIds = decisions
+    .filter(
+      (item) =>
+        item.decision === "applicable-pass" ||
+        item.decision === "applicable-fail" ||
+        item.decision === "no-applicable-guidance",
+    )
+    .map((item) => item.reviewUnitId);
+  const unassessedIntentIds = requests
+    .map((item) => item.reviewUnitId)
+    .filter((id) => !assessedIntentIds.includes(id));
+  const status = findings.length
+    ? "failed"
+    : blockers.length || unassessedIntentIds.length
+      ? "not-assessed"
+      : "passed";
   return {
     status,
-    summary: findings.length ? `${findings.length} documentation-grounded Azure Guidelines finding(s).`
-      : status === "not-assessed" ? "Azure Guidelines evidence or intent-scoped review coverage is incomplete."
-        : decisions.some((item) => item.decision === "no-applicable-guidance")
-          ? "Required review and targeted discovery completed; no applicable guidance was found for one or more intents. This is not an all-guidelines compliance pass."
-          : requests.length ? "All assessed intents match their applicable reviewed guidance." : "No assessable Semantic intents require Azure Guidelines review.",
+    summary:
+      status === "failed"
+        ? `${findings.length} documentation-grounded Azure Guidelines finding(s).`
+        : status === "passed"
+          ? decisions.some((item) => item.decision === "no-applicable-guidance")
+            ? "All Semantic intents were assessed; no applicable guidance was found for one or more intents."
+            : "All Semantic intents match applicable fetched guidance."
+          : "Azure Guidelines evidence or Semantic intent coverage is incomplete.",
     coverage: {
-      semanticIntentCount: requests.length, assessedIntentCount: requests.length - unassessedIntentIds.length,
-      selectedDocumentCount: selectedIds.length, unassessedIntentIds,
+      semanticIntentCount: requests.length,
+      assessedIntentCount: assessedIntentIds.length,
+      selectedDocumentCount,
+      unassessedIntentIds,
     },
-    sharedSearch: {
-      documentSelections: evidence.documentSelections, documents: finalDocuments,
-      discoveryResults: evidence.discoveryResults, additionalSelections: evidence.additionalSelections,
-    },
-    intentAssessments, findings, retrievalFailures: evidence.retrievalAttempts,
-    blockers: [...new Map(blockers.map((item) => [canonicalJson(item), item])).values()],
+    ...(evidence.schemaVersion === 2
+      ? {
+          sharedSearch: {
+            catalogRanking: evidence.catalogRanking,
+            documents: documentsByIntent.get(requests[0]?.reviewUnitId) ?? [],
+          },
+        }
+      : {}),
+    intentAssessments,
+    findings,
+    retrievalFailures: retrievalFailures.map((failure) => ({ ...failure })),
+    blockers,
   };
 }

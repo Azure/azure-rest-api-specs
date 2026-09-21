@@ -6,6 +6,10 @@ import test from "node:test";
 import { readJson, writeJson } from "./cli.mjs";
 import { finalizeAssessment } from "./finalize-assessment.mjs";
 
+/** @typedef {{dimensions: {semantic: {items: unknown[]}}}} FinalAssessment */
+/** @typedef {import("./assessment-judgment.schema.js").TypeSpecAssessmentJudgment} AssessmentJudgment */
+/** @typedef {{state: string, failure: {code: string}}} TestWorkflowState */
+
 function fixture() {
   const work = fs.mkdtempSync(path.join(os.tmpdir(), "finalize-assessment-"));
   writeJson(path.join(work, "preparation-manifest.json"), {
@@ -68,7 +72,7 @@ function fixture() {
     inputAccounting: {},
   });
   writeJson(path.join(work, "assessment-judgment.json"), {
-    schemaVersion: 2,
+    schemaVersion: 1,
     semanticIntents: [
       {
         reviewUnitId: "semantic-1",
@@ -85,7 +89,7 @@ function fixture() {
   return work;
 }
 
-test("guarded finalization writes only validated complete artifacts", () => {
+void test("guarded finalization writes only validated complete artifacts", () => {
   const work = fixture();
   try {
     const first = finalizeAssessment({ work });
@@ -93,27 +97,35 @@ test("guarded finalization writes only validated complete artifacts", () => {
     assert.ok(fs.existsSync(first.reportPath));
     assert.equal(Number.isInteger(first.finalizationMs), true);
     assert.ok(first.finalizationMs >= 0);
-    const assessment = readJson(first.assessmentPath);
+    const assessment = /** @type {FinalAssessment} */ (readJson(first.assessmentPath));
     assert.equal(assessment.dimensions.semantic.items.length, 1);
-    assert.equal(readJson(path.join(work, "workflow-state.json")).state, "complete");
+    assert.equal(
+      /** @type {TestWorkflowState} */ (readJson(path.join(work, "workflow-state.json"))).state,
+      "complete",
+    );
     const second = finalizeAssessment({ work });
     assert.ok(fs.existsSync(second.assessmentPath));
-    assert.equal(readJson(path.join(work, "workflow-state.json")).state, "complete");
+    assert.equal(
+      /** @type {TestWorkflowState} */ (readJson(path.join(work, "workflow-state.json"))).state,
+      "complete",
+    );
   } finally {
     fs.rmSync(work, { recursive: true, force: true });
   }
 });
 
-test("invalid Agent output leaves a correction-ready workflow state", () => {
+void test("invalid Agent output leaves a correction-ready workflow state", () => {
   const work = fixture();
   try {
     const judgmentPath = path.join(work, "assessment-judgment.json");
-    const judgment = readJson(judgmentPath);
+    const judgment = /** @type {AssessmentJudgment} */ (readJson(judgmentPath));
     judgment.semanticIntents[0].title = "";
     writeJson(judgmentPath, judgment);
     assert.throws(() => finalizeAssessment({ work }), /incomplete/);
     assert.equal(fs.existsSync(path.join(work, "assessment.json")), false);
-    const state = readJson(path.join(work, "workflow-state.json"));
+    const state = /** @type {TestWorkflowState} */ (
+      readJson(path.join(work, "workflow-state.json"))
+    );
     assert.equal(state.state, "awaiting-agent-judgment");
     assert.equal(state.failure.code, "finalization-failed");
   } finally {

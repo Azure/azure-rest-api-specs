@@ -1,15 +1,25 @@
 import crypto from "node:crypto";
 
+/** @typedef {import("./runtime-types.js").JsonValue} JsonValue */
+
+/**
+ * @param {unknown} value
+ * @param {Set<object>} stack
+ * @returns {JsonValue}
+ */
 function canonicalValue(value, stack) {
   if (value === null || typeof value === "string" || typeof value === "boolean") return value;
   if (typeof value === "number") {
-    if (!Number.isFinite(value)) throw new TypeError("Canonical JSON does not support non-finite numbers.");
-    return Object.is(value, -0) ? 0 : value;
+    if (!Number.isFinite(value))
+      throw new TypeError("Canonical JSON does not support non-finite numbers.");
+    return value === 0 ? 0 : value;
   }
   if (Array.isArray(value)) {
     if (stack.has(value)) throw new TypeError("Canonical JSON does not support cyclic values.");
     stack.add(value);
-    const result = value.map((item) =>
+    const items = /** @type {unknown[]} */ (value);
+    /** @type {JsonValue[]} */
+    const result = items.map((item) =>
       item === undefined || typeof item === "function" || typeof item === "symbol"
         ? null
         : canonicalValue(item, stack),
@@ -20,9 +30,11 @@ function canonicalValue(value, stack) {
   if (typeof value === "object") {
     if (stack.has(value)) throw new TypeError("Canonical JSON does not support cyclic values.");
     stack.add(value);
+    /** @type {{[key: string]: JsonValue}} */
     const result = {};
-    for (const key of Object.keys(value).sort()) {
-      const item = value[key];
+    const objectValue = /** @type {Record<string, unknown>} */ (value);
+    for (const key of Object.keys(objectValue).sort()) {
+      const item = objectValue[key];
       if (item === undefined || typeof item === "function" || typeof item === "symbol") continue;
       result[key] = canonicalValue(item, stack);
     }
@@ -32,10 +44,20 @@ function canonicalValue(value, stack) {
   throw new TypeError(`Canonical JSON does not support ${typeof value} values.`);
 }
 
+/**
+ * @param {unknown} value
+ * @returns {string}
+ */
 export function canonicalJson(value) {
   return JSON.stringify(canonicalValue(value, new Set()));
 }
 
+/**
+ * @param {string} prefix
+ * @param {unknown} value
+ * @param {number} [length]
+ * @returns {string}
+ */
 export function stableId(prefix, value, length = 16) {
   if (!/^[a-z][a-z0-9-]*$/.test(prefix)) {
     throw new TypeError(`Invalid stable ID prefix: ${prefix}`);
@@ -47,10 +69,20 @@ export function stableId(prefix, value, length = 16) {
   return `${prefix}-${digest.slice(0, length)}`;
 }
 
+/**
+ * @param {unknown} left
+ * @param {unknown} right
+ * @returns {number}
+ */
 export function compareCanonical(left, right) {
   return canonicalJson(left).localeCompare(canonicalJson(right));
 }
 
+/**
+ * @template T
+ * @param {T[]} values
+ * @returns {T[]}
+ */
 export function sortCanonical(values) {
   return [...values].sort(compareCanonical);
 }

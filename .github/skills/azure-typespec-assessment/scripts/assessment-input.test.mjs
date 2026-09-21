@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { spawnSync } from "node:child_process";
 import test from "node:test";
 import {
   commonSpecificationRoot,
@@ -12,6 +12,7 @@ import {
   resolveAssessmentInput,
 } from "./assessment-input.mjs";
 
+/** @param {string} repo @param {...string} args */
 function git(repo, ...args) {
   const result = spawnSync("git", ["-C", repo, ...args], {
     encoding: "utf8",
@@ -20,58 +21,44 @@ function git(repo, ...args) {
   return result.stdout.trim();
 }
 
-test("parses supported pull request identifiers", () => {
+void test("parses supported pull request identifiers", () => {
   assert.deepEqual(
-    parsePullRequest("https://github.com/Azure/azure-rest-api-specs/pull/43718"),
+    parsePullRequest("https://github.com/Azure/azure-rest-api-specs/pull/43718", ""),
     {
       owner: "Azure",
       repository: "azure-rest-api-specs",
       number: 43718,
     },
   );
-  assert.deepEqual(parsePullRequest("Azure/azure-rest-api-specs#43718"), {
+  assert.deepEqual(parsePullRequest("Azure/azure-rest-api-specs#43718", ""), {
     owner: "Azure",
     repository: "azure-rest-api-specs",
     number: 43718,
   });
-  assert.deepEqual(
-    parsePullRequest(
-      "43718",
-      "git@github.com:Azure/azure-rest-api-specs.git",
-    ),
-    {
-      owner: "Azure",
-      repository: "azure-rest-api-specs",
-      number: 43718,
-    },
-  );
-  assert.deepEqual(
-    parseGitHubRepository(
-      "https://github.com/Azure/azure-rest-api-specs.git",
-    ),
-    { owner: "Azure", repository: "azure-rest-api-specs" },
-  );
+  assert.deepEqual(parsePullRequest("43718", "git@github.com:Azure/azure-rest-api-specs.git"), {
+    owner: "Azure",
+    repository: "azure-rest-api-specs",
+    number: 43718,
+  });
+  assert.deepEqual(parseGitHubRepository("https://github.com/Azure/azure-rest-api-specs.git"), {
+    owner: "Azure",
+    repository: "azure-rest-api-specs",
+  });
 });
 
-test("derives sparse and common specification roots", () => {
+void test("derives sparse and common specification roots", () => {
   const roots = deriveSparseRoots([
     "specification/network/Network/main.tsp",
     "specification/network/Network/models.tsp",
     "specification/storage/Storage/tspconfig.yaml",
     "README.md",
   ]);
-  assert.deepEqual(roots, [
-    "specification/network",
-    "specification/storage",
-  ]);
+  assert.deepEqual(roots, ["specification/network", "specification/storage"]);
   assert.equal(commonSpecificationRoot(roots), "specification");
-  assert.equal(
-    commonSpecificationRoot(["specification/network"]),
-    "specification/network",
-  );
+  assert.equal(commonSpecificationRoot(["specification/network"]), "specification/network");
 });
 
-test("resolves an explicit head without changing the current checkout", (t) => {
+void test("resolves an explicit head without changing the current checkout", (t) => {
   const repo = fs.mkdtempSync(path.join(os.tmpdir(), "assessment-input-"));
   t.after(() => fs.rmSync(repo, { recursive: true, force: true }));
   git(repo, "init", "-q");
@@ -109,7 +96,7 @@ test("resolves an explicit head without changing the current checkout", (t) => {
   assert.ok(resolved.invocation.timings.setupExcludingFetchMs < 60_000);
 });
 
-test("discovers both service roots for a cross-service TypeSpec rename", (t) => {
+void test("discovers both service roots for a cross-service TypeSpec rename", (t) => {
   const repo = fs.mkdtempSync(path.join(os.tmpdir(), "assessment-rename-"));
   t.after(() => fs.rmSync(repo, { recursive: true, force: true }));
   git(repo, "init", "-q");
@@ -123,12 +110,7 @@ test("discovers both service roots for a cross-service TypeSpec rename", (t) => 
   git(repo, "commit", "-qm", "base");
   const base = git(repo, "rev-parse", "HEAD");
   fs.mkdirSync(destination, { recursive: true });
-  git(
-    repo,
-    "mv",
-    "specification/alpha/Widget/main.tsp",
-    "specification/beta/Widget/main.tsp",
-  );
+  git(repo, "mv", "specification/alpha/Widget/main.tsp", "specification/beta/Widget/main.tsp");
   git(repo, "commit", "-qm", "move service");
   const head = git(repo, "rev-parse", "HEAD");
 
@@ -139,14 +121,11 @@ test("discovers both service roots for a cross-service TypeSpec rename", (t) => 
     output: path.join(repo, "output"),
   });
 
-  assert.deepEqual(resolved.sparseRoots, [
-    "specification/alpha",
-    "specification/beta",
-  ]);
+  assert.deepEqual(resolved.sparseRoots, ["specification/alpha", "specification/beta"]);
   assert.equal(resolved.specification, "specification");
 });
 
-test("exposes pull request metadata for downstream reports", (t) => {
+void test("exposes pull request metadata for downstream reports", (t) => {
   const repo = fs.mkdtempSync(path.join(os.tmpdir(), "assessment-pr-"));
   t.after(() => fs.rmSync(repo, { recursive: true, force: true }));
   git(repo, "init", "-q");
@@ -183,7 +162,7 @@ test("exposes pull request metadata for downstream reports", (t) => {
   assert.deepEqual(resolved.invocation.pullRequest, pullRequest);
 });
 
-test("fetches missing explicit refs without checking them out", (t) => {
+void test("fetches missing explicit refs without checking them out", (t) => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), "assessment-fetch-"));
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
   const remote = path.join(root, "remote");
@@ -223,7 +202,7 @@ test("fetches missing explicit refs without checking them out", (t) => {
   assert.equal(git(repo, "symbolic-ref", "HEAD"), originalHead);
 });
 
-test("rejects conflicting remote comparison inputs", () => {
+void test("rejects conflicting remote comparison inputs", () => {
   assert.throws(
     () =>
       resolveAssessmentInput({

@@ -1,50 +1,90 @@
 import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
-import { parseArgs, isMain, runMain, writeJson } from "./cli.mjs";
+import { resolveProjectApiVersions } from "./api-version-selection.mjs";
+import { isMain, parseArgs, runMain, writeJson } from "./cli.mjs";
+import { runProjectCompilers } from "./compiler-runner.mjs";
 import {
   collectChanges,
   createSparseWorktree,
   discoverProjects,
-  normalizeSpecification,
   normalizeSparseRoots,
+  normalizeSpecification,
   resolveComparison,
 } from "./git-evidence.mjs";
-import { addCompilerEvidence, buildSourceIndex } from "./source-index.mjs";
-import { runProjectCompilers } from "./compiler-runner.mjs";
-import { resolveProjectApiVersions } from "./api-version-selection.mjs";
 import { ensureDependencies } from "./package-manager.mjs";
+import { addCompilerEvidence, buildSourceIndex } from "./source-index.mjs";
 
+/** @typedef {import("./runtime-types.js").ChangedFile} ChangedFile */
+/** @typedef {import("./runtime-types.js").PreparationBlocker} PreparationBlocker */
+/** @typedef {import("./runtime-types.js").PreparationManifest} PreparationManifest */
+/** @typedef {import("./runtime-types.js").PreparationProject} PreparationProject */
+/** @typedef {import("./runtime-types.js").SourceIndex} SourceIndex */
+
+/** @param {string} project */
 function stableProjectId(project) {
   return `project-${crypto.createHash("sha256").update(project).digest("hex").slice(0, 12)}`;
 }
 
+/** @param {string | undefined} file */
 function isTypeSpecPath(file) {
   return file?.endsWith(".tsp") || path.basename(file ?? "") === "tspconfig.yaml";
 }
 
+/**
+ * @param {ChangedFile} change
+ * @param {string} root
+ */
 function changeTouchesRoot(change, root) {
   return [change.path, change.previousPath].some(
     (file) => file === root || file?.startsWith(`${root}/`),
   );
 }
 
+/**
+ * @param {ChangedFile[]} changes
+ * @returns {ChangedFile[]}
+ */
 export function typeSpecChangesForAnalysis(changes) {
-  return changes.flatMap((change) => {
-    if (!change.previousPath || change.previousPath === change.path) return [change];
-    const previousRelevant = isTypeSpecPath(change.previousPath);
-    const currentRelevant = isTypeSpecPath(change.path);
-    return [
-      ...(previousRelevant && change.status !== "added"
-        ? [{ ...change, path: change.previousPath, status: "removed" }]
-        : []),
-      ...(currentRelevant
-        ? [{ ...change, status: "added" }]
-        : []),
-    ];
-  }).sort((left, right) => left.path.localeCompare(right.path));
+  return changes
+    .flatMap(
+      /** @returns {ChangedFile[]} */ (change) => {
+        if (!change.previousPath || change.previousPath === change.path) return [change];
+        const previousRelevant = isTypeSpecPath(change.previousPath);
+        const currentRelevant = isTypeSpecPath(change.path);
+        return [
+          ...(previousRelevant && change.status !== "added"
+            ? [
+                {
+                  ...change,
+                  path: change.previousPath,
+                  status: /** @type {const} */ ("removed"),
+                },
+              ]
+            : []),
+          ...(currentRelevant ? [{ ...change, status: /** @type {const} */ ("added") }] : []),
+        ];
+      },
+    )
+    .sort((left, right) => left.path.localeCompare(right.path));
 }
 
+/**
+ * @param {{
+ *   projects: string[],
+ *   sourceIndex: SourceIndex,
+ *   blockers: PreparationBlocker[],
+ *   baseWorktree: string,
+ *   currentWorktree: string,
+ *   baseCommit: string,
+ *   headCommit: string,
+ *   workRoot: string,
+ *   enabled?: boolean,
+ *   resolveApiVersions?: typeof resolveProjectApiVersions,
+ *   runCompilers?: typeof runProjectCompilers
+ * }} options
+ * @returns {PreparationProject[]}
+ */
 export function prepareProjectRecords({
   projects,
   sourceIndex,
@@ -58,6 +98,7 @@ export function prepareProjectRecords({
   resolveApiVersions = resolveProjectApiVersions,
   runCompilers = runProjectCompilers,
 }) {
+  /** @type {PreparationProject[]} */
   const records = [];
   for (const project of projects) {
     const projectId = stableProjectId(project);
@@ -67,16 +108,18 @@ export function prepareProjectRecords({
           change.path.startsWith(`${project}/`) ||
           change.path === project ||
           !projects.some(
-            (candidate) =>
-              change.path.startsWith(`${candidate}/`) || change.path === candidate,
+            (candidate) => change.path.startsWith(`${candidate}/`) || change.path === candidate,
           ),
       )
       .map((change) => change.id);
+    /** @type {PreparationBlocker[]} */
     const projectBlockers = [];
+    /** @param {PreparationBlocker} blocker */
     const addBlocker = (blocker) => {
       projectBlockers.push(blocker);
       blockers.push(blocker);
     };
+    /** @type {PreparationProject} */
     const record = {
       id: projectId,
       path: project,
@@ -105,13 +148,17 @@ export function prepareProjectRecords({
         addBlocker({
           code: "api-version-resolution-failed",
           projectId,
-          message: error.message,
+          message: error instanceof Error ? error.message : String(error),
         });
       }
     }
     if (enabled && !projectBlockers.length) {
-      for (const comparisonRole of ["baseline", "target"]) {
-        const selection = record.artifactComparison[comparisonRole];
+      for (const comparisonRole of /** @type {const} */ (["baseline", "target"])) {
+        const selection = record.artifactComparison?.[comparisonRole];
+        if (!selection) throw new Error(`Missing ${comparisonRole} artifact selection.`);
+        if (!selection.commit) {
+          throw new Error(`Missing ${comparisonRole} source commit.`);
+        }
         const worktree = selection.sourceRevision === "base" ? baseWorktree : currentWorktree;
         try {
           record.artifacts[comparisonRole] = runCompilers({
@@ -124,7 +171,7 @@ export function prepareProjectRecords({
             workRoot,
             apiVersion: selection.apiVersion,
           });
-          for (const emitter of ["autorest", "tcgc"]) {
+          for (const emitter of /** @type {const} */ (["autorest", "tcgc"])) {
             if (record.artifacts[comparisonRole][emitter].status === "failed") {
               addBlocker({
                 code: `${emitter}-compile-failed`,
@@ -141,7 +188,7 @@ export function prepareProjectRecords({
             projectId,
             comparisonRole,
             sourceRevision: selection.sourceRevision,
-            message: error.message,
+            message: error instanceof Error ? error.message : String(error),
           });
         }
       }
@@ -151,6 +198,11 @@ export function prepareProjectRecords({
   return records;
 }
 
+/**
+ * @param {string} repo
+ * @param {string} currentWorktree
+ * @param {ChangedFile[]} changedFiles
+ */
 function copyOverlay(repo, currentWorktree, changedFiles) {
   for (const file of changedFiles) {
     const source = path.join(repo, file.path);
@@ -164,9 +216,16 @@ function copyOverlay(repo, currentWorktree, changedFiles) {
   }
 }
 
+/**
+ * @param {string} repo
+ * @param {string[]} projects
+ * @param {string[]} sparseRoots
+ */
 function findExternalLocalImports(repo, projects, sparseRoots) {
   const serviceBoundaries = sparseRoots.map((root) => path.resolve(repo, root));
+  /** @type {{file: string, import: string}[]} */
   const failures = [];
+  /** @param {string} directory */
   const visit = (directory) => {
     if (!fs.existsSync(directory)) return;
     for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
@@ -194,6 +253,22 @@ function findExternalLocalImports(repo, projects, sparseRoots) {
   return failures;
 }
 
+/**
+ * @param {{
+ *   repo?: string,
+ *   base?: string,
+ *   head?: string,
+ *   mergeBaseCommit?: string,
+ *   includeWorkingTree?: boolean,
+ *   specification?: string,
+ *   output: string,
+ *   sparse_root?: string | string[],
+ *   sparseRoots?: string | string[],
+ *   pullRequest?: unknown,
+ *   invocation?: {timings?: Record<string, number>, [key: string]: unknown}
+ * }} options
+ * @returns {Promise<PreparationManifest>}
+ */
 export async function prepareAssessment({
   repo,
   base,
@@ -223,24 +298,20 @@ export async function prepareAssessment({
     mergeBaseCommit,
   );
   const comparisonMs = Math.round(performance.now() - comparisonStarted);
+  const rawSparseRoots = requestedSparseRoots ?? sparse_root;
   const sparseRoots = normalizeSparseRoots(
-    requestedSparseRoots ?? sparse_root,
+    typeof rawSparseRoots === "string" ? [rawSparseRoots] : rawSparseRoots,
     scope,
   );
   const changeDiscoveryStarted = performance.now();
-  const changedFiles = collectChanges(
-    repository,
-    comparison.mergeBaseCommit,
-    sparseRoots,
-    {
-      headRef: comparison.headCommit,
-      includeWorkingTree,
-    },
-  ).filter((file) => sparseRoots.some((root) => changeTouchesRoot(file, root)));
-  const changeDiscoveryMs = Math.round(
-    performance.now() - changeDiscoveryStarted,
-  );
+  const changedFiles = collectChanges(repository, comparison.mergeBaseCommit, sparseRoots, {
+    headRef: comparison.headCommit,
+    includeWorkingTree,
+  }).filter((file) => sparseRoots.some((root) => changeTouchesRoot(file, root)));
+  const changeDiscoveryMs = Math.round(performance.now() - changeDiscoveryStarted);
+  /** @type {PreparationBlocker[]} */
   const blockers = [];
+  /** @type {PreparationManifest} */
   const manifest = {
     schemaVersion: 1,
     repository: { root: repository, remoteUrl: comparison.remoteUrl },
@@ -268,9 +339,7 @@ export async function prepareAssessment({
     },
   };
   manifest.timings.setupExcludingFetchMs =
-    (manifest.timings.setupExcludingFetchMs ?? 0) +
-    comparisonMs +
-    changeDiscoveryMs;
+    (manifest.timings.setupExcludingFetchMs ?? 0) + comparisonMs + changeDiscoveryMs;
   if (!changedFiles.length) {
     manifest.status = "no-changes";
     manifest.timings.totalMs = Math.round(performance.now() - started);
@@ -305,11 +374,12 @@ export async function prepareAssessment({
       copyOverlay(repository, currentWorktree, analysisFiles);
     }
   } catch (error) {
-    blockers.push({ code: "workspace-preparation-failed", message: error.message });
+    blockers.push({
+      code: "workspace-preparation-failed",
+      message: error instanceof Error ? error.message : String(error),
+    });
   }
-  manifest.timings.workspacePreparationMs = Math.round(
-    performance.now() - workspaceStarted,
-  );
+  manifest.timings.workspacePreparationMs = Math.round(performance.now() - workspaceStarted);
 
   const projectDiscoveryStarted = performance.now();
   const discoveredProjects = [
@@ -317,28 +387,25 @@ export async function prepareAssessment({
       sparseRoots.flatMap((root) =>
         discoverProjects(
           currentWorktree,
-          analysisFiles.filter(
-            (file) => file.path === root || file.path.startsWith(`${root}/`),
-          ),
+          analysisFiles.filter((file) => file.path === root || file.path.startsWith(`${root}/`)),
           root,
         ),
       ),
     ),
   ].sort();
-  const projects = discoveredProjects.filter((project) =>
-    !discoveredProjects.some((candidate) =>
-      candidate !== project && candidate.startsWith(`${project}/`)));
+  const projects = discoveredProjects.filter(
+    (project) =>
+      !discoveredProjects.some(
+        (candidate) => candidate !== project && candidate.startsWith(`${project}/`),
+      ),
+  );
   if (!projects.length) {
     blockers.push({
       code: "project-not-found",
       message: `No affected tspconfig.yaml was found under ${scope}.`,
     });
   }
-  const externalImports = findExternalLocalImports(
-    currentWorktree,
-    projects,
-    sparseRoots,
-  );
+  const externalImports = findExternalLocalImports(currentWorktree, projects, sparseRoots);
   if (externalImports.length) {
     blockers.push({
       code: "unsupported-import-outside-service",
@@ -347,9 +414,7 @@ export async function prepareAssessment({
         .join(", ")}`,
     });
   }
-  manifest.timings.projectDiscoveryMs = Math.round(
-    performance.now() - projectDiscoveryStarted,
-  );
+  manifest.timings.projectDiscoveryMs = Math.round(performance.now() - projectDiscoveryStarted);
   manifest.timings.setupExcludingFetchMs =
     (manifest.timings.setupExcludingFetchMs ?? 0) +
     manifest.timings.workspacePreparationMs +
@@ -370,7 +435,10 @@ export async function prepareAssessment({
       };
     }
   } catch (error) {
-    blockers.push({ code: "dependency-setup-failed", message: error.message });
+    blockers.push({
+      code: "dependency-setup-failed",
+      message: error instanceof Error ? error.message : String(error),
+    });
   }
   if (!blockers.length && projects.length) {
     await addCompilerEvidence({
@@ -381,17 +449,19 @@ export async function prepareAssessment({
     });
     writeJson(path.join(work, "source", "source-index.json"), sourceIndex);
   }
-  manifest.projects.push(...prepareProjectRecords({
-    projects,
-    sourceIndex,
-    blockers,
-    baseWorktree,
-    currentWorktree,
-    baseCommit: comparison.mergeBaseCommit,
-    headCommit: comparison.headCommit,
-    workRoot: work,
-    enabled: !blockers.length,
-  }));
+  manifest.projects.push(
+    ...prepareProjectRecords({
+      projects,
+      sourceIndex,
+      blockers,
+      baseWorktree,
+      currentWorktree,
+      baseCommit: comparison.mergeBaseCommit,
+      headCommit: comparison.headCommit,
+      workRoot: work,
+      enabled: !blockers.length,
+    }),
+  );
   manifest.status = blockers.length ? "blocked" : "ready";
   manifest.timings.totalMs = Math.round(performance.now() - started);
   writeJson(path.join(work, "preparation-manifest.json"), manifest);
@@ -399,14 +469,22 @@ export async function prepareAssessment({
 }
 
 if (isMain(import.meta.url)) {
-  runMain(async () => {
+  void runMain(async () => {
     const args = parseArgs(process.argv.slice(2), {
       required: ["specification", "output"],
       defaults: { repo: process.cwd(), base: "origin/main" },
       arrays: ["sparse-root"],
     });
-    const result = await prepareAssessment(args);
-    console.log(path.join(path.resolve(args.output), "preparation-manifest.json"));
+    const specification = args.specification;
+    const output = args.output;
+    if (typeof specification !== "string" || typeof output !== "string") {
+      throw new Error("--specification and --output must be paths.");
+    }
+    const options = /** @type {Parameters<typeof prepareAssessment>[0]} */ (
+      /** @type {unknown} */ ({ ...args, specification, output })
+    );
+    const result = await prepareAssessment(options);
+    console.log(path.join(path.resolve(output), "preparation-manifest.json"));
     if (result.status === "blocked") process.exitCode = 1;
   });
 }

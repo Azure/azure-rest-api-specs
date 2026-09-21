@@ -8,8 +8,7 @@
     "semanticSummaries",
     "restDecisions",
     "downstreamDecisions",
-    "discoveryResults",
-    "additionalSelections",
+    "catalogScores",
     "fetchedDocuments",
     "failedRetrievals",
     "searchBlockers",
@@ -18,7 +17,7 @@
     "blockers"
   ],
   "properties": {
-    "schemaVersion": { "const": 2 },
+    "schemaVersion": { "const": 1 },
     "semanticSummaries": {
       "type": "array",
       "items": { "$ref": "#/$defs/semanticSummary" }
@@ -29,17 +28,13 @@
       "type": "array",
       "items": { "$ref": "#/$defs/inferenceResult" }
     },
-    "discoveryResults": {
+    "catalogScores": {
       "type": "array",
-      "items": { "$ref": "#/$defs/discoveryResult" }
-    },
-    "additionalSelections": {
-      "type": "array",
-      "uniqueItems": true,
-      "items": { "$ref": "#/$defs/additionalSelection" }
+      "items": { "$ref": "#/$defs/catalogScore" }
     },
     "fetchedDocuments": {
       "type": "array",
+      "maxItems": 4,
       "items": { "$ref": "#/$defs/fetchedDocument" }
     },
     "failedRetrievals": {
@@ -48,15 +43,7 @@
     },
     "searchBlockers": {
       "type": "array",
-      "items": {
-        "type": "object",
-        "additionalProperties": false,
-        "required": ["reviewUnitId", "message"],
-        "properties": {
-          "reviewUnitId": { "type": "string", "pattern": "^semantic-" },
-          "message": { "type": "string", "minLength": 1 }
-        }
-      }
+      "items": { "type": "string", "minLength": 1 }
     },
     "complianceJudgments": {
       "type": "array",
@@ -174,53 +161,30 @@
         }
       ]
     },
-    "discoveryResult": {
+    "catalogScore": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["requestId", "intentId", "outcome", "catalogIds", "rationale"],
+      "required": [
+        "catalogId",
+        "exactSymbol",
+        "patternCategory",
+        "servicePlane",
+        "changeContext",
+        "rationale"
+      ],
       "properties": {
-        "requestId": { "type": "string", "pattern": "^discovery-request-" },
-        "intentId": { "type": "string", "pattern": "^semantic-" },
-        "outcome": { "enum": ["selected", "no-match", "blocked"] },
-        "catalogIds": { "$ref": "#/$defs/catalogIds" },
+        "catalogId": { "$ref": "#/$defs/catalogId" },
+        "exactSymbol": { "enum": [0, 4] },
+        "patternCategory": { "enum": [0, 3] },
+        "servicePlane": { "enum": [0, 2] },
+        "changeContext": { "enum": [0, 1] },
         "rationale": { "type": "string", "minLength": 1 }
-      },
-      "allOf": [{ "$ref": "#/$defs/discoveryOutcome" }]
-    },
-    "catalogIds": {
-      "type": "array",
-      "uniqueItems": true,
-      "items": { "$ref": "#/$defs/catalogId" }
-    },
-    "discoveryOutcome": {
-      "if": { "properties": { "outcome": { "const": "selected" } } },
-      "then": { "properties": { "catalogIds": { "minItems": 1 } } },
-      "else": { "properties": { "catalogIds": { "maxItems": 0 } } }
-    },
-    "additionalSelection": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["intentId", "sourceCatalogId", "sourceSection", "trigger", "outcome", "catalogIds", "rationale"],
-      "properties": {
-        "intentId": { "type": "string", "pattern": "^semantic-" },
-        "sourceCatalogId": { "$ref": "#/$defs/catalogId" },
-        "sourceSection": { "type": "string", "minLength": 1 },
-        "trigger": { "enum": ["linked-reference", "uncovered-concern"] },
-        "outcome": { "enum": ["selected", "no-match", "blocked"] },
-        "catalogIds": { "$ref": "#/$defs/catalogIds" },
-        "rationale": { "type": "string", "minLength": 1 }
-      },
-      "allOf": [{ "$ref": "#/$defs/discoveryOutcome" }]
+      }
     },
     "guidance": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "section",
-        "excerpt",
-        "queryTerms",
-        "examples"
-      ],
+      "required": ["section", "excerpt", "queryTerms", "examples"],
       "properties": {
         "section": { "type": "string", "minLength": 1 },
         "excerpt": { "type": "string", "minLength": 1 },
@@ -249,7 +213,6 @@
         "catalogId",
         "retrievedAt",
         "contentHash",
-        "retrievalSource",
         "bytes",
         "guidance",
         "noRelevantGuidance"
@@ -257,12 +220,11 @@
       "properties": {
         "catalogId": { "$ref": "#/$defs/catalogId" },
         "retrievedAt": { "type": "string", "format": "date-time" },
-        "retrievalSource": { "enum": ["network", "session-reuse"] },
         "contentHash": {
           "type": "string",
           "pattern": "^sha256:[0-9a-fA-F]{64}$"
         },
-        "bytes": { "type": "integer", "minimum": 1 },
+        "bytes": { "type": "integer", "minimum": 0 },
         "guidance": {
           "type": "array",
           "items": { "$ref": "#/$defs/guidance" }
@@ -300,17 +262,9 @@
     "complianceJudgment": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "reviewUnitId",
-        "reviewedCatalogIds",
-        "applicableGuidance",
-        "decision",
-        "actual",
-        "rationale"
-      ],
+      "required": ["reviewUnitId", "applicableGuidance", "decision", "actual", "rationale"],
       "properties": {
         "reviewUnitId": { "type": "string", "pattern": "^semantic-" },
-        "reviewedCatalogIds": { "$ref": "#/$defs/catalogIds" },
         "applicableGuidance": {
           "type": "array",
           "uniqueItems": true,
@@ -329,12 +283,7 @@
           "items": { "type": "string", "pattern": "^declaration-" }
         },
         "decision": {
-          "enum": [
-            "applicable-pass",
-            "applicable-fail",
-            "no-applicable-guidance",
-            "not-assessed"
-          ]
+          "enum": ["applicable-pass", "applicable-fail", "no-applicable-guidance", "not-assessed"]
         },
         "title": { "type": "string", "minLength": 1 },
         "severity": { "enum": ["high", "medium", "low"] },
@@ -391,10 +340,7 @@
           "then": { "required": ["title", "severity"] },
           "else": {
             "not": {
-              "anyOf": [
-                { "required": ["title"] },
-                { "required": ["severity"] }
-              ]
+              "anyOf": [{ "required": ["title"] }, { "required": ["severity"] }]
             }
           }
         }

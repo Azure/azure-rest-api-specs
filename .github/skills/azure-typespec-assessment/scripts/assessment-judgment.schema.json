@@ -13,7 +13,7 @@
     "blockers"
   ],
   "properties": {
-    "schemaVersion": { "const": 2 },
+    "schemaVersion": { "const": 1 },
     "semanticIntents": {
       "type": "array",
       "items": {
@@ -36,7 +36,6 @@
         "additionalProperties": false,
         "required": [
           "reviewUnitId",
-          "reviewedCatalogIds",
           "applicableGuidance",
           "sourceChangeIds",
           "hunkIds",
@@ -47,11 +46,6 @@
         ],
         "properties": {
           "reviewUnitId": { "type": "string", "pattern": "^semantic-" },
-          "reviewedCatalogIds": {
-            "type": "array",
-            "uniqueItems": true,
-            "items": { "type": "string", "pattern": "^catalog-entry-[0-9a-f]{12}$" }
-          },
           "applicableGuidance": {
             "type": "array",
             "uniqueItems": true,
@@ -83,12 +77,7 @@
             "items": { "type": "string", "pattern": "^declaration-" }
           },
           "decision": {
-            "enum": [
-              "applicable-pass",
-              "applicable-fail",
-              "no-applicable-guidance",
-              "not-assessed"
-            ]
+            "enum": ["applicable-pass", "applicable-fail", "no-applicable-guidance", "not-assessed"]
           },
           "title": { "type": "string", "minLength": 1 },
           "severity": { "enum": ["high", "medium", "low"] },

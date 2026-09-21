@@ -5,7 +5,7 @@ import path from "node:path";
 import test from "node:test";
 import { resolveTsp } from "./compiler-runner.mjs";
 
-test("runs the Windows TypeSpec shim through its JavaScript CLI without a shell", () => {
+void test("runs the Windows TypeSpec shim through its JavaScript CLI without a shell", () => {
   const worktree = fs.mkdtempSync(path.join(os.tmpdir(), "assessment-compiler-runner-"));
   const packageRoot = path.join(worktree, "node_modules", "@typespec", "compiler");
   const shim = path.join(worktree, "node_modules", ".bin", "tsp.cmd");

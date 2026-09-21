@@ -1,15 +1,50 @@
+import { spawnSync } from "node:child_process";
 import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
-import { spawnSync } from "node:child_process";
+import { isRecord, readJsonObject } from "./cli.mjs";
 
+/**
+ * @typedef {{
+ *   executable: string,
+ *   args: string[],
+ *   displayExecutable: string
+ * }} CompilerCommand
+ * @typedef {{
+ *   status: "succeeded" | "failed",
+ *   command: {executable: string, args: string[]},
+ *   exitCode: number | null,
+ *   durationMs: number,
+ *   configPath: string,
+ *   configHash: string,
+ *   logPath: string
+ * }} EmitterRun
+ * @typedef {{
+ *   path: string,
+ *   apiVersion?: string,
+ *   documentRole: "common" | "primary" | "feature",
+ *   contentHash: string
+ * }} OpenApiArtifact
+ */
+
+/**
+ * @param {string} file
+ * @returns {string}
+ */
 function hashFile(file) {
   return crypto.createHash("sha256").update(fs.readFileSync(file)).digest("hex");
 }
 
+/**
+ * @param {string} root
+ * @param {(file: string) => boolean} predicate
+ * @returns {string[]}
+ */
 function findFiles(root, predicate) {
   if (!fs.existsSync(root)) return [];
+  /** @type {string[]} */
   const files = [];
+  /** @param {string} directory */
   const visit = (directory) => {
     for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
       const fullPath = path.join(directory, entry.name);
@@ -21,14 +56,17 @@ function findFiles(root, predicate) {
   return files.sort();
 }
 
+/**
+ * @param {string} worktree
+ * @param {{platform?: NodeJS.Platform, execPath?: string}} [options]
+ * @returns {CompilerCommand}
+ */
 export function resolveTsp(
   worktree,
   { platform = process.platform, execPath = process.execPath } = {},
 ) {
   const candidates = [
-    ...(platform === "win32"
-      ? [path.join(worktree, "node_modules", ".bin", "tsp.cmd")]
-      : []),
+    ...(platform === "win32" ? [path.join(worktree, "node_modules", ".bin", "tsp.cmd")] : []),
     path.join(worktree, "node_modules", ".bin", "tsp"),
   ];
   const displayExecutable = candidates.find(fs.existsSync);
@@ -43,8 +81,14 @@ export function resolveTsp(
   if (!fs.existsSync(manifestPath)) {
     throw new Error(`TypeSpec compiler package manifest not found at ${manifestPath}.`);
   }
-  const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
-  const bin = typeof manifest.bin === "string" ? manifest.bin : manifest.bin?.tsp;
+  const manifest = readJsonObject(manifestPath);
+  const binValue = manifest.bin;
+  const bin =
+    typeof binValue === "string"
+      ? binValue
+      : isRecord(binValue) && typeof binValue.tsp === "string"
+        ? binValue.tsp
+        : undefined;
   const cli = bin && path.resolve(packageRoot, bin);
   if (!cli || !fs.existsSync(cli)) {
     throw new Error(`TypeSpec compiler CLI is unavailable in ${manifestPath}.`);
@@ -52,6 +96,18 @@ export function resolveTsp(
   return { executable: execPath, args: [cli], displayExecutable };
 }
 
+/**
+ * @param {{
+ *   worktree: string,
+ *   project: string,
+ *   emitter: string,
+ *   output: string,
+ *   log: string,
+ *   apiVersion?: string,
+ *   workRoot: string
+ * }} options
+ * @returns {EmitterRun}
+ */
 function runEmitter({ worktree, project, emitter, output, log, apiVersion, workRoot }) {
   fs.mkdirSync(output, { recursive: true });
   fs.mkdirSync(path.dirname(log), { recursive: true });
@@ -69,16 +125,16 @@ function runEmitter({ worktree, project, emitter, output, log, apiVersion, workR
     const projectExamples = path.join(worktree, project, "examples");
     if (fs.existsSync(projectExamples)) {
       for (const entry of fs.readdirSync(projectExamples, { withFileTypes: true })) {
-        if (entry.isDirectory()) fs.mkdirSync(path.join(emptyExamples, entry.name), { recursive: true });
+        if (entry.isDirectory())
+          fs.mkdirSync(path.join(emptyExamples, entry.name), { recursive: true });
       }
     }
     if (apiVersion) fs.mkdirSync(path.join(emptyExamples, apiVersion), { recursive: true });
     args.push(`--option=${emitter}.examples-dir=${emptyExamples}`);
   }
   if (apiVersion) {
-    const option = emitter === "@azure-tools/typespec-client-generator-core"
-      ? "api-version"
-      : "version";
+    const option =
+      emitter === "@azure-tools/typespec-client-generator-core" ? "api-version" : "version";
     args.push(`--option=${emitter}.${option}=${apiVersion}`);
   }
   const started = performance.now();
@@ -105,30 +161,50 @@ function runEmitter({ worktree, project, emitter, output, log, apiVersion, workR
   };
 }
 
+/**
+ * @param {string} output
+ * @param {string} workRoot
+ * @returns {OpenApiArtifact[]}
+ */
 function describeAutorest(output, workRoot) {
   return findFiles(output, (file) => file.endsWith(".json"))
-    .map((file) => {
-      try {
-        const document = JSON.parse(fs.readFileSync(file, "utf8"));
-        if (document.swagger !== "2.0") return null;
-        const name = path.basename(file).toLowerCase();
-        return {
-          path: path.relative(workRoot, file),
-          apiVersion: document.info?.version,
-          documentRole: name.includes("common")
-            ? "common"
-            : name === "openapi.json"
-              ? "primary"
-              : "feature",
-          contentHash: hashFile(file),
-        };
-      } catch {
-        return null;
-      }
-    })
-    .filter(Boolean);
+    .map(
+      /** @returns {OpenApiArtifact | null} */ (file) => {
+        try {
+          const document = readJsonObject(file);
+          if (document.swagger !== "2.0") return null;
+          const info = isRecord(document.info) ? document.info : undefined;
+          const name = path.basename(file).toLowerCase();
+          return {
+            path: path.relative(workRoot, file),
+            ...(typeof info?.version === "string" ? { apiVersion: info.version } : {}),
+            documentRole: name.includes("common")
+              ? "common"
+              : name === "openapi.json"
+                ? "primary"
+                : "feature",
+            contentHash: hashFile(file),
+          };
+        } catch {
+          return null;
+        }
+      },
+    )
+    .filter((value) => value !== null);
 }
 
+/**
+ * @param {{
+ *   worktree: string,
+ *   project: string,
+ *   projectId: string,
+ *   comparisonRole: string,
+ *   sourceRevision: string,
+ *   sourceCommit: string,
+ *   workRoot: string,
+ *   apiVersion?: string
+ * }} options
+ */
 export function runProjectCompilers({
   worktree,
   project,
@@ -175,10 +251,9 @@ export function runProjectCompilers({
       files: describeAutorest(base, workRoot).filter(
         (file) => !apiVersion || file.apiVersion === apiVersion,
       ),
-      serviceManifestPath: findFiles(
-        base,
-        (file) => path.basename(file) === "service.yaml",
-      ).map((file) => path.relative(workRoot, file))[0],
+      serviceManifestPath: findFiles(base, (file) => path.basename(file) === "service.yaml").map(
+        (file) => path.relative(workRoot, file),
+      )[0],
     },
     tcgc: {
       ...tcgc,

@@ -80,16 +80,6 @@ current assessment.
 
 ## Results
 
-Semantic intents keep their existing grouping and gain reference-category
-badges. Azure Guidelines assessment selects required documents directly from
-those tags and changed constructs, using targeted discovery for gaps instead of
-ranking the entire catalog or fetching a fixed number of documents. The report
-shows selection reasons and original retrieval provenance. Sufficient document
-content already available in the same Agent session can be reused; there is no
-persistent document cache. A missing required document blocks its owning intent,
-and a completed search with no applicable guidance is not proof of compliance
-with every Azure Guideline.
-
 The agent starts a local-only report server after rendering and returns a
 clickable `http://127.0.0.1:<port>/assessment.html` link. Keep the assessment
 session running while viewing the report. Structured results remain available

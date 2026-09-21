@@ -1,49 +1,63 @@
+import { spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
-import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import { isRecord, readJsonObject } from "./cli.mjs";
 import { dependencyProcessCommand } from "./npm-command.mjs";
 
 const SKILL_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const INSTALL_LOCK = ".dependency-install.lock";
 const REQUIRED_PACKAGE = "yaml";
 
-function readJson(file) {
-  return JSON.parse(fs.readFileSync(file, "utf8"));
-}
-
+/**
+ * @param {string} root
+ * @returns {string}
+ */
 function expectedVersion(root) {
   const lockPath = path.join(root, "package-lock.json");
   if (!fs.existsSync(lockPath)) {
     throw new Error(`Assessment skill package-lock.json is unavailable in ${root}.`);
   }
-  const lock = readJson(lockPath);
-  const version = lock.packages?.[`node_modules/${REQUIRED_PACKAGE}`]?.version;
-  if (!version) {
+  const lock = readJsonObject(lockPath);
+  const packages = lock.packages;
+  const dependency = isRecord(packages) ? packages[`node_modules/${REQUIRED_PACKAGE}`] : undefined;
+  const version = isRecord(dependency) ? dependency.version : undefined;
+  if (typeof version !== "string" || !version) {
     throw new Error(`${REQUIRED_PACKAGE} is absent from ${lockPath}.`);
   }
   return version;
 }
 
+/**
+ * @param {string} root
+ * @returns {string | undefined}
+ */
 function installedVersion(root) {
   const manifest = path.join(root, "node_modules", REQUIRED_PACKAGE, "package.json");
   if (!fs.existsSync(manifest)) return undefined;
   try {
-    return readJson(manifest).version;
+    const version = readJsonObject(manifest).version;
+    return typeof version === "string" ? version : undefined;
   } catch {
     return undefined;
   }
 }
 
-export function skillDependencyInstallCommand(
-  { platform = process.platform } = {},
-) {
+/**
+ * @param {{platform?: NodeJS.Platform}} [options]
+ * @returns {{executable: string, args: string[]}}
+ */
+export function skillDependencyInstallCommand({ platform = process.platform } = {}) {
   return {
     executable: platform === "win32" ? "npm.cmd" : "npm",
     args: ["ci", "--ignore-scripts", "--no-audit", "--no-fund"],
   };
 }
 
+/**
+ * @param {string} root
+ * @returns {void}
+ */
 function installSkillDependencies(root) {
   const command = skillDependencyInstallCommand();
   const processCommand = dependencyProcessCommand(command);
@@ -62,16 +76,34 @@ function installSkillDependencies(root) {
       .slice(-20)
       .join("\n");
     throw new Error(
-      `Assessment skill dependency installation failed with exit code ${result.status ?? "unknown"}.`
-      + (detail ? `\n${detail}` : ""),
+      `Assessment skill dependency installation failed with exit code ${result.status ?? "unknown"}.` +
+        (detail ? `\n${detail}` : ""),
     );
   }
 }
 
+/**
+ * @param {number} milliseconds
+ * @returns {Promise<void>}
+ */
 function delay(milliseconds) {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 }
 
+/**
+ * @typedef {{
+ *   root?: string,
+ *   runInstall?: (root: string) => void | Promise<void>,
+ *   wait?: (milliseconds: number) => Promise<void>,
+ *   timeoutMs?: number,
+ *   log?: (message: string) => void
+ * }} EnsureSkillDependencyOptions
+ */
+
+/**
+ * @param {EnsureSkillDependencyOptions} [options]
+ * @returns {Promise<{installed: boolean, packages: Record<string, string>, durationMs: number}>}
+ */
 export async function ensureSkillDependencies({
   root = SKILL_ROOT,
   runInstall = installSkillDependencies,
@@ -91,15 +123,18 @@ export async function ensureSkillDependencies({
 
   const lockPath = path.join(root, INSTALL_LOCK);
   const waitStarted = Date.now();
+  /** @type {number | undefined} */
   let lock;
   while (lock === undefined) {
     try {
       lock = fs.openSync(lockPath, "wx");
     } catch (error) {
-      if (error.code !== "EEXIST") throw error;
+      const code = isRecord(error) ? error.code : undefined;
+      if (code !== "EEXIST") throw error;
       if (Date.now() - waitStarted >= timeoutMs) {
         throw new Error(
           `Timed out waiting for assessment skill dependency installation; remove stale lock ${lockPath} if no installation is running.`,
+          { cause: error },
         );
       }
       await wait(100);
@@ -110,7 +145,7 @@ export async function ensureSkillDependencies({
     let installedNow = false;
     if (installedVersion(root) !== expected) {
       log("Installing Azure TypeSpec assessment skill dependencies...");
-      await runInstall(root);
+      await Promise.resolve(runInstall(root));
       installedNow = true;
     }
     const installed = installedVersion(root);

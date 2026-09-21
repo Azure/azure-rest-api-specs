@@ -1,8 +1,18 @@
 import fs from "node:fs";
 import path from "node:path";
 
+/**
+ * @typedef {{versioned: boolean, versions: string[]}} ApiVersionSet
+ */
+
+/**
+ * @param {string} root
+ * @returns {string[]}
+ */
 function tspFiles(root) {
+  /** @type {string[]} */
   const files = [];
+  /** @param {string} directory */
   const visit = (directory) => {
     for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
       if (entry.name === "node_modules") continue;
@@ -15,7 +25,12 @@ function tspFiles(root) {
   return files.sort();
 }
 
+/**
+ * @param {string[]} contents
+ * @returns {ApiVersionSet}
+ */
 export function extractApiVersions(contents) {
+  /** @type {Set<string>} */
   const versions = new Set();
   let versioned = false;
   for (const content of contents) {
@@ -29,18 +44,39 @@ export function extractApiVersions(contents) {
   return { versioned, versions: [...versions].sort(compareApiVersions) };
 }
 
+/**
+ * @param {string} left
+ * @param {string} right
+ * @returns {number}
+ */
 export function compareApiVersions(left, right) {
   return left.localeCompare(right, "en", { numeric: true, sensitivity: "base" });
 }
 
+/**
+ * @param {string[]} versions
+ * @returns {string | undefined}
+ */
 function latest(versions) {
   return [...versions].sort(compareApiVersions).at(-1);
 }
 
+/**
+ * @param {string} version
+ * @returns {boolean}
+ */
 function isPreview(version) {
   return /preview/i.test(version);
 }
 
+/**
+ * @param {{
+ *   base: ApiVersionSet,
+ *   current: ApiVersionSet,
+ *   baseCommit?: string,
+ *   headCommit?: string
+ * }} options
+ */
 export function selectApiVersionPair({ base, current, baseCommit, headCommit }) {
   if (!base.versioned && !current.versioned) {
     return {
@@ -127,7 +163,10 @@ export function selectApiVersionPair({ base, current, baseCommit, headCommit }) 
 
   const baseSet = new Set(base.versions);
   const addedCurrentVersions = current.versions.filter((version) => !baseSet.has(version));
-  const currentVersion = latest(addedCurrentVersions.length ? addedCurrentVersions : current.versions);
+  const currentVersion = latest(
+    addedCurrentVersions.length ? addedCurrentVersions : current.versions,
+  );
+  if (!currentVersion) throw new Error("Unable to select the current API version.");
   const stableBaseVersions = base.versions.filter((version) => !isPreview(version));
   const useSameVersion = !addedCurrentVersions.length && baseSet.has(currentVersion);
   const baselineVersion = useSameVersion
@@ -163,6 +202,15 @@ export function selectApiVersionPair({ base, current, baseCommit, headCommit }) 
   };
 }
 
+/**
+ * @param {{
+ *   baseWorktree: string,
+ *   currentWorktree: string,
+ *   project: string,
+ *   baseCommit: string,
+ *   headCommit: string
+ * }} options
+ */
 export function resolveProjectApiVersions({
   baseWorktree,
   currentWorktree,
@@ -170,6 +218,7 @@ export function resolveProjectApiVersions({
   baseCommit,
   headCommit,
 }) {
+  /** @param {string} worktree */
   const discover = (worktree) => {
     const root = path.join(worktree, project);
     return extractApiVersions(tspFiles(root).map((file) => fs.readFileSync(file, "utf8")));

@@ -2,15 +2,35 @@ import fs from "node:fs";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 
+/** @type {string | undefined} */
 let resolvedEntryPath;
+/** @type {string | undefined} */
 let resolvedEntryUrl;
 
+/**
+ * @typedef {string | boolean | string[] | undefined} CliArgumentValue
+ * @typedef {{
+ *   defaults?: Record<string, CliArgumentValue>,
+ *   booleans?: string[],
+ *   arrays?: string[],
+ *   required?: string[]
+ * }} ParseArgsOptions
+ */
+
+/**
+ * @param {string[]} argv
+ * @param {ParseArgsOptions} [options]
+ * @returns {Record<string, CliArgumentValue> & {_?: string[]}}
+ */
 export function parseArgs(argv, options = {}) {
+  /** @type {Record<string, CliArgumentValue> & {_?: string[]}} */
   const result = { ...options.defaults };
   for (let index = 0; index < argv.length; index += 1) {
     const token = argv[index];
     if (!token.startsWith("--")) {
-      (result._ ??= []).push(token);
+      const positional = result._ ?? [];
+      positional.push(token);
+      result._ = positional;
       continue;
     }
     const [rawName, inlineValue] = token.slice(2).split("=", 2);
@@ -24,7 +44,9 @@ export function parseArgs(argv, options = {}) {
       throw new Error(`Missing value for --${rawName}.`);
     }
     if (options.arrays?.includes(rawName)) {
-      (result[name] ??= []).push(value);
+      const values = Array.isArray(result[name]) ? result[name] : [];
+      values.push(value);
+      result[name] = values;
     } else {
       result[name] = value;
     }
@@ -37,15 +59,47 @@ export function parseArgs(argv, options = {}) {
   return result;
 }
 
+/**
+ * @param {string} file
+ * @returns {unknown}
+ */
 export function readJson(file) {
-  return JSON.parse(fs.readFileSync(file, "utf8"));
+  return /** @type {unknown} */ (JSON.parse(fs.readFileSync(file, "utf8")));
 }
 
+/**
+ * @param {unknown} value
+ * @returns {value is Record<string, unknown>}
+ */
+export function isRecord(value) {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+/**
+ * @param {string} file
+ * @returns {Record<string, unknown>}
+ */
+export function readJsonObject(file) {
+  const value = readJson(file);
+  if (!isRecord(value)) {
+    throw new TypeError(`Expected a JSON object in ${file}.`);
+  }
+  return value;
+}
+
+/**
+ * @param {string} file
+ * @param {unknown} value
+ */
 export function writeJson(file, value) {
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, `${JSON.stringify(value, null, 2)}\n`);
 }
 
+/**
+ * @param {string} metaUrl
+ * @returns {boolean}
+ */
 export function isMain(metaUrl) {
   if (!process.argv[1]) return false;
   const entryPath = path.resolve(process.argv[1]);
@@ -60,6 +114,10 @@ export function isMain(metaUrl) {
   return metaUrl === resolvedEntryUrl;
 }
 
+/**
+ * @param {() => void | Promise<void>} action
+ * @returns {Promise<void>}
+ */
 export async function runMain(action) {
   try {
     await action();

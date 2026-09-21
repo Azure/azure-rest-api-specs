@@ -1,17 +1,188 @@
 import fs from "node:fs";
 import path from "node:path";
-import {
-  extractApiVersions,
-  selectApiVersionPair,
-} from "./api-version-selection.mjs";
-import { isMain, parseArgs, readJson, runMain } from "./cli.mjs";
-import { validateAssessment } from "./validate-assessment.mjs";
+import { extractApiVersions, selectApiVersionPair } from "./api-version-selection.mjs";
 import { documentQualitySummary, renderReportSections } from "./assessment-report-ui.mjs";
+import { isMain, parseArgs, readJsonObject, runMain } from "./cli.mjs";
+import { validateAssessment } from "./validate-assessment.mjs";
 
-const reportStyles = fs.readFileSync(new URL("./assessment-report-ui.css", import.meta.url), "utf8");
+/** @typedef {import("./runtime-types.js").ArtifactSelection} ArtifactSelection */
+/** @typedef {import("./runtime-types.js").ArtifactComparison} ArtifactComparison */
+/** @typedef {import("./runtime-types.js").AssessmentFact} AssessmentFact */
+/** @typedef {import("./runtime-types.js").AssessmentFinding} AssessmentFinding */
+/** @typedef {import("./runtime-types.js").AssessmentMethodGroup} AssessmentMethodGroup */
+/** @typedef {import("./runtime-types.js").AssessmentOperation} AssessmentOperation */
+/** @typedef {import("./runtime-types.js").AssessmentOutput} AssessmentOutput */
+/** @typedef {import("./runtime-types.js").AssessmentParameter} AssessmentParameter */
+/** @typedef {import("./runtime-types.js").AssessmentRequest} AssessmentRequest */
+/** @typedef {import("./runtime-types.js").AssessmentResponse} AssessmentResponse */
+/** @typedef {import("./runtime-types.js").AssessmentResponseHeader} AssessmentResponseHeader */
+/** @typedef {import("./runtime-types.js").AssessmentSemanticItem} AssessmentSemanticItem */
+/** @typedef {import("./runtime-types.js").AssessmentTypeImpact} AssessmentTypeImpact */
+/** @typedef {import("./runtime-types.js").ComplianceDocument} ComplianceDocument */
+/** @typedef {import("./runtime-types.js").ComplianceGuidance} ComplianceGuidance */
+/** @typedef {import("./runtime-types.js").ComplianceIntentAssessment} ComplianceFinding */
+/** @typedef {import("./runtime-types.js").FinalComplianceAssessment} FinalComplianceAssessment */
+/** @typedef {import("./runtime-types.js").InternalSemanticOperation} InternalSemanticOperation */
+/** @typedef {import("./runtime-types.js").LegacyAssessmentFinding} LegacyAssessmentFinding */
+/** @typedef {import("./runtime-types.js").LegacyAssessmentFindingInput} LegacyAssessmentFindingInput */
+/** @typedef {import("./runtime-types.js").LegacyAssessmentInput} LegacyAssessmentInput */
+/** @typedef {import("./runtime-types.js").LegacyAssessmentSourceReference} LegacyAssessmentSourceReference */
+/** @typedef {import("./runtime-types.js").LegacyAssessmentDiff} LegacyAssessmentDiff */
+/** @typedef {import("./runtime-types.js").ContractChangeRow} ContractChangeRow */
+/** @typedef {import("./runtime-types.js").DownstreamTypeCard} DownstreamTypeCard */
+/** @typedef {import("./runtime-types.js").DownstreamAnalysis} DownstreamAnalysis */
+/** @typedef {import("./runtime-types.js").DiffHunk} DiffHunk */
+/** @typedef {import("./runtime-types.js").NormalizedAutorestHeader} NormalizedAutorestHeader */
+/** @typedef {import("./runtime-types.js").NormalizedAutorestOperation} NormalizedAutorestOperation */
+/** @typedef {import("./runtime-types.js").NormalizedAutorestParameter} NormalizedAutorestParameter */
+/** @typedef {import("./runtime-types.js").NormalizedAutorestResponse} NormalizedAutorestResponse */
+/** @typedef {import("./runtime-types.js").NormalizedSchema} NormalizedSchema */
+/** @typedef {import("./runtime-types.js").RestContractCard} RestContractCard */
+/** @typedef {import("./runtime-types.js").SemanticFindingReference} SemanticFindingReference */
+/** @typedef {import("./runtime-types.js").SdkType} SdkType */
+/** @typedef {import("./runtime-types.js").SourceChange} SourceChange */
+/** @typedef {AssessmentMethodGroup["deltas"][number]} AssessmentMethodDelta */
+/** @typedef {NonNullable<AssessmentMethodDelta["changes"]>} AssessmentMethodParameterChanges */
+/** @typedef {NonNullable<AssessmentFact["properties"]>[number]} AssessmentProperty */
+/**
+ * @typedef {{path: string, startLine?: number, endLine?: number, link?: string}} ComplianceSourceLink
+ * @typedef {{
+ *   caption?: string,
+ *   path?: string,
+ *   startLine?: number,
+ *   endLine?: number,
+ *   url?: string,
+ *   link?: string,
+ *   lines?: unknown[]
+ * }} ComplianceSnippet
+ * @typedef {{icon: string, className: string, label: string}} StatusPresentation
+ * @typedef {{
+ *   area?: string,
+ *   areaKind?: string,
+ *   label?: string,
+ *   member?: string,
+ *   before: string,
+ *   after: string,
+ *   detail?: string,
+ *   beforeDetail?: string,
+ *   afterDetail?: string,
+ *   kind?: string,
+ *   identity?: string,
+ *   model?: string
+ * }} ContractRow
+ * @typedef {{schema?: NormalizedSchema, identity?: string, display?: string}} ContractValue
+ * @typedef {{area?: string, areaKind?: string, member?: string}} ContractAreaInput
+ * @typedef {{canonicalUrl?: string, url?: string, title?: string}} ComplianceDocumentReference
+ * @typedef {ContractChangeRow & {identity: string}} RestContractDelta
+ * @typedef {{downstreamAssessment?: AssessmentOutput, downstreamInput?: DownstreamAnalysis}} RenderOptions
+ */
 
+const reportStyles = fs.readFileSync(
+  new URL("./assessment-report-ui.css", import.meta.url),
+  "utf8",
+);
+
+/** @param {unknown} value @returns {value is Record<string, unknown>} */
+function isRecord(value) {
+  return value !== null && typeof value === "object" && !Array.isArray(value);
+}
+
+/**
+ * @param {unknown} value
+ * @param {string} key
+ * @returns {unknown}
+ */
+function recordValue(value, key) {
+  return isRecord(value) ? value[key] : undefined;
+}
+
+/**
+ * @param {AssessmentOutput | LegacyAssessmentInput} assessment
+ * @returns {assessment is AssessmentOutput}
+ */
+function isCurrentAssessment(assessment) {
+  return assessment.schemaVersion === 1 && "semantic" in assessment.dimensions;
+}
+
+/**
+ * @param {unknown} value
+ * @returns {value is AssessmentOutput | LegacyAssessmentInput}
+ */
+function isAssessmentInput(value) {
+  if (!isRecord(value) || !isRecord(value.dimensions)) return false;
+  if (value.schemaVersion === 1) {
+    return (
+      isRecord(value.comparison) &&
+      isRecord(value.safety) &&
+      Array.isArray(value.blockers) &&
+      isRecord(value.dimensions.semantic) &&
+      isRecord(value.dimensions.rest) &&
+      isRecord(value.dimensions.downstream) &&
+      isRecord(value.dimensions.compliance) &&
+      isRecord(value.dimensions.documentQuality)
+    );
+  }
+  return (
+    typeof value.pr === "number" &&
+    isRecord(value.baseline) &&
+    typeof value.baseline.commit === "string" &&
+    isRecord(value.head) &&
+    typeof value.head.commit === "string" &&
+    isRecord(value.dimensions.semanticUnderstanding) &&
+    isRecord(value.dimensions.restBreakingChanges) &&
+    isRecord(value.dimensions.restCompatibleDownstreamBreakingChanges) &&
+    isRecord(value.dimensions.azureCompliance)
+  );
+}
+
+/** @param {unknown} value @returns {value is DownstreamAnalysis} */
+function isDownstreamAnalysis(value) {
+  return (
+    isRecord(value) &&
+    typeof value.schemaVersion === "number" &&
+    (value.status === "ready" || value.status === "blocked") &&
+    isRecord(value.facts) &&
+    Array.isArray(value.rootCauses) &&
+    Array.isArray(value.candidates) &&
+    Array.isArray(value.blockers)
+  );
+}
+
+/**
+ * @param {string | boolean | string[] | undefined} value
+ * @param {string} flag
+ * @returns {string | undefined}
+ */
+function optionalCliPath(value, flag) {
+  if (value === undefined) return undefined;
+  if (typeof value !== "string") {
+    throw new Error(`${flag} requires exactly one path.`);
+  }
+  return value;
+}
+
+/** @param {unknown} value @returns {value is ComplianceSnippet} */
+function isComplianceSnippet(value) {
+  return isRecord(value);
+}
+
+/** @param {unknown} value */
+function displayValue(value) {
+  if (value === null || value === undefined) return "";
+  if (
+    typeof value === "string" ||
+    typeof value === "number" ||
+    typeof value === "boolean" ||
+    typeof value === "bigint"
+  ) {
+    return String(value);
+  }
+  return JSON.stringify(value) ?? "";
+}
+
+/** @param {unknown} value */
 export function escapeHtml(value) {
-  return String(value ?? "")
+  return displayValue(value)
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
@@ -19,12 +190,13 @@ export function escapeHtml(value) {
     .replaceAll("'", "&#39;");
 }
 
+/** @param {SourceChange[]} [sources] */
 function sourceLinks(sources = []) {
   return sources
     .map((source) => {
-      const current = source.declarations?.find(
-        (item) => item.source?.revision === "current",
-      ) ?? source.declarations?.find((item) => item.source?.link);
+      const current =
+        source.declarations?.find((item) => item.source?.revision === "current") ??
+        source.declarations?.find((item) => item.source?.link);
       const label = `${source.path}${current ? `:${current.source.startLine}` : ""}`;
       return current?.source?.link
         ? `<a href="${escapeHtml(current.source.link)}">${escapeHtml(label)}</a>`
@@ -33,15 +205,18 @@ function sourceLinks(sources = []) {
     .join(", ");
 }
 
+/** @param {unknown} value */
 function anchor(value) {
-  return String(value).replaceAll(/[^A-Za-z0-9_-]/g, "-");
+  return displayValue(value).replaceAll(/[^A-Za-z0-9_-]/g, "-");
 }
 
+/** @param {Partial<ArtifactSelection>} [selection] */
 function artifactLabel(selection = {}) {
   const commit = selection.commit ?? "unknown commit";
   return `${commit}@${selection.apiVersion ?? "unversioned"}`;
 }
 
+/** @param {AssessmentOutput} assessment */
 function headerTitle(assessment) {
   if (assessment.displayTitle) return assessment.displayTitle;
   const intents = assessment.dimensions.semantic.items ?? [];
@@ -59,11 +234,14 @@ function headerTitle(assessment) {
   return assessment.title ?? "Current TypeSpec changes";
 }
 
+/** @param {AssessmentOutput} assessment */
 function headerSummary(assessment) {
   const semanticItems = assessment.dimensions.semantic.items ?? [];
   const actionCounts = { add: 0, modify: 0, remove: 0 };
   for (const item of semanticItems) {
-    if (item.action in actionCounts) actionCounts[item.action] += 1;
+    if (item.action === "add" || item.action === "modify" || item.action === "remove") {
+      actionCounts[item.action] += 1;
+    }
   }
   const operationCount = new Set(
     semanticItems.flatMap((item) =>
@@ -80,13 +258,11 @@ function headerSummary(assessment) {
       assessment.dimensions.downstream.operationGroups?.length ??
       0) +
     downstreamTypeCards(assessment.dimensions.downstream).length +
-    directLegacyDownstreamFindings(
-      assessment.dimensions.downstream.legacyFindings,
-    ).length;
+    directLegacyDownstreamFindings(assessment.dimensions.downstream.legacyFindings).length;
   const downstreamCount = directDownstreamCount;
   const compliance = assessment.dimensions.compliance;
-  const complianceFindingCount = (compliance.legacyFindings?.length ?? 0) +
-    (compliance.findings?.length ?? 0);
+  const complianceFindingCount =
+    (compliance.legacyFindings?.length ?? 0) + (compliance.findings?.length ?? 0);
   const complianceIssueCount = compliance.legacyFindings
     ? compliance.legacyFindings.length
     : complianceFindingGroups(compliance.findings).length;
@@ -97,11 +273,13 @@ function headerSummary(assessment) {
     actionCounts,
     operationCount,
     restCount,
-    restFindingCount: (assessment.dimensions.rest.findings?.length ?? 0) +
+    restFindingCount:
+      (assessment.dimensions.rest.findings?.length ?? 0) +
       (assessment.dimensions.rest.legacyFindings?.length ?? 0),
     directDownstreamCount,
     downstreamCount,
-    downstreamFindingCount: (assessment.dimensions.downstream.findings?.length ?? 0) +
+    downstreamFindingCount:
+      (assessment.dimensions.downstream.findings?.length ?? 0) +
       directLegacyDownstreamFindings(assessment.dimensions.downstream.legacyFindings).length,
     complianceStatus: compliance.status,
     complianceFindingCount,
@@ -114,19 +292,34 @@ function headerSummary(assessment) {
   };
 }
 
+/** @param {string | undefined} status */
 function complianceStatus(status) {
-  if (status === "passed" || status === "assessed") return { icon: "✓", className: "pass", label: "Pass" };
+  if (status === "passed" || status === "assessed")
+    return { icon: "✓", className: "pass", label: "Pass" };
   if (status === "failed") return { icon: "×", className: "fail", label: "Fail" };
   return { icon: "i", className: "", label: "N/A" };
 }
 
+/**
+ * @param {string} title
+ * @param {StatusPresentation} status
+ */
 function summaryHeading(title, status) {
-  const label = status.label === "Pass" ? "Passed" : status.label === "Fail" ? "Failed" : status.label === "N/A" ? "Not assessed" : status.label;
+  const label =
+    status.label === "Pass"
+      ? "Passed"
+      : status.label === "Fail"
+        ? "Failed"
+        : status.label === "N/A"
+          ? "Not assessed"
+          : status.label;
   return `<div class="summary-heading"><div class="summary-value"><span class="${escapeHtml(status.className)}" aria-label="${escapeHtml(label)}">${escapeHtml(status.icon)}</span></div><div class="summary-label">${escapeHtml(title)}</div></div>`;
 }
 
+/** @param {unknown} remoteUrl */
 function githubRepositoryUrl(remoteUrl) {
-  const normalized = String(remoteUrl ?? "")
+  if (typeof remoteUrl !== "string") return undefined;
+  const normalized = remoteUrl
     .trim()
     .replace(/\/+$/, "")
     .replace(/\.git$/i, "");
@@ -137,6 +330,7 @@ function githubRepositoryUrl(remoteUrl) {
   return sshUrlPath ? `https://github.com/${sshUrlPath}` : undefined;
 }
 
+/** @param {AssessmentOutput} assessment */
 function pullRequestLink(assessment) {
   const number = assessment.pullRequest?.number ?? assessment.pr;
   const repositoryUrl = githubRepositoryUrl(assessment.repository?.remoteUrl);
@@ -148,40 +342,27 @@ function pullRequestLink(assessment) {
     : "Not available for this local pre-PR assessment.";
 }
 
-function complianceSourceLinks(links = []) {
-  return links
-    .map((source) => {
-      const label = `${source.path}:${source.startLine ?? "?"}-${source.endLine ?? "?"}`;
-      return source.link
-        ? `<a href="${escapeHtml(source.link)}">${escapeHtml(label)}</a>`
-        : `<code>${escapeHtml(label)}</code>`;
-    })
-    .join(", ");
-}
-
+/** @param {unknown[]} [snippets] */
 function complianceCode(snippets = []) {
   return snippets
     .map((snippet) => {
-      const lines = Array.isArray(snippet)
-        ? snippet
-        : (snippet.lines ?? [snippet]);
-      const startLine = Number.isFinite(snippet.startLine)
-        ? snippet.startLine
-        : undefined;
+      const details = isComplianceSnippet(snippet) ? snippet : undefined;
+      const lines = Array.isArray(snippet) ? snippet : (details?.lines ?? []);
+      const startLine = Number.isFinite(details?.startLine) ? details?.startLine : undefined;
       const label =
-        snippet.caption ??
-        (snippet.path
-          ? `${snippet.path}${startLine ? `:${startLine}-${snippet.endLine ?? startLine}` : ""}`
+        details?.caption ??
+        (details?.path
+          ? `${details.path}${startLine ? `:${startLine}-${details.endLine ?? startLine}` : ""}`
           : "Changed TypeSpec");
       const heading =
-        (snippet.url ?? snippet.link)
-          ? `<a href="${escapeHtml(snippet.url ?? snippet.link)}">${escapeHtml(label)}</a>`
+        (details?.url ?? details?.link)
+          ? `<a href="${escapeHtml(details.url ?? details.link)}">${escapeHtml(label)}</a>`
           : escapeHtml(label);
       return `<div class="diff"><div class="diff-path">${heading}</div><pre>${lines
         .map((line, index) => {
-          const kind = String(line).startsWith("+")
+          const kind = displayValue(line).startsWith("+")
             ? "add"
-            : String(line).startsWith("-")
+            : displayValue(line).startsWith("-")
               ? "remove"
               : "";
           const lineNumber = startLine
@@ -194,76 +375,16 @@ function complianceCode(snippets = []) {
     .join("");
 }
 
-function complianceComparison(comparison) {
-  const label = comparison.decision.replaceAll("-", " ");
-  return `<details class="compliance-comparison ${escapeHtml(comparison.decision)}">
-<summary><strong>${escapeHtml(label)}</strong></summary>
-<div class="compliance-comparison-body">
-${comparison.expected ? `<p><strong>Expected guidance:</strong> ${escapeHtml(comparison.expected)}</p>` : ""}
-<p><strong>Actual intent:</strong> ${escapeHtml(comparison.actual)}</p>
-<p><strong>Assessment:</strong> ${escapeHtml(comparison.gap ?? comparison.rationale)}</p>
-<p class="sources"><strong>Changed TypeSpec:</strong> ${complianceSourceLinks(comparison.sourceLinks)}</p>
-${complianceCode(comparison.codeSnippets)}
-</div></details>`;
-}
-
-function mostRelevantCodeSnippets(snippets, actual, limit = 2) {
-  const ignored = new Set([
-    "actual",
-    "adds",
-    "added",
-    "change",
-    "changed",
-    "changes",
-    "intent",
-    "manually",
-    "that",
-    "their",
-    "these",
-    "this",
-    "types",
-    "using",
-    "with",
-  ]);
-  const tokens = [
-    ...new Set(
-      String(actual ?? "")
-        .toLowerCase()
-        .match(/[a-z][a-z0-9_.@-]{3,}/g)
-        ?.filter((token) => !ignored.has(token))
-        .map((token) => token.replace(/[.@-]+$/, ""))
-        .map((token) =>
-          token.length > 5 && token.endsWith("s") ? token.slice(0, -1) : token,
-        ) ?? [],
-    ),
-  ];
-  const ranked = snippets.map((snippet, index) => {
-    const code = (snippet.lines ?? []).join("\n").toLowerCase();
-    return {
-      snippet,
-      index,
-      score: tokens.reduce(
-        (score, token) => score + (code.includes(token) ? 1 : 0),
-        0,
-      ),
-    };
-  });
-  const relevant = ranked.filter((item) => item.score > 0);
-  return (relevant.length ? relevant : ranked)
-    .sort((left, right) => right.score - left.score || left.index - right.index)
-    .slice(0, limit)
-    .map((item) => item.snippet);
-}
-
+/** @param {unknown} value */
 function normalizedComplianceGroupText(value) {
-  return String(value ?? "")
-    .trim()
-    .replaceAll(/\s+/g, " ")
-    .toLowerCase();
+  return displayValue(value).trim().replaceAll(/\s+/g, " ").toLowerCase();
 }
 
+/** @param {ComplianceFinding[]} [findings] */
 export function complianceFindingGroups(findings = []) {
+  /** @type {{key: string, findings: ComplianceFinding[]}[]} */
   const groups = [];
+  /** @type {Map<string, {key: string, findings: ComplianceFinding[]}>} */
   const groupsByKey = new Map();
   for (const finding of findings) {
     const guidanceIdentity = (finding.applicableGuidance ?? [])
@@ -289,140 +410,21 @@ export function complianceFindingGroups(findings = []) {
   return groups;
 }
 
-function complianceFindingCard(finding, context = {}) {
-  const document = context.document ?? {};
-  const guidance = context.guidance ?? {};
-  const expectedCode =
-    context.expectedCode ??
-    guidance.examples?.map((example) => ({
-      caption: "Documented TypeSpec example",
-      url: finding.canonicalDocumentUrl ?? document.canonicalUrl,
-      lines: String(example).split(/\r?\n/),
-    })) ??
-    [];
-  const findingSources = finding.sourceLinks ?? finding.sourceReferences ?? [];
-  const actual = finding.actual ?? context.actual ?? "";
-  const actualCode = mostRelevantCodeSnippets(
-    (finding.codeSnippets ?? []).map((snippet) => {
-      const source = findingSources.find((item) => item.path === snippet.path);
-      return {
-        ...snippet,
-        startLine: snippet.startLine ?? source?.startLine,
-        endLine: snippet.endLine ?? source?.endLine,
-        link: snippet.link ?? source?.link,
-      };
-    }),
-    actual,
-  );
-  const guidanceTitle =
-    context.guidanceTitle ?? document.title ?? "Official guidance";
-  const guidanceSection = finding.section ?? context.guidanceSection ?? "";
-  const guidanceUrl =
-    finding.canonicalDocumentUrl ??
-    finding.documentationUrl ??
-    document.canonicalUrl;
-  const relatedSemanticIntents =
-    finding.relatedSemanticIntents ??
-    (finding.semanticIntentId ? [finding.semanticIntentId] : []);
-  return `<details class="finding compliance-finding" id="compliance-finding-${anchor(finding.id)}">
-<summary><strong>${escapeHtml(finding.title)}</strong></summary>
-<div class="finding-body">
-<p><strong>Gap:</strong> ${escapeHtml(finding.gap ?? finding.summary)}</p>
-<details class="comparison-details expected-details" open><summary><strong>Expected</strong></summary><div class="comparison-body">
-<p>${escapeHtml(finding.expected ?? context.expected ?? "")}</p>
-${guidanceUrl ? `<p><strong>Guidance:</strong> <a href="${escapeHtml(guidanceUrl)}">${escapeHtml(guidanceTitle)}${guidanceSection ? ` — ${escapeHtml(guidanceSection)}` : ""}</a></p>` : ""}
-${complianceCode(expectedCode)}
-</div></details>
-<details class="comparison-details actual-details" open><summary><strong>Actual</strong></summary><div class="comparison-body">
-${
-  actualCode.length
-    ? `<h4>TypeSpec code</h4>${complianceCode(actualCode)}`
-    : `<p>${escapeHtml(actual)}</p>`
-}
-${relatedSemanticIntents.length ? `<p><strong>Related semantic intents:</strong> ${semanticLinks(relatedSemanticIntents)}</p>` : ""}
-</div></details>
-</div></details>`;
-}
-
-function complianceFindingGroupCard(entries, semanticItems) {
-  const first = entries[0];
-  const { finding, document = {}, guidance = {} } = first;
-  const expectedCode =
-    guidance.examples?.map((example) => ({
-      caption: "Documented TypeSpec example",
-      url: finding.canonicalDocumentUrl ?? document.canonicalUrl,
-      lines: String(example).split(/\r?\n/),
-    })) ?? [];
-  const guidanceSection = finding.section ?? guidance.section ?? "";
-  const guidanceUrl =
-    finding.canonicalDocumentUrl ??
-    finding.documentationUrl ??
-    document.canonicalUrl;
-  const guidanceTitle = document.title ?? "Official guidance";
-  const gaps = [
-    ...new Set(
-      entries
-        .map(({ finding: item }) => item.gap ?? item.summary)
-        .filter(Boolean),
-    ),
-  ];
-  const sharedGap = gaps.length === 1 ? gaps[0] : undefined;
-  const affectedIntents = entries
-    .map(({ finding: item }) => {
-      const findingSources = item.sourceLinks ?? item.sourceReferences ?? [];
-      const actualCode = mostRelevantCodeSnippets(
-        (item.codeSnippets ?? []).map((snippet) => {
-          const source = findingSources.find(
-            (candidate) => candidate.path === snippet.path,
-          );
-          return {
-            ...snippet,
-            startLine: snippet.startLine ?? source?.startLine,
-            endLine: snippet.endLine ?? source?.endLine,
-            link: snippet.link ?? source?.link,
-          };
-        }),
-        item.actual ?? "",
-      );
-      const perIntentGap =
-        !sharedGap && (item.gap ?? item.summary)
-          ? `<p><strong>Gap:</strong> ${escapeHtml(item.gap ?? item.summary)}</p>`
-          : "";
-      return `<article class="compliance-affected-intent" id="compliance-finding-${anchor(item.id)}">
-<h4>${intentTitleLinks([item.semanticIntentId], semanticItems)}</h4>
-<p><strong>Actual:</strong> ${escapeHtml(item.actual ?? "")}</p>
-${perIntentGap}
-${actualCode.length ? `<h5>TypeSpec code</h5>${complianceCode(actualCode)}` : ""}
-</article>`;
-    })
-    .join("");
-  return `<details class="finding compliance-finding compliance-finding-group">
-<summary><strong>${escapeHtml(finding.title)}</strong><span class="finding-summary">${entries.length} affected intents</span></summary>
-<div class="finding-body">
-${sharedGap ? `<p><strong>Gap:</strong> ${escapeHtml(sharedGap)}</p>` : ""}
-<details class="comparison-details expected-details" open><summary><strong>Expected</strong></summary><div class="comparison-body">
-<p>${escapeHtml(finding.expected ?? "")}</p>
-${guidanceUrl ? `<p><strong>Guidance:</strong> <a href="${escapeHtml(guidanceUrl)}">${escapeHtml(guidanceTitle)}${guidanceSection ? ` — ${escapeHtml(guidanceSection)}` : ""}</a></p>` : ""}
-${complianceCode(expectedCode)}
-</div></details>
-<h3>Affected intents (${entries.length})</h3>
-<div class="compliance-affected-intents">${affectedIntents}</div>
-</div></details>`;
-}
-
+/** @param {ComplianceDocumentReference} document */
 function fetchedComplianceDocument(document) {
   const url = document.canonicalUrl ?? document.url;
   return `<li><a href="${escapeHtml(url)}">${escapeHtml(document.title ?? url)}</a></li>`;
 }
 
+/** @param {FinalComplianceAssessment} dimension */
 function complianceEvidenceAppendix(dimension) {
+  /** @type {ComplianceDocumentReference[]} */
   const documents = [
     ...(dimension.sharedSearch?.documents ?? []),
-    ...(dimension.intentAssessments ?? []).flatMap(
-      (item) => item.documents ?? [],
-    ),
+    ...(dimension.intentAssessments ?? []).flatMap((item) => item.documents ?? []),
     ...(dimension.legacyDocuments ?? []),
   ];
+  /** @type {Set<string>} */
   const seenUrls = new Set();
   const uniqueDocuments = documents.filter((document) => {
     const url = document.canonicalUrl ?? document.url;
@@ -440,8 +442,7 @@ function complianceEvidenceAppendix(dimension) {
     intentAssessments: (dimension.intentAssessments ?? []).map((item) => ({
       semanticIntentId: item.semanticIntentId,
       decision: item.decision,
-      documentSelections: item.documentSelections,
-      reviewedCatalogIds: item.reviewedCatalogIds,
+      catalogRanking: item.catalogRanking,
       documents: item.documents,
       blockers: item.blockers,
     })),
@@ -451,6 +452,10 @@ function complianceEvidenceAppendix(dimension) {
   return `${documentList}<details class="guidance-coverage"><summary>Guidance coverage and retrieval evidence</summary><pre>${escapeHtml(JSON.stringify(evidence, null, 2))}</pre></details>`;
 }
 
+/**
+ * @param {string[]} ids
+ * @param {AssessmentSemanticItem[]} semanticItems
+ */
 function intentTitleLinks(ids, semanticItems) {
   const titles = new Map(semanticItems.map((item) => [item.id, item.title]));
   return ids
@@ -461,131 +466,51 @@ function intentTitleLinks(ids, semanticItems) {
     .join(", ");
 }
 
-function renderCompliance(dimension, semanticItems) {
-  const coverage = dimension.coverage ?? {};
-  const activeEntries = (dimension.findings ?? []).map((finding) => {
-    const intent = (dimension.intentAssessments ?? []).find(
-      (item) => item.semanticIntentId === finding.semanticIntentId,
-    );
-    const applicable = finding.applicableGuidance?.[0];
-    const document = (
-      dimension.sharedSearch?.documents ??
-      intent?.documents ??
-      []
-    ).find(
-      (item) => item.canonicalUrl === applicable?.canonicalDocumentUrl,
-    );
-    const guidance = document?.guidance?.find(
-      (item) => item.section === applicable?.guidanceSection,
-    );
-    return { finding, document, guidance };
-  });
-  const activeFindings = complianceFindingGroups(
-    activeEntries.map((entry) => entry.finding),
-  )
-    .map((group) => {
-      const entries = group.findings.map((finding) =>
-        activeEntries.find((entry) => entry.finding === finding),
-      );
-      return entries.length === 1
-        ? complianceFindingCard(entries[0].finding, entries[0])
-        : complianceFindingGroupCard(entries, semanticItems);
-    })
-    .join("");
-  const legacyFindings = (dimension.legacyFindings ?? [])
-    .map((finding) => {
-      const document = (dimension.legacyDocuments ?? []).find(
-        (item) => item.url === finding.documentationUrl,
-      );
-      return complianceFindingCard(finding, {
-        document: {
-          title: document?.title,
-          canonicalUrl: document?.url,
-        },
-        expected: document?.guidanceExcerpt,
-        actual: finding.evidence?.join("; "),
-        expectedCode: document?.expectedCodeSnippets ?? [],
-        guidanceTitle: document?.title,
-        guidanceSection: document?.section,
-      });
-    })
-    .join("");
-  const uncovered = coverage.unassessedIntentIds ?? [];
-  const noApplicableGuidanceIds = (dimension.intentAssessments ?? [])
-    .filter((item) => item.decision === "no-applicable-guidance")
-    .map((item) => item.semanticIntentId);
-  const findings = activeFindings || legacyFindings;
-  const empty =
-    dimension.status === "not-assessed"
-      ? '<p class="empty not-assessed">Azure Guidelines could not be fully assessed.</p>'
-      : noApplicableGuidanceIds.length
-        ? `<p class="empty good">Azure Guidelines were assessed. ${dimension.intentAssessments.length > noApplicableGuidanceIds.length ? "They passed for the other intents, and no" : "No"} applicable guideline was found for ${noApplicableGuidanceIds.length === 1 ? "intent" : "intents"} ${intentTitleLinks(noApplicableGuidanceIds, semanticItems)}.</p>`
-        : '<p class="empty good">No Azure Guidelines findings.</p>';
-  return `${findings || empty}
-${uncovered.length ? `<div class="panel"><strong>Azure Guidelines not assessed for:</strong> ${intentTitleLinks(uncovered, semanticItems)}</div>` : ""}`;
-}
-
+/** @param {AssessmentOutput} assessment */
 function headerComparison(assessment) {
   return `<code>${escapeHtml(assessment.comparison.baseCommit)}</code> → <code>${escapeHtml(assessment.comparison.headCommit)}</code>`;
 }
 
+/** @param {string[]} [ids] */
 function semanticLinks(ids = []) {
   return ids.length
     ? ids
-        .map(
-          (id) =>
-            `<a href="#intent-${anchor(id)}"><code>${escapeHtml(id)}</code></a>`,
-        )
+        .map((id) => `<a href="#intent-${anchor(id)}"><code>${escapeHtml(id)}</code></a>`)
         .join(", ")
     : "None";
 }
 
-function findingCards(findings, downstream = false) {
-  if (!findings.length)
-    return '<p class="empty good">No breaking changes detected.</p>';
-  return findings
-    .map(
-      (finding) => `<details class="finding" id="finding-${anchor(finding.id)}">
-<summary><strong>${escapeHtml(finding.rule)}</strong></summary>
-<div class="finding-body">
-${downstream ? `<p><strong>SDK symbol:</strong> <code>${escapeHtml(finding.crossLanguageDefinitionId ?? finding.symbol)}</code></p>` : ""}
-<dl><dt>Actual</dt><dd>${escapeHtml(finding.actual)}</dd><dt>Expected</dt><dd>${escapeHtml(finding.expected)}</dd></dl>
-<p>${escapeHtml(finding.rationale)}</p>
-<p><strong>Related semantic intents:</strong> ${semanticLinks(finding.relatedSemanticIntents)}</p>
-<p class="sources"><strong>Changed TypeSpec:</strong> ${sourceLinks(finding.sources)}</p>
-</div></details>`,
-    )
-    .join("\n");
-}
-
+/** @param {NormalizedSchema | undefined} schema @returns {string | undefined} */
 function schemaIdentity(schema) {
   const reference = schema?.reference?.split("/").at(-1);
   return schema?.enumMetadata?.name ?? reference;
 }
 
+/** @param {NormalizedSchema | undefined} schema @returns {string} */
 function schemaDisplay(schema) {
   if (!schema) return "removed";
   const identity = schemaIdentity(schema);
   if (schema.kind === "array") return `${schemaDisplay(schema.items)}[]`;
   if (schema.kind === "enum") {
-    const values = Array.isArray(schema.values)
-      ? schema.values.join(" | ")
-      : schema.values;
+    const values = Array.isArray(schema.values) ? schema.values.join(" | ") : schema.values;
     return `${identity ?? schema.type ?? "enum"}${values ? ` { ${values} }` : ""}`;
   }
   if (identity) return identity;
   return [schema.type ?? schema.kind, schema.format].filter(Boolean).join(" ");
 }
 
+/**
+ * @param {NormalizedSchema | undefined} schema
+ * @param {string[]} pathSegments
+ * @returns {ContractValue}
+ */
 function schemaPath(schema, pathSegments) {
   let current = schema;
   let identity = schemaIdentity(current);
   for (const rawSegment of pathSegments) {
     const isArray = rawSegment.endsWith("[]");
     const name = rawSegment.replace(/\[\]$/, "");
-    const property = (current?.properties ?? []).find(
-      (item) => item.name === name,
-    );
+    const property = (current?.properties ?? []).find((item) => item.name === name);
     if (!property) return { schema: undefined, identity };
     current = property.schema;
     identity = schemaIdentity(current) ?? identity;
@@ -597,19 +522,22 @@ function schemaPath(schema, pathSegments) {
   return { schema: current, identity };
 }
 
+/** @param {AssessmentFinding} finding */
 function operationFacts(finding) {
   const facts = finding.evidence ?? [];
   return {
-    before:
-      facts.find((fact) => fact.comparisonRole === "baseline") ?? facts[0],
+    before: facts.find((fact) => fact.comparisonRole === "baseline") ?? facts[0],
     after: facts.find((fact) => fact.comparisonRole === "target") ?? facts[1],
   };
 }
 
+/**
+ * @param {AssessmentFact | undefined} operation
+ * @param {string} name
+ * @returns {ContractValue}
+ */
 function parameterValue(operation, name) {
-  const parameter = (operation?.parameters ?? []).find(
-    (item) => item.name === name,
-  );
+  const parameter = (operation?.parameters ?? []).find((item) => item.name === name);
   return {
     schema: parameter?.schema,
     identity: schemaIdentity(parameter?.schema),
@@ -619,10 +547,15 @@ function parameterValue(operation, name) {
   };
 }
 
+/**
+ * @param {AssessmentFact | undefined} operation
+ * @param {string} name
+ * @returns {ContractValue}
+ */
 function responseHeaderValue(operation, name) {
   for (const response of operation?.responses ?? []) {
     const header = (response.headers ?? []).find(
-      (item) => item.name.toLowerCase() === name.toLowerCase(),
+      (item) => item.name?.toLowerCase() === name.toLowerCase(),
     );
     if (header) {
       return {
@@ -635,12 +568,15 @@ function responseHeaderValue(operation, name) {
   return { display: "removed" };
 }
 
+/**
+ * @param {AssessmentFact | undefined} operation
+ * @param {string} location
+ * @returns {ContractValue}
+ */
 function responseSchemaValue(operation, location) {
   const match = location?.match(/^response ([^.]+)(?:\.(.*))?$/);
   if (!match) return { display: "unavailable" };
-  const response = (operation?.responses ?? []).find(
-    (item) => item.status === match[1],
-  );
+  const response = (operation?.responses ?? []).find((item) => item.status === match[1]);
   if (!response) return { display: "removed" };
   const result = schemaPath(response.schema, match[2]?.split(".") ?? []);
   return {
@@ -649,31 +585,32 @@ function responseSchemaValue(operation, location) {
   };
 }
 
+/** @param {AssessmentFinding} finding @returns {RestContractDelta} */
 function restContractDelta(finding) {
   const change = finding.contractChange ?? {};
   const { before, after } = operationFacts(finding);
-  const location = change.location ?? finding.rule;
+  const rule = finding.rule ?? "";
+  const location = change.location ?? rule;
+  /** @type {ContractValue} */
   let beforeValue;
+  /** @type {ContractValue} */
   let afterValue;
-  if (
-    finding.rule.startsWith("parameter-") ||
-    finding.rule === "required-parameter-added"
-  ) {
+  if (rule.startsWith("parameter-") || rule === "required-parameter-added") {
     beforeValue = parameterValue(before, location);
     afterValue = parameterValue(after, location);
-  } else if (finding.rule.startsWith("response-header-")) {
+  } else if (rule.startsWith("response-header-")) {
     beforeValue = responseHeaderValue(before, location);
     afterValue = responseHeaderValue(after, location);
   } else if (location.startsWith("response ")) {
     beforeValue = responseSchemaValue(before, location);
     afterValue = responseSchemaValue(after, location);
-  } else if (finding.rule === "method-changed") {
+  } else if (rule === "method-changed") {
     beforeValue = { display: before?.method?.toUpperCase() };
     afterValue = { display: after?.method?.toUpperCase() };
-  } else if (finding.rule === "path-changed") {
+  } else if (rule === "path-changed") {
     beforeValue = { display: before?.path };
     afterValue = { display: after?.path };
-  } else if (finding.rule === "operation-removed") {
+  } else if (rule === "operation-removed") {
     beforeValue = {
       display: `${before?.method?.toUpperCase()} ${before?.path}`,
     };
@@ -687,27 +624,26 @@ function restContractDelta(finding) {
     afterValue.identity ??
     finding.operationIds?.[0] ??
     "Unmapped REST contract change";
+  /** @type {string | undefined} */
   let areaKind;
   let member = location;
-  if (
-    finding.rule.startsWith("parameter-") ||
-    finding.rule === "required-parameter-added"
-  ) {
+  if (rule.startsWith("parameter-") || rule === "required-parameter-added") {
     const wireLocation = [beforeValue.display, afterValue.display]
       .map((display) => display?.match(/^(query|path|header):/i)?.[1])
       .find(Boolean);
+    /** @type {Record<string, string>} */
     const labels = {
       query: "Query parameter",
       path: "Path parameter",
       header: "Request header",
     };
-    areaKind = labels[wireLocation?.toLowerCase()];
+    areaKind = wireLocation ? labels[wireLocation.toLowerCase()] : undefined;
     for (const value of [beforeValue, afterValue]) {
       if (value.display?.includes(" · ")) {
         value.display = value.display.split(" · ").slice(1).join(" · ");
       }
     }
-  } else if (finding.rule.startsWith("response-header-")) {
+  } else if (rule.startsWith("response-header-")) {
     const status = [beforeValue.display, afterValue.display]
       .map((display) => display?.match(/^(\S+)\s+·/)?.[1])
       .find(Boolean);
@@ -729,14 +665,16 @@ function restContractDelta(finding) {
   };
 }
 
+/**
+ * @param {AssessmentFinding} finding
+ * @param {AssessmentOperation} operation
+ * @param {string | undefined} semanticIntentId
+ */
 function findingMatchesOperation(finding, operation, semanticIntentId) {
   if (!(finding.operationIds ?? []).includes(operation.operationId)) {
     return false;
   }
-  if (
-    semanticIntentId &&
-    !(finding.relatedSemanticIntents ?? []).includes(semanticIntentId)
-  ) {
+  if (semanticIntentId && !(finding.relatedSemanticIntents ?? []).includes(semanticIntentId)) {
     return false;
   }
   const operationFacts = (finding.evidence ?? []).filter(
@@ -749,10 +687,12 @@ function findingMatchesOperation(finding, operation, semanticIntentId) {
   );
 }
 
+/** @param {unknown} left @param {unknown} right */
 function contractValueEqual(left, right) {
   return JSON.stringify(left) === JSON.stringify(right);
 }
 
+/** @param {NormalizedSchema | undefined} schema */
 function schemaShape(schema) {
   if (!schema) return undefined;
   return {
@@ -764,16 +704,27 @@ function schemaShape(schema) {
   };
 }
 
+/** @param {NormalizedSchema | undefined} schema @returns {string} */
 function structuralSchemaDisplay(schema) {
   if (schema?.kind === "array" && !schema.items) return "array";
   return schemaDisplay(schema);
 }
 
+/**
+ * @param {NonNullable<NormalizedSchema["properties"]>[number] | undefined} property
+ * @param {string} missing
+ */
 function propertyDisplay(property, missing) {
   if (!property) return missing;
   return `${structuralSchemaDisplay(property.schema)}${property.required ? " (required)" : " (optional)"}`;
 }
 
+/**
+ * @param {NormalizedSchema | undefined} before
+ * @param {NormalizedSchema | undefined} after
+ * @param {string} area
+ * @returns {ContractChangeRow[]}
+ */
 function schemaContractRows(before, after, area) {
   if (contractValueEqual(before, after)) return [];
   if (!before || !after) {
@@ -795,6 +746,7 @@ function schemaContractRows(before, after, area) {
     ];
   }
 
+  /** @type {ContractChangeRow[]} */
   const rows = [];
   if (before.kind === "array" || after.kind === "array") {
     rows.push(...schemaContractRows(before.items, after.items, `${area}[]`));
@@ -805,9 +757,7 @@ function schemaContractRows(before, after, area) {
   const afterProperties = new Map(
     (after.properties ?? []).map((property) => [property.name, property]),
   );
-  for (const name of [
-    ...new Set([...beforeProperties.keys(), ...afterProperties.keys()]),
-  ].sort()) {
+  for (const name of [...new Set([...beforeProperties.keys(), ...afterProperties.keys()])].sort()) {
     const previous = beforeProperties.get(name);
     const current = afterProperties.get(name);
     const propertyArea = `${area}.${name}`;
@@ -819,33 +769,38 @@ function schemaContractRows(before, after, area) {
       });
       continue;
     }
-    rows.push(
-      ...schemaContractRows(previous.schema, current.schema, propertyArea),
-    );
+    rows.push(...schemaContractRows(previous.schema, current.schema, propertyArea));
   }
   return rows;
 }
 
-function parameterDisplay(parameter, missing) {
+/**
+ * @param {AssessmentParameter | undefined} parameter
+ * @param {string} [missing]
+ */
+function parameterDisplay(parameter, missing = "not present") {
   if (!parameter) return missing;
   const details = [
     structuralSchemaDisplay(parameter.schema),
     parameter.required ? "required" : "optional",
-    parameter.collectionFormat
-      ? `collection: ${parameter.collectionFormat}`
-      : undefined,
+    parameter.collectionFormat ? `collection: ${parameter.collectionFormat}` : undefined,
   ].filter(Boolean);
   return details.join(" · ");
 }
 
+/**
+ * @param {AssessmentParameter[]} [before]
+ * @param {AssessmentParameter[]} [after]
+ * @returns {ContractChangeRow[]}
+ */
 function parameterContractRows(before = [], after = []) {
+  /** @param {AssessmentParameter} parameter */
   const key = (parameter) => `${parameter.in ?? "body"}:${parameter.name}`;
   const beforeParameters = new Map(before.map((item) => [key(item), item]));
   const afterParameters = new Map(after.map((item) => [key(item), item]));
+  /** @type {ContractChangeRow[]} */
   const rows = [];
-  for (const area of [
-    ...new Set([...beforeParameters.keys(), ...afterParameters.keys()]),
-  ].sort()) {
+  for (const area of [...new Set([...beforeParameters.keys(), ...afterParameters.keys()])].sort()) {
     const previous = beforeParameters.get(area);
     const current = afterParameters.get(area);
     if (!previous || !current) {
@@ -856,11 +811,7 @@ function parameterContractRows(before = [], after = []) {
       });
       continue;
     }
-    const schemaRows = schemaContractRows(
-      previous.schema,
-      current.schema,
-      area,
-    );
+    const schemaRows = schemaContractRows(previous.schema, current.schema, area);
     if (
       previous.required !== current.required ||
       previous.collectionFormat !== current.collectionFormat
@@ -877,19 +828,26 @@ function parameterContractRows(before = [], after = []) {
   return rows;
 }
 
+/**
+ * @param {AssessmentRequest | undefined} before
+ * @param {AssessmentRequest | undefined} after
+ * @returns {ContractChangeRow[]}
+ */
 function requestContractRows(before, after) {
   if (!before || !after) {
     return [
       {
         area: "request body",
-        before: before ? before.kind : "not present",
-        after: after ? after.kind : "removed",
+        before: before?.kind ?? "unknown",
+        after: after?.kind ?? "removed",
       },
     ];
   }
+  const beforeName = recordValue(before, "name");
+  const afterName = recordValue(after, "name");
   if (
     before.kind !== after.kind ||
-    before.name !== after.name ||
+    beforeName !== afterName ||
     before.required !== after.required
   ) {
     return [
@@ -909,41 +867,44 @@ function requestContractRows(before, after) {
   return schemaContractRows(before.schema, after.schema, "request body");
 }
 
+/**
+ * @param {AssessmentResponseHeader | undefined} header
+ * @param {string} missing
+ */
 function responseHeaderDisplay(header, missing) {
   if (!header) return missing;
   return [
     structuralSchemaDisplay(header.schema),
-    header.collectionFormat
-      ? `collection: ${header.collectionFormat}`
-      : undefined,
+    header.collectionFormat ? `collection: ${header.collectionFormat}` : undefined,
   ]
     .filter(Boolean)
     .join(" · ");
 }
 
+/**
+ * @param {AssessmentResponse | undefined} response
+ * @param {string} missing
+ */
 function responseDisplay(response, missing) {
   if (!response) return missing;
   return (
-    [
-      response.statusKind,
-      response.schema ? structuralSchemaDisplay(response.schema) : undefined,
-    ]
+    [response.statusKind, response.schema ? structuralSchemaDisplay(response.schema) : undefined]
       .filter(Boolean)
       .join(" · ") || "present"
   );
 }
 
+/**
+ * @param {AssessmentResponse[]} [before]
+ * @param {AssessmentResponse[]} [after]
+ * @returns {ContractChangeRow[]}
+ */
 function responseContractRows(before = [], after = []) {
-  const beforeResponses = new Map(
-    before.map((response) => [response.status, response]),
-  );
-  const afterResponses = new Map(
-    after.map((response) => [response.status, response]),
-  );
+  const beforeResponses = new Map(before.map((response) => [response.status, response]));
+  const afterResponses = new Map(after.map((response) => [response.status, response]));
+  /** @type {ContractChangeRow[]} */
   const rows = [];
-  for (const status of [
-    ...new Set([...beforeResponses.keys(), ...afterResponses.keys()]),
-  ].sort()) {
+  for (const status of [...new Set([...beforeResponses.keys(), ...afterResponses.keys()])].sort()) {
     const previous = beforeResponses.get(status);
     const current = afterResponses.get(status);
     const responseArea = `response ${status}`;
@@ -958,28 +919,16 @@ function responseContractRows(before = [], after = []) {
     if (previous.statusKind !== current.statusKind) {
       rows.push({
         area: `${responseArea}.kind`,
-        before: previous.statusKind,
-        after: current.statusKind,
+        before: previous.statusKind ?? "unknown",
+        after: current.statusKind ?? "unknown",
       });
     }
-    rows.push(
-      ...schemaContractRows(
-        previous.schema,
-        current.schema,
-        `${responseArea}.body`,
-      ),
-    );
+    rows.push(...schemaContractRows(previous.schema, current.schema, `${responseArea}.body`));
     const beforeHeaders = new Map(
-      (previous.headers ?? []).map((header) => [
-        header.name.toLowerCase(),
-        header,
-      ]),
+      (previous.headers ?? []).map((header) => [header.name?.toLowerCase() ?? "", header]),
     );
     const afterHeaders = new Map(
-      (current.headers ?? []).map((header) => [
-        header.name.toLowerCase(),
-        header,
-      ]),
+      (current.headers ?? []).map((header) => [header.name?.toLowerCase() ?? "", header]),
     );
     for (const headerName of [
       ...new Set([...beforeHeaders.keys(), ...afterHeaders.keys()]),
@@ -1012,32 +961,27 @@ function responseContractRows(before = [], after = []) {
   return rows;
 }
 
+/**
+ * @param {unknown} before
+ * @param {unknown} after
+ * @param {string} area
+ * @returns {ContractChangeRow[]}
+ */
 function simpleContractRows(before, after, area) {
   if (contractValueEqual(before, after)) return [];
-  const beforeObject = before && typeof before === "object";
-  const afterObject = after && typeof after === "object";
-  if (
-    (beforeObject || afterObject) &&
-    !Array.isArray(before) &&
-    !Array.isArray(after)
-  ) {
+  const beforeObject = isRecord(before) ? before : undefined;
+  const afterObject = isRecord(after) ? after : undefined;
+  if (beforeObject || afterObject) {
+    /** @type {ContractChangeRow[]} */
     const rows = [];
     for (const key of [
-      ...new Set([
-        ...Object.keys(before ?? {}),
-        ...Object.keys(after ?? {}),
-      ]),
+      ...new Set([...Object.keys(beforeObject ?? {}), ...Object.keys(afterObject ?? {})]),
     ].sort()) {
-      rows.push(
-        ...simpleContractRows(
-          before?.[key],
-          after?.[key],
-          `${area}.${key}`,
-        ),
-      );
+      rows.push(...simpleContractRows(beforeObject?.[key], afterObject?.[key], `${area}.${key}`));
     }
     if (rows.length) return rows;
   }
+  /** @param {unknown} value @param {string} missing */
   const display = (value, missing) => {
     if (value === undefined) return missing;
     if (typeof value === "string") return value;
@@ -1052,22 +996,27 @@ function simpleContractRows(before, after, area) {
   ];
 }
 
+/**
+ * @param {AssessmentOperation} operation
+ * @returns {ContractChangeRow[]}
+ */
 function structuralOperationRows(operation) {
+  /** @param {AssessmentFact | undefined} value */
   const operationExists = (value) =>
     Boolean(
       value &&
-        (value.method ||
-          value.path ||
-          value.request ||
-          value.parameters?.length ||
-          value.responses?.length),
+      (value.method ||
+        value.path ||
+        value.request ||
+        value.parameters?.length ||
+        value.responses?.length),
     );
   const beforeExists = operationExists(operation.before);
   const afterExists = operationExists(operation.after);
   if (beforeExists !== afterExists) {
+    /** @param {AssessmentFact | undefined} value @param {string} missing */
     const display = (value, missing) =>
-      [value?.method?.toUpperCase(), value?.path].filter(Boolean).join(" ") ||
-      missing;
+      [value?.method?.toUpperCase(), value?.path].filter(Boolean).join(" ") || missing;
     return [
       {
         area: "operation",
@@ -1077,16 +1026,19 @@ function structuralOperationRows(operation) {
     ];
   }
 
+  /** @type {ContractChangeRow[]} */
   const rows = [];
   for (const field of operation.changedAspects ?? []) {
     const before = operation.before?.[field];
     const after = operation.after?.[field];
     if (field === "parameters") {
-      rows.push(...parameterContractRows(before, after));
+      rows.push(
+        ...parameterContractRows(operation.before?.parameters, operation.after?.parameters),
+      );
     } else if (field === "request") {
-      rows.push(...requestContractRows(before, after));
+      rows.push(...requestContractRows(operation.before?.request, operation.after?.request));
     } else if (field === "responses") {
-      rows.push(...responseContractRows(before, after));
+      rows.push(...responseContractRows(operation.before?.responses, operation.after?.responses));
     } else if (field === "paging" || field === "lro") {
       rows.push(...simpleContractRows(before, after, field));
     } else if (field === "operation") {
@@ -1110,19 +1062,17 @@ function structuralOperationRows(operation) {
   return rows.filter((row) => row.before !== row.after);
 }
 
-export function operationContractRows(
-  operation,
-  restFindings = [],
-  semanticIntentId,
-) {
+/**
+ * @param {AssessmentOperation} operation
+ * @param {AssessmentFinding[]} [restFindings]
+ * @param {string} [semanticIntentId]
+ * @returns {ContractChangeRow[]}
+ */
+export function operationContractRows(operation, restFindings = [], semanticIntentId) {
   const detailedRows = restFindings
-    .filter((finding) =>
-      findingMatchesOperation(finding, operation, semanticIntentId),
-    )
+    .filter((finding) => findingMatchesOperation(finding, operation, semanticIntentId))
     .map(restContractDelta);
-  const rows = detailedRows.length
-    ? detailedRows
-    : structuralOperationRows(operation);
+  const rows = detailedRows.length ? detailedRows : structuralOperationRows(operation);
   return [
     ...new Map(
       rows
@@ -1133,14 +1083,12 @@ export function operationContractRows(
             left.before.localeCompare(right.before) ||
             left.after.localeCompare(right.after),
         )
-        .map((row) => [
-          `${row.area}\u0000${row.before}\u0000${row.after}`,
-          row,
-        ]),
+        .map((row) => [`${row.area}\u0000${row.before}\u0000${row.after}`, row]),
     ).values(),
   ];
 }
 
+/** @param {ContractChangeRow[]} rows */
 function renderContractChangeRows(rows) {
   return rows
     .map((row) => {
@@ -1151,6 +1099,7 @@ function renderContractChangeRows(rows) {
     .join("");
 }
 
+/** @param {ContractAreaInput} row */
 function contractAreaParts(row) {
   if (row.areaKind) {
     return {
@@ -1191,6 +1140,7 @@ function contractAreaParts(row) {
   }
   match = area.match(/^(query|path|header):(.+)$/i);
   if (match) {
+    /** @type {Record<string, string>} */
     const kinds = {
       query: "Query parameter",
       path: "Path parameter",
@@ -1211,35 +1161,38 @@ function contractAreaParts(row) {
   return { areaKind: "Contract area", member: area };
 }
 
+/** @param {ContractAreaInput} row */
 function renderContractAreaCell(row) {
   const { areaKind, member } = contractAreaParts(row);
   return `<td class="contract-member"><span class="contract-area-kind">${escapeHtml(areaKind)}</span><code>${escapeHtml(member)}</code></td>`;
 }
 
+/** @param {AssessmentFinding[]} [findings] @returns {RestContractCard[]} */
 export function restContractCards(findings = []) {
+  /** @type {Map<string, RestContractCard>} */
   const cards = new Map();
+  /** @type {Record<string, number>} */
   const severityOrder = { critical: 4, high: 3, medium: 2, low: 1 };
   for (const finding of findings) {
     const delta = restContractDelta(finding);
-    if (!cards.has(delta.identity)) {
-      cards.set(delta.identity, {
+    let card = cards.get(delta.identity);
+    if (!card) {
+      card = {
         identity: delta.identity,
         severity: finding.severity,
         findings: [],
         operations: [],
         relatedSemanticIntents: [],
         sources: [],
-      });
+      };
+      cards.set(delta.identity, card);
     }
-    const card = cards.get(delta.identity);
     card.findings.push({ ...finding, contractDelta: delta });
     card.relatedSemanticIntents.push(...(finding.relatedSemanticIntents ?? []));
     card.sources.push(...(finding.sources ?? []));
     const { before, after } = operationFacts(finding);
     for (const operationId of finding.operationIds ?? []) {
-      const fact = [after, before].find(
-        (item) => item?.operationId === operationId,
-      );
+      const fact = [after, before].find((item) => item?.operationId === operationId);
       card.operations.push({
         operationId,
         apiVersion: fact?.apiVersion,
@@ -1247,10 +1200,7 @@ export function restContractCards(findings = []) {
         path: fact?.path,
       });
     }
-    if (
-      (severityOrder[finding.severity] ?? 0) >
-      (severityOrder[card.severity] ?? 0)
-    ) {
+    if ((severityOrder[finding.severity] ?? 0) > (severityOrder[card.severity] ?? 0)) {
       card.severity = finding.severity;
     }
   }
@@ -1266,79 +1216,35 @@ export function restContractCards(findings = []) {
       ];
       card.relatedSemanticIntents = [...new Set(card.relatedSemanticIntents)];
       card.sources = [
-        ...new Map(
-          card.sources.map((source) => [source.id ?? source.path, source]),
-        ).values(),
+        ...new Map(card.sources.map((source) => [source.id ?? source.path, source])).values(),
       ];
       return card;
     })
     .sort((left, right) => left.identity.localeCompare(right.identity));
 }
 
-function restContractCardId(card) {
-  return `rest-contract-${anchor(card.identity)}`;
-}
-
-function renderRestContractCards(findings = [], semanticItems = []) {
-  return restContractCards(findings)
-    .map((card) => {
-      const findingAnchors = card.findings
-        .map((finding) => `<span id="finding-${anchor(finding.id)}"></span>`)
-        .join("");
-      const rows = renderContractChangeRows(
-        card.findings.map(({ contractDelta }) => contractDelta),
-      );
-      const operations = card.operations
-        .map(
-          (operation) =>
-            `<div class="rest-operation-line"><strong><code>${escapeHtml(operation.operationId)}</code></strong><span>${escapeHtml(operation.apiVersion ?? "unversioned")}</span><code>${escapeHtml((operation.method ?? "").toUpperCase())} ${escapeHtml(operation.path ?? "")}</code></div>`,
-        )
-        .join("");
-      const rationales = [
-        ...new Set(
-          card.findings.map((finding) => finding.rationale).filter(Boolean),
-        ),
-      ].join(" ");
-      const contractChangeCount = card.findings.length;
-      const operationCount = card.operations.length;
-      return `<details class="finding rest-contract-card" id="${restContractCardId(card)}"><summary><strong>${escapeHtml(card.identity)}</strong><span class="contract-tag">REST contract</span><span class="finding-summary">${contractChangeCount} contract ${contractChangeCount === 1 ? "change" : "changes"} — ${operationCount} affected REST ${operationCount === 1 ? "operation" : "operations"}</span></summary>
-<div class="finding-body">${findingAnchors}
-<dl class="contract-metadata"><dt>REST contract:</dt><dd><code>${escapeHtml(card.identity)}</code></dd></dl>
-<h4>Breaking changes</h4>
-<table class="contract-change-table"><thead><tr><th>Contract area</th><th>Before</th><th>After</th></tr></thead><tbody>${rows}</tbody></table>
-<div class="breaking-rationale"><strong>Why this is breaking:</strong> ${escapeHtml(rationales || "The existing wire contract is no longer preserved.")}</div>
-<details class="affected-operations"><summary><strong>Affected REST operations (${operationCount})</strong></summary>
-<div class="rest-operation-list">${operations || '<p class="empty">Operation mapping unavailable.</p>'}</div></details>
-<div class="contract-footer"><span><strong>Related semantic intents:</strong> ${card.relatedSemanticIntents.length ? intentTitleLinks(card.relatedSemanticIntents, semanticItems) : "None"}</span></div>
-</div></details>`;
-    })
-    .join("\n");
-}
-
+/** @param {unknown[]} evidence */
 function legacyEvidence(evidence) {
+  /** @type {{operation?: string, impact?: string, apiVersion?: string, method?: string, path?: string}} */
   const details = {};
+  /** @type {string[]} */
   const remaining = [];
-  for (const item of evidence) {
-    const parameter = item.match(
-      /^(.+) changed (\d+) parameter contract\(s\)\.$/,
-    );
+  for (const rawItem of evidence) {
+    const item = displayValue(rawItem);
+    const parameter = item.match(/^(.+) changed (\d+) parameter contract\(s\)\.$/);
     if (parameter) {
       details.operation = parameter[1];
       const count = Number(parameter[2]);
       details.impact = `${count} parameter contract${count === 1 ? "" : "s"} changed`;
       continue;
     }
-    const response = item.match(
-      /^(.+) changed an existing response contract\.$/,
-    );
+    const response = item.match(/^(.+) changed an existing response contract\.$/);
     if (response) {
       details.operation = response[1];
       details.impact = "Existing response contract changed";
       continue;
     }
-    const request = item.match(
-      /^Compared REST operation:\s*([^:]+):([A-Z]+):(.*)\.$/i,
-    );
+    const request = item.match(/^Compared REST operation:\s*([^:]+):([A-Z]+):(.*)\.$/i);
     if (request) {
       details.apiVersion = request[1];
       details.method = request[2].toUpperCase();
@@ -1361,21 +1267,24 @@ ${details.impact ? `<dt>Contract impact</dt><dd>${escapeHtml(details.impact)}</d
   return `${operationDetails}${otherEvidence}`;
 }
 
+/**
+ * @param {LegacyAssessmentFinding[]} [findings]
+ * @param {boolean} [downstream]
+ */
 function legacyFindingCards(findings = [], downstream = false) {
   return findings
     .map((finding) => {
       const omittedRestEvidence =
-        downstream &&
-        finding.evidence?.some((item) => /^Approved REST finding:/i.test(item));
+        downstream && finding.evidence?.some((item) => /^Approved REST finding:/i.test(item));
       const evidence = (finding.evidence ?? []).filter(
         (item) => !downstream || !/^Approved REST finding:/i.test(item),
       );
       const summary = downstream
-        ? finding.summary.replace(
+        ? (finding.summary ?? "").replace(
             /^The approved REST contract changes/i,
             "The REST breaking changes",
           )
-        : finding.summary;
+        : (finding.summary ?? "");
       return `<details class="finding" id="${downstream ? "downstream" : "finding"}-${anchor(finding.id)}">
 <summary><strong>${escapeHtml(finding.title)}</strong></summary>
 <div class="finding-body">
@@ -1389,35 +1298,37 @@ ${downstream ? "" : `<p class="sources"><strong>Changed TypeSpec:</strong> ${sou
     .join("\n");
 }
 
+/**
+ * @template {AssessmentFinding | LegacyAssessmentFinding} T
+ * @param {T[]} [findings]
+ * @returns {T[]}
+ */
 function directLegacyDownstreamFindings(findings = []) {
   return findings.filter(
     (finding) =>
-      !finding.evidence?.some((item) => /^Approved REST finding:/i.test(item)),
+      !finding.evidence?.some((item) => /^Approved REST finding:/i.test(displayValue(item))),
   );
 }
 
+/** @param {AssessmentTypeImpact[]} [impacts] */
 export function visibleSharedTypeImpacts(impacts = []) {
   return impacts.filter(
-    (impact) =>
-      (impact.findingIds?.length ?? 0) > 0 ||
-      (impact.affectedMethodCount ?? 0) > 0,
+    (impact) => (impact.findingIds?.length ?? 0) > 0 || (impact.affectedMethodCount ?? 0) > 0,
   );
 }
 
-export function downstreamTypeCards(dimension = {}) {
-  const findingsById = new Map(
-    (dimension.findings ?? []).map((finding) => [finding.id, finding]),
-  );
+/** @param {AssessmentOutput["dimensions"]["downstream"]} dimension */
+export function downstreamTypeCards(dimension) {
+  const findingsById = new Map((dimension.findings ?? []).map((finding) => [finding.id, finding]));
+  /** @type {Map<string, DownstreamTypeCard>} */
   const cards = new Map();
-  const impacts =
-    dimension.typeImpacts ?? dimension.sharedTypeImpacts ?? [];
+  const impacts = dimension.typeImpacts ?? dimension.sharedTypeImpacts ?? [];
   for (const impact of visibleSharedTypeImpacts(impacts)) {
-    const types = impact.type
-      ? [impact.type]
-      : [...new Set(impact.types ?? [])].sort();
+    const types = impact.type ? [impact.type] : [...new Set(impact.types ?? [])].sort();
     for (const [index, type] of types.entries()) {
-      if (!cards.has(type)) {
-        cards.set(type, {
+      let card = cards.get(type);
+      if (!card) {
+        card = {
           type,
           findings: [],
           relatedSemanticIntents: [],
@@ -1425,22 +1336,19 @@ export function downstreamTypeCards(dimension = {}) {
           locations: [],
           rootCauses: [],
           legacyImpactIds: [],
-        });
+        };
+        cards.set(type, card);
       }
-      const card = cards.get(type);
-      const matchedFindings = (impact.findingIds ?? [])
-        .map((id) => findingsById.get(id))
-        .filter((finding) => finding?.crossLanguageDefinitionId === type);
+      const matchedFindings = (impact.findingIds ?? []).flatMap((id) => {
+        const finding = findingsById.get(id);
+        return finding?.crossLanguageDefinitionId === type ? [finding] : [];
+      });
       card.findings.push(...matchedFindings);
       card.relatedSemanticIntents.push(
-        ...matchedFindings.flatMap(
-          (finding) => finding.relatedSemanticIntents ?? [],
-        ),
+        ...matchedFindings.flatMap((finding) => finding.relatedSemanticIntents ?? []),
       );
       if (types.length === 1 && !matchedFindings.length) {
-        card.relatedSemanticIntents.push(
-          ...(impact.relatedSemanticIntents ?? []),
-        );
+        card.relatedSemanticIntents.push(...(impact.relatedSemanticIntents ?? []));
       }
       card.affectedMethods.push(...(impact.affectedMethods ?? []));
       card.locations.push(...(impact.locations ?? []));
@@ -1448,32 +1356,25 @@ export function downstreamTypeCards(dimension = {}) {
         if (!id) continue;
         card.rootCauses.push({
           id,
-          kind: impact.rootCause,
+          kind: typeof impact.rootCause === "string" ? impact.rootCause : undefined,
           summary: impact.summary,
         });
       }
       if (index === 0) card.legacyImpactIds.push(impact.id);
     }
   }
+  /** @type {Record<string, number>} */
   const severityOrder = { critical: 4, high: 3, medium: 2, low: 1 };
   return [...cards.values()]
     .map((card) => {
-      card.findings = [
-        ...new Map(
-          card.findings.map((finding) => [finding.id, finding]),
-        ).values(),
-      ];
+      card.findings = [...new Map(card.findings.map((finding) => [finding.id, finding])).values()];
       card.relatedSemanticIntents = [...new Set(card.relatedSemanticIntents)];
       card.locations = [...new Set(card.locations)].sort();
       card.affectedMethods = [
-        ...new Map(
-          card.affectedMethods.map((method) => [method.symbol, method]),
-        ).values(),
+        ...new Map(card.affectedMethods.map((method) => [method.symbol, method])).values(),
       ];
       card.rootCauses = [
-        ...new Map(
-          card.rootCauses.map((rootCause) => [rootCause.id, rootCause]),
-        ).values(),
+        ...new Map(card.rootCauses.map((rootCause) => [rootCause.id, rootCause])).values(),
       ];
       card.legacyImpactIds = [...new Set(card.legacyImpactIds)];
       card.severity = card.findings.reduce(
@@ -1488,26 +1389,36 @@ export function downstreamTypeCards(dimension = {}) {
     .sort((left, right) => left.type.localeCompare(right.type));
 }
 
+/** @param {unknown} value @param {string} field */
 function contractSummary(value, field) {
   if (value === undefined) return "—";
   if (field === "parameters") {
+    if (!Array.isArray(value)) return "None";
     return (
-      (value ?? [])
+      value
+        .filter(isRecord)
         .map(
           (item) =>
-            `${item.in ?? "body"}:${item.name}${item.required ? " (required)" : ""}`,
+            `${displayValue(item.in ?? "body")}:${displayValue(item.name)}${item.required ? " (required)" : ""}`,
         )
         .join(", ") || "None"
     );
   }
   if (field === "responses") {
-    return (value ?? []).map((item) => item.status).join(", ") || "None";
+    if (!Array.isArray(value)) return "None";
+    return (
+      value
+        .filter(isRecord)
+        .map((item) => item.status)
+        .join(", ") || "None"
+    );
   }
-  if (field === "request") return value ? (value.kind ?? "present") : "None";
+  if (field === "request") return isRecord(value) ? displayValue(value.kind ?? "present") : "None";
   if (field === "paging" || field === "lro") return value ? "present" : "None";
-  return String(value);
+  return displayValue(value);
 }
 
+/** @param {SourceChange[]} [sources] */
 function renderSourceHunks(sources = []) {
   return sources
     .flatMap((source) =>
@@ -1530,6 +1441,7 @@ function renderSourceHunks(sources = []) {
     .join("");
 }
 
+/** @param {DiffHunk} hunk */
 function substantiveChange(hunk) {
   return (hunk.lines ?? []).some((line) => {
     if (!line.startsWith("+") && !line.startsWith("-")) return false;
@@ -1538,25 +1450,23 @@ function substantiveChange(hunk) {
   });
 }
 
+/** @param {SourceChange} source @param {DiffHunk} hunk */
 function sourceStartLine(source, hunk) {
   const hunkStartLine = hunk.current?.startLine ?? hunk.base?.startLine;
   if (Number.isFinite(hunkStartLine)) return hunkStartLine;
   const declarationLines = (source.declarations ?? [])
     .flatMap((declaration) =>
-      declaration.hunkIds?.includes(hunk.id)
-        ? [declaration.source?.startLine]
-        : [],
+      declaration.hunkIds?.includes(hunk.id) ? [declaration.source?.startLine] : [],
     )
     .filter(Number.isFinite);
   return Math.min(...declarationLines, Number.MAX_SAFE_INTEGER);
 }
 
+/** @param {AssessmentSemanticItem} item */
 export function representativeSource(item) {
   const operationHunkIds = new Set(
     (item.operations ?? []).flatMap((operation) =>
-      (operation.sources ?? []).flatMap((source) =>
-        (source.hunks ?? []).map((hunk) => hunk.id),
-      ),
+      (operation.sources ?? []).flatMap((source) => (source.hunks ?? []).map((hunk) => hunk.id)),
     ),
   );
   const candidates = (item.sources ?? []).flatMap((source) =>
@@ -1583,9 +1493,7 @@ export function representativeSource(item) {
       }
     }
     return (
-      String(left.source.path ?? "").localeCompare(
-        String(right.source.path ?? ""),
-      ) ||
+      String(left.source.path ?? "").localeCompare(String(right.source.path ?? "")) ||
       left.startLine - right.startLine ||
       String(left.hunk.id ?? "").localeCompare(String(right.hunk.id ?? ""))
     );
@@ -1601,6 +1509,7 @@ export function representativeSource(item) {
   };
 }
 
+/** @param {AssessmentSemanticItem} item */
 function representativeExample(item) {
   const source = representativeSource(item);
   if (!source) {
@@ -1611,14 +1520,14 @@ ${renderSourceHunks([source])}
 <p class="sources"><strong>Source:</strong> ${sourceLinks([source])}.</p></details>`;
 }
 
+/**
+ * @param {AssessmentOperation} operation
+ * @param {AssessmentFinding[]} restFindings
+ * @param {string} semanticIntentId
+ */
 function operationCard(operation, restFindings, semanticIntentId) {
-  const unchangedOutcome =
-    "HTTP signature and represented payload contract unchanged.";
-  const rows = operationContractRows(
-    operation,
-    restFindings,
-    semanticIntentId,
-  );
+  const unchangedOutcome = "HTTP signature and represented payload contract unchanged.";
+  const rows = operationContractRows(operation, restFindings, semanticIntentId);
   const changes = rows.length
     ? `<table class="contract-change-table"><thead><tr><th>Contract area</th><th>Before</th><th>After</th></tr></thead><tbody>${renderContractChangeRows(rows)}</tbody></table>`
     : `<p class="good"><strong>${unchangedOutcome}</strong></p>`;
@@ -1628,14 +1537,19 @@ function operationCard(operation, restFindings, semanticIntentId) {
 <p><strong>Change outcome:</strong> ${escapeHtml(outcome)}</p></div></details>`;
 }
 
-function semanticFindingReferences(item, compliance, downstream = {}) {
+/**
+ * @param {AssessmentSemanticItem} item
+ * @param {FinalComplianceAssessment} compliance
+ * @param {AssessmentOutput["dimensions"]["downstream"]} downstream
+ * @returns {SemanticFindingReference[]}
+ */
+function semanticFindingReferences(item, compliance, downstream) {
   const complianceIds = new Set([
     ...(item.relatedFindings?.compliance ?? []),
     ...(compliance.findings ?? [])
       .filter(
         (finding) =>
-          finding.semanticIntentId === item.id ||
-          finding.relatedSemanticIntents?.includes(item.id),
+          finding.semanticIntentId === item.id || finding.relatedSemanticIntents?.includes(item.id),
       )
       .map((finding) => finding.id),
   ]);
@@ -1646,52 +1560,61 @@ function semanticFindingReferences(item, compliance, downstream = {}) {
   ]);
   const methodGroups = downstream.methodGroups ?? downstream.operationGroups ?? [];
   const typeImpacts = downstream.typeImpacts ?? downstream.sharedTypeImpacts ?? [];
-  const downstreamItems = new Map([
-    ...methodGroups.map((group) => [
-      group.id,
-      {
-        title: group.symbol?.split(".").at(-1) ?? group.symbol ?? group.id,
-        detail: "SDK method",
-      },
-    ]),
-    ...typeImpacts.map((impact) => {
-      const type = impact.type ?? impact.types?.[0] ?? impact.id;
-      const findings = impact.findingIds?.length ?? 0;
-      return [
-        impact.id,
-        {
-          title: type.split(".").at(-1) ?? type,
-          detail: `${findings} ${findings === 1 ? "change" : "changes"}`,
-        },
-      ];
-    }),
-  ]);
-  return [
-    ...(item.relatedFindings?.rest ?? []).map((id) => ({
+  /** @type {Map<string, {title: string, detail: string}>} */
+  const downstreamItems = new Map();
+  for (const group of methodGroups) {
+    downstreamItems.set(group.id, {
+      title: group.symbol?.split(".").at(-1) ?? group.symbol ?? group.id,
+      detail: "SDK method",
+    });
+  }
+  for (const impact of typeImpacts) {
+    const type = impact.type ?? impact.types?.[0] ?? impact.id;
+    const findings = impact.findingIds?.length ?? 0;
+    downstreamItems.set(impact.id, {
+      title: type.split(".").at(-1) ?? type,
+      detail: `${findings} ${findings === 1 ? "change" : "changes"}`,
+    });
+  }
+  /** @type {SemanticFindingReference[]} */
+  const references = [];
+  for (const id of item.relatedFindings?.rest ?? []) {
+    references.push({
       id,
       kind: "rest",
       href: `#finding-${anchor(id)}`,
-    })),
-    ...[...downstreamIds].map((id) => ({
+    });
+  }
+  for (const id of downstreamIds) {
+    references.push({
       id,
       kind: "downstream",
       href: `#downstream-${anchor(id)}`,
       ...(downstreamItems.get(id) ?? { title: id, detail: "SDK contract" }),
-    })),
-    ...[...complianceIds].map((id) => ({
+    });
+  }
+  for (const id of complianceIds) {
+    references.push({
       id,
       kind: "compliance",
       href: `#compliance-finding-${anchor(id)}`,
-    })),
-  ];
+    });
+  }
+  return references;
 }
 
+/**
+ * @param {SemanticFindingReference[]} references
+ * @param {string} intentId
+ */
 function semanticFindingBadge(references, intentId) {
+  /** @type {Record<SemanticFindingReference["kind"], string>} */
   const labels = {
     rest: "REST breaking changes",
     downstream: "Downstream breaking changes",
     compliance: "Azure Guidelines",
   };
+  /** @type {Map<SemanticFindingReference["kind"], SemanticFindingReference[]>} */
   const grouped = new Map();
   for (const reference of references) {
     const values = grouped.get(reference.kind) ?? [];
@@ -1716,19 +1639,19 @@ function semanticFindingBadge(references, intentId) {
     : "";
 }
 
+/**
+ * @param {AssessmentSemanticItem} item
+ * @param {FinalComplianceAssessment} compliance
+ * @param {AssessmentFinding[]} restFindings
+ * @param {AssessmentOutput["dimensions"]["downstream"]} downstream
+ */
 function semanticCard(item, compliance, restFindings, downstream) {
   const all = item.operations ?? [];
   const shown = all.slice(0, 3);
   const operationContent = all.length
-    ? shown
-        .map((operation) => operationCard(operation, restFindings, item.id))
-        .join("\n")
+    ? shown.map((operation) => operationCard(operation, restFindings, item.id)).join("\n")
     : '<p class="empty">No directly affected REST operation.</p>';
-  const findingReferences = semanticFindingReferences(
-    item,
-    compliance,
-    downstream,
-  );
+  const findingReferences = semanticFindingReferences(item, compliance, downstream);
   return `<details class="intent" id="intent-${anchor(item.id)}"><summary><strong><span class="action">${escapeHtml(item.action)}</span> ${escapeHtml(item.title)}</strong>${semanticFindingBadge(findingReferences, item.id)}</summary><div class="intent-body">
 <p>${escapeHtml(item.summary)}</p>
 ${representativeExample(item)}
@@ -1737,7 +1660,11 @@ ${operationContent}
 </div></details>`;
 }
 
-function downstreamOperationGroups(dimension, semanticItems) {
+/**
+ * @param {AssessmentOutput["dimensions"]["downstream"]} dimension
+ */
+function downstreamOperationGroups(dimension) {
+  /** @type {Record<string, string>} */
   const labels = {
     kind: "Method kind",
     parameters: "Parameters",
@@ -1747,10 +1674,9 @@ function downstreamOperationGroups(dimension, semanticItems) {
     lro: "Long-running behavior",
     client: "Client",
   };
-  const value = (item) =>
-    typeof item === "string" ? item : JSON.stringify(item);
-  const parameterSignature = (parameter) =>
-    `${parameter.name}${parameter.optional ? "?" : ""}: ${parameter.type ?? "unknown"}`;
+  /** @param {unknown} item */
+  const value = (item) => (typeof item === "string" ? item : (JSON.stringify(item) ?? ""));
+  /** @param {AssessmentMethodParameterChanges} changes */
   const parameterSummary = (changes) => {
     const parts = [
       ["added", changes.added?.length],
@@ -1759,16 +1685,32 @@ function downstreamOperationGroups(dimension, semanticItems) {
       ["reordered", changes.reordered?.length],
       ["unchanged", changes.unchangedCount],
     ].filter(([, count]) => count);
-    return (
-      parts.map(([label, count]) => `${count} ${label}`).join(", ") ||
-      "unchanged"
-    );
+    return parts.map(([label, count]) => `${count} ${label}`).join(", ") || "unchanged";
   };
+  /**
+   * @param {string} cellValue
+   * @param {string | undefined} detail
+   * @param {string} kind
+   */
   const contractCell = (cellValue, detail, kind) =>
     `<code class="contract-value ${kind}">${escapeHtml(cellValue)}</code>${detail ? `<span class="contract-detail">${escapeHtml(detail)}</span>` : ""}`;
+  /** @param {SdkType | string | undefined} type */
+  const sdkTypeName = (type) => {
+    if (!type) return "unknown";
+    if (typeof type === "string") return type;
+    return type.name ?? type.id ?? type.kind ?? "unknown";
+  };
+  /** @param {AssessmentParameter} parameter */
   const parameterType = (parameter) =>
-    `${parameter.type ?? "unknown"}${parameter.optional ? "?" : ""}`;
+    `${sdkTypeName(parameter.type)}${parameter.optional ? "?" : ""}`;
+  /** @param {AssessmentParameter} parameter */
+  const parameterName = (parameter) => parameter.name ?? "parameter";
+  /**
+   * @param {string} parameterName
+   * @param {AssessmentMethodGroup} group
+   */
   const methodParameterAreaKind = (parameterName, group) => {
+    /** @type {Set<string>} */
     const locations = new Set();
     for (const method of [group.before, group.after]) {
       const protocolParameters = [
@@ -1776,52 +1718,52 @@ function downstreamOperationGroups(dimension, semanticItems) {
         ...(method?.operation?.bodyParam ? [method.operation.bodyParam] : []),
       ];
       for (const parameter of protocolParameters) {
-        const segments = (parameter.methodParameterSegments ?? [])
-          .flat(Infinity)
-          .map(String);
-        if (
-          parameter.name === parameterName ||
-          segments.includes(parameterName)
-        ) {
-          locations.add(parameter.kind);
+        const segments = (parameter.methodParameterSegments ?? []).flat(Infinity).map(displayValue);
+        if (parameter.name === parameterName || segments.includes(parameterName)) {
+          if (parameter.kind) locations.add(parameter.kind);
         }
       }
     }
     if (locations.size !== 1) return "Method parameter";
     const location = [...locations][0];
+    /** @type {Record<string, string>} */
     const labels = {
       query: "query",
       path: "path",
       header: "header",
       body: "body",
     };
-    return labels[location]
-      ? `Request ${labels[location]}`
-      : "Method parameter";
+    return labels[location] ? `Request ${labels[location]}` : "Method parameter";
   };
+  /**
+   * @param {AssessmentMethodGroup} group
+   * @returns {ContractRow[]}
+   */
   const methodContractRows = (group) =>
     group.deltas.flatMap((delta) => {
+      const field = delta.field ?? "";
       if (delta.field !== "parameters") {
         return [
           {
-            areaKind: labels[delta.field] ?? "SDK method",
-            member: labels[delta.field] ?? delta.rule,
+            areaKind: labels[field] ?? "SDK method",
+            member: labels[field] ?? delta.rule ?? "SDK method",
             before: value(delta.before),
             after: value(delta.after),
           },
         ];
       }
+      const changes = delta.changes ?? {};
       return [
-        ...(delta.changes.removed ?? []).map((item) => ({
-          areaKind: methodParameterAreaKind(item.parameter.name, group),
-          member: item.parameter.name,
+        ...(changes.removed ?? []).map((item) => ({
+          areaKind: methodParameterAreaKind(parameterName(item.parameter), group),
+          member: parameterName(item.parameter),
           before: parameterType(item.parameter),
           beforeDetail: "Existing method parameter",
           after: "not present",
         })),
-        ...(delta.changes.added ?? []).map((item) => ({
-          areaKind: methodParameterAreaKind(item.parameter.name, group),
-          member: item.parameter.name,
+        ...(changes.added ?? []).map((item) => ({
+          areaKind: methodParameterAreaKind(parameterName(item.parameter), group),
+          member: parameterName(item.parameter),
           before: "not present",
           beforeDetail: "Existing generated method signature",
           after: parameterType(item.parameter),
@@ -1829,7 +1771,7 @@ function downstreamOperationGroups(dimension, semanticItems) {
             ? "Optional method parameter"
             : "Required method parameter",
         })),
-        ...(delta.changes.modified ?? []).map((item) => ({
+        ...(changes.modified ?? []).map((item) => ({
           areaKind: methodParameterAreaKind(item.name, group),
           member: item.name,
           before: parameterType(item.before),
@@ -1837,7 +1779,7 @@ function downstreamOperationGroups(dimension, semanticItems) {
           after: parameterType(item.after),
           afterDetail: `Changed: ${item.changedFields.join(", ")}`,
         })),
-        ...(delta.changes.reordered ?? []).map((item) => ({
+        ...(changes.reordered ?? []).map((item) => ({
           areaKind: methodParameterAreaKind(item.name, group),
           member: item.name,
           before: `position ${item.beforeIndex + 1}`,
@@ -1849,23 +1791,17 @@ function downstreamOperationGroups(dimension, semanticItems) {
   const groups = methodGroups
     .map((group) => {
       const rows = methodContractRows(group);
-      const parameterDelta = group.deltas.find(
-        (delta) => delta.field === "parameters",
-      );
-      const addedParameters = parameterDelta?.changes.added ?? [];
+      const parameterDelta = group.deltas.find((delta) => delta.field === "parameters");
+      const addedParameters = parameterDelta?.changes?.added ?? [];
       const changeSummary =
-        group.deltas.length === 1 &&
-        addedParameters.length === 1 &&
-        rows.length === 1
+        group.deltas.length === 1 && addedParameters.length === 1 && rows.length === 1
           ? `An ${addedParameters[0].parameter.optional ? "optional" : "required"} parameter was added to the generated public method signature`
           : `${rows.length} generated SDK method contract ${rows.length === 1 ? "member changed" : "members changed"}`;
       const rationale = [
-        ...new Set(
-          group.deltas.map((delta) => delta.rationale).filter(Boolean),
-        ),
+        ...new Set(group.deltas.map((delta) => delta.rationale).filter(Boolean)),
       ].join(" ");
       const parameterDetail = parameterDelta
-        ? parameterSummary(parameterDelta.changes)
+        ? parameterSummary(parameterDelta.changes ?? {})
         : group.parametersUnchanged
           ? "unchanged"
           : "changed";
@@ -1885,17 +1821,18 @@ ${rationale ? `<div class="breaking-rationale"><strong>Why this is breaking:</st
     })
     .join("\n");
   const groupedFindingIds = new Set(
-    methodGroups.flatMap((group) =>
-      group.deltas.map((delta) => delta.findingId),
-    ),
+    methodGroups.flatMap((group) => group.deltas.map((delta) => delta.findingId)),
   );
+  /** @param {string} type */
   const shortTypeName = (type) => type.split(".").at(-1) ?? type;
+  /** @param {AssessmentFact | undefined} fact */
   const enumShape = (fact) => {
     if (!fact) return "unknown";
     if (fact.isFixed) return "fixed enum";
     if (fact.isUnionAsEnum) return "extensible enum";
     return "enum";
   };
+  /** @param {DownstreamTypeCard} card @returns {ContractRow[]} */
   const enumContractRows = (card) => {
     const enumFinding = card.findings.find((finding) =>
       finding.evidence?.some((fact) => fact.factKind === "enum"),
@@ -1909,6 +1846,7 @@ ${rationale ? `<div class="breaking-rationale"><strong>Why this is breaking:</st
     );
     if (!before || !after) return [];
 
+    /** @type {ContractRow[]} */
     const rows = [];
     if (enumShape(before) !== enumShape(after)) {
       rows.push({
@@ -1916,39 +1854,34 @@ ${rationale ? `<div class="breaking-rationale"><strong>Why this is breaking:</st
         areaKind: "Enum shape",
         member: shortTypeName(card.type),
         before: enumShape(before),
-        beforeDetail: before.isFixed
-          ? "Only declared values are represented."
-          : undefined,
+        beforeDetail: before.isFixed ? "Only declared values are represented." : undefined,
         after: enumShape(after),
-        afterDetail: after.isUnionAsEnum
-          ? "Unknown service values are accepted."
-          : undefined,
+        afterDetail: after.isUnionAsEnum ? "Unknown service values are accepted." : undefined,
       });
     }
-    const beforeByValue = new Map(
-      (before.values ?? []).map((item) => [String(item.value), item]),
-    );
-    const afterByValue = new Map(
-      (after.values ?? []).map((item) => [String(item.value), item]),
-    );
+    const beforeByValue = new Map((before.values ?? []).map((item) => [String(item.value), item]));
+    const afterByValue = new Map((after.values ?? []).map((item) => [String(item.value), item]));
     for (const [wireValue, previous] of beforeByValue) {
       const current = afterByValue.get(wireValue);
       if (current && current.name !== previous.name) {
+        const previousName = previous.name ?? wireValue;
+        const currentName = current.name ?? wireValue;
         rows.push({
           kind: "member",
           areaKind: "Enum member",
-          member: `${shortTypeName(card.type)}.${previous.name}`,
-          before: previous.name,
+          member: `${shortTypeName(card.type)}.${previousName}`,
+          before: previousName,
           beforeDetail: "Generated public member identity",
-          after: current.name,
+          after: currentName,
           afterDetail: `Wire value remains ${JSON.stringify(wireValue)}.`,
         });
       } else if (!current) {
+        const previousName = previous.name ?? wireValue;
         rows.push({
           kind: "member",
           areaKind: "Enum member",
-          member: `${shortTypeName(card.type)}.${previous.name}`,
-          before: previous.name,
+          member: `${shortTypeName(card.type)}.${previousName}`,
+          before: previousName,
           beforeDetail: `Wire value ${JSON.stringify(wireValue)}.`,
           after: "removed",
         });
@@ -1956,6 +1889,7 @@ ${rationale ? `<div class="breaking-rationale"><strong>Why this is breaking:</st
     }
     return rows;
   };
+  /** @param {SdkType | string | undefined} type @returns {string} */
   const typeDisplay = (type) => {
     if (!type) return "unknown";
     if (typeof type === "string") return type;
@@ -1967,29 +1901,33 @@ ${rationale ? `<div class="breaking-rationale"><strong>Why this is breaking:</st
     return (
       type.name ??
       (type.id ? shortTypeName(type.id) : undefined) ??
-      type.type ??
+      (type.type ? typeDisplay(type.type) : undefined) ??
       type.kind ??
       "unknown"
     );
   };
+  /** @param {AssessmentProperty | undefined} property */
   const propertyDisplay = (property) =>
     property
       ? `${typeDisplay(property.type ?? property.schema)}${property.optional ? "?" : ""}`
       : undefined;
+  /** @param {AssessmentFinding} finding */
   const typeFacts = (finding) => ({
     before: finding.evidence?.find(
-      (fact) =>
-        fact.factKind === "model" && fact.comparisonRole === "baseline",
+      (fact) => fact.factKind === "model" && fact.comparisonRole === "baseline",
     ),
     after: finding.evidence?.find(
       (fact) => fact.factKind === "model" && fact.comparisonRole === "target",
     ),
   });
+  /** @param {AssessmentFinding} finding */
   const propertyName = (finding) =>
     finding.actual?.match(/\bproperty\s+([A-Za-z_$][\w$]*)\b/)?.[1] ??
     finding.expected?.match(/\bproperty\s+([A-Za-z_$][\w$]*)\b/)?.[1];
+  /** @param {DownstreamTypeCard} card */
   const typePropertyAreaKind = (card) => {
     if (card.locations.length !== 1) return "Model property";
+    /** @type {Record<string, string>} */
     const labels = {
       "request-path": "Request path",
       "request-query": "Request query",
@@ -2000,17 +1938,18 @@ ${rationale ? `<div class="breaking-rationale"><strong>Why this is breaking:</st
     };
     return labels[card.locations[0]] ?? "Model property";
   };
+  /**
+   * @param {DownstreamTypeCard} card
+   * @param {AssessmentFinding[]} findings
+   * @returns {ContractRow[]}
+   */
   const modelContractRows = (card, findings) =>
     findings.flatMap((finding) => {
       const name = propertyName(finding);
       const { before, after } = typeFacts(finding);
       if (!name || (!before && !after)) return [];
-      const beforeProperty = before?.properties?.find(
-        (property) => property.name === name,
-      );
-      const afterProperty = after?.properties?.find(
-        (property) => property.name === name,
-      );
+      const beforeProperty = before?.properties?.find((property) => property.name === name);
+      const afterProperty = after?.properties?.find((property) => property.name === name);
       return [
         {
           areaKind: typePropertyAreaKind(card),
@@ -2020,22 +1959,24 @@ ${rationale ? `<div class="breaking-rationale"><strong>Why this is breaking:</st
         },
       ];
     });
+  /**
+   * @param {DownstreamTypeCard} card
+   * @param {AssessmentFinding[]} findings
+   * @returns {ContractRow[]}
+   */
   const publicSurfaceRows = (card, findings) =>
     findings.flatMap((finding) => {
       if (finding.rule !== "public-surface-changed") return [];
-      const before = finding.evidence?.find(
-        (fact) => fact.comparisonRole === "baseline",
-      );
-      const after = finding.evidence?.find(
-        (fact) => fact.comparisonRole === "target",
-      );
+      const before = finding.evidence?.find((fact) => fact.comparisonRole === "baseline");
+      const after = finding.evidence?.find((fact) => fact.comparisonRole === "target");
+      /** @param {AssessmentFact | undefined} fact */
       const display = (fact) =>
         fact
           ? [
               fact.access,
               fact.reachable === true ? "reachable" : undefined,
               fact.reachable === false ? "not reachable" : undefined,
-              fact.usage !== undefined ? `usage ${fact.usage}` : undefined,
+              fact.usage !== undefined ? `usage ${fact.usage.join(", ")}` : undefined,
             ]
               .filter(Boolean)
               .join(" · ")
@@ -2049,6 +1990,11 @@ ${rationale ? `<div class="breaking-rationale"><strong>Why this is breaking:</st
         },
       ];
     });
+  /**
+   * @param {DownstreamTypeCard} card
+   * @param {AssessmentFinding[]} findings
+   * @returns {ContractRow[]}
+   */
   const clientLocationRows = (card, findings) =>
     findings.flatMap((finding) => {
       if (finding.rule !== "client-location-changed") return [];
@@ -2056,8 +2002,7 @@ ${rationale ? `<div class="breaking-rationale"><strong>Why this is breaking:</st
         finding.actual?.match(/\bunder\s+([A-Za-z0-9_.]+)\b/)?.[1] ??
         finding.actual?.match(/\bto\s+([A-Za-z0-9_.]+)\b/)?.[1] ??
         "changed client";
-      const language =
-        finding.actual?.match(/\bgenerated\s+([A-Za-z0-9+#.]+)\s+client/i)?.[1];
+      const language = finding.actual?.match(/\bgenerated\s+([A-Za-z0-9+#.]+)\s+client/i)?.[1];
       return [
         {
           areaKind: "Client location",
@@ -2067,6 +2012,11 @@ ${rationale ? `<div class="breaking-rationale"><strong>Why this is breaking:</st
         },
       ];
     });
+  /**
+   * @param {DownstreamTypeCard} card
+   * @param {AssessmentFinding[]} findings
+   * @returns {ContractRow[]}
+   */
   const genericContractRows = (card, findings) =>
     findings.map((finding) => ({
       areaKind: "SDK contract",
@@ -2074,6 +2024,7 @@ ${rationale ? `<div class="breaking-rationale"><strong>Why this is breaking:</st
       before: finding.expected,
       after: finding.actual,
     }));
+  /** @param {DownstreamTypeCard["affectedMethods"]} methods */
   const affectedMethods = (methods) =>
     methods.length
       ? `<details class="affected-methods"><summary><strong>Affected SDK methods (${methods.length})</strong></summary>
@@ -2086,9 +2037,7 @@ ${rationale ? `<div class="breaking-rationale"><strong>Why this is breaking:</st
       : '<p class="mapping-unavailable"><strong>Affected SDK methods:</strong> mapping unavailable</p>';
   const typeCards = downstreamTypeCards(dimension)
     .map((card) => {
-      const directFindings = card.findings.filter(
-        (finding) => !groupedFindingIds.has(finding.id),
-      );
+      const directFindings = card.findings.filter((finding) => !groupedFindingIds.has(finding.id));
       const enumRows = enumContractRows(card);
       const modelRows = modelContractRows(card, directFindings);
       const structuredRows = [
@@ -2108,9 +2057,7 @@ ${rationale ? `<div class="breaking-rationale"><strong>Why this is breaking:</st
           ]
         : genericContractRows(card, directFindings);
       const shapeRow = enumRows.find((row) => row.kind === "shape");
-      const memberChangeCount = enumRows.filter(
-        (row) => row.kind === "member",
-      ).length;
+      const memberChangeCount = enumRows.filter((row) => row.kind === "member").length;
       const propertyChangeCount = modelRows.length;
       const changeSummary = shapeRow
         ? `${shapeRow.before} changed to ${/^[aeiou]/i.test(shapeRow.after) ? "an" : "a"} ${shapeRow.after}${memberChangeCount ? `, with ${memberChangeCount} generated member ${memberChangeCount === 1 ? "renamed" : "changes"}` : ""}`
@@ -2120,9 +2067,7 @@ ${rationale ? `<div class="breaking-rationale"><strong>Why this is breaking:</st
             ? `${propertyChangeCount} SDK type ${propertyChangeCount === 1 ? "property changed" : "properties changed"}`
             : `${contractRows.length} SDK type contract ${contractRows.length === 1 ? "change" : "changes"}`;
       const rationale = [
-        ...new Set(
-          directFindings.map((finding) => finding.rationale).filter(Boolean),
-        ),
+        ...new Set(directFindings.map((finding) => finding.rationale).filter(Boolean)),
       ].join(" ");
       const legacyAnchors = card.legacyImpactIds
         .map((id) => `<span id="downstream-${anchor(id)}"></span>`)
@@ -2143,17 +2088,18 @@ ${affectedMethods(card.affectedMethods)}
 </div></details>`;
     })
     .join("\n");
-  const legacy = legacyFindingCards(
-    directLegacyDownstreamFindings(dimension.legacyFindings),
-    true,
-  );
+  const legacy = legacyFindingCards(directLegacyDownstreamFindings(dimension.legacyFindings), true);
   return `${groups}${typeCards}${legacy}`;
 }
 
+/**
+ * @param {AssessmentOutput} assessment
+ * @param {RenderOptions} [options]
+ */
 function renderCurrent(assessment, options = {}) {
   const { dimensions } = assessment;
   const summary = headerSummary(assessment);
-  const report = renderReportSections(assessment, {
+  const reportHelpers = {
     escapeHtml,
     operationContractRows,
     restContractDelta,
@@ -2165,28 +2111,32 @@ function renderCurrent(assessment, options = {}) {
     legacyEvidence,
     contractAreaParts,
     directLegacyDownstreamFindings,
-  }, options);
+    intentTitleLinks,
+    semanticCard,
+    downstreamOperationGroups,
+  };
+  const report = renderReportSections(assessment, reportHelpers, options);
   summary.restCount = report.restCount;
   summary.downstreamCount = report.downstreamCount;
-  const restStatus = complianceStatus(dimensions.rest.status ?? (summary.restCount ? "failed" : "not-assessed"));
-  const downstreamStatus = complianceStatus(dimensions.downstream.status ?? (summary.downstreamCount ? "failed" : "not-assessed"));
+  const restStatus = complianceStatus(
+    dimensions.rest.status ?? (summary.restCount ? "failed" : "not-assessed"),
+  );
+  const downstreamStatus = complianceStatus(
+    dimensions.downstream.status ?? (summary.downstreamCount ? "failed" : "not-assessed"),
+  );
   const documentQuality = documentQualitySummary(dimensions.documentQuality);
   const documentStatus = complianceStatus(documentQuality.findingStatus);
+  /** @type {Map<string, Partial<ArtifactComparison>>} */
   const comparisons = new Map(
-    (assessment.artifactComparisons ?? []).map((item) => [
-      item.projectId,
-      item,
-    ]),
+    (assessment.artifactComparisons ?? []).map((item) => [item.projectId, item]),
   );
   const comparisonHeader = headerComparison(assessment);
-  const projects = assessment.projects
+  const projects = (assessment.projects ?? [])
     .map((project) => {
-      const comparison =
-        comparisons.get(project.id) ?? project.artifactComparison ?? {};
-      const baselineArtifact =
-        project.artifacts?.baseline ?? project.artifacts?.base;
-      const targetArtifact =
-        project.artifacts?.target ?? project.artifacts?.current;
+      /** @type {Partial<ArtifactComparison>} */
+      const comparison = comparisons.get(project.id) ?? project.artifactComparison ?? {};
+      const baselineArtifact = project.artifacts?.baseline ?? project.artifacts?.base;
+      const targetArtifact = project.artifacts?.target ?? project.artifacts?.current;
       return `<tr><td><code>${escapeHtml(project.path)}</code></td><td>${escapeHtml(comparison.mode ?? "legacy")}</td><td><code>${escapeHtml(artifactLabel(comparison.baseline))}</code><br><small>${escapeHtml(comparison.baseline?.sourceRevision ?? "base")} · ${escapeHtml(comparison.baseline?.reason ?? "")}</small></td><td><code>${escapeHtml(artifactLabel(comparison.target))}</code><br><small>${escapeHtml(comparison.target?.sourceRevision ?? "current")} · ${escapeHtml(comparison.target?.reason ?? "")}</small></td><td>${escapeHtml(baselineArtifact?.autorest?.status ?? "n/a")} / ${escapeHtml(baselineArtifact?.tcgc?.status ?? "n/a")}</td><td>${escapeHtml(targetArtifact?.autorest?.status ?? "n/a")} / ${escapeHtml(targetArtifact?.tcgc?.status ?? "n/a")}</td></tr>`;
     })
     .join("");
@@ -2218,14 +2168,16 @@ ${reportStyles}
 <p>This report is intended as a review reference and learning aid only. It does not replace official ARM API, Azure API Stewardship, Azure Breaking Change reviews, and should not be treated as authoritative review feedback or approval for specification changes. Official validation tools, generated artifacts, and reviewer feedback remain the source of truth for merge and release decisions.</p></div></details>
 <main class="container">
 ${report.html}
-<section id="appendix"><details class="dimension-details"><summary><h2>Appendix</h2></summary><div class="panel">${report.appendixHtml}<h3 id="potential-limits">Potential limits</h3>${assessment.blockers.length ? `<ul>${assessment.blockers.map((blocker) => `<li>${escapeHtml(blocker.message ?? blocker)}</li>`).join("")}</ul>` : "<p>None</p>"}
+<section id="appendix"><details class="dimension-details"><summary><h2>Appendix</h2></summary><div class="panel">${report.appendixHtml}<h3 id="potential-limits">Potential limits</h3>${assessment.blockers.length ? `<ul>${assessment.blockers.map((blocker) => `<li>${escapeHtml(isRecord(blocker) ? blocker.message : blocker)}</li>`).join("")}</ul>` : "<p>None</p>"}
 <h3 id="projects-and-compiler-status">Projects and compiler status</h3><table><thead><tr><th>Project</th><th>Mode</th><th>Baseline commit@version</th><th>Target commit@version</th><th>Baseline AutoRest / TCGC</th><th>Target AutoRest / TCGC</th></tr></thead><tbody>${projects}</tbody></table>
 <p><strong>Pull request:</strong> ${pullRequestLink(assessment)}</p>
 <h3 id="compliance-search-evidence">Guidance fetched</h3>
 ${complianceEvidenceAppendix(dimensions.compliance)}
-<h3>Changed files</h3><ul>${assessment.changedFiles.map((file) => `<li><code>${escapeHtml(file.path)}</code> (${escapeHtml(file.origins.join(", "))})</li>`).join("")}</ul>
+<h3>Changed files</h3><ul>${(assessment.changedFiles ?? []).map((file) => `<li><code>${escapeHtml(file.path)}</code> (${escapeHtml(file.origins.join(", "))})</li>`).join("")}</ul>
 <h3>Timing and model input</h3><pre>${escapeHtml(JSON.stringify({ timings: assessment.timings, inputAccounting: assessment.inputAccounting }, null, 2))}</pre>
-<p><strong>Provenance:</strong> ${Object.values(assessment.provenance).map(escapeHtml).join(", ")}</p></div></details></section>
+<p><strong>Provenance:</strong> ${Object.values(assessment.provenance ?? {})
+    .map(escapeHtml)
+    .join(", ")}</p></div></details></section>
 </main>
 <script>
 function revealHashTarget() {
@@ -2258,6 +2210,7 @@ revealHashTarget();
 </body></html>\n`;
 }
 
+/** @param {LegacyAssessmentInput} assessment @returns {AssessmentOutput} */
 function adaptLegacy(assessment) {
   const dimensions = assessment.dimensions;
   const source = assessment.assessmentEvidence?.changedTypeSpec ?? [];
@@ -2267,8 +2220,7 @@ function adaptLegacy(assessment) {
   );
   const legacyProjects = (assessment.projects ?? []).map((projectPath) => {
     const projectDiffs = typeSpecDiffs.filter(
-      (diff) =>
-        diff.path === projectPath || diff.path.startsWith(`${projectPath}/`),
+      (diff) => diff.path === projectPath || diff.path.startsWith(`${projectPath}/`),
     );
     const base = extractApiVersions(
       projectDiffs.map((diff) =>
@@ -2298,30 +2250,41 @@ function adaptLegacy(assessment) {
     return {
       id: projectPath,
       path: projectPath,
+      sourceChangeIds: [],
+      artifacts: {},
+      blockers: [],
       artifactComparison,
     };
   });
   const hasCodeSafetyFinding =
     dimensions.restBreakingChanges.findings.length > 0 ||
     dimensions.restCompatibleDownstreamBreakingChanges.findings.length > 0;
+  const requestedSafetyStatus = assessment.overallCodeSafety?.toLowerCase();
   const safetyStatus =
-    assessment.overallCodeSafety?.toLowerCase?.() ??
-    ((assessment.errors ?? []).length
-      ? "not-assessed"
-      : hasCodeSafetyFinding
-        ? "failed"
-        : "passed");
-  const restFindingIds = new Set(
-    dimensions.restBreakingChanges.findings.map(({ id }) => id),
-  );
+    requestedSafetyStatus === "passed" ||
+    requestedSafetyStatus === "failed" ||
+    requestedSafetyStatus === "not-assessed"
+      ? requestedSafetyStatus
+      : (assessment.errors ?? []).length
+        ? "not-assessed"
+        : hasCodeSafetyFinding
+          ? "failed"
+          : "passed";
+  const restFindingIds = new Set(dimensions.restBreakingChanges.findings.map(({ id }) => id));
   const downstreamFindingIds = new Set(
-    dimensions.restCompatibleDownstreamBreakingChanges.findings.map(
-      ({ id }) => id,
-    ),
+    dimensions.restCompatibleDownstreamBreakingChanges.findings.map(({ id }) => id),
   );
+  /** @type {Record<"added" | "modified" | "removed", "add" | "modify" | "remove">} */
   const action = { added: "add", modified: "modify", removed: "remove" };
+  /**
+   * @param {number} leftStart
+   * @param {number} leftEnd
+   * @param {number} rightStart
+   * @param {number} rightEnd
+   */
   const rangesOverlap = (leftStart, leftEnd, rightStart, rightEnd) =>
     leftStart <= rightEnd && rightStart <= leftEnd;
+  /** @param {LegacyAssessmentSourceReference} reference */
   const sourceLink = (reference) => {
     if (/^https?:\/\//.test(reference.link ?? "")) return reference.link;
     return (
@@ -2329,24 +2292,24 @@ function adaptLegacy(assessment) {
         (item) =>
           item.path === reference.path &&
           item.revision === reference.revision &&
-          rangesOverlap(
-            item.startLine,
-            item.endLine,
-            reference.startLine,
-            reference.endLine,
-          ),
+          rangesOverlap(item.startLine, item.endLine, reference.startLine, reference.endLine),
       )?.link ?? reference.link
     );
   };
+  /**
+   * @param {LegacyAssessmentSourceReference[]} [references]
+   * @param {LegacyAssessmentDiff[]} [diffs]
+   * @param {string} [prefix]
+   * @returns {SourceChange[]}
+   */
   const toSources = (references = [], diffs = [], prefix = "legacy") =>
     references.map((reference, index) => {
       const matchingDiff = diffs.find((diff) => {
         if (diff.path !== reference.path) return false;
-        const start =
-          reference.revision === "head" ? diff.newStart : diff.oldStart;
-        const count =
-          reference.revision === "head" ? diff.newCount : diff.oldCount;
+        const start = reference.revision === "head" ? diff.newStart : diff.oldStart;
+        const count = reference.revision === "head" ? diff.newCount : diff.oldCount;
         return (
+          typeof start === "number" &&
           Number.isFinite(start) &&
           rangesOverlap(
             reference.startLine,
@@ -2358,22 +2321,30 @@ function adaptLegacy(assessment) {
       });
       const id = `${prefix}-source-${index}`;
       const hunkId = `${prefix}-hunk-${index}`;
+      const range = {
+        startLine: reference.startLine,
+        endLine: reference.endLine,
+      };
       return {
         id,
         path: reference.path,
+        status: "modified",
+        origins: ["historical"],
         hunks: [
           {
             id: hunkId,
             lines: matchingDiff?.lines ?? [],
-            [reference.revision === "head" ? "current" : "base"]: {
-              startLine: reference.startLine,
-              lineCount: reference.endLine - reference.startLine + 1,
-            },
+            base: range,
+            current: range,
           },
         ],
         declarations: [
           {
             id: `${prefix}-declaration-${index}`,
+            kind: "unknown",
+            qualifiedName: reference.path,
+            decorators: [],
+            versionedMembers: [],
             hunkIds: [hunkId],
             source: {
               revision: reference.revision === "head" ? "current" : "base",
@@ -2385,27 +2356,30 @@ function adaptLegacy(assessment) {
         ],
       };
     });
+  /** @param {string} findingId */
   const relatedSemanticIntents = (findingId) =>
     semanticItems
-      .filter((item) =>
-        item.changes.some((change) =>
-          change.linkedFindingIds?.includes(findingId),
-        ),
-      )
+      .filter((item) => item.changes.some((change) => change.linkedFindingIds?.includes(findingId)))
       .map(({ id }) => id);
+  /**
+   * @param {LegacyAssessmentFindingInput[]} findings
+   * @returns {LegacyAssessmentFinding[]}
+   */
   const legacyFindings = (findings) =>
     findings.map((finding) => ({
       ...finding,
       relatedSemanticIntents: relatedSemanticIntents(finding.id),
-      sources: toSources(
-        finding.sourceReferences,
-        [],
-        `legacy-finding-${finding.id}`,
-      ),
+      sources: toSources(finding.sourceReferences, [], `legacy-finding-${finding.id}`),
     }));
+  /** @type {(ComplianceFinding & {id: string})[]} */
   const legacyComplianceFindings =
     dimensions.azureCompliance.findings?.map((finding) => ({
       ...finding,
+      semanticIntentId: relatedSemanticIntents(finding.id)[0] ?? finding.id,
+      decision: "applicable-fail",
+      actual: finding.summary ?? "",
+      gap: finding.summary ?? "",
+      applicableGuidance: [],
       relatedSemanticIntents: relatedSemanticIntents(finding.id),
       sourceReferences: (finding.sourceReferences ?? []).map((reference) => ({
         ...reference,
@@ -2424,52 +2398,73 @@ function adaptLegacy(assessment) {
   return {
     schemaVersion: 1,
     title: assessment.title,
-    pullRequest: assessment.url
-      ? { number: assessment.pr, url: assessment.url }
-      : undefined,
+    pullRequest: assessment.url ? { number: assessment.pr, url: assessment.url } : undefined,
     comparison: {
       baseCommit: assessment.baseline.commit,
       headCommit: assessment.head.commit,
+      workingTree: false,
     },
     confidence: assessment.overallConfidence ?? "medium",
-    safety: { status: safetyStatus },
+    safety: { scope: "rest-and-downstream-only", status: safetyStatus },
     dimensions: {
       semantic: {
+        status: "ready",
         items: semanticItems.map((item) => {
           const change = item.changes[0] ?? {};
           const linkedFindingIds = item.changes.flatMap(
             ({ linkedFindingIds = [] }) => linkedFindingIds,
           );
+          const itemSources = toSources(
+            item.sourceReferences,
+            item.changes.flatMap(({ typeSpecDiffs = [] }) => typeSpecDiffs),
+            `legacy-${item.id}`,
+          );
+          const projectId =
+            legacyProjects.find((project) =>
+              itemSources.some(
+                (itemSource) =>
+                  itemSource.path === project.path ||
+                  itemSource.path.startsWith(`${project.path}/`),
+              ),
+            )?.id ??
+            legacyProjects[0]?.id ??
+            "legacy";
+          const operationIds = (item.restRepresentation?.operations ?? []).map(
+            (operation) => operation.operationId,
+          );
           return {
             id: item.id,
-            action: action[change.kind] ?? "modify",
+            projectId,
+            sourceChangeIds: itemSources.map((itemSource) => itemSource.id),
+            hunkIds: itemSources.flatMap((itemSource) => itemSource.hunks.map((hunk) => hunk.id)),
+            declarationIds: itemSources.flatMap((itemSource) =>
+              itemSource.declarations.map((declaration) => declaration.id),
+            ),
+            declarationNames: itemSources.flatMap((itemSource) =>
+              itemSource.declarations.map((declaration) => declaration.qualifiedName),
+            ),
+            ownedOperationIds: operationIds,
+            operationIds,
+            beforeFactIds: [],
+            afterFactIds: [],
+            changedAspects: [],
+            action: change.kind ? (action[change.kind] ?? "modify") : "modify",
             title: item.intent,
-            summary:
-              item.restRepresentation?.summary ?? change.summary ?? item.intent,
-            operations: (item.restRepresentation?.operations ?? []).map(
-              (operation) => ({
-                ...operation,
-                apiVersion:
-                  operation.apiVersion ??
-                  operation.apiVersions?.join(", ") ??
-                  "",
-                changedAspects: [],
-                outcome:
-                  change.effect ??
-                  item.restRepresentation?.summary ??
-                  change.summary,
-              }),
-            ),
-            sources: toSources(
-              item.sourceReferences,
-              item.changes.flatMap(({ typeSpecDiffs = [] }) => typeSpecDiffs),
-              `legacy-${item.id}`,
-            ),
+            summary: item.restRepresentation?.summary ?? change.summary ?? item.intent,
+            operations: (item.restRepresentation?.operations ?? []).map((operation) => ({
+              ...operation,
+              sourceChangeIds: [],
+              hunkIds: [],
+              declarationIds: [],
+              matchBasis: "legacy",
+              apiVersion: operation.apiVersion ?? operation.apiVersions?.join(", ") ?? "",
+              changedAspects: [],
+              outcome: change.effect ?? item.restRepresentation?.summary ?? change.summary,
+            })),
+            sources: itemSources,
             relatedFindings: {
               rest: linkedFindingIds.filter((id) => restFindingIds.has(id)),
-              downstream: linkedFindingIds.filter((id) =>
-                downstreamFindingIds.has(id),
-              ),
+              downstream: linkedFindingIds.filter((id) => downstreamFindingIds.has(id)),
               sharedTypeImpact: [],
               compliance: linkedFindingIds.filter((id) =>
                 legacyComplianceFindings.some((finding) => finding.id === id),
@@ -2479,17 +2474,20 @@ function adaptLegacy(assessment) {
         }),
       },
       rest: {
+        status: dimensions.restBreakingChanges.findings.length > 0 ? "failed" : "passed",
         findings: [],
         legacyFindings: legacyFindings(dimensions.restBreakingChanges.findings),
       },
       downstream: {
+        status:
+          dimensions.restCompatibleDownstreamBreakingChanges.findings.length > 0
+            ? "failed"
+            : "passed",
         findings: [],
-        legacyFindings: legacyFindings(
-          dimensions.restCompatibleDownstreamBreakingChanges.findings,
-        ),
+        legacyFindings: legacyFindings(dimensions.restCompatibleDownstreamBreakingChanges.findings),
         operationGroups: [],
         sharedTypeImpacts: [],
-        impliedByRest: [],
+        ...{ impliedByRest: [] },
       },
       compliance: {
         status: dimensions.azureCompliance.status ?? "not-assessed",
@@ -2499,8 +2497,7 @@ function adaptLegacy(assessment) {
         coverage: {
           semanticIntentCount: 0,
           assessedIntentCount: 0,
-          selectedDocumentCount:
-            dimensions.azureCompliance.documents?.length ?? 0,
+          selectedDocumentCount: dimensions.azureCompliance.documents?.length ?? 0,
           unassessedIntentIds: [],
         },
         intentAssessments: [],
@@ -2523,25 +2520,38 @@ function adaptLegacy(assessment) {
     },
     blockers: assessment.errors ?? [],
     projects: legacyProjects,
-    changedFiles: source.map((item) => ({
+    changedFiles: source.map((item, index) => ({
+      id: `legacy-changed-${index}`,
       path: item.path,
+      status: "modified",
       origins: ["historical"],
+      hunks: [],
+      declarations: [],
     })),
     provenance: { source: "legacy assessment adapter" },
   };
 }
 
+/**
+ * @param {AssessmentOutput | LegacyAssessmentInput} assessment
+ * @param {RenderOptions} [options]
+ */
 export function renderAssessmentHtml(assessment, options = {}) {
-  const errors = validateAssessment(assessment);
+  const current = isCurrentAssessment(assessment);
+  const validationInput = current
+    ? assessment
+    : {
+        baseline: assessment.baseline,
+        head: assessment.head,
+        dimensions: assessment.dimensions,
+      };
+  const errors = validateAssessment(validationInput);
   if (errors.length) throw new Error(errors.join("\n"));
-  return renderCurrent(
-    assessment.schemaVersion === 1 ? assessment : adaptLegacy(assessment),
-    options,
-  );
+  return renderCurrent(current ? assessment : adaptLegacy(assessment), options);
 }
 
 if (isMain(import.meta.url)) {
-  runMain(async () => {
+  void runMain(() => {
     const args = parseArgs(process.argv.slice(2));
     const [input, output] = args._ ?? [];
     if (!input || !output) {
@@ -2549,9 +2559,33 @@ if (isMain(import.meta.url)) {
         "Usage: render-assessment-html.mjs <assessment.json> <assessment.html> [--downstream-input <downstream-breaking-input.json>] [--downstream-assessment <matching-assessment.json>]",
       );
     }
-    const html = renderAssessmentHtml(readJson(path.resolve(input)), {
-      downstreamInput: args.downstream_input ? readJson(path.resolve(args.downstream_input)) : undefined,
-      downstreamAssessment: args.downstream_assessment ? readJson(path.resolve(args.downstream_assessment)) : undefined,
+    const assessment = readJsonObject(path.resolve(input));
+    if (!isAssessmentInput(assessment)) {
+      throw new Error("Input is not an assessment.");
+    }
+    const downstreamInputPath = optionalCliPath(args.downstream_input, "--downstream-input");
+    const downstreamAssessmentPath = optionalCliPath(
+      args.downstream_assessment,
+      "--downstream-assessment",
+    );
+    const downstreamInput = downstreamInputPath
+      ? readJsonObject(path.resolve(downstreamInputPath))
+      : undefined;
+    if (downstreamInput !== undefined && !isDownstreamAnalysis(downstreamInput)) {
+      throw new Error("--downstream-input is not a downstream analysis.");
+    }
+    const downstreamAssessment = downstreamAssessmentPath
+      ? readJsonObject(path.resolve(downstreamAssessmentPath))
+      : undefined;
+    if (
+      downstreamAssessment !== undefined &&
+      (!isAssessmentInput(downstreamAssessment) || !isCurrentAssessment(downstreamAssessment))
+    ) {
+      throw new Error("--downstream-assessment is not a current assessment.");
+    }
+    const html = renderAssessmentHtml(assessment, {
+      downstreamInput,
+      downstreamAssessment,
     });
     fs.mkdirSync(path.dirname(path.resolve(output)), { recursive: true });
     fs.writeFileSync(path.resolve(output), html);

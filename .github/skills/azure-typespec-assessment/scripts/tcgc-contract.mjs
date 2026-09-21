@@ -3,8 +3,21 @@ import path from "node:path";
 import { isAlias, parseDocument, visit } from "yaml";
 import { canonicalJson, stableId } from "./stable-id.mjs";
 
+/** @typedef {import("./runtime-types.js").NormalizedTcgcType} NormalizedTcgcType */
+/** @typedef {import("./runtime-types.js").NormalizedTcgcContract} NormalizedTcgcContract */
+/** @typedef {import("./runtime-types.js").NormalizedTcgcMethod} NormalizedTcgcMethod */
+/** @typedef {import("./runtime-types.js").NormalizedTcgcNamedType} NormalizedTcgcNamedType */
+/** @typedef {import("./runtime-types.js").NormalizedTcgcParameter} NormalizedTcgcParameter */
+/** @typedef {NormalizedTcgcParameter & {serializedName?: unknown}} NormalizedTcgcTemplateParameter */
+/** @typedef {import("./runtime-types.js").TcgcArtifact} TcgcArtifact */
+/** @typedef {import("./runtime-types.js").TcgcCollection<unknown>} UnknownTcgcCollection */
+/** @typedef {import("./runtime-types.js").TcgcContext} TcgcContext */
+/** @typedef {import("./runtime-types.js").TcgcNode} TcgcNode */
+
 const METHOD_KINDS = new Set(["basic", "paging", "lro", "lropaging"]);
+/** @type {WeakMap<TcgcArtifact, {key: string, contract: NormalizedTcgcContract}>} */
 const contractCache = new WeakMap();
+/** @type {WeakMap<NormalizedTcgcContract, Map<string, Map<string, Map<string, Set<string>>>>>} */
 const operationIndexCache = new WeakMap();
 const SCALAR_KINDS = new Set([
   "any",
@@ -47,29 +60,50 @@ const PAGING_SEGMENT_FIELDS = [
   "nextLinkReInjectedParametersSegments",
 ];
 
+/** @param {string} message */
 function unsupported(message) {
   return new Error(`Unsupported TCGC shape: ${message}`);
 }
 
+/**
+ * @template T
+ * @param {import("./runtime-types.js").TcgcCollection<T> | undefined} value
+ * @returns {[unknown, T][]}
+ */
 function entries(value) {
   if (value instanceof Map) return [...value.entries()];
   return Object.entries(value ?? {});
 }
 
+/**
+ * @param {unknown} value
+ * @param {string} label
+ * @returns {unknown[]}
+ */
 function array(value, label) {
   if (value === undefined) return [];
   if (!Array.isArray(value)) throw unsupported(`${label} must be an array`);
   return value;
 }
 
+/**
+ * @param {unknown} value
+ * @param {string} label
+ * @returns {asserts value is TcgcNode}
+ */
 function assertObject(value, label) {
   if (!value || typeof value !== "object" || Array.isArray(value)) {
     throw unsupported(`${label} must be an object`);
   }
 }
 
+/**
+ * @param {unknown} root
+ * @param {number} limit
+ */
 function graphSize(root, limit) {
   const visited = new WeakSet();
+  /** @type {unknown[]} */
   const pending = [root];
   let count = 0;
   while (pending.length) {
@@ -78,16 +112,26 @@ function graphSize(root, limit) {
     visited.add(value);
     count += 1;
     if (count > limit) throw unsupported(`object graph exceeds the ${limit} resource limit`);
-    if (Array.isArray(value)) pending.push(...value);
-    else if (value instanceof Map) {
-      for (const [key, item] of value) pending.push(key, item);
+    if (Array.isArray(value)) {
+      for (const item of /** @type {unknown[]} */ (value)) pending.push(item);
+    } else if (value instanceof Map) {
+      for (const [key, item] of /** @type {Map<unknown, unknown>} */ (value)) {
+        pending.push(key, item);
+      }
     } else {
-      pending.push(...Object.values(value));
+      for (const item of Object.values(/** @type {Record<string, unknown>} */ (value))) {
+        pending.push(item);
+      }
     }
   }
   return count;
 }
 
+/**
+ * @param {string} source
+ * @param {{maxAliasCount?: number, maxYamlNodes?: number, maxObjects?: number}} [options]
+ * @returns {unknown}
+ */
 export function parseTcgcYaml(
   source,
   { maxAliasCount = 500000, maxYamlNodes = 5000000, maxObjects = 500000 } = {},
@@ -111,6 +155,7 @@ export function parseTcgcYaml(
   if (aliases > maxAliasCount) {
     throw unsupported(`YAML AST exceeds the ${maxAliasCount} alias resource limit`);
   }
+  /** @type {unknown} */
   let value;
   try {
     // Literal alias and expanded object limits are enforced separately. The
@@ -118,36 +163,65 @@ export function parseTcgcYaml(
     // TCGC's intentionally shared, cyclic graph.
     value = document.toJS({ maxAliasCount: -1 });
   } catch (error) {
-    throw unsupported(`YAML alias expansion failed: ${error.message}`);
+    const message = error instanceof Error ? error.message : String(error);
+    throw unsupported(`YAML alias expansion failed: ${message}`);
   }
   graphSize(value, maxObjects);
   return value;
 }
 
+/**
+ * @param {TcgcNode} raw
+ * @param {string} fallback
+ */
 function identity(raw, fallback) {
   return raw?.crossLanguageDefinitionId || fallback;
 }
 
+/** @param {unknown} raw */
 function referenceName(raw) {
-  return raw?.crossLanguageDefinitionId ?? raw?.name;
+  if (!raw || typeof raw !== "object" || Array.isArray(raw)) return undefined;
+  const value = /** @type {TcgcNode} */ (raw);
+  return value.crossLanguageDefinitionId ?? value.name;
 }
 
+/**
+ * @param {unknown} item
+ * @param {number} index
+ */
 function segmentIdentity(item, index) {
   if (typeof item === "string" || typeof item === "number") return String(item);
-  return referenceName(item) ?? item?.serializedName ?? `${item?.kind ?? "segment"}-${index}`;
+  if (!item || typeof item !== "object" || Array.isArray(item)) return `segment-${index}`;
+  const value = /** @type {TcgcNode} */ (item);
+  return referenceName(value) ?? value.serializedName ?? `${value.kind ?? "segment"}-${index}`;
 }
 
+/**
+ * @param {TcgcContext} context
+ * @param {string} code
+ * @param {string} location
+ * @param {unknown} current
+ * @param {unknown} deprecated
+ */
 function conflict(context, code, location, current, deprecated) {
-  if (current === undefined || deprecated === undefined || canonicalJson(current) === canonicalJson(deprecated)) {
+  if (
+    current === undefined ||
+    deprecated === undefined ||
+    canonicalJson(current) === canonicalJson(deprecated)
+  ) {
     return;
   }
   context.conflicts.push({ code, path: location, current, deprecated });
 }
 
+/** @param {unknown} value */
 function normalizedPropertyIdentity(value) {
-  return referenceName(value) ?? value?.serializedName ?? value?.name;
+  if (!value || typeof value !== "object" || Array.isArray(value)) return referenceName(value);
+  const item = /** @type {TcgcNode} */ (value);
+  return referenceName(item) ?? item.serializedName ?? item.name;
 }
 
+/** @param {unknown} value */
 function normalizeSerializationOptions(value) {
   if (value === undefined) return undefined;
   assertObject(value, "serializationOptions");
@@ -185,27 +259,33 @@ function normalizeSerializationOptions(value) {
   };
 }
 
+/**
+ * @param {TcgcNode} raw
+ * @param {TcgcContext} context
+ * @param {string} location
+ */
 function normalizeSerialization(raw, context, location) {
   const current = normalizeSerializationOptions(raw.serializationOptions);
-  const deprecated = raw.serializedName === undefined &&
-      raw.multipartOptions === undefined &&
-      raw.isMultipartFileInput === undefined
-    ? undefined
-    : {
-        serializedName: raw.serializedName,
-        multipartOptions: raw.multipartOptions
-          ? {
-              name: raw.multipartOptions.name,
-              isFilePart: raw.multipartOptions.isFilePart,
-              isMulti: raw.multipartOptions.isMulti,
-              filename: normalizedPropertyIdentity(raw.multipartOptions.filename),
-              contentType: normalizedPropertyIdentity(raw.multipartOptions.contentType),
-              defaultContentTypes: raw.multipartOptions.defaultContentTypes ?? [],
-              headers: (raw.multipartOptions.headers ?? []).map(normalizedPropertyIdentity),
-            }
-          : undefined,
-        isMultipartFileInput: raw.isMultipartFileInput,
-      };
+  const deprecated =
+    raw.serializedName === undefined &&
+    raw.multipartOptions === undefined &&
+    raw.isMultipartFileInput === undefined
+      ? undefined
+      : {
+          serializedName: raw.serializedName,
+          multipartOptions: raw.multipartOptions
+            ? {
+                name: raw.multipartOptions.name,
+                isFilePart: raw.multipartOptions.isFilePart,
+                isMulti: raw.multipartOptions.isMulti,
+                filename: normalizedPropertyIdentity(raw.multipartOptions.filename),
+                contentType: normalizedPropertyIdentity(raw.multipartOptions.contentType),
+                defaultContentTypes: raw.multipartOptions.defaultContentTypes ?? [],
+                headers: (raw.multipartOptions.headers ?? []).map(normalizedPropertyIdentity),
+              }
+            : undefined,
+          isMultipartFileInput: raw.isMultipartFileInput,
+        };
   if (current !== undefined && deprecated !== undefined) {
     const currentName = current.json?.name ?? current.multipart?.name;
     if (raw.serializedName !== undefined) {
@@ -233,10 +313,15 @@ function normalizeSerialization(raw, context, location) {
   return current ?? deprecated;
 }
 
-function normalizeDiscriminatedOptions(value, context, location, stack) {
+/**
+ * @param {unknown} value
+ * @param {TcgcContext} context
+ * @param {string} location
+ */
+function normalizeDiscriminatedOptions(value, context, location) {
   if (value === undefined) return undefined;
   assertObject(value, `${location}.discriminatedOptions`);
-  if (!["object", "none"].includes(value.envelope)) {
+  if (value.envelope !== "object" && value.envelope !== "none") {
     throw unsupported(`${location}.discriminatedOptions.envelope must be object or none`);
   }
   if (typeof value.discriminatorPropertyName !== "string") {
@@ -249,17 +334,31 @@ function normalizeDiscriminatedOptions(value, context, location, stack) {
   };
 }
 
-export function normalizeType(raw, context = { conflicts: [] }, location = "type", stack = new WeakSet()) {
+/**
+ * @param {unknown} raw
+ * @param {TcgcContext} [context]
+ * @param {string} [location]
+ * @param {WeakSet<object>} [stack]
+ * @returns {NormalizedTcgcType}
+ */
+export function normalizeType(
+  raw,
+  context = { conflicts: [] },
+  location = "type",
+  stack = new WeakSet(),
+) {
   assertObject(raw, location);
   if (!raw.kind || typeof raw.kind !== "string") throw unsupported(`${location} is missing kind`);
   if (stack.has(raw)) {
     return {
       kind: "reference",
-      id: referenceName(raw) ?? stableId("tcgc-cycle", { location, kind: raw.kind, name: raw.name }),
+      id:
+        referenceName(raw) ?? stableId("tcgc-cycle", { location, kind: raw.kind, name: raw.name }),
       cycle: true,
     };
   }
   stack.add(raw);
+  /** @type {NormalizedTcgcType} */
   let result;
   if (SCALAR_KINDS.has(raw.kind)) {
     result = { kind: raw.kind };
@@ -309,7 +408,6 @@ export function normalizeType(raw, context = { conflicts: [] }, location = "type
             raw.discriminatedOptions,
             context,
             location,
-            stack,
           ),
         };
         break;
@@ -346,14 +444,25 @@ export function normalizeType(raw, context = { conflicts: [] }, location = "type
         };
         break;
       case "credential":
-        result = { kind: "credential", scheme: raw.scheme?.type ?? raw.scheme };
+        result = {
+          kind: "credential",
+          scheme:
+            typeof raw.scheme === "object" && raw.scheme !== null ? raw.scheme.type : raw.scheme,
+        };
         break;
       case "endpoint":
         result = {
           kind: "endpoint",
           serverUrl: raw.serverUrl,
           templateArguments: array(raw.templateArguments, `${location}.templateArguments`).map(
-            (item, index) => normalizeParameter(item, context, `${location}.templateArguments[${index}]`, index, stack),
+            (item, index) =>
+              normalizeParameter(
+                item,
+                context,
+                `${location}.templateArguments[${index}]`,
+                index,
+                stack,
+              ),
           ),
         };
         break;
@@ -380,6 +489,10 @@ export function normalizeType(raw, context = { conflicts: [] }, location = "type
   return result;
 }
 
+/**
+ * @param {unknown} value
+ * @param {string} location
+ */
 function normalizeSegments(value, location) {
   return array(value, location).map((segment, index) => {
     if (Array.isArray(segment)) {
@@ -389,16 +502,26 @@ function normalizeSegments(value, location) {
   });
 }
 
+/**
+ * @param {unknown} raw
+ * @param {TcgcContext} context
+ * @param {string} location
+ * @param {number} position
+ * @param {WeakSet<object>} [stack]
+ * @returns {NormalizedTcgcTemplateParameter}
+ */
 function normalizeParameter(raw, context, location, position, stack = new WeakSet()) {
   assertObject(raw, location);
   const currentSegments = raw.methodParameterSegments;
   const deprecatedSegments = raw.correspondingMethodParams;
-  const normalizedCurrentSegments = currentSegments === undefined
-    ? undefined
-    : normalizeSegments(currentSegments, `${location}.methodParameterSegments`);
-  const normalizedDeprecatedSegments = deprecatedSegments === undefined
-    ? undefined
-    : normalizeSegments(deprecatedSegments, `${location}.correspondingMethodParams`);
+  const normalizedCurrentSegments =
+    currentSegments === undefined
+      ? undefined
+      : normalizeSegments(currentSegments, `${location}.methodParameterSegments`);
+  const normalizedDeprecatedSegments =
+    deprecatedSegments === undefined
+      ? undefined
+      : normalizeSegments(deprecatedSegments, `${location}.correspondingMethodParams`);
   conflict(
     context,
     "method-parameter-segments-conflict",
@@ -406,6 +529,7 @@ function normalizeParameter(raw, context, location, position, stack = new WeakSe
     normalizedCurrentSegments,
     normalizedDeprecatedSegments,
   );
+  /** @type {NormalizedTcgcTemplateParameter} */
   const result = {
     position,
     name: raw.name,
@@ -429,29 +553,46 @@ function normalizeParameter(raw, context, location, position, stack = new WeakSe
   if (raw.allowReserved !== undefined) result.allowReserved = raw.allowReserved;
   if (raw.kind === "endpoint" && raw.serializedName !== undefined) {
     const currentName = result.type.templateArguments?.[0]?.serializedName;
-    conflict(context, "endpoint-serialized-name-conflict", location, currentName, raw.serializedName);
+    conflict(
+      context,
+      "endpoint-serialized-name-conflict",
+      location,
+      currentName,
+      raw.serializedName,
+    );
   }
   return result;
 }
 
+/**
+ * @param {unknown} value
+ * @param {boolean} exception
+ * @param {string} location
+ */
 function normalizeStatusCodes(value, exception, location) {
   if (value === "*" && exception) return "*";
   if (Number.isInteger(value)) return value;
-  if (
-    value &&
-    typeof value === "object" &&
-    !Array.isArray(value) &&
-    Number.isInteger(value.start) &&
-    Number.isInteger(value.end) &&
-    value.start <= value.end
-  ) {
-    return { start: value.start, end: value.end };
+  if (value && typeof value === "object" && !Array.isArray(value)) {
+    const range = /** @type {Record<string, unknown>} */ (value);
+    if (
+      Number.isInteger(range.start) &&
+      Number.isInteger(range.end) &&
+      /** @type {number} */ (range.start) <= /** @type {number} */ (range.end)
+    ) {
+      return { start: range.start, end: range.end };
+    }
   }
   throw unsupported(
     `${location} must be one exact status, one {start,end} range${exception ? ", or *" : ""}`,
   );
 }
 
+/**
+ * @param {unknown} raw
+ * @param {TcgcContext} context
+ * @param {string} location
+ * @param {boolean} exception
+ */
 function normalizeHttpResponse(raw, context, location, exception) {
   assertObject(raw, location);
   return {
@@ -465,6 +606,11 @@ function normalizeHttpResponse(raw, context, location, exception) {
   };
 }
 
+/**
+ * @param {unknown} raw
+ * @param {TcgcContext} context
+ * @param {string} location
+ */
 function normalizeHttpOperation(raw, context, location) {
   if (raw === undefined) return undefined;
   assertObject(raw, location);
@@ -489,9 +635,15 @@ function normalizeHttpOperation(raw, context, location) {
   };
 }
 
+/**
+ * @param {unknown} raw
+ * @param {TcgcContext} context
+ * @param {string} location
+ */
 function normalizePagingMetadata(raw, context, location) {
   if (raw === undefined) return undefined;
   assertObject(raw, location);
+  /** @type {Record<string, unknown>} */
   const result = {};
   for (const field of PAGING_SEGMENT_FIELDS) {
     if (raw[field] !== undefined) {
@@ -505,11 +657,20 @@ function normalizePagingMetadata(raw, context, location) {
   return result;
 }
 
+/**
+ * @param {unknown} raw
+ * @param {TcgcContext} context
+ * @param {string} location
+ */
 function normalizeLroResult(raw, context, location) {
   if (raw === undefined) return undefined;
   return raw === "void" ? "void" : normalizeType(raw, context, location);
 }
 
+/**
+ * @param {unknown} raw
+ * @param {string} location
+ */
 function normalizeLroLink(raw, location) {
   assertObject(raw, location);
   if (raw.kind !== "link") throw unsupported(`${location}.kind must be link`);
@@ -520,42 +681,58 @@ function normalizeLroLink(raw, location) {
   };
 }
 
+/**
+ * @param {unknown} raw
+ * @param {string} location
+ */
 function normalizeOperationReference(raw, location) {
   assertObject(raw, location);
   if (raw.kind !== "reference") throw unsupported(`${location}.kind must be reference`);
+  const operationName = raw.operation
+    ? [raw.operation.verb, raw.operation.path ?? raw.operation.name]
+        .filter((item) => typeof item === "string")
+        .join(" ")
+    : undefined;
   return {
     kind: "reference",
-    operation: raw.operation
-      ? referenceName(raw.operation) ?? `${raw.operation.verb ?? ""} ${raw.operation.path ?? raw.operation.name ?? ""}`.trim()
-      : undefined,
+    operation: raw.operation ? (referenceName(raw.operation) ?? operationName) : undefined,
     parameterMap: entries(raw.parameterMap)
       .sort(([left], [right]) => String(left).localeCompare(String(right)))
       .map(([name, source]) => ({
         name: String(name),
-        source: typeof source === "string"
-          ? source
-          : {
-              kind: source?.kind,
-              name: source?.name,
-              property: normalizedPropertyIdentity(source?.property),
-            },
+        source:
+          typeof source === "string"
+            ? source
+            : {
+                kind: source?.kind,
+                name: source?.name,
+                property: normalizedPropertyIdentity(source?.property),
+              },
       })),
-    parameters: entries(raw.parameters)
+    parameters: entries(
+      /** @type {import("./runtime-types.js").TcgcCollection<TcgcNode>} */ (raw.parameters),
+    )
       .sort(([left], [right]) => String(left).localeCompare(String(right)))
       .map(([name, item]) => ({
         name: String(name),
         sourceKind: item.sourceKind,
-        source: referenceName(item.source) ?? item.source?.name,
+        source: referenceName(item.source),
         target: referenceName(item.target) ?? item.target?.name,
       })),
     link: raw.link ? normalizeLroLink(raw.link, `${location}.link`) : undefined,
   };
 }
 
+/**
+ * @param {unknown} raw
+ * @param {TcgcContext} context
+ * @param {string} location
+ */
 function normalizeLroStep(raw, context, location) {
   if (raw === undefined) return undefined;
   assertObject(raw, location);
-  if (!raw.kind || typeof raw.kind !== "string") throw unsupported(`${location} is missing step kind`);
+  if (!raw.kind || typeof raw.kind !== "string")
+    throw unsupported(`${location} is missing step kind`);
   const responseModel = normalizeLroResult(raw.responseModel, context, `${location}.responseModel`);
   switch (raw.kind) {
     case "nextOperationReference":
@@ -586,6 +763,11 @@ function normalizeLroStep(raw, context, location) {
   }
 }
 
+/**
+ * @param {unknown} raw
+ * @param {TcgcContext} context
+ * @param {string} location
+ */
 function normalizePollingInfo(raw, context, location) {
   assertObject(raw, location);
   if (raw.kind !== "pollingOperationStep") {
@@ -616,6 +798,11 @@ function normalizePollingInfo(raw, context, location) {
   };
 }
 
+/**
+ * @param {unknown} raw
+ * @param {TcgcContext} context
+ * @param {string} location
+ */
 function normalizeLroMetadata(raw, context, location) {
   if (raw === undefined) return undefined;
   assertObject(raw, location);
@@ -629,6 +816,7 @@ function normalizeLroMetadata(raw, context, location) {
   ]) {
     if (raw[field] === undefined) throw unsupported(`${location} is missing ${field}`);
   }
+  /** @type {Record<string, unknown>} */
   const result = {
     finalStateVia: raw.finalStateVia,
     pollingStep: raw.pollingStep
@@ -671,36 +859,50 @@ function normalizeLroMetadata(raw, context, location) {
     finalResultPath: raw.finalResultPath,
   };
   if (raw.finalResponse) {
-    result.finalResponse = {
+    const finalResponse = {
       envelopeResult: raw.finalResponse.envelopeResult
-        ? normalizeType(raw.finalResponse.envelopeResult, context, `${location}.finalResponse.envelopeResult`)
+        ? normalizeType(
+            raw.finalResponse.envelopeResult,
+            context,
+            `${location}.finalResponse.envelopeResult`,
+          )
         : undefined,
       result: raw.finalResponse.result
         ? normalizeType(raw.finalResponse.result, context, `${location}.finalResponse.result`)
         : undefined,
       resultSegments: raw.finalResponse.resultSegments?.map(segmentIdentity),
     };
+    result.finalResponse = finalResponse;
     conflict(
       context,
       "lro-final-envelope-conflict",
       location,
-      result.finalResponse.envelopeResult,
+      finalResponse.envelopeResult,
       result.finalEnvelopeResult,
     );
   }
   return result;
 }
 
+/**
+ * @param {unknown} raw
+ * @param {{identity: string, name?: string}} client
+ * @param {TcgcContext} context
+ * @param {number} index
+ */
 function normalizeMethod(raw, client, context, index) {
   const location = `client:${client.identity}.methods[${index}]`;
   assertObject(raw, location);
-  if (!METHOD_KINDS.has(raw.kind)) throw unsupported(`${location} has method kind ${raw.kind}`);
+  if (typeof raw.kind !== "string" || !METHOD_KINDS.has(raw.kind)) {
+    throw unsupported(`${location} has method kind ${raw.kind}`);
+  }
   if (!raw.name) throw unsupported(`${location} is missing name`);
   const methodIdentity = identity(raw, `${client.identity}.${raw.name}`);
   const responseType = raw.response?.type
     ? normalizeType(raw.response.type, context, `${location}.response.type`)
     : undefined;
-  return {
+  /** @type {NormalizedTcgcMethod} */
+  const result = {
     id: stableId("sdk-method", methodIdentity),
     identity: methodIdentity,
     crossLanguageDefinitionId: raw.crossLanguageDefinitionId,
@@ -710,10 +912,15 @@ function normalizeMethod(raw, client, context, index) {
     kind: raw.kind,
     access: raw.access,
     parameters: array(raw.parameters, `${location}.parameters`).map((item, parameterIndex) =>
-      normalizeParameter(item, context, `${location}.parameters[${parameterIndex}]`, parameterIndex),
+      normalizeParameter(
+        item,
+        context,
+        `${location}.parameters[${parameterIndex}]`,
+        parameterIndex,
+      ),
     ),
     responseType,
-    apiVersions: raw.apiVersions ?? [],
+    apiVersions: array(raw.apiVersions, `${location}.apiVersions`),
     generateConvenient: raw.generateConvenient,
     generateProtocol: raw.generateProtocol,
     isOverride: Boolean(raw.isOverride),
@@ -721,8 +928,15 @@ function normalizeMethod(raw, client, context, index) {
     paging: normalizePagingMetadata(raw.pagingMetadata, context, `${location}.pagingMetadata`),
     lro: normalizeLroMetadata(raw.lroMetadata, context, `${location}.lroMetadata`),
   };
+  return result;
 }
 
+/**
+ * @param {unknown} raw
+ * @param {{identity: string}} model
+ * @param {TcgcContext} context
+ * @param {number} index
+ */
 function normalizeProperty(raw, model, context, index) {
   const location = `model:${model.identity}.properties[${index}]`;
   assertObject(raw, location);
@@ -745,8 +959,15 @@ function normalizeProperty(raw, model, context, index) {
   };
 }
 
+/**
+ * @param {unknown} raw
+ * @param {TcgcContext} context
+ * @param {number} index
+ */
 function normalizeModel(raw, context, index) {
+  assertObject(raw, `models[${index}]`);
   const modelIdentity = identity(raw, `model:${raw.name ?? index}`);
+  /** @type {NormalizedTcgcNamedType} */
   const model = {
     id: stableId("sdk-model", modelIdentity),
     identity: modelIdentity,
@@ -755,12 +976,16 @@ function normalizeModel(raw, context, index) {
     access: raw.access,
     usage: raw.usage,
     properties: [],
-    baseModel: raw.baseModel ? referenceName(raw.baseModel) ?? raw.baseModel.name : undefined,
+    baseModel: raw.baseModel ? (referenceName(raw.baseModel) ?? raw.baseModel.name) : undefined,
     additionalProperties: raw.additionalProperties
-      ? normalizeType(raw.additionalProperties, context, `model:${modelIdentity}.additionalProperties`)
+      ? normalizeType(
+          raw.additionalProperties,
+          context,
+          `model:${modelIdentity}.additionalProperties`,
+        )
       : undefined,
     discriminatorProperty: raw.discriminatorProperty
-      ? referenceName(raw.discriminatorProperty) ?? raw.discriminatorProperty.name
+      ? (referenceName(raw.discriminatorProperty) ?? raw.discriminatorProperty.name)
       : undefined,
     discriminatorValue: raw.discriminatorValue,
     discriminatedSubtypes: entries(raw.discriminatedSubtypes)
@@ -768,13 +993,19 @@ function normalizeModel(raw, context, index) {
       .map(([name, item]) => ({ name: String(name), type: referenceName(item) ?? item?.name })),
     serialization: normalizeSerialization(raw, context, `model:${modelIdentity}`),
   };
-  model.properties = array(raw.properties, `model:${modelIdentity}.properties`).map((item, propertyIndex) =>
-    normalizeProperty(item, model, context, propertyIndex),
+  model.properties = array(raw.properties, `model:${modelIdentity}.properties`).map(
+    (item, propertyIndex) => normalizeProperty(item, model, context, propertyIndex),
   );
   return model;
 }
 
+/**
+ * @param {unknown} raw
+ * @param {TcgcContext} context
+ * @param {number} index
+ */
 function normalizeEnum(raw, context, index) {
+  assertObject(raw, `enums[${index}]`);
   const enumIdentity = identity(raw, `enum:${raw.name ?? index}`);
   return {
     id: stableId("sdk-enum", enumIdentity),
@@ -790,12 +1021,25 @@ function normalizeEnum(raw, context, index) {
       ? normalizeType(raw.valueType, context, `enum:${enumIdentity}.valueType`)
       : undefined,
     values: array(raw.values, `enum:${enumIdentity}.values`)
-      .map((item) => ({ name: item.name, value: item.value }))
-      .sort((left, right) => `${left.value}:${left.name}`.localeCompare(`${right.value}:${right.name}`)),
+      .map((item, valueIndex) => {
+        assertObject(item, `enum:${enumIdentity}.values[${valueIndex}]`);
+        return { name: item.name, value: item.value };
+      })
+      .sort((left, right) =>
+        `${canonicalJson(left.value)}:${String(left.name)}`.localeCompare(
+          `${canonicalJson(right.value)}:${String(right.name)}`,
+        ),
+      ),
   };
 }
 
+/**
+ * @param {unknown} raw
+ * @param {TcgcContext} context
+ * @param {number} index
+ */
 function normalizeUnion(raw, context, index) {
+  assertObject(raw, `unions[${index}]`);
   const unionIdentity = identity(raw, `union:${raw.name ?? index}`);
   if (raw.kind === "nullable") {
     return {
@@ -817,30 +1061,37 @@ function normalizeUnion(raw, context, index) {
     name: raw.name,
     access: raw.access,
     usage: raw.usage,
-    variantTypes: array(raw.variantTypes, `union:${unionIdentity}.variantTypes`).map((item, variantIndex) =>
-      normalizeType(item, context, `union:${unionIdentity}.variantTypes[${variantIndex}]`),
+    variantTypes: array(raw.variantTypes, `union:${unionIdentity}.variantTypes`).map(
+      (item, variantIndex) =>
+        normalizeType(item, context, `union:${unionIdentity}.variantTypes[${variantIndex}]`),
     ),
     discriminatedOptions: normalizeDiscriminatedOptions(
       raw.discriminatedOptions,
       context,
       `union:${unionIdentity}`,
-      new WeakSet(),
     ),
   };
 }
 
+/** @param {TcgcNode} root */
 function collectNamespaces(root) {
+  /** @type {{namespace: TcgcNode, identity: string}[]} */
   const result = [];
   const visited = new WeakSet();
+  /**
+   * @param {unknown} namespace
+   * @param {string} parent
+   */
   const visit = (namespace, parent) => {
     if (!namespace || typeof namespace !== "object" || visited.has(namespace)) return;
     visited.add(namespace);
+    const item = /** @type {TcgcNode} */ (namespace);
     const namespaceIdentity = identity(
-      namespace,
-      namespace.fullName ?? `${parent ? `${parent}.` : ""}${namespace.name ?? "namespace"}`,
+      item,
+      item.fullName ?? `${parent ? `${parent}.` : ""}${item.name ?? "namespace"}`,
     );
-    result.push({ namespace, identity: namespaceIdentity });
-    for (const child of array(namespace.namespaces, `namespace:${namespaceIdentity}.namespaces`)) {
+    result.push({ namespace: item, identity: namespaceIdentity });
+    for (const child of array(item.namespaces, `namespace:${namespaceIdentity}.namespaces`)) {
       visit(child, namespaceIdentity);
     }
   };
@@ -848,32 +1099,54 @@ function collectNamespaces(root) {
   return result;
 }
 
+/**
+ * @param {unknown[]} values
+ * @returns {TcgcNode[]}
+ */
 function uniqueObjects(values) {
+  /** @type {TcgcNode[]} */
   const result = [];
   const visited = new WeakSet();
   for (const value of values) {
     if (!value || typeof value !== "object" || visited.has(value)) continue;
     visited.add(value);
-    result.push(value);
+    result.push(/** @type {TcgcNode} */ (value));
   }
   return result;
 }
 
+/**
+ * @param {NormalizedTcgcType | undefined} type
+ * @param {Set<string>} result
+ */
 function collectTypeReferences(type, result) {
   if (!type) return;
-  if (["model", "enum", "union", "external", "reference"].includes(type.kind) && type.id) result.add(type.id);
+  if (["model", "enum", "union", "external", "reference"].includes(type.kind) && type.id)
+    result.add(type.id);
   if (type.valueType) collectTypeReferences(type.valueType, result);
   if (type.keyType) collectTypeReferences(type.keyType, result);
   if (type.type) collectTypeReferences(type.type, result);
   for (const item of type.valueTypes ?? []) collectTypeReferences(item, result);
   for (const item of type.variantTypes ?? []) collectTypeReferences(item, result);
-  for (const item of type.discriminatedOptions ?? []) collectTypeReferences(item.type, result);
+  if (Array.isArray(type.discriminatedOptions)) {
+    for (const item of /** @type {unknown[]} */ (type.discriminatedOptions)) {
+      if (item && typeof item === "object" && !Array.isArray(item)) {
+        collectTypeReferences(/** @type {{type?: NormalizedTcgcType}} */ (item).type, result);
+      }
+    }
+  }
 }
 
+/** @param {NormalizedTcgcContract} contract */
 function markReachable(contract) {
+  /** @type {Map<string, import("./runtime-types.js").NormalizedTcgcNamedType>} */
   const named = new Map(
-    [...contract.models, ...contract.enums, ...contract.unions].map((item) => [item.identity, item]),
+    [...contract.models, ...contract.enums, ...contract.unions].map((item) => [
+      item.identity,
+      item,
+    ]),
   );
+  /** @type {Set<string>} */
   const reachable = new Set();
   for (const method of contract.methods.filter((item) => item.access === "public")) {
     for (const parameter of method.parameters) collectTypeReferences(parameter.type, reachable);
@@ -881,7 +1154,9 @@ function markReachable(contract) {
   }
   const pending = [...reachable];
   while (pending.length) {
-    const current = named.get(pending.pop());
+    const identity = pending.pop();
+    if (identity === undefined) continue;
+    const current = named.get(identity);
     if (!current) continue;
     const before = reachable.size;
     if (current.properties) {
@@ -889,7 +1164,8 @@ function markReachable(contract) {
       if (current.baseModel) reachable.add(current.baseModel);
       collectTypeReferences(current.additionalProperties, reachable);
     }
-    if (current.variantTypes) for (const type of current.variantTypes) collectTypeReferences(type, reachable);
+    if (current.variantTypes)
+      for (const type of current.variantTypes) collectTypeReferences(type, reachable);
     if (current.valueType) collectTypeReferences(current.valueType, reachable);
     if (reachable.size !== before) {
       for (const item of reachable) if (!named.get(item)?.reachable) pending.push(item);
@@ -901,24 +1177,35 @@ function markReachable(contract) {
   }
 }
 
+/**
+ * @param {unknown} root
+ * @returns {NormalizedTcgcContract}
+ */
 export function normalizeTcgcPackage(root) {
   assertObject(root, "SdkPackage");
   for (const field of ["crossLanguagePackageId", "crossLanguageVersion", "metadata"]) {
     if (root[field] === undefined) throw unsupported(`SdkPackage is missing ${field}`);
   }
+  assertObject(root.metadata, "SdkPackage.metadata");
+  /** @type {TcgcContext} */
   const context = { conflicts: [] };
   const currentVersions = root.metadata.apiVersions;
   const deprecatedVersion = root.metadata.apiVersion;
-  const normalizedCurrentVersions = currentVersions === undefined
-    ? undefined
-    : Array.isArray(currentVersions)
-      ? [...currentVersions]
-      : entries(currentVersions)
-          .sort(([left], [right]) => String(left).localeCompare(String(right)))
-          .map(([service, version]) => ({ service: String(service), version }));
+  const normalizedCurrentVersions =
+    currentVersions === undefined
+      ? undefined
+      : Array.isArray(currentVersions)
+        ? [...currentVersions]
+        : entries(currentVersions)
+            .sort(([left], [right]) => String(left).localeCompare(String(right)))
+            .map(([service, version]) => ({ service: String(service), version }));
   const deprecatedVersions = deprecatedVersion === undefined ? undefined : [deprecatedVersion];
   const currentVersionValues = normalizedCurrentVersions?.map((item) =>
-    typeof item === "string" ? item : item.version,
+    typeof item === "string"
+      ? item
+      : item && typeof item === "object" && !Array.isArray(item)
+        ? /** @type {TcgcNode} */ (item).version
+        : undefined,
   );
   conflict(
     context,
@@ -936,30 +1223,41 @@ export function normalizeTcgcPackage(root) {
       array(namespace.clients, `namespace:${namespaceIdentity}.clients`),
     ),
   ]);
+  /** @type {NormalizedTcgcContract["clients"]} */
   const clients = [];
+  /** @type {NormalizedTcgcContract["methods"]} */
   const methods = [];
   const clientVisited = new WeakSet();
+  /**
+   * @param {unknown} raw
+   * @param {string | undefined} [owner]
+   */
   const visitClient = (raw, owner) => {
     if (!raw || typeof raw !== "object" || clientVisited.has(raw)) return;
     clientVisited.add(raw);
-    if (raw.kind !== "client") throw unsupported(`client ${raw.name ?? "unknown"} has kind ${raw.kind}`);
-    const clientIdentity = raw.name
-      ? `${raw.crossLanguageDefinitionId ?? owner ?? "client"}.${raw.name}`
-      : identity(raw, `${owner ? `${owner}.` : ""}client`);
+    const item = /** @type {TcgcNode} */ (raw);
+    if (item.kind !== "client")
+      throw unsupported(`client ${item.name ?? "unknown"} has kind ${item.kind}`);
+    const clientIdentity = item.name
+      ? `${item.crossLanguageDefinitionId ?? owner ?? "client"}.${item.name}`
+      : identity(item, `${owner ? `${owner}.` : ""}client`);
     const client = {
       id: stableId("sdk-client", clientIdentity),
       identity: clientIdentity,
-      crossLanguageDefinitionId: raw.crossLanguageDefinitionId,
-      name: raw.name,
-      parent: raw.parent ? referenceName(raw.parent) ?? raw.parent.name : undefined,
+      crossLanguageDefinitionId: item.crossLanguageDefinitionId,
+      name: item.name,
+      parent: item.parent ? (referenceName(item.parent) ?? item.parent.name) : undefined,
       owner,
-      access: raw.access,
+      access: item.access,
     };
     clients.push(client);
-    for (const [index, method] of array(raw.methods, `client:${clientIdentity}.methods`).entries()) {
+    for (const [index, method] of array(
+      item.methods,
+      `client:${clientIdentity}.methods`,
+    ).entries()) {
       methods.push(normalizeMethod(method, client, context, index));
     }
-    for (const child of array(raw.children, `client:${clientIdentity}.children`)) {
+    for (const child of array(item.children, `client:${clientIdentity}.children`)) {
       visitClient(child, clientIdentity);
     }
   };
@@ -983,6 +1281,7 @@ export function normalizeTcgcPackage(root) {
       array(namespace.unions, `namespace:${namespaceIdentity}.unions`),
     ),
   ]);
+  /** @type {NormalizedTcgcContract} */
   const contract = {
     schemaVersion: 1,
     package: {
@@ -1009,8 +1308,17 @@ export function normalizeTcgcPackage(root) {
   return contract;
 }
 
-export function normalizeTcgcContract({ workRoot = process.cwd(), artifact, maxAliasCount, maxObjects }) {
-  if (!artifact || artifact.format && artifact.format !== "tcgc-yaml") {
+/**
+ * @param {{workRoot?: string, artifact: TcgcArtifact, maxAliasCount?: number, maxObjects?: number}} options
+ * @returns {NormalizedTcgcContract}
+ */
+export function normalizeTcgcContract({
+  workRoot = process.cwd(),
+  artifact,
+  maxAliasCount,
+  maxObjects,
+}) {
+  if (!artifact || (artifact.format && artifact.format !== "tcgc-yaml")) {
     throw unsupported(`expected format tcgc-yaml, received ${artifact?.format ?? "none"}`);
   }
   const files = (artifact.files ?? [])
@@ -1021,7 +1329,9 @@ export function normalizeTcgcContract({ workRoot = process.cwd(), artifact, maxA
   }
   if (!fs.existsSync(files[0])) throw unsupported(`${files[0]} does not exist`);
   const stat = fs.statSync(files[0], { bigint: true });
-  const key = [files[0], stat.size, stat.mtimeNs, stat.ctimeNs, maxAliasCount, maxObjects].join("\0");
+  const key = [files[0], stat.size, stat.mtimeNs, stat.ctimeNs, maxAliasCount, maxObjects].join(
+    "\0",
+  );
   const cached = contractCache.get(artifact);
   if (cached?.key === key) return cached.contract;
   const contract = normalizeTcgcPackage(
@@ -1031,27 +1341,45 @@ export function normalizeTcgcContract({ workRoot = process.cwd(), artifact, maxA
   return contract;
 }
 
+/**
+ * @param {NormalizedTcgcContract} contract
+ * @param {string} apiVersion
+ * @returns {Map<string, Map<string, Set<string>>>}
+ */
 export function indexTcgcOperations(contract, apiVersion) {
   let versions = operationIndexCache.get(contract);
-  if (!versions) operationIndexCache.set(contract, versions = new Map());
-  if (versions.has(apiVersion)) return versions.get(apiVersion);
+  if (!versions) {
+    versions = new Map();
+    operationIndexCache.set(contract, versions);
+  }
+  const cached = versions.get(apiVersion);
+  if (cached) return cached;
+  /** @type {Map<string, Set<string>>} */
   const byIdentity = new Map();
   for (const method of contract.methods) {
     const identity = method.crossLanguageDefinitionId;
-    if (!identity || method.apiVersions.length && !method.apiVersions.includes(apiVersion)) continue;
+    if (!identity || (method.apiVersions.length && !method.apiVersions.includes(apiVersion)))
+      continue;
     let routes = byIdentity.get(identity);
-    if (!routes) byIdentity.set(identity, routes = new Set());
+    if (!routes) byIdentity.set(identity, (routes = new Set()));
     const { verb, path: route } = method.operation ?? {};
     if (verb && route) routes.add(`${verb.toLowerCase()}\0${route}`);
   }
+  /** @type {Map<string, Map<string, Set<string>>>} */
   const index = new Map();
   for (const [identity, routes] of byIdentity) {
     // Source indexes use owner.member or top-level names. Share route sets
     // between these exact identities instead of copying the method graph.
     const segments = identity.split(".");
-    for (const name of new Set([identity, segments.slice(-2).join("."), segments.at(-1)])) {
+    const names = [identity, segments.slice(-2).join("."), segments.at(-1)].filter(
+      (item) => item !== undefined,
+    );
+    for (const name of new Set(names)) {
       let identities = index.get(name);
-      if (!identities) index.set(name, identities = new Map());
+      if (!identities) {
+        identities = new Map();
+        index.set(name, identities);
+      }
       identities.set(identity, routes);
     }
   }

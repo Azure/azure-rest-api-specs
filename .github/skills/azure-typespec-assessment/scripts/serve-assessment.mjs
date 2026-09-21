@@ -5,6 +5,10 @@ import { isMain, parseArgs, runMain } from "./cli.mjs";
 
 const HOST = "127.0.0.1";
 
+/**
+ * @param {string} reportFile
+ * @returns {http.Server}
+ */
 export function createAssessmentServer(reportFile) {
   const resolvedReport = path.resolve(reportFile);
 
@@ -28,11 +32,16 @@ export function createAssessmentServer(reportFile) {
   });
 }
 
+/**
+ * @param {string} reportFile
+ * @param {number} [port]
+ * @returns {Promise<{server: http.Server, url: string}>}
+ */
 export async function serveAssessment(reportFile, port = 0) {
   const server = createAssessmentServer(reportFile);
   await new Promise((resolve, reject) => {
     server.once("error", reject);
-    server.listen(port, HOST, resolve);
+    server.listen(port, HOST, () => resolve(undefined));
   });
 
   const address = server.address();
@@ -48,7 +57,7 @@ export async function serveAssessment(reportFile, port = 0) {
 }
 
 if (isMain(import.meta.url)) {
-  runMain(async () => {
+  void runMain(async () => {
     const args = parseArgs(process.argv.slice(2), {
       required: ["file"],
       defaults: { port: "0" },
@@ -56,6 +65,9 @@ if (isMain(import.meta.url)) {
     const port = Number(args.port);
     if (!Number.isInteger(port) || port < 0 || port > 65535) {
       throw new Error("--port must be an integer from 0 through 65535.");
+    }
+    if (typeof args.file !== "string") {
+      throw new Error("--file must be a path.");
     }
 
     const { url } = await serveAssessment(args.file, port);

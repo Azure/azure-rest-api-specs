@@ -1,11 +1,11 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import {
-  prepareProjectRecords,
-  typeSpecChangesForAnalysis,
-} from "./prepare-assessment.mjs";
+import { prepareProjectRecords, typeSpecChangesForAnalysis } from "./prepare-assessment.mjs";
 
-test("expands renamed TypeSpec evidence into analyzable paths", () => {
+/** @typedef {import("./runtime-types.js").PreparationBlocker} PreparationBlocker */
+/** @typedef {import("./runtime-types.js").SourceIndex} SourceIndex */
+
+void test("expands renamed TypeSpec evidence into analyzable paths", () => {
   assert.deepEqual(
     typeSpecChangesForAnalysis([
       {
@@ -56,38 +56,45 @@ test("expands renamed TypeSpec evidence into analyzable paths", () => {
   );
 });
 
-test("compiler blockers remain scoped to their project", () => {
+void test("compiler blockers remain scoped to their project", () => {
   const projects = ["specification/one", "specification/two"];
+  /** @type {PreparationBlocker[]} */
   const blockers = [];
+  /** @type {string[][]} */
   const compilerCalls = [];
-  const comparison = {
-    baseline: {
-      sourceRevision: "base",
-      commit: "base-sha",
-      apiVersion: "2025-01-01",
-      reason: "affected-existing-version",
-    },
-    target: {
-      sourceRevision: "current",
-      commit: "head-sha",
-      apiVersion: "2025-01-01",
-      reason: "affected-existing-version",
-    },
-    addedCurrentVersions: [],
-    available: {
-      base: ["2025-01-01"],
-      current: ["2025-01-01"],
-    },
-  };
+  const comparison =
+    /** @type {ReturnType<NonNullable<Parameters<typeof prepareProjectRecords>[0]["resolveApiVersions"]>>} */ (
+      /** @type {unknown} */ ({
+        baseline: {
+          sourceRevision: "base",
+          commit: "base-sha",
+          apiVersion: "2025-01-01",
+          reason: "affected-existing-version",
+        },
+        target: {
+          sourceRevision: "current",
+          commit: "head-sha",
+          apiVersion: "2025-01-01",
+          reason: "affected-existing-version",
+        },
+        addedCurrentVersions: [],
+        available: {
+          base: ["2025-01-01"],
+          current: ["2025-01-01"],
+        },
+      })
+    );
 
   const records = prepareProjectRecords({
     projects,
-    sourceIndex: {
-      sourceChanges: projects.map((project, index) => ({
-        id: `source-${index}`,
-        path: `${project}/main.tsp`,
-      })),
-    },
+    sourceIndex: /** @type {SourceIndex} */ (
+      /** @type {unknown} */ ({
+        sourceChanges: projects.map((project, index) => ({
+          id: `source-${index}`,
+          path: `${project}/main.tsp`,
+        })),
+      })
+    ),
     blockers,
     baseWorktree: "base",
     currentWorktree: "current",
@@ -98,10 +105,13 @@ test("compiler blockers remain scoped to their project", () => {
     runCompilers: ({ project, comparisonRole }) => {
       compilerCalls.push([project, comparisonRole]);
       const status =
-        project === "specification/one" && comparisonRole === "baseline"
-          ? "failed"
-          : "succeeded";
-      return { autorest: { status }, tcgc: { status: "succeeded" } };
+        project === "specification/one" && comparisonRole === "baseline" ? "failed" : "succeeded";
+      return /** @type {ReturnType<NonNullable<Parameters<typeof prepareProjectRecords>[0]["runCompilers"]>>} */ (
+        /** @type {unknown} */ ({
+          autorest: { status },
+          tcgc: { status: "succeeded" },
+        })
+      );
     },
   });
 

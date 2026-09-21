@@ -4,14 +4,16 @@ import path from "node:path";
 import test from "node:test";
 import { analyzeRestBreaking } from "./analyze-rest-breaking.mjs";
 
+/** @param {string} file @param {unknown} value */
 function writeJson(file, value) {
   fs.mkdirSync(path.dirname(file), { recursive: true });
   fs.writeFileSync(file, JSON.stringify(value));
 }
 
-test("emits explicit REST candidates for parameters, required properties, enums, statuses, paging, and LRO", (context) => {
+void test("emits explicit REST candidates for parameters, required properties, enums, statuses, paging, and LRO", (context) => {
   const work = fs.mkdtempSync(path.join(process.cwd(), ".rest-analyzer-test-"));
   context.after(() => fs.rmSync(work, { recursive: true, force: true }));
+  /** @param {boolean} current */
   const document = (current) => ({
     swagger: "2.0",
     info: { title: "Widgets", version: "v1" },
@@ -38,10 +40,12 @@ test("emits explicit REST candidates for parameters, required properties, enums,
               },
             },
           ],
-          responses: current ? { 202: { description: "accepted" } } : {
-            200: { description: "ok" },
-            202: { description: "accepted" },
-          },
+          responses: current
+            ? { 202: { description: "accepted" } }
+            : {
+                200: { description: "ok" },
+                202: { description: "accepted" },
+              },
           "x-ms-pageable": current ? { nextLinkName: "next" } : undefined,
           "x-ms-long-running-operation": current,
         },
@@ -50,30 +54,39 @@ test("emits explicit REST candidates for parameters, required properties, enums,
   });
   writeJson(path.join(work, "base.json"), document(false));
   writeJson(path.join(work, "current.json"), document(true));
+  /** @param {string} file */
   const artifact = (file) => ({
     status: "succeeded",
     format: "swagger-2.0",
     files: [{ path: file, documentRole: "primary" }],
   });
-  const result = analyzeRestBreaking({
-    workRoot: work,
-    manifest: {
-      projects: [{
-        id: "project-1",
-        sourceChangeIds: ["source-authoritative"],
-        artifacts: {
-          base: { autorest: artifact("base.json") },
-          current: { autorest: artifact("current.json") },
+  const result = analyzeRestBreaking(
+    /** @type {Parameters<typeof analyzeRestBreaking>[0]} */ (
+      /** @type {unknown} */ ({
+        workRoot: work,
+        manifest: {
+          projects: [
+            {
+              id: "project-1",
+              sourceChangeIds: ["source-authoritative"],
+              artifacts: {
+                base: { autorest: artifact("base.json") },
+                current: { autorest: artifact("current.json") },
+              },
+            },
+          ],
         },
-      }],
-    },
-    sourceIndex: {
-      sourceChanges: [{
-        id: "source-authoritative",
-        declarations: [{ id: "declaration-authoritative" }],
-      }],
-    },
-  });
+        sourceIndex: {
+          sourceChanges: [
+            {
+              id: "source-authoritative",
+              declarations: [{ id: "declaration-authoritative" }],
+            },
+          ],
+        },
+      })
+    ),
+  );
   const rules = new Set(result.candidates.map((item) => item.rule));
   for (const rule of [
     "parameter-wire-type-changed",
@@ -89,20 +102,26 @@ test("emits explicit REST candidates for parameters, required properties, enums,
   }
   assert.ok(result.candidates.every((item) => item.sourceChangeIds[0] === "source-authoritative"));
   assert.ok(result.candidates.every((item) => item.contractChange?.rule === item.rule));
-  assert.deepEqual(result.candidates.map((item) => item.id), result.candidates.map((item) => item.id).sort());
+  assert.deepEqual(
+    result.candidates.map((item) => item.id),
+    result.candidates.map((item) => item.id).sort(),
+  );
 });
 
-test("ignores PR 43308-style string format annotations across intersected response models", (context) => {
+void test("ignores PR 43308-style string format annotations across intersected response models", (context) => {
   const work = fs.mkdtempSync(path.join(process.cwd(), ".rest-format-test-"));
   context.after(() => fs.rmSync(work, { recursive: true, force: true }));
+  /** @param {string} revision */
   const document = (revision) => ({
     swagger: "2.0",
     info: { title: "Chaos", version: "2026-05-01-preview" },
     definitions: {
       ScenarioRun: {
-        allOf: [{
-          $ref: `../../worktrees/${revision}/specification/common-types/resource-management/v5/types.json#/definitions/ProxyResource`,
-        }],
+        allOf: [
+          {
+            $ref: `../../worktrees/${revision}/specification/common-types/resource-management/v5/types.json#/definitions/ProxyResource`,
+          },
+        ],
         properties: {
           resourceId: {
             type: "string",
@@ -148,30 +167,39 @@ test("ignores PR 43308-style string format annotations across intersected respon
   });
   writeJson(path.join(work, "base", "autorest", "openapi.json"), document("base"));
   writeJson(path.join(work, "current", "autorest", "openapi.json"), document("current"));
+  /** @param {string} revision */
   const artifact = (revision) => ({
     status: "succeeded",
     format: "swagger-2.0",
     files: [{ path: `${revision}/autorest/openapi.json`, documentRole: "primary" }],
   });
-  const result = analyzeRestBreaking({
-    workRoot: work,
-    manifest: {
-      projects: [{
-        id: "project-1",
-        sourceChangeIds: ["source-authoritative"],
-        artifacts: {
-          base: { autorest: artifact("base") },
-          current: { autorest: artifact("current") },
+  const result = analyzeRestBreaking(
+    /** @type {Parameters<typeof analyzeRestBreaking>[0]} */ (
+      /** @type {unknown} */ ({
+        workRoot: work,
+        manifest: {
+          projects: [
+            {
+              id: "project-1",
+              sourceChangeIds: ["source-authoritative"],
+              artifacts: {
+                base: { autorest: artifact("base") },
+                current: { autorest: artifact("current") },
+              },
+            },
+          ],
         },
-      }],
-    },
-    sourceIndex: {
-      sourceChanges: [{
-        id: "source-authoritative",
-        declarations: [{ id: "declaration-authoritative" }],
-      }],
-    },
-  });
+        sourceIndex: {
+          sourceChanges: [
+            {
+              id: "source-authoritative",
+              declarations: [{ id: "declaration-authoritative" }],
+            },
+          ],
+        },
+      })
+    ),
+  );
 
   assert.deepEqual(result.candidates, []);
 });

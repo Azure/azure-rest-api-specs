@@ -1,14 +1,64 @@
 import { canonicalJson } from "./stable-id.mjs";
 
+/**
+ * @typedef {{
+ *   kind?: string,
+ *   crossLanguageDefinitionId?: string,
+ *   identity?: string,
+ *   id?: string,
+ *   name?: string,
+ *   valueType?: SdkType,
+ *   keyType?: SdkType,
+ *   valueTypes?: SdkType[],
+ *   type?: SdkType
+ * }} SdkType
+ * @typedef {{
+ *   name: string,
+ *   optional?: boolean,
+ *   onClient?: boolean,
+ *   isApiVersionParam?: boolean,
+ *   type?: SdkType
+ * }} SdkParameter
+ * @typedef {{kind?: string, responseBody?: {kind?: string}}} LroStep
+ * @typedef {{
+ *   name: string,
+ *   optional: boolean,
+ *   onClient: boolean,
+ *   isApiVersionParam: boolean,
+ *   type: unknown
+ * }} PublicParameter
+ * @typedef {{
+ *   operation?: {kind?: unknown, path?: unknown, verb?: unknown},
+ *   finalStateVia?: unknown,
+ *   pollingStep?: LroStep,
+ *   finalStep?: LroStep,
+ *   statusMonitorStep?: LroStep,
+ *   logicalResult?: SdkType | string,
+ *   pollingInfo?: unknown,
+ *   envelopeResult?: unknown,
+ *   finalEnvelopeResult?: unknown,
+ *   finalResult?: unknown,
+ *   logicalPath?: unknown,
+ *   finalResultPath?: unknown,
+ *   finalResponse?: unknown
+ * }} LongRunningOperation
+ */
+
+/**
+ * @param {SdkType | string | undefined} value
+ * @returns {string | undefined}
+ */
 export function typeIdentity(value) {
   if (typeof value === "string") return value;
-  return value?.crossLanguageDefinitionId ??
-    value?.identity ??
-    value?.id ??
-    value?.name ??
-    value?.kind;
+  return (
+    value?.crossLanguageDefinitionId ?? value?.identity ?? value?.id ?? value?.name ?? value?.kind
+  );
 }
 
+/**
+ * @param {SdkType | string | undefined} type
+ * @returns {unknown}
+ */
 function parameterTypeContract(type) {
   if (!type || typeof type !== "object") return typeIdentity(type);
   switch (type.kind) {
@@ -39,6 +89,10 @@ function parameterTypeContract(type) {
   }
 }
 
+/**
+ * @param {SdkParameter[]} [parameters]
+ * @returns {PublicParameter[]}
+ */
 export function publicParameterContract(parameters = []) {
   return parameters
     .filter((parameter) => parameter.type?.kind !== "constant")
@@ -51,6 +105,9 @@ export function publicParameterContract(parameters = []) {
     }));
 }
 
+/**
+ * @param {LongRunningOperation | undefined} lro
+ */
 export function semanticLroContract(lro) {
   if (!lro) return undefined;
   const operation = lro.operation
@@ -77,22 +134,36 @@ export function semanticLroContract(lro) {
   };
 }
 
+/**
+ * @param {PublicParameter} before
+ * @param {PublicParameter} after
+ * @returns {string[]}
+ */
 function changedParameterFields(before, after) {
-  return ["optional", "onClient", "isApiVersionParam", "type"]
-    .filter((field) => {
-      const left = before[field];
-      const right = after[field];
-      return left === undefined || right === undefined
-        ? left !== right
-        : canonicalJson(left) !== canonicalJson(right);
-    });
+  /** @type {(keyof Omit<PublicParameter, "name">)[]} */
+  const fields = ["optional", "onClient", "isApiVersionParam", "type"];
+  return fields.filter((field) => {
+    const left = before[field];
+    const right = after[field];
+    return left === undefined || right === undefined
+      ? left !== right
+      : canonicalJson(left) !== canonicalJson(right);
+  });
 }
 
+/**
+ * @param {SdkParameter[]} [beforeParameters]
+ * @param {SdkParameter[]} [afterParameters]
+ */
 export function diffPublicParameters(beforeParameters = [], afterParameters = []) {
   const before = publicParameterContract(beforeParameters);
   const after = publicParameterContract(afterParameters);
-  const beforeByName = new Map(before.map((parameter, index) => [parameter.name, { parameter, index }]));
-  const afterByName = new Map(after.map((parameter, index) => [parameter.name, { parameter, index }]));
+  const beforeByName = new Map(
+    before.map((parameter, index) => [parameter.name, { parameter, index }]),
+  );
+  const afterByName = new Map(
+    after.map((parameter, index) => [parameter.name, { parameter, index }]),
+  );
   const retainedBefore = before.filter((parameter) => afterByName.has(parameter.name));
   const retainedAfter = after.filter((parameter) => beforeByName.has(parameter.name));
   const retainedBeforePositions = new Map(
@@ -103,11 +174,14 @@ export function diffPublicParameters(beforeParameters = [], afterParameters = []
   );
 
   const added = after.flatMap((parameter, index) =>
-    beforeByName.has(parameter.name) ? [] : [{ parameter, index }]);
+    beforeByName.has(parameter.name) ? [] : [{ parameter, index }],
+  );
   const removed = before.flatMap((parameter, index) =>
-    afterByName.has(parameter.name) ? [] : [{ parameter, index }]);
+    afterByName.has(parameter.name) ? [] : [{ parameter, index }],
+  );
   const modified = retainedAfter.flatMap((parameter) => {
-    const previous = beforeByName.get(parameter.name).parameter;
+    const previous = beforeByName.get(parameter.name)?.parameter;
+    if (!previous) return [];
     const changedFields = changedParameterFields(previous, parameter);
     return changedFields.length
       ? [{ name: parameter.name, before: previous, after: parameter, changedFields }]
@@ -116,14 +190,13 @@ export function diffPublicParameters(beforeParameters = [], afterParameters = []
   const reordered = retainedAfter.flatMap((parameter) => {
     const beforeIndex = retainedBeforePositions.get(parameter.name);
     const afterIndex = retainedAfterPositions.get(parameter.name);
-    return beforeIndex === afterIndex
-      ? []
-      : [{ name: parameter.name, beforeIndex, afterIndex }];
+    return beforeIndex === afterIndex ? [] : [{ name: parameter.name, beforeIndex, afterIndex }];
   });
   const modifiedNames = new Set(modified.map((item) => item.name));
   const reorderedNames = new Set(reordered.map((item) => item.name));
-  const unchangedCount = retainedAfter.filter((parameter) =>
-    !modifiedNames.has(parameter.name) && !reorderedNames.has(parameter.name)).length;
+  const unchangedCount = retainedAfter.filter(
+    (parameter) => !modifiedNames.has(parameter.name) && !reorderedNames.has(parameter.name),
+  ).length;
 
   return { added, removed, modified, reordered, unchangedCount };
 }
