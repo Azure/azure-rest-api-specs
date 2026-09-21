@@ -1023,8 +1023,8 @@ describe("generateSdkForBatchSpecs", () => {
     expect(calls).toMatchSnapshot();
   });
 
-  test("should emit one runtime telemetry event per TypeSpec package", async () => {
-    const mockBatchType = "all-mgmtplane-typespecs";
+  test("should emit one runtime telemetry event per package for all TypeSpec specs", async () => {
+    const mockBatchType = "all-typespecs";
     const mockSpecPath = "specification/compute/Compute.Management/tspconfig.yaml";
     const mockInput = {
       localSpecRepoPath: "/spec/path",
@@ -1074,7 +1074,7 @@ describe("generateSdkForBatchSpecs", () => {
     ).toEqual([
       expect.objectContaining({
         eventType: "SdkBatchGenerationSpecResult",
-        specType: "management-plane",
+        specType: "all",
         specPath: mockSpecPath,
         packageName: "@azure/arm-compute",
         executionResult: "succeeded",
@@ -1082,7 +1082,7 @@ describe("generateSdkForBatchSpecs", () => {
       }),
       expect.objectContaining({
         eventType: "SdkBatchGenerationSpecResult",
-        specType: "management-plane",
+        specType: "all",
         specPath: mockSpecPath,
         packageName: "@azure/arm-vmware",
         executionResult: "succeeded",

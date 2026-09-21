@@ -643,14 +643,21 @@ export async function generateSdkForBatchSpecs(batchType: string): Promise<Comma
   let serviceFolderPath = "";
   const failedSpecs: string[] = [];
   const runtimeMarkdownRows: string[] = [];
-  const telemetrySpecType =
-    batchType === "all-mgmtplane-typespecs"
-      ? "management-plane"
-      : batchType === "all-dataplane-typespecs"
-        ? "data-plane"
-        : batchType === "sample-typespecs"
-          ? "sample"
-          : undefined;
+  let telemetrySpecType: string | undefined;
+  switch (batchType) {
+    case "all-mgmtplane-typespecs":
+      telemetrySpecType = "management-plane";
+      break;
+    case "all-dataplane-typespecs":
+      telemetrySpecType = "data-plane";
+      break;
+    case "sample-typespecs":
+      telemetrySpecType = "sample";
+      break;
+    case "all-typespecs":
+      telemetrySpecType = "all";
+      break;
+  }
 
   await installLanguageToolchain(commandInput);
 
