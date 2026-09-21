@@ -1,8 +1,8 @@
 # How to Compile
 
 ```cmd
-npm ci
-npx tsv specification/portal/Dashboard.Management
+pnpm install
+pnpm tsv specification/portal/resource-manager/Microsoft.Portal/Portal
 ```
 
 # References
