@@ -5,7 +5,8 @@ export default defineConfig({
     exclude: [
       ...configDefaults.exclude,
 
-      // These use node:test and are run by the assessment skill's own test suite.
+      // These files use node:test and are run by the assessment skill's `npm test`.
+      // Vitest would collect them by name but find no Vitest test suite.
       "skills/azure-typespec-assessment/scripts/*.test.mjs",
     ],
     coverage: {
