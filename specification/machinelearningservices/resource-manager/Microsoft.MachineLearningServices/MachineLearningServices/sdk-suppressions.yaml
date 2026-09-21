@@ -1,6 +1,6 @@
 suppressions:
   azure-sdk-for-go:
-    - package: 'sdk/resourcemanager/machinelearning/armmachinelearning'
+    - package: "sdk/resourcemanager/machinelearning/armmachinelearning"
       breaking-changes:
         - Field `AmlOperationListResult` of struct `OperationsClientListResponse` has been removed
         - Field `SubnetArmID` of struct `PrivateEndpoint` has been removed
@@ -15,7 +15,7 @@ suppressions:
         - Struct `UserCreatedAcrAccount` has been removed
         - Struct `UserCreatedStorageAccount` has been removed
   azure-sdk-for-python:
-    - package: 'azure-mgmt-machinelearningservices'
+    - package: "azure-mgmt-machinelearningservices"
       breaking-changes:
         - Client name is changed from `AzureMachineLearningWorkspaces` to `MachineLearningServicesMgmtClient`
         - Model AmlComputeNodesInformation no longer has parameter compute_type
@@ -94,7 +94,7 @@ suppressions:
         - Method `WorkspacesOperations.list_by_subscription` re-ordered its parameters from `['self', 'skiptoken', 'kwargs']` to `['self', 'skip', 'kwargs']`
         - Method `WorkspacesOperations.list_by_resource_group` re-ordered its parameters from `['self', 'resource_group_name', 'skiptoken', 'kwargs']` to `['self', 'resource_group_name', 'skip', 'kwargs']`
   azure-sdk-for-js:
-    - package: '@azure/arm-machinelearning'
+    - package: "@azure/arm-machinelearning"
       breaking-changes:
         - Deleted Class AzureMachineLearningWorkspaces
         - Interface BatchDeploymentsListNextOptionalParams no longer has parameter orderBy
