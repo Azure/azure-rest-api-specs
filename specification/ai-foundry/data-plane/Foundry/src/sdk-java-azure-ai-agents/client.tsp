@@ -242,6 +242,31 @@ using Azure.AI.Projects;
 );
 @@clientName(OpenAI.ToolChoiceMCP, "ToolChoiceMcp");
 
+@@clientName(
+  OpenAI.RealtimeMCPApprovalRequest,
+  "RealtimeMcpApprovalRequest",
+  "java"
+);
+@@clientName(
+  OpenAI.RealtimeMCPApprovalResponse,
+  "RealtimeMcpApprovalResponse",
+  "java"
+);
+@@clientName(OpenAI.RealtimeMCPError, "RealtimeMcpError", "java");
+@@clientName(OpenAI.RealtimeMCPHTTPError, "RealtimeMcpHttpError", "java");
+@@clientName(OpenAI.RealtimeMCPListTools, "RealtimeMcpListTools", "java");
+@@clientName(
+  OpenAI.RealtimeMCPProtocolError,
+  "RealtimeMcpProtocolError",
+  "java"
+);
+@@clientName(OpenAI.RealtimeMCPToolCall, "RealtimeMcpToolCall", "java");
+@@clientName(
+  OpenAI.RealtimeMCPToolExecutionError,
+  "RealtimeMcpToolExecutionError",
+  "java"
+);
+
 @@clientName(MemorySearchPreviewTool.update_delay, "updateDelaySeconds");
 
 @@clientName(AgentObject.blueprint, "blueprintIdentity");
