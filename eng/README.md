@@ -13,36 +13,71 @@ Below are code convention we strive to follow in `eng` directory:
 - We align `package.json` dependencies versions across all `package.json` files.
 - We align `package.json` dependencies numbers with [microsoft/typespec package.json].
   In few cases we allow more frequent update cadence.
-- We avoid doing package overrides. For example, we use `v8` of `eslint` instead of `v9` to avoid an override.
-  [See this comment for details][eslint override].
+- We avoid doing package overrides where possible.
 - We order `package.json` keys as follows: `name private type main bin scripts engines dependencies devDependencies`.
 
-### package-lock.json
+### pnpm and the lock file
 
-- We maintain only top-level `package-lock.json` file. Running `npm install` from top-level dir removes the need
-  to ever have other files.
-- We ensure the lock file remains clean by ensuring that a PR that adds or modifies any `package.json` dependencies,
-  makes changes equivalent to following protocol:
-  - `cd <local-specs-clone-root>`
-  - `git clean -xdf` to remove all untracked files.
-  - Copy-over [`package-lock.json` from `main`] to local clone.
-  - `npm install` to reflect the added or modified dependencies.
-- In case any dependencies have been removed from any `package.json`, we do `rm package-lock.json` and `npm install`.  
-  This way we ensure the lock file remains free of unused dependencies.
-- We do `npm update` only in stand-alone PRs.
-- To avoid conflicting changes when updating `package-lock.json`, only use the latest LTS version of Node, and the bundled version of npm (but no newer).  You can use `nvm install --lts` (Linux) or `nvm install lts` (Windows).
+- This repo uses [pnpm] workspaces. **Do not use `npm` or `yarn`.** Running
+  `npm install`, `npm ci`, or `yarn` fails fast (npm cannot resolve the `catalog:` and
+  `workspace:` dependency protocols), so contributors must use pnpm.
+- You must have pnpm installed globally on your machine. The simplest way is to run
+  `npm run install-pnpm`, which installs the exact pinned pnpm version via
+  `npm install -g pnpm@<version>` (the version is read from the root `package.json`
+  `packageManager` field). The command is idempotent and supports `--dry-run`. You can
+  also install pnpm yourself with `npm install -g pnpm`.
+- Once a global pnpm exists, the `packageManager` field keeps it on the pinned version:
+  pnpm self-versions, so running any `pnpm` command auto-downloads and switches to the
+  pinned version. This only works when pnpm is already installed — it cannot bootstrap
+  the initial install, which is what `npm run install-pnpm` is for.
+- Install dependencies from the repo root with `pnpm install`. There is a single
+  top-level `pnpm-lock.yaml`; do not add other lock files.
+- We maintain a single `pnpm-workspace.yaml` at the root that lists workspace packages
+  and a shared dependency `catalog:`. All external dependencies must reference the
+  catalog with `catalog:` (or `catalog:<name>` for a named catalog); use `workspace:`
+  for local workspace dependencies.
+- Run `pnpm check:workspace` from the repo root to validate catalog usage and lockfile
+  portability. The [Eng workflow](../.github/workflows/eng.yml) runs these checks in CI.
+  It checks `dependencies`, `devDependencies`, `peerDependencies`, and
+  `optionalDependencies` in the root and all packages selected by pnpm. Manifests
+  outside the workspace, including test fixtures and specification projects, are
+  not checked. pnpm validates catalog entries themselves during installation.
+  `catalogMode: strict` only controls `pnpm add`, so it does not replace this check.
+  Unused entries in default and named catalogs produce warnings, not failures.
+  The lockfile check rejects explicit tarball resolutions for registry packages,
+  which can point to environment-specific proxies. Git-hosted dependencies
+  (`gitHosted: true`) are allowed to retain their tarball URLs.
+- When you add, modify, or remove `package.json` dependencies, run `pnpm install` and
+  commit the resulting `pnpm-lock.yaml` changes so the lock file stays in sync and free
+  of unused dependencies.
+- CI installs the pinned pnpm version via `.github/actions/setup-node-install-deps`
+  (which reads the `packageManager` field) and runs `pnpm ci`.
 
 ## Linting and prettier
 
-- We make eslint-based linting rules and prettier mandatory in CI for all projects.
-- We use strict rulesets as baseline.
-- We discuss any desired rule divergences from the strict ruleset
-  and apply rule modifications to the configs with explanation for our decision.
+- Run `pnpm lint` from the repository root to lint the previously linted packages
+  in `.github` and `eng/tools` in one oxlint invocation. Use `pnpm lint:fix` to apply
+  safe fixes. File selection lives in the root `.oxlintrc.json`, so the root command
+  is simply `oxlint .`; other repository folders and root-level files are excluded.
+- The root `.oxlintrc.json` is the single lint configuration. It preserves the previous
+  ESLint recommended and TypeScript recommended type-checked rules, with type-aware
+  linting provided by `oxlint-tsgolint`. Duplicate arguments and octal literals are
+  rejected by strict-mode parsing instead of separate lint rules.
+- `.github/workflows/lint.yaml` runs linting once on Linux for all packages, outside
+  the package/OS test matrices. Package workflows still run type checks, tests, and
+  Prettier; they must not invoke code linting again. Package-local `pnpm lint` scripts
+  remain available for development.
+- `openapi-diff-runner`, `sdk-suppressions`, `summarize-impact`, and
+  `typespec-migration-validation` did not previously run ESLint and remain excluded
+  in the root configuration. Enabling linting for these packages is a separate
+  change, not part of the linter migration. Their type checks, tests,
+  and formatting are unchanged. Existing suppressions in linted packages are
+  retained; unused suppressions fail linting.
+- Discuss any desired rule divergences and explain them in the configuration.
 - We align `prettier` rules with [microsoft/typespec .prettierrc.json].
 
-[`package-lock.json` from `main`]: https://github.com/Azure/azure-rest-api-specs/blob/main/package-lock.json
+[pnpm]: https://pnpm.io
 [Design guidelines for spec repos validation tooling]: https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/1153/Design-guidelines-for-spec-repos-validation-tooling
-[eslint override]: https://github.com/Azure/azure-rest-api-specs/pull/29820#pullrequestreview-2177045580
 [microsoft/typespec .prettierrc.json]: https://github.com/microsoft/typespec/blob/main/.prettierrc.json
 [microsoft/typespec package.json]: https://github.com/microsoft/typespec/blob/main/package.json
 [npm/cli #7384]: https://github.com/npm/cli/issues/7384
