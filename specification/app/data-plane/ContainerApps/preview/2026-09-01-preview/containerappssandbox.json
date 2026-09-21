@@ -7024,42 +7024,29 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/sandboxGroups/{sandboxGroupName}/snapshots/count": {
-      "post": {
+      "get": {
         "operationId": "SnapshotsOperations_GetSnapshotsCount",
         "tags": [
           "snapshots"
         ],
-        "summary": "Gets the total count of snapshots.",
-        "description": "Gets the total count of snapshots.",
+        "description": "The most basic operation.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "Azure subscription identifier.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/AzureResourceScope.subscriptionId"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "Azure resource group name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/AzureResourceScope.resourceGroupName"
           },
           {
-            "name": "sandboxGroupName",
-            "in": "path",
-            "description": "Sandbox group name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/AzureResourceScope.sandboxGroupName"
           }
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "The HTTP 200 response for the getSnapshotsCount operation.",
             "schema": {
               "$ref": "#/definitions/SnapshotCountResponse"
             }
