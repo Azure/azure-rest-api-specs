@@ -13,7 +13,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.Web;
 
 /**
- * Virtual Connections configuration for a web app. Declares which app settings
+ * Egress configuration for a web app. Declares which app settings
  * and connection strings are virtualized so secrets never enter the application
  * sandbox at runtime.
  *
@@ -21,23 +21,24 @@ namespace Microsoft.Web;
  * of other config sub-resources (authsettingsV2, azurestorageaccounts).
  */
 @added(Versions.v2026_09_01)
-@singleton("virtualConnections")
+@singleton("egress")
 @parentResource(Site)
-model VirtualConnections
-  is Azure.ResourceManager.ProxyResource<VirtualConnectionsProperties> {
+model EgressConfig
+  is Azure.ResourceManager.ProxyResource<EgressConfigProperties> {
   ...ResourceNameParameter<
-    Resource = VirtualConnections,
+    Resource = EgressConfig,
     KeyName = "config",
     SegmentName = "config",
     NamePattern = ""
   >;
 }
 
-/** Properties of the Virtual Connections configuration. */
+/** Properties of the egress configuration. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "egress is a proxy-only sites/config singleton that is written synchronously and does not track a provisioning state, consistent with the other Microsoft.Web config singletons such as authsettingsV2."
 @added(Versions.v2026_09_01)
-model VirtualConnectionsProperties {
+model EgressConfigProperties {
   /** Whether virtual connections are enabled for this site. */
-  enabled?: VirtualConnectionsEnabledState = VirtualConnectionsEnabledState.Disabled;
+  enabled?: EgressEnabledState = EgressEnabledState.Disabled;
 
   /**
    * All virtualized connections. Key is a customer-chosen connection name
@@ -45,40 +46,16 @@ model VirtualConnectionsProperties {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Connection names are arbitrary customer-chosen keys and cannot be represented as a fixed set of model properties."
   connections?: Record<VirtualConnection>;
-
-  /** The status of the last operation. */
-  @visibility(Lifecycle.Read)
-  provisioningState?: VirtualConnectionsProvisioningState;
 }
 
 /** Enabled state for virtual connections. */
 @added(Versions.v2026_09_01)
-union VirtualConnectionsEnabledState {
+union EgressEnabledState {
   /** Virtual connections are enabled — proxy intercepts configured settings. */
   Enabled: "Enabled",
 
   /** Virtual connections are disabled — all settings pass through unchanged. */
   Disabled: "Disabled",
-
-  string,
-}
-
-/** The resource provisioning state. */
-@added(Versions.v2026_09_01)
-union VirtualConnectionsProvisioningState {
-  ResourceProvisioningState,
-
-  /** The resource is being provisioned. */
-  Provisioning: "Provisioning",
-
-  /** The resource is updating. */
-  Updating: "Updating",
-
-  /** The resource is being deleted. */
-  Deleting: "Deleting",
-
-  /** The resource create request has been accepted. */
-  Accepted: "Accepted",
 
   string,
 }
@@ -96,14 +73,14 @@ model VirtualConnection {
    * Maximum 10 settings per connection.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Setting names are arbitrary customer-chosen keys and cannot be represented as a fixed set of model properties."
-  settings: Record<SettingRole>;
+  settings: Record<VirtualConnectionSetting>;
 
   /**
    * Where to look up the settings. Default: "appSettings". Each connection pulls
    * from exactly one source — create separate connections if you need settings
    * from both sources.
    */
-  source?: SettingSource = SettingSource.appSettings;
+  source?: VirtualConnectionSettingSource = VirtualConnectionSettingSource.appSettings;
 
   /** Protocol for the backend service. */
   protocol: VirtualConnectionProtocol;
@@ -138,7 +115,7 @@ model VirtualConnection {
    * Required when protocol=http + auth=credential and the credential is a
    * separate setting. Not needed for role="value" or auth=managedIdentity.
    */
-  credentialInjection?: HttpCredentialInjection;
+  credentialInjection?: VirtualConnectionCredentialInjection;
 }
 
 /**
@@ -147,7 +124,7 @@ model VirtualConnection {
  * separate setting (not embedded in a value/URL).
  */
 @added(Versions.v2026_09_01)
-model HttpCredentialInjection {
+model VirtualConnectionCredentialInjection {
   /** HTTP header name to inject the credential into (e.g., "Authorization", "X-API-Key"). */
   header: string;
 
@@ -164,7 +141,7 @@ model HttpCredentialInjection {
  * virtual connection.
  */
 @added(Versions.v2026_09_01)
-model SettingRole {
+model VirtualConnectionSetting {
   /**
    * The role this setting plays in the connection. The platform uses this to
    * determine runtime behavior:
@@ -172,12 +149,12 @@ model SettingRole {
    * - "host"/"value" settings identify the intercept target.
    * - "username" settings feed protocol auth construction.
    */
-  role: SettingRoleType;
+  role: VirtualConnectionSettingRole;
 }
 
 /** Where to resolve settings from. */
 @added(Versions.v2026_09_01)
-union SettingSource {
+union VirtualConnectionSettingSource {
   /** App Settings (config/appsettings). */
   appSettings: "appSettings",
 
@@ -219,7 +196,7 @@ union VirtualConnectionAuthType {
 
 /** The role a setting plays in a connection. */
 @added(Versions.v2026_09_01)
-union SettingRoleType {
+union VirtualConnectionSettingRole {
   /** Plain hostname or IP — identifies the intercept target. */
   host: "host",
 
@@ -235,7 +212,7 @@ union SettingRoleType {
   string,
 }
 
-/** Result of validating a Virtual Connections configuration. */
+/** Result of validating an egress configuration. */
 @added(Versions.v2026_09_01)
 model ValidationResult {
   /** Whether the configuration is valid. */
@@ -296,12 +273,12 @@ union ValidationErrorCode {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Operations — production slot: .../sites/{name}/config/virtualConnections
+// Operations — production slot: .../sites/{name}/config/egress
 // ─────────────────────────────────────────────────────────────────────────────
 
 @added(Versions.v2026_09_01)
 @armResourceOperations
-interface VirtualConnectionsOps
+interface EgressConfigOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -320,57 +297,70 @@ interface VirtualConnectionsOps
         @path
         @segment("config")
         @key
-        virtualConnections: "virtualConnections",
+        egress: "egress",
       },
-      ResourceName = "VirtualConnections"
+      ResourceName = "EgressConfig"
     > {}
 
 @added(Versions.v2026_09_01)
 @tag("WebApps")
 @armResourceOperations(#{ omitTags: true })
-interface VirtualConnectionsConfigs {
-  /** Gets the Virtual Connections configuration for an app. */
-  @summary("Gets the Virtual Connections configuration for an app.")
-  getVirtualConnections is VirtualConnectionsOps.Read<
-    VirtualConnections,
+interface EgressConfigs {
+  /**
+   * Gets the egress configuration for an app. This operation returns an empty
+   * configuration; use the list operation to retrieve the stored configuration.
+   */
+  @summary("Gets the egress configuration for an app.")
+  getEgressConfig is EgressConfigOps.Read<
+    EgressConfig,
     OverrideErrorType = DefaultErrorResponse
   >;
 
-  /** Creates or replaces the Virtual Connections configuration for an app. */
-  @summary("Creates or replaces the Virtual Connections configuration for an app.")
-  createOrUpdateVirtualConnections is VirtualConnectionsOps.CreateOrUpdateSync<
-    VirtualConnections,
+  /** Creates or replaces the egress configuration for an app. */
+  @summary("Creates or replaces the egress configuration for an app.")
+  createOrUpdateEgressConfig is EgressConfigOps.CreateOrUpdateSync<
+    EgressConfig,
     Response =
-      | ArmResourceUpdatedResponse<VirtualConnections>
+      | ArmResourceUpdatedResponse<EgressConfig>
       | (CreatedResponse & {
-          @bodyRoot body: VirtualConnections;
+          @bodyRoot body: EgressConfig;
         }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
+  /** Gets the stored egress configuration for an app. */
+  @summary("Gets the stored egress configuration for an app.")
+  @action("list")
+  listEgressConfig is EgressConfigOps.ActionSync<
+    EgressConfig,
+    void,
+    ArmResponse<EgressConfig>,
+    OverrideErrorType = DefaultErrorResponse
+  >;
+
   /**
-   * Validates a Virtual Connections configuration without applying it. Returns
+   * Validates an egress configuration without applying it. Returns
    * validation errors for missing settings, unsupported protocols, or invalid
    * role/protocol/auth combinations.
    */
-  @summary("Validates a Virtual Connections configuration without applying it.")
+  @summary("Validates an egress configuration without applying it.")
   @action("validate")
   @actionSeparator(":")
-  validateVirtualConnections is VirtualConnectionsOps.ActionSync<
-    VirtualConnections,
-    VirtualConnectionsProperties,
+  validateEgressConfig is EgressConfigOps.ActionSync<
+    EgressConfig,
+    EgressConfigProperties,
     ArmResponse<ValidationResult>,
     OverrideErrorType = DefaultErrorResponse
   >;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Operations — deployment slot: .../sites/{name}/slots/{slot}/config/virtualConnections
+// Operations — deployment slot: .../sites/{name}/slots/{slot}/config/egress
 // ─────────────────────────────────────────────────────────────────────────────
 
 @added(Versions.v2026_09_01)
 @armResourceOperations
-interface VirtualConnectionsSlotOps
+interface EgressConfigSlotOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -395,44 +385,58 @@ interface VirtualConnectionsSlotOps
         @path
         @segment("config")
         @key
-        virtualConnections: "virtualConnections",
+        egress: "egress",
       },
-      ResourceName = "VirtualConnectionsSlot"
+      ResourceName = "EgressConfigSlot"
     > {}
 
 @added(Versions.v2026_09_01)
 @tag("WebApps")
 @armResourceOperations(#{ omitTags: true })
-interface VirtualConnectionsSlotConfigs {
-  /** Gets the Virtual Connections configuration for a deployment slot. */
-  @summary("Gets the Virtual Connections configuration for a deployment slot.")
-  getVirtualConnectionsSlot is VirtualConnectionsSlotOps.Read<
-    VirtualConnections,
+interface EgressConfigSlotConfigs {
+  /**
+   * Gets the egress configuration for a deployment slot. This operation returns
+   * an empty configuration; use the list operation to retrieve the stored
+   * configuration.
+   */
+  @summary("Gets the egress configuration for a deployment slot.")
+  getEgressConfigSlot is EgressConfigSlotOps.Read<
+    EgressConfig,
     OverrideErrorType = DefaultErrorResponse
   >;
 
-  /** Creates or replaces the Virtual Connections configuration for a deployment slot. */
-  @summary("Creates or replaces the Virtual Connections configuration for a deployment slot.")
-  createOrUpdateVirtualConnectionsSlot is VirtualConnectionsSlotOps.CreateOrUpdateSync<
-    VirtualConnections,
+  /** Creates or replaces the egress configuration for a deployment slot. */
+  @summary("Creates or replaces the egress configuration for a deployment slot.")
+  createOrUpdateEgressConfigSlot is EgressConfigSlotOps.CreateOrUpdateSync<
+    EgressConfig,
     Response =
-      | ArmResourceUpdatedResponse<VirtualConnections>
+      | ArmResourceUpdatedResponse<EgressConfig>
       | (CreatedResponse & {
-          @bodyRoot body: VirtualConnections;
+          @bodyRoot body: EgressConfig;
         }),
     OverrideErrorType = DefaultErrorResponse
   >;
 
+  /** Gets the stored egress configuration for a deployment slot. */
+  @summary("Gets the stored egress configuration for a deployment slot.")
+  @action("list")
+  listEgressConfigSlot is EgressConfigSlotOps.ActionSync<
+    EgressConfig,
+    void,
+    ArmResponse<EgressConfig>,
+    OverrideErrorType = DefaultErrorResponse
+  >;
+
   /**
-   * Validates a Virtual Connections configuration for a deployment slot without
+   * Validates an egress configuration for a deployment slot without
    * applying it.
    */
-  @summary("Validates a Virtual Connections configuration for a deployment slot.")
+  @summary("Validates an egress configuration for a deployment slot.")
   @action("validate")
   @actionSeparator(":")
-  validateVirtualConnectionsSlot is VirtualConnectionsSlotOps.ActionSync<
-    VirtualConnections,
-    VirtualConnectionsProperties,
+  validateEgressConfigSlot is EgressConfigSlotOps.ActionSync<
+    EgressConfig,
+    EgressConfigProperties,
     ArmResponse<ValidationResult>,
     OverrideErrorType = DefaultErrorResponse
   >;

@@ -10004,6 +10004,237 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/egress": {
+      "get": {
+        "operationId": "EgressConfigs_GetEgressConfig",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the egress configuration for an app.",
+        "description": "Gets the egress configuration for an app. This operation returns an empty\nconfiguration; use the list operation to retrieve the stored configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EgressConfig"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get egress configuration": {
+            "$ref": "./examples/EgressConfig_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "EgressConfigs_CreateOrUpdateEgressConfig",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Creates or replaces the egress configuration for an app.",
+        "description": "Creates or replaces the egress configuration for an app.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EgressConfig"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'EgressConfig' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EgressConfig"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/EgressConfig"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "API Management with subscription key injection": {
+            "$ref": "./examples/EgressConfig_CreateOrUpdate_ApimKey.json"
+          },
+          "Configure Redis and Storage with Managed Identity": {
+            "$ref": "./examples/EgressConfig_CreateOrUpdate_MultiHttp.json"
+          },
+          "Configure SQL with Managed Identity": {
+            "$ref": "./examples/EgressConfig_CreateOrUpdate_SqlManagedIdentity.json"
+          },
+          "Configure third-party API with credential injection": {
+            "$ref": "./examples/EgressConfig_CreateOrUpdate_ThirdPartyApi.json"
+          },
+          "Create or replace egress configuration": {
+            "$ref": "./examples/EgressConfig_CreateOrUpdate.json"
+          },
+          "Disable Virtual Connections": {
+            "$ref": "./examples/EgressConfig_Disable.json"
+          },
+          "Storage SAS URL upgraded to Managed Identity": {
+            "$ref": "./examples/EgressConfig_CreateOrUpdate_SasToManagedIdentity.json"
+          },
+          "Storage SAS URL with credential passthrough (secret hidden from app)": {
+            "$ref": "./examples/EgressConfig_CreateOrUpdate_SasPassthrough.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/egress/list": {
+      "post": {
+        "operationId": "EgressConfigs_ListEgressConfig",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the stored egress configuration for an app.",
+        "description": "Gets the stored egress configuration for an app.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EgressConfig"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List egress configuration": {
+            "$ref": "./examples/EgressConfig_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/egress:validate": {
+      "post": {
+        "operationId": "EgressConfigs_ValidateEgressConfig",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Validates an egress configuration without applying it.",
+        "description": "Validates an egress configuration without applying it. Returns\nvalidation errors for missing settings, unsupported protocols, or invalid\nrole/protocol/auth combinations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EgressConfigProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ValidationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate egress configuration": {
+            "$ref": "./examples/EgressConfig_Validate.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/logs": {
       "get": {
         "operationId": "WebApps_GetDiagnosticLogsConfiguration",
@@ -10421,190 +10652,6 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/virtualConnections": {
-      "get": {
-        "operationId": "VirtualConnectionsConfigs_GetVirtualConnections",
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Gets the Virtual Connections configuration for an app.",
-        "description": "Gets the Virtual Connections configuration for an app.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/VirtualConnections"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Virtual Connections configuration": {
-            "$ref": "./examples/VirtualConnections_Get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "VirtualConnectionsConfigs_CreateOrUpdateVirtualConnections",
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Creates or replaces the Virtual Connections configuration for an app.",
-        "description": "Creates or replaces the Virtual Connections configuration for an app.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VirtualConnections"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'VirtualConnections' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/VirtualConnections"
-            }
-          },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/VirtualConnections"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "API Management with subscription key injection": {
-            "$ref": "./examples/VirtualConnections_CreateOrUpdate_ApimKey.json"
-          },
-          "Configure Redis and Storage with Managed Identity": {
-            "$ref": "./examples/VirtualConnections_CreateOrUpdate_MultiHttp.json"
-          },
-          "Configure SQL with Managed Identity": {
-            "$ref": "./examples/VirtualConnections_CreateOrUpdate_SqlManagedIdentity.json"
-          },
-          "Configure third-party API with credential injection": {
-            "$ref": "./examples/VirtualConnections_CreateOrUpdate_ThirdPartyApi.json"
-          },
-          "Create or replace Virtual Connections configuration": {
-            "$ref": "./examples/VirtualConnections_CreateOrUpdate.json"
-          },
-          "Disable Virtual Connections": {
-            "$ref": "./examples/VirtualConnections_Disable.json"
-          },
-          "Storage SAS URL upgraded to Managed Identity": {
-            "$ref": "./examples/VirtualConnections_CreateOrUpdate_SasToManagedIdentity.json"
-          },
-          "Storage SAS URL with credential passthrough (secret hidden from app)": {
-            "$ref": "./examples/VirtualConnections_CreateOrUpdate_SasPassthrough.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/virtualConnections:validate": {
-      "post": {
-        "operationId": "VirtualConnectionsConfigs_ValidateVirtualConnections",
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Validates a Virtual Connections configuration without applying it.",
-        "description": "Validates a Virtual Connections configuration without applying it. Returns\nvalidation errors for missing settings, unsupported protocols, or invalid\nrole/protocol/auth combinations.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VirtualConnectionsProperties"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ValidationResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Validate Virtual Connections configuration": {
-            "$ref": "./examples/VirtualConnections_Validate.json"
           }
         }
       }
@@ -22829,6 +22876,247 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/egress": {
+      "get": {
+        "operationId": "EgressConfigSlotConfigs_GetEgressConfigSlot",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the egress configuration for a deployment slot.",
+        "description": "Gets the egress configuration for a deployment slot. This operation returns\nan empty configuration; use the list operation to retrieve the stored\nconfiguration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EgressConfig"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get egress configuration for a slot": {
+            "$ref": "./examples/SlotEgressConfig_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "EgressConfigSlotConfigs_CreateOrUpdateEgressConfigSlot",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Creates or replaces the egress configuration for a deployment slot.",
+        "description": "Creates or replaces the egress configuration for a deployment slot.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EgressConfig"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'EgressConfig' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EgressConfig"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/EgressConfig"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Configure Virtual Connections on a deployment slot": {
+            "$ref": "./examples/SlotEgressConfig_CreateOrUpdate_SourceScenario.json"
+          },
+          "Create or replace egress configuration for a slot": {
+            "$ref": "./examples/SlotEgressConfig_CreateOrUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/egress/list": {
+      "post": {
+        "operationId": "EgressConfigSlotConfigs_ListEgressConfigSlot",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Gets the stored egress configuration for a deployment slot.",
+        "description": "Gets the stored egress configuration for a deployment slot.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EgressConfig"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List egress configuration for a deployment slot": {
+            "$ref": "./examples/SlotEgressConfig_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/egress:validate": {
+      "post": {
+        "operationId": "EgressConfigSlotConfigs_ValidateEgressConfigSlot",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Validates an egress configuration for a deployment slot.",
+        "description": "Validates an egress configuration for a deployment slot without\napplying it.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EgressConfigProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ValidationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate egress configuration for a slot": {
+            "$ref": "./examples/SlotEgressConfig_Validate.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/logs": {
       "get": {
         "operationId": "WebApps_GetDiagnosticLogsConfigurationSlot",
@@ -23204,193 +23492,6 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/virtualConnections": {
-      "get": {
-        "operationId": "VirtualConnectionsSlotConfigs_GetVirtualConnectionsSlot",
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Gets the Virtual Connections configuration for a deployment slot.",
-        "description": "Gets the Virtual Connections configuration for a deployment slot.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of the deployment slot.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/VirtualConnections"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get Virtual Connections configuration for a slot": {
-            "$ref": "./examples/SlotVirtualConnections_Get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "VirtualConnectionsSlotConfigs_CreateOrUpdateVirtualConnectionsSlot",
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Creates or replaces the Virtual Connections configuration for a deployment slot.",
-        "description": "Creates or replaces the Virtual Connections configuration for a deployment slot.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of the deployment slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "Resource create parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VirtualConnections"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'VirtualConnections' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/VirtualConnections"
-            }
-          },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/VirtualConnections"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Configure Virtual Connections on a deployment slot": {
-            "$ref": "./examples/SlotVirtualConnections_CreateOrUpdate_SourceScenario.json"
-          },
-          "Create or replace Virtual Connections configuration for a slot": {
-            "$ref": "./examples/SlotVirtualConnections_CreateOrUpdate.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/virtualConnections:validate": {
-      "post": {
-        "operationId": "VirtualConnectionsSlotConfigs_ValidateVirtualConnectionsSlot",
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Validates a Virtual Connections configuration for a deployment slot.",
-        "description": "Validates a Virtual Connections configuration for a deployment slot without\napplying it.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of the deployment slot.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VirtualConnectionsProperties"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/ValidationResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Validate Virtual Connections configuration for a slot": {
-            "$ref": "./examples/SlotVirtualConnections_Validate.json"
           }
         }
       }
@@ -45436,6 +45537,59 @@
         "modelAsString": false
       }
     },
+    "EgressConfig": {
+      "type": "object",
+      "description": "Egress configuration for a web app. Declares which app settings\nand connection strings are virtualized so secrets never enter the application\nsandbox at runtime.\n\nThis is a proxy-only configuration singleton following the established pattern\nof other config sub-resources (authsettingsV2, azurestorageaccounts).",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EgressConfigProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "EgressConfigProperties": {
+      "type": "object",
+      "description": "Properties of the egress configuration.",
+      "properties": {
+        "enabled": {
+          "type": "string",
+          "description": "Whether virtual connections are enabled for this site.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EgressEnabledState",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Virtual connections are enabled — proxy intercepts configured settings."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Virtual connections are disabled — all settings pass through unchanged."
+              }
+            ]
+          }
+        },
+        "connections": {
+          "type": "object",
+          "description": "All virtualized connections. Key is a customer-chosen connection name\n(e.g., \"sql\", \"cache\", \"storage\"). Maximum 50 connections per site.",
+          "additionalProperties": {
+            "$ref": "#/definitions/VirtualConnection"
+          }
+        }
+      }
+    },
     "EnabledConfig": {
       "type": "object",
       "description": "Enabled configuration.",
@@ -46984,23 +47138,6 @@
         "name": "HostingEnvironmentStatus",
         "modelAsString": false
       }
-    },
-    "HttpCredentialInjection": {
-      "type": "object",
-      "description": "Describes how the proxy injects a standalone credential setting into upstream\nHTTP requests. Only applies when protocol=http and the credential is a\nseparate setting (not embedded in a value/URL).",
-      "properties": {
-        "header": {
-          "type": "string",
-          "description": "HTTP header name to inject the credential into (e.g., \"Authorization\", \"X-API-Key\")."
-        },
-        "format": {
-          "type": "string",
-          "description": "Format string for the header value. Use {value} as placeholder for the\ncredential. Default: raw credential value (no formatting).\nExamples: \"Bearer {value}\", \"Basic {value}\", \"ApiKey {value}\"."
-        }
-      },
-      "required": [
-        "header"
-      ]
     },
     "HttpLogsConfig": {
       "type": "object",
@@ -52245,55 +52382,6 @@
         }
       }
     },
-    "SettingRole": {
-      "type": "object",
-      "description": "Describes the role of a single app setting or connection string within a\nvirtual connection.",
-      "properties": {
-        "role": {
-          "$ref": "#/definitions/SettingRoleType",
-          "description": "The role this setting plays in the connection. The platform uses this to\ndetermine runtime behavior:\n- \"credential\" settings are masked (app never sees the real value).\n- \"host\"/\"value\" settings identify the intercept target.\n- \"username\" settings feed protocol auth construction."
-        }
-      },
-      "required": [
-        "role"
-      ]
-    },
-    "SettingRoleType": {
-      "type": "string",
-      "description": "The role a setting plays in a connection.",
-      "enum": [
-        "host",
-        "credential",
-        "username",
-        "value"
-      ],
-      "x-ms-enum": {
-        "name": "SettingRoleType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "host",
-            "value": "host",
-            "description": "Plain hostname or IP — identifies the intercept target."
-          },
-          {
-            "name": "credential",
-            "value": "credential",
-            "description": "Standalone secret (password, key, SAS token) — masked from app, used or replaced by proxy."
-          },
-          {
-            "name": "username",
-            "value": "username",
-            "description": "Standalone username — used for protocol auth construction (e.g., Redis ACL OID)."
-          },
-          {
-            "name": "value",
-            "value": "value",
-            "description": "Composite value (connection string, SAS URL, DSN, Redis URI) — proxy parses based on protocol."
-          }
-        ]
-      }
-    },
     "Site": {
       "type": "object",
       "description": "A web app, a mobile app backend, or an API app.",
@@ -52896,6 +52984,10 @@
           "type": "integer",
           "format": "int32",
           "description": "The number of private ports assigned to this app. These will be assigned dynamically on runtime."
+        },
+        "egressConfig": {
+          "$ref": "#/definitions/EgressConfigProperties",
+          "description": "Egress configuration (Secretless App Service)."
         },
         "cors": {
           "$ref": "#/definitions/CorsSettings",
@@ -57384,7 +57476,7 @@
     },
     "ValidationResult": {
       "type": "object",
-      "description": "Result of validating a Virtual Connections configuration.",
+      "description": "Result of validating an egress configuration.",
       "properties": {
         "valid": {
           "type": "boolean",
@@ -57439,7 +57531,7 @@
           "type": "object",
           "description": "Settings that compose this connection. Key is the app setting\n(or connection string) name; value describes its role in the connection.\nMaximum 10 settings per connection.",
           "additionalProperties": {
-            "$ref": "#/definitions/SettingRole"
+            "$ref": "#/definitions/VirtualConnectionSetting"
           }
         },
         "source": {
@@ -57451,7 +57543,7 @@
             "connectionStrings"
           ],
           "x-ms-enum": {
-            "name": "SettingSource",
+            "name": "VirtualConnectionSettingSource",
             "modelAsString": true,
             "values": [
               {
@@ -57492,7 +57584,7 @@
           }
         },
         "credentialInjection": {
-          "$ref": "#/definitions/HttpCredentialInjection",
+          "$ref": "#/definitions/VirtualConnectionCredentialInjection",
           "description": "How to inject a standalone credential into upstream HTTP requests.\nRequired when protocol=http + auth=credential and the credential is a\nseparate setting. Not needed for role=\"value\" or auth=managedIdentity."
         }
       },
@@ -57525,6 +57617,23 @@
           }
         ]
       }
+    },
+    "VirtualConnectionCredentialInjection": {
+      "type": "object",
+      "description": "Describes how the proxy injects a standalone credential setting into upstream\nHTTP requests. Only applies when protocol=http and the credential is a\nseparate setting (not embedded in a value/URL).",
+      "properties": {
+        "header": {
+          "type": "string",
+          "description": "HTTP header name to inject the credential into (e.g., \"Authorization\", \"X-API-Key\")."
+        },
+        "format": {
+          "type": "string",
+          "description": "Format string for the header value. Use {value} as placeholder for the\ncredential. Default: raw credential value (no formatting).\nExamples: \"Bearer {value}\", \"Basic {value}\", \"ApiKey {value}\"."
+        }
+      },
+      "required": [
+        "header"
+      ]
     },
     "VirtualConnectionProtocol": {
       "type": "string",
@@ -57562,118 +57671,54 @@
         ]
       }
     },
-    "VirtualConnections": {
+    "VirtualConnectionSetting": {
       "type": "object",
-      "description": "Virtual Connections configuration for a web app. Declares which app settings\nand connection strings are virtualized so secrets never enter the application\nsandbox at runtime.\n\nThis is a proxy-only configuration singleton following the established pattern\nof other config sub-resources (authsettingsV2, azurestorageaccounts).",
+      "description": "Describes the role of a single app setting or connection string within a\nvirtual connection.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/VirtualConnectionsProperties",
-          "description": "The resource-specific properties for this resource."
+        "role": {
+          "$ref": "#/definitions/VirtualConnectionSettingRole",
+          "description": "The role this setting plays in the connection. The platform uses this to\ndetermine runtime behavior:\n- \"credential\" settings are masked (app never sees the real value).\n- \"host\"/\"value\" settings identify the intercept target.\n- \"username\" settings feed protocol auth construction."
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
+      "required": [
+        "role"
       ]
     },
-    "VirtualConnectionsProperties": {
-      "type": "object",
-      "description": "Properties of the Virtual Connections configuration.",
-      "properties": {
-        "enabled": {
-          "type": "string",
-          "description": "Whether virtual connections are enabled for this site.",
-          "default": "Disabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "VirtualConnectionsEnabledState",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "Virtual connections are enabled — proxy intercepts configured settings."
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "Virtual connections are disabled — all settings pass through unchanged."
-              }
-            ]
-          }
-        },
-        "connections": {
-          "type": "object",
-          "description": "All virtualized connections. Key is a customer-chosen connection name\n(e.g., \"sql\", \"cache\", \"storage\"). Maximum 50 connections per site.",
-          "additionalProperties": {
-            "$ref": "#/definitions/VirtualConnection"
-          }
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/VirtualConnectionsProvisioningState",
-          "description": "The status of the last operation.",
-          "readOnly": true
-        }
-      }
-    },
-    "VirtualConnectionsProvisioningState": {
+    "VirtualConnectionSettingRole": {
       "type": "string",
-      "description": "The resource provisioning state.",
+      "description": "The role a setting plays in a connection.",
       "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Provisioning",
-        "Updating",
-        "Deleting",
-        "Accepted"
+        "host",
+        "credential",
+        "username",
+        "value"
       ],
       "x-ms-enum": {
-        "name": "VirtualConnectionsProvisioningState",
+        "name": "VirtualConnectionSettingRole",
         "modelAsString": true,
         "values": [
           {
-            "name": "Succeeded",
-            "value": "Succeeded",
-            "description": "Resource has been created."
+            "name": "host",
+            "value": "host",
+            "description": "Plain hostname or IP — identifies the intercept target."
           },
           {
-            "name": "Failed",
-            "value": "Failed",
-            "description": "Resource creation failed."
+            "name": "credential",
+            "value": "credential",
+            "description": "Standalone secret (password, key, SAS token) — masked from app, used or replaced by proxy."
           },
           {
-            "name": "Canceled",
-            "value": "Canceled",
-            "description": "Resource creation was canceled."
+            "name": "username",
+            "value": "username",
+            "description": "Standalone username — used for protocol auth construction (e.g., Redis ACL OID)."
           },
           {
-            "name": "Provisioning",
-            "value": "Provisioning",
-            "description": "The resource is being provisioned."
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "The resource is updating."
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "The resource is being deleted."
-          },
-          {
-            "name": "Accepted",
-            "value": "Accepted",
-            "description": "The resource create request has been accepted."
+            "name": "value",
+            "value": "value",
+            "description": "Composite value (connection string, SAS URL, DSN, Redis URI) — proxy parses based on protocol."
           }
         ]
-      },
-      "readOnly": true
+      }
     },
     "VirtualDirectory": {
       "type": "object",

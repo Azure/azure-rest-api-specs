@@ -49,7 +49,7 @@ import "./AIGateway.tsp";
 import "./BackupItem.tsp";
 import "./CsmPublishingCredentialsPoliciesEntity.tsp";
 import "./SiteAuthSettingsV2.tsp";
-import "./VirtualConnections.tsp";
+import "./EgressConfig.tsp";
 import "./ApiKVReference.tsp";
 import "./SiteLogsConfig.tsp";
 import "./SlotConfigNamesResource.tsp";

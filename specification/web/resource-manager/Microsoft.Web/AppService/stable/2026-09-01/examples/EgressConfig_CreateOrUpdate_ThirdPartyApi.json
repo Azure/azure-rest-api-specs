@@ -1,6 +1,6 @@
 {
-  "operationId": "VirtualConnectionsConfigs_CreateOrUpdateVirtualConnections",
-  "title": "API Management with subscription key injection",
+  "operationId": "EgressConfigs_CreateOrUpdateEgressConfig",
+  "title": "Configure third-party API with credential injection",
   "parameters": {
     "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     "resourceGroupName": "rg-orders",
@@ -10,19 +10,20 @@
       "properties": {
         "enabled": "Enabled",
         "connections": {
-          "internal-api": {
+          "payment-provider": {
             "settings": {
-              "API_GATEWAY_HOST": {
+              "STRIPE_ENDPOINT": {
                 "role": "host"
               },
-              "APIM_SUBSCRIPTION_KEY": {
+              "STRIPE_API_KEY": {
                 "role": "credential"
               }
             },
             "protocol": "http",
             "auth": "credential",
             "credentialInjection": {
-              "header": "Ocp-Apim-Subscription-Key"
+              "header": "Authorization",
+              "format": "Bearer {value}"
             }
           }
         }
@@ -32,57 +33,57 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg-orders/providers/Microsoft.Web/sites/orders-api/config/virtualConnections",
-        "name": "virtualConnections",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg-orders/providers/Microsoft.Web/sites/orders-api/config/egress",
+        "name": "egress",
         "type": "Microsoft.Web/sites/config",
         "properties": {
           "enabled": "Enabled",
           "connections": {
-            "internal-api": {
+            "payment-provider": {
               "settings": {
-                "API_GATEWAY_HOST": {
+                "STRIPE_ENDPOINT": {
                   "role": "host"
                 },
-                "APIM_SUBSCRIPTION_KEY": {
+                "STRIPE_API_KEY": {
                   "role": "credential"
                 }
               },
               "protocol": "http",
               "auth": "credential",
               "credentialInjection": {
-                "header": "Ocp-Apim-Subscription-Key"
+                "header": "Authorization",
+                "format": "Bearer {value}"
               }
             }
-          },
-          "provisioningState": "Succeeded"
+          }
         }
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg-orders/providers/Microsoft.Web/sites/orders-api/config/virtualConnections",
-        "name": "virtualConnections",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg-orders/providers/Microsoft.Web/sites/orders-api/config/egress",
+        "name": "egress",
         "type": "Microsoft.Web/sites/config",
         "properties": {
           "enabled": "Enabled",
           "connections": {
-            "internal-api": {
+            "payment-provider": {
               "settings": {
-                "API_GATEWAY_HOST": {
+                "STRIPE_ENDPOINT": {
                   "role": "host"
                 },
-                "APIM_SUBSCRIPTION_KEY": {
+                "STRIPE_API_KEY": {
                   "role": "credential"
                 }
               },
               "protocol": "http",
               "auth": "credential",
               "credentialInjection": {
-                "header": "Ocp-Apim-Subscription-Key"
+                "header": "Authorization",
+                "format": "Bearer {value}"
               }
             }
-          },
-          "provisioningState": "Succeeded"
+          }
         }
       }
     }
