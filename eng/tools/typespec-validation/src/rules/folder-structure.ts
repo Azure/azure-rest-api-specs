@@ -1,8 +1,8 @@
 import debug from "debug";
 import { readFile } from "fs/promises";
-import { globby } from "globby";
 import path from "path";
 import { simpleGit } from "simple-git";
+import { globFiles } from "../glob.ts";
 import { type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
 import { parse } from "../tsp-config.ts";
@@ -53,7 +53,7 @@ export class FolderStructureRule implements Rule {
       };
     }
 
-    const tspConfigs = await globby([`${folder}/**tspconfig.*`]);
+    const tspConfigs = await globFiles([`${folder}/**tspconfig.*`]);
     stdOutput += `config files: ${JSON.stringify(tspConfigs)}\n`;
     tspConfigs.forEach((file: string) => {
       if (!file.endsWith("tspconfig.yaml")) {
@@ -181,7 +181,7 @@ export class FolderStructureRule implements Rule {
 
     const allowedImportRootResolved = path.resolve(gitRoot, allowedImportRoot);
 
-    const tsps = await globby("**/*.tsp", { cwd: allowedImportRootResolved });
+    const tsps = await globFiles("**/*.tsp", { cwd: allowedImportRootResolved });
 
     for (const tsp of tsps) {
       const tspResolved = path.resolve(allowedImportRootResolved, tsp);

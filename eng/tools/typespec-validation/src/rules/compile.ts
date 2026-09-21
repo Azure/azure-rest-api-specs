@@ -1,9 +1,9 @@
 import { filterAsync } from "@azure-tools/specs-shared/array";
 import { readFile } from "fs/promises";
-import { globby } from "globby";
+import { stripVTControlCharacters } from "node:util";
 import path, { basename, dirname, normalize } from "path";
 import pc from "picocolors";
-import stripAnsi from "strip-ansi";
+import { globFiles } from "../glob.ts";
 import { type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
 import { fileExists, getSuppressions, gitDiffTopSpecFolder, runPnpm } from "../utils.ts";
@@ -47,7 +47,7 @@ export class CompileRule implements Rule {
           // Compilation completed successfully.
 
           // Remove ANSI color codes, handle windows and linux line endings
-          const lines = stripAnsi(stdout).split(/\r?\n/);
+          const lines = stripVTControlCharacters(stdout).split(/\r?\n/);
 
           // TODO: Use helpers in /.github once they support platform-specific paths
           // Header, footer, and empty lines should be excluded by JSON filter
@@ -77,10 +77,9 @@ export class CompileRule implements Rule {
             // Filter to only specs matching the folder and filename extracted from the first output-file.
             // Necessary to handle multi-project specs like keyvault.
             //
-            // Globby only accepts patterns like posix paths.
+            // Glob patterns use forward slashes on all platforms.
             const pattern = path.posix.join(...outputFolder.split(path.sep), "**", outputFilename);
-            const allSwaggers = (await globby(pattern, { ignore: ["**/examples/**"] })).map(
-              // Globby always returns posix paths
+            const allSwaggers = (await globFiles(pattern, { exclude: ["**/examples/**"] })).map(
               (p) => normalize(p),
             );
 
