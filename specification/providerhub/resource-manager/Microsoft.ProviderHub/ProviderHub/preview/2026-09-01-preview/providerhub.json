@@ -5193,9 +5193,10 @@
         },
         "rolloutOrchestrationMetadata": {
           "$ref": "#/definitions/RolloutOrchestrationMetadata",
-          "description": "Immutable orchestration metadata associated with the rollout.",
+          "description": "Orchestration metadata associated with the rollout.",
           "x-ms-mutability": [
             "read",
+            "update",
             "create"
           ]
         },
@@ -10762,7 +10763,7 @@
     },
     "RolloutOrchestrationMetadata": {
       "type": "object",
-      "description": "Immutable orchestration metadata associated with a rollout.",
+      "description": "Orchestration metadata associated with a rollout.",
       "properties": {
         "isForManifestBuildout": {
           "type": "boolean",
@@ -10771,6 +10772,10 @@
         "deploymentType": {
           "type": "string",
           "description": "The deployment type associated with the rollout."
+        },
+        "trafficRing": {
+          "type": "string",
+          "description": "The traffic ring associated with the rollout."
         },
         "serviceGroup": {
           "type": "string",
