@@ -2,11 +2,13 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Azure.ClientGenerator.Core;
 
 namespace ComputeSku;
 
@@ -189,7 +191,7 @@ model ResourceSkuLocationInfo {
    * Details of capabilities available to a SKU in specific zones.
    */
   @visibility(Lifecycle.Read)
-  @identifiers(#["name"])
+  @identifiers(#["Name"])
   zoneDetails?: ResourceSkuZoneDetails[];
 
   /**
@@ -212,9 +214,10 @@ model ResourceSkuZoneDetails {
   /**
    * The set of zones that the SKU is available in with the specified capabilities.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  @encodedName("application/json", "Name")
-  name?: string[];
+  @clientName("name")
+  Name?: string[];
 
   /**
    * A list of capabilities that are available for the SKU in the specified list of zones.
