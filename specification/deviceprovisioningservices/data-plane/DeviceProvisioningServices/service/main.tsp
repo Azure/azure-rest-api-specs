@@ -47,7 +47,15 @@ enum Versions {
   v2025_07_01_preview: "2025-07-01-preview",
 
   /**
-   * The 2026-07-01-preview API version.
+   * The 2026-11-01 API version. First GA (stable) version. Adds Azure Device
+   * Registry (ADR) certificate authority / certificate policy references on
+   * enrollments (namespaceName, certificateAuthorityName, certificatePolicyName),
+   * replacing the preview-only credentialPolicyName.
    */
-  v2026_07_01_preview: "2026-07-01-preview",
+  v2026_11_01: "2026-11-01",
+
+  /**
+   * The 2026-11-02-preview API version.
+   */
+  v2026_11_02_preview: "2026-11-02-preview",
 }

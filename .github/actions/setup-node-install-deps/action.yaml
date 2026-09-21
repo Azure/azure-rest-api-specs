@@ -1,5 +1,5 @@
 name: Setup Node and install dependencies
-description: Uses specified Node version and installs dependencies (typically using "npm")
+description: Uses specified Node version and installs dependencies using pnpm
 
 inputs:
   node-version:
@@ -7,20 +7,53 @@ inputs:
     default: 24.x
   install-command:
     description: "Command to install dependencies"
-    default: "npm ci --no-audit --no-fund --prefer-offline"
+    default: "pnpm ci --prefer-offline"
   working-directory:
-    description: "Working directory"
+    description: 'Working directory. Should point at the workspace/checkout root (the location of the root package.json with the "packageManager" field), which is also where dependencies are installed from.'
     default: "."
+  cache-name:
+    description: 'Namespaces the pnpm store cache so different install profiles do not overwrite each other (e.g. a minimal "--prod --filter" install vs. a full install share the same content-addressable store, but a smaller install must not poison the cache restored by a larger one). Use a distinct value per install-command.'
+    default: "full"
+  cache:
+    description: 'Whether to cache the pnpm store. Disable for tiny installs (e.g. a "--prod --filter" subset of a few packages) where restoring/saving the cache costs more time than it saves.'
+    default: "true"
 
 runs:
   using: "composite"
 
   steps:
+    - uses: pnpm/action-setup@0ebf47130e4866e96fce0953f49152a61190b271 # v6.0.9
+      with:
+        package_json_file: ${{ inputs.working-directory }}/package.json
+
+    # NOTE: Do not use actions/setup-node's built-in package-manager cache.
+    # - "cache: pnpm" keys the pnpm store cache only on the lockfile hash (shared
+    #   across all workflows) and never re-saves on a key hit, so a minimal
+    #   "--prod --filter" install can lock the shared cache to a tiny partial store
+    #   that full installs then can't grow. We manage the store cache explicitly
+    #   below, namespaced by "cache-name".
+    # - "package-manager-cache" defaults to true in v6; even though it only auto-caches
+    #   for npm, the detection still probes pnpm for its store path, and that first
+    #   pnpm invocation pays a ~3s PNPM_HOME v10->v11 layout migration. Disabling it
+    #   removes that probe from the first install step of every job.
     - uses: actions/setup-node@v6
       with:
         node-version: ${{ inputs.node-version }}
-        cache: "npm"
-        cache-dependency-path: ${{ inputs.working-directory }}/package-lock.json
+        package-manager-cache: false
+
+    - if: ${{ inputs.cache == 'true' }}
+      id: pnpm-store
+      run: echo "path=$(pnpm store path --silent)" >> "$GITHUB_OUTPUT"
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+
+    - if: ${{ inputs.cache == 'true' }}
+      uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
+      with:
+        path: ${{ steps.pnpm-store.outputs.path }}
+        key: pnpm-store-${{ runner.os }}-${{ runner.arch }}-${{ inputs.cache-name }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          pnpm-store-${{ runner.os }}-${{ runner.arch }}-${{ inputs.cache-name }}-
 
     - run: |
         echo "::group::$INSTALL_COMMAND"
@@ -32,8 +65,8 @@ runs:
       working-directory: ${{ inputs.working-directory }}
 
     - run: |
-        echo "::group::npm ls -a"
-        npm ls -a || true
+        echo "::group::pnpm ls"
+        pnpm ls || true
         echo "::endgroup::"
       shell: bash
       working-directory: ${{ inputs.working-directory }}
