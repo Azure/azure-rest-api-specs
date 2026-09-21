@@ -2,12 +2,14 @@
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 using Common;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -282,6 +284,23 @@ union SubPlan {
    * P2
    */
   P2: "P2",
+}
+
+/**
+ * The installation method for the Defender for Containers agent.
+ */
+union InstallationMethod {
+  string,
+
+  /**
+   * Arc-based installation
+   */
+  Arc: "Arc",
+
+  /**
+   * Helm-based installation
+   */
+  Helm: "Helm",
 }
 
 /**
@@ -695,6 +714,24 @@ model defenderForContainersAwsOffering extends cloudOffering {
   kinesisToS3?: DefenderForContainersAwsOfferingKinesisToS3;
 
   /**
+   * The installation method for the Defender for Containers agent.
+   */
+  @added(Versions.v2026_08_01_preview)
+  installationMethod?: InstallationMethod;
+
+  /**
+   * Is security gating enabled
+   */
+  @added(Versions.v2026_08_01_preview)
+  securityGatingEnabled?: boolean;
+
+  /**
+   * Is defender anti-malware enabled
+   */
+  @added(Versions.v2026_08_01_preview)
+  containerAntiMalwareEnabled?: boolean;
+
+  /**
    * Is audit logs data collection enabled
    */
   enableAuditLogsAutoProvisioning?: boolean;
@@ -793,6 +830,12 @@ model DefenderForContainersAwsOfferingMdcContainersImageAssessment {
    * The cloud role ARN in AWS for this feature
    */
   cloudRoleArn?: string;
+
+  /**
+   * Is security findings enabled for container image assessment
+   */
+  @added(Versions.v2026_08_01_preview)
+  securityFindingsEnabled?: boolean;
 }
 
 /**
@@ -1322,6 +1365,24 @@ model defenderForContainersGcpOffering extends cloudOffering {
   enableAuditLogsAutoProvisioning?: boolean;
 
   /**
+   * The installation method for the Defender for Containers agent.
+   */
+  @added(Versions.v2026_08_01_preview)
+  installationMethod?: InstallationMethod;
+
+  /**
+   * Is security gating enabled
+   */
+  @added(Versions.v2026_08_01_preview)
+  securityGatingEnabled?: boolean;
+
+  /**
+   * Is defender anti-malware enabled
+   */
+  @added(Versions.v2026_08_01_preview)
+  containerAntiMalwareEnabled?: boolean;
+
+  /**
    * Is Microsoft Defender for Cloud Kubernetes agent auto provisioning enabled
    */
   enableDefenderAgentAutoProvisioning?: boolean;
@@ -1400,6 +1461,12 @@ model DefenderForContainersGcpOfferingMdcContainersImageAssessment {
    * The service account email address in GCP for this feature
    */
   serviceAccountEmailAddress?: string;
+
+  /**
+   * Is security findings enabled for container image assessment
+   */
+  @added(Versions.v2026_08_01_preview)
+  securityFindingsEnabled?: boolean;
 }
 
 /**
@@ -1488,6 +1555,18 @@ model defenderCspmAwsOffering extends cloudOffering {
   mdcContainersAgentlessDiscoveryK8s?: DefenderCspmAwsOfferingMdcContainersAgentlessDiscoveryK8S;
 
   /**
+   * The Microsoft Defender serverless containers configuration
+   */
+  @added(Versions.v2026_08_01_preview)
+  serverlessContainers?: DefenderCspmAwsOfferingServerlessContainers;
+
+  /**
+   * The Microsoft Defender agentless serverless posture configuration
+   */
+  @added(Versions.v2026_08_01_preview)
+  agentlessServerlessPosture?: DefenderCspmAwsOfferingAgentlessServerlessPosture;
+
+  /**
    * The type of the security offering.
    */
   offeringType: "DefenderCspmAws";
@@ -1500,6 +1579,16 @@ model defenderCspmAwsOffering extends cloudOffering {
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model defenderCspmAwsOfferingVmScanners extends vmScannersAws {}
+
+/**
+ * The Microsoft Defender serverless containers configuration
+ */
+model DefenderCspmAwsOfferingServerlessContainers {
+  /**
+   * Is serverless containers scanning enabled
+   */
+  enabled?: boolean;
+}
 
 /**
  * The Microsoft Defender Data Sensitivity discovery configuration
@@ -1538,12 +1627,25 @@ model DefenderCspmAwsOfferingCiem {
   /**
    * Defender CSPM Permissions Management discovery configuration
    */
+  @removed(Versions.v2026_08_01_preview)
   ciemDiscovery?: DefenderCspmAwsOfferingCiemCiemDiscovery;
 
   /**
    * AWS Defender CSPM Permissions Management OIDC (open id connect) connection configurations
    */
   ciemOidc?: DefenderCspmAwsOfferingCiemCiemOidc;
+
+  /**
+   * The AWS log collection OIDC (open id connect) connection configuration
+   */
+  @added(Versions.v2026_08_01_preview)
+  logCollectionOidc?: DefenderCspmAwsOfferingCiemLogCollectionOidc;
+
+  /**
+   * The CloudTrail audit log ingestion configuration
+   */
+  @added(Versions.v2026_08_01_preview)
+  cloudTrailAuditLogIngestion?: AwsCloudTrailConfiguration;
 }
 
 /**
@@ -1572,6 +1674,110 @@ model DefenderCspmAwsOfferingCiemCiemOidc {
 }
 
 /**
+ * The AWS log collection OIDC (open id connect) connection configuration
+ */
+@added(Versions.v2026_08_01_preview)
+model DefenderCspmAwsOfferingCiemLogCollectionOidc {
+  /**
+   * The cloud role ARN in AWS used for the log collection oidc connection
+   */
+  cloudRoleArn?: string;
+}
+
+/**
+ * The Microsoft Defender agentless serverless posture configuration
+ */
+@added(Versions.v2026_08_01_preview)
+model DefenderCspmAwsOfferingAgentlessServerlessPosture {
+  /**
+   * Is agentless serverless posture enabled
+   */
+  enabled?: boolean;
+
+  /**
+   * The cloud role ARN in AWS for this feature
+   */
+  cloudRoleArn?: string;
+}
+
+/**
+ * The provisioning type for AWS CloudTrail resources
+ */
+@added(Versions.v2026_08_01_preview)
+union AwsCloudTrailProvisioningType {
+  string,
+
+  /**
+   * The customer provides their own CloudTrail resources
+   */
+  BringYourOwn: "BringYourOwn",
+
+  /**
+   * Resources are provisioned on the customer's side
+   */
+  ManualProvisioning: "ManualProvisioning",
+
+  /**
+   * Resources are provisioned on Microsoft's side
+   */
+  AutoProvisioning: "AutoProvisioning",
+}
+
+/**
+ * The configuration for AWS CloudTrail audit log ingestion
+ */
+@added(Versions.v2026_08_01_preview)
+model AwsCloudTrailConfiguration {
+  /**
+   * The provisioning type for the CloudTrail resources
+   */
+  provisioningType?: AwsCloudTrailProvisioningType;
+
+  /**
+   * The existing CloudTrail resource sets. Required when provisioningType is BringYourOwn.
+   */
+  @identifiers(#["s3BucketArn"])
+  cloudTrailResourceSets?: AwsCloudTrailResourceSet[];
+
+  /**
+   * The resource name prefix used when provisioning the CloudTrail resources
+   */
+  resourceNamePrefix?: string;
+
+  /**
+   * The AWS region in which the CloudTrail resources are provisioned. Required when
+   * provisioningType is ManualProvisioning or AutoProvisioning.
+   */
+  deploymentRegion?: string;
+}
+
+/**
+ * A resource set describing existing AWS CloudTrail audit log resources
+ */
+@added(Versions.v2026_08_01_preview)
+model AwsCloudTrailResourceSet {
+  /**
+   * The AWS region of the resources in this set
+   */
+  resourceRegion?: string;
+
+  /**
+   * The S3 bucket ARN in which the CloudTrail logs are stored
+   */
+  s3BucketArn?: string;
+
+  /**
+   * The SQS queue ARN used for CloudTrail log notifications
+   */
+  sqsQueueArn?: string;
+
+  /**
+   * The KMS key ARN used for CloudTrail log encryption
+   */
+  kmsKeyArn?: string;
+}
+
+/**
  * The Microsoft Defender container image assessment configuration
  */
 model DefenderCspmAwsOfferingMdcContainersImageAssessment {
@@ -1584,6 +1790,12 @@ model DefenderCspmAwsOfferingMdcContainersImageAssessment {
    * The cloud role ARN in AWS for this feature
    */
   cloudRoleArn?: string;
+
+  /**
+   * Is security findings enabled for container image assessment
+   */
+  @added(Versions.v2026_08_01_preview)
+  securityFindingsEnabled?: boolean;
 }
 
 /**
@@ -1610,6 +1822,12 @@ model defenderCspmGcpOffering extends cloudOffering {
    * GCP Defenders CSPM Permissions Management OIDC (Open ID connect) connection configurations
    */
   ciemDiscovery?: DefenderCspmGcpOfferingCiemDiscovery;
+
+  /**
+   * The GCP Defender CSPM Permissions Management configurations
+   */
+  @added(Versions.v2026_08_01_preview)
+  ciem?: DefenderCspmGcpOfferingCiem;
 
   /**
    * The Microsoft Defender for CSPM VM scanning configuration
@@ -1655,6 +1873,106 @@ model DefenderCspmGcpOfferingCiemDiscovery {
    * the azure active directory app name used of authenticating against GCP workload identity federation
    */
   azureActiveDirectoryAppName?: string;
+
+  /**
+   * Is audit log ingestion enabled for the Permissions Management offering
+   */
+  @added(Versions.v2026_08_01_preview)
+  enableAuditLogIngestion?: boolean;
+}
+
+/**
+ * The GCP Defender CSPM Permissions Management configurations
+ */
+@added(Versions.v2026_08_01_preview)
+model DefenderCspmGcpOfferingCiem {
+  /**
+   * The GCP Permissions Management OIDC (open id connect) connection configuration
+   */
+  ciemOidc?: DefenderCspmGcpOfferingCiemOidc;
+
+  /**
+   * The GCP log collection OIDC (open id connect) connection configuration
+   */
+  logCollectionOidc?: DefenderCspmGcpOfferingCiemOidc;
+
+  /**
+   * The GCP audit log ingestion configuration
+   */
+  gcpAuditLogIngestion?: GcpAuditLogConfiguration;
+}
+
+/**
+ * A GCP OIDC (open id connect) connection configuration
+ */
+@added(Versions.v2026_08_01_preview)
+model DefenderCspmGcpOfferingCiemOidc {
+  /**
+   * The GCP workload identity provider id for this feature
+   */
+  workloadIdentityProviderId?: string;
+
+  /**
+   * The service account email address in GCP for this feature
+   */
+  serviceAccountEmailAddress?: string;
+}
+
+/**
+ * The provisioning type for GCP logging resources
+ */
+@added(Versions.v2026_08_01_preview)
+union GcpLoggingProvisioningType {
+  string,
+
+  /**
+   * The customer provides their own GCP logging resources
+   */
+  BringYourOwn: "BringYourOwn",
+
+  /**
+   * Resources are provisioned on the customer's side
+   */
+  ManualProvisioning: "ManualProvisioning",
+
+  /**
+   * Resources are provisioned on Microsoft's side
+   */
+  AutoProvisioning: "AutoProvisioning",
+}
+
+/**
+ * The configuration for GCP audit log ingestion
+ */
+@added(Versions.v2026_08_01_preview)
+model GcpAuditLogConfiguration {
+  /**
+   * The provisioning type for the GCP logging resources
+   */
+  provisioningType?: GcpLoggingProvisioningType;
+
+  /**
+   * The existing GCP logging resource sets. Required when provisioningType is BringYourOwn.
+   */
+  @identifiers(#["pubSubSubscriptionName"])
+  resourceSets?: GcpLoggingResourceSet[];
+
+  /**
+   * The resource name prefix used when provisioning the GCP logging resources. Required when
+   * provisioningType is ManualProvisioning or AutoProvisioning.
+   */
+  resourceNamePrefix?: string;
+}
+
+/**
+ * A resource set describing existing GCP logging resources
+ */
+@added(Versions.v2026_08_01_preview)
+model GcpLoggingResourceSet {
+  /**
+   * The Pub/Sub subscription name in which the GCP logs are stored
+   */
+  pubSubSubscriptionName?: string;
 }
 
 /**
@@ -1703,6 +2021,12 @@ model DefenderCspmGcpOfferingMdcContainersImageAssessment {
    * The service account email address in GCP for this feature
    */
   serviceAccountEmailAddress?: string;
+
+  /**
+   * Is security findings enabled for container image assessment
+   */
+  @added(Versions.v2026_08_01_preview)
+  securityFindingsEnabled?: boolean;
 }
 
 /**

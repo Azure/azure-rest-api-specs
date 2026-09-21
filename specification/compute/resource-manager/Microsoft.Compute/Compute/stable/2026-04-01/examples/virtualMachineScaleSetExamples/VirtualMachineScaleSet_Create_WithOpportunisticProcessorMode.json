@@ -1,0 +1,226 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmScaleSetName": "{vmss-name}",
+    "api-version": "2026-04-01",
+    "parameters": {
+      "sku": {
+        "tier": "Standard",
+        "capacity": 3,
+        "name": "Standard_D2s_v5"
+      },
+      "location": "westus",
+      "properties": {
+        "overprovision": true,
+        "upgradePolicy": {
+          "mode": "Manual"
+        },
+        "virtualMachineProfile": {
+          "storageProfile": {
+            "imageReference": {
+              "sku": "2019-Datacenter",
+              "publisher": "MicrosoftWindowsServer",
+              "version": "latest",
+              "offer": "WindowsServer"
+            },
+            "osDisk": {
+              "caching": "ReadWrite",
+              "managedDisk": {
+                "storageAccountType": "Standard_LRS"
+              },
+              "createOption": "FromImage"
+            }
+          },
+          "hardwareProfile": {
+            "processorMode": "Opportunistic"
+          },
+          "osProfile": {
+            "computerNamePrefix": "{vmss-name}",
+            "adminUsername": "{your-username}",
+            "adminPassword": "{your-password}"
+          },
+          "networkProfile": {
+            "networkInterfaceConfigurations": [
+              {
+                "name": "{vmss-name}",
+                "properties": {
+                  "primary": true,
+                  "enableIPForwarding": true,
+                  "ipConfigurations": [
+                    {
+                      "name": "{vmss-name}",
+                      "properties": {
+                        "subnet": {
+                          "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "sku": {
+          "tier": "Standard",
+          "capacity": 3,
+          "name": "Standard_D2s_v5"
+        },
+        "name": "{vmss-name}",
+        "properties": {
+          "singlePlacementGroup": true,
+          "overprovision": true,
+          "uniqueId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "virtualMachineProfile": {
+            "storageProfile": {
+              "imageReference": {
+                "sku": "2019-Datacenter",
+                "publisher": "MicrosoftWindowsServer",
+                "version": "latest",
+                "offer": "WindowsServer"
+              },
+              "osDisk": {
+                "caching": "ReadWrite",
+                "managedDisk": {
+                  "storageAccountType": "Standard_LRS"
+                },
+                "createOption": "FromImage"
+              }
+            },
+            "hardwareProfile": {
+              "processorMode": "Opportunistic"
+            },
+            "osProfile": {
+              "computerNamePrefix": "{vmss-name}",
+              "adminUsername": "{your-username}",
+              "secrets": [],
+              "windowsConfiguration": {
+                "provisionVMAgent": true,
+                "enableAutomaticUpdates": true
+              }
+            },
+            "networkProfile": {
+              "networkInterfaceConfigurations": [
+                {
+                  "name": "{vmss-name}",
+                  "properties": {
+                    "dnsSettings": {
+                      "dnsServers": []
+                    },
+                    "primary": true,
+                    "enableIPForwarding": true,
+                    "ipConfigurations": [
+                      {
+                        "name": "{vmss-name}",
+                        "properties": {
+                          "subnet": {
+                            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}"
+                          },
+                          "privateIPAddressVersion": "IPv4"
+                        }
+                      }
+                    ],
+                    "enableAcceleratedNetworking": false
+                  }
+                }
+              ]
+            }
+          },
+          "upgradePolicy": {
+            "mode": "Manual"
+          },
+          "provisioningState": "Creating"
+        },
+        "location": "westus",
+        "type": "Microsoft.Compute/virtualMachineScaleSets",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}"
+      }
+    },
+    "201": {
+      "body": {
+        "sku": {
+          "tier": "Standard",
+          "capacity": 3,
+          "name": "Standard_D2s_v5"
+        },
+        "name": "{vmss-name}",
+        "properties": {
+          "singlePlacementGroup": true,
+          "overprovision": true,
+          "uniqueId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+          "virtualMachineProfile": {
+            "storageProfile": {
+              "imageReference": {
+                "sku": "2019-Datacenter",
+                "publisher": "MicrosoftWindowsServer",
+                "version": "latest",
+                "offer": "WindowsServer"
+              },
+              "osDisk": {
+                "caching": "ReadWrite",
+                "managedDisk": {
+                  "storageAccountType": "Standard_LRS"
+                },
+                "createOption": "FromImage"
+              }
+            },
+            "hardwareProfile": {
+              "processorMode": "Opportunistic"
+            },
+            "osProfile": {
+              "computerNamePrefix": "{vmss-name}",
+              "adminUsername": "{your-username}",
+              "secrets": [],
+              "windowsConfiguration": {
+                "provisionVMAgent": true,
+                "enableAutomaticUpdates": true
+              }
+            },
+            "networkProfile": {
+              "networkInterfaceConfigurations": [
+                {
+                  "name": "{vmss-name}",
+                  "properties": {
+                    "dnsSettings": {
+                      "dnsServers": []
+                    },
+                    "primary": true,
+                    "enableIPForwarding": true,
+                    "ipConfigurations": [
+                      {
+                        "name": "{vmss-name}",
+                        "properties": {
+                          "subnet": {
+                            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/{existing-virtual-network-name}/subnets/{existing-subnet-name}"
+                          },
+                          "privateIPAddressVersion": "IPv4"
+                        }
+                      }
+                    ],
+                    "enableAcceleratedNetworking": false
+                  }
+                }
+              ]
+            }
+          },
+          "upgradePolicy": {
+            "mode": "Manual"
+          },
+          "provisioningState": "Updating"
+        },
+        "location": "westus",
+        "type": "Microsoft.Compute/virtualMachineScaleSets",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/{vmss-name}"
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSets_CreateOrUpdate",
+  "title": "Create a VMSS with Opportunistic Processor Mode"
+}

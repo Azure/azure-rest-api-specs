@@ -3,6 +3,7 @@ import "./common.tsp";
 using TypeSpec.Versioning;
 
 namespace Microsoft.ManagedNetworkFabric;
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("IP Community Properties defines the resource properties.")
 model IpCommunityProperties {
   ...AnnotationResource;
@@ -38,6 +39,7 @@ model IpCommunityProperties {
   administrativeState?: AdministrativeState;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 @doc("IP Community patchable properties.")
 model IpCommunityPatchableProperties {
   @doc("List of IP Community Rules.")

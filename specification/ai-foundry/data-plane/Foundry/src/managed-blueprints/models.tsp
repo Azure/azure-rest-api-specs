@@ -8,6 +8,7 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CreateOrUpdateManagedAgentIdentityBlueprintRequest {
   @doc("""
     The unique name that identifies the managed agent identity blueprint.

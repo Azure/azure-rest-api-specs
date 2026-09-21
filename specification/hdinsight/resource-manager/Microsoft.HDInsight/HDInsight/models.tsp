@@ -673,6 +673,7 @@ model HardwareProfile {
 /**
  * The Linux operation systems profile.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model OsProfile {
   /**
    * The Linux OS profile.

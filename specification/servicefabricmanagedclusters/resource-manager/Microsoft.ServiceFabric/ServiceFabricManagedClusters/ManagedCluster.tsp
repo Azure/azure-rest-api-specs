@@ -1091,6 +1091,7 @@ model ManagedMaintenanceWindowStatusContent {
 /**
  * Describes the request to apply a maintenance window on a Service Fabric Managed Cluster.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_05_01_preview)
 model ApplyMaintenanceWindowRequest {
   /**

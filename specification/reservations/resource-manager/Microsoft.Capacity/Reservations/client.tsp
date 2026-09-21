@@ -2,11 +2,13 @@ import "./Quota/main.tsp";
 import "./Reservations/main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
+using TypeSpec.Http;
+using TypeSpec.Rest;
 using Azure.Core;
+using Azure.ResourceManager;
 using Azure.ClientGenerator.Core;
 using Reservations;
 
-#suppress "@azure-tools/typespec-client-generator-core/inconsistent-multiple-service-dependency" "temporarily suppressing"
 @client({
   name: "ReservationsClient",
   service: [Quota, Reservations],
@@ -308,14 +310,92 @@ namespace ReservationsClient;
   Quota.QuotaListBaseParam.subscriptionId,
   Quota.CurrentQuotaLimitBases.list
 );
+
+// QuotaRequestStatus overrides: subscriptionId should be method level
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op quotaRequestStatusGet(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+
+  @path
+  @segment("providers")
+  @key
+  provider: "Microsoft.Capacity",
+
+  @path
+  @segment("resourceProviders")
+  @key
+  providerId: string,
+
+  @path
+  @segment("locations")
+  @key
+  location: string,
+
+  @path
+  @segment("serviceLimitsRequests")
+  @key
+  id: string,
+): ArmResponse<Quota.QuotaRequestDetails> | Quota.ExceptionResponse;
+@@override(Quota.QuotaRequestStatus.get, quotaRequestStatusGet);
 @@clientLocation(
-  Quota.QuotaRequestGetBaseParam.subscriptionId,
-  Quota.QuotaRequestStatus.get
+  quotaRequestStatusGet::parameters.subscriptionId,
+  quotaRequestStatusGet
 );
+
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+op quotaRequestStatusList(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+
+  @path
+  @segment("providers")
+  @key
+  provider: "Microsoft.Capacity",
+
+  @path
+  @segment("resourceProviders")
+  @key
+  providerId: string,
+
+  @path
+  @segment("locations")
+  @key
+  location: string,
+
+  /**
+   * | Field | Supported operators |
+   * |---------------------|------------------------|
+   * |requestSubmitTime | ge, le, eq, gt, lt |
+   */
+  @query("$filter")
+  $filter?: string,
+
+  /**
+   * Number of records to return.
+   */
+  @minValue(1)
+  @query("$top")
+  $top?: int32,
+
+  /**
+   * Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element includes a skiptoken parameter that specifies a starting point to use for subsequent calls.
+   */
+  @query("$skiptoken")
+  $skiptoken?: string,
+): ArmResponse<Quota.QuotaRequestDetailsList> | Quota.ExceptionResponse;
+@@override(Quota.QuotaRequestStatus.list, quotaRequestStatusList);
 @@clientLocation(
-  Quota.QuotaRequestListBaseParam.subscriptionId,
-  Quota.QuotaRequestStatus.list
+  quotaRequestStatusList::parameters.subscriptionId,
+  quotaRequestStatusList
 );
+
 @@scope(Operation.list, "!csharp");
 /**
  * Resource Provider type to be reserved.

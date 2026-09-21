@@ -30,7 +30,7 @@ using TypeSpec.Versioning;
 @service(#{ title: "ApplicationInsightsManagementClient" })
 @versioned(Versions)
 // FIXME: Common type version v1 is not supported for now. Set to v3.
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Components;
 
 /**
@@ -41,4 +41,10 @@ enum Versions {
    * The 2020-02-02 API version.
    */
   v2020_02_02: "2020-02-02",
+
+  /**
+   * The 2025-01-23-preview API version.
+   */
+  @Azure.Core.previewVersion
+  v2025_01_23_preview: "2025-01-23-preview",
 }

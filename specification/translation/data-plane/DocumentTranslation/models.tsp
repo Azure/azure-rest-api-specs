@@ -146,6 +146,7 @@ model StartTranslationDetails {
   options?: BatchOptions;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Translation batch request options")
 @added(Versions.v2024_11_01_preview)
 model BatchOptions {
@@ -153,6 +154,7 @@ model BatchOptions {
   translateTextWithinImage?: boolean = false;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Definition for the input batch translation request")
 model BatchRequest {
   @doc("Source of the input documents")
@@ -211,6 +213,10 @@ model TargetInput {
   @doc("Category / custom system for translation request")
   category?: string;
 
+  /** Deployment name of the custom translation model for the translation request. */
+  @added(Versions.v2026_03_01)
+  deploymentName?: string;
+
   @doc("Target Language")
   language: string;
 
@@ -244,6 +250,7 @@ model Glossary {
   storageSource?: StorageSource;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("""
   Contains unified error information used for HTTP responses across any Cognitive
   Service. Instances
@@ -451,6 +458,10 @@ model DocumentStatus {
   @doc("Characters detected within images")
   @added(Versions.v2025_12_01_preview)
   imageCharacterDetected?: int32;
+
+  @doc("Deployment name of the custom translation model used for the translation")
+  @added(Versions.v2026_03_01)
+  deploymentName?: string;
 }
 
 @doc("Documents Status Response")
@@ -517,6 +528,11 @@ model DocumentTranslateBody {
   @query("category")
   category?: string = "general";
 
+  /** Deployment name of the custom translation model for the translation request. */
+  @added(Versions.v2026_03_01)
+  @query("deploymentName")
+  deploymentName?: string;
+
   @doc("""
     Specifies that the service is allowed to fall back to a general system when a custom system doesn't exist. 
     Possible values are: true (default) or false.
@@ -532,9 +548,10 @@ model DocumentTranslateBody {
   @multipartBody
   body: DocumentTranslateContent;
 
+  // Placed after body to preserve parameter ordering with prior GA versions
   @doc("Optional boolean parameter to translate text within an image in the document")
-  @query("translateTextWithinImage")
   @added(Versions.v2024_11_01_preview)
+  @query("translateTextWithinImage")
   translateTextWithinImage?: boolean;
 }
 
@@ -545,6 +562,7 @@ model StartTranslationBody {
   body: StartTranslationDetails;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Get Translations Status options")
 model GetTranslationsStatusOptions {
   @doc("""
@@ -620,6 +638,7 @@ model GetTranslationsStatusOptions {
   orderby?: string[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Get Documents Status options")
 model GetDocumentsStatusOptions {
   @doc("Format - uuid.  The operation id")

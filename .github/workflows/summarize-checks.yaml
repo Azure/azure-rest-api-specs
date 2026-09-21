@@ -3,12 +3,16 @@ name: "Summarize Checks"
 on:
   workflow_run:
     workflows:
-      - "Swagger SemanticValidation - Set Status"
-      - "Swagger ModelValidation - Set Status"
+      - "Breaking Change(Cross-Version) - Set Status"
+      - "Package Name Approval - Set Status"
+      - "Package Name Approval - Validate Labels"
+      - "SDK Validation Status"
       - "Summarize PR Impact"
       - "Swagger Avocado - Set Status"
+      - "Swagger BreakingChange - Set Status"
       - "Swagger LintDiff - Set Status"
-      - "SDK Validation Status"
+      - "Swagger ModelValidation - Set Status"
+      - "Swagger SemanticValidation - Set Status"
       - "TypeSpec Validation"
       - "Update Labels"
     types:
@@ -62,7 +66,7 @@ jobs:
         with:
           script: |
             const { default: dumpTriggerMetadata } =
-              await import('${{ github.workspace }}/.github/workflows/src/summarize-checks/dump-trigger-metadata.js');
+              await import('${{ github.workspace }}/.github/workflows/src/summarize-checks/dump-trigger-metadata.ts');
             return await dumpTriggerMetadata({ context, core });
 
       - id: summarize-checks
@@ -71,7 +75,7 @@ jobs:
         with:
           script: |
             const { default: summarizeChecks } =
-              await import('${{ github.workspace }}/.github/workflows/src/summarize-checks/summarize-checks.js');
+              await import('${{ github.workspace }}/.github/workflows/src/summarize-checks/summarize-checks.ts');
             return await summarizeChecks({ github, context, core });
 
       # May be used by downstream workflows
@@ -83,3 +87,20 @@ jobs:
           path: ${{ steps.summarize-checks.outputs.summary }}
           # If the file doesn't exist, just don't add the artifact
           if-no-files-found: ignore
+
+      # PR identity handoff for workflow_run consumers (e.g. Data-Plane Assign Reviewers):
+      # labels applied above use the default token and don't re-trigger `labeled` workflows,
+      # so consumers react to this run and resolve the PR from these artifacts.
+      - if: ${{ always() && steps.summarize-checks.outputs.issue_number }}
+        name: Upload artifact with issue number
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: issue-number
+          value: ${{ steps.summarize-checks.outputs.issue_number }}
+
+      - if: ${{ always() && steps.summarize-checks.outputs.head_sha }}
+        name: Upload artifact with head SHA
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: head-sha
+          value: ${{ steps.summarize-checks.outputs.head_sha }}

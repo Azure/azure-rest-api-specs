@@ -58,6 +58,7 @@ model HumanEvaluationRuleAction extends EvaluationRuleAction {
 }
 
 @doc("Evaluation rule action for human evaluation.")
+@extension("x-ms-foundry-meta", AllConditionalEvaluationRuleActionPreviews)
 model HumanEvaluationPreviewRuleAction extends EvaluationRuleAction {
   type: EvaluationRuleActionType.humanEvaluationPreview;
 

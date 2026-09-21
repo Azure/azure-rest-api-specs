@@ -20,12 +20,12 @@ jobs:
     name: Analyze Code
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 2
 
       - name: Checkout base branch for comparison
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           ref: ${{ github.event.pull_request.base.sha }}
           path: base-ref
@@ -34,7 +34,11 @@ jobs:
         uses: ./.github/actions/setup-node-install-deps
 
       - name: Install dependencies in base checkout
-        run: npm install --ignore-scripts
+        # The base checkout is a pnpm workspace, so it must be installed with pnpm:
+        # npm cannot resolve the "catalog:"/"workspace:" protocols in package.json.
+        # pnpm is already on PATH from the setup step above, and the root install has
+        # warmed the shared store, so this reuses it rather than re-downloading.
+        run: pnpm install --frozen-lockfile --ignore-scripts --prefer-offline
         working-directory: base-ref
 
       - name: Detect package name changes
@@ -45,7 +49,7 @@ jobs:
         with:
           script: |
             const { default: detectNamespaces } =
-              await import('${{ github.workspace }}/.github/workflows/src/namespace-approval/detect-namespaces.js');
+              await import('${{ github.workspace }}/.github/workflows/src/package-name-approval/detect-namespaces.ts');
             await detectNamespaces({ github, context, core });
 
       - name: Upload package name results

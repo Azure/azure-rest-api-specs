@@ -6,7 +6,9 @@ import "./models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+
 using Azure.Core;
+
 namespace Azure.AI.Projects;
 
 // ---------------------------------------------------------------------------
@@ -17,32 +19,38 @@ namespace Azure.AI.Projects;
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
 @tag("AgentOptimizationJobs")
 interface AgentOptimizationJobs {
-  @summary("Creates an agent optimization job.")
-  @doc("Create an optimization job. Returns 201 with the queued job. Honours `Operation-Id` for idempotent retry.")
+  /**
+   * Creates an optimization job and returns the queued job. Honors `Operation-Id` for idempotent retry.
+   */
+  @summary("Create an agent optimization job")
   @route("agent_optimization_jobs")
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   @pollingOperation(AgentOptimizationJobs.get)
   create is postJobPreview<
     FoundryFeaturesOptInKeys.agents_optimization_v2_preview,
-    OptimizationJob
+    AgentOptimizationJob
   >;
 
-  @summary("Get info about an agent optimization job.")
-  @doc("Get an optimization job by id.")
+  /**
+   * Retrieves an optimization job by its identifier.
+   */
+  @summary("Get an agent optimization job")
   @route("agent_optimization_jobs/{jobId}")
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   get is queryJobStatusPreview<
     FoundryFeaturesOptInKeys.agents_optimization_v2_preview,
-    OptimizationJob
+    AgentOptimizationJob
   >;
 
-  @summary("Returns a list of agent optimization jobs.")
-  @doc("List optimization jobs. Supports cursor pagination and optional status / agent_name filters.")
+  /**
+   * Lists optimization jobs with cursor pagination and optional status or agent name filters.
+   */
+  @summary("List agent optimization jobs")
   @route("agent_optimization_jobs")
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   list is listJobsPreview<
     FoundryFeaturesOptInKeys.agents_optimization_v2_preview,
-    OptimizationJobListItem,
+    AgentOptimizationJobListItem,
     {
       @doc("Filter to jobs in this lifecycle state.")
       @query
@@ -54,17 +62,21 @@ interface AgentOptimizationJobs {
     }
   >;
 
-  @summary("Cancels an agent optimization job.")
-  @doc("Request cancellation of a running or queued job. Returns an error if the job is already in a terminal state.")
+  /**
+   * Requests cancellation of a running or queued job and returns an error if the job is already in a terminal state.
+   */
+  @summary("Cancel an agent optimization job")
   @route("agent_optimization_jobs/{jobId}:cancel")
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   cancel is cancelJobPreview<
     FoundryFeaturesOptInKeys.agents_optimization_v2_preview,
-    OptimizationJob
+    AgentOptimizationJob
   >;
 
-  @summary("Deletes an agent optimization job.")
-  @doc("Delete the job and its candidate artifacts. Cancels first if non-terminal.")
+  /**
+   * Deletes the job and its candidate artifacts, canceling the job first if it is non-terminal.
+   */
+  @summary("Delete an agent optimization job")
   @route("agent_optimization_jobs/{jobId}")
   @extension("x-ms-foundry-meta", AgentOptimizationRequiredPreviews)
   delete is deleteJobPreview<FoundryFeaturesOptInKeys.agents_optimization_v2_preview>;
