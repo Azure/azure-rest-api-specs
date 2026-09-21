@@ -31,6 +31,11 @@ Is this review for (select one):
 * Previous API Spec Doc:
 * Updated paths:
 
+### Viewing API changes
+
+For convenient view of the API changes made by this PR, refer to the URLs provided in the table 
+in the `Generated ApiView` comment added to this PR. You can use ApiView to show API versions diff. 
+
 ### Suppressing failures
 
 If one or multiple validation error/warning suppression(s) is detected in your PR, please follow the 

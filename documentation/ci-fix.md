@@ -18,6 +18,9 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
   - [`PoliCheck`](#policheck)
   - [`SDK Validation *` checks, like `SDK Validation - Go`](#sdk-validation--checks-like-sdk-validation---go)
   - [`SDK Breaking Change Review`](#sdk-breaking-change-review)
+  - [`Swagger APIView`](#swagger-apiview)
+    - [If an expected APIView was not generated, follow the step below to troubleshoot.](#if-an-expected-apiview-was-not-generated-follow-the-step-below-to-troubleshoot)
+    - [Diagnosing APIView failure for SDK Language (not Swagger or TypeSpec)](#diagnosing-apiview-failure-for-sdk-language-not-swagger-or-typespec)
   - [`Swagger ApiDocPreview`](#swagger-apidocpreview)
   - [`Swagger Avocado`](#swagger-avocado)
   - [`Swagger BreakingChange` and `BreakingChange(Cross-Version)`](#swagger-breakingchange-and-breakingchangecross-version)
@@ -109,6 +112,27 @@ If the SDK breaking changes haven't been reviewed after two additional business 
 | `Go`            | Chenjie Shi     | [tadelesh](https://github.com/tadelesh)                       |
 | `JS`            | Qiaoqiao Zhang  | [qiaozha](https://github.com/qiaozha)                         |
 | `Python`        | Yuchao Yan      | [msyyc](https://github.com/msyyc)                             |
+
+## `Swagger APIView`
+
+Various APIViews are generated as part of the Azure REST API specs PR build. Among these are TypeSpec and Swagger as well as any other language that is being generated in the run. When everything is successful you should see a comment box similar to the picture below showing the APIViews generated for TypeSpec or Swagger, plus all other languages being generated.
+
+![alt text](image-3.png)
+
+### If an expected APIView was not generated, follow the step below to troubleshoot.
+
+- On the CI check click on `details` > `View Azure DevOps build log for more details` to view the devOps logs.
+- Investigate the CI job for the language with error. TypeSpec and Swagger APIViews are generated as part of the `AzureRestApiSpecsPipeline` stage in the `TypeSpecAPIView` and `SwaggerAPIView` jobs respectively, while APIViews for other SDK languages are generated in their respective language jobs in the `SDK Automation` stage.
+- Ensure that all previous checks in the job are green before proceeding.
+
+### Diagnosing APIView failure for SDK Language (not Swagger or TypeSpec)
+
+1. Check for an unexpected skip of the `Publish SDK APIView Artifact to Pipeline Artifacts` and `Generate SDK APIView` step.
+2. Look in `SDK Automation` step to verify that the API token generation completed successfully.
+3. Search logs for `Read Temp File`
+4. Below `Read Temp File` find the .json object and search within to locate the `apiViewArtifact` property.
+5. If not present, the APIView parser for the language failed to generate the `APIView Token Artifacts`.
+6. Please contact [APIView Support Teams Channel] for assistance.
 
 ## `Swagger ApiDocPreview`
 
@@ -344,6 +368,7 @@ Following checks have been removed from the validation toolchain as of August 20
 [aka.ms/azsdk/pr-getting-help]: https://aka.ms/azsdk/pr-getting-help
 [aka.ms/azsdk/support]: https://aka.ms/azsdk/support
 [aka.ms/ci-fix]: https://aka.ms/ci-fix
+[APIView Support Teams Channel]: https://teams.microsoft.com/l/channel/19%3A3adeba4aa1164f1c889e148b1b3e3ddd%40thread.skype/APIView?groupId=3e17dcb0-4257-4a30-b843-77f47f1d4121&tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47
 [automated validation tooling]: https://eng.ms/docs/products/azure-developer-experience/design/api-specs/api-tooling
 [Azure REST API specs PR]: https://eng.ms/docs/products/azure-developer-experience/design/api-specs-pr/api-specs-pr
 [TypeSpec Discussions Teams channel]: https://teams.microsoft.com/l/channel/19%3A906c1efbbec54dc8949ac736633e6bdf%40thread.skype/TypeSpec%20Discussion%20%F0%9F%90%AE?groupId=3e17dcb0-4257-4a30-b843-77f47f1d4121&tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47
