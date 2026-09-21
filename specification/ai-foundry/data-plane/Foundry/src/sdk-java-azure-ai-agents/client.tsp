@@ -486,6 +486,78 @@ using Azure.AI.Projects;
   VoiceAgentAzureSemanticVadEnTurnDetection,
   "VoiceAgentAzureSemanticVadEnglishTurnDetection"
 );
+
+// Duration-typed Java properties do not need wire-unit suffixes in their client names.
+@@clientName(
+  VoiceAgentAzureSemanticVadMultilingualTurnDetection.prefix_padding_ms,
+  "prefixPadding",
+  "java"
+);
+@@clientName(
+  VoiceAgentAzureSemanticVadMultilingualTurnDetection.silence_duration_ms,
+  "silenceDuration",
+  "java"
+);
+@@clientName(
+  VoiceAgentAzureSemanticVadMultilingualTurnDetection.speech_duration_ms,
+  "speechDuration",
+  "java"
+);
+@@clientName(
+  VoiceAgentAzureSemanticVadMultilingualTurnDetection.idle_timeout_ms,
+  "idleTimeout",
+  "java"
+);
+@@clientName(
+  VoiceAgentAzureSemanticVadTurnDetection.prefix_padding_ms,
+  "prefixPadding",
+  "java"
+);
+@@clientName(
+  VoiceAgentAzureSemanticVadTurnDetection.silence_duration_ms,
+  "silenceDuration",
+  "java"
+);
+@@clientName(
+  VoiceAgentAzureSemanticVadTurnDetection.speech_duration_ms,
+  "speechDuration",
+  "java"
+);
+@@clientName(
+  VoiceAgentAzureSemanticVadTurnDetection.idle_timeout_ms,
+  "idleTimeout",
+  "java"
+);
+@@clientName(
+  VoiceAgentEndOfUtteranceDetection.timeout_ms,
+  "timeout",
+  "java"
+);
+@@clientName(
+  VoiceAgentServerEventResponseAudioTimestampDelta.audio_duration_ms,
+  "audioDuration",
+  "java"
+);
+@@clientName(
+  VoiceAgentServerEventResponseAudioTimestampDelta.audio_offset_ms,
+  "audioOffset",
+  "java"
+);
+@@clientName(
+  OpenAI.RealtimeTurnDetectionServerVad.silence_duration_ms,
+  "silenceDuration",
+  "java"
+);
+@@clientName(
+  OpenAI.RealtimeTurnDetectionServerVad.idle_timeout_ms,
+  "idleTimeout",
+  "java"
+);
+@@clientName(
+  OpenAI.TranscriptTextUsageDuration.seconds,
+  "duration",
+  "java"
+);
 @@clientName(VoiceAgentDefinition.subagent_config, "subagentConfiguration");
 @@clientName(
   VoiceAgentEndOfUtteranceDetectionModel.semantic_detection_v1_en,
@@ -1027,6 +1099,18 @@ using Azure.AI.Projects;
 @@alternateType(
   OpenAI.RealtimeServerEventInputAudioBufferDtmfEventReceived.received_at,
   FoundryTimestamp,
+  "java"
+);
+
+// Expose millisecond-valued VAD properties as Duration
+@@alternateType(
+  OpenAI.RealtimeTurnDetectionServerVad.silence_duration_ms,
+  FoundryDurationMilliseconds,
+  "java"
+);
+@@alternateType(
+  OpenAI.RealtimeTurnDetectionServerVad.idle_timeout_ms,
+  FoundryDurationMilliseconds,
   "java"
 );
 
