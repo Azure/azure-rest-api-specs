@@ -226,7 +226,7 @@ that still point at the old `.js` entry point.
 
 ### Contributing
 
-When adding or changing shared code:
+When adding a shared utility:
 
 1. **Add the module** under `src` as a single-responsibility TypeScript file with typed exports.
 2. **Export it** by adding a subpath entry to the `exports` map in [`package.json`](./package.json).

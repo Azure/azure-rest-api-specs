@@ -93,8 +93,9 @@ Below are code convention we strive to follow in `eng` directory:
   The existing Swagger PrettierCheck pipeline and root `.prettierrc.json` are
   unchanged. Run `pnpm exec prettier --write <path-to-example.json>` to format an
   example.
-  TypeSpec validation retains `tsp format` for `.tsp` files and uses Oxfmt for
-  `tspconfig.yaml` with a line width of 80.
+  TypeSpec validation uses `tsp format` for both `.tsp` files and `tspconfig.yaml`.
+  Run `pnpm exec tsp format "../**/*.tsp" tspconfig.yaml` from the TypeSpec project
+  folder to format both.
 - Install the recommended Oxc VS Code extension for tooling formatting, Prettier
   for Swagger/example JSON, and the TypeSpec extension for `.tsp` files. For JSON
   excluded from Oxfmt, use **Format Document With... > Prettier** without changing

@@ -19,60 +19,44 @@ beforeEach(() => {
 });
 
 describe("FormatRule", () => {
-  it("formats TypeSpec and YAML directly from the project folder before checking for changes", async () => {
-    vi.mocked(runNodeBin)
-      .mockResolvedValueOnce([null, "tsp output\n", "tsp warning\n"])
-      .mockResolvedValueOnce([null, "yaml output\n", "yaml warning\n"]);
+  it("formats TypeSpec and tspconfig.yaml directly in one command before checking for changes", async () => {
+    vi.mocked(runNodeBin).mockResolvedValueOnce([null, "tsp output\n", "tsp warning\n"]);
 
     const result = await new FormatRule().execute(mockFolder);
 
-    expect(runNodeBin).toHaveBeenNthCalledWith(
-      1,
+    expect(runNodeBin).toHaveBeenCalledWith(
       "@typespec/compiler",
-      ["tsp", "format", "../**/*.tsp"],
+      ["tsp", "format", "../**/*.tsp", "tspconfig.yaml"],
       mockFolder,
     );
-    expect(runNodeBin).toHaveBeenNthCalledWith(
-      2,
-      "oxfmt",
-      ["oxfmt", "--write", "tspconfig.yaml"],
-      mockFolder,
-    );
-    expect(runNodeBin).toHaveBeenCalledTimes(2);
+    expect(runNodeBin).toHaveBeenCalledTimes(1);
     expect(gitDiffTopSpecFolder).toHaveBeenCalledWith(mockFolder);
     expect(result).toEqual({
       success: true,
-      stdOutput: "tsp output\nyaml output\ngit output",
-      errorOutput: "tsp warning\nyaml warning\n",
+      stdOutput: "tsp output\ngit output",
+      errorOutput: "tsp warning\n",
     });
   });
 
-  it.each(["TypeSpec", "YAML", "both"])("reports %s formatter failures", async (failure) => {
-    vi.mocked(runNodeBin)
-      .mockResolvedValueOnce([
-        failure === "YAML" ? null : new Error("tsp failure\n"),
-        "tsp output\n",
-        "tsp stderr\n",
-      ])
-      .mockResolvedValueOnce([
-        failure === "TypeSpec" ? null : new Error("yaml failure\n"),
-        "yaml output\n",
-        "yaml stderr\n",
-      ]);
+  it("reports formatter failures without checking for changes", async () => {
+    vi.mocked(runNodeBin).mockResolvedValueOnce([
+      new Error("tsp failure\n"),
+      "tsp output\n",
+      "tsp stderr\n",
+    ]);
 
     const result = await new FormatRule().execute(mockFolder);
 
-    expect(result.success).toBe(false);
-    expect(result.stdOutput).toBe("tsp output\nyaml output\n");
-    expect(result.errorOutput).toContain("tsp stderr\n");
-    expect(result.errorOutput).toContain("yaml stderr\n");
-    if (failure !== "YAML") expect(result.errorOutput).toContain("tsp failure\n");
-    if (failure !== "TypeSpec") expect(result.errorOutput).toContain("yaml failure\n");
-    expect(runNodeBin).toHaveBeenCalledTimes(2);
+    expect(result).toEqual({
+      success: false,
+      stdOutput: "tsp output\n",
+      errorOutput: "tsp failure\ntsp stderr\n",
+    });
+    expect(runNodeBin).toHaveBeenCalledTimes(1);
     expect(gitDiffTopSpecFolder).not.toHaveBeenCalled();
   });
 
-  it("reports changed files and both fix commands", async () => {
+  it("reports changed files and a single TypeSpec fix command", async () => {
     vi.mocked(gitDiffTopSpecFolder).mockResolvedValue({
       success: false,
       stdOutput: "git output",
@@ -84,7 +68,7 @@ describe("FormatRule", () => {
     expect(result.success).toBe(false);
     expect(result.stdOutput).toBe("git output");
     expect(result.errorOutput).toContain("changed tspconfig.yaml");
-    expect(result.errorOutput).toContain('pnpm exec tsp format "../**/*.tsp"');
-    expect(result.errorOutput).toContain("pnpm exec oxfmt --write tspconfig.yaml");
+    expect(result.errorOutput).toContain('pnpm exec tsp format "../**/*.tsp" tspconfig.yaml');
+    expect(result.errorOutput).not.toContain("oxfmt");
   });
 });
