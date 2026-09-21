@@ -355,6 +355,14 @@ using Azure.AI.Projects;
 @@clientName(AgentTelephony.updateTelephonyBinding, "updateBinding");
 @@clientName(AgentTelephony.deleteTelephonyBinding, "deleteBinding");
 @@clientName(AgentTelephony.listTelephonyCalls, "listCalls");
+@@clientName(
+  TelephonyCallListTimeQueryParameters.started_before,
+  "started_before_time"
+);
+@@clientName(
+  TelephonyCallListTimeQueryParameters.started_after,
+  "started_after_time"
+);
 @@clientName(AgentTelephony.getTelephonyCall, "getCall");
 @@clientName(AgentTelephony.transferTelephonyCall, "transferCall");
 @@clientName(AgentTelephony.endTelephonyCall, "endCall");

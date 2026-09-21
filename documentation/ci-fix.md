@@ -13,6 +13,7 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
 - [Table of Contents](#table-of-contents)
 - [Prerequisites](#prerequisites)
 - [Checks troubleshooting guides](#checks-troubleshooting-guides)
+  - [`Format`](#format)
   - [`CredScan`](#credscan)
   - [`PoliCheck`](#policheck)
   - [`SDK Validation *` checks, like `SDK Validation - Go`](#sdk-validation--checks-like-sdk-validation---go)
@@ -43,6 +44,19 @@ If you need help with your specs PR, please first thoroughly read the [aka.ms/az
 Most guides here require for you to have `npm` installed, which you can get by installing [Node.js](https://nodejs.org/en/download).
 
 # Checks troubleshooting guides
+
+## `Format`
+
+This check covers repository tooling in `.github` and `eng/tools`. To reproduce
+and fix a formatting failure, run from the repository root:
+
+``` powershell
+pnpm install
+pnpm format:check
+pnpm format
+```
+
+Tooling formatting uses Oxfmt and excludes Swagger JSON.
 
 ## `CredScan`
 

@@ -9,31 +9,24 @@
   "scripts": {
     "build": "tsc --noEmit",
     "check": "pnpm build && pnpm lint && pnpm format:check && pnpm test:ci",
-    "format": "prettier . --ignore-path ../.prettierignore --write",
-    "format:check": "prettier . --ignore-path ../.prettierignore --check",
-    "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
-    "lint": "cross-env DEBUG=eslint:eslint,eslint:linter eslint",
+    "format": "oxfmt . --write",
+    "format:check": "oxfmt . --check",
+    "lint": "oxlint .",
     "test": "vitest",
     "test:ci": "vitest run --coverage --reporter=verbose"
   },
   "dependencies": {
-    "@actions/core": "^3.0.0",
+    "@actions/core": "catalog:",
     "@azure-tools/specs-shared": "workspace:*",
     "@azure-tools/suppressions": "workspace:*",
     "js-yaml": "catalog:",
-    "oav": "4.0.4",
+    "oav": "catalog:",
     "simple-git": "catalog:"
   },
   "devDependencies": {
-    "@eslint/js": "catalog:",
     "@types/node": "catalog:",
     "@vitest/coverage-v8": "catalog:",
-    "cross-env": "catalog:",
-    "eslint": "catalog:",
-    "prettier": "catalog:",
-    "prettier-plugin-organize-imports": "catalog:",
     "typescript": "catalog:",
-    "typescript-eslint": "catalog:",
     "vitest": "catalog:",
     "@types/js-yaml": "catalog:"
   },
