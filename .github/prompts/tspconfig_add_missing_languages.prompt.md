@@ -11,4 +11,3 @@ Add a language that is missing (for instance, adding Go, Python, Javascript, or 
   - If the currently open tspconfig.yaml contains @azure-tools/typespec-azure-rulesets/resource-manager, then use this [template](https://aka.ms/azsdk/tspconfig-sample-mpg)
   - If the currently open tspconfig.yaml contains @azure-tools/typespec-azure-rulesets/data-plane, then use this [template](https://aka.ms/azsdk/tspconfig-sample-dpg)
 - Using the appropriate template file as a guide, add in any emitter configurations, like @azure-tools/typespec-go, that do not have emitters configured in our tspconfig.yaml.
-

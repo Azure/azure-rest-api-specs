@@ -226,7 +226,7 @@ model Widget {
   `Lifecycle.Update`).
 - Read-only properties: `@visibility(Lifecycle.Read)`.
 - Create-only (immutable): `@visibility(Lifecycle.Create,
-  Lifecycle.Read)`.
+Lifecycle.Read)`.
 - Write-only properties are **NOT allowed** (OAPI027) except for
   secrets annotated with `@secret`.
 

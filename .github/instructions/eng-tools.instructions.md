@@ -95,7 +95,7 @@ Every tool package is a thin extension of the shared `eng/tools` configuration. 
   "type": "module",
   "main": "src/index.ts",
   "bin": {
-    "<command>": "cmd/<command>.js"
+    "<command>": "cmd/<command>.js",
   },
   "scripts": {
     "build": "tsc --noEmit",
@@ -104,11 +104,11 @@ Every tool package is a thin extension of the shared `eng/tools` configuration. 
     "format:check": "oxfmt . --check",
     "lint": "oxlint .",
     "test": "vitest",
-    "test:ci": "vitest run --coverage --reporter=verbose"
+    "test:ci": "vitest run --coverage --reporter=verbose",
   },
   "engines": {
-    "node": ">=22.18.0"
-  }
+    "node": ">=22.18.0",
+  },
 }
 ```
 
@@ -121,7 +121,7 @@ Every tool package is a thin extension of the shared `eng/tools` configuration. 
 ```jsonc
 {
   "extends": "../tsconfig.json",
-  "include": ["src/**/*.ts", "test/**/*.ts"]
+  "include": ["src/**/*.ts", "test/**/*.ts"],
 }
 ```
 

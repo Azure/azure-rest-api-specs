@@ -183,14 +183,14 @@ HTTP finding against an ARM operation that follows the ARM rule.
 
 - Verify each operation uses the correct HTTP method and defines the correct success response codes:
 
-  | Method | Purpose                                      | Success Status Code |
-  | ------ | -------------------------------------------- | ------------------- |
-  | GET    | Read resource / list collection              | `200`               |
-  | PUT    | Create or replace resource                   | `200`, `201`        |
-  | PATCH  | Update resource (JSON Merge Patch)           | `200`; data-plane create-via-PATCH may use `201` |
-  | POST   | Create (service-assigned ID)                 | `201`               |
-  | POST   | Action                                       | `200`               |
-  | DELETE | Remove resource                              | `204` (avoid `404`) |
+  | Method | Purpose                            | Success Status Code                              |
+  | ------ | ---------------------------------- | ------------------------------------------------ |
+  | GET    | Read resource / list collection    | `200`                                            |
+  | PUT    | Create or replace resource         | `200`, `201`                                     |
+  | PATCH  | Update resource (JSON Merge Patch) | `200`; data-plane create-via-PATCH may use `201` |
+  | POST   | Create (service-assigned ID)       | `201`                                            |
+  | POST   | Action                             | `200`                                            |
+  | DELETE | Remove resource                    | `204` (avoid `404`)                              |
 
 - Data-plane long-running operations normally return `202-Accepted`. ARM uses
   verb-specific patterns: async PUT returns `200`/`201`, async PATCH may return
@@ -571,17 +571,18 @@ Example files referenced by `x-ms-examples` are a critical part of the spec — 
   member, inspect the value's location, discriminator role, and the enum's
   `x-ms-enum.modelAsString` value:
 
-  | Example value location | Enum shape | Severity | Reason |
-  | --- | --- | --- | --- |
-  | Response body, ordinary property | `modelAsString: true` | **Warning** | Extensible enums accept unknown strings; documentation and generated samples are misleading, but schema validation accepts the payload. |
-  | Response body, ordinary property | `modelAsString: false` | **Blocking** | Closed-enum validation rejects the payload. |
-  | Required polymorphic discriminator | Either | **Blocking** | The literal selects the response subtype; an unknown value breaks deserialization. |
-  | Request path or query parameter | Either | **Blocking** | The value is sent in the request URL and must match the operation contract. |
+  | Example value location             | Enum shape             | Severity     | Reason                                                                                                                                  |
+  | ---------------------------------- | ---------------------- | ------------ | --------------------------------------------------------------------------------------------------------------------------------------- |
+  | Response body, ordinary property   | `modelAsString: true`  | **Warning**  | Extensible enums accept unknown strings; documentation and generated samples are misleading, but schema validation accepts the payload. |
+  | Response body, ordinary property   | `modelAsString: false` | **Blocking** | Closed-enum validation rejects the payload.                                                                                             |
+  | Required polymorphic discriminator | Either                 | **Blocking** | The literal selects the response subtype; an unknown value breaks deserialization.                                                      |
+  | Request path or query parameter    | Either                 | **Blocking** | The value is sent in the request URL and must match the operation contract.                                                             |
 
   Do not claim that validators reject an ordinary response-body literal when
   its enum is `modelAsString: true`. The complete example-quality guidance is
   in
   [`.github/skills/azure-api-review/references/example-quality.md`](../skills/azure-api-review/references/example-quality.md#ex-payload-example-payload-correctness).
+
 - The `id` field in examples **MUST NOT** be an empty string (`"id": ""`). Empty resource IDs crash ModelValidation tooling and are never valid ARM resource identifiers.
 - String values **MUST NOT** have malformed content (e.g., extra closing braces `"{value}}"`, duplicate prefixes like `"$filter=$filter=..."`, stray trailing quotes or garbled characters).
 - The example response key **MUST** be `"headers"` (plural) — not `"header"` (singular).

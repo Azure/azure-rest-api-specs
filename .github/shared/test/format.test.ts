@@ -70,6 +70,26 @@ describe("shared formatter", () => {
     await format(["--check", ".github", "eng/tools"]);
   });
 
+  it("formats authored GitHub instructions, prompts and templates", async () => {
+    const markdownPaths = [
+      ".github/copilot-instructions.md",
+      ".github/instructions/example.instructions.md",
+      ".github/chatmodes/example.chatmode.md",
+      ".github/prompts/example.prompt.md",
+      ".github/PULL_REQUEST_TEMPLATE/example.md",
+    ];
+    for (const path of markdownPaths) await addFile(path, "#   Example\n");
+    const issueTemplate = await addFile(".github/ISSUE_TEMPLATE/example.yml", "name:   Example\n");
+
+    await expect(format(["--check", ".github"])).rejects.toMatchObject({ code: 1 });
+    await format(["--write", ".github"]);
+    for (const path of markdownPaths) {
+      expect(await readFile(join(folder, path), "utf8"), path).toBe("# Example\n");
+    }
+    expect(await readFile(issueTemplate, "utf8")).toBe("name: Example\n");
+    await format(["--check", ".github"]);
+  });
+
   it("keeps excluded content untouched even when explicitly requested", async () => {
     const paths = [
       "specification/example/stable/api.json",
@@ -82,12 +102,7 @@ describe("shared formatter", () => {
       // cspell:ignore agentics
       ".github/workflows/agentics-maintenance.yml",
       ".github/workflows/post-apiview.yml",
-      ".github/instructions/example.instructions.md",
-      ".github/ISSUE_TEMPLATE/example.yml",
       ".github/policies/example.yml",
-      ".github/prompts/example.md",
-      ".github/chatmodes/example.md",
-      ".github/PULL_REQUEST_TEMPLATE/example.md",
       ".github/skills/azsdk-common-example/SKILL.md",
       ".github/skills/evals/example/results/output.json",
       ".github/skills/evals/example/session-state/output.json",

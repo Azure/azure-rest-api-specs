@@ -182,7 +182,9 @@ retains `pnpm lint:tsc`, tests, and actionlint for workflow YAML.
 `.github/workflows/format.yaml` runs `pnpm format:check` once from the repository
 root for `.github` and `eng/tools`. Do not add formatting steps to package/OS
 test matrices. Package-local format commands inherit the root `.oxfmtrc.json`,
-including fixture, generated-file, and unmanaged-content exclusions.
+including formatting for locally maintained instructions, prompts, chatmodes,
+and issue/PR templates. Policies, fixtures, generated files, and externally synced
+content remain excluded.
 See [the engineering guide](../../eng/README.md#linting-and-formatting) for package
 exclusions that preserve the previous ESLint coverage.
 

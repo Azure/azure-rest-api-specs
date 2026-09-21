@@ -206,6 +206,7 @@ Retry-After: 10
 ---
 
 Notice what makes this good:
+
 - **One business outcome** (monitor DBs, alert in Teams) drives the
   entire scenario — not "create a watcher, then create a target."
 - **Four different resource types** (watcher, target, alert rule, action)
@@ -264,6 +265,7 @@ with a full suggested file:
 ```
 
 The file should include:
+
 1. **Service name and one-paragraph description** — what the service
    does, who it is for, and what problem it solves.
 2. **Hero scenarios** — the scenarios generated in Step 3.
