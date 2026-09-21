@@ -5634,7 +5634,8 @@
       "description": "Specifies the identity key store a machine is using.",
       "enum": [
         "TPM",
-        "Default"
+        "Default",
+        "TpmTransition"
       ],
       "x-ms-enum": {
         "name": "IdentityKeyStore",
@@ -5649,6 +5650,11 @@
             "name": "Default",
             "value": "Default",
             "description": "Default"
+          },
+          {
+            "name": "TpmTransition",
+            "value": "TpmTransition",
+            "description": "The machine is transitioning its identity key store to TPM."
           }
         ]
       }

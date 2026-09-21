@@ -527,6 +527,12 @@ union IdentityKeyStore {
    * Default
    */
   Default: "Default",
+
+  /**
+   * The machine is transitioning its identity key store to TPM.
+   */
+  @added(Versions.v2026_09_01)
+  TpmTransition: "TpmTransition",
 }
 
 /**
