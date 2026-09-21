@@ -35,8 +35,8 @@ These settings apply only when `--tag=package-2026-04-01` is specified on the co
 
 ```yaml $(tag) == 'package-2026-04-01'
 input-file:
-  - /stable/2026-04-01/portal.json
-  - /stable/2026-04-01/tenantConfiguration.json
+  - stable/2026-04-01/portal.json
+  - stable/2026-04-01/tenantConfiguration.json
 ```
 
 ### Tag: package-2025-04-01-preview
@@ -45,8 +45,8 @@ These settings apply only when `--tag=package-2025-04-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-04-01-preview'
 input-file:
-  - /preview/2025-04-01-preview/portal.json
-  - /preview/2025-04-01-preview/tenantConfiguration.json
+  - preview/2025-04-01-preview/portal.json
+  - preview/2025-04-01-preview/tenantConfiguration.json
 ```
 
 ### Tag: package-2022-12-01-preview
@@ -55,8 +55,8 @@ These settings apply only when `--tag=package-2022-12-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2022-12-01-preview'
 input-file:
-  - /preview/2022-12-01-preview/portal.json
-  - /preview/2022-12-01-preview/tenantConfiguration.json
+  - preview/2022-12-01-preview/portal.json
+  - preview/2022-12-01-preview/tenantConfiguration.json
 ```
 
 ### Tag: package-2020-09-01-preview
@@ -65,8 +65,8 @@ These settings apply only when `--tag=package-2020-09-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2020-09-01-preview'
 input-file:
-  - /preview/2020-09-01-preview/portal.json
-  - /preview/2020-09-01-preview/tenantConfiguration.json
+  - preview/2020-09-01-preview/portal.json
+  - preview/2020-09-01-preview/tenantConfiguration.json
 ```
 
 ### Tag: package-2019-01-01-preview
@@ -75,8 +75,8 @@ These settings apply only when `--tag=package-2019-01-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2019-01-01-preview'
 input-file:
-  - /preview/2019-01-01-preview/portal.json
-  - /preview/2019-01-01-preview/tenantConfiguration.json
+  - preview/2019-01-01-preview/portal.json
+  - preview/2019-01-01-preview/tenantConfiguration.json
 ```
 
 ### Tag: package-2018-10-01-preview
@@ -85,7 +85,7 @@ These settings apply only when `--tag=package-2018-10-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2018-10-01-preview'
 input-file:
-  - /preview/2018-10-01-preview/portal.json
+  - preview/2018-10-01-preview/portal.json
 ```
 
 ### Tag: package-2015-08-01-preview
@@ -94,7 +94,7 @@ These settings apply only when `--tag=package-2015-08-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2015-08-01-preview'
 input-file:
-  - /preview/2015-08-01-preview/portal.json
+  - preview/2015-08-01-preview/portal.json
 ```
 
 ---
