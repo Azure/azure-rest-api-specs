@@ -5789,9 +5789,8 @@ model DiskInformation {
   /**
    * Size of the disk in GB.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Wire name is fixed by the existing BMS data contract, which spells the unit as GB."
   @added(Versions.v2026_10_01)
-  diskSizeInGB?: int32;
+  diskSizeInGb?: int32;
 
   /**
    * Storage type of the disk.
