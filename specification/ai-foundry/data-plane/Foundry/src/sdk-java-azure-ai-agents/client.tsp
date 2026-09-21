@@ -1024,10 +1024,11 @@ using Azure.AI.Projects;
 // Type overrides
 // --------------------------------------------------------------------------------
 
-// Keep persisted voice-item Unix timestamps as Java longs. Treating the encoded
-// utcDateTime as OffsetDateTime conflicts with the generated integer JSON reader
-// across the polymorphic item hierarchy.
-@@alternateType(VoiceConversationItemPersistence.created_at, int64, "java");
+@@alternateType(
+  OpenAI.RealtimeServerEventInputAudioBufferDtmfEventReceived.received_at,
+  FoundryTimestamp,
+  "java"
+);
 
 // The original type is string | OpenAI.ToolChoiceParam . Making this just string
 // Prevents the emission of the full ToolChoiceParam class tree in Java, which
