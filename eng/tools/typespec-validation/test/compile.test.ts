@@ -1,5 +1,4 @@
-import { mockAll, mockFolder } from "./mocks.ts";
-mockAll();
+import { mockFolder } from "./mocks.ts";
 
 import { afterEach, beforeEach, describe, expect, it, type MockInstance, vi } from "vitest";
 
@@ -69,6 +68,27 @@ describe("compile", function () {
     await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
       success: true,
     });
+  });
+
+  it.each([
+    ["ANSI colors", `\u001b[32m${swaggerPath}\u001b[0m`],
+    ["OSC hyperlinks with BEL", `\u001b]8;;file:///foo.json\u0007${swaggerPath}\u001b]8;;\u0007`],
+    [
+      "OSC hyperlinks with ST",
+      `\u001b]8;;file:///foo.json\u001b\\${swaggerPath}\u001b]8;;\u001b\\`,
+    ],
+  ])("should recognize generated paths wrapped in %s", async (_name, output) => {
+    runPnpmSpy.mockResolvedValue([null, `${output}\r\n`, ""]);
+    vi.mocked(nativeGlob.globFiles).mockResolvedValue([swaggerPath]);
+    vi.mocked(fsPromises.readFile).mockResolvedValue('{"info": {"x-typespec-generated": true}}');
+
+    const result = await new CompileRule().execute(mockFolder);
+
+    expect(result.success).toBe(true);
+    expect(nativeGlob.globFiles).toHaveBeenCalledWith("data-plane/Azure.Foo/**/foo.json", {
+      exclude: ["**/examples/**"],
+    });
+    expect(result.stdOutput).toContain(`\nGenerated Swaggers:\n${path.normalize(swaggerPath)}\n`);
   });
 
   it("should succeed if output has no generated swaggers", async function () {
