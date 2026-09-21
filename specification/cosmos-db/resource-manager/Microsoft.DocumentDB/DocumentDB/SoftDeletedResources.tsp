@@ -316,7 +316,6 @@ interface SoftDeletedDatabaseAccounts {
   /**
    * Restores a soft-deleted Azure Cosmos DB database account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Explicit operationId needed for separate Restore/Purge SDK methods"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}?softDeleteActionKind=RestoreSoftDeletedResource")
   @delete
   restore(
@@ -348,7 +347,6 @@ interface SoftDeletedDatabaseAccounts {
   /**
    * Permanently deletes (purges) a soft-deleted Azure Cosmos DB database account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Explicit operationId needed for separate Restore/Purge SDK methods"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}?softDeleteActionKind=PermanentDeleteResource")
   @delete
   purge(
@@ -445,7 +443,6 @@ interface SoftDeletedSqlDatabases {
   /**
    * Restores a soft-deleted Azure Cosmos DB SQL database.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Explicit operationId needed for separate Restore/Purge SDK methods"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases/{databaseName}?softDeleteActionKind=RestoreSoftDeletedResource")
   @delete
   restore(
@@ -484,7 +481,6 @@ interface SoftDeletedSqlDatabases {
   /**
    * Permanently deletes a soft-deleted Azure Cosmos DB SQL database.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Explicit operationId needed for separate Restore/Purge SDK methods"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases/{databaseName}?softDeleteActionKind=PermanentDeleteResource")
   @delete
   purge(
@@ -602,7 +598,6 @@ interface SoftDeletedSqlContainers {
   /**
    * Restores a soft-deleted Azure Cosmos DB SQL container to active state.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Explicit operationId needed for separate Restore/Purge SDK methods"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases/{databaseName}/softDeletedSqlContainers/{containerName}?softDeleteActionKind=RestoreSoftDeletedResource")
   @delete
   restore(
@@ -648,7 +643,6 @@ interface SoftDeletedSqlContainers {
   /**
    * Permanently deletes a soft-deleted Azure Cosmos DB SQL container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Explicit operationId needed for separate Restore/Purge SDK methods"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases/{databaseName}/softDeletedSqlContainers/{containerName}?softDeleteActionKind=PermanentDeleteResource")
   @delete
   purge(

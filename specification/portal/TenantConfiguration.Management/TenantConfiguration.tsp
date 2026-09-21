@@ -56,7 +56,6 @@ interface ListTenantConfigurationViolationsOperations {
   /**
    * Gets list of items that violate tenant's configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   @route("/providers/Microsoft.Portal/listTenantConfigurationViolations")
   @armResourceCollectionAction
   @post

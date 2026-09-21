@@ -123,7 +123,7 @@ union AssociationEntityProvisioningState {
   "java"
 );
 @@clientLocation(
-  ApiManagementServiceResources.performConnectivityCheckAsync,
+  Microsoft.ApiManagement.ApiManagementServiceResources.performConnectivityCheckAsync,
   "ResourceProviders",
   "java"
 );
@@ -265,7 +265,7 @@ op replacePurge(
   "go"
 );
 @@clientLocation(
-  ApiManagementServiceResources.performConnectivityCheckAsync,
+  Microsoft.ApiManagement.ApiManagementServiceResources.performConnectivityCheckAsync,
   "Client",
   "go"
 );

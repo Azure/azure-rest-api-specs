@@ -196,6 +196,19 @@ interface Machines {
   >;
 
   /**
+   * The operation to Setup Machine Extensions.
+   */
+  @tag("MachineExtensions Setup")
+  @action("addExtensions")
+  setupExtensions is ArmResourceActionAsync<
+    Machine,
+    SetupExtensionRequest,
+    ArmResponse<SetupExtensionRequest>,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmCombinedLroHeaders<FinalResult = SetupExtensionRequest>
+  >;
+
+  /**
    * The operation to get network information of hybrid machine
    */
   @tag("MachineNetworkProfile")
@@ -216,19 +229,6 @@ interface Machines {
     Machine,
     void,
     ArmResponse<PrivateLinkScopeValidationDetails>
-  >;
-
-  /**
-   * The operation to Setup Machine Extensions.
-   */
-  @tag("MachineExtensions Setup")
-  @action("addExtensions")
-  setupExtensions is ArmResourceActionAsync<
-    Machine,
-    SetupExtensionRequest,
-    ArmResponse<SetupExtensionRequest>,
-    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmCombinedLroHeaders<FinalResult = SetupExtensionRequest>
   >;
 }
 
