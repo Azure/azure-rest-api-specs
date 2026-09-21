@@ -80299,7 +80299,10 @@ components:
         source_excerpt:
           type: string
           minLength: 1
-          description: Short supporting quotation from the generated evaluation specification.
+          description: Supporting text from the generated evaluation specification. For service-generated explanations with a source_reference, the service extracts this exact text from the referenced snapshot after the model selects a source block. Manual text without a resolvable reference is not automatically verified.
+        source_reference:
+          $ref: '#/components/schemas/RubricSourceReference'
+          description: Optional exact source location. Generation assigns the dataset, digest, and byte range, not the model. Preserved dimensions retain their original snapshot reference. A resolvable quotation does not prove that it supports a subsequently edited criterion.
       description: Concise authoring explanation, grounded in the evaluation specification rather than private model reasoning. Not an empirical claim that the weight is calibrated.
       x-ms-foundry-meta:
         required_previews:
@@ -80511,6 +80514,41 @@ components:
             $ref: '#/components/schemas/RubricRequirementResult'
           description: Judgments of all configured requirements, including N/A and insufficient-evidence results.
       description: Explainable quality and acceptance results for an explicitly opted-in rubric. A high quality score does not compensate for a violated requirement.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
+    RubricSourceReference:
+      type: object
+      required:
+        - dataset_name
+        - dataset_version
+        - content_sha256
+        - start_byte
+        - end_byte
+      properties:
+        dataset_name:
+          type: string
+          minLength: 1
+          description: Name of the generation-artifact dataset containing the snapshot.
+        dataset_version:
+          type: string
+          minLength: 1
+          description: Pinned version of the generation-artifact dataset. Never a latest-version selector.
+        content_sha256:
+          type: string
+          pattern: ^[0-9a-f]{64}$
+          description: Lowercase SHA-256 of the snapshot content encoded as UTF-8, not of the JSONL envelope.
+        start_byte:
+          type: integer
+          format: int64
+          minimum: 0
+          description: Inclusive UTF-8 byte offset of the source excerpt.
+        end_byte:
+          type: integer
+          format: int64
+          minimum: 1
+          description: Exclusive UTF-8 byte offset of the source excerpt. Must be greater than start_byte and within the referenced snapshot.
+      description: A reproducible pointer into a source_snapshot row in a versioned generation-artifact dataset. The digest identifies the snapshot content; byte offsets select exact UTF-8 text. This establishes text integrity, not semantic relevance.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview

@@ -172,6 +172,31 @@ model RubricRequirement {
   applies_when?: string;
 }
 
+@doc("A reproducible pointer into a source_snapshot row in a versioned generation-artifact dataset. The digest identifies the snapshot content; byte offsets select exact UTF-8 text. This establishes text integrity, not semantic relevance.")
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
+model RubricSourceReference {
+  @doc("Name of the generation-artifact dataset containing the snapshot.")
+  @minLength(1)
+  dataset_name: string;
+
+  @doc("Pinned version of the generation-artifact dataset. Never a latest-version selector.")
+  @minLength(1)
+  dataset_version: string;
+
+  @doc("Lowercase SHA-256 of the snapshot content encoded as UTF-8, not of the JSONL envelope.")
+  @pattern("^[0-9a-f]{64}$")
+  content_sha256: string;
+
+  @doc("Inclusive UTF-8 byte offset of the source excerpt.")
+  @minValue(0)
+  start_byte: int64;
+
+  @doc("Exclusive UTF-8 byte offset of the source excerpt. Must be greater than start_byte and within the referenced snapshot.")
+  @minValue(1)
+  end_byte: int64;
+}
+
 @doc("Concise authoring explanation, grounded in the evaluation specification rather than private model reasoning. Not an empirical claim that the weight is calibrated.")
 @added(Versions.v1)
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
@@ -184,9 +209,12 @@ model RubricDimensionExplanation {
   @minLength(1)
   weight_rationale?: string;
 
-  @doc("Short supporting quotation from the generated evaluation specification.")
+  @doc("Supporting text from the generated evaluation specification. For service-generated explanations with a source_reference, the service extracts this exact text from the referenced snapshot after the model selects a source block. Manual text without a resolvable reference is not automatically verified.")
   @minLength(1)
   source_excerpt?: string;
+
+  @doc("Optional exact source location. Generation assigns the dataset, digest, and byte range, not the model. Preserved dimensions retain their original snapshot reference. A resolvable quotation does not prove that it supports a subsequently edited criterion.")
+  source_reference?: RubricSourceReference;
 }
 
 @doc("The judgment of an explicit rubric requirement.")
