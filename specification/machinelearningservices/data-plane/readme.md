@@ -138,7 +138,7 @@ input-file:
   - RunHistory/stable/2019-08-01/runHistory.json
   - Datastore/stable/2019-08-01/datastore.json
   - Artifact/stable/2019-08-01/artifact.json
-  - HyperDrive/stavle/2019-08-01/hyperdrive.json
+  - HyperDrive/stable/2019-08-01/hyperdrive.json
 ```
 
 ---
