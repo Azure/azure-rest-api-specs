@@ -72,11 +72,16 @@ Below are code convention we strive to follow in `eng` directory:
   intentionally disabled; lint/type checks still report unused imports.
 - Swagger/OpenAPI definitions and examples under `specification/**/*.json` are
   excluded from Oxfmt. The custom Prettier plugin and root Prettier dependency
-  remain available to format these JSON files separately.
+  remain in use for these JSON files, preserving numeric literals such as `100.00`.
+  The existing Swagger PrettierCheck pipeline and root `.prettierrc.json` are
+  unchanged. Run `pnpm exec prettier --write <path-to-example.json>` to format an
+  example.
   TypeSpec validation retains `tsp format` for `.tsp` files and uses Oxfmt for
   `tspconfig.yaml` with a line width of 80.
-- Install the recommended Oxc VS Code extension for tooling formatting, and retain
-  the TypeSpec extension for `.tsp` files.
+- Install the recommended Oxc VS Code extension for tooling formatting, Prettier
+  for Swagger/example JSON, and the TypeSpec extension for `.tsp` files. For JSON
+  excluded from Oxfmt, use **Format Document With... > Prettier** without changing
+  the default formatter for tooling files.
 
 [pnpm]: https://pnpm.io
 [Design guidelines for spec repos validation tooling]: https://dev.azure.com/azure-sdk/internal/_wiki/wikis/internal.wiki/1153/Design-guidelines-for-spec-repos-validation-tooling
