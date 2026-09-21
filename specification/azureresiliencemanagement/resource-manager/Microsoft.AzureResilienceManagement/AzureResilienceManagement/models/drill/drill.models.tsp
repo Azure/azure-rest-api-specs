@@ -202,6 +202,7 @@ model ZonalDrill is ProxyResource<ZonalDrillProperties> {
 }
 
 @doc("Definition of Regional Drill properties.")
+@removed(Versions.v2026_10_01)
 model RegionalDrillProperties extends DrillProperties {
   @doc("The discriminator for the Drill object hierarchy.")
   @removed(Versions.v2026_08_31_preview)
@@ -219,6 +220,7 @@ model RegionalDrillProperties extends DrillProperties {
  */
 @tenantResource
 @doc("Regional Drill resource")
+@removed(Versions.v2026_10_01)
 model RegionalDrill is ProxyResource<RegionalDrillProperties> {
   @doc("The name of the Regional Drill")
   @pattern("^[a-zA-Z0-9-]{3,24}$")

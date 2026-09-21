@@ -578,9 +578,6 @@
         "x-ms-examples": {
           "DrillResources_List_MaximumSet": {
             "$ref": "./examples/DrillResources_List_MaximumSet_Gen.json"
-          },
-          "DrillResources_List_Regional": {
-            "$ref": "./examples/DrillResources_List_Regional.json"
           }
         },
         "x-ms-pageable": {
@@ -636,9 +633,6 @@
         "x-ms-examples": {
           "DrillResources_Get_MaximumSet": {
             "$ref": "./examples/DrillResources_Get_MaximumSet_Gen.json"
-          },
-          "DrillResources_Get_Regional": {
-            "$ref": "./examples/DrillResources_Get_Regional.json"
           }
         }
       }
@@ -5219,6 +5213,11 @@
         "recoveryPlan": {
           "$ref": "#/definitions/ExtensionObjectState",
           "description": "Recovery plan not present."
+        },
+        "healthModelAssociatedWithServiceGroup": {
+          "$ref": "#/definitions/ExtensionObjectState",
+          "description": "Indicates whether any entity in the selected Azure Health Model references the Drill Service Group through properties.signalGroups.azureResource.azureResourceId.",
+          "readOnly": true
         }
       }
     },
@@ -6651,8 +6650,7 @@
       "type": "string",
       "description": "Enum for Drill type object hierarchy.",
       "enum": [
-        "Zonal",
-        "Regional"
+        "Zonal"
       ],
       "x-ms-enum": {
         "name": "DrillType",
@@ -6662,11 +6660,6 @@
             "name": "Zonal",
             "value": "Zonal",
             "description": "Zonal Drill."
-          },
-          {
-            "name": "Regional",
-            "value": "Regional",
-            "description": "Regional Drill."
           }
         ]
       }
@@ -7581,14 +7574,14 @@
           "$ref": "#/definitions/AssociatedIdentity",
           "description": "Identity that the Drill uses to read the Azure Health Model. The Drill is granted Reader on the Health Model for this identity."
         },
-        "discoveryRuleId": {
+        "healthModelId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Full ARM Id of the discovery rule inside the Azure Health Model. The parent Health Model is derived from this Id; it is the only identifier accepted on the wire.",
+          "description": "Full ARM Id of the Azure Health Model selected for Drill monitoring.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.CloudHealth/healthmodels/discoveryrules"
+                "type": "Microsoft.CloudHealth/healthmodels"
               }
             ]
           }
@@ -7596,7 +7589,7 @@
       },
       "required": [
         "identity",
-        "discoveryRuleId"
+        "healthModelId"
       ]
     },
     "HealthModelMonitoringPropertiesUpdate": {
@@ -7607,14 +7600,14 @@
           "$ref": "#/definitions/AssociatedIdentityUpdate",
           "description": "Identity that the Drill uses to read the Azure Health Model. The Drill is granted Reader on the Health Model for this identity."
         },
-        "discoveryRuleId": {
+        "healthModelId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Full ARM Id of the discovery rule inside the Azure Health Model. The parent Health Model is derived from this Id; it is the only identifier accepted on the wire.",
+          "description": "Full ARM Id of the Azure Health Model selected for Drill monitoring.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {
-                "type": "Microsoft.CloudHealth/healthmodels/discoveryrules"
+                "type": "Microsoft.CloudHealth/healthmodels"
               }
             ]
           }
@@ -9832,94 +9825,6 @@
           "format": "date-time",
           "description": "Time when the refresh operation was last performed."
         }
-      }
-    },
-    "RegionalDrill": {
-      "type": "object",
-      "description": "Regional Drill resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RegionalDrillProperties",
-          "description": "The resource-specific properties for this resource."
-        },
-        "identity": {
-          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "RegionalDrillProperties": {
-      "type": "object",
-      "description": "Definition of Regional Drill properties.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DrillProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "Regional"
-    },
-    "RegionalDrillResourceProperties": {
-      "type": "object",
-      "description": "Properties of a resource in a regional Resiliency Drill.",
-      "properties": {
-        "regionalResiliencyStatus": {
-          "$ref": "#/definitions/RegionalResiliencyStatus",
-          "description": "Regional resiliency status reported by the selected regional protection solution.\nResilient corresponds to an available true posture value; NotResilient corresponds to an available false value.\nOmitted when the posture is unknown or unavailable; unavailable data is not reported as NotResilient.",
-          "readOnly": true
-        },
-        "replicationMode": {
-          "$ref": "#/definitions/ReplicationMode",
-          "description": "Replication mode of the selected regional protection solution.\nOmitted when no applicable mode is available.",
-          "readOnly": true
-        },
-        "advisorRegionalRecommendationId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Azure resource ID of the matching regional Advisor recommendation instance.\nThe recommendation type is identified separately by advisorRecommendationTypeId.\nOmitted when no matching recommendation exists.",
-          "readOnly": true,
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Advisor/recommendations"
-              }
-            ]
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DrillResourceProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "Regional"
-    },
-    "RegionalResiliencyStatus": {
-      "type": "string",
-      "description": "Regional resiliency posture reported by the selected protection solution.",
-      "enum": [
-        "Resilient",
-        "NotResilient"
-      ],
-      "x-ms-enum": {
-        "name": "RegionalResiliencyStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Resilient",
-            "value": "Resilient",
-            "description": "The available protection-solution posture reports the resource as regionally resilient."
-          },
-          {
-            "name": "NotResilient",
-            "value": "NotResilient",
-            "description": "The available protection-solution posture reports the resource as not regionally resilient."
-          }
-        ]
       }
     },
     "RelativeResourceCompositionState": {
