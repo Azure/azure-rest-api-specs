@@ -1,5 +1,5 @@
 {
-  "operationId": "Clusters_CreateOrUpdate",
+  "operationId": "Clusters_CreateOrReplace",
   "title": "Create a HorizonDB cluster with customer-managed key data encryption",
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
@@ -23,9 +23,9 @@
         },
         "dataEncryption": {
           "type": "AzureKeyVault",
-          "primaryKeyUri": "https://primary-key-vault.vault.azure.net/keys/horizondb-primary-key/11111111111111111111111111111111",
+          "primaryKeyUri": "https://primary-key-vault.vault.azure.net/keys/horizondb-primary-key",
           "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/identity-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/primary-encryption-identity",
-          "geoBackupKeyUri": "https://geo-key-vault.vault.azure.net/keys/horizondb-geo-backup-key/22222222222222222222222222222222",
+          "geoBackupKeyUri": "https://geo-key-vault.vault.azure.net/keys/horizondb-geo-backup-key",
           "geoBackupUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/identity-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/geo-backup-encryption-identity"
         }
       }
@@ -67,21 +67,16 @@
           },
           "dataEncryption": {
             "type": "AzureKeyVault",
-            "primaryKeyUri": "https://primary-key-vault.vault.azure.net/keys/horizondb-primary-key/11111111111111111111111111111111",
+            "primaryKeyUri": "https://primary-key-vault.vault.azure.net/keys/horizondb-primary-key",
             "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/identity-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/primary-encryption-identity",
             "primaryEncryptionKeyStatus": "Valid",
-            "geoBackupKeyUri": "https://geo-key-vault.vault.azure.net/keys/horizondb-geo-backup-key/22222222222222222222222222222222",
+            "geoBackupKeyUri": "https://geo-key-vault.vault.azure.net/keys/horizondb-geo-backup-key",
             "geoBackupUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/identity-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/geo-backup-encryption-identity",
             "geoBackupEncryptionKeyStatus": "Valid"
           },
           "state": "Updating",
           "provisioningState": "InProgress",
-          "readWritePool": {
-            "zoneRedundancy": {
-              "state": "NotProtected",
-              "unavailableReason": "No read-write pool is designated."
-            }
-          }
+          "readWritePool": {}
         }
       }
     },
@@ -120,21 +115,16 @@
           },
           "dataEncryption": {
             "type": "AzureKeyVault",
-            "primaryKeyUri": "https://primary-key-vault.vault.azure.net/keys/horizondb-primary-key/11111111111111111111111111111111",
+            "primaryKeyUri": "https://primary-key-vault.vault.azure.net/keys/horizondb-primary-key",
             "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/identity-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/primary-encryption-identity",
             "primaryEncryptionKeyStatus": "Valid",
-            "geoBackupKeyUri": "https://geo-key-vault.vault.azure.net/keys/horizondb-geo-backup-key/22222222222222222222222222222222",
+            "geoBackupKeyUri": "https://geo-key-vault.vault.azure.net/keys/horizondb-geo-backup-key",
             "geoBackupUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/identity-resource-group/providers/Microsoft.ManagedIdentity/userAssignedIdentities/geo-backup-encryption-identity",
             "geoBackupEncryptionKeyStatus": "Valid"
           },
           "state": "Provisioning",
           "provisioningState": "Provisioning",
-          "readWritePool": {
-            "zoneRedundancy": {
-              "state": "NotProtected",
-              "unavailableReason": "No read-write pool is designated."
-            }
-          }
+          "readWritePool": {}
         }
       }
     }

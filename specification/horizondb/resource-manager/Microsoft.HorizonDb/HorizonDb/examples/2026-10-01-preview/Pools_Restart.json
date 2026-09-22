@@ -9,13 +9,6 @@
     "api-version": "2026-10-01-preview"
   },
   "responses": {
-    "202": {
-      "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/pools/example-pool-01/operationStatuses/33333333-3333-3333-3333-333333333333",
-        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/pools/example-pool-01/operationResults/33333333-3333-3333-3333-333333333333",
-        "Retry-After": 10
-      }
-    },
     "200": {
       "body": {
         "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/pools/example-pool-01",
@@ -24,6 +17,13 @@
         "properties": {
           "state": "Ready",
           "allocatedNodeCount": 2,
+          "highAvailability": {
+            "state": "ZoneRedundant",
+            "zoneRedundancy": {
+              "mode": "BestEffort",
+              "state": "Achieved"
+            }
+          },
           "parameterGroup": {
             "parameterGroupResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/parameterGroups/production-parameters",
             "applyMethod": "Immediate",
@@ -31,6 +31,13 @@
           },
           "provisioningState": "Succeeded"
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/pools/example-pool-01/operationStatuses/33333333-3333-3333-3333-333333333333",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.HorizonDb/clusters/examplecluster/pools/example-pool-01/operationResults/33333333-3333-3333-3333-333333333333",
+        "Retry-After": 10
       }
     }
   }

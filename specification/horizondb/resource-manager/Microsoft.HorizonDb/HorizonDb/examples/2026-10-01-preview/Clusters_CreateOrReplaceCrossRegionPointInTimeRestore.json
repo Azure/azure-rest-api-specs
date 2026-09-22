@@ -1,17 +1,18 @@
 {
-  "operationId": "Clusters_CreateOrUpdate",
-  "title": "Restore a HorizonDB cluster to a point in time",
+  "operationId": "Clusters_CreateOrReplace",
+  "title": "Restore a HorizonDB cluster across Azure regions from the latest available backup",
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "example-resource-group",
-    "clusterName": "restored-cluster",
+    "clusterName": "cross-region-restored-cluster",
     "api-version": "2026-10-01-preview",
     "resource": {
-      "location": "eastus2",
+      "location": "westus2",
       "properties": {
         "creationMode": "PointInTimeRestore",
         "pointInTimeUtc": "2026-07-27T12:00:00Z",
         "creationSourceClusterResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/source-cluster",
+        "creationSourceClusterLocation": "eastus2",
         "network": {
           "publicAccess": "Disabled"
         },
@@ -25,19 +26,19 @@
   "responses": {
     "200": {
       "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/operationStatuses/33333333-3333-3333-3333-333333333333?api-version=2026-10-01-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/westus2/operationStatuses/44444444-4444-4444-4444-444444444444?api-version=2026-10-01-preview",
         "Retry-After": "30"
       },
       "body": {
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/restored-cluster",
-        "name": "restored-cluster",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/cross-region-restored-cluster",
+        "name": "cross-region-restored-cluster",
         "type": "Microsoft.HorizonDb/clusters",
-        "location": "eastus2",
+        "location": "westus2",
         "properties": {
           "postgreSqlVersion": "17",
           "creationMode": "PointInTimeRestore",
-          "pointInTimeUtc": "2026-07-27T12:00:00Z",
           "creationSourceClusterResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/source-cluster",
+          "creationSourceClusterLocation": "eastus2",
           "network": {
             "publicAccess": "Disabled"
           },
@@ -47,30 +48,25 @@
           },
           "state": "Provisioning",
           "provisioningState": "Provisioning",
-          "readWritePool": {
-            "zoneRedundancy": {
-              "state": "NotProtected",
-              "unavailableReason": "No read-write pool is designated."
-            }
-          }
+          "readWritePool": {}
         }
       }
     },
     "201": {
       "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/operationStatuses/33333333-3333-3333-3333-333333333333?api-version=2026-10-01-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/westus2/operationStatuses/44444444-4444-4444-4444-444444444444?api-version=2026-10-01-preview",
         "Retry-After": "30"
       },
       "body": {
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/restored-cluster",
-        "name": "restored-cluster",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/cross-region-restored-cluster",
+        "name": "cross-region-restored-cluster",
         "type": "Microsoft.HorizonDb/clusters",
-        "location": "eastus2",
+        "location": "westus2",
         "properties": {
           "postgreSqlVersion": "17",
           "creationMode": "PointInTimeRestore",
-          "pointInTimeUtc": "2026-07-27T12:00:00Z",
           "creationSourceClusterResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/source-cluster",
+          "creationSourceClusterLocation": "eastus2",
           "network": {
             "publicAccess": "Disabled"
           },
@@ -80,12 +76,7 @@
           },
           "state": "Provisioning",
           "provisioningState": "Provisioning",
-          "readWritePool": {
-            "zoneRedundancy": {
-              "state": "NotProtected",
-              "unavailableReason": "No read-write pool is designated."
-            }
-          }
+          "readWritePool": {}
         }
       }
     }

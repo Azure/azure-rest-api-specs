@@ -70,6 +70,9 @@
       "name": "MicrosoftEntraAdministrators"
     },
     {
+      "name": "Authentications"
+    },
+    {
       "name": "PasswordAuthentications"
     },
     {
@@ -488,11 +491,11 @@
         }
       },
       "put": {
-        "operationId": "Clusters_CreateOrUpdate",
+        "operationId": "Clusters_CreateOrReplace",
         "tags": [
           "Clusters"
         ],
-        "description": "Creates a new HorizonDB cluster or replaces an existing cluster. PointInTimeRestore creates the new Cluster resource and hydrates its service-owned database storage from an available source backup. It does not clone source pools, Pool-scoped endpoints, firewall rules, parameter-group associations, or other child resources. The new Cluster receives its service-generated Cluster-scoped Endpoint named cluster. For point-in-time restore, postgreSqlVersion must be omitted because the service obtains it from backup metadata; all other new-cluster configuration comes from the request or service defaults. For same-location point-in-time restore, creationSourceClusterLocation is optional. For cross-location point-in-time restore, creationSourceClusterLocation is required and must identify the source cluster's Azure location.",
+        "description": "Creates a new HorizonDB cluster or replaces an existing cluster. PointInTimeRestore creates the new Cluster resource and hydrates its service-owned database storage from an available source backup. It does not clone source pools, Pool-scoped endpoints, firewall rules, parameter-group associations, or other child resources. The new Cluster receives its service-generated Cluster-scoped Endpoint named cluster. For restore, postgreSqlVersion must be omitted because the service obtains it from backup metadata; all other new-cluster configuration comes from the request or service defaults. Same-location restore requires and honors pointInTimeUtc and allows creationSourceClusterLocation to be omitted. Cross-location restore requires creationSourceClusterLocation to identify the source cluster's Azure location and requires pointInTimeUtc, but ignores the supplied timestamp and restores the latest available backup. Cross-location responses omit pointInTimeUtc.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -567,19 +570,19 @@
         },
         "x-ms-examples": {
           "Create a HorizonDB cluster with customer-managed key data encryption": {
-            "$ref": "./examples/Clusters_CreateOrUpdateWithDataEncryption.json"
+            "$ref": "./examples/Clusters_CreateOrReplaceWithDataEncryption.json"
           },
           "Create a PostgreSQL 18 HorizonDB cluster with minimum configuration and service defaults": {
-            "$ref": "./examples/Clusters_CreateOrUpdateMinimumDefaults.json"
+            "$ref": "./examples/Clusters_CreateOrReplaceMinimumDefaults.json"
           },
-          "Create or update a HorizonDB cluster": {
-            "$ref": "./examples/Clusters_CreateOrUpdate.json"
+          "Create or replace a HorizonDB cluster": {
+            "$ref": "./examples/Clusters_CreateOrReplace.json"
           },
-          "Restore a HorizonDB cluster across Azure regions to a point in time": {
-            "$ref": "./examples/Clusters_CreateOrUpdateCrossRegionPointInTimeRestore.json"
+          "Restore a HorizonDB cluster across Azure regions from the latest available backup": {
+            "$ref": "./examples/Clusters_CreateOrReplaceCrossRegionPointInTimeRestore.json"
           },
           "Restore a HorizonDB cluster to a point in time": {
-            "$ref": "./examples/Clusters_CreateOrUpdatePointInTimeRestore.json"
+            "$ref": "./examples/Clusters_CreateOrReplacePointInTimeRestore.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -736,9 +739,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/authentications": {
       "get": {
-        "operationId": "PasswordAuthentications_List",
+        "operationId": "Authentications_List",
         "tags": [
-          "PasswordAuthentications"
+          "Authentications"
         ],
         "description": "Lists the two service-created authentication configurations for the cluster: passwordMethod and microsoftEntra.",
         "parameters": [
@@ -778,7 +781,7 @@
         },
         "x-ms-examples": {
           "List the service-created authentication methods": {
-            "$ref": "./examples/PasswordAuthentications_List.json"
+            "$ref": "./examples/Authentications_List.json"
           }
         },
         "x-ms-pageable": {
@@ -1241,7 +1244,7 @@
         }
       },
       "put": {
-        "operationId": "ChangeDataCaptureCapabilities_CreateOrUpdate",
+        "operationId": "ChangeDataCaptureCapabilities_CreateOrReplace",
         "tags": [
           "ChangeDataCaptureCapabilities"
         ],
@@ -1309,7 +1312,7 @@
         },
         "x-ms-examples": {
           "Enable the cluster change data capture capability": {
-            "$ref": "./examples/ChangeDataCaptureCapabilities_CreateOrUpdate.json"
+            "$ref": "./examples/ChangeDataCaptureCapabilities_CreateOrReplace.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1577,7 +1580,7 @@
         }
       },
       "put": {
-        "operationId": "ChangeDataCaptureConfigurations_CreateOrUpdate",
+        "operationId": "ChangeDataCaptureConfigurations_CreateOrReplace",
         "tags": [
           "ChangeDataCaptureConfigurations"
         ],
@@ -1666,7 +1669,7 @@
         },
         "x-ms-examples": {
           "Enroll a database for Microsoft Fabric Mirroring": {
-            "$ref": "./examples/ChangeDataCaptureConfigurations_CreateOrUpdate.json"
+            "$ref": "./examples/ChangeDataCaptureConfigurations_CreateOrReplace.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1954,7 +1957,7 @@
         }
       },
       "put": {
-        "operationId": "ChangeDataCaptureDestinations_CreateOrUpdate",
+        "operationId": "ChangeDataCaptureDestinations_CreateOrReplace",
         "tags": [
           "ChangeDataCaptureDestinations"
         ],
@@ -2043,7 +2046,7 @@
         },
         "x-ms-examples": {
           "Create a Microsoft Fabric change data capture destination": {
-            "$ref": "./examples/ChangeDataCaptureDestinations_CreateOrUpdate.json"
+            "$ref": "./examples/ChangeDataCaptureDestinations_CreateOrReplace.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2446,7 +2449,7 @@
         }
       },
       "put": {
-        "operationId": "IdentityAssignments_CreateOrUpdate",
+        "operationId": "IdentityAssignments_CreateOrReplace",
         "tags": [
           "IdentityAssignments"
         ],
@@ -2545,7 +2548,7 @@
         },
         "x-ms-examples": {
           "Create a change data capture identity assignment for a UAMI attached to the parent cluster": {
-            "$ref": "./examples/IdentityAssignments_CreateOrUpdate.json"
+            "$ref": "./examples/IdentityAssignments_CreateOrReplace.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3228,11 +3231,11 @@
         }
       },
       "put": {
-        "operationId": "MicrosoftEntraAdministrators_CreateOrUpdate",
+        "operationId": "MicrosoftEntraAdministrators_CreateOrReplace",
         "tags": [
           "MicrosoftEntraAdministrators"
         ],
-        "description": "Creates or updates a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.",
+        "description": "Creates or replaces a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -3315,7 +3318,7 @@
         },
         "x-ms-examples": {
           "Create or replace a Microsoft Entra administrator for a HorizonDB cluster": {
-            "$ref": "./examples/MicrosoftEntraAdministrators_CreateOrUpdate.json"
+            "$ref": "./examples/MicrosoftEntraAdministrators_CreateOrReplace.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3511,11 +3514,11 @@
         }
       },
       "put": {
-        "operationId": "Pools_CreateOrUpdate",
+        "operationId": "Pools_CreateOrReplace",
         "tags": [
           "Pools"
         ],
-        "description": "Creates a new HorizonDB pool or updates an existing pool, including its desired node allocation, compute model, or associated parameter group. A pool name can be the same as its parent cluster name. Creating a pool also creates exactly one service-managed Pool-scoped ReadOnly Endpoint representing that Pool and its network boundary. The Endpoint's associatedResourceId identifies the Pool, and the Endpoint cannot outlive or be deleted independently from it. When the first pool is created, the service automatically uses it to host the cluster's read-write node when an eligible node is available. This API version supports at most one pool per cluster; an attempt to create another pool is rejected with 409 Conflict. Every pool must be associated with a parameter group, so parameterGroup, parameterGroupResourceId, and applyMethod are required. applyMethod controls when dynamic parameter changes become effective; static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. Subtype-specific compute constraints are validated before the resource is changed. A request that would leave the pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.",
+        "description": "Creates a new HorizonDB pool or replaces an existing pool, including its desired node allocation, compute model, high-availability configuration, or associated parameter group. highAvailability.zoneRedundancy.mode is required and has no service default. A pool name can be the same as its parent cluster name. Creating a pool also creates exactly one service-managed Pool-scoped ReadOnly Endpoint representing that Pool and its network boundary. The Endpoint's associatedResourceId identifies the Pool, and the Endpoint cannot outlive or be deleted independently from it. When the first pool is created, the service automatically uses it to host the cluster's read-write node when an eligible node is available. This API version supports at most one pool per cluster; an attempt to create another pool is rejected with 409 Conflict. Every pool must be associated with a parameter group, so parameterGroup, parameterGroupResourceId, and applyMethod are required. applyMethod controls when dynamic parameter changes become effective; static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. Subtype-specific compute constraints are validated before the resource is changed. A request that would leave the pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -3600,7 +3603,7 @@
         },
         "x-ms-examples": {
           "Create a minimum provisioned HorizonDB pool": {
-            "$ref": "./examples/Pools_CreateOrUpdate.json"
+            "$ref": "./examples/Pools_CreateOrReplace.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3614,7 +3617,7 @@
         "tags": [
           "Pools"
         ],
-        "description": "Updates an existing HorizonDB pool, including its desired node allocation, selected compute model properties, the compute model type, or its associated parameter group. When parameterGroup is supplied, both parameterGroupResourceId and applyMethod are required. applyMethod controls when dynamic parameter changes become effective; static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. Subtype-specific compute constraints are validated against the recursively merged configuration. A request that would leave the pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.",
+        "description": "Updates an existing HorizonDB pool, including its desired node allocation, selected compute model properties, compute model type, high-availability configuration, or associated parameter group. When highAvailability is supplied, highAvailability.zoneRedundancy.mode is required. When parameterGroup is supplied, both parameterGroupResourceId and applyMethod are required. applyMethod controls when dynamic parameter changes become effective; static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. Subtype-specific compute constraints are validated against the recursively merged configuration. A request that would leave the pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -3694,6 +3697,9 @@
           },
           "Associate a HorizonDB pool with a parameter group pending reboot": {
             "$ref": "./examples/Pools_UpdateParameterGroupPendingReboot.json"
+          },
+          "Require zone-redundant placement for a HorizonDB pool": {
+            "$ref": "./examples/Pools_UpdateZoneRedundancyMode.json"
           },
           "Scale a HorizonDB pool to zero after clearing its read-write designation": {
             "$ref": "./examples/Pools_UpdateScaleToZero.json"
@@ -3840,7 +3846,7 @@
         }
       },
       "put": {
-        "operationId": "FirewallRules_CreateOrUpdate",
+        "operationId": "FirewallRules_CreateOrReplace",
         "tags": [
           "FirewallRules"
         ],
@@ -3938,8 +3944,8 @@
           }
         },
         "x-ms-examples": {
-          "Create or update a firewall rule on a HorizonDB pool": {
-            "$ref": "./examples/FirewallRules_CreateOrUpdate.json"
+          "Create or replace a firewall rule on a HorizonDB pool": {
+            "$ref": "./examples/FirewallRules_CreateOrReplace.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4919,12 +4925,12 @@
           }
         }
       },
-      "patch": {
-        "operationId": "PrivateEndpointConnections_Update",
+      "put": {
+        "operationId": "PrivateEndpointConnections_ApproveOrReject",
         "tags": [
           "PrivateEndpointConnections"
         ],
-        "description": "Update a Cluster PrivateEndpointConnection",
+        "description": "Approves or rejects an existing private endpoint connection.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -4949,24 +4955,27 @@
             "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/parameters/PrivateEndpointConnectionName"
           },
           {
-            "name": "properties",
+            "name": "resource",
             "in": "body",
-            "description": "The resource properties to be updated.",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionForPatchUpdate"
+              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Resource 'PrivateEndpointConnectionResource' update operation succeeded",
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
             }
           },
-          "202": {
-            "description": "Resource update request accepted.",
+          "201": {
+            "description": "Resource 'PrivateEndpointConnectionResource' create operation succeeded",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+            },
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
@@ -4992,8 +5001,8 @@
           }
         },
         "x-ms-examples": {
-          "Approve a private endpoint connection": {
-            "$ref": "./examples/PrivateEndpointConnections_Update.json"
+          "Approve or reject a private endpoint connection": {
+            "$ref": "./examples/PrivateEndpointConnections_ApproveOrReject.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -5275,11 +5284,11 @@
         }
       },
       "put": {
-        "operationId": "ParameterGroups_CreateOrUpdate",
+        "operationId": "ParameterGroups_CreateOrReplace",
         "tags": [
           "ParameterGroups"
         ],
-        "description": "Creates a new HorizonDB parameter group or updates an existing parameter group.",
+        "description": "Creates a new HorizonDB parameter group or replaces an existing parameter group.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -5342,8 +5351,8 @@
           }
         },
         "x-ms-examples": {
-          "Create or update a HorizonDB parameter group for a PostgreSQL version": {
-            "$ref": "./examples/ParameterGroups_CreateOrUpdate.json"
+          "Create or replace a HorizonDB parameter group for a PostgreSQL version": {
+            "$ref": "./examples/ParameterGroups_CreateOrReplace.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -7190,7 +7199,7 @@
         "pointInTimeUtc": {
           "type": "string",
           "format": "date-time",
-          "description": "The requested point in time, in UTC, to restore from. This property is required when creationMode is PointInTimeRestore and must be absent for other creation modes or when creationMode is omitted. The service honors this value for same-location and cross-location restores. This property can only be specified during resource creation.",
+          "description": "The requested point in time, in UTC. This property is required in every PointInTimeRestore request. For a same-location restore, the service restores the latest backup available at or before this value. For a cross-location restore, the service requires but ignores this value and restores the latest available backup; cross-location responses omit this property. This property must be absent for other creation modes or when creationMode is omitted and can only be specified during resource creation.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -7259,7 +7268,7 @@
         },
         "readWritePool": {
           "$ref": "#/definitions/ReadWritePoolProperties",
-          "description": "The current designated read-write pool and read-write status for the cluster.",
+          "description": "The pool currently designated to host the cluster's read-write node.",
           "readOnly": true
         },
         "postgreSqlVersion": {
@@ -7409,7 +7418,7 @@
         "pointInTimeUtc": {
           "type": "string",
           "format": "date-time",
-          "description": "The requested point in time, in UTC, to restore from. This property is required when creationMode is PointInTimeRestore and must be absent for other creation modes or when creationMode is omitted. The service honors this value for same-location and cross-location restores. This property can only be specified during resource creation.",
+          "description": "The requested point in time, in UTC. This property is required in every PointInTimeRestore request. For a same-location restore, the service restores the latest backup available at or before this value. For a cross-location restore, the service requires but ignores this value and restores the latest available backup; cross-location responses omit this property. This property must be absent for other creation modes or when creationMode is omitted and can only be specified during resource creation.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -7478,7 +7487,7 @@
         },
         "readWritePool": {
           "$ref": "#/definitions/ReadWritePoolProperties",
-          "description": "The current designated read-write pool and read-write status for the cluster.",
+          "description": "The pool currently designated to host the cluster's read-write node.",
           "readOnly": true
         }
       },
@@ -8062,7 +8071,7 @@
     },
     "HorizonDbClusterDataEncryption": {
       "type": "object",
-      "description": "The Cluster-level data encryption configuration. For AzureKeyVault encryption, primaryKeyUri and primaryUserAssignedIdentityId are required. When geographically redundant backup is enabled, geoBackupKeyUri and geoBackupUserAssignedIdentityId are also required. Customer-managed key identities must also be assigned to the Cluster through its top-level identity property. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation. For SystemManaged encryption, key and identity properties must be omitted.",
+      "description": "The Cluster-level data encryption configuration. For AzureKeyVault encryption, primaryKeyUri and primaryUserAssignedIdentityId are required. When geographically redundant backup is enabled, geoBackupKeyUri and geoBackupUserAssignedIdentityId are also required. Customer-managed key identities must also be assigned to the Cluster through its top-level identity property. Only versionless Azure Key Vault key URIs are supported; key version paths are rejected. For SystemManaged encryption, key and identity properties must be omitted.",
       "properties": {
         "type": {
           "$ref": "#/definitions/HorizonDbClusterDataEncryptionType",
@@ -8074,8 +8083,8 @@
           ]
         },
         "primaryKeyUri": {
-          "type": "string",
-          "description": "The Azure Key Vault key URI used to encrypt the cluster's primary storage. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation.",
+          "$ref": "#/definitions/VersionlessKeyVaultKeyUri",
+          "description": "The versionless Azure Key Vault key URI used to encrypt the cluster's primary storage. Key version paths are not supported.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -8105,8 +8114,8 @@
           "readOnly": true
         },
         "geoBackupKeyUri": {
-          "type": "string",
-          "description": "The Azure Key Vault key URI used to encrypt geographically redundant backups. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation.",
+          "$ref": "#/definitions/VersionlessKeyVaultKeyUri",
+          "description": "The versionless Azure Key Vault key URI used to encrypt geographically redundant backups. Key version paths are not supported.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -8149,8 +8158,8 @@
           ]
         },
         "primaryKeyUri": {
-          "type": "string",
-          "description": "The Azure Key Vault key URI used to encrypt the cluster's primary storage. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation.",
+          "$ref": "#/definitions/VersionlessKeyVaultKeyUri",
+          "description": "The versionless Azure Key Vault key URI used to encrypt the cluster's primary storage. Key version paths are not supported.",
           "x-ms-mutability": [
             "update"
           ]
@@ -8171,8 +8180,8 @@
           }
         },
         "geoBackupKeyUri": {
-          "type": "string",
-          "description": "The Azure Key Vault key URI used to encrypt geographically redundant backups. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation.",
+          "$ref": "#/definitions/VersionlessKeyVaultKeyUri",
+          "description": "The versionless Azure Key Vault key URI used to encrypt geographically redundant backups. Key version paths are not supported.",
           "x-ms-mutability": [
             "update"
           ]
@@ -9665,6 +9674,99 @@
         }
       }
     },
+    "PoolHighAvailabilityProperties": {
+      "type": "object",
+      "description": "The high-availability configuration and current status for a HorizonDB pool.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/PoolHighAvailabilityState",
+          "description": "The current high-availability topology achieved by the pool.",
+          "readOnly": true
+        },
+        "unavailableReason": {
+          "$ref": "#/definitions/PoolHighAvailabilityUnavailableReason",
+          "description": "The reason high availability is not currently available. This property is present only when state is NotAvailable.",
+          "readOnly": true
+        },
+        "zoneRedundancy": {
+          "$ref": "#/definitions/PoolZoneRedundancyProperties",
+          "description": "The required zone-redundancy configuration and current status for the pool.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "state",
+        "zoneRedundancy"
+      ]
+    },
+    "PoolHighAvailabilityPropertiesForPatchUpdate": {
+      "type": "object",
+      "description": "The high-availability configuration for a HorizonDB pool update.",
+      "properties": {
+        "zoneRedundancy": {
+          "$ref": "#/definitions/PoolZoneRedundancyPropertiesForPatchUpdate",
+          "description": "The required zone-redundancy configuration to apply.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        }
+      },
+      "required": [
+        "zoneRedundancy"
+      ]
+    },
+    "PoolHighAvailabilityState": {
+      "type": "string",
+      "description": "The current high-availability topology achieved by a HorizonDB pool.",
+      "enum": [
+        "NotAvailable",
+        "SingleZone",
+        "ZoneRedundant"
+      ],
+      "x-ms-enum": {
+        "name": "PoolHighAvailabilityState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotAvailable",
+            "value": "NotAvailable",
+            "description": "High availability is not available because fewer than two usable nodes are allocated."
+          },
+          {
+            "name": "SingleZone",
+            "value": "SingleZone",
+            "description": "Multiple usable nodes are allocated, but all are in the same availability zone."
+          },
+          {
+            "name": "ZoneRedundant",
+            "value": "ZoneRedundant",
+            "description": "Multiple usable nodes are allocated across multiple availability zones."
+          }
+        ]
+      }
+    },
+    "PoolHighAvailabilityUnavailableReason": {
+      "type": "string",
+      "description": "The reason high availability is not currently available for a HorizonDB pool.",
+      "enum": [
+        "InsufficientNodeCount"
+      ],
+      "x-ms-enum": {
+        "name": "PoolHighAvailabilityUnavailableReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InsufficientNodeCount",
+            "value": "InsufficientNodeCount",
+            "description": "Fewer than two usable nodes are allocated."
+          }
+        ]
+      }
+    },
     "PoolListResult": {
       "type": "object",
       "description": "The response of a Pool list operation.",
@@ -9807,6 +9909,15 @@
           "description": "The number of nodes currently allocated and assigned to the pool, regardless of their operational state or the operational state of the pool.",
           "readOnly": true
         },
+        "highAvailability": {
+          "$ref": "#/definitions/PoolHighAvailabilityProperties",
+          "description": "The required high-availability configuration and current status for the pool.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
         "parameterGroup": {
           "$ref": "#/definitions/PoolParameterGroupReference",
           "description": "The required default or custom parameter group associated with the pool.",
@@ -9833,6 +9944,7 @@
       },
       "required": [
         "allocatedNodeCount",
+        "highAvailability",
         "parameterGroup"
       ]
     },
@@ -9850,6 +9962,13 @@
         "desiredNodeCount": {
           "$ref": "#/definitions/PoolNodeCount",
           "description": "The desired number of nodes to allocate and assign to the pool. Allowed values are 0 through 16. A value of 0 keeps the pool resource and its configuration but allocates no nodes; it does not delete the pool. Omission preserves the current target. A request that would leave a pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "highAvailability": {
+          "$ref": "#/definitions/PoolHighAvailabilityPropertiesForPatchUpdate",
+          "description": "The high-availability configuration to update. Omission preserves the current configuration.",
           "x-ms-mutability": [
             "update"
           ]
@@ -9944,6 +10063,135 @@
             "name": "Stopped",
             "value": "Stopped",
             "description": "Is stopped"
+          }
+        ]
+      }
+    },
+    "PoolZoneRedundancyMode": {
+      "type": "string",
+      "description": "The zone-redundancy placement mode requested for a HorizonDB pool.",
+      "enum": [
+        "Required",
+        "BestEffort"
+      ],
+      "x-ms-enum": {
+        "name": "PoolZoneRedundancyMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Required",
+            "value": "Required",
+            "description": "Multiple nodes are acceptable only when they are placed across multiple availability zones."
+          },
+          {
+            "name": "BestEffort",
+            "value": "BestEffort",
+            "description": "The service attempts to place multiple nodes across availability zones, but same-zone placement is acceptable."
+          }
+        ]
+      }
+    },
+    "PoolZoneRedundancyProperties": {
+      "type": "object",
+      "description": "The zone-redundancy configuration and current status for a HorizonDB pool.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/PoolZoneRedundancyMode",
+          "description": "The required zone-redundancy placement mode. The service does not apply a default.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "state": {
+          "$ref": "#/definitions/PoolZoneRedundancyState",
+          "description": "Whether zone redundancy is currently achieved by the pool.",
+          "readOnly": true
+        },
+        "reason": {
+          "$ref": "#/definitions/PoolZoneRedundancyReason",
+          "description": "The reason zone redundancy is not currently achieved. This property is present only when state is NotAchieved.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "mode",
+        "state"
+      ]
+    },
+    "PoolZoneRedundancyPropertiesForPatchUpdate": {
+      "type": "object",
+      "description": "The zone-redundancy configuration for a HorizonDB pool update.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/PoolZoneRedundancyMode",
+          "description": "The required zone-redundancy placement mode.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        }
+      },
+      "required": [
+        "mode"
+      ]
+    },
+    "PoolZoneRedundancyReason": {
+      "type": "string",
+      "description": "The reason zone redundancy is not currently achieved by a HorizonDB pool.",
+      "enum": [
+        "InsufficientNodeCount",
+        "SingleZonePlacement",
+        "InsufficientZonalCapacity",
+        "TransientFailure"
+      ],
+      "x-ms-enum": {
+        "name": "PoolZoneRedundancyReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "InsufficientNodeCount",
+            "value": "InsufficientNodeCount",
+            "description": "Fewer than two usable nodes are allocated."
+          },
+          {
+            "name": "SingleZonePlacement",
+            "value": "SingleZonePlacement",
+            "description": "Multiple usable nodes are allocated in a single availability zone."
+          },
+          {
+            "name": "InsufficientZonalCapacity",
+            "value": "InsufficientZonalCapacity",
+            "description": "The service cannot currently allocate the requested compute across multiple availability zones."
+          },
+          {
+            "name": "TransientFailure",
+            "value": "TransientFailure",
+            "description": "A temporary node, zone, or orchestration failure prevents zone redundancy from being achieved."
+          }
+        ]
+      }
+    },
+    "PoolZoneRedundancyState": {
+      "type": "string",
+      "description": "Whether zone redundancy is currently achieved by a HorizonDB pool.",
+      "enum": [
+        "Achieved",
+        "NotAchieved"
+      ],
+      "x-ms-enum": {
+        "name": "PoolZoneRedundancyState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Achieved",
+            "value": "Achieved",
+            "description": "The pool currently has a zone-redundant topology."
+          },
+          {
+            "name": "NotAchieved",
+            "value": "NotAchieved",
+            "description": "The pool does not currently have a zone-redundant topology. Inspect reason for details."
           }
         ]
       }
@@ -10053,30 +10301,6 @@
             "description": "A Microsoft Entra ID application or service principal used for automated workloads."
           }
         ]
-      }
-    },
-    "PrivateEndpointConnectionForPatchUpdate": {
-      "type": "object",
-      "description": "Parameters for updating a private endpoint connection.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionPropertiesForPatchUpdate",
-          "description": "The private endpoint connection properties to update."
-        }
-      }
-    },
-    "PrivateEndpointConnectionPropertiesForPatchUpdate": {
-      "type": "object",
-      "description": "Properties for updating a private endpoint connection.",
-      "properties": {
-        "privateEndpoint": {
-          "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpoint",
-          "description": "The private endpoint resource."
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkServiceConnectionState",
-          "description": "Information about the connection state between the service consumer and provider."
-        }
       }
     },
     "PrivateEndpointConnectionResourceListResult": {
@@ -10269,41 +10493,14 @@
     },
     "ReadWritePoolProperties": {
       "type": "object",
-      "description": "The current designated read-write pool and read-write status for a HorizonDB cluster. When a pool is created while the cluster currently has no pools, the service automatically designates the new pool as the read-write pool. This behavior also applies after all pools that existed earlier in the cluster's lifetime have been deleted.",
+      "description": "The pool currently designated to host a HorizonDB cluster's read-write node. When a pool is created while the cluster currently has no pools, the service automatically designates the new pool as the read-write pool. This behavior also applies after all pools that existed earlier in the cluster's lifetime have been deleted.",
       "properties": {
         "designatedPoolResourceId": {
           "$ref": "#/definitions/PoolResourceId",
           "description": "The Azure resource ID of the pool designated to host the cluster's read-write node. The pool is a child resource of this cluster. When a pool is created while the cluster currently has no pools, the service automatically sets this property to the new pool's resource ID, including when all pools that existed earlier in the cluster's lifetime were deleted. This property is absent when no pool is designated, such as after clearReadWritePool succeeds.",
           "readOnly": true
-        },
-        "zoneRedundancy": {
-          "$ref": "#/definitions/ReadWritePoolZoneRedundancyProperties",
-          "description": "The current zone redundancy status for the read-write node. This object is always returned on reads. When the read-write node is not protected by zone redundancy, state is NotProtected and unavailableReason explains why.",
-          "readOnly": true
         }
-      },
-      "required": [
-        "zoneRedundancy"
-      ]
-    },
-    "ReadWritePoolZoneRedundancyProperties": {
-      "type": "object",
-      "description": "The current zone redundancy status for the read-write node.",
-      "properties": {
-        "state": {
-          "$ref": "#/definitions/ZoneRedundancyState",
-          "description": "The current zone-redundancy protection state for the read-write node. The state is NotProtected when no read-write pool is designated.",
-          "readOnly": true
-        },
-        "unavailableReason": {
-          "type": "string",
-          "description": "The reason the read-write node is not protected by zone redundancy. This property is present only when state is NotProtected and absent when state is Protected. Valid reasons are that no read-write pool is designated, the designated read-write pool has fewer than two nodes, all nodes in the designated read-write pool are deployed in a single availability zone, or the region does not support availability zones.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "state"
-      ]
+      }
     },
     "ScheduledMaintenanceManagementType": {
       "type": "string",
@@ -10365,34 +10562,15 @@
       ],
       "x-ms-discriminator-value": "System"
     },
+    "VersionlessKeyVaultKeyUri": {
+      "type": "string",
+      "description": "A versionless HTTPS Azure Key Vault key URI. The URI must use a supported public or sovereign Azure Key Vault DNS suffix and the path /keys/{key-name}. Key version paths are not supported.",
+      "pattern": "^https://[A-Za-z0-9-]+[.]vault([.]azure[.]net|[.]usgovcloudapi[.]net|[.]azure[.]cn)/keys/[A-Za-z0-9-]+/?$"
+    },
     "WritableDescription": {
       "type": "string",
       "description": "A user-supplied description with a maximum length of 1024 characters.",
       "maxLength": 1024
-    },
-    "ZoneRedundancyState": {
-      "type": "string",
-      "description": "The zone-redundancy protection state of the read-write node.",
-      "enum": [
-        "Protected",
-        "NotProtected"
-      ],
-      "x-ms-enum": {
-        "name": "ZoneRedundancyState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Protected",
-            "value": "Protected",
-            "description": "The read-write node is protected by zone redundancy."
-          },
-          {
-            "name": "NotProtected",
-            "value": "NotProtected",
-            "description": "The read-write node is not protected by zone redundancy. Inspect unavailableReason for details."
-          }
-        ]
-      }
     }
   },
   "parameters": {

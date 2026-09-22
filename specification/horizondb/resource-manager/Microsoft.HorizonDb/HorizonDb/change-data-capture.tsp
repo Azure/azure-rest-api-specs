@@ -753,7 +753,7 @@ interface ChangeDataCaptureCapabilities {
 
   @doc("Creates or replaces the singleton change data capture capability and reconciles shared engine prerequisites.")
   @Azure.Core.useFinalStateVia("original-uri")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ChangeDataCaptureCapability>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<ChangeDataCaptureCapability>;
 
   @doc("Updates mutable change data capture capability properties. Omitted properties preserve their current values.")
   update is ArmCustomPatchAsync<
@@ -782,7 +782,7 @@ interface ChangeDataCaptureDestinations {
   get is ArmResourceRead<ChangeDataCaptureDestination>;
 
   @doc("Creates or replaces a Microsoft Fabric change data capture destination.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrReplace is ArmResourceCreateOrReplaceAsync<
     ChangeDataCaptureDestination,
     LroHeaders = HorizonDbResourceLroHeaders<ChangeDataCaptureDestination>,
     Response =
@@ -832,7 +832,7 @@ interface IdentityAssignments {
   get is ArmResourceRead<IdentityAssignment>;
 
   @doc("Creates or idempotently replaces a change data capture identity assignment. The identity resource ID is immutable and must reference a user-assigned managed identity already attached to the parent cluster. The service also validates destination permissions, which are not granted by attaching the identity to the cluster.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrReplace is ArmResourceCreateOrReplaceAsync<
     IdentityAssignment,
     LroHeaders = HorizonDbResourceLroHeaders<IdentityAssignment>,
     Response =
@@ -862,7 +862,7 @@ interface ChangeDataCaptureConfigurations {
   get is ArmResourceRead<ChangeDataCaptureConfiguration>;
 
   @doc("Creates or replaces a change data capture configuration that enrolls a PostgreSQL database for Microsoft Fabric Mirroring.")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrReplace is ArmResourceCreateOrReplaceAsync<
     ChangeDataCaptureConfiguration,
     LroHeaders = HorizonDbResourceLroHeaders<ChangeDataCaptureConfiguration>,
     Response =

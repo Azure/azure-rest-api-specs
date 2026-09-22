@@ -1,5 +1,5 @@
 {
-  "operationId": "Pools_CreateOrUpdate",
+  "operationId": "Pools_CreateOrReplace",
   "title": "Create a minimum provisioned HorizonDB pool",
   "parameters": {
     "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
@@ -19,6 +19,11 @@
         },
         "scheduledMaintenance": {
           "maintenanceManagementType": "System"
+        },
+        "highAvailability": {
+          "zoneRedundancy": {
+            "mode": "BestEffort"
+          }
         }
       }
     }
@@ -43,6 +48,15 @@
           },
           "desiredNodeCount": 1,
           "allocatedNodeCount": 1,
+          "highAvailability": {
+            "state": "NotAvailable",
+            "unavailableReason": "InsufficientNodeCount",
+            "zoneRedundancy": {
+              "mode": "BestEffort",
+              "state": "NotAchieved",
+              "reason": "InsufficientNodeCount"
+            }
+          },
           "parameterGroup": {
             "parameterGroupResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/parameterGroups/default-postgresql-17-provisioned",
             "applyMethod": "Immediate",
@@ -74,6 +88,15 @@
           },
           "desiredNodeCount": 1,
           "allocatedNodeCount": 0,
+          "highAvailability": {
+            "state": "NotAvailable",
+            "unavailableReason": "InsufficientNodeCount",
+            "zoneRedundancy": {
+              "mode": "BestEffort",
+              "state": "NotAchieved",
+              "reason": "InsufficientNodeCount"
+            }
+          },
           "parameterGroup": {
             "parameterGroupResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/parameterGroups/default-postgresql-17-provisioned",
             "applyMethod": "Immediate",

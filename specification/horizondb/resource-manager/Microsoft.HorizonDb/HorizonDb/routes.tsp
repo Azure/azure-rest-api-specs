@@ -27,13 +27,13 @@ interface Clusters {
 
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The AutoRest emitter infers final-state-via from polling metadata. Marking this standard ARM PUT as an LRO without polling decorators emits x-ms-long-running-operation while intentionally omitting x-ms-long-running-operation-options."
   @added(Versions.v2026_10_01_preview)
-  @doc("Creates a new HorizonDB cluster or replaces an existing cluster. PointInTimeRestore creates the new Cluster resource and hydrates its service-owned database storage from an available source backup. It does not clone source pools, Pool-scoped endpoints, firewall rules, parameter-group associations, or other child resources. The new Cluster receives its service-generated Cluster-scoped Endpoint named cluster. For point-in-time restore, postgreSqlVersion must be omitted because the service obtains it from backup metadata; all other new-cluster configuration comes from the request or service defaults. For same-location point-in-time restore, creationSourceClusterLocation is optional. For cross-location point-in-time restore, creationSourceClusterLocation is required and must identify the source cluster's Azure location.")
+  @doc("Creates a new HorizonDB cluster or replaces an existing cluster. PointInTimeRestore creates the new Cluster resource and hydrates its service-owned database storage from an available source backup. It does not clone source pools, Pool-scoped endpoints, firewall rules, parameter-group associations, or other child resources. The new Cluster receives its service-generated Cluster-scoped Endpoint named cluster. For restore, postgreSqlVersion must be omitted because the service obtains it from backup metadata; all other new-cluster configuration comes from the request or service defaults. Same-location restore requires and honors pointInTimeUtc and allows creationSourceClusterLocation to be omitted. Cross-location restore requires creationSourceClusterLocation to identify the source cluster's Azure location and requires pointInTimeUtc, but ignores the supplied timestamp and restores the latest available backup. Cross-location responses omit pointInTimeUtc.")
   @sharedRoute
   @Azure.ClientGenerator.Core.Legacy.markAsLro
   @autoRoute
   @armResourceCreateOrUpdate(Cluster)
   @put
-  createOrUpdate is Azure.ResourceManager.Foundations.ArmCreateOperation<
+  createOrReplace is Azure.ResourceManager.Foundations.ArmCreateOperation<
     ResourceInstanceParameters<Cluster>,
     ClusterCreateRequest,
     ClusterReplaceAcceptedResponse | ClusterCreateAcceptedResponse,
@@ -124,12 +124,12 @@ interface Pools {
   get is ArmResourceRead<Pool>;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("Creates a new HorizonDB pool or updates an existing pool, including its desired node allocation, compute model, or associated parameter group. A pool name can be the same as its parent cluster name. Creating a pool also creates exactly one service-managed Pool-scoped ReadOnly Endpoint representing that Pool and its network boundary. The Endpoint's associatedResourceId identifies the Pool, and the Endpoint cannot outlive or be deleted independently from it. When the first pool is created, the service automatically uses it to host the cluster's read-write node when an eligible node is available. This API version supports at most one pool per cluster; an attempt to create another pool is rejected with 409 Conflict. Every pool must be associated with a parameter group, so parameterGroup, parameterGroupResourceId, and applyMethod are required. applyMethod controls when dynamic parameter changes become effective; static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. Subtype-specific compute constraints are validated before the resource is changed. A request that would leave the pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.")
+  @doc("Creates a new HorizonDB pool or replaces an existing pool, including its desired node allocation, compute model, high-availability configuration, or associated parameter group. highAvailability.zoneRedundancy.mode is required and has no service default. A pool name can be the same as its parent cluster name. Creating a pool also creates exactly one service-managed Pool-scoped ReadOnly Endpoint representing that Pool and its network boundary. The Endpoint's associatedResourceId identifies the Pool, and the Endpoint cannot outlive or be deleted independently from it. When the first pool is created, the service automatically uses it to host the cluster's read-write node when an eligible node is available. This API version supports at most one pool per cluster; an attempt to create another pool is rejected with 409 Conflict. Every pool must be associated with a parameter group, so parameterGroup, parameterGroupResourceId, and applyMethod are required. applyMethod controls when dynamic parameter changes become effective; static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. Subtype-specific compute constraints are validated before the resource is changed. A request that would leave the pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.")
   @sharedRoute
   @autoRoute
   @armResourceCreateOrUpdate(Pool)
   @put
-  createOrUpdate is Azure.ResourceManager.Foundations.ArmCreateOperation<
+  createOrReplace is Azure.ResourceManager.Foundations.ArmCreateOperation<
     ResourceInstanceParameters<Pool>,
     Pool,
     HorizonDbResourceUpdatedLroResponse<Pool> | PoolCreateAcceptedResponse,
@@ -137,7 +137,7 @@ interface Pools {
   >;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("Updates an existing HorizonDB pool, including its desired node allocation, selected compute model properties, the compute model type, or its associated parameter group. When parameterGroup is supplied, both parameterGroupResourceId and applyMethod are required. applyMethod controls when dynamic parameter changes become effective; static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. Subtype-specific compute constraints are validated against the recursively merged configuration. A request that would leave the pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.")
+  @doc("Updates an existing HorizonDB pool, including its desired node allocation, selected compute model properties, compute model type, high-availability configuration, or associated parameter group. When highAvailability is supplied, highAvailability.zoneRedundancy.mode is required. When parameterGroup is supplied, both parameterGroupResourceId and applyMethod are required. applyMethod controls when dynamic parameter changes become effective; static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. Subtype-specific compute constraints are validated against the recursively merged configuration. A request that would leave the pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.")
   update is ArmCustomPatchAsync<
     Pool,
     PoolForPatchUpdate,
@@ -267,7 +267,7 @@ interface FirewallRules {
   @doc("Creates or replaces a HorizonDB pool firewall rule.")
   @sharedRoute
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrReplace is ArmResourceCreateOrReplaceAsync<
     FirewallRule,
     LroHeaders = HorizonDbResourceLroHeaders<FirewallRule>,
     Response =
@@ -319,12 +319,12 @@ interface PrivateEndpointConnections {
     PrivateEndpointConnectionResource
   >;
 
+  @doc("Approves or rejects an existing private endpoint connection.")
   @added(Versions.v2026_10_01_preview)
   @sharedRoute
-  update is PrivateEndpointOperations.CustomPatchAsync<
+  approveOrReject is PrivateEndpointOperations.CreateOrReplaceAsync<
     Cluster,
     PrivateEndpointConnectionResource,
-    PrivateEndpointConnectionForPatchUpdate,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = PrivateEndpointConnectionResource> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -332,6 +332,7 @@ interface PrivateEndpointConnections {
   @doc("Approves or rejects a private endpoint connection.")
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_10_01_preview)
+  @sharedRoute
   updateStatus is PrivateEndpointOperations.CreateOrReplaceSync<
     Cluster,
     PrivateEndpointConnectionResource
@@ -365,8 +366,17 @@ interface ParameterGroups {
   get is ArmResourceRead<ParameterGroup>;
 
   @doc("Creates a new HorizonDB parameter group or updates an existing parameter group.")
+  @removed(Versions.v2026_10_01_preview)
+  @renamedFrom(Versions.v2026_10_01_preview, "createOrUpdate")
+  @sharedRoute
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ParameterGroup>;
+  createOrUpdateLegacy is ArmResourceCreateOrReplaceAsync<ParameterGroup>;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("Creates a new HorizonDB parameter group or replaces an existing parameter group.")
+  @sharedRoute
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrReplace is ArmResourceCreateOrReplaceAsync<ParameterGroup>;
 
   @removed(Versions.v2026_10_01_preview)
   @renamedFrom(Versions.v2026_10_01_preview, "update")
@@ -485,9 +495,9 @@ interface MicrosoftEntraAdministrators {
   @doc("Gets information about a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.")
   get is ArmResourceRead<MicrosoftEntraAdministrator>;
 
-  @doc("Creates or updates a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.")
+  @doc("Creates or replaces a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.")
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
+  createOrReplace is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     MicrosoftEntraAdministrator,
     Request = MicrosoftEntraAdministratorAdd,
     LroHeaders = HorizonDbResourceLroHeaders<MicrosoftEntraAdministrator>,
@@ -512,8 +522,16 @@ interface MicrosoftEntraAdministrators {
   list is ArmResourceListByParent<MicrosoftEntraAdministrator>;
 }
 
+@added(Versions.v2026_10_01_preview)
+@doc("Operations for the service-created authentication methods of a HorizonDB cluster.")
+@armResourceOperations
+interface Authentications {
+  @doc("Lists the two service-created authentication configurations for the cluster: passwordMethod and microsoftEntra.")
+  list is ArmResourceListByParent<Authentication>;
+}
+
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Authentication method instances are service-created with the cluster and cannot be deleted independently."
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-list-operation" "The shared Authentication resource defines the authentications collection list operation and returns both service-created authentication method instances."
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-list-operation" "The Authentications resource operations interface defines the shared authentications collection list operation and returns both service-created authentication method instances."
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-put-operation" "Authentication method instances are service-created with the cluster; customers update an existing instance through PATCH and cannot create additional instances."
 @added(Versions.v2026_10_01_preview)
 @doc("Operations for the service-created PostgreSQL username-and-password authentication method of a HorizonDB cluster.")
@@ -539,14 +557,11 @@ interface PasswordAuthentications {
     ArmResponse<Authentication>,
     ErrorResponse
   >;
-
-  @doc("Lists the two service-created authentication configurations for the cluster: passwordMethod and microsoftEntra.")
-  list is ArmResourceListByParent<Authentication>;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Authentication method instances are service-created with the cluster and cannot be deleted independently."
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-put-operation" "Authentication method instances are service-created with the cluster; customers update an existing instance through PATCH and cannot create additional instances."
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-list-operation" "The shared authentications collection list operation is defined by PasswordAuthentications.list and returns both constrained resource instances."
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-list-operation" "The shared authentications collection list operation is defined by Authentications.list and returns both constrained resource instances."
 @added(Versions.v2026_10_01_preview)
 @doc("Operations for the service-created Microsoft Entra authentication method of a HorizonDB cluster.")
 @armResourceOperations

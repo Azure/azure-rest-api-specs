@@ -171,23 +171,6 @@ model PrivateLinkResource
   name: string;
 }
 
-@added(Versions.v2026_10_01_preview)
-@doc("Parameters for updating a private endpoint connection.")
-model PrivateEndpointConnectionForPatchUpdate {
-  @doc("The private endpoint connection properties to update.")
-  properties?: PrivateEndpointConnectionPropertiesForPatchUpdate;
-}
-
-@added(Versions.v2026_10_01_preview)
-@doc("Properties for updating a private endpoint connection.")
-model PrivateEndpointConnectionPropertiesForPatchUpdate {
-  @doc("The private endpoint resource.")
-  privateEndpoint?: Azure.ResourceManager.CommonTypes.PrivateEndpoint;
-
-  @doc("Information about the connection state between the service consumer and provider.")
-  privateLinkServiceConnectionState?: Azure.ResourceManager.CommonTypes.PrivateLinkServiceConnectionState;
-}
-
 @renamedFrom(Versions.v2026_10_01_preview, "HorizonDbParameterGroup")
 @doc("Represents the HorizonDB parameter group.")
 model ParameterGroup
@@ -313,7 +296,7 @@ model ClusterProperties {
   legacyPointInTime?: utcDateTime;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The requested point in time, in UTC, to restore from. This property is required when creationMode is PointInTimeRestore and must be absent for other creation modes or when creationMode is omitted. The service honors this value for same-location and cross-location restores. This property can only be specified during resource creation.")
+  @doc("The requested point in time, in UTC. This property is required in every PointInTimeRestore request. For a same-location restore, the service restores the latest backup available at or before this value. For a cross-location restore, the service requires but ignores this value and restores the latest available backup; cross-location responses omit this property. This property must be absent for other creation modes or when creationMode is omitted and can only be specified during resource creation.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   pointInTimeUtc?: utcDateTime;
 
@@ -401,7 +384,7 @@ model ClusterProperties {
   provisioningState: ProvisioningState;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The current designated read-write pool and read-write status for the cluster.")
+  @doc("The pool currently designated to host the cluster's read-write node.")
   @visibility(Lifecycle.Read)
   readWritePool: ReadWritePoolProperties;
 
@@ -494,27 +477,11 @@ union HorizonDbComputeModelType {
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("The current zone redundancy status for the read-write node.")
-model ReadWritePoolZoneRedundancyProperties {
-  @doc("The current zone-redundancy protection state for the read-write node. The state is NotProtected when no read-write pool is designated.")
-  @visibility(Lifecycle.Read)
-  state: ZoneRedundancyState;
-
-  @doc("The reason the read-write node is not protected by zone redundancy. This property is present only when state is NotProtected and absent when state is Protected. Valid reasons are that no read-write pool is designated, the designated read-write pool has fewer than two nodes, all nodes in the designated read-write pool are deployed in a single availability zone, or the region does not support availability zones.")
-  @visibility(Lifecycle.Read)
-  unavailableReason?: string;
-}
-
-@added(Versions.v2026_10_01_preview)
-@doc("The current designated read-write pool and read-write status for a HorizonDB cluster. When a pool is created while the cluster currently has no pools, the service automatically designates the new pool as the read-write pool. This behavior also applies after all pools that existed earlier in the cluster's lifetime have been deleted.")
+@doc("The pool currently designated to host a HorizonDB cluster's read-write node. When a pool is created while the cluster currently has no pools, the service automatically designates the new pool as the read-write pool. This behavior also applies after all pools that existed earlier in the cluster's lifetime have been deleted.")
 model ReadWritePoolProperties {
   @doc("The Azure resource ID of the pool designated to host the cluster's read-write node. The pool is a child resource of this cluster. When a pool is created while the cluster currently has no pools, the service automatically sets this property to the new pool's resource ID, including when all pools that existed earlier in the cluster's lifetime were deleted. This property is absent when no pool is designated, such as after clearReadWritePool succeeds.")
   @visibility(Lifecycle.Read)
   designatedPoolResourceId?: PoolResourceId;
-
-  @doc("The current zone redundancy status for the read-write node. This object is always returned on reads. When the read-write node is not protected by zone redundancy, state is NotProtected and unavailableReason explains why.")
-  @visibility(Lifecycle.Read)
-  zoneRedundancy: ReadWritePoolZoneRedundancyProperties;
 }
 
 @added(Versions.v2026_10_01_preview)
@@ -558,18 +525,6 @@ model PoolCreateAcceptedResponse {
   @doc("The HorizonDB pool with a non-terminal provisioning state.")
   @bodyRoot
   body: Pool;
-}
-
-@added(Versions.v2026_10_01_preview)
-@doc("The zone-redundancy protection state of the read-write node.")
-union ZoneRedundancyState {
-  string,
-
-  @doc("The read-write node is protected by zone redundancy.")
-  Protected: "Protected",
-
-  @doc("The read-write node is not protected by zone redundancy. Inspect unavailableReason for details.")
-  NotProtected: "NotProtected",
 }
 
 @renamedFrom(
@@ -718,6 +673,11 @@ model PoolProperties {
   allocatedNodeCount: PoolNodeCount;
 
   @added(Versions.v2026_10_01_preview)
+  @doc("The required high-availability configuration and current status for the pool.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  highAvailability: PoolHighAvailabilityProperties;
+
+  @added(Versions.v2026_10_01_preview)
   @doc("The required default or custom parameter group associated with the pool.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   parameterGroup: PoolParameterGroupReference;
@@ -750,6 +710,11 @@ model PoolPropertiesForPatchUpdate {
   desiredNodeCount?: PoolNodeCount;
 
   @added(Versions.v2026_10_01_preview)
+  @doc("The high-availability configuration to update. Omission preserves the current configuration.")
+  @visibility(Lifecycle.Update)
+  highAvailability?: PoolHighAvailabilityPropertiesForPatchUpdate;
+
+  @added(Versions.v2026_10_01_preview)
   @doc("The default or custom parameter group to associate with the pool. Omission preserves the current association.")
   @visibility(Lifecycle.Update)
   parameterGroup?: PoolParameterGroupReferenceForPatchUpdate;
@@ -758,6 +723,120 @@ model PoolPropertiesForPatchUpdate {
   @doc("The scheduled maintenance configuration to update for the pool. When supplied, the complete configuration for the selected maintenance management type is required. Omission preserves the current configuration.")
   @visibility(Lifecycle.Update)
   scheduledMaintenance?: ScheduledMaintenancePropertiesForPatchUpdate;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The high-availability configuration and current status for a HorizonDB pool.")
+model PoolHighAvailabilityProperties {
+  @doc("The current high-availability topology achieved by the pool.")
+  @visibility(Lifecycle.Read)
+  state: PoolHighAvailabilityState;
+
+  @doc("The reason high availability is not currently available. This property is present only when state is NotAvailable.")
+  @visibility(Lifecycle.Read)
+  unavailableReason?: PoolHighAvailabilityUnavailableReason;
+
+  @doc("The required zone-redundancy configuration and current status for the pool.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  zoneRedundancy: PoolZoneRedundancyProperties;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The zone-redundancy configuration and current status for a HorizonDB pool.")
+model PoolZoneRedundancyProperties {
+  @doc("The required zone-redundancy placement mode. The service does not apply a default.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  mode: PoolZoneRedundancyMode;
+
+  @doc("Whether zone redundancy is currently achieved by the pool.")
+  @visibility(Lifecycle.Read)
+  state: PoolZoneRedundancyState;
+
+  @doc("The reason zone redundancy is not currently achieved. This property is present only when state is NotAchieved.")
+  @visibility(Lifecycle.Read)
+  reason?: PoolZoneRedundancyReason;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The high-availability configuration for a HorizonDB pool update.")
+model PoolHighAvailabilityPropertiesForPatchUpdate {
+  @doc("The required zone-redundancy configuration to apply.")
+  @visibility(Lifecycle.Update)
+  zoneRedundancy: PoolZoneRedundancyPropertiesForPatchUpdate;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The zone-redundancy configuration for a HorizonDB pool update.")
+model PoolZoneRedundancyPropertiesForPatchUpdate {
+  @doc("The required zone-redundancy placement mode.")
+  @visibility(Lifecycle.Update)
+  mode: PoolZoneRedundancyMode;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The current high-availability topology achieved by a HorizonDB pool.")
+union PoolHighAvailabilityState {
+  string,
+
+  @doc("High availability is not available because fewer than two usable nodes are allocated.")
+  NotAvailable: "NotAvailable",
+
+  @doc("Multiple usable nodes are allocated, but all are in the same availability zone.")
+  SingleZone: "SingleZone",
+
+  @doc("Multiple usable nodes are allocated across multiple availability zones.")
+  ZoneRedundant: "ZoneRedundant",
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The reason high availability is not currently available for a HorizonDB pool.")
+union PoolHighAvailabilityUnavailableReason {
+  string,
+
+  @doc("Fewer than two usable nodes are allocated.")
+  InsufficientNodeCount: "InsufficientNodeCount",
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The zone-redundancy placement mode requested for a HorizonDB pool.")
+union PoolZoneRedundancyMode {
+  string,
+
+  @doc("Multiple nodes are acceptable only when they are placed across multiple availability zones.")
+  Required: "Required",
+
+  @doc("The service attempts to place multiple nodes across availability zones, but same-zone placement is acceptable.")
+  BestEffort: "BestEffort",
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("Whether zone redundancy is currently achieved by a HorizonDB pool.")
+union PoolZoneRedundancyState {
+  string,
+
+  @doc("The pool currently has a zone-redundant topology.")
+  Achieved: "Achieved",
+
+  @doc("The pool does not currently have a zone-redundant topology. Inspect reason for details.")
+  NotAchieved: "NotAchieved",
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The reason zone redundancy is not currently achieved by a HorizonDB pool.")
+union PoolZoneRedundancyReason {
+  string,
+
+  @doc("Fewer than two usable nodes are allocated.")
+  InsufficientNodeCount: "InsufficientNodeCount",
+
+  @doc("Multiple usable nodes are allocated in a single availability zone.")
+  SingleZonePlacement: "SingleZonePlacement",
+
+  @doc("The service cannot currently allocate the requested compute across multiple availability zones.")
+  InsufficientZonalCapacity: "InsufficientZonalCapacity",
+
+  @doc("A temporary node, zone, or orchestration failure prevents zone redundancy from being achieved.")
+  TransientFailure: "TransientFailure",
 }
 
 @added(Versions.v2026_10_01_preview)
@@ -1218,7 +1297,12 @@ union HorizonDbClusterEncryptionKeyStatus {
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("The Cluster-level data encryption configuration. For AzureKeyVault encryption, primaryKeyUri and primaryUserAssignedIdentityId are required. When geographically redundant backup is enabled, geoBackupKeyUri and geoBackupUserAssignedIdentityId are also required. Customer-managed key identities must also be assigned to the Cluster through its top-level identity property. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation. For SystemManaged encryption, key and identity properties must be omitted.")
+@doc("A versionless HTTPS Azure Key Vault key URI. The URI must use a supported public or sovereign Azure Key Vault DNS suffix and the path /keys/{key-name}. Key version paths are not supported.")
+@pattern("^https://[A-Za-z0-9-]+[.]vault([.]azure[.]net|[.]usgovcloudapi[.]net|[.]azure[.]cn)/keys/[A-Za-z0-9-]+/?$")
+scalar VersionlessKeyVaultKeyUri extends string;
+
+@added(Versions.v2026_10_01_preview)
+@doc("The Cluster-level data encryption configuration. For AzureKeyVault encryption, primaryKeyUri and primaryUserAssignedIdentityId are required. When geographically redundant backup is enabled, geoBackupKeyUri and geoBackupUserAssignedIdentityId are also required. Customer-managed key identities must also be assigned to the Cluster through its top-level identity property. Only versionless Azure Key Vault key URIs are supported; key version paths are rejected. For SystemManaged encryption, key and identity properties must be omitted.")
 model HorizonDbClusterDataEncryption {
   @added(Versions.v2026_10_01_preview)
   @doc("The type of data encryption used by the cluster.")
@@ -1226,9 +1310,9 @@ model HorizonDbClusterDataEncryption {
   type?: HorizonDbClusterDataEncryptionType;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The Azure Key Vault key URI used to encrypt the cluster's primary storage. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation.")
+  @doc("The versionless Azure Key Vault key URI used to encrypt the cluster's primary storage. Key version paths are not supported.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  primaryKeyUri?: string;
+  primaryKeyUri?: VersionlessKeyVaultKeyUri;
 
   @added(Versions.v2026_10_01_preview)
   @doc("The Azure resource ID of the user-assigned managed identity used to access the primary encryption key. The identity must also be assigned to the Cluster through its top-level identity property.")
@@ -1245,9 +1329,9 @@ model HorizonDbClusterDataEncryption {
   primaryEncryptionKeyStatus?: HorizonDbClusterEncryptionKeyStatus;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The Azure Key Vault key URI used to encrypt geographically redundant backups. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation.")
+  @doc("The versionless Azure Key Vault key URI used to encrypt geographically redundant backups. Key version paths are not supported.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  geoBackupKeyUri?: string;
+  geoBackupKeyUri?: VersionlessKeyVaultKeyUri;
 
   @added(Versions.v2026_10_01_preview)
   @doc("The Azure resource ID of the user-assigned managed identity used to access the geographically redundant backup encryption key. The identity must also be assigned to the Cluster through its top-level identity property.")
@@ -1273,9 +1357,9 @@ model HorizonDbClusterDataEncryptionForPatchUpdate {
   type?: HorizonDbClusterDataEncryptionType;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The Azure Key Vault key URI used to encrypt the cluster's primary storage. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation.")
+  @doc("The versionless Azure Key Vault key URI used to encrypt the cluster's primary storage. Key version paths are not supported.")
   @visibility(Lifecycle.Update)
-  primaryKeyUri?: string;
+  primaryKeyUri?: VersionlessKeyVaultKeyUri;
 
   @added(Versions.v2026_10_01_preview)
   @doc("The Azure resource ID of the user-assigned managed identity used to access the primary encryption key. The identity must also be assigned to the Cluster through its top-level identity property.")
@@ -1287,9 +1371,9 @@ model HorizonDbClusterDataEncryptionForPatchUpdate {
   ]>;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The Azure Key Vault key URI used to encrypt geographically redundant backups. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation.")
+  @doc("The versionless Azure Key Vault key URI used to encrypt geographically redundant backups. Key version paths are not supported.")
   @visibility(Lifecycle.Update)
-  geoBackupKeyUri?: string;
+  geoBackupKeyUri?: VersionlessKeyVaultKeyUri;
 
   @added(Versions.v2026_10_01_preview)
   @doc("The Azure resource ID of the user-assigned managed identity used to access the geographically redundant backup encryption key. The identity must also be assigned to the Cluster through its top-level identity property.")
