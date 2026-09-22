@@ -8,6 +8,7 @@ parameters:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
   # This TypeSpec was assembled from an existing swagger-derived spec. The rules
   # below are disabled because the existing swagger is the source of truth:
   # turning them on would force changes that alter the generated swagger and
@@ -25,11 +26,16 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/azure-iot-deviceregistrysoftwareupdate"
     package-dir: "azure-iot-deviceregistrysoftwareupdate"
     namespace: "azure.iot.deviceregistrysoftwareupdate"
+    generate-test: true
+    generate-sample: true
     flavor: azure
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-iot-deviceregistry-softwareupdate"
     namespace: com.azure.iot.deviceregistry.softwareupdate
     flavor: azure
+    generate-samples: false
+    generate-tests: false
+    customization-class: customization/src/main/java/SoftwareUpdateCustomization.java
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/iot-device-registry-software-update"
     package-details:

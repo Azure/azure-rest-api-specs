@@ -1,5 +1,5 @@
 {
-  "title": "ScheduledActions_TriggerManualOccurrence_MaximumSet",
+  "title": "Run a recurring scheduled action immediately",
   "operationId": "ScheduledActions_TriggerManualOccurrence",
   "parameters": {
     "api-version": "2026-08-06-preview",
@@ -10,46 +10,24 @@
   "responses": {
     "202": {
       "headers": {
-        "Azure-AsyncOperation": "https://contoso.com/operationstatus",
-        "Location": "https://contoso.com/operationstatus",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/providers/Microsoft.Compute/locations/eastus/scheduledActionsOperationStatuses/00000000-0000-0000-0000-000000000000?api-version=2026-08-06-preview",
+        "Location": "https://management.azure.com/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/providers/Microsoft.Compute/locations/eastus/scheduledActionsOperationStatuses/00000000-0000-0000-0000-000000000000?api-version=2026-08-06-preview&monitor=true",
         "Retry-After": 10
       }
     },
     "200": {
       "body": {
         "properties": {
-          "scheduledTime": "2025-04-17T00:23:59.243Z",
+          "scheduledTime": "2026-09-01T02:00:00Z",
           "resultSummary": {
             "total": 25,
-            "statuses": [
-              {
-                "code": "Succeeded",
-                "count": 4,
-                "errorDetails": {
-                  "code": "InternalServerError",
-                  "message": "An internal error occurred.",
-                  "target": "virtualMachines",
-                  "details": [],
-                  "innererror": {
-                    "code": "InnerErrorCode"
-                  }
-                }
-              }
-            ]
+            "statuses": []
           },
-          "provisioningState": "Created"
+          "provisioningState": "Scheduled"
         },
-        "id": "/subscriptions/83C27AB3-A7B9-498B-B165-D9440661474F/resourceGroups/myRg/providers/Microsoft.Compute/scheduledActions/myScheduledAction",
+        "id": "/subscriptions/CB26D7CB-3E27-465F-99C8-EAF7A4118245/resourceGroups/rgcompute/providers/Microsoft.Compute/scheduledActions/myScheduledAction/occurrences/67b5bada-4772-43fc-8dbb-402476d98a45",
         "name": "67b5bada-4772-43fc-8dbb-402476d98a45",
-        "type": "Microsoft.Compute/scheduledActions/occurrences",
-        "systemData": {
-          "createdBy": "user@contoso.com",
-          "createdByType": "User",
-          "createdAt": "2025-04-17T00:23:55.288Z",
-          "lastModifiedBy": "user@contoso.com",
-          "lastModifiedByType": "User",
-          "lastModifiedAt": "2025-04-17T00:23:55.288Z"
-        }
+        "type": "Microsoft.Compute/scheduledActions/occurrences"
       }
     }
   }

@@ -13845,7 +13845,7 @@
         },
         "strategyType": {
           "$ref": "#/definitions/ClusterUpdateStrategyType",
-          "description": "The mode of operation for runtime protection."
+          "description": "The strategy for updating the cluster."
         },
         "thresholdType": {
           "$ref": "#/definitions/ValidationThresholdType",
@@ -13884,7 +13884,7 @@
         },
         "strategyType": {
           "$ref": "#/definitions/ClusterUpdateStrategyType",
-          "description": "The mode of operation for runtime protection."
+          "description": "The strategy for updating the cluster."
         },
         "thresholdType": {
           "$ref": "#/definitions/ValidationThresholdType",
@@ -13907,7 +13907,7 @@
     },
     "ClusterUpdateStrategyType": {
       "type": "string",
-      "description": "The mode of operation for runtime protection.",
+      "description": "The strategy for updating the cluster.",
       "enum": [
         "Rack",
         "PauseAfterRack"
@@ -18232,7 +18232,7 @@
         "vaultUri": {
           "type": "string",
           "format": "uri",
-          "description": "The URI for the key vault used as the secret archive."
+          "description": "The URI of the secret archive endpoint. The URI must use the `https://` scheme."
         }
       }
     },
@@ -18873,18 +18873,18 @@
       "type": "object",
       "description": "StorageApplianceProperties represents the properties of the storage appliance.",
       "properties": {
-        "rackId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The resource ID of the rack where this storage appliance resides.",
+        "administratorCredentials": {
+          "$ref": "#/definitions/AdministrativeCredentials",
+          "description": "The credentials of the administrative interface on this storage appliance.",
           "x-ms-mutability": [
             "read",
             "create"
           ]
         },
-        "storageApplianceSkuId": {
+        "rackId": {
           "type": "string",
-          "description": "The SKU for the storage appliance.",
+          "format": "arm-id",
+          "description": "The resource ID of the rack where this storage appliance resides.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -18905,9 +18905,9 @@
           "type": "string",
           "description": "The serial number for the storage appliance."
         },
-        "administratorCredentials": {
-          "$ref": "#/definitions/AdministrativeCredentials",
-          "description": "The credentials of the administrative interface on this storage appliance.",
+        "storageApplianceSkuId": {
+          "type": "string",
+          "description": "The SKU for the storage appliance.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -19008,11 +19008,11 @@
         }
       },
       "required": [
+        "administratorCredentials",
         "rackId",
-        "storageApplianceSkuId",
         "rackSlot",
         "serialNumber",
-        "administratorCredentials"
+        "storageApplianceSkuId"
       ]
     },
     "StorageApplianceProvisioningState": {
