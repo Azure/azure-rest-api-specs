@@ -797,15 +797,6 @@ override-info:
   title: SecurityCenter
 ```
 
-### Tag: package-preview-2026-09-16
-
-These settings select the service entitlement settings API without the other Security API versions.
-
-``` yaml $(tag) == 'package-preview-2026-09-16'
-input-file:
-- preview/2026-09-16-preview/serviceEntitlementSettings.json
-```
-
 ### Tag: package-composite-v3
 
 These settings apply only when `--tag=package-composite-v3` is specified on the command line.
