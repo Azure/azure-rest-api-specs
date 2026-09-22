@@ -1216,7 +1216,7 @@ model NewErrorResponseError {
   additionalInfo?: ErrorAdditionalInfo[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Non-discriminated resource envelope wrapper on a passive stamp: `extends` preserves the emitted allOf composition; `is`/spread would inline the base and `@discriminator` would mis-declare a non-polymorphic base."
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model AadPropertiesResource extends Resource {
   /**
@@ -1297,6 +1297,7 @@ model CrrAccessToken {
   /**
    * Type of the specific object - used for deserializing
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Passive stamp: reproduces a frozen plain-string discriminator; modeling it as an extensible union changes the emitted schema (enum/x-ms-enum), so the plain string is retained to preserve the frozen wire."
   objectType: string;
 
   /**
@@ -1437,6 +1438,7 @@ model RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Passive stamp: reproduces a frozen plain-string discriminator; modeling it as an extensible union changes the emitted schema (enum/x-ms-enum), so the plain string is retained to preserve the frozen wire."
   objectType: string;
 }
 
@@ -1458,7 +1460,7 @@ model CrrJobRequest {
 /**
  * Defines workload agnostic properties for a job.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Non-discriminated resource envelope wrapper on a passive stamp: `extends` preserves the emitted allOf composition; `is`/spread would inline the base and `@discriminator` would mis-declare a non-polymorphic base."
 model JobResource extends Resource {
   /**
    * JobResource properties
@@ -1509,13 +1511,14 @@ model Job {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Passive stamp: reproduces a frozen plain-string discriminator; modeling it as an extensible union changes the emitted schema (enum/x-ms-enum), so the plain string is retained to preserve the frozen wire."
   jobType: string;
 }
 
 /**
  * List of Job resources
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Non-discriminated resource envelope wrapper on a passive stamp: `extends` preserves the emitted allOf composition; `is`/spread would inline the base and `@discriminator` would mis-declare a non-polymorphic base."
 model JobResourceList extends ResourceList {
   /**
    * List of resources.
@@ -1597,10 +1600,11 @@ model OperationStatusExtendedInfo {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Passive stamp: reproduces a frozen plain-string discriminator; modeling it as an extensible union changes the emitted schema (enum/x-ms-enum), so the plain string is retained to preserve the frozen wire."
   objectType: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Non-discriminated resource envelope wrapper on a passive stamp: `extends` preserves the emitted allOf composition; `is`/spread would inline the base and `@discriminator` would mis-declare a non-polymorphic base."
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model CrrAccessTokenResource extends Resource {
   /**
@@ -1638,7 +1642,7 @@ model BackupResourceConfig {
 /**
  * List of RecoveryPoint resources
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Non-discriminated resource envelope wrapper on a passive stamp: `extends` preserves the emitted allOf composition; `is`/spread would inline the base and `@discriminator` would mis-declare a non-polymorphic base."
 model RecoveryPointResourceList extends ResourceList {
   /**
    * List of resources.
@@ -1656,13 +1660,14 @@ model RecoveryPoint {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Passive stamp: reproduces a frozen plain-string discriminator; modeling it as an extensible union changes the emitted schema (enum/x-ms-enum), so the plain string is retained to preserve the frozen wire."
   objectType: string;
 }
 
 /**
  * List of ProtectedItem resources
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Non-discriminated resource envelope wrapper on a passive stamp: `extends` preserves the emitted allOf composition; `is`/spread would inline the base and `@discriminator` would mis-declare a non-polymorphic base."
 model ProtectedItemResourceList extends ResourceList {
   /**
    * List of resources.
@@ -1674,7 +1679,7 @@ model ProtectedItemResourceList extends ResourceList {
 /**
  * Base class for backup items.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Non-discriminated resource envelope wrapper on a passive stamp: `extends` preserves the emitted allOf composition; `is`/spread would inline the base and `@discriminator` would mis-declare a non-polymorphic base."
 model ProtectedItemResource extends Resource {
   /**
    * ProtectedItemResource properties
@@ -1690,6 +1695,7 @@ model ProtectedItem {
   /**
    * backup item type.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Passive stamp: reproduces a frozen plain-string discriminator; modeling it as an extensible union changes the emitted schema (enum/x-ms-enum), so the plain string is retained to preserve the frozen wire."
   protectedItemType: string;
 
   /**
@@ -2133,7 +2139,7 @@ model AzureIaasVmProtectedItem extends ProtectedItem {
  * Azure IaaS VM workload-specific Health Details.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Faithful migration: AzureIaasVmHealthDetails is an empty specialization in the frozen stable/2023-01-15 contract."
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Non-discriminated resource envelope wrapper on a passive stamp: `extends` preserves the emitted allOf composition; `is`/spread would inline the base and `@discriminator` would mis-declare a non-polymorphic base."
 model AzureIaasVmHealthDetails extends ResourceHealthDetails {}
 
 /**
@@ -2788,8 +2794,8 @@ alias AzureWorkloadRecoveryPointProperties = {
   /**
    * UTC time at which recovery point was created
    */
-  @visibility(Lifecycle.Read)
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Faithful migration: this property name is part of the published stable/2023-01-15 wire contract and must be preserved (property casing is API surface)."
+  @visibility(Lifecycle.Read)
   recoveryPointTimeInUTC?: utcDateTime;
 
   /**
@@ -3050,8 +3056,8 @@ model AzureWorkloadSqlRecoveryPointExtendedInfo {
   /**
    * UTC time at which data directory info was captured
    */
-  @visibility(Lifecycle.Read)
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Faithful migration: this property name is part of the published stable/2023-01-15 wire contract and must be preserved (property casing is API surface)."
+  @visibility(Lifecycle.Read)
   dataDirectoryTimeInUTC?: utcDateTime;
 
   /**
@@ -3219,7 +3225,7 @@ model BmsrpQueryObject {
 /**
  * Request object for fetching CRR jobs.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Non-discriminated resource envelope wrapper on a passive stamp: `extends` preserves the emitted allOf composition; `is`/spread would inline the base and `@discriminator` would mis-declare a non-polymorphic base."
 model CrrJobRequestResource extends Resource {
   /**
    * CrrJobRequestResource properties
@@ -3258,7 +3264,7 @@ model ClientScriptForConnect {
   scriptNameSuffix?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Non-discriminated resource envelope wrapper on a passive stamp: `extends` preserves the emitted allOf composition; `is`/spread would inline the base and `@discriminator` would mis-declare a non-polymorphic base."
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model CrossRegionRestoreRequestResource extends Resource {
   /**
