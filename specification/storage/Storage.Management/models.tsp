@@ -6565,7 +6565,6 @@ model StorageConnectorProperties {
    * System-generated creation time of the Storage Connector in ISO 8601 date-time format (YYYY-MM-DDTHH:mm:ssZ).
    * Not a valid input parameter during creating.
    */
-  @removed(Versions.v2026_09_01)
   @visibility(Lifecycle.Read)
   creationTime?: string;
 
