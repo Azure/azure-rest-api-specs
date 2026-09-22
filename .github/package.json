@@ -42,10 +42,11 @@
     "tinybench": "catalog:"
   },
   "scripts": {
+    "build": "tsc --noEmit",
     "check": "pnpm test:ci && pnpm lint && pnpm format:check",
     "lint": "pnpm lint:oxlint && pnpm lint:tsc",
     "lint:oxlint": "oxlint .",
-    "lint:tsc": "tsc --build --verbose",
+    "lint:tsc": "pnpm build",
     "format": "oxfmt . --write",
     "format:check": "oxfmt . --check",
     "test": "vitest",
