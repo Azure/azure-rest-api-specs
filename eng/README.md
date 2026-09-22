@@ -101,7 +101,12 @@ of the tooling workspace.
 
 The `.mts` extension keeps the root Vitest config as ESM without changing the
 repository's default module type. Root `tsconfig.json` checks this config and is
-also covered by the GitHub package build. Existing package CI jobs remain in place.
+also covered by the GitHub package build.
+
+[Eng](../.github/workflows/eng.yml) validates the workspace, type-checks once on Linux,
+and runs the Vitest workspace on Ubuntu and Windows with Node 24.
+New tools do not need their own workflows. `github-test.yaml` separately verifies
+production-only module imports, workflow YAML, and compiled agentic workflow locks.
 
 ## Linting and formatting
 
@@ -115,8 +120,8 @@ also covered by the GitHub package build. Existing package CI jobs remain in pla
   linting provided by `oxlint-tsgolint`. Duplicate arguments and octal literals are
   rejected by strict-mode parsing instead of separate lint rules.
 - `.github/workflows/lint.yaml` runs linting once on Linux for all packages, outside
-  the package/OS test matrices. Package workflows still run type checks and tests;
-  they must not invoke code linting again. Package-local `pnpm lint` scripts
+  the test OS matrix. Build/test jobs must not invoke code linting again.
+  Package-local `pnpm lint` scripts
   remain available for development.
 - `openapi-diff-runner` and `typespec-migration-validation`
   are excluded in the root configuration. Their type checks and tests run separately.
@@ -126,7 +131,7 @@ also covered by the GitHub package build. Existing package CI jobs remain in pla
   check `.github`, `eng/tools`, and `vitest.config.mts` in one Oxfmt invocation. Package-local commands
   remain available and inherit the root `.oxfmtrc.json`.
 - `.github/workflows/format.yaml` checks formatting once on Linux, outside the
-  package/OS test matrices. Do not add formatting steps to individual package CI jobs.
+  test OS matrix. Do not add formatting steps to build/test jobs.
 - Tooling uses a line width of 100 with the existing fixture, generated-file, and
   unmanaged-content exclusions. Import organization and package.json sorting are
   intentionally disabled; lint/type checks still report unused imports.
