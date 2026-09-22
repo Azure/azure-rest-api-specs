@@ -28,8 +28,8 @@ The `eng/tools` directory contains a collection of standalone Node.js packages u
 The top-level `eng/tools` directory holds shared configuration that the individual packages extend:
 
 - `package.json` — aggregates every tool as a `workspace:*` devDependency and provides a root `build` script
-- `tsconfig.base.json` — engineering-specific options extending the root `tsconfig.base.json`
 - `tsconfig.json` — aggregate project with globs for every tool's `src`/`test` files
+- Root `tsconfig.base.json` — shared compiler options inherited by every tooling project
 - Lint configuration is shared by all packages in the repository-root `.oxlintrc.json`
 - `vitest.base.config.ts` — base Vitest config that each tool extends
 - Root `.oxfmtrc.json` — shared Oxfmt configuration and subtree-scoped ignore patterns
@@ -49,12 +49,11 @@ The top-level `eng/tools` directory holds shared configuration that the individu
 ```
 eng/tools/
 ├── package.json               # Aggregates all tools as workspace:* devDependencies; root "build"
-├── tsconfig.base.json         # Engineering options over the root compiler base
 ├── tsconfig.json              # Aggregate source/test project for all tools
 ├── vitest.base.config.ts      # Base Vitest config (extended per tool)
 └── <tool>/                    # One directory per tool package
     ├── package.json           # @azure-tools/<tool>; scripts, deps, bin entry
-    ├── tsconfig.json          # Extends ../tsconfig.base.json; include src/test
+    ├── tsconfig.json          # Extends ../../../tsconfig.base.json; include src/test
     ├── vitest.config.ts       # Extends ../vitest.base.config.ts
     ├── README.md              # Optional, recommended for user-facing tools
     ├── cmd/                   # Thin CLI wrappers (*.js) declared under package.json "bin"
@@ -120,7 +119,7 @@ Every tool package is a thin extension of the shared `eng/tools` configuration. 
 
 ```jsonc
 {
-  "extends": "../tsconfig.base.json",
+  "extends": "../../../tsconfig.base.json",
   "include": ["src/**/*.ts", "test/**/*.ts"]
 }
 ```
@@ -209,12 +208,12 @@ Code linting runs once for all packages in `.github/workflows/lint.yaml`, which 
 
 1. Create `eng/tools/<tool>/` with `src/`, `test/`, and `cmd/` directories.
 2. Add `package.json` (name `@azure-tools/<tool>`, `"type": "module"`, scripts and `engines` matching the template above).
-3. Add `tsconfig.json` extending `../tsconfig.base.json`.
+3. Add `tsconfig.json` extending the root `../../../tsconfig.base.json`.
 4. Use the repository-root `.oxlintrc.json` without adding a per-tool lint config.
 5. Add `vitest.config.ts` extending `../vitest.base.config.ts`.
 6. Add CLI wrapper(s) under `cmd/` and declare them in the `bin` field.
 7. Register the package in `eng/tools/package.json` (`workspace:*` devDependency). The aggregate `eng/tools/tsconfig.json` automatically includes tool `src`/`test` directories.
-8. Add a `.github/workflows/<tool>-test.yaml` workflow calling `_reusable-eng-tools-test.yaml` with `package: <tool>`. Include relevant `paths` filters, at minimum `tsconfig.base.json`, `eng/tools/package.json`, `eng/tools/tsconfig.json`, `eng/tools/tsconfig.base.json`, and `eng/tools/<tool>/**`.
+8. Add a `.github/workflows/<tool>-test.yaml` workflow calling `_reusable-eng-tools-test.yaml` with `package: <tool>`. Include relevant `paths` filters, at minimum `tsconfig.base.json`, `eng/tools/package.json`, `eng/tools/tsconfig.json`, and `eng/tools/<tool>/**`.
 9. Run the [required checks](#before-committing) in the new tool directory.
 
 ### Updating Dependencies
