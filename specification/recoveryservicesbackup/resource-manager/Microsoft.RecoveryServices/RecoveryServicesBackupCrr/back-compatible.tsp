@@ -85,7 +85,10 @@ using Microsoft.RecoveryServices;
   AzureIaasVmProtectedItemExtendedInfo,
   "AzureIaaSVMProtectedItemExtendedInfo"
 );
-@@clientName(AzureIaasComputeVmProtectedItem, "AzureIaaSComputeVMProtectedItem");
+@@clientName(
+  AzureIaasComputeVmProtectedItem,
+  "AzureIaaSComputeVMProtectedItem"
+);
 @@clientName(AzureIaasVmErrorInfo, "AzureIaaSVMErrorInfo");
 @@clientName(AzureIaasVmJobExtendedInfo, "AzureIaaSVMJobExtendedInfo");
 @@clientName(AzureIaasVmJobTaskDetails, "AzureIaaSVMJobTaskDetails");
@@ -125,7 +128,10 @@ using Microsoft.RecoveryServices;
   OperationStatusProvisionIlrExtendedInfo,
   "OperationStatusProvisionILRExtendedInfo"
 );
-@@clientName(AzureWorkloadSapHanaRecoveryPoint, "AzureWorkloadSAPHanaRecoveryPoint");
+@@clientName(
+  AzureWorkloadSapHanaRecoveryPoint,
+  "AzureWorkloadSAPHanaRecoveryPoint"
+);
 @@clientName(
   AzureWorkloadSapHanaRestoreRequest,
   "AzureWorkloadSAPHanaRestoreRequest"
@@ -155,7 +161,10 @@ using Microsoft.RecoveryServices;
 // leaf onto its intermediate at emit time so the emitted swagger keeps the original
 // nested `allOf` and generated SDKs keep the original is-a inheritance chain.
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
-@@hierarchyBuilding(AzureIaasClassicComputeVmProtectedItem, AzureIaasVmProtectedItem);
+@@hierarchyBuilding(
+  AzureIaasClassicComputeVmProtectedItem,
+  AzureIaasVmProtectedItem
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
 @@hierarchyBuilding(AzureIaasComputeVmProtectedItem, AzureIaasVmProtectedItem);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
@@ -175,7 +184,10 @@ using Microsoft.RecoveryServices;
 );
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
-@@hierarchyBuilding(AzureWorkloadSapHanaRecoveryPoint, AzureWorkloadRecoveryPoint);
+@@hierarchyBuilding(
+  AzureWorkloadSapHanaRecoveryPoint,
+  AzureWorkloadRecoveryPoint
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
 @@hierarchyBuilding(
