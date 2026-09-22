@@ -10,11 +10,13 @@ on:
       - pnpm-lock.yaml
       - pnpm-workspace.yaml
       - package.json
-      - tsconfig.json
+      - tsconfig.base.json
       - .github/workflows/_reusable-eng-tools-test.yaml
       - .github/workflows/spec-gen-sdk-runner-test.yaml
       - eng/tools/package.json
       - eng/tools/tsconfig.json
+      - eng/tools/vitest.base.config.ts
+      - vitest.config.mts
       - eng/tools/spec-gen-sdk-runner/**
       - eng/pipelines/templates/stages/archetype-spec-gen-sdk.yml
   workflow_dispatch:
@@ -28,4 +30,3 @@ jobs:
     uses: ./.github/workflows/_reusable-eng-tools-test.yaml
     with:
       package: spec-gen-sdk-runner
-      lint: true
