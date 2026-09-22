@@ -182,7 +182,7 @@ describe("Swagger", () => {
         Problem File: ${resolve("/fake/invalid.json")}
         Readme: ${resolve("/fake/readme.md")}
         Tag: test-tag
-        Cause: ResolverError: ENOENT: no such file or directory, open '${resolve("/does/not/exist.json")}']
+        Cause: ResolverError: ENOENT: no such file or directory, open '${resolve("/does/not/exist.json").toLowerCase()}']
     `,
     );
   });
