@@ -6668,6 +6668,18 @@ model A2AVmManagedDiskInputDetails {
 }
 
 /**
+ * A2A managed disk input details for cluster switch protection.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Preserve the established A2A provider model naming convention."
+@added(Versions.v2026_11_01)
+model A2AClusterVmManagedDiskInputDetails {
+  ...OmitProperties<
+    A2AVmManagedDiskInputDetails,
+    "confidentialDiskEncryptionInfo"
+  >;
+}
+
+/**
  * Recovery disk encryption info (BEK and KEK).
  */
 model DiskEncryptionInfo {
@@ -7718,7 +7730,8 @@ model A2AProtectedItemDetail {
    * The list of vm managed disk details.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  vmManagedDisks?: A2AVmManagedDiskInputDetails[];
+  @typeChangedFrom(Versions.v2026_11_01, A2AVmManagedDiskInputDetails[])
+  vmManagedDisks?: A2AClusterVmManagedDiskInputDetails[];
 
   /**
    * The recovery resource group Id.

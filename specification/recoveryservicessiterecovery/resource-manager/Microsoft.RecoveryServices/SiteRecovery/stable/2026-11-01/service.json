@@ -11032,6 +11032,57 @@
       ],
       "x-ms-discriminator-value": "A2A"
     },
+    "A2AClusterVmManagedDiskInputDetails": {
+      "type": "object",
+      "description": "A2A managed disk input details for cluster switch protection.",
+      "properties": {
+        "diskId": {
+          "type": "string",
+          "description": "The disk Id."
+        },
+        "primaryStagingAzureStorageAccountId": {
+          "type": "string",
+          "description": "The primary staging storage account Arm Id."
+        },
+        "recoveryResourceGroupId": {
+          "type": "string",
+          "description": "The target resource group Arm Id."
+        },
+        "recoveryReplicaDiskAccountType": {
+          "type": "string",
+          "description": "The replica disk type. Its an optional value and will be same as source disk type if not user provided."
+        },
+        "recoveryTargetDiskAccountType": {
+          "type": "string",
+          "description": "The target disk type after failover. Its an optional value and will be same as source disk type if not user provided."
+        },
+        "recoveryDiskEncryptionSetId": {
+          "type": "string",
+          "description": "The recovery disk encryption set Id."
+        },
+        "diskEncryptionInfo": {
+          "$ref": "#/definitions/DiskEncryptionInfo",
+          "description": "The recovery disk encryption information (for one / single pass flows)."
+        },
+        "recoveryNetworkAccessPolicy": {
+          "$ref": "#/definitions/DiskNetworkAccessPolicy",
+          "description": "The network access policy for the recovery managed disk."
+        },
+        "recoveryDiskAccessId": {
+          "type": "string",
+          "description": "The recovery disk access Arm Id."
+        },
+        "recoveryPublicNetworkAccess": {
+          "$ref": "#/definitions/DiskPublicNetworkAccess",
+          "description": "The public network access setting for the recovery managed disk."
+        }
+      },
+      "required": [
+        "diskId",
+        "primaryStagingAzureStorageAccountId",
+        "recoveryResourceGroupId"
+      ]
+    },
     "A2AContainerCreationInput": {
       "type": "object",
       "description": "A2A cloud creation input.",
@@ -11721,7 +11772,7 @@
           "type": "array",
           "description": "The list of vm managed disk details.",
           "items": {
-            "$ref": "#/definitions/A2AVmManagedDiskInputDetails"
+            "$ref": "#/definitions/A2AClusterVmManagedDiskInputDetails"
           }
         },
         "recoveryResourceGroupId": {
