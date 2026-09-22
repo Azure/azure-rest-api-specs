@@ -1,0 +1,43 @@
+{
+  "title": "List Workspaces with a validated customer key configuration pending",
+  "operationId": "Workspaces_List",
+  "parameters": {
+    "api-version": "2026-11-01",
+    "subscriptionId": "6b052e15-03d3-4f17-b2e1-be7f07588291",
+    "resourceGroupName": "exampleRG"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Chaos/workspaces/exampleWorkspace",
+            "name": "exampleWorkspace",
+            "type": "Microsoft.Chaos/workspaces",
+            "location": "westus2",
+            "properties": {
+              "scopes": [
+                "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG"
+              ],
+              "provisioningState": "Updating",
+              "encryption": {
+                "customerManagedKeyEncryption": {
+                  "keyEncryptionKeyUrl": "https://contoso-vault.vault.azure.net/keys/workspace-key",
+                  "keyVaultResourceId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/customer-keys/providers/Microsoft.KeyVault/vaults/contoso-vault"
+                },
+                "status": {
+                  "state": "Pending",
+                  "observedProtection": "MicrosoftManaged",
+                  "lastCheckedAt": "2026-11-01T11:00:00Z"
+                },
+                "customerManagedKeyOnboarding": {
+                  "applicationId": "00000000-0000-0000-0000-000000000001"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

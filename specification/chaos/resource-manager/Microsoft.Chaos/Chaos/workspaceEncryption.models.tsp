@@ -6,12 +6,15 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.Chaos;
 
-/** The requested customer key, onboarding information, and service observations. */
+/** The validated requested key and vault reference, onboarding information, and service observations. */
 @added(Versions.v2026_11_01)
 model WorkspaceEncryption {
   /**
    * The requested customer-managed key. Absence means Microsoft-managed
-   * protection. A present object must contain a valid keyEncryptionKeyUrl.
+   * protection. A present object requires a coherent keyEncryptionKeyUrl and
+   * keyVaultResourceId pair. After synchronous caller and vault validation,
+   * the accepted pair can be returned while configuration is Pending.
+   * It does not prove that active data already uses the requested key.
    */
   customerManagedKeyEncryption?: WorkspaceCustomerManagedKeyEncryption;
 
@@ -42,9 +45,11 @@ model WorkspaceCustomerManagedKeyEncryption {
   /**
    * The versionless HTTPS Key Vault key URI in the supported cloud and Workspace
    * tenant. The key vault must belong to the same Microsoft Entra tenant as
-   * the Workspace. The service verifies the tenant as the first remote stage
-   * of the configuration operation, before persisting requested encryption
-   * state or changing Azure Storage or customer data.
+   * the Workspace. Its HTTPS origin must match the vault referenced by
+   * keyVaultResourceId. The service validates the effective pair and caller
+   * vault-read permission synchronously through Azure Resource Manager before
+   * creating public operation metadata, accepting the configuration operation,
+   * persisting requested encryption, or changing Storage or customer data.
    * Supports RSA keys in Azure Key Vault and RSA-HSM keys in Premium Key Vault,
    * with key sizes of 2048, 3072, or 4096 bits. Premium RSA-HSM keys use the same
    * vault URL. The separate Azure Managed HSM service is not supported;
@@ -54,6 +59,20 @@ model WorkspaceCustomerManagedKeyEncryption {
    * available for at least 24 hours after rotation.
    */
   keyEncryptionKeyUrl: WorkspaceKeyEncryptionKeyUrl;
+
+  /**
+   * The fully qualified Azure resource ID of the key vault that contains the key.
+   * Use /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName},
+   * not a key child resource, Managed HSM, or URL. Full PUT with CMK and PATCH
+   * that changes either CMK member require Microsoft.KeyVault/vaults/read on
+   * the effective vault. The service compares its canonical ID, tenant, and
+   * vault URI with the requested pair before accepting the operation.
+   */
+  keyVaultResourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.KeyVault/vaults";
+    }
+  ]>;
 }
 
 /**
@@ -74,7 +93,9 @@ model WorkspaceCustomerManagedKeyOnboarding {
    * existing Workspaces, including before customer-key enrollment. Before
    * creating a Workspace with a customer key, obtain the application name and
    * ID for the target cloud from the service onboarding documentation or Portal,
-   * then consent and grant key access. GET returns the same application ID.
+   * then consent and grant key access. The configuring caller separately needs
+   * Microsoft.KeyVault/vaults/read on the referenced vault.
+   * GET returns the same application ID.
    * This is not a service principal object ID or an identity selector.
    * The Workspace's top-level identity does not select this application.
    */
@@ -83,7 +104,7 @@ model WorkspaceCustomerManagedKeyOnboarding {
   applicationId: string;
 }
 
-/** Service observations of the active encryption setting and customer-data access. */
+/** Service observations of protection and access for customer data under the Workspace encryption scope. */
 @added(Versions.v2026_11_01)
 model WorkspaceEncryptionStatus {
   /** The result of configuration or the most recent usable health observation. */
@@ -140,14 +161,18 @@ union WorkspaceEncryptionState {
 /**
  * A partial encryption setting. Omitted fields are unchanged and null deletes a
  * writable field. A remaining customerManagedKeyEncryption object must have a
- * valid key URL. Read-only onboarding and status inputs are ignored.
+ * coherent key URL and vault resource ID. Read-only onboarding and status
+ * inputs are ignored. Changing either member requires synchronous caller and
+ * vault validation of the merged pair, including any retained member.
  */
 @added(Versions.v2026_11_01)
 model WorkspaceEncryptionUpdate {
   /**
    * The customer key configuration to merge. Null deletes the object and
    * requests Microsoft-managed protection. An empty object retains an existing
-   * key URL but is invalid when no key URL exists after merging.
+   * complete pair without a lookup when neither member changes, but is invalid
+   * when the merged pair is incomplete. Whole-object removal does not require
+   * a vault metadata lookup.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Explicit null is required so JSON Merge Patch can delete customer-key properties when switching to Microsoft-managed protection."
   customerManagedKeyEncryption?: WorkspaceCustomerManagedKeyEncryptionUpdate;
@@ -158,8 +183,23 @@ model WorkspaceEncryptionUpdate {
 model WorkspaceCustomerManagedKeyEncryptionUpdate {
   /**
    * The replacement versionless key URI. Omission retains the URI; null deletes
-   * it. A remaining customer-key configuration without a valid URI is rejected.
+   * it. A same-vault replacement retains the stored vault ID. The effective
+   * pair is authorized and validated before acceptance; an incomplete or
+   * mismatched pair is rejected. Key path and name casing is preserved.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Explicit null is required so JSON Merge Patch can delete keyEncryptionKeyUrl. A remaining CMK object without a URL is rejected before mutation."
   keyEncryptionKeyUrl?: WorkspaceKeyEncryptionKeyUrl;
+
+  /**
+   * The vault resource ID to merge with the key URL. Omission retains the ID,
+   * but does not bypass caller authorization when the URL changes. Null deletes
+   * the ID; a remaining CMK object without both members is invalid. Changing
+   * vault requires a coherent new URL and ID pair.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Explicit null is required so JSON Merge Patch can delete keyVaultResourceId. A remaining CMK object without its vault ID is rejected before acceptance."
+  keyVaultResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.KeyVault/vaults";
+    }
+  ]>;
 }
