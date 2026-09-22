@@ -42675,17 +42675,15 @@ components:
           external: '#/components/schemas/ExternalAgentDefinition'
           voice: '#/components/schemas/VoiceAgentDefinition'
     AgentDefinitionOptInKeys:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - WorkflowAgents=V1Preview
-            - ExternalAgents=V1Preview
-            - DraftAgents=V1Preview
-            - VoiceAgents=V1Preview
-            - DigitalWorker=V1Preview
-            - GitHubCopilot=V1Preview
-            - Skills=V1Preview
+      type: string
+      enum:
+        - WorkflowAgents=V1Preview
+        - ExternalAgents=V1Preview
+        - DraftAgents=V1Preview
+        - VoiceAgents=V1Preview
+        - DigitalWorker=V1Preview
+        - GitHubCopilot=V1Preview
+        - Skills=V1Preview
       description: Feature opt-in keys for agent definition operations supporting conditional preview features.
     AgentEndpointAuthorizationScheme:
       type: object
