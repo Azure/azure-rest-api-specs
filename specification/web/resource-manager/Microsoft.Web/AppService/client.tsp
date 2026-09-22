@@ -110,7 +110,6 @@ namespace Customizations;
   "python"
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   AnalysisDefinitionOperationGroup.executeSiteAnalysisSlot,
   reorderParameters(
@@ -132,7 +131,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   DetectorDefinitionResources.executeSiteDetector,
   reorderParameters(
@@ -153,7 +151,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   DetectorDefinitionResourceOperationGroup.executeSiteDetectorSlot,
   reorderParameters(
@@ -175,7 +172,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   AnalysisDefinitionOperationGroup.getSiteAnalysisSlot,
   reorderParameters(
@@ -193,7 +189,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   DetectorResponseOperationGroup.getSiteDetectorResponseSlot,
   reorderParameters(
@@ -213,7 +208,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   DetectorDefinitionResourceOperationGroup.getSiteDetectorSlot,
   reorderParameters(
@@ -231,7 +225,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   DiagnosticCategoryOperationGroup.getSiteDiagnosticCategorySlot,
   reorderParameters(
@@ -248,7 +241,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   AnalysisDefinitionOperationGroup.listSiteAnalysesSlot,
   reorderParameters(
@@ -265,7 +257,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   DetectorDefinitionResourceOperationGroup.listSiteDetectorsSlot,
   reorderParameters(
@@ -282,7 +273,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   RecommendationRules.disableRecommendationForHostingEnvironment,
   reorderParameters(
@@ -300,7 +290,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   PremierAddOnOperationGroup.addPremierAddOnSlot,
   reorderParameters(
@@ -323,7 +312,6 @@ namespace Customizations;
   "premierAddOn"
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   PrivateEndpointConnectionSlotOperationGroup.approveOrRejectPrivateEndpointConnectionSlot,
   reorderParameters(
@@ -346,7 +334,6 @@ namespace Customizations;
   "privateEndpointWrapper"
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   FunctionEnvelopeOperationGroup.createInstanceFunctionSlot,
   reorderParameters(
@@ -369,7 +356,6 @@ namespace Customizations;
   "function_envelope"
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   PrivateEndpointConnectionSlotOperationGroup.deletePrivateEndpointConnectionSlot,
   reorderParameters(
@@ -387,7 +373,6 @@ namespace Customizations;
   "!javascript,!autorest"
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   SiteExtensionInfoOperationGroup.installSiteExtensionSlot,
   reorderParameters(
@@ -405,7 +390,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   Sites.migrateStorage,
   reorderParameters(
@@ -424,7 +408,6 @@ namespace Customizations;
 
 @@clientName(Sites.migrateStorage::parameters.body, "migrationOptions");
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   BackupItemOperationGroup.restoreSlot,
   reorderParameters(
@@ -444,7 +427,6 @@ namespace Customizations;
 
 @@clientName(BackupItemOperationGroup.restoreSlot::parameters.body, "request");
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   DeploymentOperationGroup.createDeploymentSlot,
   reorderParameters(
@@ -467,7 +449,6 @@ namespace Customizations;
   "deployment"
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   IdentifierOperationGroup.createOrUpdateDomainOwnershipIdentifierSlot,
   reorderParameters(
@@ -490,7 +471,6 @@ namespace Customizations;
   "domainOwnershipIdentifier"
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   FunctionEnvelopeOperationGroup.createOrUpdateFunctionSecretSlot,
   reorderParameters(
@@ -514,7 +494,6 @@ namespace Customizations;
   "key"
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   HostNameBindingOperationGroup.createOrUpdateHostNameBindingSlot,
   reorderParameters(
@@ -537,7 +516,6 @@ namespace Customizations;
   "hostNameBinding"
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   WebApps.createOrUpdateHostSecretSlot,
   reorderParameters(
@@ -557,7 +535,6 @@ namespace Customizations;
 
 @@clientName(WebApps.createOrUpdateHostSecretSlot::parameters.body, "key");
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   HybridConnectionSlotOperationGroup.createOrUpdateHybridConnectionSlot,
   reorderParameters(
@@ -581,7 +558,6 @@ namespace Customizations;
   "connectionEnvelope"
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   PublicCertificateOperationGroup.createOrUpdatePublicCertificateSlot,
   reorderParameters(
@@ -604,7 +580,6 @@ namespace Customizations;
   "publicCertificate"
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   RelayServiceConnectionEntityOperationGroup.createOrUpdateRelayServiceConnectionSlot,
   reorderParameters(
@@ -627,7 +602,6 @@ namespace Customizations;
   "connectionEnvelope"
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   VnetGatewayOperationGroup.createOrUpdateVnetConnectionGatewaySlot,
   reorderParameters(
@@ -651,7 +625,6 @@ namespace Customizations;
   "connectionEnvelope"
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   VnetInfoResourceOperationGroup.createOrUpdateVnetConnectionSlot,
   reorderParameters(
@@ -674,7 +647,6 @@ namespace Customizations;
   "connectionEnvelope"
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   BackupItemOperationGroup.deleteBackupSlot,
   reorderParameters(
@@ -691,7 +663,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   ContinuousWebJobOperationGroup.deleteContinuousWebJobSlot,
   reorderParameters(
@@ -708,7 +679,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   DeploymentOperationGroup.deleteDeploymentSlot,
   reorderParameters(
@@ -725,7 +695,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   IdentifierOperationGroup.deleteDomainOwnershipIdentifierSlot,
   reorderParameters(
@@ -742,7 +711,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   FunctionEnvelopeOperationGroup.deleteFunctionSecretSlot,
   reorderParameters(
@@ -760,7 +728,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   WebApps.deleteHostSecretSlot,
   reorderParameters(
@@ -778,7 +745,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   HybridConnectionSlotOperationGroup.deleteHybridConnectionSlot,
   reorderParameters(
@@ -796,7 +762,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   FunctionEnvelopeOperationGroup.deleteInstanceFunctionSlot,
   reorderParameters(
@@ -813,7 +778,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   ProcessInfos.deleteInstanceProcess,
   reorderParameters(
@@ -830,7 +794,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   InstanceProcessSlotOperationGroup.deleteInstanceProcessSlot,
   reorderParameters(
@@ -848,7 +811,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   PremierAddOnOperationGroup.deletePremierAddOnSlot,
   reorderParameters(
@@ -865,7 +827,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   ProcessSlotOperationGroup.deleteProcessSlot,
   reorderParameters(
@@ -882,7 +843,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   RelayServiceConnectionEntityOperationGroup.deleteRelayServiceConnectionSlot,
   reorderParameters(
@@ -899,7 +859,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   SiteExtensionInfoOperationGroup.deleteSiteExtensionSlot,
   reorderParameters(
@@ -916,7 +875,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   TriggeredWebJobs.deleteTriggeredWebJobSlot,
   reorderParameters(
@@ -933,7 +891,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   VnetInfoResourceOperationGroup.deleteVnetConnectionSlot,
   reorderParameters(
@@ -950,7 +907,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   AppSettingKeyVaultReferenceSlot.getAppSettingKeyVaultReferenceSlot,
   reorderParameters(
@@ -968,7 +924,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   BackupItemOperationGroup.getBackupStatusSlot,
   reorderParameters(
@@ -985,7 +940,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   SiteConfigSnapshotSlotResourceOperationGroup.getConfigurationSnapshotSlot,
   reorderParameters(
@@ -1003,7 +957,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   ContinuousWebJobOperationGroup.getContinuousWebJobSlot,
   reorderParameters(
@@ -1020,7 +973,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   DeploymentOperationGroup.getDeploymentSlot,
   reorderParameters(
@@ -1037,7 +989,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   IdentifierOperationGroup.getDomainOwnershipIdentifierSlot,
   reorderParameters(
@@ -1054,7 +1005,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   HybridConnectionSlotOperationGroup.getHybridConnectionSlot,
   reorderParameters(
@@ -1072,7 +1022,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   FunctionEnvelopeOperationGroup.getInstanceFunctionSlot,
   reorderParameters(
@@ -1089,7 +1038,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   WebSiteInstanceStatusOperationGroup.getInstanceInfoSlot,
   reorderParameters(
@@ -1106,7 +1054,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   ProcessInfos.getInstanceProcess,
   reorderParameters(
@@ -1123,7 +1070,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   ProcessInfos.getInstanceProcessDump,
   reorderParameters(
@@ -1141,7 +1087,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   InstanceProcessSlotOperationGroup.getInstanceProcessDumpSlot,
   reorderParameters(
@@ -1160,7 +1105,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   ProcessModuleInfos.getInstanceProcessModule,
   reorderParameters(
@@ -1178,7 +1122,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   InstanceProcessModuleSlotOperationGroup.getInstanceProcessModuleSlot,
   reorderParameters(
@@ -1197,7 +1140,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   InstanceProcessSlotOperationGroup.getInstanceProcessSlot,
   reorderParameters(
@@ -1215,7 +1157,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   WebApps.getNetworkTraceOperationSlot,
   reorderParameters(
@@ -1232,7 +1173,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   WebApps.getNetworkTraceOperationSlotV2,
   reorderParameters(
@@ -1249,7 +1189,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   WebApps.getNetworkTracesSlot,
   reorderParameters(
@@ -1266,7 +1205,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   WebApps.getNetworkTracesSlotV2,
   reorderParameters(
@@ -1283,7 +1221,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   PremierAddOnOperationGroup.getPremierAddOnSlot,
   reorderParameters(
@@ -1300,7 +1237,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   PrivateEndpointConnectionSlotOperationGroup.getPrivateEndpointConnectionSlot,
   reorderParameters(
@@ -1317,7 +1253,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   ProcessSlotOperationGroup.getProcessDumpSlot,
   reorderParameters(
@@ -1335,7 +1270,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   ProcessModuleSlotOperationGroup.getProcessModuleSlot,
   reorderParameters(
@@ -1353,7 +1287,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   ProcessSlotOperationGroup.getProcessSlot,
   reorderParameters(
@@ -1370,7 +1303,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   RelayServiceConnectionEntityOperationGroup.getRelayServiceConnectionSlot,
   reorderParameters(
@@ -1387,7 +1319,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   SiteConnectionStringKeyVaultReferenceSlot.getSiteConnectionStringKeyVaultReferenceSlot,
   reorderParameters(
@@ -1405,7 +1336,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   SiteExtensionInfoOperationGroup.getSiteExtensionSlot,
   reorderParameters(
@@ -1422,7 +1352,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   TriggeredJobHistories.getTriggeredWebJobHistorySlot,
   reorderParameters(
@@ -1440,7 +1369,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   TriggeredWebJobs.getTriggeredWebJobSlot,
   reorderParameters(
@@ -1457,7 +1385,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   VnetGatewayOperationGroup.getVnetConnectionGatewaySlot,
   reorderParameters(
@@ -1475,7 +1402,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   VnetInfoResourceOperationGroup.getVnetConnectionSlot,
   reorderParameters(
@@ -1492,7 +1418,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   WebJobs.getWebJobSlot,
   reorderParameters(
@@ -1509,7 +1434,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   BackupItemOperationGroup.listBackupStatusSecretsSlot,
   reorderParameters(
@@ -1532,7 +1456,6 @@ namespace Customizations;
   "request"
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   DeploymentOperationGroup.listDeploymentLogSlot,
   reorderParameters(
@@ -1550,7 +1473,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   FunctionEnvelopeOperationGroup.listFunctionKeysSlot,
   reorderParameters(
@@ -1568,7 +1490,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   FunctionEnvelopeOperationGroup.listFunctionSecretsSlot,
   reorderParameters(
@@ -1586,7 +1507,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   NetworkFeaturesSlotOperationGroup.listNetworkFeaturesSlot,
   reorderParameters(
@@ -1603,7 +1523,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   ProcessModuleInfos.listInstanceProcessModules,
   reorderParameters(
@@ -1620,7 +1539,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   InstanceProcessModuleSlotOperationGroup.listInstanceProcessModulesSlot,
   reorderParameters(
@@ -1638,7 +1556,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   ProcessInfos.listInstanceProcessThreads,
   reorderParameters(
@@ -1656,7 +1573,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   InstanceProcessSlotOperationGroup.listInstanceProcessThreadsSlot,
   reorderParameters(
@@ -1675,7 +1591,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   ProcessModuleSlotOperationGroup.listProcessModulesSlot,
   reorderParameters(
@@ -1692,7 +1607,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   ProcessSlotOperationGroup.listProcessThreadsSlot,
   reorderParameters(
@@ -1710,7 +1624,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   TriggeredJobHistories.listTriggeredWebJobHistorySlot,
   reorderParameters(
@@ -1727,7 +1640,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   SiteConfigSnapshotSlotResourceOperationGroup.recoverSiteConfigurationSnapshotSlot,
   reorderParameters(
@@ -1746,7 +1658,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   TriggeredWebJobs.runTriggeredWebJobSlot,
   reorderParameters(
@@ -1764,7 +1675,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   ContinuousWebJobOperationGroup.startContinuousWebJobSlot,
   reorderParameters(
@@ -1782,7 +1692,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   ContinuousWebJobOperationGroup.stopContinuousWebJobSlot,
   reorderParameters(
@@ -1800,7 +1709,6 @@ namespace Customizations;
   )
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   IdentifierOperationGroup.updateDomainOwnershipIdentifierSlot,
   reorderParameters(
@@ -1823,7 +1731,6 @@ namespace Customizations;
   "domainOwnershipIdentifier"
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   HybridConnectionSlotOperationGroup.updateHybridConnectionSlot,
   reorderParameters(
@@ -1847,7 +1754,6 @@ namespace Customizations;
   "connectionEnvelope"
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   PremierAddOnOperationGroup.updatePremierAddOnSlot,
   reorderParameters(
@@ -1870,7 +1776,6 @@ namespace Customizations;
   "premierAddOn"
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   RelayServiceConnectionEntityOperationGroup.updateRelayServiceConnectionSlot,
   reorderParameters(
@@ -1893,7 +1798,6 @@ namespace Customizations;
   "connectionEnvelope"
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   VnetGatewayOperationGroup.updateVnetConnectionGatewaySlot,
   reorderParameters(
@@ -1917,7 +1821,6 @@ namespace Customizations;
   "connectionEnvelope"
 );
 
-#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   VnetInfoResourceOperationGroup.updateVnetConnectionSlot,
   reorderParameters(
