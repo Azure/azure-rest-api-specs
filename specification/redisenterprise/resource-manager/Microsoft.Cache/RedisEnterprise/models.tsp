@@ -1748,7 +1748,7 @@ model MigrationProperties {
  */
 model MigrationUndoRequest {
   /**
-   * The reason the migration is being undone (rolled back). This value is used to improve the migration experience and is not otherwise validated.
+   * The reason for undoing (rolling back) the migration. Choose the value that best describes why the rollback is needed. This information helps us improve the migration experience and does not change how the rollback is performed.
    */
   rollbackReason?: MigrationRollbackReason;
 }
@@ -1820,6 +1820,14 @@ model AzureCacheForRedisMigrationProperties extends MigrationProperties {
   /**
    * Sets whether the data is migrated from source to target or not. This property must be true during the preview.
    */
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_01, "skipDataMigration")
+  skipDataMigrationPreview: boolean;
+
+  /**
+   * Sets whether the data is migrated from source to target or not. Set this property to true to skip data migration.
+   */
+  @added(Versions.v2026_09_01)
   skipDataMigration: boolean;
 
   /**
