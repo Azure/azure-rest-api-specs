@@ -18,6 +18,51 @@ string, or fragment. Absence of `customerManagedKeyEncryption` means
 Microsoft-managed protection. There is no writable protection-mode enum or
 alternate key-setting shape.
 
+### Supported key stores
+
+Workspace CMK supports Azure Key Vault RSA keys and Premium Key Vault RSA-HSM
+keys, with Storage-supported sizes of 2048, 3072, or 4096 bits. The separate
+Azure Managed HSM service is not supported in this GA release.
+Premium-vault RSA-HSM keys use the same vault URL and onboarding flow as RSA
+keys. A key URL does not identify its cryptographic type; do not infer the type
+from its name or reject a vault key because its name contains `HSM`.
+
+For a supported RSA-HSM key in a Premium vault, the request fragment is:
+
+```json
+{
+  "properties": {
+    "encryption": {
+      "customerManagedKeyEncryption": {
+        "keyEncryptionKeyUrl": "https://contoso-premium.vault.azure.net/keys/workspace-rsa-hsm"
+      }
+    }
+  }
+}
+```
+
+In this example the key is provisioned as RSA-HSM in Premium Key Vault; the
+URL alone does not prove that fact. The service validates vault hosts against
+the supported cloud's allowlist. A URL such as
+`https://contoso-hsm.managedhsm.azure.net/keys/workspace-key` is a separate
+Managed HSM endpoint and is rejected before LRO acceptance or any state change.
+The existing HTTP 400 error response is:
+
+```json
+{
+  "error": {
+    "code": "InvalidEncryptionConfiguration",
+    "message": "Azure Managed HSM is not supported. Use Azure Key Vault; RSA-HSM keys in Premium Key Vault are supported.",
+    "target": "properties.encryption.customerManagedKeyEncryption.keyEncryptionKeyUrl"
+  }
+}
+```
+
+This restriction adds no public field or role. Portal key selection, SDK
+documentation, onboarding, support guidance, and release notes must use the
+same boundary. Key-store acceptance tests must exercise a real Premium-vault
+RSA-HSM key; schema tests only verify the URL shape and documented scope.
+
 This uses the preferred key names from the
 [ARM common CMK contract](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/b32b6e22b3a151049fdfd5275eb0c748185a94bc/v1.0/common-api-contracts.md#customer-managed-key-encryption).
 The identity-selection object is omitted because Chaos owns the shared Storage

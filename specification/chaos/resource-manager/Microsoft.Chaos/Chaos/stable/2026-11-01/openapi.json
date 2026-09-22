@@ -7370,7 +7370,7 @@
       "properties": {
         "keyEncryptionKeyUrl": {
           "$ref": "#/definitions/WorkspaceKeyEncryptionKeyUrl",
-          "description": "The versionless HTTPS Key Vault key URI in the supported cloud and Workspace\ntenant. The key vault must belong to the same Microsoft Entra tenant as\nthe Workspace. The service verifies the tenant as the first remote stage\nof the configuration operation, before persisting requested encryption\nstate or changing Azure Storage or customer data.\nA key version, query string, or fragment is not permitted.\nAzure Storage follows key versions automatically. Keep the previous version\navailable for at least 24 hours after rotation."
+          "description": "The versionless HTTPS Key Vault key URI in the supported cloud and Workspace\ntenant. The key vault must belong to the same Microsoft Entra tenant as\nthe Workspace. The service verifies the tenant as the first remote stage\nof the configuration operation, before persisting requested encryption\nstate or changing Azure Storage or customer data.\nSupports RSA keys in Azure Key Vault and RSA-HSM keys in Premium Key Vault,\nwith key sizes of 2048, 3072, or 4096 bits. Premium RSA-HSM keys use the same\nvault URL. The separate Azure Managed HSM service is not supported;\nManaged HSM endpoints are rejected before operation acceptance.\nA key version, query string, or fragment is not permitted.\nAzure Storage follows key versions automatically. Keep the previous version\navailable for at least 24 hours after rotation."
         }
       },
       "required": [
@@ -7808,7 +7808,7 @@
     "WorkspaceKeyEncryptionKeyUrl": {
       "type": "string",
       "format": "uri",
-      "description": "A versionless HTTPS Key Vault key URI; the service also validates cloud and tenant.",
+      "description": "A versionless HTTPS Azure Key Vault key URI, including Premium-vault RSA-HSM\nkeys. Azure Managed HSM endpoints are not supported. The service also\nvalidates the cloud host allowlist and tenant; a vault URL does not identify\nthe key type.",
       "pattern": "^https://[a-zA-Z0-9-]+\\.vault\\.[a-zA-Z0-9.-]+/keys/[a-zA-Z0-9-]+$"
     },
     "WorkspaceListResult": {
