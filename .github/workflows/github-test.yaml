@@ -6,9 +6,21 @@ on:
       - main
     paths:
       - .github/**
+      - tsconfig.base.json
+      - package.json
+      - pnpm-lock.yaml
+      - pnpm-workspace.yaml
+      - vitest.config.mts
+      - eng/tools/vitest.base.config.ts
   pull_request:
     paths:
       - .github/**
+      - tsconfig.base.json
+      - package.json
+      - pnpm-lock.yaml
+      - pnpm-workspace.yaml
+      - vitest.config.mts
+      - eng/tools/vitest.base.config.ts
   workflow_dispatch:
 
 permissions:
@@ -34,6 +46,7 @@ jobs:
         with:
           sparse-checkout: |
             .github
+            eng/tools
 
       - if: ${{ github.event_name == 'pull_request' && matrix.folder == '.github' && matrix.os == 'ubuntu' }}
         name: Require compiled agentic workflow locks

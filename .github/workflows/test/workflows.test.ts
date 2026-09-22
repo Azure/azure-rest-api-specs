@@ -80,7 +80,9 @@ describe("workflow files", () => {
       "package.json",
       "pnpm-lock.yaml",
       "pnpm-workspace.yaml",
+      "tsconfig.base.json",
       "tsconfig.json",
+      "vitest.config.mts",
     ];
     expect(workflow.on?.pull_request?.paths).toEqual(paths);
     expect(workflow.on?.push?.paths).toEqual(paths);
@@ -92,7 +94,7 @@ describe("workflow files", () => {
     expect(workflow.jobs.lint.steps?.[1].with?.["install-command"]).toBe("pnpm ci");
   });
 
-  it("preserves the previous lint coverage", async () => {
+  it("lints enabled tooling and the root test config, excluding unmanaged paths", async () => {
     const root = resolve(workflowsDir, "../..");
     const folder = await mkdtemp(resolve(tmpdir(), "specs-lint-"));
     try {
@@ -106,7 +108,9 @@ describe("workflow files", () => {
           "lint-diff",
           "oav-runner",
           "release-plan",
+          "sdk-suppressions",
           "spec-gen-sdk-runner",
+          "summarize-impact",
           "suppressions",
           "tsp-client-tests",
           "typespec-requirement",
@@ -121,24 +125,22 @@ describe("workflow files", () => {
         "eng/common",
         "eng/scripts",
         "scripts",
-        ...[
-          "openapi-diff-runner",
-          "sdk-suppressions",
-          "summarize-impact",
-          "typespec-migration-validation",
-        ].map((name) => `eng/tools/${name}`),
+        ...["openapi-diff-runner", "typespec-migration-validation"].map(
+          (name) => `eng/tools/${name}`,
+        ),
       ];
       for (const path of [...included, ...excluded]) {
         await mkdir(resolve(folder, path), { recursive: true });
         await writeFile(resolve(folder, path, "index.ts"), "export const value = 1;\n");
       }
+      await writeFile(resolve(folder, "vitest.config.mts"), "export const value = 1;\n");
       const { stdout } = await execFile(
         process.execPath,
         [resolve(root, "node_modules/oxlint/bin/oxlint"), ".", "--debug=files"],
         { cwd: folder },
       );
       expect(stdout.trim().replaceAll("\\", "/").split(/\r?\n/).sort()).toEqual(
-        included.map((path) => `${path}/index.ts`).sort(),
+        [...included.map((path) => `${path}/index.ts`), "vitest.config.mts"].sort(),
       );
     } finally {
       await rm(folder, { recursive: true, force: true });
@@ -174,6 +176,7 @@ describe("workflow files", () => {
       "package.json",
       "pnpm-lock.yaml",
       "pnpm-workspace.yaml",
+      "vitest.config.mts",
     ];
     expect(workflow.on?.pull_request?.paths).toEqual(paths);
     expect(workflow.on?.push?.paths).toEqual(paths);
