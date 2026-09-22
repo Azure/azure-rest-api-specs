@@ -77,9 +77,6 @@ directive:
 
 ``` yaml
 suppressions:
-  - code: OperationsAPIImplementation
-    from: serviceEntitlementSettings.json
-    reason: The provider-wide Microsoft.Security operations endpoint is defined by the separate OperationsAPI project and included in package-composite-v3.
   - code: RequiredPropertiesMissingInResourceModel
     from: serviceEntitlementSettings.json
     where: $.definitions.ServiceEntitlementSettingOperationStatus
@@ -88,14 +85,6 @@ suppressions:
     from: serviceEntitlementSettings.json
     where: $.definitions.ServiceEntitlementSettingOperationStatus
     reason: This is the standard ArmOperationStatus LRO status monitor, not an ARM resource. Its status, timing, progress, and error fields follow the polling contract.
-  - code: AllTrackedResourcesMustHaveDelete
-    from: serviceEntitlementSettings.json
-    where: $.definitions.ServiceEntitlementSetting
-    reason: The resource has DELETE. Its operationResults GET returns the same resource as an LRO final result, not as a second tracked resource.
-  - code: TrackedResourcePatchOperation
-    from: serviceEntitlementSettings.json
-    where: $.definitions.ServiceEntitlementSetting
-    reason: The resource has PATCH with tags support. Its operationResults GET returns the same resource as an LRO final result, not as a second tracked resource.
   - code: GetResponseCodes
     from: serviceEntitlementSettings.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/serviceEntitlementSettings/{serviceEntitlementSettingName}/operationResults/{operationId}"].get
