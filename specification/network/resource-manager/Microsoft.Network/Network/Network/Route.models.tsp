@@ -13,17 +13,9 @@ namespace Microsoft.Network;
 /**
  * Route resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @parentResource(RouteTable)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model Route extends SubResourceModel {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  properties?: RoutePropertiesFormat;
-
+model Route is SubResourceInstance<RoutePropertiesFormat> {
   @visibility(Lifecycle.Read)
   @path
   @key("routeName")
@@ -38,4 +30,4 @@ model Route extends SubResourceModel {
   etag?: string;
 }
 
-@@doc(Route.type, "Resource type.");
+@@doc(SubResourceModel.type, "Resource type.");

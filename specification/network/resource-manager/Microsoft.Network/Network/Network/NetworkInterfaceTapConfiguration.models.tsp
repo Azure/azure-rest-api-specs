@@ -13,17 +13,10 @@ namespace Microsoft.Network;
 /**
  * Tap configuration in a Network Interface.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @parentResource(NetworkInterface)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model NetworkInterfaceTapConfiguration extends SubResourceModel {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  properties?: NetworkInterfaceTapConfigurationPropertiesFormat;
-
+model NetworkInterfaceTapConfiguration
+  is SubResourceInstance<NetworkInterfaceTapConfigurationPropertiesFormat> {
   /**
    * The name of the resource that is unique within a resource group. This name can be used to access the resource.
    */

@@ -18,20 +18,9 @@ namespace Microsoft.Network;
 /**
  * An interconnect group resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Resource references internal types from the legacy Network RP base model"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Network RP uses its own legacy Resource base type for all resources for backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending Resource via inheritance is the standard pattern for all Network RP resources"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy operations and types are required for backward compatibility with the existing Network RP SDK"
 @added(Versions.v2025_07_01)
-@Azure.ResourceManager.Legacy.feature(Features.interconnectGroup)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model InterconnectGroup extends Resource {
-  /** Properties of the interconnect group. */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-client-flatten is required for backward compatibility with existing Network SDKs"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-client-flatten' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to explicit modeling without flattening."
-  @extension("x-ms-client-flatten", true)
-  properties?: InterconnectGroupPropertiesFormat;
-
+@featureFile(Features.interconnectGroup)
+model InterconnectGroup is ResourceInstance<InterconnectGroupPropertiesFormat> {
   /** The name of the interconnect group. */
   @visibility(Lifecycle.Read)
   @path
@@ -46,24 +35,19 @@ model InterconnectGroup extends Resource {
   etag?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "flattenProperty is required for backward compatibility with existing Network SDKs"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  InterconnectGroup.properties
+);
+@@doc(InterconnectGroup.properties, "Properties of the interconnect group.");
+
 /**
  * A subgroup in an interconnect group.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "SubResourceModel references internal types from the legacy Network RP base model"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Network RP uses its own legacy SubResourceModel base type for all child resources for backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending SubResourceModel via inheritance is the standard pattern for all Network RP child resources"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy operations and types are required for backward compatibility with the existing Network RP SDK"
 @added(Versions.v2025_07_01)
-@Azure.ResourceManager.Legacy.feature(Features.interconnectGroup)
-@Http.Private.includeInapplicableMetadataInPayload(false)
+@featureFile(Features.interconnectGroup)
 @parentResource(InterconnectGroup)
-model Subgroup extends SubResourceModel {
-  /** Properties of the subgroup. */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-client-flatten is required for backward compatibility with existing Network SDKs"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-client-flatten' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to explicit modeling without flattening."
-  @extension("x-ms-client-flatten", true)
-  properties?: SubgroupProperties;
-
+model Subgroup is SubResourceInstance<SubgroupProperties> {
   /** The name of the subgroup. */
   @visibility(Lifecycle.Read)
   @path
@@ -72,9 +56,12 @@ model Subgroup extends SubResourceModel {
   name: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy operations and types are required for backward compatibility with the existing Network RP SDK"
+@@doc(Subgroup.properties, "Properties of the subgroup.");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "flattenProperty is required for backward compatibility with existing Network SDKs"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Subgroup.properties);
+
 @added(Versions.v2025_07_01)
-@Azure.ResourceManager.Legacy.feature(Features.interconnectGroup)
+@featureFile(Features.interconnectGroup)
 @armResourceOperations
 interface InterconnectGroups {
   /**
@@ -127,9 +114,8 @@ interface InterconnectGroups {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy operations and types are required for backward compatibility with the existing Network RP SDK"
 @added(Versions.v2025_07_01)
-@Azure.ResourceManager.Legacy.feature(Features.interconnectGroup)
+@featureFile(Features.interconnectGroup)
 @armResourceOperations
 interface Subgroups {
   /**

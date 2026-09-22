@@ -11,6 +11,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "./customizations.tsp";
 import "./models.tsp";
 import "./back-compatible.tsp";
 import "./ApplicationGateway.tsp";
@@ -236,8 +237,7 @@ enum Features {
   firstPartyServiceTag,
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.networkingOperations)
+@featureFile(Features.networkingOperations)
 @armResourceOperations(#{ omitTags: true })
 interface Operations
   extends Azure.ResourceManager.Legacy.Operations<

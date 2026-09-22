@@ -16,17 +16,11 @@ namespace Microsoft.Network;
 /**
  * Firewall Policy Kubernetes Selector Group resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "@Http.Private.includeInapplicableMetadataInPayload is required to preserve the existing firewall policy sub-resource payload shape produced by the original Swagger."
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "KubeSelectorGroup extends SubResourceModel to preserve the existing id-only firewall policy sub-resource envelope from the original Swagger; inheritance is required for wire-format compatibility."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "firewallPolicy child resources use the ARM Legacy custom-resource pattern; @parentResource(FirewallPolicy) with Legacy.feature is required to match the existing firewall policy resource hierarchy."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "firewallPolicy uses the ARM Legacy resource pattern; @Azure.ResourceManager.Legacy.feature(Features.firewallPolicy) is required to keep KubeSelectorGroup consistent with the parent firewall policy resource tree."
-@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
+@featureFile(Features.firewallPolicy)
 @parentResource(FirewallPolicy)
-@Http.Private.includeInapplicableMetadataInPayload(false)
 @added(Versions.v2025_09_01)
-model FirewallPolicyKubeSelectorGroup extends SubResourceModel {
-  properties?: FirewallPolicyKubeSelectorGroupProperties;
-
+model FirewallPolicyKubeSelectorGroup
+  is SubResourceInstance<FirewallPolicyKubeSelectorGroupProperties> {
   /**
    * The name of the resource that is unique within a resource group. This name can be used to access the resource.
    */
@@ -43,8 +37,7 @@ model FirewallPolicyKubeSelectorGroup extends SubResourceModel {
   etag?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "These operations target the KubeSelectorGroup child of firewallPolicy, which uses the ARM Legacy resource pattern; @Azure.ResourceManager.Legacy.feature(Features.firewallPolicy) is required for consistency with the parent firewall policy resource tree."
-@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
+@featureFile(Features.firewallPolicy)
 @added(Versions.v2025_09_01)
 @armResourceOperations
 interface FirewallPolicyKubeSelectorGroups {

@@ -16,15 +16,8 @@ namespace Microsoft.Network;
 /**
  * FirewallPolicy Resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model FirewallPolicy extends Resource {
-  properties?: FirewallPolicyPropertiesFormat;
-
+@featureFile(Features.firewallPolicy)
+model FirewallPolicy is ResourceInstance<FirewallPolicyPropertiesFormat> {
   @visibility(Lifecycle.Read)
   @path
   @key("firewallPolicyName")
@@ -43,8 +36,7 @@ model FirewallPolicy extends Resource {
   identity?: ManagedServiceIdentity;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.feature(Features.firewallPolicy)
+@featureFile(Features.firewallPolicy)
 @armResourceOperations(#{ omitTags: true })
 interface FirewallPolicies {
   /**

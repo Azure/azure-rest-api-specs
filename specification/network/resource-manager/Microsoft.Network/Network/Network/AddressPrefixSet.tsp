@@ -16,18 +16,11 @@ namespace Microsoft.Network;
 /**
  * Address prefix set child resource of an application security group.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy feature decorator required for Network RP feature gating, consistent with other Network RP interface definitions"
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Required for includeInapplicableMetadataInPayload which suppresses systemData in the response payload, consistent with other Network RP nested resources"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "AddressPrefixSet uses the local Network RP ProxyResource base type consistent with other Network RP nested resources (e.g. ConnectionPolicy)"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Extending the local Network RP ProxyResource is the established pattern for nested resources in this RP"
 @added(Versions.v2025_09_01)
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @parentResource(ApplicationSecurityGroup)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model AddressPrefixSet extends ProxyResource {
-  /** Properties of the address prefix set. */
-  properties?: AddressPrefixSetPropertiesFormat;
-
+model AddressPrefixSet
+  is ProxyResourceInstance<AddressPrefixSetPropertiesFormat> {
   /** The name of the address prefix set. */
   @visibility(Lifecycle.Read)
   @path
@@ -40,9 +33,8 @@ model AddressPrefixSet extends ProxyResource {
 /**
  * Properties of address prefix set.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Uses legacy ARM resource patterns consistent with other Network RP property models"
 @added(Versions.v2025_09_01)
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 model AddressPrefixSetPropertiesFormat {
   /** The list of address prefixes in CIDR notation. Supports both IPv4 and IPv6 CIDR notation (e.g. '10.0.0.0/16', '2001:db8::/32'). */
   @minItems(1)
@@ -53,9 +45,8 @@ model AddressPrefixSetPropertiesFormat {
   provisioningState?: ProvisioningState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Uses legacy ARM resource patterns consistent with other Network RP operation interfaces"
 @added(Versions.v2025_09_01)
-@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@featureFile(Features.virtualNetwork)
 @armResourceOperations(#{ omitTags: true })
 interface AddressPrefixSets {
   /**

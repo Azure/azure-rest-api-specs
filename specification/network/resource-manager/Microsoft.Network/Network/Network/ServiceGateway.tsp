@@ -16,15 +16,9 @@ namespace Microsoft.Network;
 /**
  * ServiceGateway resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "ServiceGateway uses Http.Private.includeInapplicableMetadataInPayload to suppress irrelevant ARM envelope properties from the response payload, which is required for correct wire format compatibility."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "ServiceGateway extends SecurityPerimeterTrackedResource, a shared base type defined in the Common namespace that captures the standard NSP-linked tracked resource shape. Refactoring to a standard ARM resource would require breaking changes to the existing API surface."
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "ServiceGateway inherits from SecurityPerimeterTrackedResource to share common NSP envelope properties (identity, kind, etag) across all security perimeter resource types. Composition would duplicate these definitions across the codebase."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "ServiceGateway uses Azure.ResourceManager.Legacy.feature gating to align with the NSP feature flag pattern used across all perimeter-linked resources in this namespace."
-@Azure.ResourceManager.Legacy.feature(Features.serviceGateway)
-@Http.Private.includeInapplicableMetadataInPayload(false)
-model ServiceGateway extends SecurityPerimeterTrackedResource {
-  properties?: ServiceGatewayPropertiesFormat;
-
+@featureFile(Features.serviceGateway)
+model ServiceGateway
+  is SecurityPerimeterTrackedResourceInstance<ServiceGatewayPropertiesFormat> {
   /**
    * The name of the resource.
    */
@@ -71,8 +65,7 @@ model ServiceGatewayActionOkResponse {
   body: ServiceGatewayActionOkResponseBody;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "ServiceGateways interface uses Azure.ResourceManager.Legacy.feature gating to conditionally expose operations only when the serviceGateway feature flag is enabled, consistent with the feature-gating pattern used across all NSP-linked resource operations in this namespace."
-@Azure.ResourceManager.Legacy.feature(Features.serviceGateway)
+@featureFile(Features.serviceGateway)
 @armResourceOperations
 interface ServiceGateways {
   /**
