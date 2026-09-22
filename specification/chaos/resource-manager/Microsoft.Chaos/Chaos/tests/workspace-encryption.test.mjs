@@ -160,6 +160,37 @@ test("key URI schema rejects a version, query, fragment, and non-HTTPS URI", () 
   }
 });
 
+test("Key Vault URL shape supports Premium RSA-HSM names but excludes Managed HSM endpoints", () => {
+  const pattern = new RegExp(definitions.WorkspaceKeyEncryptionKeyUrl.pattern);
+  for (const keyName of ["workspace-rsa", "workspace-rsa-hsm", "HSM-key"]) {
+    assert.ok(
+      pattern.test(`https://contoso-premium.vault.azure.net/keys/${keyName}`),
+    );
+  }
+  for (const host of [
+    "contoso-hsm.managedhsm.azure.net",
+    "contoso-hsm.managedhsm.usgovcloudapi.net",
+    "contoso-hsm.managedhsm.azure.cn",
+  ]) {
+    assert.ok(!pattern.test(`https://${host}/keys/workspace-key`), host);
+  }
+  assert.match(
+    fullCustomerKey.properties.keyEncryptionKeyUrl.description,
+    /RSA-HSM keys in Premium Key Vault/,
+  );
+  assert.match(
+    fullCustomerKey.properties.keyEncryptionKeyUrl.description,
+    /Azure Managed HSM service is not supported/,
+  );
+  const readme = readFileSync(path.join(root, "readme.md"), "utf8");
+  assert.ok(readme.includes('"code": "InvalidEncryptionConfiguration"'));
+  assert.ok(
+    readme.includes(
+      "Azure Managed HSM is not supported. Use Azure Key Vault; RSA-HSM keys in Premium Key Vault are supported.",
+    ),
+  );
+});
+
 test("examples distinguish replacement, omission, null deletion, and URL-only PATCH", () => {
   const put = example("Workspaces_CreateOrUpdate_OmitEncryption");
   assert.equal(put.parameters.resource.properties.encryption, undefined);

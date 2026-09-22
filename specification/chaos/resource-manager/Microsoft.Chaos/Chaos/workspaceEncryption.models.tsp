@@ -45,6 +45,10 @@ model WorkspaceCustomerManagedKeyEncryption {
    * the Workspace. The service verifies the tenant as the first remote stage
    * of the configuration operation, before persisting requested encryption
    * state or changing Azure Storage or customer data.
+   * Supports RSA keys in Azure Key Vault and RSA-HSM keys in Premium Key Vault,
+   * with key sizes of 2048, 3072, or 4096 bits. Premium RSA-HSM keys use the same
+   * vault URL. The separate Azure Managed HSM service is not supported;
+   * Managed HSM endpoints are rejected before operation acceptance.
    * A key version, query string, or fragment is not permitted.
    * Azure Storage follows key versions automatically. Keep the previous version
    * available for at least 24 hours after rotation.
@@ -52,7 +56,12 @@ model WorkspaceCustomerManagedKeyEncryption {
   keyEncryptionKeyUrl: WorkspaceKeyEncryptionKeyUrl;
 }
 
-/** A versionless HTTPS Key Vault key URI; the service also validates cloud and tenant. */
+/**
+ * A versionless HTTPS Azure Key Vault key URI, including Premium-vault RSA-HSM
+ * keys. Azure Managed HSM endpoints are not supported. The service also
+ * validates the cloud host allowlist and tenant; a vault URL does not identify
+ * the key type.
+ */
 @added(Versions.v2026_11_01)
 @pattern("^https://[a-zA-Z0-9-]+\\.vault\\.[a-zA-Z0-9.-]+/keys/[a-zA-Z0-9-]+$")
 scalar WorkspaceKeyEncryptionKeyUrl extends url;
