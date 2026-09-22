@@ -110,3115 +110,1834 @@ namespace Customizations;
   "python"
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op diagnosticsExecuteSiteAnalysisSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  siteName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  diagnosticCategory: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  analysisName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  /**
-   * Start Time
-   */
-  @query("startTime")
-  startTime?: utcDateTime,
-
-  /**
-   * End Time
-   */
-  @query("endTime")
-  endTime?: utcDateTime,
-
-  /**
-   * Time Grain
-   */
-  @pattern("PT[1-9][0-9]+[SMH]")
-  @query("timeGrain")
-  timeGrain?: string,
-
-  @body
-  body: void,
-): ArmResponse<DiagnosticAnalysis>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   AnalysisDefinitionOperationGroup.executeSiteAnalysisSlot,
-  diagnosticsExecuteSiteAnalysisSlotCustomized
+  reorderParameters(
+    AnalysisDefinitionOperationGroup.executeSiteAnalysisSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "siteName",
+      "diagnosticCategory",
+      "analysisName",
+      "slot",
+      "startTime",
+      "endTime",
+      "timeGrain",
+      "body"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op diagnosticsExecuteSiteDetectorCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  siteName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  detectorName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  diagnosticCategory: string,
-
-  /**
-   * Start Time
-   */
-  @query("startTime")
-  startTime?: utcDateTime,
-
-  /**
-   * End Time
-   */
-  @query("endTime")
-  endTime?: utcDateTime,
-
-  /**
-   * Time Grain
-   */
-  @pattern("PT[1-9][0-9]+[SMH]")
-  @query("timeGrain")
-  timeGrain?: string,
-
-  @body
-  body: void,
-): ArmResponse<DiagnosticDetectorResponse>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   DetectorDefinitionResources.executeSiteDetector,
-  diagnosticsExecuteSiteDetectorCustomized
+  reorderParameters(
+    DetectorDefinitionResources.executeSiteDetector,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "siteName",
+      "detectorName",
+      "diagnosticCategory",
+      "startTime",
+      "endTime",
+      "timeGrain",
+      "body"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op diagnosticsExecuteSiteDetectorSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  siteName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  detectorName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  diagnosticCategory: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  /**
-   * Start Time
-   */
-  @query("startTime")
-  startTime?: utcDateTime,
-
-  /**
-   * End Time
-   */
-  @query("endTime")
-  endTime?: utcDateTime,
-
-  /**
-   * Time Grain
-   */
-  @pattern("PT[1-9][0-9]+[SMH]")
-  @query("timeGrain")
-  timeGrain?: string,
-
-  @body
-  body: void,
-): ArmResponse<DiagnosticDetectorResponse>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   DetectorDefinitionResourceOperationGroup.executeSiteDetectorSlot,
-  diagnosticsExecuteSiteDetectorSlotCustomized
+  reorderParameters(
+    DetectorDefinitionResourceOperationGroup.executeSiteDetectorSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "siteName",
+      "detectorName",
+      "diagnosticCategory",
+      "slot",
+      "startTime",
+      "endTime",
+      "timeGrain",
+      "body"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op diagnosticsGetSiteAnalysisSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  siteName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  diagnosticCategory: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  analysisName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmResponse<AnalysisDefinition>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   AnalysisDefinitionOperationGroup.getSiteAnalysisSlot,
-  diagnosticsGetSiteAnalysisSlotCustomized
+  reorderParameters(
+    AnalysisDefinitionOperationGroup.getSiteAnalysisSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "siteName",
+      "diagnosticCategory",
+      "analysisName",
+      "slot"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op diagnosticsGetSiteDetectorResponseSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  siteName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  detectorName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  /**
-   * Start Time
-   */
-  @query("startTime")
-  startTime?: utcDateTime,
-
-  /**
-   * End Time
-   */
-  @query("endTime")
-  endTime?: utcDateTime,
-
-  /**
-   * Time Grain
-   */
-  @pattern("PT[1-9][0-9]+[SMH]")
-  @query("timeGrain")
-  timeGrain?: string,
-): ArmResponse<DetectorResponse>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   DetectorResponseOperationGroup.getSiteDetectorResponseSlot,
-  diagnosticsGetSiteDetectorResponseSlotCustomized
+  reorderParameters(
+    DetectorResponseOperationGroup.getSiteDetectorResponseSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "siteName",
+      "detectorName",
+      "slot",
+      "startTime",
+      "endTime",
+      "timeGrain"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op diagnosticsGetSiteDetectorSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  siteName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  diagnosticCategory: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  detectorName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmResponse<DetectorDefinitionResource>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   DetectorDefinitionResourceOperationGroup.getSiteDetectorSlot,
-  diagnosticsGetSiteDetectorSlotCustomized
+  reorderParameters(
+    DetectorDefinitionResourceOperationGroup.getSiteDetectorSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "siteName",
+      "diagnosticCategory",
+      "detectorName",
+      "slot"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op diagnosticsGetSiteDiagnosticCategorySlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  siteName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  diagnosticCategory: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmResponse<DiagnosticCategory>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   DiagnosticCategoryOperationGroup.getSiteDiagnosticCategorySlot,
-  diagnosticsGetSiteDiagnosticCategorySlotCustomized
+  reorderParameters(
+    DiagnosticCategoryOperationGroup.getSiteDiagnosticCategorySlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "siteName",
+      "diagnosticCategory",
+      "slot"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op diagnosticsListSiteAnalysesSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  siteName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  diagnosticCategory: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmResponse<DiagnosticAnalysisCollection>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   AnalysisDefinitionOperationGroup.listSiteAnalysesSlot,
-  diagnosticsListSiteAnalysesSlotCustomized
+  reorderParameters(
+    AnalysisDefinitionOperationGroup.listSiteAnalysesSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "siteName",
+      "diagnosticCategory",
+      "slot"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op diagnosticsListSiteDetectorsSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  siteName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  diagnosticCategory: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmResponse<DiagnosticDetectorCollection>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   DetectorDefinitionResourceOperationGroup.listSiteDetectorsSlot,
-  diagnosticsListSiteDetectorsSlotCustomized
+  reorderParameters(
+    DetectorDefinitionResourceOperationGroup.listSiteDetectorsSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "siteName",
+      "diagnosticCategory",
+      "slot"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op recommendationsDisableRecommendationForHostingEnvironmentCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @query
-  environmentName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  hostingEnvironmentName: string,
-
-  @body
-  body: void,
-): {
-  @body body: void;
-};
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   RecommendationRules.disableRecommendationForHostingEnvironment,
-  recommendationsDisableRecommendationForHostingEnvironmentCustomized
+  reorderParameters(
+    RecommendationRules.disableRecommendationForHostingEnvironment,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "environmentName",
+      "name",
+      "hostingEnvironmentName",
+      "body"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsAddPremierAddOnSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  premierAddOnName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  premierAddOn: PremierAddOn,
-): ArmResourceUpdatedResponse<PremierAddOn>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   PremierAddOnOperationGroup.addPremierAddOnSlot,
-  webAppsAddPremierAddOnSlotCustomized
+  reorderParameters(
+    PremierAddOnOperationGroup.addPremierAddOnSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "premierAddOnName",
+      "slot",
+      "resource"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsApproveOrRejectPrivateEndpointConnectionSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
+@@clientName(
+  PremierAddOnOperationGroup.addPremierAddOnSlot::parameters.resource,
+  "premierAddOn"
+);
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  privateEndpointConnectionName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  privateEndpointWrapper: RemotePrivateEndpointConnectionARMResource,
-):
-  | ArmResourceUpdatedResponse<RemotePrivateEndpointConnectionARMResource>
-  | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RemotePrivateEndpointConnectionARMResource>> & {
-      @bodyRoot
-      _: RemotePrivateEndpointConnectionARMResource;
-    });
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   PrivateEndpointConnectionSlotOperationGroup.approveOrRejectPrivateEndpointConnectionSlot,
-  webAppsApproveOrRejectPrivateEndpointConnectionSlotCustomized
+  reorderParameters(
+    PrivateEndpointConnectionSlotOperationGroup.approveOrRejectPrivateEndpointConnectionSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "privateEndpointConnectionName",
+      "slot",
+      "resource"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsCreateInstanceFunctionSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
+@@clientName(
+  PrivateEndpointConnectionSlotOperationGroup.approveOrRejectPrivateEndpointConnectionSlot::parameters.resource,
+  "privateEndpointWrapper"
+);
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  functionName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @body
-  function_envelope: FunctionEnvelope,
-): ArmResourceCreatedResponse<
-  FunctionEnvelope,
-  ArmLroLocationHeader<FinalResult = FunctionEnvelope> &
-    Azure.Core.Foundations.RetryAfterHeader
->;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   FunctionEnvelopeOperationGroup.createInstanceFunctionSlot,
-  webAppsCreateInstanceFunctionSlotCustomized
+  reorderParameters(
+    FunctionEnvelopeOperationGroup.createInstanceFunctionSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "functionName",
+      "slot",
+      "resource"
+    ]
+  )
 );
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsDeletePrivateEndpointConnectionSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
+@@clientName(
+  FunctionEnvelopeOperationGroup.createInstanceFunctionSlot::parameters.resource,
+  "function_envelope"
+);
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  privateEndpointConnectionName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-):
-  | ArmResponse<unknown>
-  | (ArmDeleteAcceptedLroResponse & {
-      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @body
-      _: unknown;
-    })
-  | (ArmDeletedNoContentResponse & {
-      #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-      @body
-      _: unknown;
-    });
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   PrivateEndpointConnectionSlotOperationGroup.deletePrivateEndpointConnectionSlot,
-  webAppsDeletePrivateEndpointConnectionSlotCustomized,
+  reorderParameters(
+    PrivateEndpointConnectionSlotOperationGroup.deletePrivateEndpointConnectionSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "privateEndpointConnectionName",
+      "slot"
+    ]
+  ),
   "!javascript,!autorest"
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsInstallSiteExtensionSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  siteExtensionId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  resource: void,
-):
-  | ArmResponse<SiteExtensionInfo>
-  | ArmResourceCreatedResponse<
-      SiteExtensionInfo,
-      LroHeaders = ArmLroLocationHeader<FinalResult = SiteExtensionInfo> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
-  | ArmTooManyRequestsResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   SiteExtensionInfoOperationGroup.installSiteExtensionSlot,
-  webAppsInstallSiteExtensionSlotCustomized
+  reorderParameters(
+    SiteExtensionInfoOperationGroup.installSiteExtensionSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "siteExtensionId",
+      "slot",
+      "resource"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsMigrateStorageCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
+#suppress "experimental-feature" "TCGC parameter customization."
+@@override(
+  Sites.migrateStorage,
+  reorderParameters(
+    Sites.migrateStorage,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "subscriptionName",
+      "resourceGroupName",
+      "name",
+      "body"
+    ]
+  )
+);
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @query
-  subscriptionName: string,
+@@clientName(Sites.migrateStorage::parameters.body, "migrationOptions");
 
-  ...ResourceGroupParameter,
+#suppress "experimental-feature" "TCGC parameter customization."
+@@override(
+  BackupItemOperationGroup.restoreSlot,
+  reorderParameters(
+    BackupItemOperationGroup.restoreSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "backupId",
+      "slot",
+      "body"
+    ]
+  )
+);
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
+@@clientName(BackupItemOperationGroup.restoreSlot::parameters.body, "request");
 
-  @body
-  migrationOptions: StorageMigrationOptions,
-): ArmResponse<StorageMigrationResponse> &
-  ArmLroLocationHeader<FinalResult = StorageMigrationResponse>;
-
-@@override(Sites.migrateStorage, webAppsMigrateStorageCustomized);
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsRestoreSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  backupId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  request: RestoreRequest,
-): {
-  @body body: void;
-};
-
-@@override(BackupItemOperationGroup.restoreSlot, webAppsRestoreSlotCustomized);
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsCreateDeploymentSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  id: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  deployment: Deployment,
-): ArmResourceUpdatedResponse<Deployment>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   DeploymentOperationGroup.createDeploymentSlot,
-  webAppsCreateDeploymentSlotCustomized
+  reorderParameters(
+    DeploymentOperationGroup.createDeploymentSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "id",
+      "slot",
+      "resource"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsCreateOrUpdateDomainOwnershipIdentifierSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
+@@clientName(
+  DeploymentOperationGroup.createDeploymentSlot::parameters.resource,
+  "deployment"
+);
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  domainOwnershipIdentifierName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  domainOwnershipIdentifier: Identifier,
-): ArmResourceUpdatedResponse<Identifier>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   IdentifierOperationGroup.createOrUpdateDomainOwnershipIdentifierSlot,
-  webAppsCreateOrUpdateDomainOwnershipIdentifierSlotCustomized
+  reorderParameters(
+    IdentifierOperationGroup.createOrUpdateDomainOwnershipIdentifierSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "domainOwnershipIdentifierName",
+      "slot",
+      "resource"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsCreateOrUpdateFunctionSecretSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
+@@clientName(
+  IdentifierOperationGroup.createOrUpdateDomainOwnershipIdentifierSlot::parameters.resource,
+  "domainOwnershipIdentifier"
+);
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  functionName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  keyName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  key: KeyInfo,
-): ArmResponse<KeyInfo> | ArmResourceCreatedSyncResponse<KeyInfo>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   FunctionEnvelopeOperationGroup.createOrUpdateFunctionSecretSlot,
-  webAppsCreateOrUpdateFunctionSecretSlotCustomized
+  reorderParameters(
+    FunctionEnvelopeOperationGroup.createOrUpdateFunctionSecretSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "functionName",
+      "keyName",
+      "slot",
+      "resource"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsCreateOrUpdateHostNameBindingSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
+@@clientName(
+  FunctionEnvelopeOperationGroup.createOrUpdateFunctionSecretSlot::parameters.resource,
+  "key"
+);
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  hostName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  hostNameBinding: HostNameBinding,
-): ArmResourceUpdatedResponse<HostNameBinding>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   HostNameBindingOperationGroup.createOrUpdateHostNameBindingSlot,
-  webAppsCreateOrUpdateHostNameBindingSlotCustomized
+  reorderParameters(
+    HostNameBindingOperationGroup.createOrUpdateHostNameBindingSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "hostName",
+      "slot",
+      "resource"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsCreateOrUpdateHostSecretSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
+@@clientName(
+  HostNameBindingOperationGroup.createOrUpdateHostNameBindingSlot::parameters.resource,
+  "hostNameBinding"
+);
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  keyType: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  keyName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  key: KeyInfo,
-):
-  | ArmResponse<KeyInfo>
-  | ArmResourceCreatedSyncResponse<KeyInfo>
-  | DefaultErrorResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   WebApps.createOrUpdateHostSecretSlot,
-  webAppsCreateOrUpdateHostSecretSlotCustomized
+  reorderParameters(
+    WebApps.createOrUpdateHostSecretSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "name",
+      "keyType",
+      "keyName",
+      "slot",
+      "body"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsCreateOrUpdateHybridConnectionSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
+@@clientName(WebApps.createOrUpdateHostSecretSlot::parameters.body, "key");
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  namespaceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  relayName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  connectionEnvelope: HybridConnection,
-): ArmResourceUpdatedResponse<HybridConnection>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   HybridConnectionSlotOperationGroup.createOrUpdateHybridConnectionSlot,
-  webAppsCreateOrUpdateHybridConnectionSlotCustomized
+  reorderParameters(
+    HybridConnectionSlotOperationGroup.createOrUpdateHybridConnectionSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "namespaceName",
+      "relayName",
+      "slot",
+      "resource"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsCreateOrUpdatePublicCertificateSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
+@@clientName(
+  HybridConnectionSlotOperationGroup.createOrUpdateHybridConnectionSlot::parameters.resource,
+  "connectionEnvelope"
+);
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  publicCertificateName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  publicCertificate: PublicCertificate,
-): ArmResourceUpdatedResponse<PublicCertificate>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   PublicCertificateOperationGroup.createOrUpdatePublicCertificateSlot,
-  webAppsCreateOrUpdatePublicCertificateSlotCustomized
+  reorderParameters(
+    PublicCertificateOperationGroup.createOrUpdatePublicCertificateSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "publicCertificateName",
+      "slot",
+      "resource"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsCreateOrUpdateRelayServiceConnectionSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
+@@clientName(
+  PublicCertificateOperationGroup.createOrUpdatePublicCertificateSlot::parameters.resource,
+  "publicCertificate"
+);
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  entityName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  connectionEnvelope: RelayServiceConnectionEntity,
-): ArmResourceUpdatedResponse<RelayServiceConnectionEntity>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   RelayServiceConnectionEntityOperationGroup.createOrUpdateRelayServiceConnectionSlot,
-  webAppsCreateOrUpdateRelayServiceConnectionSlotCustomized
+  reorderParameters(
+    RelayServiceConnectionEntityOperationGroup.createOrUpdateRelayServiceConnectionSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "entityName",
+      "slot",
+      "resource"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsCreateOrUpdateVnetConnectionGatewaySlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
+@@clientName(
+  RelayServiceConnectionEntityOperationGroup.createOrUpdateRelayServiceConnectionSlot::parameters.resource,
+  "connectionEnvelope"
+);
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  vnetName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  gatewayName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  connectionEnvelope: VnetGateway,
-): ArmResourceUpdatedResponse<VnetGateway>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   VnetGatewayOperationGroup.createOrUpdateVnetConnectionGatewaySlot,
-  webAppsCreateOrUpdateVnetConnectionGatewaySlotCustomized
+  reorderParameters(
+    VnetGatewayOperationGroup.createOrUpdateVnetConnectionGatewaySlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "vnetName",
+      "gatewayName",
+      "slot",
+      "resource"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsCreateOrUpdateVnetConnectionSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
+@@clientName(
+  VnetGatewayOperationGroup.createOrUpdateVnetConnectionGatewaySlot::parameters.resource,
+  "connectionEnvelope"
+);
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  vnetName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  connectionEnvelope: VnetInfoResource,
-): ArmResourceUpdatedResponse<VnetInfoResource>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   VnetInfoResourceOperationGroup.createOrUpdateVnetConnectionSlot,
-  webAppsCreateOrUpdateVnetConnectionSlotCustomized
+  reorderParameters(
+    VnetInfoResourceOperationGroup.createOrUpdateVnetConnectionSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "vnetName",
+      "slot",
+      "resource"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsDeleteBackupSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
+@@clientName(
+  VnetInfoResourceOperationGroup.createOrUpdateVnetConnectionSlot::parameters.resource,
+  "connectionEnvelope"
+);
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  backupId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmDeletedResponse | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   BackupItemOperationGroup.deleteBackupSlot,
-  webAppsDeleteBackupSlotCustomized
+  reorderParameters(
+    BackupItemOperationGroup.deleteBackupSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "backupId",
+      "slot"
+    ]
+  )
 );
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsDeleteContinuousWebJobSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  webJobName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmDeletedResponse | ArmDeletedNoContentResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   ContinuousWebJobOperationGroup.deleteContinuousWebJobSlot,
-  webAppsDeleteContinuousWebJobSlotCustomized
+  reorderParameters(
+    ContinuousWebJobOperationGroup.deleteContinuousWebJobSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "webJobName",
+      "slot"
+    ]
+  )
 );
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsDeleteDeploymentSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  id: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmDeletedResponse | ArmDeletedNoContentResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   DeploymentOperationGroup.deleteDeploymentSlot,
-  webAppsDeleteDeploymentSlotCustomized
+  reorderParameters(
+    DeploymentOperationGroup.deleteDeploymentSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "id",
+      "slot"
+    ]
+  )
 );
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsDeleteDomainOwnershipIdentifierSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  domainOwnershipIdentifierName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmDeletedResponse | ArmDeletedNoContentResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   IdentifierOperationGroup.deleteDomainOwnershipIdentifierSlot,
-  webAppsDeleteDomainOwnershipIdentifierSlotCustomized
+  reorderParameters(
+    IdentifierOperationGroup.deleteDomainOwnershipIdentifierSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "domainOwnershipIdentifierName",
+      "slot"
+    ]
+  )
 );
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsDeleteFunctionSecretSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  functionName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  keyName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): NoContentResponse | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   FunctionEnvelopeOperationGroup.deleteFunctionSecretSlot,
-  webAppsDeleteFunctionSecretSlotCustomized
+  reorderParameters(
+    FunctionEnvelopeOperationGroup.deleteFunctionSecretSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "functionName",
+      "keyName",
+      "slot"
+    ]
+  )
 );
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsDeleteHostSecretSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
+#suppress "experimental-feature" "TCGC parameter customization."
+@@override(
+  WebApps.deleteHostSecretSlot,
+  reorderParameters(
+    WebApps.deleteHostSecretSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "name",
+      "keyType",
+      "keyName",
+      "slot",
+      "body"
+    ]
+  )
+);
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  keyType: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  keyName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  body: void,
-): NoContentResponse | ArmNotFoundResponse;
-
-@@override(WebApps.deleteHostSecretSlot, webAppsDeleteHostSecretSlotCustomized);
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsDeleteHybridConnectionSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  namespaceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  relayName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmDeletedResponse | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   HybridConnectionSlotOperationGroup.deleteHybridConnectionSlot,
-  webAppsDeleteHybridConnectionSlotCustomized
+  reorderParameters(
+    HybridConnectionSlotOperationGroup.deleteHybridConnectionSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "namespaceName",
+      "relayName",
+      "slot"
+    ]
+  )
 );
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsDeleteInstanceFunctionSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  functionName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmDeletedNoContentResponse | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   FunctionEnvelopeOperationGroup.deleteInstanceFunctionSlot,
-  webAppsDeleteInstanceFunctionSlotCustomized
+  reorderParameters(
+    FunctionEnvelopeOperationGroup.deleteInstanceFunctionSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "functionName",
+      "slot"
+    ]
+  )
 );
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsDeleteInstanceProcessCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  processId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  instanceId: string,
-): ArmDeletedNoContentResponse | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   ProcessInfos.deleteInstanceProcess,
-  webAppsDeleteInstanceProcessCustomized
+  reorderParameters(
+    ProcessInfos.deleteInstanceProcess,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "processId",
+      "instanceId"
+    ]
+  )
 );
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsDeleteInstanceProcessSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  processId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  instanceId: string,
-): ArmDeletedNoContentResponse | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   InstanceProcessSlotOperationGroup.deleteInstanceProcessSlot,
-  webAppsDeleteInstanceProcessSlotCustomized
+  reorderParameters(
+    InstanceProcessSlotOperationGroup.deleteInstanceProcessSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "processId",
+      "slot",
+      "instanceId"
+    ]
+  )
 );
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsDeletePremierAddOnSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  premierAddOnName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmDeletedResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   PremierAddOnOperationGroup.deletePremierAddOnSlot,
-  webAppsDeletePremierAddOnSlotCustomized
+  reorderParameters(
+    PremierAddOnOperationGroup.deletePremierAddOnSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "premierAddOnName",
+      "slot"
+    ]
+  )
 );
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsDeleteProcessSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  processId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmDeletedNoContentResponse | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   ProcessSlotOperationGroup.deleteProcessSlot,
-  webAppsDeleteProcessSlotCustomized
+  reorderParameters(
+    ProcessSlotOperationGroup.deleteProcessSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "processId",
+      "slot"
+    ]
+  )
 );
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsDeleteRelayServiceConnectionSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  entityName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmDeletedResponse | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   RelayServiceConnectionEntityOperationGroup.deleteRelayServiceConnectionSlot,
-  webAppsDeleteRelayServiceConnectionSlotCustomized
+  reorderParameters(
+    RelayServiceConnectionEntityOperationGroup.deleteRelayServiceConnectionSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "entityName",
+      "slot"
+    ]
+  )
 );
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppDeleteSiteExtensionSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  siteExtensionId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmDeletedNoContentResponse | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   SiteExtensionInfoOperationGroup.deleteSiteExtensionSlot,
-  webAppDeleteSiteExtensionSlotCustomized
+  reorderParameters(
+    SiteExtensionInfoOperationGroup.deleteSiteExtensionSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "siteExtensionId",
+      "slot"
+    ]
+  )
 );
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsDeleteTriggeredWebJobSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  webJobName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmDeletedResponse | ArmDeletedNoContentResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   TriggeredWebJobs.deleteTriggeredWebJobSlot,
-  webAppsDeleteTriggeredWebJobSlotCustomized
+  reorderParameters(
+    TriggeredWebJobs.deleteTriggeredWebJobSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "webJobName",
+      "slot"
+    ]
+  )
 );
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsDeleteVnetConnectionSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  vnetName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmDeletedResponse | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   VnetInfoResourceOperationGroup.deleteVnetConnectionSlot,
-  webAppsDeleteVnetConnectionSlotCustomized
+  reorderParameters(
+    VnetInfoResourceOperationGroup.deleteVnetConnectionSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "vnetName",
+      "slot"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetAppSettingKeyVaultReferenceSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  appSettingKey: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  configreferences: "configreferences",
-): ArmResponse<ApiKVReference>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   AppSettingKeyVaultReferenceSlot.getAppSettingKeyVaultReferenceSlot,
-  webAppsGetAppSettingKeyVaultReferenceSlotCustomized
+  reorderParameters(
+    AppSettingKeyVaultReferenceSlot.getAppSettingKeyVaultReferenceSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "appSettingKey",
+      "slot",
+      "configreferences"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetBackupStatusSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  backupId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmResponse<BackupItem>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   BackupItemOperationGroup.getBackupStatusSlot,
-  webAppsGetBackupStatusSlotCustomized
+  reorderParameters(
+    BackupItemOperationGroup.getBackupStatusSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "backupId",
+      "slot"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetConfigurationSnapshotSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  snapshotId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  web: "web",
-): ArmResponse<SiteConfigResource>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   SiteConfigSnapshotSlotResourceOperationGroup.getConfigurationSnapshotSlot,
-  webAppsGetConfigurationSnapshotSlotCustomized
+  reorderParameters(
+    SiteConfigSnapshotSlotResourceOperationGroup.getConfigurationSnapshotSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "snapshotId",
+      "slot",
+      "web"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetContinuousWebJobSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  webJobName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmResponse<ContinuousWebJob> | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   ContinuousWebJobOperationGroup.getContinuousWebJobSlot,
-  webAppsGetContinuousWebJobSlotCustomized
+  reorderParameters(
+    ContinuousWebJobOperationGroup.getContinuousWebJobSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "webJobName",
+      "slot"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetDeploymentSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  id: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmResponse<Deployment>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   DeploymentOperationGroup.getDeploymentSlot,
-  webAppsGetDeploymentSlotCustomized
+  reorderParameters(
+    DeploymentOperationGroup.getDeploymentSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "id",
+      "slot"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetDomainOwnershipIdentifierSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  domainOwnershipIdentifierName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmResponse<Identifier>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   IdentifierOperationGroup.getDomainOwnershipIdentifierSlot,
-  webAppsGetDomainOwnershipIdentifierSlotCustomized
+  reorderParameters(
+    IdentifierOperationGroup.getDomainOwnershipIdentifierSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "domainOwnershipIdentifierName",
+      "slot"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetHybridConnectionSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  namespaceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  relayName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmResponse<HybridConnection>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   HybridConnectionSlotOperationGroup.getHybridConnectionSlot,
-  webAppsGetHybridConnectionSlotCustomized
+  reorderParameters(
+    HybridConnectionSlotOperationGroup.getHybridConnectionSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "namespaceName",
+      "relayName",
+      "slot"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetInstanceFunctionSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  functionName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmResponse<FunctionEnvelope>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   FunctionEnvelopeOperationGroup.getInstanceFunctionSlot,
-  webAppsGetInstanceFunctionSlotCustomized
+  reorderParameters(
+    FunctionEnvelopeOperationGroup.getInstanceFunctionSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "functionName",
+      "slot"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetInstanceInfoSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  instanceId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmResponse<WebSiteInstanceStatus>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   WebSiteInstanceStatusOperationGroup.getInstanceInfoSlot,
-  webAppsGetInstanceInfoSlotCustomized
+  reorderParameters(
+    WebSiteInstanceStatusOperationGroup.getInstanceInfoSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "instanceId",
+      "slot"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetInstanceProcessCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  processId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  instanceId: string,
-): ArmResponse<ProcessInfo>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   ProcessInfos.getInstanceProcess,
-  webAppsGetInstanceProcessCustomized
+  reorderParameters(
+    ProcessInfos.getInstanceProcess,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "processId",
+      "instanceId"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetInstanceProcessDumpCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  processId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  instanceId: string,
-
-  @body
-  body: void,
-):
-  | {
-      @header("Content-Type")
-      contentType: "*/*";
-
-      @doc("Receipt body in COSE format")
-      @bodyRoot
-      body: bytes;
-    }
-  | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   ProcessInfos.getInstanceProcessDump,
-  webAppsGetInstanceProcessDumpCustomized
+  reorderParameters(
+    ProcessInfos.getInstanceProcessDump,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "processId",
+      "instanceId",
+      "body"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetInstanceProcessDumpSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  processId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  instanceId: string,
-
-  @body
-  body: void,
-):
-  | {
-      @header("Content-Type")
-      contentType: "*/*";
-
-      @doc("Receipt body in COSE format")
-      @bodyRoot
-      body: bytes;
-    }
-  | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   InstanceProcessSlotOperationGroup.getInstanceProcessDumpSlot,
-  webAppsGetInstanceProcessDumpSlotCustomized
+  reorderParameters(
+    InstanceProcessSlotOperationGroup.getInstanceProcessDumpSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "processId",
+      "slot",
+      "instanceId",
+      "body"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetInstanceProcessModuleCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  processId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  baseAddress: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  instanceId: string,
-): ArmResponse<ProcessModuleInfo> | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   ProcessModuleInfos.getInstanceProcessModule,
-  webAppsGetInstanceProcessModuleCustomized
+  reorderParameters(
+    ProcessModuleInfos.getInstanceProcessModule,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "processId",
+      "baseAddress",
+      "instanceId"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetInstanceProcessModuleSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  processId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  baseAddress: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  instanceId: string,
-): ArmResponse<ProcessModuleInfo> | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   InstanceProcessModuleSlotOperationGroup.getInstanceProcessModuleSlot,
-  webAppsGetInstanceProcessModuleSlotCustomized
+  reorderParameters(
+    InstanceProcessModuleSlotOperationGroup.getInstanceProcessModuleSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "processId",
+      "baseAddress",
+      "slot",
+      "instanceId"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetInstanceProcessSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  processId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  instanceId: string,
-): ArmResponse<ProcessInfo> | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   InstanceProcessSlotOperationGroup.getInstanceProcessSlot,
-  webAppsGetInstanceProcessSlotCustomized
+  reorderParameters(
+    InstanceProcessSlotOperationGroup.getInstanceProcessSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "processId",
+      "slot",
+      "instanceId"
+    ]
+  )
 );
-#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetNetworkTraceOperationSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  operationId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  body: void,
-):
-  | ArmResponse<NetworkTrace[]>
-  | (AcceptedResponse & {
-      @identifiers(#[])
-      @bodyRoot
-      _: NetworkTrace[];
-    });
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   WebApps.getNetworkTraceOperationSlot,
-  webAppsGetNetworkTraceOperationSlotCustomized
+  reorderParameters(
+    WebApps.getNetworkTraceOperationSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "name",
+      "operationId",
+      "slot",
+      "body"
+    ]
+  )
 );
-#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetNetworkTraceOperationSlotV2Customized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  operationId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  body: void,
-):
-  | ArmResponse<NetworkTrace[]>
-  | (AcceptedResponse & {
-      @identifiers(#[])
-      @bodyRoot
-      _: NetworkTrace[];
-    });
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   WebApps.getNetworkTraceOperationSlotV2,
-  webAppsGetNetworkTraceOperationSlotV2Customized
+  reorderParameters(
+    WebApps.getNetworkTraceOperationSlotV2,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "name",
+      "operationId",
+      "slot",
+      "body"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetNetworkTracesSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
+#suppress "experimental-feature" "TCGC parameter customization."
+@@override(
+  WebApps.getNetworkTracesSlot,
+  reorderParameters(
+    WebApps.getNetworkTracesSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "name",
+      "operationId",
+      "slot",
+      "body"
+    ]
+  )
+);
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  operationId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  body: void,
-): ArmResponse<NetworkTrace[]>;
-
-@@override(WebApps.getNetworkTracesSlot, webAppsGetNetworkTracesSlotCustomized);
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetNetworkTracesSlotV2Customized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  operationId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  body: void,
-): ArmResponse<NetworkTrace[]>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   WebApps.getNetworkTracesSlotV2,
-  webAppsGetNetworkTracesSlotV2Customized
+  reorderParameters(
+    WebApps.getNetworkTracesSlotV2,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "name",
+      "operationId",
+      "slot",
+      "body"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetPremierAddOnSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  premierAddOnName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmResponse<PremierAddOn>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   PremierAddOnOperationGroup.getPremierAddOnSlot,
-  webAppsGetPremierAddOnSlotCustomized
+  reorderParameters(
+    PremierAddOnOperationGroup.getPremierAddOnSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "premierAddOnName",
+      "slot"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetPrivateEndpointConnectionSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  privateEndpointConnectionName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmResponse<RemotePrivateEndpointConnectionARMResource>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   PrivateEndpointConnectionSlotOperationGroup.getPrivateEndpointConnectionSlot,
-  webAppsGetPrivateEndpointConnectionSlotCustomized
+  reorderParameters(
+    PrivateEndpointConnectionSlotOperationGroup.getPrivateEndpointConnectionSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "privateEndpointConnectionName",
+      "slot"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetProcessDumpSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  processId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  body: void,
-):
-  | {
-      @header("Content-Type")
-      contentType: "*/*";
-
-      @doc("Receipt body in COSE format")
-      @bodyRoot
-      body: bytes;
-    }
-  | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   ProcessSlotOperationGroup.getProcessDumpSlot,
-  webAppsGetProcessDumpSlotCustomized
+  reorderParameters(
+    ProcessSlotOperationGroup.getProcessDumpSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "processId",
+      "slot",
+      "body"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetProcessModuleSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  processId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  baseAddress: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmResponse<ProcessModuleInfo> | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   ProcessModuleSlotOperationGroup.getProcessModuleSlot,
-  webAppsGetProcessModuleSlotCustomized
+  reorderParameters(
+    ProcessModuleSlotOperationGroup.getProcessModuleSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "processId",
+      "baseAddress",
+      "slot"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetProcessSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  processId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmResponse<ProcessInfo> | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   ProcessSlotOperationGroup.getProcessSlot,
-  webAppsGetProcessSlotCustomized
+  reorderParameters(
+    ProcessSlotOperationGroup.getProcessSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "processId",
+      "slot"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetRelayServiceConnectionSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  entityName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmResponse<RelayServiceConnectionEntity>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   RelayServiceConnectionEntityOperationGroup.getRelayServiceConnectionSlot,
-  webAppsGetRelayServiceConnectionSlotCustomized
+  reorderParameters(
+    RelayServiceConnectionEntityOperationGroup.getRelayServiceConnectionSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "entityName",
+      "slot"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetSiteConnectionStringKeyVaultReferenceSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  connectionStringKey: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  configreferences: "configreferences",
-): ArmResponse<ApiKVReference>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   SiteConnectionStringKeyVaultReferenceSlot.getSiteConnectionStringKeyVaultReferenceSlot,
-  webAppsGetSiteConnectionStringKeyVaultReferenceSlotCustomized
+  reorderParameters(
+    SiteConnectionStringKeyVaultReferenceSlot.getSiteConnectionStringKeyVaultReferenceSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "connectionStringKey",
+      "slot",
+      "configreferences"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetSiteExtensionSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  siteExtensionId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmResponse<SiteExtensionInfo> | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   SiteExtensionInfoOperationGroup.getSiteExtensionSlot,
-  webAppsGetSiteExtensionSlotCustomized
+  reorderParameters(
+    SiteExtensionInfoOperationGroup.getSiteExtensionSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "siteExtensionId",
+      "slot"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetTriggeredWebJobHistorySlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  webJobName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  id: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmResponse<TriggeredJobHistory> | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   TriggeredJobHistories.getTriggeredWebJobHistorySlot,
-  webAppsGetTriggeredWebJobHistorySlotCustomized
+  reorderParameters(
+    TriggeredJobHistories.getTriggeredWebJobHistorySlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "webJobName",
+      "id",
+      "slot"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetTriggeredWebJobSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  webJobName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmResponse<TriggeredWebJob> | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   TriggeredWebJobs.getTriggeredWebJobSlot,
-  webAppsGetTriggeredWebJobSlotCustomized
+  reorderParameters(
+    TriggeredWebJobs.getTriggeredWebJobSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "webJobName",
+      "slot"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetVnetConnectionGatewaySlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  vnetName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  gatewayName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmResponse<VnetGateway> | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   VnetGatewayOperationGroup.getVnetConnectionGatewaySlot,
-  webAppsGetVnetConnectionGatewaySlotCustomized
+  reorderParameters(
+    VnetGatewayOperationGroup.getVnetConnectionGatewaySlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "vnetName",
+      "gatewayName",
+      "slot"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetVnetConnectionSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  vnetName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmResponse<VnetInfoResource>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   VnetInfoResourceOperationGroup.getVnetConnectionSlot,
-  webAppsGetVnetConnectionSlotCustomized
+  reorderParameters(
+    VnetInfoResourceOperationGroup.getVnetConnectionSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "vnetName",
+      "slot"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsGetWebJobSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
+#suppress "experimental-feature" "TCGC parameter customization."
+@@override(
+  WebJobs.getWebJobSlot,
+  reorderParameters(
+    WebJobs.getWebJobSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "webJobName",
+      "slot"
+    ]
+  )
+);
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  webJobName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmResponse<WebJob>;
-
-@@override(WebJobs.getWebJobSlot, webAppsGetWebJobSlotCustomized);
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsListBackupStatusSecretsSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  backupId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  request: BackupRequest,
-): ArmResponse<BackupItem>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   BackupItemOperationGroup.listBackupStatusSecretsSlot,
-  webAppsListBackupStatusSecretsSlotCustomized
+  reorderParameters(
+    BackupItemOperationGroup.listBackupStatusSecretsSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "backupId",
+      "slot",
+      "body"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsListDeploymentLogSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
+@@clientName(
+  BackupItemOperationGroup.listBackupStatusSecretsSlot::parameters.body,
+  "request"
+);
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  id: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  body: void,
-): ArmResponse<Deployment>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   DeploymentOperationGroup.listDeploymentLogSlot,
-  webAppsListDeploymentLogSlotCustomized
+  reorderParameters(
+    DeploymentOperationGroup.listDeploymentLogSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "id",
+      "slot",
+      "body"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsListFunctionKeysSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  functionName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  body: void,
-): ArmResponse<StringDictionary>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   FunctionEnvelopeOperationGroup.listFunctionKeysSlot,
-  webAppsListFunctionKeysSlotCustomized
+  reorderParameters(
+    FunctionEnvelopeOperationGroup.listFunctionKeysSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "functionName",
+      "slot",
+      "body"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsListFunctionSecretsSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  functionName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  body: void,
-): ArmResponse<FunctionSecrets>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   FunctionEnvelopeOperationGroup.listFunctionSecretsSlot,
-  webAppsListFunctionSecretsSlotCustomized
+  reorderParameters(
+    FunctionEnvelopeOperationGroup.listFunctionSecretsSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "functionName",
+      "slot",
+      "body"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsListNetworkFeaturesSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  view: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmResponse<NetworkFeatures> | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   NetworkFeaturesSlotOperationGroup.listNetworkFeaturesSlot,
-  webAppsListNetworkFeaturesSlotCustomized
+  reorderParameters(
+    NetworkFeaturesSlotOperationGroup.listNetworkFeaturesSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "view",
+      "slot"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsListInstanceProcessModulesCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  processId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  instanceId: string,
-): ArmResponse<ProcessModuleInfoCollection> | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   ProcessModuleInfos.listInstanceProcessModules,
-  webAppsListInstanceProcessModulesCustomized
+  reorderParameters(
+    ProcessModuleInfos.listInstanceProcessModules,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "processId",
+      "instanceId"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsListInstanceProcessModulesSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  processId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  instanceId: string,
-): ArmResponse<ProcessModuleInfoCollection> | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   InstanceProcessModuleSlotOperationGroup.listInstanceProcessModulesSlot,
-  webAppsListInstanceProcessModulesSlotCustomized
+  reorderParameters(
+    InstanceProcessModuleSlotOperationGroup.listInstanceProcessModulesSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "processId",
+      "slot",
+      "instanceId"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsListInstanceProcessThreadsCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  processId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  instanceId: string,
-
-  @body
-  body: void,
-): ArmResponse<ProcessThreadInfoCollection> | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   ProcessInfos.listInstanceProcessThreads,
-  webAppsListInstanceProcessThreadsCustomized
+  reorderParameters(
+    ProcessInfos.listInstanceProcessThreads,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "processId",
+      "instanceId",
+      "body"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsListInstanceProcessThreadsSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  processId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  instanceId: string,
-
-  @body
-  body: void,
-): ArmResponse<ProcessThreadInfoCollection> | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   InstanceProcessSlotOperationGroup.listInstanceProcessThreadsSlot,
-  webAppsListInstanceProcessThreadsSlotCustomized
+  reorderParameters(
+    InstanceProcessSlotOperationGroup.listInstanceProcessThreadsSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "processId",
+      "slot",
+      "instanceId",
+      "body"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsListProcessModulesSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  processId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmResponse<ProcessModuleInfoCollection> | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   ProcessModuleSlotOperationGroup.listProcessModulesSlot,
-  webAppsListProcessModulesSlotCustomized
+  reorderParameters(
+    ProcessModuleSlotOperationGroup.listProcessModulesSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "processId",
+      "slot"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsListProcessThreadsSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  processId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  body: void,
-): ArmResponse<ProcessThreadInfoCollection> | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   ProcessSlotOperationGroup.listProcessThreadsSlot,
-  webAppsListProcessThreadsSlotCustomized
+  reorderParameters(
+    ProcessSlotOperationGroup.listProcessThreadsSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "processId",
+      "slot",
+      "body"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsListTriggeredWebJobHistorySlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  webJobName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-): ArmResponse<TriggeredJobHistoryCollection> | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   TriggeredJobHistories.listTriggeredWebJobHistorySlot,
-  webAppsListTriggeredWebJobHistorySlotCustomized
+  reorderParameters(
+    TriggeredJobHistories.listTriggeredWebJobHistorySlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "webJobName",
+      "slot"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsRecoverSiteConfigurationSnapshotSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  snapshotId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  web: "web",
-
-  @body
-  body: void,
-): NoContentResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   SiteConfigSnapshotSlotResourceOperationGroup.recoverSiteConfigurationSnapshotSlot,
-  webAppsRecoverSiteConfigurationSnapshotSlotCustomized
+  reorderParameters(
+    SiteConfigSnapshotSlotResourceOperationGroup.recoverSiteConfigurationSnapshotSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "snapshotId",
+      "slot",
+      "web",
+      "body"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsRunTriggeredWebJobSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  webJobName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  body: void,
-):
-  | {
-      @body body: void;
-    }
-  | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   TriggeredWebJobs.runTriggeredWebJobSlot,
-  webAppsRunTriggeredWebJobSlotCustomized
+  reorderParameters(
+    TriggeredWebJobs.runTriggeredWebJobSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "webJobName",
+      "slot",
+      "body"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsStartContinuousWebJobSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  webJobName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  body: void,
-):
-  | {
-      @body body: void;
-    }
-  | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   ContinuousWebJobOperationGroup.startContinuousWebJobSlot,
-  webAppsStartContinuousWebJobSlotCustomized
+  reorderParameters(
+    ContinuousWebJobOperationGroup.startContinuousWebJobSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "webJobName",
+      "slot",
+      "body"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsStopContinuousWebJobSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  webJobName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  body: void,
-):
-  | {
-      @body body: void;
-    }
-  | ArmNotFoundResponse;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   ContinuousWebJobOperationGroup.stopContinuousWebJobSlot,
-  webAppsStopContinuousWebJobSlotCustomized
+  reorderParameters(
+    ContinuousWebJobOperationGroup.stopContinuousWebJobSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "webJobName",
+      "slot",
+      "body"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsUpdateDomainOwnershipIdentifierSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  domainOwnershipIdentifierName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  domainOwnershipIdentifier: Identifier,
-): ArmResponse<Identifier>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   IdentifierOperationGroup.updateDomainOwnershipIdentifierSlot,
-  webAppsUpdateDomainOwnershipIdentifierSlotCustomized
+  reorderParameters(
+    IdentifierOperationGroup.updateDomainOwnershipIdentifierSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "domainOwnershipIdentifierName",
+      "slot",
+      "properties"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsUpdateHybridConnectionSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
+@@clientName(
+  IdentifierOperationGroup.updateDomainOwnershipIdentifierSlot::parameters.properties,
+  "domainOwnershipIdentifier"
+);
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  namespaceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  relayName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  connectionEnvelope: HybridConnection,
-): ArmResponse<HybridConnection>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   HybridConnectionSlotOperationGroup.updateHybridConnectionSlot,
-  webAppsUpdateHybridConnectionSlotCustomized
+  reorderParameters(
+    HybridConnectionSlotOperationGroup.updateHybridConnectionSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "namespaceName",
+      "relayName",
+      "slot",
+      "properties"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsUpdatePremierAddOnSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
+@@clientName(
+  HybridConnectionSlotOperationGroup.updateHybridConnectionSlot::parameters.properties,
+  "connectionEnvelope"
+);
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  premierAddOnName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  premierAddOn: PremierAddOnPatchResource,
-): ArmResponse<PremierAddOn>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   PremierAddOnOperationGroup.updatePremierAddOnSlot,
-  webAppsUpdatePremierAddOnSlotCustomized
+  reorderParameters(
+    PremierAddOnOperationGroup.updatePremierAddOnSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "premierAddOnName",
+      "slot",
+      "properties"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsUpdateRelayServiceConnectionSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
+@@clientName(
+  PremierAddOnOperationGroup.updatePremierAddOnSlot::parameters.properties,
+  "premierAddOn"
+);
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  entityName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  connectionEnvelope: RelayServiceConnectionEntity,
-): ArmResponse<RelayServiceConnectionEntity>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   RelayServiceConnectionEntityOperationGroup.updateRelayServiceConnectionSlot,
-  webAppsUpdateRelayServiceConnectionSlotCustomized
+  reorderParameters(
+    RelayServiceConnectionEntityOperationGroup.updateRelayServiceConnectionSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "entityName",
+      "slot",
+      "properties"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsUpdateVnetConnectionGatewaySlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
+@@clientName(
+  RelayServiceConnectionEntityOperationGroup.updateRelayServiceConnectionSlot::parameters.properties,
+  "connectionEnvelope"
+);
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  vnetName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  gatewayName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  connectionEnvelope: VnetGateway,
-): ArmResponse<VnetGateway>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   VnetGatewayOperationGroup.updateVnetConnectionGatewaySlot,
-  webAppsUpdateVnetConnectionGatewaySlotCustomized
+  reorderParameters(
+    VnetGatewayOperationGroup.updateVnetConnectionGatewaySlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "vnetName",
+      "gatewayName",
+      "slot",
+      "properties"
+    ]
+  )
 );
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op webAppsUpdateVnetConnectionSlotCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
+@@clientName(
+  VnetGatewayOperationGroup.updateVnetConnectionGatewaySlot::parameters.properties,
+  "connectionEnvelope"
+);
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  name: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  vnetName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  slot: string,
-
-  @body
-  connectionEnvelope: VnetInfoResource,
-): ArmResponse<VnetInfoResource>;
-
+#suppress "experimental-feature" "TCGC parameter customization."
 @@override(
   VnetInfoResourceOperationGroup.updateVnetConnectionSlot,
-  webAppsUpdateVnetConnectionSlotCustomized
+  reorderParameters(
+    VnetInfoResourceOperationGroup.updateVnetConnectionSlot,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "name",
+      "vnetName",
+      "slot",
+      "properties"
+    ]
+  )
+);
+
+@@clientName(
+  VnetInfoResourceOperationGroup.updateVnetConnectionSlot::parameters.properties,
+  "connectionEnvelope"
 );
 
 @@clientName(Certificate, "AppCertificate", "go");
@@ -3499,7 +2218,8 @@ op webAppsDeletePrivateEndpointConnectionSlotCustomizedForJs(
   slot: string,
 ):
   | ArmResponse<unknown>
-  | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = unknown>> & {
+  | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @body
       _: unknown;
@@ -3508,7 +2228,8 @@ op webAppsDeletePrivateEndpointConnectionSlotCustomizedForJs(
       #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @body
       _: unknown;
-    });
+    })
+  | DefaultErrorResponse;
 
 @@override(
   PrivateEndpointConnectionSlotOperationGroup.deletePrivateEndpointConnectionSlot,
@@ -3536,16 +2257,18 @@ op appServiceEnvironmentsDeletePrivateEndpointConnectionForJs(
   privateEndpointConnectionName: string,
 ):
   | ArmResponse<unknown>
-  | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = unknown> & {
+  | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @body
       _: unknown;
-    }>
+    })
   | (ArmDeletedNoContentResponse & {
       #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @body
       _: unknown;
-    });
+    })
+  | DefaultErrorResponse;
 
 @@override(
   RemotePrivateEndpointConnectionARMResources.deletePrivateEndpointConnection,
@@ -3573,16 +2296,18 @@ op staticSitesDeletePrivateEndpointConnectionForJs(
   privateEndpointConnectionName: string,
 ):
   | ArmResponse<unknown>
-  | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = unknown> & {
+  | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @body
       _: unknown;
-    }>
+    })
   | (ArmDeletedNoContentResponse & {
       #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @body
       _: unknown;
-    });
+    })
+  | DefaultErrorResponse;
 
 @@override(
   StaticSites.deletePrivateEndpointConnection,
@@ -3610,16 +2335,18 @@ op webAppsDeletePrivateEndpointConnectionForJs(
   privateEndpointConnectionName: string,
 ):
   | ArmResponse<unknown>
-  | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = unknown> & {
+  | (ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = unknown> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @body
       _: unknown;
-    }>
+    })
   | (ArmDeletedNoContentResponse & {
       #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @body
       _: unknown;
-    });
+    })
+  | DefaultErrorResponse;
 
 @@override(
   RemotePrivateEndpointConnectionARMResourceOperationGroup.deletePrivateEndpointConnection,
@@ -3655,11 +2382,13 @@ op webAppsStartNetworkTraceForJs(
   @body body: void,
 ):
   | ArmResponse<NetworkTrace[]>
-  | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]>> & {
+  | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       @identifiers(#[])
       _?: NetworkTrace[];
-    });
+    })
+  | DefaultErrorResponse;
 
 @@override(
   Sites.startNetworkTrace,
@@ -3699,11 +2428,13 @@ op webAppsStartNetworkTraceSlotForJs(
   @body body: void,
 ):
   | ArmResponse<NetworkTrace[]>
-  | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]>> & {
+  | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = NetworkTrace[]> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       @identifiers(#[])
       _?: NetworkTrace[];
-    });
+    })
+  | DefaultErrorResponse;
 
 @@override(
   WebApps.startNetworkTraceSlot,
@@ -3743,7 +2474,8 @@ op webAppsStartWebSiteNetworkTraceOperationForJs(
       @bodyRoot
       @identifiers(#[])
       _?: NetworkTrace[];
-    });
+    })
+  | DefaultErrorResponse;
 
 @@override(
   Sites.startWebSiteNetworkTraceOperation,
@@ -3787,7 +2519,8 @@ op webAppsStartWebSiteNetworkTraceOperationSlotForJs(
       @bodyRoot
       @identifiers(#[])
       _?: NetworkTrace[];
-    });
+    })
+  | DefaultErrorResponse;
 
 @@override(
   WebApps.startWebSiteNetworkTraceOperationSlot,

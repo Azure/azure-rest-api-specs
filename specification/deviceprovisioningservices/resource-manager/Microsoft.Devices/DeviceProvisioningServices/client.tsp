@@ -268,26 +268,18 @@ using Microsoft.Devices;
   "csharp"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op IotDpsResourceDeleteCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provisioningServiceName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): void;
-
 @@override(
   ProvisioningServiceDescriptions.delete,
-  IotDpsResourceDeleteCustomized,
+  reorderParameters(
+    ProvisioningServiceDescriptions.delete,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "provisioningServiceName",
+      "resourceGroupName"
+    ]
+  ),
   "python,go"
 );
 
@@ -296,351 +288,178 @@ op IotDpsResourceDeleteCustomized(
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
 @@markAsPageable(GroupIdInformations.listPrivateLinkResources, "csharp,java");
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op IotDpsResourceListKeysCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
-  @body body: void,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provisioningServiceName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): SharedAccessSignatureAuthorizationRuleListResult;
-
 @@override(
   ProvisioningServiceDescriptions.listKeys,
-  IotDpsResourceListKeysCustomized,
+  reorderParameters(
+    ProvisioningServiceDescriptions.listKeys,
+    #[
+      "provider",
+      "body",
+      "apiVersion",
+      "subscriptionId",
+      "provisioningServiceName",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,java,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op IotDpsResourceGetOperationResultCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  operationId: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provisioningServiceName: string,
-
-  ...GetOperationResultParameters,
-): AsyncOperationResult;
 
 @@override(
   ProvisioningServiceDescriptionOperations.getOperationResult,
-  IotDpsResourceGetOperationResultCustomized,
+  reorderParameters(
+    ProvisioningServiceDescriptionOperations.getOperationResult,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "operationId",
+      "resourceGroupName",
+      "provisioningServiceName",
+      "asyncinfo"
+    ]
+  ),
   "python,go,java,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op IotDpsResourceListKeysForKeyNameCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
-  @body body: void,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provisioningServiceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  keyName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): SharedAccessSignatureAuthorizationRuleAccessRightsDescription;
 
 @@override(
   ProvisioningServiceDescriptions.listKeysForKeyName,
-  IotDpsResourceListKeysForKeyNameCustomized,
+  reorderParameters(
+    ProvisioningServiceDescriptions.listKeysForKeyName,
+    #[
+      "provider",
+      "body",
+      "apiVersion",
+      "subscriptionId",
+      "provisioningServiceName",
+      "keyName",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,java,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op IotDpsResourceListValidSkusCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
-  @body body: void,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provisioningServiceName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): IotDpsSkuDefinitionListResult;
 
 @@override(
   ProvisioningServiceDescriptions.listValidSkus,
-  IotDpsResourceListValidSkusCustomized,
+  reorderParameters(
+    ProvisioningServiceDescriptions.listValidSkus,
+    #[
+      "provider",
+      "body",
+      "apiVersion",
+      "subscriptionId",
+      "provisioningServiceName",
+      "resourceGroupName"
+    ]
+  ),
   "python,go,java,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op IotDpsResourceGetCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provisioningServiceName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-): ProvisioningServiceDescription;
 
 @@override(
   ProvisioningServiceDescriptions.get,
-  IotDpsResourceGetCustomized,
+  reorderParameters(
+    ProvisioningServiceDescriptions.get,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "provisioningServiceName",
+      "resourceGroupName"
+    ]
+  ),
   "python,go"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op CertificateResponseDeleteCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  ifMatch: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provisioningServiceName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  certificateName: string,
-
-  ...CertificateNameQuery2,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @query("certificate.rawBytes")
-  certificateRawBytes?: bytes,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @query("certificate.isVerified")
-  certificateIsVerified?: boolean,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @query("certificate.purpose")
-  certificatePurpose?: CertificatePurpose,
-
-  ...CertificateNameQuery3,
-  ...CertificateNameQuery4,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @query("certificate.hasPrivateKey")
-  certificateHasPrivateKey?: boolean,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @query("certificate.nonce")
-  certificateNonce?: string,
-): void;
-
 @@override(
   CertificateResponses.delete,
-  CertificateResponseDeleteCustomized,
+  reorderParameters(
+    CertificateResponses.delete,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "ifMatch",
+      "provisioningServiceName",
+      "certificateName",
+      "certificate.name",
+      "certificateRawBytes",
+      "certificateIsVerified",
+      "certificatePurpose",
+      "certificateCreated",
+      "certificateLastUpdated",
+      "certificateHasPrivateKey",
+      "certificateNonce"
+    ]
+  ),
   "python,go,java"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op CertificateResponseGenerateVerificationCodeCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  certificateName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  ifMatch: string,
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provisioningServiceName: string,
-
-  ...CertificateNameQuery1,
-
-  /**
-   * Raw data of certificate.
-   */
-  @query("certificate.rawBytes")
-  certificateRawBytes?: bytes,
-
-  /**
-   * Indicates if the certificate has been verified by owner of the private key.
-   */
-  @query("certificate.isVerified")
-  certificateIsVerified?: boolean,
-
-  /**
-   * Description mentioning the purpose of the certificate.
-   */
-  @query("certificate.purpose")
-  certificatePurpose?: CertificatePurpose,
-
-  ...CertificateNameQuery3,
-  ...CertificateNameQuery4,
-
-  /**
-   * Indicates if the certificate contains private key.
-   */
-  @query("certificate.hasPrivateKey")
-  certificateHasPrivateKey?: boolean,
-
-  /**
-   * Random number generated to indicate Proof of Possession.
-   */
-  @query("certificate.nonce")
-  certificateNonce?: string,
-
-  @body
-  body: void,
-): VerificationCodeResponse;
-
 @@override(
   CertificateResponses.generateVerificationCode,
-  CertificateResponseGenerateVerificationCodeCustomized,
+  reorderParameters(
+    CertificateResponses.generateVerificationCode,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "certificateName",
+      "ifMatch",
+      "resourceGroupName",
+      "provisioningServiceName",
+      "certificate.name",
+      "certificateRawBytes",
+      "certificateIsVerified",
+      "certificatePurpose",
+      "certificateCreated",
+      "certificateLastUpdated",
+      "certificateHasPrivateKey",
+      "certificateNonce",
+      "body"
+    ]
+  ),
   "python,go,java,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op CertificateResponseVerifyCertificateCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<CertificateResponse>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  certificateName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  ifMatch: string,
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provisioningServiceName: string,
-
-  ...CertificateNameQuery1,
-
-  /**
-   * Raw data of certificate.
-   */
-  @query("certificate.rawBytes")
-  certificateRawBytes?: bytes,
-
-  /**
-   * Indicates if the certificate has been verified by owner of the private key.
-   */
-  @query("certificate.isVerified")
-  certificateIsVerified?: boolean,
-
-  /**
-   * Describe the purpose of the certificate.
-   */
-  @query("certificate.purpose")
-  certificatePurpose?: CertificatePurpose,
-
-  ...CertificateNameQuery3,
-  ...CertificateNameQuery4,
-
-  /**
-   * Indicates if the certificate contains private key.
-   */
-  @query("certificate.hasPrivateKey")
-  certificateHasPrivateKey?: boolean,
-
-  /**
-   * Random number generated to indicate Proof of Possession.
-   */
-  @query("certificate.nonce")
-  certificateNonce?: string,
-
-  @body
-  request: VerificationCodeRequest,
-): CertificateListDescription;
 
 @@override(
   CertificateResponses.verifyCertificate,
-  CertificateResponseVerifyCertificateCustomized,
+  reorderParameters(
+    CertificateResponses.verifyCertificate,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "certificateName",
+      "ifMatch",
+      "resourceGroupName",
+      "provisioningServiceName",
+      "certificate.name",
+      "certificateRawBytes",
+      "certificateIsVerified",
+      "certificatePurpose",
+      "certificateCreated",
+      "certificateLastUpdated",
+      "certificateHasPrivateKey",
+      "certificateNonce",
+      "body"
+    ]
+  ),
   "python,go,java,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op CertificateResponseGetCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<ProvisioningServiceDescription>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  certificateName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  provisioningServiceName: string,
-
-  /**
-   * ETag of the certificate.
-   */
-  @header("If-Match")
-  ifMatch?: string,
-): CertificateResponse;
-
 @@override(
   CertificateResponses.get,
-  CertificateResponseGetCustomized,
+  reorderParameters(
+    CertificateResponses.get,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "certificateName",
+      "resourceGroupName",
+      "provisioningServiceName",
+      "ifMatch"
+    ]
+  ),
   "python,go,java,javascript"
 );
 

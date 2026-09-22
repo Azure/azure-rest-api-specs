@@ -101,135 +101,15 @@ using StandardsAPI;
 })
 namespace SecurityManagementClient;
 
-/**
- * A private link resource name parameter.
- */
-model PrivateLinkNameParameter {
-  /**
-   * The name of the private link resource.
-   */
-  @path
-  @minLength(3)
-  @maxLength(63)
-  @pattern("^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$")
-  privateLinkName: string;
-}
-
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op privateLinksGetCustomization(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  ...PrivateLinkNameParameter,
-): ArmResponse<PrivateLinksAPI.PrivateLinkResource> | ErrorResponse;
-
-@@Azure.ClientGenerator.Core.override(
-  PrivateLinkResources.get,
-  privateLinksGetCustomization,
+@@clientName(
+  PrivateLinkResources.create::parameters.resource,
+  "privateLink",
   "!python,!java,!javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op privateLinksCreateCustomization(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  ...PrivateLinkNameParameter,
-  resource: PrivateLinksAPI.PrivateLinkResource,
-):
-  | ArmResourceUpdatedResponse<PrivateLinksAPI.PrivateLinkResource>
-  | ArmResourceCreatedResponse<
-      PrivateLinksAPI.PrivateLinkResource,
-      ArmAsyncOperationHeader<FinalResult = PrivateLinksAPI.PrivateLinkResource> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
-  | ErrorResponse;
 
 @@clientName(
-  privateLinksCreateCustomization::parameters.resource,
-  "privateLink"
-);
-@@Azure.ClientGenerator.Core.override(
-  PrivateLinkResources.create,
-  privateLinksCreateCustomization,
-  "!python,!java,!javascript"
-);
-
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op privateLinksUpdateCustomization(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  ...PrivateLinkNameParameter,
-  properties: PrivateLinksAPI.PrivateLinkUpdate,
-): ArmResponse<PrivateLinksAPI.PrivateLinkResource> | ErrorResponse;
-
-@@clientName(
-  privateLinksUpdateCustomization::parameters.properties,
-  "privateLink"
-);
-@@Azure.ClientGenerator.Core.override(
-  PrivateLinkResources.update,
-  privateLinksUpdateCustomization,
-  "!python,!java,!javascript"
-);
-
-#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op privateLinksDeleteCustomization(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  ...PrivateLinkNameParameter,
-):
-  | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>
-  | ArmDeletedNoContentResponse
-  | ErrorResponse;
-
-@@Azure.ClientGenerator.Core.override(
-  PrivateLinkResources.delete,
-  privateLinksDeleteCustomization,
-  "!python,!java,!javascript"
-);
-
-#suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op privateLinksHeadCustomization(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  ...PrivateLinkNameParameter,
-): OkResponse | ErrorResponse;
-
-@@Azure.ClientGenerator.Core.override(
-  PrivateLinkResources.head,
-  privateLinksHeadCustomization,
+  PrivateLinkResources.update::parameters.properties,
+  "privateLink",
   "!python,!java,!javascript"
 );
 
@@ -255,155 +135,12 @@ op privateLinksHeadCustomization(
 );
 @@access(DefenderFoDatabasesAwsOfferingDatabasesDspm, Access.public, "csharp");
 
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op privateEndpointConnectionsListCustomization(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  ...PrivateLinkNameParameter,
-):
-  | ArmResponse<ResourceListResult<PrivateLinksAPI.PrivateEndpointConnection>>
-  | ErrorResponse;
-
-@@Azure.ClientGenerator.Core.override(
-  PrivateEndpointConnections.list,
-  privateEndpointConnectionsListCustomization,
-  "!python,!java,!javascript"
-);
-
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op privateEndpointConnectionsGetCustomization(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  ...PrivateLinkNameParameter,
-
-  @path
-  privateEndpointConnectionName: string,
-): ArmResponse<Azure.ResourceManager.PrivateEndpointConnection> | ErrorResponse;
-
-@@Azure.ClientGenerator.Core.override(
-  PrivateEndpointConnections.get,
-  privateEndpointConnectionsGetCustomization,
-  "!python,!java,!javascript"
-);
-
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op privateEndpointConnectionsCreateOrUpdateCustomization(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  ...PrivateLinkNameParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  privateEndpointConnectionName: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  resource: PrivateLinksAPI.PrivateEndpointConnection,
-):
-  | ArmResourceUpdatedResponse<PrivateLinksAPI.PrivateLinkResource>
-  | ArmResourceCreatedResponse<
-      PrivateLinksAPI.PrivateLinkResource,
-      ArmAsyncOperationHeader<FinalResult = PrivateLinksAPI.PrivateLinkResource> &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
-  | ErrorResponse;
-
-@@Azure.ClientGenerator.Core.override(
-  PrivateEndpointConnections.createOrUpdate,
-  privateEndpointConnectionsCreateOrUpdateCustomization,
-  "!python,!java,!javascript"
-);
 @@clientName(
-  privateEndpointConnectionsCreateOrUpdateCustomization::parameters.resource,
-  "privateEndpointConnection"
-);
-
-#suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op privateEndpointConnectionsDeleteCustomization(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  ...PrivateLinkNameParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  privateEndpointConnectionName: string,
-):
-  | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>
-  | ArmDeletedNoContentResponse
-  | ErrorResponse;
-
-@@Azure.ClientGenerator.Core.override(
-  PrivateEndpointConnections.delete,
-  privateEndpointConnectionsDeleteCustomization,
+  PrivateEndpointConnections.createOrUpdate::parameters.resource,
+  "privateEndpointConnection",
   "!python,!java,!javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op privateLinkResourcesListCustomization(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  ...PrivateLinkNameParameter,
-): ArmResponse<ResourceListResult<PrivateLinkGroupResource>> | ErrorResponse;
-
-@@Azure.ClientGenerator.Core.override(
-  PrivateLinkGroupResources.list,
-  privateLinkResourcesListCustomization,
-  "!python,!java,!javascript"
-);
-
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-op privateLinkResourcesGetCustomization(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  ...PrivateLinkNameParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @path
-  groupId: string,
-): ArmResponse<PrivateLinkGroupResource> | ErrorResponse;
-
-@@Azure.ClientGenerator.Core.override(
-  PrivateLinkGroupResources.get,
-  privateLinkResourcesGetCustomization,
-  "!python,!java,!javascript"
-);
 @@clientName(
   SecurityStandardsAPI.SecurityStandard,
   "ArmSecurityStandard",
@@ -2219,119 +1956,50 @@ union CSharpServerVulnerabilityAssessmentName {
   "csharp"
 );
 
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op sqlVulnerabilityAssessmentScansGet(
-  ...ApiVersionParameter,
-
-  @path
-  providerNamespace: "Microsoft.Security",
-
-  @path
-  sqlVulnerabilityAssessment: "default",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  scanId: string,
-
-  @query
-  databaseName?: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  resourceId: string,
-): ArmResponse<ScanV2> | Common.CloudError;
-
-@@override(ScanV2s.get, sqlVulnerabilityAssessmentScansGet);
-
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op sqlVulnerabilityAssessmentScanResultsList(
-  ...ApiVersionParameter,
-
-  @path
-  providerNamespace: "Microsoft.Security",
-
-  @path
-  sqlVulnerabilityAssessment: "default",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  scanId: string,
-
-  @query
-  databaseName?: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  resourceId: string,
-): ArmResponse<ScanResults> | Common.CloudError;
+@@override(
+  ScanV2s.get,
+  reorderParameters(
+    ScanV2s.get,
+    #[
+      "apiVersion",
+      "providerNamespace",
+      "sqlVulnerabilityAssessment",
+      "scanId",
+      "databaseName",
+      "resourceId"
+    ]
+  )
+);
 
 @@override(
   SqlVulnerabilityAssessmentScanResults.list,
-  sqlVulnerabilityAssessmentScanResultsList
+  reorderParameters(
+    SqlVulnerabilityAssessmentScanResults.list,
+    #[
+      "apiVersion",
+      "providerNamespace",
+      "sqlVulnerabilityAssessment",
+      "scanId",
+      "databaseName",
+      "resourceId"
+    ]
+  )
 );
-
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op sqlVulnerabilityAssessmentScanResultsGet(
-  ...ApiVersionParameter,
-
-  @path
-  providerNamespace: "Microsoft.Security",
-
-  @path
-  sqlVulnerabilityAssessment: "default",
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  scanId: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  scanResultId: string,
-
-  @query
-  databaseName?: string,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  resourceId: string,
-): ArmResponse<ScanResult> | Common.CloudError;
 
 @@override(
   SqlVulnerabilityAssessmentScanResults.get,
-  sqlVulnerabilityAssessmentScanResultsGet
-);
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op alertsListResourceGroupLevelByRegionCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  /** The location where ASC stores the data of the subscription. can be retrieved from Get locations */
-  @path
-  @segment("locations")
-  @key
-  ascLocation: Azure.Core.azureLocation,
-): ArmResponse<AlertList> | ErrorResponse;
-
-@@override(
-  AlertOperationGroup.listResourceGroupLevelByRegion,
-  alertsListResourceGroupLevelByRegionCustomized,
-  "python,go,java"
+  reorderParameters(
+    SqlVulnerabilityAssessmentScanResults.get,
+    #[
+      "apiVersion",
+      "providerNamespace",
+      "sqlVulnerabilityAssessment",
+      "scanId",
+      "scanResultId",
+      "databaseName",
+      "resourceId"
+    ]
+  )
 );
 
 @@alternateType(

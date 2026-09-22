@@ -441,48 +441,41 @@ using TypeSpec.Http;
   "go"
 );
 
-/** Request to mark devices for a given job as shipped */
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "SDK customization override operation."
-op jobMarkDevicesShippedCustomized(
-  ...Azure.ResourceManager.ApiVersionParameter,
-  ...Azure.ResourceManager.SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.ProviderParameter<JobResource>,
+@@override(
+  JobResources.markDevicesShipped,
+  reorderParameters(
+    JobResources.markDevicesShipped,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "jobName",
+      "resourceGroupName",
+      "body"
+    ]
+  )
+);
 
-  /** The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only */
-  @path
-  jobName: string,
+@@clientName(
+  JobResources.markDevicesShipped::parameters.body,
+  "markDevicesShippedRequest"
+);
 
-  ...Azure.ResourceManager.ResourceGroupParameter,
+@@override(
+  mitigate,
+  reorderParameters(
+    mitigate,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "jobName",
+      "resourceGroupName",
+      "body"
+    ]
+  )
+);
 
-  /** Mark Devices Shipped Request */
-  @body
-  markDevicesShippedRequest: MarkDevicesShippedRequest,
-): NoContentResponse | Microsoft.DataBox.ApiError;
-
-/** Request to mitigate for a given job */
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "SDK customization override operation."
-op mitigateCustomized(
-  ...Azure.ResourceManager.ApiVersionParameter,
-  ...Azure.ResourceManager.SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.ProviderParameter<JobResource>,
-
-  /** The name of the job Resource within the specified resource group. job names must be between 3 and 24 characters in length and use any alphanumeric and underscore only */
-  @path
-  jobName: string,
-
-  ...Azure.ResourceManager.ResourceGroupParameter,
-
-  /** Mitigation Request */
-  @body
-  mitigateJobRequest: MitigateJobRequest,
-): NoContentResponse | Microsoft.DataBox.ApiError;
-
-@@override(JobResources.markDevicesShipped, jobMarkDevicesShippedCustomized);
-
-@@override(mitigate, mitigateCustomized);
+@@clientName(mitigate::parameters.body, "mitigateJobRequest");
 
 @@alternateType(OperationProperties, Record<unknown>, "javascript");

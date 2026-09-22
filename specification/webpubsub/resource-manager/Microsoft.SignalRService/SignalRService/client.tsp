@@ -260,171 +260,101 @@ using Http;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Change the base type back to TrackedResource for backward compatibility"
 @@markAsPageable(WebPubSubResources.listSkus, "csharp");
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op WebPubSubHubsGetCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<WebPubSubHub>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  hubName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  resourceName: string,
-): WebPubSubHub;
-
 @@override(
   WebPubSubHubs.get,
-  WebPubSubHubsGetCustomized,
+  reorderParameters(
+    WebPubSubHubs.get,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "hubName",
+      "resourceGroupName",
+      "resourceName"
+    ]
+  ),
   "go,python,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op WebPubSubHubsCreateOrUpdateCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<WebPubSubHub>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  hubName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  resourceName: string,
-
-  @body
-  parameters: WebPubSubHub,
-): void;
 
 @@override(
   WebPubSubHubs.createOrUpdate,
-  WebPubSubHubsCreateOrUpdateCustomized,
+  reorderParameters(
+    WebPubSubHubs.createOrUpdate,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "hubName",
+      "resourceGroupName",
+      "resourceName",
+      "resource"
+    ]
+  ),
   "go,python,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op WebPubSubHubsDeleteCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<WebPubSubHub>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  hubName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  resourceName: string,
-): void;
 
 @@override(
   WebPubSubHubs.delete,
-  WebPubSubHubsDeleteCustomized,
+  reorderParameters(
+    WebPubSubHubs.delete,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "hubName",
+      "resourceGroupName",
+      "resourceName"
+    ]
+  ),
   "go,python,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op PrivateEndpointConnectionsGetCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<PrivateEndpointConnection>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  privateEndpointConnectionName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  resourceName: string,
-): PrivateEndpointConnection;
 
 @@override(
   PrivateEndpointConnections.get,
-  PrivateEndpointConnectionsGetCustomized,
+  reorderParameters(
+    PrivateEndpointConnections.get,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "privateEndpointConnectionName",
+      "resourceGroupName",
+      "resourceName"
+    ]
+  ),
   "go,python,javascript"
 );
-
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op PrivateEndpointConnectionsUpdateCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<PrivateEndpointConnection>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  privateEndpointConnectionName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  resourceName: string,
-
-  @body
-  parameters: PrivateEndpointConnection,
-): PrivateEndpointConnection;
 
 @@override(
   PrivateEndpointConnections.update,
-  PrivateEndpointConnectionsUpdateCustomized,
+  reorderParameters(
+    PrivateEndpointConnections.update,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "privateEndpointConnectionName",
+      "resourceGroupName",
+      "resourceName",
+      "resource"
+    ]
+  ),
   "go,python,javascript"
 );
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op PrivateEndpointConnectionsDeleteCustomized(
-  ...Azure.ResourceManager.ProviderNamespace<PrivateEndpointConnection>,
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  privateEndpointConnectionName: string,
-
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
-  resourceName: string,
-): void;
-
 @@override(
   PrivateEndpointConnections.delete,
-  PrivateEndpointConnectionsDeleteCustomized,
+  reorderParameters(
+    PrivateEndpointConnections.delete,
+    #[
+      "provider",
+      "apiVersion",
+      "subscriptionId",
+      "privateEndpointConnectionName",
+      "resourceGroupName",
+      "resourceName"
+    ]
+  ),
   "go,python,javascript"
 );
 

@@ -1799,27 +1799,12 @@ model AccessRulePropertiesSubscriptionsItem {
 @@clientName(AlertSeverity.`3`, "THREE", "python");
 @@clientName(AlertSeverity.`4`, "FOUR", "python");
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op PrivateLinkScopeOperationStatusGetCustomized(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-
-  /** The operation Id. */
-  @path
-  asyncOperationId: string,
-
-  ...ResourceGroupParameter,
-):
-  | Azure.ResourceManager.ArmResponse<OperationStatus>
-  | Azure.ResourceManager.ErrorResponse;
-
 @@override(
   PrivateLinkScopeOperationStatusOperationGroup.get,
-  PrivateLinkScopeOperationStatusGetCustomized,
+  reorderParameters(
+    PrivateLinkScopeOperationStatusOperationGroup.get,
+    #["apiVersion", "subscriptionId", "asyncOperationId", "resourceGroupName"]
+  ),
   "python"
 );
 

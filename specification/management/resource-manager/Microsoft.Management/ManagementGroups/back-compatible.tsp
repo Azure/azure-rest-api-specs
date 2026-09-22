@@ -98,19 +98,72 @@ using Rest;
 // Customization to make subscriptionId a method parameter instead of the default client level parameter.
 @@override(
   SubscriptionUnderManagementGroups.getSubscription,
-  getSubscriptionCustomized
-);
-@@override(SubscriptionUnderManagementGroups.create, putSubscriptionCustomized);
-@@override(
-  SubscriptionUnderManagementGroups.delete,
-  deleteSubscriptionCustomized
+  reorderParameters(
+    replaceParameter(
+      SubscriptionUnderManagementGroups.getSubscription,
+      "subscriptionId",
+      GetSubscriptionId.subscriptionId
+    ),
+    #[
+      "extensionProvider",
+      "groupId",
+      "subscriptionId",
+      "apiVersion",
+      "Cache-Control"
+    ]
+  )
 );
 
-@@clientLocation(GetSubscriptionId.subscriptionId, getSubscriptionCustomized);
-@@clientLocation(PutSubscriptionId.subscriptionId, putSubscriptionCustomized);
+@@override(
+  SubscriptionUnderManagementGroups.create,
+  reorderParameters(
+    replaceParameter(
+      SubscriptionUnderManagementGroups.create,
+      "subscriptionId",
+      PutSubscriptionId.subscriptionId
+    ),
+    #[
+      "extensionProvider",
+      "groupId",
+      "subscriptionId",
+      "apiVersion",
+      "Cache-Control",
+      "resource"
+    ]
+  )
+);
+
+@@override(
+  SubscriptionUnderManagementGroups.delete,
+  reorderParameters(
+    replaceParameter(
+      SubscriptionUnderManagementGroups.delete,
+      "subscriptionId",
+      DeleteSubscriptionId.subscriptionId
+    ),
+    #[
+      "extensionProvider",
+      "groupId",
+      "subscriptionId",
+      "apiVersion",
+      "Cache-Control"
+    ]
+  )
+);
+
+@@clientLocation(
+  GetSubscriptionId.subscriptionId,
+  SubscriptionUnderManagementGroups.getSubscription
+);
+
+@@clientLocation(
+  PutSubscriptionId.subscriptionId,
+  SubscriptionUnderManagementGroups.create
+);
+
 @@clientLocation(
   DeleteSubscriptionId.subscriptionId,
-  deleteSubscriptionCustomized
+  SubscriptionUnderManagementGroups.delete
 );
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For customization only."
@@ -128,101 +181,3 @@ model GetSubscriptionId is SubscriptionIdParameter;
 model PutSubscriptionId is SubscriptionIdParameter;
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For customization only."
 model DeleteSubscriptionId is SubscriptionIdParameter;
-
-/**
- * Retrieves details about given subscription which is associated with the management group.
- *
- */
-@get
-op getSubscriptionCustomized is Azure.ResourceManager.Foundations.ArmReadOperation<
-  Azure.ResourceManager.Extension.ExtensionProviderNamespace<SubscriptionUnderManagementGroup> & {
-    /**
-     * The management group ID.
-     */
-    @path
-    @segment("managementGroups")
-    groupId: string;
-  } & GetSubscriptionId &
-    Azure.ResourceManager.ApiVersionParameter & {
-      /**
-       * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-      @header("Cache-Control")
-      `Cache-Control`?: string = "no-cache";
-    },
-  Azure.ResourceManager.ArmResponse<Microsoft.Management.SubscriptionUnderManagementGroup>,
-  Azure.ResourceManager.CommonTypes.ErrorResponse
->;
-
-/**
- * Associates existing subscription with the management group.
- *
- */
-@put
-op putSubscriptionCustomized is Azure.ResourceManager.Legacy.CreateOperation<
-  Azure.ResourceManager.Extension.ExtensionProviderNamespace<SubscriptionUnderManagementGroup> & {
-    /**
-     * The management group ID.
-     */
-    @path
-    @segment("managementGroups")
-    groupId: string;
-  } & PutSubscriptionId &
-    Azure.ResourceManager.ApiVersionParameter & {
-      /**
-       * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-      @header("Cache-Control")
-      `Cache-Control`?: string = "no-cache";
-    },
-  void,
-  Azure.ResourceManager.ArmResourceUpdatedResponse<Microsoft.Management.SubscriptionUnderManagementGroup>,
-  Azure.ResourceManager.CommonTypes.ErrorResponse
->;
-
-/**
- * De-associates subscription from the management group.
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "For overriding with custom operation."
-@delete
-op deleteSubscriptionCustomized is SubscriptionUnderManagementGroupOperations.ArmDeleteOperation<
-  Azure.ResourceManager.Extension.ExtensionProviderNamespace<SubscriptionUnderManagementGroup> & {
-    /**
-     * The management group ID.
-     */
-    @path
-    @segment("managementGroups")
-    groupId: string;
-  } & DeleteSubscriptionId &
-    Azure.ResourceManager.ApiVersionParameter & {
-      /**
-       * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-      @header("Cache-Control")
-      `Cache-Control`?: string = "no-cache";
-    },
-  Azure.ResourceManager.ArmDeletedResponse,
-  Azure.ResourceManager.CommonTypes.ErrorResponse
->;
-
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For customization only."
-interface SubscriptionUnderManagementGroupOperations {
-  /**
-   * @dev The base template for Azure Resource Manager DELETE Operations.
-   * @template Parameters The parameter object for the operation.
-   * @template Response The response or union of responses for success.
-   * @template ErrorResponse The error response.
-   */
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" ""
-  @Azure.ResourceManager.armResourceDelete(SubscriptionUnderManagementGroup)
-  ArmDeleteOperation<
-    Parameters extends {},
-    Response extends {},
-    ErrorResponse extends {}
-  >(...Parameters): Response | ErrorResponse;
-}

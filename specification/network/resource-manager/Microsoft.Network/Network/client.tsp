@@ -3280,207 +3280,87 @@ union ProvisioningStateUnion {
 );
 @@clientName(ExplicitProxy, "ExplicitProxySettings", "go");
 
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op availablePrivateEndpointTypesOperationGroupListByResourceGroup(
-  /**
-   * The location of the domain name.
-   */
-  @path
-  @segment("locations")
-  location: string,
-
-  /**
-   * The name of the resource group.
-   */
-  @path
-  @segment("resourceGroups")
-  resourceGroupName: string,
-
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  @body
-  body: void,
-): ArmResponse<AvailablePrivateEndpointTypesResult> | CloudError;
-
 @@override(
   AvailablePrivateEndpointTypesOperationGroup.listByResourceGroup,
-  availablePrivateEndpointTypesOperationGroupListByResourceGroup,
+  reorderParameters(
+    AvailablePrivateEndpointTypesOperationGroup.listByResourceGroup,
+    #[
+      "location",
+      "resourceGroupName",
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "body"
+    ]
+  ),
   "go,python,java"
 );
-
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op availablePrivateEndpointTypesOperationGroupList(
-  /**
-   * The location of the domain name.
-   */
-  @path
-  @segment("locations")
-  location: string,
-
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...SubscriptionActionScope,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  @body
-  body: void,
-): ArmResponse<AvailablePrivateEndpointTypesResult> | CloudError;
-
 @@override(
   AvailablePrivateEndpointTypesOperationGroup.list,
-  availablePrivateEndpointTypesOperationGroupList,
+  reorderParameters(
+    AvailablePrivateEndpointTypesOperationGroup.list,
+    #["location", "apiVersion", "subscriptionId", "name", "provider", "body"]
+  ),
   "go,java"
 );
-
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op privateLinkServicesCheckPrivateLinkServiceVisibilityByResourceGroup(
-  /**
-   * The location of the domain name.
-   */
-  @path
-  @segment("locations")
-  location: string,
-
-  /**
-   * The name of the resource group.
-   */
-  @path
-  @segment("resourceGroups")
-  resourceGroupName: string,
-
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  /**
-   * The request body of CheckPrivateLinkService API call.
-   */
-  @body
-  @clientName("parameters")
-  body: CheckPrivateLinkServiceVisibilityRequest,
-):
-  | ArmResponse<AvailablePrivateEndpointTypesResult>
-  | ArmAcceptedLroResponse<
-      "Accepted and the operation will complete asynchronously.",
-      ArmLroLocationHeader<FinalResult = PrivateLinkServiceVisibility>
-    >
-  | CloudError;
-
 @@override(
   PrivateLinkServicesOperationGroup.checkPrivateLinkServiceVisibilityByResourceGroup,
-  privateLinkServicesCheckPrivateLinkServiceVisibilityByResourceGroup,
+  reorderParameters(
+    PrivateLinkServicesOperationGroup.checkPrivateLinkServiceVisibilityByResourceGroup,
+    #[
+      "location",
+      "resourceGroupName",
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "body"
+    ]
+  ),
   "go,python,java"
 );
-
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op privateLinkServicesOperationGrouplistAutoApprovedPrivateLinkServicesByResourceGroup(
-  /**
-   * The location of the domain name.
-   */
-  @path
-  @segment("locations")
-  location: string,
-
-  /**
-   * The name of the resource group.
-   */
-  @path
-  @segment("resourceGroups")
-  resourceGroupName: string,
-
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  @body
-  body: void,
-): ArmResponse<AutoApprovedPrivateLinkServicesResult> | CloudError;
-
 @@override(
   PrivateLinkServicesOperationGroup.listAutoApprovedPrivateLinkServicesByResourceGroup,
-  privateLinkServicesOperationGrouplistAutoApprovedPrivateLinkServicesByResourceGroup,
+  reorderParameters(
+    PrivateLinkServicesOperationGroup.listAutoApprovedPrivateLinkServicesByResourceGroup,
+    #[
+      "location",
+      "resourceGroupName",
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "body"
+    ]
+  ),
   "go,python,java"
 );
-
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op replaceAvailableResourceGroupDelegationsOperationGroupList(
-  /**
-   * The location of the domain name.
-   */
-  @path
-  @segment("locations")
-  location: string,
-
-  /**
-   * The name of the resource group.
-   */
-  @path
-  @segment("resourceGroups")
-  resourceGroupName: string,
-
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  @body
-  body: void,
-): Microsoft.Network.AvailableDelegationsResult | Common.CloudError;
-
 @@override(
   AvailableResourceGroupDelegationsOperationGroup.list,
-  replaceAvailableResourceGroupDelegationsOperationGroupList,
+  reorderParameters(
+    AvailableResourceGroupDelegationsOperationGroup.list,
+    #[
+      "location",
+      "resourceGroupName",
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "body"
+    ]
+  ),
   "go,python,java"
 );
-
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op replaceprivateDnsZoneGroupsList(
-  /**
-   * The name of the private endpoint.
-   */
-  @path
-  @segment("privateEndpoints")
-  privateEndpointName: string,
-
-  /**
-   * The name of the resource group.
-   */
-  @path
-  @segment("resourceGroups")
-  resourceGroupName: string,
-
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...Azure.ResourceManager.Legacy.Provider,
-
-  @body
-  body: void,
-):
-  | Azure.ResourceManager.ArmResponse<Microsoft.Network.PrivateDnsZoneGroupListResult>
-  | Common.CloudError;
-
 @@override(
   Microsoft.Network.PrivateEndpoints.privateDnsZoneGroupsList,
-  replaceprivateDnsZoneGroupsList,
+  reorderParameters(
+    Microsoft.Network.PrivateEndpoints.privateDnsZoneGroupsList,
+    #[
+      "privateEndpointName",
+      "resourceGroupName",
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "body"
+    ]
+  ),
   "go,python,java"
 );
 

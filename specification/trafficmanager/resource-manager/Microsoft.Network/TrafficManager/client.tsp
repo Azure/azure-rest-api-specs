@@ -7,61 +7,11 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.Rest;
 
-/**
- * override for HeatMapModels.get
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op getReplace(
-  ...ApiVersionParameter,
-  ...SubscriptionIdParameter,
-  ...ResourceGroupParameter,
-  ...Azure.ResourceManager.Legacy.Provider<HeatMapModel>,
-  ...ParentKeysOf<HeatMapModel>,
-
-  /**
-   * The name of the Traffic Manager profile.
-   */
-  @path
-  @segment("trafficmanagerprofiles")
-  profileName: string,
-
-  /**
-   * The type of the heatmap.
-   */
-  @path
-  @segment("heatMaps")
-  @key("heatMapType")
-  heatMapType: HeatMapType,
-
-  /**
-   * The top left latitude,longitude pair of the rectangular viewport to query for.
-   */
-  @query("topLeft")
-  @minItems(2)
-  @maxItems(2)
-  topLeft?: float64[],
-
-  /**
-   * The bottom right latitude,longitude pair of the rectangular viewport to query for.
-   */
-  @query("botRight")
-  @minItems(2)
-  @maxItems(2)
-  botRight?: float64[],
-):
-  | Azure.ResourceManager.ArmResponse<Microsoft.Network.HeatMapModel>
-  | Microsoft.Network.CloudError;
-
 @@alternateType(
   HeatMapOpsResourceParameters.heatMapType,
   "default",
-  "java,javascript"
+  "java,javascript,go"
 );
-@@override(HeatMapModels.get, getReplace, "go");
-@@alternateType(getReplace::parameters.heatMapType, "default", "go");
 @@clientName(
   Microsoft.Network,
   "TrafficManagerManagementClient",
