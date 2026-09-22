@@ -856,3 +856,40 @@ interface RecoveryPointsExtendedInfo {
       >
     | ErrorResponse;
 }
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Legacy BMS route-based operation group; it is not an ARM resource operation group."
+@added(Versions.v2026_10_01)
+interface ProtectionContainerRefreshOperationStatuses {
+  /**
+   * Fetches the status of the fabric level asynchronous operation identified by the given operation id. The status
+   * can be in progress, completed or failed. You can refer to the OperationStatus enum for all the possible states of
+   * an operation. This is the endpoint reported in the Azure-AsyncOperation header of the fabric level operations
+   * that start one, such as RefreshContainers and GetRPExtendedInfo.
+   */
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/operationsStatus/{operationId}")
+  @get
+  @tag("ProtectionContainerRefreshOperationStatuses")
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...ResourceGroupParameter,
+
+    /**
+     * The name of the recovery services vault.
+     */
+    @path
+    vaultName: string,
+
+    /**
+     * Fabric name associated with the operation.
+     */
+    @path
+    fabricName: string,
+
+    /**
+     * OperationID which represents the operation whose status needs to be fetched.
+     */
+    @path
+    operationId: string,
+  ): ArmResponse<OperationStatus> | ErrorResponse;
+}
