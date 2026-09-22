@@ -26,3 +26,21 @@ using Microsoft.Network;
 // @@clientLocation decorators for operations with @operationId
 @@clientLocation(PrivateZones.recordSetsList, RecordSets);
 @@clientName(PrivateZones.recordSetsList, "List");
+
+@@clientName(
+  PrivateDnsResourceReferenceOperations.getByTargetResources::parameters.body,
+  "parameters"
+);
+@@clientLocation(
+  PrivateDnsResourceReferenceOperations.getByTargetResources,
+  "PrivateDnsResourceReference"
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve x-ms-client-flatten from the 2026-06-01-preview Swagger contract."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateDnsResourceReferenceRequest.properties
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve x-ms-client-flatten from the 2026-06-01-preview Swagger contract."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateDnsResourceReferenceResult.properties
+);

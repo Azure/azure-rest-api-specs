@@ -47,6 +47,11 @@ using Microsoft.Network;
 @@clientName(TxtRecord, "PrivateDnsTxtRecordInfo", "csharp");
 @@clientName(RecordSetProperties, "PrivateDnsRecordSetProperties", "csharp");
 @@clientName(
+  PrivateDnsResourceReferenceRequest,
+  "PrivateDnsResourceReferenceContent",
+  "csharp"
+);
+@@clientName(
   PrivateZoneProperties.maxNumberOfRecordSets,
   "maxNumberOfRecords",
   "csharp"

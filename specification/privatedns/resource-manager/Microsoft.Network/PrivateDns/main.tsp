@@ -15,6 +15,7 @@ import "./models.tsp";
 import "./PrivateZone.tsp";
 import "./VirtualNetworkLink.tsp";
 import "./RecordSet.tsp";
+import "./PrivateDnsResourceReference.tsp";
 import "./back-compatible.tsp";
 import "./client.tsp";
 
@@ -43,4 +44,10 @@ enum Versions {
    * The 2024-06-01 API version.
    */
   v2024_06_01: "2024-06-01",
+
+  /**
+   * The 2026-06-01-preview API version.
+   */
+  @previewVersion
+  v2026_06_01_preview: "2026-06-01-preview",
 }
