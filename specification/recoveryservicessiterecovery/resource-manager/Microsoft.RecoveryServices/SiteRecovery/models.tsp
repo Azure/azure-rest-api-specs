@@ -6514,7 +6514,7 @@ model VaultSettingCreationInputProperties {
   vmwareToAzureProviderType?: string;
 
   /**
-   * The vault level policy controlling whether the A2A recovery network configuration is automatically kept in sync with the source virtual machine. An omitted value leaves the stored policy unchanged.
+   * The vault level policy controlling whether the A2A recovery network configuration is automatically kept in sync with the source virtual machine. As with the other properties on this resource, the stored value is updated only when the property is supplied; omitting it retains the previously stored policy rather than resetting it.
    */
   @added(Versions.v2026_11_01)
   recoveryNetworkConfigAutoSync?: RecoveryNetworkConfigAutoSyncPolicy;
@@ -8550,9 +8550,10 @@ model IPConfigDetails {
   tfoLBBackendAddressPoolIds?: string[];
 
   /**
-   * The IP version (IPv4 / IPv6) of the ip-config. Orthogonal to the allocation type (static / dynamic); a missing value is treated as IPv4.
+   * The IP version (IPv4 / IPv6) of the ip-config, as reported by the service. Read-only - it reflects the discovered NIC configuration and cannot be set by the caller. Orthogonal to the allocation type (static / dynamic). Omitted when IPv6 support is not enabled.
    */
   @added(Versions.v2026_11_01)
+  @visibility(Lifecycle.Read)
   ipVersion?: IPVersion;
 }
 
