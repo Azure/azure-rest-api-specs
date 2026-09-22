@@ -887,32 +887,13 @@ alias ImmutabilityPolicyExpiryOptionalParameter = {
   expiry?: utcDateTime;
 };
 
-/** Defining an override for backward compatibility for existing sdks since the expiry
- * parameter was originally defined as optional in the swagger
- **/
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-@put
-@route("?comp=immutabilityPolicies")
-op setImmutabilityPolicyOptionalExpiry is StorageOperationNoBody<
-  {
-    ...TimeoutParameter;
-    ...IfUnmodifiedSinceParameter;
-    ...ImmutabilityPolicyExpiryOptionalParameter;
-    ...ImmutabilityPolicyModeParameter;
-    ...SnapshotParameter;
-    ...VersionIdParameter;
-  },
-  {
-    ...ImmutabilityPolicyExpiresOnResponseHeaderPrivate;
-    ...ImmutabilityPolicyModeResponseHeaderPrivate;
-  }
->;
-
 @@override(
   Storage.Blob.Blob.setImmutabilityPolicy,
-  setImmutabilityPolicyOptionalExpiry,
+  replaceParameter(
+    Storage.Blob.Blob.setImmutabilityPolicy,
+    "expiry",
+    ImmutabilityPolicyExpiryOptionalParameter.expiry
+  ),
   "csharp,javascript"
 );
 
@@ -1070,228 +1051,71 @@ alias MetadataHeadersRequired = {
   metadata: string;
 };
 
-/** operation sets one or more user-defined name-value pairs for the specified container. */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-@put
-@sharedRoute
-@route("?restype=container&comp=metadata")
-op setMetadataRequiredMetadataContainer is StorageOperationNoBody<
-  {
-    ...TimeoutParameter;
-    ...LeaseIdOptionalParameter;
-    ...MetadataHeadersRequired;
-    ...IfModifiedSinceParameter;
-  },
-  {
-    ...EtagResponseHeaderPrivate;
-    ...LastModifiedResponseHeaderPrivate;
-  }
->;
-
-@@override(Container.setMetadata, setMetadataRequiredMetadataContainer, "rust");
-
-/** The Set Metadata operation sets user-defined metadata for the specified blob as one or more name-value pairs. */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-@put
-@route("?comp=metadata")
-op setMetadataRequiredMetadataBlob is StorageOperationNoBody<
-  {
-    ...TimeoutParameter;
-    ...MetadataHeadersRequired;
-    ...LeaseIdOptionalParameter;
-    ...EncryptionKeyParameter;
-    ...EncryptionKeySha256Parameter;
-    ...EncryptionAlgorithmParameter;
-    ...EncryptionScopeParameter;
-    ...IfModifiedSinceParameter;
-    ...IfUnmodifiedSinceParameter;
-    ...IfNoneMatchParameter;
-    ...IfMatchParameter;
-    ...IfTagsParameter;
-  },
-  {
-    ...EtagResponseHeaderPrivate;
-    ...LastModifiedResponseHeaderPrivate;
-    ...VersionIdResponseHeaderPrivate;
-    ...RequestServerEncryptedResponseHeaderPrivate;
-    ...EncryptionKeySha256ResponseHeaderPrivate;
-    ...EncryptionScopeResponseHeaderPrivate;
-  }
->;
-
-@@override(Blob.setMetadata, setMetadataRequiredMetadataBlob, "rust");
-
-/** ----- This section overrides the setAccessPolicy operation for Rust to require the containerAcl body ----- */
-/** Sets the permissions for the specified container. The permissions indicate whether blobs in a container may be accessed publicly. */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-@put
-@route("?restype=container&comp=acl")
-op setAccessPolicyRequiredContainerAcl is StorageOperationNoBody<
-  {
-    /** The media type of the requestbody */
-    @header("Content-Type")
-    contentType?: "application/xml";
-
-    /** The access control list for the container. */
-    #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API"
-    @body
-    containerAcl: SignedIdentifiers;
-
-    ...TimeoutParameter;
-    ...LeaseIdOptionalParameter;
-    ...BlobPublicAccessParameter;
-    ...IfModifiedSinceParameter;
-    ...IfUnmodifiedSinceParameter;
-  },
-  {
-    ...EtagResponseHeaderPrivate;
-    ...LastModifiedResponseHeaderPrivate;
-  }
->;
-
 @@override(
-  Container.setAccessPolicy,
-  setAccessPolicyRequiredContainerAcl,
+  Container.setMetadata,
+  replaceParameter(
+    Container.setMetadata,
+    "metadata",
+    MetadataHeadersRequired.metadata
+  ),
   "rust"
 );
 
-/** ----- This section overrides operations for Rust to omit structured message parameters ----- */
-/** The Append Block operation commits a new block of data to the end of an append blob. */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-#suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
-@put
-@sharedRoute
-@route("?comp=appendblock")
-op appendBlockNoStructuredMessage is StorageOperationRequestBody<
-  {
-    /** The data to upload. */
-    ...BodyParameter;
+@@override(
+  Blob.setMetadata,
+  replaceParameter(
+    Blob.setMetadata,
+    "metadata",
+    MetadataHeadersRequired.metadata
+  ),
+  "rust"
+);
 
-    ...TimeoutParameter;
-    ...ContentLengthParameter;
-    ...ContentMd5Parameter;
-    ...ContentCrc64Parameter;
-    ...LeaseIdOptionalParameter;
-    ...BlobConditionMaxSizeParameter;
-    ...BlobConditionAppendPosParameter;
-    ...EncryptionKeyParameter;
-    ...EncryptionKeySha256Parameter;
-    ...EncryptionAlgorithmParameter;
-    ...EncryptionScopeParameter;
-    ...IfModifiedSinceParameter;
-    ...IfUnmodifiedSinceParameter;
-    ...IfNoneMatchParameter;
-    ...IfMatchParameter;
-    ...IfTagsParameter;
-  },
-  {
-    @statusCode statusCode: 201;
-    ...EtagResponseHeader;
-    ...LastModifiedResponseHeader;
-    ...ContentMd5ResponseHeader;
-    ...ContentCrc64ResponseHeader;
-    ...BlobAppendOffsetResponseHeader;
-    ...BlobCommittedBlockCountResponseHeader;
-    ...RequestServerEncryptedResponseHeader;
-    ...EncryptionKeySha256ResponseHeader;
-    ...EncryptionScopeResponseHeader;
-  },
-  "application/octet-stream"
->;
+/** ----- This section customizes setAccessPolicy for Rust to require the containerAcl body. ----- */
+model RequiredContainerAclParameter {
+  /** The access control list for the container. */
+  #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API"
+  @body
+  containerAcl: SignedIdentifiers;
+}
 
-@@override(AppendBlob.appendBlock, appendBlockNoStructuredMessage, "rust");
+@@override(
+  Container.setAccessPolicy,
+  replaceParameter(
+    Container.setAccessPolicy,
+    "containerAcl",
+    RequiredContainerAclParameter.containerAcl
+  ),
+  "rust"
+);
 
-/** The Stage Block operation creates a new block to be committed as part of a blob. */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-#suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
-@put
-@sharedRoute
-@route("?comp=block")
-op stageBlockNoStructuredMessage is StorageOperationRequestBody<
-  {
-    ...BlockIdParameter;
-    ...ContentLengthParameter;
-    ...ContentMd5Parameter;
-    ...ContentCrc64Parameter;
-    ...BodyParameter;
-    ...TimeoutParameter;
-    ...LeaseIdOptionalParameter;
-    ...EncryptionKeyParameter;
-    ...EncryptionKeySha256Parameter;
-    ...EncryptionAlgorithmParameter;
-    ...EncryptionScopeParameter;
-  },
-  {
-    @statusCode statusCode: 201;
-    ...ContentMd5ResponseHeader;
-    ...ContentCrc64ResponseHeader;
-    ...RequestServerEncryptedResponseHeader;
-    ...EncryptionKeySha256ResponseHeader;
-    ...EncryptionScopeResponseHeader;
-  },
-  "application/octet-stream"
->;
+/** ----- This section customizes operations for Rust to omit structured message parameters. ----- */
+@@override(
+  AppendBlob.appendBlock,
+  removeParameter(
+    removeParameter(AppendBlob.appendBlock, "structuredBodyType"),
+    "structuredContentLength"
+  ),
+  "rust"
+);
 
-@@override(BlockBlob.stageBlock, stageBlockNoStructuredMessage, "rust");
+@@override(
+  BlockBlob.stageBlock,
+  removeParameter(
+    removeParameter(BlockBlob.stageBlock, "structuredBodyType"),
+    "structuredContentLength"
+  ),
+  "rust"
+);
 
-/** The Upload Pages operation writes a range of pages to a page blob. */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-#suppress "@azure-tools/typespec-azure-core/no-response-body" "Existing API"
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-#suppress "@azure-tools/typespec-azure-core/byos" "Existing API"
-@put
-@sharedRoute
-@route("?comp=page")
-op uploadPagesNoStructuredMessage is StorageOperationRequestBody<
-  {
-    /** The data to upload. */
-    ...BodyParameter;
-
-    ...ContentLengthParameter;
-    ...ContentMd5Parameter;
-    ...ContentCrc64Parameter;
-    ...TimeoutParameter;
-    ...RangeParameterRequired;
-    ...LeaseIdOptionalParameter;
-    ...EncryptionKeyParameter;
-    ...EncryptionKeySha256Parameter;
-    ...EncryptionAlgorithmParameter;
-    ...EncryptionScopeParameter;
-    ...IfSequenceNumberLessThanOrEqualToParameter;
-    ...IfSequenceNumberLessThanParameter;
-    ...IfSequenceNumberEqualToParameter;
-    ...IfModifiedSinceParameter;
-    ...IfUnmodifiedSinceParameter;
-    ...IfNoneMatchParameter;
-    ...IfMatchParameter;
-    ...IfTagsParameter;
-    ...PageWriteParameter<"update">;
-  },
-  {
-    @statusCode statusCode: 201;
-    ...EtagResponseHeader;
-    ...LastModifiedResponseHeader;
-    ...ContentMd5ResponseHeader;
-    ...ContentCrc64ResponseHeader;
-    ...BlobSequenceNumberResponseHeader;
-    ...RequestServerEncryptedResponseHeader;
-    ...EncryptionKeySha256ResponseHeader;
-    ...EncryptionScopeResponseHeader;
-  },
-  "application/octet-stream"
->;
-
-@@override(PageBlob.uploadPages, uploadPagesNoStructuredMessage, "rust");
+@@override(
+  PageBlob.uploadPages,
+  removeParameter(
+    removeParameter(PageBlob.uploadPages, "structuredBodyType"),
+    "structuredContentLength"
+  ),
+  "rust"
+);
 
 /** An HTTP byte range, e.g. "bytes=0-1023". */
 @alternateType(

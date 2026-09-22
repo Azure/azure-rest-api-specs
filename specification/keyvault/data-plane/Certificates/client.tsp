@@ -47,70 +47,34 @@ namespace Customizations;
 
 using KeyVault;
 
-// Make optional path parameter required for all languages
+/** A required certificate version parameter. */
+model RequiredCertificateVersionParameter {
+  /**
+   * The version of the certificate.
+   */
+  @path("certificate-version")
+  @clientName("version", "go")
+  certificateVersion: string;
+}
 
-/**
- * The UpdateCertificate operation applies the specified update on the given certificate; the only elements updated are the certificate's attributes. This operation requires the certificates/update permission.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
-@summary("Updates the specified attributes associated with the given certificate.")
-@route("/certificates/{certificate-name}/{certificate-version}")
-@patch(#{ implicitOptionality: false })
-op updateCertificate is KeyVaultOperation<
-  {
-    /**
-     * The name of the certificate in the given key vault.
-     */
-    @path("certificate-name")
-    @clientName("name", "go")
-    certificateName: string;
-
-    /**
-     * The version of the certificate.
-     */
-    @path("certificate-version")
-    @clientName("version", "go")
-    certificateVersion: string;
-
-    /**
-     * The parameters for certificate update.
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
-    @body
-    @Azure.ClientGenerator.Core.Legacy.flattenProperty
-    parameters: CertificateUpdateParameters;
-  },
-  CertificateBundle
->;
-
-/**
- * Gets information about a specific certificate. This operation requires the certificates/get permission.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
-@summary("Gets information about a certificate.")
-@route("/certificates/{certificate-name}/{certificate-version}")
-@get
-op getCertificate is KeyVaultOperation<
-  {
-    /**
-     * The name of the certificate in the given vault.
-     */
-    @path("certificate-name")
-    @clientName("name", "go")
-    certificateName: string;
-
-    /**
-     * The version of the certificate. This URI fragment is optional. If not specified, the latest version of the certificate is returned.
-     */
-    @path("certificate-version")
-    @clientName("version", "go")
-    certificateVersion: string;
-  },
-  CertificateBundle
->;
-
-@@override(KeyVault.updateCertificate, updateCertificate, "!rust");
-@@override(KeyVault.getCertificate, getCertificate, "!rust");
+@@override(
+  KeyVault.updateCertificate,
+  replaceParameter(
+    KeyVault.updateCertificate,
+    "certificateVersion",
+    RequiredCertificateVersionParameter.certificateVersion
+  ),
+  "!rust"
+);
+@@override(
+  KeyVault.getCertificate,
+  replaceParameter(
+    KeyVault.getCertificate,
+    "certificateVersion",
+    RequiredCertificateVersionParameter.certificateVersion
+  ),
+  "!rust"
+);
 
 // Java configuration
 @@usage(CertificateIssuerItem, Usage.input, "java");
@@ -134,82 +98,26 @@ op getCertificate is KeyVaultOperation<
 
 // Go configuration
 
-/**
- * The GetCertificates operation returns the set of certificates resources in the specified key vault. This operation requires the certificates/list permission.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
-@summary("List certificates in a specified key vault")
-@route("/certificates")
-@get
-@list
-op listCertificateProperties is KeyVaultOperation<
-  {
-    /**
-     * Specifies whether to include certificates which are not completely provisioned.
-     */
-    @query("includePending")
-    includePending?: boolean;
-  },
-  CertificateListResult
->;
-
-/**
- * The GetCertificateIssuers operation returns the set of certificate issuer resources in the specified key vault. This operation requires the certificates/manageissuers/getissuers permission.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
-@summary("List certificate issuers for a specified key vault.")
-@route("/certificates/issuers")
-@get
-@list
-op listIssuerProperties is KeyVaultOperation<{}, CertificateIssuerListResult>;
-
-/**
- * The GetCertificateVersions operation returns the versions of a certificate in the specified key vault. This operation requires the certificates/list permission.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
-@summary("List the versions of a certificate.")
-@route("/certificates/{certificate-name}/versions")
-@get
-@list
-op listCertificatePropertiesVersions is KeyVaultOperation<
-  {
-    /**
-     * The name of the certificate.
-     */
-    @path("certificate-name")
-    @clientName("name", "go")
-    certificateName: string;
-  },
-  CertificateListResult
->;
-
-/**
- * The GetDeletedCertificates operation retrieves the certificates in the current vault which are in a deleted state and ready for recovery or purging. This operation includes deletion-specific information. This operation requires the certificates/get/list permission. This operation can only be enabled on soft-delete enabled vaults.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
-@summary("Lists the deleted certificates in the specified vault currently available for recovery.")
-@route("/deletedcertificates")
-@get
-@list
-op listDeletedCertificateProperties is KeyVaultOperation<
-  {
-    /**
-     * Specifies whether to include certificates which are not completely provisioned.
-     */
-    @query("includePending")
-    includePending?: boolean;
-  },
-  DeletedCertificateListResult
->;
-
-@@override(getCertificates, listCertificateProperties, "go");
-@@override(getCertificateIssuers, listIssuerProperties, "go");
-@@override(getCertificateVersions, listCertificatePropertiesVersions, "go");
-@@override(getDeletedCertificates, listDeletedCertificateProperties, "go");
+@@override(
+  getCertificates,
+  removeParameter(getCertificates, "maxresults"),
+  "go"
+);
+@@override(
+  getCertificateIssuers,
+  removeParameter(getCertificateIssuers, "maxresults"),
+  "go"
+);
+@@override(
+  getCertificateVersions,
+  removeParameter(getCertificateVersions, "maxresults"),
+  "go"
+);
+@@override(
+  getDeletedCertificates,
+  removeParameter(getDeletedCertificates, "maxresults"),
+  "go"
+);
 
 @@clientName(setCertificateContacts, "SetContacts", "go");
 @@clientName(getCertificates, "ListCertificateProperties", "go");

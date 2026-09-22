@@ -3,7 +3,6 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 
 @versioned(KeyVault.Versions)
@@ -17,467 +16,173 @@ using KeyVault;
 
 // Make optional path parameter required for all languages
 
-/**
- * In order to perform this operation, the key must already exist in the Key Vault. Note: The cryptographic material of a key itself cannot be changed. This operation requires the keys/update permission.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
-@summary("The update key operation changes specified attributes of a stored key and can be applied to any key type and key version stored in Azure Key Vault.")
-@route("/keys/{key-name}/{key-version}")
-@patch(#{ implicitOptionality: false })
-op updateKey is KeyVaultOperation<
-  {
-    /**
-     * The name of key to update.
-     */
-    @path("key-name")
-    @clientName("name", "go")
-    keyName: string;
-
-    /**
-     * The version of the key to update.
-     */
-    @path("key-version")
-    @clientName("version", "go")
-    keyVersion: string;
-
-    /**
-     * The parameters of the key to update.
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
-    @body
-    @Azure.ClientGenerator.Core.Legacy.flattenProperty
-    parameters: KeyUpdateParameters;
-  },
-  KeyBundle
->;
-
-/**
- * The get key operation is applicable to all key types. If the requested key is symmetric, then no key material is released in the response. This operation requires the keys/get permission.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
-@summary("Gets the public part of a stored key.")
-@route("/keys/{key-name}/{key-version}")
-@get
-op getKey is KeyVaultOperation<
-  {
-    /**
-     * The name of the key to get.
-     */
-    @path("key-name")
-    @clientName("name", "go")
-    keyName: string;
-
-    /**
-     * Adding the version parameter retrieves a specific version of a key. This URI fragment is optional. If not specified, the latest version of the key is returned.
-     */
-    @path("key-version")
-    @clientName("version", "go")
-    keyVersion: string;
-  },
-  KeyBundle
->;
-
-/**
- * The ENCRYPT operation encrypts an arbitrary sequence of bytes using an encryption key that is stored in Azure Key Vault. Note that the ENCRYPT operation only supports a single block of data, the size of which is dependent on the target key and the encryption algorithm to be used. The ENCRYPT operation is only strictly necessary for symmetric keys stored in Azure Key Vault since protection with an asymmetric key can be performed using public portion of the key. This operation is supported for asymmetric keys as a convenience for callers that have a key-reference but do not have access to the public key material. This operation requires the keys/encrypt permission.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
-@operationId("encrypt")
-@summary("Encrypts an arbitrary sequence of bytes using an encryption key that is stored in a key vault.")
-@route("/keys/{key-name}/{key-version}/encrypt")
-@post
-op encrypt is KeyVaultOperation<
-  {
-    /**
-     * The name of the key.
-     */
-    @path("key-name")
-    @clientName("name", "go")
-    keyName: string;
-
-    /**
-     * The version of the key.
-     */
-    @path("key-version")
-    @clientName("version", "go")
-    keyVersion: string;
-
-    /**
-     * The parameters for the encryption operation.
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
-    @body
-    @Azure.ClientGenerator.Core.Legacy.flattenProperty
-    parameters: KeyOperationsParameters;
-  },
-  KeyOperationResult
->;
-
-/**
- * The DECRYPT operation decrypts a well-formed block of ciphertext using the target encryption key and specified algorithm. This operation is the reverse of the ENCRYPT operation; only a single block of data may be decrypted, the size of this block is dependent on the target key and the algorithm to be used. The DECRYPT operation applies to asymmetric and symmetric keys stored in Azure Key Vault since it uses the private portion of the key. This operation requires the keys/decrypt permission. Microsoft recommends not to use CBC algorithms for decryption without first ensuring the integrity of the ciphertext using an HMAC, for example. See https://learn.microsoft.com/dotnet/standard/security/vulnerabilities-cbc-mode for more information.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
-@operationId("decrypt")
-@summary("Decrypts a single block of encrypted data.")
-@route("/keys/{key-name}/{key-version}/decrypt")
-@post
-op decrypt is KeyVaultOperation<
-  {
-    /**
-     * The name of the key.
-     */
-    @path("key-name")
-    @clientName("name", "go")
-    keyName: string;
-
-    /**
-     * The version of the key.
-     */
-    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Allow empty string to use latest key version"
-    @path("key-version")
-    @clientName("version", "go")
-    @clientDoc(
-      "The version is required and should be recorded when encrypting so you can reliably decrypt using the same version. You can pass an empty string to select the latest key version but if you don't record the specific version used for encryption, key rotation can make the data inaccessible.",
-      DocumentationMode.append,
-      "rust"
-    )
-    @clientOption("minLength", 0, "rust")
-    keyVersion: string;
-
-    /**
-     * The parameters for the decryption operation.
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
-    @body
-    @Azure.ClientGenerator.Core.Legacy.flattenProperty
-    parameters: KeyOperationsParameters;
-  },
-  KeyOperationResult
->;
-
-/**
- * The SIGN operation is applicable to asymmetric and symmetric keys stored in Azure Key Vault since this operation uses the private portion of the key. This operation requires the keys/sign permission.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
-@operationId("sign")
-@summary("Creates a signature from a digest using the specified key.")
-@route("/keys/{key-name}/{key-version}/sign")
-@post
-op sign is KeyVaultOperation<
-  {
-    /**
-     * The name of the key.
-     */
-    @path("key-name")
-    @clientName("name", "go")
-    keyName: string;
-
-    /**
-     * The version of the key.
-     */
-    @path("key-version")
-    @clientName("version", "go")
-    keyVersion: string;
-
-    /**
-     * The parameters for the signing operation.
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
-    @body
-    @Azure.ClientGenerator.Core.Legacy.flattenProperty
-    parameters: KeySignParameters;
-  },
-  KeyOperationResult
->;
-
-/**
- * The VERIFY operation is applicable to symmetric keys stored in Azure Key Vault. VERIFY is not strictly necessary for asymmetric keys stored in Azure Key Vault since signature verification can be performed using the public portion of the key but this operation is supported as a convenience for callers that only have a key-reference and not the public portion of the key. This operation requires the keys/verify permission.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
-@operationId("verify")
-@summary("Verifies a signature using a specified key.")
-@route("/keys/{key-name}/{key-version}/verify")
-@post
-op verify is KeyVaultOperation<
-  {
-    /**
-     * The name of the key.
-     */
-    @path("key-name")
-    @clientName("name", "go")
-    keyName: string;
-
-    /**
-     * The version of the key.
-     */
-    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Allow empty string to use latest key version"
-    @path("key-version")
-    @clientName("version", "go")
-    @clientDoc(
-      "The version is required and should be recorded when signing so you can reliably verify using the same version. You can pass an empty string to select the latest key version but if you don't record the specific version used for signing, key rotation can make the data unverifiable.",
-      DocumentationMode.append,
-      "rust"
-    )
-    @clientOption("minLength", 0, "rust")
-    keyVersion: string;
-
-    /**
-     * The parameters for verify operations.
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
-    @body
-    @Azure.ClientGenerator.Core.Legacy.flattenProperty
-    parameters: KeyVerifyParameters;
-  },
-  KeyVerifyResult
->;
-
-/**
- * The WRAP operation supports encryption of a symmetric key using a key encryption key that has previously been stored in an Azure Key Vault. The WRAP operation is only strictly necessary for symmetric keys stored in Azure Key Vault since protection with an asymmetric key can be performed using the public portion of the key. This operation is supported for asymmetric keys as a convenience for callers that have a key-reference but do not have access to the public key material. This operation requires the keys/wrapKey permission.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
-@operationId("wrapKey")
-@summary("Wraps a symmetric key using a specified key.")
-@route("/keys/{key-name}/{key-version}/wrapkey")
-@post
-op wrapKey is KeyVaultOperation<
-  {
-    /**
-     * The name of the key.
-     */
-    @path("key-name")
-    @clientName("name", "go")
-    keyName: string;
-
-    /**
-     * The version of the key.
-     */
-    @path("key-version")
-    @clientName("version", "go")
-    keyVersion: string;
-
-    /**
-     * The parameters for wrap operation.
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
-    @body
-    @Azure.ClientGenerator.Core.Legacy.flattenProperty
-    parameters: KeyOperationsParameters;
-  },
-  KeyOperationResult
->;
-
-/**
- * The UNWRAP operation supports decryption of a symmetric key using the target key encryption key. This operation is the reverse of the WRAP operation. The UNWRAP operation applies to asymmetric and symmetric keys stored in Azure Key Vault since it uses the private portion of the key. This operation requires the keys/unwrapKey permission.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
-@operationId("unwrapKey")
-@summary("Unwraps a symmetric key using the specified key that was initially used for wrapping that key.")
-@route("/keys/{key-name}/{key-version}/unwrapkey")
-@post
-op unwrapKey is KeyVaultOperation<
-  {
-    /**
-     * The name of the key.
-     */
-    @path("key-name")
-    @clientName("name", "go")
-    keyName: string;
-
-    /**
-     * The version of the key.
-     */
-    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Allow empty string to use latest key version"
-    @path("key-version")
-    @clientName("version", "go")
-    @clientDoc(
-      "The version is required and should be recorded when wrapping a data encryption key so you can reliably unwrap using the same version. You can pass an empty string to select the latest key version but if you don't record the specific version used for wrapping a key, key encryption key rotation can make the data inaccessible.",
-      DocumentationMode.append,
-      "rust"
-    )
-    @clientOption("minLength", 0, "rust")
-    keyVersion: string;
-
-    /**
-     * The parameters for the key operation.
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
-    @body
-    @Azure.ClientGenerator.Core.Legacy.flattenProperty
-    parameters: KeyOperationsParameters;
-  },
-  KeyOperationResult
->;
-
-/**
- * The SECURE WRAP operation generates a new 256 bit OCT key within the trusted execution environment(TEE) and encrypts the same with a key encryption key in Azure KeyVault.
- * Once wrapped, the generated key is erased from the TEE. This operation requires the keys/wrapKey permission.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
-@operationId("securewrapkey")
-@Versioning.added(KeyVault.Versions.v2026_01_01_preview)
-@summary("Generates a new 256 bit OCT key within the trusted execution environment and wraps this key using a specified key.")
-@route("/keys/{key-name}/{key-version}/securewrapkey")
-@post
-op secureWrapKey is KeyVaultOperation<
-  {
-    /**
-     * The name of the key.
-     */
-    @path("key-name")
-    @clientName("name", "go")
-    keyName: string;
-
-    /**
-     * The version of the key.
-     */
-    @path("key-version")
-    @clientName("version", "go")
-    keyVersion: string;
-
-    /**
-     * The parameters for wrap operation.
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
-    @body
-    @Azure.ClientGenerator.Core.Legacy.flattenProperty
-    parameters: SecureKeyWrapOperationParameters;
-  },
-  SecureKeyOperationResult
->;
-
-/**
- * The SECURE UNWRAP operation supports the unwrap of previously wrapped key.
- * It ensures the target token satisfies the release policy associated with the key encryption key.
- * This operation requires the keys/unwrapKey permission.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
-@operationId("secureunwrapkey")
-@Versioning.added(KeyVault.Versions.v2026_01_01_preview)
-@summary("Unwraps a previously wrapped key using a specified key that was used for wrapping that key.")
-@route("/keys/{key-name}/{key-version}/secureunwrapkey")
-@post
-op secureUnwrapKey is KeyVaultOperation<
-  {
-    /**
-     * The name of the key.
-     */
-    @path("key-name")
-    @clientName("name", "go")
-    keyName: string;
-
-    /**
-     * The version of the key.
-     */
-    #suppress "@azure-tools/typespec-client-generator-core/client-option" "Allow empty string to use latest key version"
-    @path("key-version")
-    @clientName("version", "go")
-    @clientDoc(
-      "The version is required and should be recorded when wrapping a data encryption key so you can reliably unwrap using the same version. You can pass an empty string to select the latest key version but if you don't record the specific version used for wrapping a key, key encryption key rotation can make the data inaccessible.",
-      DocumentationMode.append,
-      "rust"
-    )
-    @clientOption("minLength", 0, "rust")
-    keyVersion: string;
-
-    /**
-     * The parameters for unwrap operation.
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
-    @body
-    @Azure.ClientGenerator.Core.Legacy.flattenProperty
-    parameters: SecureKeyUnWrapOperationParameters;
-  },
-  SecureKeyOperationResult
->;
-
-/**
- * The release key operation is applicable to all key types. The target key must be marked exportable. This operation requires the keys/release permission.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation ID is auto-capitalized, which would be breaking"
-@operationId("release")
-@summary("Releases a key.")
-@route("/keys/{key-name}/{key-version}/release")
-@post
-op release is KeyVaultOperation<
-  {
-    /**
-     * The name of the key to get.
-     */
-    @path("key-name")
-    @clientName("name", "go")
-    keyName: string;
-
-    /**
-     * Adding the version parameter retrieves a specific version of a key.
-     */
-    @path("key-version")
-    @clientName("version", "go")
-    keyVersion: string;
-
-    /**
-     * The parameters for the key release operation.
-     */
-    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
-    @body
-    @Azure.ClientGenerator.Core.Legacy.flattenProperty
-    parameters: KeyReleaseParameters;
-  },
-  KeyReleaseResult
->;
-
-/**
- * The get key attestation operation returns the key along with its attestation blob. This operation requires the keys/get permission.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
-@Versioning.added(KeyVault.Versions.`v7.6_preview.2`)
-@summary("Gets the public part of a stored key along with its attestation blob.")
-@route("/keys/{key-name}/{key-version}/attestation")
-@get
-op getKeyAttestation is KeyVaultOperation<
-  {
-    /**
-     * The name of the key to retrieve attestation for.
-     */
-    @path("key-name")
-    @clientName("name", "go")
-    keyName: string;
-
-    /**
-     * Adding the version parameter retrieves attestation blob for specific version of a key. This URI fragment is optional. If not specified, the latest version of the key attestation blob is returned.
-     */
-    @path("key-version")
-    @clientName("version", "go")
-    keyVersion: string;
-  },
+/** A required key version parameter. */
+model RequiredKeyVersionParameter {
   /**
-   * A key bundle containing the key, its attributes and attestation blob.
+   * The version of the key.
    */
-  KeyBundle
->;
+  @path("key-version")
+  @clientName("version", "go")
+  keyVersion: string;
+}
 
-@@override(KeyVault.updateKey, updateKey, "!rust");
-@@override(KeyVault.getKey, getKey, "!rust");
+/** A required key version parameter for decrypt operations. */
+model RequiredDecryptKeyVersionParameter {
+  /**
+   * The version of the key.
+   */
+  #suppress "@azure-tools/typespec-client-generator-core/client-option" "Allow empty string to use latest key version"
+  @path("key-version")
+  @clientName("version", "go")
+  @clientDoc(
+    "The version is required and should be recorded when encrypting so you can reliably decrypt using the same version. You can pass an empty string to select the latest key version but if you don't record the specific version used for encryption, key rotation can make the data inaccessible.",
+    DocumentationMode.append,
+    "rust"
+  )
+  @clientOption("minLength", 0, "rust")
+  keyVersion: string;
+}
+
+/** A required key version parameter for verify operations. */
+model RequiredVerifyKeyVersionParameter {
+  /**
+   * The version of the key.
+   */
+  #suppress "@azure-tools/typespec-client-generator-core/client-option" "Allow empty string to use latest key version"
+  @path("key-version")
+  @clientName("version", "go")
+  @clientDoc(
+    "The version is required and should be recorded when signing so you can reliably verify using the same version. You can pass an empty string to select the latest key version but if you don't record the specific version used for signing, key rotation can make the data unverifiable.",
+    DocumentationMode.append,
+    "rust"
+  )
+  @clientOption("minLength", 0, "rust")
+  keyVersion: string;
+}
+
+/** A required key version parameter for unwrap operations. */
+model RequiredUnwrapKeyVersionParameter {
+  /**
+   * The version of the key.
+   */
+  #suppress "@azure-tools/typespec-client-generator-core/client-option" "Allow empty string to use latest key version"
+  @path("key-version")
+  @clientName("version", "go")
+  @clientDoc(
+    "The version is required and should be recorded when wrapping a data encryption key so you can reliably unwrap using the same version. You can pass an empty string to select the latest key version but if you don't record the specific version used for wrapping a key, key encryption key rotation can make the data inaccessible.",
+    DocumentationMode.append,
+    "rust"
+  )
+  @clientOption("minLength", 0, "rust")
+  keyVersion: string;
+}
+
+@@override(
+  KeyVault.updateKey,
+  replaceParameter(
+    KeyVault.updateKey,
+    "keyVersion",
+    RequiredKeyVersionParameter.keyVersion
+  ),
+  "!rust"
+);
+@@override(
+  KeyVault.getKey,
+  replaceParameter(
+    KeyVault.getKey,
+    "keyVersion",
+    RequiredKeyVersionParameter.keyVersion
+  ),
+  "!rust"
+);
 // Rust follows the service definition for optional versions but will consistently promote the version for decrypt, verify, and unwrapKey operations.
 // Not using (and storing) an explicit version for crypto operations is dangerous and can lock applications out of their data.
-@@override(KeyVault.encrypt, encrypt, "!rust");
-@@override(KeyVault.decrypt, decrypt);
-@@override(KeyVault.sign, sign, "!rust");
-@@override(KeyVault.verify, verify);
-@@override(KeyVault.wrapKey, wrapKey, "!rust");
-@@override(KeyVault.unwrapKey, unwrapKey);
-@@override(KeyVault.secureWrapKey, secureWrapKey, "!rust");
-@@override(KeyVault.secureUnwrapKey, secureUnwrapKey);
-@@override(KeyVault.release, release, "!rust");
-@@override(KeyVault.getKeyAttestation, getKeyAttestation, "!rust");
+@@override(
+  KeyVault.encrypt,
+  replaceParameter(
+    KeyVault.encrypt,
+    "keyVersion",
+    RequiredKeyVersionParameter.keyVersion
+  ),
+  "!rust"
+);
+@@override(
+  KeyVault.decrypt,
+  replaceParameter(
+    KeyVault.decrypt,
+    "keyVersion",
+    RequiredDecryptKeyVersionParameter.keyVersion
+  )
+);
+@@override(
+  KeyVault.sign,
+  replaceParameter(
+    KeyVault.sign,
+    "keyVersion",
+    RequiredKeyVersionParameter.keyVersion
+  ),
+  "!rust"
+);
+@@override(
+  KeyVault.verify,
+  replaceParameter(
+    KeyVault.verify,
+    "keyVersion",
+    RequiredVerifyKeyVersionParameter.keyVersion
+  )
+);
+@@override(
+  KeyVault.wrapKey,
+  replaceParameter(
+    KeyVault.wrapKey,
+    "keyVersion",
+    RequiredKeyVersionParameter.keyVersion
+  ),
+  "!rust"
+);
+@@override(
+  KeyVault.unwrapKey,
+  replaceParameter(
+    KeyVault.unwrapKey,
+    "keyVersion",
+    RequiredUnwrapKeyVersionParameter.keyVersion
+  )
+);
+@@override(
+  KeyVault.secureWrapKey,
+  replaceParameter(
+    KeyVault.secureWrapKey,
+    "keyVersion",
+    RequiredKeyVersionParameter.keyVersion
+  ),
+  "!rust"
+);
+@@override(
+  KeyVault.secureUnwrapKey,
+  replaceParameter(
+    KeyVault.secureUnwrapKey,
+    "keyVersion",
+    RequiredUnwrapKeyVersionParameter.keyVersion
+  )
+);
+@@override(
+  KeyVault.release,
+  replaceParameter(
+    KeyVault.release,
+    "keyVersion",
+    RequiredKeyVersionParameter.keyVersion
+  ),
+  "!rust"
+);
+@@override(
+  KeyVault.getKeyAttestation,
+  replaceParameter(
+    KeyVault.getKeyAttestation,
+    "keyVersion",
+    RequiredKeyVersionParameter.keyVersion
+  ),
+  "!rust"
+);
 
 // Java configuration
 @@clientName(KeyEncryptionAlgorithm, "KeyExportEncryptionAlgorithm", "java");
@@ -492,52 +197,17 @@ op getKeyAttestation is KeyVaultOperation<
 
 // Go configuration
 
-/**
- * The full key identifier, attributes, and tags are provided in the response. This operation requires the keys/list permission.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
-@summary("Retrieves a list of individual key versions with the same key name.")
-@route("/keys/{key-name}/versions")
-@get
-@list
-op listKeyPropertiesVersions is KeyVaultOperation<
-  {
-    /**
-     * The name of the key.
-     */
-    @path("key-name")
-    @clientName("name", "go")
-    keyName: string;
-  },
-  KeyListResult
->;
-
-/**
- * Retrieves a list of the keys in the Key Vault as JSON Web Key structures that contain the public part of a stored key. The LIST operation is applicable to all key types, however only the base key identifier, attributes, and tags are provided in the response. Individual versions of a key are not listed in the response. This operation requires the keys/list permission.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
-@summary("List keys in the specified vault.")
-@route("/keys")
-@get
-@list
-op listKeyProperties is KeyVaultOperation<{}, KeyListResult>;
-
-/**
- * Retrieves a list of the keys in the Key Vault as JSON Web Key structures that contain the public part of a deleted key. This operation includes deletion-specific information. The Get Deleted Keys operation is applicable for vaults enabled for soft-delete. While the operation can be invoked on any vault, it will return an error if invoked on a non soft-delete enabled vault. This operation requires the keys/list permission.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Foundations.Operation is necessary for Key Vault"
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Operation name is already established"
-@summary("Lists the deleted keys in the specified vault.")
-@route("/deletedkeys")
-@get
-@list
-op listDeletedKeyProperties is KeyVaultOperation<{}, DeletedKeyListResult>;
-
-@@override(getKeyVersions, listKeyPropertiesVersions, "go");
-@@override(getKeys, listKeyProperties, "go");
-@@override(getDeletedKeys, listDeletedKeyProperties, "go");
+@@override(
+  getKeyVersions,
+  removeParameter(getKeyVersions, "maxresults"),
+  "go"
+);
+@@override(getKeys, removeParameter(getKeys, "maxresults"), "go");
+@@override(
+  getDeletedKeys,
+  removeParameter(getDeletedKeys, "maxresults"),
+  "go"
+);
 
 @@clientName(getDeletedKeys, "ListDeletedKeyProperties", "go");
 @@clientName(getKeys, "ListKeyProperties", "go");
