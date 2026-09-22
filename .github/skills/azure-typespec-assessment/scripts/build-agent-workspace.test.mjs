@@ -13,7 +13,14 @@ import { readJson, writeJson } from "./cli.mjs";
  *   input: {path: string, readExactlyOnce: boolean, bytes: number},
  *   counts: {assessedSemanticIntents: number, informationalSemanticIntents: number, guidelineRequests: number},
  *   materialization: {script: string, command: string},
- *   serving: {script: string, command: string, requiredOutput: string},
+ *   serving: {
+ *     script: string,
+ *     command: string,
+ *     requiredOutput: string,
+ *     longLived: boolean,
+ *     readStartupOutputImmediately: boolean,
+ *     waitForProcessCompletion: boolean
+ *   },
  *   completionChecklist: string[]
  * }} AgentWorkspaceIndex
  * @typedef {{
@@ -223,10 +230,15 @@ void test("builds a compact complete Agent workspace", () => {
       "node <skill-directory>/scripts/serve-assessment.mjs --file <work-directory>/assessment.html",
     );
     assert.equal(index.serving.requiredOutput, "http://127.0.0.1:<port>/assessment.html");
+    assert.equal(index.serving.longLived, true);
+    assert.equal(index.serving.readStartupOutputImmediately, true);
+    assert.equal(index.serving.waitForProcessCompletion, false);
     assert.ok(
       index.completionChecklist.some(
         (item) =>
           item.includes("attached long-lived process") &&
+          item.includes("immediately read its startup output") &&
+          item.includes("without waiting for process completion") &&
           item.includes("clickable Assessment report link"),
       ),
     );

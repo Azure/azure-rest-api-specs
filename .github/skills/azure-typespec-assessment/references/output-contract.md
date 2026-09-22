@@ -8,7 +8,9 @@ After deterministic analysis, read
 exact assessed Semantic intent, informational Semantic intent, candidate,
 inference-request, and Azure Guidelines request coverage.
 It also provides the exact attached report-server command and required
-localhost URL shape used after finalization.
+localhost URL shape used after finalization, plus explicit process metadata
+requiring the Agent to read startup output immediately without waiting for the
+intentionally long-lived server to complete.
 `agent-decisions.draft.json` is the structural template with intentionally
 invalid unresolved placeholders; it is never a valid output. Read its schema
 from `agent-index.json.requiredOutputs.schemas.agentDecisions` exactly once.

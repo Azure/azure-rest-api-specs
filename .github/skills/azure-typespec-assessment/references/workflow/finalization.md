@@ -27,6 +27,12 @@ report** link and the absolute `assessment.json` path for structured results.
 Keep the server running while viewed. Do not use relative Markdown or `file:`
 URLs.
 
+For an asynchronous or background host process, read its startup output
+immediately with the host's process-output reader. Do not wait for process
+completion or a completion notification: successful report serving is a
+long-lived process and therefore does not exit while the report remains
+available.
+
 Standalone rendering accepts an explicitly selected matching graph artifact:
 append `--downstream-input (Join-Path $Work
 "dimensions\downstream-breaking-input.json")`. Guarded finalization supplies it

@@ -40,10 +40,12 @@ rendered report is served and linked:
 
 1. Start `scripts/serve-assessment.mjs --file <work-directory>/assessment.html`
    through the host's attached background or long-lived process mechanism.
-2. Wait for the server to print its
-   `http://127.0.0.1:<port>/assessment.html` URL and confirm the process remains
-   running.
-3. Return that URL as the clickable **Assessment report** link and include the
+2. Immediately read startup output from the running process through the host's
+   process-output reader. Do not wait for process completion or a completion
+   notification: the server is intentionally long-lived.
+3. Capture the printed `http://127.0.0.1:<port>/assessment.html` URL and confirm
+   the process remains running.
+4. Return that URL as the clickable **Assessment report** link and include the
    absolute `assessment.json` path for structured results.
 
 Do not substitute a `file:` URL or only return filesystem paths.
