@@ -8572,26 +8572,6 @@
       ],
       "x-ms-discriminator-value": "AzureBlob"
     },
-    "AzureFileCifsVolume": {
-      "type": "object",
-      "description": "A volume backed by Azure Files over SMB.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Volume"
-        }
-      ],
-      "x-ms-discriminator-value": "AzureFileCifs"
-    },
-    "AzureFileNfsVolume": {
-      "type": "object",
-      "description": "A volume backed by Azure Files over NFS.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Volume"
-        }
-      ],
-      "x-ms-discriminator-value": "AzureFileNfs"
-    },
     "BadRequestErrorResult": {
       "type": "object",
       "description": "A standard Azure error response for a bad request.",
@@ -10725,55 +10705,6 @@
           "description": "Whether the entity tag uses weak comparison."
         }
       }
-    },
-    "EsanSku": {
-      "type": "string",
-      "description": "Elastic SAN storage SKU.",
-      "enum": [
-        "Premium_ZRS",
-        "Premium_LRS"
-      ],
-      "x-ms-enum": {
-        "name": "EsanSku",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "PremiumZrs",
-            "value": "Premium_ZRS",
-            "description": "Premium zone-redundant storage."
-          },
-          {
-            "name": "PremiumLrs",
-            "value": "Premium_LRS",
-            "description": "Premium locally-redundant storage."
-          }
-        ]
-      }
-    },
-    "EsanVolume": {
-      "type": "object",
-      "description": "Elastic SAN volume.",
-      "properties": {
-        "size": {
-          "$ref": "#/definitions/StorageQuantity",
-          "description": "Requested and provisioned volume size."
-        },
-        "sku": {
-          "$ref": "#/definitions/EsanSku",
-          "description": "SKU selected by the service.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "size",
-        "sku"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Volume"
-        }
-      ],
-      "x-ms-discriminator-value": "Esan"
     },
     "ExecuteSandboxCommandContent": {
       "type": "object",
@@ -15442,10 +15373,7 @@
       "enum": [
         "AzureBlob",
         "AzureBlobByo",
-        "AzureFileCifs",
-        "AzureFileNfs",
-        "DataDisk",
-        "Esan"
+        "DataDisk"
       ],
       "x-ms-enum": {
         "name": "VolumeType",
@@ -15462,24 +15390,9 @@
             "description": "A customer-owned Azure Blob container volume."
           },
           {
-            "name": "AzureFileCifs",
-            "value": "AzureFileCifs",
-            "description": "An Azure Files volume using SMB."
-          },
-          {
-            "name": "AzureFileNfs",
-            "value": "AzureFileNfs",
-            "description": "An Azure Files volume using NFS."
-          },
-          {
             "name": "DataDisk",
             "value": "DataDisk",
             "description": "A persistent data disk volume."
-          },
-          {
-            "name": "Esan",
-            "value": "Esan",
-            "description": "An Elastic SAN volume."
           }
         ]
       }

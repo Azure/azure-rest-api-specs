@@ -146,17 +146,6 @@ namespace ContainerAppsSandbox {
     Succeeded: "Succeeded",
   }
 
-  /** Elastic SAN storage SKU. */
-  union EsanSku {
-    string,
-
-    /** Premium zone-redundant storage. */
-    PremiumZrs: "Premium_ZRS",
-
-    /** Premium locally-redundant storage. */
-    PremiumLrs: "Premium_LRS",
-  }
-
   /** Customer-facing volume resource. */
   @discriminator("type")
   @resource("volumes")
@@ -200,18 +189,6 @@ namespace ContainerAppsSandbox {
     usage?: BlobVolumeUsage;
   }
 
-  /** A volume backed by Azure Files over SMB. */
-  model AzureFileCifsVolume extends Volume {
-    /** Represents the type of volume. */
-    type: "AzureFileCifs";
-  }
-
-  /** A volume backed by Azure Files over NFS. */
-  model AzureFileNfsVolume extends Volume {
-    /** Represents the type of volume. */
-    type: "AzureFileNfs";
-  }
-
   /** A persistent data disk volume. */
   model DataDiskVolume extends Volume {
     /** Represents the type of volume. */
@@ -237,19 +214,6 @@ namespace ContainerAppsSandbox {
     usage?: DataDiskVolumeUsage;
   }
 
-  /** Elastic SAN volume. */
-  model EsanVolume extends Volume {
-    /** Represents the type of volume. */
-    type: "Esan";
-
-    /** Requested and provisioned volume size. */
-    size: StorageQuantity;
-
-    /** SKU selected by the service. */
-    @visibility(Lifecycle.Read)
-    sku: EsanSku;
-  }
-
   /** Represents the type of volume. */
   union VolumeType {
     /** An unrecognized volume type returned by the service. */
@@ -261,17 +225,8 @@ namespace ContainerAppsSandbox {
     /** A customer-owned Azure Blob container volume. */
     AzureBlobByo: "AzureBlobByo",
 
-    /** An Azure Files volume using SMB. */
-    AzureFileCifs: "AzureFileCifs",
-
-    /** An Azure Files volume using NFS. */
-    AzureFileNfs: "AzureFileNfs",
-
     /** A persistent data disk volume. */
     DataDisk: "DataDisk",
-
-    /** An Elastic SAN volume. */
-    Esan: "Esan",
   }
 
   /** The number of volumes of one type. */
