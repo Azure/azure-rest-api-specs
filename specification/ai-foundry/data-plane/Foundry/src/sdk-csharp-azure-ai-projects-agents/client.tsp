@@ -6,7 +6,6 @@ import "../skills/routes.tsp";
 import "../agents-session-files/routes.tsp";
 import "../managed-blueprints/routes.tsp";
 import "../agents-optimization/routes.tsp";
-import "../sdk-common/ops-relocation-voice-agents.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
@@ -1294,16 +1293,6 @@ namespace Azure.AI.Projects {
   @@access(AgentTelephony.createTelephonyCallJob, Access.internal);
   @@access(AgentTelephony.getTelephonyCallJob, Access.internal);
   @@access(AgentTelephony.cancelTelephonyCallJob, Access.internal);
-  @@access(AgentTelephony.createTelephonyCampaign, Access.internal);
-  @@access(AgentTelephony.getTelephonyCampaign, Access.internal);
-  @@access(AgentTelephony.importTelephonyCampaignRecipients, Access.internal);
-  @@access(AgentTelephony.getTelephonyCampaignRecipientImport, Access.internal);
-  @@access(AgentTelephony.validateTelephonyCampaign, Access.internal);
-  @@access(AgentTelephony.publishTelephonyCampaign, Access.internal);
-  @@access(AgentTelephony.pauseTelephonyCampaign, Access.internal);
-  @@access(AgentTelephony.resumeTelephonyCampaign, Access.internal);
-  @@access(AgentTelephony.cancelTelephonyCampaign, Access.internal);
-  @@access(AgentTelephony.getTelephonyOperation, Access.internal);
 
   // --------------------------------------------------------------------------------
   // Realtime classes replacements

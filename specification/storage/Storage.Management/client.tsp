@@ -825,6 +825,11 @@ namespace Azure.ResourceManager.Models {
   "csharp"
 );
 @@clientName(
+  SasPolicy.requireUserBoundUserDelegationSas,
+  "IsUserBoundUserDelegationSasRequired",
+  "csharp"
+);
+@@clientName(
   CustomDomain.useSubDomainName,
   "IsUseSubDomainNameEnabled",
   "csharp"
@@ -956,6 +961,16 @@ namespace Azure.ResourceManager.Models {
 @@clientName(
   StorageDataSharePropertiesUpdate,
   "StorageDataSharePropertiesPatch",
+  "csharp"
+);
+@@clientName(
+  ContextCachePropertiesUpdate,
+  "ContextCachePropertiesPatch",
+  "csharp"
+);
+@@clientName(
+  ContextCacheContainerPropertiesUpdate,
+  "ContextCacheContainerPropertiesPatch",
   "csharp"
 );
 
@@ -1495,13 +1510,13 @@ enum ProvisioningStateEnum {
 @@clientName(
   Azure.ResourceManager.CommonTypes.Encryption,
   "ArmEncryption",
-  "go,javascript"
+  "csharp,go,javascript"
 );
 
 @@alternateType(
   Azure.ResourceManager.CommonTypes.UserAssignedIdentity,
   Microsoft.Storage.UserAssignedIdentity,
-  "java,python,javascript"
+  "java,python,javascript,go"
 );
 
 @@alternateType(

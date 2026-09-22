@@ -355,6 +355,14 @@ using Azure.AI.Projects;
 @@clientName(AgentTelephony.updateTelephonyBinding, "updateBinding");
 @@clientName(AgentTelephony.deleteTelephonyBinding, "deleteBinding");
 @@clientName(AgentTelephony.listTelephonyCalls, "listCalls");
+@@clientName(
+  TelephonyCallListTimeQueryParameters.started_before,
+  "started_before_time"
+);
+@@clientName(
+  TelephonyCallListTimeQueryParameters.started_after,
+  "started_after_time"
+);
 @@clientName(AgentTelephony.getTelephonyCall, "getCall");
 @@clientName(AgentTelephony.transferTelephonyCall, "transferCall");
 @@clientName(AgentTelephony.endTelephonyCall, "endCall");
@@ -366,22 +374,6 @@ using Azure.AI.Projects;
 @@clientName(AgentTelephony.createTelephonyCallJob, "createCallJob");
 @@clientName(AgentTelephony.getTelephonyCallJob, "getCallJob");
 @@clientName(AgentTelephony.cancelTelephonyCallJob, "cancelCallJob");
-@@clientName(AgentTelephony.createTelephonyCampaign, "createCampaign");
-@@clientName(AgentTelephony.getTelephonyCampaign, "getCampaign");
-@@clientName(
-  AgentTelephony.importTelephonyCampaignRecipients,
-  "importCampaignRecipients"
-);
-@@clientName(
-  AgentTelephony.getTelephonyCampaignRecipientImport,
-  "getCampaignRecipientImport"
-);
-@@clientName(AgentTelephony.validateTelephonyCampaign, "validateCampaign");
-@@clientName(AgentTelephony.publishTelephonyCampaign, "publishCampaign");
-@@clientName(AgentTelephony.pauseTelephonyCampaign, "pauseCampaign");
-@@clientName(AgentTelephony.resumeTelephonyCampaign, "resumeCampaign");
-@@clientName(AgentTelephony.cancelTelephonyCampaign, "cancelCampaign");
-@@clientName(AgentTelephony.getTelephonyOperation, "getOperation");
 
 // --------------------------------------------------------------------------------
 // Class renames related to Responses
