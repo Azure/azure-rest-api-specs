@@ -167,7 +167,7 @@ namespace ContainerAppsSandbox {
 
     /** The volume name. */
     @key("volumeName")
-    @visibility(Lifecycle.Create, Lifecycle.Read)
+    @visibility(Lifecycle.Read)
     volumeName: VolumeName;
 
     /** Customer-defined labels for the volume. */

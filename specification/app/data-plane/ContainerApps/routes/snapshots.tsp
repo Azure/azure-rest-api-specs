@@ -51,7 +51,6 @@ alias GetSnapshotsCountErrors =
   | UnauthorizedErrorResult
   | InternalServerErrorResult;
 
-
 /** Error responses for the getSnapshot operation. */
 alias GetSnapshotErrors =
   | UnauthorizedErrorResult
