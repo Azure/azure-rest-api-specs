@@ -1767,11 +1767,7 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
   "isSoftDeletionEnabled",
   "csharp"
 );
-@@clientName(
-  CosmosDBMongoCollection,
-  "CosmosDBMongoCollectionInfo",
-  "csharp"
-);
+@@clientName(CosmosDBMongoCollection, "CosmosDBMongoCollectionInfo", "csharp");
 @@clientName(
   CosmosDBMongoVCoreCollection,
   "CosmosDBMongoVCoreCollectionInfo",
@@ -1796,15 +1792,6 @@ op sqlResourcesGetSqlRoleDefinitionCustomized(
 @@clientName(BackupResource.backupStopTimestamp, "backupStoppedOn", "csharp");
 @@clientName(BackupResource.backupExpiryTimestamp, "backupExpiresOn", "csharp");
 @@clientName(GraphResource.id, "graphName", "csharp");
-
-@@doc(
-  SoftDeletedDatabaseAccountGetResult,
-  "An Azure Cosmos DB soft-deleted database account."
-);
-@@doc(
-  GraphResourceGetProperties,
-  "The properties of an Azure Cosmos DB graph."
-);
 
 @@alternateType(
   Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeter.location,
