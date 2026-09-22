@@ -191,7 +191,7 @@ Conventions:
 - Use erasable syntax compatible with Node.js type stripping: no enums, parameter properties, or
   namespaces.
 - Linting uses the repository-root `.oxlintrc.json` with oxlint and `oxlint-tsgolint`.
-  CI lints the previously linted packages once in `.github/workflows/lint.yaml`, separately from package tests.
+  CI lints all packages once in `.github/workflows/lint.yaml`, separately from package tests.
 - Runtime dependencies are kept to an absolute minimum (ideally zero transitive dependencies) for
   performance, and must be a subset of the parent [`../package.json`](../package.json).
 
@@ -220,7 +220,7 @@ that still point at the old `.js` entry point.
 
 ### Contributing
 
-When adding or changing shared code:
+When adding a shared utility:
 
 1. **Add the module** under `src` as a single-responsibility TypeScript file with typed exports.
 2. **Export it** by adding a subpath entry to the `exports` map in [`package.json`](./package.json).
@@ -232,12 +232,12 @@ When adding or changing shared code:
 
 Useful scripts (run from `.github/shared`):
 
-| Command                | Description                                          |
-| ---------------------- | ---------------------------------------------------- |
-| `npm test`             | Run tests in watch mode (vitest).                    |
-| `npm run test:ci`      | Run tests once with coverage.                        |
-| `pnpm run lint`        | Run oxlint and `tsc` type-checking for this package. |
-| `npm run format`       | Auto-format with prettier.                           |
-| `npm run format:check` | Check formatting without writing.                    |
-| `npm run perf`         | Run performance benchmarks.                          |
-| `npm run check`        | Run tests, lint, and format check (the full gate).   |
+| Command                 | Description                                            |
+| ----------------------- | ------------------------------------------------------ |
+| `npm test`              | Run tests in watch mode (vitest).                      |
+| `npm run test:ci`       | Run tests once with coverage.                          |
+| `pnpm run lint`         | Run oxlint and `tsc` type-checking for this package.   |
+| `pnpm run format`       | Format this package with the root Oxfmt configuration. |
+| `pnpm run format:check` | Check formatting without writing.                      |
+| `npm run perf`          | Run performance benchmarks.                            |
+| `npm run check`         | Run tests, lint, and format check (the full gate).     |
