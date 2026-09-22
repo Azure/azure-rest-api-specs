@@ -203,6 +203,9 @@
     },
     {
       "name": "TieringCostOperationStatus"
+    },
+    {
+      "name": "ProtectionContainerRefreshOperationStatuses"
     }
   ],
   "paths": {
@@ -1083,6 +1086,66 @@
         "x-ms-examples": {
           "Azure Vm Discovery Operation Result": {
             "$ref": "./examples/Common/RefreshContainers_OperationResults.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/operationsStatus/{operationId}": {
+      "get": {
+        "operationId": "ProtectionContainerRefreshOperationStatuses_Get",
+        "tags": [
+          "ProtectionContainerRefreshOperationStatuses"
+        ],
+        "description": "Fetches the status of the fabric level asynchronous operation identified by the given operation id. The status\ncan be in progress, completed or failed. You can refer to the OperationStatus enum for all the possible states of\nan operation. This is the endpoint reported in the Azure-AsyncOperation header of the fabric level operations\nthat start one, such as RefreshContainers and GetRPExtendedInfo.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vaultName",
+            "in": "path",
+            "description": "The name of the recovery services vault.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name associated with the operation.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "OperationID which represents the operation whose status needs to be fetched.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Fabric Level Operation Status": {
+            "$ref": "./examples/Common/RefreshContainers_OperationStatus.json"
           }
         }
       }
@@ -9778,7 +9841,7 @@
         "name": {
           "type": "string"
         },
-        "diskSizeInGB": {
+        "diskSizeInGb": {
           "type": "integer",
           "format": "int32",
           "description": "Size of the disk in GB."
@@ -10519,6 +10582,8 @@
         "recoveryPointIds": {
           "type": "array",
           "description": "ARM id of the recovery point whose additional details are to be fetched. Exactly one recovery point id can be\nspecified.",
+          "minItems": 1,
+          "maxItems": 1,
           "items": {
             "type": "string"
           }

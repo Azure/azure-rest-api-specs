@@ -5789,9 +5789,8 @@ model DiskInformation {
   /**
    * Size of the disk in GB.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "Wire name is fixed by the existing BMS data contract, which spells the unit as GB."
   @added(Versions.v2026_10_01)
-  diskSizeInGB?: int32;
+  diskSizeInGb?: int32;
 
   /**
    * Storage type of the disk.
@@ -5884,13 +5883,14 @@ model GetRPExtendedInfoRequestResource extends Resource {
  * Request for fetching the additional details of a recovery point.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "RP is an established acronym in the BMS contract; the model name matches the service data contract."
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept in sync with the BMS service data contract."
 @added(Versions.v2026_10_01)
 model GetRPExtendedInfoRequest {
   /**
    * ARM id of the recovery point whose additional details are to be fetched. Exactly one recovery point id can be
    * specified.
    */
+  @minItems(1)
+  @maxItems(1)
   recoveryPointIds: string[];
 }
 
