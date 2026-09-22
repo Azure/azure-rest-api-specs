@@ -95,7 +95,6 @@ model ServiceCatalogResource is TrackedResource<ServiceCatalogProperties> {
   @key("serviceCatalogName")
   @segment("serviceCatalogs")
   @pattern("^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$")
-  @path
   @doc("The name of the Service Catalog resource.")
   name: string;
 }
