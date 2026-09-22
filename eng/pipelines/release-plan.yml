@@ -83,7 +83,7 @@ stages:
                   $nodeArgs += @("--commit-sha", $commitSha)
                 }
 
-                npm exec --no -- create-release-plan @nodeArgs
+                pnpm exec create-release-plan @nodeArgs
 
           - pwsh: |
               $outputPath = "$(Build.ArtifactStagingDirectory)/release-plan/release-plan.json"
@@ -119,7 +119,7 @@ stages:
                   exit 0
                 }
 
-                npm exec --no -- update-sdk-details --artifact-file $artifactPath --workspace "$(Build.SourcesDirectory)"
+                pnpm exec update-sdk-details --artifact-file $artifactPath --workspace "$(Build.SourcesDirectory)"
 
           - task: PublishPipelineArtifact@1
             displayName: "Publish release plan details artifact"
@@ -174,4 +174,4 @@ stages:
               inlineScript: |
                 $ErrorActionPreference = "Stop"
                 $artifactPath = "$(Pipeline.Workspace)/release-plan-details/release-plan.json"
-                npm exec --no -- generate-sdk --artifact-file $artifactPath --workspace "$(Build.SourcesDirectory)"
+                pnpm exec generate-sdk --artifact-file $artifactPath --workspace "$(Build.SourcesDirectory)"
