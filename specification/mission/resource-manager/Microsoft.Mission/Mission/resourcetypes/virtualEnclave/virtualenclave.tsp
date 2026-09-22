@@ -139,6 +139,34 @@ model EnclaveAddressSpacesModel {
   managedAddressSpace?: string;
 }
 
+@added(Microsoft.Mission.Versions.v2026_07_01_preview)
+@doc("Indicates who manages the address space lifecycle.")
+union AddressSpaceOwnership {
+  string,
+
+  @doc("A customer-provided address space.")
+  CustomerManaged: "CustomerManaged",
+
+  @doc("A product-managed address space.")
+  ProductManaged: "ProductManaged",
+}
+
+@added(Microsoft.Mission.Versions.v2026_07_01_preview)
+@doc("An address space entry for the enclave.")
+model AddressSpaceEntry {
+  @minValue(8)
+  @maxValue(26)
+  @doc("The CIDR prefix length that determines the address space size.")
+  prefixLength?: int32;
+
+  @doc("The CIDR notation address space.")
+  addressSpace?: string;
+
+  @doc("The address space lifecycle owner.")
+  @visibility(Lifecycle.Read)
+  ownership?: AddressSpaceOwnership;
+}
+
 @added(Microsoft.Mission.Versions.v2025_11_01_preview)
 @doc("Virtual Enclave ApprovalSettings Properties for 2025-11-01-preview and later versions")
 model VirtualEnclaveApprovalSettings {
@@ -227,6 +255,25 @@ model VirtualEnclaveBaseModel {
 
 @doc("Virtual Enclave Resource properties")
 model VirtualEnclaveProperties is VirtualEnclaveBaseModel {
+  @added(Microsoft.Mission.Versions.v2026_07_01_preview)
+  @identifiers(#[])
+  @doc("The address spaces for the enclave.")
+  addressSpaces?: AddressSpaceEntry[];
+
+  @added(Microsoft.Mission.Versions.v2026_07_01_preview)
+  @doc("The name of the enclave virtual network.")
+  @visibility(Lifecycle.Read)
+  networkName?: string;
+
+  @added(Microsoft.Mission.Versions.v2026_07_01_preview)
+  @identifiers(#["subnetName"])
+  @doc("The subnet configurations for the enclave network.")
+  subnetConfigurations?: SubnetConfiguration[];
+
+  @added(Microsoft.Mission.Versions.v2026_07_01_preview)
+  @doc("Whether subnets within the enclave can communicate with each other.")
+  allowSubnetCommunication?: boolean = false;
+
   @doc("Enclave default settings.")
   enclaveDefaultSettings?: EnclaveDefaultSettingsModel;
 
@@ -249,6 +296,20 @@ model VirtualEnclaveProperties is VirtualEnclaveBaseModel {
 @doc("Virtual Enclave Patchable Properties")
 model VirtualEnclavePatchProperties
   is UpdateableProperties<OmitDefaults<VirtualEnclaveBaseModel>> {
+  @added(Microsoft.Mission.Versions.v2026_07_01_preview)
+  @identifiers(#[])
+  @doc("The address spaces for the enclave.")
+  addressSpaces?: AddressSpaceEntry[];
+
+  @added(Microsoft.Mission.Versions.v2026_07_01_preview)
+  @identifiers(#["subnetName"])
+  @doc("The subnet configurations for the enclave network.")
+  subnetConfigurations?: SubnetConfiguration[];
+
+  @added(Microsoft.Mission.Versions.v2026_07_01_preview)
+  @doc("Whether subnets within the enclave can communicate with each other.")
+  allowSubnetCommunication?: boolean;
+
   @doc("Enclave default settings.")
   enclaveDefaultSettings?: EnclaveDefaultSettingsPatchModel;
 

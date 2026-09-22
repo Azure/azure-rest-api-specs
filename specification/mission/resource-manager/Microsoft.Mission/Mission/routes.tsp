@@ -249,6 +249,12 @@ interface CommunityEndpoints {
   listByCommunityResource is ArmResourceListByParent<CommunityEndpointResource>;
   listBySubscription is ArmListBySubscription<CommunityEndpointResource>;
 
+  @added(Microsoft.Mission.Versions.v2026_05_01_preview)
+  @useFinalStateVia("location")
+  @doc("Triggers a manual synchronization of endpoint connections to all configured destinations.")
+  @armResourceAction(CommunityEndpointResource)
+  sync is ArmResourceActionAsync<CommunityEndpointResource, never, CommunityEndpointResource>;
+
   @doc("Callback that triggers on approval state change.")
   @armResourceAction(CommunityEndpointResource)
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
@@ -294,6 +300,28 @@ interface DedicatedHub {
   delete is ArmResourceDeleteWithoutOkAsync<DedicatedHubResource>;
   listByCommunityResource is ArmResourceListByParent<DedicatedHubResource>;
   listBySubscription is ArmListBySubscription<DedicatedHubResource>;
+}
+
+@added(Microsoft.Mission.Versions.v2026_07_01_preview)
+@doc("Service Catalog Interface")
+@armResourceOperations
+interface ServiceCatalog {
+  get is ArmResourceRead<ServiceCatalogResource>;
+  @useFinalStateVia("azure-async-operation")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    ServiceCatalogResource,
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmAsyncOperationHeader
+  >;
+  @useFinalStateVia("location")
+  update is ArmCustomPatchAsync<
+    ServiceCatalogResource,
+    PatchModel = ServiceCatalogPatchModel
+  >;
+  @useFinalStateVia("location")
+  delete is ArmResourceDeleteWithoutOkAsync<ServiceCatalogResource>;
+  listByResourceGroup is ArmResourceListByParent<ServiceCatalogResource>;
+  listBySubscription is ArmListBySubscription<ServiceCatalogResource>;
 }
 
 @doc("Approval Interface")
