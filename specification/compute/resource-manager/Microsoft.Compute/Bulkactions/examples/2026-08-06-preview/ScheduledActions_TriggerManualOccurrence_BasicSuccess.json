@@ -1,0 +1,35 @@
+{
+  "title": "Run a recurring scheduled action immediately",
+  "description": "Creates and runs an occurrence for a recurring scheduled action immediately.  If there is already a scheduled occurrence nearby this request will be rejected.",
+  "operationId": "ScheduledActions_TriggerManualOccurrence",
+  "parameters": {
+    "api-version": "2026-08-06-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "scheduledActionName": "weekday-start"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/scheduledActionsOperationStatuses/00000000-0000-0000-0000-000000000000?api-version=2026-08-06-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/scheduledActionsOperationStatuses/00000000-0000-0000-0000-000000000000?api-version=2026-08-06-preview&monitor=true",
+        "Retry-After": 10
+      }
+    },
+    "200": {
+      "body": {
+        "properties": {
+          "scheduledTime": "2026-09-01T02:00:00Z",
+          "resultSummary": {
+            "total": 2,
+            "statuses": []
+          },
+          "provisioningState": "Scheduled"
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.Compute/scheduledActions/weekday-start/occurrences/67b5bada-4772-43fc-8dbb-402476d98a45",
+        "name": "67b5bada-4772-43fc-8dbb-402476d98a45",
+        "type": "Microsoft.Compute/scheduledActions/occurrences"
+      }
+    }
+  }
+}
