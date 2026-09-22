@@ -559,7 +559,7 @@ void test("semantic relationships are static, title-based and independent of ope
 
 void test("fragment handlers reveal nested details without toggling relation labels", () => {
   const html = renderAssessmentHtml(assessment());
-  const script = requiredMatch(html, /<script>([\s\S]*?)<\/script>/, 1);
+  const script = requiredMatch(html, /<script>([\s\S]*?)<\/script>/i, 1);
   /** @type {Record<string, (event?: {target?: Element, preventDefault?: () => void}) => unknown>} */
   const listeners = {};
   const outer = { tagName: "DETAILS", open: false, parentElement: null };
@@ -724,9 +724,9 @@ void test("five dimension headers and empty not-assessed states use the shared l
   assert.match(quality, /not assessed/);
   assert.match(quality, /report-badge add">passed/);
   assert.match(quality, /0 findings/);
-  assert.match(html, /@media\(max-width:760px\)/);
-  assert.match(html, /@media\(prefers-color-scheme:dark\)/);
-  assert.match(html, /grid-template-columns:minmax\(0,1fr\) max-content/);
+  assert.match(html, /@media\s*\(max-width:\s*760px\)/);
+  assert.match(html, /@media\s*\(prefers-color-scheme:\s*dark\)/);
+  assert.match(html, /grid-template-columns:\s*minmax\(0,\s*1fr\)\s+max-content/);
 });
 
 void test("legacy type findings remain visible when method mappings are unavailable", () => {
@@ -1954,7 +1954,7 @@ void recordedAssessmentTest(
         setTimeout: (callback) => callback(),
       },
     };
-    vm.runInNewContext(requiredMatch(html, /<script>([\s\S]*?)<\/script>/, 1), context);
+    vm.runInNewContext(requiredMatch(html, /<script>([\s\S]*?)<\/script>/i, 1), context);
     assert.equal(outer.open, true);
     assert.equal(finding.open, true);
     for (let index = 0; index < 2; index++) {
