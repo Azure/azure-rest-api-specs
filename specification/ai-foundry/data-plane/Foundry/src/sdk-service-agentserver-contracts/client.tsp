@@ -111,6 +111,18 @@ namespace Azure.AI.Projects {
     { logprobs?: OpenAI.LogProb[] }
   );
 
+  // Preserve compatibility with clients that report only cached input tokens.
+  @@withoutOmittedProperties(
+    OpenAI.ResponseUsageInputTokensDetails,
+    "cache_write_tokens"
+  );
+  @@copyProperties(
+    OpenAI.ResponseUsageInputTokensDetails,
+    {
+      cache_write_tokens?: integer,
+    }
+  );
+
   // Avoid Markdown list formatting that produces an invalid Python docstring.
   @@doc(
     OpenAI.Response.output,
