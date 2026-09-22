@@ -275,16 +275,24 @@ describe("workflow files", () => {
   });
 
   it("runs formatting once, outside the package test matrices", async () => {
+    const manifest = JSON.parse(
+      await readFile(resolve(workflowsDir, "../../package.json"), "utf8"),
+    ) as { scripts: Record<string, string> };
+    expect(manifest.scripts["format:check"]).toMatch(/^oxfmt /);
+    const command = manifest.scripts["format:check"].replace(
+      /^oxfmt /,
+      "node .github/formatting/node_modules/oxfmt/bin/oxfmt ",
+    );
     const files = (await readdir(workflowsDir)).filter((file) => /\.ya?ml$/.test(file));
     const formatSteps: string[] = [];
     for (const file of files) {
       const workflow = await readWorkflow(file);
       for (const [name, job] of Object.entries(workflow.jobs)) {
         for (const step of job.steps ?? []) {
-          if (/\bpnpm\s+(?:run\s+)?format(?::check(?::ci)?)?\b/.test(step.run ?? "")) {
+          if (/\bpnpm\s+(?:run\s+)?format(?::check(?::ci)?)?\b|\boxfmt\b/.test(step.run ?? "")) {
             formatSteps.push(`${file}/${name}`);
             expect(job.strategy).toBeUndefined();
-            expect(step.run).toBe("pnpm run format:check");
+            expect(step.run).toBe(command);
           }
         }
       }
@@ -310,6 +318,15 @@ describe("workflow files", () => {
     expect(workflow.permissions).toEqual({ contents: "read" });
     expect(Object.keys(workflow.jobs)).toEqual(["format"]);
     expect(workflow.jobs.format.steps?.[0].with?.["sparse-checkout"]).toBe(".github\neng/tools\n");
-    expect(workflow.jobs.format.steps?.[1].with?.["install-command"]).toBe("pnpm ci");
+    expect(workflow.jobs.format.steps?.[1].with).toEqual({
+      "install-command":
+        "pnpm install --frozen-lockfile --prod --prefer-offline --filter=azure-rest-api-specs-formatting",
+      "cache-name": "formatting",
+    });
+    const profile = JSON.parse(
+      await readFile(resolve(workflowsDir, "../formatting/package.json"), "utf8"),
+    ) as { name: string; dependencies: Record<string, string> };
+    expect(profile.name).toBe("azure-rest-api-specs-formatting");
+    expect(profile.dependencies).toEqual({ oxfmt: "catalog:" });
   });
 });

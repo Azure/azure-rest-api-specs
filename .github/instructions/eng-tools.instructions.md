@@ -218,7 +218,7 @@ dependencies once and runs the full Vitest workspace. Changes to tooling, shared
 configuration, or integration fixtures run all suites. Do not add per-tool
 workflows or type-check steps to the test OS matrix.
 
-`.github/workflows/format.yaml` runs `pnpm format:check` once from the repository root for `.github`, `eng/tools`, and `vitest.config.mts`. Do not add formatting steps to package/OS test matrices. Package-local formatting commands remain available and use the same root configuration.
+`.github/workflows/format.yaml` checks formatting once from the repository root for `.github`, `eng/tools`, and `vitest.config.mts`, using a formatter-only dependency profile. Do not add formatting steps to package/OS test matrices. Contributor formatting commands remain unchanged and use the same root configuration.
 
 Code linting runs once for all packages in `.github/workflows/lint.yaml`, which automatically includes new tools. Do not add lint steps to the build/test workflow.
 

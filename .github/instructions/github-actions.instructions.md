@@ -152,8 +152,10 @@ checks on both OSes, plus actionlint and compiled agentic workflow lock checks o
 
 CI runs `pnpm lint` once from the repository root in `lint.yaml`, covering `.github`
 and `eng/tools`. Do not add lint or type-check steps to the test OS matrix.
-`.github/workflows/format.yaml` runs `pnpm format:check` once from the repository
-root for `.github`, `eng/tools`, and `vitest.config.mts`. Do not add formatting steps to package/OS
+`.github/workflows/format.yaml` installs only the `.github/formatting` dependency profile
+and invokes Oxfmt directly from the repository root with the same arguments as
+`pnpm format:check`. Do not invoke pnpm scripts after this filtered install: pnpm can
+auto-install the rest of the workspace. Do not add formatting steps to package/OS
 test matrices. Package-local format commands inherit the root `.oxfmtrc.json`,
 including fixture, generated-file, and unmanaged-content exclusions.
 See [the engineering guide](../../eng/README.md#linting-and-formatting) for package

@@ -43,7 +43,9 @@ jobs:
 
       - uses: ./.github/actions/setup-node-install-deps
         with:
-          install-command: pnpm ci
+          install-command: pnpm install --frozen-lockfile --prod --prefer-offline --filter=azure-rest-api-specs-formatting
+          cache-name: formatting
 
       - name: Check formatting for all packages
-        run: pnpm run format:check
+        # Run directly so pnpm does not auto-install the rest of the workspace.
+        run: node .github/formatting/node_modules/oxfmt/bin/oxfmt .github eng/tools vitest.config.mts --check
