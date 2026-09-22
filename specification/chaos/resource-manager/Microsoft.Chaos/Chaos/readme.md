@@ -517,7 +517,7 @@ PR #46392 targets `juliagao-microsoft-chaos-2026-11-ga-promotion` and must merge
 there before #45455 contains CMK. Normal ARM review of that combined GA diff
 covers the vault reference, caller permission, lifecycle, and old-version 409.
 Baseline-only review is not CMK approval. If #45455 merges first, rebase and
-retarget #46392 to `main` and run normal main-target checks and review. No
+change the target of #46392 to `main`, then run normal main-target checks and review. No
 separate dedicated CMK review, named compatibility approver, or additional
 approval artifact is required; normal release and runtime acceptance remain.
 
