@@ -38,11 +38,16 @@ model EgressConfig
 @added(Versions.v2026_09_01)
 model EgressConfigProperties {
   /** Whether virtual connections are enabled for this site. */
-  enabled?: EgressEnabledState = EgressEnabledState.Disabled;
+  enabled?: EgressEnabledState;
 
   /**
    * All virtualized connections. Key is a customer-chosen connection name
-   * (e.g., "sql", "cache", "storage"). Maximum 50 connections per site.
+   * (e.g., "sql", "cache", "storage") of at most 256 characters, which must not
+   * end in whitespace and must be unique within the site regardless of casing.
+   *
+   * This collection is authoritative: a write replaces the stored connections in
+   * full, and omitting it (or supplying an empty object) deletes the egress
+   * configuration for the site.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Connection names are arbitrary customer-chosen keys and cannot be represented as a fixed set of model properties."
   connections?: Record<VirtualConnection>;
@@ -70,7 +75,6 @@ model VirtualConnection {
   /**
    * Settings that compose this connection. Key is the app setting
    * (or connection string) name; value describes its role in the connection.
-   * Maximum 10 settings per connection.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Setting names are arbitrary customer-chosen keys and cannot be represented as a fixed set of model properties."
   settings: Record<VirtualConnectionSetting>;
@@ -307,16 +311,13 @@ interface EgressConfigOps
 @armResourceOperations(#{ omitTags: true })
 interface EgressConfigs {
   /**
-   * Gets the egress configuration for an app. This operation returns an empty
-   * configuration; use the list operation to retrieve the stored configuration.
+   * Creates or replaces the egress configuration for an app. The supplied
+   * connections replace the stored ones in full, so connections omitted from
+   * the request are deleted; omitting connections entirely, or supplying an
+   * empty object, deletes the configuration for the app. Returns 201 when no
+   * configuration was stored for the app beforehand and 200 otherwise, with the
+   * stored configuration in the response body.
    */
-  @summary("Gets the egress configuration for an app.")
-  getEgressConfig is EgressConfigOps.Read<
-    EgressConfig,
-    OverrideErrorType = DefaultErrorResponse
-  >;
-
-  /** Creates or replaces the egress configuration for an app. */
   @summary("Creates or replaces the egress configuration for an app.")
   createOrUpdateEgressConfig is EgressConfigOps.CreateOrUpdateSync<
     EgressConfig,
@@ -328,7 +329,10 @@ interface EgressConfigs {
     OverrideErrorType = DefaultErrorResponse
   >;
 
-  /** Gets the stored egress configuration for an app. */
+  /**
+   * Gets the egress configuration stored for an app, including its connections.
+   * Returns an empty configuration when none is stored.
+   */
   @summary("Gets the stored egress configuration for an app.")
   @action("list")
   listEgressConfig is EgressConfigOps.ActionSync<
@@ -395,17 +399,13 @@ interface EgressConfigSlotOps
 @armResourceOperations(#{ omitTags: true })
 interface EgressConfigSlotConfigs {
   /**
-   * Gets the egress configuration for a deployment slot. This operation returns
-   * an empty configuration; use the list operation to retrieve the stored
-   * configuration.
+   * Creates or replaces the egress configuration for a deployment slot. The
+   * supplied connections replace the stored ones in full, so connections
+   * omitted from the request are deleted; omitting connections entirely, or
+   * supplying an empty object, deletes the configuration for the slot. Returns
+   * 201 when no configuration was stored for the slot beforehand and 200
+   * otherwise, with the stored configuration in the response body.
    */
-  @summary("Gets the egress configuration for a deployment slot.")
-  getEgressConfigSlot is EgressConfigSlotOps.Read<
-    EgressConfig,
-    OverrideErrorType = DefaultErrorResponse
-  >;
-
-  /** Creates or replaces the egress configuration for a deployment slot. */
   @summary("Creates or replaces the egress configuration for a deployment slot.")
   createOrUpdateEgressConfigSlot is EgressConfigSlotOps.CreateOrUpdateSync<
     EgressConfig,
@@ -417,7 +417,10 @@ interface EgressConfigSlotConfigs {
     OverrideErrorType = DefaultErrorResponse
   >;
 
-  /** Gets the stored egress configuration for a deployment slot. */
+  /**
+   * Gets the egress configuration stored for a deployment slot, including its
+   * connections. Returns an empty configuration when none is stored.
+   */
   @summary("Gets the stored egress configuration for a deployment slot.")
   @action("list")
   listEgressConfigSlot is EgressConfigSlotOps.ActionSync<

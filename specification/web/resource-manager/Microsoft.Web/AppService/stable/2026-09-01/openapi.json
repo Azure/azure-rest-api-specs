@@ -10005,58 +10005,13 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/egress": {
-      "get": {
-        "operationId": "EgressConfigs_GetEgressConfig",
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Gets the egress configuration for an app.",
-        "description": "Gets the egress configuration for an app. This operation returns an empty\nconfiguration; use the list operation to retrieve the stored configuration.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/EgressConfig"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get egress configuration": {
-            "$ref": "./examples/EgressConfig_Get.json"
-          }
-        }
-      },
       "put": {
-        "operationId": "EgressConfigs_CreateOrUpdateEgressConfig",
+        "operationId": "WebApps_CreateOrUpdateEgressConfig",
         "tags": [
           "WebApps"
         ],
         "summary": "Creates or replaces the egress configuration for an app.",
-        "description": "Creates or replaces the egress configuration for an app.",
+        "description": "Creates or replaces the egress configuration for an app. The supplied\nconnections replace the stored ones in full, so connections omitted from\nthe request are deleted; omitting connections entirely, or supplying an\nempty object, deletes the configuration for the app. Returns 201 when no\nconfiguration was stored for the app beforehand and 200 otherwise, with the\nstored configuration in the response body.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -10103,43 +10058,17 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "API Management with subscription key injection": {
-            "$ref": "./examples/EgressConfig_CreateOrUpdate_ApimKey.json"
-          },
-          "Configure Redis and Storage with Managed Identity": {
-            "$ref": "./examples/EgressConfig_CreateOrUpdate_MultiHttp.json"
-          },
-          "Configure SQL with Managed Identity": {
-            "$ref": "./examples/EgressConfig_CreateOrUpdate_SqlManagedIdentity.json"
-          },
-          "Configure third-party API with credential injection": {
-            "$ref": "./examples/EgressConfig_CreateOrUpdate_ThirdPartyApi.json"
-          },
-          "Create or replace egress configuration": {
-            "$ref": "./examples/EgressConfig_CreateOrUpdate.json"
-          },
-          "Disable Virtual Connections": {
-            "$ref": "./examples/EgressConfig_Disable.json"
-          },
-          "Storage SAS URL upgraded to Managed Identity": {
-            "$ref": "./examples/EgressConfig_CreateOrUpdate_SasToManagedIdentity.json"
-          },
-          "Storage SAS URL with credential passthrough (secret hidden from app)": {
-            "$ref": "./examples/EgressConfig_CreateOrUpdate_SasPassthrough.json"
-          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/egress/list": {
       "post": {
-        "operationId": "EgressConfigs_ListEgressConfig",
+        "operationId": "WebApps_ListEgressConfig",
         "tags": [
           "WebApps"
         ],
         "summary": "Gets the stored egress configuration for an app.",
-        "description": "Gets the stored egress configuration for an app.",
+        "description": "Gets the egress configuration stored for an app, including its connections.\nReturns an empty configuration when none is stored.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -10171,17 +10100,12 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "List egress configuration": {
-            "$ref": "./examples/EgressConfig_List.json"
-          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/egress:validate": {
       "post": {
-        "operationId": "EgressConfigs_ValidateEgressConfig",
+        "operationId": "WebApps_ValidateEgressConfig",
         "tags": [
           "WebApps"
         ],
@@ -10226,11 +10150,6 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Validate egress configuration": {
-            "$ref": "./examples/EgressConfig_Validate.json"
           }
         }
       }
@@ -22877,65 +22796,13 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/egress": {
-      "get": {
-        "operationId": "EgressConfigSlotConfigs_GetEgressConfigSlot",
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Gets the egress configuration for a deployment slot.",
-        "description": "Gets the egress configuration for a deployment slot. This operation returns\nan empty configuration; use the list operation to retrieve the stored\nconfiguration.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of the deployment slot.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/EgressConfig"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get egress configuration for a slot": {
-            "$ref": "./examples/SlotEgressConfig_Get.json"
-          }
-        }
-      },
       "put": {
-        "operationId": "EgressConfigSlotConfigs_CreateOrUpdateEgressConfigSlot",
+        "operationId": "WebApps_CreateOrUpdateEgressConfigSlot",
         "tags": [
           "WebApps"
         ],
         "summary": "Creates or replaces the egress configuration for a deployment slot.",
-        "description": "Creates or replaces the egress configuration for a deployment slot.",
+        "description": "Creates or replaces the egress configuration for a deployment slot. The\nsupplied connections replace the stored ones in full, so connections\nomitted from the request are deleted; omitting connections entirely, or\nsupplying an empty object, deletes the configuration for the slot. Returns\n201 when no configuration was stored for the slot beforehand and 200\notherwise, with the stored configuration in the response body.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -22989,25 +22856,17 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "Configure Virtual Connections on a deployment slot": {
-            "$ref": "./examples/SlotEgressConfig_CreateOrUpdate_SourceScenario.json"
-          },
-          "Create or replace egress configuration for a slot": {
-            "$ref": "./examples/SlotEgressConfig_CreateOrUpdate.json"
-          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/egress/list": {
       "post": {
-        "operationId": "EgressConfigSlotConfigs_ListEgressConfigSlot",
+        "operationId": "WebApps_ListEgressConfigSlot",
         "tags": [
           "WebApps"
         ],
         "summary": "Gets the stored egress configuration for a deployment slot.",
-        "description": "Gets the stored egress configuration for a deployment slot.",
+        "description": "Gets the egress configuration stored for a deployment slot, including its\nconnections. Returns an empty configuration when none is stored.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -23046,17 +22905,12 @@
               "$ref": "#/definitions/DefaultErrorResponse"
             }
           }
-        },
-        "x-ms-examples": {
-          "List egress configuration for a deployment slot": {
-            "$ref": "./examples/SlotEgressConfig_List.json"
-          }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/config/egress:validate": {
       "post": {
-        "operationId": "EgressConfigSlotConfigs_ValidateEgressConfigSlot",
+        "operationId": "WebApps_ValidateEgressConfigSlot",
         "tags": [
           "WebApps"
         ],
@@ -23108,11 +22962,6 @@
             "schema": {
               "$ref": "#/definitions/DefaultErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Validate egress configuration for a slot": {
-            "$ref": "./examples/SlotEgressConfig_Validate.json"
           }
         }
       }
@@ -45557,37 +45406,40 @@
       "description": "Properties of the egress configuration.",
       "properties": {
         "enabled": {
-          "type": "string",
-          "description": "Whether virtual connections are enabled for this site.",
-          "default": "Disabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "EgressEnabledState",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "Virtual connections are enabled — proxy intercepts configured settings."
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "Virtual connections are disabled — all settings pass through unchanged."
-              }
-            ]
-          }
+          "$ref": "#/definitions/EgressEnabledState",
+          "description": "Whether virtual connections are enabled for this site."
         },
         "connections": {
           "type": "object",
-          "description": "All virtualized connections. Key is a customer-chosen connection name\n(e.g., \"sql\", \"cache\", \"storage\"). Maximum 50 connections per site.",
+          "description": "All virtualized connections. Key is a customer-chosen connection name\n(e.g., \"sql\", \"cache\", \"storage\") of at most 256 characters, which must not\nend in whitespace and must be unique within the site regardless of casing.\n\nThis collection is authoritative: a write replaces the stored connections in\nfull, and omitting it (or supplying an empty object) deletes the egress\nconfiguration for the site.",
           "additionalProperties": {
             "$ref": "#/definitions/VirtualConnection"
           }
         }
+      }
+    },
+    "EgressEnabledState": {
+      "type": "string",
+      "description": "Enabled state for virtual connections.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "EgressEnabledState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Virtual connections are enabled — proxy intercepts configured settings."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Virtual connections are disabled — all settings pass through unchanged."
+          }
+        ]
       }
     },
     "EnabledConfig": {
@@ -57529,7 +57381,7 @@
       "properties": {
         "settings": {
           "type": "object",
-          "description": "Settings that compose this connection. Key is the app setting\n(or connection string) name; value describes its role in the connection.\nMaximum 10 settings per connection.",
+          "description": "Settings that compose this connection. Key is the app setting\n(or connection string) name; value describes its role in the connection.",
           "additionalProperties": {
             "$ref": "#/definitions/VirtualConnectionSetting"
           }

@@ -124,6 +124,22 @@ directive:
     reason: >-
       Connection names and setting names are arbitrary customer-chosen keys and cannot be represented as a fixed set of
       model properties. These dictionaries retain typed values for each customer-defined key.
+  - suppress: AllProxyResourcesShouldHaveDelete
+    from: openapi.json
+    where:
+      - $.definitions.EgressConfig
+    reason: >-
+      egress is a Microsoft.Web sites/config singleton whose lifetime is bound to the parent site. It is cleared by
+      writing an empty configuration with PUT rather than deleted, consistent with the other sites/config singletons
+      such as authsettingsV2.
+  - suppress: AllResourcesMustHaveGetOperation
+    from: openapi.json
+    where:
+      - $.definitions.EgressConfig
+    reason: >-
+      egress carries connection secrets, so the stored configuration is read through the POST list action, which is
+      gated separately from read access. The GET on the singleton is intentionally not exposed, consistent with the
+      other secret-bearing sites/config singletons such as appsettings, connectionstrings and authsettings.
   - suppress: PathForResourceAction
     from: openapi.json
     where:
