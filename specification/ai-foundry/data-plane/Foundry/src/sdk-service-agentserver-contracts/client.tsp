@@ -254,6 +254,17 @@ namespace Azure.AI.Projects {
     }
   );
 
+  @@withoutOmittedProperties(
+    OpenAI.ResponseUsageInputTokensDetails,
+    "cache_write_tokens"
+  );
+  @@copyProperties(
+    OpenAI.ResponseUsageInputTokensDetails,
+    {
+      cache_write_tokens?: integer,
+    }
+  );
+
   // Avoid Markdown list formatting that produces an invalid Python docstring.
   @@doc(
     OpenAI.Response.output,
