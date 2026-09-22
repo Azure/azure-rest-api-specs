@@ -1,0 +1,47 @@
+name: SDK Breaking Change Analysis - Publish Results
+
+on:
+  workflow_run:
+    workflows: ["SDK Breaking Change Analysis - Analyze"]
+    types: [completed]
+
+permissions:
+  actions: read
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  publish-results:
+    if: >-
+      github.event.workflow_run.conclusion == 'success' ||
+      github.event.workflow_run.conclusion == 'failure'
+    runs-on: ubuntu-slim
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          sparse-checkout: |
+            .github
+          persist-credentials: false
+
+      - name: Install dependencies for github-script actions
+        uses: ./.github/actions/install-deps-github-script
+
+      - name: Download SDK analysis results
+        uses: actions/download-artifact@v8
+        with:
+          name: sdk-breaking-change-results
+          path: ${{ runner.temp }}/sdk-breaking-change-results
+          github-token: ${{ github.token }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: Publish SDK breaking-change analysis result
+        uses: actions/github-script@v9
+        env:
+          RESULTS_PATH: ${{ runner.temp }}/sdk-breaking-change-results
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const { publishAnalysisResult } =
+              await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change/publish-analysis-result.ts');
+            await publishAnalysisResult({ github, context, core });

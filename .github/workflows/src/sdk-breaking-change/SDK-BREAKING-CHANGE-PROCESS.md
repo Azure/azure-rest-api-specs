@@ -25,7 +25,11 @@ downstream SDK repositories, avoid back-and-forth across repos and stages
    `SDK breaking change analysis` workflow:
 
 - Analyzes the detected SDK breaking changes.
-- Posts the analysis to the pull request, as shown in the following example:
+- Publishes the analysis result artifact.
+
+4. When the analysis workflow completes successfully, the
+   `SDK Breaking Change - Publish Results` workflow posts the analysis to the pull request, as
+   shown in the following example:
 
 ```markdown
 ## SDK Breaking changes for Go
