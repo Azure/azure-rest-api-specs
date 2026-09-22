@@ -19,6 +19,19 @@ words:
   - logprobs
   - dedup
 overrides:
+  # Fine-tuning algorithms, SDK tooling, and preserved preview documentation.
+  - filename:
+    - '**/specification/ai-foundry/data-plane/Foundry/src/session-finetuning/**'
+    - '**/specification/ai-foundry/data-plane/Foundry/src/sdk-python-azure-ai-finetuningsessions/**'
+    words:
+      - CISPO # Clipped Importance-Sampled Policy Optimization
+      - initialisation
+      - regularisation
+      - SAPO # Soft Adaptive Policy Optimization
+      - serialised
+      - TCGC # TypeSpec Client Generator Core
+      - Tokenised
+      - topk
   # OpenAI related terms
   - filename:
     - '**/specification/ai-foundry/data-plane/Foundry/src/openai/**'

@@ -18,7 +18,8 @@ op FineTuningSessionOperation<
   Params extends Reflection.Model,
   Response
 > is FoundryOperation<
-  Params & WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.finetuning_sessions_v1_preview>,
+  Params &
+    WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.finetuning_sessions_v1_preview>,
   Response
 >;
 
@@ -33,6 +34,7 @@ interface FineTuningSessions {
    * The response contains a single session identifier and a request identifier
    * to poll for session initialization.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Session creation preserves POST with HTTP 200 and a request identifier for manual polling, not HTTP 201 resource creation or HTTP 202 Azure LRO."
   @post
   @summary("Create a fine-tuning session")
   create is FineTuningSessionOperation<
@@ -44,6 +46,7 @@ interface FineTuningSessions {
   >;
 
   /** List fine-tuning sessions in this project using offset-based pagination. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Session listing preserves offset-based pagination and the existing response envelope rather than the standard resource-list contract."
   @get
   @list
   @summary("List fine-tuning sessions")
@@ -63,6 +66,7 @@ interface FineTuningSessions {
   >;
 
   /** Get information about a specific fine-tuning session. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Session retrieval preserves the fixed /fine_tuning/sessions/{sessionId} GET route and existing session representation rather than a standard resource template."
   @get
   @route("{sessionId}")
   @summary("Get a fine-tuning session")
@@ -78,6 +82,7 @@ interface FineTuningSessions {
    * Delete a fine-tuning session and mark its associated resources for cleanup.
    * Repeating deletion for an already-deleted session returns HTTP 200.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Session deletion is idempotent and returns HTTP 200 with a JSON response, including repeated deletion, rather than HTTP 204."
   @delete
   @route("{sessionId}")
   @summary("Delete a fine-tuning session")
@@ -94,6 +99,7 @@ interface FineTuningSessions {
    * Unsaved in-memory LoRA weights are lost; save a checkpoint first.
    * Poll the returned request identifier to track completion.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Session unload preserves POST to the fixed session completion route with HTTP 200 and a request identifier for manual polling, not an Azure LRO."
   @post
   @route("{sessionId}/complete")
   @summary("Unload a fine-tuning session")
@@ -109,6 +115,7 @@ interface FineTuningSessions {
    * Refresh an active session to prevent idle expiry.
    * Returns 404 if the session is not found.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Session heartbeat preserves the fixed /fine_tuning/sessions/{sessionId}/heartbeat POST action with an HTTP 200 response."
   @post
   @route("{sessionId}/heartbeat")
   @summary("Session heartbeat")
@@ -132,6 +139,7 @@ interface Training {
    * Gradients accumulate until an optimizer step is issued.
    * Poll the returned request identifier for the result.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Forward-backward training preserves POST to the session-scoped forward_backward path with HTTP 200 and a request identifier for manual polling, not an Azure LRO."
   @post
   @route("forward_backward")
   @summary("Forward and backward pass")
@@ -150,6 +158,7 @@ interface Training {
    * Submit a mini-batch for a forward-only pass without accumulating gradients.
    * Poll the returned request identifier for the result.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Forward-only training preserves POST to the session-scoped forward path with HTTP 200 and a request identifier for manual polling, not an Azure LRO."
   @post
   @route("forward")
   @summary("Forward-only pass")
@@ -168,6 +177,7 @@ interface Training {
    * Apply accumulated gradients to the LoRA weights using the Adam optimizer.
    * Poll the returned request identifier for the result.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The optimizer step preserves POST to the session-scoped optim_step path with HTTP 200 and a request identifier for manual polling, not an Azure LRO."
   @post
   @route("optim_step")
   @summary("Optimizer step")
@@ -193,6 +203,7 @@ interface Checkpoints {
    * Save a training checkpoint containing LoRA weights and optimizer state.
    * Poll the returned request identifier for the result.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Saving a training checkpoint preserves the session-scoped checkpoint POST action with HTTP 200 and a request identifier for manual polling, not an Azure LRO."
   @post
   @route("checkpoint")
   @summary("Save a training checkpoint")
@@ -211,6 +222,7 @@ interface Checkpoints {
    * Save sampler-compatible weights without optimizer state for generation.
    * Poll the returned request identifier before sampling from the checkpoint.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Saving sampler weights preserves the session-scoped checkpoint_sample POST action with HTTP 200 and a request identifier for manual polling, not an Azure LRO."
   @post
   @route("checkpoint_sample")
   @summary("Save sampler weights")
@@ -226,6 +238,7 @@ interface Checkpoints {
   >;
 
   /** List all training and sampler checkpoints for this session in a single page. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Checkpoint listing preserves a flat list in one response without pagination rather than a standard paged resource-list contract."
   @get
   @list
   @route("checkpoints")
@@ -239,6 +252,7 @@ interface Checkpoints {
   >;
 
   /** Get metadata for a specific checkpoint. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Checkpoint retrieval preserves the fixed /fine_tuning/sessions/{sessionId}/checkpoints/{checkpointId} GET route and existing checkpoint metadata representation."
   @get
   @route("checkpoints/{checkpointId}")
   @summary("Get checkpoint info")
@@ -265,6 +279,7 @@ interface Sampling {
    * The sampler-weights save request must have completed before sampling.
    * Poll the returned request identifier for the result.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Sampling preserves the session-scoped sample POST action, required checkpoint_id query, and HTTP 200 request identifier for manual polling, not an Azure LRO."
   @post
   @route("sample")
   @summary("Generate completions")
@@ -294,6 +309,7 @@ interface Operations {
    * Returns HTTP 200 with status pending while processing, completed with the
    * raw result on success, or failed with error details on failure.
    */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Request polling preserves HTTP 200 with custom pending, completed, or failed payloads at the fixed session request route, not the Azure LRO status protocol."
   @get
   @summary("Poll request status")
   get is FineTuningSessionOperation<

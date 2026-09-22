@@ -17,8 +17,13 @@ model ApiErrorResponse {
 @@copyProperties(
   OpenAI.Error,
   {
+    /** Additional errors that contributed to this failure. */
     details?: OpenAI.Error[],
+
+    /** Additional structured information about the failure. */
     additionalInfo?: Record<unknown>,
+
+    /** Diagnostic information supplied by the service for troubleshooting. */
     debugInfo?: Record<unknown>,
   }
 );

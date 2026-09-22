@@ -2,6 +2,8 @@ import "./service.tsp";
 
 namespace Azure.AI.Projects.SessionFineTuning;
 
+// clientName decorators are C#-only; Python and the wire/service contract are unchanged.
+
 // ─── Enums ────────────────────────────────────────────────────────────────────
 
 /**
@@ -12,12 +14,16 @@ namespace Azure.AI.Projects.SessionFineTuning;
  */
 union FineTuningSessionStatus {
   string,
+
   /** Session has been created and is waiting for the GPU engine. */
   queued: "queued",
+
   /** Session is loaded and actively processing requests. */
   running: "running",
+
   /** Session completed successfully. */
   succeeded: "succeeded",
+
   /**
    * Session ended in a non-success terminal state (engine death, expiry,
    * or unrecoverable failure). Any in-memory weights are lost.
@@ -28,14 +34,19 @@ union FineTuningSessionStatus {
 /** Supported loss functions for forward-backward passes. */
 union FineTuningLossFn {
   string,
+
   /** Standard language-model cross-entropy loss. */
   cross_entropy: "cross_entropy",
+
   /** REINFORCE-style importance-sampled policy gradient loss. */
   importance_sampling: "importance_sampling",
+
   /** PPO (Proximal Policy Optimization) clipped surrogate loss. */
   ppo: "ppo",
+
   /** Clipped Importance-Sampled Policy Optimization (CISPO) loss. */
   cispo: "cispo",
+
   /** Soft Adaptive Policy Optimization (SAPO) loss. */
   sapo: "sapo",
 }
@@ -43,8 +54,10 @@ union FineTuningLossFn {
 /** Fine-tuning checkpoint type. */
 union FineTuningCheckpointType {
   string,
+
   /** Full training checkpoint (optimizer state + LoRA weights). */
   training: "training",
+
   /** Sampler-compatible weights snapshot (no optimizer state). */
   sampler: "sampler",
 }
@@ -52,6 +65,7 @@ union FineTuningCheckpointType {
 /** Fine-tuning session type. */
 union FineTuningSessionType {
   string,
+
   /** A training session for fine-tuning a model. */
   training: "training",
 }
@@ -59,10 +73,13 @@ union FineTuningSessionType {
 /** Training tiers available for fine-tuning sessions. */
 union FineTuningTrainingType {
   string,
+
   /** Standard training using globally available capacity. */
   GlobalStandard: "GlobalStandard",
+
   /** Standard training constrained to the applicable data zone. */
   DatazoneStandard: "DatazoneStandard",
+
   /** Developer-tier training, subject to service eligibility. */
   DeveloperTier: "DeveloperTier",
 }
@@ -70,10 +87,13 @@ union FineTuningTrainingType {
 /** Supported encodings for an image supplied as model input. */
 union FineTuningImageFormat {
   string,
+
   /** JPEG image encoding. */
   jpeg: "jpeg",
+
   /** PNG image encoding. */
   png: "png",
+
   /** WebP image encoding. */
   webp: "webp",
 }
@@ -117,6 +137,7 @@ model FineTuningImageChunk {
 union FineTuningInputChunk {
   /** A contiguous sequence of text tokens. */
   text: FineTuningModelInputChunk,
+
   /** An encoded image. */
   image: FineTuningImageChunk,
 }
@@ -191,10 +212,10 @@ model AdamParams {
  */
 union FineTuningStopCriteria {
   /** Stop when any of these token IDs is produced. */
-  stop_token_ids: int32[];
+  stop_token_ids: int32[],
 
   /** Stop when any of these strings appears in the output. */
-  stop_strings: string[];
+  stop_strings: string[],
 }
 
 /** Token-generation sampling parameters. */
@@ -282,6 +303,7 @@ model FineTuningPendingOperation {
 /** Identifies an accepted training request and its fine-tuning session. */
 model FineTuningActionOperation {
   ...FineTuningPendingOperation;
+
   /** Identifier of the session processing this request. */
   @visibility(Lifecycle.Read)
   session_id: string;
@@ -297,6 +319,7 @@ model FineTuningRequestStatus {
 }
 
 /** A request that is still being processed. */
+@Azure.ClientGenerator.Core.clientName("PendingFineTuningContent", "csharp")
 model PendingFineTuningRequest extends FineTuningRequestStatus {
   /** Indicates that the request has not yet completed. */
   status: "pending";
@@ -306,6 +329,7 @@ model PendingFineTuningRequest extends FineTuningRequestStatus {
 }
 
 /** A request that completed successfully. */
+@Azure.ClientGenerator.Core.clientName("CompletedFineTuningContent", "csharp")
 model CompletedFineTuningRequest extends FineTuningRequestStatus {
   /** Indicates that the request completed successfully. */
   status: "completed";
@@ -315,6 +339,7 @@ model CompletedFineTuningRequest extends FineTuningRequestStatus {
 }
 
 /** A request that failed during processing. */
+@Azure.ClientGenerator.Core.clientName("FailedFineTuningContent", "csharp")
 model FailedFineTuningRequest extends FineTuningRequestStatus {
   /** Indicates that the request failed. */
   status: "failed";
@@ -381,8 +406,10 @@ model FineTuningSessionSummary {
 
   /** Whether the session uses a LoRA adapter. */
   is_lora: boolean;
+
   /** LoRA rank, if applicable. */
   lora_rank?: int32 | null;
+
   /** Indicates whether the session state is corrupted and cannot be resumed. */
   corrupted: boolean;
 
@@ -395,8 +422,10 @@ model FineTuningSessionSummary {
 model FineTuningCursor {
   /** Zero-based index of the first item in the current page. */
   offset: int32;
+
   /** Maximum number of items per page. */
   limit: int32;
+
   /** Total number of items across all pages. */
   total_count: int32;
 }
@@ -455,6 +484,10 @@ model FineTuningFromCheckpoint {
 }
 
 /** Request body for POST /fine_tuning/sessions. */
+@Azure.ClientGenerator.Core.clientName(
+  "CreateFineTuningSessionContent",
+  "csharp"
+)
 model CreateFineTuningSessionRequest {
   /** The session type. */
   type: FineTuningSessionType;
@@ -482,6 +515,10 @@ model CreateFineTuningSessionRequest {
  * Response from POST /fine_tuning/sessions.
  * Poll the returned request identifier to track session initialization.
  */
+@Azure.ClientGenerator.Core.clientName(
+  "CreateFineTuningSessionResult",
+  "csharp"
+)
 model CreateFineTuningSessionResponse {
   /** Identifier of the newly created fine-tuning session. */
   session_id: string;
@@ -524,6 +561,7 @@ model ForwardBackwardInput {
 }
 
 /** Request body for POST /fine_tuning/sessions/{sessionId}/forward_backward. */
+@Azure.ClientGenerator.Core.clientName("ForwardBackwardContent", "csharp")
 model ForwardBackwardRequest {
   /** Batch inputs for the combined forward and backward pass. */
   forward_backward_input: ForwardBackwardInput;
@@ -538,18 +576,21 @@ model ForwardInput {
 }
 
 /** Request body for POST /fine_tuning/sessions/{sessionId}/forward. */
+@Azure.ClientGenerator.Core.clientName("ForwardContent", "csharp")
 model ForwardRequest {
   /** Batch inputs for the forward-only pass. */
   forward_input: ForwardInput;
 }
 
 /** Request body for POST /fine_tuning/sessions/{sessionId}/optim_step. */
+@Azure.ClientGenerator.Core.clientName("OptimStepContent", "csharp")
 model OptimStepRequest {
   /** Adam optimizer parameters used to apply accumulated gradients. */
   adam_params: AdamParams;
 }
 
 /** Request body for POST /fine_tuning/sessions/{sessionId}/checkpoint. */
+@Azure.ClientGenerator.Core.clientName("SaveCheckpointContent", "csharp")
 model SaveCheckpointRequest {
   /**
    * User-supplied checkpoint identifier.
@@ -572,6 +613,7 @@ model SaveCheckpointRequest {
  * Supply either path or both sampling_session_seq_id and seq_id. The service
  * validates this requirement at runtime.
  */
+@Azure.ClientGenerator.Core.clientName("SaveSamplerWeightsContent", "csharp")
 model SaveSamplerWeightsRequest {
   /** Explicit sampler checkpoint identifier. Required unless both sequence identifiers are supplied. */
   @pattern("^[a-zA-Z0-9_-]+$")
@@ -589,6 +631,7 @@ model SaveSamplerWeightsRequest {
 }
 
 /** Request body for POST /fine_tuning/sessions/{sessionId}/sample. */
+@Azure.ClientGenerator.Core.clientName("FineTuningSampleContent", "csharp")
 model FineTuningSampleRequest {
   /** Number of independent completions to generate. Default 1. */
   num_samples?: int32 = 1;
@@ -634,6 +677,7 @@ model FineTuningCheckpointList {
 }
 
 /** Response from POST /fine_tuning/sessions/{sessionId}/complete. */
+@Azure.ClientGenerator.Core.clientName("FineTuningCompleteResult", "csharp")
 model FineTuningCompleteResponse {
   /** Identifier of the session being unloaded. */
   session_id: string;
@@ -643,6 +687,10 @@ model FineTuningCompleteResponse {
 }
 
 /** Response from DELETE /fine_tuning/sessions/{sessionId}. */
+@Azure.ClientGenerator.Core.clientName(
+  "FineTuningDeleteSessionResult",
+  "csharp"
+)
 model FineTuningDeleteSessionResponse {
   /** Identifier of the session targeted for deletion. */
   session_id: string;
@@ -655,6 +703,7 @@ model FineTuningDeleteSessionResponse {
 }
 
 /** Response from POST /fine_tuning/sessions/{sessionId}/heartbeat. */
+@Azure.ClientGenerator.Core.clientName("FineTuningHeartbeatResult", "csharp")
 model FineTuningHeartbeatResponse {
   /** Identifier of the session whose heartbeat was refreshed. */
   session_id: string;

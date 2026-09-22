@@ -11,7 +11,10 @@ options:
     namespace: azure.ai.finetuningsessions
     flavor: azure
     package-version: "1.0.0b1"
-    generate-packaging-files: false
+    # SDK validation starts from main, where this new package does not exist.
+    # Emit installable metadata in clean outputs; public packaging customizations
+    # remain checked in and are not replaced by the reproducibility verifier.
+    generate-packaging-files: true
   "@azure-tools/typespec-client-generator-cli":
     additionalDirectories:
       - "specification/ai-foundry/data-plane/Foundry/src/session-finetuning/"

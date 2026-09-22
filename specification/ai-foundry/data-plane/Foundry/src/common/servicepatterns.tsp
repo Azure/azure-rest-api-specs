@@ -220,7 +220,10 @@ alias PageLimitQueryParameter = {
 
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "PageOrder is the two directions of ordering by created_at (ascending or descending); this value set is inherently immutable."
 union PageOrder {
+  /** Return items in ascending creation-time order. */
   "asc",
+
+  /** Return items in descending creation-time order. */
   "desc",
 }
 
