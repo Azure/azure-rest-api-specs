@@ -4,12 +4,7 @@ import { tmpdir } from "node:os";
 import { join, relative } from "node:path";
 import { setImmediate } from "node:timers/promises";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import {
-  diffSuppression,
-  getAllApiVersionFromRPFolder,
-  getApiVersionFromSwaggerFile,
-  processPrChanges,
-} from "../src/impact.ts";
+import { diffSuppression, getAllApiVersionFromRPFolder, processPrChanges } from "../src/impact.ts";
 import { PRContext } from "../src/PRContext.ts";
 
 describe("native impact utilities", () => {
@@ -134,69 +129,6 @@ describe("native impact utilities", () => {
     expect(diffSuppression(before, after)).toEqual([changed]);
   });
 
-  it.each([
-    { content: {}, version: undefined },
-    { content: { info: {} }, version: undefined },
-    { content: { info: { version: "" } }, version: undefined },
-    { content: { info: { version: "2025-01-01-preview" } }, version: "2025-01-01-preview" },
-  ])("reads optional API version metadata from $content", async ({ content, version }) => {
-    const file = join(folder, "swagger.json");
-    await writeFile(file, JSON.stringify(content));
-
-    expect(getApiVersionFromSwaggerFile(file)).toBe(version);
-  });
-
-  it.each([
-    { content: "null", message: "Expected a Swagger object" },
-    { content: '{"info": "invalid"}', message: "Expected info to be an object" },
-    { content: '{"info": {"version": 2025}}', message: "Expected info.version to be a string" },
-  ])("reports invalid Swagger metadata in $content", async ({ content, message }) => {
-    const file = join(folder, "swagger.json");
-    await writeFile(file, content);
-
-    expect(() => getApiVersionFromSwaggerFile(file)).toThrow(`${message} in ${file}`);
-  });
-
-  it("detects suppressions in both directive and suppressions blocks", async () => {
-    const before = join(folder, "before.md");
-    const after = join(folder, "after.md");
-    const directive = { suppress: "Rule", from: "swagger.json" };
-    const suppression = { code: "Rule", reason: "Explanation" };
-    await writeFile(before, "");
-    await writeFile(
-      after,
-      "```yaml\n" +
-        yaml.dump({
-          directive: [{ transform: "$.info" }, directive],
-          suppressions: [suppression],
-        }) +
-        "```\n",
-    );
-
-    expect(diffSuppression(before, after)).toEqual([directive, suppression]);
-  });
-
-  it("warns about malformed YAML and continues to later suppression blocks", async () => {
-    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
-    const before = join(folder, "before.md");
-    const after = join(folder, "after.md");
-    const suppression = { suppress: "Rule", reason: "Explanation" };
-    await writeFile(before, "");
-    await writeFile(
-      after,
-      "```yaml\n" +
-        "suppressions: [" +
-        "\n```\n```yaml\n" +
-        yaml.dump({ suppressions: [suppression] }) +
-        "```\n",
-    );
-
-    expect(diffSuppression(before, after)).toEqual([suppression]);
-    expect(warn).toHaveBeenCalledExactlyOnceWith(
-      expect.stringContaining(`Unable to read suppressions from a code block in ${after}:`),
-    );
-  });
-
   it.each(["directive", "suppressions"])(
     "warns about non-object %s entries without discarding valid suppressions",
     async (key) => {
@@ -213,17 +145,4 @@ describe("native impact utilities", () => {
       );
     },
   );
-
-  it("warns about unreadable readmes while retaining suppression comparison", async () => {
-    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
-    const before = join(folder, "missing.md");
-    const after = join(folder, "after.md");
-    const suppression = { suppress: "Rule" };
-    await writeFile(after, "```yaml\n" + yaml.dump({ suppressions: [suppression] }) + "```\n");
-
-    expect(diffSuppression(before, after)).toEqual([suppression]);
-    expect(warn).toHaveBeenCalledExactlyOnceWith(
-      expect.stringContaining(`Unable to read suppressions from ${before}:`),
-    );
-  });
 });

@@ -180,32 +180,10 @@ export function getAllApiVersionFromRPFolder(rpFolder: string): string[] {
 }
 
 export function getApiVersionFromSwaggerFile(swaggerFile: string): string | undefined {
-  const version = readSwaggerInfo(swaggerFile)?.version;
-  if (!version) {
-    return undefined;
-  }
-  if (typeof version !== "string") {
-    throw new Error(`Expected info.version to be a string in ${swaggerFile}`);
-  }
-  return version;
-}
-
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === "object" && value !== null && !Array.isArray(value);
-}
-
-function readSwaggerInfo(swaggerFile: string): Record<string, unknown> | undefined {
-  const swagger: unknown = JSON.parse(readFileSync(swaggerFile, "utf8"));
-  if (!isRecord(swagger)) {
-    throw new Error(`Expected a Swagger object in ${swaggerFile}`);
-  }
-  if (!swagger.info) {
-    return undefined;
-  }
-  if (!isRecord(swagger.info)) {
-    throw new Error(`Expected info to be an object in ${swaggerFile}`);
-  }
-  return swagger.info;
+  const swagger = JSON.parse(readFileSync(swaggerFile, "utf8")) as {
+    info?: { version?: string };
+  };
+  return swagger.info?.version || undefined;
 }
 
 export function getRPFolderFromSwaggerFile(swaggerFile: string): string | undefined {
@@ -290,7 +268,10 @@ async function processTypeSpec(ctx: PRContext, labelContext: LabelContext): Prom
 
 function isSwaggerGeneratedByTypeSpec(swaggerFilePath: string): boolean {
   try {
-    return Boolean(readSwaggerInfo(swaggerFilePath)?.["x-typespec-generated"]);
+    const swagger = JSON.parse(readFileSync(swaggerFilePath, "utf8")) as {
+      info?: { "x-typespec-generated"?: unknown };
+    };
+    return Boolean(swagger.info?.["x-typespec-generated"]);
   } catch (error) {
     console.warn(`Unable to check TypeSpec generation for ${swaggerFilePath}: ${String(error)}`);
     return false;
@@ -471,6 +452,10 @@ async function processSuppression(context: PRContext, labelContext: LabelContext
   console.log("RETURN definition processSuppression");
 
   return suppressionReviewRequiredLabel.shouldBePresent;
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
 function getSuppressions(readmePath: string) {
