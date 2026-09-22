@@ -449,39 +449,38 @@ void test("groups REST contract deltas by schema identity and retains affected o
    * @param {string} operationId
    * @returns {AssessmentFact}
    */
-  const operation = (comparisonRole, operationId) =>
-    /** @type {AssessmentFact} */ (
-      /** @type {unknown} */ ({
-        comparisonRole,
-        operationId,
-        apiVersion: "v1",
-        method: "get",
-        path: "/widgets",
-        responses: [
-          {
-            status: "200",
-            headers: [],
-            schema: {
-              kind: "object",
-              properties:
-                comparisonRole === "baseline"
-                  ? [
-                      {
-                        name: "state",
-                        schema: {
-                          kind: "enum",
-                          type: "string",
-                          reference: "stable/v1.json#/definitions/WidgetState",
-                          values: ["Ready", "Deleted"],
-                        },
+  const operation = (comparisonRole, operationId) => /** @type {AssessmentFact} */ (
+    /** @type {unknown} */ ({
+      comparisonRole,
+      operationId,
+      apiVersion: "v1",
+      method: "get",
+      path: "/widgets",
+      responses: [
+        {
+          status: "200",
+          headers: [],
+          schema: {
+            kind: "object",
+            properties:
+              comparisonRole === "baseline"
+                ? [
+                    {
+                      name: "state",
+                      schema: {
+                        kind: "enum",
+                        type: "string",
+                        reference: "stable/v1.json#/definitions/WidgetState",
+                        values: ["Ready", "Deleted"],
                       },
-                    ]
-                  : [],
-            },
+                    },
+                  ]
+                : [],
           },
-        ],
-      })
-    );
+        },
+      ],
+    })
+  );
   /** @type {RestFindingFixture[]} */
   const findings = ["Widgets_Get", "Widgets_List"].map((operationId, index) => ({
     id: `rest-${index}`,
@@ -2022,7 +2021,7 @@ void test("five dimension cards retain the requested order without an overall qu
   assert.equal((header.match(/class="summary-card"/g) ?? []).length, 5);
   assert.match(
     html,
-    /@media\(min-width:1051px\)\{\.summary-grid\{grid-template-columns:repeat\(5,minmax\(0,1fr\)\)\}\}/,
+    /@media\s*\(min-width:\s*1051px\)\s*\{\s*\.summary-grid\s*\{\s*grid-template-columns:\s*repeat\(5,\s*minmax\(0,\s*1fr\)\);\s*\}\s*\}/,
   );
 });
 
@@ -2113,7 +2112,7 @@ void test("hero headings contain only an icon and title with counts in the detai
     if (noDocs) assert.match(docCard, /0 findings<br>0 descriptions assessed/);
     if (decision === "not-assessed") assert.match(docCard, /0 findings<br>0 descriptions assessed/);
     assert.doesNotMatch(docCard, /Not reviewed|Partially reviewed/);
-    assert.match(html, /\.summary-value\{white-space:nowrap\}/);
+    assert.match(html, /\.summary-value\s*\{\s*white-space:\s*nowrap;\s*\}/);
   }
 });
 
