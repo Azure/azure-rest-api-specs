@@ -149,7 +149,7 @@ model RubricScoring {
   @doc("Rubric-level scoring mode. Defaults to Boolean for new authoring.")
   mode?: RubricScoringMode = RubricScoringMode.boolean;
 
-  @doc("Whether rating dimensions contribute equally. Defaults to true. False enables custom relative weights for rating dimensions. Boolean scoring does not accept false. Must-pass dimensions never participate in the rating average.")
+  @doc("Whether rating dimensions contribute equally. Defaults to true. False enables custom relative weights for rating dimensions. Boolean scoring does not accept false.")
   equal_weighting?: boolean = true;
 }
 
@@ -186,7 +186,7 @@ model RubricDimensionExplanation {
   @minLength(1)
   rationale: string;
 
-  @doc("Why a custom rating weight was selected. Populated only when scoring.equal_weighting is false and must_pass is false. Omitted for equal weighting and Boolean gates.")
+  @doc("Why a custom rating weight was selected. Populated only when scoring.equal_weighting is false. Omitted for equal weighting and Boolean scoring.")
   @minLength(1)
   weight_rationale?: string;
 
@@ -204,10 +204,10 @@ model RubricDimensionExplanation {
 union RubricScoringDecision {
   string,
 
-  @doc("Applicable dimensions meet the selected quality rule and every applicable must-pass check is satisfied.")
+  @doc("Applicable dimensions meet the selected scoring rule.")
   pass: "pass",
 
-  @doc("The quality rule fails or at least one must-pass dimension is violated.")
+  @doc("The selected scoring rule fails.")
   fail: "fail",
 
   @doc("No quality dimension applies and no known failure establishes rejection.")
@@ -217,7 +217,7 @@ union RubricScoringDecision {
   indeterminate: "indeterminate",
 }
 
-@doc("Explainable scoring results for a rubric. A high rating cannot compensate for a failed must-pass dimension.")
+@doc("Explainable scoring results for a rubric. Boolean scoring requires every applicable check to pass; Likert scoring compares the weighted average with the threshold.")
 @added(Versions.v1)
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model RubricScoringResult {
@@ -240,10 +240,10 @@ model RubricScoringResult {
   @maxValue(1)
   quality_threshold?: float32;
 
-  @doc("Overall decision, including non-compensable must-pass dimensions.")
+  @doc("Overall decision from the selected scoring rule.")
   decision: RubricScoringDecision;
 
-  @doc("One result list for every dimension, including must-pass checks.")
+  @doc("One result list for every dimension, using the rubric's scoring mode.")
   dimension_results: RubricDimensionResult[];
 }
 
@@ -254,21 +254,18 @@ model RubricDimensionResult {
   @doc("The dimension identifier.")
   id: string;
 
-  @doc("Whether the dimension is a non-compensable Boolean gate.")
-  must_pass: boolean;
-
   @doc("Whether the dimension applies.")
   applicable: boolean;
 
   @doc("Known Boolean verdict. Absent for N/A or insufficient evidence and for rating dimensions.")
   passed?: boolean;
 
-  @doc("Applicable Likert grade. Absent for Boolean and must-pass dimensions.")
+  @doc("Applicable Likert grade. Absent for Boolean dimensions.")
   @minValue(1)
   @maxValue(5)
   raw_score?: int32;
 
-  @doc("Rating weight. Absent for Boolean and must-pass dimensions.")
+  @doc("Rating weight. Absent for Boolean dimensions.")
   @minValue(1)
   @maxValue(10)
   weight?: int32;
@@ -309,15 +306,6 @@ model Dimension {
   @maxValue(10)
   weight?: int32;
 
-  @doc("Whether this dimension is a non-compensable Boolean gate, including in Likert mode. Defaults to false. Must-pass dimensions do not accept a weight.")
-  @added(Versions.v1)
-  must_pass?: boolean = false;
-
-  @doc("Optional applicability condition for a must-pass dimension. Omission makes that gate unconditional; missing required behavior is failure, not N/A.")
-  @added(Versions.v1)
-  @minLength(1)
-  applies_when?: string;
-
   @doc("Optional authoring explanation. Generated for opted-in scoring; manual definitions may omit it.")
   @added(Versions.v1)
   explanation?: RubricDimensionExplanation;
@@ -334,14 +322,14 @@ model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
   @doc("The quality checks or grading criteria. Rating generation includes a service residual; Boolean generation does not inject a generic residual. Existing v1 and legacy definitions retain their behavior.")
   dimensions: Dimension[];
 
-  @doc("Quality threshold on the same normalized 0.0-1.0 scale as the emitted score. Defaults to 0.5, equivalent to a raw weighted grade of 3.0. Without a scoring policy, score >= threshold determines pass/fail; there is no implicit score-1 veto. With policy v1, explicit requirements must also be satisfied.")
+  @doc("Quality threshold on the same normalized 0.0-1.0 scale as the emitted score. Defaults to 0.5, equivalent to a raw weighted grade of 3.0. The score >= threshold determines pass/fail; there is no implicit score-1 veto.")
   @removed(Versions.v1)
   @renamedFrom(Versions.v1, "pass_threshold")
   @minValue(0.0)
   @maxValue(1.0)
   legacy_pass_threshold?: float32 = 0.5;
 
-  @doc("Optional rating threshold on the normalized 0-1 scale, interpreted as 0.5 when omitted. Boolean mode rejects this field. Must-pass dimensions remain independent acceptance gates.")
+  @doc("Optional rating threshold on the normalized 0-1 scale, interpreted as 0.5 when omitted. Boolean mode rejects this field.")
   @added(Versions.v1)
   @minValue(0.0)
   @maxValue(1.0)
@@ -475,7 +463,7 @@ model EvaluatorGenerationInputs {
   @added(Versions.v1)
   scoring?: RubricScoring;
 
-  @doc("Caller-approved dimensions to preserve while generating other checks. Include must_pass dimensions in this same list. Omission preserves prior approved dimensions on regeneration; an explicit list replaces the fixed set. Generation never invents must-pass gates.")
+  @doc("Caller-approved dimensions to preserve while generating other checks. All dimensions use the selected rubric scoring mode. Omission preserves prior approved dimensions on regeneration; an explicit list replaces the fixed set.")
   @added(Versions.v1)
   dimensions?: Dimension[];
 }

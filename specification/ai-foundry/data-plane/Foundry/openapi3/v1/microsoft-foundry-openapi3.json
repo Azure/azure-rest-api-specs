@@ -38395,16 +38395,6 @@
             "maximum": 10,
             "description": "Optional rating weight, interpreted as 1 when omitted. Boolean mode rejects weights, including an explicitly supplied 1. No schema default is emitted so SDKs do not insert rating settings into Boolean requests."
           },
-          "must_pass": {
-            "type": "boolean",
-            "description": "Whether this dimension is a non-compensable Boolean gate, including in Likert mode. Defaults to false. Must-pass dimensions do not accept a weight.",
-            "default": false
-          },
-          "applies_when": {
-            "type": "string",
-            "minLength": 1,
-            "description": "Optional applicability condition for a must-pass dimension. Omission makes that gate unconditional; missing required behavior is failure, not N/A."
-          },
           "explanation": {
             "$ref": "#/components/schemas/RubricDimensionExplanation",
             "description": "Optional authoring explanation. Generated for opted-in scoring; manual definitions may omit it."
@@ -40145,7 +40135,7 @@
             "items": {
               "$ref": "#/components/schemas/Dimension"
             },
-            "description": "Caller-approved dimensions to preserve while generating other checks. Include must_pass dimensions in this same list. Omission preserves prior approved dimensions on regeneration; an explicit list replaces the fixed set. Generation never invents must-pass gates."
+            "description": "Caller-approved dimensions to preserve while generating other checks. All dimensions use the selected rubric scoring mode. Omission preserves prior approved dimensions on regeneration; an explicit list replaces the fixed set."
           }
         },
         "description": "Caller-supplied inputs for an evaluator generation job.",
@@ -85073,7 +85063,7 @@
             "format": "float",
             "minimum": 0,
             "maximum": 1,
-            "description": "Optional rating threshold on the normalized 0-1 scale, interpreted as 0.5 when omitted. Boolean mode rejects this field. Must-pass dimensions remain independent acceptance gates."
+            "description": "Optional rating threshold on the normalized 0-1 scale, interpreted as 0.5 when omitted. Boolean mode rejects this field."
           },
           "scoring": {
             "$ref": "#/components/schemas/RubricScoring",
@@ -85106,7 +85096,7 @@
           "weight_rationale": {
             "type": "string",
             "minLength": 1,
-            "description": "Why a custom rating weight was selected. Populated only when scoring.equal_weighting is false and must_pass is false. Omitted for equal weighting and Boolean gates."
+            "description": "Why a custom rating weight was selected. Populated only when scoring.equal_weighting is false. Omitted for equal weighting and Boolean scoring."
           },
           "source_excerpt": {
             "type": "string",
@@ -85129,17 +85119,12 @@
         "type": "object",
         "required": [
           "id",
-          "must_pass",
           "applicable"
         ],
         "properties": {
           "id": {
             "type": "string",
             "description": "The dimension identifier."
-          },
-          "must_pass": {
-            "type": "boolean",
-            "description": "Whether the dimension is a non-compensable Boolean gate."
           },
           "applicable": {
             "type": "boolean",
@@ -85154,14 +85139,14 @@
             "format": "int32",
             "minimum": 1,
             "maximum": 5,
-            "description": "Applicable Likert grade. Absent for Boolean and must-pass dimensions."
+            "description": "Applicable Likert grade. Absent for Boolean dimensions."
           },
           "weight": {
             "type": "integer",
             "format": "int32",
             "minimum": 1,
             "maximum": 10,
-            "description": "Rating weight. Absent for Boolean and must-pass dimensions."
+            "description": "Rating weight. Absent for Boolean dimensions."
           },
           "effective_weight": {
             "type": "number",
@@ -85305,7 +85290,7 @@
           },
           "equal_weighting": {
             "type": "boolean",
-            "description": "Whether rating dimensions contribute equally. Defaults to true. False enables custom relative weights for rating dimensions. Boolean scoring does not accept false. Must-pass dimensions never participate in the rating average.",
+            "description": "Whether rating dimensions contribute equally. Defaults to true. False enables custom relative weights for rating dimensions. Boolean scoring does not accept false.",
             "default": true
           }
         },
@@ -85395,17 +85380,17 @@
           },
           "decision": {
             "$ref": "#/components/schemas/RubricScoringDecision",
-            "description": "Overall decision, including non-compensable must-pass dimensions."
+            "description": "Overall decision from the selected scoring rule."
           },
           "dimension_results": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/RubricDimensionResult"
             },
-            "description": "One result list for every dimension, including must-pass checks."
+            "description": "One result list for every dimension, using the rubric's scoring mode."
           }
         },
-        "description": "Explainable scoring results for a rubric. A high rating cannot compensate for a failed must-pass dimension.",
+        "description": "Explainable scoring results for a rubric. Boolean scoring requires every applicable check to pass; Likert scoring compares the weighted average with the threshold.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "Evaluations=V1Preview"
