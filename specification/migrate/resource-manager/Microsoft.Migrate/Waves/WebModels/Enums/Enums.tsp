@@ -119,17 +119,8 @@ union RunbookExecutionAction {
   @doc("Complete runbook execution step.")
   Complete: "Complete",
 
-  @doc("Fail runbook execution step.")
-  Fail: "Fail",
-
-  @doc("Skip runbook execution step.")
-  Skip: "Skip",
-
   @doc("Approve runbook execution step.")
   Approve: "Approve",
-
-  @doc("Reject runbook execution step.")
-  Reject: "Reject",
 
   string,
 }

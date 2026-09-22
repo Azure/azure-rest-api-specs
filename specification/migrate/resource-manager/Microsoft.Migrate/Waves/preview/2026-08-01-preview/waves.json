@@ -3873,20 +3873,6 @@
         }
       ]
     },
-    "MigrationEntityError": {
-      "type": "object",
-      "description": "Error details for a migration entity.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "Error code reported for the migration entity."
-        },
-        "message": {
-          "type": "string",
-          "description": "Error message reported for the migration entity."
-        }
-      }
-    },
     "MigrationEntityGroup": {
       "type": "object",
       "description": "Migration Entity Group resource.",
@@ -4045,10 +4031,6 @@
         "toolReportedMigrationStatus": {
           "type": "string",
           "description": "Migration status reported by the migration tool."
-        },
-        "error": {
-          "$ref": "#/definitions/MigrationEntityError",
-          "description": "Error details reported for the migration entity."
         }
       }
     },
@@ -4147,11 +4129,6 @@
           "description": "Migration status reported by the migration tool.",
           "readOnly": true
         },
-        "error": {
-          "$ref": "#/definitions/MigrationEntityError",
-          "description": "Error details reported for the migration entity.",
-          "readOnly": true
-        },
         "executionReadiness": {
           "type": "string",
           "description": "Execution Readiness of Migration Entity.",
@@ -4172,10 +4149,6 @@
         "assessedEntityArmId": {
           "type": "string",
           "description": "Assessed Entity ARM Id"
-        },
-        "migrationToolId": {
-          "type": "string",
-          "description": "Identifier of the migration tool used for the migration entity."
         },
         "executionMode": {
           "$ref": "#/definitions/ExecutionMode",
@@ -4445,10 +4418,7 @@
         "Cancel",
         "Retry",
         "Complete",
-        "Fail",
-        "Skip",
-        "Approve",
-        "Reject"
+        "Approve"
       ],
       "x-ms-enum": {
         "name": "RunbookExecutionAction",
@@ -4485,24 +4455,9 @@
             "description": "Complete runbook execution step."
           },
           {
-            "name": "Fail",
-            "value": "Fail",
-            "description": "Fail runbook execution step."
-          },
-          {
-            "name": "Skip",
-            "value": "Skip",
-            "description": "Skip runbook execution step."
-          },
-          {
             "name": "Approve",
             "value": "Approve",
             "description": "Approve runbook execution step."
-          },
-          {
-            "name": "Reject",
-            "value": "Reject",
-            "description": "Reject runbook execution step."
           }
         ]
       }
@@ -5547,7 +5502,8 @@
         },
         "executionMode": {
           "$ref": "#/definitions/ExecutionMode",
-          "description": "Execution mode for the migration process."
+          "description": "Execution mode for the migration process.",
+          "readOnly": true
         }
       },
       "required": [

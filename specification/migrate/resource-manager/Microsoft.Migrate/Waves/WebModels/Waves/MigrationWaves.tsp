@@ -56,6 +56,7 @@ model WaveProperties is AzureResourceProperties {
 
   @doc("Execution mode for the migration process.")
   @added(ApiVersions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
   executionMode?: ExecutionMode;
 }
 
