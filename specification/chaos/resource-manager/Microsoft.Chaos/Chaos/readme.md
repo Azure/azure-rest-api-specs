@@ -236,6 +236,32 @@ available for at least 24 hours after rotation. Do not assume immediate adoption
 of a new version. Customer-key protection applies to active data; it does not
 retroactively protect retained pre-enable copies.
 
+### Customer-data reads during restore
+
+During restore, operations that read Workspace customer data, including entity,
+existence, page, and key reads, can return HTTP 503 `ServiceUnavailable` with a
+positive numeric `Retry-After` header. Retry after that interval. Workspace
+metadata and operation-status reads remain available. Capture pauses writes;
+restore pauses customer-data reads and writes.
+
+For example, a service-selected retry interval of 10 seconds is returned as
+`Retry-After: 10`, with the existing standard Azure Resource Manager
+`ErrorResponse` body:
+
+```json
+{
+  "error": {
+    "code": "ServiceUnavailable",
+    "message": "Workspace customer data is temporarily unavailable while restore is in progress. Retry the request after the interval specified in the Retry-After header."
+  }
+}
+```
+
+The interval is retry guidance, not a restore completion guarantee. HEAD
+responses retain the status and retry header without a body. This read
+restriction does not itself change `provisioningState` or `encryption.status`
+and adds no public action, model, or permission.
+
 ### Workspace deletion
 
 Deletion uses the existing Workspace DELETE LRO. It closes admission for new
