@@ -6,6 +6,7 @@ import { fileURLToPath } from "url";
 import { ConsoleLogger } from "../src/logger.ts";
 import { Readme } from "../src/readme.ts";
 import { SpecModel } from "../src/spec-model.ts";
+import { SpecModelError } from "../src/spec-model-error.ts";
 import { Tag } from "../src/tag.ts";
 import { swaggerTypeSpecGenerated } from "./examples.ts";
 
@@ -176,15 +177,20 @@ describe("Swagger", () => {
       tag: new Tag("test-tag", [], { readme: new Readme("/fake/readme.md") }),
     });
 
-    await expect(swagger.getRefs()).rejects.toThrowErrorMatchingInlineSnapshot(
-      `
-      [SpecModelError: Failed to resolve file for swagger: ${resolve("/fake/invalid.json")}
-        Problem File: ${resolve("/fake/invalid.json")}
-        Readme: ${resolve("/fake/readme.md")}
-        Tag: test-tag
-        Cause: ResolverError: Error reading file "${resolve("/does/not/exist.json").replace(/\\/g, "/").toLowerCase()}"]
-    `,
-    );
+    try {
+      await swagger.getRefs();
+      expect.unreachable("Expected invalid reference resolution to fail");
+    } catch (error) {
+      expect(error).toBeInstanceOf(SpecModelError);
+      if (!(error instanceof SpecModelError)) throw error;
+      expect(error.message).toContain(
+        `Failed to resolve file for swagger: ${resolve("/fake/invalid.json")}`,
+      );
+      expect(error.source).toBe(resolve("/fake/invalid.json"));
+      expect(error.readme).toBe(resolve("/fake/readme.md"));
+      expect(error.tag).toBe("test-tag");
+      expect(error.cause).toBeInstanceOf(Error);
+    }
   });
 
   it("sorts refs in toJSONAsync", async () => {

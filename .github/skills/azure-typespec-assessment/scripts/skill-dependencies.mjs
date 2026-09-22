@@ -72,7 +72,7 @@ function expectedVersion(workspace) {
   let inDependencies = false;
   let currentDependency = "";
   for (const line of lines) {
-    const importerMatch = /^  (\S.*):\s*$/.exec(line);
+    const importerMatch = /^ {2}(\S.*):\s*$/.exec(line);
     if (importerMatch) {
       currentImporter = unquoteYamlScalar(importerMatch[1]);
       inDependencies = false;
@@ -85,19 +85,19 @@ function expectedVersion(workspace) {
       currentDependency = "";
       continue;
     }
-    if (/^    \S/.test(line)) {
+    if (/^ {4}\S/.test(line)) {
       inDependencies = false;
       currentDependency = "";
       continue;
     }
     if (!inDependencies) continue;
-    const dependencyMatch = /^      (\S.*):\s*$/.exec(line);
+    const dependencyMatch = /^ {6}(\S.*):\s*$/.exec(line);
     if (dependencyMatch) {
       currentDependency = unquoteYamlScalar(dependencyMatch[1]);
       continue;
     }
     if (currentDependency === REQUIRED_PACKAGE) {
-      const versionMatch = /^        version:\s*(\S.*)\s*$/.exec(line);
+      const versionMatch = /^ {8}version:\s*(\S.*)\s*$/.exec(line);
       if (versionMatch) return unquoteYamlScalar(versionMatch[1]);
     }
   }
