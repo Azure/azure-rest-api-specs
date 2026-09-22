@@ -99,7 +99,7 @@ using Microsoft.NetApp;
 
 @@clientName(
   Microsoft.NetApp.ReplicationSchedule._10minutely,
-  "$DO_NOT_NORMALIZE$\"10Minutely\"",
+  exact("\"10Minutely\""),
   "javascript"
 );
 

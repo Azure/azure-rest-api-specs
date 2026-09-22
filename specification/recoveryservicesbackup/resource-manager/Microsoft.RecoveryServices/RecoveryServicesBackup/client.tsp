@@ -3761,7 +3761,7 @@ op protectionPolicyOperationStatusesGet(
 // JavaScript backward compatibility with the last stable SDK.
 @@clientLocation(
   BMSPrepareDataMoveOperationResult.get,
-  "$DO_NOT_NORMALIZE$bMSPrepareDataMoveOperationResult",
+  exact("bMSPrepareDataMoveOperationResult"),
   "javascript"
 );
 @@clientLocation(

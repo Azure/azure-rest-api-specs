@@ -207,11 +207,7 @@ using TypeSpec.Versioning;
   "errorDetailsTimestamp",
   "csharp,javascript"
 );
-@@clientName(
-  Versions.`2024-10-01`,
-  "$DO_NOT_NORMALIZE$V2024-10-01",
-  "javascript"
-);
+@@clientName(Versions.`2024-10-01`, exact("V2024-10-01"), "javascript");
 @@clientName(
   DeleteResourceOperationResponse,
   "DeleteResourceOperationResult",
