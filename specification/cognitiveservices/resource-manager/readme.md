@@ -68,6 +68,16 @@ suppressions:
       - $.definitions.RaiAcsManifest.properties.tools
       - $.definitions.RaiAcsToolDefinition
   - code: PutResponseCodes
+    reason: AdapterDeployment PUT returns 202 Accepted with the resource body and polling headers, as confirmed by the service owner. The final resource is retrieved with GET at the original URI; declaring 201 instead causes generated SDKs to reject successful backend responses.
+    from: cognitiveservices.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/adapterDeployments/{adapterDeploymentName}"].put
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: AdapterDeployment PUT returns 202 rather than 201. The 200 and 202 response schemas include provisioningState; the service does not return the 201 response this rule requires.
+    from: cognitiveservices.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/adapterDeployments/{adapterDeploymentName}"].put
+  - code: PutResponseCodes
     reason: Compute create is a genuine long-running async operation - the service returns 202 Accepted on success (never 200/201) and 4xx on failure. Modeling 202-only reflects the real backend contract (live-validated). Preview-only bug fix correcting the contract before GA.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/computes/{computeName}"].put

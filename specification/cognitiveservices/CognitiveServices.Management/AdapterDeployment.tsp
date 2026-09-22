@@ -67,8 +67,25 @@ interface AdapterDeployments {
   /**
    * Creates an adapter deployment or re-targets it to another compatible
    * managed compute deployment. The source model ID is immutable.
+   * After polling completes, retrieve the final resource from the original resource URL.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<AdapterDeployment>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Adapter deployment PUT returns 202 Accepted with the resource body, matching the existing backend contract."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Adapter deployment PUT includes the current resource in its 202 Accepted response."
+  @Azure.Core.useFinalStateVia("original-uri")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    AdapterDeployment,
+    Response =
+      | ArmResourceUpdatedResponse<AdapterDeployment>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = AdapterDeployment> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          /** The concurrency token for the accepted adapter deployment. */
+          @header("ETag")
+          etag?: string;
+
+          @bodyRoot
+          _: AdapterDeployment;
+        })
+  >;
 
   /**
    * Lists adapter deployments associated with the Cognitive Services account.

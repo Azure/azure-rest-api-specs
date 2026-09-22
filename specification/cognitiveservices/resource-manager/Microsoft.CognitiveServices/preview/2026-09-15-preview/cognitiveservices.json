@@ -2137,7 +2137,7 @@
         "tags": [
           "AdapterDeployments"
         ],
-        "description": "Creates an adapter deployment or re-targets it to another compatible\nmanaged compute deployment. The source model ID is immutable.",
+        "description": "Creates an adapter deployment or re-targets it to another compatible\nmanaged compute deployment. The source model ID is immutable.\nAfter polling completes, retrieve the final resource from the original resource URL.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -2183,15 +2183,24 @@
               "$ref": "#/definitions/AdapterDeployment"
             }
           },
-          "201": {
-            "description": "Resource 'AdapterDeployment' create operation succeeded",
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
             "schema": {
               "$ref": "#/definitions/AdapterDeployment"
             },
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "ETag": {
+                "type": "string",
+                "description": "The concurrency token for the accepted adapter deployment."
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -2213,7 +2222,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/AdapterDeployment"
         },
         "x-ms-long-running-operation": true
