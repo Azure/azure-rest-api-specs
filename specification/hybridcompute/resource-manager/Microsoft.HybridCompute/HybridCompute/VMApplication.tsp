@@ -45,11 +45,7 @@ interface VmApplications {
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "The established ARM instance view pattern is a GET action."
   @get
   @action("instanceView")
-  getInstanceView is ArmResourceActionSync<
-    VmApplication,
-    void,
-    VmApplication
-  >;
+  getInstanceView is ArmResourceActionSync<VmApplication, void, VmApplication>;
 
   /**
    * Creates or updates a VM application.
