@@ -6713,7 +6713,7 @@ model KeyEncryptionKeyInfo {
 }
 
 /**
- * Confidential disk encryption info for a CMK confidential VM managed disk.
+ * Confidential disk encryption info for an A2A CMK confidential VM managed disk. Specifies the confidential disk encryption set ID for the replica disk used during replication and the confidential disk encryption set ID for the target disk used after failover.
  */
 @added(Versions.v2026_11_01)
 model ConfidentialDiskEncryptionInfo {
@@ -7934,6 +7934,7 @@ model A2AProtectedManagedDiskDetails {
    * The confidential disk encryption info for the managed disk. Applicable to CMK confidential VMs.
    */
   @added(Versions.v2026_11_01)
+  @visibility(Lifecycle.Read)
   confidentialDiskEncryptionInfo?: ConfidentialDiskEncryptionInfo;
 }
 
@@ -9272,7 +9273,7 @@ model A2AVmManagedDiskUpdateDetails {
   tfoDiskName?: string;
 
   /**
-   * The confidential disk encryption info to update for the managed disk. Only the recovery target confidential disk encryption set can be updated after protection is enabled; the replica confidential disk encryption set is immutable. Applicable to CMK confidential VMs.
+   * The confidential disk encryption info to update for the managed disk. Only the recovery target confidential disk encryption set can be changed through this update operation. Applicable to A2A CMK confidential VMs.
    */
   @added(Versions.v2026_11_01)
   confidentialDiskEncryptionInfo?: UpdateConfidentialDiskEncryptionInfo;

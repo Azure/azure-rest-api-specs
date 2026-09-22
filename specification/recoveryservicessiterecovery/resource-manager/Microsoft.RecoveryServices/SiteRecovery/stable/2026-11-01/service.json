@@ -11896,7 +11896,8 @@
         },
         "confidentialDiskEncryptionInfo": {
           "$ref": "#/definitions/ConfidentialDiskEncryptionInfo",
-          "description": "The confidential disk encryption info for the managed disk. Applicable to CMK confidential VMs."
+          "description": "The confidential disk encryption info for the managed disk. Applicable to CMK confidential VMs.",
+          "readOnly": true
         }
       }
     },
@@ -13220,7 +13221,7 @@
         },
         "confidentialDiskEncryptionInfo": {
           "$ref": "#/definitions/UpdateConfidentialDiskEncryptionInfo",
-          "description": "The confidential disk encryption info to update for the managed disk. Only the recovery target confidential disk encryption set can be updated after protection is enabled; the replica confidential disk encryption set is immutable. Applicable to CMK confidential VMs."
+          "description": "The confidential disk encryption info to update for the managed disk. Only the recovery target confidential disk encryption set can be changed through this update operation. Applicable to A2A CMK confidential VMs."
         }
       }
     },
@@ -14608,7 +14609,7 @@
     },
     "ConfidentialDiskEncryptionInfo": {
       "type": "object",
-      "description": "Confidential disk encryption info for a CMK confidential VM managed disk.",
+      "description": "Confidential disk encryption info for an A2A CMK confidential VM managed disk. Specifies the confidential disk encryption set ID for the replica disk used during replication and the confidential disk encryption set ID for the target disk used after failover.",
       "properties": {
         "recoveryReplicaConfidentialDiskEncryptionSetId": {
           "type": "string",
