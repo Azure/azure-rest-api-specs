@@ -5,7 +5,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 
 ## Common TypeScript settings
 
-``` yaml $(typescript)
+```yaml $(typescript)
 typescript:
   azure-arm: true
   generate-metadata: true
@@ -14,12 +14,12 @@ typescript:
 
 directive:
   # Constraint doesn't validate in JS since Unicode letters aren't part of \w
-    from: storage.json
-    where: $.parameters.ResourceGroupName
-    transform: delete $.pattern
+  from: storage.json
+  where: $.parameters.ResourceGroupName
+  transform: delete $.pattern
 ```
 
-``` yaml $(typescript) && !$(profile-content)
+```yaml $(typescript) && !$(profile-content)
 typescript:
   package-name: "@azure/arm-storage"
   output-folder: "$(typescript-sdks-folder)/sdk/storage/arm-storage"
@@ -29,7 +29,7 @@ typescript:
 
 These settings apply only when `--profile-content=profile-hybrid-2019-03-01` is specified on the command line.
 
-``` yaml $(profile-content)=='profile-hybrid-2019-03-01'
+```yaml $(profile-content)=='profile-hybrid-2019-03-01'
 typescript:
   package-name: "@azure/arm-storage-profile-2019-03-01-hybrid"
   output-folder: "$(typescript-sdks-folder)/sdk/storage/arm-storage-profile-2019-03-01-hybrid"
@@ -41,7 +41,7 @@ typescript:
 
 These settings apply only when `--profile-content=profile-hybrid-2020-09-01` is specified on the command line.
 
-``` yaml $(profile-content)=='profile-hybrid-2020-09-01'
+```yaml $(profile-content)=='profile-hybrid-2020-09-01'
 typescript:
   package-name: "@azure/arm-storage-profile-2020-09-01-hybrid"
   output-folder: "$(typescript-sdks-folder)/sdk/storage/arm-storage-profile-2020-09-01-hybrid"

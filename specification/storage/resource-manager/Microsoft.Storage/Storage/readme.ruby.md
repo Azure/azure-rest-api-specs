@@ -2,7 +2,7 @@
 
 These settings apply only when `--ruby` is specified on the command line.
 
-``` yaml
+```yaml
 package-name: azure_mgmt_storage
 package-version: "0.16.3"
 azure-arm: true
@@ -10,7 +10,7 @@ azure-arm: true
 
 ### Ruby multi-api
 
-``` yaml $(ruby) && $(multiapi)
+```yaml $(ruby) && $(multiapi)
 batch:
   - tag: package-2025-01
   - tag: package-2024-01
@@ -36,7 +36,7 @@ batch:
 These settings apply only when `--tag=package-2025-01 --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-``` yaml $(tag) == 'package-2025-01' && $(ruby)
+```yaml $(tag) == 'package-2025-01' && $(ruby)
 namespace: "Azure::Storage::Mgmt::V2025-01"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 ```
@@ -46,7 +46,7 @@ output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 These settings apply only when `--tag=package-2024-01 --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-``` yaml $(tag) == 'package-2024-01' && $(ruby)
+```yaml $(tag) == 'package-2024-01' && $(ruby)
 namespace: "Azure::Storage::Mgmt::V2024-01"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 ```
@@ -56,7 +56,7 @@ output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 These settings apply only when `--tag=package-2023-05 --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-``` yaml $(tag) == 'package-2023-05' && $(ruby)
+```yaml $(tag) == 'package-2023-05' && $(ruby)
 namespace: "Azure::Storage::Mgmt::V2023-05"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 ```
@@ -66,7 +66,7 @@ output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 These settings apply only when `--tag=package-2023-01 --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-``` yaml $(tag) == 'package-2023-01' && $(ruby)
+```yaml $(tag) == 'package-2023-01' && $(ruby)
 namespace: "Azure::Storage::Mgmt::V2023-01"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 ```
@@ -76,7 +76,7 @@ output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 These settings apply only when `--tag=package-2022-09 --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-``` yaml $(tag) == 'package-2022-09' && $(ruby)
+```yaml $(tag) == 'package-2022-09' && $(ruby)
 namespace: "Azure::Storage::Mgmt::V2022-09"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 ```
@@ -86,7 +86,7 @@ output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 These settings apply only when `--tag=package-2022-05 --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-``` yaml $(tag) == 'package-2022-05' && $(ruby)
+```yaml $(tag) == 'package-2022-05' && $(ruby)
 namespace: "Azure::Storage::Mgmt::V2022-05"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 ```
@@ -96,7 +96,7 @@ output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 These settings apply only when `--tag=package-2021-09 --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-``` yaml $(tag) == 'package-2021-09' && $(ruby)
+```yaml $(tag) == 'package-2021-09' && $(ruby)
 namespace: "Azure::Storage::Mgmt::V2021-09"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 ```
@@ -106,7 +106,7 @@ output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 These settings apply only when `--tag=package-2021-06 --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-``` yaml $(tag) == 'package-2021-06' && $(ruby)
+```yaml $(tag) == 'package-2021-06' && $(ruby)
 namespace: "Azure::Storage::Mgmt::V2021-06"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 ```
@@ -116,7 +116,7 @@ output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 These settings apply only when `--tag=package-2021-04 --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-``` yaml $(tag) == 'package-2021-04' && $(ruby)
+```yaml $(tag) == 'package-2021-04' && $(ruby)
 namespace: "Azure::Storage::Mgmt::V2021-04"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 ```
@@ -126,7 +126,7 @@ output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 These settings apply only when `--tag=package-2020-08-preview --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-``` yaml $(tag) == 'package-2020-08-preview' && $(ruby)
+```yaml $(tag) == 'package-2020-08-preview' && $(ruby)
 namespace: "Azure::Storage::Mgmt::V2020_08_01_preview"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 ```
@@ -136,7 +136,7 @@ output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 These settings apply only when `--tag=package-2018-02 --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-``` yaml $(tag) == 'package-2018-02' && $(ruby)
+```yaml $(tag) == 'package-2018-02' && $(ruby)
 namespace: "Azure::Storage::Mgmt::V2018_02_01"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 ```
@@ -146,7 +146,7 @@ output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 These settings apply only when `--tag=package-2017-10 --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-``` yaml $(tag) == 'package-2017-10' && $(ruby)
+```yaml $(tag) == 'package-2017-10' && $(ruby)
 namespace: "Azure::Storage::Mgmt::V2017_10_01"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 ```
@@ -156,7 +156,7 @@ output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 These settings apply only when `--tag=package-2017-06 --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-``` yaml $(tag) == 'package-2017-06' && $(ruby)
+```yaml $(tag) == 'package-2017-06' && $(ruby)
 namespace: "Azure::Storage::Mgmt::V2017_06_01"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 ```
@@ -166,7 +166,7 @@ output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 These settings apply only when `--tag=package-2016-12 --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-``` yaml $(tag) == 'package-2016-12' && $(ruby)
+```yaml $(tag) == 'package-2016-12' && $(ruby)
 namespace: "Azure::Storage::Mgmt::V2016_12_01"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 ```
@@ -176,7 +176,7 @@ output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 These settings apply only when `--tag=package-2016-01 --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-``` yaml $(tag) == 'package-2016-01' && $(ruby)
+```yaml $(tag) == 'package-2016-01' && $(ruby)
 namespace: "Azure::Storage::Mgmt::V2016_01_01"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 ```
@@ -186,7 +186,7 @@ output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 These settings apply only when `--tag=package-2015-06 --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-``` yaml $(tag) == 'package-2015-06' && $(ruby)
+```yaml $(tag) == 'package-2015-06' && $(ruby)
 namespace: "Azure::Storage::Mgmt::V2015_06_15"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 ```
@@ -196,7 +196,7 @@ output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 These settings apply only when `--tag=package-2015-05-preview --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-``` yaml $(tag) == 'package-2015-05-preview' && $(ruby)
+```yaml $(tag) == 'package-2015-05-preview' && $(ruby)
 namespace: "Azure::Storage::Mgmt::V2015_05_01_preview"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_storage/lib
 ```
