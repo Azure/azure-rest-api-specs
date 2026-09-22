@@ -101,7 +101,8 @@ async function handleLabeled({
   if (targetLabel === "package-name-approved-all") {
     // package-name-approved-all is a shortcut for management-plane only.
     // On mgmt PRs, a single label approves all pending languages at once.
-    // Auth (who can apply) is enforced by check-label.js (protected-labels workflow).
+    // Authorization is enforced synchronously below (evaluateLabelAuthorization)
+    // before any approval side effect runs.
     if (!isMgmt) {
       await github.rest.issues.removeLabel({
         owner,
@@ -128,10 +129,10 @@ async function handleLabeled({
       return;
     }
 
-    // Auth (who can apply) is enforced by check-label.js (protected-labels workflow).
-    // Both workflows run concurrently on labeled events, so there's a brief window
-    // where this processes before check-label.js removes an unauthorized label.
-    // State reconciles on the next event (label removal triggers unlabeled handler).
+    // Authorization is enforced synchronously below (evaluateLabelAuthorization)
+    // before any approval side effect, so an unauthorized label cannot green the
+    // status even briefly. check-label.js (protected-labels) still removes the label
+    // independently as defense in depth; correctness no longer depends on its timing.
     const lang = match[1];
     langsToApprove = [lang];
   }
