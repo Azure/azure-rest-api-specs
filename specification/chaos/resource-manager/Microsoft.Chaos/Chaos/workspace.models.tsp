@@ -4,6 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 import "./common.models.tsp";
+import "./workspaceEncryption.models.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
@@ -66,6 +67,15 @@ model WorkspaceProperties {
    * The intended workspace-level resource scope to be used by child scenarios.
    */
   scopes: Azure.Core.armResourceIdentifier[];
+
+  /**
+   * The requested customer key and service observations. On PUT, omission of
+   * encryption or customerManagedKeyEncryption, or an empty encryption object,
+   * selects Microsoft-managed protection, including when replacing a Workspace
+   * that uses a customer key. Null is not a valid PUT value.
+   */
+  @added(Versions.v2026_11_01)
+  encryption?: WorkspaceEncryption;
 }
 
 /**
@@ -74,4 +84,26 @@ model WorkspaceProperties {
 model WorkspaceUpdate {
   ...Azure.ResourceManager.Foundations.TagsUpdateModel<Workspace>;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+
+  /** The resource-specific fields to update. Omitted fields are unchanged. */
+  @added(Versions.v2026_11_01)
+  properties?: WorkspaceUpdateProperties;
+}
+
+/** The Workspace properties supported by partial updates. */
+@added(Versions.v2026_11_01)
+model WorkspaceUpdateProperties {
+  ...TypeSpec.Http.MergePatchUpdate<WorkspaceEncryptionPatchProperties>;
+}
+
+/** The writable encryption field used to construct a JSON Merge Patch. */
+@added(Versions.v2026_11_01)
+model WorkspaceEncryptionPatchProperties {
+  /**
+   * A JSON Merge Patch of the requested encryption setting. Omission leaves the
+   * setting unchanged. Null deletes the setting and selects Microsoft-managed
+   * protection. The service validates the merged configuration before any change.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Explicit null is required so JSON Merge Patch can delete encryption. This request-only transform does not change PUT or response nullability."
+  encryption?: WorkspaceEncryptionUpdate;
 }

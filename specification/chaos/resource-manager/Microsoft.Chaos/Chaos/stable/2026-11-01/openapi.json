@@ -602,6 +602,9 @@
           }
         },
         "x-ms-examples": {
+          "Get a failed Workspace encryption operation status": {
+            "$ref": "./examples/OperationStatuses_Get_CustomerKeyAccessFailed.json"
+          },
           "Gets Chaos Studio async operation status.": {
             "$ref": "./examples/OperationStatuses_Get.json"
           }
@@ -2149,6 +2152,9 @@
           }
         },
         "x-ms-examples": {
+          "List Workspaces with a validated customer key configuration pending": {
+            "$ref": "./examples/Workspaces_List_EncryptionPending.json"
+          },
           "List all Workspaces in a resource group.": {
             "$ref": "./examples/Workspaces_List.json"
           }
@@ -2200,8 +2206,20 @@
           }
         },
         "x-ms-examples": {
+          "Get a Workspace after a customer key replacement fails": {
+            "$ref": "./examples/Workspaces_Get_EncryptionFailed.json"
+          },
           "Get a Workspace in a resource group.": {
             "$ref": "./examples/Workspaces_Get.json"
+          },
+          "Get a Workspace service application before customer key enrollment": {
+            "$ref": "./examples/Workspaces_Get_EncryptionNotConfigured.json"
+          },
+          "Get a Workspace when active encryption protection is unknown": {
+            "$ref": "./examples/Workspaces_Get_EncryptionUnknown.json"
+          },
+          "Get a Workspace while customer-managed encryption is being enabled": {
+            "$ref": "./examples/Workspaces_Get_EncryptionPending.json"
           }
         }
       },
@@ -2272,6 +2290,15 @@
           }
         },
         "x-ms-examples": {
+          "Create or replace a Workspace with an empty encryption object": {
+            "$ref": "./examples/Workspaces_CreateOrUpdate_EmptyEncryption.json"
+          },
+          "Create or replace a Workspace with the Microsoft-managed encryption default": {
+            "$ref": "./examples/Workspaces_CreateOrUpdate_OmitEncryption.json"
+          },
+          "Create or update a Workspace with a customer-managed key": {
+            "$ref": "./examples/Workspaces_CreateOrUpdate_WithCustomerKey.json"
+          },
           "Create/update a workspace in a resource group.": {
             "$ref": "./examples/Workspaces_CreateOrUpdate.json"
           }
@@ -2345,8 +2372,32 @@
           }
         },
         "x-ms-examples": {
+          "Update Workspace tags without changing customer-managed encryption": {
+            "$ref": "./examples/Workspaces_Update_OmitEncryption.json"
+          },
           "Update a Workspace in a resource group.": {
             "$ref": "./examples/Workspaces_Update.json"
+          },
+          "Update a Workspace to enable customer-managed encryption": {
+            "$ref": "./examples/Workspaces_Update_EnableCustomerKey.json"
+          },
+          "Update a Workspace to re-enable a customer key after removal": {
+            "$ref": "./examples/Workspaces_Update_ReenableCustomerKey.json"
+          },
+          "Update a Workspace to remove customer-managed encryption with null": {
+            "$ref": "./examples/Workspaces_Update_RemoveCustomerKey.json"
+          },
+          "Update a Workspace to remove its writable encryption settings": {
+            "$ref": "./examples/Workspaces_Update_RemoveEncryption.json"
+          },
+          "Update a Workspace with a validated key and resource ID in another vault": {
+            "$ref": "./examples/Workspaces_Update_ChangeKeyVault.json"
+          },
+          "Update a Workspace with an empty CMK patch and retain its existing key URL": {
+            "$ref": "./examples/Workspaces_Update_EmptyCustomerKeyPatch.json"
+          },
+          "Update only the customer key URI of an encrypted Workspace": {
+            "$ref": "./examples/Workspaces_Update_ReplaceCustomerKey.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -7319,6 +7370,71 @@
         }
       ]
     },
+    "WorkspaceCustomerManagedKeyEncryption": {
+      "type": "object",
+      "description": "A customer-managed key reference, not key material.",
+      "properties": {
+        "keyEncryptionKeyUrl": {
+          "$ref": "#/definitions/WorkspaceKeyEncryptionKeyUrl",
+          "description": "The versionless HTTPS Key Vault key URI in the supported cloud and Workspace\ntenant. The key vault must belong to the same Microsoft Entra tenant as\nthe Workspace. Its HTTPS origin must match the vault referenced by\nkeyVaultResourceId. The service validates the effective pair and caller\nvault-read permission synchronously through Azure Resource Manager before\ncreating public operation metadata, accepting the configuration operation,\npersisting requested encryption, or changing Storage or customer data.\nSupports RSA keys in Azure Key Vault and RSA-HSM keys in Premium Key Vault,\nwith key sizes of 2048, 3072, or 4096 bits. Premium RSA-HSM keys use the same\nvault URL. The separate Azure Managed HSM service is not supported;\nManaged HSM endpoints are rejected before operation acceptance.\nA key version, query string, or fragment is not permitted.\nAzure Storage follows key versions automatically. Keep the previous version\navailable for at least 24 hours after rotation."
+        },
+        "keyVaultResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The fully qualified Azure resource ID of the key vault that contains the key.\nUse /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName},\nnot a key child resource, Managed HSM, or URL. Full PUT with CMK and PATCH\nthat changes either CMK member require Microsoft.KeyVault/vaults/read on\nthe effective vault. The service compares its canonical ID, tenant, and\nvault URI with the requested pair before accepting the operation.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.KeyVault/vaults"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "keyEncryptionKeyUrl",
+        "keyVaultResourceId"
+      ]
+    },
+    "WorkspaceCustomerManagedKeyEncryptionUpdateMergePatchUpdateOrCreate": {
+      "type": "object",
+      "description": "A partial customer key reference, validated after merging with the stored setting.",
+      "properties": {
+        "keyEncryptionKeyUrl": {
+          "$ref": "#/definitions/WorkspaceKeyEncryptionKeyUrl",
+          "description": "The replacement versionless key URI. Omission retains the URI; null deletes\nit. A same-vault replacement retains the stored vault ID. The effective\npair is authorized and validated before acceptance; an incomplete or\nmismatched pair is rejected. Key path and name casing is preserved.",
+          "x-nullable": true
+        },
+        "keyVaultResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The vault resource ID to merge with the key URL. Omission retains the ID,\nbut does not bypass caller authorization when the URL changes. Null deletes\nthe ID; a remaining CMK object without both members is invalid. Changing\nvault requires a coherent new URL and ID pair.",
+          "x-nullable": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.KeyVault/vaults"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "WorkspaceCustomerManagedKeyOnboarding": {
+      "type": "object",
+      "description": "The service application that the customer authorizes to use the key.",
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "The Microsoft Entra application ID used for customer consent, returned for\nexisting Workspaces, including before customer-key enrollment. Before\ncreating a Workspace with a customer key, obtain the application name and\nID for the target cloud from the service onboarding documentation or Portal,\nthen consent and grant key access. The configuring caller separately needs\nMicrosoft.KeyVault/vaults/read on the referenced vault.\nGET returns the same application ID.\nThis is not a service principal object ID or an identity selector.\nThe Workspace's top-level identity does not select this application.",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "applicationId"
+      ]
+    },
     "WorkspaceDiscovery": {
       "type": "object",
       "description": "Model that represents the latest workspace discovery result.",
@@ -7429,6 +7545,139 @@
         ]
       },
       "readOnly": true
+    },
+    "WorkspaceEncryption": {
+      "type": "object",
+      "description": "The validated requested key and vault reference, onboarding information, and service observations.",
+      "properties": {
+        "customerManagedKeyEncryption": {
+          "$ref": "#/definitions/WorkspaceCustomerManagedKeyEncryption",
+          "description": "The requested customer-managed key. Absence means Microsoft-managed\nprotection. A present object requires a coherent keyEncryptionKeyUrl and\nkeyVaultResourceId pair. After synchronous caller and vault validation,\nthe accepted pair can be returned while configuration is Pending.\nIt does not prove that active data already uses the requested key."
+        },
+        "customerManagedKeyOnboarding": {
+          "$ref": "#/definitions/WorkspaceCustomerManagedKeyOnboarding",
+          "description": "The service application used for customer consent, returned for existing Workspaces before enrollment.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/WorkspaceEncryptionStatus",
+          "description": "The observed result, separate from the requested setting.",
+          "readOnly": true
+        }
+      }
+    },
+    "WorkspaceEncryptionProtection": {
+      "type": "string",
+      "description": "The last directly observed protection of active Workspace customer data.",
+      "enum": [
+        "CustomerManaged",
+        "MicrosoftManaged"
+      ],
+      "x-ms-enum": {
+        "name": "WorkspaceEncryptionProtection",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CustomerManaged",
+            "value": "CustomerManaged",
+            "description": "Active customer data uses customer-managed key protection."
+          },
+          {
+            "name": "MicrosoftManaged",
+            "value": "MicrosoftManaged",
+            "description": "Active customer data uses Microsoft-managed key protection."
+          }
+        ]
+      }
+    },
+    "WorkspaceEncryptionState": {
+      "type": "string",
+      "description": "The observed encryption state; this does not replace Workspace provisioningState.",
+      "enum": [
+        "NotConfigured",
+        "Pending",
+        "Applied",
+        "Failed",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "WorkspaceEncryptionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotConfigured",
+            "value": "NotConfigured",
+            "description": "No per-Workspace encryption configuration exists. Microsoft-managed protection applies."
+          },
+          {
+            "name": "Pending",
+            "value": "Pending",
+            "description": "An encryption configuration operation is in progress."
+          },
+          {
+            "name": "Applied",
+            "value": "Applied",
+            "description": "A fresh check confirms the requested setting and customer-data access, for either key source."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "An encryption configuration step or health check failed. See the error for corrective action."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "No usable fresh observation is available."
+          }
+        ]
+      }
+    },
+    "WorkspaceEncryptionStatus": {
+      "type": "object",
+      "description": "Service observations of protection and access for customer data under the Workspace encryption scope.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/WorkspaceEncryptionState",
+          "description": "The result of configuration or the most recent usable health observation.",
+          "readOnly": true
+        },
+        "observedProtection": {
+          "$ref": "#/definitions/WorkspaceEncryptionProtection",
+          "description": "The last directly observed active protection. Omitted when unknown.",
+          "readOnly": true
+        },
+        "observedKeyEncryptionKeyUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "The active key URI reported by Azure Storage, including its version when\navailable. Omitted when unknown or when protection is Microsoft-managed.\nThis value is not inferred from the requested key.",
+          "readOnly": true
+        },
+        "lastCheckedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The UTC time of the observation, including a failed check.",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail",
+          "description": "The configuration or health error. Failed state includes a code and message.\nCustomerKeyAccessFailed means Azure Storage cannot use the customer key.\nEncryptionConfigurationFailed means a service-side configuration step failed.\nA more specific cause is included only when the platform response identifies it.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "state"
+      ]
+    },
+    "WorkspaceEncryptionUpdateMergePatchUpdateOrCreate": {
+      "type": "object",
+      "description": "A partial encryption setting. Omitted fields are unchanged and null deletes a\nwritable field. A remaining customerManagedKeyEncryption object must have a\ncoherent key URL and vault resource ID. Read-only onboarding and status\ninputs are ignored. Changing either member requires synchronous caller and\nvault validation of the merged pair, including any retained member.",
+      "properties": {
+        "customerManagedKeyEncryption": {
+          "$ref": "#/definitions/WorkspaceCustomerManagedKeyEncryptionUpdateMergePatchUpdateOrCreate",
+          "description": "The customer key configuration to merge. Null deletes the object and\nrequests Microsoft-managed protection. An empty object retains an existing\ncomplete pair without a lookup when neither member changes, but is invalid\nwhen the merged pair is incomplete. Whole-object removal does not require\na vault metadata lookup.",
+          "x-nullable": true
+        }
+      }
     },
     "WorkspaceEvaluation": {
       "type": "object",
@@ -7588,6 +7837,12 @@
       },
       "readOnly": true
     },
+    "WorkspaceKeyEncryptionKeyUrl": {
+      "type": "string",
+      "format": "uri",
+      "description": "A versionless HTTPS Azure Key Vault key URI, including Premium-vault RSA-HSM\nkeys. Azure Managed HSM endpoints are not supported. The service also\nvalidates the cloud host allowlist and tenant; a vault URL does not identify\nthe key type.",
+      "pattern": "^https://[a-zA-Z0-9-]+\\.vault\\.[a-zA-Z0-9.-]+/keys/[a-zA-Z0-9-]+$"
+    },
     "WorkspaceListResult": {
       "type": "object",
       "description": "Model that represents a list of Workspace resources and a link for pagination.",
@@ -7631,6 +7886,10 @@
             "format": "arm-id",
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
+        },
+        "encryption": {
+          "$ref": "#/definitions/WorkspaceEncryption",
+          "description": "The requested customer key and service observations. On PUT, omission of\nencryption or customerManagedKeyEncryption, or an empty encryption object,\nselects Microsoft-managed protection, including when replacing a Workspace\nthat uses a customer key. Null is not a valid PUT value."
         }
       },
       "required": [
@@ -7651,6 +7910,21 @@
         "identity": {
           "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/WorkspaceUpdateProperties",
+          "description": "The resource-specific fields to update. Omitted fields are unchanged."
+        }
+      }
+    },
+    "WorkspaceUpdateProperties": {
+      "type": "object",
+      "description": "The Workspace properties supported by partial updates.",
+      "properties": {
+        "encryption": {
+          "$ref": "#/definitions/WorkspaceEncryptionUpdateMergePatchUpdateOrCreate",
+          "description": "A JSON Merge Patch of the requested encryption setting. Omission leaves the\nsetting unchanged. Null deletes the setting and selects Microsoft-managed\nprotection. The service validates the merged configuration before any change.",
+          "x-nullable": true
         }
       }
     },
