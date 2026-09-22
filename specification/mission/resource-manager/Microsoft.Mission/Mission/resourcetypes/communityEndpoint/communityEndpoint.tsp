@@ -207,12 +207,7 @@ model CommunityEndpointProperties {
 
 @doc("Community Endpoint patchable Properties")
 model CommunityEndpointPatchProperties
-  is UpdateableProperties<OmitDefaults<CommunityEndpointProperties>> {
-  @added(Microsoft.Mission.Versions.v2026_05_01_preview)
-  @maxItems(100)
-  @doc("Destination communities to synchronize this endpoint's rules to.")
-  syncTo?: CommunityResourceId[];
-}
+  is UpdateableProperties<OmitDefaults<CommunityEndpointProperties>>;
 
 @doc("Community Endpoint Patch Resource")
 model CommunityEndpointPatchModel {

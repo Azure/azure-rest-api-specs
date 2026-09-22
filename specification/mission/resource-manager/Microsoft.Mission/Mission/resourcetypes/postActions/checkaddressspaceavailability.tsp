@@ -1,3 +1,7 @@
+import "@typespec/versioning";
+
+using TypeSpec.Versioning;
+
 @doc("Microsoft Mission Resource Provider management API.")
 namespace Microsoft.Mission;
 
