@@ -1577,6 +1577,13 @@ model TelephonyCallJobCancellation {
   revision: int64;
 }
 
+/** Immutable customer-chosen Campaign name within a project and Agent. */
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@minLength(1)
+@maxLength(64)
+@pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{0,63}$")
+scalar TelephonyCampaignName extends string;
+
 @doc("A durable direct or campaign-created outbound call intent.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCallJob {
@@ -1591,9 +1598,9 @@ model TelephonyCallJob {
   @doc("The name of the voice agent used at execution time.")
   agent_name: string;
 
-  @doc("The owning Campaign name under this Agent. Absent for independently created call jobs; callers cannot set Campaign ownership on direct creation.")
+  @doc("The original owning Campaign name under this Agent. Absent for direct calls. After deletion/name reuse this is only a historical label, not a link to the current same-named Campaign. Use the current Campaign's recipient results or campaign_name-filtered CallJob list for current membership.")
   @visibility(Lifecycle.Read)
-  campaign_name?: string;
+  campaign_name?: TelephonyCampaignName;
 
   @doc("The current call-job lifecycle status.")
   status: TelephonyCallJobStatus;

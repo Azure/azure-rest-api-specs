@@ -7,14 +7,15 @@ using Azure.Core;
 
 namespace Azure.AI.Projects;
 
-/** Immutable customer-chosen Campaign name within a project and Agent. */
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@minLength(1)
-@maxLength(64)
-@pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{0,63}$")
-scalar TelephonyCampaignName extends string;
-
-/** Scalar template values. Objects, arrays, and null are not accepted. */
+/**
+ * Scalar template values. Objects, arrays, null and non-finite numbers are not accepted.
+ * Numbers use JSON-number semantics, not separate int64/double wire tags: 1, 1.0 and 1e0 are
+ * equivalent for replay; -0 equals 0. Compare normalized exact decimal coefficient/exponent
+ * from the original JSON token before binary64 conversion. Never merge distinct int64 values
+ * through float rounding. Strings such as "1" remain distinct from numbers. Preserve int64
+ * values exactly; other values must convert to finite binary64 without nonzero underflow to zero.
+ * Numeric tokens are limited to 128 characters. Strings are limited to 16 KiB in UTF-8 at runtime.
+ */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyCampaignInputValue {
   string,
@@ -34,7 +35,7 @@ model TelephonyCampaignRecipient {
   /** Telephone destination; the provider comes from the campaign connection. */
   destination: TelephonyOutboundDestination;
 
-  /** Agent-declared inputs follow required/default/schema semantics. Extra scalars are dynamic variables. */
+  /** Agent-declared inputs follow required/default/schema semantics. Extra scalars are dynamic variables. At most 128 keys, each 1-256 characters; values must obey the documented byte limits. */
   structured_inputs?: Record<TelephonyCampaignInputValue>;
 
   /** Earliest dispatch time for recipient scheduling. Required only when schedule.type is recipient; forbidden for other modes. */
@@ -61,7 +62,7 @@ model TelephonyCampaignRecipientSource {
   type: TelephonyCampaignRecipientSourceType;
 }
 
-/** Small recipient sets supplied with the job. */
+/** Small recipient sets supplied with the Campaign. Creation bodies are limited to 1 MiB decoded UTF-8. Reads retain type but omit the array; use recipient_results. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model InlineTelephonyCampaignRecipientSource
   extends TelephonyCampaignRecipientSource {
@@ -93,7 +94,8 @@ union TelephonyCampaignDatasetFormat {
  * CSV columns and JSON/JSONL fields use phone_number for the required E.164 destination and key
  * for optional customer correlation. Field-name remapping is not supported.
  * In recipient scheduling mode, the selected time field is also reserved and is not a dynamic variable.
- * Other flat fields become structured inputs. CSV values preserve strings until parsed against
+ * The file must contain 1-1,000,000 recipients and at most 256 MiB decoded bytes, with at most 1 MiB per logical row.
+ * Duplicate CSV headers or JSON keys fail validation; no last-key-wins parsing. Other flat fields become structured inputs. CSV values preserve strings until parsed against
  * an Agent-declared input schema; undeclared values remain strings.
  */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -182,8 +184,7 @@ model TelephonyCampaignInputs {
   /** Authorized phone number or Teams Resource Account UUID, inferred from the connection category. */
   source: TelephonyOutboundSource;
 
-  /** Full recipient set, supplied only at creation. The service snapshots it consistently before validating and never rereads the original source for retries. */
-  @visibility(Lifecycle.Create)
+  /** Recipient source. Reads retain the source kind and Dataset provenance but omit the inline array, which is available through the paged recipient list. */
   recipients: TelephonyCampaignRecipientSource;
 
   /** Omit for immediate scheduling. Every mode requires successful preparation and explicit start. */
@@ -204,6 +205,31 @@ model CreateTelephonyCampaignRequest {
   inputs: TelephonyCampaignInputs;
 }
 
+/** Readable input provenance without an embedded inline recipient array. */
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyCampaignRecipientSourceSummary {
+  /** Original input source kind. */
+  type: TelephonyCampaignRecipientSourceType;
+
+  /** Original Dataset name, present only for Dataset input. */
+  dataset_name?: string;
+
+  /** Original explicit Dataset version, present only for Dataset input. */
+  dataset_version?: string;
+
+  /** Original file format, present only for Dataset input. */
+  format?: TelephonyCampaignDatasetFormat;
+}
+
+/** Readable immutable configuration. Full recipient values are available in the paged recipient list. */
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyCampaignInputSummary {
+  ...OmitProperties<TelephonyCampaignInputs, "recipients">;
+
+  /** Source provenance, never the full inline array. */
+  recipients: TelephonyCampaignRecipientSourceSummary;
+}
+
 /** Progress of the current validation pass. These counters may reset for a new Agent version; execution counters never reset. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaignValidationProgress {
@@ -221,9 +247,6 @@ model TelephonyCampaignValidationProgress {
 
   /** Rows rejected by validation. */
   @minValue(0) invalid_recipients: int64;
-
-  /** True only after the entire pass has been examined. Does not itself mean validation succeeded. */
-  complete: boolean;
 }
 
 /** Mutually exclusive recipient execution counts, not provider-attempt counts. All are zero until initial validation succeeds. */
@@ -232,7 +255,7 @@ model TelephonyCampaignExecutionProgress {
   /** Recipients waiting for start, schedule, capacity, validation, or retry; includes paused work and lazy CallJob materialization. */
   @minValue(0) pending: int64;
 
-  /** Recipients with a nonterminal provider call. */
+  /** Recipients with a durable origination reservation or unresolved provider attempt, including dispatching before a call ID is received. */
   @minValue(0) active: int64;
 
   /** Recipients whose CallJob completed; not proof of business success. */
@@ -295,9 +318,9 @@ model TelephonyCampaign {
   @visibility(Lifecycle.Read)
   name: TelephonyCampaignName;
 
-  /** Immutable configuration. Read responses omit the recipient source and array; use listRecipientResults to inspect recipients. */
-  @visibility(Lifecycle.Create, Lifecycle.Read)
-  inputs: TelephonyCampaignInputs;
+  /** Immutable configuration. Reads retain source provenance but omit inline recipient arrays; use listRecipientResults for rows. */
+  @visibility(Lifecycle.Read)
+  inputs: TelephonyCampaignInputSummary;
 
   /** Creation time. */
   @visibility(Lifecycle.Read) created_at: FoundryTimestamp;
@@ -305,8 +328,11 @@ model TelephonyCampaign {
   /** Last observable progress update. */
   @visibility(Lifecycle.Read) updated_at: FoundryTimestamp;
 
-  /** Opaque resource validator for If-Match on start/pause, not a campaign version. */
+  /** Opaque control-state token for conditional actions. Changes with lifecycle, validated Agent version or a new name incarnation, never from progress alone. This is not a validator for caching the full progress-bearing representation. */
   @visibility(Lifecycle.Read) etag: Azure.Core.eTag;
+
+  /** Immutable ID of the initial creation operation. Distinguishes reused names without a public Campaign version. */
+  @visibility(Lifecycle.Read) creation_operation_id: string;
 
   /** Time at which the job entered a terminal status. */
   @visibility(Lifecycle.Read) finished_at?: FoundryTimestamp;
@@ -379,18 +405,24 @@ model TelephonyCampaignRecipientResult {
 
 /** The initial resource-creation status monitor. No result payload: after preparation succeeds the SDK retrieves the Campaign through the final GET operation. Its completion never waits for scheduled or active calls. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyCampaignPreparation is JobLike {
-  /** Creation time of preparation. */
+model TelephonyCampaignOperation is JobLike {
+  /** Creation time of the initial validation operation. */
   @visibility(Lifecycle.Read) created_at: FoundryTimestamp;
 
-  /** Completion time; succeeded means the entire recipient snapshot was validated and saved. */
+  /** Completion time after the worker is quiescent; succeeded means the entire snapshot was validated and saved. */
   @visibility(Lifecycle.Read) finished_at?: FoundryTimestamp;
 }
-@@lroErrorResult(TelephonyCampaignPreparation.error);
+@@lroErrorResult(TelephonyCampaignOperation.error);
 
-/** Returns the created business resource; the asynchronous preparation is polled separately. */
+/** Campaign response. Dynamic progress is not cacheable; the body etag is used only for control-state concurrency. */
+alias TelephonyCampaignResponse = TelephonyCampaign & {
+  /** Prevents caches from treating the control token as a validator for changing progress. */
+  @header("Cache-Control") cache_control: "no-store";
+};
+
+/** Returns the created business resource; the asynchronous operation is polled separately. */
 alias TelephonyCampaignCreatedResponse<Status extends int32> = TypeSpec.Http.Response<Status> &
-  TelephonyCampaign & {
+  TelephonyCampaignResponse & {
     /** URI of the Campaign business resource. */
     @header("Location")
     location: TypeSpec.Rest.ResourceLocation<TelephonyCampaign>;
@@ -398,7 +430,7 @@ alias TelephonyCampaignCreatedResponse<Status extends int32> = TypeSpec.Http.Res
     /** URI of the automatically created preparation monitor, not the Campaign execution state. */
     @pollingLocation
     @header("Operation-Location")
-    operation_location: TypeSpec.Rest.ResourceLocation<TelephonyCampaignPreparation>;
+    operation_location: TypeSpec.Rest.ResourceLocation<TelephonyCampaignOperation>;
 
     /** ID of the one initial preparation monitor; preserved on idempotent retries. */
     @header("Operation-Id") operation_id: string;
@@ -410,35 +442,34 @@ alias TelephonyCampaignFilters = {
   @query status?: TelephonyCampaignStatus;
 };
 
-const exampleInlineRecipients: InlineTelephonyCampaignRecipientSource = #{
-  type: "inline",
-  recipients: #[
-    #{
-      destination: #{ type: "phone_number", value: "+14255550123" },
-      structured_inputs: #{ customer_name: "Avery" },
-    }
-  ],
+/** Campaign-scoped cursor parameters. Preserve shared wire names without treating reusable resource names as cursors. */
+alias TelephonyCampaignPageQueryParameters = {
+  ...OmitProperties<CommonPageQueryParameters, "after" | "before">;
+
+  /** Opaque last_id from the previous page. Binds the original sort boundary, project/Agent scope and filters; recipient cursors also bind the Campaign incarnation. Never supply a name or row ID. Cannot be combined with before. Invalid, altered or mismatched cursors return 400 invalid_cursor. */
+  @query @continuationToken after?: string;
+
+  /** Opaque first_id for backward traversal with unchanged scope/filters/order. Cannot be combined with after. Does not resolve the current resource by name. */
+  @query before?: string;
 };
-const exampleDatasetRecipients: DatasetTelephonyCampaignRecipientSource = #{
-  type: "dataset",
-  dataset_name: "reminder-recipients",
-  dataset_version: "1",
-  format: "csv",
-};
-const exampleCommonSchedule: ScheduledTelephonyCampaignSchedule = #{
-  type: "scheduled",
-  scheduled_at: FoundryTimestamp.fromISO("2026-10-01T01:00:00Z"),
-};
-const exampleRecipientSchedule: RecipientTelephonyCampaignSchedule = #{
-  type: "recipient",
-  column: "call_at",
-};
+
+/** Shared Foundry page shape with opaque boundary tokens rather than reusable resource names. */
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model TelephonyCampaignPage<T> {
+  ...OmitProperties<AgentsPagedResult<T>, "first_id" | "last_id">;
+
+  /** Opaque boundary cursor for the first returned item; absent for an empty page. Not a Campaign name or recipient ID. */
+  first_id?: string;
+
+  /** Opaque boundary cursor for the last returned item; absent for an empty page. Captures its original immutable sort key, so deleting/reusing the resource name cannot move the boundary. */
+  @continuationToken last_id?: string;
+}
 
 /** Name-addressed Campaigns owned by the route Agent. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Agent-contained named resources use FoundryDataPlanePreviewOperation with shared job envelopes and paging; shared job templates have fixed project-level ID parameters."
 @tag("TelephonyCampaigns")
 interface TelephonyCampaigns {
-  /** Starts pending work or continues a paused Campaign through required Agent-version checks. Never replays terminal recipients. With a current ETag, repeated start while running returns current state. Any unfinished preparation or Agent validation rejects start with 409, including a paused Campaign with an in-flight check: it cannot authorize continuation or queue another check. Cancelling and terminal Campaigns also reject start. A stale If-Match returns 412 before state checks. */
+  /** Starts pending work or continues paused work through required Agent-version checks. Never replays terminal recipients. Validating, cancelling and terminal states reject start with 409; paused means no validation worker remains active. With a current control token, repeated start while running returns current state. A stale token returns 412 before state checks. */
   @summary("Start a telephony campaign")
   @post
   @route("/agents/{agent_name}/telephony/campaigns/{campaign_name}:start")
@@ -455,68 +486,40 @@ interface TelephonyCampaigns {
       /** Exact ETag from a fresh read; stale commands return 412 before changing state. */
       @header("If-Match") if_match: Azure.Core.eTag;
     },
-    TelephonyCampaign
+    TelephonyCampaignResponse
   >;
-  /** Creates an immutable named Campaign and its preparation monitor. Returns 201 on first creation and 200 with the existing resource for identical inputs; differing inputs return 409 campaign_inputs_conflict. Retries never restart preparation or dialing. Operation-Id collisions with a different request return 409 operation_id_conflict. The monitor completes after initial validation, before any manual start or scheduled call. */
+  /** Creates an immutable named Campaign and starts asynchronous validation. A retained identical Operation-Id request replays its original 201 response and monitor; changed inputs with that ID return 409 operation_id_conflict. Without that replay key, an identical existing resource returns 200 and differing inputs return 409 campaign_inputs_conflict. Replays for a deleted instance return 409 campaign_deleted and never affect a reused name. */
   @summary("Create a telephony campaign")
-  @opExample(
+  @extension(
+    "x-ms-examples",
     #{
-      parameters: #{
-        agent_name: "contoso-reminder-agent",
-        campaign_name: "appointment-reminders",
-        apiVersion: "v1",
-        body: #{
-          inputs: #{
-            connection_name: "contoso-phone-provider",
-            source: "+14255550100",
-            recipients: exampleInlineRecipients,
-          },
-        },
+      CreateImmediate: #{
+        $ref: "../../examples/campaigns/CreateImmediate.json",
       },
-    },
-    #{ title: "Prepare immediate calls without dialing" }
-  )
-  @opExample(
-    #{
-      parameters: #{
-        agent_name: "contoso-reminder-agent",
-        campaign_name: "scheduled-reminders",
-        apiVersion: "v1",
-        body: #{
-          inputs: #{
-            connection_name: "contoso-phone-provider",
-            source: "+14255550100",
-            recipients: exampleDatasetRecipients,
-            schedule: exampleCommonSchedule,
-          },
-        },
+      CreateScheduled: #{
+        $ref: "../../examples/campaigns/CreateScheduled.json",
       },
-    },
-    #{ title: "Prepare calls with a common scheduled time" }
-  )
-  @opExample(
-    #{
-      parameters: #{
-        agent_name: "contoso-reminder-agent",
-        campaign_name: "recipient-time-reminders",
-        apiVersion: "v1",
-        body: #{
-          inputs: #{
-            connection_name: "contoso-phone-provider",
-            source: "+14255550100",
-            recipients: exampleDatasetRecipients,
-            schedule: exampleRecipientSchedule,
-          },
-        },
+      CreateRecipientScheduled: #{
+        $ref: "../../examples/campaigns/CreateRecipientScheduled.json",
       },
-    },
-    #{ title: "Prepare calls with a per-recipient time column" }
+    }
   )
   @put
+  @parameterVisibility(Lifecycle.Create)
   @route("/agents/{agent_name}/telephony/campaigns/{campaign_name}")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-  @pollingOperation(TelephonyCampaigns.getPreparation)
-  @finalOperation(TelephonyCampaigns.get)
+  @pollingOperation(
+    TelephonyCampaigns.getOperation,
+    {
+      operation_id: ResponseProperty<"operation_id">,
+    }
+  )
+  @finalOperation(
+    TelephonyCampaigns.get,
+    {
+      operation_id: ResponseProperty<"operation_id">,
+    }
+  )
   create is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
@@ -526,7 +529,9 @@ interface TelephonyCampaigns {
       /** Immutable name chosen by the caller; existing resources cannot be overwritten. */
       @path campaign_name: TelephonyCampaignName;
 
-      ...WithOperationId;
+      /** Optional retry identifier. Omitting it does not bypass name idempotency: identical existing inputs return 200; different inputs conflict. Preserve it for retries across deletion. */
+      @header("Operation-Id")
+      operationId?: string;
 
       /** Complete immutable Campaign definition. */
       @body body: CreateTelephonyCampaignRequest;
@@ -535,7 +540,7 @@ interface TelephonyCampaigns {
     | TelephonyCampaignCreatedResponse<200>
   >;
 
-  /** Gets an Agent-owned Campaign without embedding its recipient source or array. */
+  /** Gets the current Campaign with source provenance but no inline array. An optional operation_id guards SDK final retrieval against deletion/name reuse: a different creation operation returns 409 campaign_instance_changed and a deleted resource returns 404. */
   @summary("Get a telephony campaign")
   @get
   @route("/agents/{agent_name}/telephony/campaigns/{campaign_name}")
@@ -548,11 +553,14 @@ interface TelephonyCampaigns {
 
       /** Immutable Campaign name. */
       @path campaign_name: TelephonyCampaignName;
+
+      /** Expected creation operation, copied from Operation-Id for the SDK final GET. Never returns a later same-name instance when supplied. */
+      @query operation_id?: string;
     },
-    TelephonyCampaign
+    TelephonyCampaignResponse
   >;
 
-  /** Lists Agent-owned Campaigns without embedding recipient sources or arrays. Campaign names serve as paging IDs; ordering uses created_at and name. */
+  /** Lists Agent-owned Campaigns without inline arrays. Opaque continuation tokens retain the original created_at/internal-instance boundary across deletion and name reuse. Filters are live views, not a snapshot. */
   @summary("List telephony campaigns")
   @get
   @list
@@ -564,13 +572,16 @@ interface TelephonyCampaigns {
       /** Owning Agent; never overridden in recipient inputs. */
       @path agent_name: string;
 
-      ...CommonPageQueryParameters;
+      ...TelephonyCampaignPageQueryParameters;
       ...TelephonyCampaignFilters;
     },
-    AgentsPagedResult<TelephonyCampaign>
+    TelephonyCampaignPage<TelephonyCampaign> & {
+      /** Progress-bearing list responses are not cacheable. */
+      @header("Cache-Control") cache_control: "no-store";
+    }
   >;
 
-  /** Stops all future dispatch and retries; drains admitted calls before terminal cancellation. */
+  /** Stops future dispatch and retries for the conditionally selected instance; drains validation workers and admitted calls before terminal cancellation. A stale control token returns 412, including after name reuse. */
   @summary("Cancel a telephony campaign")
   @post
   @route("/agents/{agent_name}/telephony/campaigns/{campaign_name}:cancel")
@@ -583,11 +594,14 @@ interface TelephonyCampaigns {
 
       /** Immutable Campaign name. */
       @path campaign_name: TelephonyCampaignName;
+
+      /** Exact control token from this Campaign incarnation. Wildcards are rejected. */
+      @header("If-Match") if_match: Azure.Core.eTag;
     },
-    TelephonyCampaign
+    TelephonyCampaignResponse
   >;
 
-  /** Deletes a terminal, quiescent Campaign; otherwise returns 409. Repeated deletion returns 204. Retained replay safeguards prevent accidental recreation. Does not delete conversations or recordings. */
+  /** Deletes the conditionally selected terminal, quiescent Campaign; nonterminal work returns 409. Missing names return 204; reused names with an old control token return 412. Immediately releases the name, without a name-reserving tombstone. Retains operation polling/replay records for at least 24 hours after completion and deletion, without deleting conversations or recordings. */
   @summary("Delete a telephony campaign")
   @delete
   @route("/agents/{agent_name}/telephony/campaigns/{campaign_name}")
@@ -600,11 +614,14 @@ interface TelephonyCampaigns {
 
       /** Immutable Campaign name. */
       @path campaign_name: TelephonyCampaignName;
+
+      /** Exact control token for the instance being deleted. Wildcards are rejected; absent resources still return 204. */
+      @header("If-Match") if_match: Azure.Core.eTag;
     },
     NoContentResponse
   >;
 
-  /** Stops new attempts for running work or an execution-time validation. Already admitted calls and an in-flight check may finish but cannot undo this pause. Pending/initially validating/terminal Campaigns reject pause with 409. Pausing paused work returns its current state with a current ETag. */
+  /** Pauses running execution without disconnecting admitted calls. Initial or execution-time validating states reject pause with 409; use cancel to stop validation. Paused guarantees that no validation scan remains active. Repeating pause on paused work with its current control token returns the current state. Pending and terminal states reject pause. */
   @summary("Pause a telephony campaign")
   @post
   @route("/agents/{agent_name}/telephony/campaigns/{campaign_name}:pause")
@@ -621,10 +638,10 @@ interface TelephonyCampaigns {
       /** Exact etag from the latest read; stale commands return 412. */
       @header("If-Match") if_match: Azure.Core.eTag;
     },
-    TelephonyCampaign
+    TelephonyCampaignResponse
   >;
 
-  /** Lists recipients and their current validation/execution outcomes in any Campaign state. Stable IDs and ordering, but no snapshot guarantee across requests; a new validation does not invalidate cursors. */
+  /** Lists recipients with live filters. Opaque cursors bind the Campaign incarnation and original row sort boundary; a cursor from a deleted same-name Campaign returns 400 invalid_cursor, never rows from its replacement. New validation of the same instance does not invalidate cursors. */
   @summary("List campaign recipient results")
   @get
   @list
@@ -639,7 +656,7 @@ interface TelephonyCampaigns {
       /** Immutable Campaign name. */
       @path campaign_name: TelephonyCampaignName;
 
-      ...CommonPageQueryParameters;
+      ...TelephonyCampaignPageQueryParameters;
 
       /** Optional live outcome filter, usable before terminal execution. */
       @query status?: TelephonyCampaignRecipientResultStatus;
@@ -647,11 +664,11 @@ interface TelephonyCampaigns {
       /** Filter rows with or without validation errors, including errors that paused an already started Campaign. */
       @query has_validation_error?: boolean;
     },
-    AgentsPagedResult<TelephonyCampaignRecipientResult>
+    TelephonyCampaignPage<TelephonyCampaignRecipientResult>
   >;
 
-  /** Polls the preparation operation created with the Campaign. Nonterminal responses include Retry-After. On success, retrieve the Campaign with GET; on failure, error contains the cause. There is no separate import/validate submission and no call-outcome result in this monitor. */
-  @summary("Get campaign preparation status")
+  /** Polls an immutable creation operation independently of Campaign deletion/name reuse. Retained for the lifetime of the original resource and at least 24 hours after both operation completion and resource deletion. Nonterminal responses include Retry-After. On success, GET the Campaign with operation_id to avoid reading a reused name. No standalone operation creation or business Preparation resource exists. */
+  @summary("Get a campaign creation operation")
   @opExample(
     #{
       returnType: #{
@@ -691,9 +708,9 @@ interface TelephonyCampaigns {
     #{ title: "Validation failed without dialing" }
   )
   @get
-  @route("/agents/{agent_name}/telephony/campaigns/{campaign_name}/preparation")
+  @route("/agents/{agent_name}/telephony/campaigns/{campaign_name}/operations/{operation_id}")
   @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-  getPreparation is FoundryDataPlanePreviewOperation<
+  getOperation is FoundryDataPlanePreviewOperation<
     AgentDefinitionOptInKeys.voice_agents_v1_preview,
     {
       /** Owning Agent. */
@@ -701,7 +718,10 @@ interface TelephonyCampaigns {
 
       /** Immutable Campaign name. */
       @path campaign_name: TelephonyCampaignName;
+
+      /** Immutable creation-operation ID returned in Operation-Id. Authorization is checked against its saved project and Agent scope. */
+      @path operation_id: string;
     },
-    JobStatusResponse<TelephonyCampaignPreparation>
+    JobStatusResponse<TelephonyCampaignOperation>
   >;
 }

@@ -1,0 +1,75 @@
+{
+  "title": "CreateRecipientScheduled",
+  "operationId": "TelephonyCampaigns_create",
+  "parameters": {
+    "endpoint": "https://contoso.services.ai.azure.com/api/projects/reminders",
+    "api-version": "v1",
+    "Foundry-Features": "VoiceAgents=V1Preview",
+    "agent_name": "contoso-reminder-agent",
+    "campaign_name": "recipient-reminders",
+    "Operation-Id": "e17c2d94-132f-4cef-8fc2-61841468326a",
+    "body": {
+      "inputs": {
+        "connection_name": "contoso-phone-provider",
+        "source": "+14255550100",
+        "recipients": {
+          "type": "dataset",
+          "dataset_name": "reminder-recipients",
+          "dataset_version": "1",
+          "format": "jsonl"
+        },
+        "schedule": {
+          "type": "recipient",
+          "column": "call_at"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {
+        "Location": "https://contoso.services.ai.azure.com/api/projects/reminders/agents/contoso-reminder-agent/telephony/campaigns/recipient-reminders?api-version=v1",
+        "Operation-Location": "https://contoso.services.ai.azure.com/api/projects/reminders/agents/contoso-reminder-agent/telephony/campaigns/recipient-reminders/operations/e17c2d94-132f-4cef-8fc2-61841468326a?api-version=v1",
+        "Operation-Id": "e17c2d94-132f-4cef-8fc2-61841468326a",
+        "Cache-Control": "no-store"
+      },
+      "body": {
+        "name": "recipient-reminders",
+        "status": "validating",
+        "inputs": {
+          "connection_name": "contoso-phone-provider",
+          "source": "+14255550100",
+          "recipients": {
+            "type": "dataset",
+            "dataset_name": "reminder-recipients",
+            "dataset_version": "1",
+            "format": "jsonl"
+          },
+          "schedule": {
+            "type": "recipient",
+            "column": "call_at"
+          }
+        },
+        "etag": "\"control-reminders-instance1-v1\"",
+        "creation_operation_id": "e17c2d94-132f-4cef-8fc2-61841468326a",
+        "created_at": 1790071200,
+        "updated_at": 1790071200,
+        "progress": {
+          "validation": {
+            "checked_recipients": 0,
+            "valid_recipients": 0,
+            "invalid_recipients": 0
+          },
+          "execution": {
+            "pending": 0,
+            "active": 0,
+            "completed": 0,
+            "failed": 0,
+            "cancelled": 0,
+            "expired": 0
+          }
+        }
+      }
+    }
+  }
+}
