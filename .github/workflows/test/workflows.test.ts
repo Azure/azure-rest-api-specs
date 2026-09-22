@@ -17,11 +17,16 @@ interface Workflow {
     workflow_call?: { inputs?: Record<string, unknown> };
   };
   permissions?: Record<string, string>;
+  concurrency?: {
+    group: string;
+    "cancel-in-progress": string;
+  };
   jobs: Record<
     string,
     {
       name?: string;
       "runs-on"?: string;
+      "timeout-minutes"?: number;
       strategy?: { matrix?: Record<string, unknown>; "fail-fast"?: boolean };
       steps?: {
         name?: string;
@@ -40,6 +45,25 @@ async function readWorkflow(file: string): Promise<Workflow> {
 }
 
 describe("workflow files", () => {
+  it.each([
+    ["eng.yml", { "workspace-validation": 10, build: 10, test: 20 }],
+    ["lint.yaml", { lint: 10 }],
+    ["format.yaml", { format: 10 }],
+    ["github-test.yaml", { test: 10 }],
+  ] as const)("bounds %s jobs and only supersedes runs of the same PR", async (file, timeouts) => {
+    const workflow = await readWorkflow(file);
+    expect(workflow.concurrency).toEqual({
+      group:
+        "${{ github.workflow }}-${{ github.event_name }}-${{ github.event.pull_request.number || github.run_id }}",
+      "cancel-in-progress": "${{ github.event_name == 'pull_request' }}",
+    });
+    expect(
+      Object.fromEntries(
+        Object.entries(workflow.jobs).map(([name, job]) => [name, job["timeout-minutes"]]),
+      ),
+    ).toEqual(timeouts);
+  });
+
   it("should be named *.yaml or *.md", async () => {
     const entries = await readdir(workflowsDir, { withFileTypes: true });
 
