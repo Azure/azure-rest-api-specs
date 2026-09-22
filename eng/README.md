@@ -52,10 +52,15 @@ Below are code convention we strive to follow in `eng` directory:
   of unused dependencies.
 - CI installs the pinned pnpm version via `.github/actions/setup-node-install-deps`
   (which reads the `packageManager` field) and runs `pnpm ci`.
+- In repeated validation loops, run installed Node.js tools directly rather than starting
+  `pnpm exec` or `npm exec` for each file or project. TypeScript consumers can use
+  `execNodeBin` from `@azure-tools/specs-shared/exec`; PowerShell scripts can invoke
+  `node` with a CLI entrypoint anchored to the repository or script directory. Keep pnpm
+  for dependency installation and package-management operations.
 
 ## Linting and formatting
 
-- Run `pnpm lint` from the repository root to lint the previously linted packages
+- Run `pnpm lint` from the repository root to lint the enabled packages
   in `.github` and `eng/tools` in one oxlint invocation. Use `pnpm lint:fix` to apply
   safe fixes. File selection lives in the root `.oxlintrc.json`, so the root command
   is simply `oxlint .`; other repository folders and root-level files are excluded.
@@ -67,12 +72,9 @@ Below are code convention we strive to follow in `eng` directory:
   the package/OS test matrices. Package workflows still run type checks and tests;
   they must not invoke code linting again. Package-local `pnpm lint` scripts
   remain available for development.
-- `openapi-diff-runner`, `sdk-suppressions`, `summarize-impact`, and
-  `typespec-migration-validation` did not previously run ESLint and remain excluded
-  in the root configuration. Enabling linting for these packages is a separate
-  change, not part of the linter migration. Their type checks and tests are
-  unchanged. Existing suppressions in linted packages are
-  retained; unused suppressions fail linting.
+- `openapi-diff-runner` and `typespec-migration-validation`
+  are excluded in the root configuration. Their type checks and tests run separately.
+  Unused suppressions in linted packages fail linting.
 - Discuss any desired rule divergences and explain them in the configuration.
 - Run `pnpm format` or `pnpm format:check` from the repository root to format or
   check `.github` and `eng/tools` in one Oxfmt invocation. Package-local commands

@@ -15,7 +15,7 @@ const handwrittenSwaggerPath = "data-plane/Azure.Foo/preview/2021-11-01-preview/
 
 describe("compile", function () {
   let gitDiffTopSpecFolderSpy: MockInstance;
-  let runPnpmSpy: MockInstance;
+  let runNodeBinSpy: MockInstance;
 
   beforeEach(() => {
     vi.spyOn(utils, "fileExists").mockResolvedValue(true);
@@ -27,10 +27,10 @@ describe("compile", function () {
         errorOutput: "",
       }),
     );
-    runPnpmSpy = vi
-      .spyOn(utils, "runPnpm")
-      .mockImplementation((args, cwd) =>
-        Promise.resolve([null, `runPnpm ${args.join(" ")} at ${cwd}`, ""]),
+    runNodeBinSpy = vi
+      .spyOn(utils, "runNodeBin")
+      .mockImplementation((packageName, args, cwd) =>
+        Promise.resolve([null, `runNodeBin ${packageName} ${args.join(" ")} at ${cwd}`, ""]),
       );
   });
 
@@ -53,7 +53,7 @@ describe("compile", function () {
       // ensure examples are skipped
       `${swaggerPath.replace("foo.json", "examples/example.json")}\n`;
 
-    runPnpmSpy.mockImplementation((): Promise<[Error | null, string, string]> =>
+    runNodeBinSpy.mockImplementation((): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, compileOutput, ""]),
     );
 
@@ -68,6 +68,20 @@ describe("compile", function () {
     await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
       success: true,
     });
+    expect(runNodeBinSpy).toHaveBeenNthCalledWith(1, "@typespec/compiler", [
+      "tsp",
+      "compile",
+      "--list-files",
+      "--warn-as-error",
+      mockFolder,
+    ]);
+    expect(runNodeBinSpy).toHaveBeenNthCalledWith(2, "@typespec/compiler", [
+      "tsp",
+      "compile",
+      "--no-emit",
+      "--warn-as-error",
+      path.join(mockFolder, "client.tsp"),
+    ]);
   });
 
   it.each([
@@ -78,7 +92,7 @@ describe("compile", function () {
       `\u001b]8;;file:///foo.json\u001b\\${swaggerPath}\u001b]8;;\u001b\\`,
     ],
   ])("should recognize generated paths wrapped in %s", async (_name, output) => {
-    runPnpmSpy.mockResolvedValue([null, `${output}\r\n`, ""]);
+    runNodeBinSpy.mockResolvedValue([null, `${output}\r\n`, ""]);
     vi.mocked(nativeGlob.globFiles).mockResolvedValue([swaggerPath]);
     vi.mocked(fsPromises.readFile).mockResolvedValue('{"info": {"x-typespec-generated": true}}');
 
@@ -92,7 +106,7 @@ describe("compile", function () {
   });
 
   it("should succeed if output has no generated swaggers", async function () {
-    runPnpmSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, "not-swagger", ""]),
     );
 
@@ -103,7 +117,7 @@ describe("compile", function () {
   });
 
   it("should fail if extra swaggers", async function () {
-    runPnpmSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, swaggerPath, ""]),
     );
 
@@ -133,7 +147,7 @@ describe("compile", function () {
     const latestPreviewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
     const olderPreviewPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
 
-    runPnpmSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, latestPreviewPath, ""]),
     );
 
@@ -157,7 +171,7 @@ describe("compile", function () {
     const latestPreviewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
     const anotherLatestPreviewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/bar.json";
 
-    runPnpmSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, latestPreviewPath, ""]),
     );
 
@@ -180,7 +194,7 @@ describe("compile", function () {
     const previewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
     const stablePath = "data-plane/Azure.Foo/stable/2023-01-01/foo.json";
 
-    runPnpmSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, previewPath, ""]),
     );
 
@@ -205,7 +219,7 @@ describe("compile", function () {
     const stablePath = "data-plane/Azure.Foo/stable/2024-03-01/foo.json";
     const olderPreviewPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
 
-    runPnpmSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, stablePath, ""]),
     );
 
@@ -231,7 +245,7 @@ describe("compile", function () {
     const stablePath = "data-plane/Azure.Foo/stable/2023-01-01/foo.json";
     const newerPreviewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
 
-    runPnpmSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, stablePath, ""]),
     );
 
@@ -255,7 +269,7 @@ describe("compile", function () {
     const olderPreview1Path = "data-plane/Azure.Foo/preview/2023-01-01-preview/foo.json";
     const olderPreview2Path = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
 
-    runPnpmSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, latestPreviewPath, ""]),
     );
 
@@ -280,7 +294,7 @@ describe("compile", function () {
     const olderPreviewPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
     const stablePath = "data-plane/Azure.Foo/stable/2023-01-01/foo.json";
 
-    runPnpmSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, previewPath, ""]),
     );
 
@@ -300,7 +314,7 @@ describe("compile", function () {
   });
 
   it("supports suppressions", async function () {
-    runPnpmSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, swaggerPath, ""]),
     );
 
@@ -339,7 +353,7 @@ describe("compile", function () {
   });
 
   it("throws on invalid suppressions", async function () {
-    runPnpmSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, swaggerPath, ""]),
     );
 
@@ -359,8 +373,8 @@ describe("compile", function () {
   });
 
   it("should skip git diff check if compile fails", async function () {
-    runPnpmSpy.mockImplementation(
-      async (args: string[]): Promise<[Error | null, string, string]> => {
+    runNodeBinSpy.mockImplementation(
+      async (_packageName: string, args: string[]): Promise<[Error | null, string, string]> => {
         if (args.join(" ").includes("tsp compile")) {
           return Promise.resolve([
             { name: "compilation_error", message: "compilation error" },
@@ -379,7 +393,7 @@ describe("compile", function () {
   });
 
   it("should fail if git diff fails", async function () {
-    runPnpmSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, swaggerPath, ""]),
     );
 
@@ -402,7 +416,7 @@ describe("compile", function () {
   });
 
   it("should succeed if git diff succeeds", async function () {
-    runPnpmSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, swaggerPath, ""]),
     );
 
