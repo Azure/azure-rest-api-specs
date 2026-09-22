@@ -284,11 +284,7 @@ interface BackupProtectedItemsCrrOperationGroup {
   "x-ms-odata",
   "#/definitions/BMSAADPropertiesQueryObject"
 );
-@@TypeSpec.OpenAPI.extension(
-  BackupUsageSummariesCrrOperationGroup.list,
-  "x-ms-pageable",
-  #{ nextLinkName: null }
-);
+@@TypeSpec.list(BackupUsageSummariesCrrOperationGroup.list);
 
 @@TypeSpec.nextLink(ResourceList.nextLink);
 

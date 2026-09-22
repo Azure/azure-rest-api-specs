@@ -793,7 +793,7 @@
         },
         "x-ms-odata": "#/definitions/BMSBackupSummariesQueryObject",
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2233,7 +2233,12 @@
             "$ref": "#/definitions/BackupManagementUsage"
           }
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceList"
+        }
+      ]
     },
     "BackupResourceConfig": {
       "type": "object",
