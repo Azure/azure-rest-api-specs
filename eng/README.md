@@ -108,6 +108,28 @@ and runs the Vitest workspace on Ubuntu and Windows with Node 24.
 New tools do not need their own workflows. `github-test.yaml` separately verifies
 production-only module imports, workflow YAML, and compiled agentic workflow locks.
 
+## TypeSpec validation cleanup
+
+`eng/scripts/TypeSpec-Validation.ps1 -GitClean` restores worktree changes from the
+Git index and removes non-ignored generated output between projects. Discovery
+covers the whole repository, including output outside the current project. Staged
+changes and ignored dependencies are preserved; clean checkouts skip restore and
+clean entirely. Compiler-generated-output validation still runs before cleanup.
+
+Cleanup stops the shard on Git errors, conflicts, changed submodules, intent-to-add
+entries, changed `.gitignore` files, or tracked files replaced by directories.
+Nested repositories are not forcibly deleted: if Git skips one, cleanup reports
+the remaining untracked path and stops rather than continuing with a contaminated
+checkout.
+
+Each Git command emits a `TSV cleanup` JSON timing record with `command`,
+`durationMs`, and `success`. The validation process and PowerShell output draining
+have a separate combined timer. For performance comparisons, use repeated runs
+with the same specification/dependency base and keep Linux and Windows statistics
+separate. Compare command means, medians, and ranges, per-shard durations, summed
+execution time, and elapsed completion time independently; cleanup timings do not
+measure compiler or formatting improvements.
+
 ## Linting and formatting
 
 - Run `pnpm lint` from the repository root to lint the enabled packages

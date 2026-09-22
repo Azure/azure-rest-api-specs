@@ -67,8 +67,12 @@ if ($typespecFolders) {
       continue
     }
 
+    $validationTimer = [System.Diagnostics.Stopwatch]::StartNew()
     node $tsvScript $typespecFolder "$context" 2>&1 | Write-Host
-    if ($LASTEXITCODE) {
+    $validationExitCode = $LASTEXITCODE
+    $validationTimer.Stop()
+    LogInfo "TSV validation (process and output drain): $($validationTimer.ElapsedMilliseconds) ms"
+    if ($validationExitCode) {
       $typespecFoldersWithFailures += $typespecFolder
       $errorString = "TypeSpec Validation failed for project $typespecFolder run the following command locally to validate."
       $errorString += "`n > pnpm install"
@@ -77,8 +81,15 @@ if ($typespecFolders) {
       LogError $errorString
     }
     if ($GitClean) {
-      git restore .
-      git clean -df
+      $cleanupScript = Join-Path $PSScriptRoot ".." "tools" "typespec-validation" "src" "git-cleanup.ts"
+      $repoRoot = Resolve-Path (Join-Path $PSScriptRoot ".." "..")
+      node $cleanupScript "$repoRoot" 2>&1 | Write-Host
+      if ($LASTEXITCODE) {
+        LogError "Git cleanup failed after $typespecFolder; stopping to avoid validating a contaminated checkout."
+        LogGroupEnd
+        LogJobFailure
+        exit 1
+      }
     }
     LogGroupEnd
   }
