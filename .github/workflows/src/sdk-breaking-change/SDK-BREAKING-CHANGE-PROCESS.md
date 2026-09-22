@@ -19,13 +19,13 @@ downstream SDK repositories, avoid back-and-forth across repos and stages
 2. After the validation pipeline completes, the `SDK breaking changes labels` workflow:
 
 - Adds the `BreakingChange-<language>-Sdk` label.
-- Posts the `/azsdk sdk-breaking-analysis <language>` command as a comment.
-if any SDK breaking changes are detected.
+- Publishes artifacts identifying the pull request, commit, and SDK breaking-change label action.
 
-3. When that command comment is created or edited, the `SDK breaking change analysis` workflow:
+3. When the `SDK Breaking Change Labels` workflow completes successfully, the
+   `SDK breaking change analysis` workflow:
 
 - Analyzes the detected SDK breaking changes.
-- Updates the command comment with the analysis, as shown in the following example:
+- Posts the analysis to the pull request, as shown in the following example:
 
 ```markdown
 ## SDK Breaking changes for Go
@@ -36,14 +36,13 @@ if any SDK breaking changes are detected.
 
 **SDK Package:** armwebpubsub
 
-|  | Breaking change | Category | Suggested fix |
-| --- | --- | --- | --- |
-| ☐ | Model WebPubSubResource: SDK struct ResourceInfo was renamed to Resource, changing operation parameter and response field types. | conversion-need resolve | Add @@clientName(WebPubSubResource, "ResourceInfo", "go") to replay the legacy Go rename-model directive. |
-| ☐ | Model WebPubSubResourceList: SDK struct ResourceInfoList was renamed to ResourceList, changing list response fields. | conversion-need resolve | Add @@clientName(WebPubSubResourceList, "ResourceInfoList", "go") to replay the legacy Go rename-model directive. |
-| ☐ | Model ResourceSku versioned property set changed the SDK fields Family and Tier to FamiliyNew and TierNew. | spec change | - |
+|     | Breaking change                                                                                                                  | Category                | Suggested fix                                                                                                     |
+| --- | -------------------------------------------------------------------------------------------------------------------------------- | ----------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| ☐   | Model WebPubSubResource: SDK struct ResourceInfo was renamed to Resource, changing operation parameter and response field types. | conversion-need resolve | Add @@clientName(WebPubSubResource, "ResourceInfo", "go") to replay the legacy Go rename-model directive.         |
+| ☐   | Model WebPubSubResourceList: SDK struct ResourceInfoList was renamed to ResourceList, changing list response fields.             | conversion-need resolve | Add @@clientName(WebPubSubResourceList, "ResourceInfoList", "go") to replay the legacy Go rename-model directive. |
+| ☐   | Model ResourceSku versioned property set changed the SDK fields Family and Tier to FamiliyNew and TierNew.                       | spec change             | -                                                                                                                 |
 
 [SDK breaking change details (armwebpubsub/breaking-changes.json)](https://github.com/chunyu3/azure-rest-api-specs/actions/runs/35322886769#summary-105529151679)
-
 ```
 
 ### Mitigation
@@ -64,15 +63,15 @@ The `SDK breaking change mitigation` workflow then:
 ## SDK breaking-change mitigation result
 
 **Resolved Breaking Changes:**
-* **Typespec Project:** specification/webpubsub/resource-manager/Microsoft.SignalRService/SignalRService
 
-| Breaking change | Resolution |
-| --- | --- |
-| Struct ResourceInfo for TypeSpec model WebPubSubResource was renamed to Resource, changing the model used by create, update, get, and their response types. | Add @@clientName(WebPubSubResource, "ResourceInfo", "go") to client.tsp to preserve the legacy Go SDK name. |
-| Struct ResourceInfoList for TypeSpec model WebPubSubResourceList was renamed to ResourceList, changing the embedded list result in list responses. | Add @@clientName(WebPubSubResourceList, "ResourceInfoList", "go") to client.tsp to preserve the legacy Go SDK name. |
+- **Typespec Project:** specification/webpubsub/resource-manager/Microsoft.SignalRService/SignalRService
+
+| Breaking change                                                                                                                                             | Resolution                                                                                                          |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| Struct ResourceInfo for TypeSpec model WebPubSubResource was renamed to Resource, changing the model used by create, update, get, and their response types. | Add @@clientName(WebPubSubResource, "ResourceInfo", "go") to client.tsp to preserve the legacy Go SDK name.         |
+| Struct ResourceInfoList for TypeSpec model WebPubSubResourceList was renamed to ResourceList, changing the embedded list result in list responses.          | Add @@clientName(WebPubSubResourceList, "ResourceInfoList", "go") to client.tsp to preserve the legacy Go SDK name. |
 
 **Mitigation pull request:** https://github.com/chunyu3/azure-rest-api-specs/pull/59
-
 ```
 
 2. The specification owner reviews the mitigation pull request and applies the proposed customization for each breaking change they want to resolve. Breaking changes that are intentional and accepted must be suppressed.
