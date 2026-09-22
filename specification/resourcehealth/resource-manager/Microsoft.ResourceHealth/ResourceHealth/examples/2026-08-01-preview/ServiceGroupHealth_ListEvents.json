@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2026-08-01-preview",
+    "serviceGroupName": "example-service-group"
+  },
+  "responses": {
+    "default": {
+      "body": {
+        "error": {
+          "code": "Forbidden",
+          "message": "Access to this preview operation is not permitted."
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000001/providers/Microsoft.ResourceHealth/events/ABCD-123",
+            "name": "ABCD-123",
+            "type": "Microsoft.ResourceHealth/events",
+            "properties": {
+              "eventType": "ServiceIssue",
+              "status": "Active",
+              "title": "Service issue potentially relevant to service group members",
+              "lastUpdateTime": "2026-08-01T12:00:00Z"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000002/providers/Microsoft.ResourceHealth/events/ABCD-123",
+            "name": "ABCD-123",
+            "type": "Microsoft.ResourceHealth/events",
+            "properties": {
+              "eventType": "ServiceIssue",
+              "status": "Active",
+              "title": "Service issue potentially relevant to service group members",
+              "lastUpdateTime": "2026-08-01T12:00:00Z"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/providers/Microsoft.Management/serviceGroups/example-service-group/providers/Microsoft.ResourceHealth/events?api-version=2026-08-01-preview&$skipToken=opaque-continuation-token"
+      }
+    }
+  },
+  "operationId": "ServiceGroupHealth_ListEvents",
+  "title": "List potentially relevant events preserving subscription-scoped identities"
+}

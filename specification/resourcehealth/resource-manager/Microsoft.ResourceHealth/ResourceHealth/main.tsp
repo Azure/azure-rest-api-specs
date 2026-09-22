@@ -19,6 +19,7 @@ import "./EventImpactedResource.tsp";
 import "./Event.tsp";
 import "./EmergingIssuesGetResult.tsp";
 import "./routes.tsp";
+import "./ServiceGroupHealth.tsp";
 import "./client.tsp";
 
 using TypeSpec.Rest;
@@ -45,6 +46,11 @@ enum Versions {
    * The 2025-05-01 API version.
    */
   v2025_05_01: "2025-05-01",
+
+  /** The 2026-08-01-preview API version. */
+  @previewVersion
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  v2026_08_01_preview: "2026-08-01-preview",
 }
 
 @armResourceOperations

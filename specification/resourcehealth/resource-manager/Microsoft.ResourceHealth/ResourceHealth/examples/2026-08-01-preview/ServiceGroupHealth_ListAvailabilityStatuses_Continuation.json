@@ -1,0 +1,26 @@
+{
+  "parameters": {
+    "api-version": "2026-08-01-preview",
+    "serviceGroupName": "example-service-group",
+    "$skipToken": "opaque-continuation-token",
+    "querySignature": "opaque-query-signature"
+  },
+  "responses": {
+    "default": {
+      "body": {
+        "error": {
+          "code": "Forbidden",
+          "message": "Access to this preview operation is not permitted."
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "value": [],
+        "nextLink": "https://management.azure.com/providers/Microsoft.Management/serviceGroups/example-service-group/providers/Microsoft.ResourceHealth/availabilityStatuses?api-version=2026-08-01-preview&$skipToken=opaque-next-token&querySignature=opaque-next-signature"
+      }
+    }
+  },
+  "operationId": "ServiceGroupHealth_ListAvailabilityStatuses",
+  "title": "Continue availability status listing after an empty page"
+}

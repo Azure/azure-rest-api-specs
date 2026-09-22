@@ -1,0 +1,2549 @@
+{
+  "parameters": {
+    "api-version": "2026-08-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "string",
+        "value": [
+          {
+            "name": "status",
+            "type": "Microsoft.ResourceHealth/metadata",
+            "id": "/providers/Microsoft.ResourceHealth/metadata/status",
+            "properties": {
+              "applicableScenarios": [
+                "Alerts"
+              ],
+              "displayName": "Status",
+              "supportedValues": [
+                {
+                  "displayName": "Active",
+                  "id": "Active"
+                },
+                {
+                  "displayName": "Resolved",
+                  "id": "Resolved"
+                },
+                {
+                  "displayName": "In Progress",
+                  "id": "In Progress"
+                },
+                {
+                  "displayName": "Updated",
+                  "id": "Updated"
+                }
+              ]
+            }
+          },
+          {
+            "name": "level",
+            "type": "Microsoft.ResourceHealth/metadata",
+            "id": "/providers/Microsoft.ResourceHealth/metadata/level",
+            "properties": {
+              "applicableScenarios": [
+                "Alerts"
+              ],
+              "displayName": "Level",
+              "supportedValues": [
+                {
+                  "displayName": "Informational",
+                  "id": "Informational"
+                },
+                {
+                  "displayName": "Critical",
+                  "id": "Critical"
+                }
+              ]
+            }
+          },
+          {
+            "name": "cause",
+            "type": "Microsoft.ResourceHealth/metadata",
+            "id": "/providers/Microsoft.ResourceHealth/metadata/cause",
+            "properties": {
+              "applicableScenarios": [
+                "Alerts"
+              ],
+              "displayName": "Cause",
+              "supportedValues": [
+                {
+                  "displayName": "Platform Initiated",
+                  "id": "PlatformInitiated"
+                },
+                {
+                  "displayName": "User Initiated",
+                  "id": "UserInitiated"
+                },
+                {
+                  "displayName": "Unknown",
+                  "id": "Unknown"
+                }
+              ]
+            }
+          },
+          {
+            "name": "previousHealthStatus",
+            "type": "Microsoft.ResourceHealth/metadata",
+            "id": "/providers/Microsoft.ResourceHealth/metadata/previousHealthStatus",
+            "properties": {
+              "applicableScenarios": [
+                "Alerts"
+              ],
+              "displayName": "Previous Health Status",
+              "supportedValues": [
+                {
+                  "displayName": "Available",
+                  "id": "Available"
+                },
+                {
+                  "displayName": "Unavailable",
+                  "id": "Unavailable"
+                },
+                {
+                  "displayName": "Degraded",
+                  "id": "Degraded"
+                },
+                {
+                  "displayName": "Unknown",
+                  "id": "Unknown"
+                }
+              ]
+            }
+          },
+          {
+            "name": "currentHealthStatus",
+            "type": "Microsoft.ResourceHealth/metadata",
+            "id": "/providers/Microsoft.ResourceHealth/metadata/currentHealthStatus",
+            "properties": {
+              "applicableScenarios": [
+                "Alerts"
+              ],
+              "displayName": "Current Health Status",
+              "supportedValues": [
+                {
+                  "displayName": "Available",
+                  "id": "Available"
+                },
+                {
+                  "displayName": "Unavailable",
+                  "id": "Unavailable"
+                },
+                {
+                  "displayName": "Degraded",
+                  "id": "Degraded"
+                },
+                {
+                  "displayName": "Unknown",
+                  "id": "Unknown"
+                }
+              ]
+            }
+          },
+          {
+            "name": "supportedResourceType",
+            "type": "Microsoft.ResourceHealth/metadata",
+            "id": "/providers/Microsoft.ResourceHealth/metadata/supportedResourceType",
+            "properties": {
+              "displayName": "Supported Resource Type",
+              "supportedValues": [
+                {
+                  "displayName": "Prometheus Rule Groups",
+                  "id": "Microsoft.AlertsManagement/prometheusRuleGroups"
+                },
+                {
+                  "displayName": "Analysis Services",
+                  "id": "Microsoft.AnalysisServices/servers"
+                },
+                {
+                  "displayName": "API Management service",
+                  "id": "Microsoft.ApiManagement/service"
+                },
+                {
+                  "displayName": "Microsoft.AppPlatform/Spring",
+                  "id": "Microsoft.AppPlatform/Spring"
+                },
+                {
+                  "displayName": "Azure Data Explorer Cluster",
+                  "id": "Microsoft.Kusto/Clusters"
+                },
+                {
+                  "displayName": "microsoft.fluidrelay/fluidrelayservers",
+                  "id": "microsoft.fluidrelay/fluidrelayservers"
+                },
+                {
+                  "displayName": "AKS cluster",
+                  "id": "microsoft.ContainerService/managedClusters"
+                },
+                {
+                  "displayName": "Microsoft.Dashboard/grafana",
+                  "id": "Microsoft.Dashboard/grafana"
+                },
+                {
+                  "displayName": "Azure Monitor Workspaces",
+                  "id": "Microsoft.Monitor/Accounts"
+                },
+                {
+                  "displayName": "Azure Purview",
+                  "id": "Microsoft.Purview/accounts"
+                },
+                {
+                  "displayName": "ARO cluster",
+                  "id": "Microsoft.RedHatOpenShift/openShiftClusters"
+                },
+                {
+                  "displayName": "Microsoft.SignalRService/SignalR",
+                  "id": "Microsoft.SignalRService/SignalR"
+                },
+                {
+                  "displayName": "Microsoft.SignalRService/SignalR/replicas",
+                  "id": "Microsoft.SignalRService/SignalR/replicas"
+                },
+                {
+                  "displayName": "Microsoft.SignalRService/WebPubSub",
+                  "id": "Microsoft.SignalRService/WebPubSub"
+                },
+                {
+                  "displayName": "microsoft.storagemover/storageMovers",
+                  "id": "microsoft.storagemover/storageMovers"
+                },
+                {
+                  "displayName": "Azure VMware Solution",
+                  "id": "Microsoft.AVS/PrivateClouds"
+                },
+                {
+                  "displayName": "Batch account",
+                  "id": "Microsoft.Batch/batchAccounts"
+                },
+                {
+                  "displayName": "Redis cache",
+                  "id": "Microsoft.Cache/Redis"
+                },
+                {
+                  "displayName": "Cdn profile",
+                  "id": "Microsoft.Cdn/profiles"
+                },
+                {
+                  "displayName": "Cloud services (classic)",
+                  "id": "Microsoft.ClassicCompute/DomainNames"
+                },
+                {
+                  "displayName": "Virtual machine (classic)",
+                  "id": "Microsoft.ClassicCompute/virtualMachines"
+                },
+                {
+                  "displayName": "Cognitive Services account",
+                  "id": "Microsoft.CognitiveServices/accounts"
+                },
+                {
+                  "displayName": "Azure Dedicated Host",
+                  "id": "Microsoft.Compute/hostGroups/hosts"
+                },
+                {
+                  "displayName": "Virtual machine",
+                  "id": "Microsoft.Compute/virtualMachines"
+                },
+                {
+                  "displayName": "Virtual machine scale sets",
+                  "id": "Microsoft.Compute/virtualMachineScaleSets"
+                },
+                {
+                  "displayName": "microsoft.connectedvmwarevsphere/vcenters",
+                  "id": "microsoft.connectedvmwarevsphere/vcenters"
+                },
+                {
+                  "displayName": "Cosmos DB",
+                  "id": "Microsoft.Documentdb/databaseaccounts"
+                },
+                {
+                  "displayName": "Data factory",
+                  "id": "Microsoft.DataFactory/factories"
+                },
+                {
+                  "displayName": "Data Lake Analytics account",
+                  "id": "Microsoft.DataLakeAnalytics/accounts"
+                },
+                {
+                  "displayName": "Data Lake Store account",
+                  "id": "Microsoft.DataLakeStore/accounts"
+                },
+                {
+                  "displayName": "Azure Database Migration Service",
+                  "id": "Microsoft.DataMigration/services"
+                },
+                {
+                  "displayName": "Microsoft.DataProtection/BackupVaults",
+                  "id": "Microsoft.DataProtection/BackupVaults"
+                },
+                {
+                  "displayName": "Azure Data Share account",
+                  "id": "Microsoft.DataShare/accounts"
+                },
+                {
+                  "displayName": "Azure Database for MariaDB servers",
+                  "id": "Microsoft.DBforMariaDB/servers"
+                },
+                {
+                  "displayName": "Azure Database for MySQL flexible servers",
+                  "id": "Microsoft.DBforMySQL/flexibleServers"
+                },
+                {
+                  "displayName": "Azure Database for MySQL servers",
+                  "id": "Microsoft.DBforMySQL/servers"
+                },
+                {
+                  "displayName": "Azure Database for PostgreSQL Flexible Server",
+                  "id": "Microsoft.DBforPostgreSQL/flexibleservers"
+                },
+                {
+                  "displayName": "Azure Database for PostgreSQL servers",
+                  "id": "Microsoft.DBforPostgreSQL/servers"
+                },
+                {
+                  "displayName": "Microsoft.DBforPostgreSQL/serverGroupsv2",
+                  "id": "Microsoft.DBforPostgreSQL/serverGroupsv2"
+                },
+                {
+                  "displayName": "IoT Hub",
+                  "id": "Microsoft.Devices/IotHubs"
+                },
+                {
+                  "displayName": "Azure Digital Twins",
+                  "id": "Microsoft.DigitalTwins/DigitalTwinsInstances"
+                },
+                {
+                  "displayName": "Microsoft Defender External Attack Surface Management workspace",
+                  "id": "Microsoft.Easm/workspaces"
+                },
+                {
+                  "displayName": "Event Hub",
+                  "id": "Microsoft.EventHub/namespaces"
+                },
+                {
+                  "displayName": "Microsoft.ExtendedLocation/customLocations",
+                  "id": "Microsoft.ExtendedLocation/customLocations"
+                },
+                {
+                  "displayName": "HDInsight clusters",
+                  "id": "Microsoft.HdInsight/clusters"
+                },
+                {
+                  "displayName": "Microsoft.HealthcareApis/workspaces/dicomservices",
+                  "id": "Microsoft.HealthcareApis/workspaces/dicomservices"
+                },
+                {
+                  "displayName": "Azure Arc enabled servers",
+                  "id": "Microsoft.HybridCompute/machines"
+                },
+                {
+                  "displayName": "Microsoft.HybridNetwork/devices",
+                  "id": "Microsoft.HybridNetwork/devices"
+                },
+                {
+                  "displayName": "Microsoft.HybridNetwork/networkFunctions",
+                  "id": "Microsoft.HybridNetwork/networkFunctions"
+                },
+                {
+                  "displayName": "Log Search Alert Rules",
+                  "id": "Microsoft.Insights/scheduledQueryRules"
+                },
+                {
+                  "displayName": "IoT Central Application",
+                  "id": "Microsoft.IoTCentral/IoTApps"
+                },
+                {
+                  "displayName": "Key vault",
+                  "id": "Microsoft.KeyVault/vaults"
+                },
+                {
+                  "displayName": "Azure Arc enabled Kubernetes",
+                  "id": "Microsoft.Kubernetes/connectedClusters"
+                },
+                {
+                  "displayName": "Machine Learning Studio web services",
+                  "id": "Microsoft.MachineLearning/webServices"
+                },
+                {
+                  "displayName": "Media service",
+                  "id": "Microsoft.media/mediaservices"
+                },
+                {
+                  "displayName": "Packet Core",
+                  "id": "Microsoft.MobileNetwork/packetcoreControlPlanes"
+                },
+                {
+                  "displayName": "Application Gateway",
+                  "id": "Microsoft.Network/applicationGateways"
+                },
+                {
+                  "displayName": "Microsoft.Network/bastionHosts",
+                  "id": "Microsoft.Network/bastionHosts"
+                },
+                {
+                  "displayName": "VPN Connection",
+                  "id": "Microsoft.Network/Connections"
+                },
+                {
+                  "displayName": "Microsoft.Network/dnsResolvers/inboundEndpoints",
+                  "id": "Microsoft.Network/dnsResolvers/inboundEndpoints"
+                },
+                {
+                  "displayName": "Microsoft.Network/dnsResolvers",
+                  "id": "Microsoft.Network/dnsResolvers"
+                },
+                {
+                  "displayName": "Microsoft.Network/dnsResolvers/outboundEndpoints",
+                  "id": "Microsoft.Network/dnsResolvers/outboundEndpoints"
+                },
+                {
+                  "displayName": "Microsoft.Network/dnszones",
+                  "id": "Microsoft.Network/dnszones"
+                },
+                {
+                  "displayName": "ExpressRoute circuit",
+                  "id": "Microsoft.Network/expressRouteCircuits"
+                },
+                {
+                  "displayName": "Express RouteGateways",
+                  "id": "Microsoft.Network/ExpressRouteGateways"
+                },
+                {
+                  "displayName": "Azure Firewall",
+                  "id": "Microsoft.Network/azureFirewalls"
+                },
+                {
+                  "displayName": "Front Door",
+                  "id": "Microsoft.Network/frontdoors"
+                },
+                {
+                  "displayName": "Load balancer",
+                  "id": "Microsoft.Network/LoadBalancers"
+                },
+                {
+                  "displayName": "Microsoft.Network/NATGateways",
+                  "id": "Microsoft.Network/NATGateways"
+                },
+                {
+                  "displayName": "Network Virtual Appliance",
+                  "id": "Microsoft.Network/networkVirtualAppliances"
+                },
+                {
+                  "displayName": "Microsoft.Network/p2sVpnGateways",
+                  "id": "Microsoft.Network/p2sVpnGateways"
+                },
+                {
+                  "displayName": "Traffic Manager profile",
+                  "id": "Microsoft.Network/trafficmanagerprofiles"
+                },
+                {
+                  "displayName": "Virtual Hub",
+                  "id": "Microsoft.Network/virtualHubs"
+                },
+                {
+                  "displayName": "VPN Gateway",
+                  "id": "Microsoft.Network/virtualNetworkGateways"
+                },
+                {
+                  "displayName": "Microsoft.Network/VpnGateways/VpnConnections",
+                  "id": "Microsoft.Network/VpnGateways/VpnConnections"
+                },
+                {
+                  "displayName": "Microsoft.Network/vpnGateways",
+                  "id": "Microsoft.Network/vpnGateways"
+                },
+                {
+                  "displayName": "Microsoft.Network/VpnGateways/VpnConnections/VpnLinkConnections",
+                  "id": "Microsoft.Network/VpnGateways/VpnConnections/VpnLinkConnections"
+                },
+                {
+                  "displayName": "Notification Hub namespace",
+                  "id": "Microsoft.NotificationHubs/Namespaces"
+                },
+                {
+                  "displayName": "Log Analytics workspace",
+                  "id": "Microsoft.OperationalInsights/workspaces"
+                },
+                {
+                  "displayName": "Microsoft.Orbital/contactprofiles",
+                  "id": "Microsoft.Orbital/contactprofiles"
+                },
+                {
+                  "displayName": "Microsoft.Orbital/spacecrafts",
+                  "id": "Microsoft.Orbital/spacecrafts"
+                },
+                {
+                  "displayName": "Power BI Embedded",
+                  "id": "Microsoft.PowerBIDedicated/capacities"
+                },
+                {
+                  "displayName": "Microsoft.RecoveryServices/vaults",
+                  "id": "Microsoft.RecoveryServices/vaults"
+                },
+                {
+                  "displayName": "Microsoft.ResourceConnector/appliances",
+                  "id": "Microsoft.ResourceConnector/appliances"
+                },
+                {
+                  "displayName": "SCOM Managed instance",
+                  "id": "Microsoft.SCOM/managedInstances"
+                },
+                {
+                  "displayName": "Search service",
+                  "id": "Microsoft.Search/searchServices"
+                },
+                {
+                  "displayName": "Service Bus",
+                  "id": "Microsoft.ServiceBus/namespaces"
+                },
+                {
+                  "displayName": "Service Fabric cluster",
+                  "id": "Microsoft.ServiceFabric/clusters"
+                },
+                {
+                  "displayName": "Microsoft.ServiceFabric/managedClusters",
+                  "id": "Microsoft.ServiceFabric/managedClusters"
+                },
+                {
+                  "displayName": "Managed database",
+                  "id": "Microsoft.Sql/managedInstances/databases"
+                },
+                {
+                  "displayName": "Managed instance",
+                  "id": "Microsoft.Sql/managedInstances"
+                },
+                {
+                  "displayName": "SQL database",
+                  "id": "Microsoft.Sql/servers/databases"
+                },
+                {
+                  "displayName": "Storage account",
+                  "id": "Microsoft.Storage/storageAccounts"
+                },
+                {
+                  "displayName": "Microsoft.StorageCache/caches",
+                  "id": "Microsoft.StorageCache/caches"
+                },
+                {
+                  "displayName": "Stream Analytics job",
+                  "id": "Microsoft.StreamAnalytics/streamingjobs"
+                },
+                {
+                  "displayName": "Microsoft.Synapse/workspaces",
+                  "id": "Microsoft.Synapse/workspaces"
+                },
+                {
+                  "displayName": "Microsoft.VideoIndexer/accounts",
+                  "id": "Microsoft.VideoIndexer/accounts"
+                },
+                {
+                  "displayName": "Microsoft.VoiceServices/CommunicationsGateways",
+                  "id": "Microsoft.VoiceServices/CommunicationsGateways"
+                },
+                {
+                  "displayName": "App Service plan",
+                  "id": "Microsoft.Web/serverFarms"
+                },
+                {
+                  "displayName": "Website",
+                  "id": "Microsoft.Web/sites"
+                },
+                {
+                  "displayName": "Azure Monitor for SAP solutions",
+                  "id": "Microsoft.Workloads/monitors"
+                }
+              ]
+            }
+          },
+          {
+            "name": "supportedEventTypes",
+            "type": "Microsoft.ResourceHealth/metadata",
+            "id": "/providers/Microsoft.ResourceHealth/metadata/supportedEventTypes",
+            "properties": {
+              "displayName": "Supported Service Health Event Types",
+              "supportedValues": [
+                {
+                  "displayName": "Planned Maintenance",
+                  "id": "Maintenance"
+                },
+                {
+                  "displayName": "Health Advisories",
+                  "id": "Informational"
+                },
+                {
+                  "displayName": "Security Advisories",
+                  "id": "Security"
+                },
+                {
+                  "displayName": "Health Advisories",
+                  "id": "ActionRequired"
+                },
+                {
+                  "displayName": "Service Issue",
+                  "id": "Incident"
+                }
+              ]
+            }
+          },
+          {
+            "name": "supportedEventTags",
+            "type": "Microsoft.ResourceHealth/metadata",
+            "id": "/providers/Microsoft.ResourceHealth/metadata/supportedEventTags",
+            "properties": {
+              "displayName": "Supported Service Health Event Tags",
+              "supportedValues": [
+                {
+                  "displayName": "Action Recommended",
+                  "id": "Action Recommended",
+                  "priority": 0
+                },
+                {
+                  "displayName": "Final PIR",
+                  "id": "Final PIR",
+                  "priority": 1
+                },
+                {
+                  "displayName": "Preliminary PIR",
+                  "id": "Preliminary PIR",
+                  "priority": 2
+                },
+                {
+                  "displayName": "False Positive",
+                  "id": "False Positive",
+                  "priority": 3
+                }
+              ]
+            }
+          },
+          {
+            "name": "supportedServices",
+            "type": "Microsoft.ResourceHealth/metadata",
+            "id": "/providers/Microsoft.ResourceHealth/metadata/supportedServices",
+            "properties": {
+              "displayName": "Supported Service Health Services",
+              "supportedValues": [
+                {
+                  "displayName": "Action Groups",
+                  "id": "Action Groups",
+                  "previousId": "Action Groups",
+                  "resourceTypes": [
+                    "microsoft.insights/actiongroups",
+                    "microsoft.alertsmanagement/alerts"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000007"
+                },
+                {
+                  "displayName": "Activity Log",
+                  "id": "Activity Log",
+                  "previousId": "Activity Logs & Alerts",
+                  "resourceTypes": [
+                    "microsoft.insights/alertrules",
+                    "microsoft.insights/activitylogalerts",
+                    "microsoft.alertsmanagement/alerts"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000008"
+                },
+                {
+                  "displayName": "Azure Advisor",
+                  "id": "Azure Advisor",
+                  "previousId": "Advisor",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000009"
+                },
+                {
+                  "displayName": "Alerts",
+                  "id": "Alerts",
+                  "previousId": "Alerts",
+                  "resourceTypes": [
+                    "microsoft.insights/alertrules",
+                    "microsoft.insights/activitylogalerts",
+                    "microsoft.insights/metricalerts",
+                    "microsoft.insights/scheduledqueryrules",
+                    "microsoft.insights/actiongroups",
+                    "microsoft.alertsmanagement/alerts",
+                    "microsoft.alertsmanagement/actionrules",
+                    "microsoft.alertsmanagement/smartdetectoralertrules"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000010"
+                },
+                {
+                  "displayName": "Metrics",
+                  "id": "Metrics",
+                  "previousId": "Alerts & Metrics",
+                  "resourceTypes": [
+                    "microsoft.insights/alertrules",
+                    "microsoft.insights/metricalerts",
+                    "microsoft.alertsmanagement/alerts"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000011"
+                },
+                {
+                  "displayName": "API Management",
+                  "id": "API Management",
+                  "previousId": "API Management",
+                  "resourceTypes": [
+                    "microsoft.apimanagement/service"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000012"
+                },
+                {
+                  "displayName": "App Service",
+                  "id": "App Service",
+                  "previousId": "App Service",
+                  "resourceTypes": [
+                    "microsoft.web/sites"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000013"
+                },
+                {
+                  "displayName": "App Service (Linux)",
+                  "id": "App Service (Linux)",
+                  "previousId": "App Service (Linux)",
+                  "resourceTypes": [
+                    "microsoft.web/sites"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000014"
+                },
+                {
+                  "displayName": "Web App for Containers",
+                  "id": "Web App for Containers",
+                  "previousId": "App Service (Linux) \\ Web App for Containers",
+                  "resourceTypes": [
+                    "microsoft.web/sites"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000015"
+                },
+                {
+                  "displayName": "Web Apps Linux",
+                  "id": "Web Apps Linux",
+                  "previousId": "App Service (Linux) \\ Web Apps",
+                  "resourceTypes": [
+                    "microsoft.web/sites"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000016"
+                },
+                {
+                  "displayName": "Web Apps",
+                  "id": "Web Apps",
+                  "previousId": "App Service \\ Web Apps",
+                  "resourceTypes": [
+                    "microsoft.web/sites"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000017"
+                },
+                {
+                  "displayName": "Application Gateway",
+                  "id": "Application Gateway",
+                  "previousId": "Application Gateway",
+                  "resourceTypes": [
+                    "microsoft.network/applicationgateways"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000018"
+                },
+                {
+                  "displayName": "Application Gateway \\ Application Gateway for Containers",
+                  "id": "Application Gateway \\ Application Gateway for Containers",
+                  "previousId": "Application Gateway \\ Application Gateway for Containers",
+                  "resourceTypes": [
+                    "microsoft.servicenetworking/trafficcontrollers",
+                    "microsoft.servicenetworking/trafficcontrollers/frontends",
+                    "microsoft.servicenetworking/trafficcontrollers/associations"
+                  ]
+                },
+                {
+                  "displayName": "Application Insights",
+                  "id": "Application Insights",
+                  "previousId": "Application Insights",
+                  "resourceTypes": [
+                    "microsoft.insights/components"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000019"
+                },
+                {
+                  "displayName": "Automation",
+                  "id": "Automation",
+                  "previousId": "Automation",
+                  "resourceTypes": [
+                    "microsoft.automation/automationaccounts",
+                    "microsoft.automation/automationaccounts/runbooks",
+                    "microsoft.automation/automationaccounts/jobs"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000020"
+                },
+                {
+                  "displayName": "AutoScale",
+                  "id": "AutoScale",
+                  "previousId": "AutoScale",
+                  "resourceTypes": [
+                    "microsoft.insights/autoscalesettings"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000021"
+                },
+                {
+                  "displayName": "Microsoft Entra ID (formerly Azure AD)",
+                  "id": "Microsoft Entra ID (formerly Azure AD)",
+                  "previousId": "Azure Active Directory",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000022"
+                },
+                {
+                  "displayName": "Enterprise State Roaming",
+                  "id": "Enterprise State Roaming",
+                  "previousId": "Azure Active Directory \\ Enterprise State Roaming",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000023"
+                },
+                {
+                  "displayName": "Azure Active Directory B2C",
+                  "id": "Azure Active Directory B2C",
+                  "previousId": "Azure Active Directory B2C",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000024"
+                },
+                {
+                  "displayName": "Microsoft Entra Domain Services",
+                  "id": "Microsoft Entra Domain Services",
+                  "previousId": "Azure Active Directory Domain Services",
+                  "resourceTypes": [
+                    "microsoft.aad/domainservices"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000025"
+                },
+                {
+                  "displayName": "Azure AI Language",
+                  "id": "Azure AI Language",
+                  "previousId": "Azure AI Language",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000026"
+                },
+                {
+                  "displayName": "Azure Analysis Services",
+                  "id": "Azure Analysis Services",
+                  "previousId": "Azure Analysis Services",
+                  "resourceTypes": [
+                    "microsoft.analysisservices/servers"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000027"
+                },
+                {
+                  "displayName": "Azure API for FHIR",
+                  "id": "Azure API for FHIR",
+                  "previousId": "Azure API for FHIR",
+                  "resourceTypes": [
+                    "Microsoft.HealthcareApis/services"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000028"
+                },
+                {
+                  "displayName": "Azure App Configuration",
+                  "id": "Azure App Configuration",
+                  "previousId": "Azure App Configuration",
+                  "resourceTypes": []
+                },
+                {
+                  "displayName": "Azure Applied AI Services",
+                  "id": "Azure Applied AI Services",
+                  "previousId": "Azure Applied AI Services",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000029"
+                },
+                {
+                  "displayName": "Azure Applied AI Services \\ Azure Video Indexer",
+                  "id": "Azure Applied AI Services \\ Azure Video Indexer",
+                  "previousId": "Azure Applied AI Services \\ Azure Video Indexer",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000030"
+                },
+                {
+                  "displayName": "Azure Arc enabled data services",
+                  "id": "Azure Arc enabled data services",
+                  "previousId": "Azure Arc enabled data services",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000031"
+                },
+                {
+                  "displayName": "Azure Arc enabled Kubernetes",
+                  "id": "Azure Arc enabled Kubernetes",
+                  "previousId": "Azure Arc enabled Kubernetes",
+                  "resourceTypes": [
+                    "microsoft.kubernetes/connectedclusters"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000032"
+                },
+                {
+                  "displayName": "Azure Arc enabled servers",
+                  "id": "Azure Arc enabled servers",
+                  "previousId": "Azure Arc enabled servers",
+                  "resourceTypes": [
+                    "microsoft.hybridcompute/machines"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000033"
+                },
+                {
+                  "displayName": "Azure Arc enabled VMware vSphere",
+                  "id": "Azure Arc enabled VMware vSphere",
+                  "previousId": "Azure Arc enabled VMware vSphere",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000034"
+                },
+                {
+                  "displayName": "Azure Automanage",
+                  "id": "Azure Automanage",
+                  "previousId": "Azure Automanage",
+                  "resourceTypes": [
+                    "microsoft.automanage/configurationprofiles",
+                    "microsoft.compute/virtualmachines/providers/configurationprofileassignments",
+                    "microsoft.hybridcompute/machines/providers/configurationprofileassignments",
+                    "microsoft.Azurestackhci/clusters/providers/configurationprofileassignments"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000035"
+                },
+                {
+                  "displayName": "Azure Bastion",
+                  "id": "Azure Bastion",
+                  "previousId": "Azure Bastion",
+                  "resourceTypes": [
+                    "microsoft.network/bastionhosts"
+                  ]
+                },
+                {
+                  "displayName": "Azure Blueprints",
+                  "id": "Azure Blueprints",
+                  "previousId": "Azure Blueprints",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000036"
+                },
+                {
+                  "displayName": "Azure AI Bot Service",
+                  "id": "Azure AI Bot Service",
+                  "previousId": "Azure Bot Service",
+                  "resourceTypes": [
+                    "microsoft.botservice/botservices"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000037"
+                },
+                {
+                  "displayName": "Azure Center for SAP solutions",
+                  "id": "Azure Center for SAP solutions",
+                  "previousId": "Azure Center for SAP solutions",
+                  "resourceTypes": []
+                },
+                {
+                  "displayName": "Azure Chaos Studio",
+                  "id": "Azure Chaos Studio",
+                  "previousId": "Azure Chaos Studio",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000038"
+                },
+                {
+                  "displayName": "Azure Communication Services",
+                  "id": "Azure Communication Services",
+                  "previousId": "Azure Communication Services",
+                  "resourceTypes": [
+                    "microsoft.communication/communicationservices"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000039"
+                },
+                {
+                  "displayName": "Azure Communications Gateway",
+                  "id": "Azure Communications Gateway",
+                  "previousId": "Azure Communications Gateway",
+                  "resourceTypes": []
+                },
+                {
+                  "displayName": "Azure confidential ledger",
+                  "id": "Azure confidential ledger",
+                  "previousId": "Azure confidential ledger",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000040"
+                },
+                {
+                  "displayName": "Azure Container Apps",
+                  "id": "Azure Container Apps",
+                  "previousId": "Azure Container Apps",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000041"
+                },
+                {
+                  "displayName": "Azure Container Registry",
+                  "id": "Azure Container Registry",
+                  "previousId": "Azure Container Registry",
+                  "resourceTypes": [
+                    "microsoft.containerregistry/registries"
+                  ]
+                },
+                {
+                  "displayName": "Azure Container Service",
+                  "id": "Azure Container Service",
+                  "previousId": "Azure Container Service",
+                  "resourceTypes": [
+                    "microsoft.containerservice/managedclusters"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000042"
+                },
+                {
+                  "displayName": "Azure Container Storage",
+                  "id": "Azure Container Storage",
+                  "previousId": "Azure Container Storage",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000043"
+                },
+                {
+                  "displayName": "Azure Cosmos DB",
+                  "id": "Azure Cosmos DB",
+                  "previousId": "Azure Cosmos DB",
+                  "resourceTypes": [
+                    "microsoft.documentdb/databaseaccounts"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000044"
+                },
+                {
+                  "displayName": "Azure Cosmos DB for PostgreSQL",
+                  "id": "Azure Cosmos DB for PostgreSQL",
+                  "previousId": "Azure Cosmos DB for PostgreSQL",
+                  "resourceTypes": [
+                    "microsoft.dbforpostgresql/servergroupsv2"
+                  ]
+                },
+                {
+                  "displayName": "Azure Data Explorer",
+                  "id": "Azure Data Explorer",
+                  "previousId": "Azure Data Explorer",
+                  "resourceTypes": [
+                    "microsoft.kusto/clusters"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000045"
+                },
+                {
+                  "displayName": "Azure Data Lake Storage Gen1",
+                  "id": "Azure Data Lake Storage Gen1",
+                  "previousId": "Azure Data Lake Storage Gen1",
+                  "resourceTypes": [
+                    "microsoft.datalakestore/accounts"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000046"
+                },
+                {
+                  "displayName": "Azure Data Lake Storage Gen1",
+                  "id": "Azure Data Lake Storage Gen1",
+                  "previousId": "Azure Data Lake Storage Gen2",
+                  "resourceTypes": [
+                    "microsoft.datalakestore/accounts"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000046"
+                },
+                {
+                  "displayName": "Azure Data Manager for Energy",
+                  "id": "Azure Data Manager for Energy",
+                  "previousId": "Azure Data Manager for Energy",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000047"
+                },
+                {
+                  "displayName": "Azure Data Share",
+                  "id": "Azure Data Share",
+                  "previousId": "Azure Data Share",
+                  "resourceTypes": [
+                    "microsoft.datashare/accounts",
+                    "microsoft.datashare/shares",
+                    "microsoft.datashare/sharesubscriptions",
+                    "microsoft.datashare/datasets",
+                    "microsoft.datashare/datasetmappings",
+                    "microsoft.datashare/invitations"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000048"
+                },
+                {
+                  "displayName": "Azure Database for MariaDB",
+                  "id": "Azure Database for MariaDB",
+                  "previousId": "Azure Database for MariaDB",
+                  "resourceTypes": [
+                    "microsoft.dbformariadb/servers"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000049"
+                },
+                {
+                  "displayName": "Azure Database for MySQL",
+                  "id": "Azure Database for MySQL",
+                  "previousId": "Azure Database for MySQL",
+                  "resourceTypes": [
+                    "microsoft.dbformysql/servers"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000050"
+                },
+                {
+                  "displayName": "Azure Database for MySQL flexible servers",
+                  "id": "Azure Database for MySQL flexible servers",
+                  "previousId": "Azure Database for MySQL flexible servers",
+                  "resourceTypes": [
+                    "microsoft.dbformysql/flexibleservers"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000051"
+                },
+                {
+                  "displayName": "Azure Database for PostgreSQL",
+                  "id": "Azure Database for PostgreSQL",
+                  "previousId": "Azure Database for PostgreSQL",
+                  "resourceTypes": [
+                    "microsoft.dbforpostgresql/servers"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000052"
+                },
+                {
+                  "displayName": "Azure Database for PostgreSQL flexible servers",
+                  "id": "Azure Database for PostgreSQL flexible servers",
+                  "previousId": "Azure Database for PostgreSQL flexible servers",
+                  "resourceTypes": [
+                    "microsoft.dbforpostgresql/flexibleservers"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000053"
+                },
+                {
+                  "displayName": "Azure Database Migration Service (classic)",
+                  "id": "Azure Database Migration Service (classic)",
+                  "previousId": "Azure Database Migration Service",
+                  "resourceTypes": [
+                    "Microsoft.DataMigration/services"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000054"
+                },
+                {
+                  "displayName": "Azure Databricks",
+                  "id": "Azure Databricks",
+                  "previousId": "Azure Databricks",
+                  "resourceTypes": [
+                    "microsoft.databricks/workspaces"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000055"
+                },
+                {
+                  "displayName": "Azure DDoS Protection",
+                  "id": "Azure DDoS Protection",
+                  "previousId": "Azure DDoS Protection",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000056"
+                },
+                {
+                  "displayName": "Azure Dedicated Host",
+                  "id": "Azure Dedicated Host",
+                  "previousId": "Azure Dedicated Host",
+                  "resourceTypes": [
+                    "microsoft.compute/hostgroups/hosts"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000057"
+                },
+                {
+                  "displayName": "Azure DevOps",
+                  "id": "Azure DevOps",
+                  "previousId": "Azure DevOps",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000058"
+                },
+                {
+                  "displayName": "Azure Artifacts",
+                  "id": "Azure Artifacts",
+                  "previousId": "Azure DevOps \\ Artifacts",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000059"
+                },
+                {
+                  "displayName": "Azure Boards",
+                  "id": "Azure Boards",
+                  "previousId": "Azure DevOps \\ Boards",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000060"
+                },
+                {
+                  "displayName": "Azure Pipelines",
+                  "id": "Azure Pipelines",
+                  "previousId": "Azure DevOps \\ Pipelines",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000061"
+                },
+                {
+                  "displayName": "Azure Repos",
+                  "id": "Azure Repos",
+                  "previousId": "Azure DevOps \\ Repos",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000062"
+                },
+                {
+                  "displayName": "Azure Test Plans",
+                  "id": "Azure Test Plans",
+                  "previousId": "Azure DevOps \\ Test Plans",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000063"
+                },
+                {
+                  "displayName": "Azure DevTest Labs",
+                  "id": "Azure DevTest Labs",
+                  "previousId": "Azure DevTest Labs",
+                  "resourceTypes": [
+                    "microsoft.devtestlab/labs"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000064"
+                },
+                {
+                  "displayName": "Azure Digital Twins",
+                  "id": "Azure Digital Twins",
+                  "previousId": "Azure Digital Twins",
+                  "resourceTypes": [
+                    "microsoft.digitaltwins/digitaltwinsinstances"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000065"
+                },
+                {
+                  "displayName": "Azure DNS",
+                  "id": "Azure DNS",
+                  "previousId": "Azure DNS",
+                  "resourceTypes": [
+                    "microsoft.network/dnszones"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000066"
+                },
+                {
+                  "displayName": "Azure FarmBeats",
+                  "id": "Azure FarmBeats",
+                  "previousId": "Azure FarmBeats",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000067"
+                },
+                {
+                  "displayName": "Azure File Sync",
+                  "id": "Azure File Sync",
+                  "previousId": "Azure File Sync",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000068"
+                },
+                {
+                  "displayName": "Azure Firewall",
+                  "id": "Azure Firewall",
+                  "previousId": "Azure Firewall",
+                  "resourceTypes": [
+                    "microsoft.network/azurefirewalls"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000069"
+                },
+                {
+                  "displayName": "Azure Firewall Manager",
+                  "id": "Azure Firewall Manager",
+                  "previousId": "Azure Firewall Manager",
+                  "resourceTypes": [
+                    "microsoft.network/firewallpolicies"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000070"
+                },
+                {
+                  "displayName": "Azure Fluid Relay",
+                  "id": "Azure Fluid Relay",
+                  "previousId": "Azure Fluid Relay",
+                  "resourceTypes": [
+                    "microsoft.fluidrelay/fluidrelayservers"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000071"
+                },
+                {
+                  "displayName": "Azure Front Door",
+                  "id": "Azure Front Door",
+                  "previousId": "Azure Frontdoor",
+                  "resourceTypes": [
+                    "microsoft.network/frontdoors"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000072"
+                },
+                {
+                  "displayName": "Azure Health Data Services",
+                  "id": "Azure Health Data Services",
+                  "previousId": "Azure Health Data Services",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000073"
+                },
+                {
+                  "displayName": "Azure HPC Cache",
+                  "id": "Azure HPC Cache",
+                  "previousId": "Azure HPC Cache",
+                  "resourceTypes": [
+                    "microsoft.storagecache/caches"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000074"
+                },
+                {
+                  "displayName": "Azure AI Immersive Reader",
+                  "id": "Azure AI Immersive Reader",
+                  "previousId": "Azure Immersive Reader",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000075"
+                },
+                {
+                  "displayName": "Azure Information Protection",
+                  "id": "Azure Information Protection",
+                  "previousId": "Azure Information Protection",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000076"
+                },
+                {
+                  "displayName": "Azure IoT Hub",
+                  "id": "Azure IoT Hub",
+                  "previousId": "Azure IoT Hub",
+                  "resourceTypes": [
+                    "microsoft.devices/iothubs"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000077"
+                },
+                {
+                  "displayName": "Azure Key Vault Managed HSM",
+                  "id": "Azure Key Vault Managed HSM",
+                  "previousId": "Azure Key Vault Managed HSM",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000078"
+                },
+                {
+                  "displayName": "Azure Kubernetes Service (AKS)",
+                  "id": "Azure Kubernetes Service (AKS)",
+                  "previousId": "Azure Kubernetes Service (AKS)",
+                  "resourceTypes": [
+                    "microsoft.containerservice/managedclusters"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000079"
+                },
+                {
+                  "displayName": "Azure Kubernetes Service on Azure Stack HCI",
+                  "id": "Azure Kubernetes Service on Azure Stack HCI",
+                  "previousId": "Azure Kubernetes Service On Azure Stack HCI",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000080"
+                },
+                {
+                  "displayName": "Azure Lab Services",
+                  "id": "Azure Lab Services",
+                  "previousId": "Azure Lab Services",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000081"
+                },
+                {
+                  "displayName": "Azure Load Testing",
+                  "id": "Azure Load Testing",
+                  "previousId": "Azure Load Testing",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000082"
+                },
+                {
+                  "displayName": "Azure Managed Applications",
+                  "id": "Azure Managed Applications",
+                  "previousId": "Azure Managed Applications",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000083"
+                },
+                {
+                  "displayName": "Azure Managed Grafana",
+                  "id": "Azure Managed Grafana",
+                  "previousId": "Azure Managed Grafana",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000084"
+                },
+                {
+                  "displayName": "Azure Managed Instance for Apache Cassandra",
+                  "id": "Azure Managed Instance for Apache Cassandra",
+                  "previousId": "Azure Managed Instance for Apache Cassandra",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000085"
+                },
+                {
+                  "displayName": "Azure Maps",
+                  "id": "Azure Maps",
+                  "previousId": "Azure Maps",
+                  "resourceTypes": [
+                    "microsoft.maps/accounts"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000086"
+                },
+                {
+                  "displayName": "Azure AI Metrics Advisor",
+                  "id": "Azure AI Metrics Advisor",
+                  "previousId": "Azure Metrics Advisor",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000087"
+                },
+                {
+                  "displayName": "Azure Migrate",
+                  "id": "Azure Migrate",
+                  "previousId": "Azure Migrate",
+                  "resourceTypes": [
+                    "microsoft.migrate/migrateprojects"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000088"
+                },
+                {
+                  "displayName": "Azure Monitor",
+                  "id": "Azure Monitor",
+                  "previousId": "Azure Monitor",
+                  "resourceTypes": [
+                    "microsoft.alertsmanagement/alerts",
+                    "microsoft.insights/scheduledqueryrules"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000089"
+                },
+                {
+                  "displayName": "Azure Monitor for SAP solutions",
+                  "id": "Azure Monitor for SAP solutions",
+                  "previousId": "Azure Monitor for SAP solutions",
+                  "resourceTypes": [
+                    "microsoft.workloads/monitors"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000090"
+                },
+                {
+                  "displayName": "Azure Netapp Files",
+                  "id": "Azure Netapp Files",
+                  "previousId": "Azure Netapp Files",
+                  "resourceTypes": [
+                    "microsoft.netapp/netappaccounts"
+                  ]
+                },
+                {
+                  "displayName": "Azure Network Function Manager",
+                  "id": "Azure Network Function Manager",
+                  "previousId": "Azure Network Function Manager - Device",
+                  "resourceTypes": [
+                    "microsoft.hybridnetwork/devices"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000091"
+                },
+                {
+                  "displayName": "Azure Network Function Manager - Network Function",
+                  "id": "Azure Network Function Manager - Network Function",
+                  "previousId": "Azure Network Function Manager - Network Function",
+                  "resourceTypes": [
+                    "microsoft.hybridnetwork/networkfunctions"
+                  ]
+                },
+                {
+                  "displayName": "Azure Open Datasets",
+                  "id": "Azure Open Datasets",
+                  "previousId": "Azure Open Datasets",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000092"
+                },
+                {
+                  "displayName": "Azure OpenAI Service",
+                  "id": "Azure OpenAI Service",
+                  "previousId": "Azure OpenAI Service",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000093"
+                },
+                {
+                  "displayName": "Azure Operator Insights",
+                  "id": "Azure Operator Insights",
+                  "previousId": "Azure Operator Insights",
+                  "resourceTypes": [
+                    "microsoft.networkanalytics/dataproducts"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000094"
+                },
+                {
+                  "displayName": "Azure Orbital Ground Station",
+                  "id": "Azure Orbital Ground Station",
+                  "previousId": "Azure Orbital",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000095"
+                },
+                {
+                  "displayName": "Azure Peering Service",
+                  "id": "Azure Peering Service",
+                  "previousId": "Azure Peering Service",
+                  "resourceTypes": [
+                    "microsoft.peering/peeringservices"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000096"
+                },
+                {
+                  "displayName": "Azure Policy",
+                  "id": "Azure Policy",
+                  "previousId": "Azure Policy",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000097"
+                },
+                {
+                  "displayName": "Azure Private 5G Core",
+                  "id": "Azure Private 5G Core",
+                  "previousId": "Azure Private 5G Core",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000098"
+                },
+                {
+                  "displayName": "Azure Private Link",
+                  "id": "Azure Private Link",
+                  "previousId": "Azure Private Link",
+                  "resourceTypes": [
+                    "microsoft.network/privateendpoints",
+                    "microsoft.network/privatelinkservices"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000099"
+                },
+                {
+                  "displayName": "Azure public MEC",
+                  "id": "Azure public MEC",
+                  "previousId": "Azure public MEC",
+                  "resourceTypes": []
+                },
+                {
+                  "displayName": "Microsoft Purview",
+                  "id": "Microsoft Purview",
+                  "previousId": "Azure Purview",
+                  "resourceTypes": [
+                    "microsoft.purview/accounts"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000100"
+                },
+                {
+                  "displayName": "Azure Quantum",
+                  "id": "Azure Quantum",
+                  "previousId": "Azure Quantum",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000101"
+                },
+                {
+                  "displayName": "Azure Red Hat OpenShift",
+                  "id": "Azure Red Hat OpenShift",
+                  "previousId": "Azure Red Hat OpenShift",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000102"
+                },
+                {
+                  "displayName": "Azure Reservations",
+                  "id": "Azure Reservations",
+                  "previousId": "Azure Reservations",
+                  "resourceTypes": []
+                },
+                {
+                  "displayName": "Azure Resource Manager",
+                  "id": "Azure Resource Manager",
+                  "previousId": "Azure Resource Manager",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000103"
+                },
+                {
+                  "displayName": "Azure Resource Mover",
+                  "id": "Azure Resource Mover",
+                  "previousId": "Azure Resource Mover",
+                  "resourceTypes": [
+                    "microsoft.migrate/movecollections"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000104"
+                },
+                {
+                  "displayName": "Azure Route Server",
+                  "id": "Azure Route Server",
+                  "previousId": "Azure Route Server",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000105"
+                },
+                {
+                  "displayName": "Azure AI Search",
+                  "id": "Azure AI Search",
+                  "previousId": "Azure Search",
+                  "resourceTypes": [
+                    "microsoft.search/searchservices"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000106"
+                },
+                {
+                  "displayName": "Microsoft Sentinel",
+                  "id": "Microsoft Sentinel",
+                  "previousId": "Azure Sentinel",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000107"
+                },
+                {
+                  "displayName": "Azure SignalR Service",
+                  "id": "Azure SignalR Service",
+                  "previousId": "Azure SignalR Service",
+                  "resourceTypes": [
+                    "microsoft.signalrservice/signalr"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000108"
+                },
+                {
+                  "displayName": "Azure SignalR Service Replica",
+                  "id": "Azure SignalR Service Replica",
+                  "previousId": "Azure SignalR Service Replica",
+                  "resourceTypes": [
+                    "microsoft.signalrservice/signalr/replicas"
+                  ]
+                },
+                {
+                  "displayName": "Spatial Anchors",
+                  "id": "Spatial Anchors",
+                  "previousId": "Azure Spatial Anchors",
+                  "resourceTypes": [
+                    "microsoft.mixedreality/spatialanchorsaccounts"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000109"
+                },
+                {
+                  "displayName": "Azure Sphere",
+                  "id": "Azure Sphere",
+                  "previousId": "Azure Sphere",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000110"
+                },
+                {
+                  "displayName": "Azure Spring Apps",
+                  "id": "Azure Spring Apps",
+                  "previousId": "Azure Spring Cloud",
+                  "resourceTypes": [
+                    "microsoft.appplatform/spring"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000111"
+                },
+                {
+                  "displayName": "Azure Database Migration Service",
+                  "id": "Azure Database Migration Service",
+                  "previousId": "Azure SQL Migration extension for Azure Data Studio powered by Azure Database Migration Service",
+                  "resourceTypes": [
+                    "microsoft.datamigration/sqlmigrationservices"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000112"
+                },
+                {
+                  "displayName": "Azure Stack",
+                  "id": "Azure Stack",
+                  "previousId": "Azure Stack",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000113"
+                },
+                {
+                  "displayName": "Azure Stack Edge",
+                  "id": "Azure Stack Edge",
+                  "previousId": "Azure Stack Edge",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000114"
+                },
+                {
+                  "displayName": "Azure Stack HCI",
+                  "id": "Azure Stack HCI",
+                  "previousId": "Azure Stack HCI",
+                  "resourceTypes": [
+                    "microsoft.azurestackhci/clusters"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000115"
+                },
+                {
+                  "displayName": "Static Web Apps",
+                  "id": "Static Web Apps",
+                  "previousId": "Azure Static Web Apps",
+                  "resourceTypes": [
+                    "microsoft.web/staticsites"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000116"
+                },
+                {
+                  "displayName": "Azure Synapse Analytics",
+                  "id": "Azure Synapse Analytics",
+                  "previousId": "Azure Synapse Analytics",
+                  "resourceTypes": [
+                    "microsoft.sql/servers",
+                    "microsoft.synapse/workspaces"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000117"
+                },
+                {
+                  "displayName": "Azure Video Analyzer",
+                  "id": "Azure Video Analyzer",
+                  "previousId": "Azure Video Analyzer",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000118"
+                },
+                {
+                  "displayName": "Azure Virtual Network Manager",
+                  "id": "Azure Virtual Network Manager",
+                  "previousId": "Azure Virtual Network Manager",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000119"
+                },
+                {
+                  "displayName": "Azure VMware Solution",
+                  "id": "Azure VMware Solution",
+                  "previousId": "Azure VMware Solution",
+                  "resourceTypes": [
+                    "microsoft.avs/privateclouds",
+                    "microsoft.avs/privateclouds/clusters"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000120"
+                },
+                {
+                  "displayName": "Azure VMware Solution by CloudSimple",
+                  "id": "Azure VMware Solution by CloudSimple",
+                  "previousId": "Azure VMware Solution by CloudSimple",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000121"
+                },
+                {
+                  "displayName": "Azure Web PubSub",
+                  "id": "Azure Web PubSub",
+                  "previousId": "Azure Web PubSub",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000122"
+                },
+                {
+                  "displayName": "Azure Backup",
+                  "id": "Azure Backup",
+                  "previousId": "Backup",
+                  "resourceTypes": [
+                    "microsoft.dataprotection/backupvaults"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000123"
+                },
+                {
+                  "displayName": "BareMetal Infrastructure",
+                  "id": "BareMetal Infrastructure",
+                  "previousId": "BareMetal Infrastructure",
+                  "resourceTypes": [
+                    "microsoft.baremetalinfrastructure/baremetalinstances"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000124"
+                },
+                {
+                  "displayName": "Batch",
+                  "id": "Batch",
+                  "previousId": "Batch",
+                  "resourceTypes": [
+                    "microsoft.batch/batchaccounts"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000125"
+                },
+                {
+                  "displayName": "Content Delivery Network",
+                  "id": "Content Delivery Network",
+                  "previousId": "CDN",
+                  "resourceTypes": [
+                    "microsoft.cdn/profiles"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000126"
+                },
+                {
+                  "displayName": "Change Analysis",
+                  "id": "Change Analysis",
+                  "previousId": "Change Analysis",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000127"
+                },
+                {
+                  "displayName": "Cloud Services",
+                  "id": "Cloud Services",
+                  "previousId": "Cloud Services",
+                  "resourceTypes": [
+                    "microsoft.classiccompute/domainnames",
+                    "microsoft.compute/domainnames"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000128"
+                },
+                {
+                  "displayName": "Cloud Shell",
+                  "id": "Cloud Shell",
+                  "previousId": "Cloud Shell",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000129"
+                },
+                {
+                  "displayName": "Azure AI Anomaly Detector",
+                  "id": "Azure AI Anomaly Detector",
+                  "previousId": "Cognitive Services \\ Anomaly Detector",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000130"
+                },
+                {
+                  "displayName": "Cognitive Services \\ Azure Form Recognizer",
+                  "id": "Cognitive Services \\ Azure Form Recognizer",
+                  "previousId": "Cognitive Services \\ Azure Form Recognizer",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000131"
+                },
+                {
+                  "displayName": "Cognitive Services \\ Azure Metrics Advisor",
+                  "id": "Cognitive Services \\ Azure Metrics Advisor",
+                  "previousId": "Cognitive Services \\ Azure Metrics Advisor",
+                  "resourceTypes": []
+                },
+                {
+                  "displayName": "Bing Autosuggest",
+                  "id": "Bing Autosuggest",
+                  "previousId": "Cognitive Services \\ Bing Autosuggest API",
+                  "resourceTypes": [
+                    "microsoft.cognitiveservices/accounts"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000132"
+                },
+                {
+                  "displayName": "Bing Search",
+                  "id": "Bing Search",
+                  "previousId": "Cognitive Services \\ Bing Search API",
+                  "resourceTypes": [
+                    "microsoft.cognitiveservices/accounts"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000133"
+                },
+                {
+                  "displayName": "Bing Speech",
+                  "id": "Bing Speech",
+                  "previousId": "Cognitive Services \\ Bing Speech API",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000134"
+                },
+                {
+                  "displayName": "Bing Spell Check",
+                  "id": "Bing Spell Check",
+                  "previousId": "Cognitive Services \\ Bing Spell Check API",
+                  "resourceTypes": [
+                    "microsoft.cognitiveservices/accounts"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000135"
+                },
+                {
+                  "displayName": "Cognitive Services \\ Bing Video Search API",
+                  "id": "Cognitive Services \\ Bing Video Search API",
+                  "previousId": "Cognitive Services \\ Bing Video Search API",
+                  "resourceTypes": []
+                },
+                {
+                  "displayName": "Bing Visual Search",
+                  "id": "Bing Visual Search",
+                  "previousId": "Cognitive Services \\ Bing Visual Search API",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000136"
+                },
+                {
+                  "displayName": "Bing Web Search",
+                  "id": "Bing Web Search",
+                  "previousId": "Cognitive Services \\ Bing Web Search API",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000137"
+                },
+                {
+                  "displayName": "Azure AI Vision",
+                  "id": "Azure AI Vision",
+                  "previousId": "Cognitive Services \\ Computer Vision API",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000138"
+                },
+                {
+                  "displayName": "Content Moderator",
+                  "id": "Content Moderator",
+                  "previousId": "Cognitive Services \\ Content Moderator API",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000139"
+                },
+                {
+                  "displayName": "Azure AI Custom Vision",
+                  "id": "Azure AI Custom Vision",
+                  "previousId": "Cognitive Services \\ Custom Vision API",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000140"
+                },
+                {
+                  "displayName": "Face API",
+                  "id": "Face API",
+                  "previousId": "Cognitive Services \\ Face API",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000141"
+                },
+                {
+                  "displayName": "Cognitive Services \\ Form Recognizer API",
+                  "id": "Cognitive Services \\ Form Recognizer API",
+                  "previousId": "Cognitive Services \\ Form Recognizer API",
+                  "resourceTypes": []
+                },
+                {
+                  "displayName": "Cognitive Services \\ Image Search API",
+                  "id": "Cognitive Services \\ Image Search API",
+                  "previousId": "Cognitive Services \\ Image Search API",
+                  "resourceTypes": []
+                },
+                {
+                  "displayName": "Language Understanding (LUIS)",
+                  "id": "Language Understanding (LUIS)",
+                  "previousId": "Cognitive Services \\ Language Understanding (LUIS)",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000142"
+                },
+                {
+                  "displayName": "Bing News Search",
+                  "id": "Bing News Search",
+                  "previousId": "Cognitive Services \\ News Search API",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000143"
+                },
+                {
+                  "displayName": "Azure AI Personalizer",
+                  "id": "Azure AI Personalizer",
+                  "previousId": "Cognitive Services \\ Personalizer API",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000144"
+                },
+                {
+                  "displayName": "Cognitive Services \\ QnA Maker API",
+                  "id": "Cognitive Services \\ QnA Maker API",
+                  "previousId": "Cognitive Services \\ QnA Maker API",
+                  "resourceTypes": []
+                },
+                {
+                  "displayName": "Speaker recognition",
+                  "id": "Speaker recognition",
+                  "previousId": "Cognitive Services \\ Speaker Recognition API",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000145"
+                },
+                {
+                  "displayName": "Cognitive Services \\ Speech Services API",
+                  "id": "Cognitive Services \\ Speech Services API",
+                  "previousId": "Cognitive Services \\ Speech Services API",
+                  "resourceTypes": []
+                },
+                {
+                  "displayName": "Translator Speech",
+                  "id": "Translator Speech",
+                  "previousId": "Cognitive Services \\ Translator Speech API",
+                  "resourceTypes": [
+                    "microsoft.cognitiveservices/accounts"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000146"
+                },
+                {
+                  "displayName": "Azure AI Translator",
+                  "id": "Azure AI Translator",
+                  "previousId": "Cognitive Services \\ Translator Text API",
+                  "resourceTypes": [
+                    "microsoft.cognitiveservices/accounts"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000147"
+                },
+                {
+                  "displayName": "Azure Container Instances",
+                  "id": "Azure Container Instances",
+                  "previousId": "Container Instances",
+                  "resourceTypes": [
+                    "microsoft.containerinstance/containergroups"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000148"
+                },
+                {
+                  "displayName": "Azure Container Registry",
+                  "id": "Azure Container Registry",
+                  "previousId": "Container Registry",
+                  "resourceTypes": [
+                    "microsoft.containerregistry/registries"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000149"
+                },
+                {
+                  "displayName": "Microsoft Cost Management",
+                  "id": "Microsoft Cost Management",
+                  "previousId": "Cost Management",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000005"
+                },
+                {
+                  "displayName": "Data Catalog",
+                  "id": "Data Catalog",
+                  "previousId": "Data Catalog",
+                  "resourceTypes": [
+                    "microsoft.datacatalog/catalogs"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000150"
+                },
+                {
+                  "displayName": "Azure Data Factory",
+                  "id": "Azure Data Factory",
+                  "previousId": "Data Factory",
+                  "resourceTypes": [
+                    "microsoft.datafactory/datafactories"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000151"
+                },
+                {
+                  "displayName": "Data Factory V1",
+                  "id": "Data Factory V1",
+                  "previousId": "Data Factory V1",
+                  "resourceTypes": [
+                    "microsoft.datafactory/datafactories"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000152"
+                },
+                {
+                  "displayName": "Data Lake Analytics",
+                  "id": "Data Lake Analytics",
+                  "previousId": "Data Lake Analytics",
+                  "resourceTypes": [
+                    "microsoft.datalakeanalytics/accounts",
+                    "microsoft.datalakeanalytics/accounts/storageaccounts"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000153"
+                },
+                {
+                  "displayName": "Device Update for IoT Hub",
+                  "id": "Device Update for IoT Hub",
+                  "previousId": "Device Update for IoT Hub",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000154"
+                },
+                {
+                  "displayName": "Diagnostic Logs",
+                  "id": "Diagnostic Logs",
+                  "previousId": "Diagnostic Logs",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000155"
+                },
+                {
+                  "displayName": "Event Grid",
+                  "id": "Event Grid",
+                  "previousId": "Event Grid",
+                  "resourceTypes": [
+                    "microsoft.eventgrid/topics"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000156"
+                },
+                {
+                  "displayName": "Event Hubs",
+                  "id": "Event Hubs",
+                  "previousId": "Event Hubs",
+                  "resourceTypes": [
+                    "microsoft.eventhub/namespaces"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000157"
+                },
+                {
+                  "displayName": "ExpressRoute Circuits",
+                  "id": "ExpressRoute Circuits",
+                  "previousId": "ExpressRoute \\ ExpressRoute Circuits",
+                  "resourceTypes": [
+                    "microsoft.network/expressroutecircuits"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000158"
+                },
+                {
+                  "displayName": "ExpressRoute Gateways",
+                  "id": "ExpressRoute Gateways",
+                  "previousId": "ExpressRoute \\ ExpressRoute Gateways",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000159"
+                },
+                {
+                  "displayName": "Azure Functions",
+                  "id": "Azure Functions",
+                  "previousId": "Functions",
+                  "resourceTypes": [
+                    "microsoft.web/sites"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000160"
+                },
+                {
+                  "displayName": "HDInsight",
+                  "id": "HDInsight",
+                  "previousId": "HDInsight",
+                  "resourceTypes": [
+                    "microsoft.hdinsight/clusters"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000161"
+                },
+                {
+                  "displayName": "Health Bot",
+                  "id": "Health Bot",
+                  "previousId": "Health Bot",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000162"
+                },
+                {
+                  "displayName": "HockeyApp",
+                  "id": "HockeyApp",
+                  "previousId": "HockeyApp",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000163"
+                },
+                {
+                  "displayName": "Azure Internet Analyzer",
+                  "id": "Azure Internet Analyzer",
+                  "previousId": "Internet Analyzer",
+                  "resourceTypes": [
+                    "microsoft.network/networkexperiment"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000164"
+                },
+                {
+                  "displayName": "Azure IoT Central",
+                  "id": "Azure IoT Central",
+                  "previousId": "IoT Central",
+                  "resourceTypes": [
+                    "microsoft.iotcentral/iotapps"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000165"
+                },
+                {
+                  "displayName": "IoT Hub Device Provisioning Service",
+                  "id": "IoT Hub Device Provisioning Service",
+                  "previousId": "IoT Hub \\ IoT Hub Device Provisioning Service",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000166"
+                },
+                {
+                  "displayName": "Key Vault",
+                  "id": "Key Vault",
+                  "previousId": "Key Vault",
+                  "resourceTypes": [
+                    "microsoft.keyvault/vaults"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000167"
+                },
+                {
+                  "displayName": "Load Balancer",
+                  "id": "Load Balancer",
+                  "previousId": "Load Balancer",
+                  "resourceTypes": [
+                    "microsoft.network/loadbalancers"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000168"
+                },
+                {
+                  "displayName": "Log Analytics",
+                  "id": "Log Analytics",
+                  "previousId": "Log Analytics",
+                  "resourceTypes": [
+                    "microsoft.operationalinsights/workspaces"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000169"
+                },
+                {
+                  "displayName": "Logic Apps",
+                  "id": "Logic Apps",
+                  "previousId": "Logic Apps",
+                  "resourceTypes": [
+                    "microsoft.logic/workflows"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000170"
+                },
+                {
+                  "displayName": "Machine Learning Services",
+                  "id": "Machine Learning Services",
+                  "previousId": "Machine Learning Services",
+                  "resourceTypes": [
+                    "microsoft.machinelearning/workspaces",
+                    "microsoft.machinelearning/commitmentplans",
+                    "microsoft.machinelearning/webservices"
+                  ]
+                },
+                {
+                  "displayName": "Machine Learning Experimentation Service",
+                  "id": "Machine Learning Experimentation Service",
+                  "previousId": "Machine Learning Services \\ Machine Learning Experimentation Service",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000171"
+                },
+                {
+                  "displayName": "Machine Learning Services \\ Machine Learning Model Management",
+                  "id": "Machine Learning Services \\ Machine Learning Model Management",
+                  "previousId": "Machine Learning Services \\ Machine Learning Model Management",
+                  "resourceTypes": []
+                },
+                {
+                  "displayName": "Machine Learning Studio (classic)",
+                  "id": "Machine Learning Studio (classic)",
+                  "previousId": "Machine Learning Studio",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000172"
+                },
+                {
+                  "displayName": "Marketplace",
+                  "id": "Marketplace",
+                  "previousId": "Marketplace",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000173"
+                },
+                {
+                  "displayName": "Encoding",
+                  "id": "Encoding",
+                  "previousId": "Media Services \\ Encoding",
+                  "resourceTypes": [
+                    "microsoft.media/mediaservices"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000174"
+                },
+                {
+                  "displayName": "Live and On-Demand Streaming",
+                  "id": "Live and On-Demand Streaming",
+                  "previousId": "Media Services \\ Streaming",
+                  "resourceTypes": [
+                    "microsoft.media/mediaservices"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000175"
+                },
+                {
+                  "displayName": "Microsoft Azure Attestation",
+                  "id": "Microsoft Azure Attestation",
+                  "previousId": "Microsoft Azure Attestation",
+                  "resourceTypes": []
+                },
+                {
+                  "displayName": "Microsoft Azure portal",
+                  "id": "Microsoft Azure portal",
+                  "previousId": "Microsoft Azure portal",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000176"
+                },
+                {
+                  "displayName": "Defender External Attack Surface Management",
+                  "id": "Defender External Attack Surface Management",
+                  "previousId": "Microsoft Defender External Attack Surface Management",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000177"
+                },
+                {
+                  "displayName": "Microsoft Defender for Cloud",
+                  "id": "Microsoft Defender for Cloud",
+                  "previousId": "Microsoft Defender for Cloud",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000178"
+                },
+                {
+                  "displayName": "Microsoft Defender for IoT",
+                  "id": "Microsoft Defender for IoT",
+                  "previousId": "Microsoft Defender for IoT",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000179"
+                },
+                {
+                  "displayName": "Microsoft Entra Permissions Management",
+                  "id": "Microsoft Entra Permissions Management",
+                  "previousId": "Microsoft Entra Permissions Management",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000180"
+                },
+                {
+                  "displayName": "Microsoft Genomics",
+                  "id": "Microsoft Genomics",
+                  "previousId": "Microsoft Genomics",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000181"
+                },
+                {
+                  "displayName": "Microsoft Graph",
+                  "id": "Microsoft Graph",
+                  "previousId": "Microsoft Graph",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000182"
+                },
+                {
+                  "displayName": "Mobile Engagement",
+                  "id": "Mobile Engagement",
+                  "previousId": "Mobile Engagement",
+                  "resourceTypes": []
+                },
+                {
+                  "displayName": "Multi-Factor Authentication",
+                  "id": "Multi-Factor Authentication",
+                  "previousId": "Multi-Factor Authentication",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000183"
+                },
+                {
+                  "displayName": "Network Infrastructure",
+                  "id": "Network Infrastructure",
+                  "previousId": "Network Infrastructure",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000184"
+                },
+                {
+                  "displayName": "Network Watcher",
+                  "id": "Network Watcher",
+                  "previousId": "Network Watcher",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000185"
+                },
+                {
+                  "displayName": "Notification Hubs",
+                  "id": "Notification Hubs",
+                  "previousId": "Notification Hubs",
+                  "resourceTypes": [
+                    "microsoft.notificationhubs/namespaces"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000186"
+                },
+                {
+                  "displayName": "Power BI Embedded",
+                  "id": "Power BI Embedded",
+                  "previousId": "Power BI Embedded",
+                  "resourceTypes": [
+                    "microsoft.powerbi/workspacecollections",
+                    "microsoft.powerbidedicated/capacities"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000187"
+                },
+                {
+                  "displayName": "Recovery Services vault",
+                  "id": "Recovery Services vault",
+                  "previousId": "Recovery Services vault",
+                  "resourceTypes": [
+                    "microsoft.recoveryservices/vaults"
+                  ]
+                },
+                {
+                  "displayName": "Azure Cache for Redis",
+                  "id": "Azure Cache for Redis",
+                  "previousId": "Redis Cache",
+                  "resourceTypes": [
+                    "microsoft.cache/redis"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000188"
+                },
+                {
+                  "displayName": "Remote Rendering",
+                  "id": "Remote Rendering",
+                  "previousId": "Remote Rendering",
+                  "resourceTypes": [
+                    "microsoft.mixedreality/remoterenderingaccounts"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000189"
+                },
+                {
+                  "displayName": "SAP HANA on Azure Large Instances",
+                  "id": "SAP HANA on Azure Large Instances",
+                  "previousId": "SAP HANA on Azure Large Instances",
+                  "resourceTypes": [
+                    "microsoft.hanaonazure/hanainstances"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000190"
+                },
+                {
+                  "displayName": "Scheduler",
+                  "id": "Scheduler",
+                  "previousId": "Scheduler",
+                  "resourceTypes": [
+                    "microsoft.scheduler/jobcollections"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000191"
+                },
+                {
+                  "displayName": "Security Center",
+                  "id": "Security Center",
+                  "previousId": "Security Center",
+                  "resourceTypes": []
+                },
+                {
+                  "displayName": "Service Bus",
+                  "id": "Service Bus",
+                  "previousId": "Service Bus",
+                  "resourceTypes": [
+                    "microsoft.servicebus/namespaces"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000192"
+                },
+                {
+                  "displayName": "Azure Service Fabric",
+                  "id": "Azure Service Fabric",
+                  "previousId": "Service Fabric",
+                  "resourceTypes": [
+                    "microsoft.servicefabric/clusters"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000193"
+                },
+                {
+                  "displayName": "Azure Site Recovery",
+                  "id": "Azure Site Recovery",
+                  "previousId": "Site Recovery",
+                  "resourceTypes": [
+                    "microsoft.recoveryservices/vaults"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000194"
+                },
+                {
+                  "displayName": "Speech Services",
+                  "id": "Speech Services",
+                  "previousId": "Speech Services",
+                  "resourceTypes": []
+                },
+                {
+                  "displayName": "Azure Synapse Analytics",
+                  "id": "Azure Synapse Analytics",
+                  "previousId": "SQL Data Warehouse",
+                  "resourceTypes": [
+                    "microsoft.sql/servers/databases"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000117"
+                },
+                {
+                  "displayName": "Azure SQL Database",
+                  "id": "Azure SQL Database",
+                  "previousId": "SQL Database",
+                  "resourceTypes": [
+                    "microsoft.sql/servers",
+                    "microsoft.sql/servers/databases",
+                    "microsoft.sql/servers/elasticpools"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000195"
+                },
+                {
+                  "displayName": "SQL Managed Instance",
+                  "id": "SQL Managed Instance",
+                  "previousId": "SQL Managed Instance",
+                  "resourceTypes": [
+                    "microsoft.sql/managedinstances/databases",
+                    "microsoft.sql/managedinstances"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000196"
+                },
+                {
+                  "displayName": "SQL Server on Azure Virtual Machines",
+                  "id": "SQL Server on Azure Virtual Machines",
+                  "previousId": "SQL Server on Azure Virtual Machines",
+                  "resourceTypes": [
+                    "microsoft.sqlvirtualmachine/sqlvirtualmachines"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000003"
+                },
+                {
+                  "displayName": "SQL Server Stretch Database",
+                  "id": "SQL Server Stretch Database",
+                  "previousId": "SQL Server Stretch Database",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000197"
+                },
+                {
+                  "displayName": "Storage Accounts",
+                  "id": "Storage Accounts",
+                  "previousId": "Storage",
+                  "resourceTypes": [
+                    "microsoft.classicstorage/storageaccounts",
+                    "microsoft.storage/storageaccounts"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000198"
+                },
+                {
+                  "displayName": "StorSimple",
+                  "id": "StorSimple",
+                  "previousId": "StorSimple",
+                  "resourceTypes": [
+                    "microsoft.storsimple/managers",
+                    "microsoft.storsimplebvtd2/managers"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000199"
+                },
+                {
+                  "displayName": "Azure Stream Analytics",
+                  "id": "Azure Stream Analytics",
+                  "previousId": "Stream Analytics",
+                  "resourceTypes": [
+                    "microsoft.streamanalytics/streamingjobs"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000200"
+                },
+                {
+                  "displayName": "Subscription Management",
+                  "id": "Subscription Management",
+                  "previousId": "Subscription Management",
+                  "resourceTypes": []
+                },
+                {
+                  "displayName": "Azure Time Series Insights",
+                  "id": "Azure Time Series Insights",
+                  "previousId": "Time Series Insights",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000201"
+                },
+                {
+                  "displayName": "Traffic Manager",
+                  "id": "Traffic Manager",
+                  "previousId": "Traffic Manager",
+                  "resourceTypes": [
+                    "microsoft.network/trafficmanagerprofiles"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000202"
+                },
+                {
+                  "displayName": "Universal Print",
+                  "id": "Universal Print",
+                  "previousId": "Universal Print",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000203"
+                },
+                {
+                  "displayName": "Update management center",
+                  "id": "Update management center",
+                  "previousId": "Update management center",
+                  "resourceTypes": []
+                },
+                {
+                  "displayName": "Virtual Machine Scale Sets",
+                  "id": "Virtual Machine Scale Sets",
+                  "previousId": "Virtual Machine Scale Sets",
+                  "resourceTypes": [
+                    "microsoft.compute/virtualmachinescalesets"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000204"
+                },
+                {
+                  "displayName": "Virtual Machines",
+                  "id": "Virtual Machines",
+                  "previousId": "Virtual Machines",
+                  "resourceTypes": [
+                    "microsoft.classiccompute/virtualmachines",
+                    "microsoft.compute/virtualmachines"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000205"
+                },
+                {
+                  "displayName": "Virtual Network",
+                  "id": "Virtual Network",
+                  "previousId": "Virtual Network",
+                  "resourceTypes": [
+                    "microsoft.network/virtualnetworks",
+                    "microsoft.classicnetwork/virtualnetworks"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000206"
+                },
+                {
+                  "displayName": "Azure NAT Gateway",
+                  "id": "Azure NAT Gateway",
+                  "previousId": "Virtual Network NAT",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000207"
+                },
+                {
+                  "displayName": "VPN Gateway",
+                  "id": "VPN Gateway",
+                  "previousId": "VPN Gateway",
+                  "resourceTypes": [
+                    "microsoft.network/virtualnetworkgateways",
+                    "microsoft.network/connections"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000208"
+                },
+                {
+                  "displayName": "Virtual WAN",
+                  "id": "Virtual WAN",
+                  "previousId": "VPN Gateway \\ Virtual WAN",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000209"
+                },
+                {
+                  "displayName": "Windows 10 IoT Core Services",
+                  "id": "Windows 10 IoT Core Services",
+                  "previousId": "Windows 10 IoT Core Services",
+                  "resourceTypes": [],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000210"
+                },
+                {
+                  "displayName": "Azure Virtual Desktop",
+                  "id": "Azure Virtual Desktop",
+                  "previousId": "Windows Virtual Desktop",
+                  "resourceTypes": [
+                    "microsoft.desktopvirtualization/hostpools"
+                  ],
+                  "serviceGuid": "00000000-0000-0000-0000-000000000211"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Metadata_List",
+  "title": "GetMetadata"
+}
