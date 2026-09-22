@@ -169,6 +169,7 @@ test("Key Vault URL shape supports Premium RSA-HSM names but excludes Managed HS
   }
   for (const host of [
     "contoso-hsm.managedhsm.azure.net",
+    // cspell:ignore usgovcloudapi
     "contoso-hsm.managedhsm.usgovcloudapi.net",
     "contoso-hsm.managedhsm.azure.cn",
   ]) {
