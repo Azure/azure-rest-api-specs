@@ -15,7 +15,7 @@ namespace Microsoft.App;
  * .NET Component.
  */
 @removed(Versions.v2026_01_01)
-@added(Versions.v2026_07_01)
+@added(Versions.v2026_03_02_preview)
 @parentResource(ManagedEnvironment)
 model DotNetComponent
   is Azure.ResourceManager.ProxyResource<DotNetComponentProperties> {
@@ -65,7 +65,7 @@ model DotNetComponentAzureAsyncOperationHeader {
 }
 
 @removed(Versions.v2026_01_01)
-@added(Versions.v2026_07_01)
+@added(Versions.v2026_03_02_preview)
 @armResourceOperations
 interface DotNetComponents {
   /**
