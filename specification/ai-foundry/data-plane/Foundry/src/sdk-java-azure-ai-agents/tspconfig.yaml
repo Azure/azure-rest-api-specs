@@ -21,6 +21,9 @@ options:
       MCPToolConnectorId: McpToolConnectorId
       UpdateAgentDetailsPatchRequest: UpdateAgentDetailsOptions
       AgentsPagedResultOptimizationCandidate: OptimizationCandidatePagedResult
+      RealtimeClientEventSessionUpdateSessionTruncation1: RealtimeClientEventSessionUpdateSessionTruncationRetentionRatio
+      VoiceResponseBaseObject1: VoiceResponseBaseObject
+      PickPropertiesVoiceAgentAudioConfig: VoiceAgentResponseAudioConfig
     customization-class: customizations/src/main/java/AgentsCustomizations.java
     flavor: azure
   "@azure-tools/typespec-client-generator-cli":
@@ -61,6 +64,12 @@ options:
     output-file: beta-annotations.csv
     emitter-output-dir: "{cwd}/../customizations" # run npx tsp compile from within `TempTypeSpecFiles` folder
     namespace: com.azure.ai.agents
+    manual-entries: >-
+      AudioTranscriptionModel,
+      RealtimeSessionCreateRequestGAAudioOutputVoice,
+      VoiceAgentFunctionToolType,
+      VoiceAgentResponseAudioConfig,
+      VoiceResponseBaseObject
 imports:
   - "@azure-tools/typespec-azure-core"
   - "@azure-tools/typespec-azure-core/experimental"
