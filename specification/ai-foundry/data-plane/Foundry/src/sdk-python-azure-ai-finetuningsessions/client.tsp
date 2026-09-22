@@ -1,12 +1,11 @@
-// Python SDK customization only. The REST contract is in session-finetuning.
+// Python-only preview compatibility projection. The REST specification remains
+// session-finetuning/routes.tsp. Never import this file from the REST entrypoint.
 import "../session-finetuning/routes.tsp";
+import "./loom-models.tsp";
 
 using Azure.ClientGenerator.Core;
-using Azure.AI.Projects.SessionFineTuning;
 using TypeSpec.Http;
 
-// Select the session operations from the shared Foundry service, without
-// generating a second Projects client or importing unrelated Foundry routes.
 @client({ service: Azure.AI.Projects, name: "FineTuningSessionClient" })
 @clientNamespace("azure.ai.finetuningsessions", "python")
 namespace Azure.AI.FineTuning.Sessions;
@@ -14,202 +13,101 @@ namespace Azure.AI.FineTuning.Sessions;
 @client
 @route("/fine_tuning/sessions")
 interface Sessions {
-	create is Azure.AI.Projects.SessionFineTuning.FineTuningSessions.create;
-	list is Azure.AI.Projects.SessionFineTuning.FineTuningSessions.list;
-	get is Azure.AI.Projects.SessionFineTuning.FineTuningSessions.get;
-	delete is Azure.AI.Projects.SessionFineTuning.FineTuningSessions.delete;
-	unload is Azure.AI.Projects.SessionFineTuning.FineTuningSessions.unload;
-	heartbeat is Azure.AI.Projects.SessionFineTuning.FineTuningSessions.heartbeat;
+  create is Azure.AI.Projects.SessionFineTuning.FineTuningSessions.create;
+  list is Azure.AI.Projects.SessionFineTuning.FineTuningSessions.list;
+  get is Azure.AI.Projects.SessionFineTuning.FineTuningSessions.get;
+  unload is Azure.AI.Projects.SessionFineTuning.FineTuningSessions.unload;
+  heartbeat is Azure.AI.Projects.SessionFineTuning.FineTuningSessions.heartbeat;
 }
 
 @client
 @route("/fine_tuning/sessions/{sessionId}")
 interface Training {
-	forwardBackward is Azure.AI.Projects.SessionFineTuning.Training.forwardBackward;
-	forward is Azure.AI.Projects.SessionFineTuning.Training.forward;
-	optimizerStep is Azure.AI.Projects.SessionFineTuning.Training.optimizerStep;
+  forwardBackward is Azure.AI.Projects.SessionFineTuning.Training.forwardBackward;
+  optimizerStep is Azure.AI.Projects.SessionFineTuning.Training.optimizerStep;
 }
 
 @client
 @route("/fine_tuning/sessions/{sessionId}")
 interface Checkpoints {
-	save is Azure.AI.Projects.SessionFineTuning.Checkpoints.save;
-	saveSamplerWeights is Azure.AI.Projects.SessionFineTuning.Checkpoints.saveSamplerWeights;
-	list is Azure.AI.Projects.SessionFineTuning.Checkpoints.list;
-	get is Azure.AI.Projects.SessionFineTuning.Checkpoints.get;
+  save is Azure.AI.Projects.SessionFineTuning.Checkpoints.save;
+  saveSamplerWeights is Azure.AI.Projects.SessionFineTuning.Checkpoints.saveSamplerWeights;
+  list is Azure.AI.Projects.SessionFineTuning.Checkpoints.list;
+  get is Azure.AI.Projects.SessionFineTuning.Checkpoints.get;
 }
 
 @client
 @route("/fine_tuning/sessions/{sessionId}")
 interface Sampling {
-	sample is Azure.AI.Projects.SessionFineTuning.Sampling.sample;
+  sample is Azure.AI.Projects.SessionFineTuning.Sampling.sample;
 }
 
 @client
 @route("/fine_tuning/sessions/{sessionId}/request/{requestId}")
 interface Operations {
-	get is Azure.AI.Projects.SessionFineTuning.Operations.get;
+  get is Azure.AI.Projects.SessionFineTuning.Operations.get;
 }
 
+@@apiVersion(Azure.Core.Foundations.ApiVersionParameter.apiVersion, false, "python");
+@@clientName(Training.optimizerStep, "optimStep", "python");
 @@clientNamespace(Azure.AI.Projects, "azure.ai.finetuningsessions", "python");
 @@clientNamespace(Azure.AI.Projects.SessionFineTuning, "azure.ai.finetuningsessions", "python");
 @@clientNamespace(OpenAI, "azure.ai.finetuningsessions", "python");
-@@clientName(OpenAI.Error, "ApiError", "python");
 
-// Keep the error-model imports exposed by earlier SDK previews, even when an
-// operation's default error handling uses Azure Core exceptions instead.
-@@usage(OpenAI.Error, Usage.input | Usage.output | Usage.json, "python");
-@@access(OpenAI.Error, Access.public, "python");
-@@usage(Azure.AI.Projects.ApiErrorResponse, Usage.input | Usage.output | Usage.json, "python");
-@@access(Azure.AI.Projects.ApiErrorResponse, Access.public, "python");
+// A public model's preview optionality is not a change to server validation.
+// Keep the tested Python model shape separate from the raw REST model shape.
+@@alternateType(Azure.AI.Projects.SessionFineTuning.FineTuningSessionStatus, Loom.SessionStatus, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.FineTuningSessionType, Loom.SessionType, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.FineTuningTrainingType, string, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.FineTuningCheckpointType, Loom.CheckpointType, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.FineTuningSession, Loom.Session, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.FineTuningSessionSummary, Loom.SessionSummary, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.FineTuningCheckpoint, Loom.Checkpoint, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.FineTuningCheckpointInfo, Loom.CheckpointInfo, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.FineTuningCheckpointList, Loom.CheckpointList, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.FineTuningSessionList, Loom.SessionList, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.FineTuningPendingOperation, Loom.OperationResult, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.FineTuningActionOperation, Loom.OperationResult, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.FineTuningRequestStatus, Loom.OperationResult, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.FineTuningSampleRequest, Loom.SampleRequest, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.FineTuningSamplingParams, Loom.SamplingParams, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.FineTuningSampledSequence, Loom.SampledSequence, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.FineTuningStopCriteria, Loom.StopCriteria, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.FineTuningDatum, Loom.Datum, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.FineTuningModelInput, Loom.ModelInput, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.FineTuningModelInputChunk, Loom.ModelInputChunk, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.FineTuningLossFn, Loom.LossFn, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.FineTuningCompleteResponse, Loom.OperationResult, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.FineTuningHeartbeatResponse, Loom.HeartbeatResponse, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.FineTuningCursor, Loom.Cursor, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.FineTuningSessionModelData, Loom.SessionModelData, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.CreateFineTuningSessionRequest, Loom.CreateSessionRequest, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.CreateFineTuningSessionResponse, Loom.OperationResult, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.AdamParams, Loom.AdamParams, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.LoRAConfig, Loom.LoRAConfig, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.TensorData, Loom.TensorData, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.LossFnConfig, Loom.LossFnConfig, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.LossFnInputs, Loom.LossFnInputs, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.ForwardBackwardInput, Loom.ForwardBackwardInput, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.ForwardBackwardRequest, Loom.ForwardBackwardRequest, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.ForwardInput, Loom.ForwardInput, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.ForwardRequest, Loom.ForwardRequest, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.OptimStepRequest, Loom.OptimStepRequest, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.SaveCheckpointRequest, Loom.SaveCheckpointRequest, "python");
+@@alternateType(Azure.AI.Projects.SessionFineTuning.SaveSamplerWeightsRequest, Loom.SaveSamplerWeightsRequest, "python");
+@@alternateType(OpenAI.Error, Loom.ApiError, "python");
+@@alternateType(Azure.AI.Projects.ApiErrorResponse, Loom.ApiErrorResponse, "python");
+@@alternateType(Azure.AI.Projects.FoundryFeaturesOptInKeys, Loom.FoundryFeaturesOptInKeys, "python");
 
-@@clientName(FineTuningSessionStatus, "SessionStatus", "python");
-@@clientName(FineTuningSessionType, "SessionType", "python");
-@@clientName(FineTuningTrainingType, "TrainingType", "python");
-@@clientName(FineTuningCheckpointType, "CheckpointType", "python");
-@@clientName(FineTuningSession, "Session", "python");
-@@clientName(FineTuningSessionSummary, "SessionSummary", "python");
-@@clientName(FineTuningCheckpoint, "Checkpoint", "python");
-@@clientName(FineTuningCheckpointInfo, "CheckpointInfo", "python");
-@@clientName(FineTuningCheckpointList, "CheckpointList", "python");
-@@clientName(FineTuningSessionList, "SessionList", "python");
-@@clientName(FineTuningPendingOperation, "PendingOperation", "python");
-@@clientName(FineTuningActionOperation, "ActionOperation", "python");
-@@clientName(FineTuningRequestStatus, "RequestStatus", "python");
-@@clientName(PendingFineTuningRequest, "PendingRequest", "python");
-@@clientName(CompletedFineTuningRequest, "CompletedRequest", "python");
-@@clientName(FailedFineTuningRequest, "FailedRequest", "python");
-@@clientName(FineTuningDeleteSessionResponse, "DeleteSessionResponse", "python");
-@@clientName(FineTuningSampleRequest, "SampleRequest", "python");
-@@clientName(FineTuningSamplingParams, "SamplingParams", "python");
-@@clientName(FineTuningSampledSequence, "SampledSequence", "python");
-@@clientName(FineTuningStopCriteria, "StopCriteria", "python");
-@@clientName(FineTuningDatum, "Datum", "python");
-@@clientName(FineTuningModelInput, "ModelInput", "python");
-@@clientName(FineTuningModelInputChunk, "ModelInputChunk", "python");
-@@clientName(FineTuningImageChunk, "ImageChunk", "python");
-@@clientName(FineTuningImageFormat, "ImageFormat", "python");
-@@clientName(FineTuningFromCheckpoint, "FromCheckpoint", "python");
-@@clientName(FineTuningLossFn, "LossFn", "python");
-@@clientName(FineTuningCompleteResponse, "CompleteResponse", "python");
-@@clientName(FineTuningHeartbeatResponse, "HeartbeatResponse", "python");
-@@clientName(FineTuningCursor, "Cursor", "python");
-@@clientName(FineTuningSessionModelData, "SessionModelData", "python");
-@@clientName(CreateFineTuningSessionRequest, "CreateSessionRequest", "python");
-@@clientName(CreateFineTuningSessionResponse, "CreateSessionResponse", "python");
-
-// Preserve the explicit page+cursor API. The service uses client-driven offsets,
-// not nextLink/continuation tokens; an emitted single-page iterator would silently
-// truncate results. REST still carries @list/@pageItems/@offset/@pageSize.
+// These preserve the older client shape; they do not add HTTP 202 to the API.
+// The supported Python operation hooks retain the preview's legacy poller
+// semantics. The handwritten training layer implements real request-ID polling.
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(Sessions.list, "python");
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(Checkpoints.list, "python");
-@@usage(FineTuningSessionList, Usage.output, "python");
-@@usage(FineTuningCheckpointList, Usage.output, "python");
-@@usage(Azure.AI.Projects.FoundryFeaturesOptInKeys, Usage.input, "python");
-@@access(Azure.AI.Projects.FoundryFeaturesOptInKeys, Access.public, "python");
-
-// These are Python convenience result shapes, NOT REST polling responses.
-// They are populated by the handwritten normalization layer. Keeping their
-// definitions here makes them reproducible without polluting the REST schema.
-/** Normalized state of an SDK convenience operation. */
-union OperationStatus {
-	string,
-	/** Work is in progress. */
-	running: "running",
-	/** Work completed successfully. */
-	succeeded: "succeeded",
-	/** Work failed. */
-	failed: "failed",
-}
-
-/** Discriminator for normalized SDK convenience results. */
-union OperationType {
-	string,
-	/** A forward or forward-backward result. */
-	forward_backward: "forward_backward",
-	/** An optimizer-step result. */
-	optim_step: "optim_step",
-	/** A sampling result. */
-	sample: "sample",
-	/** A saved training checkpoint. */
-	save_checkpoint: "save_checkpoint",
-	/** Saved sampler weights. */
-	save_sampler_weights: "save_sampler_weights",
-}
-
-/** Normalized result returned by SDK convenience methods, not the REST poll envelope. */
-@usage(Usage.input | Usage.output | Usage.json, "python")
-@access(Access.public, "python")
-@discriminator("type")
-model OperationResult {
-	/** Kind of operation whose result was normalized. */
-	type: OperationType;
-	/** Request identifier associated with this convenience result. */
-	@visibility(Lifecycle.Read)
-	operation_id: string;
-	/** Normalized operation state. */
-	@visibility(Lifecycle.Read)
-	status: OperationStatus;
-}
-
-/** Normalized forward or forward-backward result. */
-model ForwardBackwardOperationResult extends OperationResult {
-	/** Identifies the forward-result shape. */
-	type: OperationType.forward_backward;
-	/** Aggregate loss, absent for forward-only results that do not report it. */
-	total_loss?: float64;
-	/** Shape identifier of each loss output. */
-	loss_fn_output_type?: string;
-	/** Per-datum outputs, including token log-probabilities. */
-	loss_fn_outputs?: Record<unknown>[];
-	/** Legacy per-datum log-probability tensors, when reported. */
-	per_datum_logprobs?: TensorData[];
-	/** Metrics reported by the service, retaining arbitrary JSON values. */
-	metrics?: Record<unknown>;
-}
-
-/** Normalized optimizer-step result. */
-model OptimStepOperationResult extends OperationResult {
-	/** Identifies an optimizer-step result. */
-	type: OperationType.optim_step;
-	/** Gradient norm, when reported. */
-	grad_norm?: float64;
-	/** Optimizer step count, when reported. */
-	step_count?: int32;
-	/** Metrics reported by the service. */
-	metrics?: Record<unknown>;
-}
-
-/** Normalized sampling result. */
-model SampleOperationResult extends OperationResult {
-	/** Identifies a sampling result. */
-	type: OperationType.sample;
-	/** Generated sequences. */
-	sequences: FineTuningSampledSequence[];
-	/** Prompt-token log-probabilities; null marks a token without a computed value. */
-	prompt_logprobs?: (float64 | null)[];
-	/** Per-prompt-token lists of [token_id, logprob] pairs; null marks an unavailable position. */
-	topk_prompt_logprobs?: (unknown[][] | null)[];
-	/** Sampling and prefill metrics, when available. */
-	metrics?: Record<unknown>;
-}
-
-/** Normalized result of saving a training checkpoint. */
-model SaveCheckpointOperationResult extends OperationResult {
-	/** Identifies a training checkpoint result. */
-	type: OperationType.save_checkpoint;
-	/** Checkpoint identifier within its source session. */
-	checkpoint_id: string;
-	/** Portable path identifying the checkpoint. */
-	path: string;
-}
-
-/** Normalized result of saving sampler weights. */
-model SaveSamplerWeightsOperationResult extends OperationResult {
-	/** Identifies a sampler-checkpoint result. */
-	type: OperationType.save_sampler_weights;
-	/** Checkpoint identifier within its source session. */
-	checkpoint_id: string;
-	/** Sampling-session identifier, when reported. */
-	sampling_session_id?: string;
-}
+@@Azure.ClientGenerator.Core.Legacy.markAsLro(Sessions.create, "python");
+@@Azure.ClientGenerator.Core.Legacy.markAsLro(Sessions.unload, "python");
+@@Azure.ClientGenerator.Core.Legacy.markAsLro(Training.forwardBackward, "python");
+@@Azure.ClientGenerator.Core.Legacy.markAsLro(Training.optimizerStep, "python");
+@@Azure.ClientGenerator.Core.Legacy.markAsLro(Checkpoints.save, "python");
+@@Azure.ClientGenerator.Core.Legacy.markAsLro(Checkpoints.saveSamplerWeights, "python");
+@@Azure.ClientGenerator.Core.Legacy.markAsLro(Sampling.sample, "python");
