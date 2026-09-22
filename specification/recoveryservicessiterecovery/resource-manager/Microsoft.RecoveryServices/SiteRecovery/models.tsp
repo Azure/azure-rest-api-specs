@@ -651,7 +651,7 @@ union RecoveryPointSyncType {
  * The IP version (address family) of an ip-config.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Matches the existing IPConfigDetails / IPConfigInputDetails naming in this specification."
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_11_01)
 union IPVersion {
   string,
 
@@ -669,7 +669,7 @@ union IPVersion {
 /**
  * The vault level policy controlling whether the A2A recovery network configuration is automatically kept in sync with the source virtual machine.
  */
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_11_01)
 union RecoveryNetworkConfigAutoSyncPolicy {
   string,
 
@@ -6485,7 +6485,7 @@ model VaultSettingProperties {
   /**
    * The vault level policy controlling whether the A2A recovery network configuration is automatically kept in sync with the source virtual machine.
    */
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_11_01)
   recoveryNetworkConfigAutoSync?: RecoveryNetworkConfigAutoSyncPolicy;
 }
 
@@ -6516,7 +6516,7 @@ model VaultSettingCreationInputProperties {
   /**
    * The vault level policy controlling whether the A2A recovery network configuration is automatically kept in sync with the source virtual machine. An omitted value leaves the stored policy unchanged.
    */
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_11_01)
   recoveryNetworkConfigAutoSync?: RecoveryNetworkConfigAutoSyncPolicy;
 }
 
@@ -6663,7 +6663,7 @@ model A2AVmManagedDiskInputDetails {
   /**
    * The confidential disk encryption info for the managed disk. Applicable to CMK confidential VMs.
    */
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_11_01)
   confidentialDiskEncryptionInfo?: ConfidentialDiskEncryptionInfo;
 }
 
@@ -6715,7 +6715,7 @@ model KeyEncryptionKeyInfo {
 /**
  * Confidential disk encryption info for a CMK confidential VM managed disk.
  */
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_11_01)
 model ConfidentialDiskEncryptionInfo {
   /**
    * The confidential disk encryption set ARM Id used for the replica disk. Applicable to CMK confidential VMs.
@@ -6739,7 +6739,7 @@ model ConfidentialDiskEncryptionInfo {
 /**
  * Confidential disk encryption info used while updating replication of a CMK confidential VM managed disk.
  */
-@added(Versions.v2026_10_01)
+@added(Versions.v2026_11_01)
 model UpdateConfidentialDiskEncryptionInfo {
   /**
    * The confidential disk encryption set ARM Id used for the target disk after failover. Applicable to CMK confidential VMs.
@@ -7369,7 +7369,7 @@ model A2AEnableProtectionInput extends EnableProtectionProviderSpecificInput {
   /**
    * The confidential data disk encryption user-assigned identity ARM Id. Applicable to CMK confidential VM data disks.
    */
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_11_01)
   recoveryConfidentialDataDiskEncryptionIdentity?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedIdentity/userAssignedIdentities";
@@ -7933,7 +7933,7 @@ model A2AProtectedManagedDiskDetails {
   /**
    * The confidential disk encryption info for the managed disk. Applicable to CMK confidential VMs.
    */
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_11_01)
   confidentialDiskEncryptionInfo?: ConfidentialDiskEncryptionInfo;
 }
 
@@ -8384,7 +8384,7 @@ model A2AReplicationDetails extends ReplicationProviderSpecificSettings {
   /**
    * The confidential data disk encryption user-assigned identity ARM Id. Applicable to CMK confidential VM data disks.
    */
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_11_01)
   recoveryConfidentialDataDiskEncryptionIdentity?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedIdentity/userAssignedIdentities";
@@ -8551,7 +8551,7 @@ model IPConfigDetails {
   /**
    * The IP version (IPv4 / IPv6) of the ip-config. Orthogonal to the allocation type (static / dynamic); a missing value is treated as IPv4.
    */
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_11_01)
   ipVersion?: IPVersion;
 }
 
@@ -9076,7 +9076,7 @@ model A2ASwitchProtectionInput extends SwitchProtectionProviderSpecificInput {
   /**
    * The confidential data disk encryption user-assigned identity ARM Id. Applicable to CMK confidential VM data disks.
    */
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_11_01)
   recoveryConfidentialDataDiskEncryptionIdentity?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedIdentity/userAssignedIdentities";
@@ -9223,7 +9223,7 @@ model A2AUpdateReplicationProtectedItemInput
   /**
    * The confidential data disk encryption user-assigned identity ARM Id. Applicable to CMK confidential VM data disks.
    */
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_11_01)
   recoveryConfidentialDataDiskEncryptionIdentity?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.ManagedIdentity/userAssignedIdentities";
@@ -9274,7 +9274,7 @@ model A2AVmManagedDiskUpdateDetails {
   /**
    * The confidential disk encryption info to update for the managed disk. Only the recovery target confidential disk encryption set can be updated after protection is enabled; the replica confidential disk encryption set is immutable. Applicable to CMK confidential VMs.
    */
-  @added(Versions.v2026_10_01)
+  @added(Versions.v2026_11_01)
   confidentialDiskEncryptionInfo?: UpdateConfidentialDiskEncryptionInfo;
 }
 
