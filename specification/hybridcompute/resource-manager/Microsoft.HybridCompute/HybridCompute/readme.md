@@ -93,6 +93,26 @@ directive:
     from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/applications/{applicationName}/instanceView"].get.responses["200"].schema.properties
     reason: This is a point GET action returning a single VM application instance view, not a resource collection.
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/applications/{applicationName}"].get.responses["200"].schema
+    reason: VmApplication.properties.provisioningState is emitted with readOnly true, but the validator does not follow the readOnly property through the shared ProvisioningState schema reference.
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/applications/{applicationName}"].put.responses["200"].schema
+    reason: VmApplication.properties.provisioningState is emitted with readOnly true, but the validator does not follow the readOnly property through the shared ProvisioningState schema reference.
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/applications/{applicationName}"].put.responses["201"].schema
+    reason: VmApplication.properties.provisioningState is emitted with readOnly true, but the validator does not follow the readOnly property through the shared ProvisioningState schema reference.
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/applications/{applicationName}/instanceView"].get.responses["200"].schema
+    reason: VmApplication.properties.provisioningState is emitted with readOnly true, but the validator does not follow the readOnly property through the shared ProvisioningState schema reference.
+  - suppress: ProvisioningStateMustBeReadOnly
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridCompute/machines/{machineName}/applications/{applicationName}"].patch.responses["200"].schema
+    reason: VmApplication.properties.provisioningState is emitted with readOnly true, but the validator does not follow the readOnly property through the shared ProvisioningState schema reference.
 ```
 
 ### Tag: package-2026-07-15
