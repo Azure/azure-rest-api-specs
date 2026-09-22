@@ -1,0 +1,40 @@
+{
+  "operationId": "AzureSandboxes_List",
+  "title": "AzureSandboxes_list",
+  "parameters": {
+    "endpoint": "https://example.azuredevcompute.io",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-resource-group",
+    "sandboxGroupName": "example-sandbox-group",
+    "api-version": "2026-09-01"
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "id": "example-sandbox",
+          "sourcesRef": {},
+          "resources": {
+            "cpu": "example-cpu",
+            "memory": "example-memory"
+          }
+        }
+      ]
+    },
+    "400": {
+      "body": {
+        "title": "Invalid request",
+        "status": 400,
+        "detail": "One or more query parameters are invalid."
+      }
+    },
+    "401": {
+      "body": {
+        "title": "Unauthorized",
+        "status": 401,
+        "detail": "Authentication is required to access this resource."
+      }
+    },
+    "500": {}
+  }
+}
