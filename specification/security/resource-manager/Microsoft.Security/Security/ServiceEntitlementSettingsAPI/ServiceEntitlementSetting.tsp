@@ -74,22 +74,13 @@ interface ServiceEntitlementSettings {
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/serviceEntitlementSettings/{serviceEntitlementSettingName}/operationStatuses/{operationId}")
   getOperationStatus(...ServiceEntitlementSettingOperationParameters):
-    | ArmResponse<ServiceEntitlementSettingOperationStatus>
+    | ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>
     | ErrorResponse;
 
-  /** Gets the result of a long-running operation. Returns no content while pending, the updated resource after PATCH completes, or no content after DELETE completes. */
+  /** Gets the status of a long-running operation through the operation-results endpoint. Returns HTTP 200 with a status monitor while the operation is in progress and after completion, including after DELETE. */
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/serviceEntitlementSettings/{serviceEntitlementSettingName}/operationResults/{operationId}")
   getOperationResult(...ServiceEntitlementSettingOperationParameters):
-    | ArmResponse<ServiceEntitlementSetting>
-    | ArmAcceptedResponse<
-        "The operation is in progress.",
-        ExtraHeaders = Azure.Core.Foundations.RetryAfterHeader & {
-          /** The URL to poll for the operation result. */
-          @header("Location")
-          location: string;
-        }
-      >
-    | ArmNoContentResponse<"The delete operation completed successfully.">
+    | ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>
     | ErrorResponse;
 }

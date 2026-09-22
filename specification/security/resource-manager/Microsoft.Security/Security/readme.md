@@ -77,18 +77,6 @@ directive:
 
 ``` yaml
 suppressions:
-  - code: RequiredPropertiesMissingInResourceModel
-    from: serviceEntitlementSettings.json
-    where: $.definitions.ServiceEntitlementSettingOperationStatus
-    reason: This is the standard ArmOperationStatus LRO status monitor, not an ARM resource. Its status, timing, progress, and error fields follow the polling contract.
-  - code: BodyTopLevelProperties
-    from: serviceEntitlementSettings.json
-    where: $.definitions.ServiceEntitlementSettingOperationStatus
-    reason: This is the standard ArmOperationStatus LRO status monitor, not an ARM resource. Its status, timing, progress, and error fields follow the polling contract.
-  - code: GetResponseCodes
-    from: serviceEntitlementSettings.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/serviceEntitlementSettings/{serviceEntitlementSettingName}/operationResults/{operationId}"].get
-    reason: The Location polling endpoint returns 202 while pending, 200 with the resource after PATCH, and 204 after DELETE. The 204 response is intentional for an operation with no final response body.
   - code: ResourceNameRestriction
     from: Microsoft.Security\stable\2024-01-01\pricings.json
     reason: Old versions do not have pattern as well, and if I add a pattern to this version, I get another error about breaking the last version's pattern.
@@ -795,6 +783,13 @@ paths, following the resource-scoped polling pattern of `ServiceEntitlementsAPI`
 are distinct from the provider-wide operations, so no composite path transformation is needed.
 The service must keep both polling endpoints accessible after deleting the setting; ARM review
 approval for this resource-scoped placement is required.
+
+Both service entitlement settings polling GETs return HTTP 200 with the shared
+`OperationStatusResult` model. Callers inspect `status` to distinguish pending and
+completed operations, including DELETE completion. The operation-results GET does
+not return the setting resource or HTTP 202/204; the initial DELETE operation still
+supports HTTP 202/204. Backend support and ARM approval of this polling contract
+must be confirmed separately.
 
 ``` yaml $(tag) == 'package-composite-v3'
 input-file:

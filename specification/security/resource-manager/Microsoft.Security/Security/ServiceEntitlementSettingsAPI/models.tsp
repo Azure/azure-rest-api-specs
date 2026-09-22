@@ -10,9 +10,6 @@ using Azure.ResourceManager;
 
 namespace ServiceEntitlementSettingsApi;
 
-/** The status monitor for a service entitlement setting operation. */
-model ServiceEntitlementSettingOperationStatus is ArmOperationStatus;
-
 /** The supported name of a service entitlement setting. */
 union ServiceEntitlementSettingName {
   /** The singleton service entitlement setting. */
