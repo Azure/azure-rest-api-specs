@@ -128,21 +128,4 @@ describe("native impact utilities", () => {
 
     expect(diffSuppression(before, after)).toEqual([changed]);
   });
-
-  it.each(["directive", "suppressions"])(
-    "warns about non-object %s entries without discarding valid suppressions",
-    async (key) => {
-      const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
-      const before = join(folder, "before.md");
-      const after = join(folder, "after.md");
-      const suppression = { suppress: "Rule", where: { paths: ["a", "b"] } };
-      await writeFile(before, "");
-      await writeFile(after, "```yaml\n" + yaml.dump({ [key]: [null, 42, suppression] }) + "```\n");
-
-      expect(diffSuppression(before, after)).toEqual([suppression]);
-      expect(warn).toHaveBeenCalledExactlyOnceWith(
-        `Ignoring non-object suppression entries in ${after}`,
-      );
-    },
-  );
 });

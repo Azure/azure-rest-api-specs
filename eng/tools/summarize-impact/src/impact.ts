@@ -454,18 +454,7 @@ async function processSuppression(context: PRContext, labelContext: LabelContext
   return suppressionReviewRequiredLabel.shouldBePresent;
 }
 
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === "object" && value !== null && !Array.isArray(value);
-}
-
 function getSuppressions(readmePath: string) {
-  const getSuppressionObjects = (entries: unknown[]) => {
-    const objects = entries.filter(isRecord);
-    if (objects.length !== entries.length) {
-      console.warn(`Ignoring non-object suppression entries in ${readmePath}`);
-    }
-    return objects;
-  };
   const walkToNode = (
     walker: commonmark.NodeWalker,
     cb: (node: commonmark.Node) => boolean,
@@ -500,19 +489,19 @@ function getSuppressions(readmePath: string) {
     for (const block of codeBlocks) {
       if (block.literal) {
         try {
-          const blockObject = yaml.load(block.literal);
-          if (!isRecord(blockObject)) {
-            continue;
-          }
-          const directives = blockObject["directive"];
+          const blockObject = yaml.load(block.literal) as
+            | {
+                directive?: Record<string, unknown>[];
+                suppressions?: Record<string, unknown>[];
+              }
+            | undefined;
+          const directives = blockObject?.["directive"];
           if (Array.isArray(directives)) {
-            suppressionResult = suppressionResult.concat(
-              getSuppressionObjects(directives).filter((s) => s.suppress),
-            );
+            suppressionResult = suppressionResult.concat(directives.filter((s) => s.suppress));
           }
-          const suppressions = blockObject["suppressions"];
+          const suppressions = blockObject?.["suppressions"];
           if (Array.isArray(suppressions)) {
-            suppressionResult = suppressionResult.concat(getSuppressionObjects(suppressions));
+            suppressionResult = suppressionResult.concat(suppressions);
           }
         } catch (error) {
           console.warn(
