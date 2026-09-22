@@ -11,21 +11,99 @@ const REQUIRED_PACKAGE = "yaml";
 
 /**
  * @param {string} root
+ * @returns {{root: string, managerVersion: string, importer: string}}
+ */
+function resolveWorkspace(root) {
+  let current = path.resolve(root);
+  while (true) {
+    const manifestPath = path.join(current, "package.json");
+    const workspacePath = path.join(current, "pnpm-workspace.yaml");
+    const lockPath = path.join(current, "pnpm-lock.yaml");
+    if (fs.existsSync(manifestPath) && fs.existsSync(workspacePath) && fs.existsSync(lockPath)) {
+      const packageManager = readJsonObject(manifestPath).packageManager;
+      const match =
+        typeof packageManager === "string"
+          ? /^pnpm@(\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?)(?:\+sha\d+\..+)?$/.exec(packageManager)
+          : null;
+      if (!match) {
+        throw new Error(`Expected an exact pnpm packageManager declaration in ${manifestPath}.`);
+      }
+      return {
+        root: current,
+        managerVersion: match[1],
+        importer: path.relative(current, root).split(path.sep).join("/"),
+      };
+    }
+    const parent = path.dirname(current);
+    if (parent === current) {
+      throw new Error(`Assessment skill pnpm workspace is unavailable above ${root}.`);
+    }
+    current = parent;
+  }
+}
+
+/**
+ * @param {string} value
  * @returns {string}
  */
-function expectedVersion(root) {
-  const lockPath = path.join(root, "package-lock.json");
-  if (!fs.existsSync(lockPath)) {
-    throw new Error(`Assessment skill package-lock.json is unavailable in ${root}.`);
+function unquoteYamlScalar(value) {
+  const trimmed = value.trim();
+  if (
+    trimmed.length >= 2 &&
+    ((trimmed.startsWith("'") && trimmed.endsWith("'")) ||
+      (trimmed.startsWith('"') && trimmed.endsWith('"')))
+  ) {
+    return trimmed.slice(1, -1);
   }
-  const lock = readJsonObject(lockPath);
-  const packages = lock.packages;
-  const dependency = isRecord(packages) ? packages[`node_modules/${REQUIRED_PACKAGE}`] : undefined;
-  const version = isRecord(dependency) ? dependency.version : undefined;
-  if (typeof version !== "string" || !version) {
-    throw new Error(`${REQUIRED_PACKAGE} is absent from ${lockPath}.`);
+  return trimmed;
+}
+
+/**
+ * Read the exact dependency version from the skill's pnpm lockfile importer
+ * without importing yaml before that dependency has been bootstrapped.
+ *
+ * @param {{root: string, importer: string}} workspace
+ * @returns {string}
+ */
+function expectedVersion(workspace) {
+  const lockPath = path.join(workspace.root, "pnpm-lock.yaml");
+  const lines = fs.readFileSync(lockPath, "utf8").split(/\r?\n/);
+  let currentImporter = "";
+  let inDependencies = false;
+  let currentDependency = "";
+  for (const line of lines) {
+    const importerMatch = /^  (\S.*):\s*$/.exec(line);
+    if (importerMatch) {
+      currentImporter = unquoteYamlScalar(importerMatch[1]);
+      inDependencies = false;
+      currentDependency = "";
+      continue;
+    }
+    if (currentImporter !== workspace.importer) continue;
+    if (line === "    dependencies:") {
+      inDependencies = true;
+      currentDependency = "";
+      continue;
+    }
+    if (/^    \S/.test(line)) {
+      inDependencies = false;
+      currentDependency = "";
+      continue;
+    }
+    if (!inDependencies) continue;
+    const dependencyMatch = /^      (\S.*):\s*$/.exec(line);
+    if (dependencyMatch) {
+      currentDependency = unquoteYamlScalar(dependencyMatch[1]);
+      continue;
+    }
+    if (currentDependency === REQUIRED_PACKAGE) {
+      const versionMatch = /^        version:\s*(\S.*)\s*$/.exec(line);
+      if (versionMatch) return unquoteYamlScalar(versionMatch[1]);
+    }
   }
-  return version;
+  throw new Error(
+    `${REQUIRED_PACKAGE} is absent from pnpm importer ${workspace.importer} in ${lockPath}.`,
+  );
 }
 
 /**
@@ -44,13 +122,13 @@ function installedVersion(root) {
 }
 
 /**
- * @param {{platform?: NodeJS.Platform}} [options]
+ * @param {{platform?: NodeJS.Platform, managerVersion: string}} options
  * @returns {{executable: string, args: string[]}}
  */
-export function skillDependencyInstallCommand({ platform = process.platform } = {}) {
+export function skillDependencyInstallCommand({ platform = process.platform, managerVersion }) {
   return {
-    executable: platform === "win32" ? "npm.cmd" : "npm",
-    args: ["ci", "--ignore-scripts", "--no-audit", "--no-fund"],
+    executable: platform === "win32" ? "npx.cmd" : "npx",
+    args: ["--yes", `pnpm@${managerVersion}`, "install", "--frozen-lockfile", "--ignore-scripts"],
   };
 }
 
@@ -59,10 +137,13 @@ export function skillDependencyInstallCommand({ platform = process.platform } = 
  * @returns {void}
  */
 function installSkillDependencies(root) {
-  const command = skillDependencyInstallCommand();
+  const workspace = resolveWorkspace(root);
+  const command = skillDependencyInstallCommand({
+    managerVersion: workspace.managerVersion,
+  });
   const processCommand = dependencyProcessCommand(command);
   const result = spawnSync(processCommand.executable, processCommand.args, {
-    cwd: root,
+    cwd: workspace.root,
     encoding: "utf8",
     maxBuffer: 64 * 1024 * 1024,
     env: process.env,
@@ -112,7 +193,8 @@ export async function ensureSkillDependencies({
   log = console.error,
 } = {}) {
   const started = performance.now();
-  const expected = expectedVersion(root);
+  const workspace = resolveWorkspace(root);
+  const expected = expectedVersion(workspace);
   if (installedVersion(root) === expected) {
     return {
       installed: false,

@@ -6,20 +6,33 @@ import test from "node:test";
 import { ensureSkillDependencies, skillDependencyInstallCommand } from "./skill-dependencies.mjs";
 
 function fixture() {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), "assessment-skill-dependencies-"));
+  const workspace = fs.mkdtempSync(path.join(os.tmpdir(), "assessment-skill-dependencies-"));
+  const root = path.join(workspace, ".github", "skills", "azure-typespec-assessment");
+  fs.mkdirSync(root, { recursive: true });
   fs.writeFileSync(
-    path.join(root, "package.json"),
-    JSON.stringify({ dependencies: { yaml: "^2.9.0" } }),
+    path.join(workspace, "package.json"),
+    JSON.stringify({ packageManager: "pnpm@11.8.0" }),
   );
   fs.writeFileSync(
-    path.join(root, "package-lock.json"),
-    JSON.stringify({
-      lockfileVersion: 3,
-      packages: {
-        "": { dependencies: { yaml: "^2.9.0" } },
-        "node_modules/yaml": { version: "2.9.0" },
-      },
-    }),
+    path.join(workspace, "pnpm-workspace.yaml"),
+    'packages:\n  - ".github/skills/azure-typespec-assessment"\n',
+  );
+  fs.writeFileSync(
+    path.join(root, "package.json"),
+    JSON.stringify({ dependencies: { yaml: "catalog:" } }),
+  );
+  fs.writeFileSync(
+    path.join(workspace, "pnpm-lock.yaml"),
+    [
+      "lockfileVersion: '9.0'",
+      "importers:",
+      "  .github/skills/azure-typespec-assessment:",
+      "    dependencies:",
+      "      yaml:",
+      "        specifier: 'catalog:'",
+      "        version: 2.9.0",
+      "",
+    ].join("\n"),
   );
   return root;
 }
@@ -115,8 +128,64 @@ void test("cleans the installation lock after failure", async () => {
 });
 
 void test("builds a deterministic lifecycle-script-free skill install", () => {
-  assert.deepEqual(skillDependencyInstallCommand({ platform: "win32" }), {
-    executable: "npm.cmd",
-    args: ["ci", "--ignore-scripts", "--no-audit", "--no-fund"],
+  assert.deepEqual(skillDependencyInstallCommand({ platform: "win32", managerVersion: "11.8.0" }), {
+    executable: "npx.cmd",
+    args: ["--yes", "pnpm@11.8.0", "install", "--frozen-lockfile", "--ignore-scripts"],
   });
+  assert.deepEqual(skillDependencyInstallCommand({ platform: "linux", managerVersion: "11.8.0" }), {
+    executable: "npx",
+    args: ["--yes", "pnpm@11.8.0", "install", "--frozen-lockfile", "--ignore-scripts"],
+  });
+});
+
+void test("requires the skill importer in the workspace lockfile", async () => {
+  const root = fixture();
+  fs.writeFileSync(
+    path.join(root, "..", "..", "..", "pnpm-lock.yaml"),
+    "lockfileVersion: '9.0'\nimporters:\n  .: {}\n",
+  );
+  await assert.rejects(ensureSkillDependencies({ root, log: () => {} }), /pnpm importer/);
+});
+
+void test("requires an exact workspace pnpm version", async () => {
+  const root = fixture();
+  fs.writeFileSync(
+    path.join(root, "..", "..", "..", "package.json"),
+    JSON.stringify({ packageManager: "pnpm@latest" }),
+  );
+  await assert.rejects(
+    ensureSkillDependencies({ root, log: () => {} }),
+    /exact pnpm packageManager/,
+  );
+});
+
+void test("rejects a skill outside a pnpm workspace", async () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "assessment-skill-standalone-"));
+  await assert.rejects(
+    ensureSkillDependencies({ root, log: () => {} }),
+    /pnpm workspace is unavailable/,
+  );
+});
+
+void test("reads quoted pnpm importer and version values", async () => {
+  const root = fixture();
+  fs.writeFileSync(
+    path.join(root, "..", "..", "..", "pnpm-lock.yaml"),
+    [
+      "lockfileVersion: '9.0'",
+      "importers:",
+      "  '.github/skills/azure-typespec-assessment':",
+      "    dependencies:",
+      "      'yaml':",
+      "        version: '2.9.0'",
+      "",
+    ].join("\n"),
+  );
+  installYaml(root);
+  const result = await ensureSkillDependencies({
+    root,
+    runInstall: () => assert.fail("install should not run"),
+    log: () => {},
+  });
+  assert.equal(result.packages.yaml, "2.9.0");
 });

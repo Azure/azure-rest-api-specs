@@ -58,11 +58,12 @@ mode excludes them.
 Production behavior lives under `scripts/`. Code under `evals/` and test files
 is not imported or used by the runtime.
 
-The coordinator bootstraps the skill's own locked dependencies before loading
-the assessment implementation. When the installed `yaml` version is missing or
-does not match `package-lock.json`, it runs lifecycle-script-free `npm ci` in
-the skill directory under an installation lock. Normal downstream commands
-reuse that installation because the coordinator is always the first command.
+The coordinator bootstraps the skill's workspace-locked dependencies before
+loading the assessment implementation. When the installed `yaml` version is
+missing or does not match the skill importer in the root `pnpm-lock.yaml`, it
+runs the repository's exact pnpm version with a frozen lockfile and lifecycle
+scripts disabled under an installation lock. Normal downstream commands reuse
+that installation because the coordinator is always the first command.
 
 Separate invocation retries, dependency setup, compilation, analyzer work,
 Agent/tool waits, and finalization when reporting elapsed time. The preparation
