@@ -1787,6 +1787,7 @@
       "enum": [
         "RSA-OAEP",
         "RSA-OAEP-256",
+        "RSA-OAEP-384",
         "RSA1_5",
         "A128GCM",
         "A192GCM",
@@ -1816,6 +1817,11 @@
             "name": "RSA_OAEP256",
             "value": "RSA-OAEP-256",
             "description": "RSAES using Optimal Asymmetric Encryption Padding with a hash function of SHA-256 and a mask generation function of MGF1 with SHA-256."
+          },
+          {
+            "name": "RSA_OAEP384",
+            "value": "RSA-OAEP-384",
+            "description": "RSAES using Optimal Asymmetric Encryption Padding with a hash function of SHA-384 and a mask generation function of MGF1 with SHA-384."
           },
           {
             "name": "RSA1_5",
@@ -2128,6 +2134,7 @@
       "description": "An algorithm used for key wrapping and unwrapping.",
       "enum": [
         "RSA-OAEP-256",
+        "RSA-OAEP-384",
         "A128KW",
         "A192KW",
         "A256KW",
@@ -2145,6 +2152,11 @@
             "name": "RSA_OAEP256",
             "value": "RSA-OAEP-256",
             "description": "RSAES using Optimal Asymmetric Encryption Padding with a hash function of SHA-256 and a mask generation function of MGF1 with SHA-256."
+          },
+          {
+            "name": "RSA_OAEP384",
+            "value": "RSA-OAEP-384",
+            "description": "RSAES using Optimal Asymmetric Encryption Padding with a hash function of SHA-384 and a mask generation function of MGF1 with SHA-384."
           },
           {
             "name": "A128_KW",
@@ -2381,7 +2393,8 @@
       "enum": [
         "CKM_RSA_AES_KEY_WRAP",
         "RSA_AES_KEY_WRAP_256",
-        "RSA_AES_KEY_WRAP_384"
+        "RSA_AES_KEY_WRAP_384",
+        "RSA_PKCS_OAEP_384"
       ],
       "x-ms-enum": {
         "name": "KeyEncryptionAlgorithm",
@@ -2401,6 +2414,11 @@
             "name": "RSA_AES_KEY_WRAP_384",
             "value": "RSA_AES_KEY_WRAP_384",
             "description": "The RSA_AES_KEY_WRAP_384 key wrap mechanism."
+          },
+          {
+            "name": "RSA_PKCS_OAEP_384",
+            "value": "RSA_PKCS_OAEP_384",
+            "description": "The RSA_PKCS_OAEP_384 key wrap mechanism."
           }
         ]
       }
