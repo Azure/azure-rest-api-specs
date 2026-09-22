@@ -8,34 +8,21 @@ using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
 using Microsoft.ResourceConnector;
 
-/*
- * Shared client overrides
- */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
-#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "customization"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-op AppliancesUpdateCustomized(
-  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
-  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
-  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
-  ...Azure.ResourceManager.ProviderNamespace<Appliance>,
-
-  @path
-  @maxLength(63)
-  @minLength(1)
-  @doc("Appliances name.")
-  @segment("appliances")
-  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$")
-  resourceName: string,
-
+/** Parameters used to flatten the appliance patch body. */
+model AppliancesUpdateParameters {
+  /** Resource tags. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "override"
-  @doc("Resource tags")
-  @body
-  tags?: Record<string>,
-): Appliance;
-@@override(Appliances.update, AppliancesUpdateCustomized, "javascript,python");
+  tags?: Record<string>;
+}
+@@override(
+  Appliances.update,
+  replaceParameter(
+    Appliances.update,
+    "properties",
+    AppliancesUpdateParameters.tags
+  ),
+  "javascript,python"
+);
 
 /*
  * Python overrides

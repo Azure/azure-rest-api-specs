@@ -259,31 +259,22 @@ model SignedIdentifiersGo is Array<SignedIdentifier>;
 @@clientOption(Storage.Queues, "omitSlashFromEmptyRoute", true, "python");
 
 /** ----- This section overrides the setAccessPolicy operation for Rust to require the queueAcl body ----- */
-/** Sets the permissions for the specified queue. */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
-@put
-@route("?comp=acl")
-op setAccessPolicyRequiredQueueAcl is StorageOperationNoBody<
-  {
-    /** The media type of the request. */
-    @header("Content-Type")
-    contentType?: "application/xml";
+model RequiredQueueAclParameter {
+  /** The access control list. */
+  #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API"
+  @bodyRoot
+  queueAcl: SignedIdentifiers;
+}
 
-    ...TimeoutParameter;
-
-    /** The access control list. */
-    #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API"
-    @bodyRoot
-    queueAcl: SignedIdentifiers;
-  },
-  {
-    @statusCode statusCode: 204;
-  }
->;
-
-@@override(Queue.setAccessPolicy, setAccessPolicyRequiredQueueAcl, "rust");
+@@override(
+  Queue.setAccessPolicy,
+  replaceParameter(
+    Queue.setAccessPolicy,
+    "queueAcl",
+    RequiredQueueAclParameter.queueAcl
+  ),
+  "rust"
+);
 
 /** ----- This section overrides the setMetadata operations for Rust to require the metadata headers ----- */
 alias MetadataHeadersRequired = {
@@ -293,22 +284,15 @@ alias MetadataHeadersRequired = {
   metadata: string;
 };
 
-/** Sets user-defined metadata for the specified queue. */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API"
-#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
-@put
-@route("?comp=metadata")
-op setMetadataRequiredMetadataQueue is StorageOperationNoBody<
-  {
-    ...TimeoutParameter;
-    ...MetadataHeadersRequired;
-  },
-  {
-    @statusCode statusCode: 204;
-  }
->;
-
-@@override(Queue.setMetadata, setMetadataRequiredMetadataQueue, "rust");
+@@override(
+  Queue.setMetadata,
+  replaceParameter(
+    Queue.setMetadata,
+    "metadata",
+    MetadataHeadersRequired.metadata
+  ),
+  "rust"
+);
 
 // csharp customizations
 @@alternateType(AccessPolicy.start, utcDateTime, "csharp");
