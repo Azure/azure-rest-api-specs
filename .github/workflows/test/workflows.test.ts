@@ -108,6 +108,7 @@ describe("workflow files", () => {
           "release-plan",
           "sdk-suppressions",
           "spec-gen-sdk-runner",
+          "summarize-impact",
           "suppressions",
           "tsp-client-tests",
           "typespec-requirement",
@@ -122,7 +123,7 @@ describe("workflow files", () => {
         "eng/common",
         "eng/scripts",
         "scripts",
-        ...["openapi-diff-runner", "summarize-impact", "typespec-migration-validation"].map(
+        ...["openapi-diff-runner", "typespec-migration-validation"].map(
           (name) => `eng/tools/${name}`,
         ),
       ];
