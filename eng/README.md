@@ -84,9 +84,6 @@ pnpm test --project @azure-tools/typespec-validation
 pnpm --filter @azure-tools/typespec-validation run test:ci
 ```
 
-Tests default to a 10-second timeout in workspace and standalone runs. Packages
-with longer integration tests can override `testTimeout` in their Vitest config.
-
 Shared coverage defaults exclude CLI wrappers, test code, and generated coverage.
 Workspace runs write reports to root `coverage/` and enforce 100% coverage for
 shared-library sources across the selected projects. Standalone runs write

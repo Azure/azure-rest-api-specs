@@ -150,12 +150,6 @@ Vitest commands still run directly and do not forward to the root.
 the Vitest workspace on Ubuntu and Windows. `github-test.yaml` retains production-only module import
 checks on both OSes, plus actionlint and compiled agentic workflow lock checks on Linux.
 
-These read-only engineering workflows cancel superseded runs of the same PR and have
-explicit job timeouts. Concurrency groups include the workflow and event; non-PR runs
-use a unique run ID so pushes and manual runs do not cancel each other. Do not extend
-this policy to status/label publishers or workflows with downstream artifact consumers
-without reviewing their cancellation behavior.
-
 CI runs `pnpm lint` once from the repository root in `lint.yaml`, covering `.github`
 and `eng/tools`. Do not add lint or type-check steps to the test OS matrix.
 `.github/workflows/format.yaml` runs `pnpm format:check` once from the repository
