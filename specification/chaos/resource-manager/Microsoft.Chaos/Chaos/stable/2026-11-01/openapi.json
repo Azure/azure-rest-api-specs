@@ -2152,6 +2152,9 @@
           }
         },
         "x-ms-examples": {
+          "List Workspaces with a validated customer key configuration pending": {
+            "$ref": "./examples/Workspaces_List_EncryptionPending.json"
+          },
           "List all Workspaces in a resource group.": {
             "$ref": "./examples/Workspaces_List.json"
           }
@@ -2386,6 +2389,9 @@
           },
           "Update a Workspace to remove its writable encryption settings": {
             "$ref": "./examples/Workspaces_Update_RemoveEncryption.json"
+          },
+          "Update a Workspace with a validated key and resource ID in another vault": {
+            "$ref": "./examples/Workspaces_Update_ChangeKeyVault.json"
           },
           "Update a Workspace with an empty CMK patch and retain its existing key URL": {
             "$ref": "./examples/Workspaces_Update_EmptyCustomerKeyPatch.json"
@@ -7370,11 +7376,24 @@
       "properties": {
         "keyEncryptionKeyUrl": {
           "$ref": "#/definitions/WorkspaceKeyEncryptionKeyUrl",
-          "description": "The versionless HTTPS Key Vault key URI in the supported cloud and Workspace\ntenant. The key vault must belong to the same Microsoft Entra tenant as\nthe Workspace. The service verifies the tenant as the first remote stage\nof the configuration operation, before persisting requested encryption\nstate or changing Azure Storage or customer data.\nSupports RSA keys in Azure Key Vault and RSA-HSM keys in Premium Key Vault,\nwith key sizes of 2048, 3072, or 4096 bits. Premium RSA-HSM keys use the same\nvault URL. The separate Azure Managed HSM service is not supported;\nManaged HSM endpoints are rejected before operation acceptance.\nA key version, query string, or fragment is not permitted.\nAzure Storage follows key versions automatically. Keep the previous version\navailable for at least 24 hours after rotation."
+          "description": "The versionless HTTPS Key Vault key URI in the supported cloud and Workspace\ntenant. The key vault must belong to the same Microsoft Entra tenant as\nthe Workspace. Its HTTPS origin must match the vault referenced by\nkeyVaultResourceId. The service validates the effective pair and caller\nvault-read permission synchronously through Azure Resource Manager before\ncreating public operation metadata, accepting the configuration operation,\npersisting requested encryption, or changing Storage or customer data.\nSupports RSA keys in Azure Key Vault and RSA-HSM keys in Premium Key Vault,\nwith key sizes of 2048, 3072, or 4096 bits. Premium RSA-HSM keys use the same\nvault URL. The separate Azure Managed HSM service is not supported;\nManaged HSM endpoints are rejected before operation acceptance.\nA key version, query string, or fragment is not permitted.\nAzure Storage follows key versions automatically. Keep the previous version\navailable for at least 24 hours after rotation."
+        },
+        "keyVaultResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The fully qualified Azure resource ID of the key vault that contains the key.\nUse /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName},\nnot a key child resource, Managed HSM, or URL. Full PUT with CMK and PATCH\nthat changes either CMK member require Microsoft.KeyVault/vaults/read on\nthe effective vault. The service compares its canonical ID, tenant, and\nvault URI with the requested pair before accepting the operation.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.KeyVault/vaults"
+              }
+            ]
+          }
         }
       },
       "required": [
-        "keyEncryptionKeyUrl"
+        "keyEncryptionKeyUrl",
+        "keyVaultResourceId"
       ]
     },
     "WorkspaceCustomerManagedKeyEncryptionUpdateMergePatchUpdateOrCreate": {
@@ -7383,8 +7402,21 @@
       "properties": {
         "keyEncryptionKeyUrl": {
           "$ref": "#/definitions/WorkspaceKeyEncryptionKeyUrl",
-          "description": "The replacement versionless key URI. Omission retains the URI; null deletes\nit. A remaining customer-key configuration without a valid URI is rejected.",
+          "description": "The replacement versionless key URI. Omission retains the URI; null deletes\nit. A same-vault replacement retains the stored vault ID. The effective\npair is authorized and validated before acceptance; an incomplete or\nmismatched pair is rejected. Key path and name casing is preserved.",
           "x-nullable": true
+        },
+        "keyVaultResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The vault resource ID to merge with the key URL. Omission retains the ID,\nbut does not bypass caller authorization when the URL changes. Null deletes\nthe ID; a remaining CMK object without both members is invalid. Changing\nvault requires a coherent new URL and ID pair.",
+          "x-nullable": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.KeyVault/vaults"
+              }
+            ]
+          }
         }
       }
     },
@@ -7394,7 +7426,7 @@
       "properties": {
         "applicationId": {
           "type": "string",
-          "description": "The Microsoft Entra application ID used for customer consent, returned for\nexisting Workspaces, including before customer-key enrollment. Before\ncreating a Workspace with a customer key, obtain the application name and\nID for the target cloud from the service onboarding documentation or Portal,\nthen consent and grant key access. GET returns the same application ID.\nThis is not a service principal object ID or an identity selector.\nThe Workspace's top-level identity does not select this application.",
+          "description": "The Microsoft Entra application ID used for customer consent, returned for\nexisting Workspaces, including before customer-key enrollment. Before\ncreating a Workspace with a customer key, obtain the application name and\nID for the target cloud from the service onboarding documentation or Portal,\nthen consent and grant key access. The configuring caller separately needs\nMicrosoft.KeyVault/vaults/read on the referenced vault.\nGET returns the same application ID.\nThis is not a service principal object ID or an identity selector.\nThe Workspace's top-level identity does not select this application.",
           "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
           "readOnly": true
         }
@@ -7516,11 +7548,11 @@
     },
     "WorkspaceEncryption": {
       "type": "object",
-      "description": "The requested customer key, onboarding information, and service observations.",
+      "description": "The validated requested key and vault reference, onboarding information, and service observations.",
       "properties": {
         "customerManagedKeyEncryption": {
           "$ref": "#/definitions/WorkspaceCustomerManagedKeyEncryption",
-          "description": "The requested customer-managed key. Absence means Microsoft-managed\nprotection. A present object must contain a valid keyEncryptionKeyUrl."
+          "description": "The requested customer-managed key. Absence means Microsoft-managed\nprotection. A present object requires a coherent keyEncryptionKeyUrl and\nkeyVaultResourceId pair. After synchronous caller and vault validation,\nthe accepted pair can be returned while configuration is Pending.\nIt does not prove that active data already uses the requested key."
         },
         "customerManagedKeyOnboarding": {
           "$ref": "#/definitions/WorkspaceCustomerManagedKeyOnboarding",
@@ -7602,7 +7634,7 @@
     },
     "WorkspaceEncryptionStatus": {
       "type": "object",
-      "description": "Service observations of the active encryption setting and customer-data access.",
+      "description": "Service observations of protection and access for customer data under the Workspace encryption scope.",
       "properties": {
         "state": {
           "$ref": "#/definitions/WorkspaceEncryptionState",
@@ -7638,11 +7670,11 @@
     },
     "WorkspaceEncryptionUpdateMergePatchUpdateOrCreate": {
       "type": "object",
-      "description": "A partial encryption setting. Omitted fields are unchanged and null deletes a\nwritable field. A remaining customerManagedKeyEncryption object must have a\nvalid key URL. Read-only onboarding and status inputs are ignored.",
+      "description": "A partial encryption setting. Omitted fields are unchanged and null deletes a\nwritable field. A remaining customerManagedKeyEncryption object must have a\ncoherent key URL and vault resource ID. Read-only onboarding and status\ninputs are ignored. Changing either member requires synchronous caller and\nvault validation of the merged pair, including any retained member.",
       "properties": {
         "customerManagedKeyEncryption": {
           "$ref": "#/definitions/WorkspaceCustomerManagedKeyEncryptionUpdateMergePatchUpdateOrCreate",
-          "description": "The customer key configuration to merge. Null deletes the object and\nrequests Microsoft-managed protection. An empty object retains an existing\nkey URL but is invalid when no key URL exists after merging.",
+          "description": "The customer key configuration to merge. Null deletes the object and\nrequests Microsoft-managed protection. An empty object retains an existing\ncomplete pair without a lookup when neither member changes, but is invalid\nwhen the merged pair is incomplete. Whole-object removal does not require\na vault metadata lookup.",
           "x-nullable": true
         }
       }

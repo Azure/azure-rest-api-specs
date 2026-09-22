@@ -48,14 +48,17 @@ function visitLocalSchemas(schema, visitor, seen = new Set()) {
   if (schema.items) visitLocalSchemas(schema.items, visitor, seen);
 }
 
-test("full encryption defaults to absent CMK, requires a URL only in present CMK, and is non-nullable", () => {
+test("full encryption defaults to absent CMK, requires the URL and vault ID pair, and is non-nullable", () => {
   assert.equal(
     definitions.WorkspaceProperties.properties.encryption.default,
     undefined,
   );
   assert.ok(!definitions.WorkspaceProperties.required.includes("encryption"));
   assert.equal(fullEncryption.required, undefined);
-  assert.deepEqual(fullCustomerKey.required, ["keyEncryptionKeyUrl"]);
+  assert.deepEqual(fullCustomerKey.required, [
+    "keyEncryptionKeyUrl",
+    "keyVaultResourceId",
+  ]);
   visitLocalSchemas(fullEncryption, (schema) => {
     assert.notEqual(schema["x-nullable"], true);
     assert.notEqual(schema["x-ms-nullable"], true);
@@ -63,6 +66,7 @@ test("full encryption defaults to absent CMK, requires a URL only in present CMK
   });
   assert.deepEqual(Object.keys(fullCustomerKey.properties), [
     "keyEncryptionKeyUrl",
+    "keyVaultResourceId",
   ]);
 });
 
@@ -80,6 +84,7 @@ test("PATCH deletion is request-only, optional, and default-free at every new le
     [definitions.WorkspaceUpdateProperties, "encryption"],
     [patchEncryption, "customerManagedKeyEncryption"],
     [patchKeyProperties, "keyEncryptionKeyUrl"],
+    [patchKeyProperties, "keyVaultResourceId"],
   ]) {
     assert.equal(
       model.properties[field]["x-nullable"],
@@ -90,6 +95,109 @@ test("PATCH deletion is request-only, optional, and default-free at every new le
   assert.deepEqual(Object.keys(patchEncryption.properties), [
     "customerManagedKeyEncryption",
   ]);
+});
+
+test("vault references carry the same constrained ARM-ID type in full and partial models", () => {
+  for (const field of [
+    fullCustomerKey.properties.keyVaultResourceId,
+    patchKeyProperties.properties.keyVaultResourceId,
+  ]) {
+    assert.equal(field.type, "string");
+    assert.equal(field.format, "arm-id");
+    assert.deepEqual(field["x-ms-arm-id-details"], {
+      allowedResources: [{ type: "Microsoft.KeyVault/vaults" }],
+    });
+    assert.notEqual(field.readOnly, true);
+    assert.equal(field.default, undefined);
+  }
+  assert.deepEqual(Object.keys(patchKeyProperties.properties), [
+    "keyEncryptionKeyUrl",
+    "keyVaultResourceId",
+  ]);
+});
+
+test("all full CMK examples contain a coherent vault reference and exact URL casing", () => {
+  let pairs = 0;
+  function check(value) {
+    if (!value || typeof value !== "object") return;
+    const key = value.customerManagedKeyEncryption;
+    if (key) {
+      assert.deepEqual(Object.keys(key).sort(), [
+        "keyEncryptionKeyUrl",
+        "keyVaultResourceId",
+      ]);
+      const match =
+        /^\/subscriptions\/[0-9a-f-]{36}\/resourceGroups\/[a-z0-9-]+\/providers\/Microsoft\.KeyVault\/vaults\/([a-z0-9-]+)$/i.exec(
+          key.keyVaultResourceId,
+        );
+      assert.ok(match, key.keyVaultResourceId);
+      assert.equal(
+        new URL(key.keyEncryptionKeyUrl).hostname,
+        `${match[1].toLowerCase()}.vault.azure.net`,
+      );
+      pairs++;
+    }
+    for (const child of Object.values(value)) check(child);
+  }
+  for (const file of readdirSync(path.join(root, "examples/2026-11-01"))) {
+    if (!file.startsWith("Workspaces_")) continue;
+    const data = readJson(`examples/2026-11-01/${file}`);
+    if (data.operationId === "Workspaces_CreateOrUpdate")
+      check(data.parameters.resource);
+    for (const response of Object.values(data.responses)) check(response.body);
+  }
+  assert.ok(pairs >= 10);
+  const sameVault = example("Workspaces_Update_ReplaceCustomerKey");
+  assert.deepEqual(
+    Object.keys(
+      sameVault.parameters.properties.properties.encryption
+        .customerManagedKeyEncryption,
+    ),
+    ["keyEncryptionKeyUrl"],
+  );
+  assert.ok(
+    sameVault.responses[
+      "200"
+    ].body.properties.encryption.customerManagedKeyEncryption.keyVaultResourceId.endsWith(
+      "/contoso-vault",
+    ),
+  );
+  const differentVault = example("Workspaces_Update_ChangeKeyVault");
+  const request =
+    differentVault.parameters.properties.properties.encryption
+      .customerManagedKeyEncryption;
+  assert.ok(request.keyVaultResourceId.endsWith("/contoso-vault-b"));
+  assert.ok(request.keyEncryptionKeyUrl.endsWith("/Workspace-Key-Next"));
+  assert.deepEqual(
+    differentVault.responses["200"].body.properties.encryption
+      .customerManagedKeyEncryption,
+    request,
+  );
+});
+
+test("accepted pending PUT and GET/LIST project validated pairs without inferring protection", () => {
+  const created = example("Workspaces_CreateOrUpdate_WithCustomerKey")
+    .responses["201"].body;
+  assert.equal(created.properties.provisioningState, "Creating");
+  assert.equal(created.properties.encryption.status.state, "Pending");
+  assert.equal(
+    created.properties.encryption.status.observedProtection,
+    undefined,
+  );
+  assert.ok(
+    created.properties.encryption.customerManagedKeyEncryption
+      .keyVaultResourceId,
+  );
+  const pending = example("Workspaces_Get_EncryptionPending").responses["200"]
+    .body;
+  const listed = example("Workspaces_List_EncryptionPending").responses["200"]
+    .body.value[0];
+  assert.deepEqual(listed, pending);
+  assert.equal(pending.properties.encryption.status.state, "Pending");
+  assert.equal(
+    pending.properties.encryption.status.observedProtection,
+    "MicrosoftManaged",
+  );
 });
 
 test("service observations and consent identity are read-only without a second provisioning state", () => {
@@ -280,7 +388,10 @@ test("empty PUT and nested deletion remove CMK while empty PATCH preserves an ex
     emptyPatch.responses["200"].body.properties.encryption
       .customerManagedKeyEncryption.keyEncryptionKeyUrl,
   );
-  assert.deepEqual(fullCustomerKey.required, ["keyEncryptionKeyUrl"]);
+  assert.deepEqual(fullCustomerKey.required, [
+    "keyEncryptionKeyUrl",
+    "keyVaultResourceId",
+  ]);
   assert.equal(patchKeyProperties.required, undefined);
 });
 

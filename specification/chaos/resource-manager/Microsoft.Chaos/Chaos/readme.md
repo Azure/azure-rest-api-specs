@@ -8,15 +8,25 @@ This is the AutoRest configuration file for chaos.
 
 Workspace PUT, PATCH, GET, and list responses support `properties.encryption`.
 Changes use `Microsoft.Chaos/workspaces/write`. Reads use
-`Microsoft.Chaos/workspaces/read`. There are no separate encryption actions or
-permissions.
+`Microsoft.Chaos/workspaces/read`. Full CMK PUT and CMK-changing PATCH also
+require caller `Microsoft.KeyVault/vaults/read` on the effective referenced
+vault. This existing permission is separate from the Storage application's
+key-use grant. There is no custom CMK action or operator role.
 
-Set `encryption.customerManagedKeyEncryption.keyEncryptionKeyUrl` to request a
-customer-managed key. The URL must be a versionless HTTPS Key Vault key URL in
+Set `encryption.customerManagedKeyEncryption.keyEncryptionKeyUrl` and its
+required sibling `keyVaultResourceId` to request a customer-managed key.
+The URL must be a versionless HTTPS Key Vault key URL in
 the supported cloud and Workspace tenant. Do not supply a key version, query
 string, or fragment. Absence of `customerManagedKeyEncryption` means
 Microsoft-managed protection. There is no writable protection-mode enum or
 alternate key-setting shape.
+
+The ID must be the full
+`/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}`
+reference. It names the customer vault, not a key child, Managed HSM, internal
+service resource, or arbitrary URL. Child/extension paths, queries, and
+fragments are invalid. The vault must be in the Workspace tenant, but need
+not be in the same subscription.
 
 ### Supported key stores
 
@@ -34,7 +44,8 @@ For a supported RSA-HSM key in a Premium vault, the request fragment is:
   "properties": {
     "encryption": {
       "customerManagedKeyEncryption": {
-        "keyEncryptionKeyUrl": "https://contoso-premium.vault.azure.net/keys/workspace-rsa-hsm"
+        "keyEncryptionKeyUrl": "https://contoso-premium.vault.azure.net/keys/workspace-rsa-hsm",
+        "keyVaultResourceId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/customer-keys/providers/Microsoft.KeyVault/vaults/contoso-premium"
       }
     }
   }
@@ -72,77 +83,161 @@ provides a direct GA precedent for these preferred names without selectable
 encryption identity. Redis Enterprise and Mongo Cluster are additional adapted
 precedents, not sources for Chaos removal, rotation, or identity semantics.
 These precedents do not replace ARM review of Chaos lifecycle behavior.
+The vault resource ID is a Chaos addition for caller-bound metadata validation,
+not a field inherited from the Health Data Services naming precedent.
 
 ### Replacement and partial updates
 
 | Request | Result |
 | --- | --- |
-| PUT with a CMK object | Apply the requested key. A present `customerManagedKeyEncryption` requires a valid non-null `keyEncryptionKeyUrl`. |
+| PUT with a CMK object | Require both non-null `keyEncryptionKeyUrl` and `keyVaultResourceId`. Authorize and validate the pair even if unchanged. |
 | PUT without encryption or its CMK object, or with `encryption: {}` | Request Microsoft-managed protection. This removes existing customer-key protection. |
 | PUT with null encryption, null CMK, or an incomplete CMK object | Return `400 InvalidEncryptionConfiguration` before any change. Empty encryption is valid; empty CMK is not. |
 | PATCH with encryption omitted or an empty object | Keep the existing encryption setting. No PUT default is applied to the patch. |
 | PATCH with CMK omitted | Keep the existing customer key. |
 | PATCH with `"customerManagedKeyEncryption": null` or `"encryption": null` | Remove the writable key configuration through the normal removal operation. Keep onboarding and observations. |
-| PATCH with `customerManagedKeyEncryption.keyEncryptionKeyUrl` | Merge the URL, validate, and enable or replace the customer key. |
-| PATCH with an empty CMK object | Retain an existing URL. Reject the request if no valid URL exists after merging. |
-| PATCH with only a null key URL | Reject the resulting CMK object without a URL. This is not removal of CMK. |
+| PATCH with only `keyEncryptionKeyUrl` | Retain the stored ID for same-vault rotation; authorize and validate the effective pair. Do not infer a vault ID from the URL. |
+| PATCH with only `keyVaultResourceId` | Retain the URL; authorize and validate both effective values. Reject an incoherent pair. |
+| PATCH changes vault | Supply a coherent new URL/ID pair. |
+| PATCH with an empty CMK object | Retain an existing complete pair without lookup or encryption LRO when no member changes. Reject an incomplete merged result. |
+| PATCH deletes only the URL or ID | Reject the incomplete CMK object at that exact property. This is not removal of CMK. |
 
 The service merges PATCH with stored writable fields, then validates the syntax
-and completeness of the result before accepting the operation. Remote tenant
-verification is the first stage of the existing configuration LRO, as described
-below. In particular,
-deleting the key URL while its CMK object remains is invalid. An empty patch is
+and completeness of the result before accepting the operation. Required remote
+validation also completes synchronously before acceptance, as described below.
+Deleting either member while its CMK object remains is invalid. An empty patch is
 not a request to reset encryption. Read-only `customerManagedKeyOnboarding` and
 `status` inputs are ignored.
 
-### Tenant verification
+### Caller-bound ARM validation before acceptance
 
-The key vault must belong to the same Microsoft Entra tenant as the Workspace.
-Syntax, trusted cloud vault host, and key path are checked before acceptance.
-For an operation that supplies a customer key, tenant discovery is the first
-remote stage of the existing Workspace LRO. The operation can retain its input,
-but requested encryption state is not persisted until the tenant matches.
-No Azure Storage configuration or customer-data change occurs before that match.
+Use a bounded synchronous
+[Vaults_Get](https://learn.microsoft.com/rest/api/keyvault/keyvault/vaults/get?view=rest-keyvault-keyvault-2024-11-01)
+through the configured cloud's Azure Resource Manager endpoint. Complete it
+before creating public operation metadata, persisting desired encryption,
+accepting the encryption LRO, or changing Storage/customer data. Use the RP
+first-party application credential with ARM signed-on-behalf-of authorization,
+not the Storage crypto identity. Keep bearer and signed-OBO tokens only in
+request memory, never in durable operation, Workspace, queue, history,
+checkpoint, or log state. No elevated service-only fallback is permitted.
 
-The service sends a credential-free HTTPS request to the validated Key Vault
-endpoint and reads the cloud authority and tenant from its documented
-`401 WWW-Authenticate` challenge. It compares this tenant with the persisted
-Workspace tenant. It does not obtain a token, make an authenticated retry,
-follow an arbitrary redirect, or fetch a URL from the challenge.
-This verifies tenant routing, not consent, key existence, grants, or key access.
+Compare returned canonical vault ID with the submitted ARM ID case-insensitively,
+returned `properties.tenantId` with the immutable Workspace tenant, and the
+parsed HTTPS origin of `properties.vaultUri` with the key URL's origin. For
+creation, the Workspace tenant comes from trusted ARM context, not request
+body input. Preserve key path/name case; suffix matching is not origin equality.
+Unknown, denied, missing, or unusable metadata never establishes a match.
+Validation is bound to the effective pair and Workspace state; a concurrent
+change cannot reuse a result for a different pair.
 
-| Discovery result | Existing LRO result |
+The finite timeout/retry budget is within the gateway request budget. Once
+exhausted, fail synchronously rather than continuing lookup in a background LRO.
+Metadata validation does not prove key existence, consent, or Storage key use.
+Private vaults need no service access to the customer's data-plane/private
+endpoint for this lookup. Storage still needs its key-use grant and trusted
+service network bypass; Network Security Perimeter requires an explicit rule
+admitting Storage.
+
+| Request | Vault metadata validation |
 | --- | --- |
-| Deterministic tenant mismatch or permanently invalid/non-verifiable endpoint | `Failed` with `InvalidEncryptionConfiguration`, targeting `properties.encryption.customerManagedKeyEncryption.keyEncryptionKeyUrl`. Correct the key URL or use a vault in the Workspace tenant. |
-| Transient timeout, throttling, or dependency 5xx | `Failed` with `EncryptionConfigurationFailed` and retry guidance. Honor `Retry-After` when provided. |
+| Full PUT with CMK, even unchanged | Required before acceptance. |
+| PATCH adds or changes either member | Authorize and validate the merged effective pair, including retained values. |
+| Unrelated or empty PATCH with no CMK change | No lookup or encryption LRO; still reject incomplete merged configuration. |
+| Full PUT without CMK, whole-CMK/encryption removal | No lookup. Revoked or deleted vaults do not block removal through this metadata prerequisite; Storage's separate removal requirements still apply. |
+| GET, status reads, DELETE, old-version supported partial PATCH | No new vault lookup or permission requirement. |
 
-Do not expose expected or observed tenant IDs in errors. An unknown tenant is
-not a match. Discovery failure leaves desired encryption, the active binding,
-and observed protection unchanged. It is reported through the existing
-operation-result error, not as a retrospective HTTP 400 from a status GET.
-Removal without a desired customer key does not require tenant discovery.
+### Provider registration and effective linked access
 
-For example, a tenant mismatch is reported by operation-status GET with HTTP
-200 and this body:
+[ProviderHub resource-type registration](https://learn.microsoft.com/azure/templates/microsoft.providerhub/2025-10-01/providerregistrations/resourcetyperegistrations)
+defines `linkedAccessChecks` entries with `actionName`, `linkedProperty`,
+`linkedAction`, `linkedActionVerb`, and `linkedType`, and separately defines
+`onBehalfOfTokens`. These are RP registration settings, not Workspace fields or
+TypeSpec decorators. The typed ARM-ID schema does not deploy access checks.
+
+The Workspace registration must associate CMK configuration writes with the
+vault-reference property, linked type `Microsoft.KeyVault/vaults`, and caller
+permission `Microsoft.KeyVault/vaults/read`. Configure signed-OBO issuance for
+the applicable Workspace writes and a caller-conditioned RP metadata-read
+service role using the existing `@Resource[HasOboToken]` pattern. This specs
+project does not own the deployment manifest; configure and verify those
+settings in the service registration before activation.
+
+Verify the registration's property-path and action/verb representation rather
+than treating a documentation fragment as a deployable manifest. In particular,
+a linked check on a submitted property alone cannot be assumed to cover an ID
+omitted from PATCH and retained from stored state. The signed-OBO ARM GET must
+authorize that effective vault. Test user, service-principal, and managed-identity
+callers, URL-only/ID-only patches, absent/null properties, and all no-lookup
+operations above. Missing or expired caller proof must never trigger a
+service-only retry. Neither existing registration fields nor existing OBO
+helper code prove that CMK authorization is deployed or correct.
+
+For example, a verified tenant mismatch returns HTTP 400 before acceptance:
 
 ```json
 {
-  "status": "Failed",
   "error": {
     "code": "InvalidEncryptionConfiguration",
     "message": "The key vault belongs to a different Microsoft Entra tenant than this Workspace. Use a key vault in the Workspace tenant.",
-    "target": "properties.encryption.customerManagedKeyEncryption.keyEncryptionKeyUrl"
+    "target": "properties.encryption.customerManagedKeyEncryption.keyVaultResourceId"
   }
 }
 ```
 
-A transient discovery failure uses the same envelope with
-`EncryptionConfigurationFailed` and the message: "Key vault tenant verification
-is temporarily unavailable. Retry the Workspace request after the indicated
-retry interval. No encryption or customer-data changes were made."
+A transient metadata failure returns HTTP 503 in the same envelope with
+`EncryptionConfigurationFailed` and the message: "Key vault metadata validation
+is temporarily unavailable. Retry the Workspace request. No configuration
+operation was accepted." Include retry guidance and `Retry-After` when known.
+Caller authorization failure returns the standard HTTP 403 authorization error,
+with guidance to obtain `Microsoft.KeyVault/vaults/read` or refresh required
+caller authorization. ARM throttling returns HTTP 429 with `Retry-After`.
+Do not expose expected, observed, or embedded tenant IDs in any error.
+Failure leaves requested state, active binding, and observations unchanged and
+creates no pending requested state or public operation metadata.
+
+Illustrative HTTP 403 for a denied vault read (an ARM linked check can instead
+report `LinkedAuthorizationFailed`):
+
+```json
+{
+  "error": {
+    "code": "AuthorizationFailed",
+    "message": "The caller must have Microsoft.KeyVault/vaults/read on the referenced key vault. Obtain access or refresh the required caller authorization, then retry.",
+    "target": "properties.encryption.customerManagedKeyEncryption.keyVaultResourceId"
+  }
+}
+```
+
+Illustrative HTTP 429 with a service-provided `Retry-After` header:
+
+```json
+{
+  "error": {
+    "code": "TooManyRequests",
+    "message": "Key vault metadata validation was throttled. Retry after the interval specified in Retry-After. No configuration operation was accepted."
+  }
+}
+```
+
+Illustrative HTTP 503 for a transient or unusable metadata response:
+
+```json
+{
+  "error": {
+    "code": "EncryptionConfigurationFailed",
+    "message": "Key vault metadata validation is temporarily unavailable. Retry the Workspace request. No configuration operation was accepted."
+  }
+}
+```
+
+These examples describe synchronous validation errors in the existing default
+error envelope, not new error-response schemas. Missing or malformed IDs and
+confirmed not-found/ID/tenant mismatches use the ID target in the HTTP 400
+example above. Invalid URLs and mismatches with the vault's HTTPS origin use
+the key URL target instead.
 
 The PATCH model uses `TypeSpec.Http.MergePatchUpdate<T>` on separate optional,
-default-free fields. Three property-scoped `no-nullable` suppressions permit
+default-free fields. Four property-scoped `no-nullable` suppressions permit
 request-only JSON Merge Patch deletion. The rule also reports nulls produced by
 the public transform. The accepted PATCH-clear pattern in #45663 is prior art;
 it does not constitute approval of this change. PUT and response fields are not
@@ -164,8 +259,12 @@ is suppressed.
 
 ### Requested setting and observed result
 
-`customerManagedKeyEncryption.keyEncryptionKeyUrl` is the last accepted
-customer key, not proof that it protects active data. The read-only
+`customerManagedKeyEncryption.keyEncryptionKeyUrl` and `keyVaultResourceId`
+are the accepted caller- and tenant-validated pair, not proof that the key
+protects active data. After synchronous validation, initial async PUT and
+GET/LIST can project that pair with `Pending` while observations continue to
+describe actual protection. Validation failure creates no pending requested
+state. The read-only
 `customerManagedKeyOnboarding.applicationId` identifies the service application
 for customer consent. It is returned for existing Workspaces before enrollment, including on a
 Microsoft-managed Workspace. It is not a service principal object ID or a
@@ -180,12 +279,16 @@ For an existing Microsoft-managed Workspace, GET returns
 `customerManagedKeyOnboarding.applicationId` before enrollment, as shown in
 `Workspaces_Get_EncryptionNotConfigured.json`. Install or consent to that
 application and grant its local service principal access to the customer key,
-then use the PATCH in `Workspaces_Update_EnableCustomerKey.json`.
+then use the paired PATCH in `Workspaces_Update_EnableCustomerKey.json`.
+The configuring caller separately needs `Microsoft.KeyVault/vaults/read` on
+the effective vault.
 
 To create a Workspace with customer-managed protection directly, first obtain
 the application name and client ID for the target cloud from the service
 onboarding documentation or Portal configuration. Consent and grant key access
-before sending the full PUT in `Workspaces_CreateOrUpdate_WithCustomerKey.json`.
+before sending the full URL/ID PUT in `Workspaces_CreateOrUpdate_WithCustomerKey.json`.
+The caller must also have vault-read permission. Portal obtains the vault ID
+from ARM metadata or manual input, not a data-plane reachability probe.
 No temporary Microsoft-managed Workspace or failed create is needed.
 GET after creation must return that same application ID. The existing GET and
 born-CMK examples use the same illustrative ID; it is not a deployment constant.
@@ -218,7 +321,8 @@ There is no second encryption provisioning-state field. PUT uses the existing
 an empty `202` with `Location`; its final result is the Workspace. Poll with the
 existing operation endpoints.
 
-An identical request with `Applied` status succeeds without a new operation.
+After required caller/vault validation, an identical request with `Applied`
+status succeeds without a new operation.
 While a configuration operation runs, HTTP 409 with the existing Workspace
 conflict code is required, including for an identical request. Returning the
 same operation is not an alternative. After terminal failure, a valid
@@ -235,6 +339,30 @@ Azure Storage follows versions of the requested key. Keep the old version
 available for at least 24 hours after rotation. Do not assume immediate adoption
 of a new version. Customer-key protection applies to active data; it does not
 retroactively protect retained pre-enable copies.
+
+### Protection, recovery, and support limits
+
+Your key protects customer data stored under the Workspace's encryption scope.
+Separate execution stores, system metadata, logs, metrics, traces, and other
+service stores keep their existing Microsoft-managed protection and retention.
+Revoking your key does not cryptographically erase those copies and does not
+guarantee that an execution already in progress will stop.
+
+The first release supports local payload and index recovery from verified
+application checkpoints. It does not provide Azure Table point-in-time restore
+or an account-loss or regional recovery point/time objective. Loss of the
+checkpoint container, account, or region can also remove local checkpoints.
+Recovery requires retained checkpoint data, current customer key access, and
+valid Workspace metadata. Do not interpret this guidance as proof of deployed
+recovery capability or a regional guarantee.
+
+Key expiry and not-before dates are not the same as disable or revocation:
+some unwrap/decrypt operations can remain permitted outside key date bounds.
+Repair consent, local service-principal, grant, network, or key-access problems
+through normal onboarding and key management. There is no emergency decryption
+path, automatic Microsoft-managed fallback, or new support privilege. Existing
+retention and legal/immutability holds apply; blocked cleanup does not imply
+physical purge. No global purge deadline is promised.
 
 ### Customer-data reads during restore
 
@@ -276,17 +404,19 @@ supported API versions.
 ### Errors and older clients
 
 Errors use the existing Azure Resource Manager `ErrorResponse` envelope.
-Accepted-operation failures appear in the operation result. Configuration or
-health failures after tenant verification can also appear in
-`encryption.status.error`; discovery failure leaves observed protection
-unchanged. These codes do not add routes or permissions.
+Synchronous caller/vault validation failures create no accepted operation.
+After acceptance, configuration failures appear in the operation result and
+`encryption.status.error`. These error envelopes add no routes or custom
+permissions.
 
 | HTTP status or result | Code | Corrective action |
 | --- | --- | --- |
-| 400 | `InvalidEncryptionConfiguration` | Supply a valid versionless key URL in a present CMK object, or correct the merged PATCH setting. No mutation occurs. |
+| 400 | `InvalidEncryptionConfiguration` | Correct a missing/malformed/wrong-type vault ID, confirmed missing vault, canonical-ID mismatch, or tenant mismatch. Target `properties.encryption.customerManagedKeyEncryption.keyVaultResourceId`. |
+| 400 | `InvalidEncryptionConfiguration` | Correct a missing/malformed key URL, unsupported host/path, or origin mismatch with the vault URI. Target `properties.encryption.customerManagedKeyEncryption.keyEncryptionKeyUrl`. |
 | 400 | `EncryptionNotSupportedForWorkspace` | Use a Workspace that supports customer-managed encryption. |
-| Failed tenant-discovery operation | `InvalidEncryptionConfiguration` | Correct the invalid/non-verifiable endpoint or use a vault in the Workspace tenant. No tenant IDs are disclosed. |
-| Failed tenant-discovery operation | `EncryptionConfigurationFailed` | Retry after a transient dependency failure; honor `Retry-After` when provided. No encryption or customer-data change occurred. |
+| 403 before acceptance | Standard authorization error | Obtain `Microsoft.KeyVault/vaults/read` on the effective vault or refresh missing/expired caller authorization. Preserve/translate the ARM linked/read error; do not substitute an invalid-key error or elevated retry. |
+| 429 before acceptance | Standard throttling error | Honor `Retry-After` from the ARM metadata lookup. No encryption operation was accepted. |
+| 503 before acceptance | `EncryptionConfigurationFailed` | Retry after transient timeout/5xx or missing/unusable metadata. Unknown metadata is not a match or confirmed customer mismatch; no operation was accepted. |
 | 409 | Existing Workspace conflict code | Wait for the current operation to finish before another configuration request. |
 | 409 | `CmkEnrollmentDisabled` | New enrollment is unavailable. Retry when enrollment is available; existing key management remains supported. |
 | 503 | `CmkCapacityUnavailable` | Service capacity is unavailable. Retry later. |
@@ -312,7 +442,7 @@ It returns HTTP 400 without changing the Workspace:
 {
   "error": {
     "code": "InvalidEncryptionConfiguration",
-    "message": "The merged customerManagedKeyEncryption object has no valid key URL. Supply a versionless HTTPS Key Vault key URL, or delete the CMK object to select Microsoft-managed protection.",
+    "message": "The merged customerManagedKeyEncryption object has no valid key URL. Supply a versionless HTTPS Key Vault key URL and its matching vault resource ID, or delete the CMK object to select Microsoft-managed protection.",
     "target": "properties.encryption.customerManagedKeyEncryption.keyEncryptionKeyUrl"
   }
 }
@@ -360,7 +490,7 @@ Before customer activation, service and SDK tests must establish these results:
 
 | Case | Required result |
 | --- | --- |
-| GET-to-PUT round trip | Preserve the complete requested key setting; ignore read-only inputs. |
+| GET-to-PUT round trip | Supply both requested key URL and vault ID; perform required caller/vault validation and ignore read-only inputs. |
 | SDK PATCH omission versus null | Serialization preserves the difference between no change and deletion. |
 | What-If with a GA template that omits the CMK object | Show the change to Microsoft-managed protection. |
 | What-If with an unchanged complete customer-key setting | No false encryption change from service-owned observations. |
@@ -368,7 +498,10 @@ Before customer activation, service and SDK tests must establish these results:
 | Concurrent enrollment and old-version PUT | No stale-state bypass of the compatibility check. |
 | Corrected GA template after enrollment | Succeed with the complete desired encryption setting. |
 | Invalid merged PATCH or invalid PUT | Return 400 before persistence or storage work. |
-| Tenant discovery mismatch or transient failure | Fail the accepted LRO with the corresponding documented code before persisting desired encryption or changing Storage/customer data. |
+| Caller/vault denial, mismatch, throttle, transient failure, or unknown metadata | Return the documented synchronous error before public operation metadata, desired persistence, LRO acceptance, or Storage/customer-data work. |
+| URL-only or ID-only PATCH | Retain the omitted member, then authorize and validate the effective pair before acceptance. |
+| No-lookup operations | Unrelated/empty PATCH, whole-CMK removal, supported old PATCH, GET/status, and DELETE require no CMK metadata read. |
+| Pending projection | Only after validation, PUT/GET/LIST can show the accepted pair with Pending; observed protection remains actual. |
 | Born-CMK onboarding | Published per-cloud application ID, Portal configuration, and GET agree; consent and key grant precede PUT. |
 | Identical request during configuration | Return HTTP 409; do not return the same operation as an alternative. |
 | DELETE with admitted writers | Close admission, drain writers, and complete the existing deletion LRO only when deletion conditions hold. |
@@ -377,6 +510,16 @@ Before customer activation, service and SDK tests must establish these results:
 The generated SDK, service implementation, and deployment tests must consume the
 same pinned CMK spec commit. Schema checks do not replace compatibility
 acceptance or deployed-service tests.
+
+### Stack integration and normal ARM review
+
+PR #46392 targets `juliagao-microsoft-chaos-2026-11-ga-promotion` and must merge
+there before #45455 contains CMK. Normal ARM review of that combined GA diff
+covers the vault reference, caller permission, lifecycle, and old-version 409.
+Baseline-only review is not CMK approval. If #45455 merges first, rebase and
+retarget #46392 to `main` and run normal main-target checks and review. No
+separate dedicated CMK review, named compatibility approver, or additional
+approval artifact is required; normal release and runtime acceptance remain.
 
 ## Getting Started
 

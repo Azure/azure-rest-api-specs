@@ -1,5 +1,5 @@
 {
-  "title": "Update a Workspace to enable customer-managed encryption",
+  "title": "Update a Workspace with a validated key and resource ID in another vault",
   "operationId": "Workspaces_Update",
   "parameters": {
     "api-version": "2026-11-01",
@@ -10,8 +10,8 @@
       "properties": {
         "encryption": {
           "customerManagedKeyEncryption": {
-            "keyEncryptionKeyUrl": "https://contoso-vault.vault.azure.net/keys/workspace-key",
-            "keyVaultResourceId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/customer-keys/providers/Microsoft.KeyVault/vaults/contoso-vault"
+            "keyEncryptionKeyUrl": "https://contoso-vault-b.vault.azure.net/keys/Workspace-Key-Next",
+            "keyVaultResourceId": "/subscriptions/22222222-2222-2222-2222-222222222222/resourceGroups/customer-keys/providers/Microsoft.KeyVault/vaults/contoso-vault-b"
           }
         }
       }
@@ -31,13 +31,13 @@
           "provisioningState": "Succeeded",
           "encryption": {
             "customerManagedKeyEncryption": {
-              "keyEncryptionKeyUrl": "https://contoso-vault.vault.azure.net/keys/workspace-key",
-              "keyVaultResourceId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/customer-keys/providers/Microsoft.KeyVault/vaults/contoso-vault"
+              "keyEncryptionKeyUrl": "https://contoso-vault-b.vault.azure.net/keys/Workspace-Key-Next",
+              "keyVaultResourceId": "/subscriptions/22222222-2222-2222-2222-222222222222/resourceGroups/customer-keys/providers/Microsoft.KeyVault/vaults/contoso-vault-b"
             },
             "status": {
               "state": "Applied",
               "observedProtection": "CustomerManaged",
-              "observedKeyEncryptionKeyUrl": "https://contoso-vault.vault.azure.net/keys/workspace-key/0123456789abcdef0123456789abcdef",
+              "observedKeyEncryptionKeyUrl": "https://contoso-vault-b.vault.azure.net/keys/Workspace-Key-Next/0123456789abcdef0123456789abcdef",
               "lastCheckedAt": "2026-11-01T12:00:00Z"
             },
             "customerManagedKeyOnboarding": {
@@ -49,8 +49,7 @@
     },
     "202": {
       "headers": {
-        "Location": "https://management.azure.com/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/providers/Microsoft.Chaos/locations/westus2/operationResults/4bdadd97-207c-4de8-9bba-08339ae099c7?api-version=2026-11-01",
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/providers/Microsoft.Chaos/locations/westus2/operationStatuses/4bdadd97-207c-4de8-9bba-08339ae099c7?api-version=2026-11-01"
+        "Location": "https://management.azure.com/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/providers/Microsoft.Chaos/locations/westus2/operationResults/4bdadd97-207c-4de8-9bba-08339ae099c7?api-version=2026-11-01"
       }
     }
   }
