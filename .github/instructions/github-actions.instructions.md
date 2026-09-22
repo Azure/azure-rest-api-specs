@@ -78,7 +78,7 @@ The `.github` directory contains all the code and configuration for GitHub Actio
 
 ### TypeScript Integration
 
-- Shared compiler options live in `.github/tsconfig.base.json`, following the TypeSpec repo's ES2024/NodeNext baseline without an external preset. The two project configs extend it and define their own file selection.
+- Shared ES2024/NodeNext compiler options live in root `tsconfig.base.json`. `.github/tsconfig.base.json` extends it with GitHub-specific library and JavaScript checking options; the two project configs define their own file selection.
 - TypeScript is configured with `noEmit`, `allowImportingTsExtensions`, `erasableSyntaxOnly`, and `verbatimModuleSyntax`
 - Use `.ts` relative imports and `import type` for type-only dependencies
 - Do not introduce enums, parameter properties, or namespaces; use frozen objects and value-union type aliases instead of enums
