@@ -11,7 +11,7 @@ on:
         required: true
         type: string
       sdk_language:
-        description: "SDK language: Cpp, DotNet, Go, Java, JavaScript, Python, or Rust"
+        description: "SDK language: .NET, Go, Java, JavaScript, Python"
         required: true
         type: string
 
@@ -30,6 +30,13 @@ jobs:
       sdk-language: ${{ steps.resolve.outputs.sdk-language }}
       should-run: ${{ steps.resolve.outputs.should-run }}
     steps:
+      - name: Checkout workflow repository
+        uses: actions/checkout@v7
+        with:
+          sparse-checkout: |
+            .github
+          persist-credentials: false
+
       - name: Resolve trigger inputs
         id: resolve
         uses: actions/github-script@v9
@@ -38,61 +45,9 @@ jobs:
           SDK_LANGUAGE_INPUT: ${{ inputs.sdk_language }}
         with:
           script: |
-            if (context.eventName === "workflow_dispatch") {
-              core.setOutput("pr-number", process.env.PR_NUMBER_INPUT);
-              core.setOutput("head-sha", "");
-              core.setOutput("sdk-language", process.env.SDK_LANGUAGE_INPUT);
-              core.setOutput("should-run", "true");
-              return;
-            }
-
-            if (context.payload.workflow_run.conclusion !== "success") {
-              core.notice("The SDK Breaking Change Labels workflow did not succeed.");
-              core.setOutput("should-run", "false");
-              return;
-            }
-
-            const artifacts = await github.paginate(
-              github.rest.actions.listWorkflowRunArtifacts,
-              {
-                ...context.repo,
-                run_id: context.payload.workflow_run.id,
-                per_page: 100,
-              },
-            );
-            const artifactNames = artifacts.map(({ name }) => name);
-            const artifactValue = (key) => {
-              const prefix = `${key}=`;
-              return artifactNames.find((name) => name.startsWith(prefix))?.slice(prefix.length);
-            };
-            const languagesByLabel = new Map([
-              ["BreakingChange-.Net-Sdk", ".Net"],
-              ["BreakingChange-Go-Sdk", "Go"],
-              ["BreakingChange-Java-Sdk", "Java"],
-              ["BreakingChange-JavaScript-Sdk", "JavaScript"],
-              ["BreakingChange-Python-Sdk", "Python"],
-            ]);
-            const labelArtifacts = artifactNames
-              .map((name) => /^label-(.+)=(true|false)$/.exec(name))
-              .filter((match) => match && languagesByLabel.has(match[1]));
-            if (labelArtifacts.length === 0) {
-              core.notice("No supported SDK breaking-change label artifact was published.");
-              core.setOutput("should-run", "false");
-              return;
-            }
-            if (labelArtifacts.length > 1) {
-              throw new Error(
-                `Expected one SDK breaking-change label artifact, found: ${labelArtifacts.map((match) => match[0]).join(", ")}`,
-              );
-            }
-
-            const [, labelName, labelValue] = labelArtifacts[0];
-            const sdkLanguage = languagesByLabel.get(labelName);
-
-            core.setOutput("pr-number", artifactValue("issue-number"));
-            core.setOutput("head-sha", artifactValue("head-sha"));
-            core.setOutput("sdk-language", sdkLanguage);
-            core.setOutput("should-run", labelValue);
+            const { resolveAnalysisTrigger } =
+              await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change/resolve-analysis-inputs.ts');
+            await resolveAnalysisTrigger({ github, context, core });
 
   analyze:
     needs: resolve-trigger

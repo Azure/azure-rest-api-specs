@@ -2,6 +2,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import {
+  resolveAnalysisTrigger,
   resolveChangedTypeSpecConfigPaths,
   resolveChangedTypeSpecProjects,
   resolveSdkLanguageConfig,
@@ -34,6 +35,90 @@ afterEach(async () => {
   const { rm } = await import("node:fs/promises");
   await Promise.all(temporaryDirectories.splice(0).map((path) => rm(path, { recursive: true })));
   vi.unstubAllEnvs();
+});
+
+describe("resolveAnalysisTrigger", () => {
+  it("resolves workflow-run inputs from artifacts", async () => {
+    const github = createMockGithub();
+    const context = createMockContext();
+    const core = createMockCore();
+    Object.assign(context, {
+      eventName: "workflow_run",
+      payload: { workflow_run: { id: 123, conclusion: "success" } },
+    });
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: {
+        artifacts: [
+          { name: "issue-number=42" },
+          { name: `head-sha=${"a".repeat(40)}` },
+          { name: "label-BreakingChange-.Net-Sdk=true" },
+        ],
+      },
+    });
+
+    await resolveAnalysisTrigger({ github, context, core });
+
+    expect(core.setOutput).toHaveBeenCalledWith("pr-number", "42");
+    expect(core.setOutput).toHaveBeenCalledWith("head-sha", "a".repeat(40));
+    expect(core.setOutput).toHaveBeenCalledWith("sdk-language", ".NET");
+    expect(core.setOutput).toHaveBeenCalledWith("should-run", "true");
+  });
+
+  it("skips when no supported label artifact exists", async () => {
+    const github = createMockGithub();
+    const context = createMockContext();
+    const core = createMockCore();
+    Object.assign(context, {
+      eventName: "workflow_run",
+      payload: { workflow_run: { id: 123, conclusion: "success" } },
+    });
+
+    await resolveAnalysisTrigger({ github, context, core });
+
+    expect(core.notice).toHaveBeenCalledWith(
+      "No supported SDK breaking-change label artifact was published.",
+    );
+    expect(core.setOutput).toHaveBeenCalledWith("should-run", "false");
+  });
+
+  it("rejects multiple supported label artifacts", async () => {
+    const github = createMockGithub();
+    const context = createMockContext();
+    const core = createMockCore();
+    Object.assign(context, {
+      eventName: "workflow_run",
+      payload: { workflow_run: { id: 123, conclusion: "success" } },
+    });
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: {
+        artifacts: [
+          { name: "label-BreakingChange-Go-Sdk=true" },
+          { name: "label-BreakingChange-Java-Sdk=true" },
+        ],
+      },
+    });
+
+    await expect(resolveAnalysisTrigger({ github, context, core })).rejects.toThrow(
+      "Expected one SDK breaking-change label artifact",
+    );
+  });
+
+  it("rejects an incomplete label artifact handoff", async () => {
+    const github = createMockGithub();
+    const context = createMockContext();
+    const core = createMockCore();
+    Object.assign(context, {
+      eventName: "workflow_run",
+      payload: { workflow_run: { id: 123, conclusion: "success" } },
+    });
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: {
+        artifacts: [{ name: "issue-number=42" }, { name: "label-BreakingChange-Go-Sdk=true" }],
+      },
+    });
+
+    await expect(resolveAnalysisTrigger({ github, context, core })).rejects.toThrow();
+  });
 });
 
 describe("resolveSdkLanguageConfig", () => {
