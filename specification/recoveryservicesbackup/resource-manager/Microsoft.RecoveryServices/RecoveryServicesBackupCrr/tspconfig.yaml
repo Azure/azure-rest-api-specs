@@ -48,6 +48,5 @@ linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
   disable:
-    "@azure-tools/typespec-azure-core/composition-over-inheritance": "Faithful migration. The original swagger models a discriminated type hierarchy via allOf/extends (RestoreRequest, ProtectedItem, Job, OperationStatusExtendedInfo, etc.). Preserving the inheritance shape is required to emit an identical bms.json."
     "@azure-tools/typespec-azure-core/no-openapi-client-extensions": "Faithful migration. The original CRR list operations emit x-ms-pageable with nextLinkName:null. This is reproduced via @@extension to keep the generated bms.json identical to stable/2023-01-15."
     "@azure-tools/typespec-azure-core/no-string-discriminator": "Faithful migration. The original contract uses plain-string discriminators (objectType, jobType, protectedItemType). Converting to an extensible union would alter the emitted schema."

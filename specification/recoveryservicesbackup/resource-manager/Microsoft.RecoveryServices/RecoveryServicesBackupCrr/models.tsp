@@ -1136,7 +1136,6 @@ model BackupManagementUsage {
   /**
    * Next reset time of usage.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   nextResetTime?: utcDateTime;
 
   /**
@@ -1495,13 +1494,11 @@ model Job {
   /**
    * The start time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * The end time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
   /**
@@ -1559,13 +1556,11 @@ model OperationStatus {
   /**
    * Operation start time. Format: ISO-8601.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * Operation end time. Format: ISO-8601.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
   /**
@@ -1725,7 +1720,6 @@ model ProtectedItem {
   /**
    * Timestamp when the last (latest) backup copy was created for this backup item.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastRecoveryPoint?: utcDateTime;
 
   /**
@@ -1741,7 +1735,6 @@ model ProtectedItem {
   /**
    * Time for deferred deletion in UTC
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Faithful migration: this property name is part of the published stable/2023-01-15 wire contract and must be preserved (property casing is API surface)."
   deferredDeleteTimeInUTC?: utcDateTime;
 
@@ -1813,7 +1806,6 @@ model AzureFileshareProtectedItem extends ProtectedItem {
   /**
    * Timestamp of the last backup operation on this backup item.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastBackupTime?: utcDateTime;
 
   /**
@@ -1885,7 +1877,6 @@ model AzureFileshareProtectedItemExtendedInfo {
   /**
    * The oldest backup copy available for this item in the service.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   oldestRecoveryPoint?: utcDateTime;
 
   /**
@@ -1908,7 +1899,6 @@ model AzureFileshareProtectedItemExtendedInfo {
    * The resource state sync time for this backup item.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   resourceStateSyncTime?: utcDateTime;
 }
 
@@ -1926,7 +1916,6 @@ model AzureFileShareRecoveryPoint extends RecoveryPoint {
    * Time at which this backup copy was created.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   recoveryPointTime?: utcDateTime;
 
   /**
@@ -2052,23 +2041,19 @@ model TargetAfsRestoreInfo {
 /**
  * IaaS VM workload-specific backup item representing the Classic Compute VM.
  */
-@extension(
-  "x-ms-discriminator-value",
-  "Microsoft.ClassicCompute/virtualMachines"
-)
-model AzureIaasClassicComputeVmProtectedItem extends AzureIaasVmProtectedItem {
+model AzureIaasClassicComputeVmProtectedItem extends ProtectedItem {
   /**
    * backup item type.
    */
-  @invisible(Lifecycle)
   protectedItemType: "Microsoft.ClassicCompute/virtualMachines";
+
+  ...AzureIaasVmProtectedItemProperties;
 }
 
 /**
- * IaaS VM workload-specific backup item.
+ * Shared properties for IaaS VM workload-specific backup items.
  */
-@extension("x-ms-discriminator-value", "AzureIaaSVMProtectedItem")
-model AzureIaasVmProtectedItem extends ProtectedItem {
+alias AzureIaasVmProtectedItemProperties = {
   /**
    * Friendly name of the VM represented by this backup item.
    */
@@ -2114,7 +2099,6 @@ model AzureIaasVmProtectedItem extends ProtectedItem {
   /**
    * Timestamp of the last backup operation on this backup item.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastBackupTime?: utcDateTime;
 
   /**
@@ -2131,6 +2115,18 @@ model AzureIaasVmProtectedItem extends ProtectedItem {
    * Extended Properties for Azure IaasVM Backup.
    */
   extendedProperties?: ExtendedProperties;
+};
+
+/**
+ * IaaS VM workload-specific backup item.
+ */
+model AzureIaasVmProtectedItem extends ProtectedItem {
+  /**
+   * backup item type.
+   */
+  protectedItemType: "AzureIaaSVMProtectedItem";
+
+  ...AzureIaasVmProtectedItemProperties;
 }
 
 /**
@@ -2147,7 +2143,6 @@ model AzureIaasVmProtectedItemExtendedInfo {
   /**
    * The oldest backup copy available for this backup item.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   oldestRecoveryPoint?: utcDateTime;
 
   /**
@@ -2187,13 +2182,13 @@ model DiskExclusionProperties {
 /**
  * IaaS VM workload-specific backup item representing the Azure Resource Manager VM.
  */
-@extension("x-ms-discriminator-value", "Microsoft.Compute/virtualMachines")
-model AzureIaasComputeVmProtectedItem extends AzureIaasVmProtectedItem {
+model AzureIaasComputeVmProtectedItem extends ProtectedItem {
   /**
    * backup item type.
    */
-  @invisible(Lifecycle)
   protectedItemType: "Microsoft.Compute/virtualMachines";
+
+  ...AzureIaasVmProtectedItemProperties;
 }
 
 /**
@@ -2311,13 +2306,11 @@ model AzureIaasVmJobTaskDetails {
   /**
    * The start time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * The end time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
   /**
@@ -2379,7 +2372,6 @@ model AzureSqlProtectedItemExtendedInfo {
   /**
    * The oldest backup copy available for this item in the service.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   oldestRecoveryPoint?: utcDateTime;
 
   /**
@@ -2492,10 +2484,9 @@ model AzureStorageJobTaskDetails {
 }
 
 /**
- * Azure VM workload-specific protected item.
+ * Shared properties for Azure VM workload-specific protected items.
  */
-@extension("x-ms-discriminator-value", "AzureVmWorkloadProtectedItem")
-model AzureVmWorkloadProtectedItem extends ProtectedItem {
+alias AzureVmWorkloadProtectedItemProperties = {
   /**
    * Friendly name of the DB represented by this backup item.
    */
@@ -2534,7 +2525,6 @@ model AzureVmWorkloadProtectedItem extends ProtectedItem {
   /**
    * Timestamp of the last backup operation on this backup item.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastBackupTime?: utcDateTime;
 
   /**
@@ -2562,6 +2552,18 @@ model AzureVmWorkloadProtectedItem extends ProtectedItem {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   kpisHealths?: Record<KpiResourceHealthDetails>;
+};
+
+/**
+ * Azure VM workload-specific protected item.
+ */
+model AzureVmWorkloadProtectedItem extends ProtectedItem {
+  /**
+   * backup item type.
+   */
+  protectedItemType: "AzureVmWorkloadProtectedItem";
+
+  ...AzureVmWorkloadProtectedItemProperties;
 }
 
 /**
@@ -2594,7 +2596,6 @@ model AzureVmWorkloadProtectedItemExtendedInfo {
   /**
    * The oldest backup copy available for this backup item.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   oldestRecoveryPoint?: utcDateTime;
 
   /**
@@ -2611,40 +2612,37 @@ model AzureVmWorkloadProtectedItemExtendedInfo {
 /**
  * Azure VM workload-specific protected item representing SAP ASE Database.
  */
-@extension("x-ms-discriminator-value", "AzureVmWorkloadSAPAseDatabase")
-model AzureVmWorkloadSapAseDatabaseProtectedItem
-  extends AzureVmWorkloadProtectedItem {
+model AzureVmWorkloadSapAseDatabaseProtectedItem extends ProtectedItem {
   /**
    * backup item type.
    */
-  @invisible(Lifecycle)
   protectedItemType: "AzureVmWorkloadSAPAseDatabase";
+
+  ...AzureVmWorkloadProtectedItemProperties;
 }
 
 /**
  * Azure VM workload-specific protected item representing SAP HANA Database.
  */
-@extension("x-ms-discriminator-value", "AzureVmWorkloadSAPHanaDatabase")
-model AzureVmWorkloadSapHanaDatabaseProtectedItem
-  extends AzureVmWorkloadProtectedItem {
+model AzureVmWorkloadSapHanaDatabaseProtectedItem extends ProtectedItem {
   /**
    * backup item type.
    */
-  @invisible(Lifecycle)
   protectedItemType: "AzureVmWorkloadSAPHanaDatabase";
+
+  ...AzureVmWorkloadProtectedItemProperties;
 }
 
 /**
  * Azure VM workload-specific protected item representing SQL Database.
  */
-@extension("x-ms-discriminator-value", "AzureVmWorkloadSQLDatabase")
-model AzureVmWorkloadSqlDatabaseProtectedItem
-  extends AzureVmWorkloadProtectedItem {
+model AzureVmWorkloadSqlDatabaseProtectedItem extends ProtectedItem {
   /**
    * backup item type.
    */
-  @invisible(Lifecycle)
   protectedItemType: "AzureVmWorkloadSQLDatabase";
+
+  ...AzureVmWorkloadProtectedItemProperties;
 }
 
 /**
@@ -2753,14 +2751,23 @@ model AzureWorkloadJobTaskDetails {
 /**
  * Recovery point specific to PointInTime
  */
-@extension("x-ms-discriminator-value", "AzureWorkloadPointInTimeRecoveryPoint")
-model AzureWorkloadPointInTimeRecoveryPoint extends AzureWorkloadRecoveryPoint {
+model AzureWorkloadPointInTimeRecoveryPoint extends RecoveryPoint {
+  /**
+   * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
+   */
+  objectType: "AzureWorkloadPointInTimeRecoveryPoint";
+
+  ...AzureWorkloadRecoveryPointProperties;
+  ...AzureWorkloadPointInTimeRecoveryPointProperties;
+}
+
+alias AzureWorkloadPointInTimeRecoveryPointProperties = {
   /**
    * List of log ranges
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Faithful migration: the original array property has no x-ms-identifiers in stable/2023-01-15; emitting identifiers would change the frozen contract."
   timeRanges?: PointInTimeRange[];
-}
+};
 
 /**
  * Provides details for log ranges
@@ -2769,26 +2776,19 @@ model PointInTimeRange {
   /**
    * Start time of the time range for log recovery.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * End time of the time range for log recovery.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 }
 
-/**
- * Workload specific recovery point, specifically encapsulates full/diff recovery point
- */
-@extension("x-ms-discriminator-value", "AzureWorkloadRecoveryPoint")
-model AzureWorkloadRecoveryPoint extends RecoveryPoint {
+alias AzureWorkloadRecoveryPointProperties = {
   /**
    * UTC time at which recovery point was created
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Faithful migration: this property name is part of the published stable/2023-01-15 wire contract and must be preserved (property casing is API surface)."
   recoveryPointTimeInUTC?: utcDateTime;
 
@@ -2814,6 +2814,18 @@ model AzureWorkloadRecoveryPoint extends RecoveryPoint {
    * Properties of Recovery Point
    */
   recoveryPointProperties?: RecoveryPointProperties;
+};
+
+/**
+ * Workload specific recovery point, specifically encapsulates full/diff recovery point
+ */
+model AzureWorkloadRecoveryPoint extends RecoveryPoint {
+  /**
+   * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
+   */
+  objectType: "AzureWorkloadRecoveryPoint";
+
+  ...AzureWorkloadRecoveryPointProperties;
 }
 
 /**
@@ -2848,27 +2860,33 @@ model RecoveryPointMoveReadinessInfo {
 /**
  * AzureWorkload SAP Hana -specific restore. Specifically for PointInTime/Log restore
  */
-@extension("x-ms-discriminator-value", "AzureWorkloadPointInTimeRestoreRequest")
-model AzureWorkloadPointInTimeRestoreRequest
-  extends AzureWorkloadRestoreRequest {
-  /**
-   * PointInTime value
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  pointInTime?: utcDateTime;
-
+model AzureWorkloadPointInTimeRestoreRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
-  @invisible(Lifecycle)
   objectType: "AzureWorkloadPointInTimeRestoreRequest";
+
+  /**
+   * PointInTime value
+   */
+  pointInTime?: utcDateTime;
+
+  ...AzureWorkloadRestoreRequestProperties;
 }
 
 /**
  * AzureWorkload-specific restore.
  */
-@extension("x-ms-discriminator-value", "AzureWorkloadRestoreRequest")
 model AzureWorkloadRestoreRequest extends RestoreRequest {
+  /**
+   * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
+   */
+  objectType: "AzureWorkloadRestoreRequest";
+
+  ...AzureWorkloadRestoreRequestProperties;
+}
+
+alias AzureWorkloadRestoreRequestProperties = {
   /**
    * Type of this recovery.
    */
@@ -2900,7 +2918,7 @@ model AzureWorkloadRestoreRequest extends RestoreRequest {
    * For e.g. /subscriptions/{subId}/resourcegroups/{rg}/provider/Microsoft.Compute/virtualmachines/{vm}
    */
   targetVirtualMachineId?: string;
-}
+};
 
 /**
  * Details about target workload during restore operation.
@@ -2930,94 +2948,100 @@ model TargetRestoreInfo {
 /**
  * Recovery point specific to PointInTime in SAPHana
  */
-@extension(
-  "x-ms-discriminator-value",
-  "AzureWorkloadSAPHanaPointInTimeRecoveryPoint"
-)
-model AzureWorkloadSapHanaPointInTimeRecoveryPoint
-  extends AzureWorkloadPointInTimeRecoveryPoint {
+model AzureWorkloadSapHanaPointInTimeRecoveryPoint extends RecoveryPoint {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
-  @invisible(Lifecycle)
   objectType: "AzureWorkloadSAPHanaPointInTimeRecoveryPoint";
+
+  ...AzureWorkloadRecoveryPointProperties;
+  ...AzureWorkloadPointInTimeRecoveryPointProperties;
 }
+
+alias AzureWorkloadSapHanaPointInTimeRestoreRequestProperties = {
+  /**
+   * PointInTime value
+   */
+  pointInTime?: utcDateTime;
+};
 
 /**
  * AzureWorkload SAP Hana -specific restore. Specifically for PointInTime/Log restore
  */
-@extension(
-  "x-ms-discriminator-value",
-  "AzureWorkloadSAPHanaPointInTimeRestoreRequest"
-)
-model AzureWorkloadSapHanaPointInTimeRestoreRequest
-  extends AzureWorkloadSapHanaRestoreRequest {
-  /**
-   * PointInTime value
-   */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  pointInTime?: utcDateTime;
-
+model AzureWorkloadSapHanaPointInTimeRestoreRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
-  @invisible(Lifecycle)
   objectType: "AzureWorkloadSAPHanaPointInTimeRestoreRequest";
+
+  ...AzureWorkloadSapHanaPointInTimeRestoreRequestProperties;
+  ...AzureWorkloadRestoreRequestProperties;
 }
 
 /**
  * AzureWorkload SAP Hana-specific restore.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Faithful migration: AzureWorkloadSAPHanaRestoreRequest is an empty specialization in the frozen stable/2023-01-15 contract."
-@extension("x-ms-discriminator-value", "AzureWorkloadSAPHanaRestoreRequest")
-model AzureWorkloadSapHanaRestoreRequest extends AzureWorkloadRestoreRequest {}
+model AzureWorkloadSapHanaRestoreRequest extends RestoreRequest {
+  /**
+   * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
+   */
+  objectType: "AzureWorkloadSAPHanaRestoreRequest";
+
+  ...AzureWorkloadRestoreRequestProperties;
+}
 
 /**
  * SAPHana specific recoverypoint, specifically encapsulates full/diff recoverypoints
  */
-@extension("x-ms-discriminator-value", "AzureWorkloadSAPHanaRecoveryPoint")
-model AzureWorkloadSapHanaRecoveryPoint extends AzureWorkloadRecoveryPoint {
+model AzureWorkloadSapHanaRecoveryPoint extends RecoveryPoint {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
-  @invisible(Lifecycle)
   objectType: "AzureWorkloadSAPHanaRecoveryPoint";
+
+  ...AzureWorkloadRecoveryPointProperties;
 }
 
 /**
  * Recovery point specific to PointInTime
  */
-@extension(
-  "x-ms-discriminator-value",
-  "AzureWorkloadSQLPointInTimeRecoveryPoint"
-)
-model AzureWorkloadSqlPointInTimeRecoveryPoint
-  extends AzureWorkloadSqlRecoveryPoint {
+model AzureWorkloadSqlPointInTimeRecoveryPoint extends RecoveryPoint {
+  /**
+   * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
+   */
+  objectType: "AzureWorkloadSQLPointInTimeRecoveryPoint";
+
   /**
    * List of log ranges
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Faithful migration: the original array property has no x-ms-identifiers in stable/2023-01-15; emitting identifiers would change the frozen contract."
   timeRanges?: PointInTimeRange[];
 
-  /**
-   * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
-   */
-  @invisible(Lifecycle)
-  objectType: "AzureWorkloadSQLPointInTimeRecoveryPoint";
+  ...AzureWorkloadSqlRecoveryPointProperties;
+  ...AzureWorkloadRecoveryPointProperties;
 }
 
 /**
  * SQL specific recoverypoint, specifically encapsulates full/diff recoverypoint along with extended info
  */
-@extension("x-ms-discriminator-value", "AzureWorkloadSQLRecoveryPoint")
-model AzureWorkloadSqlRecoveryPoint extends AzureWorkloadRecoveryPoint {
+model AzureWorkloadSqlRecoveryPoint extends RecoveryPoint {
+  /**
+   * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
+   */
+  objectType: "AzureWorkloadSQLRecoveryPoint";
+
+  ...AzureWorkloadSqlRecoveryPointProperties;
+  ...AzureWorkloadRecoveryPointProperties;
+}
+
+alias AzureWorkloadSqlRecoveryPointProperties = {
   /**
    * Extended Info that provides data directory details. Will be populated in two cases:
    * When a specific recovery point is accessed using GetRecoveryPoint
    * Or when ListRecoveryPoints is called for Log RP only with ExtendedInfo query filter
    */
   extendedInfo?: AzureWorkloadSqlRecoveryPointExtendedInfo;
-}
+};
 
 /**
  * Extended info class details
@@ -3027,7 +3051,6 @@ model AzureWorkloadSqlRecoveryPointExtendedInfo {
    * UTC time at which data directory info was captured
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Faithful migration: this property name is part of the published stable/2023-01-15 wire contract and must be preserved (property casing is API surface)."
   dataDirectoryTimeInUTC?: utcDateTime;
 
@@ -3059,33 +3082,41 @@ model SqlDataDirectory {
   logicalName?: string;
 }
 
-/**
- * AzureWorkload SQL -specific restore. Specifically for PointInTime/Log restore
- */
-@extension(
-  "x-ms-discriminator-value",
-  "AzureWorkloadSQLPointInTimeRestoreRequest"
-)
-model AzureWorkloadSqlPointInTimeRestoreRequest
-  extends AzureWorkloadSqlRestoreRequest {
+alias AzureWorkloadSqlPointInTimeRestoreRequestProperties = {
   /**
    * PointInTime value
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   pointInTime?: utcDateTime;
+};
 
+/**
+ * AzureWorkload SQL -specific restore. Specifically for PointInTime/Log restore
+ */
+model AzureWorkloadSqlPointInTimeRestoreRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
    */
-  @invisible(Lifecycle)
   objectType: "AzureWorkloadSQLPointInTimeRestoreRequest";
+
+  ...AzureWorkloadSqlPointInTimeRestoreRequestProperties;
+  ...AzureWorkloadSqlRestoreRequestProperties;
+  ...AzureWorkloadRestoreRequestProperties;
 }
 
 /**
  * AzureWorkload SQL -specific restore. Specifically for full/diff restore
  */
-@extension("x-ms-discriminator-value", "AzureWorkloadSQLRestoreRequest")
-model AzureWorkloadSqlRestoreRequest extends AzureWorkloadRestoreRequest {
+model AzureWorkloadSqlRestoreRequest extends RestoreRequest {
+  /**
+   * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
+   */
+  objectType: "AzureWorkloadSQLRestoreRequest";
+
+  ...AzureWorkloadSqlRestoreRequestProperties;
+  ...AzureWorkloadRestoreRequestProperties;
+}
+
+alias AzureWorkloadSqlRestoreRequestProperties = {
   /**
    * Default option set to true. If this is set to false, alternate data directory must be provided
    */
@@ -3101,7 +3132,7 @@ model AzureWorkloadSqlRestoreRequest extends AzureWorkloadRestoreRequest {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Faithful migration: the original array property has no x-ms-identifiers in stable/2023-01-15; emitting identifiers would change the frozen contract."
   alternateDirectoryPaths?: SqlDataDirectoryMapping[];
-}
+};
 
 /**
  * Encapsulates information regarding data directory
@@ -3155,13 +3186,11 @@ model BmsrpQueryObject {
   /**
    * Backup copies created after this time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startDate?: utcDateTime;
 
   /**
    * Backup copies created before this time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endDate?: utcDateTime;
 
   /**
@@ -3348,13 +3377,11 @@ model DpmJobTaskDetails {
   /**
    * The start time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * The end time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
   /**
@@ -3426,13 +3453,11 @@ model DpmProtectedItemExtendedInfo {
   /**
    * Last refresh time on backup item.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastRefreshedAt?: utcDateTime;
 
   /**
    * Oldest cloud recovery point time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   oldestRecoveryPoint?: utcDateTime;
 
   /**
@@ -3443,13 +3468,11 @@ model DpmProtectedItemExtendedInfo {
   /**
    * Oldest disk recovery point time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   onPremiseOldestRecoveryPoint?: utcDateTime;
 
   /**
    * latest disk recovery point time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   onPremiseLatestRecoveryPoint?: utcDateTime;
 
   /**
@@ -3566,7 +3589,6 @@ model GenericRecoveryPoint extends RecoveryPoint {
   /**
    * Time at which this backup copy was created.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   recoveryPointTime?: utcDateTime;
 
   /**
@@ -3599,7 +3621,6 @@ model IaasVmRecoveryPoint extends RecoveryPoint {
    * Time at which this backup copy was created.
    */
   @visibility(Lifecycle.Read)
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   recoveryPointTime?: utcDateTime;
 
   /**
@@ -3952,13 +3973,11 @@ model JobQueryObject {
   /**
    * Job has started at this time. Value is in UTC.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * Job has ended at this time. Value is in UTC.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 }
 
@@ -4001,7 +4020,6 @@ model MabFileFolderProtectedItem extends ProtectedItem {
   /**
    * Timestamp of the last backup operation on this backup item.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastBackupTime?: utcDateTime;
 
   /**
@@ -4033,13 +4051,11 @@ model MabFileFolderProtectedItemExtendedInfo {
   /**
    * Last time when the agent data synced to service.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastRefreshedAt?: utcDateTime;
 
   /**
    * The oldest backup copy available.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   oldestRecoveryPoint?: utcDateTime;
 
   /**
@@ -4128,13 +4144,11 @@ model MabJobTaskDetails {
   /**
    * The start time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startTime?: utcDateTime;
 
   /**
    * The end time.
    */
-  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   endTime?: utcDateTime;
 
   /**

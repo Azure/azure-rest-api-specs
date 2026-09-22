@@ -1,6 +1,7 @@
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.RecoveryServices;
 
 @@clientLocation(
@@ -146,4 +147,83 @@ using Microsoft.RecoveryServices;
 @@clientName(
   AzureWorkloadSqlPointInTimeRestoreRequest,
   "AzureWorkloadSQLPointInTimeRestoreRequest"
+);
+
+// Preserve the frozen nested discriminator hierarchy on the wire and in SDKs.
+// The models are declared flat (each subtype `extends ProtectedItem`) to satisfy
+// composition-over-inheritance; these @@hierarchyBuilding mappings re-parent each
+// leaf onto its intermediate at emit time so the emitted swagger keeps the original
+// nested `allOf` and generated SDKs keep the original is-a inheritance chain.
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@hierarchyBuilding(AzureIaasClassicComputeVmProtectedItem, AzureIaasVmProtectedItem);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@hierarchyBuilding(AzureIaasComputeVmProtectedItem, AzureIaasVmProtectedItem);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@hierarchyBuilding(
+  AzureVmWorkloadSapAseDatabaseProtectedItem,
+  AzureVmWorkloadProtectedItem
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@hierarchyBuilding(
+  AzureVmWorkloadSapHanaDatabaseProtectedItem,
+  AzureVmWorkloadProtectedItem
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@hierarchyBuilding(
+  AzureVmWorkloadSqlDatabaseProtectedItem,
+  AzureVmWorkloadProtectedItem
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@hierarchyBuilding(AzureWorkloadSapHanaRecoveryPoint, AzureWorkloadRecoveryPoint);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@hierarchyBuilding(
+  AzureWorkloadPointInTimeRecoveryPoint,
+  AzureWorkloadRecoveryPoint
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@hierarchyBuilding(AzureWorkloadSqlRecoveryPoint, AzureWorkloadRecoveryPoint);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@hierarchyBuilding(
+  AzureWorkloadSapHanaPointInTimeRecoveryPoint,
+  AzureWorkloadPointInTimeRecoveryPoint
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@hierarchyBuilding(
+  AzureWorkloadSqlPointInTimeRecoveryPoint,
+  AzureWorkloadSqlRecoveryPoint
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@hierarchyBuilding(
+  AzureWorkloadPointInTimeRestoreRequest,
+  AzureWorkloadRestoreRequest
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@hierarchyBuilding(
+  AzureWorkloadSapHanaRestoreRequest,
+  AzureWorkloadRestoreRequest
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@hierarchyBuilding(
+  AzureWorkloadSqlRestoreRequest,
+  AzureWorkloadRestoreRequest
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@hierarchyBuilding(
+  AzureWorkloadSapHanaPointInTimeRestoreRequest,
+  AzureWorkloadSapHanaRestoreRequest
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility"
+@@hierarchyBuilding(
+  AzureWorkloadSqlPointInTimeRestoreRequest,
+  AzureWorkloadSqlRestoreRequest
 );
