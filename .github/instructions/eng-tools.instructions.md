@@ -7,7 +7,7 @@ applyTo:
 
 This file provides instructions for GitHub Copilot when working with the engineering tools in the `eng/tools` directory of this repository. These tools are completely separate from the TypeSpec and OpenAPI specification work that makes up the majority of this repository.
 
-All tools under `eng/tools` follow the same patterns for development and testing. When adding a new tool or modifying an existing one, match the conventions described here.
+Read the affected tool and a sibling tool before editing. Follow the shared conventions below and the affected package's scripts, keeping changes surgical and focused.
 
 ## Overview
 
@@ -27,31 +27,29 @@ The `eng/tools` directory contains a collection of standalone Node.js packages u
 
 The top-level `eng/tools` directory holds shared configuration that the individual packages extend:
 
-- `package.json` — aggregates every tool as a `file:` devDependency and provides a root `build` script
+- `package.json` — aggregates every tool as a `workspace:*` devDependency and provides a root `build` script
 - `tsconfig.json` — base TypeScript config plus the `include` list of every tool's `src`/`test` files
 - Lint configuration is shared by all packages in the repository-root `.oxlintrc.json`
 - `vitest.base.config.ts` — base Vitest config that each tool extends
-- `.prettierrc.yaml` / `.prettierignore` — shared Prettier configuration
+- Root `.oxfmtrc.json` — shared Oxfmt configuration and subtree-scoped ignore patterns
 
 ## Technology Stack
 
 - **Language**: TypeScript (`.ts` files, executed directly by Node via type stripping — there is no separate compile/emit step)
-- **Runtime**: Node.js >= 22.18.0 (CI runs on Node 22 for ubuntu and Node 24 for windows)
+- **Runtime**: Node.js >=24.14.1; CI uses Node 24 on Ubuntu and Windows
 - **Type Checking**: `tsc --noEmit` (the `build` script only type-checks; it does not emit JavaScript)
 - **Testing**: Vitest for unit and integration tests
 - **Linting**: oxlint with type-aware rules from `oxlint-tsgolint`
-- **Formatting**: Prettier with the organize-imports plugin (shared config)
+- **Formatting**: Oxfmt using the root `.oxfmtrc.json`; import organization and package.json sorting are disabled
 - **Package Manager**: pnpm workspaces (`pnpm ci` for clean installs)
 
 ## Project Structure
 
 ```
 eng/tools/
-├── package.json               # Aggregates all tools as file: devDependencies; root "build"
+├── package.json               # Aggregates all tools as workspace:* devDependencies; root "build"
 ├── tsconfig.json              # Base TS config + include list for all tools
 ├── vitest.base.config.ts      # Base Vitest config (extended per tool)
-├── .prettierrc.yaml           # Shared Prettier config (keep in sync with .github)
-├── .prettierignore            # Shared Prettier ignore list
 └── <tool>/                    # One directory per tool package
     ├── package.json           # @azure-tools/<tool>; scripts, deps, bin entry
     ├── tsconfig.json          # Extends ../tsconfig.json; include src/test
@@ -70,9 +68,9 @@ eng/tools/
 - **Module system**: ES modules (`import`/`export`), `"type": "module"` in every `package.json`.
 - **Erasable syntax only**: Source is run directly by Node's type stripping, so the base `tsconfig.json` sets `erasableSyntaxOnly` and `verbatimModuleSyntax`. Do **not** use TypeScript features that require runtime transformation — no `enum`, no parameter properties (`constructor(private x)`), no namespaces with runtime members, and no non-`import type` type-only imports that would emit. Use `import type { ... }` for type-only imports.
 - **Import extensions**: Import local modules using their real `.ts` extension (e.g. `import { main } from "../src/index.ts"`); `allowImportingTsExtensions` is enabled.
-- **Indentation**: 2 spaces (enforced by Prettier).
-- **Quote style**: Double quotes for strings (enforced by Prettier).
-- **Line length**: Max 100 characters (`printWidth: 100`, enforced by Prettier).
+- **Indentation**: 2 spaces (enforced by Oxfmt).
+- **Quote style**: Double quotes for strings (enforced by Oxfmt).
+- **Line length**: Max 100 characters (`printWidth: 100`, enforced by Oxfmt).
 - **Naming conventions**:
   - Functions and variables: `camelCase`
   - Types, interfaces, and classes: `PascalCase`
@@ -81,8 +79,7 @@ eng/tools/
 
 ### Shared Utilities
 
-- Reuse `@azure-tools/specs-shared` (referenced as `file:../../../.github/shared`) instead of duplicating helpers such as logging, git, or changed-file utilities.
-- Tools may depend on each other via `file:` references (for example `typespec-validation` depends on `suppressions`).
+- Reuse `@azure-tools/specs-shared` (referenced as `workspace:*`) instead of duplicating helpers such as logging, git, or changed-file utilities.
 
 ## Per-Tool Configuration
 
@@ -102,22 +99,20 @@ Every tool package is a thin extension of the shared `eng/tools` configuration. 
   "scripts": {
     "build": "tsc --noEmit",
     "check": "pnpm run build && pnpm run lint && pnpm run format:check && pnpm run test:ci",
-    "format": "prettier . --ignore-path ../.prettierignore --write",
-    "format:check": "prettier . --ignore-path ../.prettierignore --check",
-    "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
+    "format": "oxfmt . --write",
+    "format:check": "oxfmt . --check",
     "lint": "oxlint .",
     "test": "vitest",
     "test:ci": "vitest run --coverage --reporter=verbose"
   },
   "engines": {
-    "node": ">=22.18.0"
+    "node": ">=24.14.1"
   }
 }
 ```
 
 - Reference external dependency versions with `catalog:`. Define their versions in the default `catalog` in the root `pnpm-workspace.yaml`, including dependencies used by only one tool.
 - Keep internal package references as `workspace:*`; do not put workspace links in the catalog.
-- Add the new package to the root `eng/tools/package.json` `devDependencies` as a `file:<tool>` entry.
 
 ### `tsconfig.json`
 
@@ -128,8 +123,6 @@ Every tool package is a thin extension of the shared `eng/tools` configuration. 
 }
 ```
 
-- Also add the new package's `src` and `test` globs to the `include` list in `eng/tools/tsconfig.json`.
-
 ### Lint configuration
 
 Use the repository-root `.oxlintrc.json`; do not add per-tool lint configurations or
@@ -137,7 +130,7 @@ dependencies. The root package provides `oxlint` and `oxlint-tsgolint`. A local
 `"lint": "oxlint ."` script can lint one tool during development; `pnpm lint` from
 the repository root lints the previously linted packages in one invocation.
 
-See [the engineering guide](../../eng/README.md#linting-and-prettier) for the
+See [the engineering guide](../../eng/README.md#linting-and-formatting) for the
 packages excluded to preserve the previous ESLint coverage. Enable linting for
 those packages in a separate change rather than adding migration-only suppressions.
 
@@ -173,61 +166,40 @@ Run these from within an individual tool directory (`eng/tools/<tool>`):
 
 ```bash
 pnpm run build           # Type-check with tsc --noEmit (no JS emitted)
-pnpm run check           # build + lint + format:check + test:ci (run this before committing)
+pnpm run check           # build + lint + format:check + test:ci
 pnpm run lint            # Run oxlint for this package
-pnpm run format          # Format code with Prettier
+pnpm run format          # Format code with Oxfmt
 pnpm run format:check    # Check formatting without modifying files
-pnpm run format:check:ci # Check formatting with verbose debug output (for CI)
 pnpm run test            # Run tests (watch by default; some tools use --run)
 pnpm run test:ci         # Run tests once with coverage report
 ```
 
 From the `eng/tools` directory, `pnpm run build` type-checks all tools at once.
 
+Use `pnpm run format` rather than adjusting formatting manually.
+
 ### Before Committing
 
-From the directory of each tool you changed, run:
-
-```bash
-pnpm run check
-```
-
-This runs the type-check, lint, format check, and tests. All must pass before committing. If a tool does not yet define a `check` script, run `build`, `lint`, `format:check`, and `test:ci` individually.
+Run `pnpm run check` from each affected tool directory. All applicable type, lint, formatting, and test checks must pass before committing. If the tool has no `check` script, run its `build`, `format:check`, and `test:ci` scripts, plus `lint` if defined. Keep the existing central lint coverage and exclusions.
 
 ### Testing Conventions
 
+Cover new or changed behavior and bug regressions with focused tests of repository-owned behavior and integration contracts. Reuse adequate existing coverage for mechanical refactors and dependency/API substitutions; add tests for uncovered repository behavior or compatibility risks, not to reproduce upstream test matrices. Preserve configured coverage requirements and justify removing existing tests.
+
 - **Framework**: Vitest
 - **Test files**: `*.test.ts` files under each tool's `test/` directory
-- **Fixtures**: Place test fixtures under `test/` (the shared `.prettierignore` excludes `fixtures` and `specification`)
+- **Fixtures**: Place test fixtures under `test/` (the root `.oxfmtrc.json` excludes `fixtures` and `specification` directories under tooling)
 - **Assertions**: Use `expect()` from Vitest
 - **Coverage**: Generated by `pnpm run test:ci`; exclude `cmd/**` and entry files (e.g. `src/index.ts`) from coverage where appropriate
 - **Test structure**: Use `describe()` and `it()` blocks
 
-Example test structure:
-
-```typescript
-import { describe, expect, it } from "vitest";
-import { myFunction } from "../src/my-module.ts";
-
-describe("myFunction", () => {
-  it("should do something", async () => {
-    const result = await myFunction({ option: "value" });
-    expect(result).toEqual(expectedValue);
-  });
-});
-```
-
 ### CI Integration
 
-Each tool is tested by a dedicated workflow (`.github/workflows/<tool>-test.yaml`) that calls the shared reusable workflow `.github/workflows/_reusable-eng-tools-test.yaml`. The reusable workflow runs `pnpm run build`, `pnpm run test:ci`, and `pnpm run format:check:ci` against the tool's `working-directory`, on a matrix of Ubuntu (Node 24) and Windows (Node 24).
+Each tool is tested by a dedicated workflow (`.github/workflows/<tool>-test.yaml`) that calls the shared reusable workflow `.github/workflows/_reusable-eng-tools-test.yaml`. The reusable workflow runs `pnpm run build` and `pnpm run test:ci` against the tool's `working-directory`, on a matrix of Ubuntu (Node 24) and Windows (Node 24).
 
-Code linting runs once for all packages in `.github/workflows/lint.yaml`. Do not add
-lint steps or a lint input to the per-package reusable workflow.
+`.github/workflows/format.yaml` runs `pnpm format:check` once from the repository root for `.github` and `eng/tools`. Do not add formatting steps to package/OS test matrices. Package-local formatting commands remain available and use the same root configuration.
 
-When adding a new tool:
-
-1. Add a `<tool>-test.yaml` workflow that calls `_reusable-eng-tools-test.yaml` with `package: <tool>`. The central lint workflow automatically includes new tools.
-2. List the relevant `paths` filters (at minimum `eng/tools/package.json`, `eng/tools/tsconfig.json`, and `eng/tools/<tool>/**`) so the workflow runs when the tool changes.
+Code linting runs once for all packages in `.github/workflows/lint.yaml`, which automatically includes new tools. Do not add lint steps or a lint input to the per-package reusable workflow.
 
 ## Common Tasks
 
@@ -240,48 +212,18 @@ When adding a new tool:
 5. Add `vitest.config.ts` extending `../vitest.base.config.ts`.
 6. Add CLI wrapper(s) under `cmd/` and declare them in the `bin` field.
 7. Register the package in `eng/tools/package.json` (`workspace:*` devDependency) and `eng/tools/tsconfig.json` (`include` globs).
-8. Add a `.github/workflows/<tool>-test.yaml` workflow calling `_reusable-eng-tools-test.yaml`.
-9. Run `pnpm run check` in the new tool directory.
+8. Add a `.github/workflows/<tool>-test.yaml` workflow calling `_reusable-eng-tools-test.yaml` with `package: <tool>`. Include relevant `paths` filters, at minimum `eng/tools/package.json`, `eng/tools/tsconfig.json`, and `eng/tools/<tool>/**`.
+9. Run the [required checks](#before-committing) in the new tool directory.
 
 ### Updating Dependencies
 
 1. Update the dependency's version in the root `pnpm-workspace.yaml` catalog, leaving the tool's `package.json` reference as `catalog:`. Preserve exact pins where used.
 2. For a new dependency, add a catalog entry and reference it with `catalog:` in the appropriate dependency section. Reuse an existing entry rather than adding a second version.
-3. Run `pnpm install` from the repository root and include the generated `pnpm-lock.yaml` with the catalog change. Preserve overrides, release-age settings, and build allowlists.
-4. Run the affected tools' checks, including consumers of shared dependencies. Tools without a `check` script need their available build, lint, formatting, and test commands run explicitly.
+3. Run `pnpm install` from the repository root and include the generated `pnpm-lock.yaml` with the catalog change; do not edit the lockfile manually. Preserve overrides, release-age settings, and build allowlists.
+4. Run the [required checks](#before-committing) for affected tools, including consumers of shared dependencies.
 5. Separate mechanical catalog changes from version upgrades that require source changes or alter output. Review resolved and transitive lockfile changes, not just manifest ranges.
 
 Only use catalog references in projects included in `pnpm-workspace.yaml`.
-
-## For AI Agents
-
-When modifying `eng/tools` code:
-
-1. **Read existing code first**: Match the conventions of a sibling tool before changing anything.
-2. **Run checks locally**: Always run `pnpm run check` in the affected tool directory before committing.
-3. **Update tests**: Add or modify tests when changing functionality.
-4. **Preserve typing**: Keep code fully typed and free of `tsc --noEmit` errors.
-5. **Follow conventions**: Match the existing structure, scripts, and config layout.
-6. **Minimize changes**: Make surgical, focused changes.
-7. **Keep config in sync**: When adding a tool, update both `eng/tools/package.json` and `eng/tools/tsconfig.json`.
-
-### Critical Don'ts
-
-- ❌ Don't use non-erasable TypeScript syntax (`enum`, parameter properties, runtime namespaces) — Node runs the `.ts` directly via type stripping.
-- ❌ Don't emit JavaScript from `tsc`; `build` is `tsc --noEmit` (type-check only).
-- ❌ Don't commit without running `pnpm run check`.
-- ❌ Don't edit `pnpm-lock.yaml` manually (use `pnpm install`).
-- ❌ Don't change formatting manually (use `pnpm run format`).
-- ❌ Don't forget to register a new tool in `eng/tools/package.json` and `eng/tools/tsconfig.json`.
-
-### Critical Do's
-
-- ✅ Do extend the shared base configs (`tsconfig`, `vitest.base.config.ts`, `.prettierrc.yaml`) and use the root oxlint config.
-- ✅ Do write Vitest tests for new functionality under `test/`.
-- ✅ Do use `import type` for type-only imports.
-- ✅ Do reuse `@azure-tools/specs-shared` utilities instead of duplicating them.
-- ✅ Do add a `<tool>-test.yaml` workflow for any new tool.
-- ✅ Do run `pnpm run check` before committing.
 
 ## Related Files
 

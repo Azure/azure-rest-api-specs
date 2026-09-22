@@ -5,17 +5,14 @@
   "devDependencies": {
     "@azure-tools/specs-shared": "workspace:*",
     "@types/node": "catalog:",
-    "prettier": "catalog:",
-    "prettier-plugin-organize-imports": "catalog:",
     "typescript": "catalog:",
     "vitest": "catalog:"
   },
   "scripts": {
     "build": "tsc --noEmit",
     "check": "pnpm build && pnpm lint && pnpm format:check && pnpm test:ci",
-    "format": "prettier . --ignore-path ../.prettierignore --write",
-    "format:check": "prettier . --ignore-path ../.prettierignore --check",
-    "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
+    "format": "oxfmt . --write",
+    "format:check": "oxfmt . --check",
     "lint": "oxlint .",
     "test": "vitest",
     "test:ci": "vitest run --reporter=verbose"
