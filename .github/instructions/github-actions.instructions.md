@@ -146,9 +146,12 @@ remains a package-local alias for `build`. Root `pnpm test`/`pnpm test:ci` run t
 Vitest workspace and root `pnpm check` runs all contributor checks. Package-local
 Vitest commands still run directly and do not forward to the root.
 
+`eng.yml` validates the workspace, runs root `pnpm build` once on Linux, and runs
+the Vitest workspace on Ubuntu and Windows. `github-test.yaml` retains production-only module import
+checks on both OSes, plus actionlint and compiled agentic workflow lock checks on Linux.
+
 CI runs `pnpm lint` once from the repository root in `lint.yaml`, covering `.github`
-and `eng/tools`. Do not add lint steps to package/OS test matrices. `github-test.yaml`
-retains `pnpm lint:tsc`, tests, and actionlint for workflow YAML.
+and `eng/tools`. Do not add lint or type-check steps to the test OS matrix.
 `.github/workflows/format.yaml` runs `pnpm format:check` once from the repository
 root for `.github`, `eng/tools`, and `vitest.config.mts`. Do not add formatting steps to package/OS
 test matrices. Package-local format commands inherit the root `.oxfmtrc.json`,
