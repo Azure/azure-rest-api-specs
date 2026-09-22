@@ -32,7 +32,6 @@ model UserHasReviewProperties {
 
 @armResourceOperations
 interface RatingAndReviewsOperations {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi"
   @doc("Check user has review.")
   @post
   @action("checkUserHasReview")

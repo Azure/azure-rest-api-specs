@@ -42,7 +42,7 @@ alias GitHubOAuthResponsesOps = Azure.ResourceManager.Legacy.LegacyOperations<
   }
 >;
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "GitHubOAuth naming is preserved for compatibility with the existing OAuth operation group."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
 interface GitHubOAuthResponses {
   /**

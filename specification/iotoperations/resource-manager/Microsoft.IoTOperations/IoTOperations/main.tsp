@@ -125,7 +125,6 @@ interface Dataflow {
   get is ArmResourceRead<DataflowResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<DataflowResource>;
   delete is ArmResourceDeleteWithoutOkAsync<DataflowResource>;
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "For backward compatibility"
   listByResourceGroup is ArmResourceListByParent<DataflowResource>;
 }
 
