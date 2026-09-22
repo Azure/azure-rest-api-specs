@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2026-03-01-preview",
+    "resourceGroupName": "testrg",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "mysqlpocserver",
+            "type": "Microsoft.DBforMySQL/flexibleServers",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqlpocserver",
+            "location": "southeastasia",
+            "properties": {
+              "highAvailability": {
+                "mode": "Disabled",
+                "state": "NotEnabled"
+              },
+              "privateOutboundSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/pocvnet/subnets/pocsubnet",
+              "state": "Ready",
+              "version": "8.4"
+            },
+            "sku": {
+              "name": "Standard_D8ds_v4",
+              "tier": "GeneralPurpose"
+            }
+          },
+          {
+            "name": "mysqlpochaserver",
+            "type": "Microsoft.DBforMySQL/flexibleServers",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqlpochaserver",
+            "location": "southeastasia",
+            "properties": {
+              "highAvailability": {
+                "mode": "SameZone",
+                "replicationMode": "BinaryLog",
+                "standbyAvailabilityZone": "1",
+                "state": "Healthy"
+              },
+              "privateOutboundSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/pocvnet/subnets/pocsubnet",
+              "state": "Ready",
+              "version": "8.4"
+            },
+            "sku": {
+              "name": "Standard_D8ds_v4",
+              "tier": "GeneralPurpose"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Servers_ListByResourceGroup",
+  "title": "List servers sharing a private outbound subnet"
+}

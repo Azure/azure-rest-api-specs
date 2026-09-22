@@ -1,0 +1,94 @@
+{
+  "parameters": {
+    "api-version": "2026-03-01-preview",
+    "parameters": {
+      "location": "southeastasia",
+      "properties": {
+        "createMode": "PointInTimeRestore",
+        "privateOutboundSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/pocvnet/subnets/pocsubnet",
+        "restorePointInTime": "2026-09-01T00:00:00Z",
+        "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqlpocserver"
+      },
+      "sku": {
+        "name": "Standard_D8ds_v4",
+        "tier": "GeneralPurpose"
+      }
+    },
+    "resourceGroupName": "testrg",
+    "serverName": "mysqlpocrestored",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "mysqlpocrestored",
+        "type": "Microsoft.DBforMySQL/flexibleServers",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqlpocrestored",
+        "location": "southeastasia",
+        "properties": {
+          "highAvailability": {
+            "mode": "Disabled",
+            "state": "NotEnabled"
+          },
+          "network": {
+            "publicNetworkAccess": "Enabled"
+          },
+          "privateOutboundSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/pocvnet/subnets/pocsubnet",
+          "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqlpocserver",
+          "state": "Ready",
+          "storage": {
+            "storageRedundancy": "LocalRedundancy",
+            "storageSizeGB": 128,
+            "storageSku": "Premium_LRS"
+          },
+          "version": "8.4"
+        },
+        "sku": {
+          "name": "Standard_D8ds_v4",
+          "tier": "GeneralPurpose"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "mysqlpocrestored",
+        "type": "Microsoft.DBforMySQL/flexibleServers",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqlpocrestored",
+        "location": "southeastasia",
+        "properties": {
+          "highAvailability": {
+            "mode": "Disabled",
+            "state": "NotEnabled"
+          },
+          "network": {
+            "publicNetworkAccess": "Enabled"
+          },
+          "privateOutboundSubnetResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/pocvnet/subnets/pocsubnet",
+          "sourceServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqlpocserver",
+          "state": "Ready",
+          "storage": {
+            "storageRedundancy": "LocalRedundancy",
+            "storageSizeGB": 128,
+            "storageSku": "Premium_LRS"
+          },
+          "version": "8.4"
+        },
+        "sku": {
+          "name": "Standard_D8ds_v4",
+          "tier": "GeneralPurpose"
+        }
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforMySQL/locations/southeastasia/operationResults/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2026-03-01-preview"
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforMySQL/locations/southeastasia/azureAsyncOperation/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2026-03-01-preview",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforMySQL/locations/southeastasia/operationResults/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2026-03-01-preview"
+      }
+    }
+  },
+  "operationId": "Servers_Create",
+  "title": "Restore a server to a point in time with an explicit private outbound subnet"
+}
