@@ -13,10 +13,19 @@ interface WorkloadSpaces {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<WorkloadSpace>;
 
   /** Updates mutable workload space properties. */
-  update is ArmCustomPatchAsync<WorkloadSpace, WorkloadSpaceUpdate>;
+  update is ArmCustomPatchAsync<
+    WorkloadSpace,
+    WorkloadSpaceUpdate,
+    LroHeaders = ArmCombinedLroHeaders<ArmOperationStatus, WorkloadSpace> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /** Deletes a workload space and its owned resources. */
-  delete is ArmResourceDeleteWithoutOkAsync<WorkloadSpace>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    WorkloadSpace,
+    LroHeaders = ArmCombinedLroHeaders<ArmOperationStatus, void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /** Lists workload spaces in a resource group. */
   listByResourceGroup is ArmResourceListByParent<WorkloadSpace>;
@@ -35,10 +44,19 @@ interface RuntimeBindings {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<RuntimeBinding>;
 
   /** Updates mutable runtime binding properties. */
-  update is ArmCustomPatchAsync<RuntimeBinding, RuntimeBindingUpdate>;
+  update is ArmCustomPatchAsync<
+    RuntimeBinding,
+    RuntimeBindingUpdate,
+    LroHeaders = ArmCombinedLroHeaders<ArmOperationStatus, RuntimeBinding> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /** Deletes a runtime binding without deleting customer-owned referenced resources. */
-  delete is ArmResourceDeleteWithoutOkAsync<RuntimeBinding>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    RuntimeBinding,
+    LroHeaders = ArmCombinedLroHeaders<ArmOperationStatus, void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /** Lists runtime bindings in a workload space. */
   listByWorkloadSpace is ArmResourceListByParent<RuntimeBinding>;
@@ -54,10 +72,19 @@ interface RuntimeLinks {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<RuntimeLink>;
 
   /** Updates mutable runtime link properties. */
-  update is ArmCustomPatchAsync<RuntimeLink, RuntimeLinkUpdate>;
+  update is ArmCustomPatchAsync<
+    RuntimeLink,
+    RuntimeLinkUpdate,
+    LroHeaders = ArmCombinedLroHeaders<ArmOperationStatus, RuntimeLink> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /** Deletes a runtime link without deleting its runtime bindings. */
-  delete is ArmResourceDeleteWithoutOkAsync<RuntimeLink>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    RuntimeLink,
+    LroHeaders = ArmCombinedLroHeaders<ArmOperationStatus, void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /** Lists runtime links in a workload space. */
   listByWorkloadSpace is ArmResourceListByParent<RuntimeLink>;
@@ -73,10 +100,19 @@ interface Capabilities {
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Capability>;
 
   /** Updates mutable capability properties. */
-  update is ArmCustomPatchAsync<Capability, CapabilityUpdate>;
+  update is ArmCustomPatchAsync<
+    Capability,
+    CapabilityUpdate,
+    LroHeaders = ArmCombinedLroHeaders<ArmOperationStatus, Capability> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /** Disables and deletes a capability. */
-  delete is ArmResourceDeleteWithoutOkAsync<Capability>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Capability,
+    LroHeaders = ArmCombinedLroHeaders<ArmOperationStatus, void> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /** Lists capabilities in a workload space. */
   listByWorkloadSpace is ArmResourceListByParent<Capability>;
