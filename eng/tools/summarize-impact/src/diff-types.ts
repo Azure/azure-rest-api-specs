@@ -41,8 +41,8 @@ export type TagDiff = {
   differences?: TagConfigDiff[];
 };
 
-export type ChangeHandler = {
-  [key in FileTypes]?: (event: PRChange) => void | Promise<void>;
+export type ChangeHandler<T = void> = {
+  [key in FileTypes]?: (event: PRChange) => T;
 };
 
 export type DiffResult<T> = {

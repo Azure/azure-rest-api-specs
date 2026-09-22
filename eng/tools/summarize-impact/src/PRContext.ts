@@ -149,7 +149,7 @@ export class PRContext {
     return [...tags.values()].map((tag) => tag.name);
   }
 
-  getPossibleParentConfigurations(): string[] {
+  async getPossibleParentConfigurations(): Promise<string[]> {
     console.log("ENTER definition getPossibleParentConfigurations");
     const changedFiles = this.getChangedFiles();
     console.log(`Detect changes in the PR:\n${JSON.stringify(changedFiles, null, 2)}`);
@@ -179,7 +179,7 @@ export class PRContext {
         }
       });
     console.log("RETURN definition getPossibleParentConfigurations");
-    return readmes;
+    return Promise.resolve(readmes);
   }
 
   getAllTags(readMeContent: string): string[] {
@@ -193,18 +193,18 @@ export class PRContext {
     return [...allTags];
   }
 
-  getInputFiles(readMeContent: string, tag: string) {
+  async getInputFiles(readMeContent: string, tag: string) {
     // todo: we should refactor this to use spec model, but I haven't had time to isolate exactly what
     // openapi-markdown is doing here, so I'm just going to use the same logic for now
     const cmd = parseMarkdown(readMeContent);
-    return amd.getInputFilesForTag(cmd.markDown, tag);
+    return Promise.resolve(amd.getInputFilesForTag(cmd.markDown, tag));
   }
 
   async getChangingTags(): Promise<TagDiff[]> {
     // we are retrieving all the readme changes, no matter if they're additions, deletions, etc
     // Additionally, we're also retrieving all the readme files that may be affected by the changes in the PR, which means
     // climbing up the directory tree until we find a readme.md file if necessary.
-    const allAffectedReadmes: string[] = this.getPossibleParentConfigurations();
+    const allAffectedReadmes: string[] = await this.getPossibleParentConfigurations();
     console.log(`all affected readme are:`);
     console.log(JSON.stringify(allAffectedReadmes, null, 2));
     const Diffs: TagDiff[] = [];
@@ -240,9 +240,9 @@ export class PRContext {
       console.log(JSON.stringify(allAffectedInputFiles, null, 2));
       const getChangedInputFiles = async (tag: string) => {
         const readmeContent = await fs.promises.readFile(newReadme, "utf-8");
-        const inputFiles = this.getInputFiles(readmeContent, tag);
+        const inputFiles = await this.getInputFiles(readmeContent, tag);
         if (inputFiles) {
-          const changedInputFiles = inputFiles.filter((f) =>
+          const changedInputFiles = (inputFiles as string[]).filter((f) =>
             allAffectedInputFiles.some((a) => a.endsWith(f)),
           );
           return changedInputFiles;

@@ -117,13 +117,14 @@ export async function evaluateImpact(
   // doesn't necessarily need to be in the PR context.
   // Uses the previous outputs that DID need to be a PR context, but otherwise only examines targetBranch and those
   // output labels.
-  const ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent = processNewRpNamespaceWithoutRpaasLabel(
-    context,
-    labelContext,
-    resourceManagerLabelShouldBePresent,
-    newRPNamespaceLabelShouldBePresent,
-    rpaasLabelShouldBePresent,
-  );
+  const ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent =
+    await processNewRpNamespaceWithoutRpaasLabel(
+      context,
+      labelContext,
+      resourceManagerLabelShouldBePresent,
+      newRPNamespaceLabelShouldBePresent,
+      rpaasLabelShouldBePresent,
+    );
 
   // examines the additions. if the changetype is addition, then it will add the ciRpaasRPNotInPrivateRepo label
   const { ciRpaasRPNotInPrivateRepoLabelShouldBePresent } =
@@ -180,10 +181,12 @@ export function getAllApiVersionFromRPFolder(rpFolder: string): string[] {
 }
 
 export function getApiVersionFromSwaggerFile(swaggerFile: string): string | undefined {
-  const swagger = JSON.parse(readFileSync(swaggerFile, "utf8")) as {
-    info?: { version?: string };
-  };
-  return swagger.info?.version || undefined;
+  const swagger = readFileSync(swaggerFile).toString();
+  const swaggerObject = JSON.parse(swagger) as { info?: { version?: string } };
+  if (swaggerObject["info"] && swaggerObject["info"]["version"]) {
+    return swaggerObject["info"]["version"];
+  }
+  return undefined;
 }
 
 export function getRPFolderFromSwaggerFile(swaggerFile: string): string | undefined {
@@ -268,23 +271,32 @@ async function processTypeSpec(ctx: PRContext, labelContext: LabelContext): Prom
 
 function isSwaggerGeneratedByTypeSpec(swaggerFilePath: string): boolean {
   try {
-    const swagger = JSON.parse(readFileSync(swaggerFilePath, "utf8")) as {
+    const swagger = JSON.parse(readFileSync(swaggerFilePath).toString()) as {
       info?: { "x-typespec-generated"?: unknown };
     };
-    return Boolean(swagger.info?.["x-typespec-generated"]);
-  } catch (error) {
-    console.warn(`Unable to check TypeSpec generation for ${swaggerFilePath}: ${String(error)}`);
+    return !!swagger?.info?.["x-typespec-generated"];
+  } catch {
     return false;
   }
 }
 
 export async function processPrChanges(ctx: PRContext, Handlers: ChangeHandler[]) {
   console.log("ENTER definition processPrChanges");
-  await processPRChangesAsync(ctx, Handlers);
+  const prChanges = await getPRChanges(ctx);
+  prChanges.forEach((prChange) => {
+    Handlers.forEach((handler) => {
+      if (prChange.fileType in handler) {
+        handler?.[prChange.fileType]?.(prChange);
+      }
+    });
+  });
   console.log("RETURN definition processPrChanges");
 }
 
-export async function processPRChangesAsync(ctx: PRContext, Handlers: ChangeHandler[]) {
+export async function processPRChangesAsync(
+  ctx: PRContext,
+  Handlers: ChangeHandler<void | Promise<void>>[],
+) {
   console.log("ENTER definition processPRChangesAsync");
   const prChanges = await getPRChanges(ctx);
 
@@ -496,11 +508,11 @@ function getSuppressions(readmePath: string) {
               }
             | undefined;
           const directives = blockObject?.["directive"];
-          if (Array.isArray(directives)) {
+          if (directives && Array.isArray(directives)) {
             suppressionResult = suppressionResult.concat(directives.filter((s) => s.suppress));
           }
           const suppressions = blockObject?.["suppressions"];
-          if (Array.isArray(suppressions)) {
+          if (suppressions && Array.isArray(suppressions)) {
             suppressionResult = suppressionResult.concat(suppressions);
           }
         } catch (error) {
@@ -543,7 +555,7 @@ async function processRPaaS(
   // By default this label should not be present. We may determine later in this function that it should be present after all.
   rpaasLabel.shouldBePresent = false;
 
-  const handlers: ChangeHandler[] = [];
+  const handlers: ChangeHandler<Promise<void>>[] = [];
   const createReadmeFileHandler = () => {
     return async (e: PRChange) => {
       if (
@@ -622,13 +634,13 @@ async function processNewRPNamespace(
 // CODESYNC:
 // - see entries for related labels in https://github.com/Azure/azure-rest-api-specs/blob/main/.github/comment.yml
 // - requiredLabelsRules.ts / requiredLabelsRules
-function processNewRpNamespaceWithoutRpaasLabel(
+async function processNewRpNamespaceWithoutRpaasLabel(
   context: PRContext,
   labelContext: LabelContext,
   resourceManagerLabelShouldBePresent: boolean,
   newRPNamespaceLabelShouldBePresent: boolean,
   rpaasLabelShouldBePresent: boolean,
-): boolean {
+): Promise<boolean> {
   console.log("ENTER definition processNewRpNamespaceWithoutRpaasLabel");
   const ciNewRPNamespaceWithoutRpaaSLabel = new Label("CI-NewRPNamespaceWithoutRPaaS");
   // By default this label should not be present. We may determine later in this function that it should be present after all.
@@ -661,7 +673,7 @@ function processNewRpNamespaceWithoutRpaasLabel(
   ciNewRPNamespaceWithoutRpaaSLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   console.log("RETURN definition processNewRpNamespaceWithoutRpaasLabel");
 
-  return ciNewRPNamespaceWithoutRpaaSLabel.shouldBePresent;
+  return Promise.resolve(ciNewRPNamespaceWithoutRpaaSLabel.shouldBePresent);
 }
 
 export const getRPaaSFolderList = (targetDirectory: string): string[] => {

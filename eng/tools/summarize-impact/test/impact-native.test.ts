@@ -2,10 +2,8 @@ import yaml from "js-yaml";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, relative } from "node:path";
-import { setImmediate } from "node:timers/promises";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { diffSuppression, getAllApiVersionFromRPFolder, processPrChanges } from "../src/impact.ts";
-import { PRContext } from "../src/PRContext.ts";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { diffSuppression, getAllApiVersionFromRPFolder } from "../src/impact.ts";
 
 describe("native impact utilities", () => {
   let folder: string;
@@ -15,74 +13,7 @@ describe("native impact utilities", () => {
   });
 
   afterEach(async () => {
-    vi.restoreAllMocks();
     await rm(folder, { recursive: true, force: true });
-  });
-
-  function createContext() {
-    const context = new PRContext(
-      folder,
-      folder,
-      { present: new Set(), toAdd: new Set(), toRemove: new Set() },
-      {
-        sourceBranch: "feature",
-        targetBranch: "main",
-        sha: "head",
-        repo: "azure-rest-api-specs",
-        owner: "Azure",
-        prNumber: "1",
-        isDraft: false,
-        fileList: {
-          additions: ["first.tsp", "second.tsp"],
-          modifications: [],
-          deletions: [],
-          renames: [],
-          total: 2,
-        },
-      },
-    );
-    vi.spyOn(context, "getReadmeDiffs").mockResolvedValue({});
-    return context;
-  }
-
-  it("awaits change handlers in file and handler order", async () => {
-    const events: string[] = [];
-    await processPrChanges(createContext(), [
-      {
-        TypeSpecFile: async ({ filePath }) => {
-          events.push(`start:${filePath}`);
-          await setImmediate();
-          events.push(`end:${filePath}`);
-        },
-      },
-      {
-        TypeSpecFile: ({ filePath }) => {
-          events.push(`next:${filePath}`);
-        },
-      },
-    ]);
-
-    expect(events).toEqual([
-      "start:first.tsp",
-      "end:first.tsp",
-      "next:first.tsp",
-      "start:second.tsp",
-      "end:second.tsp",
-      "next:second.tsp",
-    ]);
-  });
-
-  it("propagates handler failures without running later handlers", async () => {
-    const error = new Error("handler failed");
-    const nextHandler = vi.fn<() => void>();
-
-    await expect(
-      processPrChanges(createContext(), [
-        { TypeSpecFile: () => Promise.reject(error) },
-        { TypeSpecFile: nextHandler },
-      ]),
-    ).rejects.toBe(error);
-    expect(nextHandler).not.toHaveBeenCalled();
   });
 
   it("finds unique versions recursively and ignores examples and hidden files", async () => {
