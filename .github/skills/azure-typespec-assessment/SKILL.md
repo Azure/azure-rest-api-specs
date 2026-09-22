@@ -38,7 +38,7 @@ Follow the [complete workflow](references/workflow.md). Apply the [classificatio
 After guarded finalization succeeds, the assessment is not complete until the
 rendered report is served and linked:
 
-1. Start `scripts/serve-assessment.mjs --file <work-directory>\assessment.html`
+1. Start `scripts/serve-assessment.mjs --file <work-directory>/assessment.html`
    through the host's attached background or long-lived process mechanism.
 2. Wait for the server to print its
    `http://127.0.0.1:<port>/assessment.html` URL and confirm the process remains

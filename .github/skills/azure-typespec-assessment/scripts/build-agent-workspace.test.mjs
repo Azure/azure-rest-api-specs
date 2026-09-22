@@ -12,6 +12,7 @@ import { readJson, writeJson } from "./cli.mjs";
  *   coverage: {semanticIntentIds: string[], downstreamCandidateIds: string[], inferenceRequestIds: string[]},
  *   input: {path: string, readExactlyOnce: boolean, bytes: number},
  *   counts: {assessedSemanticIntents: number, informationalSemanticIntents: number, guidelineRequests: number},
+ *   materialization: {script: string, command: string},
  *   serving: {script: string, command: string, requiredOutput: string},
  *   completionChecklist: string[]
  * }} AgentWorkspaceIndex
@@ -211,8 +212,16 @@ void test("builds a compact complete Agent workspace", () => {
     assert.equal(index.input.bytes, fs.statSync(path.join(work, "model-input.json")).size);
     assert.equal(index.counts.assessedSemanticIntents, 1);
     assert.equal(index.counts.informationalSemanticIntents, 0);
+    assert.equal(index.materialization.script, "scripts/materialize-assessment-results.mjs");
+    assert.equal(
+      index.materialization.command,
+      "node <skill-directory>/scripts/materialize-assessment-results.mjs --work <work-directory>",
+    );
     assert.equal(index.serving.script, "scripts/serve-assessment.mjs");
-    assert.match(index.serving.command, /serve-assessment\.mjs --file/);
+    assert.equal(
+      index.serving.command,
+      "node <skill-directory>/scripts/serve-assessment.mjs --file <work-directory>/assessment.html",
+    );
     assert.equal(index.serving.requiredOutput, "http://127.0.0.1:<port>/assessment.html");
     assert.ok(
       index.completionChecklist.some(
