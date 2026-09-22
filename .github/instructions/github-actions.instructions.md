@@ -114,9 +114,9 @@ From `package.json` comments:
 - `simple-git`: Git operations
 - `js-yaml`: YAML parsing
 - `debug`: Debug logging
-- `vitest`: Testing framework
+- `vitest`, `@vitest/coverage-v8`: Root development dependencies for testing and coverage
 - `oxlint`, `oxlint-tsgolint`: Root development dependencies for linting
-- `typescript`: Type checking
+- `typescript`: Root development dependency for type checking
 - `oxfmt`: Code formatting
 
 ## Build, Test, and Validation

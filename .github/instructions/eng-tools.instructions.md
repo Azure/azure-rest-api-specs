@@ -114,6 +114,7 @@ Every tool package is a thin extension of the shared `eng/tools` configuration. 
 
 - Reference external dependency versions with `catalog:`. Define their versions in the default `catalog` in the root `pnpm-workspace.yaml`, including dependencies used by only one tool.
 - Keep internal package references as `workspace:*`; do not put workspace links in the catalog.
+- TypeScript, Vitest, and the V8 coverage provider are supplied by the root package. Do not add per-tool copies of these devDependencies.
 
 ### `tsconfig.json`
 
