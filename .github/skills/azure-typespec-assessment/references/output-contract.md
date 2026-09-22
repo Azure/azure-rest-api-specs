@@ -7,6 +7,8 @@ After deterministic analysis, read
 `model-input.json` exactly once. The index must remain compact and provides
 exact assessed Semantic intent, informational Semantic intent, candidate,
 inference-request, and Azure Guidelines request coverage.
+It also provides the exact attached report-server command and required
+localhost URL shape used after finalization.
 `agent-decisions.draft.json` is the structural template with intentionally
 invalid unresolved placeholders; it is never a valid output. Read its schema
 from `agent-index.json.requiredOutputs.schemas.agentDecisions` exactly once.

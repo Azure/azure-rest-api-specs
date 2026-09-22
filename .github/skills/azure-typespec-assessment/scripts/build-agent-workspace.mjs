@@ -252,6 +252,12 @@ export function buildAgentWorkspace({ work }) {
       command:
         "node <skill-directory>\\scripts\\materialize-assessment-results.mjs --work <work-directory>",
     },
+    serving: {
+      script: "scripts/serve-assessment.mjs",
+      command:
+        "node <skill-directory>\\scripts\\serve-assessment.mjs --file <work-directory>\\assessment.html",
+      requiredOutput: "http://127.0.0.1:<port>/assessment.html",
+    },
     coverage: {
       semanticIntentIds: modelInput.semanticReviewUnits.map((unit) => unit.reviewUnitId),
       informationalSemanticIntentIds: modelInput.informationalSemanticIntentIds ?? [],
@@ -272,6 +278,7 @@ export function buildAgentWorkspace({ work }) {
         : []),
       "Run materialize-assessment-results.mjs and require all materialized Agent artifacts.",
       "Run finalize-assessment.mjs and require validated assessment.json and assessment.html.",
+      "Start serve-assessment.mjs as an attached long-lived process, wait for its localhost URL, and return it as the clickable Assessment report link with the absolute assessment.json path.",
     ],
     canonicalArtifactHashes: artifactHashes,
   };

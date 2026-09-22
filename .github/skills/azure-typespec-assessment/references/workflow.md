@@ -12,4 +12,5 @@ the phase currently being performed.
 Do not skip phases, substitute manual repository inspection for preparation, or
 stop between preparation and Agent judgment. Assessment is complete only after
 guarded finalization produces validated `assessment.json` and
-`assessment.html`.
+`assessment.html`, the attached report server is running, and the response
+includes its clickable `http://127.0.0.1:<port>/assessment.html` URL.
