@@ -46364,6 +46364,14 @@ components:
           minimum: 1
           maximum: 10
           description: Optional rating weight, interpreted as 1 when omitted. Boolean mode rejects weights, including an explicitly supplied 1. No schema default is emitted so SDKs do not insert rating settings into Boolean requests.
+        must_pass:
+          type: boolean
+          description: Whether this dimension is a non-compensable Boolean gate, including in Likert mode. Defaults to false. Must-pass dimensions do not accept a weight.
+          default: false
+        applies_when:
+          type: string
+          minLength: 1
+          description: Optional applicability condition for a must-pass dimension. Omission makes that gate unconditional; missing required behavior is failure, not N/A.
         explanation:
           $ref: '#/components/schemas/RubricDimensionExplanation'
           description: Optional authoring explanation. Generated for opted-in scoring; manual definitions may omit it.
@@ -47818,14 +47826,14 @@ components:
         evaluator_description:
           type: string
           description: Optional human-friendly description for the resulting evaluator. Surfaced as `EvaluatorVersion.description` on the persisted evaluator. Typically collected from the UI alongside `evaluator_display_name`. The `evaluator_` prefix disambiguates this from any other description fields on related models.
-        scoring_policy:
-          $ref: '#/components/schemas/RubricScoringPolicy'
+        scoring:
+          $ref: '#/components/schemas/RubricScoring'
           description: Scoring policy for the generated evaluator. On regeneration, omission inherits the prior evaluator's policy. On first creation, omission preserves legacy generation. Equal mode generates weight 1 for every quality dimension.
-        requirements:
+        dimensions:
           type: array
           items:
-            $ref: '#/components/schemas/RubricRequirement'
-          description: Explicit caller-approved requirements, preserved unchanged during generation. Omission inherits prior requirements on regeneration; an empty list explicitly clears them. Generation never invents hard requirements. Requires an effective scoring policy.
+            $ref: '#/components/schemas/Dimension'
+          description: Caller-approved dimensions to preserve while generating other checks. Include must_pass dimensions in this same list. Omission preserves prior approved dimensions on regeneration; an explicit list replaces the fixed set. Generation never invents must-pass gates.
       description: Caller-supplied inputs for an evaluator generation job.
       x-ms-foundry-meta:
         required_previews:
@@ -80225,82 +80233,13 @@ components:
           format: float
           minimum: 0
           maximum: 1
-          description: Optional rating threshold on the normalized 0-1 scale, interpreted as 0.5 when omitted. Boolean mode rejects this field. Explicit requirements remain independent acceptance gates.
-        scoring_policy:
-          $ref: '#/components/schemas/RubricScoringPolicy'
-          description: Explicit opt-in to versioned explainable scoring. Omission preserves legacy scoring, including the absence of hard requirements.
-        requirements:
-          type: array
-          items:
-            $ref: '#/components/schemas/RubricRequirement'
-          description: Caller-approved must-pass requirements. Requires a scoring policy. IDs are unique across requirements and quality dimensions; the combined count is subject to the configured dimension limit, normally 20. An empty list imposes no additional acceptance gates.
+          description: Optional rating threshold on the normalized 0-1 scale, interpreted as 0.5 when omitted. Boolean mode rejects this field. Must-pass dimensions remain independent acceptance gates.
+        scoring:
+          $ref: '#/components/schemas/RubricScoring'
+          description: Simple scoring choices. Omission preserves existing legacy scoring for existing clients. No policy version is required from the caller.
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Rubric-based evaluator definition — stores dimensions produced by the generate API. Used for both quality and safety evaluators.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
-    RubricBooleanDimensionResult:
-      type: object
-      required:
-        - id
-        - applicable
-        - reason
-      properties:
-        id:
-          type: string
-          description: Identifier of the configured quality dimension.
-        applicable:
-          type: boolean
-          description: Whether the quality check applies to the evaluated response.
-        passed:
-          type: boolean
-          description: A known pass/fail judgment. Absent when not applicable or when evidence is insufficient; applicability distinguishes those states.
-        reason:
-          type: string
-          description: Brief evidence-based explanation.
-      description: One Boolean quality judgment, with explicit applicability and missing-evidence semantics.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
-    RubricDimensionContribution:
-      type: object
-      required:
-        - id
-        - applicable
-        - weight
-      properties:
-        id:
-          type: string
-          description: Identifier of the quality dimension.
-        applicable:
-          type: boolean
-          description: Whether this dimension was scored for the evaluated response.
-        raw_score:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 5
-          description: Raw quality grade. Absent when the dimension is not applicable.
-        weight:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 10
-          description: Configured quality weight; always 1 in equal mode.
-        effective_weight:
-          type: number
-          format: double
-          minimum: 0
-          maximum: 1
-          description: Weight divided by the sum of applicable quality weights. Absent for N/A dimensions.
-        contribution:
-          type: number
-          format: double
-          minimum: 0
-          maximum: 1
-          description: Effective weight multiplied by (raw_score - 1) / 4. Absent for N/A dimensions.
-      description: The reproducible contribution of one quality dimension to the normalized score.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
@@ -80316,7 +80255,7 @@ components:
         weight_rationale:
           type: string
           minLength: 1
-          description: Why the weight was selected, including whether equal weighting was requested.
+          description: Why a custom rating weight was selected. Populated only when scoring.equal_weighting is false and must_pass is false. Omitted for equal weighting and Boolean gates.
         source_excerpt:
           type: string
           minLength: 1
@@ -80325,6 +80264,56 @@ components:
           $ref: '#/components/schemas/RubricSourceReference'
           description: Optional exact source location. Generation assigns the dataset, digest, and byte range, not the model. Preserved dimensions retain their original snapshot reference. A resolvable quotation does not prove that it supports a subsequently edited criterion.
       description: Concise authoring explanation, grounded in the evaluation specification rather than private model reasoning. Not an empirical claim that the weight is calibrated.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
+    RubricDimensionResult:
+      type: object
+      required:
+        - id
+        - must_pass
+        - applicable
+      properties:
+        id:
+          type: string
+          description: The dimension identifier.
+        must_pass:
+          type: boolean
+          description: Whether the dimension is a non-compensable Boolean gate.
+        applicable:
+          type: boolean
+          description: Whether the dimension applies.
+        passed:
+          type: boolean
+          description: Known Boolean verdict. Absent for N/A or insufficient evidence and for rating dimensions.
+        raw_score:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 5
+          description: Applicable Likert grade. Absent for Boolean and must-pass dimensions.
+        weight:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 10
+          description: Rating weight. Absent for Boolean and must-pass dimensions.
+        effective_weight:
+          type: number
+          format: double
+          minimum: 0
+          maximum: 1
+          description: Normalized rating weight among applicable rating dimensions.
+        contribution:
+          type: number
+          format: double
+          minimum: 0
+          maximum: 1
+          description: Contribution to the rating aggregate.
+        reason:
+          type: string
+          description: Brief evidence-based explanation.
+      description: A typed result for one dimension in the unified rubric.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
@@ -80397,60 +80386,18 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
-    RubricRequirement:
+    RubricScoring:
       type: object
-      required:
-        - id
-        - description
       properties:
-        id:
-          type: string
-          minLength: 1
-          maxLength: 128
-          pattern: ^[a-z][a-z0-9_]*$
-          description: Stable snake_case identifier, unique across both quality dimensions and requirements.
-        description:
-          type: string
-          minLength: 1
-          description: The behavior required for acceptance. Missing required behavior is a violation, not a reason to skip the requirement.
-        applies_when:
-          type: string
-          minLength: 1
-          description: Optional condition determining whether the requirement is relevant. Omission makes the requirement unconditional. An unconditional requirement cannot be marked not_applicable.
-      description: A caller-approved must-pass acceptance condition, separate from graded quality dimensions. Generation does not add or rewrite requirements.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
-    RubricRequirementResult:
-      type: object
-      required:
-        - id
-        - verdict
-        - reason
-      properties:
-        id:
-          type: string
-          description: Identifier of the requirement in the evaluator definition.
-        verdict:
-          $ref: '#/components/schemas/RubricRequirementVerdict'
-          description: Requirement judgment. Insufficient evidence is never treated as satisfaction.
-        reason:
-          type: string
-          description: Brief explanation of the observed behavior or missing evidence.
-      description: An explicit requirement judgment and its supporting explanation.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
-    RubricRequirementVerdict:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - satisfied
-            - violated
-            - not_applicable
-            - insufficient_evidence
-      description: The judgment of an explicit rubric requirement.
+        mode:
+          $ref: '#/components/schemas/RubricScoringMode'
+          description: Rubric-level scoring mode. Defaults to Boolean for new authoring.
+          default: boolean
+        equal_weighting:
+          type: boolean
+          description: Whether rating dimensions contribute equally. Defaults to true. False enables custom relative weights for rating dimensions. Boolean scoring does not accept false. Must-pass dimensions never participate in the rating average.
+          default: true
+      description: Simple rubric scoring choices. Omission preserves existing legacy scoring.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
@@ -80478,51 +80425,20 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
-    RubricScoringPolicy:
-      type: object
-      required:
-        - policy_version
-      properties:
-        policy_version:
-          $ref: '#/components/schemas/RubricScoringPolicyVersion'
-          description: Version of scoring and acceptance rules. v1 retains rating semantics; v2 defaults to Boolean.
-        mode:
-          $ref: '#/components/schemas/RubricScoringMode'
-          description: Rubric-level mode, supported only by policy v2. Omission in v2 selects Boolean and the service persists that selection. Policy v1 does not accept this field.
-        weighting:
-          $ref: '#/components/schemas/RubricWeighting'
-          description: Optional rating weights, defaulting to equal for v1 or v2 Likert. Boolean mode rejects this field. Requirements never participate in an average.
-      description: Explicit opt-in to explainable rubric scoring and caller-approved requirements. Omission of the policy preserves legacy scoring.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
-    RubricScoringPolicyVersion:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - v1
-            - v2
-      description: Versioned rubric scoring semantics.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     RubricScoringResult:
       type: object
       required:
-        - policy_version
+        - mode
+        - equal_weighting
         - decision
-        - requirement_results
+        - dimension_results
       properties:
-        policy_version:
-          $ref: '#/components/schemas/RubricScoringPolicyVersion'
-          description: Scoring policy version used for this result.
         mode:
           $ref: '#/components/schemas/RubricScoringMode'
-          description: The resolved scoring mode. Present for policy v2; absent for v1 compatibility.
-        weighting:
-          $ref: '#/components/schemas/RubricWeighting'
-          description: Rating weighting mode. Required for rating and absent for Boolean.
+          description: The resolved scoring mode.
+        equal_weighting:
+          type: boolean
+          description: Whether rating dimensions contribute equally.
         quality_score:
           type: number
           format: double
@@ -80538,28 +80454,15 @@ components:
           minimum: 0
           maximum: 1
           description: The configured rating threshold. Required for rating and absent for Boolean.
-        requirements_passed:
-          type: boolean
-          description: False when any requirement is violated; true when all applicable requirements are satisfied, including an empty set. Absent when evidence is insufficient and no violation is established.
         decision:
           $ref: '#/components/schemas/RubricScoringDecision'
-          description: Overall decision, computed from quality and explicit requirements.
-        dimension_contributions:
-          type: array
-          items:
-            $ref: '#/components/schemas/RubricDimensionContribution'
-          description: Rating grades, exclusions, effective weights, and contributions. Required for rating and absent for Boolean.
+          description: Overall decision, including non-compensable must-pass dimensions.
         dimension_results:
           type: array
           items:
-            $ref: '#/components/schemas/RubricBooleanDimensionResult'
-          description: Typed Boolean quality judgments. Required for Boolean and absent for rating.
-        requirement_results:
-          type: array
-          items:
-            $ref: '#/components/schemas/RubricRequirementResult'
-          description: Judgments of all configured requirements, including N/A and insufficient-evidence results.
-      description: Explainable quality and acceptance results for an explicitly opted-in rubric. A high quality score does not compensate for a violated requirement.
+            $ref: '#/components/schemas/RubricDimensionResult'
+          description: One result list for every dimension, including must-pass checks.
+      description: Explainable scoring results for a rubric. A high rating cannot compensate for a failed must-pass dimension.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
@@ -80595,17 +80498,6 @@ components:
           minimum: 1
           description: Exclusive UTF-8 byte offset of the source excerpt. Must be greater than start_byte and within the referenced snapshot.
       description: A reproducible pointer into a source_snapshot row in a versioned generation-artifact dataset. The digest identifies the snapshot content; byte offsets select exact UTF-8 text. This establishes text integrity, not semantic relevance.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
-    RubricWeighting:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - equal
-            - custom
-      description: How quality dimensions contribute to the aggregate rubric score.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview

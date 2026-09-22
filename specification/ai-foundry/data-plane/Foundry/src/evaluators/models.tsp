@@ -129,32 +129,6 @@ model PromptBasedEvaluatorDefinition extends EvaluatorDefinition {
 // Dimensions + Rubric-based Evaluator Definition
 // ============================================================================
 
-@doc("How quality dimensions contribute to the aggregate rubric score.")
-@added(Versions.v1)
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-union RubricWeighting {
-  string,
-
-  @doc("Every quality dimension has weight 1. Explicit unequal weights are rejected.")
-  equal: "equal",
-
-  @doc("Use each quality dimension's positive integer weight, from 1 through 10.")
-  custom: "custom",
-}
-
-@doc("Versioned rubric scoring semantics.")
-@added(Versions.v1)
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-union RubricScoringPolicyVersion {
-  string,
-
-  @doc("Original 1-5 rating policy.")
-  v1: "v1",
-
-  @doc("Boolean-default policy with an explicit 1-5 rating alternative.")
-  v2: "v2",
-}
-
 @doc("The quality-scoring mode selected for an entire rubric.")
 @added(Versions.v1)
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
@@ -168,37 +142,15 @@ union RubricScoringMode {
   likert: "likert",
 }
 
-@doc("Explicit opt-in to explainable rubric scoring and caller-approved requirements. Omission of the policy preserves legacy scoring.")
+@doc("Simple rubric scoring choices. Omission preserves existing legacy scoring.")
 @added(Versions.v1)
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model RubricScoringPolicy {
-  @doc("Version of scoring and acceptance rules. v1 retains rating semantics; v2 defaults to Boolean.")
-  policy_version: RubricScoringPolicyVersion;
+model RubricScoring {
+  @doc("Rubric-level scoring mode. Defaults to Boolean for new authoring.")
+  mode?: RubricScoringMode = RubricScoringMode.boolean;
 
-  @doc("Rubric-level mode, supported only by policy v2. Omission in v2 selects Boolean and the service persists that selection. Policy v1 does not accept this field.")
-  mode?: RubricScoringMode;
-
-  @doc("Optional rating weights, defaulting to equal for v1 or v2 Likert. Boolean mode rejects this field. Requirements never participate in an average.")
-  weighting?: RubricWeighting;
-}
-
-@doc("A caller-approved must-pass acceptance condition, separate from graded quality dimensions. Generation does not add or rewrite requirements.")
-@added(Versions.v1)
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model RubricRequirement {
-  @doc("Stable snake_case identifier, unique across both quality dimensions and requirements.")
-  @minLength(1)
-  @maxLength(128)
-  @pattern("^[a-z][a-z0-9_]*$")
-  id: string;
-
-  @doc("The behavior required for acceptance. Missing required behavior is a violation, not a reason to skip the requirement.")
-  @minLength(1)
-  description: string;
-
-  @doc("Optional condition determining whether the requirement is relevant. Omission makes the requirement unconditional. An unconditional requirement cannot be marked not_applicable.")
-  @minLength(1)
-  applies_when?: string;
+  @doc("Whether rating dimensions contribute equally. Defaults to true. False enables custom relative weights for rating dimensions. Boolean scoring does not accept false. Must-pass dimensions never participate in the rating average.")
+  equal_weighting?: boolean = true;
 }
 
 @doc("A reproducible pointer into a source_snapshot row in a versioned generation-artifact dataset. The digest identifies the snapshot content; byte offsets select exact UTF-8 text. This establishes text integrity, not semantic relevance.")
@@ -234,7 +186,7 @@ model RubricDimensionExplanation {
   @minLength(1)
   rationale: string;
 
-  @doc("Why the weight was selected, including whether equal weighting was requested.")
+  @doc("Why a custom rating weight was selected. Populated only when scoring.equal_weighting is false and must_pass is false. Omitted for equal weighting and Boolean gates.")
   @minLength(1)
   weight_rationale?: string;
 
@@ -246,101 +198,34 @@ model RubricDimensionExplanation {
   source_reference?: RubricSourceReference;
 }
 
-@doc("The judgment of an explicit rubric requirement.")
-@added(Versions.v1)
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-union RubricRequirementVerdict {
-  string,
-
-  @doc("The available evidence establishes that the requirement was met.")
-  satisfied: "satisfied",
-
-  @doc("The available evidence establishes a violation, including an omitted required action.")
-  violated: "violated",
-
-  @doc("The requirement's explicit applicability condition is false.")
-  not_applicable: "not_applicable",
-
-  @doc("The available evidence cannot establish satisfaction or violation.")
-  insufficient_evidence: "insufficient_evidence",
-}
-
 @doc("The deterministic overall rubric acceptance decision.")
 @added(Versions.v1)
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union RubricScoringDecision {
   string,
 
-  @doc("Quality meets the threshold and all applicable requirements are satisfied.")
+  @doc("Applicable dimensions meet the selected quality rule and every applicable must-pass check is satisfied.")
   pass: "pass",
 
-  @doc("Quality is below the threshold or at least one requirement is violated.")
+  @doc("The quality rule fails or at least one must-pass dimension is violated.")
   fail: "fail",
 
   @doc("No quality dimension applies and no known failure establishes rejection.")
   not_applicable: "not_applicable",
 
-  @doc("No known failure establishes rejection, but requirement evidence is insufficient.")
+  @doc("No known failure establishes rejection, but evidence is insufficient.")
   indeterminate: "indeterminate",
 }
 
-@doc("An explicit requirement judgment and its supporting explanation.")
-@added(Versions.v1)
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model RubricRequirementResult {
-  @doc("Identifier of the requirement in the evaluator definition.")
-  id: string;
-
-  @doc("Requirement judgment. Insufficient evidence is never treated as satisfaction.")
-  verdict: RubricRequirementVerdict;
-
-  @doc("Brief explanation of the observed behavior or missing evidence.")
-  reason: string;
-}
-
-@doc("The reproducible contribution of one quality dimension to the normalized score.")
-@added(Versions.v1)
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model RubricDimensionContribution {
-  @doc("Identifier of the quality dimension.")
-  id: string;
-
-  @doc("Whether this dimension was scored for the evaluated response.")
-  applicable: boolean;
-
-  @doc("Raw quality grade. Absent when the dimension is not applicable.")
-  @minValue(1)
-  @maxValue(5)
-  raw_score?: int32;
-
-  @doc("Configured quality weight; always 1 in equal mode.")
-  @minValue(1)
-  @maxValue(10)
-  weight: int32;
-
-  @doc("Weight divided by the sum of applicable quality weights. Absent for N/A dimensions.")
-  @minValue(0)
-  @maxValue(1)
-  effective_weight?: float64;
-
-  @doc("Effective weight multiplied by (raw_score - 1) / 4. Absent for N/A dimensions.")
-  @minValue(0)
-  @maxValue(1)
-  contribution?: float64;
-}
-
-@doc("Explainable quality and acceptance results for an explicitly opted-in rubric. A high quality score does not compensate for a violated requirement.")
+@doc("Explainable scoring results for a rubric. A high rating cannot compensate for a failed must-pass dimension.")
 @added(Versions.v1)
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model RubricScoringResult {
-  @doc("Scoring policy version used for this result.")
-  policy_version: RubricScoringPolicyVersion;
+  @doc("The resolved scoring mode.")
+  mode: RubricScoringMode;
 
-  @doc("The resolved scoring mode. Present for policy v2; absent for v1 compatibility.")
-  mode?: RubricScoringMode;
-
-  @doc("Rating weighting mode. Required for rating and absent for Boolean.")
-  weighting?: RubricWeighting;
+  @doc("Whether rating dimensions contribute equally.")
+  equal_weighting: boolean;
 
   @doc("Quality score, equal to the top-level score when known. Rating uses a normalized 0-1 value; Boolean uses 1 for quality pass and 0 for quality fail, never a fraction of passed checks. Absent for unknown or N/A quality.")
   @minValue(0)
@@ -355,37 +240,51 @@ model RubricScoringResult {
   @maxValue(1)
   quality_threshold?: float32;
 
-  @doc("False when any requirement is violated; true when all applicable requirements are satisfied, including an empty set. Absent when evidence is insufficient and no violation is established.")
-  requirements_passed?: boolean;
-
-  @doc("Overall decision, computed from quality and explicit requirements.")
+  @doc("Overall decision, including non-compensable must-pass dimensions.")
   decision: RubricScoringDecision;
 
-  @doc("Rating grades, exclusions, effective weights, and contributions. Required for rating and absent for Boolean.")
-  dimension_contributions?: RubricDimensionContribution[];
-
-  @doc("Typed Boolean quality judgments. Required for Boolean and absent for rating.")
-  dimension_results?: RubricBooleanDimensionResult[];
-
-  @doc("Judgments of all configured requirements, including N/A and insufficient-evidence results.")
-  requirement_results: RubricRequirementResult[];
+  @doc("One result list for every dimension, including must-pass checks.")
+  dimension_results: RubricDimensionResult[];
 }
 
-@doc("One Boolean quality judgment, with explicit applicability and missing-evidence semantics.")
+@doc("A typed result for one dimension in the unified rubric.")
 @added(Versions.v1)
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-model RubricBooleanDimensionResult {
-  @doc("Identifier of the configured quality dimension.")
+model RubricDimensionResult {
+  @doc("The dimension identifier.")
   id: string;
 
-  @doc("Whether the quality check applies to the evaluated response.")
+  @doc("Whether the dimension is a non-compensable Boolean gate.")
+  must_pass: boolean;
+
+  @doc("Whether the dimension applies.")
   applicable: boolean;
 
-  @doc("A known pass/fail judgment. Absent when not applicable or when evidence is insufficient; applicability distinguishes those states.")
+  @doc("Known Boolean verdict. Absent for N/A or insufficient evidence and for rating dimensions.")
   passed?: boolean;
 
+  @doc("Applicable Likert grade. Absent for Boolean and must-pass dimensions.")
+  @minValue(1)
+  @maxValue(5)
+  raw_score?: int32;
+
+  @doc("Rating weight. Absent for Boolean and must-pass dimensions.")
+  @minValue(1)
+  @maxValue(10)
+  weight?: int32;
+
+  @doc("Normalized rating weight among applicable rating dimensions.")
+  @minValue(0)
+  @maxValue(1)
+  effective_weight?: float64;
+
+  @doc("Contribution to the rating aggregate.")
+  @minValue(0)
+  @maxValue(1)
+  contribution?: float64;
+
   @doc("Brief evidence-based explanation.")
-  reason: string;
+  reason?: string;
 }
 
 @doc("A single dimension — one independent, measurable quality dimension within a rubric evaluator's scoring blueprint.")
@@ -410,6 +309,15 @@ model Dimension {
   @maxValue(10)
   weight?: int32;
 
+  @doc("Whether this dimension is a non-compensable Boolean gate, including in Likert mode. Defaults to false. Must-pass dimensions do not accept a weight.")
+  @added(Versions.v1)
+  must_pass?: boolean = false;
+
+  @doc("Optional applicability condition for a must-pass dimension. Omission makes that gate unconditional; missing required behavior is failure, not N/A.")
+  @added(Versions.v1)
+  @minLength(1)
+  applies_when?: string;
+
   @doc("Optional authoring explanation. Generated for opted-in scoring; manual definitions may omit it.")
   @added(Versions.v1)
   explanation?: RubricDimensionExplanation;
@@ -433,19 +341,15 @@ model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
   @maxValue(1.0)
   legacy_pass_threshold?: float32 = 0.5;
 
-  @doc("Optional rating threshold on the normalized 0-1 scale, interpreted as 0.5 when omitted. Boolean mode rejects this field. Explicit requirements remain independent acceptance gates.")
+  @doc("Optional rating threshold on the normalized 0-1 scale, interpreted as 0.5 when omitted. Boolean mode rejects this field. Must-pass dimensions remain independent acceptance gates.")
   @added(Versions.v1)
   @minValue(0.0)
   @maxValue(1.0)
   pass_threshold?: float32;
 
-  @doc("Explicit opt-in to versioned explainable scoring. Omission preserves legacy scoring, including the absence of hard requirements.")
+  @doc("Simple scoring choices. Omission preserves existing legacy scoring for existing clients. No policy version is required from the caller.")
   @added(Versions.v1)
-  scoring_policy?: RubricScoringPolicy;
-
-  @doc("Caller-approved must-pass requirements. Requires a scoring policy. IDs are unique across requirements and quality dimensions; the combined count is subject to the configured dimension limit, normally 20. An empty list imposes no additional acceptance gates.")
-  @added(Versions.v1)
-  requirements?: RubricRequirement[];
+  scoring?: RubricScoring;
 }
 
 @doc("Endpoint-based evaluator definition. The customer owns and hosts an HTTP endpoint that implements the evaluation contract. The evaluator references a Project Connection by name; the connection stores the endpoint URL and credentials (API Key or Entra ID). At execution time, the service resolves the connection to obtain the endpoint URL and authentication details, then calls the endpoint for each evaluation row.")
@@ -569,11 +473,11 @@ model EvaluatorGenerationInputs {
 
   @doc("Scoring policy for the generated evaluator. On regeneration, omission inherits the prior evaluator's policy. On first creation, omission preserves legacy generation. Equal mode generates weight 1 for every quality dimension.")
   @added(Versions.v1)
-  scoring_policy?: RubricScoringPolicy;
+  scoring?: RubricScoring;
 
-  @doc("Explicit caller-approved requirements, preserved unchanged during generation. Omission inherits prior requirements on regeneration; an empty list explicitly clears them. Generation never invents hard requirements. Requires an effective scoring policy.")
+  @doc("Caller-approved dimensions to preserve while generating other checks. Include must_pass dimensions in this same list. Omission preserves prior approved dimensions on regeneration; an explicit list replaces the fixed set. Generation never invents must-pass gates.")
   @added(Versions.v1)
-  requirements?: RubricRequirement[];
+  dimensions?: Dimension[];
 }
 
 @doc("Token consumption summary for an evaluator generation job. Populated when the job reaches a terminal state.")
