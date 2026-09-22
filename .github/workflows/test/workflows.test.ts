@@ -80,7 +80,7 @@ describe("workflow files", () => {
       "package.json",
       "pnpm-lock.yaml",
       "pnpm-workspace.yaml",
-      "tsconfig.json",
+      "tsconfig.base.json",
     ];
     expect(workflow.on?.pull_request?.paths).toEqual(paths);
     expect(workflow.on?.push?.paths).toEqual(paths);
