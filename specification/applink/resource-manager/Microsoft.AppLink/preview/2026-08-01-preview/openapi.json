@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.AppLink management service",
-    "version": "2025-08-01-preview",
+    "version": "2026-08-01-preview",
     "description": "Microsoft.AppLink Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -997,42 +997,36 @@
         "metadata"
       ]
     },
-    "AppLinkMemberPropertiesUpdate": {
+    "AppLinkMemberUpdate": {
       "type": "object",
-      "description": "AppLink Member properties",
+      "description": "The type used for update operations of the AppLinkMember.",
       "properties": {
-        "metadata": {
-          "$ref": "#/definitions/MetadataUpdate",
-          "description": "AppLink Member Metadata"
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
+        "properties": {
+          "$ref": "#/definitions/AppLinkMemberUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "AppLinkMemberUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the AppLinkMember.",
+      "properties": {
         "upgradeProfile": {
           "$ref": "#/definitions/UpgradeProfileUpdate",
           "description": "Upgrade profile."
-        },
-        "observabilityProfile": {
-          "$ref": "#/definitions/ObservabilityProfile",
-          "description": "Observability profile"
         },
         "connectivityProfile": {
           "$ref": "#/definitions/ConnectivityProfileUpdate",
           "description": "Connectivity profile."
         }
       }
-    },
-    "AppLinkMemberUpdate": {
-      "type": "object",
-      "description": "A member of an Azure Kubernetes Application Network resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/AppLinkMemberPropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
     },
     "AppLinkProperties": {
       "type": "object",
@@ -1047,22 +1041,20 @@
     },
     "AppLinkUpdate": {
       "type": "object",
-      "description": "An Azure Kubernetes Application Network resource.",
+      "description": "The type used for update operations of the AppLink.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/AppLinkProperties",
-          "description": "The resource-specific properties for this resource."
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "$ref": "#/definitions/ManagedServiceIdentityUpdate",
           "description": "The managed service identities assigned to this resource."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
+      }
     },
     "AvailableVersion": {
       "type": "object",
@@ -1128,43 +1120,6 @@
         "selfManagedVersions"
       ]
     },
-    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
-      "type": "object",
-      "description": "Managed service identity (system assigned and/or user assigned identities)",
-      "properties": {
-        "type": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
-          "description": "The type of managed identity assigned to this resource."
-        },
-        "userAssignedIdentities": {
-          "type": "object",
-          "description": "The identities assigned to this resource by the user.",
-          "additionalProperties": {
-            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
-            "x-nullable": true
-          }
-        }
-      }
-    },
-    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
-      "type": "object",
-      "title": "Tracked Resource",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
-        }
-      ]
-    },
     "ClusterType": {
       "type": "string",
       "description": "AppLinkMember cluster type",
@@ -1194,20 +1149,24 @@
         "privateConnect": {
           "$ref": "#/definitions/PrivateConnectProfile",
           "description": "Private connect profile."
+        },
+        "network": {
+          "type": "string",
+          "description": "The network name for an Azure Kubernetes Application Network member."
         }
       }
     },
     "ConnectivityProfileUpdate": {
       "type": "object",
-      "description": "AppLinkMember connectivity profile.",
+      "description": "The updatable AppLinkMember connectivity profile.",
       "properties": {
         "eastWestGateway": {
           "$ref": "#/definitions/EastWestGatewayProfileUpdate",
           "description": "East-West gateway profile."
         },
-        "privateConnect": {
-          "$ref": "#/definitions/PrivateConnectProfileUpdate",
-          "description": "Private connect profile."
+        "network": {
+          "type": "string",
+          "description": "The network name for an Azure Kubernetes Application Network member."
         }
       }
     },
@@ -1226,7 +1185,7 @@
     },
     "EastWestGatewayProfileUpdate": {
       "type": "object",
-      "description": "AppLinkMember east-west gateway profile.",
+      "description": "The updatable AppLinkMember east-west gateway profile.",
       "properties": {
         "visibility": {
           "$ref": "#/definitions/EastWestGatewayVisibility",
@@ -1273,7 +1232,7 @@
     },
     "FullyManagedUpgradeProfileUpdate": {
       "type": "object",
-      "description": "AppLinkMember fully managed upgrade profile",
+      "description": "The updatable AppLinkMember fully managed upgrade profile.",
       "properties": {
         "releaseChannel": {
           "$ref": "#/definitions/UpgradeReleaseChannel",
@@ -1301,6 +1260,24 @@
         "releaseChannels"
       ]
     },
+    "ManagedServiceIdentityUpdate": {
+      "type": "object",
+      "description": "The update-specific managed service identity (all fields optional for PATCH).",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/UserAssignedIdentity",
+            "x-nullable": true
+          }
+        }
+      }
+    },
     "Metadata": {
       "type": "object",
       "description": "AppLinkMember metadata",
@@ -1318,10 +1295,6 @@
       "required": [
         "resourceId"
       ]
-    },
-    "MetadataUpdate": {
-      "type": "object",
-      "description": "AppLinkMember metadata"
     },
     "MetricsProfile": {
       "type": "object",
@@ -1361,10 +1334,6 @@
       "required": [
         "subnetResourceId"
       ]
-    },
-    "PrivateConnectProfileUpdate": {
-      "type": "object",
-      "description": "AppLinkMember private connect profile."
     },
     "ProvisioningState": {
       "type": "string",
@@ -1454,7 +1423,7 @@
     },
     "SelfManagedUpgradeProfileUpdate": {
       "type": "object",
-      "description": "AppLinkMember self managed upgrade profile",
+      "description": "The updatable AppLinkMember self managed upgrade profile.",
       "properties": {
         "version": {
           "type": "string",
@@ -1604,7 +1573,7 @@
     },
     "UpgradeProfileUpdate": {
       "type": "object",
-      "description": "AppLinkMember upgrade profile.",
+      "description": "The updatable AppLinkMember upgrade profile.",
       "properties": {
         "mode": {
           "$ref": "#/definitions/UpgradeMode",
