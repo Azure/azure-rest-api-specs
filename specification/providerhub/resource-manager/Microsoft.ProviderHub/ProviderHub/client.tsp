@@ -40,6 +40,11 @@ using Microsoft.ProviderHub;
   "csharp"
 );
 @@clientName(ApiProfile, "ResourceTypeRegistrationApiProfile", "csharp");
+@@clientName(
+  ApplicationDataAuthorization.excludeApplicationIdFromManifest,
+  "IsApplicationIdExcludedFromManifest",
+  "csharp"
+);
 @@clientName(AuthenticationScheme, "ProviderAuthenticationScheme", "csharp");
 @@clientName(AuthorizedApplication, "ProviderAuthorizedApplication", "csharp");
 @@clientName(
@@ -151,6 +156,7 @@ using Microsoft.ProviderHub;
 @@clientName(Intent.LOW_PRIVILEGE, "LowPrivilege", "csharp");
 @@clientName(Intent.NOT_SPECIFIED, "NotSpecified", "csharp");
 @@clientName(LegacyOperation, "ProviderLegacyOperation", "csharp");
+@@clientName(LinkedAccessCheckOptions, "LinkedAccessCheckOption", "csharp");
 @@clientName(LocationQuotaRule, "ProviderLocationQuotaRule", "csharp");
 @@alternateType(LocationQuotaRule.location, Azure.Core.azureLocation, "csharp");
 @@clientName(LoggingHiddenPropertyPath, "LoggingHiddenPropertyPaths", "csharp");
@@ -297,6 +303,11 @@ using Microsoft.ProviderHub;
 @@clientName(
   ResourceTypeRegistrationProperties.enableThirdPartyS2S,
   "IsThirdPartyS2SEnabled",
+  "csharp"
+);
+@@clientName(
+  ResourceTypeRegistrationProperties.superScaleEnabled,
+  "IsSuperScaleEnabled",
   "csharp"
 );
 @@clientName(

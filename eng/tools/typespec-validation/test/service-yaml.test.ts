@@ -1,5 +1,4 @@
-import { mockFolder, mockSimpleGit } from "./mocks.ts";
-mockSimpleGit();
+import { mockFolder } from "./mocks.ts";
 
 import { resolve } from "node:path";
 import { afterEach, beforeEach, describe, expect, it, type MockInstance, vi } from "vitest";
