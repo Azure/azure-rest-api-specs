@@ -128,11 +128,11 @@ Every tool package is a thin extension of the shared `eng/tools` configuration. 
 Use the repository-root `.oxlintrc.json`; do not add per-tool lint configurations or
 dependencies. The root package provides `oxlint` and `oxlint-tsgolint`. A local
 `"lint": "oxlint ."` script can lint one tool during development; `pnpm lint` from
-the repository root lints the previously linted packages in one invocation.
+the repository root lints the enabled packages in one invocation.
 
 See [the engineering guide](../../eng/README.md#linting-and-formatting) for the
-packages excluded to preserve the previous ESLint coverage. Enable linting for
-those packages in a separate change rather than adding migration-only suppressions.
+packages not yet linted. Enable linting for those packages in a separate change
+rather than adding blanket suppressions.
 
 ### Vitest config
 

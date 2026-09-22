@@ -9,8 +9,10 @@
   },
   "scripts": {
     "build": "tsc --noEmit",
+    "check": "pnpm build && pnpm lint && pnpm format:check && pnpm test:ci",
     "format": "oxfmt . --write",
     "format:check": "oxfmt . --check",
+    "lint": "oxlint .",
     "test": "vitest",
     "test:ci": "vitest run --coverage --reporter=verbose"
   },
