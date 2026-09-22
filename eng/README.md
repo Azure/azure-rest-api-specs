@@ -72,7 +72,7 @@ Below are code convention we strive to follow in `eng` directory:
   the package/OS test matrices. Package workflows still run type checks and tests;
   they must not invoke code linting again. Package-local `pnpm lint` scripts
   remain available for development.
-- `openapi-diff-runner`, `summarize-impact`, and `typespec-migration-validation`
+- `openapi-diff-runner` and `typespec-migration-validation`
   are excluded in the root configuration. Their type checks and tests run separately.
   Unused suppressions in linted packages fail linting.
 - Discuss any desired rule divergences and explain them in the configuration.
