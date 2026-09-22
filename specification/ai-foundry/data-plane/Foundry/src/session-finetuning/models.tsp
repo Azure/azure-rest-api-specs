@@ -606,7 +606,7 @@ model FineTuningSampleRequest {
   seq_id?: int32;
 
   /** Whether to return prompt-token log-probabilities in the overall sample result. Defaults to false server-side. */
-  prompt_logprobs?: boolean;
+  prompt_logprobs?: boolean = false;
 
   /** Number of top-k log-probabilities per prompt token. Defaults to zero (disabled); maximum 20. */
   @minValue(0)
