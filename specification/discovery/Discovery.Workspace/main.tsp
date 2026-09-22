@@ -39,6 +39,7 @@ model OAuth2Auth
   is TypeSpec.Http.OAuth2Auth<[
     {
       type: OAuth2FlowType.implicit;
+      #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
       authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize";
       scopes: ["https://discovery.azure.com/.default"];
     }
