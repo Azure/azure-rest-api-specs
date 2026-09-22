@@ -470,7 +470,8 @@ export function processImpactAssessment(
     labelContext.present,
   );
   suppressionReviewRequiredLabel.shouldBePresent =
-    impactAssessment.suppressionReviewRequired || false;
+    (impactAssessment.resourceManagerRequired && impactAssessment.suppressionReviewRequired) ||
+    false;
 
   const rpassReviewRequiredLabel = new Label("RPaaS", labelContext.present);
   rpassReviewRequiredLabel.shouldBePresent = impactAssessment.rpaasChange || false;
