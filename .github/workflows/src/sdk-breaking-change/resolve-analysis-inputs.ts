@@ -117,6 +117,25 @@ export function resolveSdkLanguageConfig(input: string | undefined): SdkLanguage
   return languageConfig;
 }
 
+export function validateAnalysisSource({
+  expectedRepository,
+  actualRepository,
+  expectedSha,
+  actualSha,
+}: {
+  expectedRepository: string;
+  actualRepository: string;
+  expectedSha?: string;
+  actualSha: string;
+}): void {
+  if (actualRepository !== expectedRepository) {
+    throw new Error(`SDK breaking-change analysis does not run for fork ${actualRepository}.`);
+  }
+  if (expectedSha && actualSha !== expectedSha) {
+    throw new Error(`Pull request head changed from ${expectedSha} to ${actualSha}.`);
+  }
+}
+
 function toPosixPath(path: string): string {
   return path.split(sep).join("/");
 }

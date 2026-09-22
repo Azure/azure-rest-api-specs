@@ -6,6 +6,7 @@ import {
   resolveChangedTypeSpecConfigPaths,
   resolveChangedTypeSpecProjects,
   resolveSdkLanguageConfig,
+  validateAnalysisSource,
 } from "../../src/sdk-breaking-change/resolve-analysis-inputs.ts";
 import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts";
 
@@ -138,6 +139,40 @@ describe("resolveSdkLanguageConfig", () => {
 
   it("rejects an unsupported language", () => {
     expect(() => resolveSdkLanguageConfig("ruby")).toThrow("Unsupported SDK language: ruby");
+  });
+});
+
+describe("validateAnalysisSource", () => {
+  it("accepts the expected repository and handoff SHA", () => {
+    expect(() =>
+      validateAnalysisSource({
+        expectedRepository: "Azure/azure-rest-api-specs",
+        actualRepository: "Azure/azure-rest-api-specs",
+        expectedSha: "a".repeat(40),
+        actualSha: "a".repeat(40),
+      }),
+    ).not.toThrow();
+  });
+
+  it("rejects a fork", () => {
+    expect(() =>
+      validateAnalysisSource({
+        expectedRepository: "Azure/azure-rest-api-specs",
+        actualRepository: "contributor/azure-rest-api-specs",
+        actualSha: "a".repeat(40),
+      }),
+    ).toThrow("does not run for fork");
+  });
+
+  it("rejects a stale handoff SHA", () => {
+    expect(() =>
+      validateAnalysisSource({
+        expectedRepository: "Azure/azure-rest-api-specs",
+        actualRepository: "Azure/azure-rest-api-specs",
+        expectedSha: "a".repeat(40),
+        actualSha: "b".repeat(40),
+      }),
+    ).toThrow("Pull request head changed");
   });
 });
 

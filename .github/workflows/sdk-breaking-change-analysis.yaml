@@ -16,9 +16,8 @@ on:
         type: string
 
 permissions:
-  actions: write
+  actions: read
   contents: read
-  copilot-requests: write
   pull-requests: read
 
 jobs:
@@ -52,6 +51,10 @@ jobs:
   analyze:
     needs: resolve-trigger
     if: needs.resolve-trigger.outputs.should-run == 'true'
+    permissions:
+      contents: read
+      copilot-requests: write
+      pull-requests: read
     concurrency:
       group: >-
         sdk-breaking-analysis-${{ needs.resolve-trigger.outputs.pr-number }}-${{
@@ -65,6 +68,9 @@ jobs:
       - name: Checkout workflow repository
         uses: actions/checkout@v7
         with:
+          sparse-checkout: |
+            .github
+            eng
           persist-credentials: false
 
       - name: Install dependencies for github-script actions
@@ -91,22 +97,29 @@ jobs:
               ...context.repo,
               pull_number: pullNumber,
             });
-
             const sdkLanguageInput = process.env.SDK_LANGUAGE_INPUT;
 
-            const { resolveSdkLanguageConfig } =
+            const { resolveSdkLanguageConfig, validateAnalysisSource } =
               await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change/resolve-analysis-inputs.ts');
+            validateAnalysisSource({
+              expectedRepository: `${context.repo.owner}/${context.repo.repo}`,
+              actualRepository: pull.head.repo.full_name,
+              expectedSha: process.env.TRIGGER_SHA,
+              actualSha: pull.head.sha,
+            });
             const languageConfig = resolveSdkLanguageConfig(sdkLanguageInput);
 
             core.setOutput("repository", pull.head.repo.full_name);
-            core.setOutput("sha", process.env.TRIGGER_SHA || pull.head.sha);
+            core.setOutput("sha", pull.head.sha);
             core.setOutput("sdk-repository", languageConfig.repository);
             core.setOutput("sdk-language", languageConfig.language);
 
-      - name: Checkout specification PR source
+      - name: Checkout specification PR head
         uses: actions/checkout@v7
         with:
           repository: ${{ steps.resolve-source.outputs.repository }}
+          # The preceding step restricts this checkout to the current SHA of a branch in this repository.
+          # codeql[actions/untrusted-checkout/critical]
           ref: ${{ steps.resolve-source.outputs.sha }}
           path: repositories/azure-rest-api-specs
           persist-credentials: false
