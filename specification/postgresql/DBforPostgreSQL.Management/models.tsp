@@ -2079,8 +2079,6 @@ model MigrationProperties {
   /**
    * Names of databases to migrate.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
   @maxItems(50)
   dbsToMigrate?: string[];
 
@@ -2125,8 +2123,6 @@ model MigrationProperties {
   /**
    * When you want to trigger cutover for specific databases set 'triggerCutover' to 'True' and the names of the specific databases in this array.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
   dbsToTriggerCutoverOn?: string[];
 
   /**
@@ -2137,8 +2133,6 @@ model MigrationProperties {
   /**
    * When you want to trigger cancel for specific databases set 'triggerCutover' to 'True' and the names of the specific databases in this array.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
   dbsToCancelMigrationOn?: string[];
 }
 
@@ -2499,8 +2493,6 @@ model MigrationPropertiesForPatch {
   /**
    * Names of databases to migrate.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
   @maxItems(50)
   dbsToMigrate?: string[];
 
@@ -2539,8 +2531,6 @@ model MigrationPropertiesForPatch {
   /**
    * When you want to trigger cutover for specific databases set 'triggerCutover' to 'True' and the names of the specific databases in this array.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
   dbsToTriggerCutoverOn?: string[];
 
   /**
@@ -2551,8 +2541,6 @@ model MigrationPropertiesForPatch {
   /**
    * When you want to trigger cancel for specific databases set 'triggerCutover' to 'True' and the names of the specific databases in this array.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
   dbsToCancelMigrationOn?: string[];
 
   /**
