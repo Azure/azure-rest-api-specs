@@ -40,7 +40,7 @@ suppressions:
       reason:
         Services that share a root manifest do not need to reimplement the Operations API.
         Operations API for MPC Pro is shared with Microsoft.Orbital and is defined
-        at specification/orbital/resource-manager/Microsoft.Orbital/stable.
+        at specification/orbital/resource-manager/stable.
 ```
 
 ### Tag: package-2024-01-31-preview
@@ -49,7 +49,7 @@ These settings apply only when `--tag=package-2024-01-31-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-01-31-preview'
 input-file:
-  - Microsoft.Orbital/preview/2024-01-31-preview/planetarycomputer.json
+  - preview/2024-01-31-preview/planetarycomputer.json
 ```
 
 ### Tag: package-2025-02-11-preview
@@ -58,7 +58,7 @@ These settings apply only when `--tag=package-2025-02-11-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-02-11-preview'
 input-file:
-  - Microsoft.Orbital/preview/2025-02-11-preview/planetarycomputer.json
+  - preview/2025-02-11-preview/planetarycomputer.json
 ```
 
 ### Tag: package-2026-04-15
@@ -67,5 +67,5 @@ These settings apply only when `--tag=package-2026-04-15` is specified on the co
 
 ```yaml $(tag) == 'package-2026-04-15'
 input-file:
-  - Microsoft.Orbital/stable/2026-04-15/planetarycomputer.json
+  - stable/2026-04-15/planetarycomputer.json
 ```
