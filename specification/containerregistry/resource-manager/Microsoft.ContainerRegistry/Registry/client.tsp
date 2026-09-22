@@ -195,6 +195,7 @@ namespace Microsoft.ContainerRegistry {
 @@clientName(ArchiveVersion, "ContainerRegistryArchiveVersion", "csharp");
 @@clientName(AuditLogStatus, "ConnectedRegistryAuditLogStatus", "csharp");
 @@clientName(AuthCredential, "ContainerRegistryAuthCredential", "csharp");
+@@clientName(AuthType, "ContainerRegistryAuthType", "csharp");
 @@clientName(
   AzureADAuthenticationAsArmPolicyStatus,
   "AadAuthenticationAsArmPolicyStatus",
