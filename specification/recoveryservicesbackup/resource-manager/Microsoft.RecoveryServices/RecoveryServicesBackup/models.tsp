@@ -5883,7 +5883,6 @@ model GetRPExtendedInfoRequestResource extends Resource {
  * Request for fetching the additional details of a recovery point.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "RP is an established acronym in the BMS contract; the model name matches the service data contract."
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept in sync with the BMS service data contract."
 @added(Versions.v2026_10_01)
 model GetRPExtendedInfoRequest {
   /**
