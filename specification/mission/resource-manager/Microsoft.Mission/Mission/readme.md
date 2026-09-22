@@ -26,7 +26,7 @@ These are the global settings for the mission.
 title: missionClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2026-07-01-preview
+tag: package-2026-04-01
 ```
 
 ### Tag: package-2026-07-01-preview
