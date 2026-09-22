@@ -4115,8 +4115,9 @@ alias AzureIaaSVMProtectedItemProperties = {
   /**
    * Specifies how existing Basic VM protection is handled when configuring protection.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "The property name matches the existing BMS wire contract."
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "The property name preserves the established VM acronym casing used by Recovery Services Backup contracts."
   @added(Versions.v2026_10_01)
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   existingBasicVMProtection?: ExistingBasicVMProtection;
 
   /**
