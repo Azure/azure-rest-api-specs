@@ -39,6 +39,19 @@ interface VmApplications {
   get is ArmResourceRead<VmApplication>;
 
   /**
+   * Gets the instance view of a VM application.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "The established ARM instance view pattern is a GET action."
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "The established ARM instance view pattern is a GET action."
+  @get
+  @action("instanceView")
+  getInstanceView is ArmResourceActionSync<
+    VmApplication,
+    void,
+    VmApplication
+  >;
+
+  /**
    * Creates or updates a VM application.
    */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<VmApplication>;
