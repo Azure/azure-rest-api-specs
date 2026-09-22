@@ -52,6 +52,11 @@ Below are code convention we strive to follow in `eng` directory:
   of unused dependencies.
 - CI installs the pinned pnpm version via `.github/actions/setup-node-install-deps`
   (which reads the `packageManager` field) and runs `pnpm ci`.
+- In repeated validation loops, run installed Node.js tools directly rather than starting
+  `pnpm exec` or `npm exec` for each file or project. TypeScript consumers can use
+  `execNodeBin` from `@azure-tools/specs-shared/exec`; PowerShell scripts can invoke
+  `node` with a CLI entrypoint anchored to the repository or script directory. Keep pnpm
+  for dependency installation and package-management operations.
 
 ## Linting and formatting
 
