@@ -26,9 +26,9 @@ jobs:
         uses: ./.github/actions/install-deps-github-script
 
       - name: Validate label authorization
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9.0.0
         with:
           script: |
             const { default: checkLabel } =
-              await import('${{ github.workspace }}/.github/workflows/src/protected-labels/check-label.js');
+              await import('${{ github.workspace }}/.github/workflows/src/protected-labels/check-label.ts');
             await checkLabel({ github, context, core });

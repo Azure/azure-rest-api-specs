@@ -1,8 +1,8 @@
 import "@typespec/rest";
 import "@typespec/http";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
 
 using Azure.ResourceManager.Foundations;
 using Azure.ResourceManager;
@@ -389,7 +389,6 @@ model IotDpsPropertiesDescription {
   @added(Versions.v2026_06_01_preview)
   @removed(Versions.v2026_08_31)
   @added(Versions.v2026_11_01)
-  @maxItems(1)
   @identifiers(#["namespaceUuid"])
   deviceRegistryNamespaces?: DeviceRegistryNamespaceDescription[];
 
@@ -1000,7 +999,7 @@ model CertificateBodyDescription {
 }
 
 /**
- * The state of Device Registry linking for a provisioning service.
+ * The state of ADR linking for a provisioning service.
  */
 @added(Versions.v2026_06_01_preview)
 @removed(Versions.v2026_08_31)

@@ -73,11 +73,11 @@ jobs:
 
       - id: get-label-action
         name: ARM Universal Auto SignOff
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9.0.0
         with:
           script: |
             const { default: getLabelAction } =
-              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-universal-auto-signoff.js');
+              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-universal-auto-signoff.ts');
             return await getLabelAction({ github, context, core });
 
       # Pilot mode owns only the test label; it never changes ARMSignedOff.

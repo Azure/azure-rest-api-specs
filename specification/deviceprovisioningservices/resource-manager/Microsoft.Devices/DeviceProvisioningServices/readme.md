@@ -66,6 +66,15 @@ input-file:
   - preview/2026-03-01-preview/iotdps.json
 ```
 
+### Tag: package-preview-2026-06
+
+These settings apply only when `--tag=package-preview-2026-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-06'
+input-file:
+  - preview/2026-06-01-preview/iotdps.json
+```
+
 ### Tag: package-preview-2025-02
 
 These settings apply only when `--tag=package-preview-2025-02` is specified on the command line.
