@@ -121,6 +121,19 @@ describe("contributor readiness", () => {
     expect(f.core.summary.write).toHaveBeenCalledOnce();
   });
 
+  it.each([null, {}])("reports an unavailable PR author as incomplete: %j", async (user) => {
+    const f = setup();
+    f.github.rest.pulls.get.mockResolvedValue({ data: { ...pr, user } });
+    await f.run();
+    expect(f.createCheck).toHaveBeenCalledWith(expect.objectContaining({ conclusion: "neutral" }));
+    const [comment] = f.github.rest.issues.createComment.mock.calls[0] as [{ body: string }];
+    expect(comment.body).toContain("| PR author |");
+    expect(comment.body).toContain("The PR author no longer has a resolvable GitHub account.");
+    expect(f.core.summary.addRaw).toHaveBeenCalledWith(
+      expect.stringContaining("Could not fully verify contributor readiness."),
+    );
+  });
+
   it("reports private-or-missing membership conditionally, not as an invalid review", async () => {
     const f = setup();
     f.membership.mockRejectedValue(createMockRequestError(404));
@@ -172,6 +185,23 @@ describe("contributor readiness", () => {
     expect(call.body).toContain("Could not associate an author or committer");
   });
 
+  it.each([null, {}])(
+    "reports an unavailable submitted reviewer as incomplete: %j",
+    async (user) => {
+      const f = setup();
+      f.listReviews.mockResolvedValue({ data: [{ id: 20, state: "COMMENTED", user }] });
+      await f.run();
+      expect(f.createCheck).toHaveBeenCalledWith(
+        expect.objectContaining({ conclusion: "neutral" }),
+      );
+      const [comment] = f.github.rest.issues.createComment.mock.calls[0] as [{ body: string }];
+      expect(comment.body).toContain("| Review 20 |");
+      expect(comment.body).toContain(
+        "The submitted review no longer has a resolvable GitHub account.",
+      );
+    },
+  );
+
   it("does not enforce human onboarding for automation", async () => {
     const f = setup();
     f.listCommits.mockResolvedValue({
@@ -194,6 +224,15 @@ describe("contributor readiness", () => {
     await expect(f.run()).rejects.toThrow("503");
     expect(f.createCheck).toHaveBeenCalledWith(expect.objectContaining({ conclusion: "neutral" }));
     expect(f.core.error).toHaveBeenCalledOnce();
+  });
+
+  it("does not turn a public membership API failure into a missing-membership finding", async () => {
+    const f = setup();
+    f.membership.mockRejectedValue(createMockRequestError(503));
+    await expect(f.run()).rejects.toThrow("503");
+    const [comment] = f.github.rest.issues.createComment.mock.calls[0] as [{ body: string }];
+    expect(comment.body).toContain("Could not complete the evaluation");
+    expect(comment.body).not.toContain("membership is not publicly visible");
   });
 
   it("does not publish when a PR changes during evaluation", async () => {
@@ -257,6 +296,51 @@ describe("contributor readiness", () => {
     f.permission.mockResolvedValue({ data: { permission: "read" } });
     await f.run();
     expect(f.createCheck).toHaveBeenCalledOnce();
+  });
+
+  it("allows a write-access maintainer who is not a participant to refresh", async () => {
+    const f = setup();
+    f.context.eventName = "issue_comment";
+    f.context.payload = {
+      issue: { number: 1 },
+      comment: { id: 1, body: "/azsdk check-access" },
+      sender: { id: 55, login: "maintainer", type: "User" },
+    };
+    await f.run();
+    expect(f.permission).toHaveBeenCalledWith({
+      owner: "Azure",
+      repo: "example",
+      username: "maintainer",
+    });
+    expect(f.createCheck).toHaveBeenCalledOnce();
+  });
+
+  it("preserves unknown author coverage when a reviewer requests a refresh", async () => {
+    const f = setup();
+    f.github.rest.pulls.get.mockResolvedValue({ data: { ...pr, user: null } });
+    f.context.eventName = "issue_comment";
+    f.context.payload = {
+      issue: { number: 1 },
+      comment: { id: 1, body: "/azsdk check-access" },
+      sender: reviewer,
+    };
+    await f.run();
+    expect(f.createCheck).toHaveBeenCalledWith(expect.objectContaining({ conclusion: "neutral" }));
+    const [comment] = f.github.rest.issues.createComment.mock.calls[0] as [{ body: string }];
+    expect(comment.body).toContain("| PR author |");
+  });
+
+  it("rejects a refresh payload for a different PR before collecting or publishing", async () => {
+    const f = setup();
+    f.context.eventName = "issue_comment";
+    f.context.payload = {
+      issue: { number: 2 },
+      comment: { id: 1, body: "/azsdk check-access" },
+      sender: reviewer,
+    };
+    await expect(f.run()).rejects.toThrow("Unexpected contributor readiness command");
+    expect(f.listCommits).not.toHaveBeenCalled();
+    expect(f.createCheck).not.toHaveBeenCalled();
   });
 
   it("rejects an unrelated commenter without verified write access", async () => {

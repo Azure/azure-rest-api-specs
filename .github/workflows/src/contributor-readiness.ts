@@ -10,6 +10,7 @@ const ONBOARDING = "https://eng.ms/docs/products/azure-developer-experience/onbo
 
 type GitHub = AsyncFunctionArguments["github"];
 type Inputs = Pick<AsyncFunctionArguments, "github" | "context" | "core">;
+type PullRequest = Awaited<ReturnType<GitHub["rest"]["pulls"]["get"]>>["data"];
 type Account = { id: number; login: string; type: string };
 type Participant = Account & { roles: Set<string> };
 export type ReadinessFinding = { subject: string; message: string; unknown?: boolean };
@@ -24,12 +25,8 @@ function isAutomation(account: Account): boolean {
   return account.type === "Bot" || (account.id === 19864447 && account.login === "web-flow");
 }
 
-/** Only GitHub's run metadata is trusted when a review workflow ran in a fork. */
-export async function resolveReadinessPullRequest({
-  github,
-  context,
-  core,
-}: Inputs): Promise<number | null> {
+export async function resolveReadinessPullRequest(inputs: Inputs): Promise<number | null> {
+  const { context } = inputs;
   if (context.eventName === "pull_request_target") {
     return (context.payload as WebhookEvent<"pull-request">).pull_request.number;
   }
@@ -40,6 +37,15 @@ export async function resolveReadinessPullRequest({
       : null;
   }
   if (context.eventName !== "workflow_run") throw new Error("Unsupported readiness trigger");
+  return resolveReviewWorkflowPullRequest(inputs);
+}
+
+/** Only GitHub's run metadata is trusted when a review workflow ran in a fork. */
+async function resolveReviewWorkflowPullRequest({
+  github,
+  context,
+  core,
+}: Inputs): Promise<number | null> {
   const payload = context.payload as WebhookEvent<"workflow-run", "completed">;
   const { data: run } = await github.rest.actions.getWorkflowRun({
     ...context.repo,
@@ -83,7 +89,7 @@ export async function collectReadinessParticipants(
   github: GitHub,
   owner: string,
   repo: string,
-  pr: Awaited<ReturnType<GitHub["rest"]["pulls"]["get"]>>["data"],
+  pr: PullRequest,
   findings: ReadinessFinding[],
 ): Promise<Participant[]> {
   const participants = new Map<number, Participant>();
@@ -105,7 +111,13 @@ export async function collectReadinessParticipants(
     participants.set(account.id, participant);
     return true;
   }
-  add(pr.user, "PR author");
+  if (!add(pr.user, "PR author")) {
+    findings.push({
+      subject: "PR author",
+      unknown: true,
+      message: "The PR author no longer has a resolvable GitHub account.",
+    });
+  }
   const commits = await github.paginate(github.rest.pulls.listCommits, {
     owner,
     repo,
@@ -138,8 +150,7 @@ export async function collectReadinessParticipants(
   });
   for (const review of reviews) {
     if (review.state === "PENDING") continue;
-    add(review.user, "submitted reviewer");
-    if (!review.user)
+    if (!add(review.user, "submitted reviewer"))
       findings.push({
         subject: `Review ${review.id}`,
         unknown: true,
@@ -147,6 +158,16 @@ export async function collectReadinessParticipants(
       });
   }
   return [...participants.values()].sort((a, b) => a.login.localeCompare(b.login));
+}
+
+async function publicMembership(github: GitHub, org: string, username: string): Promise<boolean> {
+  try {
+    await github.rest.orgs.checkPublicMembershipForUser({ org, username });
+    return true;
+  } catch (error) {
+    if (status(error) === 404) return false;
+    throw error;
+  }
 }
 
 async function writeAccess(github: GitHub, owner: string, repo: string, username: string) {
@@ -194,22 +215,8 @@ export async function evaluateReadinessParticipants(
   for (const participant of participants) {
     if (isAutomation(participant)) continue;
     for (const org of ["Microsoft", "Azure"]) {
-      const visible = await observe(
-        core,
-        findings,
-        `${participant.login}: ${org} visibility`,
-        async () => {
-          try {
-            await github.rest.orgs.checkPublicMembershipForUser({
-              org,
-              username: participant.login,
-            });
-            return true;
-          } catch (error) {
-            if (status(error) === 404) return false;
-            throw error;
-          }
-        },
+      const visible = await observe(core, findings, `${participant.login}: ${org} visibility`, () =>
+        publicMembership(github, org, participant.login),
       );
       if (visible === false)
         findings.push({
@@ -290,11 +297,9 @@ export function renderReadiness(
   ].join("\n");
 }
 
-export async function checkContributorReadiness(
-  { github, context, core }: Inputs,
-  number: number,
-): Promise<void> {
+export async function checkContributorReadiness(inputs: Inputs, number: number): Promise<void> {
   if (!Number.isSafeInteger(number) || number <= 0) throw new Error("Invalid PR number");
+  const { github, context, core } = inputs;
   const { owner, repo } = context.repo;
   const { data: pr } = await github.rest.pulls.get({ owner, repo, pull_number: number });
   if (pr.state !== "open") {
@@ -306,24 +311,9 @@ export async function checkContributorReadiness(
   let failure: Error | undefined;
   // A command must be authorized before it can publish or refresh the report.
   if (context.eventName === "issue_comment") {
-    const payload = context.payload as WebhookEvent<"issue-comment", "created">;
-    if (
-      payload.issue.number !== number ||
-      payload.comment.body.trim() !== COMMAND ||
-      isAutomation(payload.sender)
-    ) {
-      throw new Error("Unexpected contributor readiness command");
-    }
-    participants = await collectReadinessParticipants(github, owner, repo, pr, findings);
-    const authorized =
-      participants.some((person) => person.id === payload.sender.id) ||
-      (await observe(core, [], "refresh authorization", () =>
-        writeAccess(github, owner, repo, payload.sender.login),
-      ));
-    if (!authorized) {
-      core.info("Ignoring refresh from a nonparticipant without verified write access.");
-      return;
-    }
+    const authorizedParticipants = await collectAuthorizedRefreshParticipants(inputs, pr, findings);
+    if (!authorizedParticipants) return;
+    participants = authorizedParticipants;
   }
   try {
     if (context.eventName !== "issue_comment") {
@@ -339,7 +329,45 @@ export async function checkContributorReadiness(
       message: "Could not complete the evaluation. Rerun the workflow or use the refresh command.",
     });
   }
-  const { data: latest } = await github.rest.pulls.get({ owner, repo, pull_number: number });
+  await publishReadinessReport(inputs, pr, participants, findings);
+  if (failure) throw failure;
+}
+
+async function collectAuthorizedRefreshParticipants(
+  { github, context, core }: Inputs,
+  pr: PullRequest,
+  findings: ReadinessFinding[],
+): Promise<Participant[] | undefined> {
+  const { owner, repo } = context.repo;
+  const payload = context.payload as WebhookEvent<"issue-comment", "created">;
+  if (
+    payload.issue.number !== pr.number ||
+    payload.comment.body.trim() !== COMMAND ||
+    isAutomation(payload.sender)
+  ) {
+    throw new Error("Unexpected contributor readiness command");
+  }
+  const participants = await collectReadinessParticipants(github, owner, repo, pr, findings);
+  const authorized =
+    participants.some((person) => person.id === payload.sender.id) ||
+    (await observe(core, [], "refresh authorization", () =>
+      writeAccess(github, owner, repo, payload.sender.login),
+    ));
+  if (!authorized) {
+    core.info("Ignoring refresh from a nonparticipant without verified write access.");
+    return undefined;
+  }
+  return participants;
+}
+
+async function publishReadinessReport(
+  { github, context, core }: Inputs,
+  pr: PullRequest,
+  participants: Participant[],
+  findings: ReadinessFinding[],
+): Promise<void> {
+  const { owner, repo } = context.repo;
+  const { data: latest } = await github.rest.pulls.get({ owner, repo, pull_number: pr.number });
   if (latest.state !== "open" || latest.head.sha !== pr.head.sha) {
     throw new Error("PR changed during evaluation; rerun contributor readiness");
   }
@@ -349,7 +377,7 @@ export async function checkContributorReadiness(
     repo,
     name: CHECK_NAME,
     head_sha: pr.head.sha,
-    external_id: `contributor-readiness:${number}`,
+    external_id: `contributor-readiness:${pr.number}`,
     status: "completed",
     conclusion: findings.length ? "neutral" : "success",
     output: {
@@ -361,6 +389,18 @@ export async function checkContributorReadiness(
       summary: body,
     },
   });
+  await updateReadinessComment(github, owner, repo, pr.number, body, findings.length > 0);
+  await core.summary.addRaw(body).write();
+}
+
+async function updateReadinessComment(
+  github: GitHub,
+  owner: string,
+  repo: string,
+  number: number,
+  body: string,
+  hasFindings: boolean,
+): Promise<void> {
   const comments = await github.paginate(github.rest.issues.listComments, {
     owner,
     repo,
@@ -381,7 +421,7 @@ export async function checkContributorReadiness(
       comment_id: commentId,
       body: commentBody,
     });
-  } else if (!commentId && findings.length) {
+  } else if (!commentId && hasFindings) {
     await github.rest.issues.createComment({
       owner,
       repo,
@@ -389,6 +429,4 @@ export async function checkContributorReadiness(
       body: commentBody,
     });
   }
-  await core.summary.addRaw(body).write();
-  if (failure) throw failure;
 }
