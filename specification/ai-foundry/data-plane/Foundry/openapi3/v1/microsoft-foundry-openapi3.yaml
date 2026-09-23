@@ -6388,7 +6388,7 @@ paths:
   /jobs/{name}/artifacts:
     get:
       operationId: Jobs_listArtifacts
-      description: List the artifacts produced by a job, including its log files. Logs are ordinary artifacts stored under the well-known `azureml-logs/`, `user_logs/` and `system_logs/` path prefixes, so they are retrieved by filtering on `path`.
+      description: List artifact descriptors for a job, including its log files, without returning download credentials. Logs are ordinary artifacts under the `azureml-logs/`, `user_logs/` and `system_logs/` directories. Follow `nextLink` unchanged to retrieve subsequent pages.
       parameters:
         - name: api-version
           in: query
@@ -6414,24 +6414,26 @@ paths:
         - name: path
           in: query
           required: false
-          description: Optional artifact path or path prefix to filter by.
+          description: Optional directory path relative to the job's artifact container. A non-empty path is treated as a directory prefix with a trailing slash; for example, `outputs` selects artifacts under `outputs/`, not `outputs-extra/`.
           schema:
             type: string
           explode: false
-        - name: continuationToken
+        - name: $skipToken
           in: query
           required: false
-          description: Continuation token for the next page.
+          description: An opaque continuation token supplied in the preceding response's `nextLink`. Prefer following `nextLink` unchanged rather than constructing this parameter.
           schema:
             type: string
           explode: false
-        - name: pageSize
+        - name: maxpagesize
           in: query
           required: false
-          description: Maximum number of artifacts per page.
+          description: Maximum number of artifacts in one page, from 1 to 500. The service may return fewer items. Supported only for jobs routed to the Foundry Training Job backend, which uses 100 when omitted. Omit this parameter for legacy Run History jobs; specifying it on that route is rejected.
           schema:
             type: integer
             format: int32
+            minimum: 1
+            maximum: 500
           explode: false
       responses:
         '200':
@@ -6445,7 +6447,7 @@ paths:
   /jobs/{name}/artifacts/contentinfo:
     get:
       operationId: Jobs_getArtifactContentInformation
-      description: Get content information, including a readable content URI and byte length, for the artifacts produced by a job. Use this to download artifact or log content.
+      description: Get content access information for one artifact identified by its exact path. Returns a download URI and the byte length when available; this operation does not list a directory or return a page of artifacts.
       parameters:
         - name: api-version
           in: query
@@ -6470,17 +6472,11 @@ paths:
             type: string
         - name: path
           in: query
-          required: false
-          description: Optional artifact path prefix to filter by.
+          required: true
+          description: The required, case-sensitive path of one artifact relative to the job's artifact container, such as `user_logs/std_log.txt`. A directory prefix is not accepted.
           schema:
             type: string
-          explode: false
-        - name: continuationToken
-          in: query
-          required: false
-          description: Continuation token for the next page.
-          schema:
-            type: string
+            minLength: 1
           explode: false
       responses:
         '200':
@@ -6488,7 +6484,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ArtifactContentInformationList'
+                $ref: '#/components/schemas/ArtifactContentInformation'
       tags:
         - CommandJob
   /jobs/{name}/cancel:
@@ -41216,93 +41212,38 @@ components:
     Artifact:
       type: object
       required:
-        - origin
-        - container
         - path
       properties:
-        artifactId:
-          type: string
-          description: The artifact id.
-        origin:
-          type: string
-          description: The artifact origin.
-        container:
-          type: string
-          description: The container name.
         path:
           type: string
-          description: The artifact path.
-        etag:
-          type: string
-          description: The artifact Etag.
-        createdTime:
-          type: string
-          format: date-time
-          description: The artifact creation time in UTC.
-        dataPath:
-          $ref: '#/components/schemas/ArtifactDataPath'
-          description: The artifact data path.
-        tags:
-          type: object
-          unevaluatedProperties:
-            type: string
-          description: The artifact tags.
-      description: An artifact.
+          description: The case-sensitive artifact path relative to the job's artifact container.
+        contentLength:
+          anyOf:
+            - type: integer
+              format: int64
+            - type: 'null'
+          description: The artifact content length in bytes, when available. An omitted or null value means the length is unknown; zero identifies an empty file.
+      description: A job artifact descriptor. Listing artifacts does not return download credentials.
     ArtifactContentInformation:
       type: object
+      required:
+        - path
+        - contentUri
       properties:
+        path:
+          type: string
+          description: The case-sensitive artifact path relative to the job's artifact container.
         contentUri:
           type: string
           format: uri
-          description: The content URI.
-        origin:
-          type: string
-          description: The artifact origin.
-        container:
-          type: string
-          description: The container name.
-        path:
-          type: string
-          description: The artifact path.
-        tags:
-          type: object
-          unevaluatedProperties:
-            type: string
-          description: The artifact tags.
+          description: The URI used to download the artifact content. Obtain a new URI from this operation when the current URI expires; storage network restrictions still apply.
         contentLength:
-          type: integer
-          format: int64
-          description: The content byte length.
-      description: Artifact content information.
-    ArtifactContentInformationList:
-      type: object
-      required:
-        - value
-      properties:
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/ArtifactContentInformation'
-          description: The entries in the page.
-        continuationToken:
-          type: string
-          description: Token for the next page.
-        nextLink:
-          type: string
-          description: URL for the next page.
-      description: A page of artifact content information.
-    ArtifactDataPath:
-      type: object
-      properties:
-        dataStoreName:
-          type: string
-          description: The data store name.
-        relativePath:
-          type: string
-          description: The relative path within the data store.
-        sqlDataPath:
-          description: SQL data path information.
-      description: A data store path.
+          anyOf:
+            - type: integer
+              format: int64
+            - type: 'null'
+          description: The artifact content length in bytes, when available. An omitted or null value means the length is unknown; zero identifies an empty file.
+      description: Content access information for one job artifact.
     ArtifactList:
       type: object
       required:
@@ -41313,12 +41254,10 @@ components:
           items:
             $ref: '#/components/schemas/Artifact'
           description: The artifacts in the page.
-        continuationToken:
-          type: string
-          description: Token for the next page.
         nextLink:
           type: string
-          description: URL for the next page.
+          format: uri
+          description: The URL to the next page, if more artifacts are available. Follow this URL unchanged rather than constructing a continuation request.
       description: A page of artifacts.
     ArtifactProfile:
       type: object

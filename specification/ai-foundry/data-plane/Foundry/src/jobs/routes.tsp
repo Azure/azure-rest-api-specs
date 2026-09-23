@@ -53,9 +53,10 @@ interface Jobs {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Artifact sub-resource path; cannot be expressed with standard resource operations."
-  @doc("List the artifacts produced by a job, including its log files. Logs are ordinary artifacts stored under the well-known `azureml-logs/`, `user_logs/` and `system_logs/` path prefixes, so they are retrieved by filtering on `path`.")
+  @doc("List artifact descriptors for a job, including its log files, without returning download credentials. Logs are ordinary artifacts under the `azureml-logs/`, `user_logs/` and `system_logs/` directories. Follow `nextLink` unchanged to retrieve subsequent pages.")
   @route("/jobs/{name}/artifacts")
   @get
+  @list
   listArtifacts(
     ...FoundryDataPlaneApiVersionParameter,
     ...JobsPreviewHeader,
@@ -64,21 +65,24 @@ interface Jobs {
     @path
     name: string,
 
-    @doc("Optional artifact path or path prefix to filter by.")
+    @doc("Optional directory path relative to the job's artifact container. A non-empty path is treated as a directory prefix with a trailing slash; for example, `outputs` selects artifacts under `outputs/`, not `outputs-extra/`.")
     @query
     path?: string,
 
-    @doc("Continuation token for the next page.")
-    @query
-    continuationToken?: string,
+    @doc("An opaque continuation token supplied in the preceding response's `nextLink`. Prefer following `nextLink` unchanged rather than constructing this parameter.")
+    @query("$skipToken")
+    skipToken?: string,
 
-    @doc("Maximum number of artifacts per page.")
-    @query
-    pageSize?: int32,
+    @doc("Maximum number of artifacts in one page, from 1 to 500. The service may return fewer items. Supported only for jobs routed to the Foundry Training Job backend, which uses 100 when omitted. Omit this parameter for legacy Run History jobs; specifying it on that route is rejected.")
+    @query("maxpagesize")
+    @pageSize
+    @minValue(1)
+    @maxValue(500)
+    maxPageSize?: int32,
   ): ArtifactList;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Artifact sub-resource path; cannot be expressed with standard resource operations."
-  @doc("Get content information, including a readable content URI and byte length, for the artifacts produced by a job. Use this to download artifact or log content.")
+  @doc("Get content access information for one artifact identified by its exact path. Returns a download URI and the byte length when available; this operation does not list a directory or return a page of artifacts.")
   @route("/jobs/{name}/artifacts/contentinfo")
   @get
   getArtifactContentInformation(
@@ -89,14 +93,11 @@ interface Jobs {
     @path
     name: string,
 
-    @doc("Optional artifact path prefix to filter by.")
+    @doc("The required, case-sensitive path of one artifact relative to the job's artifact container, such as `user_logs/std_log.txt`. A directory prefix is not accepted.")
     @query
-    path?: string,
-
-    @doc("Continuation token for the next page.")
-    @query
-    continuationToken?: string,
-  ): ArtifactContentInformationList;
+    @minLength(1)
+    path: string,
+  ): ArtifactContentInformation;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "PUT create-or-update pattern required by the Job API wire format"
   @doc("Create and execute a Job. For update case, the Tags in the definition passed in will replace Tags in the existing job.")

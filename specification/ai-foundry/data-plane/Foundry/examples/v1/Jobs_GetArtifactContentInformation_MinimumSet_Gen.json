@@ -4,12 +4,14 @@
   "parameters": {
     "api-version": "v1",
     "name": "my_training_job_01",
+    "path": "user_logs/std_log.txt",
     "Foundry-Features": "Jobs=V1Preview"
   },
   "responses": {
     "200": {
       "body": {
-        "value": []
+        "path": "user_logs/std_log.txt",
+        "contentUri": "https://sample.blob.core.windows.net/job-artifacts/user_logs/std_log.txt?sig=example"
       }
     }
   }

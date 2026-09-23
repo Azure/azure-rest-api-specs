@@ -422,86 +422,34 @@ union ListViewType {
   All: "All",
 }
 
-@doc("A data store path.")
-model ArtifactDataPath {
-  @doc("The data store name.")
-  dataStoreName?: string;
-
-  @doc("The relative path within the data store.")
-  relativePath?: string;
-
-  @doc("SQL data path information.")
-  sqlDataPath?: unknown;
-}
-
-@doc("An artifact.")
+@doc("A job artifact descriptor. Listing artifacts does not return download credentials.")
 model Artifact {
-  @doc("The artifact id.")
-  artifactId?: string;
-
-  @doc("The artifact origin.")
-  origin: string;
-
-  @doc("The container name.")
-  container: string;
-
-  @doc("The artifact path.")
+  @doc("The case-sensitive artifact path relative to the job's artifact container.")
   path: string;
 
-  @doc("The artifact Etag.")
-  etag?: string;
-
-  @doc("The artifact creation time in UTC.")
-  createdTime?: utcDateTime;
-
-  @doc("The artifact data path.")
-  dataPath?: ArtifactDataPath;
-
-  @doc("The artifact tags.")
-  tags?: Record<string>;
+  @doc("The artifact content length in bytes, when available. An omitted or null value means the length is unknown; zero identifies an empty file.")
+  contentLength?: int64 | null;
 }
 
 @doc("A page of artifacts.")
 model ArtifactList {
   @doc("The artifacts in the page.")
+  @pageItems
   value: Artifact[];
 
-  @doc("Token for the next page.")
-  continuationToken?: string;
-
-  @doc("URL for the next page.")
-  nextLink?: string;
+  @doc("The URL to the next page, if more artifacts are available. Follow this URL unchanged rather than constructing a continuation request.")
+  @nextLink
+  nextLink?: url;
 }
 
-@doc("Artifact content information.")
+@doc("Content access information for one job artifact.")
 model ArtifactContentInformation {
-  @doc("The content URI.")
-  contentUri?: url;
+  @doc("The case-sensitive artifact path relative to the job's artifact container.")
+  path: string;
 
-  @doc("The artifact origin.")
-  origin?: string;
+  @doc("The URI used to download the artifact content. Obtain a new URI from this operation when the current URI expires; storage network restrictions still apply.")
+  contentUri: url;
 
-  @doc("The container name.")
-  container?: string;
-
-  @doc("The artifact path.")
-  path?: string;
-
-  @doc("The artifact tags.")
-  tags?: Record<string>;
-
-  @doc("The content byte length.")
-  contentLength?: int64;
-}
-
-@doc("A page of artifact content information.")
-model ArtifactContentInformationList {
-  @doc("The entries in the page.")
-  value: ArtifactContentInformation[];
-
-  @doc("Token for the next page.")
-  continuationToken?: string;
-
-  @doc("URL for the next page.")
-  nextLink?: string;
+  @doc("The artifact content length in bytes, when available. An omitted or null value means the length is unknown; zero identifies an empty file.")
+  contentLength?: int64 | null;
 }
