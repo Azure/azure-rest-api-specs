@@ -174,16 +174,16 @@ model StorageApplianceProperties {
  */
 model StorageApplianceSpec {
   /**
+   * The credentials of the administrative interface on this storage appliance.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  administratorCredentials: AdministrativeCredentials;
+
+  /**
    * The resource ID of the rack where this storage appliance resides.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   rackId: Azure.Core.armResourceIdentifier;
-
-  /**
-   * The SKU for the storage appliance.
-   */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  storageApplianceSkuId: string;
 
   /**
    * The slot the storage appliance is in the rack based on the BOM configuration.
@@ -199,10 +199,10 @@ model StorageApplianceSpec {
   serialNumber: string;
 
   /**
-   * The credentials of the administrative interface on this storage appliance.
+   * The SKU for the storage appliance.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  administratorCredentials: AdministrativeCredentials;
+  storageApplianceSkuId: string;
 }
 
 /**
@@ -332,7 +332,7 @@ model StorageAppliancePatchParameters {
   /**
    * The Azure resource tags that will replace the existing ones.
    */
-  ...Foundations.ArmTagsProperty;
+  ...TagsParameter;
 }
 
 /**
