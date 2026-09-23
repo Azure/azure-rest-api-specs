@@ -79,9 +79,6 @@
       "name": "MicrosoftEntraAuthentications"
     },
     {
-      "name": "Backups"
-    },
-    {
       "name": "ChangeDataCaptureCapabilities"
     },
     {
@@ -1028,65 +1025,6 @@
           },
           "Reset the sole PostgreSQL administrator role password": {
             "$ref": "./examples/PasswordAuthentications_ResetPassword.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/backups/{backupName}": {
-      "get": {
-        "operationId": "Backups_Get",
-        "tags": [
-          "Backups"
-        ],
-        "description": "Gets an available backup for a HorizonDB cluster. Expired automatic backups are not available through this operation.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "description": "The name of the HorizonDB cluster.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
-          },
-          {
-            "name": "backupName",
-            "in": "path",
-            "description": "The name of the HorizonDB backup.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,62}$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/Backup"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get an available automatic backup for a HorizonDB cluster": {
-            "$ref": "./examples/Backups_Get.json"
           }
         }
       }
@@ -5637,21 +5575,6 @@
       "type": "string",
       "description": "Represents an Azure Resource Type."
     },
-    "Backup": {
-      "type": "object",
-      "description": "Represents an available backup for a HorizonDB cluster.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/BackupResourceProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
     "BackupProperties": {
       "type": "object",
       "description": "Backup configuration properties for a HorizonDB cluster.",
@@ -5702,57 +5625,6 @@
             "update"
           ]
         }
-      }
-    },
-    "BackupResourceProperties": {
-      "type": "object",
-      "description": "Properties of an available HorizonDB backup.",
-      "properties": {
-        "takenAtUtc": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date and time when the backup was taken, in UTC.",
-          "readOnly": true
-        },
-        "postgreSqlVersion": {
-          "$ref": "#/definitions/PostgreSqlVersion",
-          "description": "The PostgreSQL version of the backed-up cluster.",
-          "readOnly": true
-        },
-        "backupType": {
-          "$ref": "#/definitions/BackupType",
-          "description": "The type of the backup.",
-          "readOnly": true
-        },
-        "expiredAtUtc": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date and time when an automatic backup expires, in UTC. This property can be absent for backup types that do not expire automatically.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "takenAtUtc",
-        "postgreSqlVersion",
-        "backupType"
-      ]
-    },
-    "BackupType": {
-      "type": "string",
-      "description": "The type of a HorizonDB backup. New values may be added over time.",
-      "enum": [
-        "System"
-      ],
-      "x-ms-enum": {
-        "name": "BackupType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "System",
-            "value": "System",
-            "description": "A backup created automatically by the HorizonDB service."
-          }
-        ]
       }
     },
     "Capability": {

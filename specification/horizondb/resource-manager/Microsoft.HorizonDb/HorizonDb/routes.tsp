@@ -587,11 +587,3 @@ interface MicrosoftEntraAuthentications {
     ErrorResponse
   >;
 }
-
-@added(Versions.v2026_10_01_preview)
-@doc("Backup operations for HorizonDB clusters.")
-@armResourceOperations
-interface Backups {
-  @doc("Gets an available backup for a HorizonDB cluster. Expired automatic backups are not available through this operation.")
-  get is ArmResourceRead<Backup>;
-}
