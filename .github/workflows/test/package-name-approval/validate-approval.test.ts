@@ -210,6 +210,29 @@ describe("validate-approval", () => {
         expect.objectContaining({ name: "package-name-dotnet-pending" }),
       );
     });
+
+    it("should reject an unauthorized per-language approver before changing review state", async () => {
+      context.payload = createPRLabeledPayload({
+        action: "labeled",
+        labelName: "package-name-java-approved",
+        actor: "random-user",
+        labels: ["package-name-review-required", "package-name-java-pending"],
+      });
+
+      await validateApproval(args());
+
+      expect(github.rest.issues.removeLabel).toHaveBeenCalledTimes(1);
+      expect(github.rest.issues.removeLabel).toHaveBeenCalledWith(
+        expect.objectContaining({ name: "package-name-java-approved" }),
+      );
+      expect(github.rest.issues.removeLabel).not.toHaveBeenCalledWith(
+        expect.objectContaining({ name: "package-name-java-pending" }),
+      );
+      expect(github.rest.pulls.get).not.toHaveBeenCalled();
+      expect(core.warning).toHaveBeenCalledWith(
+        "random-user is not authorized to apply package-name-java-approved, removing",
+      );
+    });
   });
 
   describe("labeled - package-name-approved-all shortcut", () => {
@@ -260,6 +283,32 @@ describe("validate-approval", () => {
         expect.objectContaining({
           body: expect.stringContaining("only available on management-plane") as unknown,
         }),
+      );
+    });
+
+    it("should reject an unauthorized shortcut before expanding approvals", async () => {
+      context.payload = createPRLabeledPayload({
+        action: "labeled",
+        labelName: "package-name-approved-all",
+        actor: "random-user",
+        labels: [
+          "package-name-review-required",
+          "package-name-dotnet-pending",
+          "package-name-java-pending",
+        ],
+        isMgmt: true,
+      });
+
+      await validateApproval(args());
+
+      expect(github.rest.issues.removeLabel).toHaveBeenCalledTimes(1);
+      expect(github.rest.issues.removeLabel).toHaveBeenCalledWith(
+        expect.objectContaining({ name: "package-name-approved-all" }),
+      );
+      expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
+      expect(github.rest.pulls.get).not.toHaveBeenCalled();
+      expect(core.warning).toHaveBeenCalledWith(
+        "random-user is not authorized to apply package-name-approved-all, removing",
       );
     });
   });
