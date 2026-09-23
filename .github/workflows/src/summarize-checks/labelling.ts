@@ -450,9 +450,10 @@ export function processImpactAssessment(
 
   // Auto-applied intake signal for data-plane stewardship review. Present exactly when a
   // data-plane PR introduces a new API version (i.e. when both `data-plane` and
-  // `new-api-version` would be present). This single label is what the merge gate, native
-  // reviewer assignment, and the review queue all key off. See rulesPri0dataPlane below and
-  // .github/workflows/src/data-plane-review/assign-reviewers.ts (TRIGGER_LABEL).
+  // `new-api-version` would be present). This single label is what the merge gate, reviewer
+  // assignment, and the review queue all key off. Reviewer assignment is owned by the
+  // azure-sdk-automation GitHub App (it requests the reviewer team with its own identity,
+  // which the default Actions token cannot do). See rulesPri0dataPlane below.
   const dataPlaneReviewRequestedLabel = new Label(
     "data-plane-review-requested",
     labelContext.present,
