@@ -20,32 +20,32 @@ union UsagesUnit {
   string,
 
   /**
-   * Count
+   * Represents the Count value.
    */
   Count: "Count",
 
   /**
-   * Bytes
+   * Represents the Bytes value.
    */
   Bytes: "Bytes",
 
   /**
-   * Seconds
+   * Represents the Seconds value.
    */
   Seconds: "Seconds",
 
   /**
-   * Percent
+   * Represents the Percent value.
    */
   Percent: "Percent",
 
   /**
-   * CountPerSecond
+   * Represents the CountPerSecond value.
    */
   CountPerSecond: "CountPerSecond",
 
   /**
-   * BytesPerSecond
+   * Represents the BytesPerSecond value.
    */
   BytesPerSecond: "BytesPerSecond",
 }
@@ -57,47 +57,47 @@ union BackupManagementType {
   string,
 
   /**
-   * Invalid
+   * Represents the Invalid value.
    */
   Invalid: "Invalid",
 
   /**
-   * AzureIaasVM
+   * Represents the AzureIaasVM value.
    */
   AzureIaasVM: "AzureIaasVM",
 
   /**
-   * MAB
+   * Represents the MAB value.
    */
   MAB: "MAB",
 
   /**
-   * DPM
+   * Represents the DPM value.
    */
   DPM: "DPM",
 
   /**
-   * AzureBackupServer
+   * Represents the AzureBackupServer value.
    */
   AzureBackupServer: "AzureBackupServer",
 
   /**
-   * AzureSql
+   * Represents the AzureSql value.
    */
   AzureSql: "AzureSql",
 
   /**
-   * AzureStorage
+   * Represents the AzureStorage value.
    */
   AzureStorage: "AzureStorage",
 
   /**
-   * AzureWorkload
+   * Represents the AzureWorkload value.
    */
   AzureWorkload: "AzureWorkload",
 
   /**
-   * DefaultBackup
+   * Represents the DefaultBackup value.
    */
   DefaultBackup: "DefaultBackup",
 }
@@ -109,27 +109,27 @@ union OperationStatusValues {
   string,
 
   /**
-   * Invalid
+   * Represents the Invalid value.
    */
   Invalid: "Invalid",
 
   /**
-   * InProgress
+   * Represents the InProgress value.
    */
   InProgress: "InProgress",
 
   /**
-   * Succeeded
+   * Represents the Succeeded value.
    */
   Succeeded: "Succeeded",
 
   /**
-   * Failed
+   * Represents the Failed value.
    */
   Failed: "Failed",
 
   /**
-   * Canceled
+   * Represents the Canceled value.
    */
   Canceled: "Canceled",
 }
@@ -141,27 +141,27 @@ union StorageType {
   string,
 
   /**
-   * Invalid
+   * Represents the Invalid value.
    */
   Invalid: "Invalid",
 
   /**
-   * GeoRedundant
+   * Represents the GeoRedundant value.
    */
   GeoRedundant: "GeoRedundant",
 
   /**
-   * LocallyRedundant
+   * Represents the LocallyRedundant value.
    */
   LocallyRedundant: "LocallyRedundant",
 
   /**
-   * ZoneRedundant
+   * Represents the ZoneRedundant value.
    */
   ZoneRedundant: "ZoneRedundant",
 
   /**
-   * ReadAccessGeoZoneRedundant
+   * Represents the ReadAccessGeoZoneRedundant value.
    */
   ReadAccessGeoZoneRedundant: "ReadAccessGeoZoneRedundant",
 }
@@ -173,17 +173,17 @@ union StorageTypeState {
   string,
 
   /**
-   * Invalid
+   * Represents the Invalid value.
    */
   Invalid: "Invalid",
 
   /**
-   * Locked
+   * Represents the Locked value.
    */
   Locked: "Locked",
 
   /**
-   * Unlocked
+   * Represents the Unlocked value.
    */
   Unlocked: "Unlocked",
 }
@@ -195,77 +195,77 @@ union DataSourceType {
   string,
 
   /**
-   * Invalid
+   * Represents the Invalid value.
    */
   Invalid: "Invalid",
 
   /**
-   * VM
+   * Represents the VM value.
    */
   VM: "VM",
 
   /**
-   * FileFolder
+   * Represents the FileFolder value.
    */
   FileFolder: "FileFolder",
 
   /**
-   * AzureSqlDb
+   * Represents the AzureSqlDb value.
    */
   AzureSqlDb: "AzureSqlDb",
 
   /**
-   * SQLDB
+   * Represents the SQLDB value.
    */
   SQLDB: "SQLDB",
 
   /**
-   * Exchange
+   * Represents the Exchange value.
    */
   Exchange: "Exchange",
 
   /**
-   * Sharepoint
+   * Represents the Sharepoint value.
    */
   Sharepoint: "Sharepoint",
 
   /**
-   * VMwareVM
+   * Represents the VMwareVM value.
    */
   VMwareVM: "VMwareVM",
 
   /**
-   * SystemState
+   * Represents the SystemState value.
    */
   SystemState: "SystemState",
 
   /**
-   * Client
+   * Represents the Client value.
    */
   Client: "Client",
 
   /**
-   * GenericDataSource
+   * Represents the GenericDataSource value.
    */
   GenericDataSource: "GenericDataSource",
 
   /**
-   * SQLDataBase
+   * Represents the SQLDataBase value.
    */
   SQLDataBase: "SQLDataBase",
 
   /**
-   * AzureFileShare
+   * Represents the AzureFileShare value.
    */
   AzureFileShare: "AzureFileShare",
 
   /**
-   * SAPHanaDatabase
+   * Represents the SAPHanaDatabase value.
    */
   SAPHanaDatabase: "SAPHanaDatabase",
 
   /**
-   * SAPAseDatabase
+   * Represents the SAPAseDatabase value.
    */
   SAPAseDatabase: "SAPAseDatabase",
 }
@@ -277,17 +277,17 @@ union CreateMode {
   string,
 
   /**
-   * Invalid
+   * Represents the Invalid value.
    */
   Invalid: "Invalid",
 
   /**
-   * Default
+   * Represents the Default value.
    */
   Default: "Default",
 
   /**
-   * Recover
+   * Represents the Recover value.
    */
   Recover: "Recover",
 }
@@ -299,17 +299,17 @@ union Type {
   string,
 
   /**
-   * Invalid
+   * Represents the Invalid value.
    */
   Invalid: "Invalid",
 
   /**
-   * BackupProtectedItemCountSummary
+   * Represents the BackupProtectedItemCountSummary value.
    */
   BackupProtectedItemCountSummary: "BackupProtectedItemCountSummary",
 
   /**
-   * BackupProtectionContainerCountSummary
+   * Represents the BackupProtectionContainerCountSummary value.
    */
   BackupProtectionContainerCountSummary: "BackupProtectionContainerCountSummary",
 }
@@ -321,32 +321,32 @@ union ProtectionState {
   string,
 
   /**
-   * Invalid
+   * Represents the Invalid value.
    */
   Invalid: "Invalid",
 
   /**
-   * IRPending
+   * Represents the IRPending value.
    */
   IRPending: "IRPending",
 
   /**
-   * Protected
+   * Represents the Protected value.
    */
   Protected: "Protected",
 
   /**
-   * ProtectionError
+   * Represents the ProtectionError value.
    */
   ProtectionError: "ProtectionError",
 
   /**
-   * ProtectionStopped
+   * Represents the ProtectionStopped value.
    */
   ProtectionStopped: "ProtectionStopped",
 
   /**
-   * ProtectionPaused
+   * Represents the ProtectionPaused value.
    */
   ProtectionPaused: "ProtectionPaused",
 }
@@ -358,22 +358,22 @@ union HealthStatus {
   string,
 
   /**
-   * Passed
+   * Represents the Passed value.
    */
   Passed: "Passed",
 
   /**
-   * ActionRequired
+   * Represents the ActionRequired value.
    */
   ActionRequired: "ActionRequired",
 
   /**
-   * ActionSuggested
+   * Represents the ActionSuggested value.
    */
   ActionSuggested: "ActionSuggested",
 
   /**
-   * Invalid
+   * Represents the Invalid value.
    */
   Invalid: "Invalid",
 }
@@ -385,32 +385,32 @@ union ResourceHealthStatus {
   string,
 
   /**
-   * Healthy
+   * Represents the Healthy value.
    */
   Healthy: "Healthy",
 
   /**
-   * TransientDegraded
+   * Represents the TransientDegraded value.
    */
   TransientDegraded: "TransientDegraded",
 
   /**
-   * PersistentDegraded
+   * Represents the PersistentDegraded value.
    */
   PersistentDegraded: "PersistentDegraded",
 
   /**
-   * TransientUnhealthy
+   * Represents the TransientUnhealthy value.
    */
   TransientUnhealthy: "TransientUnhealthy",
 
   /**
-   * PersistentUnhealthy
+   * Represents the PersistentUnhealthy value.
    */
   PersistentUnhealthy: "PersistentUnhealthy",
 
   /**
-   * Invalid
+   * Represents the Invalid value.
    */
   Invalid: "Invalid",
 }
@@ -422,27 +422,27 @@ union RecoveryType {
   string,
 
   /**
-   * Invalid
+   * Represents the Invalid value.
    */
   Invalid: "Invalid",
 
   /**
-   * OriginalLocation
+   * Represents the OriginalLocation value.
    */
   OriginalLocation: "OriginalLocation",
 
   /**
-   * AlternateLocation
+   * Represents the AlternateLocation value.
    */
   AlternateLocation: "AlternateLocation",
 
   /**
-   * RestoreDisks
+   * Represents the RestoreDisks value.
    */
   RestoreDisks: "RestoreDisks",
 
   /**
-   * Offline
+   * Represents the Offline value.
    */
   Offline: "Offline",
 }
@@ -454,27 +454,27 @@ union CopyOptions {
   string,
 
   /**
-   * Invalid
+   * Represents the Invalid value.
    */
   Invalid: "Invalid",
 
   /**
-   * CreateCopy
+   * Represents the CreateCopy value.
    */
   CreateCopy: "CreateCopy",
 
   /**
-   * Skip
+   * Represents the Skip value.
    */
   Skip: "Skip",
 
   /**
-   * Overwrite
+   * Represents the Overwrite value.
    */
   Overwrite: "Overwrite",
 
   /**
-   * FailOnConflict
+   * Represents the FailOnConflict value.
    */
   FailOnConflict: "FailOnConflict",
 }
@@ -486,17 +486,17 @@ union RestoreRequestType {
   string,
 
   /**
-   * Invalid
+   * Represents the Invalid value.
    */
   Invalid: "Invalid",
 
   /**
-   * FullShareRestore
+   * Represents the FullShareRestore value.
    */
   FullShareRestore: "FullShareRestore",
 
   /**
-   * ItemLevelRestore
+   * Represents the ItemLevelRestore value.
    */
   ItemLevelRestore: "ItemLevelRestore",
 }
@@ -508,32 +508,32 @@ union ProtectedItemState {
   string,
 
   /**
-   * Invalid
+   * Represents the Invalid value.
    */
   Invalid: "Invalid",
 
   /**
-   * IRPending
+   * Represents the IRPending value.
    */
   IRPending: "IRPending",
 
   /**
-   * Protected
+   * Represents the Protected value.
    */
   Protected: "Protected",
 
   /**
-   * ProtectionError
+   * Represents the ProtectionError value.
    */
   ProtectionError: "ProtectionError",
 
   /**
-   * ProtectionStopped
+   * Represents the ProtectionStopped value.
    */
   ProtectionStopped: "ProtectionStopped",
 
   /**
-   * ProtectionPaused
+   * Represents the ProtectionPaused value.
    */
   ProtectionPaused: "ProtectionPaused",
 }
@@ -545,22 +545,22 @@ union LastBackupStatus {
   string,
 
   /**
-   * Invalid
+   * Represents the Invalid value.
    */
   Invalid: "Invalid",
 
   /**
-   * Healthy
+   * Represents the Healthy value.
    */
   Healthy: "Healthy",
 
   /**
-   * Unhealthy
+   * Represents the Unhealthy value.
    */
   Unhealthy: "Unhealthy",
 
   /**
-   * IRPending
+   * Represents the IRPending value.
    */
   IRPending: "IRPending",
 }
@@ -572,27 +572,27 @@ union ProtectedItemHealthStatus {
   string,
 
   /**
-   * Invalid
+   * Represents the Invalid value.
    */
   Invalid: "Invalid",
 
   /**
-   * Healthy
+   * Represents the Healthy value.
    */
   Healthy: "Healthy",
 
   /**
-   * Unhealthy
+   * Represents the Unhealthy value.
    */
   Unhealthy: "Unhealthy",
 
   /**
-   * NotReachable
+   * Represents the NotReachable value.
    */
   NotReachable: "NotReachable",
 
   /**
-   * IRPending
+   * Represents the IRPending value.
    */
   IRPending: "IRPending",
 }
@@ -604,27 +604,27 @@ union RestorePointType {
   string,
 
   /**
-   * Invalid
+   * Represents the Invalid value.
    */
   Invalid: "Invalid",
 
   /**
-   * Full
+   * Represents the Full value.
    */
   Full: "Full",
 
   /**
-   * Log
+   * Represents the Log value.
    */
   Log: "Log",
 
   /**
-   * Differential
+   * Represents the Differential value.
    */
   Differential: "Differential",
 
   /**
-   * Incremental
+   * Represents the Incremental value.
    */
   Incremental: "Incremental",
 }
@@ -636,17 +636,17 @@ union OverwriteOptions {
   string,
 
   /**
-   * Invalid
+   * Represents the Invalid value.
    */
   Invalid: "Invalid",
 
   /**
-   * FailOnConflict
+   * Represents the FailOnConflict value.
    */
   FailOnConflict: "FailOnConflict",
 
   /**
-   * Overwrite
+   * Represents the Overwrite value.
    */
   Overwrite: "Overwrite",
 }
@@ -658,17 +658,17 @@ union RecoveryMode {
   string,
 
   /**
-   * Invalid
+   * Represents the Invalid value.
    */
   Invalid: "Invalid",
 
   /**
-   * FileRecovery
+   * Represents the FileRecovery value.
    */
   FileRecovery: "FileRecovery",
 
   /**
-   * WorkloadRecovery
+   * Represents the WorkloadRecovery value.
    */
   WorkloadRecovery: "WorkloadRecovery",
 }
@@ -680,17 +680,17 @@ union SQLDataDirectoryType {
   string,
 
   /**
-   * Invalid
+   * Represents the Invalid value.
    */
   Invalid: "Invalid",
 
   /**
-   * Data
+   * Represents the Data value.
    */
   Data: "Data",
 
   /**
-   * Log
+   * Represents the Log value.
    */
   Log: "Log",
 }
@@ -702,37 +702,37 @@ union RestorePointQueryType {
   string,
 
   /**
-   * Invalid
+   * Represents the Invalid value.
    */
   Invalid: "Invalid",
 
   /**
-   * Full
+   * Represents the Full value.
    */
   Full: "Full",
 
   /**
-   * Log
+   * Represents the Log value.
    */
   Log: "Log",
 
   /**
-   * Differential
+   * Represents the Differential value.
    */
   Differential: "Differential",
 
   /**
-   * FullAndDifferential
+   * Represents the FullAndDifferential value.
    */
   FullAndDifferential: "FullAndDifferential",
 
   /**
-   * All
+   * Represents the All value.
    */
   All: "All",
 
   /**
-   * Incremental
+   * Represents the Incremental value.
    */
   Incremental: "Incremental",
 }
@@ -744,37 +744,37 @@ union JobStatus {
   string,
 
   /**
-   * Invalid
+   * Represents the Invalid value.
    */
   Invalid: "Invalid",
 
   /**
-   * InProgress
+   * Represents the InProgress value.
    */
   InProgress: "InProgress",
 
   /**
-   * Completed
+   * Represents the Completed value.
    */
   Completed: "Completed",
 
   /**
-   * Failed
+   * Represents the Failed value.
    */
   Failed: "Failed",
 
   /**
-   * CompletedWithWarnings
+   * Represents the CompletedWithWarnings value.
    */
   CompletedWithWarnings: "CompletedWithWarnings",
 
   /**
-   * Cancelled
+   * Represents the Cancelled value.
    */
   Cancelled: "Cancelled",
 
   /**
-   * Cancelling
+   * Represents the Cancelling value.
    */
   Cancelling: "Cancelling",
 }
@@ -786,57 +786,57 @@ union JobOperationType {
   string,
 
   /**
-   * Invalid
+   * Represents the Invalid value.
    */
   Invalid: "Invalid",
 
   /**
-   * Register
+   * Represents the Register value.
    */
   Register: "Register",
 
   /**
-   * UnRegister
+   * Represents the UnRegister value.
    */
   UnRegister: "UnRegister",
 
   /**
-   * ConfigureBackup
+   * Represents the ConfigureBackup value.
    */
   ConfigureBackup: "ConfigureBackup",
 
   /**
-   * Backup
+   * Represents the Backup value.
    */
   Backup: "Backup",
 
   /**
-   * Restore
+   * Represents the Restore value.
    */
   Restore: "Restore",
 
   /**
-   * DisableBackup
+   * Represents the DisableBackup value.
    */
   DisableBackup: "DisableBackup",
 
   /**
-   * DeleteBackupData
+   * Represents the DeleteBackupData value.
    */
   DeleteBackupData: "DeleteBackupData",
 
   /**
-   * CrossRegionRestore
+   * Represents the CrossRegionRestore value.
    */
   CrossRegionRestore: "CrossRegionRestore",
 
   /**
-   * Undelete
+   * Represents the Undelete value.
    */
   Undelete: "Undelete",
 
   /**
-   * UpdateCustomerManagedKey
+   * Represents the UpdateCustomerManagedKey value.
    */
   UpdateCustomerManagedKey: "UpdateCustomerManagedKey",
 }
@@ -848,77 +848,77 @@ union MabServerType {
   string,
 
   /**
-   * Invalid
+   * Represents the Invalid value.
    */
   Invalid: "Invalid",
 
   /**
-   * Unknown
+   * Represents the Unknown value.
    */
   Unknown: "Unknown",
 
   /**
-   * IaasVMContainer
+   * Represents the IaasVMContainer value.
    */
   IaasVMContainer: "IaasVMContainer",
 
   /**
-   * IaasVMServiceContainer
+   * Represents the IaasVMServiceContainer value.
    */
   IaasVMServiceContainer: "IaasVMServiceContainer",
 
   /**
-   * DPMContainer
+   * Represents the DPMContainer value.
    */
   DPMContainer: "DPMContainer",
 
   /**
-   * AzureBackupServerContainer
+   * Represents the AzureBackupServerContainer value.
    */
   AzureBackupServerContainer: "AzureBackupServerContainer",
 
   /**
-   * MABContainer
+   * Represents the MABContainer value.
    */
   MABContainer: "MABContainer",
 
   /**
-   * Cluster
+   * Represents the Cluster value.
    */
   Cluster: "Cluster",
 
   /**
-   * AzureSqlContainer
+   * Represents the AzureSqlContainer value.
    */
   AzureSqlContainer: "AzureSqlContainer",
 
   /**
-   * Windows
+   * Represents the Windows value.
    */
   Windows: "Windows",
 
   /**
-   * VCenter
+   * Represents the VCenter value.
    */
   VCenter: "VCenter",
 
   /**
-   * VMAppContainer
+   * Represents the VMAppContainer value.
    */
   VMAppContainer: "VMAppContainer",
 
   /**
-   * SQLAGWorkLoadContainer
+   * Represents the SQLAGWorkLoadContainer value.
    */
   SQLAGWorkLoadContainer: "SQLAGWorkLoadContainer",
 
   /**
-   * StorageContainer
+   * Represents the StorageContainer value.
    */
   StorageContainer: "StorageContainer",
 
   /**
-   * GenericContainer
+   * Represents the GenericContainer value.
    */
   GenericContainer: "GenericContainer",
 }
@@ -930,77 +930,77 @@ union WorkloadType {
   string,
 
   /**
-   * Invalid
+   * Represents the Invalid value.
    */
   Invalid: "Invalid",
 
   /**
-   * VM
+   * Represents the VM value.
    */
   VM: "VM",
 
   /**
-   * FileFolder
+   * Represents the FileFolder value.
    */
   FileFolder: "FileFolder",
 
   /**
-   * AzureSqlDb
+   * Represents the AzureSqlDb value.
    */
   AzureSqlDb: "AzureSqlDb",
 
   /**
-   * SQLDB
+   * Represents the SQLDB value.
    */
   SQLDB: "SQLDB",
 
   /**
-   * Exchange
+   * Represents the Exchange value.
    */
   Exchange: "Exchange",
 
   /**
-   * Sharepoint
+   * Represents the Sharepoint value.
    */
   Sharepoint: "Sharepoint",
 
   /**
-   * VMwareVM
+   * Represents the VMwareVM value.
    */
   VMwareVM: "VMwareVM",
 
   /**
-   * SystemState
+   * Represents the SystemState value.
    */
   SystemState: "SystemState",
 
   /**
-   * Client
+   * Represents the Client value.
    */
   Client: "Client",
 
   /**
-   * GenericDataSource
+   * Represents the GenericDataSource value.
    */
   GenericDataSource: "GenericDataSource",
 
   /**
-   * SQLDataBase
+   * Represents the SQLDataBase value.
    */
   SQLDataBase: "SQLDataBase",
 
   /**
-   * AzureFileShare
+   * Represents the AzureFileShare value.
    */
   AzureFileShare: "AzureFileShare",
 
   /**
-   * SAPHanaDatabase
+   * Represents the SAPHanaDatabase value.
    */
   SAPHanaDatabase: "SAPHanaDatabase",
 
   /**
-   * SAPAseDatabase
+   * Represents the SAPAseDatabase value.
    */
   SAPAseDatabase: "SAPAseDatabase",
 }
@@ -1012,22 +1012,22 @@ union HealthState {
   string,
 
   /**
-   * Passed
+   * Represents the Passed value.
    */
   Passed: "Passed",
 
   /**
-   * ActionRequired
+   * Represents the ActionRequired value.
    */
   ActionRequired: "ActionRequired",
 
   /**
-   * ActionSuggested
+   * Represents the ActionSuggested value.
    */
   ActionSuggested: "ActionSuggested",
 
   /**
-   * Invalid
+   * Represents the Invalid value.
    */
   Invalid: "Invalid",
 }
@@ -1038,17 +1038,17 @@ union HealthState {
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum JobSupportedAction {
   /**
-   * Invalid
+   * Represents the Invalid value.
    */
   Invalid,
 
   /**
-   * Cancellable
+   * Represents the Cancellable value.
    */
   Cancellable,
 
   /**
-   * Retriable
+   * Represents the Retriable value.
    */
   Retriable,
 }
@@ -1059,22 +1059,22 @@ enum JobSupportedAction {
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum RecoveryPointTierType {
   /**
-   * Invalid
+   * Represents the Invalid value.
    */
   Invalid,
 
   /**
-   * InstantRP
+   * Represents the InstantRP value.
    */
   InstantRP,
 
   /**
-   * HardenedRP
+   * Represents the HardenedRP value.
    */
   HardenedRP,
 
   /**
-   * ArchivedRP
+   * Represents the ArchivedRP value.
    */
   ArchivedRP,
 }
@@ -1085,27 +1085,27 @@ enum RecoveryPointTierType {
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum RecoveryPointTierStatus {
   /**
-   * Invalid
+   * Represents the Invalid value.
    */
   Invalid,
 
   /**
-   * Valid
+   * Represents the Valid value.
    */
   Valid,
 
   /**
-   * Disabled
+   * Represents the Disabled value.
    */
   Disabled,
 
   /**
-   * Deleted
+   * Represents the Deleted value.
    */
   Deleted,
 
   /**
-   * Rehydrated
+   * Represents the Rehydrated value.
    */
   Rehydrated,
 }
@@ -1220,10 +1220,10 @@ model NewErrorResponseError {
   additionalInfo?: ErrorAdditionalInfo[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Non-discriminated resource envelope wrapper on a passive stamp: `extends` preserves the emitted allOf composition; `is`/spread would inline the base and `@discriminator` would mis-declare a non-polymorphic base."
 /**
  * AAD properties response resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Non-discriminated resource envelope wrapper on a passive stamp: `extends` preserves the emitted allOf composition; `is`/spread would inline the base and `@discriminator` would mis-declare a non-polymorphic base."
 model AadPropertiesResource extends Resource {
   /**
    * AADPropertiesResource properties
@@ -1246,12 +1246,12 @@ model AadProperties {
   tenantId?: string;
 
   /**
-   * Authority.
+   * The authentication authority.
    */
   authority?: string;
 
   /**
-   * Audience.
+   * The intended token audience.
    */
   audience?: string;
 
@@ -1300,10 +1300,10 @@ model Resource {
   eTag?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 /**
  * Cross-region restore request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CrossRegionRestoreRequest {
   /**
    * Access details for cross region restore
@@ -1633,10 +1633,10 @@ model OperationStatusExtendedInfo {
   objectType: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Non-discriminated resource envelope wrapper on a passive stamp: `extends` preserves the emitted allOf composition; `is`/spread would inline the base and `@discriminator` would mis-declare a non-polymorphic base."
 /**
  * Cross-region restore access token resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Non-discriminated resource envelope wrapper on a passive stamp: `extends` preserves the emitted allOf composition; `is`/spread would inline the base and `@discriminator` would mis-declare a non-polymorphic base."
 model CrrAccessTokenResource extends Resource {
   /**
    * CrrAccessTokenResource properties
@@ -3313,10 +3313,10 @@ model ClientScriptForConnect {
   scriptNameSuffix?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Non-discriminated resource envelope wrapper on a passive stamp: `extends` preserves the emitted allOf composition; `is`/spread would inline the base and `@discriminator` would mis-declare a non-polymorphic base."
 /**
  * Cross-region restore request resource.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Non-discriminated resource envelope wrapper on a passive stamp: `extends` preserves the emitted allOf composition; `is`/spread would inline the base and `@discriminator` would mis-declare a non-polymorphic base."
 model CrossRegionRestoreRequestResource extends Resource {
   /**
    * CrossRegionRestoreRequestResource properties
