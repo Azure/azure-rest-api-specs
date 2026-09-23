@@ -33,7 +33,7 @@ export async function publishResultInComment(
         throw error;
       }
       core.warning(
-        "The workflow token cannot edit the existing analysis comment; creating a new comment instead.",
+        "The workflow token cannot edit the existing result comment; creating a new comment instead.",
       );
     }
   }

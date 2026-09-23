@@ -19,10 +19,55 @@ permissions:
   pull-requests: write
 
 jobs:
-  mitigate:
+  resolve-trigger:
     if: >-
       github.event_name == 'workflow_dispatch' ||
       github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-slim
+    outputs:
+      head-branch: ${{ steps.resolve.outputs.head-branch }}
+      head-repository: ${{ steps.resolve.outputs.head-repository }}
+      head-sha: ${{ steps.resolve.outputs.head-sha }}
+      pr-number: ${{ steps.resolve.outputs.pr-number }}
+      sdk-language: ${{ steps.resolve.outputs.sdk-language }}
+      sdk-repository: ${{ steps.resolve.outputs.sdk-repository }}
+      should-run: ${{ steps.resolve.outputs.should-run }}
+    steps:
+      - name: Download published analysis results
+        uses: actions/download-artifact@v8
+        with:
+          name: sdk-breaking-change-results
+          path: ${{ runner.temp }}/published-analysis-results
+          github-token: ${{ github.token }}
+          run-id: ${{ inputs.workflow_run_id || github.event.workflow_run.id }}
+
+      - name: Checkout workflow repository
+        uses: actions/checkout@v7
+        with:
+          sparse-checkout: |
+            .github
+          persist-credentials: false
+
+      - name: Install dependencies for github-script actions
+        uses: ./.github/actions/install-deps-github-script
+
+      - name: Resolve mitigation trigger
+        id: resolve
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const { resolveMitigationTrigger } =
+              await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change/resolve-mitigation-inputs.ts');
+            await resolveMitigationTrigger({
+              github,
+              context,
+              core,
+              publishedResultsPath: '${{ runner.temp }}/published-analysis-results/sdk-breaking-change-analysis.json',
+            });
+
+  mitigate:
+    needs: resolve-trigger
+    if: needs.resolve-trigger.outputs.should-run == 'true'
     concurrency:
       group: >-
         sdk-breaking-mitigate-${{ inputs.workflow_run_id || github.event.workflow_run.id }}
@@ -49,86 +94,25 @@ jobs:
           github-token: ${{ github.token }}
           run-id: ${{ inputs.workflow_run_id || github.event.workflow_run.id }}
 
-      - name: Resolve mitigation trigger
-        id: resolve-trigger
-        uses: actions/github-script@v9
-        env:
-          PUBLISHED_RESULTS_PATH: ${{ runner.temp }}/published-analysis-results/sdk-breaking-change-analysis.json
-        with:
-          script: |
-            const fs = await import("node:fs/promises");
-            const analysis = JSON.parse(
-              await fs.readFile(process.env.PUBLISHED_RESULTS_PATH, "utf8"),
-            );
-            if (analysis.status !== "success") {
-              core.notice("The SDK breaking-change analysis did not succeed.");
-              core.setOutput("should-run", "false");
-              return;
-            }
-            const pullNumber = Number(analysis.prNumber);
-            const sdkLanguage = String(analysis.sdkLanguage ?? "").trim();
-            const headSha = String(analysis.headSha ?? "").trim();
-            if (!Number.isSafeInteger(pullNumber) || pullNumber <= 0) {
-              throw new Error(`Invalid pull request number: ${pullNumber}`);
-            }
-            if (!sdkLanguage) {
-              throw new Error("SDK language is required.");
-            }
-            const sdkRepositories = {
-              android: "azure-sdk-for-android",
-              cpp: "azure-sdk-for-cpp",
-              dotnet: "azure-sdk-for-net",
-              go: "azure-sdk-for-go",
-              java: "azure-sdk-for-java",
-              javascript: "azure-sdk-for-js",
-              python: "azure-sdk-for-python",
-              rust: "azure-sdk-for-rust",
-            };
-            const sdkRepository = sdkRepositories[sdkLanguage.toLowerCase()];
-            if (!sdkRepository) {
-              throw new Error(`Unsupported SDK language: ${sdkLanguage}`);
-            }
-
-            const { data: pull } = await github.rest.pulls.get({
-              ...context.repo,
-              pull_number: pullNumber,
-            });
-            if (!headSha || pull.head.sha !== headSha) {
-              throw new Error(
-                `Pull request head ${pull.head.sha} does not match analyzed head ${headSha}.`,
-              );
-            }
-
-            core.setOutput("should-run", "true");
-            core.setOutput("pull-number", pullNumber);
-            core.setOutput("sdk-language", sdkLanguage);
-            core.setOutput("sdk-repository", sdkRepository);
-            core.setOutput("head-repository", pull.head.repo.full_name);
-            core.setOutput("head-sha", pull.head.sha);
-            core.setOutput("head-branch", pull.head.ref);
-
       - name: Checkout specification PR source
-        if: steps.resolve-trigger.outputs.should-run == 'true'
         uses: actions/checkout@v7
         with:
-          repository: ${{ steps.resolve-trigger.outputs.head-repository }}
-          ref: ${{ steps.resolve-trigger.outputs.head-sha }}
+          repository: ${{ needs.resolve-trigger.outputs.head-repository }}
+          ref: ${{ needs.resolve-trigger.outputs.head-sha }}
           path: repositories/azure-rest-api-specs
           persist-credentials: false
 
       - name: Set up Node.js and install specification repository dependencies
-        if: steps.resolve-trigger.outputs.should-run == 'true'
         uses: ./repositories/workflow-repository/.github/actions/setup-node-install-deps
         with:
           working-directory: repositories/azure-rest-api-specs
 
       - name: Checkout target SDK repository
-        if: steps.resolve-trigger.outputs.should-run == 'true'
         uses: actions/checkout@v7
         with:
-          repository: Azure/${{ steps.resolve-trigger.outputs.sdk-repository }}
+          repository: Azure/${{ needs.resolve-trigger.outputs.sdk-repository }}
           ref: main
-          path: repositories/${{ steps.resolve-trigger.outputs.sdk-repository }}
+          path: repositories/${{ needs.resolve-trigger.outputs.sdk-repository }}
           persist-credentials: false
       - name: Set up GitHub Copilot CLI
         id: setup-copilot-cli
@@ -148,14 +132,15 @@ jobs:
 
       - name: Mitigate SDK breaking changes
         id: mitigate-sdk-breaking-changes
-        if: steps.resolve-trigger.outputs.should-run == 'true'
         shell: bash
         env:
           ANALYSIS_RESULT_PATH: ${{ runner.temp }}/published-analysis-results/sdk-breaking-change-analysis.json
           AZSDK_COPILOT_CLI_PATH: ${{ steps.setup-copilot-cli.outputs.path }}
           AZSDK_COPILOT_GITHUB_TOKEN: ${{ github.token }}
-          SDK_REPOSITORY_PATH: ${{ github.workspace }}/repositories/${{ steps.resolve-trigger.outputs.sdk-repository }}
+          SDK_REPOSITORY_PATH: ${{ github.workspace }}/repositories/${{ needs.resolve-trigger.outputs.sdk-repository }}
           SPEC_REPOSITORY_PATH: ${{ github.workspace }}/repositories/azure-rest-api-specs
+          MITIGATION_RESULT_PATH: ${{ runner.temp }}/published-mitigation-results/sdk-breaking-change-mitigation.json
+          MITIGATION_WORKFLOW_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           set -euo pipefail
           mitigation_log="$RUNNER_TEMP/sdk-breaking-change-mitigation.log"
@@ -163,20 +148,28 @@ jobs:
           echo "$AZSDK_CLI_PATH" >> "$GITHUB_PATH"
           export PATH="$AZSDK_CLI_PATH:$PATH"
 
-          mitigation_results_dir="$RUNNER_TEMP/sdk-breaking-change-mitigation-results"
-          mkdir -p "$mitigation_results_dir"
           test -f "$ANALYSIS_RESULT_PATH"
+          mkdir -p "$(dirname "$MITIGATION_RESULT_PATH")"
+          jq --arg mitigationWorkflowUrl "$MITIGATION_WORKFLOW_URL" '{
+            schemaVersion: 1,
+            prNumber,
+            headSha,
+            sdkLanguage,
+            mitigationWorkflowUrl: $mitigationWorkflowUrl,
+            status: "success",
+            customizationCode: "",
+            projects: [.projects[] | {
+              typespecProject,
+              sdkPackage,
+              breakingChanges: []
+            }]
+          }' "$ANALYSIS_RESULT_PATH" > "$MITIGATION_RESULT_PATH"
+
           while IFS= read -r project; do
             project_index="$(jq -r '.key' <<< "$project")"
             project_data="$(jq -c '.value' <<< "$project")"
             typespec_project_path="$(jq -r '.typespecProject' <<< "$project_data")"
             package_name="$(jq -r '.sdkPackage' <<< "$project_data")"
-            results_path="project-$((project_index + 1))"
-            project_results_dir="$mitigation_results_dir/$results_path"
-            mitigation_results="$project_results_dir/mitigation-results.json"
-            mkdir -p "$project_results_dir"
-            echo '[]' > "$mitigation_results"
-
             breaking_change_count="$(jq '.breakingChanges | length' <<< "$project_data")"
             if [[ "$breaking_change_count" -eq 0 ]]; then
               echo "No SDK breaking changes found for $typespec_project_path."
@@ -226,11 +219,12 @@ jobs:
                     '(.result // .) as $result |
                     ($result.success // false) as $isResolved | {
                       breakingChange: ($breakingChange.breakingChange // $breakingChange),
-                      isResolved: $isResolved,
-                      Resolution: ($result.Resolution // $result.resolution // $breakingChange.resolution // "")
-                    } + if $isResolved then {
-                      TypeSpecChangesSummary: ($result.TypeSpecChangesSummary // $result.typeSpecChangesSummary // "")
-                    } else {} end' \
+                      suggestedFix: ($breakingChange.suggestedFix // ""),
+                      isResolved: $isResolved
+                    } + if $result.typeSpecChangesSummary != null then
+                      {typespecChangesSummary: $result.typeSpecChangesSummary}
+                    else {}
+                    end' \
                     "$mitigation_result"
                 )"
               else
@@ -239,14 +233,17 @@ jobs:
                     --argjson breakingChange "$breaking_change" \
                     '{
                       breakingChange: ($breakingChange.breakingChange // $breakingChange),
-                      isResolved: false,
-                      Resolution: ($breakingChange.resolution // "")
+                      suggestedFix: ($breakingChange.suggestedFix // ""),
+                      isResolved: false
                     }'
                 )"
               fi
-              jq --argjson result "$clean_result" '. + [$result]' \
-                "$mitigation_results" > "$mitigation_results.tmp"
-              mv "$mitigation_results.tmp" "$mitigation_results"
+              jq \
+                --argjson projectIndex "$project_index" \
+                --argjson result "$clean_result" \
+                '.projects[$projectIndex].breakingChanges += [$result]' \
+                "$MITIGATION_RESULT_PATH" > "$MITIGATION_RESULT_PATH.tmp"
+              mv "$MITIGATION_RESULT_PATH.tmp" "$MITIGATION_RESULT_PATH"
               if [[ "$mitigation_succeeded" != "true" ]]; then
                 exit 1
               fi
@@ -254,28 +251,17 @@ jobs:
               jq -c '.breakingChanges[] | {
                 breakingChange,
                 category,
-                resolution: .suggestedFix
+                suggestedFix
               }' <<< "$project_data"
             )
           done < <(jq -c '.projects | to_entries[]' "$ANALYSIS_RESULT_PATH")
 
-          jq '.' "$mitigation_results" > "$mitigation_results.tmp"
-          mv "$mitigation_results.tmp" "$mitigation_results"
-
-      - name: Upload mitigation results
-        if: always()
-        uses: actions/upload-artifact@v7
-        with:
-          name: sdk-breaking-change-mitigation-results
-          path: ${{ runner.temp }}/sdk-breaking-change-mitigation-results
-          if-no-files-found: warn
-          retention-days: 7
-
       - name: Get mitigation changed code
-        if: steps.resolve-trigger.outputs.should-run == 'true'
         id: get-changed-code
         shell: bash
         working-directory: repositories/azure-rest-api-specs
+        env:
+          MITIGATION_RESULT_PATH: ${{ runner.temp }}/published-mitigation-results/sdk-breaking-change-mitigation.json
         run: |
           set -euo pipefail
           git add --intent-to-add --all
@@ -284,6 +270,10 @@ jobs:
           if [[ ${#changed_code} -gt $max_snippet_length ]]; then
             changed_code="${changed_code:0:$max_snippet_length}"$'\n... diff truncated.'
           fi
+          jq --arg customizationCode "$changed_code" \
+            '.customizationCode = $customizationCode' \
+            "$MITIGATION_RESULT_PATH" > "$MITIGATION_RESULT_PATH.tmp"
+          mv "$MITIGATION_RESULT_PATH.tmp" "$MITIGATION_RESULT_PATH"
           delimiter="changed_code_${RANDOM}_${RANDOM}"
           {
             echo "changed-code<<$delimiter"
@@ -291,13 +281,20 @@ jobs:
             echo "$delimiter"
           } >> "$GITHUB_OUTPUT"
 
+      - name: Upload mitigation result
+        uses: actions/upload-artifact@v7
+        with:
+          name: sdk-breaking-change-mitigation-results
+          path: ${{ runner.temp }}/published-mitigation-results/sdk-breaking-change-mitigation.json
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Publish mitigation summary
-        if: steps.resolve-trigger.outputs.should-run == 'true'
         shell: bash
         env:
-          PR_NUMBER: ${{ steps.resolve-trigger.outputs.pull-number }}
-          SDK_LANGUAGE: ${{ steps.resolve-trigger.outputs.sdk-language }}
-          MITIGATION_COMMIT: ${{ steps.resolve-trigger.outputs.head-sha }}
+          PR_NUMBER: ${{ needs.resolve-trigger.outputs.pr-number }}
+          SDK_LANGUAGE: ${{ needs.resolve-trigger.outputs.sdk-language }}
+          MITIGATION_COMMIT: ${{ needs.resolve-trigger.outputs.head-sha }}
           MITIGATION_CHANGED_CODE: ${{ steps.get-changed-code.outputs.changed-code }}
         run: |
           {
@@ -318,144 +315,19 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Surface mitigation result on pull request
-        if: steps.resolve-trigger.outputs.should-run == 'true'
         uses: actions/github-script@v9
         env:
           WORKFLOW_SUMMARY_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}#summary-${{ job.check_run_id }}
-          ANALYSIS_RESULT_PATH: ${{ runner.temp }}/published-analysis-results/sdk-breaking-change-analysis.json
-          MITIGATION_RESULTS_PATH: ${{ runner.temp }}/sdk-breaking-change-mitigation-results
-          PR_NUMBER: ${{ steps.resolve-trigger.outputs.pull-number }}
-          SDK_LANGUAGE: ${{ steps.resolve-trigger.outputs.sdk-language }}
-          MITIGATION_COMMIT: ${{ steps.resolve-trigger.outputs.head-sha }}
-          MITIGATION_CHANGED_CODE: ${{ steps.get-changed-code.outputs.changed-code }}
+          MITIGATION_RESULT_PATH: ${{ runner.temp }}/published-mitigation-results/sdk-breaking-change-mitigation.json
         with:
           github-token: ${{ github.token }}
           script: |
-            const fs = await import("node:fs/promises");
-            const path = await import("node:path");
-            const pullNumber = Number(process.env.PR_NUMBER);
-            const analysis = JSON.parse(
-              await fs.readFile(process.env.ANALYSIS_RESULT_PATH, "utf8"),
-            );
-            const projectMitigationResults = await Promise.all(
-              analysis.projects.map(async (project, index) => ({
-                project,
-                results: JSON.parse(
-                    await fs.readFile(
-                      path.join(
-                        process.env.MITIGATION_RESULTS_PATH,
-                        `project-${index + 1}`,
-                        "mitigation-results.json",
-                      ),
-                      "utf8",
-                    ),
-                  ),
-              })),
-            );
-            const escapeTableCell = (value, fallback = "-") => {
-              const text = String(value ?? "").trim();
-              return text
-                ? text.replaceAll("\r", "").replaceAll("\n", "<br>").replaceAll("|", "\\|")
-                : fallback;
-            };
-            const projectSections = projectMitigationResults.flatMap(({ project, results }) => {
-              const resolvedChanges = results
-                .filter((result) => result?.isResolved === true)
-                .map(
-                  (result) =>
-                    `| ${escapeTableCell(result.breakingChange)} | ${escapeTableCell(result.Resolution)} | ${escapeTableCell(result.TypeSpecChangesSummary?.[0])} |`,
-                );
-              const unresolvedChanges = results
-                .filter((result) => result?.isResolved !== true)
-                .map(
-                  (result) =>
-                    `| ${escapeTableCell(result.breakingChange)} | ${escapeTableCell(result.Resolution)} |`,
-                );
-              return [
-                `**TypeSpec project:** ${project.typespecProject}`,
-                "",
-                `**SDK package:** ${project.sdkPackage}`,
-                "",
-                "**Resolved Breaking Changes:**",
-                "",
-                "| Breaking change | Resolution | TypeSpec changes |",
-                "| --- | --- | --- |",
-                ...(resolvedChanges.length
-                  ? resolvedChanges
-                  : ["| None | No SDK breaking changes were resolved. | - |"]),
-                "",
-                "**Unresolved Breaking Changes:**",
-                "",
-                "| Breaking change | Suggested resolution |",
-                "| --- | --- |",
-                ...(unresolvedChanges.length
-                  ? unresolvedChanges
-                  : ["| None | All SDK breaking changes were resolved. |"]),
-                "",
-              ];
-            });
-
-            const changedCode = process.env.MITIGATION_CHANGED_CODE?.trim();
-            const report = [
-              "## SDK breaking-change mitigation result",
-              "",
-              `**Mitigation upon commit:** \`${process.env.MITIGATION_COMMIT}\``,
-              "",
-              ...projectSections,
-              "**Customization Code:**",
-              "",
-              changedCode
-                ? ["````diff", changedCode, "````"].join("\n")
-                : "No mitigation changes were produced.",
-              `[View changed code in the workflow summary](${process.env.WORKFLOW_SUMMARY_URL})`,
-            ].join("\n");
-
-            await github.rest.issues.createComment({
-              ...context.repo,
-              issue_number: pullNumber,
-              body: report,
-            });
-
-      - name: Report breaking-change mitigation failure
-        if: failure()
-        uses: actions/github-script@v9
-        env:
-          PR_NUMBER: ${{ steps.resolve-trigger.outputs.pull-number }}
-          MITIGATION_OUTCOME: ${{ steps.mitigate-sdk-breaking-changes.outcome }}
-          MITIGATION_LOG_PATH: ${{ runner.temp }}/sdk-breaking-change-mitigation.log
-          JOB_LOG_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ job.check_run_id }}
-        with:
-          github-token: ${{ github.token }}
-          script: |
-            const fs = await import("node:fs/promises");
-            let errorDetails = "";
-            if (process.env.MITIGATION_OUTCOME === "failure") {
-              try {
-                const mitigationLog = await fs.readFile(
-                  process.env.MITIGATION_LOG_PATH,
-                  "utf8",
-                );
-                errorDetails = mitigationLog
-                  .trim()
-                  .split(/\r?\n/)
-                  .slice(-30)
-                  .map((line) => `    ${line}`)
-                  .join("\n");
-              } catch (error) {
-                core.warning(`Unable to read the mitigation error log: ${error.message}`);
-              }
-            }
-
-            const failureReport = [
-              "> [!CAUTION]\n> SDK breaking-change mitigation failed",
-              errorDetails && `\n### Error log\n\n${errorDetails}`,
-              `\n[See failed step](${process.env.JOB_LOG_URL})`,
-            ]
-              .filter(Boolean)
-              .join("\n");
-
-            await github.rest.issues.createComment({
-              ...context.repo,
-              issue_number: Number(process.env.PR_NUMBER),
-              body: failureReport,
+            const { publishMitigationResult } =
+              await import('${{ github.workspace }}/repositories/workflow-repository/.github/workflows/src/sdk-breaking-change/publish-mitigation-result.ts');
+            await publishMitigationResult({
+              github,
+              context,
+              core,
+              mitigationResultPath: process.env.MITIGATION_RESULT_PATH,
+              workflowSummaryUrl: process.env.WORKFLOW_SUMMARY_URL,
             });
