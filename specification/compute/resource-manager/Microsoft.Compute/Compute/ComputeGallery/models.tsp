@@ -374,6 +374,17 @@ union SharedGalleryHostCaching {
 }
 
 /**
+ * Defines policies for exposing a gallery application version at publishing time. Cannot be updated. 'CoordinatedSDP' type: This allows customers (1P only today) to publish their version as internal in all specified target regions. When an upgrade RTO is created, RSM will orchestrate the rollout of this version in an SDP manner. For each region, RSM will invoke an API to expose this version in PIR to CRP for consumption by greenfield VMs simultaneous to when it carries out upgrades for the same version on brownfield VMs.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+union GalleryApplicationVersionExposurePolicy {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  CoordinatedSDP: "CoordinatedSDP",
+}
+
+
+/**
  * The host caching of the disk. Valid values are 'None', 'ReadOnly', and 'ReadWrite'
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
@@ -1571,11 +1582,11 @@ model GalleryApplicationUpdate extends UpdateResourceDefinition {
 }
 
 /**
- * Describes the properties of a gallery image version.
+ * Describes the properties of a gallery Application version.
  */
 model GalleryApplicationVersionProperties {
   /**
-   * The publishing profile of a gallery image version.
+   * The publishing profile of a gallery Application version.
    */
   publishingProfile: GalleryApplicationVersionPublishingProfile;
 
@@ -1591,20 +1602,20 @@ model GalleryApplicationVersionProperties {
   provisioningState?: GalleryProvisioningState;
 
   /**
-   * This is the replication status of the gallery image version.
+   * This is the replication status of the gallery Application version.
    */
   @visibility(Lifecycle.Read)
   replicationStatus?: ReplicationStatus;
 }
 
 /**
- * The publishing profile of a gallery image version.
+ * The publishing profile of a gallery Application version.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model GalleryApplicationVersionPublishingProfile
   extends GalleryArtifactPublishingProfileBase {
   /**
-   * The source image from which the Image Version is going to be created.
+   * The source image from which the Application Version is going to be created.
    */
   source: UserArtifactSource;
 
@@ -1632,10 +1643,20 @@ model GalleryApplicationVersionPublishingProfile
    */
   @identifiers(#["name"])
   customActions?: GalleryApplicationCustomAction[];
+
+   /**
+   *  Optional. Can only be set to true for global artifacts (artifacts with targetRegionGroup='All'). This will be an opt-in feature to backfill global versions in new regions that have finished buildout, in order to keep the artifacts globally replicated.
+   */
+  autoReplicateToNewRegions?: boolean;
+
+  /**
+   * Optional. If not specified, gallery app version publishing will take place as per usual. For exposurePolicy='CoordinatedSDP', the version will be created in PIR regions with isNotVisibleToCRP=true. This will keep the artifact from being exposed to CRP via PIR get/resolve. isNotVisibleToCRP will only be modified via a PIR API invokable by RSM, which will be the one to orchestrate the exposure of this version to CRP via SDP.
+   */
+  exposurePolicy?: GalleryApplicationVersionExposurePolicy;
 }
 
 /**
- * The source image from which the Image Version is going to be created.
+ * The source image from which the Application Version is going to be created.
  */
 model UserArtifactSource {
   /**
@@ -1685,6 +1706,11 @@ model UserArtifactSettings {
    * Optional. The action to be taken with regards to install/update/remove of the gallery application in the event of a reboot.
    */
   scriptBehaviorAfterReboot?: GalleryApplicationScriptRebootBehavior;
+
+  /**
+   *Optional. Determines whether this VM Application will be considered impactful in the context of operations on Service Fabric VMSS. If true, the impact statement for each instance under an SF VMSS will be updated within CRP during an installation or update (auto-upgrade included) of this VM Application. This will result in an approval request being sent to SFRP-MR (Management Role), and will require either automatic or manual approval from the service owner before proceeding with the actual upgrade.
+   */
+  applyImpactOnSFUpgrade?: boolean;
 }
 
 /**
