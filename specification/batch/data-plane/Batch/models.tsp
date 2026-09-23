@@ -452,7 +452,7 @@ union BatchNodeDeallocationOption {
   TaskCompletion: "taskcompletion",
 
   #deprecated "`RetainedData` is being deprecated, we encourage you to upload task data to Azure Storage in your task and use `TaskCompletion` instead."
-  @removed(Versions.v2026_08_01)
+  @removed(Versions.v2026_10_01)
   @doc("Deprecated, we encourage you to upload task data to Azure Storage in your task and use `TaskCompletion` instead. Allow currently running Tasks to complete, then wait for all Task data retention periods to expire. Schedule no new Tasks while waiting. Remove Compute Nodes when all Task retention periods have expired.")
   RetainedData: "retaineddata",
 }
@@ -471,7 +471,7 @@ union BatchNodeDeallocateOption {
   TaskCompletion: "taskcompletion",
 
   #deprecated "`RetainedData` is being deprecated, we encourage you to upload task data to Azure Storage in your task and use `TaskCompletion` instead."
-  @removed(Versions.v2026_08_01)
+  @removed(Versions.v2026_10_01)
   @doc("Deprecated, we encourage you to upload task data to Azure Storage in your task and use `TaskCompletion` instead. Allow currently running Tasks to complete, then wait for all Task data retention periods to expire. Schedule no new Tasks while waiting. Deallocate the Compute Node when all Task retention periods have expired.")
   RetainedData: "retaineddata",
 }
@@ -660,7 +660,7 @@ union BatchNodeRebootKind {
   TaskCompletion: "taskcompletion",
 
   #deprecated "`RetainedData` is being deprecated, we encourage you to upload task data to Azure Storage in your task and use `TaskCompletion` instead."
-  @removed(Versions.v2026_08_01)
+  @removed(Versions.v2026_10_01)
   @doc("Deprecated, we encourage you to upload task data to Azure Storage in your task and use `TaskCompletion` instead. Allow currently running Tasks to complete, then wait for all Task data retention periods to expire. Schedule no new Tasks while waiting. Restart the Compute Node when all Task retention periods have expired.")
   RetainedData: "retaineddata",
 }
@@ -679,7 +679,7 @@ union BatchNodeReimageOption {
   TaskCompletion: "taskcompletion",
 
   #deprecated "`RetainedData` is being deprecated, we encourage you to upload task data to Azure Storage in your task and use `TaskCompletion` instead."
-  @removed(Versions.v2026_08_01)
+  @removed(Versions.v2026_10_01)
   @doc("Deprecated, we encourage you to upload task data to Azure Storage in your task and use `TaskCompletion` instead. Allow currently running Tasks to complete, then wait for all Task data retention periods to expire. Schedule no new Tasks while waiting. Reimage the Compute Node when all Task retention periods have expired.")
   RetainedData: "retaineddata",
 }
@@ -793,7 +793,7 @@ model BatchErrorDetail {
 }
 
 @doc("The result of a listing the usage metrics for an Account.")
-@removed(Versions.v2026_08_01)
+@removed(Versions.v2026_10_01)
 model BatchPoolListUsageMetricsResult {
   @doc("The Pool usage metrics data.")
   @pageItems
@@ -806,7 +806,7 @@ model BatchPoolListUsageMetricsResult {
 }
 
 @doc("Usage metrics for a Pool across an aggregation interval.")
-@removed(Versions.v2026_08_01)
+@removed(Versions.v2026_10_01)
 model BatchPoolUsageMetrics {
   @doc("The ID of the Pool whose metrics are aggregated in this entry.")
   poolId: string;
@@ -987,7 +987,7 @@ model BatchPoolStatistics {
 
   @doc("Statistics related to Pool usage, such as the amount of core-time used.")
   @clientName("usageStatistics")
-  @removed(Versions.v2026_08_01)
+  @removed(Versions.v2026_10_01)
   usageStats?: BatchPoolUsageStatistics;
 
   @doc("Statistics related to resource consumption by Compute Nodes in the Pool.")
@@ -1525,7 +1525,7 @@ model ContainerRegistryReference {
   password?: string;
 
   @doc("The registry URL. If omitted, the default is \"docker.io\".")
-  registryServer?: url;
+  registryServer?: string;
 
   @doc("The reference to the user assigned identity to use to access an Azure Container Registry instead of username and password.")
   identityReference?: BatchNodeIdentityReference;
@@ -1921,11 +1921,73 @@ model VirtualMachineConfiguration {
   serviceArtifactReference?: ServiceArtifactReference;
 
   @doc("Specifies the hardware settings for the Compute Nodes. This property is not supported for pools created via auto-pool (as part of a job or job schedule); the request will be rejected if it is specified in that context.")
-  @added(Versions.v2026_08_01)
+  @added(Versions.v2026_10_01)
   hardwareProfile?: HardwareProfile;
+
+  @added(Versions.v2026_10_01)
+  @doc("""
+    The availability zone placement policy for Compute Nodes in the Pool. Set zonePlacementPolicy to Auto to delegate availability zone selection and balancing to the Virtual Machine Scale Set.
+    On Pool creation, if placement is omitted, Batch uses nodePlacementConfiguration when it is specified; otherwise, the Pool uses Regional placement, which provides no availability zone distribution guarantee. This property cannot be combined with nodePlacementConfiguration.
+    On PATCH, omitting placement preserves the existing placement policy, including when virtualMachineConfiguration is supplied.
+    """)
+  placement?: Placement;
+
+  @added(Versions.v2026_10_01)
+  @doc("""
+    The resiliency policy for Compute Nodes in the Pool. This property requires placement.zonePlacementPolicy to be Auto.
+    On PATCH, omitting resiliencyPolicy preserves the existing resiliency policy independently of whether placement is supplied.
+    """)
+  resiliencyPolicy?: ResiliencyPolicy;
 }
 
-@added(Versions.v2026_08_01)
+@added(Versions.v2026_10_01)
+@doc("The placement policy for Compute Nodes in a Pool.")
+model Placement {
+  @doc("The zone placement policy. Auto delegates zone selection and balancing to the Virtual Machine Scale Set.")
+  zonePlacementPolicy: ZonePlacementPolicyType;
+}
+
+@added(Versions.v2026_10_01)
+@doc("The resiliency policy for Compute Nodes in a Pool.")
+model ResiliencyPolicy {
+  @doc("The policy that controls allocation across availability zones.")
+  zoneAllocationPolicy: ZoneAllocationPolicy;
+}
+
+@added(Versions.v2026_10_01)
+@doc("The policy that controls allocation across availability zones.")
+model ZoneAllocationPolicy {
+  @minValue(1)
+  @doc("The maximum number of availability zones that may be used. The value cannot exceed the number of zones supported by the region.")
+  maxZoneCount?: int32;
+
+  @doc("The policy that limits the percentage of Pool instances that may be allocated in a single availability zone.")
+  maxInstancePercentPerZonePolicy?: MaxInstancePercentPerZonePolicy;
+}
+
+@added(Versions.v2026_10_01)
+@doc("The policy that limits the percentage of Pool instances that may be allocated in a single availability zone.")
+model MaxInstancePercentPerZonePolicy {
+  @doc("Whether the maximum instance percentage policy is enabled.")
+  enabled?: boolean;
+
+  @minValue(1)
+  @maxValue(100)
+  @doc("The maximum percentage of Pool instances that may be allocated in a single availability zone.")
+  value: int32;
+}
+
+@added(Versions.v2026_10_01)
+@doc("The zone placement policy for Compute Nodes in a Pool.")
+union ZonePlacementPolicyType {
+  string,
+
+  @doc("The Virtual Machine Scale Set automatically selects availability zones and balances instances across them.")
+  Auto: "Auto",
+}
+
+
+@added(Versions.v2026_10_01)
 @doc("Specifies the set of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool.")
 model VirtualMachineSkuProfile {
   @doc("The list of VM sizes (1 to 5) that may be allocated for the Pool. All sizes must share the same vCPU count and VM family. This must be specified when the vmSkuProfile is provided during Pool creation.")
@@ -1937,7 +1999,7 @@ model VirtualMachineSkuProfile {
   allocationStrategy?: VirtualMachineSkuAllocationStrategy;
 }
 
-@added(Versions.v2026_08_01)
+@added(Versions.v2026_10_01)
 @doc("Specifies a single VM size that may be allocated for an Instance Mix Pool.")
 model VirtualMachineSkuProfileVmSize {
   @doc("The name of the VM size (for example, 'Standard_D8s_v5').")
@@ -1947,7 +2009,7 @@ model VirtualMachineSkuProfileVmSize {
   rank?: int32;
 }
 
-@added(Versions.v2026_08_01)
+@added(Versions.v2026_10_01)
 @doc("Specifies the allocation strategy that the Fungible Compute Platform uses to select VM sizes from the vmSkuProfile when allocating Compute Nodes for an Instance Mix Pool.")
 union VirtualMachineSkuAllocationStrategy {
   string,
@@ -1962,7 +2024,7 @@ union VirtualMachineSkuAllocationStrategy {
   Prioritized: "prioritized",
 }
 
-@added(Versions.v2026_08_01)
+@added(Versions.v2026_10_01)
 @doc("Specifies the hardware settings for the Compute Nodes.")
 model HardwareProfile {
   @doc("Specifies the properties for customizing the size of the virtual machine.")
@@ -1970,7 +2032,7 @@ model HardwareProfile {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VMSizeProperties matches the Azure Compute VM size customization model naming."
-@added(Versions.v2026_08_01)
+@added(Versions.v2026_10_01)
 @doc("Specifies the properties for customizing the size of the virtual machine.")
 model VMSizeProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "vCPUsAvailable matches the Azure Compute VM size property naming."
@@ -3005,7 +3067,7 @@ model BatchPool {
 
   @doc("Specifies the profile of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool. When specified, vmSize must be 'Mix'. This property can only be changed while the Pool has no Compute Nodes.")
   @visibility(Lifecycle.Read)
-  @added(Versions.v2026_08_01)
+  @added(Versions.v2026_10_01)
   vmSkuProfile?: VirtualMachineSkuProfile;
 
   @doc("The timeout for allocation of Compute Nodes to the Pool. This is the timeout for the most recent resize operation. (The initial sizing when the Pool is created counts as a resize.) The default value is 15 minutes. The time duration is specified in ISO 8601 format.")
@@ -3111,7 +3173,7 @@ model BatchPoolCreateOptions {
   virtualMachineConfiguration?: VirtualMachineConfiguration;
 
   @doc("Specifies the profile of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool. When specified, vmSize must be 'Mix'. This property can only be changed while the Pool has no Compute Nodes.")
-  @added(Versions.v2026_08_01)
+  @added(Versions.v2026_10_01)
   vmSkuProfile?: VirtualMachineSkuProfile;
 
   @doc("The timeout for allocation of Compute Nodes to the Pool. This timeout applies only to manual scaling; it has no effect when enableAutoScale is set to true. The default value is 15 minutes. The minimum value is 5 minutes. If you specify a value less than 5 minutes, the Batch service returns an error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request). The time duration is specified in ISO 8601 format.")
@@ -3199,7 +3261,7 @@ model BatchPoolUpdateOptions {
   virtualMachineConfiguration?: VirtualMachineConfiguration;
 
   @doc("Specifies the profile of VM sizes and the allocation strategy used to allocate Compute Nodes for an Instance Mix Pool. When specified, vmSize must be 'Mix'.<br /><br />This field can be updated only when the pool is empty.")
-  @added(Versions.v2026_08_01)
+  @added(Versions.v2026_10_01)
   vmSkuProfile?: VirtualMachineSkuProfile;
 
   @doc("The number of task slots that can be used to run concurrent tasks on a single compute node in the pool. The default value is 1. The maximum value is the smaller of 4 times the number of cores of the vmSize of the pool or 256.<br /><br />This field can be updated only when the pool is empty.")
@@ -3951,14 +4013,14 @@ model BatchNode {
   @doc("The public IPv4 address (load balancer front-end VIP) used to reach this Compute Node from outside the virtual network. For Pools that use the Batch-managed or User-managed public load balancer, this is the load balancer's front-end public IPv4 address. The value is present regardless of whether SSH or RDP remote access is enabled, so callers can perform IP-based validation even when remote login is disabled. The property is omitted when the Pool is configured with no public IP addresses (for example, private link or BYO VNet with NoPublicIPAddresses).")
   @clientName("publicIpAddress")
   @visibility(Lifecycle.Read)
-  @added(Versions.v2026_08_01)
+  @added(Versions.v2026_10_01)
   publicIPAddress?: string;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Wire property name uses the established publicIPAddress naming"
   @doc("The public IPv6 address (load balancer front-end VIP) used to reach this Compute Node from outside the virtual network. Populated only when the Pool is configured for IPv6 / dual-stack public networking. The property is omitted otherwise.")
   @clientName("publicIpv6Address")
   @visibility(Lifecycle.Read)
-  @added(Versions.v2026_08_01)
+  @added(Versions.v2026_10_01)
   publicIPv6Address?: string;
 
   @doc("An identifier which can be passed when adding a Task to request that the Task be scheduled on this Compute Node. Note that this is just a soft affinity. If the target Compute Node is busy or unavailable at the time the Task is scheduled, then the Task will be scheduled elsewhere.")

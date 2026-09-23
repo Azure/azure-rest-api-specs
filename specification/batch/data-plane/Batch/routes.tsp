@@ -70,7 +70,7 @@ interface Pools {
     times of the last aggregation interval currently available; that is, only the
     last aggregation interval is returned.
     """)
-  @removed(Versions.v2026_08_01)
+  @removed(Versions.v2026_10_01)
   @route("/poolusagemetrics")
   @list
   listPoolUsageMetrics is ListOperation<
