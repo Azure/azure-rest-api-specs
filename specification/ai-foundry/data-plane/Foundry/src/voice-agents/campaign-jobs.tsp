@@ -14,6 +14,9 @@ namespace Azure.AI.Projects;
  * from the original JSON token before binary64 conversion. Never merge distinct int64 values
  * through float rounding. Strings such as "1" remain distinct from numbers. Preserve int64
  * values exactly; other values must convert to finite binary64 without nonzero underflow to zero.
+ * Replay comparison applies to the JSON actually received by the service. SDK serialization can round
+ * caller-side numeric values before transmission; clients needing exact values must use a lossless
+ * serialization path. Retries preserve the same serialized numeric values.
  * Numeric tokens are limited to 128 characters. Strings are limited to 16 KiB in UTF-8 at runtime.
  */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -230,7 +233,7 @@ model TelephonyCampaignInputSummary {
   recipients: TelephonyCampaignRecipientSourceSummary;
 }
 
-/** Progress of the current validation pass. These counters may reset for a new Agent version; execution counters never reset. */
+/** Progress of the current validation pass. These counters reset for each new pass, including retries for the same Agent version; execution counters never reset. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaignValidationProgress {
   /** Agent version being checked. Absent until resolved. */
@@ -295,11 +298,22 @@ union TelephonyCampaignStatus {
   /** Preparation succeeded; waiting for the first explicit start. Recipient scheduling applies once execution is authorized. */
   pending: "pending",
 
+  /** Execution is authorized, including waiting for schedules, capacity and retries. Start is idempotent; pause or cancel can stop new admission. */
   running: "running",
+
+  /** User pause or a recoverable validation/runtime blocker, with validation workers quiescent. Start continues unfinished work through any required revalidation; cancel abandons it. */
   paused: "paused",
+
+  /** New admission is closed while validation workers and admitted calls drain. Repeated cancel is idempotent; connected calls finish naturally. */
   cancelling: "cancelling",
+
+  /** Execution-terminal: every recipient is terminal, including failures or expiry. Delete is allowed after quiescence; individual call outcomes determine success. */
   completed: "completed",
+
+  /** Initial preparation failed and workers are quiescent; dialing was not authorized. Correct the inputs/Agent and create a new Campaign. This execution-terminal state permits delete. */
   failed: "failed",
+
+  /** Execution-terminal: cancellation is complete and workers/admitted calls are quiescent. Delete is allowed; unfinished work cannot be restarted. */
   cancelled: "cancelled",
 
   /** Irreversible cascade cleanup; dialing and name reuse are blocked until deletion succeeds. A failed cleanup remains in this state and can be retried. */

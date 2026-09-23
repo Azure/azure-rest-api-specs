@@ -94970,7 +94970,7 @@
             "type": "boolean"
           }
         ],
-        "description": "Scalar template values. Objects, arrays, null and non-finite numbers are not accepted.\nNumbers use JSON-number semantics, not separate int64/double wire tags: 1, 1.0 and 1e0 are\nequivalent for replay; -0 equals 0. Compare normalized exact decimal coefficient/exponent\nfrom the original JSON token before binary64 conversion. Never merge distinct int64 values\nthrough float rounding. Strings such as \"1\" remain distinct from numbers. Preserve int64\nvalues exactly; other values must convert to finite binary64 without nonzero underflow to zero.\nNumeric tokens are limited to 128 characters. Strings are limited to 16 KiB in UTF-8 at runtime.",
+        "description": "Scalar template values. Objects, arrays, null and non-finite numbers are not accepted.\nNumbers use JSON-number semantics, not separate int64/double wire tags: 1, 1.0 and 1e0 are\nequivalent for replay; -0 equals 0. Compare normalized exact decimal coefficient/exponent\nfrom the original JSON token before binary64 conversion. Never merge distinct int64 values\nthrough float rounding. Strings such as \"1\" remain distinct from numbers. Preserve int64\nvalues exactly; other values must convert to finite binary64 without nonzero underflow to zero.\nReplay comparison applies to the JSON actually received by the service. SDK serialization can round\ncaller-side numeric values before transmission; clients needing exact values must use a lossless\nserialization path. Retries preserve the same serialized numeric values.\nNumeric tokens are limited to 128 characters. Strings are limited to 16 KiB in UTF-8 at runtime.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -95389,7 +95389,7 @@
             "description": "Rows rejected by validation."
           }
         },
-        "description": "Progress of the current validation pass. These counters may reset for a new Agent version; execution counters never reset.",
+        "description": "Progress of the current validation pass. These counters reset for each new pass, including retries for the same Agent version; execution counters never reset.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"

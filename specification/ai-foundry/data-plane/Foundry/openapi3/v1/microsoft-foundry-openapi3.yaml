@@ -83229,6 +83229,9 @@ components:
         from the original JSON token before binary64 conversion. Never merge distinct int64 values
         through float rounding. Strings such as "1" remain distinct from numbers. Preserve int64
         values exactly; other values must convert to finite binary64 without nonzero underflow to zero.
+        Replay comparison applies to the JSON actually received by the service. SDK serialization can round
+        caller-side numeric values before transmission; clients needing exact values must use a lossless
+        serialization path. Retries preserve the same serialized numeric values.
         Numeric tokens are limited to 128 characters. Strings are limited to 16 KiB in UTF-8 at runtime.
       x-ms-foundry-meta:
         required_previews:
@@ -83536,7 +83539,7 @@ components:
           format: int64
           minimum: 0
           description: Rows rejected by validation.
-      description: Progress of the current validation pass. These counters may reset for a new Agent version; execution counters never reset.
+      description: Progress of the current validation pass. These counters reset for each new pass, including retries for the same Agent version; execution counters never reset.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
