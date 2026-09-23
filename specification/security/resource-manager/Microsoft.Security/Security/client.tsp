@@ -101,6 +101,193 @@ using StandardsAPI;
 })
 namespace SecurityManagementClient;
 
+@@override(
+  PrivateLinkResources.get,
+  reorderParameters(
+    PrivateLinkResources.get,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "privateLinkName"
+    ]
+  ),
+  "!python,!java,!javascript"
+);
+
+@@override(
+  PrivateLinkResources.create,
+  reorderParameters(
+    PrivateLinkResources.create,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "resource",
+      "privateLinkName"
+    ]
+  ),
+  "!python,!java,!javascript"
+);
+
+@@override(
+  PrivateLinkResources.update,
+  reorderParameters(
+    PrivateLinkResources.update,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "properties",
+      "privateLinkName"
+    ]
+  ),
+  "!python,!java,!javascript"
+);
+
+@@override(
+  PrivateLinkResources.delete,
+  reorderParameters(
+    PrivateLinkResources.delete,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "privateLinkName"
+    ]
+  ),
+  "!python,!java,!javascript"
+);
+
+@@override(
+  PrivateLinkResources.head,
+  reorderParameters(
+    PrivateLinkResources.head,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "privateLinkName"
+    ]
+  ),
+  "!python,!java,!javascript"
+);
+
+@@override(
+  PrivateEndpointConnections.list,
+  reorderParameters(
+    PrivateEndpointConnections.list,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "privateLinkName"
+    ]
+  ),
+  "!python,!java,!javascript"
+);
+
+@@override(
+  PrivateEndpointConnections.get,
+  reorderParameters(
+    PrivateEndpointConnections.get,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "privateEndpointConnectionName",
+      "privateLinkName"
+    ]
+  ),
+  "!python,!java,!javascript"
+);
+
+@@override(
+  PrivateEndpointConnections.createOrUpdate,
+  reorderParameters(
+    PrivateEndpointConnections.createOrUpdate,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "privateEndpointConnectionName",
+      "resource",
+      "privateLinkName"
+    ]
+  ),
+  "!python,!java,!javascript"
+);
+
+@@override(
+  PrivateEndpointConnections.delete,
+  reorderParameters(
+    PrivateEndpointConnections.delete,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "privateEndpointConnectionName",
+      "privateLinkName"
+    ]
+  ),
+  "!python,!java,!javascript"
+);
+
+@@override(
+  PrivateLinkGroupResources.list,
+  reorderParameters(
+    PrivateLinkGroupResources.list,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "privateLinkName"
+    ]
+  ),
+  "!python,!java,!javascript"
+);
+
+@@override(
+  PrivateLinkGroupResources.get,
+  reorderParameters(
+    PrivateLinkGroupResources.get,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "resourceGroupName",
+      "provider",
+      "groupId",
+      "privateLinkName"
+    ]
+  ),
+  "!python,!java,!javascript"
+);
+
+@@override(
+  AlertOperationGroup.listResourceGroupLevelByRegion,
+  reorderParameters(
+    AlertOperationGroup.listResourceGroupLevelByRegion,
+    #[
+      "apiVersion",
+      "subscriptionId",
+      "provider",
+      "ascLocation",
+      "resourceGroupName"
+    ]
+  ),
+  "python,go,java"
+);
+
 @@clientName(
   PrivateLinkResources.create::parameters.resource,
   "privateLink",
