@@ -87119,11 +87119,12 @@ components:
     TelephonyCampaignRecipient:
       type: object
       required:
-        - destination
+        - phone_number
       properties:
-        destination:
-          $ref: '#/components/schemas/TelephonyOutboundDestination'
-          description: Telephone destination; the provider comes from the campaign connection.
+        phone_number:
+          type: string
+          pattern: ^\+[1-9]\d{1,14}$
+          description: Recipient E.164 phone number; the provider comes from the Campaign connection.
         structured_inputs:
           type: object
           unevaluatedProperties:

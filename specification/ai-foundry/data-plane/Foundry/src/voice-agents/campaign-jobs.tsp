@@ -30,8 +30,9 @@ union TelephonyCampaignInputValue {
 /** One recipient in an inline campaign input. Each input position is a separate intended call, including repeated phone numbers. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaignRecipient {
-  /** Telephone destination; the provider comes from the campaign connection. */
-  destination: TelephonyOutboundDestination;
+  /** Recipient E.164 phone number; the provider comes from the Campaign connection. */
+  @pattern("^\\+[1-9]\\d{1,14}$")
+  phone_number: string;
 
   /** Agent-declared inputs follow required/default/schema semantics. Extra scalars are dynamic variables. At most 128 keys, each 1-256 characters; values must obey the documented byte limits. */
   structured_inputs?: Record<TelephonyCampaignInputValue>;
