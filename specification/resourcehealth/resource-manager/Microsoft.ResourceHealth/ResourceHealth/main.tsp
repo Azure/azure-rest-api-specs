@@ -48,6 +48,26 @@ enum Versions {
   v2025_05_01: "2025-05-01",
 }
 
+// Declare client groups with the service so namespace binding is independent of the entrypoint.
+namespace MetadataClientGroup {
+
+}
+namespace EventClientGroup {
+
+}
+namespace EventsClientGroup {
+
+}
+namespace SecurityAdvisoryImpactedResourcesClientGroup {
+
+}
+namespace EmergingIssuesClientGroup {
+
+}
+namespace ChildResourcesClientGroup {
+
+}
+
 @armResourceOperations
 interface Operations {
   /**
