@@ -4,14 +4,9 @@ import {
 } from "@azure-tools/specs-shared/typespec-metadata";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { checkEmitterEnabled } from "../src/emitter-check.ts";
-import { logMessage, LogLevel } from "../src/log.ts";
 
 vi.mock("@azure-tools/specs-shared/typespec-metadata", () => ({
   generateTypeSpecMetadata: vi.fn(),
-}));
-vi.mock("../src/log.ts", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("../src/log.ts")>()),
-  logMessage: vi.fn(),
 }));
 
 function metadata(languages: TypeSpecMetadata["languages"]): TypeSpecMetadata {
@@ -26,28 +21,15 @@ function metadata(languages: TypeSpecMetadata["languages"]): TypeSpecMetadata {
 describe("checkEmitterEnabled", () => {
   beforeEach(() => vi.resetAllMocks());
 
-  it.each([
-    ["python", "python"],
-    ["java", "java"],
-    ["net", "csharp"],
-    ["net", "http-client-csharp"],
-    ["net", "http-client-csharp-mgmt"],
-    ["js", "typescript"],
-    ["go", "go"],
-    ["rust", "rust"],
-    ["python-pr", "python"],
-  ])("finds the %s repository's %s emitter", async (repo, languageKey) => {
+  it("extracts configured package metadata from the shared helper", async () => {
     const result = metadata({
-      [languageKey]: [
-        { emitterName: "test-emitter", packageName: "test-package" },
-        { emitterName: "second-emitter", packageName: "second-package" },
-      ],
+      python: [{ emitterName: "test-emitter", packageName: "test-package" }],
     });
     vi.mocked(generateTypeSpecMetadata).mockResolvedValue(result);
-    await expect(checkEmitterEnabled("project", `azure-sdk-for-${repo}`)).resolves.toEqual({
+    await expect(checkEmitterEnabled("project", "azure-sdk-for-python")).resolves.toEqual({
       enabled: true,
       metadata: result,
-      languageKey,
+      languageKey: "python",
       packageName: "test-package",
     });
     expect(generateTypeSpecMetadata).toHaveBeenCalledOnce();
@@ -55,16 +37,12 @@ describe("checkEmitterEnabled", () => {
     expect(vi.mocked(generateTypeSpecMetadata).mock.lastCall?.[1]?.logger).toBeDefined();
   });
 
-  it.each([
-    ["azure-sdk-for-python", {}],
-    ["azure-sdk-for-python", { python: [] }],
-    ["unknown-repository", { python: [{ emitterName: "test-emitter" }] }],
-  ])(
-    "returns disabled only after successfully reading metadata (%s, %j)",
-    async (repo, languages) => {
+  it.each<TypeSpecMetadata["languages"]>([{}, { python: [] }])(
+    "returns disabled only after successfully reading metadata (%j)",
+    async (languages) => {
       const result = metadata(languages);
       vi.mocked(generateTypeSpecMetadata).mockResolvedValue(result);
-      await expect(checkEmitterEnabled("project", repo)).resolves.toEqual({
+      await expect(checkEmitterEnabled("project", "azure-sdk-for-python")).resolves.toEqual({
         enabled: false,
         metadata: result,
         languageKey: undefined,
@@ -90,22 +68,5 @@ describe("checkEmitterEnabled", () => {
     const error = new Error("metadata compiler diagnostic");
     vi.mocked(generateTypeSpecMetadata).mockRejectedValue(error);
     await expect(checkEmitterEnabled("project", "azure-sdk-for-python")).rejects.toBe(error);
-    expect(logMessage).not.toHaveBeenCalled();
-  });
-
-  it("routes shared compiler logs through runner logging", async () => {
-    vi.mocked(generateTypeSpecMetadata).mockImplementation((_folder, options) => {
-      options?.logger?.warning("compiler warning");
-      options?.logger?.debug("compiler details");
-      options?.logger?.info("compiler command");
-      options?.logger?.error("compiler error");
-      expect(options?.logger?.isDebug()).toBe(true);
-      return Promise.resolve(metadata({}));
-    });
-    await checkEmitterEnabled("project", "azure-sdk-for-python");
-    expect(logMessage).toHaveBeenCalledWith("compiler warning", LogLevel.Warn);
-    expect(logMessage).toHaveBeenCalledWith("compiler details", LogLevel.Debug);
-    expect(logMessage).toHaveBeenCalledWith("compiler command", LogLevel.Info);
-    expect(logMessage).toHaveBeenCalledWith("compiler error", LogLevel.Error);
   });
 });

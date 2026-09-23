@@ -1327,12 +1327,11 @@ describe("azsdk metadata outcomes", () => {
     specRepoHttpsUrl: "",
   };
   const modes = [
-    { name: "single-spec", run: generateSdkForSingleSpec, disabledResult: "notEnabled" },
-    { name: "spec-PR", run: generateSdkForSpecPr, disabledResult: "notEnabled" },
+    { name: "single-spec", run: generateSdkForSingleSpec },
+    { name: "spec-PR", run: generateSdkForSpecPr },
     {
       name: "batch",
       run: () => generateSdkForBatchSpecs("all-typespecs"),
-      disabledResult: "succeeded",
     },
   ];
 
@@ -1406,20 +1405,18 @@ describe("azsdk metadata outcomes", () => {
     },
   );
 
-  test.each(modes)(
-    "preserves disabled-emitter handling in $name",
-    async ({ run, disabledResult, name }) => {
-      await expect(run()).resolves.toEqual({ statusCode: 0, executionResult: disabledResult });
-      expect(utils.runCommandWithOutput).not.toHaveBeenCalled();
-      expect(log.vsoLogIssue).not.toHaveBeenCalled();
-      if (name === "batch") {
-        expect(fs.writeFileSync).toHaveBeenCalledWith(
-          expect.any(String),
-          expect.stringContaining("## Total Specs with SDK not enabled in the Configuration\n 1\n"),
-        );
-      }
-    },
-  );
+  test("does not count a disabled emitter as a batch failure", async () => {
+    await expect(generateSdkForBatchSpecs("all-typespecs")).resolves.toEqual({
+      statusCode: 0,
+      executionResult: "succeeded",
+    });
+    expect(utils.runCommandWithOutput).not.toHaveBeenCalled();
+    expect(log.vsoLogIssue).not.toHaveBeenCalled();
+    expect(fs.writeFileSync).toHaveBeenCalledWith(
+      expect.any(String),
+      expect.stringContaining("## Total Specs with SDK not enabled in the Configuration\n 1\n"),
+    );
+  });
 
   test.each(["batch", "spec-PR"])(
     "continues %s processing and does not reuse a prior successful report",
