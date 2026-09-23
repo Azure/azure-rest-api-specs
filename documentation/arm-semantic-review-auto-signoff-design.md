@@ -26,37 +26,41 @@ semantic API design issues.
 
 ## ARM Semantic Review
 
-`ARM Semantic Review` is the machine-readable outcome of the ARM API Reviewer
-for the current PR head. It translates the reviewer's comments and execution
-state into a result that auto-signoff can evaluate.
+The ARM API Reviewer continues to post comments as it does today. After each
+run, it also publishes an `ARM Semantic Review` result for the exact commit it
+reviewed. Universal Auto-Signoff uses this result to decide whether it can
+continue.
 
-The result is one of:
+- **Passed:** The full PR was reviewed and no Blocking issues were found.
+- **Failed:** The reviewer found one or more verified Blocking issues.
+- **Unavailable:** The review was scoped, incomplete, degraded, stale, or
+  otherwise could not produce a reliable result.
 
-- **Passed:** a full review completed and found no Blocking issues.
-- **Failed:** the reviewer reported one or more Blocking issues.
-- **Unavailable:** the review was scoped, incomplete, degraded, stale, or did
-  not produce a trustworthy result.
-
-Only **Passed** allows auto-signoff to continue. Failed and Unavailable results
-require another review or manual ARM signoff.
+Only Passed allows Universal Auto-Signoff to continue. Failed returns the PR to
+the author. Unavailable keeps the PR in the manual ARM review queue and prevents
+automatic signoff.
 
 ## Proposed flow
 
 ```mermaid
 flowchart TD
-    A[PR enters ARM review] --> B[ARM API Reviewer runs]
-    B --> C{Semantic review result}
+    A[PR opened] --> B[ARM API Reviewer triggers]
+    B --> C{ARM Semantic Review result}
 
-    C -- Passed --> D{Deterministic checks, labels,\nand approvals pass?}
-    D -- Yes --> E[Auto-sign off]
-    D -- No --> F[Wait for remaining checks or approvals]
+    C -- Passed --> D[Remove ARMChangesRequested if present\nKeep WaitForARMFeedback]
+    D --> E[Universal Auto-Signoff evaluates the PR]
+    E --> F{Deterministic checks, labels,\nand approvals pass?}
+    F -- Yes --> G[Add ARMSignedOff]
+    F -- No --> H[Wait for remaining requirements]
 
-    C -- Failed --> G[Add ARMChangesRequested\nRemove WaitForARMFeedback]
-    G --> H[Author addresses the review comments]
-    H --> I[Author sets WaitForARMFeedback]
-    I --> B
+    C -- Failed --> I[Add ARMChangesRequested\nRemove WaitForARMFeedback]
+    I --> J[Author addresses the review comments]
+    J --> K[Author sets WaitForARMFeedback\nor requests /arm-review]
+    K --> B
 
-    C -- Unavailable --> J[Require another full review\nor manual ARM signoff]
+    C -- Unavailable --> L[Leave ARM queue labels unchanged]
+    L --> M[Universal Auto-Signoff adds\nARMManualSignoffRequired]
+    M --> N[Keep WaitForARMFeedback\nRequire manual ARM review/signoff]
 ```
 
 `WaitForARMFeedback` places the PR in the ARM review queue. Setting it after
@@ -68,27 +72,22 @@ There is no review counter or retry limit.
 
 ## Auto-signoff decision
 
-Auto-signoff proceeds only when all three groups of requirements are satisfied:
+Universal Auto-Signoff proceeds only when:
 
-### Semantic review
+- ARM Semantic Review passed for the current PR head;
+- Swagger LintDiff and Swagger Avocado passed;
+- the PR is ready for ARM review;
+- any required suppression or breaking-change approval is present; and
+- manual ARM signoff is not required.
 
-- ARM Semantic Review passed for the current PR head.
-- `ARMChangesRequested` is absent.
+## Stop automatic signoff
 
-### Deterministic validation
+Add the `ARMManualSignoffRequired` label when a PR needs a human decision or
+should not be signed off automatically.
 
-- Swagger LintDiff passed.
-- Swagger Avocado passed.
-
-### Workflow state and approvals
-
-- The PR is ready for ARM review.
-- Any required suppression or breaking-change approval is present.
-- Manual ARM signoff is not required.
-
-`ARMChangesRequested` remains a visible veto in addition to the semantic
-result. This prevents label or workflow timing differences from allowing a PR
-with unresolved Blocking feedback to be signed off.
+While this label is present, Universal Auto-Signoff must not add
+`ARMSignedOff`. After the manual review, the reviewer can remove the label to
+return the PR to automatic signoff or complete the ARM signoff manually.
 
 ## Large and scoped reviews
 
@@ -107,25 +106,13 @@ reviewed again at full scope, or signed off manually.
 
 ## Failure and race handling
 
-| Case                                                | Handling                                                                                       |
-| --------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| LintDiff or Avocado finishes before the reviewer    | Auto-signoff waits for the ARM Semantic Review result.                                         |
-| The reviewer completes                              | A `workflow_run` handoff publishes the semantic result and triggers auto-signoff reevaluation. |
-| The PR changes after review                         | The previous semantic result is ignored because it does not apply to the current head.         |
-| A stale review finishes late                        | Its output is discarded after the workflow detects that the PR head changed.                   |
-| The semantic result and labels disagree             | `ARMChangesRequested` vetoes signoff.                                                          |
-| The PR changes after the signoff decision           | The label updater rechecks the live head before applying signoff.                              |
-| A bot-added label does not trigger another workflow | The reviewer-to-signoff handoff uses `workflow_run`, not the label event.                      |
-| The reviewer does not produce a valid result        | Missing, malformed, incomplete, or degraded evidence becomes Unavailable and fails closed.     |
-
-## Implementation outline
-
-1. Produce a structured reviewer result tied to the PR and reviewed head.
-2. Add an `ARM Semantic Review` status workflow that consumes the reviewer
-   result.
-3. Require a Passed semantic result and the absence of
-   `ARMChangesRequested` in Universal Auto-Signoff.
-4. Keep the existing `WaitForARMFeedback` and `/arm-review` review paths.
-5. Test clean, blocked, stale-head, scoped, incomplete, and repeated review
-   cases.
-6. Keep the integration pilot-only before changing `ARMSignedOff`.
+| Case                                             | Handling                                                                                                                 |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| LintDiff or Avocado finishes before the reviewer | Auto-signoff waits for the ARM Semantic Review result.                                                                   |
+| The reviewer completes                           | A `workflow_run` handoff publishes the semantic result and starts auto-signoff reevaluation.                             |
+| The PR changes after review                      | The previous result is ignored because it names a different commit.                                                      |
+| A stale review finishes late                     | Its output is discarded after the workflow detects that the PR head changed.                                             |
+| The PR changes after the signoff decision        | The label updater rechecks the live head before applying signoff.                                                        |
+| A bot-added label does not start the reviewer    | Initial and repeat reviews continue to use the existing triggers; this design does not introduce another label handoff.  |
+| The reviewer does not produce a valid result     | The result is Unavailable; auto-signoff adds `ARMManualSignoffRequired` and the PR remains in `WaitForARMFeedback`.      |
+| The reviewer runs again after Unavailable        | A newer result may be published, but `ARMManualSignoffRequired` continues to block auto-signoff until manually resolved. |
