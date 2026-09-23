@@ -1343,4 +1343,92 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
+
+  // --------------------------------------------------------------------------------
+  // Fix APIView namespace leak: these Foundry-only types were generating into the
+  // OpenAI C# namespace instead of Azure.AI.Projects.Agents.
+  // --------------------------------------------------------------------------------
+  @@alternateType(
+    OpenAI.VoiceResponseBaseStatus,
+    {
+      identity: "OpenAI.Realtime.RealtimeResponseStatus",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.VoiceResponseBaseOutputModality,
+    {
+      identity: "OpenAI.Realtime.RealtimeOutputModality",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+  @@alternateType(
+    OpenAI.RealtimeClientEventType,
+    {
+      identity: "OpenAI.Realtime.RealtimeClientCommandKind",
+      package: "OpenAI",
+      minVersion: "2.12.0",
+    },
+    "csharp"
+  );
+
+  @@clientNamespace(
+    OpenAI.CallableToolAllowedCaller,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
+  @@clientNamespace(
+    OpenAI.ContainerMemoryLimit,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
+  @@clientNamespace(
+    OpenAI.ContainerSkill,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
+  @@clientNamespace(
+    OpenAI.InlineSkillParam,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
+  @@clientNamespace(
+    OpenAI.InlineSkillSourceParam,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
+  @@clientNamespace(
+    OpenAI.MCPToolboxToolConnectorId,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
+  @@clientNamespace(
+    OpenAI.RealtimeFunctionToolParameters,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
+  @@clientNamespace(
+    OpenAI.SkillReferenceParam,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
+  @@clientNamespace(
+    OpenAI.VoiceAgentAudioInputConfigTranscriptionDelay,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
+  @@clientNamespace(
+    OpenAI.VoiceAgentSemanticVadTurnDetectionEagerness,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
+  @@clientNamespace(
+    OpenAI.WebSearchToolSearchContextSize,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
 }
