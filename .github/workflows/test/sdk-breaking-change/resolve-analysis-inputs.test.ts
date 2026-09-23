@@ -56,10 +56,16 @@ describe("resolveAnalysisTrigger", () => {
         ],
       },
     });
+    github.rest.pulls.get.mockResolvedValue({
+      data: {
+        head: { repo: { full_name: "owner/repo" }, sha: "a".repeat(40) },
+      },
+    });
 
     await resolveAnalysisTrigger({ github, context, core });
 
     expect(core.setOutput).toHaveBeenCalledWith("pr-number", "42");
+    expect(core.setOutput).toHaveBeenCalledWith("head-repository", "owner/repo");
     expect(core.setOutput).toHaveBeenCalledWith("head-sha", "a".repeat(40));
     expect(core.setOutput).toHaveBeenCalledWith("sdk-language", ".NET");
     expect(core.setOutput).toHaveBeenCalledWith("should-run", "true");
@@ -119,6 +125,62 @@ describe("resolveAnalysisTrigger", () => {
     });
 
     await expect(resolveAnalysisTrigger({ github, context, core })).rejects.toThrow();
+  });
+
+  it("rejects a workflow-run handoff for a fork", async () => {
+    const github = createMockGithub();
+    const context = createMockContext();
+    const core = createMockCore();
+    Object.assign(context, {
+      eventName: "workflow_run",
+      payload: { workflow_run: { id: 123, conclusion: "success" } },
+    });
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: {
+        artifacts: [
+          { name: "issue-number=42" },
+          { name: `head-sha=${"a".repeat(40)}` },
+          { name: "label-BreakingChange-Go-Sdk=true" },
+        ],
+      },
+    });
+    github.rest.pulls.get.mockResolvedValue({
+      data: {
+        head: { repo: { full_name: "contributor/repo" }, sha: "a".repeat(40) },
+      },
+    });
+
+    await expect(resolveAnalysisTrigger({ github, context, core })).rejects.toThrow(
+      "does not run for fork",
+    );
+  });
+
+  it("rejects a stale workflow-run handoff SHA", async () => {
+    const github = createMockGithub();
+    const context = createMockContext();
+    const core = createMockCore();
+    Object.assign(context, {
+      eventName: "workflow_run",
+      payload: { workflow_run: { id: 123, conclusion: "success" } },
+    });
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: {
+        artifacts: [
+          { name: "issue-number=42" },
+          { name: `head-sha=${"a".repeat(40)}` },
+          { name: "label-BreakingChange-Go-Sdk=true" },
+        ],
+      },
+    });
+    github.rest.pulls.get.mockResolvedValue({
+      data: {
+        head: { repo: { full_name: "owner/repo" }, sha: "b".repeat(40) },
+      },
+    });
+
+    await expect(resolveAnalysisTrigger({ github, context, core })).rejects.toThrow(
+      "Pull request head changed",
+    );
   });
 });
 

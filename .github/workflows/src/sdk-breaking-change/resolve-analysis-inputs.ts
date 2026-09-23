@@ -48,24 +48,21 @@ export async function resolveAnalysisTrigger({
   context,
   core,
 }: Pick<AsyncFunctionArguments, "github" | "context" | "core">): Promise<void> {
-  let pullNumber: number | undefined;
   if (context.eventName === "workflow_dispatch") {
-    pullNumber = Number(context.payload.inputs?.pr_number);
-  } else if (context.eventName === "workflow_run") {
-    pullNumber = context.payload.workflow_run.pull_requests?.[0]?.number;
-  }
-
-  if (!pullNumber || !Number.isSafeInteger(pullNumber) || pullNumber <= 0) {
-    throw new Error(`Invalid pull request number: ${pullNumber}`);
-  }
-
-  const { data: pull } = await github.rest.pulls.get({
-    ...context.repo,
-    pull_number: pullNumber,
-  });
-
-  if (context.eventName === "workflow_dispatch") {
-    const languageConfig = resolveSdkLanguageConfig(process.env.SDK_LANGUAGE_INPUT);
+    const pullNumber = Number(context.payload.inputs?.pr_number);
+    if (!Number.isSafeInteger(pullNumber) || pullNumber <= 0) {
+      throw new Error(`Invalid pull request number: ${context.payload.inputs?.pr_number}`);
+    }
+    const { data: pull } = await github.rest.pulls.get({
+      ...context.repo,
+      pull_number: pullNumber,
+    });
+    validateAnalysisSource({
+      expectedRepository: `${context.repo.owner}/${context.repo.repo}`,
+      actualRepository: pull.head.repo.full_name,
+      actualSha: pull.head.sha,
+    });
+    const languageConfig = resolveSdkLanguageConfig(context.payload.inputs?.sdk_language);
     core.setOutput("pr-number", pullNumber);
     core.setOutput("head-repository", pull.head.repo.full_name);
     core.setOutput("head-sha", pull.head.sha);
@@ -119,16 +116,27 @@ export async function resolveAnalysisTrigger({
     throw new Error(`Invalid head-sha artifact: ${headSha}`);
   }
 
-  const language = SDK_LANGUAGES_BY_LABEL.get(labelArtifact.labelName as (typeof SDK_LABELS)[number]);
+  const pullNumber = Number(issueNumber);
+  const { data: pull } = await github.rest.pulls.get({
+    ...context.repo,
+    pull_number: pullNumber,
+  });
+  validateAnalysisSource({
+    expectedRepository: `${context.repo.owner}/${context.repo.repo}`,
+    actualRepository: pull.head.repo.full_name,
+    expectedSha: headSha,
+    actualSha: pull.head.sha,
+  });
+
+  const language = SDK_LANGUAGES_BY_LABEL.get(
+    labelArtifact.labelName as (typeof SDK_LABELS)[number],
+  );
   const languageConfig = resolveSdkLanguageConfig(language);
 
   core.setOutput("pr-number", issueNumber);
   core.setOutput("head-repository", pull.head.repo.full_name);
-  core.setOutput("head-sha", headSha);
-  core.setOutput(
-    "sdk-language",
-    language,
-  );
+  core.setOutput("head-sha", pull.head.sha);
+  core.setOutput("sdk-language", language);
   core.setOutput("sdk-repository", languageConfig.repository);
   core.setOutput("should-run", labelArtifact.labelValue);
 }

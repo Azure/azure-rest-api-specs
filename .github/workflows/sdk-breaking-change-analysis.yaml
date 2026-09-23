@@ -41,9 +41,6 @@ jobs:
       - name: Resolve trigger inputs
         id: resolve
         uses: actions/github-script@v9
-        env:
-          PR_NUMBER_INPUT: ${{ inputs.pr_number }}
-          SDK_LANGUAGE_INPUT: ${{ inputs.sdk_language }}
         with:
           script: |
             const { resolveAnalysisTrigger } =
@@ -86,9 +83,12 @@ jobs:
         uses: actions/checkout@v7
         with:
           repository: ${{ needs.resolve-trigger.outputs.head-repository }}
+          # resolve-trigger restricts this to the current SHA of a branch in this repository.
+          # codeql[actions/untrusted-checkout/critical]
           ref: ${{ needs.resolve-trigger.outputs.head-sha }}
           path: repositories/azure-rest-api-specs
           persist-credentials: false
+
       - name: Resolve TypeSpec config path
         id: resolve-tsp-config
         uses: actions/github-script@v9
@@ -196,7 +196,7 @@ jobs:
           jq -cn \
             --argjson pullNumber '${{ needs.resolve-trigger.outputs.pr-number }}' \
             --arg sdkLanguage '${{ needs.resolve-trigger.outputs.sdk-language }}' \
-            --arg analyzedSha '${{ needs.resolve-trigger.outputs.sha }}' \
+            --arg analyzedSha '${{ needs.resolve-trigger.outputs.head-sha }}' \
             --arg workflowUrl '${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}' \
             '{pullNumber: $pullNumber, sdkLanguage: $sdkLanguage, analyzedSha: $analyzedSha, workflowUrl: $workflowUrl}' \
             > "$results_dir/trigger.json"
