@@ -16,8 +16,10 @@ namespace Microsoft.Storage;
  */
 @singleton("default")
 @parentResource(BlobContainer)
-model ImmutabilityPolicy
-  is Azure.ResourceManager.ProxyResource<ImmutabilityPolicyProperty, false> {
+model ImmutabilityPolicy is Azure.ResourceManager.ProxyResource<
+  ImmutabilityPolicyProperty,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ImmutabilityPolicy,
     KeyName = "immutabilityPolicy",
@@ -168,9 +170,11 @@ interface ImmutabilityPolicies {
 }
 
 @@doc(ImmutabilityPolicy.name, "");
-@@doc(ImmutabilityPolicy.properties,
+@@doc(
+  ImmutabilityPolicy.properties,
   "The properties of an ImmutabilityPolicy of a blob container."
 );
-@@doc(ImmutabilityPolicies.createOrUpdateImmutabilityPolicy::parameters.resource,
+@@doc(
+  ImmutabilityPolicies.createOrUpdateImmutabilityPolicy::parameters.resource,
   "The ImmutabilityPolicy Properties that will be created or updated to a blob container."
 );

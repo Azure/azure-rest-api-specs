@@ -1,11 +1,13 @@
 import "@typespec/versioning";
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/openapi";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
@@ -18,24 +20,28 @@ namespace Microsoft.Web;
 scalar stringApplicationJson extends string;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ArmBadRequestResponse {
   ...TypeSpec.Http.Response<400>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ArmNotFoundResponse {
   ...TypeSpec.Http.Response<404>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ArmConflictResponse {
   ...TypeSpec.Http.Response<409>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ArmTooManyRequestsResponse {
   ...TypeSpec.Http.Response<429>;
@@ -278,6 +284,11 @@ union RuntimeName {
   powershell: "powershell",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   python: "python",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @added(Versions.v2026_07_15)
+  go: "go",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   custom: "custom",
 }
@@ -1046,6 +1057,23 @@ enum RedundancyMode {
 }
 
 /**
+ * The platform release channel for the site.
+ */
+@added(Versions.v2026_03_15)
+union PlatformReleaseChannel {
+  string,
+
+  /** Latest receives updates earliest. */
+  Latest: "Latest",
+
+  /** Standard receives updates after Latest. */
+  Standard: "Standard",
+
+  /** Extended receives updates last with extended support. */
+  Extended: "Extended",
+}
+
+/**
  * Specifies the scope of uniqueness for the default hostname during resource creation
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1533,10 +1561,13 @@ enum SiteExtensionType {
  * Job status.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+// According to https://github.com/Azure/azure-sdk-for-net/issues/43295, added 2 values: Aborted, Running.
 enum TriggeredWebJobStatus {
   Success,
   Failed,
   Error,
+  Aborted,
+  Running,
 }
 
 /**
@@ -1758,6 +1789,7 @@ model CustomDnsSuffixConfigurationProperties {
   /**
    * The URL referencing the Azure Key Vault certificate secret that should be used as the default SSL/TLS certificate for sites with the custom domain suffix.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   certificateUrl?: string;
 
   /**
@@ -1839,6 +1871,7 @@ model AseV3NetworkingConfigurationProperties {
 /**
  * App Service error response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model DefaultErrorResponse {
   /**
@@ -2086,6 +2119,12 @@ model SiteProperties {
   enabled?: boolean;
 
   /**
+   * <code>true</code> if site scoped certificates are enabled; otherwise, <code>false</code>.
+   */
+  @added(Versions.v2026_03_15)
+  siteScopedCertificatesEnabled?: boolean = false;
+
+  /**
    * Enabled hostnames for the app.Hostnames need to be assigned (see HostNames) AND enabled. Otherwise,
    * the app is not served on those hostnames.
    */
@@ -2159,6 +2198,12 @@ model SiteProperties {
    * Dapr configuration of the app.
    */
   daprConfig?: DaprConfig;
+
+  /**
+   * AI integration configuration for the app.
+   */
+  @added(Versions.v2026_03_15)
+  aiIntegration?: AiIntegration;
 
   /**
    * Workload profile name for function app to execute on.
@@ -2374,6 +2419,18 @@ model SiteProperties {
    */
   @visibility(Lifecycle.Read)
   sku?: string;
+
+  /**
+   * The platform release channel for the site. Latest receives updates earliest, followed by Standard, then Extended.
+   */
+  @added(Versions.v2026_03_15)
+  platformReleaseChannel?: PlatformReleaseChannel;
+
+  /**
+   * <code>true</code> if the app is in maintenance mode; otherwise, <code>false</code>. Setting this value to true puts the app in maintenance mode, making it return the maintenance custom error page. The maintenance custom error page is required to set the site to maintenance. Default value is <code>false</code>.
+   */
+  @added(Versions.v2026_07_15)
+  maintenanceEnabled?: boolean;
 }
 
 /**
@@ -2474,6 +2531,12 @@ model OutboundVnetRouting {
    * Enables Backup and Restore operations over virtual network. Previously called VnetBackupRestoreEnabled
    */
   backupRestoreTraffic?: boolean;
+
+  /**
+   * Enables Managed Identity operations over virtual network.
+   */
+  @added(Versions.v2026_03_01_preview)
+  managedIdentityTraffic?: boolean;
 }
 
 /**
@@ -3034,6 +3097,7 @@ model RampUpRule {
   /**
    * Custom decision algorithm can be provided in TiPCallback site extension which URL can be specified.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   changeDecisionCallbackUrl?: string;
 
   /**
@@ -3553,7 +3617,7 @@ model FunctionsScaleAndConcurrency {
   alwaysReady?: FunctionsAlwaysReadyConfig[];
 
   /**
-   * The maximum number of instances for the function app.
+   * The maximum number of on demand instances per function group.
    */
   maximumInstanceCount?: int32;
 
@@ -3653,6 +3717,102 @@ model DaprConfig {
    * Enables API logging for the Dapr sidecar
    */
   enableApiLogging?: boolean;
+}
+
+/**
+ * AI integration configuration for the app.
+ */
+@added(Versions.v2026_03_15)
+model AiIntegration {
+  /**
+   * Relative path to the API specification file from /home in site files.
+   */
+  apiSpecPath?: string;
+
+  /**
+   * MCP configuration.
+   */
+  mcp?: McpSettings;
+
+  /**
+   * External auth configuration for the MCP endpoint (used when EasyAuth is not enabled).
+   */
+  siteAuth?: SiteAuthInfo;
+}
+
+/**
+ * MCP configuration settings.
+ */
+@added(Versions.v2026_03_15)
+model McpSettings {
+  /**
+   * Array of MCP server configurations. This array is replaced in its entirety on update; individual servers cannot be patched independently. An empty array signals that MCP should be disabled/deleted.
+   */
+  @identifiers(#["name"])
+  servers?: McpServerConfig[];
+}
+
+/**
+ * Configuration for an individual MCP server.
+ */
+@added(Versions.v2026_03_15)
+model McpServerConfig {
+  /**
+   * The name of the MCP server.
+   */
+  name?: string;
+
+  /**
+   * The description of the MCP server.
+   */
+  description?: string;
+
+  /**
+   * Whether the MCP server is enabled. Defaults to true when not specified on creation.
+   */
+  enabled?: boolean;
+
+  /**
+   * The endpoint path for the MCP server.
+   */
+  endpoint?: string;
+
+  /**
+   * The list of tools exposed by this MCP server.
+   */
+  toolList?: string[];
+}
+
+/**
+ * External auth configuration for the MCP endpoint (used when EasyAuth is not enabled).
+ * At minimum, `scopes` and either `wellKnownOpenIdConfiguration` or `issuer` must be provided.
+ */
+@added(Versions.v2026_03_15)
+model SiteAuthInfo {
+  /**
+   * JWKS URL for verifying JWT signatures.
+   */
+  jwksUri?: url;
+
+  /**
+   * Expected 'iss' claim. Required for custom site authentication if `wellKnownOpenIdConfiguration` is not provided.
+   */
+  issuer?: string;
+
+  /**
+   * Expected 'aud' claim.
+   */
+  audience?: string;
+
+  /**
+   * OIDC metadata URL. Required for custom site authentication if `issuer` is not provided.
+   */
+  wellKnownOpenIdConfiguration?: url;
+
+  /**
+   * OAuth scopes for Protected Resource Metadata (PRM). Required for custom site authentication.
+   */
+  scopes?: string[];
 }
 
 /**
@@ -4094,7 +4254,8 @@ model ResourceMetricAvailability {
 /**
  * Collection of SKU information.
  */
-@@Azure.ResourceManager.identifiers(SkuInfoCollection.value,
+@@Azure.ResourceManager.identifiers(
+  SkuInfoCollection.value,
   #["/sku/name", "resourceType"]
 );
 model SkuInfoCollection is Azure.Core.Page<SkuInfo>;
@@ -4291,7 +4452,8 @@ model ErrorEntity {
 /**
  * Collection of Outbound Environment Endpoints
  */
-@@Azure.ResourceManager.identifiers(OutboundEnvironmentEndpointCollection.value,
+@@Azure.ResourceManager.identifiers(
+  OutboundEnvironmentEndpointCollection.value,
   #["category"]
 );
 model OutboundEnvironmentEndpointCollection
@@ -6080,6 +6242,7 @@ model DiagnosticDetectorCollection
  * Class representing Response from Diagnostic Detectors
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DiagnosticDetectorResponse extends ProxyOnlyResource {
   /**
    * DiagnosticDetectorResponse resource specific properties
@@ -7991,11 +8154,13 @@ model PremierAddOnOfferProperties {
   /**
    * Privacy policy URL.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   privacyPolicyUrl?: string;
 
   /**
    * Legal terms URL.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   legalTermsUrl?: string;
 
   /**
@@ -8250,6 +8415,7 @@ model ValidateProperties {
   /**
    * Base URL of the container registry
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   containerRegistryBaseUrl?: string;
 
   /**
@@ -8332,6 +8498,7 @@ model StaticSitesWorkflowPreviewRequestProperties {
   /**
    * URL for the repository of the static site.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   repositoryUrl?: string;
 
   /**
@@ -8438,6 +8605,7 @@ model StaticSite {
   /**
    * URL for the repository of the static site.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   repositoryUrl?: string;
 
   /**
@@ -8454,7 +8622,10 @@ model StaticSite {
   /**
    * A user's github repository token. This is used to setup the Github Actions workflow file and API secrets.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Using x-ms-secret without format:password to match existing swagger."
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Using x-ms-secret extension directly to avoid format:password from @secret."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-secret' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to the @secret decorator."
+  @extension("x-ms-secret", true)
   repositoryToken?: string;
 
   /**
@@ -8673,6 +8844,7 @@ model StaticSiteTemplateOptions {
   /**
    * URL of the template repository. The newly generated repository will be based on this one.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   templateRepositoryUrl?: string;
 
   /**
@@ -9127,11 +9299,13 @@ model StaticSiteZipDeployment {
   /**
    * URL for the zipped app content
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   appZipUrl?: string;
 
   /**
    * URL for the zipped api content
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   apiZipUrl?: string;
 
   /**
@@ -9171,6 +9345,7 @@ model StaticSiteBasicAuthPropertiesARMResourceProperties {
   /**
    * Url to the secret in Key Vault.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   secretUrl?: string;
 
   /**
@@ -9258,6 +9433,7 @@ model StaticSiteUserInvitationResponseResourceProperties {
   /**
    * The url for the invitation link
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   invitationUrl?: string;
 }
@@ -9458,6 +9634,12 @@ model SitePatchResourceProperties {
   enabled?: boolean;
 
   /**
+   * <code>true</code> if site scoped certificates are enabled; otherwise, <code>false</code>.
+   */
+  @added(Versions.v2026_03_15)
+  siteScopedCertificatesEnabled?: boolean = false;
+
+  /**
    * Enabled hostnames for the app.Hostnames need to be assigned (see HostNames) AND enabled. Otherwise,
    * the app is not served on those hostnames.
    */
@@ -9515,6 +9697,12 @@ model SitePatchResourceProperties {
    * Configuration of the app.
    */
   siteConfig?: SiteConfig;
+
+  /**
+   * AI integration configuration for the app.
+   */
+  @added(Versions.v2026_03_15)
+  aiIntegration?: AiIntegration;
 
   /**
    * Azure Traffic Manager hostnames associated with the app. Read-only.
@@ -9807,6 +9995,7 @@ model BackupRequestProperties {
   /**
    * SAS URL to the container.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   storageAccountUrl: string;
 
   /**
@@ -9898,6 +10087,7 @@ model BackupItemProperties {
   /**
    * SAS URL for the storage account container which contains this backup.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   storageAccountUrl?: string;
 
@@ -10003,6 +10193,7 @@ model RestoreRequestProperties {
   /**
    * SAS URL to the container.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   storageAccountUrl: string;
 
   /**
@@ -11295,6 +11486,7 @@ model AzureTableStorageApplicationLogsConfig {
   /**
    * SAS URL to an Azure table with add/query/delete permissions.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   sasUrl: string;
 }
 
@@ -11310,6 +11502,7 @@ model AzureBlobStorageApplicationLogsConfig {
   /**
    * SAS url to a azure blob container with read/write/list/delete permissions.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   sasUrl?: string;
 
   /**
@@ -11368,6 +11561,7 @@ model AzureBlobStorageHttpLogsConfig {
   /**
    * SAS url to a azure blob container with read/write/list/delete permissions.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   sasUrl?: string;
 
   /**
@@ -11477,6 +11671,7 @@ model ContinuousWebJobProperties {
    * Log URL.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   log_url?: string;
 
   /**
@@ -11494,6 +11689,7 @@ model ContinuousWebJobProperties {
    * Extra Info URL.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   extra_info_url?: string;
 
   /**
@@ -11667,13 +11863,26 @@ model MSDeployStatusProperties {
 }
 
 /**
+ * MSDeploy ARM PUT information properties
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Keep MSDeployProperties as a subtype of MSDeployCore to match the existing ARM MSDeploy contract shape; follow aka.ms/tsp/conversion-fix for details."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Preserve MSDeploy* identifier casing to align with the service's published API and existing clients; follow aka.ms/tsp/conversion-fix for details."
+model MSDeployProperties extends MSDeployCore {
+  /**
+   * List of Add-On packages. Add-On packages implicitly enable the Do Not Delete MSDeploy rule.
+   */
+  @identifiers(#["packageUri"])
+  addOnPackages?: MSDeployCore[];
+}
+
+/**
  * MSDeploy ARM PUT information
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Keep MSDeploy to match the existing ARM MSDeploy contract shape; follow aka.ms/tsp/conversion-fix for details."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Preserve MSDeploy identifier casing to align with the service's published API and existing clients; follow aka.ms/tsp/conversion-fix for details."
 model MSDeploy extends ProxyOnlyResource {
   /** Core resource properties */
-  properties?: MSDeployCore;
+  properties?: MSDeployProperties;
 }
 
 /**
@@ -11888,6 +12097,7 @@ model FunctionSecrets {
    * Trigger URL.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   trigger_url?: string;
 }
 
@@ -12017,21 +12227,25 @@ model WebSiteInstanceStatusProperties {
   /**
    * Link to the GetStatusApi in Kudu
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   statusUrl?: string;
 
   /**
    * Link to the Diagnose and Solve Portal
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   detectorUrl?: string;
 
   /**
    * Link to the console to web app instance
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   consoleUrl?: string;
 
   /**
    * Link to the console to web app instance
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   healthCheckUrl?: string;
 
   /**
@@ -12729,6 +12943,79 @@ model NetworkFeaturesProperties {
 }
 
 /**
+ * Network Security Perimeter
+ */
+@added(Versions.v2026_03_15)
+model NetworkSecurityPerimeter {
+  /**
+   * ARM URI of the Network Security Perimeter resource.
+   */
+  id?: string;
+
+  /**
+   * GUID of the Network Security Perimeter resource.
+   */
+  perimeterGuid?: string;
+
+  /**
+   * Location where the Network Security Perimeter resource.
+   */
+  location?: string;
+}
+
+/**
+ * Collection of Network Security Perimeter Configurations
+ */
+@added(Versions.v2026_03_15)
+model NetworkSecurityPerimeterConfigurationCollection
+  is Azure.Core.Page<NetworkSecurityPerimeterConfiguration>;
+
+/**
+ * Detailed view of a Network Security Perimeter Configured for the site.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_03_15)
+model NetworkSecurityPerimeterConfiguration extends ProxyOnlyResource {
+  /**
+   * Name of the Network Security Perimeter Profile Access Rule.
+   */
+  properties?: NetworkSecurityPerimeterConfigurationProperties;
+}
+
+/**
+ * Network Security Perimeter Configuration Properties
+ */
+@added(Versions.v2026_03_15)
+model NetworkSecurityPerimeterConfigurationProperties {
+  /**
+   * Reflects state of association persistence and configuration propagation to App Service Data Plane.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  provisioningState?: string;
+
+  /**
+   * Reflects any misconfigurations and failures detected while provisioning the association or while processing configuration changes.
+   */
+  provisioningIssues?: NspProvisioningIssue[];
+
+  /**
+   * Associated Network Security Perimeter resource.
+   */
+  networkSecurityPerimeter?: NetworkSecurityPerimeter;
+
+  /**
+   * Representation of Network Security Perimeter Association.
+   */
+  resourceAssociations?: NspResourceAssociation;
+
+  /**
+   * Associated Network Security Perimeter Profile.
+   */
+  profile?: NspProfile;
+}
+
+/**
  * Network trace
  */
 model NetworkTrace {
@@ -12746,6 +13033,195 @@ model NetworkTrace {
    * Detailed message of a network trace operation, e.g. error message in case of failure.
    */
   message?: string;
+}
+
+/**
+ * Network Security Perimeter Profile
+ */
+@added(Versions.v2026_03_15)
+model NspProfile {
+  /**
+   * Name of the Network Security Perimeter Profile.
+   */
+  name?: string;
+
+  /**
+   * Access Rules Version for the Network Security Perimeter Profile.
+   */
+  accessRulesVersion?: string;
+
+  /**
+   * Access Rules for the Network Security Perimeter Profile.
+   */
+  accessRules?: NspProfileAccessRule[];
+
+  /**
+   * Diagnostic Settings Version for the Network Security Perimeter Profile.
+   */
+  diagnosticSettingsVersion?: string;
+
+  /**
+   * Enabled Log Categories for the Network Security Perimeter Profile.
+   */
+  enabledLogCategories?: string[];
+}
+
+/**
+ * Network Security Perimeter Profile Access Rule
+ */
+@added(Versions.v2026_03_15)
+model NspProfileAccessRule {
+  /**
+   * Name of the Network Security Perimeter Profile Access Rule.
+   */
+  name?: string;
+
+  /**
+   * Name of the Network Security Perimeter Profile Access Rule.
+   */
+  properties?: NspProfileAccessRuleProperties;
+}
+
+/**
+ * Network Security Perimeter Profile Access Rule Granular Feature
+ */
+@added(Versions.v2026_03_15)
+model NspProfileAccessRuleGranularFeature {
+  /**
+   * Resource Type of Granular Feature.
+   */
+  resourceType?: string;
+
+  /**
+   * Names of applied Granular Features.
+   */
+  features?: string[];
+}
+
+/**
+ * Network Security Perimeter Profile Access Rule Properties
+ */
+@added(Versions.v2026_03_15)
+model NspProfileAccessRuleProperties {
+  /**
+   * Direction of Access Rule (Inbound/Outbound).
+   */
+  direction?: string;
+
+  /**
+   * IP Address Ranges of Access Rule
+   */
+  addressPrefixes?: string[];
+
+  /**
+   * Service Tags of Access Rule
+   */
+  serviceTags?: string[];
+
+  /**
+   * Granular Features of Access Rule
+   */
+  @identifiers(#["resourceType"])
+  appliesTo?: NspProfileAccessRuleGranularFeature[];
+
+  /**
+   * Subscriptions of Access Rule. Not supported by App Service.
+   */
+  subscriptions?: NspSubscription[];
+
+  /**
+   * NetworkSecurityPerimeter of Access Rule. Not supported by App Service.
+   */
+  networkSecurityPerimeters?: NetworkSecurityPerimeter[];
+
+  /**
+   * Fully Qualified Domain Names of Access Rule. Not supported by App Service.
+   */
+  fullyQualifiedDomainNames?: string[];
+
+  /**
+   * Email Addresses of Access Rule. Not supported by App Service.
+   */
+  emailAddresses?: string[];
+
+  /**
+   * Phone Numbers of Access Rule. Not supported by App Service.
+   */
+  phoneNumbers?: string[];
+}
+
+/**
+ * Network Security Perimeter Association Provisioning Issue
+ */
+@added(Versions.v2026_03_15)
+model NspProvisioningIssue {
+  /**
+   * Provisioning Issue Name
+   */
+  name?: string;
+
+  /**
+   * Provisioning Issue Properties
+   */
+  properties?: NspProvisioningIssueProperties;
+}
+
+/**
+ * Network Security Perimeter Association Provisioning Issue Properties
+ */
+@added(Versions.v2026_03_15)
+model NspProvisioningIssueProperties {
+  /**
+   * Provisioning Issue Type
+   */
+  issueType?: string;
+
+  /**
+   * Provisioning Issue Severity
+   */
+  severity?: string;
+
+  /**
+   * Provisioning Issue Description
+   */
+  description?: string;
+
+  /**
+   * Recommended ARM Ids to resolve the issue
+   */
+  suggestedResourceIds?: string[];
+
+  /**
+   * Recommended access rules to resolve the issue
+   */
+  suggestedAccessRules?: string[];
+}
+
+/**
+ * Network Security Perimeter Resource Association
+ */
+@added(Versions.v2026_03_15)
+model NspResourceAssociation {
+  /**
+   * Network Security Perimeter Resource Association Name
+   */
+  name?: string;
+
+  /**
+   * Network Security Perimeter Association Access Mode (Learning/Enforced)
+   */
+  accessMode?: string;
+}
+
+/**
+ * Network Security Perimeter Subscription
+ */
+@added(Versions.v2026_03_15)
+model NspSubscription {
+  /**
+   * Network Security Perimeter Subscription Id
+   */
+  id?: string;
 }
 
 /**
@@ -13085,6 +13561,7 @@ model DeletedAppRestoreRequestProperties {
  * Details about app recovery operation.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SnapshotRestoreRequest extends ProxyOnlyResource {
   /**
    * SnapshotRestoreRequest resource specific properties
@@ -13309,30 +13786,35 @@ model SiteExtensionInfoProperties {
    * Extension URL.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   extension_url?: string;
 
   /**
    * Project URL.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   project_url?: string;
 
   /**
    * Icon URL.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   icon_url?: string;
 
   /**
    * License URL.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   license_url?: string;
 
   /**
    * Feed URL.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   feed_url?: string;
 
   /**
@@ -13467,6 +13949,7 @@ model SiteSourceControlProperties {
   /**
    * Repository or source control URL.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
   repoUrl?: string;
 
@@ -13553,6 +14036,7 @@ model GitHubActionContainerConfiguration {
   /**
    * The server URL for the container registry where the build will be hosted.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   serverUrl?: string;
 
   /**
@@ -13592,12 +14076,14 @@ model TriggeredWebJobProperties {
    * History URL.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   history_url?: string;
 
   /**
    * Scheduler Logs URL.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   scheduler_logs_url?: string;
 
   /**
@@ -13615,6 +14101,7 @@ model TriggeredWebJobProperties {
    * Extra Info URL.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   extra_info_url?: string;
 
   /**
@@ -13696,12 +14183,14 @@ model TriggeredJobRun {
    * Output URL.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   output_url?: string;
 
   /**
    * Error URL.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   error_url?: string;
 
   /**
@@ -13763,6 +14252,7 @@ model WebJobProperties {
    * Extra Info URL.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   extra_info_url?: string;
 
   /**
@@ -13866,6 +14356,7 @@ model RegenerateActionParameter {
 /**
  * Error response indicates Logic service is not able to process the incoming request. The error property contains the error details.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**
@@ -14016,7 +14507,6 @@ model WorkflowRunTrigger {
   /**
    * Gets the inputs.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   inputs?: unknown;
@@ -14614,6 +15104,7 @@ model RequestHistoryProperties {
 /**
  * A request.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model Request {
   /**
    * A list of all the headers attached to the request.
@@ -14635,6 +15126,7 @@ model Request {
 /**
  * A response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model Response {
   /**
    * A list of all the headers attached to the response.
@@ -15501,6 +15993,7 @@ model HttpScaleRule {
 /**
  * A request to approve or reject a private endpoint connection
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PrivateLinkConnectionApprovalRequest {
   /**
    * The state of a private link connection
@@ -15648,6 +16141,7 @@ model AppserviceGithubToken {
 /**
  * Appservice Github token request content.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AppserviceGithubTokenRequest {
   /**
    * Code string to exchange for Github Access token
@@ -15963,4 +16457,63 @@ model StorageMount {
    * KV reference to the credentials to connect to the share.
    */
   credentialsKeyVaultReference?: KeyVaultReferenceWithStatus;
+}
+
+/**
+ * Properties of a static sites asynchronous operation status.
+ */
+model StaticSitesOperationStatusProperties {
+  /**
+   * The current status of the asynchronous operation performed. For example, Running, Succeeded, Failed
+   */
+  @visibility(Lifecycle.Read)
+  status?: string;
+
+  /**
+   * The start time of the asynchronous operation.
+   */
+  startTime?: string;
+
+  /**
+   * The end time of the asynchronous operation.
+   */
+  endTime?: string;
+
+  /**
+   * The generic properties of a staticSite.
+   */
+  staticSiteProperties?: StaticSite;
+
+  /**
+   * Error details for the asynchronous operation, if any.
+   */
+  error?: ErrorResponse;
+}
+
+/**
+ * Status object for a static sites asynchronous operation.
+ */
+model StaticSitesOperationStatus {
+  /**
+   * The fully qualified ID for the staticSitesOperationStatus.  For example, /subscriptions/{subscriptionId}/providers/Microsoft.Web/staticSitesOperationStatuses/{operationId}
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The type of the resource.  For example, Microsoft.Web/staticSitesOperationStatuses
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * The name of the staticSitesOperationStatus. For example, a1f6e015-a5de-468f-ad54-9c75638d7134
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Properties of the async operation status.
+   */
+  properties?: StaticSitesOperationStatusProperties;
 }

@@ -2,9 +2,11 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -19,7 +21,7 @@ model PolicyAssignment
     Resource = PolicyAssignment,
     KeyName = "policyAssignmentName",
     SegmentName = "policyAssignments",
-    NamePattern = "^[^<>*%&:\\?.+/]*[^<>*%&:\\?.+/ ]+$"
+    NamePattern = "^[^<>%&:\\?/]*[^<>%&:\\?/ ]+$"
   >;
 
   /**
@@ -189,9 +191,11 @@ interface PolicyAssignments {
 
 @@doc(PolicyAssignment.name, "The name of the policy assignment to get.");
 @@doc(PolicyAssignment.properties, "Properties for the policy assignment.");
-@@doc(PolicyAssignments.create::parameters.resource,
+@@doc(
+  PolicyAssignments.create::parameters.resource,
   "Parameters for the policy assignment."
 );
-@@doc(PolicyAssignments.update::parameters.properties,
+@@doc(
+  PolicyAssignments.update::parameters.properties,
   "Parameters for policy assignment patch request."
 );

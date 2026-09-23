@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01",
+    "resourceGroupName": "rg1",
+    "routeName": "ecmp-route",
+    "routeParameters": {
+      "properties": {
+        "addressPrefix": "10.1.0.0/16",
+        "nextHopType": "VirtualApplianceEcmp",
+        "nextHop": {
+          "nextHopIpAddresses": [
+            "10.0.0.4",
+            "10.0.0.5",
+            "10.0.0.6"
+          ]
+        }
+      }
+    },
+    "routeTableName": "testrt",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "ecmp-route",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/routeTables/testrt/routes/ecmp-route",
+        "properties": {
+          "addressPrefix": "10.1.0.0/16",
+          "nextHopType": "VirtualApplianceEcmp",
+          "nextHop": {
+            "nextHopIpAddresses": [
+              "10.0.0.4",
+              "10.0.0.5",
+              "10.0.0.6"
+            ]
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "ecmp-route",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/routeTables/testrt/routes/ecmp-route",
+        "properties": {
+          "addressPrefix": "10.1.0.0/16",
+          "nextHopType": "VirtualApplianceEcmp",
+          "nextHop": {
+            "nextHopIpAddresses": [
+              "10.0.0.4",
+              "10.0.0.5",
+              "10.0.0.6"
+            ]
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "Routes_CreateOrUpdate",
+  "title": "Create ECMP route"
+}

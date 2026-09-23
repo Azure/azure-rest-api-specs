@@ -1,21 +1,23 @@
-export enum FileTypes {
-  ExampleFile = "ExampleFile",
-  ReadmeFile = "ReadmeFile",
-  SwaggerFile = "SwaggerFile",
-  TypeSpecFile = "TypeSpecFile",
-}
+export const FileTypes = {
+  ExampleFile: "ExampleFile",
+  ReadmeFile: "ReadmeFile",
+  SwaggerFile: "SwaggerFile",
+  TypeSpecFile: "TypeSpecFile",
+} as const;
+export type FileTypes = (typeof FileTypes)[keyof typeof FileTypes];
 
-export enum ChangeTypes {
-  Addition = "Addition",
-  Deletion = "Deletion",
-  Update = "Update",
-}
+export const ChangeTypes = {
+  Addition: "Addition",
+  Deletion: "Deletion",
+  Update: "Update",
+} as const;
+export type ChangeTypes = (typeof ChangeTypes)[keyof typeof ChangeTypes];
 
 export type PRChange = {
   fileType: FileTypes;
   changeType: ChangeTypes;
   filePath: string;
-  additionalInfo?: any;
+  additionalInfo?: unknown;
 };
 
 export type ReadmeTag = {
@@ -25,9 +27,9 @@ export type ReadmeTag = {
 
 export type TagConfigDiff = {
   name: string;
-  oldConfig?: any;
-  newConfig?: any;
-  difference?: any;
+  oldConfig?: unknown;
+  newConfig?: unknown;
+  difference?: unknown;
   changedInputFiles?: string[];
 };
 
@@ -39,8 +41,8 @@ export type TagDiff = {
   differences?: TagConfigDiff[];
 };
 
-export type ChangeHandler = {
-  [key in FileTypes]?: (event: PRChange) => void | Promise<void>;
+export type ChangeHandler<T = void> = {
+  [key in FileTypes]?: (event: PRChange) => T;
 };
 
 export type DiffResult<T> = {

@@ -15,11 +15,10 @@ namespace Microsoft.DBforPostgreSQL;
  * Server administrator associated to a Microsoft Entra principal.
  */
 @parentResource(Server)
-model AdministratorMicrosoftEntra
-  is Azure.ResourceManager.ProxyResource<
-    AdministratorMicrosoftEntraProperties,
-    false
-  > {
+model AdministratorMicrosoftEntra is Azure.ResourceManager.ProxyResource<
+  AdministratorMicrosoftEntraProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = AdministratorMicrosoftEntra,
     KeyName = "objectId",
@@ -53,8 +52,10 @@ interface AdministratorMicrosoftEntras {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     AdministratorMicrosoftEntra,
-    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -66,12 +67,15 @@ interface AdministratorMicrosoftEntras {
   >;
 }
 
-@@doc(AdministratorMicrosoftEntra.name,
+@@doc(
+  AdministratorMicrosoftEntra.name,
   "Object identifier of the Microsoft Entra principal."
 );
-@@doc(AdministratorMicrosoftEntra.properties,
+@@doc(
+  AdministratorMicrosoftEntra.properties,
   "Properties of a server administrator associated to a Microsoft Entra principal."
 );
-@@doc(AdministratorMicrosoftEntras.createOrUpdate::parameters.resource,
+@@doc(
+  AdministratorMicrosoftEntras.createOrUpdate::parameters.resource,
   "Required parameters for adding a server administrator associated to a Microsoft Entra principal."
 );

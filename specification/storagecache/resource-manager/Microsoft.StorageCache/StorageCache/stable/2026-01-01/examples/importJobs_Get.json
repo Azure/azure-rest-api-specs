@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "amlFilesystemName": "fs1",
+    "api-version": "2026-01-01",
+    "importJobName": "job1",
+    "resourceGroupName": "scgroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "job1",
+        "type": "Microsoft.StorageCache/amlFilesystem/importJob",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlfilesystems/fs1/importJobs/job1",
+        "location": "eastus",
+        "properties": {
+          "adminStatus": "Active",
+          "conflictResolutionMode": "OverwriteAlways",
+          "importPrefixes": [
+            "/"
+          ],
+          "maximumErrors": 0,
+          "provisioningState": "Succeeded",
+          "status": {
+            "blobsImportedPerSecond": 4000,
+            "blobsWalkedPerSecond": 10000,
+            "importedDirectories": 500,
+            "importedFiles": 1000,
+            "importedSymlinks": 1000,
+            "lastCompletionTime": "2019-04-21T18:25:43.511Z",
+            "lastStartedTime": "2019-04-21T17:25:43.511Z",
+            "preexistingDirectories": 100,
+            "preexistingFiles": 500,
+            "preexistingSymlinks": 200,
+            "state": "Completed",
+            "statusMessage": "Import job completed successfully",
+            "totalBlobsImported": 1000000,
+            "totalBlobsWalked": 1000000,
+            "totalConflicts": 1,
+            "totalErrors": 1
+          }
+        }
+      }
+    }
+  },
+  "operationId": "importJobs_Get",
+  "title": "importJobs_Get"
+}

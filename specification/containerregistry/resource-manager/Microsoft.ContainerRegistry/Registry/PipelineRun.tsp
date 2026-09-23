@@ -46,7 +46,10 @@ interface PipelineRuns {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     PipelineRun,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -63,6 +66,7 @@ interface PipelineRuns {
 @@minLength(PipelineRun.name, 5);
 @@doc(PipelineRun.name, "The name of the pipeline run.");
 @@doc(PipelineRun.properties, "The properties of a pipeline run.");
-@@doc(PipelineRuns.create::parameters.resource,
+@@doc(
+  PipelineRuns.create::parameters.resource,
   "The parameters for creating a pipeline run."
 );

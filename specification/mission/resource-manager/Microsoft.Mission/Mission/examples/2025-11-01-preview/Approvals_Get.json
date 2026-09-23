@@ -1,0 +1,49 @@
+{
+  "title": "Approval_Get",
+  "operationId": "Approval_Get",
+  "parameters": {
+    "resourceUri": "subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/Microsoft.Mission/enclaveconnections/TestMyEnclaveConnection",
+    "api-version": "2025-11-01-preview",
+    "subscriptionId": "73CEECEF-2C30-488E-946F-D20F414D99BA",
+    "resourceGroupName": "rgopenapi",
+    "approvalName": "TestApprovals"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "parentResourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/microsoft.mission/virtualenclaves/TestMyEnclave",
+          "grandparentResourceId": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/testrg/providers/Microsoft.Mission/communities/TestMyCommunity",
+          "requestMetadata": {
+            "resourceAction": "string",
+            "approvalStatus": "Approved",
+            "approvalCallbackRoute": "approvalCallback",
+            "approvalCallbackPayload": "{\n  \"key1\": \"value1\",\n  \"key2\": \"value2\"\n}"
+          },
+          "approvers": [
+            {
+              "approverEntraId": "00000000-0000-0000-0000-000000000000",
+              "actionPerformed": "Approved",
+              "lastUpdatedAt": "2023-03-17T20:43:17.760Z"
+            }
+          ],
+          "ticketId": "string",
+          "createdAt": "2023-03-17T20:43:17.760Z",
+          "stateChangedAt": "2023-03-17T20:43:17.760Z"
+        },
+        "id": "/subscriptions/c64f6eca-bdc5-4bc2-88d6-f8f1dc23f86c/resourceGroups/TestMyRg/providers/Microsoft.Mission/approvals/TestApprovals",
+        "name": "TestApprovals",
+        "type": "Microsoft.Mission/approvals",
+        "systemData": {
+          "createdBy": "myAlias",
+          "createdByType": "User",
+          "createdAt": "2023-03-17T20:43:17.760Z",
+          "lastModifiedBy": "myAlias",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-03-17T20:43:17.760Z"
+        }
+      }
+    }
+  }
+}

@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 /** Traffic Controller Provider management API. */
 @armProviderNamespace
@@ -26,6 +27,9 @@ enum Versions {
 
   /** 2025-03-01 preview version */
   v2025_03_01_preview: "2025-03-01-preview",
+
+  /** 2026-03-01 stable version */
+  v2026_03_01: "2026-03-01",
 }
 
 using TypeSpec.Http;
@@ -53,6 +57,14 @@ model FrontendProperties {
   @visibility(Lifecycle.Read)
   fqdn?: string;
 
+  /** Whether public network access is allowed for the frontend. Enabled indicates a public frontend; Disabled indicates a private frontend. */
+  @added(Versions.v2026_03_01)
+  publicNetworkAccess?: PublicNetworkAccess;
+
+  /** Reference to an Association resource that contains the subnet where the private frontend should be deployed. */
+  @added(Versions.v2026_03_01)
+  association?: FrontendAssociation;
+
   /** Frontend Security Policy Configuration */
   @added(Versions.v2025_03_01_preview)
   securityPolicyConfigurations?: SecurityPolicyConfigurations;
@@ -60,6 +72,25 @@ model FrontendProperties {
   /** Provisioning State of Traffic Controller Frontend Resource */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+}
+
+/** Whether public network access is allowed for the frontend. */
+@added(Versions.v2026_03_01)
+union PublicNetworkAccess {
+  string,
+
+  /** Public network access is enabled (public frontend accessible via a public IP address). */
+  Enabled: "Enabled",
+
+  /** Public network access is disabled (private frontend accessible only through a private endpoint). */
+  Disabled: "Disabled",
+}
+
+/** Reference to an Association resource. */
+@added(Versions.v2026_03_01)
+model FrontendAssociation {
+  /** Resource ID of the Association. */
+  id: string;
 }
 
 //----------------------- Associations -----------------------
@@ -81,7 +112,7 @@ model AssociationUpdate {
 
   /** The resource-specific properties for this resource. */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage"
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty("!javascript")
   properties?: AssociationUpdateProperties;
 }
 
@@ -149,6 +180,7 @@ model SecurityPolicyProperties {
   wafPolicy?: WafPolicy;
 
   /** Ip Access Policy of the Traffic Controller Security Policy. Single Security Policy can have only one policy type set. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @added(Versions.v2025_03_01_preview)
   ipAccessRulesPolicy?: IpAccessRulesPolicy;
 
@@ -266,6 +298,11 @@ model TrafficControllerProperties {
   @added(Versions.v2024_05_01_preview)
   securityPolicies?: ResourceId[];
 
+  /** Private Endpoint Connections List */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_03_01)
+  privateEndpointConnections?: ResourceId[];
+
   /** Security Policy Configuration */
   @added(Versions.v2024_05_01_preview)
   securityPolicyConfigurations?: SecurityPolicyConfigurations;
@@ -308,6 +345,109 @@ model ResourceId {
   id: string;
 }
 
+//----------------------- PrivateEndpointConnection -----------------------
+/** Private Endpoint Connection resource of Traffic Controller. */
+@added(Versions.v2026_03_01)
+@parentResource(TrafficController)
+model PrivateEndpointConnection
+  is ProxyResource<PrivateEndpointConnectionProperties> {
+  /** Private Endpoint Connection */
+  @key("privateEndpointConnectionName")
+  @visibility(Lifecycle.Read)
+  @path
+  @segment("privateEndpointConnections")
+  @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
+  name: string;
+}
+
+/** Properties of a Private Endpoint Connection. */
+@added(Versions.v2026_03_01)
+model PrivateEndpointConnectionProperties {
+  /** The private endpoint resource. */
+  @visibility(Lifecycle.Read)
+  privateEndpoint?: PrivateEndpointReference;
+
+  /** The connection state of the private endpoint connection. */
+  privateLinkServiceConnectionState: PrivateLinkServiceConnectionState;
+
+  /** Provisioning state of the private endpoint connection. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/** Reference to a private endpoint resource. */
+@added(Versions.v2026_03_01)
+model PrivateEndpointReference {
+  /** Resource ID of the private endpoint. */
+  @visibility(Lifecycle.Read)
+  id?: string;
+}
+
+/** The state of a private link service connection. */
+@added(Versions.v2026_03_01)
+model PrivateLinkServiceConnectionState {
+  /** Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service. */
+  status?: PrivateLinkServiceConnectionStatus;
+
+  /** The reason for approval/rejection of the connection. */
+  description?: string;
+
+  /** A message indicating if changes on the service provider require any updates on the consumer. */
+  actionsRequired?: string;
+}
+
+/** The private endpoint connection status. */
+@added(Versions.v2026_03_01)
+union PrivateLinkServiceConnectionStatus {
+  string,
+
+  /** Connection is pending approval. */
+  Pending: "Pending",
+
+  /** Connection is approved. */
+  Approved: "Approved",
+
+  /** Connection is rejected. */
+  Rejected: "Rejected",
+
+  /** Connection is disconnected. */
+  Disconnected: "Disconnected",
+}
+
+//----------------------- PrivateLinkResource -----------------------
+/** A private link resource. */
+@added(Versions.v2026_03_01)
+@parentResource(TrafficController)
+model PrivateLinkResource is ProxyResource<PrivateLinkResourceProperties> {
+  /** Private Link Resource */
+  @key("privateLinkResourceName")
+  @visibility(Lifecycle.Read)
+  @path
+  @segment("privateLinkResources")
+  @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
+  name: string;
+}
+
+/** Properties of a private link resource. */
+@added(Versions.v2026_03_01)
+model PrivateLinkResourceProperties {
+  /** The private link resource group ID. */
+  @visibility(Lifecycle.Read)
+  groupId?: string;
+
+  /** The private link resource required member names. */
+  @visibility(Lifecycle.Read)
+  requiredMembers?: string[];
+
+  /** The private link resource private DNS zone names. */
+  @visibility(Lifecycle.Read)
+  requiredZoneNames?: string[];
+
+  /** The status of the last operation. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
 //----------------------- Paths -----------------------
 @armResourceOperations
 interface AssociationsInterface {
@@ -318,7 +458,6 @@ interface AssociationsInterface {
     Association,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<Association, AssociationUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<Association>;
   listByTrafficController is ArmResourceListByParent<Association>;
@@ -333,6 +472,7 @@ interface FrontendsInterface {
     Frontend,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     Frontend,
@@ -355,6 +495,7 @@ interface SecurityPoliciesInterface {
     SecurityPolicy,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     SecurityPolicy,
@@ -376,6 +517,7 @@ interface TrafficControllerInterface {
     TrafficController,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     TrafficController,
@@ -387,6 +529,22 @@ interface TrafficControllerInterface {
   delete is ArmResourceDeleteWithoutOkAsync<TrafficController>;
   listByResourceGroup is ArmResourceListByParent<TrafficController>;
   listBySubscription is ArmListBySubscription<TrafficController>;
+}
+
+@added(Versions.v2026_03_01)
+@armResourceOperations
+interface PrivateEndpointConnectionsInterface {
+  get is ArmResourceRead<PrivateEndpointConnection>;
+  update is ArmResourceCreateOrReplaceAsync<PrivateEndpointConnection>;
+  delete is ArmResourceDeleteWithoutOkAsync<PrivateEndpointConnection>;
+  listByTrafficController is ArmResourceListByParent<PrivateEndpointConnection>;
+}
+
+@added(Versions.v2026_03_01)
+@armResourceOperations
+interface PrivateLinkResourcesInterface {
+  get is ArmResourceRead<PrivateLinkResource>;
+  listByTrafficController is ArmResourceListByParent<PrivateLinkResource>;
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

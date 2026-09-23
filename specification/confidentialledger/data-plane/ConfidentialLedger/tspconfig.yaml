@@ -6,9 +6,9 @@ emit:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
 options:
   "@azure-tools/typespec-autorest":
-    azure-resource-provider-folder: "data-plane"
     emitter-output-dir: "{project-root}"
     examples-dir: "{project-root}/examples"
     output-file: "{version-status}/{version}/confidentialledger.json"
@@ -21,21 +21,11 @@ options:
     "generate-test": false
     "generate-sample": false
     "package-pprint-name": "Confidential Ledger"
-  "@azure-tools/typespec-csharp":
-    "namespace": "Azure.ConfidentialLedger"
-    "emitter-output-dir": "{output-dir}/{service-dir}/Azure.ConfidentialLedger"
-    "flavor": "azure"
-    clear-output-folder: true
   "@azure-tools/typespec-java":
-    "emitter-output-dir": "{output-dir}/{service-dir}/azure-confidentialledger"
-    "namespace": "com.azure.confidentialledger"
+    "emitter-output-dir": "{output-dir}/{service-dir}/azure-security-confidentialledger"
+    "namespace": "com.azure.security.confidentialledger"
     "flavor": "azure"
-  "@azure-tools/typespec-ts":
-    "emitter-output-dir": "{output-dir}/{service-dir}/confidentialledger-rest"
-    "package-details":
-      "name": "@azure-rest/azure-confidentialledger"
-      description: "Microsoft Confidential Ledger"
-    "flavor": "azure"
-    is-modular-library: false
-    generate-metadata: true
-    generate-sample-project: false
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.Security.ConfidentialLedger
+    model-namespace: true

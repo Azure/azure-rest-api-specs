@@ -11,6 +11,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "./routes.tsp";
 import "@azure-tools/typespec-azure-core";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -23,6 +24,7 @@ using TypeSpec.Versioning;
   "{endpoint}/datagovernance/catalog",
   "PurviewUnifiedCatalog Service is a fully managed cloud service whose users can discover the data sources they need and understand the data sources they find. At the same time, Data Map helps organizations get more value from their existing investments.",
   {
+    @doc("The endpoint of the Purview Unified Catalog service. Example: https://api.purview-service.microsoft.com/")
     endpoint: "https://api.purview-service.microsoft.com/",
   }
 )
@@ -38,8 +40,8 @@ namespace PurviewUnifiedCatalog;
 
 @doc("Service API versions")
 enum ApiVersions {
-  @doc("2025-09-15-preview service API version")
-  v2025_09_15_preview: "2025-09-15-preview",
+  @doc("2026-03-20-preview service API version")
+  v2026_03_20_preview: "2026-03-20-preview",
 }
 
 alias AuthToken = OAuth2Auth<[

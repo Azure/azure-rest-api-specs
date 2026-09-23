@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./ResiliencyReview.tsp";
 
@@ -9,11 +10,13 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Advisor;
 /**
  * Triage recommendation data structure.
  */
+@removed(Versions.v2026_03_01_preview)
 @parentResource(ResiliencyReview)
 model TriageRecommendation
   is Azure.ResourceManager.ProxyResource<TriageRecommendationProperties> {
@@ -25,7 +28,8 @@ model TriageRecommendation
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Compatibility: preserves the legacy triage recommendation parameter and provider path shape in API versions 2025-05-01-preview and 2026-02-01-preview; changing it would alter the TriageRecommendationOps interface."
+@removed(Versions.v2026_03_01_preview)
 interface TriageRecommendationOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
@@ -49,20 +53,19 @@ interface TriageRecommendationOps
       }
     > {}
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Compatibility: preserves the legacy triage recommendation operation and action route shapes in API versions 2025-05-01-preview and 2026-02-01-preview; changing it would alter the TriageRecommendations interface."
+@removed(Versions.v2026_03_01_preview)
 interface TriageRecommendations {
-  /**
-   * Get an existing recommendation by id for an existing Azure Advisor Resiliency Review Id.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Compatibility: preserves the legacy GET triage recommendation wire shape in API versions 2025-05-01-preview and 2026-02-01-preview; changing it would alter the triageRecommendations_Get operation."
+  #deprecated "This operation is no longer supported. The Azure Advisor triage workflow has been retired and there is no replacement API. Clients should stop calling this operation."
+  @doc("Deprecated: This operation is no longer supported. The Azure Advisor triage workflow has been retired and there is no replacement API. Clients should stop calling this operation.")
   @summary("Get an existing recommendation by id for an existing Resiliency Review Id.")
   @operationId("triageRecommendations_Get")
   get is TriageRecommendationOps.Read<TriageRecommendation>;
 
-  /**
-   * Get list of recommendations for an existing Azure Advisor Resiliency Review Id.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Compatibility: preserves the legacy list triage recommendations wire shape in API versions 2025-05-01-preview and 2026-02-01-preview; changing it would alter the triageRecommendations_List operation."
+  #deprecated "This operation is no longer supported. The Azure Advisor triage workflow has been retired and there is no replacement API. Clients should stop calling this operation."
+  @doc("Deprecated: This operation is no longer supported. The Azure Advisor triage workflow has been retired and there is no replacement API. Clients should stop calling this operation.")
   @summary("Get list of recommendations for an existing Resiliency Review Id.")
   @segment("providers/Microsoft.Advisor/triageRecommendations")
   @operationId("triageRecommendations_List")
@@ -84,10 +87,9 @@ interface TriageRecommendations {
     Response = ArmResponse<TriageRecommendationCollection>
   >;
 
-  /**
-   * Approve a triage recommendation for a given id.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Compatibility: preserves the legacy approve action wire shape in API versions 2025-05-01-preview and 2026-02-01-preview; changing it would alter the triageRecommendations_ApproveTriageRecommendation operation."
+  #deprecated "This operation is no longer supported. The Azure Advisor triage workflow has been retired and there is no replacement API. Clients should stop calling this operation."
+  @doc("Deprecated: This operation is no longer supported. The Azure Advisor triage workflow has been retired and there is no replacement API. Clients should stop calling this operation.")
   @summary("Approve triage recommendation by id.")
   @operationId("triageRecommendations_ApproveTriageRecommendation")
   @action("approve")
@@ -97,10 +99,9 @@ interface TriageRecommendations {
     OkResponse
   >;
 
-  /**
-   * Reject an existing triage recommendation for a given id.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Compatibility: preserves the legacy reject action wire shape in API versions 2025-05-01-preview and 2026-02-01-preview; changing it would alter the triageRecommendations_RejectTriageRecommendation operation."
+  #deprecated "This operation is no longer supported. The Azure Advisor triage workflow has been retired and there is no replacement API. Clients should stop calling this operation."
+  @doc("Deprecated: This operation is no longer supported. The Azure Advisor triage workflow has been retired and there is no replacement API. Clients should stop calling this operation.")
   @summary("Reject existing triage recommendation by id.")
   @operationId("triageRecommendations_RejectTriageRecommendation")
   @action("reject")
@@ -110,10 +111,9 @@ interface TriageRecommendations {
     OkResponse
   >;
 
-  /**
-   * Reset an existing triage recommendation for a given id.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Compatibility: preserves the legacy reset action wire shape in API versions 2025-05-01-preview and 2026-02-01-preview; changing it would alter the triageRecommendations_ResetTriageRecommendation operation."
+  #deprecated "This operation is no longer supported. The Azure Advisor triage workflow has been retired and there is no replacement API. Clients should stop calling this operation."
+  @doc("Deprecated: This operation is no longer supported. The Azure Advisor triage workflow has been retired and there is no replacement API. Clients should stop calling this operation.")
   @summary("Reset existing triage recommendation by id.")
   @operationId("triageRecommendations_ResetTriageRecommendation")
   @action("reset")
@@ -125,10 +125,12 @@ interface TriageRecommendations {
   >;
 }
 
-@@doc(TriageRecommendation.name,
+@@doc(
+  TriageRecommendation.name,
   "Existing triage recommendation id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)."
 );
 @@doc(TriageRecommendation.properties, "Advisor resiliency review properties.");
-@@doc(TriageRecommendations.rejectTriageRecommendation::parameters.body,
+@@doc(
+  TriageRecommendations.rejectTriageRecommendation::parameters.body,
   "JSON object that contains reason for rejecting triage recommendation."
 );

@@ -1,6 +1,7 @@
 namespace Microsoft.ContainerRegistry;
 
 using Azure.ResourceManager;
+using Versioning;
 
 /**
  * The mode of the connected registry resource that indicates the permissions of the registry.
@@ -92,6 +93,89 @@ union AuditLogStatus {
 }
 
 /**
+ * The status of the connected registry's most recent sync.
+ */
+union SyncTrigger {
+  string,
+
+  /**
+   * Connected Registry sync was triggered by a sync token update
+   */
+  SyncTokenUpdate: "SyncTokenUpdate",
+
+  /**
+   * Connected Registry sync was triggered by an initial sync during activation
+   */
+  InitialSync: "InitialSync",
+
+  /**
+   * Connected Registry sync was triggered by a manual resync request
+   */
+  ManualResync: "ManualResync",
+
+  /**
+   * Connected Registry sync was triggered by the Connected Registry's recovery service
+   */
+  RecoveryService: "RecoveryService",
+}
+
+/**
+ * The action that triggered the most recent registry sync.
+ */
+@added(Versions.vLatestPreview)
+union SyncState {
+  string,
+
+  /**
+   * Connected Registry is not activated
+   */
+  NotActivated: "NotActivated",
+
+  /**
+   * Connected Registry is syncing
+   */
+  Syncing: "Syncing",
+
+  /**
+   * Connected Registry sync failed
+   */
+  Failed: "Failed",
+
+  /**
+   * Connected Registry sync succeeded
+   */
+  Succeeded: "Succeeded",
+
+  /**
+   * Connected Registry sync timed out
+   */
+  TimedOut: "TimedOut",
+
+  /**
+   * Connected Registry sync is pending
+   */
+  Pending: "Pending",
+}
+
+/**
+ * The authentication type used for the connected registry to sync with its parent.
+ */
+@added(Versions.vLatestPreview)
+union AuthType {
+  string,
+
+  /**
+   * Sync authentication is done using ACR tokens
+   */
+  SyncToken: "SyncToken",
+
+  /**
+   * Sync authentication is done using managed identity
+   */
+  ManagedIdentity: "ManagedIdentity",
+}
+
+/**
  * The properties of a connected registry.
  */
 model ConnectedRegistryProperties {
@@ -167,6 +251,12 @@ model ConnectedRegistryProperties {
    * The garbage collection properties of the connected registry.
    */
   garbageCollection?: GarbageCollectionProperties;
+
+  /**
+   * The result of the connected registry's most recent sync with its parent.
+   */
+  @added(Versions.vLatestPreview)
+  registrySyncResult?: RegistrySyncResult;
 }
 
 /**
@@ -202,7 +292,8 @@ model SyncProperties {
   /**
    * The resource ID of the ACR token used to authenticate the connected registry to its parent during sync.
    */
-  tokenId: string;
+  @madeOptional(Versions.vLatestPreview)
+  tokenId?: string;
 
   /**
    * The cron expression indicating the schedule that the connected registry will sync with its parent.
@@ -231,6 +322,12 @@ model SyncProperties {
    */
   @visibility(Lifecycle.Read)
   gatewayEndpoint?: string;
+
+  /**
+   * The authentication type used for the connected registry to sync with its parent.
+   */
+  @added(Versions.vLatestPreview)
+  authType?: AuthType;
 }
 
 /**
@@ -333,6 +430,20 @@ model StatusDetailProperties {
    */
   @visibility(Lifecycle.Read)
   correlationId?: string;
+
+  /**
+   * The total disk space in gibibytes (Gib, base-2).
+   */
+  @added(Versions.vLatestPreview)
+  @visibility(Lifecycle.Read)
+  totalGib?: float64;
+
+  /**
+   * The available disk space in gibibytes (Gib, base-2).
+   */
+  @added(Versions.vLatestPreview)
+  @visibility(Lifecycle.Read)
+  availableGib?: float64;
 }
 
 /**
@@ -351,6 +462,39 @@ model GarbageCollectionProperties {
 }
 
 /**
+ * The registry sync result of the connected registry.
+ */
+@added(Versions.vLatestPreview)
+model RegistrySyncResult {
+  /**
+   * The action that triggered the most recent registry sync.
+   */
+  @visibility(Lifecycle.Read)
+  syncTrigger: SyncTrigger;
+
+  /**
+   * The status of the connected registry's most recent sync.
+   */
+  @visibility(Lifecycle.Read)
+  syncState: SyncState;
+
+  /**
+   * The time that the connected registry's most recent sync started.
+   */
+  lastSyncStartTime?: utcDateTime;
+
+  /**
+   * The time that the connected registry's most recent sync ended.
+   */
+  lastSyncEndTime?: utcDateTime;
+
+  /**
+   * The time that the connected registry's most recent successful sync ended.
+   */
+  lastSuccessfulSyncEndTime?: utcDateTime;
+}
+
+/**
  * The parameters for updating a connected registry.
  */
 model ConnectedRegistryUpdateParameters {
@@ -360,7 +504,17 @@ model ConnectedRegistryUpdateParameters {
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ConnectedRegistryUpdateProperties;
+
+  /**
+   * The user-assigned managed identity used to authenticate the connected registry with its parent during sync.
+   */
+  ...ManagedServiceIdentityProperty;
 }
+@@added(ConnectedRegistryUpdateParameters.identity, Versions.vLatestPreview);
+@@doc(
+  ConnectedRegistryUpdateParameters.identity,
+  "The user-assigned managed identity used to authenticate the connected registry with its parent during synchronization. Requires authType to be ManagedIdentity."
+);
 
 /**
  * The parameters for updating token properties.
@@ -410,6 +564,12 @@ model SyncUpdateProperties {
    * The period of time for which a message is available to sync before it is expired. Specify the duration using the format P[n]Y[n]M[n]DT[n]H[n]M[n]S as per ISO8601.
    */
   messageTtl?: duration;
+
+  /**
+   * The authentication type used for the connected registry to sync with its parent.
+   */
+  @added(Versions.vLatestPreview)
+  authType?: AuthType;
 }
 
 /**

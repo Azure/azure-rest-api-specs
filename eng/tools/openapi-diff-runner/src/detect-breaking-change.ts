@@ -21,17 +21,17 @@ import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking
 import { SpecModel } from "@azure-tools/specs-shared/spec-model";
 import { appendFileSync, existsSync } from "node:fs";
 import * as path from "node:path";
-import { logError, LogLevel, logMessage } from "./log.js";
-import { runOad } from "./run-oad.js";
+import { logError, LogLevel, logMessage } from "./log.ts";
+import { runOad } from "./run-oad.ts";
 import {
   ApiVersionLifecycleStage,
-  BreakingChangesCheckType,
-  Context,
+  type BreakingChangesCheckType,
+  type Context,
   logFileName,
-} from "./types/breaking-change.js";
-import { RawMessageRecord, ResultMessageRecord } from "./types/message.js";
-import { addOadTrace, OadMessage, OadTraceData } from "./types/oad-types.js";
-import { applyRules } from "./utils/apply-rules.js";
+} from "./types/breaking-change.ts";
+import { type RawMessageRecord, type ResultMessageRecord } from "./types/message.ts";
+import { addOadTrace, type OadMessage, type OadTraceData } from "./types/oad-types.ts";
+import { applyRules } from "./utils/apply-rules.ts";
 import {
   blobHref,
   branchHref,
@@ -39,13 +39,13 @@ import {
   getRelativeSwaggerPathToRepo,
   processOadRuntimeErrorMessage,
   specIsPreview,
-} from "./utils/common-utils.js";
-import { processAndAppendOadMessages } from "./utils/oad-message-processor.js";
+} from "./utils/common-utils.ts";
+import { processAndAppendOadMessages } from "./utils/oad-message-processor.ts";
 import {
   deduplicateSwaggers,
   getExistedVersionOperations,
   getPrecedingSwaggers,
-} from "./utils/spec.js";
+} from "./utils/spec.ts";
 
 // We want to display some lines as we improved AutoRest v2 error output since March 2024 to provide multi-line error messages, e.g.:
 // https://github.com/Azure/autorest/pull/4934
@@ -61,6 +61,7 @@ export interface BreakingChangeDetectionContext {
   existingVersionSwaggers: string[]; // Files in existing API version directories
   newVersionSwaggers: string[]; // Files in completely new API version directories
   newVersionChangedSwaggers: string[]; // Files in existing API version directories that have changed
+  renamedSwaggers: { from: string; to: string }[];
   oadTracer: OadTraceData;
   msgs: ResultMessageRecord[];
   runtimeErrors: RawMessageRecord[];
@@ -75,6 +76,7 @@ export function createBreakingChangeDetectionContext(
   existingVersionSwaggers: string[],
   newVersionSwaggers: string[],
   newVersionChangedSwaggers: string[],
+  renamedSwaggers: { from: string; to: string }[],
   oadTracer: OadTraceData,
 ): BreakingChangeDetectionContext {
   return {
@@ -82,6 +84,7 @@ export function createBreakingChangeDetectionContext(
     existingVersionSwaggers,
     newVersionSwaggers,
     newVersionChangedSwaggers,
+    renamedSwaggers,
     oadTracer,
     msgs: [],
     runtimeErrors: [],
@@ -126,6 +129,20 @@ export async function checkBreakingChangeOnSameVersion(
       specIsPreview(swaggerPath)
         ? ApiVersionLifecycleStage.PREVIEW
         : ApiVersionLifecycleStage.STABLE,
+    );
+    aggregateOadViolationsCnt += oadViolationsCnt;
+    aggregateErrorCnt += errorCnt;
+    logMessage("Processing completed", LogLevel.EndGroup);
+  }
+
+  for (const { from, to } of detectionContext.renamedSwaggers) {
+    logMessage(`Processing rename: ${from} -> ${to}`, LogLevel.Group);
+    const { oadViolationsCnt, errorCnt } = await doBreakingChangeDetection(
+      detectionContext,
+      path.resolve(detectionContext.context.prInfo!.tempRepoFolder, from),
+      to,
+      BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
+      specIsPreview(to) ? ApiVersionLifecycleStage.PREVIEW : ApiVersionLifecycleStage.STABLE,
     );
     aggregateOadViolationsCnt += oadViolationsCnt;
     aggregateErrorCnt += errorCnt;
@@ -302,7 +319,7 @@ export async function doBreakingChangeDetection(
       newSpec,
     );
 
-    const modifiedOadMessages: OadMessage[] = applyRules(
+    const modifiedOadMessages: OadMessage[] = await applyRules(
       oadMessages,
       scenario,
       previousApiVersionLifecycleStage,
@@ -312,7 +329,7 @@ export async function doBreakingChangeDetection(
       (oadMessage) => oadMessage.type === "Error",
     ).length;
 
-    const msgs: ResultMessageRecord[] = processAndAppendOadMessages(
+    const msgs: ResultMessageRecord[] = await processAndAppendOadMessages(
       detectionContext.context,
       modifiedOadMessages,
       detectionContext.context.baseBranch,

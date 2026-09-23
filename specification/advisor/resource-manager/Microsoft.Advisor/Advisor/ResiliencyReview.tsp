@@ -69,7 +69,8 @@ interface ResiliencyReviews {
   >;
 }
 
-@@doc(ResiliencyReview.name,
+@@doc(
+  ResiliencyReview.name,
   "Existing review id. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)."
 );
 @@doc(ResiliencyReview.properties, "Advisor resiliency review properties.");

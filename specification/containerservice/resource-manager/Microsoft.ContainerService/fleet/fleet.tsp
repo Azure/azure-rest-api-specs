@@ -219,7 +219,6 @@ interface Fleets {
   #suppress "@azure-tools/typespec-providerhub/non-breaking-versioning" "Actual breaking change"
   @sharedRoute
   @removed(Versions.v2023_06_15_preview)
-  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     Fleet,
     FleetPatch,
@@ -230,12 +229,8 @@ interface Fleets {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "Use operationId to keep same name as deprecated sync operation"
   @added(Versions.v2023_06_15_preview)
   @operationId("Fleets_Update")
-  @extension(
-    "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "original-uri" }
-  )
   @sharedRoute
-  @patch(#{ implicitOptionality: true })
+  @Azure.Core.useFinalStateVia("original-uri")
   updateAsync is ArmCustomPatchAsync<
     Fleet,
     FleetPatch,

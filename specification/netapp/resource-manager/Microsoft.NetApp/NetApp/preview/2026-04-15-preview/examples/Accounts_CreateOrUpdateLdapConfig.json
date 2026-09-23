@@ -1,0 +1,90 @@
+{
+  "parameters": {
+    "accountName": "account1",
+    "api-version": "2026-04-15-preview",
+    "body": {
+      "location": "eastus",
+      "properties": {
+        "ldapConfiguration": {
+          "domain": "example.com",
+          "ldapServers": [
+            "192.0.2.1",
+            "192.0.2.2"
+          ],
+          "ldapOverTLS": false,
+          "serverCACertificate": "<REDACTED>",
+          "certificateCNHost": "ldap.krypton.com",
+          "bindAuthenticationLevel": "Simple",
+          "bindDN": "cn=user,dc=domain,dc=com",
+          "bindPasswordAkvConfig": {
+            "azureKeyVaultUri": "https://myvault.vault.azure.net/",
+            "secretName": "bindPassword",
+            "userAssignedIdentity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity"
+          }
+        }
+      }
+    },
+    "resourceGroupName": "myRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "account1",
+        "type": "Microsoft.NetApp/netAppAccounts",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "ldapConfiguration": {
+            "domain": "example.com",
+            "ldapServers": [
+              "192.0.2.1",
+              "192.0.2.2"
+            ],
+            "ldapOverTLS": false,
+            "serverCACertificate": null,
+            "certificateCNHost": "ldap.krypton.com",
+            "bindAuthenticationLevel": "Simple",
+            "bindDN": "cn=user,dc=domain,dc=com",
+            "bindPasswordAkvConfig": {
+              "azureKeyVaultUri": "https://myvault.vault.azure.net/",
+              "secretName": "bindPassword",
+              "userAssignedIdentity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity"
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "account1",
+        "type": "Microsoft.NetApp/netAppAccounts",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Creating",
+          "ldapConfiguration": {
+            "domain": "example.com",
+            "ldapServers": [
+              "192.0.2.1",
+              "192.0.2.2"
+            ],
+            "ldapOverTLS": false,
+            "serverCACertificate": null,
+            "certificateCNHost": "ldap.krypton.com",
+            "bindAuthenticationLevel": "Simple",
+            "bindDN": "cn=user,dc=domain,dc=com",
+            "bindPasswordAkvConfig": {
+              "azureKeyVaultUri": "https://myvault.vault.azure.net/",
+              "secretName": "bindPassword",
+              "userAssignedIdentity": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myIdentity"
+            }
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Accounts_CreateOrUpdate",
+  "title": "Accounts_CreateOrUpdateLdapConfig"
+}

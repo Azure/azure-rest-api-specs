@@ -1,0 +1,124 @@
+{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "accountName": "sampleacct",
+    "poolName": "testpool",
+    "api-version": "2025-06-01",
+    "parameters": {
+      "properties": {
+        "vmSize": "Standard_D4ds_v5",
+        "deploymentConfiguration": {
+          "virtualMachineConfiguration": {
+            "imageReference": {
+              "sku": "2022-Datacenter",
+              "publisher": "MicrosoftWindowsServer",
+              "version": "latest",
+              "offer": "WindowsServer"
+            },
+            "nodeAgentSkuId": "batch.node.windows amd64",
+            "diskEncryptionConfiguration": {
+              "targets": [
+                "OsDisk"
+              ],
+              "customerManagedKey": {
+                "keyUrl": "http://sample.vault.azure.net//keys/cmk/bb60031a6d4545d3a60d3f94588538c9",
+                "identityReference": {
+                  "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1"
+                }
+              }
+            }
+          }
+        },
+        "scaleSettings": {
+          "fixedScale": {
+            "targetDedicatedNodes": 1,
+            "resizeTimeout": "PT15M"
+          }
+        }
+      },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {}
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "W/\"0x8D4EDFEBFADF4AB\""
+      },
+      "body": {
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+              "principalId": "principalId",
+              "clientId": "clientId"
+            }
+          }
+        },
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool",
+        "name": "testpool",
+        "type": "Microsoft.Batch/batchAccounts/pools",
+        "etag": "W/\"0x8D4EDFEBFADF4AB\"",
+        "properties": {
+          "lastModified": "2025-06-30T07:16:33.4309281Z",
+          "creationTime": "2025-06-30T07:16:33.4309266Z",
+          "provisioningState": "Succeeded",
+          "provisioningStateTransitionTime": "2025-06-30T07:16:33.4309266Z",
+          "allocationState": "Resizing",
+          "allocationStateTransitionTime": "2025-06-30T07:16:33.4309281Z",
+          "vmSize": "Standard_D4ds_v5",
+          "interNodeCommunication": "Disabled",
+          "taskSlotsPerNode": 1,
+          "taskSchedulingPolicy": {
+            "nodeFillType": "Spread",
+            "jobDefaultOrder": "None"
+          },
+          "deploymentConfiguration": {
+            "virtualMachineConfiguration": {
+              "imageReference": {
+                "publisher": "MicrosoftWindowsServer",
+                "offer": "WindowsServer",
+                "sku": "2022-Datacenter",
+                "version": "latest"
+              },
+              "nodeAgentSkuId": "batch.node.windows amd64",
+              "diskEncryptionConfiguration": {
+                "targets": [
+                  "OsDisk"
+                ],
+                "customerManagedKey": {
+                  "keyUrl": "http://sample.vault.azure.net//keys/cmk/bb60031a6d4545d3a60d3f94588538c9",
+                  "identityReference": {
+                    "resourceId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1"
+                  }
+                }
+              }
+            }
+          },
+          "scaleSettings": {
+            "fixedScale": {
+              "targetDedicatedNodes": 1,
+              "targetLowPriorityNodes": 0,
+              "resizeTimeout": "PT15M"
+            }
+          },
+          "resizeOperationStatus": {
+            "targetDedicatedNodes": 1,
+            "nodeDeallocationOption": "Requeue",
+            "resizeTimeout": "PT15M",
+            "startTime": "2025-06-30T07:16:33.4309126Z"
+          },
+          "currentDedicatedNodes": 0,
+          "currentLowPriorityNodes": 0
+        }
+      }
+    }
+  },
+  "operationId": "Pool_Create",
+  "title": "CreatePool - customer managed key for Batch managed accounts"
+}

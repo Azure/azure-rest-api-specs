@@ -16,11 +16,10 @@ namespace Microsoft.MachineLearningServices;
  * Azure Resource Manager resource envelope.
  */
 @parentResource(Registry)
-model EnvironmentContainer
-  is Azure.ResourceManager.ProxyResource<
-    EnvironmentContainerProperties,
-    false
-  > {
+model EnvironmentContainer is Azure.ResourceManager.ProxyResource<
+  EnvironmentContainerProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = EnvironmentContainer,
     KeyName = "environmentName",
@@ -52,7 +51,9 @@ interface EnvironmentContainerOps
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
         environmentName: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningRegistryEnvironmentContainer"
     > {}
 
 @armResourceOperations
@@ -70,33 +71,38 @@ interface EnvironmentContainers {
   @summary("Create or update container.")
   createOrUpdate is EnvironmentContainerOps.CreateOrUpdateAsync<
     EnvironmentContainer,
-    Response = ArmResourceUpdatedResponse<EnvironmentContainer> | (ArmResourceCreatedResponse<
-      EnvironmentContainer,
-      LroHeaders = ArmAsyncOperationHeader<FinalResult = EnvironmentContainer> &
-        Azure.Core.Foundations.RetryAfterHeader
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<EnvironmentContainer>
+      | (ArmResourceCreatedResponse<
+          EnvironmentContainer,
+          LroHeaders = ArmAsyncOperationHeader<FinalResult = EnvironmentContainer> &
+            Azure.Core.Foundations.RetryAfterHeader
+        > & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
    * Delete container.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API returns additional response codes for LRO delete"
   @summary("Delete container.")
   delete is EnvironmentContainerOps.DeleteWithoutOkAsync<
     EnvironmentContainer,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -143,7 +149,9 @@ interface EnvironmentContainerOperationGroupOps
         @segment("environments")
         @key
         name: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningEnvironmentContainer"
     > {}
 
 @armResourceOperations
@@ -190,12 +198,15 @@ interface EnvironmentContainerOperationGroup {
 }
 
 @@doc(EnvironmentContainer.name, "Container name. This is case-sensitive.");
-@@doc(EnvironmentContainer.properties,
+@@doc(
+  EnvironmentContainer.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(EnvironmentContainers.createOrUpdate::parameters.resource,
+@@doc(
+  EnvironmentContainers.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );
-@@doc(EnvironmentContainerOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  EnvironmentContainerOperationGroup.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );

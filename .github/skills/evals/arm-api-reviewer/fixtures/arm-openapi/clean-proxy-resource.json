@@ -1,0 +1,272 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ProxyTestClient",
+    "version": "2025-01-01",
+    "description": "Clean proxy resource provider for true-negative testing."
+  },
+  "host": "management.azure.com",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "security": [
+    {
+      "azure_auth": ["user_impersonation"]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProxyTest/widgets/{widgetName}/configs/{configName}": {
+      "put": {
+        "operationId": "WidgetConfigs_CreateOrUpdate",
+        "description": "Creates or updates a widget configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          { "$ref": "#/parameters/WidgetNameParameter" },
+          { "$ref": "#/parameters/ConfigNameParameter" },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": { "$ref": "#/definitions/WidgetConfig" },
+            "description": "The widget configuration parameters."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource updated successfully.",
+            "schema": { "$ref": "#/definitions/WidgetConfig" }
+          },
+          "201": {
+            "description": "Resource created successfully.",
+            "schema": { "$ref": "#/definitions/WidgetConfig" }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "WidgetConfigs_Get",
+        "description": "Gets a widget configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          { "$ref": "#/parameters/WidgetNameParameter" },
+          { "$ref": "#/parameters/ConfigNameParameter" },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource retrieved successfully.",
+            "schema": { "$ref": "#/definitions/WidgetConfig" }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "WidgetConfigs_Delete",
+        "description": "Deletes a widget configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          { "$ref": "#/parameters/WidgetNameParameter" },
+          { "$ref": "#/parameters/ConfigNameParameter" },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProxyTest/widgets/{widgetName}/configs": {
+      "get": {
+        "operationId": "WidgetConfigs_ListByParent",
+        "description": "Lists all widget configurations under a widget.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          { "$ref": "#/parameters/WidgetNameParameter" },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of widget configurations.",
+            "schema": { "$ref": "#/definitions/WidgetConfigListResult" }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.ProxyTest/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "description": "Lists available operations for the ProxyTest resource provider.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of operations.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "WidgetConfig": {
+      "type": "object",
+      "description": "A widget configuration resource (proxy resource — no location or tags).",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WidgetConfigProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "WidgetConfigProperties": {
+      "type": "object",
+      "description": "Properties of a widget configuration resource.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the configuration."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the configuration is enabled."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioning state of the configuration.",
+          "enum": ["Succeeded", "Failed", "Canceled"],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "WidgetConfigListResult": {
+      "type": "object",
+      "description": "The response of a WidgetConfig list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The WidgetConfig items on this page.",
+          "items": { "$ref": "#/definitions/WidgetConfig" }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items.",
+          "readOnly": true
+        }
+      },
+      "required": ["value"]
+    }
+  },
+  "parameters": {
+    "WidgetNameParameter": {
+      "name": "widgetName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the parent widget.",
+      "pattern": "^[a-zA-Z0-9-]{3,24}$",
+      "x-ms-parameter-location": "method"
+    },
+    "ConfigNameParameter": {
+      "name": "configName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the configuration.",
+      "pattern": "^[a-zA-Z0-9-]{3,24}$",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

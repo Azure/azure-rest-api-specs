@@ -3,16 +3,20 @@ language: en
 flagWords:
   - teh
 ignorePaths:
-  - .github/CODEOWNERS*
-  - .github/policies/**
   - .gitignore
+  - .npmrc
+  - .vscode/**
   - '**/examples/**'
   - '**/package-lock.json'
+  - pnpm-lock.yaml
+  - pnpm-workspace.yaml
   - cspell.json
   - cspell.yaml
   - eng/**
+  - .github/skills/**
   - node_modules/**
   - specification/suppressions.yaml
+  - .devcontainer/**
 ignoreRegExpList:
   - Base64
   - email
@@ -32,12 +36,17 @@ enableFiletypes:
   - cadl
 allowCompoundWords: true
 words:
+  - agentic
   - azext
+  - azsdk
   - byos
   - cadl
   - contoso
+  - docsmsft
   - eastus
   - entra
+  - esbenp
+  - evals
   - fqdns
   - hana
   - kusto
@@ -51,11 +60,9 @@ words:
   - regen
   - rpaas
   - skus
+  - tsgolint
   - vmss
   - vnet
+  - waza
   - westus
 caseSensitive: false
-overrides:
-  - filename: '/README.md'
-    words:
-      - azsdk

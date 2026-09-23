@@ -16,8 +16,10 @@ namespace Microsoft.DesktopVirtualization;
 // Manually switched@subscriptionResource
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Following old implementation"
 @parentResource(HostPool)
-model MSIXPackage
-  is Azure.ResourceManager.ProxyResource<MSIXPackageProperties, false> {
+model MSIXPackage is Azure.ResourceManager.ProxyResource<
+  MSIXPackageProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = MSIXPackage,
     KeyName = "msixPackageFullName",
@@ -104,10 +106,12 @@ interface MSIXPackages {
 
 @@maxLength(MSIXPackage.name, 100);
 @@minLength(MSIXPackage.name, 3);
-@@doc(MSIXPackage.name,
+@@doc(
+  MSIXPackage.name,
   "The version specific package full name of the MSIX package within specified hostpool"
 );
 @@doc(MSIXPackage.properties, "Detailed properties for MSIX Package");
-@@doc(MSIXPackages.createOrUpdate::parameters.resource,
+@@doc(
+  MSIXPackages.createOrUpdate::parameters.resource,
   "Object containing  MSIX Package definitions."
 );

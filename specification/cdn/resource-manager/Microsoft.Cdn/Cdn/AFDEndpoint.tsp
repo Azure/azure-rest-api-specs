@@ -42,12 +42,15 @@ interface AFDEndpoints {
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     AFDEndpoint,
-    Response = ArmResourceUpdatedResponse<AFDEndpoint> | ArmResourceCreatedResponse<AFDEndpoint> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDEndpoint> &
-      ArmLroLocationHeader<FinalResult = AFDEndpoint> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: AFDEndpoint;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<AFDEndpoint>
+      | ArmResourceCreatedResponse<AFDEndpoint>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDEndpoint> &
+          ArmLroLocationHeader<FinalResult = AFDEndpoint> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: AFDEndpoint;
+        })
   >;
 
   /**
@@ -58,11 +61,13 @@ interface AFDEndpoints {
   update is ArmCustomPatchAsync<
     AFDEndpoint,
     PatchModel = AFDEndpointUpdateParameters,
-    Response = ArmResponse<AFDEndpoint> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDEndpoint> &
-      ArmLroLocationHeader<FinalResult = AFDEndpoint>> & {
-      @bodyRoot
-      _: AFDEndpoint;
-    })
+    Response =
+      | ArmResponse<AFDEndpoint>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = AFDEndpoint> &
+          ArmLroLocationHeader<FinalResult = AFDEndpoint>> & {
+          @bodyRoot
+          _: AFDEndpoint;
+        })
   >;
 
   /**
@@ -72,8 +77,11 @@ interface AFDEndpoints {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     AFDEndpoint,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -117,17 +125,21 @@ interface AFDEndpoints {
   >;
 }
 
-@@doc(AFDEndpoint.name,
+@@doc(
+  AFDEndpoint.name,
   "Name of the endpoint under the profile which is unique globally."
 );
-@@doc(AFDEndpoint.properties,
+@@doc(
+  AFDEndpoint.properties,
   "The JSON object that contains the properties required to create an endpoint."
 );
 @@doc(AFDEndpoints.create::parameters.resource, "Endpoint properties");
 @@doc(AFDEndpoints.update::parameters.properties, "Endpoint update properties");
-@@doc(AFDEndpoints.purgeContent::parameters.body,
+@@doc(
+  AFDEndpoints.purgeContent::parameters.body,
   "The list of paths to the content and the list of linked domains to be purged. Path can be a full URL, e.g. '/pictures/city.png' which removes a single file, or a directory with a wildcard, e.g. '/pictures/*' which removes all folders and files in the directory."
 );
-@@doc(AFDEndpoints.validateCustomDomain::parameters.body,
+@@doc(
+  AFDEndpoints.validateCustomDomain::parameters.body,
   "Custom domain to be validated."
 );

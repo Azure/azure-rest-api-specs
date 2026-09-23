@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "api-version": "2026-03-01-preview",
+    "privateEndpointConnectionName": "myPrivateEndpointConnection",
+    "resourceGroupName": "myResourceGroup",
+    "resourceName": "myFirstProvisioningService",
+    "subscriptionId": "91d12660-3dec-467a-be2a-213b5544ddc0"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myPrivateEndpointConnection",
+        "type": "Microsoft.Devices/ProvisioningServices/PrivateEndpointConnections",
+        "id": "/subscriptions/91d12660-3dec-467a-be2a-213b5544ddc0/resourceGroups/myResourceGroup/providers/Microsoft.Devices/ProvisioningServices/myFirstProvisioningService/PrivateEndpointConnections/myPrivateEndpointConnection",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/a9eba280-4734-4d49-878f-b5549d1d0453/resourceGroups/networkResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "description": "Deleted",
+            "actionsRequired": "None",
+            "status": "Disconnected"
+          }
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "myPrivateEndpointConnection",
+        "type": "Microsoft.Devices/ProvisioningServices/PrivateEndpointConnections",
+        "id": "/subscriptions/91d12660-3dec-467a-be2a-213b5544ddc0/resourceGroups/myResourceGroup/providers/Microsoft.Devices/ProvisioningServices/myFirstProvisioningService/PrivateEndpointConnections/myPrivateEndpointConnection",
+        "properties": {
+          "privateEndpoint": {
+            "id": "/subscriptions/a9eba280-4734-4d49-878f-b5549d1d0453/resourceGroups/networkResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+          },
+          "privateLinkServiceConnectionState": {
+            "description": "Deleted",
+            "actionsRequired": "None",
+            "status": "Disconnected"
+          }
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "/subscriptions/91d12660-3dec-467a-be2a-213b5544ddc0/resourceGroups/myResourceGroup/providers/Microsoft.Devices/ProvisioningServices/myFirstProvisioningService/operationResults/YWUzNDFkMzQtZmM5OS00MmUyLWEzNDMtZGJkMDIxZjlmZjgzOzdmYzBiMzhmLTc2NmItNDM5NS05OWQ1LTVmOGEzNzg4MWQzNA==?api-version=2015-03-15",
+        "Location": "/subscriptions/91d12660-3dec-467a-be2a-213b5544ddc0/resourceGroups/myResourceGroup/providers/Microsoft.Devices/ProvisioningServices/myFirstProvisioningService/operationResults/YWUzNDFkMzQtZmM5OS00MmUyLWEzNDMtZGJkMDIxZjlmZjgzOzdmYzBiMzhmLTc2NmItNDM5NS05OWQ1LTVmOGEzNzg4MWQzNA==?api-version=2015-03-15",
+        "Retry-After": "15"
+      }
+    },
+    "204": {}
+  },
+  "operationId": "IotDpsResource_DeletePrivateEndpointConnection",
+  "title": "PrivateEndpointConnection_Delete"
+}

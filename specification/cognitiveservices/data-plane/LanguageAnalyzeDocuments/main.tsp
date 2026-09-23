@@ -6,6 +6,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "./models/common.models.tsp";
 import "./models/pii.entity.recognition.tsp";
 import "./models/summarization.tsp";
+import "./client.tsp";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
@@ -18,14 +19,16 @@ using Azure.Core.Traits;
  * The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering.
  * Further documentation can be found in <a href=\"https://learn.microsoft.com/azure/cognitive-services/language-service/overview\">https://learn.microsoft.com/azure/cognitive-services/language-service/overview</a>.0 */
 @useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key"> | OAuth2Auth<[
-    {
-      type: OAuth2FlowType.authorizationCode,
-      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
-      tokenUrl: "https://login.microsoftonline.com/common/oauth2/token",
-      scopes: ["https://cognitiveservices.azure.com/.default"],
-    }
-  ]>
+
+    | ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">
+    | OAuth2Auth<[
+        {
+          type: OAuth2FlowType.authorizationCode,
+          authorizationUrl: "https://login.microsoftonline.com/common/oauth2/authorize",
+          tokenUrl: "https://login.microsoftonline.com/common/oauth2/token",
+          scopes: ["https://cognitiveservices.azure.com/.default"],
+        }
+      ]>
 )
 @service(#{ title: "Microsoft Cognitive Language Service - Document Analysis" })
 @server(
@@ -43,6 +46,12 @@ namespace Language.AnalyzeDocuments;
 enum Versions {
   /** Version 2024-11-15-preview */
   v2024_11_15_preview: "2024-11-15-preview",
+
+  /** Version 2026-05-01 */
+  v2026_05_01: "2026-05-01",
+
+  /** Version 2026-05-15-preview */
+  v2026_05_15_preview: "2026-05-15-preview",
 }
 
 alias ServiceTraits = NoRepeatableRequests &

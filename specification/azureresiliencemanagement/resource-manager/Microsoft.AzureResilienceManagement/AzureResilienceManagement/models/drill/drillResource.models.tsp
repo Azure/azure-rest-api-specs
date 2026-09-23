@@ -1,0 +1,256 @@
+﻿import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
+import "./enums.tsp";
+import "./common.tsp";
+
+using Azure.Core;
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.ResourceManager;
+using OpenAPI;
+
+namespace Microsoft.AzureResilienceManagement;
+
+/**
+ * Resource definition for the Drill resource Object.
+ */
+@parentResource(Drill)
+@doc("Drill Resource")
+model DrillResource is ProxyResource<DrillResourceProperties> {
+  @doc("The name of the DrillResource (GUID).")
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
+  @key("drillResourceName")
+  @segment("drillResources")
+  @path
+  name: string;
+}
+
+@@typeChangedFrom(
+  DrillResource.properties,
+  Versions.v2026_09_30_preview,
+  LegacyDrillResourceProperties
+);
+
+@doc("Properties of the Resiliency Drill Resource")
+@removed(Versions.v2026_09_30_preview)
+@renamedFrom(Versions.v2026_09_30_preview, "DrillResourceProperties")
+model LegacyDrillResourceProperties {
+  @doc("ARM Id of the underlying resource.")
+  resourceId: armResourceIdentifier<[]>;
+
+  @doc("Type of the Drill resource.")
+  resourceType: string;
+
+  @doc("Active location and zones of the Azure resource.")
+  @added(Versions.v2026_03_01_preview)
+  @visibility(Lifecycle.Read)
+  activeLocations?: string[];
+
+  @doc("List of recovery locations and zones of the Azure resource.")
+  @added(Versions.v2026_03_01_preview)
+  @visibility(Lifecycle.Read)
+  recoveryLocations?: string[];
+
+  @doc("Active Resource location and physical zones of Azure Resource.")
+  @added(Versions.v2026_03_01_preview)
+  @visibility(Lifecycle.Read)
+  activePhysicalZones?: string[];
+
+  @doc("Recovery Resource location and physical zones of HA Azure Resource.")
+  @added(Versions.v2026_03_01_preview)
+  @visibility(Lifecycle.Read)
+  recoveryPhysicalZones?: string[];
+
+  @doc("Inclusion State of the Drill resource in Drill")
+  inclusionState?: DrillResourceInclusionState;
+
+  @doc("Inclusion State of the Drill resource in Recovery Plan")
+  @visibility(Lifecycle.Read)
+  recoveryPlanInclusionState?: ResourceInclusionState;
+
+  @doc("Exclusion reason of the Drill resource in Recovery Plan")
+  @visibility(Lifecycle.Read)
+  recoveryPlanExclusionReason?: RecoveryPlanExclusionReason;
+
+  @doc("Protection Solution Type of the Drill resource")
+  @visibility(Lifecycle.Read)
+  resourceProtectionSolutionType?: ResourceProtectionSolutionType;
+
+  @doc("Readiness State of the Drill resource")
+  @visibility(Lifecycle.Read)
+  readinessState?: DrillResourceReadinessState;
+
+  @doc("Fault State of the Drill resource")
+  @visibility(Lifecycle.Read)
+  faultState?: DrillResourceFaultState;
+
+  @doc("Fault Properties")
+  @visibility(Lifecycle.Read)
+  faultProperties?: FaultProperties;
+
+  @doc("ForceInclusion status for this resource. Has the customer forceIncluded it?")
+  @visibility(Lifecycle.Read)
+  forceInclusionState?: ForceInclusionAndUpdate;
+
+  @doc("HA status of the Drill resource")
+  @visibility(Lifecycle.Read)
+  haStatus?: HAStatus;
+
+  @doc("Attention reason if the Status is 'NeedsAttention'.")
+  @visibility(Lifecycle.Read)
+  attentionReason?: DrillResourceAttentionReason;
+
+  @doc("Recommendation Type Id for the recommendation.")
+  @visibility(Lifecycle.Read)
+  advisorRecommendationTypeId?: string;
+
+  @doc("Associated Advisor Recommendation link, if HA is not enabled on this resource.")
+  @visibility(Lifecycle.Read)
+  advisorHaRecommendationId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.Advisor/recommendations";
+    }
+  ]>;
+
+  @doc("Last Target and Capability assignment error, if any.")
+  @removed(Versions.v2026_04_01_preview)
+  @visibility(Lifecycle.Read)
+  targetAndCapabilityAssignmentError?: ErrorDetails;
+
+  @doc("Last Target Resource RBAC assignment error, if any.")
+  @added(Versions.v2026_03_01_preview)
+  @removed(Versions.v2026_04_01_preview)
+  @visibility(Lifecycle.Read)
+  targetResourceAssignmentError?: ErrorDetails;
+
+  @doc("Last RBAC assignment error, if any.")
+  @visibility(Lifecycle.Read)
+  rbacAssignmentError?: ErrorDetails;
+
+  @doc("Monitoring RBAC assignment error, if any.")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_03_01_preview)
+  monitoringRbacAssignmentError?: ErrorDetails;
+
+  @doc("Provisioning state")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+@doc("Properties of the Resiliency Drill Resource")
+@added(Versions.v2026_09_30_preview)
+@discriminator("drillType")
+model DrillResourceProperties {
+  // Retired fields remain in the legacy model but must not reappear in the new base.
+  ...OmitProperties<
+    LegacyDrillResourceProperties,
+    | "activePhysicalZones"
+    | "recoveryPhysicalZones"
+    | "haStatus"
+    | "advisorHaRecommendationId"
+    | "targetAndCapabilityAssignmentError"
+    | "targetResourceAssignmentError"
+  >;
+
+  @doc("The discriminator for the Drill Resource object hierarchy. Matches the parent Drill type.")
+  @visibility(Lifecycle.Read)
+  drillType: DrillType;
+
+  /**
+   * Normal fault eligibility for a drill resource. Currently populated for regional resources only.
+   * Omitted until evaluated. Eligibility does not indicate inclusion or readiness,
+   * and force inclusion does not change this value.
+   */
+  @visibility(Lifecycle.Read)
+  faultEligibility?: FaultEligibility;
+
+  /**
+   * Reason the resource is ineligible under normal fault inclusion policy. Currently populated for regional resources only.
+   * Contains the single applicable recovery-plan reason when Ineligible.
+   * Omitted when Eligible, Unknown, or not yet evaluated. Failed or incomplete recovery-plan reads do not establish non-inclusion.
+   * Binding and permission errors are reported separately in attentionReason and error fields.
+   */
+  @visibility(Lifecycle.Read)
+  faultIneligibleReason?: FaultIneligibleReason;
+}
+
+@doc("Properties of a resource in a zonal Resiliency Drill.")
+@added(Versions.v2026_09_30_preview)
+model ZonalDrillResourceProperties extends DrillResourceProperties {
+  @doc("The discriminator for the Drill Resource object hierarchy. Matches the parent Drill type.")
+  @visibility(Lifecycle.Read)
+  drillType: DrillType.Zonal;
+
+  ...PickProperties<
+    LegacyDrillResourceProperties,
+    | "activePhysicalZones"
+    | "recoveryPhysicalZones"
+    | "haStatus"
+    | "advisorHaRecommendationId"
+  >;
+}
+
+@doc("Properties of a resource in a regional Resiliency Drill.")
+@added(Versions.v2026_09_30_preview)
+model RegionalDrillResourceProperties extends DrillResourceProperties {
+  @doc("The discriminator for the Drill Resource object hierarchy. Matches the parent Drill type.")
+  @visibility(Lifecycle.Read)
+  drillType: DrillType.Regional;
+
+  /**
+   * Regional resiliency status reported by the selected regional protection solution.
+   * Resilient corresponds to an available true posture value; NotResilient corresponds to an available false value.
+   * Omitted when the posture is unknown or unavailable; unavailable data is not reported as NotResilient.
+   */
+  @visibility(Lifecycle.Read)
+  regionalResiliencyStatus?: RegionalResiliencyStatus;
+
+  /**
+   * Replication mode of the selected regional protection solution.
+   * Omitted when no applicable mode is available.
+   */
+  @visibility(Lifecycle.Read)
+  replicationMode?: ReplicationMode;
+
+  /**
+   * Azure resource ID of the matching regional Advisor recommendation instance.
+   * The recommendation type is identified separately by advisorRecommendationTypeId.
+   * Omitted when no matching recommendation exists.
+   */
+  @visibility(Lifecycle.Read)
+  advisorRegionalRecommendationId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.Advisor/recommendations";
+    }
+  ]>;
+}
+
+@doc("Reason why the Drill resource is in NeedsAttention state.")
+model DrillResourceAttentionReason {
+  @doc("Experiment MSI does not have the desired RBAC on the resource.")
+  @removed(Versions.v2026_04_01_preview)
+  faultRbacOnTarget?: RBACState;
+
+  @doc("Chaos Resource MSI does not have the desired RBAC on the resource.")
+  @added(Versions.v2026_03_01_preview)
+  faultRbacOnTargetResource?: RBACState;
+
+  @doc("RBAC required by AutomationAccount for runbook MSI not setup on the target resources.")
+  runbookFaultRbacOnTargets?: RBACState;
+
+  @doc("RBAC required by Drill MSI on the target resource for monitoring.")
+  @added(Versions.v2026_03_01_preview)
+  monitoringRbacOnTargets?: RBACState;
+
+  @doc("Target extension resource is missing on the resource.")
+  @removed(Versions.v2026_04_01_preview)
+  target?: ExtensionObjectState;
+
+  @doc("Drill Resource State (wrt SG and RO).")
+  resourceState?: DrillResourceState[];
+}

@@ -53,10 +53,12 @@ interface CsmPublishingCredentialsPoliciesEntityOps
         @segment("basicPublishingCredentialsPolicies")
         @key
         ftp: "ftp",
-      }
+      },
+      ResourceName = "WebSiteFtpPublishingCredentialsPolicy"
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface CsmPublishingCredentialsPoliciesEntities {
   /**
    * Description for Returns whether FTP is allowed on the site or not.
@@ -110,10 +112,12 @@ interface CsmPublishingCredentialsPoliciesEntityOperationGroupOps
         @segment("basicPublishingCredentialsPolicies")
         @key
         scm: "scm",
-      }
+      },
+      ResourceName = "ScmSiteBasicPublishingCredentialsPolicy"
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface CsmPublishingCredentialsPoliciesEntityOperationGroup {
   /**
    * Description for Returns whether Scm basic auth is allowed on the site or not.
@@ -162,10 +166,12 @@ interface FtpAllowedSlotOps
         @segment("basicPublishingCredentialsPolicies")
         @key
         ftp: "ftp",
-      }
+      },
+      ResourceName = "WebSiteSlotFtpPublishingCredentialsPolicy"
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface CsmPublishingCredentialsPoliciesEntityFtpAllowedSlot {
   /**
    * Description for Returns whether FTP is allowed on the site or not.
@@ -225,11 +231,13 @@ interface ScmAllowedSlotOps
         @segment("basicPublishingCredentialsPolicies")
         @key
         scm: "scm",
-      }
+      },
+      ResourceName = "ScmSiteSlotBasicPublishingCredentialsPolicy"
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface CsmPublishingCredentialsPoliciesEntityScmAllowedSlot {
   /**
    * Description for Returns whether Scm basic auth is allowed on the site or not.
@@ -253,18 +261,23 @@ interface CsmPublishingCredentialsPoliciesEntityScmAllowedSlot {
 }
 
 @@doc(CsmPublishingCredentialsPoliciesEntity.name, "");
-@@doc(CsmPublishingCredentialsPoliciesEntity.properties,
+@@doc(
+  CsmPublishingCredentialsPoliciesEntity.properties,
   "CsmPublishingCredentialsPoliciesEntity resource specific properties"
 );
-@@doc(CsmPublishingCredentialsPoliciesEntities.updateFtpAllowed::parameters.resource,
+@@doc(
+  CsmPublishingCredentialsPoliciesEntities.updateFtpAllowed::parameters.resource,
   ""
 );
-@@doc(CsmPublishingCredentialsPoliciesEntityOperationGroup.updateScmAllowed::parameters.resource,
+@@doc(
+  CsmPublishingCredentialsPoliciesEntityOperationGroup.updateScmAllowed::parameters.resource,
   ""
 );
-@@doc(CsmPublishingCredentialsPoliciesEntityFtpAllowedSlot.updateFtpAllowedSlot::parameters.resource,
+@@doc(
+  CsmPublishingCredentialsPoliciesEntityFtpAllowedSlot.updateFtpAllowedSlot::parameters.resource,
   ""
 );
-@@doc(CsmPublishingCredentialsPoliciesEntityScmAllowedSlot.updateScmAllowedSlot::parameters.resource,
+@@doc(
+  CsmPublishingCredentialsPoliciesEntityScmAllowedSlot.updateScmAllowedSlot::parameters.resource,
   ""
 );

@@ -71,18 +71,23 @@ interface SAPDatabaseInstances {
   >;
 }
 
-@@doc(SAPDatabaseInstance.name,
+@@doc(
+  SAPDatabaseInstance.name,
   "Database resource name string modeled as parameter for auto generation to work correctly."
 );
-@@doc(SAPDatabaseInstances.create::parameters.resource,
+@@doc(
+  SAPDatabaseInstances.create::parameters.resource,
   "Request body of Database resource of a SAP system."
 );
-@@doc(SAPDatabaseInstances.update::parameters.properties,
+@@doc(
+  SAPDatabaseInstances.update::parameters.properties,
   "Database resource update request body."
 );
-@@doc(SAPDatabaseInstances.start::parameters.body,
+@@doc(
+  SAPDatabaseInstances.start::parameters.body,
   "SAP Database server instance start request body."
 );
-@@doc(SAPDatabaseInstances.stop::parameters.body,
+@@doc(
+  SAPDatabaseInstances.stop::parameters.body,
   "Stop request for the database instance of the SAP system."
 );

@@ -1,0 +1,318 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-01-01",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ManagedDatabaseTransparentDataEncryption"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/transparentDataEncryption": {
+      "get": {
+        "operationId": "ManagedDatabaseTransparentDataEncryption_ListByDatabase",
+        "tags": [
+          "ManagedDatabaseTransparentDataEncryption"
+        ],
+        "description": "Gets a list of managed database's transparent data encryptions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedTransparentDataEncryptionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a list of the database's transparent data encryptions": {
+            "$ref": "./examples/ManagedTransparentDataEncryptionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/transparentDataEncryption/{tdeName}": {
+      "get": {
+        "operationId": "ManagedDatabaseTransparentDataEncryption_Get",
+        "tags": [
+          "ManagedDatabaseTransparentDataEncryption"
+        ],
+        "description": "Gets a managed database's transparent data encryption.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tdeName",
+            "in": "path",
+            "description": "The name of the transparent data encryption configuration.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "current"
+            ],
+            "x-ms-enum": {
+              "name": "TransparentDataEncryptionName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "current",
+                  "value": "current",
+                  "description": "current"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedTransparentDataEncryption"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a database's transparent data encryption": {
+            "$ref": "./examples/ManagedTransparentDataEncryptionGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ManagedDatabaseTransparentDataEncryption_CreateOrUpdate",
+        "tags": [
+          "ManagedDatabaseTransparentDataEncryption"
+        ],
+        "description": "Updates a database's transparent data encryption configuration.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tdeName",
+            "in": "path",
+            "description": "The name of the transparent data encryption configuration.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "current"
+            ],
+            "x-ms-enum": {
+              "name": "TransparentDataEncryptionName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "current",
+                  "value": "current",
+                  "description": "current"
+                }
+              ]
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The database transparent data encryption.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedTransparentDataEncryption"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ManagedTransparentDataEncryption' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ManagedTransparentDataEncryption"
+            }
+          },
+          "201": {
+            "description": "Resource 'ManagedTransparentDataEncryption' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ManagedTransparentDataEncryption"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a database's Transparent Data Encryption state with minimal parameters": {
+            "$ref": "./examples/ManagedTransparentDataEncryptionUpdate.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ManagedTransparentDataEncryption": {
+      "type": "object",
+      "description": "A managed database transparent data encryption state.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedTransparentDataEncryptionProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ManagedTransparentDataEncryptionListResult": {
+      "type": "object",
+      "description": "The response of a ManagedTransparentDataEncryption list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ManagedTransparentDataEncryption items on this page",
+          "items": {
+            "$ref": "#/definitions/ManagedTransparentDataEncryption"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ManagedTransparentDataEncryptionProperties": {
+      "type": "object",
+      "description": "Properties of a transparent data encryption.",
+      "properties": {
+        "state": {
+          "$ref": "./common.json#/definitions/TransparentDataEncryptionState",
+          "description": "Specifies the state of the transparent data encryption."
+        }
+      },
+      "required": [
+        "state"
+      ]
+    }
+  },
+  "parameters": {}
+}

@@ -1094,6 +1094,57 @@
         "value"
       ]
     },
+    "FileSharePatchProperties": {
+      "type": "object",
+      "description": "File share patch properties - contains only patchable properties",
+      "properties": {
+        "provisionedStorageGiB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The provisioned storage size of the share in GiB (1 GiB is 1024^3 bytes or 1073741824 bytes). A component of the file share's bill is the provisioned storage, regardless of the amount of used storage.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "provisionedIOPerSec": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The provisioned IO / sec of the share.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "provisionedThroughputMiBPerSec": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The provisioned throughput / sec of the share.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "nfsProtocolProperties": {
+          "$ref": "#/definitions/NfsProtocolProperties",
+          "description": "Protocol settings specific NFS.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "publicAccessProperties": {
+          "$ref": "#/definitions/PublicAccessProperties",
+          "description": "The set of properties for control public access.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "publicNetworkAccess": {
+          "$ref": "#/definitions/PublicNetworkAccess",
+          "description": "Gets or sets allow or disallow public network access to azure managed file share",
+          "x-ms-mutability": [
+            "update"
+          ]
+        }
+      }
+    },
     "FileShareProperties": {
       "type": "object",
       "description": "File share properties",
@@ -1460,6 +1511,22 @@
         "value"
       ]
     },
+    "FileShareSnapshotPatchProperties": {
+      "type": "object",
+      "description": "FileShareSnapshot patch properties - contains only patchable properties",
+      "properties": {
+        "metadata": {
+          "type": "object",
+          "description": "The metadata",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "update"
+          ]
+        }
+      }
+    },
     "FileShareSnapshotProperties": {
       "type": "object",
       "description": "FileShareSnapshot properties",
@@ -1472,14 +1539,22 @@
         "initiatorId": {
           "type": "string",
           "description": "The initiator of the FileShareSnapshot. This is a user-defined value.",
-          "readOnly": true
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "metadata": {
           "type": "object",
           "description": "The metadata",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       }
     },
@@ -1502,7 +1577,10 @@
           "description": "The metadata",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-mutability": [
+            "update"
+          ]
         }
       }
     },
@@ -1532,9 +1610,7 @@
           "format": "int32",
           "description": "The provisioned storage size of the share in GiB (1 GiB is 1024^3 bytes or 1073741824 bytes). A component of the file share's bill is the provisioned storage, regardless of the amount of used storage.",
           "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
+            "update"
           ]
         },
         "provisionedIOPerSec": {
@@ -1542,9 +1618,7 @@
           "format": "int32",
           "description": "The provisioned IO / sec of the share.",
           "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
+            "update"
           ]
         },
         "provisionedThroughputMiBPerSec": {
@@ -1552,36 +1626,28 @@
           "format": "int32",
           "description": "The provisioned throughput / sec of the share.",
           "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
+            "update"
           ]
         },
         "nfsProtocolProperties": {
           "$ref": "#/definitions/NfsProtocolProperties",
           "description": "Protocol settings specific NFS.",
           "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
+            "update"
           ]
         },
         "publicAccessProperties": {
           "$ref": "#/definitions/PublicAccessProperties",
           "description": "The set of properties for control public access.",
           "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
+            "update"
           ]
         },
         "publicNetworkAccess": {
           "$ref": "#/definitions/PublicNetworkAccess",
           "description": "Gets or sets allow or disallow public network access to azure managed file share",
           "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
+            "update"
           ]
         }
       }

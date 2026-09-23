@@ -1,3 +1,8 @@
+import "@typespec/versioning";
+import "./models.common.versions.tsp";
+
+using TypeSpec.Versioning;
+
 namespace Microsoft.PlanetaryComputer;
 
 /**
@@ -1085,4 +1090,268 @@ union ColorMapNames {
    * Reversed YlOrRd colormap
    */
   ylorrd_r: "ylorrd_r",
+
+  /**
+   * Algae colormap - sequential green colormap for ocean data
+   */
+  @added(Versions.v2026_04_15)
+  algae: "algae",
+
+  /**
+   * Reversed algae colormap
+   */
+  @added(Versions.v2026_04_15)
+  algae_r: "algae_r",
+
+  /**
+   * Amp colormap - sequential magenta colormap for ocean data
+   */
+  @added(Versions.v2026_04_15)
+  amp: "amp",
+
+  /**
+   * Reversed amp colormap
+   */
+  @added(Versions.v2026_04_15)
+  amp_r: "amp_r",
+
+  /**
+   * Balance colormap - diverging blue to red for ocean data
+   */
+  @added(Versions.v2026_04_15)
+  balance: "balance",
+
+  /**
+   * Reversed balance colormap
+   */
+  @added(Versions.v2026_04_15)
+  balance_r: "balance_r",
+
+  /**
+   * Curl colormap - diverging teal to red for ocean data
+   */
+  @added(Versions.v2026_04_15)
+  curl: "curl",
+
+  /**
+   * Reversed curl colormap
+   */
+  @added(Versions.v2026_04_15)
+  curl_r: "curl_r",
+
+  /**
+   * Deep colormap - sequential blue colormap for ocean data
+   */
+  @added(Versions.v2026_04_15)
+  deep: "deep",
+
+  /**
+   * Reversed deep colormap
+   */
+  @added(Versions.v2026_04_15)
+  deep_r: "deep_r",
+
+  /**
+   * Delta colormap - diverging blue to green for ocean data
+   */
+  @added(Versions.v2026_04_15)
+  delta: "delta",
+
+  /**
+   * Reversed delta colormap
+   */
+  @added(Versions.v2026_04_15)
+  delta_r: "delta_r",
+
+  /**
+   * Dense colormap - sequential purple colormap for ocean data
+   */
+  @added(Versions.v2026_04_15)
+  dense: "dense",
+
+  /**
+   * Reversed dense colormap
+   */
+  @added(Versions.v2026_04_15)
+  dense_r: "dense_r",
+
+  /**
+   * Diff colormap - diverging colormap for difference data
+   */
+  @added(Versions.v2026_04_15)
+  diff: "diff",
+
+  /**
+   * Reversed diff colormap
+   */
+  @added(Versions.v2026_04_15)
+  diff_r: "diff_r",
+
+  /**
+   * Haline colormap - sequential blue to yellow for salinity data
+   */
+  @added(Versions.v2026_04_15)
+  haline: "haline",
+
+  /**
+   * Reversed haline colormap
+   */
+  @added(Versions.v2026_04_15)
+  haline_r: "haline_r",
+
+  /**
+   * Ice colormap - sequential blue colormap for ice data
+   */
+  @added(Versions.v2026_04_15)
+  ice: "ice",
+
+  /**
+   * Reversed ice colormap
+   */
+  @added(Versions.v2026_04_15)
+  ice_r: "ice_r",
+
+  /**
+   * Matter colormap - sequential yellow to brown for ocean data
+   */
+  @added(Versions.v2026_04_15)
+  matter: "matter",
+
+  /**
+   * Reversed matter colormap
+   */
+  @added(Versions.v2026_04_15)
+  matter_r: "matter_r",
+
+  /**
+   * Oxy colormap - diverging colormap for oxygen data
+   */
+  @added(Versions.v2026_04_15)
+  oxy: "oxy",
+
+  /**
+   * Reversed oxy colormap
+   */
+  @added(Versions.v2026_04_15)
+  oxy_r: "oxy_r",
+
+  /**
+   * Phase colormap - circular colormap for phase data
+   */
+  @added(Versions.v2026_04_15)
+  phase: "phase",
+
+  /**
+   * Reversed phase colormap
+   */
+  @added(Versions.v2026_04_15)
+  phase_r: "phase_r",
+
+  /**
+   * Rain colormap - sequential colormap for precipitation data
+   */
+  @added(Versions.v2026_04_15)
+  rain: "rain",
+
+  /**
+   * Reversed rain colormap
+   */
+  @added(Versions.v2026_04_15)
+  rain_r: "rain_r",
+
+  /**
+   * Solar colormap - sequential colormap for solar radiation data
+   */
+  @added(Versions.v2026_04_15)
+  solar: "solar",
+
+  /**
+   * Reversed solar colormap
+   */
+  @added(Versions.v2026_04_15)
+  solar_r: "solar_r",
+
+  /**
+   * Speed colormap - sequential colormap for velocity data
+   */
+  @added(Versions.v2026_04_15)
+  speed: "speed",
+
+  /**
+   * Reversed speed colormap
+   */
+  @added(Versions.v2026_04_15)
+  speed_r: "speed_r",
+
+  /**
+   * Tarn colormap - sequential colormap for topographic data
+   */
+  @added(Versions.v2026_04_15)
+  tarn: "tarn",
+
+  /**
+   * Reversed tarn colormap
+   */
+  @added(Versions.v2026_04_15)
+  tarn_r: "tarn_r",
+
+  /**
+   * Tempo colormap - sequential colormap for temporal data
+   */
+  @added(Versions.v2026_04_15)
+  tempo: "tempo",
+
+  /**
+   * Reversed tempo colormap
+   */
+  @added(Versions.v2026_04_15)
+  tempo_r: "tempo_r",
+
+  /**
+   * Thermal colormap - sequential colormap for temperature data
+   */
+  @added(Versions.v2026_04_15)
+  thermal: "thermal",
+
+  /**
+   * Reversed thermal colormap
+   */
+  @added(Versions.v2026_04_15)
+  thermal_r: "thermal_r",
+
+  /**
+   * Topo colormap - sequential colormap for topographic data
+   */
+  @added(Versions.v2026_04_15)
+  topo: "topo",
+
+  /**
+   * Reversed topo colormap
+   */
+  @added(Versions.v2026_04_15)
+  topo_r: "topo_r",
+
+  /**
+   * Turbid colormap - sequential colormap for turbidity data
+   */
+  @added(Versions.v2026_04_15)
+  turbid: "turbid",
+
+  /**
+   * Reversed turbid colormap
+   */
+  @added(Versions.v2026_04_15)
+  turbid_r: "turbid_r",
+
+  /**
+   * Turbo colormap - improved rainbow colormap
+   */
+  @added(Versions.v2026_04_15)
+  turbo: "turbo",
+
+  /**
+   * Reversed turbo colormap
+   */
+  @added(Versions.v2026_04_15)
+  turbo_r: "turbo_r",
 }

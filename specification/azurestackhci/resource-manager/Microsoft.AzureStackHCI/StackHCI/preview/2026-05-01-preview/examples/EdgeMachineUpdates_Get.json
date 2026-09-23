@@ -1,0 +1,54 @@
+{
+  "title": "EdgeMachineUpdates_Get",
+  "operationId": "EdgeMachineUpdates_Get",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "ArcInstance-rg",
+    "edgeMachineName": "machine1",
+    "default": "default"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine1/updates/default",
+        "name": "default",
+        "type": "Microsoft.AzureStackHCI/edgeMachines/updates",
+        "properties": {
+          "solutionType": "AzureLinux",
+          "values": [
+            {
+              "vsrVersion": "1.2.0",
+              "displayName": "May 2026 Cumulative Update",
+              "releaseNotesLink": "https://aka.ms/azurestackhci/releasenotes/2026-05",
+              "totalSizeBytes": 5368709120,
+              "rebootRequired": true,
+              "estimatedInstallTimeMinutes": 45,
+              "updateType": "FullImage",
+              "arcAgentVersion": "1.45.02664"
+            },
+            {
+              "vsrVersion": "1.1.5",
+              "displayName": "April 2026 Hotfix",
+              "releaseNotesLink": "https://aka.ms/azurestackhci/releasenotes/2026-04",
+              "totalSizeBytes": 1073741824,
+              "rebootRequired": false,
+              "estimatedInstallTimeMinutes": 15,
+              "updateType": "Hotfix",
+              "arcAgentVersion": "1.44.02610"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2026-05-01T10:46:55.167Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-05-01T10:46:55.167Z"
+        }
+      }
+    }
+  }
+}

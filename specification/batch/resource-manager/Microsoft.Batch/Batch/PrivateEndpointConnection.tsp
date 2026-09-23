@@ -27,15 +27,15 @@ model PrivateEndpointConnection
   /**
    * The ETag of the resource, used for concurrency statements.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Legacy design"
   @visibility(Lifecycle.Read)
   etag?: string;
 
   /**
    * The tags of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Legacy design"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "legacy design"
   tags?: Record<string>;
 }
 
@@ -61,7 +61,7 @@ interface PrivateEndpointConnections {
       /**
        * The state (ETag) version of the private endpoint connection to update. This value can be omitted or set to "*" to apply the operation unconditionally.
        */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "Legacy casing"
       @header("If-Match")
       `If-Match`?: string;
     },
@@ -71,7 +71,7 @@ interface PrivateEndpointConnections {
   /**
    * Deletes the specified private endpoint connection.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Legacy design"
   @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     PrivateEndpointConnection,
@@ -99,12 +99,15 @@ interface PrivateEndpointConnections {
 
 @@maxLength(PrivateEndpointConnection.name, 101);
 @@minLength(PrivateEndpointConnection.name, 1);
-@@doc(PrivateEndpointConnection.name,
+@@doc(
+  PrivateEndpointConnection.name,
   "The private endpoint connection name. This must be unique within the account."
 );
-@@doc(PrivateEndpointConnection.properties,
+@@doc(
+  PrivateEndpointConnection.properties,
   "The properties associated with the private endpoint connection."
 );
-@@doc(PrivateEndpointConnections.update::parameters.properties,
+@@doc(
+  PrivateEndpointConnections.update::parameters.properties,
   "PrivateEndpointConnection properties that should be updated. Properties that are supplied will be updated, any property not supplied will be unchanged."
 );

@@ -1,4 +1,4 @@
-﻿import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models-service.tsp";
 
@@ -21,6 +21,8 @@ interface DataSources {
       ...preferHeader;
 
       /** Ignores cache reset requirements. */
+      @added(Versions.v2026_05_01_preview)
+      @removed(Versions.v2026_04_01)
       @query("ignoreResetRequirements")
       skipIndexerResetRequirementForCache?: boolean;
 
@@ -68,11 +70,13 @@ interface DataSources {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   @route("/datasources")
+  @list
   @get
   list is SearchOperation<
     {
       ...acceptHeaderMinimal;
       ...selectQuery;
+      ...listingPaginationQuery;
     },
     ListDataSourcesResult
   >;
@@ -116,6 +120,8 @@ interface Indexers {
 
   /** Resync selective options from the datasource to be re-ingested by the indexer." */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_04_01)
   @route("/indexers('{indexerName}')/search.resync")
   @post
   resync is SearchIndexerOperation<
@@ -135,6 +141,8 @@ interface Indexers {
 
   /** Resets specific documents in the datasource to be selectively re-ingested by the indexer. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_04_01)
   @route("/indexers('{indexerName}')/search.resetdocs")
   @post
   resetDocs is SearchIndexerOperation<
@@ -183,10 +191,14 @@ interface Indexers {
       ...preferHeader;
 
       /** Ignores cache reset requirements. */
+      @added(Versions.v2026_05_01_preview)
+      @removed(Versions.v2026_04_01)
       @query("ignoreResetRequirements")
       skipIndexerResetRequirementForCache?: boolean;
 
       /** Disables cache reprocessing change detection. */
+      @added(Versions.v2026_05_01_preview)
+      @removed(Versions.v2026_04_01)
       @query("disableCacheReprocessingChangeDetection")
       disableCacheReprocessingChangeDetection?: boolean;
 
@@ -235,11 +247,13 @@ interface Indexers {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   @route("/indexers")
+  @list
   @get
   list is SearchOperation<
     {
       ...acceptHeaderMinimal;
       ...selectQuery;
+      ...listingPaginationQuery;
     },
     ListIndexersResult
   >;
@@ -289,10 +303,14 @@ interface Skillsets {
       ...preferHeader;
 
       /** Ignores cache reset requirements. */
+      @added(Versions.v2026_05_01_preview)
+      @removed(Versions.v2026_04_01)
       @query("ignoreResetRequirements")
       skipIndexerResetRequirementForCache?: boolean;
 
       /** Disables cache reprocessing change detection. */
+      @added(Versions.v2026_05_01_preview)
+      @removed(Versions.v2026_04_01)
       @query("disableCacheReprocessingChangeDetection")
       disableCacheReprocessingChangeDetection?: boolean;
 
@@ -341,11 +359,13 @@ interface Skillsets {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   @route("/skillsets")
+  @list
   @get
   list is SearchOperation<
     {
       ...acceptHeaderMinimal;
       ...selectQuery;
+      ...listingPaginationQuery;
     },
     ListSkillsetsResult
   >;
@@ -371,6 +391,8 @@ interface Skillsets {
 
   /** Reset an existing skillset in a search service. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_04_01)
   @route("/skillsets('{skillsetName}')/search.resetskills")
   @post
   resetSkills is SearchSkillsetOperation<
@@ -442,11 +464,13 @@ interface SynonymMaps {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   @route("/synonymmaps")
+  @list
   @get
   list is SearchOperation<
     {
       ...acceptHeaderMinimal;
       ...selectQuery;
+      ...listingPaginationQuery;
     },
     ListSynonymMapsResult
   >;
@@ -494,15 +518,97 @@ interface Indexes {
   /** Lists all indexes available for a search service. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  @renamedFrom(Versions.v2026_08_01_preview, "list")
+  @removed(Versions.v2026_08_01_preview)
   @route("/indexes")
+  @sharedRoute
+  @list
+  @get
+  listOffsetPaged is SearchOperation<
+    {
+      ...acceptHeaderMinimal;
+
+      /** The number of items to retrieve. Default is 50, maximum is 1000. */
+      @added(Versions.v2026_05_01_preview)
+      @query("$top")
+      $top?: int32;
+
+      /** The number of items to skip. */
+      @added(Versions.v2026_05_01_preview)
+      @query("$skip")
+      $skip?: int32;
+
+      /** A value that specifies whether to fetch the total count of items. Default is false. */
+      @added(Versions.v2026_05_01_preview)
+      @query("$count")
+      $count?: boolean;
+    },
+    ListIndexesResult
+  >;
+
+  /** Lists all indexes available for a search service. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  @added(Versions.v2026_08_01_preview)
+  @route("/indexes")
+  @sharedRoute
   @list
   @get
   list is SearchOperation<
     {
       ...acceptHeaderMinimal;
-      ...selectQuery;
+      ...listingPaginationQuery;
     },
     ListIndexesResult
+  >;
+
+  /** Lists all indexes available for a search service. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  @renamedFrom(Versions.v2026_08_01_preview, "listWithSelectedProperties")
+  @removed(Versions.v2026_08_01_preview)
+  @route("/indexes")
+  @sharedRoute
+  @list
+  @get
+  listWithSelectedPropertiesOffsetPaged is SearchOperation<
+    {
+      ...acceptHeaderMinimal;
+      ...selectQuery;
+
+      /** The number of items to retrieve. Default is 50, maximum is 1000. */
+      @added(Versions.v2026_05_01_preview)
+      @query("$top")
+      $top?: int32;
+
+      /** The number of items to skip. */
+      @added(Versions.v2026_05_01_preview)
+      @query("$skip")
+      $skip?: int32;
+
+      /** A value that specifies whether to fetch the total count of items. Default is false. */
+      @added(Versions.v2026_05_01_preview)
+      @query("$count")
+      $count?: boolean;
+    },
+    ListIndexesSelectedResult
+  >;
+
+  /** Lists all indexes available for a search service. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  @added(Versions.v2026_08_01_preview)
+  @route("/indexes")
+  @sharedRoute
+  @list
+  @get
+  listWithSelectedProperties is SearchOperation<
+    {
+      ...acceptHeaderMinimal;
+      ...selectQuery;
+      ...listingPaginationQuery;
+    },
+    ListIndexesSelectedResult
   >;
 
   /** Creates a new search index or updates an index if it already exists. */
@@ -616,6 +722,7 @@ interface Aliases {
   list is SearchOperation<
     {
       ...acceptHeaderMinimal;
+      ...listingPaginationQuery;
     },
     ListAliasesResult
   >;
@@ -702,6 +809,7 @@ interface KnowledgeBases {
   list is SearchOperation<
     {
       ...acceptHeaderMinimal;
+      ...listingPaginationQuery;
     },
     ListKnowledgeBasesResult
   >;
@@ -787,6 +895,7 @@ interface KnowledgeSources {
   list is SearchOperation<
     {
       ...acceptHeaderMinimal;
+      ...listingPaginationQuery;
     },
     ListKnowledgeSourcesResult
   >;
@@ -852,6 +961,113 @@ interface KnowledgeSources {
     },
     KnowledgeSourceStatus
   >;
+
+  /** Uploads a file to a File knowledge source for processing and indexing. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/byos" "Direct file upload is intentional for File knowledge source"
+  @added(Versions.v2026_05_01_preview)
+  @sharedRoute
+  @route("/knowledgesources('{sourceName}')/files")
+  @post
+  uploadFile is SearchSourceOperation<
+    {
+      /** The content type of the request body. Must be application/octet-stream. */
+      @header contentType: "application/octet-stream";
+
+      /**
+       * The Content-Disposition header specifying the filename of the uploaded file.
+       * Must follow the format: `attachment; filename="<filename>"`.
+       * For example: `attachment; filename="installation-guide.pdf"`.
+       */
+      @header("Content-Disposition") contentDisposition: string;
+
+      /** The file content to upload. */
+      @body file: bytes;
+    },
+    KnowledgeSourceFile & {
+      /** A process exit code. */
+      @statusCode
+      code: "201";
+    }
+  >;
+
+  /** Uploads a file to a File knowledge source using multipart/form-data: a JSON 'metadata' part (file name and custom metadata) and a 'content' part with the raw file bytes. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/byos" "Direct file upload is intentional for File knowledge source"
+  @added(Versions.v2026_08_01_preview)
+  @sharedRoute
+  @route("/knowledgesources('{sourceName}')/files")
+  @post
+  uploadFileMultipart is SearchSourceOperation<
+    {
+      /** The multipart/form-data body containing the metadata and content parts. */
+      @multipartBody
+      body: UploadKnowledgeSourceFileMultipartRequest;
+    },
+    KnowledgeSourceFile & {
+      @statusCode
+      code: "201";
+    }
+  >;
+
+  /** Lists all files in a File knowledge source. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  @added(Versions.v2026_05_01_preview)
+  @route("/knowledgesources('{sourceName}')/files")
+  @list
+  @get
+  listFiles is SearchSourceOperation<
+    {
+      ...acceptHeaderMinimal;
+
+      /** Optional prefix to filter files by their directory-like path. */
+      @added(Versions.v2026_08_01_preview)
+      @query
+      prefix?: string;
+
+      ...listingPaginationQuery;
+    },
+    ListKnowledgeSourceFilesResult
+  >;
+
+  /** Deletes a file from a File knowledge source and removes all indexed content derived from it. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  @added(Versions.v2026_05_01_preview)
+  @route("/knowledgesources('{sourceName}')/files('{fileId}')")
+  @delete
+  deleteFile is SearchSourceOperation<
+    {
+      /** The unique identifier of the file to delete. */
+      @path fileId: string;
+
+      ...acceptHeaderMinimal;
+    },
+    {
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+      @statusCode
+      code: "204" | "404";
+    }
+  >;
+
+  /** Updates an existing file in a File knowledge source in place, replacing its indexed content. Uses multipart/form-data: a JSON 'metadata' part (file name and custom metadata) and a 'content' part with the raw file bytes. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/byos" "Direct file upload is intentional for File knowledge source"
+  @added(Versions.v2026_08_01_preview)
+  @route("/knowledgesources('{sourceName}')/files('{fileId}')")
+  @put
+  updateFile is SearchSourceOperation<
+    {
+      /** The unique identifier of the file to update. */
+      @path fileId: string;
+
+      /** The multipart/form-data body containing the metadata and content parts. */
+      @multipartBody
+      body: UpdateKnowledgeSourceFileRequest;
+    },
+    KnowledgeSourceFile
+  >;
 }
 
 /** Gets service level statistics for a search service. */
@@ -868,12 +1084,60 @@ op getServiceStatistics is SearchOperation<
 /** Retrieves a summary of statistics for all indexes in the search service. */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+@renamedFrom(Versions.v2026_04_01, "getIndexStatsSummary")
+@removed(Versions.v2026_04_01)
 @route("/indexstats")
+@sharedRoute
+@list
+@get
+op getIndexStatsSummaryRemoved is SearchOperation<
+  {
+    ...acceptHeaderMinimal;
+  },
+  ListIndexStatsSummary
+>;
+
+/** Retrieves a summary of statistics for all indexes in the search service. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+@added(Versions.v2026_05_01_preview)
+@renamedFrom(Versions.v2026_08_01_preview, "getIndexStatsSummary")
+@removed(Versions.v2026_08_01_preview)
+@route("/indexstats")
+@sharedRoute
+@list
+@get
+op getIndexStatsSummaryPaginated is SearchOperation<
+  {
+    ...acceptHeaderMinimal;
+
+    /** The number of items to retrieve. Default is 50, maximum is 1000. */
+    @query("$top")
+    $top?: int32;
+
+    /** The number of items to skip. */
+    @query("$skip")
+    $skip?: int32;
+
+    /** A value that specifies whether to fetch the total count of items. Default is false. */
+    @query("$count")
+    $count?: boolean;
+  },
+  ListIndexStatsSummary
+>;
+
+/** Retrieves a summary of statistics for all indexes in the search service. */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+@added(Versions.v2026_08_01_preview)
+@route("/indexstats")
+@sharedRoute
 @list
 @get
 op getIndexStatsSummary is SearchOperation<
   {
     ...acceptHeaderMinimal;
+    ...listingPaginationQuery;
   },
   ListIndexStatsSummary
 >;

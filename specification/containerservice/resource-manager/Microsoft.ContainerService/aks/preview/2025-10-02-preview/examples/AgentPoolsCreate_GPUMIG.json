@@ -1,127 +1,129 @@
 {
   "parameters": {
-    "api-version": "2025-10-02-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "rg1",
-    "resourceName": "clustername1",
     "agentPoolName": "agentpool1",
+    "api-version": "2025-10-02-preview",
     "parameters": {
       "properties": {
-        "orchestratorVersion": "",
         "count": 3,
-        "vmSize": "Standard_ND96asr_v4",
-        "osType": "Linux",
         "gpuInstanceProfile": "MIG2g",
         "kubeletConfig": {
-          "cpuManagerPolicy": "static",
-          "cpuCfsQuota": true,
-          "cpuCfsQuotaPeriod": "200ms",
-          "imageGcHighThreshold": 90,
-          "imageGcLowThreshold": 70,
-          "topologyManagerPolicy": "best-effort",
           "allowedUnsafeSysctls": [
             "kernel.msg*",
             "net.core.somaxconn"
           ],
-          "failSwapOn": false
+          "cpuCfsQuota": true,
+          "cpuCfsQuotaPeriod": "200ms",
+          "cpuManagerPolicy": "static",
+          "failSwapOn": false,
+          "imageGcHighThreshold": 90,
+          "imageGcLowThreshold": 70,
+          "topologyManagerPolicy": "best-effort"
         },
         "linuxOSConfig": {
+          "swapFileSizeMB": 1500,
           "sysctls": {
+            "kernelThreadsMax": 99999,
             "netCoreWmemDefault": 12345,
-            "netIpv4TcpTwReuse": true,
             "netIpv4IpLocalPortRange": "20000 60000",
-            "kernelThreadsMax": 99999
+            "netIpv4TcpTwReuse": true
           },
-          "transparentHugePageEnabled": "always",
           "transparentHugePageDefrag": "madvise",
-          "swapFileSizeMB": 1500
-        }
+          "transparentHugePageEnabled": "always"
+        },
+        "orchestratorVersion": "",
+        "osType": "Linux",
+        "vmSize": "Standard_ND96asr_v4"
       }
-    }
+    },
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/agentpool1",
-        "type": "Microsoft.ContainerService/managedClusters/agentPools",
         "name": "agentpool1",
+        "type": "Microsoft.ContainerService/managedClusters/agentPools",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/agentpool1",
         "properties": {
-          "provisioningState": "Succeeded",
-          "orchestratorVersion": "1.17.8",
-          "currentOrchestratorVersion": "1.17.8",
           "count": 3,
-          "vmSize": "Standard_ND96asr_v4",
-          "maxPods": 110,
-          "osType": "Linux",
+          "currentOrchestratorVersion": "1.17.8",
           "gpuInstanceProfile": "MIG2g",
           "kubeletConfig": {
-            "cpuManagerPolicy": "static",
-            "cpuCfsQuota": true,
-            "cpuCfsQuotaPeriod": "200ms",
-            "imageGcHighThreshold": 90,
-            "imageGcLowThreshold": 70,
-            "topologyManagerPolicy": "best-effort",
             "allowedUnsafeSysctls": [
               "kernel.msg*",
               "net.core.somaxconn"
             ],
-            "failSwapOn": false
+            "cpuCfsQuota": true,
+            "cpuCfsQuotaPeriod": "200ms",
+            "cpuManagerPolicy": "static",
+            "failSwapOn": false,
+            "imageGcHighThreshold": 90,
+            "imageGcLowThreshold": 70,
+            "topologyManagerPolicy": "best-effort"
           },
           "linuxOSConfig": {
+            "swapFileSizeMB": 1500,
             "sysctls": {
+              "kernelThreadsMax": 99999,
               "netCoreWmemDefault": 12345,
-              "netIpv4TcpTwReuse": true,
               "netIpv4IpLocalPortRange": "20000 60000",
-              "kernelThreadsMax": 99999
+              "netIpv4TcpTwReuse": true
             },
-            "transparentHugePageEnabled": "always",
             "transparentHugePageDefrag": "madvise",
-            "swapFileSizeMB": 1500
-          }
+            "transparentHugePageEnabled": "always"
+          },
+          "maxPods": 110,
+          "orchestratorVersion": "1.17.8",
+          "osType": "Linux",
+          "provisioningState": "Succeeded",
+          "vmSize": "Standard_ND96asr_v4"
         }
       }
     },
     "201": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/agentpool1",
-        "type": "Microsoft.ContainerService/managedClusters/agentPools",
         "name": "agentpool1",
+        "type": "Microsoft.ContainerService/managedClusters/agentPools",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/agentpool1",
         "properties": {
-          "provisioningState": "Creating",
-          "orchestratorVersion": "1.17.8",
-          "currentOrchestratorVersion": "1.17.8",
           "count": 3,
-          "vmSize": "Standard_ND96asr_v4",
-          "maxPods": 110,
-          "osType": "Linux",
+          "currentOrchestratorVersion": "1.17.8",
           "gpuInstanceProfile": "MIG2g",
           "kubeletConfig": {
-            "cpuManagerPolicy": "static",
-            "cpuCfsQuota": true,
-            "cpuCfsQuotaPeriod": "200ms",
-            "imageGcHighThreshold": 90,
-            "imageGcLowThreshold": 70,
-            "topologyManagerPolicy": "best-effort",
             "allowedUnsafeSysctls": [
               "kernel.msg*",
               "net.core.somaxconn"
             ],
+            "cpuCfsQuota": true,
+            "cpuCfsQuotaPeriod": "200ms",
+            "cpuManagerPolicy": "static",
             "failSwapOn": false,
-            "podMaxPids": 100
+            "imageGcHighThreshold": 90,
+            "imageGcLowThreshold": 70,
+            "podMaxPids": 100,
+            "topologyManagerPolicy": "best-effort"
           },
           "linuxOSConfig": {
+            "swapFileSizeMB": 1500,
             "sysctls": {
+              "kernelThreadsMax": 99999,
               "netCoreWmemDefault": 65536,
-              "netIpv4TcpTwReuse": true,
               "netIpv4IpLocalPortRange": "20000 60000",
-              "kernelThreadsMax": 99999
+              "netIpv4TcpTwReuse": true
             },
-            "transparentHugePageEnabled": "always",
             "transparentHugePageDefrag": "madvise",
-            "swapFileSizeMB": 1500
-          }
+            "transparentHugePageEnabled": "always"
+          },
+          "maxPods": 110,
+          "orchestratorVersion": "1.17.8",
+          "osType": "Linux",
+          "provisioningState": "Creating",
+          "vmSize": "Standard_ND96asr_v4"
         }
       }
     }
-  }
+  },
+  "operationId": "AgentPools_CreateOrUpdate",
+  "title": "Create Agent Pool with GPUMIG"
 }

@@ -5,9 +5,10 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ResourceManager;
 
-namespace ResourceValidationClient;
+namespace ResourceValidator;
 
 /** Request to validate resources */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ResourceValidationRequest {
   /** The resource provider namespace of the resources being validated */
   provider: string;
@@ -65,6 +66,7 @@ model ResourceValidationResponseProperties {
 }
 
 /** Resource validator successful response */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ResourceValidationResponse {
   /** Details about the results of the validation */
   properties: ResourceValidationResponseProperties;

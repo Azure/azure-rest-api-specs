@@ -50,10 +50,12 @@ interface SiteConfigResourceOps
         @segment("config")
         @key
         web: "web",
-      }
+      },
+      ResourceName = "WebSiteConfig"
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface SiteConfigResources {
   /**
    * Description for Gets the configuration of an app, such as platform version and bitness, default documents, virtual applications, Always On, etc.
@@ -128,7 +130,8 @@ interface SiteConfigResourceOperationGroupOps
         @segment("snapshots")
         @key
         snapshotId: string,
-      }
+      },
+      ResourceName = "SiteConfigSnapshot"
     > {}
 
 @armResourceOperations
@@ -155,7 +158,8 @@ interface ListConfigurationsOps
       }
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface SiteConfigResourceOperationGroup {
   /**
    * Description for Gets a snapshot of the configuration of an app at a previous point in time.
@@ -215,10 +219,12 @@ interface SiteConfigSlotResourceOperationGroupOps
         @segment("config")
         @key
         web: "web",
-      }
+      },
+      ResourceName = "WebSiteSlotConfig"
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface SiteConfigSlotResourceOperationGroup {
   /**
    * Description for Gets the configuration of an app, such as platform version and bitness, default documents, virtual applications, Always On, etc.
@@ -299,7 +305,8 @@ interface SiteConfigResourceSnapshotSlotOperationGroupOps
         @segment("snapshots")
         @key
         snapshotId: string,
-      }
+      },
+      ResourceName = "SiteSlotConfigSnapshot"
     > {}
 
 @armResourceOperations
@@ -333,7 +340,8 @@ interface ListConfigurationsSlotOps
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface SiteConfigSnapshotSlotResourceOperationGroup {
   /**
    * Description for Gets a snapshot of the configuration of an app at a previous point in time.
@@ -369,15 +377,19 @@ interface SiteConfigSnapshotSlotResourceOperationGroup {
 
 @@doc(SiteConfigResource.name, "");
 @@doc(SiteConfigResource.properties, "Core resource properties");
-@@doc(SiteConfigResources.createOrUpdateConfiguration::parameters.resource,
+@@doc(
+  SiteConfigResources.createOrUpdateConfiguration::parameters.resource,
   "JSON representation of a SiteConfig object. See example."
 );
-@@doc(SiteConfigResources.updateConfiguration::parameters.properties,
+@@doc(
+  SiteConfigResources.updateConfiguration::parameters.properties,
   "JSON representation of a SiteConfig object. See example."
 );
-@@doc(SiteConfigSlotResourceOperationGroup.createOrUpdateConfigurationSlot::parameters.resource,
+@@doc(
+  SiteConfigSlotResourceOperationGroup.createOrUpdateConfigurationSlot::parameters.resource,
   "JSON representation of a SiteConfig object. See example."
 );
-@@doc(SiteConfigSlotResourceOperationGroup.updateConfigurationSlot::parameters.properties,
+@@doc(
+  SiteConfigSlotResourceOperationGroup.updateConfigurationSlot::parameters.properties,
   "JSON representation of a SiteConfig object. See example."
 );

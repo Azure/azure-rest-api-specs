@@ -1,8 +1,9 @@
+import { getChangedFiles as getChangedFilesShared } from "@azure-tools/specs-shared/changed-files";
 import { exec, spawn, spawnSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { inspect, promisify } from "node:util";
-import { LogLevel, logMessage } from "./log.js";
+import { LogLevel, logMessage } from "./log.ts";
 
 type Dirent = fs.Dirent;
 
@@ -24,8 +25,182 @@ export async function resetGitRepo(repoPath: string): Promise<void> {
       logMessage(`Successfully reset git repo at ${repoPath}`, LogLevel.Info);
     }
   } catch (error) {
-    throw new Error(`Failed to reset git repo at ${repoPath}: ${inspect(error)}`);
+    throw new Error(`Failed to reset git repo at ${repoPath}: ${inspect(error)}`, { cause: error });
   }
+}
+
+/**
+ * Character allowlist for an SDK repo branch pin: must start and end with an
+ * alphanumeric character, with letters, digits, and the separators `._-/`
+ * allowed in between. This inherently rejects whitespace, `:`, `~^?*[]`, `@`,
+ * backslashes, control characters, and a leading dash or slash. The remaining
+ * git-specific sequence checks live in `isValidSdkBranchName` for readability.
+ */
+const sdkBranchNameRegex = /^[A-Za-z0-9](?:[A-Za-z0-9._/-]*[A-Za-z0-9])?$/;
+
+/**
+ * Returns true if `branch` is a safe, valid git branch name to use as an SDK
+ * repo pin: length-bounded, matching the character allowlist, and free of the
+ * disallowed git sequences (`refs/` prefix, `..`, `//`, and a `.lock` suffix).
+ */
+export function isValidSdkBranchName(branch: string): boolean {
+  return (
+    typeof branch === "string" &&
+    branch.length > 0 &&
+    branch.length <= 250 &&
+    !branch.startsWith("refs/") &&
+    !branch.includes("..") &&
+    !branch.includes("//") &&
+    !branch.endsWith(".lock") &&
+    sdkBranchNameRegex.test(branch)
+  );
+}
+
+/** Run a git command with an argument array (no shell) in the given repo. */
+async function runGitCommand(repoPath: string, args: string[]): Promise<void> {
+  await new Promise<void>((resolve, reject) => {
+    const child = spawn("git", args, {
+      cwd: repoPath,
+      shell: false,
+      stdio: "inherit",
+      env: process.env,
+    });
+    child.on("error", (error) => reject(error));
+    child.on("exit", (code) => {
+      if (code === 0) {
+        resolve();
+      } else {
+        reject(new Error(`git ${args.join(" ")} exited with code ${code}`));
+      }
+    });
+  });
+}
+
+/**
+ * Returns true if `branch` exists as a head (branch ref) on `origin`.
+ * A successful query with no matching ref returns false; operational git
+ * failures reject so callers cannot mistake them for a missing branch.
+ */
+async function sdkBranchExistsOnOrigin(repoPath: string, branch: string): Promise<boolean> {
+  return new Promise((resolve, reject) => {
+    const chunks: Buffer[] = [];
+    const child = spawn("git", ["ls-remote", "--heads", "origin", `refs/heads/${branch}`], {
+      cwd: repoPath,
+      shell: false,
+      stdio: ["ignore", "pipe", "inherit"],
+      env: process.env,
+    });
+    child.stdout.on("data", (data: Buffer) => chunks.push(data));
+    child.on("error", (error) => {
+      reject(new Error(`Failed to query SDK branch '${branch}' on origin`, { cause: error }));
+    });
+    child.on("close", (code) => {
+      if (code !== 0) {
+        reject(new Error(`git ls-remote for SDK branch '${branch}' exited with code ${code}`));
+        return;
+      }
+      const output = Buffer.concat(chunks).toString("utf8").trim();
+      resolve(output.length > 0);
+    });
+  });
+}
+
+/**
+ * Check out a non-`main` SDK repo branch in `repoPath` for the public spec-PR
+ * flow. Validates the branch name, confirms it exists as a head on `origin`,
+ * fetches it heads-only, and checks it out.
+ *
+ * @returns `true` if the branch was checked out; `false` only when the branch
+ *   does not exist (caller should fall back to `main`).
+ * @throws when the branch name is unsafe or a git operation fails.
+ */
+export async function checkoutSdkBranch(repoPath: string, branch: string): Promise<boolean> {
+  if (!isValidSdkBranchName(branch)) {
+    throw new Error(`Refusing to check out unsafe SDK branch name '${branch}'`);
+  }
+
+  let exists: boolean;
+  try {
+    exists = await sdkBranchExistsOnOrigin(repoPath, branch);
+  } catch (error) {
+    throw new Error(
+      `Unable to verify SDK branch '${branch}' on origin. SDK validation stopped without falling back to 'main'. Check repository access and network connectivity, then retry the pipeline.`,
+      { cause: error },
+    );
+  }
+  if (!exists) {
+    logMessage(`SDK branch '${branch}' not found on origin; falling back to 'main'`, LogLevel.Warn);
+    return false;
+  }
+
+  try {
+    await runGitCommand(repoPath, [
+      "fetch",
+      "origin",
+      `refs/heads/${branch}:refs/remotes/origin/${branch}`,
+    ]);
+  } catch (error) {
+    throw new Error(
+      `Unable to fetch SDK branch '${branch}' from origin. SDK validation stopped without falling back to 'main'. Check repository access and network connectivity, then retry the pipeline.`,
+      { cause: error },
+    );
+  }
+
+  try {
+    await runGitCommand(repoPath, ["checkout", "-B", branch, `origin/${branch}`]);
+    logMessage(`Checked out SDK repo branch '${branch}' in ${repoPath}`, LogLevel.Info);
+    return true;
+  } catch (error) {
+    throw new Error(
+      `Unable to check out SDK branch '${branch}'. SDK validation stopped to avoid generating from the wrong branch.`,
+      { cause: error },
+    );
+  }
+}
+
+/** Check out the `main` branch to normalize the SDK repo between specs. */
+export async function checkoutMainBranch(repoPath: string): Promise<void> {
+  try {
+    await runGitCommand(repoPath, ["checkout", "main"]);
+  } catch (error) {
+    throw new Error(
+      `Unable to restore the SDK repository to 'main'. SDK validation stopped to prevent the next spec from using the wrong branch.`,
+      { cause: error },
+    );
+  }
+}
+
+/**
+ * Get the service folder path (`specification/<service>`) from a spec config path.
+ * @param specConfigPath The relative spec config path.
+ * @returns The service folder path.
+ */
+export function getServiceFolderPath(specConfigPath: string): string {
+  if (!specConfigPath || specConfigPath.length === 0) {
+    return "";
+  }
+  const segments = specConfigPath.replaceAll("\\", "/").split("/");
+  if (segments.length > 2) {
+    return `${segments[0]}/${segments[1]}`;
+  }
+  return segments.join("/");
+}
+
+/**
+ * Get the API plane folder (`.../resource-manager` or `.../data-plane`) from a
+ * spec config path.
+ * @param specConfigPath The relative spec config path.
+ * @returns The plane folder path, or `undefined` when the path has no plane segment.
+ */
+export function getPlaneFolderPath(specConfigPath: string): string | undefined {
+  const segments = specConfigPath.replaceAll("\\", "/").split("/");
+  const planeIndex = segments.findIndex(
+    (segment) => segment === "resource-manager" || segment === "data-plane",
+  );
+  if (planeIndex === -1) {
+    return undefined;
+  }
+  return segments.slice(0, planeIndex + 1).join("/");
 }
 
 /*
@@ -54,6 +229,14 @@ export function findReadmeFiles(directory: string): string[] {
 export function getArgumentValue(args: string[], flag: string, defaultValue: string): string {
   const index = args.indexOf(flag);
   return index !== -1 && args[index + 1] ? args[index + 1] : defaultValue;
+}
+
+export function isPrivateSpecRepo(specRepoHttpsUrl: string): boolean {
+  const normalizedUrl = specRepoHttpsUrl
+    .toLowerCase()
+    .replace(/\.git$/, "")
+    .replace(/\/$/, "");
+  return normalizedUrl.endsWith("-pr");
 }
 
 /*
@@ -85,6 +268,39 @@ export async function runSpecGenSdkCommand(specGenSdkCommand: string[]): Promise
         resolve();
       } else {
         reject(new Error(`Process exited with code ${code}`));
+      }
+    });
+  });
+}
+
+/**
+ * Run a command and capture its stdout output as a string.
+ * Used for azsdk-cli commands that return JSON on stdout.
+ *
+ * @param executable - The executable to run (e.g., "azsdk")
+ * @param args - Array of command arguments
+ * @returns The captured stdout output
+ */
+export async function runCommandWithOutput(executable: string, args: string[]): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const chunks: Buffer[] = [];
+    const childProcess = spawn(executable, args, {
+      shell: false,
+      stdio: ["inherit", "pipe", "inherit"],
+      env: process.env,
+    });
+    childProcess.stdout.on("data", (data: Buffer) => {
+      chunks.push(data);
+    });
+    childProcess.on("error", (error) => {
+      reject(new Error(`Failed to start process '${executable}': ${error.message}`));
+    });
+    childProcess.on("close", (code) => {
+      const output = Buffer.concat(chunks).toString("utf8");
+      if (code === 0) {
+        resolve(output);
+      } else {
+        reject(new Error(`Process '${executable}' exited with code ${code}. Output: ${output}`));
       }
     });
   });
@@ -172,28 +388,18 @@ function isCommandAvailable(command: string): boolean {
   }
 }
 
-// Function to call Get-ChangedFiles from PowerShell script
-export function getChangedFiles(
+// Function to get changed files using simple-git via shared library
+export async function getChangedFiles(
   specRepoPath: string,
   baseCommitish: string = "HEAD^",
   targetCommitish: string = "HEAD",
-): string[] | undefined {
-  // set diff filter to include added, copied, modified, deleted, renamed, and type changed files
-  const diffFilter = "ACMDRT";
-  const scriptPath = path.resolve(specRepoPath, "eng/scripts/ChangedFiles-Functions.ps1");
-  const args = [
-    "-Command",
-    `& { . '${scriptPath}'; Get-ChangedFiles '${baseCommitish}' '${targetCommitish}' '${diffFilter}' }`,
-  ];
-
-  const output = runPowerShellScript(args);
-  if (output) {
-    return output
-      .split("\n")
-      .map((line) => line.trim())
-      .filter((line) => line.length > 0);
-  }
-  return undefined;
+): Promise<string[]> {
+  return getChangedFilesShared({
+    baseCommitish,
+    headCommitish: targetCommitish,
+    cwd: specRepoPath,
+    gitOptions: ["--diff-filter=ACMDRT"],
+  });
 }
 
 /**
@@ -234,15 +440,59 @@ export function findParentWithFile(
 }
 
 /**
+ * Searches upward from a starting path to find ALL parent directories containing a file matching the given pattern
+ * @param startPath - The directory path to start searching from
+ * @param searchFile - Regular expression pattern to match the target file name
+ * @param specRepoFolder - The root folder of the repository
+ * @param stopAtFolder - Optional boundary directory where the search should stop
+ * @returns Array of directory paths containing the matching file, ordered from nearest to farthest (child to parent)
+ */
+export function findAllParentsWithFile(
+  startPath: string,
+  searchFile: RegExp,
+  specRepoFolder: string,
+  stopAtFolder?: string,
+): string[] {
+  const results: string[] = [];
+  let currentPath = startPath;
+
+  while (currentPath) {
+    try {
+      const absolutePath = path.resolve(specRepoFolder, currentPath);
+      const files = fs.readdirSync(absolutePath);
+      if (files.some((file) => searchFile.test(file))) {
+        results.push(currentPath);
+      }
+    } catch (error) {
+      logMessage(`Error reading directory: ${currentPath} with ${inspect(error)}`, LogLevel.Warn);
+      return results;
+    }
+    currentPath = path.dirname(currentPath);
+    // Check if we've reached the root of the path (stopAtFolder) or
+    // if we've reached '.' which prevents infinite loops with path.dirname('.')
+    if ((stopAtFolder && currentPath === stopAtFolder) || currentPath === ".") {
+      break;
+    }
+  }
+  return results;
+}
+
+/**
  * Searches for parent directories containing specific files for a list of files
  * Optimizes the search by grouping files in the same directory to avoid redundant searches
  * @param files - Array of file paths to process
  * @param options - Search configuration options
+ * @param options.findAll - When true and path contains 'resource-manager' or 'data-plane', find all matching parent folders instead of just the nearest one
  * @returns Object mapping parent directory paths to arrays of related files
  */
 export function searchRelatedParentFolders(
   files: string[],
-  options: { searchFileRegex: RegExp; specRepoFolder: string; stopAtFolder?: string },
+  options: {
+    searchFileRegex: RegExp;
+    specRepoFolder: string;
+    stopAtFolder?: string;
+    findAll?: boolean;
+  },
 ): { [folderPath: string]: string[] } {
   const result: { [folderPath: string]: string[] } = {};
 
@@ -260,17 +510,38 @@ export function searchRelatedParentFolders(
 
   // Search parent folder only once per unique directory
   for (const [dir, dirFiles] of Object.entries(filesByDir)) {
-    const parentFolder = findParentWithFile(
-      dir,
-      options.searchFileRegex,
-      options.specRepoFolder,
-      options.stopAtFolder,
-    );
-    if (parentFolder) {
-      if (!result[parentFolder]) {
-        result[parentFolder] = [];
+    // Only use findAll for v2 folder structure paths (containing resource-manager or data-plane)
+    const isV2FolderStructure = dir.includes("resource-manager") || dir.includes("data-plane");
+    const shouldFindAll = options.findAll && isV2FolderStructure;
+
+    if (shouldFindAll) {
+      // Find ALL parent folders with matching file for v2 folder structure
+      const parentFolders = findAllParentsWithFile(
+        dir,
+        options.searchFileRegex,
+        options.specRepoFolder,
+        options.stopAtFolder,
+      );
+      for (const parentFolder of parentFolders) {
+        if (!result[parentFolder]) {
+          result[parentFolder] = [];
+        }
+        result[parentFolder].push(...dirFiles);
       }
-      result[parentFolder].push(...dirFiles);
+    } else {
+      // Find only the NEAREST parent folder (existing behavior)
+      const parentFolder = findParentWithFile(
+        dir,
+        options.searchFileRegex,
+        options.specRepoFolder,
+        options.stopAtFolder,
+      );
+      if (parentFolder) {
+        if (!result[parentFolder]) {
+          result[parentFolder] = [];
+        }
+        result[parentFolder].push(...dirFiles);
+      }
     }
   }
 

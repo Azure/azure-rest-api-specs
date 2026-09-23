@@ -21,6 +21,42 @@ model ManagementGroup
   >;
 }
 
+alias ManagementGroupsGetParameters = {
+  /**
+   * The $expand=children query string parameter allows clients to request inclusion of children in the response payload.  $expand=path includes the path from the root group to the current group.  $expand=ancestors includes the ancestor Ids of the current group.
+   */
+  @query("$expand")
+  $expand?: ManagementGroupExpandType;
+
+  /**
+   * The $recurse=true query string parameter allows clients to request inclusion of entire hierarchy in the response payload. Note that  $expand=children must be passed up if $recurse is set to true.
+   */
+  @query("$recurse")
+  $recurse?: boolean;
+
+  /**
+   * A filter which allows the exclusion of subscriptions from results (i.e. '$filter=children.childType ne Subscription')
+   */
+  @query("$filter")
+  $filter?: string;
+
+  /**
+   * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  @header("Cache-Control")
+  `Cache-Control`?: string = "no-cache";
+};
+
+alias ManagementGroupsParameters = {
+  /**
+   * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+  @header("Cache-Control")
+  `Cache-Control`?: string = "no-cache";
+};
+
 @armResourceOperations
 interface ManagementGroups {
   /**
@@ -30,32 +66,7 @@ interface ManagementGroups {
   get is Extension.Read<
     Extension.Tenant,
     ManagementGroup,
-    Parameters = {
-      /**
-       * The $expand=children query string parameter allows clients to request inclusion of children in the response payload.  $expand=path includes the path from the root group to the current group.  $expand=ancestors includes the ancestor Ids of the current group.
-       */
-      @query("$expand")
-      $expand?: ManagementGroupExpandType;
-
-      /**
-       * The $recurse=true query string parameter allows clients to request inclusion of entire hierarchy in the response payload. Note that  $expand=children must be passed up if $recurse is set to true.
-       */
-      @query("$recurse")
-      $recurse?: boolean;
-
-      /**
-       * A filter which allows the exclusion of subscriptions from results (i.e. '$filter=children.childType ne Subscription')
-       */
-      @query("$filter")
-      $filter?: string;
-
-      /**
-       * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-      @header("Cache-Control")
-      `Cache-Control`?: string = "no-cache";
-    }
+    Parameters = ManagementGroupsGetParameters
   >;
 
   /**
@@ -71,18 +82,13 @@ interface ManagementGroups {
     Extension.Tenant,
     ManagementGroup,
     Request = CreateManagementGroupRequest,
-    Parameters = {
-      /**
-       * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-      @header("Cache-Control")
-      `Cache-Control`?: string = "no-cache";
-    },
-    Response = ArmResourceUpdatedResponse<ManagementGroup> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ManagementGroup>> & {
-      @bodyRoot
-      _: AzureAsyncOperationResults;
-    })
+    Parameters = ManagementGroupsParameters,
+    Response =
+      | ArmResourceUpdatedResponse<ManagementGroup>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ManagementGroup>> & {
+          @bodyRoot
+          _: AzureAsyncOperationResults;
+        })
   >;
 
   /**
@@ -96,14 +102,7 @@ interface ManagementGroups {
     Extension.Tenant,
     ManagementGroup,
     PatchModel = PatchManagementGroupRequest,
-    Parameters = {
-      /**
-       * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-      @header("Cache-Control")
-      `Cache-Control`?: string = "no-cache";
-    }
+    Parameters = ManagementGroupsParameters
   >;
 
   /**
@@ -118,19 +117,14 @@ interface ManagementGroups {
   delete is Extension.DeleteWithoutOkAsync<
     Extension.Tenant,
     ManagementGroup,
-    Parameters = {
-      /**
-       * Indicates whether the request should utilize any caches. Populate the header with 'no-cache' value to bypass existing caches.
-       */
-      #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
-      @header("Cache-Control")
-      `Cache-Control`?: string = "no-cache";
-    },
-    Response = (ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: AzureAsyncOperationResults;
-    }) | ArmDeletedNoContentResponse
+    Parameters = ManagementGroupsParameters,
+    Response =
+      | (ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: AzureAsyncOperationResults;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -178,12 +172,15 @@ interface ManagementGroups {
 }
 
 @@doc(ManagementGroup.name, "Management Group ID.");
-@@doc(ManagementGroup.properties,
+@@doc(
+  ManagementGroup.properties,
   "The generic properties of a management group."
 );
-@@doc(ManagementGroups.createOrUpdate::parameters.resource,
+@@doc(
+  ManagementGroups.createOrUpdate::parameters.resource,
   "Management group creation parameters."
 );
-@@doc(ManagementGroups.update::parameters.properties,
+@@doc(
+  ManagementGroups.update::parameters.properties,
   "Management group patch parameters."
 );

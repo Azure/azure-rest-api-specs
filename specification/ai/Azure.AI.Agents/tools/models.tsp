@@ -164,6 +164,7 @@ model MCPToolDefinition extends ToolDefinition {
   @encodedName("application/json", "server_label")
   serverLabel: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The endpoint for the MCP server")
   @encodedName("application/json", "server_url")
   serverUrl: string;
@@ -247,6 +248,7 @@ model BrowserAutomationToolConnectionParameters {
 /**
  * Ranking options for file search.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_05_01)
 model FileSearchRankingOptions {
   @doc("File search ranker.")
@@ -1466,6 +1468,7 @@ model ComputerScreenshot {
   @encodedName("application/json", "file_id")
   fileId?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The URL of the screenshot image.")
   @encodedName("application/json", "image_url")
   imageUrl?: string;

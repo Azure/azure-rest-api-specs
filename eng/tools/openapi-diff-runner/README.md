@@ -17,17 +17,19 @@ The OpenAPI Diff Runner is designed to:
 Run the following commands from the **root** of the `azure-rest-api-specs` repository:
 
 ```bash
-# Install dependencies (this also builds all eng tools via postinstall)
-npm ci
+# Install dependencies
+pnpm install
+
+# Build the project
+pnpm build
 ```
 
-The `postinstall` script automatically runs `npm run build` for all engineering tools, including
-`openapi-diff-runner`. If you need to rebuild manually after making changes:
+If you need to rebuild manually after making changes:
 
 ```bash
 # Rebuild from the tool directory
 cd eng/tools/openapi-diff-runner
-npm run build
+pnpm build
 ```
 
 ## Usage
@@ -36,16 +38,16 @@ npm run build
 
 ```bash
 # Basic usage
-npx openapi-diff-runner --pr-number <pr-number> --spec-repo-path <path>
+pnpm exec openapi-diff-runner --pr-number <pr-number> --spec-repo-path <path>
 
 # Example for a PR from the same repo
-npx openapi-diff-runner \
+pnpm exec openapi-diff-runner \
   --pr-number 12345 \
   --spec-repo-path /path/to/azure-rest-api-specs \
   --run-type SameVersion
 
 # Example for a PR from a forked repo
-npx openapi-diff-runner \
+pnpm exec openapi-diff-runner \
   --pr-number 12345 \
   --spec-repo-path . \
   --source-repo someuser/azure-rest-api-specs \
@@ -70,7 +72,7 @@ cd /path/to/fork-clone
 git checkout <source-branch>
 
 # Run the tool pointing to the fork's local clone
-npx openapi-diff-runner \
+pnpm exec openapi-diff-runner \
   --pr-number 12345 \
   --spec-repo-path /path/to/fork-clone \
   --source-repo <fork-owner>/azure-rest-api-specs \
@@ -93,7 +95,7 @@ git fetch https://github.com/<fork-owner>/azure-rest-api-specs.git <branch>:<bra
 git checkout <branch>
 
 # Run the tool
-npx openapi-diff-runner \
+pnpm exec openapi-diff-runner \
   --pr-number 12345 \
   --spec-repo-path . \
   --source-repo <fork-owner>/azure-rest-api-specs \
@@ -155,7 +157,7 @@ npx openapi-diff-runner \
 ### Prerequisites
 
 - Node.js >= 20.0.0
-- npm
+- pnpm
 - .NET 6
 - Git
 
@@ -163,14 +165,14 @@ npx openapi-diff-runner \
 
 ```bash
 # Build TypeScript files
-npm run build
+pnpm build
 
 # Run tests
-npm test
+pnpm test
 
 # Run tests with coverage
-npm run test:ci
+pnpm test:ci
 
-# Lint code
-npm run prettier
+# Format code
+pnpm format
 ```

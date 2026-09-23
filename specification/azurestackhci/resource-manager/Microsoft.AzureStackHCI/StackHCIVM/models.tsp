@@ -146,6 +146,18 @@ union SecurityRuleDirection {
   string,
 }
 
+@added(Versions.v2026_02_01_preview)
+@doc("Disk creation option values [Copy, Empty]")
+union DiskCreateOption {
+  @doc("Create a disk by copying from a source resource")
+  Copy: "Copy",
+
+  @doc("Create an empty disk")
+  Empty: "Empty",
+
+  string,
+}
+
 @doc("The format of the actual VHD file [vhd, vhdx]")
 union DiskFileFormat {
   @doc("VHDX file format")
@@ -905,6 +917,7 @@ model ExtendedLocation {
   type?: ExtendedLocationTypes;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The gallery images resource patch definition.")
 model GalleryImagesUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
@@ -942,6 +955,7 @@ model LogicalNetworkProperties {
   networkType?: LogicalNetworkTypeEnum;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("DhcpOptions contains an array of DNS servers available to VMs deployed in the logical network. Standard DHCP option for a subnet overrides logical network DHCP options.")
 model LogicalNetworkPropertiesDhcpOptions {
   @doc("The list of DNS servers IP addresses.")
@@ -1324,6 +1338,7 @@ model LogicalNetworkStatusProvisioningStatus {
   status?: Status;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The logical network resource patch definition.")
 model LogicalNetworksUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
@@ -1355,6 +1370,7 @@ model VirtualNetworkAddressSpace {
   addressPrefixes: string[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2025_09_01_preview)
 @doc("DHCP options for virtual networks")
 model VirtualNetworkDhcpOptions {
@@ -1505,6 +1521,43 @@ model InboundNATRule {
   properties: InboundNATRuleProperties;
 }
 
+@added(Versions.v2026_04_01_preview)
+@doc("Inbound rule properties - extends InboundNATRuleProperties with additional status tracking")
+model InboundRuleProperties {
+  ...InboundNATRuleProperties;
+
+  @doc("Provisioning state of the inbound rule")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningStateEnum;
+
+  @doc("The observed state of Inbound Rule")
+  @visibility(Lifecycle.Read)
+  status?: InboundRuleStatus;
+}
+
+@added(Versions.v2026_04_01_preview)
+@doc("The observed state of inbound rule")
+model InboundRuleStatus {
+  @doc("InboundRule provisioning error code")
+  errorCode?: string;
+
+  @doc("Descriptive error message")
+  errorMessage?: string;
+
+  @doc("InboundRule provisioning status")
+  provisioningStatus?: InboundRuleStatusProvisioningStatus;
+}
+
+@added(Versions.v2026_04_01_preview)
+@doc("Provisioning status of Inbound Rule")
+model InboundRuleStatusProvisioningStatus {
+  @doc("The ID of the operation performed on the inbound rule")
+  operationId?: string;
+
+  @doc("The status of the operation performed on the inbound rule [Succeeded, Failed, InProgress]")
+  status?: Status;
+}
+
 @added(Versions.v2025_09_01_preview)
 @doc("Nat Gateway resource properties")
 model NatGatewayProperties {
@@ -1519,7 +1572,8 @@ model NatGatewayProperties {
   subnets?: VirtualNetworkSubnetArmReference[];
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "NAT is a short form. The casing is correct."
-  @doc("List of inbound NAT rules. InboundNATRules can only be set after the NAT Gateway has been associated with a vnet")
+  @doc("List of inbound NAT rules. InboundNATRules can only be set after the NAT Gateway has been associated with a vnet. Removed in 2026-04-01-preview; use InboundRule Child resource instead.")
+  @removed(Versions.v2026_04_01_preview)
   @Azure.ResourceManager.identifiers(#[])
   inboundNATRules?: InboundNATRule[];
 
@@ -1773,6 +1827,7 @@ model LoadBalancerStatusProvisioningStatus {
   status?: Status;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The virtual network subnet resource patch definition.")
 @added(Versions.v2025_09_01_preview)
 model VirtualNetworkSubnetUpdateRequest {
@@ -1859,6 +1914,7 @@ model MarketplaceGalleryImageStatusDownloadStatus {
   downloadSizeInMB?: int64;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The marketplace gallery image resource patch definition.")
 model MarketplaceGalleryImagesUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
@@ -1866,6 +1922,7 @@ model MarketplaceGalleryImagesUpdateRequest {
   tags?: Record<string>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The network interface resource patch definition.")
 model NetworkInterfacesUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
@@ -1942,6 +1999,7 @@ model StorageContainerStatusProvisioningStatus {
   status?: Status;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The storage container resource patch definition.")
 model StorageContainersUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
@@ -1949,10 +2007,85 @@ model StorageContainersUpdateRequest {
   tags?: Record<string>;
 }
 
+@added(Versions.v2026_02_01_preview)
+@doc("Data used when creating a disk or snapshot")
+model CreationData {
+  @doc("This enumerates the possible sources of a disk's creation")
+  createOption: DiskCreateOption;
+
+  @doc("ARM ID of the source resource used for disk creation. Required when createOption is Copy")
+  sourceResourceId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureStackHCI/virtualHardDisks";
+    },
+    {
+      type: "Microsoft.AzureStackHCI/snapshots";
+    }
+  ]>;
+
+  @doc("Unique ID of the source resource used for disk creation. Read-only and not required for disk creation.")
+  @visibility(Lifecycle.Read)
+  sourceUniqueId?: string;
+}
+
+@added(Versions.v2026_02_01_preview)
+@doc("Properties under the snapshot resource")
+model SnapshotProperties {
+  @doc("Data used when creating a snapshot")
+  creationData?: CreationData;
+
+  @doc("The time when the snapshot was created.")
+  @visibility(Lifecycle.Read)
+  timeCreated?: utcDateTime;
+
+  @doc("The size of the disk in bytes.")
+  @visibility(Lifecycle.Read)
+  diskSizeBytes?: int64;
+
+  @doc("Unique identifier for the snapshot.")
+  @visibility(Lifecycle.Read)
+  uniqueId?: string;
+
+  @doc("Provisioning state of the snapshot.")
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningStateEnum;
+
+  @doc("The observed state of snapshots")
+  @visibility(Lifecycle.Read)
+  status?: SnapshotStatus;
+}
+
+@added(Versions.v2026_02_01_preview)
+@doc("Snapshot Status provisioning status")
+model SnapshotStatusProvisioningStatus {
+  @doc("The ID of the operation performed on the snapshot")
+  operationId?: string;
+
+  @doc("The status of the operation performed on the snapshot [Succeeded, Failed, InProgress]")
+  status?: Status;
+}
+
+@added(Versions.v2026_02_01_preview)
+@doc("The observed state of snapshots")
+model SnapshotStatus {
+  @doc("Snapshot provisioning error code")
+  errorCode?: string;
+
+  @doc("Descriptive error message")
+  errorMessage?: string;
+
+  @doc("Provisioning status of the snapshot")
+  provisioningStatus?: SnapshotStatusProvisioningStatus;
+}
+
 @doc("Properties under the virtual hard disk resource")
 model VirtualHardDiskProperties {
   @doc("Block size in bytes")
   blockSizeBytes?: int32;
+
+  @added(Versions.v2026_02_01_preview)
+  @doc("Data used when creating a virtual hard disk")
+  creationData?: CreationData;
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "GB is a short form."
   @doc("Size of the disk in GB")
@@ -1967,6 +2100,7 @@ model VirtualHardDiskProperties {
   @doc("Physical sector in bytes")
   physicalSectorBytes?: int32;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @added(Versions.v2024_05_01_preview)
   @doc("URL for downloading or accessing the virtual hard disk. This URL points to a secure link from where the VHD can be downloaded or accessed directly.")
   @secret
@@ -2085,6 +2219,7 @@ model VirtualHardDiskUploadStatus {
   errorMessage?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The virtual hard disk resource patch definition.")
 model VirtualHardDisksUpdateRequest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing api"
@@ -2107,6 +2242,7 @@ model VirtualHardDisksUpdateProperties {
 @added(Versions.v2024_05_01_preview)
 @doc("Request for uploading virtual hard disk.")
 model VirtualHardDiskUploadRequest {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The Azure managed disk SAS URL to upload the virtual hard disk to.")
   @secret
   azureManagedDiskUploadUrl: string;
@@ -2519,6 +2655,7 @@ model Identity {
   type?: "SystemAssigned";
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The virtual machine instance resource patch definition.")
 model VirtualMachineInstanceUpdateRequest {
   @doc("Defines the resource properties for the update.")
@@ -2697,4 +2834,12 @@ model GuestCredential {
   @visibility(Lifecycle.Create, Lifecycle.Update)
   @secret
   password?: string;
+}
+
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@added(Versions.v2026_04_01_preview)
+@doc("The operation gracefully shuts down a virtual machine by requesting the operating system to shut down. The virtual machine can be restarted with the same provisioned resources. To force an immediate shut down, see the skipShutdown flag.")
+model PowerOffVirtualMachineOptions {
+  @doc("Indicates whether to perform an immediate shut down. When set to true, the VM is forcefully shut down. If not specified, the default value is false, and the operation attempts a graceful shut down of the VM.")
+  skipShutdown?: boolean = false;
 }

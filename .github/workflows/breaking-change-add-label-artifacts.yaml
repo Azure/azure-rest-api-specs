@@ -19,14 +19,14 @@ jobs:
   breaking-change-add-label-artifacts:
     name: "Breaking Change - Add Label Artifacts"
 
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-slim
 
     steps:
       # *** IMPORTANT ***
       # For workflows that are triggered by the pull_request_target event, the workflow runs in the
       # context of the base of the pull request.  You should make sure that you do not check out,
       # build, or run untrusted code from the head of the pull request.
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           # Only needs .github folder for automation, not the files in the PR (analyzed in a
           # separate workflow).
@@ -38,11 +38,11 @@ jobs:
 
       - id: get-label-actions
         name: Get Label Actions
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9.0.0
         with:
           script: |
             const { default: getLabelActions } =
-              await import('${{ github.workspace }}/.github/workflows/src/breaking-change-add-label-artifacts.js');
+              await import('${{ github.workspace }}/.github/workflows/src/breaking-change-add-label-artifacts.ts');
             return await getLabelActions({ github, context, core });
 
       # Upload artifact for 'BreakingChangeReviewRequired' label

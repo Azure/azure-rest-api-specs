@@ -1,0 +1,54 @@
+{
+  "title": "Analyze File Inline",
+  "operationId": "ContentAnalyzers_AnalyzeBinaryInline",
+  "parameters": {
+    "api-version": "2026-06-01-preview",
+    "analyzerId": "prebuilt-layout",
+    "input": "RXhhbXBsZSBGaWxl"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "Succeeded",
+        "result": {
+          "analyzerId": "prebuilt-layout",
+          "apiVersion": "2026-06-01-preview",
+          "createdAt": "2026-07-01T18:46:36.244Z",
+          "contents": [
+            {
+              "kind": "document",
+              "mimeType": "application/pdf",
+              "markdown": "# CONTOSO\n\n...",
+              "metadata": {
+                "contentType": "application/pdf",
+                "pageCount": "2",
+                "author": "Contoso",
+                "title": "CONTOSO Document",
+                "createdAt": "2025-05-01T12:00:00Z",
+                "language": "en-US"
+              },
+              "startPageNumber": 1,
+              "endPageNumber": 2,
+              "unit": "inch",
+              "pages": [
+                {
+                  "pageNumber": 1,
+                  "width": 8.5,
+                  "height": 11
+                },
+                {
+                  "pageNumber": 2,
+                  "width": 8.5,
+                  "height": 11
+                }
+              ]
+            }
+          ]
+        },
+        "usage": {
+          "documentPagesStandardInline": 2
+        }
+      }
+    }
+  }
+}

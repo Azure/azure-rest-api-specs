@@ -1,7 +1,7 @@
 import path from "node:path";
 import { inspect } from "node:util";
-import { logMessage } from "./log.js";
-import { SpecGenSdkCmdInput } from "./types.js";
+import { logMessage } from "./log.ts";
+import { type SpecGenSdkCmdInput } from "./types.ts";
 import {
   createCombinedSpecs,
   getChangedFiles,
@@ -13,7 +13,7 @@ import {
   type ChangedSpecs,
   type SpecConfigs,
   type SpecResults,
-} from "./utils.js";
+} from "./utils.ts";
 
 export const readmeMdRegex = /^readme.md$/;
 export const typespecProjectRegex = /^tspconfig.yaml$/;
@@ -133,8 +133,10 @@ export function processTypeSpecProjectsV2FolderStructure(
   return changedSpecs;
 }
 
-export function detectChangedSpecConfigFiles(commandInput: SpecGenSdkCmdInput): ChangedSpecs[] {
-  const prChangedFiles: string[] = getChangedFiles(commandInput.localSpecRepoPath) ?? [];
+export async function detectChangedSpecConfigFiles(
+  commandInput: SpecGenSdkCmdInput,
+): Promise<ChangedSpecs[]> {
+  const prChangedFiles: string[] = await getChangedFiles(commandInput.localSpecRepoPath);
   if (prChangedFiles.length === 0) {
     logMessage("No files changed in the PR");
   }
@@ -164,6 +166,7 @@ export function detectChangedSpecConfigFiles(commandInput: SpecGenSdkCmdInput): 
     searchFileRegex: typespecProjectRegex,
     specRepoFolder: commandInput.localSpecRepoPath,
     stopAtFolder: "specification",
+    findAll: true,
   });
 
   const typespecProjectSharedLibraries = searchSharedLibrary(fileList, {

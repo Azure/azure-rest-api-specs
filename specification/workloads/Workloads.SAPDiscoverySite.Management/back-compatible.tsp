@@ -7,14 +7,17 @@ using Microsoft.Workloads;
 @@clientName(SAPInstances, "SapInstances", "autorest");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SAPDiscoverySite.properties,
-  "autorest"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SAPDiscoverySite.properties,
+  "autorest, csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SAPInstance.properties,
-  "autorest"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  SAPInstance.properties,
+  "autorest, csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ServerInstance.properties,
-  "autorest"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ServerInstance.properties,
+  "autorest, csharp"
 );

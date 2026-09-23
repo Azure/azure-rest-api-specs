@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2025-12-01",
+    "body": {
+      "properties": {
+        "enableNetworkMonitor": true,
+        "firewallSku": "Standard",
+        "isolationMode": "AllowOnlyApprovedOutbound",
+        "outboundRules": {
+          "rule_name_1": {
+            "type": "FQDN",
+            "category": "UserDefined",
+            "destination": "destination_endpoint"
+          }
+        }
+      }
+    },
+    "managedNetworkName": "default",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "aml-workspace-name"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "rule_name_1",
+            "type": "workspace/outboundRules",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.MachineLearningServices/workspaces/aml-workspace-name/managedNetworks/default/outboundRules/rule_name_1",
+            "properties": {
+              "type": "FQDN",
+              "category": "Required",
+              "destination": "destination_of_the_fqdn_rule",
+              "errorInformation": null,
+              "status": "Active"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    },
+    "202": {
+      "headers": {
+        "Location": "example_location"
+      }
+    }
+  },
+  "operationId": "OutboundRules_Post",
+  "title": "Post OutboundRules"
+}

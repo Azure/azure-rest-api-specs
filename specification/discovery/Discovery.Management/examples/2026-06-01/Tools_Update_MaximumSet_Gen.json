@@ -1,0 +1,142 @@
+{
+  "title": "Tools_Update_MaximumSet",
+  "operationId": "Tools_Update",
+  "parameters": {
+    "api-version": "2026-06-01",
+    "subscriptionId": "A54D43BD-2F5F-4BB1-95D4-9A8D23CC7DD4",
+    "resourceGroupName": "rgdiscovery",
+    "toolName": "f1f7503773093a8c1e",
+    "properties": {
+      "properties": {
+        "version": "jtpp",
+        "environmentVariables": {
+          "key8857": "egddkscfebieioknriklhsrl"
+        },
+        "definitionContent": {
+          "tool_id": "discovery-m1",
+          "name": "discovery",
+          "description": "Advanced DFT computational tools for molecular geometry optimization and property calculations",
+          "actions": [
+            {
+              "name": "GeometryOptimization",
+              "description": "Optimize geometry of 'xyz's from the input data asset. This is a prerequisite for all other discovery computations.",
+              "input_schema": {
+                "type": "object",
+                "properties": {
+                  "inputDataAssetId": {
+                    "type": "string",
+                    "description": "Identifier of the input data asset"
+                  },
+                  "xyzColumnName": {
+                    "type": "string",
+                    "description": "Column containing xyz data within the input data table asset"
+                  },
+                  "outputDataAssetId": {
+                    "type": "string",
+                    "description": "Identifier to use for the new output data asset which will be created."
+                  },
+                  "basisSet": {
+                    "type": "string",
+                    "description": "Basis set. Must be one of the supported basis sets (e.g., def2-svp, def2-tzvp)."
+                  }
+                },
+                "required": [
+                  "inputDataAssetId",
+                  "xyzColumnName"
+                ]
+              },
+              "command": "python3 submit_dft.py ",
+              "environment_variables": [
+                {
+                  "name": "OUTPUT_DIRECTORY_PATH",
+                  "value": "{{ outputDataAssetId }}"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "tags": {
+        "key1372": "ihmhpkujjlitavkabscrrpjwsaks"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/A54D43BD-2F5F-4BB1-95D4-9A8D23CC7DD4/resourceGroups/rgdiscovery/providers/Microsoft.Discovery/tools/f1f7503773093a8c1e",
+        "name": "f1f7503773093a8c1e",
+        "tags": {
+          "key3848": "um"
+        },
+        "location": "uksouth",
+        "type": "Microsoft.Discovery/tools",
+        "systemData": {
+          "createdBy": "uymdmmhvojuqtvvxokgefohqpcjw",
+          "createdByType": "User",
+          "createdAt": "2026-05-04T11:59:49.804Z",
+          "lastModifiedBy": "ucuttxilomgszapozsuit",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-05-04T11:59:49.804Z"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "version": "qccygbwif",
+          "environmentVariables": {
+            "key777": "iyamvfvbaxepw"
+          },
+          "definitionContent": {
+            "tool_id": "discovery-m1",
+            "name": "discovery",
+            "description": "Advanced DFT computational tools for molecular geometry optimization and property calculations",
+            "actions": [
+              {
+                "name": "GeometryOptimization",
+                "description": "Optimize geometry of 'xyz's from the input data asset. This is a prerequisite for all other discovery computations.",
+                "input_schema": {
+                  "type": "object",
+                  "properties": {
+                    "inputDataAssetId": {
+                      "type": "string",
+                      "description": "Identifier of the input data asset"
+                    },
+                    "xyzColumnName": {
+                      "type": "string",
+                      "description": "Column containing xyz data within the input data table asset"
+                    },
+                    "outputDataAssetId": {
+                      "type": "string",
+                      "description": "Identifier to use for the new output data asset which will be created."
+                    },
+                    "basisSet": {
+                      "type": "string",
+                      "description": "Basis set. Must be one of the supported basis sets (e.g., def2-svp, def2-tzvp)."
+                    }
+                  },
+                  "required": [
+                    "inputDataAssetId",
+                    "xyzColumnName"
+                  ]
+                },
+                "command": "python3 submit_dft.py ",
+                "environment_variables": [
+                  {
+                    "name": "OUTPUT_DIRECTORY_PATH",
+                    "value": "{{ outputDataAssetId }}"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus",
+        "Retry-After": 10
+      }
+    }
+  }
+}

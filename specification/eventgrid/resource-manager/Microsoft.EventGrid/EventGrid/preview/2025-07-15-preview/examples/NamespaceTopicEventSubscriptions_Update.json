@@ -1,63 +1,63 @@
 {
   "parameters": {
-    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40",
-    "resourceGroupName": "examplerg",
-    "namespaceName": "exampleNamespaceName1",
-    "topicName": "exampleNamespaceTopicName1",
-    "eventSubscriptionName": "exampleNamespaceTopicEventSubscriptionName1",
     "api-version": "2025-07-15-preview",
+    "eventSubscriptionName": "exampleNamespaceTopicEventSubscriptionName1",
     "eventSubscriptionUpdateParameters": {
       "properties": {
         "deliveryConfiguration": {
           "deliveryMode": "Queue",
           "queue": {
-            "receiveLockDurationInSeconds": 60,
+            "eventTimeToLive": "P1D",
             "maxDeliveryCount": 3,
-            "eventTimeToLive": "P1D"
+            "receiveLockDurationInSeconds": 60
           }
         },
         "eventDeliverySchema": "CloudEventSchemaV1_0"
       }
-    }
+    },
+    "namespaceName": "exampleNamespaceName1",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40",
+    "topicName": "exampleNamespaceTopicName1"
   },
   "responses": {
     "200": {
       "body": {
+        "name": "exampleNamespaceTopicEventSubscriptionName1",
+        "type": "Microsoft.EventGrid/namespaces/topics/eventsubscriptions",
+        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/namespaces/examplenamespace2/topics/exampleNamespaceTopicName1/eventSubscriptions/exampleNamespaceTopicEventSubscriptionName1",
         "properties": {
-          "provisioningState": "Succeeded",
           "deliveryConfiguration": {
             "deliveryMode": "Queue",
             "queue": {
-              "receiveLockDurationInSeconds": 60,
+              "eventTimeToLive": "P1D",
               "maxDeliveryCount": 3,
-              "eventTimeToLive": "P1D"
+              "receiveLockDurationInSeconds": 60
             }
           },
-          "eventDeliverySchema": "CloudEventSchemaV1_0"
+          "eventDeliverySchema": "CloudEventSchemaV1_0",
+          "provisioningState": "Succeeded"
         },
-        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/namespaces/examplenamespace2/topics/exampleNamespaceTopicName1/eventSubscriptions/exampleNamespaceTopicEventSubscriptionName1",
-        "name": "exampleNamespaceTopicEventSubscriptionName1",
-        "type": "Microsoft.EventGrid/namespaces/topics/eventsubscriptions",
         "systemData": null
       }
     },
     "202": {
       "body": {
+        "name": "exampleNamespaceTopicEventSubscriptionName1",
+        "type": "Microsoft.EventGrid/namespaces/topics/eventsubscriptions",
+        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/namespaces/examplenamespace2/topics/exampleNamespaceTopicName1/eventSubscriptions/exampleNamespaceTopicEventSubscriptionName1",
         "properties": {
-          "provisioningState": "Updating",
           "deliveryConfiguration": {
             "deliveryMode": "Queue",
             "queue": {
-              "receiveLockDurationInSeconds": 60,
+              "eventTimeToLive": "P1D",
               "maxDeliveryCount": 3,
-              "eventTimeToLive": "P1D"
+              "receiveLockDurationInSeconds": 60
             }
           },
-          "eventDeliverySchema": "CloudEventSchemaV1_0"
+          "eventDeliverySchema": "CloudEventSchemaV1_0",
+          "provisioningState": "Updating"
         },
-        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/namespaces/examplenamespace2/topics/exampleNamespaceTopicName1/eventSubscriptions/exampleNamespaceTopicEventSubscriptionName1",
-        "name": "exampleNamespaceTopicEventSubscriptionName1",
-        "type": "Microsoft.EventGrid/namespaces/topics/eventsubscriptions",
         "systemData": null
       },
       "headers": {
@@ -66,5 +66,7 @@
         "Retry-After": "60"
       }
     }
-  }
+  },
+  "operationId": "NamespaceTopicEventSubscriptions_Update",
+  "title": "NamespaceTopicEventSubscriptions_Update"
 }

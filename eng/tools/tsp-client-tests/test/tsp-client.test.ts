@@ -1,30 +1,25 @@
-import { execNpmExec } from "@azure-tools/specs-shared/exec";
+import { execPnpmExec } from "@azure-tools/specs-shared/exec";
 import { debugLogger } from "@azure-tools/specs-shared/logger";
 
-import { access, constants, mkdir, rm } from "fs/promises";
-import { dirname, join } from "path";
-import { ExpectStatic, test } from "vitest";
+import { access, constants, mkdtemp, rm } from "fs/promises";
+import { join } from "path";
+import { test } from "vitest";
 
-const repoRoot = join(__dirname, "..", "..", "..", "..");
+const repoRoot = join(import.meta.dirname, "..", "..", "..", "..");
 
 const options = { cwd: repoRoot, logger: debugLogger };
 
-async function convert(expect: ExpectStatic, readme: string) {
-  const resMan = readme.includes("resource-manager");
-  const specFolder = dirname(dirname(join(repoRoot, readme)));
-  const tspFolder = "Test.TspClientConvert" + (resMan ? ".Management" : "");
-  const outputFolder = join(specFolder, tspFolder);
+test.concurrent("Usage", async ({ expect }) => {
+  await expect(execPnpmExec(["tsp-client"], options)).rejects.toThrow("Usage");
+});
+
+test.concurrent("Convert resource-manager fixture", async ({ expect }) => {
+  const readme = join(import.meta.dirname, "fixtures", "resource-manager", "readme.md");
+  // Keep generated files under the package so compilation resolves the workspace dependencies.
+  const outputFolder = await mkdtemp(join(import.meta.dirname, "tsp-client-convert-"));
 
   try {
-    await mkdir(outputFolder);
-  } catch {
-    // Delete and retry
-    await rm(outputFolder, { recursive: true, force: true });
-    await mkdir(outputFolder);
-  }
-
-  try {
-    let result = await execNpmExec(
+    let result = await execPnpmExec(
       [
         "tsp-client",
         "convert",
@@ -33,7 +28,7 @@ async function convert(expect: ExpectStatic, readme: string) {
         readme,
         "-o",
         outputFolder,
-        resMan ? "--arm" : "",
+        "--arm",
       ],
       options,
     );
@@ -49,26 +44,13 @@ async function convert(expect: ExpectStatic, readme: string) {
     console.log(`File exists: ${mainTsp}`);
 
     // Use "--no-emit" to avoid generating output files that would need to be cleaned up
-    result = await execNpmExec(["tsp", "compile", "--no-emit", outputFolder], options);
+    result = await execPnpmExec(["tsp", "compile", "--no-emit", outputFolder], options);
 
     expect(result.stdout).toContain("TypeSpec compiler");
   } finally {
-    await rm(outputFolder, { recursive: true, force: true });
+    await rm(outputFolder, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
   }
 
   // Ensure outputFolder is deleted
   await expect(() => access(outputFolder)).rejects.toThrowError();
-}
-
-test.concurrent("Usage", async ({ expect }) => {
-  await expect(execNpmExec(["tsp-client"], options)).rejects.toThrow("Usage");
-});
-
-// Disabled since tsp-client is failing on data-plane
-test.skip.concurrent("Convert contosowidgetmanager/data-plane", async ({ expect }) => {
-  await convert(expect, "specification/contosowidgetmanager/data-plane/readme.md");
-});
-
-test.concurrent("Convert contosowidgetmanager/resource-manager", async ({ expect }) => {
-  await convert(expect, "specification/contosowidgetmanager/resource-manager/readme.md");
 });

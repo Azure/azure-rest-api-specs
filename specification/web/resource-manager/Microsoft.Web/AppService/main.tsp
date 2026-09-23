@@ -43,7 +43,9 @@ import "./StaticSiteUserProvidedFunctionAppARMResource.tsp";
 import "./StaticSiteBasicAuthPropertiesARMResource.tsp";
 import "./StaticSiteCustomDomainOverviewARMResource.tsp";
 import "./StaticSiteLinkedBackendARMResource.tsp";
+import "./StaticSitesAsyncOperations.tsp";
 import "./Site.tsp";
+import "./AIGateway.tsp";
 import "./BackupItem.tsp";
 import "./CsmPublishingCredentialsPoliciesEntity.tsp";
 import "./SiteAuthSettingsV2.tsp";
@@ -83,6 +85,7 @@ import "./WorkflowTrigger.tsp";
 import "./WorkflowTriggerHistory.tsp";
 import "./WorkflowVersion.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -110,8 +113,24 @@ enum Versions {
    * The 2025-05-01 API version.
    */
   v2025_05_01: "2025-05-01",
+
+  /**
+   * The 2026-03-15 API version.
+   */
+  v2026_03_01_preview: "2026-03-01-preview",
+
+  /**
+   * The 2026-03-15 API version.
+   */
+  v2026_03_15: "2026-03-15",
+
+  /**
+   * The 2026-07-15 API version.
+   */
+  v2026_07_15: "2026-07-15",
 }
 
+@tag("Provider")
 interface Operations
   extends Azure.ResourceManager.Legacy.Operations<
       ArmResponse<CsmOperationCollection>,

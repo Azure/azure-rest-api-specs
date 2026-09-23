@@ -6,37 +6,42 @@ using Azure.ClientGenerator.Core;
 using Microsoft.RecoveryServices;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  PrivateLinkResource.properties,
   "!javascript"
 );
 
 @@clientName(Vaults.createOrUpdate::parameters.resource, "vault");
 @@clientName(Vaults.update::parameters.properties, "vault");
-@@clientName(Vaults.create::parameters.properties, "certificateRequest");
+@@clientName(Vaults.create::parameters.resource, "certificateRequest");
 
-@@clientName(VaultExtendedInfoResources.createOrUpdate::parameters.resource,
+@@clientName(
+  VaultExtendedInfoResources.createOrUpdate::parameters.resource,
   "resourceResourceExtendedInfoDetails",
   "!python"
 );
-@@clientName(VaultExtendedInfoResources.createOrUpdate::parameters.resource,
+@@clientName(
+  VaultExtendedInfoResources.createOrUpdate::parameters.resource,
   "resourceExtendedInfoDetails",
   "python"
 );
-@@clientName(VaultExtendedInfoResources.update::parameters.properties,
+@@clientName(
+  VaultExtendedInfoResources.update::parameters.properties,
   "resourceResourceExtendedInfoDetails",
   "!python"
 );
-@@clientName(VaultExtendedInfoResources.update::parameters.properties,
+@@clientName(
+  VaultExtendedInfoResources.update::parameters.properties,
   "resourceExtendedInfoDetails",
   "python"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VaultExtendedInfoResource.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  VaultExtendedInfoResource.properties,
   "!javascript"
 );
-@@clientName(RecoveryServicesOperationGroup.capabilities::parameters.body,
+@@clientName(
+  RecoveryServicesOperationGroup.capabilities::parameters.body,
   "input"
 );
 
@@ -44,49 +49,61 @@ using Microsoft.RecoveryServices;
 // These ensure consistent operationId generation in the output
 
 // PrivateLinkResourceOperationGroup operations
-@@clientLocation(PrivateLinkResourceOperationGroup.get,
+@@clientLocation(
+  PrivateLinkResourceOperationGroup.get,
   "PrivateLinkResources",
   "!csharp"
 );
-@@clientLocation(PrivateLinkResourceOperationGroup.list,
+@@clientLocation(
+  PrivateLinkResourceOperationGroup.list,
   "PrivateLinkResources",
   "!csharp"
 );
 
 // RecoveryServicesOperationGroup operations
-@@clientLocation(RecoveryServicesOperationGroup.checkNameAvailability,
+@@clientLocation(
+  RecoveryServicesOperationGroup.checkNameAvailability,
   "RecoveryServices",
   "!csharp"
 );
-@@clientLocation(RecoveryServicesOperationGroup.capabilities,
+@@clientLocation(
+  RecoveryServicesOperationGroup.capabilities,
   "RecoveryServices",
   "!csharp"
 );
-@@alternateType(RecoveryServicesOperationGroup.capabilities::parameters.location,
+@@alternateType(
+  RecoveryServicesOperationGroup.capabilities::parameters.location,
   azureLocation,
   "csharp"
 );
 
 // Vaults operations
-@@clientLocation(Vaults.create, "VaultCertificates");
-@@clientLocation(Vaults.registeredIdentitiesDelete, "RegisteredIdentities");
-@@clientName(Vaults.registeredIdentitiesDelete, "Delete");
-@@clientLocation(Vaults.list, "ReplicationUsages");
-@@clientLocation(Vaults.listByVaults, "Usages");
+@@clientLocation(Vaults.create, "VaultCertificates", "!csharp");
+@@clientLocation(
+  Vaults.registeredIdentitiesDelete,
+  "RegisteredIdentities",
+  "!csharp"
+);
+@@clientName(Vaults.registeredIdentitiesDelete, "Delete", "!csharp");
+@@clientLocation(Vaults.list, "ReplicationUsages", "!csharp");
+@@clientLocation(Vaults.listByVaults, "Usages", "!csharp");
 
 // GetOperationResult operations
 @@clientLocation(GetOperationResult.listByResourceGroup, Vaults);
 
 // VaultExtendedInfoResources operations
-@@clientLocation(VaultExtendedInfoResources.get,
+@@clientLocation(
+  VaultExtendedInfoResources.get,
   "VaultExtendedInfo",
   "!csharp"
 );
-@@clientLocation(VaultExtendedInfoResources.createOrUpdate,
+@@clientLocation(
+  VaultExtendedInfoResources.createOrUpdate,
   "VaultExtendedInfo",
   "!csharp"
 );
-@@clientLocation(VaultExtendedInfoResources.update,
+@@clientLocation(
+  VaultExtendedInfoResources.update,
   "VaultExtendedInfo",
   "!csharp"
 );

@@ -45,6 +45,7 @@ interface ValidatedSolutionRecipes {
 }
 
 @@doc(ValidatedSolutionRecipe.name, "The name of the ValidatedSolutionRecipe");
-@@doc(ValidatedSolutionRecipe.properties,
+@@doc(
+  ValidatedSolutionRecipe.properties,
   "The resource-specific properties for this resource."
 );

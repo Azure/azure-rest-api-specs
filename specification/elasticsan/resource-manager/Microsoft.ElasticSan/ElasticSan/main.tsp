@@ -19,6 +19,7 @@ import "./VolumeGroup.tsp";
 import "./Volume.tsp";
 import "./Snapshot.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -27,7 +28,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * (missing-service-description) Add service description
+ * Elastic SAN is a fully integrated solution that simplifies deploying, scaling, managing, and configuring a storage area network (SAN). It also offers built-in cloud capabilities like high availability. Elastic SAN works with many types of compute resources, such as Azure Virtual Machines, Azure VMware Solution, and Azure Kubernetes Service.
  */
 @armProviderNamespace
 @service(#{ title: "ElasticSanManagement" })
@@ -40,14 +41,14 @@ namespace Microsoft.ElasticSan;
  */
 enum Versions {
   /**
-   * The 2024-07-01-preview API version.
-   */
-  v2024_07_01_preview: "2024-07-01-preview",
-
-  /**
    * The 2025-09-01 stable API version.
    */
   v2025_09_01: "2025-09-01",
+
+  /**
+   * The 2026-04-01-preview API version.
+   */
+  v2026_04_01_preview: "2026-04-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

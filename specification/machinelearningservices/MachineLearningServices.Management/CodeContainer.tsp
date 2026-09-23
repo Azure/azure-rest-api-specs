@@ -15,8 +15,10 @@ namespace Microsoft.MachineLearningServices;
  * Azure Resource Manager resource envelope.
  */
 @parentResource(Registry)
-model CodeContainer
-  is Azure.ResourceManager.ProxyResource<CodeContainerProperties, false> {
+model CodeContainer is Azure.ResourceManager.ProxyResource<
+  CodeContainerProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = CodeContainer,
     KeyName = "codeName",
@@ -48,7 +50,9 @@ interface CodeContainerOps
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
         codeName: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningRegistryCodeContainer"
     > {}
 
 @armResourceOperations
@@ -66,32 +70,37 @@ interface CodeContainers {
   @summary("Create or update Code container.")
   createOrUpdate is CodeContainerOps.CreateOrUpdateAsync<
     CodeContainer,
-    Response = ArmResourceUpdatedResponse<CodeContainer> | (ArmResourceCreatedResponse<
-      CodeContainer,
-      LroHeaders = ArmAsyncOperationHeader
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<CodeContainer>
+      | (ArmResourceCreatedResponse<
+          CodeContainer,
+          LroHeaders = ArmAsyncOperationHeader
+        > & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
    * Delete Code container.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API returns additional response codes for LRO delete"
   @summary("Delete Code container.")
   delete is CodeContainerOps.DeleteWithoutOkAsync<
     CodeContainer,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -132,7 +141,9 @@ interface CodeContainerOperationGroupOps
         @segment("codes")
         @key
         name: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningCodeContainer"
     > {}
 
 @armResourceOperations
@@ -173,12 +184,15 @@ interface CodeContainerOperationGroup {
 }
 
 @@doc(CodeContainer.name, "Container name.");
-@@doc(CodeContainer.properties,
+@@doc(
+  CodeContainer.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(CodeContainers.createOrUpdate::parameters.resource,
+@@doc(
+  CodeContainers.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );
-@@doc(CodeContainerOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  CodeContainerOperationGroup.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );

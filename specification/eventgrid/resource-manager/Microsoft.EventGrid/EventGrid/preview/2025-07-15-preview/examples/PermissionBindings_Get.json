@@ -1,24 +1,26 @@
 {
   "parameters": {
-    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40",
-    "resourceGroupName": "examplerg",
+    "api-version": "2025-07-15-preview",
     "namespaceName": "exampleNamespaceName1",
     "permissionBindingName": "examplePermissionBindingName1",
-    "api-version": "2025-07-15-preview"
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40"
   },
   "responses": {
     "200": {
       "body": {
+        "name": "examplePermissionBindingName1",
+        "type": "Microsoft.EventGrid/namespaces/permissionBindings",
+        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/namespaces/exampleNamespaceName1/permissionBindings/examplePermissionBindingName1",
         "properties": {
-          "topicSpaceName": "exampleTopicSpaceName1",
           "clientGroupName": "exampleClientGroupName1",
           "permission": "Publisher",
-          "provisioningState": "Succeeded"
-        },
-        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/namespaces/exampleNamespaceName1/permissionBindings/examplePermissionBindingName1",
-        "name": "examplePermissionBindingName1",
-        "type": "Microsoft.EventGrid/namespaces/permissionBindings"
+          "provisioningState": "Succeeded",
+          "topicSpaceName": "exampleTopicSpaceName1"
+        }
       }
     }
-  }
+  },
+  "operationId": "PermissionBindings_Get",
+  "title": "PermissionBindings_Get"
 }

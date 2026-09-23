@@ -8180,14 +8180,6 @@
           },
           "x-ms-identifiers": [],
           "description": "The list of custom Blocklist."
-        },
-        "customTopics": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CustomTopicConfig"
-          },
-          "x-ms-identifiers": [],
-          "description": "The list of custom rai topics."
         }
       }
     },
@@ -8202,20 +8194,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/RaiBlocklistConfig"
-        }
-      ]
-    },
-    "CustomTopicConfig": {
-      "description": "Gets or sets the source to which filter applies.",
-      "type": "object",
-      "properties": {
-        "source": {
-          "$ref": "#/definitions/RaiPolicyContentSource"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/RaiTopicConfig"
         }
       ]
     },
@@ -8272,20 +8250,6 @@
         "blocklistName": {
           "type": "string",
           "description": "Name of ContentFilter."
-        },
-        "blocking": {
-          "type": "boolean",
-          "description": "If blocking would occur."
-        }
-      }
-    },
-    "RaiTopicConfig": {
-      "description": "Azure OpenAI RAI topic config.",
-      "type": "object",
-      "properties": {
-        "topicName": {
-          "type": "string",
-          "description": "Name of RAI topic."
         },
         "blocking": {
           "type": "boolean",

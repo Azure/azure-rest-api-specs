@@ -47,8 +47,8 @@ interface Roles {
   @Azure.Core.useFinalStateVia("location")
   delete is ArmResourceDeleteWithoutOkAsync<
     Role,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = Role> &
-      ArmLroLocationHeader<FinalResult = Role>
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = void> &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
@@ -62,6 +62,7 @@ interface Roles {
 
 @@doc(Role.name, "The name of the cluster role.");
 @@doc(Role.properties, "The properties of a role.");
-@@doc(Roles.create::parameters.resource,
+@@doc(
+  Roles.create::parameters.resource,
   "The required parameters for creating or updating a role."
 );

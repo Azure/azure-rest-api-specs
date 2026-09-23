@@ -35,10 +35,7 @@ These settings apply only when `--tag=package-2020-10-30-preview` is specified o
 
 ```yaml $(tag) == 'package-2020-10-30-preview'
 input-file:
-  - preview/2020-10-30-preview/account.json
-  - preview/2020-10-30-preview/enterprisePolicy.json
-  - preview/2020-10-30-preview/privateEndpointConnection.json
-  - preview/2020-10-30-preview/privateLinkResources.json
+  - preview/2020-10-30-preview/openapi.json
 ```
 
 ---

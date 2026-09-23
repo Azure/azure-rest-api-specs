@@ -1,0 +1,392 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-02-01-preview",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "FirewallRules"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/firewallRules": {
+      "get": {
+        "operationId": "FirewallRules_ListByServer",
+        "tags": [
+          "FirewallRules"
+        ],
+        "description": "Gets a list of firewall rules.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FirewallRuleListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Firewall Rules": {
+            "$ref": "./examples/FirewallRuleList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "put": {
+        "operationId": "FirewallRules_Replace",
+        "tags": [
+          "FirewallRules"
+        ],
+        "description": "Replaces all firewall rules on the server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FirewallRuleList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Replace firewall rules": {
+            "$ref": "./examples/FirewallRuleReplace.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/firewallRules/{firewallRuleName}": {
+      "get": {
+        "operationId": "FirewallRules_Get",
+        "tags": [
+          "FirewallRules"
+        ],
+        "description": "Gets a firewall rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "description": "The name of the firewall rule.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Firewall Rule": {
+            "$ref": "./examples/FirewallRuleGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "FirewallRules_CreateOrUpdate",
+        "tags": [
+          "FirewallRules"
+        ],
+        "description": "Creates or updates a firewall rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "description": "The name of the firewall rule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The required parameters for creating or updating a firewall rule.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'FirewallRule' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          },
+          "201": {
+            "description": "Resource 'FirewallRule' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/FirewallRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a firewall rule max/min": {
+            "$ref": "./examples/FirewallRuleCreate.json"
+          },
+          "Update a firewall rule max/min": {
+            "$ref": "./examples/FirewallRuleUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "FirewallRules_Delete",
+        "tags": [
+          "FirewallRules"
+        ],
+        "description": "Deletes a firewall rule.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "firewallRuleName",
+            "in": "path",
+            "description": "The name of the firewall rule.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a firewall rule": {
+            "$ref": "./examples/FirewallRuleDelete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "FirewallRule": {
+      "type": "object",
+      "description": "A server firewall rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServerFirewallRuleProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/ProxyResourceWithWritableName"
+        }
+      ]
+    },
+    "FirewallRuleList": {
+      "type": "object",
+      "description": "A list of server firewall rules.",
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FirewallRule"
+          }
+        }
+      }
+    },
+    "FirewallRuleListResult": {
+      "type": "object",
+      "description": "The response of a FirewallRule list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FirewallRule items on this page",
+          "items": {
+            "$ref": "#/definitions/FirewallRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ServerFirewallRuleProperties": {
+      "type": "object",
+      "description": "The properties of a server firewall rule.",
+      "properties": {
+        "startIpAddress": {
+          "type": "string",
+          "description": "The start IP address of the firewall rule. Must be IPv4 format. Use value '0.0.0.0' for all Azure-internal IP addresses."
+        },
+        "endIpAddress": {
+          "type": "string",
+          "description": "The end IP address of the firewall rule. Must be IPv4 format. Must be greater than or equal to startIpAddress. Use value '0.0.0.0' for all Azure-internal IP addresses."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

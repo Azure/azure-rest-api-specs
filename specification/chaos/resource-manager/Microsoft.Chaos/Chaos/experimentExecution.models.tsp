@@ -54,6 +54,7 @@ model ExperimentExecutionProperties {
    * Resource provisioning state. Not currently in use for executions.
    */
   @removed(Microsoft.Chaos.Versions.v2025_01_01)
+  @added(Microsoft.Chaos.Versions.v2026_05_01_preview)
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 }
@@ -114,6 +115,7 @@ model ExperimentExecutionDetailsProperties {
    * Resource provisioning state. Not currently in use for executions.
    */
   @removed(Microsoft.Chaos.Versions.v2025_01_01)
+  @added(Microsoft.Chaos.Versions.v2026_05_01_preview)
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 

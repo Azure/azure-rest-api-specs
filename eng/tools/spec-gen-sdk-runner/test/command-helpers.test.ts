@@ -1,23 +1,29 @@
-import { APIViewRequestData, SdkName } from "@azure-tools/specs-shared/sdk-types";
+import { type APIViewRequestData, SdkName } from "@azure-tools/specs-shared/sdk-types";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { beforeEach, describe, expect, test, vi } from "vitest";
 import {
+  appendErrorsToVsoLog,
   generateArtifact,
   getBreakingChangeInfo,
+  getBuildFailedInfo,
   getRequiredSettingValue,
   getSpecPaths,
+  isBreakingChangeDetectionEnabled,
   logIssuesToPipeline,
   parseArguments,
+  prepareAzsdkDetectBreakingChangeCommand,
   prepareSpecGenSdkCommand,
+  selectGenerationTool,
+  setBuildFailedLabelVariable,
   setPipelineVariables,
-} from "../src/command-helpers.js";
-import * as log from "../src/log.js";
-import { LogLevel } from "../src/log.js";
-import * as specHelpers from "../src/spec-helpers.js";
-import type { ExecutionReport } from "../src/types.js";
-import * as utils from "../src/utils.js";
+} from "../src/command-helpers.ts";
+import * as log from "../src/log.ts";
+import { LogLevel } from "../src/log.ts";
+import * as specHelpers from "../src/spec-helpers.ts";
+import type { ExecutionReport } from "../src/types.ts";
+import * as utils from "../src/utils.ts";
 
 // Get the absolute path to the repo root
 const currentFilePath = fileURLToPath(import.meta.url);
@@ -256,7 +262,11 @@ describe("commands.ts", () => {
     });
 
     test("should return management plane TypeSpec and resource-manager readme paths for 'all-mgmtplane-typespecs'", () => {
-      const managementTypespecs = ["typespec1.Management", "typespec2.Management"];
+      const managementTypespecs = [
+        "typespec1.Management",
+        "typespec2.Management",
+        "resource-manager/typespec3",
+      ];
       const resourceManagerReadmes = ["resource-manager/readme-rm1", "resource-manager/readme-rm2"];
 
       vi.spyOn(utils, "getAllTypeSpecPaths").mockReturnValue([
@@ -272,6 +282,7 @@ describe("commands.ts", () => {
       vi.spyOn(specHelpers, "groupSpecConfigPaths").mockReturnValue([
         { tspconfigPath: "typespec1.Management", readmePath: "resource-manager/readme-rm1" },
         { tspconfigPath: "typespec2.Management", readmePath: "resource-manager/readme-rm2" },
+        { tspconfigPath: "resource-manager/typespec3", readmePath: undefined },
       ]);
 
       const result = getSpecPaths("all-mgmtplane-typespecs", "/spec/path");
@@ -283,7 +294,7 @@ describe("commands.ts", () => {
         resourceManagerReadmes,
         true,
       );
-      expect(result).toHaveLength(2);
+      expect(result).toHaveLength(3);
     });
 
     test("should return data plane TypeSpec and data-plane readme paths for 'all-dataplane-typespecs'", () => {
@@ -294,6 +305,7 @@ describe("commands.ts", () => {
         ...dataPlaneTypespecs,
         "typespec1.Management",
         "typespec2.Management",
+        "resource-manager/typespec5",
       ]);
       vi.spyOn(utils, "findReadmeFiles").mockReturnValue([
         ...dataPlaneReadmes,
@@ -366,6 +378,51 @@ describe("commands.ts", () => {
     });
   });
 
+  describe("appendErrorsToVsoLog", () => {
+    test("should append errors to an existing log entry", () => {
+      const mockLogContent = {
+        key1: { errors: ["error1"], warnings: ["warning1"] },
+      };
+      vi.spyOn(fs, "readFileSync").mockReturnValue(JSON.stringify(mockLogContent));
+      const writeFileSyncSpy = vi.spyOn(fs, "writeFileSync").mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
+
+      appendErrorsToVsoLog("/log/path", "key1", ["error2"]);
+
+      expect(writeFileSyncSpy).toHaveBeenCalledWith(
+        "/log/path",
+        JSON.stringify(
+          {
+            key1: { errors: ["error1", "error2"], warnings: ["warning1"] },
+          },
+          undefined,
+          2,
+        ),
+      );
+    });
+
+    test("should create a new log entry when the key does not exist", () => {
+      vi.spyOn(fs, "readFileSync").mockReturnValue(JSON.stringify({}));
+      const writeFileSyncSpy = vi.spyOn(fs, "writeFileSync").mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
+
+      appendErrorsToVsoLog("/log/path", "Python package namespace validation", ["error1"]);
+
+      expect(writeFileSyncSpy).toHaveBeenCalledWith(
+        "/log/path",
+        JSON.stringify(
+          {
+            "Python package namespace validation": { errors: ["error1"] },
+          },
+          undefined,
+          2,
+        ),
+      );
+    });
+  });
+
   describe("getBreakingChangeInfo", () => {
     test("should return breaking change info if applicable", () => {
       const mockExecutionReport: ExecutionReport = {
@@ -398,6 +455,84 @@ describe("commands.ts", () => {
       const result = getBreakingChangeInfo(mockExecutionReport);
 
       expect(result).toBe(false);
+    });
+  });
+
+  describe("getBuildFailedInfo", () => {
+    test("should return true when the execution result is a warning", () => {
+      const mockExecutionReport: ExecutionReport = {
+        executionResult: "warning",
+        packages: [],
+      };
+
+      expect(getBuildFailedInfo(mockExecutionReport)).toBe(true);
+    });
+
+    test("should return false when the execution result is not a warning", () => {
+      for (const executionResult of ["succeeded", "failed", "notEnabled"] as const) {
+        const mockExecutionReport: ExecutionReport = {
+          executionResult,
+          packages: [],
+        };
+
+        expect(getBuildFailedInfo(mockExecutionReport)).toBe(false);
+      }
+    });
+  });
+
+  describe("setBuildFailedLabelVariable", () => {
+    const mockCommandInput = (sdkLanguage: SdkName) => ({
+      workingFolder: "/working/folder",
+      sdkLanguage,
+      runMode: "",
+      localSpecRepoPath: "",
+      localSdkRepoPath: "",
+      sdkRepoName: "",
+      specCommitSha: "abc123",
+      specRepoHttpsUrl: "",
+    });
+
+    beforeEach(() => {
+      vi.clearAllMocks();
+    });
+
+    test("should set the BuildFailedLabel variable for .NET when the build failed", () => {
+      vi.spyOn(log, "setVsoVariable").mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
+
+      setBuildFailedLabelVariable(mockCommandInput(SdkName.Net), {
+        executionResult: "warning",
+        packages: [],
+      });
+
+      expect(log.setVsoVariable).toHaveBeenCalledWith("BuildFailedLabel", "auto-sdk-build-fix");
+    });
+
+    test("should not set the variable when the build did not fail", () => {
+      vi.spyOn(log, "setVsoVariable").mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
+
+      setBuildFailedLabelVariable(mockCommandInput(SdkName.Net), {
+        executionResult: "succeeded",
+        packages: [],
+      });
+
+      expect(log.setVsoVariable).not.toHaveBeenCalled();
+    });
+
+    test("should not set the variable for languages without a configured build-failed label", () => {
+      vi.spyOn(log, "setVsoVariable").mockImplementation(() => {
+        // mock implementation intentionally left blank
+      });
+
+      setBuildFailedLabelVariable(mockCommandInput(SdkName.Python), {
+        executionResult: "warning",
+        packages: [],
+      });
+
+      expect(log.setVsoVariable).not.toHaveBeenCalled();
     });
   });
 
@@ -622,12 +757,12 @@ describe("commands.ts", () => {
       expect(result).toBe(true);
 
       const result2 = getRequiredSettingValue(false, true, "azure-sdk-for-js");
-      // Based on the constants in types.ts, JS SDK does not require check for data plane
+      // Based on the constants in types.ts, JS SDK requires check for data plane
       expect(result2).toBe(true);
 
       const result3 = getRequiredSettingValue(false, true, "azure-sdk-for-net");
-      // .NET SDK set (dataplane: false)
-      expect(result3).toBe(false);
+      // .NET SDK set (dataPlane: true)
+      expect(result3).toBe(true);
     });
 
     test("should return false for azure-sdk-for-net when hasTypeSpecProjects is false", () => {
@@ -647,5 +782,59 @@ describe("commands.ts", () => {
       const result2 = getRequiredSettingValue(false, false, "azure-sdk-for-python");
       expect(result2).toBe(true);
     });
+  });
+
+  describe("selectGenerationTool", () => {
+    test("should return 'skipped' for Rust with only readme path", () => {
+      const result = selectGenerationTool(
+        undefined,
+        "specification/compute/resource-manager/readme.md",
+        SdkName.Rust,
+      );
+      expect(result).toBe("skipped");
+    });
+
+    test("should return 'spec-gen-sdk' for non-Rust with only readme path", () => {
+      const result = selectGenerationTool(
+        undefined,
+        "specification/compute/resource-manager/readme.md",
+        SdkName.Js,
+      );
+      expect(result).toBe("spec-gen-sdk");
+    });
+
+    test("should return 'spec-gen-sdk' for non-Rust with tspconfig path", () => {
+      const result = selectGenerationTool(
+        "specification/compute/Compute.Management/tspconfig.yaml",
+        undefined,
+        SdkName.Js,
+      );
+      expect(result).toBe("spec-gen-sdk");
+    });
+
+    test("should return 'spec-gen-sdk' when no paths are provided", () => {
+      const result = selectGenerationTool(undefined, undefined, SdkName.Rust);
+      expect(result).toBe("spec-gen-sdk");
+    });
+  });
+});
+
+describe("prepareAzsdkDetectBreakingChangeCommand", () => {
+  test("includes package path, changes-only, and json output", () => {
+    expect(prepareAzsdkDetectBreakingChangeCommand("/pkg/path")).toEqual([
+      "pkg",
+      "detect-breaking-change",
+      "--package-path",
+      "/pkg/path",
+      "--changes-only",
+      "--output",
+      "json",
+    ]);
+  });
+});
+
+describe("isBreakingChangeDetectionEnabled", () => {
+  test("is disabled by default (code-level feature flag)", () => {
+    expect(isBreakingChangeDetectionEnabled()).toBe(false);
   });
 });

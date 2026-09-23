@@ -54,6 +54,7 @@ interface DeletedConfigurationStores {
 @@maxLength(DeletedConfigurationStore.name, 50);
 @@minLength(DeletedConfigurationStore.name, 5);
 @@doc(DeletedConfigurationStore.name, "The name of the configuration store.");
-@@doc(DeletedConfigurationStore.properties,
+@@doc(
+  DeletedConfigurationStore.properties,
   "Properties of the deleted configuration store"
 );

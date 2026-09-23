@@ -27,7 +27,25 @@ These are the global settings for the confidentialledger.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-preview-2025-06
+tag: package-2026-02-23
+```
+
+### Tag: package-preview-2026-05
+
+These settings apply only when `--tag=package-preview-2026-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-05'
+input-file:
+  - Microsoft.ConfidentialLedger/ConfidentialLedger/preview/2026-05-22-preview/openapi.json
+```
+
+### Tag: package-2026-02-23
+
+These settings apply only when `--tag=package-2026-02-23` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-02-23'
+input-file:
+  - Microsoft.ConfidentialLedger/ConfidentialLedger/stable/2026-02-23/openapi.json
 ```
 
 ### Tag: package-preview-2025-06
@@ -36,7 +54,7 @@ These settings apply only when `--tag=package-preview-2025-06` is specified on t
 
 ```yaml $(tag) == 'package-preview-2025-06'
 input-file:
-  - Microsoft.ConfidentialLedger/preview/2025-06-10-preview/openapi.json
+  - Microsoft.ConfidentialLedger/ConfidentialLedger/preview/2025-06-10-preview/openapi.json
 ```
 
 ### Tag: package-preview-2024-09
@@ -45,8 +63,8 @@ These settings apply only when `--tag=package-preview-2024-09` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-09'
 input-file:
-  - Microsoft.ConfidentialLedger/preview/2024-09-19-preview/confidentialledger.json
-  - Microsoft.ConfidentialLedger/preview/2024-09-19-preview/managedccf.json
+  - Microsoft.ConfidentialLedger/ConfidentialLedger/preview/2024-09-19-preview/confidentialledger.json
+  - Microsoft.ConfidentialLedger/ConfidentialLedger/preview/2024-09-19-preview/managedccf.json
 ```
 
 ### Tag: package-preview-2024-07
@@ -55,8 +73,8 @@ These settings apply only when `--tag=package-preview-2024-07` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2024-07'
 input-file:
-  - Microsoft.ConfidentialLedger/preview/2024-07-09-preview/confidentialledger.json
-  - Microsoft.ConfidentialLedger/preview/2024-07-09-preview/managedccf.json
+  - Microsoft.ConfidentialLedger/ConfidentialLedger/preview/2024-07-09-preview/confidentialledger.json
+  - Microsoft.ConfidentialLedger/ConfidentialLedger/preview/2024-07-09-preview/managedccf.json
 ```
 
 ### Tag: package-preview-2023-06
@@ -65,8 +83,8 @@ These settings apply only when `--tag=package-preview-2023-06` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-06'
 input-file:
-  - Microsoft.ConfidentialLedger/preview/2023-06-28-preview/confidentialledger.json
-  - Microsoft.ConfidentialLedger/preview/2023-06-28-preview/managedccf.json
+  - Microsoft.ConfidentialLedger/ConfidentialLedger/preview/2023-06-28-preview/confidentialledger.json
+  - Microsoft.ConfidentialLedger/ConfidentialLedger/preview/2023-06-28-preview/managedccf.json
 ```
 
 ### Tag: package-preview-2023-01
@@ -75,8 +93,8 @@ These settings apply only when `--tag=package-preview-2023-01` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-01'
 input-file:
-  - Microsoft.ConfidentialLedger/preview/2023-01-26-preview/confidentialledger.json
-  - Microsoft.ConfidentialLedger/preview/2023-01-26-preview/managedccf.json
+  - Microsoft.ConfidentialLedger/ConfidentialLedger/preview/2023-01-26-preview/confidentialledger.json
+  - Microsoft.ConfidentialLedger/ConfidentialLedger/preview/2023-01-26-preview/managedccf.json
 ```
 
 ### Tag: package-2022-09-08-preview
@@ -85,8 +103,8 @@ These settings apply only when `--tag=package-2022-09-08-preview` is specified o
 
 ``` yaml $(tag) == 'package-2022-09-08-preview'
 input-file:
-  - Microsoft.ConfidentialLedger/preview/2022-09-08-preview/confidentialledger.json
-  - Microsoft.ConfidentialLedger/preview/2022-09-08-preview/managedccf.json
+  - Microsoft.ConfidentialLedger/ConfidentialLedger/preview/2022-09-08-preview/confidentialledger.json
+  - Microsoft.ConfidentialLedger/ConfidentialLedger/preview/2022-09-08-preview/managedccf.json
 ```
 
 ### Tag: package-2020-12-01-preview
@@ -95,7 +113,7 @@ These settings apply only when `--tag=package-2020-12-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-12-01-preview'
 input-file:
-  - Microsoft.ConfidentialLedger/preview/2020-12-01-preview/confidentialledger.json
+  - Microsoft.ConfidentialLedger/ConfidentialLedger/preview/2020-12-01-preview/confidentialledger.json
 ```
 
 ### Tag: package-2021-05-13-preview
@@ -104,7 +122,7 @@ These settings apply only when `--tag=package-2021-05-13-preview` is specified o
 
 ``` yaml $(tag) == 'package-2021-05-13-preview'
 input-file:
-  - Microsoft.ConfidentialLedger/preview/2021-05-13-preview/confidentialledger.json
+  - Microsoft.ConfidentialLedger/ConfidentialLedger/preview/2021-05-13-preview/confidentialledger.json
 ```
 
 ### Tag: package-2022-05-13
@@ -113,7 +131,7 @@ These settings apply only when `--tag=package-2022-05-13` is specified on the co
 
 ``` yaml $(tag) == 'package-2022-05-13'
 input-file:
-  - Microsoft.ConfidentialLedger/stable/2022-05-13/confidentialledger.json
+  - Microsoft.ConfidentialLedger/ConfidentialLedger/stable/2022-05-13/confidentialledger.json
 ```
 
 ---

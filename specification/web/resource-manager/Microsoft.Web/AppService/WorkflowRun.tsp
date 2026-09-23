@@ -70,7 +70,8 @@ interface WorkflowRunsOps
         @segment("runs")
         @key
         runName: string,
-      }
+      },
+      ResourceName = "WorkflowRun"
     > {}
 
 @armResourceOperations

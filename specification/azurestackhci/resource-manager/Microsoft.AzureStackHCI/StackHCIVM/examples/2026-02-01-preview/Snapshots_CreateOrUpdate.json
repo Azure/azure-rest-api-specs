@@ -1,0 +1,86 @@
+{
+  "operationId": "Snapshots_CreateOrUpdate",
+  "title": "Create or update a snapshot",
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "snapshotName": "test-snapshot",
+    "resource": {
+      "extendedLocation": {
+        "name": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocation/customLocations/dogfood-location",
+        "type": "CustomLocation"
+      },
+      "location": "West US2",
+      "tags": {
+        "environment": "test"
+      },
+      "properties": {
+        "creationData": {
+          "createOption": "Copy",
+          "sourceResourceId": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/virtualHardDisks/source-vhd"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test-snapshot",
+        "type": "Microsoft.AzureStackHCI/snapshots",
+        "extendedLocation": {
+          "name": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocation/customLocations/dogfood-location",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/snapshots/test-snapshot",
+        "location": "West US2",
+        "tags": {
+          "environment": "test"
+        },
+        "properties": {
+          "creationData": {
+            "createOption": "Copy",
+            "sourceResourceId": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/virtualHardDisks/source-vhd",
+            "sourceUniqueId": "b99c94ca-e43d-4282-9c78-84d58e5ce81a"
+          },
+          "provisioningState": "Succeeded",
+          "timeCreated": "2023-11-15T10:30:00Z",
+          "diskSizeBytes": 68719476736,
+          "uniqueId": "f9e8d7c6-b5a4-9382-7160-5948372615a3",
+          "status": {
+            "provisioningStatus": {
+              "status": "Succeeded"
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "test-snapshot",
+        "type": "Microsoft.AzureStackHCI/snapshots",
+        "extendedLocation": {
+          "name": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/dogfoodarc/providers/Microsoft.ExtendedLocation/customLocations/dogfood-location",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/snapshots/test-snapshot",
+        "location": "West US2",
+        "tags": {
+          "environment": "test"
+        },
+        "properties": {
+          "creationData": {
+            "createOption": "Copy",
+            "sourceResourceId": "/subscriptions/a95612cb-f1fa-4daa-a4fd-272844fa512c/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/virtualHardDisks/source-vhd"
+          },
+          "provisioningState": "Accepted",
+          "status": {
+            "provisioningStatus": {
+              "status": "InProgress"
+            }
+          }
+        }
+      }
+    }
+  }
+}

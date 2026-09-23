@@ -2,30 +2,38 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 //Models
-@@usage(Microsoft.EventGrid.SystemEvents.ApiCenterApiDefinitionAddedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ApiCenterApiDefinitionAddedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiCenterApiDefinitionAddedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ApiCenterApiDefinitionAddedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ApiCenterApiDefinitionUpdatedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ApiCenterApiDefinitionUpdatedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiCenterApiDefinitionUpdatedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ApiCenterApiDefinitionUpdatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ApiCenterApiSpecification,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.ApiCenterApiSpecification,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ApiCenterApiSpecification,
+@@access(
+  Microsoft.EventGrid.SystemEvents.ApiCenterApiSpecification,
   Access.public
 );
 
 //useSystemTextJsonConverter decorators
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiCenterApiDefinitionAddedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ApiCenterApiDefinitionAddedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.ApiCenterApiDefinitionUpdatedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.ApiCenterApiDefinitionUpdatedEventData,
   "csharp"
 );
 //Enums

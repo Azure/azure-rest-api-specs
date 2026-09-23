@@ -72,6 +72,7 @@ interface Tasks {
 @@doc(Task.name, "The name of the container registry task.");
 @@doc(Task.properties, "The properties of a task.");
 @@doc(Tasks.create::parameters.resource, "The parameters for creating a task.");
-@@doc(Tasks.update::parameters.properties,
+@@doc(
+  Tasks.update::parameters.properties,
   "The parameters for updating a task."
 );

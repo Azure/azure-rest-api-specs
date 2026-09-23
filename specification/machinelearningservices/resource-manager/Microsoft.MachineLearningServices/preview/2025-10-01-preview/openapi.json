@@ -7640,7 +7640,7 @@
         "tags": [
           "ComputeResources"
         ],
-        "description": "Updates the custom services list. The list of custom services provided shall be overwritten",
+        "description": "Updates the custom services list. The list of custom services provided shall be overwritten.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -7704,7 +7704,7 @@
         "tags": [
           "ComputeResources"
         ],
-        "description": "Returns supported virtual machine sizes for resize",
+        "description": "Returns supported virtual machine sizes for resize.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -11289,7 +11289,7 @@
           "Workspaces"
         ],
         "summary": "Get all the deployments under the workspace scope",
-        "description": "Get all the deployments under the workspace scope",
+        "description": "Get all the deployments under the workspace scope.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -15732,6 +15732,16 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Online Endpoint entity to apply during operation.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "additionalProperties": {}
+            }
           }
         ],
         "responses": {
@@ -21838,10 +21848,7 @@
           "items": {
             "$ref": "#/definitions/SystemService"
           },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "publicIpAddress"
-          ]
+          "readOnly": true
         },
         "agentCount": {
           "type": "integer",
@@ -22367,10 +22374,7 @@
           "items": {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
           },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "/error/code"
-          ]
+          "readOnly": true
         },
         "currentNodeCount": {
           "type": "integer",
@@ -25146,10 +25150,7 @@
           "items": {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
           },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "/error/code"
-          ]
+          "readOnly": true
         },
         "isAttachedCompute": {
           "type": "boolean",
@@ -25467,10 +25468,7 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/CustomService"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          }
         },
         "osImageMetadata": {
           "$ref": "#/definitions/ImageMetadata",
@@ -25601,10 +25599,7 @@
           "items": {
             "$ref": "#/definitions/ComputeInstanceContainer"
           },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "name"
-          ]
+          "readOnly": true
         },
         "dataDisks": {
           "type": "array",
@@ -25613,8 +25608,7 @@
           "items": {
             "$ref": "#/definitions/ComputeInstanceDataDisk"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "dataMounts": {
           "type": "array",
@@ -25623,8 +25617,7 @@
           "items": {
             "$ref": "#/definitions/ComputeInstanceDataMount"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "versions": {
           "$ref": "#/definitions/ComputeInstanceVersion",
@@ -27167,9 +27160,11 @@
       "properties": {
         "keys": {
           "type": "object",
+          "format": "password",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-secret": true
         }
       }
     },
@@ -27311,6 +27306,11 @@
           "description": "Output Asset Name.",
           "x-nullable": true
         },
+        "assetVersion": {
+          "type": "string",
+          "description": "Output Asset Version.",
+          "x-nullable": true
+        },
         "mode": {
           "type": "string",
           "description": "Output data delivery mode enums.",
@@ -27342,6 +27342,11 @@
             "read",
             "create"
           ]
+        },
+        "pathOnCompute": {
+          "type": "string",
+          "description": "Output Asset Delivery Path.",
+          "x-nullable": true
         },
         "uri": {
           "type": "string",
@@ -28235,7 +28240,9 @@
       "properties": {
         "databricksAccessToken": {
           "type": "string",
-          "description": "access token for databricks account."
+          "format": "password",
+          "description": "access token for databricks account.",
+          "x-ms-secret": true
         }
       },
       "allOf": [
@@ -28251,7 +28258,9 @@
       "properties": {
         "databricksAccessToken": {
           "type": "string",
-          "description": "Databricks access token"
+          "format": "password",
+          "description": "Databricks access token",
+          "x-ms-secret": true
         },
         "workspaceUrl": {
           "type": "string",
@@ -29098,8 +29107,10 @@
       "properties": {
         "password": {
           "type": "string",
+          "format": "password",
           "description": "DockerCredential user password",
-          "x-nullable": true
+          "x-nullable": true,
+          "x-ms-secret": true
         },
         "userName": {
           "type": "string",
@@ -29332,21 +29343,25 @@
       "properties": {
         "primaryKey": {
           "type": "string",
+          "format": "password",
           "description": "The primary key.",
           "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         },
         "secondaryKey": {
           "type": "string",
+          "format": "password",
           "description": "The secondary key.",
           "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
-          ]
+          ],
+          "x-ms-secret": true
         }
       }
     },
@@ -29383,8 +29398,10 @@
       "properties": {
         "accessToken": {
           "type": "string",
+          "format": "password",
           "description": "Access token for endpoint authentication.",
-          "x-nullable": true
+          "x-nullable": true,
+          "x-ms-secret": true
         },
         "expiryTimeUtc": {
           "type": "integer",
@@ -29518,7 +29535,7 @@
     },
     "EndpointDeploymentResourcePropertiesBasicResource": {
       "type": "object",
-      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "description": "EndpointDeploymentResourcePropertiesBasicResource is preview-only.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/EndpointDeploymentResourceProperties"
@@ -29919,7 +29936,7 @@
     },
     "EndpointResourcePropertiesBasicResource": {
       "type": "object",
-      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "description": "EndpointResourcePropertiesBasicResource is a preview-only resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/EndpointResourceProperties"
@@ -30244,7 +30261,7 @@
         },
         "imageDetails": {
           "$ref": "#/definitions/ImageDetails",
-          "description": "Environment image details"
+          "description": "Environment image details."
         },
         "inferenceConfig": {
           "$ref": "#/definitions/InferenceContainerProperties",
@@ -31048,8 +31065,7 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/IndexColumn"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "provisioningState": {
           "$ref": "#/definitions/AssetProvisioningState",
@@ -32156,8 +32172,7 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ImageModelDistributionSettingsClassification"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "limitSettings": {
           "$ref": "#/definitions/ImageLimitSettings",
@@ -32248,8 +32263,7 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ImageModelDistributionSettingsClassification"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "limitSettings": {
           "$ref": "#/definitions/ImageLimitSettings",
@@ -33349,7 +33363,7 @@
     },
     "InferenceEndpoint": {
       "type": "object",
-      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+      "description": "InferenceEndpoint is a preview-only resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/InferenceEndpointProperties",
@@ -33442,7 +33456,7 @@
     },
     "InferenceGroup": {
       "type": "object",
-      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+      "description": "InferenceGroup is a preview-only resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/InferenceGroupProperties",
@@ -33529,7 +33543,7 @@
     },
     "InferencePool": {
       "type": "object",
-      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+      "description": "InferencePool is a preview-only resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/InferencePoolProperties",
@@ -34680,6 +34694,11 @@
           "description": "Output Asset Name.",
           "x-nullable": true
         },
+        "assetVersion": {
+          "type": "string",
+          "description": "Output Asset Version.",
+          "x-nullable": true
+        },
         "mode": {
           "type": "string",
           "description": "Output data delivery mode enums.",
@@ -34711,6 +34730,11 @@
             "read",
             "create"
           ]
+        },
+        "pathOnCompute": {
+          "type": "string",
+          "description": "Output Asset Delivery Path.",
+          "x-nullable": true
         },
         "uri": {
           "type": "string",
@@ -34824,6 +34848,11 @@
           "description": "Output Asset Name.",
           "x-nullable": true
         },
+        "assetVersion": {
+          "type": "string",
+          "description": "Output Asset Version.",
+          "x-nullable": true
+        },
         "mode": {
           "type": "string",
           "description": "Output data delivery mode enums.",
@@ -34855,6 +34884,11 @@
             "read",
             "create"
           ]
+        },
+        "pathOnCompute": {
+          "type": "string",
+          "description": "Output Asset Delivery Path.",
+          "x-nullable": true
         },
         "uri": {
           "type": "string",
@@ -35175,7 +35209,7 @@
     },
     "ManagedNetworkSettingsPropertiesBasicResource": {
       "type": "object",
-      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "description": "ManagedNetworkSettingsPropertiesBasicResource is a preview-only resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ManagedNetworkSettingsProperties",
@@ -35335,8 +35369,7 @@
       "properties": {
         "principalId": {
           "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "Identity principal Id",
-          "readOnly": true
+          "description": "Identity principal Id"
         }
       }
     },
@@ -35350,8 +35383,7 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/ManagedResourceGroupAssignedIdentities"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -35986,7 +36018,6 @@
           "items": {
             "type": "string"
           },
-          "x-ms-identifiers": [],
           "x-ms-mutability": [
             "read",
             "create"
@@ -36239,7 +36270,6 @@
           "items": {
             "$ref": "#/definitions/MonitoringNotificationType"
           },
-          "x-ms-identifiers": [],
           "x-ms-mutability": [
             "read",
             "create"
@@ -37653,10 +37683,7 @@
           "x-nullable": true,
           "items": {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-          },
-          "x-ms-identifiers": [
-            "/error/code"
-          ]
+          }
         }
       }
     },
@@ -38940,7 +38967,7 @@
     },
     "RaiBlocklistItemPropertiesBasicResource": {
       "type": "object",
-      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "description": "RaiBlocklistItemPropertiesBasicResource is a preview-only resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/RaiBlocklistItemProperties",
@@ -38988,10 +39015,7 @@
       "description": "The list of Cognitive Services RaiBlocklist Items for batch add.",
       "items": {
         "$ref": "#/definitions/RaiBlocklistItemBulkRequest"
-      },
-      "x-ms-identifiers": [
-        "name"
-      ]
+      }
     },
     "RaiBlocklistProperties": {
       "type": "object",
@@ -39005,7 +39029,7 @@
     },
     "RaiBlocklistPropertiesBasicResource": {
       "type": "object",
-      "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+      "description": "RaiBlocklistPropertiesBasicResource is a preview-only resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/RaiBlocklistProperties",
@@ -39636,8 +39660,7 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/RegistryRegionArmDetails"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -39651,8 +39674,7 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/AcrDetails"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "location": {
           "type": "string",
@@ -39665,8 +39687,7 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/StorageAccountDetails"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -42464,8 +42485,7 @@
             },
             "type": "array",
             "x-nullable": true
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "allOf": [
@@ -43186,6 +43206,11 @@
           "description": "Output Asset Name.",
           "x-nullable": true
         },
+        "assetVersion": {
+          "type": "string",
+          "description": "Output Asset Version.",
+          "x-nullable": true
+        },
         "mode": {
           "type": "string",
           "description": "Output data delivery mode enums.",
@@ -43217,6 +43242,11 @@
             "read",
             "create"
           ]
+        },
+        "pathOnCompute": {
+          "type": "string",
+          "description": "Output Asset Delivery Path.",
+          "x-nullable": true
         },
         "uri": {
           "type": "string",
@@ -43403,6 +43433,11 @@
           "description": "Output Asset Name.",
           "x-nullable": true
         },
+        "assetVersion": {
+          "type": "string",
+          "description": "Output Asset Version.",
+          "x-nullable": true
+        },
         "mode": {
           "type": "string",
           "description": "Output data delivery mode enums.",
@@ -43434,6 +43469,11 @@
             "read",
             "create"
           ]
+        },
+        "pathOnCompute": {
+          "type": "string",
+          "description": "Output Asset Delivery Path.",
+          "x-nullable": true
         },
         "uri": {
           "type": "string",
@@ -43533,6 +43573,11 @@
           "description": "Output Asset Name.",
           "x-nullable": true
         },
+        "assetVersion": {
+          "type": "string",
+          "description": "Output Asset Version.",
+          "x-nullable": true
+        },
         "mode": {
           "type": "string",
           "description": "Output data delivery mode enums.",
@@ -43564,6 +43609,11 @@
             "read",
             "create"
           ]
+        },
+        "pathOnCompute": {
+          "type": "string",
+          "description": "Output Asset Delivery Path.",
+          "x-nullable": true
         },
         "uri": {
           "type": "string",
@@ -43978,7 +44028,9 @@
         },
         "password": {
           "type": "string",
-          "description": "Password of admin account"
+          "format": "password",
+          "description": "Password of admin account",
+          "x-ms-secret": true
         },
         "publicKeyData": {
           "type": "string",
@@ -44409,7 +44461,9 @@
           "type": "string"
         },
         "secretAccessKey": {
-          "type": "string"
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
         }
       }
     },
@@ -44418,7 +44472,9 @@
       "description": "Account key object for workspace connection credential.",
       "properties": {
         "key": {
-          "type": "string"
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
         }
       }
     },
@@ -44427,7 +44483,9 @@
       "description": "Api key object for workspace connection credential.",
       "properties": {
         "key": {
-          "type": "string"
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
         }
       }
     },
@@ -44491,7 +44549,9 @@
       "type": "object",
       "properties": {
         "pat": {
-          "type": "string"
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
         }
       }
     },
@@ -44616,7 +44676,9 @@
       "type": "object",
       "properties": {
         "sas": {
-          "type": "string"
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
         }
       }
     },
@@ -44634,7 +44696,9 @@
       "type": "object",
       "properties": {
         "password": {
-          "type": "string"
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
         },
         "securityToken": {
           "type": "string",

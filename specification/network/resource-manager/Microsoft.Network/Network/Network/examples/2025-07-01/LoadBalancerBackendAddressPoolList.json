@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01",
+    "loadBalancerName": "lb",
+    "resourceGroupName": "testrg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "backend",
+            "type": "Microsoft.Network/loadBalancers/backendAddressPools",
+            "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/backend",
+            "properties": {
+              "backendIPConfigurations": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Network/networkInterfaces/nic/ipConfigurations/default-ip-config"
+                }
+              ],
+              "loadBalancingRules": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb"
+                }
+              ],
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "LoadBalancerBackendAddressPools_List",
+  "title": "LoadBalancerBackendAddressPoolList"
+}

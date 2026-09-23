@@ -6,23 +6,21 @@ emit:
 output-dir: "{project-root}"
 options:
   "@azure-tools/typespec-autorest":
-    azure-resource-provider-folder: "./resource-manager"
+    azure-resource-provider-folder: "resource-manager"
     emit-common-types-schema: "never"
     emitter-output-dir: "{output-dir}"
     output-file: "{version-status}/{version}/nodecustomization.json"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     examples-dir: "{project-root}/examples"
     use-read-only-status-schema: true
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    flavor: azure
-    clear-output-folder: true
+  "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.ContainerServiceNodeCustomization"
+    emitter-output-dir: "{output-dir}/sdk/containerservice/{namespace}"
   "@azure-tools/typespec-java":
-    namespace: "com.azure.resourcemanager.containerservice.nodecustom"
-    package-dir: "azure-resourcemanager-containerservice-nodecustom"
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-containerservice-nodecustom"
-    service-name: "Container Service Node Customization"
+    service-dir: "sdk/containerservicenodecustomization"
+    namespace: "com.azure.resourcemanager.containerservicenodecustomization"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-containerservicenodecustomization"
+    service-name: "NodeCustomization"
     flavor: azure
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/containerservicenodecustomization"
@@ -44,7 +42,6 @@ options:
     generate-sample: true
   "@azure-tools/typespec-ts":
     service-dir: "sdk/containerservice"
-    package-dir: "arm-containerservicenodecustomization"
     flavor: azure
     experimental-extensible-enums: true
     emitter-output-dir: "{output-dir}/{service-dir}/arm-containerservicenodecustomization"
@@ -53,3 +50,4 @@ options:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

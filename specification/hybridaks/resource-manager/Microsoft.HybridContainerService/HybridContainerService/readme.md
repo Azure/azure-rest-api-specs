@@ -1,0 +1,173 @@
+# hybridaks
+
+> see https://aka.ms/autorest
+
+This is the AutoRest configuration file for hybridaks.
+
+## Getting Started
+
+To build the SDKs for My API, simply install AutoRest via `npm` (`npm install -g autorest`) and then run:
+
+> `autorest readme.md`
+
+To see additional help and options, run:
+
+> `autorest --help`
+
+For other options on installation see [Installing AutoRest](https://aka.ms/autorest/install) on the AutoRest github page.
+
+---
+
+## Configuration
+
+## Suppression
+``` yaml
+directive:
+  - suppress: AvoidAdditionalProperties
+    where: $.definitions.AgentPoolProperties.properties.nodeLabels
+    reason: "nodeLabels is a user-defined map<string,string> for Kubernetes labels, following AKS behavior since 2022-09-01-preview."
+
+  - suppress: AvoidAdditionalProperties
+    where: $.definitions.NamedAgentPoolProfile.properties.nodeLabels
+    reason: "nodeLabels is a user-defined map<string,string> for Kubernetes labels, following AKS behavior since 2022-09-01-preview."
+
+  - suppress: AvoidAdditionalProperties
+    where: $.definitions.KubernetesVersionProperties.properties.patchVersions
+    reason: "patchVersions is a map of patch version info, following AKS behavior."
+```
+
+### Basic Information
+
+These are the global settings for the hybridaks.
+
+
+``` yaml
+openapi-type: arm
+openapi-subtype: rpaas
+tag: package-preview-2026-04
+```
+
+### Tag: package-preview-2026-04
+
+These settings apply only when `--tag=package-preview-2026-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-04'
+input-file:
+  - preview/2026-04-01-preview/openapi.json
+```
+
+### Tag: package-2024-01
+
+These settings apply only when `--tag=package-2024-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-01'
+input-file:
+  - stable/2024-01-01/provisionedClusterInstances.json
+  - stable/2024-01-01/virtualNetworks.json
+directive:
+  - suppress: PathForTrackedResourceTypes
+    from: provisionedClusterInstances.json
+    where: $.paths["/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/agentPools/{agentPoolName}"]
+    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
+  - suppress: TrackedExtensionResourcesAreNotAllowed
+    from: provisionedClusterInstances.json
+    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
+  - suppress: PatchResponseCodes
+    from: provisionedClusterInstances.json
+    where: $.paths["/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/agentPools/{agentPoolName}"].patch
+    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
+  - suppress: XmsPageableForListCalls
+    from: provisionedClusterInstances.json
+    where: $.paths["/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/agentPools"].get
+    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
+  - suppress: AvoidAdditionalProperties
+    from: provisionedClusterInstances.json
+    where: $.definitions.AgentPoolProfile.properties.nodeLabels
+    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
+  - suppress: LroLocationHeader
+    from: virtualNetworks.json
+    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
+```
+### Tag: package-preview-2023-11
+
+These settings apply only when `--tag=package-preview-2023-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2023-11'
+input-file:
+  - preview/2023-11-15-preview/provisionedClusterInstances.json
+  - preview/2023-11-15-preview/virtualNetworks.json
+directive:
+  - suppress: PathForTrackedResourceTypes
+    from: provisionedClusterInstances.json
+    where: $.paths["/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/agentPools/{agentPoolName}"]
+    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
+  - suppress: TrackedExtensionResourcesAreNotAllowed
+    from: provisionedClusterInstances.json
+    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
+  - suppress: PatchResponseCodes
+    from: provisionedClusterInstances.json
+    where: $.paths["/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/agentPools/{agentPoolName}"].patch
+    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
+  - suppress: XmsPageableForListCalls
+    from: provisionedClusterInstances.json
+    where: $.paths["/{connectedClusterResourceUri}/providers/Microsoft.HybridContainerService/provisionedClusterInstances/default/agentPools"].get
+    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
+  - suppress: AvoidAdditionalProperties
+    from: provisionedClusterInstances.json
+    where: $.definitions.AgentPoolProfile.properties.nodeLabels
+    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
+  - suppress: LroLocationHeader
+    from: virtualNetworks.json
+    reason: "Existing violation in main; surfaced by v2 folder migration (no API shape change)."
+suppressions:
+  - code: TopLevelResourcesListBySubscription
+    where: $.definitions.KubernetesVersionProfile
+    reason: Since kubernetesVersions/default resource is defined as an extension resource to the custom location, this rule does not apply. The kubernetesVersions can vary from one custom location to another and we can't really have a ListBySubscription operation for kubernetesVersions.
+  - code: TopLevelResourcesListBySubscription
+    where: $.definitions.VmSkuProfile
+    reason: Since skus/default resource is defined as an extension resource to the custom location, this rule does not apply. The skus can vary from one custom location to another and we can't really have a ListBySubscription operation for skus.
+  - code: TopLevelResourcesListBySubscription
+    where: $.definitions.provisionedClusters
+    reason: Since provisionedClusters/default resource is defined as an extension resource to the connected cluster resource, we can't really list by subscription and this rule does not apply.
+  - code: GetCollectionOnlyHasValueAndNextLink
+    reason: This is a false alarm for the /default APIs, as they return a singleton resource and not a collection of resources
+```
+
+---
+
+# Code Generation
+
+## Swagger to SDK
+
+This section describes what SDK should be generated by the automatic system.
+This is not used by Autorest itself.
+
+``` yaml $(swagger-to-sdk)
+swagger-to-sdk:
+  - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
+  - repo: azure-resource-manager-schemas
+  - repo: azure-cli-extensions
+```
+
+## Az
+
+See configuration in [readme.az.md](./readme.az.md)
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
+
+## TypeScript
+
+See configuration in [readme.typescript.md](./readme.typescript.md)
+
+## CSharp
+
+See configuration in [readme.csharp.md](./readme.csharp.md)

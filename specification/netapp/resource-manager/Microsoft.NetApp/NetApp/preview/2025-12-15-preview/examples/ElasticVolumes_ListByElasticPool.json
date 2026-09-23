@@ -1,0 +1,87 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myRG",
+    "accountName": "account1",
+    "poolName": "pool1",
+    "api-version": "2025-12-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/elasticAccounts/account1/elasticCapacityPools/pool1/elasticVolumes/volume1",
+            "name": "account1/pool1/volume1",
+            "type": "Microsoft.NetApp/elasticAccounts/elasticCapacityPools/elasticVolumes",
+            "location": "eastus",
+            "properties": {
+              "filePath": "my-unique-file-path",
+              "size": 107374182400,
+              "exportPolicy": {
+                "rules": [
+                  {
+                    "ruleIndex": 1,
+                    "unixAccessRule": "ReadOnly",
+                    "nfsv3": "Enabled",
+                    "nfsv4": "Disabled",
+                    "allowedClients": [
+                      "0.0.0.0/0"
+                    ],
+                    "rootAccess": "Disabled"
+                  }
+                ]
+              },
+              "protocolTypes": [
+                "NFSv3"
+              ],
+              "mountTargets": [
+                {
+                  "ipAddress": "10.1.0.9"
+                }
+              ],
+              "provisioningState": "Succeeded",
+              "availabilityStatus": "Online"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/elasticAccounts/account1/elasticCapacityPools/pool1/elasticVolumes/volume2",
+            "name": "account1/pool1/volume2",
+            "type": "Microsoft.NetApp/elasticAccounts/elasticCapacityPools/elasticVolumes",
+            "location": "eastus",
+            "properties": {
+              "filePath": "my-unique-file-path2",
+              "size": 107374182400,
+              "exportPolicy": {
+                "rules": [
+                  {
+                    "ruleIndex": 1,
+                    "unixAccessRule": "ReadOnly",
+                    "nfsv3": "Disabled",
+                    "nfsv4": "Enabled",
+                    "allowedClients": [
+                      "0.0.0.0/0"
+                    ],
+                    "rootAccess": "Disabled"
+                  }
+                ]
+              },
+              "protocolTypes": [
+                "NFSv4"
+              ],
+              "mountTargets": [
+                {
+                  "ipAddress": "10.1.0.9"
+                }
+              ],
+              "provisioningState": "Succeeded",
+              "availabilityStatus": "Online"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ElasticVolumes_ListByElasticPool",
+  "title": "ElasticVolumes_ListByElasticPool"
+}

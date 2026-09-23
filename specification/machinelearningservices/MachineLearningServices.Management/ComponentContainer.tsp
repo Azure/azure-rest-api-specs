@@ -15,8 +15,10 @@ namespace Microsoft.MachineLearningServices;
  * Azure Resource Manager resource envelope.
  */
 @parentResource(Registry)
-model ComponentContainer
-  is Azure.ResourceManager.ProxyResource<ComponentContainerProperties, false> {
+model ComponentContainer is Azure.ResourceManager.ProxyResource<
+  ComponentContainerProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ComponentContainer,
     KeyName = "componentName",
@@ -48,7 +50,9 @@ interface ComponentContainerOps
         @key
         @pattern("^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$")
         componentName: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearninRegistryComponentContainer"
     > {}
 
 @armResourceOperations
@@ -66,32 +70,37 @@ interface ComponentContainers {
   @summary("Create or update container.")
   createOrUpdate is ComponentContainerOps.CreateOrUpdateAsync<
     ComponentContainer,
-    Response = ArmResourceUpdatedResponse<ComponentContainer> | (ArmResourceCreatedResponse<
-      ComponentContainer,
-      ArmAsyncOperationHeader
-    > & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response =
+      | ArmResourceUpdatedResponse<ComponentContainer>
+      | (ArmResourceCreatedResponse<
+          ComponentContainer,
+          ArmAsyncOperationHeader
+        > & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
   >;
 
   /**
    * Delete container.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API returns additional response codes for LRO delete"
   @summary("Delete container.")
   delete is ComponentContainerOps.DeleteWithoutOkAsync<
     ComponentContainer,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    }) | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | (ArmDeleteAcceptedLroResponse & {
+          /**
+           * Timeout for the client to use when polling the asynchronous operation.
+           */
+          @header("x-ms-async-operation-timeout")
+          timeout: duration;
+        })
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -132,7 +141,9 @@ interface ComponentContainerOperationGroupOps
         @segment("components")
         @key
         name: string,
-      }
+      },
+      ErrorResponse,
+      "MachineLearningComponentContainer"
     > {}
 
 @armResourceOperations
@@ -179,12 +190,15 @@ interface ComponentContainerOperationGroup {
 }
 
 @@doc(ComponentContainer.name, "Container name.");
-@@doc(ComponentContainer.properties,
+@@doc(
+  ComponentContainer.properties,
   "[Required] Additional attributes of the entity."
 );
-@@doc(ComponentContainers.createOrUpdate::parameters.resource,
+@@doc(
+  ComponentContainers.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );
-@@doc(ComponentContainerOperationGroup.createOrUpdate::parameters.resource,
+@@doc(
+  ComponentContainerOperationGroup.createOrUpdate::parameters.resource,
   "Container entity to create or update."
 );

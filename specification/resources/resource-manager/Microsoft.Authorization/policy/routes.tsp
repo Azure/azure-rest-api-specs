@@ -1,12 +1,12 @@
-// FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually
-
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
@@ -147,6 +147,25 @@ interface PolicyTokensOperationGroup {
     ...CommonTypes.ManagementGroupNameParameter,
     ...ProviderNamespace<PolicyTokenRequest>,
     ...ApiVersionParameter,
+
+    /** The policy token properties. */
+    @body parameters: PolicyTokenRequest,
+  ): PolicyTokenResponse | ErrorResponse;
+
+  /**
+   * This operation acquires a policy token in the given resource group for the given request body.
+   */
+  @added(Versions.v2026_07_01)
+  @summary("Acquires a policy token at resource group level.")
+  @autoRoute
+  @post
+  @action("acquirePolicyToken")
+  @armResourceCollectionAction
+  acquireAtResourceGroup(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...CommonTypes.ResourceGroupNameParameter,
+    ...ProviderNamespace<PolicyTokenRequest>,
 
     /** The policy token properties. */
     @body parameters: PolicyTokenRequest,

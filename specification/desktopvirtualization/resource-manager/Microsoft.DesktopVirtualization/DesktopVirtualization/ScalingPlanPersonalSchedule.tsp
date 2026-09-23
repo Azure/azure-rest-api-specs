@@ -1,11 +1,13 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./ScalingPlan.tsp";
 
 using TypeSpec.Rest;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 
@@ -14,11 +16,10 @@ namespace Microsoft.DesktopVirtualization;
  * Represents a ScalingPlanPersonalSchedule definition.
  */
 @parentResource(ScalingPlan)
-model ScalingPlanPersonalSchedule
-  is Azure.ResourceManager.ProxyResource<
-    ScalingPlanPersonalScheduleProperties,
-    false
-  > {
+model ScalingPlanPersonalSchedule is Azure.ResourceManager.ProxyResource<
+  ScalingPlanPersonalScheduleProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ScalingPlanPersonalSchedule,
     KeyName = "scalingPlanScheduleName",
@@ -43,15 +44,9 @@ interface ScalingPlanPersonalSchedules {
    * Update a ScalingPlanPersonalSchedule.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is ArmCustomPatchSyncWithOptionalBody<
     ScalingPlanPersonalSchedule,
-    ScalingPlanPersonalSchedulePatch,
-    Request = {
-      /**
-       * The resource properties to be updated
-       */
-      @bodyRoot scalingPlanSchedule?: ScalingPlanPersonalSchedulePatch;
-    }
+    ScalingPlanPersonalSchedulePatch
   >;
 
   /**
@@ -90,9 +85,15 @@ interface ScalingPlanPersonalSchedules {
 @@maxLength(ScalingPlanPersonalSchedule.name, 64);
 @@minLength(ScalingPlanPersonalSchedule.name, 1);
 @@doc(ScalingPlanPersonalSchedule.name, "The name of the ScalingPlanSchedule");
-@@doc(ScalingPlanPersonalSchedule.properties,
+@@doc(
+  ScalingPlanPersonalSchedule.properties,
   "Detailed properties for ScalingPlanPersonalSchedule"
 );
-@@doc(ScalingPlanPersonalSchedules.create::parameters.resource,
+@@doc(
+  ScalingPlanPersonalSchedules.create::parameters.resource,
   "Object containing ScalingPlanPersonalSchedule definitions."
+);
+@@clientName(
+  ScalingPlanPersonalSchedules.update::parameters.body,
+  "scalingPlanSchedule"
 );

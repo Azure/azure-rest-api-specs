@@ -152,9 +152,11 @@ interface Exports {
 
 @@doc(Export.name, "Export Name.");
 @@doc(Export.properties, "The properties of the export.");
-@@doc(Exports.createOrUpdate::parameters.resource,
+@@doc(
+  Exports.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate Export operation."
 );
-@@doc(Exports.execute::parameters.body,
+@@doc(
+  Exports.execute::parameters.body,
   "Parameters supplied to the Execute Export operation."
 );

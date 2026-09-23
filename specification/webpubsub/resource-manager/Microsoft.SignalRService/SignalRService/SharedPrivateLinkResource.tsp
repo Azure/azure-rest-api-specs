@@ -64,7 +64,8 @@ interface SharedPrivateLinkResourceOps
         @minLength(3)
         @maxLength(63)
         sharedPrivateLinkResourceName: string,
-      }
+      },
+      ResourceName = "WebPubSubReplicaSharedPrivateLink"
     > {}
 
 @armResourceOperations
@@ -118,7 +119,8 @@ interface WebPubSubSharedPrivateLinkResourceOps
         @minLength(3)
         @maxLength(63)
         sharedPrivateLinkResourceName: string,
-      }
+      },
+      ResourceName = "WebPubSubSharedPrivateLink"
     > {}
 
 @armResourceOperations
@@ -156,15 +158,19 @@ interface WebPubSubSharedPrivateLinkResources {
 
 @@maxLength(SharedPrivateLinkResource.name, 63);
 @@minLength(SharedPrivateLinkResource.name, 3);
-@@doc(SharedPrivateLinkResource.name,
+@@doc(
+  SharedPrivateLinkResource.name,
   "The name of the shared private link resource."
 );
-@@doc(SharedPrivateLinkResource.properties,
+@@doc(
+  SharedPrivateLinkResource.properties,
   "Describes the properties of an existing Shared Private Link Resource"
 );
-@@doc(SharedPrivateLinkResources.createOrUpdate::parameters.resource,
+@@doc(
+  SharedPrivateLinkResources.createOrUpdate::parameters.resource,
   "The shared private link resource"
 );
-@@doc(WebPubSubSharedPrivateLinkResources.createOrUpdate::parameters.resource,
+@@doc(
+  WebPubSubSharedPrivateLinkResources.createOrUpdate::parameters.resource,
   "The shared private link resource"
 );

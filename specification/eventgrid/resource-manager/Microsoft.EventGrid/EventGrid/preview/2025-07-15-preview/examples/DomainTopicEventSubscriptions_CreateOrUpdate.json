@@ -1,11 +1,7 @@
 {
   "parameters": {
-    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40",
-    "resourceGroupName": "examplerg",
-    "domainName": "exampleDomain1",
-    "topicName": "exampleDomainTopic1",
-    "eventSubscriptionName": "exampleEventSubscriptionName1",
     "api-version": "2025-07-15-preview",
+    "domainName": "exampleDomain1",
     "eventSubscriptionInfo": {
       "properties": {
         "destination": {
@@ -20,64 +16,70 @@
           "subjectEndsWith": "ExampleSuffix"
         }
       }
-    }
+    },
+    "eventSubscriptionName": "exampleEventSubscriptionName1",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40",
+    "topicName": "exampleDomainTopic1"
   },
   "responses": {
     "200": {
       "body": {
+        "name": "exampleEventSubscriptionName1",
+        "type": "Microsoft.EventGrid/domains/domainTopics/eventSubscriptions",
+        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/domains/exampleDomain1/domainTopics/exampleDomainTopic1/eventSubscriptions/exampleEventSubscriptionName1",
         "properties": {
           "destination": {
+            "endpointType": "WebHook",
             "properties": {
               "endpointBaseUrl": "https://requestb.in/15ksip71"
-            },
-            "endpointType": "WebHook"
+            }
           },
+          "eventDeliverySchema": "EventGridSchema",
           "filter": {
             "isSubjectCaseSensitive": false,
             "subjectBeginsWith": "ExamplePrefix",
             "subjectEndsWith": "ExampleSuffix"
           },
           "labels": null,
-          "eventDeliverySchema": "EventGridSchema",
-          "retryPolicy": {
-            "maxDeliveryAttempts": 30,
-            "eventTimeToLiveInMinutes": 1440
-          },
           "provisioningState": "Succeeded",
+          "retryPolicy": {
+            "eventTimeToLiveInMinutes": 1440,
+            "maxDeliveryAttempts": 30
+          },
           "topic": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/domains/exampleDomain1/domainTopics/exampleDomainTopic1"
-        },
-        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/domains/exampleDomain1/domainTopics/exampleDomainTopic1/eventSubscriptions/exampleEventSubscriptionName1",
-        "name": "exampleEventSubscriptionName1",
-        "type": "Microsoft.EventGrid/domains/domainTopics/eventSubscriptions"
+        }
       }
     },
     "201": {
       "body": {
+        "name": "exampleEventSubscriptionName1",
+        "type": "Microsoft.EventGrid/domains/domainTopics/eventSubscriptions",
+        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/domains/exampleDomain1/domainTopics/exampleDomainTopic1/eventSubscriptions/exampleEventSubscriptionName1",
         "properties": {
           "destination": {
+            "endpointType": "WebHook",
             "properties": {
               "endpointBaseUrl": "https://requestb.in/15ksip71"
-            },
-            "endpointType": "WebHook"
+            }
           },
+          "eventDeliverySchema": "EventGridSchema",
           "filter": {
             "isSubjectCaseSensitive": false,
             "subjectBeginsWith": "ExamplePrefix",
             "subjectEndsWith": "ExampleSuffix"
           },
           "labels": null,
-          "eventDeliverySchema": "EventGridSchema",
-          "retryPolicy": {
-            "maxDeliveryAttempts": 30,
-            "eventTimeToLiveInMinutes": 1440
-          },
           "provisioningState": "Succeeded",
+          "retryPolicy": {
+            "eventTimeToLiveInMinutes": 1440,
+            "maxDeliveryAttempts": 30
+          },
           "topic": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/domains/exampleDomain1/domainTopics/exampleDomainTopic1"
-        },
-        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/domains/exampleDomain1/domainTopics/exampleDomainTopic1/eventSubscriptions/exampleEventSubscriptionName1",
-        "name": "exampleEventSubscriptionName1",
-        "type": "Microsoft.EventGrid/domains/domainTopics/eventSubscriptions"
+        }
       }
     }
-  }
+  },
+  "operationId": "DomainTopicEventSubscriptions_CreateOrUpdate",
+  "title": "DomainTopicEventSubscriptions_CreateOrUpdate"
 }

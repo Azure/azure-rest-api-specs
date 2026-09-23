@@ -1,0 +1,1168 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Code Transparency Service",
+    "version": "2026-03-26",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "tags": [],
+  "paths": {
+    "/.well-known/scitt-keys": {
+      "get": {
+        "operationId": "ListScittKeys",
+        "description": "List all service keys in COSE_Key_Set format, per Section 2.1 of draft-ietf-scitt-scrapi-09",
+        "produces": [
+          "application/cbor",
+          "application/concise-problem-details+cbor"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AcceptCborHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response containing COSE_Key_Set (array of COSE_Key maps) in CBOR format",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "400": {
+            "description": "Validation error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "401": {
+            "description": "Unauthorized error response, returned when JWT authentication is required and the request fails authentication.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "404": {
+            "description": "Not found error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "429": {
+            "description": "Not found error response",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry-After seconds value to help with polling"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "503": {
+            "description": "Service unavailable error response",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry the same request after a suggested number of seconds"
+              },
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "Transaction ID associated with the failed request, when available"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListScittKeys": {
+            "$ref": "./examples/ListScittKeys.json"
+          }
+        }
+      }
+    },
+    "/.well-known/scitt-keys/{kid}": {
+      "get": {
+        "operationId": "GetScittKey",
+        "description": "Get a single service key by kid, per Section 2.2 of draft-ietf-scitt-scrapi-09",
+        "produces": [
+          "application/cbor",
+          "application/concise-problem-details+cbor"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/KidParameter"
+          },
+          {
+            "$ref": "#/parameters/AcceptCborHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response containing a single COSE_Key (map, not array) in CBOR format",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "400": {
+            "description": "Validation error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "401": {
+            "description": "Unauthorized error response, returned when JWT authentication is required and the request fails authentication.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "404": {
+            "description": "Not found error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "429": {
+            "description": "Not found error response",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry-After seconds value to help with polling"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "503": {
+            "description": "Service unavailable error response",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry the same request after a suggested number of seconds"
+              },
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "Transaction ID associated with the failed request, when available"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetScittKey": {
+            "$ref": "./examples/GetScittKey.json"
+          }
+        }
+      }
+    },
+    "/.well-known/transparency-configuration": {
+      "get": {
+        "operationId": "GetTransparencyConfigCbor",
+        "description": "Get the transparency service configuration, mandatory in IETF SCITT draft",
+        "produces": [
+          "application/cbor",
+          "application/concise-problem-details+cbor"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AcceptCborHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transparency configuration, see IETF SCITT draft.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "500": {
+            "description": "Server error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "503": {
+            "description": "Service unavailable error response",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry the same request after a suggested number of seconds"
+              },
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "Transaction ID associated with the failed request, when available"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetTransparencyConfigCbor": {
+            "$ref": "./examples/GetTransparencyConfigCbor.json"
+          }
+        }
+      }
+    },
+    "/entries": {
+      "post": {
+        "operationId": "CreateEntry",
+        "description": "Post an entry to be registered on the CodeTransparency instance, mandatory in IETF SCITT draft",
+        "produces": [
+          "application/scitt-receipt+cose",
+          "application/concise-problem-details+cbor"
+        ],
+        "consumes": [
+          "application/cose"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/AcceptCoseOrCborHeader"
+          },
+          {
+            "$ref": "#/parameters/WaitForCommitParameter"
+          },
+          {
+            "$ref": "#/parameters/SignedStatement.body"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Response of entry submission if the response can be served immediately, mandatory in IETF SCITT draft",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the receipt"
+              },
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "Transaction ID for the committed entry, returned when waitForCommit=true"
+              }
+            }
+          },
+          "303": {
+            "description": "Response for async entry submission in SCRAPI v09, returns 303 See Other with empty body",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the entry to poll"
+              },
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "Transaction ID for the entry"
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "401": {
+            "description": "Unauthorized error response, returned when JWT authentication is required and the request fails authentication.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "404": {
+            "description": "Not found error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "429": {
+            "description": "Not found error response",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry-After seconds value to help with polling"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "503": {
+            "description": "Service unavailable error response",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry the same request after a suggested number of seconds"
+              },
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "Transaction ID associated with the failed request, when available"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateEntry": {
+            "$ref": "./examples/CreateEntry.json"
+          }
+        }
+      }
+    },
+    "/entries/{entryId}": {
+      "get": {
+        "operationId": "GetEntry",
+        "description": "Get receipt",
+        "produces": [
+          "application/scitt-receipt+cose",
+          "application/concise-problem-details+cbor"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/EntryIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AcceptScittReceiptHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A ledger receipt, see IETF SCITT draft",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the receipt"
+              }
+            }
+          },
+          "302": {
+            "description": "Pending response for entry query in SCRAPI v09, returns 302 Found",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the entry to poll"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry-After seconds value to help with polling"
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "401": {
+            "description": "Unauthorized error response, returned when JWT authentication is required and the request fails authentication.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "404": {
+            "description": "Not found error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "429": {
+            "description": "Not found error response",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry-After seconds value to help with polling"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "503": {
+            "description": "Service unavailable error response",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry the same request after a suggested number of seconds"
+              },
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "Transaction ID associated with the failed request, when available"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetEntry": {
+            "$ref": "./examples/GetEntry.json"
+          }
+        }
+      }
+    },
+    "/entries/{entryId}/statement": {
+      "get": {
+        "operationId": "GetEntryStatement",
+        "description": "Get the transparent statement consisting of the signed statement and the receipt embedded in the header",
+        "produces": [
+          "application/scitt-statement+cose",
+          "application/concise-problem-details+cbor"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/EntryIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AcceptScittStatementHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Transparent statement",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "400": {
+            "description": "Validation error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "401": {
+            "description": "Unauthorized error response, returned when JWT authentication is required and the request fails authentication.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "404": {
+            "description": "Not found error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "429": {
+            "description": "Not found error response",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry-After seconds value to help with polling"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "503": {
+            "description": "Service unavailable error response",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry the same request after a suggested number of seconds"
+              },
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "Transaction ID associated with the failed request, when available"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetEntryStatement": {
+            "$ref": "./examples/GetEntryStatement.json"
+          }
+        }
+      }
+    },
+    "/jwks": {
+      "get": {
+        "operationId": "GetPublicKeys",
+        "description": "Get the public keys used by the service to sign receipts, mentioned in IETF SCITT draft as part of jwks_uri implementation",
+        "produces": [
+          "application/json",
+          "application/concise-problem-details+cbor"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Response containing the service public keys used to verify receipts.",
+            "schema": {
+              "$ref": "#/definitions/JsonWebKeySet"
+            }
+          },
+          "400": {
+            "description": "Validation error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "404": {
+            "description": "Not found error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "429": {
+            "description": "Not found error response",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry-After seconds value to help with polling"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "503": {
+            "description": "Service unavailable error response",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry the same request after a suggested number of seconds"
+              },
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "Transaction ID associated with the failed request, when available"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetPublicKeys": {
+            "$ref": "./examples/GetPublicKeys.json"
+          }
+        }
+      }
+    },
+    "/operations/{operationId}": {
+      "get": {
+        "operationId": "GetOperation",
+        "description": "Get status of the long running registration operation. Deprecated in SCRAPI v09 but retained unchanged for backward compatibility; clients should poll /entries/{entryId} directly.",
+        "produces": [
+          "application/cbor",
+          "application/concise-problem-details+cbor"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/OperationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/AcceptCborHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Provides status details for long running operation, mandatory in IETF SCITT draft",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the entry"
+              }
+            }
+          },
+          "202": {
+            "description": "Pending response if the operation was not complete, mandatory in IETF SCITT draft",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location of the operation"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry-After seconds value to help with polling"
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "401": {
+            "description": "Unauthorized error response, returned when JWT authentication is required and the request fails authentication.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "404": {
+            "description": "Not found error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "429": {
+            "description": "Not found error response",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry-After seconds value to help with polling"
+              }
+            }
+          },
+          "500": {
+            "description": "Server error response",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "503": {
+            "description": "Service unavailable error response",
+            "schema": {
+              "type": "file"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "Retry the same request after a suggested number of seconds"
+              },
+              "x-ms-ccf-transaction-id": {
+                "type": "string",
+                "description": "Transaction ID associated with the failed request, when available"
+              }
+            }
+          }
+        },
+        "deprecated": true,
+        "x-ms-examples": {
+          "GetOperation": {
+            "$ref": "./examples/GetOperation.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AcceptCoseHeader": {
+      "type": "object",
+      "description": "Accept application/cose header"
+    },
+    "CreateEntryCreated": {
+      "type": "object",
+      "description": "Response of entry submission if the response can be served immediately, mandatory in IETF SCITT draft",
+      "properties": {
+        "body": {
+          "type": "string",
+          "format": "byte",
+          "description": "Receipt body in COSE format"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "CreateEntrySeeOther": {
+      "type": "object",
+      "description": "Response for async entry submission in SCRAPI v09, returns 303 See Other with empty body"
+    },
+    "GetPublicKeysResponse": {
+      "type": "object",
+      "description": "Response containing the service public keys used to verify receipts.",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/JsonWebKeySet",
+          "description": "The JSON Web Key Set response body."
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "JsonWebKeySet": {
+      "type": "object",
+      "description": "A JSON Web Key Set containing service receipt-verification keys.",
+      "properties": {
+        "keys": {
+          "type": "array",
+          "description": "The service public keys used to verify receipts.",
+          "items": {
+            "$ref": "#/definitions/PublicJsonWebKey"
+          }
+        }
+      },
+      "required": [
+        "keys"
+      ]
+    },
+    "OperationStatusComplete": {
+      "type": "object",
+      "description": "Provides status details for long running operation, mandatory in IETF SCITT draft",
+      "properties": {
+        "body": {
+          "type": "string",
+          "format": "byte",
+          "description": "Operation status response"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "OperationStatusPending": {
+      "type": "object",
+      "description": "Pending response if the operation was not complete, mandatory in IETF SCITT draft"
+    },
+    "PublicJsonWebKey": {
+      "type": "object",
+      "description": "A public asymmetric key represented as an RFC 7517 JSON Web Key.",
+      "properties": {
+        "kty": {
+          "type": "string",
+          "description": "The asymmetric key type, such as EC, RSA, or OKP.",
+          "x-ms-client-name": "keyType"
+        },
+        "kid": {
+          "type": "string",
+          "description": "The case-sensitive key ID.",
+          "x-ms-client-name": "keyId"
+        },
+        "alg": {
+          "type": "string",
+          "description": "The algorithm intended for use with the key.",
+          "x-ms-client-name": "algorithm"
+        },
+        "use": {
+          "type": "string",
+          "description": "The intended public-key use, such as signature verification.",
+          "x-ms-client-name": "publicKeyUse"
+        },
+        "crv": {
+          "type": "string",
+          "description": "The named curve for EC or OKP keys.",
+          "x-ms-client-name": "curveName"
+        },
+        "x": {
+          "type": "string",
+          "description": "The base64url-encoded X coordinate for EC keys, or public key for OKP keys.",
+          "x-ms-client-name": "xCoordinate"
+        },
+        "y": {
+          "type": "string",
+          "description": "The base64url-encoded Y coordinate for EC keys.",
+          "x-ms-client-name": "yCoordinate"
+        },
+        "n": {
+          "type": "string",
+          "description": "The base64url-encoded modulus for RSA keys.",
+          "x-ms-client-name": "modulus"
+        },
+        "e": {
+          "type": "string",
+          "description": "The base64url-encoded exponent for RSA keys.",
+          "x-ms-client-name": "exponent"
+        },
+        "x5c": {
+          "type": "array",
+          "description": "The base64-encoded X.509 certificate chain.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "certificateChain"
+        }
+      },
+      "required": [
+        "kty",
+        "kid"
+      ]
+    },
+    "ReceiptEntry": {
+      "type": "object",
+      "description": "A ledger receipt, see IETF SCITT draft",
+      "properties": {
+        "body": {
+          "type": "string",
+          "format": "byte",
+          "description": "A receipt structure in COSE format"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "ReceiptEntryPending": {
+      "type": "object",
+      "description": "Pending response for entry query in SCRAPI v09, returns 302 Found"
+    },
+    "Response400Cbor": {
+      "type": "object",
+      "description": "Validation error response",
+      "properties": {
+        "error": {
+          "type": "string",
+          "format": "byte",
+          "description": "CBOR content of the error object"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Response401Cbor": {
+      "type": "object",
+      "description": "Unauthorized error response, returned when JWT authentication is required and the request fails authentication.",
+      "properties": {
+        "error": {
+          "type": "string",
+          "format": "byte",
+          "description": "CBOR content of the error object"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Response404Cbor": {
+      "type": "object",
+      "description": "Not found error response",
+      "properties": {
+        "error": {
+          "type": "string",
+          "format": "byte",
+          "description": "CBOR content of the error object"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Response429Cbor": {
+      "type": "object",
+      "description": "Not found error response",
+      "properties": {
+        "error": {
+          "type": "string",
+          "format": "byte",
+          "description": "CBOR content of the error object"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Response500Cbor": {
+      "type": "object",
+      "description": "Server error response",
+      "properties": {
+        "error": {
+          "type": "string",
+          "format": "byte",
+          "description": "CBOR content of the error object"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Response503Cbor": {
+      "type": "object",
+      "description": "Service unavailable error response",
+      "properties": {
+        "error": {
+          "type": "string",
+          "format": "byte",
+          "description": "CBOR content of the error object"
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "ScittKeyResponse": {
+      "type": "object",
+      "description": "Response containing a single COSE_Key (map, not array) in CBOR format",
+      "properties": {
+        "body": {
+          "type": "string",
+          "format": "byte",
+          "description": "Single COSE_Key as CBOR map"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "ScittKeysResponse": {
+      "type": "object",
+      "description": "Response containing COSE_Key_Set (array of COSE_Key maps) in CBOR format",
+      "properties": {
+        "body": {
+          "type": "string",
+          "format": "byte",
+          "description": "COSE_Key_Set as CBOR array of COSE_Key maps"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "TransparencyConfigurationCbor": {
+      "type": "object",
+      "description": "Transparency configuration, see IETF SCITT draft.",
+      "properties": {
+        "body": {
+          "type": "string",
+          "format": "byte",
+          "description": "CBOR content of the configuration object"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    },
+    "TransparentStatement": {
+      "type": "object",
+      "description": "Transparent statement",
+      "properties": {
+        "body": {
+          "type": "string",
+          "format": "byte",
+          "description": "CoseSign1 signature envelope with the receipt embedded in the unprotected header"
+        }
+      },
+      "required": [
+        "body"
+      ]
+    }
+  },
+  "parameters": {
+    "AcceptCborHeader": {
+      "name": "accept",
+      "in": "header",
+      "description": "Accept header",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "application/cbor"
+      ],
+      "x-ms-enum": {
+        "modelAsString": false
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "AcceptCoseOrCborHeader": {
+      "name": "accept",
+      "in": "header",
+      "description": "Accept header",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "application/cose; application/cbor"
+      ],
+      "x-ms-enum": {
+        "modelAsString": false
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "AcceptScittReceiptHeader": {
+      "name": "accept",
+      "in": "header",
+      "description": "Accept header",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "application/scitt-receipt+cose"
+      ],
+      "x-ms-enum": {
+        "modelAsString": false
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "AcceptScittStatementHeader": {
+      "name": "accept",
+      "in": "header",
+      "description": "Accept header",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "application/scitt-statement+cose"
+      ],
+      "x-ms-enum": {
+        "modelAsString": false
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "EntryIdParameter": {
+      "name": "entryId",
+      "in": "path",
+      "description": "ID of the entry to retrieve.",
+      "required": true,
+      "type": "string",
+      "maxLength": 100,
+      "x-ms-parameter-location": "method"
+    },
+    "KidParameter": {
+      "name": "kid",
+      "in": "path",
+      "description": "Key ID (kid) of the SCITT key to retrieve.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "OperationIdParameter": {
+      "name": "operationId",
+      "in": "path",
+      "description": "ID of the operation to retrieve.",
+      "required": true,
+      "type": "string",
+      "maxLength": 100,
+      "x-ms-parameter-location": "method"
+    },
+    "SignedStatement.body": {
+      "name": "body",
+      "in": "body",
+      "description": "CoseSign1 signature envelope",
+      "required": true,
+      "schema": {
+        "type": "string",
+        "format": "binary"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "WaitForCommitParameter": {
+      "name": "waitForCommit",
+      "in": "query",
+      "description": "If true, waits for the entry to be committed before returning. Returns 201 with receipt or 503 on rollback.",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

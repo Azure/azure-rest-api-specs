@@ -42,7 +42,8 @@ interface CertificateOps
         @segment("certificates")
         @key
         name: string,
-      }
+      },
+      ResourceName = "AppCertificate"
     > {}
 
 @armResourceOperations
@@ -138,7 +139,8 @@ interface SiteCertificateOps
         @key
         @pattern("^[A-z][A-z0-9]*$")
         certificateName: string,
-      }
+      },
+      ResourceName = "SiteCertificate"
     > {}
 
 @armResourceOperations
@@ -220,10 +222,12 @@ interface CertificateOperationGroupOps
         @key
         @pattern("^[A-z][A-z0-9]*$")
         certificateName: string,
-      }
+      },
+      ResourceName = "SiteSlotCertificate"
     > {}
 
-@armResourceOperations
+@tag("SiteCertificates")
+@armResourceOperations(#{ omitTags: true })
 interface CertificateOperationGroup {
   /**
    * Get a certificate for a given site and deployment slot.
@@ -276,21 +280,27 @@ interface CertificateOperationGroup {
 
 @@doc(Certificate.name, "Name of the certificate.");
 @@doc(Certificate.properties, "Certificate resource specific properties");
-@@doc(Certificates.createOrUpdate::parameters.resource,
+@@doc(
+  Certificates.createOrUpdate::parameters.resource,
   "Details of certificate, if it exists already."
 );
-@@doc(Certificates.update::parameters.properties,
+@@doc(
+  Certificates.update::parameters.properties,
   "Details of certificate, if it exists already."
 );
-@@doc(SiteCertificates.createOrUpdate::parameters.resource,
+@@doc(
+  SiteCertificates.createOrUpdate::parameters.resource,
   "Details of certificate, if it exists already."
 );
-@@doc(SiteCertificates.update::parameters.properties,
+@@doc(
+  SiteCertificates.update::parameters.properties,
   "Details of certificate, if it exists already."
 );
-@@doc(CertificateOperationGroup.createOrUpdateSlot::parameters.resource,
+@@doc(
+  CertificateOperationGroup.createOrUpdateSlot::parameters.resource,
   "Details of certificate, if it exists already."
 );
-@@doc(CertificateOperationGroup.updateSlot::parameters.properties,
+@@doc(
+  CertificateOperationGroup.updateSlot::parameters.properties,
   "Details of certificate, if it exists already."
 );

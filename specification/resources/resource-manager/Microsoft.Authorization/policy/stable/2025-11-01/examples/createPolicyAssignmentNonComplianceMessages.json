@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "api-version": "2025-11-01",
+    "parameters": {
+      "properties": {
+        "displayName": "Enforce security policies",
+        "nonComplianceMessages": [
+          {
+            "message": "Resources must comply with all internal security policies. See <internal site URL> for more info."
+          },
+          {
+            "message": "Resource names must start with 'DeptA' and end with '-LC'.",
+            "policyDefinitionReferenceId": "10420126870854049575"
+          },
+          {
+            "message": "Storage accounts must have firewall rules configured.",
+            "policyDefinitionReferenceId": "8572513655450389710"
+          }
+        ],
+        "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policySetDefinitions/securityInitiative"
+      }
+    },
+    "policyAssignmentName": "securityInitAssignment",
+    "scope": "subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "securityInitAssignment",
+        "type": "Microsoft.Authorization/policyAssignments",
+        "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyAssignments/securityInitAssignment",
+        "properties": {
+          "definitionVersion": "1.*.*",
+          "displayName": "Enforce security policies",
+          "enforcementMode": "Default",
+          "instanceId": "b7e0f8a9-1c2d-4e3f-8b4c-5d6e7f8a9b0c",
+          "metadata": {
+            "assignedBy": "User 1"
+          },
+          "nonComplianceMessages": [
+            {
+              "message": "Resources must comply with all internal security policies. See <internal site URL> for more info."
+            },
+            {
+              "message": "Resource names must start with 'DeptA' and end with '-LC'.",
+              "policyDefinitionReferenceId": "10420126870854049575"
+            },
+            {
+              "message": "Storage accounts must have firewall rules configured.",
+              "policyDefinitionReferenceId": "8572513655450389710"
+            }
+          ],
+          "notScopes": [],
+          "policyDefinitionId": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policySetDefinitions/securityInitiative",
+          "scope": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "PolicyAssignments_Create",
+  "title": "Create or update a policy assignment with multiple non-compliance messages"
+}

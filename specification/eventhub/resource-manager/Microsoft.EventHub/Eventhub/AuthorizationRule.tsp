@@ -27,7 +27,7 @@ model AuthorizationRule
   /**
    * The geo-location where the resource lives
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This property is an existing envelope property from the original OpenAPI specification and cannot be changed without breaking compatibility."
   @visibility(Lifecycle.Read)
   location?: string;
 }
@@ -71,7 +71,7 @@ interface AuthorizationRules {
   /**
    * Creates or updates an AuthorizationRule for a Namespace.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Existing PUT operation response codes match the original OpenAPI specification. Changing would be a breaking change for existing clients."
   createOrUpdateAuthorizationRule is AuthorizationRuleOps.CreateOrUpdateSync<
     AuthorizationRule,
     Response = ArmResourceUpdatedResponse<AuthorizationRule>,
@@ -223,7 +223,7 @@ interface EventHubs {
   /**
    * Creates or updates an AuthorizationRule for the specified Event Hub. Creation/update of the AuthorizationRule will take a few seconds to take effect.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Existing PUT operation response codes match the original OpenAPI specification. Changing would be a breaking change for existing clients."
   createOrUpdateAuthorizationRule is EventHubOps.CreateOrUpdateSync<
     AuthorizationRule,
     Response = ArmResourceUpdatedResponse<AuthorizationRule>,
@@ -269,18 +269,23 @@ interface EventHubs {
 
 @@minLength(AuthorizationRule.name, 1);
 @@doc(AuthorizationRule.name, "The authorization rule name.");
-@@doc(AuthorizationRule.properties,
+@@doc(
+  AuthorizationRule.properties,
   "Properties supplied to create or update AuthorizationRule"
 );
-@@doc(AuthorizationRules.createOrUpdateAuthorizationRule::parameters.resource,
+@@doc(
+  AuthorizationRules.createOrUpdateAuthorizationRule::parameters.resource,
   "The shared access AuthorizationRule."
 );
-@@doc(AuthorizationRules.regenerateKeys::parameters.body,
+@@doc(
+  AuthorizationRules.regenerateKeys::parameters.body,
   "Parameters required to regenerate the connection string."
 );
-@@doc(EventHubs.createOrUpdateAuthorizationRule::parameters.resource,
+@@doc(
+  EventHubs.createOrUpdateAuthorizationRule::parameters.resource,
   "The shared access AuthorizationRule."
 );
-@@doc(EventHubs.regenerateKeys::parameters.body,
+@@doc(
+  EventHubs.regenerateKeys::parameters.body,
   "Parameters supplied to regenerate the AuthorizationRule Keys (PrimaryKey/SecondaryKey)."
 );

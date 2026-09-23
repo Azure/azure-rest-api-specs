@@ -1,0 +1,426 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-01-01",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "WorkloadGroups"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/workloadGroups": {
+      "get": {
+        "operationId": "WorkloadGroups_ListByDatabase",
+        "tags": [
+          "WorkloadGroups"
+        ],
+        "description": "Gets the list of workload groups",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkloadGroupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get the list of workload groups for a data warehouse": {
+            "$ref": "./examples/GetWorkloadGroupList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/workloadGroups/{workloadGroupName}": {
+      "get": {
+        "operationId": "WorkloadGroups_Get",
+        "tags": [
+          "WorkloadGroups"
+        ],
+        "description": "Gets a workload group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workloadGroupName",
+            "in": "path",
+            "description": "The name of the workload group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/WorkloadGroup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a workload group for a data warehouse": {
+            "$ref": "./examples/GetWorkloadGroup.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "WorkloadGroups_CreateOrUpdate",
+        "tags": [
+          "WorkloadGroups"
+        ],
+        "description": "Creates or updates a workload group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workloadGroupName",
+            "in": "path",
+            "description": "The name of the workload group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested workload group state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/WorkloadGroup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'WorkloadGroup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/WorkloadGroup"
+            }
+          },
+          "201": {
+            "description": "Resource 'WorkloadGroup' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/WorkloadGroup"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create a workload group with all properties specified.": {
+            "$ref": "./examples/CreateOrUpdateWorkloadGroupMax.json"
+          },
+          "Create a workload group with the required properties specified.": {
+            "$ref": "./examples/CreateOrUpdateWorkloadGroupMin.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/WorkloadGroup"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "WorkloadGroups_Delete",
+        "tags": [
+          "WorkloadGroups"
+        ],
+        "description": "Deletes a workload group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workloadGroupName",
+            "in": "path",
+            "description": "The name of the workload group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a workload group": {
+            "$ref": "./examples/DeleteWorkloadGroup.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "WorkloadGroup": {
+      "type": "object",
+      "description": "Workload group operations for a data warehouse",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/WorkloadGroupProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "WorkloadGroupListResult": {
+      "type": "object",
+      "description": "The response of a WorkloadGroup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The WorkloadGroup items on this page",
+          "items": {
+            "$ref": "#/definitions/WorkloadGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "WorkloadGroupProperties": {
+      "type": "object",
+      "description": "Workload group definition. For more information look at sys.workload_management_workload_groups (DMV).",
+      "properties": {
+        "minResourcePercent": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The workload group minimum percentage resource."
+        },
+        "maxResourcePercent": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The workload group cap percentage resource."
+        },
+        "minResourcePercentPerRequest": {
+          "type": "number",
+          "format": "double",
+          "description": "The workload group request minimum grant percentage."
+        },
+        "maxResourcePercentPerRequest": {
+          "type": "number",
+          "format": "double",
+          "description": "The workload group request maximum grant percentage."
+        },
+        "importance": {
+          "type": "string",
+          "description": "The workload group importance level."
+        },
+        "queryExecutionTimeout": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The workload group query execution timeout."
+        }
+      },
+      "required": [
+        "minResourcePercent",
+        "maxResourcePercent",
+        "minResourcePercentPerRequest"
+      ]
+    }
+  },
+  "parameters": {}
+}

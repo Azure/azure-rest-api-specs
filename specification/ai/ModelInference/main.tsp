@@ -8,14 +8,23 @@ using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-autorest/unsupported-http-auth-scheme"
 @useAuth(
-  ApiKeyAuth<ApiKeyLocation.header, "api-key"> | BearerAuth | OAuth2Auth<[
-    {
-      type: OAuth2FlowType.implicit,
-      authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-      scopes: ["https://cognitiveservices.azure.com/.default"],
-    }
-  ]>
+
+    | ApiKeyAuth<ApiKeyLocation.header, "api-key">
+    | BearerAuth
+    | OAuth2Auth<[
+        {
+          type: OAuth2FlowType.implicit,
+          authorizationUrl: "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+          scopes: ["https://cognitiveservices.azure.com/.default"],
+        }
+      ]>
 )
+@doc("""
+  **Deprecated**: The Azure AI Model Inference API is deprecated and will be retired in the future.
+  Migrate to the OpenAI API, which provides equivalent functionality with broader model support and
+  unified SDK access. For migration guidance, see
+  [How to migrate from Azure AI Inference SDK to OpenAI SDK](https://learn.microsoft.com/azure/foundry/how-to/model-inference-to-openai-migration).
+  """)
 @service(#{ title: "AI Model Inference" })
 @server(
   "https://{resource}.services.ai.azure.com/models",

@@ -1,0 +1,133 @@
+{
+  "parameters": {
+    "api-version": "2025-01-01-preview",
+    "parameters": {
+      "kind": "SimpleLogAlert",
+      "location": "eastus",
+      "properties": {
+        "description": "Performance rule",
+        "actions": {
+          "actionGroups": [
+            "/subscriptions/1cf177ed-1330-4692-80ea-fd3d7783b147/resourcegroups/sqrapi/providers/microsoft.insights/actiongroups/myactiongroup"
+          ],
+          "actionProperties": {
+            "Icm.Title": "Custom title in ICM",
+            "Icm.TsgId": "https://tsg.url"
+          },
+          "customProperties": {
+            "key11": "value11",
+            "key12": "value12"
+          }
+        },
+        "autoMitigate": false,
+        "checkWorkspaceAlertsStorageConfigured": true,
+        "criteria": {
+          "allOf": [
+            {
+              "query": "Perf | where ObjectName == \"Processor\""
+            }
+          ]
+        },
+        "enabled": true,
+        "scopes": [
+          "/subscriptions/aaf177ed-1330-a9f2-80ea-fd3d7783b147/resourceGroups/scopeResourceGroup1/providers/Microsoft.Compute/virtualMachines/vm1"
+        ],
+        "severity": 4,
+        "skipQueryValidation": true
+      }
+    },
+    "resourceGroupName": "QueryResourceGroupName",
+    "ruleName": "perf",
+    "subscriptionId": "dd4bfc94-a096-412b-9c43-4bd13e35afbc"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "perf",
+        "type": "microsoft.insights/scheduledqueryrules",
+        "id": "/subscriptions/dd4bfc94-a096-412b-9c43-4bd13e35afbc/resourcegroups/QueryResourceGroupName/providers/microsoft.insights/scheduledqueryrules/perf",
+        "kind": "SimpleLogAlert",
+        "location": "eastus",
+        "properties": {
+          "description": "Performance rule",
+          "actions": {
+            "actionGroups": [
+              "/subscriptions/1cf177ed-1330-4692-80ea-fd3d7783b147/resourcegroups/sqrapi/providers/microsoft.insights/actiongroups/myactiongroup"
+            ],
+            "actionProperties": {
+              "Icm.Title": "Custom title in ICM",
+              "Icm.TsgId": "https://tsg.url"
+            },
+            "customProperties": {
+              "key11": "value11",
+              "key12": "value12"
+            }
+          },
+          "autoMitigate": false,
+          "checkWorkspaceAlertsStorageConfigured": true,
+          "criteria": {
+            "allOf": [
+              {
+                "query": "Perf | where ObjectName == \"Processor\""
+              }
+            ]
+          },
+          "enabled": true,
+          "isWorkspaceAlertsStorageConfigured": true,
+          "scopes": [
+            "/subscriptions/aaf177ed-1330-a9f2-80ea-fd3d7783b147/resourceGroups/scopeResourceGroup1/providers/Microsoft.Compute/virtualMachines/vm1"
+          ],
+          "severity": 4,
+          "skipQueryValidation": true
+        },
+        "tags": {}
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "perf",
+        "type": "microsoft.insights/scheduledqueryrules",
+        "id": "/subscriptions/dd4bfc94-a096-412b-9c43-4bd13e35afbc/resourcegroups/QueryResourceGroupName/providers/microsoft.insights/scheduledqueryrules/perf",
+        "kind": "SimpleLogAlert",
+        "location": "eastus",
+        "properties": {
+          "description": "Performance rule",
+          "actions": {
+            "actionGroups": [
+              "/subscriptions/1cf177ed-1330-4692-80ea-fd3d7783b147/resourcegroups/sqrapi/providers/microsoft.insights/actiongroups/myactiongroup"
+            ],
+            "actionProperties": {
+              "Icm.Title": "Custom title in ICM",
+              "Icm.TsgId": "https://tsg.url"
+            },
+            "customProperties": {
+              "key11": "value11",
+              "key12": "value12"
+            }
+          },
+          "autoMitigate": false,
+          "checkWorkspaceAlertsStorageConfigured": true,
+          "criteria": {
+            "allOf": [
+              {
+                "query": "Perf | where ObjectName == \"Processor\""
+              }
+            ]
+          },
+          "enabled": true,
+          "isWorkspaceAlertsStorageConfigured": true,
+          "scopes": [
+            "/subscriptions/aaf177ed-1330-a9f2-80ea-fd3d7783b147/resourceGroups/scopeResourceGroup1/providers/Microsoft.Compute/virtualMachines/vm1"
+          ],
+          "severity": 4,
+          "skipQueryValidation": true
+        },
+        "tags": {}
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ScheduledQueryRules_CreateOrUpdate",
+  "title": "Create or update a simple log alert scheduled query rule on Subscription "
+}

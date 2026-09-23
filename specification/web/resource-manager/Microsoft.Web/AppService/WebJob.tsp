@@ -57,10 +57,12 @@ interface WebJobOps
         @segment("webjobs")
         @key
         webJobName: string,
-      }
+      },
+      ResourceName = "WebSiteSlotWebJob"
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface WebJobs {
   /**
    * Description for Get webjob information for an app, or a deployment slot.
@@ -102,10 +104,12 @@ interface WebJobOperationGroupOps
         @segment("webjobs")
         @key
         webJobName: string,
-      }
+      },
+      ResourceName = "WebSiteWebJob"
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface WebJobOperationGroup {
   /**
    * Description for Get webjob information for an app, or a deployment slot.

@@ -22,8 +22,8 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 These are the global settings.
 
 ``` yaml
-title: ResourceValidationClient
-description: Resource Validation Client
+title: ResourceValidator
+description: Resource Validator
 openapi-type: arm
 tag: package-2022-06
 ```

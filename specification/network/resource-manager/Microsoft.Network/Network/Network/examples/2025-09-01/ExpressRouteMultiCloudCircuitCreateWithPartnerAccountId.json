@@ -1,0 +1,94 @@
+{
+  "parameters": {
+    "circuitName": "circuitName",
+    "resourceGroupName": "rg1",
+    "api-version": "2025-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "parameters": {
+      "properties": {
+        "serviceProviderProperties": {
+          "serviceProviderName": "AWS",
+          "peeringLocation": "uswest2",
+          "bandwidthInMbps": 200
+        },
+        "partnerAccountId": "123456789"
+      },
+      "sku": {
+        "name": "MultiCloud_MeteredData",
+        "tier": "MultiCloud",
+        "family": "MeteredData"
+      },
+      "location": "eastus2euap"
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "circuitName",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName",
+        "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+        "type": "Microsoft.Network/expressRouteCircuits",
+        "location": "eastus2euap",
+        "properties": {
+          "provisioningState": "Updating",
+          "peerings": [],
+          "authorizations": [],
+          "serviceProviderProperties": {
+            "serviceProviderName": "AWS",
+            "peeringLocation": "uswest2",
+            "bandwidthInMbps": 200
+          },
+          "circuitProvisioningState": "Enabled",
+          "allowClassicOperations": false,
+          "gatewayManagerEtag": "",
+          "serviceKey": "00000000-0000-0000-0000-000000000000",
+          "serviceProviderProvisioningState": "NotProvisioned",
+          "globalReachEnabled": false,
+          "enableDirectPortRateLimit": false,
+          "partnerAccountId": "123456789",
+          "resiliencyLevel": "Maximum"
+        },
+        "sku": {
+          "name": "MultiCloud_MeteredData",
+          "tier": "MultiCloud",
+          "family": "MeteredData"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "name": "circuitName",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/expressRouteCircuits/circuitName",
+        "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+        "type": "Microsoft.Network/expressRouteCircuits",
+        "location": "eastus2euap",
+        "properties": {
+          "provisioningState": "Updating",
+          "peerings": [],
+          "authorizations": [],
+          "serviceProviderProperties": {
+            "serviceProviderName": "AWS",
+            "peeringLocation": "uswest2",
+            "bandwidthInMbps": 200
+          },
+          "circuitProvisioningState": "Enabled",
+          "allowClassicOperations": false,
+          "gatewayManagerEtag": "",
+          "serviceKey": "00000000-0000-0000-0000-000000000000",
+          "serviceProviderProvisioningState": "NotProvisioned",
+          "globalReachEnabled": false,
+          "enableDirectPortRateLimit": false,
+          "partnerAccountId": "123456789",
+          "resiliencyLevel": "Maximum"
+        },
+        "sku": {
+          "name": "MultiCloud_MeteredData",
+          "tier": "MultiCloud",
+          "family": "MeteredData"
+        }
+      }
+    }
+  },
+  "operationId": "ExpressRouteCircuits_CreateOrUpdate",
+  "title": "Create MultiCloud ExpressRouteCircuit with PartnerAccountId"
+}

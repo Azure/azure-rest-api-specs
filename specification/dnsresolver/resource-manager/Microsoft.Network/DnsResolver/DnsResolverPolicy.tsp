@@ -117,9 +117,11 @@ interface DnsResolverPolicies {
 @@minLength(DnsResolverPolicy.name, 1);
 @@doc(DnsResolverPolicy.name, "The name of the DNS resolver policy.");
 @@doc(DnsResolverPolicy.properties, "Properties of the DNS resolver policy.");
-@@doc(DnsResolverPolicies.createOrUpdate::parameters.resource,
+@@doc(
+  DnsResolverPolicies.createOrUpdate::parameters.resource,
   "Parameters supplied to the CreateOrUpdate operation."
 );
-@@doc(DnsResolverPolicies.update::parameters.properties,
+@@doc(
+  DnsResolverPolicies.update::parameters.properties,
   "Parameters supplied to the Update operation."
 );

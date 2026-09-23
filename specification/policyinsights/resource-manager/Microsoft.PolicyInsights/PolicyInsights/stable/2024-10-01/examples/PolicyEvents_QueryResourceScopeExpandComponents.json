@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "$expand": "components",
+    "$filter": "policyAssignmentId eq '/subscriptions/e78961ba-36fe-4739-9212-e3031b4c8db7/providers/microsoft.authorization/policyassignments/560050f83dbb4a24974323f8'",
+    "api-version": "2024-10-01",
+    "policyEventsResource": "default",
+    "resourceId": "subscriptions/e78961ba-36fe-4739-9212-e3031b4c8db7/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/Vaults/myKVName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@odata.context": "https://management.azure.com/subscriptions/e78961ba-36fe-4739-9212-e3031b4c8db7/resourcegroups/myResourceGroup/providers/microsoft.keyvault/vaults/myKVName/providers/Microsoft.PolicyInsights/policyEvents/$metadata#default",
+        "@odata.count": 1,
+        "value": [
+          {
+            "@odata.context": "https://management.azure.com/subscriptions/e78961ba-36fe-4739-9212-e3031b4c8db7/resourcegroups/myResourceGroup/providers/microsoft.keyvault/vaults/myKVName/providers/Microsoft.PolicyInsights/policyEvents/$metadata#default/$entity",
+            "@odata.id": null,
+            "complianceState": "NonCompliant",
+            "components": [
+              {
+                "name": "cert-RSA-cert-3",
+                "type": "Certificate",
+                "id": "cert-RSA-cert-3",
+                "policyDefinitionAction": "audit",
+                "principalOid": "0d81b461-6bb0-4909-a102-d51803a7d275",
+                "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+                "timestamp": "2020-02-21T17:45:23.0367Z"
+              },
+              {
+                "name": "cert-RSA-cert-2",
+                "type": "Certificate",
+                "id": "cert-RSA-cert-2",
+                "policyDefinitionAction": "audit",
+                "principalOid": "0d81b461-6bb0-4909-a102-d51803a7d275",
+                "tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+                "timestamp": "2020-02-21T17:45:22.7682778Z"
+              }
+            ],
+            "effectiveParameters": "",
+            "isCompliant": false,
+            "managementGroupIds": "PolicyUIMG,AzGovTest5,72f988bf-86f1-41af-91ab-2d7cd011db47",
+            "policyAssignmentId": "/subscriptions/e78961ba-36fe-4739-9212-e3031b4c8db7/providers/microsoft.authorization/policyassignments/560050f83dbb4a24974323f8",
+            "policyAssignmentName": "560050f83dbb4a24974323f8",
+            "policyAssignmentOwner": "tbd",
+            "policyAssignmentParameters": "",
+            "policyAssignmentScope": "/subscriptions/e78961ba-36fe-4739-9212-e3031b4c8db7",
+            "policyDefinitionAction": "audit",
+            "policyDefinitionCategory": "tbd",
+            "policyDefinitionId": "/subscriptions/e78961ba-36fe-4739-9212-e3031b4c8db7/providers/microsoft.authorization/policydefinitions/ab108bc4-32df-4677-8b38-fa8b2905df59",
+            "policyDefinitionName": "ab108bc4-32df-4677-8b38-fa8b2905df59",
+            "policyDefinitionReferenceId": "",
+            "policySetDefinitionCategory": "",
+            "policySetDefinitionId": "",
+            "policySetDefinitionName": "",
+            "policySetDefinitionOwner": "",
+            "policySetDefinitionParameters": "",
+            "principalOid": "",
+            "resourceGroup": "myResourceGroup",
+            "resourceId": "/subscriptions/e78961ba-36fe-4739-9212-e3031b4c8db7/resourcegroups/myResourceGroup/providers/microsoft.keyvault/vaults/myKVName",
+            "resourceLocation": "westcentralus",
+            "resourceTags": "tbd",
+            "resourceType": "Microsoft.KeyVault/vaults",
+            "subscriptionId": "e78961ba-36fe-4739-9212-e3031b4c8db7",
+            "tenantId": "",
+            "timestamp": "2020-02-21T19:42:08.3252921Z"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PolicyEvents_ListQueryResultsForResource",
+  "title": "Query components policy events for resource scope filtered by given assignment."
+}

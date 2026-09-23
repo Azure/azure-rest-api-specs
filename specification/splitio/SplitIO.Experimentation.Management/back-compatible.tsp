@@ -2,10 +2,12 @@
 using SplitIO.Experimentation;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ExperimentationWorkspace.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  ExperimentationWorkspace.properties,
   "autorest"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Back compatibility"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Azure.ResourceManager.Foundations.ResourceUpdateModel.properties,
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  Azure.ResourceManager.Foundations.ResourceUpdateModel.properties,
   "autorest"
 );

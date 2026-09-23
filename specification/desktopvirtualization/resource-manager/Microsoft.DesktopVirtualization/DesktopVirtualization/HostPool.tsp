@@ -1,19 +1,23 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 
 namespace Microsoft.DesktopVirtualization;
 /**
  * Represents a HostPool definition.
  */
-model HostPool
-  is Azure.ResourceManager.TrackedResource<HostPoolProperties, false> {
+model HostPool is Azure.ResourceManager.TrackedResource<
+  HostPoolProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = HostPool,
     KeyName = "hostPoolName",
@@ -33,17 +37,12 @@ interface AppAttachPackageInfo {
   /**
    * Gets information from a package given the path to the package.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Backwards compatibility with existing clients."
   @action("importAppAttachPackageInfo")
   @list
   `import` is ArmResourceActionSync<
     HostPool,
-    Request = {
-      /**
-       * Information to import app attach package
-       */
-      @bodyRoot importPackageInfoRequest: ImportPackageInfoRequest;
-    },
+    Request = ImportPackageInfoRequest,
     Response = AppAttachPackageList
   >;
 }
@@ -55,17 +54,12 @@ interface MSIXImages {
    * Expands and Lists MSIX packages in an Image, given the Image Path.
    * This action uses incorrect Msix casing intentionally to match the previous APIs.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Backwards compatibility with existing clients."
   @action("expandMsixImage")
   @list
   expand is ArmResourceActionSync<
     HostPool,
-    Request = {
-      /**
-       * Represents URI referring to MSIX Image
-       */
-      @bodyRoot msixImageURI: MSIXImageURI;
-    },
+    Request = MSIXImageURI,
     Response = ExpandMsixImageList
   >;
 }
@@ -150,16 +144,7 @@ interface HostPools {
    * Update a host pool.
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
-    HostPool,
-    HostPoolPatch,
-    Request = {
-      /**
-       * The properties to be updated.
-       */
-      @bodyRoot hostPool?: HostPoolPatch;
-    }
-  >;
+  update is ArmCustomPatchSyncWithOptionalBody<HostPool, HostPoolPatch>;
 
   /**
    * Remove a host pool.
@@ -250,10 +235,14 @@ interface HostPools {
 
 @@maxLength(HostPool.name, 64);
 @@minLength(HostPool.name, 3);
-@@doc(HostPool.name,
+@@doc(
+  HostPool.name,
   "The name of the host pool within the specified resource group"
 );
 @@doc(HostPool.properties, "Detailed properties for HostPool");
-@@doc(HostPools.createOrUpdate::parameters.resource,
+@@doc(
+  HostPools.createOrUpdate::parameters.resource,
   "Object containing HostPool definitions."
 );
+@@clientName(HostPools.update::parameters.body, "hostPool");
+@@doc(HostPools.update::parameters.body, "The properties to be updated.");

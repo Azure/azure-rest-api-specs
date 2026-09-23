@@ -68,11 +68,13 @@ interface DocumentIntelligenceAdministrationClient {
   deleteClassifier is DocumentClassifiers.deleteClassifier;
 }
 
-@@clientName(AuthorizeClassifierCopyRequest,
+@@clientName(
+  AuthorizeClassifierCopyRequest,
   "AuthorizeClassifierCopyOptions",
   "java"
 );
-@@clientName(BuildDocumentClassifierRequest,
+@@clientName(
+  BuildDocumentClassifierRequest,
   "BuildDocumentClassifierOptions",
   "java"
 );
@@ -81,11 +83,13 @@ interface DocumentIntelligenceAdministrationClient {
 @@clientName(BuildDocumentModelRequest, "BuildDocumentModelOptions", "java");
 @@clientName(ClassifyDocumentRequest, "ClassifyDocumentOptions", "java");
 @@clientName(AnalyzeDocumentRequest, "AnalyzeDocumentOptions", "java");
-@@clientName(AnalyzeBatchDocumentsRequest,
+@@clientName(
+  AnalyzeBatchDocumentsRequest,
   "AnalyzeBatchDocumentsOptions",
   "java"
 );
-@@clientName(ComposeDocumentModelRequest,
+@@clientName(
+  ComposeDocumentModelRequest,
   "ComposeDocumentModelOptions",
   "java"
 );
@@ -103,15 +107,18 @@ interface DocumentIntelligenceAdministrationClient {
 @@clientName(DocumentClassifierDetails.docTypes, "documentTypes", "java");
 @@clientName(DocumentClassifierDetails.expirationDateTime, "expiresOn", "java");
 @@clientName(DocumentClassifierDetails.modifiedDateTime, "modifiedOn", "java");
-@@clientName(DocumentIntelligenceOperationDetails.createdDateTime,
+@@clientName(
+  DocumentIntelligenceOperationDetails.createdDateTime,
   "createdOn",
   "java"
 );
-@@clientName(DocumentIntelligenceOperationDetails.lastUpdatedDateTime,
+@@clientName(
+  DocumentIntelligenceOperationDetails.lastUpdatedDateTime,
   "lastUpdatedOn",
   "java"
 );
-@@clientName(ClassifierCopyAuthorization.expirationDateTime,
+@@clientName(
+  ClassifierCopyAuthorization.expirationDateTime,
   "expiresOn",
   "java"
 );
@@ -120,7 +127,8 @@ interface DocumentIntelligenceAdministrationClient {
 @@clientName(AnalyzeOperation.createdDateTime, "createdOn", "java");
 @@clientName(AnalyzeOperation.lastUpdatedDateTime, "lastUpdatedOn", "java");
 @@clientName(AnalyzeBatchOperation.createdDateTime, "createdOn", "java");
-@@clientName(AnalyzeBatchOperation.lastUpdatedDateTime,
+@@clientName(
+  AnalyzeBatchOperation.lastUpdatedDateTime,
   "lastUpdatedOn",
   "java"
 );
@@ -137,29 +145,35 @@ interface DocumentIntelligenceAdministrationClient {
 @@clientName(AnalyzeOperation, "AnalyzeOperationDetails", "java");
 @@clientName(AnalyzeBatchOperationDetail, "AnalyzeBatchResultDetails", "java");
 
-@@clientName(AnalyzeBatchDocumentsRequest,
+@@clientName(
+  AnalyzeBatchDocumentsRequest,
   "AnalyzeBatchDocumentsOptions",
   "csharp"
 );
-@@clientName(AnalyzeBatchDocumentsRequest.azureBlobSource,
+@@clientName(
+  AnalyzeBatchDocumentsRequest.azureBlobSource,
   "BlobSource",
   "csharp"
 );
-@@clientName(AnalyzeBatchDocumentsRequest.azureBlobFileListSource,
+@@clientName(
+  AnalyzeBatchDocumentsRequest.azureBlobFileListSource,
   "BlobFileListSource",
   "csharp"
 );
-@@clientName(AnalyzeBatchDocumentsRequest.resultContainerUrl,
+@@clientName(
+  AnalyzeBatchDocumentsRequest.resultContainerUrl,
   "ResultContainerUri",
   "csharp"
 );
 @@clientName(AnalyzeBatchOperation, "AnalyzeBatchOperationDetails", "csharp");
 @@clientName(AnalyzeBatchOperation.createdDateTime, "CreatedOn", "csharp");
-@@clientName(AnalyzeBatchOperation.lastUpdatedDateTime,
+@@clientName(
+  AnalyzeBatchOperation.lastUpdatedDateTime,
   "LastUpdatedOn",
   "csharp"
 );
-@@clientName(AnalyzeBatchOperationDetail,
+@@clientName(
+  AnalyzeBatchOperationDetail,
   "AnalyzeBatchResultDetails",
   "csharp"
 );
@@ -169,44 +183,53 @@ interface DocumentIntelligenceAdministrationClient {
 @@clientName(AnalyzeDocumentRequest, "AnalyzeDocumentOptions", "csharp");
 @@clientName(AnalyzeDocumentRequest.base64Source, "BytesSource", "csharp");
 @@clientName(AnalyzeDocumentRequest.urlSource, "UriSource", "csharp");
-@@clientName(AuthorizeClassifierCopyRequest,
+@@clientName(
+  AuthorizeClassifierCopyRequest,
   "AuthorizeClassifierCopyOptions",
   "csharp"
 );
 @@clientName(AuthorizeCopyRequest, "AuthorizeModelCopyOptions", "csharp");
 @@clientName(AzureBlobContentSource, "BlobContentSource", "csharp");
 @@clientName(AzureBlobContentSource.containerUrl, "ContainerUri", "csharp");
-@@clientName(AzureBlobFileListContentSource,
+@@clientName(
+  AzureBlobFileListContentSource,
   "BlobFileListContentSource",
   "csharp"
 );
-@@clientName(AzureBlobFileListContentSource.containerUrl,
+@@clientName(
+  AzureBlobFileListContentSource.containerUrl,
   "ContainerUri",
   "csharp"
 );
-@@clientName(BuildDocumentClassifierRequest,
+@@clientName(
+  BuildDocumentClassifierRequest,
   "BuildClassifierOptions",
   "csharp"
 );
-@@clientName(BuildDocumentClassifierRequest.docTypes,
+@@clientName(
+  BuildDocumentClassifierRequest.docTypes,
   "DocumentTypes",
   "csharp"
 );
 @@clientName(BuildDocumentModelRequest, "BuildDocumentModelOptions", "csharp");
 @@clientName(BuildDocumentModelRequest.azureBlobSource, "BlobSource", "csharp");
-@@clientName(BuildDocumentModelRequest.azureBlobFileListSource,
+@@clientName(
+  BuildDocumentModelRequest.azureBlobFileListSource,
   "BlobFileListSource",
   "csharp"
 );
-@@clientName(ClassifierCopyAuthorization.expirationDateTime,
+@@clientName(
+  ClassifierCopyAuthorization.expirationDateTime,
   "ExpiresOn",
   "csharp"
 );
-@@clientName(ClassifierDocumentTypeDetails.azureBlobSource,
+@@clientName(
+  ClassifierDocumentTypeDetails.azureBlobSource,
   "BlobSource",
   "csharp"
 );
-@@clientName(ClassifierDocumentTypeDetails.azureBlobFileListSource,
+@@clientName(
+  ClassifierDocumentTypeDetails.azureBlobFileListSource,
   "BlobFileListSource",
   "csharp"
 );
@@ -230,11 +253,13 @@ interface DocumentIntelligenceAdministrationClient {
 @@clientName(DocumentBarcodeKind.UPCE, "Upce", "csharp");
 @@clientName(DocumentClassifierDetails.createdDateTime, "CreatedOn", "csharp");
 @@clientName(DocumentClassifierDetails.docTypes, "DocumentTypes", "csharp");
-@@clientName(DocumentClassifierDetails.expirationDateTime,
+@@clientName(
+  DocumentClassifierDetails.expirationDateTime,
   "ExpiresOn",
   "csharp"
 );
-@@clientName(DocumentClassifierDetails.modifiedDateTime,
+@@clientName(
+  DocumentClassifierDetails.modifiedDateTime,
   "ModifiedOn",
   "csharp"
 );
@@ -249,16 +274,19 @@ interface DocumentIntelligenceAdministrationClient {
 @@clientName(DocumentFieldType.object, "Dictionary", "csharp");
 @@clientName(DocumentIntelligenceError.innererror, "InnerError", "csharp");
 @@clientName(DocumentIntelligenceInnerError.innererror, "InnerError", "csharp");
-@@clientName(DocumentIntelligenceOperationDetails.createdDateTime,
+@@clientName(
+  DocumentIntelligenceOperationDetails.createdDateTime,
   "CreatedOn",
   "csharp"
 );
-@@clientName(DocumentIntelligenceOperationDetails.lastUpdatedDateTime,
+@@clientName(
+  DocumentIntelligenceOperationDetails.lastUpdatedDateTime,
   "LastUpdatedOn",
   "csharp"
 );
 @@clientName(DocumentModelDetails.azureBlobSource, "BlobSource", "csharp");
-@@clientName(DocumentModelDetails.azureBlobFileListSource,
+@@clientName(
+  DocumentModelDetails.azureBlobFileListSource,
   "BlobFileListSource",
   "csharp"
 );

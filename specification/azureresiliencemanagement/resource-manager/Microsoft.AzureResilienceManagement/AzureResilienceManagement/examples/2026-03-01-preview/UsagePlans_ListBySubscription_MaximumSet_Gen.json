@@ -1,0 +1,38 @@
+{
+  "title": "UsagePlans_ListBySubscription_MaximumSet",
+  "operationId": "UsagePlans_ListBySubscription",
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "api-version": "2026-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "planType": "Standard",
+              "provisioningState": "Succeeded"
+            },
+            "location": "global",
+            "tags": {
+              "environment": "production"
+            },
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/MyResourceGroup/providers/Microsoft.AzureResilienceManagement/usagePlans/myUsagePlan",
+            "name": "myUsagePlan",
+            "type": "Microsoft.AzureResilienceManagement/usagePlans",
+            "systemData": {
+              "createdBy": "admin@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2025-06-01T10:00:00.000Z",
+              "lastModifiedBy": "admin@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-06-01T10:00:00.000Z"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/12345678-1234-1234-1234-123456789012/providers/Microsoft.AzureResilienceManagement/usagePlans?api-version=2026-03-01-preview&$skipToken=abc"
+      }
+    }
+  }
+}

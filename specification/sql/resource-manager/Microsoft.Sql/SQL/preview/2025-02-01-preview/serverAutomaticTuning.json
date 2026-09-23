@@ -1,0 +1,217 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-02-01-preview",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ServerAutomaticTuning"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/automaticTuning/current": {
+      "get": {
+        "operationId": "ServerAutomaticTuning_Get",
+        "tags": [
+          "ServerAutomaticTuning"
+        ],
+        "description": "Retrieves server automatic tuning options.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerAutomaticTuning"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a server's automatic tuning settings": {
+            "$ref": "./examples/ServerAutomaticTuningGet.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "ServerAutomaticTuning_Update",
+        "tags": [
+          "ServerAutomaticTuning"
+        ],
+        "description": "Update automatic tuning options on server.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The requested automatic tuning resource state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerAutomaticTuning"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerAutomaticTuning"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates server automatic tuning settings with all properties": {
+            "$ref": "./examples/ServerAutomaticTuningUpdateMax.json"
+          },
+          "Updates server automatic tuning settings with minimal properties": {
+            "$ref": "./examples/ServerAutomaticTuningUpdateMin.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AutomaticTuningServerOptions": {
+      "type": "object",
+      "description": "Automatic tuning properties for individual advisors.",
+      "properties": {
+        "desiredState": {
+          "$ref": "./common.json#/definitions/AutomaticTuningOptionModeDesired",
+          "description": "Automatic tuning option desired state."
+        },
+        "actualState": {
+          "$ref": "./common.json#/definitions/AutomaticTuningOptionModeActual",
+          "description": "Automatic tuning option actual state.",
+          "readOnly": true
+        },
+        "reasonCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Reason code if desired and actual state are different.",
+          "readOnly": true
+        },
+        "reasonDesc": {
+          "$ref": "./common.json#/definitions/AutomaticTuningServerReason",
+          "description": "Reason description if desired and actual state are different.",
+          "readOnly": true
+        }
+      }
+    },
+    "AutomaticTuningServerProperties": {
+      "type": "object",
+      "description": "Server-level Automatic Tuning properties.",
+      "properties": {
+        "desiredState": {
+          "$ref": "./common.json#/definitions/AutomaticTuningServerMode",
+          "description": "Automatic tuning desired state."
+        },
+        "actualState": {
+          "$ref": "./common.json#/definitions/AutomaticTuningServerMode",
+          "description": "Automatic tuning actual state.",
+          "readOnly": true
+        },
+        "options": {
+          "type": "object",
+          "description": "Automatic tuning options definition.",
+          "additionalProperties": {
+            "$ref": "#/definitions/AutomaticTuningServerOptions"
+          }
+        }
+      }
+    },
+    "ServerAutomaticTuning": {
+      "type": "object",
+      "description": "Server-level Automatic Tuning.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AutomaticTuningServerProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    }
+  },
+  "parameters": {}
+}

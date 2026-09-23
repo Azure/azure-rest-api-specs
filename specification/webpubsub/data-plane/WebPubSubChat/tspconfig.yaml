@@ -1,0 +1,45 @@
+parameters:
+  "service-dir":
+    default: "sdk/webpubsub"
+emit:
+  - "@azure-tools/typespec-autorest"
+
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{project-root}"
+    examples-dir: "{project-root}/examples"
+    output-file: "{version-status}/{version}/webpubsubchat.json"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-messaging-webpubsubchatservice"
+    package-name: "azure-messaging-webpubsubchatservice"
+    package-pprint-name: "Azure Web PubSub Chat Service"
+    namespace: "azure.messaging.webpubsubchatservice"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-messaging-webpubsub-chat"
+    package-name: "com.azure.messaging.webpubsub.chat"
+    namespace: "com.azure.messaging.webpubsub.chat"
+    partial-update: true
+    customization-class: customization/src/main/java/WebPubSubChatCustomization.java
+    generate-tests: false # Java emitter generates ambiguous null arguments for listRoles/listRoomMembers overloads.
+    generate-samples: false # Java emitter generates ambiguous null arguments for listRoles/listRoomMembers overloads.
+    flavor: "azure"
+  "@azure-typespec/http-client-csharp":
+    namespace: "Azure.Messaging.WebPubSub.Chat"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+  "@azure-tools/typespec-ts":
+    experimental-extensible-enums: true
+    service-dir: "sdk/web-pubsub"
+    emitter-output-dir: "{output-dir}/{service-dir}/web-pubsub-chat"
+    package-details:
+      name: "@azure/web-pubsub-chat"
+    generate-test: false
+    generate-sample: false
+    flavor: "azure"
+
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

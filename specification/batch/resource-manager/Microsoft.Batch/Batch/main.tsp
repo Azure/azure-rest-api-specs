@@ -23,6 +23,7 @@ import "./PrivateEndpointConnection.tsp";
 import "./Pool.tsp";
 import "./NetworkSecurityPerimeterConfiguration.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -47,6 +48,11 @@ enum Versions {
    * The 2024-07-01 API version.
    */
   v2024_07_01: "2024-07-01",
+
+  /**
+   * The 2025-06-01 API version.
+   */
+  v2025_06_01: "2025-06-01",
 }
 
 interface Operations
@@ -55,6 +61,7 @@ interface Operations
       CloudError
     > {}
 
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists available operations for the Microsoft.Batch provider"
 );

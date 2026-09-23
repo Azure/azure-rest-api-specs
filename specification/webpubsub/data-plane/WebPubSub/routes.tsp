@@ -4,29 +4,42 @@ import "./models.tsp";
 
 using TypeSpec.Http;
 
-namespace WebPubSub {
+namespace WebPubSubService {
+  /**
+   * The service is healthy.
+   */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+  model GetServiceStatusOkResponse {
+    /** The response status code */
+    @statusCode code: 200;
+  }
+
   /**
    * Get service health status.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  @tag("general")
   @summary("Get service health status.")
   @route("/api/health")
   @head
-  op getServiceStatus is Azure.Core.Foundations.Operation<{}, void>;
+  op getServiceStatus is Azure.Core.Foundations.Operation<
+    {},
+    GetServiceStatusOkResponse,
+    {},
+    ErrorResponse
+  >;
 
   /**
    * Add filtered connections to multiple groups.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  @tag("webpubsub")
   @summary("Add filtered connections to multiple groups.")
   @route("/api/hubs/{hub}/:addToGroups")
   @post
   op addConnectionsToGroups is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
+      /** Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore. */
       @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
@@ -37,22 +50,22 @@ namespace WebPubSub {
       @bodyRoot
       groupsToAdd: AddToGroupsRequest;
     },
-    void
+    OkResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
    * Close the connections in the hub.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  @tag("webpubsub")
   @summary("Close the connections in the hub.")
   @route("/api/hubs/{hub}/:closeConnections")
   @post
   op closeAllConnections is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
+      /** Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore. */
       @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
@@ -60,7 +73,7 @@ namespace WebPubSub {
       /**
        * Exclude these connectionIds when closing the connections in the hub.
        */
-      @query
+      @query(#{ explode: true })
       excluded?: string[];
 
       /**
@@ -69,22 +82,23 @@ namespace WebPubSub {
       @query
       reason?: string;
     },
-    void
+    void,
+    {},
+    ErrorResponse
   >;
 
   /**
    * Generate token for the client to connect Azure Web PubSub service.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "Preserving existing wire contract with multiple success content types and a typed content-type response header."
+  @tag("webpubsub")
   @summary("Generate token for the client to connect Azure Web PubSub service.")
   @route("/api/hubs/{hub}/:generateToken")
   @post
   op generateClientToken is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
+      /** Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore. */
       @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
@@ -98,8 +112,8 @@ namespace WebPubSub {
       /**
        * Roles that the connection with the generated token will have.
        */
-      @query
-      roles?: string[];
+      @query(#{ explode: true })
+      role?: string[];
 
       /**
        * The expire time of the generated token.
@@ -111,36 +125,32 @@ namespace WebPubSub {
       /**
        * Groups that the connection will join when it connects.
        */
-      @query
-      groups?: string[];
+      @query(#{ explode: true })
+      group?: string[];
 
-      /**
-       * The type of client. Case-insensitive. If not set, it's "Default". For Web
-       * PubSub for Socket.IO, only the default value is supported. For Web PubSub, the
-       * valid values are 'Default' and 'MQTT'.
-       */
+      /** The type of client. Case-insensitive. If not set, it's "Default". For Web PubSub for Socket.IO, only the default value is supported. For Web PubSub, the valid values are 'Default' and 'MQTT'. */
       @query
-      clientProtocol?: WebPubSubClientType = WebPubSubClientType.Default;
+      clientType?: WebPubSubClientType = WebPubSubClientType.Default;
     },
     ClientTokenResponse & {
       @header("content-type")
       contentType: ResponseContentType;
-    }
+    },
+    {},
+    ErrorResponse
   >;
 
   /**
    * Remove filtered connections from multiple groups.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  @tag("webpubsub")
   @summary("Remove filtered connections from multiple groups.")
   @route("/api/hubs/{hub}/:removeFromGroups")
   @post
   op removeConnectionsFromGroups is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
+      /** Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore. */
       @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
@@ -151,7 +161,9 @@ namespace WebPubSub {
       @bodyRoot
       groupsToRemove: RemoveFromGroupsRequest;
     },
-    void
+    OkResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -159,15 +171,13 @@ namespace WebPubSub {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/byos" "Web PubSub is a real-time messaging service that handles binary data directly, BYOS pattern not applicable"
+  @tag("webpubsub")
   @summary("Broadcast content inside request body to all the connected client connections.")
   @route("/api/hubs/{hub}/:send")
   @post
   op sendToAll is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
+      /** Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore. */
       @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
@@ -175,23 +185,15 @@ namespace WebPubSub {
       /**
        * Excluded connection Ids.
        */
-      @query
+      @query(#{ explode: true })
       excluded?: string[];
 
-      /**
-       * Following OData filter syntax to filter out the subscribers receiving the
-       * messages.
-       */
+      /** Following OData filter syntax to filter out the subscribers receiving the messages. */
       @query
       filter?: string;
 
-      /**
-       * The time-to-live (TTL) value in seconds for messages sent to the service. 0 is
-       * the default value, which means the message never expires. 300 is the maximum
-       * value. If this parameter is non-zero, messages that are not consumed by the
-       * client within the specified TTL will be dropped by the service. This parameter
-       * can help when the client's bandwidth is limited.
-       */
+      /** The time-to-live (TTL) value in seconds for messages sent to the service. 0 is the default value, which means the message never expires. 300 is the maximum value. If this parameter is non-zero, messages that are not consumed by the client within the specified TTL will be dropped by the service. This parameter can help when the client's bandwidth is limited. */
+      @minValue(0)
       @maxValue(300)
       @query
       messageTtlSeconds?: int32;
@@ -208,7 +210,9 @@ namespace WebPubSub {
       @bodyRoot
       message: bytes;
     },
-    void
+    AcceptedResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -216,15 +220,13 @@ namespace WebPubSub {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
+  @tag("webpubsub")
   @summary("Close the client connection.")
   @route("/api/hubs/{hub}/connections/{connectionId}")
   @delete
   op closeConnection is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
+      /** Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore. */
       @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
@@ -242,22 +244,22 @@ namespace WebPubSub {
       @query
       reason?: string;
     },
-    void
+    void,
+    {},
+    ErrorResponse
   >;
 
   /**
    * Check if the connection with the given connectionId exists.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  @tag("webpubsub")
   @summary("Check if the connection with the given connectionId exists.")
   @route("/api/hubs/{hub}/connections/{connectionId}")
   @head
   op connectionExists is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
+      /** Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore. */
       @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
@@ -269,7 +271,9 @@ namespace WebPubSub {
       @path
       connectionId: string;
     },
-    OkResponse | NotFoundResponse
+    OkResponse | NotFoundResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -277,15 +281,13 @@ namespace WebPubSub {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/byos" "Web PubSub is a real-time messaging service that handles binary data directly, BYOS pattern not applicable"
+  @tag("webpubsub")
   @summary("Send content inside request body to the specific connection.")
   @route("/api/hubs/{hub}/connections/{connectionId}/:send")
   @post
   op sendToConnection is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
+      /** Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore. */
       @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
@@ -297,13 +299,8 @@ namespace WebPubSub {
       @path
       connectionId: string;
 
-      /**
-       * The time-to-live (TTL) value in seconds for messages sent to the service. 0 is
-       * the default value, which means the message never expires. 300 is the maximum
-       * value. If this parameter is non-zero, messages that are not consumed by the
-       * client within the specified TTL will be dropped by the service. This parameter
-       * can help when the client's bandwidth is limited.
-       */
+      /** The time-to-live (TTL) value in seconds for messages sent to the service. 0 is the default value, which means the message never expires. 300 is the maximum value. If this parameter is non-zero, messages that are not consumed by the client within the specified TTL will be dropped by the service. This parameter can help when the client's bandwidth is limited. */
+      @minValue(0)
       @maxValue(300)
       @query
       messageTtlSeconds?: int32;
@@ -320,7 +317,9 @@ namespace WebPubSub {
       @bodyRoot
       message: bytes;
     },
-    void
+    AcceptedResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -328,15 +327,13 @@ namespace WebPubSub {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
+  @tag("webpubsub")
   @summary("Remove a connection from all groups.")
   @route("/api/hubs/{hub}/connections/{connectionId}/groups")
   @delete
   op removeConnectionFromAllGroups is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
+      /** Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore. */
       @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
@@ -348,22 +345,22 @@ namespace WebPubSub {
       @path
       connectionId: string;
     },
-    void
+    void,
+    {},
+    ErrorResponse
   >;
 
   /**
    * Check if there are any client connections inside the given group
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  @tag("webpubsub")
   @summary("Check if there are any client connections inside the given group")
   @route("/api/hubs/{hub}/groups/{group}")
   @head
   op groupExists is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
+      /** Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore. */
       @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
@@ -377,22 +374,22 @@ namespace WebPubSub {
       @path
       group: string;
     },
-    OkResponse | NotFoundResponse
+    OkResponse | NotFoundResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
    * Close connections in the specific group.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  @tag("webpubsub")
   @summary("Close connections in the specific group.")
   @route("/api/hubs/{hub}/groups/{group}/:closeConnections")
   @post
   op closeGroupConnections is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
+      /** Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore. */
       @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
@@ -409,7 +406,7 @@ namespace WebPubSub {
       /**
        * Exclude these connectionIds when closing the connections in the group.
        */
-      @query
+      @query(#{ explode: true })
       excluded?: string[];
 
       /**
@@ -418,7 +415,9 @@ namespace WebPubSub {
       @query
       reason?: string;
     },
-    void
+    void,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -426,15 +425,13 @@ namespace WebPubSub {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/byos" "Web PubSub is a real-time messaging service that handles binary data directly, BYOS pattern not applicable"
+  @tag("webpubsub")
   @summary("Send content inside request body to a group of connections.")
   @route("/api/hubs/{hub}/groups/{group}/:send")
   @post
   op sendToGroup is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
+      /** Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore. */
       @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
@@ -451,23 +448,15 @@ namespace WebPubSub {
       /**
        * Excluded connection Ids
        */
-      @query
+      @query(#{ explode: true })
       excluded?: string[];
 
-      /**
-       * Following OData filter syntax to filter out the subscribers receiving the
-       * messages.
-       */
+      /** Following OData filter syntax to filter out the subscribers receiving the messages. */
       @query
       filter?: string;
 
-      /**
-       * The time-to-live (TTL) value in seconds for messages sent to the service. 0 is
-       * the default value, which means the message never expires. 300 is the maximum
-       * value. If this parameter is non-zero, messages that are not consumed by the
-       * client within the specified TTL will be dropped by the service. This parameter
-       * can help when the client's bandwidth is limited.
-       */
+      /** The time-to-live (TTL) value in seconds for messages sent to the service. 0 is the default value, which means the message never expires. 300 is the maximum value. If this parameter is non-zero, messages that are not consumed by the client within the specified TTL will be dropped by the service. This parameter can help when the client's bandwidth is limited. */
+      @minValue(0)
       @maxValue(300)
       @query
       messageTtlSeconds?: int32;
@@ -484,7 +473,9 @@ namespace WebPubSub {
       @bodyRoot
       message: bytes;
     },
-    void
+    AcceptedResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -492,16 +483,15 @@ namespace WebPubSub {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "Preserving existing pageable response contract generated from the shared paged body shape."
+  @tag("webpubsub")
   @summary("List connections in a group.")
   @route("/api/hubs/{hub}/groups/{group}/connections")
   @get
   @list
   op listConnectionsInGroup is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
+      /** Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore. */
       @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
@@ -515,36 +505,26 @@ namespace WebPubSub {
       @path
       group: string;
 
-      /**
-       * The maximum number of connections to include in a single response. It should be
-       * between 1 and 200.
-       */
+      /** The maximum number of connections to include in a single response. It should be between 1 and 200. */
       @maxValue(200)
       @minValue(1)
       @query
       maxpagesize?: int32;
 
-      /**
-       * The maximum number of connections to return. If the value is not set, then all
-       * the connections in a group are returned.
-       */
+      /** The maximum number of connections to return. If the value is not set, then all the connections in a group are returned. */
       @maxValue(2147483647)
       @minValue(1)
       @query
       top?: int32;
 
-      /**
-       * A token that allows the client to retrieve the next page of results. This
-       * parameter is provided by the service in the response of a previous request when
-       * there are additional results to be fetched. Clients should include the
-       * continuationToken in the next request to receive the subsequent page of data.
-       * If this parameter is omitted, the server will return the first page of results.
-       */
+      /** A token that allows the client to retrieve the next page of results. This parameter is provided by the service in the response of a previous request when there are additional results to be fetched. Clients should include the continuationToken in the next request to receive the subsequent page of data. If this parameter is omitted, the server will return the first page of results. */
       @query
       @continuationToken
       continuationToken?: string;
     },
-    GroupMemberPagedValues
+    GroupMemberPagedValues,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -552,15 +532,13 @@ namespace WebPubSub {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
+  @tag("webpubsub")
   @summary("Remove a connection from the target group.")
   @route("/api/hubs/{hub}/groups/{group}/connections/{connectionId}")
   @delete
   op removeConnectionFromGroup is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
+      /** Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore. */
       @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
@@ -581,7 +559,9 @@ namespace WebPubSub {
       @path
       connectionId: string;
     },
-    void
+    void,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -589,15 +569,13 @@ namespace WebPubSub {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
+  @tag("webpubsub")
   @summary("Add a connection to the target group.")
   @route("/api/hubs/{hub}/groups/{group}/connections/{connectionId}")
   @put
   op addConnectionToGroup is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
+      /** Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore. */
       @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
@@ -618,7 +596,9 @@ namespace WebPubSub {
       @path
       connectionId: string;
     },
-    {}
+    OkResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -626,15 +606,13 @@ namespace WebPubSub {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
+  @tag("webpubsub")
   @summary("Revoke permission for the connection.")
   @route("/api/hubs/{hub}/permissions/{permission}/connections/{connectionId}")
   @delete
   op revokePermission is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
+      /** Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore. */
       @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
@@ -652,15 +630,13 @@ namespace WebPubSub {
       @path
       connectionId: string;
 
-      /**
-       * The meaning of the target depends on the specific permission. For
-       * joinLeaveGroup and sendToGroup, targetName is a required parameter standing for
-       * the group name.
-       */
+      /** The meaning of the target depends on the specific permission. For joinLeaveGroup and sendToGroup, targetName is a required parameter standing for the group name. */
       @query
       targetName?: string;
     },
-    void
+    void,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -668,15 +644,13 @@ namespace WebPubSub {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
+  @tag("webpubsub")
   @summary("Check if a connection has permission to the specified action.")
   @route("/api/hubs/{hub}/permissions/{permission}/connections/{connectionId}")
   @head
   op checkPermission is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
+      /** Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore. */
       @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
@@ -694,15 +668,13 @@ namespace WebPubSub {
       @path
       connectionId: string;
 
-      /**
-       * The meaning of the target depends on the specific permission. For
-       * joinLeaveGroup and sendToGroup, targetName is a required parameter standing for
-       * the group name.
-       */
+      /** The meaning of the target depends on the specific permission. For joinLeaveGroup and sendToGroup, targetName is a required parameter standing for the group name. */
       @query
       targetName?: string;
     },
-    OkResponse | NotFoundResponse
+    OkResponse | NotFoundResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -710,15 +682,13 @@ namespace WebPubSub {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
+  @tag("webpubsub")
   @summary("Grant permission to the connection.")
   @route("/api/hubs/{hub}/permissions/{permission}/connections/{connectionId}")
   @put
   op grantPermission is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
+      /** Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore. */
       @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
@@ -736,30 +706,26 @@ namespace WebPubSub {
       @path
       connectionId: string;
 
-      /**
-       * The meaning of the target depends on the specific permission. For
-       * joinLeaveGroup and sendToGroup, targetName is a required parameter standing for
-       * the group name.
-       */
+      /** The meaning of the target depends on the specific permission. For joinLeaveGroup and sendToGroup, targetName is a required parameter standing for the group name. */
       @query
       targetName?: string;
     },
-    {}
+    OkResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
    * Check if there are any client connections connected for the given user.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
+  @tag("webpubsub")
   @summary("Check if there are any client connections connected for the given user.")
   @route("/api/hubs/{hub}/users/{userId}")
   @head
   op userExists is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
+      /** Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore. */
       @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
@@ -771,7 +737,9 @@ namespace WebPubSub {
       @path
       userId: string;
     },
-    OkResponse | NotFoundResponse
+    OkResponse | NotFoundResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -779,15 +747,13 @@ namespace WebPubSub {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
+  @tag("webpubsub")
   @summary("Close connections for the specific user.")
   @route("/api/hubs/{hub}/users/{userId}/:closeConnections")
   @post
   op closeUserConnections is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
+      /** Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore. */
       @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
@@ -802,7 +768,7 @@ namespace WebPubSub {
       /**
        * Exclude these connectionIds when closing the connections for the user.
        */
-      @query
+      @query(#{ explode: true })
       excluded?: string[];
 
       /**
@@ -811,7 +777,9 @@ namespace WebPubSub {
       @query
       reason?: string;
     },
-    void
+    void,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -819,15 +787,13 @@ namespace WebPubSub {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/byos" "Web PubSub is a real-time messaging service that handles binary data directly, BYOS pattern not applicable"
+  @tag("webpubsub")
   @summary("Send content inside request body to the specific user.")
   @route("/api/hubs/{hub}/users/{userId}/:send")
   @post
   op sendToUser is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
+      /** Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore. */
       @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
@@ -839,20 +805,12 @@ namespace WebPubSub {
       @path
       userId: string;
 
-      /**
-       * Following OData filter syntax to filter out the subscribers receiving the
-       * messages.
-       */
+      /** Following OData filter syntax to filter out the subscribers receiving the messages. */
       @query
       filter?: string;
 
-      /**
-       * The time-to-live (TTL) value in seconds for messages sent to the service. 0 is
-       * the default value, which means the message never expires. 300 is the maximum
-       * value. If this parameter is non-zero, messages that are not consumed by the
-       * client within the specified TTL will be dropped by the service. This parameter
-       * can help when the client's bandwidth is limited.
-       */
+      /** The time-to-live (TTL) value in seconds for messages sent to the service. 0 is the default value, which means the message never expires. 300 is the maximum value. If this parameter is non-zero, messages that are not consumed by the client within the specified TTL will be dropped by the service. This parameter can help when the client's bandwidth is limited. */
+      @minValue(0)
       @maxValue(300)
       @query
       messageTtlSeconds?: int32;
@@ -869,7 +827,9 @@ namespace WebPubSub {
       @bodyRoot
       message: bytes;
     },
-    void
+    AcceptedResponse,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -877,15 +837,13 @@ namespace WebPubSub {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
+  @tag("webpubsub")
   @summary("Remove a user from all groups.")
   @route("/api/hubs/{hub}/users/{userId}/groups")
   @delete
   op removeUserFromAllGroups is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
+      /** Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore. */
       @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
@@ -897,7 +855,9 @@ namespace WebPubSub {
       @path
       userId: string;
     },
-    void
+    void,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -905,15 +865,13 @@ namespace WebPubSub {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
+  @tag("webpubsub")
   @summary("Remove a user from the target group.")
   @route("/api/hubs/{hub}/users/{userId}/groups/{group}")
   @delete
   op removeUserFromGroup is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
+      /** Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore. */
       @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
@@ -934,7 +892,9 @@ namespace WebPubSub {
       @path
       userId: string;
     },
-    void
+    void,
+    {},
+    ErrorResponse
   >;
 
   /**
@@ -942,15 +902,13 @@ namespace WebPubSub {
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Existing API - must use current operation signature for backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Preserving existing API operation name for backward compatibility"
+  @tag("webpubsub")
   @summary("Add a user to the target group.")
   @route("/api/hubs/{hub}/users/{userId}/groups/{group}")
   @put
   op addUserToGroup is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Target hub name, which should start with alphabetic characters and only contain
-       * alpha-numeric characters or underscore.
-       */
+      /** Target hub name, which should start with alphabetic characters and only contain alpha-numeric characters or underscore. */
       @pattern("^[A-Za-z][A-Za-z0-9_`,.[\\]]{0,127}$")
       @path
       hub: string;
@@ -971,6 +929,8 @@ namespace WebPubSub {
       @path
       userId: string;
     },
-    {}
+    OkResponse,
+    {},
+    ErrorResponse
   >;
 }

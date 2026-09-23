@@ -58,10 +58,12 @@ interface DetectorDefinitionResourceOps
         @segment("detectors")
         @key
         detectorName: string,
-      }
+      },
+      ResourceName = "SiteDiagnosticDetector"
     > {}
 
-@armResourceOperations
+@tag("Diagnostics")
+@armResourceOperations(#{ omitTags: true })
 interface DetectorDefinitionResources {
   /**
    * Description for Get Detector
@@ -147,10 +149,12 @@ interface DetectorDefinitionResourceOperationGroupOps
         @segment("detectors")
         @key
         detectorName: string,
-      }
+      },
+      ResourceName = "SiteSlotDiagnosticDetector"
     > {}
 
-@armResourceOperations
+@tag("Diagnostics")
+@armResourceOperations(#{ omitTags: true })
 interface DetectorDefinitionResourceOperationGroup {
   /**
    * Description for Get Detector

@@ -31,7 +31,14 @@ model ManagedOp is ProxyResource<ManagedOpsProperties> {
 @doc("Properties of the ManagedOps resource.")
 model ManagedOpsProperties {
   @doc("Product plan details of this resource.")
+  @removed(Versions.v2026_01_06_preview)
+  @renamedFrom(Versions.v2026_01_06_preview, "sku")
   @visibility(Lifecycle.Read)
+  oldSku?: Sku;
+
+  @doc("Product plan details of this resource.")
+  @added(Versions.v2026_01_06_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   sku?: Sku;
 
   @doc("Provisioning state of the resource.")
@@ -88,13 +95,22 @@ model PolicyAssignmentProperties {
   ]>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
-alias enablementState =
-  | "Enabled"
-  | "InProgress"
-  | "Failed"
-  | "Disabled"
-  | string;
+@doc("The enablement state of a service.")
+union EnablementState {
+  string,
+
+  @doc("Service is enabled.")
+  Enabled: "Enabled",
+
+  @doc("Service enablement is in progress.")
+  InProgress: "InProgress",
+
+  @doc("Service enablement has failed.")
+  Failed: "Failed",
+
+  @doc("Service is disabled.")
+  Disabled: "Disabled",
+}
 
 @doc("Change Tracking and Inventory service information.")
 model ChangeTrackingInformation {
@@ -106,7 +122,11 @@ model ChangeTrackingInformation {
   ]>;
 
   @doc("Indicates whether the service is enabled.")
-  enablementStatus: enablementState;
+  enablementStatus: EnablementState;
+
+  @doc("Optional error message if the service is in Failed state.")
+  @added(Versions.v2026_01_06_preview)
+  errorDetails?: ErrorDetails;
 }
 
 @doc("Azure Monitor Insights service information.")
@@ -119,40 +139,92 @@ model AzureMonitorInformation {
   ]>;
 
   @doc("Indicates whether the service is enabled.")
-  enablementStatus: enablementState;
+  enablementStatus: EnablementState;
+
+  @doc("Optional error message if the service is in Failed state.")
+  @added(Versions.v2026_01_06_preview)
+  errorDetails?: ErrorDetails;
 }
 
 @doc("Azure Update Manager service information.")
 model UpdateManagerInformation {
   @doc("Indicates whether the service is enabled.")
-  enablementStatus: enablementState;
+  enablementStatus: EnablementState;
+
+  @doc("Optional error message if the service is in Failed state.")
+  @added(Versions.v2026_01_06_preview)
+  errorDetails?: ErrorDetails;
 }
 
 @doc("Azure Policy and Machine Configuration service information.")
 model GuestConfigurationInformation {
   @doc("Indicates whether the service is enabled.")
-  enablementStatus: enablementState;
+  enablementStatus: EnablementState;
+
+  @doc("Optional error message if the service is in Failed state.")
+  @added(Versions.v2026_01_06_preview)
+  errorDetails?: ErrorDetails;
 }
 
 @doc("Defender for Servers service information.")
 model DefenderForServersInformation {
   @doc("Indicates whether the service is enabled.")
-  enablementStatus: enablementState;
+  enablementStatus: EnablementState;
+
+  @doc("Optional error message if the service is in Failed state.")
+  @added(Versions.v2026_01_06_preview)
+  errorDetails?: ErrorDetails;
 }
 
 @doc("Defender Cloud Security Posture Management (CSPM) service information.")
 model DefenderCspmInformation {
   @doc("Indicates whether the service is enabled.")
-  enablementStatus: enablementState;
+  enablementStatus: EnablementState;
+
+  @doc("Optional error message if the service is in Failed state.")
+  @added(Versions.v2026_01_06_preview)
+  errorDetails?: ErrorDetails;
+}
+
+@doc("The name of the SKU.")
+@added(Versions.v2026_01_06_preview)
+union SkuName {
+  string,
+
+  @doc("ManagedOps SKU.")
+  ManagedOps: "ManagedOps",
+}
+
+@doc("The pricing tier of the SKU.")
+@added(Versions.v2026_01_06_preview)
+union SkuTier {
+  string,
+
+  @doc("Essential tier.")
+  Essential: "Essential",
 }
 
 @doc("Specifies the service plan for this resource.")
 model Sku {
+  // Original properties for 2025-07-28-preview (no defaults)
+  @added(Versions.v2026_01_06_preview)
   @doc("Name of the SKU.")
-  name: string;
+  name: SkuName = SkuName.ManagedOps;
 
+  @added(Versions.v2026_01_06_preview)
   @doc("Pricing tier of the SKU.")
-  tier: string;
+  tier: SkuTier = SkuTier.Essential;
+
+  // Properties with defaults for 2026-01-06-preview
+  @removed(Versions.v2026_01_06_preview)
+  @renamedFrom(Versions.v2026_01_06_preview, "name")
+  @doc("Name of the SKU.")
+  skuName: string;
+
+  @removed(Versions.v2026_01_06_preview)
+  @renamedFrom(Versions.v2026_01_06_preview, "tier")
+  @doc("Pricing tier of the SKU.")
+  skuTier: string;
 }
 
 @doc("Desired configuration input by the user.")
@@ -173,17 +245,41 @@ model DesiredConfiguration {
     }
   ]>;
 
+  // Properties with defaults for 2026-01-06-preview
+  @added(Versions.v2026_01_06_preview)
   @doc("Desired enablement state of the Defender For Servers service.")
   @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
-  defenderForServers?: desiredEnablementState;
+  defenderForServers?: DesiredEnablementState = DesiredEnablementState.Disable;
 
+  @added(Versions.v2026_01_06_preview)
   @doc("Desired enablement state of the Defender Cloud Security Posture Management (CSPM) service.")
   @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
-  defenderCspm?: desiredEnablementState;
+  defenderCspm?: DesiredEnablementState = DesiredEnablementState.Disable;
+
+  // Original properties for 2025-07-28-preview (no defaults)
+  @removed(Versions.v2026_01_06_preview)
+  @renamedFrom(Versions.v2026_01_06_preview, "defenderForServers")
+  @doc("Desired enablement state of the Defender For Servers service.")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  oldDefenderForServers?: DesiredEnablementState;
+
+  @removed(Versions.v2026_01_06_preview)
+  @renamedFrom(Versions.v2026_01_06_preview, "defenderCspm")
+  @doc("Desired enablement state of the Defender Cloud Security Posture Management (CSPM) service.")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  oldDefenderCspm?: DesiredEnablementState;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Maintaining compatibility with current SDKs."
-alias desiredEnablementState = "Enable" | "Disable" | string;
+@doc("The desired enablement state of a service.")
+union DesiredEnablementState {
+  string,
+
+  @doc("Enable the service.")
+  Enable: "Enable",
+
+  @doc("Disable the service.")
+  Disable: "Disable",
+}
 
 @doc("Configuration for the Change Tracking and Inventory service.")
 model ChangeTrackingConfiguration {
@@ -205,6 +301,16 @@ model AzureMonitorConfiguration {
   ]>;
 }
 
+@doc("Details of an error encountered during enabling a service.")
+@added(Versions.v2026_01_06_preview)
+model ErrorDetails {
+  @doc("Error code.")
+  code: string;
+
+  @doc("Detailed error message.")
+  message: string;
+}
+
 @doc("The provisioning state of a resource.")
 @lroStatus
 union ProvisioningState {
@@ -216,6 +322,34 @@ union ProvisioningState {
 
   @doc("The resource is being deleted.")
   Deleting: "Deleting",
+
+  @doc("The resource has been accepted for provisioning.")
+  @added(Versions.v2026_01_06_preview)
+  Accepted: "Accepted",
+}
+
+@doc("ManagedOps model for update operations")
+model ManagedOpUpdate {
+  @doc("Updatable properties in the ManagedOps resource.")
+  properties?: ManagedOpUpdateProperties;
+}
+
+@doc("Updatable properties in the ManagedOps resource.")
+model ManagedOpUpdateProperties {
+  @doc("Desired configuration input by the user.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  desiredConfiguration?: DesiredConfigurationUpdate;
+}
+
+@doc("Updatable parameters in the Desired configuration input.")
+model DesiredConfigurationUpdate {
+  @doc("Desired enablement state of the Defender For Servers service.")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  defenderForServers?: DesiredEnablementState;
+
+  @doc("Desired enablement state of the Defender Cloud Security Posture Management (CSPM) service.")
+  @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
+  defenderCspm?: DesiredEnablementState;
 }
 
 /** The operations that can be performed on our resource */
@@ -230,15 +364,10 @@ interface ManagedOps {
   @doc("List all ManagedOps instances in the subscription.")
   list is ArmListBySubscription<ManagedOp>;
 
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @doc("Updates the ManagedOps instance with the supplied fields.")
   @patch(#{ implicitOptionality: true })
-  update is ArmCustomPatchAsync<
-    ManagedOp,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      ManagedOp,
-      ManagedOpsProperties
-    >
-  >;
+  update is ArmCustomPatchAsync<ManagedOp, ManagedOpUpdate>;
 
   @doc("Deletes the ManagedOps instance.")
   delete is ArmResourceDeleteWithoutOkAsync<ManagedOp>;

@@ -21,27 +21,40 @@ jobs:
 
     steps:
       - name: Checkout 'after' state
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
-          fetch-depth: 2
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
           path: after
 
+      - name: Find PR merge base
+        id: merge-base
+        working-directory: after
+        shell: bash
+        run: |
+          merge_base=$(git merge-base "$BASE_SHA" HEAD)
+          echo "sha=$merge_base" >> "$GITHUB_OUTPUT"
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+
       - name: Checkout 'before' state
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
-          ref: ${{ github.event.pull_request.base.sha }}
+          ref: ${{ steps.merge-base.outputs.sha }}
           path: before
 
       - name: Setup Node and install deps
         uses: ./after/.github/actions/setup-node-install-deps
         with:
+          # The repository is checked out into "after/", so that is the workspace
+          # root (and where the root package.json with "packageManager" lives).
           working-directory: after
 
       - name: Run Summarize Impact
         id: summarize-impact
         working-directory: after
         run: |
-          npm exec --no -- summarize-impact --sourceDirectory . --targetDirectory ../before \
+          pnpm exec summarize-impact --sourceDirectory . --targetDirectory ../before \
             --number "${{ github.event.pull_request.number }}" \
             --sourceBranch "$HEAD_REF" \
             --targetBranch "${{ github.event.pull_request.base.ref }}" \
@@ -57,7 +70,7 @@ jobs:
 
       - name: Set job-summary artifact
         if: ${{ always() && steps.summarize-impact.outputs.summary }}
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: job-summary
           path: ${{ steps.summarize-impact.outputs.summary }}

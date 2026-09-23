@@ -1,0 +1,305 @@
+name: arm-api-reviewer-eval-typespec
+description: |
+  TypeSpec review tests (07xxxx).
+  Validates detection of TypeSpec-specific violations: @segment casing,
+  PATCH naming, @operationId overrides, enum-vs-union, secret detection,
+  type constraints, and common anti-patterns.
+
+# The skill under test. Declared once here rather than per stimulus: vally merges the
+# root environment into each stimulus environment, and the path resolves relative to this
+# file. Without it the suite runs skill-free -- `paths.skills` in .vally.yaml only takes
+# effect when the run passes --skill-dir, which neither the local nor the CI runner does.
+environment:
+  skills:
+    - "../../../azure-api-review"
+
+tags:
+  area: arm-api-reviewer
+
+defaults:
+  runs: 1
+  timeout: "300s"
+  model: gpt-5.6-sol?effort=high
+  judge_model: claude-sonnet-4.6
+
+scoring:
+  threshold: 0.7
+
+stimuli:
+  # 070001 -- @segment casing and ARM TypeSpec conventions
+  - name: detect-typespec-segment-and-naming-violations
+    environment:
+      files:
+        - src: "../fixtures/typespec/segment-casing-violations.tsp"
+          dest: "specification/connectorgateway/resource-manager/Microsoft.ConnectorGateway/main.tsp"
+    prompt: >
+      Review the following TypeSpec specification file for compliance with
+      Azure REST API Guidelines, ARM RPC rules, and TypeSpec-specific review
+      rules. This is a new service with no previous API version. Report all
+      findings with rule IDs, line numbers, and fix suggestions.
+
+      File: specification/connectorgateway/resource-manager/Microsoft.ConnectorGateway/main.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        config:
+          pattern: "(?i)segment|casing|camelCase"
+      - type: output-matches
+        config:
+          pattern: "(?i)operationId|override"
+      - type: output-contains
+        config:
+          substring: "union"
+      - type: prompt
+    rubric:
+      - 'Flagged the @segment("connectorgateways") as incorrect casing -- should be camelCase "connectorGateways" (TSP-SEGMENT-CASE)'
+      - 'Flagged the @segment("virtualnetworks") as incorrect casing -- should be camelCase "virtualNetworks" (TSP-SEGMENT-CASE)'
+      - 'Flagged the PATCH operation named "patch" instead of "update" (TSP-PATCH-NAME)'
+      - "Flagged the @operationId override -- should restructure interface instead"
+      - "Flagged the use of enum instead of union for GatewayStatus (extensible enum)"
+      - "Flagged the use of plain string for targetVnetId instead of armResourceIdentifier (TSP-ARM-RESOURCE-ID)"
+
+  # 070002 -- Secret detection and type violations in TypeSpec
+  - name: detect-typespec-secret-and-type-violations
+    environment:
+      files:
+        - src: "../fixtures/typespec/secret-and-type-violations.tsp"
+          dest: "specification/databaseservice/resource-manager/Microsoft.DatabaseService/main.tsp"
+    prompt: >
+      Review the following TypeSpec specification file for compliance with
+      Azure REST API Guidelines, ARM RPC rules, and TypeSpec-specific review
+      rules. This is a new service with no previous API version. Report all
+      findings with rule IDs, line numbers, and fix suggestions.
+
+      File: specification/databaseservice/resource-manager/Microsoft.DatabaseService/main.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        config:
+          pattern: "(?i)secret|SEC-SECRET"
+      - type: output-contains
+        config:
+          substring: "connectionString"
+      - type: output-matches
+        config:
+          pattern: "(?i)utcDateTime|date.?time"
+      - type: prompt
+    rubric:
+      - "Flagged connectionString as a potential secret missing @secret (SEC-SECRET-DETECT)"
+      - "Flagged adminPassword as a potential secret missing @secret (SEC-SECRET-DETECT)"
+      - "Flagged the #suppress directive silencing secret-prop as wrong -- should apply @secret instead"
+      - "Flagged createdAt using string instead of utcDateTime"
+      - "Flagged diskSizeGB using string instead of a numeric type (TSP-NUMERIC-TYPE)"
+      - "Flagged storageAccountId using plain string instead of armResourceIdentifier (TSP-ARM-RESOURCE-ID)"
+
+  # 070003 -- TypeSpec anti-patterns
+  - name: detect-typespec-anti-patterns
+    environment:
+      files:
+        - src: "../fixtures/typespec/anti-patterns.tsp"
+          dest: "specification/workflowservice/resource-manager/Microsoft.WorkflowService/main.tsp"
+    prompt: >
+      Review the following TypeSpec specification file for compliance with
+      Azure REST API Guidelines, ARM RPC rules, and TypeSpec-specific review
+      rules. This is a new service with no previous API version. Report all
+      findings with rule IDs, line numbers, and fix suggestions.
+
+      File: specification/workflowservice/resource-manager/Microsoft.WorkflowService/main.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        config:
+          substring: "void"
+      - type: output-matches
+        config:
+          pattern: "(?i)underscore|PascalCase|In_Progress|FAILED"
+      - type: prompt
+    rubric:
+      - "Flagged the empty model literal {} as POST action body -- should use void instead"
+      - "Flagged the #suppress for no-empty-model as the wrong fix -- use void and remove suppression"
+      - "Flagged enum values with underscores (In_Progress) -- should use PascalCase (InProgress)"
+      - "Flagged ALL_CAPS enum value (FAILED) -- should use PascalCase (Failed)"
+      - "Flagged default value on ipAllocationMethod that flows into PATCH model (RPC-Patch-V1-10)"
+      - "Flagged @flattenProperty on new API -- flattening is discouraged for new resource types"
+
+  # 070004 -- x-ms-identifiers violations (TSP-ARRAY-IDENTIFIERS)
+  - name: detect-typespec-x-ms-identifiers-violations
+    environment:
+      files:
+        - src: "../fixtures/typespec/x-ms-identifiers-violations.tsp"
+          dest: "specification/identifierdemo/resource-manager/Microsoft.IdentifierDemo/main.tsp"
+    prompt: >
+      Review the following TypeSpec specification file for compliance with
+      Azure REST API Guidelines, ARM RPC rules, and TypeSpec-specific review
+      rules. This is a new service with no previous API version. Report all
+      findings with rule IDs, line numbers, and fix suggestions. Pay special
+      attention to how array properties declare x-ms-identifiers.
+
+      File: specification/identifierdemo/resource-manager/Microsoft.IdentifierDemo/main.tsp
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        config:
+          pattern: "(?i)@extension|x-ms-identifiers"
+      - type: output-matches
+        config:
+          pattern: "(?i)@identifiers|@key"
+      - type: output-matches
+        config:
+          pattern: "(?i)TSP-ARRAY-IDENTIFIERS|missing-x-ms-identifiers"
+      - type: output-matches
+        config:
+          pattern: "(?i)FIXME|placeholder"
+      - type: prompt
+    rubric:
+      - 'Flagged the @extension("x-ms-identifiers", []) on preflightResults as forbidden -- @extension MUST NOT be used in TypeSpec source for any reason (TSP-ARRAY-IDENTIFIERS)'
+      - 'Recommended replacing @extension("x-ms-identifiers", []) with @identifiers(#[]) for preflightResults'
+      - 'Flagged the @extension("x-ms-identifiers", ["nodeId"]) on nodes as forbidden -- must use @identifiers(#["nodeId"]) or @key on the item type'
+      - 'Flagged the #suppress reason containing "FIXME" on volumes as a placeholder-text violation (TSP-4.1 / Section 4.1 -- Warning Suppression Policy)'
+      - 'Flagged the vague "Matching AiGateway pattern" suppression reason on firewallRules -- suppressions must stand on their own with a real technical justification (TSP-4.1)'
+      - 'Recommended using @identifiers(#["volumeId"]) on volumes or @key on volumeId in the StorageVolume model instead of suppressing the rule'
+      - 'Did NOT flag the @identifiers(#["moveId"]) on pendingMoves -- this is the correct pattern (positive control)'
+      - "Did NOT flag the @identifiers(#[]) on diagnosticSnapshots -- explicit empty identifier list is the correct pattern for arrays with no identity (positive control)"
+      - "Did NOT flag customLabels -- the ClusterLabel item type uses @key on labelKey, which automatically derives x-ms-identifiers (positive control)"
+      - 'Never suggested @extension("x-ms-identifiers", ...) as a fix in any finding'
+
+  # 070005 -- operation name and sync/async template alignment
+  - name: validate-arm-operation-template-alignment
+    prompt: |
+      Review this TypeSpec ARM resource operations interface. The service team
+      has confirmed that PUT, PATCH, and DELETE always finish before returning
+      their initial response, so the synchronous templates are intentional.
+
+      ```tsp
+      @armResourceOperations
+      interface Widgets {
+        get is ArmResourceRead<Widget>;
+        createOrReplace is ArmResourceCreateOrReplaceSync<Widget>;
+        update is ArmCustomPatchSync<Widget, WidgetPatch>;
+        delete is ArmResourceDeleteSync<Widget>;
+        listByResourceGroup is ArmResourceListByParent<Widget>;
+        listBySubscription is ArmListBySubscription<Widget>;
+      }
+      ```
+
+      Report only operation-template or operation-naming findings. Explain
+      whether the operation name and each sync/async choice are valid.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-contains
+        config:
+          substring: "createOrUpdate"
+      - type: output-not-matches
+        config:
+          pattern: "(?i)(PUT|DELETE) (must|should) (be|use) (an? )?(async|asynchronous)|must use ArmResource(CreateOrReplaceAsync|DeleteWithoutOkAsync)"
+      - type: prompt
+    rubric:
+      - "Flagged createOrReplace as the wrong operation name and recommended createOrUpdate"
+      - "Kept ArmResourceCreateOrReplaceSync as the valid PUT template because the operation completes synchronously"
+      - "Kept ArmCustomPatchSync as the recommended custom PATCH template"
+      - "Kept ArmResourceDeleteSync as valid because the operation completes synchronously"
+      - "Distinguished the createOrUpdate client operation name from the ArmResourceCreateOrReplaceSync template name"
+
+  # 070006 -- raw OpenAPI extension cleanup in TypeSpec-owned output
+  - name: do-not-restore-legacy-openapi-client-extensions
+    prompt: |
+      Read the TypeSpec raw OpenAPI extension guidance in the azure-api-review
+      skill, then assess this change to an already-published ARM API version.
+
+      The TypeSpec source keeps this wire parameter unchanged:
+
+      ```tsp
+      @format("uuid")
+      @header("x-ms-client-request-id")
+      clientRequestId?: string;
+      ```
+
+      The PR removes raw `@OpenAPI.extension("x-ms-parameter-grouping", ...)`
+      and `@OpenAPI.extension("x-ms-client-request-id", true)` decorators plus
+      their `no-openapi-client-extensions` suppression. Generated OpenAPI only
+      loses `x-ms-parameter-grouping` and `x-ms-client-request-id: true`; the
+      header name, location, optionality, format, paths, methods, bodies,
+      responses, and status codes are unchanged.
+
+      Separately, the PR replaces a legacy language-specific pageable override
+      with `@list`. The response has a `nextLink` continuation property, and
+      generated `x-ms-pageable.nextLinkName` changes from `null` to `nextLink`.
+
+      Should the ARM API Reviewer file a published-version immutability finding?
+      State what it must and must not recommend as a fix.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        config:
+          pattern: "(?i)wire|REST|ARM semantic"
+      - type: output-matches
+        config:
+          pattern: "(?i)@list|paging"
+      - type: output-matches
+        config:
+          pattern: "(?i)do not|must not|never"
+      - type: prompt
+    rubric:
+      - "Does not classify removal of x-ms-parameter-grouping or x-ms-client-request-id: true as a Section 26.0 violation when the wire parameter and ARM semantics are unchanged"
+      - "Does not recommend restoring @OpenAPI.extension or adding a no-openapi-client-extensions suppression"
+      - "Explains that SDK compatibility concerns need concrete downstream evidence and must be handled with semantic TypeSpec modeling or client customization"
+      - "Recognizes @list and the nextLink response property as the native source of paging semantics rather than recommending a raw x-ms-pageable extension"
+      - "Preserves the immutability rule for any actual REST wire or ARM semantic change"
+
+  # 070007 -- ARM LRO header customization in TypeSpec-owned output
+  - name: preserve-published-arm-lro-header-contract
+    prompt: |
+      Read the ARM LRO and raw OpenAPI extension guidance in the
+      azure-api-review skill, then assess converting an already-published ARM
+      DELETE operation to TypeSpec.
+
+      The published 202 response contains `Location`, `Azure-AsyncOperation`,
+      and `Retry-After`, and has no final response body. The proposed TypeSpec
+      source is:
+
+      ```tsp
+      delete is ArmResourceDeleteWithoutOkAsync<MyResource>;
+      ```
+
+      Generated OpenAPI retains `Location` but loses `Azure-AsyncOperation`.
+      The author proposes restoring the old output with
+      `@OpenAPI.extension(...)`, or alternatively adding only
+      `@pollingOperation`.
+
+      Should the ARM API Reviewer file a published-version finding? Give the
+      native TypeSpec correction and explain the required logical final result.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        config:
+          pattern: "ArmResourceDeleteWithoutOkAsync"
+      - type: output-matches
+        config:
+          pattern: "ArmCombinedLroHeaders"
+      - type: output-matches
+        config:
+          pattern: "(?i)FinalResult\\s*=\\s*void"
+      - type: output-matches
+        config:
+          pattern: "RetryAfterHeader"
+      - type: prompt
+    rubric:
+      - "Files a published-version finding because removing Azure-AsyncOperation changes the actual initial response header contract"
+      - "Uses ArmResourceDeleteWithoutOkAsync with an LroHeaders override containing ArmCombinedLroHeaders and RetryAfterHeader"
+      - "Sets FinalResult to void because DELETE has no final response body"
+      - "Rejects restoring @OpenAPI.extension or a no-openapi-client-extensions suppression"
+      - "Explains that @pollingOperation alone does not customize an Azure.ResourceManager template's initial response headers"

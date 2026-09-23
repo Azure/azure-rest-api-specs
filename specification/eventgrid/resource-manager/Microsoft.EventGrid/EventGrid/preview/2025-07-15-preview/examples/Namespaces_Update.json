@@ -1,49 +1,49 @@
 {
   "parameters": {
-    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40",
-    "resourceGroupName": "examplerg",
-    "namespaceName": "exampleNamespaceName1",
     "api-version": "2025-07-15-preview",
+    "namespaceName": "exampleNamespaceName1",
     "namespaceUpdateParameters": {
       "tags": {
         "tag1": "value1Updated"
       }
-    }
+    },
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40"
   },
   "responses": {
     "200": {
       "body": {
+        "name": "exampleNamespaceName1",
+        "type": "Microsoft.EventGrid/namespaces",
+        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/namespaces/exampleNamespaceName1",
+        "location": "westus",
         "properties": {
           "provisioningState": "Succeeded",
           "topicSpacesConfiguration": {
-            "state": "Enabled",
+            "hostname": "exampleNamespaceName1.westus-1.mqtt.eventgrid-int.azure.net",
             "routeTopicResourceId": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampleTopic1",
-            "hostname": "exampleNamespaceName1.westus-1.mqtt.eventgrid-int.azure.net"
+            "state": "Enabled"
           }
-        },
-        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/namespaces/exampleNamespaceName1",
-        "name": "exampleNamespaceName1",
-        "type": "Microsoft.EventGrid/namespaces",
-        "location": "westus"
+        }
       }
     },
     "202": {
       "body": {
+        "name": "exampleNamespaceName1",
+        "type": "Microsoft.EventGrid/namespaces",
+        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/namespaces/exampleNamespaceName1",
+        "location": "West US",
         "properties": {
           "provisioningState": "Succeeded",
           "topicSpacesConfiguration": {
-            "state": "Enabled",
+            "hostname": "exampleNamespaceName1.westus-1.mqtt.eventgrid-int.azure.net",
             "routeTopicResourceId": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampleTopic1",
-            "hostname": "exampleNamespaceName1.westus-1.mqtt.eventgrid-int.azure.net"
+            "state": "Enabled"
           }
         },
-        "location": "West US",
         "tags": {
           "key1": "value1Updated"
-        },
-        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/namespaces/exampleNamespaceName1",
-        "name": "exampleNamespaceName1",
-        "type": "Microsoft.EventGrid/namespaces"
+        }
       },
       "headers": {
         "Azure-AsyncOperation": "https://management.windowsazure.com/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/exampleNamespaceName1/providers/Microsoft.EventGrid/namespaces/exampleNamespaceName1/operationStatus/7B023877-A473-457B-B462-562F97048FB6?api-version=2025-04-01-preview",
@@ -51,5 +51,7 @@
         "Retry-After": "60"
       }
     }
-  }
+  },
+  "operationId": "Namespaces_Update",
+  "title": "Namespaces_Update"
 }

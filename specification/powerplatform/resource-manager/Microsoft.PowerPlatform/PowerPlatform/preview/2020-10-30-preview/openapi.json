@@ -1,0 +1,1490 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PowerPlatform",
+    "version": "2020-10-30-preview",
+    "description": "// (missing-service-description) Add service description",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Accounts"
+    },
+    {
+      "name": "EnterprisePolicies"
+    },
+    {
+      "name": "PrivateEndpointConnections"
+    },
+    {
+      "name": "PrivateLinkResources"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.PowerPlatform/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all of the available PowerPlatform REST API operations.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Lists all of the available PowerPlatform REST API operations": {
+            "$ref": "./examples/listOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PowerPlatform/accounts": {
+      "get": {
+        "operationId": "Accounts_ListBySubscription",
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Retrieve a list of accounts within a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccountList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List accounts by subscription": {
+            "$ref": "./examples/listAccountsBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PowerPlatform/enterprisePolicies": {
+      "get": {
+        "operationId": "EnterprisePolicies_ListBySubscription",
+        "tags": [
+          "EnterprisePolicies"
+        ],
+        "description": "Retrieve a list of EnterprisePolicies within a subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EnterprisePolicyList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List EnterprisePolicies by subscription": {
+            "$ref": "./examples/listEnterprisePoliciesBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerPlatform/accounts": {
+      "get": {
+        "operationId": "Accounts_ListByResourceGroup",
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Retrieve a list of accounts within a given resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AccountList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List accounts by resource group": {
+            "$ref": "./examples/listAccountsByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerPlatform/accounts/{accountName}": {
+      "get": {
+        "operationId": "Accounts_Get",
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Get information about an account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of the account.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get account": {
+            "$ref": "./examples/getAccount.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Accounts_CreateOrUpdate",
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Creates an account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of the account.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to create or update an account.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Account' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "201": {
+            "description": "Resource 'Account' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update account": {
+            "$ref": "./examples/createOrUpdateAccount.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Accounts_Update",
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Updates an account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of the account.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to update an account.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchAccount"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Account"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update account": {
+            "$ref": "./examples/updateAccount.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Accounts_Delete",
+        "tags": [
+          "Accounts"
+        ],
+        "description": "Delete an account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Name of the account.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete account": {
+            "$ref": "./examples/deleteAccount.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerPlatform/enterprisePolicies": {
+      "get": {
+        "operationId": "EnterprisePolicies_ListByResourceGroup",
+        "tags": [
+          "EnterprisePolicies"
+        ],
+        "description": "Retrieve a list of EnterprisePolicies within a given resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EnterprisePolicyList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List EnterprisePolicies by resource group": {
+            "$ref": "./examples/listEnterprisePoliciesByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerPlatform/enterprisePolicies/{enterprisePolicyName}": {
+      "get": {
+        "operationId": "EnterprisePolicies_Get",
+        "tags": [
+          "EnterprisePolicies"
+        ],
+        "description": "Get information about an EnterprisePolicy",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "enterprisePolicyName",
+            "in": "path",
+            "description": "The EnterprisePolicy name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EnterprisePolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an EnterprisePolicy": {
+            "$ref": "./examples/getEnterprisePolicy.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "EnterprisePolicies_CreateOrUpdate",
+        "tags": [
+          "EnterprisePolicies"
+        ],
+        "description": "Creates an EnterprisePolicy",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "enterprisePolicyName",
+            "in": "path",
+            "description": "The EnterprisePolicy name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to create or update EnterprisePolicy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EnterprisePolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'EnterprisePolicy' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EnterprisePolicy"
+            }
+          },
+          "201": {
+            "description": "Resource 'EnterprisePolicy' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/EnterprisePolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update EnterprisePolicy": {
+            "$ref": "./examples/createOrUpdateEnterprisePolicy.json"
+          }
+        }
+      },
+      "patch": {
+        "operationId": "EnterprisePolicies_Update",
+        "tags": [
+          "EnterprisePolicies"
+        ],
+        "description": "Updates an EnterprisePolicy",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "enterprisePolicyName",
+            "in": "path",
+            "description": "The EnterprisePolicy name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to update EnterprisePolicy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchEnterprisePolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EnterprisePolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update EnterprisePolicy": {
+            "$ref": "./examples/updateEnterprisePolicy.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "EnterprisePolicies_Delete",
+        "tags": [
+          "EnterprisePolicies"
+        ],
+        "description": "Delete an EnterprisePolicy",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "enterprisePolicyName",
+            "in": "path",
+            "description": "The EnterprisePolicy name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an EnterprisePolicy": {
+            "$ref": "./examples/deleteEnterprisePolicy.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerPlatform/enterprisePolicies/{enterprisePolicyName}/privateEndpointConnections": {
+      "get": {
+        "operationId": "PrivateEndpointConnections_ListByEnterprisePolicy",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "List all private endpoint connections on an EnterprisePolicy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "enterprisePolicyName",
+            "in": "path",
+            "description": "The EnterprisePolicy name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets private endpoint connection.": {
+            "$ref": "./examples/PrivateEndpointConnectionListGet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerPlatform/enterprisePolicies/{enterprisePolicyName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "operationId": "PrivateEndpointConnections_Get",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Gets a private endpoint connection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "enterprisePolicyName",
+            "in": "path",
+            "description": "The EnterprisePolicy name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets private endpoint connection.": {
+            "$ref": "./examples/PrivateEndpointConnectionGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PrivateEndpointConnections_CreateOrUpdate",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Approve or reject a private endpoint connection with a given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "enterprisePolicyName",
+            "in": "path",
+            "description": "The EnterprisePolicy name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to create or update a private endpoint connection.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PrivateEndpointConnection' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Approve or reject a private endpoint connection with a given name.": {
+            "$ref": "./examples/PrivateEndpointConnectionUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PrivateEndpointConnections_Delete",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Deletes a private endpoint connection with a given name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "enterprisePolicyName",
+            "in": "path",
+            "description": "The EnterprisePolicy name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The name of the private endpoint connection.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a private endpoint connection with a given name.": {
+            "$ref": "./examples/PrivateEndpointConnectionDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerPlatform/enterprisePolicies/{enterprisePolicyName}/privateLinkResources": {
+      "get": {
+        "operationId": "PrivateLinkResources_ListByEnterprisePolicy",
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "Gets the private link resources that need to be created for enterprisePolicy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "enterprisePolicyName",
+            "in": "path",
+            "description": "The EnterprisePolicy name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets private endpoint connection.": {
+            "$ref": "./examples/PrivateLinkResourceListGet.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PowerPlatform/enterprisePolicies/{enterprisePolicyName}/privateLinkResources/{groupName}": {
+      "get": {
+        "operationId": "PrivateLinkResources_Get",
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "Gets the private link resources that need to be created for an EnterprisePolicy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "enterprisePolicyName",
+            "in": "path",
+            "description": "The EnterprisePolicy name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "groupName",
+            "in": "path",
+            "description": "The name of the private link resource.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets private endpoint connection.": {
+            "$ref": "./examples/PrivateLinkResourceGet.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Account": {
+      "type": "object",
+      "description": "Definition of the account.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AccountProperties",
+          "description": "The properties that define configuration for the account.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AccountList": {
+      "type": "object",
+      "description": "The response of the list accounts operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The collection value.",
+          "items": {
+            "$ref": "#/definitions/Account"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The next page link."
+        }
+      }
+    },
+    "AccountProperties": {
+      "type": "object",
+      "description": "The properties that define configuration for the account.",
+      "properties": {
+        "systemId": {
+          "type": "string",
+          "description": "The internally assigned unique identifier of the resource.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the account."
+        }
+      }
+    },
+    "EnterprisePolicy": {
+      "type": "object",
+      "description": "Definition of the EnterprisePolicy.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Properties",
+          "description": "The properties that define configuration for the enterprise policy",
+          "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/EnterprisePolicyIdentity",
+          "description": "The identity of the EnterprisePolicy."
+        },
+        "kind": {
+          "$ref": "#/definitions/EnterprisePolicyKind",
+          "description": "The kind (type) of Enterprise Policy."
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "EnterprisePolicyIdentity": {
+      "type": "object",
+      "description": "The identity of the EnterprisePolicy.",
+      "properties": {
+        "systemAssignedIdentityPrincipalId": {
+          "type": "string",
+          "description": "The principal id of EnterprisePolicy identity.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant id associated with the EnterprisePolicy.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/ResourceIdentityType",
+          "description": "The type of identity used for the EnterprisePolicy. Currently, the only supported type is 'SystemAssigned', which implicitly creates an identity."
+        }
+      }
+    },
+    "EnterprisePolicyKind": {
+      "type": "string",
+      "description": "The Kind (type) of Enterprise Policy",
+      "enum": [
+        "Lockbox",
+        "PrivateEndpoint",
+        "Encryption",
+        "NetworkInjection",
+        "Identity"
+      ],
+      "x-ms-enum": {
+        "name": "EnterprisePolicyKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Lockbox",
+            "value": "Lockbox",
+            "description": "Lockbox"
+          },
+          {
+            "name": "PrivateEndpoint",
+            "value": "PrivateEndpoint",
+            "description": "PrivateEndpoint"
+          },
+          {
+            "name": "Encryption",
+            "value": "Encryption",
+            "description": "Encryption"
+          },
+          {
+            "name": "NetworkInjection",
+            "value": "NetworkInjection",
+            "description": "NetworkInjection"
+          },
+          {
+            "name": "Identity",
+            "value": "Identity",
+            "description": "Identity"
+          }
+        ]
+      }
+    },
+    "EnterprisePolicyList": {
+      "type": "object",
+      "description": "The response of the list EnterprisePolicy operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The collection value.",
+          "items": {
+            "$ref": "#/definitions/EnterprisePolicy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The next page link."
+        }
+      }
+    },
+    "HealthStatus": {
+      "type": "string",
+      "description": "The health status of the resource.",
+      "enum": [
+        "Undetermined",
+        "Healthy",
+        "Warning",
+        "Unhealthy"
+      ],
+      "x-ms-enum": {
+        "name": "HealthStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Undetermined",
+            "value": "Undetermined",
+            "description": "Undetermined"
+          },
+          {
+            "name": "Healthy",
+            "value": "Healthy",
+            "description": "Healthy"
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "Warning"
+          },
+          {
+            "name": "Unhealthy",
+            "value": "Unhealthy",
+            "description": "Unhealthy"
+          }
+        ]
+      }
+    },
+    "KeyVaultProperties": {
+      "type": "object",
+      "description": "Settings concerning key vault encryption for a configuration store.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Uri of KeyVault"
+        },
+        "key": {
+          "$ref": "#/definitions/keyProperties",
+          "description": "Identity of the secret that includes name and version."
+        }
+      }
+    },
+    "PatchAccount": {
+      "type": "object",
+      "description": "Definition of the account.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AccountProperties",
+          "description": "The properties that define configuration for the account.",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PatchTrackedResource"
+        }
+      ]
+    },
+    "PatchEnterprisePolicy": {
+      "type": "object",
+      "description": "Definition of the EnterprisePolicy.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/EnterprisePolicyIdentity",
+          "description": "The identity of the EnterprisePolicy."
+        },
+        "kind": {
+          "$ref": "#/definitions/EnterprisePolicyKind",
+          "description": "The kind (type) of Enterprise Policy."
+        },
+        "properties": {
+          "$ref": "#/definitions/Properties",
+          "description": "The properties that define configuration for the enterprise policy",
+          "x-ms-client-flatten": true
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "Metadata pertaining to creation and last modification of the resource.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/PatchTrackedResource"
+        }
+      ]
+    },
+    "PatchTrackedResource": {
+      "type": "object",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "description": "A private endpoint connection",
+      "properties": {
+        "properties": {
+          "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateEndpointConnectionListResult": {
+      "type": "object",
+      "description": "A list of private endpoint connections",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private endpoint connections",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "type": "object",
+      "description": "A private link resource",
+      "properties": {
+        "properties": {
+          "$ref": "../../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateLinkResourceProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateLinkResourceListResult": {
+      "type": "object",
+      "description": "The response of a PrivateLinkResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PrivateLinkResource items on this page",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Properties": {
+      "type": "object",
+      "description": "The properties that define configuration for the enterprise policy.",
+      "properties": {
+        "systemId": {
+          "type": "string",
+          "description": "The internally assigned unique identifier of the resource.",
+          "readOnly": true
+        },
+        "lockbox": {
+          "$ref": "#/definitions/PropertiesLockbox",
+          "description": "Settings concerning lockbox."
+        },
+        "encryption": {
+          "$ref": "#/definitions/PropertiesEncryption",
+          "description": "The encryption settings for a configuration store."
+        },
+        "networkInjection": {
+          "$ref": "#/definitions/PropertiesNetworkInjection",
+          "description": "Settings concerning network injection."
+        },
+        "healthStatus": {
+          "$ref": "#/definitions/HealthStatus",
+          "description": "The health status of the resource."
+        }
+      }
+    },
+    "PropertiesEncryption": {
+      "type": "object",
+      "description": "The encryption settings for a configuration store.",
+      "properties": {
+        "keyVault": {
+          "$ref": "#/definitions/KeyVaultProperties",
+          "description": "Key vault properties."
+        },
+        "state": {
+          "$ref": "#/definitions/State",
+          "description": "The state of onboarding, which only appears in the response."
+        }
+      }
+    },
+    "PropertiesLockbox": {
+      "type": "object",
+      "description": "Settings concerning lockbox.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/State",
+          "description": "lockbox configuration"
+        }
+      }
+    },
+    "PropertiesNetworkInjection": {
+      "type": "object",
+      "description": "Settings concerning network injection.",
+      "properties": {
+        "virtualNetworks": {
+          "type": "array",
+          "description": "Network injection configuration",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkProperties"
+          }
+        }
+      }
+    },
+    "ResourceIdentityType": {
+      "type": "string",
+      "description": "The type of identity used for the EnterprisePolicy. Currently, the only supported type is 'SystemAssigned', which implicitly creates an identity.",
+      "enum": [
+        "SystemAssigned",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceIdentityType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "SystemAssigned"
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None"
+          }
+        ]
+      }
+    },
+    "State": {
+      "type": "string",
+      "description": "The state of onboarding, which only appears in the response.",
+      "enum": [
+        "Enabled",
+        "Disabled",
+        "NotConfigured"
+      ],
+      "x-ms-enum": {
+        "name": "State",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enabled"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disabled"
+          },
+          {
+            "name": "NotConfigured",
+            "value": "NotConfigured",
+            "description": "NotConfigured"
+          }
+        ]
+      }
+    },
+    "SubnetProperties": {
+      "type": "object",
+      "description": "Properties of a subnet.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Subnet name."
+        }
+      }
+    },
+    "VirtualNetworkProperties": {
+      "type": "object",
+      "description": "Settings concerning the virtual network.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Uri of the virtual network."
+        },
+        "subnet": {
+          "$ref": "#/definitions/SubnetProperties",
+          "description": "Properties of a subnet."
+        }
+      }
+    },
+    "keyProperties": {
+      "type": "object",
+      "description": "Url and version of the KeyVault Secret",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The identifier of the key vault key used to encrypt data."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the identity which will be used to access key vault."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

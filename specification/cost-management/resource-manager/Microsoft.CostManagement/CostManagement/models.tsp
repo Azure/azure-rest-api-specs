@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -170,6 +172,12 @@ union Scope {
    * Shared scope recommendation.
    */
   Shared: "Shared",
+
+  /**
+   * Management group scope recommendation.
+   */
+  @added(Versions.v2026_06_01)
+  ManagementGroup: "ManagementGroup",
 }
 
 /**
@@ -1428,6 +1436,7 @@ model CostAllocationProportion {
 /**
  * The cost allocation rule check name availability request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CostAllocationRuleCheckNameAvailabilityRequest {
   /**
    * Rule name
@@ -1443,6 +1452,7 @@ model CostAllocationRuleCheckNameAvailabilityRequest {
 /**
  * The cost allocation rule check name availability response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CostAllocationRuleCheckNameAvailabilityResponse {
   /**
    * Whether this rule name is available
@@ -1752,12 +1762,14 @@ model AsyncOperationStatusProperties {
   /**
    * Sas url to the async benefit utilization summaries report. Will be empty if the report is in Running or Failed state.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @secret
   reportUrl?: BenefitUtilizationSummaryReportSchema;
 
   /**
    * Sas url to async benefit utilization summaries report in secondary storage in case of primary outage. Will be empty if the report is in Running or Failed state.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @secret
   secondaryReportUrl?: BenefitUtilizationSummaryReportSchema;
 
@@ -2643,6 +2655,7 @@ model BlobInfo {
  *
  *  * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the "Retry-After" header.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model GenerateCostDetailsReportErrorResponse {
   /**
@@ -2718,6 +2731,7 @@ model DownloadURL {
   /**
    * The URL to download the generated report.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   downloadUrl?: string;
 }
@@ -2733,6 +2747,7 @@ model DownloadURL {
  *
  *  * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the "Retry-After" header.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model GenerateDetailedCostReportErrorResponse {
   /**
@@ -3853,6 +3868,7 @@ model ReportURL {
   /**
    * The CSV file from the reportUrl blob link consists of reservation usage data with the following schema at daily granularity
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   reportUrl?: ReservationReportSchema;
 
@@ -3877,6 +3893,7 @@ model PricesheetDownloadProperties {
   /**
    * The URL to download the generated report.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   downloadUrl?: string;
 
   /**
@@ -4074,6 +4091,7 @@ model EAPricesheetDownloadProperties {
   /**
    * The link (url) to download the pricesheet.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   downloadUrl?: string;
 
@@ -4483,6 +4501,30 @@ model SharedScopeBenefitRecommendationProperties
 }
 
 /**
+ * The properties of the benefit recommendation when scope is 'ManagementGroup'.
+ */
+@added(Versions.v2026_06_01)
+model ManagementGroupScopeBenefitRecommendationProperties
+  extends BenefitRecommendationProperties {
+  /**
+   * Fully-qualified identifier of the management group that this management group scope recommendation is for, of the format /providers/Microsoft.Management/managementGroups/{managementGroupId}. Applicable only if recommendation is for 'ManagementGroup' scope.
+   */
+  @visibility(Lifecycle.Read)
+  managementGroupId?: string;
+
+  /**
+   * The tenant ID associated with the management group. Populated only when managementGroupId is populated.
+   */
+  @visibility(Lifecycle.Read)
+  tenantId?: string;
+
+  /**
+   * ManagementGroup benefit scope.
+   */
+  scope: "ManagementGroup";
+}
+
+/**
  * The properties of a benefit utilization summary.
  */
 model BenefitUtilizationSummaryProperties {
@@ -4709,6 +4751,7 @@ model ViewListResult {
 /**
  * Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. \n\nSome Error responses: \n\n * 429 TooManyRequests - Request is throttled. Retry after waiting for the time specified in the \"x-ms-ratelimit-microsoft.consumption-retry-after\" header. \n\n * 503 ServiceUnavailable - Service is temporarily unavailable. Retry after waiting for the time specified in the \"Retry-After\" header.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**
@@ -4779,4 +4822,72 @@ model CostDetailsOperationResults {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   error?: ErrorDetails;
+}
+
+/**
+ * The customer billing metadata
+ */
+@added(Versions.v2026_06_01)
+model CustomerMetadata {
+  /**
+   * Customer billing account id
+   */
+  billingAccountId: string;
+
+  /**
+   * Customer billing profile id
+   */
+  billingProfileId: string;
+}
+
+/**
+ * The properties of the markup rule.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Markup rule is a synchronous configuration resource with no long-running provisioning lifecycle, so it does not expose a provisioningState property."
+@added(Versions.v2026_06_01)
+model MarkupRuleProperties {
+  /**
+   * The description of the markup rule.
+   */
+  description?: string;
+
+  /**
+   * The markup percentage of the rule.
+   */
+  percentage: float64;
+
+  /**
+   * Starting date of the markup rule.
+   */
+  startDate: utcDateTime;
+
+  /**
+   * Ending date of the markup rule.
+   */
+  endDate?: utcDateTime;
+
+  /**
+   * Customer information for the markup rule.
+   */
+  customerDetails: CustomerMetadata;
+}
+
+/**
+ * Markup rule list result. It contains a list of Markup rules.
+ */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Preserve existing C# model name for backward compatibility."
+@added(Versions.v2026_06_01)
+model MarkupRulePagedResponse {
+  /**
+   * The list of markup rules.
+   */
+  @pageItems
+  @identifiers(#["id"])
+  value?: MarkupRule[];
+
+  /**
+   * The link (url) to the next page of results.
+   */
+  @nextLink
+  nextLink?: string;
 }

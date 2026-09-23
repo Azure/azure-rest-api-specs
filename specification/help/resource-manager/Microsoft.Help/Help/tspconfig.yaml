@@ -7,7 +7,6 @@ options:
   "@azure-tools/typespec-autorest":
     omit-unreachable-types: true
     emitter-output-dir: "{project-root}"
-    azure-resource-provider-folder: "resource-manager"
     output-file: "{version-status}/{version}/help.json"
     examples-dir: "{project-root}/examples"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
@@ -32,6 +31,7 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/arm-selfhelp"
     "service-dir": "sdk/selfhelp"
     flavor: "azure"
+    compatibility-lro: true
     experimental-extensible-enums: true
     typespec-title-map:
       HelpClient: HelpRP
@@ -40,7 +40,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/selfhelp"
     emitter-output-dir: "{output-dir}/{service-dir}/armselfhelp"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armselfhelp/v2"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armselfhelp"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -50,3 +50,4 @@ options:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

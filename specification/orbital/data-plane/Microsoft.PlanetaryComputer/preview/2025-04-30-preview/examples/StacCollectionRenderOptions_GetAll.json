@@ -2,7 +2,7 @@
   "title": "StacCollectionRenderOptions_GetAll",
   "operationId": "StacCollectionRenderOptions_GetAll",
   "parameters": {
-    "collectionId": "sentinel-2-l2a-tutorial-7",
+    "collectionId": "naip-atl",
     "api-version": "2025-04-30-preview"
   },
   "responses": {
@@ -11,69 +11,20 @@
         {
           "id": "natural-color",
           "name": "Natural color",
-          "description": "True color composite of visible bands (B04, B03, B02)",
+          "description": "RGB from visual assets",
           "type": "raster-tile",
-          "options": "assets=B04&assets=B03&assets=B02&nodata=0&color_formula=Gamma RGB 3.2 Saturation 0.8 Sigmoidal RGB 25 0.35",
-          "minZoom": 9
+          "options": "assets=image&asset_bidx=image|1,2,3",
+          "minZoom": 6
         },
         {
-          "id": "natural-color-pre-feb-2022",
-          "name": "Natural color (pre Feb, 2022)",
-          "description": "Pre-Feb 2022 true color composite of visible bands (B04, B03, B02)",
+          "id": "test-natural-color",
+          "name": "Test Natural color updated",
+          "description": "RGB from visual assets - updated",
           "type": "raster-tile",
-          "options": "assets=B04&assets=B03&assets=B02&nodata=0&color_formula=Gamma RGB 3.7 Saturation 1.5 Sigmoidal RGB 15 0.35",
-          "minZoom": 9
-        },
-        {
-          "id": "color-infrared",
-          "name": "Color infrared",
-          "description": "Highlights healthy (red) and unhealthy (blue/gray) vegetation (B08, B04, B03).",
-          "type": "raster-tile",
-          "options": "assets=B08&assets=B04&assets=B03&nodata=0&color_formula=Gamma RGB 3.7 Saturation 1.5 Sigmoidal RGB 15 0.35",
-          "minZoom": 9
-        },
-        {
-          "id": "short-wave-infrared",
-          "name": "Short wave infrared",
-          "description": "Darker shades of green indicate denser vegetation. Brown is indicative of bare soil and built-up areas (B12, B8A, B04).",
-          "type": "raster-tile",
-          "options": "assets=B12&assets=B8A&assets=B04&nodata=0&color_formula=Gamma RGB 3.7 Saturation 1.5 Sigmoidal RGB 15 0.35",
-          "minZoom": 9
-        },
-        {
-          "id": "agriculture",
-          "name": "Agriculture",
-          "description": "Darker shades of green indicate denser vegetation (B11, B08, B02).",
-          "type": "raster-tile",
-          "options": "assets=B11&assets=B08&assets=B02&nodata=0&color_formula=Gamma RGB 3.7 Saturation 1.5 Sigmoidal RGB 15 0.35",
-          "minZoom": 9
-        },
-        {
-          "id": "normalized-difference-veg-inde",
-          "name": "Normalized Difference Veg. Index (NDVI)",
-          "description": "Normalized Difference Vegetation Index (B08-B04)/(B08+B04), darker green indicates healthier vegetation.",
-          "type": "raster-tile",
-          "options": "nodata=0&expression=(B08-B04)/(B08+B04)&rescale=-1,1&colormap_name=rdylgn&asset_as_band=true",
-          "minZoom": 9
-        },
-        {
-          "id": "moisture-index-ndwi",
-          "name": "Moisture Index (NDWI)",
-          "description": "Index indicating water stress in plants (B8A-B11)/(B8A+B11)",
-          "type": "raster-tile",
-          "options": "nodata=0&expression=(B8A-B11)/(B8A+B11)&rescale=-1,1&colormap_name=rdbu&asset_as_band=true",
-          "minZoom": 9
-        },
-        {
-          "id": "atmospheric-penetration",
-          "name": "Atmospheric penetration",
-          "description": "False color rendering with non-visible bands to reduce effects of atmospheric particles (B12, B11, B8A).",
-          "type": "raster-tile",
-          "options": "nodata=0&assets=B12&assets=B11&assets=B8A&color_formula=Gamma RGB 3.7 Saturation 1.5 Sigmoidal RGB 15 0.35",
-          "minZoom": 9
+          "options": "assets=image&asset_bidx=image|1,2,3",
+          "minZoom": 6
         }
       ]
-    },
-    "204": {}
+    }
   }
 }

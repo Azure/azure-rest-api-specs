@@ -48,6 +48,7 @@ interface Alerts {
 @@minLength(Alert.name, 1);
 @@doc(Alert.name, "Name of the SAP monitor alert resource.");
 @@doc(Alert.properties, "Alert Instance properties");
-@@doc(Alerts.create::parameters.resource,
+@@doc(
+  Alerts.create::parameters.resource,
   "Request body representing a SAP monitor's alert resource"
 );

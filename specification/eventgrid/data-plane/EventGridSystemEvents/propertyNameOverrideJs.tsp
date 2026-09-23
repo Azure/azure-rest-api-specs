@@ -18,119 +18,146 @@ using Microsoft.EventGrid.SystemEvents;
 @@clientName(AcsMessageMediaContent.id, "mediaId", "javascript");
 @@clientName(AcsMessageContext.id, "messageId", "javascript");
 @@clientName(AcsMessageInteractiveContent.type, "replyKind", "javascript");
-@@clientName(AcsMessageInteractiveButtonReplyContent.id,
+@@clientName(
+  AcsMessageInteractiveButtonReplyContent.id,
   "buttonId",
   "javascript"
 );
-@@clientName(AcsMessageInteractiveListReplyContent.id,
+@@clientName(
+  AcsMessageInteractiveListReplyContent.id,
   "listItemId",
   "javascript"
 );
-@@clientName(AcsMessageDeliveryStatusUpdatedEventData.channelType,
+@@clientName(
+  AcsMessageDeliveryStatusUpdatedEventData.channelType,
   "channelKind",
   "javascript"
 );
-@@clientName(AcsMessageReceivedEventData.channelType,
+@@clientName(
+  AcsMessageReceivedEventData.channelType,
   "channelKind",
   "javascript"
 );
 @@clientName(AcsMessageReceivedEventData.media, "mediaContent", "javascript");
-@@clientName(AcsMessageReceivedEventData.interactive,
+@@clientName(
+  AcsMessageReceivedEventData.interactive,
   "interactiveContent",
   "javascript"
 );
-@@clientName(AcsIncomingCallEventData.from,
+@@clientName(
+  AcsIncomingCallEventData.from,
   "fromCommunicationIdentifier",
   "javascript"
 );
-@@clientName(AcsIncomingCallEventData.to,
+@@clientName(
+  AcsIncomingCallEventData.to,
   "toCommunicationIdentifier",
   "javascript"
 );
 
-@@clientName(AcsEmailEngagementTrackingReportReceivedEventData.engagementType,
+@@clientName(
+  AcsEmailEngagementTrackingReportReceivedEventData.engagementType,
   "engagement",
   "javascript"
 );
-@@clientName(StorageTaskAssignmentQueuedEventData.queuedDateTime,
+@@clientName(
+  StorageTaskAssignmentQueuedEventData.queuedDateTime,
   "queuedOn",
   "javascript"
 );
-@@clientName(StorageTaskAssignmentCompletedEventData.completedDateTime,
+@@clientName(
+  StorageTaskAssignmentCompletedEventData.completedDateTime,
   "completedOn",
   "javascript"
 );
 
-@@clientName(ResourceNotificationsResourceUpdatedEventData.resourceInfo,
+@@clientName(
+  ResourceNotificationsResourceUpdatedEventData.resourceInfo,
   "resourceDetails",
   "javascript"
 );
-@@clientName(ResourceNotificationsResourceUpdatedEventData.operationalInfo,
+@@clientName(
+  ResourceNotificationsResourceUpdatedEventData.operationalInfo,
   "operationalDetails",
   "javascript"
 );
-@@clientName(ResourceNotificationsResourceDeletedEventData.resourceInfo,
+@@clientName(
+  ResourceNotificationsResourceDeletedEventData.resourceInfo,
   "resourceDetails",
   "javascript"
 );
-@@clientName(ResourceNotificationsResourceDeletedEventData.operationalInfo,
+@@clientName(
+  ResourceNotificationsResourceDeletedEventData.operationalInfo,
   "operationalDetails",
   "javascript"
 );
 @@clientName(AcsChatEventBaseProperties, "AcsChatEventBase", "javascript");
-@@clientName(AcsChatMessageEventBaseProperties,
+@@clientName(
+  AcsChatMessageEventBaseProperties,
   "AcsChatMessageEventBase",
   "javascript"
 );
-@@clientName(AcsChatThreadEventBaseProperties,
+@@clientName(
+  AcsChatThreadEventBaseProperties,
   "AcsChatThreadEventBase",
   "javascript"
 );
-@@clientName(AcsChatEventInThreadBaseProperties,
+@@clientName(
+  AcsChatEventInThreadBaseProperties,
   "AcsChatEventInThreadBase",
   "javascript"
 );
-@@clientName(AcsRecordingStorageInfoProperties,
+@@clientName(
+  AcsRecordingStorageInfoProperties,
   "AcsRecordingStorageInfo",
   "javascript"
 );
-@@clientName(AcsRecordingChunkInfoProperties,
+@@clientName(
+  AcsRecordingChunkInfoProperties,
   "AcsRecordingChunkInfo",
   "javascript"
 );
-@@clientName(AcsChatThreadParticipantProperties,
+@@clientName(
+  AcsChatThreadParticipantProperties,
   "AcsChatThreadParticipant",
   "javascript"
 );
-@@clientName(AcsSmsDeliveryAttemptProperties,
+@@clientName(
+  AcsSmsDeliveryAttemptProperties,
   "AcsSmsDeliveryAttempt",
   "javascript"
 );
 @@clientName(AcsSmsEventBaseProperties, "AcsSmsEventBase", "javascript");
 @@clientName(MapsGeofenceEventProperties, "MapsGeofenceEvent", "javascript");
-@@clientName(DeviceConnectionStateEventProperties,
+@@clientName(
+  DeviceConnectionStateEventProperties,
   "DeviceConnectionStateEvent",
   "javascript"
 );
-@@clientName(DeviceLifeCycleEventProperties,
+@@clientName(
+  DeviceLifeCycleEventProperties,
   "DeviceLifeCycleEvent",
   "javascript"
 );
-@@clientName(DeviceTelemetryEventProperties,
+@@clientName(
+  DeviceTelemetryEventProperties,
   "DeviceTelemetryEvent",
   "javascript"
 );
 @@clientName(DeviceTwinProperties, "DeviceTwin", "javascript");
-@@clientName(AcsChatThreadEventInThreadBaseProperties,
+@@clientName(
+  AcsChatThreadEventInThreadBaseProperties,
   "AcsChatThreadEventInThreadBase",
   "javascript"
 );
-@@clientName(AcsChatMessageEventInThreadBaseProperties,
+@@clientName(
+  AcsChatMessageEventInThreadBaseProperties,
   "AcsChatMessageEventInThreadBase",
   "javascript"
 );
 @@clientName(AcsCallingEventProperties, "AcsCallingEvent", "javascript");
-@@clientName(AcsCallParticipantEventData,
+@@clientName(
+  AcsCallParticipantEventData,
   "AcsCallParticipantEvent",
   "javascript"
 );
@@ -139,47 +166,58 @@ using Microsoft.EventGrid.SystemEvents;
 @@clientName(AcsCallRoomProperties, "AcsCallRoom", "javascript");
 @@clientName(AcsCallEndedByProperties, "AcsCallEndedBy", "javascript");
 @@clientName(AcsCallEndReasonProperties, "AcsCallEndReason", "javascript");
-@@clientName(ApiManagementCircuitBreakerProperties,
+@@clientName(
+  ApiManagementCircuitBreakerProperties,
   "ApiManagementCircuitBreaker",
   "javascript"
 );
-@@clientName(ApiManagementGatewayProperties,
+@@clientName(
+  ApiManagementGatewayProperties,
   "ApiManagementGateway",
   "javascript"
 );
-@@clientName(ApiManagementNearExpiryGatewayTokenProperties,
+@@clientName(
+  ApiManagementNearExpiryGatewayTokenProperties,
   "ApiManagementNearExpiryGatewayToken",
   "javascript"
 );
-@@clientName(ApiManagementExpiredGatewayTokenProperties,
+@@clientName(
+  ApiManagementExpiredGatewayTokenProperties,
   "ApiManagementExpiredGatewayToken",
   "javascript"
 );
-@@clientName(EventGridMQTTClientCreatedOrUpdatedEventData,
+@@clientName(
+  EventGridMQTTClientCreatedOrUpdatedEventData,
   "EventGridMqttClientCreatedOrUpdatedEventData",
   "javascript"
 );
-@@clientName(EventGridMQTTClientDeletedEventData,
+@@clientName(
+  EventGridMQTTClientDeletedEventData,
   "EventGridMqttClientDeletedEventData",
   "javascript"
 );
-@@clientName(EventGridMQTTClientSessionConnectedEventData,
+@@clientName(
+  EventGridMQTTClientSessionConnectedEventData,
   "EventGridMqttClientSessionConnectedEventData",
   "javascript"
 );
-@@clientName(EventGridMQTTClientSessionDisconnectedEventData,
+@@clientName(
+  EventGridMQTTClientSessionDisconnectedEventData,
   "EventGridMqttClientSessionDisconnectedEventData",
   "javascript"
 );
-@@clientName(EventGridMQTTClientEventData,
+@@clientName(
+  EventGridMQTTClientEventData,
   "EventGridMqttClientEventData",
   "javascript"
 );
-@@clientName(EventGridMQTTClientState,
+@@clientName(
+  EventGridMQTTClientState,
   "EventGridMqttClientState",
   "javascript"
 );
-@@clientName(EventGridMQTTClientDisconnectionReason,
+@@clientName(
+  EventGridMQTTClientDisconnectionReason,
   "EventGridMqttClientDisconnectionReason",
   "javascript"
 );

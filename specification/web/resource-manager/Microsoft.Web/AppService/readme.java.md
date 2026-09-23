@@ -8,35 +8,30 @@ service-name: AppService
 add-inner: AppServiceCertificate
 remove-inner: CsmDeploymentStatus
 name-for-ungrouped-operations: ResourceProvider
+rename-model: "ApiKVReferencePropertiesSource:ConfigReferenceSource,OpenIdConnectClientCredentialMethod:ClientCredentialMethod"
 enable-sync-stack: false
 directive:
-  - from: WebApps.json
-    where: $.definitions.MSDeploy.properties.properties
-    transform: >
-      delete $.$ref;
-      $['allOf'] = [{'$ref':'#/definitions/MSDeployCore'}];
-      return $;
-  - from: WebApps.json
+  - from: swagger-document
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/appsettings"].put
     transform: >
       $["x-ms-long-running-operation"] = true;
     reason: Swagger bug. Function App on ACA is LRO.
-  - from: WebApps.json
+  - from: swagger-document
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/appsettings"].put.responses
     transform: >
       $["202"] = {
               "description": "Operation is in progress.",
               "schema": {
-                "$ref": "./CommonDefinitions.json#/definitions/StringDictionary"
+                "$ref": "#/definitions/StringDictionary"
               }
             };
     reason: Swagger bug. Function App on ACA is LRO.
-  - from: WebApps.json
+  - from: swagger-document
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/web"].put
     transform: >
       $["x-ms-long-running-operation"] = true;
     reason: Swagger bug. Function App on ACA is LRO.
-  - from: WebApps.json
+  - from: swagger-document
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/config/web"].put.responses
     transform: >
       $["202"] = {
@@ -46,11 +41,28 @@ directive:
               }
             };
     reason: Swagger bug. Function App on ACA is LRO.
-  - from: WebApps.json
+  - from: swagger-document
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}"].patch
     transform: >
       $["x-ms-long-running-operation"] = true;
     reason: Swagger bug. Function App on ACA is LRO.
+
+  - from: swagger-document
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/instances/{instanceId}/processes/{processId}/dump"].get
+    transform: >
+      $["produces"] = ["application/json"];
+  - from: swagger-document
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/processes/{processId}/dump"].get
+    transform: >
+      $["produces"] = ["application/json"];
+  - from: swagger-document
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/processes/{processId}/dump"].get
+    transform: >
+      $["produces"] = ["application/json"];
+  - from: swagger-document
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/processes/{processId}/dump"].get
+    transform: >
+      $["produces"] = ["application/json"];
 ```
 
 ### Tag: package-2025-03 and java

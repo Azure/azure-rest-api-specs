@@ -3,3 +3,47 @@ suppressions:
     - package: 'sdk/resourcemanager/containerinstance/armcontainerinstance'
       breaking-changes:
         - Type of `ContainerGroupListResult.Value` has been changed from `[]*ContainerGroup` to `[]*ListResultContainerGroup`
+        - Struct `ContainerGroupProperties` has been removed
+  azure-sdk-for-js:
+    - package: '@azure/arm-containerinstance'
+      breaking-changes:
+        - Parameter image of interface Container is now optional
+        - Parameter resources of interface Container is now optional
+        - Parameter osType of interface ContainerGroup is now optional
+        - Removed Interface ContainerGroupProperties
+        - Removed Interface ContainerGroupPropertiesInstanceView
+        - Removed Interface Location_2
+        - Operation ContainerGroups.beginCreateOrUpdate has a new signature
+        - Operation ContainerGroups.beginCreateOrUpdateAndWait has a new signature
+        - Operation ContainerGroups.beginDeleteAndWait has a new signature
+        - Operation ContainerGroups.get has a new signature
+        - Operation ContainerGroups.update has a new signature
+  azure-sdk-for-python:
+    - package: 'azure-mgmt-containerinstance'
+      breaking-changes:
+        - Method `ContainersOperations.list_logs` changed its parameter `tail` from `positional_or_keyword` to `keyword_only`
+        - Method `ContainersOperations.list_logs` changed its parameter `timestamps` from `positional_or_keyword` to `keyword_only`
+        - Model `ContainerGroupProperties` deleted or renamed its instance variable `identity`
+        - Model `ContainerGroup` deleted or renamed its instance variable `confidential_compute_properties`
+        - Model `ContainerGroup` deleted or renamed its instance variable `containers`
+        - Model `ContainerGroup` deleted or renamed its instance variable `diagnostics`
+        - Model `ContainerGroup` deleted or renamed its instance variable `dns_config`
+        - Model `ContainerGroup` deleted or renamed its instance variable `encryption_properties`
+        - Model `ContainerGroup` deleted or renamed its instance variable `extensions`
+        - Model `ContainerGroup` deleted or renamed its instance variable `image_registry_credentials`
+        - Model `ContainerGroup` deleted or renamed its instance variable `init_containers`
+        - Model `ContainerGroup` deleted or renamed its instance variable `instance_view`
+        - Model `ContainerGroup` deleted or renamed its instance variable `ip_address`
+        - Model `ContainerGroup` deleted or renamed its instance variable `os_type`
+        - Model `ContainerGroup` deleted or renamed its instance variable `priority`
+        - Model `ContainerGroup` deleted or renamed its instance variable `provisioning_state`
+        - Model `ContainerGroup` deleted or renamed its instance variable `restart_policy`
+        - Model `ContainerGroup` deleted or renamed its instance variable `sku`
+        - Model `ContainerGroup` deleted or renamed its instance variable `subnet_ids`
+        - Model `ContainerGroup` deleted or renamed its instance variable `volumes`
+        - Model `InitContainerDefinition` deleted or renamed its instance variable `command`
+        - Model `InitContainerDefinition` deleted or renamed its instance variable `environment_variables`
+        - Model `InitContainerDefinition` deleted or renamed its instance variable `image`
+        - Model `InitContainerDefinition` deleted or renamed its instance variable `instance_view`
+        - Model `InitContainerDefinition` deleted or renamed its instance variable `security_context`
+        - Model `InitContainerDefinition` deleted or renamed its instance variable `volume_mounts`

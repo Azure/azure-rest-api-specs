@@ -1,10 +1,10 @@
 {
   "parameters": {
-    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40",
-    "resourceGroupName": "examplerg",
-    "partnerTopicName": "examplePartnerTopic1",
+    "api-version": "2025-07-15-preview",
     "eventSubscriptionName": "examplesubscription1",
-    "api-version": "2025-07-15-preview"
+    "partnerTopicName": "examplePartnerTopic1",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40"
   },
   "responses": {
     "200": {
@@ -14,8 +14,8 @@
             "name": "header1",
             "type": "Static",
             "properties": {
-              "value": "NormalValue",
-              "isSecret": false
+              "isSecret": false,
+              "value": "NormalValue"
             }
           },
           {
@@ -29,12 +29,14 @@
             "name": "header3",
             "type": "Static",
             "properties": {
-              "value": "mySecretValue",
-              "isSecret": true
+              "isSecret": true,
+              "value": "mySecretValue"
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "PartnerTopicEventSubscriptions_GetDeliveryAttributes",
+  "title": "PartnerTopicEventSubscriptions_GetDeliveryAttributes"
 }

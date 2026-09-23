@@ -1,0 +1,33 @@
+{
+  "operationId": "Endpoints_Get",
+  "parameters": {
+    "api-version": "2025-12-01",
+    "endpointName": "examples-endpointName",
+    "resourceGroupName": "examples-rg",
+    "storageMoverName": "examples-storageMoverName",
+    "subscriptionId": "60bcfc77-6589-4da2-b7fd-f9ec9322cf95"
+  },
+  "title": "Endpoints_Get_S3WithHmac",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "examples-endpointName",
+        "type": "Microsoft.StorageMover/storageMovers/endpoints",
+        "id": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/endpoints/examples-endpointName",
+        "properties": {
+          "description": "Example S3WithHmac Endpoint Description",
+          "credentials": {
+            "accessKeyUri": "https://examples-azureKeyVault.vault.azure.net/secrets/examples-access",
+            "secretKeyUri": "https://examples-azureKeyVault.vault.azure.net/secrets/examples-secret",
+            "type": "AzureKeyVaultS3WithHMAC"
+          },
+          "sourceType": "GCS",
+          "sourceUri": "https://examples-bucket.s3.amazonaws.com/prefix/",
+          "endpointType": "S3WithHMAC",
+          "endpointKind": "Source",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

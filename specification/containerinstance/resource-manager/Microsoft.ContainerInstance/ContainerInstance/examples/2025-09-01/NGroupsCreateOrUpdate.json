@@ -1,0 +1,63 @@
+{
+  "operationId": "NGroups_CreateOrUpdate",
+  "title": "NGroupsCreateOrUpdate",
+  "parameters": {
+    "ngroupsName": "demo-ngroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2025-09-01",
+    "resourceGroupName": "demo",
+    "NGroup": {
+      "properties": {
+        "updateProfile": {
+          "updateMode": "Manual"
+        },
+        "containerGroupProfiles": [],
+        "elasticProfile": {
+          "maintainDesiredCount": true,
+          "desiredCount": 1
+        }
+      },
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "properties": {
+          "updateProfile": {
+            "updateMode": "Manual"
+          },
+          "containerGroupProfiles": [],
+          "provisioningState": "Succeeded",
+          "elasticProfile": {
+            "maintainDesiredCount": true,
+            "desiredCount": 1
+          }
+        },
+        "name": "demo-ngroup",
+        "type": "Microsoft.ContainerInstance/ngroups",
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo/providers/Microsoft.ContainerInstance/ngroups/demo-ngroup"
+      }
+    },
+    "200": {
+      "body": {
+        "properties": {
+          "updateProfile": {
+            "updateMode": "Manual"
+          },
+          "containerGroupProfiles": [],
+          "provisioningState": "Succeeded",
+          "elasticProfile": {
+            "maintainDesiredCount": true,
+            "desiredCount": 1
+          }
+        },
+        "name": "demo-ngroup",
+        "type": "Microsoft.ContainerInstance/ngroups",
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo/providers/Microsoft.ContainerInstance/ngroups/demo-ngroup"
+      }
+    }
+  }
+}

@@ -6,6 +6,7 @@ emit:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
   disable:
     "@azure-tools/typespec-azure-core/operation-missing-api-version": "Not using standard versioning"
 options:
@@ -25,13 +26,6 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.AI.AnomalyDetector
     model-namespace: false
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    save-inputs: false
-    clear-output-folder: true
-    namespace: Azure.AI.AnomalyDetector
-    model-namespace: false
-    flavor: azure
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/ai-anomaly-detector-rest"
     generate-metadata: true

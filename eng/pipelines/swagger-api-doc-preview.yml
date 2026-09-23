@@ -8,8 +8,8 @@ pr:
       # Smoke test on changed files
       - eng/pipelines/swagger-api-doc-preview.yml
       - eng/pipelines/templates/steps/set-sha-check.yml
-      - .github/workflows/src/doc-preview.js
-      - .github/workflows/cmd/api-doc-preview.js
+      - .github/workflows/src/doc-preview.ts
+      - .github/workflows/cmd/api-doc-preview.ts
 
 jobs:
   - job: SwaggerApiDocPreview
@@ -32,21 +32,28 @@ jobs:
         value: 'Swagger ApiDocPreview'
 
     steps:
+      - checkout: self
+        # Fetch depth required to get list of changed files
+        fetchDepth: 2
+
+      - template: /eng/common/pipelines/templates/steps/login-to-github.yml
+        parameters:
+          TokenOwners:
+            - Azure
+            - MicrosoftDocs
+
       - template: /eng/pipelines/templates/steps/set-sha-check.yml
         parameters:
           State: pending
           TargetUrl: $(CurrentBuildUrl)
           Description: 'Starting docs build'
           Context: $(StatusName)
-
-      - checkout: self
-        # Fetch depth required to get list of changed files
-        fetchDepth: 2
+          GitHubToken: $(GH_TOKEN_Azure)
 
       - template: /eng/common/pipelines/templates/steps/sparse-checkout.yml
         parameters:
           SkipCheckoutNone: true
-          TokenToUseForAuth: $(azuresdk-github-pat)
+          TokenToUseForAuth: $(GH_TOKEN_MicrosoftDocs)
           # Path does not need to be set because sparse-checkout.yml already
           # checks out files in the repo root
           Repositories:
@@ -55,10 +62,8 @@ jobs:
               WorkingDirectory: AzureRestPreview
 
       - template: /eng/pipelines/templates/steps/npm-install.yml
-        parameters:
-          WorkingDirectory: .github/shared
 
-      - script: cmd/api-doc-preview.js --output ../../AzureRestPreview
+      - script: node cmd/api-doc-preview.ts --output ../../AzureRestPreview
         displayName: Generate Swagger API documentation preview
         workingDirectory: .github/workflows
 
@@ -69,6 +74,7 @@ jobs:
           TargetRepoOwner: MicrosoftDocs
           TargetRepoName: AzureRestPreview
           BaseRepoBranch: $(BranchName)
+          AuthToken: $(GH_TOKEN_MicrosoftDocs)
           CommitMsg: |
             Update API Doc Preview
             Build: $(System.CollectionUri)$(System.TeamProject)/_build/results?buildId=$(Build.BuildId)
@@ -98,6 +104,7 @@ jobs:
           TargetUrl: $(CurrentBuildUrl)
           Description: 'Waiting for docs build to finish'
           Context: $(StatusName)
+          GitHubToken: $(GH_TOKEN_Azure)
 
       - task: AzureCLI@2
         displayName: Wait for docs build to finish
@@ -114,9 +121,9 @@ jobs:
 
             Write-Host "Waiting for build to finish: https://dev.azure.com/apidrop/Content%20CI/_build/results?buildId=$($buildStart.id)"
             
-            # Timeout in 10 minutes to avoid infinite waiting
+            # Timeout in 20 minutes to avoid infinite waiting
             $start = Get-Date
-            while (((Get-Date) - $start).TotalMinutes -lt 10) {
+            while (((Get-Date) - $start).TotalMinutes -lt 20) {
               $runStatusRaw = az pipelines runs show `
                 --organization "https://dev.azure.com/apidrop/" `
                 --project "Content CI" `
@@ -202,6 +209,11 @@ jobs:
         displayName: Interpret docs build results
         condition: and(succeeded(), eq(variables['HasChanges'], 'true'))
 
+
+      # Login to GitHub again because the token may have expired waiting for the 
+      # docs build to complete
+      - template: /eng/common/pipelines/templates/steps/login-to-github.yml
+
       # Sets check status from docs build using $(CheckUrl), $(CheckState), and 
       # $(CheckDescription) variables set by api-doc-preview-interpret.js.
       - template: /eng/pipelines/templates/steps/set-sha-check.yml
@@ -212,6 +224,7 @@ jobs:
           TargetUrl: $(CheckUrl)
           Description: $(CheckDescription)
           Context: $(StatusName)
+          GitHubToken: $(GH_TOKEN)
 
       - template: /eng/pipelines/templates/steps/set-sha-check.yml
         parameters:
@@ -221,6 +234,7 @@ jobs:
           TargetUrl: $(CurrentBuildUrl)
           Description: No files changed require docs build
           Context: $(StatusName)
+          GitHubToken: $(GH_TOKEN)
 
       # In the event of a failure in this job (not the docs build job), set the 
       # PR status to failed and link to the current build.
@@ -233,3 +247,4 @@ jobs:
           TargetUrl: $(CurrentBuildUrl)
           Description: 'Orchestration build failed (click to see logs)'
           Context: $(StatusName)
+          GitHubToken: $(GH_TOKEN)

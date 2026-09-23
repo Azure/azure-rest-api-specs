@@ -1,0 +1,82 @@
+{
+  "operationId": "ImpactCategories_ListBySubscription",
+  "title": "Get ImpactCategories list by subscription",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceType": "microsoft.compute/virtualmachines",
+    "api-version": "2025-01-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/microsoft.Impact/ImpactCategories/ARMOperation.Create",
+            "name": "ARMOperation.Create",
+            "type": "Microsoft.Impact/impactCategories",
+            "properties": {
+              "description": "Use this to report problems related to creating a new azure virtual machine such as provisioning or allocation failures.",
+              "categoryId": "778f815b-6576-4a36-bea9-bffb3d26d7f4",
+              "parentCategoryId": "36266d25-9c53-40b3-af41-27418b11851e",
+              "requiredImpactProperties": [
+                {
+                  "name": "armCorrelations"
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/microsoft.Impact/ImpactCategories/ARMOperation.Delete",
+            "name": "ARMOperation.Delete",
+            "type": "Microsoft.Impact/impactCategories",
+            "properties": {
+              "description": "Use this to report failures in deleting VMs.",
+              "categoryId": "a9a0c6e2-1208-406f-8f4f-1ccc13fb75d5",
+              "parentCategoryId": "36266d25-9c53-40b3-af41-27418b11851e",
+              "requiredImpactProperties": [
+                {
+                  "name": "armCorrelations"
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/microsoft.Impact/ImpactCategories/ARMOperation.Other",
+            "name": "ARMOperation.Other",
+            "type": "Microsoft.Impact/impactCategories",
+            "properties": {
+              "description": "Use this to report Control Plane operation failures that don't fall into other ARMOperation categories",
+              "categoryId": "7b71f937-9344-499c-bfbe-d86fb755d891",
+              "parentCategoryId": "36266d25-9c53-40b3-af41-27418b11851e",
+              "requiredImpactProperties": [
+                {
+                  "name": "armCorrelations"
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/microsoft.Impact/ImpactCategories/Resource.Connectivity",
+            "name": "Resource.Connectivity",
+            "type": "Microsoft.Impact/impactCategories",
+            "properties": {
+              "description": "Use this to report connectivity issues to or from a VM.",
+              "categoryId": "95903644-3a15-4e37-b4be-a2ae8651f27b",
+              "parentCategoryId": "a8d1c1ae-5fcb-4a8b-a647-fd0a911e8667"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/microsoft.Impact/ImpactCategories/Resource.Connectivity.Inbound",
+            "name": "Resource.Connectivity.Inbound",
+            "type": "Microsoft.Impact/impactCategories",
+            "properties": {
+              "description": "Use this to report inbound connectivity issues to a VM.",
+              "categoryId": "940fb706-8586-4a0e-bb18-2e2d0ef0708d",
+              "parentCategoryId": "95903644-3a15-4e37-b4be-a2ae8651f27b"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

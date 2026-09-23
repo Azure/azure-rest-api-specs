@@ -6,7 +6,6 @@ emit:
 
 options:
   "@azure-tools/typespec-autorest":
-    azure-resource-provider-folder: "data-plane"
     emitter-output-dir: "{project-root}"
     examples-dir: "{project-root}/examples"
     output-file: "{version-status}/{version}/webpubsub.json"
@@ -27,16 +26,6 @@ options:
     generate-test: true
     generate-sample: true
     flavor: "azure"
-  "@azure-tools/typespec-csharp":
-    package-name: "Azure.Messaging.WebPubSub"
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    package-version: "1.6.0"
-    namespace: "Azure.Security.Attestation"
-    clear-output-folder: true
-    model-namespace: false
-    generate-test: true
-    generate-sample: true
-    flavor: "azure"
   "@azure-tools/typespec-ts":
     service-dir: "sdk/web-pubsub"
     emitter-output-dir: "{output-dir}/{service-dir}/web-pubsub"
@@ -44,8 +33,15 @@ options:
       name: "@azure/web-pubsub"
       version: "1.2.0"
     generate-test: true
-    generate-sample: true
+    generate-sample: false
     flavor: "azure"
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: Azure.Messaging.WebPubSub
+    model-namespace: false
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"
+  disable:
+    "@azure-tools/typespec-azure-core/no-query-explode": "Query parameters use default explode behavior"

@@ -53,10 +53,12 @@ interface ResourceHealthMetadataOperationGroupOps
         @segment("resourceHealthMetadata")
         @key
         default: "default",
-      }
+      },
+      ResourceName = "WebSiteResourceHealthMetadata"
     > {}
 
-@armResourceOperations
+@tag("ResourceHealthMetadata")
+@armResourceOperations(#{ omitTags: true })
 interface ResourceHealthMetadataOperationGroup {
   /**
    * Description for Gets the category of ResourceHealthMetadata to use for the given site
@@ -104,10 +106,12 @@ interface BySiteSlotOperationGroupOps
         @segment("resourceHealthMetadata")
         @key
         default: "default",
-      }
+      },
+      ResourceName = "WebSiteSlotResourceHealthMetadata"
     > {}
 
-@armResourceOperations
+@tag("ResourceHealthMetadata")
+@armResourceOperations(#{ omitTags: true })
 interface BySiteSlotOperationGroup {
   /**
    * Description for Gets the category of ResourceHealthMetadata to use for the given site
@@ -131,6 +135,7 @@ interface BySiteSlotOperationGroup {
 }
 
 @@doc(ResourceHealthMetadata.name, "");
-@@doc(ResourceHealthMetadata.properties,
+@@doc(
+  ResourceHealthMetadata.properties,
   "ResourceHealthMetadata resource specific properties"
 );

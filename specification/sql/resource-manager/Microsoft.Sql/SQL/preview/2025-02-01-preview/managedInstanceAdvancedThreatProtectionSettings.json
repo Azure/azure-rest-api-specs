@@ -1,0 +1,300 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-02-01-preview",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ManagedInstanceAdvancedThreatProtectionSettings"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/advancedThreatProtectionSettings": {
+      "get": {
+        "operationId": "ManagedInstanceAdvancedThreatProtectionSettings_ListByInstance",
+        "tags": [
+          "ManagedInstanceAdvancedThreatProtectionSettings"
+        ],
+        "description": "Get the managed instance's Advanced Threat Protection settings.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceAdvancedThreatProtectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the managed instance's Advanced Threat Protection settings.": {
+            "$ref": "./examples/ManagedInstanceAdvancedThreatProtectionSettingsListByInstance.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/advancedThreatProtectionSettings/{advancedThreatProtectionName}": {
+      "get": {
+        "operationId": "ManagedInstanceAdvancedThreatProtectionSettings_Get",
+        "tags": [
+          "ManagedInstanceAdvancedThreatProtectionSettings"
+        ],
+        "description": "Get a managed instance's Advanced Threat Protection state.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "advancedThreatProtectionName",
+            "in": "path",
+            "description": "The name of the Advanced Threat Protection state.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "AdvancedThreatProtectionName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Default",
+                  "value": "Default",
+                  "description": "Default"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceAdvancedThreatProtection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a managed instance's Advanced Threat Protection settings": {
+            "$ref": "./examples/ManagedInstanceAdvancedThreatProtectionSettingsGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ManagedInstanceAdvancedThreatProtectionSettings_CreateOrUpdate",
+        "tags": [
+          "ManagedInstanceAdvancedThreatProtectionSettings"
+        ],
+        "description": "Creates or updates Advanced Threat Protection settings.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "advancedThreatProtectionName",
+            "in": "path",
+            "description": "The name of the Advanced Threat Protection state.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "AdvancedThreatProtectionName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Default",
+                  "value": "Default",
+                  "description": "Default"
+                }
+              ]
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The managed instance Advanced Threat Protection state.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceAdvancedThreatProtection"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ManagedInstanceAdvancedThreatProtection' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceAdvancedThreatProtection"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a managed instance's Advanced Threat Protection settings with all parameters.": {
+            "$ref": "./examples/ManagedInstanceAdvancedThreatProtectionSettingsCreateMax.json"
+          },
+          "Update a managed instance's Advanced Threat Protection settings with minimal parameters.": {
+            "$ref": "./examples/ManagedInstanceAdvancedThreatProtectionSettingsCreateMin.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ManagedInstanceAdvancedThreatProtection"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ManagedInstanceAdvancedThreatProtection": {
+      "type": "object",
+      "description": "A managed instance Advanced Threat Protection.",
+      "properties": {
+        "properties": {
+          "$ref": "./common.json#/definitions/AdvancedThreatProtectionProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ManagedInstanceAdvancedThreatProtectionListResult": {
+      "type": "object",
+      "description": "The response of a ManagedInstanceAdvancedThreatProtection list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ManagedInstanceAdvancedThreatProtection items on this page",
+          "items": {
+            "$ref": "#/definitions/ManagedInstanceAdvancedThreatProtection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    }
+  },
+  "parameters": {}
+}

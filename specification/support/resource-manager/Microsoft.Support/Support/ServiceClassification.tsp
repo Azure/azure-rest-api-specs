@@ -46,6 +46,7 @@ interface ClassifyServicesNoSubscription {
 }
 
 @@doc(ClassifyServices.classifyServices::parameters.body, "Input to check.");
-@@doc(ClassifyServicesNoSubscription.classifyServices::parameters.body,
+@@doc(
+  ClassifyServicesNoSubscription.classifyServices::parameters.body,
   "Input to check."
 );

@@ -1,0 +1,554 @@
+<!-- This is a shared protocol reference, not a standalone agent file.
+     It is the single source of truth for the contract between the
+     `ARM API Reviewer` agent and the `ARM API Review Critic` agent.
+    Both agents reference this file by section anchor. Keep canonical schemas
+    here; agent files may include short operational summaries, but this file
+    wins whenever summaries drift. -->
+
+# Reviewer <-> Critic Protocol
+
+This file defines the wire contract between the `ARM API Reviewer` and the
+`ARM API Review Critic` agents: the inputs the Reviewer passes, the verdict
+tracks the Critic returns, the sentinel strings both sides accept, and the
+four marker schemas (review state, per-comment telemetry, reconciliation
+clarification, and Critic verdict).
+
+If the Reviewer or Critic file contradicts this document, **this document
+wins**. File bugs against the agent that drifted.
+
+## Glossary
+
+| Term                             | Meaning                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Session SHA**                  | For a PR, the head commit SHA captured at Step 1. For a local review, `local-sha256:<64-lowercase-hex>`, computed from the sorted reviewed/comparison source manifest. Binding for every source-file read by both agents across one review session.                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| **Base SHA / base ref**          | For a PR, the full base commit SHA; mutable branch refs are forbidden. For a local review, the recorded previous-version path/content hash and repository `HEAD`. Binding for breaking-change and classification checks.                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| **Review session**               | The arc from Step 1 (source snapshot pinned) through Step 10 (cleanup), within one conversation thread on one PR or local target.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| **Dispatch**                     | The host's subagent-invocation mechanism: `runSubagent` with `agentName: "ARM API Review Critic"` in VS Code Copilot Chat, the equivalent `agent` tool in other hosts.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **Fast path / Full review**      | Two review-depth tracks selected in Reviewer Step 1. Fast path skips Steps 3, 3.5, 4a, 5; Full review runs all steps.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| **Sentinel string**              | A literal string passed between agents that signals "this input is intentionally absent in a specific way" -- currently only `reconciliation skipped`.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **Finding-level FAIL**           | A Critic `FAIL` on a specific finding from the Reviewer's report (wrong line, rule misapplied, etc.). Overridable per the override workflow.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| **Reconciliation FAIL**          | A Critic `FAIL` on a Step 5.5 reconciliation-plan entry. Override eligibility depends on the reason; see [Non-overridable FAIL catalog](#non-overridable-fail-catalog).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| **Graph-fabrication FAIL**       | A Critic `Graph integrity = FAIL: fabrication` verdict. **Non-overridable**; the Reviewer must drop dependent findings and re-derive.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |
+| **INVALIDATED**                  | Critic `Finding accuracy = INVALIDATED` (session SHA moved or unreachable). Kills the entire session; no findings may be posted.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| **Next-step recommendation**     | An internal label set by the Reviewer at Step 7 based on the Critic's verdicts (`READY TO POST` / `REVISE RECOMMENDED` / `MANUAL DECISION REQUIRED` / `SESSION INVALIDATED`); gates Step 8 posting.                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| **Reconciliation Plan**          | The complete discussion inventory status, per-finding posting actions (POST-NEW / SKIP-COVERED / RESOLVE-AND-REPOST / REPLY-LINE-SHIFT / CLARIFY-CONFLICT / OVERFLOW-NOT-POSTED), and per-existing-thread dispositions (THANK-AND-RESOLVE / PROPOSE-HUMAN-RESOLVE) built in Reviewer Step 5.5 and executed in Step 8. `OVERFLOW-NOT-POSTED` marks a candidate excluded by the overall inline comment limit: it is **not** part of the agreed posting set, the Critic does **not** re-verify it, and it is disclosed only as an aggregate count and themes. Do not FAIL a plan for carrying such a row, and do not treat it as a finding the Reviewer forgot to post. |
+| **Scenarios A/B/C/D/E/F**        | The six reconciliation cases defined in Reviewer Step 5.5. A = SKIP-COVERED when no matching inline anchor shifted, B = RESOLVE-AND-REPOST, C = REPLY-LINE-SHIFT, D = all findings already covered, E = THANK-AND-RESOLVE, F = PROPOSE-HUMAN-RESOLVE.                                                                                                                                                                                                                                                                                                                                                                                                                |
+| **Considered-and-declined list** | Critic Input #8: prior-iteration `Likely missed violations` candidates the Reviewer evaluated and chose not to promote, each with a one-line rationale. Required to prevent advisory-item oscillation across iterations.                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| **Override workflow**            | Reviewer Step 7 item 13 -- the interactive checkpoint where the human may override a finding-level Critic FAIL with a structured justification validated by the [Override-reason validator](#override-reason-validator).                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| **Bias filter**                  | One of the six lenses in Critic Re-validation step 6 used to surface missed violations (future-breaking shape, operational pain, silent breaking changes, security smell, naming rot, what's missing).                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **Graph-diff**                   | The Critic's independent re-derivation of the Reviewer's Mermaid graphs (Step 3.5), compared against the Reviewer output -- the highest-value signal for missed structural violations.                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| **Override-reason**              | The structured justification a human attaches when overriding a finding-level Critic FAIL. Validated in Critic Re-validation step 5; an `override-reason-invalid` FAIL is non-overridable.                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| **Proof-of-fix anchor**          | The file/line citation the Reviewer records on a THANK-AND-RESOLVE or PROPOSE-HUMAN-RESOLVE entry. The Critic re-verifies independently in Re-validation step 7; missing/wrong/unreachable anchors are FAIL.                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+
+## Inputs the Reviewer passes to the Critic
+
+Pass all ten on every Critic invocation. The Critic uses **tolerant prose
+parsing**: it reads labeled fields in any order from the dispatch prompt
+and applies the documented default for any optional field that is absent.
+A required field (review target, Session SHA, Step 6 findings report, or Step 5.5
+reconciliation plan/sentinel) that is absent or malformed causes the Critic to
+return `Finding accuracy = FAIL` with
+reason `missing-inputs`.
+
+### Canonical input-block format
+
+The template both agents use is in a dedicated file:
+[`./arm-api-review-critic-inputs.template.md`](./arm-api-review-critic-inputs.template.md).
+Copy that template into every dispatch prompt; the Critic accepts any
+reasonable prose rendering of the labeled fields. The schema below
+restates field meanings for in-file readability.
+
+| #   | Input                              | Default when absent                    | Notes                                                                                                                                                                                                                                                                                               |
+| --- | ---------------------------------- | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | Review target                      | **Required -- no default**             | PR in `owner/repo#number` form, or `local workspace: <absolute-target>`.                                                                                                                                                                                                                            |
+| 2   | Session SHA                        | **Required -- no default**             | PR: full 40-char head SHA. Local: `local-sha256:<64-lowercase-hex>` from the complete source manifest. **Binding for every source-file read.**                                                                                                                                                      |
+| 3   | Step 6 findings report             | **Required -- no default**             | Verbatim, under the `## Step 6 findings report` heading.                                                                                                                                                                                                                                            |
+| 4   | Files reviewed / source manifest   | PR: derive from findings               | PR: workspace-relative reviewed paths. Local: **required** `reviewed`, `previous-version`, and applicable `head` source entries with SHA-256 hashes.                                                                                                                                                |
+| 5   | Previous-version source            | **Required -- no default**             | PR: previous-version path or `None - new service`, always with the full base commit SHA. Local: recorded repository `HEAD` plus comparison path/hash or explicit `None - new service`. Used for breaking-change and `[NEW]`/`[EXISTING]` checks.                                                    |
+| 6   | Step 5.5 reconciliation plan       | **Required -- no default**             | Verbatim, under the `## Step 5.5 reconciliation plan` heading, including counts and pagination completion for inline threads, top-level PR comments, and review bodies; or the explicit sentinel `reconciliation skipped`. Omission, an empty heading, or an empty string is malformed.             |
+| 7   | Prior iterations' FAIL set summary | Empty (none)                           | The two most recent prior iterations' rule-ID + file/line tuples. Empty on iteration 1. Used to suppress already-considered failures across iterations.                                                                                                                                             |
+| 8   | Considered-and-declined list       | Empty (none)                           | Prior-iteration `Likely missed violations` candidates the Reviewer evaluated and chose not to promote, each with a one-line rationale. The Critic MUST suppress these unless fresh evidence justifies re-surfacing.                                                                                 |
+| 9   | Graphs status                      | `Graphs: false; graph-mode: fast-path` | `Graphs: true` = Mermaid graphs in the Step 6 report and full graph diff. When false, `graph-mode` is required: `fast-path`, `size-downgrade`, or `derivation-failed`. The latter two re-derive sensitive data flow in summary form; only `derivation-failed` requires the Step 3.5 caution banner. |
+| 10  | Current iteration number           | `1`                                    | `1` through `3`. The Critic's output header echoes this verbatim.                                                                                                                                                                                                                                   |
+
+### Local source binding
+
+For a local review, Input #1 starts with `local workspace:` and Input #2 is the
+aggregate manifest digest. The Reviewer passes every reviewed, previous-version,
+and applicable recorded-`HEAD` source with its role and SHA-256 content hash in
+Input #4. Before validating a finding, the Critic independently verifies that
+the target is inside the active supported repository, re-enumerates the target,
+reselects the previous version, confirms the current `HEAD` equals Input #5,
+requires the path/role set to match exactly, reads each source from the recorded
+location, and confirms its hash. Before returning any verdict, it repeats these
+checks and recomputes the complete sorted-manifest digest.
+
+Use this exact digest algorithm in both agents:
+
+1. Hash each file's raw bytes with SHA-256 and render lowercase hexadecimal.
+2. Normalize each repo-relative path to `/` separators.
+3. Add the metadata line
+   `metadata\trepository-head\t<full-40-char-HEAD-sha>`, then render one line
+   per source as
+   `<role>\t<repo-relative-path>\t<lowercase-file-sha256>`, where role is
+   `reviewed`, `previous-version`, or `head`. For `head`, prefix the normalized
+   repo-relative path with `HEAD:`.
+4. Sort the metadata and source lines together by ordinal string comparison, join them with LF and
+   no trailing newline, hash the UTF-8 bytes with SHA-256, and prefix the result
+   with `local-sha256:`.
+5. For the stable marker target identity, resolve the real absolute target path,
+   normalize separators to `/`, remove a trailing separator except on a
+   filesystem root, lowercase it on Windows only, and hash its UTF-8 bytes with
+   SHA-256. Render that value as `local:<lowercase-hex>`.
+
+If the digest differs, return `Finding accuracy = INVALIDATED` with reason
+`session-sha-moved` and both `local-sha256:` values. If the target or a manifest
+file is no longer readable, use `session-sha-unreachable`. For local mode,
+Input #6 must be the literal `reconciliation skipped`, reconciliation is `N/A`,
+and the `pr` field in both markers is `local:<target-path-digest>`. No per-comment
+telemetry marker, posting plan, approval-label validation, or label mutation
+applies.
+
+### Compact-mode dispatch (iterations 2 and 3)
+
+When the Reviewer re-invokes the Critic after revisions (iteration 2 or 3),
+it MAY use a **compact-mode** payload to reduce dispatch size:
+
+- Pass only the **changed findings** (findings that were added, dropped, or
+  modified since the prior iteration) under the `## Step 6 findings report`
+  heading.
+- Include a **carry-over verdict summary**: a brief inline list of unchanged
+  findings with their prior-iteration Critic verdicts, labeled
+  `## Carry-over verdicts`.
+- **Re-pin the session SHA** before each compact-mode dispatch: run
+  `gh pr view <n> --json headRefOid` (or `pull_request_read(method: "get")`) to confirm
+  `head.sha` still equals the pinned session SHA. If it has moved, abort
+  per the session-invalidation rule.
+- **File-drift check (`carry-over-stale`).** For each carry-over finding,
+  re-fetch the cited file at the session SHA. If the file content at the
+  cited line has changed since the prior iteration, mark the finding
+  `carry-over-stale` and promote it from the carry-over list to the
+  changed-findings section so the Critic re-verifies it fully.
+
+The Critic treats compact-mode input as equivalent to a full payload for
+the carried-over items: carry-over verdicts are binding unless the
+`carry-over-stale` flag is set, in which case the Critic re-evaluates
+from scratch.
+
+### Non-empty response invariant
+
+An empty return or "Agent completed with no output" from a Critic dispatch
+is a **host-side failure**, not a Critic PASS. The Reviewer MUST:
+
+1. Treat the empty return as a dispatch failure.
+2. Retry the dispatch up to **3 total attempts** (the first attempt counts;
+   attempts 2 and 3 use the compact-mode payload if available).
+3. After 3 failed attempts, automatically fall back to
+   `critic-mode=unavailable` per the `[!CAUTION]` banner rules -- **no
+   user action required**. The Reviewer MUST disclose the auto-fallback in
+   the report.
+
+An empty return MUST NEVER be interpreted as a clean PASS or as an implicit
+`Finding accuracy = PASS`. A missing Critic verdict is always a host-side
+failure until the Critic explicitly returns a verdict.
+
+## Critic verdict tracks
+
+The Critic returns four verdicts in its output header. Three are binding,
+one is advisory.
+
+| Track                       | Values                                               | Binding?                         | Notes                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+| --------------------------- | ---------------------------------------------------- | -------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Finding accuracy**        | `PASS` / `WARN` / `FAIL` / `INVALIDATED`             | Binding                          | `INVALIDATED` (reasons: `session-sha-moved`, `session-sha-unreachable`) overrides every other track and kills the session.                                                                                                                                                                                                                                                                                                                                       |
+| **Graph integrity**         | `PASS` / `WARN` / `FAIL: fabrication` / `N/A`        | Binding when `FAIL: fabrication` | `N/A` is legitimate for any false graph mode. `fast-path` skips re-derivation. `size-downgrade` re-derives sensitive data flow without requiring a failure banner. `derivation-failed` re-derives sensitive data flow and requires the Step 3.5 caution banner with a reason. Missed leaks surface in `Likely missed violations`, not the Graph-integrity track. Deprecated `graphs-produced: downgraded/degraded` maps to `size-downgrade`/`derivation-failed`. |
+| **Reconciliation accuracy** | `PASS` / `WARN` / `FAIL` / `N/A`                     | Binding when `FAIL`              | Verifies complete discussion-surface inventory, semantic duplicate suppression, contradiction clarification, line-shift handling, and fix dispositions. `N/A` is only legitimate when Input #6 was the sentinel `reconciliation skipped`.                                                                                                                                                                                                                        |
+| **Coverage quality**        | `APPROVE` / `REQUEST EXPANSION` / `NEEDS DISCUSSION` | Advisory only                    | Never gates posting.                                                                                                                                                                                                                                                                                                                                                                                                                                             |
+
+## Sentinel strings
+
+Only one sentinel is currently defined.
+
+- **`reconciliation skipped`** -- pass as Input #6 when the Reviewer could
+  not produce a reconciliation plan (one or more discussion surfaces could not
+  be fetched completely and the human elected to proceed, or the human
+  cancelled reconciliation). The
+  Critic responds by recording `Reconciliation accuracy = N/A`. An empty
+  plan, empty string, or omitted Input #6 is **not** equivalent -- the
+  Critic FAILs the run on those.
+- A plan whose every row is `POST-NEW` is still a plan; pass it verbatim,
+  not the sentinel.
+
+## Telemetry-marker schemas
+
+The Reviewer emits three distinct marker types. They live in different
+places and serve different purposes. Do not confuse them.
+
+### Review-state marker (per response)
+
+Hidden HTML comment as the **literal first line** of every Reviewer
+response after Step 1 begins, through Step 10 (or session abandonment /
+invalidation). Required regardless of content -- findings, error reports,
+approval prompts, SHA-drift reports.
+
+<!-- markdownlint-disable MD013 -->
+
+```html
+<!-- review-state: critic-mode={pending|subagent|unavailable|invalidated} | iteration={N} | pr={owner/repo#number|local:<64-lowercase-hex>} -->
+```
+
+<!-- markdownlint-enable MD013 -->
+
+| Field         | Values                                                                                                | Meaning                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| ------------- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `critic-mode` | `pending`                                                                                             | Review session is live after Step 1 pinned SHAs, but the Critic has not returned yet. Only progress, fetch-error, or retry messages may use this value. **`pending` is forbidden on any response that contains finding sections** (`## API Review:`, `### Blocking Issues`, `### Warnings`, `### Suggestions`, per-finding Mermaid graphs, or a Reconciliation Plan). Emitting findings under `pending` is a constraint violation; use `subagent`, `unavailable`, or `invalidated` once the Critic gate has resolved. |
+|               | `subagent`                                                                                            | State A: Critic dispatched as subagent and verdict folded in.                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+|               | `unavailable`                                                                                         | State B: all dispatch attempts failed (empty-response or error) and the auto-fallback fired. `[!CAUTION]` banner rendered. **Never `skipped` -- that value is forbidden.**                                                                                                                                                                                                                                                                                                                                            |
+|               | `invalidated`                                                                                         | State C: Critic returned `Finding accuracy = INVALIDATED`. SHA-drift report only; no findings rendered.                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `iteration`   | `1`-`3` (Critic iteration this response reflects); `0` for Reviewer-detected drift between iterations | Echo of Input #10 for the most recent Critic call. See note below on `iteration=0`.                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| `pr`          | `owner/repo#number` or `local:<64-lowercase-hex>`                                                     | Used by State A's session-boundary check. The local value is the SHA-256 hash of the normalized absolute target path, so it remains stable across content drift.                                                                                                                                                                                                                                                                                                                                                      |
+
+Exempt from the marker: responses emitted **before** Step 1 pins the
+session SHA (e.g., out-of-scope-repo decline messages).
+
+> **`iteration=0` rule.** `iteration=0` is reserved for Reviewer-detected
+> session-SHA-drift or session-invalidation reports emitted **between**
+> Critic iterations -- never on a response that folds in a fresh Critic
+> verdict. When `iteration=0`, the response body MUST be the drift or
+> invalidation report only (no findings, no posting prompts) and
+> `critic-mode` carries whatever value the prior iteration ended with
+> (typically `subagent`). Responses that fold in a Critic verdict require
+> `iteration` in `1`-`3`.
+
+### Per-comment telemetry marker (Step 6 canonical body and Step 8 posting)
+
+<!-- cspell:ignore REPOST -->
+
+The marker is the **last line** of every standalone finding
+(POST-NEW and RESOLVE-AND-REPOST) and summary. To satisfy Reviewer-Posted
+Parity, the Reviewer also renders this exact marker in any Step 6 canonical
+comment body that is shown to the human and later posted. Not on reply-only comments
+(REPLY-LINE-SHIFT, inline CLARIFY-CONFLICT, THANK-AND-RESOLVE,
+PROPOSE-HUMAN-RESOLVE replies).
+
+**The delimiter differs by surface; the fields and their order never do.**
+
+- **Interactive agent** (VS Code): a hidden HTML comment, shown below.
+- **Unattended workflow** (`.github/workflows/arm-api-review.md`): a single
+  italic plain-text line carrying the same pipe-separated fields. gh-aw's
+  sanitizer strips HTML comments before publication, so a marker written as an
+  HTML comment there never reaches GitHub. That file defines the exact form.
+
+Treat a marker as valid when its fields and their order match, regardless of
+which of these two delimiters the surface requires.
+
+**A marker is attribution, not authentication.** Any PR participant can copy
+marker text. A thread is trusted agent-owned for autonomous resolution only
+when both conditions hold:
+
+1. its body contains a structurally valid marker; and
+2. the comment author login is exactly `github-actions[bot]`.
+
+A marker-bearing comment from any other author still participates in semantic
+coverage, deduplication, contradiction detection, and telemetry, but is
+human-owned for mutation purposes. It must never be auto-resolved. Interactive
+reviews route a fixed such thread through `PROPOSE-HUMAN-RESOLVE`; line shifts
+use `REPLY-LINE-SHIFT`.
+
+<!-- markdownlint-disable MD013 -->
+
+```html
+<!-- posted-by: arm-api-reviewer-agent | rule: <RULE-ID-or-summary> | category: <category-slug> | severity: blocking|warning|suggestion | classification: new|existing | critic: pass|warn|override|unknown | head-sha: <full-40-char-sha> [| downstream-rule: <LINTER-RULE-ID>] [| override-reason: <required-when-critic=override>] -->
+```
+
+<!-- markdownlint-enable MD013 -->
+
+| Field             | Values                                      | Notes                                                                                                                                                                                                                                                                                       |
+| ----------------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `posted-by`       | `arm-api-reviewer-agent`                    | Attribution and matching signal. Autonomous ownership additionally requires author `github-actions[bot]`; marker text alone never authorizes mutation. **Do not rename** without a backward-compat plan.                                                                                    |
+| `rule`            | Rule ID from instruction files or `summary` | e.g., `RPC-Put-V1-01`, `OAPI027`, `SEC-SECRET-DETECT`; use `summary` only for the review summary.                                                                                                                                                                                           |
+| `category`        | One of the 11 slugs below                   | The finding's issue type. Closed vocabulary; see [Finding categories](#finding-categories). Required on every standalone finding. Use `summary` on the review summary marker.                                                                                                               |
+| `severity`        | `blocking` / `warning` / `suggestion`       | Lowercase.                                                                                                                                                                                                                                                                                  |
+| `classification`  | `new` / `existing`                          | From Step 4a.                                                                                                                                                                                                                                                                               |
+| `critic`          | `pass`                                      | Default -- Critic returned PASS at High confidence.                                                                                                                                                                                                                                         |
+|                   | `warn`                                      | Critic returned PASS at Medium/Low confidence, human accepted as-is.                                                                                                                                                                                                                        |
+|                   | `override`                                  | Human explicitly overrode an eligible Critic FAIL. **REQUIRES `override-reason`.** Non-overridable reasons, including reconciliation noise-safety failures, are never `override`; see the [Non-overridable FAIL catalog](#non-overridable-fail-catalog) for the authoritative list.         |
+|                   | `unknown`                                   | Fallback value emitted only when the per-finding verdict cannot be looked up (e.g., response-scope `critic-mode` is `unavailable` and no per-finding verdict was produced). See [Telemetry fallback policy](#telemetry-fallback-policy-load-bearing); do not fabricate `pass` in this case. |
+| `head-sha`        | Full 40-char session SHA                    | Short SHAs forbidden in this marker.                                                                                                                                                                                                                                                        |
+| `downstream-rule` | Linter rule ID                              | REQUIRED when a finding's fix adds or tightens a type, format, decorator, `x-ms-*` extension, or schema constraint in a conflict-aware area from `linter-rule-coverage.md` (for example, `R3017`). Optional otherwise.                                                                      |
+| `override-reason` | Structured justification                    | REQUIRED iff `critic: override`. Must satisfy the canonical Override-reason validator defined below.                                                                                                                                                                                        |
+
+### Finding categories
+
+Canonical, closed vocabulary for the `category` field. Every standalone finding
+carries exactly one of these slugs, chosen at emit time. This is the **single
+definition** of the category set: the reviewer, the Critic, the automated
+workflow, and the overall output limit all refer to this list. Do not invent a
+slug, and do not re-derive categories by reading rule IDs after the fact.
+
+| Category slug                   | Covers                                                                                                   | Drop group              |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------- | ----------------------- |
+| `schema-and-property-design`    | Property shape, types, formats, required/optional, nullability, constraints, response payload shape      | 2 (property and naming) |
+| `naming-enums-and-identifiers`  | Naming conventions, enum modelling and extensibility, identifier and resource-name patterns              | 2 (property and naming) |
+| `sdk-and-client-impact`         | Consequences for generated clients: client name collisions, awkward or breaking generated surface        | 2 (property and naming) |
+| `resource-modeling`             | Resource type shape, tracked vs proxy, parent/child structure, provisioning state, ARM envelope          | 3 (ARM contract)        |
+| `operations-and-http-semantics` | Verb choice, status codes, headers, idempotency, collection vs point operations, query parameters        | 3 (ARM contract)        |
+| `long-running-operations`       | LRO patterns, `x-ms-long-running-operation`, final-state-via, polling and operation-status contract      | 3 (ARM contract)        |
+| `suppressions-and-tooling`      | `suppressions.yaml` and readme suppressions, AutoRest and emitter configuration, tspconfig               | 3 (ARM contract)        |
+| `review-readiness-and-ci`       | Missing or failing prerequisites for review: absent TypeSpec, tags that were never wired up, CI blockers | 3 (ARM contract)        |
+| `documentation-and-examples`    | Descriptions, doc comments, example payloads and their correctness                                       | 1 (dropped first)       |
+| `versioning-and-compatibility`  | API version placement, breaking changes against a prior version, compatibility of changed contracts      | 4 (versioning)          |
+| `security-and-secrets`          | Credential-bearing properties, secret exposure in responses or examples, auth surface                    | 5 (dropped last)        |
+
+Choosing a category:
+
+- Pick the category matching the **defect**, not the file it was found in. A
+  secret in an example file is `security-and-secrets`, not
+  `documentation-and-examples`.
+- When a finding could fit two categories, pick the one whose corrective action
+  the author must take. A property renamed for SDK reasons is
+  `naming-enums-and-identifiers` if the fix is the name, `sdk-and-client-impact`
+  if the fix is a client directive.
+- There is no `other` value. If nothing fits cleanly, pick the nearest slug
+  rather than omitting the field, and never treat the finding as uncategorized:
+  an absent category makes the finding invisible to both the drop order and the
+  telemetry.
+
+The **Drop group** column is the authoritative mapping used when a review must
+be trimmed to the inline comment limit in `.github/workflows/arm-api-review.md`.
+Groups are dropped in ascending order, so group 1 goes first and group 5 last.
+There are no per-category caps: a category never limits a finding on its own,
+and the group matters only once the overall limit is exceeded. Categories are
+the unit of measurement; drop groups are the coarser unit used when trimming.
+
+### Top-level reconciliation clarification marker
+
+A consolidated top-level CLARIFY-CONFLICT comment is reconciliation output, not
+a new standalone finding. End it with this marker so later sessions recognize
+agent ownership without pretending the comment is one finding. The delimiter
+follows the same surface rule as finding markers:
+
+<!-- markdownlint-disable MD013 -->
+
+```html
+<!-- posted-by: arm-api-reviewer-agent | reconciliation: clarification | critic: pass|warn|unknown | head-sha: <full-40-char-session-sha> -->
+```
+
+Interactive VS Code form above. Unattended workflow form:
+
+```text
+_posted-by: arm-api-reviewer-agent | reconciliation: clarification | critic: pass|warn|unknown | head-sha: <full-40-char-session-sha>_
+```
+
+<!-- markdownlint-enable MD013 -->
+
+Inline clarification replies remain inside an existing thread and do not need
+a marker. The Critic verifies the top-level marker, every linked prior item,
+and the clarification body before approving the plan.
+
+**`critic-mode` vs `critic` field -- different concepts.** `critic-mode` (in
+the review-state marker) is response-scope and describes how the Critic
+ran for the whole response. `critic` (in the per-comment marker) is
+finding-scope and records the per-finding verdict.
+
+### Critic-verdict marker (per Critic response)
+
+Hidden HTML comment as the **literal first line** of every Critic response.
+Mirrors the role of the Reviewer's `review-state` marker: gives a
+machine-auditable header before the structured `### Verdict` table that
+follows. Required on every Critic dispatch return.
+
+<!-- markdownlint-disable MD013 -->
+
+```html
+<!-- critic-verdict: finding={pass|warn|fail|invalidated} | graph={pass|warn|fail-fabrication|na} | reconciliation={pass|warn|fail|na} | coverage={approve|request-expansion|needs-discussion} | iteration={N} | pr={owner/repo#number|local:<64-lowercase-hex>} -->
+```
+
+<!-- markdownlint-enable MD013 -->
+
+| Field            | Values                                               | Notes                                                                                |
+| ---------------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| `finding`        | `pass` / `warn` / `fail` / `invalidated`             | Mirrors `Finding accuracy` row of the `### Verdict` table. Lowercase.                |
+| `graph`          | `pass` / `warn` / `fail-fabrication` / `na`          | Mirrors `Graph integrity` row. `na` is legitimate for any explicit false graph mode. |
+| `reconciliation` | `pass` / `warn` / `fail` / `na`                      | Mirrors `Reconciliation accuracy` row. `na` only when Input #6 was the sentinel.     |
+| `coverage`       | `approve` / `request-expansion` / `needs-discussion` | Mirrors `Coverage quality` row.                                                      |
+| `iteration`      | `1`-`3`                                              | Echo of Input #10.                                                                   |
+| `pr`             | `owner/repo#number` or `local:<64-lowercase-hex>`    | PR identity or normalized local-target path digest for this review session.          |
+
+**Parsing contract.** The Reviewer parses this marker first, then
+cross-checks the values against the `### Verdict` table body. If the
+marker is missing, malformed, or disagrees with the table body, the
+Reviewer treats the response as a dispatch failure and applies the
+bounded-retry / auto-unavailable policy (see "Non-empty response
+invariant" above). This makes Critic output programmatically auditable
+without depending on markdown-table parsing alone.
+
+The Critic produces no other HTML markers. In particular, the Critic
+MUST NOT emit a `review-state` marker (that is the Reviewer's
+response-scope marker) or a `posted-by: arm-api-reviewer-agent`
+marker (that is the Reviewer's per-comment marker).
+
+## Non-overridable FAIL catalog
+
+Single source of truth for which Critic `FAIL` reasons can be cleared by a
+human override (`critic: override` per-comment marker) and which cannot.
+Both agent files reference this table; do not restate the contents
+elsewhere.
+
+The catalog has **11 non-overridable reasons** (marked
+**Yes** below). All other FAIL reasons are overridable with a validated
+`override-reason` justification.
+
+| FAIL reason                    | Critic step                     | Non-overridable?        | Recovery                                                                                                       |
+| ------------------------------ | ------------------------------- | ----------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `wrong-line`                   | Re-validation 2                 | No                      | Reviewer fixes the line number and re-invokes the Critic.                                                      |
+| `line-in-conflict-region`      | Re-validation 2                 | No (`WARN`)             | Reviewer drops the finding or waits for conflict resolution.                                                   |
+| `rule-not-found`               | Re-validation 3                 | Override allowed        | Override-reason must cite the corrected instruction-file anchor.                                               |
+| `rule-misapplied`              | Re-validation 3                 | Override allowed        | Override-reason must quote the rule text that supports the finding.                                            |
+| `misclassified`                | Re-validation 4                 | No                      | Reviewer applies the Critic's `[NEW]`/`[EXISTING]` correction.                                                 |
+| `downstream-ci-conflict`       | Re-validation 4.5               | Override allowed        | Override-reason must cite the reference file section that justifies the shape change; OR correct per Recovery. |
+| `suppression-path-mismatch`    | Re-validation 4.5               | Override allowed        | Override-reason must quote the jsonpath and justify the mismatch; OR re-render `where:` segment-for-segment.   |
+| `override-reason-invalid`      | Re-validation 5                 | **Yes**                 | Reviewer supplies a valid justification or drops the finding.                                                  |
+| `unescaped-mention`            | Re-validation 6.5               | **Yes**                 | Reviewer backticks every `@<token>` outside code spans.                                                        |
+| `hash-number-autolink`         | Re-validation 6.5               | **Yes**                 | Reviewer removes `#` prefix on bare finding numbers.                                                           |
+| `skip-not-justified`           | Re-validation 7                 | Override allowed        | Override-reason must justify why the existing coverage is adequate; OR demote SKIP-COVERED to POST-NEW.        |
+| `inventory-incomplete`         | Re-validation 7                 | **Yes**                 | Retry all three paginated discussion surfaces; OR use the explicit `reconciliation skipped` path.              |
+| `duplicate-missed`             | Re-validation 7                 | **Yes**                 | Reclassify POST-NEW to SKIP-COVERED or the applicable line-shift action.                                       |
+| `conflict-unclarified`         | Re-validation 7                 | **Yes**                 | Replace POST-NEW/silence with CLARIFY-CONFLICT and supply the prior-item anchor.                               |
+| `clarification-unsupported`    | Re-validation 7                 | **Yes**                 | Correct the clarification evidence/supersession statement or leave the conflict unresolved and escalate.       |
+| `overflow-posted`              | Re-validation 7                 | **Yes**                 | Remove the overflow candidate from the posting set and disclose only its aggregate count and themes.           |
+| `shift-misclassified`          | Re-validation 7                 | Override allowed        | Override-reason must justify the scenario choice; OR reclassify between Scenarios B and C.                     |
+| `fix-not-verified`             | Re-validation 7                 | Override allowed        | Override-reason must cite the proof-of-fix anchor; OR drop the Scenario E/F entry; thread stays open.          |
+| `fix-anchor-wrong`             | Re-validation 7                 | Override allowed        | Override-reason must supply the corrected anchor; OR drop the Scenario E/F entry; thread stays open.           |
+| `fix-anchor-unreachable`       | Re-validation 7                 | Override allowed        | Override-reason must explain why the anchor is correct; OR drop the Scenario E/F entry; thread stays open.     |
+| `Graph integrity: fabrication` | Independent graph re-derivation | **Yes**                 | Reviewer drops dependent findings, re-derives graphs, re-invokes Critic.                                       |
+| `file-fetch-failed`            | Re-validation 1                 | No                      | Reviewer drops the finding and reports the fetch failure to the human.                                         |
+| `session-sha-moved`            | Re-validation 1                 | **Yes** (kills session) | Only legal action: restart from Reviewer Step 1 or abandon.                                                    |
+| `session-sha-unreachable`      | Re-validation 1                 | **Yes** (kills session) | Only legal action: restart from Reviewer Step 1 or abandon.                                                    |
+| `missing-inputs`               | Input validation                | No                      | Reviewer fixes the input block (see canonical format) and re-dispatches.                                       |
+| `approval-label-mismatch`      | Re-validation 0                 | No                      | Reviewer refreshes the exact approval-label inventory from PR metadata and re-dispatches.                      |
+| `approval-context-missing`     | Re-validation 0                 | No                      | Reviewer adds or corrects the finding-specific approval context and re-dispatches.                             |
+
+"Non-overridable" means the `critic: override` per-comment marker
+(human-supplied `override-reason`) does NOT clear the FAIL. The Reviewer's
+only legal responses are the ones listed in "Recovery". The 11
+non-overridable reasons are: `override-reason-invalid`, `unescaped-mention`,
+`hash-number-autolink`, `inventory-incomplete`, `duplicate-missed`,
+`conflict-unclarified`, `clarification-unsupported`, `overflow-posted`,
+`Graph integrity: fabrication`, `session-sha-moved`, and
+`session-sha-unreachable`. A graph-fabrication FAIL that the human
+disagrees with escalates the whole review to `MANUAL DECISION REQUIRED`
+for per-row human consent -- not to an override.
+
+### Telemetry fallback policy (load-bearing)
+
+**Telemetry MUST NEVER block the Reviewer or Critic from doing their
+job.** The markers in this section are observability metadata, not
+correctness gates. If marker assembly fails for any reason -- a field
+value cannot be computed, a value contains a character that would
+break HTML-comment syntax, a string-template lookup throws, etc. -- the
+correct behavior is to fall back, not to skip posting the comment or
+abort the review.
+
+**Fallback minimal marker.** When the full per-comment marker cannot
+be assembled, emit this minimal marker in its place and proceed with
+the comment as if the full marker had been emitted:
+
+<!-- markdownlint-disable MD013 -->
+
+```html
+<!-- posted-by: arm-api-reviewer-agent | telemetry: degraded | reason: <one-line-summary-of-what-failed> -->
+```
+
+<!-- markdownlint-enable MD013 -->
+
+The unattended workflow uses the equivalent visible form because its publisher
+strips HTML comments:
+
+```text
+_posted-by: arm-api-reviewer-agent | telemetry: degraded | reason: <one-line-summary-of-what-failed>_
+```
+
+The minimal marker preserves the attribution signal Step 5.5 uses for matching
+and records that the per-finding fields were not captured. It does not prove
+trusted thread ownership; author verification is still required. The
+`reason:` value SHOULD be a short machine-friendly identifier
+(`head-sha-unavailable`, `rule-id-missing`, `override-reason-truncated`,
+`assembly-error`) so the gap is queryable later, but any free-text
+one-liner is acceptable.
+
+**Per-field degradation order.** Before falling back to the minimal
+marker, try the following in order; each step degrades one field
+without dropping the others:
+
+1. **Optional fields** (`downstream-rule`, `override-reason` when
+   `critic` is not `override`): omit the field entirely if its value
+   cannot be assembled. The marker is still well-formed.
+2. **`head-sha` field**: if the full 40-char SHA is unavailable, fall back to
+   the minimal marker with `reason: head-sha-unavailable`. Do not emit a
+   partial full marker, and do not substitute a short SHA, branch name, or
+   different identifier into the `head-sha` slot.
+3. **`critic` field**: if the per-finding verdict cannot be looked up
+   (e.g., the response-scope `critic-mode` is `unavailable` and no
+   per-finding verdict was produced), emit `critic: unknown` rather
+   than fabricating `pass`. The minimal marker is preferred over a
+   fabricated `pass`.
+4. **`rule`, `category`, `severity`, `classification`**: these four fields are
+   the highest-signal observability fields. If any one of them cannot be
+   assembled, fall back to the minimal marker -- a marker missing the rule ID,
+   category, or severity creates a misleading audit trail and is worse than no
+   per-comment marker at all.
+
+**Posting is non-negotiable.** Once the human has approved the plan
+in Step 8, every approved finding posts. A telemetry-assembly failure
+on finding N MUST NOT prevent the posting of findings N, N+1, ..., or
+the bundled Step 9 label changes. Log the failure (chat output, not
+a posted PR comment) and continue.
+
+**Critic must not FAIL a finding for telemetry shape.** The Critic's
+re-validation procedure validates rule citations, line numbers, file
+content, and reconciliation anchors. Marker field presence, value
+shape, and per-field correctness are **out of scope** for the Critic
+and never produce a `FAIL`. If the Critic notices a malformed marker
+in the Reviewer's Step 6 canonical body, surface it under
+`Telemetry observations` (advisory, separate from `Likely missed
+violations`) so the Reviewer or human can correct future markers, but
+never block the current review on it.
+
+### Override-reason validator
+
+This section is the **single source of truth** for the override-reason
+contract. Both the Reviewer (Step 7 item 13) and the Critic (Re-validation
+step 5) reference this section; neither file restates the rules. If the
+validator changes, this section is the only edit point.
+
+An `override-reason` is valid if and only if **all three** of the following
+checks pass against the trimmed value:
+
+1. **Length.** At least 20 characters after trimming leading and trailing
+   whitespace.
+2. **Denylist.** Does not contain (case-insensitive substring match) any of
+   the boilerplate phrases below.
+3. **Structured anchor or verbatim counter-quote.** Contains at least one of:
+   - an instruction-file citation in the form `<file>:L<a>-L<b>` -- a path
+     ending in `.md` or `.instructions.md`, followed by `:L<digits>-L<digits>`
+     or `:L<digits>` (the Reviewer's counter-citation); **OR**
+   - a verbatim counter-quote from the cited rule, enclosed in matched
+     delimiters (`"..."` or `"..."`), of at least 15 characters.
+
+A justification that is long enough but contains neither an anchor nor a
+quote is paraphrase or assertion, not evidence -- it fails check 3.
+
+**Override-reason denylist** (case-insensitive substring match, used by
+check 2): `existing pattern`, `reviewer says ok`, `will fix later`, `n/a`,
+`none`, `tbd`, `wontfix`, `ignore`, `looks fine`, `is correct`, `is wrong`,
+`disagree`.
+
+**Where this validator runs.**
+
+- The **Reviewer** runs the validator in Step 7 item 13 **before** folding a
+  human override into the report. A bad reason blocks plan finalization, not
+  posting.
+- The **Critic** re-runs the validator in Re-validation step 5 when a fresh
+  override appears in the report. A re-run failure produces
+  `FAIL: override-reason-invalid`, which is **non-overridable** -- the
+  Reviewer cannot fold a second override on top of a rejected override.

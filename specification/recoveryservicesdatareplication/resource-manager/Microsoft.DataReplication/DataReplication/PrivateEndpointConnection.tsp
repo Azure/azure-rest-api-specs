@@ -26,7 +26,9 @@ model PrivateEndpointConnection
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi"
-@@OpenAPI.extension(PrivateEndpointConnections.update::parameters.resource,
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-client-name' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @clientName in client.tsp."
+@@OpenAPI.extension(
+  PrivateEndpointConnections.update::parameters.resource,
   "x-ms-client-name",
   "body"
 );
@@ -54,6 +56,7 @@ interface PrivateEndpointConnections {
 }
 
 @@doc(PrivateEndpointConnection.name, "The private endpoint connection name.");
-@@doc(PrivateEndpointConnections.update::parameters.resource,
+@@doc(
+  PrivateEndpointConnections.update::parameters.resource,
   "Private endpoint connection update input."
 );

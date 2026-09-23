@@ -1,8 +1,8 @@
 {
   "parameters": {
     "api-version": "2025-10-02-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "rg1"
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
@@ -10,33 +10,35 @@
         "value": [
           {
             "name": "snapshot1",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/snapshots/snapshot1",
             "type": "Microsoft.ContainerService/Snapshots",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/snapshots/snapshot1",
             "location": "westus",
-            "tags": {
-              "key1": "val1",
-              "key2": "val2"
-            },
-            "systemData": {
-              "createdBy": "user1",
-              "createdByType": "User",
-              "createdAt": "2021-08-09T20:13:23.298420761Z"
-            },
             "properties": {
               "creationData": {
                 "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/cluster1/agentPools/pool0"
               },
-              "snapshotType": "NodePool",
-              "nodeImageVersion": "AKSUbuntu-1804gen2containerd-2021.09.11",
+              "enableFIPS": false,
               "kubernetesVersion": "1.20.5",
-              "osType": "Linux",
+              "nodeImageVersion": "AKSUbuntu-1804gen2containerd-2021.09.11",
               "osSku": "Ubuntu",
-              "vmSize": "Standard_D2s_v3",
-              "enableFIPS": false
+              "osType": "Linux",
+              "snapshotType": "NodePool",
+              "vmSize": "Standard_D2s_v3"
+            },
+            "systemData": {
+              "createdAt": "2021-08-09T20:13:23.298420761Z",
+              "createdBy": "user1",
+              "createdByType": "User"
+            },
+            "tags": {
+              "key1": "val1",
+              "key2": "val2"
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "Snapshots_ListByResourceGroup",
+  "title": "List Snapshots by Resource Group"
 }

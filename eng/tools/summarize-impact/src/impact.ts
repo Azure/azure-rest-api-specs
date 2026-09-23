@@ -1,31 +1,28 @@
 #!/usr/bin/env node
 
-import { existsSync, readFileSync } from "fs";
-import { glob } from "glob";
+import { existsSync, globSync, readdirSync, readFileSync, statSync } from "node:fs";
+import { isDeepStrictEqual } from "node:util";
 import { dirname, join, resolve } from "path";
 
 import * as commonmark from "commonmark";
 import yaml from "js-yaml";
-import pkg from "lodash";
-const { isEqual } = pkg;
 
 import {
-  ChangeHandler,
+  type ChangeHandler,
   ChangeTypes,
-  DiffResult,
+  type DiffResult,
   FileTypes,
-  PRChange,
-  ReadmeTag,
-} from "./diff-types.js";
+  type PRChange,
+  type ReadmeTag,
+} from "./diff-types.ts";
 
-import { Label, LabelContext, PRType } from "./labelling-types.js";
+import { Label, type LabelContext, PRType } from "./labelling-types.ts";
 
-import { ImpactAssessment } from "./ImpactAssessment.js";
-import { PRContext } from "./PRContext.js";
+import { type ImpactAssessment } from "./ImpactAssessment.ts";
+import { PRContext } from "./PRContext.ts";
 
 import { dataPlane, resourceManager } from "@azure-tools/specs-shared/changed-files";
 import { Readme } from "@azure-tools/specs-shared/readme";
-import { Octokit } from "@octokit/rest";
 
 // todo: we need to populate this so that we can tell if it's a new APIVersion down stream
 // TODO: move to .github/shared
@@ -165,8 +162,10 @@ export function isDataPlanePR(filePaths: string[]): boolean {
 }
 
 export function getAllApiVersionFromRPFolder(rpFolder: string): string[] {
-  const allSwaggerFilesFromRPFolder = glob.sync(`${rpFolder}/**/*.json`);
-  console.log(`allSwaggerFilesFromRPFolder: ${allSwaggerFilesFromRPFolder}`);
+  const allSwaggerFilesFromRPFolder = globSync("**/*.json", { cwd: rpFolder }).map((file) =>
+    join(rpFolder, file),
+  );
+  console.log(`allSwaggerFilesFromRPFolder: ${allSwaggerFilesFromRPFolder.join(",")}`);
 
   const apiVersions: Set<string> = new Set();
   for (const it of allSwaggerFilesFromRPFolder) {
@@ -183,7 +182,7 @@ export function getAllApiVersionFromRPFolder(rpFolder: string): string[] {
 
 export function getApiVersionFromSwaggerFile(swaggerFile: string): string | undefined {
   const swagger = readFileSync(swaggerFile).toString();
-  const swaggerObject = JSON.parse(swagger);
+  const swaggerObject = JSON.parse(swagger) as { info?: { version?: string } };
   if (swaggerObject["info"] && swaggerObject["info"]["version"]) {
     return swaggerObject["info"]["version"];
   }
@@ -197,8 +196,8 @@ export function getRPFolderFromSwaggerFile(swaggerFile: string): string | undefi
     return undefined;
   }
 
-  const lastIdx = swaggerFile.lastIndexOf(resourceProvider!);
-  return swaggerFile.substring(0, lastIdx + resourceProvider!.length);
+  const lastIdx = swaggerFile.lastIndexOf(resourceProvider);
+  return swaggerFile.substring(0, lastIdx + resourceProvider.length);
 }
 
 export const getResourceProviderFromFilePath = (filePath: string): string | undefined => {
@@ -243,7 +242,7 @@ async function processTypeSpec(ctx: PRContext, labelContext: LabelContext): Prom
   typeSpecLabel.shouldBePresent = false;
   const handlers: ChangeHandler[] = [];
   const typeSpecFileHandler = () => {
-    return (_: PRChange) => {
+    return () => {
       // Note: this code will be executed if the PR has a diff on a TypeSpec file,
       // as defined in public/swagger-validation-common/src/context.ts/defaultFilePatterns/typespec
       typeSpecLabel.shouldBePresent = true;
@@ -272,7 +271,10 @@ async function processTypeSpec(ctx: PRContext, labelContext: LabelContext): Prom
 
 function isSwaggerGeneratedByTypeSpec(swaggerFilePath: string): boolean {
   try {
-    return !!JSON.parse(readFileSync(swaggerFilePath).toString())?.info["x-typespec-generated"];
+    const swagger = JSON.parse(readFileSync(swaggerFilePath).toString()) as {
+      info?: { "x-typespec-generated"?: unknown };
+    };
+    return !!swagger?.info?.["x-typespec-generated"];
   } catch {
     return false;
   }
@@ -291,7 +293,10 @@ export async function processPrChanges(ctx: PRContext, Handlers: ChangeHandler[]
   console.log("RETURN definition processPrChanges");
 }
 
-export async function processPRChangesAsync(ctx: PRContext, Handlers: ChangeHandler[]) {
+export async function processPRChangesAsync(
+  ctx: PRContext,
+  Handlers: ChangeHandler<void | Promise<void>>[],
+) {
   console.log("ENTER definition processPRChangesAsync");
   const prChanges = await getPRChanges(ctx);
 
@@ -314,7 +319,7 @@ export async function getPRChanges(ctx: PRContext): Promise<PRChange[]> {
     fileType: FileTypes,
     changeType: ChangeTypes,
     filePath?: string,
-    additionalInfo?: any,
+    additionalInfo?: unknown,
   ) {
     if (filePath) {
       results.push({
@@ -489,14 +494,19 @@ function getSuppressions(readmePath: string) {
     }
     return result;
   };
-  let suppressionResult: any[] = [];
+  let suppressionResult: Record<string, unknown>[] = [];
   try {
     const readme = readFileSync(readmePath).toString();
     const codeBlocks = getAllCodeBlockNodes(new commonmark.Parser().parse(readme));
     for (const block of codeBlocks) {
       if (block.literal) {
         try {
-          const blockObject = yaml.load(block.literal) as any;
+          const blockObject = yaml.load(block.literal) as
+            | {
+                directive?: Record<string, unknown>[];
+                suppressions?: Record<string, unknown>[];
+              }
+            | undefined;
           const directives = blockObject?.["directive"];
           if (directives && Array.isArray(directives)) {
             suppressionResult = suppressionResult.concat(directives.filter((s) => s.suppress));
@@ -505,10 +515,16 @@ function getSuppressions(readmePath: string) {
           if (suppressions && Array.isArray(suppressions)) {
             suppressionResult = suppressionResult.concat(suppressions);
           }
-        } catch (e) {}
+        } catch (error) {
+          console.warn(
+            `Unable to read suppressions from a code block in ${readmePath}: ${String(error)}`,
+          );
+        }
       }
     }
-  } catch (e) {}
+  } catch (error) {
+    console.warn(`Unable to read suppressions from ${readmePath}: ${String(error)}`);
+  }
   return suppressionResult;
 }
 
@@ -520,7 +536,9 @@ export function diffSuppression(readmeBefore: string, readmeAfter: string) {
     const properties = ["suppress", "from", "where", "code", "reason"];
     if (
       -1 ===
-      beforeSuppressions.findIndex((s) => properties.every((p) => isEqual(s[p], suppression[p])))
+      beforeSuppressions.findIndex((s) =>
+        properties.every((p) => isDeepStrictEqual(s[p], suppression[p])),
+      )
     ) {
       newSuppressions.push(suppression);
     }
@@ -537,7 +555,7 @@ async function processRPaaS(
   // By default this label should not be present. We may determine later in this function that it should be present after all.
   rpaasLabel.shouldBePresent = false;
 
-  const handlers: ChangeHandler[] = [];
+  const handlers: ChangeHandler<Promise<void>>[] = [];
   const createReadmeFileHandler = () => {
     return async (e: PRChange) => {
       if (
@@ -559,7 +577,7 @@ async function processRPaaS(
 }
 
 async function isRPSaaS(readmeFilePath: string) {
-  const config: any = await new Readme(readmeFilePath).getGlobalConfig();
+  const config = await new Readme(readmeFilePath).getGlobalConfig();
   return config["openapi-subtype"] === "rpaas" || config["openapi-subtype"] === "providerHub";
 }
 
@@ -655,40 +673,38 @@ async function processNewRpNamespaceWithoutRpaasLabel(
   ciNewRPNamespaceWithoutRpaaSLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   console.log("RETURN definition processNewRpNamespaceWithoutRpaasLabel");
 
-  return ciNewRPNamespaceWithoutRpaaSLabel.shouldBePresent;
+  return Promise.resolve(ciNewRPNamespaceWithoutRpaaSLabel.shouldBePresent);
 }
 
-export const getRPaaSFolderList = async (
-  client: Octokit,
-  owner: string,
-  repoName: string,
-): Promise<string[]> => {
-  const branch = "main";
-  const folder = "specification";
+export const getRPaaSFolderList = (targetDirectory: string): string[] => {
+  const armLeasesFolder = join(targetDirectory, ".github", "arm-leases");
 
-  const res = await client.rest.repos.getContent({
-    owner,
-    repo: repoName,
-    path: folder,
-    ref: branch,
-  });
+  const folderNames: Set<string> = new Set();
 
-  console.log(
-    `Get RPSaaS folder list from ${owner}/${repoName}/${folder} successfully. status: ${res.status}`,
-  );
+  // Read folders from arm-leases directory to include RPs that have active leases
+  // (indicating they are already registered in RPSaaSMaster)
+  try {
+    if (!existsSync(armLeasesFolder)) {
+      console.log(`arm-leases folder not found at ${armLeasesFolder}`);
+      return [];
+    }
 
-  // Extract folder names from the response
-  if (Array.isArray(res.data)) {
-    const folderNames = res.data
-      .filter((item: any) => item.type === "dir") // Only get directories
-      .map((item: any) => item.name); // Extract the name property
+    const entries = readdirSync(armLeasesFolder);
+    const armLeasesFolders = entries.filter((name: string) => {
+      const fullPath = join(armLeasesFolder, name);
+      return statSync(fullPath).isDirectory() && name !== "scripts";
+    });
 
-    console.log(`Found ${folderNames.length} folders: ${folderNames.join(", ")}`);
-    return folderNames;
+    armLeasesFolders.forEach((name: string) => folderNames.add(name));
+    console.log(
+      `Found ${armLeasesFolders.length} arm-lease folders: ${armLeasesFolders.join(", ")}`,
+    );
+  } catch (error) {
+    console.log(`Failed to get folder list from ${armLeasesFolder}: ${String(error)}`);
   }
 
-  console.log("No folders found or unexpected response format");
-  return [];
+  console.log(`Total unique RP folders: ${folderNames.size}`);
+  return Array.from(folderNames);
 };
 
 export function getRPRootFolderName(swaggerFile: string): string | undefined {
@@ -738,7 +754,7 @@ async function processRpaasRpNotInPrivateRepoLabel(
   }
 
   if (!skip) {
-    console.log(`RPaaS RP folder list: ${rpFolderNames}`);
+    console.log(`RPaaS RP folder list: ${rpFolderNames.join(",")}`);
 
     const handlers: ChangeHandler[] = [];
 
@@ -757,7 +773,7 @@ async function processRpaasRpNotInPrivateRepoLabel(
 
           if (!rpFolderNames.includes(rpFolderName)) {
             console.log(
-              `This RP is RPSaaS RP but could not find rpFolderName: ${rpFolderName} in RPFolderNames: ${rpFolderNames}. ` +
+              `This RP is RPSaaS RP but could not find rpFolderName: ${rpFolderName} in RPFolderNames: ${rpFolderNames.join(",")}. ` +
                 `Label 'CI-RpaaSRPNotInPrivateRepo' should be present.`,
             );
             ciRpaasRPNotInPrivateRepoLabel.shouldBePresent = true;

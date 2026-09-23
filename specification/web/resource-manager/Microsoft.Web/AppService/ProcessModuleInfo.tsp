@@ -64,10 +64,12 @@ interface ProcessModuleInfoOps
         @segment("modules")
         @key
         baseAddress: string,
-      }
+      },
+      ResourceName = "SiteInstanceProcessModule"
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface ProcessModuleInfos {
   /**
    * Description for Get process information by its ID for a specific scaled-out instance in a web site.
@@ -116,10 +118,12 @@ interface ProcessModuleInfoOperationGroupOps
         @segment("modules")
         @key
         baseAddress: string,
-      }
+      },
+      ResourceName = "SiteProcessModule"
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface ProcessModuleInfoOperationGroup {
   /**
    * Description for Get process information by its ID for a specific scaled-out instance in a web site.
@@ -180,10 +184,12 @@ interface InstanceProcessModuleSlotOperationGroupOps
         @segment("modules")
         @key
         baseAddress: string,
-      }
+      },
+      ResourceName = "SiteSlotInstanceProcessModule"
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface InstanceProcessModuleSlotOperationGroup {
   /**
    * Description for Get process information by its ID for a specific scaled-out instance in a web site.
@@ -239,10 +245,12 @@ interface ProcessModuleSlotOperationGroupOps
         @segment("modules")
         @key
         baseAddress: string,
-      }
+      },
+      ResourceName = "SiteSlotProcessModule"
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface ProcessModuleSlotOperationGroup {
   /**
    * Description for Get process information by its ID for a specific scaled-out instance in a web site.
@@ -266,6 +274,7 @@ interface ProcessModuleSlotOperationGroup {
 }
 
 @@doc(ProcessModuleInfo.name, "Module base address.");
-@@doc(ProcessModuleInfo.properties,
+@@doc(
+  ProcessModuleInfo.properties,
   "ProcessModuleInfo resource specific properties"
 );

@@ -18,13 +18,16 @@ using Microsoft.EventGrid.SystemEvents;
 using Azure.ClientGenerator.Core;
 
 // Renames applying to all languages
-@@clientName(ApiManagementNearExpiryGatewayTokenProperties.expiredAtUtc,
+@@clientName(
+  ApiManagementNearExpiryGatewayTokenProperties.expiredAtUtc,
   "expiresOn"
 );
-@@clientName(ApiManagementExpiredGatewayTokenProperties.expiredAtUtc,
+@@clientName(
+  ApiManagementExpiredGatewayTokenProperties.expiredAtUtc,
   "expiresOn"
 );
-@@clientName(ApiManagementGatewayTokenNearExpiryEventData.gatewayInfo,
+@@clientName(
+  ApiManagementGatewayTokenNearExpiryEventData.gatewayInfo,
   "gateway"
 );
 @@clientName(ApiManagementGatewayTokenNearExpiryEventData.tokenInfo, "token");
@@ -33,62 +36,81 @@ using Azure.ClientGenerator.Core;
 @@clientName(AcsIncomingCallEventData.to, "toCommunicationIdentifier");
 @@clientName(AcsIncomingCallEventData.from, "fromCommunicationIdentifier");
 @@clientName(AcsRouterWorkerSelector.value, "labelValue");
-@@clientName(AcsEmailEngagementTrackingReportReceivedEventData.engagementType,
+@@clientName(
+  AcsEmailEngagementTrackingReportReceivedEventData.engagementType,
   "engagement"
 );
-@@clientName(HealthcareFhirResourceCreatedEventData.resourceFhirAccount,
+@@clientName(
+  HealthcareFhirResourceCreatedEventData.resourceFhirAccount,
   "FhirServiceHostName"
 );
-@@clientName(HealthcareFhirResourceCreatedEventData.resourceFhirId,
+@@clientName(
+  HealthcareFhirResourceCreatedEventData.resourceFhirId,
   "FhirResourceId"
 );
-@@clientName(HealthcareFhirResourceCreatedEventData.resourceVersionId,
+@@clientName(
+  HealthcareFhirResourceCreatedEventData.resourceVersionId,
   "FhirResourceVersionId"
 );
-@@clientName(HealthcareFhirResourceCreatedEventData.resourceType,
+@@clientName(
+  HealthcareFhirResourceCreatedEventData.resourceType,
   "FhirResourceType"
 );
-@@clientName(HealthcareFhirResourceUpdatedEventData.resourceFhirAccount,
+@@clientName(
+  HealthcareFhirResourceUpdatedEventData.resourceFhirAccount,
   "FhirServiceHostName"
 );
-@@clientName(HealthcareFhirResourceUpdatedEventData.resourceFhirId,
+@@clientName(
+  HealthcareFhirResourceUpdatedEventData.resourceFhirId,
   "FhirResourceId"
 );
-@@clientName(HealthcareFhirResourceUpdatedEventData.resourceVersionId,
+@@clientName(
+  HealthcareFhirResourceUpdatedEventData.resourceVersionId,
   "FhirResourceVersionId"
 );
-@@clientName(HealthcareFhirResourceUpdatedEventData.resourceType,
+@@clientName(
+  HealthcareFhirResourceUpdatedEventData.resourceType,
   "FhirResourceType"
 );
-@@clientName(HealthcareFhirResourceDeletedEventData.resourceFhirAccount,
+@@clientName(
+  HealthcareFhirResourceDeletedEventData.resourceFhirAccount,
   "FhirServiceHostName"
 );
-@@clientName(HealthcareFhirResourceDeletedEventData.resourceFhirId,
+@@clientName(
+  HealthcareFhirResourceDeletedEventData.resourceFhirId,
   "FhirResourceId"
 );
-@@clientName(HealthcareFhirResourceDeletedEventData.resourceVersionId,
+@@clientName(
+  HealthcareFhirResourceDeletedEventData.resourceVersionId,
   "FhirResourceVersionId"
 );
-@@clientName(HealthcareFhirResourceDeletedEventData.resourceType,
+@@clientName(
+  HealthcareFhirResourceDeletedEventData.resourceType,
   "FhirResourceType"
 );
-@@clientName(ResourceNotificationsResourceUpdatedEventData.resourceInfo,
+@@clientName(
+  ResourceNotificationsResourceUpdatedEventData.resourceInfo,
   "resourceDetails"
 );
-@@clientName(ResourceNotificationsResourceUpdatedEventData.operationalInfo,
+@@clientName(
+  ResourceNotificationsResourceUpdatedEventData.operationalInfo,
   "operationalDetails"
 );
-@@clientName(ResourceNotificationsResourceDeletedEventData.resourceInfo,
+@@clientName(
+  ResourceNotificationsResourceDeletedEventData.resourceInfo,
   "resourceDetails"
 );
-@@clientName(ResourceNotificationsResourceDeletedEventData.operationalInfo,
+@@clientName(
+  ResourceNotificationsResourceDeletedEventData.operationalInfo,
   "operationalDetails"
 );
 @@clientName(StorageTaskAssignmentQueuedEventData.queuedDateTime, "queuedOn");
-@@clientName(StorageTaskAssignmentCompletedEventData.completedDateTime,
+@@clientName(
+  StorageTaskAssignmentCompletedEventData.completedDateTime,
   "completedOn"
 );
-@@clientName(AcsMessageDeliveryStatusUpdatedEventData.channelType,
+@@clientName(
+  AcsMessageDeliveryStatusUpdatedEventData.channelType,
   "channelKind"
 );
 @@clientName(AcsMessageReceivedEventData.channelType, "channelKind");
@@ -124,108 +146,134 @@ using Azure.ClientGenerator.Core;
 @@clientName(KeyVaultSecretNewVersionCreatedEventData.NBF, "Nbf");
 @@clientName(KeyVaultSecretNewVersionCreatedEventData.EXP, "Exp");
 
-@@clientName(ApiManagementUserCreatedEventData.resourceUri,
+@@clientName(
+  ApiManagementUserCreatedEventData.resourceUri,
   "resourceUrl",
   "!go, !csharp"
 );
 
-@@clientName(ApiManagementUserUpdatedEventData.resourceUri,
+@@clientName(
+  ApiManagementUserUpdatedEventData.resourceUri,
   "resourceUrl",
   "!go, !csharp"
 );
-@@clientName(ApiManagementUserDeletedEventData.resourceUri,
+@@clientName(
+  ApiManagementUserDeletedEventData.resourceUri,
   "resourceUrl",
   "!go, !csharp"
 );
-@@clientName(ApiManagementApiDeletedEventData.resourceUri,
+@@clientName(
+  ApiManagementApiDeletedEventData.resourceUri,
   "resourceUrl",
   "!go, !csharp"
 );
-@@clientName(ApiManagementApiReleaseCreatedEventData.resourceUri,
+@@clientName(
+  ApiManagementApiReleaseCreatedEventData.resourceUri,
   "resourceUrl",
   "!go, !csharp"
 );
-@@clientName(ApiManagementApiReleaseDeletedEventData.resourceUri,
+@@clientName(
+  ApiManagementApiReleaseDeletedEventData.resourceUri,
   "resourceUrl",
   "!go, !csharp"
 );
-@@clientName(ApiManagementApiReleaseUpdatedEventData.resourceUri,
+@@clientName(
+  ApiManagementApiReleaseUpdatedEventData.resourceUri,
   "resourceUrl",
   "!go, !csharp"
 );
-@@clientName(ApiManagementSubscriptionCreatedEventData.resourceUri,
+@@clientName(
+  ApiManagementSubscriptionCreatedEventData.resourceUri,
   "resourceUrl",
   "!go, !csharp"
 );
-@@clientName(ApiManagementSubscriptionUpdatedEventData.resourceUri,
+@@clientName(
+  ApiManagementSubscriptionUpdatedEventData.resourceUri,
   "resourceUrl",
   "!go, !csharp"
 );
-@@clientName(ApiManagementSubscriptionDeletedEventData.resourceUri,
+@@clientName(
+  ApiManagementSubscriptionDeletedEventData.resourceUri,
   "resourceUrl",
   "!go, !csharp"
 );
-@@clientName(ApiManagementProductCreatedEventData.resourceUri,
+@@clientName(
+  ApiManagementProductCreatedEventData.resourceUri,
   "resourceUrl",
   "!go, !csharp"
 );
-@@clientName(ApiManagementProductUpdatedEventData.resourceUri,
+@@clientName(
+  ApiManagementProductUpdatedEventData.resourceUri,
   "resourceUrl",
   "!go, !csharp"
 );
-@@clientName(ApiManagementProductDeletedEventData.resourceUri,
+@@clientName(
+  ApiManagementProductDeletedEventData.resourceUri,
   "resourceUrl",
   "!go, !csharp"
 );
-@@clientName(ApiManagementApiCreatedEventData.resourceUri,
+@@clientName(
+  ApiManagementApiCreatedEventData.resourceUri,
   "resourceUrl",
   "!go, !csharp"
 );
-@@clientName(ApiManagementApiUpdatedEventData.resourceUri,
+@@clientName(
+  ApiManagementApiUpdatedEventData.resourceUri,
   "resourceUrl",
   "!go, !csharp"
 );
-@@clientName(ApiManagementGatewayCreatedEventData.resourceUri,
+@@clientName(
+  ApiManagementGatewayCreatedEventData.resourceUri,
   "resourceUrl",
   "!go, !csharp"
 );
-@@clientName(ApiManagementGatewayUpdatedEventData.resourceUri,
+@@clientName(
+  ApiManagementGatewayUpdatedEventData.resourceUri,
   "resourceUrl",
   "!go, !csharp"
 );
-@@clientName(ApiManagementGatewayDeletedEventData.resourceUri,
+@@clientName(
+  ApiManagementGatewayDeletedEventData.resourceUri,
   "resourceUrl",
   "!go, !csharp"
 );
-@@clientName(ApiManagementGatewayHostnameConfigurationCreatedEventData.resourceUri,
+@@clientName(
+  ApiManagementGatewayHostnameConfigurationCreatedEventData.resourceUri,
   "resourceUrl",
   "!go, !csharp"
 );
-@@clientName(ApiManagementGatewayHostnameConfigurationUpdatedEventData.resourceUri,
+@@clientName(
+  ApiManagementGatewayHostnameConfigurationUpdatedEventData.resourceUri,
   "resourceUrl",
   "!go, !csharp"
 );
-@@clientName(ApiManagementGatewayHostnameConfigurationDeletedEventData.resourceUri,
+@@clientName(
+  ApiManagementGatewayHostnameConfigurationDeletedEventData.resourceUri,
   "resourceUrl",
   "!go, !csharp"
 );
-@@clientName(ApiManagementGatewayCertificateAuthorityCreatedEventData.resourceUri,
+@@clientName(
+  ApiManagementGatewayCertificateAuthorityCreatedEventData.resourceUri,
   "resourceUrl",
   "!go, !csharp"
 );
-@@clientName(ApiManagementGatewayCertificateAuthorityUpdatedEventData.resourceUri,
+@@clientName(
+  ApiManagementGatewayCertificateAuthorityUpdatedEventData.resourceUri,
   "resourceUrl",
   "!go, !csharp"
 );
-@@clientName(ApiManagementGatewayCertificateAuthorityDeletedEventData.resourceUri,
+@@clientName(
+  ApiManagementGatewayCertificateAuthorityDeletedEventData.resourceUri,
   "resourceUrl",
   "!go, !csharp"
 );
-@@clientName(ApiManagementGatewayApiAddedEventData.resourceUri,
+@@clientName(
+  ApiManagementGatewayApiAddedEventData.resourceUri,
   "resourceUrl",
   "!go, !csharp"
 );
-@@clientName(ApiManagementGatewayApiRemovedEventData.resourceUri,
+@@clientName(
+  ApiManagementGatewayApiRemovedEventData.resourceUri,
   "resourceUrl",
   "!go, !csharp"
 );

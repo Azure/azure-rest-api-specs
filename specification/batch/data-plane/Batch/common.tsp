@@ -79,6 +79,7 @@ op CreateOperation<
   BatchError
 >;
 
+#suppress "@typespec/http/deprecated-implicit-optionality" "Legacy - DO NOT COPY"
 #suppress "@azure-tools/typespec-azure-core/no-response-body" "Legacy behavior"
 @patch(#{ implicitOptionality: true })
 op UpdateOperation<
@@ -391,10 +392,9 @@ alias CommonParameters = {
     The maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. If the value is larger than 30, the default will be used instead.".
     """)
   @query
-  @clientName("timeOutInSeconds", "java")
-  @clientName("timeOutInSeconds", "csharp")
-  @clientName("timeOutInSeconds", "javascript")
-  @clientName("timeout", "go,python")
+  @clientName("timeout", "java")
+  @clientName("timeout", "go,csharp")
+  @clientName("service_timeout", "python")
   @encode("seconds", int32)
   timeOut?: duration;
 
@@ -416,7 +416,8 @@ alias CommonParameters = {
     """)
   @header("ocp-date")
   @encode(DateTimeKnownEncoding.rfc7231)
-  @clientName("ocpDate", "csharp")
+  @clientName("requestDate", "csharp")
+  @clientName("ocp_date", "python")
   ocpdate?: utcDateTime;
 };
 
@@ -437,7 +438,8 @@ alias ListPoolUsageMetricsOptionalParameters = {
     start time of the last aggregation interval currently available.
     """)
   @query
-  @clientName("starttime", "csharp,python,javascript,go")
+  @clientName("starttime", "csharp,go")
+  @clientName("start_time", "python")
   startTime?: utcDateTime;
 
   @doc("""
@@ -446,6 +448,8 @@ alias ListPoolUsageMetricsOptionalParameters = {
     last aggregation interval currently available.
     """)
   @query
+  @clientName("end_time", "python")
+  @clientName("endTime", "java")
   endtime?: utcDateTime;
 
   @doc("""
@@ -1099,6 +1103,7 @@ alias DeleteNodeUserRequiredParameters = {
   nodeId: string;
 
   @doc("The name of the user Account to delete.")
+  @clientName("username", "java")
   @path
   userName: string;
 };
@@ -1119,6 +1124,7 @@ alias ReplaceNodeUserRequiredParameters = {
   nodeId: string;
 
   @doc("The name of the user Account to update.")
+  @clientName("username", "java")
   @path
   userName: string;
 

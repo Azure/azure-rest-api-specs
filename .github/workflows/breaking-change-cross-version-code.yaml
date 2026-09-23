@@ -20,7 +20,7 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
@@ -28,7 +28,7 @@ jobs:
         uses: ./.github/actions/setup-node-install-deps
 
       - name: Setup .NET 6 SDK
-        uses: actions/setup-dotnet@v5
+        uses: actions/setup-dotnet@v6
         with:
           dotnet-version: "6.0.x"
 
@@ -36,7 +36,7 @@ jobs:
         id: breaking-change-cross-version-analyze-code
         run: |
           echo "summary=$GITHUB_STEP_SUMMARY" >> "$GITHUB_OUTPUT"
-          npm exec --no -- openapi-diff-runner \
+          pnpm exec openapi-diff-runner \
             --run-type "CrossVersion" \
             --spec-repo-path "$GITHUB_WORKSPACE" \
             --pr-source-branch "$GITHUB_HEAD_REF" \
@@ -69,7 +69,7 @@ jobs:
       # Used by other workflows like set-status
       - name: Set job-summary artifact
         if: ${{ always() && steps.breaking-change-cross-version-analyze-code.outputs.summary }}
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: job-summary
           path: ${{ steps.breaking-change-cross-version-analyze-code.outputs.summary }}

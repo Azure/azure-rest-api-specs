@@ -1,0 +1,66 @@
+{
+  "parameters": {
+    "accountName": "sampleacct",
+    "api-version": "2025-06-01",
+    "parameters": {
+      "properties": {
+        "deploymentConfiguration": {
+          "virtualMachineConfiguration": {
+            "imageReference": {
+              "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/networking-group/providers/Microsoft.Compute/galleries/testgallery/images/testimagedef/versions/0.0.1"
+            },
+            "nodeAgentSkuId": "batch.node.ubuntu 18.04"
+          }
+        },
+        "vmSize": "STANDARD_D4"
+      }
+    },
+    "poolName": "testpool",
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testpool",
+        "type": "Microsoft.Batch/batchAccounts/pools",
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool",
+        "properties": {
+          "allocationState": "Steady",
+          "allocationStateTransitionTime": "2017-08-28T10:22:55.9407275Z",
+          "creationTime": "2017-08-28T10:22:55.9407275Z",
+          "currentDedicatedNodes": 0,
+          "currentLowPriorityNodes": 0,
+          "deploymentConfiguration": {
+            "virtualMachineConfiguration": {
+              "imageReference": {
+                "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/networking-group/providers/Microsoft.Compute/galleries/testgallery/images/testimagedef/versions/0.0.1"
+              },
+              "nodeAgentSkuId": "batch.node.ubuntu 18.04"
+            }
+          },
+          "interNodeCommunication": "Disabled",
+          "lastModified": "2017-08-28T10:22:55.9407275Z",
+          "provisioningState": "Succeeded",
+          "provisioningStateTransitionTime": "2017-08-28T10:22:55.9407275Z",
+          "scaleSettings": {
+            "fixedScale": {
+              "targetDedicatedNodes": 0,
+              "targetLowPriorityNodes": 0
+            }
+          },
+          "taskSchedulingPolicy": {
+            "nodeFillType": "Spread"
+          },
+          "taskSlotsPerNode": 1,
+          "vmSize": "STANDARD_D4"
+        }
+      },
+      "headers": {
+        "ETag": "W/\"0x8D4EDFEBFADF4AB\""
+      }
+    }
+  },
+  "operationId": "Pool_Create",
+  "title": "CreatePool - Custom Image"
+}

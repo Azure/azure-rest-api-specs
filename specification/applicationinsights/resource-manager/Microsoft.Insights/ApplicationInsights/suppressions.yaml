@@ -1,0 +1,132 @@
+- tool: TypeSpecRequirement
+  path: ./preview/2018-05-01-preview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./preview/2018-06-17-preview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./preview/2019-10-17-preview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./preview/2020-02-02-preview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./preview/2020-02-10-preview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./preview/2020-03-01-preview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./preview/2020-06-02-preview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./preview/2020-10-05-preview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./preview/2021-03-03-preview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./preview/2024-02-01-preview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2015-05-01/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2017-10-01/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2020-02-02/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2020-10-20/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2020-11-20/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2021-03-08/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2021-08-01/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2021-10-14/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2022-04-01/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2022-06-15/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2023-06-01/*.json
+  reason: Brownfield service not ready to migrate
+
+- tool: TypeSpecValidation
+  reason: >
+    Not ready to split as independent services.
+  rules: [FolderStructure]
+  paths:
+    - AnalyticsItems
+    - ComponentAPIs
+    - ComponentLinkedStorageAccountApi
+    - Components
+    - DeletedWorkbookApi
+    - Favorites
+    - LiveTokenApi
+    - WebTestLocation
+    - WebTestsApi
+    - WorkBookOperations
+    - WorkbooksApi
+    - WorkbookTemplatesApi
+    
+- tool: TypeSpecValidation
+  reason: >
+    Not ready to split as independent services.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.*
+    - options.@azure-tools/typespec-java.*
+    - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-ts.*
+    - parameters.service-dir.default
+    - options.@azure-typespec/http-client-csharp-mgmt.*
+  paths: 
+    - AnalyticsItems/tspconfig.yaml
+    - ComponentAPIs/tspconfig.yaml
+    - ComponentLinkedStorageAccountApi/tspconfig.yaml
+    - Components/tspconfig.yaml
+    - DeletedWorkbookApi/tspconfig.yaml
+    - Favorites/tspconfig.yaml
+    - LiveTokenApi/tspconfig.yaml
+    - WebTestLocation/tspconfig.yaml
+    - WebTestsApi/tspconfig.yaml
+    - WorkBookOperations/tspconfig.yaml
+    - WorkbooksApi/tspconfig.yaml
+    - WorkbookTemplatesApi/tspconfig.yaml
+
+- tool: OAPI034
+  paths:
+    - ./preview/2025-01-23-preview/components_API.json
+  reason: >
+    `AzureMonitorWorkspaceIngestionMode` intentionally exposes the service-set `Disabled`
+    value on the same property clients use to opt in. This mirrors the shape of the
+    existing `IngestionMode` property on the same resource, which the resource provider
+    also moves to a service-set `Disabled` state; matching that shape keeps the two
+    ingestion settings consistent and avoids customer confusion. The new property
+    additionally documents its service-set value explicitly, which `IngestionMode` does
+    not, so the contract here is more discoverable than the precedent it follows.
+
+    The state machine is closed and narrow, so the What-If drift risk the rule guards
+    against does not arise in practice. Clients may only set `NotOptedIn` or `Enabled`.
+    The service never transitions `NotOptedIn` to `Disabled`, because a component that
+    has not opted in has no Azure Monitor workspace link to break. `Disabled` is
+    reachable only from `Enabled`, and once a component reaches `Enabled` the property
+    is effectively read-only, because opting back out is rejected. A client therefore
+    can never submit a value that the service will contradict.
+
+    OTLP has been in preview with this shape and existing preview customers have
+    reported no drift or usability issues. Splitting desired configuration from
+    observed status would require a Mgmt-AppInsights-CDS change to emit a second wire
+    field and would break current readers of the already-deployed 2025-01-23-preview
+    contract. Revisit at GA, where a contract change is expected.

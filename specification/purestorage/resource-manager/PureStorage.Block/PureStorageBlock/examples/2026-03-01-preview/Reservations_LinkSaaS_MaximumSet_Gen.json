@@ -1,0 +1,75 @@
+{
+  "title": "Reservations_LinkSaaS",
+  "operationId": "Reservations_LinkSaaS",
+  "parameters": {
+    "api-version": "2026-03-01-preview",
+    "subscriptionId": "11111111-1111-1111-1111-111111111111",
+    "resourceGroupName": "rgpurestorage",
+    "reservationName": "reservation-01",
+    "body": {
+      "saaSResourceId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rgpurestorage/providers/Microsoft.SaaS/resources/saas-resource-01"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "reservationInternalId": "res-abc123-xyz789",
+          "marketplace": {
+            "subscriptionId": "mp-sub-123",
+            "subscriptionStatus": "Subscribed",
+            "offerDetails": {
+              "publisherId": "pure_storage",
+              "offerId": "purestorage-block-offer",
+              "planId": "standard-plan",
+              "planName": "Standard Plan",
+              "termUnit": "month",
+              "termId": "12-month-term"
+            }
+          },
+          "user": {
+            "firstName": "John",
+            "lastName": "Doe",
+            "emailAddress": "john.doe@contoso.com",
+            "upn": "john.doe@contoso.com",
+            "phoneNumber": "+1-425-555-1234",
+            "companyDetails": {
+              "companyName": "Contoso Ltd.",
+              "address": {
+                "addressLine1": "1 Microsoft Way",
+                "addressLine2": "Suite 100",
+                "city": "Redmond",
+                "state": "Washington",
+                "country": "United States",
+                "postalCode": "98052"
+              }
+            }
+          },
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "environment": "production"
+        },
+        "location": "eastus",
+        "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rgpurestorage/providers/PureStorage.Block/reservations/reservation-01",
+        "name": "reservation-01",
+        "type": "PureStorage.Block/reservations",
+        "systemData": {
+          "createdBy": "john.doe@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-03-01T10:00:00.000Z",
+          "lastModifiedBy": "john.doe@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-03-03T14:30:00.000Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/11111111-1111-1111-1111-111111111111/providers/PureStorage.Block/locations/eastus/operationStatuses/op-12345",
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/11111111-1111-1111-1111-111111111111/providers/PureStorage.Block/locations/eastus/operationStatuses/op-12345",
+        "retry-after": "10"
+      }
+    }
+  }
+}

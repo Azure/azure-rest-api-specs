@@ -45,7 +45,7 @@ interface DeletedSiteOps
         @key
         providerNamespace: "Microsoft.Web",
 
-        ...LocationParameter,
+        ...LocationResourceParameter,
       },
       {},
       {
@@ -54,10 +54,12 @@ interface DeletedSiteOps
         @segment("deletedSites")
         @key
         deletedSiteId: string,
-      }
+      },
+      ResourceName = "DeletedSiteAtLocation"
     > {}
 
-@armResourceOperations
+@tag("DeletedWebApps")
+@armResourceOperations(#{ omitTags: true })
 interface DeletedSites {
   /**
    * Description for Get deleted app for a subscription at location.
@@ -98,20 +100,13 @@ interface GlobalOps
         @segment("deletedSites")
         @key
         deletedSiteId: string,
-      }
+      },
+      ResourceName = "DeletedSite"
     > {}
 
-@armResourceOperations
-interface Global {
-  /**
-   * Description for Get deleted app for a subscription.
-   */
-  @summary("Get deleted app for a subscription.")
-  getDeletedWebApp is GlobalOps.Read<
-    DeletedSite,
-    ErrorType = DefaultErrorResponse
-  >;
-
+@tag("DeletedWebApps")
+@armResourceOperations(#{ omitTags: true })
+interface GlobalDeletedWebApps {
   /**
    * Description for Get all deleted apps for a subscription.
    */
@@ -119,6 +114,19 @@ interface Global {
   list is GlobalOps.List<
     DeletedSite,
     Response = ArmResponse<DeletedWebAppCollection>,
+    ErrorType = DefaultErrorResponse
+  >;
+}
+
+@tag("Global")
+@armResourceOperations(#{ omitTags: true })
+interface Global {
+  /**
+   * Description for Get deleted app for a subscription.
+   */
+  @summary("Get deleted app for a subscription.")
+  getDeletedWebApp is GlobalOps.Read<
+    DeletedSite,
     ErrorType = DefaultErrorResponse
   >;
 

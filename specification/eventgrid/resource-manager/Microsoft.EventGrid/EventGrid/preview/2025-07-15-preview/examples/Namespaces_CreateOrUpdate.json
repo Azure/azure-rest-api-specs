@@ -1,63 +1,65 @@
 {
   "parameters": {
-    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40",
-    "resourceGroupName": "examplerg",
-    "namespaceName": "exampleNamespaceName1",
     "api-version": "2025-07-15-preview",
     "namespaceInfo": {
       "location": "westus",
+      "properties": {
+        "topicSpacesConfiguration": {
+          "routeTopicResourceId": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampleTopic1",
+          "state": "Enabled"
+        }
+      },
       "tags": {
         "tag1": "value11",
         "tag2": "value22"
-      },
-      "properties": {
-        "topicSpacesConfiguration": {
-          "state": "Enabled",
-          "routeTopicResourceId": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampleTopic1"
-        }
       }
-    }
+    },
+    "namespaceName": "exampleNamespaceName1",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40"
   },
   "responses": {
     "200": {
       "body": {
+        "name": "exampleNamespaceName1",
+        "type": "Microsoft.EventGrid/Namespaces",
+        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/namespaces/exampleNamespaceName1",
+        "location": "westus",
         "properties": {
           "provisioningState": "Creating",
           "topicSpacesConfiguration": {
-            "state": "Enabled",
+            "hostname": null,
             "routeTopicResourceId": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampleTopic1",
-            "hostname": null
+            "state": "Enabled"
           }
         },
-        "location": "westus",
         "tags": {
           "key1": "value11",
           "key2": "value22"
-        },
-        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/namespaces/exampleNamespaceName1",
-        "name": "exampleNamespaceName1",
-        "type": "Microsoft.EventGrid/Namespaces"
+        }
       }
     },
     "201": {
       "body": {
+        "name": "exampleNamespaceName1",
+        "type": "Microsoft.EventGrid/Namespaces",
+        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/namespaces/exampleNamespaceName1",
+        "location": "westus",
         "properties": {
           "provisioningState": "Creating",
           "topicSpacesConfiguration": {
-            "state": "Enabled",
+            "hostname": null,
             "routeTopicResourceId": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampleTopic1",
-            "hostname": null
+            "state": "Enabled"
           }
         },
-        "location": "westus",
         "tags": {
           "key1": "value11",
           "key2": "value22"
-        },
-        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/namespaces/exampleNamespaceName1",
-        "name": "exampleNamespaceName1",
-        "type": "Microsoft.EventGrid/Namespaces"
+        }
       }
     }
-  }
+  },
+  "operationId": "Namespaces_CreateOrUpdate",
+  "title": "Namespaces_CreateOrUpdate"
 }

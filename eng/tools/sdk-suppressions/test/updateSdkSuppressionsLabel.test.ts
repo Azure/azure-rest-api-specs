@@ -1,10 +1,10 @@
 import { expect, test, vi } from "vitest";
-import { validateSdkSuppressionsFile } from "../src/sdkSuppressions.js";
+import { validateSdkSuppressionsFile } from "../src/sdkSuppressions.ts";
 import {
   filterSuppressionList,
   getSdkNamesWithChangedSuppressions,
   processLabels,
-} from "../src/updateSdkSuppressionsLabel.js";
+} from "../src/updateSdkSuppressionsLabel.ts";
 
 vi.mock("process", () => ({
   exit: vi.fn(),
@@ -15,7 +15,7 @@ test("test filterSuppressionList for only resource-manager files", () => {
     "specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/datafactory.json",
     "specification/datafactory/resource-manager/sdk-suppressions.yaml",
   ];
-  const suppressionsFiles: String[] = filterSuppressionList(changeFiles);
+  const suppressionsFiles: string[] = filterSuppressionList(changeFiles);
   expect(suppressionsFiles).toEqual([
     "specification/datafactory/resource-manager/sdk-suppressions.yaml",
   ]);
@@ -31,7 +31,7 @@ test("test filterSuppressionList for both tsp files and resource-manager files",
     "specification/workloads/resource-manager/Microsoft.Workloads/operations/stable/2024-09-01/operations.json",
     "specification/workloads/resource-manager/sdk-suppressions.yaml",
   ];
-  const suppressionsFiles: String[] = filterSuppressionList(changeFiles);
+  const suppressionsFiles: string[] = filterSuppressionList(changeFiles);
   expect(suppressionsFiles).toEqual([
     "specification/workloads/Workloads.Operations.Management/sdk-suppressions.yaml",
   ]);
@@ -164,6 +164,76 @@ test("test getSdkNamesWithChangedSuppressions", () => {
 
   const sdkNames = getSdkNamesWithChangedSuppressions(headCont, baseCont);
   expect(sdkNames).toEqual(["azure-sdk-for-python"]);
+});
+
+test("identifies added and removed SDKs in head-then-base order", () => {
+  expect(
+    getSdkNamesWithChangedSuppressions(
+      { suppressions: { "azure-sdk-for-js": [], "azure-sdk-for-go": [] } },
+      { suppressions: { "azure-sdk-for-python": [], "azure-sdk-for-go": [] } },
+    ),
+  ).toEqual(["azure-sdk-for-js", "azure-sdk-for-python"]);
+});
+
+test.each([
+  {
+    name: "package order does not matter",
+    base: [
+      { package: "first", "breaking-changes": ["a"] },
+      { package: "second", "breaking-changes": ["b"] },
+    ],
+    head: [
+      { package: "second", "breaking-changes": ["b"] },
+      { package: "first", "breaking-changes": ["a"] },
+    ],
+    changed: false,
+  },
+  {
+    name: "duplicate package names do not count as added packages",
+    base: [{ package: "first", "breaking-changes": ["a"] }],
+    head: [
+      { package: "first", "breaking-changes": ["a"] },
+      { package: "first", "breaking-changes": ["a"] },
+    ],
+    changed: false,
+  },
+  {
+    name: "added packages are detected",
+    base: [{ package: "first", "breaking-changes": ["a"] }],
+    head: [
+      { package: "first", "breaking-changes": ["a"] },
+      { package: "second", "breaking-changes": ["b"] },
+    ],
+    changed: true,
+  },
+  {
+    name: "removed packages are detected",
+    base: [
+      { package: "first", "breaking-changes": ["a"] },
+      { package: "second", "breaking-changes": ["b"] },
+    ],
+    head: [{ package: "first", "breaking-changes": ["a"] }],
+    changed: true,
+  },
+  {
+    name: "breaking-change order does not matter",
+    base: [{ package: "first", "breaking-changes": ["a", "b"] }],
+    head: [{ package: "first", "breaking-changes": ["b", "a"] }],
+    changed: false,
+  },
+  {
+    name: "duplicate breaking changes remain significant",
+    base: [{ package: "first", "breaking-changes": ["a"] }],
+    head: [{ package: "first", "breaking-changes": ["a", "a"] }],
+    changed: true,
+  },
+])("$name", ({ base, head, changed }) => {
+  expect(
+    getSdkNamesWithChangedSuppressions(
+      { suppressions: { "azure-sdk-for-js": head } },
+      { suppressions: { "azure-sdk-for-js": base } },
+    ),
+  ).toEqual(changed ? ["azure-sdk-for-js"] : []);
 });
 
 test("test processLabels will add new label when has sdkNames", () => {

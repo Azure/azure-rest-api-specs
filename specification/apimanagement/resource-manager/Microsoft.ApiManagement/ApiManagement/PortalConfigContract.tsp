@@ -38,7 +38,7 @@ interface PortalConfigContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -52,7 +52,7 @@ interface PortalConfigContracts {
        * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
        */
       @header("ETag")
-      etag: string;
+      eTag: string;
     }
   >;
 
@@ -102,12 +102,15 @@ interface PortalConfigContracts {
 @@maxLength(PortalConfigContract.name, 80);
 @@minLength(PortalConfigContract.name, 1);
 @@doc(PortalConfigContract.name, "Portal configuration identifier.");
-@@doc(PortalConfigContract.properties,
+@@doc(
+  PortalConfigContract.properties,
   "The developer portal configuration contract properties."
 );
-@@doc(PortalConfigContracts.createOrUpdate::parameters.resource,
+@@doc(
+  PortalConfigContracts.createOrUpdate::parameters.resource,
   "Update the developer portal configuration."
 );
-@@doc(PortalConfigContracts.update::parameters.properties,
+@@doc(
+  PortalConfigContracts.update::parameters.properties,
   "Update the developer portal configuration."
 );

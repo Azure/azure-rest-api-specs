@@ -23,12 +23,16 @@ model FabricModel
   >;
 }
 #suppress "@azure-tools/typespec-azure-core/no-openapi"
-@@OpenAPI.extension(Fabric.create::parameters.resource,
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-client-name' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @clientName in client.tsp."
+@@OpenAPI.extension(
+  Fabric.create::parameters.resource,
   "x-ms-client-name",
   "body"
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi"
-@@OpenAPI.extension(Fabric.update::parameters.properties,
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-client-name' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @clientName in client.tsp."
+@@OpenAPI.extension(
+  Fabric.update::parameters.properties,
   "x-ms-client-name",
   "body"
 );

@@ -38,6 +38,7 @@ model OnlineRequestSettings {
   maxConcurrentRequestsPerInstance: int32;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("LongRunningNullResponse")
 model LongRunningNullResponse {
   @doc("Polling Uri.")
@@ -45,6 +46,7 @@ model LongRunningNullResponse {
   location: ResourceLocation<ResourceOperationStatus<PutAssetLROResponse>>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("PutAssetLROResponse")
 model PutAssetLROResponse {
   @doc("Response of completed put asset lro.")
@@ -79,4 +81,13 @@ model ProbeSettings {
 
   @doc("The HTTP method for the probe request.")
   httpMethod: string;
+}
+
+@doc("Accelerator configuration for a model instance.")
+model AcceleratorMap {
+  @doc("The type of accelerator (e.g. A100_80GB, H100_80GB).")
+  acceleratorType: string;
+
+  @doc("Number of accelerators allocated per model instance.")
+  numberOfAcceleratorsPerModelInstance: int32;
 }
