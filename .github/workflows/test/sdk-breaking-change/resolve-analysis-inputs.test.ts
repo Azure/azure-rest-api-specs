@@ -61,6 +61,12 @@ describe("resolveAnalysisTrigger", () => {
         head: { repo: { full_name: "owner/repo" }, sha: "a".repeat(40) },
       },
     });
+    Object.assign(github.rest.pulls, {
+      listFiles: vi.fn().mockResolvedValue({
+        data: [{ filename: "specification/service/Widget.Service/main.tsp" }],
+      }),
+    });
+    github.rest.repos.getContent.mockResolvedValue({ data: { type: "file" } });
 
     await resolveAnalysisTrigger({ github, context, core });
 
@@ -69,6 +75,10 @@ describe("resolveAnalysisTrigger", () => {
     expect(core.setOutput).toHaveBeenCalledWith("head-sha", "a".repeat(40));
     expect(core.setOutput).toHaveBeenCalledWith("sdk-language", ".NET");
     expect(core.setOutput).toHaveBeenCalledWith("should-run", "true");
+    expect(core.setOutput).toHaveBeenCalledWith(
+      "tsp-config-paths",
+      '["specification/service/Widget.Service/tspconfig.yaml"]',
+    );
   });
 
   it("skips when no supported label artifact exists", async () => {
@@ -280,6 +290,7 @@ describe("resolveChangedTypeSpecConfigPathsFromPullRequest", () => {
       ],
     });
     Object.assign(github.rest.pulls, { listFiles });
+    github.rest.pulls.get.mockResolvedValue({ data: { head: { sha: "a".repeat(40) } } });
     github.rest.repos.getContent
       .mockRejectedValueOnce(Object.assign(new Error("Not Found"), { status: 404 }))
       .mockResolvedValueOnce({ data: { type: "file" } });
@@ -290,7 +301,6 @@ describe("resolveChangedTypeSpecConfigPathsFromPullRequest", () => {
         context,
         core,
         pullNumber: 42,
-        headSha: "a".repeat(40),
       }),
     ).resolves.toEqual(["specification/service/Widget.Service/tspconfig.yaml"]);
     expect(listFiles).toHaveBeenCalledWith({

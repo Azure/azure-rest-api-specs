@@ -86,11 +86,12 @@ describe("publishMitigationResult", () => {
       workflowSummaryUrl: "https://github.com/owner/repo/actions/runs/456",
     });
 
-    expect(github.rest.issues.createComment).toHaveBeenCalledWith(
-      expect.objectContaining({
-        issue_number: 42,
-        body: expect.stringMatching(/^\/azsdk sdk-breaking-mitigate Java\n\n/),
-      }),
-    );
+    expect(github.rest.issues.createComment).toHaveBeenCalled();
+    const comment = github.rest.issues.createComment.mock.calls[0]?.[0] as {
+      issue_number: number;
+      body: string;
+    };
+    expect(comment.issue_number).toBe(42);
+    expect(comment.body).toMatch(/^\/azsdk sdk-breaking-mitigate Java\n\n/);
   });
 });

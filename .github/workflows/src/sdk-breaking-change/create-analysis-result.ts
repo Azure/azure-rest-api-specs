@@ -95,7 +95,11 @@ export async function createAnalysisResult({
   if (status === "failure") {
     try {
       errorMessage = (await readFile(join(resultsPath, "error.log"), "utf8")).trim();
-    } catch {}
+    } catch (error) {
+      if (!(error instanceof Error && "code" in error && error.code === "ENOENT")) {
+        throw error;
+      }
+    }
     errorMessage ||= "SDK breaking-change analysis failed.";
     errorMessage += `\n\n[See analysis workflow](${analysisWorkflowUrl})`;
   }

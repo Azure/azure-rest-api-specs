@@ -22,7 +22,10 @@ type MitigationResult = {
 };
 
 function escapeTableCell(value: unknown, fallback = "-"): string {
-  const text = String(value ?? "").trim();
+  const text =
+    typeof value === "string" || typeof value === "number" || typeof value === "boolean"
+      ? String(value).trim()
+      : "";
   return text
     ? text.replaceAll("\r", "").replaceAll("\n", "<br>").replaceAll("|", "\\|")
     : fallback;
@@ -41,7 +44,7 @@ export async function buildMitigationReport({
   const result = JSON.parse(await readFile(mitigationResultPath, "utf8")) as MitigationResult;
   if (result.status !== "success") {
     const errorMessage =
-      result.errorMessage ?? "The SDK breaking-change mitigaition did not succeed.";
+      result.errorMessage ?? "The SDK breaking-change mitigation did not succeed.";
     core.warning(errorMessage); // Handle the failure case if needed
     return { report: errorMessage, result };
   }

@@ -1,7 +1,10 @@
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { createAnalysisResult } from "../../src/sdk-breaking-change/create-analysis-result.ts";
+import {
+  AnalysisResultSchema,
+  createAnalysisResult,
+} from "../../src/sdk-breaking-change/create-analysis-result.ts";
 import {
   buildAnalysisReport,
   publishAnalysisResult,
@@ -62,8 +65,8 @@ afterEach(async () => {
 
 describe("createAnalysisResult", () => {
   it("creates a versioned artifact from raw analysis results", async () => {
-    const artifact = JSON.parse(
-      await readFile(join(resultsPath, "sdk-breaking-change-analysis.json"), "utf8"),
+    const artifact = AnalysisResultSchema.parse(
+      JSON.parse(await readFile(join(resultsPath, "sdk-breaking-change-analysis.json"), "utf8")),
     );
 
     expect(artifact).toEqual({
@@ -153,12 +156,13 @@ describe("publishAnalysisResult", () => {
       core: createMockCore(),
     });
 
-    expect(github.rest.issues.createComment).toHaveBeenCalledWith(
-      expect.objectContaining({
-        issue_number: 42,
-        body: expect.stringMatching(/^\/azsdk sdk-breaking-analysis Go\n\n/),
-      }),
-    );
+    expect(github.rest.issues.createComment).toHaveBeenCalled();
+    const comment = github.rest.issues.createComment.mock.calls[0]?.[0] as {
+      issue_number: number;
+      body: string;
+    };
+    expect(comment.issue_number).toBe(42);
+    expect(comment.body).toMatch(/^\/azsdk sdk-breaking-analysis Go\n\n/);
   });
 
   it("publishes the error message for a failed analysis", async () => {

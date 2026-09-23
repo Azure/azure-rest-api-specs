@@ -1,6 +1,7 @@
 import type { AsyncFunctionArguments } from "@actions/github-script";
 import { existsSync, realpathSync } from "node:fs";
 import { dirname, isAbsolute, relative, resolve, sep } from "node:path";
+import type { WebhookEvent } from "../github.ts";
 
 type PullRequestFile = {
   filename: string;
@@ -43,15 +44,29 @@ const SDK_LANGUAGES_BY_LABEL = new Map<(typeof SDK_LABELS)[number], string>([
   ["BreakingChange-Python-Sdk", "Python"],
 ]);
 
+function getWorkflowDispatchInput(payload: unknown, name: string): string | undefined {
+  if (typeof payload !== "object" || payload === null || !("inputs" in payload)) {
+    return undefined;
+  }
+  const { inputs } = payload;
+  if (typeof inputs !== "object" || inputs === null || !(name in inputs)) {
+    return undefined;
+  }
+  const value = (inputs as Record<string, unknown>)[name];
+  return typeof value === "string" ? value : undefined;
+}
+
 export async function resolveAnalysisTrigger({
   github,
   context,
   core,
 }: Pick<AsyncFunctionArguments, "github" | "context" | "core">): Promise<void> {
   if (context.eventName === "workflow_dispatch") {
-    const pullNumber = Number(context.payload.inputs?.pr_number);
+    const pullNumberInput = getWorkflowDispatchInput(context.payload, "pr_number");
+    const sdkLanguageInput = getWorkflowDispatchInput(context.payload, "sdk_language");
+    const pullNumber = Number(pullNumberInput);
     if (!Number.isSafeInteger(pullNumber) || pullNumber <= 0) {
-      throw new Error(`Invalid pull request number: ${context.payload.inputs?.pr_number}`);
+      throw new Error(`Invalid pull request number: ${pullNumberInput}`);
     }
     const { data: pull } = await github.rest.pulls.get({
       ...context.repo,
@@ -62,23 +77,26 @@ export async function resolveAnalysisTrigger({
       actualRepository: pull.head.repo.full_name,
       actualSha: pull.head.sha,
     });
-    const languageConfig = resolveSdkLanguageConfig(context.payload.inputs?.sdk_language);
+    const languageConfig = resolveSdkLanguageConfig(sdkLanguageInput);
     core.setOutput("pr-number", pullNumber);
     core.setOutput("head-repository", pull.head.repo.full_name);
     core.setOutput("head-sha", pull.head.sha);
-    core.setOutput("sdk-language", context.payload.inputs?.sdk_language);
+    core.setOutput("sdk-language", sdkLanguageInput);
     core.setOutput("sdk-repository", languageConfig.repository);
     core.setOutput("should-run", "true");
-    resolveChangedTypeSpecConfigPathsFromPullRequest({
+    await resolveChangedTypeSpecConfigPathsFromPullRequest({
       github,
       context,
       core,
-      pullNumber
+      pullNumber,
     });
     return;
   }
 
-  const workflowRun = context.payload.workflow_run;
+  const { workflow_run: workflowRun } = context.payload as WebhookEvent<
+    "workflow-run",
+    "completed"
+  >;
   if (workflowRun?.conclusion !== "success") {
     core.notice("The SDK Breaking Change Labels workflow did not succeed.");
     core.setOutput("should-run", "false");
@@ -145,11 +163,11 @@ export async function resolveAnalysisTrigger({
   core.setOutput("sdk-language", language);
   core.setOutput("sdk-repository", languageConfig.repository);
   core.setOutput("should-run", labelArtifact.labelValue);
-  resolveChangedTypeSpecConfigPathsFromPullRequest({
+  await resolveChangedTypeSpecConfigPathsFromPullRequest({
     github,
     context,
     core,
-    pullNumber: pullNumber
+    pullNumber,
   });
 }
 
@@ -234,7 +252,7 @@ export async function resolveChangedTypeSpecConfigPathsFromPullRequest({
   github,
   context,
   core,
-  pullNumber
+  pullNumber,
 }: Pick<AsyncFunctionArguments, "github" | "context" | "core"> & {
   pullNumber: number;
 }): Promise<string[]> {
@@ -242,9 +260,9 @@ export async function resolveChangedTypeSpecConfigPathsFromPullRequest({
     throw new Error(`Invalid pull request number: ${pullNumber}`);
   }
   const { data: pull } = await github.rest.pulls.get({
-      ...context.repo,
-      pull_number: pullNumber,
-    });
+    ...context.repo,
+    pull_number: pullNumber,
+  });
   const headSha = pull.head.sha;
   if (!headSha || !/^[0-9a-f]{40}$/i.test(headSha)) {
     throw new Error(`Invalid HEAD_SHA: ${headSha}`);

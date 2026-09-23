@@ -5,7 +5,10 @@ import { AnalysisResultSchema, type AnalysisResult } from "./create-analysis-res
 import { publishResultInComment } from "./publish-result-in-comment.ts";
 
 function escapeTableCell(value: unknown, fallback = "-"): string {
-  const text = String(value ?? "").trim();
+  const text =
+    typeof value === "string" || typeof value === "number" || typeof value === "boolean"
+      ? String(value).trim()
+      : "";
   return text
     ? text.replaceAll("\r", "").replaceAll("|", "\\|").replaceAll("\n", "<br>")
     : fallback;
