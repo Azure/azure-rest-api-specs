@@ -8,9 +8,15 @@ import {
   ensureReleasePlan,
   getApiReleaseType,
   getNextMonthTarget,
+  getReleasePlanResultById,
   getSdkReleaseType,
 } from "./release-plan.ts";
-import type { CliArguments, OctokitLike, TypeSpecProjectInfo } from "./types.ts";
+import type {
+  CliArguments,
+  EnsureReleasePlanResult,
+  OctokitLike,
+  TypeSpecProjectInfo,
+} from "./types.ts";
 import {
   createOctokit,
   FOLDER_MIGRATION_LABEL,
@@ -37,6 +43,16 @@ export async function main(): Promise<void> {
 
   try {
     args = parseCliArguments();
+    const runner = createAzdskRunner();
+
+    if (args.releasePlanId) {
+      console.log(`Getting release plan by id: ${args.releasePlanId}`);
+      const result = getReleasePlanResultById(args.releasePlanId, runner);
+      releasePlanEnsured = true;
+      writeReleasePlanResult(result, args.outputFile);
+      return;
+    }
+
     octokit = createOctokit(undefined);
 
     // Use provided PR number if available, otherwise fall back to commit SHA
@@ -170,19 +186,12 @@ export async function main(): Promise<void> {
         apiVersion: projectInfo.apiVersion,
         testReleasePlan: args.testReleasePlan,
       },
-      createAzdskRunner(),
+      runner,
       hasNewApiVersionLabel || isTspConfigChanged,
     );
     releasePlanEnsured = true;
 
-    console.log(JSON.stringify(result, null, 2));
-
-    if (args.outputFile) {
-      const outputPath = path.resolve(args.outputFile);
-      mkdirSync(path.dirname(outputPath), { recursive: true });
-      writeFileSync(outputPath, `${JSON.stringify(result, null, 2)}\n`, "utf8");
-      console.log(`Wrote release plan details to ${outputPath}`);
-    }
+    writeReleasePlanResult(result, args.outputFile);
 
     // Post comment on PR if release plan was created
     if (result.outcome === "created" && resolvedPrNumber) {
@@ -246,6 +255,17 @@ export async function main(): Promise<void> {
   }
 }
 
+function writeReleasePlanResult(result: EnsureReleasePlanResult, outputFile?: string): void {
+  console.log(JSON.stringify(result, null, 2));
+
+  if (outputFile) {
+    const outputPath = path.resolve(outputFile);
+    mkdirSync(path.dirname(outputPath), { recursive: true });
+    writeFileSync(outputPath, `${JSON.stringify(result, null, 2)}\n`, "utf8");
+    console.log(`Wrote release plan details to ${outputPath}`);
+  }
+}
+
 export { parseCliArguments } from "./args.ts";
 export {
   buildReleaseplanCommentBody,
@@ -259,6 +279,7 @@ export {
   getApiReleaseType,
   getNextMonthTarget,
   getReleasePlanById,
+  getReleasePlanResultById,
   getSdkReleaseType,
   runAzdskCommand,
 } from "./release-plan.ts";
