@@ -25,10 +25,13 @@ namespace Microsoft.Network;
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This resource must nest under VirtualNetworkAppliance via @parentResource; VirtualNetworkAppliance extends Common.Resource, which is declared with Azure.ResourceManager.Legacy.customAzureResource (see Common/main.tsp), so this resource must carry the same Legacy resource-manager feature tag as its parent for @parentResource to resolve correctly."
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "The 4 capability kinds share a fixed envelope (id, name, type, kind) and differ only in the kind literal value; TypeSpec's @discriminator polymorphism for OpenAPI 2.0 allOf/discriminator generation requires the kind subtypes to extend the discriminated base type. Composition with spread (`...`) cannot produce the allOf-based discriminated schema this wire format requires."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "This resource must nest under VirtualNetworkAppliance, a pre-existing Legacy custom Azure resource (see Common/main.tsp), so it must carry the same Legacy resource-manager feature tag as its parent; matches the suppression already present on the parent at VirtualNetworkAppliance.tsp."
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Matches the identical decorator on the parent VirtualNetworkAppliance (see VirtualNetworkAppliance.tsp); excludes the read-only, path-derived `name` property from the PUT write payload so the create/update request body and the GET/PUT response share one schema, per RPC-Put-V1-25."
 @added(Versions.v2026_03_01)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetworkAppliance)
 @parentResource(VirtualNetworkAppliance)
 @discriminator("kind")
+@Http.Private.includeInapplicableMetadataInPayload(false)
 model VirtualNetworkApplianceCapability
   extends Azure.ResourceManager.ProxyResource<VirtualNetworkApplianceCapabilityProperties> {
   @visibility(Lifecycle.Read)
@@ -50,6 +53,7 @@ model VirtualNetworkApplianceCapability
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This repo's tspconfig.yaml routes emitted schemas to per-feature output files (output-splitting: legacy-feature-files) keyed on Azure.ResourceManager.Legacy.feature; without this decorator on the subtype itself, its schema is emitted into the shared common.json file instead of virtualNetworkAppliance.json, which was verified empirically by removing the decorator and recompiling."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The model name intentionally mirrors the wire-level x-ms-discriminator-value 'PLGatewayFastpath', which is the deployed Network Resource Provider's `kind` string; renaming the TypeSpec model to a differently-cased name would decouple the model name from the discriminator value it represents and confuse code generation for consumers that map model name to kind."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Must carry the same Legacy resource-manager feature tag as its base type VirtualNetworkApplianceCapability for output-splitting (per-feature file routing) to apply consistently to every discriminated subtype."
 @added(Versions.v2026_03_01)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetworkAppliance)
 model PLGatewayFastpathCapability extends VirtualNetworkApplianceCapability {
@@ -65,6 +69,7 @@ model PLGatewayFastpathCapability extends VirtualNetworkApplianceCapability {
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This repo's tspconfig.yaml routes emitted schemas to per-feature output files (output-splitting: legacy-feature-files) keyed on Azure.ResourceManager.Legacy.feature; without this decorator on the subtype itself, its schema would be emitted into the shared common.json file instead of virtualNetworkAppliance.json."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The model name intentionally mirrors the wire-level x-ms-discriminator-value 'PLGateway', which is the deployed Network Resource Provider's `kind` string; renaming the TypeSpec model to a differently-cased name would decouple the model name from the discriminator value it represents and confuse code generation for consumers that map model name to kind."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Must carry the same Legacy resource-manager feature tag as its base type VirtualNetworkApplianceCapability for output-splitting (per-feature file routing) to apply consistently to every discriminated subtype."
 @added(Versions.v2026_03_01)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetworkAppliance)
 model PLGatewayCapability extends VirtualNetworkApplianceCapability {
@@ -80,6 +85,7 @@ model PLGatewayCapability extends VirtualNetworkApplianceCapability {
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This repo's tspconfig.yaml routes emitted schemas to per-feature output files (output-splitting: legacy-feature-files) keyed on Azure.ResourceManager.Legacy.feature; without this decorator on the subtype itself, its schema would be emitted into the shared common.json file instead of virtualNetworkAppliance.json."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The model name intentionally mirrors the wire-level x-ms-discriminator-value 'PLIPForwarders', which is the deployed Network Resource Provider's `kind` string; renaming the TypeSpec model to a differently-cased name would decouple the model name from the discriminator value it represents and confuse code generation for consumers that map model name to kind."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Must carry the same Legacy resource-manager feature tag as its base type VirtualNetworkApplianceCapability for output-splitting (per-feature file routing) to apply consistently to every discriminated subtype."
 @added(Versions.v2026_03_01)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetworkAppliance)
 model PLIPForwardersCapability extends VirtualNetworkApplianceCapability {
@@ -96,6 +102,7 @@ model PLIPForwardersCapability extends VirtualNetworkApplianceCapability {
  * precondition, service-validated) beyond the properties common to every capability.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "This repo's tspconfig.yaml routes emitted schemas to per-feature output files (output-splitting: legacy-feature-files) keyed on Azure.ResourceManager.Legacy.feature; without this decorator on the subtype itself, its schema would be emitted into the shared common.json file instead of virtualNetworkAppliance.json."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "Must carry the same Legacy resource-manager feature tag as its base type VirtualNetworkApplianceCapability for output-splitting (per-feature file routing) to apply consistently to every discriminated subtype."
 @added(Versions.v2026_03_01)
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetworkAppliance)
 model Nat64Capability extends VirtualNetworkApplianceCapability {
