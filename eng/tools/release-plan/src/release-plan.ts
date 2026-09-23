@@ -259,6 +259,21 @@ export function getReleasePlanById(releasePlanId: string, runner?: AzsdkRunner):
 }
 
 /**
+ * Retrieves a release plan directly by id without running discovery or creation.
+ */
+export function getReleasePlanResultById(
+  releasePlanId: string,
+  runner: AzsdkRunner,
+): EnsureReleasePlanResult {
+  const trimmedId = releasePlanId.trim();
+  return {
+    outcome: "existing_by_id",
+    releasePlan: getReleasePlanById(trimmedId, runner),
+    details: { releasePlanId: trimmedId },
+  };
+}
+
+/**
  * Computes the target release month as "Month YYYY" for next month.
  * @returns Target release month string (e.g., "July 2026")
  */
