@@ -22,6 +22,9 @@ permissions:
 
 jobs:
   resolve:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-slim
     outputs:
       head-repository: ${{ steps.resolve.outputs.head-repository }}
@@ -75,10 +78,10 @@ jobs:
       - name: Checkout specification PR head
         uses: actions/checkout@v7
         with:
-          repository: ${{ needs.resolve.outputs.head-repository }}
+          repository: ${{ github.repository }}
           # resolve-trigger restricts this to the current SHA of a branch in this repository.
           # codeql[actions/untrusted-checkout/critical]
-          ref: ${{ needs.resolve.outputs.head-sha }}
+          ref: refs/pull/${{ needs.resolve.outputs.pr-number }}/merge
           path: repositories/azure-rest-api-specs
           persist-credentials: false
 
