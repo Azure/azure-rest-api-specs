@@ -176,7 +176,7 @@ Single source of truth for breaking-change and versioning approval label names a
   folder, falling back to `client.tsp` when `main.tsp` is absent. The optional `timeout` limits
   compiler execution in milliseconds, with no timeout by default. Pass `logger` to receive
   execution logs and stderr warnings. Failures throw, retaining compiler diagnostics and the
-  execution error as their cause rather than treating the project as unconfigured.
+  execution error as their cause rather than reporting that no emitter is configured.
 - `TypeSpecMetadataSchema`, `TypeSpecLanguageMetadataSchema` — zod schemas for metadata output.
 
 ## Folder structure & contributing
