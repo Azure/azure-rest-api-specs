@@ -215,8 +215,8 @@ catalogs:
       specifier: github:actions/github-script
       version: 9.0.0
     '@apidevtools/json-schema-ref-parser':
-      specifier: ^15.1.3
-      version: 15.3.5
+      specifier: ^16.0.2
+      version: 16.0.2
     '@autorest/openapi-to-typespec':
       specifier: 0.11.14
       version: 0.11.14
@@ -576,6 +576,9 @@ importers:
       '@typespec/xml':
         specifier: 'catalog:'
         version: 0.86.0(@typespec/compiler@1.16.0(@types/node@24.13.1))
+      '@vitest/coverage-v8':
+        specifier: 'catalog:'
+        version: 5.0.0(vitest@5.0.0)
       autorest:
         specifier: 'catalog:'
         version: 3.8.0
@@ -597,12 +600,15 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 7.0.2
+      vitest:
+        specifier: 'catalog:'
+        version: 5.0.0(@types/node@24.13.1)(@vitest/coverage-v8@5.0.0)(vite@8.0.16(@types/node@24.13.1)(yaml@2.9.0))
 
   .github:
     dependencies:
       '@apidevtools/json-schema-ref-parser':
         specifier: 'catalog:'
-        version: 15.3.5(@types/json-schema@7.0.15)
+        version: 16.0.2(@types/json-schema@7.0.15)
       '@azure-tools/specs-shared':
         specifier: workspace:*
         version: link:shared
@@ -679,9 +685,6 @@ importers:
       '@types/semver':
         specifier: 'catalog:'
         version: 7.7.1
-      '@vitest/coverage-v8':
-        specifier: 'catalog:'
-        version: 5.0.0(vitest@5.0.0)
       '@vitest/utils':
         specifier: 'catalog:'
         version: 5.0.0
@@ -694,18 +697,12 @@ importers:
       tinybench:
         specifier: 'catalog:'
         version: 6.1.4
-      typescript:
-        specifier: 'catalog:'
-        version: 7.0.2
-      vitest:
-        specifier: 'catalog:'
-        version: 5.0.0(@types/node@24.13.1)(@vitest/coverage-v8@5.0.0)(vite@8.0.16(@types/node@24.13.1)(yaml@2.9.0))
 
   .github/shared:
     dependencies:
       '@apidevtools/json-schema-ref-parser':
         specifier: 'catalog:'
-        version: 15.3.5(@types/json-schema@7.0.15)
+        version: 16.0.2(@types/json-schema@7.0.15)
       cross-spawn:
         specifier: 'catalog:'
         version: 7.0.6
@@ -740,21 +737,24 @@ importers:
       '@types/semver':
         specifier: 'catalog:'
         version: 7.7.1
-      '@vitest/coverage-v8':
-        specifier: 'catalog:'
-        version: 5.0.0(vitest@5.0.0)
       semver:
         specifier: 'catalog:'
         version: 7.8.5
       tinybench:
         specifier: 'catalog:'
         version: 6.1.4
-      typescript:
+
+  eng/scripts:
+    devDependencies:
+      '@types/node':
         specifier: 'catalog:'
-        version: 7.0.2
-      vitest:
+        version: 24.13.1
+
+  .github/skills/azure-typespec-assessment:
+    dependencies:
+      yaml:
         specifier: 'catalog:'
-        version: 5.0.0(@types/node@24.13.1)(@vitest/coverage-v8@5.0.0)(vite@8.0.16(@types/node@24.13.1)(yaml@2.9.0))
+        version: 2.9.0
 
   eng/tools:
     devDependencies:
@@ -803,18 +803,12 @@ importers:
       '@types/node':
         specifier: 'catalog:'
         version: 24.13.1
-      typescript:
-        specifier: 'catalog:'
-        version: 7.0.2
-      vitest:
-        specifier: 'catalog:'
-        version: 5.0.0(@types/node@24.13.1)(@vitest/coverage-v8@5.0.0)(vite@8.0.16(@types/node@24.13.1)(yaml@2.9.0))
 
   eng/tools/lint-diff:
     dependencies:
       '@apidevtools/json-schema-ref-parser':
         specifier: 'catalog:'
-        version: 15.3.5(@types/json-schema@7.0.15)
+        version: 16.0.2(@types/json-schema@7.0.15)
       '@azure-tools/specs-shared':
         specifier: workspace:*
         version: link:../../../.github/shared
@@ -843,21 +837,12 @@ importers:
       '@types/node':
         specifier: 'catalog:'
         version: 24.13.1
-      '@vitest/coverage-v8':
-        specifier: 'catalog:'
-        version: 5.0.0(vitest@5.0.0)
       execa:
         specifier: 'catalog:'
         version: 10.0.0
       memfs:
         specifier: 'catalog:'
         version: 4.57.6(tslib@2.8.1)
-      typescript:
-        specifier: 'catalog:'
-        version: 7.0.2
-      vitest:
-        specifier: 'catalog:'
-        version: 5.0.0(@types/node@24.13.1)(@vitest/coverage-v8@5.0.0)(vite@8.0.16(@types/node@24.13.1)(yaml@2.9.0))
 
   eng/tools/oav-runner:
     dependencies:
@@ -886,15 +871,6 @@ importers:
       '@types/node':
         specifier: 'catalog:'
         version: 24.13.1
-      '@vitest/coverage-v8':
-        specifier: 'catalog:'
-        version: 5.0.0(vitest@5.0.0)
-      typescript:
-        specifier: 'catalog:'
-        version: 7.0.2
-      vitest:
-        specifier: 'catalog:'
-        version: 5.0.0(@types/node@24.13.1)(@vitest/coverage-v8@5.0.0)(vite@8.0.16(@types/node@24.13.1)(yaml@2.9.0))
 
   eng/tools/openapi-diff-runner:
     dependencies:
@@ -917,15 +893,6 @@ importers:
       '@types/node':
         specifier: 'catalog:'
         version: 24.13.1
-      '@vitest/coverage-v8':
-        specifier: 'catalog:'
-        version: 5.0.0(vitest@5.0.0)
-      typescript:
-        specifier: 'catalog:'
-        version: 7.0.2
-      vitest:
-        specifier: 'catalog:'
-        version: 5.0.0(@types/node@24.13.1)(@vitest/coverage-v8@5.0.0)(vite@8.0.16(@types/node@24.13.1)(yaml@2.9.0))
 
   eng/tools/release-plan:
     dependencies:
@@ -939,15 +906,6 @@ importers:
       '@types/node':
         specifier: 'catalog:'
         version: 24.13.1
-      '@vitest/coverage-v8':
-        specifier: 'catalog:'
-        version: 5.0.0(vitest@5.0.0)
-      typescript:
-        specifier: 'catalog:'
-        version: 7.0.2
-      vitest:
-        specifier: 'catalog:'
-        version: 5.0.0(@types/node@24.13.1)(@vitest/coverage-v8@5.0.0)(vite@8.0.16(@types/node@24.13.1)(yaml@2.9.0))
 
   eng/tools/sdk-suppressions:
     dependencies:
@@ -973,15 +931,6 @@ importers:
       '@types/node':
         specifier: 'catalog:'
         version: 24.13.1
-      '@vitest/coverage-v8':
-        specifier: 'catalog:'
-        version: 5.0.0(vitest@5.0.0)
-      typescript:
-        specifier: 'catalog:'
-        version: 7.0.2
-      vitest:
-        specifier: 'catalog:'
-        version: 5.0.0(@types/node@24.13.1)(@vitest/coverage-v8@5.0.0)(vite@8.0.16(@types/node@24.13.1)(yaml@2.9.0))
 
   eng/tools/spec-gen-sdk-runner:
     dependencies:
@@ -995,15 +944,6 @@ importers:
       '@types/node':
         specifier: 'catalog:'
         version: 24.13.1
-      '@vitest/coverage-v8':
-        specifier: 'catalog:'
-        version: 5.0.0(vitest@5.0.0)
-      typescript:
-        specifier: 'catalog:'
-        version: 7.0.2
-      vitest:
-        specifier: 'catalog:'
-        version: 5.0.0(@types/node@24.13.1)(@vitest/coverage-v8@5.0.0)(vite@8.0.16(@types/node@24.13.1)(yaml@2.9.0))
 
   eng/tools/summarize-impact:
     dependencies:
@@ -1041,15 +981,6 @@ importers:
       '@types/node':
         specifier: 'catalog:'
         version: 24.13.1
-      '@vitest/coverage-v8':
-        specifier: 'catalog:'
-        version: 5.0.0(vitest@5.0.0)
-      typescript:
-        specifier: 'catalog:'
-        version: 7.0.2
-      vitest:
-        specifier: 'catalog:'
-        version: 5.0.0(@types/node@24.13.1)(@vitest/coverage-v8@5.0.0)(vite@8.0.16(@types/node@24.13.1)(yaml@2.9.0))
 
   eng/tools/suppressions:
     dependencies:
@@ -1069,15 +1000,6 @@ importers:
       '@types/node':
         specifier: 'catalog:'
         version: 24.13.1
-      '@vitest/coverage-v8':
-        specifier: 'catalog:'
-        version: 5.0.0(vitest@5.0.0)
-      typescript:
-        specifier: 'catalog:'
-        version: 7.0.2
-      vitest:
-        specifier: 'catalog:'
-        version: 5.0.0(@types/node@24.13.1)(@vitest/coverage-v8@5.0.0)(vite@8.0.16(@types/node@24.13.1)(yaml@2.9.0))
 
   eng/tools/tsp-client-tests:
     devDependencies:
@@ -1087,12 +1009,6 @@ importers:
       '@types/node':
         specifier: 'catalog:'
         version: 24.13.1
-      typescript:
-        specifier: 'catalog:'
-        version: 7.0.2
-      vitest:
-        specifier: 'catalog:'
-        version: 5.0.0(@types/node@24.13.1)(@vitest/coverage-v8@5.0.0)(vite@8.0.16(@types/node@24.13.1)(yaml@2.9.0))
 
   eng/tools/typespec-migration-validation:
     dependencies:
@@ -1115,15 +1031,6 @@ importers:
       '@types/yargs':
         specifier: 'catalog:'
         version: 17.0.35
-      '@vitest/coverage-v8':
-        specifier: 'catalog:'
-        version: 5.0.0(vitest@5.0.0)
-      typescript:
-        specifier: 'catalog:'
-        version: 7.0.2
-      vitest:
-        specifier: 'catalog:'
-        version: 5.0.0(@types/node@24.13.1)(@vitest/coverage-v8@5.0.0)(vite@8.0.16(@types/node@24.13.1)(yaml@2.9.0))
 
   eng/tools/typespec-requirement:
     devDependencies:
@@ -1133,12 +1040,6 @@ importers:
       execa:
         specifier: 'catalog:'
         version: 10.0.0
-      typescript:
-        specifier: 'catalog:'
-        version: 7.0.2
-      vitest:
-        specifier: 'catalog:'
-        version: 5.0.0(@types/node@24.13.1)(@vitest/coverage-v8@5.0.0)(vite@8.0.16(@types/node@24.13.1)(yaml@2.9.0))
 
   eng/tools/typespec-suppressions:
     dependencies:
@@ -1155,15 +1056,6 @@ importers:
       '@types/node':
         specifier: 'catalog:'
         version: 24.13.1
-      '@vitest/coverage-v8':
-        specifier: 'catalog:'
-        version: 5.0.0(vitest@5.0.0)
-      typescript:
-        specifier: 'catalog:'
-        version: 7.0.2
-      vitest:
-        specifier: 'catalog:'
-        version: 5.0.0(@types/node@24.13.1)(@vitest/coverage-v8@5.0.0)(vite@8.0.16(@types/node@24.13.1)(yaml@2.9.0))
 
   eng/tools/typespec-validation:
     dependencies:
@@ -1198,15 +1090,6 @@ importers:
       '@types/node':
         specifier: 'catalog:'
         version: 24.13.1
-      '@vitest/coverage-v8':
-        specifier: 'catalog:'
-        version: 5.0.0(vitest@5.0.0)
-      typescript:
-        specifier: 'catalog:'
-        version: 7.0.2
-      vitest:
-        specifier: 'catalog:'
-        version: 5.0.0(@types/node@24.13.1)(@vitest/coverage-v8@5.0.0)(vite@8.0.16(@types/node@24.13.1)(yaml@2.9.0))
 
 packages:
 
@@ -1252,9 +1135,9 @@ packages:
     resolution: {integrity: sha512-Oc96zvmxx1fqoSEdUmfmvvb59/KDOnUoJ7s2t7bISyAn0XEz57LCCw8k2Y4Pf3mwKaZLMciESALORLgfe2frCw==}
     engines: {node: '>= 16'}
 
-  '@apidevtools/json-schema-ref-parser@15.3.5':
-    resolution: {integrity: sha512-orNOYXw3hYXxxisXMldjzjBzqqTLBPbwOtHg7ovBPvfBHDue1qM9YJENZ3W2BQuS+7z4ThogMbEzEsov57Itkg==}
-    engines: {node: '>=20'}
+  '@apidevtools/json-schema-ref-parser@16.0.2':
+    resolution: {integrity: sha512-oCwWUyRdMtt/hnp6ONPudFZzF7tSqiHy46lLx5VsnsLTacs8TSU558VPAiOueFJ8WddCH30PINWDA8ByxhGHmQ==}
+    engines: {node: '>=22.19.0'}
     peerDependencies:
       '@types/json-schema': ^7.0.15
 
@@ -4338,6 +4221,10 @@ packages:
     resolution: {integrity: sha512-4yqz8a3n5HmGTlsbADNtr/dJlhkh/55Rq798G6ibiULcXbDtaLpTl1pvdqcbFfeoj3iSi52lePFM7h9H21cw/A==}
     engines: {node: '>=18.17'}
 
+  undici@8.10.2:
+    resolution: {integrity: sha512-/y4/bH9YNU5hi9NIrpOuvGXFcxrj3CMrV+/AYpowAYTpHn8gX/XPFjNy766FPoYY0miQhdW977JFWKGNhBdwyQ==}
+    engines: {node: '>=22.19.0'}
+
   unicorn-magic@0.3.0:
     resolution: {integrity: sha512-+QBBXBCvifc56fsbuxZQ6Sic3wqqc3WWaqxs58gvJrcOuN83HGTCwz3oS5phzU9LthRNE9VrJCFCLUgHeeFnfA==}
     engines: {node: '>=18'}
@@ -4650,10 +4537,11 @@ snapshots:
       '@types/json-schema': 7.0.15
       js-yaml: 4.3.2
 
-  '@apidevtools/json-schema-ref-parser@15.3.5(@types/json-schema@7.0.15)':
+  '@apidevtools/json-schema-ref-parser@16.0.2(@types/json-schema@7.0.15)':
     dependencies:
       '@types/json-schema': 7.0.15
-      js-yaml: 4.3.2
+      js-yaml: 5.4.1
+      undici: 8.10.2
 
   '@apidevtools/json-schema-ref-parser@9.1.2':
     dependencies:
@@ -7885,6 +7773,8 @@ snapshots:
   undici-types@7.24.6: {}
 
   undici@6.26.0: {}
+
+  undici@8.10.2: {}
 
   unicorn-magic@0.3.0: {}
 

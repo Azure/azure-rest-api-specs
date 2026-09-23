@@ -13,7 +13,7 @@ interface Workflow {
   name?: string;
   on?: {
     pull_request?: { paths?: string[] };
-    push?: { paths?: string[] };
+    push?: { branches?: string[]; paths?: string[] };
     workflow_call?: { inputs?: Record<string, unknown> };
   };
   permissions?: Record<string, string>;
@@ -21,8 +21,15 @@ interface Workflow {
     string,
     {
       name?: string;
-      strategy?: unknown;
-      steps?: { run?: string; with?: Record<string, unknown> }[];
+      "runs-on"?: string;
+      strategy?: { matrix?: Record<string, unknown>; "fail-fast"?: boolean };
+      steps?: {
+        name?: string;
+        if?: string;
+        uses?: string;
+        run?: string;
+        with?: Record<string, unknown>;
+      }[];
       with?: Record<string, unknown>;
     }
   >;
@@ -66,8 +73,128 @@ describe("workflow files", () => {
     }
 
     expect(lintSteps).toEqual(["lint.yaml/lint"]);
-    const reusable = await readWorkflow("_reusable-eng-tools-test.yaml");
-    expect(reusable.on?.workflow_call?.inputs).not.toHaveProperty("lint");
+  });
+
+  it("type-checks once and tests all packages on both platforms", async () => {
+    const files = (await readdir(workflowsDir)).filter((file) => /\.ya?ml$/.test(file));
+    const builds: string[] = [];
+    const tests: string[] = [];
+    for (const file of files) {
+      const workflow = await readWorkflow(file);
+      for (const [name, job] of Object.entries(workflow.jobs)) {
+        for (const step of job.steps ?? []) {
+          if (/\bpnpm\s+(?:run\s+)?(?:build|lint:tsc)\b/.test(step.run ?? "")) {
+            builds.push(`${file}/${name}`);
+            expect(job.strategy).toBeUndefined();
+            expect(job["runs-on"]).toBe("ubuntu-24.04");
+            expect(step.run).toBe("pnpm run build");
+          }
+          if (/\bpnpm\s+(?:run\s+)?test:ci\b/.test(step.run ?? "")) {
+            tests.push(`${file}/${name}`);
+            expect(job.strategy).toEqual({
+              "fail-fast": false,
+              matrix: {
+                include: [
+                  { os: "ubuntu", runner: "ubuntu-24.04" },
+                  { os: "windows", runner: "windows-2022" },
+                ],
+              },
+            });
+            expect(job["runs-on"]).toBe("${{ matrix.runner }}");
+          }
+        }
+      }
+    }
+    expect(builds).toEqual(["eng.yml/build"]);
+    expect(tests).toEqual(["eng.yml/test"]);
+    expect(files).not.toContain("eng-tools-test.yaml");
+    expect(files).not.toContain("_reusable-eng-tools-test.yaml");
+  });
+
+  it("triggers engineering checks on shared inputs and checks out integration fixtures", async () => {
+    const workflow = await readWorkflow("eng.yml");
+    const paths = [
+      "**/package.json",
+      ".github/**",
+      "eng/**",
+      "pnpm-lock.yaml",
+      "pnpm-workspace.yaml",
+      "tsconfig.json",
+      "tsconfig.base.json",
+      "vitest.config.mts",
+      ".npmrc",
+      ".gitignore",
+      ".oxlintrc.json",
+      ".oxfmtrc.json",
+      "specification/common-types/**",
+      "specification/contosowidgetmanager/**",
+      "specification/storage/**",
+      "specification/compute/**",
+    ];
+    expect(workflow.on?.pull_request?.paths).toEqual(paths);
+    expect(workflow.on?.push?.paths).toEqual(paths);
+    expect(workflow.on?.push?.branches).toEqual(["main", "typespec-next"]);
+    expect(workflow.name).toBe("Eng");
+    expect(Object.keys(workflow.jobs)).toEqual(["workspace-validation", "build", "test"]);
+    expect(workflow.permissions).toEqual({ contents: "read" });
+    expect(
+      workflow.jobs.test.steps?.find((step) => step.uses?.startsWith("actions/checkout"))?.with,
+    ).toEqual({
+      "sparse-checkout":
+        ".github\neng\nspecification/common-types\nspecification/contosowidgetmanager\nspecification/storage\nspecification/compute\n",
+    });
+    for (const job of Object.values(workflow.jobs)) {
+      expect(
+        job.steps?.filter((step) => step.uses === "./.github/actions/setup-node-install-deps"),
+      ).toHaveLength(1);
+    }
+    const validation = workflow.jobs["workspace-validation"];
+    expect(validation["runs-on"]).toBe("ubuntu-24.04");
+    expect(validation.strategy).toBeUndefined();
+    expect(validation.steps?.[0].with).toEqual({
+      "sparse-checkout-cone-mode": false,
+      "sparse-checkout":
+        "package.json\n/pnpm-workspace.yaml\n/pnpm-lock.yaml\n/.github/actions/setup-node-install-deps/\n/.github/shared/\n/.github/workflows/src/validate-workspace.ts\n",
+    });
+    expect(validation.steps?.[1].with).toEqual({
+      "install-command":
+        "pnpm install --frozen-lockfile --prod --prefer-offline --filter=azure-rest-api-specs-github...",
+      "cache-name": "workspace-validation",
+    });
+    expect(validation.steps?.[2].run).toBe("node ./.github/workflows/src/validate-workspace.ts");
+  });
+
+  it("retains production-only imports and GitHub workflow checks outside the test jobs", async () => {
+    const workflow = await readWorkflow("github-test.yaml");
+    expect(workflow.jobs.test.strategy?.matrix).toEqual({
+      include: [
+        { os: "ubuntu", runner: "ubuntu-24.04" },
+        { os: "windows", runner: "windows-2022" },
+      ],
+    });
+    expect(workflow.jobs.test["runs-on"]).toBe("${{ matrix.runner }}");
+    expect(workflow.jobs.test.name).toBe("test (${{ matrix.os }})");
+    const steps = workflow.jobs.test.steps ?? [];
+    const install = steps.findIndex(
+      (step) => step.uses === "./.github/actions/install-deps-github-script",
+    );
+    const imports = steps.findIndex((step) => step.name === "Verify all modules are importable");
+    expect(install).toBeGreaterThanOrEqual(0);
+    expect(imports).toBeGreaterThan(install);
+    expect(steps[imports].if).toBeUndefined();
+    expect(steps.some((step) => step.uses === "./.github/actions/setup-node-install-deps")).toBe(
+      false,
+    );
+    const actionlint = steps.find((step) => step.name === "Lint workflows");
+    expect(actionlint?.if).toBe("${{ matrix.os == 'ubuntu' }}");
+    expect(actionlint?.uses).toContain("actionlint");
+    const locks = steps.find((step) => step.name === "Require compiled agentic workflow locks");
+    expect(locks?.if).toBe("${{ github.event_name == 'pull_request' && matrix.os == 'ubuntu' }}");
+    expect(locks?.with?.script).toContain("core.setFailed");
+    for (const path of ["package.json", "pnpm-lock.yaml", "pnpm-workspace.yaml", ".npmrc"]) {
+      expect(workflow.on?.pull_request?.paths).toContain(path);
+      expect(workflow.on?.push?.paths).toContain(path);
+    }
   });
 
   it("triggers central linting for all package and lint configuration changes", async () => {
@@ -80,7 +207,9 @@ describe("workflow files", () => {
       "package.json",
       "pnpm-lock.yaml",
       "pnpm-workspace.yaml",
+      "tsconfig.base.json",
       "tsconfig.json",
+      "vitest.config.mts",
     ];
     expect(workflow.on?.pull_request?.paths).toEqual(paths);
     expect(workflow.on?.push?.paths).toEqual(paths);
@@ -92,7 +221,7 @@ describe("workflow files", () => {
     expect(workflow.jobs.lint.steps?.[1].with?.["install-command"]).toBe("pnpm ci");
   });
 
-  it("preserves the previous lint coverage", async () => {
+  it("lints enabled tooling and the root test config, excluding unmanaged paths", async () => {
     const root = resolve(workflowsDir, "../..");
     const folder = await mkdtemp(resolve(tmpdir(), "specs-lint-"));
     try {
@@ -106,7 +235,9 @@ describe("workflow files", () => {
           "lint-diff",
           "oav-runner",
           "release-plan",
+          "sdk-suppressions",
           "spec-gen-sdk-runner",
+          "summarize-impact",
           "suppressions",
           "tsp-client-tests",
           "typespec-requirement",
@@ -121,24 +252,22 @@ describe("workflow files", () => {
         "eng/common",
         "eng/scripts",
         "scripts",
-        ...[
-          "openapi-diff-runner",
-          "sdk-suppressions",
-          "summarize-impact",
-          "typespec-migration-validation",
-        ].map((name) => `eng/tools/${name}`),
+        ...["openapi-diff-runner", "typespec-migration-validation"].map(
+          (name) => `eng/tools/${name}`,
+        ),
       ];
       for (const path of [...included, ...excluded]) {
         await mkdir(resolve(folder, path), { recursive: true });
         await writeFile(resolve(folder, path, "index.ts"), "export const value = 1;\n");
       }
+      await writeFile(resolve(folder, "vitest.config.mts"), "export const value = 1;\n");
       const { stdout } = await execFile(
         process.execPath,
         [resolve(root, "node_modules/oxlint/bin/oxlint"), ".", "--debug=files"],
         { cwd: folder },
       );
       expect(stdout.trim().replaceAll("\\", "/").split(/\r?\n/).sort()).toEqual(
-        included.map((path) => `${path}/index.ts`).sort(),
+        [...included.map((path) => `${path}/index.ts`), "vitest.config.mts"].sort(),
       );
     } finally {
       await rm(folder, { recursive: true, force: true });
@@ -174,6 +303,7 @@ describe("workflow files", () => {
       "package.json",
       "pnpm-lock.yaml",
       "pnpm-workspace.yaml",
+      "vitest.config.mts",
     ];
     expect(workflow.on?.pull_request?.paths).toEqual(paths);
     expect(workflow.on?.push?.paths).toEqual(paths);
