@@ -70,16 +70,6 @@ also request a review with `/arm-review`.
 Authors can make and push multiple fixes before returning the PR to the queue.
 There is no review counter or retry limit.
 
-## Auto-signoff decision
-
-Universal Auto-Signoff proceeds only when:
-
-- ARM Semantic Review passed for the current PR head;
-- Swagger LintDiff and Swagger Avocado passed;
-- the PR is ready for ARM review;
-- any required suppression or breaking-change approval is present; and
-- manual ARM signoff is not required.
-
 ## Stop automatic signoff
 
 Add the `ARMManualSignoffRequired` label when a PR needs a human decision or
