@@ -1,0 +1,394 @@
+import type { AsyncFunctionArguments } from "@actions/github-script";
+import { PER_PAGE_MAX } from "../../shared/src/github.ts";
+import { parseExistingComments } from "./comment.ts";
+import type { Core, WebhookEvent } from "./github.ts";
+
+const COMMAND = "/azsdk check-access";
+const MARKER = "<!-- contributor-readiness -->";
+const CHECK_NAME = "Contributor readiness";
+const ONBOARDING = "https://eng.ms/docs/products/azure-developer-experience/onboard/access";
+
+type GitHub = AsyncFunctionArguments["github"];
+type Inputs = Pick<AsyncFunctionArguments, "github" | "context" | "core">;
+type Account = { id: number; login: string; type: string };
+type Participant = Account & { roles: Set<string> };
+export type ReadinessFinding = { subject: string; message: string; unknown?: boolean };
+
+function status(error: unknown): number | undefined {
+  return error instanceof Error && "status" in error && typeof error.status === "number"
+    ? error.status
+    : undefined;
+}
+
+function isAutomation(account: Account): boolean {
+  return account.type === "Bot" || (account.id === 19864447 && account.login === "web-flow");
+}
+
+/** Only GitHub's run metadata is trusted when a review workflow ran in a fork. */
+export async function resolveReadinessPullRequest({
+  github,
+  context,
+  core,
+}: Inputs): Promise<number | null> {
+  if (context.eventName === "pull_request_target") {
+    return (context.payload as WebhookEvent<"pull-request">).pull_request.number;
+  }
+  if (context.eventName === "issue_comment") {
+    const { issue, comment, sender } = context.payload as WebhookEvent<"issue-comment", "created">;
+    return issue.pull_request && comment.body.trim() === COMMAND && !isAutomation(sender)
+      ? issue.number
+      : null;
+  }
+  if (context.eventName !== "workflow_run") throw new Error("Unsupported readiness trigger");
+  const payload = context.payload as WebhookEvent<"workflow-run", "completed">;
+  const { data: run } = await github.rest.actions.getWorkflowRun({
+    ...context.repo,
+    run_id: payload.workflow_run.id,
+  });
+  if (
+    run.repository.id !== payload.repository.id ||
+    run.event !== "pull_request_review" ||
+    run.path !== ".github/workflows/contributor-readiness-review.yaml"
+  ) {
+    throw new Error("Unexpected contributor readiness review workflow");
+  }
+  let numbers = (run.pull_requests ?? [])
+    .filter((pr) => pr.base.repo.id === payload.repository.id)
+    .map((pr) => pr.number);
+  if (numbers.length === 0) {
+    const { data } = await github.rest.search.issuesAndPullRequests({
+      q: `repo:${context.repo.owner}/${context.repo.repo} is:pr is:open sha:${run.head_sha}`,
+      per_page: PER_PAGE_MAX,
+    });
+    if (data.incomplete_results || data.total_count > data.items.length) {
+      throw new Error("Incomplete PR lookup for review workflow; use /azsdk check-access");
+    }
+    numbers = data.items.map((pr) => pr.number);
+  }
+  const candidates: number[] = [];
+  for (const number of new Set(numbers)) {
+    const { data: pr } = await github.rest.pulls.get({ ...context.repo, pull_number: number });
+    if (pr.state === "open" && pr.base.repo.id === payload.repository.id) candidates.push(number);
+  }
+  if (candidates.length > 1) {
+    throw new Error(
+      "Review workflow matches multiple PRs; use /azsdk check-access on the intended PR",
+    );
+  }
+  if (!candidates.length) core.info("No open PR found for the review workflow.");
+  return candidates[0] ?? null;
+}
+
+export async function collectReadinessParticipants(
+  github: GitHub,
+  owner: string,
+  repo: string,
+  pr: Awaited<ReturnType<GitHub["rest"]["pulls"]["get"]>>["data"],
+  findings: ReadinessFinding[],
+): Promise<Participant[]> {
+  const participants = new Map<number, Participant>();
+  function add(account: Account | Record<string, never> | null, role: string): boolean {
+    if (
+      !account ||
+      typeof account.id !== "number" ||
+      typeof account.login !== "string" ||
+      typeof account.type !== "string"
+    )
+      return false;
+    const participant = participants.get(account.id) ?? {
+      id: account.id,
+      login: account.login,
+      type: account.type,
+      roles: new Set<string>(),
+    };
+    participant.roles.add(role);
+    participants.set(account.id, participant);
+    return true;
+  }
+  add(pr.user, "PR author");
+  const commits = await github.paginate(github.rest.pulls.listCommits, {
+    owner,
+    repo,
+    pull_number: pr.number,
+    per_page: PER_PAGE_MAX,
+  });
+  if (commits.length !== pr.commits) {
+    findings.push({
+      subject: "Commit coverage",
+      unknown: true,
+      message: `GitHub returned ${commits.length} of ${pr.commits} commits. Contributor coverage is incomplete (the commit endpoint has a 250-commit limit).`,
+    });
+  }
+  for (const commit of commits) {
+    const author = add(commit.author, "commit author");
+    const committer = add(commit.committer, "committer");
+    if (!author || !committer)
+      findings.push({
+        subject: `Commit ${commit.sha.slice(0, 12)}`,
+        unknown: true,
+        message:
+          "Could not associate an author or committer with a GitHub account. Check the commit email's account association; this is not proof of an unauthorized contributor.",
+      });
+  }
+  const reviews = await github.paginate(github.rest.pulls.listReviews, {
+    owner,
+    repo,
+    pull_number: pr.number,
+    per_page: PER_PAGE_MAX,
+  });
+  for (const review of reviews) {
+    if (review.state === "PENDING") continue;
+    add(review.user, "submitted reviewer");
+    if (!review.user)
+      findings.push({
+        subject: `Review ${review.id}`,
+        unknown: true,
+        message: "The submitted review no longer has a resolvable GitHub account.",
+      });
+  }
+  return [...participants.values()].sort((a, b) => a.login.localeCompare(b.login));
+}
+
+async function writeAccess(github: GitHub, owner: string, repo: string, username: string) {
+  const { data } = await github.rest.repos.getCollaboratorPermissionLevel({
+    owner,
+    repo,
+    username,
+  });
+  return (
+    ["write", "maintain", "admin"].includes(data.permission) ||
+    data.user?.permissions?.push === true
+  );
+}
+
+async function observe<T>(
+  core: Core,
+  findings: ReadinessFinding[],
+  subject: string,
+  operation: () => Promise<T>,
+): Promise<T | undefined> {
+  try {
+    return await operation();
+  } catch (error) {
+    // A denied lookup is not evidence that the participant lacks permission.
+    if (![403, 404].includes(status(error) ?? 0)) throw error;
+    core.warning(`Could not verify ${subject}: GitHub returned ${status(error)}.`);
+    findings.push({
+      subject,
+      unknown: true,
+      message:
+        "Could not verify this requirement with the workflow's access. Refresh later or ask a maintainer to inspect the workflow.",
+    });
+    return undefined;
+  }
+}
+
+export async function evaluateReadinessParticipants(
+  github: GitHub,
+  core: Core,
+  owner: string,
+  repo: string,
+  participants: Participant[],
+  findings: ReadinessFinding[],
+): Promise<void> {
+  for (const participant of participants) {
+    if (isAutomation(participant)) continue;
+    for (const org of ["Microsoft", "Azure"]) {
+      const visible = await observe(
+        core,
+        findings,
+        `${participant.login}: ${org} visibility`,
+        async () => {
+          try {
+            await github.rest.orgs.checkPublicMembershipForUser({
+              org,
+              username: participant.login,
+            });
+            return true;
+          } catch (error) {
+            if (status(error) === 404) return false;
+            throw error;
+          }
+        },
+      );
+      if (visible === false)
+        findings.push({
+          subject: participant.login,
+          message: `${org} membership is not publicly visible. If contributing internally, join the organization or make your membership Public. This alone does not invalidate a review.`,
+        });
+    }
+    const write = await observe(core, findings, `${participant.login}: repository access`, () =>
+      writeAccess(github, owner, repo, participant.login),
+    );
+    if (write === false)
+      findings.push({
+        subject: participant.login,
+        message: participant.roles.has("submitted reviewer")
+          ? "No repository write access. An approval from this account cannot satisfy a required write-access review. Internal reviewers should request or renew Azure SDK Partners access, allow propagation, then refresh."
+          : "No repository write access. Fork contributions remain possible; internal contributors needing main-repository branches or issue management should request or renew Azure SDK Partners access.",
+      });
+  }
+}
+
+function escape(value: string): string {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll("|", "&#124;")
+    .replaceAll("@", "&#64;")
+    .replaceAll("`", "&#96;")
+    .replace(/[\\[\]()*_~]/g, "\\$&")
+    .replace(/[\r\n]/g, " ");
+}
+
+export function renderReadiness(
+  participants: Participant[],
+  findings: ReadinessFinding[],
+  sha: string,
+): string {
+  return [
+    "## Contributor readiness (advisory)",
+    "",
+    findings.some((finding) => finding.unknown)
+      ? "Could not fully verify contributor readiness."
+      : findings.length
+        ? "Contributor access or onboarding needs attention."
+        : "No contributor-readiness issues found.",
+    "",
+    `Evaluated head \`${sha.slice(0, 12)}\`. Existing merge rules are unchanged.`,
+    ...(findings.length
+      ? [
+          "",
+          "| Participant / area | Finding |",
+          "| --- | --- |",
+          ...findings
+            .slice(0, 100)
+            .map((finding) => `| ${escape(finding.subject)} | ${escape(finding.message)} |`),
+          ...(findings.length > 100
+            ? [`\n${findings.length - 100} additional findings omitted from this bounded report.`]
+            : []),
+        ]
+      : []),
+    "",
+    "<details><summary>Evaluated participants</summary>",
+    "",
+    ...participants
+      .slice(0, 100)
+      .map((p) => `- ${escape(p.login)}: ${[...p.roles].sort().join(", ")}`),
+    ...(participants.length > 100
+      ? [`- ${participants.length - 100} additional participants evaluated.`]
+      : []),
+    "",
+    "</details>",
+    "",
+    `[Internal contributor onboarding](${ONBOARDING}): access requests can take up to one day to propagate and need renewal every 180 days.`,
+    "Private membership cannot be distinguished from no membership. Request approvals, expiry dates, and DevOps access are not checked.",
+    "Write access alone does not guarantee an approval counts: GitHub's CODEOWNER and other review rules still apply.",
+    "",
+    `After fixing access, comment \`${COMMAND}\`. PR authors, commit participants, submitted reviewers and maintainers can refresh.`,
+  ].join("\n");
+}
+
+export async function checkContributorReadiness(
+  { github, context, core }: Inputs,
+  number: number,
+): Promise<void> {
+  if (!Number.isSafeInteger(number) || number <= 0) throw new Error("Invalid PR number");
+  const { owner, repo } = context.repo;
+  const { data: pr } = await github.rest.pulls.get({ owner, repo, pull_number: number });
+  if (pr.state !== "open") {
+    core.info("Skipping contributor readiness for a closed PR.");
+    return;
+  }
+  const findings: ReadinessFinding[] = [];
+  let participants: Participant[] = [];
+  let failure: Error | undefined;
+  // A command must be authorized before it can publish or refresh the report.
+  if (context.eventName === "issue_comment") {
+    const payload = context.payload as WebhookEvent<"issue-comment", "created">;
+    if (
+      payload.issue.number !== number ||
+      payload.comment.body.trim() !== COMMAND ||
+      isAutomation(payload.sender)
+    ) {
+      throw new Error("Unexpected contributor readiness command");
+    }
+    participants = await collectReadinessParticipants(github, owner, repo, pr, findings);
+    const authorized =
+      participants.some((person) => person.id === payload.sender.id) ||
+      (await observe(core, [], "refresh authorization", () =>
+        writeAccess(github, owner, repo, payload.sender.login),
+      ));
+    if (!authorized) {
+      core.info("Ignoring refresh from a nonparticipant without verified write access.");
+      return;
+    }
+  }
+  try {
+    if (context.eventName !== "issue_comment") {
+      participants = await collectReadinessParticipants(github, owner, repo, pr, findings);
+    }
+    await evaluateReadinessParticipants(github, core, owner, repo, participants, findings);
+  } catch (error) {
+    failure = error instanceof Error ? error : new Error("GitHub lookup failed", { cause: error });
+    core.error("Contributor readiness could not complete its GitHub lookups.");
+    findings.push({
+      subject: "Evaluation",
+      unknown: true,
+      message: "Could not complete the evaluation. Rerun the workflow or use the refresh command.",
+    });
+  }
+  const { data: latest } = await github.rest.pulls.get({ owner, repo, pull_number: number });
+  if (latest.state !== "open" || latest.head.sha !== pr.head.sha) {
+    throw new Error("PR changed during evaluation; rerun contributor readiness");
+  }
+  const body = renderReadiness(participants, findings, pr.head.sha);
+  await github.rest.checks.create({
+    owner,
+    repo,
+    name: CHECK_NAME,
+    head_sha: pr.head.sha,
+    external_id: `contributor-readiness:${number}`,
+    status: "completed",
+    conclusion: findings.length ? "neutral" : "success",
+    output: {
+      title: findings.some((finding) => finding.unknown)
+        ? "Could not fully verify contributor readiness"
+        : findings.length
+          ? "Contributor readiness needs attention"
+          : "No contributor-readiness issues found",
+      summary: body,
+    },
+  });
+  const comments = await github.paginate(github.rest.issues.listComments, {
+    owner,
+    repo,
+    issue_number: number,
+    per_page: PER_PAGE_MAX,
+  });
+  const [commentId, oldBody] = parseExistingComments(
+    comments.filter(
+      (comment) => comment.user?.type === "Bot" && comment.user.login === "github-actions[bot]",
+    ),
+    MARKER,
+  );
+  const commentBody = `${body}\n${MARKER}`;
+  if (commentId && oldBody !== commentBody) {
+    await github.rest.issues.updateComment({
+      owner,
+      repo,
+      comment_id: commentId,
+      body: commentBody,
+    });
+  } else if (!commentId && findings.length) {
+    await github.rest.issues.createComment({
+      owner,
+      repo,
+      issue_number: number,
+      body: commentBody,
+    });
+  }
+  await core.summary.addRaw(body).write();
+  if (failure) throw failure;
+}

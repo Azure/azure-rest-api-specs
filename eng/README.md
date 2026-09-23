@@ -4,6 +4,32 @@ The `eng` directory contains source code for automated tooling running on this r
 
 For context on this directory, see [Design guidelines for spec repos validation tooling] (Microsoft-internal).
 
+## Contributor readiness
+
+The advisory **Contributor readiness** check reports public Microsoft/Azure
+membership visibility and effective repository access for the PR author, commit
+authors/committers, and all submitted reviewers. It does not change merge rules.
+Missing public membership produces conditional internal-onboarding guidance, not
+a claim that an external contributor is unauthorized.
+
+After changing access, comment `/azsdk check-access` on the PR. The PR author,
+resolved commit participants, submitted reviewers and maintainers can refresh,
+including affected participants without write access. One bot comment is updated
+when findings exist and resolved when they are fixed; clean PRs receive only the
+check. Permission changes alone do not trigger an automatic refresh.
+
+The check uses `GITHUB_TOKEN`: no additional credentials, bot service or Azure
+resources are needed. Private memberships, team membership, manager approvals,
+access expiry dates and Azure DevOps roles are not inspected. CODEOWNER coverage
+and other approval rules remain GitHub's responsibility. Unmapped identities,
+inaccessible API results, and PRs exceeding the commits API's 250-commit limit are
+reported as incomplete rather than silently passing.
+
+Submitted-review events use a read-only notification workflow followed by a
+trusted `workflow_run` publisher, so fork PR code is never executed with write
+permissions. Fork workflow approval policies can delay automatic review refresh;
+the comment command is also available. Do not make this advisory check required.
+
 ## Code conventions
 
 Below are code convention we strive to follow in `eng` directory:

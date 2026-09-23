@@ -1,0 +1,69 @@
+name: Contributor Readiness
+
+on:
+  pull_request_target:
+    types: [opened, reopened, synchronize, ready_for_review]
+  issue_comment:
+    types: [created]
+  workflow_run:
+    workflows: ["Contributor Readiness - Review Event"]
+    types: [completed]
+
+permissions: {}
+
+jobs:
+  resolve:
+    if: >-
+      github.event_name != 'issue_comment' ||
+      (github.event.issue.pull_request &&
+       github.event.comment.body == '/azsdk check-access' &&
+       github.event.sender.type != 'Bot')
+    runs-on: ubuntu-slim
+    permissions:
+      contents: read
+      actions: read
+      pull-requests: read
+    outputs:
+      pr: ${{ steps.resolve.outputs.result }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          sparse-checkout: .github
+          persist-credentials: false
+      - uses: actions/github-script@v8
+        id: resolve
+        with:
+          script: |
+            const { resolveReadinessPullRequest } =
+              await import('${{ github.workspace }}/.github/workflows/src/contributor-readiness.ts');
+            return await resolveReadinessPullRequest({ github, context, core });
+
+  report:
+    needs: resolve
+    if: needs.resolve.outputs.pr != 'null'
+    runs-on: ubuntu-slim
+    timeout-minutes: 10
+    concurrency:
+      group: contributor-readiness-${{ needs.resolve.outputs.pr }}
+      cancel-in-progress: false
+    permissions:
+      contents: read
+      pull-requests: read
+      issues: write
+      checks: write
+    steps:
+      # Never check out or execute PR code, including when refreshing a fork review.
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          sparse-checkout: .github
+          persist-credentials: false
+      - uses: actions/github-script@v8
+        env:
+          PR_NUMBER: ${{ needs.resolve.outputs.pr }}
+        with:
+          script: |
+            const { checkContributorReadiness } =
+              await import('${{ github.workspace }}/.github/workflows/src/contributor-readiness.ts');
+            await checkContributorReadiness({ github, context, core }, Number(process.env.PR_NUMBER));
