@@ -785,6 +785,12 @@ and DELETE returns 200/204 without a body. No settings-specific operation status
 result polling endpoints are exposed. The provider-wide polling APIs used by other
 resource types and the shared Operations discovery API remain unchanged.
 
+GET for an individual setting and PATCH return HTTP 404 with the standard ARM error
+response when the setting does not exist. PATCH does not create a missing setting.
+These errors are represented by the OpenAPI `default` response, which references
+the shared ARM `ErrorResponse` schema. DELETE of an already-missing setting returns
+HTTP 204 without a body.
+
 ``` yaml $(tag) == 'package-composite-v3'
 input-file:
 - preview/2015-06-01-preview/locations.json
