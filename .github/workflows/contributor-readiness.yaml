@@ -31,7 +31,7 @@ jobs:
           ref: ${{ github.event.repository.default_branch }}
           sparse-checkout: .github
           persist-credentials: false
-      - uses: actions/github-script@v8
+      - uses: actions/github-script@v9.0.0
         id: resolve
         with:
           script: |
@@ -59,7 +59,7 @@ jobs:
           ref: ${{ github.event.repository.default_branch }}
           sparse-checkout: .github
           persist-credentials: false
-      - uses: actions/github-script@v8
+      - uses: actions/github-script@v9.0.0
         env:
           PR_NUMBER: ${{ needs.resolve.outputs.pr }}
         with:
