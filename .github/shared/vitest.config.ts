@@ -1,32 +1,18 @@
-import { configDefaults, defineConfig } from "vitest/config";
+import { defineConfig, mergeConfig } from "vitest/config";
+import { baseConfig } from "../../eng/tools/vitest.base.config.ts";
 
-export default defineConfig({
-  esbuild: {
-    // Ignore tsconfig.json, since it's only used for type checking, and causes
-    // a warning if vitest tries to load it
-    // @ts-expect-error: 'tsConfig' does not exist in type 'ESBuildOptions'
-    tsConfig: false,
-  },
-
-  test: {
-    coverage: {
-      exclude: [
-        ...(configDefaults.coverage.exclude ?? []),
-
-        // Config files (not in defaults)
-        "eslint*.config.js",
-
-        // Not worth testing CLI code
-        "cmd/**/*.ts",
-      ],
-
-      // Enforce 100% coverage for all metrics
-      thresholds: {
-        branches: 100,
-        functions: 100,
-        lines: 100,
-        statements: 100,
+export default mergeConfig(
+  baseConfig,
+  defineConfig({
+    test: {
+      coverage: {
+        thresholds: {
+          branches: 100,
+          functions: 100,
+          lines: 100,
+          statements: 100,
+        },
       },
     },
-  },
-});
+  }),
+);

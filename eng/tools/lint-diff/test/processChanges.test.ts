@@ -16,6 +16,8 @@ import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { isWindows } from "./test-util.ts";
 
+const fixturesRoot = join(import.meta.dirname, "fixtures");
+
 declare module "vitest" {
   interface Assertion {
     // Asserts readmes for testing reconcileChangedFilesAndTags
@@ -400,8 +402,8 @@ describe("getChangedSwaggers", () => {
   test("returns an empty set if no swaggers are changed", async () => {
     await expect(
       getChangedSwaggers(
-        "test/fixtures/getChangedSwaggers/before",
-        "test/fixtures/getChangedSwaggers/after",
+        join(fixturesRoot, "getChangedSwaggers", "before"),
+        join(fixturesRoot, "getChangedSwaggers", "after"),
         new Set<string>(),
       ),
     ).resolves.toEqual(new Set<string>());
@@ -409,8 +411,8 @@ describe("getChangedSwaggers", () => {
 
   test("excludes swaggers that are not changed", async () => {
     const swaggers = await getChangedSwaggers(
-      "test/fixtures/getChangedSwaggers/before/",
-      "test/fixtures/getChangedSwaggers/after/",
+      join(fixturesRoot, "getChangedSwaggers", "before"),
+      join(fixturesRoot, "getChangedSwaggers", "after"),
       new Set<string>(["specification/service1/file1.json"]),
     );
     expect(swaggers).toEqual(new Set<string>());
@@ -418,8 +420,8 @@ describe("getChangedSwaggers", () => {
 
   test("includes swaggers that don't exist in before", async () => {
     const swaggers = await getChangedSwaggers(
-      "test/fixtures/getChangedSwaggers/before/",
-      "test/fixtures/getChangedSwaggers/after/",
+      join(fixturesRoot, "getChangedSwaggers", "before"),
+      join(fixturesRoot, "getChangedSwaggers", "after"),
       new Set<string>(["specification/service1/new-file.json"]),
     );
     expect(swaggers).toEqual(new Set<string>(["specification/service1/new-file.json"]));
@@ -427,8 +429,8 @@ describe("getChangedSwaggers", () => {
 
   test("includes swagger that has been changed", async () => {
     const swaggers = await getChangedSwaggers(
-      "test/fixtures/getChangedSwaggers/before/",
-      "test/fixtures/getChangedSwaggers/after/",
+      join(fixturesRoot, "getChangedSwaggers", "before"),
+      join(fixturesRoot, "getChangedSwaggers", "after"),
       new Set<string>(["specification/service1/different.json"]),
     );
     expect(swaggers).toEqual(new Set<string>(["specification/service1/different.json"]));
@@ -436,8 +438,8 @@ describe("getChangedSwaggers", () => {
 
   test("includes swaggers that have a relevant changed dependency", async () => {
     const swaggers = await getChangedSwaggers(
-      "test/fixtures/getChangedSwaggers/before/",
-      "test/fixtures/getChangedSwaggers/after/",
+      join(fixturesRoot, "getChangedSwaggers", "before"),
+      join(fixturesRoot, "getChangedSwaggers", "after"),
       new Set<string>([
         "specification/service1/with-dependency.json",
         "specification/service1/changed-dependency.json",
@@ -456,7 +458,7 @@ describe("buildState", () => {
   test.skipIf(isWindows())("returns output for a swagger edited in place", async () => {
     const actual = await buildState(
       ["specification/edit-in-place/data-plane/swagger.json"],
-      "test/fixtures/buildState/",
+      join(fixturesRoot, "buildState"),
     );
 
     expect(actual).toMatchInlineSnapshot(`
@@ -479,7 +481,7 @@ describe("buildState", () => {
   test.skipIf(isWindows())("returns output for an edited readme", async () => {
     const actual = await buildState(
       ["specification/edit-in-place/readme.md"],
-      "test/fixtures/buildState/",
+      join(fixturesRoot, "buildState"),
     );
 
     expect(actual).toMatchObject([
@@ -496,7 +498,7 @@ describe("buildState", () => {
     ]);
 
     expect(actual[0].get("specification/edit-in-place/readme.md")!.readme.path).toEqual(
-      resolve("test/fixtures/buildState/", "specification/edit-in-place/readme.md"),
+      resolve(fixturesRoot, "buildState", "specification/edit-in-place/readme.md"),
     );
   });
 
@@ -504,7 +506,7 @@ describe("buildState", () => {
     await expect(
       buildState(
         ["specification/edit-in-place/data-plane/does-not-exist.json"],
-        "test/fixtures/buildState/",
+        join(fixturesRoot, "buildState"),
       ),
     ).resolves.not.toThrow();
   });
@@ -512,7 +514,7 @@ describe("buildState", () => {
   test.skipIf(isWindows())("does not include readme files that has no input-file:", async () => {
     const actual = await buildState(
       ["specification/no-input-file/readme.md"],
-      "test/fixtures/buildState/",
+      join(fixturesRoot, "buildState"),
     );
 
     expect(actual).toEqual([new Map<string, ReadmeAffectedTags>(), []]);
@@ -521,7 +523,7 @@ describe("buildState", () => {
   test("handles deleted (i.e. nonexistant) readme.md file", async () => {
     const actual = await buildState(
       ["specification/deleted-readme/readme.md"],
-      "test/fixtures/buildState/",
+      join(fixturesRoot, "buildState"),
     );
 
     expect(actual).toEqual([new Map<string, ReadmeAffectedTags>(), []]);
@@ -533,7 +535,7 @@ describe("buildState", () => {
         "specification/deleted-readme/readme.md",
         "specification/deleted-readme/data-plane/swagger.json",
       ],
-      "test/fixtures/buildState/",
+      join(fixturesRoot, "buildState"),
     );
 
     expect(actual).toEqual([new Map<string, ReadmeAffectedTags>(), []]);
