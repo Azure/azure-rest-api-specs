@@ -389,6 +389,7 @@ model IotDpsPropertiesDescription {
   @added(Versions.v2026_06_01_preview)
   @removed(Versions.v2026_08_31)
   @added(Versions.v2026_11_01)
+  @maxItems(1)
   @identifiers(#["namespaceUuid"])
   deviceRegistryNamespaces?: DeviceRegistryNamespaceDescription[];
 
