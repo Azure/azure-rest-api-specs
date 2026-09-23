@@ -89,7 +89,7 @@ union SyncStatus {
   @doc("Synchronization failed on all destinations.")
   Failed: "Failed",
 
-  @doc("Synchronization succeeded on some destinations but failed on others.")
+  @doc("Synchronization succeeded on some destinations but failed on others. Check syncDestinationStatuses for per-destination details.")
   PartiallySucceeded: "PartiallySucceeded",
 }
 
@@ -149,7 +149,7 @@ model CommunityEndpointDestinationRule {
   transitHubResourceId?: TransitHubResourceId;
 
   @added(Microsoft.Mission.Versions.v2026_05_01_preview)
-  @doc("The direction of traffic for this rule.")
+  @doc("The direction of traffic for this rule. Defaults to Outbound if not specified.")
   direction?: RuleDirection = RuleDirection.Outbound;
 
   ...EndpointRuleBase;

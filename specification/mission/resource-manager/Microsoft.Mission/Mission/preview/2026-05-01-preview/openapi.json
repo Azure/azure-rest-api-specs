@@ -1669,7 +1669,7 @@
         "tags": [
           "CommunityEndpoints"
         ],
-        "description": "Triggers a manual re-sync of community endpoint connections to all configured sync destinations.",
+        "description": "Triggers a manual synchronization of endpoint connections to all configured destinations.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -4499,8 +4499,9 @@
         },
         "minimumApproversRequired": {
           "type": "integer",
-          "format": "int64",
-          "description": "Minimum number of approvers required for this approval setting."
+          "format": "int32",
+          "description": "Minimum number of approvers required for this approval setting.",
+          "minimum": 0
         },
         "mandatoryApprovers": {
           "type": "array",
@@ -4738,7 +4739,7 @@
               {
                 "name": "Outbound",
                 "value": "Outbound",
-                "description": "Outbound traffic from the client enclave to the server destination (default)."
+                "description": "Outbound traffic from the client enclave to the server destination."
               },
               {
                 "name": "Inbound",
@@ -4797,7 +4798,7 @@
         },
         "syncTo": {
           "type": "array",
-          "description": "Array of ARM resource IDs of destination communities to synchronize this endpoint's rules to. The RP creates and manages the destination CEPs automatically within each community. Maximum 100 destinations per source endpoint.",
+          "description": "Destination communities to synchronize this endpoint's rules to.",
           "maxItems": 100,
           "items": {
             "$ref": "#/definitions/CommunityResourceId"
@@ -4838,7 +4839,7 @@
         },
         "syncTo": {
           "type": "array",
-          "description": "Array of ARM resource IDs of destination communities to synchronize this endpoint's rules to. The RP creates and manages the destination CEPs automatically within each community. Maximum 100 destinations per source endpoint.",
+          "description": "Destination communities to synchronize this endpoint's rules to.",
           "maxItems": 100,
           "items": {
             "$ref": "#/definitions/CommunityResourceId"
@@ -4846,17 +4847,17 @@
         },
         "syncFrom": {
           "$ref": "#/definitions/CommunityEndpointResourceId",
-          "description": "ARM resource ID of the source Community Endpoint that manages this endpoint's rules via synchronization. This property is read-only and set by the RP on destination CEPs created by the sync process.",
+          "description": "The source Community Endpoint that manages this endpoint through synchronization.",
           "readOnly": true
         },
         "syncStatus": {
           "$ref": "#/definitions/SyncStatus",
-          "description": "The synchronization status of this Community Endpoint. Tracks sync state independently of provisioningState.",
+          "description": "The synchronization status of this Community Endpoint.",
           "readOnly": true
         },
         "syncDestinationStatuses": {
           "type": "array",
-          "description": "Per-destination synchronization status. Only populated on source CEPs that have syncTo configured.",
+          "description": "The synchronization status for each destination Community Endpoint.",
           "items": {
             "$ref": "#/definitions/SyncDestinationStatus"
           },
@@ -4867,7 +4868,7 @@
         },
         "syncPerformedBy": {
           "$ref": "#/definitions/SyncPerformedBy",
-          "description": "Information about the principal who last configured or modified syncTo. Set by the RP and surfaced for audit transparency.",
+          "description": "The principal who last configured or modified synchronization.",
           "readOnly": true
         }
       },
@@ -7112,7 +7113,7 @@
       "properties": {
         "destinationId": {
           "$ref": "#/definitions/CommunityEndpointResourceId",
-          "description": "ARM resource ID of the destination Community Endpoint.",
+          "description": "The ARM resource ID of the destination Community Endpoint.",
           "readOnly": true
         },
         "status": {
@@ -7122,13 +7123,13 @@
         },
         "errorMessage": {
           "type": "string",
-          "description": "Error message if the sync to this destination failed.",
+          "description": "The error message when synchronization to this destination fails.",
           "readOnly": true
         },
         "lastSyncTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp of the last successful sync to this destination.",
+          "description": "The timestamp of the last successful synchronization to this destination.",
           "readOnly": true
         }
       },
@@ -7139,32 +7140,32 @@
     },
     "SyncPerformedBy": {
       "type": "object",
-      "description": "Information about the principal who performed the sync operation.",
+      "description": "Information about the principal who performed the synchronization operation.",
       "properties": {
         "principalId": {
           "type": "string",
-          "description": "Object ID of the user principal who configured syncTo.",
+          "description": "The object ID of the principal who configured synchronization.",
           "readOnly": true
         },
         "principalType": {
           "type": "string",
-          "description": "The type of principal (e.g., User, ServicePrincipal).",
+          "description": "The type of principal that configured synchronization.",
           "readOnly": true
         },
         "tenantId": {
           "type": "string",
-          "description": "Tenant ID of the principal.",
+          "description": "The tenant ID of the principal.",
           "readOnly": true
         },
         "performedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the syncTo was configured or last modified.",
+          "description": "The timestamp when synchronization was configured or last modified.",
           "readOnly": true
         },
         "correlationId": {
           "type": "string",
-          "description": "ARM correlation ID from the source PUT that set up syncTo.",
+          "description": "The Azure Resource Manager correlation ID from the source update.",
           "readOnly": true
         }
       },

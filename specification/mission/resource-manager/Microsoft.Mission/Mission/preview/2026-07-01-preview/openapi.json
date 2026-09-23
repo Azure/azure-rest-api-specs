@@ -1711,7 +1711,7 @@
         "tags": [
           "CommunityEndpoints"
         ],
-        "description": "Triggers a manual re-sync of community endpoint connections to all configured sync destinations.",
+        "description": "Triggers a manual synchronization of endpoint connections to all configured destinations.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -2956,7 +2956,7 @@
           {
             "name": "serviceCatalogName",
             "in": "path",
-            "description": "The name of the ServiceCatalog Resource",
+            "description": "The name of the Service Catalog resource.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
@@ -3001,7 +3001,7 @@
           {
             "name": "serviceCatalogName",
             "in": "path",
-            "description": "The name of the ServiceCatalog Resource",
+            "description": "The name of the Service Catalog resource.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
@@ -3076,7 +3076,7 @@
           {
             "name": "serviceCatalogName",
             "in": "path",
-            "description": "The name of the ServiceCatalog Resource",
+            "description": "The name of the Service Catalog resource.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
@@ -3148,7 +3148,7 @@
           {
             "name": "serviceCatalogName",
             "in": "path",
-            "description": "The name of the ServiceCatalog Resource",
+            "description": "The name of the Service Catalog resource.",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$"
@@ -4498,22 +4498,22 @@
     },
     "AddressSpaceEntry": {
       "type": "object",
-      "description": "An address space entry for the enclave. Customer entries have ownership 'CustomerManaged'; the RP-injected managed address space has ownership 'ProductManaged' and is always the last element.",
+      "description": "An address space entry for the enclave.",
       "properties": {
         "prefixLength": {
           "type": "integer",
           "format": "int32",
-          "description": "CIDR prefix length (e.g., 22, 23, 24). Determines the size of the address space.",
+          "description": "The CIDR prefix length that determines the address space size.",
           "minimum": 8,
           "maximum": 26
         },
         "addressSpace": {
           "type": "string",
-          "description": "CIDR notation address space (e.g., '10.0.0.0/23'). Optional — if omitted, RP allocates based on prefixLength. If provided, used as-is (custom address space)."
+          "description": "The CIDR notation address space."
         },
         "ownership": {
           "$ref": "#/definitions/AddressSpaceOwnership",
-          "description": "Indicates whether this address space is customer-managed or product-managed. Product-managed entries are RP-injected and always the last element(s) in the array.",
+          "description": "The address space lifecycle owner.",
           "readOnly": true
         }
       }
@@ -4883,8 +4883,9 @@
         },
         "minimumApproversRequired": {
           "type": "integer",
-          "format": "int64",
-          "description": "Minimum number of approvers required for this approval setting."
+          "format": "int32",
+          "description": "Minimum number of approvers required for this approval setting.",
+          "minimum": 0
         },
         "mandatoryApprovers": {
           "type": "array",
@@ -5068,13 +5069,13 @@
         "prefixLength": {
           "type": "integer",
           "format": "int32",
-          "description": "CIDR prefix length (e.g., 22, 23, 24). Determines the size of the address space to check.",
+          "description": "The CIDR prefix length for the address space to check.",
           "minimum": 8,
           "maximum": 26
         },
         "addressSpace": {
           "type": "string",
-          "description": "Specific CIDR address space to check availability for. If omitted, RP checks for any available space of the given prefixLength."
+          "description": "The specific CIDR address space to check for availability."
         }
       },
       "required": [
@@ -5128,7 +5129,7 @@
               {
                 "name": "Outbound",
                 "value": "Outbound",
-                "description": "Outbound traffic from the client enclave to the server destination (default)."
+                "description": "Outbound traffic from the client enclave to the server destination."
               },
               {
                 "name": "Inbound",
@@ -5187,7 +5188,7 @@
         },
         "syncTo": {
           "type": "array",
-          "description": "Array of ARM resource IDs of destination communities to synchronize this endpoint's rules to. The RP creates and manages the destination CEPs automatically within each community. Maximum 100 destinations per source endpoint.",
+          "description": "Destination communities to synchronize this endpoint's rules to.",
           "maxItems": 100,
           "items": {
             "$ref": "#/definitions/CommunityResourceId"
@@ -5228,7 +5229,7 @@
         },
         "syncTo": {
           "type": "array",
-          "description": "Array of ARM resource IDs of destination communities to synchronize this endpoint's rules to. The RP creates and manages the destination CEPs automatically within each community. Maximum 100 destinations per source endpoint.",
+          "description": "Destination communities to synchronize this endpoint's rules to.",
           "maxItems": 100,
           "items": {
             "$ref": "#/definitions/CommunityResourceId"
@@ -5236,17 +5237,17 @@
         },
         "syncFrom": {
           "$ref": "#/definitions/CommunityEndpointResourceId",
-          "description": "ARM resource ID of the source Community Endpoint that manages this endpoint's rules via synchronization. This property is read-only and set by the RP on destination CEPs created by the sync process.",
+          "description": "The source Community Endpoint that manages this endpoint through synchronization.",
           "readOnly": true
         },
         "syncStatus": {
           "$ref": "#/definitions/SyncStatus",
-          "description": "The synchronization status of this Community Endpoint. Tracks sync state independently of provisioningState.",
+          "description": "The synchronization status of this Community Endpoint.",
           "readOnly": true
         },
         "syncDestinationStatuses": {
           "type": "array",
-          "description": "Per-destination synchronization status. Only populated on source CEPs that have syncTo configured.",
+          "description": "The synchronization status for each destination Community Endpoint.",
           "items": {
             "$ref": "#/definitions/SyncDestinationStatus"
           },
@@ -5257,7 +5258,7 @@
         },
         "syncPerformedBy": {
           "$ref": "#/definitions/SyncPerformedBy",
-          "description": "Information about the principal who last configured or modified syncTo. Set by the RP and surfaced for audit transparency.",
+          "description": "The principal who last configured or modified synchronization.",
           "readOnly": true
         }
       },
@@ -5854,6 +5855,20 @@
         ]
       }
     },
+    "EnclaveAddressSpacesModel": {
+      "type": "object",
+      "description": "Enclave Address Spaces",
+      "properties": {
+        "enclaveAddressSpace": {
+          "type": "string",
+          "description": "Enclave Address Space"
+        },
+        "managedAddressSpace": {
+          "type": "string",
+          "description": "Managed Address Space"
+        }
+      }
+    },
     "EnclaveConnectionPatchModel": {
       "type": "object",
       "description": "Enclave Connection Patch Resource",
@@ -6355,6 +6370,49 @@
       "required": [
         "value"
       ]
+    },
+    "EnclaveVirtualNetworkModel": {
+      "type": "object",
+      "description": "Enclave Virtual Network Properties",
+      "properties": {
+        "networkName": {
+          "type": "string",
+          "description": "Network Name."
+        },
+        "networkSize": {
+          "type": "string",
+          "description": "Network Size.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "customCidrRange": {
+          "type": "string",
+          "description": "Custom CIDR Range.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "subnetConfigurations": {
+          "type": "array",
+          "description": "Subnet Configurations.",
+          "items": {
+            "$ref": "#/definitions/SubnetConfiguration"
+          },
+          "x-ms-identifiers": []
+        },
+        "allowSubnetCommunication": {
+          "type": "boolean",
+          "description": "Allow Subnet Communication.",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
     },
     "FirewallPolicyResourceId": {
       "type": "string",
@@ -7271,35 +7329,35 @@
     },
     "ServiceCatalogItem": {
       "type": "object",
-      "description": "Service Catalog Item",
+      "description": "A service in the service catalog.",
       "properties": {
         "serviceName": {
           "type": "string",
-          "description": "Service name."
+          "description": "The service name."
         },
         "serviceUri": {
           "type": "string",
-          "description": "Service URI.",
+          "description": "The service URI.",
           "readOnly": true
         },
         "version": {
           "type": "string",
-          "description": "Version of the service.",
+          "description": "The service version.",
           "readOnly": true
         },
         "templateSpecId": {
           "type": "string",
-          "description": "Template spec resource ID.",
+          "description": "The template specification resource ID.",
           "readOnly": true
         },
         "templateSpecVersion": {
           "type": "string",
-          "description": "Template spec version.",
+          "description": "The template specification version.",
           "readOnly": true
         },
         "templateScope": {
           "$ref": "#/definitions/TemplateScope",
-          "description": "Scope of the template."
+          "description": "The template scope."
         }
       },
       "required": [
@@ -7308,11 +7366,11 @@
     },
     "ServiceCatalogPatchModel": {
       "type": "object",
-      "description": "Service Catalog Patch Resource",
+      "description": "The Service Catalog patch resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ServiceCatalogPatchProperties",
-          "description": "The ServiceCatalog resource properties."
+          "description": "The Service Catalog resource properties."
         },
         "tags": {
           "type": "object",
@@ -7325,11 +7383,11 @@
     },
     "ServiceCatalogPatchProperties": {
       "type": "object",
-      "description": "Service Catalog patchable Properties",
+      "description": "The patchable properties of a Service Catalog.",
       "properties": {
         "services": {
           "type": "array",
-          "description": "List of services in the service catalog.",
+          "description": "The services in the service catalog.",
           "items": {
             "$ref": "#/definitions/ServiceCatalogItem"
           },
@@ -7339,7 +7397,7 @@
     },
     "ServiceCatalogProperties": {
       "type": "object",
-      "description": "Describes the properties of a Service Catalog.",
+      "description": "The properties of a Service Catalog.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -7348,17 +7406,17 @@
         },
         "managedResourceGroupName": {
           "type": "string",
-          "description": "Managed resource group name.",
+          "description": "The managed resource group name.",
           "readOnly": true
         },
         "managedOnBehalfOfConfiguration": {
           "$ref": "../../../../../../common-types/resource-management/v5/mobo.json#/definitions/ManagedOnBehalfOfConfiguration",
-          "description": "Managed On Behalf Of Configuration.",
+          "description": "The Managed On Behalf Of configuration.",
           "readOnly": true
         },
         "services": {
           "type": "array",
-          "description": "List of services in the service catalog.",
+          "description": "The services in the service catalog.",
           "items": {
             "$ref": "#/definitions/ServiceCatalogItem"
           },
@@ -7368,7 +7426,7 @@
     },
     "ServiceCatalogResource": {
       "type": "object",
-      "description": "ServiceCatalog Model Resource",
+      "description": "The Service Catalog resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ServiceCatalogProperties",
@@ -7578,7 +7636,7 @@
       "properties": {
         "destinationId": {
           "$ref": "#/definitions/CommunityEndpointResourceId",
-          "description": "ARM resource ID of the destination Community Endpoint.",
+          "description": "The ARM resource ID of the destination Community Endpoint.",
           "readOnly": true
         },
         "status": {
@@ -7588,13 +7646,13 @@
         },
         "errorMessage": {
           "type": "string",
-          "description": "Error message if the sync to this destination failed.",
+          "description": "The error message when synchronization to this destination fails.",
           "readOnly": true
         },
         "lastSyncTime": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp of the last successful sync to this destination.",
+          "description": "The timestamp of the last successful synchronization to this destination.",
           "readOnly": true
         }
       },
@@ -7605,32 +7663,32 @@
     },
     "SyncPerformedBy": {
       "type": "object",
-      "description": "Information about the principal who performed the sync operation.",
+      "description": "Information about the principal who performed the synchronization operation.",
       "properties": {
         "principalId": {
           "type": "string",
-          "description": "Object ID of the user principal who configured syncTo.",
+          "description": "The object ID of the principal who configured synchronization.",
           "readOnly": true
         },
         "principalType": {
           "type": "string",
-          "description": "The type of principal (e.g., User, ServicePrincipal).",
+          "description": "The type of principal that configured synchronization.",
           "readOnly": true
         },
         "tenantId": {
           "type": "string",
-          "description": "Tenant ID of the principal.",
+          "description": "The tenant ID of the principal.",
           "readOnly": true
         },
         "performedAt": {
           "type": "string",
           "format": "date-time",
-          "description": "Timestamp when the syncTo was configured or last modified.",
+          "description": "The timestamp when synchronization was configured or last modified.",
           "readOnly": true
         },
         "correlationId": {
           "type": "string",
-          "description": "ARM correlation ID from the source PUT that set up syncTo.",
+          "description": "The Azure Resource Manager correlation ID from the source update.",
           "readOnly": true
         }
       },
@@ -7700,17 +7758,17 @@
           {
             "name": "Subscription",
             "value": "Subscription",
-            "description": "Template scope is Subscription"
+            "description": "The template scope is subscription."
           },
           {
             "name": "Tenant",
             "value": "Tenant",
-            "description": "Template scope is Tenant"
+            "description": "The template scope is tenant."
           },
           {
             "name": "NotApplicable",
             "value": "NotApplicable",
-            "description": "Template scope is NotApplicable"
+            "description": "The template scope is not applicable."
           }
         ]
       }
@@ -8026,6 +8084,10 @@
       "type": "object",
       "description": "Virtual Enclave Patchable Properties",
       "properties": {
+        "enclaveVirtualNetwork": {
+          "$ref": "#/definitions/EnclaveVirtualNetworkModel",
+          "description": "Virtual Network."
+        },
         "bastionEnabled": {
           "type": "boolean",
           "description": "Deploy Bastion service (True or False)."
@@ -8064,7 +8126,7 @@
         },
         "addressSpaces": {
           "type": "array",
-          "description": "Address spaces for the enclave. Supports multiple entries. Customer specifies prefixLength, RP allocates and injects the addressSpace CIDR. Product-managed address spaces (ownership=productManaged) are RP-injected and always appear at the end of the array.",
+          "description": "The address spaces for the enclave.",
           "items": {
             "$ref": "#/definitions/AddressSpaceEntry"
           },
@@ -8072,13 +8134,17 @@
         },
         "subnetConfigurations": {
           "type": "array",
-          "description": "Subnet configurations for the enclave network.",
+          "description": "The subnet configurations for the enclave network.",
           "items": {
             "$ref": "#/definitions/SubnetConfiguration"
           },
           "x-ms-identifiers": [
             "subnetName"
           ]
+        },
+        "allowSubnetCommunication": {
+          "type": "boolean",
+          "description": "Whether subnets within the enclave can communicate with each other."
         },
         "enclaveDefaultSettings": {
           "$ref": "#/definitions/EnclaveDefaultSettingsPatchModel",
@@ -8099,10 +8165,6 @@
         "monitoringSettings": {
           "$ref": "#/definitions/MonitoringSettingsPatchModel",
           "description": "Virtual Enclave Monitoring Settings for diagnostic and virtual network flow logs"
-        },
-        "allowSubnetCommunication": {
-          "type": "boolean",
-          "description": "Whether subnets within the enclave can communicate with each other."
         }
       }
     },
@@ -8113,6 +8175,15 @@
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning State.",
+          "readOnly": true
+        },
+        "enclaveVirtualNetwork": {
+          "$ref": "#/definitions/EnclaveVirtualNetworkModel",
+          "description": "Virtual Network."
+        },
+        "enclaveAddressSpaces": {
+          "$ref": "#/definitions/EnclaveAddressSpacesModel",
+          "description": "Enclave Address Spaces",
           "readOnly": true
         },
         "communityResourceId": {
@@ -8224,7 +8295,7 @@
         },
         "addressSpaces": {
           "type": "array",
-          "description": "Address spaces for the enclave. Supports multiple entries. Customer specifies prefixLength, RP allocates and injects the addressSpace CIDR. Product-managed address spaces (ownership=productManaged) are RP-injected and always appear at the end of the array.",
+          "description": "The address spaces for the enclave.",
           "items": {
             "$ref": "#/definitions/AddressSpaceEntry"
           },
@@ -8232,12 +8303,12 @@
         },
         "networkName": {
           "type": "string",
-          "description": "The name of the enclave's virtual network.",
+          "description": "The name of the enclave virtual network.",
           "readOnly": true
         },
         "subnetConfigurations": {
           "type": "array",
-          "description": "Subnet configurations for the enclave network.",
+          "description": "The subnet configurations for the enclave network.",
           "items": {
             "$ref": "#/definitions/SubnetConfiguration"
           },
@@ -8276,6 +8347,7 @@
         }
       },
       "required": [
+        "enclaveVirtualNetwork",
         "communityResourceId"
       ]
     },

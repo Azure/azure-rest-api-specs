@@ -39,6 +39,18 @@ union ApprovalPolicy {
   NotRequired: "NotRequired",
 }
 
+@added(Microsoft.Mission.Versions.v2026_05_01_preview)
+@doc("Policy Override")
+union PolicyOverride {
+  string,
+
+  @doc("PolicyOverride Enclave.")
+  Enclave: "Enclave",
+
+  @doc("PolicyOverride None.")
+  None: "None",
+}
+
 @added(Microsoft.Mission.Versions.v2024_12_01_preview)
 @doc("Approver Metadata for approvals request.")
 model MandatoryApprover {
@@ -212,8 +224,12 @@ model CommunityBaseModel {
 
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Backwards compatibility - Existing union"
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)
+  @typeChangedFrom(
+    Microsoft.Mission.Versions.v2026_05_01_preview,
+    "Enclave" | "None" | string
+  )
   @doc("Policy override setting for the community. Specifies whether to apply enclave-specific policies or disable policy enforcement.")
-  policyOverride?: "Enclave" | "None" | string;
+  policyOverride?: PolicyOverride;
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Community role assignments")

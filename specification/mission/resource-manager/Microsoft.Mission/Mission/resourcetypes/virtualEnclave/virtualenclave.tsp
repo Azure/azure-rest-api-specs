@@ -26,6 +26,10 @@ union DiagnosticDestination {
 
   @doc("DiagnosticDestination Type Both")
   Both: "Both",
+
+  @added(Microsoft.Mission.Versions.v2026_05_01_preview)
+  @doc("DiagnosticDestination Type Unspecified")
+  Unspecified: "Unspecified",
 }
 
 @doc("Rbac Inheritance Mode")
@@ -144,10 +148,10 @@ model EnclaveAddressSpacesModel {
 union AddressSpaceOwnership {
   string,
 
-  @doc("A customer-provided address space.")
+  @doc("Customer-provided address space. Customer specifies prefixLength, RP allocates CIDR.")
   CustomerManaged: "CustomerManaged",
 
-  @doc("A product-managed address space.")
+  @doc("Product-managed address space. RP-injected for internal platform use (e.g., hub connectivity).")
   ProductManaged: "ProductManaged",
 }
 
@@ -272,6 +276,7 @@ model VirtualEnclaveProperties is VirtualEnclaveBaseModel {
 
   @added(Microsoft.Mission.Versions.v2026_07_01_preview)
   @doc("Whether subnets within the enclave can communicate with each other.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   allowSubnetCommunication?: boolean = false;
 
   @doc("Enclave default settings.")

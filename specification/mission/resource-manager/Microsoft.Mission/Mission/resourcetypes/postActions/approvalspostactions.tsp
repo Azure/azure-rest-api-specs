@@ -9,6 +9,51 @@ using TypeSpec.Versioning;
 @doc("Microsoft Mission Resource Provider management API.")
 namespace Microsoft.Mission;
 
+@added(Microsoft.Mission.Versions.v2026_05_01_preview)
+@doc("Approval Status")
+union PostActionApprovalStatus {
+  string,
+
+  @doc("PostActionApprovalStatus Approved")
+  Approved: "Approved",
+
+  @doc("PostActionApprovalStatus Rejected")
+  Rejected: "Rejected",
+}
+
+@added(Microsoft.Mission.Versions.v2026_05_01_preview)
+@doc("Resource Request Action")
+union ApprovalCallbackResourceRequestAction {
+  string,
+
+  @doc("ApprovalCallbackResourceRequestAction Create")
+  Create: "Create",
+
+  @doc("ApprovalCallbackResourceRequestAction Delete")
+  Delete: "Delete",
+
+  @doc("ApprovalCallbackResourceRequestAction Update")
+  Update: "Update",
+
+  @doc("ApprovalCallbackResourceRequestAction Reset")
+  Reset: "Reset",
+}
+
+@added(Microsoft.Mission.Versions.v2026_05_01_preview)
+@doc("Resource Request Action")
+union ApprovalDeletionCallbackResourceRequestAction {
+  string,
+
+  @doc("ApprovalDeletionCallbackResourceRequestAction Create")
+  Create: "Create",
+
+  @doc("ApprovalDeletionCallbackResourceRequestAction Delete")
+  Delete: "Delete",
+
+  @doc("ApprovalDeletionCallbackResourceRequestAction Update")
+  Update: "Update",
+}
+
 @doc("Request body for calling post-action")
 model ApprovalCallbackRequest {
   @removed(Microsoft.Mission.Versions.v2024_12_01_preview)
@@ -16,12 +61,20 @@ model ApprovalCallbackRequest {
   resourceId: armResourceIdentifier;
 
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Backwards compatibility - Existing union"
+  @typeChangedFrom(
+    Microsoft.Mission.Versions.v2026_05_01_preview,
+    "Create" | "Delete" | "Update" | "Reset" | string
+  )
   @doc("Resource request action indicating action which needed to be performed upon calling approval-callback post action")
-  resourceRequestAction: "Create" | "Delete" | "Update" | "Reset" | string;
+  resourceRequestAction: ApprovalCallbackResourceRequestAction;
 
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Backwards compatibility - Existing union"
+  @typeChangedFrom(
+    Microsoft.Mission.Versions.v2026_05_01_preview,
+    "Approved" | "Rejected" | string
+  )
   @doc("Approval status indicating 'Approved' or 'Rejected'")
-  approvalStatus: "Approved" | "Rejected" | string;
+  approvalStatus: PostActionApprovalStatus;
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Payload requested by client upon approval action")
@@ -32,8 +85,12 @@ model ApprovalCallbackRequest {
 @doc("Request body for calling post-action")
 model ApprovalActionRequest {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Backwards compatibility - Existing union"
+  @typeChangedFrom(
+    Microsoft.Mission.Versions.v2026_05_01_preview,
+    "Approved" | "Rejected" | string
+  )
   @doc("Approval status indicating 'Approved' or 'Rejected'")
-  approvalStatus: "Approved" | "Rejected" | string;
+  approvalStatus: PostActionApprovalStatus;
 }
 
 // Define a model for the approval initator callback response
@@ -46,6 +103,10 @@ model ApprovalActionResponse {
 @doc("Request body for calling post-action")
 model ApprovalDeletionCallbackRequest {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Backwards compatibility - Existing union"
+  @typeChangedFrom(
+    Microsoft.Mission.Versions.v2026_05_01_preview,
+    "Create" | "Delete" | "Update" | string
+  )
   @doc("Resource request action indicating action which needed to be performed upon calling approval-deletion-callback post action")
-  resourceRequestAction: "Create" | "Delete" | "Update" | string;
+  resourceRequestAction: ApprovalDeletionCallbackResourceRequestAction;
 }
