@@ -140,30 +140,24 @@ describe("generateTypeSpecMetadata", () => {
     },
   );
 
-  it.each([true, false])(
-    "handles successful stderr with logger enabled: %s",
-    async (withLogger) => {
-      const logger: ILogger = {
-        debug: vi.fn(),
-        info: vi.fn(),
-        error: vi.fn(),
-        warning: vi.fn(),
-        isDebug: () => false,
-      };
-      vi.mocked(execNodeBin).mockImplementation(async (_packageName, args) => {
-        metadataFile = getMetadataFile(args);
-        await writeFile(metadataFile, JSON.stringify(validMetadata));
-        return { stdout: "", stderr: "compiler warning" };
-      });
-      await generateTypeSpecMetadata("contoso", { logger: withLogger ? logger : undefined });
-      expect(logger.warning).toHaveBeenCalledTimes(withLogger ? 1 : 0);
-      if (withLogger) {
-        expect(logger.warning).toHaveBeenCalledWith(
-          "typespec-metadata emitter warnings: compiler warning",
-        );
-      }
-    },
-  );
+  it("does not infer warning or error severity from successful stderr", async () => {
+    const logger: ILogger = {
+      debug: vi.fn(),
+      info: vi.fn(),
+      error: vi.fn(),
+      warning: vi.fn(),
+      isDebug: () => false,
+    };
+    vi.mocked(execNodeBin).mockImplementation(async (_packageName, args) => {
+      metadataFile = getMetadataFile(args);
+      await writeFile(metadataFile, JSON.stringify(validMetadata));
+      return { stdout: "", stderr: "compiler progress" };
+    });
+    await expect(generateTypeSpecMetadata("contoso", { logger })).resolves.toEqual(validMetadata);
+    expect(logger.warning).not.toHaveBeenCalled();
+    expect(logger.error).not.toHaveBeenCalled();
+    await expectMetadataDirectoryRemoved(metadataFile);
+  });
 
   it.each(["missing", "malformed"])("rejects %s JSON output and cleans up", async (output) => {
     vi.mocked(execNodeBin).mockImplementation(async (_packageName, args) => {
@@ -223,13 +217,12 @@ describe("generateTypeSpecMetadata", () => {
     await expectMetadataDirectoryRemoved(metadataFile);
   });
 
-  it("includes compiler diagnostics written to stdout", async () => {
+  it.each(["stdout", "stderr"])("includes failed compiler output written to %s", async (stream) => {
     vi.mocked(execNodeBin).mockImplementation((_packageName, args) => {
       metadataFile = getMetadataFile(args);
 
       const error = Object.assign(new Error("Command failed: tsp compile"), {
-        stdout: "error file-not-found: File main.tsp not found.",
-        stderr: "",
+        [stream]: "error file-not-found: File main.tsp not found.",
       });
       return Promise.reject(error);
     });

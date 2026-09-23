@@ -62,7 +62,7 @@ export async function generateTypeSpecMetadata(
 
   try {
     try {
-      const { stderr } = await execNodeBin(
+      await execNodeBin(
         "@typespec/compiler",
         [
           "tsp",
@@ -82,9 +82,6 @@ export async function generateTypeSpecMetadata(
           maxBuffer: 64 * 1024 * 1024,
         },
       );
-      if (stderr) {
-        options.logger?.warning(`typespec-metadata emitter warnings: ${stderr}`);
-      }
     } catch (error) {
       // The TypeSpec compiler writes its diagnostics to stdout, not stderr.
       const details = isExecError(error) ? [error.stdout, error.stderr].join("").trim() : undefined;
