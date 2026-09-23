@@ -170,92 +170,31 @@ jobs:
 
       - name: Analyze SDK projects
         id: analyze-sdk-projects
-        shell: bash
+        uses: actions/github-script@v9
         env:
           AZSDK_COPILOT_CLI_PATH: ${{ steps.setup-copilot-cli.outputs.path }}
           AZSDK_COPILOT_GITHUB_TOKEN: ${{ github.token }}
           LOCAL_SDK_REPO_PATH: ${{ github.workspace }}/repositories/${{ needs.resolve.outputs.sdk-repository }}
           SPEC_REPOSITORY_PATH: ${{ github.workspace }}/repositories/azure-rest-api-specs
           TYPESPEC_CONFIG_PATHS: ${{ needs.resolve.outputs.tsp-config-paths }}
-        run: |
-          set -Eeuo pipefail
-          results_dir="$RUNNER_TEMP/sdk-breaking-change-results"
-          mkdir -p "$results_dir"
-          analysis_log="$results_dir/analysis.log"
-          exec > >(tee "$analysis_log") 2>&1
-          trap 'status=$?; printf "Analysis failed with exit code %s.\n" "$status" > "$results_dir/error.log"; exit "$status"' ERR
-          jq -cn \
-            --argjson pullNumber '${{ needs.resolve.outputs.pr-number }}' \
-            --arg sdkLanguage '${{ needs.resolve.outputs.sdk-language }}' \
-            --arg analyzedSha '${{ needs.resolve.outputs.head-sha }}' \
-            --arg workflowUrl '${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}' \
-            '{pullNumber: $pullNumber, sdkLanguage: $sdkLanguage, analyzedSha: $analyzedSha, workflowUrl: $workflowUrl}' \
-            > "$results_dir/trigger.json"
-          manifest_jsonl="$results_dir/projects.jsonl"
-          : > "$manifest_jsonl"
-          echo '[]' > "$results_dir/projects.json"
-          mapfile -t typespec_config_paths < <(jq -r '.[]' <<< "$TYPESPEC_CONFIG_PATHS")
-          declare -A package_names=()
-          project_number=0
-
-          for index in "${!typespec_config_paths[@]}"; do
-            relative_tsp_config_path="${typespec_config_paths[$index]}"
-            typespec_project_path="${relative_tsp_config_path%/tspconfig.yaml}"
-            tsp_config_path="$SPEC_REPOSITORY_PATH/$relative_tsp_config_path"
-            project_number="$((index + 1))"
-            marker="$RUNNER_TEMP/azsdk-generation-started"
-            generation_result="$RUNNER_TEMP/sdk-generation-result.json"
-            touch "$marker"
-
-            azsdk package generate \
-              --local-sdk-repo-path "$LOCAL_SDK_REPO_PATH" \
-              --tsp-config-path "$tsp_config_path" \
-              --output json | tee "$generation_result"
-
-            mapfile -d '' generated_configs < <(
-              find "$LOCAL_SDK_REPO_PATH" -type f -name tsp-location.yaml -newer "$marker" -print0
-            )
-            if [[ ${#generated_configs[@]} -ne 1 ]]; then
-              echo "Expected exactly one generated tsp-location.yaml for $typespec_project_path, found ${#generated_configs[@]}." >&2
-              printf '  %s\n' "${generated_configs[@]}" >&2
-              exit 1
-            fi
-
-            package_path="$(realpath "$(dirname "${generated_configs[0]}")")"
-            if [[ ! -d "$package_path" || "$package_path" != "$LOCAL_SDK_REPO_PATH"/* ]]; then
-              echo "Invalid generated package path: $package_path" >&2
-              exit 1
-            fi
-            package_name="$(basename "$package_path")"
-            if [[ -n "${package_names[$package_name]:-}" ]]; then
-              relative_results_path="$package_name-$project_number"
-            else
-              relative_results_path="$package_name"
-            fi
-            package_names["$package_name"]=1
-            project_results="$results_dir/$relative_results_path"
-            mkdir -p "$project_results"
-            mv "$generation_result" "$project_results/generate.json"
-
-            azsdk package build \
-              --package-path "$package_path" \
-              --output json | tee "$project_results/build.json"
-
-            azsdk package detect-breaking-change \
-              --package-path "$package_path" \
-              --tsp-config-path "$tsp_config_path" \
-              --output json | tee "$project_results/breaking-changes.json"
-
-            jq -cn \
-              --arg typespecProjectPath "$typespec_project_path" \
-              --arg packageName "$package_name" \
-              --arg resultsPath "$relative_results_path" \
-              '{typespecProjectPath: $typespecProjectPath, packageName: $packageName, resultsPath: $resultsPath}' \
-              >> "$manifest_jsonl"
-            jq -s '.' "$manifest_jsonl" > "$results_dir/projects.json"
-          done
-
-          rm "$manifest_jsonl"
+          PR_NUMBER: ${{ needs.resolve.outputs.pr-number }}
+          SDK_LANGUAGE: ${{ needs.resolve.outputs.sdk-language }}
+          ANALYZED_SHA: ${{ needs.resolve.outputs.head-sha }}
+          WORKFLOW_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        with:
+          script: |
+            const { analyzeSdkProjects } =
+              await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change/analyze-sdk-projects.ts');
+            await analyzeSdkProjects({
+              runnerTemp: process.env.RUNNER_TEMP,
+              localSdkRepositoryPath: process.env.LOCAL_SDK_REPO_PATH,
+              specificationRepositoryPath: process.env.SPEC_REPOSITORY_PATH,
+              typeSpecConfigPaths: JSON.parse(process.env.TYPESPEC_CONFIG_PATHS),
+              pullNumber: Number(process.env.PR_NUMBER),
+              sdkLanguage: process.env.SDK_LANGUAGE,
+              analyzedSha: process.env.ANALYZED_SHA,
+              workflowUrl: process.env.WORKFLOW_URL,
+            });
 
       - name: Publish result summary
         if: always()

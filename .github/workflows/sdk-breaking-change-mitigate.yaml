@@ -80,6 +80,13 @@ jobs:
           path: repositories/workflow-repository
           persist-credentials: false
 
+      - name: Install dependencies for github-script actions
+        uses: ./repositories/workflow-repository/.github/actions/setup-node-install-deps
+        with:
+          working-directory: repositories/workflow-repository
+          install-command: "pnpm install --frozen-lockfile --prod --prefer-offline --config.trust-lockfile=true --filter=azure-rest-api-specs-github..."
+          cache: "false"
+
       - name: Install Azure SDK CLI
         shell: pwsh
         run: ./repositories/workflow-repository/eng/common/mcp/azure-sdk-mcp.ps1 -InstallDirectory $env:AZSDK_CLI_PATH
@@ -130,7 +137,7 @@ jobs:
 
       - name: Mitigate SDK breaking changes
         id: mitigate-sdk-breaking-changes
-        shell: bash
+        uses: actions/github-script@v9
         env:
           ANALYSIS_RESULT_PATH: ${{ runner.temp }}/published-analysis-results/sdk-breaking-change-analysis.json
           AZSDK_COPILOT_CLI_PATH: ${{ steps.setup-copilot-cli.outputs.path }}
@@ -139,120 +146,19 @@ jobs:
           SPEC_REPOSITORY_PATH: ${{ github.workspace }}/repositories/azure-rest-api-specs
           MITIGATION_RESULT_PATH: ${{ runner.temp }}/published-mitigation-results/sdk-breaking-change-mitigation.json
           MITIGATION_WORKFLOW_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        run: |
-          set -euo pipefail
-          mitigation_log="$RUNNER_TEMP/sdk-breaking-change-mitigation.log"
-          exec > >(tee "$mitigation_log") 2>&1
-          echo "$AZSDK_CLI_PATH" >> "$GITHUB_PATH"
-          export PATH="$AZSDK_CLI_PATH:$PATH"
-
-          test -f "$ANALYSIS_RESULT_PATH"
-          mkdir -p "$(dirname "$MITIGATION_RESULT_PATH")"
-          jq --arg mitigationWorkflowUrl "$MITIGATION_WORKFLOW_URL" '{
-            schemaVersion: 1,
-            prNumber,
-            headSha,
-            sdkLanguage,
-            mitigationWorkflowUrl: $mitigationWorkflowUrl,
-            status: "success",
-            customizationCode: "",
-            projects: [.projects[] | {
-              typespecProject,
-              sdkPackage,
-              breakingChanges: []
-            }]
-          }' "$ANALYSIS_RESULT_PATH" > "$MITIGATION_RESULT_PATH"
-
-          while IFS= read -r project; do
-            project_index="$(jq -r '.key' <<< "$project")"
-            project_data="$(jq -c '.value' <<< "$project")"
-            typespec_project_path="$(jq -r '.typespecProject' <<< "$project_data")"
-            package_name="$(jq -r '.sdkPackage' <<< "$project_data")"
-            breaking_change_count="$(jq '.breakingChanges | length' <<< "$project_data")"
-            if [[ "$breaking_change_count" -eq 0 ]]; then
-              echo "No SDK breaking changes found for $typespec_project_path."
-              continue
-            fi
-
-            tsp_project_path="$(realpath "$SPEC_REPOSITORY_PATH/$typespec_project_path")"
-            if [[ ! -d "$tsp_project_path" || "$tsp_project_path" != "$SPEC_REPOSITORY_PATH"/specification/* ]]; then
-              echo "Invalid TypeSpec project path: $typespec_project_path" >&2
-              exit 1
-            fi
-
-            package_paths=()
-            while IFS= read -r -d '' tsp_location_path; do
-              candidate_package_path="$(dirname "$tsp_location_path")"
-              if [[ "$(basename "$candidate_package_path")" == "$package_name" ]]; then
-                package_paths+=("$(realpath "$candidate_package_path")")
-              fi
-            done < <(find "$SDK_REPOSITORY_PATH" -type f -name tsp-location.yaml -print0)
-            if [[ ${#package_paths[@]} -ne 1 ]]; then
-              echo "Expected exactly one SDK package named $package_name, found ${#package_paths[@]}." >&2
-              printf '  %s\n' "${package_paths[@]}" >&2
-              exit 1
-            fi
-            package_path="${package_paths[0]}"
-
-            breaking_change_number=0
-            while IFS= read -r breaking_change; do
-              mitigation_result="$RUNNER_TEMP/sdk-mitigation-result-$breaking_change_number.json"
-              breaking_change_number="$((breaking_change_number + 1))"
-              echo "Mitigating SDK breaking change $breaking_change_number of $breaking_change_count for $typespec_project_path."
-              customization_request="Resolve this SDK breaking change: $breaking_change"
-              mitigation_succeeded=true
-              if ! azsdk typespec client customized-update \
-                  --tsp-project-path "$tsp_project_path" \
-                  --package-path "$package_path" \
-                  --customization-request "$customization_request" \
-                  --edit-scope 2 \
-                  --output json | tee "$mitigation_result"; then
-                mitigation_succeeded=false
-              fi
-
-              if [[ "$mitigation_succeeded" == "true" ]] && jq -e . "$mitigation_result" > /dev/null; then
-                clean_result="$(
-                  jq -c \
-                    --argjson breakingChange "$breaking_change" \
-                    '(.result // .) as $result |
-                    ($result.success // false) as $isResolved | {
-                      breakingChange: ($breakingChange.breakingChange // $breakingChange),
-                      suggestedFix: ($breakingChange.suggestedFix // ""),
-                      isResolved: $isResolved
-                    } + if $result.typeSpecChangesSummary != null then
-                      {typespecChangesSummary: $result.typeSpecChangesSummary}
-                    else {}
-                    end' \
-                    "$mitigation_result"
-                )"
-              else
-                clean_result="$(
-                  jq -cn \
-                    --argjson breakingChange "$breaking_change" \
-                    '{
-                      breakingChange: ($breakingChange.breakingChange // $breakingChange),
-                      suggestedFix: ($breakingChange.suggestedFix // ""),
-                      isResolved: false
-                    }'
-                )"
-              fi
-              jq \
-                --argjson projectIndex "$project_index" \
-                --argjson result "$clean_result" \
-                '.projects[$projectIndex].breakingChanges += [$result]' \
-                "$MITIGATION_RESULT_PATH" > "$MITIGATION_RESULT_PATH.tmp"
-              mv "$MITIGATION_RESULT_PATH.tmp" "$MITIGATION_RESULT_PATH"
-              if [[ "$mitigation_succeeded" != "true" ]]; then
-                exit 1
-              fi
-            done < <(
-              jq -c '.breakingChanges[] | {
-                breakingChange,
-                category,
-                suggestedFix
-              }' <<< "$project_data"
-            )
-          done < <(jq -c '.projects | to_entries[]' "$ANALYSIS_RESULT_PATH")
+        with:
+          script: |
+            const { mitigateSdkBreakingChanges } =
+              await import('${{ github.workspace }}/repositories/workflow-repository/.github/workflows/src/sdk-breaking-change/mitigate-sdk-breaking-changes.ts');
+            await mitigateSdkBreakingChanges({
+              runnerTemp: process.env.RUNNER_TEMP,
+              analysisResultPath: process.env.ANALYSIS_RESULT_PATH,
+              mitigationResultPath: process.env.MITIGATION_RESULT_PATH,
+              mitigationWorkflowUrl: process.env.MITIGATION_WORKFLOW_URL,
+              specificationRepositoryPath: process.env.SPEC_REPOSITORY_PATH,
+              sdkRepositoryPath: process.env.SDK_REPOSITORY_PATH,
+              azureSdkCliPath: process.env.AZSDK_CLI_PATH,
+            });
 
       - name: Get mitigation changed code
         id: get-changed-code
