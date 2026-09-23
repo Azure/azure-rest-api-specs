@@ -1,0 +1,28 @@
+{
+  "title": "CancelCampaign",
+  "operationId": "TelephonyCampaigns_cancel",
+  "parameters": {
+    "endpoint": "https://contoso.services.ai.azure.com/api/projects/reminders",
+    "api-version": "v1",
+    "Foundry-Features": "VoiceAgents=V1Preview",
+    "agent_name": "contoso-reminder-agent",
+    "campaign_name": "reminders",
+    "If-Match": "\"control-reminders-instance1-running\"",
+    "Operation-Id": "8c4e11c6-d190-46b0-9b4c-fd4de302a2fb"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Operation-Id": "8c4e11c6-d190-46b0-9b4c-fd4de302a2fb",
+        "Operation-Location": "https://contoso.services.ai.azure.com/api/projects/reminders/agents/contoso-reminder-agent/telephony/campaigns/reminders/operations/8c4e11c6-d190-46b0-9b4c-fd4de302a2fb?api-version=v1",
+        "Retry-After": 5
+      },
+      "body": {
+        "id": "8c4e11c6-d190-46b0-9b4c-fd4de302a2fb",
+        "kind": "cancel",
+        "status": "in_progress",
+        "created_at": 1790071800
+      }
+    }
+  }
+}

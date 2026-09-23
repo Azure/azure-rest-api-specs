@@ -715,10 +715,11 @@ interface AgentTelephony {
    * Lists direct and campaign-created call jobs owned by the route Agent. Deleted and superseded-round
    * jobs are omitted. Status-filtered pages are live views, not a snapshot across requests.
    * For campaign_name-filtered traversal, after/before CallJob IDs retain their original Campaign
-   * incarnation and validation_operation_id association for the cursor lifetime, including after task
+   * incarnation and internal execution_generation association for the cursor lifetime, including after task
    * deletion. Validate that association before reading the current round. Replacement or name reuse
    * returns 400 invalid_cursor, never silently continues in a new round. Discard the traversal and
-   * restart SDK iteration. Unknown/expired/mismatched boundaries also return 400 invalid_cursor.
+   * restart SDK iteration. Cancellation updates Campaign.operation_id without changing round identity
+   * or invalidating the cursor. Unknown/expired/mismatched boundaries also return 400 invalid_cursor.
    * A first page resolves the current round; deleting Campaigns return an empty page.
    */
   @summary("List outbound telephony call jobs")
