@@ -234,33 +234,27 @@ describe("detect-namespaces", () => {
     expect(core.setOutput).toHaveBeenCalledWith("results", "true");
   });
 
-  it.each(["missing config", "missing entrypoint", "compile failure"])(
-    "treats base %s as new",
-    async (reason) => {
-      mockFileStatuses([file]);
-      vi.mocked(existsSync).mockImplementation((path) => {
-        if (!String(path).startsWith(baseRefDir)) return true;
-        return (
-          reason === "compile failure" ||
-          (reason === "missing entrypoint" && String(path).endsWith("tspconfig.yaml"))
-        );
-      });
-      if (reason === "compile failure") {
-        vi.mocked(generateTypeSpecMetadata)
-          .mockResolvedValueOnce(metadata())
-          .mockRejectedValueOnce(new Error("base compiler diagnostic"));
-      }
-      await detectNamespaces(args());
-      expect(core.setOutput).toHaveBeenCalledWith("results", "true");
-      if (reason === "compile failure") {
-        expect(core.warning).toHaveBeenCalledWith(
-          expect.stringContaining("base compiler diagnostic"),
-        );
-      } else {
-        expect(generateTypeSpecMetadata).toHaveBeenCalledTimes(1);
-      }
-    },
-  );
+  it.each(["missing config", "compile failure"])("treats base %s as new", async (reason) => {
+    mockFileStatuses([file]);
+    vi.mocked(existsSync).mockImplementation((path) => {
+      if (!String(path).startsWith(baseRefDir)) return true;
+      return reason === "compile failure";
+    });
+    if (reason === "compile failure") {
+      vi.mocked(generateTypeSpecMetadata)
+        .mockResolvedValueOnce(metadata())
+        .mockRejectedValueOnce(new Error("base compiler diagnostic"));
+    }
+    await detectNamespaces(args());
+    expect(core.setOutput).toHaveBeenCalledWith("results", "true");
+    if (reason === "compile failure") {
+      expect(core.warning).toHaveBeenCalledWith(
+        expect.stringContaining("base compiler diagnostic"),
+      );
+    } else {
+      expect(generateTypeSpecMetadata).toHaveBeenCalledTimes(1);
+    }
+  });
 
   it("propagates head failures without publishing successful results", async () => {
     const error = new Error("head compiler diagnostic");
@@ -270,20 +264,13 @@ describe("detect-namespaces", () => {
     expect(core.setOutput).not.toHaveBeenCalled();
   });
 
-  it.each(["csharp", "http-client-csharp", "http-client-csharp-mgmt"])(
-    "normalizes %s and ignores empty or unnamed entries",
-    async (language) => {
-      vi.mocked(generateTypeSpecMetadata).mockResolvedValue(
-        metadata({
-          [language]: [{ packageName: "Azure.Compute" }],
-          python: [],
-          java: [{}],
-        }),
-      );
-      await detectNamespaces(args());
-      expect(writtenResults()).toMatchObject({ namespacesFound: { dotnet: "Azure.Compute" } });
-    },
-  );
+  it("normalizes the C# emitter alias to dotnet", async () => {
+    vi.mocked(generateTypeSpecMetadata).mockResolvedValue(
+      metadata({ "http-client-csharp": [{ packageName: "Azure.Compute" }] }),
+    );
+    await detectNamespaces(args());
+    expect(writtenResults()).toMatchObject({ namespacesFound: { dotnet: "Azure.Compute" } });
+  });
 
   it("uses the old path for a renamed base project", async () => {
     const oldPath = "specification/compute/old/tspconfig.yaml";

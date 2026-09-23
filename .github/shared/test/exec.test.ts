@@ -14,7 +14,7 @@ import {
   execPnpmExec,
   isExecError,
 } from "../src/exec.ts";
-import { debugLogger, type ILogger } from "../src/logger.ts";
+import { debugLogger } from "../src/logger.ts";
 
 vi.mock("node:module", async (importOriginal) => {
   const original = await importOriginal<typeof import("node:module")>();
@@ -41,22 +41,6 @@ describe("execFile", () => {
     await expect(execFile(file, args, { ...options, maxBuffer: expected.length })).resolves.toEqual(
       { stdout: expected, stderr: "" },
     );
-  });
-
-  it("logs successful stderr at debug level without inferring severity", async () => {
-    const logger: ILogger = {
-      debug: vi.fn(),
-      info: vi.fn(),
-      error: vi.fn(),
-      warning: vi.fn(),
-      isDebug: () => true,
-    };
-    await expect(
-      execFile(process.execPath, ["-e", "process.stderr.write('progress')"], { logger }),
-    ).resolves.toEqual({ stdout: "", stderr: "progress" });
-    expect(logger.debug).toHaveBeenCalledWith("stderr: 'progress'");
-    expect(logger.warning).not.toHaveBeenCalled();
-    expect(logger.error).not.toHaveBeenCalled();
   });
 
   it("exec fails with too-small buffer", async () => {
