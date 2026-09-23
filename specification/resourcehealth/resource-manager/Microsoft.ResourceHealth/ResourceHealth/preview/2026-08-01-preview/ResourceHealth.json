@@ -942,7 +942,11 @@
         },
         "location": {
           "type": "string",
-          "description": "Azure Resource Manager geo location of the resource."
+          "description": "Azure Resource Manager geo location of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "systemData": {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
@@ -986,14 +990,14 @@
           "description": "The name of the resource",
           "readOnly": true
         },
-        "type": {
-          "$ref": "#/definitions/Azure.Core.armResourceType",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        },
         "systemData": {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
           "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
           "readOnly": true
         },
         "properties": {

@@ -53,7 +53,11 @@ model ServiceGroupEventProperties is EventProperties {
 
 /** A service health event that retains its original subscription-scoped identity and resource metadata. */
 model ServiceGroupEvent {
-  ...Azure.ResourceManager.CommonTypes.Resource;
+  ...OmitProperties<Azure.ResourceManager.CommonTypes.Resource, "type">;
+
+  /** The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts" */
+  @visibility(Lifecycle.Read)
+  type?: string;
 
   /** Properties of the event. Optional maintenance information is returned only when available. */
   properties?: ServiceGroupEventProperties;
@@ -64,7 +68,11 @@ model ServiceGroupEvents is Azure.Core.Page<ServiceGroupEvent>;
 
 /** Current resource availability with optional resource creation and modification metadata. */
 model ServiceGroupAvailabilityStatus {
-  ...AvailabilityStatus;
+  ...OmitProperties<AvailabilityStatus, "location">;
+
+  /** Azure Resource Manager geo location of the resource. */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  location?: string;
 
   /** Azure Resource Manager metadata containing createdBy and modifiedBy information, when available. */
   @visibility(Lifecycle.Read)
