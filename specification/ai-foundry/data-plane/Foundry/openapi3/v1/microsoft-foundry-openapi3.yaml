@@ -46438,13 +46438,14 @@ components:
     CreateTelephonyCallJobRequest:
       type: object
       required:
-        - destination
+        - phone_number
         - connection_name
         - source
       properties:
-        destination:
-          $ref: '#/components/schemas/TelephonyOutboundDestination'
-          description: The phone destination to call.
+        phone_number:
+          type: string
+          pattern: ^\+[1-9]\d{1,14}$
+          description: The recipient E.164 phone number.
         connection_name:
           type: string
           minLength: 1
@@ -46472,14 +46473,10 @@ components:
       examples:
         - connection_name: telephony-acs
           source: aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa
-          destination:
-            type: phone_number
-            value: '+14255550123'
+          phone_number: '+14255550123'
         - connection_name: telephony-twilio
           source: '+14255550100'
-          destination:
-            type: phone_number
-            value: '+14255550123'
+          phone_number: '+14255550123'
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -82276,7 +82273,7 @@ components:
     TelephonyCallJob:
       type: object
       required:
-        - destination
+        - phone_number
         - connection_name
         - source
         - id
@@ -82289,9 +82286,10 @@ components:
         - created_at
         - updated_at
       properties:
-        destination:
-          $ref: '#/components/schemas/TelephonyOutboundDestination'
-          description: The phone destination to call.
+        phone_number:
+          type: string
+          pattern: ^\+[1-9]\d{1,14}$
+          description: The recipient E.164 phone number.
         connection_name:
           type: string
           minLength: 1
@@ -83322,33 +83320,6 @@ components:
           type: string
           description: Pinned Agent version used for preparation, shared by all errors on the page.
       description: Error-only page. During validation this is a partial live view; an empty page does not establish success.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    TelephonyOutboundDestination:
-      type: object
-      required:
-        - type
-        - value
-      properties:
-        type:
-          $ref: '#/components/schemas/TelephonyOutboundDestinationType'
-          description: The destination type. Only E.164 phone numbers are currently supported.
-        value:
-          type: string
-          pattern: ^\+[1-9]\d{1,14}$
-          description: The destination E.164 phone number.
-      description: The destination of an outbound call.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    TelephonyOutboundDestinationType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - phone_number
-      description: The type of destination for an outbound call.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview

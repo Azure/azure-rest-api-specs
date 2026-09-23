@@ -1356,26 +1356,6 @@ alias TelephonyTransferTargetsResponse = TelephonyTransferTargets & {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar TelephonyCallJobId extends string;
 
-@doc("The type of destination for an outbound call.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union TelephonyOutboundDestinationType {
-  string,
-
-  @doc("An E.164 phone number.")
-  phone_number: "phone_number",
-}
-
-@doc("The destination of an outbound call.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyOutboundDestination {
-  @doc("The destination type. Only E.164 phone numbers are currently supported.")
-  type: TelephonyOutboundDestinationType;
-
-  @doc("The destination E.164 phone number.")
-  @pattern("^\\+[1-9]\\d{1,14}$")
-  value: string;
-}
-
 @doc("The retry strategy for an outbound call.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyOutboundRetryPolicyType {
@@ -1430,8 +1410,9 @@ scalar TelephonyOutboundSource extends string;
 @doc("Customer-controlled configuration shared by direct and campaign-created call jobs.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCallJobConfiguration {
-  @doc("The phone destination to call.")
-  destination: TelephonyOutboundDestination;
+  @doc("The recipient E.164 phone number.")
+  @pattern("^\\+[1-9]\\d{1,14}$")
+  phone_number: string;
 
   @doc("The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone Extension. No inbound telephony binding is required.")
   @minLength(1)
@@ -1459,12 +1440,12 @@ model TelephonyCallJobConfiguration {
 @example(#{
   connection_name: "telephony-twilio",
   source: "+14255550100",
-  destination: #{ type: "phone_number", value: "+14255550123" },
+  phone_number: "+14255550123",
 })
 @example(#{
   connection_name: "telephony-acs",
   source: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
-  destination: #{ type: "phone_number", value: "+14255550123" },
+  phone_number: "+14255550123",
 })
 model CreateTelephonyCallJobRequest {
   ...TelephonyCallJobConfiguration;
