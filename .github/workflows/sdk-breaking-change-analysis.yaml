@@ -24,9 +24,11 @@ jobs:
   resolve-trigger:
     runs-on: ubuntu-slim
     outputs:
+      head-repository: ${{ steps.resolve.outputs.head-repository }}
       head-sha: ${{ steps.resolve.outputs.head-sha }}
       pr-number: ${{ steps.resolve.outputs.pr-number }}
       sdk-language: ${{ steps.resolve.outputs.sdk-language }}
+      sdk-repository: ${{ steps.resolve.outputs.sdk-repository }}
       should-run: ${{ steps.resolve.outputs.should-run }}
     steps:
       - name: Checkout workflow repository
@@ -80,50 +82,13 @@ jobs:
         shell: pwsh
         run: ./eng/common/mcp/azure-sdk-mcp.ps1 -InstallDirectory $env:AZSDK_CLI_PATH
 
-      - name: Resolve inputs and repositories
-        id: resolve-source
-        uses: actions/github-script@v9
-        env:
-          PR_NUMBER: ${{ needs.resolve-trigger.outputs.pr-number }}
-          SDK_LANGUAGE_INPUT: ${{ needs.resolve-trigger.outputs.sdk-language }}
-          TRIGGER_SHA: ${{ needs.resolve-trigger.outputs.head-sha }}
-        with:
-          script: |
-            const pullNumber = Number(process.env.PR_NUMBER);
-            if (!Number.isSafeInteger(pullNumber) || pullNumber <= 0) {
-              throw new Error(`Invalid pull request number: ${process.env.PR_NUMBER}`);
-            }
-            const { data: pull } = await github.rest.pulls.get({
-              ...context.repo,
-              pull_number: pullNumber,
-            });
-            const sdkLanguageInput = process.env.SDK_LANGUAGE_INPUT;
-
-            const { resolveSdkLanguageConfig, validateAnalysisSource } =
-              await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change/resolve-analysis-inputs.ts');
-            validateAnalysisSource({
-              expectedRepository: `${context.repo.owner}/${context.repo.repo}`,
-              actualRepository: pull.head.repo.full_name,
-              expectedSha: process.env.TRIGGER_SHA,
-              actualSha: pull.head.sha,
-            });
-            const languageConfig = resolveSdkLanguageConfig(sdkLanguageInput);
-
-            core.setOutput("repository", pull.head.repo.full_name);
-            core.setOutput("sha", pull.head.sha);
-            core.setOutput("sdk-repository", languageConfig.repository);
-            core.setOutput("sdk-language", languageConfig.language);
-
       - name: Checkout specification PR head
         uses: actions/checkout@v7
         with:
-          repository: ${{ steps.resolve-source.outputs.repository }}
-          # The preceding step restricts this checkout to the current SHA of a branch in this repository.
-          # codeql[actions/untrusted-checkout/critical]
-          ref: ${{ steps.resolve-source.outputs.sha }}
+          repository: ${{ needs.resolve-trigger.outputs.head-repository }}
+          ref: ${{ needs.resolve-trigger.outputs.head-sha }}
           path: repositories/azure-rest-api-specs
           persist-credentials: false
-
       - name: Resolve TypeSpec config path
         id: resolve-tsp-config
         uses: actions/github-script@v9
@@ -139,40 +104,40 @@ jobs:
       - name: Checkout target SDK repository
         uses: actions/checkout@v7
         with:
-          repository: Azure/${{ steps.resolve-source.outputs.sdk-repository }}
+          repository: Azure/${{ needs.resolve-trigger.outputs.sdk-repository }}
           ref: main
-          path: repositories/${{ steps.resolve-source.outputs.sdk-repository }}
+          path: repositories/${{ needs.resolve-trigger.outputs.sdk-repository }}
           persist-credentials: false
 
       - name: Set up Go
-        if: steps.resolve-source.outputs.sdk-language == 'Go'
+        if: needs.resolve-trigger.outputs.sdk-language == 'Go'
         uses: actions/setup-go@v7
         with:
           go-version: "1.26.x"
           cache: false
 
       - name: Set up .NET
-        if: steps.resolve-source.outputs.sdk-language == 'DotNet'
+        if: needs.resolve-trigger.outputs.sdk-language == 'DotNet'
         uses: actions/setup-dotnet@v6
         with:
           dotnet-version: "10.0.x"
 
       - name: Set up Python
-        if: steps.resolve-source.outputs.sdk-language == 'Python'
+        if: needs.resolve-trigger.outputs.sdk-language == 'Python'
         uses: actions/setup-python@v6
         with:
           python-version: "3.13"
 
       - name: Set up Python SDK environment
-        if: steps.resolve-source.outputs.sdk-language == 'Python'
+        if: needs.resolve-trigger.outputs.sdk-language == 'Python'
         shell: bash
-        working-directory: repositories/${{ steps.resolve-source.outputs.sdk-repository }}
+        working-directory: repositories/${{ needs.resolve-trigger.outputs.sdk-repository }}
         run: |
           python -m pip install -U pip > /dev/null
           python -m pip install 'eng/tools/azure-sdk-tools[ghtools]' > /dev/null
 
       - name: Install golangci-lint
-        if: steps.resolve-source.outputs.sdk-language == 'Go'
+        if: needs.resolve-trigger.outputs.sdk-language == 'Go'
         shell: bash
         run: |
           set -euo pipefail
@@ -201,8 +166,8 @@ jobs:
       - name: Set up SDK development environment
         shell: bash
         env:
-          SDK_REPOSITORY_PATH: ${{ github.workspace }}/repositories/${{ steps.resolve-source.outputs.sdk-repository }}
-          SDK_LANGUAGE: ${{ steps.resolve-source.outputs.sdk-language }}
+          SDK_REPOSITORY_PATH: ${{ github.workspace }}/repositories/${{ needs.resolve-trigger.outputs.sdk-repository }}
+          SDK_LANGUAGE: ${{ needs.resolve-trigger.outputs.sdk-language }}
         run: |
           set -euo pipefail
           echo "$AZSDK_CLI_PATH" >> "$GITHUB_PATH"
@@ -218,7 +183,7 @@ jobs:
         env:
           AZSDK_COPILOT_CLI_PATH: ${{ steps.setup-copilot-cli.outputs.path }}
           AZSDK_COPILOT_GITHUB_TOKEN: ${{ github.token }}
-          LOCAL_SDK_REPO_PATH: ${{ github.workspace }}/repositories/${{ steps.resolve-source.outputs.sdk-repository }}
+          LOCAL_SDK_REPO_PATH: ${{ github.workspace }}/repositories/${{ needs.resolve-trigger.outputs.sdk-repository }}
           SPEC_REPOSITORY_PATH: ${{ github.workspace }}/repositories/azure-rest-api-specs
           TYPESPEC_CONFIG_PATHS: ${{ steps.resolve-tsp-config.outputs.tsp-config-paths }}
         run: |
@@ -230,8 +195,8 @@ jobs:
           trap 'status=$?; printf "Analysis failed with exit code %s.\n" "$status" > "$results_dir/error.log"; exit "$status"' ERR
           jq -cn \
             --argjson pullNumber '${{ needs.resolve-trigger.outputs.pr-number }}' \
-            --arg sdkLanguage '${{ steps.resolve-source.outputs.sdk-language }}' \
-            --arg analyzedSha '${{ steps.resolve-source.outputs.sha }}' \
+            --arg sdkLanguage '${{ needs.resolve-trigger.outputs.sdk-language }}' \
+            --arg analyzedSha '${{ needs.resolve-trigger.outputs.sha }}' \
             --arg workflowUrl '${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}' \
             '{pullNumber: $pullNumber, sdkLanguage: $sdkLanguage, analyzedSha: $analyzedSha, workflowUrl: $workflowUrl}' \
             > "$results_dir/trigger.json"
@@ -307,7 +272,7 @@ jobs:
         env:
           JOB_STATUS: ${{ job.status }}
           ANALYSIS_OUTCOME: ${{ steps.analyze-sdk-projects.outcome }}
-          ANALYZED_SHA: ${{ steps.resolve-source.outputs.sha }}
+          ANALYZED_SHA: ${{ needs.resolve-trigger.outputs.head-sha }}
           JOB_LOG_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/job/${{ job.check_run_id }}
         run: |
           {
@@ -356,13 +321,13 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Create SDK analysis result artifact
-        if: always() && steps.resolve-source.outputs.sha != ''
+        if: always() && needs.resolve-trigger.outputs.head-sha != ''
         uses: actions/github-script@v9
         env:
           RESULTS_PATH: ${{ runner.temp }}/sdk-breaking-change-results
           PR_NUMBER: ${{ needs.resolve-trigger.outputs.pr-number }}
-          HEAD_SHA: ${{ steps.resolve-source.outputs.sha }}
-          SDK_LANGUAGE: ${{ steps.resolve-source.outputs.sdk-language }}
+          HEAD_SHA: ${{ needs.resolve-trigger.outputs.head-sha }}
+          SDK_LANGUAGE: ${{ needs.resolve-trigger.outputs.sdk-language }}
           ANALYSIS_WORKFLOW_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           STATUS: ${{ steps.analyze-sdk-projects.outcome == 'success' && 'success' || 'failure' }}
         with:

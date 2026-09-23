@@ -48,10 +48,29 @@ export async function resolveAnalysisTrigger({
   context,
   core,
 }: Pick<AsyncFunctionArguments, "github" | "context" | "core">): Promise<void> {
+  let pullNumber: number | undefined;
   if (context.eventName === "workflow_dispatch") {
-    core.setOutput("pr-number", process.env.PR_NUMBER_INPUT);
-    core.setOutput("head-sha", "");
-    core.setOutput("sdk-language", process.env.SDK_LANGUAGE_INPUT);
+    pullNumber = Number(context.payload.inputs?.pr_number);
+  } else if (context.eventName === "workflow_run") {
+    pullNumber = context.payload.workflow_run.pull_requests?.[0]?.number;
+  }
+
+  if (!pullNumber || !Number.isSafeInteger(pullNumber) || pullNumber <= 0) {
+    throw new Error(`Invalid pull request number: ${pullNumber}`);
+  }
+
+  const { data: pull } = await github.rest.pulls.get({
+    ...context.repo,
+    pull_number: pullNumber,
+  });
+
+  if (context.eventName === "workflow_dispatch") {
+    const languageConfig = resolveSdkLanguageConfig(process.env.SDK_LANGUAGE_INPUT);
+    core.setOutput("pr-number", pullNumber);
+    core.setOutput("head-repository", pull.head.repo.full_name);
+    core.setOutput("head-sha", pull.head.sha);
+    core.setOutput("sdk-language", context.payload.inputs?.sdk_language);
+    core.setOutput("sdk-repository", languageConfig.repository);
     core.setOutput("should-run", "true");
     return;
   }
@@ -100,12 +119,17 @@ export async function resolveAnalysisTrigger({
     throw new Error(`Invalid head-sha artifact: ${headSha}`);
   }
 
+  const language = SDK_LANGUAGES_BY_LABEL.get(labelArtifact.labelName as (typeof SDK_LABELS)[number]);
+  const languageConfig = resolveSdkLanguageConfig(language);
+
   core.setOutput("pr-number", issueNumber);
+  core.setOutput("head-repository", pull.head.repo.full_name);
   core.setOutput("head-sha", headSha);
   core.setOutput(
     "sdk-language",
-    SDK_LANGUAGES_BY_LABEL.get(labelArtifact.labelName as (typeof SDK_LABELS)[number]),
+    language,
   );
+  core.setOutput("sdk-repository", languageConfig.repository);
   core.setOutput("should-run", labelArtifact.labelValue);
 }
 
