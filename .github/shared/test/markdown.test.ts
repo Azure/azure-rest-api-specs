@@ -109,6 +109,28 @@ describe("tables, lists and details", () => {
     expect(html).toContain("first<br />second<br />third<br />fourth");
   });
 
+  it("preserves long backslash runs without a pipe", () => {
+    const value = "\\".repeat(100_000);
+    expect(table([["Value"], [value]])).toBe(`| Value |\n| --- |\n| ${value} |`);
+  });
+
+  it.each([0, 1, 2, 3, 50_000, 50_001])(
+    "preserves pipe escaping after %s consecutive backslashes",
+    (length) => {
+      const backslashes = "\\".repeat(length);
+      const escape = length % 2 === 0 ? "\\" : "";
+      expect(table([["Value"], [`${backslashes}|tail|`]])).toBe(
+        `| Value |\n| --- |\n| ${backslashes}${escape}|tail\\| |`,
+      );
+    },
+  );
+
+  it("resets backslash parity across ordinary text and line breaks", () => {
+    expect(table([["Value"], ["\\text|\\\n|\\\r\n|"]])).toBe(
+      "| Value |\n| --- |\n| \\text\\|\\<br />\\|\\<br />\\| |",
+    );
+  });
+
   it.each([{ rows: [] }, { rows: [[]] }, { rows: [["One"], ["Two", "Three"]] }])(
     "rejects invalid table rows %j",
     ({ rows }) => {

@@ -73,13 +73,16 @@ export function link(label: string, url: string): string {
   return `[${label}](${url})`;
 }
 
-/** Escapes table delimiters without changing existing pipe escapes or other trusted Markdown. */
+/** Escapes table delimiters in one pass, preserving existing pipe escapes and trusted Markdown. */
 function escapeTableCell(value: string): string {
-  return value
-    .replace(/(\\*)\|/g, (match: string, slashes: string) =>
-      slashes.length % 2 === 0 ? `${slashes}\\|` : match,
-    )
-    .replace(/\r\n?|\n/g, "<br />");
+  const escaped: string[] = [];
+  let backslashes = 0;
+  for (const character of value) {
+    if (character === "|" && backslashes % 2 === 0) escaped.push("\\");
+    escaped.push(character);
+    backslashes = character === "\\" ? backslashes + 1 : 0;
+  }
+  return escaped.join("").replace(/\r\n?|\n/g, "<br />");
 }
 
 /** Renders a GFM table with a header row; cells accept trusted Markdown and must have equal widths. */
