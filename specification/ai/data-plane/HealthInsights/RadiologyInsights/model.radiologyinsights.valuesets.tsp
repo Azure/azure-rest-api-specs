@@ -1,4 +1,4 @@
-import "../HealthInsights.Common/model.common.fhir.elements.tsp";
+import "../Common/model.common.fhir.elements.tsp";
 
 namespace AzureHealthInsights;
 

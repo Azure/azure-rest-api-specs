@@ -1,7 +1,7 @@
-import "../HealthInsights.Common/model.common.request.tsp";
-import "../HealthInsights.Common/model.common.response.tsp";
-import "../HealthInsights.Common/model.common.shared.tsp";
-import "../HealthInsights.Common/model.common.fhir.elements.tsp";
+import "../Common/model.common.request.tsp";
+import "../Common/model.common.response.tsp";
+import "../Common/model.common.shared.tsp";
+import "../Common/model.common.fhir.elements.tsp";
 
 using TypeSpec.Rest;
 
