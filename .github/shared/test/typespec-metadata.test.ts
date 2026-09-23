@@ -1,9 +1,9 @@
 import { access, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { dirname, join } from "node:path";
+import { dirname, join, resolve } from "node:path";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { execNodeBin } from "../src/exec.ts";
-import { debugLogger } from "../src/logger.ts";
+import { debugLogger, type ILogger } from "../src/logger.ts";
 import { generateTypeSpecMetadata } from "../src/typespec-metadata.ts";
 
 vi.mock("../src/exec.ts", async (importOriginal) => ({
@@ -64,6 +64,8 @@ describe("generateTypeSpecMetadata", () => {
       expect(packageName).toBe("@typespec/compiler");
       expect(options?.cwd).toMatch(/contoso$/);
       expect(options?.maxBuffer).toBe(64 * 1024 * 1024);
+      expect(options?.timeout).toBeUndefined();
+      expect(args[2]).toBe(resolve("contoso"));
       return { stdout: "", stderr: "" };
     });
 
@@ -96,6 +98,103 @@ describe("generateTypeSpecMetadata", () => {
       });
 
       await expect(generateTypeSpecMetadata(projectDirectory)).resolves.toEqual(validMetadata);
+    } finally {
+      await rm(projectDirectory, { recursive: true, force: true });
+    }
+  });
+
+  it.each(["main.tsp", "client.tsp"])(
+    "keeps the project target when main.tsp exists (%s)",
+    async (filename) => {
+      const projectDirectory = await mkdtemp(join(tmpdir(), "typespec-main-project-"));
+      try {
+        await writeFile(join(projectDirectory, "main.tsp"), "");
+        await writeFile(join(projectDirectory, filename), "");
+        vi.mocked(execNodeBin).mockImplementation(async (_packageName, args) => {
+          metadataFile = getMetadataFile(args);
+          await writeFile(metadataFile, JSON.stringify(validMetadata));
+          expect(args[2]).toBe(projectDirectory);
+          return { stdout: "", stderr: "" };
+        });
+        await generateTypeSpecMetadata(projectDirectory);
+        await expectMetadataDirectoryRemoved(metadataFile);
+      } finally {
+        await rm(projectDirectory, { recursive: true, force: true });
+      }
+    },
+  );
+
+  it.each(["custom.tsp", resolve("contoso/custom.tsp")])(
+    "honors an explicit entrypoint and timeout (%s)",
+    async (entrypoint) => {
+      vi.mocked(execNodeBin).mockImplementation(async (_packageName, args, options) => {
+        metadataFile = getMetadataFile(args);
+        await writeFile(metadataFile, JSON.stringify(validMetadata));
+        expect(args[2]).toBe(resolve("contoso/custom.tsp"));
+        expect(options?.cwd).toBe(resolve("contoso"));
+        expect(options?.timeout).toBe(120_000);
+        return { stdout: "", stderr: "" };
+      });
+      await generateTypeSpecMetadata("contoso", { entrypoint, timeout: 120_000 });
+      await expectMetadataDirectoryRemoved(metadataFile);
+    },
+  );
+
+  it.each([true, false])(
+    "handles successful stderr with logger enabled: %s",
+    async (withLogger) => {
+      const logger: ILogger = {
+        debug: vi.fn(),
+        info: vi.fn(),
+        error: vi.fn(),
+        warning: vi.fn(),
+        isDebug: () => false,
+      };
+      vi.mocked(execNodeBin).mockImplementation(async (_packageName, args) => {
+        metadataFile = getMetadataFile(args);
+        await writeFile(metadataFile, JSON.stringify(validMetadata));
+        return { stdout: "", stderr: "compiler warning" };
+      });
+      await generateTypeSpecMetadata("contoso", { logger: withLogger ? logger : undefined });
+      expect(logger.warning).toHaveBeenCalledTimes(withLogger ? 1 : 0);
+      if (withLogger) {
+        expect(logger.warning).toHaveBeenCalledWith(
+          "typespec-metadata emitter warnings: compiler warning",
+        );
+      }
+    },
+  );
+
+  it.each(["missing", "malformed"])("rejects %s JSON output and cleans up", async (output) => {
+    vi.mocked(execNodeBin).mockImplementation(async (_packageName, args) => {
+      metadataFile = getMetadataFile(args);
+      if (output === "malformed") await writeFile(metadataFile, "{");
+      return { stdout: "", stderr: "" };
+    });
+    await expect(generateTypeSpecMetadata("contoso")).rejects.toThrow();
+    await expectMetadataDirectoryRemoved(metadataFile);
+  });
+
+  it("isolates concurrent output without touching existing project metadata", async () => {
+    const projectDirectory = await mkdtemp(join(tmpdir(), "typespec-concurrent-project-"));
+    const existingOutput = join(projectDirectory, "typespec-metadata.json");
+    const metadataFiles: string[] = [];
+    try {
+      await writeFile(existingOutput, "existing metadata");
+      vi.mocked(execNodeBin).mockImplementation(async (_packageName, args) => {
+        const file = getMetadataFile(args);
+        metadataFiles.push(file);
+        expect(file.startsWith(projectDirectory)).toBe(false);
+        await writeFile(file, JSON.stringify(validMetadata));
+        return { stdout: "", stderr: "" };
+      });
+      await Promise.all([
+        generateTypeSpecMetadata(projectDirectory),
+        generateTypeSpecMetadata(projectDirectory),
+      ]);
+      expect(new Set(metadataFiles).size).toBe(2);
+      for (const file of metadataFiles) await expectMetadataDirectoryRemoved(file);
+      await expect(access(existingOutput)).resolves.toBeUndefined();
     } finally {
       await rm(projectDirectory, { recursive: true, force: true });
     }
@@ -138,4 +237,23 @@ describe("generateTypeSpecMetadata", () => {
     await expect(generateTypeSpecMetadata("contoso")).rejects.toThrow("file-not-found");
     await expectMetadataDirectoryRemoved(metadataFile);
   });
+
+  it.each(["", "partial diagnostics"])(
+    "preserves timeout errors and their cause (%s)",
+    async (stdout) => {
+      const error = Object.assign(new Error("compiler timed out"), {
+        stdout,
+        stderr: "",
+        killed: true,
+      });
+      vi.mocked(execNodeBin).mockImplementation((_packageName, args) => {
+        metadataFile = getMetadataFile(args);
+        return Promise.reject(error);
+      });
+      const result = generateTypeSpecMetadata("contoso", { timeout: 100 });
+      await expect(result).rejects.toThrow("compiler timed out");
+      await expect(result).rejects.toHaveProperty("cause", error);
+      await expectMetadataDirectoryRemoved(metadataFile);
+    },
+  );
 });
