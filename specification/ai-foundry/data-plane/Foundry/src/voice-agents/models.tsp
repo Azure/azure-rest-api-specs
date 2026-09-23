@@ -1598,7 +1598,7 @@ model TelephonyCallJob {
   @doc("The name of the voice agent used at execution time.")
   agent_name: string;
 
-  @doc("The original owning Campaign name under this Agent. Absent for direct calls. After deletion/name reuse this is only a historical label, not a link to the current same-named Campaign. Use the current Campaign's recipient results or campaign_name-filtered CallJob list for current membership.")
+  @doc("The owning Campaign name under this Agent. Absent for direct calls. Campaign deletion also deletes its CallJobs; owned jobs are hidden once cascade deletion is accepted. Association and cleanup use the immutable internal Campaign instance, so name reuse cannot associate old work with a replacement.")
   @visibility(Lifecycle.Read)
   campaign_name?: TelephonyCampaignName;
 

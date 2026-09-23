@@ -728,7 +728,7 @@ interface AgentTelephony {
       /** Optional lifecycle filter. */
       @query status?: TelephonyCallJobStatus;
 
-      /** Restrict results to the current incarnation of the named Campaign. A missing Campaign returns 404; deleted incarnations are never included after name reuse. Omit to include direct and historical Campaign-created jobs. */
+      /** Restrict results to the current incarnation of the named Campaign. A missing Campaign returns 404; a deleting Campaign returns an empty page. Omit to include direct and retained Campaign-created jobs. Jobs owned by deleting/deleted instances are excluded, including after name reuse. */
       @query campaign_name?: TelephonyCampaignName;
     },
     AgentsPagedResult<TelephonyCallJob>

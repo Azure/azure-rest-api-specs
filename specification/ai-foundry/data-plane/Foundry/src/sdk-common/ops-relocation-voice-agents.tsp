@@ -16,7 +16,7 @@ namespace Azure.AI.Projects.Beta.VoiceAgents {
   @@clientLocation(TelephonyCampaigns.cancel, Campaigns);
   @@clientLocation(TelephonyCampaigns.delete, Campaigns);
   @@clientLocation(TelephonyCampaigns.pause, Campaigns);
-  @@clientLocation(TelephonyCampaigns.listRecipientResults, Campaigns);
+  @@clientLocation(TelephonyCampaigns.listValidationErrors, Campaigns);
 
   interface Conversations {}
   @@clientLocation(
