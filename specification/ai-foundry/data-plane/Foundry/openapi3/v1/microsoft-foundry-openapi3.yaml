@@ -5349,7 +5349,7 @@ paths:
         with the Campaign and Operation-Id/Operation-Location without waiting for the complete recipient scan.
         The Campaign normally reports validating; a fast scan may already be complete when polled.
         This one creation operation tracks snapshotting and automatic initial validation.
-        Success completes the monitor and enters pending until explicit start; failure completes it as failed
+        Success completes the monitor and enters ready until explicit start; failure completes it as failed
         with a summary and exposes row diagnostics through validation_errors. Later Campaign state changes
         never reopen the creation monitor or make poller completion authorize dialing.
         A retained identical Operation-Id request replays its original 201 response and monitor without
@@ -5877,7 +5877,7 @@ paths:
     post:
       operationId: TelephonyCampaigns_cancel
       summary: Cancel a telephony campaign
-      description: Stops future dispatch and retries for the conditionally selected instance; drains validation workers and admitted calls before terminal cancellation. A stale control token returns 412, including after name reuse.
+      description: Stops future dispatch and retries for the conditionally selected instance. Allowed while validating, ready, running or paused; enters cancelling and drains validation workers and admitted calls before cancelled. Connected calls finish naturally. Cancellation during initial validation completes the creation operation as cancelled after worker quiescence. Cancellation during later revalidation preserves the terminal creation operation. Repeated cancel while cancelling/cancelled returns current state; completed/failed reject cancel with 409. A stale control token returns 412, including after name reuse.
       parameters:
         - name: Foundry-Features
           in: header
@@ -5948,7 +5948,7 @@ paths:
     post:
       operationId: TelephonyCampaigns_pause
       summary: Pause a telephony campaign
-      description: Pauses running execution without disconnecting admitted calls. Initial or execution-time validating states reject pause with 409; use cancel to stop validation. Paused guarantees that no validation scan remains active. Repeating pause on paused work with its current control token returns the current state. Pending and terminal states reject pause.
+      description: Pauses running execution without disconnecting admitted calls. Initial or execution-time validating states reject pause with 409; use cancel to stop validation. Paused guarantees that no validation scan remains active. Repeating pause on paused work with its current control token returns the current state. Ready and terminal states reject pause.
       parameters:
         - name: Foundry-Features
           in: header
@@ -6019,7 +6019,7 @@ paths:
     post:
       operationId: TelephonyCampaigns_start
       summary: Start a telephony campaign
-      description: Starts pending work or continues paused work through required Agent-version checks. Never replays terminal recipients. Validating, cancelling and terminal states reject start with 409; paused means no validation worker remains active. With a current control token, repeated start while running returns current state. A stale token returns 412 before state checks.
+      description: Starts a ready Campaign or continues paused work through required Agent-version checks. Never replays terminal recipients. Validating, cancelling and terminal states reject start with 409; paused means no validation worker remains active. With a current control token, repeated start while running returns current state. A stale token returns 412 before state checks.
       parameters:
         - name: Foundry-Features
           in: header
@@ -83449,7 +83449,7 @@ components:
         - type: string
           enum:
             - validating
-            - pending
+            - ready
             - running
             - paused
             - cancelling

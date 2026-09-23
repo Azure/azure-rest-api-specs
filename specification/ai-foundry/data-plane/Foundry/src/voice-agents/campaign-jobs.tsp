@@ -292,11 +292,11 @@ model TelephonyCampaignProgress {
 union TelephonyCampaignStatus {
   string,
 
-  /** Initial preparation or a coordinated Agent-version check; no new attempts are admitted. */
+  /** Initial preparation or a coordinated Agent-version check; no new attempts are admitted. Cancel enters cancelling until workers and admitted calls quiesce; start and pause return 409. */
   validating: "validating",
 
   /** Preparation succeeded; waiting for the first explicit start. Recipient scheduling applies once execution is authorized. */
-  pending: "pending",
+  ready: "ready",
 
   /** Execution is authorized, including waiting for schedules, capacity and retries. Start is idempotent; pause or cancel can stop new admission. */
   running: "running",
@@ -484,7 +484,7 @@ model TelephonyCampaignPage<T> {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Agent-contained named resources use FoundryDataPlanePreviewOperation with shared job envelopes and paging; shared job templates have fixed project-level ID parameters."
 @tag("TelephonyCampaigns")
 interface TelephonyCampaigns {
-  /** Starts pending work or continues paused work through required Agent-version checks. Never replays terminal recipients. Validating, cancelling and terminal states reject start with 409; paused means no validation worker remains active. With a current control token, repeated start while running returns current state. A stale token returns 412 before state checks. */
+  /** Starts a ready Campaign or continues paused work through required Agent-version checks. Never replays terminal recipients. Validating, cancelling and terminal states reject start with 409; paused means no validation worker remains active. With a current control token, repeated start while running returns current state. A stale token returns 412 before state checks. */
   @summary("Start a telephony campaign")
   @post
   @route("/agents/{agent_name}/telephony/campaigns/{campaign_name}:start")
@@ -510,7 +510,7 @@ interface TelephonyCampaigns {
    * with the Campaign and Operation-Id/Operation-Location without waiting for the complete recipient scan.
    * The Campaign normally reports validating; a fast scan may already be complete when polled.
    * This one creation operation tracks snapshotting and automatic initial validation.
-   * Success completes the monitor and enters pending until explicit start; failure completes it as failed
+   * Success completes the monitor and enters ready until explicit start; failure completes it as failed
    * with a summary and exposes row diagnostics through validation_errors. Later Campaign state changes
    * never reopen the creation monitor or make poller completion authorize dialing.
    * A retained identical Operation-Id request replays its original 201 response and monitor without
@@ -611,7 +611,7 @@ interface TelephonyCampaigns {
     }
   >;
 
-  /** Stops future dispatch and retries for the conditionally selected instance; drains validation workers and admitted calls before terminal cancellation. A stale control token returns 412, including after name reuse. */
+  /** Stops future dispatch and retries for the conditionally selected instance. Allowed while validating, ready, running or paused; enters cancelling and drains validation workers and admitted calls before cancelled. Connected calls finish naturally. Cancellation during initial validation completes the creation operation as cancelled after worker quiescence. Cancellation during later revalidation preserves the terminal creation operation. Repeated cancel while cancelling/cancelled returns current state; completed/failed reject cancel with 409. A stale control token returns 412, including after name reuse. */
   @summary("Cancel a telephony campaign")
   @post
   @route("/agents/{agent_name}/telephony/campaigns/{campaign_name}:cancel")
@@ -682,7 +682,7 @@ interface TelephonyCampaigns {
     TelephonyCampaignDeleteAcceptedResponse | NoContentResponse
   >;
 
-  /** Pauses running execution without disconnecting admitted calls. Initial or execution-time validating states reject pause with 409; use cancel to stop validation. Paused guarantees that no validation scan remains active. Repeating pause on paused work with its current control token returns the current state. Pending and terminal states reject pause. */
+  /** Pauses running execution without disconnecting admitted calls. Initial or execution-time validating states reject pause with 409; use cancel to stop validation. Paused guarantees that no validation scan remains active. Repeating pause on paused work with its current control token returns the current state. Ready and terminal states reject pause. */
   @summary("Pause a telephony campaign")
   @post
   @route("/agents/{agent_name}/telephony/campaigns/{campaign_name}:pause")

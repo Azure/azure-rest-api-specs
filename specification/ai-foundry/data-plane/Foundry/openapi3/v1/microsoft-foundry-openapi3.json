@@ -7797,7 +7797,7 @@
       "put": {
         "operationId": "TelephonyCampaigns_create",
         "summary": "Create a telephony campaign",
-        "description": "Creates an immutable named Campaign using the named PUT resource-creation LRO pattern.\nRejects invalid request shape, authorization or basic configuration before starting background work.\nAfter durably recording the Campaign, creation monitor and recoverable background work, returns 201\nwith the Campaign and Operation-Id/Operation-Location without waiting for the complete recipient scan.\nThe Campaign normally reports validating; a fast scan may already be complete when polled.\nThis one creation operation tracks snapshotting and automatic initial validation.\nSuccess completes the monitor and enters pending until explicit start; failure completes it as failed\nwith a summary and exposes row diagnostics through validation_errors. Later Campaign state changes\nnever reopen the creation monitor or make poller completion authorize dialing.\nA retained identical Operation-Id request replays its original 201 response and monitor without\nrestarting validation; changed inputs with that ID return 409 operation_id_conflict. Without that\nreplay key, an identical existing resource returns 200 and differing inputs return 409\ncampaign_inputs_conflict. Replays for a deleted instance return 409 campaign_deleted and never\naffect a reused name. Existing Campaign configuration remains immutable.",
+        "description": "Creates an immutable named Campaign using the named PUT resource-creation LRO pattern.\nRejects invalid request shape, authorization or basic configuration before starting background work.\nAfter durably recording the Campaign, creation monitor and recoverable background work, returns 201\nwith the Campaign and Operation-Id/Operation-Location without waiting for the complete recipient scan.\nThe Campaign normally reports validating; a fast scan may already be complete when polled.\nThis one creation operation tracks snapshotting and automatic initial validation.\nSuccess completes the monitor and enters ready until explicit start; failure completes it as failed\nwith a summary and exposes row diagnostics through validation_errors. Later Campaign state changes\nnever reopen the creation monitor or make poller completion authorize dialing.\nA retained identical Operation-Id request replays its original 201 response and monitor without\nrestarting validation; changed inputs with that ID return 409 operation_id_conflict. Without that\nreplay key, an identical existing resource returns 200 and differing inputs return 409\ncampaign_inputs_conflict. Replays for a deleted instance return 409 campaign_deleted and never\naffect a reused name. Existing Campaign configuration remains immutable.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -8540,7 +8540,7 @@
       "post": {
         "operationId": "TelephonyCampaigns_cancel",
         "summary": "Cancel a telephony campaign",
-        "description": "Stops future dispatch and retries for the conditionally selected instance; drains validation workers and admitted calls before terminal cancellation. A stale control token returns 412, including after name reuse.",
+        "description": "Stops future dispatch and retries for the conditionally selected instance. Allowed while validating, ready, running or paused; enters cancelling and drains validation workers and admitted calls before cancelled. Connected calls finish naturally. Cancellation during initial validation completes the creation operation as cancelled after worker quiescence. Cancellation during later revalidation preserves the terminal creation operation. Repeated cancel while cancelling/cancelled returns current state; completed/failed reject cancel with 409. A stale control token returns 412, including after name reuse.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -8650,7 +8650,7 @@
       "post": {
         "operationId": "TelephonyCampaigns_pause",
         "summary": "Pause a telephony campaign",
-        "description": "Pauses running execution without disconnecting admitted calls. Initial or execution-time validating states reject pause with 409; use cancel to stop validation. Paused guarantees that no validation scan remains active. Repeating pause on paused work with its current control token returns the current state. Pending and terminal states reject pause.",
+        "description": "Pauses running execution without disconnecting admitted calls. Initial or execution-time validating states reject pause with 409; use cancel to stop validation. Paused guarantees that no validation scan remains active. Repeating pause on paused work with its current control token returns the current state. Ready and terminal states reject pause.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -8760,7 +8760,7 @@
       "post": {
         "operationId": "TelephonyCampaigns_start",
         "summary": "Start a telephony campaign",
-        "description": "Starts pending work or continues paused work through required Agent-version checks. Never replays terminal recipients. Validating, cancelling and terminal states reject start with 409; paused means no validation worker remains active. With a current control token, repeated start while running returns current state. A stale token returns 412 before state checks.",
+        "description": "Starts a ready Campaign or continues paused work through required Agent-version checks. Never replays terminal recipients. Validating, cancelling and terminal states reject start with 409; paused means no validation worker remains active. With a current control token, repeated start while running returns current state. A stale token returns 412 before state checks.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -89591,7 +89591,7 @@
             "type": "string",
             "enum": [
               "validating",
-              "pending",
+              "ready",
               "running",
               "paused",
               "cancelling",
