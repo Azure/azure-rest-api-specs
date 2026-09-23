@@ -1,6 +1,6 @@
 import { type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
-import { gitDiffTopSpecFolder, runPnpm } from "../utils.ts";
+import { gitDiffTopSpecFolder, runNodeBin } from "../utils.ts";
 
 export class FormatRule implements Rule {
   readonly name = "Format";
@@ -11,20 +11,10 @@ export class FormatRule implements Rule {
     let stdOutput = "";
     let errorOutput = "";
 
-    let [err, stdout, stderr] = await runPnpm(
+    const [err, stdout, stderr] = await runNodeBin(
+      "@typespec/compiler",
       // Format parent folder to include shared files
-      ["exec", "tsp", "format", "../**/*.tsp"],
-      folder,
-    );
-    if (err) {
-      success = false;
-      errorOutput += err.message;
-    }
-    stdOutput += stdout;
-    errorOutput += stderr;
-
-    [err, stdout, stderr] = await runPnpm(
-      ["exec", "prettier", "--write", "tspconfig.yaml"],
+      ["tsp", "format", "../**/*.tsp", "tspconfig.yaml"],
       folder,
     );
     if (err) {
@@ -40,7 +30,7 @@ export class FormatRule implements Rule {
       if (!gitDiffResult.success) {
         success = false;
         errorOutput += gitDiffResult.errorOutput;
-        errorOutput += `\nFiles have been changed after \`tsp format\`. Run \`tsp format\` and ensure all files are included in your change.`;
+        errorOutput += `\nFiles have been changed by formatting. Run \`pnpm exec tsp format "../**/*.tsp" tspconfig.yaml\` from the project folder and include the changes.`;
       }
     }
 
