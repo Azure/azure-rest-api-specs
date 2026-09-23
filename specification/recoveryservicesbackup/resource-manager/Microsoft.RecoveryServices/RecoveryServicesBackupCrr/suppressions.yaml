@@ -1,0 +1,113 @@
+# LintDiff exceptions for the frozen Cross-Region Restore 2023-01-15 contract.
+# Each entry is scoped to one rule and the generated Swagger file. These are
+# legacy API shapes that cannot be changed during a horizontal TypeSpec migration.
+
+- tool: AvoidAdditionalProperties
+  paths:
+    - stable/2023-01-15/bms.json
+  reason: The published API uses open string and object maps for property bags, health data, source associations, and recovery-point metadata. Replacing those maps with closed models would reject existing payloads.
+
+- tool: ResourceNameRestriction
+  paths:
+    - stable/2023-01-15/bms.json
+  reason: The published API does not constrain the legacy vault, fabric, container, protected-item, recovery-point, or singleton path parameters. Adding patterns during migration would narrow accepted resource identifiers.
+
+- tool: BodyTopLevelProperties
+  paths:
+    - stable/2023-01-15/bms.json
+  reason: OperationStatus is an established response body with status, startTime, endTime, error, and properties at the top level. Wrapping those fields would change the response contract.
+
+- tool: RequiredPropertiesMissingInResourceModel
+  paths:
+    - stable/2023-01-15/bms.json
+  reason: BackupManagementUsageList and OperationStatus are legacy response wrappers rather than ARM resource models. Making id, name, type, or properties required would change existing responses.
+
+- tool: ResourceHasXMsResourceEnabled
+  paths:
+    - stable/2023-01-15/bms.json
+  reason: Resource is the published reusable response envelope for this API, not an independently addressable ARM resource type. Adding x-ms-azure-resource would incorrectly classify its derived response wrappers as tracked resources.
+
+- tool: AllTrackedResourcesMustHaveDelete
+  paths:
+    - stable/2023-01-15/bms.json
+  reason: AadPropertiesResource, BackupResourceConfigResource, and RecoveryPointResource inherit the legacy Resource response envelope but are read-only, action, or singleton proxy shapes; the published API intentionally has no DELETE operations for them.
+
+- tool: TrackedResourcesMustHavePut
+  paths:
+    - stable/2023-01-15/bms.json
+  reason: AadPropertiesResource and RecoveryPointResource are read-only legacy response wrappers, not tracked resources. Adding PUT operations would invent unsupported API surface.
+
+- tool: TrackedResourcePatchOperation
+  paths:
+    - stable/2023-01-15/bms.json
+  reason: AadPropertiesResource and RecoveryPointResource are read-only legacy response wrappers, not tracked resources. Adding PATCH operations would invent unsupported API surface.
+
+- tool: TrackedResourceBeyondsThirdLevel
+  paths:
+    - stable/2023-01-15/bms.json
+  reason: Recovery points retain the published deeply nested vault/fabric/container/protectedItem route. Flattening the route would break every existing resource identifier.
+
+- tool: PathForTrackedResourceTypes
+  paths:
+    - stable/2023-01-15/bms.json
+  reason: AadPropertiesResource and BackupResourceConfigResource reuse the legacy Resource envelope but are location-level and singleton proxy responses. Their published paths must not be converted to tracked-resource paths.
+
+- tool: PathForNestedResource
+  paths:
+    - stable/2023-01-15/bms.json
+  reason: The backup storage configuration singleton uses the published backupstorageconfig/vaultstorageconfig path. Changing its nesting or segment shape would break the stable resource identifier.
+
+- tool: EvenSegmentedPathForPutOperation
+  paths:
+    - stable/2023-01-15/bms.json
+  reason: The published singleton PUT path ends in backupstorageconfig/vaultstorageconfig. Changing its segment count would break the stable endpoint.
+
+- tool: PutResponseCodes
+  paths:
+    - stable/2023-01-15/bms.json
+  reason: BackupResourceStorageConfigs_Update preserves the published synchronous 200 response. Adding or replacing response codes would change the stable operation contract.
+
+- tool: PatchResponseCodes
+  paths:
+    - stable/2023-01-15/bms.json
+  reason: BackupResourceStorageConfigs_patch preserves the published 204 response. Adding a response body or different success code would change the stable operation contract.
+
+- tool: PutGetPatchResponseSchema
+  paths:
+    - stable/2023-01-15/bms.json
+  reason: The singleton GET and PUT return the resource while the published PATCH returns no content. Aligning the schemas would change the PATCH response contract.
+
+- tool: PostResponseCodes
+  paths:
+    - stable/2023-01-15/bms.json
+  reason: BackupCrossRegionRestore preserves the published accepted-only asynchronous response behavior. Adding a synchronous 200 response would change the stable operation contract.
+
+- tool: LroErrorContent
+  paths:
+    - stable/2023-01-15/bms.json
+  reason: BackupCrossRegionRestore preserves the published legacy error schema for its asynchronous operation. Replacing it with the current ARM LRO error shape would change error payloads.
+
+- tool: ParametersInPost
+  paths:
+    - stable/2023-01-15/bms.json
+  reason: The backupCrrJobs POST operations preserve published query parameters used to filter and paginate job results. Moving them into the body would change the endpoint contract.
+
+- tool: ParametersOrder
+  paths:
+    - stable/2023-01-15/bms.json
+  reason: RecoveryPointsCrr_List preserves the published parameter order to maintain generated-client compatibility for the migrated stable version.
+
+- tool: GetCollectionOnlyHasValueAndNextLink
+  paths:
+    - stable/2023-01-15/bms.json
+  reason: The published backupAadProperties and backupUsageSummaries GET responses include legacy collection metadata in addition to value. Removing those fields would change response payloads.
+
+- tool: XmsPageableForListCalls
+  paths:
+    - stable/2023-01-15/bms.json
+  reason: backupAadProperties is a published GET returning a legacy collection wrapper without pageable semantics. Adding x-ms-pageable would incorrectly change generated client behavior.
+
+- tool: OperationsAPIImplementation
+  paths:
+    - stable/2023-01-15/bms.json
+  reason: The Microsoft.RecoveryServices operations endpoint is owned by the sibling RecoveryServicesBackup TypeSpec project. Duplicating it in this passive-stamp project would create conflicting ownership.
