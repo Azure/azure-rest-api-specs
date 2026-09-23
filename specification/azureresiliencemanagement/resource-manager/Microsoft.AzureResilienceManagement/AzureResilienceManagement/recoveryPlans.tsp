@@ -34,14 +34,14 @@ namespace Microsoft.AzureResilienceManagement;
 @removed(Versions.v2026_09_30_preview)
 @renamedFrom(Versions.v2026_09_30_preview, "RecoveryPlans")
 interface RecoveryPlansOld {
-  @route(ServiceGroupRoute)
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  @route(ServiceGroupRoute)
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   get is ArmResourceRead<RecoveryPlan, ServiceGroupParameters>;
 
-  @route(ServiceGroupRoute)
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  @route(ServiceGroupRoute)
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -49,8 +49,8 @@ interface RecoveryPlansOld {
     ServiceGroupParameters
   >;
 
-  @route(ServiceGroupRoute)
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  @route(ServiceGroupRoute)
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   update is ArmResourcePatchAsync<
@@ -59,8 +59,8 @@ interface RecoveryPlansOld {
     ServiceGroupParameters
   >;
 
-  @route(ServiceGroupRoute)
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  @route(ServiceGroupRoute)
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -68,8 +68,8 @@ interface RecoveryPlansOld {
     ServiceGroupParameters
   >;
 
-  @route(ServiceGroupRoute)
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  @route(ServiceGroupRoute)
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   list is ArmResourceListByParent<
@@ -126,10 +126,10 @@ model RecoveryPlanListResult is ResourceListResult<RecoveryPlan>;
 @removed(Versions.v2026_09_30_preview)
 @renamedFrom(Versions.v2026_09_30_preview, "RecoveryPlanActions")
 interface RecoveryPlanActionsOld {
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @post
   @doc("This action finalizes the recovery orchestration plan, ensuring all necessary configurations are in place.")
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   finalize is ArmResourceActionAsync<
@@ -139,10 +139,10 @@ interface RecoveryPlanActionsOld {
     ServiceGroupAndRequestHeadersParameters
   >;
 
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @post
   @doc("This action adds or updates the resources to be included in the recovery orchestration plan.")
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   updateResources is ArmResourceActionAsync<
@@ -152,10 +152,10 @@ interface RecoveryPlanActionsOld {
     ServiceGroupAndRequestHeadersParameters
   >;
 
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @post
   @doc("This action checks if the recovery orchestration plan is eligible for operations like failover and reprotect, ensuring it meets the necessary criteria.")
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   validateForOperation is ArmResourceActionAsync<
@@ -165,10 +165,10 @@ interface RecoveryPlanActionsOld {
     ServiceGroupAndRequestHeadersParameters
   >;
 
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @post
   @doc("This action checks if the recovery orchestration plan is eligible for failover operation, ensuring it meets the necessary criteria and provides a list of qualified and unqualified resources.")
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   validateForFailover is ArmResourceActionAsync<
@@ -178,10 +178,10 @@ interface RecoveryPlanActionsOld {
     ServiceGroupAndRequestHeadersParameters
   >;
 
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @post
   @doc("This action checks if the recovery orchestration plan is eligible for failover commit operation, ensuring it meets the necessary criteria and provides a list of qualified and unqualified resources.")
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   validateForFailoverCommit is ArmResourceActionAsync<
@@ -191,10 +191,10 @@ interface RecoveryPlanActionsOld {
     ServiceGroupAndRequestHeadersParameters
   >;
 
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @post
   @doc("This action checks if the recovery orchestration plan is eligible for test failover operation, ensuring it meets the necessary criteria and provides a list of qualified and unqualified resources.")
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   validateForTestFailover is ArmResourceActionAsync<
@@ -204,10 +204,10 @@ interface RecoveryPlanActionsOld {
     ServiceGroupAndRequestHeadersParameters
   >;
 
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @post
   @doc("This action checks if the recovery orchestration plan is eligible for test failover cleanup operation, ensuring it meets the necessary criteria and provides a list of qualified and unqualified resources.")
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   validateForTestFailoverCleanup is ArmResourceActionAsync<
@@ -217,13 +217,13 @@ interface RecoveryPlanActionsOld {
     ServiceGroupAndRequestHeadersParameters
   >;
 
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @post
   @doc("This action checks if the recovery orchestration plan is eligible for reprotect operation, ensuring it meets the necessary criteria and provides a list of qualified and unqualified resources.")
   @removed(Versions.v2026_03_01_preview)
   @renamedFrom(Versions.v2026_03_01_preview, "validateForReprotect")
   @sharedRoute
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   validateForReprotectOld is ArmResourceActionAsync<
     RecoveryPlan,
@@ -232,12 +232,12 @@ interface RecoveryPlanActionsOld {
     ServiceGroupAndRequestHeadersParameters
   >;
 
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @post
   @doc("This action checks if the recovery orchestration plan is eligible for reprotect operation, ensuring it meets the necessary criteria and provides a list of qualified and unqualified resources.")
   @added(Versions.v2026_03_01_preview)
   @sharedRoute
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   validateForReprotect is ArmResourceActionAsync<
     RecoveryPlan,
@@ -247,10 +247,10 @@ interface RecoveryPlanActionsOld {
     OptionalRequestBody = true
   >;
 
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @post
   @doc("This action performs the necessary readiness check on the recovery orchestration plan to ensure it is in the desired state and eligible for all recovery actions, including all protected resources.")
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   checkReadiness is ArmResourceActionAsync<
@@ -263,10 +263,10 @@ interface RecoveryPlanActionsOld {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @post
   @doc("This action triggers the failover operation on the recovery orchestration plan for the qualified resources.")
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   failover is ArmResourceActionAsync<
@@ -276,10 +276,10 @@ interface RecoveryPlanActionsOld {
     ServiceGroupAndRequestHeadersParameters
   >;
 
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @post
   @doc("This action triggers the failover commit operation on the recovery orchestration plan for the qualified resources.")
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   failoverCommit is ArmResourceActionAsync<
@@ -289,13 +289,13 @@ interface RecoveryPlanActionsOld {
     ServiceGroupAndRequestHeadersParameters
   >;
 
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @post
   @doc("This action triggers the reprotect operation on the recovery orchestration plan for the qualified resources.")
   @removed(Versions.v2026_03_01_preview)
   @renamedFrom(Versions.v2026_03_01_preview, "reprotect")
   @sharedRoute
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   reprotectOld is ArmResourceActionAsync<
     RecoveryPlan,
@@ -304,12 +304,12 @@ interface RecoveryPlanActionsOld {
     ServiceGroupAndRequestHeadersParameters
   >;
 
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @post
   @doc("This action triggers the reprotect operation on the recovery orchestration plan for the qualified resources.")
   @added(Versions.v2026_03_01_preview)
   @sharedRoute
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   reprotect is ArmResourceActionAsync<
     RecoveryPlan,
@@ -319,10 +319,10 @@ interface RecoveryPlanActionsOld {
     OptionalRequestBody = true
   >;
 
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @post
   @doc("This action triggers the test failover operation on the recovery orchestration plan for the qualified resources.")
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   testFailover is ArmResourceActionAsync<
@@ -332,10 +332,10 @@ interface RecoveryPlanActionsOld {
     ServiceGroupAndRequestHeadersParameters
   >;
 
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @post
   @doc("This action triggers the test failover cleanup operation on the recovery orchestration plan for the qualified resources.")
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   testFailoverCleanup is ArmResourceActionAsync<
@@ -427,7 +427,6 @@ interface RecoveryPlanActions {
     ServiceGroupAndRequestHeadersParameters
   >;
 
-
   @route(ServiceGroupRoute)
   @post
   @doc("This action checks if the recovery orchestration plan is eligible for reprotect operation, ensuring it meets the necessary criteria and provides a list of qualified and unqualified resources.")
@@ -476,7 +475,6 @@ interface RecoveryPlanActions {
     ServiceGroupAndRequestHeadersParameters
   >;
 
-
   @route(ServiceGroupRoute)
   @post
   @doc("This action triggers the reprotect operation on the recovery orchestration plan for the qualified resources.")
@@ -519,14 +517,14 @@ interface RecoveryPlanActions {
 interface RecoveryResourcesOld {
   // ONLY Get and List are exposed to the user.
 
-  @route(ServiceGroupRoute)
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  @route(ServiceGroupRoute)
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   get is ArmResourceRead<RecoveryResource, ServiceGroupParameters>;
 
-  @route(ServiceGroupRoute)
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  @route(ServiceGroupRoute)
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   list is ArmResourceListByParent<RecoveryResource, ServiceGroupParameters>;
@@ -552,25 +550,25 @@ interface RecoveryResources {
 @removed(Versions.v2026_09_30_preview)
 @renamedFrom(Versions.v2026_09_30_preview, "RecoveryJobs")
 interface RecoveryJobsOld {
-  @route(ServiceGroupRoute)
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  @route(ServiceGroupRoute)
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   get is ArmResourceRead<RecoveryJob, ServiceGroupParameters>;
 
-  @route(ServiceGroupRoute)
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  @route(ServiceGroupRoute)
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   list is ArmResourceListByParent<RecoveryJob, ServiceGroupParameters>;
 
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @post
   @doc("This action attempts to cancel the ongoing recovery orchestration job.")
   @removed(Versions.v2026_03_01_preview)
   @renamedFrom(Versions.v2026_03_01_preview, "cancel")
   @sharedRoute
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   cancelOld is ArmResourceActionAsync<
     RecoveryJob,
@@ -579,12 +577,12 @@ interface RecoveryJobsOld {
     ServiceGroupAndRequestHeadersParameters
   >;
 
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @post
   @doc("This action attempts to cancel the ongoing recovery orchestration job.")
   @added(Versions.v2026_03_01_preview)
   @sharedRoute
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   cancel is ArmResourceActionAsync<
     RecoveryJob,
@@ -593,13 +591,13 @@ interface RecoveryJobsOld {
     ServiceGroupAndRequestHeadersParameters
   >;
 
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @post
   @doc("This action resumes the ongoing recovery orchestration job that was paused for required user intervention.")
   @removed(Versions.v2026_03_01_preview)
   @renamedFrom(Versions.v2026_03_01_preview, "resume")
   @sharedRoute
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   resumeOld is ArmResourceActionAsync<
     RecoveryJob,
@@ -608,12 +606,12 @@ interface RecoveryJobsOld {
     ServiceGroupAndRequestHeadersParameters
   >;
 
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @post
   @doc("This action resumes the ongoing recovery orchestration job that was paused for required user intervention.")
   @added(Versions.v2026_03_01_preview)
   @sharedRoute
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   resume is ArmResourceActionAsync<
     RecoveryJob,
@@ -622,10 +620,10 @@ interface RecoveryJobsOld {
     ServiceGroupAndRequestHeadersParameters
   >;
 
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @post
   @doc("This action retries the ongoing recovery orchestration job for resources that failed in previous attempts.")
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   retry is ArmResourceActionAsync<
@@ -648,7 +646,6 @@ interface RecoveryJobs {
   @sharedRoute
   list is ArmResourceListByParent<RecoveryJob, ServiceGroupParameters>;
 
-
   @route(ServiceGroupRoute)
   @post
   @doc("This action attempts to cancel the ongoing recovery orchestration job.")
@@ -659,7 +656,6 @@ interface RecoveryJobs {
     ArmResponse<Azure.ResourceManager.ErrorResponse>,
     ServiceGroupAndRequestHeadersParameters
   >;
-
 
   @route(ServiceGroupRoute)
   @post
@@ -706,14 +702,14 @@ interface RecoveryChildJobs {
 @removed(Versions.v2026_09_30_preview)
 @renamedFrom(Versions.v2026_09_30_preview, "RecoveryJobResources")
 interface RecoveryJobResourcesOld {
-  @route(ServiceGroupRoute)
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  @route(ServiceGroupRoute)
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   get is ArmResourceRead<RecoveryJobResource, ServiceGroupParameters>;
 
-  @route(ServiceGroupRoute)
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  @route(ServiceGroupRoute)
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   list is ArmResourceListByParent<RecoveryJobResource, ServiceGroupParameters>;

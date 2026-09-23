@@ -23,14 +23,14 @@ namespace Microsoft.AzureResilienceManagement;
 interface DrillResourcesOld {
   // ONLY Get and List are exposed to the user.
 
-  @route(ServiceGroupRoute)
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  @route(ServiceGroupRoute)
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   get is ArmResourceRead<DrillResource, ServiceGroupParameters>;
 
-  @route(ServiceGroupRoute)
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  @route(ServiceGroupRoute)
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   list is ArmResourceListByParent<DrillResource, ServiceGroupTenantParameters>;

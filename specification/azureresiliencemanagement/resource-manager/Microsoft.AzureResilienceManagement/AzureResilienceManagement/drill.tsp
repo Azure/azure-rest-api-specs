@@ -21,22 +21,22 @@ namespace Microsoft.AzureResilienceManagement;
 @removed(Versions.v2026_09_30_preview)
 @renamedFrom(Versions.v2026_09_30_preview, "Drills")
 interface DrillsOld {
-  @route(ServiceGroupRoute)
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  @route(ServiceGroupRoute)
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   get is ArmResourceRead<Drill, ServiceGroupParameters>;
 
-  @route(ServiceGroupRoute)
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  @route(ServiceGroupRoute)
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   create is ArmResourceCreateOrReplaceAsync<Drill, ServiceGroupParameters>;
 
   #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @patch(#{ implicitOptionality: true })
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   update is ArmCustomPatchAsync<
@@ -51,14 +51,14 @@ interface DrillsOld {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  @route(ServiceGroupRoute)
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  @route(ServiceGroupRoute)
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   delete is ArmResourceDeleteWithoutOkAsync<Drill, ServiceGroupParameters>;
 
-  @route(ServiceGroupRoute)
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  @route(ServiceGroupRoute)
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   list is ArmResourceListByParent<Drill, ServiceGroupTenantParameters>;
@@ -66,12 +66,12 @@ interface DrillsOld {
   /**
   POST Actions
   */
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @added(Versions.v2026_03_01_preview)
   @armResourceAction(Drill)
   @post
   @doc("This returns eligible resource to be faulted or failed over.")
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   validateForExecution is ArmResourceActionAsync<
@@ -87,11 +87,11 @@ interface DrillsOld {
   /**
   POST Actions
   */
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @armResourceAction(Drill)
   @post
   @doc("This starts a new running instance of the Drill.")
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   start is ArmResourceActionAsync<
@@ -104,11 +104,11 @@ interface DrillsOld {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @armResourceAction(Drill)
   @post
   @doc("This ends the currently running instance of the Drill.")
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   end is ArmResourceActionAsync<
@@ -121,6 +121,7 @@ interface DrillsOld {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @removed(Versions.v2026_04_01_preview)
   @renamedFrom(Versions.v2026_04_01_preview, "addOrUpdateResources")
@@ -128,7 +129,6 @@ interface DrillsOld {
   @armResourceAction(Drill)
   @post
   @doc("This enables the user to include, exclude or update resources from their Drill.")
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   addOrUpdateResourcesOld is ArmResourceActionAsync<
     Drill,
@@ -141,13 +141,13 @@ interface DrillsOld {
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Per Azure REST API guidelines and the Spectral PostResponseCodes rule, LRO POST operations with no final body must return 202 + 204 + default. This TSP ARM library rule conflicts with that requirement; we follow the official guideline."
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @added(Versions.v2026_04_01_preview)
   @sharedRoute
   @armResourceAction(Drill)
   @post
   @doc("This enables the user to include, exclude or update resources from their Drill.")
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   addOrUpdateResources is ArmResourceActionAsync<
     Drill,
@@ -160,12 +160,12 @@ interface DrillsOld {
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Per Azure REST API guidelines and the Spectral PostResponseCodes rule, LRO POST operations with no final body must return 202 + 204 + default. This TSP ARM library rule conflicts with that requirement; we follow the official guideline."
+  #deprecated "The refreshReadinessState operation is deprecated. Use Drills_ResyncReadinessCheck with API version 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @removed(Versions.v2026_04_01_preview)
   @armResourceAction(Drill)
   @post
   @doc("This triggers detection of any drifts from the desired state of Resources and RBAC.")
-  #deprecated "The refreshReadinessState operation is deprecated. Use Drills_ResyncReadinessCheck with API version 2026-09-30-preview or a later supported API version."
   @summary("Deprecated. Use Drills_ResyncReadinessCheck in 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   refreshReadinessState is ArmResourceActionAsync<
@@ -179,12 +179,12 @@ interface DrillsOld {
   >;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Per Azure REST API guidelines and the Spectral PostResponseCodes rule, LRO POST operations with no final body must return 202 + 204 + default. This TSP ARM library rule conflicts with that requirement; we follow the official guideline."
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @added(Versions.v2026_03_01_preview)
   @armResourceAction(Drill)
   @post
   @doc("This triggers detection of any drifts from the desired state of Resources and RBAC.")
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   resyncReadinessCheck is ArmResourceActionAsync<
@@ -284,7 +284,6 @@ interface Drills {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Per Azure REST API guidelines and the Spectral PostResponseCodes rule, LRO POST operations with no final body must return 202 + 204 + default. This TSP ARM library rule conflicts with that requirement; we follow the official guideline."
   @route(ServiceGroupRoute)
   @sharedRoute
@@ -300,7 +299,6 @@ interface Drills {
       ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;
-
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Per Azure REST API guidelines and the Spectral PostResponseCodes rule, LRO POST operations with no final body must return 202 + 204 + default. This TSP ARM library rule conflicts with that requirement; we follow the official guideline."
   @route(ServiceGroupRoute)

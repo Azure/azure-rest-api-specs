@@ -21,14 +21,14 @@ namespace Microsoft.AzureResilienceManagement;
 @removed(Versions.v2026_09_30_preview)
 @renamedFrom(Versions.v2026_09_30_preview, "GoalAssignments")
 interface GoalAssignmentsOld {
-  @route(ServiceGroupRoute)
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  @route(ServiceGroupRoute)
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   get is ArmResourceRead<GoalAssignment, ServiceGroupParameters>;
 
-  @route(ServiceGroupRoute)
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  @route(ServiceGroupRoute)
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -39,8 +39,8 @@ interface GoalAssignmentsOld {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  @route(ServiceGroupRoute)
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  @route(ServiceGroupRoute)
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   update is ArmResourcePatchAsync<
@@ -52,11 +52,11 @@ interface GoalAssignmentsOld {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @doc("Action to exclude a resource from goal assignment.")
   @route(ServiceGroupRoute)
   @TypeSpec.Rest.action("updateGoalResources")
   @post
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   updateGoalResources is ArmResourceActionAsync<
@@ -69,11 +69,11 @@ interface GoalAssignmentsOld {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @doc("Refreshes the goal resources under a goal assignment. This operation scans for new resources under the scope of the assignment.")
   @route(ServiceGroupRoute)
   @TypeSpec.Rest.action("refreshGoalResources")
   @post
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   refreshGoalResources is ArmResourceActionAsync<
@@ -86,8 +86,8 @@ interface GoalAssignmentsOld {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  @route(ServiceGroupRoute)
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  @route(ServiceGroupRoute)
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -98,12 +98,12 @@ interface GoalAssignmentsOld {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @added(Versions.v2026_03_01_preview)
   @doc("Recommends capacity improvements for resources under the goal assignments scope. Returns AI-powered capacity assessments and recommendations.")
   @route(ServiceGroupRoute)
   @TypeSpec.Rest.action("recommendCapacity")
   @post
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   recommendCapacity is ArmResourceActionAsync<
@@ -116,8 +116,8 @@ interface GoalAssignmentsOld {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  @route(ServiceGroupRoute)
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  @route(ServiceGroupRoute)
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   list is ArmResourceListByParent<GoalAssignment, ServiceGroupTenantParameters>;
@@ -262,14 +262,14 @@ interface GoalTemplates {
 @removed(Versions.v2026_09_30_preview)
 @renamedFrom(Versions.v2026_09_30_preview, "GoalResources")
 interface GoalResourcesOld {
-  @route(ServiceGroupRoute)
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  @route(ServiceGroupRoute)
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   get is ArmResourceRead<GoalResource, ServiceGroupParameters>;
 
-  @route(ServiceGroupRoute)
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  @route(ServiceGroupRoute)
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   list is ArmResourceListByParent<GoalResource, ServiceGroupTenantParameters>;

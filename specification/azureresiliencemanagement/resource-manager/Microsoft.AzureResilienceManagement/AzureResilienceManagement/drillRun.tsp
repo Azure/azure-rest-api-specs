@@ -23,14 +23,14 @@ namespace Microsoft.AzureResilienceManagement;
 interface DrillRunsOld {
   // ONLY Get and POST actions are exposed to the user.
 
-  @route(ServiceGroupRoute)
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  @route(ServiceGroupRoute)
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   get is ArmResourceRead<DrillRun, ServiceGroupParameters>;
 
-  @route(ServiceGroupRoute)
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  @route(ServiceGroupRoute)
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   list is ArmResourceListByParent<DrillRun, ServiceGroupParameters>;
@@ -38,6 +38,7 @@ interface DrillRunsOld {
   /**
   POST Actions
   */
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @removed(Versions.v2026_06_01_preview)
   @renamedFrom(Versions.v2026_06_01_preview, "failOver")
@@ -45,7 +46,6 @@ interface DrillRunsOld {
   @armResourceAction(DrillRun)
   @post
   @doc("This initiates a new Failover operation on this Drill Run.")
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   failOverOld is ArmResourceActionAsync<
     DrillRun,
@@ -57,13 +57,13 @@ interface DrillRunsOld {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @added(Versions.v2026_06_01_preview)
   @sharedRoute
   @armResourceAction(DrillRun)
   @post
   @doc("This initiates a new Failover operation on this Drill Run.")
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   failOver is ArmResourceActionAsync<
     DrillRun,
@@ -76,12 +76,12 @@ interface DrillRunsOld {
     OptionalRequestBody = true
   >;
 
+  #deprecated "The testFailOver operation is deprecated and has no direct replacement in 2026-09-30-preview. Clients must stop calling this operation."
   @route(ServiceGroupRoute)
   @removed(Versions.v2026_04_01_preview)
   @armResourceAction(DrillRun)
   @post
   @doc("This initiates a new Test-Failover operation on this Drill Run.")
-  #deprecated "The testFailOver operation is deprecated and has no direct replacement in 2026-09-30-preview. Clients must stop calling this operation."
   @summary("Deprecated with no direct replacement in 2026-09-30-preview.")
   @sharedRoute
   testFailOver is ArmResourceActionAsync<
@@ -94,12 +94,12 @@ interface DrillRunsOld {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  #deprecated "The testFailOverCleanup operation is deprecated and has no direct replacement in 2026-09-30-preview. Clients must stop calling this operation."
   @route(ServiceGroupRoute)
   @removed(Versions.v2026_04_01_preview)
   @armResourceAction(DrillRun)
   @post
   @doc("This initiates a new Test-Failover Cleanup operation on this Drill Run.")
-  #deprecated "The testFailOverCleanup operation is deprecated and has no direct replacement in 2026-09-30-preview. Clients must stop calling this operation."
   @summary("Deprecated with no direct replacement in 2026-09-30-preview.")
   @sharedRoute
   testFailOverCleanup is ArmResourceActionAsync<
@@ -112,6 +112,7 @@ interface DrillRunsOld {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @removed(Versions.v2026_06_01_preview)
   @renamedFrom(Versions.v2026_06_01_preview, "reprotect")
@@ -119,7 +120,6 @@ interface DrillRunsOld {
   @armResourceAction(DrillRun)
   @post
   @doc("This initiates a new Reprotect operation on this Drill Run.")
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   reprotectOld is ArmResourceActionAsync<
     DrillRun,
@@ -131,13 +131,13 @@ interface DrillRunsOld {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @added(Versions.v2026_06_01_preview)
   @sharedRoute
   @armResourceAction(DrillRun)
   @post
   @doc("This initiates a new Reprotect operation on this Drill Run.")
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   reprotect is ArmResourceActionAsync<
     DrillRun,
@@ -150,11 +150,11 @@ interface DrillRunsOld {
     OptionalRequestBody = true
   >;
 
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @armResourceAction(DrillRun)
   @post
   @doc("This enables the user to add notes on this Drill Run.")
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   addNotes is ArmResourceActionAsync<
@@ -167,11 +167,11 @@ interface DrillRunsOld {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @armResourceAction(DrillRun)
   @post
   @doc("This unblocks a Failover workflow that is paused after the Fault stage, to proceed to the Failover stage.")
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   resume is ArmResourceActionAsync<
@@ -184,11 +184,11 @@ interface DrillRunsOld {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @armResourceAction(DrillRun)
   @post
   @doc("This enables the user to mark this stage as complete, disabling further retries on it.")
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   markAsComplete is ArmResourceActionAsync<
@@ -201,12 +201,12 @@ interface DrillRunsOld {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @added(Versions.v2026_08_31_preview)
   @armResourceAction(DrillRun)
   @post
   @doc("This generates, or regenerates, the report for this Drill Run. The action is idempotent and is safe to call at any time: a call that arrives while a generation is already running joins it, and a call made after a failed attempt retries it. A report that has been finalized is never regenerated.")
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   generateReport is ArmResourceActionAsync<
@@ -219,12 +219,12 @@ interface DrillRunsOld {
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @route(ServiceGroupRoute)
   @added(Versions.v2026_08_31_preview)
   @armResourceAction(DrillRun)
   @post
   @doc("This returns a short-lived, read-only URL to download the report for this Drill Run. The URL expires at the returned expiryTimestamp and grants access to that single report only.")
-  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   listReportDownloadUrl is ArmResourceActionAsync<
@@ -251,7 +251,6 @@ interface DrillRuns {
   @sharedRoute
   list is ArmResourceListByParent<DrillRun, ServiceGroupParameters>;
 
-
   @route(ServiceGroupRoute)
   @sharedRoute
   @armResourceAction(DrillRun)
@@ -267,9 +266,6 @@ interface DrillRuns {
       Azure.Core.Foundations.RetryAfterHeader,
     OptionalRequestBody = true
   >;
-
-
-
 
   @route(ServiceGroupRoute)
   @sharedRoute
@@ -367,13 +363,13 @@ interface DrillRuns {
 @doc("Operations for managing Drill Run child jobs.")
 @removed(Versions.v2026_04_01_preview)
 interface DrillRunChildJobs {
-  @route(ServiceGroupRoute)
   #deprecated "DrillRunChildJob operations are deprecated and removed in 2026-04-01-preview. They have no direct replacement in 2026-09-30-preview."
+  @route(ServiceGroupRoute)
   @summary("Deprecated with no direct replacement in 2026-09-30-preview.")
   get is ArmResourceRead<DrillRunChildJob, ServiceGroupParameters>;
 
-  @route(ServiceGroupRoute)
   #deprecated "DrillRunChildJob operations are deprecated and removed in 2026-04-01-preview. They have no direct replacement in 2026-09-30-preview."
+  @route(ServiceGroupRoute)
   @summary("Deprecated with no direct replacement in 2026-09-30-preview.")
   list is ArmResourceListByParent<DrillRunChildJob, ServiceGroupParameters>;
 }
@@ -383,14 +379,14 @@ interface DrillRunChildJobs {
 @removed(Versions.v2026_09_30_preview)
 @renamedFrom(Versions.v2026_09_30_preview, "DrillRunResources")
 interface DrillRunResourcesOld {
-  @route(ServiceGroupRoute)
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  @route(ServiceGroupRoute)
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   get is ArmResourceRead<DrillRunResource, ServiceGroupParameters>;
 
-  @route(ServiceGroupRoute)
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  @route(ServiceGroupRoute)
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   list is ArmResourceListByParent<DrillRunResource, ServiceGroupParameters>;
@@ -413,13 +409,13 @@ interface DrillRunResources {
 @doc("Operations for managing Chaos jobs.")
 @removed(Versions.v2026_04_01_preview)
 interface ChaosJobs {
-  @route(ServiceGroupRoute)
   #deprecated "ChaosJob operations are deprecated and removed in 2026-04-01-preview. They have no direct replacement in 2026-09-30-preview."
+  @route(ServiceGroupRoute)
   @summary("Deprecated with no direct replacement in 2026-09-30-preview.")
   get is ArmResourceRead<ChaosJob, ServiceGroupParameters>;
 
-  @route(ServiceGroupRoute)
   #deprecated "ChaosJob operations are deprecated and removed in 2026-04-01-preview. They have no direct replacement in 2026-09-30-preview."
+  @route(ServiceGroupRoute)
   @summary("Deprecated with no direct replacement in 2026-09-30-preview.")
   list is ArmResourceListByParent<ChaosJob, ServiceGroupParameters>;
 }
@@ -428,13 +424,13 @@ interface ChaosJobs {
 @doc("Operations for managing Chaos job resources.")
 @removed(Versions.v2026_04_01_preview)
 interface ChaosJobResources {
-  @route(ServiceGroupRoute)
   #deprecated "ChaosJobResource operations are deprecated and removed in 2026-04-01-preview. They have no direct replacement in 2026-09-30-preview."
+  @route(ServiceGroupRoute)
   @summary("Deprecated with no direct replacement in 2026-09-30-preview.")
   get is ArmResourceRead<ChaosJobResource, ServiceGroupParameters>;
 
-  @route(ServiceGroupRoute)
   #deprecated "ChaosJobResource operations are deprecated and removed in 2026-04-01-preview. They have no direct replacement in 2026-09-30-preview."
+  @route(ServiceGroupRoute)
   @summary("Deprecated with no direct replacement in 2026-09-30-preview.")
   list is ArmResourceListByParent<ChaosJobResource, ServiceGroupParameters>;
 }
@@ -443,13 +439,13 @@ interface ChaosJobResources {
 @doc("Operations for managing Chaos job child job.")
 @removed(Versions.v2026_04_01_preview)
 interface ChaosJobChildJobs {
-  @route(ServiceGroupRoute)
   #deprecated "ChaosJobChildJob operations are deprecated and removed in 2026-04-01-preview. They have no direct replacement in 2026-09-30-preview."
+  @route(ServiceGroupRoute)
   @summary("Deprecated with no direct replacement in 2026-09-30-preview.")
   get is ArmResourceRead<ChaosJobChildJob, ServiceGroupParameters>;
 
-  @route(ServiceGroupRoute)
   #deprecated "ChaosJobChildJob operations are deprecated and removed in 2026-04-01-preview. They have no direct replacement in 2026-09-30-preview."
+  @route(ServiceGroupRoute)
   @summary("Deprecated with no direct replacement in 2026-09-30-preview.")
   list is ArmResourceListByParent<ChaosJobChildJob, ServiceGroupParameters>;
 }
