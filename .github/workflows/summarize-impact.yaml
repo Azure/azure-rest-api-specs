@@ -23,13 +23,24 @@ jobs:
       - name: Checkout 'after' state
         uses: actions/checkout@v7
         with:
-          fetch-depth: 2
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
           path: after
+
+      - name: Find PR merge base
+        id: merge-base
+        working-directory: after
+        shell: bash
+        run: |
+          merge_base=$(git merge-base "$BASE_SHA" HEAD)
+          echo "sha=$merge_base" >> "$GITHUB_OUTPUT"
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
 
       - name: Checkout 'before' state
         uses: actions/checkout@v7
         with:
-          ref: ${{ github.event.pull_request.base.sha }}
+          ref: ${{ steps.merge-base.outputs.sha }}
           path: before
 
       - name: Setup Node and install deps

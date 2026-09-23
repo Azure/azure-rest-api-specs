@@ -8,9 +8,8 @@
   },
   "scripts": {
     "build": "tsc --noEmit",
-    "format": "prettier . --ignore-path ../.prettierignore --write",
-    "format:check": "prettier . --ignore-path ../.prettierignore --check",
-    "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
+    "format": "oxfmt . --write",
+    "format:check": "oxfmt . --check",
     "test": "vitest",
     "test:ci": "vitest run --coverage --reporter=verbose"
   },
@@ -18,19 +17,14 @@
     "node": ">=24.14.1"
   },
   "dependencies": {
-    "@actions/core": "^3.0.0",
+    "@actions/core": "catalog:",
     "@azure-tools/specs-shared": "workspace:*",
     "@azure-tools/suppressions": "workspace:*",
-    "@azure/oad": "0.12.4",
+    "@azure/oad": "catalog:",
     "simple-git": "catalog:"
   },
   "devDependencies": {
-    "@types/node": "catalog:",
-    "@vitest/coverage-v8": "catalog:",
-    "prettier": "catalog:",
-    "prettier-plugin-organize-imports": "catalog:",
-    "typescript": "catalog:",
-    "vitest": "catalog:"
+    "@types/node": "catalog:"
   },
   "version": "0.0.0"
 }
