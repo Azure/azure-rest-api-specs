@@ -58,8 +58,11 @@ downstream SDK repositories, avoid back-and-forth across repos and stages
 The `SDK breaking change mitigation` workflow then:
 
 - Applies TypeSpec client customizations for breaking changes that can be mitigated.
-- Creates a pull request containing the proposed customizations.
-- Posts the mitigation results to the pull request, as shown in the following example:
+- Publishes the mitigation result artifact.
+
+2. When mitigation completes successfully, the
+   `SDK Breaking Change Mitigation - Publish Results` workflow posts the mitigation results to the
+   pull request, as shown in the following example:
 
 ```markdown
 ## SDK breaking-change mitigation result
@@ -76,7 +79,8 @@ The `SDK breaking change mitigation` workflow then:
 **Mitigation pull request:** https://github.com/chunyu3/azure-rest-api-specs/pull/59
 ```
 
-2. The specification owner reviews the mitigation pull request and applies the proposed customization for each breaking change they want to resolve. Breaking changes that are intentional and accepted must be suppressed.
+3. The specification owner reviews the proposed customization for each breaking change they want
+   to resolve. Breaking changes that are intentional and accepted must be suppressed.
 
 ### Approval
 

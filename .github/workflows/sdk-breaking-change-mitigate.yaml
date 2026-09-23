@@ -13,10 +13,8 @@ on:
 
 permissions:
   actions: read
-  contents: write
+  contents: read
   copilot-requests: write
-  issues: write
-  pull-requests: write
 
 jobs:
   resolve-trigger:
@@ -313,21 +311,3 @@ jobs:
               echo "No mitigation changes were produced."
             fi
           } >> "$GITHUB_STEP_SUMMARY"
-
-      - name: Surface mitigation result on pull request
-        uses: actions/github-script@v9
-        env:
-          WORKFLOW_SUMMARY_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}#summary-${{ job.check_run_id }}
-          MITIGATION_RESULT_PATH: ${{ runner.temp }}/published-mitigation-results/sdk-breaking-change-mitigation.json
-        with:
-          github-token: ${{ github.token }}
-          script: |
-            const { publishMitigationResult } =
-              await import('${{ github.workspace }}/repositories/workflow-repository/.github/workflows/src/sdk-breaking-change/publish-mitigation-result.ts');
-            await publishMitigationResult({
-              github,
-              context,
-              core,
-              mitigationResultPath: process.env.MITIGATION_RESULT_PATH,
-              workflowSummaryUrl: process.env.WORKFLOW_SUMMARY_URL,
-            });
