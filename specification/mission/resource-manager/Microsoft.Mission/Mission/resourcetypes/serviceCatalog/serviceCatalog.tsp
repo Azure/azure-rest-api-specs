@@ -1,10 +1,12 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
 
 using Azure.Core;
 using Azure.ResourceManager;
+using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 
@@ -95,6 +97,8 @@ model ServiceCatalogResource is TrackedResource<ServiceCatalogProperties> {
   @key("serviceCatalogName")
   @segment("serviceCatalogs")
   @pattern("^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]$")
+  @path
   @doc("The name of the Service Catalog resource.")
+  @visibility(Lifecycle.Read)
   name: string;
 }
