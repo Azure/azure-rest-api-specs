@@ -4,7 +4,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import {
   resolveAnalysisTrigger,
   resolveChangedTypeSpecConfigPaths,
-  resolveChangedTypeSpecProjects,
+  resolveChangedTypeSpecConfigPathsFromPullRequest,
   resolveSdkLanguageConfig,
   validateAnalysisSource,
 } from "../../src/sdk-breaking-change/resolve-analysis-inputs.ts";
@@ -266,14 +266,11 @@ describe("resolveChangedTypeSpecConfigPaths", () => {
   });
 });
 
-describe("resolveChangedTypeSpecProjects", () => {
+describe("resolveChangedTypeSpecConfigPathsFromPullRequest", () => {
   it("reads all pull request files and sets the config path output", async () => {
-    const repositoryPath = createRepository();
     const github = createMockGithub();
     const context = createMockContext();
     const core = createMockCore();
-    vi.stubEnv("PR_NUMBER", "42");
-    vi.stubEnv("SPEC_REPOSITORY_PATH", repositoryPath);
     const listFiles = vi.fn().mockResolvedValue({
       data: [
         {
@@ -283,15 +280,36 @@ describe("resolveChangedTypeSpecProjects", () => {
       ],
     });
     Object.assign(github.rest.pulls, { listFiles });
+    github.rest.repos.getContent
+      .mockRejectedValueOnce(Object.assign(new Error("Not Found"), { status: 404 }))
+      .mockResolvedValueOnce({ data: { type: "file" } });
 
-    await expect(resolveChangedTypeSpecProjects({ github, context, core })).resolves.toEqual([
-      "specification/service/Widget.Service/tspconfig.yaml",
-    ]);
+    await expect(
+      resolveChangedTypeSpecConfigPathsFromPullRequest({
+        github,
+        context,
+        core,
+        pullNumber: 42,
+        headSha: "a".repeat(40),
+      }),
+    ).resolves.toEqual(["specification/service/Widget.Service/tspconfig.yaml"]);
     expect(listFiles).toHaveBeenCalledWith({
       owner: "owner",
       repo: "repo",
       pull_number: 42,
       per_page: 100,
+    });
+    expect(github.rest.repos.getContent).toHaveBeenNthCalledWith(1, {
+      owner: "owner",
+      repo: "repo",
+      path: "specification/service/Widget.Service/new/tspconfig.yaml",
+      ref: "a".repeat(40),
+    });
+    expect(github.rest.repos.getContent).toHaveBeenNthCalledWith(2, {
+      owner: "owner",
+      repo: "repo",
+      path: "specification/service/Widget.Service/tspconfig.yaml",
+      ref: "a".repeat(40),
     });
     expect(core.setOutput).toHaveBeenCalledWith(
       "tsp-config-paths",

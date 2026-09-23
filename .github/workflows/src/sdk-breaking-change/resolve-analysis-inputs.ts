@@ -69,6 +69,12 @@ export async function resolveAnalysisTrigger({
     core.setOutput("sdk-language", context.payload.inputs?.sdk_language);
     core.setOutput("sdk-repository", languageConfig.repository);
     core.setOutput("should-run", "true");
+    resolveChangedTypeSpecConfigPathsFromPullRequest({
+      github,
+      context,
+      core,
+      pullNumber
+    });
     return;
   }
 
@@ -139,6 +145,12 @@ export async function resolveAnalysisTrigger({
   core.setOutput("sdk-language", language);
   core.setOutput("sdk-repository", languageConfig.repository);
   core.setOutput("should-run", labelArtifact.labelValue);
+  resolveChangedTypeSpecConfigPathsFromPullRequest({
+    github,
+    context,
+    core,
+    pullNumber: pullNumber
+  });
 }
 
 export function resolveSdkLanguageConfig(input: string | undefined): SdkLanguageConfig {
@@ -218,18 +230,24 @@ export function resolveChangedTypeSpecConfigPaths(
   return [...configPaths].sort();
 }
 
-export async function resolveChangedTypeSpecProjects({
+export async function resolveChangedTypeSpecConfigPathsFromPullRequest({
   github,
   context,
   core,
-}: Pick<AsyncFunctionArguments, "github" | "context" | "core">): Promise<string[]> {
-  const pullNumber = Number(process.env.PR_NUMBER);
-  const repositoryPath = process.env.SPEC_REPOSITORY_PATH;
+  pullNumber
+}: Pick<AsyncFunctionArguments, "github" | "context" | "core"> & {
+  pullNumber: number;
+}): Promise<string[]> {
   if (!Number.isSafeInteger(pullNumber) || pullNumber <= 0) {
-    throw new Error(`Invalid pull request number: ${process.env.PR_NUMBER}`);
+    throw new Error(`Invalid pull request number: ${pullNumber}`);
   }
-  if (!repositoryPath) {
-    throw new Error("SPEC_REPOSITORY_PATH is required.");
+  const { data: pull } = await github.rest.pulls.get({
+      ...context.repo,
+      pull_number: pullNumber,
+    });
+  const headSha = pull.head.sha;
+  if (!headSha || !/^[0-9a-f]{40}$/i.test(headSha)) {
+    throw new Error(`Invalid HEAD_SHA: ${headSha}`);
   }
 
   const files: PullRequestFile[] = await github.paginate(github.rest.pulls.listFiles, {
@@ -240,12 +258,46 @@ export async function resolveChangedTypeSpecProjects({
   const changedFiles = files.flatMap(({ filename, previous_filename }) =>
     [filename, previous_filename].filter((path): path is string => path !== undefined),
   );
-  const configPaths = resolveChangedTypeSpecConfigPaths(repositoryPath, changedFiles);
+  const configPaths = new Set<string>();
+  for (const changedFile of changedFiles) {
+    const normalizedPath = changedFile.replaceAll("\\", "/");
+    if (!normalizedPath.endsWith(".tsp") && !normalizedPath.endsWith("/tspconfig.yaml")) {
+      continue;
+    }
 
-  if (configPaths.length === 0) {
+    validateRepositoryPath(normalizedPath);
+    let directory = dirname(normalizedPath).replaceAll("\\", "/");
+    const belongsToKnownProject = [...configPaths].some((configPath) => {
+      const projectDirectory = dirname(configPath).replaceAll("\\", "/");
+      return directory === projectDirectory || directory.startsWith(`${projectDirectory}/`);
+    });
+    if (belongsToKnownProject) {
+      continue;
+    }
+    while (directory.startsWith("specification/")) {
+      const configPath = `${directory}/tspconfig.yaml`;
+      try {
+        await github.rest.repos.getContent({
+          ...context.repo,
+          path: configPath,
+          ref: headSha,
+        });
+        configPaths.add(configPath);
+        break;
+      } catch (error) {
+        if (!(error instanceof Error && "status" in error && error.status === 404)) {
+          throw error;
+        }
+      }
+      directory = dirname(directory).replaceAll("\\", "/");
+    }
+  }
+
+  if (configPaths.size === 0) {
     throw new Error("No tspconfig.yaml could be resolved from the changed TypeSpec files.");
   }
 
-  core.setOutput("tsp-config-paths", JSON.stringify(configPaths));
-  return configPaths;
+  const sortedConfigPaths = [...configPaths].sort();
+  core.setOutput("tsp-config-paths", JSON.stringify(sortedConfigPaths));
+  return sortedConfigPaths;
 }
