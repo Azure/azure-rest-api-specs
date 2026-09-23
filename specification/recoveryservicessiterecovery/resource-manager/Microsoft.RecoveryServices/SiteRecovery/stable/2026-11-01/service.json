@@ -3529,6 +3529,9 @@
           "Enables protection for an A2A confidential VM with CMK disk encryption.": {
             "$ref": "./examples/ReplicationProtectedItems_Create_A2ACvm.json"
           },
+          "Enables protection for an InMage RCM VM in an extended location.": {
+            "$ref": "./examples/ReplicationProtectedItems_Create_InMageRcmEdgeZone.json"
+          },
           "Enables protection.": {
             "$ref": "./examples/ReplicationProtectedItems_Create.json"
           }
@@ -20083,6 +20086,10 @@
         "targetCapacityReservationGroupId": {
           "type": "string",
           "description": "The target capacity reservation group ARM Id."
+        },
+        "targetExtendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The target extended location."
         }
       },
       "required": [
@@ -21515,6 +21522,10 @@
         "targetAvailabilityZone": {
           "type": "string",
           "description": "The target availability zone."
+        },
+        "targetExtendedLocation": {
+          "$ref": "#/definitions/ExtendedLocation",
+          "description": "The target extended location."
         },
         "targetProximityPlacementGroupId": {
           "type": "string",
