@@ -746,17 +746,17 @@ model PoolZoneRedundancyProperties {
 @added(Versions.v2026_10_01_preview)
 @doc("The high-availability configuration for a HorizonDB pool update.")
 model PoolHighAvailabilityPropertiesForPatchUpdate {
-  @doc("The required zone-redundancy configuration to apply.")
+  @doc("The zone-redundancy configuration to apply. Omission preserves the current configuration.")
   @visibility(Lifecycle.Update)
-  zoneRedundancy: PoolZoneRedundancyPropertiesForPatchUpdate;
+  zoneRedundancy?: PoolZoneRedundancyPropertiesForPatchUpdate;
 }
 
 @added(Versions.v2026_10_01_preview)
 @doc("The zone-redundancy configuration for a HorizonDB pool update.")
 model PoolZoneRedundancyPropertiesForPatchUpdate {
-  @doc("The required zone-redundancy placement mode.")
+  @doc("The zone-redundancy placement mode. Omission preserves the current mode.")
   @visibility(Lifecycle.Update)
-  mode: PoolZoneRedundancyMode;
+  mode?: PoolZoneRedundancyMode;
 }
 
 @added(Versions.v2026_10_01_preview)

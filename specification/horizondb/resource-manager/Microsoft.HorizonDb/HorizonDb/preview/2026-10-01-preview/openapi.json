@@ -9508,15 +9508,12 @@
       "properties": {
         "zoneRedundancy": {
           "$ref": "#/definitions/PoolZoneRedundancyPropertiesForPatchUpdate",
-          "description": "The required zone-redundancy configuration to apply.",
+          "description": "The zone-redundancy configuration to apply. Omission preserves the current configuration.",
           "x-ms-mutability": [
             "update"
           ]
         }
-      },
-      "required": [
-        "zoneRedundancy"
-      ]
+      }
     },
     "PoolHighAvailabilityState": {
       "type": "string",
@@ -9925,15 +9922,12 @@
       "properties": {
         "mode": {
           "$ref": "#/definitions/PoolZoneRedundancyMode",
-          "description": "The required zone-redundancy placement mode.",
+          "description": "The zone-redundancy placement mode. Omission preserves the current mode.",
           "x-ms-mutability": [
             "update"
           ]
         }
-      },
-      "required": [
-        "mode"
-      ]
+      }
     },
     "PoolZoneRedundancyReason": {
       "type": "string",

@@ -90,6 +90,13 @@ suppressions:
     reason: >-
       PagedParameterGroupConnectionProperties is a paged response envelope
       containing value and nextLink, not an ARM resource model.
+  - code: PutInOperationName
+    from: openapi.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/privateEndpointConnections/{privateEndpointConnectionName}"].put
+    reason: >-
+      This PUT approves or rejects an existing private endpoint connection; it
+      does not create the connection. The approval-specific operation ID
+      PrivateEndpointConnections_ApproveOrReject describes the service behavior.
 ```
 
 ### Tag: package-horizondb-2026-05-01-preview
