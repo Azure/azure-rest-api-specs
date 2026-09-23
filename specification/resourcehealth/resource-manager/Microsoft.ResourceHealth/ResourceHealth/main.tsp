@@ -46,26 +46,10 @@ enum Versions {
    * The 2025-05-01 API version.
    */
   v2025_05_01: "2025-05-01",
-}
 
-// Declare client groups with the service so namespace binding is independent of the entrypoint.
-namespace MetadataClientGroup {
-
-}
-namespace EventClientGroup {
-
-}
-namespace EventsClientGroup {
-
-}
-namespace SecurityAdvisoryImpactedResourcesClientGroup {
-
-}
-namespace EmergingIssuesClientGroup {
-
-}
-namespace ChildResourcesClientGroup {
-
+  /** The 2026-08-01-preview API version. */
+  @Azure.Core.previewVersion
+  v2026_08_01_preview: "2026-08-01-preview",
 }
 
 @armResourceOperations

@@ -8,38 +8,11 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Microsoft.ResourceHealth;
 
-/** Resource Health collections for service groups. */
-@armProviderNamespace("Microsoft.ResourceHealth")
-@service(#{ title: "Resource Health Service Groups" })
-@versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
-namespace Microsoft.ResourceHealthServiceGroups;
-
-/** The API versions for service group health collections. */
-enum Versions {
-  /** The 2026-08-01-preview API version. */
-  @Azure.Core.previewVersion
-  @useDependency(Microsoft.ResourceHealth.Versions.v2025_05_01)
-  v2026_08_01_preview: "2026-08-01-preview",
-}
-
-/** Lists the operations available for the Resource Health provider. */
-@added(Versions.v2026_08_01_preview)
-interface Operations
-  extends Azure.ResourceManager.Legacy.Operations<
-      ArmResponse<ServiceGroupOperationListResult>,
-      Microsoft.ResourceHealth.ErrorResponse
-    > {}
-
-/** Lists provider operations using the existing Resource Health response contract. */
-model ServiceGroupOperationListResult
-  is Microsoft.ResourceHealth.operationListResult;
-
-@@pageItems(ServiceGroupOperationListResult.value);
+namespace Microsoft.ResourceHealth;
 
 /** Service health event properties, including optional planned maintenance information when available. */
+@added(Versions.v2026_08_01_preview)
 model ServiceGroupEventProperties is EventProperties {
   /** Unique identifier for planned maintenance event. */
   maintenanceId?: string;
@@ -52,8 +25,13 @@ model ServiceGroupEventProperties is EventProperties {
 }
 
 /** A service health event that retains its original subscription-scoped identity and resource metadata. */
+@added(Versions.v2026_08_01_preview)
 model ServiceGroupEvent {
-  ...OmitProperties<Azure.ResourceManager.CommonTypes.Resource, "type">;
+  ...OmitProperties<Azure.ResourceManager.CommonTypes.Resource, "id" | "type">;
+
+  /** Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName} */
+  @visibility(Lifecycle.Read)
+  id?: Azure.Core.armResourceIdentifier;
 
   /** The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts" */
   @visibility(Lifecycle.Read)
@@ -64,11 +42,25 @@ model ServiceGroupEvent {
 }
 
 /** A page of service health events potentially relevant to the service group. */
+@added(Versions.v2026_08_01_preview)
 model ServiceGroupEvents is Azure.Core.Page<ServiceGroupEvent>;
 
 /** Current resource availability with optional resource creation and modification metadata. */
+@added(Versions.v2026_08_01_preview)
 model ServiceGroupAvailabilityStatus {
-  ...OmitProperties<AvailabilityStatus, "location">;
+  ...OmitProperties<AvailabilityStatus, "id" | "name" | "type" | "location">;
+
+  /** Azure Resource Manager Identity for the availabilityStatuses resource. */
+  @visibility(Lifecycle.Read)
+  id?: Azure.Core.armResourceIdentifier;
+
+  /** current. */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /** Microsoft.ResourceHealth/AvailabilityStatuses. */
+  @visibility(Lifecycle.Read)
+  type?: string;
 
   /** Azure Resource Manager geo location of the resource. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
@@ -80,6 +72,7 @@ model ServiceGroupAvailabilityStatus {
 }
 
 /** A page of current resource availability statuses for direct service group members. */
+@added(Versions.v2026_08_01_preview)
 model ServiceGroupAvailabilityStatusListResult {
   ...OmitProperties<availabilityStatusListResult, "value">;
 
