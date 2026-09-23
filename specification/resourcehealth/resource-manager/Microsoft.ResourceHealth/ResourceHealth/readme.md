@@ -46,6 +46,14 @@ operation groups. A separate service-group client targets this preview. `service
 lists both service surfaces and is maintained explicitly because the project contains
 multiple services.
 
+Service-group event responses also support the optional `maintenanceId`,
+`maintenanceType`, and `argQuery` properties from the `2023-10-01-preview`
+contract. Event and availability-status responses support optional `systemData`
+resource metadata. These properties describe response capabilities, not guaranteed
+population: fields may be omitted when not available or not applicable. Examples
+illustrate both populated and omitted optional fields and do not imply deployment
+or runtime availability. Original resource- and subscription-scoped IDs are retained.
+
 ```yaml $(tag) == 'package-2026-08-01-preview'
 input-file:
   - preview/2026-08-01-preview/ResourceHealth.json

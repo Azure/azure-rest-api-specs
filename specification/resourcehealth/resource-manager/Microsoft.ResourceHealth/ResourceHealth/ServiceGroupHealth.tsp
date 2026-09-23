@@ -27,7 +27,58 @@ enum Versions {
 
 /** Lists the operations available for the Resource Health provider. */
 @added(Versions.v2026_08_01_preview)
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      ArmResponse<ServiceGroupOperationListResult>,
+      Microsoft.ResourceHealth.ErrorResponse
+    > {}
+
+/** Lists provider operations using the existing Resource Health response contract. */
+model ServiceGroupOperationListResult
+  is Microsoft.ResourceHealth.operationListResult;
+
+@@pageItems(ServiceGroupOperationListResult.value);
+
+/** Service health event properties, including optional planned maintenance information when available. */
+model ServiceGroupEventProperties is EventProperties {
+  /** Unique identifier for planned maintenance event. */
+  maintenanceId?: string;
+
+  /** The type of planned maintenance event. */
+  maintenanceType?: string;
+
+  /** Azure Resource Graph query to fetch the affected resources from their existing Azure Resource Graph locations. */
+  argQuery?: string;
+}
+
+/** A service health event that retains its original subscription-scoped identity and resource metadata. */
+model ServiceGroupEvent {
+  ...Azure.ResourceManager.CommonTypes.Resource;
+
+  /** Properties of the event. Optional maintenance information is returned only when available. */
+  properties?: ServiceGroupEventProperties;
+}
+
+/** A page of service health events potentially relevant to the service group. */
+model ServiceGroupEvents is Azure.Core.Page<ServiceGroupEvent>;
+
+/** Current resource availability with optional resource creation and modification metadata. */
+model ServiceGroupAvailabilityStatus {
+  ...AvailabilityStatus;
+
+  /** Azure Resource Manager metadata containing createdBy and modifiedBy information, when available. */
+  @visibility(Lifecycle.Read)
+  systemData?: Azure.ResourceManager.CommonTypes.SystemData;
+}
+
+/** A page of current resource availability statuses for direct service group members. */
+model ServiceGroupAvailabilityStatusListResult {
+  ...OmitProperties<availabilityStatusListResult, "value">;
+
+  /** The current resource availability statuses. */
+  @pageItems
+  value: ServiceGroupAvailabilityStatus[];
+}
 
 /** Parameters for health collections scoped to a service group. */
 @added(Versions.v2026_08_01_preview)
@@ -85,7 +136,7 @@ interface ServiceGroupHealth {
       @query
       querySignature?: string;
     },
-    ArmResponse<availabilityStatusListResult>,
+    ArmResponse<ServiceGroupAvailabilityStatusListResult>,
     Azure.ResourceManager.ErrorResponse
   >;
 
@@ -114,7 +165,7 @@ interface ServiceGroupHealth {
   @segment("events")
   listEvents is ArmReadOperation<
     ServiceGroupHealthParameters,
-    ArmResponse<Events>,
+    ArmResponse<ServiceGroupEvents>,
     Azure.ResourceManager.ErrorResponse
   >;
 }

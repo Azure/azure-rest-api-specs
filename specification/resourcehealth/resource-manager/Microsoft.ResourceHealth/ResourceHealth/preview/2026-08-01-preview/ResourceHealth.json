@@ -160,13 +160,13 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/operationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -174,9 +174,6 @@
           "List Resource Health provider operations": {
             "$ref": "./examples/Operations_List.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     }
@@ -344,6 +341,27 @@
       "type": "string",
       "description": "Represents an Azure Resource Type."
     },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "Error details.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "string",
+          "description": "The error details.",
+          "readOnly": true
+        }
+      }
+    },
     "EventLevelValues": {
       "type": "string",
       "description": "Level of event.",
@@ -382,7 +400,7 @@
     },
     "EventProperties": {
       "type": "object",
-      "description": "Properties of event.",
+      "description": "Service health event properties, including optional planned maintenance information when available.",
       "properties": {
         "eventType": {
           "$ref": "#/definitions/EventTypeValues",
@@ -545,6 +563,18 @@
         "billingId": {
           "type": "string",
           "description": "Billing identifier information."
+        },
+        "maintenanceId": {
+          "type": "string",
+          "description": "Unique identifier for planned maintenance event."
+        },
+        "maintenanceType": {
+          "type": "string",
+          "description": "The type of planned maintenance event."
+        },
+        "argQuery": {
+          "type": "string",
+          "description": "Azure Resource Graph query to fetch the affected resources from their existing Azure Resource Graph locations."
         }
       }
     },
@@ -836,25 +866,25 @@
         ]
       }
     },
-    "ProxyResource": {
+    "OperationDisplay": {
       "type": "object",
-      "description": "ARM proxy resource.",
+      "description": "Properties of the operation.",
       "properties": {
-        "id": {
+        "provider": {
           "type": "string",
-          "format": "arm-id",
-          "description": "Azure Resource Manager Identity for the availabilityStatuses resource."
+          "description": "Provider name."
         },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "$ref": "#/definitions/Azure.Core.armResourceType",
-          "description": "Microsoft.ResourceHealth/AvailabilityStatuses."
-        },
-        "location": {
+        "resource": {
           "type": "string",
-          "description": "Azure Resource Manager geo location of the resource."
+          "description": "Resource name."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Operation name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the operation."
         }
       }
     },
@@ -892,33 +922,49 @@
     },
     "availabilityStatus": {
       "type": "object",
-      "description": "availabilityStatus of a resource.",
+      "description": "Current resource availability with optional resource creation and modification metadata.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/AvailabilityStatusProperties",
           "description": "Properties of availability state."
+        },
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Azure Resource Manager Identity for the availabilityStatuses resource."
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/Azure.Core.armResourceType",
+          "description": "Microsoft.ResourceHealth/AvailabilityStatuses."
+        },
+        "location": {
+          "type": "string",
+          "description": "Azure Resource Manager geo location of the resource."
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information, when available.",
+          "readOnly": true
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ]
+      }
     },
     "availabilityStatusListResult": {
       "type": "object",
-      "description": "The List availabilityStatus operation response.",
+      "description": "A page of current resource availability statuses for direct service group members.",
       "properties": {
-        "value": {
-          "type": "array",
-          "description": "The list of availabilityStatuses.",
-          "items": {
-            "$ref": "#/definitions/availabilityStatus"
-          }
-        },
         "nextLink": {
           "type": "string",
           "description": "The URI to fetch the next page of availabilityStatuses. Call ListNext() with this URI to fetch the next page of availabilityStatuses."
+        },
+        "value": {
+          "type": "array",
+          "description": "The current resource availability statuses.",
+          "items": {
+            "$ref": "#/definitions/availabilityStatus"
+          }
         }
       },
       "required": [
@@ -927,27 +973,42 @@
     },
     "event": {
       "type": "object",
-      "description": "Service health event",
+      "description": "A service health event that retains its original subscription-scoped identity and resource metadata.",
       "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/Azure.Core.armResourceType",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        },
         "properties": {
           "$ref": "#/definitions/EventProperties",
-          "description": "Properties of event.",
-          "x-ms-client-flatten": true
+          "description": "Properties of the event. Optional maintenance information is returned only when available."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
+      }
     },
     "events": {
       "type": "object",
-      "description": "The List events operation response.",
+      "description": "A page of service health events potentially relevant to the service group.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The Event items on this page",
+          "description": "The ServiceGroupEvent items on this page",
           "items": {
             "$ref": "#/definitions/event"
           }
@@ -1067,6 +1128,39 @@
           "description": "It provides a map of parameter name and value for portal extension blade to produce lik for given service health event."
         }
       }
+    },
+    "operation": {
+      "type": "object",
+      "description": "Operation available in the Microsoft.ResourceHealth resource provider.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the operation."
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Properties of the operation."
+        }
+      }
+    },
+    "operationListResult": {
+      "type": "object",
+      "description": "Lists provider operations using the existing Resource Health response contract.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of operations available in the Microsoft.ResourceHealth resource provider.",
+          "items": {
+            "$ref": "#/definitions/operation"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "reasonChronicityTypes": {
       "type": "string",

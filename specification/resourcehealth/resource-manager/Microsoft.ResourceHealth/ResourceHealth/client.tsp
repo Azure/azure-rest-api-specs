@@ -12,12 +12,38 @@ using Azure.Core;
   string
 );
 @@clientName(
-  Azure.ResourceManager.CommonTypes.OperationDisplay,
-  "ServiceGroupOperationDisplay"
-);
-@@clientName(
   Azure.ResourceManager.CommonTypes.ErrorResponse,
   "ServiceGroupErrorResponse"
+);
+@@clientName(
+  Microsoft.ResourceHealthServiceGroups.ServiceGroupOperationListResult,
+  "operationListResult",
+  "autorest"
+);
+@@clientName(
+  Microsoft.ResourceHealthServiceGroups.ServiceGroupEventProperties,
+  "EventProperties",
+  "autorest"
+);
+@@clientName(
+  Microsoft.ResourceHealthServiceGroups.ServiceGroupEvent,
+  "event",
+  "autorest"
+);
+@@clientName(
+  Microsoft.ResourceHealthServiceGroups.ServiceGroupEvents,
+  "events",
+  "autorest"
+);
+@@clientName(
+  Microsoft.ResourceHealthServiceGroups.ServiceGroupAvailabilityStatus,
+  "availabilityStatus",
+  "autorest"
+);
+@@clientName(
+  Microsoft.ResourceHealthServiceGroups.ServiceGroupAvailabilityStatusListResult,
+  "availabilityStatusListResult",
+  "autorest"
 );
 
 // Keep existing clients on the existing service's version stream.
@@ -55,6 +81,7 @@ namespace ResourceHealthClients {
   service: Microsoft.ResourceHealthServiceGroups,
   autoMergeService: true,
 })
+@clientName("ResourceHealthServiceGroupsClient", "java")
 namespace ResourceHealthServiceGroupClients {
 
 }
