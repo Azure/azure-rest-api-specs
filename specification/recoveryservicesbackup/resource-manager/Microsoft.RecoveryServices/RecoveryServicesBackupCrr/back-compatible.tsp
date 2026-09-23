@@ -155,6 +155,23 @@ using Microsoft.RecoveryServices;
   "AzureWorkloadSQLPointInTimeRestoreRequest"
 );
 
+// The local frozen-contract `Resource` and `ErrorDetail` envelopes intentionally
+// mirror shapes that also exist in ARM common-types, which the resource-manager
+// library injects. TCGC rejects the duplicate client name for csharp/java/python
+// (Go/JS/Rust do not enforce it). Scope the rename to those SDK languages only so
+// the autorest emitter is unaffected and the swagger definition keys (`Resource`,
+// `ErrorDetail`) stay identical to the frozen 2023-01-15 contract.
+@@clientName(
+  Microsoft.RecoveryServices.Resource,
+  "CrrResource",
+  "csharp,java,python"
+);
+@@clientName(
+  Microsoft.RecoveryServices.ErrorDetail,
+  "CrrErrorDetail",
+  "csharp,java,python"
+);
+
 // Preserve the frozen nested discriminator hierarchy on the wire and in SDKs.
 // The models are declared flat (each subtype `extends ProtectedItem`) to satisfy
 // composition-over-inheritance; these @@hierarchyBuilding mappings re-parent each

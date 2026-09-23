@@ -13,6 +13,12 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.RecoveryServices;
 
+/** The Location header contains the URL where the status of the long running operation can be checked. */
+alias CrrLroLocationHeader = {
+  /** The Location header contains the URL where the status of the long running operation can be checked. */
+  @header("Location") location?: string;
+};
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
 @tag("BackupUsageSummaries_CRR")
 interface BackupUsageSummariesCrrOperationGroup {
@@ -90,7 +96,6 @@ interface CrossRegionRestoreOperationGroup {
   /**
    * Restores the specified backed up data in a different region as compared to where the data is backed up.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Restores the specified backed up data in a different region as compared to where the data is backed up.")
   @operationId("CrossRegionRestore_Trigger")
@@ -108,7 +113,8 @@ interface CrossRegionRestoreOperationGroup {
       @segment("locations")
       azureRegion: string;
     },
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = void> &
+    LroHeaders = CrrLroLocationHeader &
+      ArmAsyncOperationHeader<FinalResult = void> &
       Azure.Core.Foundations.RetryAfterHeader,
     Error = NewErrorResponse
   >;
@@ -186,7 +192,6 @@ interface CrrOperationResultsOperationGroup {
   /**
    * Gets the operation result of a cross-region-restore operation for the given operation ID and Azure region.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Faithful migration: the original CrrOperationResults_Get 202 response does not emit a Location header; adding one would change the frozen stable/2023-01-15 contract."
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Faithful migration: the original CrrOperationResults_Get success response is body-less, matching the frozen stable/2023-01-15 contract."
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CrrOperationResults_Get")
@@ -206,7 +211,12 @@ interface CrrOperationResultsOperationGroup {
     #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
     @path
     operationId: string,
-  ): OkResponse | ArmAcceptedResponse | NewErrorResponse;
+  ):
+    | OkResponse
+    | ArmAcceptedLroResponse<LroHeaders = CrrLroLocationHeader &
+        ArmAsyncOperationHeader<FinalResult = void> &
+        Azure.Core.Foundations.RetryAfterHeader>
+    | NewErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"

@@ -169,6 +169,10 @@
                 "type": "string",
                 "description": "A link to the status monitor"
               },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -356,6 +360,14 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -569,10 +581,6 @@
             "schema": {
               "$ref": "#/definitions/CrrAccessTokenResource"
             }
-          },
-          "400": {
-            "description": "BadRequest",
-            "x-ms-error-response": true
           },
           "default": {
             "description": "An unexpected error response.",
@@ -4692,10 +4700,6 @@
           }
         }
       }
-    },
-    "RecoveryPointGetAccessTokenBadRequest": {
-      "type": "object",
-      "description": "BadRequest"
     },
     "RecoveryPointMoveReadinessInfo": {
       "type": "object",

@@ -83,13 +83,6 @@ interface RecoveryPointResources {
   ): ArmResponse<RecoveryPointResourceList> | NewErrorResponse;
 }
 
-/** The request is invalid. */
-@error
-@doc("BadRequest")
-model RecoveryPointGetAccessTokenBadRequest {
-  ...TypeSpec.Http.Response<400>;
-}
-
 @tag("RecoveryPoints_GetAccessToken")
 @armResourceOperations(#{ omitTags: true })
 interface RecoveryPointGetAccessToken {
@@ -104,8 +97,7 @@ interface RecoveryPointGetAccessToken {
   getAccessToken is ArmResourceActionSync<
     RecoveryPointResource,
     AadPropertiesResource,
-    | ArmResponse<CrrAccessTokenResource>
-    | RecoveryPointGetAccessTokenBadRequest,
+    ArmResponse<CrrAccessTokenResource>,
     Error = NewErrorResponse
   >;
 }
