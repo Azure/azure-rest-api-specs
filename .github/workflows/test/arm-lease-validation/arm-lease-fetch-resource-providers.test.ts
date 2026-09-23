@@ -1,7 +1,8 @@
 import fs from "fs";
+import { tmpdir } from "os";
 import path from "path";
 import { fileURLToPath } from "url";
-import { describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import {
   findRepoRoot,
@@ -12,16 +13,6 @@ import {
 // Get the directory of the current test file to find repo root reliably
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
-// Check if specification directory exists (may not exist in sparse checkouts)
-const hasSpecificationDir = () => {
-  try {
-    const repoRoot = findRepoRoot(__dirname);
-    return fs.existsSync(path.join(repoRoot, "specification"));
-  } catch {
-    return false;
-  }
-};
 
 describe("fetch-resource-providers", () => {
   describe("findRepoRoot", () => {
@@ -36,47 +27,70 @@ describe("fetch-resource-providers", () => {
     });
   });
 
-  describe("findResourceProviders (without service names)", () => {
-    it("finds resource providers without service names", () => {
-      const repoRoot = findRepoRoot(__dirname);
-      const rps = findResourceProviders(repoRoot, false);
+  describe("findResourceProviders", () => {
+    let repoRoot: string;
 
-      // In sparse checkouts, specification/ may not exist, so rps could be empty
-      if (!hasSpecificationDir()) {
-        expect(rps).toEqual([]);
-        return;
-      }
-
-      expect(rps.length).toBeGreaterThan(0);
-      expect(rps.every((rp) => rp.rpNamespace && rp.orgName && rp.path)).toBe(true);
-      expect(rps.every((rp) => !rp.serviceNames)).toBe(true);
-      expect(rps.some((rp) => rp.rpNamespace === "Microsoft.Storage")).toBe(true);
-      expect(rps.some((rp) => rp.rpNamespace === "Microsoft.Compute")).toBe(false);
+    beforeEach(() => {
+      repoRoot = fs.mkdtempSync(path.join(tmpdir(), "arm-resource-providers-"));
     });
-  });
 
-  describe("findResourceProviders (with service names)", () => {
-    it("finds resource providers with service names", () => {
-      const repoRoot = findRepoRoot(__dirname);
-      const rps = findResourceProviders(repoRoot, true);
+    afterEach(() => {
+      fs.rmSync(repoRoot, { recursive: true, force: true });
+    });
 
-      // In sparse checkouts, specification/ may not exist, so rps could be empty
-      if (!hasSpecificationDir()) {
-        expect(rps).toEqual([]);
-        return;
-      }
+    it.each([false, true])(
+      "returns no providers without specification (withServiceNames=%s)",
+      (withServiceNames) => {
+        expect(findResourceProviders(repoRoot, withServiceNames)).toEqual([]);
+      },
+    );
 
-      expect(rps.length).toBeGreaterThan(0);
-      expect(rps.every((rp) => rp.rpNamespace && rp.orgName && rp.path && rp.serviceNames)).toBe(
-        true,
-      );
-      expect(rps.every((rp) => Array.isArray(rp.serviceNames))).toBe(true);
+    it.each([false, true])(
+      "returns no providers with only common-types (withServiceNames=%s)",
+      (withServiceNames) => {
+        fs.mkdirSync(path.join(repoRoot, "specification/common-types"), { recursive: true });
+        expect(findResourceProviders(repoRoot, withServiceNames)).toEqual([]);
+      },
+    );
 
-      const compute = rps.find((rp) => rp.rpNamespace === "Microsoft.Compute");
-      expect(compute).toBeDefined();
-      expect(compute?.orgName).toBe("compute");
-      expect(compute?.serviceNames?.includes("Compute")).toBe(true);
-      expect(rps.some((rp) => rp.rpNamespace === "Microsoft.Storage")).toBe(false);
+    describe("with resource provider fixtures", () => {
+      beforeEach(() => {
+        for (const directory of [
+          "storage/resource-manager/Microsoft.Storage/stable",
+          "storage/resource-manager/Microsoft.Storage/preview",
+          "storage/resource-manager/Microsoft.Storage/examples",
+          "storage/resource-manager/Microsoft.Storage/common-types",
+          "compute/resource-manager/Microsoft.Compute/Disks",
+          "compute/resource-manager/Microsoft.Compute/Compute",
+          "compute/resource-manager/Microsoft.Compute/examples",
+          "empty/resource-manager/Microsoft.Empty",
+          "private/resource-manager/Private.Provider/stable",
+          "common-types",
+        ]) {
+          fs.mkdirSync(path.join(repoRoot, "specification", directory), { recursive: true });
+        }
+      });
+
+      it("finds only resource providers without service names", () => {
+        expect(findResourceProviders(repoRoot, false)).toEqual([
+          {
+            rpNamespace: "Microsoft.Storage",
+            orgName: "storage",
+            path: path.join("specification", "storage", "resource-manager", "Microsoft.Storage"),
+          },
+        ]);
+      });
+
+      it("finds only resource providers with sorted service names", () => {
+        expect(findResourceProviders(repoRoot, true)).toEqual([
+          {
+            rpNamespace: "Microsoft.Compute",
+            orgName: "compute",
+            path: path.join("specification", "compute", "resource-manager", "Microsoft.Compute"),
+            serviceNames: ["Compute", "Disks"],
+          },
+        ]);
+      });
     });
   });
 
