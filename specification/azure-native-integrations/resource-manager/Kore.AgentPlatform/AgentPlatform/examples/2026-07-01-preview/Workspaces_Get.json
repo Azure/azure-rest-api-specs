@@ -1,0 +1,44 @@
+{
+  "title": "Workspaces_Get",
+  "operationId": "Workspaces_Get",
+  "parameters": {
+    "api-version": "2026-07-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contoso-rg",
+    "organizationName": "contoso-org",
+    "workspaceName": "contoso-prod"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg/providers/Kore.AgentPlatform/organizations/contoso-org/workspaces/contoso-prod",
+        "name": "contoso-prod",
+        "type": "Kore.AgentPlatform/organizations/workspaces",
+        "properties": {
+          "partnerProperties": {
+            "name": "Contoso Production",
+            "ownerEmail": "owner@contoso.com",
+            "partnerResourceId": "ws_01JK2MXYZ9ABCDEF000002"
+          },
+          "isDefault": false,
+          "status": "active",
+          "provisioningState": "Succeeded",
+          "marketplaceDetails": [
+            {
+              "offerDetails": {
+                "offerId": "kore-ai-platform",
+                "planId": "business-monthly",
+                "publisherId": "kore-ai",
+                "planName": "Business Monthly",
+                "termId": "1m",
+                "termUnit": "P1M"
+              },
+              "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg/providers/Microsoft.SaaS/resources/kore-ai-saas",
+              "subscriptionStatus": "Subscribed"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

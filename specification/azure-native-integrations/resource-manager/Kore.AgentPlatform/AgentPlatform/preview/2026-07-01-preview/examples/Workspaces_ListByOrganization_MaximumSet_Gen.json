@@ -1,0 +1,72 @@
+{
+  "title": "Workspaces_ListByOrganization_MaximumSet_Gen",
+  "operationId": "Workspaces_ListByOrganization",
+  "parameters": {
+    "api-version": "2026-07-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contoso-rg",
+    "organizationName": "contoso-org"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "type": "Kore.AgentPlatform/organizations/workspaces",
+            "name": "my first workspace",
+            "properties": {
+              "marketplaceDetails": [
+                {
+                  "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg/providers/Microsoft.SaaS/resources/kore-ai-saas",
+                  "subscriptionStatus": "Subscribed",
+                  "offerDetails": {
+                    "publisherId": "kore-ai",
+                    "offerId": "kore-ai-platform",
+                    "planId": "business-monthly",
+                    "planName": "Business Monthly",
+                    "termUnit": "P1M",
+                    "termId": "1m"
+                  }
+                }
+              ],
+              "isDefault": true,
+              "partnerProperties": {
+                "ownerEmail": "admin@contoso.com",
+                "name": "my first workspace"
+              },
+              "status": "active"
+            },
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg/providers/Kore.AgentPlatform/organizations/contoso-org/workspaces/my-first-workspace"
+          },
+          {
+            "type": "Kore.AgentPlatform/organizations/workspaces",
+            "name": "Contoso Production",
+            "properties": {
+              "marketplaceDetails": [
+                {
+                  "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg/providers/Microsoft.SaaS/resources/kore-ai-saas",
+                  "subscriptionStatus": "Subscribed",
+                  "offerDetails": {
+                    "publisherId": "kore-ai",
+                    "offerId": "kore-ai-platform",
+                    "planId": "business-monthly",
+                    "planName": "Business Monthly",
+                    "termUnit": "P1M",
+                    "termId": "1m"
+                  }
+                }
+              ],
+              "isDefault": false,
+              "partnerProperties": {
+                "ownerEmail": "owner@contoso.com",
+                "name": "Contoso Production"
+              },
+              "status": "active"
+            },
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg/providers/Kore.AgentPlatform/organizations/contoso-org/workspaces/Contoso-Production"
+          }
+        ]
+      }
+    }
+  }
+}
