@@ -7023,7 +7023,7 @@
       "post": {
         "operationId": "AgentTelephony_cancelTelephonyCallJob",
         "summary": "Cancel an outbound telephony call job",
-        "description": "Requests cancellation of a durable outbound call job. A connected call is allowed to finish.",
+        "description": "Requests cancellation of a durable outbound call job using If-Match. Prevents future attempts and may complete asynchronously. A new cancellation request after the call has connected returns 409; the connected call is allowed to finish naturally.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -38448,7 +38448,7 @@
           },
           "retry_policy": {
             "$ref": "#/components/schemas/TelephonyOutboundRetryPolicy",
-            "description": "The provider-attempt retry policy. Omit it for one attempt with no retry delay."
+            "description": "The provider-attempt retry policy. Omit it for one initial attempt with no retry. Returned CallJobs normalize an omitted policy to fixed_interval with max_attempts=1 and interval=0 seconds."
           }
         },
         "description": "A request to create one durable direct outbound call job.",
@@ -87987,7 +87987,7 @@
           },
           "retry_policy": {
             "$ref": "#/components/schemas/TelephonyOutboundRetryPolicy",
-            "description": "The frozen provider-attempt retry policy."
+            "description": "The frozen provider-attempt retry policy. When omitted on direct CallJob or Campaign creation, this is fixed_interval with max_attempts=1 and interval=0 seconds: only the initial attempt is made, with no retry."
           },
           "attempt_count": {
             "type": "integer",
@@ -88930,7 +88930,7 @@
           },
           "retry_policy": {
             "$ref": "#/components/schemas/TelephonyOutboundRetryPolicy",
-            "description": "Per-recipient provider retries. Omit for a single attempt."
+            "description": "Per-recipient provider retries. Omit for one initial attempt with no retry. Generated CallJobs return fixed_interval with max_attempts=1 and interval=0 seconds for an omitted policy."
           }
         },
         "description": "Readable configuration. Inline arrays are omitted. recipient_dataset is present only for Dataset input and reports the concrete version once resolved.",
@@ -89000,7 +89000,7 @@
           },
           "retry_policy": {
             "$ref": "#/components/schemas/TelephonyOutboundRetryPolicy",
-            "description": "Per-recipient provider retries. Omit for a single attempt."
+            "description": "Per-recipient provider retries. Omit for one initial attempt with no retry. Generated CallJobs return fixed_interval with max_attempts=1 and interval=0 seconds for an omitted policy."
           }
         },
         "description": "Complete Campaign configuration supplied on creation or replacement of failed preparation. Inputs stay fixed throughout a validation round and subsequent execution.",

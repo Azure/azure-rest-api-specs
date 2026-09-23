@@ -1450,7 +1450,7 @@ model TelephonyCallJobConfiguration {
 model CreateTelephonyCallJobRequest {
   ...TelephonyCallJobConfiguration;
 
-  @doc("The provider-attempt retry policy. Omit it for one attempt with no retry delay.")
+  @doc("The provider-attempt retry policy. Omit it for one initial attempt with no retry. Returned CallJobs normalize an omitted policy to fixed_interval with max_attempts=1 and interval=0 seconds.")
   retry_policy?: TelephonyOutboundRetryPolicy;
 }
 
@@ -1589,7 +1589,7 @@ model TelephonyCallJob {
   @doc("The recorded cancellation request, when cancellation was requested.")
   cancellation?: TelephonyCallJobCancellation;
 
-  @doc("The frozen provider-attempt retry policy.")
+  @doc("The frozen provider-attempt retry policy. When omitted on direct CallJob or Campaign creation, this is fixed_interval with max_attempts=1 and interval=0 seconds: only the initial attempt is made, with no retry.")
   retry_policy: TelephonyOutboundRetryPolicy;
 
   @doc("The number of provider attempts created so far.")

@@ -775,7 +775,7 @@ interface AgentTelephony {
     TelephonyCallJobResponse
   >;
 
-  /** Requests cancellation of a durable outbound call job. A connected call is allowed to finish. */
+  /** Requests cancellation of a durable outbound call job using If-Match. Prevents future attempts and may complete asynchronously. A new cancellation request after the call has connected returns 409; the connected call is allowed to finish naturally. */
   @summary("Cancel an outbound telephony call job")
   @post
   @route("/agents/{agent_name}/telephony/call_jobs/{call_job_id}:cancel")

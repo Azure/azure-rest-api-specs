@@ -135,7 +135,7 @@ model TelephonyCampaignInputs {
   /** Omit for immediate scheduling. Every mode dispatches automatically after successful preparation, subject to its schedule. */
   schedule?: TelephonyCampaignSchedule;
 
-  /** Per-recipient provider retries. Omit for a single attempt. */
+  /** Per-recipient provider retries. Omit for one initial attempt with no retry. Generated CallJobs return fixed_interval with max_attempts=1 and interval=0 seconds for an omitted policy. */
   retry_policy?: TelephonyOutboundRetryPolicy;
 }
 
