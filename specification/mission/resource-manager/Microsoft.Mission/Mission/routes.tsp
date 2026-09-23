@@ -253,7 +253,11 @@ interface CommunityEndpoints {
   @useFinalStateVia("location")
   @doc("Triggers a manual synchronization of endpoint connections to all configured destinations.")
   @armResourceAction(CommunityEndpointResource)
-  sync is ArmResourceActionAsync<CommunityEndpointResource, void, CommunityEndpointResource>;
+  sync is ArmResourceActionAsync<
+    CommunityEndpointResource,
+    void,
+    CommunityEndpointResource
+  >;
 
   @doc("Callback that triggers on approval state change.")
   @armResourceAction(CommunityEndpointResource)
