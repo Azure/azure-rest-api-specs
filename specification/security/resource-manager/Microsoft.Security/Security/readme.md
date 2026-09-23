@@ -778,18 +778,12 @@ override-info:
 
 These settings apply only when `--tag=package-composite-v3` is specified on the command line.
 
-Service entitlement settings uses resource-scoped `operationResults` and `operationStatuses`
-paths, following the resource-scoped polling pattern of `ServiceEntitlementsAPI`. These paths
-are distinct from the provider-wide operations, so no composite path transformation is needed.
-The service must keep both polling endpoints accessible after deleting the setting; ARM review
-approval for this resource-scoped placement is required.
-
-Both service entitlement settings polling GETs return HTTP 200 with the shared
-`OperationStatusResult` model. Callers inspect `status` to distinguish pending and
-completed operations, including DELETE completion. The operation-results GET does
-not return the setting resource or HTTP 202/204; the initial DELETE operation still
-supports HTTP 202/204. Backend support and ARM approval of this polling contract
-must be confirmed separately.
+Service entitlement settings uses synchronous PUT, PATCH, and DELETE operations.
+The service completes the requested change before returning success: PUT returns
+200/201 with the completed resource, PATCH returns 200 with the completed resource,
+and DELETE returns 200/204 without a body. No settings-specific operation status or
+result polling endpoints are exposed. The provider-wide polling APIs used by other
+resource types and the shared Operations discovery API remain unchanged.
 
 ``` yaml $(tag) == 'package-composite-v3'
 input-file:
