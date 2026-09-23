@@ -200,6 +200,11 @@ Conventions:
   CI lints all packages once in `.github/workflows/lint.yaml`, separately from package tests.
 - Runtime dependencies are kept to an absolute minimum (ideally zero transitive dependencies) for
   performance, and must be a subset of the parent [`../package.json`](../package.json).
+- Root `pnpm build` delegates to this package's build script. Root `pnpm test:ci`
+  includes it as a Vitest project and measures shared-source coverage across the
+  selected projects. Package-local Vitest commands still run directly with the
+  independent 100% coverage gate, inheriting shared defaults but not the root
+  workspace project list.
 
 ### `test`
 

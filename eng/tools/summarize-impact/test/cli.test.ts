@@ -1,11 +1,119 @@
-import { describe, expect, it } from "vitest"; //vi
+import { afterEach, beforeEach, describe, expect, it } from "vitest"; //vi
 
+import { execFileSync } from "node:child_process";
+import { cpSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
 import path from "path";
 
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
+import type { ImpactAssessment } from "../src/ImpactAssessment.ts";
 import { PRContext } from "../src/PRContext.ts";
 import { evaluateImpact, getRPaaSFolderList } from "../src/impact.ts";
 import { type LabelContext } from "../src/labelling-types.ts";
+
+describe("CLI PR comparison", () => {
+  let directory: string;
+  let sourceDirectory: string;
+  let targetDirectory: string;
+
+  function git(...args: string[]): string {
+    return execFileSync("git", ["-c", "commit.gpgsign=false", ...args], {
+      cwd: sourceDirectory,
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "pipe"],
+    }).trim();
+  }
+
+  function addSwagger(plane: string, version: string) {
+    const file = path.join(
+      sourceDirectory,
+      "specification/contosowidgetmanager",
+      plane,
+      "Microsoft.Contoso/stable",
+      version,
+      "contoso.json",
+    );
+    mkdirSync(path.dirname(file), { recursive: true });
+    writeFileSync(file, JSON.stringify({ swagger: "2.0", info: { version }, paths: {} }));
+    git("add", ".");
+    git("commit", "-m", `Add ${plane} ${version}`);
+  }
+
+  beforeEach(() => {
+    directory = mkdtempSync(path.join(tmpdir(), "summarize-impact-"));
+    sourceDirectory = path.join(directory, "after");
+    targetDirectory = path.join(directory, "before");
+    cpSync(path.join(__dirname, "fixtures/default/before"), sourceDirectory, { recursive: true });
+    git("init", "-b", "main");
+    git("config", "user.name", "Test");
+    git("config", "user.email", "test@example.com");
+    git("add", ".");
+    git("commit", "-m", "Initial specs");
+    git("checkout", "-b", "pr");
+  });
+
+  afterEach(() => {
+    rmSync(directory, { recursive: true, force: true });
+  });
+
+  it.each([
+    { mergeMain: true, plane: "resource-manager" },
+    { mergeMain: false, plane: "resource-manager" },
+    { mergeMain: true, plane: "data-plane" },
+  ])("assesses only PR changes: %o", ({ mergeMain, plane }) => {
+    addSwagger(plane, "2026-01-01");
+    git("checkout", "main");
+    addSwagger("data-plane", "2026-02-01");
+    const baseSha = git("rev-parse", "HEAD");
+    git("checkout", "pr");
+    if (mergeMain) {
+      git("merge", "--no-ff", "main", "-m", "Merge main");
+    } else {
+      // The PR's impact must include earlier commits, not just HEAD^..HEAD.
+      writeFileSync(path.join(sourceDirectory, "unrelated.txt"), "PR follow-up");
+      git("add", ".");
+      git("commit", "-m", "PR follow-up");
+    }
+
+    const headSha = git("rev-parse", "HEAD");
+    const mergeBase = git("merge-base", baseSha, headSha);
+    git("worktree", "add", "--detach", targetDirectory, mergeBase);
+
+    const output = execFileSync(
+      process.execPath,
+      [
+        path.resolve(__dirname, "../cmd/summarize-impact.js"),
+        "--sourceDirectory",
+        sourceDirectory,
+        "--targetDirectory",
+        targetDirectory,
+        "--number",
+        "1",
+        "--sourceBranch",
+        "pr",
+        "--targetBranch",
+        "main",
+        "--sha",
+        headSha,
+        "--repo",
+        "azure-rest-api-specs",
+        "--owner",
+        "Azure",
+      ],
+      { cwd: sourceDirectory, encoding: "utf8", stdio: ["ignore", "pipe", "pipe"] },
+    );
+
+    const changedFilesOutput = output.split("Total:")[0];
+    expect(changedFilesOutput).toContain("2026-01-01");
+    expect(changedFilesOutput).not.toContain("2026-02-01");
+    const impact = JSON.parse(
+      readFileSync(path.join(sourceDirectory, "summary.json"), "utf8"),
+    ) as ImpactAssessment;
+    expect(impact.dataPlaneRequired).toBe(plane === "data-plane");
+    expect(impact.resourceManagerRequired).toBe(plane === "resource-manager");
+    expect(impact.isNewApiVersion).toBe(true);
+  });
+});
 
 describe("Check Changes", () => {
   it.skipIf(!process.env.GITHUB_TOKEN || !process.env.INTEGRATION_TEST)(
