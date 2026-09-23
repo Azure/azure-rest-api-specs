@@ -76,34 +76,25 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    A[API Reviewer runs] --> B[Post Blocking comments]
-    B --> C[Add ARMAPIReviewCompleted]
-    B --> D[ARMChangesRequested may be added]
-    C --> E{Existing auto-signoff checks pass?}
-    D --> E
-    E -- No --> F[Wait for checks or approvals]
-    E -- Yes --> G[Apply auto-signoff transition]
-    G --> H[Add ARMSignedOff]
-    G --> I[Remove ARMChangesRequested\nand WaitForARMFeedback]
+    A[API Reviewer runs] --> B[Complete all review actions:\nPost Blocking comments\nAdd ARMAPIReviewCompleted\nAdd ARMChangesRequested]
+    B --> C{Existing auto-signoff checks pass?}
+    C -- No --> D[Wait for checks or approvals]
+    C -- Yes --> E[Apply one auto-signoff transition:\nAdd ARMSignedOff\nRemove ARMChangesRequested\nRemove WaitForARMFeedback]
 ```
 
 **Result:** AI comments remain visible but advisory. They do not block
 auto-signoff after the review completes.
 
-## 6. Scenario 3: Author pushes another commit
+## 6. Scenario 3: Author pushes and the reviewer runs again
 
 ```mermaid
 flowchart TD
     A[ARMAPIReviewCompleted already present] --> B[Author pushes a commit]
-    B --> C[Existing checks rerun for the new head]
-    B --> D[API Reviewer may run again\nusing existing triggers]
-    D --> E[New AI comments remain advisory]
-    C --> F{Existing auto-signoff checks pass?}
-    E --> F
-    F -- No --> G[Do not sign off]
-    F -- Yes --> H[Apply auto-signoff transition]
-    H --> I[Add ARMSignedOff]
-    H --> J[Remove ARMChangesRequested\nand WaitForARMFeedback]
+    B --> C[When the reviewer trigger is eligible,\nboth workflows execute for the new head:\nExisting checks rerun\nAPI Reviewer runs]
+    C --> D[New AI comments remain advisory]
+    D --> E{Existing auto-signoff checks pass?}
+    E -- No --> F[Do not sign off]
+    E -- Yes --> G[Apply one auto-signoff transition:\nAdd or preserve ARMSignedOff\nRemove ARMChangesRequested\nRemove WaitForARMFeedback]
 ```
 
 **Result:** Later AI runs do not delay or veto auto-signoff. Current
@@ -147,6 +138,14 @@ manual dispatch without relying on a label-generated event.
 If a later reviewer run adds `ARMChangesRequested` after signoff, its workflow
 completion triggers auto-signoff again. Auto-signoff preserves
 `ARMSignedOff` and removes the advisory `ARMChangesRequested` label.
+
+`Summarize Checks` also gives `ARMSignedOff` precedence over
+`ARMChangesRequested`, but it is not the reliable trigger for this cleanup. A
+label added by the reviewer with `GITHUB_TOKEN` may not start
+`Summarize Checks`, and that workflow does not currently listen for API
+Reviewer completion. It may remove the label on a later event, but the
+Universal Auto-Signoff `workflow_run` handoff removes it immediately after the
+reviewer finishes.
 
 ## 8. Required changes
 
