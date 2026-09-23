@@ -208,7 +208,9 @@ interface CrrOperationResultsOperationGroup {
 
     ...SubscriptionIdParameter,
 
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+    /**
+     * The operation ID.
+     */
     @path
     operationId: string,
   ):
@@ -240,7 +242,9 @@ interface CrrOperationStatusOperationGroup {
 
     ...SubscriptionIdParameter,
 
-    #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+    /**
+     * The operation ID.
+     */
     @path
     operationId: string,
   ): ArmResponse<OperationStatus> | NewErrorResponse;

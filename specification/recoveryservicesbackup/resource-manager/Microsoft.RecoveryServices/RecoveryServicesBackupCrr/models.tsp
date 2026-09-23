@@ -1032,7 +1032,9 @@ union HealthState {
   Invalid: "Invalid",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+/**
+ * Supported actions for a backup management job.
+ */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
 enum JobSupportedAction {
   /**
@@ -1219,7 +1221,9 @@ model NewErrorResponseError {
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Non-discriminated resource envelope wrapper on a passive stamp: `extends` preserves the emitted allOf composition; `is`/spread would inline the base and `@discriminator` would mis-declare a non-polymorphic base."
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+/**
+ * AAD properties response resource.
+ */
 model AadPropertiesResource extends Resource {
   /**
    * AADPropertiesResource properties
@@ -1227,17 +1231,33 @@ model AadPropertiesResource extends Resource {
   properties?: AadProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+/**
+ * Azure Active Directory properties.
+ */
 model AadProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  /**
+   * Service principal client ID.
+   */
   servicePrincipalClientId?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Tenant ID.
+   */
   tenantId?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Authority.
+   */
   authority?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Audience.
+   */
   audience?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Service principal object ID.
+   */
   servicePrincipalObjectId?: string;
 }
 
@@ -1281,7 +1301,9 @@ model Resource {
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+/**
+ * Cross-region restore request.
+ */
 model CrossRegionRestoreRequest {
   /**
    * Access details for cross region restore
@@ -1294,7 +1316,9 @@ model CrossRegionRestoreRequest {
   restoreRequest?: RestoreRequest;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+/**
+ * Cross-region restore access token.
+ */
 @discriminator("objectType")
 model CrrAccessToken {
   /**
@@ -1610,7 +1634,9 @@ model OperationStatusExtendedInfo {
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Non-discriminated resource envelope wrapper on a passive stamp: `extends` preserves the emitted allOf composition; `is`/spread would inline the base and `@discriminator` would mis-declare a non-polymorphic base."
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+/**
+ * Cross-region restore access token resource.
+ */
 model CrrAccessTokenResource extends Resource {
   /**
    * CrrAccessTokenResource properties
@@ -2178,7 +2204,9 @@ model ExtendedProperties {
   diskExclusionProperties?: DiskExclusionProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+/**
+ * Properties for disk exclusion from backup.
+ */
 model DiskExclusionProperties {
   /**
    * List of Disks' Logical Unit Numbers (LUN) to be used for VM Protection.
@@ -2861,11 +2889,18 @@ model RecoveryPointTierInformation {
   extendedInfo?: Record<string>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+/**
+ * Recovery point move readiness information.
+ */
 model RecoveryPointMoveReadinessInfo {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  /**
+   * Whether the recovery point is ready to move.
+   */
   isReadyForMove?: boolean;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Additional information about move readiness.
+   */
   additionalInfo?: string;
 }
 
@@ -3279,7 +3314,9 @@ model ClientScriptForConnect {
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Non-discriminated resource envelope wrapper on a passive stamp: `extends` preserves the emitted allOf composition; `is`/spread would inline the base and `@discriminator` would mis-declare a non-polymorphic base."
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+/**
+ * Cross-region restore request resource.
+ */
 model CrossRegionRestoreRequestResource extends Resource {
   /**
    * CrossRegionRestoreRequestResource properties
@@ -3291,9 +3328,14 @@ model CrossRegionRestoreRequestResource extends Resource {
  * Disk information
  */
 model DiskInformation {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  /**
+   * Logical Unit Number (LUN) of the disk.
+   */
   lun?: int32;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Name of the disk.
+   */
   name?: string;
 }
 
@@ -4310,19 +4352,38 @@ model ProtectedItemQueryObject {
   backupSetName?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+/**
+ * Cross-region restore access token for a workload item.
+ */
 model WorkloadCrrAccessToken extends CrrAccessToken {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  /**
+   * Unique name of the protectable object.
+   */
   protectableObjectUniqueName?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Friendly name of the protectable object.
+   */
   protectableObjectFriendlyName?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Workload type of the protectable object.
+   */
   protectableObjectWorkloadType?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Protection state of the protectable object.
+   */
   protectableObjectProtectionState?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Host OS name of the protectable object's container.
+   */
   protectableObjectContainerHostOsName?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+
+  /**
+   * Parent logical container name of the protectable object.
+   */
   protectableObjectParentLogicalContainerName?: string;
 
   /**

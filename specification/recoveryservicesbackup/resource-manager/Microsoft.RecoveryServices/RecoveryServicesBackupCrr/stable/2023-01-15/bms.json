@@ -349,6 +349,7 @@
           {
             "name": "operationId",
             "in": "path",
+            "description": "The operation ID.",
             "required": true,
             "type": "string"
           }
@@ -413,6 +414,7 @@
           {
             "name": "operationId",
             "in": "path",
+            "description": "The operation ID.",
             "required": true,
             "type": "string"
           }
@@ -958,26 +960,33 @@
   "definitions": {
     "AADProperties": {
       "type": "object",
+      "description": "Azure Active Directory properties.",
       "properties": {
         "servicePrincipalClientId": {
-          "type": "string"
+          "type": "string",
+          "description": "Service principal client ID."
         },
         "tenantId": {
-          "type": "string"
+          "type": "string",
+          "description": "Tenant ID."
         },
         "authority": {
-          "type": "string"
+          "type": "string",
+          "description": "Authority."
         },
         "audience": {
-          "type": "string"
+          "type": "string",
+          "description": "Audience."
         },
         "servicePrincipalObjectId": {
-          "type": "string"
+          "type": "string",
+          "description": "Service principal object ID."
         }
       }
     },
     "AADPropertiesResource": {
       "type": "object",
+      "description": "AAD properties response resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/AADProperties",
@@ -2404,6 +2413,7 @@
     },
     "CrossRegionRestoreRequest": {
       "type": "object",
+      "description": "Cross-region restore request.",
       "properties": {
         "crossRegionRestoreAccessDetails": {
           "$ref": "#/definitions/CrrAccessToken",
@@ -2417,6 +2427,7 @@
     },
     "CrossRegionRestoreRequestResource": {
       "type": "object",
+      "description": "Cross-region restore request resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/CrossRegionRestoreRequest",
@@ -2431,6 +2442,7 @@
     },
     "CrrAccessToken": {
       "type": "object",
+      "description": "Cross-region restore access token.",
       "properties": {
         "objectType": {
           "type": "string",
@@ -2548,6 +2560,7 @@
     },
     "CrrAccessTokenResource": {
       "type": "object",
+      "description": "Cross-region restore access token resource.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/CrrAccessToken",
@@ -2792,6 +2805,7 @@
     },
     "DiskExclusionProperties": {
       "type": "object",
+      "description": "Properties for disk exclusion from backup.",
       "properties": {
         "diskLunList": {
           "type": "array",
@@ -2813,10 +2827,12 @@
       "properties": {
         "lun": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "description": "Logical Unit Number (LUN) of the disk."
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "description": "Name of the disk."
         }
       }
     },
@@ -3620,6 +3636,7 @@
     },
     "JobSupportedAction": {
       "type": "string",
+      "description": "Supported actions for a backup management job.",
       "enum": [
         "Invalid",
         "Cancellable",
@@ -4703,12 +4720,15 @@
     },
     "RecoveryPointMoveReadinessInfo": {
       "type": "object",
+      "description": "Recovery point move readiness information.",
       "properties": {
         "isReadyForMove": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "Whether the recovery point is ready to move."
         },
         "additionalInfo": {
-          "type": "string"
+          "type": "string",
+          "description": "Additional information about move readiness."
         }
       }
     },
@@ -5477,24 +5497,31 @@
     },
     "WorkloadCrrAccessToken": {
       "type": "object",
+      "description": "Cross-region restore access token for a workload item.",
       "properties": {
         "protectableObjectUniqueName": {
-          "type": "string"
+          "type": "string",
+          "description": "Unique name of the protectable object."
         },
         "protectableObjectFriendlyName": {
-          "type": "string"
+          "type": "string",
+          "description": "Friendly name of the protectable object."
         },
         "protectableObjectWorkloadType": {
-          "type": "string"
+          "type": "string",
+          "description": "Workload type of the protectable object."
         },
         "protectableObjectProtectionState": {
-          "type": "string"
+          "type": "string",
+          "description": "Protection state of the protectable object."
         },
         "protectableObjectContainerHostOsName": {
-          "type": "string"
+          "type": "string",
+          "description": "Host OS name of the protectable object's container."
         },
         "protectableObjectParentLogicalContainerName": {
-          "type": "string"
+          "type": "string",
+          "description": "Parent logical container name of the protectable object."
         },
         "containerId": {
           "type": "string",
