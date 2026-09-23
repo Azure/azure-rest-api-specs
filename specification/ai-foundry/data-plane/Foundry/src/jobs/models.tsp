@@ -357,7 +357,7 @@ model CommandJob extends JobProperties {
 }
 
 @doc("Job resource.")
-@Rest.resource("jobs")
+@Rest.resource("training_jobs")
 model Job {
   @doc("The name of the Job. This is case-sensitive.")
   @key("name")

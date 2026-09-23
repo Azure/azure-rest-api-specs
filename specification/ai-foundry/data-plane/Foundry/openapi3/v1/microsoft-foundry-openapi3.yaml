@@ -8541,366 +8541,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Insights
-  /jobs:
-    get:
-      operationId: Jobs_list
-      description: List Jobs.
-      parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
-        - name: jobType
-          in: query
-          required: false
-          description: Filter by job type (e.g. 'Command').
-          schema:
-            $ref: '#/components/schemas/JobType'
-          explode: false
-        - name: tag
-          in: query
-          required: false
-          description: Filter jobs by tag in the format 'key=value' (e.g., 'framework=pytorch').
-          schema:
-            type: string
-          explode: false
-        - name: listViewType
-          in: query
-          required: false
-          description: Specifies which view type to apply when listing jobs.
-          schema:
-            $ref: '#/components/schemas/ListViewType'
-          explode: false
-        - name: properties
-          in: query
-          required: false
-          description: 'Comma-separated user property names and optionally values. Example: prop1,prop2=value2.'
-          schema:
-            type: string
-          explode: false
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Jobs=V1Preview
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PagedJob'
-        default:
-          description: An unexpected error response.
-          headers:
-            x-ms-error-code:
-              required: false
-              description: String error code indicating what went wrong.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
-      tags:
-        - CommandJob
-  /jobs/{name}:
-    get:
-      operationId: Jobs_get
-      description: Get a Job by name.
-      parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
-        - name: name
-          in: path
-          required: true
-          description: The name of the Job. This is case-sensitive.
-          schema:
-            type: string
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Jobs=V1Preview
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Job'
-        default:
-          description: An unexpected error response.
-          headers:
-            x-ms-error-code:
-              required: false
-              description: String error code indicating what went wrong.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
-      tags:
-        - CommandJob
-    put:
-      operationId: Jobs_createOrUpdate
-      description: Create and execute a Job. For update case, the Tags in the definition passed in will replace Tags in the existing job.
-      parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
-        - name: name
-          in: path
-          required: true
-          description: The name of the Job. This is case-sensitive.
-          schema:
-            type: string
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Jobs=V1Preview
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Job'
-        '201':
-          description: The request has succeeded and a new resource has been created as a result.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Job'
-        default:
-          description: An unexpected error response.
-          headers:
-            x-ms-error-code:
-              required: false
-              description: String error code indicating what went wrong.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
-      tags:
-        - CommandJob
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Job'
-        description: The job to create or update.
-    delete:
-      operationId: Jobs_beginDelete
-      description: Delete a Job by name. Returns 202 Accepted with a Location header to poll for completion, or 204 if the job does not exist.
-      parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
-        - name: name
-          in: path
-          required: true
-          description: The name of the Job. This is case-sensitive.
-          schema:
-            type: string
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Jobs=V1Preview
-      responses:
-        '202':
-          description: Response returned when a job delete operation is accepted asynchronously.
-          headers:
-            Location:
-              required: true
-              description: URL to poll for the status of the delete operation.
-              schema:
-                type: string
-            Retry-After:
-              required: false
-              description: Suggested delay in seconds before polling.
-              schema:
-                type: integer
-                format: int32
-        '204':
-          description: There is no content to send for this request, but the headers may be useful.
-        default:
-          description: An unexpected error response.
-          headers:
-            x-ms-error-code:
-              required: false
-              description: String error code indicating what went wrong.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
-      tags:
-        - CommandJob
-  /jobs/{name}/artifacts:
-    get:
-      operationId: Jobs_listArtifacts
-      description: List artifact descriptors for a job, including its log files, without returning download credentials. Logs are ordinary artifacts under the `azureml-logs/`, `user_logs/` and `system_logs/` directories. Follow `nextLink` unchanged to retrieve subsequent pages.
-      parameters:
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Jobs=V1Preview
-        - name: name
-          in: path
-          required: true
-          description: The name of the Job.
-          schema:
-            type: string
-        - name: path
-          in: query
-          required: false
-          description: Optional directory path relative to the job's artifact container. A non-empty path is treated as a directory prefix with a trailing slash; for example, `outputs` selects artifacts under `outputs/`, not `outputs-extra/`.
-          schema:
-            type: string
-          explode: false
-        - name: $skipToken
-          in: query
-          required: false
-          description: An opaque continuation token supplied in the preceding response's `nextLink`. Prefer following `nextLink` unchanged rather than constructing this parameter.
-          schema:
-            type: string
-          explode: false
-        - name: maxpagesize
-          in: query
-          required: false
-          description: Maximum number of artifacts in one page, from 1 to 500. The service may return fewer items. Supported only for jobs routed to the Foundry Training Job backend, which uses 100 when omitted. Omit this parameter for legacy Run History jobs; specifying it on that route is rejected.
-          schema:
-            type: integer
-            format: int32
-            minimum: 1
-            maximum: 500
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ArtifactList'
-      tags:
-        - CommandJob
-  /jobs/{name}/artifacts/contentinfo:
-    get:
-      operationId: Jobs_getArtifactContentInformation
-      description: Get content access information for one artifact identified by its exact path. Returns a download URI and the byte length when available; this operation does not list a directory or return a page of artifacts.
-      parameters:
-        - name: api-version
-          in: query
-          required: true
-          description: The API version to use for this operation.
-          schema:
-            type: string
-          explode: false
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Jobs=V1Preview
-        - name: name
-          in: path
-          required: true
-          description: The name of the Job.
-          schema:
-            type: string
-        - name: path
-          in: query
-          required: true
-          description: The required, case-sensitive path of one artifact relative to the job's artifact container, such as `user_logs/std_log.txt`. A directory prefix is not accepted.
-          schema:
-            type: string
-            minLength: 1
-          explode: false
-      responses:
-        '200':
-          description: The request has succeeded.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ArtifactContentInformation'
-      tags:
-        - CommandJob
-  /jobs/{name}/cancel:
-    post:
-      operationId: Jobs_beginCancel
-      description: Cancel a Job by name. Returns 200 if cancelled immediately, or 202 Accepted with a Location header to poll for completion.
-      parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
-        - name: name
-          in: path
-          required: true
-          description: The name of the Job. This is case-sensitive.
-          schema:
-            type: string
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Jobs=V1Preview
-      responses:
-        '200':
-          description: The request has succeeded.
-        '202':
-          description: Response returned when a job cancel operation is accepted asynchronously.
-          headers:
-            Location:
-              required: true
-              description: URL to poll for the status of the cancel operation.
-              schema:
-                type: string
-            Retry-After:
-              required: false
-              description: Suggested delay in seconds before polling.
-              schema:
-                type: integer
-                format: int32
-        default:
-          description: An unexpected error response.
-          headers:
-            x-ms-error-code:
-              required: false
-              description: String error code indicating what went wrong.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
-      tags:
-        - CommandJob
   /memory_stores:
     post:
       operationId: createMemoryStore
@@ -41517,6 +41157,366 @@ paths:
               type: object
               unevaluatedProperties: {}
         description: The MCP request body.
+  /training_jobs:
+    get:
+      operationId: Jobs_list
+      description: List Jobs.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: jobType
+          in: query
+          required: false
+          description: Filter by job type (e.g. 'Command').
+          schema:
+            $ref: '#/components/schemas/JobType'
+          explode: false
+        - name: tag
+          in: query
+          required: false
+          description: Filter jobs by tag in the format 'key=value' (e.g., 'framework=pytorch').
+          schema:
+            type: string
+          explode: false
+        - name: listViewType
+          in: query
+          required: false
+          description: Specifies which view type to apply when listing jobs.
+          schema:
+            $ref: '#/components/schemas/ListViewType'
+          explode: false
+        - name: properties
+          in: query
+          required: false
+          description: 'Comma-separated user property names and optionally values. Example: prop1,prop2=value2.'
+          schema:
+            type: string
+          explode: false
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Jobs=V1Preview
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PagedJob'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - CommandJob
+  /training_jobs/{name}:
+    get:
+      operationId: Jobs_get
+      description: Get a Job by name.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: The name of the Job. This is case-sensitive.
+          schema:
+            type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Jobs=V1Preview
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - CommandJob
+    put:
+      operationId: Jobs_createOrUpdate
+      description: Create and execute a Job. For update case, the Tags in the definition passed in will replace Tags in the existing job.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: The name of the Job. This is case-sensitive.
+          schema:
+            type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Jobs=V1Preview
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        '201':
+          description: The request has succeeded and a new resource has been created as a result.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Job'
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - CommandJob
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Job'
+        description: The job to create or update.
+    delete:
+      operationId: Jobs_beginDelete
+      description: Delete a Job by name. Returns 202 Accepted with a Location header to poll for completion, or 204 if the job does not exist.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: The name of the Job. This is case-sensitive.
+          schema:
+            type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Jobs=V1Preview
+      responses:
+        '202':
+          description: Response returned when a job delete operation is accepted asynchronously.
+          headers:
+            Location:
+              required: true
+              description: URL to poll for the status of the delete operation.
+              schema:
+                type: string
+            Retry-After:
+              required: false
+              description: Suggested delay in seconds before polling.
+              schema:
+                type: integer
+                format: int32
+        '204':
+          description: There is no content to send for this request, but the headers may be useful.
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - CommandJob
+  /training_jobs/{name}/artifacts:
+    get:
+      operationId: Jobs_listArtifacts
+      description: List artifact descriptors for a job, including its log files, without returning download credentials. Logs are ordinary artifacts under the `azureml-logs/`, `user_logs/` and `system_logs/` directories. Follow `nextLink` unchanged to retrieve subsequent pages.
+      parameters:
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Jobs=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the Job.
+          schema:
+            type: string
+        - name: path
+          in: query
+          required: false
+          description: Optional directory path relative to the job's artifact container. A non-empty path is treated as a directory prefix with a trailing slash; for example, `outputs` selects artifacts under `outputs/`, not `outputs-extra/`.
+          schema:
+            type: string
+          explode: false
+        - name: $skipToken
+          in: query
+          required: false
+          description: An opaque continuation token supplied in the preceding response's `nextLink`. Prefer following `nextLink` unchanged rather than constructing this parameter.
+          schema:
+            type: string
+          explode: false
+        - name: maxpagesize
+          in: query
+          required: false
+          description: Maximum number of artifacts in one page, from 1 to 500. The service may return fewer items. Supported only for jobs routed to the Foundry Training Job backend, which uses 100 when omitted. Omit this parameter for legacy Run History jobs; specifying it on that route is rejected.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+            maximum: 500
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArtifactList'
+      tags:
+        - CommandJob
+  /training_jobs/{name}/artifacts/contentinfo:
+    get:
+      operationId: Jobs_getArtifactContentInformation
+      description: Get content access information for one artifact identified by its exact path. Returns a download URI and the byte length when available; this operation does not list a directory or return a page of artifacts.
+      parameters:
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Jobs=V1Preview
+        - name: name
+          in: path
+          required: true
+          description: The name of the Job.
+          schema:
+            type: string
+        - name: path
+          in: query
+          required: true
+          description: The required, case-sensitive path of one artifact relative to the job's artifact container, such as `user_logs/std_log.txt`. A directory prefix is not accepted.
+          schema:
+            type: string
+            minLength: 1
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArtifactContentInformation'
+      tags:
+        - CommandJob
+  /training_jobs/{name}/cancel:
+    post:
+      operationId: Jobs_beginCancel
+      description: Cancel a Job by name. Returns 200 if cancelled immediately, or 202 Accepted with a Location header to poll for completion.
+      parameters:
+        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: name
+          in: path
+          required: true
+          description: The name of the Job. This is case-sensitive.
+          schema:
+            type: string
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - Jobs=V1Preview
+      responses:
+        '200':
+          description: The request has succeeded.
+        '202':
+          description: Response returned when a job cancel operation is accepted asynchronously.
+          headers:
+            Location:
+              required: true
+              description: URL to poll for the status of the cancel operation.
+              schema:
+                type: string
+            Retry-After:
+              required: false
+              description: Suggested delay in seconds before polling.
+              schema:
+                type: integer
+                format: int32
+        default:
+          description: An unexpected error response.
+          headers:
+            x-ms-error-code:
+              required: false
+              description: String error code indicating what went wrong.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+      tags:
+        - CommandJob
 security:
   - OAuth2Auth:
       - https://ai.azure.com/.default
