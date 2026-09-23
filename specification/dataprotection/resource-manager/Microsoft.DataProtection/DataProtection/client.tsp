@@ -5,6 +5,9 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Microsoft.DataProtection;
 
+@encode("duration-constant")
+scalar DurationConstant extends duration;
+
 // Fix property name changes (ID -> Id)
 @@clientName(DatasourceSet.resourceID, "resourceId", "java");
 @@clientName(Datasource.resourceID, "resourceId", "java");
@@ -188,7 +191,7 @@ using Microsoft.DataProtection;
 @@alternateType(AzureBackupJob.progressUrl, url, "csharp");
 @@alternateType(AzureBackupJob.dataSourceId, armResourceIdentifier, "csharp");
 @@alternateType(AzureBackupJob.dataSourceLocation, azureLocation, "csharp");
-@@alternateType(AzureBackupJob.duration, duration, "csharp");
+@@alternateType(AzureBackupJob.duration, DurationConstant, "csharp");
 @@alternateType(AzureBackupJob.policyId, armResourceIdentifier, "csharp");
 @@clientName(AzureBackupJob.progressEnabled, "IsProgressEnabled", "csharp");
 @@clientName(AzureBackupJobResource, "DataProtectionBackupJob", "csharp");
