@@ -49,7 +49,7 @@ directive:
     where: $.definitions.ObservabilityConfiguration
     reason: ObservabilityConfiguration is a singleton proxy resource that intentionally does not support DELETE. The resource can only be retrieved via GET.
   - suppress: TopLevelResourcesListBySubscription
-    from: preview/2026-06-01-preview/observabilityConfiguration.json
+    from: observabilityConfiguration.json
     reason: ObservabilityConfiguration is a singleton resource whose only accepted name is 'default'. A list-by-subscription operation would always return at most that single instance and is intentionally omitted when not exposed by the service surface.
   - suppress: RepeatedPathInfo
     from: observabilityConfiguration.json
