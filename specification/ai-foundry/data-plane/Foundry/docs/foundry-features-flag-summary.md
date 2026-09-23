@@ -108,5 +108,12 @@ independently of the wire API version.
 | Fine-Tuning Sessions | Optimizer Step | POST | `/fine_tuning_sessions/{sessionId}/optim_step` | Required: `FineTuningSessions=V1Preview` |
 | Fine-Tuning Sessions | Get Operation | GET | `/fine_tuning_sessions/{sessionId}/request/{requestId}` | Required: `FineTuningSessions=V1Preview` |
 | Fine-Tuning Sessions | Sample | POST | `/fine_tuning_sessions/{sessionId}/sample` | Required: `FineTuningSessions=V1Preview` |
+| Training Jobs | List | GET | `/training_jobs` | Required: `Jobs=V1Preview` |
+| Training Jobs | CreateOrUpdate | PUT | `/training_jobs/{name}` | Required: `Jobs=V1Preview` |
+| Training Jobs | Get | GET | `/training_jobs/{name}` | Required: `Jobs=V1Preview` |
+| Training Jobs | Delete | DELETE | `/training_jobs/{name}` | Required: `Jobs=V1Preview` |
+| Training Jobs | Cancel | POST | `/training_jobs/{name}/cancel` | Required: `Jobs=V1Preview` |
+| Training Jobs | List Artifacts | GET | `/training_jobs/{name}/artifacts` | Required: `Jobs=V1Preview` |
+| Training Jobs | Get Artifact Content Information | GET | `/training_jobs/{name}/artifacts/contentinfo` | Required: `Jobs=V1Preview` |
 
 Note that only v1 operations are included in the above table. If an operation (or interface) is decorated with `@removed(Versions.v1)` the are not included here.
