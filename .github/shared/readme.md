@@ -97,6 +97,45 @@ Single source of truth for breaking-change and versioning approval label names a
 
 - `toPercent(value, decimals)` — format a `0..1` ratio as a percentage string.
 
+### `markdown` — composable report helpers
+
+- `MarkdownDoc`, `MarkdownSection` — trusted Markdown blocks, optional content, arrays and sections.
+- `section(title, body)` — group content under a heading; nested sections increase the heading level.
+- `renderMarkdownDoc(doc, heading = 1)` — render blocks separated by blank lines, omitting empty blocks.
+- `escapeMarkdown(text)` — escape untrusted single-line text, including HTML, table pipes and mentions.
+- `inlineCode(text)` — render nonempty code text, preserving embedded backticks and edge spaces.
+- `link(label, url)` — create a link from trusted inline Markdown and a trusted destination.
+- `table([header, ...rows])` — render equal-width GFM rows, escaping pipes and preserving line breaks.
+- `unorderedList(items)` — render Markdown list items, indenting continuation lines.
+- `details(summary, body)` — create a collapsible block with a plain-text summary and Markdown body.
+
+Like [TypeSpec's `tspd` helpers](https://github.com/microsoft/typespec/blob/main/packages/tspd/src/ref-doc/utils/markdown.ts),
+callers describe the document structure rather than hand-joining every line. Strings are trusted
+Markdown: apply `escapeMarkdown` to external text before putting it in a heading,
+table cell, list item or link label. Link destinations must be trusted separately.
+
+```typescript
+import {
+  details,
+  escapeMarkdown,
+  renderMarkdownDoc,
+  section,
+  table,
+  unorderedList,
+} from "@azure-tools/specs-shared/markdown";
+
+const report = renderMarkdownDoc(
+  section("Contributor readiness", [
+    table([
+      ["Participant", "Finding"],
+      [escapeMarkdown(login), escapeMarkdown(message)],
+    ]),
+    details("Participants", unorderedList([escapeMarkdown(login)])),
+  ]),
+  2,
+);
+```
+
 ### `path` — path helpers (with caching)
 
 - `includesSegment(path, segment)` — true if the path contains the given path segment.
