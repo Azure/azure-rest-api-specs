@@ -397,6 +397,298 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionDatabases/{databaseName}/longTermRetentionManagedInstanceBackups/{backupName}/lockTimeBasedImmutability": {
+      "post": {
+        "operationId": "ManagedInstanceLongTermRetentionBackups_LockTimeBasedImmutability",
+        "tags": [
+          "LongTermRetentionManagedInstanceBackups"
+        ],
+        "description": "Lock time based immutability of an existing managed instance long term retention backup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the managed database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceLongTermRetentionBackup"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ManagedInstanceLongTermRetentionBackup"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionDatabases/{databaseName}/longTermRetentionManagedInstanceBackups/{backupName}/removeLegalHoldImmutability": {
+      "post": {
+        "operationId": "ManagedInstanceLongTermRetentionBackups_RemoveLegalHoldImmutability",
+        "tags": [
+          "LongTermRetentionManagedInstanceBackups"
+        ],
+        "description": "Remove legal hold immutability of an existing managed instance long term retention backup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the managed database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceLongTermRetentionBackup"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ManagedInstanceLongTermRetentionBackup"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionDatabases/{databaseName}/longTermRetentionManagedInstanceBackups/{backupName}/removeTimeBasedImmutability": {
+      "post": {
+        "operationId": "ManagedInstanceLongTermRetentionBackups_RemoveTimeBasedImmutability",
+        "tags": [
+          "LongTermRetentionManagedInstanceBackups"
+        ],
+        "description": "Remove time based immutability of an existing managed instance long term retention backup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the managed database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceLongTermRetentionBackup"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ManagedInstanceLongTermRetentionBackup"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionDatabases/{databaseName}/longTermRetentionManagedInstanceBackups/{backupName}/setLegalHoldImmutability": {
+      "post": {
+        "operationId": "ManagedInstanceLongTermRetentionBackups_SetLegalHoldImmutability",
+        "tags": [
+          "LongTermRetentionManagedInstanceBackups"
+        ],
+        "description": "Set legal hold immutability of an existing managed instance long term retention backup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the managed database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceLongTermRetentionBackup"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ManagedInstanceLongTermRetentionBackup"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionManagedInstanceBackups": {
       "get": {
         "operationId": "LongTermRetentionManagedInstanceBackups_ListByInstance",
@@ -851,6 +1143,310 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionDatabases/{databaseName}/longTermRetentionManagedInstanceBackups/{backupName}/lockTimeBasedImmutability": {
+      "post": {
+        "operationId": "LongTermRetentionManagedInstanceBackups_LockTimeBasedImmutabilityByResourceGroup",
+        "tags": [
+          "LongTermRetentionManagedInstanceBackups"
+        ],
+        "description": "Lock time based immutability of an existing managed instance long term retention backup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the managed database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceLongTermRetentionBackup"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ManagedInstanceLongTermRetentionBackup"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionDatabases/{databaseName}/longTermRetentionManagedInstanceBackups/{backupName}/removeLegalHoldImmutability": {
+      "post": {
+        "operationId": "LongTermRetentionManagedInstanceBackups_RemoveLegalHoldImmutabilityByResourceGroup",
+        "tags": [
+          "LongTermRetentionManagedInstanceBackups"
+        ],
+        "description": "Remove legal hold immutability of an existing managed instance long term retention backup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the managed database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceLongTermRetentionBackup"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ManagedInstanceLongTermRetentionBackup"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionDatabases/{databaseName}/longTermRetentionManagedInstanceBackups/{backupName}/removeTimeBasedImmutability": {
+      "post": {
+        "operationId": "LongTermRetentionManagedInstanceBackups_RemoveTimeBasedImmutabilityByResourceGroup",
+        "tags": [
+          "LongTermRetentionManagedInstanceBackups"
+        ],
+        "description": "Remove time based immutability of an existing managed instance long term retention backup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the managed database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceLongTermRetentionBackup"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ManagedInstanceLongTermRetentionBackup"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/locations/{locationName}/longTermRetentionManagedInstances/{managedInstanceName}/longTermRetentionDatabases/{databaseName}/longTermRetentionManagedInstanceBackups/{backupName}/setLegalHoldImmutability": {
+      "post": {
+        "operationId": "LongTermRetentionManagedInstanceBackups_SetLegalHoldImmutabilityByResourceGroup",
+        "tags": [
+          "LongTermRetentionManagedInstanceBackups"
+        ],
+        "description": "Set legal hold immutability of an existing managed instance long term retention backup.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "locationName",
+            "in": "path",
+            "description": "The location of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the managed database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "backupName",
+            "in": "path",
+            "description": "The backup name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceLongTermRetentionBackup"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/ManagedInstanceLongTermRetentionBackup"
         },
         "x-ms-long-running-operation": true
       }

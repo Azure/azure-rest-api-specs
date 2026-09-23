@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Sql;
 /**
@@ -90,6 +91,62 @@ interface ManagedInstanceLongTermRetentionBackups {
   >;
 
   /**
+   * Lock time based immutability of an existing managed instance long term retention backup.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @tag("LongTermRetentionManagedInstanceBackups")
+  lockTimeBasedImmutability is ManagedInstanceLongTermRetentionBackupOps.ActionAsync<
+    ManagedInstanceLongTermRetentionBackup,
+    void,
+    void,
+    Response =
+      | ArmResponse<ManagedInstanceLongTermRetentionBackup>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstanceLongTermRetentionBackup>>
+  >;
+
+  /**
+   * Remove legal hold immutability of an existing managed instance long term retention backup.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @tag("LongTermRetentionManagedInstanceBackups")
+  removeLegalHoldImmutability is ManagedInstanceLongTermRetentionBackupOps.ActionAsync<
+    ManagedInstanceLongTermRetentionBackup,
+    void,
+    void,
+    Response =
+      | ArmResponse<ManagedInstanceLongTermRetentionBackup>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstanceLongTermRetentionBackup>>
+  >;
+
+  /**
+   * Remove time based immutability of an existing managed instance long term retention backup.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @tag("LongTermRetentionManagedInstanceBackups")
+  removeTimeBasedImmutability is ManagedInstanceLongTermRetentionBackupOps.ActionAsync<
+    ManagedInstanceLongTermRetentionBackup,
+    void,
+    void,
+    Response =
+      | ArmResponse<ManagedInstanceLongTermRetentionBackup>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstanceLongTermRetentionBackup>>
+  >;
+
+  /**
+   * Set legal hold immutability of an existing managed instance long term retention backup.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @tag("LongTermRetentionManagedInstanceBackups")
+  setLegalHoldImmutability is ManagedInstanceLongTermRetentionBackupOps.ActionAsync<
+    ManagedInstanceLongTermRetentionBackup,
+    void,
+    void,
+    Response =
+      | ArmResponse<ManagedInstanceLongTermRetentionBackup>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstanceLongTermRetentionBackup>>
+  >;
+
+  /**
    * Lists all long term retention backups for a managed database.
    */
   @tag("LongTermRetentionManagedInstanceBackups")
@@ -163,6 +220,62 @@ interface LongTermRetentionManagedInstanceBackups {
   deleteByResourceGroup is LongTermRetentionManagedInstanceBackupOps.DeleteWithoutOkAsync<
     ManagedInstanceLongTermRetentionBackup,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse
+  >;
+
+  /**
+   * Lock time based immutability of an existing managed instance long term retention backup.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @action("lockTimeBasedImmutability")
+  lockTimeBasedImmutabilityByResourceGroup is LongTermRetentionManagedInstanceBackupOps.ActionAsync<
+    ManagedInstanceLongTermRetentionBackup,
+    void,
+    void,
+    Response =
+      | ArmResponse<ManagedInstanceLongTermRetentionBackup>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstanceLongTermRetentionBackup>>
+  >;
+
+  /**
+   * Remove legal hold immutability of an existing managed instance long term retention backup.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @action("removeLegalHoldImmutability")
+  removeLegalHoldImmutabilityByResourceGroup is LongTermRetentionManagedInstanceBackupOps.ActionAsync<
+    ManagedInstanceLongTermRetentionBackup,
+    void,
+    void,
+    Response =
+      | ArmResponse<ManagedInstanceLongTermRetentionBackup>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstanceLongTermRetentionBackup>>
+  >;
+
+  /**
+   * Remove time based immutability of an existing managed instance long term retention backup.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @action("removeTimeBasedImmutability")
+  removeTimeBasedImmutabilityByResourceGroup is LongTermRetentionManagedInstanceBackupOps.ActionAsync<
+    ManagedInstanceLongTermRetentionBackup,
+    void,
+    void,
+    Response =
+      | ArmResponse<ManagedInstanceLongTermRetentionBackup>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstanceLongTermRetentionBackup>>
+  >;
+
+  /**
+   * Set legal hold immutability of an existing managed instance long term retention backup.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @action("setLegalHoldImmutability")
+  setLegalHoldImmutabilityByResourceGroup is LongTermRetentionManagedInstanceBackupOps.ActionAsync<
+    ManagedInstanceLongTermRetentionBackup,
+    void,
+    void,
+    Response =
+      | ArmResponse<ManagedInstanceLongTermRetentionBackup>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ManagedInstanceLongTermRetentionBackup>>
   >;
 
   /**
