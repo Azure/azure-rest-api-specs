@@ -1,0 +1,42 @@
+{
+  "operationId": "QueryEndpointActivations_CreateOrUpdate",
+  "title": "Activate a query endpoint in one region",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "offeringName": "contoso-insights",
+    "queryEndpointName": "topology-explorer",
+    "location": "westus2",
+    "resource": {}
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ResourceGraph/offerings/contoso-insights/queryEndpoints/topology-explorer/locations/westus2/activation/default",
+        "name": "default",
+        "type": "Microsoft.ResourceGraph/offerings/queryEndpoints/locations/activation",
+        "properties": {
+          "ontologyRef": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ResourceGraph/offerings/contoso-insights/ontologies/network-topology",
+          "enginePreference": "Pacific",
+          "region": "westus2",
+          "provisioningState": "Succeeded",
+          "validationDetails": []
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ResourceGraph/offerings/contoso-insights/queryEndpoints/topology-explorer/locations/westus2/activation/default",
+        "name": "default",
+        "type": "Microsoft.ResourceGraph/offerings/queryEndpoints/locations/activation",
+        "properties": {
+          "ontologyRef": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ResourceGraph/offerings/contoso-insights/ontologies/network-topology",
+          "enginePreference": "Pacific",
+          "region": "westus2",
+          "provisioningState": "Succeeded",
+          "validationDetails": []
+        }
+      }
+    }
+  }
+}

@@ -5,9 +5,10 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 
 import "./ResourceChanges/main.tsp";
-import "./ResourceGraphApi/main.tsp";
+import "./ResourceGraphApi/query.tsp";
 import "./ResourceHistory/main.tsp";
 import "./GraphQueryApi/main.tsp";
+import "./OnboardingApi/main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -17,7 +18,13 @@ using Azure.ClientGenerator.Core;
 
 @client({
   name: "ResourceGraphClient",
-  service: [ResourceChanges, ResourceGraphApi, ResourceHistory, GraphQueryApi],
+  service: [
+    ResourceChanges,
+    ResourceGraphApi,
+    ResourceHistory,
+    GraphQueryApi,
+    OnboardingApi
+  ],
   autoMergeService: true,
 })
 namespace Microsoft.ResourceGraph;

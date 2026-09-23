@@ -1,0 +1,34 @@
+{
+  "operationId": "OntologyActivations_ListByLocation",
+  "title": "List the ontology activations in one region",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "offeringName": "contoso-insights",
+    "ontologyName": "network-topology",
+    "location": "westus2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ResourceGraph/offerings/contoso-insights/ontologies/network-topology/locations/westus2/activation/default",
+            "name": "default",
+            "type": "Microsoft.ResourceGraph/offerings/ontologies/locations/activation",
+            "properties": {
+              "region": "westus2",
+              "provisioningState": "Succeeded",
+              "reviewStatus": "Submitted",
+              "validationDetails": [],
+              "materializedDataOnboardingRefs": [
+                "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ResourceGraph/offerings/contoso-insights/dataOnboardings/microsoft-network-20260414091500"
+              ],
+              "assignments": []
+            }
+          }
+        ]
+      }
+    }
+  }
+}
