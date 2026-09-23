@@ -17,7 +17,7 @@ export type PRChange = {
   fileType: FileTypes;
   changeType: ChangeTypes;
   filePath: string;
-  additionalInfo?: any;
+  additionalInfo?: unknown;
 };
 
 export type ReadmeTag = {
@@ -27,9 +27,9 @@ export type ReadmeTag = {
 
 export type TagConfigDiff = {
   name: string;
-  oldConfig?: any;
-  newConfig?: any;
-  difference?: any;
+  oldConfig?: unknown;
+  newConfig?: unknown;
+  difference?: unknown;
   changedInputFiles?: string[];
 };
 
@@ -41,8 +41,8 @@ export type TagDiff = {
   differences?: TagConfigDiff[];
 };
 
-export type ChangeHandler = {
-  [key in FileTypes]?: (event: PRChange) => void | Promise<void>;
+export type ChangeHandler<T = void> = {
+  [key in FileTypes]?: (event: PRChange) => T;
 };
 
 export type DiffResult<T> = {

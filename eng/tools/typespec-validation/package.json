@@ -13,25 +13,18 @@
     "picocolors": "catalog:",
     "simple-git": "catalog:",
     "@azure-tools/suppressions": "workspace:*",
-    "strip-ansi": "catalog:",
     "yaml": "catalog:",
     "zod": "catalog:"
   },
   "devDependencies": {
     "@types/debug": "catalog:",
-    "@types/node": "catalog:",
-    "@vitest/coverage-v8": "catalog:",
-    "prettier": "catalog:",
-    "prettier-plugin-organize-imports": "catalog:",
-    "typescript": "catalog:",
-    "vitest": "catalog:"
+    "@types/node": "catalog:"
   },
   "scripts": {
     "build": "tsc --noEmit",
     "check": "pnpm build && pnpm lint && pnpm format:check && pnpm test:ci",
-    "format": "prettier . --ignore-path ../.prettierignore --write",
-    "format:check": "prettier . --ignore-path ../.prettierignore --check",
-    "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
+    "format": "oxfmt . --write",
+    "format:check": "oxfmt . --check",
     "lint": "oxlint .",
     "test": "vitest",
     "test:ci": "vitest run --coverage --reporter=verbose"
