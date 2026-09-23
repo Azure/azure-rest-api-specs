@@ -1,14 +1,13 @@
 import type { AsyncFunctionArguments } from "@actions/github-script";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import {
-  details,
   escapeMarkdown,
   inlineCode,
   link,
   renderMarkdownDoc,
   section,
   table,
-  unorderedList,
+  type MarkdownDoc,
 } from "../../shared/src/markdown.ts";
 import { parseExistingComments } from "./comment.ts";
 import type { Core, WebhookEvent } from "./github.ts";
@@ -16,7 +15,7 @@ import type { Core, WebhookEvent } from "./github.ts";
 const COMMAND = "/azsdk check-access";
 const MARKER = "<!-- contributor-readiness -->";
 const CHECK_NAME = "Contributor readiness";
-const ONBOARDING = "https://eng.ms/docs/products/azure-developer-experience/onboard/access";
+const ONBOARDING = "https://aka.ms/azsdk/access";
 
 type GitHub = AsyncFunctionArguments["github"];
 type Inputs = Pick<AsyncFunctionArguments, "github" | "context" | "core">;
@@ -136,7 +135,7 @@ export async function collectReadinessParticipants(
     findings.push({
       subject: "PR author",
       unknown: true,
-      message: "The PR author no longer has a resolvable GitHub account.",
+      message: "GitHub account unavailable.",
     });
   }
   const commits = await github.paginate(github.rest.pulls.listCommits, {
@@ -149,7 +148,7 @@ export async function collectReadinessParticipants(
     findings.push({
       subject: "Commit coverage",
       unknown: true,
-      message: `GitHub returned ${commits.length} of ${pr.commits} commits. Contributor coverage is incomplete (the commit endpoint has a 250-commit limit).`,
+      message: `Only ${commits.length} of ${pr.commits} commits checked (GitHub limit: 250).`,
     });
   }
   for (const commit of commits) {
@@ -159,8 +158,7 @@ export async function collectReadinessParticipants(
       findings.push({
         subject: `Commit ${commit.sha.slice(0, 12)}`,
         unknown: true,
-        message:
-          "Could not associate an author or committer with a GitHub account. Check the commit email's account association; this is not proof of an unauthorized contributor.",
+        message: "Author/committer account unavailable; check the commit email.",
       });
   }
   const reviews = await github.paginate(github.rest.pulls.listReviews, {
@@ -175,7 +173,7 @@ export async function collectReadinessParticipants(
       findings.push({
         subject: `Review ${review.id}`,
         unknown: true,
-        message: "The submitted review no longer has a resolvable GitHub account.",
+        message: "Reviewer account unavailable.",
       });
   }
   return [...participants.values()].sort((a, b) => a.login.localeCompare(b.login));
@@ -211,18 +209,18 @@ async function observe<T>(
   findings: ReadinessFinding[],
   subject: string,
   operation: () => Promise<T>,
+  unavailable = "Could not verify access; retry or ask a maintainer.",
 ): Promise<T | undefined> {
   try {
     return await operation();
   } catch (error) {
     // A denied lookup is not evidence that the participant lacks permission.
     if (![403, 404].includes(status(error) ?? 0)) throw error;
-    core.warning(`Could not verify ${subject}: GitHub returned ${status(error)}.`);
+    core.warning(`${subject}: ${unavailable} GitHub returned ${status(error)}.`);
     findings.push({
       subject,
       unknown: true,
-      message:
-        "Could not verify this requirement with the workflow's access. Refresh later or ask a maintainer to inspect the workflow.",
+      message: unavailable,
     });
     return undefined;
   }
@@ -240,78 +238,85 @@ export async function evaluateReadinessParticipants(
   for (const participant of participants) {
     if (isAutomation(participant)) continue;
     for (const org of ["Microsoft", "Azure"]) {
-      const visible = await observe(core, findings, `${participant.login}: ${org} visibility`, () =>
-        publicMembership(github, org, participant.login),
+      const visible = await observe(
+        core,
+        findings,
+        participant.login,
+        () => publicMembership(github, org, participant.login),
+        `Could not verify ${org} membership.`,
       );
       if (visible === false)
         findings.push({
           subject: participant.login,
-          message: `${org} membership is not publicly visible. If contributing internally, join the organization or make your membership Public. This alone does not invalidate a review.`,
+          message: `${org} membership not public.`,
         });
     }
-    const write = await observe(core, findings, `${participant.login}: repository access`, () =>
-      writeAccess(github, owner, repo, participant.login),
+    const write = await observe(
+      core,
+      findings,
+      participant.login,
+      () => writeAccess(github, owner, repo, participant.login),
+      "Could not verify repository access.",
     );
     if (write === false)
       findings.push({
         subject: participant.login,
         message: participant.roles.has("submitted reviewer")
-          ? "No repository write access. An approval from this account cannot satisfy a required write-access review. Internal reviewers should request or renew Azure SDK Partners access, allow propagation, then refresh."
-          : "No repository write access. Fork contributions remain possible; internal contributors needing main-repository branches or issue management should request or renew Azure SDK Partners access.",
+          ? "No write access; approval cannot satisfy required reviews."
+          : "No write access; fork contributions are still allowed.",
       });
   }
 }
 
-/** Builds the bounded advisory report, escaping all participant names and finding text. */
-export function renderReadiness(
-  participants: Participant[],
-  findings: ReadinessFinding[],
-  sha: string,
-): string {
+/** Builds a concise advisory report with only affected users and a setup/refresh link. */
+export function renderReadiness(participants: Participant[], findings: ReadinessFinding[]): string {
   return renderMarkdownDoc(
-    section("Contributor readiness (advisory)", [
-      findings.some((finding) => finding.unknown)
-        ? "Could not fully verify contributor readiness."
-        : findings.length
-          ? "Contributor access or onboarding needs attention."
-          : "No contributor-readiness issues found.",
-      `Evaluated head ${inlineCode(sha.slice(0, 12))}. Existing merge rules are unchanged.`,
+    section(
+      "Contributor readiness (advisory)",
       findings.length
         ? [
-            table([
-              ["Participant / area", "Finding"],
-              ...findings
-                .slice(0, 100)
-                .map((finding) => [
-                  escapeMarkdown(finding.subject),
-                  escapeMarkdown(finding.message),
-                ]),
-            ]),
-            findings.length > 100
-              ? `${findings.length - 100} additional findings omitted from this bounded report.`
-              : undefined,
+            renderReadinessFindings(participants, findings),
+            `Internal contributors: ${link("setup / renew access", ONBOARDING)}. Recheck: ${inlineCode(COMMAND)}.`,
+            "Advisory only; GitHub review rules still apply.",
           ]
-        : undefined,
-      details(
-        "Evaluated participants",
-        unorderedList([
-          ...participants
-            .slice(0, 100)
-            .map((p) => `${escapeMarkdown(p.login)}: ${[...p.roles].sort().join(", ")}`),
-          ...(participants.length > 100
-            ? [`${participants.length - 100} additional participants evaluated.`]
-            : []),
-        ]),
-      ),
-      [
-        `${link("Internal contributor onboarding", ONBOARDING)}: access requests can take up to one day to propagate and need renewal every 180 days.`,
-        "Private membership cannot be distinguished from no membership. Request approvals, expiry dates, and DevOps access are not checked.",
-        "Write access alone does not guarantee an approval counts: GitHub's CODEOWNER and other review rules still apply.",
-      ].join("\n"),
-      `After fixing access, comment ${inlineCode(COMMAND)}. PR authors, commit participants, submitted reviewers and maintainers can refresh.`,
-    ]),
+        : "✅ No contributor-readiness issues found.",
+    ),
     2,
   );
+}
+
+/** Groups findings into escaped, linked user rows; yellow means unknown, not confirmed failure. */
+function renderReadinessFindings(
+  participants: Participant[],
+  findings: ReadinessFinding[],
+): MarkdownDoc {
+  const users = new Set(participants.map((participant) => participant.login));
+  const groups = new Map<string, { messages: Set<string>; unknown: boolean }>();
+  for (const finding of findings) {
+    const group = groups.get(finding.subject) ?? { messages: new Set<string>(), unknown: true };
+    group.messages.add(finding.message);
+    group.unknown &&= finding.unknown === true;
+    groups.set(finding.subject, group);
+  }
+  const entries = [...groups].sort(
+    ([a, left], [b, right]) => Number(left.unknown) - Number(right.unknown) || a.localeCompare(b),
+  );
+  return [
+    table([
+      ["User / area", "Issue"],
+      ...entries.slice(0, 100).map(([subject, group]) => {
+        const label = escapeMarkdown(subject);
+        const user = users.has(subject)
+          ? link(label, `https://github.com/${encodeURIComponent(subject)}`)
+          : label;
+        return [
+          `${group.unknown ? "🟡" : "🔴"} **${user}**`,
+          [...group.messages].map(escapeMarkdown).join("<br>"),
+        ];
+      }),
+    ]),
+    entries.length > 100 ? `${entries.length - 100} more entries not shown.` : undefined,
+  ];
 }
 
 /**
@@ -347,7 +352,7 @@ export async function checkContributorReadiness(inputs: Inputs, number: number):
     findings.push({
       subject: "Evaluation",
       unknown: true,
-      message: "Could not complete the evaluation. Rerun the workflow or use the refresh command.",
+      message: "Could not complete checks; rerun or use the refresh command.",
     });
   }
   await publishReadinessReport(inputs, pr, participants, findings);
@@ -394,7 +399,7 @@ async function publishReadinessReport(
   if (latest.state !== "open" || latest.head.sha !== pr.head.sha) {
     throw new Error("PR changed during evaluation; rerun contributor readiness");
   }
-  const body = renderReadiness(participants, findings, pr.head.sha);
+  const body = renderReadiness(participants, findings);
   await github.rest.checks.create({
     owner,
     repo,

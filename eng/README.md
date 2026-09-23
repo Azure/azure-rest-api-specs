@@ -12,6 +12,11 @@ authors/committers, and all submitted reviewers. It does not change merge rules.
 Missing public membership produces conditional internal-onboarding guidance, not
 a claim that an external contributor is unauthorized.
 
+The comment groups findings by affected user: 🔴 marks a confirmed issue and 🟡
+marks checks that could not be verified. It links to
+[setup and access renewal](https://aka.ms/azsdk/access); users without findings
+are omitted to keep the report short. The job summary shows the same report.
+
 After changing access, comment `/azsdk check-access` on the PR. The PR author,
 resolved commit participants, submitted reviewers and maintainers can refresh,
 including affected participants without write access. One bot comment is updated

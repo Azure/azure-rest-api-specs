@@ -127,10 +127,10 @@ describe("contributor readiness", () => {
     await f.run();
     expect(f.createCheck).toHaveBeenCalledWith(expect.objectContaining({ conclusion: "neutral" }));
     const [comment] = f.github.rest.issues.createComment.mock.calls[0] as [{ body: string }];
-    expect(comment.body).toContain("| PR author |");
-    expect(comment.body).toContain("The PR author no longer has a resolvable GitHub account.");
+    expect(comment.body).toContain("| 🟡 **PR author** |");
+    expect(comment.body).toContain("GitHub account unavailable.");
     expect(f.core.summary.addRaw).toHaveBeenCalledWith(
-      expect.stringContaining("Could not fully verify contributor readiness."),
+      expect.stringContaining("GitHub account unavailable."),
     );
   });
 
@@ -140,8 +140,8 @@ describe("contributor readiness", () => {
     await f.run();
     expect(f.createCheck).toHaveBeenCalledWith(expect.objectContaining({ conclusion: "neutral" }));
     const call = f.github.rest.issues.createComment.mock.calls[0] as [{ body: string }];
-    expect(call[0].body).toContain("If contributing internally");
-    expect(call[0].body).toContain("This alone does not invalidate a review");
+    expect(call[0].body).toContain("Internal contributors:");
+    expect(call[0].body).toContain("GitHub review rules still apply");
     expect(call[0].body).not.toContain("cannot satisfy");
   });
 
@@ -150,8 +150,41 @@ describe("contributor readiness", () => {
     f.permission.mockResolvedValue({ data: { permission: "read" } });
     await f.run();
     const [call] = f.github.rest.issues.createComment.mock.calls[0] as [{ body: string }];
-    expect(call.body).toContain("cannot satisfy a required write-access review");
-    expect(call.body).toContain("Fork contributions remain possible");
+    expect(call.body).toContain("approval cannot satisfy required reviews");
+    expect(call.body).toContain("fork contributions are still allowed");
+  });
+
+  it("groups each affected user into one short, clearly marked row", async () => {
+    const f = setup();
+    f.membership.mockRejectedValue(createMockRequestError(404));
+    f.permission.mockResolvedValue({ data: { permission: "read" } });
+    await f.run();
+    const [comment] = f.github.rest.issues.createComment.mock.calls[0] as [{ body: string }];
+    const rows = comment.body.split("\n").filter((line) => line.startsWith("| 🔴"));
+    expect(rows).toHaveLength(2);
+    expect(rows[0]).toContain("**[author-example](https://github.com/author-example)**");
+    expect(rows[1]).toContain("**[reviewer-example](https://github.com/reviewer-example)**");
+    expect(rows.every((row) => row.includes("Microsoft") && row.includes("Azure"))).toBe(true);
+    expect(comment.body).toContain("https://aka.ms/azsdk/access");
+    expect(comment.body).not.toContain("eng.ms");
+    expect(comment.body).not.toContain("Evaluated participants");
+    expect(comment.body).not.toContain("180 days");
+    expect(comment.body.split(/\s+/).length).toBeLessThan(100);
+  });
+
+  it("shows only affected users and distinguishes unavailable checks from confirmed issues", async () => {
+    const f = setup();
+    f.permission.mockImplementation(({ username }: { username: string }) =>
+      username === reviewer.login
+        ? Promise.reject(createMockRequestError(403))
+        : Promise.resolve({ data: { permission: "write" } }),
+    );
+    await f.run();
+    const [comment] = f.github.rest.issues.createComment.mock.calls[0] as [{ body: string }];
+    expect(comment.body).toContain("| 🟡 **[reviewer-example]");
+    expect(comment.body).not.toContain("author-example");
+    expect(comment.body).not.toContain("🔴");
+    expect(comment.body).toContain("Could not verify repository access");
   });
 
   it.each([
@@ -171,7 +204,7 @@ describe("contributor readiness", () => {
     await f.run();
     const [call] = f.github.rest.issues.createComment.mock.calls[0] as [{ body: string }];
     expect(call.body).toContain("Could not verify");
-    expect(call.body).not.toContain("No repository write access");
+    expect(call.body).not.toContain("No write access");
     expect(f.core.warning).toHaveBeenCalled();
   });
 
@@ -182,7 +215,7 @@ describe("contributor readiness", () => {
     await f.run();
     const [call] = f.github.rest.issues.createComment.mock.calls[0] as [{ body: string }];
     expect(call.body).toContain("1 of 300 commits");
-    expect(call.body).toContain("Could not associate an author or committer");
+    expect(call.body).toContain("Author/committer account unavailable");
   });
 
   it.each([null, {}])(
@@ -195,10 +228,8 @@ describe("contributor readiness", () => {
         expect.objectContaining({ conclusion: "neutral" }),
       );
       const [comment] = f.github.rest.issues.createComment.mock.calls[0] as [{ body: string }];
-      expect(comment.body).toContain("| Review 20 |");
-      expect(comment.body).toContain(
-        "The submitted review no longer has a resolvable GitHub account.",
-      );
+      expect(comment.body).toContain("| 🟡 **Review 20** |");
+      expect(comment.body).toContain("Reviewer account unavailable.");
     },
   );
 
@@ -231,8 +262,8 @@ describe("contributor readiness", () => {
     f.membership.mockRejectedValue(createMockRequestError(503));
     await expect(f.run()).rejects.toThrow("503");
     const [comment] = f.github.rest.issues.createComment.mock.calls[0] as [{ body: string }];
-    expect(comment.body).toContain("Could not complete the evaluation");
-    expect(comment.body).not.toContain("membership is not publicly visible");
+    expect(comment.body).toContain("Could not complete checks");
+    expect(comment.body).not.toContain("membership not public");
   });
 
   it("does not publish when a PR changes during evaluation", async () => {
@@ -327,7 +358,7 @@ describe("contributor readiness", () => {
     await f.run();
     expect(f.createCheck).toHaveBeenCalledWith(expect.objectContaining({ conclusion: "neutral" }));
     const [comment] = f.github.rest.issues.createComment.mock.calls[0] as [{ body: string }];
-    expect(comment.body).toContain("| PR author |");
+    expect(comment.body).toContain("| 🟡 **PR author** |");
   });
 
   it("rejects a refresh payload for a different PR before collecting or publishing", async () => {
@@ -358,19 +389,52 @@ describe("contributor readiness", () => {
   });
 
   it("escapes output and explicitly bounds very large reports", () => {
-    const findings: ReadinessFinding[] = Array.from({ length: 200 }, () => ({
-      subject: "@org/team | <script>",
+    const findings: ReadinessFinding[] = Array.from({ length: 200 }, (_, index) => ({
+      subject: `@org/team | <script> ${index}`,
       message: "Unresolved",
     }));
-    const body = renderReadiness([], findings, pr.head.sha);
+    const body = renderReadiness([], findings);
     expect(body).not.toContain("@org/team");
     expect(body).not.toContain("<script>");
-    expect(body).toContain("100 additional findings");
+    expect(body).toContain("100 more entries not shown.");
+  });
+
+  it("combines duplicate and mixed-severity findings without losing unknown evidence", () => {
+    const body = renderReadiness(
+      [{ ...reviewer, roles: new Set(["submitted reviewer"]) }],
+      [
+        { subject: reviewer.login, message: "Azure membership not public." },
+        { subject: reviewer.login, message: "Azure membership not public." },
+        { subject: reviewer.login, message: "Could not verify repository access.", unknown: true },
+      ],
+    );
+    expect(body.split("\n").filter((line) => line.startsWith("| 🔴"))).toHaveLength(1);
+    expect(body.match(/Azure membership not public/g)).toHaveLength(1);
+    expect(body).toContain("Could not verify repository access.");
   });
 
   it("renders the clean report consistently", () => {
     expect(
-      renderReadiness([{ ...author, roles: new Set(["PR author", "committer"]) }], [], pr.head.sha),
+      renderReadiness([{ ...author, roles: new Set(["PR author", "committer"]) }], []),
+    ).toMatchSnapshot();
+  });
+
+  it("renders concise, red-marked user findings", () => {
+    expect(
+      renderReadiness(
+        [
+          { ...author, roles: new Set(["PR author"]) },
+          { ...reviewer, roles: new Set(["submitted reviewer"]) },
+        ],
+        [
+          { subject: author.login, message: "Microsoft membership not public." },
+          { subject: author.login, message: "Azure membership not public." },
+          {
+            subject: reviewer.login,
+            message: "No write access; approval cannot satisfy required reviews.",
+          },
+        ],
+      ),
     ).toMatchSnapshot();
   });
 
@@ -385,7 +449,6 @@ describe("contributor readiness", () => {
             unknown: true,
           },
         ],
-        pr.head.sha,
       ),
     ).toMatchSnapshot();
   });

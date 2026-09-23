@@ -1,44 +1,32 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`contributor readiness > renders concise, red-marked user findings 1`] = `
+"## Contributor readiness (advisory)
+
+| User / area | Issue |
+| --- | --- |
+| 🔴 **[author-example](https://github.com/author-example)** | Microsoft membership not public.<br>Azure membership not public. |
+| 🔴 **[reviewer-example](https://github.com/reviewer-example)** | No write access; approval cannot satisfy required reviews. |
+
+Internal contributors: [setup / renew access](https://aka.ms/azsdk/access). Recheck: \`/azsdk check-access\`.
+
+Advisory only; GitHub review rules still apply."
+`;
+
 exports[`contributor readiness > renders incomplete findings without introducing Markdown or mentions 1`] = `
 "## Contributor readiness (advisory)
 
-Could not fully verify contributor readiness.
-
-Evaluated head \`aaaaaaaaaaaa\`. Existing merge rules are unchanged.
-
-| Participant / area | Finding |
+| User / area | Issue |
 | --- | --- |
-| &#64;org/team &#124; &lt;script&gt; | Account \\[unavailable\\]\\(https://example.com\\) &#96;unknown&#96; |
+| 🟡 **&#64;org/team &#124; &lt;script&gt;** | Account \\[unavailable\\]\\(https://example.com\\) &#96;unknown&#96; |
 
-<details><summary>Evaluated participants</summary>
+Internal contributors: [setup / renew access](https://aka.ms/azsdk/access). Recheck: \`/azsdk check-access\`.
 
-
-</details>
-
-[Internal contributor onboarding](https://eng.ms/docs/products/azure-developer-experience/onboard/access): access requests can take up to one day to propagate and need renewal every 180 days.
-Private membership cannot be distinguished from no membership. Request approvals, expiry dates, and DevOps access are not checked.
-Write access alone does not guarantee an approval counts: GitHub's CODEOWNER and other review rules still apply.
-
-After fixing access, comment \`/azsdk check-access\`. PR authors, commit participants, submitted reviewers and maintainers can refresh."
+Advisory only; GitHub review rules still apply."
 `;
 
 exports[`contributor readiness > renders the clean report consistently 1`] = `
 "## Contributor readiness (advisory)
 
-No contributor-readiness issues found.
-
-Evaluated head \`aaaaaaaaaaaa\`. Existing merge rules are unchanged.
-
-<details><summary>Evaluated participants</summary>
-
-- author-example: PR author, committer
-
-</details>
-
-[Internal contributor onboarding](https://eng.ms/docs/products/azure-developer-experience/onboard/access): access requests can take up to one day to propagate and need renewal every 180 days.
-Private membership cannot be distinguished from no membership. Request approvals, expiry dates, and DevOps access are not checked.
-Write access alone does not guarantee an approval counts: GitHub's CODEOWNER and other review rules still apply.
-
-After fixing access, comment \`/azsdk check-access\`. PR authors, commit participants, submitted reviewers and maintainers can refresh."
+✅ No contributor-readiness issues found."
 `;
