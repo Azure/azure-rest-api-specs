@@ -5,6 +5,7 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Microsoft.DataProtection;
 
+#suppress "@azure-tools/typespec-azure-core/known-encoding" "The Data Protection service returns .NET constant-format durations, and this encoding is used only by the C# client alternate type."
 @encode("duration-constant")
 scalar DurationConstant extends duration;
 
