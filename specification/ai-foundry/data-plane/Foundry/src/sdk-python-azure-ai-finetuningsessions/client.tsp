@@ -1,68 +1,36 @@
-// Python-only preview compatibility projection. The REST specification remains
-// session-finetuning/routes.tsp. Never import this file from the REST entrypoint.
+// Python-only preview customization. HTTP routes and service operations are
+// defined only in session-finetuning/routes.tsp; do not import this SDK entrypoint
+// from the REST entrypoint.
 import "../session-finetuning/routes.tsp";
 import "./loom-models.tsp";
 
 using Azure.ClientGenerator.Core;
-using TypeSpec.Http;
+using Azure.AI.Projects.SessionFineTuning;
 
-@client({
-  service: Azure.AI.Projects,
-  name: "FineTuningSessionClient",
-})
 @clientNamespace("azure.ai.finetuningsessions", "python")
 namespace Azure.AI.FineTuning.Sessions;
 
-@client
-@route("/fine_tuning/sessions")
-interface Sessions {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Python facade alias preserves the existing fixed-route HTTP 200 session creation and request-ID polling contract."
-  create is Azure.AI.Projects.SessionFineTuning.FineTuningSessions.create;
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Python facade alias preserves the existing fixed-route HTTP 200 offset-paged session response."
-  list is Azure.AI.Projects.SessionFineTuning.FineTuningSessions.list;
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Python facade alias preserves the existing fixed-route HTTP 200 session lookup contract."
-  get is Azure.AI.Projects.SessionFineTuning.FineTuningSessions.get;
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Python facade alias preserves the existing fixed-route HTTP 200 unload response and request-ID polling contract."
-  unload is Azure.AI.Projects.SessionFineTuning.FineTuningSessions.unload;
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Python facade alias preserves the existing fixed-route HTTP 200 heartbeat contract."
-  heartbeat is Azure.AI.Projects.SessionFineTuning.FineTuningSessions.heartbeat;
-}
+@@clientName(Azure.AI.Projects, "FineTuningSessionClient", "python");
 
-@client
-@route("/fine_tuning/sessions/{sessionId}")
-interface Training {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Python facade alias preserves the existing fixed-route HTTP 200 forward-backward response and request-ID polling contract."
-  forwardBackward is Azure.AI.Projects.SessionFineTuning.Training.forwardBackward;
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Python facade alias preserves the existing fixed-route HTTP 200 optimizer-step response and request-ID polling contract."
-  optimizerStep is Azure.AI.Projects.SessionFineTuning.Training.optimizerStep;
-}
+// Omit exactly the two raw operations absent from the existing Python SDK.
+@@scope(FineTuningSessions.delete, "!python");
+@@scope(Training.forward, "!python");
 
-@client
-@route("/fine_tuning/sessions/{sessionId}")
-interface Checkpoints {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Python facade alias preserves the existing fixed-route HTTP 200 checkpoint-save response and request-ID polling contract."
-  save is Azure.AI.Projects.SessionFineTuning.Checkpoints.save;
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Python facade alias preserves the existing fixed-route HTTP 200 sampler-weights response and request-ID polling contract."
-  saveSamplerWeights is Azure.AI.Projects.SessionFineTuning.Checkpoints.saveSamplerWeights;
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Python facade alias preserves the existing fixed-route HTTP 200 single-page checkpoint response."
-  list is Azure.AI.Projects.SessionFineTuning.Checkpoints.list;
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Python facade alias preserves the existing fixed-route HTTP 200 checkpoint lookup contract."
-  get is Azure.AI.Projects.SessionFineTuning.Checkpoints.get;
-}
-
-@client
-@route("/fine_tuning/sessions/{sessionId}")
-interface Sampling {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Python facade alias preserves the existing fixed-route HTTP 200 sampling response and request-ID polling contract."
-  sample is Azure.AI.Projects.SessionFineTuning.Sampling.sample;
-}
-
-@client
-@route("/fine_tuning/sessions/{sessionId}/request/{requestId}")
-interface Operations {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Python facade alias preserves the existing fixed-route HTTP 200 request-ID status polling contract."
-  get is Azure.AI.Projects.SessionFineTuning.Operations.get;
-}
+// Named SDK locations create the existing flat groups without defining HTTP
+// interfaces or copying operations. Routes remain on the service operations.
+@@clientLocation(FineTuningSessions.create, "Sessions", "python");
+@@clientLocation(FineTuningSessions.list, "Sessions", "python");
+@@clientLocation(FineTuningSessions.get, "Sessions", "python");
+@@clientLocation(FineTuningSessions.unload, "Sessions", "python");
+@@clientLocation(FineTuningSessions.heartbeat, "Sessions", "python");
+@@clientLocation(Training.forwardBackward, "Training", "python");
+@@clientLocation(Training.optimizerStep, "Training", "python");
+@@clientLocation(Checkpoints.save, "Checkpoints", "python");
+@@clientLocation(Checkpoints.saveSamplerWeights, "Checkpoints", "python");
+@@clientLocation(Checkpoints.list, "Checkpoints", "python");
+@@clientLocation(Checkpoints.get, "Checkpoints", "python");
+@@clientLocation(Sampling.sample, "Sampling", "python");
+@@clientLocation(Operations.get, "Operations", "python");
 
 @@apiVersion(
   Azure.Core.Foundations.ApiVersionParameter.apiVersion,
@@ -394,13 +362,22 @@ interface Operations {
 // The supported Python operation hooks retain the preview's legacy poller
 // semantics. The handwritten training layer implements real request-ID polling.
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preview Python compatibility retains the plain session-list response and cursor instead of an ItemPaged wrapper; no HTTP 202 contract is declared."
-@@Azure.ClientGenerator.Core.Legacy.disablePageable(Sessions.list, "python");
+@@Azure.ClientGenerator.Core.Legacy.disablePageable(
+  FineTuningSessions.list,
+  "python"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preview Python compatibility retains the plain checkpoint-list response instead of an ItemPaged wrapper; no HTTP 202 contract is declared."
 @@Azure.ClientGenerator.Core.Legacy.disablePageable(Checkpoints.list, "python");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preview Python compatibility retains begin_create and its legacy poller customization; this does not declare an HTTP 202 response."
-@@Azure.ClientGenerator.Core.Legacy.markAsLro(Sessions.create, "python");
+@@Azure.ClientGenerator.Core.Legacy.markAsLro(
+  FineTuningSessions.create,
+  "python"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preview Python compatibility retains begin_unload and its legacy poller customization; this does not declare an HTTP 202 response."
-@@Azure.ClientGenerator.Core.Legacy.markAsLro(Sessions.unload, "python");
+@@Azure.ClientGenerator.Core.Legacy.markAsLro(
+  FineTuningSessions.unload,
+  "python"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preview Python compatibility retains begin_forward_backward and its legacy poller customization; this does not declare an HTTP 202 response."
 @@Azure.ClientGenerator.Core.Legacy.markAsLro(
   Training.forwardBackward,

@@ -1,5 +1,34 @@
 # Python preview generation and Loom parity
 
+## Route ownership refactor (2026-09-23)
+
+The HTTP routes and all 15 service operations remain defined once in
+`session-finetuning/routes.tsp`. The Python client file contains no routed
+interfaces or operation aliases. Supported Python-scoped `@clientName`,
+`@clientLocation`, and `@scope` decorators reuse the service operations while
+retaining exactly the existing 13-operation selection and five SDK groups.
+All model mappings, per-call API-version behavior, and legacy polling/pagination
+customizations remain SDK-only. The shared operation template is unchanged;
+the separate `FoundryDataPlaneRequiredPreviewOperation` migration is not included.
+
+The starting public TypeSpec and SDK commits are respectively
+`a170cb1188d5fc706a6433a0c95a13caf30c72fe` and
+`df4b722725386974c26463fb375ba7e27f6511fb`. Isolated baseline and candidate
+emissions with identical maintained Python hooks have byte-identical generated
+Python and assembled runtime. All four full REST outputs are byte-identical.
+Only 26 APIView operation identities now refer to the original service rather
+than aliases; this is metadata, not an API or wire change.
+
+Baseline and candidate each pass 501 regression tests and the existing full
+Loom API/behavior comparison; the installed candidate wheel passes these checks
+as well. No runtime, tests, verifiers, comparison exceptions, or Loom files were
+changed. The 13 former facade lint suppressions disappeared with the aliases;
+the historical CI counts below predate this refactor.
+
+The TypeSpec refactor is committed separately from its SDK metadata update.
+The SDK source pointer and provenance identify the commit containing this
+refactor; the starting commits above remain the comparison baselines.
+
 The customer-facing target is the tested SDK at Loom commit
 `485774df502642879fdf3a53777be4a0d95155dc`, with the approved distribution/import
 rename to `azure-ai-finetuningsessions` / `azure.ai.finetuningsessions`.
