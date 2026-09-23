@@ -54,7 +54,7 @@ interface Jobs {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Artifact sub-resource path; cannot be expressed with standard resource operations."
   @doc("List artifact descriptors for a job, including its log files, without returning download credentials. Logs are ordinary artifacts under the `azureml-logs/`, `user_logs/` and `system_logs/` directories. Follow `nextLink` unchanged to retrieve subsequent pages.")
-  @route("/jobs/{name}/artifacts")
+  @route("/training_jobs/{name}/artifacts")
   @get
   @list
   listArtifacts(
@@ -83,7 +83,7 @@ interface Jobs {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Artifact sub-resource path; cannot be expressed with standard resource operations."
   @doc("Get content access information for one artifact identified by its exact path. Returns a download URI and the byte length when available; this operation does not list a directory or return a page of artifacts.")
-  @route("/jobs/{name}/artifacts/contentinfo")
+  @route("/training_jobs/{name}/artifacts/contentinfo")
   @get
   getArtifactContentInformation(
     ...FoundryDataPlaneApiVersionParameter,
