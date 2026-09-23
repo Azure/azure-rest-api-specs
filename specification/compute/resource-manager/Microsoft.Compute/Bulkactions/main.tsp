@@ -20,7 +20,7 @@ using TypeSpec.Versioning;
 @versioned(Versions)
 namespace Microsoft.Compute;
 
-/** ComputeSchedule API versions */
+/** Bulk Actions API versions. */
 enum Versions {
   /** 2026-04-06-preview version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
@@ -41,4 +41,8 @@ enum Versions {
   /** 2026-09-06-preview version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   `2026-09-06-preview`,
+
+  /** 2026-10-06-preview version */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  `2026-10-06-preview`,
 }

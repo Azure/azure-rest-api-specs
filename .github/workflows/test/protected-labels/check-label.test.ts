@@ -76,6 +76,21 @@ describe("checkLabel", () => {
     setupMocks();
   });
 
+  it("rejects a labeled event without a label", async () => {
+    context.payload = {
+      ...createLabeledPayload({
+        labelName: "BreakingChange-Approved-Benign",
+        actor: "user1",
+      }),
+      label: undefined,
+    };
+
+    await expect(invokeCheckLabel({ github, context, core })).rejects.toThrow(
+      "Pull request label event is missing a label name.",
+    );
+    expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
+  });
+
   describe("bot bypass", () => {
     it("skips github-actions[bot]", async () => {
       context.payload = createLabeledPayload({
@@ -163,7 +178,7 @@ describe("checkLabel", () => {
       });
       expect(github.rest.issues.createComment).toHaveBeenCalledWith(
         expect.objectContaining({
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          // oxlint-disable-next-line typescript/no-unsafe-assignment
           body: expect.stringContaining("@unauthorized-user is not authorized"),
         }),
       );
