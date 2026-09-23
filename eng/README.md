@@ -92,11 +92,12 @@ independent 100% gate. The two integration-only packages retain their standalone
 coverage-free commands. `typespec-migration-validation` has no Vitest project
 and participates only in the root build.
 
-The full test run requires PowerShell (`pwsh`). Test fixtures live alongside their
-suites under `.github` and `eng`, or are created in temporary directories; tests
-do not require the repository's `specification/` tree. Sparse checkouts only need
-`.github` and `eng`, along with the root configuration files. Resolve test fixture
-paths from `import.meta.dirname`, not the invocation working directory, to support both modes.
+The full test run requires PowerShell (`pwsh`). The conversion smoke test uses a
+self-contained Swagger fixture under `eng/tools/tsp-client-tests/test/fixtures/`.
+CI's sparse checkout only needs `.github` and `eng`, along with the root configuration
+files. The ARM resource-provider tests retain their existing behavior when
+`specification/` is absent. Resolve test fixture paths from `import.meta.dirname`,
+not the invocation working directory, to support both modes.
 Mirrored `eng/common` packages and arbitrary specification projects are not part
 of the tooling workspace.
 
