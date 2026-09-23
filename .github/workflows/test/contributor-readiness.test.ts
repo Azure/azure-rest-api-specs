@@ -367,6 +367,28 @@ describe("contributor readiness", () => {
     expect(body).not.toContain("<script>");
     expect(body).toContain("100 additional findings");
   });
+
+  it("renders the clean report consistently", () => {
+    expect(
+      renderReadiness([{ ...author, roles: new Set(["PR author", "committer"]) }], [], pr.head.sha),
+    ).toMatchSnapshot();
+  });
+
+  it("renders incomplete findings without introducing Markdown or mentions", () => {
+    expect(
+      renderReadiness(
+        [],
+        [
+          {
+            subject: "@org/team | <script>",
+            message: "Account [unavailable](https://example.com)\n`unknown`",
+            unknown: true,
+          },
+        ],
+        pr.head.sha,
+      ),
+    ).toMatchSnapshot();
+  });
 });
 
 describe("readiness trigger resolution", () => {

@@ -1,5 +1,15 @@
 import type { AsyncFunctionArguments } from "@actions/github-script";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
+import {
+  details,
+  escapeMarkdown,
+  inlineCode,
+  link,
+  renderMarkdownDoc,
+  section,
+  table,
+  unorderedList,
+} from "../../shared/src/markdown.ts";
 import { parseExistingComments } from "./comment.ts";
 import type { Core, WebhookEvent } from "./github.ts";
 
@@ -15,16 +25,19 @@ type Account = { id: number; login: string; type: string };
 type Participant = Account & { roles: Set<string> };
 export type ReadinessFinding = { subject: string; message: string; unknown?: boolean };
 
+/** Extracts an HTTP status from an API error, leaving unrelated errors unclassified. */
 function status(error: unknown): number | undefined {
   return error instanceof Error && "status" in error && typeof error.status === "number"
     ? error.status
     : undefined;
 }
 
+/** Identifies bots and GitHub's web-flow committer, which do not require human onboarding. */
 function isAutomation(account: Account): boolean {
   return account.type === "Bot" || (account.id === 19864447 && account.login === "web-flow");
 }
 
+/** Resolves a trigger to its PR; ignored commands and unmatched review runs return null. */
 export async function resolveReadinessPullRequest(inputs: Inputs): Promise<number | null> {
   const { context } = inputs;
   if (context.eventName === "pull_request_target") {
@@ -40,7 +53,10 @@ export async function resolveReadinessPullRequest(inputs: Inputs): Promise<numbe
   return resolveReviewWorkflowPullRequest(inputs);
 }
 
-/** Only GitHub's run metadata is trusted when a review workflow ran in a fork. */
+/**
+ * Resolves a review notification from GitHub's run metadata, never fork-supplied artifacts.
+ * Rejects unexpected workflows and incomplete or ambiguous PR associations.
+ */
 async function resolveReviewWorkflowPullRequest({
   github,
   context,
@@ -85,6 +101,10 @@ async function resolveReviewWorkflowPullRequest({
   return candidates[0] ?? null;
 }
 
+/**
+ * Collects unique PR, commit and submitted-review accounts with their roles.
+ * Appends unknown findings when identities or commit coverage cannot be resolved.
+ */
 export async function collectReadinessParticipants(
   github: GitHub,
   owner: string,
@@ -93,6 +113,7 @@ export async function collectReadinessParticipants(
   findings: ReadinessFinding[],
 ): Promise<Participant[]> {
   const participants = new Map<number, Participant>();
+  /** Adds a role to a resolvable account; returns false for missing or malformed identities. */
   function add(account: Account | Record<string, never> | null, role: string): boolean {
     if (
       !account ||
@@ -160,6 +181,7 @@ export async function collectReadinessParticipants(
   return [...participants.values()].sort((a, b) => a.login.localeCompare(b.login));
 }
 
+/** Checks membership visibility; false means not public, not necessarily absent membership. */
 async function publicMembership(github: GitHub, org: string, username: string): Promise<boolean> {
   try {
     await github.rest.orgs.checkPublicMembershipForUser({ org, username });
@@ -170,6 +192,7 @@ async function publicMembership(github: GitHub, org: string, username: string): 
   }
 }
 
+/** Checks effective repository write capability, including maintain/admin and custom grants. */
 async function writeAccess(github: GitHub, owner: string, repo: string, username: string) {
   const { data } = await github.rest.repos.getCollaboratorPermissionLevel({
     owner,
@@ -182,6 +205,7 @@ async function writeAccess(github: GitHub, owner: string, repo: string, username
   );
 }
 
+/** Logs denied/unavailable lookups as unknown evidence; propagates other API failures. */
 async function observe<T>(
   core: Core,
   findings: ReadinessFinding[],
@@ -204,6 +228,7 @@ async function observe<T>(
   }
 }
 
+/** Appends public-membership and effective-access findings for human participants. */
 export async function evaluateReadinessParticipants(
   github: GitHub,
   core: Core,
@@ -237,66 +262,62 @@ export async function evaluateReadinessParticipants(
   }
 }
 
-function escape(value: string): string {
-  return value
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll("|", "&#124;")
-    .replaceAll("@", "&#64;")
-    .replaceAll("`", "&#96;")
-    .replace(/[\\[\]()*_~]/g, "\\$&")
-    .replace(/[\r\n]/g, " ");
-}
-
+/** Builds the bounded advisory report, escaping all participant names and finding text. */
 export function renderReadiness(
   participants: Participant[],
   findings: ReadinessFinding[],
   sha: string,
 ): string {
-  return [
-    "## Contributor readiness (advisory)",
-    "",
-    findings.some((finding) => finding.unknown)
-      ? "Could not fully verify contributor readiness."
-      : findings.length
-        ? "Contributor access or onboarding needs attention."
-        : "No contributor-readiness issues found.",
-    "",
-    `Evaluated head \`${sha.slice(0, 12)}\`. Existing merge rules are unchanged.`,
-    ...(findings.length
-      ? [
-          "",
-          "| Participant / area | Finding |",
-          "| --- | --- |",
-          ...findings
+  return renderMarkdownDoc(
+    section("Contributor readiness (advisory)", [
+      findings.some((finding) => finding.unknown)
+        ? "Could not fully verify contributor readiness."
+        : findings.length
+          ? "Contributor access or onboarding needs attention."
+          : "No contributor-readiness issues found.",
+      `Evaluated head ${inlineCode(sha.slice(0, 12))}. Existing merge rules are unchanged.`,
+      findings.length
+        ? [
+            table([
+              ["Participant / area", "Finding"],
+              ...findings
+                .slice(0, 100)
+                .map((finding) => [
+                  escapeMarkdown(finding.subject),
+                  escapeMarkdown(finding.message),
+                ]),
+            ]),
+            findings.length > 100
+              ? `${findings.length - 100} additional findings omitted from this bounded report.`
+              : undefined,
+          ]
+        : undefined,
+      details(
+        "Evaluated participants",
+        unorderedList([
+          ...participants
             .slice(0, 100)
-            .map((finding) => `| ${escape(finding.subject)} | ${escape(finding.message)} |`),
-          ...(findings.length > 100
-            ? [`\n${findings.length - 100} additional findings omitted from this bounded report.`]
+            .map((p) => `${escapeMarkdown(p.login)}: ${[...p.roles].sort().join(", ")}`),
+          ...(participants.length > 100
+            ? [`${participants.length - 100} additional participants evaluated.`]
             : []),
-        ]
-      : []),
-    "",
-    "<details><summary>Evaluated participants</summary>",
-    "",
-    ...participants
-      .slice(0, 100)
-      .map((p) => `- ${escape(p.login)}: ${[...p.roles].sort().join(", ")}`),
-    ...(participants.length > 100
-      ? [`- ${participants.length - 100} additional participants evaluated.`]
-      : []),
-    "",
-    "</details>",
-    "",
-    `[Internal contributor onboarding](${ONBOARDING}): access requests can take up to one day to propagate and need renewal every 180 days.`,
-    "Private membership cannot be distinguished from no membership. Request approvals, expiry dates, and DevOps access are not checked.",
-    "Write access alone does not guarantee an approval counts: GitHub's CODEOWNER and other review rules still apply.",
-    "",
-    `After fixing access, comment \`${COMMAND}\`. PR authors, commit participants, submitted reviewers and maintainers can refresh.`,
-  ].join("\n");
+        ]),
+      ),
+      [
+        `${link("Internal contributor onboarding", ONBOARDING)}: access requests can take up to one day to propagate and need renewal every 180 days.`,
+        "Private membership cannot be distinguished from no membership. Request approvals, expiry dates, and DevOps access are not checked.",
+        "Write access alone does not guarantee an approval counts: GitHub's CODEOWNER and other review rules still apply.",
+      ].join("\n"),
+      `After fixing access, comment ${inlineCode(COMMAND)}. PR authors, commit participants, submitted reviewers and maintainers can refresh.`,
+    ]),
+    2,
+  );
 }
 
+/**
+ * Evaluates an open PR, authorizes manual refreshes, and publishes the advisory report.
+ * Unexpected lookup failures are rethrown after publishing the available incomplete evidence.
+ */
 export async function checkContributorReadiness(inputs: Inputs, number: number): Promise<void> {
   if (!Number.isSafeInteger(number) || number <= 0) throw new Error("Invalid PR number");
   const { github, context, core } = inputs;
@@ -333,6 +354,7 @@ export async function checkContributorReadiness(inputs: Inputs, number: number):
   if (failure) throw failure;
 }
 
+/** Returns participants for an authorized refresh, or undefined after logging a denied request. */
 async function collectAuthorizedRefreshParticipants(
   { github, context, core }: Inputs,
   pr: PullRequest,
@@ -360,6 +382,7 @@ async function collectAuthorizedRefreshParticipants(
   return participants;
 }
 
+/** Verifies the PR head is still current, then publishes its check, comment and job summary. */
 async function publishReadinessReport(
   { github, context, core }: Inputs,
   pr: PullRequest,
@@ -393,6 +416,10 @@ async function publishReadinessReport(
   await core.summary.addRaw(body).write();
 }
 
+/**
+ * Updates only the Actions bot's marked comment, resolving it when findings disappear.
+ * Creates a comment only for findings and leaves identical content untouched.
+ */
 async function updateReadinessComment(
   github: GitHub,
   owner: string,
