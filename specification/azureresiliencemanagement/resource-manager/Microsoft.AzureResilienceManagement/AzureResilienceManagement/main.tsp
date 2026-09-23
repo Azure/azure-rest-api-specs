@@ -56,6 +56,7 @@ enum Versions {
 @renamedFrom(Versions.v2026_09_30_preview, "Operations")
 interface OperationsOld {
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  @doc("List the operations for the provider Deprecated: API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version.")
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
   list is Azure.ResourceManager.Operations.list;
@@ -68,7 +69,7 @@ interface OperationStatusOld {
   #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
   @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
   @sharedRoute
-  @doc("Returns the current status of an async operation.")
+  @doc("Returns the current status of an async operation. Deprecated: API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version.")
   @autoRoute
   get(
     ...ApiVersionParameter,
