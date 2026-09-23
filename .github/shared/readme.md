@@ -109,7 +109,7 @@ Single source of truth for breaking-change and versioning approval label names a
 - `unorderedList(items)` — render Markdown list items, indenting continuation lines.
 - `details(summary, body)` — create a collapsible block with a plain-text summary and Markdown body.
 
-Like [TypeSpec's `tspd` helpers](https://github.com/microsoft/typespec/blob/main/packages/tspd/src/ref-doc/utils/markdown.ts),
+Like [TypeSpec's Markdown helpers](https://github.com/microsoft/typespec/blob/main/packages/tspd/src/ref-doc/utils/markdown.ts),
 callers describe the document structure rather than hand-joining every line. Strings are trusted
 Markdown: apply `escapeMarkdown` to external text before putting it in a heading,
 table cell, list item or link label. Link destinations must be trusted separately.
