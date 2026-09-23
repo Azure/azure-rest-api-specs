@@ -26,7 +26,32 @@ These are the global settings for the AI Manager API.
 
 ```yaml
 openapi-type: arm
-tag: package-2026-08-02-preview
+tag: package-2026-09-02-preview
+```
+### Tag: package-2026-09-02-preview
+
+These settings apply only when `--tag=package-2026-09-02-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-09-02-preview'
+input-file:
+  - preview/2026-09-02-preview/aimanagers.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: aimanagers.json
+    where: $.definitions.AIManagerNamespaceProperties.properties.labels
+    reason: Labels are a key/value map that is passed through to the underlying Kubernetes model.
+  - code: AvoidAdditionalProperties
+    from: aimanagers.json
+    where: $.definitions.AIManagerNamespaceProperties.properties.annotations
+    reason: Annotations are a key/value map that is passed through to the underlying Kubernetes model.
+  - code: AvoidAdditionalProperties
+    from: aimanagers.json
+    where: $.definitions.ModelDeploymentOverrides.properties.values
+    reason: Free-form override key/value pairs documented per release.
+  - code: AvoidAdditionalProperties
+    from: aimanagers.json
+    where: $.definitions.BaseModelReference.properties.config
+    reason: Verbatim user-supplied config.json from the upstream model repository. Key set is model-specific and unbounded; the platform forwards it to the dataplane and reads only sizing and configuration hints from it.
 ```
 
 ### Tag: package-2026-08-02-preview

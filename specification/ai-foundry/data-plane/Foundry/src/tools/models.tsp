@@ -438,7 +438,6 @@ namespace Azure.AI.Projects {
   /**
    * The input definition information for a Browser Automation Tool, as used to configure an Agent.
    */
-  @removed(Versions.v1)
   model BrowserAutomationTool extends OpenAI.Tool {
     /**
      * The object type, which is always 'browser_automation'.
