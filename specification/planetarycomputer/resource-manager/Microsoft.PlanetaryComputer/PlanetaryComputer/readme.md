@@ -40,7 +40,7 @@ suppressions:
       reason:
         Services that share a root manifest do not need to reimplement the Operations API.
         Operations API for MPC Pro is shared with Microsoft.Orbital and is defined
-        at specification/orbital/resource-manager/stable.
+        at specification/planetarycomputer/resource-manager/Microsoft.PlanetaryComputer/PlanetaryComputer/stable.
 ```
 
 ### Tag: package-2024-01-31-preview
