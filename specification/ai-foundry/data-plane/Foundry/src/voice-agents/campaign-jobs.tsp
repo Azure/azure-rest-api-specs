@@ -27,7 +27,7 @@ union TelephonyCampaignInputValue {
 /** One recipient in an inline campaign input. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaignRecipient {
-  /** Optional customer correlation key. It does not control deduplication; each input position is a separate recipient. */
+  /** Optional customer correlation key. Deduplication uses input position; each position is a separate recipient. */
   @minLength(1)
   @maxLength(256)
   key?: string;
@@ -130,7 +130,7 @@ union TelephonyCampaignScheduleType {
   recipient: "recipient",
 }
 
-/** Scheduling never authorizes dialing: successful preparation and explicit start are required. */
+/** Dialing requires successful preparation and explicit start in every scheduling mode. */
 @discriminator("type")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaignSchedule {
@@ -148,7 +148,7 @@ model ImmediateTelephonyCampaignSchedule extends TelephonyCampaignSchedule {
   type: "immediate";
 }
 
-/** Apply the same earliest dispatch time to every recipient. A past time means eligible now, not an error. */
+/** Apply the same earliest dispatch time to every recipient. A past time is valid and makes work eligible after start. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @example(#{
   type: "scheduled",
@@ -173,10 +173,10 @@ model RecipientTelephonyCampaignSchedule extends TelephonyCampaignSchedule {
   column?: string = "scheduled_at";
 }
 
-/** Immutable Campaign configuration. Recipients are accepted only on creation; successful input rows are not a separate public resource. */
+/** Immutable Campaign configuration. Recipients are accepted on creation; successful input rows contribute to aggregate validation progress. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaignInputs {
-  /** Human-readable project connection name, not a connection resource ID. */
+  /** Human-readable name of the provider connection in the current project. */
   @minLength(1)
   @maxLength(256)
   connection_name: string;
@@ -249,7 +249,7 @@ model TelephonyCampaignValidationProgress {
   @minValue(0) invalid_recipients: int64;
 }
 
-/** Mutually exclusive recipient execution counts, not provider-attempt counts. All are zero until initial validation succeeds. */
+/** Mutually exclusive execution counts measured per recipient intent. All are zero until initial validation succeeds. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaignExecutionProgress {
   /** Recipients waiting for start, schedule, capacity, validation, or retry; includes paused work and lazy CallJob materialization. */
@@ -292,7 +292,7 @@ union TelephonyCampaignStatus {
   /** Initial preparation or a coordinated Agent-version check; no new attempts are admitted. */
   validating: "validating",
 
-  /** Preparation succeeded; waiting for the first explicit start, not for a scheduled time. */
+  /** Preparation succeeded; waiting for the first explicit start. Recipient scheduling applies once execution is authorized. */
   pending: "pending",
 
   running: "running",
@@ -306,10 +306,10 @@ union TelephonyCampaignStatus {
   deleting: "deleting",
 }
 
-/** One immutable campaign execution. No configuration update, publish, republish, or campaign version exists. */
+/** One immutable Campaign execution with start, pause, cancel and deletion controls. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaign {
-  /** Business execution state, not an LRO completion signal. */
+  /** Business execution state. Creation and deletion completion are tracked by their operation monitors. */
   @visibility(Lifecycle.Read)
   status: TelephonyCampaignStatus;
 
@@ -348,7 +348,7 @@ model TelephonyCampaign {
   @visibility(Lifecycle.Read) progress: TelephonyCampaignProgress;
 }
 
-/** One invalid input row in the current validation pass. Successful rows and execution outcomes are not returned here. */
+/** Validation diagnostic for one invalid input row in the current pass. Execution details are available through the CallJob list. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaignValidationError {
   /** Customer key if it could be parsed. */
@@ -370,7 +370,7 @@ model TelephonyCampaignValidationErrorPage {
   agent_version?: string;
 }
 
-/** Error pages use input-position ordering rather than Campaign creation-time ordering. */
+/** Error pages order diagnostics by their original input position. */
 alias TelephonyCampaignValidationErrorQueryParameters = {
   ...OmitProperties<TelephonyCampaignPageQueryParameters, "order">;
 
@@ -379,15 +379,15 @@ alias TelephonyCampaignValidationErrorQueryParameters = {
 };
 
 /**
- * Status monitor for one creation or cascade-deletion request, not Campaign execution or each internal
- * validation pass. Automatic initial snapshotting and validation belong to the creation operation.
- * Later Agent-version revalidation does not create a public operation or reopen the completed creation
- * monitor; inspect Campaign status/progress and validation_errors instead. Start, pause and cancel
- * return Campaign state without creating another operation. Deletion has its own operation; transport
+ * Status monitor for one creation or cascade-deletion request. The creation operation tracks automatic
+ * initial snapshotting and validation. Later Agent-version revalidation is tracked through Campaign
+ * status/progress and validation_errors, with the original creation monitor retaining its terminal
+ * outcome. Start, pause and cancel return Campaign state. Public operations are created for initial
+ * preparation and deletion. Deletion has its own operation; transport
  * and internal worker retries reuse it, while an explicit retry after terminal deletion failure creates
  * a new operation and preserves the previous failure.
- * The monitor has no result or embedded row-error collection. Its error is a bounded failure summary;
- * current row diagnostics are paged separately and are not retained per operation. Create finishes with
+ * The monitor omits the result payload. Its error is a bounded failure summary; row diagnostics are
+ * paged separately for the current/latest validation pass. Create finishes with
  * a guarded Campaign GET; delete finishes without a result or final resource GET. Monitors are retained
  * independently of the resource.
  */
@@ -414,7 +414,7 @@ alias TelephonyCampaignCreatedResponse<Status extends int32> = TypeSpec.Http.Res
     @header("Location")
     location: TypeSpec.Rest.ResourceLocation<TelephonyCampaign>;
 
-    /** Absolute URI including api-version of the creation monitor, returned without waiting for the full scan. Tracks initial preparation, not Campaign execution or later revalidation. */
+    /** Absolute URI including api-version of the initial preparation monitor, returned while the recipient scan proceeds asynchronously. Campaign state tracks subsequent execution and revalidation. */
     @pollingLocation
     @header("Operation-Location")
     operation_location: TypeSpec.Rest.ResourceLocation<TelephonyCampaignOperation>;
@@ -454,7 +454,7 @@ alias TelephonyCampaignPageQueryParameters = {
   @query before?: string;
 };
 
-/** Shared Foundry page shape with opaque boundary tokens rather than reusable resource names. */
+/** Shared Foundry page shape with opaque boundary tokens bound to the original sort position. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaignPage<T> {
   ...OmitProperties<AgentsPagedResult<T>, "first_id" | "last_id">;
@@ -495,7 +495,7 @@ interface TelephonyCampaigns {
    * After durably recording the Campaign, creation monitor and recoverable background work, returns 201
    * with the Campaign and Operation-Id/Operation-Location without waiting for the complete recipient scan.
    * The Campaign normally reports validating; a fast scan may already be complete when polled.
-   * Snapshotting and automatic validation share this one operation, not a second verify operation.
+   * This one creation operation tracks snapshotting and automatic initial validation.
    * Success completes the monitor and enters pending until explicit start; failure completes it as failed
    * with a summary and exposes row diagnostics through validation_errors. Later Campaign state changes
    * never reopen the creation monitor or make poller completion authorize dialing.
@@ -503,7 +503,7 @@ interface TelephonyCampaigns {
    * restarting validation; changed inputs with that ID return 409 operation_id_conflict. Without that
    * replay key, an identical existing resource returns 200 and differing inputs return 409
    * campaign_inputs_conflict. Replays for a deleted instance return 409 campaign_deleted and never
-   * affect a reused name. PUT does not permit overwriting an existing Campaign.
+   * affect a reused name. Existing Campaign configuration remains immutable.
    */
   @summary("Create a telephony campaign")
   @extension(
@@ -545,7 +545,7 @@ interface TelephonyCampaigns {
       /** Immutable name chosen by the caller; existing resources cannot be overwritten. */
       @path campaign_name: TelephonyCampaignName;
 
-      /** Optional retry identifier. Omitting it does not bypass name idempotency: identical existing inputs return 200; different inputs conflict. Preserve it for retries across deletion. */
+      /** Optional retry identifier. Name idempotency also applies when omitted: identical existing inputs return 200; different inputs conflict. Preserve it for retries across deletion. */
       @header("Operation-Id")
       operationId?: string;
 
@@ -689,16 +689,15 @@ interface TelephonyCampaigns {
   >;
 
   /**
-   * Lists only invalid rows from the current/latest validation pass, never successful rows or CallJob
-   * results. This separate paged collection keeps potentially large diagnostics out of SDK operation
-   * polling responses. The operation GET is not paginated and has only a bounded failure summary;
-   * there is no operation-scoped error endpoint or public validation_operation_id.
+   * Lists validation diagnostics for invalid rows from the current/latest pass. Execution details use
+   * the CallJob list. This Campaign-scoped collection pages potentially large diagnostics independently
+   * of SDK operation polling, whose GET returns a single monitor with a bounded failure summary.
    * During validating the list is partial; an empty page does not establish success or authorize start.
    * Campaign status determines completion. Each new pass atomically replaces the previous diagnostics,
-   * including a retry for the same Agent version. There is no historical per-operation row-error archive;
-   * callers needing a diagnostic copy should retrieve it before initiating another pass.
+   * including a retry for the same Agent version. Diagnostics are retained for the current/latest pass;
+   * callers needing a copy should retrieve it before initiating another pass.
    * Opaque cursors bind the Campaign incarnation, internal validation pass and row_number boundary;
-   * a changed pass or reused name returns 400 invalid_cursor. No public validation ID is required.
+   * a changed pass or reused name returns 400 invalid_cursor. Pass identity remains internal.
    * Successful validation returns an empty page. Execution failures belong to CallJobs, and non-row
    * failures to Campaign.error. Existing CallJobs and revalidation errors can coexist; use the filtered
    * CallJob list for execution details. Deleting returns 409 campaign_deleting; deleted Campaigns return 404.
@@ -750,7 +749,7 @@ interface TelephonyCampaigns {
     TelephonyCampaignValidationErrorPage
   >;
 
-  /** Polls a creation or deletion operation independently of Campaign deletion/name reuse. Retained for the lifetime of the original resource and at least 24 hours after both operation completion and resource deletion. Nonterminal responses include Retry-After. This is not a paged diagnostic collection: failed operations contain a bounded error summary; current row errors are retrieved through listValidationErrors. Later revalidation never rewrites a terminal creation operation or creates a new public operation. Creation success uses a guarded final Campaign GET; deletion success has no result or final GET. Deletion cannot be cancelled. No standalone operation creation or business Preparation resource exists. */
+  /** Polls a creation or deletion operation independently of Campaign deletion/name reuse. Retained for the lifetime of the original resource and at least 24 hours after both operation completion and resource deletion. Nonterminal responses include Retry-After. Returns a single monitor with a bounded error summary on failure; listValidationErrors pages current row diagnostics. Later revalidation is tracked through Campaign state/progress while the creation monitor retains its terminal outcome. Public operations are created for initial preparation and deletion. Creation success uses a guarded final Campaign GET; deletion success has no result or final GET. Deletion cannot be cancelled. */
   @summary("Get a campaign operation")
   @opExample(
     #{
