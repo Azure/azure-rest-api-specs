@@ -51,17 +51,15 @@
     "@types/js-yaml": "catalog:",
     "@types/node": "catalog:",
     "@types/semver": "catalog:",
-    "@vitest/coverage-v8": "catalog:",
     "semver": "catalog:",
-    "tinybench": "catalog:",
-    "typescript": "catalog:",
-    "vitest": "catalog:"
+    "tinybench": "catalog:"
   },
   "scripts": {
+    "build": "tsc --noEmit",
     "check": "pnpm test:ci && pnpm lint && pnpm format:check",
     "lint": "pnpm lint:oxlint && pnpm lint:tsc",
     "lint:oxlint": "oxlint .",
-    "lint:tsc": "tsc --build --verbose",
+    "lint:tsc": "pnpm build",
     "format": "oxfmt . --write",
     "format:check": "oxfmt . --check",
     "perf": "node perf/perf.ts",
