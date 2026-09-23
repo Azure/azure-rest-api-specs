@@ -1,9 +1,9 @@
 import "@azure-tools/typespec-client-generator-core";
-import "./HealthInsights.RadiologyInsights/route.radiologyinsights.tsp";
+import "./route.radiologyinsights.tsp";
 
 import "@typespec/rest";
 import "@typespec/http";
-import "./service.tsp";
+import "../HealthInsights.Common/service.tsp";
 
 using Azure.ClientGenerator.Core;
 
