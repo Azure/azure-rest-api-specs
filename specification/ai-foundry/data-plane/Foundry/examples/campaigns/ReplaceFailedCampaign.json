@@ -1,5 +1,5 @@
 {
-  "title": "CreateRecipientScheduled",
+  "title": "ReplaceFailedCampaign",
   "operationId": "TelephonyCampaigns_create",
   "parameters": {
     "endpoint": "https://contoso.services.ai.azure.com/api/projects/reminders",
@@ -7,7 +7,7 @@
     "Foundry-Features": "VoiceAgents=V1Preview",
     "agent_name": "contoso-reminder-agent",
     "campaign_name": "recipient-reminders",
-    "Operation-Id": "e17c2d94-132f-4cef-8fc2-61841468326a",
+    "Operation-Id": "af4b47b9-760c-41ac-85ea-16e99b2f0602",
     "body": {
       "inputs": {
         "connection_name": "contoso-phone-provider",
@@ -16,17 +16,19 @@
           "type": "recipient"
         },
         "recipient_dataset": {
-          "name": "reminder-recipients"
+          "name": "reminder-recipients",
+          "version": "2"
         }
       }
-    }
+    },
+    "If-Match": "\"control-reminders-instance1-failed\""
   },
   "responses": {
-    "201": {
+    "200": {
       "headers": {
         "Location": "https://contoso.services.ai.azure.com/api/projects/reminders/agents/contoso-reminder-agent/telephony/campaigns/recipient-reminders?api-version=v1",
-        "Operation-Location": "https://contoso.services.ai.azure.com/api/projects/reminders/agents/contoso-reminder-agent/telephony/campaigns/recipient-reminders/operations/e17c2d94-132f-4cef-8fc2-61841468326a?api-version=v1",
-        "Operation-Id": "e17c2d94-132f-4cef-8fc2-61841468326a",
+        "Operation-Location": "https://contoso.services.ai.azure.com/api/projects/reminders/agents/contoso-reminder-agent/telephony/campaigns/recipient-reminders/operations/af4b47b9-760c-41ac-85ea-16e99b2f0602?api-version=v1",
+        "Operation-Id": "af4b47b9-760c-41ac-85ea-16e99b2f0602",
         "Cache-Control": "no-store"
       },
       "body": {
@@ -39,13 +41,14 @@
             "type": "recipient"
           },
           "recipient_dataset": {
-            "name": "reminder-recipients"
+            "name": "reminder-recipients",
+            "version": "2"
           }
         },
-        "etag": "\"control-reminders-instance1-v1\"",
-        "validation_operation_id": "e17c2d94-132f-4cef-8fc2-61841468326a",
+        "etag": "\"control-reminders-instance1-round2-validating\"",
+        "validation_operation_id": "af4b47b9-760c-41ac-85ea-16e99b2f0602",
         "created_at": 1790071200,
-        "updated_at": 1790071200,
+        "updated_at": 1790071800,
         "progress": {
           "pending": 0,
           "active": 0,
@@ -53,8 +56,7 @@
           "failed": 0,
           "cancelled": 0,
           "expired": 0
-        },
-        "locked_agent_version": "12"
+        }
       }
     }
   }
