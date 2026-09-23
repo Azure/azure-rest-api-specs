@@ -501,6 +501,24 @@ model AvailabilityPolicy {
 }
 
 /**
+ * Values for the scheduler type when the supported virtualization type is Direct.
+ */
+@added(Versions.v2026_10_02)
+union DirectVirtualizationSchedulerType {
+  string,
+
+  /**
+   * Azure managed direct virtualization scheduler
+   */
+  AzureManaged: "AzureManaged",
+
+  /**
+   * Guest managed direct virtualization scheduler
+   */
+  GuestManaged: "GuestManaged",
+}
+
+/**
  * Disk resource properties.
  */
 model DiskProperties {
@@ -743,6 +761,20 @@ model SupportedCapabilities {
    */
   @added(Versions.v2025_01_02)
   supportedSecurityOption?: SupportedSecurityOption;
+
+  /**
+   * The virtualization types supported by the disk. If set it can be Undefined or Direct.
+   */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @added(Versions.v2026_10_02)
+  supportedVirtualizationTypes?: string;
+
+  /**
+   * The direct virtualization scheduler type supported by the disk.
+   */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @added(Versions.v2026_10_02)
+  directVirtualizationSchedulerType?: DirectVirtualizationSchedulerType;
 }
 
 /**

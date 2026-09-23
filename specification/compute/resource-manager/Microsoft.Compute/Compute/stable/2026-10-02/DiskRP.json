@@ -3151,6 +3151,30 @@
         ]
       }
     },
+    "DirectVirtualizationSchedulerType": {
+      "type": "string",
+      "description": "Values for the scheduler type when the supported virtualization type is Direct.",
+      "enum": [
+        "AzureManaged",
+        "GuestManaged"
+      ],
+      "x-ms-enum": {
+        "name": "DirectVirtualizationSchedulerType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureManaged",
+            "value": "AzureManaged",
+            "description": "Azure managed direct virtualization scheduler"
+          },
+          {
+            "name": "GuestManaged",
+            "value": "GuestManaged",
+            "description": "Guest managed direct virtualization scheduler"
+          }
+        ]
+      }
+    },
     "Disk": {
       "type": "object",
       "description": "Disk resource.",
@@ -5198,6 +5222,22 @@
         "supportedSecurityOption": {
           "$ref": "#/definitions/SupportedSecurityOption",
           "description": "Refers to the security capability of the disk supported to create a Trusted launch or Confidential VM"
+        },
+        "supportedVirtualizationTypes": {
+          "type": "string",
+          "description": "The virtualization types supported by the disk. If set it can be Undefined or Direct.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "directVirtualizationSchedulerType": {
+          "$ref": "#/definitions/DirectVirtualizationSchedulerType",
+          "description": "The direct virtualization scheduler type supported by the disk.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       }
     },
