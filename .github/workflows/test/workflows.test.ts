@@ -111,7 +111,7 @@ describe("workflow files", () => {
     expect(files).not.toContain("_reusable-eng-tools-test.yaml");
   });
 
-  it("triggers engineering checks on shared inputs and checks out integration fixtures", async () => {
+  it("triggers engineering checks on shared inputs without checking out service specs", async () => {
     const workflow = await readWorkflow("eng.yml");
     const paths = [
       "**/package.json",
@@ -126,10 +126,6 @@ describe("workflow files", () => {
       ".gitignore",
       ".oxlintrc.json",
       ".oxfmtrc.json",
-      "specification/common-types/**",
-      "specification/contosowidgetmanager/**",
-      "specification/storage/**",
-      "specification/compute/**",
     ];
     expect(workflow.on?.pull_request?.paths).toEqual(paths);
     expect(workflow.on?.push?.paths).toEqual(paths);
@@ -140,8 +136,7 @@ describe("workflow files", () => {
     expect(
       workflow.jobs.test.steps?.find((step) => step.uses?.startsWith("actions/checkout"))?.with,
     ).toEqual({
-      "sparse-checkout":
-        ".github\neng\nspecification/common-types\nspecification/contosowidgetmanager\nspecification/storage\nspecification/compute\n",
+      "sparse-checkout": ".github\neng\n",
     });
     for (const job of Object.values(workflow.jobs)) {
       expect(
