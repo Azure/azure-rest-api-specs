@@ -111,7 +111,7 @@ model EvaluationDataGenerationJobOutputTarget {
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model SupervisedFineTuningDataGenerationJobOutputTarget {
   @doc("Filename to assign to the generated fine-tuning file.")
-  name?: string;
+  name: string;
 
   @doc("Controls how file outputs are written. If omitted, defaults to `overwrite` and writes only the newly generated fine-tuning file content.")
   write_mode?: DataGenerationJobOutputWriteMode;
@@ -125,7 +125,7 @@ model SupervisedFineTuningDataGenerationJobOutputTarget {
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model ReinforcementFineTuningDataGenerationJobOutputTarget {
   @doc("Filename to assign to the generated fine-tuning file.")
-  name?: string;
+  name: string;
 
   @doc("Controls how file outputs are written. If omitted, defaults to `overwrite` and writes only the newly generated fine-tuning file content.")
   write_mode?: DataGenerationJobOutputWriteMode;
