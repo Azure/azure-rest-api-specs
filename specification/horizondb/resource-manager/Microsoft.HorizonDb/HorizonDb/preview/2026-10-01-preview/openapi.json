@@ -1032,58 +1032,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/backups": {
-      "get": {
-        "operationId": "Backups_List",
-        "tags": [
-          "Backups"
-        ],
-        "description": "Lists the backups available for a HorizonDB cluster. Expired automatic backups are omitted.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "clusterName",
-            "in": "path",
-            "description": "The name of the HorizonDB cluster.",
-            "required": true,
-            "type": "string",
-            "minLength": 1,
-            "maxLength": 63,
-            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/BackupListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List available backups for a HorizonDB cluster": {
-            "$ref": "./examples/Backups_List.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/backups/{backupName}": {
       "get": {
         "operationId": "Backups_Get",
@@ -5702,27 +5650,6 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
-      ]
-    },
-    "BackupListResult": {
-      "type": "object",
-      "description": "The response of a Backup list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Backup items on this page",
-          "items": {
-            "$ref": "#/definitions/Backup"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "BackupProperties": {

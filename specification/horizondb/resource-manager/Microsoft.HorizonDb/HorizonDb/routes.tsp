@@ -594,7 +594,4 @@ interface MicrosoftEntraAuthentications {
 interface Backups {
   @doc("Gets an available backup for a HorizonDB cluster. Expired automatic backups are not available through this operation.")
   get is ArmResourceRead<Backup>;
-
-  @doc("Lists the backups available for a HorizonDB cluster. Expired automatic backups are omitted.")
-  list is ArmResourceListByParent<Backup>;
 }
