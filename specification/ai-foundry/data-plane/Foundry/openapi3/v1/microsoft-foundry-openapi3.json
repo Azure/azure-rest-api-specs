@@ -6680,7 +6680,7 @@
       "get": {
         "operationId": "AgentTelephony_listTelephonyCallJobs",
         "summary": "List outbound telephony call jobs",
-        "description": "Lists direct and campaign-created call jobs owned by the route Agent. Deleted jobs are omitted. Status-filtered pages are live views, not a snapshot across requests.",
+        "description": "Lists direct and campaign-created call jobs owned by the route Agent. Deleted and superseded-round\njobs are omitted. Status-filtered pages are live views, not a snapshot across requests.\nFor campaign_name-filtered traversal, after/before CallJob IDs retain their original Campaign\nincarnation and validation_operation_id association for the cursor lifetime, including after task\ndeletion. Validate that association before reading the current round. Replacement or name reuse\nreturns 400 invalid_cursor, never silently continues in a new round. Discard the traversal and\nrestart SDK iteration. Unknown/expired/mismatched boundaries also return 400 invalid_cursor.\nA first page resolves the current round; deleting Campaigns return an empty page.",
         "parameters": [
           {
             "name": "Foundry-Features",
@@ -6759,7 +6759,7 @@
             "name": "campaign_name",
             "in": "query",
             "required": false,
-            "description": "Restrict results to the current incarnation of the named Campaign. A missing Campaign returns 404; a deleting Campaign returns an empty page. Omit to include direct and retained Campaign-created jobs. Jobs owned by deleting/deleted instances are excluded, including after name reuse.",
+            "description": "Restrict results to the current incarnation and validation round of the named Campaign. A missing Campaign returns 404; a deleting Campaign returns an empty page. Continuation across round replacement or name reuse returns 400 invalid_cursor. Omit to include direct and retained current-round Campaign jobs. Deleting/deleted instances and superseded rounds are excluded.",
             "schema": {
               "$ref": "#/components/schemas/TelephonyCampaignName"
             },
@@ -43005,11 +43005,6 @@
           }
         ],
         "description": "Dispatch automatically as soon as preparation succeeds and capacity permits.",
-        "examples": [
-          {
-            "type": "immediate"
-          }
-        ],
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -84958,11 +84953,6 @@
           }
         ],
         "description": "Read every recipient's earliest dispatch time from the fixed scheduled_at field. Dataset CSV/JSON/JSONL values use RFC 3339 with an explicit offset or Z; inline values use FoundryTimestamp.",
-        "examples": [
-          {
-            "type": "recipient"
-          }
-        ],
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -86356,13 +86346,6 @@
           }
         ],
         "description": "Apply the same earliest dispatch time to every recipient. A past time is valid and makes work eligible after preparation succeeds.",
-        "examples": [
-          {
-            "type": "scheduled",
-            "scheduled_at": 1790816400,
-            "expires_at": 1790902800
-          }
-        ],
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"

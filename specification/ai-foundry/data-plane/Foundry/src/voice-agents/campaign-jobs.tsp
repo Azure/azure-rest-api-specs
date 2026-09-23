@@ -98,20 +98,14 @@ model TelephonyCampaignSchedule {
 
 /** Dispatch automatically as soon as preparation succeeds and capacity permits. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@example(#{ type: "immediate" })
 model ImmediateTelephonyCampaignSchedule extends TelephonyCampaignSchedule {
-  type: "immediate";
+  type: TelephonyCampaignScheduleType.immediate;
 }
 
 /** Apply the same earliest dispatch time to every recipient. A past time is valid and makes work eligible after preparation succeeds. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@example(#{
-  type: "scheduled",
-  scheduled_at: FoundryTimestamp.fromISO("2026-10-01T01:00:00Z"),
-  expires_at: FoundryTimestamp.fromISO("2026-10-02T01:00:00Z"),
-})
 model ScheduledTelephonyCampaignSchedule extends TelephonyCampaignSchedule {
-  type: "scheduled";
+  type: TelephonyCampaignScheduleType.scheduled;
 
   /** Common earliest dispatch time; successful preparation is required. */
   scheduled_at: FoundryTimestamp;
@@ -119,9 +113,8 @@ model ScheduledTelephonyCampaignSchedule extends TelephonyCampaignSchedule {
 
 /** Read every recipient's earliest dispatch time from the fixed scheduled_at field. Dataset CSV/JSON/JSONL values use RFC 3339 with an explicit offset or Z; inline values use FoundryTimestamp. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@example(#{ type: "recipient" })
 model RecipientTelephonyCampaignSchedule extends TelephonyCampaignSchedule {
-  type: "recipient";
+  type: TelephonyCampaignScheduleType.recipient;
 }
 
 /** Complete Campaign configuration supplied on creation or replacement of failed preparation. Inputs stay fixed throughout a validation round and subsequent execution. */

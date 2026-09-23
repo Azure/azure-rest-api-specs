@@ -711,7 +711,16 @@ interface AgentTelephony {
     TelephonyCallJobAcceptedResponse
   >;
 
-  /** Lists direct and campaign-created call jobs owned by the route Agent. Deleted jobs are omitted. Status-filtered pages are live views, not a snapshot across requests. */
+  /**
+   * Lists direct and campaign-created call jobs owned by the route Agent. Deleted and superseded-round
+   * jobs are omitted. Status-filtered pages are live views, not a snapshot across requests.
+   * For campaign_name-filtered traversal, after/before CallJob IDs retain their original Campaign
+   * incarnation and validation_operation_id association for the cursor lifetime, including after task
+   * deletion. Validate that association before reading the current round. Replacement or name reuse
+   * returns 400 invalid_cursor, never silently continues in a new round. Discard the traversal and
+   * restart SDK iteration. Unknown/expired/mismatched boundaries also return 400 invalid_cursor.
+   * A first page resolves the current round; deleting Campaigns return an empty page.
+   */
   @summary("List outbound telephony call jobs")
   @get
   @list
@@ -728,7 +737,7 @@ interface AgentTelephony {
       /** Optional lifecycle filter. */
       @query status?: TelephonyCallJobStatus;
 
-      /** Restrict results to the current incarnation of the named Campaign. A missing Campaign returns 404; a deleting Campaign returns an empty page. Omit to include direct and retained Campaign-created jobs. Jobs owned by deleting/deleted instances are excluded, including after name reuse. */
+      /** Restrict results to the current incarnation and validation round of the named Campaign. A missing Campaign returns 404; a deleting Campaign returns an empty page. Continuation across round replacement or name reuse returns 400 invalid_cursor. Omit to include direct and retained current-round Campaign jobs. Deleting/deleted instances and superseded rounds are excluded. */
       @query campaign_name?: TelephonyCampaignName;
     },
     AgentsPagedResult<TelephonyCallJob>
