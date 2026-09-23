@@ -2,10 +2,16 @@
   "name": "azure-rest-api-specs",
   "packageManager": "pnpm@11.8.0",
   "scripts": {
+    "build": "pnpm -r --filter \"!azure-rest-api-specs-eng-tools\" run build",
+    "check": "pnpm check:workspace && pnpm build && pnpm lint && pnpm format:check && pnpm test:ci",
     "check:workspace": "node ./.github/workflows/src/validate-workspace.ts",
     "install-pnpm": "node ./eng/scripts/install-pnpm.mts",
     "lint": "oxlint .",
-    "lint:fix": "pnpm lint --fix"
+    "lint:fix": "pnpm lint --fix",
+    "format": "oxfmt .github eng/tools vitest.config.mts --write",
+    "format:check": "oxfmt .github eng/tools vitest.config.mts --check",
+    "test": "vitest",
+    "test:ci": "vitest run --coverage --reporter=verbose"
   },
   "devDependencies": {
     "@autorest/openapi-to-typespec": "catalog:",
@@ -41,7 +47,6 @@
     "@typespec/http": "catalog:",
     "@typespec/openapi": "catalog:",
     "@typespec/openapi3": "catalog:",
-    "@typespec/prettier-plugin-typespec": "catalog:",
     "@typespec/rest": "catalog:",
     "@typespec/sse": "catalog:",
     "@typespec/streams": "catalog:",
@@ -51,7 +56,10 @@
     "oxlint": "catalog:",
     "oxlint-tsgolint": "catalog:",
     "prettier": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "oxfmt": "catalog:",
+    "@vitest/coverage-v8": "catalog:",
+    "vitest": "catalog:"
   },
   "engines": {
     "node": ">=24.14.1"

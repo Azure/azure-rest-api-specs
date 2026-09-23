@@ -8,6 +8,7 @@ import {
   symlinkSync,
   writeFileSync,
 } from "node:fs";
+import { rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -63,8 +64,9 @@ describe("workspace validation", () => {
     writeManifest(".", { name: "root", private: true });
   });
 
-  afterEach(() => {
-    rmSync(repoRoot, { recursive: true, force: true });
+  afterEach(async () => {
+    // Windows can briefly retain file locks after pnpm exits.
+    await rm(repoRoot, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
   });
 
   it("accepts catalogs and workspace references in every dependency section", () => {

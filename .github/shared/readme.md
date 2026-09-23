@@ -65,6 +65,12 @@ Single source of truth for breaking-change and versioning approval label names a
 
 - `isExecError(error)` — type guard for errors thrown by the exec helpers.
 - `execFile(file, args, options)` — promisified `child_process.execFile`.
+- `execNodeBin(packageName, [binary, ...args], options)` — run an installed Node.js CLI directly
+  with the current Node executable, without starting npm/pnpm or a shell shim. Resolves the package
+  from `options.cwd` (or the current directory) using Node's `findPackageJSON`, reads its `bin`
+  entry, and preserves the exec helpers' logging, output limits, and error handling. Packages do
+  not need to export `package.json`. This uses Node's built-in resolver, not custom resolution hooks;
+  `findPackageJSON` is available in Node 24 and is marked Active Development.
 - `execNpm(args, options)` — run an `npm` command.
 - `execNpmExec(args, options)` — run an `npm exec` command.
 - `execPnpm(args, options)` — run a `pnpm` command (via `cross-spawn`).
@@ -90,6 +96,45 @@ Single source of truth for breaking-change and versioning approval label names a
 ### `math` — math helpers
 
 - `toPercent(value, decimals)` — format a `0..1` ratio as a percentage string.
+
+### `markdown` — composable report helpers
+
+- `MarkdownDoc`, `MarkdownSection` — trusted Markdown blocks, optional content, arrays and sections.
+- `section(title, body)` — group content under a heading; nested sections increase the heading level.
+- `renderMarkdownDoc(doc, heading = 1)` — render blocks separated by blank lines, omitting empty blocks.
+- `escapeMarkdown(text)` — escape untrusted single-line text, including HTML, table pipes and mentions.
+- `inlineCode(text)` — render nonempty code text, preserving embedded backticks and edge spaces.
+- `link(label, url)` — create a link from trusted inline Markdown and a trusted destination.
+- `table([header, ...rows])` — render equal-width GFM rows, escaping pipes and preserving line breaks.
+- `unorderedList(items)` — render Markdown list items, indenting continuation lines.
+- `details(summary, body)` — create a collapsible block with a plain-text summary and Markdown body.
+
+Like [TypeSpec's Markdown helpers](https://github.com/microsoft/typespec/blob/main/packages/tspd/src/ref-doc/utils/markdown.ts),
+callers describe the document structure rather than hand-joining every line. Strings are trusted
+Markdown: apply `escapeMarkdown` to external text before putting it in a heading,
+table cell, list item or link label. Link destinations must be trusted separately.
+
+```typescript
+import {
+  details,
+  escapeMarkdown,
+  renderMarkdownDoc,
+  section,
+  table,
+  unorderedList,
+} from "@azure-tools/specs-shared/markdown";
+
+const report = renderMarkdownDoc(
+  section("Contributor readiness", [
+    table([
+      ["Participant", "Finding"],
+      [escapeMarkdown(login), escapeMarkdown(message)],
+    ]),
+    details("Participants", unorderedList([escapeMarkdown(login)])),
+  ]),
+  2,
+);
+```
 
 ### `path` — path helpers (with caching)
 
@@ -191,9 +236,14 @@ Conventions:
 - Use erasable syntax compatible with Node.js type stripping: no enums, parameter properties, or
   namespaces.
 - Linting uses the repository-root `.oxlintrc.json` with oxlint and `oxlint-tsgolint`.
-  CI lints the previously linted packages once in `.github/workflows/lint.yaml`, separately from package tests.
+  CI lints all packages once in `.github/workflows/lint.yaml`, separately from package tests.
 - Runtime dependencies are kept to an absolute minimum (ideally zero transitive dependencies) for
   performance, and must be a subset of the parent [`../package.json`](../package.json).
+- Root `pnpm build` delegates to this package's build script. Root `pnpm test:ci`
+  includes it as a Vitest project and measures shared-source coverage across the
+  selected projects. Package-local Vitest commands still run directly with the
+  independent 100% coverage gate, inheriting shared defaults but not the root
+  workspace project list.
 
 ### `test`
 
@@ -220,7 +270,7 @@ that still point at the old `.js` entry point.
 
 ### Contributing
 
-When adding or changing shared code:
+When adding a shared utility:
 
 1. **Add the module** under `src` as a single-responsibility TypeScript file with typed exports.
 2. **Export it** by adding a subpath entry to the `exports` map in [`package.json`](./package.json).
@@ -232,12 +282,12 @@ When adding or changing shared code:
 
 Useful scripts (run from `.github/shared`):
 
-| Command                | Description                                          |
-| ---------------------- | ---------------------------------------------------- |
-| `npm test`             | Run tests in watch mode (vitest).                    |
-| `npm run test:ci`      | Run tests once with coverage.                        |
-| `pnpm run lint`        | Run oxlint and `tsc` type-checking for this package. |
-| `npm run format`       | Auto-format with prettier.                           |
-| `npm run format:check` | Check formatting without writing.                    |
-| `npm run perf`         | Run performance benchmarks.                          |
-| `npm run check`        | Run tests, lint, and format check (the full gate).   |
+| Command                 | Description                                            |
+| ----------------------- | ------------------------------------------------------ |
+| `npm test`              | Run tests in watch mode (vitest).                      |
+| `npm run test:ci`       | Run tests once with coverage.                          |
+| `pnpm run lint`         | Run oxlint and `tsc` type-checking for this package.   |
+| `pnpm run format`       | Format this package with the root Oxfmt configuration. |
+| `pnpm run format:check` | Check formatting without writing.                      |
+| `npm run perf`          | Run performance benchmarks.                            |
+| `npm run check`         | Run tests, lint, and format check (the full gate).     |
