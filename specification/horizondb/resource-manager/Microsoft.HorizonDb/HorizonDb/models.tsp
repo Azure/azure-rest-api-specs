@@ -1285,7 +1285,7 @@ union HorizonDbClusterEncryptionKeyStatus {
 @added(Versions.v2026_10_01_preview)
 @doc("A versionless HTTPS Azure Key Vault key URI. The URI must use a supported public or sovereign Azure Key Vault DNS suffix and the path /keys/{key-name}. Key version paths are not supported.")
 @pattern("^https://[A-Za-z0-9-]+[.]vault([.]azure[.]net|[.]usgovcloudapi[.]net|[.]azure[.]cn)/keys/[A-Za-z0-9-]+/?$")
-scalar VersionlessKeyVaultKeyUri extends string;
+scalar VersionlessKeyVaultKeyUri extends url;
 
 @added(Versions.v2026_10_01_preview)
 @doc("The Cluster-level data encryption configuration. For AzureKeyVault encryption, primaryKeyUri and primaryUserAssignedIdentityId are required. When geographically redundant backup is enabled, geoBackupKeyUri and geoBackupUserAssignedIdentityId are also required. Customer-managed key identities must also be assigned to the Cluster through its top-level identity property. Only versionless Azure Key Vault key URIs are supported; key version paths are rejected. For SystemManaged encryption, key and identity properties must be omitted.")
