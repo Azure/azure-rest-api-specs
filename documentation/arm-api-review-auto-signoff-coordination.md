@@ -26,28 +26,18 @@ It does not:
 
 - approve the PR;
 - stop the reviewer from running again; or
-- make `ARMChangesRequested` an auto-signoff requirement.
-
-No reviewed commit SHA needs to be stored because auto-signoff does not
-distinguish current and stale AI findings.
+- make AI findings blocking.
 
 ## 3. Auto-signoff rules
 
-Auto-signoff is eligible only when all of these conditions are true:
+Auto-signoff:
 
-1. `ARMAPIReviewCompleted` is present.
-2. `ARMReview` is present.
-3. `NotReadyForARMReview` is absent.
-4. `ARMManualSignoffRequired` is absent.
-5. If `SuppressionReviewRequired` is present, `Approved-Suppression` is also
-   present.
-6. The latest `Swagger LintDiff` status on the current PR head is successful.
-7. The latest `Swagger Avocado` status on the current PR head is successful.
+1. Waits until `ARMAPIReviewCompleted` is present.
+2. Applies the existing deterministic, approval, and readiness checks.
+3. Treats automated AI findings as advisory.
 
-`ARMChangesRequested` is advisory and does not affect eligibility after
-`ARMAPIReviewCompleted` is present.
-
-When auto-signoff succeeds, it applies one label transition:
+When all auto-signoff requirements pass, the workflow makes the following label
+updates:
 
 ```text
 Add:    ARMSignedOff
@@ -100,86 +90,19 @@ flowchart TD
 **Result:** Later AI runs do not delay or veto auto-signoff. Current
 deterministic checks decide the outcome.
 
-## 7. Workflow coordination
+## 7. Edge cases
 
-```mermaid
-sequenceDiagram
-    participant AI as ARM API Reviewer
-    participant GH as GitHub Actions
-    participant AS as Universal Auto-Signoff
-    participant PR
-
-    AI->>PR: Add ARMAPIReviewCompleted
-    AI-->>GH: ARM API Review workflow completes
-    GH->>AS: workflow_run completed event
-    AS->>GH: Read trusted PR-number artifact
-    AS->>PR: Fetch current labels and head statuses
-    AS->>AS: Evaluate all auto-signoff rules
-```
-
-The `ARMAPIReviewCompleted` label stores state but does not trigger the
-auto-signoff workflow. A label added with `GITHUB_TOKEN` normally does not
-start another workflow.
-
-Universal Auto-Signoff instead adds this trigger:
-
-```yaml
-workflow_run:
-  workflows: ["ARM API Review: Automated Workflow"]
-  types: [completed]
-```
-
-The API Reviewer publishes the target PR number as a trusted workflow artifact.
-Universal Auto-Signoff reads that artifact from the completed run, fetches the
-PR's current labels and head statuses, and then evaluates the rules in
-Section 3. This supports reviewer runs started by PR events, `/arm-review`, or
-manual dispatch without relying on a label-generated event.
-
-Universal Auto-Signoff keeps its existing triggers and adds the reviewer
-completion trigger:
-
-| Trigger                                                     | Purpose                                                                      |
-| ----------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| PR opened, updated, reopened, edited, labeled, or unlabeled | Reevaluate when the PR head or relevant labels change                        |
-| LintDiff or Avocado status workflow completes               | Reevaluate when a required deterministic status changes                      |
-| ARM API Reviewer workflow completes                         | Reevaluate after every automatic, explicit, or manually dispatched AI review |
-
-These triggers are independent. Universal Auto-Signoff does not wait for a
-future AI run after `ARMAPIReviewCompleted` exists; it reevaluates whenever any
-input changes.
-
-### Explicit AI review after auto-signoff
-
-```mermaid
-sequenceDiagram
-    participant User
-    participant AI as ARM API Reviewer
-    participant AS as Universal Auto-Signoff
-    participant UL as Update Labels
-    participant PR
-
-    Note over PR: ARMSignedOff is already present
-    User->>AI: Trigger /arm-review
-    AI->>PR: Post advisory comments
-    AI->>PR: Add ARMChangesRequested
-    AI-->>AS: workflow_run completed event
-    AS->>PR: Fetch current labels and head statuses
-    AS->>AS: Reevaluate auto-signoff rules
-    AS->>UL: Preserve ARMSignedOff\nRemove ARMChangesRequested and WaitForARMFeedback
-    UL->>PR: Apply label changes
-```
-
-The cleanup is an explicit output of Universal Auto-Signoff even when
-`ARMSignedOff` is already present. It does not depend on a new signoff label
-being added.
-
-`Summarize Checks` also gives `ARMSignedOff` precedence over
-`ARMChangesRequested`, but it is not the reliable trigger for this cleanup. A
-label added by the reviewer with `GITHUB_TOKEN` may not start
-`Summarize Checks`, and that workflow does not currently listen for API
-Reviewer completion. It may remove the label on a later event, but the
-Universal Auto-Signoff `workflow_run` handoff removes it immediately after the
-reviewer finishes.
+| Edge case                                                                                                       | Handling                                                                                                 |
+| --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| The reviewer adds `ARMAPIReviewCompleted` with `GITHUB_TOKEN`, so the label event does not trigger auto-signoff | Trigger Universal Auto-Signoff from the reviewer's `workflow_run: completed` event.                      |
+| The first AI review has not completed                                                                           | `ARMAPIReviewCompleted` is absent, so auto-signoff waits.                                                |
+| AI review and deterministic checks complete at different times                                                  | Each completion triggers reevaluation; signoff occurs only after AI completion and existing checks pass. |
+| The reviewer adds `ARMChangesRequested`                                                                         | The finding remains advisory; successful auto-signoff removes the label.                                 |
+| An explicit AI review adds `ARMChangesRequested` after signoff                                                  | Reviewer completion triggers auto-signoff again, which preserves signoff and removes the advisory label. |
+| `Summarize Checks` fails                                                                                        | Auto-signoff performs its own label cleanup, so the final state does not depend on `Summarize Checks`.   |
+| The AI reviewer fails before completing                                                                         | Do not add `ARMAPIReviewCompleted`; auto-signoff waits for a completed review.                           |
+| `ARMAPIReviewCompleted` is added manually                                                                       | Require trusted reviewer workflow evidence before accepting the label.                                   |
+| A stale workflow completes after the PR changes                                                                 | Re-fetch current PR labels and head statuses before applying signoff.                                    |
 
 ## 8. Required changes
 
