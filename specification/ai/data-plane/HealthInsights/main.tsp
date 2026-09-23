@@ -2,9 +2,8 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "@typespec/http";
 import "@typespec/versioning";
-import "./service.tsp";
+import "./client.tsp";
 
-import "./HealthInsights.RadiologyInsights/route.radiologyinsights.tsp";
 import "./HealthInsights.TrialMatcher/route.trialmatcher.tsp";
 
 // FIXME: This is a workaround. Tracking issue: https://github.com/microsoft/typespec/issues/2826
