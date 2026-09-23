@@ -5855,20 +5855,6 @@
         ]
       }
     },
-    "EnclaveAddressSpacesModel": {
-      "type": "object",
-      "description": "Enclave Address Spaces",
-      "properties": {
-        "enclaveAddressSpace": {
-          "type": "string",
-          "description": "Enclave Address Space"
-        },
-        "managedAddressSpace": {
-          "type": "string",
-          "description": "Managed Address Space"
-        }
-      }
-    },
     "EnclaveConnectionPatchModel": {
       "type": "object",
       "description": "Enclave Connection Patch Resource",
@@ -6370,49 +6356,6 @@
       "required": [
         "value"
       ]
-    },
-    "EnclaveVirtualNetworkModel": {
-      "type": "object",
-      "description": "Enclave Virtual Network Properties",
-      "properties": {
-        "networkName": {
-          "type": "string",
-          "description": "Network Name."
-        },
-        "networkSize": {
-          "type": "string",
-          "description": "Network Size.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "customCidrRange": {
-          "type": "string",
-          "description": "Custom CIDR Range.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "subnetConfigurations": {
-          "type": "array",
-          "description": "Subnet Configurations.",
-          "items": {
-            "$ref": "#/definitions/SubnetConfiguration"
-          },
-          "x-ms-identifiers": []
-        },
-        "allowSubnetCommunication": {
-          "type": "boolean",
-          "description": "Allow Subnet Communication.",
-          "default": false,
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      }
     },
     "FirewallPolicyResourceId": {
       "type": "string",
@@ -8084,10 +8027,6 @@
       "type": "object",
       "description": "Virtual Enclave Patchable Properties",
       "properties": {
-        "enclaveVirtualNetwork": {
-          "$ref": "#/definitions/EnclaveVirtualNetworkModel",
-          "description": "Virtual Network."
-        },
         "bastionEnabled": {
           "type": "boolean",
           "description": "Deploy Bastion service (True or False)."
@@ -8175,15 +8114,6 @@
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning State.",
-          "readOnly": true
-        },
-        "enclaveVirtualNetwork": {
-          "$ref": "#/definitions/EnclaveVirtualNetworkModel",
-          "description": "Virtual Network."
-        },
-        "enclaveAddressSpaces": {
-          "$ref": "#/definitions/EnclaveAddressSpacesModel",
-          "description": "Enclave Address Spaces",
           "readOnly": true
         },
         "communityResourceId": {
@@ -8347,7 +8277,6 @@
         }
       },
       "required": [
-        "enclaveVirtualNetwork",
         "communityResourceId"
       ]
     },

@@ -84,6 +84,7 @@ model SubnetConfiguration {
   networkSecurityGroupResourceId?: NsgResourceId;
 }
 
+@removed(Microsoft.Mission.Versions.v2026_07_01_preview)
 @doc("Enclave Virtual Network Properties")
 model EnclaveVirtualNetworkModel {
   @renamedFrom(Microsoft.Mission.Versions.v2025_05_01_preview, "name")
@@ -134,6 +135,7 @@ model EnclaveDefaultSettingsModel {
   diagnosticDestination?: DiagnosticDestination = DiagnosticDestination.EnclaveOnly;
 }
 
+@removed(Microsoft.Mission.Versions.v2026_07_01_preview)
 @doc("Enclave Address Spaces")
 model EnclaveAddressSpacesModel {
   @doc("Enclave Address Space")
@@ -198,9 +200,11 @@ model VirtualEnclaveBaseModel {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
+  @removed(Microsoft.Mission.Versions.v2026_07_01_preview)
   @doc("Virtual Network.")
   enclaveVirtualNetwork: EnclaveVirtualNetworkModel;
 
+  @removed(Microsoft.Mission.Versions.v2026_07_01_preview)
   @doc("Enclave Address Spaces")
   @visibility(Lifecycle.Read)
   enclaveAddressSpaces?: EnclaveAddressSpacesModel;
