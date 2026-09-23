@@ -157,7 +157,7 @@ using Microsoft.RecoveryServices;
 
 // The local frozen-contract `Resource` and `ErrorDetail` envelopes intentionally
 // mirror shapes that also exist in ARM common-types, which the resource-manager
-// library injects. TCGC rejects the duplicate client name for csharp/java/python
+// library injects. The client generator rejects the duplicate client name for csharp/java/python
 // (Go/JS/Rust do not enforce it). Scope the rename to those SDK languages only so
 // the autorest emitter is unaffected and the swagger definition keys (`Resource`,
 // `ErrorDetail`) stay identical to the frozen 2023-01-15 contract.

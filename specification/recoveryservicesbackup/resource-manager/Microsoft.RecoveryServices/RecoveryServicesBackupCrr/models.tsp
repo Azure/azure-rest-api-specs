@@ -1173,6 +1173,7 @@ model NameInfo {
 /**
  * The resource management error response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model NewErrorResponse {
   /**
@@ -1279,6 +1280,7 @@ model Resource {
   eTag?: string;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model CrossRegionRestoreRequest {
   /**
@@ -1434,6 +1436,7 @@ model CrrAccessToken {
 /**
  * Base class for restore request. Workload-specific restore requests are derived from this class.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @discriminator("objectType")
 model RestoreRequest {
   /**
@@ -1446,6 +1449,7 @@ model RestoreRequest {
 /**
  * Request object for fetching CRR jobs.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model CrrJobRequest {
   /**
    * Entire ARM resource id of the resource
@@ -1972,6 +1976,7 @@ model RecoveryPointProperties {
 /**
  * AzureFileShare Restore Request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AzureFileShareRestoreRequest extends RestoreRequest {
   /**
    * Type of this recovery.
@@ -2867,6 +2872,7 @@ model RecoveryPointMoveReadinessInfo {
 /**
  * AzureWorkload SAP Hana -specific restore. Specifically for PointInTime/Log restore
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AzureWorkloadPointInTimeRestoreRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -2884,6 +2890,7 @@ model AzureWorkloadPointInTimeRestoreRequest extends RestoreRequest {
 /**
  * AzureWorkload-specific restore.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AzureWorkloadRestoreRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -2975,6 +2982,7 @@ alias AzureWorkloadSapHanaPointInTimeRestoreRequestProperties = {
 /**
  * AzureWorkload SAP Hana -specific restore. Specifically for PointInTime/Log restore
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AzureWorkloadSapHanaPointInTimeRestoreRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -2988,6 +2996,7 @@ model AzureWorkloadSapHanaPointInTimeRestoreRequest extends RestoreRequest {
 /**
  * AzureWorkload SAP Hana-specific restore.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AzureWorkloadSapHanaRestoreRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -3099,6 +3108,7 @@ alias AzureWorkloadSqlPointInTimeRestoreRequestProperties = {
 /**
  * AzureWorkload SQL -specific restore. Specifically for PointInTime/Log restore
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AzureWorkloadSqlPointInTimeRestoreRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -3113,6 +3123,7 @@ model AzureWorkloadSqlPointInTimeRestoreRequest extends RestoreRequest {
 /**
  * AzureWorkload SQL -specific restore. Specifically for full/diff restore
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AzureWorkloadSqlRestoreRequest extends RestoreRequest {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -3173,6 +3184,7 @@ model BekDetails {
   /**
    * Secret is BEK.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   secretUrl?: string;
 
   /**
@@ -3251,6 +3263,7 @@ model ClientScriptForConnect {
   /**
    * OS type - Windows, Linux etc. for which this file / folder restore client script works.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType?: string;
 
   /**
@@ -3520,11 +3533,13 @@ model EncryptionDetails {
   /**
    * Key Url.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   kekUrl?: string;
 
   /**
    * Secret Url.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   secretKeyUrl?: string;
 
   /**
@@ -3684,6 +3699,7 @@ model IaasVmRecoveryPoint extends RecoveryPoint {
   /**
    * OS type
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osType?: string;
 
   /**
@@ -3746,6 +3762,7 @@ model KekDetails {
   /**
    * Key is KEK.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   keyUrl?: string;
 
   /**
@@ -3787,6 +3804,7 @@ model RecoveryPointDiskConfiguration {
 /**
  * IaaS VM workload-specific restore.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model IaasVmRestoreRequest extends RestoreRequest {
   /**
    * ID of the backup copy to be recovered.
