@@ -276,7 +276,11 @@ namespace SecurityManagementClient;
 @@override(
   AlertOperationGroup.listResourceGroupLevelByRegion,
   reorderParameters(
-    AlertOperationGroup.listResourceGroupLevelByRegion,
+    replaceParameter(
+      AlertOperationGroup.listResourceGroupLevelByRegion,
+      "provider",
+      Azure.ResourceManager.Legacy.Provider.provider
+    ),
     #[
       "apiVersion",
       "subscriptionId",
