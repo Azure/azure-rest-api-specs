@@ -2777,12 +2777,6 @@ model SiteConfig {
   vnetPrivatePortsCount?: int32;
 
   /**
-   * Egress configuration (Secretless App Service).
-   */
-  @added(Versions.v2026_09_01)
-  egressConfig?: EgressConfigProperties;
-
-  /**
    * Cross-Origin Resource Sharing (CORS) settings.
    */
   cors?: CorsSettings;
