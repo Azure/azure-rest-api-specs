@@ -6,8 +6,8 @@ using Microsoft.ResourceHealth;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ImpactedResourceStatus.properties);
 
-@@clientLocation(MetadataEntities.getEntity, "Metadata");
-@@clientLocation(MetadataEntities.list, "Metadata");
+@@clientLocation(MetadataEntities.getEntity, MetadataClientGroup);
+@@clientLocation(MetadataEntities.list, MetadataClientGroup);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MetadataEntity.properties);
 
@@ -19,15 +19,18 @@ using Microsoft.ResourceHealth;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(EventImpactedResource.properties);
 
-@@clientLocation(EventOperationGroup.getBySubscriptionIdAndTrackingId, "Event");
-@@clientLocation(EventOperationGroup.listBySubscriptionId, "Events");
+@@clientLocation(
+  EventOperationGroup.getBySubscriptionIdAndTrackingId,
+  EventClientGroup
+);
+@@clientLocation(EventOperationGroup.listBySubscriptionId, EventsClientGroup);
 @@clientLocation(
   EventOperationGroup.listBySubscriptionIdAndEventId,
-  "SecurityAdvisoryImpactedResources"
+  SecurityAdvisoryImpactedResourcesClientGroup
 );
 @@clientLocation(
   EventOperationGroup.fetchDetailsBySubscriptionIdAndTrackingId,
-  "Event"
+  EventClientGroup
 );
 @@clientName(
   EventOperationGroup.fetchDetailsBySubscriptionIdAndTrackingId,
@@ -35,21 +38,24 @@ using Microsoft.ResourceHealth;
 );
 @@clientLocation(
   EventOperationGroup.fetchBilllingCommunicationDetailsBySubscriptionIdAndTrackingId,
-  "Event"
+  EventClientGroup
 );
 @@clientName(
   EventOperationGroup.fetchBilllingCommunicationDetailsBySubscriptionIdAndTrackingId,
   "fetchBilllingCommunicationDetailsBySubscriptionIdAndTrackingId"
 );
-@@clientLocation(TenantEventOperationGroup.getByTenantIdAndTrackingId, "Event");
-@@clientLocation(TenantEventOperationGroup.listByTenantId, "Events");
+@@clientLocation(
+  TenantEventOperationGroup.getByTenantIdAndTrackingId,
+  EventClientGroup
+);
+@@clientLocation(TenantEventOperationGroup.listByTenantId, EventsClientGroup);
 @@clientLocation(
   TenantEventOperationGroup.listByTenantIdAndEventId,
-  "SecurityAdvisoryImpactedResources"
+  SecurityAdvisoryImpactedResourcesClientGroup
 );
 @@clientLocation(
   TenantEventOperationGroup.fetchDetailsByTenantIdAndTrackingId,
-  "Event"
+  EventClientGroup
 );
 @@clientName(
   TenantEventOperationGroup.fetchDetailsByTenantIdAndTrackingId,
@@ -58,14 +64,14 @@ using Microsoft.ResourceHealth;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(Event.properties);
 
-@@clientLocation(EmergingIssuesGetResults.get, "EmergingIssues");
-@@clientLocation(EmergingIssuesGetResults.list, "EmergingIssues");
+@@clientLocation(EmergingIssuesGetResults.get, EmergingIssuesClientGroup);
+@@clientLocation(EmergingIssuesGetResults.list, EmergingIssuesClientGroup);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(EmergingIssuesGetResult.properties);
 
-@@clientLocation(EventsOperationGroup.listBySingleResource, "Events");
+@@clientLocation(EventsOperationGroup.listBySingleResource, EventsClientGroup);
 
-@@clientLocation(ChildResourcesOperationGroup.list, "ChildResources");
+@@clientLocation(ChildResourcesOperationGroup.list, ChildResourcesClientGroup);
 @@clientName(AvailabilityStatus, "availabilityStatus");
 @@clientName(Events, "events");
 @@clientName(EmergingIssuesGetResult, "emergingIssuesGetResult");

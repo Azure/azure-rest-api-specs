@@ -8,8 +8,26 @@ using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using Microsoft.ResourceHealth;
 
-namespace Microsoft.ResourceHealth;
+/** Resource Health collections for service groups. */
+@armProviderNamespace("Microsoft.ResourceHealth")
+@service(#{ title: "Resource Health Service Groups" })
+@versioned(Versions)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+namespace Microsoft.ResourceHealthServiceGroups;
+
+/** The API versions for service group health collections. */
+enum Versions {
+  /** The 2026-08-01-preview API version. */
+  @Azure.Core.previewVersion
+  @useDependency(Microsoft.ResourceHealth.Versions.v2025_05_01)
+  v2026_08_01_preview: "2026-08-01-preview",
+}
+
+/** Lists the operations available for the Resource Health provider. */
+@added(Versions.v2026_08_01_preview)
+interface Operations extends Azure.ResourceManager.Operations {}
 
 /** Parameters for health collections scoped to a service group. */
 @added(Versions.v2026_08_01_preview)

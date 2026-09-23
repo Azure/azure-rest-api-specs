@@ -35,6 +35,17 @@ azure-validator: true
 
 These settings apply only when `--tag=package-2026-08-01-preview` is specified on the command line.
 
+This preview contains the service-group availability-status and service-health-event
+collection APIs, plus standard Resource Health provider operations discovery.
+Subscription, resource, and tenant health APIs continue to use their existing API
+versions; they are not included in this preview.
+
+The service-group API surface is versioned independently from the existing Resource Health
+service. Existing TypeSpec clients remain bound to the existing service and retain their
+operation groups. A separate service-group client targets this preview. `service.yaml`
+lists both service surfaces and is maintained explicitly because the project contains
+multiple services.
+
 ```yaml $(tag) == 'package-2026-08-01-preview'
 input-file:
   - preview/2026-08-01-preview/ResourceHealth.json
