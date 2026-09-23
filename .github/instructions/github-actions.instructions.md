@@ -1,7 +1,7 @@
 ---
 applyTo:
-  - ".github/*.config.js"
-  - ".github/.prettier*"
+  - ".github/*.config.{js,ts}"
+  - ".oxfmtrc.json"
   - ".github/cspell.yaml"
   - ".github/package*.json"
   - ".github/tsconfig.json"
@@ -15,25 +15,27 @@ applyTo:
 
 This file provides instructions for GitHub Copilot when working with GitHub Actions code in this repository. The GitHub Actions infrastructure is completely separate from the TypeSpec and OpenAPI specification work that makes up the majority of this repository.
 
+Read existing code before editing, preserve its conventions, and keep changes surgical and focused.
+
 ## Overview
 
 The `.github` directory contains all the code and configuration for GitHub Actions that run as PR checks. This includes:
 
 - **Actions**: Reusable composite actions in `.github/actions/`
 - **Workflows**: Workflow files in `.github/workflows/`
-- **Shared utilities**: Common JavaScript modules in `.github/shared/src/`
+- **Shared utilities**: Common TypeScript modules in `.github/shared/src/`
 - **Tests**: Test files in `.github/workflows/test/` and `.github/shared/test/`
-- **Configuration**: ESLint, Prettier, TypeScript, and Vitest configs
+- **Configuration**: Root oxlint, Oxfmt, TypeScript, and Vitest configs
 
 ## Technology Stack
 
-- **Language**: JavaScript (ES2020+, with JSDoc type annotations)
+- **Language**: TypeScript with erasable syntax and native type annotations
 - **Runtime**: Node.js 24.x (on GitHub Actions runners)
-- **Type Checking**: TypeScript via JSDoc comments (no `.ts` files, only `.js`)
+- **Type Checking**: `tsc --noEmit`; Node.js executes the `.ts` sources directly
 - **Testing**: Vitest for unit and integration tests
-- **Linting**: ESLint with TypeScript-aware rules
-- **Formatting**: Prettier with organize-imports plugin
-- **Package Manager**: npm (npm ci for clean installs)
+- **Linting**: oxlint with type-aware rules from `oxlint-tsgolint`, configured in the root `.oxlintrc.json`
+- **Formatting**: Oxfmt using the root `.oxfmtrc.json`; import organization and package.json sorting are disabled
+- **Package Manager**: pnpm workspaces (`pnpm ci` for clean installs)
 
 ## Project Structure
 
@@ -44,69 +46,53 @@ The `.github` directory contains all the code and configuration for GitHub Actio
 │   ├── install-deps-github-script/
 │   └── ...
 ├── workflows/                  # Workflow YAML files and their scripts
-│   ├── src/                   # JavaScript modules for workflows
+│   ├── src/                   # TypeScript modules for workflows
 │   ├── test/                  # Tests for workflow scripts
 │   ├── *.yaml                 # Workflow definitions
 │   └── cmd/                   # CLI scripts
 ├── shared/                    # Shared utilities used across workflows
 │   ├── src/                   # Core utility modules
 │   ├── test/                  # Tests for shared utilities
-│   ├── eslint.base.config.js  # Base ESLint config
 │   └── package.json
 ├── matchers/                  # Problem matchers for CI output
 ├── package.json               # Root dependencies (superset of shared/)
-├── eslint.config.js           # ESLint configuration
 ├── tsconfig.json              # TypeScript config (type-checking only)
-├── vitest.config.js           # Vitest test configuration
-└── .prettierrc.yaml           # Prettier formatting rules
+└── vitest.config.ts           # Vitest test configuration
 ```
 
 ## Coding Standards
 
-### JavaScript Style
+### TypeScript Style
 
-- **File extension**: Always `.js`, never `.ts` (TypeScript is used only for type-checking)
+- **File extension**: Use `.ts` for source, tests, CLI entry points, benchmarks, and Vitest configuration; do not add JavaScript files
 - **Module system**: ES modules (`import`/`export`), not CommonJS
-- **Type annotations**: Use JSDoc comments extensively for all functions, parameters, and return types
-- **Indentation**: 2 spaces (enforced by Prettier)
-- **Quote style**: Double quotes for strings (enforced by Prettier)
-- **Line length**: Max 100 characters (enforced by Prettier)
+- **Type annotations**: Use interfaces, type aliases, and native parameter and return annotations, not JSDoc type declarations. Keep comments for documentation
+- **Indentation**: 2 spaces (enforced by Oxfmt)
+- **Quote style**: Double quotes for strings (enforced by Oxfmt)
+- **Line length**: Max 100 characters (enforced by Oxfmt)
 - **Naming conventions**:
   - Functions and variables: `camelCase`
   - Constants: `UPPER_SNAKE_CASE` for true constants
-  - Files: `kebab-case.js` or `camelCase.js`
-- **Exports**: Use named exports, avoid default exports
-
-### JSDoc Type Annotations
-
-All functions must have complete JSDoc type annotations:
-
-```javascript
-/**
- * Get a list of changed files in a git repository
- *
- * @param {Object} [options]
- * @param {string} [options.baseCommitish] Default: "HEAD^".
- * @param {string} [options.cwd] Current working directory. Default: process.cwd().
- * @param {import('./logger.js').ILogger} [options.logger]
- * @returns {Promise<string[]>} List of changed files
- */
-export async function getChangedFiles(options = {}) {
-  // Implementation
-}
-```
+  - Files: `kebab-case.ts` or `camelCase.ts`
+- **Exports**: Prefer named exports for new reusable helpers; preserve configuration and workflow entry-point export contracts
 
 ### TypeScript Integration
 
-- TypeScript is configured in `tsconfig.json` with `allowJs: true` and `checkJs: true`
-- Run `npm run lint:tsc` to type-check JavaScript files via JSDoc
-- Never create `.ts` files; use JSDoc in `.js` files instead
-- Import types with `@typedef` and `@type` JSDoc tags
+- Shared ES2024/NodeNext compiler options live in the single root `tsconfig.base.json`. Each GitHub project extends it directly, defining its own file selection and overrides that preserve the existing library, JavaScript, and unused-code checking behavior.
+- TypeScript is configured with `noEmit`, `allowImportingTsExtensions`, `erasableSyntaxOnly`, and `verbatimModuleSyntax`
+- Use `.ts` relative imports and `import type` for type-only dependencies
+- Do not introduce enums, parameter properties, or namespaces; use frozen objects and value-union type aliases instead of enums
+- Type injected `github`, `context`, and `core` values using `AsyncFunctionArguments` from `@actions/github-script`
+- For helpers that take `core` separately, import the shared `Core` type from `workflows/src/github.ts`
+- Type webhook payloads with `WebhookEvent<"pull-request", "labeled">` from `workflows/src/github.ts`, using GitHub OpenAPI event and action names. Omit the action to accept all actions for an event.
+- Inline `actions/github-script` YAML snippets remain JavaScript; they dynamically import the `.ts` modules
+
+See [the shared package guide](../shared/readme.md) for shared-library development conventions.
 
 ### YAML Style for Actions/Workflows
 
 - **Indentation**: 2 spaces
-- **String values**: Use double quotes (e.g., `cache: "npm"`) per Prettier conventions
+- **String values**: Use double quotes (e.g., `cache: "pnpm"`) per Oxfmt conventions
 - **Descriptions**: All inputs must have clear descriptions
 - **naming**: Use kebab-case for YAML keys (e.g., `working-directory`, not `workingDirectory`)
 
@@ -119,7 +105,7 @@ From `package.json` comments:
 - **Runtime dependencies**: Must be kept to an absolute minimum for performance
 - **Transitive dependencies**: Ideally zero transitive dependencies for runtime
 - **Relationship**: `.github/package.json` must be a superset of `.github/shared/package.json`
-- **Updates**: When updating dependencies, update both files if the dependency is shared
+- **Versions**: Reference external dependencies with `catalog:` and define their versions in the root `pnpm-workspace.yaml` catalog. Keep internal links as `workspace:*`.
 
 ### Key Dependencies
 
@@ -128,82 +114,77 @@ From `package.json` comments:
 - `simple-git`: Git operations
 - `js-yaml`: YAML parsing
 - `debug`: Debug logging
-- `vitest`: Testing framework
-- `eslint`, `typescript-eslint`: Linting and type checking
-- `prettier`: Code formatting
+- `vitest`, `@vitest/coverage-v8`: Root development dependencies for testing and coverage
+- `oxlint`, `oxlint-tsgolint`: Root development dependencies for linting
+- `typescript`: Root development dependency for type checking
+- `oxfmt`: Code formatting
 
 ## Build, Test, and Validation
 
-### Available npm Scripts
+### Available pnpm Scripts
 
-In `.github/` directory:
-
-```bash
-npm run check           # Run all checks (lint + format:check + test:ci)
-npm run lint            # Run both ESLint and TypeScript checks
-npm run lint:eslint     # Run ESLint only
-npm run lint:tsc        # Run TypeScript type checking only
-npm run format          # Format code with Prettier
-npm run format:check    # Check formatting without modifying files
-npm run format:check:ci # Check formatting with verbose debug output (for CI)
-npm run test            # Run tests in watch mode
-npm run test:ci         # Run tests once with coverage report
-npm run validate        # Alias for 'check' (legacy)
-```
-
-In `.github/shared/` directory:
+Run from `.github/` or `.github/shared/` unless noted:
 
 ```bash
-npm run check           # Run all checks
-npm run lint            # Run ESLint and TypeScript checks
-npm run format          # Format code with Prettier
-npm run format:check    # Check formatting
-npm run test            # Run tests in watch mode
-npm run test:ci         # Run tests once with coverage report
-npm run perf            # Run performance benchmarks
+pnpm run build           # Run this package's TypeScript check
+pnpm run check           # Run all checks (lint + format:check + test:ci)
+pnpm run lint            # Run both oxlint and TypeScript checks
+pnpm run lint:oxlint     # Run oxlint only
+pnpm run lint:tsc        # Run TypeScript type checking only
+pnpm run format          # Format code with Oxfmt
+pnpm run format:check    # Check formatting without modifying files
+pnpm run test            # Run tests in watch mode
+pnpm run test:ci         # Run tests once with coverage report
+pnpm run validate        # Run the same checks (legacy, .github only)
+pnpm run perf            # Run performance benchmarks (.github/shared only)
 ```
+
+Use `pnpm run format` rather than adjusting formatting manually.
+
+Root `pnpm build` delegates to package build scripts with `pnpm -r`; `lint:tsc`
+remains a package-local alias for `build`. Root `pnpm test`/`pnpm test:ci` run the
+Vitest workspace and root `pnpm check` runs all contributor checks. Package-local
+Vitest commands still run directly and do not forward to the root.
+
+`eng.yml` validates the workspace, runs root `pnpm build` once on Linux, and runs
+the Vitest workspace on Ubuntu and Windows. `github-test.yaml` retains production-only module import
+checks on both OSes, plus actionlint and compiled agentic workflow lock checks on Linux.
+
+CI runs `pnpm lint` once from the repository root in `lint.yaml`, covering `.github`
+and `eng/tools`. Do not add lint or type-check steps to the test OS matrix.
+`.github/workflows/format.yaml` runs `pnpm format:check` once from the repository
+root for `.github`, `eng/tools`, and `vitest.config.mts`. Do not add formatting steps to package/OS
+test matrices. Package-local format commands inherit the root `.oxfmtrc.json`,
+including fixture, generated-file, and unmanaged-content exclusions.
+See [the engineering guide](../../eng/README.md#linting-and-formatting) for package
+exclusions for packages not yet linted.
 
 ### Before Committing
 
-Always run:
-
-```bash
-npm run check
-```
-
-This runs linting, formatting checks, and tests. All must pass before committing.
+Run `pnpm run check` in each affected package. All lint, formatting, and test checks must pass before committing. Ensure changes do not break other workflows.
 
 ### Testing Conventions
 
+Cover new or changed behavior and bug regressions with focused tests of repository-owned behavior and integration contracts. Reuse adequate existing coverage for mechanical refactors and dependency/API substitutions; add tests for uncovered repository behavior or compatibility risks, not to reproduce upstream test matrices. Preserve configured coverage requirements and justify removing existing tests.
+
 - **Framework**: Vitest
-- **Test files**: `*.test.js` files in `test/` directories
-- **Mocks**: Define mocks in test files or `test/mocks.js`
+- **Test files**: `*.test.ts` files in `test/` directories
+- **Mocks**: Define mocks in test files or `test/mocks.ts`; prefer typed `vi.fn` and `vi.mocked` over casts
 - **Assertions**: Use `expect()` from Vitest
-- **Coverage**: Maintained via `npm run test:ci`
+- **Coverage**: Maintained via `pnpm run test:ci`
 - **Test structure**: Use `describe()` and `it()` blocks
-
-Example test structure:
-
-```javascript
-import { describe, expect, it } from "vitest";
-import { myFunction } from "../src/my-module.js";
-
-describe("myFunction", () => {
-  it("should do something", async () => {
-    const result = await myFunction({ option: "value" });
-    expect(result).toEqual(expectedValue);
-  });
-});
-```
 
 ### Coverage Exclusions
 
-Per `vitest.config.js`, coverage excludes:
+Package configs inherit `defaultVitestConfig` from root `vitest.config.mts`, not
+its workspace project list. Shared defaults exclude:
 
-- `**/eslint*.config.js`
 - `**/cmd/**` (CLI code)
 - `**/coverage/**`
 - `**/test/**`
+
+The shared package retains its independent 100% gate for standalone runs.
+Workspace coverage has a root-configured 100% threshold for shared sources.
 
 ## GitHub Actions Patterns
 
@@ -217,7 +198,7 @@ Composite actions are defined in `.github/actions/*/action.yaml`. Key patterns:
 - Set environment variables with `${{ inputs.name }}` syntax
 - Use `echo "::group::name"` and `echo "::endgroup::"` for output grouping
 
-### Workflow JavaScript
+### Workflow TypeScript
 
 Scripts in `.github/workflows/src/` are typically used with `actions/github-script@v8`:
 
@@ -225,18 +206,18 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
 - uses: actions/github-script@v8
   with:
     script: |
-      const { myFunction } = await import("${{ github.workspace }}/.github/workflows/src/my-script.js");
+      const { myFunction } = await import("${{ github.workspace }}/.github/workflows/src/my-script.ts");
       await myFunction({ github, context, core });
 ```
 
 ### Common Patterns
 
-- **GitHub API calls**: Use `github.rest.*` methods with proper error handling
+- **GitHub API calls**: All GitHub API calls go through `github.rest.*` (Octokit)
 - **Logging**: Use `core.info()`, `core.warning()`, `core.error()`, `core.debug()`
 - **Outputs**: Use `core.setOutput()` or append to `$GITHUB_OUTPUT` file
 - **Context**: Always accept `github`, `context`, `core` as parameters from github-script
 - **Pagination**: Use `PER_PAGE_MAX` constant for API pagination
-- **Rate limiting**: Workflows implement rate limit logging hooks
+- **Rate limiting**: Workflows use rate limiting hooks to log API usage
 
 ## Security and Best Practices
 
@@ -250,49 +231,46 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
 ### Code Quality
 
 - **Async/await**: Prefer async/await over raw Promises
-- **Error handling**: Always handle errors; use try/catch or `.catch()`
+- **Error handling**: Always handle errors; use try/catch or `.catch()` and log caught errors with `core.error()`
 - **Logging**: Log important operations for debugging
 - **Idempotency**: Workflows should be idempotent where possible
 - **Comments**: Explain complex logic; avoid obvious comments
+- **Documentation**: Update this file if adding new patterns
 
 ### Performance
 
-- **Minimal dependencies**: Keep runtime dependencies minimal (per package.json comments)
-- **Caching**: Use appropriate caching strategies (e.g., npm cache in setup-node)
+- **Caching**: Use appropriate caching strategies (e.g., pnpm cache in setup-node)
 - **Early exits**: Return early when conditions aren't met
 
 ## Common Tasks
 
 ### Adding a New Shared Utility
 
-1. Create the module in `.github/shared/src/my-utility.js`
-2. Add JSDoc type annotations
+1. Create the module in `.github/shared/src/my-utility.ts`
+2. Add native TypeScript annotations and documentation comments where needed
 3. Export named functions
 4. Add exports to `.github/shared/package.json` under `exports` field
-5. Write tests in `.github/shared/test/my-utility.test.js`
-6. Run `npm run check` in `.github/shared/`
-7. Run `npm run check` in `.github/` (to ensure no breakage)
+5. Write tests in `.github/shared/test/my-utility.test.ts`
+6. Run the [required checks](#before-committing) in both `.github/shared/` and `.github/`.
 
 ### Adding a New Workflow
 
 1. Create workflow YAML in `.github/workflows/my-workflow.yaml`
-2. Create workflow scripts in `.github/workflows/src/my-workflow.js`
-3. Write tests in `.github/workflows/test/my-workflow.test.js`
+2. Create workflow scripts in `.github/workflows/src/my-workflow.ts`
+3. Write tests in `.github/workflows/test/my-workflow.test.ts`
 4. Add workflow to `github-test.yaml` if it needs validation
-5. Run `npm run check` to validate
+5. Run the [required checks](#before-committing).
 
 ### Updating Dependencies
 
-1. Update `.github/package.json` (root)
-2. If dependency is used in shared utilities, update `.github/shared/package.json`
-3. Run `npm install` in both directories
-4. If `.github/shared/package.json` was modified, also run `npm install` in the **repo root** to update the root `package-lock.json` (the root `package.json` depends on `.github/shared` via `"file:.github/shared"`)
-5. Commit all modified `package.json` and `package-lock.json` files
-6. Test with `npm run check` in both directories
+1. Update the dependency's entry in the root `pnpm-workspace.yaml` catalog.
+2. For a new dependency, add or reuse its catalog entry and add `catalog:` references to the appropriate manifest sections.
+3. Run `pnpm install` once from the **repo root** — `.github` and `.github/shared` are pnpm workspace packages, so a single install updates the single root `pnpm-lock.yaml` for the whole workspace. Do not edit the lockfile manually.
+4. Include the catalog, affected manifests, and generated lockfile together. Review actual dependency resolutions and isolate impactful upgrades from mechanical catalog conversions.
+5. Run the [required checks](#before-committing) in both directories and check affected engineering consumers.
 
 ### Node.js Version Management
 
-- Default Node.js version: 24.x
 - Use `actions/setup-node@v6` with `node-version` input
 - The `setup-node-install-deps` composite action handles Node.js setup
 - For ubuntu-slim workflows, use empty string for `node-version` to use cached version
@@ -304,19 +282,10 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
 ```bash
 # Install dependencies
 cd .github
-npm ci
-
-# Run tests in watch mode
-npm run test
-
-# Run type checking
-npm run lint:tsc
-
-# Check formatting
-npm run format:check
+pnpm install
 
 # Debug a specific test
-npm run test -- path/to/test.test.js
+pnpm run test -- path/to/test.test.ts
 ```
 
 ### Debugging Workflows
@@ -328,10 +297,10 @@ npm run test -- path/to/test.test.js
 
 ### Common Issues
 
-- **Type errors**: Ensure all JSDoc annotations are correct; run `npm run lint:tsc`
-- **Import errors**: Verify file paths use `.js` extension even for modules
+- **Type errors**: Check native TypeScript declarations; run `pnpm run lint:tsc`
+- **Import errors**: Verify relative file paths use `.ts` and type-only imports use `import type`
 - **Test failures**: Check mock data matches expected GitHub API responses
-- **Formatting errors**: Run `npm run format` to auto-fix
+- **Formatting errors**: Run `pnpm run format` to auto-fix
 
 ## Architecture Patterns
 
@@ -350,50 +319,10 @@ npm run test -- path/to/test.test.js
 5. Scripts call GitHub API to update status/comments/labels
 6. Workflow completes with success or failure
 
-### API Communication
-
-- All GitHub API calls go through `github.rest.*` (Octokit)
-- Rate limiting hooks log API usage
-- Pagination uses `PER_PAGE_MAX` constant
-- Errors are caught and logged with `core.error()`
-
-## For AI Agents
-
-When modifying GitHub Actions code:
-
-1. **Read existing code first**: Understand patterns before changing
-2. **Run checks locally**: Always run `npm run check` before committing
-3. **Update tests**: Add/modify tests when changing functionality
-4. **Preserve typing**: Maintain JSDoc annotations for all changes
-5. **Follow conventions**: Match existing code style and structure
-6. **Minimize changes**: Make surgical, focused changes
-7. **Test isolation**: Ensure changes don't break other workflows
-8. **Documentation**: Update this file if adding new patterns
-
-### Critical Don'ts
-
-- ❌ Don't create `.ts` files (use `.js` with JSDoc)
-- ❌ Don't use default exports (use named exports)
-- ❌ Don't skip JSDoc annotations
-- ❌ Don't commit without running `npm run check`
-- ❌ Don't modify `package-lock.json` manually (use npm install)
-- ❌ Don't remove existing tests without justification
-- ❌ Don't change formatting manually (use `npm run format`)
-
-### Critical Do's
-
-- ✅ Do maintain JSDoc type annotations
-- ✅ Do write tests for new functionality
-- ✅ Do preserve existing code patterns
-- ✅ Do run `npm run check` before committing
-- ✅ Do use async/await for asynchronous operations
-- ✅ Do handle errors gracefully
-- ✅ Do log important operations for debugging
-
 ## Related Files
 
 - Main Copilot instructions: [`.github/copilot-instructions.md`](../copilot-instructions.md)
 - Other instruction files: [`.github/instructions/`](.)
 - GitHub Actions docs: https://docs.github.com/en/actions
 - Vitest docs: https://vitest.dev/
-- ESLint docs: https://eslint.org/
+- oxlint docs: https://oxc.rs/docs/guide/usage/linter
