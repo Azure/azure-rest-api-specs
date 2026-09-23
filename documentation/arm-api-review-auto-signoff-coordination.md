@@ -33,18 +33,18 @@ distinguish current and stale AI findings.
 
 ## 3. Auto-signoff rules
 
-Auto-signoff waits until `ARMAPIReviewCompleted` is present.
+Auto-signoff is eligible only when all of these conditions are true:
 
-After that, it evaluates the existing deterministic and approval requirements:
+1. `ARMAPIReviewCompleted` is present.
+2. `ARMReview` is present.
+3. `NotReadyForARMReview` is absent.
+4. `ARMManualSignoffRequired` is absent.
+5. If `SuppressionReviewRequired` is present, `Approved-Suppression` is also
+   present.
+6. The latest `Swagger LintDiff` status on the current PR head is successful.
+7. The latest `Swagger Avocado` status on the current PR head is successful.
 
-- ARM review readiness;
-- LintDiff and Avocado;
-- breaking-change and versioning approvals;
-- modeling and RPaaS requirements;
-- suppression approval; and
-- manual-signoff requirements.
-
-`ARMChangesRequested` is not an auto-signoff input once
+`ARMChangesRequested` is advisory and does not affect eligibility after
 `ARMAPIReviewCompleted` is present.
 
 When auto-signoff succeeds, it applies one label transition:
@@ -111,21 +111,38 @@ deterministic checks decide the outcome.
 
 ## 7. Workflow coordination
 
-```text
-ARM API Reviewer completes
-        |
-        v
-ARMAPIReviewCompleted is added
-        |
-        v
-Universal Auto-Signoff reevaluates
-        |
-        v
-Existing deterministic and approval checks decide signoff
+```mermaid
+sequenceDiagram
+    participant AI as ARM API Reviewer
+    participant GH as GitHub Actions
+    participant AS as Universal Auto-Signoff
+    participant PR
+
+    AI->>PR: Add ARMAPIReviewCompleted
+    AI-->>GH: ARM API Review workflow completes
+    GH->>AS: workflow_run completed event
+    AS->>GH: Read trusted PR-number artifact
+    AS->>PR: Fetch current labels and head statuses
+    AS->>AS: Evaluate all auto-signoff rules
 ```
 
-The handoff must use reviewer workflow completion, not only the label event,
-because a label added with `GITHUB_TOKEN` may not trigger another workflow.
+The `ARMAPIReviewCompleted` label stores state but does not trigger the
+auto-signoff workflow. A label added with `GITHUB_TOKEN` normally does not
+start another workflow.
+
+Universal Auto-Signoff instead adds this trigger:
+
+```yaml
+workflow_run:
+  workflows: ["ARM API Review: Automated Workflow"]
+  types: [completed]
+```
+
+The API Reviewer publishes the target PR number as a trusted workflow artifact.
+Universal Auto-Signoff reads that artifact from the completed run, fetches the
+PR's current labels and head statuses, and then evaluates the rules in
+Section 3. This supports reviewer runs started by PR events, `/arm-review`, or
+manual dispatch without relying on a label-generated event.
 
 If a later reviewer run adds `ARMChangesRequested` after signoff, its workflow
 completion triggers auto-signoff again. Auto-signoff preserves
@@ -133,14 +150,18 @@ completion triggers auto-signoff again. Auto-signoff preserves
 
 ## 8. Required changes
 
-1. Have the API Reviewer add `ARMAPIReviewCompleted` after review completion.
-2. Trigger Universal Auto-Signoff when the reviewer workflow completes.
-3. Require `ARMAPIReviewCompleted` before evaluating auto-signoff.
-4. Keep `ARMChangesRequested` advisory and exclude it from auto-signoff
+1. Have the API Reviewer add `ARMAPIReviewCompleted` and publish a trusted
+   PR-number artifact after review completion.
+2. Add an `ARM API Review: Automated Workflow` `workflow_run: completed`
+   trigger to Universal Auto-Signoff.
+3. Use the PR-number artifact to fetch the PR's current labels and head
+   statuses.
+4. Require `ARMAPIReviewCompleted` before evaluating auto-signoff.
+5. Keep `ARMChangesRequested` advisory and exclude it from auto-signoff
    eligibility.
-5. Apply `ARMSignedOff` and remove `ARMChangesRequested` and
+6. Apply `ARMSignedOff` and remove `ARMChangesRequested` and
    `WaitForARMFeedback` in one auto-signoff transition.
-6. Preserve every existing reviewer trigger and deterministic approval check.
-7. Test the three scenarios above, including a later reviewer run that adds
+7. Preserve every existing reviewer trigger and deterministic approval check.
+8. Test the three scenarios above, including a later reviewer run that adds
    `ARMChangesRequested` after signoff.
-8. Validate with `ARMAutoSignedOff-Test` before changing production behavior.
+9. Validate with `ARMAutoSignedOff-Test` before changing production behavior.
