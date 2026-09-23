@@ -12,20 +12,17 @@
       "inputs": {
         "connection_name": "contoso-phone-provider",
         "source": "+14255550100",
-        "recipients": {
-          "type": "inline",
-          "recipients": [
-            {
-              "destination": {
-                "type": "phone_number",
-                "value": "+14255550123"
-              },
-              "structured_inputs": {
-                "customer_name": "Avery"
-              }
+        "recipients": [
+          {
+            "destination": {
+              "type": "phone_number",
+              "value": "+14255550123"
+            },
+            "structured_inputs": {
+              "customer_name": "Avery"
             }
-          ]
-        },
+          }
+        ],
         "schedule": {
           "type": "immediate"
         }
@@ -46,9 +43,6 @@
         "inputs": {
           "connection_name": "contoso-phone-provider",
           "source": "+14255550100",
-          "recipients": {
-            "type": "inline"
-          },
           "schedule": {
             "type": "immediate"
           }
@@ -58,11 +52,6 @@
         "created_at": 1790071200,
         "updated_at": 1790071200,
         "progress": {
-          "validation": {
-            "checked_recipients": 0,
-            "valid_recipients": 0,
-            "invalid_recipients": 0
-          },
           "execution": {
             "pending": 0,
             "active": 0,
@@ -71,7 +60,8 @@
             "cancelled": 0,
             "expired": 0
           }
-        }
+        },
+        "locked_agent_version": "12"
       }
     }
   }

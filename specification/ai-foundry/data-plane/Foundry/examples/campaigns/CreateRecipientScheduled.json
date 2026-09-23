@@ -12,15 +12,12 @@
       "inputs": {
         "connection_name": "contoso-phone-provider",
         "source": "+14255550100",
-        "recipients": {
-          "type": "dataset",
-          "dataset_name": "reminder-recipients",
-          "dataset_version": "1",
-          "format": "jsonl"
-        },
         "schedule": {
           "type": "recipient",
           "column": "call_at"
+        },
+        "recipient_dataset": {
+          "name": "reminder-recipients"
         }
       }
     }
@@ -39,15 +36,12 @@
         "inputs": {
           "connection_name": "contoso-phone-provider",
           "source": "+14255550100",
-          "recipients": {
-            "type": "dataset",
-            "dataset_name": "reminder-recipients",
-            "dataset_version": "1",
-            "format": "jsonl"
-          },
           "schedule": {
             "type": "recipient",
             "column": "call_at"
+          },
+          "recipient_dataset": {
+            "name": "reminder-recipients"
           }
         },
         "etag": "\"control-reminders-instance1-v1\"",
@@ -55,11 +49,6 @@
         "created_at": 1790071200,
         "updated_at": 1790071200,
         "progress": {
-          "validation": {
-            "checked_recipients": 0,
-            "valid_recipients": 0,
-            "invalid_recipients": 0
-          },
           "execution": {
             "pending": 0,
             "active": 0,
@@ -68,7 +57,8 @@
             "cancelled": 0,
             "expired": 0
           }
-        }
+        },
+        "locked_agent_version": "12"
       }
     }
   }

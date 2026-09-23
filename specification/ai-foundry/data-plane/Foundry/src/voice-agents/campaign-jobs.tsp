@@ -45,77 +45,28 @@ model TelephonyCampaignRecipient {
   scheduled_at?: FoundryTimestamp;
 }
 
-/** How the recipient set is supplied. */
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union TelephonyCampaignRecipientSourceType {
-  string,
-
-  /** Recipients embedded in the creation request. */
-  inline: "inline",
-
-  /** Recipients read from a project Dataset file version. */
-  dataset: "dataset",
-}
-
-/** Source of the immutable recipient snapshot. */
-@discriminator("type")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyCampaignRecipientSource {
-  /** Recipient source kind. */
-  type: TelephonyCampaignRecipientSourceType;
-}
-
-/** Small recipient sets supplied with the Campaign. Creation bodies are limited to 1 MiB decoded UTF-8. Reads retain type but omit the array. Keep the original submission; only validation errors and materialized CallJobs are exposed. */
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model InlineTelephonyCampaignRecipientSource
-  extends TelephonyCampaignRecipientSource {
-  type: "inline";
-
-  /** At most 100 inline recipients. Larger campaigns use a Dataset. */
-  @minItems(1)
-  @maxItems(100)
-  recipients: TelephonyCampaignRecipient[];
-}
-
-/** Supported Dataset file encodings. */
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union TelephonyCampaignDatasetFormat {
-  string,
-
-  /** Comma-separated values with a header row. */
-  csv: "csv",
-
-  /** A JSON array of recipient objects. */
-  json: "json",
-
-  /** One recipient object per line. */
-  jsonl: "jsonl",
-}
-
 /**
- * An explicit Dataset file version in the current project; URLs and credentials are not accepted.
- * CSV columns and JSON/JSONL fields use phone_number for the required E.164 destination and key
- * for optional customer correlation. Field-name remapping is not supported.
- * In recipient scheduling mode, the selected time field is also reserved and is not a dynamic variable.
- * The file must contain 1-1,000,000 recipients and at most 256 MiB decoded bytes, with at most 1 MiB per logical row.
- * Duplicate CSV headers or JSON keys fail validation; no last-key-wins parsing. Other flat fields become structured inputs. CSV values preserve strings until parsed against
- * an Agent-declared input schema; undeclared values remain strings.
+ * Reference to a single-file (uri_file) Dataset in the current project.
+ * During preparation, an omitted version resolves to the Dataset service's latest version once.
+ * Persist that concrete version before reading content; preparation and execution retries
+ * use the same version/snapshot. Reads return the resolved version once available.
+ * Validation identifies CSV, JSON array or JSONL from bounded content inspection, using file metadata
+ * as hints. Unsupported, ambiguous or malformed content fails preparation; a parse error is not
+ * grounds to reinterpret the file as another format.
+ * File fields use phone_number for the required E.164 destination and key for optional correlation.
+ * The selected scheduling field is reserved. Other flat fields become structured inputs; undeclared
+ * CSV cells stay strings. Duplicate CSV headers or JSON keys fail validation.
+ * Files contain 1-1,000,000 recipients and at most 256 MiB decoded bytes, with 1 MiB per logical row.
  */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model DatasetTelephonyCampaignRecipientSource
-  extends TelephonyCampaignRecipientSource {
-  type: "dataset";
-
-  /** Name of an existing file Dataset. */
+model TelephonyCampaignDatasetReference {
+  /** Name of an existing uri_file Dataset in this project. Folder Datasets are rejected during preparation. */
   @minLength(1)
-  dataset_name: string;
+  name: string;
 
-  /** Explicit Dataset version, not a mutable latest label. */
+  /** Omit on creation to resolve latest once during preparation. On reads, contains the concrete version after resolution, or the requested version before resolution. Remains absent while an omitted version is unresolved. */
   @minLength(1)
-  dataset_version: string;
-
-  /** Encoding of the version's file content. */
-  format: TelephonyCampaignDatasetFormat;
+  version?: string;
 }
 
 /** Mutually exclusive ways to determine each recipient's earliest dispatch time. */
@@ -123,7 +74,7 @@ model DatasetTelephonyCampaignRecipientSource
 union TelephonyCampaignScheduleType {
   string,
 
-  /** Eligible after explicit start. */
+  /** Eligible automatically after successful preparation. */
   immediate: "immediate",
 
   /** One common earliest dispatch time. */
@@ -133,7 +84,7 @@ union TelephonyCampaignScheduleType {
   recipient: "recipient",
 }
 
-/** Dialing requires successful preparation and explicit start in every scheduling mode. */
+/** Creation authorizes dialing; every scheduling mode waits for successful preparation. */
 @discriminator("type")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaignSchedule {
@@ -144,14 +95,14 @@ model TelephonyCampaignSchedule {
   expires_at?: FoundryTimestamp;
 }
 
-/** Dispatch as soon as capacity permits after explicit start. */
+/** Dispatch automatically as soon as preparation succeeds and capacity permits. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @example(#{ type: "immediate" })
 model ImmediateTelephonyCampaignSchedule extends TelephonyCampaignSchedule {
   type: "immediate";
 }
 
-/** Apply the same earliest dispatch time to every recipient. A past time is valid and makes work eligible after start. */
+/** Apply the same earliest dispatch time to every recipient. A past time is valid and makes work eligible after preparation succeeds. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @example(#{
   type: "scheduled",
@@ -161,7 +112,7 @@ model ImmediateTelephonyCampaignSchedule extends TelephonyCampaignSchedule {
 model ScheduledTelephonyCampaignSchedule extends TelephonyCampaignSchedule {
   type: "scheduled";
 
-  /** Common earliest dispatch time; explicit start is still required. */
+  /** Common earliest dispatch time; successful preparation is required. */
   scheduled_at: FoundryTimestamp;
 }
 
@@ -176,7 +127,7 @@ model RecipientTelephonyCampaignSchedule extends TelephonyCampaignSchedule {
   column?: string = "scheduled_at";
 }
 
-/** Immutable Campaign configuration. Recipients are accepted on creation; successful input rows contribute to aggregate validation progress. */
+/** Immutable Campaign configuration. Recipients are accepted on creation and validated before CallJobs become eligible for automatic dispatch. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaignInputs {
   /** Human-readable name of the provider connection in the current project. */
@@ -187,10 +138,15 @@ model TelephonyCampaignInputs {
   /** Authorized phone number or Teams Resource Account UUID, inferred from the connection category. */
   source: TelephonyOutboundSource;
 
-  /** Recipient source. Reads retain source kind and Dataset provenance but omit the inline array. Keep the original submission to correlate validation errors by input position. */
-  recipients: TelephonyCampaignRecipientSource;
+  /** Inline recipients, mutually exclusive with recipient_dataset. Exactly one source is required; neither, both or an empty array returns 400. Reads omit this array; retain the original submission for row correlation. Creation body limit: 1 MiB decoded UTF-8. */
+  @minItems(1)
+  @maxItems(100)
+  recipients?: TelephonyCampaignRecipient[];
 
-  /** Omit for immediate scheduling. Every mode requires successful preparation and explicit start. */
+  /** Dataset source, mutually exclusive with recipients. Exactly one source is required. Omitted version is resolved once during asynchronous preparation; file format is detected during validation. */
+  recipient_dataset?: TelephonyCampaignDatasetReference;
+
+  /** Omit for immediate scheduling. Every mode dispatches automatically after successful preparation, subject to its schedule. */
   schedule?: TelephonyCampaignSchedule;
 
   /** Per-recipient provider retries. Omit for a single attempt. */
@@ -208,54 +164,16 @@ model CreateTelephonyCampaignRequest {
   inputs: TelephonyCampaignInputs;
 }
 
-/** Readable input provenance without an embedded inline recipient array. */
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyCampaignRecipientSourceSummary {
-  /** Original input source kind. */
-  type: TelephonyCampaignRecipientSourceType;
-
-  /** Original Dataset name, present only for Dataset input. */
-  dataset_name?: string;
-
-  /** Original explicit Dataset version, present only for Dataset input. */
-  dataset_version?: string;
-
-  /** Original file format, present only for Dataset input. */
-  format?: TelephonyCampaignDatasetFormat;
-}
-
-/** Readable immutable configuration without the recipient array. Validation diagnostics and CallJobs have separate list APIs. */
+/** Readable configuration. Inline arrays are omitted. recipient_dataset is present only for Dataset input and reports the concrete version once resolved. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaignInputSummary {
   ...OmitProperties<TelephonyCampaignInputs, "recipients">;
-
-  /** Source provenance, never the full inline array. */
-  recipients: TelephonyCampaignRecipientSourceSummary;
 }
 
-/** Progress of the current validation pass. These counters reset for each new pass, including retries for the same Agent version; execution counters never reset. */
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyCampaignValidationProgress {
-  /** Agent version being checked. Absent until resolved. */
-  agent_version?: string;
-
-  /** Number of rows in this pass. Omitted until known; revalidation checks only unfinished recipients. */
-  @minValue(0) total_recipients?: int64;
-
-  /** Rows checked in this pass; equals valid_recipients plus invalid_recipients. */
-  @minValue(0) checked_recipients: int64;
-
-  /** Rows passing this validation pass. */
-  @minValue(0) valid_recipients: int64;
-
-  /** Rows rejected by validation. */
-  @minValue(0) invalid_recipients: int64;
-}
-
-/** Mutually exclusive execution counts measured per recipient intent. All are zero until initial validation succeeds. */
+/** Mutually exclusive execution counts measured per recipient intent. All are zero until preparation succeeds and all CallJobs are generated. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaignExecutionProgress {
-  /** Recipients waiting for start, schedule, capacity, validation, or retry; includes paused work and lazy CallJob materialization. */
+  /** Recipients waiting for their schedule, capacity or retry after preparation has completed. */
   @minValue(0) pending: int64;
 
   /** Recipients with a durable origination reservation or unresolved provider attempt, including dispatching before a call ID is received. */
@@ -274,14 +192,11 @@ model TelephonyCampaignExecutionProgress {
   @minValue(0) expired: int64;
 }
 
-/** Validation and execution progress have different denominators and must not be added together. */
+/** Batch size and outbound execution progress. Validation is reported through Campaign status and validation_errors. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaignProgress {
   /** Total input rows, including invalid rows. Omitted until known; never an estimate. */
   @minValue(0) total_recipients?: int64;
-
-  /** Current initial or Agent-version validation pass. */
-  validation: TelephonyCampaignValidationProgress;
 
   /** Execution accounting for this Campaign. After successful preparation, the counts sum to total_recipients. */
   execution: TelephonyCampaignExecutionProgress;
@@ -292,17 +207,11 @@ model TelephonyCampaignProgress {
 union TelephonyCampaignStatus {
   string,
 
-  /** Initial preparation or a coordinated Agent-version check; no new attempts are admitted. Cancel enters cancelling until workers and admitted calls quiesce; start and pause return 409. */
+  /** Snapshotting, validation against the pinned Agent version and idempotent generation of all CallJobs. Dispatch is gated until preparation succeeds. Cancel enters cancelling and waits for workers to quiesce. */
   validating: "validating",
 
-  /** Preparation succeeded; waiting for the first explicit start. Recipient scheduling applies once execution is authorized. */
-  ready: "ready",
-
-  /** Execution is authorized, including waiting for schedules, capacity and retries. Start is idempotent; pause or cancel can stop new admission. */
+  /** Preparation succeeded and all CallJobs are generated. Automatic execution includes waiting for schedules, capacity and retries; cancel stops new admission. */
   running: "running",
-
-  /** User pause or a recoverable validation/runtime blocker, with validation workers quiescent. Start continues unfinished work through any required revalidation; cancel abandons it. */
-  paused: "paused",
 
   /** New admission is closed while validation workers and admitted calls drain. Repeated cancel is idempotent; connected calls finish naturally. */
   cancelling: "cancelling",
@@ -310,7 +219,7 @@ union TelephonyCampaignStatus {
   /** Execution-terminal: every recipient is terminal, including failures or expiry. Delete is allowed after quiescence; individual call outcomes determine success. */
   completed: "completed",
 
-  /** Initial preparation failed and workers are quiescent; dialing was not authorized. Correct the inputs/Agent and create a new Campaign. This execution-terminal state permits delete. */
+  /** Preparation failed and workers are quiescent; no calls were dispatched. Partial task materialization remains fenced. Correct the inputs/Agent and create a new Campaign. This terminal state permits delete. */
   failed: "failed",
 
   /** Execution-terminal: cancellation is complete and workers/admitted calls are quiescent. Delete is allowed; unfinished work cannot be restarted. */
@@ -320,14 +229,14 @@ union TelephonyCampaignStatus {
   deleting: "deleting",
 }
 
-/** One immutable Campaign execution with start, pause, cancel and deletion controls. */
+/** One immutable Campaign execution authorized at creation, with cancel and deletion controls. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaign {
   /** Business execution state. Creation and deletion completion are tracked by their operation monitors. */
   @visibility(Lifecycle.Read)
   status: TelephonyCampaignStatus;
 
-  /** Initial preparation failure when failed, a recoverable validation/runtime blocker when paused, or cleanup failure when deleting. Cleared after successful recovery or when cleanup is retried. Never contains secrets or raw recipient values. */
+  /** Preparation failure when failed or cleanup failure when deleting. Cleanup errors are cleared when cleanup is retried. Never contains secrets or raw recipient values. */
   @visibility(Lifecycle.Read)
   error?: ApiError;
 
@@ -345,7 +254,7 @@ model TelephonyCampaign {
   /** Last observable progress update. */
   @visibility(Lifecycle.Read) updated_at: FoundryTimestamp;
 
-  /** Opaque control-state token for conditional actions. Changes with lifecycle, validated Agent version or a new name incarnation, never from progress alone. This is not a validator for caching the full progress-bearing representation. */
+  /** Opaque control-state token for conditional actions. Changes with lifecycle or a new name incarnation, never from progress alone. This is not a validator for caching the full progress-bearing representation. */
   @visibility(Lifecycle.Read) etag: Azure.Core.eTag;
 
   /** Immutable ID of the initial creation operation. Distinguishes reused names without a public Campaign version. */
@@ -354,15 +263,15 @@ model TelephonyCampaign {
   /** Time at which the job entered a terminal status. */
   @visibility(Lifecycle.Read) finished_at?: FoundryTimestamp;
 
-  /** Exact Agent version approved for the Campaign. Set only after successful validation and unchanged on failure. CallJobs compare it with latest when resolving and execute this explicit version. Absent until initial validation succeeds. */
+  /** Exact owning Agent version resolved from latest and persisted before the first creation response. Immutable for this Campaign: validation, CallJob execution and every retry use this version; each Attempt records it. Later Agent updates do not trigger comparison or validation. An unavailable/deleted version fails preparation or the affected CallJob explicitly, never falls back to latest. */
   @visibility(Lifecycle.Read)
-  locked_agent_version?: string;
+  locked_agent_version: string;
 
   /** Available partial accounting even when the job fails or is cancelled. */
   @visibility(Lifecycle.Read) progress: TelephonyCampaignProgress;
 }
 
-/** Validation diagnostic for one invalid input row in the current pass. Execution details are available through the CallJob list. */
+/** Validation diagnostic for one invalid input row in the initial preparation. Execution details are available through the CallJob list. */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaignValidationError {
   /** Customer key if it could be parsed. */
@@ -380,7 +289,7 @@ model TelephonyCampaignValidationError {
 model TelephonyCampaignValidationErrorPage {
   ...TelephonyCampaignPage<TelephonyCampaignValidationError>;
 
-  /** Exact Agent version for this pass, omitted if Agent resolution has not succeeded. Shared by all errors on the page. */
+  /** Pinned Agent version used for preparation, shared by all errors on the page. */
   agent_version?: string;
 }
 
@@ -393,24 +302,21 @@ alias TelephonyCampaignValidationErrorQueryParameters = {
 };
 
 /**
- * Status monitor for one creation or cascade-deletion request. The creation operation tracks automatic
- * initial snapshotting and validation. Later Agent-version revalidation is tracked through Campaign
- * status/progress and validation_errors, with the original creation monitor retaining its terminal
- * outcome. Start, pause and cancel return Campaign state. Public operations are created for initial
- * preparation and deletion. Deletion has its own operation; transport
- * and internal worker retries reuse it, while an explicit retry after terminal deletion failure creates
- * a new operation and preserves the previous failure.
- * The monitor omits the result payload. Its error is a bounded failure summary; row diagnostics are
- * paged separately for the current/latest validation pass. Create finishes with
- * a guarded Campaign GET; delete finishes without a result or final resource GET. Monitors are retained
- * independently of the resource.
+ * Status monitor for creation preparation or cascade deletion. Creation tracks snapshotting,
+ * validation against the pinned Agent version and generation of all CallJobs. Success atomically
+ * releases the Campaign dispatch gate unless cancellation has won; it does not wait for phone calls.
+ * Automatic dispatch may begin before the creation poller returns. Cancel returns Campaign state.
+ * Deletion transport and worker retries reuse their monitor; explicit retry after terminal cleanup
+ * failure creates a new operation. Creation/deletion monitors omit result; validation diagnostics are
+ * paged separately. Create finishes with a guarded Campaign GET; delete has no final resource GET.
+ * Monitors remain retained independently of the resource.
  */
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCampaignOperation is JobLike {
   /** Creation time of this operation. */
   @visibility(Lifecycle.Read) created_at: FoundryTimestamp;
 
-  /** Completion time. Creation succeeds after the entire snapshot is validated and saved; deletion succeeds after the Campaign, its copied snapshot, validation diagnostics, internal recipient accounting, owned CallJobs/attempt records and pending dispatch/outbox records are removed. The source Dataset, connections, Agent configuration, actual call records, conversations and recordings are preserved. */
+  /** Completion time. Creation succeeds after the entire snapshot is validated and saved, all CallJobs are durably generated and automatic dispatch is enabled; deletion succeeds after the Campaign, its copied snapshot, validation diagnostics, internal recipient accounting, owned CallJobs/attempt records and pending dispatch/outbox records are removed. The source Dataset, connections, Agent configuration, actual call records, conversations and recordings are preserved. */
   @visibility(Lifecycle.Read) finished_at?: FoundryTimestamp;
 }
 @@lroErrorResult(TelephonyCampaignOperation.error);
@@ -428,7 +334,7 @@ alias TelephonyCampaignCreatedResponse<Status extends int32> = TypeSpec.Http.Res
     @header("Location")
     location: TypeSpec.Rest.ResourceLocation<TelephonyCampaign>;
 
-    /** Absolute URI including api-version of the initial preparation monitor, returned while the recipient scan proceeds asynchronously. Campaign state tracks subsequent execution and revalidation. */
+    /** Absolute URI including api-version of the initial preparation monitor, returned while the recipient scan proceeds asynchronously. Campaign state tracks subsequent execution. */
     @pollingLocation
     @header("Operation-Location")
     operation_location: TypeSpec.Rest.ResourceLocation<TelephonyCampaignOperation>;
@@ -461,7 +367,7 @@ alias TelephonyCampaignFilters = {
 alias TelephonyCampaignPageQueryParameters = {
   ...OmitProperties<CommonPageQueryParameters, "after" | "before">;
 
-  /** Opaque last_id from the previous page. Binds the original sort boundary, project/Agent scope and filters; validation-error cursors also bind the Campaign incarnation and current internal validation pass. Never supply a name or row number. Cannot be combined with before. Invalid, altered or mismatched cursors return 400 invalid_cursor. */
+  /** Opaque last_id from the previous page. Binds the original sort boundary, project/Agent scope and filters; validation-error cursors also bind the Campaign incarnation and immutable input snapshot. Never supply a name or row number. Cannot be combined with before. Invalid, altered or mismatched cursors return 400 invalid_cursor. */
   @query @continuationToken after?: string;
 
   /** Opaque first_id for backward traversal with unchanged scope/filters/order. Cannot be combined with after. Does not resolve the current resource by name. */
@@ -484,40 +390,25 @@ model TelephonyCampaignPage<T> {
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Agent-contained named resources use FoundryDataPlanePreviewOperation with shared job envelopes and paging; shared job templates have fixed project-level ID parameters."
 @tag("TelephonyCampaigns")
 interface TelephonyCampaigns {
-  /** Starts a ready Campaign or continues paused work through required Agent-version checks. Never replays terminal recipients. Validating, cancelling and terminal states reject start with 409; paused means no validation worker remains active. With a current control token, repeated start while running returns current state. A stale token returns 412 before state checks. */
-  @summary("Start a telephony campaign")
-  @post
-  @route("/agents/{agent_name}/telephony/campaigns/{campaign_name}:start")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-  start is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
-    {
-      /** Owning Agent. */
-      @path agent_name: string;
-
-      /** Immutable Campaign name. */
-      @path campaign_name: TelephonyCampaignName;
-
-      /** Exact ETag from a fresh read; stale commands return 412 before changing state. */
-      @header("If-Match") if_match: Azure.Core.eTag;
-    },
-    TelephonyCampaignResponse
-  >;
   /**
-   * Creates an immutable named Campaign using the named PUT resource-creation LRO pattern.
-   * Rejects invalid request shape, authorization or basic configuration before starting background work.
-   * After durably recording the Campaign, creation monitor and recoverable background work, returns 201
-   * with the Campaign and Operation-Id/Operation-Location without waiting for the complete recipient scan.
-   * The Campaign normally reports validating; a fast scan may already be complete when polled.
-   * This one creation operation tracks snapshotting and automatic initial validation.
-   * Success completes the monitor and enters ready until explicit start; failure completes it as failed
-   * with a summary and exposes row diagnostics through validation_errors. Later Campaign state changes
-   * never reopen the creation monitor or make poller completion authorize dialing.
-   * A retained identical Operation-Id request replays its original 201 response and monitor without
-   * restarting validation; changed inputs with that ID return 409 operation_id_conflict. Without that
-   * replay key, an identical existing resource returns 200 and differing inputs return 409
-   * campaign_inputs_conflict. Replays for a deleted instance return 409 campaign_deleted and never
-   * affect a reused name. Existing Campaign configuration remains immutable.
+   * Creates an immutable named Campaign and authorizes automatic execution after preparation.
+   * Synchronous shape/auth checks and resolution of the owning Agent's latest version precede acceptance.
+   * Persist the concrete Agent version with the Campaign, monitor and recoverable work before returning
+   * 201 and Operation-Id/Operation-Location. Identical retries reuse that pinned version and original monitor.
+   * Snapshot/validate all recipients, then idempotently generate one CallJob per input position.
+   * Stay validating until all tasks exist; workers must check the Campaign dispatch gate. Publish running
+   * and creation success only after complete materialization, unless cancellation won. Partial generation
+   * is recoverable and cannot dial. Exhausted preparation failure enters failed after workers stop,
+   * preserving diagnostics and fenced partial tasks for deletion. Row errors use validation_errors.
+   * Immediate tasks may dial before the create poller returns; future tasks wait for their schedule.
+   * Agent updates do not alter existing Campaigns or trigger another validation. An unavailable pinned
+   * version fails preparation or affected CallJobs explicitly; execution and retries never select latest.
+   * Same retained Operation-Id and input replays original 201; conflicting input returns 409 operation_id_conflict.
+   * Exactly one of inputs.recipients and inputs.recipient_dataset is required. Replay compares original
+   * inputs including Dataset version omission, excluding resolved versions/format and rendered defaults.
+   * Without matching replay, an identical existing resource returns 200 and its original monitor;
+   * changed inputs return 409 campaign_inputs_conflict. After deletion a retained creation key returns
+   * 409 campaign_deleted. A fresh unkeyed creation after name reuse authorizes new work.
    */
   @summary("Create a telephony campaign")
   @extension(
@@ -611,7 +502,7 @@ interface TelephonyCampaigns {
     }
   >;
 
-  /** Stops future dispatch and retries for the conditionally selected instance. Allowed while validating, ready, running or paused; enters cancelling and drains validation workers and admitted calls before cancelled. Connected calls finish naturally. Cancellation during initial validation completes the creation operation as cancelled after worker quiescence. Cancellation during later revalidation preserves the terminal creation operation. Repeated cancel while cancelling/cancelled returns current state; completed/failed reject cancel with 409. A stale control token returns 412, including after name reuse. */
+  /** Stops future dispatch and retries for the conditionally selected instance. Allowed while validating or running; enters cancelling and drains validation workers and admitted calls before cancelled. Connected calls finish naturally. Cancellation that wins during preparation completes the creation operation as cancelled after worker quiescence and prevents partial tasks from dialing. Cancellation after preparation preserves the terminal creation operation. Repeated cancel while cancelling/cancelled returns current state; completed/failed reject cancel with 409. A stale control token returns 412, including after name reuse. */
   @summary("Cancel a telephony campaign")
   @post
   @route("/agents/{agent_name}/telephony/campaigns/{campaign_name}:cancel")
@@ -682,39 +573,16 @@ interface TelephonyCampaigns {
     TelephonyCampaignDeleteAcceptedResponse | NoContentResponse
   >;
 
-  /** Pauses running execution without disconnecting admitted calls. Initial or execution-time validating states reject pause with 409; use cancel to stop validation. Paused guarantees that no validation scan remains active. Repeating pause on paused work with its current control token returns the current state. Ready and terminal states reject pause. */
-  @summary("Pause a telephony campaign")
-  @post
-  @route("/agents/{agent_name}/telephony/campaigns/{campaign_name}:pause")
-  @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-  pause is FoundryDataPlanePreviewOperation<
-    AgentDefinitionOptInKeys.voice_agents_v1_preview,
-    {
-      /** Owning Agent; never overridden in recipient inputs. */
-      @path agent_name: string;
-
-      /** Immutable Campaign name. */
-      @path campaign_name: TelephonyCampaignName;
-
-      /** Exact etag from the latest read; stale commands return 412. */
-      @header("If-Match") if_match: Azure.Core.eTag;
-    },
-    TelephonyCampaignResponse
-  >;
-
   /**
-   * Lists validation diagnostics for invalid rows from the current/latest pass. Execution details use
-   * the CallJob list. This Campaign-scoped collection pages potentially large diagnostics independently
-   * of SDK operation polling, whose GET returns a single monitor with a bounded failure summary.
-   * During validating the list is partial; an empty page does not establish success or authorize start.
-   * Campaign status determines completion. Each new pass atomically replaces the previous diagnostics,
-   * including a retry for the same Agent version. Diagnostics are retained for the current/latest pass;
-   * callers needing a copy should retrieve it before initiating another pass.
-   * Opaque cursors bind the Campaign incarnation, internal validation pass and row_number boundary;
-   * a changed pass or reused name returns 400 invalid_cursor. Pass identity remains internal.
-   * Successful validation returns an empty page. Execution failures belong to CallJobs, and non-row
-   * failures to Campaign.error. Existing CallJobs and revalidation errors can coexist; use the filtered
-   * CallJob list for execution details. Deleting returns 409 campaign_deleting; deleted Campaigns return 404.
+   * Lists invalid-row diagnostics from initial preparation against the pinned Agent version.
+   * The operation monitor returns a bounded summary; this collection pages detailed errors.
+   * During validating the list is partial, and an empty page is not a completion signal.
+   * Diagnostic identities are stable by input position across worker retries; retries do not replace
+   * the diagnostic collection or invalidate cursors. After preparation ends, diagnostics are retained
+   * until Campaign deletion. Successful validation has an empty error list; execution failures are
+   * exposed through CallJobs and non-row preparation failures through Campaign.error.
+   * Cursors bind the Campaign incarnation and row_number boundary; reused names or invalid cursors
+   * return 400 invalid_cursor. Deleting returns 409 campaign_deleting; deleted Campaigns return 404.
    */
   @summary("List campaign validation errors")
   @opExample(
@@ -763,7 +631,7 @@ interface TelephonyCampaigns {
     TelephonyCampaignValidationErrorPage
   >;
 
-  /** Polls a creation or deletion operation independently of Campaign deletion/name reuse. Retained for the lifetime of the original resource and at least 24 hours after both operation completion and resource deletion. Nonterminal responses include Retry-After. Returns a single monitor with a bounded error summary on failure; listValidationErrors pages current row diagnostics. Later revalidation is tracked through Campaign state/progress while the creation monitor retains its terminal outcome. Public operations are created for initial preparation and deletion. Creation success uses a guarded final Campaign GET; deletion success has no result or final GET. Deletion cannot be cancelled. */
+  /** Polls a creation or deletion operation independently of resource deletion/name reuse. Retained for the resource lifetime and at least 24 hours after both operation completion and deletion. Nonterminal responses include Retry-After. A failed monitor has a bounded error summary; listValidationErrors pages preparation diagnostics. Creation success includes full CallJob generation and automatic dispatch enablement, then a guarded final Campaign GET. Call execution can already be underway or complete when the poller returns. Delete has no result or final GET and cannot be cancelled. */
   @summary("Get a campaign operation")
   @opExample(
     #{
@@ -785,7 +653,7 @@ interface TelephonyCampaigns {
         finished_at: FoundryTimestamp.fromISO("2026-09-17T08:01:00Z"),
       },
     },
-    #{ title: "Preparation finished before manual start" }
+    #{ title: "Preparation finished and automatic dispatch is enabled" }
   )
   @opExample(
     #{
@@ -797,7 +665,7 @@ interface TelephonyCampaigns {
         error: #{
           code: "campaign_validation_failed",
           message: "Recipient validation failed. Inspect validation_errors, correct the inputs, and create a new Campaign.",
-          param: "inputs.recipients",
+          param: "inputs",
         },
       },
     },

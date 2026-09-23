@@ -8,14 +8,12 @@ namespace Azure.AI.Projects.Beta {
 
 namespace Azure.AI.Projects.Beta.VoiceAgents {
   interface Campaigns {}
-  @@clientLocation(TelephonyCampaigns.start, Campaigns);
   @@clientLocation(TelephonyCampaigns.getOperation, Campaigns);
   @@clientLocation(TelephonyCampaigns.create, Campaigns);
   @@clientLocation(TelephonyCampaigns.get, Campaigns);
   @@clientLocation(TelephonyCampaigns.list, Campaigns);
   @@clientLocation(TelephonyCampaigns.cancel, Campaigns);
   @@clientLocation(TelephonyCampaigns.delete, Campaigns);
-  @@clientLocation(TelephonyCampaigns.pause, Campaigns);
   @@clientLocation(TelephonyCampaigns.listValidationErrors, Campaigns);
 
   interface Conversations {}
