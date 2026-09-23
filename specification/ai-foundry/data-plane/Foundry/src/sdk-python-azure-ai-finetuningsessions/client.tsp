@@ -12,7 +12,16 @@ namespace Azure.AI.FineTuning.Sessions;
 
 @@clientName(Azure.AI.Projects, "FineTuningSessionClient", "python");
 
-// Omit exactly the two raw operations absent from the existing Python SDK.
+// Preserve the existing preview operation-group surface. Both capabilities are
+// available through maintained Python customization hooks included in SDK
+// regeneration, rather than additional raw generated operation-group methods:
+// - Sync: FineTuningSession.delete() and FineTuningSession.forward(...).
+// - Async: aio.FineTuningSessionClient.delete_session(...), forward(...), and
+//   forward_async(...).
+// Forward helpers handle chunking and request-ID polling. Delete helpers stop
+// the heartbeat, treat HTTP 404 as success, and return None.
+// Both REST operations remain defined in session-finetuning/routes.tsp. Adding
+// raw operation-group methods would be a separate additive API change.
 @@scope(FineTuningSessions.delete, "!python");
 @@scope(Training.forward, "!python");
 
