@@ -51,10 +51,50 @@ enum Versions {
   v2026_09_30_preview: "2026-09-30-preview",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+@armResourceOperations
+@removed(Versions.v2026_09_30_preview)
+@renamedFrom(Versions.v2026_09_30_preview, "Operations")
+interface OperationsOld {
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
+  @sharedRoute
+  list is Azure.ResourceManager.Operations.list;
+}
 
 @armResourceOperations
+@removed(Versions.v2026_09_30_preview)
+@renamedFrom(Versions.v2026_09_30_preview, "OperationStatus")
+interface OperationStatusOld {
+  #deprecated "API versions 2025-02-01-preview through 2026-08-31-preview are deprecated. Use 2026-09-30-preview or a later supported API version."
+  @summary("Deprecated API version. Use 2026-09-30-preview or a later supported API version.")
+  @sharedRoute
+  @doc("Returns the current status of an async operation.")
+  @autoRoute
+  get(
+    ...ApiVersionParameter,
+
+    @path
+    @segment("providers")
+    @doc("The provider namespace.")
+    provider: "Microsoft.AzureResilienceManagement",
+
+    ...LocationParameter,
+    ...Azure.ResourceManager.Foundations.OperationIdParameter,
+  ): ArmResponse<OperationStatusResult> | ErrorResponse;
+}
+
+#suppress "deprecated" "The legacy operation must retain the operationStatuses route segment in the retired API versions."
+@@segment(OperationStatusOld.get::parameters.operationId, "operationStatuses");
+
+@added(Versions.v2026_09_30_preview)
+interface Operations extends Azure.ResourceManager.Operations {}
+
+@@sharedRoute(Operations.list);
+
+@armResourceOperations
+@added(Versions.v2026_09_30_preview)
 interface OperationStatus {
+  @sharedRoute
   @doc("Returns the current status of an async operation.")
   @autoRoute
   get(
