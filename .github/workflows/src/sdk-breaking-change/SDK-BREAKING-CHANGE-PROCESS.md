@@ -46,24 +46,22 @@ downstream SDK repositories, avoid back-and-forth across repos and stages
 | ☐   | Model WebPubSubResourceList: SDK struct ResourceInfoList was renamed to ResourceList, changing list response fields.             | conversion-need resolve | Add @@clientName(WebPubSubResourceList, "ResourceInfoList", "go") to replay the legacy Go rename-model directive. |
 | ☐   | Model ResourceSku versioned property set changed the SDK fields Family and Tier to FamiliyNew and TierNew.                       | spec change             | -                                                                                                                 |
 
-[SDK breaking change details (armwebpubsub/breaking-changes.json)](https://github.com/chunyu3/azure-rest-api-specs/actions/runs/35322886769#summary-105529151679)
+[SDK breaking change analysis details](https://github.com/chunyu3/azure-rest-api-specs/actions/runs/35322886769)
 ```
 
 ### Mitigation
 
-1. The specification pull request owner starts mitigation by posting the following command:
-
-`/azsdk sdk-breaking-mitigate <language>`
+1. Completion of the `SDK Breaking Change Analysis - Publish Results` workflow automatically
+   triggers the `SDK Breaking Change Mitigation` workflow. The mitigation workflow can also be
+   manually dispatched with the completed publisher workflow run ID.
 
 The `SDK breaking change mitigation` workflow then:
 
 - Applies TypeSpec client customizations for breaking changes that can be mitigated.
 - Creates a pull request containing the proposed customizations.
-- Updates the command comment with the mitigation results, as shown in the following example:
+- Posts the mitigation results to the pull request, as shown in the following example:
 
 ```markdown
-/azsdk sdk-breaking-mitigate Go
-
 ## SDK breaking-change mitigation result
 
 **Resolved Breaking Changes:**

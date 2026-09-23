@@ -45,3 +45,11 @@ jobs:
             const { publishAnalysisResult } =
               await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change/publish-analysis-result.ts');
             await publishAnalysisResult({ github, context, core });
+
+      - name: Upload SDK analysis results for mitigation
+        uses: actions/upload-artifact@v7
+        with:
+          name: sdk-breaking-change-results
+          path: ${{ runner.temp }}/sdk-breaking-change-results/sdk-breaking-change-analysis.json
+          if-no-files-found: error
+          retention-days: 7
