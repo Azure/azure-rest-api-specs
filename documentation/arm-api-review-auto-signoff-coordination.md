@@ -135,9 +135,43 @@ PR's current labels and head statuses, and then evaluates the rules in
 Section 3. This supports reviewer runs started by PR events, `/arm-review`, or
 manual dispatch without relying on a label-generated event.
 
-If a later reviewer run adds `ARMChangesRequested` after signoff, its workflow
-completion triggers auto-signoff again. Auto-signoff preserves
-`ARMSignedOff` and removes the advisory `ARMChangesRequested` label.
+Universal Auto-Signoff keeps its existing triggers and adds the reviewer
+completion trigger:
+
+| Trigger                                                     | Purpose                                                                      |
+| ----------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| PR opened, updated, reopened, edited, labeled, or unlabeled | Reevaluate when the PR head or relevant labels change                        |
+| LintDiff or Avocado status workflow completes               | Reevaluate when a required deterministic status changes                      |
+| ARM API Reviewer workflow completes                         | Reevaluate after every automatic, explicit, or manually dispatched AI review |
+
+These triggers are independent. Universal Auto-Signoff does not wait for a
+future AI run after `ARMAPIReviewCompleted` exists; it reevaluates whenever any
+input changes.
+
+### Explicit AI review after auto-signoff
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant AI as ARM API Reviewer
+    participant AS as Universal Auto-Signoff
+    participant UL as Update Labels
+    participant PR
+
+    Note over PR: ARMSignedOff is already present
+    User->>AI: Trigger /arm-review
+    AI->>PR: Post advisory comments
+    AI->>PR: Add ARMChangesRequested
+    AI-->>AS: workflow_run completed event
+    AS->>PR: Fetch current labels and head statuses
+    AS->>AS: Reevaluate auto-signoff rules
+    AS->>UL: Preserve ARMSignedOff\nRemove ARMChangesRequested and WaitForARMFeedback
+    UL->>PR: Apply label changes
+```
+
+The cleanup is an explicit output of Universal Auto-Signoff even when
+`ARMSignedOff` is already present. It does not depend on a new signoff label
+being added.
 
 `Summarize Checks` also gives `ARMSignedOff` precedence over
 `ARMChangesRequested`, but it is not the reliable trigger for this cleanup. A
