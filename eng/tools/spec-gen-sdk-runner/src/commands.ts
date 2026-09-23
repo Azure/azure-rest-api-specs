@@ -119,22 +119,10 @@ async function runAzsdkGeneration(
 
   // Step 1: Check if the language emitter is enabled
   logMessage(`Checking emitter configuration for ${commandInput.sdkRepoName}`, LogLevel.Info);
-  let emitterCheck: EmitterCheckResult;
-  try {
-    emitterCheck = await checkEmitterEnabled(tspConfigDir, commandInput.sdkRepoName);
-  } catch (error) {
-    const message = `Failed to check emitter for ${commandInput.sdkRepoName} in ${tspConfigRelativePath}: ${inspect(error)}`;
-    logMessage(message, LogLevel.Error);
-    vsoLogIssue(message);
-    return {
-      executionReport: {
-        packages: [],
-        executionResult: "failed",
-        generateFromTypeSpec: true,
-      },
-      statusCode: 1,
-    };
-  }
+  const emitterCheck: EmitterCheckResult = await checkEmitterEnabled(
+    tspConfigDir,
+    commandInput.sdkRepoName,
+  );
 
   if (!emitterCheck.enabled) {
     logMessage(

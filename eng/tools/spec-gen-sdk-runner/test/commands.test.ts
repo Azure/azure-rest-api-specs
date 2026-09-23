@@ -1,7 +1,7 @@
 import { SdkName } from "@azure-tools/specs-shared/sdk-types";
 import fs from "node:fs";
 import path from "node:path";
-import { afterEach, beforeEach, describe, expect, test, vi, type Mock } from "vitest";
+import { beforeEach, describe, expect, test, vi, type Mock } from "vitest";
 import * as commandHelpers from "../src/command-helpers.ts";
 import {
   generateSdkForBatchSpecs,
@@ -9,12 +9,11 @@ import {
   generateSdkForSpecPr,
 } from "../src/commands.ts";
 import * as log from "../src/log.ts";
-import * as emitterCheck from "../src/emitter-check.ts";
 import { LogLevel } from "../src/log.ts";
 import * as pythonPypiValidation from "../src/python-pypi-validation.ts";
 import * as sdkValidationConfig from "../src/sdk-validation-config.ts";
 import * as changeFiles from "../src/spec-helpers.ts";
-import type { ExecutionReport, SpecGenSdkCmdInput } from "../src/types.ts";
+import type { ExecutionReport } from "../src/types.ts";
 import * as utils from "../src/utils.ts";
 
 function getNormalizedFsCalls(mockFn: Mock): unknown[][] {
@@ -1311,150 +1310,4 @@ describe("generateSdkForBatchSpecs", () => {
     expect(utils.runSpecGenSdkCommand).not.toHaveBeenCalled();
     expect(utils.resetGitRepo).not.toHaveBeenCalled();
   });
-});
-
-describe("azsdk metadata outcomes", () => {
-  const specPath = "specification/contoso/Contoso/tspconfig.yaml";
-  const commandInput: SpecGenSdkCmdInput = {
-    tspConfigPath: specPath,
-    localSpecRepoPath: "/spec",
-    localSdkRepoPath: "/sdk",
-    workingFolder: "/working",
-    runMode: "release",
-    sdkRepoName: "azure-sdk-for-js",
-    sdkLanguage: SdkName.Js,
-    specCommitSha: "",
-    specRepoHttpsUrl: "",
-  };
-  const modes = [
-    { name: "single-spec", run: generateSdkForSingleSpec, disabledResult: "notEnabled" },
-    { name: "spec-PR", run: generateSdkForSpecPr, disabledResult: "notEnabled" },
-    {
-      name: "batch",
-      run: () => generateSdkForBatchSpecs("all-typespecs"),
-      disabledResult: "succeeded",
-    },
-  ];
-
-  beforeEach(() => {
-    vi.restoreAllMocks();
-    vi.spyOn(commandHelpers, "parseArguments").mockReturnValue(commandInput);
-    vi.spyOn(commandHelpers, "selectGenerationTool").mockReturnValue("azsdk-cli");
-    vi.spyOn(commandHelpers, "installLanguageToolchain").mockResolvedValue();
-    vi.spyOn(commandHelpers, "prepareSpecGenSdkCommand").mockReturnValue([]);
-    vi.spyOn(commandHelpers, "prepareAzsdkGenerateCommand").mockReturnValue(["pkg", "generate"]);
-    vi.spyOn(commandHelpers, "setPipelineVariables").mockImplementation(() => {});
-    vi.spyOn(commandHelpers, "setBuildFailedLabelVariable").mockImplementation(() => {});
-    vi.spyOn(commandHelpers, "generateArtifact").mockReturnValue(0);
-    vi.spyOn(commandHelpers, "isBreakingChangeDetectionEnabled").mockReturnValue(false);
-    vi.spyOn(commandHelpers, "getSpecPaths").mockReturnValue([{ tspconfigPath: specPath }]);
-    vi.spyOn(changeFiles, "detectChangedSpecConfigFiles").mockResolvedValue([
-      { specs: [], typespecProject: specPath },
-    ]);
-    vi.spyOn(utils, "resetGitRepo").mockResolvedValue();
-    vi.spyOn(utils, "runCommandWithOutput").mockResolvedValue(
-      '{"result":"succeeded","package_name":"test-package"}',
-    );
-    vi.spyOn(utils, "execAsync").mockResolvedValue({ stdout: "", stderr: "" });
-    vi.spyOn(fs, "existsSync").mockReturnValue(false);
-    vi.spyOn(fs, "writeFileSync").mockImplementation(() => {});
-    vi.spyOn(log, "logMessage").mockImplementation(() => {});
-    vi.spyOn(log, "vsoLogIssue").mockImplementation(() => {});
-    vi.spyOn(log, "vsoAddAttachment").mockImplementation(() => {});
-    vi.spyOn(emitterCheck, "checkEmitterEnabled").mockResolvedValue({ enabled: false });
-  });
-
-  afterEach(() => vi.restoreAllMocks());
-
-  test.each(modes)(
-    "reports metadata failure rather than notEnabled in $name",
-    async ({ run, name }) => {
-      vi.mocked(emitterCheck.checkEmitterEnabled).mockRejectedValue(
-        new Error("error file-not-found: compiler diagnostic"),
-      );
-      await expect(run()).resolves.toEqual({ statusCode: 1, executionResult: "failed" });
-      expect(utils.runCommandWithOutput).not.toHaveBeenCalled();
-      expect(utils.execAsync).not.toHaveBeenCalled();
-      expect(log.vsoLogIssue).toHaveBeenCalledWith(expect.stringContaining("compiler diagnostic"));
-      expect(log.logMessage).toHaveBeenCalledWith(
-        expect.stringContaining(specPath),
-        LogLevel.Error,
-      );
-      if (name === "single-spec") {
-        expect(commandHelpers.setPipelineVariables).toHaveBeenCalled();
-      } else if (name === "spec-PR") {
-        expect(commandHelpers.generateArtifact).toHaveBeenCalledWith(
-          commandInput,
-          "failed",
-          false,
-          false,
-          true,
-          "",
-          [],
-          true,
-        );
-      } else {
-        expect(fs.writeFileSync).toHaveBeenCalledWith(
-          expect.any(String),
-          expect.stringContaining("## Total Failed Specs\n 1\n"),
-        );
-        expect(fs.writeFileSync).not.toHaveBeenCalledWith(
-          expect.any(String),
-          expect.stringContaining("## Specs with SDK Not Enabled"),
-        );
-      }
-    },
-  );
-
-  test.each(modes)(
-    "preserves disabled-emitter handling in $name",
-    async ({ run, disabledResult, name }) => {
-      await expect(run()).resolves.toEqual({ statusCode: 0, executionResult: disabledResult });
-      expect(utils.runCommandWithOutput).not.toHaveBeenCalled();
-      expect(log.vsoLogIssue).not.toHaveBeenCalled();
-      if (name === "batch") {
-        expect(fs.writeFileSync).toHaveBeenCalledWith(
-          expect.any(String),
-          expect.stringContaining("## Total Specs with SDK not enabled in the Configuration\n 1\n"),
-        );
-      }
-    },
-  );
-
-  test.each(["batch", "spec-PR"])(
-    "continues %s processing and does not reuse a prior successful report",
-    async (mode) => {
-      const paths = [
-        "specification/first/Contoso/tspconfig.yaml",
-        specPath,
-        "specification/last/Contoso/tspconfig.yaml",
-      ];
-      vi.mocked(commandHelpers.getSpecPaths).mockReturnValue(
-        paths.map((tspconfigPath) => ({ tspconfigPath })),
-      );
-      vi.mocked(changeFiles.detectChangedSpecConfigFiles).mockResolvedValue(
-        paths.map((typespecProject) => ({ specs: [], typespecProject })),
-      );
-      vi.mocked(emitterCheck.checkEmitterEnabled)
-        .mockResolvedValueOnce({ enabled: true, packageName: "test-package" })
-        .mockRejectedValueOnce(new Error("compiler diagnostic"))
-        .mockResolvedValueOnce({ enabled: true, packageName: "test-package" });
-      const result =
-        mode === "batch"
-          ? await generateSdkForBatchSpecs("all-typespecs")
-          : await generateSdkForSpecPr();
-      expect(result).toEqual({ statusCode: 1, executionResult: "failed" });
-      expect(emitterCheck.checkEmitterEnabled).toHaveBeenCalledTimes(3);
-      expect(utils.runCommandWithOutput).toHaveBeenCalledTimes(2);
-      if (mode === "batch") {
-        const summary = vi.mocked(fs.writeFileSync).mock.lastCall?.[1];
-        expect(summary).toContain(`## Spec Failures in the Generation Process\n${specPath},`);
-        expect(summary).toContain("## Total Failed Specs\n 1\n");
-        expect(summary).toContain("## Total Successful Specs\n 2\n");
-        expect(log.logMessage).toHaveBeenCalledWith(
-          expect.stringContaining('"failedSpecs":["specification/contoso/Contoso/tspconfig.yaml"]'),
-        );
-      }
-    },
-  );
 });
