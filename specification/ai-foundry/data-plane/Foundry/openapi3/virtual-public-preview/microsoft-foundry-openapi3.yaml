@@ -46713,6 +46713,60 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvalRunDataSource'
       description: A wrapper data source that contains a polymorphic trace source to specify how traces are selected for evaluation.
+    AzureAvatarVoiceSyncVoice:
+      type: object
+      required:
+        - type
+        - model
+      properties:
+        type:
+          type: string
+          enum:
+            - avatar-voice-sync
+        temperature:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          description: The synthesis temperature.
+        custom_lexicon_url:
+          type: string
+          format: uri
+          description: The URL of a custom pronunciation lexicon.
+        custom_text_normalization_url:
+          type: string
+          format: uri
+          description: The URL of a custom text-normalization configuration.
+        prefer_locales:
+          type: array
+          items:
+            type: string
+          description: Preferred BCP-47 locales for multilingual synthesis.
+        locale:
+          type: string
+          description: The enforced BCP-47 output locale.
+        style:
+          type: string
+          description: The voice speaking style.
+        pitch:
+          type: string
+          description: The SSML-compatible pitch adjustment.
+        rate:
+          type: string
+          description: The SSML-compatible speaking-rate adjustment.
+        volume:
+          type: string
+          description: The SSML-compatible volume adjustment.
+        model:
+          type: string
+          minLength: 1
+          description: The neural model used to synthesize the avatar voice.
+      allOf:
+        - $ref: '#/components/schemas/VoiceAgentVoice'
+      description: An Azure avatar voice-synchronization configuration used by a handoff node.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     AzureContentFilterBlocklistIdResult:
       type: object
       required:
@@ -46948,6 +47002,65 @@ components:
           $ref: '#/components/schemas/AzureContentFilterSeverity'
           description: The severity level of the content.
       description: A content filter result indicating severity level and whether content was filtered.
+    AzureCustomVoice:
+      type: object
+      required:
+        - type
+        - name
+        - endpoint_id
+      properties:
+        type:
+          type: string
+          enum:
+            - azure-custom
+        temperature:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          description: The synthesis temperature.
+        custom_lexicon_url:
+          type: string
+          format: uri
+          description: The URL of a custom pronunciation lexicon.
+        custom_text_normalization_url:
+          type: string
+          format: uri
+          description: The URL of a custom text-normalization configuration.
+        prefer_locales:
+          type: array
+          items:
+            type: string
+          description: Preferred BCP-47 locales for multilingual synthesis.
+        locale:
+          type: string
+          description: The enforced BCP-47 output locale.
+        style:
+          type: string
+          description: The voice speaking style.
+        pitch:
+          type: string
+          description: The SSML-compatible pitch adjustment.
+        rate:
+          type: string
+          description: The SSML-compatible speaking-rate adjustment.
+        volume:
+          type: string
+          description: The SSML-compatible volume adjustment.
+        name:
+          type: string
+          minLength: 1
+          description: The custom voice name.
+        endpoint_id:
+          type: string
+          minLength: 1
+          description: The Azure Speech custom voice deployment endpoint identifier.
+      allOf:
+        - $ref: '#/components/schemas/VoiceAgentVoice'
+      description: An Azure custom neural voice used by a handoff node.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     AzureFunctionBinding:
       type: object
       required:
@@ -47104,6 +47217,142 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - RedTeams=V1Preview
+    AzurePersonalVoice:
+      type: object
+      required:
+        - type
+        - name
+        - model
+      properties:
+        type:
+          type: string
+          enum:
+            - azure-personal
+        temperature:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          description: The synthesis temperature.
+        custom_lexicon_url:
+          type: string
+          format: uri
+          description: The URL of a custom pronunciation lexicon.
+        custom_text_normalization_url:
+          type: string
+          format: uri
+          description: The URL of a custom text-normalization configuration.
+        prefer_locales:
+          type: array
+          items:
+            type: string
+          description: Preferred BCP-47 locales for multilingual synthesis.
+        locale:
+          type: string
+          description: The enforced BCP-47 output locale.
+        style:
+          type: string
+          description: The voice speaking style.
+        pitch:
+          type: string
+          description: The SSML-compatible pitch adjustment.
+        rate:
+          type: string
+          description: The SSML-compatible speaking-rate adjustment.
+        volume:
+          type: string
+          description: The SSML-compatible volume adjustment.
+        name:
+          type: string
+          minLength: 1
+          description: The personal voice name.
+        model:
+          type: string
+          minLength: 1
+          description: The neural model used by the personal voice.
+      allOf:
+        - $ref: '#/components/schemas/VoiceAgentVoice'
+      description: An Azure personal voice used by a handoff node.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    AzureRealtimeNativeVoice:
+      type: object
+      required:
+        - type
+        - name
+      properties:
+        type:
+          type: string
+          enum:
+            - azure-realtime-native
+        name:
+          type: string
+          minLength: 1
+          description: The Azure realtime-native voice name.
+      allOf:
+        - $ref: '#/components/schemas/VoiceAgentVoice'
+      description: An Azure realtime-native voice used by a handoff node.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    AzureStandardVoice:
+      type: object
+      required:
+        - type
+        - name
+      properties:
+        type:
+          type: string
+          enum:
+            - azure-standard
+        temperature:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          description: The synthesis temperature.
+        custom_lexicon_url:
+          type: string
+          format: uri
+          description: The URL of a custom pronunciation lexicon.
+        custom_text_normalization_url:
+          type: string
+          format: uri
+          description: The URL of a custom text-normalization configuration.
+        prefer_locales:
+          type: array
+          items:
+            type: string
+          description: Preferred BCP-47 locales for multilingual synthesis.
+        locale:
+          type: string
+          description: The enforced BCP-47 output locale.
+        style:
+          type: string
+          description: The voice speaking style.
+        pitch:
+          type: string
+          description: The SSML-compatible pitch adjustment.
+        rate:
+          type: string
+          description: The SSML-compatible speaking-rate adjustment.
+        volume:
+          type: string
+          description: The SSML-compatible volume adjustment.
+        name:
+          type: string
+          minLength: 1
+          description: The Azure neural voice name.
+        multi_talker_speaker_name:
+          type: string
+          description: The speaker name used by a multi-talker voice.
+      allOf:
+        - $ref: '#/components/schemas/VoiceAgentVoice'
+      description: An Azure standard neural voice used by a handoff node.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     AzureUserSecurityContext:
       type: object
       properties:
@@ -82614,6 +82863,26 @@ components:
     OpenAI.numeric:
       type: number
       format: double
+    OpenAIVoice:
+      type: object
+      required:
+        - type
+        - name
+      properties:
+        type:
+          type: string
+          enum:
+            - openai
+        name:
+          type: string
+          minLength: 1
+          description: The OpenAI built-in voice name.
+      allOf:
+        - $ref: '#/components/schemas/VoiceAgentVoice'
+      description: An OpenAI built-in voice used by a handoff node.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenApiAnonymousAuthDetails:
       type: object
       required:
@@ -88141,6 +88410,11 @@ components:
         subagent_config:
           $ref: '#/components/schemas/VoiceAgentSubagentConfig'
           description: Optional configuration for sibling Foundry text agents that this voice agent may consult as background specialists.
+        handoff:
+          $ref: '#/components/schemas/VoiceAgentHandoffGraph'
+          description: |-
+            Optional directed graph of specialist behaviors that may become active during one voice session. The top-level
+            voice-agent definition is the implicit `$entrypoint`; configured nodes contain only additional behaviors.
         store:
           type: boolean
           description: |-
@@ -88297,6 +88571,235 @@ components:
           template: '#/components/schemas/VoiceAgentTemplateGreetingConfig'
           llm_generated: '#/components/schemas/VoiceAgentLlmGeneratedGreetingConfig'
       description: Session-start greeting configuration for a voice agent.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentHandoffEdge:
+      type: object
+      required:
+        - id
+        - source
+        - target
+        - description
+      properties:
+        id:
+          $ref: '#/components/schemas/VoiceAgentHandoffId'
+          description: The edge identifier.
+        source:
+          $ref: '#/components/schemas/VoiceAgentHandoffNodeReference'
+          description: The source node identifier or `$entrypoint`.
+        target:
+          $ref: '#/components/schemas/VoiceAgentHandoffNodeReference'
+          description: The target node identifier or `$entrypoint`.
+        description:
+          type: string
+          minLength: 1
+          maxLength: 500
+          description: A model-facing route condition supplied alongside the active node instructions.
+        cancel_on_interruption:
+          type: boolean
+          description: Whether user interruption before commit cancels the pending handoff.
+          default: false
+        delay_ms:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 10000
+          description: The minimum delay before target activation, in milliseconds.
+          default: 0
+        transfer_message:
+          anyOf:
+            - type: string
+            - type: 'null'
+          maxLength: 500
+          description: Optional deterministic source-voice announcement played before target activation.
+        target_response:
+          $ref: '#/components/schemas/VoiceAgentHandoffTargetResponse'
+          description: Whether Voice Live automatically starts a response after target activation.
+          default: auto
+      description: One directed transition in a voice-agent handoff graph.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentHandoffGraph:
+      type: object
+      required:
+        - nodes
+        - edges
+      properties:
+        max_transfers:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 100
+          description: The maximum number of successfully completed handoffs in one session.
+          default: 16
+        max_attempts:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 100
+          description: The maximum number of attempted handoffs. When omitted, the service uses `max_transfers`.
+        nodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/VoiceAgentHandoffNode'
+          maxItems: 31
+          description: The additional specialist behaviors. `$entrypoint` is implicit and must not be included.
+        edges:
+          type: array
+          items:
+            $ref: '#/components/schemas/VoiceAgentHandoffEdge'
+          minItems: 1
+          maxItems: 128
+          description: The allowed directed transitions. At least one edge must originate from `$entrypoint`.
+      description: |-
+        A directed graph of additional voice-agent behaviors. The top-level voice-agent definition is the implicit
+        `$entrypoint` and is not repeated in `nodes`.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentHandoffId:
+      type: string
+      pattern: ^[a-z][a-z0-9_-]{0,63}$
+      description: A case-sensitive identifier for a configured handoff node or edge.
+    VoiceAgentHandoffMaxOutputTokenCount:
+      type: integer
+      format: int32
+      minimum: 1
+      description: A positive output-token limit for one handoff-node response.
+    VoiceAgentHandoffMaxOutputTokens:
+      anyOf:
+        - $ref: '#/components/schemas/VoiceAgentHandoffMaxOutputTokenCount'
+        - type: string
+          enum:
+            - inf
+      description: The maximum output-token count or the literal `inf` for a handoff node.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentHandoffNode:
+      type: object
+      required:
+        - id
+        - description
+        - config
+      properties:
+        id:
+          $ref: '#/components/schemas/VoiceAgentHandoffId'
+          description: The node identifier. `$entrypoint` is reserved and cannot be declared in `nodes`.
+        description:
+          type: string
+          minLength: 1
+          description: A display-only description of the specialist behavior. This value is not provided to the model.
+        config:
+          $ref: '#/components/schemas/VoiceAgentHandoffNodeConfig'
+          description: The behavior activated when this node becomes active.
+      description: One explicitly configured specialist behavior in a voice-agent handoff graph.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentHandoffNodeConfig:
+      type: object
+      properties:
+        model:
+          type: string
+          description: The target model for a cascaded graph. Realtime graphs reject this property and retain the connection model.
+        instructions:
+          anyOf:
+            - type: string
+            - type: 'null'
+          description: Instructions activated for this node. Omission inherits the entrypoint instructions; null clears them.
+        tools:
+          anyOf:
+            - type: array
+              items:
+                $ref: '#/components/schemas/VoiceAgentTool'
+            - type: 'null'
+          description: Customer tools available at this node. Omission or null selects an empty customer tool set.
+        tool_choice:
+          anyOf:
+            - $ref: '#/components/schemas/VoiceAgentToolChoice'
+            - type: 'null'
+          description: Tool-selection behavior for this node. Omission or null defaults to `auto`.
+        voice:
+          anyOf:
+            - $ref: '#/components/schemas/VoiceAgentVoice'
+            - type: 'null'
+          description: The voice activated for this node. Omission inherits the entrypoint voice; null clears it where supported.
+        temperature:
+          anyOf:
+            - type: number
+              format: float
+            - type: 'null'
+          minimum: 0
+          maximum: 2
+          description: The sampling temperature for a compatible node model.
+        max_response_output_tokens:
+          anyOf:
+            - $ref: '#/components/schemas/VoiceAgentHandoffMaxOutputTokens'
+            - type: 'null'
+          description: The maximum output-token count for one response while this node is active.
+        reasoning_effort:
+          anyOf:
+            - $ref: '#/components/schemas/VoiceAgentHandoffReasoningEffort'
+            - type: 'null'
+          description: Reasoning effort for a compatible node model.
+        voice_adaptation:
+          anyOf:
+            - $ref: '#/components/schemas/VoiceAgentHandoffVoiceAdaptation'
+            - type: 'null'
+          description: Voice-optimized instruction adaptation for this node. Null disables adaptation.
+        interim_response:
+          anyOf:
+            - $ref: '#/components/schemas/VoiceAgentInterimResponseConfig'
+            - type: 'null'
+          description: Interim-response settings for this node. Null disables interim responses.
+        parallel_tool_calls:
+          type: boolean
+          description: Whether this node may call customer tools in parallel. Nodes with outgoing handoff edges must use `false`.
+          default: false
+      description: Node-scoped behavior that replaces the active voice-agent behavior after a handoff.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentHandoffNodeReference:
+      type: string
+      pattern: ^(?:\$entrypoint|[a-z][a-z0-9_-]{0,63})$
+      description: 'A handoff node reference: either `$entrypoint` or a configured node identifier.'
+    VoiceAgentHandoffReasoningEffort:
+      type: string
+      enum:
+        - none
+        - minimal
+        - low
+        - medium
+        - high
+        - xhigh
+      description: Reasoning effort applied by a compatible handoff-node model.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentHandoffTargetResponse:
+      type: string
+      enum:
+        - auto
+        - none
+      description: Whether Voice Live automatically starts a response after a handoff target becomes active.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentHandoffVoiceAdaptation:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - auto
+          description: The adaptation strategy. Currently only `auto` is supported.
+      description: Voice-optimized instruction adaptation applied while a handoff node is active.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -88951,6 +89454,27 @@ components:
             - azure_semantic_vad_en
             - azure_semantic_vad_multilingual
       description: The turn-detection strategy. Additional values may be added over time.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    VoiceAgentVoice:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          description: The voice implementation. Additional values may be added over time.
+      discriminator:
+        propertyName: type
+        mapping:
+          openai: '#/components/schemas/OpenAIVoice'
+          azure-standard: '#/components/schemas/AzureStandardVoice'
+          azure-custom: '#/components/schemas/AzureCustomVoice'
+          azure-personal: '#/components/schemas/AzurePersonalVoice'
+          avatar-voice-sync: '#/components/schemas/AzureAvatarVoiceSyncVoice'
+          azure-realtime-native: '#/components/schemas/AzureRealtimeNativeVoice'
+      description: A typed voice configuration used by a voice-agent handoff node.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
