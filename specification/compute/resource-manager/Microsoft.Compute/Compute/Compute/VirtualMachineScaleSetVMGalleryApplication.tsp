@@ -1,6 +1,5 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
@@ -9,7 +8,6 @@ import "./VirtualMachineScaleSetVM.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 using Common;
 
@@ -87,7 +85,6 @@ interface VirtualMachineScaleSetVMGalleryApplications {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @added(Versions.v2026_09_01)
-  @operationId("VirtualMachineScaleSetVMGalleryApplications_Get")
   get is VirtualMachineScaleSetVMGalleryApplicationOps.Read<
     VirtualMachineScaleSetVMGalleryApplication,
     Parameters = {
@@ -104,7 +101,6 @@ interface VirtualMachineScaleSetVMGalleryApplications {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @added(Versions.v2026_09_01)
-  @operationId("VirtualMachineScaleSetVMGalleryApplications_List")
   @list
   list is VirtualMachineScaleSetVMGalleryApplicationOps.List<
     VirtualMachineScaleSetVMGalleryApplication,
@@ -119,7 +115,6 @@ interface VirtualMachineScaleSetVMGalleryApplications {
   @added(Versions.v2026_09_01)
   @get
   @action("instanceView")
-  @operationId("VirtualMachineScaleSetVMGalleryApplications_GetInstanceView")
   getInstanceView is ComputeResourceActionSync<
     VirtualMachineScaleSetVMGalleryApplication,
     void,

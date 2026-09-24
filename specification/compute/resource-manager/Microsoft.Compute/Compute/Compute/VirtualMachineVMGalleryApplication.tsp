@@ -1,6 +1,5 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
@@ -9,7 +8,6 @@ import "./VirtualMachine.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 using Common;
 
@@ -155,7 +153,6 @@ interface VirtualMachineVMGalleryApplications {
   @added(Versions.v2026_09_01)
   @get
   @action("instanceView")
-  @operationId("VirtualMachineVMGalleryApplications_GetInstanceView")
   getInstanceView is ComputeResourceActionSync<
     VirtualMachineVMGalleryApplication,
     void,
