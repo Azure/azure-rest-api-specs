@@ -30,7 +30,7 @@ This includes but is not limited to:
 ## MCP Tools
 
 | Tool                                              | Purpose                                                                                                                                                                                              |
-| ------------------------------------------------- | -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `azure-sdk-mcp:azsdk_typespec_retrieve_knowledge` | Retrieve knowledge for requests **not** covered by the eight cases in [reference-document-links.md](references/reference-document-links.md). Covered cases use agentic search (`web_fetch`) instead. |
 | `azure-sdk-mcp:azsdk_run_typespec_validation`     | Validate TypeSpec                                                                                                                                                                                    |
 
