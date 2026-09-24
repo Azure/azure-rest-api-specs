@@ -103,6 +103,24 @@ namespace Microsoft.Relationships {
   "csharp"
 );
 
+@@clientName(
+  DependencyOfRelationshipsByServiceGroup,
+  "ServiceGroupDependencyOfRelationship",
+  "csharp"
+);
+
+@@clientName(
+  ContainsRelationships.listByResourceGroup,
+  "GetByResourceGroupContainsRelationships",
+  "csharp"
+);
+
+@@clientName(
+  ContainsRelationships.listBySubscription,
+  "GetBySubscriptionContainsRelationships",
+  "csharp"
+);
+
 // Go SDK: preserve the original public model name for the 2026 shape while
 // assigning a distinct name to the legacy model to avoid a duplicate client name.
 @@clientName(
