@@ -79,13 +79,13 @@ union FineTuningTrainingType {
   string,
 
   /** Standard training using globally available capacity. */
-  GlobalStandard: "GlobalStandard",
+  global_standard: "GlobalStandard",
 
   /** Standard training constrained to the applicable data zone. */
-  DatazoneStandard: "DatazoneStandard",
+  datazone_standard: "DatazoneStandard",
 
   /** Developer-tier training, subject to service eligibility. */
-  DeveloperTier: "DeveloperTier",
+  developer_tier: "DeveloperTier",
 }
 
 /** Supported encodings for an image supplied as model input. */
