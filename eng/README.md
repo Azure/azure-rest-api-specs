@@ -122,13 +122,6 @@ Nested repositories are not forcibly deleted: if Git skips one, cleanup reports
 the remaining untracked path and stops rather than continuing with a contaminated
 checkout.
 
-Each Git command emits a `TSV cleanup` JSON timing record with `command`,
-`durationMs`, and `success`. The validation process and PowerShell output draining
-have a separate combined timer. For performance comparisons, use repeated runs
-with the same specification/dependency base and keep Linux and Windows statistics
-separate. Compare command means, medians, and ranges, per-shard durations, summed
-execution time, and elapsed completion time independently; cleanup timings do not
-measure compiler or formatting improvements.
 
 ## Linting and formatting
 
