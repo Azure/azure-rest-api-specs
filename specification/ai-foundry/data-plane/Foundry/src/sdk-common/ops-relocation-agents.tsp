@@ -91,5 +91,4 @@ namespace Azure.AI.Projects.Beta {
   @@clientLocation(Azure.AI.Projects.MemoryStores.getMemory, MemoryStores);
   @@clientLocation(Azure.AI.Projects.MemoryStores.listMemories, MemoryStores);
   @@clientLocation(Azure.AI.Projects.MemoryStores.deleteMemory, MemoryStores);
-
 }
