@@ -100,6 +100,43 @@ it("requires --all for --git-clean", async () => {
   });
 });
 
+it("requires --all for --shard", async () => {
+  await expect(run("--shard=1/2", "project")).rejects.toMatchObject({
+    code: 1,
+    stderr: expect.stringContaining("--shard requires --all") as unknown,
+  });
+});
+
+it.each(["1", "0/2", "3/2"])("exits nonzero for invalid --shard=%s", async (shard) => {
+  await addProject("specification/a");
+  await expect(run("--all", `--shard=${shard}`)).rejects.toMatchObject({
+    code: 1,
+    stderr: expect.stringContaining("Invalid --shard") as unknown,
+  });
+});
+
+it("runs only the selected shard under an explicit root", async () => {
+  await addProject("custom/a");
+  await addProject("custom/b");
+  await writeFile(
+    join(root, "suppressions.yaml"),
+    "- tool: TypeSpecValidation\n  paths: [custom/b]\n  reason: selected project\n",
+  );
+
+  const { stdout } = await run("--all", "--shard", "2/2", "custom");
+  expect(stdout).toContain("Shard 2/2: 1 of 2 TypeSpec projects");
+  expect(stdout).toContain("Suppressed: selected project");
+  expect(stdout).not.toContain(join(root, "custom/a"));
+});
+
+it("exits nonzero rather than creating empty shards", async () => {
+  await addProject("specification/a");
+  await expect(run("--all", "--shard=1/2")).rejects.toMatchObject({
+    code: 1,
+    stderr: expect.stringContaining("Shard count (2) exceeds") as unknown,
+  });
+});
+
 it("refuses --git-clean when the checkout has untracked files", async () => {
   await addProject("specification/a");
   await simpleGit(root)
@@ -120,6 +157,8 @@ it("refuses --git-clean when the checkout has untracked files", async () => {
 it("rejects extra positional arguments to --all", async () => {
   await expect(run("--all", "specification", "extra")).rejects.toMatchObject({
     code: 1,
-    stderr: expect.stringContaining("Usage: tsv --all [folder] [--git-clean]") as unknown,
+    stderr: expect.stringContaining(
+      "Usage: tsv --all [folder] [--shard=<index>/<count>] [--git-clean]",
+    ) as unknown,
   });
 });

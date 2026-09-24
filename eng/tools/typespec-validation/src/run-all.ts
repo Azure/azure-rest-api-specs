@@ -1,14 +1,14 @@
 import { getSuppressions } from "@azure-tools/suppressions";
 import { spawn } from "node:child_process";
 import { stat } from "node:fs/promises";
-import { dirname, resolve } from "node:path";
+import { dirname, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { simpleGit } from "simple-git";
 import { globFiles } from "./glob.ts";
 
 export async function runAll(
   folder: string,
-  options: { gitClean?: boolean } = {},
+  options: { gitClean?: boolean; shard?: string } = {},
 ): Promise<boolean> {
   const root = resolve(folder);
   if (!(await stat(root)).isDirectory()) {
@@ -19,10 +19,21 @@ export async function runAll(
     cwd: root,
     exclude: ["**/node_modules/**"],
   });
-  const projects = [...new Set(configs.map((config) => dirname(resolve(root, config))))].sort();
+  // Sort relative POSIX paths so shard membership is the same on every OS.
+  const projectFolders = [
+    ...new Set(configs.map((config) => dirname(config).split(sep).join("/"))),
+  ].sort();
+  let projects = projectFolders.map((project) => resolve(root, project));
   if (projects.length === 0) {
     console.error(`No TypeSpec projects found in ${root}`);
     return false;
+  }
+
+  if (options.shard !== undefined) {
+    projects = selectShard(projects, options.shard);
+    console.log(
+      `Shard ${options.shard}: ${projects.length} of ${projectFolders.length} TypeSpec projects`,
+    );
   }
 
   const git = options.gitClean ? simpleGit(root) : undefined;
@@ -64,6 +75,36 @@ export async function runAll(
     console.error(`TypeSpec Validation failed for:\n${failed.join("\n")}`);
   }
   return failed.length === 0;
+}
+
+/** Select a one-based shard, distributing extra projects to the first shards. */
+function selectShard(projects: string[], shard: string): string[] {
+  const match = /^(\d+)\/(\d+)$/.exec(shard);
+  const index = Number(match?.[1]);
+  const count = Number(match?.[2]);
+  if (
+    match?.[0] !== shard ||
+    !Number.isSafeInteger(index) ||
+    !Number.isSafeInteger(count) ||
+    index < 1 ||
+    index > count
+  ) {
+    throw new Error(
+      `Invalid --shard "${shard}". Expected positive safe integers <index>/<count> ` +
+        "with index <= count (for example, 1/3).",
+    );
+  }
+  if (count > projects.length) {
+    throw new Error(
+      `Shard count (${count}) exceeds the number of TypeSpec projects (${projects.length})`,
+    );
+  }
+
+  const size = Math.floor(projects.length / count);
+  const remainder = projects.length % count;
+  const start = (index - 1) * size + Math.min(index - 1, remainder);
+  const end = start + size + (index <= remainder ? 1 : 0);
+  return projects.slice(start, end);
 }
 
 function validateProject(folder: string): Promise<boolean> {

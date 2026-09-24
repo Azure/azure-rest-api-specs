@@ -84,11 +84,14 @@ export async function main() {
     all: {
       type: "boolean",
     },
+    shard: {
+      type: "string",
+    },
     "git-clean": {
       type: "boolean",
     },
-  };
-  const parsedArgs = parseArgs({ args, options, allowPositionals: true } as ParseArgsConfig);
+  } satisfies ParseArgsConfig["options"];
+  const parsedArgs = parseArgs({ args, options, allowPositionals: true });
 
   if (parsedArgs.values["git-clean"] && !parsedArgs.values.all) {
     console.error("--git-clean requires --all");
@@ -96,14 +99,21 @@ export async function main() {
     return;
   }
 
+  if (parsedArgs.values.shard !== undefined && !parsedArgs.values.all) {
+    console.error("--shard requires --all");
+    process.exitCode = 1;
+    return;
+  }
+
   if (parsedArgs.values.all) {
     if (parsedArgs.positionals.length > 1) {
-      console.error("Usage: tsv --all [folder] [--git-clean]");
+      console.error("Usage: tsv --all [folder] [--shard=<index>/<count>] [--git-clean]");
       process.exitCode = 1;
       return;
     }
     const success = await runAll(parsedArgs.positionals[0] ?? "specification", {
       gitClean: parsedArgs.values["git-clean"] === true,
+      shard: parsedArgs.values.shard,
     });
     if (!success) process.exitCode = 1;
     return;
