@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Playwright Service Management API",
-    "version": "2026-08-01-preview",
+    "version": "2026-10-01-preview",
     "description": "Playwright Service Management API provides access to Playwright workspace resources and their operations through Azure Resource Manager.",
     "x-typespec-generated": [
       {
@@ -1009,6 +1009,35 @@
               }
             ]
           }
+        },
+        "sessionArtifacts": {
+          "type": "string",
+          "description": "Indicates whether session artifact collection is enabled for the workspace.",
+          "default": "Disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "EnablementStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "The feature is enabled."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "The feature is disabled."
+              }
+            ]
+          }
+        },
+        "sessionArtifactsIdentity": {
+          "$ref": "#/definitions/SessionArtifactsIdentity",
+          "description": "The managed identity used to upload session artifacts to the storage account."
         }
       }
     },
@@ -1107,6 +1136,14 @@
           "type": "string",
           "format": "uri",
           "description": "The URI of the Azure storage account used to store workspace artifacts, test results, and reports."
+        },
+        "sessionArtifacts": {
+          "$ref": "#/definitions/EnablementStatus",
+          "description": "Indicates whether session artifact collection is enabled for the workspace."
+        },
+        "sessionArtifactsIdentity": {
+          "$ref": "#/definitions/SessionArtifactsIdentityUpdate",
+          "description": "The managed identity used to upload session artifacts to the storage account."
         }
       }
     },
@@ -1158,6 +1195,77 @@
         ]
       },
       "readOnly": true
+    },
+    "SessionArtifactsIdentity": {
+      "type": "object",
+      "description": "The managed identity used to upload session artifacts.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/SessionArtifactsIdentityType",
+          "description": "The type of managed identity used to upload session artifacts."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource ID of the user-assigned managed identity. This value is required when type is UserAssigned and must be omitted when type is SystemAssigned.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "SessionArtifactsIdentityType": {
+      "type": "string",
+      "description": "The type of managed identity used to upload session artifacts.",
+      "enum": [
+        "SystemAssigned",
+        "UserAssigned"
+      ],
+      "x-ms-enum": {
+        "name": "SessionArtifactsIdentityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SystemAssigned",
+            "value": "SystemAssigned",
+            "description": "Use the workspace system-assigned managed identity."
+          },
+          {
+            "name": "UserAssigned",
+            "value": "UserAssigned",
+            "description": "Use a user-assigned managed identity."
+          }
+        ]
+      }
+    },
+    "SessionArtifactsIdentityUpdate": {
+      "type": "object",
+      "description": "The managed identity used to upload session artifacts during an update operation.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/SessionArtifactsIdentityType",
+          "description": "The type of managed identity used to upload session artifacts."
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource ID of the user-assigned managed identity. This value is required when type is UserAssigned and must be omitted when type is SystemAssigned.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      }
     }
   },
   "parameters": {}
