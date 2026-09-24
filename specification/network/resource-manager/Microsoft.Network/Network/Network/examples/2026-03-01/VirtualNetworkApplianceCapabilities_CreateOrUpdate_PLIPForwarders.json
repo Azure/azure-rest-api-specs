@@ -1,0 +1,49 @@
+{
+  "parameters": {
+    "api-version": "2026-03-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "virtualNetworkApplianceName": "test-vna",
+    "capabilityName": "pl-ipforwarders",
+    "parameters": {
+      "kind": "PLIPForwarders",
+      "properties": {
+        "ipVersion": "IPv6"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "pl-ipforwarders",
+        "type": "Microsoft.Network/virtualNetworkAppliances/capabilities",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkAppliances/test-vna/capabilities/pl-ipforwarders",
+        "kind": "PLIPForwarders",
+        "properties": {
+          "ipVersion": "IPv6",
+          "linkedResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/rg1-vnet",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "pl-ipforwarders",
+        "type": "Microsoft.Network/virtualNetworkAppliances/capabilities",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkAppliances/test-vna/capabilities/pl-ipforwarders",
+        "kind": "PLIPForwarders",
+        "properties": {
+          "ipVersion": "IPv6",
+          "linkedResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/rg1-vnet",
+          "provisioningState": "Creating"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/locations/eastus/operations/00000000-0000-0000-0000-000000000000?api-version=2026-03-01",
+        "Retry-After": 10
+      }
+    }
+  },
+  "operationId": "VirtualNetworkApplianceCapabilities_CreateOrUpdate",
+  "title": "Create virtual network appliance PLIPForwarders capability"
+}

@@ -41,6 +41,9 @@
   "tags": [
     {
       "name": "VirtualNetworkAppliances"
+    },
+    {
+      "name": "VirtualNetworkApplianceCapabilities"
     }
   ],
   "paths": {
@@ -361,9 +364,315 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkAppliances/{virtualNetworkApplianceName}/capabilities": {
+      "get": {
+        "operationId": "VirtualNetworkApplianceCapabilities_List",
+        "tags": [
+          "VirtualNetworkApplianceCapabilities"
+        ],
+        "description": "Gets all capabilities of a virtual network appliance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkApplianceName",
+            "in": "path",
+            "description": "The name of the virtual network appliance.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkApplianceCapabilityListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List virtual network appliance capabilities": {
+            "$ref": "./examples/VirtualNetworkApplianceCapabilities_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkAppliances/{virtualNetworkApplianceName}/capabilities/{capabilityName}": {
+      "get": {
+        "operationId": "VirtualNetworkApplianceCapabilities_Get",
+        "tags": [
+          "VirtualNetworkApplianceCapabilities"
+        ],
+        "description": "Gets the specified capability of a virtual network appliance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkApplianceName",
+            "in": "path",
+            "description": "The name of the virtual network appliance.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "capabilityName",
+            "in": "path",
+            "description": "The name of the virtual network appliance capability.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkApplianceCapability"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get virtual network appliance capability": {
+            "$ref": "./examples/VirtualNetworkApplianceCapabilities_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualNetworkApplianceCapabilities_CreateOrUpdate",
+        "tags": [
+          "VirtualNetworkApplianceCapabilities"
+        ],
+        "description": "Creates or updates a capability on a virtual network appliance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkApplianceName",
+            "in": "path",
+            "description": "The name of the virtual network appliance.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "capabilityName",
+            "in": "path",
+            "description": "The name of the virtual network appliance capability.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters supplied to the create or update virtual network appliance capability operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkApplianceCapability"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'VirtualNetworkApplianceCapability' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkApplianceCapability"
+            }
+          },
+          "201": {
+            "description": "Resource 'VirtualNetworkApplianceCapability' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkApplianceCapability"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create virtual network appliance NAT64 capability": {
+            "$ref": "./examples/VirtualNetworkApplianceCapabilities_CreateOrUpdate_NAT64.json"
+          },
+          "Create virtual network appliance PLGateway capability": {
+            "$ref": "./examples/VirtualNetworkApplianceCapabilities_CreateOrUpdate_PLGateway.json"
+          },
+          "Create virtual network appliance PLGatewayFastpath capability": {
+            "$ref": "./examples/VirtualNetworkApplianceCapabilities_CreateOrUpdate.json"
+          },
+          "Create virtual network appliance PLIPForwarders capability": {
+            "$ref": "./examples/VirtualNetworkApplianceCapabilities_CreateOrUpdate_PLIPForwarders.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/VirtualNetworkApplianceCapability"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VirtualNetworkApplianceCapabilities_Delete",
+        "tags": [
+          "VirtualNetworkApplianceCapabilities"
+        ],
+        "description": "Deletes the specified capability of a virtual network appliance.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkApplianceName",
+            "in": "path",
+            "description": "The name of the virtual network appliance.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "capabilityName",
+            "in": "path",
+            "description": "The name of the virtual network appliance capability.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete virtual network appliance capability": {
+            "$ref": "./examples/VirtualNetworkApplianceCapabilities_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
+    "Nat64Capability": {
+      "type": "object",
+      "description": "The NAT64 capability. Enables stateful NAT64 translation (IPv6-only workloads reaching IPv4\ndestinations) on the appliance's floating NIC; supported on a dual-stack appliance. This kind is\nproperty-less: it carries no `ipVersion` (the parent appliance's dual-stack configuration is the\nprecondition, service-validated) beyond the properties common to every capability.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VirtualNetworkApplianceCapability"
+        }
+      ],
+      "x-ms-discriminator-value": "NAT64"
+    },
+    "PLGatewayCapability": {
+      "type": "object",
+      "description": "The Private Link Gateway (slow-path) capability. Private Link programming offloaded to the appliance's gateway;\nIPv6 on a dual-stack appliance.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VirtualNetworkApplianceCapability"
+        }
+      ],
+      "x-ms-discriminator-value": "PLGateway"
+    },
+    "PLGatewayFastpathCapability": {
+      "type": "object",
+      "description": "The Private Link Gateway FastPath capability. Private Link fast-path programming on the appliance's gateway;\nsupported on a dual-stack appliance.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VirtualNetworkApplianceCapability"
+        }
+      ],
+      "x-ms-discriminator-value": "PLGatewayFastpath"
+    },
+    "PLIPForwardersCapability": {
+      "type": "object",
+      "description": "The Private Link IP-forwarders (NVA) capability. Private Link programming offloaded to the appliance NVA;\nIPv6 on a dual-stack appliance.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VirtualNetworkApplianceCapability"
+        }
+      ],
+      "x-ms-discriminator-value": "PLIPForwarders"
+    },
     "VirtualNetworkAppliance": {
       "type": "object",
       "description": "A virtual network appliance in a resource group.",
@@ -384,6 +693,86 @@
           "$ref": "./common.json#/definitions/Resource"
         }
       ]
+    },
+    "VirtualNetworkApplianceCapability": {
+      "type": "object",
+      "description": "A capability enabled on a virtual network appliance. The top-level `kind` discriminator selects the\ncapability family; every kind shares the same `properties` schema (see\nVirtualNetworkApplianceCapabilityProperties). One capability of a given kind may exist per appliance.",
+      "properties": {
+        "kind": {
+          "$ref": "./common.json#/definitions/VirtualNetworkApplianceCapabilityKind",
+          "description": "The kind of capability (the top-level discriminator)."
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind"
+      ],
+      "allOf": [
+        {
+          "type": "object",
+          "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+          "properties": {
+            "properties": {
+              "$ref": "#/definitions/VirtualNetworkApplianceCapabilityProperties",
+              "description": "The resource-specific properties for this resource."
+            }
+          },
+          "allOf": [
+            {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+            }
+          ]
+        }
+      ]
+    },
+    "VirtualNetworkApplianceCapabilityListResult": {
+      "type": "object",
+      "description": "The response of a VirtualNetworkApplianceCapability list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The VirtualNetworkApplianceCapability items on this page",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkApplianceCapability"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "VirtualNetworkApplianceCapabilityProperties": {
+      "type": "object",
+      "description": "Properties common to every virtual network appliance capability, independent of kind.",
+      "properties": {
+        "linkedResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure resource ID of the owning virtual network. System-derived and read-only.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks"
+              }
+            ]
+          }
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the capability resource.",
+          "readOnly": true
+        },
+        "ipVersion": {
+          "$ref": "./common.json#/definitions/VirtualNetworkApplianceCapabilityIpVersion",
+          "description": "The IP version the capability applies to. Private Link Gateway FastPath (`PLGatewayFastpath`)\nonly accepts `DualStack`; Private Link Gateway (`PLGateway`) and Private Link IP-forwarders\n(`PLIPForwarders`) only accept `IPv6`. Not applicable to `NAT64`, which is property-less and must\nomit this value. The service validates the value against the resource's `kind` when the\ncapability is created or updated."
+        }
+      }
     },
     "VirtualNetworkApplianceIpConfiguration": {
       "type": "object",
