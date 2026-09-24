@@ -1557,6 +1557,9 @@ union RecoveryPointTierType {
   @added(Versions.v2026_10_01)
   "IASnapshotRP",
 
+  // Kept closed (no string catch-all) for API versions before 2026-10-01, so those versions' emitted swagger is
+  // unchanged; the service is responsible for not returning "IASnapshotRP" to clients of older API versions.
+  @added(Versions.v2026_10_01)
   string,
 }
 
