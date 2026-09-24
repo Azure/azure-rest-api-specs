@@ -522,8 +522,8 @@ model CreateFineTuningSessionRequest {
   from_checkpoint?: FineTuningFromCheckpoint | null;
 
   /**
-   * Training tier. If omitted, the service defaults to GlobalStandard unless
-   * the legacy user_metadata.DeveloperTier setting selects DeveloperTier.
+   * Training tier. Set this property explicitly to select the tier.
+   * If omitted, tier selection is left to the service.
    */
   training_type?: FineTuningTrainingType;
 }
