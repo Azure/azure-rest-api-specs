@@ -1,16 +1,16 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { FormatRule } from "../src/rules/format.ts";
-import { gitDiffTopSpecFolder, runPnpm } from "../src/utils.ts";
+import { gitDiffTopSpecFolder, runNodeBin } from "../src/utils.ts";
 import { mockFolder } from "./mocks.ts";
 
 vi.mock("../src/utils.ts", () => ({
-  runPnpm: vi.fn(),
+  runNodeBin: vi.fn(),
   gitDiffTopSpecFolder: vi.fn(),
 }));
 
 beforeEach(() => {
   vi.resetAllMocks();
-  vi.mocked(runPnpm).mockResolvedValue([null, "", ""]);
+  vi.mocked(runNodeBin).mockResolvedValue([null, "", ""]);
   vi.mocked(gitDiffTopSpecFolder).mockResolvedValue({
     success: true,
     stdOutput: "git output",
@@ -19,16 +19,17 @@ beforeEach(() => {
 });
 
 describe("FormatRule", () => {
-  it("formats TypeSpec and tspconfig.yaml in one command before checking for changes", async () => {
-    vi.mocked(runPnpm).mockResolvedValueOnce([null, "tsp output\n", "tsp warning\n"]);
+  it("formats TypeSpec and tspconfig.yaml directly in one command before checking for changes", async () => {
+    vi.mocked(runNodeBin).mockResolvedValueOnce([null, "tsp output\n", "tsp warning\n"]);
 
     const result = await new FormatRule().execute(mockFolder);
 
-    expect(runPnpm).toHaveBeenCalledWith(
-      ["exec", "tsp", "format", "../**/*.tsp", "tspconfig.yaml"],
+    expect(runNodeBin).toHaveBeenCalledWith(
+      "@typespec/compiler",
+      ["tsp", "format", "../**/*.tsp", "tspconfig.yaml"],
       mockFolder,
     );
-    expect(runPnpm).toHaveBeenCalledTimes(1);
+    expect(runNodeBin).toHaveBeenCalledTimes(1);
     expect(gitDiffTopSpecFolder).toHaveBeenCalledWith(mockFolder);
     expect(result).toEqual({
       success: true,
@@ -38,7 +39,7 @@ describe("FormatRule", () => {
   });
 
   it("reports formatter failures without checking for changes", async () => {
-    vi.mocked(runPnpm).mockResolvedValueOnce([
+    vi.mocked(runNodeBin).mockResolvedValueOnce([
       new Error("tsp failure\n"),
       "tsp output\n",
       "tsp stderr\n",
@@ -51,7 +52,7 @@ describe("FormatRule", () => {
       stdOutput: "tsp output\n",
       errorOutput: "tsp failure\ntsp stderr\n",
     });
-    expect(runPnpm).toHaveBeenCalledTimes(1);
+    expect(runNodeBin).toHaveBeenCalledTimes(1);
     expect(gitDiffTopSpecFolder).not.toHaveBeenCalled();
   });
 
