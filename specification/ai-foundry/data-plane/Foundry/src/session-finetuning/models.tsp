@@ -710,19 +710,13 @@ model FineTuningDeleteSessionResponse {
 
   /** Whether the session is marked as deleted. */
   deleted: boolean;
-
-  /** Identifies the response as a session deletion result. */
-  type: "delete_session";
 }
 
 /** Response from POST /fine_tuning/sessions/{sessionId}/heartbeat. */
 @Azure.ClientGenerator.Core.clientName("FineTuningHeartbeatResult", "csharp")
 model FineTuningHeartbeatResponse {
-  /** Identifier of the session whose heartbeat was refreshed. */
-  session_id: string;
-
-  /** Identifies the response as a session heartbeat acknowledgement, when included. */
-  type?: "session_heartbeat";
+  /** Identifier of the session whose heartbeat was refreshed, when included by the service. */
+  session_id?: string;
 }
 
 // ─── Sampling output primitives ───────────────────────────────────────────────

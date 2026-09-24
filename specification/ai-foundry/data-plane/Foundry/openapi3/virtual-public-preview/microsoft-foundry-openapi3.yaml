@@ -85742,7 +85742,6 @@ components:
       required:
         - session_id
         - deleted
-        - type
       properties:
         session_id:
           type: string
@@ -85750,11 +85749,6 @@ components:
         deleted:
           type: boolean
           description: Whether the session is marked as deleted.
-        type:
-          type: string
-          enum:
-            - delete_session
-          description: Identifies the response as a session deletion result.
       description: Response from DELETE /fine_tuning/sessions/{sessionId}.
     SessionFineTuning.FineTuningFromCheckpoint:
       type: object
@@ -85777,17 +85771,10 @@ components:
       description: A training checkpoint used to initialize a new fine-tuning session.
     SessionFineTuning.FineTuningHeartbeatResponse:
       type: object
-      required:
-        - session_id
       properties:
         session_id:
           type: string
-          description: Identifier of the session whose heartbeat was refreshed.
-        type:
-          type: string
-          enum:
-            - session_heartbeat
-          description: Identifies the response as a session heartbeat acknowledgement, when included.
+          description: Identifier of the session whose heartbeat was refreshed, when included by the service.
       description: Response from POST /fine_tuning/sessions/{sessionId}/heartbeat.
     SessionFineTuning.FineTuningImageChunk:
       type: object
