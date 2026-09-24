@@ -990,16 +990,12 @@ interface ProtectionGroups {
   createOrupdate is ArmResourceCreateOrUpdateAsync<ProtectionGroup>;
   delete is ArmResourceDeleteWithoutOkAsync<ProtectionGroup>;
   listByCloudAccount is ArmResourceListByParent<ProtectionGroup>;
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Earlier API versions of stopBackup return 204 with no content on completion."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "stopBackup is a long-running operation that returns 204 with no content on completion."
   @doc("Stop Backup for a Protection Group")
-  @returnTypeChangedFrom(
-    Versions.v9_preview,
-    ArmNoContentResponse | ArmAcceptedLroResponse | ErrorResponse
-  )
   stopBackup is ArmResourceActionAsync<
     ProtectionGroup,
     StopBackupProtectionGroupRequest,
-    never,
+    ArmNoContentResponse,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
