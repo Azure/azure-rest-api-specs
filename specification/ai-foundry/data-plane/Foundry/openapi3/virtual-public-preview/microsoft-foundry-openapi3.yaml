@@ -85633,7 +85633,9 @@ components:
         time:
           type: string
           format: date-time
-          description: Timestamp when the checkpoint was saved.
+          description: |-
+            Timestamp when the checkpoint was saved.
+            The fine-tuning service returns an RFC 3339 UTC date-time string, not Unix epoch seconds.
           readOnly: true
         step_number:
           anyOf:
@@ -86073,7 +86075,9 @@ components:
         last_request_time:
           type: string
           format: date-time
-          description: Timestamp of the most recent request made against this session.
+          description: |-
+            Timestamp of the most recent request made against this session.
+            The fine-tuning service returns an RFC 3339 UTC date-time string, not Unix epoch seconds.
           readOnly: true
       description: Summary item returned in the paginated GET /fine_tuning/sessions list.
     SessionFineTuning.FineTuningSessionType:

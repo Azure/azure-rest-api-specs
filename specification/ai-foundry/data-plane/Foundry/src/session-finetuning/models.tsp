@@ -413,7 +413,10 @@ model FineTuningSessionSummary {
   /** Indicates whether the session state is corrupted and cannot be resumed. */
   corrupted: boolean;
 
-  /** Timestamp of the most recent request made against this session. */
+  /**
+   * Timestamp of the most recent request made against this session.
+   * The fine-tuning service returns an RFC 3339 UTC date-time string, not Unix epoch seconds.
+   */
   @visibility(Lifecycle.Read)
   last_request_time: utcDateTime;
 }
@@ -442,7 +445,10 @@ model FineTuningCheckpoint {
   @visibility(Lifecycle.Read)
   checkpoint_type: FineTuningCheckpointType;
 
-  /** Timestamp when the checkpoint was saved. */
+  /**
+   * Timestamp when the checkpoint was saved.
+   * The fine-tuning service returns an RFC 3339 UTC date-time string, not Unix epoch seconds.
+   */
   @visibility(Lifecycle.Read)
   time: utcDateTime;
 
