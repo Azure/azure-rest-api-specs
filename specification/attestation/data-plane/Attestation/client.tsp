@@ -4,8 +4,6 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using AttestationService;
 
-@@clientName(AttestationService, "AttestationClient", "csharp");
-
 @@access(Policy.get, Access.internal, "csharp");
 @@access(Policy.set, Access.internal, "csharp");
 @@access(Policy.reset, Access.internal, "csharp");
@@ -57,7 +55,3 @@ using AttestationService;
 @@access(TpmAttestationRequest, Access.public, "csharp");
 @@access(CertificateModification, Access.public, "csharp");
 @@usage(TpmAttestationRequest, Usage.input, "csharp");
-
-@@alternateType(AttestationResult.iat, int64, "csharp");
-@@alternateType(AttestationResult.exp, int64, "csharp");
-@@alternateType(AttestationResult.nbf, int64, "csharp");

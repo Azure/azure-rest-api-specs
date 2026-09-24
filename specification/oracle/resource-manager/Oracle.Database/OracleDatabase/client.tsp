@@ -832,3 +832,13 @@ using Oracle.Database;
   "listByCloudVMCluster",
   "go"
 );
+
+// Preserve released Java names across versioned wire-compatible properties.
+@@clientName(CloudVmClusterProperties.hostname, "hostnameV1", "java");
+@@clientName(CloudVmClusterProperties.hostnameV2, "hostname", "java");
+@@clientName(CloudVmClusterProperties.scanDnsName, "scanDnsNameV1", "java");
+@@clientName(CloudVmClusterProperties.scanDnsNameV2, "scanDnsName", "java");
+@@clientName(ExadbVmClusterProperties.hostname, "hostnameV1", "java");
+@@clientName(ExadbVmClusterProperties.hostnameV2, "hostname", "java");
+@@clientName(ExadbVmClusterProperties.scanDnsName, "scanDnsNameV1", "java");
+@@clientName(ExadbVmClusterProperties.scanDnsNameV2, "scanDnsName", "java");

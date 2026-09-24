@@ -28,7 +28,8 @@ The `eng/tools` directory contains a collection of standalone Node.js packages u
 The top-level `eng/tools` directory holds shared configuration that the individual packages extend:
 
 - `package.json` — aggregates every tool as a `workspace:*` devDependency and provides a root `build` script
-- `tsconfig.json` — base TypeScript config plus the `include` list of every tool's `src`/`test` files
+- `tsconfig.json` — aggregate project with globs for every tool's `src`/`test` files
+- Root `tsconfig.base.json` — shared compiler options inherited by every tooling project
 - Lint configuration is shared by all packages in the repository-root `.oxlintrc.json`
 - `vitest.base.config.ts` — base Vitest config that each tool extends
 - Root `.oxfmtrc.json` — shared Oxfmt configuration and subtree-scoped ignore patterns
@@ -48,11 +49,11 @@ The top-level `eng/tools` directory holds shared configuration that the individu
 ```
 eng/tools/
 ├── package.json               # Aggregates all tools as workspace:* devDependencies; root "build"
-├── tsconfig.json              # Base TS config + include list for all tools
+├── tsconfig.json              # Aggregate source/test project for all tools
 ├── vitest.base.config.ts      # Base Vitest config (extended per tool)
 └── <tool>/                    # One directory per tool package
     ├── package.json           # @azure-tools/<tool>; scripts, deps, bin entry
-    ├── tsconfig.json          # Extends ../tsconfig.json; include src/test
+    ├── tsconfig.json          # Extends ../../../tsconfig.base.json; include src/test
     ├── vitest.config.ts       # Extends ../vitest.base.config.ts
     ├── README.md              # Optional, recommended for user-facing tools
     ├── cmd/                   # Thin CLI wrappers (*.js) declared under package.json "bin"
@@ -66,7 +67,7 @@ eng/tools/
 
 - **File extension**: Source is `.ts`. CLI wrappers in `cmd/` are `.js` (thin launchers, see below).
 - **Module system**: ES modules (`import`/`export`), `"type": "module"` in every `package.json`.
-- **Erasable syntax only**: Source is run directly by Node's type stripping, so the base `tsconfig.json` sets `erasableSyntaxOnly` and `verbatimModuleSyntax`. Do **not** use TypeScript features that require runtime transformation — no `enum`, no parameter properties (`constructor(private x)`), no namespaces with runtime members, and no non-`import type` type-only imports that would emit. Use `import type { ... }` for type-only imports.
+- **Erasable syntax only**: Source is run directly by Node's type stripping, so root `tsconfig.base.json` sets `erasableSyntaxOnly` and `verbatimModuleSyntax`. Do **not** use TypeScript features that require runtime transformation — no `enum`, no parameter properties (`constructor(private x)`), no namespaces with runtime members, and no non-`import type` type-only imports that would emit. Use `import type { ... }` for type-only imports.
 - **Import extensions**: Import local modules using their real `.ts` extension (e.g. `import { main } from "../src/index.ts"`); `allowImportingTsExtensions` is enabled.
 - **Indentation**: 2 spaces (enforced by Oxfmt).
 - **Quote style**: Double quotes for strings (enforced by Oxfmt).
@@ -113,12 +114,13 @@ Every tool package is a thin extension of the shared `eng/tools` configuration. 
 
 - Reference external dependency versions with `catalog:`. Define their versions in the default `catalog` in the root `pnpm-workspace.yaml`, including dependencies used by only one tool.
 - Keep internal package references as `workspace:*`; do not put workspace links in the catalog.
+- TypeScript, Vitest, and the V8 coverage provider are supplied by the root package. Do not add per-tool copies of these devDependencies.
 
 ### `tsconfig.json`
 
 ```jsonc
 {
-  "extends": "../tsconfig.json",
+  "extends": "../../../tsconfig.base.json",
   "include": ["src/**/*.ts", "test/**/*.ts"]
 }
 ```
@@ -128,11 +130,11 @@ Every tool package is a thin extension of the shared `eng/tools` configuration. 
 Use the repository-root `.oxlintrc.json`; do not add per-tool lint configurations or
 dependencies. The root package provides `oxlint` and `oxlint-tsgolint`. A local
 `"lint": "oxlint ."` script can lint one tool during development; `pnpm lint` from
-the repository root lints the previously linted packages in one invocation.
+the repository root lints the enabled packages in one invocation.
 
 See [the engineering guide](../../eng/README.md#linting-and-formatting) for the
-packages excluded to preserve the previous ESLint coverage. Enable linting for
-those packages in a separate change rather than adding migration-only suppressions.
+packages not yet linted. Enable linting for those packages in a separate change
+rather than adding blanket suppressions.
 
 ### Vitest config
 
@@ -142,7 +144,16 @@ Use `vitest.config.ts` and re-export the shared base:
 export { baseConfig as default } from "../vitest.base.config.ts";
 ```
 
-For tool-specific options such as `testTimeout` or coverage exclusions, use Vitest's `mergeConfig` to extend the base. Tests must live under `./test`. Keep explicit per-tool configs: Vitest 5 does not search ancestor directories for a config.
+For tool-specific options such as `testTimeout` or standalone coverage exclusions,
+use `defineConfig` and `mergeConfig` to extend the base. The base inherits
+`defaultVitestConfig` from root `vitest.config.mts`, without the workspace project
+list. Root runs discover these configs as projects; local scripts still invoke
+Vitest directly. Coverage overrides apply to standalone runs, while workspace
+coverage is configured at the root.
+
+Tests must live under `./test`. Use project-relative `include` patterns rather than
+a cwd-relative `dir`, and resolve fixtures from `import.meta.dirname` so tests
+work from both the package and repository root.
 
 ### CLI wrappers (`cmd/`)
 
@@ -175,6 +186,11 @@ pnpm run test:ci         # Run tests once with coverage report
 ```
 
 From the `eng/tools` directory, `pnpm run build` type-checks all tools at once.
+Root `pnpm build` uses `pnpm -r` to run individual package build scripts, excluding
+the aggregate package. Root `pnpm test`/`pnpm test:ci` run the Vitest workspace;
+use `--project <package-name>` to select a project. Root `pnpm check` runs workspace
+validation, build, lint, formatting checks, and tests. Package-local test commands
+keep their existing behavior.
 
 Use `pnpm run format` rather than adjusting formatting manually.
 
@@ -189,17 +205,22 @@ Cover new or changed behavior and bug regressions with focused tests of reposito
 - **Framework**: Vitest
 - **Test files**: `*.test.ts` files under each tool's `test/` directory
 - **Fixtures**: Place test fixtures under `test/` (the root `.oxfmtrc.json` excludes `fixtures` and `specification` directories under tooling)
+- **Generated fixtures**: Use a unique temporary directory with `afterEach` or `finally` cleanup. Never recursively remove test directories derived from `process.cwd()`, which can be the repository root.
 - **Assertions**: Use `expect()` from Vitest
 - **Coverage**: Generated by `pnpm run test:ci`; exclude `cmd/**` and entry files (e.g. `src/index.ts`) from coverage where appropriate
 - **Test structure**: Use `describe()` and `it()` blocks
 
 ### CI Integration
 
-Each tool is tested by a dedicated workflow (`.github/workflows/<tool>-test.yaml`) that calls the shared reusable workflow `.github/workflows/_reusable-eng-tools-test.yaml`. The reusable workflow runs `pnpm run build` and `pnpm run test:ci` against the tool's `working-directory`, on a matrix of Ubuntu (Node 24) and Windows (Node 24).
+`.github/workflows/eng.yml` validates the workspace, runs root `pnpm build` once on Linux and
+root `pnpm test:ci` on Ubuntu and Windows with Node 24. Each test job installs
+dependencies once and runs the full Vitest workspace. Changes to tooling, shared
+configuration, or integration fixtures run all suites. Do not add per-tool
+workflows or type-check steps to the test OS matrix.
 
-`.github/workflows/format.yaml` runs `pnpm format:check` once from the repository root for `.github` and `eng/tools`. Do not add formatting steps to package/OS test matrices. Package-local formatting commands remain available and use the same root configuration.
+`.github/workflows/format.yaml` runs `pnpm format:check` once from the repository root for `.github`, `eng/tools`, and `vitest.config.mts`. Do not add formatting steps to package/OS test matrices. Package-local formatting commands remain available and use the same root configuration.
 
-Code linting runs once for all packages in `.github/workflows/lint.yaml`, which automatically includes new tools. Do not add lint steps or a lint input to the per-package reusable workflow.
+Code linting runs once for all packages in `.github/workflows/lint.yaml`, which automatically includes new tools. Do not add lint steps to the build/test workflow.
 
 ## Common Tasks
 
@@ -207,12 +228,12 @@ Code linting runs once for all packages in `.github/workflows/lint.yaml`, which 
 
 1. Create `eng/tools/<tool>/` with `src/`, `test/`, and `cmd/` directories.
 2. Add `package.json` (name `@azure-tools/<tool>`, `"type": "module"`, scripts and `engines` matching the template above).
-3. Add `tsconfig.json` extending `../tsconfig.json`.
+3. Add `tsconfig.json` extending the root `../../../tsconfig.base.json`.
 4. Use the repository-root `.oxlintrc.json` without adding a per-tool lint config.
 5. Add `vitest.config.ts` extending `../vitest.base.config.ts`.
 6. Add CLI wrapper(s) under `cmd/` and declare them in the `bin` field.
-7. Register the package in `eng/tools/package.json` (`workspace:*` devDependency) and `eng/tools/tsconfig.json` (`include` globs).
-8. Add a `.github/workflows/<tool>-test.yaml` workflow calling `_reusable-eng-tools-test.yaml` with `package: <tool>`. Include relevant `paths` filters, at minimum `eng/tools/package.json`, `eng/tools/tsconfig.json`, and `eng/tools/<tool>/**`.
+7. Register the package in `eng/tools/package.json` (`workspace:*` devDependency). The aggregate `eng/tools/tsconfig.json` automatically includes tool `src`/`test` directories.
+8. Use the shared `eng.yml` workflow, which discovers new tools automatically. If the tool needs additional fixtures, update the shared workflow's triggers and sparse checkout.
 9. Run the [required checks](#before-committing) in the new tool directory.
 
 ### Updating Dependencies
@@ -230,6 +251,6 @@ Only use catalog references in projects included in `pnpm-workspace.yaml`.
 - Main Copilot instructions: [`.github/copilot-instructions.md`](../copilot-instructions.md)
 - GitHub Actions instructions: [`github-actions.instructions.md`](./github-actions.instructions.md)
 - Other instruction files: [`.github/instructions/`](.)
-- Reusable test workflow: [`.github/workflows/_reusable-eng-tools-test.yaml`](../workflows/_reusable-eng-tools-test.yaml)
+- Engineering workflow: [`.github/workflows/eng.yml`](../workflows/eng.yml)
 - Vitest docs: https://vitest.dev/
 - oxlint docs: https://oxc.rs/docs/guide/usage/linter

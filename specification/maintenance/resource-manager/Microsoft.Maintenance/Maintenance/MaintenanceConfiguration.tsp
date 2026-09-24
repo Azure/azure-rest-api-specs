@@ -99,7 +99,8 @@ interface MaintenanceConfigurationOperationGroupOps
           SegmentName = "maintenanceConfigurations",
           NamePattern = ""
         >>,
-      }
+      },
+      "MaintenanceConfiguration"
     > {}
 
 @armResourceOperations
