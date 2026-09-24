@@ -12260,7 +12260,8 @@
             "required": true,
             "description": "Identifier of the fine-tuning session to retrieve.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             }
           },
           {
@@ -12351,7 +12352,8 @@
             "required": true,
             "description": "Identifier of the fine-tuning session to delete.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             }
           },
           {
@@ -12444,7 +12446,8 @@
             "required": true,
             "description": "Identifier of the fine-tuning session to checkpoint.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             }
           },
           {
@@ -12548,7 +12551,8 @@
             "required": true,
             "description": "Identifier of the fine-tuning session whose sampler weights will be saved.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             }
           },
           {
@@ -12652,7 +12656,8 @@
             "required": true,
             "description": "Identifier of the fine-tuning session whose checkpoints will be listed.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             }
           },
           {
@@ -12745,7 +12750,8 @@
             "required": true,
             "description": "Identifier of the fine-tuning session containing the checkpoint.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             }
           },
           {
@@ -12754,7 +12760,8 @@
             "required": true,
             "description": "Identifier of the checkpoint to retrieve.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             }
           },
           {
@@ -12847,7 +12854,8 @@
             "required": true,
             "description": "Identifier of the fine-tuning session to unload.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             }
           },
           {
@@ -12940,7 +12948,8 @@
             "required": true,
             "description": "Identifier of the fine-tuning session that will process the batch.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             }
           },
           {
@@ -13044,7 +13053,8 @@
             "required": true,
             "description": "Identifier of the fine-tuning session that will process the batch.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             }
           },
           {
@@ -13148,7 +13158,8 @@
             "required": true,
             "description": "Identifier of the fine-tuning session to keep active.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             }
           },
           {
@@ -13241,7 +13252,8 @@
             "required": true,
             "description": "Identifier of the fine-tuning session whose weights will be updated.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             }
           },
           {
@@ -13345,7 +13357,8 @@
             "required": true,
             "description": "Identifier of the fine-tuning session associated with the request.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             }
           },
           {
@@ -13354,7 +13367,8 @@
             "required": true,
             "description": "Request identifier returned when the work was submitted.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             }
           },
           {
@@ -13447,7 +13461,8 @@
             "required": true,
             "description": "Identifier of the fine-tuning session containing the sampler checkpoint.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             }
           },
           {
@@ -13456,7 +13471,8 @@
             "required": true,
             "description": "Identifier of the completed sampler checkpoint to use for generation.",
             "schema": {
-              "type": "string"
+              "type": "string",
+              "minLength": 1
             },
             "explode": false
           },
@@ -87334,6 +87350,7 @@
         "properties": {
           "session_id": {
             "type": "string",
+            "minLength": 1,
             "description": "Identifier of the newly created fine-tuning session."
           },
           "type": {
@@ -87354,6 +87371,7 @@
           },
           "request_id": {
             "type": "string",
+            "minLength": 1,
             "description": "Request identifier used to poll for session initialization."
           },
           "info_message": {
@@ -87474,6 +87492,7 @@
         "properties": {
           "request_id": {
             "type": "string",
+            "minLength": 1,
             "description": "Request identifier to pass to the session's request-status endpoint.",
             "readOnly": true
           },
@@ -87487,6 +87506,7 @@
           },
           "session_id": {
             "type": "string",
+            "minLength": 1,
             "description": "Identifier of the session processing this request.",
             "readOnly": true
           }
@@ -87503,6 +87523,7 @@
         "properties": {
           "checkpoint_id": {
             "type": "string",
+            "minLength": 1,
             "description": "Identifier of the saved checkpoint within the session.",
             "readOnly": true
           },
@@ -87617,10 +87638,12 @@
         "properties": {
           "session_id": {
             "type": "string",
+            "minLength": 1,
             "description": "Identifier of the session being unloaded."
           },
           "request_id": {
             "type": "string",
+            "minLength": 1,
             "description": "Request identifier used to poll for completion of the unload request."
           }
         },
@@ -87679,6 +87702,7 @@
         "properties": {
           "session_id": {
             "type": "string",
+            "minLength": 1,
             "description": "Identifier of the session targeted for deletion."
           },
           "deleted": {
@@ -87717,6 +87741,7 @@
         "properties": {
           "session_id": {
             "type": "string",
+            "minLength": 1,
             "description": "Identifier of the session whose heartbeat was refreshed, when included by the service."
           }
         },
@@ -87844,6 +87869,7 @@
         "properties": {
           "request_id": {
             "type": "string",
+            "minLength": 1,
             "description": "Request identifier to pass to the session's request-status endpoint.",
             "readOnly": true
           },
@@ -87978,6 +88004,7 @@
         "properties": {
           "session_id": {
             "type": "string",
+            "minLength": 1,
             "description": "Unique identifier for this fine-tuning session.",
             "readOnly": true
           },
@@ -88084,6 +88111,7 @@
         "properties": {
           "session_id": {
             "type": "string",
+            "minLength": 1,
             "description": "Unique identifier for this fine-tuning session.",
             "readOnly": true
           },

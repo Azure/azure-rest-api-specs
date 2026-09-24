@@ -297,6 +297,7 @@ model LossFnConfig {
 model FineTuningPendingOperation {
   /** Request identifier to pass to the session's request-status endpoint. */
   @visibility(Lifecycle.Read)
+  @minLength(1)
   request_id: string;
 
   /** Indicates that the request has not yet completed. */
@@ -310,6 +311,7 @@ model FineTuningActionOperation {
 
   /** Identifier of the session processing this request. */
   @visibility(Lifecycle.Read)
+  @minLength(1)
   session_id: string;
 }
 
@@ -382,6 +384,7 @@ model FineTuningSessionModelData {
 model FineTuningSession {
   /** Unique identifier for this fine-tuning session. */
   @visibility(Lifecycle.Read)
+  @minLength(1)
   session_id: string;
 
   /** Session category, using the same wire values as the create-session request. */
@@ -399,6 +402,7 @@ model FineTuningSession {
 model FineTuningSessionSummary {
   /** Unique identifier for this fine-tuning session. */
   @visibility(Lifecycle.Read)
+  @minLength(1)
   session_id: string;
 
   /** Base model used for this fine-tuning session. */
@@ -443,6 +447,7 @@ model FineTuningCursor {
 model FineTuningCheckpoint {
   /** Identifier of the saved checkpoint within the session. */
   @visibility(Lifecycle.Read)
+  @minLength(1)
   checkpoint_id: string;
 
   /** Whether the checkpoint contains training state or sampler weights. */
@@ -533,6 +538,7 @@ model CreateFineTuningSessionRequest {
 )
 model CreateFineTuningSessionResponse {
   /** Identifier of the newly created fine-tuning session. */
+  @minLength(1)
   session_id: string;
 
   /** Session category returned for the request, not a response-model identity marker. */
@@ -548,6 +554,7 @@ model CreateFineTuningSessionResponse {
   status: FineTuningSessionStatus;
 
   /** Request identifier used to poll for session initialization. */
+  @minLength(1)
   request_id: string;
 
   /** Informational message associated with session creation, when available. */
@@ -694,9 +701,11 @@ model FineTuningCheckpointList {
 @Azure.ClientGenerator.Core.clientName("FineTuningCompleteResult", "csharp")
 model FineTuningCompleteResponse {
   /** Identifier of the session being unloaded. */
+  @minLength(1)
   session_id: string;
 
   /** Request identifier used to poll for completion of the unload request. */
+  @minLength(1)
   request_id: string;
 }
 
@@ -707,6 +716,7 @@ model FineTuningCompleteResponse {
 )
 model FineTuningDeleteSessionResponse {
   /** Identifier of the session targeted for deletion. */
+  @minLength(1)
   session_id: string;
 
   /** Whether the session is marked as deleted. */
@@ -717,6 +727,7 @@ model FineTuningDeleteSessionResponse {
 @Azure.ClientGenerator.Core.clientName("FineTuningHeartbeatResult", "csharp")
 model FineTuningHeartbeatResponse {
   /** Identifier of the session whose heartbeat was refreshed, when included by the service. */
+  @minLength(1)
   session_id?: string;
 }
 

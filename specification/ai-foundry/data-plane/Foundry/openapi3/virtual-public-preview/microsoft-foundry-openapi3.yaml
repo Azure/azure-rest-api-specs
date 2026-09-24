@@ -9934,6 +9934,7 @@ paths:
           description: Identifier of the fine-tuning session to retrieve.
           schema:
             type: string
+            minLength: 1
         - name: api-version
           in: query
           required: true
@@ -9995,6 +9996,7 @@ paths:
           description: Identifier of the fine-tuning session to delete.
           schema:
             type: string
+            minLength: 1
         - name: api-version
           in: query
           required: true
@@ -10057,6 +10059,7 @@ paths:
           description: Identifier of the fine-tuning session to checkpoint.
           schema:
             type: string
+            minLength: 1
         - name: api-version
           in: query
           required: true
@@ -10126,6 +10129,7 @@ paths:
           description: Identifier of the fine-tuning session whose sampler weights will be saved.
           schema:
             type: string
+            minLength: 1
         - name: api-version
           in: query
           required: true
@@ -10193,6 +10197,7 @@ paths:
           description: Identifier of the fine-tuning session whose checkpoints will be listed.
           schema:
             type: string
+            minLength: 1
         - name: api-version
           in: query
           required: true
@@ -10253,12 +10258,14 @@ paths:
           description: Identifier of the fine-tuning session containing the checkpoint.
           schema:
             type: string
+            minLength: 1
         - name: checkpointId
           in: path
           required: true
           description: Identifier of the checkpoint to retrieve.
           schema:
             type: string
+            minLength: 1
         - name: api-version
           in: query
           required: true
@@ -10322,6 +10329,7 @@ paths:
           description: Identifier of the fine-tuning session to unload.
           schema:
             type: string
+            minLength: 1
         - name: api-version
           in: query
           required: true
@@ -10384,6 +10392,7 @@ paths:
           description: Identifier of the fine-tuning session that will process the batch.
           schema:
             type: string
+            minLength: 1
         - name: api-version
           in: query
           required: true
@@ -10454,6 +10463,7 @@ paths:
           description: Identifier of the fine-tuning session that will process the batch.
           schema:
             type: string
+            minLength: 1
         - name: api-version
           in: query
           required: true
@@ -10523,6 +10533,7 @@ paths:
           description: Identifier of the fine-tuning session to keep active.
           schema:
             type: string
+            minLength: 1
         - name: api-version
           in: query
           required: true
@@ -10585,6 +10596,7 @@ paths:
           description: Identifier of the fine-tuning session whose weights will be updated.
           schema:
             type: string
+            minLength: 1
         - name: api-version
           in: query
           required: true
@@ -10655,12 +10667,14 @@ paths:
           description: Identifier of the fine-tuning session associated with the request.
           schema:
             type: string
+            minLength: 1
         - name: requestId
           in: path
           required: true
           description: Request identifier returned when the work was submitted.
           schema:
             type: string
+            minLength: 1
         - name: api-version
           in: query
           required: true
@@ -10724,12 +10738,14 @@ paths:
           description: Identifier of the fine-tuning session containing the sampler checkpoint.
           schema:
             type: string
+            minLength: 1
         - name: checkpoint_id
           in: query
           required: true
           description: Identifier of the completed sampler checkpoint to use for generation.
           schema:
             type: string
+            minLength: 1
           explode: false
         - name: api-version
           in: query
@@ -85610,6 +85626,7 @@ components:
       properties:
         session_id:
           type: string
+          minLength: 1
           description: Identifier of the newly created fine-tuning session.
         type:
           $ref: '#/components/schemas/SessionFineTuning.FineTuningSessionType'
@@ -85625,6 +85642,7 @@ components:
           description: Current lifecycle status, which can initially be created or queued.
         request_id:
           type: string
+          minLength: 1
           description: Request identifier used to poll for session initialization.
         info_message:
           anyOf:
@@ -85692,6 +85710,7 @@ components:
       properties:
         request_id:
           type: string
+          minLength: 1
           description: Request identifier to pass to the session's request-status endpoint.
           readOnly: true
         status:
@@ -85702,6 +85721,7 @@ components:
           readOnly: true
         session_id:
           type: string
+          minLength: 1
           description: Identifier of the session processing this request.
           readOnly: true
       description: Identifies an accepted training request and its fine-tuning session.
@@ -85714,6 +85734,7 @@ components:
       properties:
         checkpoint_id:
           type: string
+          minLength: 1
           description: Identifier of the saved checkpoint within the session.
           readOnly: true
         checkpoint_type:
@@ -85789,9 +85810,11 @@ components:
       properties:
         session_id:
           type: string
+          minLength: 1
           description: Identifier of the session being unloaded.
         request_id:
           type: string
+          minLength: 1
           description: Request identifier used to poll for completion of the unload request.
       description: Response from POST /fine_tuning/sessions/{sessionId}/complete.
     SessionFineTuning.FineTuningCursor:
@@ -85835,6 +85858,7 @@ components:
       properties:
         session_id:
           type: string
+          minLength: 1
           description: Identifier of the session targeted for deletion.
         deleted:
           type: boolean
@@ -85864,6 +85888,7 @@ components:
       properties:
         session_id:
           type: string
+          minLength: 1
           description: Identifier of the session whose heartbeat was refreshed, when included by the service.
       description: Response from POST /fine_tuning/sessions/{sessionId}/heartbeat.
     SessionFineTuning.FineTuningImageChunk:
@@ -85954,6 +85979,7 @@ components:
       properties:
         request_id:
           type: string
+          minLength: 1
           description: Request identifier to pass to the session's request-status endpoint.
           readOnly: true
         status:
@@ -86057,6 +86083,7 @@ components:
       properties:
         session_id:
           type: string
+          minLength: 1
           description: Unique identifier for this fine-tuning session.
           readOnly: true
         type:
@@ -86131,6 +86158,7 @@ components:
       properties:
         session_id:
           type: string
+          minLength: 1
           description: Unique identifier for this fine-tuning session.
           readOnly: true
         base_model:

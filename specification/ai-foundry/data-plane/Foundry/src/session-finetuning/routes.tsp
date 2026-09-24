@@ -78,7 +78,9 @@ interface FineTuningSessions {
   get is FineTuningSessionOperation<
     {
       /** Identifier of the fine-tuning session to retrieve. */
-      @path sessionId: string;
+      @minLength(1)
+      @path
+      sessionId: string;
     },
     FineTuningSession
   >;
@@ -94,7 +96,9 @@ interface FineTuningSessions {
   delete is FineTuningSessionOperation<
     {
       /** Identifier of the fine-tuning session to delete. */
-      @path sessionId: string;
+      @minLength(1)
+      @path
+      sessionId: string;
     },
     FineTuningDeleteSessionResponse
   >;
@@ -111,7 +115,9 @@ interface FineTuningSessions {
   unload is FineTuningSessionOperation<
     {
       /** Identifier of the fine-tuning session to unload. */
-      @path sessionId: string;
+      @minLength(1)
+      @path
+      sessionId: string;
     },
     FineTuningCompleteResponse
   >;
@@ -127,7 +133,9 @@ interface FineTuningSessions {
   heartbeat is FineTuningSessionOperation<
     {
       /** Identifier of the fine-tuning session to keep active. */
-      @path sessionId: string;
+      @minLength(1)
+      @path
+      sessionId: string;
     },
     FineTuningHeartbeatResponse
   >;
@@ -151,7 +159,9 @@ interface Training {
   forwardBackward is FineTuningSessionOperation<
     {
       /** Identifier of the fine-tuning session that will process the batch. */
-      @path sessionId: string;
+      @minLength(1)
+      @path
+      sessionId: string;
 
       /** Training batch and loss configuration for the forward-backward pass. */
       @body request: ForwardBackwardRequest;
@@ -170,7 +180,9 @@ interface Training {
   forward is FineTuningSessionOperation<
     {
       /** Identifier of the fine-tuning session that will process the batch. */
-      @path sessionId: string;
+      @minLength(1)
+      @path
+      sessionId: string;
 
       /** Training batch and loss configuration for the forward-only pass. */
       @body request: ForwardRequest;
@@ -189,7 +201,9 @@ interface Training {
   optimizerStep is FineTuningSessionOperation<
     {
       /** Identifier of the fine-tuning session whose weights will be updated. */
-      @path sessionId: string;
+      @minLength(1)
+      @path
+      sessionId: string;
 
       /** Adam optimizer configuration for applying accumulated gradients. */
       @body request: OptimStepRequest;
@@ -215,7 +229,9 @@ interface Checkpoints {
   save is FineTuningSessionOperation<
     {
       /** Identifier of the fine-tuning session to checkpoint. */
-      @path sessionId: string;
+      @minLength(1)
+      @path
+      sessionId: string;
 
       /** Identifier and optional training metadata for the checkpoint. */
       @body checkpoint: SaveCheckpointRequest;
@@ -234,7 +250,9 @@ interface Checkpoints {
   saveSamplerWeights is FineTuningSessionOperation<
     {
       /** Identifier of the fine-tuning session whose sampler weights will be saved. */
-      @path sessionId: string;
+      @minLength(1)
+      @path
+      sessionId: string;
 
       /** Explicit checkpoint identifier or sequence identifiers for the sampler weights. */
       @body checkpoint: SaveSamplerWeightsRequest;
@@ -251,7 +269,9 @@ interface Checkpoints {
   list is FineTuningSessionOperation<
     {
       /** Identifier of the fine-tuning session whose checkpoints will be listed. */
-      @path sessionId: string;
+      @minLength(1)
+      @path
+      sessionId: string;
     },
     FineTuningCheckpointList
   >;
@@ -264,10 +284,14 @@ interface Checkpoints {
   get is FineTuningSessionOperation<
     {
       /** Identifier of the fine-tuning session containing the checkpoint. */
-      @path sessionId: string;
+      @minLength(1)
+      @path
+      sessionId: string;
 
       /** Identifier of the checkpoint to retrieve. */
-      @path checkpointId: string;
+      @minLength(1)
+      @path
+      checkpointId: string;
     },
     FineTuningCheckpointInfo
   >;
@@ -291,10 +315,14 @@ interface Sampling {
   sample is FineTuningSessionOperation<
     {
       /** Identifier of the fine-tuning session containing the sampler checkpoint. */
-      @path sessionId: string;
+      @minLength(1)
+      @path
+      sessionId: string;
 
       /** Identifier of the completed sampler checkpoint to use for generation. */
-      @query("checkpoint_id") checkpointId: string;
+      @minLength(1)
+      @query("checkpoint_id")
+      checkpointId: string;
 
       /** Prompt and generation parameters for the requested completions. */
       @body sample: FineTuningSampleRequest;
@@ -320,10 +348,14 @@ interface Operations {
   get is FineTuningSessionOperation<
     {
       /** Identifier of the fine-tuning session associated with the request. */
-      @path sessionId: string;
+      @minLength(1)
+      @path
+      sessionId: string;
 
       /** Request identifier returned when the work was submitted. */
-      @path requestId: string;
+      @minLength(1)
+      @path
+      requestId: string;
     },
     FineTuningRequestStatus
   >;
