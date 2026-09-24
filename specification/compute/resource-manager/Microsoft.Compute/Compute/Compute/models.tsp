@@ -3590,6 +3590,7 @@ model VMGalleryApplication {
   /**
    * Specifies whether the gallery application is managed outside the VM application extension.
    */
+  @added(Versions.v2026_09_01)
   manuallyManaged?: boolean;
 
   /**
@@ -3603,11 +3604,13 @@ model VMGalleryApplication {
    *  The resource id looks like:
    *  /sharedGalleries/{SharedGalleryUniqueName}/applications/{applicationName}/versions/1.0.0
    */
+  @added(Versions.v2026_09_01)
   sharedGalleryApplicationId?: string;
 
   /**
    * Specifies the community gallery application version resource ID.
    */
+  @added(Versions.v2026_09_01)
   communityGalleryApplicationId?: string;
 
   /**
@@ -3625,6 +3628,7 @@ model VMGalleryApplication {
    * Populated only if requested using GET {VMApplicationName}?$expand=instanceView
    * It is ignored if set in the request body of the PUT api.
    */
+  @added(Versions.v2026_09_01)
   instanceView?: VMGalleryApplicationInstanceView;
 
   /**
@@ -3635,12 +3639,14 @@ model VMGalleryApplication {
   /**
    * Zero or more custom actions. These are always processed with PATCH semantics.
    */
+  @added(Versions.v2026_09_01)
   customActions?: VMGalleryApplicationCustomAction[];
 }
 
 /**
  * Specifies a custom action for a gallery application.
  */
+@added(Versions.v2026_09_01)
 model VMGalleryApplicationCustomAction {
   /**
    * Required. The name of the action to run.
@@ -3668,6 +3674,7 @@ model VMGalleryApplicationCustomAction {
 /**
  * Specifies a custom action parameter for a gallery application.
  */
+@added(Versions.v2026_09_01)
 model VMGalleryApplicationCustomActionParameter {
   /**
    * The name of the custom action parameter.
@@ -3683,6 +3690,7 @@ model VMGalleryApplicationCustomActionParameter {
 /**
  * Specifies the instance view of a gallery application.
  */
+@added(Versions.v2026_09_01)
 model VMGalleryApplicationInstanceView {
   /**
    * The application status status information.
@@ -3715,6 +3723,7 @@ model VMGalleryApplicationInstanceView {
 /**
  * Specifies the action being performed on the application instance and its result.
  */
+@added(Versions.v2026_09_01)
 model VMGalleryApplicationInstanceViewAction {
   /**
    * The action being performed.
@@ -7026,6 +7035,7 @@ model VirtualMachineProperties {
   /**
    * Sets up run command service for supporting immediate run command execution in the future.
    */
+  @added(Versions.v2026_09_01)
   installRunCommandAsService?: boolean;
 }
 
@@ -9981,6 +9991,7 @@ model VirtualMachineRunCommandProperties {
   /**
    * Optional. If set to true, the command will be run immediately bypassing typical pipelines to reach the VM directly..
    */
+  @added(Versions.v2026_09_01)
   runImmediately?: boolean;
 
   /**
@@ -10030,6 +10041,7 @@ model VirtualMachineRunCommandProperties {
    * Optional. If true, sequence number of the extension will be incremented even if the script and settings have been executed in previous execution part of previous sequence number.
    * Increasing the sequence number should result in re-running the Run Command again when Linux or Windows Run Command is execution on VM.
    */
+  @added(Versions.v2026_09_01)
   forceRerun?: boolean;
 }
 

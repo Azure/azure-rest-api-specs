@@ -18,7 +18,7 @@ namespace Compute;
 /**
  * Describes a gallery application installed on a virtual machine scale set VM.
  */
-@added(Versions.v2026_04_01)
+@added(Versions.v2026_09_01)
 @parentResource(VirtualMachineScaleSetVM)
 model VirtualMachineScaleSetVMGalleryApplication
   is Azure.ResourceManager.ProxyResource<VMGalleryApplication> {
@@ -33,7 +33,7 @@ model VirtualMachineScaleSetVMGalleryApplication
 /**
  * The list of gallery applications installed on a virtual machine scale set VM.
  */
-@added(Versions.v2026_04_01)
+@added(Versions.v2026_09_01)
 model VirtualMachineScaleSetVMGalleryApplicationListResult
   is Azure.Core.Page<VirtualMachineScaleSetVMGalleryApplication>;
 
@@ -86,7 +86,7 @@ interface VirtualMachineScaleSetVMGalleryApplications {
    * Gets a gallery application installed on a virtual machine scale set VM.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @added(Versions.v2026_04_01)
+  @added(Versions.v2026_09_01)
   @operationId("VirtualMachineScaleSetVMGalleryApplications_Get")
   get is VirtualMachineScaleSetVMGalleryApplicationOps.Read<
     VirtualMachineScaleSetVMGalleryApplication,
@@ -103,7 +103,7 @@ interface VirtualMachineScaleSetVMGalleryApplications {
    * Lists gallery applications installed on a virtual machine scale set VM.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @added(Versions.v2026_04_01)
+  @added(Versions.v2026_09_01)
   @operationId("VirtualMachineScaleSetVMGalleryApplications_List")
   @list
   list is VirtualMachineScaleSetVMGalleryApplicationOps.List<
@@ -116,7 +116,7 @@ interface VirtualMachineScaleSetVMGalleryApplications {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "The controller exposes instanceView as a GET action."
-  @added(Versions.v2026_04_01)
+  @added(Versions.v2026_09_01)
   @get
   @action("instanceView")
   @operationId("VirtualMachineScaleSetVMGalleryApplications_GetInstanceView")

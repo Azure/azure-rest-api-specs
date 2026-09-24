@@ -87,6 +87,7 @@ interface VirtualMachineVMGalleryApplications {
   /**
     * Gets a gallery application installed on a virtual machine.
    */
+  @added(Versions.v2026_09_01)
   get is VirtualMachineVMGalleryApplicationOps.Read<
     VirtualMachineVMGalleryApplication,
     Parameters = {
@@ -101,6 +102,7 @@ interface VirtualMachineVMGalleryApplications {
   /**
    * Creates or updates a gallery application on a virtual machine.
    */
+  @added(Versions.v2026_09_01)
   createOrUpdate is VirtualMachineVMGalleryApplicationOps.CreateOrUpdateAsync<
     VirtualMachineVMGalleryApplication,
     LroHeaders = ArmLroLocationHeader<FinalResult = VirtualMachineVMGalleryApplication> &
@@ -144,7 +146,7 @@ interface VirtualMachineVMGalleryApplications {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "The controller exposes instanceView as a GET action."
-  @added(Versions.v2026_04_01)
+  @added(Versions.v2026_09_01)
   @get
   @action("instanceView")
   @operationId("VirtualMachineVMGalleryApplications_GetInstanceView")
