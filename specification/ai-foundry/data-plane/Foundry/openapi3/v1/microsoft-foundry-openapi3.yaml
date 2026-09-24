@@ -6041,9 +6041,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - DataGenerationJobs
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     post:
       operationId: DataGenerationJobs_create
       summary: Create a data generation job
@@ -6109,9 +6106,6 @@ paths:
             schema:
               $ref: '#/components/schemas/DataGenerationJobInputs'
         description: The data generation job inputs to create.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
   /data_generation_jobs/{jobId}:
     get:
       operationId: DataGenerationJobs_get
@@ -6167,9 +6161,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - DataGenerationJobs
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     delete:
       operationId: DataGenerationJobs_delete
       summary: Delete a data generation job
@@ -6213,9 +6204,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - DataGenerationJobs
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
   /data_generation_jobs/{jobId}:cancel:
     post:
       operationId: DataGenerationJobs_cancel
@@ -6264,9 +6252,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - DataGenerationJobs
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
   /datasets:
     get:
       operationId: Datasets_listLatest
@@ -41739,9 +41724,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobSource'
       description: Agent source for data generation jobs — references an agent to fetch instructions and metadata from.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     AgentDefinition:
       type: object
       required:
@@ -45728,9 +45710,6 @@ components:
           supervised_finetuning: '#/components/schemas/SupervisedFineTuningDataGenerationJob'
           reinforcement_finetuning: '#/components/schemas/ReinforcementFineTuningDataGenerationJob'
       description: Data Generation Job resource.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     DataGenerationJobInputs:
       type: object
       required:
@@ -45760,9 +45739,6 @@ components:
           supervised_finetuning: '#/components/schemas/SupervisedFineTuningDataGenerationJobInputs'
           reinforcement_finetuning: '#/components/schemas/ReinforcementFineTuningDataGenerationJobInputs'
       description: Caller-supplied inputs for a data generation job.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     DataGenerationJobOptions:
       type: object
       required:
@@ -45788,9 +45764,6 @@ components:
           simulation_seed: '#/components/schemas/SimulationSeedDataGenerationJobOptions'
           tool_use: '#/components/schemas/ToolUseFineTuningDataGenerationJobOptions'
       description: Options for managing data generation jobs.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     DataGenerationJobOutput:
       type: object
       required:
@@ -45805,9 +45778,6 @@ components:
           file: '#/components/schemas/FileDataGenerationJobOutput'
           dataset: '#/components/schemas/DatasetDataGenerationJobOutput'
       description: Output information for a data generation job.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     DataGenerationJobOutputType:
       anyOf:
         - type: string
@@ -45816,9 +45786,6 @@ components:
             - file
             - dataset
       description: The supported output file types for a data generation job.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     DataGenerationJobOutputWriteMode:
       anyOf:
         - type: string
@@ -45827,9 +45794,6 @@ components:
             - overwrite
             - merge
       description: The supported write modes for data generation job outputs.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     DataGenerationJobResult:
       type: object
       required:
@@ -45848,9 +45812,6 @@ components:
           $ref: '#/components/schemas/DataGenerationTokenUsage'
           description: The token usage information for the data generation job.
       description: Result produced by a successful data generation job.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     DataGenerationJobScenario:
       anyOf:
         - type: string
@@ -45860,9 +45821,6 @@ components:
             - reinforcement_finetuning
             - evaluation
       description: The supported scenarios for a data generation job.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     DataGenerationJobSource:
       type: object
       required:
@@ -45882,9 +45840,6 @@ components:
           traces: '#/components/schemas/TracesDataGenerationJobSource'
           file: '#/components/schemas/FileDataGenerationJobSource'
       description: The base source model for data generation jobs.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     DataGenerationJobSourceType:
       anyOf:
         - type: string
@@ -45895,9 +45850,6 @@ components:
             - traces
             - file
       description: The supported source types for data generation jobs.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     DataGenerationJobType:
       anyOf:
         - type: string
@@ -45908,9 +45860,6 @@ components:
             - tool_use
             - simulation_seed
       description: The supported data generation job types.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     DataGenerationModelOptions:
       type: object
       required:
@@ -45920,9 +45869,6 @@ components:
           type: string
           description: Base model name used to generate data.
       description: LLM model options for data generation jobs.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     DataGenerationTokenUsage:
       type: object
       required:
@@ -45946,9 +45892,6 @@ components:
           description: Total number of tokens used.
           readOnly: true
       description: Token usage information for a data generation job.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     DataSourceConfig:
       type: object
       required:
@@ -46002,9 +45945,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobOutput'
       description: Dataset output for a data generation job.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     DatasetEvaluatorGenerationJobSource:
       type: object
       required:
@@ -47330,9 +47270,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJob'
       description: Evaluation data generation job resource.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     EvaluationDataGenerationJobInputs:
       type: object
       required:
@@ -47349,9 +47286,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobInputs'
       description: Caller-supplied inputs for an evaluation data generation job.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     EvaluationDataGenerationJobOutputTarget:
       type: object
       properties:
@@ -47371,9 +47305,6 @@ components:
           description: Controls how dataset outputs are written. If omitted, defaults to `overwrite` and creates the next dataset version using only newly generated rows.
           default: overwrite
       description: Dataset output target for an evaluation data generation job.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     EvaluationDataset:
       type: object
       required:
@@ -48418,9 +48349,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobSource'
       description: File source for data generation jobs — Azure OpenAI file input.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     FileDatasetVersion:
       type: object
       required:
@@ -79584,9 +79512,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobSource'
       description: Prompt source for data generation jobs — inline text provided by the user.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     PromptEvaluatorGenerationJobSource:
       type: object
       required:
@@ -81059,9 +80984,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobOptions'
       description: The options for a data generation job with SimpleQnA type.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     SimpleQnAFineTuningQuestionType:
       anyOf:
         - type: string
@@ -81086,9 +81008,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobOptions'
       description: The options for a task generation data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     SipTelephonyTransferDestination:
       type: object
       required:
@@ -83176,9 +83095,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobOptions'
       description: The options for a data generation job with Traces type.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     TracesDataGenerationJobSource:
       type: object
       required:
@@ -83216,9 +83132,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobSource'
       description: Traces source for data generation jobs — conversation traces from Application Insights.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     TracesEvaluatorGenerationJobSource:
       type: object
       required:

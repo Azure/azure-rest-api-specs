@@ -6,6 +6,8 @@ using Azure.Core;
 
 namespace Azure.AI.Projects;
 
+alias DataGenerationJobsOptionalPreviewHeader = WithConditionalFoundryPreviewHeader<FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview>;
+
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
 @tag("DataGenerationJobs")
@@ -15,10 +17,15 @@ interface DataGenerationJobs {
    */
   @summary("Get a data generation job")
   @route("data_generation_jobs/{jobId}")
-  @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
-  get is queryJobStatusPreview<
-    FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview,
-    DataGenerationJob
+  @get
+  get is FoundryDataPlaneOperation<
+    {
+      ...DataGenerationJobsOptionalPreviewHeader;
+
+      /** The ID of the job. */
+      @path jobId: string;
+    },
+    JobStatusResponse<DataGenerationJob>
   >;
 
   /**
@@ -26,10 +33,14 @@ interface DataGenerationJobs {
    */
   @summary("List data generation jobs")
   @route("data_generation_jobs")
-  @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
-  list is listJobsPreview<
-    FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview,
-    DataGenerationJob
+  @get
+  @list
+  list is FoundryDataPlaneOperation<
+    {
+      ...DataGenerationJobsOptionalPreviewHeader;
+      ...CommonPageQueryParameters;
+    },
+    AgentsPagedResult<DataGenerationJob>
   >;
 
   /**
@@ -38,12 +49,11 @@ interface DataGenerationJobs {
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
   @summary("Create a data generation job")
   @route("data_generation_jobs")
-  @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
   @pollingOperation(DataGenerationJobs.get)
   @post
-  create is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview,
+  create is FoundryDataPlaneOperation<
     {
+      ...DataGenerationJobsOptionalPreviewHeader;
       ...WithOperationId;
 
       /** The data generation job inputs to create. */
@@ -57,10 +67,15 @@ interface DataGenerationJobs {
    */
   @summary("Cancel a data generation job")
   @route("data_generation_jobs/{jobId}:cancel")
-  @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
-  cancel is cancelJobPreview<
-    FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview,
-    DataGenerationJob
+  @post
+  cancel is FoundryDataPlaneOperation<
+    {
+      ...DataGenerationJobsOptionalPreviewHeader;
+
+      /** The ID of the job to cancel. */
+      @path jobId: string;
+    },
+    OkResponse & DataGenerationJob
   >;
 
   /**
@@ -68,6 +83,14 @@ interface DataGenerationJobs {
    */
   @summary("Delete a data generation job")
   @route("data_generation_jobs/{jobId}")
-  @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
-  delete is deleteJobPreview<FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview>;
+  @delete
+  delete is FoundryDataPlaneOperation<
+    {
+      ...DataGenerationJobsOptionalPreviewHeader;
+
+      /** The ID of the job to delete. */
+      @path jobId: string;
+    },
+    NoContentResponse
+  >;
 }
