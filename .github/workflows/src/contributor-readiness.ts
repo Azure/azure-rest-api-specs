@@ -190,17 +190,14 @@ async function publicMembership(github: GitHub, org: string, username: string): 
   }
 }
 
-/** Checks effective repository write capability, including maintain/admin and custom grants. */
+/** Checks GitHub's base permission; maintain and custom roles inherit a base permission. */
 async function writeAccess(github: GitHub, owner: string, repo: string, username: string) {
   const { data } = await github.rest.repos.getCollaboratorPermissionLevel({
     owner,
     repo,
     username,
   });
-  return (
-    ["write", "maintain", "admin"].includes(data.permission) ||
-    data.user?.permissions?.push === true
-  );
+  return data.permission === "write" || data.permission === "admin";
 }
 
 /** Logs denied/unavailable lookups as unknown evidence; propagates other API failures. */

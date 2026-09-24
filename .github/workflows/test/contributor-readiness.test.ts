@@ -188,14 +188,27 @@ describe("contributor readiness", () => {
   });
 
   it.each([
-    { permission: "maintain" },
-    { permission: "admin" },
-    { permission: "custom", user: { permissions: { push: true } } },
+    { permission: "write", role_name: "maintain" },
+    { permission: "admin", role_name: "admin" },
+    { permission: "write", role_name: "custom-reviewer" },
   ])("recognizes effective write capability: %j", async (data) => {
     const f = setup();
     f.permission.mockResolvedValue({ data });
     await f.run();
     expect(f.createCheck).toHaveBeenCalledWith(expect.objectContaining({ conclusion: "success" }));
+  });
+
+  it.each([
+    { permission: "read", role_name: "triage" },
+    { permission: "read", role_name: "custom-reviewer" },
+    { permission: "none", role_name: "none" },
+  ])("does not grant write access from a role name: %j", async (data) => {
+    const f = setup();
+    f.permission.mockResolvedValue({ data });
+    await f.run();
+    expect(f.createCheck).toHaveBeenCalledWith(expect.objectContaining({ conclusion: "neutral" }));
+    const [comment] = f.github.rest.issues.createComment.mock.calls[0] as [{ body: string }];
+    expect(comment.body).toContain("No write access; approval cannot satisfy required reviews.");
   });
 
   it.each([403, 404])("does not infer no access from permission lookup HTTP %s", async (code) => {

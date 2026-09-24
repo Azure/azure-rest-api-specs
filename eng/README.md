@@ -32,7 +32,8 @@ reported as incomplete rather than silently passing.
 
 Submitted-review events use a read-only notification workflow followed by a
 trusted `workflow_run` publisher, so fork PR code is never executed with write
-permissions. Fork workflow approval policies can delay automatic review refresh;
+permissions. Editing or dismissing a review does not rerun the check; those
+reviewers remain included. Fork workflow approval policies can delay automatic review refresh;
 the comment command is also available. Do not make this advisory check required.
 
 ## Code conventions
