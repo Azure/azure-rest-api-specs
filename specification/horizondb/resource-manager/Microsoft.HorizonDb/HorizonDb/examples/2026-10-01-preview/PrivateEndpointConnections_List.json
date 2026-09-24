@@ -17,7 +17,7 @@
             "type": "Microsoft.HorizonDb/clusters/privateEndpointConnections",
             "properties": {
               "groupIds": [
-                "default"
+                "example-cluster"
               ],
               "privateEndpoint": {
                 "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/network-resource-group/providers/Microsoft.Network/privateEndpoints/example-private-endpoint"
@@ -25,6 +25,25 @@
               "privateLinkServiceConnectionState": {
                 "status": "Approved",
                 "description": "Approved for the production database network",
+                "actionsRequired": "None"
+              },
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/privateEndpointConnections/example-pool-private-endpoint-connection",
+            "name": "example-pool-private-endpoint-connection",
+            "type": "Microsoft.HorizonDb/clusters/privateEndpointConnections",
+            "properties": {
+              "groupIds": [
+                "example-pool"
+              ],
+              "privateEndpoint": {
+                "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/network-resource-group/providers/Microsoft.Network/privateEndpoints/example-pool-private-endpoint"
+              },
+              "privateLinkServiceConnectionState": {
+                "status": "Approved",
+                "description": "Approved for read-only Pool access",
                 "actionsRequired": "None"
               },
               "provisioningState": "Succeeded"

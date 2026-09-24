@@ -71,7 +71,7 @@ model Cluster is Azure.ResourceManager.TrackedResource<ClusterProperties> {
 @maxLength(63)
 scalar LegacyPoolName extends string;
 
-@doc("A lowercase enforced name as a HorizonDB pool name.")
+@doc("A lowercase enforced name as a HorizonDB pool name. The name must differ from the name of the parent cluster because endpoint names are derived from cluster and pool names.")
 @pattern("^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$")
 @minLength(1)
 @maxLength(63)
@@ -84,8 +84,8 @@ scalar PoolName extends string;
 scalar ProvisionedPoolVCores extends int32;
 
 @added(Versions.v2026_10_01_preview)
-@doc("A HorizonDB pool node count, from 0 through 16.")
-@minValue(0)
+@doc("A HorizonDB pool node count, from 1 through 16.")
+@minValue(1)
 @maxValue(16)
 scalar PoolNodeCount extends int32;
 
@@ -649,17 +649,12 @@ model PoolProperties {
   computeModel?: PoolComputeModel;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The required desired number of nodes to allocate and assign to the pool. Allowed values are 0 through 16. A value of 0 keeps the pool resource, its read-write designation, and its name, compute configuration, maintenance configuration, and parameter-group association, but allocates no nodes and leaves the cluster without an active read-write node; it does not delete the pool.")
+  @doc("The required number of nodes to allocate and assign to the pool. Allowed values are 1 through 16. To deallocate runtime compute without changing the configured node count, stop the pool.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  desiredNodeCount: PoolNodeCount;
+  nodeCount: PoolNodeCount;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The number of nodes currently allocated and assigned to the pool, regardless of their operational state or the operational state of the pool.")
-  @visibility(Lifecycle.Read)
-  allocatedNodeCount: PoolNodeCount;
-
-  @added(Versions.v2026_10_01_preview)
-  @doc("The required high-availability configuration for the pool. mode must be Disabled when desiredNodeCount is 0 or 1, and must be AnyZone or ZoneRedundant when desiredNodeCount is 2 through 16.")
+  @doc("The required high-availability configuration for the pool. mode must be Disabled when nodeCount is 1, and must be AnyZone or ZoneRedundant when nodeCount is 2 through 16.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   highAvailability: PoolHighAvailability;
 
@@ -691,12 +686,12 @@ model PoolPropertiesForPatchUpdate {
   computeModel?: PoolComputeModelForPatchUpdate;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The desired number of nodes to allocate and assign to the pool. Allowed values are 0 through 16. A value of 0 keeps the pool resource, its read-write designation, and its configuration but allocates no nodes and leaves the cluster without an active read-write node; it does not delete the pool. Omission preserves the current target.")
+  @doc("The number of nodes to allocate and assign to the pool. Allowed values are 1 through 16. Omission preserves the current configured value. To deallocate runtime compute without changing the configured node count, stop the pool.")
   @visibility(Lifecycle.Update)
-  desiredNodeCount?: PoolNodeCount;
+  nodeCount?: PoolNodeCount;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The high-availability configuration to update. Omission preserves the current mode. The service recursively merges omitted PATCH properties with the existing resource before validating the effective desiredNodeCount and mode together.")
+  @doc("The high-availability configuration to update. Omission preserves the current mode. The service recursively merges omitted PATCH properties with the existing resource before validating the effective nodeCount and mode together.")
   @visibility(Lifecycle.Update)
   highAvailability?: PoolHighAvailabilityPatch;
 
@@ -714,7 +709,7 @@ model PoolPropertiesForPatchUpdate {
 @added(Versions.v2026_10_01_preview)
 @doc("The high-availability configuration for a HorizonDB pool.")
 model PoolHighAvailability {
-  @doc("The high-availability mode. Disabled is required when desiredNodeCount is 0 or 1. AnyZone or ZoneRedundant is required when desiredNodeCount is 2 through 16.")
+  @doc("The high-availability mode. Disabled is required when nodeCount is 1. AnyZone or ZoneRedundant is required when nodeCount is 2 through 16.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   mode: PoolHighAvailabilityMode;
 }
@@ -722,7 +717,7 @@ model PoolHighAvailability {
 @added(Versions.v2026_10_01_preview)
 @doc("The high-availability configuration for a HorizonDB pool update.")
 model PoolHighAvailabilityPatch {
-  @doc("The high-availability mode. Omission preserves the current mode before the service validates it with the effective desiredNodeCount.")
+  @doc("The high-availability mode. Omission preserves the current mode before the service validates it with the effective nodeCount.")
   @visibility(Lifecycle.Update)
   mode?: PoolHighAvailabilityMode;
 }
@@ -732,13 +727,13 @@ model PoolHighAvailabilityPatch {
 union PoolHighAvailabilityMode {
   string,
 
-  @doc("High availability is disabled. This mode is valid only when desiredNodeCount is 0 or 1.")
+  @doc("High availability is disabled. This mode is valid only when nodeCount is 1.")
   Disabled: "Disabled",
 
-  @doc("The service may allocate nodes in the same availability zone or across availability zones. This mode is valid only when desiredNodeCount is 2 through 16.")
+  @doc("The service may allocate nodes in the same availability zone or across availability zones. This mode is valid only when nodeCount is 2 through 16.")
   AnyZone: "AnyZone",
 
-  @doc("The service must allocate nodes across availability zones. This mode is valid only when desiredNodeCount is 2 through 16.")
+  @doc("The service must allocate nodes across availability zones. This mode is valid only when nodeCount is 2 through 16.")
   ZoneRedundant: "ZoneRedundant",
 }
 
