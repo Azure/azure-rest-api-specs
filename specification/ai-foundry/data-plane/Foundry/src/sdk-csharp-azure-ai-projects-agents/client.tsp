@@ -1353,7 +1353,9 @@ namespace Azure.AI.Projects {
   // named e.g. `OpenAI.VoiceResponseBaseStatus` to target directly: such names
   // only exist post-emission, invented by the C# emitter for anonymous types.
   // Instead, each property is first retyped (@@alternateType) to a small local
-  // named union declared here, and that local union is the one aliased/namespaced.
+  // named union declared here (keeping the original leaked names so the public
+  // API surface is unchanged other than its namespace), and that local union is
+  // the one namespaced.
   //
   // Several of these properties are spread into a Foundry-local model via
   // `OmitProperties`/`ToolFields` (e.g. VoiceResponseBase spreads
@@ -1365,7 +1367,7 @@ namespace Azure.AI.Projects {
   // sdk-java-azure-ai-agents/client.tsp, which already uses this exact pattern for
   // these same properties.
   // --------------------------------------------------------------------------------
-  union LocalVoiceResponseStatus {
+  union VoiceResponseBaseStatus {
     "completed",
     "cancelled",
     "failed",
@@ -1374,35 +1376,27 @@ namespace Azure.AI.Projects {
   }
   @@alternateType(
     OpenAI.RealtimeResponse.status,
-    LocalVoiceResponseStatus,
+    VoiceResponseBaseStatus,
     "csharp"
   );
-  @@alternateType(
-    LocalVoiceResponseStatus,
-    {
-      identity: "OpenAI.Realtime.RealtimeResponseStatus",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
+  @@clientNamespace(
+    VoiceResponseBaseStatus,
+    "Azure.AI.Projects.Agents",
     "csharp"
   );
 
-  union LocalVoiceResponseOutputModality {
+  union VoiceResponseBaseOutputModality {
     "text",
     "audio",
   }
   @@alternateType(
     OpenAI.RealtimeResponse.output_modalities,
-    LocalVoiceResponseOutputModality[],
+    VoiceResponseBaseOutputModality[],
     "csharp"
   );
-  @@alternateType(
-    LocalVoiceResponseOutputModality,
-    {
-      identity: "OpenAI.Realtime.RealtimeOutputModality",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
+  @@clientNamespace(
+    VoiceResponseBaseOutputModality,
+    "Azure.AI.Projects.Agents",
     "csharp"
   );
 
