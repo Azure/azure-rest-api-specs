@@ -37,35 +37,7 @@ These settings apply only when `--tag=package-preview-2024-04` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2024-04'
 input-file:
-  - Microsoft.KubernetesConfiguration/stable/2023-05-01/extensions.json
-  - Microsoft.KubernetesConfiguration/preview/2024-04-01-preview/fluxconfiguration.json
-  - Microsoft.KubernetesConfiguration/stable/2023-05-01/kubernetesconfiguration.json
-  - Microsoft.KubernetesConfiguration/stable/2023-05-01/operations.json
-suppressions:  
-  - code: ResourceNameRestriction
-    from: fluxconfiguration.json
-    reason: Existing service contract needs to be backward compatible, pattern validation exists in RP.
-  - code: DeleteResponseCodes
-    from: fluxconfiguration.json
-    reason: Existing service contract needs to be backward compatible, force delete does synchronous delete and returns 200.
-  - code: LroLocationHeader
-    from: fluxconfiguration.json
-    reason: Existing service contract needs to be backward compatible, 202 operations return Azure-Async-Operation header.
-  - code: AvoidAdditionalProperties
-    from: fluxconfiguration.json
-    reason: Existing service contract needs to be backward compatible.
-  - code: PatchResponseCodes
-    from: fluxconfiguration.json
-    reason: Existing service contract needs to be backward compatible.
-```
-
-### Tag: package-preview-2024-04-only
-
-These settings apply only when `--tag=package-preview-2024-04-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2024-04-only'
-input-file:
-  - Microsoft.KubernetesConfiguration/preview/2024-04-01-preview/fluxconfiguration.json
+  - preview/2024-04-01-preview/fluxconfiguration.json
 ```
 
 ### Tag: package-2023-05
@@ -74,10 +46,10 @@ These settings apply only when `--tag=package-2023-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2023-05'
 input-file:
-  - Microsoft.KubernetesConfiguration/stable/2023-05-01/extensions.json
-  - Microsoft.KubernetesConfiguration/stable/2023-05-01/fluxconfiguration.json
-  - Microsoft.KubernetesConfiguration/stable/2023-05-01/kubernetesconfiguration.json
-  - Microsoft.KubernetesConfiguration/stable/2023-05-01/operations.json
+  - stable/2023-05-01/extensions.json
+  - stable/2023-05-01/fluxconfiguration.json
+  - stable/2023-05-01/kubernetesconfiguration.json
+  - stable/2023-05-01/operations.json
 ```
 
 ### Tag: package-preview-2023-05
@@ -86,9 +58,9 @@ These settings apply only when `--tag=package-preview-2023-05` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-05'
 input-file:
-  - Microsoft.KubernetesConfiguration/preview/2023-05-01-preview/extensionTypes.json
-  - Microsoft.KubernetesConfiguration/stable/2023-05-01/operations.json
-  - Microsoft.KubernetesConfiguration/common/2023-05-01-preview/definitions.json
+  - preview/2023-05-01-preview/extensionTypes.json
+  - stable/2023-05-01/operations.json
+  - common/2023-05-01-preview/definitions.json
 ```
 
 ### Tag: package-2022-11
@@ -97,10 +69,10 @@ These settings apply only when `--tag=package-2022-11` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-11'
 input-file:
-  - Microsoft.KubernetesConfiguration/stable/2022-11-01/extensions.json
-  - Microsoft.KubernetesConfiguration/stable/2022-11-01/fluxconfiguration.json
-  - Microsoft.KubernetesConfiguration/stable/2022-11-01/kubernetesconfiguration.json
-  - Microsoft.KubernetesConfiguration/stable/2022-11-01/operations.json
+  - stable/2022-11-01/extensions.json
+  - stable/2022-11-01/fluxconfiguration.json
+  - stable/2022-11-01/kubernetesconfiguration.json
+  - stable/2022-11-01/operations.json
 ```
 
 ### Tag: package-2022-07
@@ -109,10 +81,10 @@ These settings apply only when `--tag=package-2022-07` is specified on the comma
 
 ```yaml $(tag) == 'package-2022-07'
 input-file:
-  - Microsoft.KubernetesConfiguration/stable/2022-07-01/extensions.json
-  - Microsoft.KubernetesConfiguration/stable/2022-07-01/fluxconfiguration.json
-  - Microsoft.KubernetesConfiguration/stable/2022-07-01/kubernetesconfiguration.json
-  - Microsoft.KubernetesConfiguration/stable/2022-07-01/operations.json
+  - stable/2022-07-01/extensions.json
+  - stable/2022-07-01/fluxconfiguration.json
+  - stable/2022-07-01/kubernetesconfiguration.json
+  - stable/2022-07-01/operations.json
 ```
 
 ### Tag: package-preview-2022-04
@@ -121,17 +93,17 @@ These settings apply only when `--tag=package-preview-2022-04` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-04'
 input-file:
-  - Microsoft.KubernetesConfiguration/preview/2022-04-02-preview/extensions.json
-  - Microsoft.KubernetesConfiguration/stable/2022-03-01/fluxconfiguration.json
-  - Microsoft.KubernetesConfiguration/stable/2022-03-01/kubernetesconfiguration.json
-  - Microsoft.KubernetesConfiguration/stable/2022-03-01/operations.json
-  - Microsoft.KubernetesConfiguration/preview/2022-04-02-preview/privateLinkScopes.json
+  - preview/2022-04-02-preview/extensions.json
+  - stable/2022-03-01/fluxconfiguration.json
+  - stable/2022-03-01/kubernetesconfiguration.json
+  - stable/2022-03-01/operations.json
+  - preview/2022-04-02-preview/privateLinkScopes.json
 ```
 
 ``` yaml $(tag) == 'package-preview-2022-04-only'
 input-file:
-  - Microsoft.KubernetesConfiguration/preview/2022-04-02-preview/extensions.json
-  - Microsoft.KubernetesConfiguration/preview/2022-04-02-preview/privateLinkScopes.json
+  - preview/2022-04-02-preview/extensions.json
+  - preview/2022-04-02-preview/privateLinkScopes.json
 ```
 
 ### Tag: package-2022-03
@@ -140,10 +112,10 @@ These settings apply only when `--tag=package-2022-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-03'
 input-file:
-  - Microsoft.KubernetesConfiguration/stable/2022-03-01/extensions.json
-  - Microsoft.KubernetesConfiguration/stable/2022-03-01/fluxconfiguration.json
-  - Microsoft.KubernetesConfiguration/stable/2022-03-01/kubernetesconfiguration.json
-  - Microsoft.KubernetesConfiguration/stable/2022-03-01/operations.json
+  - stable/2022-03-01/extensions.json
+  - stable/2022-03-01/fluxconfiguration.json
+  - stable/2022-03-01/kubernetesconfiguration.json
+  - stable/2022-03-01/operations.json
 ```
 
 ### Tag: package-preview-2022-01-15
@@ -152,16 +124,16 @@ These settings apply only when `--tag=package-preview-2022-01-15` is specified o
 
 ``` yaml $(tag) == 'package-preview-2022-01-15'
 input-file:
-  - Microsoft.KubernetesConfiguration/preview/2022-01-15-preview/extensionTypes.json
-  - Microsoft.KubernetesConfiguration/preview/2022-01-01-preview/extensions.json
-  - Microsoft.KubernetesConfiguration/preview/2022-01-01-preview/fluxconfiguration.json
-  - Microsoft.KubernetesConfiguration/preview/2022-01-01-preview/kubernetesconfiguration.json
-  - Microsoft.KubernetesConfiguration/preview/2022-01-01-preview/operations.json
+  - preview/2022-01-15-preview/extensionTypes.json
+  - preview/2022-01-01-preview/extensions.json
+  - preview/2022-01-01-preview/fluxconfiguration.json
+  - preview/2022-01-01-preview/kubernetesconfiguration.json
+  - preview/2022-01-01-preview/operations.json
 ```
 
 ``` yaml $(tag) == 'package-preview-2022-01-15-only'
 input-file:
-  - Microsoft.KubernetesConfiguration/preview/2022-01-15-preview/extensionTypes.json
+  - preview/2022-01-15-preview/extensionTypes.json
 ```
 
 ### Tag: package-preview-2022-01
@@ -170,11 +142,11 @@ These settings apply only when `--tag=package-preview-2022-01` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-01'
 input-file:
-  - Microsoft.KubernetesConfiguration/preview/2022-01-01-preview/extensionTypes.json
-  - Microsoft.KubernetesConfiguration/preview/2022-01-01-preview/extensions.json
-  - Microsoft.KubernetesConfiguration/preview/2022-01-01-preview/fluxconfiguration.json
-  - Microsoft.KubernetesConfiguration/preview/2022-01-01-preview/kubernetesconfiguration.json
-  - Microsoft.KubernetesConfiguration/preview/2022-01-01-preview/operations.json
+  - preview/2022-01-01-preview/extensionTypes.json
+  - preview/2022-01-01-preview/extensions.json
+  - preview/2022-01-01-preview/fluxconfiguration.json
+  - preview/2022-01-01-preview/kubernetesconfiguration.json
+  - preview/2022-01-01-preview/operations.json
 ```
 
 ### Tag: package-preview-2021-11
@@ -183,11 +155,11 @@ These settings apply only when `--tag=package-preview-2021-11` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2021-11'
 input-file:
-  - Microsoft.KubernetesConfiguration/preview/2021-11-01-preview/extensions.json
-  - Microsoft.KubernetesConfiguration/preview/2021-11-01-preview/extensionTypes.json
-  - Microsoft.KubernetesConfiguration/preview/2021-11-01-preview/kubernetesconfiguration.json
-  - Microsoft.KubernetesConfiguration/preview/2021-11-01-preview/fluxconfiguration.json
-  - Microsoft.KubernetesConfiguration/preview/2021-11-01-preview/operations.json
+  - preview/2021-11-01-preview/extensions.json
+  - preview/2021-11-01-preview/extensionTypes.json
+  - preview/2021-11-01-preview/kubernetesconfiguration.json
+  - preview/2021-11-01-preview/fluxconfiguration.json
+  - preview/2021-11-01-preview/operations.json
 ```
 
 ### Tag: package-2021-09
@@ -196,7 +168,7 @@ These settings apply only when `--tag=package-2021-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-09'
 input-file:
-  - Microsoft.KubernetesConfiguration/stable/2021-09-01/extensions.json
+  - stable/2021-09-01/extensions.json
 ```
 
 ---
@@ -251,9 +223,9 @@ These settings apply only when `--tag=package-preview-2021-05` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2021-05'
 input-file:
-  - Microsoft.KubernetesConfiguration/preview/2021-05-01-preview/extensions.json
-  - Microsoft.KubernetesConfiguration/preview/2021-05-01-preview/extensionTypes.json
-  - Microsoft.KubernetesConfiguration/preview/2021-05-01-preview/kubernetesconfiguration.json
+  - preview/2021-05-01-preview/extensions.json
+  - preview/2021-05-01-preview/extensionTypes.json
+  - preview/2021-05-01-preview/kubernetesconfiguration.json
 ```
 
 ### Tag: package-2021-03
@@ -262,7 +234,7 @@ These settings apply only when `--tag=package-2021-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-03'
 input-file:
-  - Microsoft.KubernetesConfiguration/stable/2021-03-01/kubernetesconfiguration.json
+  - stable/2021-03-01/kubernetesconfiguration.json
 ```
 
 ### Tag: package-preview-2020-10
@@ -271,7 +243,7 @@ These settings apply only when `--tag=package-preview-2020-10` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2020-10'
 input-file:
-  - Microsoft.KubernetesConfiguration/preview/2020-10-01-preview/kubernetesconfiguration.json
+  - preview/2020-10-01-preview/kubernetesconfiguration.json
 ```
 
 ### Tag: package-2020-07-01-preview
@@ -280,8 +252,8 @@ These settings apply only when `--tag=package-2020-07-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-07-01-preview'
 input-file:
-  - Microsoft.KubernetesConfiguration/preview/2020-07-01-preview/kubernetesconfiguration.json
-  - Microsoft.KubernetesConfiguration/preview/2020-07-01-preview/extensions.json
+  - preview/2020-07-01-preview/kubernetesconfiguration.json
+  - preview/2020-07-01-preview/extensions.json
 ```
 
 ### Tag: package-2019-11-01-preview
@@ -290,7 +262,7 @@ These settings apply only when `--tag=package-2019-11-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2019-11-01-preview'
 input-file:
-  - Microsoft.KubernetesConfiguration/preview/2019-11-01-preview/kubernetesconfiguration.json
+  - preview/2019-11-01-preview/kubernetesconfiguration.json
 ```
 
 ## Suppression
