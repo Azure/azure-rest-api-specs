@@ -137,6 +137,11 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].patch.parameters[3].schema.properties.sku
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/connections/{connectionName}"].patch.parameters[6].schema.properties.properties
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedComputeDeployments/{deploymentName}"].patch.parameters[5].schema.properties.sku
+  - code: PatchIdentityProperty
+    reason: Managed compute deployment identity is immutable after creation, as confirmed by the service owner, and is marked x-ms-mutability [read, create]. The PatchIdentityProperty rule explicitly permits omitting immutable identity from PATCH.
+    from: cognitiveservices.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedComputeDeployments/{deploymentName}"].patch.parameters[5]
   - code: PatchBodyParametersSchema
     reason: The service requires the top-level properties envelope in a cost control PATCH request while every field inside the patch properties model remains optional.
     where:
