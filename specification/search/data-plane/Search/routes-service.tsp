@@ -519,19 +519,16 @@ interface LegacyIndexes {
       ...acceptHeaderMinimal;
 
       /** The number of items to retrieve. Default is 50, maximum is 1000. */
-      @removed(Versions.v2026_10_01)
       @added(Versions.v2026_05_01_preview)
       @query("$top")
       $top?: int32;
 
       /** The number of items to skip. */
-      @removed(Versions.v2026_10_01)
       @added(Versions.v2026_05_01_preview)
       @query("$skip")
       $skip?: int32;
 
       /** A value that specifies whether to fetch the total count of items. Default is false. */
-      @removed(Versions.v2026_10_01)
       @added(Versions.v2026_05_01_preview)
       @query("$count")
       $count?: boolean;
@@ -555,19 +552,16 @@ interface LegacyIndexes {
       ...selectQuery;
 
       /** The number of items to retrieve. Default is 50, maximum is 1000. */
-      @removed(Versions.v2026_10_01)
       @added(Versions.v2026_05_01_preview)
       @query("$top")
       $top?: int32;
 
       /** The number of items to skip. */
-      @removed(Versions.v2026_10_01)
       @added(Versions.v2026_05_01_preview)
       @query("$skip")
       $skip?: int32;
 
       /** A value that specifies whether to fetch the total count of items. Default is false. */
-      @removed(Versions.v2026_10_01)
       @added(Versions.v2026_05_01_preview)
       @query("$count")
       $count?: boolean;
