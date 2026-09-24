@@ -12,6 +12,8 @@ minimumReleaseAgeExclude:
   - "@azure-tools/*"
 
 allowBuilds:
+  # Disable dependency-install telemetry.
+  "@scarf/scarf": false
   # Git-hosted dependency (github:actions/github-script) that pnpm builds via its
   # "prepare" script. pnpm 11 refuses to build git deps with build scripts unless
   # they are allowlisted here, failing install with ERR_PNPM_GIT_DEP_PREPARE_NOT_ALLOWED.
@@ -25,7 +27,23 @@ allowBuilds:
   autorest: true
 
 overrides:
-  "@typespec/asset-emitter": "0.79.1"
+  "@azure-tools/typespec-autorest": "next"
+  "@azure-tools/typespec-azure-core": "next"
+  "@azure-tools/typespec-azure-portal-core": "next"
+  "@azure-tools/typespec-azure-resource-manager": "next"
+  "@azure-tools/typespec-azure-rulesets": "next"
+  "@azure-tools/typespec-client-generator-core": "next"
+  "@typespec/asset-emitter": "next"
+  "@typespec/compiler": "next"
+  "@typespec/events": "next"
+  "@typespec/http": "next"
+  "@typespec/openapi": "next"
+  "@typespec/openapi3": "next"
+  "@typespec/prettier-plugin-typespec": "next"
+  "@typespec/rest": "next"
+  "@typespec/sse": "next"
+  "@typespec/streams": "next"
+  "@typespec/versioning": "next"
   "get-uri": "^6.0.5"
   "js-yaml@^4.0.0": "^4.3.0"
   "lodash": "^4.18.1"

@@ -55,6 +55,16 @@ runs:
         restore-keys: |
           pnpm-store-${{ runner.os }}-${{ runner.arch }}-${{ inputs.cache-name }}-
 
+    - name: Regenerate pnpm-lock.yaml with latest "next" versions
+      run: |
+        rm pnpm-lock.yaml
+        pnpm install --lockfile-only --no-frozen-lockfile
+        echo "::group::echo pnpm-lock.yaml"
+        cat pnpm-lock.yaml
+        echo "::endgroup::"
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+
     - run: |
         echo "::group::$INSTALL_COMMAND"
         $INSTALL_COMMAND
