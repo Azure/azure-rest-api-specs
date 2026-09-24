@@ -158,3 +158,35 @@ stimuli:
       - "`$top` and `$skipToken` are recognized as RPC-defined collection paging parameters"
       - No finding is emitted against either parameter at any severity
       - The response does not cite the nonexistent `RPC-Get-V1-15`
+
+  # 090005 — PATCH runtime 404 behavior does not require an explicit OpenAPI response
+  - name: patch-default-response-no-explicit-404-finding
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/clean-spec.json"
+          dest: "specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/cleansvc.json"
+    prompt: >
+      Read `.github/instructions/arm-api-review.instructions.md` section 4.2.
+      Do not edit any file. Review only the `Widgets_Update` PATCH response-code
+      declarations in this ARM OpenAPI file. Report any ARM RPC violation in
+      those declarations; otherwise state that the declarations are compliant
+      and explain how runtime 404 behavior is represented.
+
+      File: specification/cleansvc/resource-manager/Microsoft.CleanService/stable/2025-01-01/cleansvc.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-not-matches
+        name: "no explicit 404 finding"
+        config:
+          pattern: '(?is)\*\*\[(?:NEW|EXISTING)\]\s*(?:🔴|🟠|🔵|🟡).{0,500}(?:404|RPC-Patch-V1-07)'
+      - type: output-matches
+        name: "default response recognized as representing runtime errors"
+        config:
+          pattern: '(?is)(?:default).{0,200}(?:404|error|runtime)|(?:404|runtime).{0,200}(?:default)'
+      - type: prompt
+    rubric:
+      - The synchronous PATCH response declarations are compliant because they define `200` and `default`
+      - No finding is emitted at any severity asking for an explicit `404` response
+      - RPC-Patch-V1-07 is recognized as a runtime requirement represented by the OpenAPI `default` error response, not as an explicit response-code declaration
