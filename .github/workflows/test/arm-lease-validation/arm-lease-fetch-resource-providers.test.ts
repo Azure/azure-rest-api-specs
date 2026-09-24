@@ -50,7 +50,11 @@ describe("fetch-resource-providers", () => {
       expect(rps.length).toBeGreaterThan(0);
       expect(rps.every((rp) => rp.rpNamespace && rp.orgName && rp.path)).toBe(true);
       expect(rps.every((rp) => !rp.serviceNames)).toBe(true);
-      expect(rps.some((rp) => rp.rpNamespace === "Microsoft.Storage")).toBe(true);
+      const storage = rps.find((rp) => rp.rpNamespace === "Microsoft.Storage");
+      expect(storage).toBeDefined();
+      expect(storage?.path).toBe(
+        path.join("specification", "storage", "resource-manager", "Microsoft.Storage"),
+      );
       expect(rps.some((rp) => rp.rpNamespace === "Microsoft.Compute")).toBe(false);
     });
   });
