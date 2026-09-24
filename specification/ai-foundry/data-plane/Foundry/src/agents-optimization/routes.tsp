@@ -11,21 +11,12 @@ namespace Azure.AI.Projects;
 @tag("AgentOptimizationJobs")
 interface AgentOptimizationJobs {
   /**
-   * Creates an optimization job and returns the queued job. Honors `Operation-Id` for idempotent retry.
+   * Creates an optimization job and returns the queued job. Honors `Operation-Id` for idempotent retry. Clients poll the URL in `Operation-Location` by using the get operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "The response creates an asynchronously processed job resource; callers poll the returned job with GET rather than polling the create request."
   @summary("Create an agent optimization job")
   @route("agent_optimization_jobs")
-  @post
-  create is FoundryDataPlaneOperation<
-    {
-      ...WithOperationId;
-
-      /** The optimization job inputs. */
-      @body body: AgentOptimizationJobCreate;
-    },
-    JobCreatedResponse<AgentOptimizationJob>
-  >;
+  @pollingOperation(AgentOptimizationJobs.get)
+  create is postJob<AgentOptimizationJob>;
 
   /**
    * Estimates validation-set rows, per-stage model call volumes, and cost bands without submitting the job.
@@ -37,7 +28,7 @@ interface AgentOptimizationJobs {
       /** The inputs to estimate against. */
       @body inputs: AgentOptimizationEstimateInputs;
     },
-    AgentOptimizationEstimateResponse
+    AgentOptimizationEstimateResult
   >;
 
   /**
@@ -99,7 +90,8 @@ interface AgentOptimizationJobCandidates {
       @path jobId: string;
 
       /** Comma-separated list of expand keys. Pass `mutations` to populate mutation `value` fields; omit to receive mutation items containing only `type`. Additional expand keys may be added in future previews. */
-      @query expand?: string;
+      @query(#{ explode: false })
+      expand?: AgentOptimizationCandidateExpand[];
 
       ...AgentOptimizationCandidatePageQueryParameters;
     },
@@ -118,7 +110,6 @@ interface AgentOptimizationJobCandidates {
 
       /** The candidate identifier. */
       @path candidateId: string;
-
     },
     AgentOptimizationCandidate
   >;

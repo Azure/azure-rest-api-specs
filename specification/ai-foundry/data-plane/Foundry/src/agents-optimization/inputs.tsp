@@ -84,10 +84,36 @@ model AgentOptimizationUserConversationSimulationSetInput
   default_simulation_configuration?: UserConversationSimulationConfiguration;
 }
 
+/** Source types supported by optimization evaluation sets. */
+union AgentOptimizationSetSourceType {
+  string,
+
+  @doc("Test cases supplied directly in the optimization request.")
+  inline: "inline",
+
+  @doc("An explicitly versioned registered Foundry dataset.")
+  dataset_reference: "dataset_reference",
+}
+
+/** Base source for a target-completion optimization evaluation set. */
+@discriminator("type")
+model AgentOptimizationTargetCompletionSetSource {
+  @doc("Target-completion source type. Additional types may be added in future API versions.")
+  type: AgentOptimizationSetSourceType;
+}
+
+/** Base source for a user-conversation-simulation optimization evaluation set. */
+@discriminator("type")
+model AgentOptimizationUserConversationSimulationSetSource {
+  @doc("User-conversation-simulation source type. Additional types may be added in future API versions.")
+  type: AgentOptimizationSetSourceType;
+}
+
 /** Supplies single-turn rows directly in the optimization request. */
-model AgentOptimizationTargetCompletionInlineSetSource {
+model AgentOptimizationTargetCompletionInlineSetSource
+  extends AgentOptimizationTargetCompletionSetSource {
   @doc("Inline source discriminator.")
-  type: "inline";
+  type: AgentOptimizationSetSourceType.inline;
 
   @doc("Target-completion test cases.")
   @minItems(1)
@@ -96,9 +122,10 @@ model AgentOptimizationTargetCompletionInlineSetSource {
 }
 
 /** Supplies Evals user-conversation simulation test cases directly in the optimization request. */
-model AgentOptimizationUserConversationSimulationInlineSetSource {
+model AgentOptimizationUserConversationSimulationInlineSetSource
+  extends AgentOptimizationUserConversationSimulationSetSource {
   @doc("Inline source discriminator.")
-  type: "inline";
+  type: AgentOptimizationSetSourceType.inline;
 
   @doc("Conversation test scenarios.")
   @minItems(1)
@@ -106,10 +133,11 @@ model AgentOptimizationUserConversationSimulationInlineSetSource {
   test_cases: UserConversationSimulationTestCase[];
 }
 
-/** References an explicitly versioned registered Foundry dataset. */
-model AgentOptimizationReferenceDatasetSource {
+/** References an explicitly versioned registered Foundry dataset for target-completion evaluation. */
+model AgentOptimizationTargetCompletionReferenceSetSource
+  extends AgentOptimizationTargetCompletionSetSource {
   @doc("Registered dataset source discriminator.")
-  type: "reference";
+  type: AgentOptimizationSetSourceType.dataset_reference;
 
   @doc("Registered dataset name.")
   @minLength(1)
@@ -120,16 +148,19 @@ model AgentOptimizationReferenceDatasetSource {
   version: string;
 }
 
-/** Source for a target-completion optimization evaluation set. */
-union AgentOptimizationTargetCompletionSetSource {
-  inline: AgentOptimizationTargetCompletionInlineSetSource,
-  reference: AgentOptimizationReferenceDatasetSource,
-}
+/** References an explicitly versioned registered Foundry dataset for user-conversation-simulation evaluation. */
+model AgentOptimizationUserConversationSimulationReferenceSetSource
+  extends AgentOptimizationUserConversationSimulationSetSource {
+  @doc("Registered dataset source discriminator.")
+  type: AgentOptimizationSetSourceType.dataset_reference;
 
-/** Source for a user-conversation-simulation optimization evaluation set. */
-union AgentOptimizationUserConversationSimulationSetSource {
-  inline: AgentOptimizationUserConversationSimulationInlineSetSource,
-  reference: AgentOptimizationReferenceDatasetSource,
+  @doc("Registered dataset name.")
+  @minLength(1)
+  name: string;
+
+  @doc("Registered dataset version.")
+  @minLength(1)
+  version: string;
 }
 
 /** A single item in an inline evaluation set. */
@@ -168,10 +199,26 @@ model AgentOptimizationEvaluator {
 @minLength(1)
 scalar AgentOptimizationModelName extends string;
 
-@doc("Identifies the Foundry agent that owns the configuration being optimized.")
+/** Target configuration types supported by optimization jobs. */
+union AgentOptimizationTargetConfigurationType {
+  string,
+
+  @doc("A registered Foundry agent.")
+  foundry_agent: "foundry_agent",
+}
+
+@doc("Base target configuration for an optimization job.")
+@discriminator("type")
 model AgentOptimizationTargetConfiguration {
-  @doc("Target type discriminator.")
-  type: "foundry_agent";
+  @doc("Target configuration type. Additional types may be added in future API versions.")
+  type: AgentOptimizationTargetConfigurationType;
+}
+
+@doc("Identifies the Foundry agent that owns the configuration being optimized.")
+model AgentOptimizationFoundryAgentTargetConfiguration
+  extends AgentOptimizationTargetConfiguration {
+  @doc("Foundry-agent target discriminator.")
+  type: AgentOptimizationTargetConfigurationType.foundry_agent;
 
   @doc("Registered Foundry agent name.")
   @minLength(1)
@@ -220,7 +267,7 @@ model AgentOptimizationBaselineAgentConfiguration {
 
 @doc("The agent attributes and alternative values available to an agent-optimization search.")
 model AgentOptimizationSpace {
-  @doc("Agent attributes the optimizer may change. Defaults to instructions when omitted.")
+  @doc("Agent attributes the optimizer may change. If omitted, the service defaults to instructions.")
   @minItems(1)
   target_attributes?: TargetAttribute[] = #[TargetAttribute.instructions];
 
@@ -231,17 +278,17 @@ model AgentOptimizationSpace {
 
 /** Candidate search settings. */
 model AgentOptimizationCandidateSearchConfiguration {
-  @doc("Maximum number of non-baseline candidates to fully evaluate. Defaults to 2 when omitted.")
+  @doc("Maximum number of non-baseline candidates to fully evaluate. If omitted, the service defaults to 2.")
   @minValue(1)
   @maxValue(200)
   max_candidates?: int32 = 2;
 
-  @doc("Number of training-set rows sampled to screen each proposed candidate before full validation. Defaults to 3 when omitted.")
+  @doc("Number of training-set rows sampled to screen each proposed candidate before full validation. If omitted, the service defaults to 3.")
   @minValue(1)
   @maxValue(100)
   candidate_screening_sample_size?: int32 = 3;
 
-  @doc("Maximum number of consecutive proposed candidates that may fail screening before the search stops early. Defaults to 5 when omitted.")
+  @doc("Maximum number of consecutive proposed candidates that may fail screening before the search stops early. If omitted, the service defaults to 5.")
   @minValue(1)
   @maxValue(50)
   max_consecutive_failed_candidate_screens?: int32 = 5;
@@ -263,26 +310,37 @@ model AgentOptimizationEvaluationConfiguration {
   @doc("Model configuration used by model-based evaluators and conversation simulation.")
   evaluation_model: EvaluationModelConfiguration;
 
-  @doc("Maximum number of target-agent runs executed concurrently during each single-turn evaluation. Defaults to 1 when omitted. Conversation evaluation supports only 1.")
+  @doc("Maximum number of target-agent runs executed concurrently during each single-turn evaluation. If omitted, the service defaults to 1. Conversation evaluation supports only 1.")
   @minValue(1)
   @maxValue(10)
-  max_concurrent_agent_runs?: int32;
+  max_concurrent_agent_runs?: int32 = 1;
+}
+
+/** Optimization job configuration types. */
+union AgentOptimizationConfigurationType {
+  string,
+
+  @doc("Comparative agent optimization.")
+  agent_optimization: "agent_optimization",
+
+  @doc("One-shot prompt optimization.")
+  prompt_optimization: "prompt_optimization",
 }
 
 /** Base model for type-specific optimization configuration. */
 @discriminator("type")
 model AgentOptimizationConfigurationBase {
   @doc("Optimization type discriminator.")
-  type: string;
+  type: AgentOptimizationConfigurationType;
 }
 
 @doc("Configuration for optimizing an agent for measured quality.")
 model AgentOptimizationConfiguration
   extends AgentOptimizationConfigurationBase {
   @doc("Optimization type discriminator.")
-  type: "agent_optimization";
+  type: AgentOptimizationConfigurationType.agent_optimization;
 
-  @doc("Optimization goal. Defaults to improve_quality when omitted.")
+  @doc("Optimization goal. If omitted, the service defaults to improve_quality.")
   goal?: AgentOptimizationGoal = AgentOptimizationGoal.improve_quality;
 
   @doc("Quality measurement configuration.")
@@ -327,7 +385,7 @@ model SteeringPromptOptimizationContext extends OptimizationContext {
 model PromptOptimizationConfiguration
   extends AgentOptimizationConfigurationBase {
   @doc("Optimization type discriminator.")
-  type: "prompt_optimization";
+  type: AgentOptimizationConfigurationType.prompt_optimization;
 
   @doc("Context used to steer prompt optimization. Omitted when no context is supplied.")
   @minItems(1)
@@ -385,8 +443,8 @@ model AgentOptimizationCostEstimate {
   unpriced_stages?: AgentOptimizationStage[];
 }
 
-@doc("Response body for :estimate.")
-model AgentOptimizationEstimateResponse {
+@doc("Result returned when estimating an agent-optimization job.")
+model AgentOptimizationEstimateResult {
   @doc("Estimated model-call counts grouped by optimization stage. Typical values are calibrated expectations and may be fractional.")
   call_counts?: AgentOptimizationStageEstimate;
 

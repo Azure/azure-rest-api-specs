@@ -63,10 +63,10 @@ model AgentOptimizationJobTokenUsage {
   @doc("Sum of input_tokens + output_tokens. Omitted when unmeasured.")
   total_tokens?: int64;
 
-  @doc("Input tokens served from the model's cache. Included in input_tokens and not additive. Defaults to 0 when omitted.")
+  @doc("Input tokens served from the model's cache. Included in input_tokens and not additive. If omitted, the service defaults to 0.")
   cached_tokens?: int64 = 0;
 
-  @doc("Reasoning tokens counted separately by reasoning models. Included in output_tokens and not additive. Defaults to 0 when omitted.")
+  @doc("Reasoning tokens counted separately by reasoning models. Included in output_tokens and not additive. If omitted, the service defaults to 0.")
   reasoning_tokens?: int64 = 0;
 }
 
@@ -79,7 +79,7 @@ model AgentOptimizationJobLatency {
   `model`?: string;
 
   @doc("Average per-call latency, rounded to milliseconds.")
-  avg_latency_ms: int64;
+  avg_latency_ms: FoundryDurationMilliseconds;
 
   @doc("Total number of calls contributing to this entry.")
   call_count: int64;
@@ -96,11 +96,18 @@ model AgentOptimizationResultCandidateSummary {
   @doc("Candidate ID of the highest-scoring candidate for evaluated jobs, or the selected transformed output for non-comparative jobs. Omitted until a candidate has been selected.")
   best_id?: string;
 
-  @doc("Score of the baseline candidate for a comparatively evaluated job. Omitted otherwise and until baseline evaluation completes.")
+  @doc("Normalized score of the baseline candidate from 0.0 to 1.0 for a comparatively evaluated job. Omitted otherwise and until baseline evaluation completes.")
+  @minValue(0.0)
+  @maxValue(1.0)
   baseline_score?: float64;
 
-  @doc("Best score observed for a comparatively evaluated job. Omitted otherwise and until a candidate completes evaluation.")
+  @doc("Best normalized score observed from 0.0 to 1.0 for a comparatively evaluated job. Omitted otherwise and until a candidate completes evaluation.")
+  @minValue(0.0)
+  @maxValue(1.0)
   best_score?: float64;
+
+  @doc("Most recently promoted candidate for the job. Omitted if no candidates have been promoted.")
+  latest_promoted_candidate?: AgentOptimizationCandidatePromotionInfo;
 }
 
 @doc("Partial or terminal result produced by an agent optimization job.")
@@ -123,10 +130,7 @@ model AgentOptimizationJobResult {
 // ---------------------------------------------------------------------------
 
 @doc("Agent optimization job resource — a long-running job that produces candidate changes to a Foundry agent configuration.")
-model AgentOptimizationJob is JobLike<
-  AgentOptimizationJobResult,
-  never
-> {
+model AgentOptimizationJob is JobLike<AgentOptimizationJobResult, never> {
   @doc("Human-readable label. Omitted when no label is needed; it has no uniqueness, routing, or idempotency semantics.")
   @maxLength(256)
   display_name?: string;
@@ -140,6 +144,10 @@ model AgentOptimizationJob is JobLike<
   @doc("Type-specific optimization configuration.")
   optimization_configuration: AgentOptimizationConfigurationBase;
 
+  @doc("Duration for which the job has been running, in milliseconds.")
+  @visibility(Lifecycle.Read)
+  run_duration_milliseconds: FoundryDurationMilliseconds;
+
   @doc("The timestamp when the job was created, represented in Unix time.")
   @visibility(Lifecycle.Read)
   created_at: FoundryTimestamp;
@@ -152,12 +160,3 @@ model AgentOptimizationJob is JobLike<
   @visibility(Lifecycle.Read)
   warnings?: string[];
 }
-
-@doc("Configuration used to create an agent optimization job.")
-model AgentOptimizationJobCreate is PickProperties<
-  AgentOptimizationJob,
-  "display_name"
-    | "target_configuration"
-    | "optimization_model_configuration"
-    | "optimization_configuration"
->;
