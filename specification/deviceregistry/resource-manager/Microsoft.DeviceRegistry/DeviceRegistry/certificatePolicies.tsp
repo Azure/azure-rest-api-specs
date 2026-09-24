@@ -16,7 +16,7 @@ namespace Microsoft.DeviceRegistry;
 @doc("A Certificate Policy resource.")
 @parentResource(CertificateAuthority)
 model CertificatePolicy
-  is Azure.ResourceManager.TrackedResource<CertificatePolicyProperties> {
+  is Azure.ResourceManager.ProxyResource<CertificatePolicyProperties> {
   @doc("The name of the Certificate Policy resource.")
   @minLength(3)
   @maxLength(63)
