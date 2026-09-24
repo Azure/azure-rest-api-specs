@@ -166,31 +166,46 @@ namespace Azure.AI.FineTuning.Sessions;
   "Sort direction by created_at: asc returns oldest objects first; desc returns newest first."
 );
 
-// A public model's preview optionality is not a change to server validation.
-// Keep the tested Python model shape separate from the raw REST model shape.
+// Reuse authoritative REST types whenever their Python shape is compatible.
+// The Loom aliases below are references, not copied model or enum declarations.
+@@clientName(Loom.CheckpointType, "CheckpointType", "python");
+@@clientName(Loom.LossFn, "LossFn", "python");
+@@clientName(Loom.SessionType, "SessionType", "python");
+@@clientName(Loom.StopCriteria, "StopCriteria", "python");
+@@clientName(Loom.ModelInputChunk, "ModelInputChunk", "python");
+@@clientName(Loom.Cursor, "Cursor", "python");
+@@clientName(Loom.Datum, "Datum", "python");
+@@clientName(Loom.Session, "Session", "python");
+@@clientName(Loom.SessionList, "SessionList", "python");
+@@clientName(Loom.CheckpointList, "CheckpointList", "python");
+@@usage(Loom.CheckpointType, Usage.input | Usage.output, "python");
+@@usage(Loom.LossFn, Usage.input | Usage.output, "python");
+@@usage(Loom.SessionType, Usage.input | Usage.output, "python");
+@@usage(Loom.StopCriteria, Usage.input | Usage.output, "python");
+@@usage(Loom.TensorData, Usage.input | Usage.output, "python");
+@@usage(Loom.ModelInputChunk, Usage.input | Usage.output, "python");
+@@usage(Loom.Cursor, Usage.input | Usage.output, "python");
+@@usage(Loom.LossFnConfig, Usage.input | Usage.output, "python");
+@@usage(Loom.Datum, Usage.input | Usage.output, "python");
+@@usage(Loom.ForwardBackwardInput, Usage.input | Usage.output, "python");
+@@usage(Loom.ForwardBackwardRequest, Usage.input | Usage.output, "python");
+@@usage(Loom.ForwardRequest, Usage.input | Usage.output, "python");
+@@usage(Loom.OptimStepRequest, Usage.input | Usage.output, "python");
+@@usage(Loom.Session, Usage.input | Usage.output, "python");
+@@usage(Loom.SessionList, Usage.input | Usage.output, "python");
+@@usage(Loom.CheckpointList, Usage.input | Usage.output, "python");
+@@usage(Loom.SaveCheckpointRequest, Usage.input | Usage.output, "python");
+
+// Only genuine compatibility exceptions use alternate types. Optional Python
+// constructors and legacy result classes are not alternate server contracts.
 @@alternateType(
   Azure.AI.Projects.SessionFineTuning.FineTuningSessionStatus,
   Loom.SessionStatus,
   "python"
 );
 @@alternateType(
-  Azure.AI.Projects.SessionFineTuning.FineTuningSessionType,
-  Loom.SessionType,
-  "python"
-);
-@@alternateType(
   Azure.AI.Projects.SessionFineTuning.FineTuningTrainingType,
   string,
-  "python"
-);
-@@alternateType(
-  Azure.AI.Projects.SessionFineTuning.FineTuningCheckpointType,
-  Loom.CheckpointType,
-  "python"
-);
-@@alternateType(
-  Azure.AI.Projects.SessionFineTuning.FineTuningSession,
-  Loom.Session,
   "python"
 );
 @@alternateType(
@@ -206,16 +221,6 @@ namespace Azure.AI.FineTuning.Sessions;
 @@alternateType(
   Azure.AI.Projects.SessionFineTuning.FineTuningCheckpointInfo,
   Loom.CheckpointInfo,
-  "python"
-);
-@@alternateType(
-  Azure.AI.Projects.SessionFineTuning.FineTuningCheckpointList,
-  Loom.CheckpointList,
-  "python"
-);
-@@alternateType(
-  Azure.AI.Projects.SessionFineTuning.FineTuningSessionList,
-  Loom.SessionList,
   "python"
 );
 @@alternateType(
@@ -249,28 +254,8 @@ namespace Azure.AI.FineTuning.Sessions;
   "python"
 );
 @@alternateType(
-  Azure.AI.Projects.SessionFineTuning.FineTuningStopCriteria,
-  Loom.StopCriteria,
-  "python"
-);
-@@alternateType(
-  Azure.AI.Projects.SessionFineTuning.FineTuningDatum,
-  Loom.Datum,
-  "python"
-);
-@@alternateType(
   Azure.AI.Projects.SessionFineTuning.FineTuningModelInput,
   Loom.ModelInput,
-  "python"
-);
-@@alternateType(
-  Azure.AI.Projects.SessionFineTuning.FineTuningModelInputChunk,
-  Loom.ModelInputChunk,
-  "python"
-);
-@@alternateType(
-  Azure.AI.Projects.SessionFineTuning.FineTuningLossFn,
-  Loom.LossFn,
   "python"
 );
 @@alternateType(
@@ -281,11 +266,6 @@ namespace Azure.AI.FineTuning.Sessions;
 @@alternateType(
   Azure.AI.Projects.SessionFineTuning.FineTuningHeartbeatResponse,
   Loom.HeartbeatResponse,
-  "python"
-);
-@@alternateType(
-  Azure.AI.Projects.SessionFineTuning.FineTuningCursor,
-  Loom.Cursor,
   "python"
 );
 @@alternateType(
@@ -314,48 +294,13 @@ namespace Azure.AI.FineTuning.Sessions;
   "python"
 );
 @@alternateType(
-  Azure.AI.Projects.SessionFineTuning.TensorData,
-  Loom.TensorData,
-  "python"
-);
-@@alternateType(
-  Azure.AI.Projects.SessionFineTuning.LossFnConfig,
-  Loom.LossFnConfig,
-  "python"
-);
-@@alternateType(
   Azure.AI.Projects.SessionFineTuning.LossFnInputs,
   Loom.LossFnInputs,
   "python"
 );
 @@alternateType(
-  Azure.AI.Projects.SessionFineTuning.ForwardBackwardInput,
-  Loom.ForwardBackwardInput,
-  "python"
-);
-@@alternateType(
-  Azure.AI.Projects.SessionFineTuning.ForwardBackwardRequest,
-  Loom.ForwardBackwardRequest,
-  "python"
-);
-@@alternateType(
   Azure.AI.Projects.SessionFineTuning.ForwardInput,
   Loom.ForwardInput,
-  "python"
-);
-@@alternateType(
-  Azure.AI.Projects.SessionFineTuning.ForwardRequest,
-  Loom.ForwardRequest,
-  "python"
-);
-@@alternateType(
-  Azure.AI.Projects.SessionFineTuning.OptimStepRequest,
-  Loom.OptimStepRequest,
-  "python"
-);
-@@alternateType(
-  Azure.AI.Projects.SessionFineTuning.SaveCheckpointRequest,
-  Loom.SaveCheckpointRequest,
   "python"
 );
 @@alternateType(

@@ -1,44 +1,41 @@
-// SDK-only tested preview model projection; not a REST specification.
-// Source inventory: azure/ai/finetuningsessions/models/{_models.py,_enums.py}
-// and azure/ai/finetuningsessions/_types.py in the current target SDK.
-// 36 models, 116 directly declared properties, 7 extensible enums (26 named
-// values), and the StopCriteria union. No handwritten patch-layer types.
-// In particular, ModelInput below is the generated token-only base, not its
-// multimodal override. No FromCheckpoint, ImageChunk, or extra REST models.
+// Python preview compatibility models, not a second service contract.
+// Shared shapes below reference the authoritative REST declarations directly;
+// client.tsp supplies Python names and maps only the compatibility exceptions.
+// Keep this file out of the REST entrypoint. No service or operations are declared.
 //
-// Intended toolchain: Python emitter 0.61.3 / http-client-python 0.28.3 /
-// client-generator-core 0.67.3 / TypeSpec compiler 1.11.0.
-// This file declares no service or operations; client.tsp maps the REST types
-// to these Python-only preview types. The REST service contract is unchanged.
-// All declarations have explicit Python input/output usage for retention.
-// Read-only properties retain Lifecycle.Read; other properties use the
-// default five lifecycle visibilities. Optionality follows annotations and
-// keyword constructors, not prose describing server defaults. No defaults,
-// ranges, patterns, or additional service constraints are inferred here.
-// int32/float64 project Python int/float; exact original widths cannot be
-// recovered from Python annotations. Top-level Optional maps to ?, whereas
-// explicitly nullable list elements retain | null. Known pinned-emitter
-// tuple and nullable-element gaps are implemented in models/_patch.py, with
-// exact customer-visible annotations, constructor overloads, and serializers.
+// Remaining definitions preserve existing constructor requiredness/defaults,
+// legacy result classes, and pinned-emitter representations. They must not be
+// interpreted as server validation or evidence of a server-side default.
+// Multimodal input, checkpoint resume, and nullable tuple results are supported
+// by maintained Python hooks; their generated bases alone are not the full API.
+// The model-by-model rationale is recorded in the SDK generation guide.
+// Toolchain: Python emitter 0.61.3 / http-client-python 0.28.3 / TCGC 0.67.3.
 
 import "@azure-tools/typespec-client-generator-core";
+import "../session-finetuning/models.tsp";
 
 using Azure.ClientGenerator.Core;
 
 @clientNamespace("azure.ai.finetuningsessions", "python")
 namespace Azure.AI.FineTuning.Sessions.Loom;
 
-/** Fine-tuning checkpoint type. */
-@usage(Usage.input | Usage.output, "python")
-union CheckpointType {
-  /** Full training checkpoint (optimizer state + LoRA weights). */
-  training: "training",
-
-  /** Sampler-compatible weights snapshot (no optimizer state). */
-  sampler: "sampler",
-
-  string,
-}
+// Aliases reference the same type graph; no fields or enum values are copied.
+alias CheckpointType = Azure.AI.Projects.SessionFineTuning.FineTuningCheckpointType;
+alias LossFn = Azure.AI.Projects.SessionFineTuning.FineTuningLossFn;
+alias SessionType = Azure.AI.Projects.SessionFineTuning.FineTuningSessionType;
+alias StopCriteria = Azure.AI.Projects.SessionFineTuning.FineTuningStopCriteria;
+alias ModelInputChunk = Azure.AI.Projects.SessionFineTuning.FineTuningModelInputChunk;
+alias Cursor = Azure.AI.Projects.SessionFineTuning.FineTuningCursor;
+alias LossFnConfig = Azure.AI.Projects.SessionFineTuning.LossFnConfig;
+alias Datum = Azure.AI.Projects.SessionFineTuning.FineTuningDatum;
+alias ForwardBackwardInput = Azure.AI.Projects.SessionFineTuning.ForwardBackwardInput;
+alias ForwardBackwardRequest = Azure.AI.Projects.SessionFineTuning.ForwardBackwardRequest;
+alias ForwardRequest = Azure.AI.Projects.SessionFineTuning.ForwardRequest;
+alias OptimStepRequest = Azure.AI.Projects.SessionFineTuning.OptimStepRequest;
+alias Session = Azure.AI.Projects.SessionFineTuning.FineTuningSession;
+alias SessionList = Azure.AI.Projects.SessionFineTuning.FineTuningSessionList;
+alias CheckpointList = Azure.AI.Projects.SessionFineTuning.FineTuningCheckpointList;
+alias SaveCheckpointRequest = Azure.AI.Projects.SessionFineTuning.SaveCheckpointRequest;
 
 /** Type of FoundryFeaturesOptInKeys. */
 @usage(Usage.input | Usage.output, "python")
@@ -60,27 +57,6 @@ union FoundryFeaturesOptInKeys {
 
   /** FINETUNING_SESSIONS_V1_PREVIEW. */
   finetuning_sessions_v1_preview: "FineTuningSessions=V1Preview",
-
-  string,
-}
-
-/** Supported loss functions for forward-backward passes. */
-@usage(Usage.input | Usage.output, "python")
-union LossFn {
-  /** Standard language-model cross-entropy loss. */
-  cross_entropy: "cross_entropy",
-
-  /** REINFORCE-style importance-sampled policy gradient loss. */
-  importance_sampling: "importance_sampling",
-
-  /** PPO (Proximal Policy Optimization) clipped surrogate loss. */
-  ppo: "ppo",
-
-  /** Clipped Importance-Sampled Policy Optimization (CISPO) loss. */
-  cispo: "cispo",
-
-  /** Soft Adaptive Policy Optimization (SAPO) loss. */
-  sapo: "sapo",
 
   string,
 }
@@ -147,22 +123,8 @@ union SessionStatus {
   string,
 }
 
-/** Fine-tuning session type. */
-@usage(Usage.input | Usage.output, "python")
-union SessionType {
-  /** A training session for fine-tuning a model. */
-  training: "training",
-
-  string,
-}
-
-/** Stop criteria: either a list of token IDs or a list of stop strings. */
-@usage(Usage.input | Usage.output, "python")
-union StopCriteria {
-  int32[],
-  string[],
-}
-
+// Compatibility: existing Python keyword constructors require all Adam fields.
+// The REST model instead allows omission and supplies service defaults.
 /** Adam optimizer hyper-parameters. */
 @usage(Usage.input | Usage.output, "python")
 model AdamParams {
@@ -245,13 +207,8 @@ model CheckpointInfo {
   lora_rank?: int32;
 }
 
-/** List of all checkpoints for a session (no pagination). */
-@usage(Usage.input | Usage.output, "python")
-model CheckpointList {
-  /** Checkpoints belonging to the session. */
-  checkpoints: Checkpoint[];
-}
-
+// Compatibility: optional config, legacy ejectable field, and hook-based resume.
+// This preserves construction; it does not relax the server's required config.
 /** Request body for POST /fine_tuning/sessions. */
 @usage(Usage.input | Usage.output, "python")
 model CreateSessionRequest {
@@ -261,7 +218,7 @@ model CreateSessionRequest {
   /** Base model to use for the fine-tuning session. */
   base_model: string;
 
-  /** LoRA adapter config. Rank is fixed server-side for v1; omit to use the server default. */
+  /** LoRA adapter configuration. Optional in this compatibility model; session creation requires a configuration with rank. */
   lora_config?: LoRAConfig;
 
   /** User-provided metadata associated with the session. */
@@ -274,45 +231,10 @@ model CreateSessionRequest {
   training_type?: string;
 }
 
-/** Pagination cursor returned in list responses. */
-@usage(Usage.input | Usage.output, "python")
-model Cursor {
-  /** Zero-based index of the first item in the current page. */
-  offset: int32;
-
-  /** Maximum number of items per page. */
-  limit: int32;
-
-  /** Total number of items across all pages. */
-  total_count: int32;
-}
-
-/** A single training example. */
-@usage(Usage.input | Usage.output, "python")
-model Datum {
-  /** Token-ID input to the model. */
-  model_input: ModelInput;
-
-  /** Loss-function targets, aligned with model_input tokens. */
-  loss_fn_inputs: LossFnInputs;
-}
-
-/** Inner payload for a forward-backward request. */
-@usage(Usage.input | Usage.output, "python")
-model ForwardBackwardInput {
-  /** Training examples to process in the pass. */
-  data: Datum[];
-
-  /** Loss function to apply to the training examples. */
-  loss_fn: LossFn;
-
-  /** Hyper-parameters for the selected loss function. */
-  loss_fn_config?: LossFnConfig;
-}
-
 /**
- * Discriminated union of all async operation results. Returned by GET
- * /fine_tuning/sessions/{sessionId}/operations/{operationId}.
+ * Legacy Python operation-result base retained for existing raw poller APIs.
+ * The service returns request-ID/status envelopes, not this discriminator shape.
+ * Maintained convenience hooks implement the service's request-status polling.
  */
 @usage(Usage.input | Usage.output, "python")
 @discriminator("type")
@@ -354,13 +276,6 @@ model ForwardBackwardOperationResult extends OperationResult {
   metrics?: Record<unknown>;
 }
 
-/** Request body for POST /fine_tuning/sessions/{sessionId}/forward_backward. */
-@usage(Usage.input | Usage.output, "python")
-model ForwardBackwardRequest {
-  /** Training examples and loss configuration for the forward-backward pass. */
-  forward_backward_input: ForwardBackwardInput;
-}
-
 /**
  * Forward-only payload.
  *
@@ -372,13 +287,8 @@ model ForwardBackwardRequest {
 @usage(Usage.input | Usage.output, "python")
 model ForwardInput extends ForwardBackwardInput {}
 
-/** Request body for POST /fine_tuning/sessions/{sessionId}/forward. */
-@usage(Usage.input | Usage.output, "python")
-model ForwardRequest {
-  /** Input data and loss configuration for the forward-only pass. */
-  forward_input: ForwardInput;
-}
-
+// Compatibility: the original Python constructor requires session_id; current
+// service heartbeat responses may omit it. No new REST requirement is implied.
 /** Response from POST /fine_tuning/sessions/{sessionId}/heartbeat. */
 @usage(Usage.input | Usage.output, "python")
 model HeartbeatResponse {
@@ -387,8 +297,8 @@ model HeartbeatResponse {
 }
 
 /**
- * LoRA adapter configuration. `rank` is fixed server-side for v1; omit to use the server
- * default.
+ * LoRA adapter configuration with the existing optional Python constructor fields.
+ * Session creation requires rank; this model does not provide a client-side default.
  */
 @usage(Usage.input | Usage.output, "python")
 model LoRAConfig {
@@ -414,28 +324,7 @@ model LoRAConfig {
   freeze_multi_modal_projector?: boolean;
 }
 
-/** Optional per-loss-function hyper-parameters. */
-@usage(Usage.input | Usage.output, "python")
-model LossFnConfig {
-  /**
-   * PPO (Proximal Policy Optimization) / CISPO (Clipped Importance-Sampled Policy Optimization):
-   * lower clip threshold.
-   */
-  clip_low_threshold?: float64;
-
-  /**
-   * PPO (Proximal Policy Optimization) / CISPO (Clipped Importance-Sampled Policy Optimization):
-   * upper clip threshold.
-   */
-  clip_high_threshold?: float64;
-
-  /** SAPO (Soft Adaptive Policy Optimization): positive advantage temperature. */
-  tau_pos?: float64;
-
-  /** SAPO (Soft Adaptive Policy Optimization): negative advantage temperature. */
-  tau_neg?: float64;
-}
-
+// Compatibility: weights is required by the existing Python constructor.
 /** Per-datum loss function inputs used in forward-backward. */
 @usage(Usage.input | Usage.output, "python")
 model LossFnInputs {
@@ -466,13 +355,6 @@ model ModelInput {
   chunks: ModelInputChunk[];
 }
 
-/** A contiguous block of token IDs forming part of a model input. */
-@usage(Usage.input | Usage.output, "python")
-model ModelInputChunk {
-  /** Sequence of token IDs in this chunk. */
-  tokens: int32[];
-}
-
 /** OptimStepOperationResult. */
 @usage(Usage.input | Usage.output, "python")
 model OptimStepOperationResult extends OperationResult {
@@ -487,13 +369,6 @@ model OptimStepOperationResult extends OperationResult {
 
   /** Metrics reported by the optimizer step. */
   metrics?: Record<float64>;
-}
-
-/** Request body for POST /fine_tuning/sessions/{sessionId}/optim_step. */
-@usage(Usage.input | Usage.output, "python")
-model OptimStepRequest {
-  /** Adam optimizer hyper-parameters to use for this step. */
-  adam_params: AdamParams;
 }
 
 /** A single sampled sequence. */
@@ -575,10 +450,8 @@ model SampleRequest {
    */
   prompt_logprobs?: boolean;
 
-  /** Number of top-k log-probabilities to return per prompt token. 0 = none. Must be between 0 and 20 (default 20). */
-  // The target annotation and keyword constructor require this field;
-  // preserve that shape despite the target docstring describing a default.
-  // These defaults are copied SDK prose, not a newly asserted REST contract.
+  /** Number of top-k log-probabilities per prompt token, from 0 to 20. Zero disables this output. The service defaults to 0 when omitted. */
+  // Compatibility: the existing Python keyword constructor requires this field.
   topk_prompt_logprobs: int32;
 }
 
@@ -617,19 +490,6 @@ model SaveCheckpointOperationResult extends OperationResult {
   path: string;
 }
 
-/** Request body for POST /fine_tuning/sessions/{sessionId}/checkpoint. */
-@usage(Usage.input | Usage.output, "python")
-model SaveCheckpointRequest {
-  /** User-supplied checkpoint identifier. Alphanumeric plus underscores and hyphens; max 255 characters. */
-  path: string;
-
-  /** Training iteration this checkpoint corresponds to. Optional. */
-  step_number?: int32;
-
-  /** Per-step evaluation metrics at checkpoint time. Optional. */
-  metrics?: Record<unknown>;
-}
-
 /** SaveSamplerWeightsOperationResult. */
 @usage(Usage.input | Usage.output, "python")
 model SaveSamplerWeightsOperationResult extends OperationResult {
@@ -654,34 +514,6 @@ model SaveSamplerWeightsRequest {
 
   /** Training step sequence number. */
   seq_id?: int32;
-}
-
-/** Response from GET /fine_tuning/sessions/{sessionId}. */
-@usage(Usage.input | Usage.output, "python")
-model Session {
-  /** Unique identifier for this fine-tuning session. */
-  @visibility(Lifecycle.Read)
-  session_id: string;
-
-  /** The session type. */
-  type: SessionType;
-
-  /** Current lifecycle status of the session. */
-  @visibility(Lifecycle.Read)
-  status: SessionStatus;
-
-  /** Model and adapter configuration associated with this session. */
-  model_data: SessionModelData;
-}
-
-/** Paginated list of fine-tuning sessions. */
-@usage(Usage.input | Usage.output, "python")
-model SessionList {
-  /** Session summaries in the current page. */
-  data: SessionSummary[];
-
-  /** Pagination information for the session list. */
-  cursor: Cursor;
 }
 
 /** Nested model sub-object within a session response. */
@@ -725,9 +557,4 @@ model SessionSummary {
   last_request_time: utcDateTime;
 }
 
-/** A 1-D array of floating-point values serialised for the wire. */
-@usage(Usage.input | Usage.output, "python")
-model TensorData {
-  /** The floating-point values of the tensor. */
-  data: float64[];
-}
+alias TensorData = Azure.AI.Projects.SessionFineTuning.TensorData;
