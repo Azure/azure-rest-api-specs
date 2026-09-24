@@ -81909,11 +81909,13 @@ components:
       properties:
         source_session_id:
           type: string
+          minLength: 1
           maxLength: 255
           pattern: ^[a-zA-Z0-9_-]+$
           description: Identifier of the session containing the source training checkpoint.
         checkpoint_id:
           type: string
+          minLength: 1
           maxLength: 255
           pattern: ^[a-zA-Z0-9_-]+$
           description: Identifier of the training checkpoint within the source session.
@@ -82416,6 +82418,7 @@ components:
       properties:
         path:
           type: string
+          minLength: 1
           maxLength: 255
           pattern: ^[a-zA-Z0-9_-]+$
           description: |-
@@ -82436,6 +82439,7 @@ components:
       properties:
         path:
           type: string
+          minLength: 1
           maxLength: 255
           pattern: ^[a-zA-Z0-9_-]+$
           description: Explicit sampler checkpoint identifier. Required unless both sequence identifiers are supplied.

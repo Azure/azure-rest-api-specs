@@ -480,11 +480,13 @@ model FineTuningCheckpointInfo {
 model FineTuningFromCheckpoint {
   /** Identifier of the session containing the source training checkpoint. */
   @pattern("^[a-zA-Z0-9_-]+$")
+  @minLength(1)
   @maxLength(255)
   source_session_id: string;
 
   /** Identifier of the training checkpoint within the source session. */
   @pattern("^[a-zA-Z0-9_-]+$")
+  @minLength(1)
   @maxLength(255)
   checkpoint_id: string;
 }
@@ -603,6 +605,7 @@ model SaveCheckpointRequest {
    * Alphanumeric plus underscores and hyphens; max 255 characters.
    */
   @pattern("^[a-zA-Z0-9_-]+$")
+  @minLength(1)
   @maxLength(255)
   path: string;
 
@@ -623,6 +626,7 @@ model SaveCheckpointRequest {
 model SaveSamplerWeightsRequest {
   /** Explicit sampler checkpoint identifier. Required unless both sequence identifiers are supplied. */
   @pattern("^[a-zA-Z0-9_-]+$")
+  @minLength(1)
   @maxLength(255)
   path?: string;
 
