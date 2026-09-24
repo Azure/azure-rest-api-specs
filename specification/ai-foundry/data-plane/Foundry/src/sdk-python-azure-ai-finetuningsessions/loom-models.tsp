@@ -227,8 +227,11 @@ model CreateSessionRequest {
   /** Opt the session into idle hibernation. Default False. */
   ejectable?: boolean;
 
-  /** Training SKU type: 'GlobalStandard', 'DatazoneStandard', or 'DeveloperTier'. Default 'GlobalStandard'. */
-  training_type?: string;
+  // Reuse the service property's type, optionality, documentation, and wire name.
+  ...PickProperties<
+    Azure.AI.Projects.SessionFineTuning.CreateFineTuningSessionRequest,
+    "training_type"
+  >;
 }
 
 /**

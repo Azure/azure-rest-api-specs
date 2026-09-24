@@ -203,9 +203,16 @@ namespace Azure.AI.FineTuning.Sessions;
   Loom.SessionStatus,
   "python"
 );
-@@alternateType(
+// An extensible string-backed enum adds discoverability without restricting
+// existing string inputs or injecting a client-side training-tier default.
+@@clientName(
   Azure.AI.Projects.SessionFineTuning.FineTuningTrainingType,
-  string,
+  "TrainingType",
+  "python"
+);
+@@usage(
+  Azure.AI.Projects.SessionFineTuning.FineTuningTrainingType,
+  Usage.input | Usage.output,
   "python"
 );
 @@alternateType(
