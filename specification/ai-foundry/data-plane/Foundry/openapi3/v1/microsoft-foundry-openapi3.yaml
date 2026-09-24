@@ -82177,6 +82177,7 @@ components:
         - type: string
         - type: string
           enum:
+            - created
             - queued
             - running
             - succeeded
@@ -82184,8 +82185,8 @@ components:
       description: |-
         Lifecycle status of a fine-tuning session.
 
-        Uses the canonical fine-tuning job vocabulary for consistency
-        across all API surfaces.
+        Uses the canonical fine-tuning job vocabulary for steady states and
+        includes the initial created state returned during session creation.
     SessionFineTuning.FineTuningSessionSummary:
       type: object
       required:

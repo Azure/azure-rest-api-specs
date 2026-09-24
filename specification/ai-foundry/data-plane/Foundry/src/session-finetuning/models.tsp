@@ -9,11 +9,14 @@ namespace Azure.AI.Projects.SessionFineTuning;
 /**
  * Lifecycle status of a fine-tuning session.
  *
- * Uses the canonical fine-tuning job vocabulary for consistency
- * across all API surfaces.
+ * Uses the canonical fine-tuning job vocabulary for steady states and
+ * includes the initial created state returned during session creation.
  */
 union FineTuningSessionStatus {
   string,
+
+  /** Session creation was accepted and the session is awaiting allocation. */
+  created: "created",
 
   /** Session has been created and is waiting for the GPU engine. */
   queued: "queued",
