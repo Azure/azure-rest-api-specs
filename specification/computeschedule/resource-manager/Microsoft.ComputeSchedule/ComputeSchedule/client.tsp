@@ -374,48 +374,6 @@ using TypeSpec.Versioning;
   "!autorest"
 );
 
-@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
-@doc("Represents a scheduled action resource input for write operations.")
-model ScheduledActionResourceInput {
-  @doc("""
-    The ARM Id of the resource.
-    "subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Compute/virtualMachines/{vmName}"
-    """)
-  resourceId: ValidScheduledActionResourceId;
-
-  @doc("The desired notification settings for the specified resource.")
-  @Azure.ResourceManager.identifiers(#["destination"])
-  notificationSettings?: Array<NotificationProperties>;
-}
-
-@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
-@doc("Request model to attach a list of scheduled action resources.")
-model ResourceAttachRequestInput {
-  @doc("List of resources to be attached/patched")
-  @identifiers(#["resourceId"])
-  resources: Array<ScheduledActionResourceInput>;
-}
-
-@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
-@doc("Request model perform a resource operation in a list of resources")
-model ResourcePatchRequestInput {
-  @doc("The list of resources we watch to patch")
-  @identifiers(#["resourceId"])
-  resources: Array<ScheduledActionResourceInput>;
-}
-
-@@alternateType(
-  ScheduledActions.attachResources::parameters.body,
-  ResourceAttachRequestInput,
-  "javascript"
-);
-
-@@alternateType(
-  ScheduledActions.patchResources::parameters.body,
-  ResourcePatchRequestInput,
-  "javascript"
-);
-
 // =====================================================================
 // Fix: NetworkApiVersion enum members with dashes cause Python SyntaxError
 // (ENUM_2020 - 11 - 01 instead of ENUM_2020_11_01)
