@@ -160,8 +160,8 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
-  Microsoft.HorizonDb.PrivateEndpointConnections.update,
-  "updatePrivateEndpointConnection",
+  Microsoft.HorizonDb.PrivateEndpointConnections.approveOrReject,
+  "approveOrRejectPrivateEndpointConnection",
   "csharp"
 );
 @@clientName(
@@ -253,16 +253,6 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(
   Azure.ResourceManager.PrivateEndpointConnectionUpdate.properties,
-  "HorizonDBPrivateEndpointConnectionPatchProperties",
-  "csharp"
-);
-@@clientName(
-  Microsoft.HorizonDb.PrivateEndpointConnectionForPatchUpdate,
-  "HorizonDBPrivateEndpointConnectionPatch",
-  "csharp"
-);
-@@clientName(
-  Microsoft.HorizonDb.PrivateEndpointConnectionPropertiesForPatchUpdate,
   "HorizonDBPrivateEndpointConnectionPatchProperties",
   "csharp"
 );

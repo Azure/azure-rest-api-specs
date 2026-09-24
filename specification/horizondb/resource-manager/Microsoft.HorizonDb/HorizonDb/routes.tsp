@@ -27,13 +27,13 @@ interface Clusters {
 
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The AutoRest emitter infers final-state-via from polling metadata. Marking this standard ARM PUT as an LRO without polling decorators emits x-ms-long-running-operation while intentionally omitting x-ms-long-running-operation-options."
   @added(Versions.v2026_10_01_preview)
-  @doc("Creates a new HorizonDB cluster or replaces an existing cluster. PointInTimeRestore creates the new Cluster resource and hydrates its service-owned database storage from an available source backup. It does not clone source pools, Pool-scoped endpoints, firewall rules, parameter-group associations, or other child resources. The new Cluster receives its service-generated Cluster-scoped Endpoint named cluster. For point-in-time restore, postgreSqlVersion must be omitted because the service obtains it from backup metadata; all other new-cluster configuration comes from the request or service defaults. For same-location point-in-time restore, creationSourceClusterLocation is optional. For cross-location point-in-time restore, creationSourceClusterLocation is required and must identify the source cluster's Azure location.")
+  @doc("Creates a new HorizonDB cluster or replaces an existing cluster. PointInTimeRestore creates the new Cluster resource and hydrates its service-owned database storage from an available source backup. It does not clone source pools, Pool-scoped endpoints, firewall rules, parameter-group associations, or other child resources. The new Cluster receives its service-generated Cluster-scoped Endpoint named cluster. For restore, postgreSqlVersion must be omitted because the service obtains it from backup metadata; all other new-cluster configuration comes from the request or service defaults. Same-location restore requires and honors pointInTimeUtc and allows creationSourceClusterLocation to be omitted. Cross-location restore requires creationSourceClusterLocation to identify the source cluster's Azure location and requires pointInTimeUtc, but ignores the supplied timestamp and restores the latest available backup. Cross-location responses omit pointInTimeUtc.")
   @sharedRoute
   @Azure.ClientGenerator.Core.Legacy.markAsLro
   @autoRoute
   @armResourceCreateOrUpdate(Cluster)
   @put
-  createOrUpdate is Azure.ResourceManager.Foundations.ArmCreateOperation<
+  createOrReplace is Azure.ResourceManager.Foundations.ArmCreateOperation<
     ResourceInstanceParameters<Cluster>,
     ClusterCreateRequest,
     ClusterReplaceAcceptedResponse | ClusterCreateAcceptedResponse,
@@ -85,6 +85,17 @@ interface Clusters {
   @doc("Lists all HorizonDB clusters in a subscription.")
   listBySubscription is ArmListBySubscription<Cluster>;
 
+  @added(Versions.v2026_10_01_preview)
+  @doc("Triggers failover within the cluster's designated read-write pool. HorizonDB selects the replacement node using the same eligibility and node-selection rules as automatic failover. The request fails with 409 Conflict when the designated pool is not eligible for failover or another conflicting operation is in progress.")
+  @action("failover")
+  failover is ArmResourceActionAsync<
+    Cluster,
+    void,
+    ArmResponse<Cluster>,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = Cluster> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_10_01_preview)
   @doc("Starts a stopped HorizonDB cluster.")
@@ -124,12 +135,12 @@ interface Pools {
   get is ArmResourceRead<Pool>;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("Creates a new HorizonDB pool or updates an existing pool, including its desired node allocation, compute model, or associated parameter group. A pool name can be the same as its parent cluster name. Creating a pool also creates exactly one service-managed Pool-scoped ReadOnly Endpoint representing that Pool and its network boundary. The Endpoint's associatedResourceId identifies the Pool, and the Endpoint cannot outlive or be deleted independently from it. When the first pool is created, the service automatically uses it to host the cluster's read-write node when an eligible node is available. This API version supports at most one pool per cluster; an attempt to create another pool is rejected with 409 Conflict. Every pool must be associated with a parameter group, so parameterGroup, parameterGroupResourceId, and applyMethod are required. applyMethod controls when dynamic parameter changes become effective; static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. Subtype-specific compute constraints are validated before the resource is changed. A request that would leave the pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.")
+  @doc("Creates a new HorizonDB pool or replaces an existing pool, including its node allocation, compute model, high-availability configuration, or associated parameter group. nodeCount and highAvailability.mode are required and have no service defaults. nodeCount must be 1 through 16. Disabled is valid only when nodeCount is 1. AnyZone and ZoneRedundant are valid only when nodeCount is 2 through 16. AnyZone permits same-zone or cross-zone placement, while ZoneRedundant requires nodes to be allocated across availability zones. Node allocation and high-availability reconfiguration are atomic: if all requested nodes or the required zonal topology cannot be provisioned, the long-running operation fails and the previous resource state is preserved. A pool name must differ from its parent cluster name because the Cluster-scoped ReadWrite Endpoint is named after the Cluster and the Pool-scoped ReadOnly Endpoint is named after the Pool; the service rejects a request whose names would collide. Creating a pool also creates exactly one service-managed Pool-scoped ReadOnly Endpoint representing that Pool and its network boundary. The Endpoint's associatedResourceId identifies the Pool, and the Endpoint cannot outlive or be deleted independently from it. When the first pool is created, the service automatically designates it to host the cluster's read-write node when an eligible node is available. This API version supports at most one pool per cluster; an attempt to create another pool is rejected with 409 Conflict. Every pool must be associated with a parameter group, so parameterGroup, parameterGroupResourceId, and applyMethod are required. applyMethod controls when dynamic parameter changes become effective; static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. Subtype-specific compute constraints are validated before the resource is changed.")
   @sharedRoute
   @autoRoute
   @armResourceCreateOrUpdate(Pool)
   @put
-  createOrUpdate is Azure.ResourceManager.Foundations.ArmCreateOperation<
+  createOrReplace is Azure.ResourceManager.Foundations.ArmCreateOperation<
     ResourceInstanceParameters<Pool>,
     Pool,
     HorizonDbResourceUpdatedLroResponse<Pool> | PoolCreateAcceptedResponse,
@@ -137,7 +148,7 @@ interface Pools {
   >;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("Updates an existing HorizonDB pool, including its desired node allocation, selected compute model properties, the compute model type, or its associated parameter group. When parameterGroup is supplied, both parameterGroupResourceId and applyMethod are required. applyMethod controls when dynamic parameter changes become effective; static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. Subtype-specific compute constraints are validated against the recursively merged configuration. A request that would leave the pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.")
+  @doc("Updates an existing HorizonDB pool, including its node allocation, selected compute model properties, compute model type, high-availability configuration, or associated parameter group. Omitted nodeCount and highAvailability.mode values preserve their existing values; the service recursively merges the PATCH before atomically validating the effective tuple. nodeCount, when supplied, must be 1 through 16. Disabled is valid only when the effective nodeCount is 1. AnyZone and ZoneRedundant are valid only when the effective nodeCount is 2 through 16. Therefore, crossing between those node-count ranges requires nodeCount and highAvailability.mode to be changed together. AnyZone permits same-zone or cross-zone placement. Changing from AnyZone to ZoneRedundant may allocate a replacement node in another availability zone and replace a read-only node, disconnecting connections to the replaced node. If all requested nodes or the required zonal topology cannot be provisioned, the long-running operation fails and the previous resource state is preserved. To deallocate runtime compute without changing the configured nodeCount, use the Pool stop action. When parameterGroup is supplied, both parameterGroupResourceId and applyMethod are required. applyMethod controls when dynamic parameter changes become effective; static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. Subtype-specific compute constraints are validated against the recursively merged configuration.")
   update is ArmCustomPatchAsync<
     Pool,
     PoolForPatchUpdate,
@@ -149,7 +160,7 @@ interface Pools {
   list is ArmResourceListByParent<Pool>;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("Starts a stopped HorizonDB pool. Power operations are supported only at pool scope in this API version; there is no cluster-level start action. When the pool transitions from Stopped to Ready, completion applies pending dynamic and static parameter changes. When the pool is already Ready, the operation succeeds as a true idempotent no-op and leaves pending parameter changes pending. The operation is allowed when allocatedNodeCount is 0. After the Pool is running, its Pool-scoped ReadOnly Endpoint routes only when at least one allocated node is not currently playing the read-write role. The request fails with 409 Conflict when another operation is in progress or the pool is in any other incompatible state.")
+  @doc("Starts a stopped HorizonDB pool. Power operations are supported only at pool scope in this API version; there is no cluster-level start action. When the pool transitions from Stopped to Ready, completion applies pending dynamic and static parameter changes. When the pool is already Ready, the operation succeeds as a true idempotent no-op and leaves pending parameter changes pending. The operation is allowed when the pool has no allocated nodes. After the Pool is running, its Pool-scoped ReadOnly Endpoint routes only when at least one allocated node is not currently playing the read-write role. The request fails with 409 Conflict when another operation is in progress or the pool is in any other incompatible state.")
   @action("start")
   start is ArmResourceActionAsyncBase<
     Pool,
@@ -165,7 +176,7 @@ interface Pools {
   >;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("Stops a running HorizonDB pool and deallocates compute. Power operations are supported only at pool scope in this API version; there is no cluster-level stop action. The operation succeeds as an idempotent no-op when the pool is already Stopped. It is allowed when allocatedNodeCount is 0. The Pool-scoped ReadOnly Endpoint remains discoverable but has no routing destination while the Pool is Stopped. The request fails with 409 Conflict when another operation is in progress or the pool is in any other incompatible state.")
+  @doc("Stops a running HorizonDB pool and deallocates compute. Power operations are supported only at pool scope in this API version; there is no cluster-level stop action. The operation succeeds as an idempotent no-op when the pool is already Stopped. It is allowed when the pool has no allocated nodes. The Pool-scoped ReadOnly Endpoint remains discoverable but has no routing destination while the Pool is Stopped. The request fails with 409 Conflict when another operation is in progress or the pool is in any other incompatible state.")
   @action("stop")
   stop is ArmResourceActionAsyncBase<
     Pool,
@@ -181,7 +192,7 @@ interface Pools {
   >;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("Restarts the PostgreSQL container on all allocated nodes in a ready HorizonDB pool and applies pending dynamic and static parameter changes. Power operations are supported only at pool scope in this API version; there is no cluster-level restart action. When allocatedNodeCount is 0, the operation succeeds without restarting any nodes, pending changes are considered applied, parameterGroup.syncStatus becomes InSync, and the resulting configuration applies to nodes allocated later. The request fails with 409 Conflict when another operation is in progress or the pool is in any other incompatible state.")
+  @doc("Restarts the PostgreSQL container on all allocated nodes in a ready HorizonDB pool and applies pending dynamic and static parameter changes. Power operations are supported only at pool scope in this API version; there is no cluster-level restart action. When the pool has no allocated nodes, the operation succeeds without restarting any nodes, pending changes are considered applied, parameterGroup.syncStatus becomes InSync, and the resulting configuration applies to nodes allocated later. The request fails with 409 Conflict when another operation is in progress or the pool is in any other incompatible state.")
   @action("restart")
   restart is ArmResourceActionAsyncBase<
     Pool,
@@ -267,7 +278,7 @@ interface FirewallRules {
   @doc("Creates or replaces a HorizonDB pool firewall rule.")
   @sharedRoute
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+  createOrReplace is ArmResourceCreateOrReplaceAsync<
     FirewallRule,
     LroHeaders = HorizonDbResourceLroHeaders<FirewallRule>,
     Response =
@@ -319,12 +330,12 @@ interface PrivateEndpointConnections {
     PrivateEndpointConnectionResource
   >;
 
+  @doc("Approves or rejects an existing private endpoint connection.")
   @added(Versions.v2026_10_01_preview)
   @sharedRoute
-  update is PrivateEndpointOperations.CustomPatchAsync<
+  approveOrReject is PrivateEndpointOperations.CreateOrReplaceAsync<
     Cluster,
     PrivateEndpointConnectionResource,
-    PrivateEndpointConnectionForPatchUpdate,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = PrivateEndpointConnectionResource> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -332,6 +343,7 @@ interface PrivateEndpointConnections {
   @doc("Approves or rejects a private endpoint connection.")
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_10_01_preview)
+  @sharedRoute
   updateStatus is PrivateEndpointOperations.CreateOrReplaceSync<
     Cluster,
     PrivateEndpointConnectionResource
@@ -365,8 +377,17 @@ interface ParameterGroups {
   get is ArmResourceRead<ParameterGroup>;
 
   @doc("Creates a new HorizonDB parameter group or updates an existing parameter group.")
+  @removed(Versions.v2026_10_01_preview)
+  @renamedFrom(Versions.v2026_10_01_preview, "createOrUpdate")
+  @sharedRoute
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<ParameterGroup>;
+  createOrUpdateLegacy is ArmResourceCreateOrReplaceAsync<ParameterGroup>;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("Creates a new HorizonDB parameter group or replaces an existing parameter group.")
+  @sharedRoute
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrReplace is ArmResourceCreateOrReplaceAsync<ParameterGroup>;
 
   @removed(Versions.v2026_10_01_preview)
   @renamedFrom(Versions.v2026_10_01_preview, "update")
@@ -485,9 +506,9 @@ interface MicrosoftEntraAdministrators {
   @doc("Gets information about a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.")
   get is ArmResourceRead<MicrosoftEntraAdministrator>;
 
-  @doc("Creates or updates a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.")
+  @doc("Creates or replaces a PostgreSQL role that is a member of azure_pg_admin and mapped to a Microsoft Entra principal.")
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
+  createOrReplace is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     MicrosoftEntraAdministrator,
     Request = MicrosoftEntraAdministratorAdd,
     LroHeaders = HorizonDbResourceLroHeaders<MicrosoftEntraAdministrator>,
@@ -512,8 +533,16 @@ interface MicrosoftEntraAdministrators {
   list is ArmResourceListByParent<MicrosoftEntraAdministrator>;
 }
 
+@added(Versions.v2026_10_01_preview)
+@doc("Operations for the service-created authentication methods of a HorizonDB cluster.")
+@armResourceOperations
+interface Authentications {
+  @doc("Lists the two service-created authentication configurations for the cluster: passwordMethod and microsoftEntra.")
+  list is ArmResourceListByParent<Authentication>;
+}
+
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Authentication method instances are service-created with the cluster and cannot be deleted independently."
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-list-operation" "The shared Authentication resource defines the authentications collection list operation and returns both service-created authentication method instances."
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-list-operation" "The Authentications resource operations interface defines the shared authentications collection list operation and returns both service-created authentication method instances."
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-put-operation" "Authentication method instances are service-created with the cluster; customers update an existing instance through PATCH and cannot create additional instances."
 @added(Versions.v2026_10_01_preview)
 @doc("Operations for the service-created PostgreSQL username-and-password authentication method of a HorizonDB cluster.")
@@ -539,14 +568,11 @@ interface PasswordAuthentications {
     ArmResponse<Authentication>,
     ErrorResponse
   >;
-
-  @doc("Lists the two service-created authentication configurations for the cluster: passwordMethod and microsoftEntra.")
-  list is ArmResourceListByParent<Authentication>;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Authentication method instances are service-created with the cluster and cannot be deleted independently."
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-put-operation" "Authentication method instances are service-created with the cluster; customers update an existing instance through PATCH and cannot create additional instances."
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-list-operation" "The shared authentications collection list operation is defined by PasswordAuthentications.list and returns both constrained resource instances."
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-list-operation" "The shared authentications collection list operation is defined by Authentications.list and returns both constrained resource instances."
 @added(Versions.v2026_10_01_preview)
 @doc("Operations for the service-created Microsoft Entra authentication method of a HorizonDB cluster.")
 @armResourceOperations
@@ -571,15 +597,4 @@ interface MicrosoftEntraAuthentications {
     ArmResponse<Authentication>,
     ErrorResponse
   >;
-}
-
-@added(Versions.v2026_10_01_preview)
-@doc("Backup operations for HorizonDB clusters.")
-@armResourceOperations
-interface Backups {
-  @doc("Gets an available backup for a HorizonDB cluster. Expired automatic backups are not available through this operation.")
-  get is ArmResourceRead<Backup>;
-
-  @doc("Lists the backups available for a HorizonDB cluster. Expired automatic backups are omitted.")
-  list is ArmResourceListByParent<Backup>;
 }

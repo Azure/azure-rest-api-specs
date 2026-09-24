@@ -71,7 +71,7 @@ model Cluster is Azure.ResourceManager.TrackedResource<ClusterProperties> {
 @maxLength(63)
 scalar LegacyPoolName extends string;
 
-@doc("A lowercase enforced name as a HorizonDB pool name.")
+@doc("A lowercase enforced name as a HorizonDB pool name. The name must differ from the name of the parent cluster because endpoint names are derived from cluster and pool names.")
 @pattern("^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$")
 @minLength(1)
 @maxLength(63)
@@ -84,8 +84,8 @@ scalar PoolName extends string;
 scalar ProvisionedPoolVCores extends int32;
 
 @added(Versions.v2026_10_01_preview)
-@doc("A HorizonDB pool node count, from 0 through 16.")
-@minValue(0)
+@doc("A HorizonDB pool node count, from 1 through 16.")
+@minValue(1)
 @maxValue(16)
 scalar PoolNodeCount extends int32;
 
@@ -171,23 +171,6 @@ model PrivateLinkResource
   name: string;
 }
 
-@added(Versions.v2026_10_01_preview)
-@doc("Parameters for updating a private endpoint connection.")
-model PrivateEndpointConnectionForPatchUpdate {
-  @doc("The private endpoint connection properties to update.")
-  properties?: PrivateEndpointConnectionPropertiesForPatchUpdate;
-}
-
-@added(Versions.v2026_10_01_preview)
-@doc("Properties for updating a private endpoint connection.")
-model PrivateEndpointConnectionPropertiesForPatchUpdate {
-  @doc("The private endpoint resource.")
-  privateEndpoint?: Azure.ResourceManager.CommonTypes.PrivateEndpoint;
-
-  @doc("Information about the connection state between the service consumer and provider.")
-  privateLinkServiceConnectionState?: Azure.ResourceManager.CommonTypes.PrivateLinkServiceConnectionState;
-}
-
 @renamedFrom(Versions.v2026_10_01_preview, "HorizonDbParameterGroup")
 @doc("Represents the HorizonDB parameter group.")
 model ParameterGroup
@@ -255,20 +238,6 @@ model MicrosoftEntraAuthentication
   name: "microsoftEntra";
 }
 
-@added(Versions.v2026_10_01_preview)
-@doc("Represents an available backup for a HorizonDB cluster.")
-@parentResource(Cluster)
-model Backup is Azure.ResourceManager.ProxyResource<BackupResourceProperties> {
-  @doc("The name of the HorizonDB backup.")
-  @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_.]{0,62}$")
-  @minLength(1)
-  @maxLength(63)
-  @key("backupName")
-  @path
-  @segment("backups")
-  name: string;
-}
-
 @renamedFrom(Versions.v2026_10_01_preview, "HorizonDbClusterProperties")
 @doc("Properties of a HorizonDB cluster.")
 model ClusterProperties {
@@ -313,7 +282,7 @@ model ClusterProperties {
   legacyPointInTime?: utcDateTime;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The requested point in time, in UTC, to restore from. This property is required when creationMode is PointInTimeRestore and must be absent for other creation modes or when creationMode is omitted. The service honors this value for same-location and cross-location restores. This property can only be specified during resource creation.")
+  @doc("The requested point in time, in UTC. This property is required in every PointInTimeRestore request. For a same-location restore, the service restores the latest backup available at or before this value. For a cross-location restore, the service requires but ignores this value and restores the latest available backup; cross-location responses omit this property. This property must be absent for other creation modes or when creationMode is omitted and can only be specified during resource creation.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   pointInTimeUtc?: utcDateTime;
 
@@ -401,7 +370,7 @@ model ClusterProperties {
   provisioningState: ProvisioningState;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The current designated read-write pool and read-write status for the cluster.")
+  @doc("The pool currently designated to host the cluster's read-write node.")
   @visibility(Lifecycle.Read)
   readWritePool: ReadWritePoolProperties;
 
@@ -494,27 +463,11 @@ union HorizonDbComputeModelType {
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("The current zone redundancy status for the read-write node.")
-model ReadWritePoolZoneRedundancyProperties {
-  @doc("The current zone-redundancy protection state for the read-write node. The state is NotProtected when no read-write pool is designated.")
-  @visibility(Lifecycle.Read)
-  state: ZoneRedundancyState;
-
-  @doc("The reason the read-write node is not protected by zone redundancy. This property is present only when state is NotProtected and absent when state is Protected. Valid reasons are that no read-write pool is designated, the designated read-write pool has fewer than two nodes, all nodes in the designated read-write pool are deployed in a single availability zone, or the region does not support availability zones.")
-  @visibility(Lifecycle.Read)
-  unavailableReason?: string;
-}
-
-@added(Versions.v2026_10_01_preview)
-@doc("The current designated read-write pool and read-write status for a HorizonDB cluster. When a pool is created while the cluster currently has no pools, the service automatically designates the new pool as the read-write pool. This behavior also applies after all pools that existed earlier in the cluster's lifetime have been deleted.")
+@doc("The pool currently designated to host a HorizonDB cluster's read-write node. When a pool is created while the cluster currently has no pools, the service automatically designates the new pool as the read-write pool. This behavior also applies after all pools that existed earlier in the cluster's lifetime have been deleted.")
 model ReadWritePoolProperties {
   @doc("The Azure resource ID of the pool designated to host the cluster's read-write node. The pool is a child resource of this cluster. When a pool is created while the cluster currently has no pools, the service automatically sets this property to the new pool's resource ID, including when all pools that existed earlier in the cluster's lifetime were deleted. This property is absent when no pool is designated, such as after clearReadWritePool succeeds.")
   @visibility(Lifecycle.Read)
   designatedPoolResourceId?: PoolResourceId;
-
-  @doc("The current zone redundancy status for the read-write node. This object is always returned on reads. When the read-write node is not protected by zone redundancy, state is NotProtected and unavailableReason explains why.")
-  @visibility(Lifecycle.Read)
-  zoneRedundancy: ReadWritePoolZoneRedundancyProperties;
 }
 
 @added(Versions.v2026_10_01_preview)
@@ -558,18 +511,6 @@ model PoolCreateAcceptedResponse {
   @doc("The HorizonDB pool with a non-terminal provisioning state.")
   @bodyRoot
   body: Pool;
-}
-
-@added(Versions.v2026_10_01_preview)
-@doc("The zone-redundancy protection state of the read-write node.")
-union ZoneRedundancyState {
-  string,
-
-  @doc("The read-write node is protected by zone redundancy.")
-  Protected: "Protected",
-
-  @doc("The read-write node is not protected by zone redundancy. Inspect unavailableReason for details.")
-  NotProtected: "NotProtected",
 }
 
 @renamedFrom(
@@ -708,14 +649,14 @@ model PoolProperties {
   computeModel?: PoolComputeModel;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The desired number of nodes to allocate and assign to the pool. Allowed values are 0 through 16. A value of 0 keeps the pool resource and its name, compute configuration, maintenance configuration, and parameter-group association, but allocates no nodes; it does not delete the pool. A request that would leave a pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.")
+  @doc("The required number of nodes to allocate and assign to the pool. Allowed values are 1 through 16. To deallocate runtime compute without changing the configured node count, stop the pool.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  desiredNodeCount?: PoolNodeCount;
+  nodeCount: PoolNodeCount;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The number of nodes currently allocated and assigned to the pool, regardless of their operational state or the operational state of the pool.")
-  @visibility(Lifecycle.Read)
-  allocatedNodeCount: PoolNodeCount;
+  @doc("The required high-availability configuration for the pool. mode must be Disabled when nodeCount is 1, and must be AnyZone or ZoneRedundant when nodeCount is 2 through 16.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  highAvailability: PoolHighAvailability;
 
   @added(Versions.v2026_10_01_preview)
   @doc("The required default or custom parameter group associated with the pool.")
@@ -745,9 +686,14 @@ model PoolPropertiesForPatchUpdate {
   computeModel?: PoolComputeModelForPatchUpdate;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The desired number of nodes to allocate and assign to the pool. Allowed values are 0 through 16. A value of 0 keeps the pool resource and its configuration but allocates no nodes; it does not delete the pool. Omission preserves the current target. A request that would leave a pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.")
+  @doc("The number of nodes to allocate and assign to the pool. Allowed values are 1 through 16. Omission preserves the current configured value. To deallocate runtime compute without changing the configured node count, stop the pool.")
   @visibility(Lifecycle.Update)
-  desiredNodeCount?: PoolNodeCount;
+  nodeCount?: PoolNodeCount;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The high-availability configuration to update. Omission preserves the current mode. The service recursively merges omitted PATCH properties with the existing resource before validating the effective nodeCount and mode together.")
+  @visibility(Lifecycle.Update)
+  highAvailability?: PoolHighAvailabilityPatch;
 
   @added(Versions.v2026_10_01_preview)
   @doc("The default or custom parameter group to associate with the pool. Omission preserves the current association.")
@@ -758,6 +704,37 @@ model PoolPropertiesForPatchUpdate {
   @doc("The scheduled maintenance configuration to update for the pool. When supplied, the complete configuration for the selected maintenance management type is required. Omission preserves the current configuration.")
   @visibility(Lifecycle.Update)
   scheduledMaintenance?: ScheduledMaintenancePropertiesForPatchUpdate;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The high-availability configuration for a HorizonDB pool.")
+model PoolHighAvailability {
+  @doc("The high-availability mode. Disabled is required when nodeCount is 1. AnyZone or ZoneRedundant is required when nodeCount is 2 through 16.")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
+  mode: PoolHighAvailabilityMode;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The high-availability configuration for a HorizonDB pool update.")
+model PoolHighAvailabilityPatch {
+  @doc("The high-availability mode. Omission preserves the current mode before the service validates it with the effective nodeCount.")
+  @visibility(Lifecycle.Update)
+  mode?: PoolHighAvailabilityMode;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The high-availability mode requested for a HorizonDB pool.")
+union PoolHighAvailabilityMode {
+  string,
+
+  @doc("High availability is disabled. This mode is valid only when nodeCount is 1.")
+  Disabled: "Disabled",
+
+  @doc("The service may allocate nodes in the same availability zone or across availability zones. This mode is valid only when nodeCount is 2 through 16.")
+  AnyZone: "AnyZone",
+
+  @doc("The service must allocate nodes across availability zones. This mode is valid only when nodeCount is 2 through 16.")
+  ZoneRedundant: "ZoneRedundant",
 }
 
 @added(Versions.v2026_10_01_preview)
@@ -1218,7 +1195,12 @@ union HorizonDbClusterEncryptionKeyStatus {
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("The Cluster-level data encryption configuration. For AzureKeyVault encryption, primaryKeyUri and primaryUserAssignedIdentityId are required. When geographically redundant backup is enabled, geoBackupKeyUri and geoBackupUserAssignedIdentityId are also required. Customer-managed key identities must also be assigned to the Cluster through its top-level identity property. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation. For SystemManaged encryption, key and identity properties must be omitted.")
+@doc("A versionless HTTPS Azure Key Vault key URI. The URI must use a supported public or sovereign Azure Key Vault DNS suffix and the path /keys/{key-name}. Key version paths are not supported.")
+@pattern("^https://[A-Za-z0-9-]+[.]vault([.]azure[.]net|[.]usgovcloudapi[.]net|[.]azure[.]cn)/keys/[A-Za-z0-9-]+/?$")
+scalar VersionlessKeyVaultKeyUri extends url;
+
+@added(Versions.v2026_10_01_preview)
+@doc("The Cluster-level data encryption configuration. For AzureKeyVault encryption, primaryKeyUri and primaryUserAssignedIdentityId are required. When geographically redundant backup is enabled, geoBackupKeyUri and geoBackupUserAssignedIdentityId are also required. Customer-managed key identities must also be assigned to the Cluster through its top-level identity property. Only versionless Azure Key Vault key URIs are supported; key version paths are rejected. For SystemManaged encryption, key and identity properties must be omitted.")
 model HorizonDbClusterDataEncryption {
   @added(Versions.v2026_10_01_preview)
   @doc("The type of data encryption used by the cluster.")
@@ -1226,9 +1208,9 @@ model HorizonDbClusterDataEncryption {
   type?: HorizonDbClusterDataEncryptionType;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The Azure Key Vault key URI used to encrypt the cluster's primary storage. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation.")
+  @doc("The versionless Azure Key Vault key URI used to encrypt the cluster's primary storage. Key version paths are not supported.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  primaryKeyUri?: string;
+  primaryKeyUri?: VersionlessKeyVaultKeyUri;
 
   @added(Versions.v2026_10_01_preview)
   @doc("The Azure resource ID of the user-assigned managed identity used to access the primary encryption key. The identity must also be assigned to the Cluster through its top-level identity property.")
@@ -1245,9 +1227,9 @@ model HorizonDbClusterDataEncryption {
   primaryEncryptionKeyStatus?: HorizonDbClusterEncryptionKeyStatus;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The Azure Key Vault key URI used to encrypt geographically redundant backups. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation.")
+  @doc("The versionless Azure Key Vault key URI used to encrypt geographically redundant backups. Key version paths are not supported.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  geoBackupKeyUri?: string;
+  geoBackupKeyUri?: VersionlessKeyVaultKeyUri;
 
   @added(Versions.v2026_10_01_preview)
   @doc("The Azure resource ID of the user-assigned managed identity used to access the geographically redundant backup encryption key. The identity must also be assigned to the Cluster through its top-level identity property.")
@@ -1273,9 +1255,9 @@ model HorizonDbClusterDataEncryptionForPatchUpdate {
   type?: HorizonDbClusterDataEncryptionType;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The Azure Key Vault key URI used to encrypt the cluster's primary storage. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation.")
+  @doc("The versionless Azure Key Vault key URI used to encrypt the cluster's primary storage. Key version paths are not supported.")
   @visibility(Lifecycle.Update)
-  primaryKeyUri?: string;
+  primaryKeyUri?: VersionlessKeyVaultKeyUri;
 
   @added(Versions.v2026_10_01_preview)
   @doc("The Azure resource ID of the user-assigned managed identity used to access the primary encryption key. The identity must also be assigned to the Cluster through its top-level identity property.")
@@ -1287,9 +1269,9 @@ model HorizonDbClusterDataEncryptionForPatchUpdate {
   ]>;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The Azure Key Vault key URI used to encrypt geographically redundant backups. A versionless key URI enables automatic key rotation; a versioned key URI disables automatic key rotation.")
+  @doc("The versionless Azure Key Vault key URI used to encrypt geographically redundant backups. Key version paths are not supported.")
   @visibility(Lifecycle.Update)
-  geoBackupKeyUri?: string;
+  geoBackupKeyUri?: VersionlessKeyVaultKeyUri;
 
   @added(Versions.v2026_10_01_preview)
   @doc("The Azure resource ID of the user-assigned managed identity used to access the geographically redundant backup encryption key. The identity must also be assigned to the Cluster through its top-level identity property.")
@@ -1329,27 +1311,6 @@ model BackupPropertiesForPatchUpdate {
   retentionDays?: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Backups are immutable point-in-time records and do not have a resource provisioning state."
-@added(Versions.v2026_10_01_preview)
-@doc("Properties of an available HorizonDB backup.")
-model BackupResourceProperties {
-  @doc("The date and time when the backup was taken, in UTC.")
-  @visibility(Lifecycle.Read)
-  takenAtUtc: utcDateTime;
-
-  @doc("The PostgreSQL version of the backed-up cluster.")
-  @visibility(Lifecycle.Read)
-  postgreSqlVersion: PostgreSqlVersion;
-
-  @doc("The type of the backup.")
-  @visibility(Lifecycle.Read)
-  backupType: BackupType;
-
-  @doc("The date and time when an automatic backup expires, in UTC. This property can be absent for backup types that do not expire automatically.")
-  @visibility(Lifecycle.Read)
-  expiredAtUtc?: utcDateTime;
-}
-
 @added(Versions.v2026_10_01_preview)
 @doc("Indicates the geo-redundancy state.")
 union GeoRedundancyState {
@@ -1360,15 +1321,6 @@ union GeoRedundancyState {
 
   @doc("Geo-redundancy is disabled")
   Disabled: "Disabled",
-}
-
-@added(Versions.v2026_10_01_preview)
-@doc("The type of a HorizonDB backup. New values may be added over time.")
-union BackupType {
-  string,
-
-  /** A backup created automatically by the HorizonDB service. */
-  System: "System",
 }
 
 @added(Versions.v2026_10_01_preview)

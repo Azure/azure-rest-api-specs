@@ -12,13 +12,27 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/privateLinkResources/default",
-            "name": "default",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/privateLinkResources/example-cluster",
+            "name": "example-cluster",
             "type": "Microsoft.HorizonDb/clusters/privateLinkResources",
             "properties": {
-              "groupId": "default",
+              "groupId": "example-cluster",
               "requiredMembers": [
                 "example-cluster"
+              ],
+              "requiredZoneNames": [
+                "privatelink.horizondb.azure.com"
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/example-resource-group/providers/Microsoft.HorizonDb/clusters/example-cluster/privateLinkResources/example-pool",
+            "name": "example-pool",
+            "type": "Microsoft.HorizonDb/clusters/privateLinkResources",
+            "properties": {
+              "groupId": "example-pool",
+              "requiredMembers": [
+                "example-pool"
               ],
               "requiredZoneNames": [
                 "privatelink.horizondb.azure.com"
