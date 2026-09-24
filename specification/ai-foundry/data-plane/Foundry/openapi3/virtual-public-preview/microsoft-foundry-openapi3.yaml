@@ -45622,22 +45622,8 @@ components:
           format: int32
           minimum: 1
           maximum: 200
-          description: Maximum number of non-baseline candidates to fully evaluate. If omitted, the service defaults to 2.
-          default: 2
-        candidate_screening_sample_size:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 100
-          description: Number of training-set rows sampled to screen each proposed candidate before full validation. If omitted, the service defaults to 3.
-          default: 3
-        max_consecutive_failed_candidate_screens:
-          type: integer
-          format: int32
-          minimum: 1
-          maximum: 50
-          description: Maximum number of consecutive proposed candidates that may fail screening before the search stops early. If omitted, the service defaults to 5.
-          default: 5
+          description: Maximum number of non-baseline candidates to fully evaluate. If omitted, the service defaults to 1.
+          default: 1
       description: Candidate search settings.
     AgentOptimizationCandidateStatus:
       anyOf:

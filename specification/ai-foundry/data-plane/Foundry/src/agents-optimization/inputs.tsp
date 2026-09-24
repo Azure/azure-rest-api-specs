@@ -278,20 +278,10 @@ model AgentOptimizationSpace {
 
 /** Candidate search settings. */
 model AgentOptimizationCandidateSearchConfiguration {
-  @doc("Maximum number of non-baseline candidates to fully evaluate. If omitted, the service defaults to 2.")
+  @doc("Maximum number of non-baseline candidates to fully evaluate. If omitted, the service defaults to 1.")
   @minValue(1)
   @maxValue(200)
-  max_candidates?: int32 = 2;
-
-  @doc("Number of training-set rows sampled to screen each proposed candidate before full validation. If omitted, the service defaults to 3.")
-  @minValue(1)
-  @maxValue(100)
-  candidate_screening_sample_size?: int32 = 3;
-
-  @doc("Maximum number of consecutive proposed candidates that may fail screening before the search stops early. If omitted, the service defaults to 5.")
-  @minValue(1)
-  @maxValue(50)
-  max_consecutive_failed_candidate_screens?: int32 = 5;
+  max_candidates?: int32 = 1;
 }
 
 /** Reusable quality-measurement configuration. */
