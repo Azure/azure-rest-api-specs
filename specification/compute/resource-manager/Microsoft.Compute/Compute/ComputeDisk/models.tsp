@@ -1163,7 +1163,6 @@ model DiskUpdateProperties {
 /**
  * Request body for disk claim operation.
  */
-@clientName("ClaimRequestContent", "csharp")
 @added(Versions.v2026_10_02)
 model ClaimRequest {
   /**
@@ -1175,7 +1174,6 @@ model ClaimRequest {
 /**
  * Request body for disk unclaim operation.
  */
-@clientName("UnclaimRequestContent", "csharp")
 @added(Versions.v2026_10_02)
 model UnclaimRequest {
   /**
