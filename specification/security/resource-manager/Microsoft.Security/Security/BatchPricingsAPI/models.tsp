@@ -46,6 +46,7 @@ model PricingBatchList {
   /**
    * The URI to fetch the next page.
    */
+  @visibility(Lifecycle.Read)
   @nextLink
   nextLink?: url;
 }
