@@ -2,6 +2,7 @@ import { type Suppression } from "@azure-tools/suppressions";
 import { stat } from "node:fs/promises";
 import { type ParseArgsConfig, parseArgs } from "node:util";
 import { type Rule } from "./rule.ts";
+import { runAll } from "./run-all.ts";
 import { ClientTspImportRule } from "./rules/client-tsp-import.ts";
 import { CompileRule } from "./rules/compile.ts";
 import { EmitAutorestRule } from "./rules/emit-autorest.ts";
@@ -80,8 +81,34 @@ export async function main() {
       type: "string",
       short: "c",
     },
+    all: {
+      type: "boolean",
+    },
+    "git-clean": {
+      type: "boolean",
+    },
   };
   const parsedArgs = parseArgs({ args, options, allowPositionals: true } as ParseArgsConfig);
+
+  if (parsedArgs.values["git-clean"] && !parsedArgs.values.all) {
+    console.error("--git-clean requires --all");
+    process.exitCode = 1;
+    return;
+  }
+
+  if (parsedArgs.values.all) {
+    if (parsedArgs.positionals.length > 1) {
+      console.error("Usage: tsv --all [folder] [--git-clean]");
+      process.exitCode = 1;
+      return;
+    }
+    const success = await runAll(parsedArgs.positionals[0] ?? "specification", {
+      gitClean: parsedArgs.values["git-clean"] === true,
+    });
+    if (!success) process.exitCode = 1;
+    return;
+  }
+
   const folder = parsedArgs.positionals[0];
 
   if (parsedArgs.positionals[1]) {
