@@ -66,6 +66,16 @@ export async function validateBreakingChange(context: Context): Promise<number> 
   await context.prInfo?.checkout(context.prInfo.baseBranch);
   oadTracer = setOadBaseBranch(oadTracer, context.prInfo?.baseBranch || context.baseBranch);
 
+  if (isSameVersionBreakingType(context.runType)) {
+    for (const swagger of diffs.deletions) {
+      const headPath = path.resolve(context.localSpecRepoPath, swagger);
+      const basePath = path.join(context.prInfo!.tempRepoFolder, swagger);
+      if (!existsSync(headPath) && existsSync(basePath)) {
+        createDummySwagger(basePath, headPath);
+      }
+    }
+  }
+
   const swaggersToProcess = new Set(
     await excludeSuppressedSwaggers(context, [
       ...diffs.additions,
@@ -132,18 +142,6 @@ export async function validateBreakingChange(context: Context): Promise<number> 
 
   logMessage("The following are deleted swaggers that need to do the comparison: ");
   logMessage(JSON.stringify(needCompareDeletedSwaggers, null, 2));
-
-  logMessage(
-    `Creating dummy files to compare for deleted Swagger files. Count: ${needCompareDeletedSwaggers.length}`,
-  );
-
-  // create a dummy file to compare. if the deleted file exists in base branch
-  for (const f of needCompareDeletedSwaggers) {
-    const baseFilePath = path.join(context.prInfo!.tempRepoFolder, f);
-    if (isSameVersionBreakingType(context.runType)) {
-      createDummySwagger(baseFilePath, path.resolve(f));
-    }
-  }
 
   logMessage(
     `Creating dummy files to compare for new Swagger files in existing API version folders. ` +

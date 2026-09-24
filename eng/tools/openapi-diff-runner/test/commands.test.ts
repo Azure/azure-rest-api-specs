@@ -1,5 +1,6 @@
 import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
+import { mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { devNull } from "node:os";
 import path, { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -421,6 +422,40 @@ describe("validateBreakingChange", () => {
 });
 
 describe("Swagger suppressions", () => {
+  it("uses a PR-head suppression for a deleted Swagger file", async () => {
+    const fixtureRoot = resolve(__dirname, "suppression-fixtures");
+    const deletedSwagger = "specification/contoso/deleted/removed.json";
+    const headSwaggerPath = resolve(fixtureRoot, "head", deletedSwagger);
+    const mockCreateDummySwagger = vi.mocked(createDummySwagger).mockImplementation((_, target) => {
+      mkdirSync(path.dirname(target), { recursive: true });
+      writeFileSync(target, "{}");
+    });
+    const mockRunOad = vi.mocked(runOad).mockResolvedValue([]);
+
+    mockChangedFilesStatuses({ deletions: [deletedSwagger] });
+
+    try {
+      await validateBreakingChange({
+        ...context,
+        localSpecRepoPath: resolve(fixtureRoot, "head"),
+        runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,
+        prInfo: {
+          ...context.prInfo,
+          tempRepoFolder: resolve(fixtureRoot, "base"),
+        },
+      });
+
+      expect(mockCreateDummySwagger).toBeCalledWith(
+        resolve(fixtureRoot, "base", deletedSwagger),
+        headSwaggerPath,
+      );
+      expect(mockRunOad).not.toBeCalled();
+    } finally {
+      rmSync(path.dirname(headSwaggerPath), { recursive: true, force: true });
+      mockCreateDummySwagger.mockReset();
+    }
+  });
+
   it("filters every file in suppressed directories and keeps rule-scoped files", async () => {
     const fixtureRoot = resolve(__dirname, "suppression-fixtures");
     const testContext = {
