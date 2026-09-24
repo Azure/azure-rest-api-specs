@@ -12042,9 +12042,6 @@
         "description": "Create a new fine-tuning session and allocate it to a GPU engine.\nThe response contains a single session identifier and a request identifier\nto poll for session initialization.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
             "name": "Foundry-Features",
             "in": "header",
             "required": true,
@@ -12055,6 +12052,16 @@
                 "FineTuningSessions=V1Preview"
               ]
             }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -12082,7 +12089,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -12101,7 +12108,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -12128,7 +12135,16 @@
         "description": "List fine-tuning sessions in this project using offset-based pagination.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "FineTuningSessions=V1Preview"
+              ]
+            }
           },
           {
             "name": "limit",
@@ -12155,16 +12171,14 @@
             "explode": false
           },
           {
-            "name": "Foundry-Features",
-            "in": "header",
+            "name": "api-version",
+            "in": "query",
             "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "description": "The API version to use for this operation.",
             "schema": {
-              "type": "string",
-              "enum": [
-                "FineTuningSessions=V1Preview"
-              ]
-            }
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -12192,7 +12206,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -12211,7 +12225,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -12229,7 +12243,16 @@
         "description": "Get information about a specific fine-tuning session.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "FineTuningSessions=V1Preview"
+              ]
+            }
           },
           {
             "name": "sessionId",
@@ -12241,16 +12264,14 @@
             }
           },
           {
-            "name": "Foundry-Features",
-            "in": "header",
+            "name": "api-version",
+            "in": "query",
             "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "description": "The API version to use for this operation.",
             "schema": {
-              "type": "string",
-              "enum": [
-                "FineTuningSessions=V1Preview"
-              ]
-            }
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -12278,7 +12299,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -12297,7 +12318,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -12313,7 +12334,16 @@
         "description": "Delete a fine-tuning session and mark its associated resources for cleanup.\nRepeating deletion for an already-deleted session returns HTTP 200.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "FineTuningSessions=V1Preview"
+              ]
+            }
           },
           {
             "name": "sessionId",
@@ -12325,16 +12355,14 @@
             }
           },
           {
-            "name": "Foundry-Features",
-            "in": "header",
+            "name": "api-version",
+            "in": "query",
             "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "description": "The API version to use for this operation.",
             "schema": {
-              "type": "string",
-              "enum": [
-                "FineTuningSessions=V1Preview"
-              ]
-            }
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -12362,7 +12390,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -12381,7 +12409,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -12399,7 +12427,16 @@
         "description": "Save a training checkpoint containing LoRA weights and optimizer state.\nPoll the returned request identifier for the result.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "FineTuningSessions=V1Preview"
+              ]
+            }
           },
           {
             "name": "sessionId",
@@ -12411,16 +12448,14 @@
             }
           },
           {
-            "name": "Foundry-Features",
-            "in": "header",
+            "name": "api-version",
+            "in": "query",
             "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "description": "The API version to use for this operation.",
             "schema": {
-              "type": "string",
-              "enum": [
-                "FineTuningSessions=V1Preview"
-              ]
-            }
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -12448,7 +12483,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -12467,7 +12502,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -12496,7 +12531,16 @@
         "description": "Save sampler-compatible weights without optimizer state for generation.\nPoll the returned request identifier before sampling from the checkpoint.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "FineTuningSessions=V1Preview"
+              ]
+            }
           },
           {
             "name": "sessionId",
@@ -12508,16 +12552,14 @@
             }
           },
           {
-            "name": "Foundry-Features",
-            "in": "header",
+            "name": "api-version",
+            "in": "query",
             "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "description": "The API version to use for this operation.",
             "schema": {
-              "type": "string",
-              "enum": [
-                "FineTuningSessions=V1Preview"
-              ]
-            }
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -12545,7 +12587,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -12564,7 +12606,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -12593,7 +12635,16 @@
         "description": "List all training and sampler checkpoints for this session in a single page.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "FineTuningSessions=V1Preview"
+              ]
+            }
           },
           {
             "name": "sessionId",
@@ -12605,16 +12656,14 @@
             }
           },
           {
-            "name": "Foundry-Features",
-            "in": "header",
+            "name": "api-version",
+            "in": "query",
             "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "description": "The API version to use for this operation.",
             "schema": {
-              "type": "string",
-              "enum": [
-                "FineTuningSessions=V1Preview"
-              ]
-            }
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -12642,7 +12691,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -12661,7 +12710,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -12679,7 +12728,16 @@
         "description": "Get metadata for a specific checkpoint.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "FineTuningSessions=V1Preview"
+              ]
+            }
           },
           {
             "name": "sessionId",
@@ -12700,16 +12758,14 @@
             }
           },
           {
-            "name": "Foundry-Features",
-            "in": "header",
+            "name": "api-version",
+            "in": "query",
             "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "description": "The API version to use for this operation.",
             "schema": {
-              "type": "string",
-              "enum": [
-                "FineTuningSessions=V1Preview"
-              ]
-            }
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -12737,7 +12793,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -12756,7 +12812,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -12774,7 +12830,16 @@
         "description": "Unload a session from the GPU engine, freeing memory.\nUnsaved in-memory LoRA weights are lost; save a checkpoint first.\nPoll the returned request identifier to track completion.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "FineTuningSessions=V1Preview"
+              ]
+            }
           },
           {
             "name": "sessionId",
@@ -12786,16 +12851,14 @@
             }
           },
           {
-            "name": "Foundry-Features",
-            "in": "header",
+            "name": "api-version",
+            "in": "query",
             "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "description": "The API version to use for this operation.",
             "schema": {
-              "type": "string",
-              "enum": [
-                "FineTuningSessions=V1Preview"
-              ]
-            }
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -12823,7 +12886,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -12842,7 +12905,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -12860,7 +12923,16 @@
         "description": "Submit a mini-batch for a forward-only pass without accumulating gradients.\nPoll the returned request identifier for the result.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "FineTuningSessions=V1Preview"
+              ]
+            }
           },
           {
             "name": "sessionId",
@@ -12872,16 +12944,14 @@
             }
           },
           {
-            "name": "Foundry-Features",
-            "in": "header",
+            "name": "api-version",
+            "in": "query",
             "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "description": "The API version to use for this operation.",
             "schema": {
-              "type": "string",
-              "enum": [
-                "FineTuningSessions=V1Preview"
-              ]
-            }
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -12909,7 +12979,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -12928,7 +12998,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -12957,7 +13027,16 @@
         "description": "Submit a mini-batch for a combined forward and backward pass.\nGradients accumulate until an optimizer step is issued.\nPoll the returned request identifier for the result.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "FineTuningSessions=V1Preview"
+              ]
+            }
           },
           {
             "name": "sessionId",
@@ -12969,16 +13048,14 @@
             }
           },
           {
-            "name": "Foundry-Features",
-            "in": "header",
+            "name": "api-version",
+            "in": "query",
             "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "description": "The API version to use for this operation.",
             "schema": {
-              "type": "string",
-              "enum": [
-                "FineTuningSessions=V1Preview"
-              ]
-            }
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -13006,7 +13083,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -13025,7 +13102,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -13054,7 +13131,16 @@
         "description": "Refresh an active session to prevent idle expiry.\nReturns 404 if the session is not found.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "FineTuningSessions=V1Preview"
+              ]
+            }
           },
           {
             "name": "sessionId",
@@ -13066,16 +13152,14 @@
             }
           },
           {
-            "name": "Foundry-Features",
-            "in": "header",
+            "name": "api-version",
+            "in": "query",
             "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "description": "The API version to use for this operation.",
             "schema": {
-              "type": "string",
-              "enum": [
-                "FineTuningSessions=V1Preview"
-              ]
-            }
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -13103,7 +13187,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -13122,7 +13206,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -13140,7 +13224,16 @@
         "description": "Apply accumulated gradients to the LoRA weights using the Adam optimizer.\nPoll the returned request identifier for the result.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "FineTuningSessions=V1Preview"
+              ]
+            }
           },
           {
             "name": "sessionId",
@@ -13152,16 +13245,14 @@
             }
           },
           {
-            "name": "Foundry-Features",
-            "in": "header",
+            "name": "api-version",
+            "in": "query",
             "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "description": "The API version to use for this operation.",
             "schema": {
-              "type": "string",
-              "enum": [
-                "FineTuningSessions=V1Preview"
-              ]
-            }
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -13189,7 +13280,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -13208,7 +13299,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -13237,7 +13328,16 @@
         "description": "Poll a fine-tuning request using its request identifier.\nReturns HTTP 200 with status pending while processing, completed with the\nraw result on success, or failed with error details on failure.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "FineTuningSessions=V1Preview"
+              ]
+            }
           },
           {
             "name": "sessionId",
@@ -13258,16 +13358,14 @@
             }
           },
           {
-            "name": "Foundry-Features",
-            "in": "header",
+            "name": "api-version",
+            "in": "query",
             "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "description": "The API version to use for this operation.",
             "schema": {
-              "type": "string",
-              "enum": [
-                "FineTuningSessions=V1Preview"
-              ]
-            }
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -13295,7 +13393,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -13314,7 +13412,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -13332,7 +13430,16 @@
         "description": "Generate one or more completions from the specified sampler checkpoint.\nThe sampler-weights save request must have completed before sampling.\nPoll the returned request identifier for the result.",
         "parameters": [
           {
-            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "FineTuningSessions=V1Preview"
+              ]
+            }
           },
           {
             "name": "sessionId",
@@ -13354,16 +13461,14 @@
             "explode": false
           },
           {
-            "name": "Foundry-Features",
-            "in": "header",
+            "name": "api-version",
+            "in": "query",
             "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "description": "The API version to use for this operation.",
             "schema": {
-              "type": "string",
-              "enum": [
-                "FineTuningSessions=V1Preview"
-              ]
-            }
+              "type": "string"
+            },
+            "explode": false
           }
         ],
         "responses": {
@@ -13391,7 +13496,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }
@@ -13410,7 +13515,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                  "$ref": "#/components/schemas/ApiErrorResponse"
                 }
               }
             }

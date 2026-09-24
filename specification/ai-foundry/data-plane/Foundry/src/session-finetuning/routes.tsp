@@ -17,10 +17,14 @@ namespace Azure.AI.Projects.SessionFineTuning;
 op FineTuningSessionOperation<
   Params extends Reflection.Model,
   Response
-> is FoundryOperation<
-  Params &
-    WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.finetuning_sessions_v1_preview>,
-  Response
+> is FoundryDataPlaneRequiredPreviewOperation<
+  FoundryFeaturesOptInKeys.finetuning_sessions_v1_preview,
+  Params,
+  Response,
+  ApiErrorResponse & {
+    /** String error code indicating what went wrong. */
+    @header("x-ms-error-code") errorCode?: string;
+  }
 >;
 
 // ─── Fine-tuning sessions ─────────────────────────────────────────────────────

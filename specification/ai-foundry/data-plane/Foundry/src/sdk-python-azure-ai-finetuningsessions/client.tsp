@@ -42,7 +42,7 @@ namespace Azure.AI.FineTuning.Sessions;
 @@clientLocation(Operations.get, "Operations", "python");
 
 @@apiVersion(
-  Azure.Core.Foundations.ApiVersionParameter.apiVersion,
+  Azure.AI.Projects.FoundryDataPlaneApiVersionParameter.apiVersion,
   false,
   "python"
 );
@@ -57,6 +57,14 @@ namespace Azure.AI.FineTuning.Sessions;
 
 // Document shared types only in this Python entrypoint, without changing the
 // shared REST sources or importing this projection into the REST entrypoint.
+@@doc(
+  Azure.AI.Projects.FoundryDataPlaneOperation,
+  "A Foundry operation using the shared API-version parameter and error response contract."
+);
+@@doc(
+  Azure.AI.Projects.FoundryDataPlaneRequiredPreviewOperation,
+  "A Foundry operation requiring the feature opt-in header for its preview area."
+);
 @@doc(
   Azure.AI.Projects.ApiErrorResponse.error,
   "The service error describing why the API request failed."

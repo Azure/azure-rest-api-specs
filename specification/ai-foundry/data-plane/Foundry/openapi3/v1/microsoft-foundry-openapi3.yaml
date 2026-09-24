@@ -8112,7 +8112,6 @@ paths:
         The response contains a single session identifier and a request identifier
         to poll for session initialization.
       parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
         - name: Foundry-Features
           in: header
           required: true
@@ -8121,6 +8120,13 @@ paths:
             type: string
             enum:
               - FineTuningSessions=V1Preview
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
       responses:
         '200':
           description: The request has succeeded.
@@ -8139,7 +8145,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
           headers:
@@ -8151,7 +8157,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - FineTuningSessions
       requestBody:
@@ -8166,7 +8172,14 @@ paths:
       summary: List fine-tuning sessions
       description: List fine-tuning sessions in this project using offset-based pagination.
       parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - FineTuningSessions=V1Preview
         - name: limit
           in: query
           required: false
@@ -8185,14 +8198,13 @@ paths:
             format: int32
             default: 0
           explode: false
-        - name: Foundry-Features
-          in: header
+        - name: api-version
+          in: query
           required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          description: The API version to use for this operation.
           schema:
             type: string
-            enum:
-              - FineTuningSessions=V1Preview
+          explode: false
       responses:
         '200':
           description: The request has succeeded.
@@ -8211,7 +8223,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
           headers:
@@ -8223,7 +8235,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - FineTuningSessions
   /fine_tuning/sessions/{sessionId}:
@@ -8232,13 +8244,6 @@ paths:
       summary: Get a fine-tuning session
       description: Get information about a specific fine-tuning session.
       parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
-        - name: sessionId
-          in: path
-          required: true
-          description: Identifier of the fine-tuning session to retrieve.
-          schema:
-            type: string
         - name: Foundry-Features
           in: header
           required: true
@@ -8247,6 +8252,19 @@ paths:
             type: string
             enum:
               - FineTuningSessions=V1Preview
+        - name: sessionId
+          in: path
+          required: true
+          description: Identifier of the fine-tuning session to retrieve.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
       responses:
         '200':
           description: The request has succeeded.
@@ -8265,7 +8283,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
           headers:
@@ -8277,7 +8295,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - FineTuningSessions
     delete:
@@ -8287,13 +8305,6 @@ paths:
         Delete a fine-tuning session and mark its associated resources for cleanup.
         Repeating deletion for an already-deleted session returns HTTP 200.
       parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
-        - name: sessionId
-          in: path
-          required: true
-          description: Identifier of the fine-tuning session to delete.
-          schema:
-            type: string
         - name: Foundry-Features
           in: header
           required: true
@@ -8302,6 +8313,19 @@ paths:
             type: string
             enum:
               - FineTuningSessions=V1Preview
+        - name: sessionId
+          in: path
+          required: true
+          description: Identifier of the fine-tuning session to delete.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
       responses:
         '200':
           description: The request has succeeded.
@@ -8320,7 +8344,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
           headers:
@@ -8332,7 +8356,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - FineTuningSessions
   /fine_tuning/sessions/{sessionId}/checkpoint:
@@ -8343,13 +8367,6 @@ paths:
         Save a training checkpoint containing LoRA weights and optimizer state.
         Poll the returned request identifier for the result.
       parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
-        - name: sessionId
-          in: path
-          required: true
-          description: Identifier of the fine-tuning session to checkpoint.
-          schema:
-            type: string
         - name: Foundry-Features
           in: header
           required: true
@@ -8358,6 +8375,19 @@ paths:
             type: string
             enum:
               - FineTuningSessions=V1Preview
+        - name: sessionId
+          in: path
+          required: true
+          description: Identifier of the fine-tuning session to checkpoint.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
       responses:
         '200':
           description: The request has succeeded.
@@ -8376,7 +8406,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
           headers:
@@ -8388,7 +8418,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Checkpoints
       requestBody:
@@ -8406,13 +8436,6 @@ paths:
         Save sampler-compatible weights without optimizer state for generation.
         Poll the returned request identifier before sampling from the checkpoint.
       parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
-        - name: sessionId
-          in: path
-          required: true
-          description: Identifier of the fine-tuning session whose sampler weights will be saved.
-          schema:
-            type: string
         - name: Foundry-Features
           in: header
           required: true
@@ -8421,6 +8444,19 @@ paths:
             type: string
             enum:
               - FineTuningSessions=V1Preview
+        - name: sessionId
+          in: path
+          required: true
+          description: Identifier of the fine-tuning session whose sampler weights will be saved.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
       responses:
         '200':
           description: The request has succeeded.
@@ -8439,7 +8475,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
           headers:
@@ -8451,7 +8487,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Checkpoints
       requestBody:
@@ -8467,13 +8503,6 @@ paths:
       summary: List checkpoints
       description: List all training and sampler checkpoints for this session in a single page.
       parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
-        - name: sessionId
-          in: path
-          required: true
-          description: Identifier of the fine-tuning session whose checkpoints will be listed.
-          schema:
-            type: string
         - name: Foundry-Features
           in: header
           required: true
@@ -8482,6 +8511,19 @@ paths:
             type: string
             enum:
               - FineTuningSessions=V1Preview
+        - name: sessionId
+          in: path
+          required: true
+          description: Identifier of the fine-tuning session whose checkpoints will be listed.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
       responses:
         '200':
           description: The request has succeeded.
@@ -8500,7 +8542,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
           headers:
@@ -8512,7 +8554,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Checkpoints
   /fine_tuning/sessions/{sessionId}/checkpoints/{checkpointId}:
@@ -8521,7 +8563,14 @@ paths:
       summary: Get checkpoint info
       description: Get metadata for a specific checkpoint.
       parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - FineTuningSessions=V1Preview
         - name: sessionId
           in: path
           required: true
@@ -8534,14 +8583,13 @@ paths:
           description: Identifier of the checkpoint to retrieve.
           schema:
             type: string
-        - name: Foundry-Features
-          in: header
+        - name: api-version
+          in: query
           required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          description: The API version to use for this operation.
           schema:
             type: string
-            enum:
-              - FineTuningSessions=V1Preview
+          explode: false
       responses:
         '200':
           description: The request has succeeded.
@@ -8560,7 +8608,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
           headers:
@@ -8572,7 +8620,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Checkpoints
   /fine_tuning/sessions/{sessionId}/complete:
@@ -8584,13 +8632,6 @@ paths:
         Unsaved in-memory LoRA weights are lost; save a checkpoint first.
         Poll the returned request identifier to track completion.
       parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
-        - name: sessionId
-          in: path
-          required: true
-          description: Identifier of the fine-tuning session to unload.
-          schema:
-            type: string
         - name: Foundry-Features
           in: header
           required: true
@@ -8599,6 +8640,19 @@ paths:
             type: string
             enum:
               - FineTuningSessions=V1Preview
+        - name: sessionId
+          in: path
+          required: true
+          description: Identifier of the fine-tuning session to unload.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
       responses:
         '200':
           description: The request has succeeded.
@@ -8617,7 +8671,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
           headers:
@@ -8629,7 +8683,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - FineTuningSessions
   /fine_tuning/sessions/{sessionId}/forward:
@@ -8640,13 +8694,6 @@ paths:
         Submit a mini-batch for a forward-only pass without accumulating gradients.
         Poll the returned request identifier for the result.
       parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
-        - name: sessionId
-          in: path
-          required: true
-          description: Identifier of the fine-tuning session that will process the batch.
-          schema:
-            type: string
         - name: Foundry-Features
           in: header
           required: true
@@ -8655,6 +8702,19 @@ paths:
             type: string
             enum:
               - FineTuningSessions=V1Preview
+        - name: sessionId
+          in: path
+          required: true
+          description: Identifier of the fine-tuning session that will process the batch.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
       responses:
         '200':
           description: The request has succeeded.
@@ -8673,7 +8733,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
           headers:
@@ -8685,7 +8745,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Training
       requestBody:
@@ -8704,13 +8764,6 @@ paths:
         Gradients accumulate until an optimizer step is issued.
         Poll the returned request identifier for the result.
       parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
-        - name: sessionId
-          in: path
-          required: true
-          description: Identifier of the fine-tuning session that will process the batch.
-          schema:
-            type: string
         - name: Foundry-Features
           in: header
           required: true
@@ -8719,6 +8772,19 @@ paths:
             type: string
             enum:
               - FineTuningSessions=V1Preview
+        - name: sessionId
+          in: path
+          required: true
+          description: Identifier of the fine-tuning session that will process the batch.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
       responses:
         '200':
           description: The request has succeeded.
@@ -8737,7 +8803,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
           headers:
@@ -8749,7 +8815,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Training
       requestBody:
@@ -8767,13 +8833,6 @@ paths:
         Refresh an active session to prevent idle expiry.
         Returns 404 if the session is not found.
       parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
-        - name: sessionId
-          in: path
-          required: true
-          description: Identifier of the fine-tuning session to keep active.
-          schema:
-            type: string
         - name: Foundry-Features
           in: header
           required: true
@@ -8782,6 +8841,19 @@ paths:
             type: string
             enum:
               - FineTuningSessions=V1Preview
+        - name: sessionId
+          in: path
+          required: true
+          description: Identifier of the fine-tuning session to keep active.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
       responses:
         '200':
           description: The request has succeeded.
@@ -8800,7 +8872,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
           headers:
@@ -8812,7 +8884,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - FineTuningSessions
   /fine_tuning/sessions/{sessionId}/optim_step:
@@ -8823,13 +8895,6 @@ paths:
         Apply accumulated gradients to the LoRA weights using the Adam optimizer.
         Poll the returned request identifier for the result.
       parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
-        - name: sessionId
-          in: path
-          required: true
-          description: Identifier of the fine-tuning session whose weights will be updated.
-          schema:
-            type: string
         - name: Foundry-Features
           in: header
           required: true
@@ -8838,6 +8903,19 @@ paths:
             type: string
             enum:
               - FineTuningSessions=V1Preview
+        - name: sessionId
+          in: path
+          required: true
+          description: Identifier of the fine-tuning session whose weights will be updated.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
       responses:
         '200':
           description: The request has succeeded.
@@ -8856,7 +8934,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
           headers:
@@ -8868,7 +8946,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Training
       requestBody:
@@ -8887,7 +8965,14 @@ paths:
         Returns HTTP 200 with status pending while processing, completed with the
         raw result on success, or failed with error details on failure.
       parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - FineTuningSessions=V1Preview
         - name: sessionId
           in: path
           required: true
@@ -8900,14 +8985,13 @@ paths:
           description: Request identifier returned when the work was submitted.
           schema:
             type: string
-        - name: Foundry-Features
-          in: header
+        - name: api-version
+          in: query
           required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          description: The API version to use for this operation.
           schema:
             type: string
-            enum:
-              - FineTuningSessions=V1Preview
+          explode: false
       responses:
         '200':
           description: The request has succeeded.
@@ -8926,7 +9010,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
           headers:
@@ -8938,7 +9022,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Operations
   /fine_tuning/sessions/{sessionId}/sample:
@@ -8950,7 +9034,14 @@ paths:
         The sampler-weights save request must have completed before sampling.
         Poll the returned request identifier for the result.
       parameters:
-        - $ref: '#/components/parameters/Azure.Core.Foundations.ApiVersionParameter'
+        - name: Foundry-Features
+          in: header
+          required: true
+          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          schema:
+            type: string
+            enum:
+              - FineTuningSessions=V1Preview
         - name: sessionId
           in: path
           required: true
@@ -8964,14 +9055,13 @@ paths:
           schema:
             type: string
           explode: false
-        - name: Foundry-Features
-          in: header
+        - name: api-version
+          in: query
           required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
+          description: The API version to use for this operation.
           schema:
             type: string
-            enum:
-              - FineTuningSessions=V1Preview
+          explode: false
       responses:
         '200':
           description: The request has succeeded.
@@ -8990,7 +9080,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
         5XX:
           description: Server error
           headers:
@@ -9002,7 +9092,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
+                $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Sampling
       requestBody:
