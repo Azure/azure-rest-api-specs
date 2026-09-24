@@ -1,0 +1,94 @@
+{
+  "title": "Evaluators_createVersion_Rubric",
+  "operationId": "Evaluators_createVersion",
+  "parameters": {
+    "api-version": "v1",
+    "name": "customer_support_quality_rubric",
+    "body": {
+      "display_name": "Customer Support Quality Rubric",
+      "description": "Rubric evaluator scoring customer-support responses across task, accuracy, and helpfulness dimensions.",
+      "evaluator_type": "custom",
+      "categories": [
+        "quality"
+      ],
+      "supported_evaluation_levels": [
+        "turn"
+      ],
+      "metadata": {
+        "owner": "eval-platform"
+      },
+      "definition": {
+        "type": "rubric",
+        "pass_threshold": 0.5,
+        "dimensions": [
+          {
+            "id": "task_completion",
+            "description": "The response fully accomplishes the user's requested task.",
+            "weight": 8
+          },
+          {
+            "id": "factual_accuracy",
+            "description": "The response is factually correct and free of hallucination.",
+            "weight": 3
+          },
+          {
+            "id": "helpfulness",
+            "description": "The response is clear, relevant, and useful to the user.",
+            "weight": 2
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "display_name": "Customer Support Quality Rubric",
+        "description": "Rubric evaluator scoring customer-support responses across task, accuracy, and helpfulness dimensions.",
+        "evaluator_type": "custom",
+        "categories": [
+          "quality"
+        ],
+        "supported_evaluation_levels": [
+          "turn"
+        ],
+        "metadata": {
+          "owner": "eval-platform"
+        },
+        "definition": {
+          "type": "rubric",
+          "pass_threshold": 0.5,
+          "dimensions": [
+            {
+              "id": "task_completion",
+              "description": "The response fully accomplishes the user's requested task.",
+              "weight": 8
+            },
+            {
+              "id": "factual_accuracy",
+              "description": "The response is factually correct and free of hallucination.",
+              "weight": 3
+            },
+            {
+              "id": "helpfulness",
+              "description": "The response is clear, relevant, and useful to the user.",
+              "weight": 2
+            },
+            {
+              "id": "general_quality",
+              "description": "Overall residual quality not captured by the other dimensions.",
+              "weight": 1,
+              "always_applicable": true
+            }
+          ]
+        },
+        "created_by": "user@contoso.com",
+        "created_at": 1759999990,
+        "modified_at": 1759999992,
+        "id": "azureai://accounts/account_1/projects/project_1/evaluators/customer_support_quality_rubric/versions/1",
+        "name": "customer_support_quality_rubric",
+        "version": "1"
+      }
+    }
+  }
+}
