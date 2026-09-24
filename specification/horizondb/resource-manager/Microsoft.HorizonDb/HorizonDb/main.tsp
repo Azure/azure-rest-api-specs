@@ -8,6 +8,7 @@ import "./client.tsp";
 
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
+using Azure.Core;
 
 /**
  * Azure Resource Provider API for managing HorizonDB clusters, pools, replicas, and firewall rules
@@ -20,10 +21,12 @@ namespace Microsoft.HorizonDb;
 
 @doc("The available API versions.")
 enum Versions {
-  /**
-   * The 2026-01-20-preview API version.
-   */
+  @doc("The 2026-01-20-preview API version.")
   v2026_01_20_preview: "2026-01-20-preview",
+
+  @doc("The 2026-05-01-preview API version.")
+  @previewVersion
+  v2026_05_01_preview: "2026-05-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

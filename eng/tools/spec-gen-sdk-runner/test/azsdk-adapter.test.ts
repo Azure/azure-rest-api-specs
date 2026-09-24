@@ -1,9 +1,11 @@
 import { describe, expect, test } from "vitest";
 import {
   type AzsdkBuildResponse,
+  type AzsdkDetectBreakingChangeResponse,
   type AzsdkGenerateResponse,
   type AzsdkPackResponse,
   buildExecutionReport,
+  getBreakingChangeSignal,
   parseAzsdkResponse,
 } from "../src/azsdk-adapter.ts";
 import { type EmitterCheckResult } from "../src/emitter-check.ts";
@@ -238,5 +240,49 @@ describe("buildExecutionReport", () => {
     };
     const report = buildExecutionReport(succeededGenerate, undefined, emitter);
     expect(report.packages[0].packageName).toBe("test-package");
+  });
+});
+
+describe("getBreakingChangeSignal", () => {
+  test("returns true when result reports a breaking change", () => {
+    const response: AzsdkDetectBreakingChangeResponse = {
+      result: { hasBreakingChange: true, breakingChanges: [], changes: "# changes" },
+    };
+    expect(getBreakingChangeSignal(response)).toBe(true);
+  });
+
+  test("returns false when result reports no breaking change", () => {
+    const response: AzsdkDetectBreakingChangeResponse = {
+      result: { hasBreakingChange: false },
+    };
+    expect(getBreakingChangeSignal(response)).toBe(false);
+  });
+
+  test("returns undefined when result is the string 'failed'", () => {
+    expect(getBreakingChangeSignal({ result: "failed" })).toBeUndefined();
+  });
+
+  test("returns undefined when response_error is set", () => {
+    const response: AzsdkDetectBreakingChangeResponse = {
+      result: { hasBreakingChange: true },
+      response_error: "boom",
+    };
+    expect(getBreakingChangeSignal(response)).toBeUndefined();
+  });
+
+  test("returns undefined when response_errors is non-empty", () => {
+    const response: AzsdkDetectBreakingChangeResponse = {
+      result: { hasBreakingChange: false },
+      response_errors: ["boom"],
+    };
+    expect(getBreakingChangeSignal(response)).toBeUndefined();
+  });
+
+  test("returns undefined when result object omits hasBreakingChange", () => {
+    expect(getBreakingChangeSignal({ result: { changes: "# changes" } })).toBeUndefined();
+  });
+
+  test("returns undefined when there is no result", () => {
+    expect(getBreakingChangeSignal({})).toBeUndefined();
   });
 });

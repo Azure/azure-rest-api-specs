@@ -8,6 +8,11 @@ options:
     namespace: "Azure.ResourceManager.AppService"
     emitter-output-dir: "{output-dir}/sdk/websites/{namespace}"
     enable-wire-path-attribute: true
+    api-version: "2026-03-15"
+  "@azure-typespec/http-client-csharp-provisioning":
+    namespace: "Azure.Provisioning.AppService"
+    emitter-output-dir: "{output-dir}/sdk/websites/{namespace}"
+    api-version: "2025-03-01"
   "@azure-tools/typespec-autorest":
     omit-unreachable-types: true
     emitter-output-dir: "{project-root}"
@@ -51,7 +56,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/appservice"
     emitter-output-dir: "{output-dir}/{service-dir}/armappservice"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armappservice/v6"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armappservice"
     fix-const-stuttering: false
     flavor: "azure"
     generate-samples: true

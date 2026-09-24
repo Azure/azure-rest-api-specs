@@ -5450,6 +5450,7 @@ model UtilizationAggregates {
 /**
  * Savings plan patch request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SavingsPlanUpdateRequest {
   /**
    * Savings plan patch request
@@ -7794,6 +7795,7 @@ model RenewPropertiesResponse {
 /**
  * The request for reservation purchase
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ReservationPurchaseRequest {
   /**
    * The name of sku
@@ -8878,6 +8880,7 @@ model RecipientTransferProperties {
 /**
  * Result of transfer validation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ValidateTransferListResponse {
   /**
    * The list of transfer validation results.

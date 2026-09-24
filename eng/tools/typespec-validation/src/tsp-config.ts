@@ -3,7 +3,7 @@ import * as z from "zod";
 
 const TspConfigSchema = z
   .object({
-    emit: z.array(z.string()).optional(),
+    emit: z.array(z.string()).nullish(),
     options: z
       .looseObject({
         "@azure-tools/typespec-autorest": z

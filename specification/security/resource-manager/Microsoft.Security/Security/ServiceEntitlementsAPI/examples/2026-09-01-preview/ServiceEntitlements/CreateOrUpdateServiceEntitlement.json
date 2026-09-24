@@ -1,0 +1,57 @@
+{
+  "operationId": "ServiceEntitlements_CreateOrUpdate",
+  "title": "Creates or updates a service entitlement",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "resourceGroupName": "myResourceGroup",
+    "serviceEntitlementName": "myserviceentitlement1",
+    "resource": {
+      "location": "eastus",
+      "tags": {
+        "environment": "test"
+      },
+      "properties": {
+        "serviceType": "Perception",
+        "state": "Enabled"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myResourceGroup/providers/Microsoft.Security/serviceEntitlements/myserviceentitlement1",
+        "name": "myserviceentitlement1",
+        "type": "Microsoft.Security/serviceEntitlements",
+        "location": "eastus",
+        "tags": {
+          "environment": "test"
+        },
+        "properties": {
+          "serviceType": "Perception",
+          "state": "Enabled",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myResourceGroup/providers/Microsoft.Security/serviceEntitlements/myserviceentitlement1",
+        "name": "myserviceentitlement1",
+        "type": "Microsoft.Security/serviceEntitlements",
+        "location": "eastus",
+        "tags": {
+          "environment": "test"
+        },
+        "properties": {
+          "serviceType": "Perception",
+          "state": "Enabled",
+          "provisioningState": "Creating"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myResourceGroup/providers/Microsoft.Security/serviceEntitlements/myserviceentitlement1/operationResults/11111111-1111-1111-1111-111111111111?api-version=2026-09-01-preview"
+      }
+    }
+  }
+}

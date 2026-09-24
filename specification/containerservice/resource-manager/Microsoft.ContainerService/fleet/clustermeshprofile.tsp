@@ -11,6 +11,8 @@ namespace Microsoft.ContainerService;
 
 @doc("A cluster mesh profile stores the general information about the mesh.")
 @added(Versions.v2026_03_02_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_02_preview)
 @resource("clusterMeshProfiles")
 @parentResource(Fleet)
 model ClusterMeshProfile
@@ -30,6 +32,8 @@ model ClusterMeshProfile
 
 @doc("A cluster mesh profile stores the general information about the mesh.")
 @added(Versions.v2026_03_02_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_02_preview)
 model ClusterMeshProfileProperties {
   @doc("The provisioning state of the cluster mesh profile.")
   @visibility(Lifecycle.Read)
@@ -50,6 +54,8 @@ model ClusterMeshProfileProperties {
 
 @doc("The provisioning state of the cluster mesh profile resource.")
 @added(Versions.v2026_03_02_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_02_preview)
 union ClusterMeshProfileProvisioningState {
   string,
   ResourceProvisioningState,
@@ -57,6 +63,8 @@ union ClusterMeshProfileProvisioningState {
 
 @doc("Cluster mesh state.")
 @added(Versions.v2026_03_02_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_02_preview)
 union ClusterMeshState {
   string,
 
@@ -78,6 +86,8 @@ union ClusterMeshState {
 
 @doc("Status of the cluster mesh.")
 @added(Versions.v2026_03_02_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_02_preview)
 model ClusterMeshProfileStatus {
   @doc("The state of the cluster mesh.")
   @visibility(Lifecycle.Read)
@@ -97,6 +107,8 @@ model ClusterMeshProfileStatus {
 }
 
 @added(Versions.v2026_03_02_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_02_preview)
 @armResourceOperations
 interface ClusterMeshProfiles {
   get is ArmResourceRead<ClusterMeshProfile>;

@@ -1,0 +1,61 @@
+name: "Package Name Approval - Analyze Code"
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - edited
+    branches:
+      - main
+    paths:
+      - "specification/**/tspconfig.yaml"
+
+permissions:
+  contents: read
+
+jobs:
+  detect-namespaces:
+    name: Analyze Code
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 2
+
+      - name: Checkout base branch for comparison
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.base.sha }}
+          path: base-ref
+
+      - name: Setup Node and install dependencies
+        uses: ./.github/actions/setup-node-install-deps
+
+      - name: Install dependencies in base checkout
+        # The base checkout is a pnpm workspace, so it must be installed with pnpm:
+        # npm cannot resolve the "catalog:"/"workspace:" protocols in package.json.
+        # pnpm is already on PATH from the setup step above, and the root install has
+        # warmed the shared store, so this reuses it rather than re-downloading.
+        run: pnpm install --frozen-lockfile --ignore-scripts --prefer-offline
+        working-directory: base-ref
+
+      - name: Detect package name changes
+        id: detect
+        uses: actions/github-script@v9.0.0
+        env:
+          BASE_REF_DIR: ${{ github.workspace }}/base-ref
+        with:
+          script: |
+            const { default: detectNamespaces } =
+              await import('${{ github.workspace }}/.github/workflows/src/package-name-approval/detect-namespaces.ts');
+            await detectNamespaces({ github, context, core });
+
+      - name: Upload package name results
+        if: always() && steps.detect.outputs.results
+        uses: actions/upload-artifact@v7
+        with:
+          name: package-name-results
+          path: ${{ steps.detect.outputs.results_path }}
+          if-no-files-found: ignore

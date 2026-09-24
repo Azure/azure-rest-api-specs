@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "$filter": "backupManagementType eq 'AzureStorage'",
+    "api-version": "2026-07-01",
+    "fabricName": "Azure",
+    "resourceGroupName": "SwaggerTestRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "swaggertestvault"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "StorageContainer;Storage;SwaggerTestRg;swaggertestsakeybased",
+            "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/swaggertestvault/backupFabrics/Azure/protectionContainers/StorageContainer;Storage;SwaggerTestRg;swaggertestsakeybased",
+            "properties": {
+              "backupManagementType": "AzureStorage",
+              "containerType": "StorageContainer",
+              "friendlyName": "swaggertestsakeybased",
+              "healthStatus": "Healthy",
+              "protectedItemCount": 2,
+              "registrationStatus": "Registered",
+              "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.Storage/storageAccounts/swaggertestsakeybased",
+              "acquireStorageAccountLock": "Acquire",
+              "accessType": "KeyBased"
+            }
+          },
+          {
+            "name": "StorageContainer;Storage;SwaggerTestRg;swaggertestsasami",
+            "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/swaggertestvault/backupFabrics/Azure/protectionContainers/StorageContainer;Storage;SwaggerTestRg;swaggertestsasami",
+            "properties": {
+              "backupManagementType": "AzureStorage",
+              "containerType": "StorageContainer",
+              "friendlyName": "swaggertestsasami",
+              "healthStatus": "Healthy",
+              "protectedItemCount": 1,
+              "registrationStatus": "Registered",
+              "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.Storage/storageAccounts/swaggertestsasami",
+              "acquireStorageAccountLock": "Acquire",
+              "accessType": "IdentityBased",
+              "identityInfo": {
+                "isSystemAssignedIdentity": true
+              }
+            }
+          },
+          {
+            "name": "StorageContainer;Storage;SwaggerTestRg;swaggertestsauami",
+            "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/swaggertestvault/backupFabrics/Azure/protectionContainers/StorageContainer;Storage;SwaggerTestRg;swaggertestsauami",
+            "properties": {
+              "backupManagementType": "AzureStorage",
+              "containerType": "StorageContainer",
+              "friendlyName": "swaggertestsauami",
+              "healthStatus": "Healthy",
+              "protectedItemCount": 1,
+              "registrationStatus": "Registered",
+              "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.Storage/storageAccounts/swaggertestsauami",
+              "acquireStorageAccountLock": "NotAcquire",
+              "accessType": "IdentityBased",
+              "identityInfo": {
+                "isSystemAssignedIdentity": false,
+                "managedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/swaggertestuami"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "BackupProtectionContainers_List",
+  "title": "List Backup Protection Containers with Access Type"
+}

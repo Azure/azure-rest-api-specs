@@ -360,6 +360,7 @@ model LogSpecification {
 /**
  * App Service error response.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model DefaultErrorResponse {
   /**
@@ -1020,6 +1021,7 @@ model TldLegalAgreement {
 /**
  * The server could not understand the request due to invalid syntax.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ArmBadRequestResponse {
   ...TypeSpec.Http.Response<400>;

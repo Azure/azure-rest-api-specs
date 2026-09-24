@@ -15,7 +15,9 @@ interface OperationResults {
    * Get long running operation result.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Day 0 property, no body for 200 response"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Necessary to avoid standard routing"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Necessary to avoid standard routing"
   @summary("Get long running operation result.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/managedClusterOperationResults/{operationId}")
   @get
@@ -28,6 +30,7 @@ interface OperationResults {
      * operation identifier.
      */
     #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+    #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-parameter-location' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @clientLocation in client.tsp."
     @OpenAPI.extension("x-ms-parameter-location", "method")
     @path
     operationId: string,
@@ -43,7 +46,9 @@ interface OperationStatus {
   /**
    * Get long running operation status.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Necessary to avoid standard routing"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Necessary to avoid standard routing"
   @summary("Get long running operation status.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabric/locations/{location}/managedClusterOperations/{operationId}")
   @get
@@ -56,6 +61,7 @@ interface OperationStatus {
      * operation identifier.
      */
     #suppress "@azure-tools/typespec-azure-core/no-openapi" "Day 0 property"
+    #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-parameter-location' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to @clientLocation in client.tsp."
     @OpenAPI.extension("x-ms-parameter-location", "method")
     @path
     operationId: string,

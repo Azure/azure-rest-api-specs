@@ -280,8 +280,11 @@ interface SoftDeletedDatabaseAccounts {
   /**
    * Lists all the soft-deleted Azure Cosmos DB database accounts available under the subscription and in a region. This call requires 'Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/read' permission.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Custom operation for soft-deleted resources"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Custom operation for soft-deleted resources"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-pageable is required for ARM list operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-pageable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to Azure.Core paging operations."
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts")
   @get
   @extension("x-ms-pageable", #{ nextLinkName: "nextLink" })
@@ -297,6 +300,7 @@ interface SoftDeletedDatabaseAccounts {
    * Lists all the soft-deleted Azure Cosmos DB database accounts available under the given resource group and in a region. This call requires 'Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/read' permission.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-pageable is required for ARM list operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-pageable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to Azure.Core paging operations."
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts")
   @get
   @extension("x-ms-pageable", #{ nextLinkName: "nextLink" })
@@ -418,6 +422,7 @@ interface SoftDeletedSqlDatabases {
    * Lists all the soft-deleted Azure Cosmos DB SQL databases under a soft-deleted database account. This call requires 'Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/softDeletedSqlDatabases/read' permission.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-pageable is required for ARM list operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-pageable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to Azure.Core paging operations."
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases")
   @get
   @extension("x-ms-pageable", #{ nextLinkName: "nextLink" })
@@ -569,6 +574,7 @@ interface SoftDeletedSqlContainers {
    * Lists all the soft-deleted Azure Cosmos DB SQL containers under a soft-deleted SQL database. This call requires 'Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/softDeletedSqlDatabases/softDeletedSqlContainers/read' permission.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-pageable is required for ARM list operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-pageable' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to Azure.Core paging operations."
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{accountName}/softDeletedSqlDatabases/{databaseName}/softDeletedSqlContainers")
   @get
   @extension("x-ms-pageable", #{ nextLinkName: "nextLink" })

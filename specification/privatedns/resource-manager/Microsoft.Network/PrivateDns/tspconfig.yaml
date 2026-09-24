@@ -37,7 +37,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/privatedns"
     emitter-output-dir: "{output-dir}/{service-dir}/armprivatedns"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armprivatedns/v2"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armprivatedns"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -49,6 +49,10 @@ options:
     model-namespace: true
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     enable-wire-path-attribute: true
+  "@azure-typespec/http-client-csharp-provisioning":
+    namespace: "Azure.Provisioning.PrivateDns"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    api-version: "2024-06-01"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

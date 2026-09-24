@@ -859,6 +859,8 @@ union JobType {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   FineTuning: "FineTuning",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
@@ -868,6 +870,8 @@ union JobType {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   Distillation: "Distillation",
 }
 
@@ -3004,6 +3008,8 @@ union DistributionType {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   Ray: "Ray",
 }
 
@@ -3924,6 +3930,7 @@ model VirtualMachineSize {
    * The OS VHD disk size, in MB, allowed by the virtual machine size.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API contract uses this naming convention"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @summary("OS VHD Disk size")
   @visibility(Lifecycle.Read)
   osVhdSizeMB?: int32;
@@ -3992,9 +3999,7 @@ model EstimatedVMPrices {
   /**
    * The list of estimated prices for using a VM of a particular OS type, tier, etc.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Array items do not have stable identifiers"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @summary("List of estimated VM prices.")
   values: EstimatedVMPrice[];
 }
@@ -4247,9 +4252,7 @@ model Compute {
    * Errors during provisioning
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["/error/code"])
   provisioningErrors?: ErrorResponse[] | null;
 
   /**
@@ -4437,6 +4440,7 @@ model Endpoint {
    * Host IP over which the application is exposed from the container
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   hostIp?: string | null;
 }
 
@@ -4490,6 +4494,7 @@ model VolumeDefinition {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model BindOptions {
   /**
    * Type of Bind Option
@@ -4511,6 +4516,7 @@ model BindOptions {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model VolumeOptions {
   /**
    * Indicate whether volume is nocopy
@@ -4520,6 +4526,7 @@ model VolumeOptions {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model TmpfsOptions {
   /**
    * Mention the Tmpfs size
@@ -4582,6 +4589,7 @@ model AmlComputeNodeInformation {
    * Private IP address of the compute node.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   @summary("Private IP address.")
   privateIpAddress?: string | null;
@@ -4590,6 +4598,7 @@ model AmlComputeNodeInformation {
    * Public IP address of the compute node.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   @summary("Public IP address.")
   publicIpAddress?: string | null;
@@ -5178,6 +5187,8 @@ model EnvironmentVersionProperties extends AssetBase {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   imageDetails?: ImageDetails;
 
   /**
@@ -5233,6 +5244,8 @@ model BuildContext {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model ImageDetails {
   /**
    * Indicates if image exists
@@ -6455,6 +6468,7 @@ model FeatureWindow {
 /**
  * Response payload for creating a backfill request for a given feature set version
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model FeaturesetVersionBackfillResponse {
   /**
    * List of jobs submitted as part of the backfill request.
@@ -6496,8 +6510,6 @@ model FeaturestoreEntityVersionProperties extends AssetBase {
    * Specifies index columns
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #[])
   indexColumns?: IndexColumn[] | null;
 
   /**
@@ -7162,6 +7174,8 @@ model JobBaseProperties extends ResourceBase {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   parentJobName?: string | null;
 
   /**
@@ -7722,6 +7736,8 @@ model ContentSafety {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   contentSafetyLevel?: ContentSafetyLevel = ContentSafetyLevel.Blocking;
 
   /**
@@ -7816,8 +7832,6 @@ model RegistryProperties {
    * Details of each region the registry is in
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #[])
   regionDetails?: RegistryRegionArmDetails[] | null;
 }
 
@@ -7841,8 +7855,6 @@ model ManagedResourceGroupSettings {
    * List of assigned identities for the managed resource group
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #[])
   assignedIdentities?: ManagedResourceGroupAssignedIdentities[] | null;
 }
 
@@ -7956,8 +7968,6 @@ model RegistryRegionArmDetails {
    * List of ACR accounts
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #[])
   acrDetails?: AcrDetails[] | null;
 
   /**
@@ -7970,8 +7980,6 @@ model RegistryRegionArmDetails {
    * List of storage accounts
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #[])
   storageAccountDetails?: StorageAccountDetails[] | null;
 }
 
@@ -8153,6 +8161,8 @@ model WorkspaceProperties {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   @visibility(Lifecycle.Read)
   agentsEndpointUri?: url;
 
@@ -8171,6 +8181,8 @@ model WorkspaceProperties {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   allowRoleAssignmentOnRG?: boolean;
 
   /**
@@ -8188,6 +8200,8 @@ model WorkspaceProperties {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   containerRegistries?: string[];
 
   /**
@@ -8221,6 +8235,8 @@ model WorkspaceProperties {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   enableSimplifiedCmk?: boolean;
 
   /**
@@ -8232,6 +8248,8 @@ model WorkspaceProperties {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   enableSoftwareBillOfMaterials?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
@@ -8244,6 +8262,8 @@ model WorkspaceProperties {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   existingWorkspaces?: string[];
 
   /**
@@ -8272,12 +8292,15 @@ model WorkspaceProperties {
   /**
    * The list of IPv4  addresses that are allowed to access the workspace.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @removed(Versions.v2025_12_01)
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   ipAllowlist?: string[];
 
   /**
@@ -8292,6 +8315,8 @@ model WorkspaceProperties {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   keyVaults?: string[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
@@ -8312,6 +8337,8 @@ model WorkspaceProperties {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   networkAcls?: NetworkAcls;
 
   /**
@@ -8385,6 +8412,8 @@ model WorkspaceProperties {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   softDeleteRetentionInDays?: int32;
 
   /**
@@ -8399,6 +8428,8 @@ model WorkspaceProperties {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   storageAccounts?: string[];
 
   /**
@@ -8441,6 +8472,7 @@ model EncryptionProperty {
    * The byok cosmosdb account that customer brings to store customer's data
    * with encryption
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   cosmosDbResourceId?: string;
 
   /**
@@ -8566,6 +8598,7 @@ model ManagedNetworkSettings {
    * Public IP address assigned to the Azure Firewall.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   firewallPublicIpAddress?: string | null;
 }
@@ -8627,6 +8660,7 @@ model NetworkAcls {
    * Rules governing the accessibility of a resource from a specific ip address or ip range.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Array items do not have stable identifiers"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipRules?: IPRule[];
 }
 
@@ -8739,10 +8773,12 @@ model ServerlessComputeSettings {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model ServiceManagedResourcesSettings {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   cosmosDb?: CosmosDbSettings;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model CosmosDbSettings {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   collectionsThroughput?: int32;
@@ -8832,6 +8868,8 @@ model WorkspacePropertiesUpdateParameters {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   allowRoleAssignmentOnRG?: boolean;
 
   /**
@@ -8861,6 +8899,8 @@ model WorkspacePropertiesUpdateParameters {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   enableSoftwareBillOfMaterials?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
@@ -8885,12 +8925,15 @@ model WorkspacePropertiesUpdateParameters {
    * The list of IPv4 addresses that are allowed to access the workspace.
    */
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @removed(Versions.v2025_12_01)
   @added(Versions.v2026_01_15_preview)
   @removed(Versions.v2026_03_01)
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   ipAllowlist?: string[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
@@ -8905,6 +8948,8 @@ model WorkspacePropertiesUpdateParameters {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   networkAcls?: NetworkAcls;
 
   /**
@@ -8936,6 +8981,8 @@ model WorkspacePropertiesUpdateParameters {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   softDeleteRetentionInDays?: int32;
 
   /**
@@ -9247,8 +9294,8 @@ model RaiBlocklistProperties {
  * The list of Cognitive Services RaiBlocklist Items for batch add.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Empty model used as placeholder in API"
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
-@OpenAPI.extension("x-ms-identifiers", #["name"])
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@identifiers(#["name"])
 model RaiBlocklistItemsBulkAddRequest is RaiBlocklistItemBulkRequest[];
 
 /**
@@ -9527,6 +9574,8 @@ model EndpointResourceProperties {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   deployments?: EndpointDeploymentResourcePropertiesBasicResource[];
 
   /**
@@ -9931,9 +9980,7 @@ model AKSSchemaProperties {
    * System services
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["publicIpAddress"])
   systemServices?: SystemService[] | null;
 
   /**
@@ -9991,6 +10038,7 @@ model SystemService {
   /**
    * Public IP address
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   publicIpAddress?: string;
 
@@ -10251,10 +10299,8 @@ model AmlComputeProperties {
    * Collection of errors encountered by various compute nodes during node setup.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read)
   @summary("Errors.")
-  @OpenAPI.extension("x-ms-identifiers", #["/error/code"])
   errors?: ErrorResponse[] | null;
 
   /**
@@ -10431,6 +10477,8 @@ model ComputeInstanceProperties {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   autologgerSettings?: ComputeInstanceAutologgerSettings | null;
 
   /**
@@ -10443,8 +10491,6 @@ model ComputeInstanceProperties {
    * List of Custom Services added to the compute.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
   customServices?: CustomService[] | null;
 
   /**
@@ -10506,6 +10552,8 @@ model ComputeInstanceProperties {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   @summary("Enable Auto OS Patching.")
   enableOSPatching?: boolean | null = false;
 
@@ -10519,6 +10567,8 @@ model ComputeInstanceProperties {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   @summary("Enable root access.")
   enableRootAccess?: boolean | null = true;
 
@@ -10540,6 +10590,8 @@ model ComputeInstanceProperties {
   @added(Versions.v2026_03_15_preview)
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
   @summary("Release quota if compute instance stopped.")
   releaseQuotaOnStop?: boolean | null = false;
 
@@ -10585,27 +10637,21 @@ model ComputeInstanceProperties {
    * Describes informations of containers on this ComputeInstance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
   containers?: ComputeInstanceContainer[] | null;
 
   /**
    * Describes informations of dataDisks on this ComputeInstance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   dataDisks?: ComputeInstanceDataDisk[] | null;
 
   /**
    * Describes informations of dataMounts on this ComputeInstance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   dataMounts?: ComputeInstanceDataMount[] | null;
 
   /**
@@ -10624,6 +10670,8 @@ model ComputeInstanceProperties {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model ComputeInstanceAutologgerSettings {
   /**
    * Indicates whether mlflow autologger is enabled for notebooks.
@@ -10676,11 +10724,13 @@ model ImageMetadata {
   /**
    * Specifies whether this compute instance is running on the latest operating system image.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   isLatestOsImageVersion?: boolean;
 
   /**
    * Metadata about the os patching.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   osPatchingStatus?: OsPatchingStatus;
 }
@@ -10688,6 +10738,7 @@ model ImageMetadata {
 /**
  * Returns metadata about the os patching.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
 model OsPatchingStatus {
   /**
    * The os patching status.
@@ -10713,8 +10764,7 @@ model OsPatchingStatus {
    * Collection of errors encountered when doing os patching.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #["/error/code"])
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   osPatchingErrors?: ErrorResponse[] | null;
 }
 
@@ -10726,6 +10776,7 @@ model ComputeInstanceConnectivityEndpoints {
    * Public IP Address of this ComputeInstance.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   publicIpAddress?: string | null;
 
@@ -10733,6 +10784,7 @@ model ComputeInstanceConnectivityEndpoints {
    * Private IP Address of this ComputeInstance (local to the VNET in which the compute instance is deployed).
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   privateIpAddress?: string | null;
 }
@@ -11211,7 +11263,7 @@ model VirtualMachineSshCredentials {
   /**
    * Password of admin account
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Secret property is part of existing API contract"
+  @secret
   password?: string;
 
   /**
@@ -11283,7 +11335,7 @@ model DatabricksProperties {
   /**
    * Databricks access token
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Secret property is part of existing API contract"
+  @secret
   databricksAccessToken?: string;
 
   /**
@@ -11484,7 +11536,7 @@ model DatabricksComputeSecretsProperties {
   /**
    * access token for databricks account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Secret property is part of existing API contract"
+  @secret
   databricksAccessToken?: string;
 }
 
@@ -11632,10 +11684,38 @@ model AssetJobOutput {
   assetName?: string | null;
 
   /**
+   * Output Asset Version.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
+  assetVersion?: string | null;
+
+  /**
    * Output data delivery mode enums.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   mode?: OutputDeliveryMode = OutputDeliveryMode.ReadWriteMount;
+
+  /**
+   * Output Asset Delivery Path.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
+  @removed(Versions.v2025_12_01)
+  @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
+  pathOnCompute?: string | null;
 
   /**
    * Output Asset URI.
@@ -12118,6 +12198,8 @@ model AzureFileDatastore extends DatastoreProperties {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model AzureOpenAiFineTuning extends FineTuningVertical {
   /**
    * HyperParameters for fine tuning Azure Open AI model.
@@ -12161,6 +12243,8 @@ model AzureOpenAiHyperParameters {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 @discriminator("modelProvider")
 @usage(Azure.ClientGenerator.Core.Usage.output)
 model FineTuningVertical {
@@ -12690,9 +12774,6 @@ model TableVerticalFeaturizationSettings extends FeaturizationSettings {
    * User can specify additional transformers to be used along with the columns to which it would be applied and parameters for the transformer constructor.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #[])
   transformerParams?: Record<ColumnTransformer[] | null> | null;
 }
 
@@ -12995,9 +13076,7 @@ model MonitorEmailNotificationSettings {
    * The email recipient list which has a limitation of 499 characters in total.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   emails?: string[] | null;
 }
 
@@ -13045,9 +13124,7 @@ model MonitoringSignalBase {
    * The current notification mode for this signal.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   notificationTypes?: MonitoringNotificationType[] | null;
 
   /**
@@ -13116,6 +13193,8 @@ model CustomMetricThreshold {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model CustomModelFineTuning extends FineTuningVertical {
   /**
    * HyperParameters for fine tuning custom model.
@@ -13355,6 +13434,8 @@ model FeatureImportanceSettings {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 @discriminator("dataGenerationType")
 model DataGenerationVertical {
   /**
@@ -13517,6 +13598,8 @@ model DefaultScaleSettings extends OnlineScaleSettings {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model DistillationJob extends JobBaseProperties {
   /**
    * [Required]
@@ -13561,6 +13644,8 @@ model DistillationJob extends JobBaseProperties {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model FinetuningDetails {
   /**
    * Finetuning Hyperparameters
@@ -13703,6 +13788,8 @@ model FeatureSubset extends MonitoringFeatureFilterBase {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 @usage(Azure.ClientGenerator.Core.Usage.output)
 model FineTuningJob extends JobBaseProperties {
   /**
@@ -13916,8 +14003,6 @@ model ImageClassificationBase extends ImageVertical {
    * Search space for sampling different combinations of models and their hyperparameters.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Required for swagger compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #[])
   searchSpace?: ImageModelDistributionSettingsClassification[] | null;
 }
 
@@ -15340,6 +15425,8 @@ model PyTorch extends DistributionConfiguration {
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_07_01)
+@added(Versions.v2026_07_15_preview)
 model Ray extends DistributionConfiguration {
   /**
    * The port of the head ray process.
@@ -15373,6 +15460,12 @@ model Ray extends DistributionConfiguration {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Existing API contract allows null values"
   workerNodeAdditionalArgs?: string | null;
+
+  /**
+   * Whether to expose the Ray Client server through the AML proxy on the default port 10001.
+   */
+  @added(Versions.v2026_07_15_preview)
+  enableRemoteAccessClientServer?: boolean;
 
   /**
    * [Required] Specifies the type of distribution framework.
@@ -16198,8 +16291,9 @@ model AccessKeyAuthTypeWorkspaceConnectionProperties
 model WorkspaceConnectionAccessKey {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
   accessKeyId?: string;
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Secret property is part of existing API contract"
+  @secret
   secretAccessKey?: string;
 }
 
@@ -16224,7 +16318,7 @@ model AccountKeyAuthTypeWorkspaceConnectionProperties
  */
 model WorkspaceConnectionAccountKey {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Secret property is part of existing API contract"
+  @secret
   key?: string;
 }
 
@@ -16266,7 +16360,7 @@ model ApiKeyAuthWorkspaceConnectionProperties
  */
 model WorkspaceConnectionApiKey {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "Secret property is part of existing API contract"
+  @secret
   key?: string;
 }
 
@@ -16392,6 +16486,7 @@ model ContentSafetyEndpointResourceProperties
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model CustomKeys {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Existing API uses additionalProperties pattern"
+  @secret
   keys?: Record<string>;
 }
 
@@ -16603,6 +16698,7 @@ model PATAuthTypeWorkspaceConnectionProperties
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model WorkspaceConnectionPersonalAccessToken {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+  @secret
   pat?: string;
 }
 
@@ -16657,6 +16753,7 @@ model SASAuthTypeWorkspaceConnectionProperties
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
 model WorkspaceConnectionSharedAccessSignature {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "Existing API contract - suppression reason updated"
+  @secret
   sas?: string;
 }
 

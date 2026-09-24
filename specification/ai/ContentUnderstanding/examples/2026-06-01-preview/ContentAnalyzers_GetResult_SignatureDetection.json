@@ -1,0 +1,58 @@
+{
+  "title": "Get Analysis Result with Signature Detection",
+  "operationId": "ContentAnalyzers_GetResult",
+  "parameters": {
+    "api-version": "2026-06-01-preview",
+    "operationId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "status": "Succeeded",
+        "result": {
+          "analyzerId": "prebuilt-layout",
+          "apiVersion": "2026-06-01-preview",
+          "createdAt": "2026-07-01T10:05:00.000Z",
+          "contents": [
+            {
+              "kind": "document",
+              "mimeType": "application/pdf",
+              "markdown": "# Contract Agreement\n\nSigned by John Smith.\n\nSignature:\n\nParticipant Signature\n\n\n![John Smith](signatures/1.1)\n\n\nPrinted Name: John Smith\n",
+              "startPageNumber": 1,
+              "endPageNumber": 1,
+              "unit": "inch",
+              "metadata": {
+                "contentType": "application/pdf",
+                "pageCount": "1",
+                "author": "Legal Department",
+                "title": "Contract Agreement",
+                "language": "en"
+              },
+              "pages": [
+                {
+                  "pageNumber": 1,
+                  "width": 8.5,
+                  "height": 11
+                }
+              ],
+              "signatures": [
+                {
+                  "id": "1.1",
+                  "source": "D(1,1.0718,2.5962,3.3784,2.592,3.3846,3.099,1.0781,3.1018)",
+                  "span": {
+                    "offset": 81,
+                    "length": 29
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "usage": {
+          "documentPagesStandard": 1
+        }
+      }
+    }
+  }
+}

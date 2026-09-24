@@ -53,3 +53,17 @@ using Microsoft.Resources;
 @@responseAsBool(SpecificResources.checkExistence, "javascript");
 @@responseAsBool(Resources.checkExistenceById, "javascript");
 @@responseAsBool(ResourceGroups.checkExistence, "javascript");
+
+@@clientLocation(TagsResources.getAtScope, "TagOperations", "java");
+@@clientLocation(TagsResources.createOrUpdateAtScope, "TagOperations", "java");
+@@clientLocation(TagsResources.updateAtScope, "TagOperations", "java");
+@@clientLocation(TagsResources.deleteAtScope, "TagOperations", "java");
+@@clientLocation(TagsOperationGroup.deleteValue, "TagOperations", "java");
+@@clientLocation(
+  TagsOperationGroup.createOrUpdateValue,
+  "TagOperations",
+  "java"
+);
+@@clientLocation(TagsOperationGroup.createOrUpdate, "TagOperations", "java");
+@@clientLocation(TagsOperationGroup.delete, "TagOperations", "java");
+@@clientLocation(TagsOperationGroup.list, "TagOperations", "java");

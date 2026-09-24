@@ -185,7 +185,9 @@ op putSubscriptionCustomized is Azure.ResourceManager.Legacy.CreateOperation<
 /**
  * De-associates subscription from the management group.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For overriding with custom operation."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "For overriding with custom operation."
 @delete
 op deleteSubscriptionCustomized is SubscriptionUnderManagementGroupOperations.ArmDeleteOperation<
   Azure.ResourceManager.Extension.ExtensionProviderNamespace<SubscriptionUnderManagementGroup> & {

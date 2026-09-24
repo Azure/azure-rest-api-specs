@@ -1,0 +1,160 @@
+{
+  "title": "Create or Replace Analyzer",
+  "operationId": "ContentAnalyzers_CreateOrReplace",
+  "parameters": {
+    "api-version": "2026-06-01-preview",
+    "analyzerId": "myAnalyzer",
+    "resource": {
+      "description": "My analyzer",
+      "tags": {
+        "createdBy": "John"
+      },
+      "baseAnalyzerId": "prebuilt-document",
+      "config": {
+        "enableOcr": true,
+        "enableLayout": true,
+        "enableFormula": false,
+        "enableFigureDescription": true,
+        "returnDetails": true,
+        "workflow": "default",
+        "enableSegment": true,
+        "allowInPageSegments": true,
+        "contentCategories": {
+          "invoice": {
+            "description": "Invoice or billing statement"
+          },
+          "receipt": {
+            "description": "Purchase receipt"
+          }
+        }
+      },
+      "fieldSchema": {
+        "name": "MyForm",
+        "description": "My form",
+        "fields": {
+          "Company": {
+            "type": "string",
+            "description": "Name of company."
+          }
+        },
+        "definitions": {}
+      },
+      "knowledgeSources": [
+        {
+          "kind": "labeledData",
+          "containerUrl": "https://myStorageAccount.blob.core.windows.net/myContainer",
+          "prefix": "trainingData",
+          "fileListPath": "trainingData/fileList.jsonl"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Operation-Location": "https://myendpoint.cognitiveservices.azure.com/contentunderstanding/analyzers/myAnalyzer/operations/3b31320d-8bab-4f88-b19c-2322a7f11034?api-version=2026-06-01-preview"
+      },
+      "body": {
+        "analyzerId": "myAnalyzer",
+        "description": "My analyzer",
+        "tags": {
+          "createdBy": "John"
+        },
+        "status": "creating",
+        "createdAt": "2025-05-01T18:46:36.051Z",
+        "lastModifiedAt": "2025-05-01T18:46:36.051Z",
+        "baseAnalyzerId": "prebuilt-document",
+        "config": {
+          "enableOcr": true,
+          "enableLayout": true,
+          "enableFormula": false,
+          "enableFigureDescription": true,
+          "returnDetails": true,
+          "workflow": "default",
+          "enableSegment": true,
+          "allowInPageSegments": true,
+          "contentCategories": {
+            "invoice": {
+              "description": "Invoice or billing statement"
+            },
+            "receipt": {
+              "description": "Purchase receipt"
+            }
+          }
+        },
+        "fieldSchema": {
+          "name": "MyForm",
+          "description": "My form",
+          "fields": {
+            "Company": {
+              "type": "string",
+              "description": "Name of company."
+            }
+          },
+          "definitions": {}
+        },
+        "knowledgeSources": [
+          {
+            "kind": "labeledData",
+            "containerUrl": "https://myStorageAccount.blob.core.windows.net/myContainer",
+            "prefix": "trainingData",
+            "fileListPath": "trainingData/fileList.jsonl"
+          }
+        ]
+      }
+    },
+    "201": {
+      "headers": {
+        "Operation-Location": "https://myendpoint.cognitiveservices.azure.com/contentunderstanding/analyzers/myAnalyzer/operations/3b31320d-8bab-4f88-b19c-2322a7f11034?api-version=2026-06-01-preview"
+      },
+      "body": {
+        "analyzerId": "myAnalyzer",
+        "description": "My analyzer",
+        "tags": {
+          "createdBy": "John"
+        },
+        "status": "creating",
+        "createdAt": "2025-05-01T18:46:36.051Z",
+        "lastModifiedAt": "2025-05-01T18:46:36.051Z",
+        "baseAnalyzerId": "prebuilt-document",
+        "config": {
+          "enableOcr": true,
+          "enableLayout": true,
+          "enableFormula": false,
+          "enableFigureDescription": true,
+          "returnDetails": true,
+          "workflow": "default",
+          "enableSegment": true,
+          "allowInPageSegments": true,
+          "contentCategories": {
+            "invoice": {
+              "description": "Invoice or billing statement"
+            },
+            "receipt": {
+              "description": "Purchase receipt"
+            }
+          }
+        },
+        "fieldSchema": {
+          "name": "MyForm",
+          "description": "My form",
+          "fields": {
+            "Company": {
+              "type": "string",
+              "description": "Name of company."
+            }
+          },
+          "definitions": {}
+        },
+        "knowledgeSources": [
+          {
+            "kind": "labeledData",
+            "containerUrl": "https://myStorageAccount.blob.core.windows.net/myContainer",
+            "prefix": "trainingData",
+            "fileListPath": "trainingData/fileList.jsonl"
+          }
+        ]
+      }
+    }
+  }
+}

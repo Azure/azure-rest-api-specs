@@ -18,6 +18,7 @@ alias HealthInsightsRetryAfterTrait = ResponseHeadersTrait<
 @doc("Provides the 'x-ms-request-id' header to enable request correlation in responses.")
 @trait("RequestIdResponseHeader")
 model RequestIdResponseHeaderTrait {
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "inline anonymous model"
   @doc("An opaque, globally-unique, server-generated string identifier for the request.")
   requestId: {
     @traitLocation(TraitLocation.Response)
@@ -32,6 +33,7 @@ alias ServiceTraits = NoRepeatableRequests &
   RequestIdResponseHeaderTrait &
   QueryParametersTrait<Azure.Core.ExpandQueryParameter>;
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model HealthInsightsErrorResponse is Azure.Core.Foundations.ErrorResponse {
   ...RequestIdResponseHeader;
 }

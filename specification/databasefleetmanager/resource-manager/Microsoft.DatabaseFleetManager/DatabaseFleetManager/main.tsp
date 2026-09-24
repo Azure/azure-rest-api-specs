@@ -15,6 +15,7 @@ import "./FirewallRule.tsp";
 import "./Fleet.tsp";
 import "./Fleetspace.tsp";
 import "./FleetTier.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -47,4 +48,3 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @@clientName(DatabaseChangeTierDefinition, "DatabaseChangeTierProperties");
 @@clientName(DatabaseRenameDefinition, "DatabaseRenameProperties");
 @@clientName(RegisterServerDefinition, "RegisterServerProperties");
-@@clientName(Identity, "IdentityProperties", "csharp");

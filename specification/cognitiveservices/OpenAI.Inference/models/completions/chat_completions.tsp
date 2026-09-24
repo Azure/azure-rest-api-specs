@@ -60,7 +60,7 @@ model ChatCompletionsJsonSchemaResponseFormat
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "this represents the case-sensitive wire format"
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicitly required, nullable types"
-  #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backwards compatibility with existing clients."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Backwards compatibility with existing clients."
   json_schema: {
     /** A description of what the response format is for, used by the model to determine how to respond in the format. */
     description?: string;
@@ -81,6 +81,7 @@ model ChatCompletionsJsonSchemaResponseFormat
 /**
  * Options for streaming response. Only set this when you set `stream: true`.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(ServiceApiVersions.v2024_09_01_Preview)
 model ChatCompletionStreamOptions {
   /**
@@ -90,6 +91,7 @@ model ChatCompletionStreamOptions {
   includeUsage?: boolean;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("""
   The configuration information for a chat completions request.
   Completions support a wide variety of tasks and generate text that continues from or "completes"
@@ -395,7 +397,7 @@ model PredictionContent {
    * can be returned much more quickly.
    */
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "OpenAPI v2 support deferred"
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" "Backwards compatibility with existing clients."
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Backwards compatibility with existing clients."
   content: string | ChatMessageTextContentItem[];
 }
 

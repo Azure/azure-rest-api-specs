@@ -11,7 +11,6 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "./models.tsp";
 import "./back-compatible.tsp";
 import "./ServiceGroup.tsp";
 import "./client.tsp";
@@ -25,7 +24,6 @@ using TypeSpec.Versioning;
 /**
  * The Groups RP provides Service Groups as a construct to group multiple resources, resource groups, subscriptions and other service groups into an organizational hierarchy and centrally manage access control, policies, alerting and reporting for those resources
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "For backward compatibility"
 @armProviderNamespace
 @service(#{ title: "Groups RP APIs" })
 @versioned(Versions)
@@ -40,4 +38,9 @@ enum Versions {
    * The 2024-02-01-preview API version.
    */
   v2024_02_01_preview: "2024-02-01-preview",
+
+  /**
+   * The 2026-08-01 API version.
+   */
+  v2026_08_01: "2026-08-01",
 }

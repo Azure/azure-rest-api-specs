@@ -142,11 +142,6 @@ interface SearchServices {
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
-      @OpenAPI.extension(
-        "x-ms-parameter-grouping",
-        #{ name: "search-management-request-options" }
-      )
-      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     Error = CloudError
@@ -167,11 +162,6 @@ interface SearchServices {
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
-      @OpenAPI.extension(
-        "x-ms-parameter-grouping",
-        #{ name: "search-management-request-options" }
-      )
-      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     LroHeaders = ArmLroLocationHeader<FinalResult = SearchService> &
@@ -196,11 +186,6 @@ interface SearchServices {
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
-      @OpenAPI.extension(
-        "x-ms-parameter-grouping",
-        #{ name: "search-management-request-options" }
-      )
-      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     Error = CloudError
@@ -222,11 +207,6 @@ interface SearchServices {
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
-      @OpenAPI.extension(
-        "x-ms-parameter-grouping",
-        #{ name: "search-management-request-options" }
-      )
-      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     Response = OkResponse | NoContentResponse,
@@ -248,11 +228,6 @@ interface SearchServices {
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
-      @OpenAPI.extension(
-        "x-ms-parameter-grouping",
-        #{ name: "search-management-request-options" }
-      )
-      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     Response = SearchServiceListResult,
@@ -274,11 +249,6 @@ interface SearchServices {
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
-      @OpenAPI.extension(
-        "x-ms-parameter-grouping",
-        #{ name: "search-management-request-options" }
-      )
-      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     Response = SearchServiceListResult,
@@ -303,11 +273,6 @@ interface SearchServices {
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
-      @OpenAPI.extension(
-        "x-ms-parameter-grouping",
-        #{ name: "search-management-request-options" }
-      )
-      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     Error = CloudError
@@ -331,11 +296,6 @@ interface SearchServices {
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
-      @OpenAPI.extension(
-        "x-ms-parameter-grouping",
-        #{ name: "search-management-request-options" }
-      )
-      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     OverrideErrorType = CloudError
@@ -360,11 +320,6 @@ interface SearchServices {
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
-      @OpenAPI.extension(
-        "x-ms-parameter-grouping",
-        #{ name: "search-management-request-options" }
-      )
-      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     OverrideErrorType = CloudError
@@ -389,11 +344,6 @@ interface SearchServices {
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
-      @OpenAPI.extension(
-        "x-ms-parameter-grouping",
-        #{ name: "search-management-request-options" }
-      )
-      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     Error = CloudError
@@ -419,11 +369,6 @@ interface SearchServices {
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
-      @OpenAPI.extension(
-        "x-ms-parameter-grouping",
-        #{ name: "search-management-request-options" }
-      )
-      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     OverrideErrorType = CloudError
@@ -461,11 +406,6 @@ interface SearchServices {
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
-      @OpenAPI.extension(
-        "x-ms-parameter-grouping",
-        #{ name: "search-management-request-options" }
-      )
-      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     Error = CloudError

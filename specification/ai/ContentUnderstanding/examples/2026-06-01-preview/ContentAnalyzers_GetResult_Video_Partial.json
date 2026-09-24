@@ -1,0 +1,40 @@
+{
+  "title": "Get Analysis Result for Video with Partial Processing",
+  "operationId": "ContentAnalyzers_GetResult",
+  "parameters": {
+    "api-version": "2026-06-01-preview",
+    "operationId": "b7c8d9e0-1234-5678-9abc-def012345678"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "b7c8d9e0-1234-5678-9abc-def012345678",
+        "status": "Succeeded",
+        "result": {
+          "analyzerId": "prebuilt-videoSearch",
+          "apiVersion": "2026-06-01-preview",
+          "createdAt": "2026-07-01T18:46:36.244Z",
+          "warnings": [
+            {
+              "code": "InputExceededLimit",
+              "message": "The input exceeded the maximum duration that can be processed; only milliseconds 0-7200000 were analyzed. See https://aka.ms/cu-doc-limits.",
+              "target": "inputs/0"
+            }
+          ],
+          "contents": [
+            {
+              "kind": "audioVisual",
+              "mimeType": "video/mp4",
+              "markdown": "# Video\n\n...",
+              "startTimeMs": 0,
+              "endTimeMs": 7200000
+            }
+          ]
+        },
+        "usage": {
+          "videoHours": 2
+        }
+      }
+    }
+  }
+}

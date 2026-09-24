@@ -20,8 +20,9 @@ interface OracleSubscriptions
     "./examples/oracleSubscriptions_listCloudAccountDetails.json",
     "List Cloud Account details for the Oracle Subscription"
   )
-  listCloudAccountDetails is ListActions.ArmResourceGetActionAsync<
+  listCloudAccountDetails is ArmResourceActionAsync<
     OracleSubscription<Plan>,
+    void,
     CloudAccountDetails
   >;
 
@@ -31,8 +32,9 @@ interface OracleSubscriptions
     "./examples/oracleSubscriptions_listSaasSubscriptionDetails.json",
     "List Saas Subscription details for the Oracle Subscription"
   )
-  listSaasSubscriptionDetails is ListActions.ArmResourceGetActionAsync<
+  listSaasSubscriptionDetails is ArmResourceActionAsync<
     OracleSubscription<Plan>,
+    void,
     SaasSubscriptionDetails
   >;
 
@@ -42,8 +44,9 @@ interface OracleSubscriptions
     "./examples/oracleSubscriptions_listActivationLinks.json",
     "List Activation Links for the Oracle Subscription"
   )
-  listActivationLinks is ListActions.ArmResourceGetActionAsync<
+  listActivationLinks is ArmResourceActionAsync<
     OracleSubscription<Plan>,
+    void,
     ActivationLinks
   >;
 
@@ -65,6 +68,8 @@ interface OracleSubscriptions
    * @template Properties RP-specific property bag for the resource
    * @template BaseParameters The http parameters that are part of the request
    */
+  #suppress "@typespec/http/deprecated-implicit-optionality" "LEGACY - DO NOT COPY"
+  @Http.patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     OracleSubscription<Plan>,
     ResourceUpdateModel<

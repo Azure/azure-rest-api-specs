@@ -1,10 +1,12 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./ProtectionContainerResource.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Legacy;
 using TypeSpec.Http;
@@ -100,6 +102,24 @@ interface Backups {
     ProtectedItemResource,
     BackupRequestResource,
     AcceptedResponse
+  >;
+}
+
+@added(Versions.v2026_07_01)
+@armResourceOperations
+interface ConfigureSourceScan {
+  /**
+   * Configures source scan for a protected item. This is an asynchronous operation. To know the status of the
+   * operation, call GetProtectedItemOperationResult API.
+   */
+  @action("configureSourceScan")
+  execute is ArmResourceActionAsync<
+    ProtectedItemResource,
+    ProtectedItemConfigureSourceScanRequest,
+    OperationStatus,
+    LroHeaders = ArmAsyncOperationHeader &
+      ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 

@@ -20,3 +20,53 @@ using Azure.ClientGenerator.Core;
   string,
   "javascript"
 );
+
+@@access(
+  Microsoft.CodeTransparency.GetPublicKeysResponse,
+  Access.internal,
+  "csharp"
+);
+@@access(Microsoft.CodeTransparency.JsonWebKeySet, Access.internal, "csharp");
+@@access(
+  Microsoft.CodeTransparency.PublicJsonWebKey,
+  Access.internal,
+  "csharp"
+);
+
+@@access(Microsoft.CodeTransparency.getOperationV09, Access.internal, "csharp");
+
+@@clientName(
+  Microsoft.CodeTransparency.createEntry,
+  "createEntryLegacy",
+  "csharp"
+);
+@@clientName(
+  Microsoft.CodeTransparency.createEntryV09,
+  "createEntry",
+  "csharp"
+);
+@@clientName(Microsoft.CodeTransparency.getEntry, "getEntryLegacy", "csharp");
+@@clientName(Microsoft.CodeTransparency.getEntryV09, "getEntry", "csharp");
+@@clientName(
+  Microsoft.CodeTransparency.getEntryStatement,
+  "getEntryStatementLegacy",
+  "csharp"
+);
+@@clientName(
+  Microsoft.CodeTransparency.getEntryStatementV09,
+  "getEntryStatement",
+  "csharp"
+);
+@@clientName(
+  Microsoft.CodeTransparency.getPublicKeys,
+  "getPublicKeysLegacy",
+  "csharp"
+);
+@@clientName(
+  Microsoft.CodeTransparency.getPublicKeysV09,
+  "getPublicKeys",
+  "csharp"
+);
+@@convenientAPI(Microsoft.CodeTransparency.getPublicKeysV09, false, "csharp");
+@@convenientAPI(Microsoft.CodeTransparency.listScittKeys, false, "csharp");
+@@convenientAPI(Microsoft.CodeTransparency.getScittKey, false, "csharp");

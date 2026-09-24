@@ -101,6 +101,7 @@ model FoundryModelWarning {
 @Rest.resource("models")
 @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
 model ModelVersion {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("URI of the model artifact in blob storage")
   blobUri: url;
 
@@ -178,6 +179,7 @@ model LoraConfig {
   dropout?: float32;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request body for updating a model version. Only description and tags can be modified.")
 @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
 model UpdateModelVersionRequest {
@@ -188,6 +190,7 @@ model UpdateModelVersionRequest {
   tags?: Record<string>;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Represents a request for a pending upload of a model version.")
 @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
 model ModelPendingUploadRequest {
@@ -201,6 +204,7 @@ model ModelPendingUploadRequest {
   pendingUploadType: PendingUploadType.TemporaryBlobReference;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Represents the response for a model pending upload request.")
 @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
 model ModelPendingUploadResponse {
@@ -217,13 +221,16 @@ model ModelPendingUploadResponse {
   pendingUploadType: PendingUploadType.TemporaryBlobReference;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request to fetch credentials for a model asset.")
 @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
 model ModelCredentialRequest {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("Blob URI of the model asset to fetch credentials for.")
   blobUri: url;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Accepted response for asynchronous model version creation, with polling location.")
 @extension("x-ms-foundry-meta", ModelsRequiredPreviews)
 model CreateModelVersionAsyncResponse {
@@ -233,6 +240,7 @@ model CreateModelVersionAsyncResponse {
   @header("Location")
   location?: url;
 
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Type kept for backward compatibility"
   @bodyRoot
   body: {
     @doc("URL to poll for operation status.")

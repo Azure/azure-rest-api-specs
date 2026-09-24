@@ -13,6 +13,8 @@ scalar ClusterMeshProfileResourceId
   ]>;
 
 @added(Versions.v2026_03_02_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_02_preview)
 @doc("The Mesh Member data for a Fleet Member resource.")
 model MeshProperties {
   @doc("The Cilium cluster properties.")
@@ -29,6 +31,8 @@ model MeshProperties {
 }
 
 @added(Versions.v2026_03_02_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_02_preview)
 @doc("The Cilium specific properties of the member cluster.")
 model CiliumProperties {
   @doc("Cilium requires each cluster to be assigned a unique numeric cluster id from 1 - 255. The id is managed by Fleet and cannot be set by the user.")
@@ -41,6 +45,8 @@ model CiliumProperties {
 }
 
 @added(Versions.v2026_03_02_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_02_preview)
 @doc("Mesh member state.")
 union MeshMemberState {
   string,
@@ -59,6 +65,8 @@ union MeshMemberState {
 }
 
 @added(Versions.v2026_03_02_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_02_preview)
 @doc("Status of the mesh member.")
 model MeshMemberStatus {
   @doc("The mesh member state.")

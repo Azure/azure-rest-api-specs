@@ -555,6 +555,7 @@ model FirewallRules {
   /**
    * This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   ipRanges?: string[];
 
   /**

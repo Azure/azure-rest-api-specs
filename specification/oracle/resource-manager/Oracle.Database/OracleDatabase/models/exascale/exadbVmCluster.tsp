@@ -93,11 +93,18 @@ model ExadbVmClusterProperties {
   @maxLength(255)
   giVersion?: string;
 
+  @removed(Versions.v20260501_preview)
   @doc("The hostname for the  Exadata VM cluster on Exascale Infrastructure.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   @minLength(1)
   @maxLength(12)
   hostname: string;
+
+  @added(Versions.v20260501_preview)
+  @doc("The hostname for the  Exadata VM cluster on Exascale Infrastructure.")
+  @encodedName("application/json", "hostname")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  hostnameV2: string;
 
   @doc("The Oracle license model that applies to the Exadata VM cluster on Exascale Infrastructure. The default is LICENSE_INCLUDED. ")
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -169,11 +176,18 @@ model ExadbVmClusterProperties {
   @visibility(Lifecycle.Read)
   lifecycleDetails?: string;
 
+  @removed(Versions.v20260501_preview)
   @doc("The FQDN of the DNS record for the SCAN IP addresses that are associated with the Exadata VM cluster on Exascale Infrastructure. ")
   @visibility(Lifecycle.Read)
   @minLength(1)
   @maxLength(72)
   scanDnsName?: string;
+
+  @added(Versions.v20260501_preview)
+  @doc("The FQDN of the DNS record for the SCAN IP addresses that are associated with the Exadata VM cluster on Exascale Infrastructure. ")
+  @visibility(Lifecycle.Read)
+  @encodedName("application/json", "scanDnsName")
+  scanDnsNameV2?: string;
 
   @doc("The Single Client Access Name (SCAN) IP addresses associated with the Exadata VM cluster on Exascale Infrastructure. SCAN IP addresses are typically used for load balancing and are not assigned to any interface. Oracle Clusterware directs the requests to the appropriate nodes in the cluster. **Note:** For a single-node DB system, this list is empty.")
   @visibility(Lifecycle.Read)

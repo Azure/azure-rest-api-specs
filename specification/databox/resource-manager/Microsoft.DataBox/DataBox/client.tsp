@@ -442,7 +442,9 @@ using TypeSpec.Http;
 );
 
 /** Request to mark devices for a given job as shipped */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK customization override operation."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "SDK customization override operation."
 op jobMarkDevicesShippedCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
   ...Azure.ResourceManager.SubscriptionIdParameter,
@@ -460,7 +462,9 @@ op jobMarkDevicesShippedCustomized(
 ): NoContentResponse | Microsoft.DataBox.ApiError;
 
 /** Request to mitigate for a given job */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "SDK customization override operation."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "SDK customization override operation."
 op mitigateCustomized(
   ...Azure.ResourceManager.ApiVersionParameter,
   ...Azure.ResourceManager.SubscriptionIdParameter,

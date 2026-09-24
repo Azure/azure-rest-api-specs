@@ -28,7 +28,7 @@ using TypeSpec.Versioning;
 @armProviderNamespace("Microsoft.Insights")
 @service(#{ title: "ApplicationInsightsManagementClient" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace WorkbookTemplatesApi;
 
 /**

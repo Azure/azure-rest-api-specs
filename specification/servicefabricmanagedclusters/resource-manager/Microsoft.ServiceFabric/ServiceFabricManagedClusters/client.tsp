@@ -692,6 +692,11 @@ namespace Azure.ResourceManager.Models {
   "csharp"
 );
 @@clientName(
+  ProxyAgentSettings.addProxyAgentExtension,
+  "ShouldAddProxyAgentExtension",
+  "csharp"
+);
+@@clientName(
   ManagedMaintenanceWindowStatus.get,
   "GetManagedMaintenanceWindowStatus",
   "csharp"
@@ -726,6 +731,16 @@ namespace Azure.ResourceManager.Models {
 @@clientName(
   ManagedApplyMaintenanceWindow.postNoBody,
   "PostManagedApplyMaintenanceWindow",
+  "csharp"
+);
+@@clientName(
+  ManagedApplyMaintenanceWindow.post,
+  "PostManagedApplyMaintenanceWindowWithContent",
+  "csharp"
+);
+@@clientName(
+  ApplyMaintenanceWindowRequest,
+  "ApplyMaintenanceWindowContent",
   "csharp"
 );
 @@clientName(Applications.fetchHealth::parameters.body, "content", "csharp");

@@ -26,8 +26,11 @@ if: >
 permissions:
   contents: read
   actions: read
+  copilot-requests: write
   issues: read
   pull-requests: read
+  # Required by shared-github-aw-imports/global_networks_auth_import.md to mint an
+  # OIDC token for the api://AzureADTokenExchange audience (federated `az login`).
   id-token: write
 strict: false
 imports:
@@ -37,6 +40,10 @@ env:
   AZSDK_CLI_PATH: /tmp/bin
   AZURE_CLIENT_ID: c277c2aa-5326-4d16-90de-98feeca69cbc
   AZURE_TENANT_ID: 72f988bf-86f1-41af-91ab-2d7cd011db47
+  # NOTE: gh-aw warns that this secret is visible to the agent container. It is
+  # intentional (see #40598): the azsdk CLI the agent drives needs a GitHub token,
+  # as does the azsdk-mcp installer step. Do not move it to `engine.env` — the
+  # imported setup steps read it too.
   GITHUB_TOKEN: ${{ secrets.GITHUB_PERSONAL_ACCESS_TOKEN || secrets.GITHUB_TOKEN }}
   GITHUB_ACTIONS: "true"
 tools:
@@ -100,7 +107,7 @@ When validation succeeds, execute the following steps in order.
 - Execute `azsdk release-plan get --work-item-id <WORK_ITEM_ID> --release-plan-id <RELEASE_PLAN_ID>`. Release plan and work item ID are numeric values.
 - If release plan is not found then add a comment in the issue to state that release plan is not found for SDK generation and complete the workflow.
 - If get release plan is successful, then run following steps from the azure-rest-api-specs repo root.
-  - Run `npm ci`.
+  - Run `pnpm install`.
   - update the release plan by executing `azsdk release-plan update --typespec-path <TypeSpec project path> --workitem-id <work-item-id> --pull-request <spec pull request url> --api-version <api-version>` from azure-rest-api-specs repo root. Use the TypeSpec project path from the issue context, the work item ID from the release plan, and the spec pull request URL identified in step 2.
 - Capture the TypeSpec project path, API version, release type, and target languages from the issue context (dispatch runs rely on the issue referenced by `issue_url`).
 - For `issue_comment` triggers, inspect the comment body for case-insensitive mentions of supported language names (`Python`, `.NET`, `JavaScript`, `Java`, `Go`). If one or more supported languages are explicitly requested, override the target language list to only those deduplicated matches. When no supported languages are mentioned, fall back to the release plan language list.

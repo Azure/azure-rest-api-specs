@@ -65,15 +65,14 @@ interface FleetUpdateStrategies {
 
   #suppress "deprecated" "Existing API"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Existing API"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "DO NOT COPY - migrate to LRO apis"
-  @extension(
-    "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "azure-async-operation" }
-  )
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteAsync<
     FleetUpdateStrategy,
     Azure.ResourceManager.Foundations.BaseParameters<FleetUpdateStrategy> &
-      IfMatchParameters<FleetUpdateStrategy>
+      IfMatchParameters<FleetUpdateStrategy>,
+    LroHeaders = ArmLroLocationHeader &
+      ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /** List FleetUpdateStrategy resources by Fleet */

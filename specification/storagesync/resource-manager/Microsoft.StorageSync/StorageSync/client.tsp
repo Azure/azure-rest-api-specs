@@ -16,6 +16,11 @@ using Microsoft.StorageSync;
   Azure.ResourceManager.CommonTypes.PrivateLinkResource.properties,
   "csharp,javascript"
 );
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the established flattened StorageSync SDK model shape."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(
+  CloudEndpointUpdateParameters.properties,
+  "csharp"
+);
 
 @@clientName(RestoreFileSpec.isdir, "IsDirectory", "csharp");
 @@clientName(

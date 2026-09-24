@@ -1,5 +1,5 @@
 <!-- NOTE: This comment is for file maintainers only and is not rendered.
-     Upstream alignment: 2026-04-15
+     Upstream alignment: 2026-08-15
      Derived from:
        - Azure REST API Guidelines (vNext) — Naming
        - ARM Wiki: api_contracts/guidelines/api_best_practices_and_design_choices.md (RPC-BestPractice-01)
@@ -13,7 +13,8 @@ Consistent naming across Azure APIs ensures a uniform developer experience in SD
 
 - [Azure REST API Guidelines -- JSON](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#json)
 - [Azure REST API Guidelines -- URLs](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#uniform-resource-locators-urls)
-- [Azure Resource Provider Contract -- Resource API Reference](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/resource-api-reference.md)
+- [Azure Resource Provider Contract -- URI Format and Arguments](https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10/uri-format-and-arguments-for-crud-apis-on-resources)
+- [Azure Resource Provider Contract -- PUT Resource](https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10/put-resource)
 
 ---
 

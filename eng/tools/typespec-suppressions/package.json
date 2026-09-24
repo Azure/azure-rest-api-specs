@@ -1,0 +1,29 @@
+{
+  "name": "@azure-tools/typespec-suppressions",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "bin": {
+    "typespec-suppressions": "cmd/typespec-suppressions.js"
+  },
+  "scripts": {
+    "build": "tsc --noEmit",
+    "check": "pnpm build && pnpm lint && pnpm format:check && pnpm test:ci",
+    "format": "oxfmt . --write",
+    "format:check": "oxfmt . --check",
+    "lint": "oxlint .",
+    "test": "vitest --run",
+    "test:ci": "vitest run --coverage --reporter=verbose"
+  },
+  "dependencies": {
+    "@typespec/compiler": "catalog:",
+    "simple-git": "catalog:",
+    "yaml": "catalog:"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:"
+  },
+  "engines": {
+    "node": ">=24.14.1"
+  }
+}

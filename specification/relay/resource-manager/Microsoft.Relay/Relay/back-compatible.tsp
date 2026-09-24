@@ -118,3 +118,6 @@ using Microsoft.Relay;
 
 // NamespacesOperationGroup operations
 @@clientLocation(NamespacesOperationGroup.checkNameAvailability, "Namespaces");
+
+// ClustersOperationGroup operations
+@@clientLocation(ClustersOperationGroup.listAvailableClusterRegion, Clusters);

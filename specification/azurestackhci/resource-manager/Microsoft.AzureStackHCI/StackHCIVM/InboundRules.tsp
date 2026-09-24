@@ -15,6 +15,7 @@ namespace Microsoft.AzureStackHCI;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-azure-resource legacy"
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-azure-resource' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to Azure.ResourceManager resource types."
 @doc("The inbound rule resource definition.")
 @extension("x-ms-azure-resource", true)
 @parentResource(NatGateway)

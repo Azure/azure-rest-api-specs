@@ -1,0 +1,40 @@
+{
+  "title": "Get Analysis Result for a Virtually-Paginated Text Document with Partial Processing",
+  "operationId": "ContentAnalyzers_GetResult",
+  "parameters": {
+    "api-version": "2026-06-01-preview",
+    "operationId": "c1d2e3f4-a5b6-7890-1234-abcdef012345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "c1d2e3f4-a5b6-7890-1234-abcdef012345",
+        "status": "Succeeded",
+        "result": {
+          "analyzerId": "prebuilt-read",
+          "apiVersion": "2026-06-01-preview",
+          "createdAt": "2026-07-01T18:46:36.244Z",
+          "warnings": [
+            {
+              "code": "InputExceededLimit",
+              "message": "The input exceeded the maximum number of pages that can be processed; only pages 1-5 were analyzed. See https://aka.ms/cu-doc-limits.",
+              "target": "inputs/0"
+            }
+          ],
+          "contents": [
+            {
+              "kind": "document",
+              "mimeType": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+              "markdown": "# CONTOSO\n\n...",
+              "startPageNumber": 1,
+              "endPageNumber": 5
+            }
+          ]
+        },
+        "usage": {
+          "documentPagesMinimal": 5
+        }
+      }
+    }
+  }
+}
