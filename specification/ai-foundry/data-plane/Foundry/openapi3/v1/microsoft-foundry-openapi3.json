@@ -12134,7 +12134,7 @@
             "name": "limit",
             "in": "query",
             "required": false,
-            "description": "Maximum number of sessions to return in this page. Defaults to 20.",
+            "description": "Maximum number of sessions to return in this page. If omitted, the service defaults to 20.",
             "schema": {
               "type": "integer",
               "format": "int32",
@@ -12146,7 +12146,7 @@
             "name": "offset",
             "in": "query",
             "required": false,
-            "description": "Number of sessions to skip before returning this page. Defaults to zero.",
+            "description": "Number of sessions to skip before returning this page. If omitted, the service defaults to 0.",
             "schema": {
               "type": "integer",
               "format": "int32",
@@ -87103,14 +87103,14 @@
             "type": "number",
             "format": "double",
             "minimum": 0,
-            "description": "Nonnegative learning rate. Defaults to 0.0001.",
+            "description": "Nonnegative learning rate. If omitted, the service defaults to 0.0001.",
             "default": 0.0001
           },
           "beta1": {
             "type": "number",
             "format": "double",
             "minimum": 0,
-            "description": "Adam first-moment coefficient, from zero inclusive to one exclusive. Defaults to 0.9.",
+            "description": "Adam first-moment coefficient, from zero inclusive to one exclusive. If omitted, the service defaults to 0.9.",
             "exclusiveMaximum": 1,
             "default": 0.9
           },
@@ -87118,14 +87118,14 @@
             "type": "number",
             "format": "double",
             "minimum": 0,
-            "description": "Adam second-moment coefficient, from zero inclusive to one exclusive. Defaults to 0.95.",
+            "description": "Adam second-moment coefficient, from zero inclusive to one exclusive. If omitted, the service defaults to 0.95.",
             "exclusiveMaximum": 1,
             "default": 0.95
           },
           "eps": {
             "type": "number",
             "format": "double",
-            "description": "Positive numerical stability floor. Defaults to 0.000000000001.",
+            "description": "Positive numerical stability floor. If omitted, the service defaults to 0.000000000001.",
             "exclusiveMinimum": 0,
             "default": 1e-12
           },
@@ -87133,7 +87133,7 @@
             "type": "number",
             "format": "double",
             "minimum": 0,
-            "description": "Nonnegative L2 weight-decay coefficient. Defaults to zero.",
+            "description": "Nonnegative L2 weight-decay coefficient. If omitted, the service defaults to 0.0.",
             "default": 0
           }
         },
@@ -87211,7 +87211,7 @@
           },
           "training_type": {
             "$ref": "#/components/schemas/SessionFineTuning.FineTuningTrainingType",
-            "description": "Training tier. When omitted, the service defaults to GlobalStandard unless\nthe legacy user_metadata.DeveloperTier setting selects DeveloperTier."
+            "description": "Training tier. If omitted, the service defaults to GlobalStandard unless\nthe legacy user_metadata.DeveloperTier setting selects DeveloperTier."
           }
         },
         "description": "Request body for POST /fine_tuning/sessions."
@@ -87800,7 +87800,7 @@
           "num_samples": {
             "type": "integer",
             "format": "int32",
-            "description": "Number of independent completions to generate. Default 1.",
+            "description": "Number of independent completions to generate. If omitted, the service defaults to 1.",
             "default": 1
           },
           "prompt": {
@@ -87822,7 +87822,7 @@
           },
           "prompt_logprobs": {
             "type": "boolean",
-            "description": "Whether to return prompt-token log-probabilities in the overall sample result. Defaults to false server-side.",
+            "description": "Whether to return prompt-token log-probabilities in the overall sample result. If omitted, the service defaults to false.",
             "default": false
           },
           "topk_prompt_logprobs": {
@@ -87830,7 +87830,7 @@
             "format": "int32",
             "minimum": 0,
             "maximum": 20,
-            "description": "Number of top-k log-probabilities per prompt token. Defaults to zero (disabled); maximum 20.",
+            "description": "Number of top-k log-probabilities per prompt token. If omitted, the service defaults to 0. Zero disables this output; maximum 20.",
             "default": 0
           }
         },
@@ -87851,25 +87851,25 @@
           "temperature": {
             "type": "number",
             "format": "double",
-            "description": "Softmax temperature. Default 1.0.",
+            "description": "Softmax temperature. If omitted, the service defaults to 1.0.",
             "default": 1
           },
           "top_p": {
             "type": "number",
             "format": "double",
-            "description": "Nucleus (top-p) probability mass. Default 1.0.",
+            "description": "Nucleus (top-p) probability mass. If omitted, the service defaults to 1.0.",
             "default": 1
           },
           "top_k": {
             "type": "integer",
             "format": "int32",
-            "description": "Top-k candidates. -1 = disabled.",
+            "description": "Top-k candidates. If omitted, the service defaults to -1. A value of -1 disables top-k filtering.",
             "default": -1
           },
           "seed": {
             "type": "integer",
             "format": "int64",
-            "description": "RNG seed for reproducible samples. Server chooses randomly if omitted."
+            "description": "RNG seed for reproducible samples. If omitted, the service chooses a random seed."
           },
           "stop_criteria": {
             "$ref": "#/components/schemas/SessionFineTuning.FineTuningStopCriteria",
@@ -88173,23 +88173,26 @@
           "alpha": {
             "type": "number",
             "format": "double",
-            "description": "LoRA scaling factor (effective scale = alpha / rank). Defaults to 32.0 server-side."
+            "description": "LoRA scaling factor (effective scale = alpha / rank). If omitted, the service defaults to 32.0.",
+            "default": 32
           },
           "seed": {
             "type": "integer",
             "format": "int64",
-            "description": "Seed for LoRA weight initialisation.\nIf omitted, the server picks a random seed and echoes it back."
+            "description": "Seed for LoRA weight initialisation.\nIf omitted, the service picks a random seed and echoes it back."
           },
           "freeze_vision_tower": {
             "type": "boolean",
-            "description": "Whether to freeze the vision tower during training. Defaults to true server-side."
+            "description": "Whether to freeze the vision tower during training. If omitted, the service defaults to true.",
+            "default": true
           },
           "freeze_multi_modal_projector": {
             "type": "boolean",
-            "description": "Whether to freeze the multimodal projector during training. Defaults to true server-side."
+            "description": "Whether to freeze the multimodal projector during training. If omitted, the service defaults to true.",
+            "default": true
           }
         },
-        "description": "LoRA adapter configuration.\nOmit optional settings to use the server defaults."
+        "description": "LoRA adapter configuration.\nIf optional settings are omitted, the service applies the defaults described below."
       },
       "SessionFineTuning.LossFnConfig": {
         "type": "object",
@@ -88229,7 +88232,7 @@
           },
           "weights": {
             "$ref": "#/components/schemas/SessionFineTuning.TensorData",
-            "description": "Per-token weights (0.0 = masked, 1.0 = counted). Omission uses a weight of one for each target."
+            "description": "Per-token weights (0.0 = masked, 1.0 = counted). If omitted, the service uses a weight of 1.0 for each target."
           },
           "advantages": {
             "$ref": "#/components/schemas/SessionFineTuning.TensorData",
@@ -88337,7 +88340,7 @@
             "enum": [
               "save_weights_for_sampler"
             ],
-            "description": "Identifies the request as saving sampler-compatible weights.",
+            "description": "Identifies the request as saving sampler-compatible weights. If omitted, the service defaults to \"save_weights_for_sampler\".",
             "default": "save_weights_for_sampler"
           }
         },

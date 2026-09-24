@@ -155,51 +155,51 @@ model FineTuningModelInput {
 
 /**
  * LoRA adapter configuration.
- * Omit optional settings to use the server defaults.
+ * If optional settings are omitted, the service applies the defaults described below.
  */
 model LoRAConfig {
   /** Number of LoRA rank dimensions required by the service. */
   rank: int32;
 
-  /** LoRA scaling factor (effective scale = alpha / rank). Defaults to 32.0 server-side. */
-  alpha?: float64;
+  /** LoRA scaling factor (effective scale = alpha / rank). If omitted, the service defaults to 32.0. */
+  alpha?: float64 = 32.0;
 
   /**
    * Seed for LoRA weight initialisation.
-   * If omitted, the server picks a random seed and echoes it back.
+   * If omitted, the service picks a random seed and echoes it back.
    */
   seed?: int64;
 
-  /** Whether to freeze the vision tower during training. Defaults to true server-side. */
-  freeze_vision_tower?: boolean;
+  /** Whether to freeze the vision tower during training. If omitted, the service defaults to true. */
+  freeze_vision_tower?: boolean = true;
 
-  /** Whether to freeze the multimodal projector during training. Defaults to true server-side. */
-  freeze_multi_modal_projector?: boolean;
+  /** Whether to freeze the multimodal projector during training. If omitted, the service defaults to true. */
+  freeze_multi_modal_projector?: boolean = true;
 }
 
 // ─── Adam optimizer parameters ────────────────────────────────────────────────
 
 /** Adam optimizer hyper-parameters. */
 model AdamParams {
-  /** Nonnegative learning rate. Defaults to 0.0001. */
+  /** Nonnegative learning rate. If omitted, the service defaults to 0.0001. */
   @minValue(0)
   learning_rate?: float64 = 1e-4;
 
-  /** Adam first-moment coefficient, from zero inclusive to one exclusive. Defaults to 0.9. */
+  /** Adam first-moment coefficient, from zero inclusive to one exclusive. If omitted, the service defaults to 0.9. */
   @minValue(0)
   @maxValueExclusive(1)
   beta1?: float64 = 0.9;
 
-  /** Adam second-moment coefficient, from zero inclusive to one exclusive. Defaults to 0.95. */
+  /** Adam second-moment coefficient, from zero inclusive to one exclusive. If omitted, the service defaults to 0.95. */
   @minValue(0)
   @maxValueExclusive(1)
   beta2?: float64 = 0.95;
 
-  /** Positive numerical stability floor. Defaults to 0.000000000001. */
+  /** Positive numerical stability floor. If omitted, the service defaults to 0.000000000001. */
   @minValueExclusive(0)
   eps?: float64 = 1e-12;
 
-  /** Nonnegative L2 weight-decay coefficient. Defaults to zero. */
+  /** Nonnegative L2 weight-decay coefficient. If omitted, the service defaults to 0.0. */
   @minValue(0)
   weight_decay?: float64 = 0.0;
 }
@@ -224,16 +224,16 @@ model FineTuningSamplingParams {
   @minValue(1)
   max_tokens: int32;
 
-  /** Softmax temperature. Default 1.0. */
+  /** Softmax temperature. If omitted, the service defaults to 1.0. */
   temperature?: float64 = 1.0;
 
-  /** Nucleus (top-p) probability mass. Default 1.0. */
+  /** Nucleus (top-p) probability mass. If omitted, the service defaults to 1.0. */
   top_p?: float64 = 1.0;
 
-  /** Top-k candidates. -1 = disabled. */
+  /** Top-k candidates. If omitted, the service defaults to -1. A value of -1 disables top-k filtering. */
   top_k?: int32 = -1;
 
-  /** RNG seed for reproducible samples. Server chooses randomly if omitted. */
+  /** RNG seed for reproducible samples. If omitted, the service chooses a random seed. */
   seed?: int64;
 
   /** Stop criteria: either stop_token_ids or stop_strings, not both. */
@@ -247,7 +247,7 @@ model LossFnInputs {
   /** Target token ids (shifted by 1 relative to model input). */
   target_tokens: TensorData;
 
-  /** Per-token weights (0.0 = masked, 1.0 = counted). Omission uses a weight of one for each target. */
+  /** Per-token weights (0.0 = masked, 1.0 = counted). If omitted, the service uses a weight of 1.0 for each target. */
   weights?: TensorData;
 
   /**
@@ -505,7 +505,7 @@ model CreateFineTuningSessionRequest {
   from_checkpoint?: FineTuningFromCheckpoint | null;
 
   /**
-   * Training tier. When omitted, the service defaults to GlobalStandard unless
+   * Training tier. If omitted, the service defaults to GlobalStandard unless
    * the legacy user_metadata.DeveloperTier setting selects DeveloperTier.
    */
   training_type?: FineTuningTrainingType;
@@ -626,14 +626,14 @@ model SaveSamplerWeightsRequest {
   /** Training step sequence number. Required with sampling_session_seq_id when path is omitted. */
   seq_id?: int32;
 
-  /** Identifies the request as saving sampler-compatible weights. */
+  /** Identifies the request as saving sampler-compatible weights. If omitted, the service defaults to "save_weights_for_sampler". */
   type?: "save_weights_for_sampler" = "save_weights_for_sampler";
 }
 
 /** Request body for POST /fine_tuning/sessions/{sessionId}/sample. */
 @Azure.ClientGenerator.Core.clientName("FineTuningSampleContent", "csharp")
 model FineTuningSampleRequest {
-  /** Number of independent completions to generate. Default 1. */
+  /** Number of independent completions to generate. If omitted, the service defaults to 1. */
   num_samples?: int32 = 1;
 
   /** Tokenised input prompt. */
@@ -648,10 +648,10 @@ model FineTuningSampleRequest {
   /** Training step index; must match the seq_id used when saving sampler weights. */
   seq_id?: int32;
 
-  /** Whether to return prompt-token log-probabilities in the overall sample result. Defaults to false server-side. */
+  /** Whether to return prompt-token log-probabilities in the overall sample result. If omitted, the service defaults to false. */
   prompt_logprobs?: boolean = false;
 
-  /** Number of top-k log-probabilities per prompt token. Defaults to zero (disabled); maximum 20. */
+  /** Number of top-k log-probabilities per prompt token. If omitted, the service defaults to 0. Zero disables this output; maximum 20. */
   @minValue(0)
   @maxValue(20)
   topk_prompt_logprobs?: int32 = 0;
