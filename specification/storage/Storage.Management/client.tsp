@@ -852,6 +852,11 @@ namespace Azure.ResourceManager.Models {
 @@clientName(ManagementPolicyRule.type, "RuleType", "csharp");
 @@clientName(BlobInventoryPolicySchema.type, "RuleType", "csharp");
 @@clientName(
+  AdvancedPlatformMetricsRuleProperties.ruleType,
+  "RuleKind",
+  "csharp"
+);
+@@clientName(
   AdvancedPlatformMetricsRuleProperties.enabled,
   "IsEnabled",
   "csharp"
