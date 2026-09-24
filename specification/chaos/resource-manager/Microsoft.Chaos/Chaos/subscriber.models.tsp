@@ -71,7 +71,9 @@ model SubscriberHost {
 
   /**
    * The ARM-shaped external identifier (`.../virtualSurrogateResources/{hostHint}`)
-   * of the host, for a non-ARM machine.
+   * of the host, for a non-ARM machine. This is an opaque, ARM-shaped handle:
+   * `virtualSurrogateResources` is a synthetic surrogate marker, not a registered or
+   * resolvable ARM resource type, so it has no PUT/GET of its own.
    */
   @visibility(Lifecycle.Read)
   externalId?: string;
@@ -98,27 +100,15 @@ model SubscriberProperties {
   connectionResourceId?: Azure.Core.armResourceIdentifier;
 
   /**
-   * The connection's per-create grant stamp this registration is bound to.
-   * Present only for below-ARM subscribers; omitted for above-ARM subscribers.
-   */
-  @visibility(Lifecycle.Read)
-  grantIncarnation?: string;
-
-  /**
-   * The parent workspace's per-creation stamp. A workspace recreate mints a new
-   * incarnation and purges all prior subscribers.
-   */
-  @visibility(Lifecycle.Read)
-  workspaceIncarnation: string;
-
-  /**
    * The host type of the machine the agent runs on.
    */
   @visibility(Lifecycle.Read)
   kind: HostType;
 
   /**
-   * The liveness status of the subscriber, from the agent heartbeat.
+   * The liveness status of the subscriber, derived from the agent heartbeat. This is a
+   * snapshot value as of the workspace's most recent `refreshRecommendations`, not a
+   * live read, so it can lag the agent's current state until the next refresh.
    */
   @visibility(Lifecycle.Read)
   status: SubscriberStatus;
@@ -130,7 +120,9 @@ model SubscriberProperties {
   registeredAt: utcDateTime;
 
   /**
-   * The date and time of the agent's last heartbeat.
+   * The date and time of the agent's last heartbeat, as observed at the workspace's
+   * most recent `refreshRecommendations`. Like `status`, this reflects the last
+   * discovery snapshot rather than a live read.
    */
   @visibility(Lifecycle.Read)
   lastSeenAt: utcDateTime;

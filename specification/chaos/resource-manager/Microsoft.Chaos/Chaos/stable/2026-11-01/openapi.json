@@ -7216,7 +7216,7 @@
         },
         "externalId": {
           "type": "string",
-          "description": "The ARM-shaped external identifier (`.../virtualSurrogateResources/{hostHint}`)\nof the host, for a non-ARM machine.",
+          "description": "The ARM-shaped external identifier (`.../virtualSurrogateResources/{hostHint}`)\nof the host, for a non-ARM machine. This is an opaque, ARM-shaped handle:\n`virtualSurrogateResources` is a synthetic surrogate marker, not a registered or\nresolvable ARM resource type, so it has no PUT/GET of its own.",
           "readOnly": true
         }
       }
@@ -7258,16 +7258,6 @@
           "description": "The `.../connections/{name}` connection that authorizes this subscriber.\nPresent only for below-ARM subscribers; omitted for above-ARM subscribers,\nwhich are authorized by the workspace's system-managed allowance.",
           "readOnly": true
         },
-        "grantIncarnation": {
-          "type": "string",
-          "description": "The connection's per-create grant stamp this registration is bound to.\nPresent only for below-ARM subscribers; omitted for above-ARM subscribers.",
-          "readOnly": true
-        },
-        "workspaceIncarnation": {
-          "type": "string",
-          "description": "The parent workspace's per-creation stamp. A workspace recreate mints a new\nincarnation and purges all prior subscribers.",
-          "readOnly": true
-        },
         "kind": {
           "$ref": "#/definitions/HostType",
           "description": "The host type of the machine the agent runs on.",
@@ -7275,7 +7265,7 @@
         },
         "status": {
           "$ref": "#/definitions/SubscriberStatus",
-          "description": "The liveness status of the subscriber, from the agent heartbeat.",
+          "description": "The liveness status of the subscriber, derived from the agent heartbeat. This is a\nsnapshot value as of the workspace's most recent `refreshRecommendations`, not a\nlive read, so it can lag the agent's current state until the next refresh.",
           "readOnly": true
         },
         "registeredAt": {
@@ -7287,7 +7277,7 @@
         "lastSeenAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The date and time of the agent's last heartbeat.",
+          "description": "The date and time of the agent's last heartbeat, as observed at the workspace's\nmost recent `refreshRecommendations`. Like `status`, this reflects the last\ndiscovery snapshot rather than a live read.",
           "readOnly": true
         },
         "host": {
@@ -7323,7 +7313,6 @@
       },
       "required": [
         "workspaceId",
-        "workspaceIncarnation",
         "kind",
         "status",
         "registeredAt",
