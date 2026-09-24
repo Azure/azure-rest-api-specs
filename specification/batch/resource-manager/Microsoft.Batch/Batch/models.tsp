@@ -264,7 +264,7 @@ enum AuthenticationMode {
   /**
    * The authentication mode using task authentication tokens.
    */
-  @removed(Versions.v2026_08_01)
+  @removed(Versions.v2026_10_01)
   TaskAuthenticationToken,
 }
 
@@ -651,10 +651,10 @@ enum ComputeNodeDeallocationOption {
 }
 
 /**
- * Determines what to do with a node and its running task(s) after it has been selected for deallocation. This is the set of values that can be requested; `RetainedData` is no longer accepted as of the 2026-08-01 API version.
+ * Determines what to do with a node and its running task(s) after it has been selected for deallocation. This is the set of values that can be requested; `RetainedData` is no longer accepted as of the 2026-10-01 API version.
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "legacy design"
-@added(Versions.v2026_08_01)
+@added(Versions.v2026_10_01)
 enum RequestedComputeNodeDeallocationOption {
   /**
    * Terminate running task processes and requeue the tasks. The tasks will run again when a node is available. Remove nodes as soon as tasks have been terminated.
@@ -2133,7 +2133,7 @@ model PoolProperties {
   /**
    * Specifies the profile of VM sizes and the allocation strategy used to allocate compute nodes for an Instance Mix pool. When specified, vmSize must be "Mix". This property can only be changed while the pool has no compute nodes.
    */
-  @added(Versions.v2026_08_01)
+  @added(Versions.v2026_10_01)
   vmSkuProfile?: VirtualMachineSkuProfile;
 
   /**
@@ -2379,14 +2379,104 @@ model VirtualMachineConfiguration {
   /**
    * Specifies the hardware settings for the compute nodes.
    */
-  @added(Versions.v2026_08_01)
+  @added(Versions.v2026_10_01)
   hardwareProfile?: HardwareProfile;
+
+  /**
+   * The availability zone placement policy for compute nodes in the pool. Set zonePlacementPolicy to Auto to delegate availability zone selection and balancing to the Virtual Machine Scale Set.
+   * On pool creation, if placement is omitted, Batch uses nodePlacementConfiguration when it is specified; otherwise, the pool uses Regional placement, which provides no availability zone distribution guarantee. This property cannot be combined with nodePlacementConfiguration.
+   * On PATCH, omitting placement preserves the existing placement policy, including when virtualMachineConfiguration is supplied.
+   * On PUT, the supplied virtual machine configuration replaces the existing policies; omitting placement clears the placement policy.
+   */
+  @added(Versions.v2026_10_01)
+  @summary("The availability zone placement policy for compute nodes in the pool.")
+  placement?: Placement;
+
+  /**
+   * The resiliency policy for compute nodes in the pool. This property requires placement.zonePlacementPolicy to be Auto.
+   * On PATCH, omitting resiliencyPolicy preserves the existing resiliency policy independently of whether placement is supplied.
+   * On PUT, the supplied virtual machine configuration replaces the existing policies; omitting resiliencyPolicy clears the resiliency policy.
+   */
+  @added(Versions.v2026_10_01)
+  @summary("The resiliency policy for compute nodes in the pool.")
+  resiliencyPolicy?: ResiliencyPolicy;
 }
+
+/**
+ * The placement policy for compute nodes in a pool.
+ */
+@added(Versions.v2026_10_01)
+model Placement {
+  /**
+   * Auto delegates zone selection and balancing to the Virtual Machine Scale Set.
+   */
+  zonePlacementPolicy: ZonePlacementPolicyType;
+}
+
+/**
+ * The resiliency policy for compute nodes in a pool.
+ */
+@added(Versions.v2026_10_01)
+model ResiliencyPolicy {
+  /**
+   * The policy that controls allocation across availability zones.
+   */
+  zoneAllocationPolicy: ZoneAllocationPolicy;
+}
+
+/**
+ * The policy that controls allocation across availability zones.
+ */
+@added(Versions.v2026_10_01)
+model ZoneAllocationPolicy {
+  /**
+   * The maximum number of availability zones that may be used. The value cannot exceed the number of zones supported by the region.
+   */
+  @minValue(1)
+  maxZoneCount?: int32;
+
+  /**
+   * The policy that limits the percentage of pool instances that may be allocated in a single availability zone.
+   */
+  maxInstancePercentPerZonePolicy?: MaxInstancePercentPerZonePolicy;
+}
+
+/**
+ * The policy that limits the percentage of pool instances that may be allocated in a single availability zone.
+ */
+@added(Versions.v2026_10_01)
+model MaxInstancePercentPerZonePolicy {
+  /**
+   * Whether the maximum instance percentage policy is enabled.
+   */
+  enabled?: boolean;
+
+  /**
+   * The maximum percentage of pool instances that may be allocated in a single availability zone.
+   */
+  @minValue(1)
+  @maxValue(100)
+  value: int32;
+}
+
+/**
+ * The zone placement policy for compute nodes in a pool.
+ */
+@added(Versions.v2026_10_01)
+union ZonePlacementPolicyType {
+  string,
+
+  /**
+   * The Virtual Machine Scale Set automatically selects availability zones and balances instances across them.
+   */
+  Auto: "Auto",
+}
+
 
 /**
  * Specifies the set of VM sizes and the allocation strategy used to allocate compute nodes for an Instance Mix pool.
  */
-@added(Versions.v2026_08_01)
+@added(Versions.v2026_10_01)
 model VirtualMachineSkuProfile {
   /**
    * The list of VM sizes (1 to 5) that may be allocated for the pool. All sizes must share the same vCPU count and VM family. This must be specified when the vmSkuProfile is provided during pool creation.
@@ -2406,7 +2496,7 @@ model VirtualMachineSkuProfile {
  * Specifies a single VM size that may be allocated for an Instance Mix pool.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VMSize matches the existing Batch vmSize terminology for VM sizes."
-@added(Versions.v2026_08_01)
+@added(Versions.v2026_10_01)
 model VirtualMachineSkuProfileVMSize {
   /**
    * The name of the VM size (for example, "Standard_D8s_v5").
@@ -2422,7 +2512,7 @@ model VirtualMachineSkuProfileVMSize {
 /**
  * Specifies the allocation strategy that the Fungible Compute Platform uses to select VM sizes from the vmSkuProfile when allocating nodes for an Instance Mix pool.
  */
-@added(Versions.v2026_08_01)
+@added(Versions.v2026_10_01)
 union VirtualMachineSkuAllocationStrategy {
   string,
 
@@ -2445,7 +2535,7 @@ union VirtualMachineSkuAllocationStrategy {
 /**
  * Specifies the hardware settings for the compute nodes.
  */
-@added(Versions.v2026_08_01)
+@added(Versions.v2026_10_01)
 model HardwareProfile {
   /**
    * Specifies the properties for customizing the size of the virtual machine.
@@ -2457,7 +2547,7 @@ model HardwareProfile {
  * Specifies the properties for customizing the size of the virtual machine.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "VMSizeProperties matches the Azure Compute VM size customization model naming."
-@added(Versions.v2026_08_01)
+@added(Versions.v2026_10_01)
 model VMSizeProperties {
   /**
    * Specifies the number of vCPUs available for the VM. When this property is not specified in the request body the default behavior is to set it to the value of vCPUs available for that VM size.
@@ -2999,7 +3089,7 @@ model FixedScaleSettings {
    */
   @summary("Determines what to do with a node and its running task(s) after it has been selected for deallocation.")
   @visibility(Lifecycle.Create, Lifecycle.Update)
-  @typeChangedFrom(Versions.v2026_08_01, ComputeNodeDeallocationOption)
+  @typeChangedFrom(Versions.v2026_10_01, ComputeNodeDeallocationOption)
   nodeDeallocationOption?: RequestedComputeNodeDeallocationOption;
 }
 
