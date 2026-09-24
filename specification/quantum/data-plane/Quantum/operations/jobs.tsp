@@ -22,28 +22,14 @@ namespace Quantum.Workspace.Services {
     create is CreateOperation<JobDetails>;
 
     /** Update job properties. */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Uses a custom signature to keep JobUpdateOptions as PATCH request while returning a dedicated JobUpdateResponse on the shared jobs route."
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Uses a custom signature to keep JobUpdateOptions as PATCH request while returning a dedicated JobUpdateResponse on the jobs route."
     @sharedRoute
-    @added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
     update is PatchOperation<JobUpdateOptions, JobUpdateResponse>;
 
-    /** OLD METHOD: Update job properties. */
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" """
-      There is no support for JsonPatch in Azure.Core.
-      The Azure.Core.ResourceUpdate does not support NoContentResponse and the JsonPatchDocument request body.
-      See https://github.com/Azure/typespec-azure/issues/475
-      """
-    @sharedRoute
-    @removed(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
-    @renamedFrom(QuantumWorkspaceAPIVersion.v2025_09_01_preview, "update")
-    updateOld is PatchOperationOld<JobDetails>;
-
-    /** Delete a job by its id. Use for cancellation in versions before 2025-12-01-preview. */
-    @renamedFrom(QuantumWorkspaceAPIVersion.v2025_12_01_preview, "cancel")
+    /** Delete a job by its id. */
     delete is DeleteOperation<JobDetails>;
 
     /** Request the cancellation of an existing job. */
-    @added(QuantumWorkspaceAPIVersion.v2025_12_01_preview)
     cancel is ActionOperation<JobDetails>;
 
     /** Get job by its id. */

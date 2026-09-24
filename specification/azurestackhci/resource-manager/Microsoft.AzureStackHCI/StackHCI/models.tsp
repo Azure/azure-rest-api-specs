@@ -22,6 +22,10 @@ union HciJobType {
   /** Job to repair a server in the cluster. */
   RepairServer: "RepairServer",
 
+  /** Job to configure Arc Gateway for the cluster. */
+  @added(Versions.v2026_10_15_preview)
+  ConfigureArcGateway: "ConfigureArcGateway",
+
   /** Job to create GPU partitions for the cluster. */
   @added(Versions.v2026_10_15_preview)
   GpuCreatePartition: "GpuCreatePartition",
@@ -447,6 +451,24 @@ union ConnectivityStatus {
    * The connectivity status is not specified.
    */
   NotSpecified: "NotSpecified",
+}
+
+/**
+ * Status of the Azure Arc Gateway on the cluster.
+ */
+@added(Versions.v2026_10_15_preview)
+union ArcGatewayStatus {
+  string,
+
+  /**
+   * Azure Arc Gateway is enabled on the cluster.
+   */
+  Enabled: "Enabled",
+
+  /**
+   * Azure Arc Gateway is disabled on the cluster.
+   */
+  Disabled: "Disabled",
 }
 
 /**
@@ -2242,6 +2264,13 @@ model ClusterProperties {
   sdnProperties?: ClusterSdnProperties;
 
   /**
+   * Azure Arc Gateway properties of the cluster.
+   */
+  @added(Versions.v2026_10_15_preview)
+  @visibility(Lifecycle.Read)
+  arcGatewayProperties?: ArcGatewayProperties;
+
+  /**
    * Local Availability Zone information for HCI cluster
    */
   @identifiers(#["localAvailabilityZoneName"])
@@ -2259,6 +2288,18 @@ model ClusterProperties {
   @added(Versions.v2026_04_30)
   @visibility(Lifecycle.Read)
   storageType?: StorageType;
+}
+
+/**
+ * Azure Arc Gateway properties of the cluster.
+ */
+@added(Versions.v2026_10_15_preview)
+model ArcGatewayProperties {
+  /**
+   * Status of the Azure Arc Gateway on the cluster.
+   */
+  @visibility(Lifecycle.Read)
+  arcGatewayStatus?: ArcGatewayStatus = ArcGatewayStatus.Disabled;
 }
 
 /**
@@ -9216,6 +9257,13 @@ model ClusterJobProperties {
  */
 @added(Versions.v2026_10_01)
 model ClusterJobListResult is Azure.Core.Page<ClusterJob>;
+
+/** Properties for configuring Arc Gateway for a cluster. */
+@added(Versions.v2026_10_15_preview)
+model HciConfigureArcGatewayJobProperties extends ClusterJobProperties {
+  /** ClusterJob Type to support polymorphic resource. */
+  jobType: HciJobType.ConfigureArcGateway;
+}
 
 ////////////////////////////////////////////////////////////////
 ////////////////////// OS Image Models //////////////////////

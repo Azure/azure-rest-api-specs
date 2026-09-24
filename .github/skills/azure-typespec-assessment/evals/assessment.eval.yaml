@@ -1,0 +1,109 @@
+name: azure-typespec-assessment-eval
+description: Routing and minimal capability coverage for azure-typespec-assessment.
+type: capability
+
+tags:
+  area: azure-typespec-assessment
+  type: ci-gate
+
+defaults:
+  runs: 1
+  timeout: "120s"
+  model: gpt-5.4
+  judge_model: gpt-5.4
+  executor: copilot-sdk
+
+scoring:
+  threshold: 1
+
+stimuli:
+  - name: trigger-assess-current-typespec-diff
+    prompt: "Load the skill appropriate for reviewing the current TypeSpec diff under C:\\workspace\\azure-rest-api-specs\\specification\\contoso\\widget. State which skill applies, but do not inspect files or start the assessment."
+    environment:
+      skills:
+        - ..
+    graders:
+      - type: skill-invocation
+        config:
+          required: ["azure-typespec-assessment"]
+    constraints: &routing_constraints
+      max_turns: 1
+      max_tokens: 10000
+
+  - name: trigger-review-typespec-pr
+    prompt: "Load the skill appropriate for assessing https://github.com/Azure/azure-rest-api-specs/pull/44988. State which skill applies, but do not inspect the PR or start the assessment."
+    environment:
+      skills:
+        - ..
+    graders:
+      - type: skill-invocation
+        config:
+          required: ["azure-typespec-assessment"]
+    constraints: *routing_constraints
+
+  - name: capability-no-changes-assessment
+    tags:
+      case: capability
+    prompt: "Use azure-typespec-assessment to assess the current TypeSpec changes under specification/contoso against HEAD. The repository is prepared and intentionally has no changes. Run the coordinator immediately with assessment-work as the output directory, do not inspect or modify source files, and report the result."
+    environment:
+      skills:
+        - ..
+      commands:
+        - git init
+        - git config user.email eval@example.com
+        - git config user.name "Assessment Eval"
+        - node -e "const fs=require('fs');fs.mkdirSync('specification/contoso',{recursive:true});fs.writeFileSync('specification/contoso/main.tsp','namespace Contoso;\\n');"
+        - git add specification/contoso/main.tsp
+        - git commit -m baseline
+    graders:
+      - type: skill-invocation
+        config:
+          required: ["azure-typespec-assessment"]
+      - type: tool-calls
+        config:
+          required:
+            - name: "^(bash|powershell)$"
+      - type: file-exists
+        config:
+          path: assessment-work/model-input.json
+      - type: file-matches
+        config:
+          path: assessment-work/model-input.json
+          pattern: '"status"\s*:\s*"no-changes"'
+      - type: run-command
+        config:
+          command: >-
+            node -e "const fs=require('fs');const input=JSON.parse(fs.readFileSync('assessment-work/model-input.json','utf8'));const state=JSON.parse(fs.readFileSync('assessment-work/workflow-state.json','utf8'));if(input.status!=='no-changes'||state.state!=='complete')process.exit(1);"
+          expected_exit_code: 0
+      - type: output-matches
+        config:
+          pattern: "no-changes"
+    constraints:
+      max_turns: 4
+      max_tokens: 20000
+
+  - name: anti-trigger-author-typespec
+    prompt: "Load the skill appropriate for adding stable API version 2026-09-01 under specification/contoso/widget. State which skill applies, but do not inspect or modify files."
+    environment:
+      skills:
+        - ..
+        - ../../azure-typespec-author
+    graders:
+      - type: skill-invocation
+        config:
+          required: ["azure-typespec-author"]
+          disallowed: ["azure-typespec-assessment"]
+    constraints: *routing_constraints
+
+  - name: anti-trigger-generate-sdk
+    prompt: "Load the skill appropriate for generating the Python package azure-contoso-widget from specification/contoso/widget. State which skill applies, but do not generate code or run tests."
+    environment:
+      skills:
+        - ..
+        - ../../azsdk-common-generate-sdk-locally
+    graders:
+      - type: skill-invocation
+        config:
+          required: ["azsdk-common-generate-sdk-locally"]
+          disallowed: ["azure-typespec-assessment"]
+    constraints: *routing_constraints

@@ -58,11 +58,33 @@ union TestFailoverState {
   string,
 }
 
+@added(Versions.v2026_09_30_preview)
+@doc("Replication mode configured for a protected resource.")
+union ReplicationMode {
+  @added(Versions.v2026_09_30_preview)
+  @doc("No replication mode is configured for the protected resource.")
+  None: "None",
+
+  @added(Versions.v2026_09_30_preview)
+  @doc("The resource is active in multiple locations at the same time.")
+  ActiveActive: "ActiveActive",
+
+  @added(Versions.v2026_09_30_preview)
+  @doc("The resource has one active location and one or more passive recovery locations.")
+  ActivePassive: "ActivePassive",
+
+  string,
+}
+
 @doc("Definition of recovery resource resource protection solution settings.")
 model ResourceProtectionSolutionSettings {
   @doc("A setting that indicates the resource protected with which recovery solution.")
   @visibility(Lifecycle.Read)
   protectionSolutionType?: ResourceProtectionSolutionType;
+
+  @added(Versions.v2026_09_30_preview)
+  @doc("Replication mode configured for the protected resource.")
+  replicationMode?: ReplicationMode;
 
   @doc("A status that indicates the protection status of a resource with an Azure solution for regional or zonal recovery.")
   @visibility(Lifecycle.Read)
@@ -120,6 +142,81 @@ model ResourceProtectionSolutionSettings {
 model ResourceBaseProtectionSolutionSetting {
   @doc("A setting that indicates the resource protected with which recovery solution.")
   protectionSolutionType: ResourceProtectionSolutionType;
+}
+
+@added(Versions.v2026_09_30_preview)
+@doc("Definition of recovery orchestration resource protection using an Azure Resource Manager template.")
+model ResourceAzureTemplateProtectionSetting
+  extends ResourceBaseProtectionSolutionSetting {
+  @added(Versions.v2026_09_30_preview)
+  @doc("A setting that indicates Azure Resource Manager template-based recovery.")
+  protectionSolutionType: "AzureTemplate";
+
+  @added(Versions.v2026_09_30_preview)
+  @doc("The Azure resource ID of the Template Spec version to deploy.")
+  templateSpecVersionId: armResourceIdentifier<[
+    {
+      type: "Microsoft.Resources/templateSpecs/versions";
+    }
+  ]>;
+
+  @added(Versions.v2026_09_30_preview)
+  @doc("""
+    The Azure Resource Manager scope at which the recovery template is deployed. Must be the
+    subscription containing the protected resource, or a resource group within it; deployments
+    above subscription scope are not supported.
+    """)
+  deploymentScope: armResourceIdentifier<[
+    {
+      type: "Microsoft.Resources/subscriptions";
+      scopes: ["Tenant"];
+    },
+    {
+      type: "Microsoft.Resources/resourceGroups";
+      scopes: ["Subscription"];
+    }
+  ]>;
+
+  @added(Versions.v2026_09_30_preview)
+  @doc("The location used to store deployment metadata. Required when deploymentScope is a subscription.")
+  deploymentLocation?: azureLocation;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "DB preserves the established Azure Cosmos DB product casing."
+@added(Versions.v2026_09_30_preview)
+@doc("Definition of recovery orchestration resource protection using Azure Cosmos DB.")
+model ResourceCosmosDBProtectionSetting
+  extends ResourceBaseProtectionSolutionSetting {
+  @added(Versions.v2026_09_30_preview)
+  @doc("A setting that indicates Azure Cosmos DB protection.")
+  protectionSolutionType: ResourceProtectionSolutionType.AzureCosmosDB;
+}
+
+@added(Versions.v2026_09_30_preview)
+@doc("Definition of recovery orchestration resource protection using an Azure Storage account.")
+model ResourceStorageAccountProtectionSetting
+  extends ResourceBaseProtectionSolutionSetting {
+  @added(Versions.v2026_09_30_preview)
+  @doc("A setting that indicates Azure Storage account protection.")
+  protectionSolutionType: ResourceProtectionSolutionType.AzureStorageAccount;
+}
+
+@added(Versions.v2026_09_30_preview)
+@doc("Definition of recovery orchestration resource protection using Azure Service Bus.")
+model ResourceServiceBusProtectionSetting
+  extends ResourceBaseProtectionSolutionSetting {
+  @added(Versions.v2026_09_30_preview)
+  @doc("A setting that indicates Azure Service Bus protection.")
+  protectionSolutionType: ResourceProtectionSolutionType.AzureServiceBus;
+}
+
+@added(Versions.v2026_09_30_preview)
+@doc("Definition of recovery orchestration resource protection using Azure NetApp Files.")
+model ResourceNetAppFilesProtectionSetting
+  extends ResourceBaseProtectionSolutionSetting {
+  @added(Versions.v2026_09_30_preview)
+  @doc("A setting that indicates Azure NetApp Files protection.")
+  protectionSolutionType: ResourceProtectionSolutionType.AzureNetAppFiles;
 }
 
 @doc("Definition of recovery orchestration resource native protection solution setting with recovery orchestration plan.")

@@ -48,6 +48,22 @@ describe("runUpdateSdkDetails", () => {
     expect(runner).not.toHaveBeenCalled();
   });
 
+  it("accepts release plans retrieved directly by id", () => {
+    const runner = vi.fn((args: string[]) => {
+      if (args[0] === "release-plan" && args[1] === "get") {
+        return ok(buildPlan({ Status: "Completed" }));
+      }
+      return ok();
+    });
+
+    runUpdateSdkDetails(cliArgs, {
+      readArtifact: vi.fn(() => buildArtifact("existing_by_id")),
+      runner,
+    });
+
+    expect(runner).toHaveBeenCalledOnce();
+  });
+
   it("skips update when release plan status is not In progress", () => {
     const runner = vi.fn((args: string[]) => {
       if (args[0] === "release-plan" && args[1] === "get") {
