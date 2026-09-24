@@ -1,0 +1,46 @@
+steps:
+  - script: |
+      set -e
+      BRANCH="${SKILL_BRANCH:-}"
+      if [ "$BRANCH" = '$(SkillBranch)' ]; then
+        BRANCH=""
+      fi
+      if [ -z "$BRANCH" ]; then
+        echo "SkillBranch not set; keep current checked-out skill files."
+        exit 0
+      fi
+
+      BRANCH_REF="$BRANCH"
+      case "$BRANCH_REF" in
+        refs/heads/*)
+          ;;
+        refs/remotes/origin/*)
+          BRANCH_REF="refs/heads/${BRANCH_REF#refs/remotes/origin/}"
+          ;;
+        origin/*)
+          BRANCH_REF="refs/heads/${BRANCH_REF#origin/}"
+          ;;
+        refs/*)
+          ;;
+        *)
+          BRANCH_REF="refs/heads/$BRANCH_REF"
+          ;;
+      esac
+
+      echo "Overlaying azure-typespec-assessment skill from: $BRANCH_REF"
+      git fetch origin "$BRANCH_REF"
+      rm -rf .github/skills/azure-typespec-assessment/SKILL.md \
+             .github/skills/azure-typespec-assessment/references
+      git checkout FETCH_HEAD -- \
+        .github/skills/azure-typespec-assessment/SKILL.md \
+        .github/skills/azure-typespec-assessment/references
+      echo "Skill source overlaid from $BRANCH_REF"
+    displayName: 'Overlay skill source from SkillBranch (if set)'
+    env:
+      SKILL_BRANCH: $(SkillBranch)
+
+  - script: |
+      set -e
+      npm ci
+    displayName: "Install the assessment scripts' dependencies"
+    workingDirectory: $(Build.SourcesDirectory)/.github/skills/azure-typespec-assessment
