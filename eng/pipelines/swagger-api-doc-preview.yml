@@ -62,6 +62,8 @@ jobs:
               WorkingDirectory: AzureRestPreview
 
       - template: /eng/pipelines/templates/steps/npm-install.yml
+        parameters:
+          WorkingDirectory: .github/shared
 
       - script: cmd/api-doc-preview.js --output ../../AzureRestPreview
         displayName: Generate Swagger API documentation preview
@@ -213,8 +215,6 @@ jobs:
       # Login to GitHub again because the token may have expired waiting for the 
       # docs build to complete
       - template: /eng/common/pipelines/templates/steps/login-to-github.yml
-        parameters:
-          AlwaysUseOwnerSuffix: true
 
       # Sets check status from docs build using $(CheckUrl), $(CheckState), and 
       # $(CheckDescription) variables set by api-doc-preview-interpret.js.
@@ -226,7 +226,7 @@ jobs:
           TargetUrl: $(CheckUrl)
           Description: $(CheckDescription)
           Context: $(StatusName)
-          GitHubToken: $(GH_TOKEN_Azure)
+          GitHubToken: $(GH_TOKEN)
 
       - template: /eng/pipelines/templates/steps/set-sha-check.yml
         parameters:
@@ -236,7 +236,7 @@ jobs:
           TargetUrl: $(CurrentBuildUrl)
           Description: No files changed require docs build
           Context: $(StatusName)
-          GitHubToken: $(GH_TOKEN_Azure)
+          GitHubToken: $(GH_TOKEN)
 
       # In the event of a failure in this job (not the docs build job), set the 
       # PR status to failed and link to the current build.
@@ -249,4 +249,4 @@ jobs:
           TargetUrl: $(CurrentBuildUrl)
           Description: 'Orchestration build failed (click to see logs)'
           Context: $(StatusName)
-          GitHubToken: $(GH_TOKEN_Azure)
+          GitHubToken: $(GH_TOKEN)
