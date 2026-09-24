@@ -24,6 +24,30 @@ model AzureKeyVaultSecretProviderClass
 
 @@maxLength(AzureKeyVaultSecretProviderClass.name, 253);
 
+/**
+ * Known Azure clouds for the in-cluster Azure Key Vault provider.
+ * The provider also accepts AzureCloud as an alias for AzurePublicCloud and AzureUSGovernment as an alias for AzureUSGovernmentCloud.
+ * Cloud names are matched case-insensitively.
+ */
+union AzureCloudName {
+  string,
+
+  /** Azure public cloud. */
+  AzurePublicCloud: "AzurePublicCloud",
+
+  /** Azure US Government cloud. */
+  AzureUSGovernmentCloud: "AzureUSGovernmentCloud",
+
+  /** Azure China cloud. */
+  AzureChinaCloud: "AzureChinaCloud",
+
+  /** Legacy Azure Germany cloud. */
+  AzureGermanCloud: "AzureGermanCloud",
+
+  /** Azure Stack cloud. Requires a custom environment file configured on the provider. */
+  AzureStackCloud: "AzureStackCloud",
+}
+
 @doc("The properties of the AzureKeyVaultSecretProviderClass.")
 model AzureKeyVaultSecretProviderClassProperties {
   // Azure Key Vault Provider properties
@@ -32,10 +56,10 @@ model AzureKeyVaultSecretProviderClassProperties {
   keyvaultName: string;
 
   /**
-   * The Azure cloud containing the key vault, for example AzurePublicCloud, AzureUSGovernmentCloud, or AzureChinaCloud.
+   * The Azure cloud containing the key vault.
    * If omitted, the in-cluster Azure Key Vault provider's configured default cloud is used.
    */
-  cloudName?: string;
+  cloudName?: AzureCloudName;
 
   @doc("The user assigned managed identity client ID that should be used to access the Azure Key Vault.")
   @pattern("^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$")
