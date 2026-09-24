@@ -67,18 +67,93 @@ it("discovers sorted, unique project folders, including invalid config extension
   const first = await addProject("a", "tspconfig.yml");
   await addProject("a");
   const nested = await addProject("a/nested");
+  const afterNested = await addProject("aZ");
   await addProject("node_modules/dependency");
   await addProject("a/node_modules/dependency");
   await mkdir(join(root, "not-a-project", "tspconfig.yaml"), { recursive: true });
 
   await expect(runAll(root)).resolves.toBe(true);
 
-  expect(vi.mocked(spawn).mock.calls.map((call) => call[1]?.[1])).toEqual([first, nested, last]);
+  expect(vi.mocked(spawn).mock.calls.map((call) => call[1]?.[1])).toEqual([
+    first,
+    nested,
+    afterNested,
+    last,
+  ]);
   expect(spawn).toHaveBeenCalledWith(
     process.execPath,
     [expect.stringMatching(/[/\\]cmd[/\\]tsv\.js$/), first, '{"checkingAllSpecs":true}'],
     { stdio: "inherit" },
   );
+});
+
+it.each([
+  { count: 1, sizes: [6] },
+  { count: 3, sizes: [2, 2, 2] },
+  { count: 4, sizes: [2, 2, 1, 1] },
+  { count: 6, sizes: [1, 1, 1, 1, 1, 1] },
+])(
+  "partitions six projects into $count balanced, non-overlapping shards",
+  async ({ count, sizes }) => {
+    const projects: string[] = [];
+    for (const name of ["f", "b", "d", "a", "e", "c"]) {
+      projects.push(await addProject(name));
+    }
+    projects.sort();
+    const selected: string[] = [];
+    for (let index = 1; index <= count; index++) {
+      vi.mocked(spawn).mockClear();
+      await expect(runAll(root, { shard: `${index}/${count}` })).resolves.toBe(true);
+      const expected = projects.slice(selected.length, selected.length + sizes[index - 1]);
+      expect(vi.mocked(spawn).mock.calls.map((call) => call[1]?.[1])).toEqual(expected);
+      selected.push(...expected);
+    }
+    expect(selected).toEqual(projects);
+  },
+);
+
+it("applies suppressions after sharding without moving projects between shards", async () => {
+  await addProject("a");
+  const second = await addProject("b");
+  await addProject("c");
+  await addProject("d");
+  await writeFile(
+    join(root, "suppressions.yaml"),
+    "- tool: TypeSpecValidationAll\n  paths: [a]\n  reason: skipped\n",
+  );
+
+  await expect(runAll(root, { shard: "1/2" })).resolves.toBe(true);
+  expect(vi.mocked(spawn).mock.calls.map((call) => call[1]?.[1])).toEqual([second]);
+  expect(console.log).toHaveBeenCalledWith("Shard 1/2: 2 of 4 TypeSpec projects");
+  expect(console.log).toHaveBeenCalledWith("Suppressed: skipped");
+});
+
+it.each([
+  "",
+  "1",
+  "1/2/3",
+  "0/2",
+  "1/0",
+  "3/2",
+  "-1/2",
+  "1.5/2",
+  "1e0/2",
+  " 1/2",
+  "1/2\n",
+  "1/9007199254740992",
+  "9007199254740992/9007199254740992",
+])("rejects invalid shard %j before running projects", async (shard) => {
+  await addProject("a");
+  await expect(runAll(root, { shard })).rejects.toThrow("Invalid --shard");
+  expect(spawn).not.toHaveBeenCalled();
+});
+
+it("rejects more shards than projects before attempting cleanup", async () => {
+  await addProject("a");
+  await expect(runAll(root, { shard: "1/2", gitClean: true })).rejects.toThrow(
+    "Shard count (2) exceeds the number of TypeSpec projects (1)",
+  );
+  expect(spawn).not.toHaveBeenCalled();
 });
 
 it("waits for each child to exit before starting the next project", async () => {
