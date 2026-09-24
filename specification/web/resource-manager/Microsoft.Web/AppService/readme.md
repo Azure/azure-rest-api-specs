@@ -122,24 +122,38 @@ directive:
       - $.definitions.EgressConfigProperties.properties.connections
       - $.definitions.VirtualConnection.properties.settings
     reason: >-
-      Connection names and setting names are arbitrary customer-chosen keys and cannot be represented as a fixed set of
-      model properties. These dictionaries retain typed values for each customer-defined key.
+      These are dictionaries of strongly typed values whose keys alone are customer-chosen: connections maps a
+      customer-chosen connection name to a typed VirtualConnection, and settings maps an app setting or connection
+      string name to a typed VirtualConnectionSetting. Neither is an open or untyped bag, and the keys are arbitrary
+      customer input that cannot be represented as a fixed set of model properties.
   - suppress: AllProxyResourcesShouldHaveDelete
     from: openapi.json
     where:
       - $.definitions.EgressConfig
     reason: >-
-      egress is a Microsoft.Web sites/config singleton whose lifetime is bound to the parent site. It is cleared by
-      writing an empty configuration with PUT rather than deleted, consistent with the other sites/config singletons
-      such as authsettingsV2.
+      egress is a Microsoft.Web sites/config singleton and has no lifetime independent of the parent site: it is
+      created implicitly with the site and removed only when the site is deleted, so it cannot be made to not exist
+      while the site exists. Cleared state is expressed by writing an empty configuration with PUT, which is the
+      established contract for every sibling singleton. No sites/config singleton exposes DELETE - authsettingsV2,
+      authsettings, appsettings, connectionstrings, pushsettings and azurestorageaccounts are all GET/PUT or PUT/list
+      only, and the only DELETE operations under config are item-level deletes within a collection such as
+      appsettings/{key} and connectionstrings/{name}. A DELETE on the singleton would carry no semantic distinct from
+      PUT with an empty body.
   - suppress: AllResourcesMustHaveGetOperation
     from: openapi.json
     where:
       - $.definitions.EgressConfig
     reason: >-
-      egress carries connection secrets, so the stored configuration is read through the POST list action, which is
-      gated separately from read access. The GET on the singleton is intentionally not exposed, consistent with the
-      other secret-bearing sites/config singletons such as appsettings, connectionstrings and authsettings.
+      The stored egress configuration is keyed by customer-supplied app setting and connection string names -
+      connections is keyed by connection name and settings is keyed by the app setting or connection string name -
+      so reading it discloses part of the site's app setting namespace, which customers frequently use to carry
+      credential-identifying or infrastructure-identifying text. Those identifiers are already protected by this
+      resource provider: appsettings and connectionstrings expose no GET and are readable only through their POST
+      list action. Because Microsoft.Web/sites/config/read and Microsoft.Web/sites/config/list/action are distinct
+      RBAC actions, and the built-in Reader role grants read but not the list action, exposing a GET on egress would
+      let a reader enumerate setting names that appsettings/list and connectionstrings/list deliberately withhold.
+      The stored configuration is therefore read through the POST list action and the GET on the singleton is
+      intentionally not exposed, consistent with appsettings and connectionstrings.
   - suppress: PathForResourceAction
     from: openapi.json
     where:
@@ -150,7 +164,9 @@ directive:
     reason: >-
       egress is a Microsoft.Web sites/config singleton, so list and validate are POST actions on the singleton itself
       rather than on a resource collection with a resource-name parameter. The paths intentionally end with the fixed
-      singleton name plus the action.
+      singleton name plus the action, matching the existing sites/config action paths such as appsettings/list and
+      connectionstrings/list. The list action is the gated read path for this resource, since the singleton
+      intentionally exposes no GET.
 ```
 
 ### Tag: package-2026-09
