@@ -92,7 +92,8 @@ interface Clusters {
     Cluster,
     void,
     ArmResponse<Cluster>,
-    LroHeaders = ArmCombinedLroHeaders<FinalResult = Cluster> & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = Cluster> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   @added(Versions.v2026_05_01_preview)
