@@ -327,8 +327,9 @@ If validation fails, return `Finding accuracy = FAIL` with reason
   invocation, answer all three questions affirmatively in your own
   reasoning. If any answer is "no", do not issue the call.
   Before the **first** `execute`/`runInTerminal` call in any turn, emit
-  exactly one transcript-visible line (plain chat text, not a posted
-  comment) so the gate is auditable in eval logs and human review:
+  exactly one standalone interim transcript-visible line (plain chat text,
+  not a posted comment and not part of the final Critic return payload) so
+  the gate is auditable in eval logs and human review:
 
   ```
   Pre-tool self-check passed: Q1 yes, Q2 yes, Q3 yes
@@ -337,7 +338,10 @@ If validation fails, return `Finding accuracy = FAIL` with reason
   If any answer is "no", emit instead `Pre-tool self-check FAILED on Q<n>; aborting`
   and abandon the call. Subsequent calls in the same turn do not need
   to repeat the line unless the command class changes (e.g., switching
-  from `gh api` reads to `git show`).
+  from `gh api` reads to `git show`). After tool use completes, do not
+  repeat either self-check line in the final return payload. The final
+  Critic response must still begin with the required `<!-- critic-verdict:
+  ... -->` marker as its literal first line.
   1. Is this command on the allowed-shell-command list in the
      "Tooling prerequisite for private-repo PRs" section, OR is it a
      direct read-only equivalent (e.g., `gh api ... --method GET`,
