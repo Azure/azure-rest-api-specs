@@ -1,6 +1,5 @@
 import "@typespec/openapi";
 import "@azure-tools/openai-typespec/models/realtime";
-import "@azure-tools/openai-typespec/models/audio";
 import "./agents.tsp";
 
 using TypeSpec.OpenAPI;
@@ -40,11 +39,10 @@ using Azure.AI.Projects;
   "x-ms-foundry-meta",
   VoiceAgentRequiredPreview
 );
-@@extension(
-  OpenAI.TranscriptionLanguage,
-  "x-ms-foundry-meta",
-  VoiceAgentRequiredPreview
-);
+// Note: OpenAI.TranscriptionLanguage is not tagged here because it does not exist in
+// @azure-tools/openai-typespec@1.23.0, the version pinned for C# generation
+// (eng/http-client-csharp-emitter-package.json); it was only added in a later version
+// of that package.
 
 // MCP tool descriptions exposed by realtime MCP events.
 @@extension(
