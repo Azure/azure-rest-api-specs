@@ -270,6 +270,28 @@ For more information see [cspell configuration](https://cspell.org/configuration
 
 https://github.com/Azure/azure-rest-api-specs/wiki/TypeSpec-Validation
 
+From the repository root, validate one project or all projects under a folder:
+
+```sh
+pnpm tsv specification/<service>/<project>
+pnpm tsv --all
+pnpm tsv --all specification/<service>
+```
+
+`--all` defaults to `specification`, discovers project folders containing `tspconfig.*`,
+and validates them sequentially in sorted order. It honors whole-tool
+`TypeSpecValidationAll` suppressions and passes `checkingAllSpecs: true` to each
+project's validation. It continues after project validation failures and exits nonzero
+if any project fails or no projects are found.
+
+Validation can modify generated files and formatting. By default, those changes are
+left in place, so a failed project's changes can affect later projects in the same
+service folder. In a disposable CI checkout, use `pnpm tsv --all --git-clean` to restore
+tracked files and remove untracked files and directories across the **entire checkout**
+after each project. This option requires an initially clean checkout, including no
+untracked files; ignored files are retained. Do not use it in a checkout with other
+work in progress.
+
 ## `TypeSpec Suppressions`
 
 > [!NOTE]
