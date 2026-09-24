@@ -952,7 +952,7 @@ model EvalRunOutputItemResult {
   /** Additional details about the test criteria metric. */
   properties?: Record<string>;
 
-  /** Reproducible quality calculation and explicit requirement judgments. Present only for rubric scoring policy v1. */
+  /** Dimension judgments and the rubric's scoring decision. Present for evaluators using explicit rubric scoring. */
   @added(Versions.v1)
   rubric_scoring?: RubricScoringResult;
 }

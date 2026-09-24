@@ -46363,10 +46363,7 @@ components:
           format: int32
           minimum: 1
           maximum: 10
-          description: Optional rating weight, interpreted as 1 when omitted. Boolean mode rejects weights, including an explicitly supplied 1. No schema default is emitted so SDKs do not insert rating settings into Boolean requests.
-        explanation:
-          $ref: '#/components/schemas/RubricDimensionExplanation'
-          description: Optional authoring explanation. Generated for opted-in scoring; manual definitions may omit it.
+          description: Optional configured rating weight. For new scoring definitions, omit every weight for equal contribution or supply a weight for every dimension. Partially weighted definitions are rejected, including a mix of explicit unit weights and omitted weights. Boolean mode rejects weights. No schema default is emitted.
         always_applicable:
           type: boolean
           description: When true, the LLM judge always scores this dimension regardless of relevance (skips applicability assessment). The service-generated general quality/policy dimension has this set to true and is non-editable. Users may set this on their own custom dimensions. The service defaults to `false` if a value is not specified by the caller.
@@ -47106,7 +47103,7 @@ components:
           description: Additional details about the test criteria metric.
         rubric_scoring:
           $ref: '#/components/schemas/RubricScoringResult'
-          description: Reproducible quality calculation and explicit requirement judgments. Present only for rubric scoring policy v1.
+          description: Dimension judgments and the rubric's scoring decision. Present for evaluators using explicit rubric scoring.
       unevaluatedProperties: {}
       description: A single grader result for an evaluation run output item.
       title: EvalRunOutputItemResult
@@ -47820,7 +47817,7 @@ components:
           description: Optional human-friendly description for the resulting evaluator. Surfaced as `EvaluatorVersion.description` on the persisted evaluator. Typically collected from the UI alongside `evaluator_display_name`. The `evaluator_` prefix disambiguates this from any other description fields on related models.
         scoring:
           $ref: '#/components/schemas/RubricScoring'
-          description: Scoring policy for the generated evaluator. On regeneration, omission inherits the prior evaluator's policy. On first creation, omission preserves legacy generation. Equal mode generates weight 1 for every quality dimension.
+          description: Scoring choices for the generated evaluator. Supplied scoring defaults to Likert. On first creation, omitted weights yield equal contribution without configured weight fields. On regeneration, prior scoring and weights are preserved unless explicitly changed in a reviewed evaluator definition. Omitting scoring preserves legacy generation on first creation and inherits saved choices on regeneration.
         dimensions:
           type: array
           items:
@@ -80235,30 +80232,6 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
-    RubricDimensionExplanation:
-      type: object
-      required:
-        - rationale
-      properties:
-        rationale:
-          type: string
-          minLength: 1
-          description: Why the dimension is relevant to the requested evaluation.
-        weight_rationale:
-          type: string
-          minLength: 1
-          description: Why a custom rating weight was selected. Populated only when scoring.equal_weighting is false. Omitted for equal weighting and Boolean scoring.
-        source_excerpt:
-          type: string
-          minLength: 1
-          description: Supporting text from the generated evaluation specification. For service-generated explanations with a source_reference, the service extracts this exact text from the referenced snapshot after the model selects a source block. Manual text without a resolvable reference is not automatically verified.
-        source_reference:
-          $ref: '#/components/schemas/RubricSourceReference'
-          description: Optional exact source location. Generation assigns the dataset, digest, and byte range, not the model. Preserved dimensions retain their original snapshot reference. A resolvable quotation does not prove that it supports a subsequently edited criterion.
-      description: Concise authoring explanation, grounded in the evaluation specification rather than private model reasoning. Not an empirical claim that the weight is calibrated.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     RubricDimensionResult:
       type: object
       required:
@@ -80285,7 +80258,7 @@ components:
           format: int32
           minimum: 1
           maximum: 10
-          description: Rating weight. Absent for Boolean dimensions.
+          description: Explicitly configured rating weight. Omitted for every dimension when weights are implicit, and always absent for Boolean dimensions. If configured, all rating dimensions include a weight.
         effective_weight:
           type: number
           format: double
@@ -80379,12 +80352,8 @@ components:
       properties:
         mode:
           $ref: '#/components/schemas/RubricScoringMode'
-          description: Rubric-level scoring mode. Defaults to Boolean for new authoring.
-          default: boolean
-        equal_weighting:
-          type: boolean
-          description: Whether rating dimensions contribute equally. Defaults to true. False enables custom relative weights for rating dimensions. Boolean scoring does not accept false.
-          default: true
+          description: Rubric-level scoring mode. Defaults to Likert when scoring is supplied. Omitting scoring preserves existing legacy behavior.
+          default: likert
       description: Simple rubric scoring choices. Omission preserves existing legacy scoring.
       x-ms-foundry-meta:
         required_previews:
@@ -80417,16 +80386,12 @@ components:
       type: object
       required:
         - mode
-        - equal_weighting
         - decision
         - dimension_results
       properties:
         mode:
           $ref: '#/components/schemas/RubricScoringMode'
           description: The resolved scoring mode.
-        equal_weighting:
-          type: boolean
-          description: Whether rating dimensions contribute equally.
         quality_score:
           type: number
           format: double
@@ -80451,41 +80416,6 @@ components:
             $ref: '#/components/schemas/RubricDimensionResult'
           description: One result list for every dimension, using the rubric's scoring mode.
       description: Explainable scoring results for a rubric. Boolean scoring requires every applicable check to pass; Likert scoring compares the weighted average with the threshold.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
-    RubricSourceReference:
-      type: object
-      required:
-        - dataset_name
-        - dataset_version
-        - content_sha256
-        - start_byte
-        - end_byte
-      properties:
-        dataset_name:
-          type: string
-          minLength: 1
-          description: Name of the generation-artifact dataset containing the snapshot.
-        dataset_version:
-          type: string
-          minLength: 1
-          description: Pinned version of the generation-artifact dataset. Never a latest-version selector.
-        content_sha256:
-          type: string
-          pattern: ^[0-9a-f]{64}$
-          description: Lowercase SHA-256 of the snapshot content encoded as UTF-8, not of the JSONL envelope.
-        start_byte:
-          type: integer
-          format: int64
-          minimum: 0
-          description: Inclusive UTF-8 byte offset of the source excerpt.
-        end_byte:
-          type: integer
-          format: int64
-          minimum: 1
-          description: Exclusive UTF-8 byte offset of the source excerpt. Must be greater than start_byte and within the referenced snapshot.
-      description: A reproducible pointer into a source_snapshot row in a versioned generation-artifact dataset. The digest identifies the snapshot content; byte offsets select exact UTF-8 text. This establishes text integrity, not semantic relevance.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
