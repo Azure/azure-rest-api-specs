@@ -52,6 +52,11 @@ enum Versions {
   @doc("Dependent on Azure.ResourceManager.Versions.v1_0_Preview_1, LiftrBase.Versions.v1_preview")
   @useDependency(LiftrBase.Versions.v1_preview)
   v8_preview: "2026-07-03-preview",
+
+  @doc("The 2026-08-01-preview API version, using LiftrBase.Versions.v3_preview.")
+  @Azure.Core.previewVersion
+  @useDependency(LiftrBase.Versions.v3_preview)
+  v9_preview: "2026-08-01-preview",
 }
 interface Operations extends Azure.ResourceManager.Operations {}
 
@@ -84,7 +89,62 @@ model SaaSData {
 @added(Versions.v6_preview)
 model ActivateSaaSParameterRequest {
   @doc("SaaS guid for Activate and Validate SaaS Resource")
+  @removed(Versions.v9_preview)
   saaSGuid: string;
+
+  @doc("SaaS guid for Activate and Validate SaaS Resource")
+  @added(Versions.v9_preview)
+  saasGuid: string;
+
+  @doc("Optional publisher identifier")
+  @added(Versions.v9_preview)
+  publisherId?: string;
+
+  @doc("Optional activation request parameters containing user and company details")
+  @added(Versions.v9_preview)
+  activateSaaSRequestParam?: ActivateSaaSRequestParam;
+}
+
+@doc("Optional company profile information")
+@added(Versions.v9_preview)
+model CompanyProfile {
+  @doc("Job title")
+  jobTitle?: string;
+
+  @doc("Company name")
+  companyName?: string;
+
+  @doc("Company website")
+  website?: string;
+
+  @doc("Street address")
+  street?: string;
+
+  @doc("City of the company address.")
+  city?: string;
+
+  @doc("Country of the company address.")
+  country?: string;
+
+  @doc("Postal code")
+  postalCode?: string;
+
+  @doc("State or province of the company address.")
+  state?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "SaaS is a well-known acronym"
+@doc("Optional activate SaaS request parameters")
+@added(Versions.v9_preview)
+model ActivateSaaSRequestParam {
+  @doc("Optional Marketplace SaaS resource identifier")
+  saasResourceId?: string;
+
+  @doc("Optional user details")
+  user?: UserDetails;
+
+  @doc("Optional company details")
+  company?: CompanyProfile;
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "SaaS response model"
@@ -159,13 +219,25 @@ model CloudAccountProperties is BaseResourceProperties {
 
   @doc("The backup administrator principal provided during CCA create. Required on create (enforced by backend), ignored on update.")
   @added(Versions.v8_preview)
+  @removed(Versions.v9_preview)
   @visibility(Lifecycle.Create)
   backupAdminOnCcaCreate?: EntityInfo;
 
   @doc("The multi-person authorization (MPA) administrator principal provided during CCA create. Required on create (enforced by backend), ignored on update.")
   @added(Versions.v8_preview)
+  @removed(Versions.v9_preview)
   @visibility(Lifecycle.Create)
   multiPersonAuthorizationOnCcaCreate?: EntityInfo;
+
+  @doc("Optional company details for the cloud account")
+  @added(Versions.v9_preview)
+  company?: CompanyProfile;
+
+  @doc("Role assignments to provision during CCA creation. Each entry maps a Commvault role to its assigned Entra principals.")
+  @added(Versions.v9_preview)
+  @visibility(Lifecycle.Create)
+  @Azure.ResourceManager.identifiers(#["roleName"])
+  roleAssignmentsOnCcaCreate?: RoleAssignment[];
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "SaaS operation group"
@@ -216,12 +288,32 @@ model StorageProperties {
   @doc("Provisioning state of the resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: ResourceProvisioningState;
+
+  @doc("The compliance lock status of the storage.")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v9_preview)
+  complianceLockStatus?: ComplianceLockStatus;
 }
 
 @doc("Storage Type of Commvault Storage")
 union StorageType {
   @doc("Air Gap Protect")
   AirGapProtect: "Air_Gap_Protect",
+
+  string,
+}
+
+@doc("Compliance lock status of a Commvault Storage.")
+@added(Versions.v9_preview)
+union ComplianceLockStatus {
+  @doc("Compliance lock is enabled; storage is protected.")
+  Enabled: "Enabled",
+
+  @doc("Disablement is pending multi-person authorization (MPA) approval. Status transitions to 'Disabled' once approved.")
+  DisablementPending: "DisablementPending",
+
+  @doc("Compliance lock is disabled.")
+  Disabled: "Disabled",
 
   string,
 }
@@ -251,6 +343,26 @@ interface Storages {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Storage>;
   delete is ArmResourceDeleteWithoutOkAsync<Storage>;
   listByCloudAccount is ArmResourceListByParent<Storage>;
+
+  @doc("Enable compliance lock on the storage. Synchronous operation.")
+  @added(Versions.v9_preview)
+  enableComplianceLock is ArmResourceActionSync<
+    Storage,
+    void,
+    ArmResponse<Storage>
+  >;
+
+  @doc("Disable compliance lock on the storage. Initiates an out-of-band multi-person authorization (MPA) email approval workflow on the partner side. The storage compliance lock status transitions to 'DisablementPending' immediately; once the MPA approval completes, the status becomes 'Disabled' (observable via the refresh action).")
+  @added(Versions.v9_preview)
+  disableComplianceLock is ArmResourceActionSync<
+    Storage,
+    void,
+    ArmResponse<Storage>
+  >;
+
+  @doc("Refresh storage state from partner. Fetches latest compliance lock status from Commvault and updates the ARM resource.")
+  @added(Versions.v9_preview)
+  refresh is ArmResourceActionSync<Storage, void, ArmResponse<Storage>>;
 }
 
 @parentResource(CloudAccount)
@@ -641,15 +753,18 @@ model ProtectionGroupProperties {
 
   @doc("The protection group schedule")
   @visibility(Lifecycle.Read)
-  protectionStatus?: ProtectionStatus; //Check what values can it have
+  @madeRequired(Versions.v9_preview)
+  protectionStatus: ProtectionStatus; //Check what values can it have
 
   @doc("The number of ProtectedItems under the Protection Group")
   @visibility(Lifecycle.Read)
-  numberOfProtectedItems?: int32;
+  @madeRequired(Versions.v9_preview)
+  numberOfProtectedItems: int32;
 
   @doc("The Commvault Protection Group backup time")
   @visibility(Lifecycle.Read)
-  lastBackUpTime?: int64;
+  @madeRequired(Versions.v9_preview)
+  lastBackUpTime: int64;
 
   @doc("The backup activity status indicating if backup is enabled or not on the protection group")
   @visibility(Lifecycle.Read)
@@ -1210,11 +1325,20 @@ model RoleMappingProperties {
 @added(Versions.v8_preview)
 model RoleAssignment {
   @doc("The name of the Commvault role")
-  roleName?: RoleName;
+  @madeRequired(Versions.v9_preview)
+  roleName: RoleName;
 
   @doc("The Entra entities (users or groups) assigned to this role")
+  @removed(Versions.v9_preview)
+  @renamedFrom(Versions.v9_preview, "entities")
   @Azure.ResourceManager.identifiers(#[])
-  entities?: EntityInfo[];
+  oldEntities?: EntityInfo[];
+
+  @doc("The Entra entities (users or groups) assigned to this role")
+  @added(Versions.v9_preview)
+  @minItems(1)
+  @Azure.ResourceManager.identifiers(#[])
+  entities: EntityInfo[];
 }
 
 @doc("Supported Commvault role names")
