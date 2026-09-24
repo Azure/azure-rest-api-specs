@@ -98,6 +98,15 @@ union FineTuningImageFormat {
   webp: "webp",
 }
 
+/** A text-token or image chunk within a model input. */
+union FineTuningInputChunk {
+  /** A contiguous sequence of text tokens. */
+  text: FineTuningModelInputChunk,
+
+  /** An encoded image. */
+  image: FineTuningImageChunk,
+}
+
 // ─── Common primitives ────────────────────────────────────────────────────────
 
 /** A 1-D array of floating-point values serialised for the wire. */
@@ -131,15 +140,6 @@ model FineTuningImageChunk {
   /** Number of model tokens expected to represent this image. */
   @minValue(1)
   expected_tokens: int32;
-}
-
-/** A text-token or image chunk within a model input. */
-union FineTuningInputChunk {
-  /** A contiguous sequence of text tokens. */
-  text: FineTuningModelInputChunk,
-
-  /** An encoded image. */
-  image: FineTuningImageChunk,
 }
 
 /** Full model input as an ordered sequence of token-ID and image chunks. */
