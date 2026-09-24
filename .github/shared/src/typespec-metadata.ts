@@ -84,14 +84,17 @@ export async function generateTypeSpecMetadata(
       );
     } catch (error) {
       // The TypeSpec compiler writes its diagnostics to stdout, not stderr.
-      const details = isExecError(error) ? [error.stdout, error.stderr].join("").trim() : undefined;
+      let details = String(error);
+      if (isExecError(error)) {
+        for (const output of [error.stdout, error.stderr]) {
+          const text = output?.trim();
+          if (text && !details.includes(text)) {
+            details += `\n${text}`;
+          }
+        }
+      }
 
-      throw new Error(
-        `Failed to generate TypeSpec metadata: ${String(error)}${details ? `\n${details}` : ""}`,
-        {
-          cause: error,
-        },
-      );
+      throw new Error(`Failed to generate TypeSpec metadata: ${details}`, { cause: error });
     }
 
     const parsed = TypeSpecMetadataSchema.safeParse(

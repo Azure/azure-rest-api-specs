@@ -178,27 +178,33 @@ describe("generateTypeSpecMetadata", () => {
     await expectMetadataDirectoryRemoved(metadataFile);
   });
 
-  it("includes failed compiler output from both streams", async () => {
-    vi.mocked(execNodeBin).mockImplementation((_packageName, args) => {
-      metadataFile = getMetadataFile(args);
-
-      const error = Object.assign(new Error("Command failed: tsp compile"), {
-        stdout: "error file-not-found: File main.tsp not found.",
-        stderr: "compiler progress",
+  it.each([false, true])(
+    "separates failed compiler streams without duplicating stderr (already included: %s)",
+    async (stderrIncluded) => {
+      const stdout = "error file-not-found: File main.tsp not found.";
+      const stderr = "compiler progress";
+      const error = Object.assign(
+        new Error(`Command failed: tsp compile${stderrIncluded ? `\n${stderr}` : ""}`),
+        { stdout, stderr },
+      );
+      vi.mocked(execNodeBin).mockImplementation((_packageName, args) => {
+        metadataFile = getMetadataFile(args);
+        return Promise.reject(error);
       });
-      return Promise.reject(error);
-    });
 
-    const result = generateTypeSpecMetadata("contoso");
-    await expect(result).rejects.toThrow("file-not-found");
-    await expect(result).rejects.toThrow("compiler progress");
-    await expectMetadataDirectoryRemoved(metadataFile);
-  });
+      const result = generateTypeSpecMetadata("contoso");
+      await expect(result).rejects.toHaveProperty(
+        "message",
+        `Failed to generate TypeSpec metadata: ${String(error)}\n${stdout}${stderrIncluded ? "" : `\n${stderr}`}`,
+      );
+      await expect(result).rejects.toHaveProperty("cause", error);
+      await expectMetadataDirectoryRemoved(metadataFile);
+    },
+  );
 
   it("preserves timeout errors and their cause even with partial diagnostics", async () => {
     const error = Object.assign(new Error("compiler timed out"), {
       stdout: "partial diagnostics",
-      stderr: "",
       killed: true,
     });
     vi.mocked(execNodeBin).mockImplementation((_packageName, args) => {
