@@ -379,7 +379,7 @@ union SharedGalleryHostCaching {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
 union GalleryApplicationVersionExposurePolicy {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @doc("Coordinates exposure of the gallery application version through safe deployment practices.")
   CoordinatedSDP: "CoordinatedSDP",
 }
 
