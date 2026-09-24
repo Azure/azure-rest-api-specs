@@ -1,0 +1,134 @@
+{
+  "parameters": {
+    "api-version": "2026-07-01",
+    "resourceUri": "subscriptions/4abcdefgh-ijkl-mnop-qrstuvwxyz/resourceGroups/rhctestenv/providers/Microsoft.Compute/virtualMachines/rhctestenvV1PI"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/4abcdefgh-ijkl-mnop-qrstuvwxyz/resourceGroups/rhctestenv/providers/Microsoft.Compute/virtualMachines/rhctestenvV1PI/providers/Microsoft.ResourceHealth/events?api-version=2026-07-01&$skipToken=OpaquePageNumber",
+        "value": [
+          {
+            "name": "BC_1-FXZ",
+            "type": "/providers/Microsoft.ResourceHealth/events",
+            "id": "/providers/Microsoft.ResourceHealth/events/BC_1-FXZ",
+            "properties": {
+              "advisorRecommendations": {
+                "httpMethod": "GET",
+                "url": "https://management.azure.com/subscriptions/4abcdefgh-ijkl-mnop-qrstuvwxyz/providers/Microsoft.Advisor/recommendations?api-version=2025-01-01&%24filter=trackingIds%2Fany%28t%3A%20t%20eq%20%27BC_1-FXZ%27%29",
+                "description": "Lists Advisor recommendations associated with this retirement event."
+              },
+              "article": {
+                "articleContent": "<html>An Azure service retirement is planned. Review the retirement guidance and recommended actions.</html>"
+              },
+              "enableChatWithUs": false,
+              "enableMicrosoftSupport": true,
+              "eventLevel": "Warning",
+              "eventSource": "ServiceHealth",
+              "eventTags": [
+                "Action Recommended"
+              ],
+              "eventSubType": "Retirement",
+              "eventType": "HealthAdvisory",
+              "faqs": [
+                {
+                  "answer": "This is an answer",
+                  "localeCode": "en",
+                  "question": "This is a question"
+                }
+              ],
+              "header": "Action may be required for an upcoming Azure service retirement",
+              "hirStage": "active",
+              "impact": [
+                {
+                  "impactedRegions": [
+                    {
+                      "impactedRegion": "West US",
+                      "impactedSubscriptions": [
+                        "{subscriptionId}"
+                      ],
+                      "lastUpdateTime": "2025-05-13T15:43:48.1203530Z",
+                      "status": "Active",
+                      "updates": [
+                        {
+                          "summary": "Update 3 - Retirement guidance and recommended actions have been updated.",
+                          "updateDateTime": "2025-05-13T15:43:48.1203530Z"
+                        },
+                        {
+                          "summary": "Update 2 - Additional retirement impact details are available.",
+                          "updateDateTime": "2025-05-13T10:32:48.1203530Z"
+                        },
+                        {
+                          "eventTags": [
+                            "Action Recommended"
+                          ],
+                          "summary": "Update 1 - An upcoming Azure service retirement was announced.",
+                          "updateDateTime": "2025-05-12T15:00:48.1203530Z"
+                        }
+                      ]
+                    }
+                  ],
+                  "impactedService": "Virtual Machines",
+                  "impactedServiceGuid": "fd8065f5-ffd0-4756-8788-e6a11bf36257"
+                }
+              ],
+              "impactMitigationTime": "2025-05-14T15:43:48.1203530Z",
+              "impactStartTime": "2025-05-12T14:45:48.1203530Z",
+              "isEventSensitive": false,
+              "isHIR": false,
+              "lastUpdateTime": "2025-05-13T15:43:48.1203530Z",
+              "level": "Warning",
+              "links": [
+                {
+                  "type": "Hyperlink",
+                  "bladeName": "RequestRCABlade",
+                  "displayText": {
+                    "localizedValue": "Request RCA",
+                    "value": "Request RCA"
+                  },
+                  "extensionName": "Microsoft_Azure_Health",
+                  "parameters": {
+                    "rcaRequested": "False",
+                    "trackingId": "BC_1-FXZ"
+                  }
+                },
+                {
+                  "type": "Button",
+                  "bladeName": "AzureHealthBrowseBlade",
+                  "displayText": {
+                    "localizedValue": "Sign up for updates",
+                    "value": "Sign up for updates"
+                  },
+                  "extensionName": "Microsoft_Azure_Health",
+                  "parameters": {
+                    "trackingId": "BC_1-FXZ"
+                  }
+                }
+              ],
+              "priority": 2,
+              "recommendedActions": {
+                "actions": [
+                  {
+                    "actionText": "action 1",
+                    "groupId": 23243
+                  },
+                  {
+                    "actionText": "action 2",
+                    "groupId": 23432
+                  }
+                ],
+                "localeCode": "en",
+                "message": "Recommended actions title"
+              },
+              "status": "Active",
+              "summary": "An Azure service retirement is planned. Review the retirement guidance and recommended actions.",
+              "title": "Upcoming retirement: Virtual Machines in West US"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Events_ListBySingleResource",
+  "title": "ListEventsBySingleResource"
+}
