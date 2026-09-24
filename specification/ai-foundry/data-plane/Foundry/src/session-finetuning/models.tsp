@@ -1,4 +1,5 @@
-import "./service.tsp";
+import "../common/service.tsp";
+import "../common/custom-types.tsp";
 
 namespace Azure.AI.Projects.SessionFineTuning;
 

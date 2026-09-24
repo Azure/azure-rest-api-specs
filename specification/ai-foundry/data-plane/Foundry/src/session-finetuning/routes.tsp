@@ -1,4 +1,5 @@
-import "./service.tsp";
+import "../common/service.tsp";
+import "../common/custom-types.tsp";
 import "./models.tsp";
 import "../common/models.tsp";
 import "../common/error.range.tsp";
