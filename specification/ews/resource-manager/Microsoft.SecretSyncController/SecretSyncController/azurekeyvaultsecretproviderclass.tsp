@@ -28,19 +28,19 @@ model AzureKeyVaultSecretProviderClass
 union AzureCloudName {
   string,
 
-  @doc("Azure public cloud.")
+  /** Azure public cloud. */
   AzurePublicCloud: "AzurePublicCloud",
 
-  @doc("Azure US Government cloud.")
+  /** Azure US Government cloud. */
   AzureUSGovernmentCloud: "AzureUSGovernmentCloud",
 
-  @doc("Azure China cloud.")
+  /** Azure China cloud. */
   AzureChinaCloud: "AzureChinaCloud",
 
-  @doc("Legacy Azure Germany cloud.")
+  /** Azure Germany cloud. */
   AzureGermanCloud: "AzureGermanCloud",
 
-  @doc("Azure Stack cloud. Requires a custom environment file configured on the provider.")
+  /** Azure Stack cloud. */
   AzureStackCloud: "AzureStackCloud",
 }
 
