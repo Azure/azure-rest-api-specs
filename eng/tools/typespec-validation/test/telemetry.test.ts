@@ -69,14 +69,6 @@ it("does not initialize or export when opted out", async () => {
   expect(console.error).not.toHaveBeenCalled();
 });
 
-it("does not use another application's ambient destination", async () => {
-  vi.stubEnv("APPLICATIONINSIGHTS_CONNECTION_STRING", connectionString);
-  expect(await createTelemetry()).toBeUndefined();
-  expect(console.error).toHaveBeenCalledWith(
-    "[tsv:telemetry] No TSV Application Insights destination configured; telemetry is not exported.",
-  );
-});
-
 it("surfaces invalid configuration without echoing it", async () => {
   vi.stubEnv("TSV_APPLICATIONINSIGHTS_CONNECTION_STRING", "do-not-log-this");
   expect(await createTelemetry()).toBeUndefined();
@@ -253,70 +245,89 @@ it("isolates SDK shutdown failure", async () => {
   );
 });
 
-it("exports only the approved payload to the configured endpoint", async () => {
-  vi.stubEnv("OTEL_RESOURCE_ATTRIBUTES", "user.name=private-user,host.name=private-host");
-  vi.stubEnv("OTEL_SERVICE_NAME", "private-service");
-  vi.stubEnv("APPLICATIONINSIGHTS_CONNECTION_STRING", "do-not-use");
-  const requests: { url: string; body: string; timeout: number }[] = [];
-  const realExporter = await createAzureMonitorExporter(connectionString, {
-    sendRequest(request) {
-      if (typeof request.body !== "string") throw new Error("Expected serialized envelope");
-      requests.push({ url: request.url, body: request.body, timeout: request.timeout });
-      return Promise.resolve({ request, status: 200, headers: request.headers, bodyAsText: "{}" });
-    },
-  });
-  const telemetry = (await createTelemetry(realExporter))!;
-  const project = join(root, "specification", "service", "Project");
-  await mkdir(project, { recursive: true });
-  await simpleGit(root).init();
-  await telemetry.setProject(project);
-  telemetry.command.mode = "project";
-  telemetry.command.ruleCount = 1;
-  telemetry.command.outcome = "success";
-  telemetry.startRule("Compile").end("success");
-  await telemetry.shutdown(0);
-  expect(requests).toHaveLength(1);
-  expect(requests[0].url).toBe("https://tsv.invalid/v2.1/track");
-  expect(requests[0].timeout).toBe(2000);
-  const envelopes = JSON.parse(requests[0].body) as {
-    tags: Record<string, string>;
-    data: { baseType: string; baseData: { name: string; properties: Record<string, unknown> } };
-  }[];
-  expect(envelopes).toHaveLength(2);
-  for (const envelope of envelopes) {
-    expect(envelope.data.baseType).toBe("RemoteDependencyData");
-    expect(envelope.tags["ai.cloud.role"]).toBe("typespec-validation");
-    expect(envelope.tags["ai.cloud.roleInstance"]).toBe("tsv");
-    expect(envelope.data.baseData.properties["tsv.project"]).toBe("specification/service/Project");
-    expect(Object.keys(envelope.tags).sort()).toEqual(
-      [
-        "ai.application.ver",
-        "ai.cloud.role",
-        "ai.cloud.roleInstance",
-        "ai.device.osVersion",
-        "ai.internal.sdkVersion",
-        "ai.operation.id",
-        "ai.operation.parentId",
-      ]
-        .filter((key) => key !== "ai.operation.parentId" || envelope.tags[key] !== undefined)
-        .sort(),
+it.each([undefined, "", connectionString])(
+  "exports only the approved payload with destination override %s",
+  async (override) => {
+    vi.stubEnv("TSV_APPLICATIONINSIGHTS_CONNECTION_STRING", override);
+    vi.stubEnv("OTEL_RESOURCE_ATTRIBUTES", "user.name=private-user,host.name=private-host");
+    vi.stubEnv("OTEL_SERVICE_NAME", "private-service");
+    vi.stubEnv("APPLICATIONINSIGHTS_CONNECTION_STRING", "do-not-use");
+    const requests: { url: string; body: string; timeout: number }[] = [];
+    const realExporter = await createAzureMonitorExporter(undefined, {
+      sendRequest(request) {
+        if (typeof request.body !== "string") throw new Error("Expected serialized envelope");
+        requests.push({ url: request.url, body: request.body, timeout: request.timeout });
+        return Promise.resolve({
+          request,
+          status: 200,
+          headers: request.headers,
+          bodyAsText: "{}",
+        });
+      },
+    });
+    const telemetry = (await createTelemetry(realExporter))!;
+    const project = join(root, "specification", "service", "Project");
+    await mkdir(project, { recursive: true });
+    await simpleGit(root).init();
+    await telemetry.setProject(project);
+    telemetry.command.mode = "project";
+    telemetry.command.ruleCount = 1;
+    telemetry.command.outcome = "success";
+    telemetry.startRule("Compile").end("success");
+    await telemetry.shutdown(0);
+    expect(requests).toHaveLength(1);
+    expect(requests[0].url).toBe(
+      override
+        ? "https://tsv.invalid/v2.1/track"
+        : "https://westus-0.in.applicationinsights.azure.com/v2.1/track",
     );
-  }
-  expect(envelopes[0].data.baseData).toMatchObject({
-    name: "tsv.rule",
-    properties: {
-      "tsv.rule": "Compile",
-      "tsv.outcome": "success",
-      "tsv.project": "specification/service/Project",
-    },
-  });
-  expect(Object.keys(envelopes[0].data.baseData.properties).sort()).toEqual([
-    "tsv.outcome",
-    "tsv.project",
-    "tsv.rule",
-  ]);
-  expect(requests[0].body).not.toContain(root);
-  expect(requests[0].body).not.toContain("private");
-  expect(requests[0].body).not.toContain("do-not-use");
-  expect(process.env.APPLICATION_INSIGHTS_NO_STATSBEAT).toBeUndefined();
-});
+    expect(requests[0].timeout).toBe(2000);
+    const envelopes = JSON.parse(requests[0].body) as {
+      iKey: string;
+      tags: Record<string, string>;
+      data: { baseType: string; baseData: { name: string; properties: Record<string, unknown> } };
+    }[];
+    expect(envelopes).toHaveLength(2);
+    for (const envelope of envelopes) {
+      expect(envelope.iKey).toBe(
+        override ? "00000000-0000-0000-0000-000000000001" : "88fc2996-ed66-4816-95d7-f6a29b997b50",
+      );
+      expect(envelope.data.baseType).toBe("RemoteDependencyData");
+      expect(envelope.tags["ai.cloud.role"]).toBe("typespec-validation");
+      expect(envelope.tags["ai.cloud.roleInstance"]).toBe("tsv");
+      expect(envelope.data.baseData.properties["tsv.project"]).toBe(
+        "specification/service/Project",
+      );
+      expect(Object.keys(envelope.tags).sort()).toEqual(
+        [
+          "ai.application.ver",
+          "ai.cloud.role",
+          "ai.cloud.roleInstance",
+          "ai.device.osVersion",
+          "ai.internal.sdkVersion",
+          "ai.operation.id",
+          "ai.operation.parentId",
+        ]
+          .filter((key) => key !== "ai.operation.parentId" || envelope.tags[key] !== undefined)
+          .sort(),
+      );
+    }
+    expect(envelopes[0].data.baseData).toMatchObject({
+      name: "tsv.rule",
+      properties: {
+        "tsv.rule": "Compile",
+        "tsv.outcome": "success",
+        "tsv.project": "specification/service/Project",
+      },
+    });
+    expect(Object.keys(envelopes[0].data.baseData.properties).sort()).toEqual([
+      "tsv.outcome",
+      "tsv.project",
+      "tsv.rule",
+    ]);
+    expect(requests[0].body).not.toContain(root);
+    expect(requests[0].body).not.toContain("private");
+    expect(requests[0].body).not.toContain("do-not-use");
+    expect(process.env.APPLICATION_INSIGHTS_NO_STATSBEAT).toBeUndefined();
+  },
+);

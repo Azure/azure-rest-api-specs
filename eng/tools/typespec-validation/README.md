@@ -19,11 +19,10 @@ $env:AZSDKTOOLS_COLLECT_TELEMETRY = "false"
 pnpm tsv specification/contosowidgetmanager/Contoso.Management
 ```
 
-**Rollout prerequisite:** no default ingestion destination is configured yet.
-Until the new TSV Application Insights resource is provisioned and its public
-ingestion configuration is approved, telemetry is sent only when
-`TSV_APPLICATIONINSIGHTS_CONNECTION_STRING` is configured. This variable also
-selects an alternate instance for testing. TSV does not use another application's
+Telemetry is sent to TSV's dedicated Application Insights resource by default.
+Set `TSV_APPLICATIONINSIGHTS_CONNECTION_STRING` to select an alternate instance
+for testing. An unset or empty value uses TSV's default destination.
+TSV does not use another application's
 `APPLICATIONINSIGHTS_CONNECTION_STRING` or the Azure SDK MCP destination.
 
 Collected data is limited to:

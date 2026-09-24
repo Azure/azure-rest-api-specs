@@ -38,6 +38,9 @@ export interface TsvTelemetry {
 }
 
 const traceParentVariable = "TSV_TELEMETRY_TRACEPARENT";
+const defaultConnectionString =
+  "InstrumentationKey=88fc2996-ed66-4816-95d7-f6a29b997b50;" +
+  "IngestionEndpoint=https://westus-0.in.applicationinsights.azure.com/";
 
 function debug(message: string) {
   if (process.env.TSV_TELEMETRY_DEBUG === "true") {
@@ -84,7 +87,8 @@ export async function getProjectPath(folder: string): Promise<string | undefined
 }
 
 export async function createAzureMonitorExporter(
-  connectionString: string,
+  connectionString = process.env.TSV_APPLICATIONINSIGHTS_CONNECTION_STRING ||
+    defaultConnectionString,
   httpClient?: AzureMonitorExporterOptions["httpClient"],
 ): Promise<SpanExporter> {
   const { AzureMonitorTraceExporter } = await import("@azure/monitor-opentelemetry-exporter");
@@ -129,12 +133,6 @@ export async function createTelemetry(exporter?: SpanExporter): Promise<TsvTelem
   delete process.env[traceParentVariable];
   if (!isTelemetryEnabled()) return undefined;
 
-  const connectionString = process.env.TSV_APPLICATIONINSIGHTS_CONNECTION_STRING;
-  if (!exporter && !connectionString) {
-    debug("No TSV Application Insights destination configured; telemetry is not exported.");
-    return undefined;
-  }
-
   try {
     const [
       { ROOT_CONTEXT, trace, SpanStatusCode, defaultTextMapGetter, defaultTextMapSetter },
@@ -158,7 +156,7 @@ export async function createTelemetry(exporter?: SpanExporter): Promise<TsvTelem
     ) {
       throw new Error("Invalid TSV package version");
     }
-    const activeExporter = exporter ?? (await createAzureMonitorExporter(connectionString!));
+    const activeExporter = exporter ?? (await createAzureMonitorExporter());
     const provider = new sdk.BasicTracerProvider({
       resource: resources.resourceFromAttributes({
         "service.name": "typespec-validation",
