@@ -4464,13 +4464,15 @@ model AzureIaaSVMProtectionPolicy extends ProtectionPolicy {
   instantRpRetentionRangeInDays?: int32;
 
   /**
-   * Specifies whether Instant Access snapshot is enabled for the policy.
+   * Specifies whether Instant Access snapshot is enabled for the policy. If false or omitted,
+   * instantAccessDurationMinutes is ignored and no Instant Access snapshot is retained.
    */
   @added(Versions.v2026_10_01)
   instantAccessSnapshotEnabled?: boolean;
 
   /**
-   * Duration in minutes for which the Instant Access snapshot is retained.
+   * Duration in minutes for which the Instant Access snapshot is retained, when instantAccessSnapshotEnabled
+   * is true. Must be between 60 and 300 minutes; defaults to 300 minutes if not specified.
    */
   @added(Versions.v2026_10_01)
   @minValue(60)

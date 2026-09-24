@@ -6524,12 +6524,12 @@
         },
         "instantAccessSnapshotEnabled": {
           "type": "boolean",
-          "description": "Specifies whether Instant Access snapshot is enabled for the policy."
+          "description": "Specifies whether Instant Access snapshot is enabled for the policy. If false or omitted,\ninstantAccessDurationMinutes is ignored and no Instant Access snapshot is retained."
         },
         "instantAccessDurationMinutes": {
           "type": "integer",
           "format": "int32",
-          "description": "Duration in minutes for which the Instant Access snapshot is retained.",
+          "description": "Duration in minutes for which the Instant Access snapshot is retained, when instantAccessSnapshotEnabled\nis true. Must be between 60 and 300 minutes; defaults to 300 minutes if not specified.",
           "minimum": 60,
           "maximum": 300
         },
