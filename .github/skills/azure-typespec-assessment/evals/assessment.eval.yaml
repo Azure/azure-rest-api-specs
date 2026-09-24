@@ -1,5 +1,5 @@
 name: azure-typespec-assessment-eval
-description: Routing and minimal capability coverage for azure-typespec-assessment.
+description: Routing and report-generation coverage for azure-typespec-assessment.
 type: capability
 
 tags:
@@ -8,53 +8,58 @@ tags:
 
 defaults:
   runs: 1
-  timeout: "120s"
+  timeout: "1200s"
   model: gpt-5.4
   judge_model: gpt-5.4
   executor: copilot-sdk
 
 scoring:
-  threshold: 1
+  threshold: 0.8
 
 stimuli:
-  - name: trigger-assess-current-typespec-diff
-    prompt: "Load the skill appropriate for reviewing the current TypeSpec diff under C:\\workspace\\azure-rest-api-specs\\specification\\contoso\\widget. State which skill applies, but do not inspect files or start the assessment."
-    environment:
-      skills:
-        - ..
-    graders:
-      - type: skill-invocation
-        config:
-          required: ["azure-typespec-assessment"]
-    constraints: &routing_constraints
-      max_turns: 1
-      max_tokens: 10000
-
-  - name: trigger-review-typespec-pr
-    prompt: "Load the skill appropriate for assessing https://github.com/Azure/azure-rest-api-specs/pull/44988. State which skill applies, but do not inspect the PR or start the assessment."
-    environment:
-      skills:
-        - ..
-    graders:
-      - type: skill-invocation
-        config:
-          required: ["azure-typespec-assessment"]
-    constraints: *routing_constraints
-
-  - name: capability-no-changes-assessment
+  - name: invoke-pr-coordinator-first
     tags:
-      case: capability
-    prompt: "Use azure-typespec-assessment to assess the current TypeSpec changes under specification/contoso against HEAD. The repository is prepared and intentionally has no changes. Run the coordinator immediately with assessment-work as the output directory, do not inspect or modify source files, and report the result."
+      behavior: assess-pr
+    prompt: |
+      Use azure-typespec-assessment to assess PR https://github.com/Azure/azure-rest-api-specs/pull/43308.
     environment:
       skills:
         - ..
-      commands:
-        - git init
-        - git config user.email eval@example.com
-        - git config user.name "Assessment Eval"
-        - node -e "const fs=require('fs');fs.mkdirSync('specification/contoso',{recursive:true});fs.writeFileSync('specification/contoso/main.tsp','namespace Contoso;\\n');"
-        - git add specification/contoso/main.tsp
-        - git commit -m baseline
+    graders:
+      - type: skill-invocation
+        config:
+          required: ["azure-typespec-assessment"]
+      - type: prompt
+        config:
+          prompt: |
+            Inspect the ordered transcript and tool arguments. The first
+            operational command after loading the skill must invoke
+            scripts/run-assessment-analysis.mjs with --pr and --output.
+            Fail if the agent first runs separate gh pr, gh api, git status,
+            git diff, git fetch, git worktree, dependency, glob, or project
+            discovery commands. A failed direct coordinator invocation still
+            passes the ordering requirement.
+    constraints:
+      max_turns: 3
+      max_tokens: 100000
+
+  - name: retain-pr-43308-html-report
+    tags:
+      behavior: report-rendering
+    prompt: |
+      Use azure-typespec-assessment to validate the supplied PR 43308 assessment
+      fixture and render its final HTML report to output/assessment.html.
+      Run scripts/validate-assessment.mjs and scripts/render-assessment-html.mjs
+      against assessment.json. This is an existing-report replay, not a fresh
+      source assessment.
+    environment:
+      files:
+        - src: fixtures/assessments/43308.json
+          dest: assessment.json
+        - src: ../scripts
+          dest: scripts
+        - src: ../references
+          dest: references
     graders:
       - type: skill-invocation
         config:
@@ -62,48 +67,48 @@ stimuli:
       - type: tool-calls
         config:
           required:
-            - name: "^(bash|powershell)$"
-      - type: file-exists
-        config:
-          path: assessment-work/model-input.json
-      - type: file-matches
-        config:
-          path: assessment-work/model-input.json
-          pattern: '"status"\s*:\s*"no-changes"'
+            - "^(powershell|bash)$"
       - type: run-command
         config:
-          command: >-
-            node -e "const fs=require('fs');const input=JSON.parse(fs.readFileSync('assessment-work/model-input.json','utf8'));const state=JSON.parse(fs.readFileSync('assessment-work/workflow-state.json','utf8'));if(input.status!=='no-changes'||state.state!=='complete')process.exit(1);"
+          command: "node scripts/validate-assessment.mjs assessment.json"
           expected_exit_code: 0
-      - type: output-matches
+      - type: run-command
         config:
-          pattern: "no-changes"
-    constraints:
-      max_turns: 4
-      max_tokens: 20000
+          command: "node scripts/render-assessment-html.mjs assessment.json output/assessment.html"
+          expected_exit_code: 0
+      - type: file-exists
+        config:
+          path: "output/assessment.html"
+      - type: file-matches
+          path: "output/assessment.html"
+        config:
+          pattern: "FirewallPolicies\\.createOrUpdate"
 
-  - name: anti-trigger-author-typespec
-    prompt: "Load the skill appropriate for adding stable API version 2026-09-01 under specification/contoso/widget. State which skill applies, but do not inspect or modify files."
-    environment:
-      skills:
-        - ..
-        - ../../azure-typespec-author
-    graders:
-      - type: skill-invocation
-        config:
-          required: ["azure-typespec-author"]
-          disallowed: ["azure-typespec-assessment"]
-    constraints: *routing_constraints
-
-  - name: anti-trigger-generate-sdk
-    prompt: "Load the skill appropriate for generating the Python package azure-contoso-widget from specification/contoso/widget. State which skill applies, but do not generate code or run tests."
-    environment:
-      skills:
-        - ..
-        - ../../azsdk-common-generate-sdk-locally
-    graders:
-      - type: skill-invocation
-        config:
-          required: ["azsdk-common-generate-sdk-locally"]
-          disallowed: ["azure-typespec-assessment"]
-    constraints: *routing_constraints
+  # - name: invoke-local-coordinator-first
+  #   tags:
+  #     behavior: direct-coordinator
+  #   prompt: |
+  #     Use azure-typespec-assessment to assess the local
+  #     Microsoft.ServiceNetworking/ServiceNetworking TypeSpec changes against
+  #     commit 6e058a0a22c828ca0ebfd5a4826a72addc44f909.
+  #   environment:
+  #     skills:
+  #       - ..
+  #   graders:
+  #     - type: skill-invocation
+  #       config:
+  #         required: ["azure-typespec-assessment"]
+  #     - type: prompt
+  #       config:
+  #         prompt: |
+  #           Inspect the ordered transcript and tool arguments. Because the
+  #           baseline and specification are supplied, the first operational
+  #           command after loading the skill must invoke
+  #           scripts/run-assessment-analysis.mjs with --base, --specification,
+  #           and --output. Fail if the agent first runs git status, git diff,
+  #           git fetch, git worktree, dependency, glob, or project discovery
+  #           commands. A failed direct coordinator invocation still passes the
+  #           ordering requirement.
+  #   constraints:
+  #     max_turns: 3
+  #     max_tokens: 100000
