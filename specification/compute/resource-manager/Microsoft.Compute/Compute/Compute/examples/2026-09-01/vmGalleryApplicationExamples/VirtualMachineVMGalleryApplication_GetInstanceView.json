@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmName": "myVM",
+    "applicationName": "myGalleryApplication",
+    "api-version": "2026-09-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM/applications/myGalleryApplication",
+        "name": "myGalleryApplication",
+        "type": "Microsoft.Compute/virtualMachines/applications",
+        "properties": {
+          "packageReferenceId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGallery/applications/myApplication/versions/1.0.0",
+          "instanceView": {
+            "name": "myApplication",
+            "version": "1.0.0",
+            "result": "Succeeded",
+            "statuses": [
+              {
+                "code": "ProvisioningState/succeeded",
+                "level": "Info",
+                "displayStatus": "Provisioning succeeded"
+              }
+            ],
+            "actionsPerformed": [
+              {
+                "operation": "Install",
+                "result": "Succeeded"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "operationId": "VirtualMachineVMGalleryApplications_GetInstanceView",
+  "title": "Get a gallery application instance view from a virtual machine."
+}

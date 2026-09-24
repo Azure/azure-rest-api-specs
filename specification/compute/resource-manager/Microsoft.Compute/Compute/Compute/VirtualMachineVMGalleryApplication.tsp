@@ -18,6 +18,7 @@ namespace Compute;
 /**
  * Describes a gallery application installed on a virtual machine.
  */
+@added(Versions.v2026_09_01)
 @parentResource(VirtualMachine)
 model VirtualMachineVMGalleryApplication
   is Azure.ResourceManager.ProxyResource<VMGalleryApplication> {
@@ -32,6 +33,7 @@ model VirtualMachineVMGalleryApplication
 /**
  * Describes an update to a gallery application installed on a virtual machine.
  */
+@added(Versions.v2026_09_01)
 model VirtualMachineVMGalleryApplicationUpdate {
   /**
    * The gallery application properties. This can be omitted for a tags-only update.
@@ -42,6 +44,7 @@ model VirtualMachineVMGalleryApplicationUpdate {
 /**
  * The list of gallery applications installed on a virtual machine scale set VM.
  */
+@added(Versions.v2026_09_01)
 model VirtualMachineVMGalleryApplicationListResult
   is Azure.Core.Page<VirtualMachineVMGalleryApplication>;
 
@@ -112,6 +115,7 @@ interface VirtualMachineVMGalleryApplications {
   /**
    * Updates a gallery application on a virtual machine. A request containing only tags is completed synchronously.
    */
+  @added(Versions.v2026_09_01)
   @patch(#{ implicitOptionality: false })
   update is VirtualMachineVMGalleryApplicationOps.CustomPatchAsync<
     VirtualMachineVMGalleryApplication,
@@ -124,6 +128,7 @@ interface VirtualMachineVMGalleryApplications {
   /**
    * Deletes a gallery application from a virtual machine.
    */
+  @added(Versions.v2026_09_01)
   delete is VirtualMachineVMGalleryApplicationOps.DeleteWithoutOkAsync<
     VirtualMachineVMGalleryApplication,
     Response =
@@ -135,6 +140,7 @@ interface VirtualMachineVMGalleryApplications {
   /**
    * Lists gallery applications installed on a virtual machine.
    */
+  @added(Versions.v2026_09_01)
   @list
   list is VirtualMachineVMGalleryApplicationOps.List<
     VirtualMachineVMGalleryApplication,

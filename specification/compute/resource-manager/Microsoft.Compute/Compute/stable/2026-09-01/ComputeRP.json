@@ -118,6 +118,12 @@
       "name": "VirtualMachineScaleSetVMDiagnosticRunCommands"
     },
     {
+      "name": "VirtualMachineVMGalleryApplications"
+    },
+    {
+      "name": "VirtualMachineScaleSetVMGalleryApplications"
+    },
+    {
       "name": "Usage"
     },
     {
@@ -8803,6 +8809,195 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/applications": {
+      "get": {
+        "operationId": "VirtualMachineScaleSetVMGalleryApplications_List",
+        "tags": [
+          "VirtualMachineScaleSetVMGalleryApplications"
+        ],
+        "description": "Lists gallery applications installed on a virtual machine scale set VM.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "description": "The name of the VirtualMachineScaleSet",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The name of the VirtualMachineScaleSetVM",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetVMGalleryApplicationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List gallery applications installed on a virtual machine scale set VM.": {
+            "$ref": "./examples/vmGalleryApplicationExamples/VirtualMachineScaleSetVMGalleryApplication_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/applications/{applicationName}": {
+      "get": {
+        "operationId": "VirtualMachineScaleSetVMGalleryApplications_Get",
+        "tags": [
+          "VirtualMachineScaleSetVMGalleryApplications"
+        ],
+        "description": "Gets a gallery application installed on a virtual machine scale set VM.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "description": "The name of the VirtualMachineScaleSet",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The name of the VirtualMachineScaleSetVM",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the VirtualMachineScaleSetVMGalleryApplication",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The expand expression to apply to the operation. The supported value is 'instanceView'.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "instanceView"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetVMGalleryApplication"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a gallery application installed on a virtual machine scale set VM.": {
+            "$ref": "./examples/vmGalleryApplicationExamples/VirtualMachineScaleSetVMGalleryApplication_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/applications/{applicationName}/instanceView": {
+      "get": {
+        "operationId": "VirtualMachineScaleSetVMGalleryApplications_GetInstanceView",
+        "tags": [
+          "VirtualMachineScaleSetVMGalleryApplications"
+        ],
+        "description": "Gets a gallery application and its instance view from a virtual machine scale set VM.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "description": "The name of the VM scale set.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "description": "The instance ID of the virtual machine.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the gallery application.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineScaleSetVMGalleryApplication"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a gallery application instance view from a virtual machine scale set VM.": {
+            "$ref": "./examples/vmGalleryApplicationExamples/VirtualMachineScaleSetVMGalleryApplication_GetInstanceView.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/approveRollingUpgrade": {
       "post": {
         "operationId": "VirtualMachineScaleSetVMs_ApproveRollingUpgrade",
@@ -11482,6 +11677,401 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/applications": {
+      "get": {
+        "operationId": "VirtualMachineVMGalleryApplications_List",
+        "tags": [
+          "VirtualMachineVMGalleryApplications"
+        ],
+        "description": "Lists gallery applications installed on a virtual machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the VirtualMachine",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineVMGalleryApplicationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List gallery applications installed on a virtual machine.": {
+            "$ref": "./examples/vmGalleryApplicationExamples/VirtualMachineVMGalleryApplication_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/applications/{applicationName}": {
+      "get": {
+        "operationId": "VirtualMachineVMGalleryApplications_Get",
+        "tags": [
+          "VirtualMachineVMGalleryApplications"
+        ],
+        "description": "Gets a gallery application installed on a virtual machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the VirtualMachine",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the VirtualMachineVMGalleryApplication",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The expand expression to apply to the operation. The supported value is 'instanceView'.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "instanceView"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineVMGalleryApplication"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a gallery application installed on a virtual machine.": {
+            "$ref": "./examples/vmGalleryApplicationExamples/VirtualMachineVMGalleryApplication_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualMachineVMGalleryApplications_CreateOrUpdate",
+        "tags": [
+          "VirtualMachineVMGalleryApplications"
+        ],
+        "description": "Creates or updates a gallery application on a virtual machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the VirtualMachine",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the VirtualMachineVMGalleryApplication",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "The gallery application to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineVMGalleryApplication"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'VirtualMachineVMGalleryApplication' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineVMGalleryApplication"
+            }
+          },
+          "201": {
+            "description": "Resource 'VirtualMachineVMGalleryApplication' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineVMGalleryApplication"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update a gallery application on a virtual machine.": {
+            "$ref": "./examples/vmGalleryApplicationExamples/VirtualMachineVMGalleryApplication_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/VirtualMachineVMGalleryApplication"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "VirtualMachineVMGalleryApplications_Update",
+        "tags": [
+          "VirtualMachineVMGalleryApplications"
+        ],
+        "description": "Updates a gallery application on a virtual machine. A request containing only tags is completed synchronously.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the VirtualMachine",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the VirtualMachineVMGalleryApplication",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The gallery application update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineVMGalleryApplicationUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineVMGalleryApplication"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update a gallery application on a virtual machine.": {
+            "$ref": "./examples/vmGalleryApplicationExamples/VirtualMachineVMGalleryApplication_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/VirtualMachineVMGalleryApplication"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VirtualMachineVMGalleryApplications_Delete",
+        "tags": [
+          "VirtualMachineVMGalleryApplications"
+        ],
+        "description": "Deletes a gallery application from a virtual machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the VirtualMachine",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the VirtualMachineVMGalleryApplication",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a gallery application from a virtual machine.": {
+            "$ref": "./examples/vmGalleryApplicationExamples/VirtualMachineVMGalleryApplication_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/applications/{applicationName}/instanceView": {
+      "get": {
+        "operationId": "VirtualMachineVMGalleryApplications_GetInstanceView",
+        "tags": [
+          "VirtualMachineVMGalleryApplications"
+        ],
+        "description": "Gets a gallery application and its instance view from a virtual machine.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "description": "The name of the virtual machine.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the gallery application.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineVMGalleryApplication"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../common-types/v1/common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a gallery application instance view from a virtual machine.": {
+            "$ref": "./examples/vmGalleryApplicationExamples/VirtualMachineVMGalleryApplication_GetInstanceView.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/assessPatches": {
@@ -20782,9 +21372,21 @@
           "format": "int32",
           "description": "Optional, Specifies the order in which the packages have to be installed"
         },
+        "manuallyManaged": {
+          "type": "boolean",
+          "description": "Specifies whether the gallery application is managed outside the VM application extension."
+        },
         "packageReferenceId": {
           "type": "string",
           "description": "Specifies the GalleryApplicationVersion resource id on the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{application}/versions/{version}"
+        },
+        "sharedGalleryApplicationId": {
+          "type": "string",
+          "description": "This is the id of \"Directly\" SharedGalleries. Such references represent the \"fake\" proxy-only resources\ncreated in \"sharedTo\" subscriptions. These are shared directly to a subscription/AAD tenant, instead of using RBAC-based sharing.\nThe resource id looks like:\n/sharedGalleries/{SharedGalleryUniqueName}/applications/{applicationName}/versions/1.0.0"
+        },
+        "communityGalleryApplicationId": {
+          "type": "string",
+          "description": "Specifies the community gallery application version resource ID."
         },
         "configurationReference": {
           "type": "string",
@@ -20794,14 +21396,123 @@
           "type": "boolean",
           "description": "Optional, If true, any failure for any operation in the VmApplication will fail the deployment"
         },
+        "instanceView": {
+          "$ref": "#/definitions/VMGalleryApplicationInstanceView",
+          "description": "Contains the deployment status of this application\nPopulated only if requested using GET {VMApplicationName}?$expand=instanceView\nIt is ignored if set in the request body of the PUT api."
+        },
         "enableAutomaticUpgrade": {
           "type": "boolean",
           "description": "If set to true, when a new Gallery Application version is available in PIR/SIG, it will be automatically updated for the VM/VMSS"
+        },
+        "customActions": {
+          "type": "array",
+          "description": "Zero or more custom actions. These are always processed with PATCH semantics.",
+          "items": {
+            "$ref": "#/definitions/VMGalleryApplicationCustomAction"
+          }
         }
       },
       "required": [
         "packageReferenceId"
       ]
+    },
+    "VMGalleryApplicationCustomAction": {
+      "type": "object",
+      "description": "Specifies a custom action for a gallery application.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Required. The name of the action to run."
+        },
+        "uniqueIdentifier": {
+          "type": "string",
+          "description": "Optional. A unique identifier that distinguishes this run of the action from any other.\nNote that in practice this should be a guid, but we have no constraints. We really only \ncare whether it's different than the previous value. The unique identifier of the custom action."
+        },
+        "order": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional. The order in which the custom action should be executed."
+        },
+        "parameters": {
+          "type": "array",
+          "description": "Optional. The list of parameters for the custom action.",
+          "items": {
+            "$ref": "#/definitions/VMGalleryApplicationCustomActionParameter"
+          }
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "VMGalleryApplicationCustomActionParameter": {
+      "type": "object",
+      "description": "Specifies a custom action parameter for a gallery application.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the custom action parameter."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the custom action parameter."
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "VMGalleryApplicationInstanceView": {
+      "type": "object",
+      "description": "Specifies the instance view of a gallery application.",
+      "properties": {
+        "statuses": {
+          "type": "array",
+          "description": "The application status status information.",
+          "items": {
+            "$ref": "#/definitions/InstanceViewStatus"
+          },
+          "x-ms-identifiers": []
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the application."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the application."
+        },
+        "result": {
+          "type": "string",
+          "description": "The current status of the application"
+        },
+        "actionsPerformed": {
+          "type": "array",
+          "description": "The list of actions performed on the application instance.",
+          "items": {
+            "$ref": "#/definitions/VMGalleryApplicationInstanceViewAction"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "actionsPerformed"
+      ]
+    },
+    "VMGalleryApplicationInstanceViewAction": {
+      "type": "object",
+      "description": "Specifies the action being performed on the application instance and its result.",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "description": "The action being performed."
+        },
+        "result": {
+          "type": "string",
+          "description": "The result of the action performed."
+        }
+      }
     },
     "VMGuestPatchClassificationLinux": {
       "type": "string",
@@ -22547,6 +23258,10 @@
         "resiliencyProfile": {
           "$ref": "#/definitions/ResiliencyProfile",
           "description": "Resiliency profile for the virtual machine."
+        },
+        "installRunCommandAsService": {
+          "type": "boolean",
+          "description": "Sets up run command service for supporting immediate run command execution in the future."
         }
       }
     },
@@ -22754,6 +23469,10 @@
           "type": "string",
           "description": "Specifies the user account password on the VM when executing the run command."
         },
+        "runImmediately": {
+          "type": "boolean",
+          "description": "Optional. If set to true, the command will be run immediately bypassing typical pipelines to reach the VM directly.."
+        },
         "timeoutInSeconds": {
           "type": "integer",
           "format": "int32",
@@ -22788,6 +23507,10 @@
         "treatFailureAsDeploymentFailure": {
           "type": "boolean",
           "description": "Optional. If set to true, any failure in the script will fail the deployment and ProvisioningState will be marked as Failed. If set to false, ProvisioningState would only reflect whether the run command was run or not by the extensions platform, it would not indicate whether script failed in case of script failures. See instance view of run command in case of script failures to see executionMessage, output, error: https://aka.ms/runcommandmanaged#get-execution-status-and-results"
+        },
+        "forceRerun": {
+          "type": "boolean",
+          "description": "Optional. If true, sequence number of the extension will be incremented even if the script and settings have been executed in previous execution part of previous sequence number.\nIncreasing the sequence number should result in re-running the Run Command again when Linux or Windows Run Command is execution on VM."
         }
       }
     },
@@ -24660,6 +25383,42 @@
         }
       }
     },
+    "VirtualMachineScaleSetVMGalleryApplication": {
+      "type": "object",
+      "description": "Describes a gallery application installed on a virtual machine scale set VM.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VMGalleryApplication",
+          "description": "The gallery application properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "VirtualMachineScaleSetVMGalleryApplicationListResult": {
+      "type": "object",
+      "description": "The list of gallery applications installed on a virtual machine scale set VM.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of gallery applications installed on the virtual machine scale set VM.",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineScaleSetVMGalleryApplication"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI to fetch the next page of gallery applications."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "VirtualMachineScaleSetVMInstanceIDs": {
       "type": "object",
       "description": "Specifies a list of virtual machine instance IDs from the VM scale set.",
@@ -26059,6 +26818,52 @@
           "$ref": "#/definitions/UpdateResource"
         }
       ]
+    },
+    "VirtualMachineVMGalleryApplication": {
+      "type": "object",
+      "description": "Describes a gallery application installed on a virtual machine.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VMGalleryApplication",
+          "description": "The gallery application properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "VirtualMachineVMGalleryApplicationListResult": {
+      "type": "object",
+      "description": "The list of gallery applications installed on a virtual machine scale set VM.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of gallery applications installed on the virtual machine scale set VM.",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineVMGalleryApplication"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI to fetch the next page of gallery applications."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "VirtualMachineVMGalleryApplicationUpdate": {
+      "type": "object",
+      "description": "Describes an update to a gallery application installed on a virtual machine.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VMGalleryApplication",
+          "description": "The gallery application properties. This can be omitted for a tags-only update."
+        }
+      }
     },
     "VmDiskTypes": {
       "type": "string",

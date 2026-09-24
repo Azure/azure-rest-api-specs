@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmName": "myVM",
+    "applicationName": "myGalleryApplication",
+    "api-version": "2026-09-01",
+    "properties": {
+      "properties": {
+        "packageReferenceId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGallery/applications/myApplication/versions/1.0.0",
+        "customActions": [
+          {
+            "name": "MyCustomAction",
+            "uniqueIdentifier": "d87c4f4e-312f-4c3e-b419-21e29b9be67a",
+            "order": 1,
+            "parameters": [
+              {
+                "name": "myParameter",
+                "value": "myValue"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM/applications/myGalleryApplication",
+        "name": "myGalleryApplication",
+        "type": "Microsoft.Compute/virtualMachines/applications",
+        "properties": {
+          "packageReferenceId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGallery/applications/myApplication/versions/1.0.0",
+          "customActions": [
+            {
+              "name": "MyCustomAction",
+              "uniqueIdentifier": "d87c4f4e-312f-4c3e-b419-21e29b9be67a",
+              "order": 1,
+              "parameters": [
+                {
+                  "name": "myParameter",
+                  "value": "myValue"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "VirtualMachineVMGalleryApplications_Update",
+  "title": "Update a gallery application on a virtual machine."
+}
