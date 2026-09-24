@@ -106,6 +106,9 @@
       "name": "ExpressRouteLagMembers"
     },
     {
+      "name": "ExpressRouteLagAuthorizations"
+    },
+    {
       "name": "RouteFilters"
     },
     {
@@ -1218,6 +1221,9 @@
           },
           "Create ExpressRouteCircuit on ExpressRouteLag": {
             "$ref": "./examples/ExpressRouteCircuitCreateOnExpressRouteLag.json"
+          },
+          "Create ExpressRouteCircuit on ExpressRouteLag with Authorization Key": {
+            "$ref": "./examples/ExpressRouteCircuitCreateOnExpressRouteLagWithAuthorizationKey.json"
           },
           "Create ExpressRouteCircuit on ExpressRoutePort": {
             "$ref": "./examples/ExpressRouteCircuitCreateOnExpressRoutePort.json"
@@ -4549,6 +4555,317 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}/authorizations": {
+      "get": {
+        "operationId": "ExpressRouteLagAuthorizations_List",
+        "tags": [
+          "ExpressRouteLagAuthorizations"
+        ],
+        "description": "Gets all authorizations in an express route LAG.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "expressRouteLagName",
+            "in": "path",
+            "description": "The name of the express route LAG.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteLagAuthorizationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List ExpressRouteLag Authorization": {
+            "$ref": "./examples/ExpressRouteLagAuthorizationList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}/authorizations/{authorizationName}": {
+      "get": {
+        "operationId": "ExpressRouteLagAuthorizations_Get",
+        "tags": [
+          "ExpressRouteLagAuthorizations"
+        ],
+        "description": "Gets the specified authorization from the specified express route LAG.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "expressRouteLagName",
+            "in": "path",
+            "description": "The name of the express route LAG.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorizationName",
+            "in": "path",
+            "description": "The name of the authorization.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteLagAuthorization"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ExpressRouteLag Authorization": {
+            "$ref": "./examples/ExpressRouteLagAuthorizationGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ExpressRouteLagAuthorizations_CreateOrUpdate",
+        "tags": [
+          "ExpressRouteLagAuthorizations"
+        ],
+        "description": "Creates or updates an authorization in the specified express route LAG.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "expressRouteLagName",
+            "in": "path",
+            "description": "The name of the express route LAG.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorizationName",
+            "in": "path",
+            "description": "The name of the authorization.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Parameters supplied to the create or update express route LAG authorization operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteLagAuthorization"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ExpressRouteLagAuthorization' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteLagAuthorization"
+            }
+          },
+          "201": {
+            "description": "Resource 'ExpressRouteLagAuthorization' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteLagAuthorization"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create ExpressRouteLag Authorization": {
+            "$ref": "./examples/ExpressRouteLagAuthorizationCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ExpressRouteLagAuthorization"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ExpressRouteLagAuthorizations_Delete",
+        "tags": [
+          "ExpressRouteLagAuthorizations"
+        ],
+        "description": "Deletes the specified authorization from the specified express route LAG.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "expressRouteLagName",
+            "in": "path",
+            "description": "The name of the express route LAG.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorizationName",
+            "in": "path",
+            "description": "The name of the authorization.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete ExpressRouteLag Authorization": {
+            "$ref": "./examples/ExpressRouteLagAuthorizationDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}/authorizations/{authorizationName}/listKeys": {
+      "post": {
+        "operationId": "ExpressRouteLagAuthorizations_ListKeys",
+        "tags": [
+          "ExpressRouteLagAuthorizations"
+        ],
+        "description": "Gets the authorization key associated with the specified express route LAG authorization.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "expressRouteLagName",
+            "in": "path",
+            "description": "The name of the express route LAG.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorizationName",
+            "in": "path",
+            "description": "The name of the authorization.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "./common.json#/definitions/ExpressRouteAuthorizationKey"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./common.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List ExpressRouteLag Authorization Keys": {
+            "$ref": "./examples/ExpressRouteLagAuthorizationListKeys.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteLags/{expressRouteLagName}/generateLoa": {
       "post": {
         "operationId": "ExpressRouteLags_GenerateLoa",
@@ -7357,6 +7674,71 @@
         }
       ]
     },
+    "ExpressRouteLagAuthorization": {
+      "type": "object",
+      "title": "ExpressRoute Lag Authorization",
+      "description": "ExpressRouteLag Authorization resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExpressRouteLagAuthorizationPropertiesFormat",
+          "description": "ExpressRouteLag authorization properties."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResourceModel"
+        }
+      ]
+    },
+    "ExpressRouteLagAuthorizationListResult": {
+      "type": "object",
+      "title": "ExpressRoute Lag Authorization List Result",
+      "description": "Paged collection of ExpressRouteLagAuthorization items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ExpressRouteLagAuthorization items on this page",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteLagAuthorization"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExpressRouteLagAuthorizationPropertiesFormat": {
+      "type": "object",
+      "title": "ExpressRoute Lag Authorization Properties",
+      "description": "Properties of ExpressRouteLag Authorization.",
+      "properties": {
+        "authorizationUseStatus": {
+          "$ref": "./common.json#/definitions/ExpressRouteLagAuthorizationUseStatus",
+          "description": "The authorization use status.",
+          "readOnly": true
+        },
+        "circuitResourceUri": {
+          "type": "string",
+          "description": "The reference to the ExpressRoute circuit resource using the authorization.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the authorization resource.",
+          "readOnly": true
+        }
+      }
+    },
     "ExpressRouteLagLink": {
       "type": "object",
       "title": "ExpressRouteLagLink",
@@ -7633,6 +8015,14 @@
             "$ref": "./common.json#/definitions/SubResource"
           },
           "readOnly": true
+        },
+        "authorizations": {
+          "type": "array",
+          "title": "ExpressRouteLagAuthorizations Child-Resources",
+          "description": "The set of authorizations of the ExpressRouteLag resource.",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteLagAuthorization"
+          }
         },
         "allocationDate": {
           "type": "string",
