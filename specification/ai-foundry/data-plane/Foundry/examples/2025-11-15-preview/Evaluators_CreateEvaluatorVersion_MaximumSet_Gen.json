@@ -1,18 +1,23 @@
 {
   "title": "Evaluators_CreateEvaluatorVersion_MaximumSet",
-  "operationId": "Evaluators_CreateEvaluatorVersion",
+  "operationId": "Evaluators_createVersion",
   "parameters": {
     "api-version": "2025-11-15-preview",
-    "name": "my_evaluator",
-    "type": "custom",
+    "Foundry-Features": "Evaluations=V1Preview",
+    "name": "support_quality",
+    "If-Match": "\"current-8c21\"",
+    "Operation-Id": "6f62943d-2c62-43f8-b787-33d420cab6d9",
     "evaluator": {
-      "display_name": "lirxubatpcivlmicfrzfoiotoxjf",
+      "display_name": "Support quality",
       "metadata": {
-        "key8046": "nvatafccfjdslevuxmcmhsg"
+        "owner": "support-evaluations"
       },
       "evaluator_type": "custom",
       "categories": [
         "quality"
+      ],
+      "supported_evaluation_levels": [
+        "turn"
       ],
       "definition": {
         "type": "prompt",
@@ -31,29 +36,27 @@
             "query",
             "response"
           ]
-        },
-        "metrics": {
-          "key2527": {
-            "type": "ordinal",
-            "desirable_direction": "increase",
-            "min_value": 19,
-            "max_value": 23,
-            "is_primary": true
-          }
         }
+      },
+      "description": "Scores support response quality.",
+      "tags": {
+        "environment": "production"
       }
     }
   },
   "responses": {
     "201": {
       "body": {
-        "display_name": "lirxubatpcivlmicfrzfoiotoxjf",
+        "display_name": "Support quality",
         "metadata": {
-          "key8046": "nvatafccfjdslevuxmcmhsg"
+          "owner": "support-evaluations"
         },
         "evaluator_type": "custom",
         "categories": [
           "quality"
+        ],
+        "supported_evaluation_levels": [
+          "turn"
         ],
         "definition": {
           "type": "prompt",
@@ -72,23 +75,18 @@
               "query",
               "response"
             ]
-          },
-          "metrics": {
-            "key2527": {
-              "type": "ordinal",
-              "desirable_direction": "increase",
-              "min_value": 19,
-              "max_value": 23,
-              "is_primary": true
-            }
           }
         },
-        "created_by": "vetzbotxmwuscjezswaxzcnkc",
-        "created_at": 1759999990,
-        "modified_at": 1759999992,
-        "id": "azureai://accounts/account_1/projects/project_1/evaluators/custom_evaluator/versions/1",
-        "name": "my_evaluator",
-        "version": "v1"
+        "created_by": "00000000-0000-0000-0000-000000000001",
+        "created_at": "2026-09-09T15:10:00Z",
+        "modified_at": "2026-09-09T15:10:00Z",
+        "description": "Scores support response quality.",
+        "tags": {
+          "environment": "production"
+        },
+        "id": "azureai://accounts/account_1/projects/project_1/evaluators/support_quality/versions/3",
+        "name": "support_quality",
+        "version": "3"
       }
     }
   }

@@ -475,8 +475,9 @@ using Azure.AI.Projects;
 // Beta Evaluators sub‐client
 // --------------------------------------------------------------------------------
 
-// Need to explicitly mention both languages to avoid compile error
-@@clientName(Evaluators.listLatestVersions, "list", "python, javascript");
+// Keep publication lineage public on the beta Evaluators sub-client.
+@@access(Evaluators.listDiagnostics, Access.public);
+@@access(Evaluators.getDiagnostic, Access.public);
 
 // Evaluator pending upload
 @@clientName(Evaluators.startPendingUpload, "pendingUpload");
@@ -488,7 +489,9 @@ using Azure.AI.Projects;
 @@clientName(EvaluatorGenerationJobs.cancel, "cancelGenerationJob");
 @@clientName(EvaluatorGenerationJobs.delete, "deleteGenerationJob");
 
-// EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
+// Evaluator datetime fields are typed as string in the spec but carry ISO-8601 timestamps
+@@alternateType(Evaluator.created_at, utcDateTime, "python");
+@@alternateType(Evaluator.modified_at, utcDateTime, "python");
 @@alternateType(EvaluatorVersion.created_at, utcDateTime, "python");
 @@alternateType(EvaluatorVersion.modified_at, utcDateTime, "python");
 

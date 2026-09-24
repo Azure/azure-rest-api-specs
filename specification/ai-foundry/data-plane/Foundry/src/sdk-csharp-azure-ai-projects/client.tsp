@@ -155,6 +155,8 @@ namespace Azure.AI.Projects;
 @@clientName(Evaluators.getCredentials, "GetCredential");
 @@access(Evaluators.getCredentials, Access.internal);
 @@access(Evaluators.startPendingUpload, Access.internal);
+@@access(Evaluators.listDiagnostics, Access.public);
+@@access(Evaluators.getDiagnostic, Access.public);
 
 @@access(EvaluatorDefinitionType, Access.public);
 
