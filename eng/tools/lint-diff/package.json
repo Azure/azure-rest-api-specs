@@ -10,10 +10,9 @@
     "build": "tsc --noEmit",
     "check": "pnpm build && pnpm lint && pnpm format:check && pnpm test:ci",
     "clean": "rm -rf dist && rm -rf node_modules",
-    "format": "prettier . --ignore-path ../.prettierignore --write",
-    "format:check": "prettier . --ignore-path ../.prettierignore --check",
-    "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
-    "lint": "cross-env DEBUG=eslint:eslint,eslint:linter eslint",
+    "format": "oxfmt . --write",
+    "format:check": "oxfmt . --check",
+    "lint": "oxlint .",
     "test": "vitest",
     "test:ci": "vitest run --coverage --reporter=verbose"
   },
@@ -32,18 +31,9 @@
     "marked": "catalog:"
   },
   "devDependencies": {
-    "@eslint/js": "catalog:",
     "@types/node": "catalog:",
-    "@vitest/coverage-v8": "catalog:",
-    "cross-env": "catalog:",
-    "eslint": "catalog:",
     "execa": "catalog:",
-    "memfs": "catalog:",
-    "prettier": "catalog:",
-    "prettier-plugin-organize-imports": "catalog:",
-    "typescript": "catalog:",
-    "typescript-eslint": "catalog:",
-    "vitest": "catalog:"
+    "memfs": "catalog:"
   },
   "version": "0.0.0"
 }

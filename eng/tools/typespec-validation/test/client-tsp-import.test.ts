@@ -1,5 +1,4 @@
-import { mockFolder, mockSimpleGit } from "./mocks.ts";
-mockSimpleGit();
+import { mockFolder } from "./mocks.ts";
 
 import { strict as assert } from "node:assert";
 import { afterEach, beforeEach, describe, it, type MockInstance, vi } from "vitest";

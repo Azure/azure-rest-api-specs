@@ -1,5 +1,4 @@
-import { mockAll, mockFolder } from "./mocks.ts";
-mockAll();
+import { mockFolder } from "./mocks.ts";
 
 import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import { strict as assert } from "node:assert";
