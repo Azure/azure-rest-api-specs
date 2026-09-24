@@ -1349,12 +1349,20 @@ namespace Azure.AI.Projects {
   // OpenAI C# namespace instead of Azure.AI.Projects.Agents.
   //
   // The properties below are declared as anonymous inline unions on their source
-  // models (either in the external OpenAI package or spread in from it via
-  // `OmitProperties`/`ToolFields`), so there is no real TypeSpec symbol named
-  // e.g. `OpenAI.VoiceResponseBaseStatus` to target directly: such names only
-  // exist post-emission, invented by the C# emitter for anonymous types. Instead,
-  // each property is first retyped (@@alternateType) to a small local named union
-  // declared here, and that local union is the one aliased/namespaced.
+  // models in the external OpenAI package, so there is no real TypeSpec symbol
+  // named e.g. `OpenAI.VoiceResponseBaseStatus` to target directly: such names
+  // only exist post-emission, invented by the C# emitter for anonymous types.
+  // Instead, each property is first retyped (@@alternateType) to a small local
+  // named union declared here, and that local union is the one aliased/namespaced.
+  //
+  // Several of these properties are spread into a Foundry-local model via
+  // `OmitProperties`/`ToolFields` (e.g. VoiceResponseBase spreads
+  // OpenAI.RealtimeResponse). TCGC does not bind alternateType/clientNamespace to
+  // the spread-derived copy of the property, only to the property on its original
+  // declaring model, so every @@alternateType below targets `OpenAI.<Model>.<prop>`
+  // (never the Foundry model that spreads it in) -- confirmed against
+  // sdk-java-azure-ai-agents/client.tsp, which already uses this exact pattern for
+  // these same properties.
   // --------------------------------------------------------------------------------
   union LocalVoiceResponseStatus {
     "completed",
@@ -1363,7 +1371,7 @@ namespace Azure.AI.Projects {
     "incomplete",
     "in_progress",
   }
-  @@alternateType(VoiceResponseBase.status, LocalVoiceResponseStatus, "csharp");
+  @@alternateType(OpenAI.RealtimeResponse.status, LocalVoiceResponseStatus, "csharp");
   @@alternateType(
     LocalVoiceResponseStatus,
     {
@@ -1379,7 +1387,7 @@ namespace Azure.AI.Projects {
     "audio",
   }
   @@alternateType(
-    VoiceResponseBase.output_modalities,
+    OpenAI.RealtimeResponse.output_modalities,
     LocalVoiceResponseOutputModality[],
     "csharp"
   );
@@ -1439,8 +1447,9 @@ namespace Azure.AI.Projects {
     "csharp"
   );
 
-  // The four types below are also anonymous inline unions (see comment above);
-  // give each one a real local symbol before moving its namespace.
+  // The four unions below are also anonymous inline unions on the OpenAI side
+  // (same situation as above); give each a clientNamespace instead of an
+  // external alias since they have no real OpenAI SDK equivalent to alias to.
   union MCPToolboxToolConnectorId {
     "connector_dropbox",
     "connector_gmail",
@@ -1451,7 +1460,7 @@ namespace Azure.AI.Projects {
     "connector_outlookemail",
     "connector_sharepoint",
   }
-  @@alternateType(MCPToolboxTool.connector_id, MCPToolboxToolConnectorId, "csharp");
+  @@alternateType(OpenAI.MCPTool.connector_id, MCPToolboxToolConnectorId, "csharp");
   @@clientNamespace(MCPToolboxToolConnectorId, "Azure.AI.Projects.Agents", "csharp");
 
   union VoiceAgentAudioInputConfigTranscriptionDelay {
@@ -1462,7 +1471,7 @@ namespace Azure.AI.Projects {
     "xhigh",
   }
   @@alternateType(
-    VoiceAgentInputTranscription.delay,
+    OpenAI.AudioTranscription.delay,
     VoiceAgentAudioInputConfigTranscriptionDelay,
     "csharp"
   );
@@ -1479,7 +1488,7 @@ namespace Azure.AI.Projects {
     "auto",
   }
   @@alternateType(
-    VoiceAgentSemanticVadTurnDetection.eagerness,
+    OpenAI.RealtimeTurnDetectionSemanticVad.eagerness,
     VoiceAgentSemanticVadTurnDetectionEagerness,
     "csharp"
   );
