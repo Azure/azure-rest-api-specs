@@ -54,6 +54,7 @@ import {
   getPullRequestLabels,
   getTypeSpecProjectInfoFromCommit,
   getTypeSpecProjectInfoFromPr,
+  getTypeSpecProjectVersionFromMetadata,
   parseApiVersion,
   resolveTypeSpecMetadata,
 } from "../src/typespec-project.ts";
@@ -201,7 +202,7 @@ describe("TypeSpec project detection edge cases", () => {
     writeFileSync(join(projectPath, "main.tsp"), "namespace Demo;");
 
     // Setup mock metadata for the project
-    setupMockMetadata(projectPath, "2025-08-01", "stable");
+    setupMockMetadata(projectPath, "2025-08-01", "preview");
 
     const get = vi.fn().mockResolvedValueOnce({ data: { labels: [] } });
     const listFiles = vi
@@ -232,6 +233,7 @@ describe("TypeSpec project detection edge cases", () => {
     expect(result).not.toBeNull();
     expect(result?.tspProjectPath).toBe("specification/foo");
     expect(result?.apiVersion).toBe("2025-08-01");
+    expect(result?.isPreview).toBe(false);
     expect(listFiles).toHaveBeenCalled();
   });
 
@@ -394,7 +396,7 @@ describe("TypeSpec project detection edge cases", () => {
     writeFileSync(join(projectPath, "main.tsp"), "namespace Demo;");
 
     // Setup mock metadata for the project
-    setupMockMetadata(projectPath, "2026-01-01-preview", "preview");
+    setupMockMetadata(projectPath, "2026-01-01-preview", "stable");
 
     const listPullRequestsAssociatedWithCommit = vi.fn().mockResolvedValueOnce({
       data: [{ number: 123 }],
@@ -433,6 +435,7 @@ describe("TypeSpec project detection edge cases", () => {
     expect(result.hasNewApiVersionLabel).toBe(true);
     expect(result.projectInfo?.tspProjectPath).toBe("specification/foo");
     expect(result.projectInfo?.apiVersion).toBe("2026-01-01-preview");
+    expect(result.projectInfo?.isPreview).toBe(true);
   });
 
   it("falls back to commit file analysis when no PR is associated", async () => {
@@ -645,9 +648,7 @@ describe("TypeSpec metadata resolution", () => {
       ],
     });
 
-    const result = resolveTypeSpecMetadata(metadata);
-    expect(result.apiVersion).toBe("2025-08-01");
-    expect(result.sdkType).toBe("stable");
+    expect(resolveTypeSpecMetadata(metadata)).toEqual({ apiVersion: "2025-08-01" });
   });
 
   it("uses the first API version when metadata contains multiple versions", () => {
@@ -670,13 +671,10 @@ describe("TypeSpec metadata resolution", () => {
       ],
     });
 
-    expect(resolveTypeSpecMetadata(metadata)).toEqual({
-      apiVersion: "2025-08-01",
-      sdkType: "stable",
-    });
+    expect(resolveTypeSpecMetadata(metadata)).toEqual({ apiVersion: "2025-08-01" });
   });
 
-  it("throws error when languages have different sdkTypes (conflicting)", () => {
+  it("ignores conflicting SDK types when resolving the API version", () => {
     const metadata = createMetadata({
       csharp: [
         {
@@ -696,11 +694,7 @@ describe("TypeSpec metadata resolution", () => {
       ],
     });
 
-    expect(() => {
-      resolveTypeSpecMetadata(metadata);
-    }).toThrow(
-      "TypeSpec code generator output suggests that this project contains conflicting SDK release type",
-    );
+    expect(resolveTypeSpecMetadata(metadata)).toEqual({ apiVersion: "2025-08-01" });
   });
 
   it("skips language configs with missing apiVersion and logs warning", () => {
@@ -730,19 +724,16 @@ describe("TypeSpec metadata resolution", () => {
       ],
     });
 
-    const result = resolveTypeSpecMetadata(metadata);
-    expect(result.apiVersion).toBe("2025-08-01");
-    expect(result.sdkType).toBe("stable");
+    expect(resolveTypeSpecMetadata(metadata)).toEqual({ apiVersion: "2025-08-01" });
   });
 
-  it("skips language configs with missing sdkType", () => {
+  it("uses language configs with missing SDK type", () => {
     const metadata = createMetadata({
       csharp: [
         {
           emitterName: "csharp",
           packageName: "Azure.ResourceManager.Sample",
           apiVersion: "2025-08-01",
-          sdkType: "stable",
         },
       ],
       java: [
@@ -757,14 +748,11 @@ describe("TypeSpec metadata resolution", () => {
           emitterName: "python",
           packageName: "azure-mgmt-sample",
           apiVersion: "2025-08-01",
-          sdkType: "stable",
         },
       ],
     });
 
-    const result = resolveTypeSpecMetadata(metadata);
-    expect(result.apiVersion).toBe("2025-08-01");
-    expect(result.sdkType).toBe("stable");
+    expect(resolveTypeSpecMetadata(metadata)).toEqual({ apiVersion: "2025-08-01" });
   });
 
   it("throws error when no valid language configurations found", () => {
@@ -802,8 +790,17 @@ describe("TypeSpec metadata resolution", () => {
       ],
     });
 
-    const result = resolveTypeSpecMetadata(metadata);
-    expect(result.apiVersion).toBe("2025-08-01-preview");
-    expect(result.sdkType).toBe("preview");
+    expect(resolveTypeSpecMetadata(metadata)).toEqual({
+      apiVersion: "2025-08-01-preview",
+    });
+  });
+
+  it("rejects API versions outside the stable and preview formats", async () => {
+    const projectPath = join(workspace, "specification/foo");
+    mockMetadataMap.set(projectPath, { apiVersion: "latest", sdkType: "stable" });
+
+    await expect(
+      getTypeSpecProjectVersionFromMetadata(projectPath, "specification/foo"),
+    ).rejects.toThrow("API version 'latest' must use YYYY-MM-DD or YYYY-MM-DD-preview format");
   });
 });

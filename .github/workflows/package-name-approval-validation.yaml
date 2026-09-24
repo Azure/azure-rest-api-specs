@@ -29,7 +29,7 @@ jobs:
         uses: ./.github/actions/install-deps-github-script
 
       - name: Validate package name approval label
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9.0.0
         with:
           script: |
             const { default: validateApproval } =
@@ -37,7 +37,7 @@ jobs:
             await validateApproval({ github, context, core });
 
       - name: Update package name approval status
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9.0.0
         with:
           script: |
             const { default: statusCheck } =

@@ -65,6 +65,8 @@ Single source of truth for breaking-change and versioning approval label names a
 
 - `isExecError(error)` — type guard for errors thrown by the exec helpers.
 - `execFile(file, args, options)` — promisified `child_process.execFile`.
+- `ExecFileOptions` — direct execution options, including an optional `timeout` in milliseconds
+  for `execFile` and `execNodeBin`. Omit it for no execution timeout.
 - `execNodeBin(packageName, [binary, ...args], options)` — run an installed Node.js CLI directly
   with the current Node executable, without starting npm/pnpm or a shell shim. Resolves the package
   from `options.cwd` (or the current directory) using Node's `findPackageJSON`, reads its `bin`
@@ -96,6 +98,45 @@ Single source of truth for breaking-change and versioning approval label names a
 ### `math` — math helpers
 
 - `toPercent(value, decimals)` — format a `0..1` ratio as a percentage string.
+
+### `markdown` — composable report helpers
+
+- `MarkdownDoc`, `MarkdownSection` — trusted Markdown blocks, optional content, arrays and sections.
+- `section(title, body)` — group content under a heading; nested sections increase the heading level.
+- `renderMarkdownDoc(doc, heading = 1)` — render blocks separated by blank lines, omitting empty blocks.
+- `escapeMarkdown(text)` — escape untrusted single-line text, including HTML, table pipes and mentions.
+- `inlineCode(text)` — render nonempty code text, preserving embedded backticks and edge spaces.
+- `link(label, url)` — create a link from trusted inline Markdown and a trusted destination.
+- `table([header, ...rows])` — render equal-width GFM rows, escaping pipes and preserving line breaks.
+- `unorderedList(items)` — render Markdown list items, indenting continuation lines.
+- `details(summary, body)` — create a collapsible block with a plain-text summary and Markdown body.
+
+Like [TypeSpec's Markdown helpers](https://github.com/microsoft/typespec/blob/main/packages/tspd/src/ref-doc/utils/markdown.ts),
+callers describe the document structure rather than hand-joining every line. Strings are trusted
+Markdown: apply `escapeMarkdown` to external text before putting it in a heading,
+table cell, list item or link label. Link destinations must be trusted separately.
+
+```typescript
+import {
+  details,
+  escapeMarkdown,
+  renderMarkdownDoc,
+  section,
+  table,
+  unorderedList,
+} from "@azure-tools/specs-shared/markdown";
+
+const report = renderMarkdownDoc(
+  section("Contributor readiness", [
+    table([
+      ["Participant", "Finding"],
+      [escapeMarkdown(login), escapeMarkdown(message)],
+    ]),
+    details("Participants", unorderedList([escapeMarkdown(login)])),
+  ]),
+  2,
+);
+```
 
 ### `path` — path helpers (with caching)
 
@@ -168,7 +209,14 @@ Single source of truth for breaking-change and versioning approval label names a
 ### `typespec-metadata` — TypeSpec SDK metadata
 
 - `generateTypeSpecMetadata(folder, options)` — run the `@azure-tools/typespec-metadata` emitter,
-  validate its JSON output, and clean up its temporary output.
+  validate its JSON output, and clean up its unique temporary output on success or failure.
+  Resolves the compiler from the project folder. The optional `entrypoint` overrides project
+  discovery and may be absolute or relative to that folder; otherwise, compilation targets the
+  folder, falling back to `client.tsp` when `main.tsp` is absent. The optional `timeout` limits
+  compiler execution in milliseconds, with no timeout by default. Pass `logger` to receive
+  execution logs, with stdout and stderr recorded at debug level without inferring severity.
+  Failures throw, retaining compiler diagnostics and the execution error as their cause rather
+  than reporting that no emitter is configured.
 - `TypeSpecMetadataSchema`, `TypeSpecLanguageMetadataSchema` — zod schemas for metadata output.
 
 ## Folder structure & contributing

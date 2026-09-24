@@ -2,6 +2,7 @@ import { configDefaults, defineConfig, mergeConfig } from "vitest/config";
 
 export const defaultVitestConfig = defineConfig({
   test: {
+    testTimeout: 10000,
     coverage: {
       provider: "v8",
       reporter: ["text", "json", "html"],

@@ -212,11 +212,15 @@ Cover new or changed behavior and bug regressions with focused tests of reposito
 
 ### CI Integration
 
-Each tool is tested by a dedicated workflow (`.github/workflows/<tool>-test.yaml`) that calls the shared reusable workflow `.github/workflows/_reusable-eng-tools-test.yaml`. The reusable workflow runs `pnpm run build` and `pnpm run test:ci` against the tool's `working-directory`, on a matrix of Ubuntu (Node 24) and Windows (Node 24).
+`.github/workflows/eng.yml` validates the workspace, runs root `pnpm build` once on Linux and
+root `pnpm test:ci` on Ubuntu and Windows with Node 24. Each test job installs
+dependencies once and runs the full Vitest workspace. Changes to tooling, shared
+configuration, or integration fixtures run all suites. Do not add per-tool
+workflows or type-check steps to the test OS matrix.
 
 `.github/workflows/format.yaml` runs `pnpm format:check` once from the repository root for `.github`, `eng/tools`, and `vitest.config.mts`. Do not add formatting steps to package/OS test matrices. Package-local formatting commands remain available and use the same root configuration.
 
-Code linting runs once for all packages in `.github/workflows/lint.yaml`, which automatically includes new tools. Do not add lint steps or a lint input to the per-package reusable workflow.
+Code linting runs once for all packages in `.github/workflows/lint.yaml`, which automatically includes new tools. Do not add lint steps to the build/test workflow.
 
 ## Common Tasks
 
@@ -229,7 +233,7 @@ Code linting runs once for all packages in `.github/workflows/lint.yaml`, which 
 5. Add `vitest.config.ts` extending `../vitest.base.config.ts`.
 6. Add CLI wrapper(s) under `cmd/` and declare them in the `bin` field.
 7. Register the package in `eng/tools/package.json` (`workspace:*` devDependency). The aggregate `eng/tools/tsconfig.json` automatically includes tool `src`/`test` directories.
-8. Add a `.github/workflows/<tool>-test.yaml` workflow calling `_reusable-eng-tools-test.yaml` with `package: <tool>`. Include relevant `paths` filters, at minimum `tsconfig.base.json`, `vitest.config.mts`, `eng/tools/package.json`, `eng/tools/tsconfig.json`, `eng/tools/vitest.base.config.ts`, and `eng/tools/<tool>/**`.
+8. Use the shared `eng.yml` workflow, which discovers new tools automatically. If the tool needs additional fixtures, update the shared workflow's triggers and sparse checkout.
 9. Run the [required checks](#before-committing) in the new tool directory.
 
 ### Updating Dependencies
@@ -247,6 +251,6 @@ Only use catalog references in projects included in `pnpm-workspace.yaml`.
 - Main Copilot instructions: [`.github/copilot-instructions.md`](../copilot-instructions.md)
 - GitHub Actions instructions: [`github-actions.instructions.md`](./github-actions.instructions.md)
 - Other instruction files: [`.github/instructions/`](.)
-- Reusable test workflow: [`.github/workflows/_reusable-eng-tools-test.yaml`](../workflows/_reusable-eng-tools-test.yaml)
+- Engineering workflow: [`.github/workflows/eng.yml`](../workflows/eng.yml)
 - Vitest docs: https://vitest.dev/
 - oxlint docs: https://oxc.rs/docs/guide/usage/linter

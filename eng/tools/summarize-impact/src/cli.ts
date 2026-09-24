@@ -7,6 +7,7 @@ import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 import { writeFile } from "fs/promises";
 import { parseArgs, type ParseArgsConfig } from "node:util";
 import { resolve } from "path";
+import { simpleGit } from "simple-git";
 import { type LabelContext } from "./labelling-types.ts";
 import { PRContext } from "./PRContext.ts";
 
@@ -74,8 +75,11 @@ export async function main() {
   const targetDirectory = opts.targetDirectory as string;
   const sourceGitRoot = await getRootFolder(sourceDirectory);
   const targetGitRoot = await getRootFolder(targetDirectory);
+  // The target checkout is the PR merge base, not necessarily the source's first parent.
+  const baseCommitish = await simpleGit(targetGitRoot).revparse("HEAD");
   const fileList = await getChangedFilesStatuses({
     cwd: sourceGitRoot,
+    baseCommitish,
     // code in diff-types.ts and impact.ts assumes the file list only contains add/modify/delete, not renames
     gitOptions: ["--no-renames"],
     logger: defaultLogger,
