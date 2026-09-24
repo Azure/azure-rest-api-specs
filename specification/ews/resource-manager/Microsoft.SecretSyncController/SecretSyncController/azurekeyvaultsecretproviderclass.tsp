@@ -24,11 +24,7 @@ model AzureKeyVaultSecretProviderClass
 
 @@maxLength(AzureKeyVaultSecretProviderClass.name, 253);
 
-/**
- * Known Azure clouds for the in-cluster Azure Key Vault provider.
- * The provider also accepts AzureCloud as an alias for AzurePublicCloud and AzureUSGovernment as an alias for AzureUSGovernmentCloud.
- * Cloud names are matched case-insensitively.
- */
+/** Known Azure clouds for the in-cluster Azure Key Vault provider. */
 union AzureCloudName {
   string,
 
