@@ -1357,10 +1357,11 @@ namespace Azure.AI.Projects {
   //
   // Several of these properties are spread into a Foundry-local model via
   // `OmitProperties`/`ToolFields` (e.g. VoiceResponseBase spreads
-  // OpenAI.RealtimeResponse). TCGC does not bind alternateType/clientNamespace to
-  // the spread-derived copy of the property, only to the property on its original
-  // declaring model, so every @@alternateType below targets `OpenAI.<Model>.<prop>`
-  // (never the Foundry model that spreads it in) -- confirmed against
+  // OpenAI.RealtimeResponse). The client generator does not bind
+  // alternateType/clientNamespace to the spread-derived copy of the property,
+  // only to the property on its original declaring model, so every
+  // @@alternateType below targets `OpenAI.<Model>.<prop>` (never the Foundry
+  // model that spreads it in) -- confirmed against
   // sdk-java-azure-ai-agents/client.tsp, which already uses this exact pattern for
   // these same properties.
   // --------------------------------------------------------------------------------
