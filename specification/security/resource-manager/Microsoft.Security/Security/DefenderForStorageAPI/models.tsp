@@ -1,13 +1,11 @@
 ﻿import "@typespec/rest";
 import "@typespec/http";
-import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Common;
@@ -63,14 +61,51 @@ model DefenderForStorageSettingList {
    * The URI to fetch the next page.
    */
   @nextLink
-  nextLink?: string;
+  nextLink?: url;
+}
+
+/**
+ * List of Defender for Storage malware scans.
+ */
+model MalwareScanList {
+  /**
+   * List of Defender for Storage malware scans.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: MalwareScan[];
+
+  /**
+   * The URI to fetch the next page.
+   */
+  @nextLink
+  nextLink?: url;
+}
+
+/**
+ * The provisioning state of the Defender for Storage settings resource.
+ */
+@Azure.Core.lroStatus
+union DefenderForStorageProvisioningState {
+  string,
+  Azure.ResourceManager.ResourceProvisioningState,
+
+  /**
+   * The resource is being provisioned.
+   */
+  InProgress: "InProgress",
 }
 
 /**
  * Defender for Storage resource properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DefenderForStorageSettingProperties {
+  /**
+   * The provisioning state of the resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: DefenderForStorageProvisioningState;
+
   /**
    * Indicates whether Defender for Storage is enabled on this storage account.
    */
@@ -139,13 +174,20 @@ model OnUploadProperties {
   /**
    * Defines the max GB to be scanned per Month. Set to -1 if no capping is needed. If not specified, the default value is -1.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserves the JSON property name 'capGBPerMonth' published in 2025-09-01-preview; changing its casing would break compatibility with existing clients."
   capGBPerMonth?: int32;
+
+  /**
+   * The number of gigabytes scanned by On Upload malware scanning during the current month. Reflects the current month's usage.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "'GB' matches the casing of the existing capGBPerMonth, scannedBlobsInGB and scannedFilesInGB properties in this spec."
+  @visibility(Lifecycle.Read)
+  scannedGBThisMonth?: float64;
 
   /**
    * Optional. Determine which blobs get scanned by On Upload malware scanning. An Or operation is performed between each filter type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Service explicitly returns null when no filters are configured, not just omits the field."
   filters?: OnUploadFilters | null;
 }
 
@@ -159,20 +201,20 @@ model OnUploadFilters {
    * Exclude entire containers: Use prefix of container names you want to exclude without a trailing `/`.
    * Exclude a single container: Add a trailing slash `/` after the container name to avoid excluding other containers with similar prefixes.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Service explicitly returns null when no prefixes are configured, not just omits the field."
   excludeBlobsWithPrefix?: string[] | null;
 
   /**
    * Optional. A list of suffixes to exclude from on-upload malware scanning. Suffixes match only the end of blob names, and should be used for file extensions or blob name endings only.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Service explicitly returns null when no suffixes are configured, not just omits the field."
   excludeBlobsWithSuffix?: string[] | null;
 
   /**
    * Optional. Specifies the maximum size in bytes for blobs to be scanned. This parameter accepts a single positive integer value. Blobs larger than this value will be excluded from scanning.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  excludeBlobsLargerThan?: unknown | null;
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Service explicitly returns null when no size limit is configured, not just omits the field."
+  excludeBlobsLargerThan?: int64 | null;
 }
 
 /**
@@ -192,14 +234,37 @@ model SensitiveDataDiscoveryProperties {
 }
 
 /**
- * Describes the state of a malware scan operation.
+ * A status code of the malware scan operation.
  */
-model MalwareScan {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  properties?: MalwareScanProperties;
+union MalwareScanStatus {
+  string,
+
+  /** The scan request has been queued and is waiting to be processed. */
+  Queued: "Queued",
+
+  /** The scan is currently in progress. */
+  InProgress: "InProgress",
+
+  /** The scan has finished processing and is waiting for final results. */
+  WaitingForCompletion: "WaitingForCompletion",
+
+  /** The scan is being cancelled upon user request. */
+  Canceling: "Canceling",
+
+  /** The scan has been canceled. */
+  Canceled: "Canceled",
+
+  /** The scan failed. */
+  Failed: "Failed",
+
+  /** The scan has completed successfully. */
+  Completed: "Completed",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+/**
+ * Properties of a malware scan operation.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "MalwareScan is a read-only resource created via the startMalwareScan action (no PUT/PATCH). Its lifecycle is modeled by scanStatus; an ARM provisioningState is not applicable."
 model MalwareScanProperties {
   /**
    * The identifier of the scan.
@@ -209,7 +274,7 @@ model MalwareScanProperties {
   /**
    * A status code of the scan operation.
    */
-  scanStatus?: string;
+  scanStatus?: MalwareScanStatus;
 
   /**
    * A description of the status of the scan.
@@ -219,12 +284,12 @@ model MalwareScanProperties {
   /**
    * The time at which the scan had been initiated.
    */
-  scanStartTime?: string;
+  scanStartTime?: utcDateTime;
 
   /**
    * The time at which the scan has ended. Only available for a scan which has terminated.
    */
-  scanEndTime?: string;
+  scanEndTime?: utcDateTime;
 
   /**
    * A summary of the scan results.
@@ -245,12 +310,6 @@ model ScanSummary {
    * A summary of the scan results of the files that were scanned.
    */
   files?: FilesScanSummary;
-
-  /**
-   * The estimated cost of the scan. Only available for a scan which has terminated.
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  estimatedScanCostUSD?: float64;
 }
 
 /**
@@ -280,7 +339,7 @@ model BlobsScanSummary {
   /**
    * The number of gigabytes of data that were scanned.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserves the JSON response property name 'scannedBlobsInGB' published in 2025-09-01-preview; changing its casing would break compatibility with existing clients."
   scannedBlobsInGB?: float64;
 }
 
@@ -311,14 +370,13 @@ model FilesScanSummary {
   /**
    * The number of gigabytes of data that were scanned.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserves the JSON response property name 'scannedFilesInGB' published in 2025-09-01-preview; changing its casing would break compatibility with existing clients."
   scannedFilesInGB?: float64;
 }
 
 /**
  * The matching strategy for the filter.
  */
-@added(Versions.v2026_01_01_preview)
 union MatchType {
   string,
 
@@ -336,7 +394,6 @@ union MatchType {
 /**
  * Filter with value and matching strategy.
  */
-@added(Versions.v2026_01_01_preview)
 model MatchFilter {
   /**
    * The value to match against.
@@ -352,7 +409,6 @@ model MatchFilter {
 /**
  * Filter for blob scanning. At least one of 'container' or 'blob' must be specified; a request with neither is rejected by the service. If only container is provided, all blobs in that container are scanned. If only blob is provided, blobs matching the filter across all containers are scanned.
  */
-@added(Versions.v2026_01_01_preview)
 model BlobScanFilter {
   /**
    * Optional filter for the blob container to scan. If not provided, the blob filter will apply across all containers.
@@ -368,7 +424,6 @@ model BlobScanFilter {
 /**
  * Filter for file scanning. At least one of 'share' or 'file' must be specified; a request with neither is rejected by the service. If only share is provided, all files in that share are scanned. If only file is provided, files matching the filter across all shares are scanned.
  */
-@added(Versions.v2026_01_01_preview)
 model FileScanFilter {
   /**
    * Optional filter for the file share to scan. If not provided, the file filter will apply across all shares.
@@ -384,7 +439,6 @@ model FileScanFilter {
 /**
  * Filters to scope the malware scan.
  */
-@added(Versions.v2026_01_01_preview)
 model MalwareScanFilters {
   /**
    * Optional filter for blob scanning. Specifies which blobs to scan.
@@ -400,7 +454,6 @@ model MalwareScanFilters {
 /**
  * Properties for the malware scan request.
  */
-@added(Versions.v2026_01_01_preview)
 model StartMalwareScanRequestProperties {
   /**
    * Optional filters to scope the malware scan to specific blobs or files.
@@ -412,7 +465,6 @@ model StartMalwareScanRequestProperties {
  * Request body for starting a malware scan with optional filters.
  */
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-@added(Versions.v2026_01_01_preview)
 model StartMalwareScanRequest {
   /**
    * Properties for the malware scan request.

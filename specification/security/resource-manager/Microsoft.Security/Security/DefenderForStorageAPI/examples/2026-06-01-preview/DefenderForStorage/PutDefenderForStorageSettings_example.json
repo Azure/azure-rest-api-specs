@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2025-09-01-preview",
+    "api-version": "2026-06-01-preview",
     "defenderForStorageSetting": {
       "properties": {
         "isEnabled": true,
@@ -40,6 +40,7 @@
         "type": "Microsoft.Security/defenderForStorageSettings",
         "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.Storage/storageAccounts/samplestorageaccount/providers/Microsoft.Security/defenderForStorageSettings/current",
         "properties": {
+          "provisioningState": "Succeeded",
           "isEnabled": true,
           "malwareScanning": {
             "automatedResponse": "BlobSoftDelete",
@@ -49,9 +50,8 @@
               "filters": {
                 "excludeBlobsLargerThan": 1024,
                 "excludeBlobsWithPrefix": [
-                  "sample-container/logs",
-                  "single-excluded-container/",
-                  "excluded-containers"
+                  "unscanned-container",
+                  "sample-container/logs"
                 ],
                 "excludeBlobsWithSuffix": [
                   ".log",
@@ -60,47 +60,50 @@
               },
               "isEnabled": true
             },
-            "operationStatus": {
-              "code": "Succeeded"
-            },
             "scanResultsEventGridTopicResourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.EventGrid/topics/sampletopic"
           },
           "overrideSubscriptionLevelSettings": true,
           "sensitiveDataDiscovery": {
-            "isEnabled": true,
-            "operationStatus": {
-              "code": "Succeeded"
-            }
+            "isEnabled": true
           }
         }
       }
     },
     "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.Storage/storageAccounts/samplestorageaccount/providers/Microsoft.Security/defenderForStorageSettings/current/operationStatus/8b1f8a3b-1f7c-4e1a-9c7e-9f1f5a1d4b2e?api-version=2026-06-01-preview",
+        "Retry-After": 15
+      },
       "body": {
         "name": "current",
         "type": "Microsoft.Security/defenderForStorageSettings",
         "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.Storage/storageAccounts/samplestorageaccount/providers/Microsoft.Security/defenderForStorageSettings/current",
         "properties": {
+          "provisioningState": "InProgress",
           "isEnabled": true,
           "malwareScanning": {
-            "automatedResponse": "None",
+            "automatedResponse": "BlobSoftDelete",
             "blobScanResultsOptions": "BlobIndexTags",
             "onUpload": {
-              "capGBPerMonth": -1,
-              "isEnabled": false
+              "capGBPerMonth": 10000,
+              "filters": {
+                "excludeBlobsLargerThan": 1024,
+                "excludeBlobsWithPrefix": [
+                  "unscanned-container",
+                  "sample-container/logs"
+                ],
+                "excludeBlobsWithSuffix": [
+                  ".log",
+                  ".jpg"
+                ]
+              },
+              "isEnabled": true
             },
-            "operationStatus": {
-              "code": "PartialSuccess",
-              "message": "Failed to setup data scanner."
-            }
+            "scanResultsEventGridTopicResourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/SampleRG/providers/Microsoft.EventGrid/topics/sampletopic"
           },
           "overrideSubscriptionLevelSettings": true,
           "sensitiveDataDiscovery": {
-            "isEnabled": false,
-            "operationStatus": {
-              "code": "PartialSuccess",
-              "message": "Failed to setup data scanner."
-            }
+            "isEnabled": true
           }
         }
       }

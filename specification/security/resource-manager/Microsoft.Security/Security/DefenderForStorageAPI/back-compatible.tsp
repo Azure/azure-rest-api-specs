@@ -15,6 +15,8 @@ using Common;
   "defenderForStorageSetting"
 );
 @@clientLocation(DefenderForStorageSettings.list, "DefenderForStorage");
+@@clientLocation(DefenderForStorageOperationStatus.get, "DefenderForStorage");
+@@clientName(DefenderForStorageOperationStatus.get, "GetOperationStatus");
 @@clientLocation(
   DefenderForStorageSettings.startMalwareScan,
   "DefenderForStorage"
@@ -25,5 +27,9 @@ using Common;
 );
 @@clientLocation(
   DefenderForStorageSettings.getMalwareScan,
+  "DefenderForStorage"
+);
+@@clientLocation(
+  DefenderForStorageSettings.listMalwareScans,
   "DefenderForStorage"
 );

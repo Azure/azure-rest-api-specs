@@ -2,7 +2,6 @@
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
-import "@typespec/versioning";
 import "./models.tsp";
 import "../Common/main.tsp";
 
@@ -10,14 +9,13 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using TypeSpec.Versioning;
 using Common;
 
 namespace DefenderForStorageAPI;
 /**
  * The Defender for Storage resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "DefenderForStorageSetting is an extension resource scoped to an arbitrary storage resource via the custom `resourceId` path parameter on the operation templates. The linter mistakes the extension scope plus the explicit `settingName` parameter for multiple base-parameter decorators, but only one scope is defined."
 @extensionResource
 model DefenderForStorageSetting
   is Azure.ResourceManager.ExtensionResource<DefenderForStorageSettingProperties> {
@@ -27,6 +25,21 @@ model DefenderForStorageSetting
     SegmentName = "defenderForStorageSettings",
     NamePattern = "",
     Type = SettingName
+  >;
+}
+
+/**
+ * Describes the state of a malware scan operation.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-base-parameter" "MalwareScan is an extension resource nested under defenderForStorageSettings whose scope is supplied via the custom `resourceId` path parameter on the operation templates. The linter mistakes the extension scope plus the explicit name parameter for multiple base-parameter decorators, but only one scope is defined."
+@extensionResource
+model MalwareScan
+  is Azure.ResourceManager.ExtensionResource<MalwareScanProperties> {
+  ...ResourceNameParameter<
+    Resource = MalwareScan,
+    KeyName = "scanId",
+    SegmentName = "malwareScans",
+    NamePattern = "^(latest|[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})$"
   >;
 }
 
@@ -95,18 +108,15 @@ interface DefenderForStorageSettings {
    * Gets the Defender for Storage settings for the specified storage account.
    */
   @tag("DefenderForStorage")
-  get is DefenderForStorageSettingsOps.Read<
-    DefenderForStorageSetting,
-    ErrorType = CloudError
-  >;
+  get is DefenderForStorageSettingsOps.Read<DefenderForStorageSetting>;
   /**
    * Creates or updates the Defender for Storage settings on a specified storage account.
+   * This is an asynchronous operation. The response includes the `Azure-AsyncOperation`
+   * header pointing to the operation status endpoint, which can be polled until the
+   * operation completes.
    */
   @tag("DefenderForStorage")
-  create is DefenderForStorageSettingsOps.CreateOrUpdateSync<
-    DefenderForStorageSetting,
-    ErrorType = CloudError
-  >;
+  create is DefenderForStorageSettingsOps.CreateOrUpdateAsync<DefenderForStorageSetting>;
 
   /**
    * Lists the Defender for Storage settings for the specified storage account.
@@ -114,13 +124,13 @@ interface DefenderForStorageSettings {
   @tag("DefenderForStorage")
   list is DefenderForStorageSettingsOps.List<
     DefenderForStorageSetting,
-    Response = ArmResponse<DefenderForStorageSettingList>,
-    ErrorType = CloudError
+    Response = ArmResponse<DefenderForStorageSettingList>
   >;
 
   /**
    * Cancels a Defender for Storage malware scan for the specified storage account.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "This action returns the MalwareScan resource it cancels, not the parent DefenderForStorageSetting; this differs from the resource's CRUD operations by design."
   @tag("DefenderForStorage")
   @tag("Antimalware")
   @tag("Scan")
@@ -128,25 +138,13 @@ interface DefenderForStorageSettings {
   cancelMalwareScan is DefenderForStorageMalwareScansOps.ActionSync<
     DefenderForStorageSetting,
     void,
-    ArmResponse<MalwareScan>,
-    ErrorType = CloudError
+    ArmResponse<MalwareScan>
   >;
 
   /**
    * Initiate a Defender for Storage malware scan for the specified storage account. Blobs and Files will be scanned for malware.
    */
-  // Hand-written (not built from DefenderForStorageSettingsOps.ActionSync<>) so the request
-  // body can be versioned: only the `body` parameter is @added(v2026), so the operation
-  // exists in all versions but the optional StartMalwareScanRequest body only appears in
-  // 2026-01-01-preview. This keeps 2025-09-01-preview byte-identical to main while adding
-  // the on-demand scan filters in 2026. ActionSync<> can't express a per-version body.
-  //
-  // The path parameters are declared inline (matching the DefenderForStorageSettingsOps
-  // legacy alias) rather than via ResourceInstanceParameters<>, so the URL keeps the
-  // existing `resourceId` scope naming instead of switching to `resourceUri`. Route
-  // assembly is driven by @armResourceAction + the @segment/@key decorators (no explicit
-  // @route), which avoids the path-parameter duplication seen when combining an explicit
-  // @route with @armResourceOperations.
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "This action returns a MalwareScan resource (the scan it initiated), not the parent DefenderForStorageSetting; this differs from the resource's CRUD operations by design."
   @tag("DefenderForStorage")
   @tag("Antimalware")
   @tag("Scan")
@@ -173,11 +171,13 @@ interface DefenderForStorageSettings {
     @pattern("^[a-z][a-z0-9]*$")
     settingName: SettingName,
 
-    /** Optional request body to filter which blobs and files to scan. */
-    @added(Versions.v2026_01_01_preview)
+    /**
+     * Optional request body to filter which blobs and files to scan.
+     * Supported since API version 2026-01-01-preview.
+     */
     @bodyRoot
     body?: StartMalwareScanRequest,
-  ): ArmResponse<MalwareScan> | CloudError;
+  ): ArmResponse<MalwareScan> | ErrorResponse;
 
   /**
    * Gets the Defender for Storage malware scan for the specified storage resource.
@@ -185,10 +185,17 @@ interface DefenderForStorageSettings {
   @tag("DefenderForStorage")
   @tag("Antimalware")
   @tag("Scan")
-  @get
-  getMalwareScan is DefenderForStorageMalwareScansOps.Read<
+  getMalwareScan is DefenderForStorageMalwareScansOps.Read<MalwareScan>;
+
+  /**
+   * Lists the Defender for Storage malware scans for the specified storage resource.
+   */
+  @tag("DefenderForStorage")
+  @tag("Antimalware")
+  @tag("Scan")
+  listMalwareScans is DefenderForStorageMalwareScansOps.List<
     MalwareScan,
-    ErrorType = CloudError
+    Response = ArmResponse<MalwareScanList>
   >;
 }
 
@@ -201,3 +208,31 @@ interface DefenderForStorageSettings {
   DefenderForStorageSettings.create::parameters.resource,
   "Defender for Storage Settings"
 );
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This is the polling endpoint for asynchronous Defender for Storage operations and is not itself an Azure resource interface."
+interface DefenderForStorageOperationStatus {
+  /**
+   * Gets the status of an asynchronous Defender for Storage settings operation. This is
+   * the polling endpoint referenced by the `Azure-AsyncOperation` header returned from
+   * the create-or-update operation.
+   */
+  @tag("DefenderForStorage")
+  @route("/{+resourceId}/providers/Microsoft.Security/defenderForStorageSettings/{settingName}/operationStatus/{operationId}")
+  @get
+  get(
+    ...ApiVersionParameter,
+
+    /** The fully qualified Azure Resource manager identifier of the resource. */
+    @path
+    resourceId: string,
+
+    /** The defender for storage setting name. */
+    @path
+    @pattern("^[a-z][a-z0-9]*$")
+    settingName: SettingName,
+
+    ...Azure.ResourceManager.CommonTypes.OperationIdParameter,
+  ):
+    | ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>
+    | ErrorResponse;
+}
