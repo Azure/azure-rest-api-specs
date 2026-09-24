@@ -1,6 +1,5 @@
 import "../common/models.tsp";
 import "../common/servicepatterns.tsp";
-import "./diagnostic-jobs-models.tsp";
 import "./models.tsp";
 
 namespace Azure.AI.Projects;
@@ -42,7 +41,7 @@ alias ListEvaluatorDiagnosticsParameters = {
   @query
   end_time?: utcDateTime;
 
-  @doc("Filter by an exact associated evaluator version. A rubric comparison matches when either its baseline or target version equals this value.")
+  @doc("Filter lineage diagnostics by the exact published evaluator version.")
   @query
   evaluator_version?: EvaluatorVersionNumber;
 
@@ -53,28 +52,6 @@ alias ListEvaluatorDiagnosticsParameters = {
   @doc("Filter by one or more completed diagnostic types by repeating the query parameter.")
   @query(#{ explode: true })
   type?: EvaluatorDiagnosticType[];
-};
-
-alias ListEvaluatorDiagnosticJobsParameters = {
-  @doc("Filter jobs by lifecycle status.")
-  @query
-  status?: JobStatus;
-
-  @doc("Filter jobs by requested diagnostic type.")
-  @query
-  type?: EvaluatorDiagnosticJobType;
-};
-
-alias EvaluatorDiagnosticJobScopeParameters = {
-  @doc("The evaluator name.")
-  @path
-  name: string;
-};
-
-alias EvaluatorDiagnosticJobIdentifierParameter = {
-  @doc("The evaluator diagnostic job identifier.")
-  @path
-  jobId: string;
 };
 
 @tag("Evaluators")
@@ -183,12 +160,11 @@ interface Evaluators {
   >;
 
   /**
-   * Returns completed diagnostics for the specified evaluator.
+   * Returns immutable publication lineage for the specified evaluator.
    *
-   * Time, evaluator-version, dimension, content-hash, and type filters are
-   * intersected. A comparison matches the evaluator-version and content-hash
-   * filters when either its baseline or target association matches. Requested
-   * diagnostics appear only after the source job succeeds.
+   * Time, evaluator-version, dimension, and type filters are intersected.
+   * Diagnostics are populated when a numbered evaluator version is published.
+   * Editing mutable current state does not publish lineage.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Evaluator diagnostics are immutable completed resources with custom evaluator-scoped filtering."
   @summary("List evaluator diagnostics")
@@ -333,84 +309,6 @@ interface Evaluators {
       credential_request: EvaluatorCredentialRequest;
     },
     AssetCredentialResponse
-  >;
-}
-
-// ============================================================================
-// Evaluator Diagnostic Jobs
-// ============================================================================
-
-#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
-@tag("EvaluatorDiagnosticJobs")
-interface EvaluatorDiagnosticJobs {
-  /** Creates an evaluator diagnostic job and returns the queued job. */
-  @summary("Create an evaluator diagnostic job")
-  @post
-  @route("/evaluators/{name}/diagnostic_jobs")
-  @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
-  @pollingOperation(EvaluatorDiagnosticJobs.get)
-  create is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
-    {
-      ...EvaluatorDiagnosticJobScopeParameters;
-      ...WithOperationId;
-
-      @doc("The evaluator diagnostic job request.")
-      @body
-      request: EvaluatorDiagnosticJobRequest;
-    },
-    JobCreatedResponse<EvaluatorDiagnosticJob>
-  >;
-
-  /** Gets one evaluator diagnostic job by its identifier. */
-  @summary("Get an evaluator diagnostic job")
-  @get
-  @route("/evaluators/{name}/diagnostic_jobs/{jobId}")
-  @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
-  get is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
-    EvaluatorDiagnosticJobScopeParameters &
-      EvaluatorDiagnosticJobIdentifierParameter,
-    JobStatusResponse<EvaluatorDiagnosticJob>
-  >;
-
-  /** Lists evaluator diagnostic jobs, including non-terminal and failed jobs. */
-  @summary("List evaluator diagnostic jobs")
-  @get
-  @list
-  @route("/evaluators/{name}/diagnostic_jobs")
-  @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
-  list is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
-    EvaluatorDiagnosticJobScopeParameters &
-      CommonPageQueryParameters &
-      ListEvaluatorDiagnosticJobsParameters,
-    AgentsPagedResult<EvaluatorDiagnosticJob>
-  >;
-
-  /** Cancels a queued or running evaluator diagnostic job. */
-  @summary("Cancel an evaluator diagnostic job")
-  @post
-  @route("/evaluators/{name}/diagnostic_jobs/{jobId}:cancel")
-  @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
-  cancel is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
-    EvaluatorDiagnosticJobScopeParameters &
-      EvaluatorDiagnosticJobIdentifierParameter,
-    OkResponse & EvaluatorDiagnosticJob
-  >;
-
-  /** Deletes an evaluator diagnostic job and job-owned temporary artifacts. A completed diagnostic published by the job is retained. */
-  @summary("Delete an evaluator diagnostic job")
-  @delete
-  @route("/evaluators/{name}/diagnostic_jobs/{jobId}")
-  @extension("x-ms-foundry-meta", EvaluatorDiagnosticJobsRequiredPreviews)
-  delete is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
-    EvaluatorDiagnosticJobScopeParameters &
-      EvaluatorDiagnosticJobIdentifierParameter,
-    NoContentResponse
   >;
 }
 

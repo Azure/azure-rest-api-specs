@@ -21,12 +21,6 @@ interface Evaluators {}
 @@clientLocation(Azure.AI.Projects.Evaluators.listDiagnostics, Evaluators);
 @@clientLocation(Azure.AI.Projects.Evaluators.getDiagnostic, Evaluators);
 
-@@clientLocation(Azure.AI.Projects.EvaluatorDiagnosticJobs.create, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluatorDiagnosticJobs.get, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluatorDiagnosticJobs.list, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluatorDiagnosticJobs.cancel, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluatorDiagnosticJobs.delete, Evaluators);
-
 @@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.create, Evaluators);
 @@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.get, Evaluators);
 @@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.list, Evaluators);

@@ -6,8 +6,10 @@ import { ArmLeaseValidationLabel } from "./arm-lease-validation-labels.js";
 import { checkLease } from "./detect-arm-leases.js";
 import { detectNewResourceTypes } from "./detect-new-resource-types.js";
 
-const ARM_OFFICE_HOURS_URL =
-  "https://outlook.office365.com/book/ARMOfficeHours1@microsoft.onmicrosoft.com/?ismsaljsauthenabled=true";
+const ARM_OFFICE_HOURS_URL = "https://aka.ms/apimodelingreview";
+const ARM_OFFICE_HOURS_MESSAGE =
+  "Please join ARM API Modeling Review Office Hours (drop-in, no booking required; every Tuesday and Thursday, " +
+  `9:30-10:30 AM PST) before merging: ${ARM_OFFICE_HOURS_URL}`;
 
 // Match pattern: specification/<orgName>/resource-manager/<RPNamespace>/...
 // Trailing slash ensures the match is a directory component, not a file like readme.md
@@ -245,7 +247,7 @@ export default async function armModelingReview({ core }) {
     }
     core.setFailed(
       `${invalidLeases.length} new resource provider(s) detected without a valid ARM lease. ` +
-        `Please schedule a discussion at ARM API Modeling Office Hours before merging: ${ARM_OFFICE_HOURS_URL}`,
+        ARM_OFFICE_HOURS_MESSAGE,
     );
   } else {
     core.info("New resource provider(s) detected with valid ARM lease — no action required.");
@@ -314,8 +316,7 @@ async function checkNewResourceTypes(rmFiles, core) {
 
   if (!allLeasesValid) {
     core.setFailed(
-      "New resource types detected without a valid ARM lease. " +
-        `Please schedule a discussion at ARM API Modeling Office Hours before merging: ${ARM_OFFICE_HOURS_URL}`,
+      "New resource types detected without a valid ARM lease. " + ARM_OFFICE_HOURS_MESSAGE,
     );
   } else {
     core.info("New resource types detected with valid ARM lease — auto-signed-off.");

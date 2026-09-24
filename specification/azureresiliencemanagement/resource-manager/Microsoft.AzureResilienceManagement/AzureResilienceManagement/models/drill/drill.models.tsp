@@ -59,6 +59,10 @@ model DrillProperties {
   @doc("ROPlan properties.")
   recoveryPlanProperties?: RecoveryPlanPropertiesOfDrill;
 
+  @doc("Goal Assignment properties.")
+  @added(Versions.v2026_09_30_preview)
+  goalAssignmentProperties?: GoalAssignmentPropertiesOfDrill;
+
   @doc("Properties for internal resources that are created for the Drill.")
   @added(Versions.v2026_03_01_preview)
   drillAssetProperties?: AssetPropertiesOfDrill;
@@ -109,7 +113,14 @@ model DrillProperties {
   managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
 
   @doc("The discriminator for the Drill object hierarchy.")
+  @removed(Versions.v2026_08_31_preview)
+  @renamedFrom(Versions.v2026_08_31_preview, "drillType")
   @visibility(Lifecycle.Create)
+  legacyDrillType: DrillType;
+
+  @doc("The discriminator for the Drill object hierarchy.")
+  @added(Versions.v2026_08_31_preview)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   drillType: DrillType;
 
   @doc("Monitoring properties of the Drill.")
@@ -150,11 +161,23 @@ model LastRunProperties {
   @doc("Attestation state of the last run of this Drill.")
   @visibility(Lifecycle.Read)
   lastRunAttestation?: DrillAttestation;
+
+  @doc("Actual recovery time of the last run of this Drill.")
+  @added(Versions.v2026_09_30_preview)
+  @visibility(Lifecycle.Read)
+  lastRunRecoveryTimeActual?: duration;
 }
 
 @doc("Definition of Zonal Drill properties.")
 model ZonalDrillProperties extends DrillProperties {
   @doc("The discriminator for the Drill object hierarchy.")
+  @removed(Versions.v2026_08_31_preview)
+  @renamedFrom(Versions.v2026_08_31_preview, "drillType")
+  legacyDrillType: DrillType.Zonal;
+
+  @doc("The discriminator for the Drill object hierarchy.")
+  @added(Versions.v2026_08_31_preview)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   drillType: DrillType.Zonal;
 
   @doc("An indication whether a VM is included in this Zonal Drill. If not, RO is not needed.")
@@ -181,6 +204,13 @@ model ZonalDrill is ProxyResource<ZonalDrillProperties> {
 @doc("Definition of Regional Drill properties.")
 model RegionalDrillProperties extends DrillProperties {
   @doc("The discriminator for the Drill object hierarchy.")
+  @removed(Versions.v2026_08_31_preview)
+  @renamedFrom(Versions.v2026_08_31_preview, "drillType")
+  legacyDrillType: DrillType.Regional;
+
+  @doc("The discriminator for the Drill object hierarchy.")
+  @added(Versions.v2026_08_31_preview)
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   drillType: DrillType.Regional;
 }
 
@@ -406,6 +436,24 @@ model RecoveryPlanPropertiesOfDrill {
   @doc("Excluded resource count in RecoveryPlan.")
   @visibility(Lifecycle.Read)
   recoveryPlanResourceExcludedCount?: int32;
+}
+
+/**
+ * Model that represents the Goal Assignment properties
+ */
+@doc("Goal assignment properties.")
+@added(Versions.v2026_09_30_preview)
+model GoalAssignmentPropertiesOfDrill {
+  @doc("Identity to use for goal assignment operations.")
+  identity: AssociatedIdentity;
+
+  @doc("Goal assignment id.")
+  @visibility(Lifecycle.Read)
+  goalAssignmentId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.AzureResilienceManagement/goalAssignments";
+    }
+  ]>;
 }
 
 /**
@@ -642,6 +690,22 @@ model AttentionReason {
   @identifiers(#[])
   @added(Versions.v2026_08_31_preview)
   sliAttentionStatuses?: SliAttentionStatus[];
+
+  @doc("Drill object does not have the necessary RBAC on Goal Assignment.")
+  @added(Versions.v2026_09_30_preview)
+  drillRbacOnGoalAssignment?: RBACState;
+
+  @doc("Permissions needed by the Drill MSI on Goal Assignment.")
+  @added(Versions.v2026_09_30_preview)
+  rbacNeededForDrillOnGoalAssignment?: string[];
+
+  @doc("Goal Assignment not present.")
+  @added(Versions.v2026_09_30_preview)
+  goalAssignment?: ExtensionObjectState;
+
+  @doc("Recovery plan not present.")
+  @added(Versions.v2026_09_30_preview)
+  recoveryPlan?: ExtensionObjectState;
 }
 
 @doc("Internal System Metadata, to be used by internal components only.")
@@ -786,6 +850,10 @@ model DrillPatchProperties {
 
   @doc("Recovery Plan properties.")
   recoveryPlanProperties?: RecoveryPlanPropertiesOfDrill;
+
+  @doc("Goal Assignment properties.")
+  @added(Versions.v2026_09_30_preview)
+  goalAssignmentProperties?: GoalAssignmentPropertiesOfDrill;
 
   @doc("Properties for internal resources that are created for the Drill.")
   @added(Versions.v2026_03_01_preview)

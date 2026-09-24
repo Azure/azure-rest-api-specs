@@ -41,9 +41,8 @@ enum Versions {
   v2022_04_01: "2022-04-01",
 
   /**
-   * The 2024-04-01-preview API version.
+   * The 2026-09-01 API version.
    */
-  @Azure.Core.previewVersion
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
-  v2024_04_01_preview: "2024-04-01-preview",
+  v2026_09_01: "2026-09-01",
 }

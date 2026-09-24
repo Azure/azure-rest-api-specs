@@ -1,0 +1,111 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "InlineSystemDataTest",
+    "version": "2025-01-01"
+  },
+  "host": "management.azure.com",
+  "schemes": ["https"],
+  "produces": ["application/json"],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SystemDataTest/widgets/{widgetName}": {
+      "get": {
+        "operationId": "Widgets_Get",
+        "description": "Gets a widget.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "widgetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The widget name."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The widget.",
+            "schema": {
+              "$ref": "#/definitions/Widget"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Widget": {
+      "type": "object",
+      "description": "A tracked widget resource.",
+      "x-ms-azure-resource": true,
+      "required": ["location", "systemData"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource ID."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource type."
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location."
+        },
+        "systemData": {
+          "$ref": "#/definitions/InlineSystemData"
+        },
+        "properties": {
+          "type": "object",
+          "description": "Service-specific properties.",
+          "properties": {
+            "provisioningState": {
+              "type": "string",
+              "readOnly": true,
+              "description": "The provisioning state."
+            }
+          }
+        }
+      }
+    },
+    "InlineSystemData": {
+      "type": "object",
+      "description": "Inline system metadata that should use common types.",
+      "readOnly": true,
+      "properties": {
+        "createdBy": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The identity that created the resource."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The creation timestamp."
+        }
+      }
+    }
+  }
+}

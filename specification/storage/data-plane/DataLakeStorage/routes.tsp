@@ -667,7 +667,7 @@ interface Path {
     {
       @statusCode statusCode: 202;
       ...EtagResponseHeader;
-      ...ContentMD5ResponseHeader;
+      ...ContentMD5ResponseHeaderBytes;
       ...ContentCrc64ResponseHeader;
       ...IsServerEncryptedResponseHeader;
       ...EncryptionKeySha256ResponseHeader;

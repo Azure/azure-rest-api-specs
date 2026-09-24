@@ -995,6 +995,12 @@ for ($runIndex = 1; $runIndex -le $Repeat; $runIndex++) {
         $overallExitCode = $evalExitCode
     }
 
+    # Vally's CLI exit code follows the aggregate threshold, but this runner is a regression gate: every configured stimulus must pass.
+    if ($failed -gt 0 -and $overallExitCode -eq 0) {
+        Write-Host ("  [REGRESSION] {0} stimulus trial(s) failed." -f $failed) -ForegroundColor Red
+        $overallExitCode = 1
+    }
+
     # vally's own pass/fail uses `scoring.threshold`, which is an aggregate:
     # a suite can score above threshold while individual stimuli fail. That is
     # reasonable for a capability suite and wrong for a true-negative regression

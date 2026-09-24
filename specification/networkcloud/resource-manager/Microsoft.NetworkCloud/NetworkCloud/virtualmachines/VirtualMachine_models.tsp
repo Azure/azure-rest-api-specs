@@ -336,6 +336,7 @@ model ImageRepositoryCredentialsPatch {
   /**
    * The URL of the authentication server used to validate the repository credentials.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   registryUrl?: string;
 
   /**
@@ -424,7 +425,7 @@ model VirtualMachinePatchParameters {
   /**
    * The Azure resource tags that will replace the existing ones.
    */
-  ...Foundations.ArmTagsProperty;
+  ...TagsParameter;
 }
 
 /**

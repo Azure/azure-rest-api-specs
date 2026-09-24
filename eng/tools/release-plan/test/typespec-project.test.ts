@@ -504,11 +504,46 @@ describe("TypeSpec project detection edge cases", () => {
       },
     });
 
-    expect(result.isFolderMigration).toBe(true);
+    expect(result.skipReleasePlanAutomation).toBe(true);
     expect(result.projectInfo).toBeNull();
     expect(result.prNumber).toBe(321);
     expect(result.hasNewApiVersionLabel).toBe(false);
     // Folder migration is detected before listing files, so no file lookup happens.
+    expect(listFiles).not.toHaveBeenCalled();
+  });
+
+  it("skips PRs labeled to opt out of release plan automation", async () => {
+    const listPullRequestsAssociatedWithCommit = vi.fn().mockResolvedValueOnce({
+      data: [{ number: 654 }],
+    });
+    const get = vi.fn().mockResolvedValueOnce({
+      data: { labels: [{ name: "Skip-ReleasePlan-Automation" }] },
+    });
+    const listFiles = vi.fn();
+
+    const result = await getTypeSpecProjectInfoFromCommit({
+      commitSha: "skip123",
+      owner: "Azure",
+      repo: "azure-rest-api-specs",
+      workspace: process.cwd(),
+      octokit: {
+        rest: {
+          pulls: {
+            get,
+            listFiles,
+          },
+          repos: {
+            listPullRequestsAssociatedWithCommit,
+            getCommit: vi.fn(),
+          },
+        },
+      },
+    });
+
+    expect(result.skipReleasePlanAutomation).toBe(true);
+    expect(result.projectInfo).toBeNull();
+    expect(result.prNumber).toBe(654);
+    expect(result.hasNewApiVersionLabel).toBe(false);
     expect(listFiles).not.toHaveBeenCalled();
   });
 

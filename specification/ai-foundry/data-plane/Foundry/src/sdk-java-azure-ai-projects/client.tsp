@@ -89,11 +89,6 @@ namespace Azure.AI.Projects;
 @@clientName(Evaluators.deleteVersion, "deleteEvaluatorVersion");
 @@clientName(Evaluators.listDiagnostics, "listEvaluatorDiagnostics");
 @@clientName(Evaluators.getDiagnostic, "getEvaluatorDiagnostic");
-@@clientName(EvaluatorDiagnosticJobs.create, "createEvaluatorDiagnosticJob");
-@@clientName(EvaluatorDiagnosticJobs.get, "getEvaluatorDiagnosticJob");
-@@clientName(EvaluatorDiagnosticJobs.list, "listEvaluatorDiagnosticJobs");
-@@clientName(EvaluatorDiagnosticJobs.cancel, "cancelEvaluatorDiagnosticJob");
-@@clientName(EvaluatorDiagnosticJobs.delete, "deleteEvaluatorDiagnosticJob");
 
 // Indexes
 @@clientName(Indexes.createOrUpdateVersion, "createOrUpdateIndexVersion");
@@ -215,6 +210,11 @@ namespace Azure.AI.Projects;
 
 @@clientName(AttackStrategy.Base64, "Base_64");
 @@clientName(AttackStrategy.ROT13, "ROT_13");
+
+@@clientName(AgentInsightHighlightedTrace.duration_ms, "Duration");
+
+// Preserve name on GA'd model
+@@clientName(FoundryEvaluationTarget, "Target");
 
 // --------------------------------------------------------------------------------
 // Usage / Public accessibility overrides
@@ -357,6 +357,8 @@ model TimeZoneType {}
 @@alternateType(RecurrenceTrigger.timeZone, TimeZoneType, "java");
 
 @@alternateType(RoutineRunStatus, string, "java");
+
+@@alternateType(AgentInsightHighlightedTrace.total_tokens, int64, "java");
 
 // --------------------------------------------------------------------------------
 // Relocate EvaluatorGenerationJobs, EvaluationSuites, and

@@ -67,6 +67,8 @@ Single source of truth for breaking-change and versioning approval label names a
 - `execFile(file, args, options)` — promisified `child_process.execFile`.
 - `execNpm(args, options)` — run an `npm` command.
 - `execNpmExec(args, options)` — run an `npm exec` command.
+- `execPnpm(args, options)` — run a `pnpm` command (via `cross-spawn`).
+- `execPnpmExec(args, options)` — run a `pnpm exec` command (via `cross-spawn`).
 
 ### `git` — git helpers
 

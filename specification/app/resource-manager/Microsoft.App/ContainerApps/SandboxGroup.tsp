@@ -73,7 +73,7 @@ interface SandboxGroups {
   update is ArmCustomPatchAsync<
     SandboxGroup,
     SandboxGroupPatch,
-    LroHeaders = ArmCombinedLroHeaders
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = SandboxGroup>
   >;
 
   /** Delete a SandboxGroup. */
