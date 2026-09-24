@@ -2,6 +2,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using Versioning;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Common;
 
@@ -1162,6 +1163,7 @@ model DiskUpdateProperties {
 /**
  * Request body for disk claim operation.
  */
+@clientName("ClaimRequestContent", "csharp")
 @added(Versions.v2026_10_02)
 model ClaimRequest {
   /**
@@ -1173,6 +1175,7 @@ model ClaimRequest {
 /**
  * Request body for disk unclaim operation.
  */
+@clientName("UnclaimRequestContent", "csharp")
 @added(Versions.v2026_10_02)
 model UnclaimRequest {
   /**
