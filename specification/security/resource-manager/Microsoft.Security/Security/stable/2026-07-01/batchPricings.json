@@ -47,6 +47,51 @@
     }
   ],
   "paths": {
+    "/{scopeId}/providers/Microsoft.Security/batchPricings": {
+      "get": {
+        "operationId": "BatchPricings_List",
+        "tags": [
+          "BatchPricings",
+          "PricingBatch"
+        ],
+        "description": "Lists the pricing batch resources for the specified scope.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "scopeId",
+            "in": "path",
+            "description": "The subscription scope for the batch pricing resource.",
+            "required": true,
+            "type": "string",
+            "x-ms-skip-url-encoding": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PricingBatchList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Common.CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List pricing batches": {
+            "$ref": "./examples/BatchPricings/ListBatchPricings_example.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/{scopeId}/providers/Microsoft.Security/batchPricings/{pricingBatchName}": {
       "get": {
         "operationId": "BatchPricings_Get",
@@ -229,6 +274,27 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "PricingBatchList": {
+      "type": "object",
+      "description": "A list of pricing batch resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The pricing batch resources.",
+          "items": {
+            "$ref": "#/definitions/PricingBatch"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI to fetch the next page."
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "PricingBatchPlanItem": {

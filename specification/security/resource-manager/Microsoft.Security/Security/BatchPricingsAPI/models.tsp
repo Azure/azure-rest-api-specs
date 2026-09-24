@@ -34,6 +34,23 @@ model PricingBatchProperties {
 }
 
 /**
+ * A list of pricing batch resources.
+ */
+model PricingBatchList {
+  /**
+   * The pricing batch resources.
+   */
+  @pageItems
+  value: PricingBatch[];
+
+  /**
+   * The URI to fetch the next page.
+   */
+  @nextLink
+  nextLink?: url;
+}
+
+/**
  * An individual pricing plan configuration.
  */
 model PricingBatchPlanItem {
