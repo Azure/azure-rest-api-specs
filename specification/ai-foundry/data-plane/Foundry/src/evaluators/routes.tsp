@@ -27,29 +27,38 @@ alias EvaluatorCreatedOrOkResponse =
   | EvaluatorOkResponse;
 
 alias ListEvaluatorDiagnosticsParameters = {
-  ...OmitProperties<CommonPageQueryParameters, "order">;
+  ...OmitProperties<CommonPageQueryParameters, "order" | "limit">;
+
+  @doc("The maximum number of lineage entries to return, between 1 and 100. The default is 20.")
+  @minValue(1)
+  @maxValue(100)
+  @query
+  limit?: int32 = 20;
 
   @doc("Sort completed diagnostics by `occurred_at`, then diagnostic identifier. The default is `desc`.")
   @query
   order?: PageOrder = "desc";
 
-  @doc("Inclusive lower bound for the completed diagnostic occurrence time.")
+  @doc("Inclusive lower bound for the diagnostic occurrence time, expressed as Unix seconds.")
   @query
-  start_time?: utcDateTime;
+  start_time?: FoundryTimestamp;
 
-  @doc("Inclusive upper bound for the completed diagnostic occurrence time.")
+  @doc("Inclusive upper bound for the diagnostic occurrence time, expressed as Unix seconds. Includes all entries occurring within that second.")
   @query
-  end_time?: utcDateTime;
+  end_time?: FoundryTimestamp;
 
   @doc("Filter lineage diagnostics by the exact published evaluator version.")
   @query
   evaluator_version?: EvaluatorVersionNumber;
 
   @doc("Filter completed diagnostics for one public rubric dimension identifier.")
+  @minLength(1)
+  @maxLength(128)
   @query
   dimension_id?: string;
 
   @doc("Filter by one or more completed diagnostic types by repeating the query parameter.")
+  @minItems(1)
   @query(#{ explode: true })
   type?: EvaluatorDiagnosticType[];
 };

@@ -9590,17 +9590,6 @@ paths:
           description: The evaluator name.
           schema:
             type: string
-        - name: limit
-          in: query
-          required: false
-          description: |-
-            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
-            default is 20.
-          schema:
-            type: integer
-            format: int32
-            default: 20
-          explode: false
         - name: after
           in: query
           required: false
@@ -9621,6 +9610,17 @@ paths:
           schema:
             type: string
           explode: false
+        - name: limit
+          in: query
+          required: false
+          description: The maximum number of lineage entries to return, between 1 and 100. The default is 20.
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+            maximum: 100
+            default: 20
+          explode: false
         - name: order
           in: query
           required: false
@@ -9632,18 +9632,16 @@ paths:
         - name: start_time
           in: query
           required: false
-          description: Inclusive lower bound for the completed diagnostic occurrence time.
+          description: Inclusive lower bound for the diagnostic occurrence time, expressed as Unix seconds.
           schema:
-            type: string
-            format: date-time
+            $ref: '#/components/schemas/FoundryTimestamp'
           explode: false
         - name: end_time
           in: query
           required: false
-          description: Inclusive upper bound for the completed diagnostic occurrence time.
+          description: Inclusive upper bound for the diagnostic occurrence time, expressed as Unix seconds. Includes all entries occurring within that second.
           schema:
-            type: string
-            format: date-time
+            $ref: '#/components/schemas/FoundryTimestamp'
           explode: false
         - name: evaluator_version
           in: query
@@ -9658,6 +9656,8 @@ paths:
           description: Filter completed diagnostics for one public rubric dimension identifier.
           schema:
             type: string
+            minLength: 1
+            maxLength: 128
           explode: false
         - name: type
           in: query
@@ -9667,6 +9667,7 @@ paths:
             type: array
             items:
               $ref: '#/components/schemas/EvaluatorDiagnosticType'
+            minItems: 1
         - name: api-version
           in: query
           required: true
@@ -48189,16 +48190,19 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/EvaluatorDiagnostic'
+          maxItems: 100
           description: The evaluator publication lineage entries.
         first_id:
           anyOf:
             - type: string
             - type: 'null'
+          minLength: 1
           description: The first diagnostic identifier represented in this page.
         last_id:
           anyOf:
             - type: string
             - type: 'null'
+          minLength: 1
           description: The last diagnostic identifier represented in this page.
         has_more:
           type: boolean
@@ -49842,6 +49846,9 @@ components:
       properties:
         id:
           type: string
+          minLength: 1
+          maxLength: 128
+          pattern: ^[a-z][a-z0-9_]*$
           description: Stable identifier for this dimension (snake_case, e.g., `correct_resolution`). Required. Provided by the user when manually creating a rubric evaluator or during human-in-the-loop review of a generated set; the generation pipeline produces an initial value the user can edit. Editable when saving new versions.
         description:
           type: string
@@ -49873,6 +49880,8 @@ components:
             - dimension_added
         dimension_id:
           type: string
+          minLength: 1
+          maxLength: 128
           description: The public dimension identifier associated with the change. It remains stable until explicitly changed; changing an identifier produces a removal change for the prior identifier and an addition change for the new identifier.
         after:
           $ref: '#/components/schemas/Dimension'
@@ -49881,6 +49890,8 @@ components:
           type: array
           items:
             type: string
+          minItems: 1
+          maxItems: 3
           description: The public dimension fields changed, when reported.
       allOf:
         - $ref: '#/components/schemas/EvaluatorLineageDiagnosticBase'
@@ -49901,6 +49912,8 @@ components:
             - dimension_removed
         dimension_id:
           type: string
+          minLength: 1
+          maxLength: 128
           description: The public dimension identifier associated with the change. It remains stable until explicitly changed; changing an identifier produces a removal change for the prior identifier and an addition change for the new identifier.
         before:
           $ref: '#/components/schemas/Dimension'
@@ -49909,6 +49922,8 @@ components:
           type: array
           items:
             type: string
+          minItems: 1
+          maxItems: 3
           description: The public dimension fields changed, when reported.
       allOf:
         - $ref: '#/components/schemas/EvaluatorLineageDiagnosticBase'
@@ -49930,6 +49945,8 @@ components:
             - dimension_updated
         dimension_id:
           type: string
+          minLength: 1
+          maxLength: 128
           description: The public dimension identifier associated with the change. It remains stable until explicitly changed; changing an identifier produces a removal change for the prior identifier and an addition change for the new identifier.
         before:
           $ref: '#/components/schemas/Dimension'
@@ -49941,6 +49958,8 @@ components:
           type: array
           items:
             type: string
+          minItems: 1
+          maxItems: 3
           description: The public dimension fields changed, when reported.
       allOf:
         - $ref: '#/components/schemas/EvaluatorLineageDiagnosticBase'
@@ -52025,14 +52044,14 @@ components:
       properties:
         id:
           type: string
+          minLength: 1
           description: The stable server-assigned diagnostic identifier.
         evaluator_version:
           $ref: '#/components/schemas/EvaluatorVersionNumber'
           description: The immutable published evaluator version to which the lineage entry applies.
         occurred_at:
-          type: string
-          format: date-time
-          description: The server-recorded time when the change occurred.
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: The server-recorded time when the change occurred, expressed as Unix seconds.
         change_type:
           $ref: '#/components/schemas/EvaluatorDiagnosticChangeType'
           description: A stable machine-readable classification describing why the change occurred.
@@ -52045,11 +52064,11 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          version_created: '#/components/schemas/VersionCreatedDiagnosticChange'
-          dimension_added: '#/components/schemas/DimensionAddedDiagnosticChange'
-          dimension_updated: '#/components/schemas/DimensionUpdatedDiagnosticChange'
-          dimension_removed: '#/components/schemas/DimensionRemovedDiagnosticChange'
-          definition_updated: '#/components/schemas/DefinitionUpdatedDiagnosticChange'
+          version_created: '#/components/schemas/EvaluatorLineageDiagnosticBase'
+          dimension_added: '#/components/schemas/EvaluatorLineageDiagnosticBase'
+          dimension_updated: '#/components/schemas/EvaluatorLineageDiagnosticBase'
+          dimension_removed: '#/components/schemas/EvaluatorLineageDiagnosticBase'
+          definition_updated: '#/components/schemas/EvaluatorLineageDiagnosticBase'
       description: The shared fields for immutable evaluator publication lineage.
       x-ms-foundry-meta:
         required_previews:
@@ -52132,6 +52151,8 @@ components:
       properties:
         dimension_id:
           type: string
+          minLength: 1
+          maxLength: 128
           description: The stable rubric dimension identifier.
         source_ids:
           type: array
@@ -52170,11 +52191,16 @@ components:
       properties:
         field:
           type: string
+          minLength: 1
           description: A stable path identifying the changed field.
         before:
-          description: The field's prior JSON value.
+          type: object
+          unevaluatedProperties: {}
+          description: The prior snapshot, mapping the exact `field` path to its JSON value. The mapped value may be a scalar, array, object, or null.
         after:
-          description: The field's resulting JSON value.
+          type: object
+          unevaluatedProperties: {}
+          description: The resulting snapshot, mapping the exact `field` path to its JSON value. The mapped value may be a scalar, array, object, or null.
       description: A change to one functional evaluator field.
       x-ms-foundry-meta:
         required_previews:
@@ -52318,9 +52344,11 @@ components:
       properties:
         source_id:
           type: string
+          minLength: 1
           description: The stable source identifier within the generation operation.
         source_type:
           type: string
+          minLength: 1
           description: The source type.
         content_hash:
           $ref: '#/components/schemas/Sha256Hash'
@@ -52370,15 +52398,15 @@ components:
     EvaluatorLineageDiagnosticBase:
       type: object
       required:
-        - actor
         - type
+        - actor
       properties:
+        type:
+          $ref: '#/components/schemas/EvaluatorDiagnosticType'
+          description: The lineage diagnostic change shape.
         actor:
           $ref: '#/components/schemas/EvaluatorDiagnosticActor'
           description: The authenticated user or service responsible for the lineage event.
-        type:
-          type: string
-          description: Discriminator property for EvaluatorLineageDiagnosticBase.
       discriminator:
         propertyName: type
         mapping:
@@ -52454,15 +52482,19 @@ components:
       properties:
         code:
           type: string
+          minLength: 1
           description: The stable gap code.
         severity:
           $ref: '#/components/schemas/EvaluatorDiagnosticMessageSeverity'
           description: The gap severity.
         source_id:
           type: string
+          minLength: 1
           description: The related source identifier, when applicable.
         dimension_id:
           type: string
+          minLength: 1
+          maxLength: 128
           description: The related dimension identifier, when applicable.
         explanation:
           type: string
@@ -52604,6 +52636,8 @@ components:
           - Evaluations=V1Preview
     EvaluatorVersionNumber:
       type: string
+      minLength: 1
+      maxLength: 10
       pattern: ^[1-9][0-9]*$
       description: A published evaluator version number represented as a decimal integer string.
     ExternalAgentDefinition:
@@ -85472,6 +85506,8 @@ components:
         Additional event types may be introduced in future versions.
     Sha256Hash:
       type: string
+      minLength: 64
+      maxLength: 64
       pattern: ^[0-9a-f]{64}$
       description: A lowercase 64-character SHA-256 hexadecimal digest.
     SharepointGroundingToolCall:
@@ -88318,6 +88354,7 @@ components:
           description: The preceding published evaluator version, when one exists.
         generation_job_id:
           type: string
+          minLength: 1
           description: The evaluator generation job that created the version, when applicable.
         source_lineage:
           $ref: '#/components/schemas/EvaluatorSourceLineageSummary'

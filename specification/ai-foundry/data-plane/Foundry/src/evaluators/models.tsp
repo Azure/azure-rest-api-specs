@@ -133,6 +133,9 @@ model PromptBasedEvaluatorDefinition extends EvaluatorDefinition {
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model Dimension {
   @doc("Stable identifier for this dimension (snake_case, e.g., `correct_resolution`). Required. Provided by the user when manually creating a rubric evaluator or during human-in-the-loop review of a generated set; the generation pipeline produces an initial value the user can edit. Editable when saving new versions.")
+  @minLength(1)
+  @maxLength(128)
+  @pattern("^[a-z][a-z0-9_]*$")
   id: string;
 
   @doc("What this dimension measures (e.g., 'Correctly identifies the user's reservation intent and pursues the appropriate workflow').")
@@ -258,13 +261,14 @@ union EvaluatorDiagnosticType {
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorDiagnostic {
   @doc("The stable server-assigned diagnostic identifier.")
+  @minLength(1)
   id: string;
 
   @doc("The immutable published evaluator version to which the lineage entry applies.")
   evaluator_version: EvaluatorVersionNumber;
 
-  @doc("The server-recorded time when the change occurred.")
-  occurred_at: utcDateTime;
+  @doc("The server-recorded time when the change occurred, expressed as Unix seconds.")
+  occurred_at: FoundryTimestamp;
 
   @doc("A stable machine-readable classification describing why the change occurred.")
   change_type: EvaluatorDiagnosticChangeType;
@@ -280,6 +284,9 @@ model EvaluatorDiagnostic {
 @discriminator("type")
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorLineageDiagnosticBase extends EvaluatorDiagnostic {
+  @doc("The lineage diagnostic change shape.")
+  type: EvaluatorDiagnosticType;
+
   @doc("The authenticated user or service responsible for the lineage event.")
   actor: EvaluatorDiagnosticActor;
 }
@@ -288,13 +295,16 @@ model EvaluatorLineageDiagnosticBase extends EvaluatorDiagnostic {
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model CompletedEvaluatorDiagnosticsPage {
   @doc("The evaluator publication lineage entries.")
+  @maxItems(100)
   @pageItems
   data: EvaluatorDiagnostic[];
 
   @doc("The first diagnostic identifier represented in this page.")
+  @minLength(1)
   first_id?: string | null;
 
   @doc("The last diagnostic identifier represented in this page.")
+  @minLength(1)
   @continuationToken
   last_id?: string | null;
 
@@ -306,13 +316,14 @@ model CompletedEvaluatorDiagnosticsPage {
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorFieldChange {
   @doc("A stable path identifying the changed field.")
+  @minLength(1)
   field: string;
 
-  @doc("The field's prior JSON value.")
-  before: unknown;
+  @doc("The prior snapshot, mapping the exact `field` path to its JSON value. The mapped value may be a scalar, array, object, or null.")
+  before: Record<unknown>;
 
-  @doc("The field's resulting JSON value.")
-  after: unknown;
+  @doc("The resulting snapshot, mapping the exact `field` path to its JSON value. The mapped value may be a scalar, array, object, or null.")
+  after: Record<unknown>;
 }
 
 @doc("How an evaluator generation source was used.")
@@ -334,9 +345,11 @@ union EvaluatorGenerationSourceUseStatus {
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorGenerationSourceSnapshot {
   @doc("The stable source identifier within the generation operation.")
+  @minLength(1)
   source_id: string;
 
   @doc("The source type.")
+  @minLength(1)
   source_type: string;
 
   @doc("The lowercase 64-character SHA-256 source content hash.")
@@ -368,6 +381,8 @@ union EvaluatorDimensionSourceCoverageStatus {
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorDimensionSourceCoverage {
   @doc("The stable rubric dimension identifier.")
+  @minLength(1)
+  @maxLength(128)
   dimension_id: string;
 
   @doc("Stable source identifiers recorded for the dimension.")
@@ -384,15 +399,19 @@ model EvaluatorDimensionSourceCoverage {
 @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorSourceCoverageGap {
   @doc("The stable gap code.")
+  @minLength(1)
   code: string;
 
   @doc("The gap severity.")
   severity: EvaluatorDiagnosticMessageSeverity;
 
   @doc("The related source identifier, when applicable.")
+  @minLength(1)
   source_id?: string;
 
   @doc("The related dimension identifier, when applicable.")
+  @minLength(1)
+  @maxLength(128)
   dimension_id?: string;
 
   @doc("A bounded explanation.")
@@ -424,6 +443,7 @@ model VersionCreatedDiagnosticChange extends EvaluatorLineageDiagnosticBase {
   prior_version?: EvaluatorVersionNumber;
 
   @doc("The evaluator generation job that created the version, when applicable.")
+  @minLength(1)
   generation_job_id?: string;
 
   @doc("Bounded source lineage recorded by evaluator generation, when available.")
@@ -436,12 +456,16 @@ model DimensionAddedDiagnosticChange extends EvaluatorLineageDiagnosticBase {
   type: EvaluatorDiagnosticType.dimension_added;
 
   @doc("The public dimension identifier associated with the change. It remains stable until explicitly changed; changing an identifier produces a removal change for the prior identifier and an addition change for the new identifier.")
+  @minLength(1)
+  @maxLength(128)
   dimension_id: string;
 
   @doc("The resulting complete dimension snapshot.")
   after: Dimension;
 
   @doc("The public dimension fields changed, when reported.")
+  @minItems(1)
+  @maxItems(3)
   changed_fields?: string[];
 }
 
@@ -451,6 +475,8 @@ model DimensionUpdatedDiagnosticChange extends EvaluatorLineageDiagnosticBase {
   type: EvaluatorDiagnosticType.dimension_updated;
 
   @doc("The public dimension identifier associated with the change. It remains stable until explicitly changed; changing an identifier produces a removal change for the prior identifier and an addition change for the new identifier.")
+  @minLength(1)
+  @maxLength(128)
   dimension_id: string;
 
   @doc("The complete dimension snapshot before the update.")
@@ -460,6 +486,8 @@ model DimensionUpdatedDiagnosticChange extends EvaluatorLineageDiagnosticBase {
   after: Dimension;
 
   @doc("The public dimension fields changed, when reported.")
+  @minItems(1)
+  @maxItems(3)
   changed_fields?: string[];
 }
 
@@ -469,12 +497,16 @@ model DimensionRemovedDiagnosticChange extends EvaluatorLineageDiagnosticBase {
   type: EvaluatorDiagnosticType.dimension_removed;
 
   @doc("The public dimension identifier associated with the change. It remains stable until explicitly changed; changing an identifier produces a removal change for the prior identifier and an addition change for the new identifier.")
+  @minLength(1)
+  @maxLength(128)
   dimension_id: string;
 
   @doc("The complete dimension snapshot before removal.")
   before: Dimension;
 
   @doc("The public dimension fields changed, when reported.")
+  @minItems(1)
+  @maxItems(3)
   changed_fields?: string[];
 }
 
