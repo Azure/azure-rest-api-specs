@@ -85,6 +85,16 @@ interface Clusters {
   @doc("Lists all HorizonDB clusters in a subscription.")
   listBySubscription is ArmListBySubscription<Cluster>;
 
+  @added(Versions.v2026_10_01_preview)
+  @doc("Triggers failover within the cluster's designated read-write pool. HorizonDB selects the replacement node using the same eligibility and node-selection rules as automatic failover. The request fails with 409 Conflict when the designated pool is not eligible for failover or another conflicting operation is in progress.")
+  @action("failover")
+  failover is ArmResourceActionAsync<
+    Cluster,
+    void,
+    ArmResponse<Cluster>,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = Cluster> & Azure.Core.Foundations.RetryAfterHeader
+  >;
+
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_10_01_preview)
   @doc("Starts a stopped HorizonDB cluster.")
