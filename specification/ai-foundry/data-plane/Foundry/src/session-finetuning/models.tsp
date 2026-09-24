@@ -130,7 +130,7 @@ model FineTuningModelInputChunk {
  * content and token count at runtime.
  */
 model FineTuningImageChunk {
-  /** Identifies this chunk as an image. */
+  /** Image input tag that distinguishes encoded image data from a token-only chunk. */
   type: "image" = "image";
 
   /** Image bytes, serialized as a base64-encoded string. */
@@ -383,7 +383,7 @@ model FineTuningSession {
   @visibility(Lifecycle.Read)
   session_id: string;
 
-  /** The session type. */
+  /** Session category, using the same wire values as the create-session request. */
   type: FineTuningSessionType;
 
   /** Current lifecycle status of the session. */
@@ -500,7 +500,7 @@ model FineTuningFromCheckpoint {
   "csharp"
 )
 model CreateFineTuningSessionRequest {
-  /** The session type. */
+  /** Category of session to create. This existing request property is named type on the wire. */
   type: FineTuningSessionType;
 
   /** Base model to use for the new training session. */
@@ -534,7 +534,7 @@ model CreateFineTuningSessionResponse {
   /** Identifier of the newly created fine-tuning session. */
   session_id: string;
 
-  /** Type of session created by the service. */
+  /** Session category returned for the request, not a response-model identity marker. */
   type: FineTuningSessionType;
 
   /** Base model used by the session. */
@@ -639,7 +639,7 @@ model SaveSamplerWeightsRequest {
   /** Training step sequence number. Required with sampling_session_seq_id when path is omitted. */
   seq_id?: int32;
 
-  /** Identifies the request as saving sampler-compatible weights. If omitted, the service defaults to "save_weights_for_sampler". */
+  /** Existing request command tag for saving sampler-compatible weights. If omitted, the service defaults to "save_weights_for_sampler". */
   type?: "save_weights_for_sampler" = "save_weights_for_sampler";
 }
 

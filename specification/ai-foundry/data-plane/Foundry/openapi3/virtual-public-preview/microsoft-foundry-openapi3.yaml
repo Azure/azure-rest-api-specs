@@ -85484,7 +85484,7 @@ components:
       properties:
         type:
           $ref: '#/components/schemas/SessionFineTuning.FineTuningSessionType'
-          description: The session type.
+          description: Category of session to create. This existing request property is named type on the wire.
         base_model:
           type: string
           description: Base model to use for the new training session.
@@ -85523,7 +85523,7 @@ components:
           description: Identifier of the newly created fine-tuning session.
         type:
           $ref: '#/components/schemas/SessionFineTuning.FineTuningSessionType'
-          description: Type of session created by the service.
+          description: Session category returned for the request, not a response-model identity marker.
         base_model:
           type: string
           description: Base model used by the session.
@@ -85788,7 +85788,7 @@ components:
           type: string
           enum:
             - image
-          description: Identifies this chunk as an image.
+          description: Image input tag that distinguishes encoded image data from a token-only chunk.
           default: image
         data:
           type: string
@@ -85971,7 +85971,7 @@ components:
           readOnly: true
         type:
           $ref: '#/components/schemas/SessionFineTuning.FineTuningSessionType'
-          description: The session type.
+          description: Session category, using the same wire values as the create-session request.
         status:
           $ref: '#/components/schemas/SessionFineTuning.FineTuningSessionStatus'
           description: Current lifecycle status of the session.
@@ -86298,7 +86298,7 @@ components:
           type: string
           enum:
             - save_weights_for_sampler
-          description: Identifies the request as saving sampler-compatible weights. If omitted, the service defaults to "save_weights_for_sampler".
+          description: Existing request command tag for saving sampler-compatible weights. If omitted, the service defaults to "save_weights_for_sampler".
           default: save_weights_for_sampler
       description: |-
         Request body for POST /fine_tuning/sessions/{sessionId}/checkpoint_sample.
