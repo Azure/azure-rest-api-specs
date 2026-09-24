@@ -658,13 +658,84 @@ namespace ContainerAppsSandbox {
     ContainerAppsSandboxClientModels.BlobVolumeAuthentication,
     "csharp"
   );
+  @@alternateType(EgressPolicyHookRef.endpoint, url, "csharp");
+  @@alternateType(VolumePathItem.eTag, Azure.Core.eTag, "csharp");
+  @@alternateType(
+    Sandbox.sandboxGroupId,
+    Azure.Core.armResourceIdentifier,
+    "csharp"
+  );
+  @@alternateType(
+    CreateSandboxGatewayConnectionContent.resourceId,
+    Azure.Core.armResourceIdentifier,
+    "csharp"
+  );
+  @@alternateType(
+    EgressPolicyManagedIdentityRef.identityResourceId,
+    Azure.Core.armResourceIdentifier,
+    "csharp"
+  );
 
   // Model names
   // Qualify generic model names to avoid collisions with other libraries.
   @@clientName(Connection, "SandboxConnection", "csharp");
   @@clientName(Secret, "SandboxSecret", "csharp");
-  @@clientName(Sandbox, "ContainerAppsSandbox", "csharp");
+  @@clientName(Sandbox, "ContainerAppsSandboxProperties", "csharp");
   @@clientName(Snapshot, "SandboxSnapshot", "csharp");
+  @@clientName(FileInfo, "SandboxFileInfo", "csharp");
+  @@clientName(MkDirContent, "SandboxDirectoryContent", "csharp");
+  @@clientName(AddPodVolumeMountsContent, "PodVolumeMountsContent", "csharp");
+  @@clientName(AddVolumeMountContent, "SandboxVolumeMountContent", "csharp");
+
+  @@clientName(CreateDiskImageSource, "DiskImageSource", "csharp");
+  @@clientName(CreateDiskImageSourceKind, "DiskImageSourceKind", "csharp");
+  @@clientName(
+    CreateDiskImageSourceBlobSource,
+    "BlobDiskImageSource",
+    "csharp"
+  );
+  @@clientName(
+    CreateDiskImageSourceRegistrySource,
+    "RegistryDiskImageSource",
+    "csharp"
+  );
+
+  @@clientName(LogColumnDef, "TelemetryLogColumn", "csharp");
+  @@clientName(LogColumnDefKind, "TelemetryLogColumnKind", "csharp");
+  @@clientName(RefLogColumnDef, "ReferenceTelemetryLogColumn", "csharp");
+  @@clientName(ValueLogColumnDef, "LiteralTelemetryLogColumn", "csharp");
+  @@clientName(TelemetryAuth, "TelemetryAuthentication", "csharp");
+  @@clientName(TelemetryAuthKind, "TelemetryAuthenticationKind", "csharp");
+  @@clientName(
+    TelemetryManagedIdentityAuth,
+    "TelemetryManagedIdentityAuthentication",
+    "csharp"
+  );
+  @@clientName(
+    TelemetrySystemAssignedManagedIdentityAuth,
+    "TelemetrySystemAssignedManagedIdentityAuthentication",
+    "csharp"
+  );
+  @@clientName(
+    TelemetryApplicationInsightsAuth,
+    "TelemetryApplicationInsightsAuthentication",
+    "csharp"
+  );
+  @@clientName(TelemetryHeaderAuth, "TelemetryHeaderAuthentication", "csharp");
+  @@clientName(TelemetryConfig, "TelemetryConfiguration", "csharp");
+
+  @@clientName(
+    SandboxGroupIdentitySelectorSystemAssignedIdentitySelector,
+    "SystemAssignedSandboxGroupIdentitySelector",
+    "csharp"
+  );
+  @@clientName(
+    SandboxGroupIdentitySelectorUserAssignedIdentitySelector,
+    "UserAssignedSandboxGroupIdentitySelector",
+    "csharp"
+  );
+  @@clientName(SandboxAutoSuspendPolicy.interval, "intervalSeconds", "csharp");
+  @@clientName(DiskImageImage, "ImageMetadata", "csharp");
 
   // SandboxVolume already describes a volume mount; this model is the group-scoped resource.
   @@clientName(Volume, "SandboxGroupVolume", "csharp");
@@ -680,8 +751,8 @@ namespace ContainerAppsSandbox {
     "GenerateConsentLinkResult",
     "csharp"
   );
-  @@clientName(DirListingResponse, "DirListingResult", "csharp");
-  @@clientName(FileOpStatusResponse, "FileOpStatusResult", "csharp");
+  @@clientName(DirListingResponse, "SandboxDirectoryListingResult", "csharp");
+  @@clientName(FileOpStatusResponse, "SandboxFileOperationResult", "csharp");
   @@clientName(WriteFileResponse, "WriteFileResult", "csharp");
   @@clientName(ConnectionsListResponse, "ConnectionsListResult", "csharp");
   @@clientName(EgressDecisionsResponse, "EgressDecisionsResult", "csharp");
@@ -714,9 +785,36 @@ namespace ContainerAppsSandbox {
   @@clientName(Sandbox.cmd, "command", "csharp");
   @@clientName(CreateSandboxContent.cmd, "command", "csharp");
   @@clientName(DiskImageImage.cmd, "command", "csharp");
+  @@clientName(DiskImageImage.base, "baseImage", "csharp");
   @@clientName(ContainerSpec.args, "arguments", "csharp");
   @@clientName(ExecuteSandboxCommandContent.args, "arguments", "csharp");
   @@clientName(ContainerSpec.env, "environment", "csharp");
+  @@clientName(FileInfo.isDir, "isDirectory", "csharp");
+  @@clientName(FileInfo.isSymlink, "isSymbolicLink", "csharp");
+  @@clientName(FileInfo.symlinkTarget, "symbolicLinkTarget", "csharp");
+  @@clientName(NetworkStats.rxBytes, "bytesReceived", "csharp");
+  @@clientName(NetworkStats.txBytes, "bytesSent", "csharp");
+  @@clientName(NetworkStats.rxPackets, "packetsReceived", "csharp");
+  @@clientName(NetworkStats.txPackets, "packetsSent", "csharp");
+  @@clientName(CpuStats.loadAvg1, "loadAverage1Minute", "csharp");
+  @@clientName(CpuStats.loadAvg5, "loadAverage5Minutes", "csharp");
+  @@clientName(CpuStats.loadAvg15, "loadAverage15Minutes", "csharp");
+  @@clientName(
+    SandboxExecuteCommandResponse.stdout,
+    "standardOutput",
+    "csharp"
+  );
+  @@clientName(SandboxExecuteCommandResponse.stderr, "standardError", "csharp");
+  @@clientName(
+    SandboxExecuteShellCommandResponse.stdout,
+    "standardOutput",
+    "csharp"
+  );
+  @@clientName(
+    SandboxExecuteShellCommandResponse.stderr,
+    "standardError",
+    "csharp"
+  );
   @@clientName(EgressForwardProxy.ca, "certificateAuthority", "csharp");
   @@clientName(
     IpAccessControlRule.sourceCidrs,
