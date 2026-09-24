@@ -9,7 +9,10 @@
     "api-version": "2026-10-01-preview",
     "properties": {
       "properties": {
-        "desiredNodeCount": 0
+        "desiredNodeCount": 0,
+        "highAvailability": {
+          "mode": "Disabled"
+        }
       }
     }
   },
@@ -30,13 +33,7 @@
           "desiredNodeCount": 0,
           "allocatedNodeCount": 0,
           "highAvailability": {
-            "state": "NotAvailable",
-            "unavailableReason": "InsufficientNodeCount",
-            "zoneRedundancy": {
-              "mode": "BestEffort",
-              "state": "NotAchieved",
-              "reason": "InsufficientNodeCount"
-            }
+            "mode": "Disabled"
           },
           "parameterGroup": {
             "parameterGroupResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.HorizonDb/locations/eastus2/parameterGroups/default-postgresql-17-provisioned",

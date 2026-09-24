@@ -649,7 +649,7 @@ model PoolProperties {
   computeModel?: PoolComputeModel;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The desired number of nodes to allocate and assign to the pool. Allowed values are 0 through 16. A value of 0 keeps the pool resource and its name, compute configuration, maintenance configuration, and parameter-group association, but allocates no nodes; it does not delete the pool. A request that would leave a pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.")
+  @doc("The desired number of nodes to allocate and assign to the pool. Allowed values are 0 through 16. A value of 0 keeps the pool resource, its read-write designation, and its name, compute configuration, maintenance configuration, and parameter-group association, but allocates no nodes and leaves the cluster without an active read-write node; it does not delete the pool.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   desiredNodeCount?: PoolNodeCount;
 
@@ -659,9 +659,9 @@ model PoolProperties {
   allocatedNodeCount: PoolNodeCount;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The required high-availability configuration and current status for the pool.")
+  @doc("The required high-availability configuration for the pool. mode must be Disabled when desiredNodeCount is 0 or 1, and must be AnyZone or ZoneRedundant when desiredNodeCount is 2 through 16.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  highAvailability: PoolHighAvailabilityProperties;
+  highAvailability: PoolHighAvailability;
 
   @added(Versions.v2026_10_01_preview)
   @doc("The required default or custom parameter group associated with the pool.")
@@ -691,14 +691,14 @@ model PoolPropertiesForPatchUpdate {
   computeModel?: PoolComputeModelForPatchUpdate;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The desired number of nodes to allocate and assign to the pool. Allowed values are 0 through 16. A value of 0 keeps the pool resource and its configuration but allocates no nodes; it does not delete the pool. Omission preserves the current target. A request that would leave a pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.")
+  @doc("The desired number of nodes to allocate and assign to the pool. Allowed values are 0 through 16. A value of 0 keeps the pool resource, its read-write designation, and its configuration but allocates no nodes and leaves the cluster without an active read-write node; it does not delete the pool. Omission preserves the current target.")
   @visibility(Lifecycle.Update)
   desiredNodeCount?: PoolNodeCount;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The high-availability configuration to update. Omission preserves the current configuration.")
+  @doc("The high-availability configuration to update. Omission preserves the current mode. The service recursively merges omitted PATCH properties with the existing resource before validating the effective desiredNodeCount and mode together.")
   @visibility(Lifecycle.Update)
-  highAvailability?: PoolHighAvailabilityPropertiesForPatchUpdate;
+  highAvailability?: PoolHighAvailabilityPatch;
 
   @added(Versions.v2026_10_01_preview)
   @doc("The default or custom parameter group to associate with the pool. Omission preserves the current association.")
@@ -712,117 +712,34 @@ model PoolPropertiesForPatchUpdate {
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("The high-availability configuration and current status for a HorizonDB pool.")
-model PoolHighAvailabilityProperties {
-  @doc("The current high-availability topology achieved by the pool.")
-  @visibility(Lifecycle.Read)
-  state: PoolHighAvailabilityState;
-
-  @doc("The reason high availability is not currently available. This property is present only when state is NotAvailable.")
-  @visibility(Lifecycle.Read)
-  unavailableReason?: PoolHighAvailabilityUnavailableReason;
-
-  @doc("The required zone-redundancy configuration and current status for the pool.")
+@doc("The high-availability configuration for a HorizonDB pool.")
+model PoolHighAvailability {
+  @doc("The high-availability mode. Disabled is required when desiredNodeCount is 0 or 1. AnyZone or ZoneRedundant is required when desiredNodeCount is 2 through 16.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  zoneRedundancy: PoolZoneRedundancyProperties;
-}
-
-@added(Versions.v2026_10_01_preview)
-@doc("The zone-redundancy configuration and current status for a HorizonDB pool.")
-model PoolZoneRedundancyProperties {
-  @doc("The required zone-redundancy placement mode. The service does not apply a default.")
-  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  mode: PoolZoneRedundancyMode;
-
-  @doc("Whether zone redundancy is currently achieved by the pool.")
-  @visibility(Lifecycle.Read)
-  state: PoolZoneRedundancyState;
-
-  @doc("The reason zone redundancy is not currently achieved. This property is present only when state is NotAchieved.")
-  @visibility(Lifecycle.Read)
-  reason?: PoolZoneRedundancyReason;
+  mode: PoolHighAvailabilityMode;
 }
 
 @added(Versions.v2026_10_01_preview)
 @doc("The high-availability configuration for a HorizonDB pool update.")
-model PoolHighAvailabilityPropertiesForPatchUpdate {
-  @doc("The zone-redundancy configuration to apply. Omission preserves the current configuration.")
+model PoolHighAvailabilityPatch {
+  @doc("The high-availability mode. Omission preserves the current mode before the service validates it with the effective desiredNodeCount.")
   @visibility(Lifecycle.Update)
-  zoneRedundancy?: PoolZoneRedundancyPropertiesForPatchUpdate;
+  mode?: PoolHighAvailabilityMode;
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("The zone-redundancy configuration for a HorizonDB pool update.")
-model PoolZoneRedundancyPropertiesForPatchUpdate {
-  @doc("The zone-redundancy placement mode. Omission preserves the current mode.")
-  @visibility(Lifecycle.Update)
-  mode?: PoolZoneRedundancyMode;
-}
-
-@added(Versions.v2026_10_01_preview)
-@doc("The current high-availability topology achieved by a HorizonDB pool.")
-union PoolHighAvailabilityState {
+@doc("The high-availability mode requested for a HorizonDB pool.")
+union PoolHighAvailabilityMode {
   string,
 
-  @doc("High availability is not available because fewer than two usable nodes are allocated.")
-  NotAvailable: "NotAvailable",
+  @doc("High availability is disabled. This mode is valid only when desiredNodeCount is 0 or 1.")
+  Disabled: "Disabled",
 
-  @doc("Multiple usable nodes are allocated, but all are in the same availability zone.")
-  SingleZone: "SingleZone",
+  @doc("The service may allocate nodes in the same availability zone or across availability zones. This mode is valid only when desiredNodeCount is 2 through 16.")
+  AnyZone: "AnyZone",
 
-  @doc("Multiple usable nodes are allocated across multiple availability zones.")
+  @doc("The service must allocate nodes across availability zones. This mode is valid only when desiredNodeCount is 2 through 16.")
   ZoneRedundant: "ZoneRedundant",
-}
-
-@added(Versions.v2026_10_01_preview)
-@doc("The reason high availability is not currently available for a HorizonDB pool.")
-union PoolHighAvailabilityUnavailableReason {
-  string,
-
-  @doc("Fewer than two usable nodes are allocated.")
-  InsufficientNodeCount: "InsufficientNodeCount",
-}
-
-@added(Versions.v2026_10_01_preview)
-@doc("The zone-redundancy placement mode requested for a HorizonDB pool.")
-union PoolZoneRedundancyMode {
-  string,
-
-  @doc("Multiple nodes are acceptable only when they are placed across multiple availability zones.")
-  Required: "Required",
-
-  @doc("The service attempts to place multiple nodes across availability zones, but same-zone placement is acceptable.")
-  BestEffort: "BestEffort",
-}
-
-@added(Versions.v2026_10_01_preview)
-@doc("Whether zone redundancy is currently achieved by a HorizonDB pool.")
-union PoolZoneRedundancyState {
-  string,
-
-  @doc("The pool currently has a zone-redundant topology.")
-  Achieved: "Achieved",
-
-  @doc("The pool does not currently have a zone-redundant topology. Inspect reason for details.")
-  NotAchieved: "NotAchieved",
-}
-
-@added(Versions.v2026_10_01_preview)
-@doc("The reason zone redundancy is not currently achieved by a HorizonDB pool.")
-union PoolZoneRedundancyReason {
-  string,
-
-  @doc("Fewer than two usable nodes are allocated.")
-  InsufficientNodeCount: "InsufficientNodeCount",
-
-  @doc("Multiple usable nodes are allocated in a single availability zone.")
-  SingleZonePlacement: "SingleZonePlacement",
-
-  @doc("The service cannot currently allocate the requested compute across multiple availability zones.")
-  InsufficientZonalCapacity: "InsufficientZonalCapacity",
-
-  @doc("A temporary node, zone, or orchestration failure prevents zone redundancy from being achieved.")
-  TransientFailure: "TransientFailure",
 }
 
 @added(Versions.v2026_10_01_preview)

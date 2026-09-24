@@ -3477,7 +3477,7 @@
         "tags": [
           "Pools"
         ],
-        "description": "Creates a new HorizonDB pool or replaces an existing pool, including its desired node allocation, compute model, high-availability configuration, or associated parameter group. highAvailability.zoneRedundancy.mode is required and has no service default. A pool name can be the same as its parent cluster name. Creating a pool also creates exactly one service-managed Pool-scoped ReadOnly Endpoint representing that Pool and its network boundary. The Endpoint's associatedResourceId identifies the Pool, and the Endpoint cannot outlive or be deleted independently from it. When the first pool is created, the service automatically uses it to host the cluster's read-write node when an eligible node is available. This API version supports at most one pool per cluster; an attempt to create another pool is rejected with 409 Conflict. Every pool must be associated with a parameter group, so parameterGroup, parameterGroupResourceId, and applyMethod are required. applyMethod controls when dynamic parameter changes become effective; static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. Subtype-specific compute constraints are validated before the resource is changed. A request that would leave the pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.",
+        "description": "Creates a new HorizonDB pool or replaces an existing pool, including its desired node allocation, compute model, high-availability configuration, or associated parameter group. highAvailability.mode is required and has no service default. Disabled is valid only when desiredNodeCount is 0 or 1. AnyZone and ZoneRedundant are valid only when desiredNodeCount is 2 through 16. AnyZone permits same-zone or cross-zone placement, while ZoneRedundant requires nodes to be allocated across availability zones. Node allocation and high-availability reconfiguration are atomic: if all desired nodes or the required zonal topology cannot be provisioned, the long-running operation fails and the previous resource state is preserved. A pool name can be the same as its parent cluster name. Creating a pool also creates exactly one service-managed Pool-scoped ReadOnly Endpoint representing that Pool and its network boundary. The Endpoint's associatedResourceId identifies the Pool, and the Endpoint cannot outlive or be deleted independently from it. When the first pool is created, the service automatically designates it to host the cluster's read-write node when an eligible node is available. A desiredNodeCount of 0 preserves that designation but leaves the cluster without an active read-write node. This API version supports at most one pool per cluster; an attempt to create another pool is rejected with 409 Conflict. Every pool must be associated with a parameter group, so parameterGroup, parameterGroupResourceId, and applyMethod are required. applyMethod controls when dynamic parameter changes become effective; static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. Subtype-specific compute constraints are validated before the resource is changed.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -3576,7 +3576,7 @@
         "tags": [
           "Pools"
         ],
-        "description": "Updates an existing HorizonDB pool, including its desired node allocation, selected compute model properties, compute model type, high-availability configuration, or associated parameter group. When highAvailability is supplied, highAvailability.zoneRedundancy.mode is required. When parameterGroup is supplied, both parameterGroupResourceId and applyMethod are required. applyMethod controls when dynamic parameter changes become effective; static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. Subtype-specific compute constraints are validated against the recursively merged configuration. A request that would leave the pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.",
+        "description": "Updates an existing HorizonDB pool, including its desired node allocation, selected compute model properties, compute model type, high-availability configuration, or associated parameter group. Omitted desiredNodeCount and highAvailability.mode values preserve their existing values; the service recursively merges the PATCH before atomically validating the effective tuple. Disabled is valid only when the effective desiredNodeCount is 0 or 1. AnyZone and ZoneRedundant are valid only when the effective desiredNodeCount is 2 through 16. Therefore, crossing between those node-count ranges requires desiredNodeCount and highAvailability.mode to be changed together. AnyZone permits same-zone or cross-zone placement. Changing from AnyZone to ZoneRedundant may allocate a replacement node in another availability zone and replace a read-only node, disconnecting connections to the replaced node. If all desired nodes or the required zonal topology cannot be provisioned, the long-running operation fails and the previous resource state is preserved. Updating desiredNodeCount to 0 preserves the pool's read-write designation but leaves the cluster without an active read-write node. When parameterGroup is supplied, both parameterGroupResourceId and applyMethod are required. applyMethod controls when dynamic parameter changes become effective; static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. Subtype-specific compute constraints are validated against the recursively merged configuration.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -3658,7 +3658,7 @@
             "$ref": "./examples/Pools_UpdateParameterGroupPendingReboot.json"
           },
           "Require zone-redundant placement for a HorizonDB pool": {
-            "$ref": "./examples/Pools_UpdateZoneRedundancyMode.json"
+            "$ref": "./examples/Pools_UpdateHighAvailabilityMode.json"
           },
           "Scale a HorizonDB pool to zero after clearing its read-write designation": {
             "$ref": "./examples/Pools_UpdateScaleToZero.json"
@@ -9546,23 +9546,13 @@
         }
       }
     },
-    "PoolHighAvailabilityProperties": {
+    "PoolHighAvailability": {
       "type": "object",
-      "description": "The high-availability configuration and current status for a HorizonDB pool.",
+      "description": "The high-availability configuration for a HorizonDB pool.",
       "properties": {
-        "state": {
-          "$ref": "#/definitions/PoolHighAvailabilityState",
-          "description": "The current high-availability topology achieved by the pool.",
-          "readOnly": true
-        },
-        "unavailableReason": {
-          "$ref": "#/definitions/PoolHighAvailabilityUnavailableReason",
-          "description": "The reason high availability is not currently available. This property is present only when state is NotAvailable.",
-          "readOnly": true
-        },
-        "zoneRedundancy": {
-          "$ref": "#/definitions/PoolZoneRedundancyProperties",
-          "description": "The required zone-redundancy configuration and current status for the pool.",
+        "mode": {
+          "$ref": "#/definitions/PoolHighAvailabilityMode",
+          "description": "The high-availability mode. Disabled is required when desiredNodeCount is 0 or 1. AnyZone or ZoneRedundant is required when desiredNodeCount is 2 through 16.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -9571,69 +9561,50 @@
         }
       },
       "required": [
-        "state",
-        "zoneRedundancy"
+        "mode"
       ]
     },
-    "PoolHighAvailabilityPropertiesForPatchUpdate": {
-      "type": "object",
-      "description": "The high-availability configuration for a HorizonDB pool update.",
-      "properties": {
-        "zoneRedundancy": {
-          "$ref": "#/definitions/PoolZoneRedundancyPropertiesForPatchUpdate",
-          "description": "The zone-redundancy configuration to apply. Omission preserves the current configuration.",
-          "x-ms-mutability": [
-            "update"
-          ]
-        }
-      }
-    },
-    "PoolHighAvailabilityState": {
+    "PoolHighAvailabilityMode": {
       "type": "string",
-      "description": "The current high-availability topology achieved by a HorizonDB pool.",
+      "description": "The high-availability mode requested for a HorizonDB pool.",
       "enum": [
-        "NotAvailable",
-        "SingleZone",
+        "Disabled",
+        "AnyZone",
         "ZoneRedundant"
       ],
       "x-ms-enum": {
-        "name": "PoolHighAvailabilityState",
+        "name": "PoolHighAvailabilityMode",
         "modelAsString": true,
         "values": [
           {
-            "name": "NotAvailable",
-            "value": "NotAvailable",
-            "description": "High availability is not available because fewer than two usable nodes are allocated."
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "High availability is disabled. This mode is valid only when desiredNodeCount is 0 or 1."
           },
           {
-            "name": "SingleZone",
-            "value": "SingleZone",
-            "description": "Multiple usable nodes are allocated, but all are in the same availability zone."
+            "name": "AnyZone",
+            "value": "AnyZone",
+            "description": "The service may allocate nodes in the same availability zone or across availability zones. This mode is valid only when desiredNodeCount is 2 through 16."
           },
           {
             "name": "ZoneRedundant",
             "value": "ZoneRedundant",
-            "description": "Multiple usable nodes are allocated across multiple availability zones."
+            "description": "The service must allocate nodes across availability zones. This mode is valid only when desiredNodeCount is 2 through 16."
           }
         ]
       }
     },
-    "PoolHighAvailabilityUnavailableReason": {
-      "type": "string",
-      "description": "The reason high availability is not currently available for a HorizonDB pool.",
-      "enum": [
-        "InsufficientNodeCount"
-      ],
-      "x-ms-enum": {
-        "name": "PoolHighAvailabilityUnavailableReason",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "InsufficientNodeCount",
-            "value": "InsufficientNodeCount",
-            "description": "Fewer than two usable nodes are allocated."
-          }
-        ]
+    "PoolHighAvailabilityPatch": {
+      "type": "object",
+      "description": "The high-availability configuration for a HorizonDB pool update.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/PoolHighAvailabilityMode",
+          "description": "The high-availability mode. Omission preserves the current mode before the service validates it with the effective desiredNodeCount.",
+          "x-ms-mutability": [
+            "update"
+          ]
+        }
       }
     },
     "PoolListResult": {
@@ -9766,7 +9737,7 @@
         },
         "desiredNodeCount": {
           "$ref": "#/definitions/PoolNodeCount",
-          "description": "The desired number of nodes to allocate and assign to the pool. Allowed values are 0 through 16. A value of 0 keeps the pool resource and its name, compute configuration, maintenance configuration, and parameter-group association, but allocates no nodes; it does not delete the pool. A request that would leave a pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.",
+          "description": "The desired number of nodes to allocate and assign to the pool. Allowed values are 0 through 16. A value of 0 keeps the pool resource, its read-write designation, and its name, compute configuration, maintenance configuration, and parameter-group association, but allocates no nodes and leaves the cluster without an active read-write node; it does not delete the pool.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -9779,8 +9750,8 @@
           "readOnly": true
         },
         "highAvailability": {
-          "$ref": "#/definitions/PoolHighAvailabilityProperties",
-          "description": "The required high-availability configuration and current status for the pool.",
+          "$ref": "#/definitions/PoolHighAvailability",
+          "description": "The required high-availability configuration for the pool. mode must be Disabled when desiredNodeCount is 0 or 1, and must be AnyZone or ZoneRedundant when desiredNodeCount is 2 through 16.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -9830,14 +9801,14 @@
         },
         "desiredNodeCount": {
           "$ref": "#/definitions/PoolNodeCount",
-          "description": "The desired number of nodes to allocate and assign to the pool. Allowed values are 0 through 16. A value of 0 keeps the pool resource and its configuration but allocates no nodes; it does not delete the pool. Omission preserves the current target. A request that would leave a pool hosting the read-write node with an effective desiredNodeCount of 0 is rejected without changing the pool.",
+          "description": "The desired number of nodes to allocate and assign to the pool. Allowed values are 0 through 16. A value of 0 keeps the pool resource, its read-write designation, and its configuration but allocates no nodes and leaves the cluster without an active read-write node; it does not delete the pool. Omission preserves the current target.",
           "x-ms-mutability": [
             "update"
           ]
         },
         "highAvailability": {
-          "$ref": "#/definitions/PoolHighAvailabilityPropertiesForPatchUpdate",
-          "description": "The high-availability configuration to update. Omission preserves the current configuration.",
+          "$ref": "#/definitions/PoolHighAvailabilityPatch",
+          "description": "The high-availability configuration to update. Omission preserves the current mode. The service recursively merges omitted PATCH properties with the existing resource before validating the effective desiredNodeCount and mode together.",
           "x-ms-mutability": [
             "update"
           ]
@@ -9932,132 +9903,6 @@
             "name": "Stopped",
             "value": "Stopped",
             "description": "Is stopped"
-          }
-        ]
-      }
-    },
-    "PoolZoneRedundancyMode": {
-      "type": "string",
-      "description": "The zone-redundancy placement mode requested for a HorizonDB pool.",
-      "enum": [
-        "Required",
-        "BestEffort"
-      ],
-      "x-ms-enum": {
-        "name": "PoolZoneRedundancyMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Required",
-            "value": "Required",
-            "description": "Multiple nodes are acceptable only when they are placed across multiple availability zones."
-          },
-          {
-            "name": "BestEffort",
-            "value": "BestEffort",
-            "description": "The service attempts to place multiple nodes across availability zones, but same-zone placement is acceptable."
-          }
-        ]
-      }
-    },
-    "PoolZoneRedundancyProperties": {
-      "type": "object",
-      "description": "The zone-redundancy configuration and current status for a HorizonDB pool.",
-      "properties": {
-        "mode": {
-          "$ref": "#/definitions/PoolZoneRedundancyMode",
-          "description": "The required zone-redundancy placement mode. The service does not apply a default.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "state": {
-          "$ref": "#/definitions/PoolZoneRedundancyState",
-          "description": "Whether zone redundancy is currently achieved by the pool.",
-          "readOnly": true
-        },
-        "reason": {
-          "$ref": "#/definitions/PoolZoneRedundancyReason",
-          "description": "The reason zone redundancy is not currently achieved. This property is present only when state is NotAchieved.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "mode",
-        "state"
-      ]
-    },
-    "PoolZoneRedundancyPropertiesForPatchUpdate": {
-      "type": "object",
-      "description": "The zone-redundancy configuration for a HorizonDB pool update.",
-      "properties": {
-        "mode": {
-          "$ref": "#/definitions/PoolZoneRedundancyMode",
-          "description": "The zone-redundancy placement mode. Omission preserves the current mode.",
-          "x-ms-mutability": [
-            "update"
-          ]
-        }
-      }
-    },
-    "PoolZoneRedundancyReason": {
-      "type": "string",
-      "description": "The reason zone redundancy is not currently achieved by a HorizonDB pool.",
-      "enum": [
-        "InsufficientNodeCount",
-        "SingleZonePlacement",
-        "InsufficientZonalCapacity",
-        "TransientFailure"
-      ],
-      "x-ms-enum": {
-        "name": "PoolZoneRedundancyReason",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "InsufficientNodeCount",
-            "value": "InsufficientNodeCount",
-            "description": "Fewer than two usable nodes are allocated."
-          },
-          {
-            "name": "SingleZonePlacement",
-            "value": "SingleZonePlacement",
-            "description": "Multiple usable nodes are allocated in a single availability zone."
-          },
-          {
-            "name": "InsufficientZonalCapacity",
-            "value": "InsufficientZonalCapacity",
-            "description": "The service cannot currently allocate the requested compute across multiple availability zones."
-          },
-          {
-            "name": "TransientFailure",
-            "value": "TransientFailure",
-            "description": "A temporary node, zone, or orchestration failure prevents zone redundancy from being achieved."
-          }
-        ]
-      }
-    },
-    "PoolZoneRedundancyState": {
-      "type": "string",
-      "description": "Whether zone redundancy is currently achieved by a HorizonDB pool.",
-      "enum": [
-        "Achieved",
-        "NotAchieved"
-      ],
-      "x-ms-enum": {
-        "name": "PoolZoneRedundancyState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Achieved",
-            "value": "Achieved",
-            "description": "The pool currently has a zone-redundant topology."
-          },
-          {
-            "name": "NotAchieved",
-            "value": "NotAchieved",
-            "description": "The pool does not currently have a zone-redundant topology. Inspect reason for details."
           }
         ]
       }
