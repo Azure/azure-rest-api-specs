@@ -35,7 +35,7 @@ export async function getSdkSuppressionsSdkNames(
     `Will compare base commit: ${baseCommitHash} and head commit: ${headCommitHash} to get different SDK.`,
   );
   console.log(`The pr origin changed files: ${prChangeFiles.join(", ")}`);
-  let suppressionFileList = filterSuppressionList(prChangeFiles);
+  const suppressionFileList = filterSuppressionList(prChangeFiles);
   console.log(`Will compare sdk-suppression.yaml files: ${suppressionFileList.join(", ")}`);
   let sdkNameList: SdkName[] = [];
   if (suppressionFileList.length > 0) {
@@ -71,7 +71,7 @@ export async function getSdkSuppressionsSdkNames(
           `${JSON.stringify(headSuppressionContent)} to get different SDK.`,
       );
 
-      let _sdkNameList = getSdkNamesWithChangedSuppressions(
+      const _sdkNameList = getSdkNamesWithChangedSuppressions(
         headSuppressionContent as SdkSuppressionsYml,
         baseSuppressionContent as SdkSuppressionsYml,
       );
@@ -85,16 +85,13 @@ export async function getSdkSuppressionsSdkNames(
   return [...new Set(sdkNameList)];
 }
 
-export async function getSdkSuppressionsFileContent(
-  ref: string,
-  path: string,
-): Promise<string | object | undefined | null> {
+export async function getSdkSuppressionsFileContent(ref: string, path: string): Promise<unknown> {
   try {
     const suppressionFileContent = await simpleGit().show([`${ref}:${path}`]);
     console.log(`Found content in ${ref}#${path}`);
     return parseYamlContent(suppressionFileContent, path).result;
   } catch (error) {
-    console.log(`Not found content in ${ref}#${path}, Error: ${error}`);
+    console.log(`Not found content in ${ref}#${path}, Error: ${String(error)}`);
     return null;
   }
 }
@@ -201,7 +198,7 @@ export function getSdkNamesWithChangedSuppressions(
  * @param headCommitHash
  * @param prLabels
  * @param outputFile
- * @returns { labelsToAdd: String[]; labelsToRemove: String[] }
+ * @returns { labelsToAdd: string[]; labelsToRemove: string[] }
  * This code performs two key functions:
  * First, it retrieves the corresponding SDKNames based on the differences between the two sdk-suppression files.
  * Second, it compares the SDKNames obtained in the previous step with the existing PR labels and processes the PR labels accordingly.
@@ -211,7 +208,7 @@ export async function updateSdkSuppressionsLabels(
   headCommitHash: string,
   prLabels: string,
   outputFile?: string,
-): Promise<{ labelsToAdd: String[]; labelsToRemove: String[] }> {
+): Promise<{ labelsToAdd: string[]; labelsToRemove: string[] }> {
   try {
     const result = await simpleGit().raw("status");
     console.log("Git status:", result);
@@ -244,7 +241,7 @@ export async function updateSdkSuppressionsLabels(
  *
  * @param presentLabels
  * @param sdkNames
- * @returns {labelsToAdd: String[], labelsToRemove: String[]}
+ * @returns {labelsToAdd: string[], labelsToRemove: string[]}
  *
  * Based on the various sdknames and existing labels, process the suppression label of PR.
  *
@@ -257,11 +254,11 @@ export async function updateSdkSuppressionsLabels(
 export function processLabels(
   presentLabels: string[],
   sdkNames: string[],
-): { labelsToAdd: String[]; labelsToRemove: String[] } {
+): { labelsToAdd: string[]; labelsToRemove: string[] } {
   // The sdkNames indicates whether any suppression files have been modified. If it is empty
   // then check if the suppression label was previously applied and remove it if so. Otherwise, no action is needed.
-  let addSdkSuppressionsLabels: string[] = [];
-  let removeSdkSuppressionsLabels: string[] = [];
+  const addSdkSuppressionsLabels: string[] = [];
+  const removeSdkSuppressionsLabels: string[] = [];
   sdkNames.forEach((sdkName) => {
     const sdk = sdkLabels[sdkName as SdkName];
     const breakingChangeSuppression = sdk.breakingChangeSuppression;
@@ -316,17 +313,17 @@ export function processLabels(
  * filter data-plane for swagger suppression and tsp suppression for each service
  */
 export function filterSuppressionList(filesChangedPaths: string[]): string[] {
-  let initialSuppressionFiles = filesChangedPaths.filter((suppressionFile) =>
+  const initialSuppressionFiles = filesChangedPaths.filter((suppressionFile) =>
     suppressionFile.split("/").includes(sdkSuppressionsFileName),
   );
-  let tspSuppressionFileList = initialSuppressionFiles.filter((suppressionFile) =>
+  const tspSuppressionFileList = initialSuppressionFiles.filter((suppressionFile) =>
     suppressionFile.split("/").some((suppressionFile) => suppressionFile.endsWith(".Management")),
   );
-  let swaggerSuppressionFileList = initialSuppressionFiles.filter((suppressionFile) =>
+  const swaggerSuppressionFileList = initialSuppressionFiles.filter((suppressionFile) =>
     suppressionFile.split("/").includes("resource-manager"),
   );
 
-  let filterSuppressionFileList = [...tspSuppressionFileList, ...swaggerSuppressionFileList];
+  const filterSuppressionFileList = [...tspSuppressionFileList, ...swaggerSuppressionFileList];
 
   const groupedSuppressionFileList = filterSuppressionFileList.reduce(
     (acc: { [key: string]: string[] }, path) => {
@@ -343,8 +340,8 @@ export function filterSuppressionList(filesChangedPaths: string[]): string[] {
 
   let suppressionFileList: string[] = [];
   for (const serviceName in groupedSuppressionFileList) {
-    if (groupedSuppressionFileList.hasOwnProperty(serviceName)) {
-      let serviceSuppressionList = groupedSuppressionFileList[serviceName];
+    if (Object.hasOwn(groupedSuppressionFileList, serviceName)) {
+      const serviceSuppressionList = groupedSuppressionFileList[serviceName];
       if (
         serviceSuppressionList.some((suppressionFile) =>
           suppressionFile

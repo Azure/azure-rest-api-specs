@@ -192,34 +192,69 @@ describe("extractInputs", () => {
     );
   });
 
-  it("workflow_run:completed:pull_request (same repo)", async () => {
-    const context = {
-      eventName: "workflow_run",
-      payload: {
-        action: "completed",
-        workflow_run: {
-          event: "pull_request",
-          head_sha: "abc123",
-          id: 456,
-          repository: {
-            name: "TestRepoName",
-            owner: {
-              login: "TestRepoOwnerLogin",
+  it.each([{ pullRequests: [{ number: 123 }] }, { pullRequests: [null, { number: 123 }, null] }])(
+    "workflow_run:completed:pull_request (same repo, $pullRequests)",
+    async ({ pullRequests }) => {
+      const context = {
+        eventName: "workflow_run",
+        payload: {
+          action: "completed",
+          workflow_run: {
+            event: "pull_request",
+            head_sha: "abc123",
+            id: 456,
+            repository: {
+              name: "TestRepoName",
+              owner: {
+                login: "TestRepoOwnerLogin",
+              },
             },
+            pull_requests: pullRequests,
           },
-          pull_requests: [{ number: 123 }],
         },
-      },
-    };
+      };
 
-    await expect(extractInputs(createMockGithub(), context, createMockCore())).resolves.toEqual({
-      owner: "TestRepoOwnerLogin",
-      repo: "TestRepoName",
-      head_sha: "abc123",
-      issue_number: 123,
-      run_id: 456,
-    });
-  });
+      await expect(extractInputs(createMockGithub(), context, createMockCore())).resolves.toEqual({
+        owner: "TestRepoOwnerLogin",
+        repo: "TestRepoName",
+        head_sha: "abc123",
+        issue_number: 123,
+        run_id: 456,
+      });
+    },
+  );
+
+  it.each(["repository", "head_repository"])(
+    "rejects a workflow run with a null %s owner",
+    async (missingOwner) => {
+      const context = {
+        eventName: "workflow_run",
+        payload: {
+          action: "completed",
+          workflow_run: {
+            event: "pull_request",
+            head_sha: "abc123",
+            id: 456,
+            repository: {
+              name: "TestRepo",
+              owner: missingOwner === "repository" ? null : { login: "Azure" },
+            },
+            head_repository: {
+              name: "TestFork",
+              owner: missingOwner === "head_repository" ? null : { login: "contributor" },
+            },
+            pull_requests: missingOwner === "repository" ? [{ number: 123 }] : [null],
+          },
+        },
+      };
+      const github = createMockGithub();
+
+      await expect(extractInputs(github, context, createMockCore())).rejects.toThrow(
+        "Could not extract repository owner or name from context payload",
+      );
+      expect(github.rest.repos.listPullRequestsAssociatedWithCommit).not.toHaveBeenCalled();
+    },
+  );
 
   it.each([0, 1, 2, 3])(
     "workflow_run:completed:pull_request (fork repo, %s PRs)",

@@ -1,5 +1,7 @@
-import { readFile } from "fs/promises";
-import yaml from "js-yaml";
+import {
+  loadProtectedLabelsConfig,
+  type ProtectedLabelsConfig,
+} from "../protected-labels/authorization.ts";
 
 export type ApproversConfig = {
   "data-plane"?: Record<string, string[]>;
@@ -22,23 +24,16 @@ const PROTECTED_LABELS_PATH = ".github/protected-labels.yml";
  *   data-plane: { dotnet: [...], java: [...], global: [...] }
  *   management-plane: { all: [...] }
  */
-export async function loadApproversConfig(
-  path: string = PROTECTED_LABELS_PATH,
-): Promise<ApproversConfig> {
-  const content = await readFile(path, "utf8");
-  const config = yaml.load(content) as Record<string, unknown>;
-
+export function createApproversConfig(config: ProtectedLabelsConfig): ApproversConfig {
   const dataPlane: Record<string, string[]> = {};
 
   let mgmtAll: string[] = [];
 
   // Include global-approvers in data-plane.global so getAllApprovers()
   // (used by handleUnlabeled) recognizes them as authorized.
-  const globalApprovers = (config["global-approvers"] ?? ([] as unknown)) as string[];
+  const globalApprovers = config.globalApprovers;
 
-  for (const [label, entry] of Object.entries(config)) {
-    if (label === "global-approvers") continue;
-
+  for (const [label, entry] of Object.entries(config.labels)) {
     // Match package-name-<lang>-approved or package-name-approved-all
     let lang;
     if (label === "package-name-approved-all") {
@@ -51,7 +46,7 @@ export async function loadApproversConfig(
 
     // Flat entry (backward compat) - treat all users as data-plane
     if (Array.isArray(entry)) {
-      const users = entry as unknown as string[];
+      const users = entry;
       if (lang === "all") {
         dataPlane.global = users;
       } else {
@@ -62,10 +57,7 @@ export async function loadApproversConfig(
 
     // Plane-aware entry
     if (entry && typeof entry === "object") {
-      const planeEntry = entry as {
-        "management-plane"?: string[];
-        "data-plane"?: string[];
-      };
+      const planeEntry = entry;
       if (planeEntry["management-plane"]) {
         // Collect unique mgmt approvers across all namespace labels
         mgmtAll = [...new Set([...mgmtAll, ...planeEntry["management-plane"]])];
@@ -86,7 +78,8 @@ export async function loadApproversConfig(
   }
 
   // Parse tier1 configuration
-  const tier1Config = config["tier1"] ?? {};
+  const tier1Entry = config.labels["tier1"];
+  const tier1Config = Array.isArray(tier1Entry) ? {} : (tier1Entry ?? {});
 
   return {
     "data-plane": dataPlane,
@@ -95,4 +88,10 @@ export async function loadApproversConfig(
     "management-plane": { all: mgmtAll },
     tier1: tier1Config,
   };
+}
+
+export async function loadApproversConfig(
+  path: string = PROTECTED_LABELS_PATH,
+): Promise<ApproversConfig> {
+  return createApproversConfig(await loadProtectedLabelsConfig(path));
 }

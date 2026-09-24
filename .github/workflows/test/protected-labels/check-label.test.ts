@@ -76,6 +76,21 @@ describe("checkLabel", () => {
     setupMocks();
   });
 
+  it("rejects a labeled event without a label", async () => {
+    context.payload = {
+      ...createLabeledPayload({
+        labelName: "BreakingChange-Approved-Benign",
+        actor: "user1",
+      }),
+      label: undefined,
+    };
+
+    await expect(invokeCheckLabel({ github, context, core })).rejects.toThrow(
+      "Pull request label event is missing a label name.",
+    );
+    expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
+  });
+
   describe("bot bypass", () => {
     it("skips github-actions[bot]", async () => {
       context.payload = createLabeledPayload({

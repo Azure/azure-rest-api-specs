@@ -1,4 +1,4 @@
-import { configDefaults, defineConfig, mergeConfig } from "vitest/config";
+import { defineConfig, mergeConfig } from "vitest/config";
 import { baseConfig } from "../vitest.base.config.ts";
 
 export default mergeConfig(
@@ -6,7 +6,7 @@ export default mergeConfig(
   defineConfig({
     test: {
       coverage: {
-        exclude: [...configDefaults.coverage.exclude!, "cmd/**", "src/index.ts"],
+        exclude: ["src/index.ts"],
       },
     },
   }),

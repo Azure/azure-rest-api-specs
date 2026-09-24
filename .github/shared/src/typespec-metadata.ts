@@ -3,7 +3,7 @@ import { mkdtemp, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import * as z from "zod";
-import { execNpmExec, isExecError } from "./exec.ts";
+import { execNodeBin, isExecError } from "./exec.ts";
 
 export const TypeSpecLanguageMetadataSchema = z.looseObject({
   emitterName: z.string(),
@@ -52,7 +52,8 @@ export async function generateTypeSpecMetadata(
 
   try {
     try {
-      await execNpmExec(
+      await execNodeBin(
+        "@typespec/compiler",
         [
           "tsp",
           "compile",
