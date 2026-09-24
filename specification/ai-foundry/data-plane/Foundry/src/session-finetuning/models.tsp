@@ -78,10 +78,10 @@ union FineTuningSessionType {
 union FineTuningTrainingType {
   string,
 
-  /** Standard training using globally available capacity. */
+  /** Training using globally available capacity. */
   global_standard: "GlobalStandard",
 
-  /** Standard training constrained to the applicable data zone. */
+  /** Training constrained to Foundry account's datazone. Current datazones: US, EU, AsiaPacific. */
   datazone_standard: "DatazoneStandard",
 
   /** Developer-tier training, subject to service eligibility. */
