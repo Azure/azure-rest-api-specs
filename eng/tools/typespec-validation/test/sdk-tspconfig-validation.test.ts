@@ -1131,6 +1131,7 @@ describe("tspconfig", function () {
     const rule = new SdkTspConfigValidationRule(c.subRules, []);
     const result = await rule.execute(c.folder);
     strictEqual(result.success, true);
+    strictEqual(result.suppressed, true);
     strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation skipped."), true);
   });
 

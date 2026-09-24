@@ -1,4 +1,5 @@
 import { ChildProcess, spawn } from "node:child_process";
+import { InMemorySpanExporter } from "@opentelemetry/sdk-trace-base";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { access, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -6,6 +7,7 @@ import { join } from "node:path";
 import { simpleGit } from "simple-git";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { runAll } from "../src/run-all.ts";
+import { createTelemetry } from "../src/telemetry.ts";
 
 vi.mock("node:child_process", async (importOriginal) => ({
   ...(await importOriginal()),
@@ -14,7 +16,10 @@ vi.mock("node:child_process", async (importOriginal) => ({
 
 function exitingChild(code: number | null = 0, signal: NodeJS.Signals | null = null) {
   const child = new ChildProcess();
-  queueMicrotask(() => child.emit("close", code, signal));
+  queueMicrotask(() => {
+    child.emit("spawn");
+    child.emit("close", code, signal);
+  });
   return child;
 }
 
@@ -59,8 +64,71 @@ beforeEach(async () => {
 
 afterEach(async () => {
   vi.restoreAllMocks();
+  vi.unstubAllEnvs();
   await rm(root, { recursive: true, force: true });
 });
+
+it("reports shard counts, suppressions, and child exit counts with trace context", async () => {
+  await addProject("a");
+  await addProject("b");
+  await addProject("c");
+  await writeFile(
+    join(root, "suppressions.yaml"),
+    "- tool: TypeSpecValidationAll\n  paths: [b]\n  reason: suppressed\n",
+  );
+  vi.stubEnv("AZSDKTOOLS_COLLECT_TELEMETRY", "true");
+  const exporter = new InMemorySpanExporter();
+  vi.spyOn(exporter, "shutdown").mockResolvedValue();
+  const telemetry = (await createTelemetry(exporter))!;
+  vi.mocked(spawn).mockImplementationOnce(() => exitingChild(1));
+  await expect(runAll(root, { shard: "1/2" }, telemetry)).resolves.toBe(false);
+  expect(telemetry.batch).toEqual({
+    discovered: 3,
+    selected: 2,
+    suppressed: 1,
+    launched: 1,
+    zeroExit: 0,
+    nonzeroExit: 1,
+    completed: true,
+  });
+  const spawnOptions = vi.mocked(spawn).mock.calls[0]?.[2];
+  expect(spawnOptions?.stdio).toBe("inherit");
+  expect(spawnOptions?.env?.TSV_TELEMETRY_TRACEPARENT).toMatch(/^00-[0-9a-f]{32}-[0-9a-f]{16}-01$/);
+  await telemetry.shutdown(1);
+  expect(exporter.getFinishedSpans()[0].attributes).toMatchObject({
+    "tsv.projects.discovered": 3,
+    "tsv.projects.selected": 2,
+    "tsv.projects.nonzero_exit": 1,
+    "tsv.batch_completed": true,
+  });
+});
+
+it.each(["launch", "signal"])(
+  "does not report a completed batch on a child %s error",
+  async (kind) => {
+    await addProject("a");
+    await addProject("b");
+    vi.stubEnv("AZSDKTOOLS_COLLECT_TELEMETRY", "true");
+    const exporter = new InMemorySpanExporter();
+    vi.spyOn(exporter, "shutdown").mockResolvedValue();
+    const telemetry = (await createTelemetry(exporter))!;
+    vi.mocked(spawn).mockImplementationOnce(() => {
+      if (kind === "signal") return exitingChild(null, "SIGTERM");
+      const child = new ChildProcess();
+      queueMicrotask(() => child.emit("error", new Error("launch failed")));
+      return child;
+    });
+    await expect(runAll(root, {}, telemetry)).rejects.toThrow();
+    expect(telemetry.batch).toMatchObject({
+      discovered: 2,
+      launched: kind === "launch" ? 0 : 1,
+      zeroExit: 0,
+      nonzeroExit: 0,
+      completed: false,
+    });
+    await telemetry.shutdown(1);
+  },
+);
 
 it("discovers sorted, unique project folders, including invalid config extensions", async () => {
   const last = await addProject("z");

@@ -15,6 +15,7 @@ import { NpmPrefixRule } from "./rules/npm-prefix.ts";
 import { SdkTspConfigValidationRule } from "./rules/sdk-tspconfig-validation.ts";
 import { ServiceYamlRule } from "./rules/service-yaml.ts";
 import { StaleApiVersionPinRule } from "./rules/stale-api-version-pin.ts";
+import { createTelemetry, type TsvTelemetry } from "./telemetry.ts";
 import { fileExists, getSuppressions, normalizePath } from "./utils.ts";
 
 // Context argument may add new properties or override checkingAllSpecs
@@ -35,11 +36,14 @@ export async function runRules(
   rules: Rule[],
   folder: string,
   suppressions: Suppression[],
+  telemetry?: TsvTelemetry,
 ): Promise<RunRulesResult> {
   const result: RunRulesResult = { success: true, suppressed: [], executed: [], failed: [] };
+  if (telemetry) telemetry.command.ruleCount = rules.length;
 
   for (const rule of rules) {
     console.log("\nExecuting rule: " + rule.name);
+    const span = telemetry?.startRule(rule.name);
 
     if (rule.suppressable) {
       const ruleSuppressions = suppressions.filter(
@@ -48,11 +52,19 @@ export async function runRules(
       if (ruleSuppressions.length > 0) {
         console.log(`  Suppressed: ${ruleSuppressions[0].reason}`);
         result.suppressed.push(rule.name);
+        span?.end("suppressed");
         continue;
       }
     }
 
-    const ruleResult = await rule.execute(folder);
+    let ruleResult;
+    try {
+      ruleResult = await rule.execute(folder);
+    } catch (error) {
+      span?.end("error");
+      throw error;
+    }
+    span?.end(!ruleResult.success ? "failure" : ruleResult.suppressed ? "suppressed" : "success");
     result.executed.push(rule.name);
     if (ruleResult.stdOutput) console.log(ruleResult.stdOutput);
     if (!ruleResult.success) {
@@ -71,6 +83,17 @@ export async function runRules(
 }
 
 export async function main() {
+  const telemetry = await createTelemetry();
+  let completed = false;
+  try {
+    await runCommand(telemetry);
+    completed = true;
+  } finally {
+    await telemetry?.shutdown(completed ? Number(process.exitCode ?? 0) : 1);
+  }
+}
+
+async function runCommand(telemetry?: TsvTelemetry) {
   const args = process.argv.slice(2);
   const options = {
     folder: {
@@ -92,6 +115,7 @@ export async function main() {
     },
   } satisfies ParseArgsConfig["options"];
   const parsedArgs = parseArgs({ args, options, allowPositionals: true });
+  if (telemetry) telemetry.command.mode = parsedArgs.values.all ? "all" : "project";
 
   if (parsedArgs.values["git-clean"] && !parsedArgs.values.all) {
     console.error("--git-clean requires --all");
@@ -111,11 +135,26 @@ export async function main() {
       process.exitCode = 1;
       return;
     }
-    const success = await runAll(parsedArgs.positionals[0] ?? "specification", {
-      gitClean: parsedArgs.values["git-clean"] === true,
-      shard: parsedArgs.values.shard,
-    });
+    if (telemetry) {
+      telemetry.command.outcome = "error";
+      telemetry.command.checkingAllSpecs = true;
+    }
+    const success = await runAll(
+      parsedArgs.positionals[0] ?? "specification",
+      {
+        gitClean: parsedArgs.values["git-clean"] === true,
+        shard: parsedArgs.values.shard,
+      },
+      telemetry,
+    );
     if (!success) process.exitCode = 1;
+    if (telemetry) {
+      telemetry.command.outcome = !success
+        ? "validation_failed"
+        : telemetry.batch?.launched === 0
+          ? "suppressed"
+          : "success";
+    }
     return;
   }
 
@@ -129,13 +168,20 @@ export async function main() {
 
   if (!(await fileExists(absolutePath))) {
     console.log(`Folder ${absolutePath} does not exist`);
-    process.exit(1);
+    process.exitCode = 1;
+    return;
   }
   if (!(await stat(absolutePath)).isDirectory()) {
     console.log(`Please run TypeSpec Validation on a directory path`);
-    process.exit(1);
+    process.exitCode = 1;
+    return;
   }
   console.log("Running TypeSpecValidation on folder: ", absolutePath);
+  if (telemetry) {
+    telemetry.command.outcome = "error";
+    telemetry.command.checkingAllSpecs = context.checkingAllSpecs === true;
+    await telemetry.setProject(absolutePath);
+  }
 
   const suppressions: Suppression[] = await getSuppressions(absolutePath);
 
@@ -145,6 +191,7 @@ export async function main() {
   if (toolSuppressions && toolSuppressions[0]) {
     // Use reason from first matching suppression and ignore rest
     console.log(`  Suppressed: ${suppressions[0].reason}`);
+    if (telemetry) telemetry.command.outcome = "suppressed";
     return;
   }
 
@@ -163,7 +210,10 @@ export async function main() {
     new StaleApiVersionPinRule(),
   ];
 
-  const result = await runRules(rules, absolutePath, suppressions);
+  const result = await runRules(rules, absolutePath, suppressions, telemetry);
+  if (telemetry) {
+    telemetry.command.outcome = result.success ? "success" : "validation_failed";
+  }
 
   if (!result.success) {
     process.exitCode = 1;

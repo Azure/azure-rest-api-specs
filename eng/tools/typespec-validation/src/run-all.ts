@@ -5,11 +5,23 @@ import { dirname, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { simpleGit } from "simple-git";
 import { globFiles } from "./glob.ts";
+import type { BatchTelemetry, TsvTelemetry } from "./telemetry.ts";
 
 export async function runAll(
   folder: string,
   options: { gitClean?: boolean; shard?: string } = {},
+  telemetry?: TsvTelemetry,
 ): Promise<boolean> {
+  const batch: BatchTelemetry = {
+    discovered: 0,
+    selected: 0,
+    suppressed: 0,
+    launched: 0,
+    zeroExit: 0,
+    nonzeroExit: 0,
+    completed: false,
+  };
+  if (telemetry) telemetry.batch = batch;
   const root = resolve(folder);
   if (!(await stat(root)).isDirectory()) {
     throw new Error(`Please run TypeSpec Validation on a directory path: ${root}`);
@@ -24,6 +36,7 @@ export async function runAll(
     ...new Set(configs.map((config) => dirname(config).split(sep).join("/"))),
   ].sort();
   let projects = projectFolders.map((project) => resolve(root, project));
+  batch.discovered = projects.length;
   if (projects.length === 0) {
     console.error(`No TypeSpec projects found in ${root}`);
     return false;
@@ -35,6 +48,7 @@ export async function runAll(
       `Shard ${options.shard}: ${projects.length} of ${projectFolders.length} TypeSpec projects`,
     );
   }
+  batch.selected = projects.length;
 
   const git = options.gitClean ? simpleGit(root) : undefined;
   if (git) {
@@ -56,12 +70,16 @@ export async function runAll(
     const suppression = suppressions.find((s) => !s.rules?.length && !s.subRules?.length);
     if (suppression) {
       console.log(`Suppressed: ${suppression.reason}`);
+      batch.suppressed++;
       continue;
     }
 
     try {
-      if (!(await validateProject(project))) {
+      if (!(await validateProject(project, batch, telemetry))) {
         failed.push(project);
+        batch.nonzeroExit++;
+      } else {
+        batch.zeroExit++;
       }
     } finally {
       if (git) {
@@ -74,6 +92,7 @@ export async function runAll(
   if (failed.length > 0) {
     console.error(`TypeSpec Validation failed for:\n${failed.join("\n")}`);
   }
+  batch.completed = true;
   return failed.length === 0;
 }
 
@@ -107,7 +126,11 @@ function selectShard(projects: string[], shard: string): string[] {
   return projects.slice(start, end);
 }
 
-function validateProject(folder: string): Promise<boolean> {
+function validateProject(
+  folder: string,
+  batch: BatchTelemetry,
+  telemetry?: TsvTelemetry,
+): Promise<boolean> {
   return new Promise((resolve, reject) => {
     // A child process keeps each project's context and exit status independent.
     const child = spawn(
@@ -117,8 +140,12 @@ function validateProject(folder: string): Promise<boolean> {
         folder,
         JSON.stringify({ checkingAllSpecs: true }),
       ],
-      { stdio: "inherit" },
+      {
+        stdio: "inherit",
+        ...(telemetry ? { env: telemetry.childEnvironment() } : {}),
+      },
     );
+    child.once("spawn", () => batch.launched++);
     child.once("error", reject);
     child.once("close", (code, signal) => {
       if (signal) {

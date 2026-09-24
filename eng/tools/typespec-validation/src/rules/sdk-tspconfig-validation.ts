@@ -882,7 +882,7 @@ export class SdkTspConfigValidationRule implements Rule {
       (s) => s.rules?.includes(this.name) === true && (!s.subRules || s.subRules.length === 0),
     );
     if (shouldSuppressEntireRule)
-      return { success: true, stdOutput: `[${this.name}]: validation skipped.` };
+      return { success: true, suppressed: true, stdOutput: `[${this.name}]: validation skipped.` };
 
     this.setSuppressedKeyPaths(suppressions);
 
