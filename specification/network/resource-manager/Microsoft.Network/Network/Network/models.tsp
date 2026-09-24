@@ -1870,6 +1870,24 @@ union ExpressRoutePortAuthorizationUseStatus {
 }
 
 /**
+ * The authorization use status.
+ */
+@added(Versions.v2026_03_01)
+union ExpressRouteLagAuthorizationUseStatus {
+  string,
+
+  /**
+   * Available
+   */
+  Available: "Available",
+
+  /**
+   * InUse
+   */
+  InUse: "InUse",
+}
+
+/**
  * The operation mode for automatically learning private ranges to not be SNAT
  */
 union AutoLearnPrivateRangesMode {
@@ -13041,6 +13059,13 @@ model ExpressRouteLagPropertiesFormat {
   circuits?: SubResource[];
 
   /**
+   * The set of authorizations of the ExpressRouteLag resource.
+   */
+  @added(Versions.v2026_03_01)
+  @summary("ExpressRouteLagAuthorizations Child-Resources")
+  authorizations?: ExpressRouteLagAuthorization[];
+
+  /**
    * The date and time when the ExpressRouteLag was allocated.
    */
   #suppress "@azure-tools/typespec-azure-core/no-string-datetime" "Backend emits allocationDate as a non-ISO 8601 formatted string (e.g. '6/16/2026 5:28:06 PM'); the property is preserved as string to maintain wire compatibility with the existing ExpressRouteLag service contract."
@@ -13080,6 +13105,33 @@ model ExpressRouteLagPropertiesFormat {
    * LACP timer configuration.
    */
   lacpTimer?: ExpressRouteLagLacpTimer;
+}
+
+/**
+ * Properties of ExpressRouteLag Authorization.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The Network RP TypeSpec project uses Azure.ResourceManager.Legacy patterns for consistency with existing ExpressRoute resources."
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@summary("ExpressRoute Lag Authorization Properties")
+@added(Versions.v2026_03_01)
+model ExpressRouteLagAuthorizationPropertiesFormat {
+  /**
+   * The authorization use status.
+   */
+  @visibility(Lifecycle.Read)
+  authorizationUseStatus?: ExpressRouteLagAuthorizationUseStatus;
+
+  /**
+   * The reference to the ExpressRoute circuit resource using the authorization.
+   */
+  @visibility(Lifecycle.Read)
+  circuitResourceUri?: string;
+
+  /**
+   * The provisioning state of the authorization resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
 }
 
 /**
@@ -27792,6 +27844,13 @@ model ExpressRouteLagLinkListResult is Azure.Core.Page<ExpressRouteLagLink>;
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 @added(Versions.v2025_09_01)
 model ExpressRouteLagMemberListResult is Azure.Core.Page<ExpressRouteLagMember>;
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The Network RP TypeSpec project uses Azure.ResourceManager.Legacy patterns for consistency with existing ExpressRoute resources."
+@summary("ExpressRoute Lag Authorization List Result")
+@Azure.ResourceManager.Legacy.feature(Features.expressRoute)
+@added(Versions.v2026_03_01)
+model ExpressRouteLagAuthorizationListResult
+  is Azure.Core.Page<ExpressRouteLagAuthorization>;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @summary("ExpressRoutePorts Location List Result")
