@@ -242,6 +242,9 @@ model FineTuningSamplingParams {
 
   /** Stop criteria: either stop_token_ids or stop_strings, not both. */
   stop_criteria?: FineTuningStopCriteria;
+
+  /** Optional structured-output format passed to the sampling provider. */
+  response_format?: Record<unknown> | null;
 }
 
 // ─── Training data ────────────────────────────────────────────────────────────

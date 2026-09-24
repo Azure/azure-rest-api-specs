@@ -9,7 +9,7 @@
 // Multimodal input, checkpoint resume, and nullable tuple results are supported
 // by maintained Python hooks; their generated bases alone are not the full API.
 // The model-by-model rationale is recorded in the SDK generation guide.
-// Toolchain: Python emitter 0.61.3 / http-client-python 0.28.3 / TCGC 0.67.3.
+// Toolchain versions are recorded by the Python SDK repository's shared emitter lock.
 
 import "@azure-tools/typespec-client-generator-core";
 import "../session-finetuning/models.tsp";
@@ -207,8 +207,8 @@ model CheckpointInfo {
   lora_rank?: int32;
 }
 
-// Compatibility: optional config, legacy ejectable field, and hook-based resume.
-// This preserves construction; it does not relax the server's required config.
+// Compatibility: legacy ejectable field and hook-based checkpoint resume.
+// Config and rank are required, matching the authoritative service contract.
 /** Request body for POST /fine_tuning/sessions. */
 @usage(Usage.input | Usage.output, "python")
 model CreateSessionRequest {
@@ -218,8 +218,8 @@ model CreateSessionRequest {
   /** Base model to use for the fine-tuning session. */
   base_model: string;
 
-  /** LoRA adapter configuration. Optional in this compatibility model; session creation requires a configuration with rank. */
-  lora_config?: LoRAConfig;
+  /** Required LoRA adapter configuration, including rank. */
+  lora_config: LoRAConfig;
 
   /** User-provided metadata associated with the session. */
   user_metadata?: Record<unknown>;
@@ -300,13 +300,13 @@ model HeartbeatResponse {
 }
 
 /**
- * LoRA adapter configuration with the existing optional Python constructor fields.
- * Session creation requires rank; this model does not provide a client-side default.
+ * LoRA adapter configuration with an explicit rank, as required by the service.
+ * Optional fields remain omitted rather than injecting client-side defaults.
  */
 @usage(Usage.input | Usage.output, "python")
 model LoRAConfig {
   /** Number of LoRA rank dimensions. */
-  rank?: int32;
+  rank: int32;
 
   /** LoRA scaling factor (effective scale = alpha / rank). Defaults to 32.0 server-side. */
   alpha?: float64;
@@ -478,6 +478,12 @@ model SamplingParams {
 
   /** Stop criteria: either stop_token_ids or stop_strings, not both. */
   stop_criteria?: StopCriteria;
+
+  // Reuse the service's optional structured-output property and documentation.
+  ...PickProperties<
+    Azure.AI.Projects.SessionFineTuning.FineTuningSamplingParams,
+    "response_format"
+  >;
 }
 
 /** SaveCheckpointOperationResult. */

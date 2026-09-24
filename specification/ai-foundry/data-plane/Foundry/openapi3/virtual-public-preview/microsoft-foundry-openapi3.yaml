@@ -86183,6 +86183,12 @@ components:
         stop_criteria:
           $ref: '#/components/schemas/SessionFineTuning.FineTuningStopCriteria'
           description: 'Stop criteria: either stop_token_ids or stop_strings, not both.'
+        response_format:
+          anyOf:
+            - type: object
+              unevaluatedProperties: {}
+            - type: 'null'
+          description: Optional structured-output format passed to the sampling provider.
       description: Token-generation sampling parameters.
     SessionFineTuning.FineTuningSession:
       type: object
