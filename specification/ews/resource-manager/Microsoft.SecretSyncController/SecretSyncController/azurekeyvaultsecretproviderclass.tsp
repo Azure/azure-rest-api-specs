@@ -24,23 +24,23 @@ model AzureKeyVaultSecretProviderClass
 
 @@maxLength(AzureKeyVaultSecretProviderClass.name, 253);
 
-/** Known Azure clouds for the in-cluster Azure Key Vault provider. */
+/** Azure clouds for the in-cluster Azure Key Vault provider. */
 union AzureCloudName {
   string,
 
-  /** Azure public cloud. */
+  @doc("Azure public cloud.")
   AzurePublicCloud: "AzurePublicCloud",
 
-  /** Azure US Government cloud. */
+  @doc("Azure US Government cloud.")
   AzureUSGovernmentCloud: "AzureUSGovernmentCloud",
 
-  /** Azure China cloud. */
+  @doc("Azure China cloud.")
   AzureChinaCloud: "AzureChinaCloud",
 
-  /** Legacy Azure Germany cloud. */
+  @doc("Legacy Azure Germany cloud.")
   AzureGermanCloud: "AzureGermanCloud",
 
-  /** Azure Stack cloud. Requires a custom environment file configured on the provider. */
+  @doc("Azure Stack cloud. Requires a custom environment file configured on the provider.")
   AzureStackCloud: "AzureStackCloud",
 }
 
