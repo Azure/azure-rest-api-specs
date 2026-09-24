@@ -11,6 +11,7 @@ import {
   getReleasePlanResultById,
   getSdkReleaseType,
 } from "./release-plan.ts";
+import { assertCleanSpecCheckout, assertSpecCommitSha } from "./spec-target.ts";
 import type {
   CliArguments,
   EnsureReleasePlanResult,
@@ -101,6 +102,7 @@ export async function main(): Promise<void> {
 
       projectInfo = await getTypeSpecProjectInfoFromPr({
         prNumber: args.prNumber,
+        commitSha: args.commitSha,
         owner: args.owner,
         repo: args.repo,
         workspace: args.workspace,
@@ -175,11 +177,15 @@ export async function main(): Promise<void> {
     const apiReleaseType = getApiReleaseType(projectInfo.isPreview, args.repo);
     const sdkReleaseType = getSdkReleaseType(projectInfo.isPreview);
     const targetMonth = getNextMonthTarget();
+    const specCommitSha = projectInfo.specCommitSha;
+    assertSpecCommitSha(specCommitSha);
 
     const result = ensureReleasePlan(
       {
         prUrl,
         tspProjectPath: projectInfo.tspProjectPath,
+        workspace: args.workspace,
+        specCommitSha,
         apiReleaseType,
         sdkReleaseType,
         targetMonth,
@@ -191,6 +197,7 @@ export async function main(): Promise<void> {
     );
     releasePlanEnsured = true;
 
+    assertCleanSpecCheckout(args.workspace, specCommitSha);
     writeReleasePlanResult(result, args.outputFile);
 
     // Post comment on PR if release plan was created

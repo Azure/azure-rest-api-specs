@@ -230,7 +230,7 @@ stages:
       - template: /eng/common/pipelines/templates/steps/install-azsdk-cli.yml
         parameters:
           SourceRootPath: $(SpecRepoDirectory)
-          Condition: and(succeeded(), contains(variables['SdkRepoName'], 'rust'))
+          Condition: and(succeeded(), or(contains(variables['SdkRepoName'], 'rust'), ne('${{ parameters.ReleasePlanWorkItemId }}', '0')))
 
       - script: |
           set -euo pipefail  # Exit on error, undefined vars, and pipeline failures
@@ -347,6 +347,19 @@ stages:
                 Write-Host "##vso[task.setvariable variable=ReleasePlanInfo]$releasePlanInfo"
                 Write-Host "Release Plan Info: $releasePlanInfo"
 
+        - ${{ if and(ne(parameters.ReleasePlanWorkItemId, 0), eq(parameters.ConfigType, 'TypeSpec')) }}:
+          - task: AzureCLI@2
+            displayName: "Validate generation snapshot before publishing SDK changes"
+            inputs:
+              azureSubscription: opensource-api-connection
+              scriptType: pscore
+              scriptLocation: scriptPath
+              scriptPath: $(SpecRepoDirectory)/eng/scripts/Confirm-ReleasePlan-Generation.ps1
+              arguments: >
+                -ReleasePlanWorkItemId ${{ parameters.ReleasePlanWorkItemId }}
+                -BuildId $(Build.BuildId)
+                -SdkRepoName $(SdkRepoName)
+
         - template: /eng/common/pipelines/templates/steps/git-push-changes.yml
           parameters:
             BaseRepoBranch: $(SdkPullRequestSourceBranch)
@@ -387,22 +400,12 @@ stages:
               -OpenAsDraft $$(OpenSdkPullRequestAsDraft)
               -UpdateExistingPullRequest $true
 
-        - ${{ if endsWith(parameters.TriggerSource, '-release') }}:
-          - task: PowerShell@2
-            displayName: Add auto-release label
-            condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), eq(variables['Build.SourceBranch'], 'refs/heads/main'), not(endsWith(variables['SdkRepoName'], '-pr')))
-            inputs:
-              pwsh: true
-              workingDirectory: $(SdkRepoDirectory)
-              filePath: $(SdkRepoDirectory)/eng/common/scripts/Add-IssueLabels.ps1
-              arguments: >
-                -RepoOwner "azure"
-                -RepoName "$(SdkRepoName)"
-                -IssueNumber "$(Submitted.PullRequest.Number)"
-                -Labels "auto-release"
-                -AuthToken "$(GH_TOKEN)"
-
         - ${{ if ne(parameters.ReleasePlanWorkItemId, 0) }}:
+          - pwsh: |
+              Write-Host "##vso[task.setvariable variable=SdkPrStatus]No changes"
+            condition: and(succeeded(), ne(variables['HasChanges'], 'true'))
+            displayName: "Record unchanged SDK generation"
+
           - pwsh: |
               $prUrl = "https://github.com/Azure/$(SdkRepoName)/pull/$(Submitted.PullRequest.Number)"
               Write-Host "Pull request created: $prUrl"
@@ -420,20 +423,51 @@ stages:
             condition: failed()
             displayName: "Set pull request generation failed status variable"
 
-          - task: AzureCLI@2
-            displayName: Link pull request to release plan
-            condition: not(endsWith(variables['SdkRepoName'], '-pr'))
-            continueOnError: true
+          - ${{ if eq(parameters.ConfigType, 'TypeSpec') }}:
+            - task: AzureCLI@2
+              displayName: Link current generation result to release plan
+              condition: not(endsWith(variables['SdkRepoName'], '-pr'))
+              inputs:
+                azureSubscription: opensource-api-connection
+                scriptType: pscore
+                scriptLocation: scriptPath
+                scriptPath: $(SpecRepoDirectory)/eng/scripts/Confirm-ReleasePlan-Generation.ps1
+                arguments: >
+                  -ReleasePlanWorkItemId ${{ parameters.ReleasePlanWorkItemId }}
+                  -BuildId $(Build.BuildId)
+                  -PullRequestUrl "$(PullRequestUrl)"
+                  -Status "$(SdkPrStatus)"
+                  -SdkRepoName $(SdkRepoName)
+          - ${{ else }}:
+            - task: AzureCLI@2
+              displayName: Link OpenAPI pull request to release plan
+              condition: not(endsWith(variables['SdkRepoName'], '-pr'))
+              continueOnError: true
+              inputs:
+                azureSubscription: opensource-api-connection
+                scriptType: pscore
+                scriptLocation: scriptPath
+                scriptPath: $(SpecRepoDirectory)/eng/scripts/Update-PullRequest-In-ReleasePlan.ps1
+                arguments: >
+                  -ReleasePlanWorkItemId ${{ parameters.ReleasePlanWorkItemId }}
+                  -PullRequestUrl "$(PullRequestUrl)"
+                  -Status "$(SdkPrStatus)"
+                  -SdkRepoName $(SdkRepoName)
+
+        - ${{ if endsWith(parameters.TriggerSource, '-release') }}:
+          - task: PowerShell@2
+            displayName: Add auto-release label
+            condition: and(succeeded(), eq(variables['HasChanges'], 'true'), ne(variables['Build.Reason'], 'PullRequest'), eq(variables['Build.SourceBranch'], 'refs/heads/main'), not(endsWith(variables['SdkRepoName'], '-pr')))
             inputs:
-              azureSubscription: opensource-api-connection
-              scriptType: pscore
-              scriptLocation: scriptPath
-              scriptPath: $(SpecRepoDirectory)/eng/scripts/Update-PullRequest-In-ReleasePlan.ps1
+              pwsh: true
+              workingDirectory: $(SdkRepoDirectory)
+              filePath: $(SdkRepoDirectory)/eng/common/scripts/Add-IssueLabels.ps1
               arguments: >
-                -ReleasePlanWorkItemId ${{ parameters.ReleasePlanWorkItemId }}
-                -PullRequestUrl "$(PullRequestUrl)"
-                -Status "$(SdkPrStatus)"
-                -SdkRepoName "$(SdkRepoName)"
+                -RepoOwner "azure"
+                -RepoName "$(SdkRepoName)"
+                -IssueNumber "$(Submitted.PullRequest.Number)"
+                -Labels "auto-release"
+                -AuthToken "$(GH_TOKEN)"
 
       - ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
         - pwsh: |
