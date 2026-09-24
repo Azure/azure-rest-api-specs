@@ -98,6 +98,22 @@ describe("validate-approval", () => {
       .mockResolvedValue({ data: [] });
   });
 
+  it.each(["labeled", "unlabeled"])("rejects a %s event without a label", async (action) => {
+    context.payload = {
+      ...createPRLabeledPayload({
+        action,
+        labelName: "package-name-java-approved",
+        actor: "approver1",
+      }),
+      label: undefined,
+    };
+
+    await expect(validateApproval(args())).rejects.toThrow(
+      "Pull request label event is missing a label name.",
+    );
+    expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
+  });
+
   describe("labeled - per-language approval", () => {
     it("should skip when package-name-review-required label is absent", async () => {
       context.payload = createPRLabeledPayload({

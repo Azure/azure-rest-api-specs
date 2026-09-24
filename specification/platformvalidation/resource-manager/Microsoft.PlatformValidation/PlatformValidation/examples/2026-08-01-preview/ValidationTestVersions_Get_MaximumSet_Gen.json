@@ -1,0 +1,55 @@
+{
+  "title": "ValidationTestVersions_Get_MaximumSet",
+  "operationId": "ValidationTestVersions_Get",
+  "parameters": {
+    "api-version": "2026-08-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "validationTestName": "linux-quality-validation",
+    "version": "1.0.0"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "displayName": "Linux Quality Validation 1.0.0",
+          "description": "Linux Quality Validation Suite backed by LISA. Runs the Linux quality checks selected by the caller against the image supplied in the execution plan.",
+          "audience": "Public",
+          "provisioningState": "Succeeded",
+          "categoryIds": [
+            "linux-quality-validations"
+          ],
+          "inputs": [
+            {
+              "name": "concurrency",
+              "definition": {
+                "description": "Maximum number of Linux quality tests to run in parallel.",
+                "type": "Integer",
+                "required": false,
+                "defaultValue": "0"
+              }
+            },
+            {
+              "name": "testSuite",
+              "definition": {
+                "description": "Linux quality test selections. Each array item can select checks using testNames, testArea, testCategory, testTags, or testPriority. The service runs the resolved union.",
+                "type": "Array",
+                "required": true
+              }
+            }
+          ]
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.PlatformValidation/validationTests/linux-quality-validation/versions/1.0.0",
+        "name": "1.0.0",
+        "type": "Microsoft.PlatformValidation/validationTests/versions",
+        "systemData": {
+          "createdBy": "11111111-1111-4111-8111-111111111111",
+          "createdByType": "Application",
+          "createdAt": "2026-09-09T11:00:00Z",
+          "lastModifiedBy": "11111111-1111-4111-8111-111111111111",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2026-09-09T11:00:00Z"
+        }
+      }
+    }
+  }
+}

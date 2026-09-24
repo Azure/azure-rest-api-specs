@@ -1,4 +1,4 @@
-import type { Core } from "../github.ts";
+import type { Core, WebhookEvent } from "../github.ts";
 // Protected Labels Enforcement
 // Entry point for .github/workflows/protected-labels.yaml
 //
@@ -180,9 +180,12 @@ export default async function checkLabel({
 }: import("@actions/github-script").AsyncFunctionArguments) {
   const { owner, repo, issue_number } = await extractInputs(github, context, core);
 
-  const payload = context.payload as import("@octokit/webhooks-types").PullRequestLabeledEvent;
+  const payload = context.payload as WebhookEvent<"pull-request", "labeled">;
 
-  const labelName = payload.label.name;
+  const labelName = payload.label?.name;
+  if (!labelName) {
+    throw new Error("Pull request label event is missing a label name.");
+  }
   const actor = payload.sender.login;
 
   if (ALLOWED_BOT_LOGINS.includes(actor)) {

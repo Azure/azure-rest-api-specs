@@ -1,5 +1,5 @@
 import { extractInputs } from "../context.ts";
-import type { Core } from "../github.ts";
+import type { Core, WebhookEvent } from "../github.ts";
 import { loadApproversConfig } from "./approvers.ts";
 import { removeLabelIfPresent } from "./labels.ts";
 
@@ -253,12 +253,13 @@ export default async function validateApproval({
 
   const { owner, repo, issue_number } = await extractInputs(github, context, core);
 
-  const payload = context.payload as
-    | import("@octokit/webhooks-types").PullRequestLabeledEvent
-    | import("@octokit/webhooks-types").PullRequestUnlabeledEvent;
+  const payload = context.payload as WebhookEvent<"pull-request", "labeled" | "unlabeled">;
 
   const labels: string[] = payload.pull_request.labels.map((label: { name: string }) => label.name);
-  const targetLabel = payload.label.name;
+  const targetLabel = payload.label?.name;
+  if (!targetLabel) {
+    throw new Error("Pull request label event is missing a label name.");
+  }
   const actor = payload.sender.login;
   const isMgmt = labels.includes("Mgmt") || labels.includes("resource-manager");
 

@@ -51283,6 +51283,9 @@ components:
             Controls how long the model waits before emitting transcription text.
               Higher values can improve transcription accuracy at the cost of latency.
               Only supported with `gpt-realtime-whisper` in GA Realtime sessions.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.AudioTranscriptionResponse:
       type: object
       properties:
@@ -57851,6 +57854,9 @@ components:
           tokens: '#/components/schemas/OpenAI.TranscriptTextUsageTokens'
           duration: '#/components/schemas/OpenAI.TranscriptTextUsageDuration'
       description: Token usage statistics for the request.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.CreateTranscriptionResponseJsonUsageType:
       anyOf:
         - type: string
@@ -57858,6 +57864,9 @@ components:
           enum:
             - tokens
             - duration
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.CreateTranscriptionResponseVerboseJson:
       type: object
       required:
@@ -67244,10 +67253,19 @@ components:
             - type: 'null'
       description: A tool available on an MCP server.
       title: MCP list tools tool
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.MCPListToolsToolAnnotations:
       type: object
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.MCPListToolsToolInputSchema:
       type: object
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.MCPTool:
       type: object
       required:
@@ -70198,6 +70216,9 @@ components:
           audio/pcm: '#/components/schemas/OpenAI.RealtimeAudioFormatsAudioPcm'
           audio/pcmu: '#/components/schemas/OpenAI.RealtimeAudioFormatsAudioPcmu'
           audio/pcma: '#/components/schemas/OpenAI.RealtimeAudioFormatsAudioPcma'
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeAudioFormatsAudioPcm:
       type: object
       required:
@@ -70213,6 +70234,9 @@ components:
             - 24000
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeAudioFormats'
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeAudioFormatsAudioPcma:
       type: object
       required:
@@ -70224,6 +70248,9 @@ components:
             - audio/pcma
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeAudioFormats'
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeAudioFormatsAudioPcmu:
       type: object
       required:
@@ -70235,6 +70262,9 @@ components:
             - audio/pcmu
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeAudioFormats'
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeAudioFormatsType:
       anyOf:
         - type: string
@@ -70243,6 +70273,9 @@ components:
             - audio/pcm
             - audio/pcmu
             - audio/pcma
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeCallCreateRequest:
       type: object
       properties:
@@ -70574,6 +70607,9 @@ components:
             - system
             - user
             - assistant
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeConversationItemMessageUser:
       type: object
       required:
@@ -70666,6 +70702,9 @@ components:
             - mcp_call
             - mcp_approval_request
             - message
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeCreateClientSecretRequest:
       type: object
       properties:
@@ -70897,6 +70936,9 @@ components:
           protocol_error: '#/components/schemas/OpenAI.RealtimeMCPProtocolError'
           tool_execution_error: '#/components/schemas/OpenAI.RealtimeMCPToolExecutionError'
           http_error: '#/components/schemas/OpenAI.RealtimeMCPHTTPError'
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeMCPHTTPError:
       type: object
       required:
@@ -70916,6 +70958,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeMCPError'
       title: Realtime MCP HTTP error
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeMCPListTools:
       type: object
       required:
@@ -70974,6 +71019,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeMCPError'
       title: Realtime MCP protocol error
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeMCPToolCall:
       type: object
       required:
@@ -71042,6 +71090,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeMCPError'
       title: Realtime MCP tool execution error
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeMcpErrorType:
       anyOf:
         - type: string
@@ -71050,6 +71101,9 @@ components:
             - protocol_error
             - tool_execution_error
             - http_error
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeReasoning:
       type: object
       properties:
@@ -71414,6 +71468,9 @@ components:
         - $ref: '#/components/schemas/OpenAI.RealtimeSessionCreateRequestUnion'
       description: Realtime session object configuration.
       title: Realtime session configuration
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeSessionCreateRequestGAAudio:
       type: object
       properties:
@@ -71421,6 +71478,9 @@ components:
           $ref: '#/components/schemas/OpenAI.RealtimeSessionCreateRequestGAAudioInput'
         output:
           $ref: '#/components/schemas/OpenAI.RealtimeSessionCreateRequestGAAudioOutput'
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeSessionCreateRequestGAAudioInput:
       type: object
       properties:
@@ -71432,6 +71492,9 @@ components:
           $ref: '#/components/schemas/OpenAI.RealtimeSessionCreateRequestGAAudioInputNoiseReduction'
         turn_detection:
           $ref: '#/components/schemas/OpenAI.RealtimeTurnDetection'
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeSessionCreateRequestGAAudioInputNoiseReduction:
       type: object
       properties:
@@ -71450,6 +71513,9 @@ components:
           minimum: 0.25
           maximum: 1.5
           default: 1
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeSessionCreateRequestGATracing:
       type: object
       properties:
@@ -71460,6 +71526,9 @@ components:
         metadata:
           type: object
           unevaluatedProperties: {}
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeSessionCreateRequestInputAudioTranscription:
       type: object
       properties:
@@ -71504,6 +71573,9 @@ components:
         mapping:
           transcription: '#/components/schemas/OpenAI.RealtimeTranscriptionSessionCreateRequestGA'
           realtime: '#/components/schemas/OpenAI.RealtimeSessionCreateRequestGA'
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeSessionCreateRequestUnionType:
       anyOf:
         - type: string
@@ -71511,6 +71583,9 @@ components:
           enum:
             - realtime
             - transcription
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeSessionCreateResponse:
       type: object
       required:
@@ -71795,11 +71870,17 @@ components:
         - $ref: '#/components/schemas/OpenAI.RealtimeSessionCreateRequestUnion'
       description: Realtime transcription session object configuration.
       title: Realtime transcription session configuration
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeTranscriptionSessionCreateRequestGAAudio:
       type: object
       properties:
         input:
           $ref: '#/components/schemas/OpenAI.RealtimeTranscriptionSessionCreateRequestGAAudioInput'
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeTranscriptionSessionCreateRequestGAAudioInput:
       type: object
       properties:
@@ -71811,6 +71892,9 @@ components:
           $ref: '#/components/schemas/OpenAI.RealtimeTranscriptionSessionCreateRequestGAAudioInputNoiseReduction'
         turn_detection:
           $ref: '#/components/schemas/OpenAI.RealtimeTurnDetection'
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeTranscriptionSessionCreateRequestGAAudioInputNoiseReduction:
       type: object
       properties:
@@ -72188,6 +72272,9 @@ components:
         For `gpt-realtime-whisper` transcription sessions, turn detection must be
         set to `null`; VAD is not supported.
       title: Realtime Turn Detection
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeTurnDetectionSemanticVad:
       type: object
       required:
@@ -72213,6 +72300,9 @@ components:
           default: true
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeTurnDetection'
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeTurnDetectionServerVad:
       type: object
       required:
@@ -72240,6 +72330,9 @@ components:
             - type: 'null'
       allOf:
         - $ref: '#/components/schemas/OpenAI.RealtimeTurnDetection'
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.RealtimeTurnDetectionType:
       anyOf:
         - type: string
@@ -72247,6 +72340,9 @@ components:
           enum:
             - server_vad
             - semantic_vad
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.Reasoning:
       type: object
       properties:
@@ -77300,6 +77396,9 @@ components:
         - $ref: '#/components/schemas/OpenAI.CreateTranscriptionResponseJsonUsage'
       description: Usage statistics for models billed by audio input duration.
       title: Duration Usage
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.TranscriptTextUsageTokens:
       type: object
       required:
@@ -77330,6 +77429,9 @@ components:
         - $ref: '#/components/schemas/OpenAI.CreateTranscriptionResponseJsonUsage'
       description: Usage statistics for models billed by token usage.
       title: Token Usage
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.TranscriptTextUsageTokensInputTokenDetails:
       type: object
       properties:
@@ -77337,6 +77439,9 @@ components:
           $ref: '#/components/schemas/OpenAI.integer'
         audio_tokens:
           $ref: '#/components/schemas/OpenAI.integer'
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.TranscriptionDiarizedSegment:
       type: object
       required:
@@ -77386,6 +77491,9 @@ components:
           type: string
           description: The code of a language detected in the audio.
       description: A language detected in transcribed audio.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.TranscriptionSegment:
       type: object
       required:
@@ -78405,6 +78513,9 @@ components:
             - verse
             - marin
             - cedar
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     OpenAI.WaitParam:
       type: object
       required:

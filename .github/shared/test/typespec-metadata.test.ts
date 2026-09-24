@@ -2,13 +2,13 @@ import { access, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { execNpmExec } from "../src/exec.ts";
+import { execNodeBin } from "../src/exec.ts";
 import { debugLogger } from "../src/logger.ts";
 import { generateTypeSpecMetadata } from "../src/typespec-metadata.ts";
 
 vi.mock("../src/exec.ts", async (importOriginal) => ({
   ...(await importOriginal()),
-  execNpmExec: vi.fn(),
+  execNodeBin: vi.fn(),
 }));
 
 const validMetadata = {
@@ -52,15 +52,16 @@ describe("generateTypeSpecMetadata", () => {
 
   beforeEach(() => {
     metadataFile = undefined;
-    vi.mocked(execNpmExec).mockReset();
+    vi.mocked(execNodeBin).mockReset();
   });
 
   it("generates, validates, and cleans up TypeSpec metadata", async () => {
-    vi.mocked(execNpmExec).mockImplementation(async (args, options) => {
+    vi.mocked(execNodeBin).mockImplementation(async (packageName, args, options) => {
       metadataFile = getMetadataFile(args);
       await writeFile(metadataFile, JSON.stringify(validMetadata));
 
       expect(args).toContain("@azure-tools/typespec-metadata");
+      expect(packageName).toBe("@typespec/compiler");
       expect(options?.cwd).toMatch(/contoso$/);
       expect(options?.maxBuffer).toBe(64 * 1024 * 1024);
       return { stdout: "", stderr: "" };
@@ -71,7 +72,7 @@ describe("generateTypeSpecMetadata", () => {
   });
 
   it("passes the logger to command execution", async () => {
-    vi.mocked(execNpmExec).mockImplementation(async (args, options) => {
+    vi.mocked(execNodeBin).mockImplementation(async (_packageName, args, options) => {
       metadataFile = getMetadataFile(args);
       await writeFile(metadataFile, JSON.stringify(validMetadata));
       expect(options?.logger).toBe(debugLogger);
@@ -87,7 +88,7 @@ describe("generateTypeSpecMetadata", () => {
     await writeFile(clientTspPath, "namespace Contoso;");
 
     try {
-      vi.mocked(execNpmExec).mockImplementation(async (args) => {
+      vi.mocked(execNodeBin).mockImplementation(async (_packageName, args) => {
         metadataFile = getMetadataFile(args);
         await writeFile(metadataFile, JSON.stringify(validMetadata));
         expect(args[2]).toBe(clientTspPath);
@@ -101,7 +102,7 @@ describe("generateTypeSpecMetadata", () => {
   });
 
   it("rejects invalid metadata and cleans up", async () => {
-    vi.mocked(execNpmExec).mockImplementation(async (args) => {
+    vi.mocked(execNodeBin).mockImplementation(async (_packageName, args) => {
       metadataFile = getMetadataFile(args);
       await writeFile(metadataFile, JSON.stringify({ languages: [] }));
       return { stdout: "", stderr: "" };
@@ -112,7 +113,7 @@ describe("generateTypeSpecMetadata", () => {
   });
 
   it("wraps execution errors and cleans up", async () => {
-    vi.mocked(execNpmExec).mockImplementation((args) => {
+    vi.mocked(execNodeBin).mockImplementation((_packageName, args) => {
       metadataFile = getMetadataFile(args);
       return Promise.reject(new Error("compile failed"));
     });
@@ -124,7 +125,7 @@ describe("generateTypeSpecMetadata", () => {
   });
 
   it("includes compiler diagnostics written to stdout", async () => {
-    vi.mocked(execNpmExec).mockImplementation((args) => {
+    vi.mocked(execNodeBin).mockImplementation((_packageName, args) => {
       metadataFile = getMetadataFile(args);
 
       const error = Object.assign(new Error("Command failed: tsp compile"), {

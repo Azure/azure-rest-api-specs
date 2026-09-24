@@ -18,6 +18,8 @@ Describe "Get-ChangedCoreFiles" {
         @{ path = "eng/scripts/Get-TypeSpec-Folders.ps1" },
         @{ path = "specification/common-types/resource-management/v6/types.json" },
         @{ path = "package.json" },
+        @{ path = ".oxfmtrc.json" },
+        @{ path = ".prettierrc.json" },
         @{ path = "pnpm-lock.yaml" },
         @{ path = "pnpm-workspace.yaml" }
     ) {

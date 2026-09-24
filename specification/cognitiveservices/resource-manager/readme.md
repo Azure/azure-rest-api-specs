@@ -59,6 +59,14 @@ suppressions:
       - $.definitions.RaiAcsModerationBindingExtension.properties.harm_configs
       - $.definitions.RaiAcsPolicyBinding.properties.aacs_moderation
       - $.definitions.RaiAcsToolDefinition.properties.security_labels
+  - code: DefinitionsPropertiesNamesCamelCase
+    reason: Cost control match keys are trusted request attribute names defined by the service contract. Their dotted wire names must be preserved so the service can evaluate matches; generated SDKs expose idiomatic camelCase names through x-ms-client-name.
+    from: cognitiveservices.json
+    where:
+      - $.definitions.CostControlMatch.properties["foundry.caller.agent.id"]
+      - $.definitions.CostControlMatch.properties["foundry.caller.identity.oid"]
+      - $.definitions.CostControlMatch.properties["foundry.caller.session.id"]
+      - $.definitions.CostControlMatch.properties["foundry.project.id"]
   - code: AvoidAdditionalProperties
     reason: The canonical ACS manifest defines metadata and tool entries as extensible JSON objects, and policies and tools as name-keyed maps. Replacing these objects with closed properties or arrays would break ACS manifest portability and round-tripping.
     from: cognitiveservices.json
@@ -67,6 +75,16 @@ suppressions:
       - $.definitions.RaiAcsManifest.properties.policies
       - $.definitions.RaiAcsManifest.properties.tools
       - $.definitions.RaiAcsToolDefinition
+  - code: PutResponseCodes
+    reason: AdapterDeployment PUT returns 202 Accepted with the resource body and polling headers, as confirmed by the service owner. The final resource is retrieved with GET at the original URI; declaring 201 instead causes generated SDKs to reject successful backend responses.
+    from: cognitiveservices.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/adapterDeployments/{adapterDeploymentName}"].put
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: AdapterDeployment PUT returns 202 rather than 201. The 200 and 202 response schemas include provisioningState; the service does not return the 201 response this rule requires.
+    from: cognitiveservices.json
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/adapterDeployments/{adapterDeploymentName}"].put
   - code: PutResponseCodes
     reason: Compute create is a genuine long-running async operation - the service returns 202 Accepted on success (never 200/201) and 4xx on failure. Modeling 202-only reflects the real backend contract (live-validated). Preview-only bug fix correcting the contract before GA.
     where:
@@ -119,6 +137,10 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].patch.parameters[3].schema.properties.sku
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/connections/{connectionName}"].patch.parameters[6].schema.properties.properties
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedComputeDeployments/{deploymentName}"].patch.parameters[5].schema.properties.sku
+  - code: PatchBodyParametersSchema
+    reason: The service requires the top-level properties envelope in a cost control PATCH request while every field inside the patch properties model remains optional.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/costControls/{costControlName}"].patch.parameters[6].schema
   - code: PatchBodyParametersSchema
     reason: Workbench uses PatchModel = Workbench (full resource as PATCH body). Required properties (targetClusterId, imageLink) are within the optional properties bag.
     where:

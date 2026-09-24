@@ -1,5 +1,5 @@
 import { extractInputs } from "../context.ts";
-import type { Core } from "../github.ts";
+import type { Core, WebhookEvent } from "../github.ts";
 
 /**
  * Intake label for data-plane stewardship review. The merge gate keys off the same label
@@ -42,7 +42,7 @@ export default async function assignReviewers({
     return await assignFromWorkflowRun({ github, context, core });
   }
 
-  const payload = context.payload as import("@octokit/webhooks-types").PullRequestLabeledEvent;
+  const payload = context.payload as WebhookEvent<"pull-request", "labeled">;
 
   const targetLabel = payload.label?.name;
 

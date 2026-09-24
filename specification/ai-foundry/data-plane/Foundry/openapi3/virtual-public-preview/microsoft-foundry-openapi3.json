@@ -50608,6 +50608,11 @@
             ],
             "description": "Controls how long the model waits before emitting transcription text.\n  Higher values can improve transcription accuracy at the cost of latency.\n  Only supported with `gpt-realtime-whisper` in GA Realtime sessions."
           }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
         }
       },
       "OpenAI.AudioTranscriptionResponse": {
@@ -59861,7 +59866,12 @@
             "duration": "#/components/schemas/OpenAI.TranscriptTextUsageDuration"
           }
         },
-        "description": "Token usage statistics for the request."
+        "description": "Token usage statistics for the request.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.CreateTranscriptionResponseJsonUsageType": {
         "anyOf": [
@@ -59875,7 +59885,12 @@
               "duration"
             ]
           }
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.CreateTranscriptionResponseVerboseJson": {
         "type": "object",
@@ -73348,13 +73363,28 @@
           }
         },
         "description": "A tool available on an MCP server.",
-        "title": "MCP list tools tool"
+        "title": "MCP list tools tool",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.MCPListToolsToolAnnotations": {
-        "type": "object"
+        "type": "object",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.MCPListToolsToolInputSchema": {
-        "type": "object"
+        "type": "object",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.MCPTool": {
         "type": "object",
@@ -77617,6 +77647,11 @@
             "audio/pcmu": "#/components/schemas/OpenAI.RealtimeAudioFormatsAudioPcmu",
             "audio/pcma": "#/components/schemas/OpenAI.RealtimeAudioFormatsAudioPcma"
           }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
         }
       },
       "OpenAI.RealtimeAudioFormatsAudioPcm": {
@@ -77642,7 +77677,12 @@
           {
             "$ref": "#/components/schemas/OpenAI.RealtimeAudioFormats"
           }
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.RealtimeAudioFormatsAudioPcma": {
         "type": "object",
@@ -77661,7 +77701,12 @@
           {
             "$ref": "#/components/schemas/OpenAI.RealtimeAudioFormats"
           }
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.RealtimeAudioFormatsAudioPcmu": {
         "type": "object",
@@ -77680,7 +77725,12 @@
           {
             "$ref": "#/components/schemas/OpenAI.RealtimeAudioFormats"
           }
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.RealtimeAudioFormatsType": {
         "anyOf": [
@@ -77695,7 +77745,12 @@
               "audio/pcma"
             ]
           }
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.RealtimeCallCreateRequest": {
         "type": "object",
@@ -78154,7 +78209,12 @@
               "assistant"
             ]
           }
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.RealtimeConversationItemMessageUser": {
         "type": "object",
@@ -78284,7 +78344,12 @@
               "message"
             ]
           }
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.RealtimeCreateClientSecretRequest": {
         "type": "object",
@@ -78521,6 +78586,11 @@
             "tool_execution_error": "#/components/schemas/OpenAI.RealtimeMCPToolExecutionError",
             "http_error": "#/components/schemas/OpenAI.RealtimeMCPHTTPError"
           }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
         }
       },
       "OpenAI.RealtimeMCPHTTPError": {
@@ -78550,7 +78620,12 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeMCPError"
           }
         ],
-        "title": "Realtime MCP HTTP error"
+        "title": "Realtime MCP HTTP error",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.RealtimeMCPListTools": {
         "type": "object",
@@ -78634,7 +78709,12 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeMCPError"
           }
         ],
-        "title": "Realtime MCP protocol error"
+        "title": "Realtime MCP protocol error",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.RealtimeMCPToolCall": {
         "type": "object",
@@ -78740,7 +78820,12 @@
             "$ref": "#/components/schemas/OpenAI.RealtimeMCPError"
           }
         ],
-        "title": "Realtime MCP tool execution error"
+        "title": "Realtime MCP tool execution error",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.RealtimeMcpErrorType": {
         "anyOf": [
@@ -78755,7 +78840,12 @@
               "http_error"
             ]
           }
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.RealtimeReasoning": {
         "type": "object",
@@ -79183,7 +79273,12 @@
           }
         ],
         "description": "Realtime session object configuration.",
-        "title": "Realtime session configuration"
+        "title": "Realtime session configuration",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.RealtimeSessionCreateRequestGAAudio": {
         "type": "object",
@@ -79194,6 +79289,11 @@
           "output": {
             "$ref": "#/components/schemas/OpenAI.RealtimeSessionCreateRequestGAAudioOutput"
           }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
         }
       },
       "OpenAI.RealtimeSessionCreateRequestGAAudioInput": {
@@ -79211,6 +79311,11 @@
           "turn_detection": {
             "$ref": "#/components/schemas/OpenAI.RealtimeTurnDetection"
           }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
         }
       },
       "OpenAI.RealtimeSessionCreateRequestGAAudioInputNoiseReduction": {
@@ -79237,6 +79342,11 @@
             "maximum": 1.5,
             "default": 1
           }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
         }
       },
       "OpenAI.RealtimeSessionCreateRequestGATracing": {
@@ -79252,6 +79362,11 @@
             "type": "object",
             "unevaluatedProperties": {}
           }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
         }
       },
       "OpenAI.RealtimeSessionCreateRequestInputAudioTranscription": {
@@ -79319,6 +79434,11 @@
             "transcription": "#/components/schemas/OpenAI.RealtimeTranscriptionSessionCreateRequestGA",
             "realtime": "#/components/schemas/OpenAI.RealtimeSessionCreateRequestGA"
           }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
         }
       },
       "OpenAI.RealtimeSessionCreateRequestUnionType": {
@@ -79333,7 +79453,12 @@
               "transcription"
             ]
           }
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.RealtimeSessionCreateResponse": {
         "type": "object",
@@ -79654,7 +79779,12 @@
           }
         ],
         "description": "Realtime transcription session object configuration.",
-        "title": "Realtime transcription session configuration"
+        "title": "Realtime transcription session configuration",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.RealtimeTranscriptionSessionCreateRequestGAAudio": {
         "type": "object",
@@ -79662,6 +79792,11 @@
           "input": {
             "$ref": "#/components/schemas/OpenAI.RealtimeTranscriptionSessionCreateRequestGAAudioInput"
           }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
         }
       },
       "OpenAI.RealtimeTranscriptionSessionCreateRequestGAAudioInput": {
@@ -79679,6 +79814,11 @@
           "turn_detection": {
             "$ref": "#/components/schemas/OpenAI.RealtimeTurnDetection"
           }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
         }
       },
       "OpenAI.RealtimeTranscriptionSessionCreateRequestGAAudioInputNoiseReduction": {
@@ -80120,7 +80260,12 @@
           }
         },
         "description": "Configuration for turn detection, ether Server VAD or Semantic VAD. This can be set to `null` to turn off, in which case the client must manually trigger model response.\nServer VAD means that the model will detect the start and end of speech based on audio volume and respond at the end of user speech.\nSemantic VAD is more advanced and uses a turn detection model (in conjunction with VAD) to semantically estimate whether the user has finished speaking, then dynamically sets a timeout based on this probability. For example, if user audio trails off with \"uhhm\", the model will score a low probability of turn end and wait longer for the user to continue speaking. This can be useful for more natural conversations, but may have a higher latency.\nFor `gpt-realtime-whisper` transcription sessions, turn detection must be\nset to `null`; VAD is not supported.",
-        "title": "Realtime Turn Detection"
+        "title": "Realtime Turn Detection",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.RealtimeTurnDetectionSemanticVad": {
         "type": "object",
@@ -80157,7 +80302,12 @@
           {
             "$ref": "#/components/schemas/OpenAI.RealtimeTurnDetection"
           }
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.RealtimeTurnDetectionServerVad": {
         "type": "object",
@@ -80203,7 +80353,12 @@
           {
             "$ref": "#/components/schemas/OpenAI.RealtimeTurnDetection"
           }
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.RealtimeTurnDetectionType": {
         "anyOf": [
@@ -80217,7 +80372,12 @@
               "semantic_vad"
             ]
           }
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.Reasoning": {
         "type": "object",
@@ -86453,7 +86613,12 @@
           }
         ],
         "description": "Usage statistics for models billed by audio input duration.",
-        "title": "Duration Usage"
+        "title": "Duration Usage",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.TranscriptTextUsageTokens": {
         "type": "object",
@@ -86495,7 +86660,12 @@
           }
         ],
         "description": "Usage statistics for models billed by token usage.",
-        "title": "Token Usage"
+        "title": "Token Usage",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.TranscriptTextUsageTokensInputTokenDetails": {
         "type": "object",
@@ -86506,6 +86676,11 @@
           "audio_tokens": {
             "$ref": "#/components/schemas/OpenAI.integer"
           }
+        },
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
         }
       },
       "OpenAI.TranscriptionDiarizedSegment": {
@@ -86571,7 +86746,12 @@
             "description": "The code of a language detected in the audio."
           }
         },
-        "description": "A language detected in transcribed audio."
+        "description": "A language detected in transcribed audio.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.TranscriptionSegment": {
         "type": "object",
@@ -87965,7 +88145,12 @@
               "cedar"
             ]
           }
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
       },
       "OpenAI.WaitParam": {
         "type": "object",

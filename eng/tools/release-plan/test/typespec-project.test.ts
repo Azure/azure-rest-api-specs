@@ -1,7 +1,8 @@
 import type { TypeSpecMetadata } from "@azure-tools/specs-shared/typespec-metadata";
-import { mkdirSync, rmSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const { mockMetadataMap } = vi.hoisted(() => ({
   mockMetadataMap: new Map<string, { apiVersion: string; sdkType: "stable" | "preview" }>(),
@@ -71,6 +72,17 @@ function setupMockMetadata(projectPath: string, apiVersion: string, sdkType: "st
   mockMetadataMap.set(projectPath, { apiVersion, sdkType });
 }
 
+let workspace: string;
+
+beforeEach(() => {
+  workspace = mkdtempSync(join(tmpdir(), "release-plan-typespec-"));
+  mockMetadataMap.clear();
+});
+
+afterEach(() => {
+  rmSync(workspace, { recursive: true, force: true });
+});
+
 describe("version helpers", () => {
   it("sorts API versions descending with GA preferred over preview on same date", () => {
     const input = ["2025-06-01-preview", "2025-06-01", "2026-01-01-preview"];
@@ -94,7 +106,6 @@ describe("version helpers", () => {
 
 describe("TypeSpec path discovery", () => {
   it("finds nearest tspconfig.yaml directory", () => {
-    const workspace = process.cwd();
     const result = findTspConfigDir(
       "specification/service/resource-manager/Microsoft.Sample/main.tsp",
       workspace,
@@ -109,7 +120,7 @@ describe("TypeSpec path discovery", () => {
         "specification/foo/stable/2025-05-01/foo.json",
       ],
       "specification/foo",
-      process.cwd(),
+      workspace,
     );
 
     expect(result.apiVersions[0]).toBe("2025-06-01-preview");
@@ -168,7 +179,7 @@ describe("GitHub PR file listing", () => {
       prNumber: 42,
       owner: "Azure",
       repo: "azure-rest-api-specs",
-      workspace: process.cwd(),
+      workspace,
       octokit: {
         rest: {
           pulls: {
@@ -185,7 +196,7 @@ describe("GitHub PR file listing", () => {
 
 describe("TypeSpec project detection edge cases", () => {
   it("still detects project when PR lacks new-api-version label", async () => {
-    const projectPath = join(process.cwd(), "specification/foo");
+    const projectPath = join(workspace, "specification/foo");
     mkdirSync(projectPath, { recursive: true });
     writeFileSync(join(projectPath, "main.tsp"), "namespace Demo;");
 
@@ -207,7 +218,7 @@ describe("TypeSpec project detection edge cases", () => {
       prNumber: 42,
       owner: "Azure",
       repo: "azure-rest-api-specs",
-      workspace: process.cwd(),
+      workspace,
       octokit: {
         rest: {
           pulls: {
@@ -222,9 +233,6 @@ describe("TypeSpec project detection edge cases", () => {
     expect(result?.tspProjectPath).toBe("specification/foo");
     expect(result?.apiVersion).toBe("2025-08-01");
     expect(listFiles).toHaveBeenCalled();
-
-    // Cleanup
-    rmSync(projectPath, { recursive: true, force: true });
   });
 
   it("returns null when PR has multiple tsp projects", async () => {
@@ -243,7 +251,7 @@ describe("TypeSpec project detection edge cases", () => {
       prNumber: 42,
       owner: "Azure",
       repo: "azure-rest-api-specs",
-      workspace: process.cwd(),
+      workspace,
       octokit: {
         rest: {
           pulls: {
@@ -298,7 +306,7 @@ describe("TypeSpec project detection edge cases", () => {
         "specification/foo/2026-01-01/readme.md",
       ],
       "specification/foo",
-      process.cwd(),
+      workspace,
     );
 
     expect(result.apiVersions).toContain("2025-05-01");
@@ -381,7 +389,7 @@ describe("TypeSpec project detection edge cases", () => {
   });
 
   it("uses associated PR path when commit maps to a PR", async () => {
-    const projectPath = join(process.cwd(), "specification/foo");
+    const projectPath = join(workspace, "specification/foo");
     mkdirSync(projectPath, { recursive: true });
     writeFileSync(join(projectPath, "main.tsp"), "namespace Demo;");
 
@@ -406,7 +414,7 @@ describe("TypeSpec project detection edge cases", () => {
       commitSha: "abc999",
       owner: "Azure",
       repo: "azure-rest-api-specs",
-      workspace: process.cwd(),
+      workspace,
       octokit: {
         rest: {
           pulls: {
@@ -425,13 +433,10 @@ describe("TypeSpec project detection edge cases", () => {
     expect(result.hasNewApiVersionLabel).toBe(true);
     expect(result.projectInfo?.tspProjectPath).toBe("specification/foo");
     expect(result.projectInfo?.apiVersion).toBe("2026-01-01-preview");
-
-    // Cleanup
-    rmSync(projectPath, { recursive: true, force: true });
   });
 
   it("falls back to commit file analysis when no PR is associated", async () => {
-    const projectPath = join(process.cwd(), "specification/bar");
+    const projectPath = join(workspace, "specification/bar");
     mkdirSync(projectPath, { recursive: true });
     writeFileSync(join(projectPath, "main.tsp"), "namespace Demo;");
 
@@ -452,7 +457,7 @@ describe("TypeSpec project detection edge cases", () => {
       commitSha: "zzz111",
       owner: "Azure",
       repo: "azure-rest-api-specs",
-      workspace: process.cwd(),
+      workspace,
       octokit: {
         rest: {
           pulls: {
@@ -471,9 +476,6 @@ describe("TypeSpec project detection edge cases", () => {
     expect(result.hasNewApiVersionLabel).toBe(false);
     expect(result.projectInfo?.tspProjectPath).toBe("specification/bar");
     expect(result.projectInfo?.apiVersion).toBe("2025-09-01");
-
-    // Cleanup
-    rmSync(projectPath, { recursive: true, force: true });
   });
 
   it("skips folder-migration PRs and does not fetch changed files", async () => {
@@ -489,7 +491,7 @@ describe("TypeSpec project detection edge cases", () => {
       commitSha: "mig123",
       owner: "Azure",
       repo: "azure-rest-api-specs",
-      workspace: process.cwd(),
+      workspace,
       octokit: {
         rest: {
           pulls: {
@@ -525,7 +527,7 @@ describe("TypeSpec project detection edge cases", () => {
       commitSha: "skip123",
       owner: "Azure",
       repo: "azure-rest-api-specs",
-      workspace: process.cwd(),
+      workspace,
       octokit: {
         rest: {
           pulls: {
@@ -548,7 +550,7 @@ describe("TypeSpec project detection edge cases", () => {
   });
 
   it("ignores renamed files when detecting the API version", async () => {
-    const projectPath = join(process.cwd(), "specification/bar");
+    const projectPath = join(workspace, "specification/bar");
     mkdirSync(projectPath, { recursive: true });
     writeFileSync(join(projectPath, "main.tsp"), "namespace Demo;");
 
@@ -571,7 +573,7 @@ describe("TypeSpec project detection edge cases", () => {
       commitSha: "rename1",
       owner: "Azure",
       repo: "azure-rest-api-specs",
-      workspace: process.cwd(),
+      workspace,
       octokit: {
         rest: {
           pulls: {
@@ -587,9 +589,6 @@ describe("TypeSpec project detection edge cases", () => {
     });
 
     expect(result.projectInfo?.apiVersion).toBe("2025-09-01");
-
-    // Cleanup
-    rmSync(projectPath, { recursive: true, force: true });
   });
 });
 

@@ -1,0 +1,116 @@
+name: Eng
+
+on:
+  push:
+    branches:
+      - main
+      - typespec-next
+    paths:
+      - "**/package.json"
+      - .github/**
+      - eng/**
+      - pnpm-lock.yaml
+      - pnpm-workspace.yaml
+      - tsconfig.json
+      - tsconfig.base.json
+      - vitest.config.mts
+      - .npmrc
+      - .gitignore
+      - .oxlintrc.json
+      - .oxfmtrc.json
+      - specification/common-types/**
+      - specification/contosowidgetmanager/**
+      - specification/storage/**
+      - specification/compute/**
+  pull_request:
+    paths:
+      - "**/package.json"
+      - .github/**
+      - eng/**
+      - pnpm-lock.yaml
+      - pnpm-workspace.yaml
+      - tsconfig.json
+      - tsconfig.base.json
+      - vitest.config.mts
+      - .npmrc
+      - .gitignore
+      - .oxlintrc.json
+      - .oxfmtrc.json
+      - specification/common-types/**
+      - specification/contosowidgetmanager/**
+      - specification/storage/**
+      - specification/compute/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  workspace-validation:
+    name: Workspace validation
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          # Keep every manifest so new workspace locations are checked too.
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            package.json
+            /pnpm-workspace.yaml
+            /pnpm-lock.yaml
+            /.github/actions/setup-node-install-deps/
+            /.github/shared/
+            /.github/workflows/src/validate-workspace.ts
+
+      - uses: ./.github/actions/setup-node-install-deps
+        with:
+          install-command: "pnpm install --frozen-lockfile --prod --prefer-offline --filter=azure-rest-api-specs-github..."
+          cache-name: workspace-validation
+
+      # Avoid pnpm run auto-installing the rest of the workspace.
+      - run: node ./.github/workflows/src/validate-workspace.ts
+
+  build:
+    name: Type check
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          sparse-checkout: |
+            .github
+            eng
+
+      - uses: ./.github/actions/setup-node-install-deps
+
+      - run: pnpm run build
+
+  test:
+    name: Test (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu
+            runner: ubuntu-24.04
+          - os: windows
+            runner: windows-2022
+
+    runs-on: ${{ matrix.runner }}
+
+    steps:
+      - if: runner.os == 'Windows'
+        run: git config --global core.longpaths true
+
+      - uses: actions/checkout@v7
+        with:
+          sparse-checkout: |
+            .github
+            eng
+            specification/common-types
+            specification/contosowidgetmanager
+            specification/storage
+            specification/compute
+
+      - uses: ./.github/actions/setup-node-install-deps
+
+      - run: pnpm run test:ci
