@@ -44,7 +44,7 @@ union AgentOptimizationGoal {
 // ---------------------------------------------------------------------------
 
 /** Logical row formats supported by optimization evaluation sets. */
-union AgentOptimizationSetInputType {
+union AgentOptimizationEvaluationSetType {
   string,
 
   @doc("Independent single-turn queries evaluated against each candidate.")
@@ -56,36 +56,36 @@ union AgentOptimizationSetInputType {
 
 /** Base discriminated model for an optimization evaluation set. */
 @discriminator("type")
-model AgentOptimizationSetInput {
+model AgentOptimizationEvaluationSet {
   @doc("Logical format of the evaluation set rows.")
-  type: AgentOptimizationSetInputType;
+  type: AgentOptimizationEvaluationSetType;
 }
 
 /** Evaluation set containing independent single-turn inputs. */
-model AgentOptimizationTargetCompletionSetInput
-  extends AgentOptimizationSetInput {
+model AgentOptimizationTargetCompletionEvaluationSet
+  extends AgentOptimizationEvaluationSet {
   @doc("Target-completion set discriminator.")
-  type: AgentOptimizationSetInputType.target_completion;
+  type: AgentOptimizationEvaluationSetType.target_completion;
 
   @doc("Inline test cases or an explicitly versioned registered Foundry dataset.")
-  source: AgentOptimizationTargetCompletionSetSource;
+  source: AgentOptimizationTargetCompletionDataSource;
 }
 
 /** Evaluation set containing scenarios for simulated conversations. */
-model AgentOptimizationUserConversationSimulationSetInput
-  extends AgentOptimizationSetInput {
+model AgentOptimizationUserConversationSimulationEvaluationSet
+  extends AgentOptimizationEvaluationSet {
   @doc("User-conversation-simulation set discriminator.")
-  type: AgentOptimizationSetInputType.user_conversation_simulation;
+  type: AgentOptimizationEvaluationSetType.user_conversation_simulation;
 
   @doc("Inline test cases or an explicitly versioned registered Foundry dataset.")
-  source: AgentOptimizationUserConversationSimulationSetSource;
+  source: AgentOptimizationUserConversationSimulationDataSource;
 
   @doc("Defaults applied to every scenario. A test case's simulation_configuration overrides corresponding properties.")
   default_simulation_configuration?: UserConversationSimulationConfiguration;
 }
 
 /** Source types supported by optimization evaluation sets. */
-union AgentOptimizationSetSourceType {
+union AgentOptimizationDataSourceType {
   string,
 
   @doc("Test cases supplied directly in the optimization request.")
@@ -97,23 +97,23 @@ union AgentOptimizationSetSourceType {
 
 /** Base source for a target-completion optimization evaluation set. */
 @discriminator("type")
-model AgentOptimizationTargetCompletionSetSource {
+model AgentOptimizationTargetCompletionDataSource {
   @doc("Target-completion source type. Additional types may be added in future API versions.")
-  type: AgentOptimizationSetSourceType;
+  type: AgentOptimizationDataSourceType;
 }
 
 /** Base source for a user-conversation-simulation optimization evaluation set. */
 @discriminator("type")
-model AgentOptimizationUserConversationSimulationSetSource {
+model AgentOptimizationUserConversationSimulationDataSource {
   @doc("User-conversation-simulation source type. Additional types may be added in future API versions.")
-  type: AgentOptimizationSetSourceType;
+  type: AgentOptimizationDataSourceType;
 }
 
 /** Supplies single-turn rows directly in the optimization request. */
-model AgentOptimizationTargetCompletionInlineSetSource
-  extends AgentOptimizationTargetCompletionSetSource {
+model AgentOptimizationTargetCompletionInlineDataSource
+  extends AgentOptimizationTargetCompletionDataSource {
   @doc("Inline source discriminator.")
-  type: AgentOptimizationSetSourceType.inline;
+  type: AgentOptimizationDataSourceType.inline;
 
   @doc("Target-completion test cases.")
   @minItems(1)
@@ -122,10 +122,10 @@ model AgentOptimizationTargetCompletionInlineSetSource
 }
 
 /** Supplies Evals user-conversation simulation test cases directly in the optimization request. */
-model AgentOptimizationUserConversationSimulationInlineSetSource
-  extends AgentOptimizationUserConversationSimulationSetSource {
+model AgentOptimizationUserConversationSimulationInlineDataSource
+  extends AgentOptimizationUserConversationSimulationDataSource {
   @doc("Inline source discriminator.")
-  type: AgentOptimizationSetSourceType.inline;
+  type: AgentOptimizationDataSourceType.inline;
 
   @doc("Conversation test scenarios.")
   @minItems(1)
@@ -134,10 +134,10 @@ model AgentOptimizationUserConversationSimulationInlineSetSource
 }
 
 /** References an explicitly versioned registered Foundry dataset for target-completion evaluation. */
-model AgentOptimizationTargetCompletionReferenceSetSource
-  extends AgentOptimizationTargetCompletionSetSource {
+model AgentOptimizationTargetCompletionDatasetReferenceDataSource
+  extends AgentOptimizationTargetCompletionDataSource {
   @doc("Registered dataset source discriminator.")
-  type: AgentOptimizationSetSourceType.dataset_reference;
+  type: AgentOptimizationDataSourceType.dataset_reference;
 
   @doc("Registered dataset name.")
   @minLength(1)
@@ -149,10 +149,10 @@ model AgentOptimizationTargetCompletionReferenceSetSource
 }
 
 /** References an explicitly versioned registered Foundry dataset for user-conversation-simulation evaluation. */
-model AgentOptimizationUserConversationSimulationReferenceSetSource
-  extends AgentOptimizationUserConversationSimulationSetSource {
+model AgentOptimizationUserConversationSimulationDatasetReferenceDataSource
+  extends AgentOptimizationUserConversationSimulationDataSource {
   @doc("Registered dataset source discriminator.")
-  type: AgentOptimizationSetSourceType.dataset_reference;
+  type: AgentOptimizationDataSourceType.dataset_reference;
 
   @doc("Registered dataset name.")
   @minLength(1)
@@ -297,10 +297,10 @@ model AgentOptimizationCandidateSearchConfiguration {
 /** Reusable quality-measurement configuration. */
 model AgentOptimizationEvaluationConfiguration {
   @doc("Evaluation set used to guide the optimization search. Inline data supports up to 2,000 test cases when a separate validation set is supplied; otherwise it is also used for validation and is limited to 500.")
-  training_set: AgentOptimizationSetInput;
+  training_set: AgentOptimizationEvaluationSet;
 
   @doc("Held-out evaluation set used for full candidate evaluation, limited to 500 inline test cases. The training set is reused and subject to the same 500-test-case validation limit when omitted.")
-  validation_set?: AgentOptimizationSetInput;
+  validation_set?: AgentOptimizationEvaluationSet;
 
   @doc("Evaluator references used to score candidate quality.")
   @minItems(1)

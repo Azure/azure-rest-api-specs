@@ -45724,6 +45724,14 @@ components:
             $ref: '#/components/schemas/AgentOptimizationStage'
           description: Stages excluded from the total because pricing was unavailable.
       description: Estimated monetary cost. Present only when at least one contributing model has pricing data.
+    AgentOptimizationDataSourceType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - inline
+            - dataset_reference
+      description: Source types supported by optimization evaluation sets.
     AgentOptimizationEstimateBand:
       type: object
       required:
@@ -45781,10 +45789,10 @@ components:
         - evaluation_model
       properties:
         training_set:
-          $ref: '#/components/schemas/AgentOptimizationSetInput'
+          $ref: '#/components/schemas/AgentOptimizationEvaluationSet'
           description: Evaluation set used to guide the optimization search. Inline data supports up to 2,000 test cases when a separate validation set is supplied; otherwise it is also used for validation and is limited to 500.
         validation_set:
-          $ref: '#/components/schemas/AgentOptimizationSetInput'
+          $ref: '#/components/schemas/AgentOptimizationEvaluationSet'
           description: Held-out evaluation set used for full candidate evaluation, limited to 500 inline test cases. The training set is reused and subject to the same 500-test-case validation limit when omitted.
         evaluators:
           type: array
@@ -45804,6 +45812,28 @@ components:
           description: Maximum number of target-agent runs executed concurrently during each single-turn evaluation. If omitted, the service defaults to 1. Conversation evaluation supports only 1.
           default: 1
       description: Reusable quality-measurement configuration.
+    AgentOptimizationEvaluationSet:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/AgentOptimizationEvaluationSetType'
+          description: Logical format of the evaluation set rows.
+      discriminator:
+        propertyName: type
+        mapping:
+          target_completion: '#/components/schemas/AgentOptimizationTargetCompletionEvaluationSet'
+          user_conversation_simulation: '#/components/schemas/AgentOptimizationUserConversationSimulationEvaluationSet'
+      description: Base discriminated model for an optimization evaluation set.
+    AgentOptimizationEvaluationSetType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - target_completion
+            - user_conversation_simulation
+      description: Logical row formats supported by optimization evaluation sets.
     AgentOptimizationEvaluator:
       type: object
       required:
@@ -46096,36 +46126,6 @@ components:
           $ref: '#/components/schemas/AgentOptimizationCandidatePromotionInfo'
           description: Most recently promoted candidate for the job. Omitted if no candidates have been promoted.
       description: Summary of candidates produced by an agent optimization job.
-    AgentOptimizationSetInput:
-      type: object
-      required:
-        - type
-      properties:
-        type:
-          $ref: '#/components/schemas/AgentOptimizationSetInputType'
-          description: Logical format of the evaluation set rows.
-      discriminator:
-        propertyName: type
-        mapping:
-          target_completion: '#/components/schemas/AgentOptimizationTargetCompletionSetInput'
-          user_conversation_simulation: '#/components/schemas/AgentOptimizationUserConversationSimulationSetInput'
-      description: Base discriminated model for an optimization evaluation set.
-    AgentOptimizationSetInputType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - target_completion
-            - user_conversation_simulation
-      description: Logical row formats supported by optimization evaluation sets.
-    AgentOptimizationSetSourceType:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - inline
-            - dataset_reference
-      description: Source types supported by optimization evaluation sets.
     AgentOptimizationSkill:
       type: object
       required:
@@ -46201,28 +46201,21 @@ components:
           $ref: '#/components/schemas/AgentOptimizationEstimateBand'
           description: Estimated values for calls that generate candidate changes.
       description: Estimated values grouped by optimization stage.
-    AgentOptimizationTargetCompletionInlineSetSource:
+    AgentOptimizationTargetCompletionDataSource:
       type: object
       required:
         - type
-        - test_cases
       properties:
         type:
-          type: string
-          enum:
-            - inline
-          description: Inline source discriminator.
-        test_cases:
-          type: array
-          items:
-            $ref: '#/components/schemas/AgentOptimizationTargetCompletionTestCase'
-          minItems: 1
-          maxItems: 2000
-          description: Target-completion test cases.
-      allOf:
-        - $ref: '#/components/schemas/AgentOptimizationTargetCompletionSetSource'
-      description: Supplies single-turn rows directly in the optimization request.
-    AgentOptimizationTargetCompletionReferenceSetSource:
+          $ref: '#/components/schemas/AgentOptimizationDataSourceType'
+          description: Target-completion source type. Additional types may be added in future API versions.
+      discriminator:
+        propertyName: type
+        mapping:
+          inline: '#/components/schemas/AgentOptimizationTargetCompletionInlineDataSource'
+          dataset_reference: '#/components/schemas/AgentOptimizationTargetCompletionDatasetReferenceDataSource'
+      description: Base source for a target-completion optimization evaluation set.
+    AgentOptimizationTargetCompletionDatasetReferenceDataSource:
       type: object
       required:
         - type
@@ -46243,9 +46236,9 @@ components:
           minLength: 1
           description: Registered dataset version.
       allOf:
-        - $ref: '#/components/schemas/AgentOptimizationTargetCompletionSetSource'
+        - $ref: '#/components/schemas/AgentOptimizationTargetCompletionDataSource'
       description: References an explicitly versioned registered Foundry dataset for target-completion evaluation.
-    AgentOptimizationTargetCompletionSetInput:
+    AgentOptimizationTargetCompletionEvaluationSet:
       type: object
       required:
         - type
@@ -46257,25 +46250,32 @@ components:
             - target_completion
           description: Target-completion set discriminator.
         source:
-          $ref: '#/components/schemas/AgentOptimizationTargetCompletionSetSource'
+          $ref: '#/components/schemas/AgentOptimizationTargetCompletionDataSource'
           description: Inline test cases or an explicitly versioned registered Foundry dataset.
       allOf:
-        - $ref: '#/components/schemas/AgentOptimizationSetInput'
+        - $ref: '#/components/schemas/AgentOptimizationEvaluationSet'
       description: Evaluation set containing independent single-turn inputs.
-    AgentOptimizationTargetCompletionSetSource:
+    AgentOptimizationTargetCompletionInlineDataSource:
       type: object
       required:
         - type
+        - test_cases
       properties:
         type:
-          $ref: '#/components/schemas/AgentOptimizationSetSourceType'
-          description: Target-completion source type. Additional types may be added in future API versions.
-      discriminator:
-        propertyName: type
-        mapping:
-          inline: '#/components/schemas/AgentOptimizationTargetCompletionInlineSetSource'
-          dataset_reference: '#/components/schemas/AgentOptimizationTargetCompletionReferenceSetSource'
-      description: Base source for a target-completion optimization evaluation set.
+          type: string
+          enum:
+            - inline
+          description: Inline source discriminator.
+        test_cases:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentOptimizationTargetCompletionTestCase'
+          minItems: 1
+          maxItems: 2000
+          description: Target-completion test cases.
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationTargetCompletionDataSource'
+      description: Supplies single-turn rows directly in the optimization request.
     AgentOptimizationTargetCompletionTestCase:
       type: object
       required:
@@ -46335,28 +46335,21 @@ components:
       allOf:
         - $ref: '#/components/schemas/AgentOptimizationMutation'
       description: Tool mutations.
-    AgentOptimizationUserConversationSimulationInlineSetSource:
+    AgentOptimizationUserConversationSimulationDataSource:
       type: object
       required:
         - type
-        - test_cases
       properties:
         type:
-          type: string
-          enum:
-            - inline
-          description: Inline source discriminator.
-        test_cases:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserConversationSimulationTestCase'
-          minItems: 1
-          maxItems: 2000
-          description: Conversation test scenarios.
-      allOf:
-        - $ref: '#/components/schemas/AgentOptimizationUserConversationSimulationSetSource'
-      description: Supplies Evals user-conversation simulation test cases directly in the optimization request.
-    AgentOptimizationUserConversationSimulationReferenceSetSource:
+          $ref: '#/components/schemas/AgentOptimizationDataSourceType'
+          description: User-conversation-simulation source type. Additional types may be added in future API versions.
+      discriminator:
+        propertyName: type
+        mapping:
+          inline: '#/components/schemas/AgentOptimizationUserConversationSimulationInlineDataSource'
+          dataset_reference: '#/components/schemas/AgentOptimizationUserConversationSimulationDatasetReferenceDataSource'
+      description: Base source for a user-conversation-simulation optimization evaluation set.
+    AgentOptimizationUserConversationSimulationDatasetReferenceDataSource:
       type: object
       required:
         - type
@@ -46377,9 +46370,9 @@ components:
           minLength: 1
           description: Registered dataset version.
       allOf:
-        - $ref: '#/components/schemas/AgentOptimizationUserConversationSimulationSetSource'
+        - $ref: '#/components/schemas/AgentOptimizationUserConversationSimulationDataSource'
       description: References an explicitly versioned registered Foundry dataset for user-conversation-simulation evaluation.
-    AgentOptimizationUserConversationSimulationSetInput:
+    AgentOptimizationUserConversationSimulationEvaluationSet:
       type: object
       required:
         - type
@@ -46391,28 +46384,35 @@ components:
             - user_conversation_simulation
           description: User-conversation-simulation set discriminator.
         source:
-          $ref: '#/components/schemas/AgentOptimizationUserConversationSimulationSetSource'
+          $ref: '#/components/schemas/AgentOptimizationUserConversationSimulationDataSource'
           description: Inline test cases or an explicitly versioned registered Foundry dataset.
         default_simulation_configuration:
           $ref: '#/components/schemas/UserConversationSimulationConfiguration'
           description: Defaults applied to every scenario. A test case's simulation_configuration overrides corresponding properties.
       allOf:
-        - $ref: '#/components/schemas/AgentOptimizationSetInput'
+        - $ref: '#/components/schemas/AgentOptimizationEvaluationSet'
       description: Evaluation set containing scenarios for simulated conversations.
-    AgentOptimizationUserConversationSimulationSetSource:
+    AgentOptimizationUserConversationSimulationInlineDataSource:
       type: object
       required:
         - type
+        - test_cases
       properties:
         type:
-          $ref: '#/components/schemas/AgentOptimizationSetSourceType'
-          description: User-conversation-simulation source type. Additional types may be added in future API versions.
-      discriminator:
-        propertyName: type
-        mapping:
-          inline: '#/components/schemas/AgentOptimizationUserConversationSimulationInlineSetSource'
-          dataset_reference: '#/components/schemas/AgentOptimizationUserConversationSimulationReferenceSetSource'
-      description: Base source for a user-conversation-simulation optimization evaluation set.
+          type: string
+          enum:
+            - inline
+          description: Inline source discriminator.
+        test_cases:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserConversationSimulationTestCase'
+          minItems: 1
+          maxItems: 2000
+          description: Conversation test scenarios.
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationUserConversationSimulationDataSource'
+      description: Supplies Evals user-conversation simulation test cases directly in the optimization request.
     AgentReference:
       type: object
       required:
