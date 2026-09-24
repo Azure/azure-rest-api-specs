@@ -8,6 +8,10 @@
     "deploymentName": "gpt-oss-120b-byoc",
     "api-version": "2026-09-15-preview",
     "properties": {
+      "tags": {
+        "environment": "test",
+        "owner": "model-team"
+      },
       "sku": {
         "name": "VmManagedCompute",
         "capacity": 2
@@ -21,6 +25,16 @@
         "name": "gpt-oss-120b-byoc",
         "type": "Microsoft.CognitiveServices/accounts/managedComputeDeployments",
         "etag": "\"0x8D...\"",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedIdentity/userAssignedIdentities/deployment-identity": {}
+          }
+        },
+        "tags": {
+          "environment": "test",
+          "owner": "model-team"
+        },
         "properties": {
           "model": "azureml://registries/azureml-openai-oss/models/gpt-oss-120b/versions/4",
           "deploymentTemplate": "projects/my-project/deploymentTemplates/gpt-oss-120b-vllm-tuned/versions/2",
