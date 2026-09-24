@@ -17,6 +17,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.AzureResilienceManagement;
 
 @added(Versions.v2026_09_30_preview)
+@removed(Versions.v2026_10_01)
 @doc("Reason why a recovery resource cannot be included in a recovery plan.")
 union ResourceInclusionDisabledReason {
   @added(Versions.v2026_09_30_preview)
@@ -58,6 +59,7 @@ model RecoveryResourceProperties {
   inclusionState?: ResourceInclusionState;
 
   @added(Versions.v2026_09_30_preview)
+  @removed(Versions.v2026_10_01)
   @visibility(Lifecycle.Read)
   @doc("Reasons why inclusion of the resource in a recovery plan is disabled.")
   inclusionDisabledReasons?: ResourceInclusionDisabledReason[];

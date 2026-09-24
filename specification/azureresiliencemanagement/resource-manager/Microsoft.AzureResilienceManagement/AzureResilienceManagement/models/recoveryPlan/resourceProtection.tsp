@@ -59,6 +59,7 @@ union TestFailoverState {
 }
 
 @added(Versions.v2026_09_30_preview)
+@removed(Versions.v2026_10_01)
 @doc("Replication mode configured for a protected resource.")
 union ReplicationMode {
   @added(Versions.v2026_09_30_preview)
@@ -83,6 +84,7 @@ model ResourceProtectionSolutionSettings {
   protectionSolutionType?: ResourceProtectionSolutionType;
 
   @added(Versions.v2026_09_30_preview)
+  @removed(Versions.v2026_10_01)
   @doc("Replication mode configured for the protected resource.")
   replicationMode?: ReplicationMode;
 
@@ -145,6 +147,7 @@ model ResourceBaseProtectionSolutionSetting {
 }
 
 @added(Versions.v2026_09_30_preview)
+@removed(Versions.v2026_10_01)
 @doc("Definition of recovery orchestration resource protection using an Azure Resource Manager template.")
 model ResourceAzureTemplateProtectionSetting
   extends ResourceBaseProtectionSolutionSetting {
@@ -184,6 +187,7 @@ model ResourceAzureTemplateProtectionSetting
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "DB preserves the established Azure Cosmos DB product casing."
 @added(Versions.v2026_09_30_preview)
+@removed(Versions.v2026_10_01)
 @doc("Definition of recovery orchestration resource protection using Azure Cosmos DB.")
 model ResourceCosmosDBProtectionSetting
   extends ResourceBaseProtectionSolutionSetting {
@@ -193,6 +197,7 @@ model ResourceCosmosDBProtectionSetting
 }
 
 @added(Versions.v2026_09_30_preview)
+@removed(Versions.v2026_10_01)
 @doc("Definition of recovery orchestration resource protection using an Azure Storage account.")
 model ResourceStorageAccountProtectionSetting
   extends ResourceBaseProtectionSolutionSetting {
@@ -202,6 +207,7 @@ model ResourceStorageAccountProtectionSetting
 }
 
 @added(Versions.v2026_09_30_preview)
+@removed(Versions.v2026_10_01)
 @doc("Definition of recovery orchestration resource protection using Azure Service Bus.")
 model ResourceServiceBusProtectionSetting
   extends ResourceBaseProtectionSolutionSetting {
@@ -211,6 +217,7 @@ model ResourceServiceBusProtectionSetting
 }
 
 @added(Versions.v2026_09_30_preview)
+@removed(Versions.v2026_10_01)
 @doc("Definition of recovery orchestration resource protection using Azure NetApp Files.")
 model ResourceNetAppFilesProtectionSetting
   extends ResourceBaseProtectionSolutionSetting {
