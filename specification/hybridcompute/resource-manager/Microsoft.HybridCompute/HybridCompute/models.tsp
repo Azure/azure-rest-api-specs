@@ -2269,6 +2269,12 @@ model MachineUpdateProperties {
    * Endorsement Key Certificate of the Trusted Platform Module (TPM) that the client provides to be used during initial resource onboarding.
    */
   tpmEkCertificate?: string;
+
+  /**
+   * Public Key that the client provides to be used during initial resource onboarding
+   */
+  @added(Versions.v2026_09_01)
+  clientPublicKey?: string;
 }
 
 /**
