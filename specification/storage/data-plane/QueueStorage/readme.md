@@ -2,20 +2,19 @@
 
 > see https://aka.ms/autorest
 
-This is the configuration file for QueueStorage swaggers.
+This is the AutoRest configuration file for QueueStorage.
 
 ---
 
 ## Getting Started
 
-To generate the swagger in this folder, run:
+To build the SDK for QueueStorage, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
-> `tsp compile .`
+> `autorest`
 
 To see additional help and options, run:
 
-> `tsp --help`
-
+> `autorest --help`
 ---
 
 ## Configuration
@@ -24,20 +23,56 @@ To see additional help and options, run:
 
 These are the global settings for the QueueStorage API.
 
-```yaml
+``` yaml
 openapi-type: data-plane
 tag: package-2026-04-tsp
 use-internal-constructors: true
 add-credentials: true
 ```
 
+### Tag: package-2018-03-preview
+
+These settings apply only when `--tag=package-2018-03-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-03-preview'
+input-file:
+- preview/2018-03-28/queue.json
+```
+
+### Tag: package-2018-03
+
+These settings apply only when `--tag=package-2018-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-03'
+input-file:
+- stable/2018-03-28/queue.json
+```
+
+### Tag: package-2026-02
+
+These settings apply only when `--tag=package-2026-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-02'
+input-file:
+- stable/2026-02-06/queue.json
+```
+
+### Tag: package-2026-04
+
+These settings apply only when `--tag=package-2026-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-04'
+input-file:
+- stable/2026-04-06/queue.json
+```
+
 ### Tag: package-2026-04-tsp
 
 These settings apply only when `--tag=package-2026-04-tsp` is specified on the command line.
 
-```yaml $(tag) == 'package-2026-04-tsp'
+``` yaml $(tag) == 'package-2026-04-tsp'
 input-file:
-  - stable/2026-04-06/generated_queue.json
+- stable/2026-04-06/generated_queue.json
 ```
 
 ### Suppression

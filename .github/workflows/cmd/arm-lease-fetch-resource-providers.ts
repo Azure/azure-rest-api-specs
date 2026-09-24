@@ -27,6 +27,19 @@ export function hasVersionDirectories(rpPath: string): boolean {
 }
 
 /**
+ * Check whether a resource provider has a single TypeSpec project wrapper with version directories.
+ * @param rpPath - Path to the resource provider
+ * @param serviceNames - Direct child directories considered service names
+ * @returns True if the resource provider's versions are nested beneath a TypeSpec project wrapper
+ */
+function hasSingleProjectWrapper(rpPath: string, serviceNames: string[]): boolean {
+  if (serviceNames.length !== 1) return false;
+
+  const projectPath = join(rpPath, serviceNames[0]);
+  return existsSync(join(projectPath, "tspconfig.yaml")) && hasVersionDirectories(projectPath);
+}
+
+/**
  * Check if a directory looks like the repository root
  * @param dir - Directory to check
  * @returns True if it looks like repo root
@@ -102,15 +115,20 @@ export function findResourceProviders(
       const serviceNames = readdirSync(rpPath)
         .filter((sn) => isServiceNameDirectory(join(rpPath, sn)))
         .sort();
+      const hasProjectWrapper = hasSingleProjectWrapper(rpPath, serviceNames);
 
       if (withServiceNames && serviceNames.length > 0) {
+        if (hasProjectWrapper) continue;
         results.push({
           rpNamespace: rpNamespace,
           path: relative(repoRoot, rpPath),
           orgName: orgName,
           serviceNames: serviceNames,
         });
-      } else if (!withServiceNames && serviceNames.length === 0 && hasVersionDirectories(rpPath)) {
+      } else if (
+        !withServiceNames &&
+        ((serviceNames.length === 0 && hasVersionDirectories(rpPath)) || hasProjectWrapper)
+      ) {
         results.push({
           rpNamespace: rpNamespace,
           path: relative(repoRoot, rpPath),
