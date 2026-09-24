@@ -1194,7 +1194,6 @@ model KnowledgeBaseWorkIQReference extends KnowledgeBaseReference {
   attributions?: WorkIQAttribution[];
 
   /** The sensitivity label information for the reference. */
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   searchSensitivityLabelInfo?: PurviewSensitivityLabelInfo;
 }
@@ -1349,7 +1348,6 @@ model ImageServingStatistics {
   verbalizationUsed?: boolean;
 
   /** The set of images the model selected to be served to the downstream model for this retrieval activity. */
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   servedImages?: ServedImage[];
 }

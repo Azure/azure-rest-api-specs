@@ -5423,7 +5423,6 @@ model WorkIQKnowledgeSource extends KnowledgeSource {
 
   /** The parameters for the WorkIQ knowledge source, including the customer-owned Entra app configuration used for on-behalf-of authentication. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   workIQParameters: WorkIQKnowledgeSourceParameters;
 }
@@ -5560,7 +5559,6 @@ model McpServerTool {
   inclusionMode?: McpServerToolInclusionMode;
 
   /** Controls whether the parsed results from this tool are reranked. Defaults to 'rerank' when not specified. */
-  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   resultsProcessing?: KnowledgeSourceResultsProcessing;
 
