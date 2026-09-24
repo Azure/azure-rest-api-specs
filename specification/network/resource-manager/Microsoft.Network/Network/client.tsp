@@ -5169,18 +5169,6 @@ op replaceprivateDnsZoneGroupsList(
 @@clientName(Microsoft.Network.IPTraffic, "NetworkVerifierIPTraffic", "csharp");
 
 @@clientName(
-  Microsoft.Network.RoutingConfiguration,
-  "RoutingConfigurationNfv",
-  "csharp"
-);
-
-@@clientName(
-  Microsoft.Network.PropagatedRouteTable,
-  "PropagatedRouteTableNfv",
-  "csharp"
-);
-
-@@clientName(
   Common.PrivateEndpointVNetPolicies,
   "PrivateEndpointVnetPolicy",
   "csharp"
