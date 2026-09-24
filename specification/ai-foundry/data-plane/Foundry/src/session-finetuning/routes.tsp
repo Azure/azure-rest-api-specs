@@ -58,12 +58,12 @@ interface FineTuningSessions {
   list is FineTuningSessionOperation<
     {
       /** Maximum number of sessions to return in this page. If omitted, the service defaults to 20. */
-      @query("limit")
+      @query
       @pageSize
       limit?: int32 = 20;
 
       /** Number of sessions to skip before returning this page. If omitted, the service defaults to 0. */
-      @query("offset")
+      @query
       @offset
       offset?: int32 = 0;
     },
