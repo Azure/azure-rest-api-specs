@@ -8684,6 +8684,18 @@
         "description": "Returns a list of data generation jobs.",
         "parameters": [
           {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "DataGenerationJobs=V1Preview"
+              ]
+            }
+          },
+          {
             "name": "limit",
             "in": "query",
             "required": false,
@@ -8796,13 +8808,30 @@
         },
         "tags": [
           "DataGenerationJobs"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "post": {
         "operationId": "DataGenerationJobs_create",
         "summary": "Create a data generation job",
         "description": "Submits a new data generation job for asynchronous execution.",
         "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "DataGenerationJobs=V1Preview"
+              ]
+            }
+          },
           {
             "name": "Operation-Id",
             "in": "header",
@@ -8884,6 +8913,11 @@
             }
           },
           "description": "The data generation job inputs to create."
+        },
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
         }
       }
     },
@@ -8893,6 +8927,18 @@
         "summary": "Get a data generation job",
         "description": "Retrieves the specified data generation job and its current status.",
         "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "DataGenerationJobs=V1Preview"
+              ]
+            }
+          },
           {
             "name": "jobId",
             "in": "path",
@@ -8957,13 +9003,30 @@
         },
         "tags": [
           "DataGenerationJobs"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "delete": {
         "operationId": "DataGenerationJobs_delete",
         "summary": "Delete a data generation job",
         "description": "Removes the specified data generation job and its associated output.",
         "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "DataGenerationJobs=V1Preview"
+              ]
+            }
+          },
           {
             "name": "jobId",
             "in": "path",
@@ -9011,7 +9074,12 @@
         },
         "tags": [
           "DataGenerationJobs"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       }
     },
     "/data_generation_jobs/{jobId}:cancel": {
@@ -9020,6 +9088,18 @@
         "summary": "Cancel a data generation job",
         "description": "Cancels the specified data generation job if it is still in progress.",
         "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": false,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "DataGenerationJobs=V1Preview"
+              ]
+            }
+          },
           {
             "name": "jobId",
             "in": "path",
@@ -9074,7 +9154,12 @@
         },
         "tags": [
           "DataGenerationJobs"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       }
     },
     "/datasets": {
@@ -31777,7 +31862,12 @@
             "$ref": "#/components/schemas/DataGenerationJobSource"
           }
         ],
-        "description": "Agent source for data generation jobs — references an agent to fetch instructions and metadata from."
+        "description": "Agent source for data generation jobs — references an agent to fetch instructions and metadata from.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "AgentDefinition": {
         "type": "object",
@@ -37353,7 +37443,12 @@
             "readOnly": true
           }
         },
-        "description": "Data Generation Job resource."
+        "description": "Data Generation Job resource.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "DataGenerationJobInputs": {
         "type": "object",
@@ -37392,7 +37487,12 @@
             "reinforcement_finetuning": "#/components/schemas/ReinforcementFineTuningDataGenerationJobInputs"
           }
         },
-        "description": "Caller-supplied inputs for a data generation job."
+        "description": "Caller-supplied inputs for a data generation job.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "DataGenerationJobOptions": {
         "type": "object",
@@ -37425,7 +37525,12 @@
             "tool_use": "#/components/schemas/ToolUseFineTuningDataGenerationJobOptions"
           }
         },
-        "description": "Options for managing data generation jobs."
+        "description": "Options for managing data generation jobs.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "DataGenerationJobOutput": {
         "type": "object",
@@ -37445,7 +37550,12 @@
             "dataset": "#/components/schemas/DatasetDataGenerationJobOutput"
           }
         },
-        "description": "Output information for a data generation job."
+        "description": "Output information for a data generation job.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "DataGenerationJobOutputType": {
         "anyOf": [
@@ -37460,7 +37570,12 @@
             ]
           }
         ],
-        "description": "The supported output file types for a data generation job."
+        "description": "The supported output file types for a data generation job.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "DataGenerationJobOutputWriteMode": {
         "anyOf": [
@@ -37475,7 +37590,12 @@
             ]
           }
         ],
-        "description": "The supported write modes for data generation job outputs."
+        "description": "The supported write modes for data generation job outputs.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "DataGenerationJobResult": {
         "type": "object",
@@ -37500,7 +37620,12 @@
             "description": "The token usage information for the data generation job."
           }
         },
-        "description": "Result produced by a successful data generation job."
+        "description": "Result produced by a successful data generation job.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "DataGenerationJobScenario": {
         "anyOf": [
@@ -37516,7 +37641,12 @@
             ]
           }
         ],
-        "description": "The supported scenarios for a data generation job."
+        "description": "The supported scenarios for a data generation job.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "DataGenerationJobSource": {
         "type": "object",
@@ -37542,7 +37672,12 @@
             "file": "#/components/schemas/FileDataGenerationJobSource"
           }
         },
-        "description": "The base source model for data generation jobs."
+        "description": "The base source model for data generation jobs.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "DataGenerationJobSourceType": {
         "anyOf": [
@@ -37559,7 +37694,12 @@
             ]
           }
         ],
-        "description": "The supported source types for data generation jobs."
+        "description": "The supported source types for data generation jobs.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "DataGenerationJobType": {
         "anyOf": [
@@ -37576,7 +37716,12 @@
             ]
           }
         ],
-        "description": "The supported data generation job types."
+        "description": "The supported data generation job types.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "DataGenerationModelOptions": {
         "type": "object",
@@ -37589,7 +37734,12 @@
             "description": "Base model name used to generate data."
           }
         },
-        "description": "LLM model options for data generation jobs."
+        "description": "LLM model options for data generation jobs.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "DataGenerationTokenUsage": {
         "type": "object",
@@ -37618,7 +37768,12 @@
             "readOnly": true
           }
         },
-        "description": "Token usage information for a data generation job."
+        "description": "Token usage information for a data generation job.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "DataSourceConfig": {
         "type": "object",
@@ -37692,7 +37847,12 @@
             "$ref": "#/components/schemas/DataGenerationJobOutput"
           }
         ],
-        "description": "Dataset output for a data generation job."
+        "description": "Dataset output for a data generation job.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "DatasetEvaluatorGenerationJobSource": {
         "type": "object",
@@ -39212,7 +39372,12 @@
             "$ref": "#/components/schemas/DataGenerationJobInputs"
           }
         ],
-        "description": "Caller-supplied inputs for an evaluation data generation job."
+        "description": "Caller-supplied inputs for an evaluation data generation job.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "EvaluationDataGenerationJobOutputTarget": {
         "type": "object",
@@ -39238,7 +39403,12 @@
             "default": "overwrite"
           }
         },
-        "description": "Dataset output target for an evaluation data generation job."
+        "description": "Dataset output target for an evaluation data generation job.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "EvaluationDataset": {
         "type": "object",
@@ -40728,7 +40898,12 @@
             "$ref": "#/components/schemas/DataGenerationJobOutput"
           }
         ],
-        "description": "Azure OpenAI file output for a data generation job."
+        "description": "Azure OpenAI file output for a data generation job.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "FileDataGenerationJobSource": {
         "type": "object",
@@ -40754,7 +40929,12 @@
             "$ref": "#/components/schemas/DataGenerationJobSource"
           }
         ],
-        "description": "File source for data generation jobs — Azure OpenAI file input."
+        "description": "File source for data generation jobs — Azure OpenAI file input.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "FileDatasetVersion": {
         "type": "object",
@@ -83917,7 +84097,12 @@
             "$ref": "#/components/schemas/DataGenerationJobSource"
           }
         ],
-        "description": "Prompt source for data generation jobs — inline text provided by the user."
+        "description": "Prompt source for data generation jobs — inline text provided by the user.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "PromptEvaluatorGenerationJobSource": {
         "type": "object",
@@ -84500,7 +84685,12 @@
             "$ref": "#/components/schemas/DataGenerationJobInputs"
           }
         ],
-        "description": "Caller-supplied inputs for a reinforcement fine-tuning data generation job."
+        "description": "Caller-supplied inputs for a reinforcement fine-tuning data generation job.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "ReinforcementFineTuningDataGenerationJobOutputTarget": {
         "type": "object",
@@ -84522,7 +84712,12 @@
             "description": "File ID to merge into when `write_mode` is `merge`."
           }
         },
-        "description": "File output target for a reinforcement fine-tuning data generation job."
+        "description": "File output target for a reinforcement fine-tuning data generation job.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "ReminderPreviewToolboxTool": {
         "type": "object",
@@ -86001,7 +86196,12 @@
             "$ref": "#/components/schemas/DataGenerationJobOptions"
           }
         ],
-        "description": "The options for a data generation job with SimpleQnA type."
+        "description": "The options for a data generation job with SimpleQnA type.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "SimpleQnAFineTuningQuestionType": {
         "anyOf": [
@@ -86016,7 +86216,12 @@
             ]
           }
         ],
-        "description": "The supported question types for SimpleQnA data generation jobs used for fine-tuning scenarios."
+        "description": "The supported question types for SimpleQnA data generation jobs used for fine-tuning scenarios.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "SimulationSeedDataGenerationJobOptions": {
         "type": "object",
@@ -86037,7 +86242,12 @@
             "$ref": "#/components/schemas/DataGenerationJobOptions"
           }
         ],
-        "description": "The options for a task generation data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`."
+        "description": "The options for a task generation data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "SipTelephonyTransferDestination": {
         "type": "object",
@@ -86373,7 +86583,12 @@
             "$ref": "#/components/schemas/DataGenerationJobInputs"
           }
         ],
-        "description": "Caller-supplied inputs for a supervised fine-tuning data generation job."
+        "description": "Caller-supplied inputs for a supervised fine-tuning data generation job.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "SupervisedFineTuningDataGenerationJobOutputTarget": {
         "type": "object",
@@ -86395,7 +86610,12 @@
             "description": "File ID to merge into when `write_mode` is `merge`."
           }
         },
-        "description": "File output target for a supervised fine-tuning data generation job."
+        "description": "File output target for a supervised fine-tuning data generation job.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "SyntheticDataGenerationPreviewEvalRunDataSource": {
         "type": "object",
@@ -88447,7 +88667,12 @@
             "$ref": "#/components/schemas/DataGenerationJobOptions"
           }
         ],
-        "description": "The options for a data generation job with ToolUse type. Used only for fine-tuning scenarios."
+        "description": "The options for a data generation job with ToolUse type. Used only for fine-tuning scenarios.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "ToolboxObject": {
         "type": "object",
@@ -88956,7 +89181,12 @@
             "$ref": "#/components/schemas/DataGenerationJobOptions"
           }
         ],
-        "description": "The options for a data generation job with Traces type."
+        "description": "The options for a data generation job with Traces type.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "TracesDataGenerationJobSource": {
         "type": "object",
@@ -89009,7 +89239,12 @@
             "$ref": "#/components/schemas/DataGenerationJobSource"
           }
         ],
-        "description": "Traces source for data generation jobs — conversation traces from Application Insights."
+        "description": "Traces source for data generation jobs — conversation traces from Application Insights.",
+        "x-ms-foundry-meta": {
+          "conditional_previews": [
+            "DataGenerationJobs=V1Preview"
+          ]
+        }
       },
       "TracesEvaluatorGenerationJobSource": {
         "type": "object",

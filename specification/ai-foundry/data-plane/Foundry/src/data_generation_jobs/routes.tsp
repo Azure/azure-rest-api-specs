@@ -1,6 +1,7 @@
 import "./models.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.OpenAPI;
 using Azure.Core;
 
 namespace Azure.AI.Projects;
@@ -14,14 +15,22 @@ interface DataGenerationJobs {
    */
   @summary("Get a data generation job")
   @route("data_generation_jobs/{jobId}")
-  get is queryJobStatus<DataGenerationJob>;
+  @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
+  get is queryJobStatusPreview<
+    FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview,
+    DataGenerationJob
+  >;
 
   /**
    * Returns a list of data generation jobs.
    */
   @summary("List data generation jobs")
   @route("data_generation_jobs")
-  list is listJobs<DataGenerationJob>;
+  @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
+  list is listJobsPreview<
+    FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview,
+    DataGenerationJob
+  >;
 
   /**
    * Submits a new data generation job for asynchronous execution.
@@ -29,9 +38,11 @@ interface DataGenerationJobs {
   #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
   @summary("Create a data generation job")
   @route("data_generation_jobs")
+  @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
   @pollingOperation(DataGenerationJobs.get)
   @post
-  create is FoundryDataPlaneOperation<
+  create is FoundryDataPlanePreviewOperation<
+    FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview,
     {
       ...WithOperationId;
 
@@ -46,12 +57,17 @@ interface DataGenerationJobs {
    */
   @summary("Cancel a data generation job")
   @route("data_generation_jobs/{jobId}:cancel")
-  cancel is cancelJob<DataGenerationJob>;
+  @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
+  cancel is cancelJobPreview<
+    FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview,
+    DataGenerationJob
+  >;
 
   /**
    * Removes the specified data generation job and its associated output.
    */
   @summary("Delete a data generation job")
   @route("data_generation_jobs/{jobId}")
-  delete is deleteJob<DataGenerationJob>;
+  @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
+  delete is deleteJobPreview<FoundryFeaturesOptInKeys.data_generation_jobs_v1_preview>;
 }
