@@ -1372,7 +1372,11 @@ namespace Azure.AI.Projects {
     "incomplete",
     "in_progress",
   }
-  @@alternateType(OpenAI.RealtimeResponse.status, LocalVoiceResponseStatus, "csharp");
+  @@alternateType(
+    OpenAI.RealtimeResponse.status,
+    LocalVoiceResponseStatus,
+    "csharp"
+  );
   @@alternateType(
     LocalVoiceResponseStatus,
     {
@@ -1461,8 +1465,16 @@ namespace Azure.AI.Projects {
     "connector_outlookemail",
     "connector_sharepoint",
   }
-  @@alternateType(OpenAI.MCPTool.connector_id, MCPToolboxToolConnectorId, "csharp");
-  @@clientNamespace(MCPToolboxToolConnectorId, "Azure.AI.Projects.Agents", "csharp");
+  @@alternateType(
+    OpenAI.MCPTool.connector_id,
+    MCPToolboxToolConnectorId,
+    "csharp"
+  );
+  @@clientNamespace(
+    MCPToolboxToolConnectorId,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
 
   union VoiceAgentAudioInputConfigTranscriptionDelay {
     "minimal",
