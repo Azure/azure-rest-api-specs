@@ -28,16 +28,6 @@ function Get-ChangedSwaggerFiles($changedFiles = (Get-ChangedFiles)) {
   return $changedSwaggerFiles
 }
 
-function Get-ChangedTypeSpecFiles($changedFiles = (Get-ChangedFiles)) {
-  $changedFiles = Get-ChangedFilesUnderSpecification $changedFiles
-
-  $changedTypeSpecFiles = $changedFiles.Where({ 
-    $_.EndsWith(".tsp")
-  })
-    
-  return $changedTypeSpecFiles
-}
-
 function Get-ChangedFilesUnderSpecification($changedFiles = (Get-ChangedFiles)) {
   $changedFilesUnderSpecification = $changedFiles.Where({ 
     $_.StartsWith("specification")
@@ -49,15 +39,17 @@ function Get-ChangedFilesUnderSpecification($changedFiles = (Get-ChangedFiles)) 
 function Get-ChangedCoreFiles($changedFiles = (Get-ChangedFiles)) {
   $rootFiles = @(
     ".gitattributes",
+    ".oxfmtrc.json",
     ".prettierrc.json",
-    "package-lock.json",
+    "pnpm-lock.yaml",
+    "pnpm-workspace.yaml",
     "package.json",
     "tsconfig.json",
     "specification/suppressions.yaml"
   )
 
   $coreFiles = $changedFiles.Where({ 
-    $_.StartsWith(".github/") -or
+    ($_.StartsWith(".github/") -and !$_.StartsWith(".github/arm-leases/")) -or
     ($_.StartsWith("eng/") -and !$_.StartsWith("eng/common/")) -or
     $_.StartsWith("specification/common-types/") -or
     $_ -in $rootFiles

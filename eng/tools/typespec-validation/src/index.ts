@@ -1,7 +1,8 @@
+import { type Suppression } from "@azure-tools/suppressions";
 import { stat } from "node:fs/promises";
 import { type ParseArgsConfig, parseArgs } from "node:util";
-import { type Suppression } from "suppressions";
 import { type Rule } from "./rule.ts";
+import { runAll } from "./run-all.ts";
 import { ClientTspImportRule } from "./rules/client-tsp-import.ts";
 import { CompileRule } from "./rules/compile.ts";
 import { EmitAutorestRule } from "./rules/emit-autorest.ts";
@@ -80,8 +81,44 @@ export async function main() {
       type: "string",
       short: "c",
     },
-  };
-  const parsedArgs = parseArgs({ args, options, allowPositionals: true } as ParseArgsConfig);
+    all: {
+      type: "boolean",
+    },
+    shard: {
+      type: "string",
+    },
+    "git-clean": {
+      type: "boolean",
+    },
+  } satisfies ParseArgsConfig["options"];
+  const parsedArgs = parseArgs({ args, options, allowPositionals: true });
+
+  if (parsedArgs.values["git-clean"] && !parsedArgs.values.all) {
+    console.error("--git-clean requires --all");
+    process.exitCode = 1;
+    return;
+  }
+
+  if (parsedArgs.values.shard !== undefined && !parsedArgs.values.all) {
+    console.error("--shard requires --all");
+    process.exitCode = 1;
+    return;
+  }
+
+  if (parsedArgs.values.all) {
+    if (parsedArgs.positionals.length > 1) {
+      console.error("Usage: tsv --all [folder] [--shard=<index>/<count>] [--git-clean]");
+      process.exitCode = 1;
+      return;
+    }
+    const success = await runAll(parsedArgs.positionals[0] ?? "specification", {
+      gitClean: parsedArgs.values["git-clean"] === true,
+      shard: parsedArgs.values.shard,
+    });
+    if (!success) process.exitCode = 1;
+    return;
+  }
+
   const folder = parsedArgs.positionals[0];
 
   if (parsedArgs.positionals[1]) {

@@ -6,6 +6,8 @@
 // It is imported by the client.tsp file, which is used for emitting the Python and JS clients.
 // See https://azure.github.io/typespec-azure/docs/howtos/generate-client-libraries/03client/#move-all-operations-to-root-client
 
+import "./ops-relocation-voice-agents.tsp";
+
 using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.Projects {
@@ -24,6 +26,18 @@ namespace Azure.AI.Projects {
   );
   @@clientLocation(
     Azure.AI.Projects.AgentSessionFiles.deleteSessionFile,
+    Agents
+  );
+  @@clientLocation(
+    Azure.AI.Projects.Microsoft365Publishing.publishAgentToMicrosoft365,
+    Agents
+  );
+  @@clientLocation(
+    Azure.AI.Projects.Microsoft365Publishing.getMicrosoft365AppPackage,
+    Agents
+  );
+  @@clientLocation(
+    Azure.AI.Projects.Microsoft365Publishing.getMicrosoft365PublishDefaults,
     Agents
   );
 }
@@ -60,7 +74,6 @@ namespace Azure.AI.Projects.Beta {
   @@clientLocation(Azure.AI.Projects.MemoryStores.listMemories, MemoryStores);
   @@clientLocation(Azure.AI.Projects.MemoryStores.deleteMemory, MemoryStores);
 
-  interface Agents {}
   @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.create, Agents);
   @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.get, Agents);
   @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.list, Agents);

@@ -1,5 +1,5 @@
 <!-- NOTE: This comment is for file maintainers only and is not rendered.
-     Upstream alignment: 2026-04-15
+     Upstream alignment: 2026-08-15
      Derived from:
        - @microsoft.azure/openapi-validator-rulesets v2.2.6
        - LintDiff test fixtures in eng/tools/lint-diff/
@@ -8,11 +8,11 @@
 
 # Linter Rule Coverage Map
 
-This reference maps every linter rule ID from `@microsoft.azure/openapi-validator`
-to its corresponding instruction file section or reference file. The goal is to
-ensure the ARM API Reviewer agent can flag every violation the linter catches,
-and reviewers can cross-reference linter findings with the detailed guidance in
-instruction files.
+This reference maps linter rules that the Reviewer cites or must account for
+when suggesting fixes. It is not an exhaustive substitute for the pinned
+`@microsoft.azure/openapi-validator-rulesets` package; that package remains the
+authoritative inventory. The goal is to cross-reference reviewer findings and
+identify required CI rules whose behavior affects a suggested fix.
 
 **How to use this file:**
 
@@ -30,13 +30,16 @@ instruction files.
 | Linter Rule ID | Name                         | Instruction Coverage                     | Status       |
 | -------------- | ---------------------------- | ---------------------------------------- | ------------ |
 | R4011          | DeleteOperationResponses     | arm-api-review §5.1 (RPC-Delete-V1-01)   | ✅ Covered   |
-| R4028          | ValidResponseCodeRequired    | openapi-review §6                        | ✅ Covered   |
+| R4028          | ValidResponseCodeRequired    | openapi-review §5                        | ✅ Covered   |
 | --             | DeleteResponseCodes          | arm-api-review §5.1 (RPC-Delete-V1-01)   | ✅ Annotated |
 | --             | PatchResponseCodes           | arm-api-review §4.2 (RPC-Patch-V1-06)    | ✅ Covered   |
 | --             | PostResponseCodes            | arm-api-review §12.1 (RPC-POST-V1-02/03) | ✅ Covered   |
 | --             | PutResponseCodes             | arm-api-review §3.1 (RPC-Put-V1-11)      | ✅ Annotated |
 | R3013          | DeleteMustNotHaveRequestBody | arm-api-review §5.2                      | ✅ Covered   |
-| R2044          | InvalidVerbUsed              | openapi-review §6                        | ✅ Covered   |
+| --             | DeleteResponseBodyEmpty      | arm-api-review §5.1 (RPC-Delete-V1-04)   | ✅ Covered   |
+| --             | GetMustNotHaveRequestBody    | --                                       | ❌ GAP       |
+| --             | GetResponseCodes             | --                                       | ❌ GAP       |
+| R2044          | InvalidVerbUsed              | openapi-review §5                        | ✅ Covered   |
 
 ## PUT / PATCH / GET Contract Rules
 
@@ -48,27 +51,29 @@ instruction files.
 | R2017          | PutRequestResponseScheme                 | arm-api-review §3.1 (RPC-Put-V1-25)    | ✅ Covered   |
 | R3007          | PutGetPatchResponseSchema                | arm-api-review §3.1 (RPC-Put-V1-12)    | ✅ Covered   |
 | --             | PatchPropertiesCorrespondToPutProperties | arm-api-review §4                      | ✅ Covered   |
-| R2062          | XmsResourceInPutResponse                 | arm-api-review §2.1 (RPC-Put-V1-12)    | ✅ Covered   |
+| R2062          | XmsResourceInPutResponse                 | arm-api-review §2.1                    | ✅ Covered   |
 | --             | ConsistentResponseSchemaForPut           | arm-api-review §3.1 (RPC-Put-V1-29)    | ✅ Annotated |
 | --             | ConsistentPatchProperties                | arm-api-review §4.3a (RPC-Patch-V1-01) | ✅ Annotated |
 
 ## Resource Lifecycle Rules
 
-| Linter Rule ID | Name                                         | Instruction Coverage                                             | Status       |
-| -------------- | -------------------------------------------- | ---------------------------------------------------------------- | ------------ |
-| R3025          | TrackedResourceGetOperation                  | tracked-resource-lifecycle.md                                    | ✅ Covered   |
-| R3026          | TrackedResourcePatchOperation                | tracked-resource-lifecycle.md                                    | ✅ Covered   |
-| R3027          | TrackedResourceListByResourceGroup           | tracked-resource-lifecycle.md                                    | ✅ Covered   |
-| R3028          | TrackedResourceListBySubscription            | tracked-resource-lifecycle.md                                    | ✅ Covered   |
-| R4014          | AllResourcesMustHaveGetOperation             | arm-api-review §2.7                                              | ✅ Covered   |
-| R4015          | NestedResourcesMustHaveListOperation         | arm-api-review §2.3                                              | ✅ Covered   |
-| R4016          | TopLevelResourcesListByResourceGroup         | policy-compatibility.md PLCY007                                  | ✅ Covered   |
-| R4017          | TopLevelResourcesListBySubscription          | policy-compatibility.md PLCY007                                  | ✅ Covered   |
-| R3010          | TrackedResourceListByImmediateParent         | arm-api-review §2.3                                              | ✅ Covered   |
-| --             | MissingSegmentsInNestedResourceListOperation | arm-api-review §2.3                                              | ✅ Covered   |
-| --             | AllProxyResourcesShouldHaveDelete            | arm-api-review §5.1 (RPC-Delete-V1-05)                           | ✅ Covered   |
-| --             | TrackedExtensionResourcesAreNotAllowed       | arm-api-review §1.2 (RPC-Uri-V1-12)                              | ✅ Annotated |
-| --             | ReservedResourceNamesModelAsEnum             | tracked-resource-lifecycle.md (RPC-ConstrainedCollections-V1-04) | ✅ Annotated |
+| Linter Rule ID | Name                                         | Instruction Coverage                                       | Status       |
+| -------------- | -------------------------------------------- | ---------------------------------------------------------- | ------------ |
+| R3025          | TrackedResourceGetOperation                  | tracked-resource-lifecycle.md                              | ✅ Covered   |
+| R3026          | TrackedResourcePatchOperation                | tracked-resource-lifecycle.md                              | ✅ Covered   |
+| R3027          | TrackedResourceListByResourceGroup           | tracked-resource-lifecycle.md                              | ✅ Covered   |
+| R3028          | TrackedResourceListBySubscription            | tracked-resource-lifecycle.md                              | ✅ Covered   |
+| R4014          | AllResourcesMustHaveGetOperation             | arm-api-review §2.7                                        | ✅ Covered   |
+| R4015          | NestedResourcesMustHaveListOperation         | arm-api-review §2.3                                        | ✅ Covered   |
+| R4016          | TopLevelResourcesListByResourceGroup         | policy-compatibility.md PLCY007                            | ✅ Covered   |
+| R4017          | TopLevelResourcesListBySubscription          | policy-compatibility.md PLCY007                            | ✅ Covered   |
+| R3010          | TrackedResourceListByImmediateParent         | arm-api-review §2.3                                        | ✅ Covered   |
+| --             | MissingSegmentsInNestedResourceListOperation | arm-api-review §2.3                                        | ✅ Covered   |
+| --             | PathForTrackedResourceTypes                  | arm-api-review §1.1 (RPC-Put-V1-01)                        | ✅ Covered   |
+| --             | AllTrackedResourcesMustHaveDelete            | arm-api-review §5.1 (RPC-Delete-V1-03)                     | ✅ Covered   |
+| --             | AllProxyResourcesShouldHaveDelete            | arm-api-review §5.1 (RPC-Delete-V1-05)                     | ✅ Covered   |
+| --             | TrackedExtensionResourcesAreNotAllowed       | arm-api-review §1.2 (RPC-Uri-V1-12)                        | ✅ Annotated |
+| --             | ReservedResourceNamesModelAsEnum             | tracked-resource-lifecycle.md (optional authoring pattern) | ⚠️ Implicit  |
 
 ## Resource Model & Properties Rules
 
@@ -78,11 +83,13 @@ instruction files.
 | R3019          | ArmResourcePropertiesBag                 | arm-api-review §2.5, §2.6           | ✅ Covered   |
 | R2020          | RequiredPropertiesMissingInResourceModel | arm-api-review §2.1                 | ✅ Covered   |
 | R4009          | RequiredReadOnlySystemData               | arm-api-review §20.1                | ✅ Covered   |
+| --             | SystemDataDefinitionsCommonTypes         | arm-api-review §20.1                | ✅ Annotated |
+| --             | SystemDataInPropertiesBag                | arm-api-review §20.1                | ✅ Covered   |
 | R4034          | AzureResourceTagsSchemaValidation        | arm-api-review §1.2 (proxy no tags) | ✅ Covered   |
 | --             | TagsAreNotAllowedForProxyResources       | arm-api-review §1.2                 | ✅ Covered   |
 | R2057          | InvalidSkuModel                          | arm-api-review §2.6.1               | ✅ Covered   |
-| R2019          | ResourceHasXMsResourceEnabled            | arm-api-review §2.1 (RPC-Put-V1-12) | ✅ Covered   |
-| R4037          | MissingTypeObject                        | openapi-review §5.3                 | ✅ Covered   |
+| R2019          | ResourceHasXMsResourceEnabled            | arm-api-review §2.1                 | ✅ Covered   |
+| R4037          | MissingTypeObject                        | openapi-review §6                   | ✅ Covered   |
 | R2056          | RequiredReadOnlyProperties               | property-mutability.md OAPI027      | ✅ Covered   |
 | --             | AvoidAdditionalProperties                | arm-api-review §8.5                 | ✅ Covered   |
 
@@ -92,19 +99,19 @@ instruction files.
 | -------------- | ------------------------------------ | ----------------------------------- | ----------- |
 | R3020          | PathResourceProviderNamePascalCase   | arm-api-review §1.3                 | ✅ Covered  |
 | R3021          | PathResourceTypeNameCamelCase        | arm-api-review §1.6                 | ✅ Covered  |
-| R3030          | PathResourceProviderMatchNamespace   | arm-api-review §1.3 (RPC-Put-V1-06) | ✅ Covered  |
+| R3030          | PathResourceProviderMatchNamespace   | arm-api-review §1.3 (RPC-Uri-V1-03) | ✅ Covered  |
 | R3014          | BodyPropertiesNamesCamelCase         | naming-conventions.md               | ✅ Covered  |
 | R3016          | DefinitionsPropertiesNamesCamelCase  | naming-conventions.md               | ✅ Covered  |
-| R1001          | OperationIdNounVerb                  | openapi-review §7.1                 | ✅ Covered  |
-| R2055          | OneUnderscoreInOperationId           | openapi-review §7.1                 | ⚠️ Implicit |
-| R1003          | ListInOperationName                  | openapi-review §7.1                 | ⚠️ Implicit |
-| R1005          | GetInOperationName                   | openapi-review §7.1                 | ⚠️ Implicit |
-| R1006          | PutInOperationName                   | openapi-review §7.1                 | ⚠️ Implicit |
-| R1007          | PatchInOperationName                 | openapi-review §7.1                 | ⚠️ Implicit |
-| R1009          | DeleteInOperationName                | openapi-review §7.1                 | ⚠️ Implicit |
-| R2066          | PostOperationIdContainsUrlVerb       | openapi-review §7.1                 | ⚠️ Implicit |
-| R2063          | OperationIdNounConflictingModelNames | --                                  | ❌ GAP      |
-| R4004          | OperationIdRequired                  | openapi-review §7.1                 | ✅ Covered  |
+| R1001          | OperationIdNounVerb                  | openapi-review §14                  | ✅ Covered  |
+| R2055          | OneUnderscoreInOperationId           | openapi-review §14                  | ⚠️ Implicit |
+| R1003          | ListInOperationName                  | openapi-review §14                  | ⚠️ Implicit |
+| R1005          | GetInOperationName                   | openapi-review §14                  | ⚠️ Implicit |
+| R1006          | PutInOperationName                   | openapi-review §14                  | ⚠️ Implicit |
+| R1007          | PatchInOperationName                 | openapi-review §14                  | ⚠️ Implicit |
+| R1009          | DeleteInOperationName                | openapi-review §14                  | ⚠️ Implicit |
+| R2066          | PostOperationIdContainsUrlVerb       | openapi-review §14                  | ⚠️ Implicit |
+| R2063          | OperationIdNounConflictingModelNames | openapi-review §14                  | ✅ Covered  |
+| R4004          | OperationIdRequired                  | openapi-review §14                  | ✅ Covered  |
 | --             | SchemaNamesConvention                | naming-conventions.md               | ⚠️ Implicit |
 
 ## Enum & Type Rules
@@ -120,9 +127,9 @@ instruction files.
 | R4005          | UniqueXmsEnumName         | enum-best-practices.md                                                     | ✅ Covered                                                                                                                                                                                                                                                                                                       |
 | R2018          | XmsEnumValidation         | enum-best-practices.md                                                     | ✅ Covered                                                                                                                                                                                                                                                                                                       |
 | R3017          | GuidUsage                 | arm-api-review §8.4 + [guid-and-uuid-on-arm.md](./guid-and-uuid-on-arm.md) | ⚠️ Conflict-aware: §8.4 previously recommended `format: uuid` unconditionally, which trips `GuidUsage` on ARM specs. The reference file documents the ARM decision tree (acceptable/unacceptable property lists) and the required scoped-suppression form. Do not blanket-recommend `format: uuid` on ARM specs. |
-| R4013          | IntegerTypeMustHaveFormat | openapi-review §5.3                                                        | ⚠️ Implicit                                                                                                                                                                                                                                                                                                      |
-| R2003          | ValidFormats              | openapi-review §5.3                                                        | ✅ Covered                                                                                                                                                                                                                                                                                                       |
-| --             | SchemaTypeAndFormat       | openapi-review §5.3                                                        | ⚠️ Implicit                                                                                                                                                                                                                                                                                                      |
+| R4013          | IntegerTypeMustHaveFormat | openapi-review §6                                                          | ⚠️ Implicit                                                                                                                                                                                                                                                                                                      |
+| R2003          | ValidFormats              | openapi-review §6                                                          | ✅ Covered                                                                                                                                                                                                                                                                                                       |
+| --             | SchemaTypeAndFormat       | openapi-review §6                                                          | ⚠️ Implicit                                                                                                                                                                                                                                                                                                      |
 
 ## LRO & Async Rules
 
@@ -147,64 +154,66 @@ instruction files.
 
 ## Pagination Rules
 
-| Linter Rule ID | Name                                     | Instruction Coverage                | Status       |
-| -------------- | ---------------------------------------- | ----------------------------------- | ------------ |
-| R2025          | NextLinkPropertyMustExist                | arm-api-review §13.1                | ✅ Covered   |
-| R2029          | PageableOperation                        | arm-api-review §13.1                | ✅ Covered   |
-| R2060          | PageableRequires200Response              | arm-api-review §13.1                | ✅ Covered   |
-| R4012          | XmsPageableMustHaveCorrespondingResponse | arm-api-review §13.1                | ✅ Covered   |
-| R4019          | GetCollectionResponseSchema              | arm-api-review §13.1                | ✅ Covered   |
-| R3060          | XmsPageableListByRGAndSubscriptions      | arm-api-review §2.2                 | ✅ Covered   |
-| R3008          | CollectionObjectPropertiesNaming         | arm-api-review §13.1                | ✅ Covered   |
-| --             | QueryParametersInCollectionGet           | arm-api-review §2.2 (RPC-Get-V1-15) | ✅ Annotated |
+| Linter Rule ID | Name                                     | Instruction Coverage                | Status                                                                  |
+| -------------- | ---------------------------------------- | ----------------------------------- | ----------------------------------------------------------------------- |
+| R2025          | NextLinkPropertyMustExist                | arm-api-review §13.1                | ✅ Covered                                                              |
+| R2029          | PageableOperation                        | arm-api-review §13.1                | ✅ Covered                                                              |
+| R2060          | PageableRequires200Response              | arm-api-review §13.1                | ✅ Covered                                                              |
+| R4012          | XmsPageableMustHaveCorrespondingResponse | arm-api-review §13.1                | ✅ Covered                                                              |
+| R4019          | GetCollectionResponseSchema              | arm-api-review §13.1                | ✅ Covered                                                              |
+| R3060          | XmsPageableListByRGAndSubscriptions      | arm-api-review §2.2                 | ✅ Covered                                                              |
+| R3008          | CollectionObjectPropertiesNaming         | arm-api-review §13.1                | ✅ Covered                                                              |
+| --             | QueryParametersInCollectionGet           | arm-api-review §2.2 (RPC-Uri-V1-09) | ⚠️ Staging-only; false-positives on RPC-defined `$top` and `$skipToken` |
+| --             | ParametersInPointGet                     | arm-api-review §2.2 (RPC-Get-V1-08) | ✅ Covered                                                              |
+| --             | ValidQueryParametersForPointOperations   | arm-api-review §2.2                 | ⚠️ Staging-only; broader point-operation rule                           |
 
 ## Operations API Rules
 
-| Linter Rule ID | Name                               | Instruction Coverage                       | Status       |
-| -------------- | ---------------------------------- | ------------------------------------------ | ------------ |
-| R3023          | OperationsAPIImplementation        | arm-api-review §1.4 (RPC-Operations-V1)    | ✅ Covered   |
-| R4018          | OperationsApiResponseSchema        | arm-api-review §1.4                        | ✅ Covered   |
-| --             | OperationsApiSchemaUsesCommonTypes | arm-api-review §1.4, §2.8                  | ✅ Covered   |
-| --             | OperationsApiTenantLevelOnly       | arm-api-review §1.4 (RPC-Operations-V1-02) | ✅ Annotated |
+| Linter Rule ID | Name                               | Instruction Coverage                 | Status       |
+| -------------- | ---------------------------------- | ------------------------------------ | ------------ |
+| R3023          | OperationsAPIImplementation        | arm-api-review §1.4 (ARM-OPERATIONS) | ✅ Covered   |
+| R4018          | OperationsApiResponseSchema        | arm-api-review §1.4                  | ✅ Covered   |
+| --             | OperationsApiSchemaUsesCommonTypes | arm-api-review §1.4, §2.8            | ✅ Covered   |
+| --             | OperationsApiTenantLevelOnly       | arm-api-review §1.4 (ARM-OPERATIONS) | ✅ Annotated |
 
 ## Description & Documentation Rules
 
 | Linter Rule ID | Name                                  | Instruction Coverage | Status     |
 | -------------- | ------------------------------------- | -------------------- | ---------- |
-| R4000          | ParameterDescriptionRequired          | openapi-review §9    | ✅ Covered |
-| R4020          | DescriptiveDescriptionRequired        | openapi-review §9    | ✅ Covered |
-| R4021          | DescriptionAndTitleMissing            | openapi-review §9    | ✅ Covered |
-| R4022          | OperationDescriptionOrSummaryRequired | openapi-review §9    | ✅ Covered |
-| R2023          | SummaryAndDescriptionMustNotBeSame    | openapi-review §9    | ✅ Covered |
-| R3011          | DescriptionMustNotBeNodeName          | openapi-review §9    | ✅ Covered |
-| --             | SchemaDescriptionOrTitle              | openapi-review §9    | ✅ Covered |
-| R1010          | AvoidMsdnReferences                   | openapi-review §9    | ✅ Covered |
+| R4000          | ParameterDescriptionRequired          | openapi-review §17   | ✅ Covered |
+| R4020          | DescriptiveDescriptionRequired        | openapi-review §17   | ✅ Covered |
+| R4021          | DescriptionAndTitleMissing            | openapi-review §17   | ✅ Covered |
+| R4022          | OperationDescriptionOrSummaryRequired | openapi-review §17   | ✅ Covered |
+| R2023          | SummaryAndDescriptionMustNotBeSame    | --                   | ❌ GAP     |
+| R3011          | DescriptionMustNotBeNodeName          | openapi-review §17   | ✅ Covered |
+| --             | SchemaDescriptionOrTitle              | openapi-review §17   | ✅ Covered |
+| R1010          | AvoidMsdnReferences                   | --                   | ❌ GAP     |
 
 ## Extension & Annotation Rules
 
 | Linter Rule ID | Name                               | Instruction Coverage                        | Status      |
 | -------------- | ---------------------------------- | ------------------------------------------- | ----------- |
-| R4001          | XmsParameterLocation               | openapi-review §18                          | ✅ Covered  |
-| R4041          | XmsIdentifierValidation            | openapi-review §18                          | ⚠️ Implicit |
+| R4001          | XmsParameterLocation               | openapi-review §16                          | ✅ Covered  |
+| R4041          | XmsIdentifierValidation            | openapi-review §16                          | ⚠️ Implicit |
 | R2008          | MutabilityWithReadOnly             | property-mutability.md                      | ✅ Covered  |
 | R4002          | LocationMustHaveXmsMutability      | availability-zones.md, arm-api-review §17.2 | ✅ Covered  |
-| R2012          | XmsClientNameParameter             | openapi-review §18                          | ⚠️ Implicit |
-| R2013          | XmsClientNameProperty              | openapi-review §18                          | ⚠️ Implicit |
+| R2012          | XmsClientNameParameter             | openapi-review §16                          | ⚠️ Implicit |
+| R2013          | XmsClientNameProperty              | openapi-review §16                          | ⚠️ Implicit |
 | R4006          | DeprecatedXmsCodeGenerationSetting | --                                          | ❌ GAP      |
-| R2058          | XmsPathsMustOverloadPaths          | openapi-review §18                          | ⚠️ Implicit |
+| R2058          | XmsPathsMustOverloadPaths          | openapi-review §16                          | ⚠️ Implicit |
 
 ## Path & Parameter Rules
 
 | Linter Rule ID | Name                                  | Instruction Coverage                  | Status       |
 | -------------- | ------------------------------------- | ------------------------------------- | ------------ |
 | R2014          | SubscriptionIdParameterInOperations   | arm-api-review §1.1                   | ✅ Covered   |
-| R2015          | ParameterNotDefinedInGlobalParameters | openapi-review §4                     | ✅ Covered   |
+| R2015          | ParameterNotDefinedInGlobalParameters | openapi-review §15                    | ✅ Covered   |
 | --             | ParametersInPost                      | arm-api-review §12.1 (RPC-POST-V1-05) | ✅ Annotated |
-| R4029          | UniqueClientParameterName             | openapi-review §4                     | ✅ Covered   |
-| R4039          | ParametersOrder                       | openapi-review §4                     | ⚠️ Implicit  |
-| R2024          | AnonymousBodyParameter                | openapi-review §4                     | ✅ Covered   |
-| R2047          | NamePropertyDefinitionInParameter     | openapi-review §4                     | ✅ Covered   |
-| --             | PathParameterSchema                   | openapi-review §4                     | ⚠️ Implicit  |
+| R4029          | UniqueClientParameterName             | openapi-review §15                    | ✅ Covered   |
+| R4039          | ParametersOrder                       | openapi-review §15                    | ⚠️ Implicit  |
+| R2024          | AnonymousBodyParameter                | openapi-review §15                    | ✅ Covered   |
+| R2047          | NamePropertyDefinitionInParameter     | openapi-review §15                    | ✅ Covered   |
+| --             | PathParameterSchema                   | openapi-review §15                    | ⚠️ Implicit  |
 | --             | PathContainsResourceType              | arm-api-review §1.5                   | ✅ Covered   |
 | R4038          | ExtensionResourcePathPattern          | arm-api-review §1.2                   | ✅ Covered   |
 | --             | NoDuplicatePathsForScopeParameter     | arm-api-review §1.2 (RPC-Uri-V1-10)   | ✅ Annotated |
@@ -214,17 +223,18 @@ instruction files.
 
 | Linter Rule ID | Name                       | Instruction Coverage | Status     |
 | -------------- | -------------------------- | -------------------- | ---------- |
-| R4007          | DefaultErrorResponseSchema | openapi-review §10   | ✅ Covered |
-| R4010          | RequiredDefaultResponse    | openapi-review §10   | ✅ Covered |
-| R4032          | MissingXmsErrorResponse    | openapi-review §10   | ✅ Covered |
+| R4007          | DefaultErrorResponseSchema | openapi-review §11   | ✅ Covered |
+| R4010          | RequiredDefaultResponse    | openapi-review §11   | ✅ Covered |
+| R4032          | MissingXmsErrorResponse    | openapi-review §11   | ✅ Covered |
 
 ## Security & Format Rules
 
-| Linter Rule ID | Name                         | Instruction Coverage | Status     |
-| -------------- | ---------------------------- | -------------------- | ---------- |
-| R2054          | SecurityDefinitionsStructure | openapi-review §3    | ✅ Covered |
-| R1011          | HttpsSupportedScheme         | openapi-review §3    | ✅ Covered |
-| R2004          | NonApplicationJsonType       | openapi-review §5.1  | ✅ Covered |
+| Linter Rule ID | Name                         | Instruction Coverage | Status      |
+| -------------- | ---------------------------- | -------------------- | ----------- |
+| R2054          | SecurityDefinitionsStructure | openapi-review §3    | ✅ Covered  |
+| --             | ApiHost                      | --                   | ❌ GAP      |
+| R1011          | HttpsSupportedScheme         | openapi-review §3    | ✅ Covered  |
+| R2004          | NonApplicationJsonType       | openapi-review §21   | ⚠️ Implicit |
 
 ## Private Endpoint Rules
 
@@ -244,21 +254,21 @@ instruction files.
 
 ## Example & Misc Rules
 
-| Linter Rule ID | Name                            | Instruction Coverage                 | Status       |
-| -------------- | ------------------------------- | ------------------------------------ | ------------ |
-| D5001          | XmsExamplesRequired             | openapi-review §22                   | ✅ Covered   |
-| R4030          | UniqueXmsExample                | openapi-review §22                   | ✅ Covered   |
-| R4033          | UniqueModelName                 | openapi-review §5                    | ✅ Covered   |
-| R2026          | AvoidAnonymousTypes             | openapi-review §5                    | ✅ Covered   |
-| R2009          | ArraySchemaMustHaveItems        | openapi-review §5.3                  | ✅ Covered   |
-| R4008          | AvoidEmptyResponseSchema        | openapi-review §6                    | ✅ Covered   |
-| R2006          | ControlCharactersNotAllowed     | openapi-review §5                    | ✅ Covered   |
-| R2065          | LicenseHeaderMustNotBeSpecified | openapi-review §1                    | ✅ Covered   |
-| R2001          | AvoidNestedProperties           | --                                   | ❌ GAP       |
-| R2028          | NonEmptyClientName              | openapi-review §18                   | ⚠️ Implicit  |
-| --             | RepeatedPathInfo                | openapi-review §7.1                  | ⚠️ Implicit  |
-| --             | ResourceNameRestriction         | arm-api-review §15.7 (PREFLIGHT-005) | ✅ Covered   |
-| --             | TenantLevelAPIsNotAllowed       | arm-api-review §12A (RPC-Uri-V1-11)  | ✅ Annotated |
+| Linter Rule ID | Name                            | Instruction Coverage                 | Status                                                                                                                    |
+| -------------- | ------------------------------- | ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------- |
+| D5001          | XmsExamplesRequired             | openapi-review §22                   | ✅ Covered                                                                                                                |
+| R4030          | UniqueXmsExample                | openapi-review §22                   | ✅ Covered                                                                                                                |
+| R4033          | UniqueModelName                 | openapi-review §6                    | ✅ Covered                                                                                                                |
+| R2026          | AvoidAnonymousTypes             | openapi-review §6                    | ✅ Covered                                                                                                                |
+| R2009          | ArraySchemaMustHaveItems        | openapi-review §6                    | ✅ Covered                                                                                                                |
+| R4008          | AvoidEmptyResponseSchema        | openapi-review §6                    | ✅ Covered                                                                                                                |
+| R2006          | ControlCharactersNotAllowed     | --                                   | ❌ GAP                                                                                                                    |
+| R2065          | LicenseHeaderMustNotBeSpecified | openapi-review §1                    | ✅ Covered                                                                                                                |
+| R2001          | AvoidNestedProperties           | openapi-review §16                   | ⚠️ Conflict-aware: linter recommends `x-ms-client-flatten`, which is forbidden for new specs; do not recommend it blindly |
+| R2028          | NonEmptyClientName              | openapi-review §16                   | ⚠️ Implicit                                                                                                               |
+| --             | RepeatedPathInfo                | openapi-review §4                    | ⚠️ Implicit                                                                                                               |
+| --             | ResourceNameRestriction         | arm-api-review §15.7 (PREFLIGHT-005) | ✅ Covered                                                                                                                |
+| --             | TenantLevelAPIsNotAllowed       | arm-api-review §12A (RPC-Uri-V1-11)  | ✅ Annotated                                                                                                              |
 
 ## Pattern Constraint Rules
 
@@ -277,22 +287,25 @@ instruction files.
 
 ---
 
-## Coverage Summary
+## Coverage Status Meanings
 
-| Status       | Count | Meaning                                                            |
-| ------------ | ----- | ------------------------------------------------------------------ |
-| ✅ Covered   | ~95   | Rule has explicit instruction file section                         |
-| ✅ Annotated | ~18   | Rule has `(Also enforced by:)` annotation                          |
-| ⚠️ Implicit  | ~18   | Instruction covers the concept but doesn't cite the linter rule ID |
-| ❌ GAP       | ~3    | No instruction coverage at all                                     |
+| Status            | Meaning                                                                  |
+| ----------------- | ------------------------------------------------------------------------ |
+| ✅ Covered        | Rule has an explicit instruction section                                 |
+| ✅ Annotated      | Instruction names the corresponding linter rule                          |
+| ⚠️ Implicit       | Instruction covers the concept but does not cite the linter rule name    |
+| ⚠️ Conflict-aware | Linter behavior conflicts with current authoring guidance and needs care |
+| ⚠️ Staging-only   | Rule is not a required production check or has known false positives     |
+| ❌ GAP            | No instruction coverage exists                                           |
 
 ### GAP Rules Requiring Coverage
 
-| Rule ID | Name                                 | Recommended Location |
-| ------- | ------------------------------------ | -------------------- |
-| R2063   | OperationIdNounConflictingModelNames | openapi-review §7.1  |
-| R4006   | DeprecatedXmsCodeGenerationSetting   | openapi-review §18   |
-| R2001   | AvoidNestedProperties                | arm-api-review §8.2  |
+| Rule ID | Name                               | Recommended Location |
+| ------- | ---------------------------------- | -------------------- |
+| R4006   | DeprecatedXmsCodeGenerationSetting | openapi-review §16   |
+| R2023   | SummaryAndDescriptionMustNotBeSame | openapi-review §17   |
+| R1010   | AvoidMsdnReferences                | openapi-review §17   |
+| R2006   | ControlCharactersNotAllowed        | openapi-review §6    |
 
 ### Missing Automated Linter Rules
 

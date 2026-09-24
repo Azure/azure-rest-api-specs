@@ -1,0 +1,34 @@
+{
+  "title": "Get a Symmetric Key Device Authentication Profile",
+  "operationId": "RegistryDeviceAuthenticationProfiles_Get",
+  "description": "Get a symmetric key device authentication profile. The keys are not returned as part of the response. Key retrieval is performed through a call to the `getKeys` action on this resource.",
+  "parameters": {
+    "api-version": "2026-11-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "namespaceName": "my-namespace-1",
+    "registryDeviceName": "adr-smart-device3-f191f536-f652-4eb4-b9a0-1a9d43300cab",
+    "authenticationProfileName": "symmetric-default"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/my-namespace-1/registryDevices/adr-smart-device3-f191f536-f652-4eb4-b9a0-1a9d43300cab/authenticationProfiles/symmetric-default",
+        "name": "symmetric-default",
+        "type": "Microsoft.DeviceRegistry/namespaces/registryDevices/authenticationProfiles",
+        "systemData": {
+          "createdBy": "00003442-0000-0000-0000-494059220000",
+          "createdByType": "Application",
+          "createdAt": "2026-01-15T10:30:00Z",
+          "lastModifiedBy": "00003442-0000-0000-0000-494059220000",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2026-05-10T08:20:00Z"
+        },
+        "properties": {
+          "authenticationType": "SymmetricKey",
+          "symmetricKey": {}
+        }
+      }
+    }
+  }
+}
