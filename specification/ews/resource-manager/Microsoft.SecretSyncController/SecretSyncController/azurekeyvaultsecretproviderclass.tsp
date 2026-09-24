@@ -31,6 +31,12 @@ model AzureKeyVaultSecretProviderClassProperties {
   @doc("The name of the Azure Key Vault to sync secrets from.")
   keyvaultName: string;
 
+  /**
+   * The Azure cloud containing the key vault, for example AzurePublicCloud, AzureUSGovernmentCloud, or AzureChinaCloud.
+   * If omitted, the in-cluster Azure Key Vault provider's configured default cloud is used.
+   */
+  cloudName?: string;
+
   @doc("The user assigned managed identity client ID that should be used to access the Azure Key Vault.")
   @pattern("^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$")
   clientId: string;
