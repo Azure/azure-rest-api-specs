@@ -1535,6 +1535,15 @@ union OpenIdConnectClientCredentialMethod {
   "csharp"
 );
 
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
+@@clientOption(
+  ManagedEnvironment,
+  "resource-name-constraint",
+  #{ minLength: 2, maxLength: 60, pattern: "^[a-z0-9-]+$" },
+  "csharp"
+);
+
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning compatibility"
 #suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "RBAC roles for provisioning compatibility"
 @@clientOption(
