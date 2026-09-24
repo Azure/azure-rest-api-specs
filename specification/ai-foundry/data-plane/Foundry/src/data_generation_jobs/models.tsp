@@ -103,7 +103,7 @@ model EvaluationDataGenerationJobOutputTarget {
   tags?: Record<string>;
 
   @doc("Controls how dataset outputs are written. If omitted, defaults to `overwrite` and creates the next dataset version using only newly generated rows.")
-  write_mode?: DataGenerationJobOutputWriteMode;
+  write_mode?: DataGenerationJobOutputWriteMode = DataGenerationJobOutputWriteMode.overwrite;
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
@@ -114,7 +114,7 @@ model SupervisedFineTuningDataGenerationJobOutputTarget {
   name: string;
 
   @doc("Controls how file outputs are written. If omitted, defaults to `overwrite` and writes only the newly generated fine-tuning file content.")
-  write_mode?: DataGenerationJobOutputWriteMode;
+  write_mode?: DataGenerationJobOutputWriteMode = DataGenerationJobOutputWriteMode.overwrite;
 
   @doc("File ID to merge into when `write_mode` is `merge`.")
   merge_file_id?: string;
@@ -128,7 +128,7 @@ model ReinforcementFineTuningDataGenerationJobOutputTarget {
   name: string;
 
   @doc("Controls how file outputs are written. If omitted, defaults to `overwrite` and writes only the newly generated fine-tuning file content.")
-  write_mode?: DataGenerationJobOutputWriteMode;
+  write_mode?: DataGenerationJobOutputWriteMode = DataGenerationJobOutputWriteMode.overwrite;
 
   @doc("File ID to merge into when `write_mode` is `merge`.")
   merge_file_id?: string;
