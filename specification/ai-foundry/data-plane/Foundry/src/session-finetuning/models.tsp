@@ -532,7 +532,7 @@ model CreateFineTuningSessionResponse {
   session_id: string;
 
   /** Type of session created by the service. */
-  type: string;
+  type: FineTuningSessionType;
 
   /** Base model used by the session. */
   base_model: string;
