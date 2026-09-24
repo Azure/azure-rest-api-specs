@@ -1347,9 +1347,25 @@ namespace Azure.AI.Projects {
   // --------------------------------------------------------------------------------
   // Fix APIView namespace leak: these Foundry-only types were generating into the
   // OpenAI C# namespace instead of Azure.AI.Projects.Agents.
+  //
+  // The properties below are declared as anonymous inline unions on their source
+  // models (either in the external OpenAI package or spread in from it via
+  // `OmitProperties`/`ToolFields`), so there is no real TypeSpec symbol named
+  // e.g. `OpenAI.VoiceResponseBaseStatus` to target directly: such names only
+  // exist post-emission, invented by the C# emitter for anonymous types. Instead,
+  // each property is first retyped (@@alternateType) to a small local named union
+  // declared here, and that local union is the one aliased/namespaced.
   // --------------------------------------------------------------------------------
+  union LocalVoiceResponseStatus {
+    "completed",
+    "cancelled",
+    "failed",
+    "incomplete",
+    "in_progress",
+  }
+  @@alternateType(VoiceResponseBase.status, LocalVoiceResponseStatus, "csharp");
   @@alternateType(
-    OpenAI.VoiceResponseBaseStatus,
+    LocalVoiceResponseStatus,
     {
       identity: "OpenAI.Realtime.RealtimeResponseStatus",
       package: "OpenAI",
@@ -1357,8 +1373,18 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
+
+  union LocalVoiceResponseOutputModality {
+    "text",
+    "audio",
+  }
   @@alternateType(
-    OpenAI.VoiceResponseBaseOutputModality,
+    VoiceResponseBase.output_modalities,
+    LocalVoiceResponseOutputModality[],
+    "csharp"
+  );
+  @@alternateType(
+    LocalVoiceResponseOutputModality,
     {
       identity: "OpenAI.Realtime.RealtimeOutputModality",
       package: "OpenAI",
@@ -1366,6 +1392,7 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
+
   @@alternateType(
     OpenAI.RealtimeClientEventType,
     {
@@ -1402,11 +1429,6 @@ namespace Azure.AI.Projects {
     "csharp"
   );
   @@clientNamespace(
-    OpenAI.MCPToolboxToolConnectorId,
-    "Azure.AI.Projects.Agents",
-    "csharp"
-  );
-  @@clientNamespace(
     OpenAI.RealtimeFunctionToolParameters,
     "Azure.AI.Projects.Agents",
     "csharp"
@@ -1416,18 +1438,69 @@ namespace Azure.AI.Projects {
     "Azure.AI.Projects.Agents",
     "csharp"
   );
-  @@clientNamespace(
-    OpenAI.VoiceAgentAudioInputConfigTranscriptionDelay,
-    "Azure.AI.Projects.Agents",
+
+  // The four types below are also anonymous inline unions (see comment above);
+  // give each one a real local symbol before moving its namespace.
+  union MCPToolboxToolConnectorId {
+    "connector_dropbox",
+    "connector_gmail",
+    "connector_googlecalendar",
+    "connector_googledrive",
+    "connector_microsoftteams",
+    "connector_outlookcalendar",
+    "connector_outlookemail",
+    "connector_sharepoint",
+  }
+  @@alternateType(MCPToolboxTool.connector_id, MCPToolboxToolConnectorId, "csharp");
+  @@clientNamespace(MCPToolboxToolConnectorId, "Azure.AI.Projects.Agents", "csharp");
+
+  union VoiceAgentAudioInputConfigTranscriptionDelay {
+    "minimal",
+    "low",
+    "medium",
+    "high",
+    "xhigh",
+  }
+  @@alternateType(
+    VoiceAgentInputTranscription.delay,
+    VoiceAgentAudioInputConfigTranscriptionDelay,
     "csharp"
   );
   @@clientNamespace(
-    OpenAI.VoiceAgentSemanticVadTurnDetectionEagerness,
+    VoiceAgentAudioInputConfigTranscriptionDelay,
     "Azure.AI.Projects.Agents",
     "csharp"
   );
+
+  union VoiceAgentSemanticVadTurnDetectionEagerness {
+    "low",
+    "medium",
+    "high",
+    "auto",
+  }
+  @@alternateType(
+    VoiceAgentSemanticVadTurnDetection.eagerness,
+    VoiceAgentSemanticVadTurnDetectionEagerness,
+    "csharp"
+  );
   @@clientNamespace(
-    OpenAI.WebSearchToolSearchContextSize,
+    VoiceAgentSemanticVadTurnDetectionEagerness,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
+
+  union WebSearchToolSearchContextSize {
+    "low",
+    "medium",
+    "high",
+  }
+  @@alternateType(
+    OpenAI.WebSearchTool.search_context_size,
+    WebSearchToolSearchContextSize,
+    "csharp"
+  );
+  @@clientNamespace(
+    WebSearchToolSearchContextSize,
     "Azure.AI.Projects.Agents",
     "csharp"
   );
