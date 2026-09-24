@@ -28,16 +28,6 @@ model PrivateEndpointConnectionDescription
   >;
 }
 
-// @Http.Private.includeInapplicableMetadataInPayload(false)
-// @parentResource(ServicesDescription)
-// model PrivateEndpointConnectionDescription
-//   extends Azure.ResourceManager.CommonTypes.PrivateEndpointConnection {
-//   @visibility(Lifecycle.Read)
-//   @key("privateEndpointConnectionName")
-//   @segment("privateEndpointConnections")
-//   name: string;
-// }
-
 alias PrivateEndpointConnectionDescriptionOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
