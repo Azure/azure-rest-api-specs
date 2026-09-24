@@ -174,7 +174,7 @@ model OnUploadProperties {
   /**
    * Defines the max GB to be scanned per Month. Set to -1 if no capping is needed. If not specified, the default value is -1.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserves the JSON property name 'capGBPerMonth' published in 2025-09-01-preview; changing its casing would break compatibility with existing clients."
   capGBPerMonth?: int32;
 
   /**
@@ -339,7 +339,7 @@ model BlobsScanSummary {
   /**
    * The number of gigabytes of data that were scanned.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserves the JSON response property name 'scannedBlobsInGB' published in 2025-09-01-preview; changing its casing would break compatibility with existing clients."
   scannedBlobsInGB?: float64;
 }
 
@@ -370,7 +370,7 @@ model FilesScanSummary {
   /**
    * The number of gigabytes of data that were scanned.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserves the JSON response property name 'scannedFilesInGB' published in 2025-09-01-preview; changing its casing would break compatibility with existing clients."
   scannedFilesInGB?: float64;
 }
 
