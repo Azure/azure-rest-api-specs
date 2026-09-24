@@ -175,15 +175,7 @@ model LatestLinkedSaaSResponse {
 interface CloudAccounts {
   get is ArmResourceRead<CloudAccount>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<CloudAccount>;
-  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
-  @patch(#{ implicitOptionality: true })
-  update is ArmCustomPatchAsync<
-    CloudAccount,
-    Azure.ResourceManager.Foundations.ResourceUpdateModel<
-      CloudAccount,
-      CloudAccountProperties
-    >
-  >;
+  update is ArmResourcePatchAsync<CloudAccount, CloudAccountProperties>;
   delete is ArmResourceDeleteWithoutOkAsync<CloudAccount>;
   listByResourceGroup is ArmResourceListByParent<CloudAccount>;
   listBySubscription is ArmListBySubscription<CloudAccount>;
@@ -209,6 +201,15 @@ interface CloudAccounts {
     ArmResponse<LatestLinkedSaaSResponse>
   >;
 }
+
+@@typeChangedFrom(
+  CloudAccounts.update::parameters.properties,
+  Versions.v9_preview,
+  Azure.ResourceManager.Foundations.ResourceUpdateModel<
+    CloudAccount,
+    CloudAccountProperties
+  >
+);
 
 @doc("Properties specific to Commvault Cloud Account resource")
 model CloudAccountProperties is BaseResourceProperties {
@@ -306,7 +307,7 @@ union StorageType {
 @doc("Compliance lock status of a Commvault Storage.")
 @added(Versions.v9_preview)
 union ComplianceLockStatus {
-  @doc("Compliance lock is enabled; storage is protected.")
+  @doc("Compliance lock is enabled — storage is protected.")
   Enabled: "Enabled",
 
   @doc("Disablement is pending multi-person authorization (MPA) approval. Status transitions to 'Disabled' once approved.")
@@ -989,12 +990,16 @@ interface ProtectionGroups {
   createOrupdate is ArmResourceCreateOrUpdateAsync<ProtectionGroup>;
   delete is ArmResourceDeleteWithoutOkAsync<ProtectionGroup>;
   listByCloudAccount is ArmResourceListByParent<ProtectionGroup>;
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "stopBackup is a long-running operation that returns 204 with no content on completion"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Earlier API versions of stopBackup return 204 with no content on completion."
   @doc("Stop Backup for a Protection Group")
+  @returnTypeChangedFrom(
+    Versions.v9_preview,
+    ArmNoContentResponse | ArmAcceptedLroResponse | ErrorResponse
+  )
   stopBackup is ArmResourceActionAsync<
     ProtectionGroup,
     StopBackupProtectionGroupRequest,
-    ArmNoContentResponse,
+    never,
     LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
