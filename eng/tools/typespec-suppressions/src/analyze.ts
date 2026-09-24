@@ -182,6 +182,18 @@ async function readRevisionFile(
   }
 }
 
+function excludeNestedTypeSpecProjects(files: string[], specPath: string): string[] {
+  const nestedSpecPaths = files
+    .filter(isTypeSpecConfigFile)
+    .map((filePath) => normalizeRepoPath(path.posix.dirname(filePath)))
+    .filter((configSpecPath) => configSpecPath !== specPath);
+
+  return files.filter(
+    (filePath) =>
+      !nestedSpecPaths.some((nestedSpecPath) => filePath.startsWith(`${nestedSpecPath}/`)),
+  );
+}
+
 async function collectRevisionSuppressions(
   repoRoot: string,
   revision: string,
@@ -190,7 +202,7 @@ async function collectRevisionSuppressions(
   renamedFilePaths = new Map<string, string>(),
 ): Promise<SuppressionRecord[]> {
   const files = await listRevisionFiles(repoRoot, revision, revisionSpecPath);
-  const relevantFiles = files.filter(
+  const relevantFiles = excludeNestedTypeSpecProjects(files, revisionSpecPath).filter(
     (filePath) => isTypeSpecSourceFile(filePath) || isTypeSpecConfigFile(filePath),
   );
 
@@ -264,7 +276,7 @@ async function collectDirectorySuppressions(
   specPath: string,
 ): Promise<SuppressionRecord[]> {
   const files = await listDirectoryFiles(repoRoot, specPath);
-  const relevantFiles = files.filter(
+  const relevantFiles = excludeNestedTypeSpecProjects(files, specPath).filter(
     (filePath) => isTypeSpecSourceFile(filePath) || isTypeSpecConfigFile(filePath),
   );
 
