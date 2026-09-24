@@ -649,9 +649,9 @@ model PoolProperties {
   computeModel?: PoolComputeModel;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("The desired number of nodes to allocate and assign to the pool. Allowed values are 0 through 16. A value of 0 keeps the pool resource, its read-write designation, and its name, compute configuration, maintenance configuration, and parameter-group association, but allocates no nodes and leaves the cluster without an active read-write node; it does not delete the pool.")
+  @doc("The required desired number of nodes to allocate and assign to the pool. Allowed values are 0 through 16. A value of 0 keeps the pool resource, its read-write designation, and its name, compute configuration, maintenance configuration, and parameter-group association, but allocates no nodes and leaves the cluster without an active read-write node; it does not delete the pool.")
   @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
-  desiredNodeCount?: PoolNodeCount;
+  desiredNodeCount: PoolNodeCount;
 
   @added(Versions.v2026_10_01_preview)
   @doc("The number of nodes currently allocated and assigned to the pool, regardless of their operational state or the operational state of the pool.")

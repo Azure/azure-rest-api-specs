@@ -3477,7 +3477,7 @@
         "tags": [
           "Pools"
         ],
-        "description": "Creates a new HorizonDB pool or replaces an existing pool, including its desired node allocation, compute model, high-availability configuration, or associated parameter group. highAvailability.mode is required and has no service default. Disabled is valid only when desiredNodeCount is 0 or 1. AnyZone and ZoneRedundant are valid only when desiredNodeCount is 2 through 16. AnyZone permits same-zone or cross-zone placement, while ZoneRedundant requires nodes to be allocated across availability zones. Node allocation and high-availability reconfiguration are atomic: if all desired nodes or the required zonal topology cannot be provisioned, the long-running operation fails and the previous resource state is preserved. A pool name can be the same as its parent cluster name. Creating a pool also creates exactly one service-managed Pool-scoped ReadOnly Endpoint representing that Pool and its network boundary. The Endpoint's associatedResourceId identifies the Pool, and the Endpoint cannot outlive or be deleted independently from it. When the first pool is created, the service automatically designates it to host the cluster's read-write node when an eligible node is available. A desiredNodeCount of 0 preserves that designation but leaves the cluster without an active read-write node. This API version supports at most one pool per cluster; an attempt to create another pool is rejected with 409 Conflict. Every pool must be associated with a parameter group, so parameterGroup, parameterGroupResourceId, and applyMethod are required. applyMethod controls when dynamic parameter changes become effective; static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. Subtype-specific compute constraints are validated before the resource is changed.",
+        "description": "Creates a new HorizonDB pool or replaces an existing pool, including its desired node allocation, compute model, high-availability configuration, or associated parameter group. desiredNodeCount and highAvailability.mode are required and have no service defaults. Disabled is valid only when desiredNodeCount is 0 or 1. AnyZone and ZoneRedundant are valid only when desiredNodeCount is 2 through 16. AnyZone permits same-zone or cross-zone placement, while ZoneRedundant requires nodes to be allocated across availability zones. Node allocation and high-availability reconfiguration are atomic: if all desired nodes or the required zonal topology cannot be provisioned, the long-running operation fails and the previous resource state is preserved. A pool name can be the same as its parent cluster name. Creating a pool also creates exactly one service-managed Pool-scoped ReadOnly Endpoint representing that Pool and its network boundary. The Endpoint's associatedResourceId identifies the Pool, and the Endpoint cannot outlive or be deleted independently from it. When the first pool is created, the service automatically designates it to host the cluster's read-write node when an eligible node is available. A desiredNodeCount of 0 preserves that designation but leaves the cluster without an active read-write node. This API version supports at most one pool per cluster; an attempt to create another pool is rejected with 409 Conflict. Every pool must be associated with a parameter group, so parameterGroup, parameterGroupResourceId, and applyMethod are required. applyMethod controls when dynamic parameter changes become effective; static parameter changes always require a customer-triggered restart or a restart during scheduled maintenance. Subtype-specific compute constraints are validated before the resource is changed.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -9737,7 +9737,7 @@
         },
         "desiredNodeCount": {
           "$ref": "#/definitions/PoolNodeCount",
-          "description": "The desired number of nodes to allocate and assign to the pool. Allowed values are 0 through 16. A value of 0 keeps the pool resource, its read-write designation, and its name, compute configuration, maintenance configuration, and parameter-group association, but allocates no nodes and leaves the cluster without an active read-write node; it does not delete the pool.",
+          "description": "The required desired number of nodes to allocate and assign to the pool. Allowed values are 0 through 16. A value of 0 keeps the pool resource, its read-write designation, and its name, compute configuration, maintenance configuration, and parameter-group association, but allocates no nodes and leaves the cluster without an active read-write node; it does not delete the pool.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -9783,6 +9783,7 @@
         }
       },
       "required": [
+        "desiredNodeCount",
         "allocatedNodeCount",
         "highAvailability",
         "parameterGroup"
