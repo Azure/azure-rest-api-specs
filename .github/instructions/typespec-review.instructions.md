@@ -288,7 +288,7 @@ Flag these issues when found:
 - **`@flattenProperty` on new APIs** — do not add new `@flattenProperty` decorators. Flattening creates SDK-breaking issues and is discouraged for new resource types and properties. Existing flattened properties may remain for backward compatibility.
 - **Spread-only model types as full models** — a model type used only for spreading (`...`) into other types **SHOULD** be declared as an `alias` instead. Using `model` for types that are only spread generates unnecessary types in the output. See [TypeSpec alias documentation](https://typespec.io/docs/language-basics/alias) (TypeSpec-BestPractice-01).
 - **Empty model literal `{}` as POST action body** -- when an `ArmResourceActionAsync` or `ArmResourceActionSync` POST action does not need a request body, use `void` instead of `{}`. An empty model literal triggers the `no-empty-model` lint rule, and suppressing it is the wrong fix. Use `void` and remove the suppression.
-- **`@extension(...)` in TypeSpec source** -- never add `@extension(...)` decorators to TypeSpec source for any reason. This includes `@extension("x-ms-identifiers", ...)`, `@extension("x-ms-mutability", ...)`, and any other OpenAPI extension. `@extension` bypasses TypeSpec's type system and emitter conventions. Use the appropriate built-in decorator instead: `@identifiers` / `@key` for `x-ms-identifiers`, `@visibility` for mutability, `@secret` for secret data, etc. (see TSP-ARRAY-IDENTIFIERS for the `x-ms-identifiers` case).
+- **Raw client-altering OpenAPI extensions (TSP-NO-RAW-CLIENT-EXTENSIONS)** -- do not add or restore `@OpenAPI.extension(...)` / `@extension(...)` for client-altering `x-ms-*` metadata, and do not suppress `@azure-tools/typespec-azure-core/no-openapi-client-extensions`. Express the behavior in the semantic TypeSpec model so every emitter sees it. This remains true when reviewing an already-published API version: preserving generated Swagger is not a reason to reintroduce a prohibited raw decorator. A genuinely emitter-only, non-client-altering custom extension with no native representation requires a concrete explanation and should be confirmed with the TypeSpec library owners rather than generalized into an exception. See [`typespec-openapi-extensions.md`](../skills/azure-api-review/references/typespec-openapi-extensions.md) for native mappings and generated-diff triage.
 
 ---
 
@@ -360,6 +360,11 @@ Use one of the following built-in TypeSpec decorators instead:
 
 When reviewing a new `missing-x-ms-identifiers` suppression, propose `@identifiers` or `@key` as the fix. **Never** suggest `@extension("x-ms-identifiers", ...)`.
 
+The same rule applies to every client-altering extension: never suggest a raw
+OpenAPI decorator or a `no-openapi-client-extensions` suppression as a
+compatibility fix. Use the mapping in
+[`typespec-openapi-extensions.md`](../skills/azure-api-review/references/typespec-openapi-extensions.md).
+
 ---
 
 ## 7. `tspconfig.yaml` Additional Validation
@@ -391,7 +396,7 @@ When reviewing a new `missing-x-ms-identifiers` suppression, propose `@identifie
 ### 8.2 Validation
 
 - The conversion should be validated using `tsp-client compare` (or equivalent diff tool) to confirm the generated OpenAPI matches the original.
-- Common post-conversion issues to watch for: `date-time` format inconsistencies, property name casing drift, and missing `x-ms-*` extensions.
+- Common post-conversion issues to watch for: `date-time` format inconsistencies, property name casing drift, and missing semantics that should be emitted from native TypeSpec constructs. Do not require raw `x-ms-*` metadata parity when the difference is only legacy emitter metadata; apply [`typespec-openapi-extensions.md`](../skills/azure-api-review/references/typespec-openapi-extensions.md) before classifying the diff.
 
 ### 8.3 SDK Generation Cutover
 

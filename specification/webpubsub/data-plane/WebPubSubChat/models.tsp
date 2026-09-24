@@ -68,6 +68,29 @@ model ChatMessage {
   ...EtagProperty;
 }
 
+/** A permission that can be assigned to a chat role. */
+union ChatPermission {
+  string,
+
+  /** Allows a user to create chat rooms. */
+  UserCreateRoom: "user.create_room",
+
+  /** Allows a user to list the rooms they belong to. */
+  UserFetchAllRooms: "user.fetch_all_rooms",
+
+  /** Allows a room member to publish messages. */
+  RoomPublishMessage: "room.publish_message",
+
+  /** Allows a room member to read message history. */
+  RoomHistory: "room.history",
+
+  /** Allows a room member to add users to a room. */
+  RoomInvite: "room.invite",
+
+  /** Allows a room operator to remove users from a room. */
+  RoomRemoveUser: "room.remove_user",
+}
+
 /**
  * Represents a chat role.
  * A role name must start with 'user.' or 'room.' prefix.
@@ -85,7 +108,7 @@ model ChatRole {
   name: string;
 
   /** Permissions associated with the role. Do not mix user permissions and room permissions in one role. */
-  permissions: string[];
+  permissions: ChatPermission[];
 
   ...EtagProperty;
 }
