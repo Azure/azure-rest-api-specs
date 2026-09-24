@@ -10,6 +10,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.DBforPostgreSQL;
 
@@ -157,4 +158,32 @@ interface MajorVersionUpgradePrecheck {
 
   @doc("Lists major version upgrade prechecks for a flexible server.")
   list is ArmResourceListByParent<MajorVersionUpgradePrecheckResource>;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "The database agent is enabled or disabled through PUT and the service does not support DELETE."
+@armResourceOperations
+@added(Versions.v2026_07_01)
+interface DbAgents {
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "The service contract requires the DBAgent_List operation ID."
+  @doc("Lists the database agent configuration for a flexible server.")
+  @operationId("DBAgent_List")
+  list is ArmResourceListByParent<DbAgent>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "The service contract requires the DBAgent_Get operation ID."
+  @doc("Gets the database agent configuration for a flexible server.")
+  @operationId("DBAgent_Get")
+  get is ArmResourceRead<DbAgent>;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "The implemented service contract returns HTTP 202 for every database agent write."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The implemented service contract returns the in-progress database agent resource in the HTTP 202 response body."
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "The service contract requires the DBAgent_CreateOrUpdate operation ID."
+  @doc("Enables or disables the database agent for a flexible server.")
+  @operationId("DBAgent_CreateOrUpdate")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  @put
+  createOrUpdate is Legacy.CreateOrReplaceAsync<
+    DbAgent,
+    Request = DbAgentForUpdate,
+    Response = DbAgentAcceptedResponse
+  >;
 }
