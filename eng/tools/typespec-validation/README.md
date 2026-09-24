@@ -93,8 +93,8 @@ dependencies
 | where cloud_RoleName == "typespec-validation" and name == "tsv.rule"
 | where tostring(customDimensions["tsv.outcome"]) != "suppressed"
 | summarize p50 = percentile(duration, 50), p95 = percentile(duration, 95)
-    by rule = tostring(customDimensions["tsv.rule"]),
-       project = tostring(customDimensions["tsv.project"])
+    by ruleName = tostring(customDimensions["tsv.rule"]),
+       projectPath = tostring(customDimensions["tsv.project"])
 ```
 
 The package's Vitest configuration opts out by default, including subprocesses.
