@@ -62,8 +62,6 @@ jobs:
               WorkingDirectory: AzureRestPreview
 
       - template: /eng/pipelines/templates/steps/npm-install.yml
-        parameters:
-          WorkingDirectory: .github/shared
 
       - script: cmd/api-doc-preview.js --output ../../AzureRestPreview
         displayName: Generate Swagger API documentation preview
