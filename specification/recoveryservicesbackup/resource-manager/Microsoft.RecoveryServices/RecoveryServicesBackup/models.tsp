@@ -4477,7 +4477,7 @@ model AzureIaaSVMProtectionPolicy extends ProtectionPolicy {
   @added(Versions.v2026_10_01)
   @minValue(60)
   @maxValue(300)
-  instantAccessDurationMinutes?: int32;
+  instantAccessDurationMinutes?: int32 = 300;
 
   /**
    * TimeZone optional input as string. For example: TimeZone = "Pacific Standard Time".
