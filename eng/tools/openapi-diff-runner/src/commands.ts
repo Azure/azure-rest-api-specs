@@ -66,14 +66,24 @@ export async function validateBreakingChange(context: Context): Promise<number> 
   await context.prInfo?.checkout(context.prInfo.baseBranch);
   oadTracer = setOadBaseBranch(oadTracer, context.prInfo?.baseBranch || context.baseBranch);
 
-  if (isSameVersionBreakingType(context.runType)) {
-    for (const swagger of diffs.deletions) {
-      const headPath = path.resolve(context.localSpecRepoPath, swagger);
-      const basePath = path.join(context.prInfo!.tempRepoFolder, swagger);
-      if (!existsSync(headPath) && existsSync(basePath)) {
-        createDummySwagger(basePath, headPath);
-      }
-    }
+  const deletedSwaggerPlaceholders =
+    context.prInfo && isSameVersionBreakingType(context.runType)
+      ? diffs.deletions.filter((swagger) => {
+          const headPath = path.resolve(context.localSpecRepoPath, swagger);
+          const basePath = path.join(context.prInfo.tempRepoFolder, swagger);
+          return !existsSync(headPath) && existsSync(basePath);
+        })
+      : [];
+
+  logMessage(
+    `Creating placeholder files for deleted Swagger suppressions. Count: ${deletedSwaggerPlaceholders.length}`,
+  );
+
+  for (const swagger of deletedSwaggerPlaceholders) {
+    createDummySwagger(
+      path.join(context.prInfo!.tempRepoFolder, swagger),
+      path.resolve(context.localSpecRepoPath, swagger),
+    );
   }
 
   const swaggersToProcess = new Set(
