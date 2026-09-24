@@ -45677,15 +45677,16 @@ components:
       required:
         - id
         - status
+        - name
+        - sources
+        - generation_configuration
+        - scenario
         - created_at
       properties:
         id:
           type: string
           description: Server-assigned unique identifier.
           readOnly: true
-        inputs:
-          $ref: '#/components/schemas/DataGenerationJobInputs'
-          description: Caller-supplied inputs.
         result:
           $ref: '#/components/schemas/DataGenerationJobResult'
           description: Result produced on success.
@@ -45698,6 +45699,20 @@ components:
           $ref: '#/components/schemas/OpenAI.Error'
           description: Error details — populated only on failure.
           readOnly: true
+        name:
+          type: string
+          description: The display name of the data generation job.
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataGenerationJobSource'
+          description: The sources used for the data generation job.
+        generation_configuration:
+          $ref: '#/components/schemas/DataGenerationJobOptions'
+          description: The generation configuration for the data generation job.
+        scenario:
+          $ref: '#/components/schemas/DataGenerationJobScenario'
+          description: The scenario of the data generation job. Either for fine-tuning or evaluation.
         created_at:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).
@@ -45706,6 +45721,12 @@ components:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The timestamp when the job was finished, represented in Unix time (seconds since January 1, 1970).
           readOnly: true
+      discriminator:
+        propertyName: scenario
+        mapping:
+          evaluation: '#/components/schemas/EvaluationDataGenerationJob'
+          supervised_finetuning: '#/components/schemas/SupervisedFineTuningDataGenerationJob'
+          reinforcement_finetuning: '#/components/schemas/ReinforcementFineTuningDataGenerationJob'
       description: Data Generation Job resource.
       x-ms-foundry-meta:
         conditional_previews:
@@ -47293,6 +47314,25 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - Insights=V1Preview
+    EvaluationDataGenerationJob:
+      type: object
+      required:
+        - scenario
+      properties:
+        scenario:
+          type: string
+          enum:
+            - evaluation
+          description: The scenario of the data generation job, which is Evaluation for this model.
+        output_configuration:
+          $ref: '#/components/schemas/EvaluationDataGenerationJobOutputTarget'
+          description: Optional dataset output configuration for the generated evaluation data.
+      allOf:
+        - $ref: '#/components/schemas/DataGenerationJob'
+      description: Evaluation data generation job resource.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     EvaluationDataGenerationJobInputs:
       type: object
       required:
@@ -79936,6 +79976,25 @@ components:
       allOf:
         - $ref: '#/components/schemas/ItemGenerationParams'
       description: Represents the parameters for red team taxonomy item generation.
+    ReinforcementFineTuningDataGenerationJob:
+      type: object
+      required:
+        - scenario
+      properties:
+        scenario:
+          type: string
+          enum:
+            - reinforcement_finetuning
+          description: The scenario of the data generation job, which is Reinforcement Fine-tuning for this model.
+        output_configuration:
+          $ref: '#/components/schemas/ReinforcementFineTuningDataGenerationJobOutputTarget'
+          description: Optional file output configuration for the generated reinforcement fine-tuning data.
+      allOf:
+        - $ref: '#/components/schemas/DataGenerationJob'
+      description: Reinforcement fine-tuning data generation job resource.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     ReinforcementFineTuningDataGenerationJobInputs:
       type: object
       required:
@@ -81252,6 +81311,25 @@ components:
           description: The structured output captured during the response.
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
+    SupervisedFineTuningDataGenerationJob:
+      type: object
+      required:
+        - scenario
+      properties:
+        scenario:
+          type: string
+          enum:
+            - supervised_finetuning
+          description: The scenario of the data generation job, which is Supervised Fine-tuning for this model.
+        output_configuration:
+          $ref: '#/components/schemas/SupervisedFineTuningDataGenerationJobOutputTarget'
+          description: Optional file output configuration for the generated supervised fine-tuning data.
+      allOf:
+        - $ref: '#/components/schemas/DataGenerationJob'
+      description: Supervised fine-tuning data generation job resource.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     SupervisedFineTuningDataGenerationJobInputs:
       type: object
       required:
