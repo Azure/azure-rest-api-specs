@@ -68,6 +68,51 @@ alias ManagedInstanceLongTermRetentionBackupOps = Azure.ResourceManager.Legacy.L
   ResourceName = "SubscriptionLongTermRetentionManagedInstanceBackup"
 >;
 
+alias ManagedInstanceLongTermRetentionBackupActionOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+
+    /** the provider namespace */
+    @path
+    @segment("providers")
+    @key
+    providerNamespace: "Microsoft.Sql";
+
+    /** The location of the database. */
+    @path
+    @segment("locations")
+    @key
+    @pattern("^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$")
+    locationName: Azure.Core.azureLocation;
+
+    /** The name of the managed instance. */
+    @path
+    @segment("longTermRetentionManagedInstances")
+    @key
+    @pattern("^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$")
+    managedInstanceName: string;
+
+    /** The name of the managed database. */
+    @path
+    @segment("longTermRetentionDatabases")
+    @key
+    @pattern("^(?:[A-Za-z0-9_()'.-]|[A-Za-z0-9_ .()'.-]{1,127}[A-Za-z0-9_()'.-])$")
+    databaseName: string;
+  },
+  {
+    /** The backup name. */
+    @path
+    @segment("longTermRetentionManagedInstanceBackups")
+    @key
+    @pattern(
+      "^[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12};[0-9]{18};(?:Hot|Archive)$"
+    )
+    backupName: string;
+  },
+  ResourceName = "SubscriptionLongTermRetentionManagedInstanceBackup"
+>;
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations(#{ omitTags: true })
 @Azure.ResourceManager.Legacy.feature(
@@ -95,7 +140,7 @@ interface ManagedInstanceLongTermRetentionBackups {
    */
   @added(Versions.v2026_08_01_preview)
   @tag("LongTermRetentionManagedInstanceBackups")
-  lockTimeBasedImmutability is ManagedInstanceLongTermRetentionBackupOps.ActionAsync<
+  lockTimeBasedImmutability is ManagedInstanceLongTermRetentionBackupActionOps.ActionAsync<
     ManagedInstanceLongTermRetentionBackup,
     void,
     void,
@@ -109,7 +154,7 @@ interface ManagedInstanceLongTermRetentionBackups {
    */
   @added(Versions.v2026_08_01_preview)
   @tag("LongTermRetentionManagedInstanceBackups")
-  removeLegalHoldImmutability is ManagedInstanceLongTermRetentionBackupOps.ActionAsync<
+  removeLegalHoldImmutability is ManagedInstanceLongTermRetentionBackupActionOps.ActionAsync<
     ManagedInstanceLongTermRetentionBackup,
     void,
     void,
@@ -123,7 +168,7 @@ interface ManagedInstanceLongTermRetentionBackups {
    */
   @added(Versions.v2026_08_01_preview)
   @tag("LongTermRetentionManagedInstanceBackups")
-  removeTimeBasedImmutability is ManagedInstanceLongTermRetentionBackupOps.ActionAsync<
+  removeTimeBasedImmutability is ManagedInstanceLongTermRetentionBackupActionOps.ActionAsync<
     ManagedInstanceLongTermRetentionBackup,
     void,
     void,
@@ -137,7 +182,7 @@ interface ManagedInstanceLongTermRetentionBackups {
    */
   @added(Versions.v2026_08_01_preview)
   @tag("LongTermRetentionManagedInstanceBackups")
-  setLegalHoldImmutability is ManagedInstanceLongTermRetentionBackupOps.ActionAsync<
+  setLegalHoldImmutability is ManagedInstanceLongTermRetentionBackupActionOps.ActionAsync<
     ManagedInstanceLongTermRetentionBackup,
     void,
     void,
@@ -202,6 +247,47 @@ alias LongTermRetentionManagedInstanceBackupOps = Azure.ResourceManager.Legacy.L
   ResourceName = "ResourceGroupLongTermRetentionManagedInstanceBackup"
 >;
 
+alias LongTermRetentionManagedInstanceBackupActionOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider;
+
+    /** The location of the database. */
+    @path
+    @segment("locations")
+    @key
+    @pattern("^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$")
+    locationName: Azure.Core.azureLocation;
+
+    /** The name of the managed instance. */
+    @path
+    @segment("longTermRetentionManagedInstances")
+    @key
+    @pattern("^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$")
+    managedInstanceName: string;
+
+    /** The name of the managed database. */
+    @path
+    @segment("longTermRetentionDatabases")
+    @key
+    @pattern("^(?:[A-Za-z0-9_()'.-]|[A-Za-z0-9_ .()'.-]{1,127}[A-Za-z0-9_()'.-])$")
+    databaseName: string;
+  },
+  {
+    /** The backup name. */
+    @path
+    @segment("longTermRetentionManagedInstanceBackups")
+    @key
+    @pattern(
+      "^[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12};[0-9]{18};(?:Hot|Archive)$"
+    )
+    backupName: string;
+  },
+  ResourceName = "ResourceGroupLongTermRetentionManagedInstanceBackup"
+>;
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 @Azure.ResourceManager.Legacy.feature(
@@ -227,7 +313,7 @@ interface LongTermRetentionManagedInstanceBackups {
    */
   @added(Versions.v2026_08_01_preview)
   @action("lockTimeBasedImmutability")
-  lockTimeBasedImmutabilityByResourceGroup is LongTermRetentionManagedInstanceBackupOps.ActionAsync<
+  lockTimeBasedImmutabilityByResourceGroup is LongTermRetentionManagedInstanceBackupActionOps.ActionAsync<
     ManagedInstanceLongTermRetentionBackup,
     void,
     void,
@@ -241,7 +327,7 @@ interface LongTermRetentionManagedInstanceBackups {
    */
   @added(Versions.v2026_08_01_preview)
   @action("removeLegalHoldImmutability")
-  removeLegalHoldImmutabilityByResourceGroup is LongTermRetentionManagedInstanceBackupOps.ActionAsync<
+  removeLegalHoldImmutabilityByResourceGroup is LongTermRetentionManagedInstanceBackupActionOps.ActionAsync<
     ManagedInstanceLongTermRetentionBackup,
     void,
     void,
@@ -255,7 +341,7 @@ interface LongTermRetentionManagedInstanceBackups {
    */
   @added(Versions.v2026_08_01_preview)
   @action("removeTimeBasedImmutability")
-  removeTimeBasedImmutabilityByResourceGroup is LongTermRetentionManagedInstanceBackupOps.ActionAsync<
+  removeTimeBasedImmutabilityByResourceGroup is LongTermRetentionManagedInstanceBackupActionOps.ActionAsync<
     ManagedInstanceLongTermRetentionBackup,
     void,
     void,
@@ -269,7 +355,7 @@ interface LongTermRetentionManagedInstanceBackups {
    */
   @added(Versions.v2026_08_01_preview)
   @action("setLegalHoldImmutability")
-  setLegalHoldImmutabilityByResourceGroup is LongTermRetentionManagedInstanceBackupOps.ActionAsync<
+  setLegalHoldImmutabilityByResourceGroup is LongTermRetentionManagedInstanceBackupActionOps.ActionAsync<
     ManagedInstanceLongTermRetentionBackup,
     void,
     void,
