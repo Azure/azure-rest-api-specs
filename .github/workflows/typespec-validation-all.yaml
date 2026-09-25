@@ -54,8 +54,8 @@ jobs:
         # the GitHub Jobs UI.
         ref: ${{ fromJSON(github.event_name == 'schedule' && '["default", "next"]' || '["default"]') }}
         os: [ubuntu, windows]
-        # shards must start at 0 and increment by 1
-        shard: [0, 1, 2]
+        # shards must start at 1 and increment by 1
+        shard: [1, 2, 3]
         # total-shards must be an accurate count of the number of shards
         total-shards: [3]
 
@@ -75,15 +75,6 @@ jobs:
         uses: ./.github/actions/setup-node-install-deps
 
       - name: Validate All Specs
-        run: |
-          # Keep processing when errors are written. Nonzero exit will mark the 
-          # step as failed. 
-          $ErrorActionPreference = 'Continue'
-
-          ./eng/scripts/TypeSpec-Validation.ps1 `
-            -Shard ${{ matrix.shard }} `
-            -TotalShards ${{ matrix.total-shards }} `
-            -CheckAll `
-            -GitClean `
-            -Verbose
-        shell: pwsh
+        run: >-
+          node eng/tools/typespec-validation/cmd/tsv.js --all
+          --shard=${{ matrix.shard }}/${{ matrix.total-shards }} --git-clean specification
