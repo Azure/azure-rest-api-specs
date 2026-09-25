@@ -1,0 +1,64 @@
+{
+  "operationId": "DataOnboardingActivations_Get",
+  "title": "Get the activation of a data onboarding in one region",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "offeringName": "contoso-insights",
+    "dataOnboardingName": "microsoft-network-20260414091500",
+    "location": "westus2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ResourceGraph/offerings/contoso-insights/dataOnboardings/microsoft-network-20260414091500/locations/westus2/activation/default",
+        "name": "default",
+        "type": "Microsoft.ResourceGraph/offerings/dataOnboardings/locations/activation",
+        "properties": {
+          "region": "westus2",
+          "provisioningState": "Succeeded",
+          "reviewStatus": "Executed",
+          "validationDetails": [],
+          "assignments": [
+            {
+              "kind": "Node",
+              "resourceType": "microsoft.network/virtualnetworks",
+              "scaleUnit": "su1",
+              "dataset": "Resources",
+              "logicalTableName": "Resources",
+              "physicalTableName": "Resources_v1",
+              "lookbackHours": 60
+            },
+            {
+              "kind": "Node",
+              "resourceType": "microsoft.network/networkinterfaces",
+              "scaleUnit": "su1",
+              "dataset": "Resources",
+              "logicalTableName": "Resources",
+              "physicalTableName": "Resources_v1",
+              "lookbackHours": 60
+            },
+            {
+              "kind": "Edge",
+              "relationshipType": "Microsoft.Network/attachedTo",
+              "sourceNodeType": "microsoft.network/networkinterfaces",
+              "targetNodeType": "microsoft.network/virtualnetworks",
+              "scaleUnit": "su1",
+              "dataset": "Resources",
+              "logicalTableName": "Relationships",
+              "physicalTableName": "Relationships_v1",
+              "lookbackHours": 60
+            }
+          ],
+          "ingestionEndpoint": {
+            "uri": "https://arg-ingestion-westus2.resourcegraph.azure.com/notifications",
+            "supportedFormats": [
+              "ARNSchemaV3"
+            ]
+          },
+          "materializedDataOnboardingRefs": []
+        }
+      }
+    }
+  }
+}

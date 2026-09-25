@@ -1,0 +1,70 @@
+{
+  "operationId": "Ontologies_Get",
+  "title": "Get an ontology",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "offeringName": "contoso-insights",
+    "ontologyName": "network-topology"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ResourceGraph/offerings/contoso-insights/ontologies/network-topology",
+        "name": "network-topology",
+        "type": "Microsoft.ResourceGraph/offerings/ontologies",
+        "properties": {
+          "displayName": "Network Topology",
+          "autoOnboard": true,
+          "nodeTypeRefs": [
+            {
+              "resourceType": "microsoft.network/virtualnetworks",
+              "alias": "vnet"
+            },
+            {
+              "resourceType": "microsoft.network/networkinterfaces",
+              "alias": "nic"
+            }
+          ],
+          "edgeTypeRefs": [
+            {
+              "relationshipType": "Microsoft.Network/attachedTo",
+              "sourceNodeType": "microsoft.network/networkinterfaces",
+              "targetNodeType": "microsoft.network/virtualnetworks"
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "reviewStatus": "Approved",
+          "approvedBy": "arg-onboarding@microsoft.com",
+          "approvedAt": "2026-04-12T16:05:00.000Z",
+          "validationStatus": "Available",
+          "validationDetails": [
+            {
+              "kind": "Node",
+              "resourceType": "microsoft.network/virtualnetworks",
+              "availability": "Available",
+              "dataOnboardingRef": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ResourceGraph/offerings/contoso-insights/dataOnboardings/microsoft-network-20260414091500",
+              "reviewStatus": "Approved"
+            },
+            {
+              "kind": "Node",
+              "resourceType": "microsoft.network/networkinterfaces",
+              "availability": "Available",
+              "dataOnboardingRef": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ResourceGraph/offerings/contoso-insights/dataOnboardings/microsoft-network-20260414091500",
+              "reviewStatus": "Approved"
+            },
+            {
+              "kind": "Edge",
+              "relationshipType": "Microsoft.Network/attachedTo",
+              "sourceNodeType": "microsoft.network/networkinterfaces",
+              "targetNodeType": "microsoft.network/virtualnetworks",
+              "availability": "Available",
+              "dataOnboardingRef": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ResourceGraph/offerings/contoso-insights/dataOnboardings/microsoft-network-20260414091500",
+              "reviewStatus": "Approved"
+            }
+          ]
+        }
+      }
+    }
+  }
+}
