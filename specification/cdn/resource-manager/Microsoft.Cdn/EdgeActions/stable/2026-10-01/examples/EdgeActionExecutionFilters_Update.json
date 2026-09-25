@@ -4,7 +4,7 @@
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "testrg",
-    "api-version": "2025-12-01-preview",
+    "api-version": "2026-10-01",
     "edgeActionName": "edgeAction1",
     "executionFilter": "executionFilter1",
     "properties": {
@@ -16,7 +16,7 @@
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Cdn/edgeActions/edgeAction1/slots/slot1",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Cdn/edgeActions/edgeAction1/executionFilters/executionFilter1",
         "name": "executionFilter1",
         "type": "Microsoft.Cdn/edgeActions/executionFilters",
         "location": "global",
@@ -31,7 +31,9 @@
     },
     "202": {
       "headers": {
-        "location": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2025-09-01-preview"
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Cdn/edgeActionOperationResults/11111111-1111-1111-1111-111111111111?api-version=2026-10-01",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Cdn/edgeActionOperations/11111111-1111-1111-1111-111111111111?api-version=2026-10-01",
+        "Retry-After": 60
       }
     }
   }

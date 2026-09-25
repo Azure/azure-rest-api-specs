@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Cdn/EdgeAction",
-    "version": "2025-12-01-preview",
+    "version": "2026-10-01",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -46,9 +46,77 @@
     },
     {
       "name": "EdgeActionExecutionFilters"
+    },
+    {
+      "name": "EdgeActionOperations"
+    },
+    {
+      "name": "EdgeActionOperationResults"
     }
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/edgeActionOperationResults/{operationId}": {
+      "get": {
+        "operationId": "EdgeActionOperationResults_Get",
+        "tags": [
+          "EdgeActionOperationResults"
+        ],
+        "description": "Returns the result of an Edge Action asynchronous operation. The `200` body is the body the\noriginating operation would have returned synchronously, so it varies by operation and is not\ndeclared as one fixed schema.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed. The body is the response the originating operation would have produced\nhad it run synchronously, so its shape depends on that operation and is not one fixed schema.\nThere is no `status` field here; the outcome is the HTTP status code."
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The URL to poll for the result of this operation."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "minimum": 10,
+                "maximum": 600
+              }
+            }
+          },
+          "204": {
+            "description": "The operation completed successfully and produced no content."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetEdgeActionOperationResult": {
+            "$ref": "./examples/EdgeActionOperationResults_Get.json"
+          },
+          "GetEdgeActionOperationResultThatCompletedWithoutContent": {
+            "$ref": "./examples/EdgeActionOperationResults_GetNoContent.json"
+          },
+          "GetEdgeActionOperationResultWhileRunning": {
+            "$ref": "./examples/EdgeActionOperationResults_GetRunning.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/edgeActions": {
       "get": {
         "operationId": "EdgeActions_ListBySubscription",
@@ -85,6 +153,48 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActionOperations/{operationId}": {
+      "get": {
+        "operationId": "EdgeActionOperations_Get",
+        "tags": [
+          "EdgeActionOperations"
+        ],
+        "description": "Returns the current status of an Edge Action asynchronous operation.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/OperationIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EdgeActionOperationStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetEdgeActionOperationStatus": {
+            "$ref": "./examples/EdgeActionOperations_Get.json"
+          }
         }
       }
     },
@@ -217,6 +327,20 @@
             "description": "Resource 'EdgeAction' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/EdgeAction"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "minimum": 10,
+                "maximum": 600
+              }
             }
           },
           "201": {
@@ -227,12 +351,15 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
               },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "minimum": 10,
+                "maximum": 600
               }
             }
           },
@@ -298,6 +425,11 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -305,7 +437,9 @@
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "minimum": 10,
+                "maximum": 600
               }
             }
           },
@@ -359,6 +493,11 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -366,7 +505,9 @@
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "minimum": 10,
+                "maximum": 600
               }
             }
           },
@@ -547,6 +688,20 @@
             "description": "Resource 'EdgeActionExecutionFilter' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/EdgeActionExecutionFilter"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "minimum": 10,
+                "maximum": 600
+              }
             }
           },
           "201": {
@@ -557,12 +712,15 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
               },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "minimum": 10,
+                "maximum": 600
               }
             }
           },
@@ -576,6 +734,9 @@
         "x-ms-examples": {
           "CreateEdgeActionExecutionFilters": {
             "$ref": "./examples/EdgeActionExecutionFilters_Create.json"
+          },
+          "CreateOrReplaceEdgeActionExecutionFilterAsync": {
+            "$ref": "./examples/EdgeActionExecutionFilters_ReplaceAsync.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -637,6 +798,11 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -644,7 +810,9 @@
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "minimum": 10,
+                "maximum": 600
               }
             }
           },
@@ -707,6 +875,11 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -714,7 +887,9 @@
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "minimum": 10,
+                "maximum": 600
               }
             }
           },
@@ -895,6 +1070,20 @@
             "description": "Resource 'EdgeActionVersion' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/EdgeActionVersion"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "minimum": 10,
+                "maximum": 600
+              }
             }
           },
           "201": {
@@ -905,12 +1094,15 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
               },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "minimum": 10,
+                "maximum": 600
               }
             }
           },
@@ -985,6 +1177,11 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -992,7 +1189,9 @@
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "minimum": 10,
+                "maximum": 600
               }
             }
           },
@@ -1055,6 +1254,11 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1062,7 +1266,9 @@
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "minimum": 10,
+                "maximum": 600
               }
             }
           },
@@ -1093,7 +1299,7 @@
         "tags": [
           "EdgeActionVersions"
         ],
-        "description": "A long-running resource action.",
+        "description": "Deploys code to an edge action version.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1142,6 +1348,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1149,7 +1360,9 @@
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "minimum": 10,
+                "maximum": 600
               }
             }
           },
@@ -1177,7 +1390,7 @@
         "tags": [
           "EdgeActionVersions"
         ],
-        "description": "Get the version code for the edge action version.",
+        "description": "Gets the deployed code for an edge action version.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1214,20 +1427,6 @@
               "$ref": "#/definitions/VersionCode"
             }
           },
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1239,11 +1438,7 @@
           "GetVersionCode": {
             "$ref": "./examples/EdgeActionVersions_GetVersionCode.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/versions/{version}/swapDefault": {
@@ -1252,7 +1447,7 @@
         "tags": [
           "EdgeActionVersions"
         ],
-        "description": "Swap the default version for the edge action.",
+        "description": "Swaps the default edge action version.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1286,6 +1481,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -1293,7 +1493,9 @@
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status.",
+                "minimum": 10,
+                "maximum": 600
               }
             }
           },
@@ -1381,6 +1583,49 @@
       "required": [
         "attachedResourceId"
       ]
+    },
+    "EdgeActionDeploymentStatus": {
+      "type": "string",
+      "description": "The deployment status for edge action version code.",
+      "enum": [
+        "NotStarted",
+        "InProgress",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "EdgeActionDeploymentStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "No code deployment has been durably accepted."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "A code deployment has been durably accepted and is not terminal."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Code deployment succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Code deployment failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Code deployment was canceled."
+          }
+        ]
+      },
+      "readOnly": true
     },
     "EdgeActionExecutionFilter": {
       "type": "object",
@@ -1522,30 +1767,6 @@
         }
       }
     },
-    "EdgeActionIsDefaultVersion": {
-      "type": "string",
-      "description": "Indicates whether this is the default version",
-      "enum": [
-        "True",
-        "False"
-      ],
-      "x-ms-enum": {
-        "name": "EdgeActionIsDefaultVersion",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "True",
-            "value": "True",
-            "description": "This is the default version"
-          },
-          {
-            "name": "False",
-            "value": "False",
-            "description": "This is not the default version"
-          }
-        ]
-      }
-    },
     "EdgeActionListResult": {
       "type": "object",
       "description": "The response of a EdgeAction list operation.",
@@ -1565,6 +1786,61 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "EdgeActionOperationStatus": {
+      "type": "object",
+      "description": "The current status of an Edge Action asynchronous operation. This is the body served by the\n`Azure-AsyncOperation` polling URL, and it follows the Azure Resource Manager asynchronous\noperation status format: `id` addresses the status resource, `name` is the operation\nidentifier, and `properties` carries the operation outcome once the operation succeeds.\n`percentComplete` and nested `operations` are intentionally omitted, because the service\nreports neither. There is no `resourceId`: the preview api-versions returned that name\ncarrying the operation status resource URL, which is the value `id` now carries, so this is\na rename rather than a dropped field. The identifier of the resource the operation ran\nagainst is not recorded on the operation, so no field claims to supply it.",
+      "properties": {
+        "properties": {
+          "type": "object",
+          "description": "Edge Action specific properties for the operation status resource. Only present when the operation ended with a Succeeded status.",
+          "additionalProperties": {},
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/OperationStatus",
+          "description": "The current status of the operation.",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "description": "The fully qualified identifier of the operation status resource itself, which is the URL used to read this status. Preview api-versions returned this same value under the name resourceId.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the operation status resource, which is the operation identifier.",
+          "readOnly": true
+        },
+        "operationType": {
+          "type": "string",
+          "description": "The operation type.",
+          "readOnly": true
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the operation.",
+          "readOnly": true
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the operation (if completed).",
+          "readOnly": true
+        },
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
+          "description": "The error detail, present when the operation ended with a Failed or Canceled status.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "status",
+        "id",
+        "name",
+        "operationType"
       ]
     },
     "EdgeActionProperties": {
@@ -1589,22 +1865,10 @@
         "attachments"
       ]
     },
-    "EdgeActionPropertiesUpdate": {
-      "type": "object",
-      "description": "Represents an edge action properties"
-    },
     "EdgeActionUpdate": {
       "type": "object",
       "description": "The type used for update operations of the EdgeAction.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/EdgeActionPropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
-        },
-        "sku": {
-          "$ref": "#/definitions/SkuTypeUpdate",
-          "description": "The sku type of the edge action"
-        },
         "tags": {
           "type": "object",
           "description": "Resource tags.",
@@ -1660,6 +1924,36 @@
             "name": "others",
             "value": "others",
             "description": "Other deployment types"
+          }
+        ]
+      }
+    },
+    "EdgeActionVersionExecutionState": {
+      "type": "string",
+      "description": "When the edge action version executes.",
+      "enum": [
+        "Default",
+        "Active",
+        "Inactive"
+      ],
+      "x-ms-enum": {
+        "name": "EdgeActionVersionExecutionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Default",
+            "value": "Default",
+            "description": "Executes when no Execution Filter is exercised. Selected by swapDefault. An associated Execution Filter may additionally trigger execution; the state remains Default."
+          },
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Executes when its associated Execution Filter is exercised, and only then."
+          },
+          {
+            "name": "Inactive",
+            "value": "Inactive",
+            "description": "Never executes because nothing exists to trigger it."
           }
         ]
       }
@@ -1720,14 +2014,15 @@
           "description": "The provisioning state",
           "readOnly": true
         },
-        "isDefaultVersion": {
-          "$ref": "#/definitions/EdgeActionIsDefaultVersion",
-          "description": "The active state",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+        "versionExecutionState": {
+          "$ref": "#/definitions/EdgeActionVersionExecutionState",
+          "description": "How this version receives traffic.",
+          "readOnly": true
+        },
+        "deploymentStatus": {
+          "$ref": "#/definitions/EdgeActionDeploymentStatus",
+          "description": "The status of the latest accepted code deployment.",
+          "readOnly": true
         },
         "lastPackageUpdateTime": {
           "type": "string",
@@ -1738,7 +2033,8 @@
       },
       "required": [
         "deploymentType",
-        "isDefaultVersion"
+        "versionExecutionState",
+        "deploymentStatus"
       ]
     },
     "EdgeActionVersionUpdate": {
@@ -1751,34 +2047,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "properties": {
-          "$ref": "#/definitions/EdgeActionVersionUpdateProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      }
-    },
-    "EdgeActionVersionUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the EdgeActionVersion.",
-      "properties": {
-        "deploymentType": {
-          "$ref": "#/definitions/EdgeActionVersionDeploymentType",
-          "description": "The deployment type",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "isDefaultVersion": {
-          "$ref": "#/definitions/EdgeActionIsDefaultVersion",
-          "description": "The active state",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
         }
       }
     },
@@ -1807,6 +2075,43 @@
       },
       "readOnly": true
     },
+    "OperationStatus": {
+      "type": "string",
+      "description": "The status of an operation",
+      "enum": [
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "Operation is running"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Operation succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Operation failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Operation was canceled"
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "ProvisioningState": {
       "type": "string",
       "description": "The status of the current operation",
@@ -1815,7 +2120,8 @@
         "Failed",
         "Canceled",
         "Provisioning",
-        "Upgrading"
+        "Upgrading",
+        "Deleting"
       ],
       "x-ms-enum": {
         "name": "ProvisioningState",
@@ -1845,6 +2151,11 @@
             "name": "Upgrading",
             "value": "Upgrading",
             "description": "Upgrade in progress"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deletion is in progress."
           }
         ]
       },
@@ -1868,20 +2179,6 @@
         "tier"
       ]
     },
-    "SkuTypeUpdate": {
-      "type": "object",
-      "description": "The SKU type for update operations",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the SKU"
-        },
-        "tier": {
-          "type": "string",
-          "description": "The tier of the SKU"
-        }
-      }
-    },
     "VersionCode": {
       "type": "object",
       "description": "Version code information for edge action",
@@ -1894,20 +2191,10 @@
             "update",
             "create"
           ]
-        },
-        "name": {
-          "type": "string",
-          "description": "The version code name",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
         }
       },
       "required": [
-        "content",
-        "name"
+        "content"
       ]
     }
   },
