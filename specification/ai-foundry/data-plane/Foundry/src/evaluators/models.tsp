@@ -421,6 +421,7 @@ model EvaluatorVersion {
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request body for getting evaluator credentials")
 model EvaluatorCredentialRequest {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The blob URI for the evaluator storage. Example: `https://account.blob.core.windows.net:443/container`")
   blob_uri: url;
 }
