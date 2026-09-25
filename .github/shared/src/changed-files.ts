@@ -19,6 +19,8 @@ export async function getChangedFiles(
   options: {
     baseCommitish?: string;
     cwd?: string;
+    /** Git configuration passed with -c, without updating the repository configuration. */
+    gitConfig?: string[];
     gitOptions?: string[];
     headCommitish?: string;
     logger?: import("./logger.ts").ILogger;
@@ -28,6 +30,7 @@ export async function getChangedFiles(
   const {
     baseCommitish = "HEAD^",
     cwd,
+    gitConfig = [],
     gitOptions = [],
     headCommitish = "HEAD",
     logger,
@@ -44,7 +47,7 @@ export async function getChangedFiles(
   // { name: "/foo/baz.js", status: Status.Renamed, previousName: "/foo/bar.js"}.
   // Then add filter functions to filter based on status.  This is more flexible and lets consumers
   // filter based on status with a single call to `git diff`.
-  const result = await simpleGit(cwd).diff([
+  const result = await simpleGit({ baseDir: cwd ?? process.cwd(), config: gitConfig }).diff([
     "--name-only",
     ...gitOptions,
     baseCommitish,

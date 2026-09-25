@@ -5,7 +5,7 @@ import { tmpdir } from "node:os";
 import { join, relative, sep } from "node:path";
 import { simpleGit } from "simple-git";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
-import { runAll } from "../src/run-all.ts";
+import { runAll } from "../src/run-projects.ts";
 
 vi.mock("node:child_process", async (importOriginal) => ({
   ...(await importOriginal()),

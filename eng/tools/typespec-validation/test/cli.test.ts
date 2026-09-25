@@ -1,5 +1,5 @@
 import { execFile } from "node:child_process";
-import { mkdir, mkdtemp, realpath, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -20,6 +20,19 @@ async function addProject(path: string) {
 
 function run(...args: string[]) {
   return execFileAsync(process.execPath, [cli, ...args], { cwd: root });
+}
+
+async function initGit() {
+  return simpleGit(root)
+    .init()
+    .addConfig("user.name", "Test")
+    .addConfig("user.email", "test@example.com")
+    .addConfig("commit.gpgsign", "false");
+}
+
+async function commit(message: string) {
+  await simpleGit(root).add("-A").commit(message);
+  return (await simpleGit(root).revparse("HEAD")).trim();
 }
 
 beforeEach(async () => {
@@ -119,10 +132,12 @@ it("exits nonzero when --all finds no projects", async () => {
   });
 });
 
-it("requires --all for --git-clean", async () => {
+it("requires a batch mode for --git-clean", async () => {
   await expect(run("--git-clean", "project")).rejects.toMatchObject({
     code: 1,
-    stderr: expect.stringContaining("--git-clean requires --all") as unknown,
+    stderr: expect.stringContaining(
+      "--git-clean and --dry-run require --all or --changed",
+    ) as unknown,
   });
 });
 
@@ -184,7 +199,173 @@ it("rejects extra positional arguments to --all", async () => {
   await expect(run("--all", "specification", "extra")).rejects.toMatchObject({
     code: 1,
     stderr: expect.stringContaining(
-      "Usage: tsv --all [folder] [--shard=<index>/<count>] [--git-clean]",
+      "Usage: tsv --all [folder] [--shard=<index>/<count>] [--git-clean] [--dry-run]",
     ) as unknown,
+  });
+});
+
+it("validates only changed projects and forwards commit context with cleanup enabled", async () => {
+  await addProject("specification/service/a");
+  await addProject("specification/other/b");
+  await writeFile(
+    join(root, "suppressions.yaml"),
+    `- tool: TypeSpecValidationAll
+  paths: [specification/**]
+  reason: must not suppress scoped runs
+- tool: TypeSpecValidation
+  paths: [specification/service/a]
+  if: !checkingAllSpecs && baseCommitish === "HEAD^" && headCommitish === "HEAD"
+  reason: changed project context
+`,
+  );
+  await initGit();
+  await commit("Base");
+  await writeFile(join(root, "specification/service/a/tspconfig.yaml"), "# changed");
+  await commit("Head");
+
+  const { stdout } = await run("--changed", "--git-clean");
+  expect(stdout).toContain("Checking 1 TypeSpec folders:\nspecification/service/a");
+  expect(stdout).toContain("Suppressed: changed project context");
+  expect(stdout).not.toContain("must not suppress scoped runs");
+  expect(stdout).not.toContain("Validating specification/other/b");
+  expect((await simpleGit(root).status()).isClean()).toBe(true);
+});
+
+it("can ignore a core-file fallback while retaining scoped spec changes", async () => {
+  await addProject("specification/service/a");
+  await addProject("specification/other/b");
+  await writeFile(
+    join(root, "suppressions.yaml"),
+    `- tool: TypeSpecValidation
+  paths: [specification/**]
+  if: typeof baseCommitish === "string" && typeof headCommitish === "string"
+  reason: valid context
+`,
+  );
+  await initGit();
+  await commit("Base");
+  await writeFile(join(root, ".gitattributes"), "*.tsp text\n");
+  await writeFile(join(root, "specification/service/a/tspconfig.yaml"), "# changed");
+  await commit("Head");
+
+  const all = await run("--changed");
+  expect(all.stdout).toContain("Found changes to core eng or root files so checking all specs.");
+  expect(all.stdout).toContain("Checking 2 TypeSpec folders:");
+  expect(all.stdout.match(/Suppressed: valid context/g)).toHaveLength(2);
+  const scoped = await run("--changed", "--ignore-core-files");
+  expect(scoped.stdout).toContain("Checking 1 TypeSpec folders:\nspecification/service/a");
+  expect(scoped.stdout).not.toContain("Validating specification/other/b");
+});
+
+it("honors explicit revisions and dry runs without modifying local files", async () => {
+  await addProject("specification/service/a");
+  await addProject("specification/other/b");
+  await initGit();
+  const base = await commit("Base");
+  await writeFile(join(root, "specification/service/a/tspconfig.yaml"), "# first");
+  const head = await commit("First change");
+  await writeFile(join(root, "specification/other/b/tspconfig.yaml"), "# second");
+  await commit("Second change");
+  const untracked = join(root, "local.txt");
+  await writeFile(untracked, "keep");
+
+  const { stdout } = await run(
+    "--changed",
+    `--base=${base}`,
+    `--head=${head}`,
+    "--dry-run",
+    "--git-clean",
+  );
+  expect(stdout).toContain("Checking 1 TypeSpec folders:\nspecification/service/a");
+  expect(stdout).toContain(`"baseCommitish":"${base}","headCommitish":"${head}"`);
+  expect(stdout).not.toContain("Running TypeSpecValidation on folder:");
+  expect(await readFile(untracked, "utf8")).toBe("keep");
+});
+
+it("succeeds when committed changes do not affect any projects", async () => {
+  await addProject("specification/service/a");
+  await initGit();
+  await commit("Base");
+  await writeFile(join(root, "README.md"), "docs only");
+  await commit("Docs");
+
+  const { stdout } = await run("--changed");
+  expect(stdout).toContain("No impacted TypeSpec projects found");
+  expect(stdout).not.toContain("Running TypeSpecValidation on folder:");
+});
+
+it("includes services with changed non-ASCII filenames without changing Git configuration", async () => {
+  await addProject("specification/service/a");
+  await initGit();
+  await simpleGit(root).addConfig("core.quotepath", "true");
+  await commit("Base");
+  await writeFile(join(root, "specification/service/a/caf\u00e9.json"), "{}");
+  await commit("Example");
+
+  const { stdout } = await run("--changed", "--dry-run");
+  expect(stdout).toContain("Checking 1 TypeSpec folders:\nspecification/service/a");
+  expect((await simpleGit(root).getConfig("core.quotepath")).value).toBe("true");
+});
+
+it("fails instead of treating an invalid base as an empty selection", async () => {
+  await addProject("specification/service/a");
+  await initGit();
+  await commit("Base");
+
+  await expect(run("--changed", "--base=missing-ref")).rejects.toMatchObject({ code: 1 });
+});
+
+it("returns a failure exit code and still validates later impacted projects", async () => {
+  await addProject("specification/service/a");
+  await addProject("specification/service/b");
+  await writeFile(
+    join(root, "suppressions.yaml"),
+    "- tool: TypeSpecValidation\n  paths: [specification/service/b]\n  reason: later project\n",
+  );
+  await initGit();
+  await commit("Base");
+  await writeFile(join(root, "specification/service/a/tspconfig.yaml"), "# changed");
+  await writeFile(join(root, "specification/service/b/tspconfig.yaml"), "# changed");
+  await commit("Head");
+
+  await expect(run("--changed")).rejects.toMatchObject({
+    code: 1,
+    stdout: expect.stringContaining("Suppressed: later project") as unknown,
+    stderr: expect.stringContaining(
+      "TypeSpec Validation failed for:\nspecification/service/a",
+    ) as unknown,
+  });
+});
+
+it("supports --dry-run with --all", async () => {
+  await addProject("specification/service/a");
+  const { stdout } = await run("--all", "--dry-run");
+  expect(stdout).toContain(
+    'Dry run: would validate specification/service/a with context {"checkingAllSpecs":true}',
+  );
+  expect(stdout).not.toContain("Running TypeSpecValidation on folder:");
+});
+
+it.each([
+  { args: ["--all", "--changed"], error: "--all and --changed cannot be combined" },
+  { args: ["--changed", "--shard=1/2"], error: "--shard requires --all" },
+  {
+    args: ["--all", "--base=HEAD"],
+    error: "--base, --head and --ignore-core-files require --changed",
+  },
+  {
+    args: ["--head=HEAD", "project"],
+    error: "--base, --head and --ignore-core-files require --changed",
+  },
+  {
+    args: ["--ignore-core-files"],
+    error: "--base, --head and --ignore-core-files require --changed",
+  },
+  { args: ["--dry-run"], error: "--git-clean and --dry-run require --all or --changed" },
+  { args: ["--changed", "project"], error: "Usage: tsv --changed" },
+])("rejects invalid invocation $args", async ({ args, error }) => {
+  await expect(run(...args)).rejects.toMatchObject({
+    code: 1,
+    stderr: expect.stringContaining(error) as unknown,
   });
 });

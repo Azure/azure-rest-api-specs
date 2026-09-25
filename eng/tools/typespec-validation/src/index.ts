@@ -2,7 +2,7 @@ import { type Suppression } from "@azure-tools/suppressions";
 import { stat } from "node:fs/promises";
 import { type ParseArgsConfig, parseArgs } from "node:util";
 import { type Rule } from "./rule.ts";
-import { runAll } from "./run-all.ts";
+import { runAll, runChanged } from "./run-projects.ts";
 import { ClientTspImportRule } from "./rules/client-tsp-import.ts";
 import { CompileRule } from "./rules/compile.ts";
 import { EmitAutorestRule } from "./rules/emit-autorest.ts";
@@ -84,6 +84,21 @@ export async function main() {
     all: {
       type: "boolean",
     },
+    changed: {
+      type: "boolean",
+    },
+    base: {
+      type: "string",
+    },
+    head: {
+      type: "string",
+    },
+    "ignore-core-files": {
+      type: "boolean",
+    },
+    "dry-run": {
+      type: "boolean",
+    },
     shard: {
       type: "string",
     },
@@ -93,27 +108,63 @@ export async function main() {
   } satisfies ParseArgsConfig["options"];
   const parsedArgs = parseArgs({ args, options, allowPositionals: true });
 
-  if (parsedArgs.values["git-clean"] && !parsedArgs.values.all) {
-    console.error("--git-clean requires --all");
+  const { values } = parsedArgs;
+  if (values.all && values.changed) {
+    console.error("--all and --changed cannot be combined");
+    process.exitCode = 1;
+    return;
+  }
+  if ((values["git-clean"] || values["dry-run"]) && !values.all && !values.changed) {
+    console.error("--git-clean and --dry-run require --all or --changed");
+    process.exitCode = 1;
+    return;
+  }
+  if (
+    (values.base !== undefined || values.head !== undefined || values["ignore-core-files"]) &&
+    !values.changed
+  ) {
+    console.error("--base, --head and --ignore-core-files require --changed");
     process.exitCode = 1;
     return;
   }
 
-  if (parsedArgs.values.shard !== undefined && !parsedArgs.values.all) {
+  if (values.shard !== undefined && !values.all) {
     console.error("--shard requires --all");
     process.exitCode = 1;
     return;
   }
 
-  if (parsedArgs.values.all) {
+  if (values.changed) {
+    if (parsedArgs.positionals.length > 0) {
+      console.error(
+        "Usage: tsv --changed [--base=<commit>] [--head=<commit>] [--ignore-core-files] [--git-clean] [--dry-run]",
+      );
+      process.exitCode = 1;
+      return;
+    }
+    const success = await runChanged(process.cwd(), {
+      baseCommitish: values.base,
+      headCommitish: values.head,
+      ignoreCoreFiles: values["ignore-core-files"],
+      gitClean: values["git-clean"],
+      dryRun: values["dry-run"],
+    });
+    if (!success) process.exitCode = 1;
+    return;
+  }
+
+  if (values.all) {
     if (parsedArgs.positionals.length > 1) {
-      console.error("Usage: tsv --all [folder] [--shard=<index>/<count>] [--git-clean]");
+      console.error(
+        "Usage: tsv --all [folder] [--shard=<index>/<count>] [--git-clean] [--dry-run]",
+      );
       process.exitCode = 1;
       return;
     }
     const success = await runAll(parsedArgs.positionals[0] ?? "specification", {
-      gitClean: parsedArgs.values["git-clean"] === true,
-      shard: parsedArgs.values.shard,
+      gitClean: values["git-clean"],
+      shard: values.shard,
+      dryRun: values["dry-run"],
     });
     if (!success) process.exitCode = 1;
     return;

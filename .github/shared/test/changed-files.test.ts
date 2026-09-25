@@ -70,6 +70,19 @@ describe("changedFiles", () => {
     expect(mockDiff).toHaveBeenCalledWith(["--name-only", "--no-renames", "HEAD^", "HEAD"]);
   });
 
+  it("getChangedFiles accepts per-command Git configuration", async () => {
+    const files = ["specification/service/examples/caf\u00e9.json"];
+    mockDiff.mockResolvedValue(files.join("\n"));
+    const cwd = resolve("repo");
+    await expect(getChangedFiles({ cwd, gitConfig: ["core.quotepath=false"] })).resolves.toEqual(
+      files,
+    );
+    expect(simpleGit.simpleGit).toHaveBeenCalledWith({
+      baseDir: cwd,
+      config: ["core.quotepath=false"],
+    });
+  });
+
   it("getChangedFiles accepts multiple gitOptions", async () => {
     const files = ["file1.json"];
     mockDiff.mockResolvedValue(files.join("\n"));
