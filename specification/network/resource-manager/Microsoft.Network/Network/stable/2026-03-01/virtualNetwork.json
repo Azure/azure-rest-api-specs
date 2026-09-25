@@ -2428,6 +2428,9 @@
           },
           "Get Developer Bastion Host": {
             "$ref": "./examples/BastionHostDeveloperGet.json"
+          },
+          "Get Bastion Host With Firewall In Data Path": {
+            "$ref": "./examples/BastionHostGetWithFirewall.json"
           }
         }
       },
@@ -2513,6 +2516,9 @@
           },
           "Create or Update Bastion Host With User Assigned Identity for Session Recording Configuration": {
             "$ref": "./examples/BastionHostPutWithUserAssignedIdentityForSRConfig.json"
+          },
+          "Create Bastion Host With Firewall In Data Path": {
+            "$ref": "./examples/BastionHostPutWithFirewall.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -15256,6 +15262,10 @@
         "privateIPAllocationMethod": {
           "$ref": "./common.json#/definitions/IPAllocationMethod",
           "description": "Private IP allocation method."
+        },
+        "privateIPAddress": {
+          "type": "string",
+          "description": "PrivateIPAddress of the Bastion Host IP Configuration."
         }
       },
       "required": [
@@ -15360,6 +15370,15 @@
         "sessionRecordingConfiguration": {
           "$ref": "#/definitions/BastionSessionRecordingConfiguration",
           "description": "The storage account and identity to use for session recording"
+        },
+        "enableFirewallInDataPath": {
+          "type": "boolean",
+          "description": "Enable/Disable Firewall In Data Path feature of the Bastion Host resource.",
+          "default": false
+        },
+        "fqdnIPAddress": {
+          "type": "string",
+          "description": "Public IP address bound to the DNS name"
         }
       }
     },
