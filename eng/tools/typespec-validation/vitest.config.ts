@@ -1,1 +1,11 @@
-export { baseConfig as default } from "../vitest.base.config.ts";
+import { defineConfig, mergeConfig } from "vitest/config";
+import { baseConfig } from "../vitest.base.config.ts";
+
+export default mergeConfig(
+  baseConfig,
+  defineConfig({
+    test: {
+      env: { AZSDKTOOLS_COLLECT_TELEMETRY: "false" },
+    },
+  }),
+);
