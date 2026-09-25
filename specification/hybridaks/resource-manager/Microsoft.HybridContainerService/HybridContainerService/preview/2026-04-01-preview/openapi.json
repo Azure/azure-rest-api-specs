@@ -2769,6 +2769,11 @@
           "type": "string",
           "description": "The version of Kubernetes in use by the provisioned cluster."
         },
+        "nvidiaDevicePluginEnabled": {
+          "type": "boolean",
+          "description": "Whether to deploy the managed NVIDIA device plugin add-on. NVIDIA drivers and the NVIDIA Container Toolkit must already be installed on every cluster node.",
+          "default": false
+        },
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfile",
           "description": "The network configuration profile for the provisioned cluster."

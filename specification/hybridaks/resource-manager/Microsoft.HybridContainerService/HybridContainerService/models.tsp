@@ -226,6 +226,11 @@ model ProvisionedClusterProperties {
   kubernetesVersion?: string;
 
   /**
+   * Whether to deploy the managed NVIDIA device plugin add-on. NVIDIA drivers and the NVIDIA Container Toolkit must already be installed on every cluster node.
+   */
+  nvidiaDevicePluginEnabled?: boolean = false;
+
+  /**
    * The network configuration profile for the provisioned cluster.
    */
   networkProfile?: NetworkProfile;
