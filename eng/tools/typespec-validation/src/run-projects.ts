@@ -2,47 +2,81 @@ import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 import { getSuppressions } from "@azure-tools/suppressions";
 import { spawn } from "node:child_process";
 import { stat } from "node:fs/promises";
-import { dirname, relative, resolve, sep } from "node:path";
+import { relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { simpleGit } from "simple-git";
-import { globFiles } from "./glob.ts";
+import { findChangedProjects, findProjects, type ChangedProjectsOptions } from "./find-projects.ts";
+
+interface RunOptions {
+  gitClean?: boolean;
+  dryRun?: boolean;
+}
+
+interface RunContext {
+  checkingAllSpecs: boolean;
+  baseCommitish?: string;
+  headCommitish?: string;
+}
 
 export async function runAll(
   folder: string,
-  options: { gitClean?: boolean; shard?: string } = {},
+  options: RunOptions & { shard?: string } = {},
 ): Promise<boolean> {
   const root = resolve(folder);
   if (!(await stat(root)).isDirectory()) {
     throw new Error(`Please run TypeSpec Validation on a directory path: ${root}`);
   }
 
-  const configs = await globFiles("**/tspconfig.*", {
-    cwd: root,
-    exclude: ["**/node_modules/**"],
-  });
-  // Sort relative POSIX paths so shard membership is the same on every OS.
-  const projectFolders = [
-    ...new Set(configs.map((config) => dirname(config).split(sep).join("/"))),
-  ].sort();
-  let projects = projectFolders.map((project) => resolve(root, project));
+  let projects = await findProjects(root);
   if (projects.length === 0) {
     console.error(`No TypeSpec projects found in ${root}`);
     return false;
   }
 
   if (options.shard !== undefined) {
+    const total = projects.length;
     projects = selectShard(projects, options.shard);
-    console.log(
-      `Shard ${options.shard}: ${projects.length} of ${projectFolders.length} TypeSpec projects`,
-    );
+    console.log(`Shard ${options.shard}: ${projects.length} of ${total} TypeSpec projects`);
   }
 
+  return runProjects(root, projects, { checkingAllSpecs: true }, options);
+}
+
+export async function runChanged(
+  folder: string,
+  options: RunOptions & Partial<ChangedProjectsOptions> = {},
+): Promise<boolean> {
+  const root = await getRootFolder(folder);
+  const { baseCommitish = "HEAD^", headCommitish = "HEAD", ignoreCoreFiles } = options;
+  const { projects, checkingAllSpecs } = await findChangedProjects(root, {
+    baseCommitish,
+    headCommitish,
+    ignoreCoreFiles,
+  });
+  if (projects.length === 0) {
+    if (checkingAllSpecs) {
+      console.error("TypeSpec Validation - All did not validate any specs");
+      return false;
+    }
+    console.log("No impacted TypeSpec projects found");
+    return true;
+  }
+  return runProjects(root, projects, { checkingAllSpecs, baseCommitish, headCommitish }, options);
+}
+
+async function runProjects(
+  root: string,
+  projects: string[],
+  context: RunContext,
+  options: RunOptions,
+): Promise<boolean> {
   const git = simpleGit(root);
+  const gitClean = options.gitClean && !options.dryRun;
   const displayRoot =
-    options.gitClean || (await git.checkIsRepo()) ? await getRootFolder(root) : process.cwd();
+    gitClean || (await git.checkIsRepo()) ? await getRootFolder(root) : process.cwd();
   const displayPath = (project: string) =>
     relative(displayRoot, project).split(sep).join("/") || ".";
-  if (options.gitClean) {
+  if (gitClean) {
     await git.cwd(displayRoot);
     await git.revparse(["--verify", "HEAD"]);
     if (!(await git.status(["--untracked-files=all"])).isClean()) {
@@ -60,21 +94,27 @@ export async function runAll(
     const name = displayPath(project);
     console.log(githubActions ? `::group::Validating ${name}` : `\nValidating ${name}`);
     try {
-      const suppressions = await getSuppressions("TypeSpecValidationAll", project, {
-        checkingAllSpecs: true,
-      });
-      const suppression = suppressions.find((s) => !s.rules?.length && !s.subRules?.length);
-      if (suppression) {
-        console.log(`Suppressed: ${suppression.reason}`);
+      if (context.checkingAllSpecs) {
+        const suppressions = await getSuppressions("TypeSpecValidationAll", project, {
+          ...context,
+        });
+        const suppression = suppressions.find((s) => !s.rules?.length && !s.subRules?.length);
+        if (suppression) {
+          console.log(`Suppressed: ${suppression.reason}`);
+          continue;
+        }
+      }
+      if (options.dryRun) {
+        console.log(`Dry run: would validate ${name} with context ${JSON.stringify(context)}`);
         continue;
       }
 
       try {
-        if (!(await validateProject(project))) {
+        if (!(await validateProject(project, context))) {
           failed.push(name);
         }
       } finally {
-        if (options.gitClean) {
+        if (gitClean) {
           await git.raw(["restore", "--worktree", "--", "."]);
           await git.clean("f", ["-d"]);
         }
@@ -122,16 +162,12 @@ function selectShard(projects: string[], shard: string): string[] {
   return projects.slice(start, end);
 }
 
-function validateProject(folder: string): Promise<boolean> {
+function validateProject(folder: string, context: RunContext): Promise<boolean> {
   return new Promise((resolve, reject) => {
     // A child process keeps each project's context and exit status independent.
     const child = spawn(
       process.execPath,
-      [
-        fileURLToPath(new URL("../cmd/tsv.js", import.meta.url)),
-        folder,
-        JSON.stringify({ checkingAllSpecs: true }),
-      ],
+      [fileURLToPath(new URL("../cmd/tsv.js", import.meta.url)), folder, JSON.stringify(context)],
       { stdio: "inherit" },
     );
     child.once("error", reject);
