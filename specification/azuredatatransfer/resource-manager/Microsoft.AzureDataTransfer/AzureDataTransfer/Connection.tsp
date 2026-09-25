@@ -1,6 +1,5 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -8,7 +7,6 @@ using TypeSpec.Rest;
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureDataTransfer;
 /**
@@ -76,9 +74,7 @@ interface Connections {
   /**
    * Lists all pending remote connections that are linkable to this connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation Id generated does not match original OpenAPIv2 JSON specification."
   @action("listPendingConnections")
-  @operationId("ListPendingConnections_List")
   @list
   list is ArmResourceActionSync<
     Connection,
@@ -89,9 +85,7 @@ interface Connections {
   /**
    * Lists all remote flows that have not yet been linked to local flows
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation Id generated does not match original OpenAPIv2 JSON specification."
   @action("listPendingFlows")
-  @operationId("ListPendingFlows_List")
   @list
   listPendingFlowsList is ArmResourceActionSync<
     Connection,

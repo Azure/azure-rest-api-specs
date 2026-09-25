@@ -1326,6 +1326,8 @@ using Microsoft.Web;
 
 @@clientLocation(Users.getPublishingUser, Microsoft.Web, "!csharp");
 @@clientLocation(Users.updatePublishingUser, Microsoft.Web, "!csharp");
+@@clientLocation(Users.getPublishingUser, Microsoft.Web, "autorest");
+@@clientLocation(Users.updatePublishingUser, Microsoft.Web, "autorest");
 @@clientName(Users.updatePublishingUser::parameters.resource, "userDetails");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1333,11 +1335,14 @@ using Microsoft.Web;
 
 @@clientLocation(SourceControls.getSourceControl, Microsoft.Web, "!csharp");
 @@clientLocation(SourceControls.updateSourceControl, Microsoft.Web, "!csharp");
+@@clientLocation(SourceControls.getSourceControl, Microsoft.Web, "autorest");
+@@clientLocation(SourceControls.updateSourceControl, Microsoft.Web, "autorest");
 @@clientName(
   SourceControls.updateSourceControl::parameters.resource,
   "requestMessage"
 );
 @@clientLocation(SourceControls.listSourceControls, Microsoft.Web, "!csharp");
+@@clientLocation(SourceControls.listSourceControls, Microsoft.Web, "autorest");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(SourceControl.properties);

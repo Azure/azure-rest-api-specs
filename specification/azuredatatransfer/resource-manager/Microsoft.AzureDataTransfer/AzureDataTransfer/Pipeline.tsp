@@ -1,7 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
@@ -9,7 +8,6 @@ using TypeSpec.Rest;
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
 
 namespace Microsoft.AzureDataTransfer;
@@ -90,9 +88,7 @@ interface Pipelines {
   /**
    * Lists all Flows associated with the specified Pipeline.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation Id generated does not match original OpenAPIv2 JSON specification."
   @action("listFlows")
-  @operationId("ListFlowsByPipeline_List")
   list is ArmResourceActionSync<
     Pipeline,
     {
@@ -108,9 +104,7 @@ interface Pipelines {
   /**
    * Lists the schemas associated with a specific connection in the Pipeline. This operation has reached end of life support starting version 2025-05-30-preview. For schema support please create and use a FlowProfile resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Operation Id generated does not match original OpenAPIv2 JSON specification."
   @action("listSchemas")
-  @operationId("ListSchemas_List")
   listSchemasList is ArmResourceActionSync<
     Pipeline,
     Schema,

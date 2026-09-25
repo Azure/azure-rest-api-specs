@@ -1,6 +1,5 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./VirtualMachineScaleSetVM.tsp";
@@ -8,7 +7,6 @@ import "./VirtualMachineScaleSetVM.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using Common;
 
 namespace Compute;
@@ -92,8 +90,6 @@ interface VirtualMachineScaleSetVMExtensions {
   /**
    * The operation to get the VMSS VM extension.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachineScaleSetVMExtensions_Get")
   get is ComputeResourceRead<
     VirtualMachineScaleSetVMExtension,
     Parameters = {
@@ -108,8 +104,6 @@ interface VirtualMachineScaleSetVMExtensions {
   /**
    * The operation to create or update the VMSS VM extension.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachineScaleSetVMExtensions_CreateOrUpdate")
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     VirtualMachineScaleSetVMExtension,
     LroHeaders = ArmLroLocationHeader<FinalResult = VirtualMachineScaleSetVMExtension> &
@@ -119,9 +113,7 @@ interface VirtualMachineScaleSetVMExtensions {
   /**
    * The operation to update the VMSS VM extension.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
-  @operationId("VirtualMachineScaleSetVMExtensions_Update")
   update is ComputeCustomPatchAsync<
     VirtualMachineScaleSetVMExtension,
     VirtualMachineScaleSetVMExtensionUpdate,
@@ -133,18 +125,14 @@ interface VirtualMachineScaleSetVMExtensions {
   /**
    * The operation to delete the VMSS VM extension.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  @operationId("VirtualMachineScaleSetVMExtensions_Delete")
   delete is ComputeResourceDeleteAsync<VirtualMachineScaleSetVMExtension>;
 
   /**
    * The operation to get all extensions of an instance in Virtual Machine Scaleset.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachineScaleSetVMExtensions_List")
   list is VirtualMachineScaleSetVMExtensionsOps.ListSinglePage<
     VirtualMachineScaleSetVMExtension,
     Parameters = {

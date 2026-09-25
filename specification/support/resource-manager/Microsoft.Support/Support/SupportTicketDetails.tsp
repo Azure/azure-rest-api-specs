@@ -124,8 +124,6 @@ interface SupportTickets {
   /**
    * This operation fetches ARM resource id of support resource type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("LookUpResourceId_Post")
   @added(Versions.v2025_06_01_preview)
   lookUpResourceId is ArmProviderActionSync<
     Request = LookUpResourceIdRequest,

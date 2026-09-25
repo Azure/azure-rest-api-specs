@@ -142,7 +142,6 @@ interface Modules {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @tag("ObjectDataTypes")
-  @operationId("ObjectDataTypes_ListFieldsByModuleAndType")
   @OpenAPI.externalDocs("http://aka.ms/azureautomationsdk/objectdatatypeoperations")
   @list
   @get
