@@ -34,6 +34,9 @@ enum Versions {
 
   @doc("2026-10-01-preview")
   v2026_10_01_preview: "2026-10-01-preview",
+
+  @doc("2026-11-01")
+  v2026_11_01: "2026-11-01",
 }
 
 alias ProviderName = "Microsoft.CloudHealth";
