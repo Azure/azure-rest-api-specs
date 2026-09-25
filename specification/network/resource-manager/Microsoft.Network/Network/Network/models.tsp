@@ -11132,6 +11132,7 @@ model DdosCustomPolicyPropertiesFormat {
    * The list of DDoS mitigation rules associated with the custom policy.
    */
   @added(Versions.v2026_03_01)
+  @identifiers(#["name"])
   @maxItems(2)
   mitigationRules?: DdosMitigationRule[];
 
