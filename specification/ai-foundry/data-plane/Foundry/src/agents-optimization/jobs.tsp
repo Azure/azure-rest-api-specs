@@ -87,7 +87,7 @@ model AgentOptimizationJobLatency {
 
 @doc("Summary of candidates produced by an agent optimization job.")
 model AgentOptimizationResultCandidateSummary {
-  @doc("Number of completed candidates, including the baseline once completed.")
+  @doc("Number of completed candidates. Does not include the baseline.")
   completed_candidate_count: int32;
 
   @doc("Candidate ID of the original baseline. Omitted until the baseline candidate is available.")
