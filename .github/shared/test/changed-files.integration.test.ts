@@ -5,6 +5,8 @@ import { simpleGit } from "simple-git";
 import { afterEach, beforeEach, expect, it } from "vitest";
 import { getChangedFiles, getChangedFilesStatuses } from "../src/changed-files.ts";
 
+// cspell:ignore gpgsign
+
 let root: string;
 
 beforeEach(async () => {
