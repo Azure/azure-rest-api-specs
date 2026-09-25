@@ -220,13 +220,13 @@ interface GoalAssignments {
 @removed(Versions.v2026_09_30_preview)
 interface GoalTemplates {
   #deprecated "GoalTemplate is deprecated and removed in 2026-09-30-preview."
-  @doc("Gets a goal template. Deprecated: the GoalTemplate resource type is deprecated and is removed in 2026-09-30-preview. Set resiliency intent directly on the GoalAssignment (requireZonalResiliency, requireRegionalResiliency) and read resource posture from GoalResource (zonalResiliency, regionalResiliency) instead.")
+  @doc("Gets a goal template. Deprecated: the GoalTemplate resource type is deprecated and is removed in 2026-09-30-preview. Set resiliency intent directly on the GoalAssignment (requireZonalResiliency) and read resource posture from GoalResource (zonalResiliency) instead.")
   @route(ServiceGroupRoute)
   @summary("Deprecated. Set resiliency intent on GoalAssignment and read resource posture from GoalResource instead.")
   get is ArmResourceRead<GoalTemplate, ServiceGroupParameters>;
 
   #deprecated "GoalTemplate is deprecated and removed in 2026-09-30-preview."
-  @doc("Creates or updates a goal template. Deprecated: the GoalTemplate resource type is deprecated and is removed in 2026-09-30-preview. Set resiliency intent directly on the GoalAssignment (requireZonalResiliency, requireRegionalResiliency) and read resource posture from GoalResource (zonalResiliency, regionalResiliency) instead.")
+  @doc("Creates or updates a goal template. Deprecated: the GoalTemplate resource type is deprecated and is removed in 2026-09-30-preview. Set resiliency intent directly on the GoalAssignment (requireZonalResiliency) and read resource posture from GoalResource (zonalResiliency) instead.")
   @route(ServiceGroupRoute)
   @summary("Deprecated. Set resiliency intent on GoalAssignment and read resource posture from GoalResource instead.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
@@ -235,7 +235,7 @@ interface GoalTemplates {
   >;
 
   #deprecated "GoalTemplate is deprecated and removed in 2026-09-30-preview."
-  @doc("Updates a goal template. Deprecated: the GoalTemplate resource type is deprecated and is removed in 2026-09-30-preview. Set resiliency intent directly on the GoalAssignment (requireZonalResiliency, requireRegionalResiliency) and read resource posture from GoalResource (zonalResiliency, regionalResiliency) instead.")
+  @doc("Updates a goal template. Deprecated: the GoalTemplate resource type is deprecated and is removed in 2026-09-30-preview. Set resiliency intent directly on the GoalAssignment (requireZonalResiliency) and read resource posture from GoalResource (zonalResiliency) instead.")
   @route(ServiceGroupRoute)
   @summary("Deprecated. Set resiliency intent on GoalAssignment and read resource posture from GoalResource instead.")
   update is ArmResourcePatchAsync<
@@ -248,7 +248,7 @@ interface GoalTemplates {
   >;
 
   #deprecated "GoalTemplate is deprecated and removed in 2026-09-30-preview."
-  @doc("Deletes a goal template. Deprecated: the GoalTemplate resource type is deprecated and is removed in 2026-09-30-preview. Set resiliency intent directly on the GoalAssignment (requireZonalResiliency, requireRegionalResiliency) and read resource posture from GoalResource (zonalResiliency, regionalResiliency) instead.")
+  @doc("Deletes a goal template. Deprecated: the GoalTemplate resource type is deprecated and is removed in 2026-09-30-preview. Set resiliency intent directly on the GoalAssignment (requireZonalResiliency) and read resource posture from GoalResource (zonalResiliency) instead.")
   @route(ServiceGroupRoute)
   @summary("Deprecated. Set resiliency intent on GoalAssignment and read resource posture from GoalResource instead.")
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -257,7 +257,7 @@ interface GoalTemplates {
   >;
 
   #deprecated "GoalTemplate is deprecated and removed in 2026-09-30-preview."
-  @doc("Lists the goal templates of a service group. Deprecated: the GoalTemplate resource type is deprecated and is removed in 2026-09-30-preview. Set resiliency intent directly on the GoalAssignment (requireZonalResiliency, requireRegionalResiliency) and read resource posture from GoalResource (zonalResiliency, regionalResiliency) instead.")
+  @doc("Lists the goal templates of a service group. Deprecated: the GoalTemplate resource type is deprecated and is removed in 2026-09-30-preview. Set resiliency intent directly on the GoalAssignment (requireZonalResiliency) and read resource posture from GoalResource (zonalResiliency) instead.")
   @route(ServiceGroupRoute)
   @summary("Deprecated. Set resiliency intent on GoalAssignment and read resource posture from GoalResource instead.")
   list is ArmResourceListByParent<GoalTemplate, ServiceGroupTenantParameters>;
