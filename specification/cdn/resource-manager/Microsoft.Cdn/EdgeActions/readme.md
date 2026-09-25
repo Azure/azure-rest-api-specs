@@ -28,14 +28,59 @@ These are the global settings for the EdgeActions API.
 title: EdgeActionsManagementClient
 description: Edge Actions Management Client
 openapi-type: arm
-tag: package-2025-12-01-preview
+tag: package-2026-10-01
+```
+
+### Tag: package-2026-10-01
+
+These settings apply only when `--tag=package-2026-10-01` is specified on the command line.
+
+This is the default stable tag. Its document is identical to `package-2025-12-01-preview` apart
+from the api-version string: the same operations, request and response models, response codes, and
+long-running operation metadata. `2026-10-01` introduces no contract change, so an existing
+`2025-12-01-preview` caller reaches GA by changing the api-version alone. The internal
+`addAttachment` and `deleteAttachment` operations used exclusively by the AFD RP remain absent, as
+they have been since `2025-12-01-preview`.
+
+Only the examples differ. They carry the `2026-10-01` api-version, declare the polling and
+`Retry-After` headers the contract already defines, and correct polling URLs that had been left
+pointing at superseded preview api-versions.
+
+Because the document is unchanged, this tag carries the same suppressions as the preview tag it is
+derived from.
+
+```yaml $(tag) == 'package-2026-10-01'
+input-file:
+  - stable/2026-10-01/openapi.json
+modelerfour:
+  lenient-model-deduplication: true
+  prenamer: true
+suppressions:
+  # Operations endpoint for Microsoft.Cdn already defined in central Cdn swagger, not duplicated here
+  - code: OperationsAPIImplementation
+    reason: Operations API implemented in central Cdn swagger (package-preview-2025-09) for provider Microsoft.Cdn.
+  # LRO POST actions intentionally return 200 (final) and 202 (in-progress) matching 2024-07-22-preview baseline.
+  - code: PostResponseCodes
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/versions/{version}/swapDefault"].post
+    reason: Preexisting LRO pattern (200,202) retained for backward compatibility with 2024-07-22-preview.
+  # Delete operations return 200 for synchronous completion in addition to 202/204 for LRO pattern.
+  - code: DeleteResponseCodes
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/versions/{version}"].delete
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/edgeActions/{edgeActionName}/executionFilters/{executionFilter}"].delete
+    reason: >-
+      EdgeActions RP currently implements synchronous delete (returns 200). Adding 200 to the spec
+      enables SDK generation to accept 200 as a valid response. Transitioning to async delete (202)
+      while maintaining backward compatibility with existing clients from 2024-07-22-preview.
 ```
 
 ### Tag: package-2025-12-01-preview
 
 These settings apply only when `--tag=package-2025-12-01-preview` is specified on the command line.
 
-This is the default tag. It removes the internal `addAttachment` and `deleteAttachment` operations
+This preview tag removes the internal `addAttachment` and `deleteAttachment` operations
 that are used exclusively by the AFD RP.
 
 ```yaml $(tag) == 'package-2025-12-01-preview'
