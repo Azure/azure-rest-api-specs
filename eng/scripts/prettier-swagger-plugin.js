@@ -10,7 +10,8 @@ const print = (path, options, print) => {
         return node.extra.raw;
     }
 
-    return plugins_estree.printers['estree-json'].print(path, options, print);
+    // Preserve JSON quoting when delegating from the custom parser.
+    return plugins_estree.printers['estree-json'].print(path, { ...options, parser: 'json-stringify' }, print);
 };
 
 exports.languages = [
