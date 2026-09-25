@@ -73,9 +73,7 @@ describe("renderSuppressionsCommentBody", () => {
 
     expect(body).toContain("## TypeSpec suppressions requiring review");
     expect(body).toContain("Suppressions are strongly discouraged");
-    expect(body).toContain(
-      "❌ Approval required (currently under testing, review NOT enforced) — 1 suppression",
-    );
+    expect(body).toContain("❌ Approval required — 1 suppression");
     // Source link text is the file name + line only (full path stays in the href).
     expect(body).toContain(
       '<a href="https://github.com/test-owner/test-repo/pull/42/files#diff-efaa719245fb34e480918c08f8fe8f5b6f620477e1053f1d6f0e2a0ca5f05e69R12">main.tsp#L12</a>',
