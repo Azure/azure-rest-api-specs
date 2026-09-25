@@ -11,18 +11,19 @@
         "name": "bastionhosttenant",
         "type": "Microsoft.Network/bastionHosts",
         "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/bastionHosts/bastionhosttenant'",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/bastionHosts/bastionhosttenant",
         "location": "West US",
         "properties": {
           "disableCopyPaste": false,
           "dnsName": "bst-9d89d361-100e-4c01-b92d-466548c476dc.bastion.azure.com",
           "enableIpConnect": false,
           "enableKerberos": false,
-          "enablePrivateOnlyBastion": true,
+          "enablePrivateOnlyBastion": false,
           "enableSessionRecording": false,
           "enableShareableLink": false,
           "enableTunneling": false,
-          "enableFirewallInDataPath": false,
+          "enableFirewallInDataPath": true,
+          "fqdnIPAddress": "20.1.90.60",
           "ipConfigurations": [
             {
               "name": "bastionHostIpConfiguration",
@@ -31,6 +32,7 @@
               "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/bastionHosts/bastionhosttenant/bastionHostIpConfigurations/bastionHostIpConfiguration",
               "properties": {
                 "privateIPAllocationMethod": "Dynamic",
+                "privateIPAddress": "15.0.1.4",
                 "provisioningState": "Succeeded",
                 "subnet": {
                   "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet2/subnets/BastionHostSubnet"
@@ -52,5 +54,5 @@
     }
   },
   "operationId": "BastionHosts_Get",
-  "title": "Get Bastion Host With Private Only"
+  "title": "Get Bastion Host With Firewall In Data Path"
 }
