@@ -1,7 +1,8 @@
+import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 import { getSuppressions } from "@azure-tools/suppressions";
 import { spawn } from "node:child_process";
 import { stat } from "node:fs/promises";
-import { dirname, resolve, sep } from "node:path";
+import { dirname, relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { simpleGit } from "simple-git";
 import { globFiles } from "./glob.ts";
@@ -36,37 +37,51 @@ export async function runAll(
     );
   }
 
-  const git = options.gitClean ? simpleGit(root) : undefined;
-  if (git) {
-    await git.cwd((await git.revparse("--show-toplevel")).trim());
+  const git = simpleGit(root);
+  const displayRoot =
+    options.gitClean || (await git.checkIsRepo()) ? await getRootFolder(root) : process.cwd();
+  const displayPath = (project: string) =>
+    relative(displayRoot, project).split(sep).join("/") || ".";
+  if (options.gitClean) {
+    await git.cwd(displayRoot);
     await git.revparse(["--verify", "HEAD"]);
     if (!(await git.status(["--untracked-files=all"])).isClean()) {
       throw new Error("--git-clean requires a clean checkout, including untracked files");
     }
   }
 
-  console.log(`Checking ${projects.length} TypeSpec folders:\n${projects.join("\n")}`);
+  console.log(
+    `Checking ${projects.length} TypeSpec folders:\n${projects.map(displayPath).join("\n")}`,
+  );
   const failed: string[] = [];
+  const githubActions = process.env.GITHUB_ACTIONS === "true";
 
   for (const project of projects) {
-    console.log(`\nValidating ${project}`);
-    const suppressions = await getSuppressions("TypeSpecValidationAll", project, {
-      checkingAllSpecs: true,
-    });
-    const suppression = suppressions.find((s) => !s.rules?.length && !s.subRules?.length);
-    if (suppression) {
-      console.log(`Suppressed: ${suppression.reason}`);
-      continue;
-    }
-
+    const name = displayPath(project);
+    console.log(githubActions ? `::group::Validating ${name}` : `\nValidating ${name}`);
     try {
-      if (!(await validateProject(project))) {
-        failed.push(project);
+      const suppressions = await getSuppressions("TypeSpecValidationAll", project, {
+        checkingAllSpecs: true,
+      });
+      const suppression = suppressions.find((s) => !s.rules?.length && !s.subRules?.length);
+      if (suppression) {
+        console.log(`Suppressed: ${suppression.reason}`);
+        continue;
+      }
+
+      try {
+        if (!(await validateProject(project))) {
+          failed.push(name);
+        }
+      } finally {
+        if (options.gitClean) {
+          await git.raw(["restore", "--worktree", "--", "."]);
+          await git.clean("f", ["-d"]);
+        }
       }
     } finally {
-      if (git) {
-        await git.raw(["restore", "--worktree", "--", "."]);
-        await git.clean("f", ["-d"]);
+      if (githubActions) {
+        console.log("::endgroup::");
       }
     }
   }
