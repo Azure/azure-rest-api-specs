@@ -7080,6 +7080,22 @@ model WorkbenchProperties {
 }
 
 /**
+ * Mutable properties for a Workbench resource.
+ */
+@added(Versions.v2026_09_15_preview)
+model WorkbenchUpdateProperties {
+  /**
+   * ARM resource ID of the parent cluster that hosts this workbench. May be changed only when the workbench is stopped.
+   */
+  targetClusterId?: string;
+
+  /**
+   * ISO 8601 duration before the idle workbench is automatically shut down (e.g., 'PT30M').
+   */
+  idleTimeBeforeShutdown?: string;
+}
+
+/**
  * The list of workbenches operation response.
  */
 @added(Versions.v2026_03_15_preview)

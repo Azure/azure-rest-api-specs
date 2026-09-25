@@ -47,21 +47,52 @@ model Workbench is Azure.ResourceManager.ProxyResource<
   /**
    * The location of the workbench resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Workbench tracks its own location independently from parent Project to support cross-region placement"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Published preview versions retain location for backward compatibility"
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_09_01)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location?: string;
 
+  // Keep tags only in historical projections; the legacy name prevents unprojected
+  // ARM PATCH lint from requiring tags in the new update body.
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Workbench requires tags on the resource envelope for resource management and billing"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Published preview versions retain tags for backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<string> type used for tags to support extensible key-value pairs"
-  tags?: Record<string>;
+  @renamedFrom(Versions.v2026_09_15_preview, "tags")
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_09_01)
+  tagsLegacy?: Record<string>;
 
   /**
    * Identity for the resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Workbench requires identity on the resource envelope for managed identity support"
+  identity?: Identity;
+}
+
+/**
+ * The mutable fields of a workbench resource.
+ */
+@added(Versions.v2026_09_15_preview)
+model WorkbenchUpdate {
+  /**
+   * Properties of the workbench to update.
+   */
+  properties?: WorkbenchUpdateProperties;
+
+  /**
+   * Identity for the resource. May be changed while the workbench is running and takes effect after restart.
+   */
   identity?: Identity;
 }
 
@@ -86,13 +117,31 @@ interface Workbenches {
   @tag("Workbenches")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Workbench>;
 
+  // Keep the legacy template so historical PATCH projections retain their LRO metadata.
   /**
    * Updates a workbench associated with the project.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-patch-body" "Using full Workbench class for PATCH to match existing Compute/Cluster pattern"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-patch-body" "Published preview versions retain the full Workbench PATCH body for backward compatibility"
+  @sharedRoute
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_15_preview, "update")
   @tag("Workbenches")
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<Workbench, PatchModel = Workbench>;
+  updateLegacy is ArmCustomPatchAsync<Workbench, PatchModel = Workbench>;
+
+  /**
+   * Updates a workbench associated with the project.
+   */
+  @sharedRoute
+  @added(Versions.v2026_09_15_preview)
+  @tag("Workbenches")
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchSync<Workbench, PatchModel = WorkbenchUpdate>;
 
   /**
    * Deletes the specified workbench associated with the project.
@@ -141,6 +190,10 @@ interface Workbenches {
 @@doc(
   Workbenches.createOrUpdate::parameters.resource,
   "The workbench properties."
+);
+@@doc(
+  Workbenches.updateLegacy::parameters.properties,
+  "The workbench properties to update."
 );
 @@doc(
   Workbenches.update::parameters.properties,
