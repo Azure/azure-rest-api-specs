@@ -91,6 +91,7 @@ model CodeBasedEvaluatorDefinition extends EvaluatorDefinition {
   @doc("The container image tag to use for evaluator code execution")
   image_tag?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The blob URI for the evaluator storage")
   blob_uri?: url;
 }
