@@ -611,13 +611,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "problemServiceName",
-            "in": "path",
-            "description": "Name of the Azure service for which the problem classifications need to be retrieved.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-zA-Z_\\-. ]+$",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/ProblemServiceNameParameter"
           },
           {
             "name": "problemClassificationsClassificationInput",
@@ -1704,13 +1698,7 @@
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "problemServiceName",
-            "in": "path",
-            "description": "Name of the Azure service for which the problem classifications need to be retrieved.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[0-9a-zA-Z_\\-. ]+$",
-            "x-ms-parameter-location": "method"
+            "$ref": "#/parameters/ProblemServiceNameParameter"
           },
           {
             "name": "problemClassificationsClassificationInput",
@@ -2878,15 +2866,8 @@
           "description": "The System generated Id that is unique. Use supportTicketId property for Microsoft.Support/supportTickets resource type."
         },
         "type": {
-          "type": "string",
-          "description": "The type of resource.",
-          "enum": [
-            "Microsoft.Support/supportTickets"
-          ],
-          "x-ms-enum": {
-            "name": "ResourceType",
-            "modelAsString": false
-          }
+          "$ref": "#/definitions/ResourceType",
+          "description": "The type of resource."
         }
       }
     },
@@ -3107,6 +3088,24 @@
             "region"
           ]
         }
+      }
+    },
+    "ResourceType": {
+      "type": "string",
+      "description": "The type of support resource for resource Id lookup.",
+      "enum": [
+        "Microsoft.Support/supportTickets"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Microsoft.Support/supportTickets",
+            "value": "Microsoft.Support/supportTickets",
+            "description": "Microsoft Support ticket resource type."
+          }
+        ]
       }
     },
     "SecondaryConsent": {
@@ -3645,5 +3644,15 @@
       }
     }
   },
-  "parameters": {}
+  "parameters": {
+    "ProblemServiceNameParameter": {
+      "name": "problemServiceName",
+      "in": "path",
+      "description": "Name of the Azure service for which the problem classifications need to be retrieved.",
+      "required": true,
+      "type": "string",
+      "pattern": "^[0-9a-zA-Z_\\-. ]+$",
+      "x-ms-parameter-location": "method"
+    }
+  }
 }
