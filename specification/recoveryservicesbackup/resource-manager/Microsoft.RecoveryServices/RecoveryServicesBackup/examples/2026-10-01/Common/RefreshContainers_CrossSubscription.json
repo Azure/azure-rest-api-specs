@@ -1,0 +1,20 @@
+{
+  "parameters": {
+    "$filter": "backupManagementType eq 'AzureWorkload' and containerSubscriptionId eq 'a76f4f58-8c04-4f53-9e68-4a698b0f43e4'",
+    "api-version": "2026-10-01",
+    "fabricName": "Azure",
+    "resourceGroupName": "SwaggerTestRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "NetSDKTestRsVault"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupFabrics/Azure/operationResults/00000000-0000-0000-0000-000000000000?api-version=2026-10-01",
+        "Retry-After": 60
+      }
+    }
+  },
+  "operationId": "ProtectionContainers_Refresh",
+  "title": "Trigger cross-subscription Azure Workload discovery"
+}

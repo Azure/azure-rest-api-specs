@@ -28,7 +28,7 @@ These are the global settings for the RecoveryServicesBackup API.
 title: Recovery Services Backup Client
 description: Open API 2.0 Specs for Azure RecoveryServices Backup service
 openapi-type: arm
-tag: package-2026-08-01
+tag: package-2026-10-01
 csharp-sdks-folder: ./Generated/CSharp
 python-sdks-folder: ./Generated/Python
 go-sdk-folder: ./Generated/Golang
@@ -36,12 +36,14 @@ go-sdk-folder: ./Generated/Golang
 license-header: MICROSOFT_MIT
 ```
 
+### Stamp Overrides
+
 ```yaml $(package-passivestamp)
 tag: package-passivestamp-2023-01-15
 ```
 
 ```yaml $(package-activestamp)
-tag: package-2026-08-01
+tag: package-2026-10-01
 ```
 
 ### Validations
@@ -53,6 +55,15 @@ azure-validator: true
 model-validator: true
 semantic-validator: true
 message-format: json
+```
+
+### Tag: package-2026-10-01
+
+These settings apply only when `--tag=package-2026-10-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-10-01'
+input-file:
+  - stable/2026-10-01/bms.json
 ```
 
 ### Tag: package-2026-08-01
@@ -617,10 +628,10 @@ directive:
   - suppress: LroErrorContent
     from: bms.json
     reason: The azure backup service's API infra handles the conversation from exceptions to custom error CloudError. Changing this would be breaking change for our service.
-  - suppress: ConsistentPatchProperties  
+  - suppress: ConsistentPatchProperties
     from: bms.json
-    where: 
-     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}"].patch.parameters[8]["schema"]
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}"].patch.parameters[8]["schema"]
     reason: Known false alarm for the discriminator pattern that causes ConsistentPatchProperties rule to fail.
   - suppress: AllTrackedResourcesMustHaveDelete
     from: bms.json

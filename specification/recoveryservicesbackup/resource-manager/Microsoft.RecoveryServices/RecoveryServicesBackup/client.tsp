@@ -2254,6 +2254,7 @@ op protectionPolicyOperationStatusesGet(
 @@clientName(ExtendedProperties, "IaasVmBackupExtendedProperties", "csharp");
 @@clientName(RestoreRequestResource, "TriggerRestoreContent", "csharp");
 @@clientName(RestoreRequest, "RestoreContent", "csharp");
+@@clientName(GetRPExtendedInfoRequest, "GetRPExtendedInfoContent", "csharp");
 @@clientName(BackupRequest, "BackupContent", "csharp");
 @@clientName(AzureFileshareProtectedItem, "FileshareProtectedItem", "csharp");
 @@clientName(
