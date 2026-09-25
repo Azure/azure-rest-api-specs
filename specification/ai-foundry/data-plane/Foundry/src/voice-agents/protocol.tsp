@@ -29,6 +29,9 @@ union VoiceAgentServerEventTypeExtension {
   session_subagent_started: "session.subagent.started",
   session_subagent_completed: "session.subagent.completed",
   session_subagent_aborted: "session.subagent.aborted",
+  session_handoff_started: "session.handoff.started",
+  session_handoff_completed: "session.handoff.completed",
+  session_handoff_aborted: "session.handoff.aborted",
   session_avatar_connecting: "session.avatar.connecting",
   session_avatar_switch_to_speaking: "session.avatar.switch_to_speaking",
   session_avatar_switch_to_idle: "session.avatar.switch_to_idle",
@@ -154,6 +157,9 @@ union VoiceAgentServerEvent {
   session_subagent_started: VoiceAgentServerEventSessionSubagentStarted,
   session_subagent_completed: VoiceAgentServerEventSessionSubagentCompleted,
   session_subagent_aborted: VoiceAgentServerEventSessionSubagentAborted,
+  session_handoff_started: VoiceAgentServerEventSessionHandoffStarted,
+  session_handoff_completed: VoiceAgentServerEventSessionHandoffCompleted,
+  session_handoff_aborted: VoiceAgentServerEventSessionHandoffAborted,
   session_updated: OpenAI.RealtimeServerEventSessionUpdated,
   error: OpenAI.RealtimeServerEventError,
   warning: VoiceAgentServerEventWarning,
@@ -274,6 +280,9 @@ union VoiceAgentSessionUpdate {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model VoiceAgentSessionResponseConfig {
   ...VoiceAgentSessionUpdateConfig;
+
+  @doc("The effective handoff topology and runtime state, when handoff is configured.")
+  handoff?: VoiceAgentHandoffState | null;
 
   @doc("The object type. Always `realtime.session`.")
   object: "realtime.session";
