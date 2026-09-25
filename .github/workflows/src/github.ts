@@ -1,16 +1,13 @@
-import type * as core from "@actions/core";
-import type { context, getOctokit } from "@actions/github";
 import type { endpoint as octokitEndpoint } from "@octokit/endpoint";
 import type { operations } from "@octokit/openapi-webhooks-types";
-import type { RestEndpointMethodTypes } from "@octokit/plugin-rest-endpoint-methods";
 import type { OctokitResponse, RequestParameters } from "@octokit/types";
 import type { ILogger } from "../../shared/src/logger.ts";
 import { toPercent } from "../../shared/src/math.ts";
 import { Duration, formatDuration, getDuration, subtract } from "../../shared/src/time.ts";
 
-export type Core = typeof core;
-export type Context = typeof context;
-export type GitHub = ReturnType<typeof getOctokit>;
+export type Core = typeof import("@actions/core");
+export type Context = typeof import("@actions/github").context;
+export type GitHub = ReturnType<typeof import("@actions/github").getOctokit>;
 
 /** Values injected into our workflow scripts by actions/github-script. */
 export interface GitHubScriptArgs {
@@ -41,7 +38,8 @@ export type WorkflowRuns =
 export type CheckRuns =
   RestEndpointMethodTypes["checks"]["listForRef"]["response"]["data"]["check_runs"];
 
-export type { RestEndpointMethodTypes };
+export type RestEndpointMethodTypes =
+  import("@octokit/plugin-rest-endpoint-methods").RestEndpointMethodTypes;
 
 export function createLogHook(
   endpoint: typeof octokitEndpoint,

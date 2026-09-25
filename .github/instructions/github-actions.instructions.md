@@ -271,10 +271,9 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
 
 Keep handwritten `actions/github-script` workflow and composite-action refs pinned to the same
 release. When updating that release, check that the toolkit versions used by `GitHubScriptArgs`
-match the action's injected APIs. The `github-script` named catalog pins `@actions/core` for workflow
-types independently of standalone engineering tools. Do not install the action itself as an npm
-dependency. Preserve the production-only import checks; generated agentic workflows and their locks
-are managed separately.
+remain compatible with the action's injected APIs. Use the existing toolkit catalog entries rather
+than installing the action itself as an npm dependency. Preserve the production-only import checks;
+generated agentic workflows and their locks are managed separately.
 
 ### Node.js Version Management
 
