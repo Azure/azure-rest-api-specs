@@ -15924,6 +15924,14 @@
             "$ref": "#/definitions/DdosDetectionRule"
           }
         },
+        "mitigationRules": {
+          "type": "array",
+          "description": "The list of DDoS mitigation rules associated with the custom policy.",
+          "maxItems": 2,
+          "items": {
+            "$ref": "#/definitions/DdosMitigationRule"
+          }
+        },
         "frontEndIpConfiguration": {
           "type": "array",
           "description": "The list of frontend IP configurations associated with the custom policy.",
@@ -15994,6 +16002,94 @@
           "description": "The traffic detection rule details."
         }
       }
+    },
+    "DdosGeoMatch": {
+      "type": "object",
+      "description": "A geographic source match. At least one of continent or countryCode must be specified. If both are specified, the country must belong to the continent.",
+      "properties": {
+        "continent": {
+          "$ref": "./common.json#/definitions/DdosContinent",
+          "description": "The continent to match."
+        },
+        "countryCode": {
+          "$ref": "./common.json#/definitions/DdosCountryCode",
+          "description": "The two-letter country or territory code to match."
+        }
+      }
+    },
+    "DdosMitigationRule": {
+      "type": "object",
+      "description": "A DDoS mitigation rule resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the DDoS mitigation rule."
+        },
+        "id": {
+          "type": "string",
+          "description": "The resource ID of the DDoS mitigation rule.",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The resource type.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/DdosMitigationRulePropertiesFormat",
+          "description": "Properties of the DDoS mitigation rule.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "name",
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "./common.json#/definitions/SubResource"
+        }
+      ]
+    },
+    "DdosMitigationRulePropertiesFormat": {
+      "type": "object",
+      "description": "DDoS mitigation rule properties. Each rule must specify at least one applicable default mitigation or source policy override.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "./common.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the DDoS mitigation rule.",
+          "readOnly": true
+        },
+        "trafficScope": {
+          "$ref": "./common.json#/definitions/DdosMitigationTrafficScope",
+          "description": "The traffic protocol to which the mitigation rule applies."
+        },
+        "tcpDefaultMitigations": {
+          "$ref": "#/definitions/DdosTcpDefaultMitigations",
+          "description": "The default TCP mitigations. This property is valid only when trafficScope is Tcp."
+        },
+        "udpDefaultMitigations": {
+          "$ref": "#/definitions/DdosUdpDefaultMitigations",
+          "description": "The default UDP mitigations. This property is valid only when trafficScope is Udp."
+        },
+        "sourcePolicyOverrides": {
+          "type": "array",
+          "description": "Source-specific actions that override the default mitigations. A rule supports at most one Deny override and one Permit override.",
+          "maxItems": 2,
+          "items": {
+            "$ref": "#/definitions/DdosSourcePolicyOverride"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "trafficScope"
+      ]
     },
     "DdosProtectionPlan": {
       "type": "object",
@@ -16086,6 +16182,124 @@
           "description": "The DDoS protection plan associated with the public IP. Can only be set if ProtectionMode is Enabled"
         }
       }
+    },
+    "DdosSourceMatchConditions": {
+      "type": "object",
+      "description": "Source conditions for a DDoS source policy override. A source matches when it matches any IP prefix or any geographic match.",
+      "properties": {
+        "ipPrefixes": {
+          "type": "array",
+          "description": "The IPv4 or IPv6 CIDR prefixes in `<address>/<prefix-length>` format. Entries are evaluated with OR semantics.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "geoMatches": {
+          "type": "array",
+          "description": "The geographic matches. Entries are evaluated with OR semantics.",
+          "items": {
+            "$ref": "#/definitions/DdosGeoMatch"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "DdosSourcePolicyAction": {
+      "type": "object",
+      "description": "The action to apply to traffic matching a source policy override.",
+      "properties": {
+        "actionType": {
+          "$ref": "./common.json#/definitions/DdosSourcePolicyActionType",
+          "description": "The source policy action type."
+        }
+      },
+      "required": [
+        "actionType"
+      ]
+    },
+    "DdosSourcePolicyOverride": {
+      "type": "object",
+      "description": "A source-specific action that overrides the default mitigations.",
+      "properties": {
+        "policyAction": {
+          "$ref": "#/definitions/DdosSourcePolicyAction",
+          "description": "The action to apply to matching traffic."
+        },
+        "conditions": {
+          "$ref": "#/definitions/DdosSourceMatchConditions",
+          "description": "The source conditions that select traffic for the action."
+        }
+      },
+      "required": [
+        "policyAction",
+        "conditions"
+      ]
+    },
+    "DdosTcpDefaultMitigations": {
+      "type": "object",
+      "description": "Default mitigations for TCP traffic.",
+      "properties": {
+        "perSourceRateLimiting": {
+          "$ref": "#/definitions/DdosTcpPerSourceRateLimitPolicy",
+          "description": "The per-source TCP packet rate limit."
+        },
+        "perSourceConnectionRateLimiting": {
+          "$ref": "#/definitions/DdosTcpPerSourceConnectionRateLimitPolicy",
+          "description": "The per-source rate limit for new TCP connection establishments."
+        }
+      }
+    },
+    "DdosTcpPerSourceConnectionRateLimitPolicy": {
+      "type": "object",
+      "description": "A per-source TCP connection establishment rate limit.",
+      "properties": {
+        "connectionsPerSecond": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of new TCP connections established per second from a source IP."
+        }
+      },
+      "required": [
+        "connectionsPerSecond"
+      ]
+    },
+    "DdosTcpPerSourceRateLimitPolicy": {
+      "type": "object",
+      "description": "A per-source TCP packet rate limit.",
+      "properties": {
+        "packetsPerSecond": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of TCP packets allowed per second from a source IP."
+        }
+      },
+      "required": [
+        "packetsPerSecond"
+      ]
+    },
+    "DdosUdpDefaultMitigations": {
+      "type": "object",
+      "description": "Default mitigations for UDP traffic.",
+      "properties": {
+        "perSourceRateLimiting": {
+          "$ref": "#/definitions/DdosUdpPerSourceRateLimitPolicy",
+          "description": "The per-source UDP packet rate limit."
+        }
+      }
+    },
+    "DdosUdpPerSourceRateLimitPolicy": {
+      "type": "object",
+      "description": "A per-source UDP packet rate limit.",
+      "properties": {
+        "packetsPerSecond": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of UDP packets allowed per second from a source IP."
+        }
+      },
+      "required": [
+        "packetsPerSecond"
+      ]
     },
     "Delegation": {
       "type": "object",
