@@ -2,7 +2,7 @@ import { inspect } from "util";
 import { isFullGitSha } from "../../shared/src/git.ts";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import { CoreLogger } from "./core-logger.ts";
-import type { Core, WebhookEvent } from "./github.ts";
+import type { Context, Core, GitHub, WebhookEvent } from "./github.ts";
 import { createLogHook, createRateLimitHook } from "./github.ts";
 import { getIssueNumber } from "./issues.ts";
 
@@ -17,8 +17,8 @@ export type RestEndpointMethodTypes =
  * run_id is only defined for "workflow_run:completed" events.
  */
 export async function extractInputs(
-  github: import("@actions/github-script").AsyncFunctionArguments["github"],
-  context: import("@actions/github-script").AsyncFunctionArguments["context"],
+  github: GitHub,
+  context: Context,
   core: Core,
 ): Promise<{
   owner: string;

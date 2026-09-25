@@ -1,23 +1,33 @@
-import type { AsyncFunctionArguments } from "@actions/github-script";
+import type { EndpointInterface, OctokitResponse } from "@octokit/types";
 import { afterEach } from "node:test";
 import { beforeEach, describe, expect, expectTypeOf, it, vi } from "vitest";
 import { add, Duration } from "../../shared/src/time.ts";
-import { createLogHook, createRateLimitHook, type Core } from "../src/github.ts";
-import { createMockLogger } from "./mocks.ts";
+import type { Core, GitHubScriptArgs } from "../src/github.ts";
+import { createLogHook, createRateLimitHook } from "../src/github.ts";
+import { createMockContext, createMockCore, createMockGithub, createMockLogger } from "./mocks.ts";
 
-describe("Core", () => {
-  it("matches the toolkit provided by GitHub Script", () => {
-    expectTypeOf<Core>().toEqualTypeOf<AsyncFunctionArguments["core"]>();
+describe("GitHubScriptArgs", () => {
+  it("accepts the three values passed by our workflow entry points", () => {
+    const args = {
+      github: createMockGithub(),
+      context: createMockContext(),
+      core: createMockCore(),
+    } satisfies GitHubScriptArgs;
+
+    expectTypeOf(args).toExtend<GitHubScriptArgs>();
+  });
+
+  it("preserves the synchronous core APIs provided by GitHub Script", () => {
+    expectTypeOf<ReturnType<Core["setOutput"]>>().toBeVoid();
+    expectTypeOf<ReturnType<Core["setFailed"]>>().toBeVoid();
+    expectTypeOf<ReturnType<Core["notice"]>>().toBeVoid();
   });
 });
 
 describe("createLogHook", () => {
   it("logs request info with body", () => {
     const mockLogger = createMockLogger();
-    const logHook = createLogHook(
-      ((r: object) => r) as import("@octokit/types").EndpointInterface,
-      mockLogger,
-    );
+    const logHook = createLogHook(((r: object) => r) as EndpointInterface, mockLogger);
 
     expect(
       logHook({
@@ -37,10 +47,7 @@ describe("createLogHook", () => {
 
   it("logs request info without body", () => {
     const mockLogger = createMockLogger();
-    const logHook = createLogHook(
-      ((r: object) => r) as import("@octokit/types").EndpointInterface,
-      mockLogger,
-    );
+    const logHook = createLogHook(((r: object) => r) as EndpointInterface, mockLogger);
 
     expect(
       logHook({
@@ -72,9 +79,7 @@ describe("createRateLimitHook", () => {
     const mockLogger = createMockLogger();
     const ratelimitHook = createRateLimitHook(mockLogger);
 
-    expect(
-      ratelimitHook({ headers: {} } as import("@octokit/types").OctokitResponse<unknown, number>),
-    ).toBeUndefined();
+    expect(ratelimitHook({ headers: {} } as OctokitResponse<unknown, number>)).toBeUndefined();
 
     expect(mockLogger.info).toBeCalledTimes(0);
     expect(mockLogger.debug).toBeCalledTimes(1);
@@ -98,7 +103,7 @@ describe("createRateLimitHook", () => {
           "x-ratelimit-remaining": "50",
           "x-ratelimit-reset": reset,
         },
-      } as import("@octokit/types").OctokitResponse<unknown, number>),
+      } as OctokitResponse<unknown, number>),
     ).toBeUndefined();
     expect(mockLogger.info).toBeCalledTimes(1);
     expect(mockLogger.info.mock.calls[0]).toMatchInlineSnapshot(`
@@ -114,7 +119,7 @@ describe("createRateLimitHook", () => {
           "x-ratelimit-remaining": "75",
           "x-ratelimit-reset": reset,
         },
-      } as import("@octokit/types").OctokitResponse<unknown, number>),
+      } as OctokitResponse<unknown, number>),
     ).toBeUndefined();
     expect(mockLogger.info).toBeCalledTimes(2);
     expect(mockLogger.info.mock.calls[1]).toMatchInlineSnapshot(`
@@ -130,7 +135,7 @@ describe("createRateLimitHook", () => {
           "x-ratelimit-remaining": "25",
           "x-ratelimit-reset": reset,
         },
-      } as import("@octokit/types").OctokitResponse<unknown, number>),
+      } as OctokitResponse<unknown, number>),
     ).toBeUndefined();
     expect(mockLogger.info).toBeCalledTimes(3);
     expect(mockLogger.info.mock.calls[2]).toMatchInlineSnapshot(`
@@ -146,7 +151,7 @@ describe("createRateLimitHook", () => {
           "x-ratelimit-remaining": "0",
           "x-ratelimit-reset": reset,
         },
-      } as import("@octokit/types").OctokitResponse<unknown, number>),
+      } as OctokitResponse<unknown, number>),
     ).toBeUndefined();
     expect(mockLogger.info).toBeCalledTimes(4);
     expect(mockLogger.info.mock.calls[3]).toMatchInlineSnapshot(`

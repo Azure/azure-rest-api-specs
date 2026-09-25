@@ -1,3 +1,4 @@
+import type { GitHubScriptArgs } from "../src/github.ts";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 // Mock fs/promises before imports
@@ -17,9 +18,7 @@ const outputFile = "avocado.ndjson";
 
 describe("generateJobSummary", () => {
   function generateJobSummary(asyncFunctionArgs: unknown) {
-    return generateJobSummaryImpl(
-      asyncFunctionArgs as import("@actions/github-script").AsyncFunctionArguments,
-    );
+    return generateJobSummaryImpl(asyncFunctionArgs as GitHubScriptArgs);
   }
 
   beforeEach(() => {

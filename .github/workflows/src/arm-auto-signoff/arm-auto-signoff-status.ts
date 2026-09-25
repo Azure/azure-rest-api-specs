@@ -3,7 +3,7 @@ import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { equals } from "../../../shared/src/set.ts";
 import { byDate, invert } from "../../../shared/src/sort.ts";
 import { extractInputs } from "../context.ts";
-import type { Core } from "../github.ts";
+import type { Core, GitHub, GitHubScriptArgs } from "../github.ts";
 import { LabelAction } from "../label.ts";
 import { ArmAutoSignoffLabel } from "./arm-auto-signoff-labels.ts";
 
@@ -57,11 +57,7 @@ function readBooleanArtifactValue(artifactNames: string[], key: string): boolean
 // TODO: Add tests
 /* v8 ignore start */
 
-export default async function getLabelAction({
-  github,
-  context,
-  core,
-}: import("@actions/github-script").AsyncFunctionArguments): Promise<{
+export default async function getLabelAction({ github, context, core }: GitHubScriptArgs): Promise<{
   headSha: string;
   issueNumber: number;
   labelActions: ManagedLabelActions;
@@ -268,7 +264,7 @@ export async function getLabelActionImpl({
  */
 async function checkArmAnalysisWorkflow(
   workflowRuns: WorkflowRun[],
-  github: import("@actions/github-script").AsyncFunctionArguments["github"],
+  github: GitHub,
   owner: string,
   repo: string,
   core: Core,

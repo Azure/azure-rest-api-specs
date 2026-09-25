@@ -1,13 +1,9 @@
 import { isFullGitSha } from "../../shared/src/git.ts";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import { extractInputs } from "../src/context.ts";
-import type { Core } from "./github.ts";
+import type { Core, GitHubScriptArgs } from "./github.ts";
 
-export default async function updateLabels({
-  github,
-  context,
-  core,
-}: import("@actions/github-script").AsyncFunctionArguments) {
+export default async function updateLabels({ github, context, core }: GitHubScriptArgs) {
   const { owner, repo, head_sha, issue_number, run_id } = await extractInputs(
     github,
     context,
