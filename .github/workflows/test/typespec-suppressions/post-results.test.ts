@@ -38,6 +38,7 @@ describe("post-results", () => {
   }
 
   beforeEach(() => {
+    context.eventName = "";
     vi.mocked(extractInputs).mockReset();
     vi.mocked(commentOrUpdate).mockReset();
     vi.mocked(parseExistingComments).mockReset();
@@ -140,7 +141,8 @@ describe("post-results", () => {
   });
 
   it("does not touch labels when the analysis result is unavailable", async () => {
-    const github = githubWithLabels([]);
+    context.eventName = "workflow_run";
+    const github = githubWithLabels(["typespec-suppressions-approved"]);
     vi.mocked(buildSuppressionsComment).mockResolvedValue(undefined);
 
     await postSuppressionsResults(args(github));
@@ -165,6 +167,49 @@ describe("post-results", () => {
       42,
       ["typespec-suppressions-approved", "other"],
     );
+  });
+
+  it("clears approval and renders a new analysis result as pending", async () => {
+    context.eventName = "workflow_run";
+    const github = githubWithLabels(["typespec-suppressions-approved", "other"]);
+    vi.mocked(buildSuppressionsComment).mockResolvedValue({ body: "BODY", requiresApproval: true });
+
+    await postSuppressionsResults(args(github));
+
+    expect(buildSuppressionsComment).toHaveBeenCalledWith(
+      github,
+      mockCore,
+      "test-owner",
+      "test-repo",
+      "abc123",
+      42,
+      ["other"],
+    );
+    expect(github.rest.issues.removeLabel).toHaveBeenCalledWith({
+      owner: "test-owner",
+      repo: "test-repo",
+      issue_number: 42,
+      name: "typespec-suppressions-approved",
+    });
+  });
+
+  it("preserves approval when refreshing after a label event", async () => {
+    context.eventName = "pull_request_target";
+    const github = githubWithLabels(["typespec-suppressions-approved"]);
+    vi.mocked(buildSuppressionsComment).mockResolvedValue({ body: "BODY", requiresApproval: true });
+
+    await postSuppressionsResults(args(github));
+
+    expect(buildSuppressionsComment).toHaveBeenCalledWith(
+      github,
+      mockCore,
+      "test-owner",
+      "test-repo",
+      "abc123",
+      42,
+      ["typespec-suppressions-approved"],
+    );
+    expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
   });
 
   it("resolves an existing comment when nothing requires review", async () => {

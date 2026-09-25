@@ -16,7 +16,10 @@
 import { PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { commentOrUpdate, parseExistingComments } from "../comment.ts";
 import { extractInputs } from "../context.ts";
-import { TYPESPEC_SUPPRESSIONS_REVIEW_REQUIRED_LABEL } from "../label.ts";
+import {
+  TYPESPEC_SUPPRESSIONS_APPROVED_LABEL,
+  TYPESPEC_SUPPRESSIONS_REVIEW_REQUIRED_LABEL,
+} from "../label.ts";
 import { removeLabelIfPresent } from "../package-name-approval/labels.ts";
 import {
   buildSuppressionsComment,
@@ -74,6 +77,10 @@ export default async function postSuppressionsResults({
   });
 
   const labelNames: string[] = pr.labels.map((label: { name?: string }) => label.name ?? "");
+  const isNewAnalysis = context.eventName === "workflow_run";
+  const effectiveLabelNames = isNewAnalysis
+    ? labelNames.filter((label) => label !== TYPESPEC_SUPPRESSIONS_APPROVED_LABEL)
+    : labelNames;
 
   const result = await buildSuppressionsComment(
     github,
@@ -82,7 +89,7 @@ export default async function postSuppressionsResults({
     repo,
     head_sha,
     issue_number,
-    labelNames,
+    effectiveLabelNames,
   );
 
   if (!result) {
@@ -93,6 +100,19 @@ export default async function postSuppressionsResults({
   }
 
   const { body, requiresApproval } = result;
+
+  if (isNewAnalysis && labelNames.includes(TYPESPEC_SUPPRESSIONS_APPROVED_LABEL)) {
+    core.info(
+      `Removing ${TYPESPEC_SUPPRESSIONS_APPROVED_LABEL} label for new analysis result on ${owner}/${repo}#${issue_number}.`,
+    );
+    await removeLabelIfPresent(
+      github,
+      owner,
+      repo,
+      issue_number,
+      TYPESPEC_SUPPRESSIONS_APPROVED_LABEL,
+    );
+  }
 
   await syncReviewRequiredLabel(
     github,
