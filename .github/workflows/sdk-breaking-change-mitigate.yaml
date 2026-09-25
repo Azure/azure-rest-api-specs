@@ -1,0 +1,219 @@
+name: SDK Breaking Change Mitigation
+
+on:
+  workflow_run:
+    workflows: ["SDK Breaking Change Analysis - Publish Results"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      workflow_run_id:
+        description: "Completed SDK Breaking Change Analysis - Publish Results workflow run ID"
+        required: true
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+  copilot-requests: write
+
+jobs:
+  resolve-trigger:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-slim
+    outputs:
+      head-branch: ${{ steps.resolve.outputs.head-branch }}
+      head-repository: ${{ steps.resolve.outputs.head-repository }}
+      head-sha: ${{ steps.resolve.outputs.head-sha }}
+      pr-number: ${{ steps.resolve.outputs.pr-number }}
+      sdk-language: ${{ steps.resolve.outputs.sdk-language }}
+      sdk-repository: ${{ steps.resolve.outputs.sdk-repository }}
+      should-run: ${{ steps.resolve.outputs.should-run }}
+    steps:
+      - name: Download published analysis results
+        uses: actions/download-artifact@v8
+        with:
+          name: sdk-breaking-change-results
+          path: ${{ runner.temp }}/published-analysis-results
+          github-token: ${{ github.token }}
+          run-id: ${{ inputs.workflow_run_id || github.event.workflow_run.id }}
+
+      - name: Checkout workflow repository
+        uses: actions/checkout@v7
+        with:
+          sparse-checkout: |
+            .github
+          persist-credentials: false
+
+      - name: Install dependencies for github-script actions
+        uses: ./.github/actions/install-deps-github-script
+
+      - name: Resolve mitigation trigger
+        id: resolve
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const { resolveMitigationTrigger } =
+              await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change/resolve-mitigation-inputs.ts');
+            await resolveMitigationTrigger({
+              github,
+              context,
+              core,
+              publishedResultsPath: '${{ runner.temp }}/published-analysis-results/sdk-breaking-change-analysis.json',
+            });
+
+  mitigate:
+    needs: resolve-trigger
+    if: needs.resolve-trigger.outputs.should-run == 'true'
+    concurrency:
+      group: >-
+        sdk-breaking-mitigate-${{ inputs.workflow_run_id || github.event.workflow_run.id }}
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    env:
+      AZSDK_CLI_PATH: /tmp/bin
+    steps:
+      - name: Checkout workflow repository
+        uses: actions/checkout@v7
+        with:
+          path: repositories/workflow-repository
+          persist-credentials: false
+
+      - name: Install dependencies for github-script actions
+        uses: ./repositories/workflow-repository/.github/actions/setup-node-install-deps
+        with:
+          working-directory: repositories/workflow-repository
+          install-command: "pnpm install --frozen-lockfile --prod --prefer-offline --config.trust-lockfile=true --filter=azure-rest-api-specs-github..."
+          cache: "false"
+
+      - name: Install Azure SDK CLI
+        shell: pwsh
+        run: ./repositories/workflow-repository/eng/common/mcp/azure-sdk-mcp.ps1 -InstallDirectory $env:AZSDK_CLI_PATH
+
+      - name: Download published analysis results
+        uses: actions/download-artifact@v8
+        with:
+          name: sdk-breaking-change-results
+          path: ${{ runner.temp }}/published-analysis-results
+          github-token: ${{ github.token }}
+          run-id: ${{ inputs.workflow_run_id || github.event.workflow_run.id }}
+
+      - name: Checkout specification PR source
+        uses: actions/checkout@v7
+        with:
+          repository: ${{ needs.resolve-trigger.outputs.head-repository }}
+          ref: ${{ needs.resolve-trigger.outputs.head-sha }}
+          path: repositories/azure-rest-api-specs
+          persist-credentials: false
+
+      - name: Set up Node.js and install specification repository dependencies
+        uses: ./repositories/workflow-repository/.github/actions/setup-node-install-deps
+        with:
+          working-directory: repositories/azure-rest-api-specs
+
+      - name: Checkout target SDK repository
+        uses: actions/checkout@v7
+        with:
+          repository: Azure/${{ needs.resolve-trigger.outputs.sdk-repository }}
+          ref: main
+          path: repositories/${{ needs.resolve-trigger.outputs.sdk-repository }}
+          persist-credentials: false
+      - name: Set up GitHub Copilot CLI
+        id: setup-copilot-cli
+        shell: bash
+        run: |
+          set -euo pipefail
+          install_dir="$RUNNER_TEMP/copilot-cli"
+          npm_config_ignore_scripts=false npm install \
+            --global \
+            --prefix "$install_dir" \
+            @github/copilot
+          echo "$install_dir/bin" >> "$GITHUB_PATH"
+          copilot_path="$install_dir/bin/copilot"
+          test -x "$copilot_path"
+          "$copilot_path" --version
+          echo "path=$copilot_path" >> "$GITHUB_OUTPUT"
+
+      - name: Mitigate SDK breaking changes
+        id: mitigate-sdk-breaking-changes
+        uses: actions/github-script@v9
+        env:
+          ANALYSIS_RESULT_PATH: ${{ runner.temp }}/published-analysis-results/sdk-breaking-change-analysis.json
+          AZSDK_COPILOT_CLI_PATH: ${{ steps.setup-copilot-cli.outputs.path }}
+          AZSDK_COPILOT_GITHUB_TOKEN: ${{ github.token }}
+          SDK_REPOSITORY_PATH: ${{ github.workspace }}/repositories/${{ needs.resolve-trigger.outputs.sdk-repository }}
+          SPEC_REPOSITORY_PATH: ${{ github.workspace }}/repositories/azure-rest-api-specs
+          MITIGATION_RESULT_PATH: ${{ runner.temp }}/published-mitigation-results/sdk-breaking-change-mitigation.json
+          MITIGATION_WORKFLOW_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        with:
+          script: |
+            const { mitigateSdkBreakingChanges } =
+              await import('${{ github.workspace }}/repositories/workflow-repository/.github/workflows/src/sdk-breaking-change/mitigate-sdk-breaking-changes.ts');
+            await mitigateSdkBreakingChanges({
+              runnerTemp: process.env.RUNNER_TEMP,
+              analysisResultPath: process.env.ANALYSIS_RESULT_PATH,
+              mitigationResultPath: process.env.MITIGATION_RESULT_PATH,
+              mitigationWorkflowUrl: process.env.MITIGATION_WORKFLOW_URL,
+              specificationRepositoryPath: process.env.SPEC_REPOSITORY_PATH,
+              sdkRepositoryPath: process.env.SDK_REPOSITORY_PATH,
+              azureSdkCliPath: process.env.AZSDK_CLI_PATH,
+            });
+
+      - name: Get mitigation changed code
+        id: get-changed-code
+        shell: bash
+        working-directory: repositories/azure-rest-api-specs
+        env:
+          MITIGATION_RESULT_PATH: ${{ runner.temp }}/published-mitigation-results/sdk-breaking-change-mitigation.json
+        run: |
+          set -euo pipefail
+          git add --intent-to-add --all
+          changed_code="$(git diff --no-ext-diff --no-color)"
+          max_snippet_length=12000
+          if [[ ${#changed_code} -gt $max_snippet_length ]]; then
+            changed_code="${changed_code:0:$max_snippet_length}"$'\n... diff truncated.'
+          fi
+          jq --arg customizationCode "$changed_code" \
+            '.customizationCode = $customizationCode' \
+            "$MITIGATION_RESULT_PATH" > "$MITIGATION_RESULT_PATH.tmp"
+          mv "$MITIGATION_RESULT_PATH.tmp" "$MITIGATION_RESULT_PATH"
+          delimiter="changed_code_${RANDOM}_${RANDOM}"
+          {
+            echo "changed-code<<$delimiter"
+            printf '%s\n' "$changed_code"
+            echo "$delimiter"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Upload mitigation result
+        uses: actions/upload-artifact@v7
+        with:
+          name: sdk-breaking-change-mitigation-results
+          path: ${{ runner.temp }}/published-mitigation-results/sdk-breaking-change-mitigation.json
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Publish mitigation summary
+        shell: bash
+        env:
+          PR_NUMBER: ${{ needs.resolve-trigger.outputs.pr-number }}
+          SDK_LANGUAGE: ${{ needs.resolve-trigger.outputs.sdk-language }}
+          MITIGATION_COMMIT: ${{ needs.resolve-trigger.outputs.head-sha }}
+          MITIGATION_CHANGED_CODE: ${{ steps.get-changed-code.outputs.changed-code }}
+        run: |
+          {
+            echo "## SDK breaking-change mitigation"
+            echo
+            printf '%s\n\n' "**Pull request:** #$PR_NUMBER"
+            printf '%s\n\n' "**SDK language:** $SDK_LANGUAGE"
+            printf '%s\n\n' "**Mitigation upon commit:** \`$MITIGATION_COMMIT\`"
+            echo "## Customization Code"
+            echo
+            if [[ -n "$MITIGATION_CHANGED_CODE" ]]; then
+              echo '````diff'
+              printf '%s\n' "$MITIGATION_CHANGED_CODE"
+              echo '````'
+            else
+              echo "No mitigation changes were produced."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
