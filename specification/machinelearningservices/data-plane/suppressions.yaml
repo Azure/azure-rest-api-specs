@@ -13,3 +13,19 @@
     These internal data-plane APIs were migrated from hand-written Swagger to TypeSpec.
     The TypeSpec-generated OpenAPI specs do not yet contain x-ms-examples.
     Examples will be added in a follow-up iteration.
+- tool: TypeSpecValidation
+  reason: >
+    TypeSpec Config Incomplete - Missing required emitter options in tspconfig.yaml.
+    Responsibility: Spec owner would update missing configurations.
+    More info: https://aka.ms/azsdk/spec-gen-sdk-config.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-java.*
+    - options.@azure-tools/typespec-ts.*
+  paths:
+    - AIAssets/tspconfig.yaml
+    - DatasetDataplane/tspconfig.yaml
+    - RegistryDiscovery/tspconfig.yaml
+    - RunHistory/tspconfig.yaml
+    - WorkspaceDataplane/tspconfig.yaml
+    - ModelDataplane/tspconfig.yaml

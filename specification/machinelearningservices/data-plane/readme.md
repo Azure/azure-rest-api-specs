@@ -5,7 +5,9 @@
 This is the AutoRest configuration file for AzureMachineLearning.
 
 ---
+
 ## Getting Started
+
 To build the SDK for AzureMachineLearning, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -13,16 +15,16 @@ To build the SDK for AzureMachineLearning, simply [Install AutoRest](https://aka
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the AzureMachineLearning API.
 
-``` yaml
+```yaml
 title: Azure Machine Learning Service
 description: These APIs allow end users to manage Azure Machine Learning Services.
 openapi-type: data-plane
@@ -33,7 +35,7 @@ add-credentials: true
 
 ### Suppression
 
-``` yaml
+```yaml
 directive:
   - suppress: AvoidNestedProperties
     reason: Client defined properties dictionaries should not be flattened.
@@ -99,7 +101,7 @@ These settings apply only when `--tag=package-2024-05-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-05-01-preview'
 input-file:
-  - Microsoft.MachineLearningServices/preview/2024-05-01-preview/azure-ai-assets.json
+  - AIAssets/preview/2024-05-01-preview/azure-ai-assets.json
 ```
 
 ### Tag: package-2024-04-01-preview
@@ -108,7 +110,7 @@ These settings apply only when `--tag=package-2024-04-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-04-01-preview'
 input-file:
-  - Microsoft.MachineLearningServices/preview/2024-04-01-preview/azure-ai-assets.json
+  - AIAssets/preview/2024-04-01-preview/azure-ai-assets.json
 ```
 
 ### Tag: package-2019-09-preview
@@ -117,42 +119,42 @@ These settings apply only when `--tag=package-2019-09-preview` is specified on t
 
 ```yaml $(tag) == 'package-2019-09-preview'
 input-file:
-  - Microsoft.MachineLearningServices/preview/2019-09-30/execution.json
-  - Microsoft.MachineLearningServices/preview/2019-09-30/modelManagement.json
-  - Microsoft.MachineLearningServices/preview/2019-09-30/runHistory.json
-  - Microsoft.MachineLearningServices/preview/2019-09-30/datastore.json
-  - Microsoft.MachineLearningServices/preview/2019-09-30/artifact.json
-  - Microsoft.MachineLearningServices/preview/2019-09-30/hyperdrive.json
+  - ExecutionTraining/stable/2019-09-30/execution.json
+  - ModelManagement/stable/2019-09-30/modelManagement.json
+  - RunHistory/stable/2019-09-30/runHistory.json
+  - Datastore/stable/2019-09-30/datastore.json
+  - Artifact/stable/2019-09-30/artifact.json
+  - HyperDrive/stable/2019-09-30/hyperdrive.json
 ```
 
 ### Tag: package-2019-08-preview
 
 These settings apply only when `--tag=package-2019-08-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-08-preview'
+```yaml $(tag) == 'package-2019-08-preview'
 input-file:
-  - Microsoft.MachineLearningServices/preview/2019-08-01/execution.json
-  - Microsoft.MachineLearningServices/preview/2019-08-01/modelManagement.json
-  - Microsoft.MachineLearningServices/preview/2019-08-01/runHistory.json
-  - Microsoft.MachineLearningServices/preview/2019-08-01/datastore.json
-  - Microsoft.MachineLearningServices/preview/2019-08-01/artifact.json
-  - Microsoft.MachineLearningServices/preview/2019-08-01/hyperdrive.json
+  - ExecutionTraining/stable/2019-08-01/execution.json
+  - ModelManagement/stable/2019-08-01/modelManagement.json
+  - RunHistory/stable/2019-08-01/runHistory.json
+  - Datastore/stable/2019-08-01/datastore.json
+  - Artifact/stable/2019-08-01/artifact.json
+  - HyperDrive/stable/2019-08-01/hyperdrive.json
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
 Swagger to SDK has been intentionally disabled for this spec.
 
-## C#
+## C
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
 
-``` yaml $(csharp)
+```yaml $(csharp)
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
@@ -161,18 +163,16 @@ csharp:
   clear-output-folder: true
 ```
 
-
 ## Python
 
-Python generation is intentionally disabled.  Please use the published Python package for Azure Machine Learning on PyPi.
-
+Python generation is intentionally disabled. Please use the published Python package for Azure Machine Learning on PyPi.
 
 ## Java
 
 These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
-``` yaml $(java)
+```yaml $(java)
 java:
   azure-arm: true
   namespace: com.microsoft.azure.machinelearning.services
@@ -180,13 +180,13 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/azure-machinelearning-services
 ```
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
 This block is updated by an automatic script. Edits may be lost!
 
-``` yaml $(tag) == 'all-api-versions' /* autogenerated */
+```yaml $(tag) == 'all-api-versions' /* autogenerated */
 # include the azure profile definitions from the standard location
 require: $(this-folder)/../../../profiles/readme.md
 
@@ -197,26 +197,24 @@ input-file:
   - $(this-folder)/RegistryDiscovery/stable/v1.0/registry-discovery.json
   - $(this-folder)/RunHistory/stable/v1.0/run-history.json
   - $(this-folder)/WorkspaceDataplane/preview/2023-06-01-preview/workspace-dataplane.json
-  - $(this-folder)/Microsoft.MachineLearningServices\preview\2019-09-30\execution.json
-  - $(this-folder)/Microsoft.MachineLearningServices\preview\2019-09-30\modelManagement.json
-  - $(this-folder)/Microsoft.MachineLearningServices\preview\2019-09-30\runHistory.json
-  - $(this-folder)/Microsoft.MachineLearningServices\preview\2019-09-30\datastore.json
-  - $(this-folder)/Microsoft.MachineLearningServices\preview\2019-09-30\artifact.json
-  - $(this-folder)/Microsoft.MachineLearningServices\preview\2019-09-30\hyperdrive.json
-  - $(this-folder)/Microsoft.MachineLearningServices/preview/2019-08-01/execution.json
-  - $(this-folder)/Microsoft.MachineLearningServices/preview/2019-08-01/modelManagement.json
-  - $(this-folder)/Microsoft.MachineLearningServices/preview/2019-08-01/runHistory.json
-  - $(this-folder)/Microsoft.MachineLearningServices/preview/2019-08-01/datastore.json
-  - $(this-folder)/Microsoft.MachineLearningServices/preview/2019-08-01/artifact.json
-  - $(this-folder)/Microsoft.MachineLearningServices/preview/2019-08-01/hyperdrive.json
-
+  - $(this-folder)/ExecutionTraining\stable\2019-09-30\execution.json
+  - $(this-folder)/ModelManagement\stable\2019-09-30\modelManagement.json
+  - $(this-folder)/RunHistory\stable\2019-09-30\runHistory.json
+  - $(this-folder)/Datastore\stable\2019-09-30\datastore.json
+  - $(this-folder)/Artifact\stable\2019-09-30\artifact.json
+  - $(this-folder)/HyperDrive\stable\2019-09-30\hyperdrive.json
+  - $(this-folder)/ExecutionTraining\stable/2019-08-01/execution.json
+  - $(this-folder)/ModelManagement\stable/2019-08-01/modelManagement.json
+  - $(this-folder)/RunHistory\stable/2019-08-01/runHistory.json
+  - $(this-folder)/Datastore\stable/2019-08-01/datastore.json
+  - $(this-folder)/Artifact\stable/2019-08-01/artifact.json
+  - $(this-folder)/HyperDrive/stable/2019-08-01/hyperdrive.json
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
-uncomment the  `exclude-file` section below and add the file paths.
+If there are files that should not be in the `all-api-versions` set,
+uncomment the `exclude-file` section below and add the file paths.
 
-``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
+```yaml $(tag) == 'all-api-versions'
+#exclude-file:
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
