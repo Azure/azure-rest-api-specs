@@ -549,6 +549,11 @@ using Microsoft.OperationalInsights;
   "csharp"
 );
 @@clientName(
+  WorkspaceFeatures.dataAuthorizationMode,
+  "IsDataAuthorizationMode",
+  "csharp"
+);
+@@clientName(
   WorkspaceFeatures.unifiedSentinelBillingOnly,
   "IsUnifiedSentinelBillingOnly",
   "csharp"
