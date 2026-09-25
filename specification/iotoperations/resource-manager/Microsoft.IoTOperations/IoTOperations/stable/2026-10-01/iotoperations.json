@@ -6630,7 +6630,6 @@
         }
       },
       "required": [
-        "group",
         "kind",
         "name"
       ]
@@ -7184,8 +7183,8 @@
         },
         "host": {
           "type": "string",
-          "description": "Host of the Azure Data Explorer in the form of <cluster>.<region>.kusto.windows.net .",
-          "pattern": ".+\\..+\\.kusto\\.windows\\.net"
+          "description": "Host of the Azure Data Explorer in the form of <cluster>.<region>.kusto.windows.net (Azure Public) or <cluster>.<region>.kusto.usgovcloudapi.net (Azure US Government).",
+          "pattern": ".*\\.*\\.kusto\\.(windows\\.net|usgovcloudapi\\.net)"
         },
         "batching": {
           "$ref": "#/definitions/BatchingConfiguration",
@@ -7229,8 +7228,8 @@
         },
         "host": {
           "type": "string",
-          "description": "Host of the Azure Data Lake in the form of <account>.blob.core.windows.net .",
-          "pattern": ".+\\.blob\\.core\\.windows\\.net"
+          "description": "Host of the Azure Data Lake in the form of <account>.blob.core.windows.net (Azure Public) or <account>.blob.core.usgovcloudapi.net (Azure US Government).",
+          "pattern": ".*\\.blob\\.core\\.(windows\\.net|usgovcloudapi\\.net)"
         },
         "batching": {
           "$ref": "#/definitions/BatchingConfiguration",
@@ -7285,8 +7284,8 @@
         },
         "host": {
           "type": "string",
-          "description": "Host of the Microsoft Fabric in the form of https://<host>.fabric.microsoft.com.",
-          "pattern": ".+\\.fabric\\.microsoft\\.com"
+          "description": "Host of the Microsoft Fabric in the form of https://<host>.fabric.microsoft.com (Azure Public) or https://<host>.fabric.microsoft.us (Azure US Government).",
+          "pattern": ".*\\.fabric\\.microsoft\\.(com|us)"
         },
         "batching": {
           "$ref": "#/definitions/BatchingConfiguration",
@@ -9551,7 +9550,7 @@
         },
         "sku": {
           "$ref": "#/definitions/InstanceSku",
-          "description": "The billing SKU for the AIO Instance. Defaults to Standard. Immutable after create.",
+          "description": "The billing SKU for the AIO Instance. Defaults to Standard.",
           "x-ms-mutability": [
             "read",
             "create"
