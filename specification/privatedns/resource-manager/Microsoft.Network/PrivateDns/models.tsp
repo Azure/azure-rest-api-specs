@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -291,6 +293,80 @@ model RecordSetProperties {
    */
   @identifiers(#[])
   txtRecords?: TxtRecord[];
+
+  /**
+   * A reference to an azure private traffic manager profile resource from where the record set value is taken. Cannot be combined with aRecords, aaaaRecords, or cnameRecord.
+   */
+  @added(Versions.v2026_06_01_preview)
+  trafficManagementProfile?: SubResource;
+
+  /**
+   * The provisioning state of the record set. This is a read-only property and any attempt to set this value will be ignored.
+   */
+  @added(Versions.v2026_06_01_preview)
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+}
+
+/**
+ * Represents a single Azure resource and its referencing private DNS record sets.
+ */
+@added(Versions.v2026_06_01_preview)
+model PrivateDnsResourceReference {
+  /**
+   * A list of private DNS record sets that reference the target resource.
+   */
+  privateDnsResources?: SubResource[];
+
+  /**
+   * A reference to an azure resource from where the private DNS resource value is taken.
+   */
+  targetResource?: SubResource;
+}
+
+/**
+ * Represents the properties of the private DNS Resource Reference Request.
+ */
+@added(Versions.v2026_06_01_preview)
+model PrivateDnsResourceReferenceRequest {
+  /**
+   * The properties of the Resource Reference Request.
+   */
+  properties?: PrivateDnsResourceReferenceRequestProperties;
+}
+
+/**
+ * Represents the properties of the private DNS Resource Reference Request.
+ */
+@added(Versions.v2026_06_01_preview)
+model PrivateDnsResourceReferenceRequestProperties {
+  /**
+   * A list of references to azure resources for which referencing private DNS records need to be queried.
+   */
+  targetResources?: SubResource[];
+}
+
+/**
+ * Represents the properties of the private DNS Resource Reference Result.
+ */
+@added(Versions.v2026_06_01_preview)
+model PrivateDnsResourceReferenceResult {
+  /**
+   * The result of private dns resource reference request. Returns a list of private dns resource references for each of the azure resource in the request.
+   */
+  properties?: PrivateDnsResourceReferenceResultProperties;
+}
+
+/**
+ * The result of private dns resource reference request. Returns a list of private dns resource references for each of the azure resource in the request.
+ */
+@added(Versions.v2026_06_01_preview)
+model PrivateDnsResourceReferenceResultProperties {
+  /**
+   * The result of private dns resource reference request. A list of private dns resource references for each of the azure resource in the request
+   */
+  @identifiers(#[])
+  privateDnsResourceReferences?: PrivateDnsResourceReference[];
 }
 
 /**
