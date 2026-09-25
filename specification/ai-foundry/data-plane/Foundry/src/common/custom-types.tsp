@@ -1,3 +1,7 @@
+import "@azure-tools/typespec-azure-core";
+
+using Azure.Core.Experimental;
+
 namespace OpenAI {
   scalar integer extends TypeSpec.int64;
   scalar numeric extends TypeSpec.float64;

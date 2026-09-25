@@ -1,5 +1,10 @@
 import { describe, expect, it, vi } from "vitest";
-import { ensureReleasePlan, getApiReleaseType, getSdkReleaseType } from "../src/release-plan.ts";
+import {
+  ensureReleasePlan,
+  getApiReleaseType,
+  getReleasePlanResultById,
+  getSdkReleaseType,
+} from "../src/release-plan.ts";
 import type { AzsdkRunner } from "../src/types.ts";
 
 describe("release type helpers", () => {
@@ -69,7 +74,7 @@ describe("ensureReleasePlan", () => {
           code: 0,
           out: "null",
         },
-      "release-plan get --typespec-path specification/foo/Contoso.Service --api-release-type Public Preview --output json":
+      "release-plan get --typespec-path specification/foo/Contoso.Service --api-version 2026-06-01-preview --api-release-type Public Preview --output json":
         {
           code: 0,
           out: JSON.stringify({ id: 101, apiVersion: "2026-06-01-preview" }),
@@ -88,7 +93,7 @@ describe("ensureReleasePlan", () => {
           code: 0,
           out: "null",
         },
-      "release-plan get --typespec-path specification/foo/Contoso.Service --api-release-type Public Preview --output json":
+      "release-plan get --typespec-path specification/foo/Contoso.Service --api-version 2026-06-01-preview --api-release-type Public Preview --output json":
         {
           code: 0,
           out: "null",
@@ -113,7 +118,7 @@ describe("ensureReleasePlan", () => {
           code: 0,
           out: "null",
         },
-      "release-plan get --typespec-path specification/foo/Contoso.Service --api-release-type Public Preview --output json":
+      "release-plan get --typespec-path specification/foo/Contoso.Service --api-version 2026-06-01-preview --api-release-type Public Preview --output json":
         {
           code: 0,
           out: "null",
@@ -130,6 +135,33 @@ describe("ensureReleasePlan", () => {
     expect(result.releasePlan).toEqual({
       id: 1000,
       release_plan_link: "https://example.test/1000",
+    });
+  });
+
+  describe("getReleasePlanResultById", () => {
+    it("gets only the requested release plan", () => {
+      const runner = vi.fn().mockReturnValue({
+        exitCode: 0,
+        stdout: JSON.stringify({ release_plan_details: { ReleasePlanId: "12345" } }),
+        stderr: "",
+      });
+
+      const result = getReleasePlanResultById(" 12345 ", runner);
+
+      expect(runner).toHaveBeenCalledOnce();
+      expect(runner).toHaveBeenCalledWith([
+        "release-plan",
+        "get",
+        "--release-plan-id",
+        "12345",
+        "--output",
+        "json",
+      ]);
+      expect(result).toEqual({
+        outcome: "existing_by_id",
+        releasePlan: { release_plan_details: { ReleasePlanId: "12345" } },
+        details: { releasePlanId: "12345" },
+      });
     });
   });
 
@@ -160,7 +192,7 @@ describe("ensureReleasePlan", () => {
           code: 0,
           out: "null",
         },
-      "release-plan get --typespec-path specification/foo/Contoso.Service --api-release-type Public Preview --output json":
+      "release-plan get --typespec-path specification/foo/Contoso.Service --api-version 2026-06-01-preview --api-release-type Public Preview --output json":
         {
           code: 0,
           out: "null",
@@ -182,7 +214,7 @@ describe("ensureReleasePlan", () => {
           code: 0,
           out: "null",
         },
-      "release-plan get --typespec-path specification/foo/Contoso.Service --api-release-type Public Preview --output json":
+      "release-plan get --typespec-path specification/foo/Contoso.Service --api-version 2026-06-01-preview --api-release-type Public Preview --output json":
         {
           code: 0,
           out: "null",
@@ -206,7 +238,7 @@ describe("ensureReleasePlan", () => {
           code: 0,
           out: "null",
         },
-      "release-plan get --typespec-path specification/foo/Contoso.Service --api-release-type Public Preview --output json":
+      "release-plan get --typespec-path specification/foo/Contoso.Service --api-version 2026-06-01-preview --api-release-type Public Preview --output json":
         {
           code: 0,
           out: "null",
@@ -244,7 +276,7 @@ describe("ensureReleasePlan", () => {
           code: 0,
           out: "null",
         },
-      "release-plan get --typespec-path specification/foo/Contoso.Service --api-release-type Public Preview --output json":
+      "release-plan get --typespec-path specification/foo/Contoso.Service --api-version 2026-06-01-preview --api-release-type Public Preview --output json":
         {
           code: 0,
           out: "null",

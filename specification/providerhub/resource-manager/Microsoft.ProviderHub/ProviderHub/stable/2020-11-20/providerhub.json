@@ -2960,17 +2960,6 @@
         }
       }
     },
-    "ServiceTreeInfo": {
-      "type": "object",
-      "properties": {
-        "serviceId": {
-          "type": "string"
-        },
-        "componentId": {
-          "type": "string"
-        }
-      }
-    },
     "TemplateDeploymentPolicy": {
       "required": [
         "capabilities",
@@ -3172,13 +3161,6 @@
           },
           "x-ms-identifiers": []
         },
-        "serviceTreeInfos": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServiceTreeInfo"
-          },
-          "x-ms-identifiers": []
-        },
         "requestHeaderOptions": {
           "allOf": [
             {
@@ -3254,22 +3236,14 @@
         "incidentContactEmail": {
           "type": "string"
         },
-        "serviceTreeInfos": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServiceTreeInfo"
-          },
-          "x-ms-identifiers": []
-        },
         "resourceAccessPolicy": {
           "enum": [
-            "NotSpecified",
-            "AcisReadAllowed",
-            "AcisActionAllowed"
+            "NotSpecified"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "ResourceAccessPolicy"
+            "name": "ResourceAccessPolicy",
+            "modelAsString": true
           }
         },
         "resourceAccessRoles": {
@@ -4340,13 +4314,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "serviceTreeInfos": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServiceTreeInfo"
-          },
-          "x-ms-identifiers": []
         },
         "requestHeaderOptions": {
           "allOf": [

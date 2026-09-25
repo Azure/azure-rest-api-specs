@@ -278,3 +278,47 @@ using Microsoft.Confluent;
   Azure.ResourceManager.Foundations.ProxyResource,
   "csharp"
 );
+
+@@clientName(AccessPointResource, "ConfluentAccessPoint", "csharp");
+@@clientName(AccessPointProperties, "ConfluentAccessPointProperties", "csharp");
+@@clientName(NetworkGatewayResource, "ConfluentNetworkGateway", "csharp");
+@@clientName(
+  NetworkGatewayProperties,
+  "ConfluentNetworkGatewayProperties",
+  "csharp"
+);
+@@clientName(LatestLinkedSaaSResponse, "LatestLinkedSaaSResult", "csharp");
+@@clientName(
+  ActivateSaaSParameterRequest,
+  "ActivateSaaSParameterContent",
+  "csharp"
+);
+@@clientName(
+  SaaSResourceDetailsResponse,
+  "SaaSResourceDetailsResult",
+  "csharp"
+);
+@@clientName(SaaSData, "ConfluentSaaSInfo", "csharp");
+@@clientName(KeyValuePair, "ConfluentKeyValuePair", "csharp");
+@@clientName(LiftrBase.VnetInjectionDetails, "VNetInjectionDetails", "csharp");
+@@alternateType(
+  LiftrBase.VnetInjectionDetails.virtualNetworkResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  LiftrBase.VnetInjectionDetails.subnetResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@clientName(
+  AzureCosmosDBSourceConnectorServiceInfo.cosmosMessageKeyEnabled,
+  "IsCosmosMessageKeyEnabled",
+  "csharp"
+);
+@@alternateType(SaaSData.saaSResourceId, armResourceIdentifier, "csharp");
+@@alternateType(
+  LatestLinkedSaaSResponse.saaSResourceId,
+  armResourceIdentifier,
+  "csharp"
+);

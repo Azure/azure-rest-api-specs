@@ -155,6 +155,88 @@ union MaintenanceStateName {
   Canceled: "Canceled",
 }
 
+@added(Versions.v2026_03_01)
+@doc("Defines the type of maintenance activity")
+union MaintenanceActivityKind {
+  string,
+
+  @doc("Upgrade activity")
+  Upgrade: "Upgrade",
+
+  @doc("Downgrade activity")
+  Downgrade: "Downgrade",
+
+  @doc("Certificate rotation activity")
+  CertificateRotation: "CertificateRotation",
+
+  @doc("Backup activity")
+  Backup: "Backup",
+}
+
+@added(Versions.v2026_03_01)
+@doc("Represents a maintenance activity performed as part of an operation")
+model MaintenanceActivity {
+  @doc("The type of activity")
+  @visibility(Lifecycle.Read)
+  kind: MaintenanceActivityKind;
+
+  @doc("The component on which the activity is performed")
+  @visibility(Lifecycle.Read)
+  component: string;
+
+  @doc("Target version of the component")
+  @visibility(Lifecycle.Read)
+  version: string;
+
+  @doc("Optional link containing more details about the activity")
+  @visibility(Lifecycle.Read)
+  infoLink?: string;
+
+  @doc("Describes impact of the activity")
+  @visibility(Lifecycle.Read)
+  impact?: string;
+}
+
+@added(Versions.v2026_03_01)
+@doc("Defines the kind of group")
+union MaintenanceGroupKind {
+  string,
+
+  @doc("Logical grouping of maintenance operations")
+  Logical: "Logical",
+
+  @doc("Consolidation grouping of maintenance operations")
+  Consolidation: "Consolidation",
+}
+
+@added(Versions.v2026_03_01)
+@doc("Represents a maintenance group")
+model MaintenanceGroup {
+  @doc("Unique identifier of the group")
+  @visibility(Lifecycle.Read)
+  id: string;
+
+  @doc("Display name of the group")
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  @doc("Type of the group")
+  @visibility(Lifecycle.Read)
+  kind: MaintenanceGroupKind;
+}
+
+@added(Versions.v2026_03_01)
+@doc("Defines relationship details between maintenance groups")
+model MaintenanceRelationships {
+  @doc("List of dependent group identifiers")
+  @visibility(Lifecycle.Read)
+  dependencies?: string[];
+
+  @doc("List of prerequisite group identifiers")
+  @visibility(Lifecycle.Read)
+  prerequisites?: string[];
+}
+
 @doc("properties of a maintenance")
 model MaintenanceProperties {
   @doc("type of maintenance")
@@ -168,6 +250,22 @@ model MaintenanceProperties {
   @doc("Cluster ID for on which maintenance will be applied. Empty if maintenance is at private cloud level")
   @visibility(Lifecycle.Read)
   clusterId?: int32;
+
+  @added(Versions.v2026_03_01)
+  @doc("Activities performed as part of maintenance")
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  activities?: MaintenanceActivity[];
+
+  @added(Versions.v2026_03_01)
+  @doc("Group details if maintenance is part of a group")
+  @visibility(Lifecycle.Read)
+  group?: MaintenanceGroup;
+
+  @added(Versions.v2026_03_01)
+  @doc("Relationships with other maintenances like dependencies and prerequisites")
+  @visibility(Lifecycle.Read)
+  relationships?: MaintenanceRelationships;
 
   @doc("Link to maintenance info")
   @visibility(Lifecycle.Read)
@@ -219,6 +317,10 @@ union BlockedDatesConstraintCategory {
 
   @doc("Holidays")
   Holiday: "Holiday",
+
+  @added(Versions.v2026_03_01)
+  @doc("Constraint due to overlapping maintenance")
+  OverlappingMaintenance: "OverlappingMaintenance",
 }
 
 @doc("Blocked Time range Constraints for maintenance")
@@ -348,6 +450,27 @@ model AvailableWindowForMaintenance {
   endsAt: utcDateTime;
 }
 
+@added(Versions.v2026_03_01)
+@doc("Recommendation details for scheduling/rescheduling maintenance")
+model MaintenanceRecommendation {
+  @doc("List of recommended maintenance windows")
+  @visibility(Lifecycle.Read)
+  @identifiers(#[])
+  maintenanceWindows?: MaintenanceWindowRecommendation[];
+}
+
+@added(Versions.v2026_03_01)
+@doc("Represents a recommended maintenance start window")
+model MaintenanceWindowRecommendation {
+  @doc("Recommended start time for maintenance")
+  @visibility(Lifecycle.Read)
+  startTime: utcDateTime;
+
+  @doc("Reason for recommending this window")
+  @visibility(Lifecycle.Read)
+  reason?: string;
+}
+
 @doc("Time ranges blocked for operation on maintenance")
 model BlockedMaintenanceWindow {
   @doc("Category of blocked date")
@@ -401,6 +524,11 @@ model ScheduleOperation extends MaintenanceManagementOperation {
   @visibility(Lifecycle.Read)
   @identifiers(#[])
   constraints?: ScheduleOperationConstraint[];
+
+  @added(Versions.v2026_03_01)
+  @doc("Recommendations for scheduling maintenance")
+  @visibility(Lifecycle.Read)
+  recommendation?: MaintenanceRecommendation;
 }
 
 @doc("Constraints for scheduling of maintenance")
@@ -415,6 +543,10 @@ union ScheduleOperationConstraintKind {
 
   @doc("Blocked time range constraint")
   BlockedWhileScheduleOperation: "Blocked",
+
+  @added(Versions.v2026_03_01)
+  @doc("Defines weekend scheduling restriction")
+  WeekendScheduling: "WeekendScheduling",
 }
 
 @doc("Defines constraints for schedule operation on maintenance")
@@ -437,6 +569,20 @@ model SchedulingWindow extends ScheduleOperationConstraint {
   @doc("End date Time")
   @visibility(Lifecycle.Read)
   endsAt: utcDateTime;
+}
+
+@added(Versions.v2026_03_01)
+@doc("Constraint defining weekend scheduling restrictions")
+model WeekendSchedulingConstraint extends ScheduleOperationConstraint {
+  kind: ScheduleOperationConstraintKind.WeekendScheduling;
+
+  @doc("Indicates if scheduling is disabled on weekends")
+  @visibility(Lifecycle.Read)
+  isDisabled?: boolean;
+
+  @doc("Reason why weekend scheduling is disabled")
+  @visibility(Lifecycle.Read)
+  disabledReason?: string;
 }
 
 @doc("Time window in which Customer can to schedule maintenance")
@@ -473,6 +619,11 @@ model RescheduleOperation extends MaintenanceManagementOperation {
   @visibility(Lifecycle.Read)
   @identifiers(#[])
   constraints?: RescheduleOperationConstraint[];
+
+  @added(Versions.v2026_03_01)
+  @doc("Recommendations for rescheduling maintenance")
+  @visibility(Lifecycle.Read)
+  recommendation?: MaintenanceRecommendation;
 }
 
 @doc("Constraints for rescheduling of maintenance")
@@ -484,6 +635,14 @@ union RescheduleOperationConstraintKind {
 
   @doc("Blocked time range constraint")
   BlockedWhileRescheduleOperation: "Blocked",
+
+  @added(Versions.v2026_03_01)
+  @doc("Defines allowed window for rescheduling")
+  ReschedulingWindow: "ReschedulingWindow",
+
+  @added(Versions.v2026_03_01)
+  @doc("Defines weekend rescheduling restriction")
+  WeekendRescheduling: "WeekendRescheduling",
 }
 
 @doc("Defines constraints for reschedule operation on maintenance")
@@ -492,6 +651,27 @@ model RescheduleOperationConstraint {
   @doc("The kind of operation")
   @visibility(Lifecycle.Read)
   kind: RescheduleOperationConstraintKind;
+}
+
+@added(Versions.v2026_03_01)
+@doc("Constraint defining allowed time window for rescheduling")
+model ReschedulingWindowConstraint extends RescheduleOperationConstraint {
+  kind: RescheduleOperationConstraintKind.ReschedulingWindow;
+  ...AvailableWindowForMaintenance;
+}
+
+@added(Versions.v2026_03_01)
+@doc("Constraint defining weekend rescheduling restrictions")
+model WeekendReschedulingConstraint extends RescheduleOperationConstraint {
+  kind: RescheduleOperationConstraintKind.WeekendRescheduling;
+
+  @doc("Indicates if rescheduling is disabled on weekends")
+  @visibility(Lifecycle.Read)
+  isDisabled?: boolean;
+
+  @doc("Reason why weekend rescheduling is disabled")
+  @visibility(Lifecycle.Read)
+  disabledReason?: string;
 }
 
 @doc("Time window in which Customer can reschedule maintenance")
