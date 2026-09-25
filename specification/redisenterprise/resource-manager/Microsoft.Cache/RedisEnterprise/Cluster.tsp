@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Cache;
 /**
@@ -104,6 +106,19 @@ interface Clusters {
     Cluster,
     void,
     ArmResponse<SkuDetailsList>
+  >;
+
+  /**
+   * Unlinks the migrated endpoint from a Azure Managed Redis cluster that was migrated from Azure Cache for Redis Enterprise, removing the source cache endpoint that was redirected to this cluster during migration.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "The service never returns a 204 for this LRO; it always returns 202 and the operation completes with no final body. Declaring the 204 this rule expects would document a response the service does not produce."
+  @added(Versions.v2026_09_01)
+  @action("unlinkMigratedEndpoint")
+  unlinkMigratedEndpoint is ArmResourceActionAsyncBase<
+    Cluster,
+    void,
+    ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Cluster>
   >;
 
   /**
