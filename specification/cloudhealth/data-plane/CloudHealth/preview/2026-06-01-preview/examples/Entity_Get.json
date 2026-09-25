@@ -1,0 +1,82 @@
+{
+  "operationId": "Entity_Get",
+  "title": "Get entity diagnostic snapshot",
+  "parameters": {
+    "endpoint": "https://contoso-1f33ba.eastus.data.cloudhealth.azure.com",
+    "api-version": "2026-06-01-preview",
+    "entityName": "frontend-web-app"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "entityName": "frontend-web-app",
+        "healthState": "Degraded",
+        "lastHealthTransitionAt": "2026-06-05T12:00:00Z",
+        "lastHealthTransitionReason": "SignalTransition",
+        "impact": "Limited",
+        "signalInputs": [
+          {
+            "name": "request-latency-p95",
+            "effectiveHealthState": "Degraded"
+          }
+        ],
+        "dependencyInputs": [
+          {
+            "name": "backend-api",
+            "effectiveHealthState": "Healthy"
+          }
+        ],
+        "effectiveDependencyAggregation": {
+          "configuration": {
+            "aggregationType": "WorstOf",
+            "ignoreUnknown": false
+          },
+          "resolution": "Configured"
+        },
+        "signalAggregationGroups": [
+          {
+            "name": "availability",
+            "members": [
+              "request-latency-p95",
+              "request-success-rate"
+            ],
+            "effectiveAggregation": {
+              "configuration": {
+                "aggregationType": "MinHealthy",
+                "degradedThreshold": 80,
+                "unhealthyThreshold": 50,
+                "unit": "Percentage",
+                "ignoreUnknown": true
+              },
+              "resolution": "Configured"
+            },
+            "aggregatedHealthState": "Degraded",
+            "unresolvedMembers": []
+          }
+        ]
+      }
+    },
+    "400": {
+      "headers": {
+        "x-ms-error-code": "InvalidEntityName"
+      },
+      "body": {
+        "error": {
+          "code": "InvalidEntityName",
+          "message": "The entity name is invalid."
+        }
+      }
+    },
+    "404": {
+      "headers": {
+        "x-ms-error-code": "EntityNotFound"
+      },
+      "body": {
+        "error": {
+          "code": "EntityNotFound",
+          "message": "The requested entity was not found."
+        }
+      }
+    }
+  }
+}
