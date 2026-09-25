@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
 
@@ -13,7 +15,13 @@ namespace Microsoft.Widget;
 /** Employee resource */
 model Employee is TrackedResource<EmployeeProperties> {
   ...ResourceNameParameter<Employee>;
+
+  // Standard ARM `sku` envelope property. Supports Free, Basic, and Standard
+  // SKUs via the common-types SkuTier. Introduced in 2026-07-01-preview.
+  ...ResourceSkuProperty;
 }
+
+@@added(Employee.sku, Versions.v2026_07_01_preview);
 
 /** Employee properties */
 model EmployeeProperties {
