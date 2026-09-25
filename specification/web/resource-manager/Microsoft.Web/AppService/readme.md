@@ -41,6 +41,14 @@ tag: package-2026-07
 
 ```yaml
 directive:
+  - suppress: AvoidAdditionalProperties
+    from: openapi.json
+    where: $.definitions.FunctionAppVersionConfig.properties.appSettings
+    reason: FunctionAppVersionConfig.appSettings intentionally uses a direct object map because application-setting names are customer-defined and the complete immutable version configuration is supplied atomically.
+  - suppress: EnumInsteadOfBoolean
+    from: openapi.json
+    where: $.definitions.FunctionAppVersionDeployment.properties.remoteBuild
+    reason: remoteBuild is an intentional binary request option that enables or disables remote build.
   - suppress: XmsResourceInPutResponse
     from: WebApps.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions/{functionName}/keys/{keyName}"].put
@@ -100,6 +108,15 @@ directive:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/extensions/MSDeploy"]
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/instances/{instanceId}/extensions/MSDeploy/log"]
     reason: MSDeploy is the intentional name matching the existing service API.
+```
+
+### Tag: package-2026-10-01-preview
+
+These settings apply only when `--tag=package-2026-10-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-10-01-preview'
+input-file:
+    - preview/2026-10-01-preview/openapi.json
 ```
 
 ### Tag: package-2026-07

@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "sample-rg",
+    "name": "sample-func",
+    "api-version": "2026-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.Web/sites/sample-func/functionAppVersions/release-2026-10-01",
+            "name": "release-2026-10-01",
+            "type": "Microsoft.Web/sites/functionAppVersions",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "versionState": "Ready",
+              "functionAppVersionConfig": {
+                "runtime": {
+                  "name": "python",
+                  "version": "3.12"
+                },
+                "deployment": {
+                  "appArtifact": {
+                    "type": "zipPackage"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-rg/providers/Microsoft.Web/sites/sample-func/functionAppVersions?api-version=2026-10-01-preview&$skiptoken=opaque"
+      }
+    }
+  },
+  "operationId": "FunctionAppVersions_ListBySite",
+  "title": "List Function App versions"
+}
