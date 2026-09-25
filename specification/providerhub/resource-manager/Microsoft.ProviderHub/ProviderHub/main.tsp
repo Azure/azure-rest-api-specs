@@ -23,6 +23,7 @@ import "./SkuResource.tsp";
 import "./AuthorizedApplication.tsp";
 import "./ProviderMonitorSetting.tsp";
 import "./ManifestInfo.tsp";
+import "./EndpointRegistration.tsp";
 import "./client.tsp";
 
 using TypeSpec.Rest;
@@ -56,10 +57,10 @@ enum Versions {
   v2025_10_01: "2025-10-01",
 
   /**
-   * The 2026-02-01-preview API version.
+   * The 2026-09-01-preview API version.
    */
   @Azure.Core.previewVersion
-  v2026_02_01_preview: "2026-02-01-preview",
+  v2026_09_01_preview: "2026-09-01-preview",
 }
 
 /**
