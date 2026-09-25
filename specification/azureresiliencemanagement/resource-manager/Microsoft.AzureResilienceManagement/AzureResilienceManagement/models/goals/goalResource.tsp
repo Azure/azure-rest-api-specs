@@ -54,10 +54,6 @@ model GoalResourceProperties {
   @added(Versions.v2026_06_01_preview)
   zonalResiliency?: ResiliencyProperties;
 
-  @doc("Regional resiliency posture (participation, attestation, exclusion reason, and user confirmations) for the Azure resource.")
-  @added(Versions.v2026_09_30_preview)
-  regionalResiliency?: ResiliencyProperties;
-
   @doc("Flag which depicts whether the Arm resource is excluded for disaster recovery recommendation.")
   @removed(Versions.v2026_09_30_preview)
   disasterRecoveryGoalParticipation?: ExclusionState;
