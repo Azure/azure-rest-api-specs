@@ -99,6 +99,13 @@ interface Volumes {
       @header
       @clientName("accessSoftDeletedResources", "csharp") // this could be temporary because we cannot reference this parameter through ::parameter syntax.
       `x-ms-access-soft-deleted-resources`?: `x-ms-access-soft-deleted-resources`;
+
+      /**
+       * Optional, filters the volumes that are returned. Supported filters are creationData/sourceId and creationData/createSource, combined with the and operator, for example `creationData/sourceId eq '<source volume resource id>' and creationData/createSource eq 'Volume'`. creationData/sourceId must be specified when this parameter is used and the source volume must be in the same volume group. Use this to list the clones of a volume.
+       */
+      @added(Versions.v2026_10_01_preview)
+      @query("$filter")
+      $filter?: string;
     },
     Response = ArmResponse<VolumeList>
   >;
