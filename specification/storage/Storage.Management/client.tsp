@@ -53,11 +53,6 @@ using Microsoft.Storage;
 // csharp rename-mapping decorators
 @@clientName(AccessTier, "StorageAccountAccessTier", "csharp");
 @@clientName(AccountStatus, "StorageAccountStatus", "csharp");
-@@clientName(
-  AdvancedPlatformMetricsRuleType,
-  "AdvancedPlatformMetricsRuleKind",
-  "csharp"
-);
 @@clientName(AiProvider, "AIProvider", "csharp");
 @@clientName(
   AzureFilesIdentityBasedAuthentication,
@@ -851,11 +846,6 @@ namespace Azure.ResourceManager.Models {
 @@clientName(TableAccessPolicy.expiryTime, "ExpireOn", "csharp");
 @@clientName(ManagementPolicyRule.type, "RuleType", "csharp");
 @@clientName(BlobInventoryPolicySchema.type, "RuleType", "csharp");
-@@clientName(
-  AdvancedPlatformMetricsRuleProperties.ruleType,
-  "RuleKind",
-  "csharp"
-);
 @@clientName(
   AdvancedPlatformMetricsRuleProperties.enabled,
   "IsEnabled",
