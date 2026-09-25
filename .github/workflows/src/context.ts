@@ -2,7 +2,7 @@ import { inspect } from "util";
 import { isFullGitSha } from "../../shared/src/git.ts";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import { CoreLogger } from "./core-logger.ts";
-import type { Core } from "./github.ts";
+import type { Core, WebhookEvent } from "./github.ts";
 import { createLogHook, createRateLimitHook } from "./github.ts";
 import { getIssueNumber } from "./issues.ts";
 
@@ -34,7 +34,7 @@ export async function extractInputs(
 
   let workflowRunEvent = "undefined";
   if (context.eventName === "workflow_run") {
-    const payload = context.payload as import("@octokit/webhooks-types").WorkflowRunEvent;
+    const payload = context.payload as WebhookEvent<"workflow-run">;
     workflowRunEvent = payload.workflow_run?.event;
   }
   core.info(`  payload.workflow_run.event: ${workflowRunEvent}`);
@@ -74,7 +74,7 @@ export async function extractInputs(
   ) {
     // Most properties on payload should be the same for both pull_request and pull_request_target
 
-    const payload = context.payload as import("@octokit/webhooks-types").PullRequestEvent;
+    const payload = context.payload as WebhookEvent<"pull-request">;
 
     inputs = {
       owner: payload.repository.owner.login,
@@ -84,7 +84,7 @@ export async function extractInputs(
       run_id: NaN,
     };
   } else if (context.eventName === "issue_comment" && context.payload.action === "edited") {
-    const payload = context.payload as import("@octokit/webhooks-types").IssueCommentEditedEvent;
+    const payload = context.payload as WebhookEvent<"issue-comment", "edited">;
 
     const owner = payload.repository.owner.login;
     const repo = payload.repository.name;
@@ -104,7 +104,7 @@ export async function extractInputs(
       run_id: NaN,
     };
   } else if (context.eventName === "workflow_dispatch") {
-    const payload = context.payload as import("@octokit/webhooks-types").WorkflowDispatchEvent;
+    const payload = context.payload as WebhookEvent<"workflow-dispatch">;
     inputs = {
       owner: payload.repository.owner.login,
       repo: payload.repository.name,
@@ -113,7 +113,7 @@ export async function extractInputs(
       run_id: NaN,
     };
   } else if (context.eventName === "workflow_run" && context.payload.action === "completed") {
-    const payload = context.payload as import("@octokit/webhooks-types").WorkflowRunCompletedEvent;
+    const payload = context.payload as WebhookEvent<"workflow-run", "completed">;
 
     let issue_number = NaN;
     let head_sha = "";
@@ -135,21 +135,22 @@ export async function extractInputs(
       // on the target branch and can be trusted.  But it should also be unnecessary, since we should be able extract
       // the issue number from the payload itself, just like pull_request.
 
-      const pull_requests = payload.workflow_run.pull_requests;
-      if (pull_requests && pull_requests.length > 0) {
+      const pullRequest = payload.workflow_run.pull_requests?.find((pr) => pr !== null);
+      if (pullRequest) {
         // TODO: Only include PRs to the same repo as the triggering workflow (existing filter below)
         // TODO: Throw if more than one open PR to our repo
 
         // For non-fork PRs, we should be able to extract the PR number from the payload, which avoids an
         // unnecessary API call.  The listPullRequestsAssociatedWithCommit() API also seems to return
         // empty for non-fork PRs.  This should be the same for pull_request and pull_request_target.
-        issue_number = pull_requests[0].number;
+        issue_number = pullRequest.number;
       } else {
         // For fork PRs, we must call an API in the head repository to get the PR number in the base repository
 
         // Owner and repo for the PR head (at least one should differ from base for fork PRs)
-        const head_owner = payload.workflow_run.head_repository.owner.login;
-        const head_repo = payload.workflow_run.head_repository.name;
+        const { owner: head_owner, repo: head_repo } = getRepositoryInfo(
+          payload.workflow_run.head_repository,
+        );
 
         let pullRequests: PullRequest[] = [];
 
@@ -214,8 +215,7 @@ export async function extractInputs(
       // Attempt to extract issue number from artifact.  This can be trusted, because it was uploaded from a workflow that is trusted,
       // because "issue_comment" and "workflow_run" only trigger on workflows in the default branch.
       const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
-        owner: payload.workflow_run.repository.owner.login,
-        repo: payload.workflow_run.repository.name,
+        ...getRepositoryInfo(payload.workflow_run.repository),
         run_id: payload.workflow_run.id,
         per_page: PER_PAGE_MAX,
       });
@@ -275,14 +275,13 @@ export async function extractInputs(
     }
 
     inputs = {
-      owner: payload.workflow_run.repository.owner.login,
-      repo: payload.workflow_run.repository.name,
+      ...getRepositoryInfo(payload.workflow_run.repository),
       head_sha,
       issue_number,
       run_id: payload.workflow_run.id,
     };
   } else if (context.eventName === "check_run") {
-    const payload = context.payload as import("@octokit/webhooks-types").CheckRunEvent;
+    const payload = context.payload as WebhookEvent<"check-run">;
     const checkRun = payload.check_run;
     const repositoryInfo = getRepositoryInfo(payload.repository);
     inputs = {
@@ -294,7 +293,7 @@ export async function extractInputs(
       run_id: NaN,
     };
   } else if (context.eventName === "check_suite" && context.payload.action === "completed") {
-    const payload = context.payload as import("@octokit/webhooks-types").CheckSuiteCompletedEvent;
+    const payload = context.payload as WebhookEvent<"check-suite", "completed">;
 
     const repositoryInfo = getRepositoryInfo(payload.repository);
     inputs = {
@@ -317,7 +316,9 @@ export async function extractInputs(
   return inputs;
 }
 
-function getRepositoryInfo(repository: import("@octokit/webhooks-types").Repository | undefined): {
+function getRepositoryInfo(
+  repository: { name?: string; owner?: { login?: string } | null } | null | undefined,
+): {
   owner: string;
   repo: string;
 } {

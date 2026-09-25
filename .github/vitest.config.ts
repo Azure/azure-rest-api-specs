@@ -1,20 +1,11 @@
-import { configDefaults, defineConfig } from "vitest/config";
+import { defineConfig, mergeConfig } from "vitest/config";
+import { defaultVitestConfig } from "../vitest.config.mts";
 
-export default defineConfig({
-  test: {
-    coverage: {
-      exclude: [
-        ...(configDefaults.coverage.exclude ?? []),
-
-        // Not worth testing CLI code
-        "**/cmd/**",
-
-        // Ignore all coverage folders
-        "**/coverage/**",
-
-        // Ignore all test folders
-        "**/test/**",
-      ],
+export default mergeConfig(
+  defaultVitestConfig,
+  defineConfig({
+    test: {
+      include: ["workflows/test/**/*.test.ts"],
     },
-  },
-});
+  }),
+);

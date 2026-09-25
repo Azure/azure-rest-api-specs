@@ -8,28 +8,10 @@ using Microsoft.App;
 // (AZC0030) disallows ('Collection', 'Parameter'). These renames only affect
 // the generated C# type names.
 @@clientName(AgentConnectorCollection, "AgentConnectorList", "csharp");
-@@clientName(
-  AgentSpaceConnectorCollection,
-  "AgentSpaceConnectorList",
-  "csharp"
-);
-@@clientName(GenevaActionParameter, "GenevaActionParameterInfo", "csharp");
 
 // Boolean properties must use a verb prefix (BOOL001).
-@@clientName(
-  GenevaActionConfig.approvalRequired,
-  "IsApprovalRequired",
-  "csharp"
-);
 @@clientName(SupportedAgentModelProperties.default, "IsDefault", "csharp");
 @@clientName(AgentIdentity.enabled, "IsEnabled", "csharp");
-
-// Date/time properties should end with 'On' (DATE001).
-@@clientName(
-  AgentSpaceComplianceStatus.lastComplianceCheck,
-  "LastComplianceCheckOn",
-  "csharp"
-);
 
 // Add RP/domain context to otherwise-generic type names to avoid future
 // breaking renames before GA (RESNAME001 / contextual naming).
@@ -39,8 +21,6 @@ using Microsoft.App;
 // ClientId is documented as a GUID; surface it as System.Guid in C# only,
 // without changing the wire/spec type (Type mapping).
 @@alternateType(AgentIdentity.clientId, Azure.Core.uuid, "csharp");
-@@alternateType(GenevaActionsPolicy.clientId, Azure.Core.uuid, "csharp");
-@@alternateType(GenevaActionsPolicyPatch.clientId, Azure.Core.uuid, "csharp");
 @@alternateType(
   ApplicationInsightsConfiguration.appId,
   Azure.Core.uuid,
@@ -66,14 +46,3 @@ using Microsoft.App;
   "csharp"
 );
 @@clientName(UpgradeChannel, "AgentUpgradeChannel", "csharp");
-@@clientName(
-  AgentSpaceProperties.lastPolicyPropagation,
-  "LastPolicyPropagationOn",
-  "csharp"
-);
-@@alternateType(AgentSpaceProperties.serviceTreeId, Azure.Core.uuid, "csharp");
-@@alternateType(
-  AgentSpacePatchProperties.serviceTreeId,
-  Azure.Core.uuid,
-  "csharp"
-);
