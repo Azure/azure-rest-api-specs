@@ -24,6 +24,7 @@ import { intersect } from "../../../shared/src/set.ts";
 import { byDate, invert } from "../../../shared/src/sort.ts";
 import { commentOrUpdate } from "../comment.ts";
 import { extractInputs } from "../context.ts";
+import { TYPESPEC_SUPPRESSIONS_APPROVED_LABEL } from "../label.ts";
 import {
   ImpactAssessmentSchema,
   brChRevApproval,
@@ -40,6 +41,7 @@ import {
   reqMetCheckTsg,
   typeSpecRequirementArmTsg,
   typeSpecRequirementDataPlaneTsg,
+  typeSpecSuppressionsTsg,
 } from "./tsgs.ts";
 
 import fs from "fs/promises";
@@ -121,6 +123,12 @@ const CHECK_METADATA: CheckMetadata[] = [
     name: "TypeSpec Validation",
     suppressionLabels: [],
     troubleshootingGuide: defaultTsg,
+  },
+  {
+    precedence: 0,
+    name: "TypeSpec Suppressions",
+    suppressionLabels: [TYPESPEC_SUPPRESSIONS_APPROVED_LABEL],
+    troubleshootingGuide: typeSpecSuppressionsTsg,
   },
   {
     precedence: 0,

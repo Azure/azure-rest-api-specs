@@ -272,19 +272,19 @@ https://github.com/Azure/azure-rest-api-specs/wiki/TypeSpec-Validation
 
 ## `TypeSpec Suppressions`
 
-> [!NOTE]
->
-> This check is currently in **testing mode and is non-blocking** — it surfaces
-> information and inline warnings but does not currently prevent your PR from
-> merging. It is distinct from the AutoRest/`suppressions.yaml` flow described in
-> [Suppression Process](#suppression-process) below.
-
 This check detects **new or changed TypeSpec lint suppressions** introduced by
-your PR and surfaces them for review. It analyzes two kinds of suppressions in
-the TypeSpec projects impacted by your changes:
+your PR and requires them to be removed or approved before the PR can merge. It
+is distinct from the AutoRest/`suppressions.yaml` flow described in
+[Suppression Process](#suppression-process) below. It analyzes two kinds of
+suppressions in the TypeSpec projects impacted by your changes:
 
 - **Inline suppressions**: `#suppress` directives in `.tsp` files.
 - **Config suppressions**: `linter.disable` entries in `tspconfig.yaml`.
+
+Only suppressions for rules listed in
+[`check-rules.json`](https://github.com/Azure/azure-rest-api-specs/blob/main/eng/tools/typespec-suppressions/check-rules.json)
+count toward review/gating; suppressions for other rules are still detected and
+reported for visibility but do not block the check.
 
 The check runs as the following workflows (mirroring the three-run structure used
 by other validations in this repo):
@@ -292,14 +292,14 @@ by other validations in this repo):
 | Check name | Purpose |
 |------------|---------|
 | `TypeSpec Suppressions - Analyze Code` | Computes the impacted TypeSpec folders, runs the analyzer, writes the markdown summary + a JSON report artifact (`typespec-suppressions-report`), and emits inline `::warning` annotations anchored to each suppression on the PR diff. |
-| `TypeSpec Suppressions - Set Status` | Reports the check status; approval is granted by applying the `Approved-TypeSpecSuppression` label. |
+| `TypeSpec Suppressions - Set Status` | Reports the check status; approval is granted by applying the `typespec-suppressions-approved` label. |
 | `TypeSpec Suppressions - Test` | Runs the analyzer tool's own test suite. |
 
 ### Where to see the results
 
-- A **"TypeSpec suppressions requiring review"** comment is surfaced on the
-  PR , listing the new/changed suppressions with
-  their rule, source location, and justification.
+- A **"TypeSpec suppressions requiring review"** comment is surfaced on the PR,
+  listing the new/changed suppressions with their rule, source location, and
+  justification.
 - **Inline `::warning` annotations** appear on the PR diff at each suppression's
   source location.
 - The full structured report is uploaded as the `typespec-suppressions-report`
@@ -321,7 +321,10 @@ suppression, prefer fixing the underlying issue:
    string explaining why the rule cannot be satisfied; suppressions with no
    justification are flagged.
 3. **If the suppression is legitimate and requires approval**, ask the
-   appropriate reviewer to apply the `Approved-TypeSpecSuppression` label.
+   appropriate reviewer (ARM spec PRs: only the ARM reviewer can apply the
+   label) to apply the `typespec-suppressions-approved` label. The
+   `TypeSpec Suppressions` check remains blocking until the suppression is
+   resolved or the label is applied.
 
 ### Reproduce locally
 
@@ -330,7 +333,7 @@ The check is powered by the `@azure-tools/typespec-suppressions` CLI. See
 for usage. For example, to compare your branch against `main`:
 
 ``` powershell
-npx typespec-suppressions --base origin/main <path-to-typespec-project-folder>
+npx typespec-suppressions --base origin/main --check-rules-file eng/tools/typespec-suppressions/check-rules.json --fail-on-approval <path-to-typespec-project-folder>
 ```
 
 ## `license/cla`
@@ -346,7 +349,7 @@ Refer to the [suppression guide](https://aka.ms/pr-suppressions) for detailed gu
 This process (backed by `suppressions.yaml` files and the `Approved-Suppression` label) applies to
 most validation checks. It is separate from TypeSpec *lint* suppressions (`#suppress` directives and
 `tspconfig.yaml` `linter.disable` entries), which are surfaced by the
-[`TypeSpec Suppressions`](#typespec-suppressions) check and approved via the `Approved-TypeSpecSuppression`
+[`TypeSpec Suppressions`](#typespec-suppressions) check and approved via the `typespec-suppressions-approved`
 label.
 
 # Checks not covered by this guide
