@@ -105,9 +105,7 @@ alias ManagedInstanceLongTermRetentionBackupActionOps = Azure.ResourceManager.Le
     @path
     @segment("longTermRetentionManagedInstanceBackups")
     @key
-    @pattern(
-      "^[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12};[0-9]{18};(?:Hot|Archive)$"
-    )
+    @pattern("^[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12};[0-9]{18};(?:Hot|Archive)$")
     backupName: string;
   },
   ResourceName = "SubscriptionLongTermRetentionManagedInstanceBackup"
@@ -280,9 +278,7 @@ alias LongTermRetentionManagedInstanceBackupActionOps = Azure.ResourceManager.Le
     @path
     @segment("longTermRetentionManagedInstanceBackups")
     @key
-    @pattern(
-      "^[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12};[0-9]{18};(?:Hot|Archive)$"
-    )
+    @pattern("^[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12};[0-9]{18};(?:Hot|Archive)$")
     backupName: string;
   },
   ResourceName = "ResourceGroupLongTermRetentionManagedInstanceBackup"
