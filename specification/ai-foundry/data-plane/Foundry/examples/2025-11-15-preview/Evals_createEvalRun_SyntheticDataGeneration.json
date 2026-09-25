@@ -1,0 +1,77 @@
+{
+  "title": "Evals_createEvalRun_SyntheticDataGeneration",
+  "operationId": "Evals_createEvalRun",
+  "parameters": {
+    "api-version": "2025-11-15-preview",
+    "eval_id": "eval_67e579652b548190aaa83ada4b125f47",
+    "body": {
+      "name": "synthetic data generation eval run",
+      "evaluation_level": "turn",
+      "data_source": {
+        "type": "azure_ai_synthetic_data_gen",
+        "item_generation_params": {
+          "type": "synthetic_data_gen",
+          "samples_count": 20,
+          "prompt": "Generate billing-support questions a customer might ask.",
+          "model_deployment_name": "gpt-4o",
+          "output_dataset_name": "synthetic-billing-support-output",
+          "sources": [
+            {
+              "type": "file_id",
+              "id": "file-abc123"
+            }
+          ]
+        },
+        "target": {
+          "type": "azure_ai_model",
+          "model": "gpt-4o"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "object": "eval.run",
+        "id": "evalrun_67e57965b480819094274e3a32235e4c",
+        "eval_id": "eval_67e579652b548190aaa83ada4b125f47",
+        "status": "queued",
+        "name": "synthetic data generation eval run",
+        "evaluation_level": "turn",
+        "created_at": 1743092069,
+        "report_url": "https://ai.azure.com/evaluations/eval_67e579652b548190aaa83ada4b125f47?run_id=evalrun_67e57965b480819094274e3a32235e4c",
+        "result_counts": {
+          "total": 0,
+          "errored": 0,
+          "failed": 0,
+          "passed": 0
+        },
+        "per_model_usage": [],
+        "per_testing_criteria_results": [],
+        "data_source": {
+          "type": "azure_ai_synthetic_data_gen",
+          "item_generation_params": {
+            "type": "synthetic_data_gen",
+            "samples_count": 20,
+            "prompt": "Generate billing-support questions a customer might ask.",
+            "model_deployment_name": "gpt-4o",
+            "output_dataset_name": "synthetic-billing-support-output",
+            "output_dataset_id": "azureai://accounts/my-account/projects/my-project/data/synthetic-billing-support-output/versions/1",
+            "sources": [
+              {
+                "type": "file_id",
+                "id": "file-abc123"
+              }
+            ]
+          },
+          "target": {
+            "type": "azure_ai_model",
+            "model": "gpt-4o"
+          }
+        },
+        "error": null,
+        "metadata": {}
+      }
+    }
+  }
+}
