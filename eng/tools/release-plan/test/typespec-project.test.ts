@@ -1,4 +1,5 @@
 import type { TypeSpecMetadata } from "@azure-tools/specs-shared/typespec-metadata";
+import { generateTypeSpecMetadata } from "@azure-tools/specs-shared/typespec-metadata";
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -51,6 +52,7 @@ import {
   getAssociatedPrNumber,
   getCommitChangedFiles,
   getPrChangedFiles,
+  getMergedSpecCommitSha,
   getPullRequestLabels,
   getTypeSpecProjectInfoFromCommit,
   getTypeSpecProjectInfoFromPr,
@@ -58,6 +60,7 @@ import {
   parseApiVersion,
   resolveTypeSpecMetadata,
 } from "../src/typespec-project.ts";
+import { cleanGit, OLD_SHA, SPEC_SHA } from "./test-helpers.ts";
 
 function createMetadata(languages: TypeSpecMetadata["languages"]): TypeSpecMetadata {
   return {
@@ -204,7 +207,9 @@ describe("TypeSpec project detection edge cases", () => {
     // Setup mock metadata for the project
     setupMockMetadata(projectPath, "2025-08-01", "preview");
 
-    const get = vi.fn().mockResolvedValueOnce({ data: { labels: [] } });
+    const get = vi
+      .fn()
+      .mockResolvedValue({ data: { labels: [], merged: true, merge_commit_sha: SPEC_SHA } });
     const listFiles = vi
       .fn()
       .mockResolvedValueOnce({
@@ -220,6 +225,7 @@ describe("TypeSpec project detection edge cases", () => {
       owner: "Azure",
       repo: "azure-rest-api-specs",
       workspace,
+      git: cleanGit(),
       octokit: {
         rest: {
           pulls: {
@@ -237,7 +243,7 @@ describe("TypeSpec project detection edge cases", () => {
     expect(listFiles).toHaveBeenCalled();
   });
 
-  it("returns null when PR has multiple tsp projects", async () => {
+  it("throws when PR has multiple tsp projects rather than selecting the first", async () => {
     const get = vi.fn().mockResolvedValueOnce({ data: { labels: [{ name: "new-api-version" }] } });
     const listFiles = vi
       .fn()
@@ -249,22 +255,22 @@ describe("TypeSpec project detection edge cases", () => {
       })
       .mockResolvedValueOnce({ data: [] });
 
-    const result = await getTypeSpecProjectInfoFromPr({
-      prNumber: 42,
-      owner: "Azure",
-      repo: "azure-rest-api-specs",
-      workspace,
-      octokit: {
-        rest: {
-          pulls: {
-            get,
-            listFiles,
+    await expect(
+      getTypeSpecProjectInfoFromPr({
+        prNumber: 42,
+        owner: "Azure",
+        repo: "azure-rest-api-specs",
+        workspace,
+        octokit: {
+          rest: {
+            pulls: {
+              get,
+              listFiles,
+            },
           },
         },
-      },
-    });
-
-    expect(result).toBeNull();
+      }),
+    ).rejects.toThrow(/Multiple TypeSpec projects/);
   });
 
   it("handles paginated file responses across multiple pages", async () => {
@@ -401,7 +407,9 @@ describe("TypeSpec project detection edge cases", () => {
     const listPullRequestsAssociatedWithCommit = vi.fn().mockResolvedValueOnce({
       data: [{ number: 123 }],
     });
-    const get = vi.fn().mockResolvedValueOnce({ data: { labels: [{ name: "new-api-version" }] } });
+    const get = vi.fn().mockResolvedValue({
+      data: { labels: [{ name: "new-api-version" }], merged: true, merge_commit_sha: SPEC_SHA },
+    });
     const listFiles = vi
       .fn()
       .mockResolvedValueOnce({
@@ -413,10 +421,11 @@ describe("TypeSpec project detection edge cases", () => {
       .mockResolvedValueOnce({ data: [] });
 
     const result = await getTypeSpecProjectInfoFromCommit({
-      commitSha: "abc999",
+      commitSha: SPEC_SHA,
       owner: "Azure",
       repo: "azure-rest-api-specs",
       workspace,
+      git: cleanGit(),
       octokit: {
         rest: {
           pulls: {
@@ -438,7 +447,7 @@ describe("TypeSpec project detection edge cases", () => {
     expect(result.projectInfo?.isPreview).toBe(true);
   });
 
-  it("falls back to commit file analysis when no PR is associated", async () => {
+  it("does not select a release target for TypeSpec changes with no associated merged PR", async () => {
     const projectPath = join(workspace, "specification/bar");
     mkdirSync(projectPath, { recursive: true });
     writeFileSync(join(projectPath, "main.tsp"), "namespace Demo;");
@@ -456,29 +465,26 @@ describe("TypeSpec project detection edge cases", () => {
       },
     });
 
-    const result = await getTypeSpecProjectInfoFromCommit({
-      commitSha: "zzz111",
-      owner: "Azure",
-      repo: "azure-rest-api-specs",
-      workspace,
-      octokit: {
-        rest: {
-          pulls: {
-            get: vi.fn(),
-            listFiles: vi.fn(),
-          },
-          repos: {
-            listPullRequestsAssociatedWithCommit,
-            getCommit,
+    await expect(
+      getTypeSpecProjectInfoFromCommit({
+        commitSha: "zzz111",
+        owner: "Azure",
+        repo: "azure-rest-api-specs",
+        workspace,
+        octokit: {
+          rest: {
+            pulls: {
+              get: vi.fn(),
+              listFiles: vi.fn(),
+            },
+            repos: {
+              listPullRequestsAssociatedWithCommit,
+              getCommit,
+            },
           },
         },
-      },
-    });
-
-    expect(result.prNumber).toBeUndefined();
-    expect(result.hasNewApiVersionLabel).toBe(false);
-    expect(result.projectInfo?.tspProjectPath).toBe("specification/bar");
-    expect(result.projectInfo?.apiVersion).toBe("2025-09-01");
+      }),
+    ).rejects.toThrow(/No merged spec PR/);
   });
 
   it("skips folder-migration PRs and does not fetch changed files", async () => {
@@ -560,32 +566,33 @@ describe("TypeSpec project detection edge cases", () => {
     // Setup mock metadata for the project
     setupMockMetadata(projectPath, "2025-09-01", "stable");
 
-    const listPullRequestsAssociatedWithCommit = vi.fn().mockResolvedValueOnce({ data: [] });
-    const getCommit = vi.fn().mockResolvedValueOnce({
-      data: {
-        files: [
-          { filename: "specification/bar/tspconfig.yaml", status: "modified" },
-          // Renamed into a folder that looks like an older API version; must be ignored.
-          { filename: "specification/bar/2020-01-01/legacy.tsp", status: "renamed" },
-          { filename: "specification/bar/2025-09-01/main.tsp", status: "added" },
-        ],
-      },
+    const listPullRequestsAssociatedWithCommit = vi
+      .fn()
+      .mockResolvedValueOnce({ data: [{ number: 123 }] });
+    const listFiles = vi.fn().mockResolvedValueOnce({
+      data: [
+        { filename: "specification/bar/tspconfig.yaml", status: "modified" },
+        // Renamed into a folder that looks like an older API version; must be ignored.
+        { filename: "specification/bar/2020-01-01/legacy.tsp", status: "renamed" },
+        { filename: "specification/bar/2025-09-01/main.tsp", status: "added" },
+      ],
     });
 
     const result = await getTypeSpecProjectInfoFromCommit({
-      commitSha: "rename1",
+      commitSha: SPEC_SHA,
       owner: "Azure",
       repo: "azure-rest-api-specs",
       workspace,
+      git: cleanGit(),
       octokit: {
         rest: {
           pulls: {
-            get: vi.fn(),
-            listFiles: vi.fn(),
+            get: vi.fn().mockResolvedValue({ data: { merged: true, merge_commit_sha: SPEC_SHA } }),
+            listFiles,
           },
           repos: {
             listPullRequestsAssociatedWithCommit,
-            getCommit,
+            getCommit: vi.fn(),
           },
         },
       },
@@ -620,6 +627,87 @@ describe("pull request label helpers", () => {
 });
 
 describe("TypeSpec metadata resolution", () => {
+  const autoRestConfig = {
+    emitterName: "@azure-tools/typespec-autorest",
+    apiVersion: "2025-08-01",
+    sdkType: "stable" as const,
+    outputDir: "{project-root}/../resource-manager/Microsoft.Sample",
+  };
+
+  it("accepts real-shaped AutoRest metadata without a package alongside an SDK", () => {
+    const metadata = createMetadata({
+      unknown: [autoRestConfig],
+      python: [
+        {
+          emitterName: "@azure-tools/typespec-python",
+          packageName: "azure-mgmt-sample",
+          namespace: "azure.mgmt.sample",
+          apiVersion: "2025-08-01",
+          sdkType: "stable",
+        },
+      ],
+      documentation: [{ emitterName: "documentation", apiVersion: "latest" }],
+    });
+
+    expect(resolveTypeSpecMetadata(metadata)).toEqual({ apiVersion: "2025-08-01" });
+  });
+
+  it("does not use unknown or unrecognized emitters as the only API-version source", () => {
+    expect(() =>
+      resolveTypeSpecMetadata(
+        createMetadata({ unknown: [autoRestConfig], documentation: [autoRestConfig] }),
+      ),
+    ).toThrow(/No valid language/);
+  });
+
+  it.each(["csharp", "python", "typescript", "javascript", "java", "rust", "swift", "go"])(
+    "requires a concrete version and package for the recognized SDK language %s",
+    (language) => {
+      const config = {
+        emitterName: `@azure-tools/typespec-${language}`,
+        packageName: "sample-package",
+        apiVersion: "2025-08-01",
+      };
+      expect(resolveTypeSpecMetadata(createMetadata({ [language]: [config] }))).toEqual({
+        apiVersion: "2025-08-01",
+      });
+      for (const packageName of [undefined, "", "   "]) {
+        expect(() =>
+          resolveTypeSpecMetadata(createMetadata({ [language]: [{ ...config, packageName }] })),
+        ).toThrow(/packageName/);
+      }
+      for (const apiVersion of [undefined, "latest"]) {
+        expect(() =>
+          resolveTypeSpecMetadata(createMetadata({ [language]: [{ ...config, apiVersion }] })),
+        ).toThrow(/API version/);
+      }
+    },
+  );
+
+  it("still rejects a recognized SDK mismatch when AutoRest agrees with the first SDK", () => {
+    expect(() =>
+      resolveTypeSpecMetadata(
+        createMetadata({
+          unknown: [autoRestConfig],
+          csharp: [
+            {
+              emitterName: "@azure-typespec/http-client-csharp",
+              packageName: "Azure.ResourceManager.Sample",
+              apiVersion: "2025-08-01",
+            },
+          ],
+          rust: [
+            {
+              emitterName: "@azure-tools/typespec-rust",
+              packageName: "azure_mgmt_sample",
+              apiVersion: "2026-01-01-preview",
+            },
+          ],
+        }),
+      ),
+    ).toThrow(/Ambiguous API versions/);
+  });
+
   it("parses valid TypeSpec metadata with multiple languages", () => {
     const metadata = createMetadata({
       csharp: [
@@ -651,7 +739,7 @@ describe("TypeSpec metadata resolution", () => {
     expect(resolveTypeSpecMetadata(metadata)).toEqual({ apiVersion: "2025-08-01" });
   });
 
-  it("uses the first API version when metadata contains multiple versions", () => {
+  it("rejects inconsistent API versions instead of selecting the first or latest", () => {
     const metadata = createMetadata({
       csharp: [
         {
@@ -671,7 +759,7 @@ describe("TypeSpec metadata resolution", () => {
       ],
     });
 
-    expect(resolveTypeSpecMetadata(metadata)).toEqual({ apiVersion: "2025-08-01" });
+    expect(() => resolveTypeSpecMetadata(metadata)).toThrow(/Ambiguous API versions/);
   });
 
   it("ignores conflicting SDK types when resolving the API version", () => {
@@ -697,7 +785,7 @@ describe("TypeSpec metadata resolution", () => {
     expect(resolveTypeSpecMetadata(metadata)).toEqual({ apiVersion: "2025-08-01" });
   });
 
-  it("skips language configs with missing apiVersion and logs warning", () => {
+  it("rejects missing apiVersion even when other languages have a concrete version", () => {
     const metadata = createMetadata({
       csharp: [
         {
@@ -724,7 +812,7 @@ describe("TypeSpec metadata resolution", () => {
       ],
     });
 
-    expect(resolveTypeSpecMetadata(metadata)).toEqual({ apiVersion: "2025-08-01" });
+    expect(() => resolveTypeSpecMetadata(metadata)).toThrow(/API version/);
   });
 
   it("uses language configs with missing SDK type", () => {
@@ -755,7 +843,7 @@ describe("TypeSpec metadata resolution", () => {
     expect(resolveTypeSpecMetadata(metadata)).toEqual({ apiVersion: "2025-08-01" });
   });
 
-  it("throws error when no valid language configurations found", () => {
+  it("throws when the only configuration has no API version", () => {
     const metadata = createMetadata({
       csharp: [
         {
@@ -767,7 +855,7 @@ describe("TypeSpec metadata resolution", () => {
 
     expect(() => {
       resolveTypeSpecMetadata(metadata);
-    }).toThrow("No valid language configurations found in TypeSpec metadata");
+    }).toThrow(/API version/);
   });
 
   it("handles preview API versions correctly", () => {
@@ -802,5 +890,133 @@ describe("TypeSpec metadata resolution", () => {
     await expect(
       getTypeSpecProjectVersionFromMetadata(projectPath, "specification/foo"),
     ).rejects.toThrow("API version 'latest' must use YYYY-MM-DD or YYYY-MM-DD-preview format");
+  });
+
+  it.each(["all", "latest", "", "2026-01-01-preview,2026-06-01"])(
+    "rejects nonconcrete metadata version %s",
+    (apiVersion) => {
+      expect(() =>
+        resolveTypeSpecMetadata(
+          createMetadata({
+            python: [{ emitterName: "python", packageName: "azure-mgmt-test", apiVersion }],
+          }),
+        ),
+      ).toThrow(/API version/);
+    },
+  );
+
+  it("rejects multiple versions in a single language configuration array", () => {
+    expect(() =>
+      resolveTypeSpecMetadata(
+        createMetadata({
+          python: ["2026-01-01-preview", "2026-06-01"].map((apiVersion) => ({
+            emitterName: "python",
+            packageName: "azure-mgmt-test",
+            apiVersion,
+          })),
+        }),
+      ),
+    ).toThrow(/Ambiguous API versions/);
+  });
+
+  it("rejects empty metadata", () => {
+    expect(() => resolveTypeSpecMetadata(createMetadata({}))).toThrow(/No valid language/);
+  });
+});
+
+describe("explicit merged event and metadata boundary", () => {
+  function boundary() {
+    const git = cleanGit();
+    const get = vi.fn().mockResolvedValue({ data: { merged: true, merge_commit_sha: SPEC_SHA } });
+    const listFiles = vi
+      .fn()
+      .mockResolvedValue({ data: [{ filename: "specification/foo/tspconfig.yaml" }] });
+    return {
+      prNumber: 123,
+      owner: "Azure",
+      repo: "azure-rest-api-specs",
+      workspace,
+      octokit: { rest: { pulls: { get, listFiles } } },
+      git,
+    };
+  }
+
+  it("uses the resolved PR merge commit and checks checkout before and after metadata", async () => {
+    const params = boundary();
+    setupMockMetadata(join(workspace, "specification/foo"), "2026-01-01-preview", "preview");
+    const result = await getTypeSpecProjectInfoFromPr(params);
+    expect(result?.specCommitSha).toBe(SPEC_SHA);
+    expect(params.git.mock.calls.map(([, args]) => args[0])).toEqual([
+      "rev-parse",
+      "status",
+      "rev-parse",
+      "status",
+    ]);
+  });
+
+  it.each([
+    { merged: false, merge_commit_sha: SPEC_SHA },
+    { state: "open", merged_at: null, merge_commit_sha: SPEC_SHA },
+  ])("rejects unmerged events before metadata: %j", async (data) => {
+    const params = boundary();
+    params.octokit.rest.pulls.get.mockResolvedValue({ data });
+    const calls = vi.mocked(generateTypeSpecMetadata).mock.calls.length;
+    await expect(getTypeSpecProjectInfoFromPr(params)).rejects.toThrow(/requires merged/);
+    expect(vi.mocked(generateTypeSpecMetadata).mock.calls).toHaveLength(calls);
+    expect(params.git).not.toHaveBeenCalled();
+  });
+
+  it("rejects a trigger commit that is not the PR merge commit", async () => {
+    await expect(getMergedSpecCommitSha({ ...boundary(), commitSha: OLD_SHA })).rejects.toThrow(
+      /Trigger commit/,
+    );
+  });
+
+  it("rejects a clean workspace at a different HEAD before metadata", async () => {
+    const params = boundary();
+    const calls = vi.mocked(generateTypeSpecMetadata).mock.calls.length;
+    await expect(
+      getTypeSpecProjectInfoFromPr({ ...params, git: cleanGit(OLD_SHA) }),
+    ).rejects.toThrow(/HEAD/);
+    expect(vi.mocked(generateTypeSpecMetadata).mock.calls).toHaveLength(calls);
+  });
+
+  it("detects checkout drift during metadata generation", async () => {
+    const params = boundary();
+    vi.mocked(generateTypeSpecMetadata).mockImplementationOnce(() => {
+      params.git.mockReturnValue({ exitCode: 0, stdout: OLD_SHA, stderr: "" });
+      return Promise.resolve(
+        createMetadata({
+          python: [
+            {
+              emitterName: "python",
+              packageName: "azure-mgmt-test",
+              apiVersion: "2026-01-01-preview",
+            },
+          ],
+        }),
+      );
+    });
+    await expect(getTypeSpecProjectInfoFromPr(params)).rejects.toThrow(/HEAD/);
+  });
+
+  it("propagates ambiguous metadata rather than reporting no changes", async () => {
+    const params = boundary();
+    vi.mocked(generateTypeSpecMetadata).mockResolvedValueOnce(
+      createMetadata({
+        python: ["2026-01-01-preview", "2026-06-01"].map((apiVersion) => ({
+          emitterName: "python",
+          packageName: "azure-mgmt-test",
+          apiVersion,
+        })),
+      }),
+    );
+    await expect(getTypeSpecProjectInfoFromPr(params)).rejects.toThrow(/Ambiguous API versions/);
+  });
+
+  it("propagates compilation failure rather than reporting no changes", async () => {
+    const params = boundary();
+    vi.mocked(generateTypeSpecMetadata).mockRejectedValueOnce(new Error("compiler diagnostics"));
+    await expect(getTypeSpecProjectInfoFromPr(params)).rejects.toThrow(/compiler diagnostics/);
   });
 });

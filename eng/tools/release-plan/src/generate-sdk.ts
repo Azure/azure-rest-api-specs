@@ -2,16 +2,15 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import process from "node:process";
 import { parseArgs, type ParseArgsConfig } from "node:util";
-import { createAzdskRunner, getReleasePlanById } from "./release-plan.ts";
-import { resolveTypespecProjectPath, toStringValue } from "./sdk-workflow-common.ts";
-import type {
-  AzsdkRunner,
-  EnsureReleasePlanResult,
-  OctokitLike,
-  ReleasePlanData,
-  ReleasePlanDetails,
-  SdkInfo,
-} from "./types.ts";
+import { createAzdskRunner, getReleasePlanById, parseAzdskResponse } from "./release-plan.ts";
+import {
+  apiReleaseTypeLabel,
+  projectPath,
+  releasePlanDetails,
+  requiredPlanId,
+  validateArtifactTarget,
+} from "./spec-target.ts";
+import type { AzsdkRunner, EnsureReleasePlanResult, OctokitLike, SdkInfo } from "./types.ts";
 import { createOctokit } from "./typespec-project.ts";
 
 type SdkLanguage = ".NET" | "Java" | "JavaScript" | "Python" | "Go";
@@ -231,58 +230,45 @@ export async function runGenerateSdk(
   const artifact = JSON.parse(artifactRaw) as EnsureReleasePlanResult;
 
   const outcome = artifact.outcome;
-  const artifactReleasePlan = artifact.releasePlan;
-  const artifactPlanDetails = artifactReleasePlan?.release_plan_details;
-
-  const typespecProjectPath = resolveTypespecProjectPath(
-    artifactPlanDetails?.APISpecProjectPath ?? "",
-    args.workspace,
-  );
-
-  const releasePlanId = toStringValue(artifactPlanDetails?.ReleasePlanId);
-
-  const workItemId = toStringValue(artifactPlanDetails?.WorkItemId) || releasePlanId;
-
   console.log(`Outcome: ${outcome}`);
-  console.log(`TypeSpec Project Path: ${typespecProjectPath}`);
-  console.log(`ReleasePlanId: ${releasePlanId}`);
-
-  if (outcome.toLowerCase() === "not_found" || !releasePlanId) {
-    console.log("No release plan available for SDK generation. Skipping SDK generation stage.");
+  if (outcome === "not_found" || outcome === "stale_event") {
+    console.log("No current release target from this event. Skipping SDK generation stage.");
     return;
   }
-
-  if (!workItemId) {
-    throw new Error("Work item id could not be determined from release-plan artifact.");
+  if (!["created", "existing_by_id", "existing_by_pr", "existing_by_path"].includes(outcome)) {
+    throw new Error("Unrecognized release-plan artifact outcome; refusing SDK generation.");
   }
 
-  const plan: ReleasePlanData = getReleasePlanById(releasePlanId, runner);
-  const planDetails: ReleasePlanDetails | undefined = plan.release_plan_details;
-  const isManagementPlane = Boolean(planDetails?.IsManagementPlane);
-
-  const sdkReleaseType = planDetails?.SDKReleaseType ?? "";
-  console.log(`SDK release type: ${sdkReleaseType}`);
-  console.log(`Is management plane: ${isManagementPlane}`);
-  if (!typespecProjectPath) {
-    throw new Error(
-      "TypeSpec project path could not be determined from artifact or release plan details.",
-    );
+  const artifactPlanDetails = releasePlanDetails(artifact.releasePlan);
+  const releasePlanId = requiredPlanId(artifactPlanDetails.ReleasePlanId, "ReleasePlanId");
+  const plan = getReleasePlanById(releasePlanId, runner);
+  const freshDetails = releasePlanDetails(plan);
+  if (apiReleaseTypeLabel(freshDetails.ApiReleaseType) === "Private Preview") {
+    validateArtifactTarget(artifact, plan, args.workspace);
+    console.log("Private preview plans are not eligible for automatic SDK generation.");
+    return;
   }
-
-  if (!sdkReleaseType) {
-    throw new Error("SDK release type could not be determined from release plan details.");
-  }
-
-  if (!isManagementPlane) {
+  if (freshDetails.IsManagementPlane !== true) {
     console.log(
       "This release plan is not management plane and not eligible for auto SDK generation.",
     );
     return;
   }
 
-  const sdkInfoItems = planDetails?.SDKInfo ?? [];
+  const planDetails = validateArtifactTarget(artifact, plan, args.workspace);
+  const workItemId = requiredPlanId(planDetails.WorkItemId, "WorkItemId");
+  const typespecProjectPath = projectPath(planDetails.APISpecProjectPath, args.workspace);
+  const sdkReleaseType = planDetails.SDKReleaseType!;
+  const apiVersion = planDetails.SpecAPIVersion!;
+  const specCommitSha = planDetails.SpecCommitSHA!;
+  console.log(`TypeSpec Project Path: ${typespecProjectPath}`);
+  console.log(
+    `ReleasePlanId: ${releasePlanId}; API version: ${apiVersion}; spec commit: ${specCommitSha}`,
+  );
+  console.log(`SDK release type: ${sdkReleaseType}`);
+
+  const sdkInfoItems = planDetails.SDKInfo ?? [];
   const outcomeNormalized = outcome.toLowerCase();
-  const failedLanguages: SdkLanguage[] = [];
 
   for (const language of languages) {
     console.log(`Checking if SDK needs to be generated for language '${language}'.`);
@@ -310,29 +296,28 @@ export async function runGenerateSdk(
       language,
       "--workitem-id",
       workItemId,
+      "--api-version",
+      apiVersion,
+      "--spec-commit-sha",
+      specCommitSha,
+      "--require-merged-spec",
+      "true",
+      "--output",
+      "json",
     ]);
 
-    if (generateResult.exitCode !== 0) {
-      console.log(`SDK generation failed for language '${language}'.`);
-      if (generateResult.stderr.trim()) {
-        console.log(generateResult.stderr.trim());
-      } else if (generateResult.stdout.trim()) {
-        console.log(generateResult.stdout.trim());
+    try {
+      const response = parseAzdskResponse(generateResult, "spec-workflow generate-sdk");
+      if (response?.status !== "Success") {
+        throw new Error("azsdk did not return a successful SDK generation response.");
       }
-      failedLanguages.push(language);
-    } else {
-      console.log(`SDK generation succeeded for language '${language}'.`);
-      if (generateResult.stdout.trim()) {
-        console.log(generateResult.stdout.trim());
-      }
-      if (generateResult.stderr.trim()) {
-        console.log(generateResult.stderr.trim());
-      }
+    } catch (error) {
+      throw new Error(`SDK generation failed for language '${language}'. ${String(error)}`, {
+        cause: error,
+      });
     }
-  }
-
-  if (failedLanguages.length > 0) {
-    throw new Error(`SDK generation failed for language(s): ${failedLanguages.join(", ")}`);
+    console.log(`SDK generation succeeded for language '${language}'.`);
+    console.log(generateResult.stdout.trim());
   }
 
   console.log("SDK generation stage completed successfully.");

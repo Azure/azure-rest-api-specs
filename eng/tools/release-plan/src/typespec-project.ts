@@ -6,6 +6,12 @@ import { Octokit } from "@octokit/rest";
 import { execSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
 import { join, posix } from "node:path";
+import {
+  assertApiVersion,
+  assertCleanSpecCheckout,
+  assertSpecCommitSha,
+  type GitRunner,
+} from "./spec-target.ts";
 import type {
   CommitProjectInfoResult,
   OctokitLike,
@@ -27,7 +33,7 @@ export const SKIP_RELEASE_PLAN_AUTOMATION_LABEL = "Skip-ReleasePlan-Automation";
 
 /**
  * Identifies one TypeSpec project path and selected API version from a pull request.
- * Returns null when no specification files were modified, or when zero/multiple projects found.
+ * Returns null when no TypeSpec files were modified; ambiguous targets fail closed.
  * Uses TypeSpec metadata emitter to determine API version and SDK type.
  * @param params Object containing PR details, owner, repo, workspace, and Octokit instance
  * @param params.prNumber Pull request number
@@ -35,7 +41,7 @@ export const SKIP_RELEASE_PLAN_AUTOMATION_LABEL = "Skip-ReleasePlan-Automation";
  * @param params.repo Repository name
  * @param params.workspace Absolute path to workspace root
  * @param params.octokit Octokit instance for GitHub API calls
- * @returns TypeSpec project info with path and API version, or null if no spec changes, no projects found, multiple projects found, or API version detection fails
+ * @returns The unique versioned project at the merge commit, or null for no TypeSpec changes
  */
 export async function getTypeSpecProjectInfoFromPr(params: {
   prNumber: number;
@@ -43,6 +49,8 @@ export async function getTypeSpecProjectInfoFromPr(params: {
   repo: string;
   workspace: string;
   octokit: OctokitLike;
+  commitSha?: string;
+  git?: GitRunner;
 }): Promise<TypeSpecProjectInfo | null> {
   const { prNumber, owner, repo, workspace, octokit } = params;
 
@@ -54,37 +62,61 @@ export async function getTypeSpecProjectInfoFromPr(params: {
   });
 
   const specFiles = allFiles.filter((f) => f.filename.startsWith("specification/"));
-  if (specFiles.length === 0) {
+  if (
+    !specFiles.some((f) => f.filename.endsWith(".tsp") || f.filename.endsWith("tspconfig.yaml"))
+  ) {
     return null;
   }
 
   const tspProjectPaths = collectTypeSpecProjectPaths(specFiles, workspace);
 
   if (tspProjectPaths.length === 0) {
-    console.log("Unable to locate TypeSpec project (tspconfig.yaml) for modified files.");
-    return null;
+    throw new Error("Unable to locate TypeSpec project (tspconfig.yaml) for modified files.");
   }
   if (tspProjectPaths.length > 1) {
-    console.log(
+    throw new Error(
       `Multiple TypeSpec projects found in PR: ${tspProjectPaths.join(", ")}. Create release plan manually using aka.ms/azsdk/releaseplan-dashboard.`,
     );
-    return null;
   }
 
   const tspProjectRelPath = tspProjectPaths[0];
   const tspProjectAbsPath = join(workspace, tspProjectRelPath);
 
-  try {
-    return await getTypeSpecProjectVersionFromMetadata(tspProjectAbsPath, tspProjectRelPath);
-  } catch {
-    console.error(`Failed to determine API version for TypeSpec project at ${tspProjectRelPath}`);
-    return null;
+  const specCommitSha = await getMergedSpecCommitSha(params);
+  assertCleanSpecCheckout(workspace, specCommitSha, params.git);
+  const info = await getTypeSpecProjectVersionFromMetadata(tspProjectAbsPath, tspProjectRelPath);
+  assertCleanSpecCheckout(workspace, specCommitSha, params.git);
+  return { ...info, specCommitSha };
+}
+
+/** Resolve only a merged PR's immutable commit, never its branch head or a test-merge ref. */
+export async function getMergedSpecCommitSha(params: {
+  prNumber: number;
+  owner: string;
+  repo: string;
+  octokit: OctokitLike;
+  commitSha?: string;
+}): Promise<string> {
+  const { owner, repo, prNumber, octokit, commitSha } = params;
+  const { data } = await octokit.rest.pulls.get({ owner, repo, pull_number: prNumber });
+  if (data.merged === false || (!data.merged && !data.merged_at)) {
+    throw new Error(`Automatic release planning requires merged spec PR #${prNumber}.`);
   }
+  assertSpecCommitSha(data.merge_commit_sha);
+  if (commitSha !== undefined) {
+    assertSpecCommitSha(commitSha);
+    if (commitSha.toLowerCase() !== data.merge_commit_sha.toLowerCase()) {
+      throw new Error(
+        `Trigger commit ${commitSha} does not match spec PR #${prNumber}'s merge commit.`,
+      );
+    }
+  }
+  return commitSha ?? data.merge_commit_sha;
 }
 
 /**
  * Identifies TypeSpec project info from a commit SHA.
- * Attempts to resolve an associated PR first; if not found, inspects commit file changes directly.
+ * Requires an associated merged PR for TypeSpec changes; non-TypeSpec changes are skipped.
  * Uses TypeSpec metadata emitter to determine API version and SDK type.
  * @returns TypeSpec project info and optional associated PR number
  */
@@ -94,6 +126,7 @@ export async function getTypeSpecProjectInfoFromCommit(params: {
   repo: string;
   workspace: string;
   octokit: OctokitLike;
+  git?: GitRunner;
 }): Promise<CommitProjectInfoResult> {
   const { commitSha, owner, repo, workspace, octokit } = params;
 
@@ -135,6 +168,8 @@ export async function getTypeSpecProjectInfoFromCommit(params: {
       repo,
       workspace,
       octokit,
+      commitSha,
+      git: params.git,
     });
     return {
       projectInfo,
@@ -151,39 +186,13 @@ export async function getTypeSpecProjectInfoFromCommit(params: {
   });
 
   const specFiles = allFiles.filter((f) => f.filename.startsWith("specification/"));
-  if (specFiles.length === 0) {
+  if (
+    !specFiles.some((f) => f.filename.endsWith(".tsp") || f.filename.endsWith("tspconfig.yaml"))
+  ) {
     return { projectInfo: null, hasNewApiVersionLabel: false };
   }
 
-  const tspProjectPaths = collectTypeSpecProjectPaths(specFiles, workspace);
-  if (tspProjectPaths.length === 0) {
-    console.log("Unable to locate TypeSpec project (tspconfig.yaml) for modified files.");
-    return { projectInfo: null, hasNewApiVersionLabel: false };
-  }
-
-  if (tspProjectPaths.length > 1) {
-    console.log(
-      `Multiple TypeSpec projects found in commit: ${tspProjectPaths.join(", ")}. Create release plan manually using aka.ms/azsdk/releaseplan-dashboard.`,
-    );
-    return { projectInfo: null, hasNewApiVersionLabel: false };
-  }
-
-  const tspProjectRelPath = tspProjectPaths[0];
-  const tspProjectAbsPath = join(workspace, tspProjectRelPath);
-
-  try {
-    const projectInfo = await getTypeSpecProjectVersionFromMetadata(
-      tspProjectAbsPath,
-      tspProjectRelPath,
-    );
-    return {
-      projectInfo,
-      hasNewApiVersionLabel: false,
-    };
-  } catch {
-    console.error(`Failed to determine API version for TypeSpec project at ${tspProjectRelPath}`);
-    return { projectInfo: null, hasNewApiVersionLabel: false };
-  }
+  throw new Error(`No merged spec PR could be resolved for trigger commit ${commitSha}.`);
 }
 
 /**
@@ -333,6 +342,11 @@ export async function getAssociatedPrNumber(params: {
     commit_sha: commitSha,
   });
 
+  if (response.data.length > 1) {
+    throw new Error(
+      "Multiple PRs are associated with the trigger commit; specify --pr-number explicitly.",
+    );
+  }
   return response.data[0]?.number;
 }
 
@@ -363,28 +377,42 @@ export function findTspConfigDir(relativeFilePath: string, workspace: string): s
   return null;
 }
 
+// Normalized SDK language keys emitted by @azure-tools/typespec-metadata.
+const METADATA_SDK_LANGUAGES = new Set([
+  "csharp",
+  "python",
+  "typescript",
+  "javascript",
+  "java",
+  "rust",
+  "swift",
+  "go",
+]);
+
 /**
- * Extracts the API version from TypeSpec metadata.
+ * Extracts one concrete API version shared by all recognized SDK configurations.
  */
 export function resolveTypeSpecMetadata(metadata: TypeSpecMetadata): {
   apiVersion: string;
 } {
   const apiVersions = new Set<string>();
 
-  for (const [, langConfigs] of Object.entries(metadata.languages)) {
-    if (!Array.isArray(langConfigs)) {
+  for (const [language, langConfigs] of Object.entries(metadata.languages)) {
+    // Non-SDK emitters such as AutoRest appear under "unknown" without a package name.
+    if (!METADATA_SDK_LANGUAGES.has(language)) {
       continue;
+    }
+    if (!Array.isArray(langConfigs)) {
+      throw new Error("Invalid language configurations in TypeSpec metadata.");
     }
 
     for (const config of langConfigs) {
       const apiVersion = config.apiVersion;
       const packageName = config.packageName;
 
-      if (!apiVersion || !packageName) {
-        console.warn(
-          `Skipping language config with missing apiVersion or packageName: ${JSON.stringify(config)}`,
-        );
-        continue;
+      assertApiVersion(apiVersion);
+      if (typeof packageName !== "string" || !packageName.trim()) {
+        throw new Error("A TypeSpec language configuration is missing its packageName.");
       }
 
       console.log(`language config: ${JSON.stringify(config)}`);
@@ -394,6 +422,11 @@ export function resolveTypeSpecMetadata(metadata: TypeSpecMetadata): {
 
   if (apiVersions.size === 0) {
     throw new Error("No valid language configurations found in TypeSpec metadata");
+  }
+  if (apiVersions.size !== 1) {
+    throw new Error(
+      `Ambiguous API versions in TypeSpec metadata: ${[...apiVersions].join(", ")}. Select one concrete API version before release planning.`,
+    );
   }
 
   return { apiVersion: Array.from(apiVersions)[0] };
@@ -413,11 +446,6 @@ export async function getTypeSpecProjectVersionFromMetadata(
   try {
     const metadata = await generateTypeSpecMetadata(tspProjectAbsPath);
     const { apiVersion } = resolveTypeSpecMetadata(metadata);
-    if (!/^\d{4}-\d{2}-\d{2}(?:-preview)?$/.test(apiVersion)) {
-      throw new Error(
-        `API version '${apiVersion}' must use YYYY-MM-DD or YYYY-MM-DD-preview format`,
-      );
-    }
     const isPreview = apiVersion.endsWith("-preview");
 
     console.log(
