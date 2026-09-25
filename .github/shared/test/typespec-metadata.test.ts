@@ -1,9 +1,9 @@
 import { access, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { dirname, join } from "node:path";
+import { dirname, join, resolve } from "node:path";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { execNodeBin } from "../src/exec.ts";
-import { debugLogger } from "../src/logger.ts";
+import { debugLogger, type ILogger } from "../src/logger.ts";
 import { generateTypeSpecMetadata } from "../src/typespec-metadata.ts";
 
 vi.mock("../src/exec.ts", async (importOriginal) => ({
@@ -64,6 +64,8 @@ describe("generateTypeSpecMetadata", () => {
       expect(packageName).toBe("@typespec/compiler");
       expect(options?.cwd).toMatch(/contoso$/);
       expect(options?.maxBuffer).toBe(64 * 1024 * 1024);
+      expect(options?.timeout).toBeUndefined();
+      expect(args[2]).toBe(resolve("contoso"));
       return { stdout: "", stderr: "" };
     });
 
@@ -101,6 +103,58 @@ describe("generateTypeSpecMetadata", () => {
     }
   });
 
+  it("keeps the project target when both main.tsp and client.tsp exist", async () => {
+    const projectDirectory = await mkdtemp(join(tmpdir(), "typespec-main-project-"));
+    try {
+      await writeFile(join(projectDirectory, "main.tsp"), "");
+      await writeFile(join(projectDirectory, "client.tsp"), "");
+      vi.mocked(execNodeBin).mockImplementation(async (_packageName, args) => {
+        metadataFile = getMetadataFile(args);
+        await writeFile(metadataFile, JSON.stringify(validMetadata));
+        expect(args[2]).toBe(projectDirectory);
+        return { stdout: "", stderr: "" };
+      });
+      await generateTypeSpecMetadata(projectDirectory);
+    } finally {
+      await rm(projectDirectory, { recursive: true, force: true });
+    }
+  });
+
+  it.each(["custom.tsp", resolve("contoso/custom.tsp")])(
+    "honors an explicit entrypoint and timeout (%s)",
+    async (entrypoint) => {
+      vi.mocked(execNodeBin).mockImplementation(async (_packageName, args, options) => {
+        metadataFile = getMetadataFile(args);
+        await writeFile(metadataFile, JSON.stringify(validMetadata));
+        expect(args[2]).toBe(resolve("contoso/custom.tsp"));
+        expect(options?.cwd).toBe(resolve("contoso"));
+        expect(options?.timeout).toBe(120_000);
+        return { stdout: "", stderr: "" };
+      });
+      await generateTypeSpecMetadata("contoso", { entrypoint, timeout: 120_000 });
+      await expectMetadataDirectoryRemoved(metadataFile);
+    },
+  );
+
+  it("does not infer warning or error severity from successful stderr", async () => {
+    const logger: ILogger = {
+      debug: vi.fn(),
+      info: vi.fn(),
+      error: vi.fn(),
+      warning: vi.fn(),
+      isDebug: () => false,
+    };
+    vi.mocked(execNodeBin).mockImplementation(async (_packageName, args) => {
+      metadataFile = getMetadataFile(args);
+      await writeFile(metadataFile, JSON.stringify(validMetadata));
+      return { stdout: "", stderr: "compiler progress" };
+    });
+    await expect(generateTypeSpecMetadata("contoso", { logger })).resolves.toEqual(validMetadata);
+    expect(logger.warning).not.toHaveBeenCalled();
+    expect(logger.error).not.toHaveBeenCalled();
+    await expectMetadataDirectoryRemoved(metadataFile);
+  });
+
   it("rejects invalid metadata and cleans up", async () => {
     vi.mocked(execNodeBin).mockImplementation(async (_packageName, args) => {
       metadataFile = getMetadataFile(args);
@@ -124,18 +178,42 @@ describe("generateTypeSpecMetadata", () => {
     await expectMetadataDirectoryRemoved(metadataFile);
   });
 
-  it("includes compiler diagnostics written to stdout", async () => {
+  it.each([false, true])(
+    "separates failed compiler streams without duplicating stderr (already included: %s)",
+    async (stderrIncluded) => {
+      const stdout = "error file-not-found: File main.tsp not found.";
+      const stderr = "compiler progress";
+      const error = Object.assign(
+        new Error(`Command failed: tsp compile${stderrIncluded ? `\n${stderr}` : ""}`),
+        { stdout, stderr },
+      );
+      vi.mocked(execNodeBin).mockImplementation((_packageName, args) => {
+        metadataFile = getMetadataFile(args);
+        return Promise.reject(error);
+      });
+
+      const result = generateTypeSpecMetadata("contoso");
+      await expect(result).rejects.toHaveProperty(
+        "message",
+        `Failed to generate TypeSpec metadata: ${String(error)}\n${stdout}${stderrIncluded ? "" : `\n${stderr}`}`,
+      );
+      await expect(result).rejects.toHaveProperty("cause", error);
+      await expectMetadataDirectoryRemoved(metadataFile);
+    },
+  );
+
+  it("preserves timeout errors and their cause even with partial diagnostics", async () => {
+    const error = Object.assign(new Error("compiler timed out"), {
+      stdout: "partial diagnostics",
+      killed: true,
+    });
     vi.mocked(execNodeBin).mockImplementation((_packageName, args) => {
       metadataFile = getMetadataFile(args);
-
-      const error = Object.assign(new Error("Command failed: tsp compile"), {
-        stdout: "error file-not-found: File main.tsp not found.",
-        stderr: "",
-      });
       return Promise.reject(error);
     });
-
-    await expect(generateTypeSpecMetadata("contoso")).rejects.toThrow("file-not-found");
+    const result = generateTypeSpecMetadata("contoso", { timeout: 100 });
+    await expect(result).rejects.toThrow("compiler timed out");
+    await expect(result).rejects.toHaveProperty("cause", error);
     await expectMetadataDirectoryRemoved(metadataFile);
   });
 });
