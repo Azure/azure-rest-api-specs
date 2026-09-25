@@ -24,12 +24,6 @@ export default mergeConfig(
         ".github/vitest.config.ts",
         ".github/shared/vitest.config.ts",
         "eng/tools/*/vitest.config.ts",
-        {
-          test: {
-            name: "eng-scripts",
-            include: ["eng/scripts/*.test.mjs"],
-          },
-        },
       ],
       coverage: {
         thresholds: {
