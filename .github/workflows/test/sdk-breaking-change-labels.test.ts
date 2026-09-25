@@ -1,3 +1,4 @@
+import type { GitHubScriptArgs } from "../src/github.ts";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { sdkLabels } from "../../shared/src/sdk-types.ts";
 import { createMockSpecGenSdkArtifactInfo } from "../../shared/test/sdk-types.ts";
@@ -22,10 +23,8 @@ const mockGithub = createMockGithub();
 const mockContext = createMockContext();
 const mockCore = createMockCore();
 
-function getLabelAndAction(
-  asyncFunctionArgs: Partial<import("../src/github.ts").GitHubScriptArgs>,
-) {
-  return getLabelAndActionSrc(asyncFunctionArgs as import("../src/github.ts").GitHubScriptArgs);
+function getLabelAndAction(asyncFunctionArgs: Partial<GitHubScriptArgs>) {
+  return getLabelAndActionSrc(asyncFunctionArgs as GitHubScriptArgs);
 }
 
 describe("sdk-breaking-change-labels", () => {

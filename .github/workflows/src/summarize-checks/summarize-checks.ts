@@ -1,4 +1,11 @@
-import type { Core, WebhookEvent } from "../github.ts";
+import type {
+  CheckRuns,
+  CommitStatuses,
+  Core,
+  GitHub,
+  GitHubScriptArgs,
+  WebhookEvent,
+} from "../github.ts";
 /*
   This file is a github script. It will be called directly from a github-script action. This code is a simplified
   amalgamation of logic that previously resided in the `PR Summary` check and various events within the `pipelinebot`.
@@ -88,9 +95,9 @@ export type CheckRunResult = {
   target_url?: string;
 };
 
-export type CommitStatus = import("../github.ts").CommitStatuses[0];
+export type CommitStatus = CommitStatuses[0];
 
-export type CheckRun = import("../github.ts").CheckRuns[0];
+export type CheckRun = CheckRuns[0];
 
 // Placing these configuration items here until we decide another way to pull them in.
 const FYI_CHECK_NAMES = [
@@ -252,7 +259,7 @@ export default async function summarizeChecks({
   github,
   context,
   core,
-}: import("../github.ts").GitHubScriptArgs): Promise<void> {
+}: GitHubScriptArgs): Promise<void> {
   const { owner, repo, issue_number, head_sha } = await extractInputs(github, context, core);
 
   if (!issue_number) {
@@ -314,7 +321,7 @@ export function outputRunDetails(
 }
 
 export async function summarizeChecksImpl(
-  github: import("../github.ts").GitHub,
+  github: GitHub,
   core: Core,
   owner: string,
   repo: string,
@@ -440,7 +447,7 @@ export async function summarizeChecksImpl(
  * Updates or creates a commit status with the given status
  */
 export async function updateCommitStatus(
-  github: import("../github.ts").GitHub,
+  github: GitHub,
   core: Core,
   owner: string,
   repo: string,
@@ -478,7 +485,7 @@ export async function updateCommitStatus(
 }
 
 export async function getExistingLabels(
-  github: import("../github.ts").GitHub,
+  github: GitHub,
   owner: string,
   repo: string,
   issue_number: number,
@@ -562,7 +569,7 @@ export function getRequiredChecksFromBranchRuleOutput(
  * @param prNumber - The pull request number.
  */
 export async function getCheckRunTuple(
-  github: import("../github.ts").GitHub,
+  github: GitHub,
   core: Core,
   owner: string,
   repo: string,
@@ -1070,7 +1077,7 @@ function buildViolatedLabelRulesNextStepsText(
  * @returns The parsed job summary data
  */
 export async function getImpactAssessment(
-  github: import("../github.ts").GitHub,
+  github: GitHub,
   core: Core,
   owner: string,
   repo: string,

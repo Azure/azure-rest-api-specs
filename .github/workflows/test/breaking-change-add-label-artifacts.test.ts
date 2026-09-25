@@ -1,3 +1,4 @@
+import type { GitHubScriptArgs } from "../src/github.ts";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { REVIEW_REQUIRED_LABELS } from "../../shared/src/breaking-change.ts";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
@@ -12,8 +13,8 @@ vi.mock("../src/context.ts", () => ({
   extractInputs: vi.fn(),
 }));
 
-function getLabelActions(asyncFunctionArgs: Partial<import("../src/github.ts").GitHubScriptArgs>) {
-  return getLabelActionsImpl(asyncFunctionArgs as import("../src/github.ts").GitHubScriptArgs);
+function getLabelActions(asyncFunctionArgs: Partial<GitHubScriptArgs>) {
+  return getLabelActionsImpl(asyncFunctionArgs as GitHubScriptArgs);
 }
 
 describe("breaking-change-add-label-artifacts", () => {

@@ -1,4 +1,4 @@
-import type { Core, WebhookEvent } from "../github.ts";
+import type { Core, GitHub, GitHubScriptArgs, WebhookEvent } from "../github.ts";
 // Protected Labels Enforcement
 // Entry point for .github/workflows/protected-labels.yaml
 //
@@ -26,7 +26,7 @@ async function enforceLabelAuthorization({
   actor,
   authorizedUsers,
 }: {
-  github: import("../github.ts").GitHub;
+  github: GitHub;
   core: Core;
   owner: string;
   repo: string;
@@ -76,11 +76,7 @@ async function enforceLabelAuthorization({
 /**
  * Main entry point - called from the workflow via github-script.
  */
-export default async function checkLabel({
-  github,
-  context,
-  core,
-}: import("../github.ts").GitHubScriptArgs) {
+export default async function checkLabel({ github, context, core }: GitHubScriptArgs) {
   const { owner, repo, issue_number } = await extractInputs(github, context, core);
 
   const payload = context.payload as WebhookEvent<"pull-request", "labeled">;

@@ -2,7 +2,7 @@ import { inspect } from "util";
 import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { byDate, invert } from "../../../shared/src/sort.ts";
 import { extractInputs } from "../context.ts";
-import type { Core } from "../github.ts";
+import type { Core, GitHubScriptArgs } from "../github.ts";
 import { LabelAction } from "../label.ts";
 import { ArmAutoSignoffLabel } from "./arm-auto-signoff-labels.ts";
 
@@ -20,11 +20,7 @@ function createNoneLabelActions(): ManagedLabelActions {
 
 /* v8 ignore start */
 
-export default async function getLabelAction({
-  github,
-  context,
-  core,
-}: import("../github.ts").GitHubScriptArgs): Promise<{
+export default async function getLabelAction({ github, context, core }: GitHubScriptArgs): Promise<{
   headSha: string;
   issueNumber: number;
   labelActions: ManagedLabelActions;

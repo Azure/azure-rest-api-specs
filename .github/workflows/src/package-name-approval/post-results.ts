@@ -5,7 +5,7 @@ import { execFile } from "../../../shared/src/exec.ts";
 import { PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { commentOrUpdate, parseExistingComments } from "../comment.ts";
 import { extractInputs } from "../context.ts";
-import type { Core } from "../github.ts";
+import type { Core, GitHub, GitHubScriptArgs } from "../github.ts";
 import { loadApproversConfig } from "./approvers.ts";
 import { removeLabelIfPresent } from "./labels.ts";
 
@@ -30,7 +30,7 @@ const NamespaceResultsSchema = z.object({
 });
 
 async function downloadNamespaceResults(
-  github: import("../github.ts").GitHub,
+  github: GitHub,
   core: Core,
   owner: string,
   repo: string,
@@ -230,11 +230,7 @@ function buildCommentBody({
   return body;
 }
 
-export default async function postResults({
-  github,
-  context,
-  core,
-}: import("../github.ts").GitHubScriptArgs) {
+export default async function postResults({ github, context, core }: GitHubScriptArgs) {
   const { owner, repo, issue_number, run_id } = await extractInputs(github, context, core);
   const approversConfig = await loadApproversConfig();
   const results = await downloadNamespaceResults(github, core, owner, repo, run_id);

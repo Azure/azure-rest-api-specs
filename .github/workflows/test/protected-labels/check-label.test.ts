@@ -1,3 +1,4 @@
+import type { GitHubScriptArgs } from "../../src/github.ts";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts";
 
@@ -12,8 +13,8 @@ import { readFile } from "fs/promises";
 import yaml from "js-yaml";
 import checkLabel from "../../src/protected-labels/check-label.ts";
 
-function invokeCheckLabel(args: Partial<import("../../src/github.ts").GitHubScriptArgs>) {
-  return checkLabel(args as import("../../src/github.ts").GitHubScriptArgs);
+function invokeCheckLabel(args: Partial<GitHubScriptArgs>) {
+  return checkLabel(args as GitHubScriptArgs);
 }
 
 const protectedLabelsConfig = {

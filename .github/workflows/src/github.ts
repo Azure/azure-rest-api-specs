@@ -1,10 +1,16 @@
+import type * as core from "@actions/core";
+import type { context, getOctokit } from "@actions/github";
+import type { endpoint as octokitEndpoint } from "@octokit/endpoint";
 import type { operations } from "@octokit/openapi-webhooks-types";
+import type { RestEndpointMethodTypes } from "@octokit/plugin-rest-endpoint-methods";
+import type { OctokitResponse, RequestParameters } from "@octokit/types";
+import type { ILogger } from "../../shared/src/logger.ts";
 import { toPercent } from "../../shared/src/math.ts";
 import { Duration, formatDuration, getDuration, subtract } from "../../shared/src/time.ts";
 
-export type Core = typeof import("@actions/core");
-export type Context = typeof import("@actions/github").context;
-export type GitHub = ReturnType<typeof import("@actions/github").getOctokit>;
+export type Core = typeof core;
+export type Context = typeof context;
+export type GitHub = ReturnType<typeof getOctokit>;
 
 /** Values injected into our workflow scripts by actions/github-script. */
 export interface GitHubScriptArgs {
@@ -35,16 +41,13 @@ export type WorkflowRuns =
 export type CheckRuns =
   RestEndpointMethodTypes["checks"]["listForRef"]["response"]["data"]["check_runs"];
 
-export type RestEndpointMethodTypes =
-  import("@octokit/plugin-rest-endpoint-methods").RestEndpointMethodTypes;
+export type { RestEndpointMethodTypes };
 
 export function createLogHook(
-  endpoint: typeof import("@octokit/endpoint").endpoint,
-  logger: import("../../shared/src/logger.ts").ILogger,
-): (options: import("@octokit/types").RequestParameters & { url: string; method: string }) => void {
-  function logHook(
-    options: import("@octokit/types").RequestParameters & { url: string; method: string },
-  ) {
+  endpoint: typeof octokitEndpoint,
+  logger: ILogger,
+): (options: RequestParameters & { url: string; method: string }) => void {
+  function logHook(options: RequestParameters & { url: string; method: string }) {
     const request = endpoint(options);
     logger.info(
       `[github] ${request.method.toUpperCase()} ${request.url} ${request.body ? JSON.stringify(request.body) : ""}`,
@@ -54,10 +57,8 @@ export function createLogHook(
   return logHook;
 }
 
-export function createRateLimitHook(
-  logger: import("../../shared/src/logger.ts").ILogger,
-): (response: import("@octokit/types").OctokitResponse<unknown>) => void {
-  function rateLimitHook(response: import("@octokit/types").OctokitResponse<unknown>) {
+export function createRateLimitHook(logger: ILogger): (response: OctokitResponse<unknown>) => void {
+  function rateLimitHook(response: OctokitResponse<unknown>) {
     const {
       "x-ratelimit-limit": limitHeader,
       "x-ratelimit-remaining": remainingHeader,

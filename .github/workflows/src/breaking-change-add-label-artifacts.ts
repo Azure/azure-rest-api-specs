@@ -1,3 +1,4 @@
+import type { GitHubScriptArgs } from "./github.ts";
 import { REVIEW_REQUIRED_LABELS } from "../../shared/src/breaking-change.ts";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import { byDate, invert } from "../../shared/src/sort.ts";
@@ -11,7 +12,7 @@ export default async function getLabelActions({
   github,
   context,
   core,
-}: import("./github.ts").GitHubScriptArgs): Promise<void> {
+}: GitHubScriptArgs): Promise<void> {
   const { owner, repo, head_sha, issue_number } = await extractInputs(github, context, core);
 
   core.setOutput("head_sha", head_sha);

@@ -1,3 +1,4 @@
+import type { GitHubScriptArgs } from "../../src/github.ts";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts";
 
@@ -74,7 +75,7 @@ describe("validate-approval", () => {
 
   let core: ReturnType<typeof createMockCore>;
 
-  function args(): import("../../src/github.ts").GitHubScriptArgs {
+  function args(): GitHubScriptArgs {
     return {
       github,
       context,

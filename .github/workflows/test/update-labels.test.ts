@@ -1,3 +1,4 @@
+import type { GitHubScriptArgs } from "../src/github.ts";
 import { describe, expect, it } from "vitest";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import { fullGitSha } from "../../shared/test/examples.ts";
@@ -5,7 +6,7 @@ import updateLabelsSrc, { updateLabelsImpl } from "../src/update-labels.ts";
 import { createMockCore, createMockGithub, createMockRequestError } from "./mocks.ts";
 
 function updateLabels(asyncFunctionArgs: unknown) {
-  return updateLabelsSrc(asyncFunctionArgs as import("../src/github.ts").GitHubScriptArgs);
+  return updateLabelsSrc(asyncFunctionArgs as GitHubScriptArgs);
 }
 
 describe("updateLabels", () => {

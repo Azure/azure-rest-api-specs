@@ -1,3 +1,4 @@
+import type { GitHubScriptArgs } from "../github.ts";
 import { incrementalTypeSpec } from "./arm-incremental-typespec.ts";
 import { checkTrivialChanges } from "./trivial-changes-check.ts";
 
@@ -11,9 +12,7 @@ export type PullRequestChanges = import("./pr-changes.ts").PullRequestChanges;
  * - Incremental TypeSpec check
  * - Trivial changes check
  */
-export default async function armAutoSignoffCode({
-  core,
-}: import("../github.ts").GitHubScriptArgs): Promise<{
+export default async function armAutoSignoffCode({ core }: GitHubScriptArgs): Promise<{
   incremental: boolean;
   trivial: boolean;
 }> {

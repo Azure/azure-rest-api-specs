@@ -1,3 +1,4 @@
+import type { GitHubScriptArgs } from "../../src/github.ts";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts";
 
@@ -28,9 +29,7 @@ describe("post-results", () => {
   const mockCore = createMockCore();
   const context = createMockContext();
 
-  function args(
-    github: import("../mocks.ts").GitHub,
-  ): import("../../src/github.ts").GitHubScriptArgs {
+  function args(github: import("../mocks.ts").GitHub): GitHubScriptArgs {
     return {
       github,
       context,

@@ -1,5 +1,5 @@
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
-import type { Core } from "./github.ts";
+import type { Core, GitHub } from "./github.ts";
 
 export type IssueComment = {
   id: number;
@@ -54,7 +54,7 @@ export function parseExistingComments(
  * @returns Resolves when the comment is created or updated.
  */
 export async function commentOrUpdate(
-  github: import("./github.ts").GitHub,
+  github: GitHub,
   core: Core,
   owner: string,
   repo: string,

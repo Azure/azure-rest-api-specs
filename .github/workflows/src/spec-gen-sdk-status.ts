@@ -2,13 +2,13 @@ import { CheckStatus, CommitStatusState, PER_PAGE_MAX } from "../../shared/src/g
 import { SpecGenSdkArtifactInfoSchema } from "../../shared/src/sdk-types.ts";
 import { getAdoBuildInfoFromUrl, getAzurePipelineArtifact } from "./artifacts.ts";
 import { extractInputs } from "./context.ts";
-import type { Core } from "./github.ts";
+import type { CheckRuns, Core, GitHubScriptArgs } from "./github.ts";
 
 export default async function setSpecGenSdkStatus({
   github,
   context,
   core,
-}: import("./github.ts").GitHubScriptArgs): Promise<void> {
+}: GitHubScriptArgs): Promise<void> {
   const inputs = await extractInputs(github, context, core);
   const head_sha = inputs.head_sha;
   const details_url = inputs.details_url;
@@ -133,7 +133,7 @@ async function processResult({
   checkRuns,
   core,
 }: {
-  checkRuns: import("./github.ts").CheckRuns;
+  checkRuns: CheckRuns;
   core: Core;
 }): Promise<{ state: CommitStatusState; description: string }> {
   let state: CommitStatusState = CommitStatusState.SUCCESS;
