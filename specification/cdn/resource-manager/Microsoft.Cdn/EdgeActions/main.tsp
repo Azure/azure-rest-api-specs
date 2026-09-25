@@ -25,6 +25,7 @@ namespace Microsoft.Cdn;
 enum Versions {
   `2025-09-01-preview`,
   `2025-12-01-preview`,
+  `2026-10-01`,
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "SKU property required at envelope level for backwards compatibility with 2024-07-22-preview"
