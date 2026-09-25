@@ -236,6 +236,7 @@ union DrillType {
   Zonal: "Zonal",
 
   @doc("Regional Drill.")
+  @removed(Versions.v2026_10_01)
   Regional: "Regional",
 }
 
@@ -503,6 +504,7 @@ union DrillReportFinalizationState {
 
 /** Regional resiliency posture reported by the selected protection solution. */
 @added(Versions.v2026_09_30_preview)
+@removed(Versions.v2026_10_01)
 union RegionalResiliencyStatus {
   string,
 

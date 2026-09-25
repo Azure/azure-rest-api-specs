@@ -26,6 +26,7 @@ model ServiceLevelResource {
 }
 
 @added(Versions.v2026_09_30_preview)
+@removed(Versions.v2026_10_01)
 @doc("Recovery objectives targeted by a goal assignment for regional resiliency.")
 model RegionalObjectives {
   @doc("Target regional recovery point objective. eg, PT15M for 15 minutes.")
@@ -55,10 +56,12 @@ model GoalAssignmentProperties {
 
   @doc("Whether regional resiliency is required for this goal assignment.")
   @added(Versions.v2026_09_30_preview)
+  @removed(Versions.v2026_10_01)
   requireRegionalResiliency?: boolean;
 
   @doc("Recovery objectives targeted for regional resiliency.")
   @added(Versions.v2026_09_30_preview)
+  @removed(Versions.v2026_10_01)
   regionalObjectives?: RegionalObjectives;
 
   @doc("List of service level resources.")

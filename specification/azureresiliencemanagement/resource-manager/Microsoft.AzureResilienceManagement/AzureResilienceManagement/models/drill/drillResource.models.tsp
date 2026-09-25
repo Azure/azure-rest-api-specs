@@ -197,6 +197,7 @@ model ZonalDrillResourceProperties extends DrillResourceProperties {
 
 @doc("Properties of a resource in a regional Resiliency Drill.")
 @added(Versions.v2026_09_30_preview)
+@removed(Versions.v2026_10_01)
 model RegionalDrillResourceProperties extends DrillResourceProperties {
   @doc("The discriminator for the Drill Resource object hierarchy. Matches the parent Drill type.")
   @visibility(Lifecycle.Read)
