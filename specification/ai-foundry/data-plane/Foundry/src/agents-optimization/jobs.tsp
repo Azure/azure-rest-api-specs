@@ -146,7 +146,7 @@ model AgentOptimizationJob is JobLike<AgentOptimizationJobResult, never> {
 
   @doc("Duration for which the job has been running, in milliseconds.")
   @visibility(Lifecycle.Read)
-  run_duration_milliseconds: FoundryDurationMilliseconds;
+  run_duration_ms: FoundryDurationMilliseconds;
 
   @doc("The timestamp when the job was created, represented in Unix time.")
   @visibility(Lifecycle.Read)
