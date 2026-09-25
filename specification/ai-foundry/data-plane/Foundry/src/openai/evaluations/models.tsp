@@ -56,13 +56,19 @@ model TestingCriterionEvaluator {
   /** The object type, which is always `azure_ai_evaluator`. */
   type: "azure_ai_evaluator";
 
-  /** The registered evaluator resource name. */
+  /** The name of this testing criterion, used to label its results. */
   name: string;
 
-  /** The exact immutable published evaluator version. Omitted when the accepted criterion snapshots current evaluator state. */
-  version?: EvaluatorVersionNumber;
+  /** The registered evaluator resource name. */
+  evaluator_name: string;
 
-  /** The ETag returned with mutable current evaluator state. Required when `version` is omitted and omitted for immutable published versions. The service verifies the ETag when accepting the evaluation and snapshots that current representation instead of late-binding to later state. */
+  /** The evaluator version. The latest published version is used when omitted or empty, preserving the existing evaluator-reference behavior. */
+  evaluator_version?: string;
+
+  /** Optional registry containing the evaluator. Omit for a project evaluator or the default built-in evaluator registry. */
+  registry_name?: string;
+
+  /** An explicit opt-in to binding mutable current evaluator state by its ETag. Omit `evaluator_version` when supplying this field. The service verifies and snapshots the current representation when accepting the evaluation. Without either field, the existing latest-published-version behavior is retained. */
   etag?: string;
 
   /** The initialization parameters for the evaluation. Must support structured outputs. */

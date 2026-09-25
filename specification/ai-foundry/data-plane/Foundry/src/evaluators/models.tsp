@@ -815,6 +815,17 @@ model EvaluatorCredentialRequest {
   blob_uri: url;
 }
 
+@doc("A page of evaluator versions preserving the established JSON and SDK property names.")
+model PagedEvaluatorVersion is PagedResultWithNextLink<EvaluatorVersion>;
+
+@@encodedName(PagedEvaluatorVersion.data, "application/json", "value");
+@@encodedName(PagedEvaluatorVersion.next_link, "application/json", "nextLink");
+@@Azure.ClientGenerator.Core.clientName(PagedEvaluatorVersion.data, "value");
+@@Azure.ClientGenerator.Core.clientName(
+  PagedEvaluatorVersion.next_link,
+  "nextLink"
+);
+
 @doc("Evaluator Metric")
 model EvaluatorMetric {
   @doc("Type of the metric.")

@@ -11217,8 +11217,8 @@
     "/evaluators": {
       "get": {
         "operationId": "Evaluators_list",
-        "summary": "List current evaluators",
-        "description": "Lists unnumbered current evaluator resources.",
+        "summary": "List latest evaluator versions",
+        "description": "Lists the latest published evaluator versions, preserving the existing collection contract.",
         "parameters": [
           {
             "name": "type",
@@ -11269,25 +11269,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "required": [
-                    "data"
-                  ],
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/Evaluator"
-                      },
-                      "description": "The requested list of items."
-                    },
-                    "next_link": {
-                      "type": "string",
-                      "format": "uri",
-                      "description": "The URL to fetch the next page of results, or absent if there are no additional pages."
-                    }
-                  },
-                  "description": "A page of items with a URL cursor to the next page."
+                  "$ref": "#/components/schemas/PagedEvaluatorVersion"
                 }
               }
             }
@@ -12027,25 +12009,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "required": [
-                    "data"
-                  ],
-                  "properties": {
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/components/schemas/EvaluatorVersion"
-                      },
-                      "description": "The requested list of items."
-                    },
-                    "next_link": {
-                      "type": "string",
-                      "format": "uri",
-                      "description": "The URL to fetch the next page of results, or absent if there are no additional pages."
-                    }
-                  },
-                  "description": "A page of items with a URL cursor to the next page."
+                  "$ref": "#/components/schemas/PagedEvaluatorVersion"
                 }
               }
             }
@@ -84493,6 +84457,27 @@
         },
         "description": "Paged collection of EvaluationTaxonomy items"
       },
+      "PagedEvaluatorVersion": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvaluatorVersion"
+            },
+            "description": "The requested list of items."
+          },
+          "nextLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL to fetch the next page of results, or absent if there are no additional pages."
+          }
+        },
+        "description": "A page of evaluator versions preserving the established JSON and SDK property names."
+      },
       "PagedIndex": {
         "type": "object",
         "required": [
@@ -89203,7 +89188,8 @@
         "type": "object",
         "required": [
           "type",
-          "name"
+          "name",
+          "evaluator_name"
         ],
         "properties": {
           "type": {
@@ -89215,15 +89201,23 @@
           },
           "name": {
             "type": "string",
+            "description": "The name of this testing criterion, used to label its results."
+          },
+          "evaluator_name": {
+            "type": "string",
             "description": "The registered evaluator resource name."
           },
-          "version": {
-            "$ref": "#/components/schemas/EvaluatorVersionNumber",
-            "description": "The exact immutable published evaluator version. Omitted when the accepted criterion snapshots current evaluator state."
+          "evaluator_version": {
+            "type": "string",
+            "description": "The evaluator version. The latest published version is used when omitted or empty, preserving the existing evaluator-reference behavior."
+          },
+          "registry_name": {
+            "type": "string",
+            "description": "Optional registry containing the evaluator. Omit for a project evaluator or the default built-in evaluator registry."
           },
           "etag": {
             "type": "string",
-            "description": "The ETag returned with mutable current evaluator state. Required when `version` is omitted and omitted for immutable published versions. The service verifies the ETag when accepting the evaluation and snapshots that current representation instead of late-binding to later state."
+            "description": "An explicit opt-in to binding mutable current evaluator state by its ETag. Omit `evaluator_version` when supplying this field. The service verifies and snapshots the current representation when accepting the evaluation. Without either field, the existing latest-published-version behavior is retained."
           },
           "initialization_parameters": {
             "type": "object",

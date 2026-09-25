@@ -117,15 +117,15 @@ interface Evaluators {
     Http.NoContentResponse
   >;
 
-  /** Lists unnumbered current evaluator resources. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The mutable current evaluator collection is distinct from published versions."
-  @summary("List current evaluators")
+  /** Lists the latest published evaluator versions, preserving the existing collection contract. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The existing evaluator collection lists latest published versions."
+  @summary("List latest evaluator versions")
   @route("/evaluators")
   @get
   @list
   list is FoundryDataPlaneOperation<
     ListEvaluatorsParameters,
-    PagedResultWithNextLink<Evaluator>
+    PagedEvaluatorVersion
   >;
 
   /** Publishes the ETag-matched current evaluator as the next immutable numbered version. */
@@ -159,7 +159,7 @@ interface Evaluators {
 
       ...ListEvaluatorsParameters;
     },
-    PagedResultWithNextLink<EvaluatorVersion>
+    PagedEvaluatorVersion
   >;
 
   /**
