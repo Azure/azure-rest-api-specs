@@ -28,8 +28,14 @@ model ContextCache is Azure.ResourceManager.TrackedResource<
   @path
   name: string;
 
-  ...ManagedSystemAssignedIdentityProperty;
+  ...ManagedServiceIdentityProperty;
 }
+
+@@typeChangedFrom(
+  ContextCache.identity,
+  Versions.v2026_09_01,
+  Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentity
+);
 
 @armResourceOperations
 @added(Versions.v2026_06_01)
@@ -63,4 +69,15 @@ interface ContextCaches {
    * List Context Caches by subscription.
    */
   listBySubscription is ArmListBySubscription<ContextCache>;
+
+  /**
+   * Check the availability of a context cache resource name.
+   */
+  @added(Versions.v2026_09_01)
+  @action("contextCacheCheckNameAvailability")
+  checkNameAvailability is ArmProviderActionSync<
+    ContextCacheCheckNameAvailabilityParameters,
+    ContextCacheCheckNameAvailabilityResult,
+    SubscriptionActionScope
+  >;
 }
