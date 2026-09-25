@@ -1,15 +1,16 @@
 {
   "operationId": "EdgeActionVersions_Update",
-  "title": "UpdateEdgeActionVersion",
+  "title": "ValidateEdgeActionVersionUpdateWithoutChanges",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "testrg",
-    "api-version": "2025-12-01-preview",
+    "api-version": "2026-10-01",
     "edgeActionName": "edgeAction1",
     "version": "version1",
     "properties": {
       "properties": {
-        "deploymentType": "others"
+        "deploymentType": "zip",
+        "isDefaultVersion": "True"
       }
     }
   },
@@ -22,7 +23,7 @@
         "location": "global",
         "properties": {
           "provisioningState": "Succeeded",
-          "deploymentType": "others",
+          "deploymentType": "zip",
           "validationStatus": "Succeeded",
           "isDefaultVersion": "True",
           "lastPackageUpdateTime": "2024-05-25T16:19:23Z"
@@ -31,7 +32,8 @@
     },
     "202": {
       "headers": {
-        "location": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2025-09-01-preview"
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Cdn/operationresults/00000000-0000-0000-0000-000000000000?api-version=2026-10-01",
+        "Retry-After": 10
       }
     }
   }
