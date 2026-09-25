@@ -1,4 +1,4 @@
-import type { GitHubScriptArgs } from "../../src/github.ts";
+import type { Context, Core, GitHub, GitHubScriptArgs } from "../../src/github.ts";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts";
 
@@ -59,11 +59,11 @@ function createLabeledPayload({
 }
 
 describe("checkLabel", () => {
-  let github: import("../mocks.ts").GitHub & ReturnType<typeof createMockGithub>;
+  let github: GitHub & ReturnType<typeof createMockGithub>;
 
-  let core: import("../mocks.ts").Core;
+  let core: Core;
 
-  let context: import("../mocks.ts").Context;
+  let context: Context;
 
   beforeEach(() => {
     vi.resetAllMocks();

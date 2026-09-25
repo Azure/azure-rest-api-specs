@@ -2,8 +2,6 @@ import { RequestError } from "@octokit/request-error";
 import { vi, type Mock } from "vitest";
 import type { Context, Core, GitHub } from "../src/github.ts";
 
-export type { Context, Core, GitHub };
-
 export function createMockGithub(): GitHub & ReturnType<typeof createMockGithubImpl> {
   return createMockGithubImpl() as GitHub & ReturnType<typeof createMockGithubImpl>;
 }

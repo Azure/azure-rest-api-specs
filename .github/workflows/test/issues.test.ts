@@ -1,10 +1,7 @@
-import type { GitHub } from "../src/github.ts";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { defaultLogger } from "../../shared/src/logger.ts";
 import { getIssueNumber } from "../src/issues.ts";
 import { createMockGithub, createMockLogger } from "./mocks.ts";
-
-export type { GitHub };
 
 const mockGithub = createMockGithub();
 

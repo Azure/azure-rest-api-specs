@@ -1,4 +1,4 @@
-import type { GitHubScriptArgs } from "../../src/github.ts";
+import type { GitHub, GitHubScriptArgs } from "../../src/github.ts";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts";
 
@@ -29,7 +29,7 @@ describe("post-results", () => {
   const mockCore = createMockCore();
   const context = createMockContext();
 
-  function args(github: import("../mocks.ts").GitHub): GitHubScriptArgs {
+  function args(github: GitHub): GitHubScriptArgs {
     return {
       github,
       context,
@@ -53,7 +53,7 @@ describe("post-results", () => {
     vi.mocked(parseExistingComments).mockReturnValue([undefined, undefined]);
   });
 
-  function githubWithLabels(labels: string[]): import("../mocks.ts").GitHub {
+  function githubWithLabels(labels: string[]): GitHub {
     const github = createMockGithub();
     github.rest.pulls.get.mockResolvedValue({
       data: { labels: labels.map((name) => ({ name })) },
