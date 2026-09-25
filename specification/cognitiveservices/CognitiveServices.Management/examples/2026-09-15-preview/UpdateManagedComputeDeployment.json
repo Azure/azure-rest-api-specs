@@ -8,9 +8,11 @@
     "deploymentName": "gpt-oss-120b-gpu",
     "api-version": "2026-09-15-preview",
     "properties": {
-      "tags": {
-        "environment": "test",
-        "owner": "model-team"
+      "properties": {
+        "deploymentParameters": {
+          "environment": "test",
+          "owner": "model-team"
+        }
       },
       "sku": {
         "name": "GlobalManagedCompute",
@@ -25,11 +27,11 @@
         "name": "gpt-oss-120b-gpu",
         "type": "Microsoft.CognitiveServices/accounts/managedComputeDeployments",
         "etag": "\"0x8D...\"",
-        "tags": {
-          "environment": "test",
-          "owner": "model-team"
-        },
         "properties": {
+          "deploymentParameters": {
+            "environment": "test",
+            "owner": "model-team"
+          },
           "model": "azureml://registries/azureml-openai-oss/models/gpt-oss-120b/versions/4",
           "deploymentTemplate": "azureml://registries/azureml-openai-oss/deploymenttemplates/gpt-oss-120b-short-context/versions/1",
           "acceleratorType": "H100_80GB",
