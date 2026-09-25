@@ -50,7 +50,6 @@ it("searches affected services recursively, deduplicates, and sorts projects", a
   });
   expect(getChangedFiles).toHaveBeenCalledWith({
     cwd: root,
-    gitConfig: ["core.quotepath=false"],
     ...revisions,
     logger: expect.anything() as unknown,
   });

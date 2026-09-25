@@ -43,55 +43,84 @@ describe("changedFiles", () => {
       "specification/contosowidgetmanager/resource-manager/Microsoft.Contoso/stable/2021-11-01/examples/Employees_Get.json",
     ];
 
-    mockDiff.mockResolvedValue(files.join("\n"));
+    mockDiff.mockResolvedValue(files.join("\0") + "\0");
 
     await expect(getChangedFiles(options)).resolves.toEqual(files);
-    expect(mockDiff).toHaveBeenCalledWith(["--name-only", "HEAD^", "HEAD"]);
+    expect(mockDiff).toHaveBeenCalledWith(["--name-only", "-z", "HEAD^", "HEAD"]);
 
     const specFiles = files.filter((f) => f.startsWith("specification"));
-    mockDiff.mockResolvedValue(specFiles.join("\n"));
+    mockDiff.mockResolvedValue(specFiles.join("\0") + "\0");
     await expect(getChangedFiles({ ...options, paths: ["specification"] })).resolves.toEqual(
       specFiles,
     );
-    expect(mockDiff).toHaveBeenCalledWith(["--name-only", "HEAD^", "HEAD", "--", "specification"]);
+    expect(mockDiff).toHaveBeenCalledWith([
+      "--name-only",
+      "-z",
+      "HEAD^",
+      "HEAD",
+      "--",
+      "specification",
+    ]);
   });
 
   it("getChangedFiles returns empty array when no files are changed", async () => {
     mockDiff.mockResolvedValue("");
     await expect(getChangedFiles()).resolves.toEqual([]);
-    expect(mockDiff).toHaveBeenCalledWith(["--name-only", "HEAD^", "HEAD"]);
+    expect(mockDiff).toHaveBeenCalledWith(["--name-only", "-z", "HEAD^", "HEAD"]);
   });
 
   it("getChangedFiles accepts gitOptions parameter", async () => {
     const files = ["file1.json", "file2.json"];
-    mockDiff.mockResolvedValue(files.join("\n"));
+    mockDiff.mockResolvedValue(files.join("\0") + "\0");
 
     await expect(getChangedFiles({ gitOptions: ["--no-renames"] })).resolves.toEqual(files);
-    expect(mockDiff).toHaveBeenCalledWith(["--name-only", "--no-renames", "HEAD^", "HEAD"]);
+    expect(mockDiff).toHaveBeenCalledWith(["--name-only", "-z", "--no-renames", "HEAD^", "HEAD"]);
   });
 
-  it("getChangedFiles accepts per-command Git configuration", async () => {
-    const files = ["specification/service/examples/caf\u00e9.json"];
-    mockDiff.mockResolvedValue(files.join("\n"));
-    const cwd = resolve("repo");
-    await expect(getChangedFiles({ cwd, gitConfig: ["core.quotepath=false"] })).resolves.toEqual(
-      files,
-    );
-    expect(simpleGit.simpleGit).toHaveBeenCalledWith({
-      baseDir: cwd,
-      config: ["core.quotepath=false"],
-    });
+  it("getChangedFiles preserves non-ASCII names, quotes, backslashes, and whitespace", async () => {
+    const files = [
+      " leading.json",
+      "caf\u00e9.json",
+      'quote".json',
+      "back\\slash.json",
+      "tab\tname.json",
+      "line\nname.json",
+      "trailing.json ",
+    ];
+    mockDiff.mockResolvedValue(files.join("\0") + "\0");
+    await expect(getChangedFiles()).resolves.toEqual(files);
+  });
+
+  const readers = [
+    { name: "getChangedFiles", read: getChangedFiles },
+    { name: "getChangedFilesStatuses", read: getChangedFilesStatuses },
+  ];
+
+  it.each(readers)("$name does not mutate reusable path filters", async ({ read }) => {
+    mockDiff.mockResolvedValue("");
+    const paths = ["specification"];
+    await read({ paths });
+    await read({ paths });
+    expect(paths).toEqual(["specification"]);
+    expect(mockDiff.mock.calls[0]).toEqual(mockDiff.mock.calls[1]);
+  });
+
+  it.each(readers)("$name propagates Git errors", async ({ read }) => {
+    const error = new Error("Invalid revision");
+    mockDiff.mockRejectedValueOnce(error);
+    await expect(read()).rejects.toBe(error);
   });
 
   it("getChangedFiles accepts multiple gitOptions", async () => {
     const files = ["file1.json"];
-    mockDiff.mockResolvedValue(files.join("\n"));
+    mockDiff.mockResolvedValue(files.join("\0") + "\0");
 
     await expect(
       getChangedFiles({ gitOptions: ["--no-renames", "--find-copies"] }),
     ).resolves.toEqual(files);
     expect(mockDiff).toHaveBeenCalledWith([
       "--name-only",
+      "-z",
       "--no-renames",
       "--find-copies",
       "HEAD^",
@@ -308,15 +337,16 @@ describe("changedFiles", () => {
     it.each([{}, { logger: debugLogger }])(
       "should categorize files correctly with all types of changes (%o)",
       async (options) => {
-        const gitOutput = [
-          "M\t.github/src/changed-files.js",
-          "A\tspecification/new-service/readme.md",
-          "M\tspecification/existing-service/main.tsp",
-          "D\tspecification/old-service/contoso.json",
-          "R100\tspecification/service/old-name.json\tspecification/service/new-name.json",
-          "C90\tspecification/template/base.json\tspecification/service/derived.json",
-          "T\tspecification/service/type-changed.json",
-        ].join("\n");
+        const records = [
+          ["M", ".github/src/changed-files.js"],
+          ["A", "specification/new-service/readme.md"],
+          ["M", "specification/existing-service/main.tsp"],
+          ["D", "specification/old-service/contoso.json"],
+          ["R100", "specification/service/old-name.json", "specification/service/new-name.json"],
+          ["C90", "specification/template/base.json", "specification/service/derived.json"],
+          ["T", "specification/service/type-changed.json"],
+        ];
+        const gitOutput = records.flat().join("\0") + "\0";
 
         mockDiff.mockResolvedValue(gitOutput);
         let result = await getChangedFilesStatuses(options);
@@ -336,12 +366,13 @@ describe("changedFiles", () => {
           ],
           total: 7,
         });
-        expect(mockDiff).toHaveBeenCalledWith(["--name-status", "HEAD^", "HEAD"]);
+        expect(mockDiff).toHaveBeenCalledWith(["--name-status", "-z", "HEAD^", "HEAD"]);
 
-        const specGitOutput = gitOutput
-          .split("\n")
-          .filter((f) => f.includes("specification/"))
-          .join("\n");
+        const specGitOutput =
+          records
+            .filter((record) => record[1].startsWith("specification/"))
+            .flat()
+            .join("\0") + "\0";
         mockDiff.mockResolvedValue(specGitOutput);
         result = await getChangedFilesStatuses({ ...options, paths: ["specification"] });
         expect(result).toEqual({
@@ -361,6 +392,7 @@ describe("changedFiles", () => {
         });
         expect(mockDiff).toHaveBeenCalledWith([
           "--name-status",
+          "-z",
           "HEAD^",
           "HEAD",
           "--",
@@ -382,10 +414,10 @@ describe("changedFiles", () => {
     });
 
     it("should handle only additions", async () => {
-      const gitOutput = [
-        "A\tspecification/service1/readme.md",
-        "A\tspecification/service2/main.tsp",
-      ].join("\n");
+      const gitOutput =
+        ["A", "specification/service1/readme.md", "A", "specification/service2/main.tsp"].join(
+          "\0",
+        ) + "\0";
 
       mockDiff.mockResolvedValue(gitOutput);
       const result = await getChangedFilesStatuses();
@@ -399,10 +431,15 @@ describe("changedFiles", () => {
     });
 
     it("should handle only renames", async () => {
-      const gitOutput = [
-        "R95\told/path/file1.json\tnew/path/file1.json",
-        "R100\tservice/old.tsp\tservice/new.tsp",
-      ].join("\n");
+      const gitOutput =
+        [
+          "R95",
+          "old/path/file1.json",
+          "new/path/file1.json",
+          "R100",
+          "service/old.tsp",
+          "service/new.tsp",
+        ].join("\0") + "\0";
 
       mockDiff.mockResolvedValue(gitOutput);
       const result = await getChangedFilesStatuses();
@@ -431,14 +468,19 @@ describe("changedFiles", () => {
         cwd: "/custom/path",
       };
 
-      mockDiff.mockResolvedValue("A\ttest.json");
+      mockDiff.mockResolvedValue("A\0test.json\0");
       await getChangedFilesStatuses(options);
       expect(simpleGit.simpleGit).toHaveBeenCalledWith("/custom/path");
-      expect(mockDiff).toHaveBeenCalledWith(["--name-status", "origin/main", "feature-branch"]);
+      expect(mockDiff).toHaveBeenCalledWith([
+        "--name-status",
+        "-z",
+        "origin/main",
+        "feature-branch",
+      ]);
     });
 
     it("should accept gitOptions parameter", async () => {
-      mockDiff.mockResolvedValue("A\tfile1.json\nM\tfile2.json");
+      mockDiff.mockResolvedValue("A\0file1.json\0M\0file2.json\0");
       const result = await getChangedFilesStatuses({ gitOptions: ["--no-renames"] });
       expect(result).toEqual({
         additions: ["file1.json"],
@@ -447,11 +489,17 @@ describe("changedFiles", () => {
         renames: [],
         total: 2,
       });
-      expect(mockDiff).toHaveBeenCalledWith(["--name-status", "--no-renames", "HEAD^", "HEAD"]);
+      expect(mockDiff).toHaveBeenCalledWith([
+        "--name-status",
+        "-z",
+        "--no-renames",
+        "HEAD^",
+        "HEAD",
+      ]);
     });
 
     it("should accept multiple gitOptions", async () => {
-      mockDiff.mockResolvedValue("A\tfile1.json");
+      mockDiff.mockResolvedValue("A\0file1.json\0");
       const result = await getChangedFilesStatuses({
         gitOptions: ["--no-renames", "--find-copies"],
       });
@@ -464,6 +512,7 @@ describe("changedFiles", () => {
       });
       expect(mockDiff).toHaveBeenCalledWith([
         "--name-status",
+        "-z",
         "--no-renames",
         "--find-copies",
         "HEAD^",
@@ -474,10 +523,10 @@ describe("changedFiles", () => {
     it("should log categories selectively with a logger", async () => {
       // When only some categories are populated and a logger is provided, the per-category
       // if-blocks whose category is empty should take their false branch.
-      const gitOutput = [
-        "A\tspecification/service1/readme.md",
-        "A\tspecification/service2/main.tsp",
-      ].join("\n");
+      const gitOutput =
+        ["A", "specification/service1/readme.md", "A", "specification/service2/main.tsp"].join(
+          "\0",
+        ) + "\0";
 
       mockDiff.mockResolvedValue(gitOutput);
       const result = await getChangedFilesStatuses({ logger: debugLogger });
@@ -490,7 +539,7 @@ describe("changedFiles", () => {
       });
 
       // Also test with no additions so the additions log block's false branch is covered
-      const gitOutputNoAdditions = "M\tspecification/service1/readme.md";
+      const gitOutputNoAdditions = "M\0specification/service1/readme.md\0";
       mockDiff.mockResolvedValue(gitOutputNoAdditions);
       const result2 = await getChangedFilesStatuses({ logger: debugLogger });
       expect(result2).toEqual({
@@ -500,6 +549,42 @@ describe("changedFiles", () => {
         renames: [],
         total: 1,
       });
+    });
+
+    it("preserves literal filenames across mixed status records", async () => {
+      const records = [
+        ["A", " leading.json"],
+        ["M", "line\nbreak.json"],
+        ["D", 'quote".json'],
+        ["R100", "old\tname.json", "new\nname.json"],
+        ["C75", "back\\slash.json", "caf\u00e9.json"],
+        ["M", "trailing.json "],
+      ];
+      mockDiff.mockResolvedValue(records.flat().join("\0") + "\0");
+      await expect(getChangedFilesStatuses()).resolves.toEqual({
+        additions: [" leading.json", "caf\u00e9.json"],
+        modifications: ["line\nbreak.json", "trailing.json "],
+        deletions: ['quote".json'],
+        renames: [{ from: "old\tname.json", to: "new\nname.json" }],
+        total: 6,
+      });
+    });
+
+    it.each(["M", "M\0\0", "\0file.json\0"])(
+      "rejects incomplete status records: %j",
+      async (output) => {
+        mockDiff.mockResolvedValue(output);
+        await expect(getChangedFilesStatuses()).rejects.toThrow(
+          "Invalid NUL-delimited git diff --name-status output",
+        );
+      },
+    );
+
+    it.each(["R100", "C75"])("rejects a %s record without its destination", async (status) => {
+      mockDiff.mockResolvedValue(`${status}\0source.json\0`);
+      await expect(getChangedFilesStatuses()).rejects.toThrow(
+        "Missing destination in git diff rename/copy record",
+      );
     });
   });
 });

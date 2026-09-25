@@ -49,7 +49,6 @@ export async function findChangedProjects(
   const changedFiles = (
     await getChangedFiles({
       cwd: root,
-      gitConfig: ["core.quotepath=false"],
       baseCommitish: options.baseCommitish,
       headCommitish: options.headCommitish,
       logger: new ConsoleLogger(),
