@@ -28,65 +28,23 @@ namespace Azure.AI.Projects {
     Azure.AI.Projects.AgentSessionFiles.deleteSessionFile,
     Agents
   );
-  @@clientLocation(
-    Azure.AI.Projects.AgentOptimizationJobs.create,
-    Agents,
-    "!javascript"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentOptimizationJobs.get,
-    Agents,
-    "!javascript"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentOptimizationJobs.list,
-    Agents,
-    "!javascript"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentOptimizationJobs.cancel,
-    Agents,
-    "!javascript"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentOptimizationJobs.delete,
-    Agents,
-    "!javascript"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentOptimizationJobs.estimate,
-    Agents,
-    "!javascript"
-  );
+  @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.create, Agents);
+  @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.get, Agents);
+  @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.list, Agents);
+  @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.cancel, Agents);
+  @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.delete, Agents);
+  @@clientLocation(Azure.AI.Projects.AgentOptimizationJobs.estimate, Agents);
   @@clientLocation(
     Azure.AI.Projects.AgentOptimizationJobCandidates.listCandidates,
-    Agents,
-    "!javascript"
+    Agents
   );
   @@clientLocation(
     Azure.AI.Projects.AgentOptimizationJobCandidates.getCandidate,
-    Agents,
-    "!javascript"
+    Agents
   );
   @@clientLocation(
     Azure.AI.Projects.AgentOptimizationJobCandidates.promoteCandidate,
-    Agents,
-    "!javascript"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentOptimizationJobCandidates.listCandidates,
-    AgentOptimizationJobs,
-    "javascript"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentOptimizationJobCandidates.getCandidate,
-    AgentOptimizationJobs,
-    "javascript"
-  );
-  @@clientLocation(
-    Azure.AI.Projects.AgentOptimizationJobCandidates.promoteCandidate,
-    AgentOptimizationJobs,
-    "javascript"
+    Agents
   );
   @@clientLocation(
     Azure.AI.Projects.Microsoft365Publishing.publishAgentToMicrosoft365,
