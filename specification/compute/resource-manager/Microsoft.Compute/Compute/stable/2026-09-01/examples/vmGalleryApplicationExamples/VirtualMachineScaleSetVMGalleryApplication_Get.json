@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmScaleSetName": "myVMScaleSet",
+    "instanceId": "0",
+    "applicationName": "myGalleryApplication",
+    "api-version": "2026-09-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myVMScaleSet/virtualMachines/0/applications/myGalleryApplication",
+        "name": "myGalleryApplication",
+        "type": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines/applications",
+        "properties": {
+          "packageReferenceId": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/galleries/myGallery/applications/myApplication/versions/1.0.0",
+          "order": 1,
+          "tags": "myTag",
+          "manuallyManaged": false
+        }
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSetVMGalleryApplications_Get",
+  "title": "Get a gallery application installed on a virtual machine scale set VM."
+}
