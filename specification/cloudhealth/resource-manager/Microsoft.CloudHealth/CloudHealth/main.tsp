@@ -31,6 +31,9 @@ enum Versions {
 
   @doc("2026-09-01-preview")
   v2026_09_01_preview: "2026-09-01-preview",
+
+  @doc("2026-10-01-preview")
+  v2026_10_01_preview: "2026-10-01-preview",
 }
 
 alias ProviderName = "Microsoft.CloudHealth";
@@ -52,6 +55,15 @@ scalar string4096 extends string;
 @maxLength(256)
 @doc("String with max length validation of 256 characters")
 scalar string256 extends string;
+
+@minLength(1)
+@maxLength(256)
+scalar dimensionFilter256 extends string;
+
+@minLength(1)
+@maxLength(2048)
+@doc("String with max length validation of 2048 characters")
+scalar string2048 extends string;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
@@ -364,10 +376,9 @@ model ResourceMetricSignalDefinitionProperties
 
   @removed(Versions.v2026_09_01_preview)
   @renamedFrom(Versions.v2026_09_01_preview, "dimensionFilter")
+  @typeChangedFrom(Versions.v2026_01_01_preview, dimensionFilter256)
   @doc("Optional: Dimension filter to apply to the dimension. Must only be set if also Dimension is set.")
-  @minLength(1)
-  @maxLength(256)
-  dimensionFilterV1?: string;
+  dimensionFilterV1?: string2048;
 
   @added(Versions.v2026_09_01_preview)
   @doc("Optional: Dimension filter to apply to the dimension.")
@@ -1675,24 +1686,59 @@ model SignalConfiguration {
   @maxLength(256)
   signalId: string;
 
+  @added(Versions.v2026_10_01_preview)
+  @doc("Display name of the recommended signal configuration.")
+  @minLength(1)
+  @maxLength(260)
+  displayName?: string;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("Description of the recommended signal configuration.")
+  @maxLength(1024)
+  description?: string;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("Azure resource types to which the recommended signal configuration applies.")
+  @maxItems(20)
+  applicableResourceTypes?: string256[];
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("Interval in which the recommended signal is evaluated.")
+  refreshInterval?: RefreshInterval;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("Unit of the recommended signal result (e.g. Bytes, MilliSeconds, Percent, Count).")
+  @minLength(1)
+  @maxLength(100)
+  dataUnit?: string;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("Kind-specific settings for the recommended signal.")
+  configuration: SignalRecommendationConfiguration;
+
+  @removed(Versions.v2026_10_01_preview)
   @doc("Metric namespace (e.g. 'microsoft.compute/virtualmachines').")
   @minLength(1)
   @maxLength(256)
   metricNamespace?: string;
 
+  @removed(Versions.v2026_10_01_preview)
   @doc("Name of the metric (e.g. 'Percentage CPU').")
   @minLength(1)
   @maxLength(256)
   metricName?: string;
 
+  @removed(Versions.v2026_10_01_preview)
   @doc("Type of aggregation to apply to the metric.")
   aggregationType?: MetricAggregationType;
 
+  @removed(Versions.v2026_10_01_preview)
   @doc("Unit of the metric (e.g. Percent, Bytes, Count).")
   @minLength(1)
   @maxLength(100)
   unit?: string;
 
+  @removed(Versions.v2026_10_01_preview)
   @doc("Time range of the metric. ISO 8601 duration format (e.g. 'PT5M').")
   @minLength(1)
   @maxLength(100)
@@ -1700,11 +1746,11 @@ model SignalConfiguration {
 
   @removed(Versions.v2026_09_01_preview)
   @renamedFrom(Versions.v2026_09_01_preview, "dimensionFilter")
+  @typeChangedFrom(Versions.v2026_01_01_preview, dimensionFilter256)
   @doc("Optional dimension filter to apply to the metric.")
-  @minLength(1)
-  @maxLength(256)
-  dimensionFilterV1?: string;
+  dimensionFilterV1?: string2048;
 
+  @removed(Versions.v2026_10_01_preview)
   @added(Versions.v2026_09_01_preview)
   @doc("Optional dimension filter to apply to the metric.")
   @minLength(1)
@@ -1713,6 +1759,117 @@ model SignalConfiguration {
 
   @doc("Evaluation rules with recommended thresholds.")
   evaluationRules?: EvaluationRule;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("Supported signal recommendation kinds.")
+union SignalRecommendationKind {
+  string,
+
+  @doc("Azure Resource Metric recommendation.")
+  AzureResourceMetric: "AzureResourceMetric",
+
+  @doc("Log Analytics Query recommendation.")
+  LogAnalyticsQuery: "LogAnalyticsQuery",
+
+  @doc("Prometheus Metrics Query recommendation.")
+  PrometheusMetricsQuery: "PrometheusMetricsQuery",
+}
+
+@added(Versions.v2026_10_01_preview)
+@discriminator("signalKind")
+@doc("Kind-specific signal recommendation configuration.")
+model SignalRecommendationConfiguration {
+  @doc("Kind of the recommended signal.")
+  signalKind: SignalRecommendationKind;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("Azure Resource Metric recommendation configuration.")
+model AzureResourceMetricRecommendationConfiguration
+  extends SignalRecommendationConfiguration {
+  @doc("Kind of the recommended signal.")
+  signalKind: SignalRecommendationKind.AzureResourceMetric;
+
+  @doc("Metric namespace.")
+  @minLength(1)
+  @maxLength(256)
+  metricNamespace: string;
+
+  @doc("Name of the metric.")
+  @minLength(1)
+  @maxLength(256)
+  metricName: string;
+
+  @doc("Type of aggregation to apply to the metric.")
+  aggregationType: MetricAggregationType;
+
+  @doc("Time range of the metric in ISO 8601 duration format (e.g. 'PT5M').")
+  @minLength(1)
+  @maxLength(100)
+  timeGrain: string;
+
+  @doc("Optional dimension filter to apply to the metric.")
+  @minLength(1)
+  @maxLength(2048)
+  dimensionFilter?: string;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("Log Analytics Query recommendation configuration.")
+model LogAnalyticsQueryRecommendationConfiguration
+  extends SignalRecommendationConfiguration {
+  @doc("Kind of the recommended signal. This value indicates that a Log Analytics workspace is required.")
+  signalKind: SignalRecommendationKind.LogAnalyticsQuery;
+
+  @doc("Query text in KQL syntax. Supported entity template variables, such as `{{entity.azureResourceId}}`, may appear in the query.")
+  @minLength(1)
+  @maxLength(5000)
+  queryText: string;
+
+  @doc("Time range of the signal in ISO 8601 duration format (e.g. 'PT5M'). If not specified, the KQL query must define a time range.")
+  @minLength(1)
+  @maxLength(100)
+  timeGrain?: string;
+
+  @doc("Name of the numeric result column to evaluate against the thresholds.")
+  @minLength(1)
+  @maxLength(100)
+  valueColumnName?: string;
+
+  @doc("Log Analytics tables required by the query.")
+  @maxItems(10)
+  requiredTables?: string256[];
+
+  @doc("Diagnostic setting categories required to populate the query's tables.")
+  @maxItems(20)
+  requiredDiagnosticSettingCategories?: string256[];
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("Prometheus Metrics Query recommendation configuration.")
+model PrometheusMetricsRecommendationConfiguration
+  extends SignalRecommendationConfiguration {
+  @doc("Kind of the recommended signal. This value indicates that an Azure Monitor workspace is required.")
+  signalKind: SignalRecommendationKind.PrometheusMetricsQuery;
+
+  @doc("Query text in PromQL syntax. Supported entity template variables, such as `{{entity.name}}`, may appear in the query.")
+  @minLength(1)
+  @maxLength(5000)
+  queryText: string;
+
+  @doc("Time range of the signal in ISO 8601 duration format (e.g. 'PT5M').")
+  @minLength(1)
+  @maxLength(100)
+  timeGrain?: string;
+
+  @doc("Prometheus metrics required by the query.")
+  @maxItems(20)
+  requiredMetrics?: string256[];
+
+  @doc("Prometheus scrape targets required to populate the query's metrics.")
+  @maxItems(10)
+  requiredScrapeTargets?: string256[];
 }
 
 alias TimestampQueryParam = {

@@ -384,6 +384,10 @@ suppressions:
   - code: XMSSecretInResponse
     reason: Existing secret fields maintained for backward compatibility.
     from: ComputeRP.json
+  - code: XMSSecretInResponse
+    reason: metadataKey is a metadata field name, not a cryptographic key. Wire-format name is fixed by existing CAPS backend serialization.
+    from: GalleryRP.json
+    where: $.definitions.MetadataKeyValue.properties.metadataKey
   - code: LroLocationHeader
     reason: Existing LRO operation does not include Location header for backward compatibility.
     from: ComputeRP.json
@@ -887,7 +891,7 @@ input-file:
   - stable/2026-04-01/ComputeRP.json
   - stable/2026-10-02/DiskRP.json
   - stable/2021-07-01/skus.json
-  - stable/2025-12-03/GalleryRP.json
+  - stable/2026-03-03/GalleryRP.json
 ```
 
 ### Tag: package-2026-10-02-only
@@ -897,6 +901,27 @@ These settings apply only when `--tag=package-2026-10-02-only` is specified on t
 ```yaml $(tag) == 'package-2026-10-02-only'
 input-file:
   - stable/2026-10-02/DiskRP.json
+```
+
+### Tag: package-2026-03-03
+
+These settings apply only when `--tag=package-2026-03-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-03-03'
+input-file:
+  - stable/2026-04-01/ComputeRP.json
+  - stable/2026-03-02/DiskRP.json
+  - stable/2021-07-01/skus.json
+  - stable/2026-03-03/GalleryRP.json
+```
+
+### Tag: package-2026-03-03-only
+
+These settings apply only when `--tag=package-2026-03-03-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-03-03-only'
+input-file:
+  - stable/2026-03-03/GalleryRP.json
 ```
 
 ### Tag: package-2026-04-01
