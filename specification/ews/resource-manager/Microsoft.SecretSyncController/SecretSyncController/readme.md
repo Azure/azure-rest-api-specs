@@ -27,7 +27,16 @@ These are the global settings for the SecretSyncController.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-08-21-preview
+tag: package-2026-09-25-preview
+```
+
+### Tag: package-2026-09-25-preview
+
+These settings apply only when `--tag=package-2026-09-25-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-09-25-preview'
+input-file:
+  - preview/2026-09-25-preview/secretsynccontroller.json
 ```
 
 ### Tag: package-2024-08-21-preview
