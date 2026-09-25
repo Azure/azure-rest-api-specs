@@ -1084,6 +1084,14 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 
 @@alternateType(
+  OpenAI.MisalignmentErrorDetailsResource,
+  {
+    identity: "com.openai.models.ErrorObject.Misalignment",
+  },
+  "java"
+);
+
+@@alternateType(
   OpenAI.RealtimeServerEventInputAudioBufferDtmfEventReceived.received_at,
   FoundryTimestamp,
   "java"
