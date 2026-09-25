@@ -64,4 +64,58 @@ namespace Microsoft.Migrate {
   }
 }
 
+// C# client naming customizations.
+@@clientName(ArtifactUploadUrlRequest, "ArtifactUploadUrlContent", "csharp");
+@@clientName(ArtifactUploadUrlResponse, "ArtifactUploadUrlResult", "csharp");
+@@clientName(ArtifactUploadUrlResponse.uploadUrl, "uploadUri", "csharp");
+@@clientName(
+  ArtifactDownloadUrlRequest,
+  "ArtifactDownloadUrlContent",
+  "csharp"
+);
+@@clientName(
+  ArtifactDirectoryDownloadUrlRequest,
+  "ArtifactDirectoryDownloadUrlContent",
+  "csharp"
+);
+@@clientName(
+  ArtifactFileDownloadUrlRequest,
+  "ArtifactFileDownloadUrlContent",
+  "csharp"
+);
+@@clientName(
+  ArtifactDownloadUrlResponse,
+  "ArtifactDownloadUrlResult",
+  "csharp"
+);
+@@clientName(ArtifactDownloadUrlResponse.downloadUrl, "downloadUri", "csharp");
+@@clientName(RunbookStepAddRequest, "RunbookStepAddContent", "csharp");
+@@clientName(
+  RunbookManualStepAddRequest,
+  "RunbookManualStepAddContent",
+  "csharp"
+);
+@@clientName(
+  RunbookApprovalStepAddRequest,
+  "RunbookApprovalStepAddContent",
+  "csharp"
+);
+@@clientName(RunbookStepUpdateRequest, "RunbookStepUpdateContent", "csharp");
+@@clientName(RunbookStepDeleteRequest, "RunbookStepDeleteContent", "csharp");
+@@clientName(
+  RunbookWorkstreamsMergeRequest,
+  "RunbookWorkstreamsMergeContent",
+  "csharp"
+);
+@@clientName(
+  RunbookWorkstreamSplitRequest,
+  "RunbookWorkstreamSplitContent",
+  "csharp"
+);
+@@clientName(
+  RunbookExecutionActionRequest,
+  "RunbookExecutionActionContent",
+  "csharp"
+);
+
 @@alternateType(Tasks.create::parameters.resource, TaskCreate, "javascript");
