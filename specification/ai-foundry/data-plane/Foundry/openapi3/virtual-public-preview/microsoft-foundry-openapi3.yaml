@@ -85776,7 +85776,30 @@ components:
           minLength: 1
           description: Identifier of the session whose heartbeat was refreshed, when included by the service.
       description: Response from POST /fine_tuning/sessions/{sessionId}/heartbeat.
-    SessionFineTuning.FineTuningImageChunk:
+    SessionFineTuning.FineTuningImageFormat:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - jpeg
+            - png
+            - webp
+      description: Supported encodings for an image supplied as model input.
+    SessionFineTuning.FineTuningInputChunk:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/SessionFineTuning.FineTuningInputChunkType'
+          description: Identifies which model input chunk variant is supplied.
+      discriminator:
+        propertyName: type
+        mapping:
+          text: '#/components/schemas/SessionFineTuning.FineTuningInputChunkText'
+          image: '#/components/schemas/SessionFineTuning.FineTuningInputChunkImage'
+      description: A text-token or image chunk within a model input, identified by its type.
+    SessionFineTuning.FineTuningInputChunkImage:
       type: object
       required:
         - type
@@ -85788,8 +85811,7 @@ components:
           type: string
           enum:
             - image
-          description: Image input tag that distinguishes encoded image data from a token-only chunk.
-          default: image
+          description: Identifies this chunk as an encoded image.
         data:
           type: string
           contentEncoding: base64
@@ -85802,24 +85824,40 @@ components:
           format: int32
           minimum: 1
           description: Number of model tokens expected to represent this image.
+      allOf:
+        - $ref: '#/components/schemas/SessionFineTuning.FineTuningInputChunk'
       description: |-
         An image supplied as part of a multimodal input.
         Each decoded image must not exceed 10 MB. The service validates the image
         content and token count at runtime.
-    SessionFineTuning.FineTuningImageFormat:
+    SessionFineTuning.FineTuningInputChunkText:
+      type: object
+      required:
+        - type
+        - tokens
+      properties:
+        type:
+          type: string
+          enum:
+            - text
+          description: Identifies this chunk as text tokens.
+        tokens:
+          type: array
+          items:
+            type: integer
+            format: int32
+          description: Sequence of token IDs in this chunk.
+      allOf:
+        - $ref: '#/components/schemas/SessionFineTuning.FineTuningInputChunk'
+      description: A contiguous block of token IDs forming part of a model input.
+    SessionFineTuning.FineTuningInputChunkType:
       anyOf:
         - type: string
         - type: string
           enum:
-            - jpeg
-            - png
-            - webp
-      description: Supported encodings for an image supplied as model input.
-    SessionFineTuning.FineTuningInputChunk:
-      anyOf:
-        - $ref: '#/components/schemas/SessionFineTuning.FineTuningModelInputChunk'
-        - $ref: '#/components/schemas/SessionFineTuning.FineTuningImageChunk'
-      description: A text-token or image chunk within a model input.
+            - text
+            - image
+      description: Identifies the content carried by a model input chunk.
     SessionFineTuning.FineTuningLossFn:
       anyOf:
         - type: string
@@ -85844,18 +85882,6 @@ components:
             Chunks forming the complete model input. At most 64 image chunks are
             allowed per example; the service enforces this limit at runtime.
       description: Full model input as an ordered sequence of token-ID and image chunks.
-    SessionFineTuning.FineTuningModelInputChunk:
-      type: object
-      required:
-        - tokens
-      properties:
-        tokens:
-          type: array
-          items:
-            type: integer
-            format: int32
-          description: Sequence of token IDs in this chunk.
-      description: A contiguous block of token IDs forming part of a model input.
     SessionFineTuning.FineTuningPendingOperation:
       type: object
       required:

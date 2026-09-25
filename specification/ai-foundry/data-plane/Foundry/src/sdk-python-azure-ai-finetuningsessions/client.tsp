@@ -173,6 +173,12 @@ namespace Azure.AI.FineTuning.Sessions;
 @@clientName(Loom.SessionType, "SessionType", "python");
 @@clientName(Loom.StopCriteria, "StopCriteria", "python");
 @@clientName(Loom.ModelInputChunk, "ModelInputChunk", "python");
+@@clientName(Loom.ModelInput, "ModelInput", "python");
+@@clientName(FineTuningInputChunk, "InputChunk", "python");
+@@clientName(FineTuningInputChunkType, "InputChunkType", "python");
+@@clientName(FineTuningInputChunkImage, "ImageChunk", "python");
+// Preserve the existing ImageChunk.format string API and local validation.
+@@alternateType(FineTuningImageFormat, string, "python");
 @@clientName(Loom.Cursor, "Cursor", "python");
 @@clientName(Loom.Datum, "Datum", "python");
 @@clientName(Loom.Session, "Session", "python");
@@ -184,6 +190,7 @@ namespace Azure.AI.FineTuning.Sessions;
 @@usage(Loom.StopCriteria, Usage.input | Usage.output, "python");
 @@usage(Loom.TensorData, Usage.input | Usage.output, "python");
 @@usage(Loom.ModelInputChunk, Usage.input | Usage.output, "python");
+@@usage(Loom.ModelInput, Usage.input | Usage.output, "python");
 @@usage(Loom.Cursor, Usage.input | Usage.output, "python");
 @@usage(Loom.LossFnConfig, Usage.input | Usage.output, "python");
 @@usage(Loom.Datum, Usage.input | Usage.output, "python");
@@ -261,11 +268,6 @@ namespace Azure.AI.FineTuning.Sessions;
   "python"
 );
 @@alternateType(
-  Azure.AI.Projects.SessionFineTuning.FineTuningModelInput,
-  Loom.ModelInput,
-  "python"
-);
-@@alternateType(
   Azure.AI.Projects.SessionFineTuning.FineTuningCompleteResponse,
   Loom.OperationResult,
   "python"
@@ -321,9 +323,16 @@ namespace Azure.AI.FineTuning.Sessions;
   Loom.ApiErrorResponse,
   "python"
 );
-@@alternateType(
+// Generate the opt-in enum from its sole shared declaration. Existing members
+// retain their names/wire values; the remaining shared members are additive.
+@@clientName(
   Azure.AI.Projects.FoundryFeaturesOptInKeys,
-  Loom.FoundryFeaturesOptInKeys,
+  "FoundryFeaturesOptInKeys",
+  "python"
+);
+@@usage(
+  Azure.AI.Projects.FoundryFeaturesOptInKeys,
+  Usage.input | Usage.output,
   "python"
 );
 

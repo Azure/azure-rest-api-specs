@@ -1,6 +1,12 @@
-// Python preview compatibility models, not a second service contract.
-// Shared shapes below reference the authoritative REST declarations directly;
-// client.tsp supplies Python names and maps only the compatibility exceptions.
+// Python-only generation projections, imported by client.tsp, not the REST entrypoint.
+// Authoritative wire models belong in ../session-finetuning/models.tsp. Shared
+// shapes below alias those declarations instead of maintaining another copy.
+// The remaining models are deliberately different Python API shapes: for example,
+// required Adam constructor arguments where REST has optional service defaults,
+// and legacy OperationResult classes where REST returns request-status envelopes.
+// Moving those projections into the service file would misstate its wire contract
+// or change other SDKs. New service models must be defined in the service file;
+// only justified Python compatibility exceptions belong here.
 // Keep this file out of the REST entrypoint. No service or operations are declared.
 //
 // Remaining definitions preserve existing constructor requiredness/defaults,
@@ -24,7 +30,7 @@ alias CheckpointType = Azure.AI.Projects.SessionFineTuning.FineTuningCheckpointT
 alias LossFn = Azure.AI.Projects.SessionFineTuning.FineTuningLossFn;
 alias SessionType = Azure.AI.Projects.SessionFineTuning.FineTuningSessionType;
 alias StopCriteria = Azure.AI.Projects.SessionFineTuning.FineTuningStopCriteria;
-alias ModelInputChunk = Azure.AI.Projects.SessionFineTuning.FineTuningModelInputChunk;
+alias ModelInputChunk = Azure.AI.Projects.SessionFineTuning.FineTuningInputChunkText;
 alias Cursor = Azure.AI.Projects.SessionFineTuning.FineTuningCursor;
 alias LossFnConfig = Azure.AI.Projects.SessionFineTuning.LossFnConfig;
 alias Datum = Azure.AI.Projects.SessionFineTuning.FineTuningDatum;
@@ -36,30 +42,6 @@ alias Session = Azure.AI.Projects.SessionFineTuning.FineTuningSession;
 alias SessionList = Azure.AI.Projects.SessionFineTuning.FineTuningSessionList;
 alias CheckpointList = Azure.AI.Projects.SessionFineTuning.FineTuningCheckpointList;
 alias SaveCheckpointRequest = Azure.AI.Projects.SessionFineTuning.SaveCheckpointRequest;
-
-/** Type of FoundryFeaturesOptInKeys. */
-@usage(Usage.input | Usage.output, "python")
-union FoundryFeaturesOptInKeys {
-  /** EVALUATIONS_V1_PREVIEW. */
-  evaluations_v1_preview: "Evaluations=V1Preview",
-
-  /** SCHEDULES_V1_PREVIEW. */
-  schedules_v1_preview: "Schedules=V1Preview",
-
-  /** RED_TEAMS_V1_PREVIEW. */
-  red_teams_v1_preview: "RedTeams=V1Preview",
-
-  /** INSIGHTS_V1_PREVIEW. */
-  insights_v1_preview: "Insights=V1Preview",
-
-  /** MEMORY_STORES_V1_PREVIEW. */
-  memory_stores_v1_preview: "MemoryStores=V1Preview",
-
-  /** FINETUNING_SESSIONS_V1_PREVIEW. */
-  finetuning_sessions_v1_preview: "FineTuningSessions=V1Preview",
-
-  string,
-}
 
 /** Lifecycle status of an async fine-tuning operation — standard Azure LRO values. */
 @usage(Usage.input | Usage.output, "python")
@@ -351,12 +333,8 @@ model LossFnInputs {
   logprobs?: TensorData;
 }
 
-/** Full model input as one or more token-ID chunks. */
-@usage(Usage.input | Usage.output, "python")
-model ModelInput {
-  /** Ordered list of token-ID chunks that together form the complete model input. */
-  chunks: ModelInputChunk[];
-}
+/** Reuse the service's discriminated text/image model input directly. */
+alias ModelInput = Azure.AI.Projects.SessionFineTuning.FineTuningModelInput;
 
 /** OptimStepOperationResult. */
 @usage(Usage.input | Usage.output, "python")

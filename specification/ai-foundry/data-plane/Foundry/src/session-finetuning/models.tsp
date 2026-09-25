@@ -102,13 +102,15 @@ union FineTuningImageFormat {
   webp: "webp",
 }
 
-/** A text-token or image chunk within a model input. */
-union FineTuningInputChunk {
+/** Identifies the content carried by a model input chunk. */
+union FineTuningInputChunkType {
+  string,
+
   /** A contiguous sequence of text tokens. */
-  text: FineTuningModelInputChunk,
+  text: "text",
 
   /** An encoded image. */
-  image: FineTuningImageChunk,
+  image: "image",
 }
 
 // ─── Common primitives ────────────────────────────────────────────────────────
@@ -119,8 +121,18 @@ model TensorData {
   data: float64[];
 }
 
+/** A text-token or image chunk within a model input, identified by its type. */
+@discriminator("type")
+model FineTuningInputChunk {
+  /** Identifies which model input chunk variant is supplied. */
+  type: FineTuningInputChunkType;
+}
+
 /** A contiguous block of token IDs forming part of a model input. */
-model FineTuningModelInputChunk {
+model FineTuningInputChunkText extends FineTuningInputChunk {
+  /** Identifies this chunk as text tokens. */
+  type: FineTuningInputChunkType.text;
+
   /** Sequence of token IDs in this chunk. */
   tokens: int32[];
 }
@@ -130,9 +142,9 @@ model FineTuningModelInputChunk {
  * Each decoded image must not exceed 10 MB. The service validates the image
  * content and token count at runtime.
  */
-model FineTuningImageChunk {
-  /** Image input tag that distinguishes encoded image data from a token-only chunk. */
-  type: "image" = "image";
+model FineTuningInputChunkImage extends FineTuningInputChunk {
+  /** Identifies this chunk as an encoded image. */
+  type: FineTuningInputChunkType.image;
 
   /** Image bytes, serialized as a base64-encoded string. */
   @encode("base64")

@@ -93170,41 +93170,6 @@
         },
         "description": "Response from POST /fine_tuning/sessions/{sessionId}/heartbeat."
       },
-      "SessionFineTuning.FineTuningImageChunk": {
-        "type": "object",
-        "required": [
-          "type",
-          "data",
-          "format",
-          "expected_tokens"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "enum": [
-              "image"
-            ],
-            "description": "Image input tag that distinguishes encoded image data from a token-only chunk.",
-            "default": "image"
-          },
-          "data": {
-            "type": "string",
-            "contentEncoding": "base64",
-            "description": "Image bytes, serialized as a base64-encoded string."
-          },
-          "format": {
-            "$ref": "#/components/schemas/SessionFineTuning.FineTuningImageFormat",
-            "description": "Encoding of the supplied image bytes."
-          },
-          "expected_tokens": {
-            "type": "integer",
-            "format": "int32",
-            "minimum": 1,
-            "description": "Number of model tokens expected to represent this image."
-          }
-        },
-        "description": "An image supplied as part of a multimodal input.\nEach decoded image must not exceed 10 MB. The service validates the image\ncontent and token count at runtime."
-      },
       "SessionFineTuning.FineTuningImageFormat": {
         "anyOf": [
           {
@@ -93222,15 +93187,108 @@
         "description": "Supported encodings for an image supplied as model input."
       },
       "SessionFineTuning.FineTuningInputChunk": {
-        "anyOf": [
-          {
-            "$ref": "#/components/schemas/SessionFineTuning.FineTuningModelInputChunk"
+        "type": "object",
+        "required": [
+          "type"
+        ],
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/SessionFineTuning.FineTuningInputChunkType",
+            "description": "Identifies which model input chunk variant is supplied."
+          }
+        },
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "text": "#/components/schemas/SessionFineTuning.FineTuningInputChunkText",
+            "image": "#/components/schemas/SessionFineTuning.FineTuningInputChunkImage"
+          }
+        },
+        "description": "A text-token or image chunk within a model input, identified by its type."
+      },
+      "SessionFineTuning.FineTuningInputChunkImage": {
+        "type": "object",
+        "required": [
+          "type",
+          "data",
+          "format",
+          "expected_tokens"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "image"
+            ],
+            "description": "Identifies this chunk as an encoded image."
           },
+          "data": {
+            "type": "string",
+            "contentEncoding": "base64",
+            "description": "Image bytes, serialized as a base64-encoded string."
+          },
+          "format": {
+            "$ref": "#/components/schemas/SessionFineTuning.FineTuningImageFormat",
+            "description": "Encoding of the supplied image bytes."
+          },
+          "expected_tokens": {
+            "type": "integer",
+            "format": "int32",
+            "minimum": 1,
+            "description": "Number of model tokens expected to represent this image."
+          }
+        },
+        "allOf": [
           {
-            "$ref": "#/components/schemas/SessionFineTuning.FineTuningImageChunk"
+            "$ref": "#/components/schemas/SessionFineTuning.FineTuningInputChunk"
           }
         ],
-        "description": "A text-token or image chunk within a model input."
+        "description": "An image supplied as part of a multimodal input.\nEach decoded image must not exceed 10 MB. The service validates the image\ncontent and token count at runtime."
+      },
+      "SessionFineTuning.FineTuningInputChunkText": {
+        "type": "object",
+        "required": [
+          "type",
+          "tokens"
+        ],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "text"
+            ],
+            "description": "Identifies this chunk as text tokens."
+          },
+          "tokens": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "Sequence of token IDs in this chunk."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/SessionFineTuning.FineTuningInputChunk"
+          }
+        ],
+        "description": "A contiguous block of token IDs forming part of a model input."
+      },
+      "SessionFineTuning.FineTuningInputChunkType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "text",
+              "image"
+            ]
+          }
+        ],
+        "description": "Identifies the content carried by a model input chunk."
       },
       "SessionFineTuning.FineTuningLossFn": {
         "anyOf": [
@@ -93265,23 +93323,6 @@
           }
         },
         "description": "Full model input as an ordered sequence of token-ID and image chunks."
-      },
-      "SessionFineTuning.FineTuningModelInputChunk": {
-        "type": "object",
-        "required": [
-          "tokens"
-        ],
-        "properties": {
-          "tokens": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "description": "Sequence of token IDs in this chunk."
-          }
-        },
-        "description": "A contiguous block of token IDs forming part of a model input."
       },
       "SessionFineTuning.FineTuningPendingOperation": {
         "type": "object",
