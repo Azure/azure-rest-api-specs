@@ -396,7 +396,7 @@ read-only `github` toolset. If any check fails, act as directed and stop.
    If the PR carries `skip-arm-review`, call `noop` and stop (opt-out).
    From the same response, capture the exact label names matching
    `BreakingChange-Approved-*`, `Versioning-Approved-*`,
-   `Approved-Suppression`, or `Approved-TypeSpecSuppression`. This is the
+   `Approved-Suppression`, or `typespec-suppressions-approved`. This is the
    approval-label inventory for the review; record `none` when it is empty.
 3. **`specification/` scope** — call `pull_request_read(method: "get_files")` and
    paginate the file list. **Check whether it was truncated before deciding
@@ -892,7 +892,7 @@ comment. Never prefix a bare finding number with `#`.
 For breaking-change findings, use `BreakingChange-Approved-*` for cross-version
 breaks and `Versioning-Approved-*` for same-version or published-version
 exceptions. For suppression findings, use `Approved-Suppression` for OpenAPI
-suppression flows and `Approved-TypeSpecSuppression` for TypeSpec suppression
+suppression flows and `typespec-suppressions-approved` for TypeSpec suppression
 flows. The `Approval context` paragraph must name an observed matching label or
 state that no matching label was observed. A label does not remove or downgrade
 the finding; it changes the remaining author action when the approval covers

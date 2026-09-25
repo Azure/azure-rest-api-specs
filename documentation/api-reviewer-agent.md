@@ -231,7 +231,7 @@ changed. Human-authored threads are never resolved automatically.
 Every review records the exact API-review approval labels observed on the PR
 next to the reviewed commit. The recognized labels are
 `BreakingChange-Approved-*`, `Versioning-Approved-*`,
-`Approved-Suppression`, and `Approved-TypeSpecSuppression`; the review states
+`Approved-Suppression`, and `typespec-suppressions-approved`; the review states
 `none` when no matching label is present.
 
 Breaking-change and suppression findings are still posted when a matching

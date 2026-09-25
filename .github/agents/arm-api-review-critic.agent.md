@@ -430,7 +430,7 @@ re-verify the reconciliation plan (Input #6).
 
 Call `pull_request_read(method: "get")` and independently inventory the exact current PR label
 names matching `BreakingChange-Approved-*`, `Versioning-Approved-*`,
-`Approved-Suppression`, or `Approved-TypeSpecSuppression`. Compare that
+`Approved-Suppression`, or `typespec-suppressions-approved`. Compare that
 inventory with the report's `Approval labels observed` line.
 
 - A missing inventory line, an omitted matching label, or a listed label that
@@ -439,7 +439,7 @@ inventory with the report's `Approval labels observed` line.
   paragraph names the observed applicable label or states that no label in the
   applicable breaking-change/versioning family was observed.
 - For each suppression finding, perform the same check using
-  `Approved-Suppression` or `Approved-TypeSpecSuppression` as applicable.
+  `Approved-Suppression` or `typespec-suppressions-approved` as applicable.
 - Missing or contradictory finding guidance is
   `FAIL: approval-context-missing`.
 - A label must not cause a finding to be dropped or downgraded. The context must

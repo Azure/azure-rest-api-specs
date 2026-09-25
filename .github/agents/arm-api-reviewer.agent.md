@@ -657,7 +657,7 @@ binds every previous-version fetch.
 
 - From the same PR metadata response, capture the exact label names matching
   `BreakingChange-Approved-*`, `Versioning-Approved-*`,
-  `Approved-Suppression`, or `Approved-TypeSpecSuppression`. Record
+  `Approved-Suppression`, or `typespec-suppressions-approved`. Record
   `Approval labels observed: none` when there are no matches. Do not include
   SDK-language, package-name, or namespace approval labels in this inventory.
 - Every PR-head file fetch (changed files in Step 1, re-fetches inside Step 5, Critic re-fetches in Step 7) MUST pin to the session SHA - never to a branch name, never to `HEAD`, never to a freshly re-resolved `head.sha`. Previous-version files MUST pin to the recorded full base commit SHA, not a branch or the session SHA.
