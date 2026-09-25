@@ -32,7 +32,7 @@ When adding a new API version:
 ``` yaml
 # common
 openapi-type: data-plane
-tag: package-2026-08-01-preview
+tag: package-2026-10-01
 
 directive:
   - where:
@@ -171,6 +171,19 @@ directive:
       -  $.definitions.SuggestResult.properties["@search.text"]
     suppress:
       - RequiredReadOnlyProperties
+```
+
+### Tag: package-2026-10-01
+
+These settings apply only when `--tag=package-2026-10-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-10-01'
+input-file:
+  - stable/2026-10-01/search.json
+suppressions:
+  - code: LroExtension
+    from: search.json
+    reason: Legacy swagger file
 ```
 
 ### Tag: package-2026-08-01-preview
