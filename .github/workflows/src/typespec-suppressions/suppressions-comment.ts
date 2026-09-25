@@ -17,6 +17,7 @@ import type { Core } from "../github.ts";
 import { execFile } from "../../../shared/src/exec.ts";
 import { PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { byDate, invert } from "../../../shared/src/sort.ts";
+import { TYPESPEC_SUPPRESSIONS_APPROVED_LABEL } from "../label.ts";
 
 import { createHash } from "crypto";
 import fs from "fs/promises";
@@ -75,7 +76,6 @@ export const TYPESPEC_SUPPRESSIONS_REPORT_ARTIFACT_NAME = "typespec-suppressions
 export const TYPESPEC_SUPPRESSIONS_COMMENT_IDENTIFIER = "TypeSpecSuppressionsReview";
 export const TYPESPEC_SUPPRESSIONS_SECTION_TITLE =
   "TypeSpec suppressions requiring review (testing, non-blocking)";
-export const APPROVED_SUPPRESSION_LABEL = "Approved-TypeSpecSuppression";
 // GitHub caps comment bodies at ~65k characters, so only render a handful of suppressions
 // inline per table (new and changed) and link to the analysis log for the full list.
 const MAX_SUPPRESSIONS_SHOWN = 5;
@@ -192,6 +192,12 @@ function pluralize(count: number, singular: string, plural: string = `${singular
   return `${count} ${count === 1 ? singular : plural}`;
 }
 
+function getReportedSuppressions(
+  report: TypeSpecSuppressionsReport,
+): TypeSpecSuppressionsReport | TypeSpecCheckedSuppressions {
+  return report.checkedSuppressions ?? report;
+}
+
 function renderRuleLabel(suppression: TypeSpecSuppressionRecord): string {
   const label = `<code>${escapeHtml(suppression.ruleName)}</code>`;
   const documentationUrl = suppression.ruleMetadata?.documentationUrl;
@@ -304,7 +310,7 @@ export function renderSuppressionsCommentBody(
     "",
     `**Status:** ${summaryParts.join(" — ")}`,
     "",
-    "⚠️ <strong>This check is currently in testing mode and is non-blocking</strong> — it will not prevent this PR from merging. This PR adds or updates the TypeSpec suppressions listed below. <strong>Suppressions are strongly discouraged</strong> — they bypass linter rules that protect API quality and consistency. Authors should avoid adding new suppressions and prefer fixing the underlying issue; reviewers should approve only when there is a clear, compelling justification and no reasonable alternative. Review each linked rule and source location, then apply <code>Approved-TypeSpecSuppression</code> only if every justification is acceptable. The <strong>Status</strong> column shows ✅ once the label is applied and ❌ while approval is pending.",
+    `⚠️ <strong>This check is currently in testing mode and is non-blocking</strong> — it will not prevent this PR from merging. This PR adds or updates the TypeSpec suppressions listed below. <strong>Suppressions are strongly discouraged</strong> — they bypass linter rules that protect API quality and consistency. Authors should avoid adding new suppressions and prefer fixing the underlying issue; reviewers should approve only when there is a clear, compelling justification and no reasonable alternative. Review each linked rule and source location, then apply <code>${TYPESPEC_SUPPRESSIONS_APPROVED_LABEL}</code> only if every justification is acceptable. The <strong>Status</strong> column shows ✅ once the label is applied and ❌ while approval is pending.`,
     "",
   ];
 
@@ -408,7 +414,7 @@ export async function buildSuppressionsComment(
     owner,
     repo,
     pullNumber,
-    isApproved: labelNames.includes(APPROVED_SUPPRESSION_LABEL),
+    isApproved: labelNames.includes(TYPESPEC_SUPPRESSIONS_APPROVED_LABEL),
     runUrl,
   });
 

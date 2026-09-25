@@ -292,7 +292,7 @@ by other validations in this repo):
 | Check name | Purpose |
 |------------|---------|
 | `TypeSpec Suppressions - Analyze Code` | Computes the impacted TypeSpec folders, runs the analyzer, writes the markdown summary + a JSON report artifact (`typespec-suppressions-report`), and emits inline `::warning` annotations anchored to each suppression on the PR diff. |
-| `TypeSpec Suppressions - Set Status` | Reports the check status; approval is granted by applying the `Approved-TypeSpecSuppression` label. |
+| `TypeSpec Suppressions - Set Status` | Reports the check status; approval is granted by applying the `typespec-suppressions-approved` label. |
 | `TypeSpec Suppressions - Test` | Runs the analyzer tool's own test suite. |
 
 ### Where to see the results
@@ -322,7 +322,7 @@ suppression, prefer fixing the underlying issue:
    justification are flagged.
 3. **If the suppression is legitimate and requires approval**, ask the
    appropriate reviewer (ARM spec PRs: only the ARM reviewer can apply the
-   label) to apply the `Approved-TypeSpecSuppression` label. The
+   label) to apply the `typespec-suppressions-approved` label. The
    `TypeSpec Suppressions` check remains blocking until the suppression is
    resolved or the label is applied.
 
@@ -349,7 +349,7 @@ Refer to the [suppression guide](https://aka.ms/pr-suppressions) for detailed gu
 This process (backed by `suppressions.yaml` files and the `Approved-Suppression` label) applies to
 most validation checks. It is separate from TypeSpec *lint* suppressions (`#suppress` directives and
 `tspconfig.yaml` `linter.disable` entries), which are surfaced by the
-[`TypeSpec Suppressions`](#typespec-suppressions) check and approved via the `Approved-TypeSpecSuppression`
+[`TypeSpec Suppressions`](#typespec-suppressions) check and approved via the `typespec-suppressions-approved`
 label.
 
 # Checks not covered by this guide

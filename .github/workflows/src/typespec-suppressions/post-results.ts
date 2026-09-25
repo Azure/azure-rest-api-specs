@@ -5,7 +5,7 @@
   Run from the typespec-suppressions-comment.yaml workflow on:
     - workflow_run:completed of "TypeSpec Suppressions - Analyze Code"
     - pull_request_target: labeled / unlabeled (to refresh ✅/❌ on the
-      Approved-TypeSpecSuppression label)
+      typespec-suppressions-approved label)
 
   It resolves PR context, reads the current labels for approval state, downloads
   the latest Analyze Code report artifact (by head_sha), and posts or updates a
@@ -16,6 +16,7 @@
 import { PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { commentOrUpdate, parseExistingComments } from "../comment.ts";
 import { extractInputs } from "../context.ts";
+import { TYPESPEC_SUPPRESSIONS_REVIEW_REQUIRED_LABEL } from "../label.ts";
 import { removeLabelIfPresent } from "../package-name-approval/labels.ts";
 import {
   buildSuppressionsComment,
@@ -34,27 +35,27 @@ async function syncReviewRequiredLabel(
   labelNames: string[],
   requiresApproval: boolean,
 ) {
-  const hasLabel = labelNames.includes(SUPPRESSION_REVIEW_REQUIRED_LABEL);
+  const hasLabel = labelNames.includes(TYPESPEC_SUPPRESSIONS_REVIEW_REQUIRED_LABEL);
   if (requiresApproval && !hasLabel) {
     core.info(
-      `Applying ${SUPPRESSION_REVIEW_REQUIRED_LABEL} label on ${owner}/${repo}#${issueNumber}.`,
+      `Applying ${TYPESPEC_SUPPRESSIONS_REVIEW_REQUIRED_LABEL} label on ${owner}/${repo}#${issueNumber}.`,
     );
     await github.rest.issues.addLabels({
       owner,
       repo,
       issue_number: issueNumber,
-      labels: [SUPPRESSION_REVIEW_REQUIRED_LABEL],
+      labels: [TYPESPEC_SUPPRESSIONS_REVIEW_REQUIRED_LABEL],
     });
   } else if (!requiresApproval && hasLabel) {
     core.info(
-      `Removing ${SUPPRESSION_REVIEW_REQUIRED_LABEL} label on ${owner}/${repo}#${issueNumber}.`,
+      `Removing ${TYPESPEC_SUPPRESSIONS_REVIEW_REQUIRED_LABEL} label on ${owner}/${repo}#${issueNumber}.`,
     );
     await removeLabelIfPresent(
       github,
       owner,
       repo,
       issueNumber,
-      SUPPRESSION_REVIEW_REQUIRED_LABEL,
+      TYPESPEC_SUPPRESSIONS_REVIEW_REQUIRED_LABEL,
     );
   }
 }
