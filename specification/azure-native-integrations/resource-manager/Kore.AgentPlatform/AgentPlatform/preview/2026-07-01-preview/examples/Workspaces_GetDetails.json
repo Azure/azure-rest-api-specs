@@ -1,0 +1,53 @@
+{
+  "title": "Workspaces_GetDetails",
+  "operationId": "Workspaces_GetDetails",
+  "parameters": {
+    "api-version": "2026-07-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contoso-rg",
+    "organizationName": "contoso-org",
+    "workspaceName": "contoso-prod"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "ws_01JK2MXYZ9ABCDEF000002",
+        "azureResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg/providers/Kore.AgentPlatform/organizations/contoso-org/workspaces/contoso-prod",
+        "organizationId": "org_01JK2MXYZ9ABCDEF123456",
+        "partnerProperties": {
+          "name": "Contoso Production",
+          "ownerEmail": "owner@contoso.com",
+          "retentionDays": 90,
+          "default": false,
+          "marketplaceDetails": [
+            {
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contoso-rg/providers/Microsoft.SaaS/resources/kore-ai-saas",
+              "mpId": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+              "planId": "business-monthly",
+              "planName": "AI for Service",
+              "offerId": "ai-for-service",
+              "publisherId": "kore-ai",
+              "termId": "1y",
+              "status": "Subscribed"
+            }
+          ]
+        },
+        "status": "active",
+        "projects": [
+          {
+            "id": "019e0218-aa9a-77c7-a9cc-812f3ec2fb72",
+            "name": "AML False Positive Agent",
+            "description": "AML false-positive review decision-support",
+            "createdBy": "jane.doe@contoso.com",
+            "status": "deployed",
+            "agentCount": 9,
+            "createdAt": "2026-05-07T11:00:31.514Z",
+            "updatedAt": "2026-05-07T11:00:31.798Z"
+          }
+        ],
+        "createdAt": "2026-01-05T09:00:00Z",
+        "updatedAt": "2026-04-20T14:00:00Z"
+      }
+    }
+  }
+}
