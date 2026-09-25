@@ -35,7 +35,7 @@ interface Clusters {
   @put
   createOrReplace is Azure.ResourceManager.Foundations.ArmCreateOperation<
     ResourceInstanceParameters<Cluster>,
-    ClusterCreateRequest,
+    Cluster,
     ClusterReplaceAcceptedResponse | ClusterCreateAcceptedResponse,
     ErrorResponse
   >;

@@ -519,7 +519,7 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ClusterCreateRequest"
+              "$ref": "#/definitions/Cluster"
             }
           }
         ],
@@ -5641,10 +5641,6 @@
         ]
       }
     },
-    "Azure.Core.armResourceType": {
-      "type": "string",
-      "description": "Represents an Azure Resource Type."
-    },
     "BackupProperties": {
       "type": "object",
       "description": "Backup configuration properties for a HorizonDB cluster.",
@@ -7053,161 +7049,6 @@
         ]
       }
     },
-    "ClusterCreateProperties": {
-      "type": "object",
-      "description": "Properties accepted when creating or replacing a HorizonDB cluster.",
-      "properties": {
-        "creationMode": {
-          "$ref": "#/definitions/ClusterCreateMode",
-          "description": "The mode used to create the cluster. When this property is omitted while creating a new cluster, the service records Create. PointInTimeRestore creates a new cluster from an available backup; pointInTimeUtc and creationSourceClusterResourceId are then required, postgreSqlVersion must be omitted because it is obtained from the backup metadata, and creationSourceClusterLocation is required when the source and target cluster locations differ. This property is immutable and is returned as creation provenance. On replacement, omission preserves the recorded value, resubmitting the same value is accepted, and changing it is rejected.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "pointInTimeUtc": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The requested point in time, in UTC. This property is required in every PointInTimeRestore request. For a same-location restore, the service restores the latest backup available at or before this value. For a cross-location restore, the service requires but ignores this value and restores the latest available backup; cross-location responses omit this property. This property must be absent for other creation modes or when creationMode is omitted and can only be specified during resource creation.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "creationSourceClusterResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The Azure resource ID of the source HorizonDB cluster used by the selected creation mode. This property is required for PointInTimeRestore and other source-based creation modes, and must be absent when creationMode is Create or omitted. A source cluster does not need to have a pool to be restored, provided an available backup exists. This immutable creation-provenance value does not change after creation.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.HorizonDb/clusters"
-              }
-            ]
-          }
-        },
-        "creationSourceClusterLocation": {
-          "type": "string",
-          "description": "The Azure location of the source HorizonDB cluster used for point-in-time restore. This property is optional when the source and target cluster locations are the same. It is required when the source cluster location differs from the target cluster location and must identify the source cluster's location. This property must be absent for creation modes other than PointInTimeRestore or when creationMode is omitted. This immutable creation-provenance value does not change after creation.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "network": {
-          "$ref": "#/definitions/Network",
-          "description": "The network configuration for the cluster. When this object is omitted, the service defaults it to publicAccess Disabled.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "backup": {
-          "$ref": "#/definitions/BackupProperties",
-          "description": "The backup configuration for the cluster.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "dataEncryption": {
-          "$ref": "#/definitions/HorizonDbClusterDataEncryption",
-          "description": "The data encryption configuration for the cluster. When omitted during cluster creation, the service uses SystemManaged encryption.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "state": {
-          "$ref": "#/definitions/ClusterState",
-          "description": "Current state of the cluster.",
-          "readOnly": true
-        },
-        "provisioningState": {
-          "$ref": "#/definitions/ProvisioningState",
-          "description": "The provisioning state of the cluster.",
-          "readOnly": true
-        },
-        "readWritePool": {
-          "$ref": "#/definitions/ReadWritePoolProperties",
-          "description": "The pool currently designated to host the cluster's read-write node.",
-          "readOnly": true
-        },
-        "postgreSqlVersion": {
-          "$ref": "#/definitions/PostgreSqlVersion",
-          "description": "The PostgreSQL major version for the new cluster. This property is required for ordinary cluster creation and must be omitted when creationMode is PointInTimeRestore because the service obtains the version from the source backup metadata.",
-          "x-ms-mutability": [
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "state",
-        "provisioningState",
-        "readWritePool"
-      ]
-    },
-    "ClusterCreateRequest": {
-      "type": "object",
-      "description": "A request to create or replace a HorizonDB cluster.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource",
-          "readOnly": true
-        },
-        "type": {
-          "$ref": "#/definitions/Azure.Core.armResourceType",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        },
-        "identity": {
-          "$ref": "#/definitions/HorizonDbClusterManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "properties": {
-          "$ref": "#/definitions/ClusterCreateProperties",
-          "description": "The properties for the selected cluster creation mode."
-        }
-      },
-      "required": [
-        "location",
-        "properties"
-      ]
-    },
     "ClusterFeatureCapability": {
       "type": "object",
       "description": "A HorizonDB Cluster feature supported in a location.",
@@ -7361,7 +7202,6 @@
         }
       },
       "required": [
-        "postgreSqlVersion",
         "state",
         "provisioningState",
         "readWritePool"
