@@ -1,4 +1,4 @@
-import { execPnpm, isExecError } from "@azure-tools/specs-shared/exec";
+import { execNodeBin, isExecError } from "@azure-tools/specs-shared/exec";
 import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 import {
   getSuppressions as getSuppressionsImpl,
@@ -13,13 +13,14 @@ import { context } from "./index.ts";
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");
 
-// Wraps execPnpm() to return error (and coalesce stdout and stderr) instead of throwing
-export async function runPnpm(
-  args: string[],
+// Return command failures to the validation rule along with captured output.
+export async function runNodeBin(
+  packageName: string,
+  args: [string, ...string[]],
   cwd?: string,
 ): Promise<[Error | null, string, string]> {
   try {
-    const { stdout, stderr } = await execPnpm(args, {
+    const { stdout, stderr } = await execNodeBin(packageName, args, {
       logger: new ConsoleLogger(),
       maxBuffer: 64 * 1024 * 1024,
       cwd,

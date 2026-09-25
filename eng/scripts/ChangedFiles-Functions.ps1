@@ -28,16 +28,6 @@ function Get-ChangedSwaggerFiles($changedFiles = (Get-ChangedFiles)) {
   return $changedSwaggerFiles
 }
 
-function Get-ChangedTypeSpecFiles($changedFiles = (Get-ChangedFiles)) {
-  $changedFiles = Get-ChangedFilesUnderSpecification $changedFiles
-
-  $changedTypeSpecFiles = $changedFiles.Where({ 
-    $_.EndsWith(".tsp")
-  })
-    
-  return $changedTypeSpecFiles
-}
-
 function Get-ChangedFilesUnderSpecification($changedFiles = (Get-ChangedFiles)) {
   $changedFilesUnderSpecification = $changedFiles.Where({ 
     $_.StartsWith("specification")
@@ -49,6 +39,7 @@ function Get-ChangedFilesUnderSpecification($changedFiles = (Get-ChangedFiles)) 
 function Get-ChangedCoreFiles($changedFiles = (Get-ChangedFiles)) {
   $rootFiles = @(
     ".gitattributes",
+    ".oxfmtrc.json",
     ".prettierrc.json",
     "pnpm-lock.yaml",
     "pnpm-workspace.yaml",
