@@ -22,8 +22,8 @@ deduplicated, sorted, and validated sequentially.
 Changes to core tooling, root configuration, shared common types, or the root
 suppression file trigger all-project validation. ARM lease metadata and
 `eng/common` do not trigger this fallback. Use `--ignore-core-files` to disable
-the fallback. The PR workflow enables it only for PRs targeting `main` or
-`RPSaaSMaster`.
+the fallback. The PR workflow enables the fallback only for PRs targeting `main`
+or `RPSaaSMaster`; other target branches pass `--ignore-core-files`.
 
 Changed-project validation passes the base/head commits to each project's rules.
 `TypeSpecValidationAll` suppressions apply only to `--all` or a core-file fallback,
