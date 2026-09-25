@@ -11,16 +11,9 @@ steps:
     parameters:
       NodeVersion: ${{ parameters.NodeVersion }}
 
-  # Invoke the script directly (rather than `npm run install-pnpm`) so this step
-  # works regardless of ${{ parameters.WorkingDirectory }}. `npm run` resolves the
-  # nearest package.json by walking up from the current directory and stops at the
-  # first one it finds; pnpm workspace packages (e.g. .github, .github/shared) have
-  # their own package.json without an "install-pnpm" script, which previously made
-  # this step fail with "Missing script: install-pnpm" for callers that pass a
-  # non-root WorkingDirectory. install-pnpm.mts resolves the repo root itself, so
-  # running it via `node` from any cwd is safe and behavior-preserving.
-  - script: node $(Build.SourcesDirectory)/eng/scripts/install-pnpm.mts
+  - script: npm run install-pnpm
     displayName: Install pnpm
+    workingDirectory: ${{ parameters.WorkingDirectory }}
 
   - script: pnpm ci
     displayName: pnpm install
