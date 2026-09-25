@@ -26,7 +26,7 @@ async function enforceLabelAuthorization({
   actor,
   authorizedUsers,
 }: {
-  github: import("@actions/github-script").AsyncFunctionArguments["github"];
+  github: import("../github.ts").GitHub;
   core: Core;
   owner: string;
   repo: string;
@@ -80,7 +80,7 @@ export default async function checkLabel({
   github,
   context,
   core,
-}: import("@actions/github-script").AsyncFunctionArguments) {
+}: import("../github.ts").GitHubScriptArgs) {
   const { owner, repo, issue_number } = await extractInputs(github, context, core);
 
   const payload = context.payload as WebhookEvent<"pull-request", "labeled">;

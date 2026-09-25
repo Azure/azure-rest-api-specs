@@ -171,7 +171,7 @@ function filterUnchanged(
 export default async function detectNamespaces({
   context,
   core,
-}: import("@actions/github-script").AsyncFunctionArguments) {
+}: import("../github.ts").GitHubScriptArgs) {
   const payload = context.payload as WebhookEvent<"pull-request">;
 
   const cwd = process.env.GITHUB_WORKSPACE ?? process.cwd();

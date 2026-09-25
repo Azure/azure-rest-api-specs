@@ -3,9 +3,7 @@ import { basename, join, normalize, sep } from "path";
 import { pathToFileURL } from "url";
 import { inspect } from "util";
 
-export default async function importAllModules({
-  core,
-}: import("@actions/github-script").AsyncFunctionArguments) {
+export default async function importAllModules({ core }: import("./github.ts").GitHubScriptArgs) {
   const workspace = process.env.GITHUB_WORKSPACE;
   if (!workspace) {
     throw new Error("Env var GITHUB_WORKSPACE must be set");

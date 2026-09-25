@@ -1,13 +1,29 @@
-import type { AsyncFunctionArguments } from "@actions/github-script";
 import { afterEach } from "node:test";
 import { beforeEach, describe, expect, expectTypeOf, it, vi } from "vitest";
 import { add, Duration } from "../../shared/src/time.ts";
-import { createLogHook, createRateLimitHook, type Core } from "../src/github.ts";
-import { createMockLogger } from "./mocks.ts";
+import {
+  createLogHook,
+  createRateLimitHook,
+  type Core,
+  type GitHubScriptArgs,
+} from "../src/github.ts";
+import { createMockContext, createMockCore, createMockGithub, createMockLogger } from "./mocks.ts";
 
-describe("Core", () => {
-  it("matches the toolkit provided by GitHub Script", () => {
-    expectTypeOf<Core>().toEqualTypeOf<AsyncFunctionArguments["core"]>();
+describe("GitHubScriptArgs", () => {
+  it("accepts the three values passed by our workflow entry points", () => {
+    const args = {
+      github: createMockGithub(),
+      context: createMockContext(),
+      core: createMockCore(),
+    } satisfies GitHubScriptArgs;
+
+    expectTypeOf(args).toExtend<GitHubScriptArgs>();
+  });
+
+  it("preserves the synchronous core APIs provided by GitHub Script", () => {
+    expectTypeOf<ReturnType<Core["setOutput"]>>().toBeVoid();
+    expectTypeOf<ReturnType<Core["setFailed"]>>().toBeVoid();
+    expectTypeOf<ReturnType<Core["notice"]>>().toBeVoid();
   });
 });
 

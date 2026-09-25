@@ -61,7 +61,7 @@ export default async function getLabelAction({
   github,
   context,
   core,
-}: import("@actions/github-script").AsyncFunctionArguments): Promise<{
+}: import("../github.ts").GitHubScriptArgs): Promise<{
   headSha: string;
   issueNumber: number;
   labelActions: ManagedLabelActions;
@@ -268,7 +268,7 @@ export async function getLabelActionImpl({
  */
 async function checkArmAnalysisWorkflow(
   workflowRuns: WorkflowRun[],
-  github: import("@actions/github-script").AsyncFunctionArguments["github"],
+  github: import("../github.ts").GitHub,
   owner: string,
   repo: string,
   core: Core,

@@ -82,7 +82,7 @@ The `.github` directory contains all the code and configuration for GitHub Actio
 - TypeScript is configured with `noEmit`, `allowImportingTsExtensions`, `erasableSyntaxOnly`, and `verbatimModuleSyntax`
 - Use `.ts` relative imports and `import type` for type-only dependencies
 - Do not introduce enums, parameter properties, or namespaces; use frozen objects and value-union type aliases instead of enums
-- Type injected `github`, `context`, and `core` values using `AsyncFunctionArguments` from `@actions/github-script`
+- Type injected `github`, `context`, and `core` values using `GitHubScriptArgs` from `workflows/src/github.ts`; use its `GitHub`, `Context`, and `Core` types for individual values
 - For helpers that take `core` separately, import the shared `Core` type from `workflows/src/github.ts`
 - Type webhook payloads with `WebhookEvent<"pull-request", "labeled">` from `workflows/src/github.ts`, using GitHub OpenAPI event and action names. Omit the action to accept all actions for an event.
 - Inline `actions/github-script` YAML snippets remain JavaScript; they dynamically import the `.ts` modules
@@ -109,7 +109,7 @@ From `package.json` comments:
 
 ### Key Dependencies
 
-- `@actions/github-script`: GitHub Actions toolkit (devDependency)
+- `@actions/core`, `@actions/github`: Types for the injected GitHub Actions toolkit (devDependencies)
 - `@octokit/rest`, `@octokit/types`: GitHub REST API client
 - `simple-git`: Git operations
 - `js-yaml`: YAML parsing
@@ -270,9 +270,11 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
 5. Run the [required checks](#before-committing) in both directories and check affected engineering consumers.
 
 Keep handwritten `actions/github-script` workflow and composite-action refs pinned to the same
-release as the catalog's `@actions/github-script` development dependency. Update those refs,
-the catalog, the lockfile, and the commit-specific `allowBuilds` entry together. Preserve the
-production-only import checks; generated agentic workflows and their locks are managed separately.
+release. When updating that release, check that the toolkit versions used by `GitHubScriptArgs`
+match the action's injected APIs. The `github-script` named catalog pins `@actions/core` for workflow
+types independently of standalone engineering tools. Do not install the action itself as an npm
+dependency. Preserve the production-only import checks; generated agentic workflows and their locks
+are managed separately.
 
 ### Node.js Version Management
 

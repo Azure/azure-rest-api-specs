@@ -17,8 +17,8 @@ export type RestEndpointMethodTypes =
  * run_id is only defined for "workflow_run:completed" events.
  */
 export async function extractInputs(
-  github: import("@actions/github-script").AsyncFunctionArguments["github"],
-  context: import("@actions/github-script").AsyncFunctionArguments["context"],
+  github: import("./github.ts").GitHub,
+  context: import("./github.ts").Context,
   core: Core,
 ): Promise<{
   owner: string;

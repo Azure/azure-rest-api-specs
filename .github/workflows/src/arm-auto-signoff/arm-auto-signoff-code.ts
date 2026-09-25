@@ -13,7 +13,7 @@ export type PullRequestChanges = import("./pr-changes.ts").PullRequestChanges;
  */
 export default async function armAutoSignoffCode({
   core,
-}: import("@actions/github-script").AsyncFunctionArguments): Promise<{
+}: import("../github.ts").GitHubScriptArgs): Promise<{
   incremental: boolean;
   trivial: boolean;
 }> {

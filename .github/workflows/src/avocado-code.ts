@@ -10,7 +10,7 @@ import { parse } from "./ndjson.ts";
 
 export default async function generateJobSummary({
   core,
-}: import("@actions/github-script").AsyncFunctionArguments): Promise<void> {
+}: import("./github.ts").GitHubScriptArgs): Promise<void> {
   const avocadoOutputFile = process.env.AVOCADO_OUTPUT_FILE;
   core.info(`avocadoOutputFile: ${avocadoOutputFile}`);
 

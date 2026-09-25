@@ -1,9 +1,17 @@
-import type { AsyncFunctionArguments } from "@actions/github-script";
 import type { operations } from "@octokit/openapi-webhooks-types";
 import { toPercent } from "../../shared/src/math.ts";
 import { Duration, formatDuration, getDuration, subtract } from "../../shared/src/time.ts";
 
-export type Core = AsyncFunctionArguments["core"];
+export type Core = typeof import("@actions/core");
+export type Context = typeof import("@actions/github").context;
+export type GitHub = ReturnType<typeof import("@actions/github").getOctokit>;
+
+/** Values injected into our workflow scripts by actions/github-script. */
+export interface GitHubScriptArgs {
+  github: GitHub;
+  context: Context;
+  core: Core;
+}
 
 type WebhookEventName = {
   [Name in keyof operations]: Name extends `${infer Event}/${string}` ? Event : Name;
