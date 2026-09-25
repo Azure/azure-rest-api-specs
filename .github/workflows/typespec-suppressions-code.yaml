@@ -21,6 +21,19 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Resolve analysis revisions
+        id: revisions
+        shell: bash
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          # Match a three-dot PR diff while retaining the synthetic merge checkout
+          # so the workflow and its local dependencies come from the same revision.
+          base_revision="$(git merge-base "$BASE_SHA" "$HEAD_SHA")"
+          echo "base=$base_revision" >> "$GITHUB_OUTPUT"
+          echo "head=$HEAD_SHA" >> "$GITHUB_OUTPUT"
+
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
 
@@ -29,8 +42,8 @@ jobs:
         run: |
           $ignoreCoreFiles = $true
           $typespecFolders, $checkedAll = & "./eng/scripts/Get-TypeSpec-Folders.ps1" `
-            -BaseCommitish:"${{ github.event.pull_request.base.sha }}" `
-            -HeadCommitish:"HEAD" `
+            -BaseCommitish:"${{ steps.revisions.outputs.base }}" `
+            -HeadCommitish:"${{ steps.revisions.outputs.head }}" `
             -IgnoreCoreFiles:$ignoreCoreFiles
 
           $typespecFolders | Set-Content -Path typespec-folders.txt
@@ -65,8 +78,8 @@ jobs:
             printf '%s\n' \
               '{' \
               '  "repoRoot": "'"$GITHUB_WORKSPACE"'",' \
-              '  "baseRevision": "'"${{ github.event.pull_request.base.sha }}"'",' \
-              '  "headRevision": "HEAD",' \
+              '  "baseRevision": "'"${{ steps.revisions.outputs.base }}"'",' \
+              '  "headRevision": "'"${{ steps.revisions.outputs.head }}"'",' \
               '  "specPaths": [],' \
               '  "requiresApproval": false,' \
               '  "counts": {' \
@@ -93,8 +106,8 @@ jobs:
           fi
 
           pnpm exec typespec-suppressions \
-            --base "${{ github.event.pull_request.base.sha }}" \
-            --head HEAD \
+            --base "${{ steps.revisions.outputs.base }}" \
+            --head "${{ steps.revisions.outputs.head }}" \
             --json-output "typespec-suppressions-report.json" \
             --markdown-output "$GITHUB_STEP_SUMMARY" \
             --check-rules-file "eng/tools/typespec-suppressions/check-rules.json" \
