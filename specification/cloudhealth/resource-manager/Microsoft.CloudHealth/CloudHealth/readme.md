@@ -84,6 +84,7 @@ input-file:
   - preview/2026-01-01-preview/cloudhealth.json
 ```
 
+
 ### Tag: package-2025-05-01-preview
 
 These settings apply only when `--tag=package-2025-05-01-preview` is specified on the command line.
@@ -119,7 +120,6 @@ swagger-to-sdk:
   - repo: azure-cli-extensions
   - repo: azure-powershell
 ```
-
 ## Az
 
 See configuration in [readme.az.md](./readme.az.md)
