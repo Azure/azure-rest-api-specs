@@ -122,6 +122,7 @@ model FleetProperties {
 
   /** Zone Allocation Policy for Fleet. */
   @added(Versions.v2026_04_01_preview)
+  @removed(Versions.v2026_08_01)
   zoneAllocationPolicy?: ZoneAllocationPolicy;
 }
 
@@ -543,10 +544,10 @@ model AdditionalLocationsProfile {
 union FleetMode {
   string,
 
-  /** Default. Managed is the default mode for Compute Fleet where VMs are provisioned via virtual machine scale sets. */
+  /** Default. Managed mode where Compute Fleet provisions the VMs, manages them and their lifecycle. */
   managed: "Managed",
 
-  /** Launch mode for Compute Fleet will directly launch VM instances to be managed by the customer. */
+  /** Launch mode where Compute Fleet launches the VMs and the customer manages them and their lifecycle. */
   launch: "Launch",
 }
 
@@ -567,6 +568,7 @@ union CapacityType {
 
 /** ZoneAllocationPolicy for Compute Fleet. */
 @added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_08_01)
 model ZoneAllocationPolicy {
   /** Distribution strategy used for zone allocation policy. */
   distributionStrategy: ZoneDistributionStrategy;
