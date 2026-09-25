@@ -90479,14 +90479,14 @@
             "items": {
               "$ref": "#/components/schemas/Dimension"
             },
-            "description": "The set of dimensions — the scoring blueprint used by the LLM judge. Quality evaluators include a non-editable residual dimension with id 'general_quality' (always_applicable: true); safety evaluators include 'general_policy_compliance'. Both use the same Dimension structure."
+            "description": "The quality checks or grading criteria. Rating generation includes a service residual; Boolean generation does not inject a generic residual. Existing v1 and legacy definitions retain their behavior."
           },
           "pass_threshold": {
             "type": "number",
             "format": "float",
             "minimum": 0,
             "maximum": 1,
-            "description": "Pass/fail threshold for the aggregate rubric score, on the same normalized 0.0-1.0 scale as the emitted `score`. When the runtime weighted average meets or exceeds this value, the result is `pass`. Defaults to 0.5 (equivalent to a raw 1-5 weighted average of 3.0). The 'any dimension scored 1 → fail' rule still applies regardless of this threshold.",
+            "description": "Quality threshold on the same normalized 0.0-1.0 scale as the emitted score. Defaults to 0.5, equivalent to a raw weighted grade of 3.0. The score >= threshold determines pass/fail; there is no implicit score-1 veto.",
             "default": 0.5
           }
         },
