@@ -22,11 +22,34 @@ subdirectory keeps reference files out of the interactive agent scan path.
   is the Reviewer-Critic wire contract (inputs, verdicts, sentinels, marker schemas).
   Source of truth if either agent file disagrees.
 
+## Downstream package contract
+
+[`arm-api-reviewer.export.json`](./arm-api-reviewer.export.json) defines the
+portable ARM API Reviewer runtime used by downstream hosts. It owns the
+Reviewer, hidden Critic, protocol, instruction, review-skill, and supporting
+file closure. Downstream repositories must consume the generated export rather
+than maintain a separate file list or modify exported content.
+
+Validate or export the package from the repository root:
+
+```powershell
+node .github/workflows/cmd/arm-api-reviewer-export.ts
+node .github/workflows/cmd/arm-api-reviewer-export.ts --output <empty-directory>
+```
+
+The generated manifest records the full source commit, file hashes and sizes,
+package compatibility version, and a deterministic content digest. A
+compatibility-version change signals that downstream host integration may need
+to change before the package can be updated.
+
 ## Conventions
 
 - Filename: `<short-name>.agent.md`, lowercase-hyphenated.
 - Internal subagents: set `user-invocable: false` in frontmatter.
 - Extract shared schemas to `protocols/` to prevent drift.
+- Update `arm-api-reviewer.export.json` when adding or removing a runtime
+  dependency. Export validation fails when a required relative reference is
+  outside the declared package.
 - Prefer explicit tool allowlists over `github/*` for read-only agents.
 - Agents that run unattended (from a `.github/workflows/*.md` gh-aw workflow)
   get **no** mutating GitHub tools at all; `safe-outputs` is their only write
