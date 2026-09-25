@@ -1343,4 +1343,181 @@ namespace Azure.AI.Projects {
     },
     "csharp"
   );
+
+  // --------------------------------------------------------------------------------
+  // Fix APIView namespace leak: these Foundry-only types were generating into the
+  // OpenAI C# namespace instead of Azure.AI.Projects.Agents.
+  //
+  // The properties below are declared as anonymous inline unions on their source
+  // models in the external OpenAI package, so there is no real TypeSpec symbol
+  // named e.g. `OpenAI.VoiceResponseBaseStatus` to target directly: such names
+  // only exist post-emission, invented by the C# emitter for anonymous types.
+  // Instead, each property is first retyped (@@alternateType) to a small local
+  // named union declared here (keeping the original leaked names so the public
+  // API surface is unchanged other than its namespace), and that local union is
+  // the one namespaced.
+  //
+  // Several of these properties are spread into a Foundry-local model via
+  // `OmitProperties`/`ToolFields` (e.g. VoiceResponseBase spreads
+  // OpenAI.RealtimeResponse). The client generator does not bind
+  // alternateType/clientNamespace to the spread-derived copy of the property,
+  // only to the property on its original declaring model, so every
+  // @@alternateType below targets `OpenAI.<Model>.<prop>` (never the Foundry
+  // model that spreads it in) -- confirmed against
+  // sdk-java-azure-ai-agents/client.tsp, which already uses this exact pattern for
+  // these same properties.
+  // --------------------------------------------------------------------------------
+  union VoiceResponseBaseStatus {
+    "completed",
+    "cancelled",
+    "failed",
+    "incomplete",
+    "in_progress",
+  }
+  @@alternateType(
+    OpenAI.RealtimeResponse.status,
+    VoiceResponseBaseStatus,
+    "csharp"
+  );
+  @@clientNamespace(
+    VoiceResponseBaseStatus,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
+
+  union VoiceResponseBaseOutputModality {
+    "text",
+    "audio",
+  }
+  @@alternateType(
+    OpenAI.RealtimeResponse.output_modalities,
+    VoiceResponseBaseOutputModality[],
+    "csharp"
+  );
+  @@clientNamespace(
+    VoiceResponseBaseOutputModality,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
+
+  @@alternateType(
+    OpenAI.RealtimeClientEventType,
+    {
+      identity: "OpenAI.Realtime.RealtimeClientCommandKind",
+      package: "OpenAI",
+      minVersion: "2.14.0",
+    },
+    "csharp"
+  );
+
+  @@clientNamespace(
+    OpenAI.CallableToolAllowedCaller,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
+  @@clientNamespace(
+    OpenAI.ContainerMemoryLimit,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
+  @@clientNamespace(
+    OpenAI.ContainerSkill,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
+  @@clientNamespace(
+    OpenAI.InlineSkillParam,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
+  @@clientNamespace(
+    OpenAI.InlineSkillSourceParam,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
+  @@clientNamespace(
+    OpenAI.RealtimeFunctionToolParameters,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
+  @@clientNamespace(
+    OpenAI.SkillReferenceParam,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
+
+  // The four unions below are also anonymous inline unions on the OpenAI side
+  // (same situation as above); give each a clientNamespace instead of an
+  // external alias since they have no real OpenAI SDK equivalent to alias to.
+  union MCPToolboxToolConnectorId {
+    "connector_dropbox",
+    "connector_gmail",
+    "connector_googlecalendar",
+    "connector_googledrive",
+    "connector_microsoftteams",
+    "connector_outlookcalendar",
+    "connector_outlookemail",
+    "connector_sharepoint",
+  }
+  @@alternateType(
+    OpenAI.MCPTool.connector_id,
+    MCPToolboxToolConnectorId,
+    "csharp"
+  );
+  @@clientNamespace(
+    MCPToolboxToolConnectorId,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
+
+  union VoiceAgentAudioInputConfigTranscriptionDelay {
+    "minimal",
+    "low",
+    "medium",
+    "high",
+    "xhigh",
+  }
+  @@alternateType(
+    OpenAI.AudioTranscription.delay,
+    VoiceAgentAudioInputConfigTranscriptionDelay,
+    "csharp"
+  );
+  @@clientNamespace(
+    VoiceAgentAudioInputConfigTranscriptionDelay,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
+
+  union VoiceAgentSemanticVadTurnDetectionEagerness {
+    "low",
+    "medium",
+    "high",
+    "auto",
+  }
+  @@alternateType(
+    OpenAI.RealtimeTurnDetectionSemanticVad.eagerness,
+    VoiceAgentSemanticVadTurnDetectionEagerness,
+    "csharp"
+  );
+  @@clientNamespace(
+    VoiceAgentSemanticVadTurnDetectionEagerness,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
+
+  union WebSearchToolSearchContextSize {
+    "low",
+    "medium",
+    "high",
+  }
+  @@alternateType(
+    OpenAI.WebSearchTool.search_context_size,
+    WebSearchToolSearchContextSize,
+    "csharp"
+  );
+  @@clientNamespace(
+    WebSearchToolSearchContextSize,
+    "Azure.AI.Projects.Agents",
+    "csharp"
+  );
 }
