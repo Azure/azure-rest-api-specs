@@ -28,7 +28,7 @@ function createDefinition(): ArmApiReviewerExportDefinition {
     validation: {
       vallyVersion: "0.14.0",
       releaseSmokeSuite: "release-smoke",
-      reviewerModel: "gpt-5.6-sol?effort=high",
+      reviewerModel: "gpt-5.6-sol",
       judgeModel: "gpt-5.4",
     },
   };
@@ -110,7 +110,7 @@ describe("ARM API Reviewer export", () => {
     expect(manifest.validation.vallyVersion).toBe(
       evalPackage.devDependencies["@microsoft/vally-cli"],
     );
-    expect(manifest.validation.reviewerModel).toBe("gpt-5.6-sol?effort=high");
+    expect(manifest.validation.reviewerModel).toBe("gpt-5.6-sol");
     expect(manifest.validation.judgeModel).toBe("gpt-5.4");
   });
 

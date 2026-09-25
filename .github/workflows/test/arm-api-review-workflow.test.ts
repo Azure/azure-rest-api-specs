@@ -1003,13 +1003,12 @@ describe("ARM API review consistency and hardening", () => {
 
     for (const file of files) {
       const text = await readFile(join(dir, file), "utf8");
-      // The agent under test must match the production model, or eval results
-      // describe a model that never reviews a real PR. Anchored to the line
-      // start because plain `model:` also matches `judge_model:`.
-      expect(text, `${file} agent model`).toContain(`model: ${canonicalModel}`);
-      // The scheduled release gate uses a broadly available judge so a model
-      // entitlement change cannot prevent downstream package qualification.
+      // The scheduled release gate uses CLI-available model identifiers so
+      // query-string or entitlement changes cannot prevent qualification.
+      // Full qualification continues to match the production model.
+      const agentModel = file === "release-smoke.yaml" ? "gpt-5.6-sol" : canonicalModel;
       const judgeModel = file === "release-smoke.yaml" ? "gpt-5.4" : "claude-sonnet-4.6";
+      expect(text, `${file} agent model`).toContain(`model: ${agentModel}`);
       expect(text, `${file} judge model`).toContain(`judge_model: ${judgeModel}`);
     }
   });
