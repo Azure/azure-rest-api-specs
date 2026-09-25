@@ -1,0 +1,102 @@
+{
+  "title": "SovereignViewOperations_ComplianceDetails",
+  "operationId": "SovereignViewOperations_ComplianceDetails",
+  "parameters": {
+    "api-version": "2026-10-31-preview",
+    "subscriptionId": "22b62f96-c8d5-4131-97f8-f820a5a3c55f",
+    "resourceGroupName": "ExampleResourceGroup",
+    "sovereignViewName": "ExampleSV",
+    "body": {
+      "top": 50,
+      "skip": 25,
+      "complianceDimensions": [
+        {
+          "dimension": "EncryptionAtRest",
+          "states": [
+            "Compliant"
+          ]
+        }
+      ],
+      "filters": [
+        {
+          "field": "Region",
+          "operator": "In",
+          "value": [
+            "northeurope"
+          ]
+        },
+        {
+          "field": "ParentResourceName",
+          "operator": "In",
+          "value": [
+            "example-parent-vm"
+          ]
+        }
+      ],
+      "sort": [
+        {
+          "field": "ResourceId",
+          "direction": "asc",
+          "sortingOrder": [
+            "Compliant",
+            "NonCompliant"
+          ]
+        }
+      ],
+      "search": {
+        "field": "ResourceId",
+        "value": "example-vm"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "reportStatus": {
+          "state": "UpToDate",
+          "nextAttempt": "2026-08-01T06:20:21Z"
+        },
+        "lastEvaluated": "2026-03-15T12:30:00Z",
+        "totalResources": 2,
+        "resources": [
+          {
+            "resourceId": "/subscriptions/22b62f96-c8d5-4131-97f8-f820a5a3c55f/resourceGroups/ExampleResourceGroup/providers/Microsoft.Compute/virtualMachines/example-vm-01",
+            "parentResourceId": "/subscriptions/22b62f96-c8d5-4131-97f8-f820a5a3c55f/resourceGroups/ExampleResourceGroup",
+            "location": "northeurope",
+            "dimensionDetails": [
+              {
+                "dimension": "EncryptionAtRest",
+                "state": "Compliant",
+                "complianceDetails": [
+                  {
+                    "policyInitiativeId": "/subscriptions/22b62f96-c8d5-4131-97f8-f820a5a3c55f/providers/Microsoft.Authorization/policySetDefinitions/ExamplePolicySet",
+                    "policyAssignmentId": "/subscriptions/22b62f96-c8d5-4131-97f8-f820a5a3c55f/providers/Microsoft.Authorization/policyAssignments/68fcd240-8a80-4e3b-8590-52fefd22cdd8",
+                    "evaluatedAt": "2026-03-15T10:32:29Z"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "resourceId": "/subscriptions/22b62f96-c8d5-4131-97f8-f820a5a3c55f/resourceGroups/ExampleResourceGroup/providers/Microsoft.Storage/storageAccounts/examplest01",
+            "parentResourceId": "/subscriptions/22b62f96-c8d5-4131-97f8-f820a5a3c55f/resourceGroups/ExampleResourceGroup",
+            "location": "northeurope",
+            "dimensionDetails": [
+              {
+                "dimension": "EncryptionAtRest",
+                "state": "NonCompliant",
+                "complianceDetails": [
+                  {
+                    "policyInitiativeId": "/subscriptions/22b62f96-c8d5-4131-97f8-f820a5a3c55f/providers/Microsoft.Authorization/policySetDefinitions/ExamplePolicySet",
+                    "policyAssignmentId": "/subscriptions/22b62f96-c8d5-4131-97f8-f820a5a3c55f/providers/Microsoft.Authorization/policyAssignments/f868169e-9bc7-43d9-8ae0-362d24e926b7",
+                    "evaluatedAt": "2026-03-15T11:15:45Z"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
