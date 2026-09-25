@@ -2,6 +2,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./Account.tsp";
 
@@ -9,6 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.CognitiveServices;
 /**
@@ -72,17 +74,60 @@ interface RaiPolicies {
   /**
    * Gets the specified Content Filters associated with the Azure OpenAI account.
    */
-  get is RaiPolicyOps.Read<RaiPolicy>;
+  @sharedRoute
+  @removed(Versions.v2026_09_15_preview)
+  @renamedFrom(Versions.v2026_09_15_preview, "get")
+  getLegacy is RaiPolicyOps.Read<RaiPolicy>;
+
+  /**
+   * Gets the specified Content Filters associated with the Azure OpenAI account.
+   */
+  @sharedRoute
+  @added(Versions.v2026_09_15_preview)
+  get is RaiPolicyOps.Read<
+    RaiPolicy,
+    Response = ArmResponse<RaiPolicy> & RaiResourceEtagResponseHeader
+  >;
 
   /**
    * Update the state of specified Content Filters associated with the Azure OpenAI account.
    */
-  createOrUpdate is RaiPolicyOps.CreateOrUpdateSync<RaiPolicy>;
+  @sharedRoute
+  @removed(Versions.v2026_09_15_preview)
+  @renamedFrom(Versions.v2026_09_15_preview, "createOrUpdate")
+  createOrUpdateLegacy is RaiPolicyOps.CreateOrUpdateSync<RaiPolicy>;
+
+  /**
+   * Update the state of specified Content Filters associated with the Azure OpenAI account.
+   */
+  @sharedRoute
+  @added(Versions.v2026_09_15_preview)
+  createOrUpdate is RaiPolicyOps.CreateOrUpdateSync<
+    RaiPolicy,
+    Parameters = RaiResourcePutConditionalHeaders,
+    Response =
+      | (ArmResourceUpdatedResponse<RaiPolicy> & RaiResourceEtagResponseHeader)
+      | (ArmResourceCreatedSyncResponse<RaiPolicy> &
+          RaiResourceEtagResponseHeader)
+  >;
 
   /**
    * Deletes the specified Content Filters associated with the Azure OpenAI account.
    */
-  delete is RaiPolicyOps.DeleteWithoutOkAsync<RaiPolicy>;
+  @sharedRoute
+  @removed(Versions.v2026_09_15_preview)
+  @renamedFrom(Versions.v2026_09_15_preview, "delete")
+  deleteLegacy is RaiPolicyOps.DeleteWithoutOkAsync<RaiPolicy>;
+
+  /**
+   * Deletes the specified Content Filters associated with the Azure OpenAI account.
+   */
+  @sharedRoute
+  @added(Versions.v2026_09_15_preview)
+  delete is RaiPolicyOps.DeleteWithoutOkAsync<
+    RaiPolicy,
+    Parameters = RaiResourceDeleteConditionalHeaders
+  >;
 
   /**
    * Gets the content filters associated with the Azure OpenAI account.
@@ -137,6 +182,10 @@ interface SubscriptionRaiPolicy {
 );
 @@encodedName(RaiPolicy.etag, "application/json", "etag");
 @@doc(RaiPolicy.properties, "Properties of Cognitive Services RaiPolicy.");
+@@doc(
+  RaiPolicies.createOrUpdateLegacy::parameters.resource,
+  "Properties describing the Content Filters."
+);
 @@doc(
   RaiPolicies.createOrUpdate::parameters.resource,
   "Properties describing the Content Filters."

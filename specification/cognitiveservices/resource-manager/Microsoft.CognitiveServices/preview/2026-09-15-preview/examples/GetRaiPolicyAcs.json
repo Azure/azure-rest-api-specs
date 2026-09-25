@@ -1,0 +1,123 @@
+{
+  "operationId": "RaiPolicies_Get",
+  "parameters": {
+    "accountName": "safety-account",
+    "api-version": "2026-09-15-preview",
+    "raiPolicyName": "agent-guard",
+    "resourceGroupName": "resource-group",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Get an ACS policy",
+  "responses": {
+    "200": {
+      "headers": {
+        "ETag": "\"00000000-0000-0000-0000-000000000003\""
+      },
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-group/providers/Microsoft.CognitiveServices/accounts/safety-account/raiPolicies/agent-guard",
+        "name": "agent-guard",
+        "type": "Microsoft.CognitiveServices/accounts/raiPolicies",
+        "etag": "\"00000000-0000-0000-0000-000000000003\"",
+        "properties": {
+          "type": "UserManaged",
+          "format": "ACS",
+          "acs": {
+            "agent_control_specification_version": "0.4.0-alpha.1",
+            "metadata": {
+              "name": "agent-guard"
+            },
+            "policies": {
+              "input-guard": {
+                "type": "rego",
+                "query": "data.input_guard.verdict"
+              },
+              "tool-guard": {
+                "type": "rego",
+                "query": "data.tool_guard.verdict"
+              }
+            },
+            "intervention_points": {
+              "input": {
+                "policy_target": "$snap.input",
+                "policy_target_kind": "user_input",
+                "policy": {
+                  "id": "input-guard",
+                  "aacs_moderation": {
+                    "subject_format": "text",
+                    "harm_configs": [
+                      {
+                        "category": "PromptInjection"
+                      }
+                    ]
+                  }
+                }
+              },
+              "pre_tool_call": {
+                "policy_target": "$snap.tool_call.args",
+                "policy_target_kind": "tool_args",
+                "tool_name_from": "$snap.tool_call.name",
+                "policy": {
+                  "id": "tool-guard"
+                }
+              },
+              "post_tool_call": {
+                "policy_target": "$snap.tool_result.value",
+                "policy_target_kind": "tool_result",
+                "tool_name_from": "$snap.tool_call.name",
+                "policy": {
+                  "id": "tool-guard"
+                }
+              }
+            },
+            "tools": {
+              "web_search": {
+                "id": "web_search",
+                "type": "retrieval",
+                "description": "Search approved public documentation",
+                "security_labels": [
+                  "network_egress",
+                  "untrusted_content"
+                ],
+                "clearance": "public",
+                "allowed_domains": [
+                  "learn.microsoft.com"
+                ]
+              },
+              "wire_transfer": {
+                "id": "wire_transfer",
+                "type": "financial_action",
+                "security_labels": [
+                  "financial_write"
+                ],
+                "clearance": "confidential"
+              }
+            },
+            "annotators": {}
+          },
+          "acsRegos": [
+            {
+              "regoName": "input-guard"
+            },
+            {
+              "regoName": "tool-guard"
+            }
+          ],
+          "customBlocklists": [
+            {
+              "blocklistName": "blocked-terms",
+              "source": "Prompt",
+              "blocking": true
+            }
+          ],
+          "customExternalSafetyProviders": [
+            {
+              "externalSafetyProviderName": "contoso-safety-provider",
+              "source": "Prompt",
+              "blocking": true
+            }
+          ]
+        }
+      }
+    }
+  }
+}

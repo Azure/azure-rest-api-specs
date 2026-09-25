@@ -1108,6 +1108,13 @@ op regenerateKeyCustom(
   "EvaluateDeploymentPoliciesResult",
   "csharp"
 );
+@@clientName(
+  AdapterDeploymentLastOperation,
+  "CognitiveServicesAdapterDeploymentLastOperationInfo",
+  "csharp"
+);
+@@clientName(RaiAcsRegoPolicyDefinition, "RaiAcsRegoPolicy", "csharp");
+@@clientName(RaiAcsToolDefinition, "RaiAcsTool", "csharp");
 @@clientName(Identity, "CognitiveServicesComputeIdentity", "csharp");
 @@clientName(
   ResourceIdentityType,
@@ -1222,6 +1229,11 @@ op regenerateKeyCustom(
 );
 @@alternateType(ManagedComputeDeployment.etag, eTag, "csharp");
 @@alternateType(
+  ManagedComputeDeployment.identity,
+  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
+  "csharp"
+);
+@@alternateType(
   ManagedComputeCapacityProperties.location,
   azureLocation,
   "csharp"
@@ -1258,3 +1270,5 @@ op regenerateKeyCustom(
   "CognitiveServicesComputeProvisioningState",
   "csharp"
 );
+@@clientName(CostControl, "CognitiveServicesAccountCostControl", "csharp");
+@@alternateType(CostControl.etag, eTag, "csharp");
