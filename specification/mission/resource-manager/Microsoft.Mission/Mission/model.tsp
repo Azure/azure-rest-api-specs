@@ -15,6 +15,7 @@ import "./resourcetypes/enclaveEndpoint/enclaveEndpoint.tsp";
 import "./resourcetypes/postActions/approvalspostactions.tsp";
 import "./resourcetypes/postActions/checkaddressspaceavailability.tsp";
 import "./resourcetypes/dedicatedHub/dedicatedHub.tsp";
+import "./resourcetypes/serviceCatalog/serviceCatalog.tsp";
 import "./resourcetypes/transitHub/transitHub.tsp";
 import "./resourcetypes/virtualEnclave/virtualenclave.tsp";
 import "./resourcetypes/workload/workload.tsp";
