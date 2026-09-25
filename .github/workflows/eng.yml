@@ -4,30 +4,48 @@ on:
   push:
     branches:
       - main
+      - typespec-next
     paths:
       - "**/package.json"
-      - pnpm-workspace.yaml
+      - .github/**
+      - eng/**
       - pnpm-lock.yaml
-      - .github/actions/setup-node-install-deps/**
-      - .github/workflows/eng.yml
-      - .github/workflows/src/validate-workspace.ts
+      - pnpm-workspace.yaml
+      - tsconfig.json
+      - tsconfig.base.json
+      - vitest.config.mts
+      - .npmrc
+      - .gitignore
+      - .oxlintrc.json
+      - .oxfmtrc.json
   pull_request:
     paths:
       - "**/package.json"
-      - pnpm-workspace.yaml
+      - .github/**
+      - eng/**
       - pnpm-lock.yaml
-      - .github/actions/setup-node-install-deps/**
-      - .github/workflows/eng.yml
-      - .github/workflows/src/validate-workspace.ts
+      - pnpm-workspace.yaml
+      - tsconfig.json
+      - tsconfig.base.json
+      - vitest.config.mts
+      - .npmrc
+      - .gitignore
+      - .oxlintrc.json
+      - .oxfmtrc.json
   workflow_dispatch:
 
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   workspace-validation:
     name: Workspace validation
     runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v7
         with:
@@ -48,3 +66,46 @@ jobs:
 
       # Avoid pnpm run auto-installing the rest of the workspace.
       - run: node ./.github/workflows/src/validate-workspace.ts
+
+  build:
+    name: Type check
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          sparse-checkout: |
+            .github
+            eng
+
+      - uses: ./.github/actions/setup-node-install-deps
+
+      - run: pnpm run build
+
+  test:
+    name: Test (${{ matrix.os }})
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu
+            runner: ubuntu-24.04
+          - os: windows
+            runner: windows-2022
+
+    runs-on: ${{ matrix.runner }}
+
+    steps:
+      - if: runner.os == 'Windows'
+        run: git config --global core.longpaths true
+
+      - uses: actions/checkout@v7
+        with:
+          sparse-checkout: |
+            .github
+            eng
+
+      - uses: ./.github/actions/setup-node-install-deps
+
+      - run: pnpm run test:ci

@@ -78,7 +78,7 @@ The `.github` directory contains all the code and configuration for GitHub Actio
 
 ### TypeScript Integration
 
-- Shared compiler options live in `.github/tsconfig.base.json`, following the TypeSpec repo's ES2024/NodeNext baseline without an external preset. The two project configs extend it and define their own file selection.
+- Shared ES2024/NodeNext compiler options live in the single root `tsconfig.base.json`. Each GitHub project extends it directly, defining its own file selection and overrides that preserve the existing library, JavaScript, and unused-code checking behavior.
 - TypeScript is configured with `noEmit`, `allowImportingTsExtensions`, `erasableSyntaxOnly`, and `verbatimModuleSyntax`
 - Use `.ts` relative imports and `import type` for type-only dependencies
 - Do not introduce enums, parameter properties, or namespaces; use frozen objects and value-union type aliases instead of enums
@@ -114,9 +114,9 @@ From `package.json` comments:
 - `simple-git`: Git operations
 - `js-yaml`: YAML parsing
 - `debug`: Debug logging
-- `vitest`: Testing framework
+- `vitest`, `@vitest/coverage-v8`: Root development dependencies for testing and coverage
 - `oxlint`, `oxlint-tsgolint`: Root development dependencies for linting
-- `typescript`: Type checking
+- `typescript`: Root development dependency for type checking
 - `oxfmt`: Code formatting
 
 ## Build, Test, and Validation
@@ -126,6 +126,7 @@ From `package.json` comments:
 Run from `.github/` or `.github/shared/` unless noted:
 
 ```bash
+pnpm run build           # Run this package's TypeScript check
 pnpm run check           # Run all checks (lint + format:check + test:ci)
 pnpm run lint            # Run both oxlint and TypeScript checks
 pnpm run lint:oxlint     # Run oxlint only
@@ -140,15 +141,23 @@ pnpm run perf            # Run performance benchmarks (.github/shared only)
 
 Use `pnpm run format` rather than adjusting formatting manually.
 
+Root `pnpm build` delegates to package build scripts with `pnpm -r`; `lint:tsc`
+remains a package-local alias for `build`. Root `pnpm test`/`pnpm test:ci` run the
+Vitest workspace and root `pnpm check` runs all contributor checks. Package-local
+Vitest commands still run directly and do not forward to the root.
+
+`eng.yml` validates the workspace, runs root `pnpm build` once on Linux, and runs
+the Vitest workspace on Ubuntu and Windows. `github-test.yaml` retains production-only module import
+checks on both OSes, plus actionlint and compiled agentic workflow lock checks on Linux.
+
 CI runs `pnpm lint` once from the repository root in `lint.yaml`, covering `.github`
-and `eng/tools`. Do not add lint steps to package/OS test matrices. `github-test.yaml`
-retains `pnpm lint:tsc`, tests, and actionlint for workflow YAML.
+and `eng/tools`. Do not add lint or type-check steps to the test OS matrix.
 `.github/workflows/format.yaml` runs `pnpm format:check` once from the repository
-root for `.github` and `eng/tools`. Do not add formatting steps to package/OS
+root for `.github`, `eng/tools`, and `vitest.config.mts`. Do not add formatting steps to package/OS
 test matrices. Package-local format commands inherit the root `.oxfmtrc.json`,
 including fixture, generated-file, and unmanaged-content exclusions.
 See [the engineering guide](../../eng/README.md#linting-and-formatting) for package
-exclusions that preserve the previous ESLint coverage.
+exclusions for packages not yet linted.
 
 ### Before Committing
 
@@ -167,11 +176,15 @@ Cover new or changed behavior and bug regressions with focused tests of reposito
 
 ### Coverage Exclusions
 
-Per `vitest.config.ts`, coverage excludes:
+Package configs inherit `defaultVitestConfig` from root `vitest.config.mts`, not
+its workspace project list. Shared defaults exclude:
 
 - `**/cmd/**` (CLI code)
 - `**/coverage/**`
 - `**/test/**`
+
+The shared package retains its independent 100% gate for standalone runs.
+Workspace coverage has a root-configured 100% threshold for shared sources.
 
 ## GitHub Actions Patterns
 
@@ -187,10 +200,10 @@ Composite actions are defined in `.github/actions/*/action.yaml`. Key patterns:
 
 ### Workflow TypeScript
 
-Scripts in `.github/workflows/src/` are typically used with `actions/github-script@v8`:
+Scripts in `.github/workflows/src/` are typically used with `actions/github-script@v9.0.0`:
 
 ```yaml
-- uses: actions/github-script@v8
+- uses: actions/github-script@v9.0.0
   with:
     script: |
       const { myFunction } = await import("${{ github.workspace }}/.github/workflows/src/my-script.ts");
@@ -255,6 +268,11 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
 3. Run `pnpm install` once from the **repo root** — `.github` and `.github/shared` are pnpm workspace packages, so a single install updates the single root `pnpm-lock.yaml` for the whole workspace. Do not edit the lockfile manually.
 4. Include the catalog, affected manifests, and generated lockfile together. Review actual dependency resolutions and isolate impactful upgrades from mechanical catalog conversions.
 5. Run the [required checks](#before-committing) in both directories and check affected engineering consumers.
+
+Keep handwritten `actions/github-script` workflow and composite-action refs pinned to the same
+release as the catalog's `@actions/github-script` development dependency. Update those refs,
+the catalog, the lockfile, and the commit-specific `allowBuilds` entry together. Preserve the
+production-only import checks; generated agentic workflows and their locks are managed separately.
 
 ### Node.js Version Management
 
