@@ -1,24 +1,21 @@
-// Python-only generation projections, imported by client.tsp, not the REST entrypoint.
-// Authoritative wire models belong in ../session-finetuning/models.tsp. Shared
-// shapes below alias those declarations instead of maintaining another copy.
-// The remaining models are deliberately different Python API shapes: for example,
-// required Adam constructor arguments where REST has optional service defaults,
-// and legacy OperationResult classes where REST returns request-status envelopes.
-// Moving those projections into the service file would misstate its wire contract
-// or change other SDKs. New service models must be defined in the service file;
-// only justified Python compatibility exceptions belong here.
-// Keep this file out of the REST entrypoint. No service or operations are declared.
+// Models for custom code in emitted SDKs, not the REST API contract.
+// Import this file only from SDK generation entrypoints, never from the REST
+// entrypoint. Authoritative wire models are defined in ./models.tsp; matching
+// shapes below reference those declarations instead of maintaining another copy.
+// The current customizations preserve the existing Python SDK's constructors,
+// result classes, and serialization. They do not define server validation or
+// service defaults, and no service or operations are declared here.
 //
-// Remaining definitions preserve existing constructor requiredness/defaults,
-// legacy result classes, and pinned-emitter representations. They must not be
-// interpreted as server validation or evidence of a server-side default.
-// Multimodal input, checkpoint resume, and nullable tuple results are supported
-// by maintained Python hooks; their generated bases alone are not the full API.
-// The model-by-model rationale is recorded in the SDK generation guide.
-// Toolchain versions are recorded by the Python SDK repository's shared emitter lock.
+// All current model classes and unions are existing public Python SDK exports.
+// Do not mark them internal merely because they support SDK custom code.
+// Any future internal-only helper must use @access(Access.internal, "python")
+// (or the corresponding language scope) and must not appear in public signatures.
+// The existing namespace is retained to preserve generated type identifiers.
+// Maintained Python hooks provide additional behavior; the model-by-model
+// rationale and generation toolchain are recorded in the SDK generation guide.
 
 import "@azure-tools/typespec-client-generator-core";
-import "../session-finetuning/models.tsp";
+import "./models.tsp";
 
 using Azure.ClientGenerator.Core;
 

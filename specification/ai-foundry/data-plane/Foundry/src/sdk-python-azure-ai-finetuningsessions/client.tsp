@@ -2,7 +2,7 @@
 // defined only in session-finetuning/routes.tsp; do not import this SDK entrypoint
 // from the REST entrypoint.
 import "../session-finetuning/routes.tsp";
-import "./loom-models.tsp";
+import "../session-finetuning/models-custom-code.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.AI.Projects.SessionFineTuning;
