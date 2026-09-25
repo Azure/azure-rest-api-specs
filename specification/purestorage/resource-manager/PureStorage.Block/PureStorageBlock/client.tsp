@@ -35,6 +35,56 @@ using PureStorage.Block;
 );
 
 // CSharp
+@@clientName(
+  VolumeOverwriteRequest,
+  "PureStorageBlockVolumeOverwriteRequestContent",
+  "csharp"
+);
+@@clientName(
+  ActivateSaaSRequest,
+  "PureStorageBlockActivateSaaSRequestContent",
+  "csharp"
+);
+@@clientName(
+  LinkSaaSRequest,
+  "PureStorageBlockLinkSaaSRequestContent",
+  "csharp"
+);
+@@clientName(
+  PerformanceParameters,
+  "PureStorageBlockPerformanceParametersContent",
+  "csharp"
+);
+@@clientName(
+  ConnectionParametersResponse,
+  "PureStorageBlockConnectionParametersResponseResult",
+  "csharp"
+);
+@@clientName(
+  LatestLinkedSaaSResponse,
+  "PureStorageBlockLatestLinkedSaaSResponseResult",
+  "csharp"
+);
+@@clientName(
+  ProtectionParameters,
+  "PureStorageBlockProtectionParametersContent",
+  "csharp"
+);
+@@clientName(
+  SaaSResourceDetailsResponse,
+  "PureStorageBlockSaaSResourceDetailsResponseResult",
+  "csharp"
+);
+@@clientName(
+  VolumeGroupOverwriteRequest,
+  "PureStorageBlockVolumeGroupOverwriteRequestContent",
+  "csharp"
+);
+@@clientName(
+  VolumeGroupSnapshotListRequest,
+  "PureStorageBlockVolumeGroupSnapshotListRequestContent",
+  "csharp"
+);
 @@alternateType(
   ServiceInitializationHandle.sddcResourceId,
   armResourceIdentifier,

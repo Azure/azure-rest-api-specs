@@ -500,3 +500,42 @@ union DrillReportFinalizationState {
   @doc("The report is finalized and immutable.")
   Finalized: "Finalized",
 }
+
+/** Regional resiliency posture reported by the selected protection solution. */
+@added(Versions.v2026_09_30_preview)
+union RegionalResiliencyStatus {
+  string,
+
+  /** The available protection-solution posture reports the resource as regionally resilient. */
+  Resilient: "Resilient",
+
+  /** The available protection-solution posture reports the resource as not regionally resilient. */
+  NotResilient: "NotResilient",
+}
+
+/** Normal fault eligibility of a drill resource, independent of inclusion and readiness. */
+@added(Versions.v2026_09_30_preview)
+union FaultEligibility {
+  string,
+
+  /** The available information is insufficient to determine normal fault eligibility. */
+  Unknown: "Unknown",
+
+  /** The resource satisfies the normal fault inclusion policy. */
+  Eligible: "Eligible",
+
+  /** The resource does not satisfy the normal fault inclusion policy. */
+  Ineligible: "Ineligible",
+}
+
+/** Reason requiring attention for a resource that requires recovery-plan participation and has no independent fault eligibility path. */
+@added(Versions.v2026_09_30_preview)
+union FaultIneligibleReason {
+  string,
+
+  /** The parent drill has no associated recovery plan required by the resource's normal fault inclusion policy. */
+  RecoveryPlanNotConfigured: "RecoveryPlanNotConfigured",
+
+  /** The associated recovery plan's complete membership collection was successfully read and the resource is absent or explicitly Excluded. */
+  ResourceNotIncludedInRecoveryPlan: "ResourceNotIncludedInRecoveryPlan",
+}

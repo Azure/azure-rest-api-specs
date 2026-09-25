@@ -19,3 +19,6 @@
 - tool: TypeSpecRequirement
   path: ./stable/2023-03-01/*.json
   reason: Brownfield service not ready to migrate
+- tool: Swagger Avocado
+  path: ./stable/2023-03-01/vmware.json
+  reason: The parameterized workload network GET was retired when the singleton /workloadNetworks/default route replaced it during the TypeSpec migration. This older version still contains the retired route, so Avocado reports MISSING_APIS_IN_DEFAULT_TAG against the 2026-03-01 default tag.

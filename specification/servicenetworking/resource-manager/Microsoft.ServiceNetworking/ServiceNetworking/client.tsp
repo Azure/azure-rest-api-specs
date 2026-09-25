@@ -161,6 +161,16 @@ using Microsoft.ServiceNetworking;
 );
 
 @@clientName(
+  PrivateEndpointConnection,
+  "ServiceNetworkingPrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(
+  PrivateLinkResource,
+  "ServiceNetworkingPrivateLinkResource",
+  "csharp"
+);
+@@clientName(
   PublicNetworkAccess,
   "TrafficControllerPublicNetworkAccess",
   "csharp"

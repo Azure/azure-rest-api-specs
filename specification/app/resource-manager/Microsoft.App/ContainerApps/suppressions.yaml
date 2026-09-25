@@ -52,3 +52,12 @@
 - tool: TypeSpecRequirement
   path: ./stable/2025-07-01/*.json
   reason: Brownfield service not ready to migrate
+- tool: SwaggerAvocado
+  paths:
+    - ./*.tsp
+    - ./readme.md
+    - ./service.yaml
+    - ./suppressions.yaml
+    - ./examples/2026-03-02-preview/**
+    - ./preview/2026-03-02-preview/**
+  reason: The Functions host invoke operation is an internal RP-to-RP API that was intentionally retired starting with 2026-01-01. Avocado only applies suppressions to changed files and cannot suppress MISSING_APIS_IN_DEFAULT_TAG by rule, so every changed file for this release must be covered to prevent the retired operation from being required in the new default tag.

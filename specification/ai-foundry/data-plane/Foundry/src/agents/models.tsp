@@ -1,5 +1,6 @@
 import "../openai/responses/models.tsp";
 import "../common/servicepatterns.tsp";
+import "../skills/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -11,7 +12,11 @@ const AllConditionalAgentDefinitionPreviews = #{
   conditional_previews: #[
     AgentDefinitionOptInKeys.workflow_agents_v1_preview,
     AgentDefinitionOptInKeys.external_agents_v1_preview,
-    AgentDefinitionOptInKeys.draft_agents_v1_preview
+    AgentDefinitionOptInKeys.voice_agents_v1_preview,
+    AgentDefinitionOptInKeys.draft_agents_v1_preview,
+    AgentDefinitionOptInKeys.digital_worker_v1_preview,
+    AgentDefinitionOptInKeys.github_copilot_v1_preview,
+    AgentDefinitionOptInKeys.skills_v1_preview
   ],
 };
 
@@ -23,12 +28,23 @@ model CreateAgentVersionRequest {
   @maxLength(512)
   description?: string;
 
-  @doc("The agent definition. This can be a workflow, hosted agent, or a simple agent definition.")
+  @doc("The agent definition. This can be a prompt, workflow, hosted, external, or voice agent definition.")
   @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
   definition: AgentDefinition;
 
   @doc("The blueprint reference for the agent.")
   blueprint_reference?: AgentBlueprintReference;
+
+  @doc("(Preview) The type of digital worker (previously known as `autopilot`). If omitted, it is not a digital worker.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      conditional_previews: #[
+        AgentDefinitionOptInKeys.digital_worker_v1_preview
+      ],
+    }
+  )
+  digital_worker_type?: DigitalWorkerType;
 
   @doc("(Preview) Whether this agent version is a draft (candidate) rather than a release. The service defaults to `false` if a value is not specified by the caller. Draft versions are recorded but excluded from default 'latest' resolution and are not auto-promoted.")
   @extension(
@@ -101,7 +117,7 @@ model CreateAgentRequest {
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @extension("x-ms-foundry-meta", AllConditionalAgentDefinitionPreviews)
 model UpdateAgentRequest {
-  ...OmitProperties<CreateAgentVersionRequest, "draft">;
+  ...OmitProperties<CreateAgentVersionRequest, "draft" | "digital_worker_type">;
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
@@ -158,6 +174,10 @@ model AgentObject {
   @visibility(Lifecycle.Read)
   state: AgentState;
 
+  @doc("The administrative configuration state of the agent. This reflects whether the agent was explicitly enabled or disabled, independently of identity-derived operational state.")
+  @visibility(Lifecycle.Read)
+  configuration_state: AgentState;
+
   @doc("The source of the agent's operational state. When the agent is disabled, indicates where the disabled state originates from. Empty when not derived from a specific source.")
   @visibility(Lifecycle.Read)
   state_source?: AgentStateSource;
@@ -170,6 +190,17 @@ model AgentObject {
 
   @doc("The endpoint configuration for the agent")
   agent_endpoint?: AgentEndpointConfig;
+
+  @doc("(Preview) The type of digital worker (previously known as `autopilot`). If omitted, it is not a digital worker.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      conditional_previews: #[
+        AgentDefinitionOptInKeys.digital_worker_v1_preview
+      ],
+    }
+  )
+  digital_worker_type?: DigitalWorkerType;
 
   @doc("The instance identity of the agent")
   @visibility(Lifecycle.Read)
@@ -269,6 +300,7 @@ union AgentEndpointProtocol {
   a2a: "a2a",
   mcp: "mcp",
   invocations: "invocations",
+  voice: "voice",
 
   @doc("WebSocket-based protocol for hosted voice and real-time streaming agents.")
   invocations_ws: "invocations_ws",
@@ -280,15 +312,87 @@ union AgentKind {
   hosted: "hosted",
   workflow: "workflow",
   external: "external",
+  voice: "voice",
 
   @removed(Versions.v1)
   container_app: "container_app",
+}
+
+@doc("The type of digital worker.")
+union DigitalWorkerType {
+  string,
+
+  @doc("A Microsoft 365 digital worker.")
+  m365: "m365",
 }
 
 @doc("Configuration for Responsible AI (RAI) content filtering and safety features.")
 model RaiConfig {
   @doc("The name of the RAI policy to apply.")
   rai_policy_name: string;
+
+  @doc("""
+    Author-declared configuration telling the platform where user/agent text lives in the
+    agent-defined invocations request/response bodies, so content-safety guardrails can extract
+    and moderate it. Optional; a rai_config without it leaves the invocations path without
+    content-safety moderation.
+    """)
+  invocations_moderation?: RaiInvocationModeration;
+}
+
+@doc("How an invocations request/response body is parsed to locate text for content-safety moderation.")
+union RaiInvocationContentType {
+  string,
+
+  @doc("Parse the body as JSON and evaluate the declared paths/selectors.")
+  json: "json",
+
+  @doc("Treat the whole (size-capped) body as text; paths/selectors are ignored.")
+  text: "text",
+}
+
+@doc("Author-declared response shape for the invocations protocol.")
+union RaiInvocationMode {
+  string,
+
+  @doc("Non-streaming response body.")
+  non_streaming: "non_streaming",
+
+  @doc("Streaming response body.")
+  streaming: "streaming",
+
+  @doc("Both non-streaming and streaming response bodies.")
+  both: "both",
+}
+
+@doc("An SSE event-type to text-field selector for streaming invocation output.")
+model RaiSseTextSelector {
+  @doc("The SSE event `type` value that carries text.")
+  event_type: string;
+
+  @doc("The field on a matched event holding the text delta. When omitted, the service defaults to `delta`.")
+  text_field?: string = "delta";
+}
+
+@doc("Declares where request/response text lives so content-safety guardrails can extract it.")
+model RaiInvocationModeration {
+  @doc("How the REQUEST body is parsed. When omitted, the service defaults to `json`.")
+  input_content_type?: RaiInvocationContentType = RaiInvocationContentType.json;
+
+  @doc("How the RESPONSE body is parsed. When omitted, the service defaults to `json`.")
+  output_content_type?: RaiInvocationContentType = RaiInvocationContentType.json;
+
+  @doc("Author-declared response shape; drives which output gate runs and which fields are required.")
+  response_mode: RaiInvocationMode;
+
+  @doc("Path(s) to user text in the REQUEST body. Required when input_content_type is `json`.")
+  input_paths?: string[];
+
+  @doc("Path(s) to agent text in a NON-STREAMING response body. Required when response_mode is non_streaming/both and output_content_type is `json`.")
+  output_paths?: string[];
+
+  @doc("One SSE event->field selector per event type carrying text. Required when response_mode is streaming/both and output_content_type is `json`.")
+  stream_selectors?: RaiSseTextSelector[];
 }
 
 @discriminator("kind")
@@ -303,11 +407,27 @@ model AgentDefinition {
 model PromptAgentDefinition extends AgentDefinition {
   kind: AgentKind.prompt;
 
+  @doc("The managed runtime and agent loop used to execute this prompt agent.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{
+      required_previews: #[AgentDefinitionOptInKeys.github_copilot_v1_preview],
+    }
+  )
+  harness?: AgentHarness;
+
   @doc("The model deployment to use for this agent.")
   `model`: string;
 
   @doc("A system (or developer) message inserted into the model's context.")
   instructions?: string | null;
+
+  @doc("The Foundry skills available to this prompt agent. An omitted skill version is resolved and pinned when the agent version is created.")
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[AgentDefinitionOptInKeys.skills_v1_preview] }
+  )
+  skills?: SkillReference[];
 
   @doc("""
     What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.
@@ -352,6 +472,37 @@ model PromptAgentDefinition extends AgentDefinition {
   structured_inputs?: Record<StructuredInputDefinition>;
 }
 
+@doc("A managed runtime and agent loop used to execute a prompt agent.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.github_copilot_v1_preview] }
+)
+@discriminator("type")
+model AgentHarness {
+  @doc("The type of managed harness.")
+  type: string;
+}
+
+@doc("The GitHub Copilot managed harness for prompt agents.")
+@extension(
+  "x-ms-foundry-meta",
+  #{ required_previews: #[AgentDefinitionOptInKeys.github_copilot_v1_preview] }
+)
+model GitHubCopilotHarness extends AgentHarness {
+  @doc("The type of managed harness. Always `github_copilot_preview`.")
+  type: "github_copilot_preview";
+}
+
+@doc("A reference to a versioned Foundry skill.")
+@extension("x-ms-foundry-meta", SkillsRequiredPreviews)
+model SkillReference {
+  @doc("The name of the skill.")
+  name: SkillName;
+
+  @doc("The skill version. If omitted, the current default version is resolved and pinned when the agent version is created.")
+  version?: string;
+}
+
 /**
  * Configuration options for a text response from the model. Can be plain text or structured JSON data.
  */
@@ -392,6 +543,20 @@ model ContainerConfiguration {
     """)
   @example("my-registry-connection")
   registry_connection_id?: string;
+}
+
+@doc("Session defaults applied to sessions created for a hosted agent version.")
+model SessionConfiguration {
+  @doc("""
+    The idle duration, in seconds, before a session's sandbox is suspended. Optional — when
+    unset, the server default of 900 seconds is used. Must be between 120 and 3600 seconds
+    (inclusive).
+    """)
+  @minValue(duration.fromISO("PT120S"))
+  @maxValue(duration.fromISO("PT3600S"))
+  @example(duration.fromISO("PT300S"))
+  @encode(DurationKnownEncoding.seconds, int32)
+  idle_timeout_seconds?: duration = duration.fromISO("PT900S");
 }
 
 @doc("Code-based deployment configuration for a hosted agent.")
@@ -483,6 +648,10 @@ model HostedAgentDefinition extends AgentDefinition {
 
   @doc("Optional customer-supplied telemetry configuration for exporting container logs, traces, and metrics.")
   telemetry_config?: TelemetryConfig;
+
+  @doc("Optional session defaults (for example, the idle timeout) applied to sessions created for this agent version.")
+  @example(#{ idle_timeout_seconds: duration.fromISO("PT300S") })
+  session_configuration?: SessionConfiguration;
 }
 
 @doc("The container app agent definition.")
@@ -675,10 +844,73 @@ model ProtocolConfiguration {
   invocations_ws?: InvocationsWsProtocolConfiguration;
 }
 
+@doc("An access boundary for the activity protocol.")
+union ActivityProtocolAccessBoundary {
+  string,
+
+  @doc("Allows read access to one-on-one developer conversations.")
+  read_1on1_developers: "read.1on1.developers",
+
+  @doc("Allows read access to one-on-one manager conversations.")
+  read_1on1_manager: "read.1on1.manager",
+
+  @doc("Allows read access to allowlisted one-on-one conversations.")
+  read_1on1_allowlisted: "read.1on1.allowlisted",
+
+  @doc("Allows read access to tenant-wide one-on-one conversations.")
+  read_1on1_tenant: "read.1on1.tenant",
+
+  @doc("Allows write access to one-on-one developer conversations.")
+  write_1on1_developers: "write.1on1.developers",
+
+  @doc("Allows write access to one-on-one manager conversations.")
+  write_1on1_manager: "write.1on1.manager",
+
+  @doc("Allows write access to allowlisted one-on-one conversations.")
+  write_1on1_allowlisted: "write.1on1.allowlisted",
+
+  @doc("Allows write access to tenant-wide one-on-one conversations.")
+  write_1on1_tenant: "write.1on1.tenant",
+
+  @doc("Allows read access to developer group conversations.")
+  read_group_developers: "read.group.developers",
+
+  @doc("Allows read access to allowlisted group conversations.")
+  read_group_allowlisted: "read.group.allowlisted",
+
+  @doc("Allows read access to group conversations where a manager is invited.")
+  read_group_manager_invited: "read.group.manager-invited",
+
+  @doc("Allows read access to group conversations where a manager is present.")
+  read_group_manager_present: "read.group.manager-present",
+
+  @doc("Allows read access to tenant-wide group conversations.")
+  read_group_tenant: "read.group.tenant",
+
+  @doc("Allows write access to developer group conversations.")
+  write_group_developers: "write.group.developers",
+
+  @doc("Allows write access to allowlisted group conversations.")
+  write_group_allowlisted: "write.group.allowlisted",
+
+  @doc("Allows write access to group conversations where a manager is invited.")
+  write_group_manager_invited: "write.group.manager-invited",
+
+  @doc("Allows write access to group conversations where a manager is present.")
+  write_group_manager_present: "write.group.manager-present",
+
+  @doc("Allows write access to tenant-wide group conversations.")
+  write_group_tenant: "write.group.tenant",
+}
+
 @doc("Configuration specific to the activity protocol.")
 model ActivityProtocolConfiguration {
   @doc("Whether to enable the M365 public endpoint for the activity protocol.")
   enable_m365_public_endpoint?: boolean;
+
+  @doc("The access boundaries for the activity protocol.")
+  @visibility(Lifecycle.Read)
+  access_boundaries?: ActivityProtocolAccessBoundary[];
 }
 
 @doc("Configuration specific to the responses protocol.")
@@ -709,6 +941,30 @@ model AgentEndpointConfig {
 
   @doc("The authorization schemes supported by the agent endpoint")
   authorization_schemes?: AgentEndpointAuthorizationScheme[];
+
+  @doc("The Microsoft Agent Certification review status of the Microsoft 365 store title published for this agent. Server-populated and best-effort: it is absent when the status could not be determined, and an absent value must not be interpreted as the agent not being published. No value is terminal, because publishing a new version of an agent reuses the same store title and sends it back through review.")
+  @visibility(Lifecycle.Read)
+  publish_approval_status?: PublishApprovalStatus;
+}
+
+@doc("The Microsoft Agent Certification review status of the Microsoft 365 store title published for an agent.")
+union PublishApprovalStatus {
+  string,
+
+  @doc("The agent has never been published to the Microsoft 365 store, so there is nothing to review.")
+  not_published: "not_published",
+
+  @doc("The published title is awaiting a review decision.")
+  pending: "pending",
+
+  @doc("The title passed review, as of this read.")
+  approved: "approved",
+
+  @doc("The title was rejected in review, as of this read.")
+  rejected: "rejected",
+
+  @doc("The agent is published at a scope that does not go through Microsoft Agent Certification. Only tenant-scoped titles are reviewed.")
+  no_approval_needed: "no_approval_needed",
 }
 
 model AgentIdentity {
@@ -939,6 +1195,11 @@ model AgentSessionResource {
   @encode("unixTimestamp", int64)
   @visibility(Lifecycle.Read)
   expires_at: utcDateTime;
+
+  /** The Unix timestamp (in seconds) when the session sandbox was last observed to stop or go idle. Present only after the session has gone idle at least once, used for accurate idle-billing reconciliation. */
+  @encode("unixTimestamp", int64)
+  @visibility(Lifecycle.Read)
+  stopped_at?: utcDateTime;
 }
 
 // ── Session Request Models ──────────────────────────────
