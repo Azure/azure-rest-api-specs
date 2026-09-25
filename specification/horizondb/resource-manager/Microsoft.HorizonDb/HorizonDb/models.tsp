@@ -264,7 +264,7 @@ model ClusterProperties {
   @added(Versions.v2026_10_01_preview)
   @doc("The PostgreSQL major version used by the HorizonDB cluster. API version 2026-10-01-preview supports versions 17 and 18. For ordinary cluster creation, the version is supplied in the request and is immutable after creation. For point-in-time restore, the service obtains the version from the source backup metadata and the request must omit this property. This API version does not support in-place PostgreSQL major-version upgrades.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  postgreSqlVersion: PostgreSqlVersion;
+  postgreSqlVersion?: PostgreSqlVersion;
 
   @removed(Versions.v2026_10_01_preview)
   @renamedFrom(Versions.v2026_10_01_preview, "createMode")
@@ -580,26 +580,6 @@ model ClusterForPatchUpdate {
 
   @doc("The properties that can be updated for a HorizonDB cluster.")
   properties?: ClusterPropertiesForPatchUpdate;
-}
-
-@added(Versions.v2026_10_01_preview)
-@doc("Properties accepted when creating or replacing a HorizonDB cluster.")
-model ClusterCreateProperties {
-  ...OmitProperties<ClusterProperties, "postgreSqlVersion">;
-
-  @doc("The PostgreSQL major version for the new cluster. This property is required for ordinary cluster creation and must be omitted when creationMode is PointInTimeRestore because the service obtains the version from the source backup metadata.")
-  @visibility(Lifecycle.Create)
-  postgreSqlVersion?: PostgreSqlVersion;
-}
-
-@added(Versions.v2026_10_01_preview)
-@doc("A request to create or replace a HorizonDB cluster.")
-model ClusterCreateRequest {
-  ...Azure.ResourceManager.Foundations.TrackedResource;
-  ...HorizonDbClusterManagedServiceIdentityProperty;
-
-  @doc("The properties for the selected cluster creation mode.")
-  properties: ClusterCreateProperties;
 }
 
 @@added(Cluster.identity, Versions.v2026_05_01_preview);

@@ -67,11 +67,6 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(
-  Microsoft.HorizonDb.ClusterCreateRequest,
-  "HorizonDBClusterCreateContent",
-  "csharp"
-);
-@@clientName(
   Microsoft.HorizonDb.ClusterReplaceAcceptedResponse,
   "HorizonDBClusterReplaceAcceptedResult",
   "csharp"
