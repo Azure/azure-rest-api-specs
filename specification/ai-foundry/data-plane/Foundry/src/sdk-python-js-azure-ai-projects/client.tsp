@@ -13,12 +13,12 @@ import "../connections/routes.tsp";
 import "../datasets/routes.tsp";
 import "../deployments/routes.tsp";
 import "../indexes/routes.tsp";
+import "../evaluators/routes.tsp";
 
 // Beta operations (preview routes, requiring opt-in request header)
 import "../voice-agents/routes.tsp";
 import "../agent-insights/routes.tsp";
 import "../evaluation-taxonomies/routes.tsp";
-import "../evaluators/routes.tsp";
 import "../insights/routes.tsp";
 import "../memory-stores/routes.tsp";
 import "../models/routes.tsp";
@@ -472,10 +472,10 @@ using Azure.AI.Projects;
 @@clientName(DispatchRoutineResponse, "DispatchRoutineResult", "python");
 
 // --------------------------------------------------------------------------------
-// Beta Evaluators sub‐client
+// Evaluator sub-clients
 // --------------------------------------------------------------------------------
 
-// Keep publication lineage public on the beta Evaluators sub-client.
+// Publication lineage is public on the GA Evaluators sub-client.
 @@access(Evaluators.listDiagnostics, Access.public);
 @@access(Evaluators.getDiagnostic, Access.public);
 

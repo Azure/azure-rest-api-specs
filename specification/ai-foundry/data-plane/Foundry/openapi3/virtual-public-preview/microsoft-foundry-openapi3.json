@@ -13766,18 +13766,6 @@
         "description": "Lists unnumbered current evaluator resources.",
         "parameters": [
           {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
-          {
             "name": "type",
             "in": "query",
             "required": false,
@@ -13826,7 +13814,25 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PagedEvaluator"
+                  "type": "object",
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Evaluator"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "next_link": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "The URL to fetch the next page of results, or absent if there are no additional pages."
+                    }
+                  },
+                  "description": "A page of items with a URL cursor to the next page."
                 }
               }
             }
@@ -13863,18 +13869,6 @@
         "summary": "Create or update the current evaluator",
         "description": "Creates the unnumbered current evaluator, or replaces it when the name already exists. Existing current state requires a matching `If-Match` ETag.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
           {
             "name": "name",
             "in": "path",
@@ -13988,18 +13982,6 @@
         "description": "Returns the unnumbered current evaluator and its ETag.",
         "parameters": [
           {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
-          {
             "name": "name",
             "in": "path",
             "required": true,
@@ -14082,18 +14064,6 @@
         "description": "Removes the current evaluator and all of its published versions. A matching ETag is required when current state exists.",
         "parameters": [
           {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
-          {
             "name": "name",
             "in": "path",
             "required": true,
@@ -14162,18 +14132,6 @@
         "description": "Retrieves SAS credentials for a pending current evaluator upload. Publishing freezes the resulting immutable artifact identity.",
         "parameters": [
           {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
-          {
             "name": "name",
             "in": "path",
             "required": true,
@@ -14238,11 +14196,6 @@
             }
           },
           "description": "The credential request parameters"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
         }
       }
     },
@@ -14252,18 +14205,6 @@
         "summary": "List evaluator diagnostics",
         "description": "Returns immutable publication lineage for the specified evaluator.\n\nTime, evaluator-version, dimension, and type filters are intersected.\nDiagnostics are populated when a numbered evaluator version is published.\nEditing mutable current state does not publish lineage.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
           {
             "name": "name",
             "in": "path",
@@ -14418,12 +14359,7 @@
         },
         "tags": [
           "Evaluators"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        ]
       }
     },
     "/evaluators/{name}/diagnostics/{diagnostic_id}": {
@@ -14432,18 +14368,6 @@
         "summary": "Get an evaluator diagnostic",
         "description": "Returns one completed evaluator diagnostic by its stable identifier.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
           {
             "name": "name",
             "in": "path",
@@ -14507,12 +14431,7 @@
         },
         "tags": [
           "Evaluators"
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        ]
       }
     },
     "/evaluators/{name}/startPendingUpload": {
@@ -14521,18 +14440,6 @@
         "summary": "Start a current evaluator pending upload",
         "description": "Initiates or retrieves a pending upload for mutable current evaluator state. Publishing freezes the resulting immutable artifact identity.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": false,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
           {
             "name": "name",
             "in": "path",
@@ -14598,11 +14505,6 @@
             }
           },
           "description": "The pending upload request parameters"
-        },
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
         }
       }
     },
@@ -14612,18 +14514,6 @@
         "summary": "List published evaluator versions",
         "description": "Returns immutable published versions for the specified evaluator.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
           {
             "name": "name",
             "in": "path",
@@ -14682,7 +14572,25 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PagedEvaluatorVersion"
+                  "type": "object",
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/EvaluatorVersion"
+                      },
+                      "description": "The requested list of items."
+                    },
+                    "next_link": {
+                      "type": "string",
+                      "format": "uri",
+                      "description": "The URL to fetch the next page of results, or absent if there are no additional pages."
+                    }
+                  },
+                  "description": "A page of items with a URL cursor to the next page."
                 }
               }
             }
@@ -14717,18 +14625,6 @@
         "summary": "Create a published evaluator version",
         "description": "Atomically replaces current evaluator state and publishes that exact state as the next immutable numbered version.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
           {
             "name": "name",
             "in": "path",
@@ -14825,18 +14721,6 @@
         "description": "Retrieves the specified immutable published evaluator version.",
         "parameters": [
           {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
-          {
             "name": "name",
             "in": "path",
             "required": true,
@@ -14907,18 +14791,6 @@
         "description": "Removes the specified immutable published version without changing current state.",
         "parameters": [
           {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
-          {
             "name": "name",
             "in": "path",
             "required": true,
@@ -14983,18 +14855,6 @@
         "summary": "Publish the current evaluator",
         "description": "Publishes the ETag-matched current evaluator as the next immutable numbered version.",
         "parameters": [
-          {
-            "name": "Foundry-Features",
-            "in": "header",
-            "required": true,
-            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
-            "schema": {
-              "type": "string",
-              "enum": [
-                "Evaluations=V1Preview"
-              ]
-            }
-          },
           {
             "name": "name",
             "in": "path",
@@ -41075,31 +40935,16 @@
           },
           "entry_point": {
             "type": "string",
-            "description": "The entry point Python file name for the uploaded evaluator code (e.g. 'answer_length_evaluator.py')",
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "Evaluations=V1Preview"
-              ]
-            }
+            "description": "The entry point Python file name for the uploaded evaluator code (e.g. 'answer_length_evaluator.py')"
           },
           "image_tag": {
             "type": "string",
-            "description": "The container image tag to use for evaluator code execution",
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "Evaluations=V1Preview"
-              ]
-            }
+            "description": "The container image tag to use for evaluator code execution"
           },
           "blob_uri": {
             "type": "string",
             "format": "uri",
-            "description": "The blob URI for the evaluator storage",
-            "x-ms-foundry-meta": {
-              "required_previews": [
-                "Evaluations=V1Preview"
-              ]
-            }
+            "description": "The blob URI for the evaluator storage"
           }
         },
         "allOf": [
@@ -41107,12 +40952,7 @@
             "$ref": "#/components/schemas/EvaluatorDefinition"
           }
         ],
-        "description": "Code-based evaluator definition using python code",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Code-based evaluator definition using python code"
       },
       "CodeConfiguration": {
         "type": "object",
@@ -41249,12 +41089,7 @@
             "description": "Whether more lineage entries are available."
           }
         },
-        "description": "A flat page of immutable evaluator lineage diagnostics.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "A flat page of immutable evaluator lineage diagnostics."
       },
       "CompletionMessageToolCallChunk": {
         "type": "object",
@@ -43050,12 +42885,7 @@
             "description": "Dataset version."
           }
         },
-        "description": "Reference to a versioned Foundry Dataset.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Reference to a versioned Foundry Dataset."
       },
       "DatasetType": {
         "anyOf": [
@@ -43208,12 +43038,7 @@
             "$ref": "#/components/schemas/EvaluatorLineageDiagnosticBase"
           }
         ],
-        "description": "A diagnostic change recording functional evaluator changes outside individual dimensions.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "A diagnostic change recording functional evaluator changes outside individual dimensions."
       },
       "DeleteAgentResponse": {
         "type": "object",
@@ -43580,12 +43405,7 @@
             "default": false
           }
         },
-        "description": "A single dimension — one independent, measurable quality dimension within a rubric evaluator's scoring blueprint.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "A single dimension — one independent, measurable quality dimension within a rubric evaluator's scoring blueprint."
       },
       "DimensionAddedDiagnosticChange": {
         "type": "object",
@@ -43626,12 +43446,7 @@
             "$ref": "#/components/schemas/EvaluatorLineageDiagnosticBase"
           }
         ],
-        "description": "A diagnostic change recording the addition of a rubric dimension.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "A diagnostic change recording the addition of a rubric dimension."
       },
       "DimensionRemovedDiagnosticChange": {
         "type": "object",
@@ -43672,12 +43487,7 @@
             "$ref": "#/components/schemas/EvaluatorLineageDiagnosticBase"
           }
         ],
-        "description": "A diagnostic change recording the removal of a rubric dimension.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "A diagnostic change recording the removal of a rubric dimension."
       },
       "DimensionUpdatedDiagnosticChange": {
         "type": "object",
@@ -43723,12 +43533,7 @@
             "$ref": "#/components/schemas/EvaluatorLineageDiagnosticBase"
           }
         ],
-        "description": "A diagnostic change recording an update to a rubric dimension.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "A diagnostic change recording an update to a rubric dimension."
       },
       "DispatchRoutineRequest": {
         "type": "object",
@@ -46126,12 +45931,7 @@
             "readOnly": true
           }
         },
-        "description": "The mutable unnumbered current evaluator state.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "The mutable unnumbered current evaluator state."
       },
       "EvaluatorCategory": {
         "anyOf": [
@@ -46147,12 +45947,7 @@
             ]
           }
         ],
-        "description": "The category of the evaluator",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "The category of the evaluator"
       },
       "EvaluatorConfiguration": {
         "type": "object",
@@ -46191,12 +45986,7 @@
             "description": "The blob URI for the evaluator storage. Example: `https://account.blob.core.windows.net:443/container`"
           }
         },
-        "description": "Request body for getting evaluator credentials",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Request body for getting evaluator credentials"
       },
       "EvaluatorDefinition": {
         "type": "object",
@@ -46235,12 +46025,7 @@
             "endpoint": "#/components/schemas/EndpointBasedEvaluatorDefinition"
           }
         },
-        "description": "Base evaluator configuration with discriminator",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Base evaluator configuration with discriminator"
       },
       "EvaluatorDefinitionType": {
         "anyOf": [
@@ -46260,12 +46045,7 @@
             ]
           }
         ],
-        "description": "The type of evaluator definition",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "The type of evaluator definition"
       },
       "EvaluatorDiagnostic": {
         "type": "object",
@@ -46313,12 +46093,7 @@
             "definition_updated": "#/components/schemas/EvaluatorLineageDiagnosticBase"
           }
         },
-        "description": "The shared fields for immutable evaluator publication lineage.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "The shared fields for immutable evaluator publication lineage."
       },
       "EvaluatorDiagnosticActor": {
         "type": "object",
@@ -46335,12 +46110,7 @@
             "description": "A stable opaque principal or service identifier, when available."
           }
         },
-        "description": "The actor responsible for an evaluator lineage diagnostic.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "The actor responsible for an evaluator lineage diagnostic."
       },
       "EvaluatorDiagnosticActorType": {
         "anyOf": [
@@ -46355,12 +46125,7 @@
             ]
           }
         ],
-        "description": "The type of actor responsible for an evaluator lineage diagnostic.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "The type of actor responsible for an evaluator lineage diagnostic."
       },
       "EvaluatorDiagnosticChangeType": {
         "anyOf": [
@@ -46382,12 +46147,7 @@
             ]
           }
         ],
-        "description": "Known machine-readable classifications for evaluator diagnostic changes.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Known machine-readable classifications for evaluator diagnostic changes."
       },
       "EvaluatorDiagnosticMessageSeverity": {
         "anyOf": [
@@ -46402,12 +46162,7 @@
             ]
           }
         ],
-        "description": "The severity of an evaluator diagnostic message.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "The severity of an evaluator diagnostic message."
       },
       "EvaluatorDiagnosticType": {
         "anyOf": [
@@ -46425,12 +46180,7 @@
             ]
           }
         ],
-        "description": "The supported evaluator diagnostic change shapes.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "The supported evaluator diagnostic change shapes."
       },
       "EvaluatorDimensionSourceCoverage": {
         "type": "object",
@@ -46462,12 +46212,7 @@
             "description": "A bounded explanation of the coverage status."
           }
         },
-        "description": "Recorded source coverage for one rubric dimension.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Recorded source coverage for one rubric dimension."
       },
       "EvaluatorDimensionSourceCoverageStatus": {
         "anyOf": [
@@ -46484,12 +46229,7 @@
             ]
           }
         ],
-        "description": "Whether one rubric dimension is covered by recorded generation sources.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Whether one rubric dimension is covered by recorded generation sources."
       },
       "EvaluatorFieldChange": {
         "type": "object",
@@ -46515,12 +46255,7 @@
             "description": "The resulting snapshot, mapping the exact `field` path to its JSON value. The mapped value may be a scalar, array, object, or null."
           }
         },
-        "description": "A change to one functional evaluator field.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "A change to one functional evaluator field."
       },
       "EvaluatorGenerationArtifacts": {
         "type": "object",
@@ -46541,12 +46276,7 @@
             "description": "The kinds of rows present in `dataset`. Always contains `\"spec\"` (the generated evaluation specification, a Markdown document describing what the evaluator measures). May additionally contain `\"tools\"` (when the generation pipeline produced or inferred OpenAI tool schemas) and/or `\"context\"` (when supplementary materials such as file uploads or trace samples were used during generation)."
           }
         },
-        "description": "Service-managed provenance artifacts produced by an evaluator generation job. Present on generated current evaluator state and copied into a published version when that state is published. The combined-JSONL Foundry Dataset is read-only and resolves to a versioned dataset in a service-reserved namespace.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Service-managed provenance artifacts produced by an evaluator generation job. Present on generated current evaluator state and copied into a published version when that state is published. The combined-JSONL Foundry Dataset is read-only and resolves to a versioned dataset in a service-reserved namespace."
       },
       "EvaluatorGenerationInputs": {
         "type": "object",
@@ -46730,12 +46460,7 @@
             "description": "How the source was used."
           }
         },
-        "description": "A bounded evaluator generation source snapshot.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "A bounded evaluator generation source snapshot."
       },
       "EvaluatorGenerationSourceUseStatus": {
         "anyOf": [
@@ -46751,12 +46476,7 @@
             ]
           }
         ],
-        "description": "How an evaluator generation source was used.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "How an evaluator generation source was used."
       },
       "EvaluatorGenerationTokenUsage": {
         "type": "object",
@@ -46820,12 +46540,7 @@
             "$ref": "#/components/schemas/EvaluatorDiagnostic"
           }
         ],
-        "description": "The shared fields for completed evaluator lineage diagnostics.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "The shared fields for completed evaluator lineage diagnostics."
       },
       "EvaluatorMetric": {
         "type": "object",
@@ -46858,12 +46573,7 @@
             "description": "Indicates if this metric is primary when there are multiple metrics."
           }
         },
-        "description": "Evaluator Metric",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Evaluator Metric"
       },
       "EvaluatorMetricDirection": {
         "anyOf": [
@@ -46879,12 +46589,7 @@
             ]
           }
         ],
-        "description": "The direction of the metric indicating whether a higher value is better, a lower value is better, or neutral",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "The direction of the metric indicating whether a higher value is better, a lower value is better, or neutral"
       },
       "EvaluatorMetricType": {
         "anyOf": [
@@ -46900,12 +46605,7 @@
             ]
           }
         ],
-        "description": "The type of the evaluator",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "The type of the evaluator"
       },
       "EvaluatorSourceCoverageGap": {
         "type": "object",
@@ -46940,12 +46640,7 @@
             "description": "A bounded explanation."
           }
         },
-        "description": "A bounded gap in evaluator source coverage.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "A bounded gap in evaluator source coverage."
       },
       "EvaluatorSourceLineageSummary": {
         "type": "object",
@@ -46985,12 +46680,7 @@
             "description": "Bounded limitations of the recorded lineage."
           }
         },
-        "description": "Bounded source lineage and coverage recorded by evaluator generation.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Bounded source lineage and coverage recorded by evaluator generation."
       },
       "EvaluatorType": {
         "anyOf": [
@@ -47005,12 +46695,7 @@
             ]
           }
         ],
-        "description": "The type of the evaluator",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "The type of the evaluator"
       },
       "EvaluatorVersion": {
         "type": "object",
@@ -47121,12 +46806,7 @@
             "readOnly": true
           }
         },
-        "description": "An immutable published evaluator version.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "An immutable published evaluator version."
       },
       "EvaluatorVersionNumber": {
         "type": "string",
@@ -47897,12 +47577,7 @@
             ]
           }
         ],
-        "description": "Category of a warning surfaced on a generated evaluator version. Extensible so new warning categories (e.g., safety, output quality) can be introduced without a breaking change.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Category of a warning surfaced on a generated evaluator version. Extensible so new warning categories (e.g., safety, output quality) can be introduced without a breaking change."
       },
       "GitHubCopilotBuiltInTool": {
         "type": "string",
@@ -90360,48 +90035,6 @@
         },
         "description": "Paged collection of EvaluationTaxonomy items"
       },
-      "PagedEvaluator": {
-        "type": "object",
-        "required": [
-          "value"
-        ],
-        "properties": {
-          "value": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Evaluator"
-            },
-            "description": "The Evaluator items on this page"
-          },
-          "nextLink": {
-            "type": "string",
-            "format": "uri",
-            "description": "The link to the next page of items"
-          }
-        },
-        "description": "Paged collection of Evaluator items"
-      },
-      "PagedEvaluatorVersion": {
-        "type": "object",
-        "required": [
-          "value"
-        ],
-        "properties": {
-          "value": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EvaluatorVersion"
-            },
-            "description": "The EvaluatorVersion items on this page"
-          },
-          "nextLink": {
-            "type": "string",
-            "format": "uri",
-            "description": "The link to the next page of items"
-          }
-        },
-        "description": "Paged collection of EvaluatorVersion items"
-      },
       "PagedIndex": {
         "type": "object",
         "required": [
@@ -90828,12 +90461,7 @@
             "$ref": "#/components/schemas/EvaluatorDefinition"
           }
         ],
-        "description": "Prompt-based evaluator",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Prompt-based evaluator"
       },
       "PromptDataGenerationJobSource": {
         "type": "object",
@@ -92068,12 +91696,7 @@
             "$ref": "#/components/schemas/EvaluatorDefinition"
           }
         ],
-        "description": "Rubric-based evaluator definition — stores dimensions produced by the generate API. Used for both quality and safety evaluators.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "Rubric-based evaluator definition — stores dimensions produced by the generate API. Used for both quality and safety evaluators."
       },
       "RubricGenerationInputQualityWarning": {
         "type": "object",
@@ -96811,12 +96434,7 @@
             "$ref": "#/components/schemas/EvaluatorLineageDiagnosticBase"
           }
         ],
-        "description": "A diagnostic change recording the creation of an evaluator version.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "Evaluations=V1Preview"
-          ]
-        }
+        "description": "A diagnostic change recording the creation of an evaluator version."
       },
       "VersionIndicator": {
         "type": "object",

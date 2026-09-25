@@ -7594,14 +7594,6 @@ paths:
       summary: List current evaluators
       description: Lists unnumbered current evaluator resources.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
         - name: type
           in: query
           required: false
@@ -7635,7 +7627,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PagedEvaluator'
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Evaluator'
+                    description: The requested list of items.
+                  next_link:
+                    type: string
+                    format: uri
+                    description: The URL to fetch the next page of results, or absent if there are no additional pages.
+                description: A page of items with a URL cursor to the next page.
         4XX:
           description: Client error
           content:
@@ -7656,14 +7661,6 @@ paths:
       summary: Create or update the current evaluator
       description: Creates the unnumbered current evaluator, or replaces it when the name already exists. Existing current state requires a matching `If-Match` ETag.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
         - name: name
           in: path
           required: true
@@ -7732,14 +7729,6 @@ paths:
       summary: Get the current evaluator
       description: Returns the unnumbered current evaluator and its ETag.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
         - name: name
           in: path
           required: true
@@ -7789,14 +7778,6 @@ paths:
       summary: Delete an evaluator
       description: Removes the current evaluator and all of its published versions. A matching ETag is required when current state exists.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
         - name: name
           in: path
           required: true
@@ -7837,14 +7818,6 @@ paths:
       summary: Get current evaluator credentials
       description: Retrieves SAS credentials for a pending current evaluator upload. Publishing freezes the resulting immutable artifact identity.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
         - name: name
           in: path
           required: true
@@ -7886,9 +7859,6 @@ paths:
             schema:
               $ref: '#/components/schemas/EvaluatorCredentialRequest'
         description: The credential request parameters
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
   /evaluators/{name}/diagnostics:
     get:
       operationId: Evaluators_listDiagnostics
@@ -7900,14 +7870,6 @@ paths:
         Diagnostics are populated when a numbered evaluator version is published.
         Editing mutable current state does not publish lineage.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
         - name: name
           in: path
           required: true
@@ -8020,23 +7982,12 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Evaluators
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
   /evaluators/{name}/diagnostics/{diagnostic_id}:
     get:
       operationId: Evaluators_getDiagnostic
       summary: Get an evaluator diagnostic
       description: Returns one completed evaluator diagnostic by its stable identifier.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
         - name: name
           in: path
           required: true
@@ -8077,23 +8028,12 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - Evaluators
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
   /evaluators/{name}/startPendingUpload:
     post:
       operationId: Evaluators_startPendingUpload
       summary: Start a current evaluator pending upload
       description: Initiates or retrieves a pending upload for mutable current evaluator state. Publishing freezes the resulting immutable artifact identity.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
         - name: name
           in: path
           required: true
@@ -8135,23 +8075,12 @@ paths:
             schema:
               $ref: '#/components/schemas/PendingUploadRequest'
         description: The pending upload request parameters
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
   /evaluators/{name}/versions:
     get:
       operationId: Evaluators_listVersions
       summary: List published evaluator versions
       description: Returns immutable published versions for the specified evaluator.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
         - name: name
           in: path
           required: true
@@ -8191,7 +8120,20 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PagedEvaluatorVersion'
+                type: object
+                required:
+                  - data
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/EvaluatorVersion'
+                    description: The requested list of items.
+                  next_link:
+                    type: string
+                    format: uri
+                    description: The URL to fetch the next page of results, or absent if there are no additional pages.
+                description: A page of items with a URL cursor to the next page.
         4XX:
           description: Client error
           content:
@@ -8211,14 +8153,6 @@ paths:
       summary: Create a published evaluator version
       description: Atomically replaces current evaluator state and publishes that exact state as the next immutable numbered version.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
         - name: name
           in: path
           required: true
@@ -8276,14 +8210,6 @@ paths:
       summary: Get a published evaluator version
       description: Retrieves the specified immutable published evaluator version.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
         - name: name
           in: path
           required: true
@@ -8329,14 +8255,6 @@ paths:
       summary: Delete a published evaluator version
       description: Removes the specified immutable published version without changing current state.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
         - name: name
           in: path
           required: true
@@ -8379,14 +8297,6 @@ paths:
       summary: Publish the current evaluator
       description: Publishes the ETag-matched current evaluator as the next immutable numbered version.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: true
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - Evaluations=V1Preview
         - name: name
           in: path
           required: true
@@ -45187,28 +45097,16 @@ components:
         entry_point:
           type: string
           description: The entry point Python file name for the uploaded evaluator code (e.g. 'answer_length_evaluator.py')
-          x-ms-foundry-meta:
-            required_previews:
-              - Evaluations=V1Preview
         image_tag:
           type: string
           description: The container image tag to use for evaluator code execution
-          x-ms-foundry-meta:
-            required_previews:
-              - Evaluations=V1Preview
         blob_uri:
           type: string
           format: uri
           description: The blob URI for the evaluator storage
-          x-ms-foundry-meta:
-            required_previews:
-              - Evaluations=V1Preview
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Code-based evaluator definition using python code
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     CodeConfiguration:
       type: object
       required:
@@ -45300,9 +45198,6 @@ components:
           type: boolean
           description: Whether more lineage entries are available.
       description: A flat page of immutable evaluator lineage diagnostics.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     CompletionMessageToolCallChunk:
       type: object
       required:
@@ -46435,9 +46330,6 @@ components:
           type: string
           description: Dataset version.
       description: Reference to a versioned Foundry Dataset.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     DatasetType:
       anyOf:
         - type: string
@@ -46544,9 +46436,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorLineageDiagnosticBase'
       description: A diagnostic change recording functional evaluator changes outside individual dimensions.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     DeleteAgentResponse:
       type: object
       required:
@@ -46789,9 +46678,6 @@ components:
           description: When true, the LLM judge always scores this dimension regardless of relevance (skips applicability assessment). The service-generated general quality/policy dimension has this set to true and is non-editable. Users may set this on their own custom dimensions. The service defaults to `false` if a value is not specified by the caller.
           default: false
       description: A single dimension — one independent, measurable quality dimension within a rubric evaluator's scoring blueprint.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     DimensionAddedDiagnosticChange:
       type: object
       required:
@@ -46821,9 +46707,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorLineageDiagnosticBase'
       description: A diagnostic change recording the addition of a rubric dimension.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     DimensionRemovedDiagnosticChange:
       type: object
       required:
@@ -46853,9 +46736,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorLineageDiagnosticBase'
       description: A diagnostic change recording the removal of a rubric dimension.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     DimensionUpdatedDiagnosticChange:
       type: object
       required:
@@ -46889,9 +46769,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorLineageDiagnosticBase'
       description: A diagnostic change recording an update to a rubric dimension.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     DispatchRoutineRequest:
       type: object
       properties:
@@ -48297,9 +48174,6 @@ components:
           description: The entity tag for this resource.
           readOnly: true
       description: The mutable unnumbered current evaluator state.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorCategory:
       anyOf:
         - type: string
@@ -48309,9 +48183,6 @@ components:
             - safety
             - agents
       description: The category of the evaluator
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorCredentialRequest:
       type: object
       required:
@@ -48322,9 +48193,6 @@ components:
           format: uri
           description: 'The blob URI for the evaluator storage. Example: `https://account.blob.core.windows.net:443/container`'
       description: Request body for getting evaluator credentials
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorDefinition:
       type: object
       required:
@@ -48354,9 +48222,6 @@ components:
           rubric: '#/components/schemas/RubricBasedEvaluatorDefinition'
           endpoint: '#/components/schemas/EndpointBasedEvaluatorDefinition'
       description: Base evaluator configuration with discriminator
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorDefinitionType:
       anyOf:
         - type: string
@@ -48370,9 +48235,6 @@ components:
             - rubric
             - endpoint
       description: The type of evaluator definition
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorDiagnostic:
       type: object
       required:
@@ -48410,9 +48272,6 @@ components:
           dimension_removed: '#/components/schemas/EvaluatorLineageDiagnosticBase'
           definition_updated: '#/components/schemas/EvaluatorLineageDiagnosticBase'
       description: The shared fields for immutable evaluator publication lineage.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorDiagnosticActor:
       type: object
       required:
@@ -48425,9 +48284,6 @@ components:
           type: string
           description: A stable opaque principal or service identifier, when available.
       description: The actor responsible for an evaluator lineage diagnostic.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorDiagnosticActorType:
       anyOf:
         - type: string
@@ -48436,9 +48292,6 @@ components:
             - user
             - service
       description: The type of actor responsible for an evaluator lineage diagnostic.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorDiagnosticChangeType:
       anyOf:
         - type: string
@@ -48454,9 +48307,6 @@ components:
             - generation_completed
             - history_imported
       description: Known machine-readable classifications for evaluator diagnostic changes.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorDiagnosticMessageSeverity:
       anyOf:
         - type: string
@@ -48465,9 +48315,6 @@ components:
             - info
             - warning
       description: The severity of an evaluator diagnostic message.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorDiagnosticType:
       anyOf:
         - type: string
@@ -48479,9 +48326,6 @@ components:
             - dimension_removed
             - definition_updated
       description: The supported evaluator diagnostic change shapes.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorDimensionSourceCoverage:
       type: object
       required:
@@ -48506,9 +48350,6 @@ components:
           type: string
           description: A bounded explanation of the coverage status.
       description: Recorded source coverage for one rubric dimension.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorDimensionSourceCoverageStatus:
       anyOf:
         - type: string
@@ -48519,9 +48360,6 @@ components:
             - unresolved
             - uncovered
       description: Whether one rubric dimension is covered by recorded generation sources.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorFieldChange:
       type: object
       required:
@@ -48542,9 +48380,6 @@ components:
           unevaluatedProperties: {}
           description: The resulting snapshot, mapping the exact `field` path to its JSON value. The mapped value may be a scalar, array, object, or null.
       description: A change to one functional evaluator field.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorGenerationArtifacts:
       type: object
       required:
@@ -48560,9 +48395,6 @@ components:
             type: string
           description: The kinds of rows present in `dataset`. Always contains `"spec"` (the generated evaluation specification, a Markdown document describing what the evaluator measures). May additionally contain `"tools"` (when the generation pipeline produced or inferred OpenAI tool schemas) and/or `"context"` (when supplementary materials such as file uploads or trace samples were used during generation).
       description: Service-managed provenance artifacts produced by an evaluator generation job. Present on generated current evaluator state and copied into a published version when that state is published. The combined-JSONL Foundry Dataset is read-only and resolves to a versioned dataset in a service-reserved namespace.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorGenerationInputs:
       type: object
       required:
@@ -48697,9 +48529,6 @@ components:
           $ref: '#/components/schemas/EvaluatorGenerationSourceUseStatus'
           description: How the source was used.
       description: A bounded evaluator generation source snapshot.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorGenerationSourceUseStatus:
       anyOf:
         - type: string
@@ -48709,9 +48538,6 @@ components:
             - partially_used
             - rejected
       description: How an evaluator generation source was used.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorGenerationTokenUsage:
       type: object
       required:
@@ -48758,9 +48584,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorDiagnostic'
       description: The shared fields for completed evaluator lineage diagnostics.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorMetric:
       type: object
       properties:
@@ -48786,9 +48609,6 @@ components:
           type: boolean
           description: Indicates if this metric is primary when there are multiple metrics.
       description: Evaluator Metric
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorMetricDirection:
       anyOf:
         - type: string
@@ -48798,9 +48618,6 @@ components:
             - decrease
             - neutral
       description: The direction of the metric indicating whether a higher value is better, a lower value is better, or neutral
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorMetricType:
       anyOf:
         - type: string
@@ -48810,9 +48627,6 @@ components:
             - continuous
             - boolean
       description: The type of the evaluator
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorSourceCoverageGap:
       type: object
       required:
@@ -48840,9 +48654,6 @@ components:
           type: string
           description: A bounded explanation.
       description: A bounded gap in evaluator source coverage.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorSourceLineageSummary:
       type: object
       required:
@@ -48872,9 +48683,6 @@ components:
             type: string
           description: Bounded limitations of the recorded lineage.
       description: Bounded source lineage and coverage recorded by evaluator generation.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorType:
       anyOf:
         - type: string
@@ -48883,9 +48691,6 @@ components:
             - builtin
             - custom
       description: The type of the evaluator
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorVersion:
       type: object
       required:
@@ -48971,9 +48776,6 @@ components:
           description: The immutable published version number.
           readOnly: true
       description: An immutable published evaluator version.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorVersionNumber:
       type: string
       minLength: 1
@@ -49485,9 +49287,6 @@ components:
           enum:
             - input_quality
       description: Category of a warning surfaced on a generated evaluator version. Extensible so new warning categories (e.g., safety, output quality) can be introduced without a breaking change.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     GitHubCopilotBuiltInTool:
       type: string
       enum:
@@ -80030,36 +79829,6 @@ components:
           format: uri
           description: The link to the next page of items
       description: Paged collection of EvaluationTaxonomy items
-    PagedEvaluator:
-      type: object
-      required:
-        - value
-      properties:
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/Evaluator'
-          description: The Evaluator items on this page
-        nextLink:
-          type: string
-          format: uri
-          description: The link to the next page of items
-      description: Paged collection of Evaluator items
-    PagedEvaluatorVersion:
-      type: object
-      required:
-        - value
-      properties:
-        value:
-          type: array
-          items:
-            $ref: '#/components/schemas/EvaluatorVersion'
-          description: The EvaluatorVersion items on this page
-        nextLink:
-          type: string
-          format: uri
-          description: The link to the next page of items
-      description: Paged collection of EvaluatorVersion items
     PagedIndex:
       type: object
       required:
@@ -80342,9 +80111,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Prompt-based evaluator
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     PromptDataGenerationJobSource:
       type: object
       required:
@@ -81170,9 +80936,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Rubric-based evaluator definition — stores dimensions produced by the generate API. Used for both quality and safety evaluators.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     RubricGenerationInputQualityWarning:
       type: object
       required:
@@ -84438,9 +84201,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorLineageDiagnosticBase'
       description: A diagnostic change recording the creation of an evaluator version.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     VersionIndicator:
       type: object
       required:

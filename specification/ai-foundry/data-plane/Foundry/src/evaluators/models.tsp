@@ -15,7 +15,6 @@ const EvaluatorsRequiredPreviews = #{
 };
 
 @doc("The category of the evaluator")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorCategory {
   string,
 
@@ -30,7 +29,6 @@ union EvaluatorCategory {
 }
 
 @doc("The type of the evaluator")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorType {
   string,
 
@@ -42,7 +40,6 @@ union EvaluatorType {
 }
 
 @doc("The type of evaluator definition")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorDefinitionType {
   string,
 
@@ -71,7 +68,6 @@ union EvaluatorDefinitionType {
 #suppress "@azure-tools/typespec-azure-core/no-unknown"
 @doc("Base evaluator configuration with discriminator")
 @discriminator("type")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorDefinition {
   @doc("The type of evaluator definition")
   type: EvaluatorDefinitionType;
@@ -87,37 +83,23 @@ model EvaluatorDefinition {
 }
 
 @doc("Code-based evaluator definition using python code")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model CodeBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.code;
 
   @doc("Inline code text for the evaluator")
   code_text?: string;
 
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview] }
-  )
   @doc("The entry point Python file name for the uploaded evaluator code (e.g. 'answer_length_evaluator.py')")
   entry_point?: string;
 
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview] }
-  )
   @doc("The container image tag to use for evaluator code execution")
   image_tag?: string;
 
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview] }
-  )
   @doc("The blob URI for the evaluator storage")
   blob_uri?: url;
 }
 
 @doc("Prompt-based evaluator")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model PromptBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.prompt;
 
@@ -130,7 +112,6 @@ model PromptBasedEvaluatorDefinition extends EvaluatorDefinition {
 // ============================================================================
 
 @doc("A single dimension — one independent, measurable quality dimension within a rubric evaluator's scoring blueprint.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model Dimension {
   @doc("Stable identifier for this dimension (snake_case, e.g., `correct_resolution`). Required. Provided by the user when manually creating a rubric evaluator or during human-in-the-loop review of a generated set; the generation pipeline produces an initial value the user can edit. Editable when saving new versions.")
   @minLength(1)
@@ -151,7 +132,6 @@ model Dimension {
 }
 
 @doc("Rubric-based evaluator definition — stores dimensions produced by the generate API. Used for both quality and safety evaluators.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.rubric;
 
@@ -169,7 +149,6 @@ model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
 // ============================================================================
 
 @doc("The type of actor responsible for an evaluator lineage diagnostic.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorDiagnosticActorType {
   string,
 
@@ -181,7 +160,6 @@ union EvaluatorDiagnosticActorType {
 }
 
 @doc("The actor responsible for an evaluator lineage diagnostic.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorDiagnosticActor {
   @doc("The type of actor.")
   type: EvaluatorDiagnosticActorType;
@@ -191,7 +169,6 @@ model EvaluatorDiagnosticActor {
 }
 
 @doc("The severity of an evaluator diagnostic message.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorDiagnosticMessageSeverity {
   string,
 
@@ -203,7 +180,6 @@ union EvaluatorDiagnosticMessageSeverity {
 }
 
 @doc("Known machine-readable classifications for evaluator diagnostic changes.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorDiagnosticChangeType {
   string,
 
@@ -236,7 +212,6 @@ union EvaluatorDiagnosticChangeType {
 }
 
 @doc("The supported evaluator diagnostic change shapes.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorDiagnosticType {
   string,
 
@@ -258,7 +233,6 @@ union EvaluatorDiagnosticType {
 
 @doc("The shared fields for immutable evaluator publication lineage.")
 @discriminator("type")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorDiagnostic {
   @doc("The stable server-assigned diagnostic identifier.")
   @minLength(1)
@@ -282,7 +256,6 @@ model EvaluatorDiagnostic {
 
 @doc("The shared fields for completed evaluator lineage diagnostics.")
 @discriminator("type")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorLineageDiagnosticBase extends EvaluatorDiagnostic {
   @doc("The lineage diagnostic change shape.")
   type: EvaluatorDiagnosticType;
@@ -292,7 +265,6 @@ model EvaluatorLineageDiagnosticBase extends EvaluatorDiagnostic {
 }
 
 @doc("A flat page of immutable evaluator lineage diagnostics.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model CompletedEvaluatorDiagnosticsPage {
   @doc("The evaluator publication lineage entries.")
   @maxItems(100)
@@ -313,7 +285,6 @@ model CompletedEvaluatorDiagnosticsPage {
 }
 
 @doc("A change to one functional evaluator field.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorFieldChange {
   @doc("A stable path identifying the changed field.")
   @minLength(1)
@@ -327,7 +298,6 @@ model EvaluatorFieldChange {
 }
 
 @doc("How an evaluator generation source was used.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorGenerationSourceUseStatus {
   string,
 
@@ -342,7 +312,6 @@ union EvaluatorGenerationSourceUseStatus {
 }
 
 @doc("A bounded evaluator generation source snapshot.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorGenerationSourceSnapshot {
   @doc("The stable source identifier within the generation operation.")
   @minLength(1)
@@ -360,7 +329,6 @@ model EvaluatorGenerationSourceSnapshot {
 }
 
 @doc("Whether one rubric dimension is covered by recorded generation sources.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorDimensionSourceCoverageStatus {
   string,
 
@@ -378,7 +346,6 @@ union EvaluatorDimensionSourceCoverageStatus {
 }
 
 @doc("Recorded source coverage for one rubric dimension.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorDimensionSourceCoverage {
   @doc("The stable rubric dimension identifier.")
   @minLength(1)
@@ -396,7 +363,6 @@ model EvaluatorDimensionSourceCoverage {
 }
 
 @doc("A bounded gap in evaluator source coverage.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorSourceCoverageGap {
   @doc("The stable gap code.")
   @minLength(1)
@@ -419,7 +385,6 @@ model EvaluatorSourceCoverageGap {
 }
 
 @doc("Bounded source lineage and coverage recorded by evaluator generation.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorSourceLineageSummary {
   @doc("Recorded generation source snapshots.")
   sources: EvaluatorGenerationSourceSnapshot[];
@@ -435,7 +400,6 @@ model EvaluatorSourceLineageSummary {
 }
 
 @doc("A diagnostic change recording the creation of an evaluator version.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model VersionCreatedDiagnosticChange extends EvaluatorLineageDiagnosticBase {
   type: EvaluatorDiagnosticType.version_created;
 
@@ -451,7 +415,6 @@ model VersionCreatedDiagnosticChange extends EvaluatorLineageDiagnosticBase {
 }
 
 @doc("A diagnostic change recording the addition of a rubric dimension.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model DimensionAddedDiagnosticChange extends EvaluatorLineageDiagnosticBase {
   type: EvaluatorDiagnosticType.dimension_added;
 
@@ -470,7 +433,6 @@ model DimensionAddedDiagnosticChange extends EvaluatorLineageDiagnosticBase {
 }
 
 @doc("A diagnostic change recording an update to a rubric dimension.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model DimensionUpdatedDiagnosticChange extends EvaluatorLineageDiagnosticBase {
   type: EvaluatorDiagnosticType.dimension_updated;
 
@@ -492,7 +454,6 @@ model DimensionUpdatedDiagnosticChange extends EvaluatorLineageDiagnosticBase {
 }
 
 @doc("A diagnostic change recording the removal of a rubric dimension.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model DimensionRemovedDiagnosticChange extends EvaluatorLineageDiagnosticBase {
   type: EvaluatorDiagnosticType.dimension_removed;
 
@@ -511,7 +472,6 @@ model DimensionRemovedDiagnosticChange extends EvaluatorLineageDiagnosticBase {
 }
 
 @doc("A diagnostic change recording functional evaluator changes outside individual dimensions.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model DefinitionUpdatedDiagnosticChange extends EvaluatorLineageDiagnosticBase {
   type: EvaluatorDiagnosticType.definition_updated;
 
@@ -534,7 +494,6 @@ model EndpointBasedEvaluatorDefinition extends EvaluatorDefinition {
 // ============================================================================
 
 @doc("Reference to a versioned Foundry Dataset.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model DatasetReference {
   @doc("Dataset name.")
   name: string;
@@ -544,7 +503,6 @@ model DatasetReference {
 }
 
 @doc("Service-managed provenance artifacts produced by an evaluator generation job. Present on generated current evaluator state and copied into a published version when that state is published. The combined-JSONL Foundry Dataset is read-only and resolves to a versioned dataset in a service-reserved namespace.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorGenerationArtifacts {
   @doc("Reference to the single Foundry Dataset holding all artifacts produced by the generation pipeline. Each row in the JSONL carries a `kind` field discriminating its content (e.g. `spec`, `tools`, `context`).")
   dataset: DatasetReference;
@@ -736,7 +694,6 @@ model RubricGenerationInputQualityWarning {
 }
 
 @doc("Category of a warning surfaced on a generated evaluator version. Extensible so new warning categories (e.g., safety, output quality) can be introduced without a breaking change.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union GenerationWarningType {
   string,
 
@@ -819,7 +776,6 @@ alias EvaluatorProperties = {
 
 @doc("The mutable unnumbered current evaluator state.")
 @resource("evaluators")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model Evaluator {
   ...EvaluatorProperties;
 
@@ -836,7 +792,6 @@ model Evaluator {
 }
 
 @doc("An immutable published evaluator version.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorVersion {
   ...EvaluatorProperties;
 
@@ -854,10 +809,6 @@ model EvaluatorVersion {
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-@extension(
-  "x-ms-foundry-meta",
-  #{ required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview] }
-)
 @doc("Request body for getting evaluator credentials")
 model EvaluatorCredentialRequest {
   @doc("The blob URI for the evaluator storage. Example: `https://account.blob.core.windows.net:443/container`")
@@ -865,7 +816,6 @@ model EvaluatorCredentialRequest {
 }
 
 @doc("Evaluator Metric")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorMetric {
   @doc("Type of the metric.")
   type?: EvaluatorMetricType;
@@ -887,7 +837,6 @@ model EvaluatorMetric {
 }
 
 @doc("The type of the evaluator")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorMetricType {
   string,
 
@@ -902,7 +851,6 @@ union EvaluatorMetricType {
 }
 
 @doc("The direction of the metric indicating whether a higher value is better, a lower value is better, or neutral")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorMetricDirection {
   string,
 

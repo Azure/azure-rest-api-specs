@@ -70,8 +70,7 @@ interface Evaluators {
   @summary("Create or update the current evaluator")
   @route("/evaluators/{name}")
   @put
-  createOrUpdate is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+  createOrUpdate is FoundryDataPlaneOperation<
     {
       @doc("The evaluator name.")
       @path
@@ -91,8 +90,7 @@ interface Evaluators {
   @summary("Get the current evaluator")
   @route("/evaluators/{name}")
   @get
-  get is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+  get is FoundryDataPlaneOperation<
     {
       @doc("The evaluator name.")
       @path
@@ -108,8 +106,7 @@ interface Evaluators {
   @summary("Delete an evaluator")
   @route("/evaluators/{name}")
   @delete
-  delete is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+  delete is FoundryDataPlaneOperation<
     {
       @doc("The evaluator name.")
       @path
@@ -126,10 +123,9 @@ interface Evaluators {
   @route("/evaluators")
   @get
   @list
-  list is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+  list is FoundryDataPlaneOperation<
     ListEvaluatorsParameters,
-    Azure.Core.Page<Evaluator>
+    PagedResultWithNextLink<Evaluator>
   >;
 
   /** Publishes the ETag-matched current evaluator as the next immutable numbered version. */
@@ -137,8 +133,7 @@ interface Evaluators {
   @summary("Publish the current evaluator")
   @route("/evaluators/{name}:publish_version")
   @post
-  publishVersion is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+  publishVersion is FoundryDataPlaneOperation<
     {
       @doc("The evaluator name.")
       @path
@@ -156,8 +151,7 @@ interface Evaluators {
   @route("/evaluators/{name}/versions")
   @get
   @list
-  listVersions is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+  listVersions is FoundryDataPlaneOperation<
     {
       @doc("The evaluator name.")
       @path
@@ -165,7 +159,7 @@ interface Evaluators {
 
       ...ListEvaluatorsParameters;
     },
-    Azure.Core.Page<EvaluatorVersion>
+    PagedResultWithNextLink<EvaluatorVersion>
   >;
 
   /**
@@ -180,9 +174,7 @@ interface Evaluators {
   @route("/evaluators/{name}/diagnostics")
   @get
   @list
-  @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-  listDiagnostics is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+  listDiagnostics is FoundryDataPlaneOperation<
     {
       @doc("The evaluator name.")
       @path
@@ -198,9 +190,7 @@ interface Evaluators {
   @summary("Get an evaluator diagnostic")
   @route("/evaluators/{name}/diagnostics/{diagnostic_id}")
   @get
-  @extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
-  getDiagnostic is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+  getDiagnostic is FoundryDataPlaneOperation<
     {
       @doc("The evaluator name.")
       @path
@@ -218,8 +208,7 @@ interface Evaluators {
   @summary("Get a published evaluator version")
   @route("/evaluators/{name}/versions/{version}")
   @get
-  getVersion is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+  getVersion is FoundryDataPlaneOperation<
     {
       @doc("The evaluator name.")
       @path
@@ -237,8 +226,7 @@ interface Evaluators {
   @summary("Delete a published evaluator version")
   @route("/evaluators/{name}/versions/{version}")
   @delete
-  deleteVersion is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+  deleteVersion is FoundryDataPlaneOperation<
     {
       @doc("The evaluator name.")
       @path
@@ -256,8 +244,7 @@ interface Evaluators {
   @summary("Create a published evaluator version")
   @route("/evaluators/{name}/versions")
   @post
-  createVersion is FoundryDataPlaneRequiredPreviewOperation<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+  createVersion is FoundryDataPlaneOperation<
     {
       @doc("The evaluator name.")
       @path
@@ -278,12 +265,7 @@ interface Evaluators {
   @summary("Start a current evaluator pending upload")
   @post
   @route("/evaluators/{name}/startPendingUpload")
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview] }
-  )
-  startPendingUpload is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+  startPendingUpload is FoundryDataPlaneOperation<
     {
       /** The name path parameter. */
       @path
@@ -302,12 +284,7 @@ interface Evaluators {
   @summary("Get current evaluator credentials")
   @post
   @route("/evaluators/{name}/credentials")
-  @extension(
-    "x-ms-foundry-meta",
-    #{ required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview] }
-  )
-  getCredentials is FoundryDataPlanePreviewOperation<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
+  getCredentials is FoundryDataPlaneOperation<
     {
       /** The name path parameter. */
       @path
