@@ -171,7 +171,7 @@ alias SearchOperation<
   Traits extends Reflection.Model = {},
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
-  TParams & ClientRequestIdHeader,
+  ClientRequestIdHeader & TParams,
   TResponse,
   Traits,
   TError
@@ -183,7 +183,7 @@ alias SearchIndexOperation<
   Traits extends Reflection.Model = {},
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
-  TParams & ClientRequestIdHeader & indexNamePath,
+  ClientRequestIdHeader & indexNamePath & TParams,
   TResponse,
   Traits,
   TError
@@ -195,7 +195,7 @@ alias SearchIndexerOperation<
   Traits extends Reflection.Model = {},
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
-  TParams & ClientRequestIdHeader & indexerNamePath,
+  ClientRequestIdHeader & indexerNamePath & TParams,
   TResponse,
   Traits,
   TError
@@ -207,7 +207,7 @@ alias SearchDataSourceOperation<
   Traits extends Reflection.Model = {},
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
-  TParams & ClientRequestIdHeader & dataSourceNamePath,
+  ClientRequestIdHeader & dataSourceNamePath & TParams,
   TResponse,
   Traits,
   TError
@@ -219,7 +219,7 @@ alias SearchSkillsetOperation<
   Traits extends Reflection.Model = {},
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
-  TParams & ClientRequestIdHeader & skillsetNamePath,
+  ClientRequestIdHeader & skillsetNamePath & TParams,
   TResponse,
   Traits,
   TError
@@ -231,7 +231,7 @@ alias SearchSynonymMapOperation<
   Traits extends Reflection.Model = {},
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
-  TParams & ClientRequestIdHeader & synonymMapNamePath,
+  ClientRequestIdHeader & synonymMapNamePath & TParams,
   TResponse,
   Traits,
   TError
@@ -243,7 +243,7 @@ alias SearchAliasOperation<
   Traits extends Reflection.Model = {},
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
-  TParams & ClientRequestIdHeader & aliasNamePath,
+  ClientRequestIdHeader & aliasNamePath & TParams,
   TResponse,
   Traits,
   TError
@@ -255,7 +255,7 @@ alias SearchSourceOperation<
   Traits extends Reflection.Model = {},
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
-  TParams & ClientRequestIdHeader & sourceNamePath,
+  ClientRequestIdHeader & sourceNamePath & TParams,
   TResponse,
   Traits,
   TError
@@ -267,7 +267,7 @@ alias SearchKnowledgeBaseOperation<
   Traits extends Reflection.Model = {},
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
-  TParams & ClientRequestIdHeader & knowledgeBaseNamePath,
+  ClientRequestIdHeader & knowledgeBaseNamePath & TParams,
   TResponse,
   Traits,
   TError
