@@ -740,11 +740,11 @@
           "$ref": "#/definitions/CapacityDetails",
           "description": "The capacity details configuration for Azure Blob Storage."
         },
-        "prefixDefinitions": {
+        "prefixConfigurations": {
           "type": "array",
-          "description": "The prefix definitions that scope the capacity details to specific storage accounts, containers, and prefixes.",
+          "description": "The prefix configurations that scope the capacity details to specific storage accounts, containers, and prefixes.",
           "items": {
-            "$ref": "#/definitions/PrefixDefinition"
+            "$ref": "#/definitions/PrefixConfiguration"
           },
           "x-ms-identifiers": []
         }
@@ -761,11 +761,11 @@
           "$ref": "#/definitions/CapacityDetailsUpdate",
           "description": "The capacity details configuration to update for Azure Blob Storage."
         },
-        "prefixDefinitions": {
+        "prefixConfigurations": {
           "type": "array",
-          "description": "The prefix definitions to update for Azure Blob Storage.",
+          "description": "The prefix configurations to update for Azure Blob Storage.",
           "items": {
-            "$ref": "#/definitions/PrefixDefinitionUpdate"
+            "$ref": "#/definitions/PrefixConfigurationUpdate"
           },
           "x-ms-identifiers": []
         }
@@ -851,9 +851,9 @@
         "results"
       ]
     },
-    "PrefixDefinition": {
+    "PrefixConfiguration": {
       "type": "object",
-      "description": "A prefix definition that scopes capacity details to a specific storage account, container, and prefix.",
+      "description": "A prefix configuration that scopes capacity details to a specific storage account, container, and prefix.",
       "properties": {
         "storageAccountName": {
           "type": "string",
@@ -880,9 +880,9 @@
         "containerName"
       ]
     },
-    "PrefixDefinitionUpdate": {
+    "PrefixConfigurationUpdate": {
       "type": "object",
-      "description": "A prefix definition that can be updated.",
+      "description": "A prefix configuration that can be updated.",
       "properties": {
         "storageAccountName": {
           "type": "string",

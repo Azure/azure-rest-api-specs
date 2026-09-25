@@ -65,6 +65,8 @@ Single source of truth for breaking-change and versioning approval label names a
 
 - `isExecError(error)` — type guard for errors thrown by the exec helpers.
 - `execFile(file, args, options)` — promisified `child_process.execFile`.
+- `ExecFileOptions` — direct execution options, including an optional `timeout` in milliseconds
+  for `execFile` and `execNodeBin`. Omit it for no execution timeout.
 - `execNodeBin(packageName, [binary, ...args], options)` — run an installed Node.js CLI directly
   with the current Node executable, without starting npm/pnpm or a shell shim. Resolves the package
   from `options.cwd` (or the current directory) using Node's `findPackageJSON`, reads its `bin`
@@ -207,7 +209,14 @@ const report = renderMarkdownDoc(
 ### `typespec-metadata` — TypeSpec SDK metadata
 
 - `generateTypeSpecMetadata(folder, options)` — run the `@azure-tools/typespec-metadata` emitter,
-  validate its JSON output, and clean up its temporary output.
+  validate its JSON output, and clean up its unique temporary output on success or failure.
+  Resolves the compiler from the project folder. The optional `entrypoint` overrides project
+  discovery and may be absolute or relative to that folder; otherwise, compilation targets the
+  folder, falling back to `client.tsp` when `main.tsp` is absent. The optional `timeout` limits
+  compiler execution in milliseconds, with no timeout by default. Pass `logger` to receive
+  execution logs, with stdout and stderr recorded at debug level without inferring severity.
+  Failures throw, retaining compiler diagnostics and the execution error as their cause rather
+  than reporting that no emitter is configured.
 - `TypeSpecMetadataSchema`, `TypeSpecLanguageMetadataSchema` — zod schemas for metadata output.
 
 ## Folder structure & contributing
