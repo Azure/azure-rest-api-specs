@@ -1,3 +1,6 @@
+// cspell:ignore vally
+
+import { existsSync } from "node:fs";
 import { mkdir, mkdtemp, readFile, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
@@ -10,6 +13,7 @@ import {
 
 const SOURCE_COMMIT = "a".repeat(40);
 const REAL_REPO_ROOT = resolve(import.meta.dirname, "../../..");
+const HAS_REAL_PACKAGE = existsSync(join(REAL_REPO_ROOT, "documentation"));
 
 function createDefinition(): ArmApiReviewerExportDefinition {
   return {
@@ -26,7 +30,7 @@ function createDefinition(): ArmApiReviewerExportDefinition {
     directories: [],
     runtimeReferenceRoots: ["runtime"],
     validation: {
-      vallyVersion: "0.14.0",
+      evaluationFrameworkVersion: "0.14.0",
       releaseSmokeSuite: "release-smoke",
       reviewerModel: "gpt-5.6-sol",
       judgeModel: "gpt-5.4",
@@ -82,37 +86,40 @@ describe("ARM API Reviewer export", () => {
     await rm(workspace, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
   });
 
-  it("exports the real reviewer package and matches the pinned Vally version", async () => {
-    const manifest = await exportArmApiReviewer({
-      repoRoot: REAL_REPO_ROOT,
-      sourceCommit: SOURCE_COMMIT,
-    });
-    const evalPackage = JSON.parse(
-      await readFile(join(REAL_REPO_ROOT, "eng/common/scripts/eval/package.json"), "utf8"),
-    ) as { devDependencies: Record<string, string> };
+  it.skipIf(!HAS_REAL_PACKAGE)(
+    "exports the real reviewer package and matches the pinned evaluation framework version",
+    async () => {
+      const manifest = await exportArmApiReviewer({
+        repoRoot: REAL_REPO_ROOT,
+        sourceCommit: SOURCE_COMMIT,
+      });
+      const evalPackage = JSON.parse(
+        await readFile(join(REAL_REPO_ROOT, "eng/common/scripts/eval/package.json"), "utf8"),
+      ) as { devDependencies: Record<string, string> };
 
-    expect(manifest.packageName).toBe("arm-api-reviewer");
-    expect(manifest.files).toHaveLength(45);
-    expect(manifest.files.map((file) => file.path)).toEqual(
-      [...manifest.files.map((file) => file.path)].sort((left, right) =>
-        left.localeCompare(right, "en"),
-      ),
-    );
-    expect(manifest.files).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({ path: manifest.entrypoints.reviewer }),
-        expect.objectContaining({ path: manifest.entrypoints.critic }),
-        expect.objectContaining({ path: manifest.entrypoints.skill }),
-      ]),
-    );
-    expect(manifest.contentDigest).toMatch(/^[0-9a-f]{64}$/);
-    expect(manifest.files.every((file) => /^[0-9a-f]{64}$/.test(file.sha256))).toBe(true);
-    expect(manifest.validation.vallyVersion).toBe(
-      evalPackage.devDependencies["@microsoft/vally-cli"],
-    );
-    expect(manifest.validation.reviewerModel).toBe("gpt-5.6-sol");
-    expect(manifest.validation.judgeModel).toBe("gpt-5.4");
-  });
+      expect(manifest.packageName).toBe("arm-api-reviewer");
+      expect(manifest.files).toHaveLength(45);
+      expect(manifest.files.map((file) => file.path)).toEqual(
+        [...manifest.files.map((file) => file.path)].sort((left, right) =>
+          left.localeCompare(right, "en"),
+        ),
+      );
+      expect(manifest.files).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({ path: manifest.entrypoints.reviewer }),
+          expect.objectContaining({ path: manifest.entrypoints.critic }),
+          expect.objectContaining({ path: manifest.entrypoints.skill }),
+        ]),
+      );
+      expect(manifest.contentDigest).toMatch(/^[0-9a-f]{64}$/);
+      expect(manifest.files.every((file) => /^[0-9a-f]{64}$/.test(file.sha256))).toBe(true);
+      expect(manifest.validation.evaluationFrameworkVersion).toBe(
+        evalPackage.devDependencies["@microsoft/vally-cli"],
+      );
+      expect(manifest.validation.reviewerModel).toBe("gpt-5.6-sol");
+      expect(manifest.validation.judgeModel).toBe("gpt-5.4");
+    },
+  );
 
   it("writes a deterministic package and generated manifest", async () => {
     const firstOutput = join(workspace, "first");

@@ -340,8 +340,8 @@ If validation fails, return `Finding accuracy = FAIL` with reason
   to repeat the line unless the command class changes (e.g., switching
   from `gh api` reads to `git show`). After tool use completes, do not
   repeat either self-check line in the final return payload. The final
-  Critic response must still begin with the required `<!-- critic-verdict:
-  ... -->` marker as its literal first line.
+  Critic response must still begin with the required marker
+  `<!-- critic-verdict: ... -->` as its literal first line.
   1. Is this command on the allowed-shell-command list in the
      "Tooling prerequisite for private-repo PRs" section, OR is it a
      direct read-only equivalent (e.g., `gh api ... --method GET`,

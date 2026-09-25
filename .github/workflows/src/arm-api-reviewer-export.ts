@@ -30,7 +30,7 @@ export interface ArmApiReviewerExportDefinition {
   directories: string[];
   runtimeReferenceRoots: string[];
   validation: {
-    vallyVersion: string;
+    evaluationFrameworkVersion: string;
     releaseSmokeSuite: string;
     reviewerModel: string;
     judgeModel: string;
@@ -167,7 +167,10 @@ function parseDefinition(value: unknown): ArmApiReviewerExportDefinition {
     directories: requireStringArray(value.directories, "directories"),
     runtimeReferenceRoots: requireStringArray(value.runtimeReferenceRoots, "runtimeReferenceRoots"),
     validation: {
-      vallyVersion: requireString(validation.vallyVersion, "validation.vallyVersion"),
+      evaluationFrameworkVersion: requireString(
+        validation.evaluationFrameworkVersion,
+        "validation.evaluationFrameworkVersion",
+      ),
       releaseSmokeSuite: requireString(
         validation.releaseSmokeSuite,
         "validation.releaseSmokeSuite",
@@ -378,7 +381,7 @@ function computeContentDigest(
     `entrypoint:reviewer:${definition.entrypoints.reviewer}`,
     `entrypoint:critic:${definition.entrypoints.critic}`,
     `entrypoint:skill:${definition.entrypoints.skill}`,
-    `validation:vally-version:${definition.validation.vallyVersion}`,
+    `validation:evaluation-framework-version:${definition.validation.evaluationFrameworkVersion}`,
     `validation:release-smoke-suite:${definition.validation.releaseSmokeSuite}`,
     `validation:reviewer-model:${definition.validation.reviewerModel}`,
     `validation:judge-model:${definition.validation.judgeModel}`,
@@ -417,15 +420,16 @@ export async function exportArmApiReviewer({
   }
 
   const canonicalRepoRoot = await realpath(repoRoot);
-  const resolvedDefinitionPath = definitionPath
+  const unresolvedDefinitionPath = definitionPath
     ? resolve(definitionPath)
     : resolve(canonicalRepoRoot, ".github/agents/arm-api-reviewer.export.json");
-  if (!isWithinOrEqual(canonicalRepoRoot, resolvedDefinitionPath)) {
+  const canonicalDefinitionPath = await realpath(unresolvedDefinitionPath);
+  if (!isWithinOrEqual(canonicalRepoRoot, canonicalDefinitionPath)) {
     throw new Error("The export definition must be inside the source repository.");
   }
 
   const definition = parseDefinition(
-    JSON.parse(await readFile(resolvedDefinitionPath, "utf8")) as unknown,
+    JSON.parse(await readFile(canonicalDefinitionPath, "utf8")) as unknown,
   );
   const paths = await collectExportPaths(canonicalRepoRoot, definition);
   await validateRuntimeReferences(canonicalRepoRoot, paths, definition.runtimeReferenceRoots);
