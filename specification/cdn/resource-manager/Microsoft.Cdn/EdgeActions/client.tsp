@@ -28,6 +28,11 @@ using Microsoft.Cdn;
   "csharp"
 );
 @@clientName(
+  EdgeActionVersions.deployVersionCodePreview::parameters.body,
+  "content",
+  "csharp"
+);
+@@clientName(
   EdgeActionVersions.deployVersionCode::parameters.body,
   "content",
   "csharp"
