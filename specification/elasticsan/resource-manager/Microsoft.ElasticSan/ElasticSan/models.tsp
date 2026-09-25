@@ -34,12 +34,6 @@ union SkuName {
    */
   @added(Versions.v2026_05_01_preview)
   ElasticSAN_LRS: "ElasticSAN_LRS",
-
-  /**
-   * Zone redundant storage. Supported only for ElasticSanVersion V2.
-   */
-  @added(Versions.v2026_05_01_preview)
-  ElasticSAN_ZRS: "ElasticSAN_ZRS",
 }
 
 /**
