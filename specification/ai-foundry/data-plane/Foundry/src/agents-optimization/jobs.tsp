@@ -119,7 +119,7 @@ model AgentOptimizationJobResult {
   token_usage: AgentOptimizationJobTokenUsage[];
 
   @doc("Aggregate latency per stage and model. Always present; empty when no server-measured latency is available.")
-  latency_usage: AgentOptimizationJobLatency[];
+  latency_metrics: AgentOptimizationJobLatency[];
 
   @doc("Reason the candidate search terminated. Omitted for jobs that do not comparatively evaluate candidates and until the job reaches a terminal state.")
   termination_reason?: AgentOptimizationTerminationReason;

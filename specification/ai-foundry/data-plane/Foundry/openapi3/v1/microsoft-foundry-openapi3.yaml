@@ -43243,7 +43243,7 @@ components:
       type: object
       required:
         - token_usage
-        - latency_usage
+        - latency_metrics
       properties:
         candidate_summary:
           $ref: '#/components/schemas/AgentOptimizationResultCandidateSummary'
@@ -43253,7 +43253,7 @@ components:
           items:
             $ref: '#/components/schemas/AgentOptimizationJobTokenUsage'
           description: Aggregate token usage per stage and model. Always present; empty array when no calls were measured.
-        latency_usage:
+        latency_metrics:
           type: array
           items:
             $ref: '#/components/schemas/AgentOptimizationJobLatency'
