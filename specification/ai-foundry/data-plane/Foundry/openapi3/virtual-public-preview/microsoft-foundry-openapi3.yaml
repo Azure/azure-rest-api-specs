@@ -46649,6 +46649,7 @@ components:
             - deleting
             - deleted
             - expired
+            - standby
       description: The status of an agent session.
     AgentState:
       anyOf:
@@ -53139,6 +53140,9 @@ components:
           description: Optional session defaults (for example, the idle timeout) applied to sessions created for this agent version.
           examples:
             - idle_timeout_seconds: 300
+        standby_pool:
+          $ref: '#/components/schemas/StandbyPool'
+          description: Optional standby (warm) pool configuration. When set with a positive size, the service keeps pre-provisioned sessions ready to be claimed for this agent version.
       allOf:
         - $ref: '#/components/schemas/AgentDefinition'
       description: The hosted agent definition.
@@ -85655,6 +85659,19 @@ components:
           type: string
           description: Sku tier
       description: Sku information
+    StandbyPool:
+      type: object
+      properties:
+        size:
+          type: integer
+          format: int32
+          minimum: 0
+          maximum: 50
+          description: The number of pre-provisioned standby sessions to keep ready for this agent version. Must be between 0 and 50 (inclusive). 0 disables the standby pool.
+          examples:
+            - 3
+          default: 0
+      description: Standby (warm) pool configuration for a hosted agent version. Keeps pre-provisioned sessions ready to be claimed, reducing cold-start latency for invocations.
     SteeringPromptOptimizationContext:
       type: object
       required:
