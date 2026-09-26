@@ -27,12 +27,21 @@ These are the global settings for the devopsinfrastructure.
 ```yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-preview-2026-07-03
+tag: package-preview-2026-07-30
 ```
 
 ``` yaml
 modelerfour:
   flatten-models: false
+```
+
+### Tag: package-preview-2026-07-30
+
+These settings apply only when `--tag=package-preview-2026-07-30` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-07-30'
+input-file:
+  - preview/2026-07-30-preview/devopsinfrastructure.json
 ```
 
 ### Tag: package-preview-2026-07-03
