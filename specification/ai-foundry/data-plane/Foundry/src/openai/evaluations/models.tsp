@@ -1033,7 +1033,7 @@ model EvalRun is OpenAI.EvalRun {
   """
       Defines how the service obtains the data to evaluate. Choose the variant
       that matches one of these workflows:
-
+    
       - **Evaluate existing data:** Provide a dataset or inline items containing
         query, response, and optional ground-truth fields for single-turn
         evaluation, or complete conversations for multi-turn evaluation. The
@@ -1049,7 +1049,7 @@ model EvalRun is OpenAI.EvalRun {
         instead of individual queries or scenarios. The service generates the
         inputs, invokes the specified target, captures its responses, and
         evaluates them.
-
+    
       The selected source must conform to the evaluation's `data_source_config`.
     """
 );
