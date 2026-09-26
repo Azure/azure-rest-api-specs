@@ -169,6 +169,10 @@ union JsonWebKeyWrapAlgorithm {
   /** RSAES using Optimal Asymmetric Encryption Padding with a hash function of SHA-256 and a mask generation function of MGF1 with SHA-256. */
   RSA_OAEP256: "RSA-OAEP-256",
 
+  /** RSAES using Optimal Asymmetric Encryption Padding with a hash function of SHA-384 and a mask generation function of MGF1 with SHA-384. */
+  @added(KeyVault.Versions.v2026_03_01_preview)
+  RSA_OAEP384: "RSA-OAEP-384",
+
   /** 128-bit AES key wrap. */
   A128_KW: "A128KW",
 
@@ -211,6 +215,12 @@ union JsonWebKeyEncryptionAlgorithm {
    * RSAES using Optimal Asymmetric Encryption Padding with a hash function of SHA-256 and a mask generation function of MGF1 with SHA-256.
    */
   RSA_OAEP256: "RSA-OAEP-256",
+
+  /**
+   * RSAES using Optimal Asymmetric Encryption Padding with a hash function of SHA-384 and a mask generation function of MGF1 with SHA-384.
+   */
+  @added(KeyVault.Versions.v2026_03_01_preview)
+  RSA_OAEP384: "RSA-OAEP-384",
 
   /** [Not recommended] RSAES-PKCS1-V1_5 key encryption, as described in https://tools.ietf.org/html/rfc3447. Microsoft recommends using RSA_OAEP_256 or stronger algorithms for enhanced security. Microsoft does *not* recommend RSA_1_5, which is included solely for backwards compatibility. Cryptographic standards no longer consider RSA with the PKCS#1 v1.5 padding scheme secure for encryption. */
   RSA1_5: "RSA1_5",
@@ -377,6 +387,10 @@ union KeyEncryptionAlgorithm {
 
   /** The RSA_AES_KEY_WRAP_384 key wrap mechanism. */
   RSA_AES_KEY_WRAP_384: "RSA_AES_KEY_WRAP_384",
+
+  /** The RSA_PKCS_OAEP_384 key wrap mechanism. */
+  @added(KeyVault.Versions.v2026_03_01_preview)
+  RSA_PKCS_OAEP_384: "RSA_PKCS_OAEP_384",
 }
 
 /**
