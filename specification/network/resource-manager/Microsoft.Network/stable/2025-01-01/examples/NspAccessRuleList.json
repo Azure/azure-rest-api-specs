@@ -1,0 +1,73 @@
+{
+  "title": "List NSP Access Rules",
+  "parameters": {
+    "api-version": "2024-10-01",
+    "subscriptionId": "subId",
+    "resourceGroupName": "rg1",
+    "networkSecurityPerimeterName": "nsp1",
+    "profileName": "profile1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "accessRule1",
+            "id": "/subscriptions/rg1/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/profiles/profile1/accessRules/accessRule1",
+            "type": "Microsoft.Network/networkSecurityPerimeters/profiles/accessRules",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "direction": "Inbound",
+              "addressPrefixes": [
+                "10.11.0.0/16",
+                "10.10.1.0/24"
+              ],
+              "fullyQualifiedDomainNames": [],
+              "subscriptions": [],
+              "networkSecurityPerimeters": [],
+              "emailAddresses": [],
+              "phoneNumbers": [],
+              "serviceTags": []
+            },
+            "systemData": {
+              "createdBy": "user",
+              "createdByType": "User",
+              "createdAt": "2024-02-07T18:07:36.3446713Z",
+              "lastModifiedBy": "user",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2024-02-07T18:07:36.3446713Z"
+            }
+          },
+          {
+            "name": "accessRule2",
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/profiles/profile1/accessRules/accessRule2",
+            "type": "Microsoft.Network/networkSecurityPerimeters/profiles/accessRules",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "direction": "Outbound",
+              "addressPrefixes": [],
+              "fullyQualifiedDomainNames": [
+                "paasrp1.contoso.org",
+                "paasrp2.contoso.org"
+              ],
+              "subscriptions": [],
+              "networkSecurityPerimeters": [],
+              "emailAddresses": [],
+              "phoneNumbers": [],
+              "serviceTags": []
+            },
+            "systemData": {
+              "createdBy": "user",
+              "createdByType": "User",
+              "createdAt": "2024-02-07T18:07:36.3446713Z",
+              "lastModifiedBy": "user",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2024-02-07T18:07:36.3446713Z"
+            }
+          }
+        ],
+        "nextLink": "{baseurl}/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/profiles/profile1/accessRules?api-version=2024-10-01&$skipToken=10"
+      }
+    }
+  }
+}

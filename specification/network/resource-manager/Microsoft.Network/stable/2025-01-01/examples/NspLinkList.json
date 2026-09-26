@@ -1,0 +1,51 @@
+{
+  "title": "List NSP Links",
+  "parameters": {
+    "api-version": "2024-10-01",
+    "subscriptionId": "subId",
+    "resourceGroupName": "rg1",
+    "networkSecurityPerimeterName": "nsp1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "link1",
+            "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/links/link1",
+            "type": "Microsoft.Network/networkSecurityPerimeters/links",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "autoApprovedRemotePerimeterResourceId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp2",
+              "remotePerimeterGuid": "guid",
+              "remotePerimeterLocation": "westus2",
+              "localInboundProfiles": [
+                "*"
+              ],
+              "localOutboundProfiles": [
+                "*"
+              ],
+              "remoteInboundProfiles": [
+                "*"
+              ],
+              "remoteOutboundProfiles": [
+                "*"
+              ],
+              "description": "Auto Approved",
+              "status": "Approved"
+            },
+            "systemData": {
+              "createdBy": "user",
+              "createdByType": "User",
+              "createdAt": "2024-02-07T18:07:36.3446713Z",
+              "lastModifiedBy": "user",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2024-02-07T18:07:36.3446713Z"
+            }
+          }
+        ],
+        "nextLink": "{baseurl}/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp1/links?api-version=2024-10-01&$skipToken=10"
+      }
+    }
+  }
+}

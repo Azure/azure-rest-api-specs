@@ -1,0 +1,40 @@
+{
+  "changes_summary": {
+    "description": "WAF Policy API Enhancements",
+    "files_modified": [
+      "applicationGatewayWafDynamicManifests.json",
+      "applicationGateway.json"
+    ]
+  },
+  "new_fields": {
+    "displayName": {
+      "location": "ApplicationGatewayFirewallManifestRuleSet",
+      "file": "applicationGatewayWafDynamicManifests.json",
+      "type": "string",
+      "description": "The display name of the web application firewall rule set version.",
+      "purpose": "Provides user-friendly names for rule set versions (e.g., 'OWASP Core Rule Set 3.2' instead of just '3.2')",
+      "example": "OWASP Core Rule Set 3.2"
+    },
+    "paranoiaLevel": {
+      "location": "ApplicationGatewayFirewallRule", 
+      "file": "applicationGateway.json",
+      "type": "integer",
+      "format": "int32",
+      "description": "The paranoia level of the web application firewall rule.",
+      "minimum": 1,
+      "maximum": 4,
+      "purpose": "Defines how aggressive the WAF rule enforcement is (1=basic, 4=most restrictive)",
+      "example": 2
+    }
+  },
+  "api_endpoints_affected": [
+    "GET /subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/applicationGatewayWafDynamicManifests",
+    "GET /subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/applicationGatewayWafDynamicManifests/default",
+    "PUT /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies/{policyName}"
+  ],
+  "backward_compatibility": {
+    "status": "Maintained",
+    "reason": "Both fields are optional and not in required arrays",
+    "impact": "No breaking changes to existing implementations"
+  }
+}
