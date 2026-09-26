@@ -245,8 +245,8 @@ model Widget {
 ### 4.7 `tspconfig.yaml`
 
 - The `tspconfig.yaml` **MUST** reference the correct linter ruleset:
-  - ARM: `@azure-tools/typespec-azure-rulesets/resource-manager`
-  - Data-plane: `@azure-tools/typespec-azure-rulesets/data-plane`
+  - ARM: `file:` followed by the relative path to `eng/typespec-rulesets/resource-manager.yaml`
+  - Data-plane: `file:` followed by the relative path to `eng/typespec-rulesets/data-plane.yaml`
 
 ---
 
