@@ -15,7 +15,7 @@ namespace Microsoft.DocumentDB;
 /**
  * Representation of a Garnet cache cluster.
  */
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_07_15)
 model GarnetClusterResource
   is Azure.ResourceManager.TrackedResource<GarnetClusterResourceProperties> {
   ...ResourceNameParameter<
@@ -32,7 +32,7 @@ model GarnetClusterResource
   identity?: ManagedCassandraManagedServiceIdentity;
 }
 
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_07_15)
 @armResourceOperations(#{ omitTags: true })
 interface GarnetClusters {
   /**

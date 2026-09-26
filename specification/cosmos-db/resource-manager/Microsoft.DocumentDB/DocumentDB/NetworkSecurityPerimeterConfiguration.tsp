@@ -17,7 +17,7 @@ namespace Microsoft.DocumentDB;
  * Network security perimeter (NSP) configuration resource
  */
 @parentResource(DatabaseAccountGetResults)
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_07_15)
 model NetworkSecurityPerimeterConfiguration
   is Azure.ResourceManager.ProxyResource<Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationProperties> {
   ...ResourceNameParameter<
@@ -28,7 +28,7 @@ model NetworkSecurityPerimeterConfiguration
   >;
 }
 
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_07_15)
 @armResourceOperations
 interface NetworkSecurityPerimeterConfigurations {
   /**
