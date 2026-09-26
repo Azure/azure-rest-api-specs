@@ -326,5 +326,12 @@ directive:
     from: maps-management.json
     reason: standard property being applied to all azure resources.
   - suppress: MISSING_APIS_IN_DEFAULT_TAG
-    reason: ARM provides the specification for resource move operation. Hence, the operation has been removed from versions after 2018-05-01.
+    reason: >-
+      Two API paths present in older versions are intentionally absent from the default (2026-12-01) tag:
+      (1) '/subscriptions/{}/resourceGroups/{}/moveResources' (2018-05-01) — ARM owns the resource-move
+      specification, so the operation was removed from versions after 2018-05-01.
+      (2) '/subscriptions/{}/providers/Microsoft.Maps/operations' (Maps_ListSubscriptionOperations, 2023-06-01) —
+      the subscription-scoped operations list is non-conformant with the ARM RPC (operations must be tenant-scoped);
+      it was intentionally removed and the tenant-scoped '/providers/Microsoft.Maps/operations' remains. This removal
+      was approved by the Breaking Change Board (originally in Azure/azure-rest-api-specs#26945).
 ```
