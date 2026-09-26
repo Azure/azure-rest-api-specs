@@ -550,6 +550,27 @@ model Resource {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RecommendationProperties {
   /**
+   * The fully qualified resource ID of the service group that contains the recommendation.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  sgId?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * The display name of the service group that contains the recommendation.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  sgName?: string;
+
+  /**
+   * The contextual criticality assigned to the recommendation.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  criticalityLabel?: CriticalityLabel;
+
+  /**
    * The category of the recommendation.
    */
   category?: Category;
@@ -737,6 +758,43 @@ model RecommendationProperties {
    * Additional notes for the Recommendation
    */
   notes?: string;
+}
+
+/**
+ * The contextual criticality assigned to a recommendation.
+ */
+@added(Versions.v2026_08_01_preview)
+union CriticalityLabel {
+  string,
+
+  /** The recommendation has critical contextual importance. */
+  Critical: "Critical",
+
+  /** The recommendation has high contextual importance. */
+  High: "High",
+
+  /** The recommendation has moderate contextual importance. */
+  Moderate: "Moderate",
+
+  /** The recommendation has low contextual importance. */
+  Low: "Low",
+
+  /** The recommendation has no contextual criticality. */
+  None: "None",
+}
+
+/**
+ * Controls whether all recommendations or only contextually prioritized recommendations are returned.
+ */
+@added(Versions.v2026_08_01_preview)
+union RecommendationMode {
+  string,
+
+  /** Return all recommendations. */
+  All: "all",
+
+  /** Return only recommendations that have contextual prioritization signals. */
+  Contextual: "contextual",
 }
 
 /**

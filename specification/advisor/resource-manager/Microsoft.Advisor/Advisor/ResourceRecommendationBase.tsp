@@ -1,12 +1,22 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/rest";
 import "./models.tsp";
 
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
+using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
 namespace Microsoft.Advisor;
+
+/** The name of a service group. */
+@minLength(1)
+@maxLength(90)
+@pattern("^[a-zA-Z0-9\\-_().]{1,90}$")
+scalar ServiceGroupName extends string;
+
 /**
  * Advisor Recommendation.
  */
@@ -121,6 +131,80 @@ interface ResourceRecommendationBases {
     },
     Error = ArmDefaultErrorResponse
   >;
+}
+
+/** Operations for recommendations viewed in a service group scope. */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "This interface contains explicit service-group routes rather than standard ARM resource operations."
+interface ServiceGroupRecommendationOperations {
+  /** Lists recommendations for a service group. */
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "The explicit operation returns a paged resource response or the standard ARM error response."
+  @added(Versions.v2026_08_01_preview)
+  @route("/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.Advisor/recommendations")
+  @list
+  @get
+  listByServiceGroup(
+    ...ApiVersionParameter,
+
+    /** The name of the service group. */
+    @path
+    serviceGroupName: ServiceGroupName,
+
+    /** Controls whether all recommendations or only contextually prioritized recommendations are returned. */
+    @query
+    mode?: RecommendationMode = RecommendationMode.All,
+
+    /** The filter to apply to the recommendations. */
+    @query("$filter")
+    $filter?: string,
+
+    /** The number of recommendations per page. */
+    @query("$top")
+    $top?: int32,
+
+    /** The page-continuation token. */
+    @query("$skipToken")
+    $skipToken?: string,
+  ):
+    | ArmResponse<ResourceListResult<ResourceRecommendationBase>>
+    | ArmDefaultErrorResponse;
+
+  /** Gets a recommendation viewed in a service group scope. */
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "The explicit operation returns a resource response or the standard ARM error response."
+  @added(Versions.v2026_08_01_preview)
+  @route("/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.Advisor/recommendations/{recommendationId}")
+  @get
+  getByServiceGroup(
+    ...ApiVersionParameter,
+
+    /** The name of the service group. */
+    @path
+    serviceGroupName: ServiceGroupName,
+
+    /** The service-group-scoped recommendation identifier. */
+    @path
+    recommendationId: string,
+  ): ArmResponse<ResourceRecommendationBase> | ArmDefaultErrorResponse;
+
+  /** Updates the state of a recommendation viewed in a service group scope. */
+  #suppress "@azure-tools/typespec-azure-core/response-schema-problem" "The explicit operation returns a resource response or the standard ARM error response."
+  @added(Versions.v2026_08_01_preview)
+  @route("/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.Advisor/recommendations/{recommendationId}")
+  @patch
+  patchByServiceGroup(
+    ...ApiVersionParameter,
+
+    /** The name of the service group. */
+    @path
+    serviceGroupName: ServiceGroupName,
+
+    /** The service-group-scoped recommendation identifier. */
+    @path
+    recommendationId: string,
+
+    /** The state properties to update. */
+    @bodyRoot
+    properties: RecommendationPatchPayload,
+  ): ArmResponse<ResourceRecommendationBase> | ArmDefaultErrorResponse;
 }
 
 @@doc(ResourceRecommendationBase.name, "The recommendation ID.");
