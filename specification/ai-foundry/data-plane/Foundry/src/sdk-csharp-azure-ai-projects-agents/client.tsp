@@ -1287,6 +1287,8 @@ namespace Azure.AI.Projects {
   @@access(AgentTelephony.replaceTelephonyTransferTargets, Access.internal);
   @@access(AgentTelephony.createTelephonyCallJob, Access.internal);
   @@access(AgentTelephony.getTelephonyCallJob, Access.internal);
+  @@access(AgentTelephony.listTelephonyCallJobs, Access.internal);
+  @@access(AgentTelephony.deleteTelephonyCallJob, Access.internal);
   @@access(AgentTelephony.cancelTelephonyCallJob, Access.internal);
 
   // --------------------------------------------------------------------------------

@@ -1357,26 +1357,6 @@ alias TelephonyTransferTargetsResponse = TelephonyTransferTargets & {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 scalar TelephonyCallJobId extends string;
 
-@doc("The type of destination for an outbound call.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union TelephonyOutboundDestinationType {
-  string,
-
-  @doc("An E.164 phone number.")
-  phone_number: "phone_number",
-}
-
-@doc("The destination of an outbound call.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model TelephonyOutboundDestination {
-  @doc("The destination type. Only E.164 phone numbers are currently supported.")
-  type: TelephonyOutboundDestinationType;
-
-  @doc("The destination E.164 phone number.")
-  @pattern("^\\+[1-9]\\d{1,14}$")
-  value: string;
-}
-
 @doc("The retry strategy for an outbound call.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyOutboundRetryPolicyType {
@@ -1431,8 +1411,9 @@ scalar TelephonyOutboundSource extends string;
 @doc("Customer-controlled configuration shared by direct and campaign-created call jobs.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCallJobConfiguration {
-  @doc("The phone destination to call.")
-  destination: TelephonyOutboundDestination;
+  @doc("The recipient E.164 phone number.")
+  @pattern("^\\+[1-9]\\d{1,14}$")
+  phone_number: string;
 
   @doc("The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone Extension. No inbound telephony binding is required.")
   @minLength(1)
@@ -1460,17 +1441,17 @@ model TelephonyCallJobConfiguration {
 @example(#{
   connection_name: "telephony-twilio",
   source: "+14255550100",
-  destination: #{ type: "phone_number", value: "+14255550123" },
+  phone_number: "+14255550123",
 })
 @example(#{
   connection_name: "telephony-acs",
   source: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
-  destination: #{ type: "phone_number", value: "+14255550123" },
+  phone_number: "+14255550123",
 })
 model CreateTelephonyCallJobRequest {
   ...TelephonyCallJobConfiguration;
 
-  @doc("The provider-attempt retry policy. Omit it for one attempt with no retry delay.")
+  @doc("The provider-attempt retry policy. Omit it for one initial attempt with no retry. Returned CallJobs normalize an omitted policy to fixed_interval with max_attempts=1 and interval=0 seconds.")
   retry_policy?: TelephonyOutboundRetryPolicy;
 }
 
@@ -1578,6 +1559,13 @@ model TelephonyCallJobCancellation {
   revision: int64;
 }
 
+/** Immutable customer-chosen Campaign name within a project and Agent. */
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@minLength(1)
+@maxLength(64)
+@pattern("^[a-zA-Z0-9][a-zA-Z0-9_-]{0,63}$")
+scalar TelephonyCampaignName extends string;
+
 @doc("A durable direct or campaign-created outbound call intent.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TelephonyCallJob {
@@ -1592,13 +1580,17 @@ model TelephonyCallJob {
   @doc("The name of the voice agent used at execution time.")
   agent_name: string;
 
+  @doc("The owning Campaign name under this Agent. Absent for direct calls. Campaign deletion also deletes its CallJobs; owned jobs are hidden once cascade deletion is accepted. Association and cleanup use the immutable internal Campaign instance, so name reuse cannot associate old work with a replacement.")
+  @visibility(Lifecycle.Read)
+  campaign_name?: TelephonyCampaignName;
+
   @doc("The current call-job lifecycle status.")
   status: TelephonyCallJobStatus;
 
   @doc("The recorded cancellation request, when cancellation was requested.")
   cancellation?: TelephonyCallJobCancellation;
 
-  @doc("The frozen provider-attempt retry policy.")
+  @doc("The frozen provider-attempt retry policy. When omitted on direct CallJob or Campaign creation, this is fixed_interval with max_attempts=1 and interval=0 seconds: only the initial attempt is made, with no retry.")
   retry_policy: TelephonyOutboundRetryPolicy;
 
   @doc("The number of provider attempts created so far.")
