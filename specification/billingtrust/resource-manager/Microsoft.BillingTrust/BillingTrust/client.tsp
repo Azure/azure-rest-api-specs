@@ -14,7 +14,6 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(AssessmentState, "BillingTrustAssessmentState", "csharp");
-@@clientName(AssessmentType, "BillingTrustAssessmentType", "csharp");
 @@clientName(RuleProperties, "BillingTrustRuleProperties", "csharp");
 @@clientName(RuleState, "BillingTrustRuleState", "csharp");
 @@clientName(ExternalId, "BillingTrustExternalId", "csharp");
@@ -22,11 +21,6 @@ using Azure.ClientGenerator.Core;
 @@clientName(TaxId, "BillingTrustTaxId", "csharp");
 @@clientName(TaxIdStatus, "BillingTrustTaxIdStatus", "csharp");
 @@clientName(RegistrationNumber, "BillingTrustRegistrationNumber", "csharp");
-@@clientName(
-  RegistrationRequirement,
-  "BillingTrustRegistrationRequirement",
-  "csharp"
-);
 @@clientName(DomainEntry, "BillingTrustDomainEntry", "csharp");
 @@clientName(DomainEntryState, "BillingTrustDomainEntryState", "csharp");
 @@clientName(

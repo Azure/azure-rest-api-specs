@@ -1,0 +1,42 @@
+{
+  "operationId": "Assessments_Update",
+  "title": "Update an assessment's draft",
+  "parameters": {
+    "resourceUri": "providers/Microsoft.Billing/billingAccounts/30000000-0000-0000-0000-000000000000:30000000-0000-3000-0000-000000000000_2019-05-31",
+    "assessmentName": "Edu",
+    "api-version": "2026-08-10-preview",
+    "properties": {
+      "draft": [
+        {
+          "key": "firstName",
+          "value": "Jane"
+        },
+        {
+          "key": "lastName",
+          "value": "Doe"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Billing/billingAccounts/30000000-0000-0000-0000-000000000000:30000000-0000-3000-0000-000000000000_2019-05-31/providers/Microsoft.BillingTrust/assessments/Edu",
+        "name": "Edu",
+        "type": "Microsoft.BillingTrust/assessments",
+        "properties": {
+          "evaluationState": "succeeded",
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdBy": "edu-admin@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-03-17T10:00:00.000Z",
+          "lastModifiedBy": "edu-admin@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-03-17T12:30:00.000Z"
+        }
+      }
+    }
+  }
+}
