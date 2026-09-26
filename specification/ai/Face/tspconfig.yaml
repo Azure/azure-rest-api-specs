@@ -43,8 +43,8 @@ options:
     flavor: azure
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/data-plane"
-    - "@azure-tools/typespec-azure-rulesets/client-sdk"
+    - "file:../../../eng/typespec-rulesets/data-plane.yaml"
+    - "file:../../../eng/typespec-rulesets/client-sdk.yaml"
   disable:
     "@azure-tools/typespec-azure-core/operation-missing-api-version": "API version located in the host template"
     "@azure-tools/typespec-azure-core/use-standard-operations": "Most of our operation doesn't fit standard ops"

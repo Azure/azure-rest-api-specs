@@ -1,20 +1,35 @@
-import { join } from "path";
+import path, { join } from "path";
 import { type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
 import { parse } from "../tsp-config.ts";
 import { fileExists, readTspConfig } from "../utils.ts";
 
-// Maps deprecated rulesets to the replacement rulesets
-const deprecatedRulesets = new Map<string, string>([
-  ["@azure-tools/typespec-azure-core/all", "@azure-tools/typespec-azure-rulesets/data-plane"],
-  [
-    "@azure-tools/typespec-azure-resource-manager/all",
-    "@azure-tools/typespec-azure-rulesets/resource-manager",
-  ],
+const deprecatedRulesets = new Set([
+  "@azure-tools/typespec-azure-core/all",
+  "@azure-tools/typespec-azure-resource-manager/all",
 ]);
 
-// Ruleset required when any client (language) emitter has options defined
-const clientSdkRuleset = "@azure-tools/typespec-azure-rulesets/client-sdk";
+const rulesetDirectory = "eng/typespec-rulesets";
+
+function getRulesetPath(repositoryRoot: string, folder: string, ruleset: string): string {
+  const relativePath = path
+    .relative(folder, path.join(repositoryRoot, rulesetDirectory, ruleset))
+    .replaceAll("\\", "/");
+  return `file:${relativePath}`;
+}
+
+function getRepositoryRoot(folder: string): string {
+  const normalizedFolder = folder.replaceAll("\\", "/");
+  const specificationMarker = "/specification/";
+  const specificationIndex = normalizedFolder.lastIndexOf(specificationMarker);
+  if (specificationIndex >= 0) {
+    return normalizedFolder.slice(0, specificationIndex);
+  }
+  if (normalizedFolder.startsWith("specification/")) {
+    return ".";
+  }
+  throw new Error(`TypeSpec project folder must be under specification/: ${folder}`);
+}
 
 // Known client (language) emitters. When any of these has options defined in tspconfig.yaml,
 // the client-sdk ruleset must be enabled. Excludes non-client emitters such as
@@ -34,7 +49,7 @@ export class LinterRulesetRule implements Rule {
   readonly name = "LinterRuleset";
 
   readonly description =
-    "Ensures each spec includes the correct linter ruleset (data-plane or management-plane)";
+    "Ensures each spec includes the repository-owned rulesets for its API plane and SDK emitters";
 
   async execute(folder: string): Promise<RuleResult> {
     let success = true;
@@ -60,26 +75,25 @@ export class LinterRulesetRule implements Rule {
 
     // Normalize path separators
     const normalizedFolder = folder.replace(/\\/g, "/");
+    const repositoryRoot = getRepositoryRoot(folder);
 
     let requiredRuleset;
     if (
       normalizedFolder.includes("/resource-manager/") ||
       normalizedFolder.trim().endsWith(".Management")
     ) {
-      requiredRuleset = "@azure-tools/typespec-azure-rulesets/resource-manager";
+      requiredRuleset = getRulesetPath(repositoryRoot, folder, "resource-manager.yaml");
     } else if (clientTspExists && !mainTspExists) {
       // Assume folders with no autorest setting, containing only "client.tsp" but no "main.tsp",
       // are data-plane (e.g. HealthInsights.TrialMatcher)
-      requiredRuleset = "@azure-tools/typespec-azure-rulesets/data-plane";
+      requiredRuleset = getRulesetPath(repositoryRoot, folder, "data-plane.yaml");
     } else {
-      requiredRuleset = "@azure-tools/typespec-azure-rulesets/data-plane";
+      requiredRuleset = getRulesetPath(repositoryRoot, folder, "data-plane.yaml");
     }
 
     if (linterExtends) {
       for (const ruleset of linterExtends) {
         if (deprecatedRulesets.has(ruleset)) {
-          const newRuleset = deprecatedRulesets.get(ruleset);
-
           success = false;
           errorOutput +=
             "tspconfig.yaml references the following ruleset which is deprecated:\n" +
@@ -92,7 +106,7 @@ export class LinterRulesetRule implements Rule {
             "\n" +
             "linter:\n" +
             "  extends:\n" +
-            `    - "${newRuleset}"`;
+            `    - "${requiredRuleset}"`;
         }
       }
     }
@@ -111,6 +125,7 @@ export class LinterRulesetRule implements Rule {
     const emittersWithOptions = clientEmitters.filter(
       (emitter) => config?.options?.[emitter] !== undefined,
     );
+    const clientSdkRuleset = getRulesetPath(repositoryRoot, folder, "client-sdk.yaml");
     if (emittersWithOptions.length > 0 && !linterExtends?.includes(clientSdkRuleset)) {
       success = false;
       if (errorOutput) {
