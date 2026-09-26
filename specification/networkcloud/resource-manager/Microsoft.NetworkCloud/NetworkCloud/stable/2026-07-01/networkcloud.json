@@ -13845,7 +13845,7 @@
         },
         "strategyType": {
           "$ref": "#/definitions/ClusterUpdateStrategyType",
-          "description": "The mode of operation for runtime protection."
+          "description": "The strategy for updating the cluster."
         },
         "thresholdType": {
           "$ref": "#/definitions/ValidationThresholdType",
@@ -13884,7 +13884,7 @@
         },
         "strategyType": {
           "$ref": "#/definitions/ClusterUpdateStrategyType",
-          "description": "The mode of operation for runtime protection."
+          "description": "The strategy for updating the cluster."
         },
         "thresholdType": {
           "$ref": "#/definitions/ValidationThresholdType",
@@ -13907,7 +13907,7 @@
     },
     "ClusterUpdateStrategyType": {
       "type": "string",
-      "description": "The mode of operation for runtime protection.",
+      "description": "The strategy for updating the cluster.",
       "enum": [
         "Rack",
         "PauseAfterRack"
@@ -18890,14 +18890,6 @@
             "create"
           ]
         },
-        "storageApplianceSkuId": {
-          "type": "string",
-          "description": "The SKU for the storage appliance.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "rackSlot": {
           "type": "integer",
           "format": "int64",
@@ -18912,6 +18904,14 @@
         "serialNumber": {
           "type": "string",
           "description": "The serial number for the storage appliance."
+        },
+        "storageApplianceSkuId": {
+          "type": "string",
+          "description": "The SKU for the storage appliance.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "caCertificate": {
           "$ref": "#/definitions/CertificateInfo",
@@ -19010,9 +19010,9 @@
       "required": [
         "administratorCredentials",
         "rackId",
-        "storageApplianceSkuId",
         "rackSlot",
-        "serialNumber"
+        "serialNumber",
+        "storageApplianceSkuId"
       ]
     },
     "StorageApplianceProvisioningState": {

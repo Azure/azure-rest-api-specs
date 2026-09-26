@@ -6,7 +6,8 @@ on:
       - main
   pull_request:
     paths:
-      - package-lock.json
+      - pnpm-lock.yaml
+      - pnpm-workspace.yaml
       - package.json
       - tsconfig.json
       - .github/shared
@@ -26,4 +27,3 @@ jobs:
     uses: ./.github/workflows/_reusable-eng-tools-test.yaml
     with:
       package: oav-runner
-      lint: true

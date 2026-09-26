@@ -46,7 +46,7 @@ jobs:
           result-encoding: json
           script: |
             const { default: armAutoSignoffCode } =
-              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-auto-signoff-code.js');
+              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-auto-signoff-code.ts');
             return await armAutoSignoffCode({ github, context, core });
 
       # Upload artifacts with individual results

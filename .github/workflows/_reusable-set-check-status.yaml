@@ -60,7 +60,7 @@ jobs:
         with:
           script: |
             const { default: setStatus } =
-                await import('${{ github.workspace }}/.github/workflows/src/set-status.js');
+                await import('${{ github.workspace }}/.github/workflows/src/set-status.ts');
             return await setStatus(
               { github, context, core },
               '${{ inputs.monitored_workflow_name }}',
