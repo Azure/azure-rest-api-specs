@@ -3931,7 +3931,8 @@ model PatchResourceSku {
 @added(Versions.v2026_09_15_preview)
 model ManagedComputeDeploymentPatchProperties {
   /**
-   * Additional string-valued parameters supplied by the caller for this deployment.
+   * Non-secret, string-valued BYOC runtime parameters for VmManagedCompute deployments.
+   * Other SKUs and unsupported parameter names are rejected.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Deployment parameters require an extensible string-keyed map"
   deploymentParameters?: Record<string>;
@@ -6589,7 +6590,8 @@ model ManagedComputeDeploymentProperties {
   gatedModelAccess?: GatedModelAccessProperties;
 
   /**
-   * Additional string-valued parameters supplied by the caller for this deployment.
+   * Non-secret, string-valued BYOC runtime parameters for VmManagedCompute deployments.
+   * Other SKUs and unsupported parameter names are rejected.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Deployment parameters require an extensible string-keyed map"
   @added(Versions.v2026_09_15_preview)
