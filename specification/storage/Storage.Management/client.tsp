@@ -53,6 +53,7 @@ using Microsoft.Storage;
 // csharp rename-mapping decorators
 @@clientName(AccessTier, "StorageAccountAccessTier", "csharp");
 @@clientName(AccountStatus, "StorageAccountStatus", "csharp");
+@@clientName(AiProvider, "AIProvider", "csharp");
 @@clientName(
   AzureFilesIdentityBasedAuthentication,
   "FilesIdentityBasedAuthentication",
@@ -810,6 +811,11 @@ namespace Azure.ResourceManager.Models {
   "csharp"
 );
 @@clientName(
+  SasPolicy.requireUserBoundUserDelegationSas,
+  "IsUserBoundUserDelegationSasRequired",
+  "csharp"
+);
+@@clientName(
   CustomDomain.useSubDomainName,
   "IsUseSubDomainNameEnabled",
   "csharp"
@@ -840,6 +846,11 @@ namespace Azure.ResourceManager.Models {
 @@clientName(TableAccessPolicy.expiryTime, "ExpireOn", "csharp");
 @@clientName(ManagementPolicyRule.type, "RuleType", "csharp");
 @@clientName(BlobInventoryPolicySchema.type, "RuleType", "csharp");
+@@clientName(
+  AdvancedPlatformMetricsRuleProperties.enabled,
+  "IsEnabled",
+  "csharp"
+);
 
 // Additional property renames for StorageAccount properties
 @@clientName(
@@ -943,6 +954,16 @@ namespace Azure.ResourceManager.Models {
   "StorageDataSharePropertiesPatch",
   "csharp"
 );
+@@clientName(
+  ContextCachePropertiesUpdate,
+  "ContextCachePropertiesPatch",
+  "csharp"
+);
+@@clientName(
+  ContextCacheContainerPropertiesUpdate,
+  "ContextCacheContainerPropertiesPatch",
+  "csharp"
+);
 
 // Native data sharing property renames/types
 @@clientName(
@@ -953,6 +974,16 @@ namespace Azure.ResourceManager.Models {
 @@clientName(
   StorageConnectorPropertiesUpdate.testConnection,
   "ShouldTestConnection",
+  "csharp"
+);
+@@clientName(
+  ContextCacheContainerProperties.timeToLive,
+  "TimeToLiveInDays",
+  "csharp"
+);
+@@clientName(
+  ContextCacheContainerPropertiesUpdate.timeToLive,
+  "TimeToLiveInDays",
   "csharp"
 );
 
@@ -994,6 +1025,11 @@ namespace Azure.ResourceManager.Models {
 @@alternateType(ActiveDirectoryProperties.domainGuid, uuid, "csharp");
 @@alternateType(EncryptionScopeKeyVaultProperties.keyUri, url, "csharp");
 @@alternateType(KeyVaultProperties.keyvaulturi, url, "csharp");
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.CustomerManagedKeyEncryption.keyEncryptionKeyUrl,
+  url,
+  "csharp"
+);
 
 // Rename DomainGuid → ActiveDirectoryDomainGuid for backward compat
 @@clientName(
@@ -1480,13 +1516,13 @@ enum ProvisioningStateEnum {
 @@clientName(
   Azure.ResourceManager.CommonTypes.Encryption,
   "ArmEncryption",
-  "go,javascript"
+  "csharp,go,javascript"
 );
 
 @@alternateType(
   Azure.ResourceManager.CommonTypes.UserAssignedIdentity,
   Microsoft.Storage.UserAssignedIdentity,
-  "java,python"
+  "java,python,javascript,go"
 );
 
 @@alternateType(
