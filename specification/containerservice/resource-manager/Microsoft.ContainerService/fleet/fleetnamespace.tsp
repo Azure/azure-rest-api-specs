@@ -14,6 +14,14 @@ using Placement.V1;
 
 namespace Microsoft.ContainerService;
 
+@added(Versions.v2026_11_01_preview)
+scalar FleetMemberResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ContainerService/fleets/members",
+    }
+  ]>;
+
 @doc("A fleet managed namespace.")
 @resource("managedNamespaces")
 @added(Versions.v2025_08_01_preview)
@@ -59,6 +67,11 @@ model FleetManagedNamespaceProperties {
   @visibility(Lifecycle.Read)
   @doc("The Azure Portal FQDN of the Fleet hub.")
   portalFqdn?: string;
+
+  @added(Versions.v2026_11_01_preview)
+  @visibility(Lifecycle.Read)
+  @doc("The resource IDs of the Fleet members where the current-generation ClusterResourcePlacement status reports the managed namespace as successfully applied. This property is omitted while current-generation placement status is unavailable, including while an update is being scheduled. An empty array indicates that current-generation placement status is available but the managed namespace is not successfully applied to any members.")
+  placedMemberIds?: FleetMemberResourceId[];
 }
 
 @added(Versions.v2025_08_01_preview)
@@ -238,6 +251,24 @@ interface FleetManagedNamespaces {
     FleetManagedNamespacePatch,
     Azure.ResourceManager.Foundations.BaseParameters<FleetManagedNamespace> &
       IfMatchParameters<FleetManagedNamespace>
+  >;
+
+  @added(Versions.v2026_11_01_preview)
+  @action("listCredentials")
+  @doc("Lists the Fleet hub credentials scoped to the managed namespace.")
+  listCredentials is ArmResourceActionSync<
+    FleetManagedNamespace,
+    void,
+    FleetCredentialResults
+  >;
+
+  @added(Versions.v2026_11_01_preview)
+  @action("listMemberCredentials")
+  @doc("Lists the Fleet member credentials scoped to the managed namespace.")
+  listMemberCredentials is ArmResourceActionSync<
+    FleetManagedNamespace,
+    FleetMemberCredentialRequest,
+    FleetMemberCredentialResults
   >;
 }
 
