@@ -152,6 +152,7 @@ model ApiError {
 
 /** Error response for API failures. */
 @usage(Usage.input | Usage.output, "python")
+@clientName("ApiErrorResult", "csharp")
 model ApiErrorResponse {
   /** Details of the API failure. */
   error: ApiError;
@@ -190,6 +191,7 @@ model CheckpointInfo {
 // Config and rank are required, matching the authoritative service contract.
 /** Request body for POST /fine_tuning/sessions. */
 @usage(Usage.input | Usage.output, "python")
+@clientName("CreateSessionContent", "csharp")
 model CreateSessionRequest {
   /** The session type. */
   type: SessionType;
@@ -273,6 +275,7 @@ model ForwardInput extends ForwardBackwardInput {}
 // service heartbeat responses may omit it. No new REST requirement is implied.
 /** Response from POST /fine_tuning/sessions/{sessionId}/heartbeat. */
 @usage(Usage.input | Usage.output, "python")
+@clientName("HeartbeatResult", "csharp")
 model HeartbeatResponse {
   /** Identifier of the session whose heartbeat was acknowledged. */
   session_id: string;
@@ -405,6 +408,7 @@ model SampleOperationResult extends OperationResult {
 
 /** Request body for POST /fine_tuning/sessions/{sessionId}/sample. */
 @usage(Usage.input | Usage.output, "python")
+@clientName("SampleContent", "csharp")
 model SampleRequest {
   /** Number of independent completions to generate. Default 1. */
   num_samples: int32;
@@ -489,6 +493,7 @@ model SaveSamplerWeightsOperationResult extends OperationResult {
 
 /** Request body for POST /fine_tuning/sessions/{sessionId}/checkpoint_sample. */
 @usage(Usage.input | Usage.output, "python")
+@clientName("SaveSamplerWeightsContent", "csharp")
 model SaveSamplerWeightsRequest {
   /** Optional explicit identifier for the sampler checkpoint. */
   path?: string;
