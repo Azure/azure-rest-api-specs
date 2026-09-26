@@ -20,6 +20,7 @@ import "./AssessmentResult.tsp";
 import "./ResiliencyReview.tsp";
 import "./TriageRecommendation.tsp";
 import "./TriageResource.tsp";
+import "./Remediation.tsp";
 import "./routes.tsp";
 import "./back-compatible.tsp";
 import "./client.tsp";
@@ -57,6 +58,12 @@ enum Versions {
    * The 2026-03-01-preview API version.
    */
   v2026_03_01_preview: "2026-03-01-preview",
+
+  /**
+   * The 2026-09-01-preview API version.
+   */
+  @Azure.Core.previewVersion
+  v2026_09_01_preview: "2026-09-01-preview",
 }
 
 interface Operations
