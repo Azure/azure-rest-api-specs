@@ -1,0 +1,187 @@
+{
+  "title": "AssessedNetworkSecurityGroupOperations_ListByParent_MaximumSet",
+  "operationId": "AssessedNetworkSecurityGroupOperations_ListByParent",
+  "parameters": {
+    "api-version": "2026-02-02-preview",
+    "subscriptionId": "D5F31D22-3E2E-4A10-B63F-3E0C598D11FA",
+    "resourceGroupName": "rgnetworkAssessments",
+    "projectName": "contosoProject",
+    "assessmentName": "assessmentName",
+    "$filter": "properties/resourceName eq 'contoso-nsg'",
+    "pageSize": 10,
+    "continuationToken": "abc123",
+    "totalRecordCount": 1
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "workloadType": "Network",
+              "linkages": [
+                {
+                  "workloadName": "contoso-subnet",
+                  "linkageType": "ConnectedTo",
+                  "kind": "Subnet",
+                  "armId": "/subscriptions/D5F31D22-3E2E-4A10-B63F-3E0C598D11FA/resourceGroups/contoso-rg/providers/Microsoft.Network/virtualNetworks/contoso-vnet/subnets/default"
+                }
+              ],
+              "recommendations": [
+                {
+                  "configuration": {
+                    "azureTarget": "AzureNetworkSecurityGroup",
+                    "sizingCriterion": "AsOnPremises"
+                  },
+                  "recommendedFor": {
+                    "strategies": [
+                      "PaaSPreferred"
+                    ]
+                  },
+                  "migrationPlatform": "IaaS",
+                  "confidenceScore": 4.5,
+                  "migrationSuitability": {
+                    "readiness": "Suitable"
+                  },
+                  "securitySuitability": {
+                    "readiness": "Suitable"
+                  },
+                  "totalCost": [
+                    {
+                      "costDetail": [
+                        {
+                          "name": "MonthlyBandwidthCost",
+                          "value": 0
+                        }
+                      ],
+                      "savingOptions": "None"
+                    }
+                  ],
+                  "totalSavings": [
+                    {
+                      "savingsDetail": [
+                        {
+                          "name": "MonthlyAzureHybridCostSavings",
+                          "value": 0
+                        }
+                      ],
+                      "savingOptions": "None"
+                    }
+                  ],
+                  "migrationIssues": [
+                    {
+                      "issueCode": "NSG001",
+                      "issueCategory": "Warning",
+                      "issueDescription": "NSG contains rules that allow broad inbound access",
+                      "possibleCause": "Rules with source 0.0.0.0/0 allow traffic from any source",
+                      "recommendedActions": [
+                        "Review and restrict source address prefixes to specific IP ranges"
+                      ],
+                      "moreInformation": [
+                        {
+                          "title": "Network security groups",
+                          "url": "https://learn.microsoft.com/azure/virtual-network/network-security-groups-overview"
+                        }
+                      ]
+                    }
+                  ],
+                  "skus": [
+                    {
+                      "kind": "Endpoint",
+                      "resourceUri": "/subscriptions/D5F31D22-3E2E-4A10-B63F-3E0C598D11FA/resourceGroups/contoso-rg/providers/Microsoft.Network/networkSecurityGroups/contoso-nsg",
+                      "displayName": "Network Security Group",
+                      "id": "nsg",
+                      "type": "NetworkSecurityGroup",
+                      "sources": [
+                        {
+                          "name": "contoso-nsg",
+                          "migrationSuitability": {
+                            "readiness": "Suitable"
+                          }
+                        }
+                      ],
+                      "details": {
+                        "skuType": "Network",
+                        "skuName": "NetworkSecurityGroup",
+                        "capabilities": [
+                          {
+                            "name": "flowLogs",
+                            "value": "supported"
+                          }
+                        ],
+                        "totalCost": [
+                          {
+                            "costDetail": [
+                              {
+                                "name": "MonthlyBandwidthCost",
+                                "value": 0
+                              }
+                            ],
+                            "savingOptions": "None"
+                          }
+                        ],
+                        "totalSavings": [
+                          {
+                            "savingsDetail": [
+                              {
+                                "name": "MonthlyAzureHybridCostSavings",
+                                "value": 0
+                              }
+                            ],
+                            "savingOptions": "None"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "migrationGuidelines": [
+                    {
+                      "guidelineId": "nsg-guideline-001",
+                      "migrationGuidelineCategory": "Security",
+                      "migrationGuidelineContext": [
+                        {
+                          "contextKey": "securityReview",
+                          "contextValue": "Review all inbound rules for least-privilege access"
+                        }
+                      ]
+                    }
+                  ],
+                  "recommendationReasonings": [
+                    {
+                      "reasoningId": "nsg-reason-001",
+                      "reasoningString": "NSG rules can be directly migrated to Azure NSG",
+                      "contextDetails": [
+                        "All security rules are compatible with Azure NSG format"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "resourceName": "contoso-nsg",
+              "extendedDetails": {
+                "customRuleCount": 5,
+                "defaultRuleCount": 3,
+                "associatedSubnetCount": 2,
+                "associatedNicCount": 4
+              },
+              "createdTimestamp": "2025-09-07T16:22:10.208Z",
+              "updatedTimestamp": "2025-09-07T16:22:10.208Z"
+            },
+            "id": "/subscriptions/D5F31D22-3E2E-4A10-B63F-3E0C598D11FA/resourceGroups/rgnetworkAssessments/providers/Microsoft.Migrate/assessmentProjects/contosoProject/networkAssessments/assessmentName/assessedNetworkSecurityGroups/nsg1",
+            "name": "nsg1",
+            "type": "Microsoft.Migrate/assessmentProjects/networkAssessments/assessedNetworkSecurityGroups",
+            "systemData": {
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2025-09-07T16:22:10.208Z",
+              "lastModifiedBy": "user@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-09-07T16:22:10.208Z"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/D5F31D22-3E2E-4A10-B63F-3E0C598D11FA/resourceGroups/rgnetworkAssessments/providers/Microsoft.Migrate/assessmentProjects/contosoProject/networkAssessments/assessmentName/assessedNetworkSecurityGroups?api-version=2026-02-02-preview&continuationToken=def456"
+      }
+    }
+  }
+}

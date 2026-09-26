@@ -1,0 +1,206 @@
+{
+  "title": "AssessedAppGwRoutingRuleOperations_ListByParent_MaximumSet",
+  "operationId": "AssessedAppGwRoutingRuleOperations_ListByParent",
+  "parameters": {
+    "api-version": "2026-02-02-preview",
+    "subscriptionId": "D5F31D22-3E2E-4A10-B63F-3E0C598D11FA",
+    "resourceGroupName": "rgnetworkAssessments",
+    "projectName": "contosoProject",
+    "assessmentName": "assessmentName",
+    "assessedApplicationGatewayName": "appgw1",
+    "$filter": "properties/resourceName eq 'contoso-appgw-rule1'",
+    "pageSize": 10,
+    "continuationToken": "abc123",
+    "totalRecordCount": 2
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "workloadType": "Network",
+              "linkages": [
+                {
+                  "workloadName": "contoso-appgw",
+                  "linkageType": "Parent",
+                  "kind": "ApplicationGateway",
+                  "armId": "/subscriptions/D5F31D22-3E2E-4A10-B63F-3E0C598D11FA/resourceGroups/contoso-rg/providers/Microsoft.Network/applicationGateways/contoso-appgw"
+                }
+              ],
+              "recommendations": [
+                {
+                  "configuration": {
+                    "azureTarget": "AzureApplicationGateway",
+                    "sizingCriterion": "AsOnPremises"
+                  },
+                  "recommendedFor": {
+                    "strategies": [
+                      "PaaSPreferred"
+                    ]
+                  },
+                  "migrationPlatform": "IaaS",
+                  "confidenceScore": 4.5,
+                  "migrationSuitability": {
+                    "readiness": "Suitable"
+                  },
+                  "securitySuitability": {
+                    "readiness": "Suitable"
+                  },
+                  "totalCost": [
+                    {
+                      "costDetail": [
+                        {
+                          "name": "MonthlyComputeCost",
+                          "value": 15
+                        }
+                      ],
+                      "savingOptions": "None"
+                    }
+                  ],
+                  "totalSavings": [
+                    {
+                      "savingsDetail": [
+                        {
+                          "name": "MonthlyAzureHybridCostSavings",
+                          "value": 5
+                        }
+                      ],
+                      "savingOptions": "None"
+                    }
+                  ],
+                  "migrationIssues": [
+                    {
+                      "issueCode": "APPGWRULE001",
+                      "issueCategory": "Warning",
+                      "issueDescription": "Routing rule uses path-based routing with wildcard paths that need review",
+                      "possibleCause": "Wildcard path rules may behave differently in target environment",
+                      "recommendedActions": [
+                        "Review path-based routing rules post-migration"
+                      ],
+                      "moreInformation": [
+                        {
+                          "title": "Application Gateway URL path-based routing",
+                          "url": "https://learn.microsoft.com/azure/application-gateway/url-route-overview"
+                        }
+                      ]
+                    }
+                  ],
+                  "skus": [
+                    {
+                      "kind": "Endpoint",
+                      "resourceUri": "/subscriptions/D5F31D22-3E2E-4A10-B63F-3E0C598D11FA/resourceGroups/contoso-rg/providers/Microsoft.Network/applicationGateways/contoso-appgw",
+                      "displayName": "Standard v2 Application Gateway Routing Rule",
+                      "id": "standard-v2-appgw-rule",
+                      "type": "ApplicationGateway",
+                      "sources": [
+                        {
+                          "name": "contoso-appgw-rule1",
+                          "migrationSuitability": {
+                            "readiness": "Suitable"
+                          }
+                        }
+                      ],
+                      "details": {
+                        "skuType": "Network",
+                        "skuName": "Standard_v2",
+                        "capabilities": [
+                          {
+                            "name": "pathBasedRouting",
+                            "value": "supported"
+                          }
+                        ],
+                        "totalCost": [
+                          {
+                            "costDetail": [
+                              {
+                                "name": "MonthlyComputeCost",
+                                "value": 15
+                              }
+                            ],
+                            "savingOptions": "None"
+                          }
+                        ],
+                        "totalSavings": [
+                          {
+                            "savingsDetail": [
+                              {
+                                "name": "MonthlyAzureHybridCostSavings",
+                                "value": 5
+                              }
+                            ],
+                            "savingOptions": "None"
+                          }
+                        ]
+                      }
+                    }
+                  ],
+                  "migrationGuidelines": [
+                    {
+                      "guidelineId": "appgwrule-guideline-001",
+                      "migrationGuidelineCategory": "General",
+                      "migrationGuidelineContext": [
+                        {
+                          "contextKey": "ruleType",
+                          "contextValue": "Basic rule with HTTPS listener"
+                        }
+                      ]
+                    }
+                  ],
+                  "recommendationReasonings": [
+                    {
+                      "reasoningId": "appgwrule-reason-001",
+                      "reasoningString": "Routing rule configuration is compatible with Azure Application Gateway v2",
+                      "contextDetails": [
+                        "Basic routing with HTTPS backend settings and health probe"
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "resourceName": "contoso-appgw-rule1",
+              "extendedDetails": {
+                "ruleType": "Basic",
+                "priority": 100,
+                "listener": {
+                  "name": "listener-https",
+                  "frontendIpConfiguration": {
+                    "name": "appGwPublicFrontendIp",
+                    "type": "Public",
+                    "publicIpName": "contoso-appgw-pip",
+                    "ipAddress": "20.100.50.25"
+                  },
+                  "port": 443,
+                  "protocol": "Https",
+                  "hostName": "www.contoso.com"
+                },
+                "backendAddressPool": "backend-pool-1",
+                "backendSettings": {
+                  "name": "backend-settings-1",
+                  "port": 443,
+                  "protocol": "Https",
+                  "requestTimeout": 30,
+                  "hostName": "contoso.com"
+                }
+              },
+              "createdTimestamp": "2025-09-07T16:22:10.208Z",
+              "updatedTimestamp": "2025-09-07T16:22:10.208Z"
+            },
+            "id": "/subscriptions/D5F31D22-3E2E-4A10-B63F-3E0C598D11FA/resourceGroups/rgnetworkAssessments/providers/Microsoft.Migrate/assessmentProjects/contosoProject/networkAssessments/assessmentName/assessedApplicationGateways/appgw1/assessedAppGwRoutingRules/routingrule1",
+            "name": "routingrule1",
+            "type": "Microsoft.Migrate/assessmentProjects/networkAssessments/assessedApplicationGateways/assessedAppGwRoutingRules",
+            "systemData": {
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2025-09-07T16:22:10.208Z",
+              "lastModifiedBy": "user@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-09-07T16:22:10.208Z"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/D5F31D22-3E2E-4A10-B63F-3E0C598D11FA/resourceGroups/rgnetworkAssessments/providers/Microsoft.Migrate/assessmentProjects/contosoProject/networkAssessments/assessmentName/assessedApplicationGateways/appgw1/assessedAppGwRoutingRules?api-version=2026-02-02-preview&continuationToken=def456"
+      }
+    }
+  }
+}
