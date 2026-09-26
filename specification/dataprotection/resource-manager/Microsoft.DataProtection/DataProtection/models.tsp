@@ -1167,7 +1167,7 @@ model OperationResource {
 
   /**
    * Required if status == failed or status == canceled. This is the OData v4 error format, used by the RPC and will go into the v2.2 Azure REST API guidelines.
-   * The full set of optional properties (e.g. inner errors / details) can be found in the "Error Response" section.
+   * The full set of optional properties (e.g. inner errors / details) can be found in the `Error Response` section.
    */
   error?: Error;
 
@@ -1177,7 +1177,7 @@ model OperationResource {
   id?: string;
 
   /**
-   * It must match the last segment of the "id" field, and will typically be a GUID / system generated value
+   * It must match the last segment of the `id` field, and will typically be a GUID / system generated value.
    */
   name?: string;
 
@@ -4020,8 +4020,8 @@ model RestoreTargetInfo extends RestoreTargetInfoBase {
  */
 model ScheduleBasedBackupCriteria extends BackupCriteria {
   /**
-   * it contains absolute values like "AllBackup" / "FirstOfDay" / "FirstOfWeek" / "FirstOfMonth"
-   * and should be part of AbsoluteMarker enum
+   * It contains absolute marker values such as `AllBackup`, `FirstOfDay`, `FirstOfWeek`, and `FirstOfMonth`.
+   * These values should be part of the `AbsoluteMarker` enum.
    */
   absoluteCriteria?: AbsoluteMarker[];
 

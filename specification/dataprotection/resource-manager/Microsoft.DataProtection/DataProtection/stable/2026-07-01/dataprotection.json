@@ -7910,7 +7910,7 @@
         },
         "error": {
           "$ref": "#/definitions/Error",
-          "description": "Required if status == failed or status == canceled. This is the OData v4 error format, used by the RPC and will go into the v2.2 Azure REST API guidelines.\nThe full set of optional properties (e.g. inner errors / details) can be found in the \"Error Response\" section."
+          "description": "Required if status == failed or status == canceled. This is the OData v4 error format, used by the RPC and will go into the v2.2 Azure REST API guidelines.\nThe full set of optional properties (e.g. inner errors / details) can be found in the `Error Response` section."
         },
         "id": {
           "type": "string",
@@ -7918,7 +7918,7 @@
         },
         "name": {
           "type": "string",
-          "description": "It must match the last segment of the \"id\" field, and will typically be a GUID / system generated value"
+          "description": "It must match the last segment of the `id` field, and will typically be a GUID / system generated value."
         },
         "properties": {
           "$ref": "#/definitions/OperationExtendedInfo",
@@ -8803,7 +8803,7 @@
       "properties": {
         "absoluteCriteria": {
           "type": "array",
-          "description": "it contains absolute values like \"AllBackup\" / \"FirstOfDay\" / \"FirstOfWeek\" / \"FirstOfMonth\"\nand should be part of AbsoluteMarker enum",
+          "description": "It contains absolute marker values such as `AllBackup`, `FirstOfDay`, `FirstOfWeek`, and `FirstOfMonth`.\nThese values should be part of the `AbsoluteMarker` enum.",
           "items": {
             "$ref": "#/definitions/AbsoluteMarker"
           }
