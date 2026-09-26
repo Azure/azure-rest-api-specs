@@ -38,7 +38,8 @@ model BenefitVersionedExpansionProperties {
    * Amount of benefit that has been consumed
    */
   @visibility(Lifecycle.Read)
-  consumed?: Price;
+  @typeChangedFrom(Versions.v2026_07_01_preview, Price)
+  consumed?: Consumed;
 }
 
 /**
@@ -720,6 +721,10 @@ union ResourceType {
 
   /** Reserved capacity or reserved instances */
   Reservations: "Reservations",
+
+  /** Spend Plans */
+  @added(Versions.v2026_07_01_preview)
+  SpendPlans: "SpendPlans",
 }
 
 /**
@@ -835,6 +840,29 @@ model Price {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   amount?: float64;
+}
+
+/**
+ * The amount and percentage of a benefit that has been consumed.
+ */
+@added(Versions.v2026_07_01_preview)
+model Consumed {
+  /**
+   * The ISO 4217 3-letter currency code for the consumed amount.
+   */
+  currencyCode?: string;
+
+  /**
+   * The consumed amount in the currency specified by currencyCode.
+   */
+  amount?: float64;
+
+  /**
+   * Percentage of the benefit that has been consumed, from 0 to 100. For indirect customers only this percentage is populated; for all other customers amount, currencyCode, and percentage are populated.
+   */
+  @minValue(0)
+  @maxValue(100)
+  percentage?: float64;
 }
 
 /**
@@ -1252,6 +1280,7 @@ model ResourceSku {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model PurchaseRequest {
   /**
    * The SKU to be applied for this resource
@@ -1432,6 +1461,7 @@ model SavingsPlanUpdateRequestProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SavingsPlanUpdateValidateRequest {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @identifiers(#[])
@@ -1472,6 +1502,7 @@ model SavingsPlanValidResponseProperty {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SavingsPlanPurchaseValidateRequest {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   benefits?: SavingsPlanOrderAliasModel[];
@@ -1481,6 +1512,7 @@ model SavingsPlanPurchaseValidateRequest {
  * Reservation order alias
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ReservationOrderAliasRequest
   extends Azure.ResourceManager.CommonTypes.Resource {
   /**
@@ -3930,3 +3962,675 @@ model CatalogGroupList {
   @nextLink
   nextLink?: url;
 }
+
+// --- Notification Rule Models -------------------------------------------------
+
+/**
+ * The kind of notification rule.
+ */
+@added(Versions.v2026_07_01_preview)
+union NotificationRuleKind {
+  string,
+
+  /**
+   * Built-in notification rule automatically provisioned with the parent resource.
+   */
+  BuiltIn: "BuiltIn",
+
+  /**
+   * Custom notification rule created by the user.
+   */
+  Custom: "Custom",
+}
+
+/**
+ * Status of the notification rule.
+ */
+@added(Versions.v2026_07_01_preview)
+union NotificationRuleStatus {
+  string,
+
+  /**
+   * Notification rule is pending activation.
+   */
+  Pending: "Pending",
+
+  /**
+   * Notification rule is active and will evaluate conditions.
+   */
+  Active: "Active",
+
+  /**
+   * Notification rule is disabled and will not fire.
+   */
+  Disabled: "Disabled",
+}
+
+/**
+ * The firing mode for notifications.
+ */
+@added(Versions.v2026_07_01_preview)
+union FiringMode {
+  string,
+
+  /**
+   * Notification fires once and is automatically disabled after successful delivery.
+   */
+  OneTime: "OneTime",
+
+  /**
+   * Notification fires every time the condition is met, subject to rate limits.
+   */
+  Recurring: "Recurring",
+}
+
+/**
+ * The type of condition trigger for notification evaluation.
+ */
+@added(Versions.v2026_07_01_preview)
+union TriggerType {
+  string,
+
+  /**
+   * Evaluate condition whenever the resource changes via Azure Resource Notifications events.
+   */
+  OnResourceChange: "OnResourceChange",
+
+  /**
+   * Evaluate condition at a scheduled time relative to a resource property.
+   */
+  Scheduled: "Scheduled",
+}
+
+/**
+ * Notification behavior configuration controlling how notifications are fired.
+ */
+@added(Versions.v2026_07_01_preview)
+model NotificationBehavior {
+  /**
+   * The firing mode for this notification rule.
+   */
+  firingMode?: FiringMode;
+
+  /**
+   * Maximum number of notifications that can be sent per day for this rule.
+   */
+  maxNotificationsPerDay?: int32;
+
+  /**
+   * Minimum time between successive notifications in ISO 8601 duration format (e.g., PT1H for 1 hour).
+   */
+  cooldownPeriod?: string;
+}
+
+/**
+ * Schedule configuration for scheduled notification triggers.
+ */
+@added(Versions.v2026_07_01_preview)
+model TriggerSchedule {
+  /**
+   * JSON path to a date/datetime property in the resource used as the reference point (e.g., properties.expiryDate).
+   */
+  relativeToProperty?: string;
+
+  /**
+   * ISO 8601 duration offset relative to the property value. Negative values indicate before the date (e.g., -P30D for 30 days before).
+   */
+  offset?: string;
+}
+
+/**
+ * Trigger configuration for when the notification condition should be evaluated.
+ */
+@added(Versions.v2026_07_01_preview)
+model NotificationTrigger {
+  /**
+   * The type of trigger that initiates condition evaluation.
+   */
+  type?: TriggerType;
+
+  /**
+   * Schedule configuration. Required when trigger type is Scheduled.
+   */
+  schedule?: TriggerSchedule;
+}
+
+/**
+ * Condition definition for notification rule evaluation.
+ */
+@added(Versions.v2026_07_01_preview)
+model NotificationCondition {
+  /**
+   * Condition expression evaluated against the current resource state (e.g., "properties.expiryDate <= utcNow() + duration('P30D')").
+   */
+  expression?: string;
+
+  /**
+   * Trigger configuration determining when the condition is evaluated.
+   */
+  trigger?: NotificationTrigger;
+}
+
+/**
+ * Recipient configuration for notification delivery.
+ */
+@added(Versions.v2026_07_01_preview)
+model NotificationRecipients {
+  /**
+   * The scope at which to resolve recipients. Accepts parent resource scope, billing profile scope, or billing account scope.
+   */
+  scope?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * Azure RBAC role definition ID used to identify recipients. Users with this role assignment at the specified scope will receive notifications.
+   */
+  roleDefinitionId?: Azure.Core.armResourceIdentifier<[
+    {
+      scopes: ["Tenant", "Subscription", "ResourceGroup", "Extension"];
+      type: "Microsoft.Authorization/roleDefinitions";
+    }
+  ]>;
+}
+
+/**
+ * Read-only delivery state tracking for a notification rule.
+ */
+@added(Versions.v2026_07_01_preview)
+model DeliveryState {
+  /**
+   * Timestamp of the last time the notification condition was triggered.
+   */
+  @visibility(Lifecycle.Read)
+  lastTriggeredAt?: utcDateTime;
+
+  /**
+   * Timestamp of the last successful notification delivery.
+   */
+  @visibility(Lifecycle.Read)
+  lastDeliveredAt?: utcDateTime;
+
+  /**
+   * Number of notifications sent today for this rule (resets at midnight UTC).
+   */
+  @visibility(Lifecycle.Read)
+  notificationsSentToday?: int32;
+
+  /**
+   * Total number of notifications sent since the rule was created.
+   */
+  @visibility(Lifecycle.Read)
+  totalNotificationsSent?: int32;
+}
+
+/** Common writable properties shared between notification rule resource and patch models. */
+alias NotificationRuleWritableProperties = {
+  /**
+   * Display name for the notification rule.
+   */
+  displayName?: string;
+
+  /**
+   * Description of what this notification rule does.
+   */
+  description?: string;
+
+  /**
+   * Current status of the notification rule.
+   */
+  status?: NotificationRuleStatus;
+
+  /**
+   * Start date of the notification evaluation window. Defaults to creation time. Reset to current UTC time when a disabled rule is re-enabled.
+   */
+  startAt?: utcDateTime;
+
+  /**
+   * End date of the notification evaluation window. Automatically updated by the system when the parent resource's expiryDate changes.
+   */
+  endAt?: utcDateTime;
+
+  /**
+   * Configuration controlling how notifications are fired including mode, rate limits, and cooldown.
+   */
+  notificationBehavior?: NotificationBehavior;
+
+  /**
+   * Condition that determines when the notification should fire.
+   */
+  condition?: NotificationCondition;
+
+  /**
+   * Recipient configuration specifying who receives the notifications.
+   */
+  @identifiers(#[])
+  recipients?: NotificationRecipients[];
+};
+
+/**
+ * Properties of a notification rule.
+ */
+@added(Versions.v2026_07_01_preview)
+model NotificationRuleProperties {
+  /**
+   * The parent resource ID this notification rule is scoped to.
+   */
+  @visibility(Lifecycle.Read)
+  scope?: Azure.Core.armResourceIdentifier;
+
+  ...NotificationRuleWritableProperties;
+
+  /**
+   * Read-only delivery state and statistics for this notification rule.
+   */
+  @visibility(Lifecycle.Read)
+  deliveryState?: DeliveryState;
+
+  /**
+   * Provisioning state of the notification rule as assigned by RPaaS. This indicates the last operation's status.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: BenefitProvisioningState;
+}
+
+/**
+ * Notification rule patch request.
+ */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@added(Versions.v2026_07_01_preview)
+model NotificationRulePatchRequest {
+  /**
+   * Notification rule patch request properties.
+   */
+  properties?: NotificationRulePatchRequestProperties;
+}
+
+/**
+ * Properties that can be updated on a notification rule.
+ */
+@added(Versions.v2026_07_01_preview)
+model NotificationRulePatchRequestProperties {
+  ...NotificationRuleWritableProperties;
+}
+
+/**
+ * List of notification rules.
+ */
+@added(Versions.v2026_07_01_preview)
+model NotificationRuleList is Azure.Core.Page<NotificationRule>;
+
+/**
+ * The kind of spend plan.
+ */
+@added(Versions.v2026_07_01_preview)
+union SpendPlanKind {
+  string,
+
+  /**
+   * A flexible spend plan.
+   */
+  FlexSpendPlan: "FlexSpendPlan",
+}
+
+/**
+ * Status of the spend plan.
+ */
+@added(Versions.v2026_07_01_preview)
+union SpendPlanStatus {
+  string,
+
+  /**
+   * The spend plan is active and available for use.
+   */
+  Active: "Active",
+
+  /**
+   * The spend plan is pending activation.
+   */
+  Pending: "Pending",
+
+  /**
+   * The spend plan has been canceled.
+   */
+  Canceled: "Canceled",
+
+  /**
+   * The spend plan has expired.
+   */
+  Expired: "Expired",
+
+  /**
+   * The spend plan operation failed.
+   */
+  Failed: "Failed",
+
+  /**
+   * The spend plan is exhausted.
+   */
+  Exhausted: "Exhausted",
+}
+
+/**
+ * Indicates when a scheduled change to the spend plan takes effect.
+ */
+@added(Versions.v2026_07_01_preview)
+union SpendPlanScheduledOn {
+  string,
+
+  /**
+   * The scheduled change is applied when the spend plan renews.
+   */
+  Renew: "Renew",
+}
+
+/**
+ * Product details for a spend plan.
+ */
+@added(Versions.v2026_07_01_preview)
+model SpendPlanProductDetails {
+  ...ProductDetailsBase;
+}
+
+/**
+ * Properties of a spend plan that can be scheduled to change in the future.
+ */
+@added(Versions.v2026_07_01_preview)
+model SpendPlanScheduledProperties {
+  /**
+   * Represent benefit term in ISO 8601 format.
+   */
+  term?: Term;
+
+  /**
+   * Commitment towards the benefit.
+   */
+  commitment?: Commitment;
+
+  /**
+   * Represents the billing plan in ISO 8601 format. Required only for monthly billing plans.
+   */
+  billingPlan?: BillingPlan;
+
+  /**
+   * Product UPN for the spend plan type.
+   */
+  productCode: string;
+}
+
+/**
+ * A set of changes that are scheduled to be applied to the spend plan in the future.
+ */
+@added(Versions.v2026_07_01_preview)
+model SpendPlanScheduledChanges {
+  /**
+   * Indicates when the scheduled change takes effect.
+   */
+  scheduledOn: SpendPlanScheduledOn;
+
+  ...SpendPlanScheduledProperties;
+}
+
+/**
+ * A set of spend plan changes that can be patched for a future schedule.
+ */
+@added(Versions.v2026_07_01_preview)
+model SpendPlanPatchScheduledChanges {
+  /**
+   * Indicates when the scheduled change takes effect.
+   */
+  scheduledOn?: SpendPlanScheduledOn;
+
+  /**
+   * Represent benefit term in ISO 8601 format.
+   */
+  term?: Term;
+
+  /**
+   * Commitment towards the benefit.
+   */
+  commitment?: Commitment;
+
+  /**
+   * Represents the billing plan in ISO 8601 format. Required only for monthly billing plans.
+   */
+  billingPlan?: BillingPlan;
+
+  /**
+   * Product UPN for the spend plan type.
+   */
+  productCode?: string;
+}
+
+/**
+ * Properties of a spend plan.
+ */
+@added(Versions.v2026_07_01_preview)
+model SpendPlanProperties {
+  /**
+   * Provisioning state
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: BenefitProvisioningState;
+
+  /**
+   * System identifier
+   */
+  @visibility(Lifecycle.Read)
+  systemId?: string;
+
+  /**
+   * Identifier of the order created during spend plan acquisition.
+   */
+  @visibility(Lifecycle.Read)
+  orderId?: string;
+
+  /**
+   * Status of the spend plan
+   */
+  @visibility(Lifecycle.Read)
+  status?: SpendPlanStatus;
+
+  /**
+   * Display name
+   */
+  displayName: string;
+
+  /**
+   * Product UPN for the spend plan type
+   */
+  productCode: string;
+
+  /**
+   * Product details including SKU title, product family, and product type.
+   */
+  @visibility(Lifecycle.Read)
+  productDetails?: SpendPlanProductDetails;
+
+  /**
+   * Fully-qualified identifier of the billing subscription that is charged for the spend plan.
+   */
+  billingSubscriptionId: Azure.Core.armResourceIdentifier<[
+    {
+      scopes: ["Tenant"];
+      type: "Microsoft.Resources/subscriptions";
+    }
+  ]>;
+
+  /**
+   * Fully-qualified identifier of the billing account where the benefit is applied.
+   */
+  @visibility(Lifecycle.Read)
+  billingAccountResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      scopes: ["Tenant"];
+      type: "Microsoft.Billing/billingAccounts";
+    }
+  ]>;
+
+  /**
+   * Fully-qualified identifier of the billing profile where the benefit is applied.
+   */
+  @visibility(Lifecycle.Read)
+  billingProfileResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      scopes: ["Tenant"];
+      type: "Microsoft.Billing/billingAccounts/billingProfiles";
+    }
+  ]>;
+
+  /**
+   * Customer resource id where the benefit is scoped to.
+   */
+  @visibility(Lifecycle.Read)
+  customerResourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      scopes: ["Tenant"];
+      type: "Microsoft.Billing/billingAccounts/customers";
+    }
+  ]>;
+
+  /**
+   * Represent benefit term in ISO 8601 format.
+   */
+  term: Term;
+
+  /**
+   * Commitment towards the benefit.
+   */
+  commitment: Commitment;
+
+  /**
+   * Represents the billing plan in ISO 8601 format. Required only for monthly billing plans.
+   */
+  billingPlan?: BillingPlan;
+
+  /**
+   * Type of the Applied Scope.
+   */
+  appliedScopeType: AppliedScopeType;
+
+  /**
+   * Properties specific to applied scope type. Not required if not applicable.
+   */
+  appliedScopeProperties?: AppliedScopeProperties;
+
+  /**
+   * Setting this to true will automatically purchase a new benefit on the expiration date time.
+   */
+  renew?: boolean = false;
+
+  /**
+   * The changes that are scheduled to be applied to the spend plan in the future.
+   */
+  scheduledChanges?: SpendPlanScheduledChanges;
+
+  /**
+   * Start DateTime.
+   */
+  startAt?: utcDateTime;
+
+  /**
+   * End DateTime in UTC.
+   */
+  endAt?: utcDateTime;
+
+  ...BenefitVersionedExpansionProperties;
+}
+
+/**
+ * Spend plan patch request
+ */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Spend plan patch supports tags and a subset of properties"
+@added(Versions.v2026_07_01_preview)
+model SpendPlanPatchRequest {
+  /**
+   * Resource tags
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "tags is a standard ARM patch envelope property"
+  tags?: Record<string>;
+
+  /**
+   * Spend plan patch properties
+   */
+  properties?: SpendPlanPatchProperties;
+}
+
+/**
+ * Spend plan patch properties
+ */
+@added(Versions.v2026_07_01_preview)
+model SpendPlanPatchProperties {
+  /**
+   * Display name
+   */
+  displayName?: string;
+
+  /**
+   * Represents the billing plan in ISO 8601 format. Required only for monthly billing plans.
+   */
+  billingPlan?: BillingPlan;
+
+  /**
+   * Type of the Applied Scope.
+   */
+  appliedScopeType?: AppliedScopeType;
+
+  /**
+   * Properties specific to applied scope type. Not required if not applicable.
+   */
+  appliedScopeProperties?: AppliedScopeProperties;
+
+  /**
+   * Setting this to true will automatically purchase a new benefit on the expiration date time.
+   */
+  renew?: boolean;
+
+  /**
+   * The changes that are scheduled to be applied to the spend plan in the future.
+   */
+  scheduledChanges?: SpendPlanPatchScheduledChanges;
+}
+
+/**
+ * List of spend plans
+ */
+@added(Versions.v2026_07_01_preview)
+model SpendPlanList is Azure.Core.Page<SpendPlan>;
+
+/**
+ * Properties of a spend plan term. A term captures a past configuration of the spend plan that was superseded by a scheduled change.
+ */
+@added(Versions.v2026_07_01_preview)
+model SpendPlanTermProperties {
+  /**
+   * Globally unique system identifier of the spend plan configuration captured by this term.
+   */
+  @visibility(Lifecycle.Read)
+  systemId?: string;
+
+  /**
+   * Provisioning state.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: BenefitProvisioningState;
+
+  ...SpendPlanScheduledProperties;
+
+  /**
+   * The DateTime from which this configuration became active.
+   */
+  @visibility(Lifecycle.Read)
+  startAt?: utcDateTime;
+
+  /**
+   * The DateTime until which this configuration was active.
+   */
+  @visibility(Lifecycle.Read)
+  endAt?: utcDateTime;
+}
+
+/**
+ * List of spend plan terms
+ */
+@added(Versions.v2026_07_01_preview)
+model SpendPlanTermList is Azure.Core.Page<SpendPlanTerm>;
