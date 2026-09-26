@@ -7448,6 +7448,12 @@
         "port": {
           "description": "The TCP port number that the Amazon Redshift server uses to listen for client connections. The default value is 5439. Type: integer (or Expression with resultType integer)."
         },
+        "sslMode": {
+          "description": "The SSL certificate verification mode to use when connecting to Amazon Redshift. The default value is verify-full. Only used for Version 2.0. Type: string."
+        },
+        "sslInsecure": {
+          "description": "Specifies whether the driver checks the authenticity of the IdP server certificate. The default value is False. Only used for Version 2.0. Type: boolean (or Expression with resultType boolean)."
+        },
         "encryptedCredential": {
           "type": "string",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string."
@@ -7476,6 +7482,54 @@
         }
       ],
       "x-ms-discriminator-value": "AmazonRedshiftSource"
+    },
+    "AmazonRedshiftSslMode": {
+      "type": "string",
+      "description": "The SSL certificate verification mode to use when connecting to Amazon Redshift. The default value is verify-full. Only used for Version 2.0.",
+      "enum": [
+        "verify-full",
+        "verify-ca",
+        "require",
+        "prefer",
+        "allow",
+        "disable"
+      ],
+      "x-ms-enum": {
+        "name": "AmazonRedshiftSslMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Verify_full",
+            "value": "verify-full",
+            "description": "Connect only using SSL, a trusted certificate authority, and a server name that matches the certificate."
+          },
+          {
+            "name": "Verify_ca",
+            "value": "verify-ca",
+            "description": "Connect only using SSL and a trusted certificate authority."
+          },
+          {
+            "name": "Required",
+            "value": "require",
+            "description": "Connect only using SSL."
+          },
+          {
+            "name": "Preferred",
+            "value": "prefer",
+            "description": "Connect using SSL if available. Otherwise, connect without using SSL."
+          },
+          {
+            "name": "Allowed",
+            "value": "allow",
+            "description": "By default, connect without using SSL. If the server requires SSL connections, then use SSL."
+          },
+          {
+            "name": "Disabled",
+            "value": "disable",
+            "description": "Connect without using SSL."
+          }
+        ]
+      }
     },
     "AmazonRedshiftTableDataset": {
       "type": "object",
