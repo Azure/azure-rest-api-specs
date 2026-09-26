@@ -1041,16 +1041,8 @@ paths:
     post:
       operationId: AgentOptimizationJobs_create
       summary: Create an agent optimization job
-      description: Creates an optimization job and returns the queued job. Honors `Operation-Id` for idempotent retry.
+      description: Creates an optimization job and returns the queued job. Honors `Operation-Id` for idempotent retry. Clients poll the URL in `Operation-Location` by using the get operation.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - AgentsOptimization=V2Preview
         - name: Operation-Id
           in: header
           required: false
@@ -1103,22 +1095,11 @@ paths:
             schema:
               $ref: '#/components/schemas/AgentOptimizationJob'
         description: The job to create.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
     get:
       operationId: AgentOptimizationJobs_list
       summary: List agent optimization jobs
       description: Lists optimization jobs with cursor pagination and optional status or agent name filters.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - AgentsOptimization=V2Preview
         - name: limit
           in: query
           required: false
@@ -1194,7 +1175,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: '#/components/schemas/AgentOptimizationJobListItem'
+                      $ref: '#/components/schemas/AgentOptimizationJob'
                     description: The requested list of items.
                   first_id:
                     type: string
@@ -1220,23 +1201,12 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - AgentOptimizationJobs
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
   /agent_optimization_jobs/{jobId}:
     get:
       operationId: AgentOptimizationJobs_get
       summary: Get an agent optimization job
       description: Retrieves an optimization job by its identifier.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - AgentsOptimization=V2Preview
         - name: jobId
           in: path
           required: true
@@ -1278,22 +1248,11 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - AgentOptimizationJobs
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
     delete:
       operationId: AgentOptimizationJobs_delete
       summary: Delete an agent optimization job
-      description: Deletes the job and its candidate artifacts, canceling the job first if it is non-terminal.
+      description: Cancels active work, then deletes the job and its candidate artifacts.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - AgentsOptimization=V2Preview
         - name: jobId
           in: path
           required: true
@@ -1324,23 +1283,204 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - AgentOptimizationJobs
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
+  /agent_optimization_jobs/{jobId}/candidates:
+    get:
+      operationId: AgentOptimizationJobCandidates_listCandidates
+      summary: List candidates for an agent optimization job
+      description: Lists candidates for the given optimization job with cursor pagination, including the original baseline and generated candidates. Each `output.mutations` item identifies a changed attribute by `type`; mutation `value` fields are omitted unless the client passes `expand=mutations`.
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          description: The ID of the parent optimization job.
+          schema:
+            type: string
+        - name: expand
+          in: query
+          required: false
+          description: Comma-separated list of expand keys. Pass `mutations` to populate mutation `value` fields; omit to receive mutation items containing only `type`. Additional expand keys may be added in future previews.
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/AgentOptimizationCandidateExpand'
+          explode: false
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: Sort order by the candidate `started_at` timestamp.
+          schema:
+            $ref: '#/components/schemas/PageOrder'
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: Candidate-ID cursor identifying the last item from the previous page.
+          schema:
+            type: string
+          explode: false
+        - name: before
+          in: query
+          required: false
+          description: Candidate-ID cursor identifying the first item from the following page.
+          schema:
+            type: string
+          explode: false
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - has_more
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/AgentOptimizationCandidate'
+                    description: The requested list of items.
+                  first_id:
+                    type: string
+                    description: The first ID represented in this list.
+                  last_id:
+                    type: string
+                    description: The last ID represented in this list.
+                  has_more:
+                    type: boolean
+                    description: A value indicating whether there are additional values available not captured in this list.
+                description: The response data for a requested list of items.
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - AgentOptimizationJobs
+  /agent_optimization_jobs/{jobId}/candidates/{candidateId}:
+    get:
+      operationId: AgentOptimizationJobCandidates_getCandidate
+      summary: Get a candidate for an agent optimization job
+      description: Retrieves a single candidate. Mutation values are always included.
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          description: The ID of the parent optimization job.
+          schema:
+            type: string
+        - name: candidateId
+          in: path
+          required: true
+          description: The candidate identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentOptimizationCandidate'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - AgentOptimizationJobs
+  /agent_optimization_jobs/{jobId}/candidates/{candidateId}:promote:
+    post:
+      operationId: AgentOptimizationJobCandidates_promoteCandidate
+      summary: Promote a candidate for an agent optimization job
+      description: Promotes a candidate to the Foundry agent stored in the parent job's target configuration. Promotion is unavailable when the job omitted target_configuration. Prompt-agent promotion creates a new agent version. Hosted-agent promotion currently records promotion metadata without deploying a new hosted-agent version.
+      parameters:
+        - name: jobId
+          in: path
+          required: true
+          description: The ID of the parent optimization job.
+          schema:
+            type: string
+        - name: candidateId
+          in: path
+          required: true
+          description: The candidate identifier.
+          schema:
+            type: string
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentOptimizationCandidate'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - AgentOptimizationJobs
   /agent_optimization_jobs/{jobId}:cancel:
     post:
       operationId: AgentOptimizationJobs_cancel
       summary: Cancel an agent optimization job
-      description: Requests cancellation of a running or queued job and returns an error if the job is already in a terminal state.
+      description: Requests cancellation of a running or queued job. Returns 409 Conflict if the job is already in a terminal state.
       parameters:
-        - name: Foundry-Features
-          in: header
-          required: false
-          description: A feature flag opt-in required when using preview operations or modifying persisted preview resources.
-          schema:
-            type: string
-            enum:
-              - AgentsOptimization=V2Preview
         - name: jobId
           in: path
           required: true
@@ -1375,9 +1515,47 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - AgentOptimizationJobs
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
+  /agent_optimization_jobs:estimate:
+    post:
+      operationId: AgentOptimizationJobs_estimate
+      summary: Estimate an agent optimization job
+      description: Estimates validation-set rows, per-stage model call volumes, and cost bands without submitting the job.
+      parameters:
+        - name: api-version
+          in: query
+          required: true
+          description: The API version to use for this operation.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentOptimizationEstimateResult'
+        4XX:
+          description: Client error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+        5XX:
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiErrorResponse'
+      tags:
+        - AgentOptimizationJobs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentOptimizationEstimateInputs'
+        description: The inputs to estimate against.
   /agents:
     post:
       operationId: Agents_createAgent_Agents_createAgentFromCode
@@ -6046,9 +6224,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - DataGenerationJobs
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     post:
       operationId: DataGenerationJobs_create
       summary: Create a data generation job
@@ -6112,11 +6287,8 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DataGenerationJob'
-        description: The job to create.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
+              $ref: '#/components/schemas/DataGenerationJobInputs'
+        description: The data generation job inputs to create.
   /data_generation_jobs/{jobId}:
     get:
       operationId: DataGenerationJobs_get
@@ -6172,9 +6344,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - DataGenerationJobs
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     delete:
       operationId: DataGenerationJobs_delete
       summary: Delete a data generation job
@@ -6218,9 +6387,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - DataGenerationJobs
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
   /data_generation_jobs/{jobId}:cancel:
     post:
       operationId: DataGenerationJobs_cancel
@@ -6269,9 +6435,6 @@ paths:
                 $ref: '#/components/schemas/ApiErrorResponse'
       tags:
         - DataGenerationJobs
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
   /datasets:
     get:
       operationId: Datasets_listLatest
@@ -42634,9 +42797,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobSource'
       description: Agent source for data generation jobs — references an agent to fetch instructions and metadata from.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     AgentDefinition:
       type: object
       required:
@@ -43597,154 +43757,418 @@ components:
           readOnly: true
         agent_card:
           $ref: '#/components/schemas/AgentCard'
-    AgentOptimizationCandidate:
-      type: object
-      required:
-        - name
-        - avg_score
-        - avg_tokens
-      properties:
-        candidate_id:
-          type: string
-          description: Server-assigned candidate identifier. Use with GET /candidates/{id} sub-endpoints.
-        name:
-          type: string
-          description: Display name of the candidate (e.g., 'baseline', 'instruction-v2').
-        mutations:
-          type: object
-          unevaluatedProperties: {}
-          description: "What was mutated from the baseline (e.g., {system_prompt: 'new prompt'})."
-        avg_score:
-          type: number
-          format: double
-          description: Average composite score across all tasks.
-        avg_tokens:
-          type: number
-          format: double
-          description: Average token usage across all tasks.
-        eval_id:
-          type: string
-          description: Foundry evaluation identifier used to score this candidate.
-        eval_run_id:
-          type: string
-          description: Foundry evaluation run identifier for this candidate's scoring run.
-        promotion:
-          $ref: '#/components/schemas/PromotionInfo'
-          description: Promotion metadata. Null if the candidate has not been promoted.
-      description: Aggregated evaluation result for a single candidate agent configuration across all tasks.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
-    AgentOptimizationDatasetCriterion:
-      type: object
-      required:
-        - name
-        - instruction
-      properties:
-        name:
-          type: string
-          description: Criterion name.
-        instruction:
-          type: string
-          description: Criterion instruction / description.
-      description: 'Evaluation criterion: a name + instruction pair used for per-item scoring.'
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
-    AgentOptimizationDatasetInput:
+    AgentOptimizationAgentCandidateOutput:
       type: object
       required:
         - type
       properties:
         type:
-          $ref: '#/components/schemas/AgentOptimizationDatasetInputType'
-          description: Dataset input type discriminator.
+          type: string
+          enum:
+            - agent_optimization
+        mutations:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentOptimizationMutation'
+          description: Typed configuration mutations applied to the baseline. Omitted for the baseline candidate. LIST without `expand=mutations` returns mutation items with only `type`; expanded LIST and candidate GET populate each mutation's `value`.
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationCandidateOutput'
+      description: Candidate output produced by an agent-optimization job.
+    AgentOptimizationBaselineAgentConfiguration:
+      type: object
+      properties:
+        system_prompt:
+          type: string
+          description: Caller-supplied baseline system prompt. Omitted to resolve the baseline from the target; a prompt agent's stored definition is authoritative.
+        current_model:
+          $ref: '#/components/schemas/AgentOptimizationModelName'
+          description: Current model name. An existing deployment name is also accepted. Omitted to resolve the model from the target.
+        skills:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentOptimizationSkill'
+          description: Skills available for optimization. Omitted when no manual skill surface is supplied.
+        tools:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.ChatCompletionTool'
+          description: Function tools available for optimization. Omitted when no manual tool surface is supplied. The optimizer may change function and argument descriptions while preserving names and parameter JSON Schema.
+      description: Caller-supplied baseline agent values that cannot be resolved from the target agent.
+    AgentOptimizationCandidate:
+      type: object
+      required:
+        - candidate_id
+        - job_id
+        - name
+        - status
+        - started_at
+      properties:
+        candidate_id:
+          type: string
+          description: Server-assigned candidate identifier.
+        job_id:
+          type: string
+          description: Identifier of the parent optimization job.
+        name:
+          type: string
+          description: Display name of the candidate (e.g., 'baseline', 'instruction-v2').
+        status:
+          $ref: '#/components/schemas/AgentOptimizationCandidateStatus'
+          description: The candidate's current lifecycle state.
+        started_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: Timestamp when work on this candidate slot began, represented in Unix time.
+        output:
+          $ref: '#/components/schemas/AgentOptimizationCandidateOutput'
+          description: Typed output generated for this candidate. The output type matches the parent job's optimization type. Omitted until output is available.
+        rationale:
+          type: string
+          description: Human-readable explanation of why the optimizer produced this candidate. Populated on candidate GET when available and omitted from LIST.
+        agent_version:
+          type: string
+          description: Foundry agent version associated with this candidate. Omitted when no temporary or evaluated agent version was created.
+        evaluation:
+          $ref: '#/components/schemas/AgentOptimizationCandidateEvaluation'
+          description: Comparative evaluation summary. Omitted when this candidate was not comparatively evaluated.
+        promotion:
+          $ref: '#/components/schemas/AgentOptimizationCandidatePromotionInfo'
+          description: Promotion metadata. Omitted if this candidate has not been promoted.
+      description: A candidate generated by an optimization job.
+    AgentOptimizationCandidateEvaluation:
+      type: object
+      properties:
+        score:
+          type: number
+          format: double
+          description: Average composite score across evaluated tasks. Omitted until scoring produces an aggregate score.
+        avg_tokens:
+          type: number
+          format: double
+          description: Average total tokens consumed per task. Omitted when token usage was not measured.
+        avg_latency_ms:
+          $ref: '#/components/schemas/FoundryDurationMilliseconds'
+          description: Average end-to-end latency per task, rounded to milliseconds.
+        eval_id:
+          type: string
+          description: Foundry evaluation identifier used to score this candidate. Omitted when unavailable.
+        eval_run_id:
+          type: string
+          description: Foundry evaluation run identifier used to score this candidate. Omitted when unavailable.
+        completed_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: Timestamp when full candidate evaluation completed, represented in Unix time. Omitted when unavailable.
+      description: Comparative evaluation summary for a candidate.
+    AgentOptimizationCandidateExpand:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - mutations
+      description: Vocabulary for the `expand` query parameter on the candidate LIST endpoint. This open union keeps SDKs usable when new expand keys ship server-side. Multiple values are serialized as one comma-separated query parameter.
+    AgentOptimizationCandidateOutput:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/AgentOptimizationConfigurationType'
+          description: Output type matching the parent job's optimization type. Additional types may be added in future API versions.
       discriminator:
         propertyName: type
         mapping:
-          inline: '#/components/schemas/AgentOptimizationInlineDatasetInput'
-          reference: '#/components/schemas/AgentOptimizationReferenceDatasetInput'
-      description: Base discriminated model for dataset input. Either inline items or a registered reference.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
-    AgentOptimizationDatasetInputType:
+          agent_optimization: '#/components/schemas/AgentOptimizationAgentCandidateOutput'
+          prompt_optimization: '#/components/schemas/AgentOptimizationPromptCandidateOutput'
+      description: Base candidate output. Job types define derived output models with their own fields.
+    AgentOptimizationCandidatePromotionInfo:
+      type: object
+      required:
+        - promoted_at
+        - promoted_agent
+      properties:
+        promoted_at:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: Timestamp when promotion occurred, represented in Unix time.
+        promoted_agent:
+          $ref: '#/components/schemas/AgentReference'
+          description: Agent reference associated with the completed promotion.
+      description: Promotion metadata recorded for a candidate.
+    AgentOptimizationCandidateSearchConfiguration:
+      type: object
+      properties:
+        max_candidates:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 200
+          description: Maximum number of non-baseline candidates to fully evaluate. If omitted, the service defaults to 1.
+          default: 1
+      description: Candidate search settings.
+    AgentOptimizationCandidateStatus:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - generating
+            - evaluating
+            - completed
+            - failed
+      description: The candidate's lifecycle state.
+    AgentOptimizationConfiguration:
+      type: object
+      required:
+        - type
+        - evaluation_configuration
+        - candidate_search_configuration
+        - agent_optimization_space
+      properties:
+        type:
+          type: string
+          enum:
+            - agent_optimization
+          description: Optimization type discriminator.
+        goal:
+          $ref: '#/components/schemas/AgentOptimizationGoal'
+          description: Optimization goal. If omitted, the service defaults to improve_quality.
+          default: improve_quality
+        evaluation_configuration:
+          $ref: '#/components/schemas/AgentOptimizationEvaluationConfiguration'
+          description: Quality measurement configuration.
+        candidate_search_configuration:
+          $ref: '#/components/schemas/AgentOptimizationCandidateSearchConfiguration'
+          description: Configuration for candidate search and screening.
+        baseline_agent_configuration:
+          $ref: '#/components/schemas/AgentOptimizationBaselineAgentConfiguration'
+          description: Caller-supplied baseline agent configuration. Omitted when all baseline values can be resolved from the target agent.
+        agent_optimization_space:
+          $ref: '#/components/schemas/AgentOptimizationSpace'
+          description: Agent attributes and alternatives available to the search.
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationConfigurationBase'
+      description: Configuration for optimizing an agent for measured quality.
+    AgentOptimizationConfigurationBase:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/AgentOptimizationConfigurationType'
+          description: Optimization type discriminator.
+      discriminator:
+        propertyName: type
+        mapping:
+          agent_optimization: '#/components/schemas/AgentOptimizationConfiguration'
+          prompt_optimization: '#/components/schemas/PromptOptimizationConfiguration'
+      description: Base model for type-specific optimization configuration.
+    AgentOptimizationConfigurationType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - agent_optimization
+            - prompt_optimization
+      description: Optimization job configuration types.
+    AgentOptimizationCostEstimate:
+      type: object
+      required:
+        - currency
+      properties:
+        currency:
+          type: string
+          description: ISO 4217 currency code for all monetary values in this estimate.
+          default: USD
+        total:
+          $ref: '#/components/schemas/AgentOptimizationEstimateBand'
+          description: Total estimated cost across all priced stages.
+        by_stage:
+          $ref: '#/components/schemas/AgentOptimizationStageEstimate'
+          description: Estimated cost grouped by optimization stage.
+        unpriced_stages:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentOptimizationStage'
+          description: Stages excluded from the total because pricing was unavailable.
+      description: Estimated monetary cost. Present only when at least one contributing model has pricing data.
+    AgentOptimizationDataSourceType:
       anyOf:
         - type: string
         - type: string
           enum:
             - inline
-            - reference
-      description: Discriminator values for the dataset input union.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
-    AgentOptimizationDatasetItem:
+            - dataset_reference
+      description: Source types supported by optimization evaluation sets.
+    AgentOptimizationEstimateBand:
+      type: object
+      required:
+        - low
+        - typical
+        - ceiling
+      properties:
+        low:
+          type: number
+          format: double
+          description: Lower bound.
+        typical:
+          type: number
+          format: double
+          description: Central estimate.
+        ceiling:
+          type: number
+          format: double
+          description: Upper bound.
+      description: A low/typical/ceiling range for an estimated quantity. Expected values may be fractional, including estimated model-call counts.
+    AgentOptimizationEstimateInputs:
+      type: object
+      required:
+        - optimization_model_configuration
+        - optimization_configuration
+      properties:
+        target_configuration:
+          $ref: '#/components/schemas/AgentOptimizationTargetConfiguration'
+          description: Foundry agent whose configuration would be optimized. Omitted when the workflow does not target a registered Foundry agent.
+        optimization_model_configuration:
+          $ref: '#/components/schemas/AgentOptimizationModelConfiguration'
+          description: Model that would generate candidate changes. An existing deployment name is also accepted.
+        optimization_configuration:
+          $ref: '#/components/schemas/AgentOptimizationConfiguration'
+          description: Agent-optimization configuration to estimate.
+      description: Inputs for estimating an agent-optimization job.
+    AgentOptimizationEstimateResult:
       type: object
       properties:
-        query:
-          type: string
-          description: The user query / prompt.
-        ground_truth:
-          type: string
-          description: Expected ground truth answer.
-        desired_num_turns:
+        call_counts:
+          $ref: '#/components/schemas/AgentOptimizationStageEstimate'
+          description: Estimated model-call counts grouped by optimization stage. Typical values are calibrated expectations and may be fractional.
+        cost:
+          $ref: '#/components/schemas/AgentOptimizationCostEstimate'
+          description: Estimated monetary cost. Omitted when no contributing model has pricing data.
+        prices_as_of:
+          $ref: '#/components/schemas/FoundryTimestamp'
+          description: Timestamp of the pricing snapshot used for cost estimation, represented in Unix time. Omitted when no valid pricing snapshot is available.
+      description: Result returned when estimating an agent-optimization job.
+    AgentOptimizationEvaluationConfiguration:
+      type: object
+      required:
+        - training_set
+        - evaluators
+        - evaluation_model
+      properties:
+        training_set:
+          $ref: '#/components/schemas/AgentOptimizationEvaluationSet'
+          description: Evaluation set used to guide the optimization search. Inline data supports up to 2,000 test cases when a separate validation set is supplied; otherwise it is also used for validation and is limited to 500.
+        validation_set:
+          $ref: '#/components/schemas/AgentOptimizationEvaluationSet'
+          description: Held-out evaluation set used for full candidate evaluation, limited to 500 inline test cases. The training set is reused and subject to the same 500-test-case validation limit when omitted.
+        evaluators:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentOptimizationEvaluator'
+          minItems: 1
+          maxItems: 20
+          description: Evaluator references used to score candidate quality.
+        evaluation_model:
+          $ref: '#/components/schemas/EvaluationModelConfiguration'
+          description: Model configuration used by model-based evaluators and conversation simulation.
+        max_concurrent_agent_runs:
           type: integer
           format: int32
           minimum: 1
-          maximum: 20
-          description: Desired number of conversation turns for simulation mode (1-20).
-        criteria:
-          type: array
-          items:
-            $ref: '#/components/schemas/AgentOptimizationDatasetCriterion'
-          description: Per-item evaluation criteria.
-      description: A single item in an inline dataset.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
-    AgentOptimizationEvaluatorRef:
+          maximum: 10
+          description: Maximum number of target-agent runs executed concurrently during each single-turn evaluation. If omitted, the service defaults to 1. Conversation evaluation supports only 1.
+          default: 1
+      description: Reusable quality-measurement configuration.
+    AgentOptimizationEvaluationSet:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/AgentOptimizationEvaluationSetType'
+          description: Logical format of the evaluation set rows.
+      discriminator:
+        propertyName: type
+        mapping:
+          target_completion: '#/components/schemas/AgentOptimizationTargetCompletionEvaluationSet'
+          user_conversation_simulation: '#/components/schemas/AgentOptimizationUserConversationSimulationEvaluationSet'
+      description: Base discriminated model for an optimization evaluation set.
+    AgentOptimizationEvaluationSetType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - target_completion
+            - user_conversation_simulation
+      description: Logical row formats supported by optimization evaluation sets.
+    AgentOptimizationEvaluator:
       type: object
       required:
         - name
       properties:
         name:
           type: string
+          minLength: 1
           description: Evaluator name.
         version:
           type: string
-          description: Evaluator version. If not specified, the latest version is used.
+          minLength: 1
+          description: Evaluator version. Omitted to use the latest version.
+        initialization_parameters:
+          type: object
+          unevaluatedProperties: {}
+          description: Parameters passed to the evaluator at initialization. Omitted when the evaluator requires no initialization parameters.
       description: Reference to a named evaluator, optionally pinned to a version.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
-    AgentOptimizationInlineDatasetInput:
+    AgentOptimizationFoundryAgentTargetConfiguration:
       type: object
       required:
         - type
-        - items
+        - name
       properties:
         type:
           type: string
           enum:
-            - inline
-          description: Dataset input type discriminator.
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/AgentOptimizationDatasetItem'
-          description: Dataset items.
+            - foundry_agent
+          description: Foundry-agent target discriminator.
+        name:
+          type: string
+          minLength: 1
+          maxLength: 256
+          description: Registered Foundry agent name.
+        version:
+          type: string
+          minLength: 1
+          description: Pinned agent version. Omitted to resolve and pin the latest version.
       allOf:
-        - $ref: '#/components/schemas/AgentOptimizationDatasetInput'
-      description: Inline dataset — items supplied directly in the request body.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
+        - $ref: '#/components/schemas/AgentOptimizationTargetConfiguration'
+      description: Identifies the Foundry agent that owns the configuration being optimized.
+    AgentOptimizationGoal:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - improve_quality
+      description: Goal for an agent-optimization job.
+    AgentOptimizationInstructionsMutation:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - instructions
+        value:
+          type: string
+          description: Optimized agent instructions. Omitted on LIST unless `expand=mutations` is specified.
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationMutation'
+      description: Instructions mutation.
     AgentOptimizationJob:
       type: object
       required:
         - id
         - status
+        - optimization_model_configuration
+        - optimization_configuration
+        - run_duration_ms
         - created_at
         - updated_at
       properties:
@@ -43752,9 +44176,6 @@ components:
           type: string
           description: Server-assigned unique identifier.
           readOnly: true
-        inputs:
-          $ref: '#/components/schemas/AgentOptimizationJobInputs'
-          description: Caller-supplied inputs.
         result:
           $ref: '#/components/schemas/AgentOptimizationJobResult'
           description: Result produced on success.
@@ -43767,6 +44188,23 @@ components:
           $ref: '#/components/schemas/OpenAI.Error'
           description: Error details — populated only on failure.
           readOnly: true
+        display_name:
+          type: string
+          maxLength: 256
+          description: Human-readable label. Omitted when no label is needed; it has no uniqueness, routing, or idempotency semantics.
+        target_configuration:
+          $ref: '#/components/schemas/AgentOptimizationTargetConfiguration'
+          description: Foundry agent whose configuration is optimized. Omitted when the workflow does not target a registered Foundry agent.
+        optimization_model_configuration:
+          $ref: '#/components/schemas/AgentOptimizationModelConfiguration'
+          description: Model used to generate candidate changes. An existing deployment name is also accepted.
+        optimization_configuration:
+          $ref: '#/components/schemas/AgentOptimizationConfigurationBase'
+          description: Type-specific optimization configuration.
+        run_duration_ms:
+          $ref: '#/components/schemas/FoundryDurationMilliseconds'
+          description: Duration for which the job has been running, in milliseconds.
+          readOnly: true
         created_at:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The timestamp when the job was created, represented in Unix time.
@@ -43774,185 +44212,471 @@ components:
         updated_at:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The timestamp when the job was last updated, represented in Unix time.
-          readOnly: true
-        progress:
-          $ref: '#/components/schemas/AgentOptimizationJobProgress'
-          description: Progress snapshot. May be present in terminal states reflecting last-known progress.
           readOnly: true
         warnings:
           type: array
           items:
             type: string
-          description: Non-fatal warnings emitted at any point during optimization.
+          description: Non-fatal warnings emitted during optimization. Omitted when no warnings were produced.
           readOnly: true
-      description: Agent optimization job resource — a long-running job that optimizes an agent's configuration (instructions, model, skills, tools) to maximize evaluation scores. On success, the result contains scored candidates.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
-    AgentOptimizationJobInputs:
+      description: Agent optimization job resource — a long-running job that produces candidate changes to a Foundry agent configuration.
+    AgentOptimizationJobLatency:
       type: object
       required:
-        - agent
-        - train_dataset
-        - evaluators
+        - stage
+        - avg_latency_ms
+        - call_count
       properties:
-        agent:
-          $ref: '#/components/schemas/OptimizedAgentIdentifier'
-          description: The agent (and pinned version) being optimized.
-        train_dataset:
-          $ref: '#/components/schemas/AgentOptimizationDatasetInput'
-          description: Training dataset — either inline items or a reference to a registered dataset. Required.
-        validation_dataset:
-          $ref: '#/components/schemas/AgentOptimizationDatasetInput'
-          description: Optional held-out validation dataset for measuring generalization of the final candidate.
-        evaluators:
-          type: array
-          items:
-            $ref: '#/components/schemas/AgentOptimizationEvaluatorRef'
-          description: Job-level evaluators referenced by name and optional version. Required; at least one must be provided.
-        options:
-          $ref: '#/components/schemas/AgentOptimizationOptions'
-          description: Tuning knobs and run-mode.
-      description: Caller-supplied inputs for an optimization job.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
-    AgentOptimizationJobListItem:
-      type: object
-      required:
-        - id
-        - status
-        - created_at
-        - updated_at
-      properties:
-        id:
+        stage:
+          $ref: '#/components/schemas/AgentOptimizationStage'
+          description: Optimization stage measured by this entry.
+        model:
           type: string
-          description: Server-assigned unique identifier.
-          readOnly: true
-        status:
-          $ref: '#/components/schemas/JobStatus'
-          description: Current lifecycle status.
-          readOnly: true
-        error:
-          $ref: '#/components/schemas/OpenAI.Error'
-          description: Error details — populated only on failure.
-          readOnly: true
-        created_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The timestamp when the job was created, represented in Unix time.
-          readOnly: true
-        updated_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: The timestamp when the job was last updated, represented in Unix time.
-          readOnly: true
-        progress:
-          $ref: '#/components/schemas/AgentOptimizationJobProgress'
-          description: Progress snapshot. May be present in terminal states reflecting last-known progress.
-          readOnly: true
-        agent:
-          $ref: '#/components/schemas/OptimizedAgentIdentifier'
-          description: The agent targeted by this optimization job.
-          readOnly: true
-      description: Slim job representation returned by the LIST endpoint.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
-    AgentOptimizationJobProgress:
-      type: object
-      required:
-        - candidates_completed
-        - best_score
-        - elapsed_seconds
-      properties:
-        candidates_completed:
+          description: Model name or deployment name measured by this entry.
+        avg_latency_ms:
+          $ref: '#/components/schemas/FoundryDurationMilliseconds'
+          description: Average per-call latency, rounded to milliseconds.
+        call_count:
           type: integer
-          format: int32
-          description: Number of candidates whose evaluation has completed so far.
-        best_score:
-          type: number
-          format: double
-          description: Best score observed so far across all candidates.
-        elapsed_seconds:
-          type: number
-          format: double
-          description: Wall-clock time elapsed in seconds since the job began executing.
-      description: In-flight progress; only populated while status is queued or in_progress.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
+          format: int64
+          description: Total number of calls contributing to this entry.
+      description: Average latency for one optimization stage and model.
     AgentOptimizationJobResult:
       type: object
+      required:
+        - token_usage
+        - latency_metrics
       properties:
-        baseline:
-          type: string
-          description: Candidate ID of the original (un-optimized) baseline evaluation.
-        best:
-          type: string
-          description: Candidate ID of the highest-scoring candidate found during optimization.
-        candidates:
+        candidate_summary:
+          $ref: '#/components/schemas/AgentOptimizationResultCandidateSummary'
+          description: Summary of candidates produced by the job. Omitted until candidate processing begins.
+        token_usage:
           type: array
           items:
-            $ref: '#/components/schemas/AgentOptimizationCandidate'
-          description: All evaluated candidates including baseline.
-      description: Terminal-state result body. Populated when status is succeeded or failed.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
-    AgentOptimizationOptions:
+            $ref: '#/components/schemas/AgentOptimizationJobTokenUsage'
+          description: Aggregate token usage per stage and model. Always present; empty array when no calls were measured.
+        latency_metrics:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentOptimizationJobLatency'
+          description: Aggregate latency per stage and model. Always present; empty when no server-measured latency is available.
+        termination_reason:
+          $ref: '#/components/schemas/AgentOptimizationTerminationReason'
+          description: Reason the candidate search terminated. Omitted for jobs that do not comparatively evaluate candidates and until the job reaches a terminal state.
+      description: Partial or terminal result produced by an agent optimization job.
+    AgentOptimizationJobTokenUsage:
       type: object
+      required:
+        - stage
       properties:
-        max_candidates:
-          type: integer
-          format: int32
-          minimum: 1
-          description: 'Maximum number of optimization candidates to generate. Must be >= 1. Default: 5.'
-          default: 5
-        optimization_config:
-          type: object
-          unevaluatedProperties: {}
-          description: Per-target-attribute configuration overrides. Contains skills, tools, system_prompt for the agent, plus model space for model optimization.
-        eval_model:
+        stage:
+          $ref: '#/components/schemas/AgentOptimizationStage'
+          description: Optimization stage that generated these calls.
+        model:
           type: string
-          description: Model deployment used for evaluation. Defaults to server config (typically 'gpt-4o').
-        optimization_model:
-          type: string
-          description: Model deployment for optimization reasoning (must be gpt-5 family). Falls back to the default eval model when not set.
-        evaluation_level:
-          $ref: '#/components/schemas/EvaluationLevel'
-          description: Evaluation granularity. Null/omitted means per-item single-turn. Set to 'conversation' for per-conversation multi-turn simulation scoring.
-        max_stalls:
+          description: Model name or deployment name that served the calls.
+        input_tokens:
           type: integer
-          format: int32
-          minimum: 1
-          description: Maximum number of consecutive reflective minibatch rejections before stopping early. A 'stall' occurs when the optimizer proposes a prompt change, evaluates it on a small subset, and the score does not improve — so no full validation-set evaluation is triggered. The counter resets whenever a minibatch passes and its full-validation score beats the current best. Only a sustained plateau of `max_stalls` consecutive minibatch failures triggers the stop. The service defaults to 5 if a value is not specified by the caller. Must be >= 1 when set.
-          default: 5
-      description: Tuning knobs and run-mode for an optimization job.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
-    AgentOptimizationReferenceDatasetInput:
+          format: int64
+          description: Total input tokens. Omitted when unmeasured.
+        output_tokens:
+          type: integer
+          format: int64
+          description: Total output tokens. Omitted when unmeasured.
+        total_tokens:
+          type: integer
+          format: int64
+          description: Sum of input_tokens + output_tokens. Omitted when unmeasured.
+        cached_tokens:
+          type: integer
+          format: int64
+          description: Input tokens served from the model's cache. Included in input_tokens and not additive. If omitted, the service defaults to 0.
+          default: 0
+        reasoning_tokens:
+          type: integer
+          format: int64
+          description: Reasoning tokens counted separately by reasoning models. Included in output_tokens and not additive. If omitted, the service defaults to 0.
+          default: 0
+      description: Aggregated token usage for one optimization stage and model.
+    AgentOptimizationModelConfiguration:
+      type: object
+      required:
+        - model
+      properties:
+        model:
+          $ref: '#/components/schemas/AgentOptimizationModelName'
+          description: Model name or existing deployment name in the Foundry project.
+      description: Identifies a model used by an optimization or evaluation step.
+    AgentOptimizationModelMutation:
       type: object
       required:
         - type
-        - name
       properties:
         type:
           type: string
           enum:
-            - reference
-          description: Dataset input type discriminator.
+            - model
+        value:
+          $ref: '#/components/schemas/AgentOptimizationModelName'
+          description: Selected model name or deployment name. Omitted on LIST unless `expand=mutations` is specified.
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationMutation'
+      description: Model mutation.
+    AgentOptimizationModelName:
+      type: string
+      minLength: 1
+      description: A non-empty Foundry model name or existing deployment name.
+    AgentOptimizationMutation:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/TargetAttribute'
+          description: Attribute changed by this mutation.
+      discriminator:
+        propertyName: type
+        mapping:
+          instructions: '#/components/schemas/AgentOptimizationInstructionsMutation'
+          model: '#/components/schemas/AgentOptimizationModelMutation'
+          skills: '#/components/schemas/AgentOptimizationSkillsMutation'
+          tools: '#/components/schemas/AgentOptimizationToolsMutation'
+      description: Base candidate mutation.
+    AgentOptimizationPromptCandidateOutput:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - prompt_optimization
+        mutations:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentOptimizationMutation'
+          description: Typed configuration mutations applied to the baseline. Omitted for the baseline candidate. LIST without `expand=mutations` returns mutation items with only `type`; expanded LIST and candidate GET populate each mutation's `value`.
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationCandidateOutput'
+      description: Candidate output produced by a prompt-optimization job.
+    AgentOptimizationResultCandidateSummary:
+      type: object
+      required:
+        - completed_candidate_count
+      properties:
+        completed_candidate_count:
+          type: integer
+          format: int32
+          description: Number of completed candidates. Does not include the baseline.
+        baseline_id:
+          type: string
+          description: Candidate ID of the original baseline. Omitted until the baseline candidate is available.
+        best_id:
+          type: string
+          description: Candidate ID of the highest-scoring candidate for evaluated jobs, or the selected transformed output for non-comparative jobs. Omitted until a candidate has been selected.
+        baseline_score:
+          type: number
+          format: double
+          minimum: 0
+          maximum: 1
+          description: Normalized score of the baseline candidate from 0.0 to 1.0 for a comparatively evaluated job. Omitted otherwise and until baseline evaluation completes.
+        best_score:
+          type: number
+          format: double
+          minimum: 0
+          maximum: 1
+          description: Best normalized score observed from 0.0 to 1.0 for a comparatively evaluated job. Omitted otherwise and until a candidate completes evaluation.
+        latest_promoted_candidate:
+          $ref: '#/components/schemas/AgentOptimizationCandidatePromotionInfo'
+          description: Most recently promoted candidate for the job. Omitted if no candidates have been promoted.
+      description: Summary of candidates produced by an agent optimization job.
+    AgentOptimizationSkill:
+      type: object
+      required:
+        - name
+        - description
+      properties:
         name:
           type: string
+          minLength: 1
+          description: Stable skill name.
+        description:
+          type: string
+          minLength: 1
+          description: Short description used for skill discovery and progressive disclosure.
+        body:
+          type: string
+          description: Skill instructions or content that may be optimized. Omitted when the skill has no body.
+      description: A skill in the manually supplied agent optimization surface.
+    AgentOptimizationSkillsMutation:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - skills
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentOptimizationSkill'
+          description: Added or changed skills. Omitted on LIST unless `expand=mutations` is specified.
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationMutation'
+      description: Skill mutations.
+    AgentOptimizationSpace:
+      type: object
+      properties:
+        target_attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/TargetAttribute'
+          minItems: 1
+          description: Agent attributes the optimizer may change. If omitted, the service defaults to instructions.
+          default:
+            - instructions
+        model_search_space:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentOptimizationModelName'
+          minItems: 1
+          description: Alternative model names or existing deployment names available when model is an optimization target.
+      description: The agent attributes and alternative values available to an agent-optimization search.
+    AgentOptimizationStage:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - agent
+            - evaluation
+            - optimization
+      description: Stage of optimization that consumed model resources.
+    AgentOptimizationStageEstimate:
+      type: object
+      properties:
+        agent:
+          $ref: '#/components/schemas/AgentOptimizationEstimateBand'
+          description: Estimated values for calls made by the agent being optimized.
+        evaluation:
+          $ref: '#/components/schemas/AgentOptimizationEstimateBand'
+          description: Estimated values for calls that evaluate candidate quality.
+        optimization:
+          $ref: '#/components/schemas/AgentOptimizationEstimateBand'
+          description: Estimated values for calls that generate candidate changes.
+      description: Estimated values grouped by optimization stage.
+    AgentOptimizationTargetCompletionDataSource:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/AgentOptimizationDataSourceType'
+          description: Target-completion source type. Additional types may be added in future API versions.
+      discriminator:
+        propertyName: type
+        mapping:
+          inline: '#/components/schemas/AgentOptimizationTargetCompletionInlineDataSource'
+          dataset_reference: '#/components/schemas/AgentOptimizationTargetCompletionDatasetReferenceDataSource'
+      description: Base source for a target-completion optimization evaluation set.
+    AgentOptimizationTargetCompletionDatasetReferenceDataSource:
+      type: object
+      required:
+        - type
+        - name
+        - version
+      properties:
+        type:
+          type: string
+          enum:
+            - dataset_reference
+          description: Registered dataset source discriminator.
+        name:
+          type: string
+          minLength: 1
           description: Registered dataset name.
         version:
           type: string
-          description: Dataset version. If not specified, the latest version is used.
+          minLength: 1
+          description: Registered dataset version.
       allOf:
-        - $ref: '#/components/schemas/AgentOptimizationDatasetInput'
-      description: Reference to a registered Foundry dataset.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
+        - $ref: '#/components/schemas/AgentOptimizationTargetCompletionDataSource'
+      description: References an explicitly versioned registered Foundry dataset for target-completion evaluation.
+    AgentOptimizationTargetCompletionEvaluationSet:
+      type: object
+      required:
+        - type
+        - source
+      properties:
+        type:
+          type: string
+          enum:
+            - target_completion
+          description: Target-completion set discriminator.
+        source:
+          $ref: '#/components/schemas/AgentOptimizationTargetCompletionDataSource'
+          description: Inline test cases or an explicitly versioned registered Foundry dataset.
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationEvaluationSet'
+      description: Evaluation set containing independent single-turn inputs.
+    AgentOptimizationTargetCompletionInlineDataSource:
+      type: object
+      required:
+        - type
+        - test_cases
+      properties:
+        type:
+          type: string
+          enum:
+            - inline
+          description: Inline source discriminator.
+        test_cases:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentOptimizationTargetCompletionTestCase'
+          minItems: 1
+          maxItems: 2000
+          description: Target-completion test cases.
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationTargetCompletionDataSource'
+      description: Supplies single-turn rows directly in the optimization request.
+    AgentOptimizationTargetCompletionTestCase:
+      type: object
+      required:
+        - query
+      properties:
+        query:
+          type: string
+          minLength: 1
+          description: The user query / prompt.
+        ground_truth:
+          type: string
+          description: Expected ground truth answer. Omitted when no ground truth is supplied.
+      description: A single item in an inline evaluation set.
+    AgentOptimizationTargetConfiguration:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/AgentOptimizationTargetConfigurationType'
+          description: Target configuration type. Additional types may be added in future API versions.
+      discriminator:
+        propertyName: type
+        mapping:
+          foundry_agent: '#/components/schemas/AgentOptimizationFoundryAgentTargetConfiguration'
+      description: Base target configuration for an optimization job.
+    AgentOptimizationTargetConfigurationType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - foundry_agent
+      description: Target configuration types supported by optimization jobs.
+    AgentOptimizationTerminationReason:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - completed
+            - budget_exhausted
+            - candidate_screening_stalled
+      description: Reason the optimization process ended. Early termination reasons still indicate a successful job; completed candidates remain available.
+    AgentOptimizationToolsMutation:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - tools
+        value:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.ChatCompletionTool'
+          description: Added or changed function tools. Omitted on LIST unless `expand=mutations` is specified.
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationMutation'
+      description: Tool mutations.
+    AgentOptimizationUserConversationSimulationDataSource:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          $ref: '#/components/schemas/AgentOptimizationDataSourceType'
+          description: User-conversation-simulation source type. Additional types may be added in future API versions.
+      discriminator:
+        propertyName: type
+        mapping:
+          inline: '#/components/schemas/AgentOptimizationUserConversationSimulationInlineDataSource'
+          dataset_reference: '#/components/schemas/AgentOptimizationUserConversationSimulationDatasetReferenceDataSource'
+      description: Base source for a user-conversation-simulation optimization evaluation set.
+    AgentOptimizationUserConversationSimulationDatasetReferenceDataSource:
+      type: object
+      required:
+        - type
+        - name
+        - version
+      properties:
+        type:
+          type: string
+          enum:
+            - dataset_reference
+          description: Registered dataset source discriminator.
+        name:
+          type: string
+          minLength: 1
+          description: Registered dataset name.
+        version:
+          type: string
+          minLength: 1
+          description: Registered dataset version.
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationUserConversationSimulationDataSource'
+      description: References an explicitly versioned registered Foundry dataset for user-conversation-simulation evaluation.
+    AgentOptimizationUserConversationSimulationEvaluationSet:
+      type: object
+      required:
+        - type
+        - source
+      properties:
+        type:
+          type: string
+          enum:
+            - user_conversation_simulation
+          description: User-conversation-simulation set discriminator.
+        source:
+          $ref: '#/components/schemas/AgentOptimizationUserConversationSimulationDataSource'
+          description: Inline test cases or an explicitly versioned registered Foundry dataset.
+        default_simulation_configuration:
+          $ref: '#/components/schemas/UserConversationSimulationConfiguration'
+          description: Defaults applied to every scenario. A test case's simulation_configuration overrides corresponding properties.
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationEvaluationSet'
+      description: Evaluation set containing scenarios for simulated conversations.
+    AgentOptimizationUserConversationSimulationInlineDataSource:
+      type: object
+      required:
+        - type
+        - test_cases
+      properties:
+        type:
+          type: string
+          enum:
+            - inline
+          description: Inline source discriminator.
+        test_cases:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserConversationSimulationTestCase'
+          minItems: 1
+          maxItems: 2000
+          description: Conversation test scenarios.
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationUserConversationSimulationDataSource'
+      description: Supplies Evals user-conversation simulation test cases directly in the optimization request.
     AgentReference:
       type: object
       required:
@@ -45504,9 +46228,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: A browser automation tool call.
-      x-ms-foundry-meta:
-        required_previews:
-          - preview_tool
     BrowserAutomationToolCallOutput:
       type: object
       required:
@@ -45530,9 +46251,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
       description: The output of a browser automation tool call.
-      x-ms-foundry-meta:
-        required_previews:
-          - preview_tool
     BrowserAutomationToolConnectionParameters:
       type: object
       required:
@@ -46557,15 +47275,16 @@ components:
       required:
         - id
         - status
+        - name
+        - sources
+        - generation_configuration
+        - scenario
         - created_at
       properties:
         id:
           type: string
           description: Server-assigned unique identifier.
           readOnly: true
-        inputs:
-          $ref: '#/components/schemas/DataGenerationJobInputs'
-          description: Caller-supplied inputs.
         result:
           $ref: '#/components/schemas/DataGenerationJobResult'
           description: Result produced on success.
@@ -46578,6 +47297,20 @@ components:
           $ref: '#/components/schemas/OpenAI.Error'
           description: Error details — populated only on failure.
           readOnly: true
+        name:
+          type: string
+          description: The display name of the data generation job.
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataGenerationJobSource'
+          description: The sources used for the data generation job.
+        generation_configuration:
+          $ref: '#/components/schemas/DataGenerationJobOptions'
+          description: The generation configuration for the data generation job.
+        scenario:
+          $ref: '#/components/schemas/DataGenerationJobScenario'
+          description: The scenario of the data generation job. Either for fine-tuning or evaluation.
         created_at:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).
@@ -46586,16 +47319,19 @@ components:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The timestamp when the job was finished, represented in Unix time (seconds since January 1, 1970).
           readOnly: true
+      discriminator:
+        propertyName: scenario
+        mapping:
+          evaluation: '#/components/schemas/EvaluationDataGenerationJob'
+          supervised_finetuning: '#/components/schemas/SupervisedFineTuningDataGenerationJob'
+          reinforcement_finetuning: '#/components/schemas/ReinforcementFineTuningDataGenerationJob'
       description: Data Generation Job resource.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     DataGenerationJobInputs:
       type: object
       required:
         - name
         - sources
-        - options
+        - generation_configuration
         - scenario
       properties:
         name:
@@ -46606,19 +47342,19 @@ components:
           items:
             $ref: '#/components/schemas/DataGenerationJobSource'
           description: The sources used for the data generation job.
-        options:
+        generation_configuration:
           $ref: '#/components/schemas/DataGenerationJobOptions'
-          description: The options for the data generation job.
+          description: The generation configuration for the data generation job.
         scenario:
           $ref: '#/components/schemas/DataGenerationJobScenario'
           description: The scenario of the data generation job. Either for fine-tuning or evaluation.
-        output_options:
-          $ref: '#/components/schemas/DataGenerationJobOutputOptions'
-          description: Optional caller-supplied metadata for the job's output. See individual fields for whether they apply to file outputs (fine-tuning scenarios), dataset outputs (evaluation scenario), or both.
+      discriminator:
+        propertyName: scenario
+        mapping:
+          evaluation: '#/components/schemas/EvaluationDataGenerationJobInputs'
+          supervised_finetuning: '#/components/schemas/SupervisedFineTuningDataGenerationJobInputs'
+          reinforcement_finetuning: '#/components/schemas/ReinforcementFineTuningDataGenerationJobInputs'
       description: Caller-supplied inputs for a data generation job.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     DataGenerationJobOptions:
       type: object
       required:
@@ -46644,9 +47380,6 @@ components:
           simulation_seed: '#/components/schemas/SimulationSeedDataGenerationJobOptions'
           tool_use: '#/components/schemas/ToolUseFineTuningDataGenerationJobOptions'
       description: Options for managing data generation jobs.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     DataGenerationJobOutput:
       type: object
       required:
@@ -46661,30 +47394,6 @@ components:
           file: '#/components/schemas/FileDataGenerationJobOutput'
           dataset: '#/components/schemas/DatasetDataGenerationJobOutput'
       description: Output information for a data generation job.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
-    DataGenerationJobOutputOptions:
-      type: object
-      properties:
-        name:
-          type: string
-          description: Name to assign to the output. Used as the filename for Azure OpenAI file outputs (fine-tuning scenarios) and as the dataset name for dataset outputs (evaluation scenario).
-        description:
-          type: string
-          description: Description to assign to the output. Applies only to dataset outputs (evaluation scenario); ignored for Azure OpenAI file outputs.
-        tags:
-          type: object
-          unevaluatedProperties:
-            type: string
-          description: Tags to assign to the output. Applies only to dataset outputs (evaluation scenario); ignored for Azure OpenAI file outputs.
-        write_mode:
-          $ref: '#/components/schemas/DataGenerationJobOutputWriteMode'
-          description: Controls how dataset outputs are written. If omitted, defaults to `overwrite` and creates the next dataset version using only newly generated rows.
-      description: Output options for data generation job.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     DataGenerationJobOutputType:
       anyOf:
         - type: string
@@ -46693,9 +47402,6 @@ components:
             - file
             - dataset
       description: The supported output file types for a data generation job.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     DataGenerationJobOutputWriteMode:
       anyOf:
         - type: string
@@ -46704,9 +47410,6 @@ components:
             - overwrite
             - merge
       description: The supported write modes for data generation job outputs.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     DataGenerationJobResult:
       type: object
       required:
@@ -46725,9 +47428,6 @@ components:
           $ref: '#/components/schemas/DataGenerationTokenUsage'
           description: The token usage information for the data generation job.
       description: Result produced by a successful data generation job.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     DataGenerationJobScenario:
       anyOf:
         - type: string
@@ -46737,9 +47437,6 @@ components:
             - reinforcement_finetuning
             - evaluation
       description: The supported scenarios for a data generation job.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     DataGenerationJobSource:
       type: object
       required:
@@ -46759,9 +47456,6 @@ components:
           traces: '#/components/schemas/TracesDataGenerationJobSource'
           file: '#/components/schemas/FileDataGenerationJobSource'
       description: The base source model for data generation jobs.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     DataGenerationJobSourceType:
       anyOf:
         - type: string
@@ -46772,9 +47466,6 @@ components:
             - traces
             - file
       description: The supported source types for data generation jobs.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     DataGenerationJobType:
       anyOf:
         - type: string
@@ -46785,9 +47476,6 @@ components:
             - tool_use
             - simulation_seed
       description: The supported data generation job types.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     DataGenerationModelOptions:
       type: object
       required:
@@ -46797,9 +47485,6 @@ components:
           type: string
           description: Base model name used to generate data.
       description: LLM model options for data generation jobs.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     DataGenerationTokenUsage:
       type: object
       required:
@@ -46823,9 +47508,6 @@ components:
           description: Total number of tokens used.
           readOnly: true
       description: Token usage information for a data generation job.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     DataSourceConfig:
       type: object
       required:
@@ -46879,9 +47561,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobOutput'
       description: Dataset output for a data generation job.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     DatasetEvaluatorGenerationJobSource:
       type: object
       required:
@@ -48183,6 +48862,57 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - Insights=V1Preview
+    EvaluationDataGenerationJob:
+      type: object
+      required:
+        - scenario
+      properties:
+        scenario:
+          type: string
+          enum:
+            - evaluation
+          description: The scenario of the data generation job, which is Evaluation for this model.
+        output_configuration:
+          $ref: '#/components/schemas/EvaluationDataGenerationJobOutputTarget'
+          description: Optional dataset output configuration for the generated evaluation data.
+      allOf:
+        - $ref: '#/components/schemas/DataGenerationJob'
+      description: Evaluation data generation job resource.
+    EvaluationDataGenerationJobInputs:
+      type: object
+      required:
+        - scenario
+      properties:
+        scenario:
+          type: string
+          enum:
+            - evaluation
+          description: The scenario of the data generation job, which is Evaluation for this model.
+        output_configuration:
+          $ref: '#/components/schemas/EvaluationDataGenerationJobOutputTarget'
+          description: Optional dataset output configuration for the generated evaluation data.
+      allOf:
+        - $ref: '#/components/schemas/DataGenerationJobInputs'
+      description: Caller-supplied inputs for an evaluation data generation job.
+    EvaluationDataGenerationJobOutputTarget:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Dataset name to assign to the output.
+        description:
+          type: string
+          description: Description to assign to the output dataset.
+        tags:
+          type: object
+          unevaluatedProperties:
+            type: string
+          description: Tags to assign to the output dataset.
+        write_mode:
+          $ref: '#/components/schemas/DataGenerationJobOutputWriteMode'
+          description: Controls how dataset outputs are written. If omitted, defaults to `overwrite` and creates the next dataset version using only newly generated rows.
+          default: overwrite
+      description: Dataset output target for an evaluation data generation job.
     EvaluationDataset:
       type: object
       required:
@@ -49152,7 +49882,7 @@ components:
           readOnly: true
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobOutput'
-      description: Azure OpenAI file output for a data generation job.
+      description: Azure OpenAI file output for a data generation job. This is a preview feature.
       x-ms-foundry-meta:
         conditional_previews:
           - DataGenerationJobs=V1Preview
@@ -49173,9 +49903,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobSource'
       description: File source for data generation jobs — Azure OpenAI file input.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     FileDatasetVersion:
       type: object
       required:
@@ -79878,21 +80605,26 @@ components:
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: An OpenAPI tool stored in a toolbox.
-    OptimizedAgentIdentifier:
+    OptimizationContext:
       type: object
       required:
-        - agent_name
+        - type
       properties:
-        agent_name:
-          type: string
-          description: Registered Foundry agent name (required).
-        agent_version:
-          type: string
-          description: Pinned agent version. Defaults to latest if omitted.
-      description: Identifies the registered Foundry agent to optimize (request-only). Skills, tools, and system_prompt are specified in options.optimization_config.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
+        type:
+          $ref: '#/components/schemas/OptimizationContextType'
+          description: Optimization context type discriminator.
+      discriminator:
+        propertyName: type
+        mapping:
+          steering_prompt: '#/components/schemas/SteeringPromptOptimizationContext'
+      description: Base model for typed optimization context.
+    OptimizationContextType:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - steering_prompt
+      description: Type of context supplied to an optimization workflow.
     OtlpTelemetryEndpoint:
       type: object
       required:
@@ -80188,26 +80920,6 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - MemoryStores=V1Preview
-    PromotionInfo:
-      type: object
-      required:
-        - promoted_at
-        - agent_name
-        - agent_version
-      properties:
-        promoted_at:
-          $ref: '#/components/schemas/FoundryTimestamp'
-          description: Timestamp when promotion occurred, represented in Unix time.
-        agent_name:
-          type: string
-          description: Name of the Foundry agent this candidate was promoted to.
-        agent_version:
-          type: string
-          description: Version of the Foundry agent this candidate was promoted to.
-      description: Promotion metadata recorded when a candidate is deployed to a Foundry agent.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - AgentsOptimization=V2Preview
     PromptAgentDefinition:
       type: object
       required:
@@ -80336,9 +81048,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobSource'
       description: Prompt source for data generation jobs — inline text provided by the user.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     PromptEvaluatorGenerationJobSource:
       type: object
       required:
@@ -80359,6 +81068,25 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorGenerationJobSource'
       description: Prompt source for evaluator generation jobs — inline text provided by the user.
+    PromptOptimizationConfiguration:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          enum:
+            - prompt_optimization
+          description: Optimization type discriminator.
+        context:
+          type: array
+          items:
+            $ref: '#/components/schemas/OptimizationContext'
+          minItems: 1
+          description: Context used to steer prompt optimization. Omitted when no context is supplied.
+      allOf:
+        - $ref: '#/components/schemas/AgentOptimizationConfigurationBase'
+      description: Configuration for a one-shot prompt transformation without comparative evaluation.
     ProtocolConfiguration:
       type: object
       properties:
@@ -80725,6 +81453,63 @@ components:
       allOf:
         - $ref: '#/components/schemas/ItemGenerationParams'
       description: Represents the parameters for red team taxonomy item generation.
+    ReinforcementFineTuningDataGenerationJob:
+      type: object
+      required:
+        - scenario
+      properties:
+        scenario:
+          type: string
+          enum:
+            - reinforcement_finetuning
+          description: The scenario of the data generation job, which is Reinforcement Fine-tuning for this model.
+        output_configuration:
+          $ref: '#/components/schemas/ReinforcementFineTuningDataGenerationJobOutputTarget'
+          description: Optional file output configuration for the generated reinforcement fine-tuning data.
+      allOf:
+        - $ref: '#/components/schemas/DataGenerationJob'
+      description: Reinforcement fine-tuning data generation job resource. This is a preview feature.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
+    ReinforcementFineTuningDataGenerationJobInputs:
+      type: object
+      required:
+        - scenario
+      properties:
+        scenario:
+          type: string
+          enum:
+            - reinforcement_finetuning
+          description: The scenario of the data generation job, which is Reinforcement Fine-tuning for this model.
+        output_configuration:
+          $ref: '#/components/schemas/ReinforcementFineTuningDataGenerationJobOutputTarget'
+          description: Optional file output configuration for the generated reinforcement fine-tuning data.
+      allOf:
+        - $ref: '#/components/schemas/DataGenerationJobInputs'
+      description: Caller-supplied inputs for a reinforcement fine-tuning data generation job. This is a preview feature.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
+    ReinforcementFineTuningDataGenerationJobOutputTarget:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Filename to assign to the generated fine-tuning file.
+        write_mode:
+          $ref: '#/components/schemas/DataGenerationJobOutputWriteMode'
+          description: Controls how file outputs are written. If omitted, defaults to `overwrite` and writes only the newly generated fine-tuning file content.
+          default: overwrite
+        merge_file_id:
+          type: string
+          description: File ID to merge into when `write_mode` is `merge`.
+      description: File output target for a reinforcement fine-tuning data generation job. This is a preview feature.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     ReminderPreviewToolboxTool:
       type: object
       required:
@@ -82675,9 +83460,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobOptions'
       description: The options for a data generation job with SimpleQnA type.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     SimpleQnAFineTuningQuestionType:
       anyOf:
         - type: string
@@ -82685,7 +83467,7 @@ components:
           enum:
             - short_answer
             - long_answer
-      description: The supported question types for SimpleQnA data generation jobs used for fine-tuning scenarios.
+      description: The supported question types for SimpleQnA data generation jobs used for fine-tuning scenarios. This is a preview feature.
       x-ms-foundry-meta:
         conditional_previews:
           - DataGenerationJobs=V1Preview
@@ -82702,9 +83484,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobOptions'
       description: The options for a task generation data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     SipTelephonyTransferDestination:
       type: object
       required:
@@ -82872,6 +83651,24 @@ components:
           type: string
           description: Sku tier
       description: Sku information
+    SteeringPromptOptimizationContext:
+      type: object
+      required:
+        - type
+        - prompt
+      properties:
+        type:
+          type: string
+          enum:
+            - steering_prompt
+          description: Optimization context type discriminator.
+        prompt:
+          type: string
+          minLength: 1
+          description: Developer guidance describing the desired changes.
+      allOf:
+        - $ref: '#/components/schemas/OptimizationContext'
+      description: Natural-language guidance for the desired optimization.
     StructuredInputDefinition:
       type: object
       properties:
@@ -82927,6 +83724,63 @@ components:
           description: The structured output captured during the response.
       allOf:
         - $ref: '#/components/schemas/OpenAI.OutputItem'
+    SupervisedFineTuningDataGenerationJob:
+      type: object
+      required:
+        - scenario
+      properties:
+        scenario:
+          type: string
+          enum:
+            - supervised_finetuning
+          description: The scenario of the data generation job, which is Supervised Fine-tuning for this model.
+        output_configuration:
+          $ref: '#/components/schemas/SupervisedFineTuningDataGenerationJobOutputTarget'
+          description: Optional file output configuration for the generated supervised fine-tuning data.
+      allOf:
+        - $ref: '#/components/schemas/DataGenerationJob'
+      description: Supervised fine-tuning data generation job resource. This is a preview feature.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
+    SupervisedFineTuningDataGenerationJobInputs:
+      type: object
+      required:
+        - scenario
+      properties:
+        scenario:
+          type: string
+          enum:
+            - supervised_finetuning
+          description: The scenario of the data generation job, which is Supervised Fine-tuning for this model.
+        output_configuration:
+          $ref: '#/components/schemas/SupervisedFineTuningDataGenerationJobOutputTarget'
+          description: Optional file output configuration for the generated supervised fine-tuning data.
+      allOf:
+        - $ref: '#/components/schemas/DataGenerationJobInputs'
+      description: Caller-supplied inputs for a supervised fine-tuning data generation job. This is a preview feature.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
+    SupervisedFineTuningDataGenerationJobOutputTarget:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Filename to assign to the generated fine-tuning file.
+        write_mode:
+          $ref: '#/components/schemas/DataGenerationJobOutputWriteMode'
+          description: Controls how file outputs are written. If omitted, defaults to `overwrite` and writes only the newly generated fine-tuning file content.
+          default: overwrite
+        merge_file_id:
+          type: string
+          description: File ID to merge into when `write_mode` is `merge`.
+      description: File output target for a supervised fine-tuning data generation job. This is a preview feature.
+      x-ms-foundry-meta:
+        conditional_previews:
+          - DataGenerationJobs=V1Preview
     SyntheticDataGenerationConfiguration:
       type: object
       required:
@@ -83043,6 +83897,16 @@ components:
         `target`: the model in `model_configuration` plays the simulated user and drives the conversation
         according to `default_simulation_configuration` until it reaches the desired length or maximum turn
         limit. The evaluation's testing criteria are then applied to the generated conversations.
+    TargetAttribute:
+      anyOf:
+        - type: string
+        - type: string
+          enum:
+            - instructions
+            - model
+            - skills
+            - tools
+      description: Agent attribute that can be optimized.
     TargetCompletionEvalRunDataSource:
       type: object
       required:
@@ -84421,7 +85285,7 @@ components:
           description: Maximum number of samples to generate, up to service-defined limits.
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobOptions'
-      description: The options for a data generation job with ToolUse type. Used only for fine-tuning scenarios.
+      description: The options for a data generation job with ToolUse type. This is a preview feature used only for fine-tuning scenarios.
       x-ms-foundry-meta:
         conditional_previews:
           - DataGenerationJobs=V1Preview
@@ -84789,9 +85653,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobOptions'
       description: The options for a data generation job with Traces type.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     TracesDataGenerationJobSource:
       type: object
       required:
@@ -84829,9 +85690,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobSource'
       description: Traces source for data generation jobs — conversation traces from Application Insights.
-      x-ms-foundry-meta:
-        conditional_previews:
-          - DataGenerationJobs=V1Preview
     TracesEvalRunDataSource:
       type: object
       required:

@@ -116,7 +116,6 @@ union FoundryFeaturesOptInKeys {
   skills_v1_preview: "Skills=V1Preview",
   data_generation_jobs_v1_preview: "DataGenerationJobs=V1Preview",
   models_v1_preview: "Models=V1Preview",
-  agents_optimization_v2_preview: "AgentsOptimization=V2Preview",
   model_router_controls_v1_preview: "ModelRouterControls=V1Preview",
   finetuning_sessions_v1_preview: "FineTuningSessions=V1Preview",
 }

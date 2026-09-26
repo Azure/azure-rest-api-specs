@@ -80,7 +80,7 @@ API review:
 Do not treat SDK-language approval labels, package-name approvals, namespace
 approvals, or an arbitrary label containing the word `Approved` as API-review
 approval. The canonical breaking-change and versioning label definitions live
-in [`.github/shared/src/breaking-change.js`](../shared/src/breaking-change.js).
+in [`.github/shared/src/breaking-change.ts`](../shared/src/breaking-change.ts).
 
 **Review preamble disclosure.** In the review-body preamble, immediately after
 the sentence that identifies the reviewed commit, include exactly one of:

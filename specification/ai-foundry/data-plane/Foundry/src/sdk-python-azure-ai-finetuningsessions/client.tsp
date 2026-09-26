@@ -114,10 +114,6 @@ namespace Azure.AI.FineTuning.Sessions;
   "Opts in to the V1 preview of model operations."
 );
 @@doc(
-  Azure.AI.Projects.FoundryFeaturesOptInKeys.agents_optimization_v2_preview,
-  "Opts in to the V2 preview of agent optimization."
-);
-@@doc(
   Azure.AI.Projects.FoundryFeaturesOptInKeys.model_router_controls_v1_preview,
   "Opts in to the V1 preview of model-router configuration controls."
 );
