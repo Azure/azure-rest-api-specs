@@ -1,10 +1,12 @@
 ﻿import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Microsoft.Common;
@@ -80,6 +82,14 @@ model RoleAssignmentProperties {
    * Id of the delegated managed identity resource
    */
   delegatedManagedIdentityResourceId?: string;
+
+  /**
+   * The expiration time of the role assignment as an ISO 8601 date-time string. This is set by the service (only for role assignments created via the elevateAccess call) and cannot be set through create requests. When the role assignment has no expiration time, this property is omitted from the response.
+   */
+  @added(Versions.v2026_07_01_preview)
+  @visibility(Lifecycle.Read)
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  expirationTime?: utcDateTime;
 }
 
 /**
