@@ -39,3 +39,26 @@ These settings apply only when `--tag=package-2025-04-01` is specified on the co
 input-file:
   - stable/2025-04-01/main.json
 ```
+
+### Tag: package-2026-05-01-preview
+
+These settings apply only when `--tag=package-2026-05-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-05-01-preview'
+input-file:
+  - preview/2026-05-01-preview/main.json
+suppressions:
+  - code: XMSSecretInResponse
+    reason: skipToken is a pagination cursor token, not a secret credential.
+    from: main.json
+    where: $.definitions.BillingAccountItemDetailsReportQueryFilter.properties.skipToken
+  - code: XMSSecretInResponse
+    reason: skipToken is a pagination cursor token, not a secret credential.
+    from: main.json
+    where: $.definitions.CarbonEmissionDataListResult.properties.skipToken
+  - code: XMSSecretInResponse
+    reason: skipToken is a pagination cursor token, not a secret credential.
+    from: main.json
+    where: $.definitions.ItemDetailsQueryFilter.properties.skipToken
+```
+
