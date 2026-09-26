@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "name": "myrepo",
+    "digest": "sha256:abc123def456",
+    "api-version": "2021-07-01",
+    "url": "acrapi.azurecr.io"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "schemaVersion": 2,
+        "mediaType": "application/vnd.oci.image.index.v1+json",
+        "manifests": [
+          {
+            "mediaType": "application/vnd.oci.image.manifest.v1+json",
+            "digest": "sha256:147d4993c49244b8b2eaf8969e6c70c1c31a3f728318d9d2cd61971f5604a17b",
+            "size": 1234,
+            "artifactType": "application/vnd.azure.artifact.streaming.v1",
+            "annotations": {
+              "streaming.format": "overlaybd",
+              "streaming.platform.arch": "amd64",
+              "streaming.platform.os": "linux",
+              "streaming.version": "v1"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ContainerRegistryBlob_GetReferrers",
+  "title": "Get referrers"
+}
