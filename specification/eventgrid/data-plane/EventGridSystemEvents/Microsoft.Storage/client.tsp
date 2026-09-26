@@ -127,7 +127,23 @@ using Azure.ClientGenerator.Core;
   Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedEventData,
   Access.public
 );
+@@usage(
+  Microsoft.EventGrid.SystemEvents.StorageOperationFailedForReplicationEventData,
+  Usage.output | Usage.json
+);
+@@access(
+  Microsoft.EventGrid.SystemEvents.StorageOperationFailedForReplicationEventData,
+  Access.public
+);
 //Enums
+@@usage(
+  Microsoft.EventGrid.SystemEvents.StorageOperationFailedForReplicationReason,
+  Usage.output | Usage.json
+);
+@@access(
+  Microsoft.EventGrid.SystemEvents.StorageOperationFailedForReplicationReason,
+  Access.public
+);
 @@usage(
   Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedStatus,
   Usage.output | Usage.json
@@ -184,6 +200,10 @@ using Azure.ClientGenerator.Core;
 );
 @@useSystemTextJsonConverter(
   Microsoft.EventGrid.SystemEvents.StorageLifecyclePolicyCompletedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.StorageOperationFailedForReplicationEventData,
   "csharp"
 );
 @@useSystemTextJsonConverter(
