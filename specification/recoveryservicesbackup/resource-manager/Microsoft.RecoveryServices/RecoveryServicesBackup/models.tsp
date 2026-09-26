@@ -821,6 +821,7 @@ union PolicyType {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 union VMWorkloadPolicyType {
   string,
 
@@ -935,6 +936,7 @@ union ProtectedItemState {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 union ProtectionLevel {
   string,
 
@@ -954,6 +956,7 @@ union ProtectionLevel {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 union InstanceProtectionReadiness {
   string,
 
@@ -1102,6 +1105,7 @@ union RestorePointQueryType {
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
   @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_08_31_preview)
   Snapshot: "Snapshot",
 
   /** Full, differential, and snapshot restore point types */
@@ -1111,6 +1115,7 @@ union RestorePointQueryType {
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
   @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_08_31_preview)
   FullDifferentialAndSnapshot: "FullDifferentialAndSnapshot",
 }
 
@@ -1402,6 +1407,7 @@ union ContainerType {
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
   @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_08_31_preview)
   HanaScaleoutContainer: "HanaScaleoutContainer",
 }
 
@@ -3374,6 +3380,7 @@ model UnlockDeleteResponse {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 model UpdateRecoveryPointRequest {
   /**
    * Resource properties.
@@ -3390,6 +3397,7 @@ model UpdateRecoveryPointRequest {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 model PatchRecoveryPointInput {
   /**
    * Properties of Recovery Point
@@ -3406,6 +3414,7 @@ model PatchRecoveryPointInput {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 model PatchRecoveryPointPropertiesInput {
   /**
    * Expiry time of Recovery Point in UTC.
@@ -3778,6 +3787,7 @@ model AzureVmWorkloadProtectionPolicy extends ProtectionPolicy {
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
   @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_08_31_preview)
   vmWorkloadPolicyType?: VMWorkloadPolicyType;
 
   /**
@@ -4827,6 +4837,7 @@ model AzureVmWorkloadSQLDatabaseProtectedItem extends ProtectedItem {
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
   @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_08_31_preview)
   parentProtectedItem?: string;
 
   /**
@@ -4838,6 +4849,7 @@ model AzureVmWorkloadSQLDatabaseProtectedItem extends ProtectedItem {
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
   @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_08_31_preview)
   protectionLevel?: ProtectionLevel;
 }
 
@@ -4851,6 +4863,7 @@ model AzureVmWorkloadSQLDatabaseProtectedItem extends ProtectedItem {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 model AzureVmWorkloadSQLInstanceProtectedItem extends ProtectedItem {
   /**
    * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
@@ -5379,6 +5392,7 @@ model AzureWorkloadSQLRecoveryPointExtendedInfo {
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
   @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_08_31_preview)
   @identifiers(#[])
   includedDatabases?: DatabaseInRP[];
 }
@@ -5552,6 +5566,7 @@ model BmsrpQueryObject {
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
   @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_08_31_preview)
   baseSnapshotRPId?: string;
 
   /**
@@ -5564,6 +5579,7 @@ model BmsrpQueryObject {
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
   @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_08_31_preview)
   baseRPDatasourceId?: string;
 
   /**
@@ -5576,6 +5592,7 @@ model BmsrpQueryObject {
   @removed(Versions.v2026_05_01)
   @added(Versions.v2026_05_31_preview)
   @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_08_31_preview)
   getLatestRPOnly?: boolean;
 }
 
@@ -6001,6 +6018,7 @@ model DailySchedule {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 model DatabaseInRP {
   /**
    * Datasource Id for the database.
@@ -6592,6 +6610,209 @@ model IaasVMRestoreRequest extends RestoreRequest {
   objectType: "IaasVMRestoreRequest";
 
   ...IaasVMRestoreRequestProperties;
+}
+
+/**
+ * Base class for bulk restore requests. Workload-specific bulk restore requests are derived from this class.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Bulk restore request follows the existing RestoreRequest polymorphic contract."
+@added(Versions.v2026_08_31_preview)
+model BulkRestoreRequestBase extends RestoreRequest {
+  /**
+   * Type of this recovery.
+   */
+  recoveryType: RecoveryType;
+
+  /**
+   * Restore details for each protected item included in the bulk restore request.
+   */
+  @identifiers(#[])
+  protectedItemRestoreDetails: ProtectedItemRestoreDetailsBase[];
+}
+
+/**
+ * IaaS VM workload-specific bulk restore request.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service contract uses IaaSVM acronym in the discriminator value."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Bulk restore request intentionally extends the intermediate RestoreRequest subtype shared by bulk workloads."
+@added(Versions.v2026_08_31_preview)
+model IaaSVMBulkRestoreRequest extends BulkRestoreRequestBase {
+  /**
+   * This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.
+   */
+  objectType: "IaaSVMBulkRestoreRequest";
+
+  /**
+   * This is the ARM Id of the resource group that you want to create for this Virtual machine and other artifacts.
+   */
+  targetResourceGroupId: armResourceIdentifier<[
+    {
+      type: "Microsoft.Resources/resourceGroups";
+    }
+  ]>;
+
+  /**
+   * Fully qualified ARM ID of the storage account to which the VMs have to be restored.
+   */
+  storageAccountId: armResourceIdentifier<[
+    {
+      type: "Microsoft.Storage/storageAccounts";
+    }
+  ]>;
+
+  /**
+   * Region in which the virtual machines are restored.
+   */
+  region?: string;
+
+  /**
+   * Managed Identity information required to access customer storage account.
+   */
+  identityInfo?: IdentityInfo;
+
+  /**
+   * Flag to denote if unmanaged disk VMs should be restored with managed disks.
+   */
+  restoreWithManagedDisks?: boolean;
+
+  /**
+   * This is the virtual network Id of the vnet that will be attached to the restored virtual machines.
+   */
+  virtualNetworkId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks";
+    }
+  ]>;
+
+  /**
+   * Subnet ID associated with the restored virtual machines.
+   */
+  subnetId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks/subnets";
+    }
+  ]>;
+
+  /**
+   * Target extended location where the VMs should be restored.
+   */
+  extendedLocation?: ExtendedLocation;
+
+  /**
+   * Prefix to use for target VM names created by the bulk restore.
+   */
+  targetVmNamePrefix?: string;
+
+  /**
+   * Specifies target network access settings for disks of VMs to be restored.
+   */
+  targetDiskNetworkAccessSettings?: TargetDiskNetworkAccessSettings;
+
+  /**
+   * DiskEncryptionSet's ID needed if the VMs need to be encrypted at rest during restore with customer managed key.
+   */
+  diskEncryptionSetId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/diskEncryptionSets";
+    }
+  ]>;
+
+  /**
+   * Target zones where the VMs and their disks should be restored.
+   */
+  zones?: string[];
+
+  /**
+   * IaaS VM workload specific restore details for restores using managed identity.
+   */
+  identityBasedRestoreDetails?: IdentityBasedRestoreDetails;
+
+  /**
+   * Target subscription ID for the bulk restore operation.
+   */
+  targetSubscriptionId?: string;
+
+  /**
+   * Flag to skip pre-OLR backup before restore.
+   */
+  skipPreOLRBackup?: boolean;
+}
+
+/**
+ * Per protected item restore details for bulk restore.
+ */
+@added(Versions.v2026_08_31_preview)
+model ProtectedItemRestoreDetailsBase {
+  /**
+   * ID of the backup copy to be recovered.
+   */
+  recoveryPointId: string;
+
+  /**
+   * Fully qualified ARM ID of the VM which is being recovered.
+   */
+  sourceResourceId: armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/virtualMachines";
+    }
+  ]>;
+
+  /**
+   * This is the complete ARM Id of the VM that will be created.
+   */
+  targetVirtualMachineId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/virtualMachines";
+    }
+  ]>;
+
+  /**
+   * DiskEncryptionSet's ID needed if the VM needs to be encrypted at rest during restore with customer managed key.
+   */
+  diskEncryptionSetId?: armResourceIdentifier<[
+    {
+      type: "Microsoft.Compute/diskEncryptionSets";
+    }
+  ]>;
+
+  /**
+   * Stores Secured VM Details.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Existing API uses VM acronym in property name."
+  securedVMDetails?: SecuredVMDetails;
+}
+
+/**
+ * Request body for fetching recovery points for bulk restore.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Existing service contract uses RP acronym in the request name."
+@added(Versions.v2026_08_31_preview)
+model FetchRPForBulkRestoreRequest {
+  /**
+   * Protected item IDs for which recovery points should be fetched.
+   */
+  protectedItemIds?: armResourceIdentifier<[
+    {
+      type: "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems";
+    }
+  ]>[];
+}
+
+/**
+ * Recovery point discovery result for bulk cross-tenant restore, keyed by protected item ID.
+ */
+@added(Versions.v2026_08_31_preview)
+model BulkRestoreRecoveryPointsResponse {
+  /**
+   * Map of the source protected item's ARM ID to its discovered recovery point.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "The bulk recovery-point discovery result is a dynamic map keyed by the source protected item's ARM ID, mirroring the service's ResourceDictionary<RecoveryPoint> wire contract. The key set is caller-supplied and unbounded, so there is no fixed property set to model this as a typed object."
+  value?: Record<RecoveryPointResource>;
+
+  /**
+   * The URI to fetch the next page of results, if any.
+   */
+  nextLink?: url;
 }
 
 /**
@@ -8055,6 +8276,7 @@ model AzureVmWorkloadSAPHanaHSRProtectableItem extends WorkloadProtectableItem {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 model AzureVmWorkloadSAPHanaScaleoutProtectableItem
   extends WorkloadProtectableItem {
   /**
@@ -9085,6 +9307,7 @@ model ClientDiscoveryResponse {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 union CrossTenantProvisioningState {
   string,
   ResourceProvisioningState,
@@ -9110,6 +9333,7 @@ union CrossTenantProvisioningState {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 model CrossTenantVaultMappingProperties {
   /**
    * ARM resource ID of the source vault.
@@ -9158,6 +9382,7 @@ model CrossTenantVaultMappingProperties {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 model RemoveCrossTenantVaultMappingRequest {
   /**
    * ResourceGuardOperationRequests on which LAC check will be performed.
@@ -9172,6 +9397,7 @@ model RemoveCrossTenantVaultMappingRequest {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 union VaultMappingState {
   string,
 
@@ -9191,6 +9417,7 @@ union VaultMappingState {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 model CrossTenantVaultMappingStatusResponse {
   /**
    * Mapping name (if mapped).
@@ -9211,6 +9438,7 @@ model CrossTenantVaultMappingStatusResponse {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 model VaultCredentialCertificateRequest {
   /**
    * Options for certificate generation.
@@ -9226,6 +9454,7 @@ model VaultCredentialCertificateRequest {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 model VaultCredentialCertificateCreateOptions {
   /**
    * Validity period of the generated certificate in hours.
@@ -9242,6 +9471,7 @@ model VaultCredentialCertificateCreateOptions {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 model VaultCredentialCertificateResponse
   is Azure.ResourceManager.ProxyResource<VaultCredentialCertificateProperties> {
   /**
@@ -9262,6 +9492,7 @@ model VaultCredentialCertificateResponse
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 union AuthType {
   string,
 
@@ -9277,6 +9508,7 @@ union AuthType {
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_31_preview)
 @removed(Versions.v2026_07_01)
+@added(Versions.v2026_08_31_preview)
 model VaultCredentialCertificateProperties {
   /**
    * Authentication type.
