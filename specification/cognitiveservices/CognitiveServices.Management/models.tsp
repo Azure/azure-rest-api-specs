@@ -3904,7 +3904,7 @@ model SkuResource {
 /**
  * The object being used to update sku of a resource, in general used for PATCH operations.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "The managed compute PATCH contract updates tags and SKU; deployment identity is supplied through PUT."
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "The managed compute PATCH contract updates SKU and deployment parameters; identity is supplied through PUT."
 @added(Versions.v2026_03_15_preview)
 @removed(Versions.v2026_05_01)
 @added(Versions.v2026_05_15_preview)
@@ -3919,12 +3919,23 @@ model PatchResourceSku {
   sku?: Sku;
 
   /**
-   * Resource tags.
+   * Deployment properties that can be updated by PATCH.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Record<string> preserves the existing Cognitive Services tag shape"
   @added(Versions.v2026_09_15_preview)
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  tags?: Record<string>;
+  properties?: ManagedComputeDeploymentPatchProperties;
+}
+
+/**
+ * Properties that may be changed through a managed compute deployment PATCH.
+ */
+@added(Versions.v2026_09_15_preview)
+model ManagedComputeDeploymentPatchProperties {
+  /**
+   * Non-secret, string-valued runtime parameters for VmManagedCompute deployments.
+   * Other SKUs and unsupported parameter names are rejected.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Deployment parameters require an extensible string-keyed map"
+  deploymentParameters?: Record<string>;
 }
 
 /**
@@ -6577,6 +6588,15 @@ model ManagedComputeDeploymentProperties {
   @added(Versions.v2026_09_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   gatedModelAccess?: GatedModelAccessProperties;
+
+  /**
+   * Non-secret, string-valued runtime parameters for VmManagedCompute deployments.
+   * Other SKUs and unsupported parameter names are rejected.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Deployment parameters require an extensible string-keyed map"
+  @added(Versions.v2026_09_15_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  deploymentParameters?: Record<string>;
 
   /**
    * Deployment capabilities represented as key-value pairs.

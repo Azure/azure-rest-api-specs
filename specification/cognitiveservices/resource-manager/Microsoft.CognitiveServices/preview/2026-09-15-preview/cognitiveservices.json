@@ -18910,18 +18910,6 @@
             "create"
           ]
         },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
         "etag": {
           "type": "string",
           "description": "Resource Etag.",
@@ -18980,6 +18968,19 @@
         }
       }
     },
+    "ManagedComputeDeploymentPatchProperties": {
+      "type": "object",
+      "description": "Properties that may be changed through a managed compute deployment PATCH.",
+      "properties": {
+        "deploymentParameters": {
+          "type": "object",
+          "description": "Non-secret, string-valued runtime parameters for VmManagedCompute deployments.\nOther SKUs and unsupported parameter names are rejected.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "ManagedComputeDeploymentProperties": {
       "type": "object",
       "description": "Properties of a Cognitive Services managed compute deployment.",
@@ -19022,6 +19023,18 @@
           "description": "Configuration used to authorize access to a gated model during deployment creation.",
           "x-ms-mutability": [
             "read",
+            "create"
+          ]
+        },
+        "deploymentParameters": {
+          "type": "object",
+          "description": "Non-secret, string-valued runtime parameters for VmManagedCompute deployments.\nOther SKUs and unsupported parameter names are rejected.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
             "create"
           ]
         },
@@ -20207,17 +20220,9 @@
           "$ref": "#/definitions/Sku",
           "description": "The resource model definition representing SKU"
         },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+        "properties": {
+          "$ref": "#/definitions/ManagedComputeDeploymentPatchProperties",
+          "description": "Deployment properties that can be updated by PATCH."
         }
       }
     },
