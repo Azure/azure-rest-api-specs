@@ -32,7 +32,8 @@ identify required CI rules whose behavior affects a suggested fix.
 | R4011          | DeleteOperationResponses     | arm-api-review §5.1 (RPC-Delete-V1-01)   | ✅ Covered   |
 | R4028          | ValidResponseCodeRequired    | openapi-review §5                        | ✅ Covered   |
 | --             | DeleteResponseCodes          | arm-api-review §5.1 (RPC-Delete-V1-01)   | ✅ Annotated |
-| --             | PatchResponseCodes           | arm-api-review §4.2 (RPC-Patch-V1-06)    | ✅ Covered   |
+| --             | PatchResponseCodes           | arm-api-review §4.2 (RPC-Patch-V1-06/07) | ✅ Covered   |
+| --             | NoErrorCodeResponses         | arm-api-review §4.2 (RPC-Patch-V1-07)    | ✅ Covered   |
 | --             | PostResponseCodes            | arm-api-review §12.1 (RPC-POST-V1-02/03) | ✅ Covered   |
 | --             | PutResponseCodes             | arm-api-review §3.1 (RPC-Put-V1-11)      | ✅ Annotated |
 | R3013          | DeleteMustNotHaveRequestBody | arm-api-review §5.2                      | ✅ Covered   |
