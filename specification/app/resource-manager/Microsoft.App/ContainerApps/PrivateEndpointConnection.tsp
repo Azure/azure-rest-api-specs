@@ -123,67 +123,6 @@ alias ManagedEnvironmentPrivateLinkResourceOps = Azure.ResourceManager.Legacy.Le
   }
 >;
 
-alias ContainerAppPrivateEndpointConnectionOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
-
-    /** Name of the Container App. */
-    @path
-    @segment("containerApps")
-    @key
-    @pattern("^[-\\w\\._\\(\\)]+$")
-    containerAppName: string;
-  },
-  {
-    /** Name of the Private Endpoint Connection. */
-    @path
-    @segment("privateEndpointConnections")
-    @key
-    privateEndpointConnectionName: string;
-  }
->;
-
-alias ContainerAppPrivateLinkResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
-
-    /** Name of the Container App. */
-    @path
-    @segment("containerApps")
-    @key
-    @pattern("^[-\\w\\._\\(\\)]+$")
-    containerAppName: string;
-  },
-  {
-    ...ContainerAppsPrivateLinkResourceNameParameter;
-  }
->;
-
-alias ManagedEnvironmentPrivateLinkResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider;
-
-    /** Name of the managed environment. */
-    @path
-    @segment("managedEnvironments")
-    @key
-    @pattern("^[-\\w\\._\\(\\)]+$")
-    environmentName: string;
-  },
-  {
-    ...ContainerAppsPrivateLinkResourceNameParameter;
-  }
->;
-
 @armResourceOperations
 @tag("ManagedEnvironments")
 @tag("PrivateEndpointConnections")
