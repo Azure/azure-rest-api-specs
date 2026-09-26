@@ -1,0 +1,20 @@
+{
+  "operationId": "EduEnrollments_Delete",
+  "title": "Delete an edu enrollment",
+  "parameters": {
+    "resourceUri": "providers/Microsoft.Billing/billingAccounts/12345678",
+    "enrollmentName": "default",
+    "api-version": "2026-08-10-preview"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/12345678/providers/Microsoft.ProgramEnrollment/locations/global/operationStatuses/00000000-0000-0000-0000-000000000002?api-version=2026-08-10-preview",
+        "Retry-After": 10
+      }
+    },
+    "204": {
+      "description": "Resource does not exist."
+    }
+  }
+}
