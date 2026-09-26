@@ -33,6 +33,10 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   @doc("Version 2026-06-01")
   v2026_06_01: "2026-06-01",
+
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  @doc("Version 2026-09-01")
+  v2026_09_01: "2026-09-01",
 }
 
 @doc("File share resource")
