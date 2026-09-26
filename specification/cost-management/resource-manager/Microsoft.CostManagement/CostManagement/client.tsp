@@ -167,9 +167,6 @@ op GetGenerateDetailedCostReportOperationStatusCustomized(
 @@clientName(Grain, "BenefitRecommendationUsageGrain", "csharp");
 @@clientName(OperatorType, "ComparisonOperatorType", "csharp");
 @@clientName(AlertCriteria, "AlertCriterion", "csharp");
-@@clientName(AlertProperties.modificationTime, "ModifiedOn", "csharp");
-@@clientName(AlertProperties.creationTime, "CreatedOn", "csharp");
-@@clientName(AlertProperties.closeTime, "CloseOn", "csharp");
 @@clientName(
   AlertProperties.statusModificationTime,
   "StatusModifiedOn",

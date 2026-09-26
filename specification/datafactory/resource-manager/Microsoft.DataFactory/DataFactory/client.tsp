@@ -529,12 +529,6 @@ using Microsoft.DataFactory;
 );
 @@clientName(DataFlowDebugResource, "DataFactoryDataFlowDebugInfo", "csharp");
 @@clientName(
-  DataFlowDebugSessionInfo.lastActivityTime,
-  "LastActivityOn",
-  "csharp"
-);
-@@clientName(DataFlowDebugSessionInfo.startTime, "StartOn", "csharp");
-@@clientName(
   DataFlowDebugSessionInfo.timeToLiveInMinutes,
   "TimeToLiveInMinutes",
   "csharp"
@@ -1291,8 +1285,6 @@ using Microsoft.DataFactory;
   "DataFactoryDataPlaneUserAccessPolicy",
   "csharp"
 );
-@@clientName(UserAccessPolicy.expireTime, "ExpireOn", "csharp");
-@@clientName(UserAccessPolicy.startTime, "StartOn", "csharp");
 @@clientName(UserProperty, "PipelineActivityUserProperty", "csharp");
 @@clientName(ValueType, "DatasetSourceValueType", "csharp");
 @@clientName(VariableSpecification, "PipelineVariableSpecification", "csharp");
