@@ -59,6 +59,14 @@ using Azure.ClientGenerator.Core;
   Access.public
 );
 @@usage(
+  Microsoft.EventGrid.SystemEvents.StorageLifecyclePolicyProgressEventData,
+  Usage.output | Usage.json
+);
+@@access(
+  Microsoft.EventGrid.SystemEvents.StorageLifecyclePolicyProgressEventData,
+  Access.public
+);
+@@usage(
   Microsoft.EventGrid.SystemEvents.StorageLifecyclePolicyActionSummaryDetail,
   Usage.output | Usage.json
 );
@@ -129,6 +137,22 @@ using Azure.ClientGenerator.Core;
 );
 //Enums
 @@usage(
+  Microsoft.EventGrid.SystemEvents.StorageLifecyclePolicyProgressStatus,
+  Usage.output | Usage.json
+);
+@@access(
+  Microsoft.EventGrid.SystemEvents.StorageLifecyclePolicyProgressStatus,
+  Access.public
+);
+@@usage(
+  Microsoft.EventGrid.SystemEvents.StorageLifecyclePolicyProgressInterruptedCause,
+  Usage.output | Usage.json
+);
+@@access(
+  Microsoft.EventGrid.SystemEvents.StorageLifecyclePolicyProgressInterruptedCause,
+  Access.public
+);
+@@usage(
   Microsoft.EventGrid.SystemEvents.StorageTaskAssignmentCompletedStatus,
   Usage.output | Usage.json
 );
@@ -184,6 +208,10 @@ using Azure.ClientGenerator.Core;
 );
 @@useSystemTextJsonConverter(
   Microsoft.EventGrid.SystemEvents.StorageLifecyclePolicyCompletedEventData,
+  "csharp"
+);
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.StorageLifecyclePolicyProgressEventData,
   "csharp"
 );
 @@useSystemTextJsonConverter(
