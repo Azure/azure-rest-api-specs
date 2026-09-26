@@ -30,4 +30,21 @@
   reason: Brownfield service not ready to migrate
 - tool: TypeSpecRequirement
   path: ./stable/2023-06-01/*.json
-  reason: Brownfield service not ready to migrate  
+  reason: Brownfield service not ready to migrate
+- tool: Swagger Avocado
+  path: ./stable/2023-06-01/maps-management.json
+  reason: >-
+    MISSING_APIS_IN_DEFAULT_TAG for '/subscriptions/{}/providers/Microsoft.Maps/operations'
+    (Maps_ListSubscriptionOperations). The subscription-scoped operations list is non-conformant
+    with the ARM RPC (operations must be tenant-scoped) and was intentionally removed; the
+    tenant-scoped '/providers/Microsoft.Maps/operations' remains in the default (2026-12-01) tag.
+    This older version still contains the retired route, so Avocado reports it against the new
+    default tag. Removal was approved by the Breaking Change Board (originally in
+    Azure/azure-rest-api-specs#26945).
+- tool: Swagger Avocado
+  path: ./stable/2018-05-01/maps-management.json
+  reason: >-
+    MISSING_APIS_IN_DEFAULT_TAG for '/subscriptions/{}/resourceGroups/{}/moveResources'. ARM owns
+    the resource-move specification, so the operation was removed from versions after 2018-05-01.
+    This older version still contains the route, so Avocado reports it against the default
+    (2026-12-01) tag.  
