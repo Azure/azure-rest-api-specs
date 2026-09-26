@@ -1,0 +1,59 @@
+parameters:
+  "service-dir":
+    default: "sdk/recoveryservicesbackup"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/bms.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    emit-lro-options: "all"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.RecoveryServicesBackupCrr"
+    emitter-output-dir: "{output-dir}/sdk/recoveryservices-backup/Azure.ResourceManager.RecoveryServicesBackupCrr"
+  "@azure-tools/typespec-python":
+    service-dir: "sdk/recoveryservices"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-recoveryservicesbackupcrr"
+    namespace: "azure.mgmt.recoveryservicesbackupcrr"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-recoveryservicesbackupcrr"
+    namespace: "com.azure.resourcemanager.recoveryservicesbackupcrr"
+    service-name: "Recovery Services Backup Crr"
+    flavor: azure
+    use-object-for-unknown: true
+  "@azure-tools/typespec-ts":
+    compatibility-lro: true
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-recoveryservicesbackupcrr"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-recoveryservicesbackupcrr"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/recoveryservices"
+    emitter-output-dir: "{output-dir}/{service-dir}/armrecoveryservicesbackupcrr"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armrecoveryservicesbackupcrr"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+  disable:
+    "@azure-tools/typespec-azure-core/casing-style": "Faithful migration of the frozen 2023-01-15 CRR Swagger; legacy model/property/acronym names are part of the existing wire contract and cannot be renamed."
+    "@azure-tools/typespec-azure-core/no-string-discriminator": "Legacy CRR discriminated types use string discriminators (objectType/jobType); preserved as-is from 2023-01-15 for backward compatibility."
+    "@azure-tools/typespec-azure-core/no-multiple-discriminator": "Legacy CRR inheritance hierarchies (e.g. ProtectedItem, Job) carry multiple discriminator levels from 2023-01-15; preserved for backward compatibility."
+    "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers": "Legacy array properties from 2023-01-15 do not declare x-ms-identifiers; preserved to keep the emitted swagger byte-faithful to the original."
+    "@azure-tools/typespec-azure-core/documentation-required": "Faithful migration; some legacy properties/operations from 2023-01-15 lack descriptions and adding them would diverge from the frozen source."
+    "@azure-tools/typespec-azure-resource-manager/lro-location-header": "The original 2023-01-15 CrossRegionRestore/CRR-operation LROs return a header-less 202; preserved exactly for backward compatibility."
+    "@azure-tools/typespec-azure-resource-manager/no-empty-model": "Legacy 2023-01-15 models use bare type:object properties; preserved for backward compatibility."
+    "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes": "RecoveryPoints_GetAccessToken returns a documented 400 in the original 2023-01-15 spec; preserved for backward compatibility."
+    "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint": "The CRR passive-stamp surface (2023-01-15) does not expose a provider Operations list; adding one would introduce a path not present in the frozen original."
+    "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation": "The CRR vaultstorageconfig singleton has no delete operation in the original 2023-01-15 spec; preserved for backward compatibility."
+    "@azure-tools/typespec-azure-resource-manager/no-response-body": "Legacy CRR operation-result reads return an empty 200 body in the original 2023-01-15 spec; preserved for backward compatibility."
