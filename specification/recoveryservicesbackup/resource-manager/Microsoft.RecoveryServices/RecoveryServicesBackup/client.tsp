@@ -3757,6 +3757,31 @@ op protectionPolicyOperationStatusesGet(
   "InstantItemRecoveryOperationResultContent",
   "csharp"
 );
+@@clientName(
+  AzureFileShareProvisionVaultILRRequest,
+  "AzureFileShareProvisionVaultILRContent",
+  "csharp"
+);
+@@clientName(
+  BrowseRecoveryPointRequest,
+  "BrowseRecoveryPointContent",
+  "csharp"
+);
+@@clientName(
+  AzureFileShareBrowseRecoveryPointRequest,
+  "AzureFileShareBrowseRecoveryPointContent",
+  "csharp"
+);
+@@clientName(
+  BrowseRecoveryPointResponse,
+  "BrowseRecoveryPointResult",
+  "csharp"
+);
+@@clientName(
+  AzureFileShareBrowseRecoveryPointResponse,
+  "AzureFileShareBrowseRecoveryPointResult",
+  "csharp"
+);
 
 // JavaScript backward compatibility with the last stable SDK.
 @@clientLocation(
