@@ -386,6 +386,114 @@
           }
         }
       }
+    },
+    "/workspaces/{workspaceId}/search": {
+      "get": {
+        "operationId": "Search_Get",
+        "summary": "Execute a search query",
+        "description": "Executes a search query for data in a workspace.",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "Primary Workspace ID of the query. This is the Workspace ID from the Properties\nblade in the Azure portal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "description": "The search query to execute.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "timespan",
+            "in": "query",
+            "description": "The timespan over which to query data. This is an ISO8601 time period value.\nThis timespan is applied in addition to any that are specified in the query expression.",
+            "required": true,
+            "type": "string",
+            "format": "duration"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QueryResults"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "A simple GET search query on a workspace": {
+            "$ref": "./examples/search-get-example.json"
+          }
+        }
+      },
+      "post": {
+        "operationId": "Search_Execute",
+        "summary": "Execute a search query",
+        "description": "Executes a search query for data in a workspace.",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "Primary Workspace ID of the query. This is the Workspace ID from the Properties\nblade in the Azure portal.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "timespan",
+            "in": "query",
+            "description": "Optional. The timespan over which to query data. A timespan must be supplied either\nhere or in the request body. If both are supplied, the service uses their intersection.",
+            "required": false,
+            "type": "string",
+            "format": "duration"
+          },
+          {
+            "name": "Prefer",
+            "in": "header",
+            "description": "Optional. The prefer header to set server timeout, query statistics and visualization information.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "prefer"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The search query to execute. A timespan must be supplied either in this body or as\na query parameter. If both are supplied, the service uses their intersection.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QueryBody"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QueryResults"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "A simple POST search query on a workspace": {
+            "$ref": "./examples/search-post-example.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
