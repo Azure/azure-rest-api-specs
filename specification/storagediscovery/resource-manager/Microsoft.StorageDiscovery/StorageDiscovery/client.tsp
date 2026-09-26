@@ -57,4 +57,3 @@ using Microsoft.StorageDiscovery;
   "AzureBlobStoragePrefixConfiguration",
   "csharp"
 );
-
