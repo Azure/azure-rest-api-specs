@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -175,4 +177,22 @@ model ExtensionTypeVersionUnsupportedKubernetesMatrixItem {
    * The list of Kubernetes Versions not supported by the list of Kubernetes Cluster Distribution names in this object
    */
   unsupportedVersions?: string[];
+}
+
+/**
+ * List of supported Azure locations for an extension type.
+ */
+@added(Versions.v2026_04_01)
+model SupportedLocationsResult {
+  /**
+   * Array of supported Azure location names.
+   */
+  @pageItems
+  value: string[];
+
+  /**
+   * The URL to get the next set of results.
+   */
+  @nextLink
+  nextLink?: url;
 }
