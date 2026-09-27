@@ -4318,32 +4318,9 @@ op replaceprivateDnsZoneGroupsList(
   "csharp"
 );
 
-@@clientName(
+// Reuse the shared identity model for every reference, including FlowLog.identity.
+@@alternateType(
   Common.ManagedServiceIdentity,
-  "InternalNetworkManagedServiceIdentity",
-  "csharp"
-);
-
-@@alternateType(
-  Microsoft.Network.AuthenticationPolicy.identity,
-  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
-  "csharp"
-);
-
-@@alternateType(
-  Microsoft.Network.AuthenticationPolicyUpdateParameters.identity,
-  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
-  "csharp"
-);
-
-@@alternateType(
-  Microsoft.Network.BastionHost.identity,
-  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
-  "csharp"
-);
-
-@@alternateType(
-  Microsoft.Network.BastionHostUpdate.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
@@ -6044,54 +6021,6 @@ op replaceprivateDnsZoneGroupsList(
 @@alternateType(
   Microsoft.Network.ExpressRoutePortAuthorizationPropertiesFormat.circuitResourceUri,
   url,
-  "csharp"
-);
-
-@@alternateType(
-  Microsoft.Network.ApplicationGateway.identity,
-  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
-  "csharp"
-);
-
-@@alternateType(
-  Microsoft.Network.ExpressRoutePort.identity,
-  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
-  "csharp"
-);
-
-@@alternateType(
-  Microsoft.Network.FirewallPolicy.identity,
-  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
-  "csharp"
-);
-
-@@alternateType(
-  Microsoft.Network.FlowLogInformation.identity,
-  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
-  "csharp"
-);
-
-@@alternateType(
-  Microsoft.Network.NetworkVirtualAppliance.identity,
-  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
-  "csharp"
-);
-
-@@alternateType(
-  Microsoft.Network.VirtualNetworkGateway.identity,
-  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
-  "csharp"
-);
-
-@@alternateType(
-  Microsoft.Network.ExpressRouteLag.identity,
-  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
-  "csharp"
-);
-
-@@alternateType(
-  Microsoft.Network.ExpressRouteLagUpdateTagsOrIdentityRequest.identity,
-  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
   "csharp"
 );
 
