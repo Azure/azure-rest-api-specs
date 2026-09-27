@@ -18,7 +18,7 @@ import type { Core, WebhookEvent } from "../github.ts";
 */
 
 // #region imports/constants
-import { execFile } from "../../../shared/src/exec.ts";
+import { strFromU8, unzipSync } from "fflate";
 import { CheckConclusion, PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { intersect } from "../../../shared/src/set.ts";
 import { byDate, invert } from "../../../shared/src/sort.ts";
@@ -41,10 +41,6 @@ import {
   typeSpecRequirementArmTsg,
   typeSpecRequirementDataPlaneTsg,
 } from "./tsgs.ts";
-
-import fs from "fs/promises";
-import os from "os";
-import path from "path";
 
 export type CheckMetadata = {
   precedence: number;
@@ -102,6 +98,8 @@ const FYI_CHECK_NAMES = [
 const AUTOMATED_CHECK_NAME = "Automated merging requirements met";
 const IMPACT_CHECK_NAME = "Summarize PR Impact";
 const NEXT_STEPS_COMMENT_ID = "NextStepsToMerge";
+// Preserve the output limit previously enforced by execFile.
+const MAX_IMPACT_ASSESSMENT_BYTES = 16 * 1024 * 1024;
 
 const CHECK_METADATA: CheckMetadata[] = [
   {
@@ -1106,21 +1104,22 @@ export async function getImpactAssessment(
 
   core.info(`Successfully downloaded job-summary artifact ID: ${jobSummaryArtifact.id}`);
 
-  // Write zip buffer to temp file and extract JSON
-  const tmpZip = path.join(process.env.RUNNER_TEMP || os.tmpdir(), `job-summary-${runId}.zip`);
-  // Convert ArrayBuffer to Buffer
-  // Convert ArrayBuffer (download.data) to Node Buffer
-  const arrayBuffer = download.data as ArrayBuffer;
-  const zipBuffer = Buffer.from(new Uint8Array(arrayBuffer));
-  await fs.writeFile(tmpZip, zipBuffer);
+  const files = unzipSync(new Uint8Array(download.data as ArrayBuffer), {
+    filter: ({ name, originalSize }) => {
+      if (name !== "summary.json") return false;
+      if (originalSize > MAX_IMPACT_ASSESSMENT_BYTES) {
+        throw new Error(`summary.json in artifact ID: ${jobSummaryArtifact.id} exceeds 16 MiB.`);
+      }
+      return true;
+    },
+  });
+  const summary = files["summary.json"];
+  if (!summary) {
+    throw new Error(
+      `Unable to find summary.json in job-summary artifact ID: ${jobSummaryArtifact.id}.`,
+    );
+  }
 
-  // Extract JSON content from zip archive
-  // Could replace with library like 'fflate' instead of 'exec unzip', but
-  // this would require 'npm i', while 'unzip' is pre-installed.
-  const { stdout: jsonContent } = await execFile("unzip", ["-p", tmpZip]);
-
-  await fs.unlink(tmpZip);
-
-  return ImpactAssessmentSchema.parse(JSON.parse(jsonContent));
+  return ImpactAssessmentSchema.parse(JSON.parse(strFromU8(summary)));
 }
 // #endregion
