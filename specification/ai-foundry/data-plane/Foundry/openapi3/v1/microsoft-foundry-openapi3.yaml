@@ -46110,7 +46110,7 @@ components:
           description: Whether to set this version as the default. Defaults to false.
       required:
         - files
-    CreateTeamsPhoneExtensionTelephonyBindingRequest:
+    CreateTeamsPhoneExtensibilityTelephonyBindingRequest:
       type: object
       required:
         - provider
@@ -46119,8 +46119,8 @@ components:
         provider:
           type: string
           enum:
-            - teams_phone_extension
-          description: The Microsoft Teams Phone Extension provider.
+            - teams_phone_extensibility
+          description: The Microsoft Teams Phone extensibility provider.
         phone_number:
           type: string
           maxLength: 64
@@ -46130,7 +46130,7 @@ components:
           description: The Microsoft Teams resource-account object identifier as a GUID.
       allOf:
         - $ref: '#/components/schemas/CreateTelephonyBindingRequest'
-      description: The request to create a Microsoft Teams Phone Extension binding.
+      description: The request to create a Microsoft Teams Phone extensibility binding.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -46155,7 +46155,7 @@ components:
       discriminator:
         propertyName: provider
         mapping:
-          teams_phone_extension: '#/components/schemas/CreateTeamsPhoneExtensionTelephonyBindingRequest'
+          teams_phone_extensibility: '#/components/schemas/CreateTeamsPhoneExtensibilityTelephonyBindingRequest'
           twilio: '#/components/schemas/CreateTwilioTelephonyBindingRequest'
       description: The request to create a telephony binding.
       x-ms-foundry-meta:
@@ -46175,11 +46175,11 @@ components:
           type: string
           minLength: 1
           maxLength: 256
-          description: The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone Extension. No inbound telephony binding is required.
+          description: The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone extensibility. No inbound telephony binding is required.
         source:
           $ref: '#/components/schemas/TelephonyOutboundSource'
           minLength: 1
-          description: The caller identity used to originate the call. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone Extension connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing.
+          description: The caller identity used to originate the call. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone extensibility connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing.
         purpose:
           type: string
           minLength: 1
@@ -82176,7 +82176,7 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
-    TeamsPhoneExtensionTelephonyBinding:
+    TeamsPhoneExtensibilityTelephonyBinding:
       type: object
       required:
         - provider
@@ -82185,8 +82185,8 @@ components:
         provider:
           type: string
           enum:
-            - teams_phone_extension
-          description: The Microsoft Teams Phone Extension provider.
+            - teams_phone_extensibility
+          description: The Microsoft Teams Phone extensibility provider.
         phone_number:
           type: string
           maxLength: 64
@@ -82196,11 +82196,11 @@ components:
           description: The Microsoft Teams resource-account object identifier as a GUID.
       allOf:
         - $ref: '#/components/schemas/TelephonyBinding'
-      description: A Microsoft Teams Phone Extension binding owned by a voice agent.
+      description: A Microsoft Teams Phone extensibility binding owned by a voice agent.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    TeamsPhoneExtensionTelephonyBindingListItem:
+    TeamsPhoneExtensibilityTelephonyBindingListItem:
       type: object
       required:
         - provider
@@ -82209,8 +82209,8 @@ components:
         provider:
           type: string
           enum:
-            - teams_phone_extension
-          description: The Microsoft Teams Phone Extension provider.
+            - teams_phone_extensibility
+          description: The Microsoft Teams Phone extensibility provider.
         phone_number:
           type: string
           maxLength: 64
@@ -82220,7 +82220,7 @@ components:
           description: The Microsoft Teams resource-account object identifier as a GUID.
       allOf:
         - $ref: '#/components/schemas/TelephonyBindingListItem'
-      description: A Microsoft Teams Phone Extension binding returned in a list, including its entity tag.
+      description: A Microsoft Teams Phone extensibility binding returned in a list, including its entity tag.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -82363,7 +82363,7 @@ components:
       discriminator:
         propertyName: provider
         mapping:
-          teams_phone_extension: '#/components/schemas/TeamsPhoneExtensionTelephonyBinding'
+          teams_phone_extensibility: '#/components/schemas/TeamsPhoneExtensibilityTelephonyBinding'
           twilio: '#/components/schemas/TwilioTelephonyBinding'
       description: A telephony binding owned by a voice agent.
       x-ms-foundry-meta:
@@ -82416,7 +82416,7 @@ components:
       discriminator:
         propertyName: provider
         mapping:
-          teams_phone_extension: '#/components/schemas/TeamsPhoneExtensionTelephonyBindingListItem'
+          teams_phone_extensibility: '#/components/schemas/TeamsPhoneExtensibilityTelephonyBindingListItem'
           twilio: '#/components/schemas/TwilioTelephonyBindingListItem'
       description: A telephony binding returned in a list, including its entity tag.
       x-ms-foundry-meta:
@@ -82514,11 +82514,11 @@ components:
           type: string
           minLength: 1
           maxLength: 256
-          description: The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone Extension. No inbound telephony binding is required.
+          description: The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone extensibility. No inbound telephony binding is required.
         source:
           $ref: '#/components/schemas/TelephonyOutboundSource'
           minLength: 1
-          description: The caller identity used to originate the call. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone Extension connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing.
+          description: The caller identity used to originate the call. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone extensibility connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing.
         purpose:
           type: string
           minLength: 1
@@ -82813,7 +82813,7 @@ components:
         - type: string
           enum:
             - gateway
-            - teams_phone_extension
+            - teams_phone_extensibility
             - twilio
             - voice_agent
       description: The component that supplied a telephony lifecycle observation.
@@ -82870,7 +82870,7 @@ components:
         provider_number:
           type: string
           maxLength: 64
-          description: The Teams Phone Extension or Twilio number that received the call.
+          description: The Teams Phone extensibility or Twilio number that received the call.
         status:
           $ref: '#/components/schemas/TelephonyCallStatus'
           description: The lifecycle status of the call.
@@ -82969,7 +82969,7 @@ components:
         provider_number:
           type: string
           maxLength: 64
-          description: The Teams Phone Extension or Twilio number that received the call.
+          description: The Teams Phone extensibility or Twilio number that received the call.
         status:
           $ref: '#/components/schemas/TelephonyCallStatus'
           description: The lifecycle status of the call.
@@ -83232,7 +83232,7 @@ components:
         - type: string
         - type: string
           enum:
-            - teams_phone_extension
+            - teams_phone_extensibility
             - twilio
       description: A telephony provider supported by an agent binding. Known values are stable; additional values may be added over time.
       x-ms-foundry-meta:
@@ -84168,13 +84168,13 @@ components:
           type: string
           minLength: 1
           maxLength: 256
-          description: The replacement Foundry connection name. This property is valid only for a Teams Phone Extension binding; a Twilio binding's connection is immutable.
+          description: The replacement Foundry connection name. This property is valid only for a Teams Phone extensibility binding; a Twilio binding's connection is immutable.
         phone_number:
           anyOf:
             - type: string
             - type: 'null'
           maxLength: 64
-          description: The replacement Teams Phone Extension display phone number. Omit it to preserve the current value; use null to clear it. This property is valid only for a Teams Phone Extension binding.
+          description: The replacement Teams Phone extensibility display phone number. Omit it to preserve the current value; use null to clear it. This property is valid only for a Teams Phone extensibility binding.
       description: The request to update an existing telephony binding. Every property is optional and the binding's provider is immutable.
       x-ms-foundry-meta:
         required_previews:

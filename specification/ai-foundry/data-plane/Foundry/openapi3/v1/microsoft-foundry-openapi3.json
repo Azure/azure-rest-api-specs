@@ -37903,7 +37903,7 @@
           "files"
         ]
       },
-      "CreateTeamsPhoneExtensionTelephonyBindingRequest": {
+      "CreateTeamsPhoneExtensibilityTelephonyBindingRequest": {
         "type": "object",
         "required": [
           "provider",
@@ -37913,9 +37913,9 @@
           "provider": {
             "type": "string",
             "enum": [
-              "teams_phone_extension"
+              "teams_phone_extensibility"
             ],
-            "description": "The Microsoft Teams Phone Extension provider."
+            "description": "The Microsoft Teams Phone extensibility provider."
           },
           "phone_number": {
             "type": "string",
@@ -37932,7 +37932,7 @@
             "$ref": "#/components/schemas/CreateTelephonyBindingRequest"
           }
         ],
-        "description": "The request to create a Microsoft Teams Phone Extension binding.",
+        "description": "The request to create a Microsoft Teams Phone extensibility binding.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -37965,7 +37965,7 @@
         "discriminator": {
           "propertyName": "provider",
           "mapping": {
-            "teams_phone_extension": "#/components/schemas/CreateTeamsPhoneExtensionTelephonyBindingRequest",
+            "teams_phone_extensibility": "#/components/schemas/CreateTeamsPhoneExtensibilityTelephonyBindingRequest",
             "twilio": "#/components/schemas/CreateTwilioTelephonyBindingRequest"
           }
         },
@@ -37992,12 +37992,12 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 256,
-            "description": "The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone Extension. No inbound telephony binding is required."
+            "description": "The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone extensibility. No inbound telephony binding is required."
           },
           "source": {
             "$ref": "#/components/schemas/TelephonyOutboundSource",
             "minLength": 1,
-            "description": "The caller identity used to originate the call. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone Extension connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing."
+            "description": "The caller identity used to originate the call. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone extensibility connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing."
           },
           "purpose": {
             "type": "string",
@@ -87697,7 +87697,7 @@
           ]
         }
       },
-      "TeamsPhoneExtensionTelephonyBinding": {
+      "TeamsPhoneExtensibilityTelephonyBinding": {
         "type": "object",
         "required": [
           "provider",
@@ -87707,9 +87707,9 @@
           "provider": {
             "type": "string",
             "enum": [
-              "teams_phone_extension"
+              "teams_phone_extensibility"
             ],
-            "description": "The Microsoft Teams Phone Extension provider."
+            "description": "The Microsoft Teams Phone extensibility provider."
           },
           "phone_number": {
             "type": "string",
@@ -87726,14 +87726,14 @@
             "$ref": "#/components/schemas/TelephonyBinding"
           }
         ],
-        "description": "A Microsoft Teams Phone Extension binding owned by a voice agent.",
+        "description": "A Microsoft Teams Phone extensibility binding owned by a voice agent.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
           ]
         }
       },
-      "TeamsPhoneExtensionTelephonyBindingListItem": {
+      "TeamsPhoneExtensibilityTelephonyBindingListItem": {
         "type": "object",
         "required": [
           "provider",
@@ -87743,9 +87743,9 @@
           "provider": {
             "type": "string",
             "enum": [
-              "teams_phone_extension"
+              "teams_phone_extensibility"
             ],
-            "description": "The Microsoft Teams Phone Extension provider."
+            "description": "The Microsoft Teams Phone extensibility provider."
           },
           "phone_number": {
             "type": "string",
@@ -87762,7 +87762,7 @@
             "$ref": "#/components/schemas/TelephonyBindingListItem"
           }
         ],
-        "description": "A Microsoft Teams Phone Extension binding returned in a list, including its entity tag.",
+        "description": "A Microsoft Teams Phone extensibility binding returned in a list, including its entity tag.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -87978,7 +87978,7 @@
         "discriminator": {
           "propertyName": "provider",
           "mapping": {
-            "teams_phone_extension": "#/components/schemas/TeamsPhoneExtensionTelephonyBinding",
+            "teams_phone_extensibility": "#/components/schemas/TeamsPhoneExtensibilityTelephonyBinding",
             "twilio": "#/components/schemas/TwilioTelephonyBinding"
           }
         },
@@ -88048,7 +88048,7 @@
         "discriminator": {
           "propertyName": "provider",
           "mapping": {
-            "teams_phone_extension": "#/components/schemas/TeamsPhoneExtensionTelephonyBindingListItem",
+            "teams_phone_extensibility": "#/components/schemas/TeamsPhoneExtensibilityTelephonyBindingListItem",
             "twilio": "#/components/schemas/TwilioTelephonyBindingListItem"
           }
         },
@@ -88183,12 +88183,12 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 256,
-            "description": "The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone Extension. No inbound telephony binding is required."
+            "description": "The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone extensibility. No inbound telephony binding is required."
           },
           "source": {
             "$ref": "#/components/schemas/TelephonyOutboundSource",
             "minLength": 1,
-            "description": "The caller identity used to originate the call. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone Extension connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing."
+            "description": "The caller identity used to originate the call. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone extensibility connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing."
           },
           "purpose": {
             "type": "string",
@@ -88587,7 +88587,7 @@
             "type": "string",
             "enum": [
               "gateway",
-              "teams_phone_extension",
+              "teams_phone_extensibility",
               "twilio",
               "voice_agent"
             ]
@@ -88664,7 +88664,7 @@
           "provider_number": {
             "type": "string",
             "maxLength": 64,
-            "description": "The Teams Phone Extension or Twilio number that received the call."
+            "description": "The Teams Phone extensibility or Twilio number that received the call."
           },
           "status": {
             "$ref": "#/components/schemas/TelephonyCallStatus",
@@ -88799,7 +88799,7 @@
           "provider_number": {
             "type": "string",
             "maxLength": 64,
-            "description": "The Teams Phone Extension or Twilio number that received the call."
+            "description": "The Teams Phone extensibility or Twilio number that received the call."
           },
           "status": {
             "$ref": "#/components/schemas/TelephonyCallStatus",
@@ -89190,7 +89190,7 @@
           {
             "type": "string",
             "enum": [
-              "teams_phone_extension",
+              "teams_phone_extensibility",
               "twilio"
             ]
           }
@@ -90465,7 +90465,7 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 256,
-            "description": "The replacement Foundry connection name. This property is valid only for a Teams Phone Extension binding; a Twilio binding's connection is immutable."
+            "description": "The replacement Foundry connection name. This property is valid only for a Teams Phone extensibility binding; a Twilio binding's connection is immutable."
           },
           "phone_number": {
             "anyOf": [
@@ -90477,7 +90477,7 @@
               }
             ],
             "maxLength": 64,
-            "description": "The replacement Teams Phone Extension display phone number. Omit it to preserve the current value; use null to clear it. This property is valid only for a Teams Phone Extension binding."
+            "description": "The replacement Teams Phone extensibility display phone number. Omit it to preserve the current value; use null to clear it. This property is valid only for a Teams Phone extensibility binding."
           }
         },
         "description": "The request to update an existing telephony binding. Every property is optional and the binding's provider is immutable.",
