@@ -4467,6 +4467,12 @@ op replaceprivateDnsZoneGroupsList(
   "csharp"
 );
 
+// Keep the original .NET acronym casing on generated endpoint values. These
+// client names do not change the service's AzureVM, AzureArcVM, or AzureVMSS strings.
+@@clientName(Microsoft.Network.EndpointType.AzureVM, "AzureVm", "csharp");
+@@clientName(Microsoft.Network.EndpointType.AzureArcVM, "AzureArcVm", "csharp");
+@@clientName(Microsoft.Network.EndpointType.AzureVMSS, "AzureVmss", "csharp");
+
 @@clientName(
   Microsoft.Network.ConnectivityParameters,
   "ConnectivityContent",
