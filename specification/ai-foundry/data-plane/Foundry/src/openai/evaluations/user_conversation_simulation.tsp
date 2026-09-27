@@ -8,8 +8,8 @@ namespace Azure.AI.Projects;
  * Each source item defines a test scenario. Use a JSONL source or an `inline_user_conversation_simulation` source with strongly typed test cases. JSONL attributes use the inline test-case property names by default; specify `data_mapping` only when the dataset uses different names. The model specified by `model_configuration` generates the simulated user's turns and drives the conversation with `target` until it reaches the desired length or maximum turn limit. The evaluation's testing criteria are then applied to the conversation.
  */
 model UserConversationSimulationEvalRunDataSource extends EvalRunDataSource {
-  /** The type of data source, always `azure_ai_user_conversation_simulation_preview`. */
-  type: "azure_ai_user_conversation_simulation_preview";
+  /** The type of data source, always `azure_ai_user_conversation_simulation`. */
+  type: "azure_ai_user_conversation_simulation";
 
   /** Test scenarios supplied as JSONL rows or strongly typed inline test cases. */
   source: UserConversationSimulationSource;
