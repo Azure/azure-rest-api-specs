@@ -6252,6 +6252,12 @@ op replaceprivateDnsZoneGroupsList(
   "csharp"
 );
 
+@@clientName(
+  Microsoft.Network.P2SConnectionConfigurationProperties.configurationPolicyGroupAssociations,
+  "ConfigurationPolicyGroups",
+  "csharp"
+);
+
 @@alternateType(
   Microsoft.Network.VirtualHubProperties.bgpConnections,
   Azure.ResourceManager.Models.WritableSubResource[],
