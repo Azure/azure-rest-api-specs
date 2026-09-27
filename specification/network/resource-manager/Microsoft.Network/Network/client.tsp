@@ -5344,6 +5344,138 @@ op replaceprivateDnsZoneGroupsList(
   "csharp"
 );
 
+// Preserve the strong types shared by the released management and provisioning APIs.
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayCustomError.customErrorPageUrl,
+  url,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ApplicationGatewayProbeHealthResponseMatch.body,
+  unknown,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.AzureFirewallIpGroups.id,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Common.BackendAddressPoolPropertiesFormat.location,
+  azureLocation,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ConnectionMonitorDestination.resourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ConnectionMonitorEndpoint.resourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ConnectionMonitorEndpoint.subscriptionId,
+  uuid,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.ConnectionMonitorSource.resourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.Hub.resourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.Hub.resourceType,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.CrossTenantScopes.tenantId,
+  uuid,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.NetworkManagerSecurityGroupItem.networkGroupId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.PerimeterBasedAccessRule.location,
+  azureLocation,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.PerimeterBasedAccessRule.perimeterGuid,
+  uuid,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.NetworkVirtualAppliancePropertiesFormat.privateIpAddress,
+  ipV4Address,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.PacketCaptureStorageLocation.storageId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Common.PrivateEndpointIPConfigurationProperties.privateIPAddress,
+  ipV4Address,
+  "csharp"
+);
+@@alternateType(
+  Common.ResourceNavigationLinkFormat.linkedResourceType,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@alternateType(
+  Common.ServiceAssociationLinkPropertiesFormat.linkedResourceType,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+@@alternateType(
+  Common.ServiceAssociationLinkPropertiesFormat.locations,
+  azureLocation[],
+  "csharp"
+);
+@@alternateType(
+  Common.ServiceEndpointPolicyDefinitionPropertiesFormat.serviceResources,
+  armResourceIdentifier[],
+  "csharp"
+);
+@@alternateType(
+  Common.ServiceEndpointPropertiesFormat.locations,
+  azureLocation[],
+  "csharp"
+);
+@@alternateType(
+  Common.TrafficAnalyticsConfigurationProperties.workspaceResourceId,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.VpnGatewayIpConfiguration.id,
+  armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.VpnServerConfigRadiusServerRootCertificate.publicCertData,
+  unknown,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.Network.VpnServerConfigVpnClientRootCertificate.publicCertData,
+  unknown,
+  "csharp"
+);
+
 @@alternateType(
   Microsoft.Network.ProxyResource.id,
   armResourceIdentifier,
