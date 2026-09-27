@@ -6,6 +6,7 @@ import "./StorageAppliance_models.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.NetworkCloud;
 /**
@@ -28,7 +29,14 @@ model StorageAppliance is Azure.ResourceManager.TrackedResource<
 > {
   ...StorageApplianceNameParameter;
   ...Azure.ResourceManager.Legacy.EntityTagProperty;
-  ...RequiredExtendedLocationProperty;
+
+  /**
+   * The extended location of the resource. This property is required when creating the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Legacy API has extended location in the resource envelope."
+  @madeOptional(Versions.v2026_10_01)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  extendedLocation?: Foundations.ExtendedLocation;
 }
 
 @armResourceOperations
