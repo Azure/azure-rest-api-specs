@@ -4456,8 +4456,14 @@ op replaceprivateDnsZoneGroupsList(
 );
 
 @@clientName(
-  Microsoft.Network.ConnectionMonitorType,
+  Microsoft.Network.EndpointType,
   "ConnectionMonitorEndpointType",
+  "csharp"
+);
+
+@@clientName(
+  Microsoft.Network.ConnectionMonitorEndpoint.type,
+  "endpointType",
   "csharp"
 );
 
