@@ -78,7 +78,10 @@ export function parseRefreshCliArguments(
 function shouldRunForOutcome(outcome: string): boolean {
   const normalized = outcome.trim().toLowerCase();
   return (
-    normalized === "created" || normalized === "existing_by_path" || normalized === "existing_by_pr"
+    normalized === "created" ||
+    normalized === "existing_by_id" ||
+    normalized === "existing_by_path" ||
+    normalized === "existing_by_pr"
   );
 }
 

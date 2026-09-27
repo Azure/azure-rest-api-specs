@@ -297,6 +297,13 @@ namespace Azure.AI.Projects;
   },
   "java"
 );
+@@alternateType(
+  OpenAI.MisalignmentErrorDetailsResource,
+  {
+    identity: "com.openai.models.ErrorObject.Misalignment",
+  },
+  "java"
+);
 
 // GrammarSyntax1 → expandable GrammarSyntax enum
 // The OpenAI TypeSpec names this enum "GrammarSyntax1"; replace with an open union
