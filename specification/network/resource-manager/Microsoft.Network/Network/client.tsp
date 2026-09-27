@@ -5344,6 +5344,13 @@ op replaceprivateDnsZoneGroupsList(
   "csharp"
 );
 
+// Keep the numeric bandwidth distinct from the released C# string compatibility property.
+@@clientName(
+  Microsoft.Network.VirtualNetworkAppliancePropertiesFormat.bandwidthInGbps,
+  "bandwidthGbps",
+  "csharp"
+);
+
 // Preserve the strong types shared by the released management and provisioning APIs.
 @@alternateType(
   Microsoft.Network.ApplicationGatewayCustomError.customErrorPageUrl,
