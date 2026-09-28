@@ -297,6 +297,11 @@ namespace ApplicationInsightsManagementClient;
 @@clientName(AnalyticsItems.ItemScope, "ComponentItemScope", "csharp");
 @@clientName(AnalyticsItems.ItemType, "ComponentItemType", "csharp");
 @@clientName(Components.IngestionMode, "ComponentIngestionMode", "csharp");
+@@clientName(
+  Components.AzureMonitorWorkspaceIngestionMode,
+  "ComponentAzureMonitorWorkspaceIngestionMode",
+  "csharp"
+);
 @@clientName(Components.FlowType, "ComponentFlowType", "csharp");
 @@clientName(Components.RequestSource, "ComponentRequestSource", "csharp");
 @@clientName(

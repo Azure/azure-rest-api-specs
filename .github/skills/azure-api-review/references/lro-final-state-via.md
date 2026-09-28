@@ -1,19 +1,83 @@
-<!-- Upstream alignment: 2026-08-15
+<!-- Upstream alignment: 2026-09-10
      This date is for maintainers of this file only -- it records when
      rules were last verified against upstream docs. No action is needed
      by spec authors or PR reviewers. -->
 
-# LRO Polling and `final-state-via` Guidance
+# ARM LRO Headers, Results, and `final-state-via`
 
-This reference clarifies the behavior of `x-ms-long-running-operation-options`
-and `final-state-via`, and provides guidance on when (and when not) to specify
-them.
+This reference explains how ARM long-running operations model initial response
+headers, logical results, polling, and final result retrieval. It also clarifies
+the generated `x-ms-long-running-operation-options` and `final-state-via`
+metadata.
 
 **Authoritative references:**
 
 - [Azure REST API Guidelines -- Long-Running Operations](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#long-running-operations--jobs)
 - [Azure Resource Provider Contract -- Async Operations](https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10/async-api-reference)
+- [TypeSpec Azure -- Customizing ARM Long-Running Operations](https://azure.github.io/typespec-azure/docs/howtos/arm/long-running-operations/)
 - [AutoRest LRO Extension docs](https://github.com/Azure/autorest/blob/master/docs/extensions/readme.md#x-ms-long-running-operation)
+
+---
+
+## TypeSpec Source of Truth
+
+Use an asynchronous `Azure.ResourceManager` operation template to model an ARM
+LRO. The templates provide the correct defaults and expose an `LroHeaders`
+template parameter when the service contract requires different initial
+response headers. Do not add raw OpenAPI extensions to reproduce generated
+`x-ms-long-running-operation` metadata.
+
+The available ARM header models are:
+
+| Header model                               | Initial response headers              |
+| ------------------------------------------ | ------------------------------------- |
+| `ArmAsyncOperationHeader<FinalResult = T>` | `Azure-AsyncOperation`                |
+| `ArmLroLocationHeader<FinalResult = T>`    | `Location`                            |
+| `ArmCombinedLroHeaders<FinalResult = T>`   | `Azure-AsyncOperation` and `Location` |
+
+When overriding `LroHeaders`, include
+`Azure.Core.Foundations.RetryAfterHeader` and set `FinalResult` to the logical
+result returned when the operation completes. The result is the resource or
+action response type when the operation produces one, and `void` when it does
+not. It is not automatically the status-monitor response type.
+
+### ARM Template Defaults
+
+| Operation                                                                | Default LRO headers       | Logical final result |
+| ------------------------------------------------------------------------ | ------------------------- | -------------------- |
+| PUT `ArmResourceCreateOrReplaceAsync` / `ArmResourceCreateOrUpdateAsync` | `ArmAsyncOperationHeader` | Resource type        |
+| PATCH `ArmResourcePatchAsync` / `ArmCustomPatchAsync`                    | `ArmLroLocationHeader`    | Resource type        |
+| DELETE `ArmResourceDeleteWithoutOkAsync`                                 | `ArmLroLocationHeader`    | `void`               |
+| POST `ArmResourceActionAsync`                                            | `ArmLroLocationHeader`    | Action response type |
+| POST `ArmResourceActionNoResponseContentAsync`                           | `ArmLroLocationHeader`    | `void`               |
+
+Use a non-default header model only when the service contract or ARM policy
+requires it. For example, an async POST action that returns both polling
+headers and a response model can override the template as follows:
+
+```tsp
+op startMigration is ArmResourceActionAsync<
+  MyResource,
+  MigrationRequest,
+  MigrationResponse,
+  LroHeaders = ArmCombinedLroHeaders<FinalResult = MigrationResponse> &
+    Azure.Core.Foundations.RetryAfterHeader
+>;
+```
+
+ARM header requirements still apply independently of library defaults. Starting
+January 2025, new RP namespace implementations must include
+`Azure-AsyncOperation` on async PUT responses. Greenfield RP namespaces must
+return both `Location` and `Azure-AsyncOperation` for async PATCH, DELETE, and
+POST operations; brownfield namespaces are strongly recommended to add
+`Azure-AsyncOperation`. Because the PATCH, DELETE, and POST templates default to
+`Location` only, greenfield APIs must override them with
+`ArmCombinedLroHeaders`. Validate the actual response contract before
+recommending an override.
+
+`@pollingOperation` and `@finalOperation` describe polling and final-operation
+links for Azure.Core or custom status-monitor patterns. They are not blanket
+replacements for ARM operation templates or their `LroHeaders` parameter.
 
 ---
 
@@ -95,18 +159,23 @@ Do not add `x-ms-long-running-operation-options` -- the default is correct.
 
 ### TypeSpec
 
-When `final-state-via` is needed:
+Use the matching ARM async operation template. When its default headers do not
+match the service contract, override `LroHeaders` and preserve the correct
+logical result. For example, a DELETE operation that uses
+`Azure-AsyncOperation` has no final response body:
 
 ```tsp
-@pollingOperation(GetOperationStatus)
-@finalLocation(MyResource)
-op myAction(...): AcceptedResponse;
+op delete is ArmResourceDeleteWithoutOkAsync<
+  MyResource,
+  LroHeaders = ArmAsyncOperationHeader<FinalResult = void> &
+    Azure.Core.Foundations.RetryAfterHeader
+>;
 ```
 
-When it is NOT needed (standard ARM resource operations):
+Do not override standard operations when their defaults already match the
+service and ARM policy:
 
 ```tsp
-// ARM operation templates handle LRO correctly by default
 createOrUpdate is ArmResourceCreateOrReplaceAsync<MyResource>;
 delete is ArmResourceDeleteWithoutOkAsync<MyResource>;
 ```

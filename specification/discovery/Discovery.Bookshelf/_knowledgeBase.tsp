@@ -225,6 +225,7 @@ model SearchResultItem {
   citations?: Citation[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Results of a knowledge base search.")
 @added(Versions.`2026-06-01`)
 model SearchResponse {
@@ -232,6 +233,7 @@ model SearchResponse {
   searchResults: SearchResultItem[];
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response indicating the KnowledgeBase operation.")
 @discriminator("operationType")
 model KnowledgeBaseOperationResponse {
@@ -249,6 +251,7 @@ model KnowledgeBaseOperationResponse {
   operationType: KnowledgeBaseOperationType;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response for indexing operations.")
 @added(Versions.`2026-06-01`)
 model KnowledgeBaseIndexingOperationResponse
@@ -260,6 +263,7 @@ model KnowledgeBaseIndexingOperationResponse
   indexingResult?: IndexingOperationResult;
 }
 
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Response for search operations.")
 @added(Versions.`2026-06-01`)
 model KnowledgeBaseSearchOperationResponse
