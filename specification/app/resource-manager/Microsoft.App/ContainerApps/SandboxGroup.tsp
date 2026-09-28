@@ -106,5 +106,8 @@ model SandboxGroupPatch {
 /** SandboxGroup resource specific properties for patch requests. */
 @added(Versions.v2026_07_01)
 model SandboxGroupPatchProperties {
-  ...PickProperties<SandboxGroupProperties, "environmentId" | "enableDetailedMetrics">;
+  ...PickProperties<
+    SandboxGroupProperties,
+    "environmentId" | "enableDetailedMetrics"
+  >;
 }
