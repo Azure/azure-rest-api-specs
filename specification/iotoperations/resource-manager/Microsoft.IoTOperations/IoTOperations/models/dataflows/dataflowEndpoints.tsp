@@ -133,15 +133,7 @@ model DataflowEndpointDataExplorer {
   @doc("Database name.")
   database: string;
 
-  @doc("Host of the Azure Data Explorer in the form of <cluster>.<region>.kusto.windows.net .")
-  @pattern(".+\\..+\\.kusto\\.windows\\.net")
-  @removed(Versions.`2026-10-01`)
-  @renamedFrom(Versions.`2026-10-01`, "host")
-  previousHost: string;
-
-  @doc("Host of the Azure Data Explorer in the form of <cluster>.<region>.kusto.windows.net (Azure Public) or <cluster>.<region>.kusto.usgovcloudapi.net (Azure US Government).")
-  @pattern(".*\\.*\\.kusto\\.(windows\\.net|usgovcloudapi\\.net)")
-  @added(Versions.`2026-10-01`)
+  @doc("Host of the Azure Data Explorer in the form of <cluster>.<region>.kusto.windows.net (Azure Public) or <cluster>.<region>.kusto.usgovcloudapi.net (Azure US Government). This will be validated by the regex `.*\\.*\\.kusto\\.(windows\\.net|usgovcloudapi\\.net)`.")
   host: string;
 
   @doc("Azure Data Explorer endpoint batching configuration.")
@@ -166,15 +158,7 @@ model DataflowEndpointDataLakeStorage {
   @doc("Authentication configuration. NOTE - only authentication property is allowed per entry.")
   authentication: DataflowEndpointDataLakeStorageAuthentication;
 
-  @doc("Host of the Azure Data Lake in the form of <account>.blob.core.windows.net .")
-  @pattern(".+\\.blob\\.core\\.windows\\.net")
-  @removed(Versions.`2026-10-01`)
-  @renamedFrom(Versions.`2026-10-01`, "host")
-  previousHost: string;
-
-  @doc("Host of the Azure Data Lake in the form of <account>.blob.core.windows.net (Azure Public) or <account>.blob.core.usgovcloudapi.net (Azure US Government).")
-  @pattern(".*\\.blob\\.core\\.(windows\\.net|usgovcloudapi\\.net)")
-  @added(Versions.`2026-10-01`)
+  @doc("Host of the Azure Data Lake in the form of <account>.blob.core.windows.net (Azure Public) or <account>.blob.core.usgovcloudapi.net (Azure US Government). This will be validated by the regex `.*\\.blob\\.core\\.(windows\\.net|usgovcloudapi\\.net)`.")
   host: string;
 
   @doc("Azure Data Lake endpoint batching configuration.")
@@ -211,15 +195,7 @@ model DataflowEndpointFabricOneLake {
   @doc("Type of location of the data in the workspace. Can be either tables or files.")
   oneLakePathType: DataflowEndpointFabricPathType;
 
-  @doc("Host of the Microsoft Fabric in the form of https://<host>.fabric.microsoft.com.")
-  @pattern(".+\\.fabric\\.microsoft\\.com")
-  @removed(Versions.`2026-10-01`)
-  @renamedFrom(Versions.`2026-10-01`, "host")
-  previousHost: string;
-
-  @doc("Host of the Microsoft Fabric in the form of https://<host>.fabric.microsoft.com (Azure Public) or https://<host>.fabric.microsoft.us (Azure US Government).")
-  @pattern(".*\\.fabric\\.microsoft\\.(com|us)")
-  @added(Versions.`2026-10-01`)
+  @doc("Host of the Microsoft Fabric in the form of https://<host>.fabric.microsoft.com (Azure Public) or https://<host>.fabric.microsoft.us (Azure US Government). This will be validated by the regex `.*\\.fabric\\.microsoft\\.(com|us)`.")
   host: string;
 
   @doc("Batching configuration.")
