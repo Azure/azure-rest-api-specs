@@ -62,20 +62,6 @@
         ],
         "parameters": [
           {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
-          },
-          {
             "name": "x-ms-version",
             "in": "header",
             "description": "Specifies the version of the operation to use for this request.",
@@ -117,7 +103,7 @@
             "minimum": 0
           },
           {
-            "name": "x-ms-range",
+            "name": "Range",
             "in": "header",
             "description": "Specifies the range of the blob to operate on.",
             "required": false,
@@ -387,8 +373,8 @@
                 "enum": [
                   "pending",
                   "success",
-                  "aborted",
-                  "failed"
+                  "failed",
+                  "aborted"
                 ],
                 "x-ms-enum": {
                   "name": "CopyStatus",
@@ -405,14 +391,14 @@
                       "description": "The copy operation succeeded."
                     },
                     {
-                      "name": "Aborted",
-                      "value": "aborted",
-                      "description": "The copy operation was aborted."
-                    },
-                    {
                       "name": "Failed",
                       "value": "failed",
                       "description": "The copy operation failed."
+                    },
+                    {
+                      "name": "Aborted",
+                      "value": "aborted",
+                      "description": "The copy operation was aborted."
                     }
                   ]
                 }
@@ -439,8 +425,8 @@
                 "description": "Indicates the immutability policy mode of the blob.",
                 "enum": [
                   "mutable",
-                  "unlocked",
-                  "locked"
+                  "locked",
+                  "unlocked"
                 ],
                 "x-ms-enum": {
                   "name": "ImmutabilityPolicyMode",
@@ -452,14 +438,14 @@
                       "description": "Response only. The immutability policy is mutable."
                     },
                     {
-                      "name": "Unlocked",
-                      "value": "unlocked",
-                      "description": "The immutability policy is unlocked."
-                    },
-                    {
                       "name": "Locked",
                       "value": "locked",
                       "description": "The immutability policy is locked."
+                    },
+                    {
+                      "name": "Unlocked",
+                      "value": "unlocked",
+                      "description": "The immutability policy is unlocked."
                     }
                   ]
                 }
@@ -548,22 +534,22 @@
                 "type": "string",
                 "description": "The lease status of the blob.",
                 "enum": [
-                  "locked",
-                  "unlocked"
+                  "unlocked",
+                  "locked"
                 ],
                 "x-ms-enum": {
                   "name": "LeaseStatus",
                   "modelAsString": false,
                   "values": [
                     {
-                      "name": "Locked",
-                      "value": "locked",
-                      "description": "The lease is locked."
-                    },
-                    {
                       "name": "Unlocked",
                       "value": "unlocked",
                       "description": "The lease is unlocked."
+                    },
+                    {
+                      "name": "Locked",
+                      "value": "locked",
+                      "description": "The lease is locked."
                     }
                   ]
                 }
@@ -770,8 +756,8 @@
                 "enum": [
                   "pending",
                   "success",
-                  "aborted",
-                  "failed"
+                  "failed",
+                  "aborted"
                 ],
                 "x-ms-enum": {
                   "name": "CopyStatus",
@@ -788,14 +774,14 @@
                       "description": "The copy operation succeeded."
                     },
                     {
-                      "name": "Aborted",
-                      "value": "aborted",
-                      "description": "The copy operation was aborted."
-                    },
-                    {
                       "name": "Failed",
                       "value": "failed",
                       "description": "The copy operation failed."
+                    },
+                    {
+                      "name": "Aborted",
+                      "value": "aborted",
+                      "description": "The copy operation was aborted."
                     }
                   ]
                 }
@@ -822,8 +808,8 @@
                 "description": "Indicates the immutability policy mode of the blob.",
                 "enum": [
                   "mutable",
-                  "unlocked",
-                  "locked"
+                  "locked",
+                  "unlocked"
                 ],
                 "x-ms-enum": {
                   "name": "ImmutabilityPolicyMode",
@@ -835,14 +821,14 @@
                       "description": "Response only. The immutability policy is mutable."
                     },
                     {
-                      "name": "Unlocked",
-                      "value": "unlocked",
-                      "description": "The immutability policy is unlocked."
-                    },
-                    {
                       "name": "Locked",
                       "value": "locked",
                       "description": "The immutability policy is locked."
+                    },
+                    {
+                      "name": "Unlocked",
+                      "value": "unlocked",
+                      "description": "The immutability policy is unlocked."
                     }
                   ]
                 }
@@ -931,22 +917,22 @@
                 "type": "string",
                 "description": "The lease status of the blob.",
                 "enum": [
-                  "locked",
-                  "unlocked"
+                  "unlocked",
+                  "locked"
                 ],
                 "x-ms-enum": {
                   "name": "LeaseStatus",
                   "modelAsString": false,
                   "values": [
                     {
-                      "name": "Locked",
-                      "value": "locked",
-                      "description": "The lease is locked."
-                    },
-                    {
                       "name": "Unlocked",
                       "value": "unlocked",
                       "description": "The lease is unlocked."
+                    },
+                    {
+                      "name": "Locked",
+                      "value": "locked",
+                      "description": "The lease is locked."
                     }
                   ]
                 }
@@ -1047,20 +1033,6 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
           },
           {
             "name": "timeout",
@@ -1358,8 +1330,8 @@
             "type": "string",
             "enum": [
               "mutable",
-              "unlocked",
-              "locked"
+              "locked",
+              "unlocked"
             ],
             "x-ms-enum": {
               "name": "ImmutabilityPolicyMode",
@@ -1371,14 +1343,14 @@
                   "description": "Response only. The immutability policy is mutable."
                 },
                 {
-                  "name": "Unlocked",
-                  "value": "unlocked",
-                  "description": "The immutability policy is unlocked."
-                },
-                {
                   "name": "Locked",
                   "value": "locked",
                   "description": "The immutability policy is locked."
+                },
+                {
+                  "name": "Unlocked",
+                  "value": "unlocked",
+                  "description": "The immutability policy is unlocked."
                 }
               ]
             },
@@ -1426,8 +1398,8 @@
                 "enum": [
                   "pending",
                   "success",
-                  "aborted",
-                  "failed"
+                  "failed",
+                  "aborted"
                 ],
                 "x-ms-enum": {
                   "name": "CopyStatus",
@@ -1444,14 +1416,14 @@
                       "description": "The copy operation succeeded."
                     },
                     {
-                      "name": "Aborted",
-                      "value": "aborted",
-                      "description": "The copy operation was aborted."
-                    },
-                    {
                       "name": "Failed",
                       "value": "failed",
                       "description": "The copy operation failed."
+                    },
+                    {
+                      "name": "Aborted",
+                      "value": "aborted",
+                      "description": "The copy operation was aborted."
                     }
                   ]
                 }
@@ -1516,20 +1488,6 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
-          },
-          {
             "name": "snapshot",
             "in": "query",
             "description": "Specifies the snapshot of the blob.",
@@ -1568,22 +1526,22 @@
             "required": false,
             "type": "string",
             "enum": [
-              "include",
-              "only"
+              "only",
+              "include"
             ],
             "x-ms-enum": {
               "name": "DeleteSnapshotsOptionType",
               "modelAsString": false,
               "values": [
                 {
-                  "name": "Include",
-                  "value": "include",
-                  "description": "Delete the blob and snapshots."
-                },
-                {
                   "name": "Only",
                   "value": "only",
                   "description": "Only delete the snapshots."
+                },
+                {
+                  "name": "Include",
+                  "value": "include",
+                  "description": "Delete the blob and snapshots."
                 }
               ]
             },
@@ -1740,20 +1698,6 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
           },
           {
             "name": "snapshot",
@@ -2045,8 +1989,8 @@
                 "enum": [
                   "pending",
                   "success",
-                  "aborted",
-                  "failed"
+                  "failed",
+                  "aborted"
                 ],
                 "x-ms-enum": {
                   "name": "CopyStatus",
@@ -2063,14 +2007,14 @@
                       "description": "The copy operation succeeded."
                     },
                     {
-                      "name": "Aborted",
-                      "value": "aborted",
-                      "description": "The copy operation was aborted."
-                    },
-                    {
                       "name": "Failed",
                       "value": "failed",
                       "description": "The copy operation failed."
+                    },
+                    {
+                      "name": "Aborted",
+                      "value": "aborted",
+                      "description": "The copy operation was aborted."
                     }
                   ]
                 }
@@ -2102,8 +2046,8 @@
                 "description": "Indicates the immutability policy mode of the blob.",
                 "enum": [
                   "mutable",
-                  "unlocked",
-                  "locked"
+                  "locked",
+                  "unlocked"
                 ],
                 "x-ms-enum": {
                   "name": "ImmutabilityPolicyMode",
@@ -2115,14 +2059,14 @@
                       "description": "Response only. The immutability policy is mutable."
                     },
                     {
-                      "name": "Unlocked",
-                      "value": "unlocked",
-                      "description": "The immutability policy is unlocked."
-                    },
-                    {
                       "name": "Locked",
                       "value": "locked",
                       "description": "The immutability policy is locked."
+                    },
+                    {
+                      "name": "Unlocked",
+                      "value": "unlocked",
+                      "description": "The immutability policy is unlocked."
                     }
                   ]
                 }
@@ -2215,22 +2159,22 @@
                 "type": "string",
                 "description": "The lease status of the blob.",
                 "enum": [
-                  "locked",
-                  "unlocked"
+                  "unlocked",
+                  "locked"
                 ],
                 "x-ms-enum": {
                   "name": "LeaseStatus",
                   "modelAsString": false,
                   "values": [
                     {
-                      "name": "Locked",
-                      "value": "locked",
-                      "description": "The lease is locked."
-                    },
-                    {
                       "name": "Unlocked",
                       "value": "unlocked",
                       "description": "The lease is unlocked."
+                    },
+                    {
+                      "name": "Locked",
+                      "value": "locked",
+                      "description": "The lease is locked."
                     }
                   ]
                 }
@@ -2353,20 +2297,6 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
           },
           {
             "name": "timeout",
@@ -2660,20 +2590,6 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
           },
           {
             "name": "x-ms-copy-source",
@@ -3308,20 +3224,6 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
-          },
-          {
             "name": "blockid",
             "in": "query",
             "description": "A Base64 value that identifies the block. Prior to encoding, the string must be less than or equal to 64 bytes in size. For a given blob, the length of the value specified for the blockid parameter must be the same size for each block.",
@@ -3544,20 +3446,6 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
           },
           {
             "name": "blockid",
@@ -3869,20 +3757,6 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
           },
           {
             "name": "timeout",
@@ -4207,8 +4081,8 @@
             "type": "string",
             "enum": [
               "mutable",
-              "unlocked",
-              "locked"
+              "locked",
+              "unlocked"
             ],
             "x-ms-enum": {
               "name": "ImmutabilityPolicyMode",
@@ -4220,14 +4094,14 @@
                   "description": "Response only. The immutability policy is mutable."
                 },
                 {
-                  "name": "Unlocked",
-                  "value": "unlocked",
-                  "description": "The immutability policy is unlocked."
-                },
-                {
                   "name": "Locked",
                   "value": "locked",
                   "description": "The immutability policy is locked."
+                },
+                {
+                  "name": "Unlocked",
+                  "value": "unlocked",
+                  "description": "The immutability policy is unlocked."
                 }
               ]
             },
@@ -4368,7 +4242,7 @@
             "name": "blocklisttype",
             "in": "query",
             "description": "Specifies whether to return the list of committed blocks, the list of uncommitted blocks, or both lists together.",
-            "required": false,
+            "required": true,
             "type": "string",
             "enum": [
               "committed",
@@ -4513,20 +4387,6 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
-          },
-          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\\\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\\\">Setting Timeouts for Blob Service Operations.</a>",
@@ -4636,20 +4496,6 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
           },
           {
             "name": "timeout",
@@ -4791,20 +4637,6 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
-          },
-          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\\\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\\\">Setting Timeouts for Blob Service Operations.</a>",
@@ -4839,8 +4671,8 @@
             "type": "string",
             "enum": [
               "mutable",
-              "unlocked",
-              "locked"
+              "locked",
+              "unlocked"
             ],
             "x-ms-enum": {
               "name": "ImmutabilityPolicyMode",
@@ -4852,14 +4684,14 @@
                   "description": "Response only. The immutability policy is mutable."
                 },
                 {
-                  "name": "Unlocked",
-                  "value": "unlocked",
-                  "description": "The immutability policy is unlocked."
-                },
-                {
                   "name": "Locked",
                   "value": "locked",
                   "description": "The immutability policy is locked."
+                },
+                {
+                  "name": "Unlocked",
+                  "value": "unlocked",
+                  "description": "The immutability policy is unlocked."
                 }
               ]
             },
@@ -4900,8 +4732,8 @@
                 "description": "Indicates the immutability policy mode of the blob.",
                 "enum": [
                   "mutable",
-                  "unlocked",
-                  "locked"
+                  "locked",
+                  "unlocked"
                 ],
                 "x-ms-enum": {
                   "name": "ImmutabilityPolicyMode",
@@ -4913,14 +4745,14 @@
                       "description": "Response only. The immutability policy is mutable."
                     },
                     {
-                      "name": "Unlocked",
-                      "value": "unlocked",
-                      "description": "The immutability policy is unlocked."
-                    },
-                    {
                       "name": "Locked",
                       "value": "locked",
                       "description": "The immutability policy is locked."
+                    },
+                    {
+                      "name": "Unlocked",
+                      "value": "unlocked",
+                      "description": "The immutability policy is unlocked."
                     }
                   ]
                 }
@@ -4986,20 +4818,6 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
           },
           {
             "name": "timeout",
@@ -5098,20 +4916,6 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
-          },
-          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\\\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\\\">Setting Timeouts for Blob Service Operations.</a>",
@@ -5204,8 +5008,8 @@
                 "enum": [
                   "pending",
                   "success",
-                  "aborted",
-                  "failed"
+                  "failed",
+                  "aborted"
                 ],
                 "x-ms-enum": {
                   "name": "CopyStatus",
@@ -5222,14 +5026,14 @@
                       "description": "The copy operation succeeded."
                     },
                     {
-                      "name": "Aborted",
-                      "value": "aborted",
-                      "description": "The copy operation was aborted."
-                    },
-                    {
                       "name": "Failed",
                       "value": "failed",
                       "description": "The copy operation failed."
+                    },
+                    {
+                      "name": "Aborted",
+                      "value": "aborted",
+                      "description": "The copy operation was aborted."
                     }
                   ]
                 }
@@ -5290,20 +5094,6 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
           },
           {
             "name": "timeout",
@@ -5473,20 +5263,6 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
-          },
-          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\\\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\\\">Setting Timeouts for Blob Service Operations.</a>",
@@ -5645,20 +5421,6 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
           },
           {
             "name": "timeout",
@@ -5827,20 +5589,6 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
-          },
-          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\\\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\\\">Setting Timeouts for Blob Service Operations.</a>",
@@ -5993,20 +5741,6 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
           },
           {
             "name": "timeout",
@@ -6167,20 +5901,6 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
-          },
-          {
             "name": "x-ms-lease-duration",
             "in": "header",
             "description": "Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds.",
@@ -6324,20 +6044,6 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
-          },
-          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\\\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\\\">Setting Timeouts for Blob Service Operations.</a>",
@@ -6472,20 +6178,6 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
           },
           {
             "name": "x-ms-lease-id",
@@ -6630,20 +6322,6 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
-          },
-          {
             "name": "x-ms-lease-id",
             "in": "header",
             "description": "A lease ID for the resource. The resource must have an active lease and the lease ID must match.",
@@ -6772,20 +6450,6 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
           },
           {
             "name": "x-ms-lease-id",
@@ -6920,20 +6584,6 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
           },
           {
             "name": "timeout",
@@ -7188,20 +6838,6 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
-          },
-          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\\\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\\\">Setting Timeouts for Blob Service Operations.</a>",
@@ -7415,20 +7051,6 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
-          },
-          {
             "name": "Content-Length",
             "in": "header",
             "description": "The length of the request.",
@@ -7465,7 +7087,7 @@
             "minimum": 0
           },
           {
-            "name": "x-ms-range",
+            "name": "Range",
             "in": "header",
             "description": "Specifies the range of the blob to operate on.",
             "required": true,
@@ -7749,20 +7371,6 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
-          },
-          {
             "name": "Content-Length",
             "in": "header",
             "description": "Value must be 0 when x-ms-page-write is clear.",
@@ -7783,7 +7391,7 @@
             "minimum": 0
           },
           {
-            "name": "x-ms-range",
+            "name": "Range",
             "in": "header",
             "description": "Specifies the range of the blob to operate on.",
             "required": true,
@@ -7966,18 +7574,10 @@
                 "format": "byte",
                 "description": "The CRC64 hash of the content."
               },
-              "x-ms-encryption-key-sha256": {
-                "type": "string",
-                "description": "The SHA-256 hash of the provided encryption key."
-              },
               "x-ms-request-id": {
                 "type": "string",
                 "format": "uuid",
                 "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              },
-              "x-ms-request-server-encrypted": {
-                "type": "boolean",
-                "description": "Indicates whether the contents of the request are successfully encrypted."
               },
               "x-ms-version": {
                 "type": "string",
@@ -8032,20 +7632,6 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
-          },
-          {
             "name": "x-ms-copy-source",
             "in": "header",
             "description": "Specifies the URL of the source.",
@@ -8098,7 +7684,7 @@
             "minimum": 0
           },
           {
-            "name": "x-ms-range",
+            "name": "Range",
             "in": "header",
             "description": "Specifies the range of the blob to operate on.",
             "required": true,
@@ -8469,7 +8055,7 @@
             "minimum": 0
           },
           {
-            "name": "x-ms-range",
+            "name": "Range",
             "in": "header",
             "description": "Specifies the range of the blob to operate on.",
             "required": false,
@@ -8663,7 +8249,7 @@
             "x-ms-client-name": "prevSnapshotUrl"
           },
           {
-            "name": "x-ms-range",
+            "name": "Range",
             "in": "header",
             "description": "Specifies the range of the blob to operate on.",
             "required": false,
@@ -8824,20 +8410,6 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
           },
           {
             "name": "timeout",
@@ -9032,20 +8604,6 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
           },
           {
             "name": "timeout",
@@ -9248,20 +8806,6 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
-          },
-          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\\\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\\\">Setting Timeouts for Blob Service Operations.</a>",
@@ -9327,14 +8871,19 @@
             "required": true,
             "type": "string",
             "enum": [
+              "increment",
               "max",
-              "update",
-              "increment"
+              "update"
             ],
             "x-ms-enum": {
               "name": "SequenceNumberActionType",
               "modelAsString": false,
               "values": [
+                {
+                  "name": "Increment",
+                  "value": "increment",
+                  "description": "Increment the sequence number."
+                },
                 {
                   "name": "Max",
                   "value": "max",
@@ -9344,11 +8893,6 @@
                   "name": "Update",
                   "value": "update",
                   "description": "Update the sequence number."
-                },
-                {
-                  "name": "Increment",
-                  "value": "increment",
-                  "description": "Increment the sequence number."
                 }
               ]
             },
@@ -9453,20 +8997,6 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
           },
           {
             "name": "snapshot",
@@ -9715,8 +9245,8 @@
                 "enum": [
                   "pending",
                   "success",
-                  "aborted",
-                  "failed"
+                  "failed",
+                  "aborted"
                 ],
                 "x-ms-enum": {
                   "name": "CopyStatus",
@@ -9733,14 +9263,14 @@
                       "description": "The copy operation succeeded."
                     },
                     {
-                      "name": "Aborted",
-                      "value": "aborted",
-                      "description": "The copy operation was aborted."
-                    },
-                    {
                       "name": "Failed",
                       "value": "failed",
                       "description": "The copy operation failed."
+                    },
+                    {
+                      "name": "Aborted",
+                      "value": "aborted",
+                      "description": "The copy operation was aborted."
                     }
                   ]
                 }
@@ -9827,22 +9357,22 @@
                 "type": "string",
                 "description": "The lease status of the blob.",
                 "enum": [
-                  "locked",
-                  "unlocked"
+                  "unlocked",
+                  "locked"
                 ],
                 "x-ms-enum": {
                   "name": "LeaseStatus",
                   "modelAsString": false,
                   "values": [
                     {
-                      "name": "Locked",
-                      "value": "locked",
-                      "description": "The lease is locked."
-                    },
-                    {
                       "name": "Unlocked",
                       "value": "unlocked",
                       "description": "The lease is unlocked."
+                    },
+                    {
+                      "name": "Locked",
+                      "value": "locked",
+                      "description": "The lease is locked."
                     }
                   ]
                 }
@@ -9998,8 +9528,8 @@
                 "enum": [
                   "pending",
                   "success",
-                  "aborted",
-                  "failed"
+                  "failed",
+                  "aborted"
                 ],
                 "x-ms-enum": {
                   "name": "CopyStatus",
@@ -10016,14 +9546,14 @@
                       "description": "The copy operation succeeded."
                     },
                     {
-                      "name": "Aborted",
-                      "value": "aborted",
-                      "description": "The copy operation was aborted."
-                    },
-                    {
                       "name": "Failed",
                       "value": "failed",
                       "description": "The copy operation failed."
+                    },
+                    {
+                      "name": "Aborted",
+                      "value": "aborted",
+                      "description": "The copy operation was aborted."
                     }
                   ]
                 }
@@ -10110,22 +9640,22 @@
                 "type": "string",
                 "description": "The lease status of the blob.",
                 "enum": [
-                  "locked",
-                  "unlocked"
+                  "unlocked",
+                  "locked"
                 ],
                 "x-ms-enum": {
                   "name": "LeaseStatus",
                   "modelAsString": false,
                   "values": [
                     {
-                      "name": "Locked",
-                      "value": "locked",
-                      "description": "The lease is locked."
-                    },
-                    {
                       "name": "Unlocked",
                       "value": "unlocked",
                       "description": "The lease is unlocked."
+                    },
+                    {
+                      "name": "Locked",
+                      "value": "locked",
+                      "description": "The lease is locked."
                     }
                   ]
                 }
@@ -10194,20 +9724,6 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
           },
           {
             "name": "timeout",
@@ -10353,20 +9869,6 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
           },
           {
             "name": "timeout",
@@ -10724,20 +10226,6 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
-          },
-          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\\\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\\\">Setting Timeouts for Blob Service Operations.</a>",
@@ -10902,20 +10390,6 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
           },
           {
             "name": "snapshot",
@@ -11200,20 +10674,6 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
-          },
-          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\\\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\\\">Setting Timeouts for Blob Service Operations.</a>",
@@ -11293,20 +10753,6 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
           },
           {
             "name": "timeout",
@@ -11496,20 +10942,6 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
-          },
-          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\\\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\\\">Setting Timeouts for Blob Service Operations.</a>",
@@ -11697,20 +11129,6 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
-          },
-          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\\\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\\\">Setting Timeouts for Blob Service Operations.</a>",
@@ -11853,20 +11271,6 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
-          },
-          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\\\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\\\">Setting Timeouts for Blob Service Operations.</a>",
@@ -11972,20 +11376,6 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
           },
           {
             "name": "timeout",
@@ -12142,22 +11532,22 @@
                 "type": "string",
                 "description": "The lease status of the blob.",
                 "enum": [
-                  "locked",
-                  "unlocked"
+                  "unlocked",
+                  "locked"
                 ],
                 "x-ms-enum": {
                   "name": "LeaseStatus",
                   "modelAsString": false,
                   "values": [
                     {
-                      "name": "Locked",
-                      "value": "locked",
-                      "description": "The lease is locked."
-                    },
-                    {
                       "name": "Unlocked",
                       "value": "unlocked",
                       "description": "The lease is unlocked."
+                    },
+                    {
+                      "name": "Locked",
+                      "value": "locked",
+                      "description": "The lease is locked."
                     }
                   ]
                 }
@@ -12347,20 +11737,6 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
           },
           {
             "name": "timeout",
@@ -13144,20 +12520,6 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
-          },
-          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\\\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\\\">Setting Timeouts for Blob Service Operations.</a>",
@@ -13273,20 +12635,6 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
-          },
-          {
             "name": "x-ms-source-container-name",
             "in": "header",
             "description": "Specifies the name of the container to rename.",
@@ -13384,20 +12732,6 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
-          },
-          {
             "name": "x-ms-deleted-container-name",
             "in": "header",
             "description": "Specifies the name of the deleted container to restore.",
@@ -13493,20 +12827,6 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
           },
           {
             "name": "timeout",
@@ -13860,20 +13180,6 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
-          },
-          {
             "name": "timeout",
             "in": "query",
             "description": "The timeout parameter is expressed in seconds. For more information, see <a href=\\\"https://docs.microsoft.com/en-us/rest/api/storageservices/fileservices/setting-timeouts-for-blob-service-operations\\\">Setting Timeouts for Blob Service Operations.</a>",
@@ -14134,8 +13440,8 @@
             "type": "string",
             "enum": [
               "mutable",
-              "unlocked",
-              "locked"
+              "locked",
+              "unlocked"
             ],
             "x-ms-enum": {
               "name": "ImmutabilityPolicyMode",
@@ -14147,14 +13453,14 @@
                   "description": "Response only. The immutability policy is mutable."
                 },
                 {
-                  "name": "Unlocked",
-                  "value": "unlocked",
-                  "description": "The immutability policy is unlocked."
-                },
-                {
                   "name": "Locked",
                   "value": "locked",
                   "description": "The immutability policy is locked."
+                },
+                {
+                  "name": "Unlocked",
+                  "value": "unlocked",
+                  "description": "The immutability policy is unlocked."
                 }
               ]
             },
@@ -14362,20 +13668,6 @@
             "x-ms-client-name": "clientRequestId"
           },
           {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
-          },
-          {
             "name": "x-ms-meta",
             "in": "header",
             "description": "The metadata headers.",
@@ -14562,8 +13854,8 @@
             "type": "string",
             "enum": [
               "mutable",
-              "unlocked",
-              "locked"
+              "locked",
+              "unlocked"
             ],
             "x-ms-enum": {
               "name": "ImmutabilityPolicyMode",
@@ -14575,14 +13867,14 @@
                   "description": "Response only. The immutability policy is mutable."
                 },
                 {
-                  "name": "Unlocked",
-                  "value": "unlocked",
-                  "description": "The immutability policy is unlocked."
-                },
-                {
                   "name": "Locked",
                   "value": "locked",
                   "description": "The immutability policy is locked."
+                },
+                {
+                  "name": "Unlocked",
+                  "value": "unlocked",
+                  "description": "The immutability policy is unlocked."
                 }
               ]
             },
@@ -14725,20 +14017,6 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
           },
           {
             "name": "x-ms-meta",
@@ -15063,8 +14341,8 @@
             "type": "string",
             "enum": [
               "mutable",
-              "unlocked",
-              "locked"
+              "locked",
+              "unlocked"
             ],
             "x-ms-enum": {
               "name": "ImmutabilityPolicyMode",
@@ -15076,14 +14354,14 @@
                   "description": "Response only. The immutability policy is mutable."
                 },
                 {
-                  "name": "Unlocked",
-                  "value": "unlocked",
-                  "description": "The immutability policy is unlocked."
-                },
-                {
                   "name": "Locked",
                   "value": "locked",
                   "description": "The immutability policy is locked."
+                },
+                {
+                  "name": "Unlocked",
+                  "value": "unlocked",
+                  "description": "The immutability policy is unlocked."
                 }
               ]
             },
@@ -15257,20 +14535,6 @@
             "type": "string",
             "format": "uuid",
             "x-ms-client-name": "clientRequestId"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "Accept header",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
           },
           {
             "name": "x-ms-meta",
@@ -16979,8 +16243,8 @@
       "enum": [
         "pending",
         "success",
-        "aborted",
-        "failed"
+        "failed",
+        "aborted"
       ],
       "x-ms-enum": {
         "name": "CopyStatus",
@@ -16997,14 +16261,14 @@
             "description": "The copy operation succeeded."
           },
           {
-            "name": "Aborted",
-            "value": "aborted",
-            "description": "The copy operation was aborted."
-          },
-          {
             "name": "Failed",
             "value": "failed",
             "description": "The copy operation failed."
+          },
+          {
+            "name": "Aborted",
+            "value": "aborted",
+            "description": "The copy operation was aborted."
           }
         ]
       }
@@ -17053,22 +16317,22 @@
       "type": "string",
       "description": "Specifies the delete behavior of blob snapshots.",
       "enum": [
-        "include",
-        "only"
+        "only",
+        "include"
       ],
       "x-ms-enum": {
         "name": "DeleteSnapshotsOptionType",
         "modelAsString": false,
         "values": [
           {
-            "name": "Include",
-            "value": "include",
-            "description": "Delete the blob and snapshots."
-          },
-          {
             "name": "Only",
             "value": "only",
             "description": "Only delete the snapshots."
+          },
+          {
+            "name": "Include",
+            "value": "include",
+            "description": "Delete the blob and snapshots."
           }
         ]
       }
@@ -17333,8 +16597,8 @@
       "description": "The immutability policy mode.",
       "enum": [
         "mutable",
-        "unlocked",
-        "locked"
+        "locked",
+        "unlocked"
       ],
       "x-ms-enum": {
         "name": "ImmutabilityPolicyMode",
@@ -17346,14 +16610,14 @@
             "description": "Response only. The immutability policy is mutable."
           },
           {
-            "name": "Unlocked",
-            "value": "unlocked",
-            "description": "The immutability policy is unlocked."
-          },
-          {
             "name": "Locked",
             "value": "locked",
             "description": "The immutability policy is locked."
+          },
+          {
+            "name": "Unlocked",
+            "value": "unlocked",
+            "description": "The immutability policy is unlocked."
           }
         ]
       }
@@ -17466,22 +16730,22 @@
       "type": "string",
       "description": "The lease status.",
       "enum": [
-        "locked",
-        "unlocked"
+        "unlocked",
+        "locked"
       ],
       "x-ms-enum": {
         "name": "LeaseStatus",
         "modelAsString": false,
         "values": [
           {
-            "name": "Locked",
-            "value": "locked",
-            "description": "The lease is locked."
-          },
-          {
             "name": "Unlocked",
             "value": "unlocked",
             "description": "The lease is unlocked."
+          },
+          {
+            "name": "Locked",
+            "value": "locked",
+            "description": "The lease is locked."
           }
         ]
       }
@@ -18191,14 +17455,19 @@
       "type": "string",
       "description": "The sequence number actions.",
       "enum": [
+        "increment",
         "max",
-        "update",
-        "increment"
+        "update"
       ],
       "x-ms-enum": {
         "name": "SequenceNumberActionType",
         "modelAsString": false,
         "values": [
+          {
+            "name": "Increment",
+            "value": "increment",
+            "description": "Increment the sequence number."
+          },
           {
             "name": "Max",
             "value": "max",
@@ -18208,11 +17477,6 @@
             "name": "Update",
             "value": "update",
             "description": "Update the sequence number."
-          },
-          {
-            "name": "Increment",
-            "value": "increment",
-            "description": "Increment the sequence number."
           }
         ]
       }
