@@ -2728,6 +2728,26 @@ union ProvisioningStateUnion {
   "csharp"
 );
 @@clientName(
+  Microsoft.Network.ApplicationGatewaySslProtocol.TLSv1_0,
+  Azure.ClientGenerator.Core.exact("Tls1_0"),
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewaySslProtocol.TLSv1_1,
+  Azure.ClientGenerator.Core.exact("Tls1_1"),
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewaySslProtocol.TLSv1_2,
+  Azure.ClientGenerator.Core.exact("Tls1_2"),
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewaySslProtocol.TLSv1_3,
+  Azure.ClientGenerator.Core.exact("Tls1_3"),
+  "csharp"
+);
+@@clientName(
   Microsoft.Network.ApplicationGatewayTierTypes.WAF,
   Azure.ClientGenerator.Core.exact("Waf"),
   "csharp"
