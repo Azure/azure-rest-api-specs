@@ -92,10 +92,12 @@ independent 100% gate. The two integration-only packages retain their standalone
 coverage-free commands. `typespec-migration-validation` has no Vitest project
 and participates only in the root build.
 
-The full test run requires PowerShell (`pwsh`) and the specification fixtures used
-by the suites, including common-types, Contoso, Storage, and Compute. Sparse
-checkouts must include those fixtures. Resolve test fixture paths from
-`import.meta.dirname`, not the invocation working directory, to support both modes.
+The full test run requires PowerShell (`pwsh`). The conversion smoke test uses a
+self-contained Swagger fixture under `eng/tools/tsp-client-tests/test/fixtures/`.
+CI's sparse checkout only needs `.github` and `eng`, along with the root configuration
+files. The ARM resource-provider tests retain their existing behavior when
+`specification/` is absent. Resolve test fixture paths from `import.meta.dirname`,
+not the invocation working directory, to support both modes.
 Mirrored `eng/common` packages and arbitrary specification projects are not part
 of the tooling workspace.
 
@@ -107,21 +109,6 @@ also covered by the GitHub package build.
 and runs the Vitest workspace on Ubuntu and Windows with Node 24.
 New tools do not need their own workflows. `github-test.yaml` separately verifies
 production-only module imports, workflow YAML, and compiled agentic workflow locks.
-
-## TypeSpec validation cleanup
-
-`eng/scripts/TypeSpec-Validation.ps1 -GitClean` restores worktree changes from the
-Git index and removes non-ignored generated output between projects. Discovery
-covers the whole repository, including output outside the current project. Staged
-changes and ignored dependencies are preserved; clean checkouts skip restore and
-clean entirely. Compiler-generated-output validation still runs before cleanup.
-
-Cleanup stops the shard on Git errors, conflicts, changed submodules, intent-to-add
-entries, changed `.gitignore` files, or tracked files replaced by directories.
-Nested repositories are not forcibly deleted: if Git skips one, cleanup reports
-the remaining untracked path and stops rather than continuing with a contaminated
-checkout.
-
 
 ## Linting and formatting
 

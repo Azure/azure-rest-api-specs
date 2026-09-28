@@ -111,9 +111,3 @@ function* pathBatches(paths: string[]): Generator<string[]> {
   }
   if (batch.length > 0) yield batch;
 }
-
-if (import.meta.main) {
-  const repoRoot = process.argv[2];
-  if (!repoRoot) throw new Error("Usage: node git-cleanup.ts <repository-root>");
-  await cleanWorktree(repoRoot);
-}

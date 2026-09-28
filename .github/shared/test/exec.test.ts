@@ -168,6 +168,13 @@ describe("execNodeBin", () => {
       execNodeBin("@test/cli", ["cli"], { cwd: root, maxBuffer: 1 }),
     ).rejects.toMatchObject({ code: "ERR_CHILD_PROCESS_STDIO_MAXBUFFER" });
   });
+
+  it("terminates the binary when the caller's timeout expires", async () => {
+    await installCli(root, "cli.cjs", "setInterval(() => {}, 1000)");
+    await expect(
+      execNodeBin("@test/cli", ["cli"], { cwd: root, timeout: 100 }),
+    ).rejects.toMatchObject({ killed: true });
+  });
 });
 
 describe("execNpm", () => {

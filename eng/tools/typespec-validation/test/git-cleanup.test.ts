@@ -1,7 +1,6 @@
 import * as exec from "@azure-tools/specs-shared/exec";
-import { execFileSync, spawnSync } from "node:child_process";
+import { execFileSync } from "node:child_process";
 import {
-  copyFileSync,
   existsSync,
   mkdirSync,
   mkdtempSync,
@@ -11,8 +10,7 @@ import {
   writeFileSync,
 } from "node:fs";
 import { tmpdir } from "node:os";
-import { dirname, join, resolve } from "node:path";
-import { pathToFileURL } from "node:url";
+import { dirname, join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { z } from "zod";
 import { cleanWorktree } from "../src/git-cleanup.ts";
@@ -70,32 +68,6 @@ describe("cleanWorktree", () => {
   it("runs only one status query for a clean checkout", async () => {
     await cleanWorktree(repo);
     expect(commands()).toEqual(["status"]);
-  });
-
-  it("runs the Node entrypoint against the supplied repository, independently of cwd", () => {
-    write("project/source.txt", "modified");
-    write("outside/generated.txt");
-    const result = spawnSync(
-      process.execPath,
-      [resolve(import.meta.dirname, "../src/git-cleanup.ts"), repo],
-      { cwd: tmpdir(), encoding: "utf8" },
-    );
-
-    expect(result.stderr).toBe("");
-    expect(result.status).toBe(0);
-    expect(result.stdout).toContain('TSV cleanup {"command":"status"');
-    expect(status()).toBe("");
-  });
-
-  it("requires an explicit repository for the Node entrypoint", () => {
-    const result = spawnSync(
-      process.execPath,
-      [resolve(import.meta.dirname, "../src/git-cleanup.ts")],
-      { cwd: repo, encoding: "utf8" },
-    );
-
-    expect(result.status).not.toBe(0);
-    expect(result.stderr).toContain("Usage: node git-cleanup.ts <repository-root>");
   });
 
   it("restores modified and deleted files and cleans output across the repository", async () => {
@@ -350,108 +322,5 @@ describe("cleanWorktree", () => {
 
     expect(commands().at(-1)).toBe(command);
     expect(console.log).toHaveBeenLastCalledWith(expect.stringContaining('"success":false'));
-  });
-});
-
-describe("PowerShell validation cleanup", () => {
-  beforeEach(() => {
-    const sourceRoot = resolve(import.meta.dirname, "../../../..");
-    write("eng/scripts/Suppressions-Functions.ps1", "");
-    write("eng/scripts/Array-Functions.ps1", "");
-    write("eng/scripts/Get-TypeSpec-Folders.ps1", 'return @(@("first", "second"), $false)');
-    write(
-      "eng/common/scripts/logging.ps1",
-      `
-function LogGroupStart($message) { Write-Host "Group: $message" }
-function LogGroupEnd { Write-Host "End group" }
-function LogInfo($message) { Write-Host $message }
-function LogError($message) { Write-Host "Error: $message" }
-function LogJobFailure { Write-Host "Job failed" }
-`,
-    );
-    copyFileSync(
-      join(sourceRoot, "eng/scripts/TypeSpec-Validation.ps1"),
-      join(repo, "eng/scripts/TypeSpec-Validation.ps1"),
-    );
-    const cleanupUrl = pathToFileURL(resolve(import.meta.dirname, "../src/git-cleanup.ts")).href;
-    write(
-      "eng/tools/typespec-validation/src/git-cleanup.ts",
-      `
-const { cleanWorktree } = await import(${JSON.stringify(cleanupUrl)});
-await cleanWorktree(process.argv[2]);
-`,
-    );
-  });
-
-  function run(...args: string[]) {
-    return spawnSync(
-      "pwsh",
-      ["-NoProfile", "-File", "eng/scripts/TypeSpec-Validation.ps1", ...args],
-      {
-        cwd: repo,
-        encoding: "utf8",
-      },
-    );
-  }
-
-  it("cleans between projects without hiding validation failures", () => {
-    write(
-      "eng/tools/typespec-validation/cmd/tsv.js",
-      `
-const fs = require("node:fs");
-console.log("Running " + process.argv[2]);
-if (fs.readFileSync("project/source.txt", "utf8") !== "original") {
-  throw new Error("Previous project contaminated checkout");
-}
-fs.writeFileSync("project/source.txt", "modified");
-fs.writeFileSync("outside/generated.txt", "generated");
-process.exitCode = process.argv[2] === "first" ? 1 : 0;
-`,
-    );
-    commit();
-
-    const result = run("-GitClean");
-
-    expect(result.stdout + result.stderr).not.toContain("Previous project contaminated checkout");
-    expect(result.stdout).toContain("Running second");
-    expect(result.stdout).toContain("TypeSpec Validation failed for project first");
-    expect(result.stdout).toContain("TSV validation (process and output drain):");
-    expect(result.stdout.match(/TSV cleanup {"command":"status"/g)).toHaveLength(2);
-    expect(result.status).toBe(1);
-    expect(status()).toBe("");
-  });
-
-  it("stops the project loop after a cleanup failure", () => {
-    write(
-      "eng/tools/typespec-validation/cmd/tsv.js",
-      `
-const fs = require("node:fs");
-const { execFileSync } = require("node:child_process");
-console.log("Running " + process.argv[2]);
-fs.mkdirSync("nested");
-execFileSync("git", ["init", "--quiet", "nested"]);
-`,
-    );
-    commit();
-
-    const result = run("-GitClean");
-
-    expect(result.stdout).toContain("Git cleanup failed after first");
-    expect(result.stdout).not.toContain("Running second");
-    expect(result.status).toBe(1);
-    expect(existsSync(join(repo, "nested/.git"))).toBe(true);
-  });
-
-  it("does not clean when GitClean is disabled or DryRun is enabled", () => {
-    write("eng/tools/typespec-validation/cmd/tsv.js", 'console.log("Running " + process.argv[2]);');
-    commit();
-    write("generated.txt");
-
-    for (const args of [[], ["-GitClean", "-DryRun"]]) {
-      const result = run(...args);
-      expect(result.status).toBe(0);
-      expect(result.stdout).not.toContain("TSV cleanup");
-      expect(existsSync(join(repo, "generated.txt"))).toBe(true);
-    }
   });
 });
