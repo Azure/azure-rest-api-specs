@@ -147,6 +147,7 @@ using Azure.AI.Projects;
 @@clientName(A2ATool.a2a_version, exact("a2a_version"), "python");
 
 @@clientName(OpenAI.ImageGenActionEnum, "ImageGenAction");
+@@clientName(ConnectionType.RemoteA2A, exact("REMOTE_A2A"), "python");
 
 // DatasetItem model has a property `response_items?: OpenAI.OutputItem[]`. It is used
 // to define Agent optimization request. If emitted as-is, it pulls in a lot of
