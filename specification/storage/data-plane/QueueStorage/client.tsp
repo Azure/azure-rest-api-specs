@@ -367,7 +367,12 @@ op setMetadataRequiredMetadataQueue is StorageOperationNoBody<
 
 @@alternateType(MetadataHeaders.metadata, Record<string>, "java");
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
-@@clientOption(MetadataHeaders.metadata, "collectionHeaderPrefix", "x-ms-meta-", "java");
+@@clientOption(
+  MetadataHeaders.metadata,
+  "collectionHeaderPrefix",
+  "x-ms-meta-",
+  "java"
+);
 
 @@clientName(SentMessage, "SendMessageResult", "java");
 @@clientName(ReceivedMessage, "QueueMessageItemInternal", "java");
@@ -423,7 +428,9 @@ op setMetadataRequiredMetadataQueue is StorageOperationNoBody<
 @@clientLocation(QueueClient.updateMessage, QueueClient, "java");
 @@clientLocation(QueueClient.deleteMessage, QueueClient, "java");
 
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(Queue.getProperties, "responseHeadersAsModel", true, "java");
+#suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(Queue.updateMessage, "responseHeadersAsModel", true, "java");
 
 @@access(StorageErrorCode, Access.public, "java");
