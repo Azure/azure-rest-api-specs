@@ -5882,7 +5882,7 @@ model GetRPExtendedInfoRequestResource extends Resource {
   /**
    * GetRPExtendedInfoRequestResource properties
    */
-  properties?: GetRPExtendedInfoRequest;
+  properties: GetRPExtendedInfoRequest;
 }
 
 /**
