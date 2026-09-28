@@ -73,10 +73,40 @@ union FunctionAppVersionOperationStatus {
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("The ZIP package artifact used by a Function App version.")
+@doc("The Function App version artifact type.")
+union FunctionAppVersionArtifactType {
+  /** A ZIP package artifact. */
+  ZipPackage: "zipPackage",
+
+  /** A container image artifact. */
+  ContainerImage: "containerImage",
+
+  string,
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The artifact used by a Function App version.")
+@discriminator("type")
 model FunctionAppVersionArtifact {
   /** The artifact type. */
+  type: FunctionAppVersionArtifactType;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("A ZIP package artifact.")
+model ZipPackageAppArtifact extends FunctionAppVersionArtifact {
+  /** The artifact type. */
   type: "zipPackage";
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("A container image artifact.")
+model ContainerImageAppArtifact extends FunctionAppVersionArtifact {
+  /** The artifact type. */
+  type: "containerImage";
+
+  /** The container image reference. */
+  reference: string;
 }
 
 @added(Versions.v2026_10_01_preview)
@@ -84,6 +114,18 @@ model FunctionAppVersionArtifact {
 model FunctionAppVersionDeployment {
   /** The application artifact. */
   appArtifact: FunctionAppVersionArtifact;
+
+  /**
+   * The URI from which to materialize a ZIP package. This value is treated as a
+   * secret and is never returned by read or list operations.
+   */
+  @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  packageUri?: url;
+
+  /** Whether to perform a remote build while materializing the ZIP package. */
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  remoteBuild?: boolean;
 }
 
 @added(Versions.v2026_10_01_preview)
