@@ -4,6 +4,8 @@ import { type MitigationResult, MitigationResultSchema } from "./mitigate-sdk-br
 import { publishResultInComment } from "./publish-result-in-comment.ts";
 import { escapeMarkdown } from "../../../shared/src/markdown.ts";
 
+const MAX_CHANGED_CODE_LENGTH = 50;
+
 // function escapeTableCell(value: unknown, fallback = "-"): string {
 //   const text =
 //     typeof value === "string" || typeof value === "number" || typeof value === "boolean"
@@ -79,7 +81,11 @@ export async function buildMitigationReport({
     ];
   });
 
-  const changedCode = result.customizationCode.trim();
+  const fullChangedCode = result.customizationCode.trim();
+  const changedCode =
+    fullChangedCode.length > MAX_CHANGED_CODE_LENGTH
+      ? `${fullChangedCode.slice(0, MAX_CHANGED_CODE_LENGTH)}\n... diff truncated.`
+      : fullChangedCode;
   return {
     report: [
       "## SDK breaking-change mitigation result",

@@ -1,4 +1,4 @@
-import { mkdir, rm, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import {
@@ -70,6 +70,29 @@ describe("buildMitigationReport", () => {
     );
     expect(report).toContain("| Property changed | Restore the old property |");
     expect(report).toContain("````diff\n+customization\n````");
+  });
+
+  it("truncates customization code longer than 12,000 characters", async () => {
+    const customizationCode = `+${"a".repeat(12_000)}`;
+    const artifact = JSON.parse(await readFile(mitigationResultPath, "utf8")) as Record<
+      string,
+      unknown
+    >;
+    await writeFile(mitigationResultPath, JSON.stringify({ ...artifact, customizationCode }));
+    const github = createMockGithub();
+    github.rest.pulls.get.mockResolvedValue({ data: { head: { sha: "a".repeat(40) } } });
+
+    const { report, result } = await buildMitigationReport({
+      github,
+      context: createMockContext(),
+      core: createMockCore(),
+      mitigationResultPath,
+      workflowSummaryUrl: "https://github.com/owner/repo/actions/runs/456",
+    });
+
+    expect(report).toContain(`${customizationCode.slice(0, 12_000)}\n... diff truncated.`);
+    expect(report).not.toContain(customizationCode);
+    expect(result.customizationCode).toBe(customizationCode);
   });
 });
 
