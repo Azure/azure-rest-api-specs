@@ -7062,13 +7062,6 @@ model WorkbenchProperties {
   imageLink: string;
 
   /**
-   * Runtime image from the mcr.microsoft.com/azureml/fci-runtime repository. Immutable after creation. If omitted or blank, the service selects its configured runtime image.
-   */
-  @added(Versions.v2026_09_15_preview)
-  @visibility(Lifecycle.Read, Lifecycle.Create)
-  runtimeImage?: string;
-
-  /**
    * For virtual clusters, an exact Singularity instance type or a full-node Azure VM size. If omitted or null on creation, defaults to Singularity.D4_v3. Foundry Compute ignores this override and uses the pool configuration. Changing the instance type requires the workbench to be stopped.
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Explicit null selects the service fallback on create and resets the instance type on PATCH; omission preserves it on PATCH"

@@ -24182,14 +24182,6 @@
             "create"
           ]
         },
-        "runtimeImage": {
-          "type": "string",
-          "description": "Runtime image from the mcr.microsoft.com/azureml/fci-runtime repository. Immutable after creation. If omitted or blank, the service selects its configured runtime image.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
         "instanceType": {
           "type": "string",
           "description": "For virtual clusters, an exact Singularity instance type or a full-node Azure VM size. If omitted or null on creation, defaults to Singularity.D4_v3. Foundry Compute ignores this override and uses the pool configuration. Changing the instance type requires the workbench to be stopped.",
@@ -24381,7 +24373,7 @@
         },
         "identity": {
           "$ref": "#/definitions/Identity",
-          "description": "Identity for the resource. May be changed while the workbench is running and takes effect after restart."
+          "description": "Identity for the resource. May be changed while the workbench is running only when properties is omitted or null; the change takes effect after restart. If a properties object is supplied, including an empty object or timeout-only update, changing identity requires the workbench to be stopped."
         }
       }
     },

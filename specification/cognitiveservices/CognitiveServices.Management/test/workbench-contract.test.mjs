@@ -29,6 +29,8 @@ assert(workbenchPath, "Workbench operation path must exist");
 const operations = spec.paths[workbenchPath];
 const definitions = spec.definitions;
 const documents = new Map([[specFile, spec]]);
+const identityDescription =
+  "Identity for the resource. May be changed while the workbench is running only when properties is omitted or null; the change takes effect after restart. If a properties object is supplied, including an empty object or timeout-only update, changing identity requires the workbench to be stopped.";
 
 function resolve(schema, file) {
   if (!schema.$ref) return [schema, file];
@@ -96,19 +98,10 @@ test("create keeps required fields and exposes read/create-only image and mount 
     "targetClusterId",
     "imageLink",
   ]);
-  for (const name of [
-    "imageLink",
-    "runtimeImage",
-    "datasetId",
-    "sshSettings",
-  ]) {
+  for (const name of ["imageLink", "datasetId", "sshSettings"]) {
     assert.deepEqual(properties[name]["x-ms-mutability"], ["read", "create"]);
   }
-  assert.equal(properties.runtimeImage.default, undefined);
-  assert.match(
-    properties.runtimeImage.description,
-    /mcr\.microsoft\.com\/azureml\/fci-runtime/,
-  );
+  assert.equal(Object.hasOwn(properties, "runtimeImage"), false);
   assert.equal(properties.instanceType.type, "string");
   assert.equal(properties.instanceType["x-nullable"], true);
   assertNullableCount(properties.gpuCount);
@@ -139,7 +132,7 @@ test("PATCH is independently optional and contains only supported mutable fields
   assert.equal(properties.properties.instanceType["x-nullable"], true);
   assertNullableCount(properties.properties.gpuCount);
   assert.doesNotMatch(properties.properties.gpuCount.description, /stopped/i);
-  assert.match(update.properties.identity.description, /running.*restart/);
+  assert.equal(update.properties.identity.description, identityDescription);
   assert.deepEqual(Object.keys(operations.patch.responses), ["200", "default"]);
   assert.deepEqual(operations.patch.responses["200"].schema, {
     $ref: "#/definitions/Workbench",
@@ -217,9 +210,18 @@ if (baselineRef) {
       }
     }
     for (const [name, model] of Object.entries(baseline.definitions)) {
-      if (["Workbench", "WorkbenchProperties", "WorkbenchUpdateProperties"].includes(name))
+      if (
+        [
+          "Workbench",
+          "WorkbenchProperties",
+          "WorkbenchUpdateProperties",
+        ].includes(name)
+      )
         continue;
-      assert.deepEqual(definitions[name], model, name);
+      const expected = structuredClone(model);
+      if (name === "WorkbenchUpdate")
+        expected.properties.identity.description = identityDescription;
+      assert.deepEqual(definitions[name], expected, name);
     }
   });
 
@@ -256,7 +258,7 @@ if (baselineRef) {
   });
 }
 
-test("Workbench source examples match generation and omit forbidden envelope properties", () => {
+test("Workbench examples match generation and omit runtimeImage and forbidden envelope properties", () => {
   const files = readdirSync(examples).filter(
     (f) => f.includes("Workbench") && f.endsWith(".json"),
   );
@@ -268,6 +270,7 @@ test("Workbench source examples match generation and omit forbidden envelope pro
       content,
       readFileSync(path.join(path.dirname(specFile), "examples", file)),
     );
+    assert.doesNotMatch(content.toString("utf8"), /"runtimeImage"\s*:/, file);
     const example = JSON.parse(content);
     operationIds.add(example.operationId);
     assert.equal(example.parameters["api-version"], version);
@@ -335,10 +338,6 @@ test("Workbench source examples match generation and omit forbidden envelope pro
     assert.equal(properties.instanceType, "Singularity.ND12_H100_v5-n1");
     assert.equal(properties.gpuCount, 1);
   }
-  assert.equal(
-    create.parameters.resource.properties.runtimeImage,
-    "mcr.microsoft.com/azureml/fci-runtime:example-tag",
-  );
   const reset = JSON.parse(
     readFileSync(
       path.join(examples, "UpdateWorkbenchResetComputeProperties.json"),
@@ -381,6 +380,33 @@ async function getSdkContext() {
   );
   return sdkContext;
 }
+
+test("public Workbench Swagger and SDK models omit runtimeImage", async () => {
+  for (const [name, model] of Object.entries(definitions)) {
+    if (name.startsWith("Workbench")) {
+      assert.equal(Object.hasOwn(envelope(model), "runtimeImage"), false, name);
+    }
+  }
+  const context = await getSdkContext();
+  const models = context.sdkPackage.models.filter((model) =>
+    model.__raw?.name.startsWith("Workbench"),
+  );
+  assert(
+    models.some((model) => model.__raw.name === "WorkbenchProperties"),
+    "SDK resource properties model must exist",
+  );
+  for (const model of models) {
+    assert.equal(
+      model.properties.some(
+        (property) =>
+          property.name === "runtimeImage" ||
+          property.serializedName === "runtimeImage",
+      ),
+      false,
+      model.name,
+    );
+  }
+});
 
 test("SDK input models preserve optional-plus-nullable reset values", async () => {
   const context = await getSdkContext();

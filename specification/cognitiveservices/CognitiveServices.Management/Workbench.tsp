@@ -91,7 +91,7 @@ model WorkbenchUpdate {
   properties?: WorkbenchUpdateProperties;
 
   /**
-   * Identity for the resource. May be changed while the workbench is running and takes effect after restart.
+   * Identity for the resource. May be changed while the workbench is running only when properties is omitted or null; the change takes effect after restart. If a properties object is supplied, including an empty object or timeout-only update, changing identity requires the workbench to be stopped.
    */
   identity?: Identity;
 }
