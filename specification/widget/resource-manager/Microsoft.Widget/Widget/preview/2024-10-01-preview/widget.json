@@ -631,16 +631,19 @@
       "type": "object",
       "description": "Parameters for updating an employee's administrative state.",
       "properties": {
+        "dryRun": {
+          "type": "boolean",
+          "description": "Whether to validate the request without applying the change."
+        },
         "enabled": {
           "type": "boolean",
           "description": "Whether the employee is enabled."
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for enabling or disabling the employee."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/EmployeeActionConfig"
-        }
-      ]
+      }
     },
     "UpdateEmployeeStateResult": {
       "type": "object",

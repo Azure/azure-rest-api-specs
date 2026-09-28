@@ -39,10 +39,15 @@ model EmployeeActionConfig {
 }
 
 /** Parameters for updating an employee's administrative state. */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Preserve the existing public SDK inheritance relationship."
-model UpdateEmployeeState extends EmployeeActionConfig {
+model UpdateEmployeeState {
+  ...EmployeeActionConfig;
+
   /** Whether the employee is enabled. */
   enabled?: boolean;
+
+  /** The reason for enabling or disabling the employee. */
+  @TypeSpec.Versioning.added(Versions.v2024_10_01_preview)
+  reason?: string;
 }
 
 /** The employee's administrative state after updating or validating the request. */
