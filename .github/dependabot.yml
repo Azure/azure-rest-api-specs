@@ -30,6 +30,8 @@ updates:
     ignore:
       # Updated manually to align with minimum supported Node version
       - dependency-name: "@types/node"
+      # Updated together with handwritten workflow refs and the pnpm build allowance
+      - dependency-name: "@actions/github-script"
       # Updated manually by the team maintaining this package
       - dependency-name: "@azure-tools/openai-typespec"
       # Updated manually by the Liftr team
@@ -49,9 +51,9 @@ updates:
       typespec:
         patterns:
           - "*typespec*"
-      eslint:
+      oxlint:
         patterns:
-          - "*eslint*"
+          - "oxlint*"
     versioning-strategy: increase-if-necessary
   - package-ecosystem: "npm"
     directories:
@@ -65,10 +67,6 @@ updates:
     ignore:
       # Updated manually to align with minimum supported Node version
       - dependency-name: "@types/node"
-      # Points to "github:actions/github-script" since package isn't published to npmjs
-      - dependency-name: "@types/github-script"
-    groups:
-      eslint:
-        patterns:
-          - "*eslint*"
+      # Updated together with handwritten workflow refs and the pnpm build allowance
+      - dependency-name: "@actions/github-script"
     versioning-strategy: increase-if-necessary
