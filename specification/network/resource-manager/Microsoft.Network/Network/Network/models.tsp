@@ -11219,7 +11219,7 @@ model DdosMitigationRulePropertiesFormat {
   /**
    * Source-specific actions that override the default mitigations. A rule supports at most one Deny override and one Permit override.
    */
-  @identifiers(#[])
+  @identifiers(#["policyAction/actionType"])
   @maxItems(2)
   sourcePolicyOverrides?: DdosSourcePolicyOverride[];
 }
@@ -11279,6 +11279,7 @@ model DdosTcpPerSourceRateLimitPolicy {
   /**
    * The maximum number of TCP packets allowed per second from a source IP.
    */
+  @minValue(100)
   packetsPerSecond: int32;
 }
 
@@ -11292,6 +11293,7 @@ model DdosTcpPerSourceConnectionRateLimitPolicy {
   /**
    * The maximum number of new TCP connections established per second from a source IP.
    */
+  @minValue(0)
   connectionsPerSecond: int32;
 }
 
@@ -11305,6 +11307,7 @@ model DdosUdpPerSourceRateLimitPolicy {
   /**
    * The maximum number of UDP packets allowed per second from a source IP.
    */
+  @minValue(100)
   packetsPerSecond: int32;
 }
 

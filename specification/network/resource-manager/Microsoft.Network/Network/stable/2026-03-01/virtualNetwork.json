@@ -16087,7 +16087,9 @@
           "items": {
             "$ref": "#/definitions/DdosSourcePolicyOverride"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "policyAction/actionType"
+          ]
         }
       },
       "required": [
@@ -16259,7 +16261,8 @@
         "connectionsPerSecond": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of new TCP connections established per second from a source IP."
+          "description": "The maximum number of new TCP connections established per second from a source IP.",
+          "minimum": 0
         }
       },
       "required": [
@@ -16273,7 +16276,8 @@
         "packetsPerSecond": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of TCP packets allowed per second from a source IP."
+          "description": "The maximum number of TCP packets allowed per second from a source IP.",
+          "minimum": 100
         }
       },
       "required": [
@@ -16297,7 +16301,8 @@
         "packetsPerSecond": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of UDP packets allowed per second from a source IP."
+          "description": "The maximum number of UDP packets allowed per second from a source IP.",
+          "minimum": 100
         }
       },
       "required": [
