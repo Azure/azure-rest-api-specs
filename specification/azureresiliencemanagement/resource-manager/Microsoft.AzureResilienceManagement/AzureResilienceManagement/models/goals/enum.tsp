@@ -35,6 +35,7 @@ union AttestationState {
 }
 
 @doc("Enum for the requirement status of the resource in the goal.")
+@removed(Versions.v2026_09_30_preview)
 union RequirementSelected {
   string,
 
@@ -46,6 +47,7 @@ union RequirementSelected {
 }
 
 @doc("Supported type of goal assignment.")
+@removed(Versions.v2026_09_30_preview)
 union GoalAssignmentType {
   string,
 
@@ -54,6 +56,7 @@ union GoalAssignmentType {
 }
 
 @doc("Supported type of goal.")
+@removed(Versions.v2026_09_30_preview)
 union GoalType {
   string,
 
@@ -118,8 +121,12 @@ union ReasonForRequestingConfirmation {
 }
 
 @added(Versions.v2026_03_01_preview)
+@renamedFrom(
+  Versions.v2026_06_01_preview,
+  "UserConfirmationForHighAvailabilityItem"
+)
 @doc("Represents a user confirmation for a high availability solution.")
-model UserConfirmationForHighAvailabilityItem {
+model UserConfirmationItem {
   @doc("The solution display name of the high availability solution.")
   solutionDisplayName: SolutionDisplayName;
 

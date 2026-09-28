@@ -58,6 +58,11 @@ using Microsoft.Compute;
   "csharp"
 );
 @@clientName(SkuMixPlacementItem, "ComputeSkuMixPlacementItem", "csharp");
+@@clientName(
+  SkuMixPlacementCapacityLimit,
+  "ComputeSkuMixPlacementCapacityLimit",
+  "csharp"
+);
 @@clientName(SkuMixPlacementBase, "ComputeSkuMixPlacement", "csharp");
 @@clientName(SkuMixPlacementResponse.validUntil, "ValidUntilOn", "csharp");
 @@clientName(SkuMixPlacementScores.post, "generate", "csharp");

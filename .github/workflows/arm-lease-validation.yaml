@@ -34,9 +34,9 @@ jobs:
         uses: ./.github/actions/install-deps-github-script
 
       - name: ARM Lease Validation
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9.0.0
         with:
           script: |
             const { default: armLeaseValidation } =
-              await import('${{ github.workspace }}/.github/workflows/src/arm-lease-validation/arm-lease-validation.js');
+              await import('${{ github.workspace }}/.github/workflows/src/arm-lease-validation/arm-lease-validation.ts');
             return await armLeaseValidation(core);

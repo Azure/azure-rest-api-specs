@@ -37,3 +37,13 @@ using Microsoft.StorageDiscovery;
   "StorageDiscoveryWorkspacePatchProperties",
   "csharp"
 );
+@@clientName(
+  AzureBlobStorageCapabilityUpdate,
+  "AzureBlobStorageCapabilityPatch",
+  "csharp"
+);
+@@clientName(
+  PrefixConfigurationUpdate,
+  "AzureBlobStoragePrefixConfigurationPatch",
+  "csharp"
+);

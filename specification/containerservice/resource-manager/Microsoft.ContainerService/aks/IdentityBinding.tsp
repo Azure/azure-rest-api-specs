@@ -149,7 +149,7 @@ model IdentityBindingProperties {
    * authorization falls back exclusively to ClusterRole/ClusterRoleBinding
    * evaluation. Maximum 100 entries.
    */
-  @added(Versions.v2026_05_02_preview)
+  @added(Versions.v2026_06_02_preview)
   @identifiers(#[])
   @maxItems(100)
   allowedSubjects?: AllowedSubject[];
@@ -163,7 +163,7 @@ model IdentityBindingProperties {
  * AllowedSubject are AND'd; multiple AllowedSubjects on an
  * IdentityBinding are OR'd.
  */
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_06_02_preview)
 model AllowedSubject {
   /**
    * Label selector matching the namespaces in which this identity may be

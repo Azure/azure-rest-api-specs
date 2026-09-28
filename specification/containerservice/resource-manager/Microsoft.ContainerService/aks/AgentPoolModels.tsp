@@ -186,14 +186,14 @@ model ManagedClusterAgentPoolProfileProperties {
   /**
    * Defines the upgrade strategy for the agent pool. The default is Rolling.
    */
-  @added(Versions.v2026_05_02_preview)
+  @added(Versions.v2026_06_02_preview)
   upgradeStrategy?: UpgradeStrategy;
 
   /**
    * Whether to enable the full-cache ephemeral OS disk feature. When this feature is enabled, the entire operating system will be locally cached on the ephemeral OS disk, preventing E17 events caused by network failures.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-  @added(Versions.v2026_05_02_preview)
+  @added(Versions.v2026_06_02_preview)
   enableOSDiskFullCaching?: boolean;
 
   /**
@@ -204,7 +204,7 @@ model ManagedClusterAgentPoolProfileProperties {
   /**
    * Settings for Blue-Green upgrade on the agentpool. Applies when upgrade strategy is set to BlueGreen.
    */
-  @added(Versions.v2026_05_02_preview)
+  @added(Versions.v2026_06_02_preview)
   upgradeSettingsBlueGreen?: AgentPoolBlueGreenUpgradeSettings;
 
   /**
@@ -276,7 +276,7 @@ model ManagedClusterAgentPoolProfileProperties {
   /**
    * Taints added on the nodes during creation that will not be reconciled by AKS. These taints will not be reconciled by AKS and can be removed with a kubectl call. This field can be modified after node pool is created, but nodes will not be recreated with new taints until another operation that requires recreation (e.g. node image upgrade) happens. These taints allow for required configuration to run before the node is ready to accept workloads, for example 'key1=value1:NoSchedule' that then can be removed with `kubectl taint nodes node1 key1=value1:NoSchedule-`
    */
-  @added(Versions.v2026_05_02_preview)
+  @added(Versions.v2026_06_02_preview)
   nodeInitializationTaints?: string[];
 
   /**
@@ -403,7 +403,7 @@ model ManagedClusterAgentPoolProfileProperties {
   /**
    * Settings to determine the prepared image specification used to provision nodes in a pool.
    */
-  @added(Versions.v2026_05_02_preview)
+  @added(Versions.v2026_06_02_preview)
   preparedImageSpecificationProfile?: PreparedImageSpecificationProfile;
 }
 
@@ -424,7 +424,7 @@ model AgentPoolUpgradeSettings {
   /**
    * The maximum number or percentage of extra nodes that are allowed to be blocked in the agent pool during an upgrade when undrainable node behavior is Cordon. This can either be set to an integer (e.g. '5') or a percentage (e.g. '50%'). If a percentage is specified, it is the percentage of the total agent pool size at the time of the upgrade. For percentages, fractional nodes are rounded up. If not specified, the default is maxSurge. This must always be greater than or equal to maxSurge. For more information, including best practices, see: https://learn.microsoft.com/en-us/azure/aks/upgrade-cluster
    */
-  @added(Versions.v2026_05_02_preview)
+  @added(Versions.v2026_06_02_preview)
   maxBlockedNodes?: string;
 
   /**
@@ -450,7 +450,7 @@ model AgentPoolUpgradeSettings {
 /**
  * Settings for blue-green upgrade on an agentpool
  */
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_06_02_preview)
 model AgentPoolBlueGreenUpgradeSettings {
   /**
    * The number or percentage of nodes to drain in batch during blue-green upgrade. Must be a non-zero number. This can either be set to an integer (e.g. '5') or a percentage (e.g. '50%'). If a percentage is specified, it is the percentage of the total number of blue nodes of the initial upgrade operation. For percentages, fractional nodes are rounded up. If not specified, the default is 10%. For more information, including best practices, see: https://learn.microsoft.com/en-us/azure/aks/upgrade-cluster
@@ -543,26 +543,45 @@ model KubeletConfig {
   /**
    * Specifies the default seccomp profile applied to all workloads. If not specified, 'Unconfined' will be used by default.
    */
-  @added(Versions.v2026_05_02_preview)
+  @added(Versions.v2026_06_02_preview)
   seccompDefault?: SeccompDefault;
 
   /**
    * Kube-reserved values for kubelet. When a value is not set, the system-computed default based on VM size is used. See [AKS node resource reservations](https://aka.ms/aks/nodereservations) for details on computed defaults. Only applicable for Linux nodepools.
    */
-  @added(Versions.v2026_05_02_preview)
+  @added(Versions.v2026_06_02_preview)
   kubeReserved?: KubeReserved;
 
   /**
    * Hard eviction thresholds for kubelet. When a threshold is not set, the system default is used. See [AKS node resource reservations](https://aka.ms/aks/nodereservations) for details on computed defaults. Only applicable for Linux nodepools.
    */
-  @added(Versions.v2026_05_02_preview)
+  @added(Versions.v2026_06_02_preview)
   hardEvictionThreshold?: HardEvictionThreshold;
+
+  /**
+   * Soft eviction thresholds for kubelet. When crossed, pods are evicted after the paired softEvictionGracePeriod. System defaults apply when the cluster's `enableNodeHardening` property is true; otherwise no soft eviction is configured. For each signal (memoryAvailable, nodeFsAvailable, nodeFsInodesFree), the entries in softEvictionThreshold and softEvictionGracePeriod must be in the same state: both omitted (default), both non-empty (override), or both empty strings (opt that signal out). Only applicable for Linux nodepools. See https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/#soft-eviction-thresholds.
+   */
+  @added(Versions.v2026_06_02_preview)
+  softEvictionThreshold?: SoftEvictionThreshold;
+
+  /**
+   * Grace periods for soft eviction signals — how long a threshold must be held before pod eviction. Same defaulting and pairing rules as softEvictionThreshold. Values are Go-style duration strings (e.g. '1m30s'); supported units are 'ns', 'us', 'ms', 's', 'm', and 'h'. Only applicable for Linux nodepools.
+   */
+  @added(Versions.v2026_06_02_preview)
+  softEvictionGracePeriod?: SoftEvictionGracePeriod;
+
+  /**
+   * Maximum grace period, in seconds, for pods to terminate during a soft eviction; caps the pod's terminationGracePeriodSeconds. Default is 60, applied when the cluster's `enableNodeHardening` property is true. Only applicable for Linux nodepools.
+   */
+  @added(Versions.v2026_06_02_preview)
+  @minValue(0)
+  evictionMaxPodGracePeriodInSeconds?: int32;
 }
 
 /**
  * Kube-reserved values for kubelet. When a value is not set, the system-computed default based on VM size is used. See [AKS node resource reservations](https://aka.ms/aks/nodereservations) for details on computed defaults. Only applicable for Linux nodepools.
  */
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_06_02_preview)
 model KubeReserved {
   /**
    * The amount of CPU reserved for Kubernetes system daemons, in millicores. Must be greater than or equal to 140. For example, a value of 200 means 200m (0.2 CPU cores).
@@ -579,7 +598,7 @@ model KubeReserved {
 /**
  * Hard eviction thresholds for kubelet. These thresholds trigger pod eviction when node resources drop below the specified values. Values must be greater than or equal to the documented minimums for each signal. Supported formats are Ki, Mi, Gi, or percentages using %.
  */
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_06_02_preview)
 model HardEvictionThreshold {
   /**
    * The threshold for available memory below which pod eviction is triggered. Accepts absolute values (e.g. '500Mi') or percentage values (e.g. '5%'). Absolute values must be greater than or equal to 100Mi. Percentage values must be greater than or equal to 2%.
@@ -593,6 +612,48 @@ model HardEvictionThreshold {
 
   /**
    * The threshold for available inodes on the node filesystem below which pod eviction is triggered. Accepts absolute inode counts (e.g. '100000') or percentage values (e.g. '5%'). Percentage values must be greater than or equal to the system default of 5%.
+   */
+  nodeFsInodesFree?: string;
+}
+
+/**
+ * Soft eviction thresholds for kubelet. These thresholds trigger graceful pod eviction when node resources drop below the specified values for at least the corresponding grace period defined in softEvictionGracePeriod. Supported formats are Ki, Mi, Gi, or percentages using %.
+ */
+@added(Versions.v2026_06_02_preview)
+model SoftEvictionThreshold {
+  /**
+   * The threshold for available memory below which soft pod eviction is triggered. Accepts absolute values (e.g. '500Mi') or percentage values (e.g. '5%'). Absolute minimum is 100Mi; percentage minimum is 2%. Default uses a capacity-based step ladder: 500Mi for nodes with <=8GiB, 750Mi for 16GiB, and 1024Mi (1Gi) for >=32GiB. Must also be greater than the effective hardEvictionThreshold.memoryAvailable.
+   */
+  memoryAvailable?: string;
+
+  /**
+   * The threshold for available node filesystem space below which soft pod eviction is triggered. Accepts absolute values (e.g. '1Gi') or percentage values (e.g. '10%'). Default is '12%'. Must be greater than or equal to 10% and greater than the effective hardEvictionThreshold.nodeFsAvailable.
+   */
+  nodeFsAvailable?: string;
+
+  /**
+   * The threshold for available inodes on the node filesystem below which soft pod eviction is triggered. Accepts absolute inode counts (e.g. '100000') or percentage values (e.g. '5%'). Default is '7%'. Percentage values must be greater than or equal to 5% and greater than the effective hardEvictionThreshold.nodeFsInodesFree.
+   */
+  nodeFsInodesFree?: string;
+}
+
+/**
+ * Grace periods for kubelet soft eviction thresholds. Each field is a Go-style duration string (e.g. '1m30s') that specifies how long the corresponding soft eviction signal must be crossed before pod eviction is triggered. A grace period only applies when the matching soft eviction threshold is set.
+ */
+@added(Versions.v2026_06_02_preview)
+model SoftEvictionGracePeriod {
+  /**
+   * The grace period for the memoryAvailable soft eviction signal, expressed as a Go-style duration string (e.g. '30s', '1m30s'). Supported units are 'ns', 'us', 'ms', 's', 'm', and 'h'. Must be greater than or equal to '30s'. Default is '30s'.
+   */
+  memoryAvailable?: string;
+
+  /**
+   * The grace period for the nodeFsAvailable soft eviction signal, expressed as a Go-style duration string (e.g. '30s', '1m30s'). Supported units are 'ns', 'us', 'ms', 's', 'm', and 'h'. Must be greater than or equal to '30s'. Default is '2m'.
+   */
+  nodeFsAvailable?: string;
+
+  /**
+   * The grace period for the nodeFsInodesFree soft eviction signal, expressed as a Go-style duration string (e.g. '30s', '1m30s'). Supported units are 'ns', 'us', 'ms', 's', 'm', and 'h'. Must be greater than or equal to '30s'. Default is '2m'.
    */
   nodeFsInodesFree?: string;
 }
@@ -799,7 +860,7 @@ model AgentPoolNetworkProfile {
    * The resource IDs of public IP prefixes for node public IPs. At most one IPv4 and one IPv6 prefix may be specified. Order does not matter; the RP determines IP version from the referenced resource's publicIPAddressVersion. Requires enableNodePublicIP to be true on the agent pool. Mutually exclusive with the top-level nodePublicIPPrefixID property. Immutable after node pool creation. To change prefixes, delete and recreate the node pool. For more information, see https://aka.ms/aks/ipv6-ilpip
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-  @added(Versions.v2026_05_02_preview)
+  @added(Versions.v2026_06_02_preview)
   @maxItems(2)
   nodePublicIPPrefixIDs?: Azure.Core.armResourceIdentifier<[
     {
@@ -823,13 +884,39 @@ model AgentPoolNetworkProfile {
   ]>[];
 
   /** Secondary network interface configurations for each VM in the agent pool. Each entry is a template: one physical NIC per entry is provisioned on every VM instance. These interfaces are created at agent pool creation time and are immutable. The length of the list must be less than the NIC capacity minus 1 for the VM size of the agent pool (AKS manages the primary NIC). For example, a Standard_D8a_v4 VM supports up to 4 NICs, so the maximum number of secondary interfaces allowed is 3. For mixed-SKU VM pools the effective capacity is the minimum across all SKUs: count(secondaryNetworkInterfaces) + 1 <= min(maxNICs). For more information, see https://aka.ms/aks/multi-nic */
-  @added(Versions.v2026_05_02_preview)
+  @added(Versions.v2026_06_02_preview)
   @identifiers(#[])
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   secondaryNetworkInterfaces?: AgentPoolNetworkInterface[];
+
+  /** DRANET settings of an agent pool. */
+  @added(Versions.v2026_06_01)
+  dranet?: DRANETProfile;
+}
+
+/** DRANET settings of an agent pool. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "DRANET is the approved public API acronym."
+@added(Versions.v2026_06_01)
+model DRANETProfile {
+  /** The DRANET mode for the agent pool. */
+  mode?: DRANETMode;
+}
+
+/** The DRANET mode for the agent pool. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "DRANET is the approved public API acronym."
+@added(Versions.v2026_06_01)
+union DRANETMode {
+  string,
+
+  /** DRANET is not managed by AKS. */
+  Unmanaged: "Unmanaged",
+
+  /** DRANET is managed by AKS. */
+  Managed: "Managed",
 }
 
 /** Type of network interface to be provisioned on each virtual machine instance. For more information, see https://aka.ms/aks/multi-nic */
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_06_02_preview)
 union AgentPoolNetworkInterfaceType {
   string,
 
@@ -841,7 +928,7 @@ union AgentPoolNetworkInterfaceType {
 }
 
 /** Configuration of a secondary network interface provisioned on each VM instance in the agent pool. For more information, see https://aka.ms/aks/multi-nic */
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_06_02_preview)
 model AgentPoolNetworkInterface {
   /**
    * Type of NIC to be provisioned on the VM.
@@ -857,6 +944,42 @@ model AgentPoolNetworkInterface {
 
   /** Whether accelerated networking is enabled on this secondary NIC. If omitted, this defaults to true only when the agent pool VM SKU supports accelerated networking. Validation will fail if it is enabled on an unsupported SKU or NIC configuration. */
   enableAcceleratedNetworking?: boolean;
+
+  /** Public IP configuration for this secondary NIC. Only valid when `type` is `Standard`. Set `publicIPAddressVersion` to provision a per-VM instance-level public IP for the NIC, then optionally shape it with `ipTags` or `publicIPPrefixID`. If omitted, no public IP is provisioned. Idle timeout is not configurable. For more information, see https://aka.ms/aks/multi-nic */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for consistency with existing AKS public IP naming (nodePublicIPPrefixID, nodePublicIPTags)."
+  @added(Versions.v2026_06_02_preview)
+  publicIPAddressConfiguration?: AgentPoolNICPublicIPAddressConfiguration;
+}
+
+/** Public IP configuration applied to a secondary NIC on an agent pool. `ipTags` and `publicIPPrefixID` are mutually exclusive, matching the primary NIC's behavior. For more information, see https://aka.ms/aks/multi-nic */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Model name maintained for consistency with existing AKS public IP naming (nodePublicIPPrefixID, nodePublicIPTags)."
+@added(Versions.v2026_06_02_preview)
+model AgentPoolNICPublicIPAddressConfiguration {
+  /** IP version of the public IP provisioned for this NIC. Required: its presence is what enables public IP provisioning, so an empty configuration allocates nothing. `IPv4` is the only accepted value. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for consistency with VMSS publicIPAddressVersion and existing AKS public IP naming."
+  publicIPAddressVersion: AgentPoolNICPublicIPAddressVersion;
+
+  /** IP tags to attach to the public IP allocated for this NIC. Each tag's `ipTagType` must be `FirstPartyUsage`, `NetworkDomain`, or `RoutingPreference`. Mutually exclusive with `publicIPPrefixID`. */
+  @identifiers(#[])
+  ipTags?: IPTag[];
+
+  /** The resource ID of a public IP prefix to draw this NIC's public IP from. Mutually exclusive with `ipTags`. */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for consistency with existing AKS public IP naming (nodePublicIPPrefixID)."
+  publicIPPrefixID?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/publicIPPrefixes";
+    }
+  ]>;
+}
+
+/** IP version of the public IP allocated for a secondary NIC. `IPv4` is the only accepted value. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Value name maintained for consistency with VMSS publicIPAddressVersion (IPv4/IPv6)."
+@added(Versions.v2026_06_02_preview)
+union AgentPoolNICPublicIPAddressVersion {
+  string,
+
+  /** The public IP allocated for the NIC will be IPv4. */
+  IPv4: "IPv4",
 }
 
 /**
@@ -941,25 +1064,32 @@ model GPUProfile {
   /**
    * Specify the type of GPU driver to install when creating Windows agent pools. If not provided, AKS selects the driver based on system compatibility. This cannot be changed once the AgentPool has been created. This cannot be set on Linux AgentPools. For Linux AgentPools, the driver is selected based on system compatibility.
    */
-  @added(Versions.v2026_05_02_preview)
+  @added(Versions.v2026_06_02_preview)
   driverType?: DriverType;
 
   /**
    * NVIDIA-specific GPU settings.
    */
-  @added(Versions.v2026_05_02_preview)
+  @added(Versions.v2026_06_02_preview)
   nvidia?: NvidiaGPUProfile;
 }
 
 /**
  * NVIDIA-specific GPU settings
  */
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_06_02_preview)
 model NvidiaGPUProfile {
   /**
    * The Managed GPU experience installs additional components, such as the Data Center GPU Manager (DCGM) metrics for monitoring, on top of the GPU driver for you. For more details of what is installed, check out aka.ms/aks/managed-gpu.
    */
   managementMode?: ManagementMode;
+
+  /**
+   * NVIDIA GPU resource allocation mode. DevicePlugin installs the NVIDIA
+   * Kubernetes device plugin. DRA installs the NVIDIA DRA driver.
+   */
+  @added(Versions.v2026_06_02_preview)
+  driverMode?: NvidiaDriverMode = NvidiaDriverMode.DevicePlugin;
 
   /**
    * Sets the MIG (Multi-Instance GPU) strategy that will be used for managed MIG support. For more information about the different strategies, visit aka.ms/aks/managed-gpu. When not specified, the default is None.
@@ -1162,7 +1292,7 @@ model LocalDNSOverride {
 /**
  * Settings to determine the prepared image specification used to provision nodes in a pool.
  */
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_06_02_preview)
 model PreparedImageSpecificationProfile {
   /**
    * The resource ID of the prepared image specification resource to use. This can include a version. Omitting the version will use the latest version of the prepared image specification.
@@ -1182,4 +1312,70 @@ model AgentPoolDeleteMachinesParameter {
    * The agent pool machine names.
    */
   machineNames: string[];
+}
+
+/**
+ * Agent pool.
+ */
+@added(Versions.v2026_06_02_preview)
+model AgentPoolUpdate {
+  /**
+   * Properties for the agent pool.
+   */
+  properties?: AgentPoolUpdateProperties;
+}
+
+/**
+ * Properties for the agent pool.
+ */
+@added(Versions.v2026_06_02_preview)
+model AgentPoolUpdateProperties {
+  /**
+   * Number of agents (VMs) to host docker containers.
+   */
+  count?: int32;
+
+  /**
+   * Specifications on VirtualMachines agent pool.
+   */
+  virtualMachinesProfile?: AgentPoolUpdateVirtualMachinesProfile;
+}
+
+/**
+ * Specifications on VirtualMachines agent pool.
+ */
+@added(Versions.v2026_06_02_preview)
+model AgentPoolUpdateVirtualMachinesProfile {
+  /**
+   * Specifications on how to scale a VirtualMachines agent pool.
+   */
+  scale?: AgentPoolUpdateScaleProfile;
+}
+
+/**
+ * Specifications on how to scale a VirtualMachines agent pool.
+ */
+@added(Versions.v2026_06_02_preview)
+model AgentPoolUpdateScaleProfile {
+  /**
+   * Specifications on how to scale the VirtualMachines agent pool to a fixed size.
+   */
+  @identifiers(#[])
+  manual?: AgentPoolUpdateManualScaleProfile[];
+}
+
+/**
+ * Specifications on number of machines.
+ */
+@added(Versions.v2026_06_02_preview)
+model AgentPoolUpdateManualScaleProfile {
+  /**
+   * VM size that AKS will use when creating and scaling e.g. 'Standard_E4s_v3', 'Standard_E16s_v3' or 'Standard_D16s_v5'.
+   */
+  size?: string;
+
+  /**
+   * Number of nodes.
+   */
+  count?: int32;
 }
