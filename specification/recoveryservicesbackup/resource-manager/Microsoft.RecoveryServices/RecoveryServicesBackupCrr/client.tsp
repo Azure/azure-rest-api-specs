@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.RecoveryServices;
