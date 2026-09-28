@@ -10702,9 +10702,9 @@ model BastionHostIPConfigurationPropertiesFormat {
   /**
    * The private IP address assigned to the Bastion host Internal Load Balancer.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2026_03_01)
   @visibility(Lifecycle.Read)
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   privateIPAddress?: string;
 }
 
