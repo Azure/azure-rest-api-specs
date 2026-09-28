@@ -9,51 +9,35 @@ namespace ContainerAppsSandbox {
   // populate the clients without changing the service interfaces or other languages.
   /** Operations within one sandbox group. */
   namespace Group {
-    /** Operations on one sandbox within the group. */
-    namespace Resource {
-      namespace Files {
-
-      }
-
-      namespace Networking {
-
-      }
-
-      namespace Streams {
-
-      }
+    /** Operations on sandboxes within the group. */
+    namespace Sandboxes {
     }
 
     namespace Connections {
-
     }
 
     namespace ContentPackages {
-
     }
 
     namespace Credentials {
-
     }
 
     namespace DiskImages {
+    }
 
+    namespace PublicDiskImages {
     }
 
     namespace EgressPolicies {
-
     }
 
     namespace Secrets {
-
     }
 
     namespace Snapshots {
-
     }
 
     namespace Volumes {
-
     }
   }
 
@@ -62,186 +46,173 @@ namespace ContainerAppsSandbox {
     Group,
     {
       parameters: AzureResourceScope,
-      initializedBy: InitializedBy.parent,
-    },
-    "csharp"
-  );
-  @@clientInitialization(
-    Group.Resource,
-    {
-      parameters: {
-        ...AzureResourceScope,
-
-        /** Sandbox identifier. */
-        id: SandboxId,
-      },
-      initializedBy: InitializedBy.parent,
+      initializedBy: InitializedBy.parent | InitializedBy.individually,
     },
     "csharp"
   );
 
   // Operation locations
   // Collection operations do not require an individual sandbox.
-  @@clientLocation(AzureSandboxes.list, Group, "csharp");
-  @@clientLocation(AzureSandboxes.create, Group, "csharp");
+  @@clientLocation(AzureSandboxes.list, Group.Sandboxes, "csharp");
+  @@clientLocation(AzureSandboxes.create, Group.Sandboxes, "csharp");
   @@clientLocation(
     SandboxLifecycleOperations.getSandboxesCount,
-    Group,
+    Group.Sandboxes,
     "csharp"
   );
-  // Resource operations share the sandbox identifier captured by the parent factory.
-  @@clientLocation(AzureSandboxes.get, Group.Resource, "csharp");
-  @@clientLocation(AzureSandboxes.delete, Group.Resource, "csharp");
+  // Individual sandbox operations retain the sandbox identifier as a method parameter.
+  @@clientLocation(AzureSandboxes.get, Group.Sandboxes, "csharp");
+  @@clientLocation(AzureSandboxes.delete, Group.Sandboxes, "csharp");
   @@clientLocation(
     SandboxLifecycleOperations.getSandboxStats,
-    Group.Resource,
+    Group.Sandboxes,
     "csharp"
   );
   @@clientLocation(
     SandboxLifecycleOperations.postSandboxDisable,
-    Group.Resource,
+    Group.Sandboxes,
     "csharp"
   );
   @@clientLocation(
     SandboxLifecycleOperations.postSandboxEnable,
-    Group.Resource,
+    Group.Sandboxes,
     "csharp"
   );
   @@clientLocation(
     SandboxLifecycleOperations.postSandboxExecuteCommand,
-    Group.Resource,
+    Group.Sandboxes,
     "csharp"
   );
   @@clientLocation(
     SandboxLifecycleOperations.postSandboxExecuteShellCommand,
-    Group.Resource,
+    Group.Sandboxes,
     "csharp"
   );
   @@clientLocation(
     SandboxLifecycleOperations.postSandboxLifecycle,
-    Group.Resource,
+    Group.Sandboxes,
     "csharp"
   );
   @@clientLocation(
     SandboxLifecycleOperations.postSandboxResume,
-    Group.Resource,
+    Group.Sandboxes,
     "csharp"
   );
   @@clientLocation(
     SandboxLifecycleOperations.postSandboxStop,
-    Group.Resource,
+    Group.Sandboxes,
     "csharp"
   );
   @@clientLocation(
     SandboxStorageOperations.postSandboxCommit,
-    Group.Resource,
+    Group.Sandboxes,
     "csharp"
   );
   @@clientLocation(
     SandboxStorageOperations.postSandboxDownloadContentPackage,
-    Group.Resource,
+    Group.Sandboxes,
     "csharp"
   );
   @@clientLocation(
     SandboxStorageOperations.postSandboxPodVolumesAdd2,
-    Group.Resource,
+    Group.Sandboxes,
     "csharp"
   );
   @@clientLocation(
     SandboxStorageOperations.postSandboxSnapshot,
-    Group.Resource,
+    Group.Sandboxes,
     "csharp"
   );
   @@clientLocation(
     SandboxStorageOperations.postSandboxVolumeAdd,
-    Group.Resource,
+    Group.Sandboxes,
     "csharp"
   );
   @@clientLocation(
     SandboxFilesOperations.deleteSandboxFile,
-    Group.Resource.Files,
+    Group.Sandboxes,
     "csharp"
   );
   @@clientLocation(
     SandboxFilesOperations.getSandboxFile,
-    Group.Resource.Files,
+    Group.Sandboxes,
     "csharp"
   );
   @@clientLocation(
     SandboxFilesOperations.getSandboxFilesList,
-    Group.Resource.Files,
+    Group.Sandboxes,
     "csharp"
   );
   @@clientLocation(
     SandboxFilesOperations.getSandboxFileStat,
-    Group.Resource.Files,
+    Group.Sandboxes,
     "csharp"
   );
   @@clientLocation(
     SandboxFilesOperations.postSandboxFileMkdir,
-    Group.Resource.Files,
+    Group.Sandboxes,
     "csharp"
   );
   @@clientLocation(
     SandboxFilesOperations.postSandboxFile,
-    Group.Resource.Files,
+    Group.Sandboxes,
     "csharp"
   );
 
   @@clientLocation(
     SandboxNetworkingOperations.getSandboxEgressDecisions,
-    Group.Resource.Networking,
+    Group.Sandboxes,
     "csharp"
   );
   @@clientLocation(
     SandboxNetworkingOperations.getSandboxPorts,
-    Group.Resource.Networking,
+    Group.Sandboxes,
     "csharp"
   );
   @@clientLocation(
     SandboxNetworkingOperations.patchSandboxPort,
-    Group.Resource.Networking,
+    Group.Sandboxes,
     "csharp"
   );
   @@clientLocation(
     SandboxNetworkingOperations.postSandboxConnectionAdd,
-    Group.Resource.Networking,
+    Group.Sandboxes,
     "csharp"
   );
   @@clientLocation(
     SandboxNetworkingOperations.postSandboxEgressPolicy,
-    Group.Resource.Networking,
+    Group.Sandboxes,
     "csharp"
   );
   @@clientLocation(
     SandboxNetworkingOperations.postSandboxPortAdd,
-    Group.Resource.Networking,
+    Group.Sandboxes,
     "csharp"
   );
   @@clientLocation(
     SandboxNetworkingOperations.postSandboxPortRemove,
-    Group.Resource.Networking,
+    Group.Sandboxes,
     "csharp"
   );
   @@clientLocation(
     SandboxNetworkingOperations.putSandboxPorts,
-    Group.Resource.Networking,
+    Group.Sandboxes,
     "csharp"
   );
 
   @@clientLocation(
     SandboxStreamsOperations.getSandboxExecStream,
-    Group.Resource.Streams,
+    Group.Sandboxes,
     "csharp"
   );
   @@clientLocation(
     SandboxStreamsOperations.getSandboxLogStream,
-    Group.Resource.Streams,
+    Group.Sandboxes,
     "csharp"
   );
   @@clientLocation(
     SandboxStreamsOperations.getSandboxProcessesStream,
-    Group.Resource.Streams,
+    Group.Sandboxes,
     "csharp"
   );
 
@@ -341,12 +312,12 @@ namespace ContainerAppsSandbox {
   );
   @@clientLocation(
     DiskImagesOperations.listDiskImagesPublic,
-    Group.DiskImages,
+    Group.PublicDiskImages,
     "csharp"
   );
   @@clientLocation(
     DiskImagesOperations.getDiskImagePublic,
-    Group.DiskImages,
+    Group.PublicDiskImages,
     "csharp"
   );
   @@clientLocation(
@@ -381,11 +352,27 @@ namespace ContainerAppsSandbox {
     "csharp"
   );
 
-  @@clientLocation(SecretsOperations.deleteSecret, Group.Secrets, "csharp");
+  @@clientLocation(
+    SecretsOperations.deleteSecret,
+    Group.Secrets,
+    "csharp"
+  );
   @@clientLocation(SecretsOperations.listSecrets, Group.Secrets, "csharp");
-  @@clientLocation(SecretsOperations.getSecretKeys, Group.Secrets, "csharp");
-  @@clientLocation(SecretsOperations.postSecretPeek, Group.Secrets, "csharp");
-  @@clientLocation(SecretsOperations.putSecret, Group.Secrets, "csharp");
+  @@clientLocation(
+    SecretsOperations.getSecretKeys,
+    Group.Secrets,
+    "csharp"
+  );
+  @@clientLocation(
+    SecretsOperations.postSecretPeek,
+    Group.Secrets,
+    "csharp"
+  );
+  @@clientLocation(
+    SecretsOperations.putSecret,
+    Group.Secrets,
+    "csharp"
+  );
 
   @@clientLocation(
     SnapshotsOperations.deleteSnapshot,
@@ -402,14 +389,34 @@ namespace ContainerAppsSandbox {
     Group.Snapshots,
     "csharp"
   );
-  @@clientLocation(SnapshotsOperations.getSnapshot, Group.Snapshots, "csharp");
+  @@clientLocation(
+    SnapshotsOperations.getSnapshot,
+    Group.Snapshots,
+    "csharp"
+  );
 
-  @@clientLocation(VolumesOperations.deleteVolume, Group.Volumes, "csharp");
-  @@clientLocation(VolumesOperations.deleteVolumeFile, Group.Volumes, "csharp");
+  @@clientLocation(
+    VolumesOperations.deleteVolume,
+    Group.Volumes,
+    "csharp"
+  );
+  @@clientLocation(
+    VolumesOperations.deleteVolumeFile,
+    Group.Volumes,
+    "csharp"
+  );
   @@clientLocation(VolumesOperations.listVolumes, Group.Volumes, "csharp");
   @@clientLocation(VolumesOperations.getVolumesCount, Group.Volumes, "csharp");
-  @@clientLocation(VolumesOperations.getVolume, Group.Volumes, "csharp");
-  @@clientLocation(VolumesOperations.getVolumeFiles, Group.Volumes, "csharp");
+  @@clientLocation(
+    VolumesOperations.getVolume,
+    Group.Volumes,
+    "csharp"
+  );
+  @@clientLocation(
+    VolumesOperations.getVolumeFiles,
+    Group.Volumes,
+    "csharp"
+  );
   @@clientLocation(
     VolumesOperations.getVolumeFileDownload,
     Group.Volumes,
@@ -420,7 +427,11 @@ namespace ContainerAppsSandbox {
     Group.Volumes,
     "csharp"
   );
-  @@clientLocation(VolumesOperations.postVolumeFork, Group.Volumes, "csharp");
+  @@clientLocation(
+    VolumesOperations.postVolumeFork,
+    Group.Volumes,
+    "csharp"
+  );
   @@clientLocation(VolumesOperations.createVolume, Group.Volumes, "csharp");
   @@clientLocation(
     VolumesOperations.createOrReplaceVolumeFile,
@@ -430,15 +441,13 @@ namespace ContainerAppsSandbox {
 
   // Client names
   // The C# emitter prefixes nested clients with their parent names.
-  @@clientName(Group, "SandboxGroup", "csharp");
-  @@clientName(Group.Resource, "Sandbox", "csharp");
-  @@clientName(Group.Resource.Files, "Files", "csharp");
-  @@clientName(Group.Resource.Networking, "Networking", "csharp");
-  @@clientName(Group.Resource.Streams, "Streams", "csharp");
+  @@clientName(Group, "SandboxGroupClient", "csharp");
+  @@clientName(Group.Sandboxes, "Sandboxes", "csharp");
   @@clientName(Group.Connections, "Connections", "csharp");
   @@clientName(Group.ContentPackages, "ContentPackages", "csharp");
   @@clientName(Group.Credentials, "Credentials", "csharp");
   @@clientName(Group.DiskImages, "DiskImages", "csharp");
+  @@clientName(Group.PublicDiskImages, "PublicDiskImages", "csharp");
   @@clientName(Group.EgressPolicies, "EgressPolicies", "csharp");
   @@clientName(Group.Secrets, "Secrets", "csharp");
   @@clientName(Group.Snapshots, "Snapshots", "csharp");
