@@ -1,12 +1,14 @@
-import { EventEmitter } from "node:events";
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import { PassThrough } from "node:stream";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import type { ExecFileOptions, ExecResult } from "../../../shared/src/exec.ts";
 
-const { spawnMock } = vi.hoisted(() => ({ spawnMock: vi.fn() }));
+const { execFileMock } = vi.hoisted(() => ({
+  execFileMock:
+    vi.fn<(file: string, args?: string[], options?: ExecFileOptions) => Promise<ExecResult>>(),
+}));
 
-vi.mock("cross-spawn", () => ({ default: spawnMock }));
+vi.mock("../../../shared/src/exec.ts", () => ({ execFile: execFileMock }));
 
 import { analyzeSdkProjects } from "../../src/sdk-breaking-change/analyze-sdk-projects.ts";
 
@@ -23,27 +25,14 @@ beforeEach(async () => {
     recursive: true,
   });
 
-  spawnMock.mockImplementation((_command: string, args: string[]) => {
-    const child = Object.assign(new EventEmitter(), {
-      stdout: new PassThrough(),
-      stderr: new PassThrough(),
-    });
-
-    queueMicrotask(() => {
-      void (async () => {
-        const operation = args[1];
-        if (operation === "generate") {
-          const packagePath = join(sdkRepositoryPath, "sdk", "armwidget");
-          await mkdir(packagePath, { recursive: true });
-          await writeFile(join(packagePath, "tsp-location.yaml"), "directory: specification\n");
-        }
-        child.stdout.end(`${JSON.stringify({ operation })}\n`);
-        child.stderr.end();
-        child.emit("close", 0, null);
-      })();
-    });
-
-    return child;
+  execFileMock.mockImplementation(async (_file, args = []) => {
+    const operation = args[1];
+    if (operation === "generate") {
+      const packagePath = join(sdkRepositoryPath, "sdk", "armwidget");
+      await mkdir(packagePath, { recursive: true });
+      await writeFile(join(packagePath, "tsp-location.yaml"), "directory: specification\n");
+    }
+    return { stdout: `${JSON.stringify({ operation })}\n`, stderr: "" };
   });
 });
 
@@ -55,7 +44,6 @@ afterEach(async () => {
 describe("analyzeSdkProjects", () => {
   it("runs generation, build, and detection and writes the result manifest", async () => {
     await analyzeSdkProjects({
-      runnerTemp: temporaryDirectory,
       localSdkRepositoryPath: sdkRepositoryPath,
       specificationRepositoryPath,
       typeSpecConfigPaths: ["specification/service/Widget.Service/tspconfig.yaml"],
@@ -63,6 +51,7 @@ describe("analyzeSdkProjects", () => {
       sdkLanguage: "Go",
       analyzedSha: "a".repeat(40),
       workflowUrl: "https://github.com/owner/repo/actions/runs/123",
+      resultDir: temporaryDirectory,
     });
 
     const resultsPath = join(temporaryDirectory, "sdk-breaking-change-results");
@@ -81,9 +70,14 @@ describe("analyzeSdkProjects", () => {
     await expect(
       readFile(join(resultsPath, "armwidget", "breaking-changes.json"), "utf8"),
     ).resolves.toContain('"operation":"detect-breaking-change"');
-    await expect(readFile(join(resultsPath, "analysis.log"), "utf8")).resolves.toContain(
-      '"operation":"detect-breaking-change"',
+    await expect(readFile(join(resultsPath, "analysis.log"), "utf8")).resolves.toBe("");
+    expect(execFileMock).toHaveBeenCalledTimes(3);
+    expect(execFileMock).toHaveBeenNthCalledWith(1, "azsdk", expect.arrayContaining(["generate"]));
+    expect(execFileMock).toHaveBeenNthCalledWith(2, "azsdk", expect.arrayContaining(["build"]));
+    expect(execFileMock).toHaveBeenNthCalledWith(
+      3,
+      "azsdk",
+      expect.arrayContaining(["detect-breaking-change"]),
     );
-    expect(spawnMock).toHaveBeenCalledTimes(3);
   });
 });

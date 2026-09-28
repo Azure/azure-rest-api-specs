@@ -4,35 +4,41 @@ import { z } from "zod";
 import { AnalysisResultSchema } from "./create-analysis-result.ts";
 import { execFile } from "../../../shared/src/exec.ts";
 
-type MitigatedChange = {
-  breakingChange: string;
-  suggestedFix: string;
-  isResolved: boolean;
-  typespecChangesSummary?: string[];
-};
+const MitigatedChangeSchema = z.object({
+  breakingChange: z.string(),
+  suggestedFix: z.string(),
+  isResolved: z.boolean(),
+  typespecChangesSummary: z.array(z.string()).optional(),
+});
 
-type MitigationResult = {
-  schemaVersion: 1;
-  prNumber: number;
-  headSha: string;
-  sdkLanguage: string;
-  mitigationWorkflowUrl: string;
-  status: "success";
-  customizationCode: string;
-  projects: Array<{
-    typespecProject: string;
-    sdkPackage: string;
-    breakingChanges: MitigatedChange[];
-  }>;
-};
+type MitigatedChange = z.infer<typeof MitigatedChangeSchema>;
+
+export const MitigationResultSchema = z.object({
+  schemaVersion: z.literal(1),
+  prNumber: z.number().int().positive(),
+  headSha: z.string().regex(/^[0-9a-f]{40}$/i),
+  sdkLanguage: z.string().min(1),
+  mitigationWorkflowUrl: z.string().url(),
+  status: z.enum(["success", "failure"]),
+  customizationCode: z.string(),
+  projects: z.array(
+    z.object({
+      typespecProject: z.string().min(1),
+      sdkPackage: z.string().min(1),
+      breakingChanges: z.array(MitigatedChangeSchema),
+    }),
+  ),
+  errorMessage: z.string().min(1).optional(),
+});
+
+export type MitigationResult = z.infer<typeof MitigationResultSchema>;
 
 export type MitigateSdkBreakingChangesOptions = {
-  runnerTemp: string;
   analysisResultPath: string;
   mitigationResultPath: string;
   mitigationWorkflowUrl: string;
   specificationRepositoryPath: string;
-  sdkRepositoryPath: string;
+  resultDirPath: string;
   azureSdkCliPath: string;
 };
 
@@ -61,10 +67,11 @@ function isWithin(parent: string, child: string): boolean {
 }
 
 async function writeResult(path: string, result: MitigationResult): Promise<void> {
-  await writeFile(path, `${JSON.stringify(result, null, 2)}\n`);
+  const validatedResult = MitigationResultSchema.parse(result);
+  await writeFile(path, `${JSON.stringify(validatedResult, null, 2)}\n`);
 }
 
-function cleanCustomizedUpdateResult(
+function BuildCustomizedUpdateResult(
   rawResult: unknown,
   breakingChange: string,
   suggestedFix: string,
@@ -82,113 +89,117 @@ function cleanCustomizedUpdateResult(
 }
 
 export async function mitigateSdkBreakingChanges({
-  runnerTemp,
   analysisResultPath,
   mitigationResultPath,
   mitigationWorkflowUrl,
   specificationRepositoryPath: unresolvedSpecificationRepositoryPath,
-  sdkRepositoryPath: unresolvedSdkRepositoryPath,
+  resultDirPath,
   azureSdkCliPath,
 }: MitigateSdkBreakingChangesOptions): Promise<void> {
   const analysisResult = AnalysisResultSchema.parse(
     JSON.parse(await readFile(analysisResultPath, "utf8")),
   );
-  const specificationRepositoryPath = await realpath(unresolvedSpecificationRepositoryPath);
-  const specificationRoot = await realpath(join(specificationRepositoryPath, "specification"));
-  const sdkRepositoryPath = await realpath(unresolvedSdkRepositoryPath);
-  await mkdir(dirname(mitigationResultPath), { recursive: true });
+  try {
+    const specificationRepositoryPath = await realpath(unresolvedSpecificationRepositoryPath);
+    const specificationRoot = await realpath(join(specificationRepositoryPath, "specification"));
+    await mkdir(dirname(mitigationResultPath), { recursive: true });
 
-  const mitigationResult: MitigationResult = {
-    schemaVersion: 1,
-    prNumber: analysisResult.prNumber,
-    headSha: analysisResult.headSha,
-    sdkLanguage: analysisResult.sdkLanguage,
-    mitigationWorkflowUrl,
-    status: "success",
-    customizationCode: "",
-    projects: analysisResult.projects.map((project) => ({
-      typespecProject: project.typespecProject,
-      sdkPackage: project.sdkPackage,
-      breakingChanges: [],
-    })),
-  };
-  await writeResult(mitigationResultPath, mitigationResult);
+    const mitigationResult: MitigationResult = {
+      schemaVersion: 1,
+      prNumber: analysisResult.prNumber,
+      headSha: analysisResult.headSha,
+      sdkLanguage: analysisResult.sdkLanguage,
+      mitigationWorkflowUrl,
+      status: "success",
+      customizationCode: "",
+      projects: analysisResult.projects.map((project) => ({
+        typespecProject: project.typespecProject,
+        sdkPackage: project.sdkPackage,
+        breakingChanges: [],
+      })),
+    };
 
-  const locationPaths = await findFiles(sdkRepositoryPath, "tsp-location.yaml");
-  for (const [projectIndex, project] of analysisResult.projects.entries()) {
-    if (project.breakingChanges.length === 0) {
-      console.log(`No SDK breaking changes found for ${project.typespecProject}.`);
-      continue;
-    }
+    for (const [projectIndex, project] of analysisResult.projects.entries()) {
+      if (project.breakingChanges.length === 0) {
+        console.log(`No SDK breaking changes found for ${project.typespecProject}.`);
+        continue;
+      }
 
-    const typeSpecProjectPath = await realpath(
-      join(specificationRepositoryPath, project.typespecProject),
-    );
-    if (
-      !(await stat(typeSpecProjectPath)).isDirectory() ||
-      !isWithin(specificationRoot, typeSpecProjectPath)
-    ) {
-      throw new Error(`Invalid TypeSpec project path: ${project.typespecProject}`);
-    }
-
-    const packagePaths = await Promise.all(
-      locationPaths
-        .map((locationPath) => dirname(locationPath))
-        .filter((packagePath) => basename(packagePath) === project.sdkPackage)
-        .map((packagePath) => realpath(packagePath)),
-    );
-    if (packagePaths.length !== 1 || !isWithin(sdkRepositoryPath, packagePaths[0])) {
-      throw new Error(
-        `Expected exactly one SDK package named ${project.sdkPackage}, found ${packagePaths.length}.`,
+      const typeSpecProjectPath = await realpath(
+        join(specificationRepositoryPath, project.typespecProject),
       );
-    }
+      if (
+        !(await stat(typeSpecProjectPath)).isDirectory() ||
+        !isWithin(specificationRoot, typeSpecProjectPath)
+      ) {
+        throw new Error(`Invalid TypeSpec project path: ${project.typespecProject}`);
+      }
 
-    for (const [changeIndex, change] of project.breakingChanges.entries()) {
-      console.log(
-        `Mitigating SDK breaking change ${changeIndex + 1} of ${project.breakingChanges.length} for ${project.typespecProject}.`,
-      );
-      const commandResultPath = join(runnerTemp, `sdk-mitigation-result-${changeIndex}.json`);
-      const { stdout } = await execFile(join(azureSdkCliPath, process.platform === "win32" ? "azsdk.exe" : "azsdk"), [
-        "typespec",
-        "client",
-        "customized-update",
-        "--tsp-project-path",
-        typeSpecProjectPath,
-        "--package-path",
-        packagePaths[0],
-        "--customization-request",
-        `Resolve this SDK breaking change: ${JSON.stringify({
-          breakingChange: change.breakingChange,
-          category: change.category,
-          suggestedFix: change.suggestedFix,
-        })}`,
-        "--edit-scope",
-        "2",
-        "--output",
-        "json",
-      ]);
-      await writeFile(commandResultPath, stdout);
-
-      let cleanResult: MitigatedChange = {
-        breakingChange: change.breakingChange,
-        suggestedFix: change.suggestedFix,
-        isResolved: false,
-      };
-      try {
-        cleanResult = cleanCustomizedUpdateResult(
-          JSON.parse(stdout),
-          change.breakingChange,
-          change.suggestedFix,
+      for (const [changeIndex, change] of project.breakingChanges.entries()) {
+        console.log(
+          `Mitigating SDK breaking change ${changeIndex + 1} of ${project.breakingChanges.length} for ${project.typespecProject}.`,
         );
-      } catch {
-        cleanResult.isResolved = false;
-      }
-      const succeeded = cleanResult.isResolved;
-      mitigationResult.projects[projectIndex].breakingChanges.push(cleanResult);
-      await writeResult(mitigationResultPath, mitigationResult);
-      if (!succeeded) {
-        throw new Error(`Mitigation failed for ${change.breakingChange}.`);
+        const commandResultPath = join(resultDirPath, `sdk-mitigation-result-${changeIndex}.json`);
+        try {
+          const { stdout } = await execFile(
+            join(azureSdkCliPath, process.platform === "win32" ? "azsdk.exe" : "azsdk"),
+            [
+              "typespec",
+              "client",
+              "customized-update",
+              "--tsp-project-path",
+              typeSpecProjectPath,
+              "--customization-request",
+              `Resolve this SDK breaking change: ${JSON.stringify({
+                breakingChange: change.breakingChange,
+                category: change.category,
+                suggestedFix: change.suggestedFix,
+              })}`,
+              "--edit-scope",
+              "2",
+              "--output",
+              "json",
+            ],
+          );
+          await writeFile(commandResultPath, stdout);
+
+          let migratedResult: MitigatedChange = {
+            breakingChange: change.breakingChange,
+            suggestedFix: change.suggestedFix,
+            isResolved: false,
+          };
+          try {
+            migratedResult = BuildCustomizedUpdateResult(
+              JSON.parse(stdout),
+              change.breakingChange,
+              change.suggestedFix,
+            );
+          } catch {
+            migratedResult.isResolved = false;
+          }
+          mitigationResult.projects[projectIndex].breakingChanges.push(migratedResult);
+        } catch (error) {
+          console.error(
+            `Failed to mitigate SDK breaking change ${changeIndex + 1} for ${project.typespecProject}:`,
+            error,
+          );
+        }
+        await writeResult(mitigationResultPath, mitigationResult);
       }
     }
+  } catch (error) {
+    console.error("SDK breaking-change mitigation failed.", error);
+    let failureResult: MitigationResult = {
+      schemaVersion: 1,
+      status: "failure",
+      prNumber: analysisResult.prNumber,
+      headSha: analysisResult.headSha,
+      sdkLanguage: analysisResult.sdkLanguage,
+      mitigationWorkflowUrl: mitigationWorkflowUrl,
+      errorMessage: (error as Error).message,
+      projects: [],
+      customizationCode: "",
+    };
+    await writeResult(mitigationResultPath, failureResult);
   }
 }

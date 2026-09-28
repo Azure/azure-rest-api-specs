@@ -1,26 +1,8 @@
 import type { AsyncFunctionArguments } from "@actions/github-script";
 import { readFile } from "node:fs/promises";
+import { type MitigationResult, MitigationResultSchema } from "./mitigate-sdk-breaking-changes.ts";
 import { publishResultInComment } from "./publish-result-in-comment.ts";
 import { escapeMarkdown } from "../../../shared/src/markdown.ts";
-
-type MitigationResult = {
-  prNumber: number;
-  headSha: string;
-  sdkLanguage: string;
-  status: "success" | "failure";
-  errorMessage?: string;
-  customizationCode: string;
-  projects: Array<{
-    typespecProject: string;
-    sdkPackage: string;
-    breakingChanges: Array<{
-      breakingChange: string;
-      suggestedFix: string;
-      isResolved: boolean;
-      typespecChangesSummary?: string[];
-    }>;
-  }>;
-};
 
 // function escapeTableCell(value: unknown, fallback = "-"): string {
 //   const text =
@@ -42,7 +24,9 @@ export async function buildMitigationReport({
   mitigationResultPath: string;
   workflowSummaryUrl: string;
 }): Promise<{ report: string; result: MitigationResult }> {
-  const result = JSON.parse(await readFile(mitigationResultPath, "utf8")) as MitigationResult;
+  const result = MitigationResultSchema.parse(
+    JSON.parse(await readFile(mitigationResultPath, "utf8")),
+  );
   if (result.status !== "success") {
     const errorMessage =
       result.errorMessage ?? "The SDK breaking-change mitigation did not succeed.";

@@ -186,7 +186,6 @@ jobs:
             const { analyzeSdkProjects } =
               await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change/analyze-sdk-projects.ts');
             await analyzeSdkProjects({
-              runnerTemp: process.env.RUNNER_TEMP,
               localSdkRepositoryPath: process.env.LOCAL_SDK_REPO_PATH,
               specificationRepositoryPath: process.env.SPEC_REPOSITORY_PATH,
               typeSpecConfigPaths: JSON.parse(process.env.TYPESPEC_CONFIG_PATHS),
@@ -194,6 +193,7 @@ jobs:
               sdkLanguage: process.env.SDK_LANGUAGE,
               analyzedSha: process.env.ANALYZED_SHA,
               workflowUrl: process.env.WORKFLOW_URL,
+              resultDir: process.env.RUNNER_TEMP,
             });
 
       - name: Publish result summary

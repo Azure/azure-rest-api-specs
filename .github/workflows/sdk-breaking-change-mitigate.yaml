@@ -151,12 +151,11 @@ jobs:
             const { mitigateSdkBreakingChanges } =
               await import('${{ github.workspace }}/repositories/workflow-repository/.github/workflows/src/sdk-breaking-change/mitigate-sdk-breaking-changes.ts');
             await mitigateSdkBreakingChanges({
-              runnerTemp: process.env.RUNNER_TEMP,
               analysisResultPath: process.env.ANALYSIS_RESULT_PATH,
               mitigationResultPath: process.env.MITIGATION_RESULT_PATH,
               mitigationWorkflowUrl: process.env.MITIGATION_WORKFLOW_URL,
               specificationRepositoryPath: process.env.SPEC_REPOSITORY_PATH,
-              sdkRepositoryPath: process.env.SDK_REPOSITORY_PATH,
+              resultDirPath: process.env.RUNNER_TEMP,
               azureSdkCliPath: process.env.AZSDK_CLI_PATH,
             });
 

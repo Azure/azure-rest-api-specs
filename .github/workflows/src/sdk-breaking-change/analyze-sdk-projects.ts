@@ -10,7 +10,6 @@ type ProjectResult = {
 };
 
 export type AnalyzeSdkProjectsOptions = {
-  runnerTemp: string;
   localSdkRepositoryPath: string;
   specificationRepositoryPath: string;
   typeSpecConfigPaths: string[];
@@ -18,6 +17,7 @@ export type AnalyzeSdkProjectsOptions = {
   sdkLanguage: string;
   analyzedSha: string;
   workflowUrl: string;
+  resultDir: string;
 };
 
 async function findFiles(directory: string, name: string): Promise<string[]> {
@@ -48,7 +48,6 @@ function isWithin(parent: string, child: string): boolean {
 }
 
 export async function analyzeSdkProjects({
-  runnerTemp,
   localSdkRepositoryPath: unresolvedLocalSdkRepositoryPath,
   specificationRepositoryPath,
   typeSpecConfigPaths,
@@ -56,9 +55,10 @@ export async function analyzeSdkProjects({
   sdkLanguage,
   analyzedSha,
   workflowUrl,
+  resultDir,
 }: AnalyzeSdkProjectsOptions): Promise<void> {
   const localSdkRepositoryPath = await realpath(unresolvedLocalSdkRepositoryPath);
-  const resultsDirectory = join(runnerTemp, "sdk-breaking-change-results");
+  const resultsDirectory = join(resultDir, "sdk-breaking-change-results");
   const analysisLog = join(resultsDirectory, "analysis.log");
   await mkdir(resultsDirectory, { recursive: true });
   await writeFile(analysisLog, "");
@@ -80,7 +80,7 @@ export async function analyzeSdkProjects({
     for (const [index, relativeConfigPath] of typeSpecConfigPaths.entries()) {
       const typeSpecProjectPath = relativeConfigPath.replace(/\/tspconfig\.yaml$/, "");
       const configPath = join(specificationRepositoryPath, relativeConfigPath);
-      const generationResult = join(runnerTemp, "sdk-generation-result.json");
+      const generationResult = join(resultDir, "sdk-generation-result.json");
       const generationStartedAt = Date.now();
 
       /* Generate the SDK package */
