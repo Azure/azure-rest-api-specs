@@ -39,6 +39,6 @@ model UpgradeHistoryProperties {
 
 @armResourceOperations
 interface UpgradeHistories {
-  @doc("List UpgradeHistory resources by AppLinkMember.")
+  @doc("List the upgrade history of an Azure Kubernetes Application Network member.")
   listByAppLinkMember is ArmResourceListByParent<UpgradeHistory>;
 }
