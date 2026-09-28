@@ -141,7 +141,10 @@ model VoiceAgentHandoffEdge {
   @maxValue(10000)
   delay_ms?: int32 = 0;
 
-  @doc("Optional deterministic source-voice announcement played before target activation.")
+  @doc("""
+    Optional deterministic source-voice announcement played before target activation. Supported by cascaded
+    pipelines and realtime pipelines using local Azure TTS; model-native realtime voice requires omission or null.
+    """)
   @maxLength(500)
   transfer_message?: string | null;
 
