@@ -3561,10 +3561,6 @@
           "type": "boolean",
           "description": "This property when set to true, will enable data residency, thus, disabling disaster recovery."
         },
-        "rootCertificate": {
-          "$ref": "#/definitions/RootCertificateProperties",
-          "description": "This property store root certificate related information"
-        },
         "ipVersion": {
           "$ref": "#/definitions/IpVersion",
           "description": "This property specifies the IP Version the hub is currently utilizing."
@@ -4536,22 +4532,6 @@
             "description": "None"
           }
         ]
-      }
-    },
-    "RootCertificateProperties": {
-      "type": "object",
-      "description": "This property store root certificate related information",
-      "properties": {
-        "enableRootCertificateV2": {
-          "type": "boolean",
-          "description": "This property when set to true, hub will use G2 cert; while it's set to false, hub uses Baltimore Cert."
-        },
-        "lastUpdatedTimeUtc": {
-          "type": "string",
-          "format": "date-time",
-          "description": "the last update time to root certificate flag.",
-          "readOnly": true
-        }
       }
     },
     "RouteCompilationError": {

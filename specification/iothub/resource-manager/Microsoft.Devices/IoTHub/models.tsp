@@ -952,6 +952,7 @@ model IotHubProperties {
   /**
    * This property store root certificate related information
    */
+  @removed(Versions.v2026_11_01)
   rootCertificate?: RootCertificateProperties;
 
   /**
@@ -1928,6 +1929,7 @@ model IotHubLocationDescription {
 /**
  * This property store root certificate related information
  */
+@removed(Versions.v2026_11_01)
 model RootCertificateProperties {
   /**
    * This property when set to true, hub will use G2 cert; while it's set to false, hub uses Baltimore Cert.
