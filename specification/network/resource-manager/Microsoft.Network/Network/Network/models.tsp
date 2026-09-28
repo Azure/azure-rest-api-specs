@@ -10635,6 +10635,7 @@ model BastionHostPropertiesFormat {
   /**
    * Add FQDN IP Address for Bastion with Firewall In Data Path
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2026_03_01)
   fqdnIPAddress?: string;
 }
