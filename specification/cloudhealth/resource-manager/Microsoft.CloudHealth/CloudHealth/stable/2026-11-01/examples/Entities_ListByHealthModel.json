@@ -274,7 +274,7 @@
                       "displayName": "HTTP 5xx error rate",
                       "refreshInterval": "PT1M",
                       "dataUnit": "Percent",
-                      "queryText": "sum(rate(http_requests_total{job=\"orders-api\", code=~\"5..\"}[5m])) / sum(rate(http_requests_total{job=\"orders-api\"}[5m])) * 100",
+                      "queryText": "sum(rate(http_requests_total{job='orders-api', code=~'5..'}[5m])) / sum(rate(http_requests_total{job='orders-api'}[5m])) * 100",
                       "timeGrain": "PT5M",
                       "evaluationRules": {
                         "degradedRule": {
@@ -298,7 +298,7 @@
                       "displayName": "p95 request latency",
                       "refreshInterval": "PT1M",
                       "dataUnit": "MilliSeconds",
-                      "queryText": "histogram_quantile(0.95, sum by (le) (rate(http_request_duration_seconds_bucket{job=\"orders-api\"}[5m]))) * 1000",
+                      "queryText": "histogram_quantile(0.95, sum by (le) (rate(http_request_duration_seconds_bucket{job='orders-api'}[5m]))) * 1000",
                       "timeGrain": "PT5M",
                       "evaluationRules": {
                         "degradedRule": {
@@ -323,7 +323,7 @@
                       "displayName": "Pod CPU utilization",
                       "refreshInterval": "PT1M",
                       "dataUnit": "Percent",
-                      "queryText": "sum(rate(container_cpu_usage_seconds_total{namespace=\"online-store\", pod=~\"orders-api-.*\"}[5m])) * 100",
+                      "queryText": "sum(rate(container_cpu_usage_seconds_total{namespace='online-store', pod=~'orders-api-.*'}[5m])) * 100",
                       "timeGrain": "PT5M",
                       "evaluationRules": {
                         "degradedRule": {
