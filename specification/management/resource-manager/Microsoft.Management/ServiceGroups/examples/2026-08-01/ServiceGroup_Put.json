@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2026-08-01",
+    "createServiceGroupRequest": {
+      "properties": {
+        "attributes": {
+          "criticality": 2
+        },
+        "displayName": "ServiceGroup 1 Name",
+        "parent": {
+          "resourceId": "/providers/Microsoft.Management/serviceGroups/RootGroup"
+        }
+      }
+    },
+    "serviceGroupName": "ServiceGroup1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "ServiceGroup1",
+        "type": "Microsoft.Management/serviceGroups",
+        "id": "/providers/Microsoft.Management/serviceGroups/ServiceGroup1",
+        "properties": {
+          "attributes": {
+            "criticality": 2
+          },
+          "displayName": "ServiceGroup 1 Name",
+          "parent": {
+            "resourceId": "/providers/Microsoft.Management/serviceGroups/RootGroup"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.Management/operationStatuses/20000000-0000-0000-0000-000000000001?api-version=2026-08-01"
+      },
+      "body": {
+        "name": "ServiceGroup1",
+        "type": "Microsoft.Management/serviceGroups",
+        "id": "/providers/Microsoft.Management/serviceGroups/ServiceGroup1",
+        "properties": {
+          "attributes": {
+            "criticality": 2
+          },
+          "displayName": "ServiceGroup 1 Name",
+          "parent": {
+            "resourceId": "/providers/Microsoft.Management/serviceGroups/RootGroup"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  },
+  "operationId": "CreateOrUpdateServiceGroup",
+  "title": "PutServiceGroup"
+}

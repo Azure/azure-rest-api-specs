@@ -97,34 +97,38 @@ using Microsoft.RecoveryServices;
 @@clientLocation(
   PrivateEndpointConnectionResources.get,
   "PrivateEndpointConnection",
-  "!csharp"
+  "!csharp,!javascript"
 );
 @@clientLocation(
   PrivateEndpointConnectionResources.put,
   "PrivateEndpointConnection",
-  "!csharp"
+  "!csharp,!javascript"
 );
 @@clientLocation(
   PrivateEndpointConnectionResources.delete,
   "PrivateEndpointConnection",
-  "!csharp"
+  "!csharp,!javascript"
 );
 @@clientLocation(
   PrivateEndpointOperationStatuses.getOperationStatus,
   "PrivateEndpoint",
-  "!csharp"
+  "!csharp,!javascript"
 );
 
-@@clientLocation(ProtectionIntentResources.get, "ProtectionIntent", "!csharp");
+@@clientLocation(
+  ProtectionIntentResources.get,
+  "ProtectionIntent",
+  "!csharp,!javascript"
+);
 @@clientLocation(
   ProtectionIntentResources.createOrUpdate,
   "ProtectionIntent",
-  "!csharp"
+  "!csharp,!javascript"
 );
 @@clientLocation(
   ProtectionIntentResources.delete,
   "ProtectionIntent",
-  "!csharp"
+  "!csharp,!javascript"
 );
 
 @@clientLocation(
@@ -142,7 +146,7 @@ using Microsoft.RecoveryServices;
 @@clientLocation(
   ProtectionIntentOperationGroup.validate,
   "ProtectionIntent",
-  "!csharp"
+  "!csharp,!javascript"
 );
 
 @@clientLocation(OperationOperationGroup.validate, "Operation", "!csharp");

@@ -7,7 +7,7 @@ using TypeSpec.OpenAPI;
 namespace Azure.AI.Projects;
 
 const RoutineRequiredPreviews = #{
-  conditional_previews: #[FoundryFeaturesOptInKeys.routines_v1_preview],
+  conditional_previews: #[FoundryFeaturesOptInKeys.routines_v2_preview],
 };
 
 @doc("The discriminator values supported for routine triggers.")
@@ -107,6 +107,18 @@ union RoutineRunPhase {
 @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
 union RoutineRunStatus {
   string,
+}
+
+@doc("The supported identities for routine dispatch authorization.")
+@extension("x-ms-foundry-meta", RoutineRequiredPreviews)
+union RoutineDispatchIdentity {
+  string,
+
+  @doc("Dispatches with the target agent identity and a foundation token.")
+  agent: "agent",
+
+  @doc("An explicit customer opt-in to dispatch as the principal that created the routine.")
+  creator: "creator",
 }
 
 alias RoutineTriggers = Record<RoutineTrigger>;
@@ -256,6 +268,13 @@ model Routine {
   updated_at?: FoundryTimestamp;
 }
 
+@doc("Optional authorization configuration for a routine dispatch.")
+@extension("x-ms-foundry-meta", RoutineRequiredPreviews)
+model RoutineAuthorization {
+  @doc("The identity used when dispatching the routine. Defaults to agent when omitted; set to creator only when the customer opts in to creator identity dispatch.")
+  identity?: RoutineDispatchIdentity = RoutineDispatchIdentity.agent;
+}
+
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The request body used to create or update a routine.")
 @extension("x-ms-foundry-meta", RoutineRequiredPreviews)
@@ -272,6 +291,9 @@ model RoutineCreateOrUpdateRequest {
 
   @doc("The action executed when the routine fires.")
   action?: RoutineAction;
+
+  @doc("Optional authorization configuration for dispatching a newly created routine. Ignored when updating an existing routine.")
+  authorization?: RoutineAuthorization;
 }
 
 @doc("Base model for a manual dispatch payload.")
@@ -438,18 +460,11 @@ model ListRoutinesParameters {
   @query
   limit?: int32;
 
-  @doc("An opaque cursor returned as last_id by the previous list response.")
+  @doc("An opaque continuation token identifying where to resume the list. Prefer following the `next_link` returned by the previous response, which embeds this value.")
   @query
-  @continuationToken
   after?: string;
 
-  @doc("Unsupported. Reserved for future backward pagination support.")
-  @query
-  before?: string;
-
-  @doc("The ordering direction. Supported values are asc and desc.")
-  @query
-  order?: string;
+  ...PageOrderQueryParameter;
 }
 
 @doc("Parameters for deleting a routine.")
@@ -475,18 +490,11 @@ model ListRoutineRunsParameters {
   @query
   limit?: int32;
 
-  @doc("An opaque cursor returned as last_id by the previous list-runs response.")
+  @doc("An opaque continuation token identifying where to resume the list. Prefer following the `next_link` returned by the previous response, which embeds this value.")
   @query
-  @continuationToken
   after?: string;
 
-  @doc("Unsupported. Reserved for future backward pagination support.")
-  @query
-  before?: string;
-
-  @doc("The ordering direction. Supported values are asc and desc.")
-  @query
-  order?: string;
+  ...PageOrderQueryParameter;
 }
 
 @doc("Parameters for dispatching a routine asynchronously.")

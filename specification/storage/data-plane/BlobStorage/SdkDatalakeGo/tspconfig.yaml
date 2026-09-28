@@ -3,8 +3,10 @@ parameters:
     default: "sdk/storage"
 options:
   "@azure-tools/typespec-go":
+    api-version: "2026-06-06"
     containing-module: "github.com/Azure/azure-sdk-for-go/sdk/storage/azdatalake"
     service-dir: "sdk/storage"
+    emit-content-type-header: true
     emitter-output-dir: "{output-dir}/{service-dir}/azdatalake/internal/generated_blob"
     generate-fakes: false
     file-prefix: "zz_"

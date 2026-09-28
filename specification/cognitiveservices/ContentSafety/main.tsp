@@ -42,7 +42,7 @@ enum Versions {
   v2023_10_01: "2023-10-01",
   v2024_09_01: "2024-09-01",
 
-  @doc("Public preview that adds asynchronous Content Provenance Detection operations.")
+  @doc("Public preview that adds the synchronous Unified Moderate operation.")
   @Azure.Core.previewVersion
-  v2026_07_01_preview: "2026-07-01-preview",
+  v2026_09_01_preview: "2026-09-01-preview",
 }

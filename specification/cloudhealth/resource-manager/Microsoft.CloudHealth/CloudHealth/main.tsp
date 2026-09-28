@@ -28,6 +28,15 @@ enum Versions {
 
   @doc("2026-05-01-preview")
   v2026_05_01_preview: "2026-05-01-preview",
+
+  @doc("2026-09-01-preview")
+  v2026_09_01_preview: "2026-09-01-preview",
+
+  @doc("2026-10-01-preview")
+  v2026_10_01_preview: "2026-10-01-preview",
+
+  @doc("2026-11-01")
+  v2026_11_01: "2026-11-01",
 }
 
 alias ProviderName = "Microsoft.CloudHealth";
@@ -49,6 +58,15 @@ scalar string4096 extends string;
 @maxLength(256)
 @doc("String with max length validation of 256 characters")
 scalar string256 extends string;
+
+@minLength(1)
+@maxLength(256)
+scalar dimensionFilter256 extends string;
+
+@minLength(1)
+@maxLength(2048)
+@doc("String with max length validation of 2048 characters")
+scalar string2048 extends string;
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
@@ -109,6 +127,11 @@ scalar signalDefinitionName extends string;
 @pattern(proxyResourceNameRegex)
 @doc("Type for signal name.")
 scalar signalName extends string;
+
+@added(Versions.v2026_09_01_preview)
+@pattern(proxyResourceNameRegex)
+@doc("Name of a signal aggregation group. Must be unique within an entity. Independent of signal names.")
+scalar signalAggregationGroupName extends string;
 
 @doc("A signal definition in a health model")
 @parentResource(HealthModel)
@@ -217,6 +240,7 @@ model ThresholdRuleV2 {
   sensitivity?: DynamicThresholdSensitivity;
 
   @added(Versions.v2026_05_01_preview)
+  @removed(Versions.v2026_09_01_preview)
   @doc("ISO 8601 duration for the historical look-back window used by dynamic threshold computation. Only applicable when operator is Dynamic.")
   lookBackWindow?: LookBackWindow;
 }
@@ -353,9 +377,16 @@ model ResourceMetricSignalDefinitionProperties
   @maxLength(256)
   dimension?: string;
 
+  @removed(Versions.v2026_09_01_preview)
+  @renamedFrom(Versions.v2026_09_01_preview, "dimensionFilter")
+  @typeChangedFrom(Versions.v2026_01_01_preview, dimensionFilter256)
   @doc("Optional: Dimension filter to apply to the dimension. Must only be set if also Dimension is set.")
+  dimensionFilterV1?: string2048;
+
+  @added(Versions.v2026_09_01_preview)
+  @doc("Optional: Dimension filter to apply to the dimension.")
   @minLength(1)
-  @maxLength(256)
+  @maxLength(2048)
   dimensionFilter?: string;
 }
 
@@ -571,6 +602,13 @@ model EntityProperties {
   @doc("Signal groups which are assigned to this entity")
   signalGroups?: SignalGroups;
 
+  @added(Versions.v2026_09_01_preview)
+  @doc("Logical aggregation groups over the signals on this entity. Overlap is allowed: the same signal may appear in more than one group's members. Each group is evaluated independently according to its strategy, and a shared signal can contribute to multiple group states and related per-group telemetry. Group states contribute alongside any ungrouped signals and the dependency-aggregated child health to the entity's overall worst-of composite.")
+  @minItems(1)
+  @maxItems(20)
+  @identifiers(#["name"])
+  signalAggregationGroups?: SignalAggregationGroup[];
+
   @visibility(Lifecycle.Read)
   @doc("Discovered by which discovery rule. If set, the entity cannot be deleted manually.")
   discoveredBy?: discoveryRuleName;
@@ -728,7 +766,8 @@ model DependenciesSignalGroup {
 @doc("Properties for dependent entities, i.e. child entities")
 model DependenciesSignalGroupV2 {
   @doc("Aggregation type for child dependencies.")
-  aggregationType: DependenciesAggregationType = DependenciesAggregationType.WorstOf;
+  @typeChangedFrom(Versions.v2026_09_01_preview, DependenciesAggregationType)
+  aggregationType: AggregationType = AggregationType.WorstOf;
 
   @doc("Degraded threshold for aggregation. For MinHealthy: parent is degraded when healthy count/percentage falls to or below this value. For MaxNotHealthy: parent is degraded when not-healthy count/percentage reaches or exceeds this value. Optional — if not set, there is no degraded state (transitions directly from Healthy to Unhealthy).")
   @minValue(0)
@@ -739,13 +778,57 @@ model DependenciesSignalGroupV2 {
   unhealthyThreshold?: float64;
 
   @doc("Unit type for the aggregation thresholds. Required when aggregationType is MinHealthy or MaxNotHealthy.")
-  unit?: DependenciesAggregationUnit;
+  @typeChangedFrom(Versions.v2026_09_01_preview, DependenciesAggregationUnit)
+  unit?: AggregationUnit;
 
   @doc("If true, children with Unknown health state are excluded from aggregation calculations. Defaults to true.")
   ignoreUnknown?: boolean = true;
 }
 
+@added(Versions.v2026_09_01_preview)
+@doc("A logical group of signals on an entity, evaluated under a configurable aggregation strategy. Groups are independent even when they share members. Each group's aggregated state is one of the inputs to the entity's composite health computation alongside any signals not declared in any group's members[].")
+model SignalAggregationGroup {
+  @doc("Name of the aggregation group. Unique within the entity.")
+  name: signalAggregationGroupName;
+
+  @doc("Display name")
+  @minLength(1)
+  @maxLength(260)
+  displayName?: string;
+
+  @doc("Aggregation strategy applied across the members of this group.")
+  aggregationType?: AggregationType = AggregationType.WorstOf;
+
+  @doc("Names of signals on this entity which are members of the group. Members are matched by name; references to signals that do not currently exist on the entity are accepted (typically for pre-declared external signals) and surfaced via 'unresolvedMembers'. A signal may be listed in multiple groups; no duplicates within this list.")
+  @minItems(1)
+  @maxItems(50)
+  members: signalName[];
+
+  @doc("Degraded threshold for threshold-bearing strategies (MinHealthy, MaxNotHealthy). For MinHealthy: group is degraded when the healthy member count/percentage falls to or below this value. For MaxNotHealthy: group is degraded when the not-healthy member count/percentage reaches or exceeds this value. Optional — if not set, the group transitions directly between Healthy and Unhealthy. MUST NOT be set when aggregationType is WorstOf or BestOf.")
+  @minValue(0)
+  degradedThreshold?: float64;
+
+  @doc("Unhealthy threshold for threshold-bearing strategies. Required when aggregationType is MinHealthy or MaxNotHealthy; MUST NOT be set otherwise.")
+  @minValue(0)
+  unhealthyThreshold?: float64;
+
+  @doc("Unit type for the thresholds. Required when aggregationType is MinHealthy or MaxNotHealthy; MUST NOT be set otherwise.")
+  unit?: AggregationUnit;
+
+  @doc("If true (default), members reporting Unknown are excluded from the aggregation. For MinHealthy and MaxNotHealthy this flag affects the denominator/count and is meaningful. For WorstOf and BestOf the flag has no observable effect: under WorstOf, Unknown=0 is the lowest severity and can never beat any non-Unknown member in a Max() so filtering it changes nothing observable; under BestOf, Unknown is unconditionally excluded by the strategy itself irrespective of the flag. The flag is retained on the contract for vocabulary symmetry across all four strategies.")
+  ignoreUnknown?: boolean = true;
+
+  @visibility(Lifecycle.Read)
+  @doc("Computed aggregated health state of the group as of the last entity evaluation. Unknown if no resolvable members or all members filtered out.")
+  aggregatedHealthState?: HealthState;
+
+  @visibility(Lifecycle.Read)
+  @doc("Members listed in 'members' that do not currently resolve to a signal on this entity at the time of the last entity evaluation. Treated as Unknown during aggregation. Empty/omitted when every member resolves.")
+  unresolvedMembers?: signalName[];
+}
+
 @doc("Aggregation type for child dependencies.")
+@removed(Versions.v2026_09_01_preview)
 union DependenciesAggregationType {
   string,
 
@@ -774,6 +857,44 @@ union DependenciesAggregationUnit {
   Absolute: "Absolute",
 
   @doc("Threshold is a percentage of entities (0-100).")
+  Percentage: "Percentage",
+}
+
+@doc("Aggregation strategy for combining a set of health states into one.")
+@added(Versions.v2026_09_01_preview)
+union AggregationType {
+  string,
+
+  @doc("Worst health state across members is propagated. Default behavior.")
+  WorstOf: "WorstOf",
+
+  @removed(Versions.v2026_01_01_preview)
+  @doc("Based on configurable thresholds.")
+  Thresholds: "Thresholds",
+
+  @added(Versions.v2026_09_01_preview)
+  @doc("Best (least severe) health state across the non-Unknown members is propagated. Unknown members are excluded from the selection; if every member is Unknown the group resolves to Unknown. The 'ignoreUnknown' flag has no observable effect for this strategy and is documented as such.")
+  BestOf: "BestOf",
+
+  @added(Versions.v2026_01_01_preview)
+  @doc("Healthy if the count/percentage of healthy members meets the threshold.")
+  MinHealthy: "MinHealthy",
+
+  @added(Versions.v2026_01_01_preview)
+  @doc("Healthy if the count/percentage of not-healthy members stays below the threshold.")
+  MaxNotHealthy: "MaxNotHealthy",
+}
+
+@added(Versions.v2026_01_01_preview)
+@doc("Unit type for the thresholds used by threshold-bearing aggregation strategies.")
+@renamedFrom(Versions.v2026_09_01_preview, "DependenciesAggregationUnit")
+union AggregationUnit {
+  string,
+
+  @doc("Threshold is an absolute count of members.")
+  Absolute: "Absolute",
+
+  @doc("Threshold is a percentage of members (0-100).")
   Percentage: "Percentage",
 }
 
@@ -1036,6 +1157,7 @@ union HealthState {
   @doc("Unknown status")
   Unknown: "Unknown",
 
+  @removed(Versions.v2026_09_01_preview)
   @doc("Deleted status")
   Deleted: "Deleted",
 }
@@ -1185,8 +1307,9 @@ model DiscoveryRuleProperties {
   numberOfDiscoveredEntities?: int32;
 
   @visibility(Lifecycle.Read)
+  @madeOptional(Versions.v2026_09_01_preview)
   @doc("Name of the entity which represents the discovery rule. Note: It might take a few minutes after creating the discovery rule until the entity is created.")
-  entityName: string;
+  entityName?: string;
 }
 
 @added(Versions.v2026_01_01_preview)
@@ -1566,36 +1689,190 @@ model SignalConfiguration {
   @maxLength(256)
   signalId: string;
 
+  @added(Versions.v2026_10_01_preview)
+  @doc("Display name of the recommended signal configuration.")
+  @minLength(1)
+  @maxLength(260)
+  displayName?: string;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("Description of the recommended signal configuration.")
+  @maxLength(1024)
+  description?: string;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("Azure resource types to which the recommended signal configuration applies.")
+  @maxItems(20)
+  applicableResourceTypes?: string256[];
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("Interval in which the recommended signal is evaluated.")
+  refreshInterval?: RefreshInterval;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("Unit of the recommended signal result (e.g. Bytes, MilliSeconds, Percent, Count).")
+  @minLength(1)
+  @maxLength(100)
+  dataUnit?: string;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("Kind-specific settings for the recommended signal.")
+  configuration: SignalRecommendationConfiguration;
+
+  @removed(Versions.v2026_10_01_preview)
   @doc("Metric namespace (e.g. 'microsoft.compute/virtualmachines').")
   @minLength(1)
   @maxLength(256)
   metricNamespace?: string;
 
+  @removed(Versions.v2026_10_01_preview)
   @doc("Name of the metric (e.g. 'Percentage CPU').")
   @minLength(1)
   @maxLength(256)
   metricName?: string;
 
+  @removed(Versions.v2026_10_01_preview)
   @doc("Type of aggregation to apply to the metric.")
   aggregationType?: MetricAggregationType;
 
+  @removed(Versions.v2026_10_01_preview)
   @doc("Unit of the metric (e.g. Percent, Bytes, Count).")
   @minLength(1)
   @maxLength(100)
   unit?: string;
 
+  @removed(Versions.v2026_10_01_preview)
   @doc("Time range of the metric. ISO 8601 duration format (e.g. 'PT5M').")
   @minLength(1)
   @maxLength(100)
   timeGrain?: string;
 
+  @removed(Versions.v2026_09_01_preview)
+  @renamedFrom(Versions.v2026_09_01_preview, "dimensionFilter")
+  @typeChangedFrom(Versions.v2026_01_01_preview, dimensionFilter256)
+  @doc("Optional dimension filter to apply to the metric.")
+  dimensionFilterV1?: string2048;
+
+  @removed(Versions.v2026_10_01_preview)
+  @added(Versions.v2026_09_01_preview)
   @doc("Optional dimension filter to apply to the metric.")
   @minLength(1)
-  @maxLength(256)
+  @maxLength(2048)
   dimensionFilter?: string;
 
   @doc("Evaluation rules with recommended thresholds.")
   evaluationRules?: EvaluationRule;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("Supported signal recommendation kinds.")
+union SignalRecommendationKind {
+  string,
+
+  @doc("Azure Resource Metric recommendation.")
+  AzureResourceMetric: "AzureResourceMetric",
+
+  @doc("Log Analytics Query recommendation.")
+  LogAnalyticsQuery: "LogAnalyticsQuery",
+
+  @doc("Prometheus Metrics Query recommendation.")
+  PrometheusMetricsQuery: "PrometheusMetricsQuery",
+}
+
+@added(Versions.v2026_10_01_preview)
+@discriminator("signalKind")
+@doc("Kind-specific signal recommendation configuration.")
+model SignalRecommendationConfiguration {
+  @doc("Kind of the recommended signal.")
+  signalKind: SignalRecommendationKind;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("Azure Resource Metric recommendation configuration.")
+model AzureResourceMetricRecommendationConfiguration
+  extends SignalRecommendationConfiguration {
+  @doc("Kind of the recommended signal.")
+  signalKind: SignalRecommendationKind.AzureResourceMetric;
+
+  @doc("Metric namespace.")
+  @minLength(1)
+  @maxLength(256)
+  metricNamespace: string;
+
+  @doc("Name of the metric.")
+  @minLength(1)
+  @maxLength(256)
+  metricName: string;
+
+  @doc("Type of aggregation to apply to the metric.")
+  aggregationType: MetricAggregationType;
+
+  @doc("Time range of the metric in ISO 8601 duration format (e.g. 'PT5M').")
+  @minLength(1)
+  @maxLength(100)
+  timeGrain: string;
+
+  @doc("Optional dimension filter to apply to the metric.")
+  @minLength(1)
+  @maxLength(2048)
+  dimensionFilter?: string;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("Log Analytics Query recommendation configuration.")
+model LogAnalyticsQueryRecommendationConfiguration
+  extends SignalRecommendationConfiguration {
+  @doc("Kind of the recommended signal. This value indicates that a Log Analytics workspace is required.")
+  signalKind: SignalRecommendationKind.LogAnalyticsQuery;
+
+  @doc("Query text in KQL syntax. Supported entity template variables, such as `{{entity.azureResourceId}}`, may appear in the query.")
+  @minLength(1)
+  @maxLength(5000)
+  queryText: string;
+
+  @doc("Time range of the signal in ISO 8601 duration format (e.g. 'PT5M'). If not specified, the KQL query must define a time range.")
+  @minLength(1)
+  @maxLength(100)
+  timeGrain?: string;
+
+  @doc("Name of the numeric result column to evaluate against the thresholds.")
+  @minLength(1)
+  @maxLength(100)
+  valueColumnName?: string;
+
+  @doc("Log Analytics tables required by the query.")
+  @maxItems(10)
+  requiredTables?: string256[];
+
+  @doc("Diagnostic setting categories required to populate the query's tables.")
+  @maxItems(20)
+  requiredDiagnosticSettingCategories?: string256[];
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("Prometheus Metrics Query recommendation configuration.")
+model PrometheusMetricsRecommendationConfiguration
+  extends SignalRecommendationConfiguration {
+  @doc("Kind of the recommended signal. This value indicates that an Azure Monitor workspace is required.")
+  signalKind: SignalRecommendationKind.PrometheusMetricsQuery;
+
+  @doc("Query text in PromQL syntax. Supported entity template variables, such as `{{entity.name}}`, may appear in the query.")
+  @minLength(1)
+  @maxLength(5000)
+  queryText: string;
+
+  @doc("Time range of the signal in ISO 8601 duration format (e.g. 'PT5M').")
+  @minLength(1)
+  @maxLength(100)
+  timeGrain?: string;
+
+  @doc("Prometheus metrics required by the query.")
+  @maxItems(20)
+  requiredMetrics?: string256[];
+
+  @doc("Prometheus scrape targets required to populate the query's metrics.")
+  @maxItems(10)
+  requiredScrapeTargets?: string256[];
 }
 
 alias TimestampQueryParam = {
