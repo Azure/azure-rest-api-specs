@@ -2428,9 +2428,6 @@
           },
           "Get Developer Bastion Host": {
             "$ref": "./examples/BastionHostDeveloperGet.json"
-          },
-          "Get Bastion Host With Firewall In Data Path": {
-            "$ref": "./examples/BastionHostGetWithFirewall.json"
           }
         }
       },
@@ -2516,9 +2513,6 @@
           },
           "Create or Update Bastion Host With User Assigned Identity for Session Recording Configuration": {
             "$ref": "./examples/BastionHostPutWithUserAssignedIdentityForSRConfig.json"
-          },
-          "Create Bastion Host With Firewall In Data Path": {
-            "$ref": "./examples/BastionHostPutWithFirewall.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -15265,7 +15259,7 @@
         },
         "privateIPAddress": {
           "type": "string",
-          "description": "PrivateIPAddress of the Bastion Host IP Configuration.",
+          "description": "The private IP address assigned to the Bastion host Internal Load Balancer.",
           "readOnly": true
         }
       },
@@ -15374,12 +15368,12 @@
         },
         "enableFirewallInDataPath": {
           "type": "boolean",
-          "description": "Enable/Disable Firewall In Data Path feature of the Bastion Host resource.",
+          "description": "Enable/Disable Firewall In Data Path feature of the Bastion Host resource",
           "default": false
         },
         "fqdnIPAddress": {
           "type": "string",
-          "description": "Public IP address bound to the DNS name"
+          "description": "Add FQDN IP Address for Bastion with Firewall In Data Path"
         }
       }
     },
