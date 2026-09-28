@@ -6,7 +6,6 @@ import "../skills/routes.tsp";
 import "../agents-session-files/routes.tsp";
 import "../managed-blueprints/routes.tsp";
 import "../agents-optimization/routes.tsp";
-import "../sdk-common/ops-relocation-voice-agents.tsp";
 
 using Azure.ClientGenerator.Core;
 using Azure.Core.Experimental;
@@ -1271,11 +1270,6 @@ namespace Azure.AI.Projects {
       identity: "System.Object",
     },
     "csharp"
-  );
-
-  @@clientName(
-    AgentOptimizationDatasetItem.desired_num_turns,
-    "DesiredTurnCount"
   );
 
   // --------------------------------------------------------------------------------

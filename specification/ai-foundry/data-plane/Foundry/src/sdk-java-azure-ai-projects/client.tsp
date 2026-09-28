@@ -226,6 +226,12 @@ namespace Azure.AI.Projects;
 
 // Azure-specific OpenAI eval extensions used with the Stainless OpenAI SDK.
 @@usage(
+  GraderAzureAIEvaluator,
+  Usage.input | Usage.output | Usage.json,
+  "java"
+);
+@@access(GraderAzureAIEvaluator, Access.public, "java");
+@@usage(
   TestingCriterionEvaluator,
   Usage.input | Usage.output | Usage.json,
   "java"
@@ -293,6 +299,13 @@ namespace Azure.AI.Projects;
   OpenAI.CompoundFilter,
   {
     identity: "com.openai.models.CompoundFilter",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.MisalignmentErrorDetailsResource,
+  {
+    identity: "com.openai.models.ErrorObject.Misalignment",
   },
   "java"
 );
