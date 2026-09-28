@@ -5340,6 +5340,9 @@ op replaceprivateDnsZoneGroupsList(
   "csharp"
 );
 
+// Keep numeric rule identifiers distinct from the released C# string collection.
+@@clientName(Microsoft.Network.ManagedRuleSetRuleGroup.rules, "ruleIds", "csharp");
+
 // Preserve the strong types shared by the released management and provisioning APIs.
 @@alternateType(
   Microsoft.Network.ApplicationGatewayCustomError.customErrorPageUrl,
