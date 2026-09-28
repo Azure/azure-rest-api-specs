@@ -27,7 +27,22 @@ These are the global settings for the cloudhealth.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2026-10-01-preview
+tag: package-2026-11-01
+```
+
+### Tag: package-2026-11-01
+
+These settings apply only when `--tag=package-2026-11-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-11-01'
+input-file:
+  - stable/2026-11-01/cloudhealth.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    reason: Approved scenario for dynamic annotation key-value properties
+    where:
+      - $.definitions.DataAnnotation.properties.annotationDetails
+      - $.definitions.AddDataAnnotationRequest.properties.annotationDetails
 ```
 
 ### Tag: package-2026-10-01-preview
