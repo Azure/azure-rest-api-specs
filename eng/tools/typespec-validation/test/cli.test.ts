@@ -66,7 +66,37 @@ it("uses an explicit root, exits nonzero on failure, and still runs later projec
   await expect(run("--all", "custom")).rejects.toMatchObject({
     code: 1,
     stdout: expect.stringContaining("Suppressed: later project") as unknown,
-    stderr: expect.stringContaining("TypeSpec Validation failed for:\ncustom/a") as unknown,
+    stderr: expect.stringContaining(
+      "TypeSpec Validation failed for some folder to fix run and address any errors:\n" +
+        " > pnpm install\n > pnpm tsv custom/a\n" +
+        "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
+    ) as unknown,
+  });
+});
+
+it("emits a failure annotation inside its project group and a final reproduction summary", async () => {
+  vi.stubEnv("GITHUB_ACTIONS", "true");
+  await addProject("custom/a");
+  await addProject("custom/b");
+  await simpleGit(root).init();
+  await writeFile(
+    join(root, "suppressions.yaml"),
+    "- tool: TypeSpecValidation\n  paths: [custom/b]\n  reason: later project\n",
+  );
+
+  await expect(run("--all", "custom")).rejects.toMatchObject({
+    code: 1,
+    stdout: expect.stringContaining(
+      "::error::TypeSpec Validation failed for project custom/a run the following command locally to validate.%0A" +
+        " > pnpm install%0A > pnpm tsv custom/a%0A" +
+        "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation\n" +
+        "::endgroup::\n::group::Validating custom/b",
+    ) as unknown,
+    stderr: expect.stringContaining(
+      "TypeSpec Validation failed for some folder to fix run and address any errors:\n" +
+        " > pnpm install\n > pnpm tsv custom/a\n" +
+        "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
+    ) as unknown,
   });
 });
 
