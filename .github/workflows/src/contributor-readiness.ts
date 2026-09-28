@@ -1,4 +1,3 @@
-import type { AsyncFunctionArguments } from "@actions/github-script";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import {
   escapeMarkdown,
@@ -10,15 +9,13 @@ import {
   type MarkdownDoc,
 } from "../../shared/src/markdown.ts";
 import { parseExistingComments } from "./comment.ts";
-import type { Core, WebhookEvent } from "./github.ts";
+import type { Core, GitHub, GitHubScriptArgs, WebhookEvent } from "./github.ts";
 
 const COMMAND = "/azsdk check-access";
 const MARKER = "<!-- contributor-readiness -->";
 const CHECK_NAME = "Contributor readiness";
 const ONBOARDING = "https://aka.ms/azsdk/access";
 
-type GitHub = AsyncFunctionArguments["github"];
-type Inputs = Pick<AsyncFunctionArguments, "github" | "context" | "core">;
 type PullRequest = Awaited<ReturnType<GitHub["rest"]["pulls"]["get"]>>["data"];
 type Account = { id: number; login: string; type: string };
 type Participant = Account & { roles: Set<string> };
@@ -37,7 +34,9 @@ function isAutomation(account: Account): boolean {
 }
 
 /** Resolves a trigger to its PR; ignored commands and unmatched review runs return null. */
-export async function resolveReadinessPullRequest(inputs: Inputs): Promise<number | null> {
+export async function resolveReadinessPullRequest(
+  inputs: GitHubScriptArgs,
+): Promise<number | null> {
   const { context } = inputs;
   if (context.eventName === "pull_request_target") {
     return (context.payload as WebhookEvent<"pull-request">).pull_request.number;
@@ -60,7 +59,7 @@ async function resolveReviewWorkflowPullRequest({
   github,
   context,
   core,
-}: Inputs): Promise<number | null> {
+}: GitHubScriptArgs): Promise<number | null> {
   const payload = context.payload as WebhookEvent<"workflow-run", "completed">;
   const { data: run } = await github.rest.actions.getWorkflowRun({
     ...context.repo,
@@ -320,7 +319,10 @@ function renderReadinessFindings(
  * Evaluates an open PR, authorizes manual refreshes, and publishes the advisory report.
  * Unexpected lookup failures are rethrown after publishing the available incomplete evidence.
  */
-export async function checkContributorReadiness(inputs: Inputs, number: number): Promise<void> {
+export async function checkContributorReadiness(
+  inputs: GitHubScriptArgs,
+  number: number,
+): Promise<void> {
   if (!Number.isSafeInteger(number) || number <= 0) throw new Error("Invalid PR number");
   const { github, context, core } = inputs;
   const { owner, repo } = context.repo;
@@ -358,7 +360,7 @@ export async function checkContributorReadiness(inputs: Inputs, number: number):
 
 /** Returns participants for an authorized refresh, or undefined after logging a denied request. */
 async function collectAuthorizedRefreshParticipants(
-  { github, context, core }: Inputs,
+  { github, context, core }: GitHubScriptArgs,
   pr: PullRequest,
   findings: ReadinessFinding[],
 ): Promise<Participant[] | undefined> {
@@ -386,7 +388,7 @@ async function collectAuthorizedRefreshParticipants(
 
 /** Verifies the PR head is still current, then publishes its check, comment and job summary. */
 async function publishReadinessReport(
-  { github, context, core }: Inputs,
+  { github, context, core }: GitHubScriptArgs,
   pr: PullRequest,
   participants: Participant[],
   findings: ReadinessFinding[],
