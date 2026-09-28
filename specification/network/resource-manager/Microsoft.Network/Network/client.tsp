@@ -1362,6 +1362,89 @@ union ProvisioningStateUnion {
   "java"
 );
 
+// Preserve released C# constructibility and writable leaves in output-only model graphs.
+// Do not change HTTP operations or properties explicitly marked Read.
+@@usage(
+  Common.IPConfiguration,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  Common.ResourceNavigationLink,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  Common.ServiceAssociationLink,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  Microsoft.Network.ContainerNetworkInterface,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  Microsoft.Network.VirtualNetworkApplianceIpConfiguration,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  Microsoft.Network.BgpServiceCommunity,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  Microsoft.Network.ExpressRouteServiceProvider,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  Microsoft.Network.ApplicationGatewayFirewallRuleSet,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  Microsoft.Network.ApplicationGatewaySslPredefinedPolicy,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  Microsoft.Network.PeerExpressRouteCircuitConnection,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  Microsoft.Network.ExpressRouteProviderPort,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  Microsoft.Network.VirtualNetworkGatewayConnectionListEntity,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  Microsoft.Network.ApplicationGatewayPrivateLinkResource,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  Microsoft.Network.AzureFirewallFqdnTag,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  Microsoft.Network.ExpressRoutePortsLocation,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+@@usage(
+  Microsoft.Network.NetworkVirtualApplianceSku,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "csharp"
+);
+
 // Make read-only ExpressRoute models input for backward compat
 @@usage(
   Microsoft.Network.ExpressRouteCrossConnectionPeeringProperties,
