@@ -46650,19 +46650,6 @@
         "deployment": {
           "$ref": "#/definitions/FunctionAppVersionDeployment",
           "description": "The deployment configuration."
-        },
-        "appSettings": {
-          "type": "object",
-          "format": "password",
-          "description": "Optional version-scoped application settings. Values are omitted from normal\nread and list operations.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ],
-          "x-ms-secret": true
         }
       },
       "required": [
@@ -46820,6 +46807,19 @@
         "functionAppVersionConfig": {
           "$ref": "#/definitions/FunctionAppVersionConfig",
           "description": "The immutable customer-authored version configuration."
+        },
+        "appSettings": {
+          "type": "object",
+          "format": "password",
+          "description": "Optional version-scoped application settings. Values are omitted from normal\nread and list operations.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
         },
         "validationDetail": {
           "$ref": "#/definitions/FunctionAppVersionValidationDetail",

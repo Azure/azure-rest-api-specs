@@ -133,15 +133,6 @@ model FunctionAppVersionDeployment {
 model FunctionAppVersionConfig {
   /** The deployment configuration. */
   deployment: FunctionAppVersionDeployment;
-
-  /**
-   * Optional version-scoped application settings. Values are omitted from normal
-   * read and list operations.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Application settings are an open name-value dictionary by design."
-  @secret
-  @visibility(Lifecycle.Create, Lifecycle.Update)
-  appSettings?: Record<string>;
 }
 
 @added(Versions.v2026_10_01_preview)
@@ -183,6 +174,15 @@ model FunctionAppVersionProperties {
 
   /** The immutable customer-authored version configuration. */
   functionAppVersionConfig: FunctionAppVersionConfig;
+
+  /**
+   * Optional version-scoped application settings. Values are omitted from normal
+   * read and list operations.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Application settings are an open name-value dictionary by design."
+  @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  appSettings?: Record<string>;
 
   /** Safe details for the latest failed validation attempt. */
   @visibility(Lifecycle.Read)
