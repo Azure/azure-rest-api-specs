@@ -201,6 +201,15 @@ input-file:
 - stable/2026-06-06/file.json
 ```
 
+### Tag: package-2026-06-tsp
+
+These settings apply only when `--tag=package-2026-06-tsp` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-06-tsp'
+input-file:
+- stable/2026-06-06/generated_file.json
+```
+
 ### Tag: package-2026-10
 
 These settings apply only when `--tag=package-2026-10` is specified on the command line.
@@ -210,6 +219,15 @@ input-file:
 - stable/2026-10-06/file.json
 ```
 
+### Tag: package-2026-10-tsp
+
+These settings apply only when `--tag=package-2026-10-tsp` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-10-tsp'
+input-file:
+- stable/2026-10-06/generated_file.json
+```
+
 ### Tag: package-2026-12
 
 These settings apply only when `--tag=package-2026-12` is specified on the command line.
@@ -217,6 +235,15 @@ These settings apply only when `--tag=package-2026-12` is specified on the comma
 ``` yaml $(tag) == 'package-2026-12'
 input-file:
 - stable/2026-12-06/file.json
+```
+
+### Tag: package-2026-12-tsp
+
+These settings apply only when `--tag=package-2026-12-tsp` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-12-tsp'
+input-file:
+- stable/2026-12-06/generated_file.json
 ```
 
 ### Suppression
