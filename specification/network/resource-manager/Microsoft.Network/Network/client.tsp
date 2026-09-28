@@ -2126,6 +2126,11 @@ union ProvisioningStateUnion {
   "csharp"
 );
 @@clientName(
+  Microsoft.Network.CustomIpPrefixPropertiesFormat.customIpPrefixParent,
+  "ParentCustomIPPrefix",
+  "csharp"
+);
+@@clientName(
   Microsoft.Network.CustomIpPrefixPropertiesFormat.childCustomIpPrefixes,
   "ChildCustomIPPrefixes",
   "csharp"
