@@ -1302,10 +1302,7 @@ op uploadPagesNoStructuredMessage is StorageOperationRequestBody<
 )
 scalar HttpRange extends string;
 
-// ---- Java customizations ----
 @@clientName(BlobServicePropertiesCsharp, "BlobServiceProperties", "java");
-// The shipped java type is the public com.azure.storage.blob.models.GeoReplicationStatus, which is what
-// GeoReplication.getStatus() returns; the csharp/go name would both rename it and hide it in implementation.
 @@clientName(GeoReplicationStatusType, "GeoReplicationStatus", "java");
 @@access(GeoReplicationStatusType, Access.public, "java");
 @@clientName(StorageErrorCode, "BlobErrorCode", "java");
@@ -1317,8 +1314,6 @@ scalar HttpRange extends string;
 @@clientName(LeaseDuration, "LeaseDurationType", "java");
 @@clientName(Blob.setProperties, "SetHttpHeaders", "java");
 
-// Blob Query is defined on the BlockBlob interface, but the shipped java SDK exposes query() on
-// BlobClientBase/BlobAsyncClientBase and calls it through BlobsImpl. Keep the op group java saw under AutoRest.
 @@clientLocation(BlockBlob.query, Blob, "java");
 @@clientName(ListBlobsResponse, "ListBlobsFlatSegmentResponse", "java");
 @@clientName(Container.findBlobsByTags, "FilterBlobs", "java");
@@ -1336,29 +1331,19 @@ scalar HttpRange extends string;
 @@clientName(AccessPolicy.expiry, "ExpiresOn", "java");
 @@clientName(AccessPolicy.permission, "Permissions", "java");
 
-// AccessPolicy.start/expiry use @encode("rfc3339-fixed-width"), which typespec-java does not recognize and so
-// falls back to String. go and csharp override the same two properties for the same reason; without this java
-// generates getStartsOn(): String instead of the shipped OffsetDateTime.
 @@alternateType(AccessPolicy.start, utcDateTime, "java");
 @@alternateType(AccessPolicy.expiry, utcDateTime, "java");
 
-// UserDelegationKey/Block/BlockLookupList expose base64Bytes properties that the shipped java API surfaces as
-// String (the caller supplies an already-base64-encoded block id). go and python carry the same overrides.
 @@alternateType(UserDelegationKey.value, string, "java");
 @@alternateType(Block.name, string, "java");
-// These must stay `string[]`: the override replaces the element type, and a bare `string` would collapse the
-// property to a scalar and stop it serializing as repeated elements.
 @@alternateType(BlockLookupList.committed, string[], "java");
 @@alternateType(BlockLookupList.uncommitted, string[], "java");
 @@alternateType(BlockLookupList.latest, string[], "java");
 @@alternateType(BlockIdParameter.blockid, string, "java");
 
-// BlobPrefix follows BlobItem: the generated model is internal and carries the BlobName, so the Encoded
-// attribute survives and ModelHelper can decode it; the public BlobPrefix is hand-owned and exposes a String.
 @@clientName(BlobPrefix, "BlobPrefixInternal", "java");
 @@access(BlobPrefix, Access.internal, "java");
 
-// The shipped java accessors spell these out; the spec's abbreviated property names would rename the public API.
 @@clientName(UserDelegationKey.signedOid, "signedObjectId", "java");
 @@clientName(UserDelegationKey.signedTid, "signedTenantId", "java");
 @@clientName(
@@ -1367,22 +1352,13 @@ scalar HttpRange extends string;
   "java"
 );
 
-// The shipped java constant is UNCOMMITTEDBLOBS (no underscore); the emitter would otherwise derive
-// UNCOMMITTED_BLOBS from the spec member name, renaming a public constant.
 @@clientName(ListBlobsIncludeItem.UncommittedBlobs, "uncommittedblobs", "java");
 
-// The shipped java KeyInfo takes the SAS start/expiry as pre-formatted ISO-8601 strings (the hand-written
-// BlobServiceClient formats them via Constants.ISO_8601_UTC_DATE_FORMATTER), and spells out the tenant id.
-// python, csharp, javascript and go all carry the same string override.
 @@alternateType(KeyInfo.start, string, "java");
 @@alternateType(KeyInfo.expiry, string, "java");
 @@clientName(KeyInfo.delegatedUserTid, "delegatedUserTenantId", "java");
 @@clientName(Metrics.includeApis, "IncludeApis", "java");
-// The csharp scope shortens these to Block/Page/Append, but the shipped java constants are BLOCK_BLOB,
-// PAGE_BLOB and APPEND_BLOB, which the spec member names already produce -- renaming them here would be a
-// breaking public API change.
 
-// The shipped java accessor spells the container property the other way round.
 @@clientName(
   ContainerProperties.preventEncryptionScopeOverride,
   "encryptionScopeOverridePrevented",
@@ -1398,10 +1374,6 @@ scalar HttpRange extends string;
 @@clientName(SkuName.StandardRAGZRS, "StandardRagzrs", "java");
 @@clientName(BlobDeleteTypeCustom, "BlobDeleteType", "java");
 
-// Models whose spec-native names would otherwise generate internal duplicates alongside the shipped public
-// types listed in custom-types. Without these the generated models reference the duplicate (e.g.
-// BlobServiceProperties.getLogging() returns implementation.models.Logging instead of the shipped
-// BlobAnalyticsLogging), which is a breaking public API change.
 @@clientName(AccessPolicy, "BlobAccessPolicy", "java");
 @@clientName(SignedIdentifier, "BlobSignedIdentifier", "java");
 @@clientName(CorsRule, "BlobCorsRule", "java");
@@ -1419,16 +1391,10 @@ scalar HttpRange extends string;
 @@clientName(ParquetConfiguration, "ParquetTextConfiguration", "java");
 @@clientName(BlobHierarchyList, "BlobHierarchyListSegment", "java");
 
-// The hand-written BlobServiceClient pages on the NextMarker in the segment response body, so it needs the
-// response as a typed model. Without an explicit access/usage it is only consumed inline by the emitter's paging
-// helpers and no model is generated. BlobContainersSegment is the name the shipped java impl used.
 @@clientName(ListContainersResponse, "BlobContainersSegment", "java");
 @@access(ListContainersResponse, Access.internal, "java");
 @@usage(ListContainersResponse, Usage.output, "java");
 
-// go and csharp both flatten these XML metadata bags to a plain string map; java was missing the same
-// alternateType, so the emitter generated BlobMetadata/ObjectReplicationMetadata wrapper classes where the
-// shipped models expose Map<String, String>.
 @@alternateType(BlobItem.metadata, Record<string>, "java");
 @@alternateType(BlobItem.objectReplicationMetadata, Record<string>, "java");
 @@access(BlobProperties, Access.internal, "java");
@@ -1438,18 +1404,13 @@ scalar HttpRange extends string;
 @@access(DelimitedTextConfiguration, Access.internal, "java");
 @@access(JsonTextConfiguration, Access.internal, "java");
 @@access(BlobDeleteTypeCustom, Access.internal, "java");
-// BlobErrorCode is public on the shipped java API, so the enum has to be generated as a standalone type.
 @@access(StorageErrorCode, Access.public, "java");
 @@usage(StorageErrorCode, Usage.output, "java");
 
 @@clientName(Storage.Blob, "AzureBlobStorage", "java");
 
-// java metadata as an x-ms-meta-* collection rather than a single header, mirroring the scopes the other
-// languages already carry on this property.
 @@alternateType(MetadataHeaders.metadata, Record<string>, "java");
 
-// Same for the object replication rules: the shipped BlobDownloadHeaders exposes them as an x-ms-or-* collection
-// that ModelHelper.getObjectReplicationSourcePolicies parses. rust, javascript, python and go already carry this.
 @@alternateType(
   ObjectReplicationHeaders.objectReplicationRules,
   Record<string>,
