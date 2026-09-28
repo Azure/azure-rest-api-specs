@@ -9,7 +9,7 @@ import type { Core, GitHub, GitHubScriptArgs, WebhookEvent } from "../github.ts"
 //   Flat:  LabelName: [user1, user2]
 //   Plane: LabelName: { management-plane: [user1], data-plane: [user2] }
 
-import { escapeMarkdown, link } from "@azure-tools/specs-shared/markdown";
+import { details, escapeMarkdown, link } from "@azure-tools/specs-shared/markdown";
 import { extractInputs } from "../context.ts";
 import { evaluateLabelAuthorization, loadProtectedLabelsConfig } from "./authorization.ts";
 
@@ -69,8 +69,10 @@ async function enforceLabelAuthorization({
     repo,
     issue_number: issueNumber,
     body:
-      `⚠️ @${actor} is not authorized to apply \`${labelName}\`. ` +
-      `Only ${authorizedList} can apply this label.\n\nLabel removed.`,
+      `⚠️ @${actor} is not authorized to apply \`${labelName}\`. Label removed.\n\n` +
+      "Please follow the **Next Steps to Merge** comment on this PR and the " +
+      `${link("review and merge process", "https://aka.ms/azsdk/specreview/merge")}.\n\n` +
+      details("See allowed approvers", `Only ${authorizedList} can apply this label.`),
   });
 
   return false;
