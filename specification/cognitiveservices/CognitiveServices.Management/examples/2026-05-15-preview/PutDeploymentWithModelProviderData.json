@@ -1,0 +1,76 @@
+{
+  "operationId": "Deployments_CreateOrUpdate",
+  "parameters": {
+    "accountName": "accountName",
+    "api-version": "2026-05-15-preview",
+    "deployment": {
+      "properties": {
+        "model": {
+          "name": "claude-sonnet-5",
+          "format": "Anthropic"
+        },
+        "modelProviderData": {
+          "organizationName": "Contoso, Ltd.",
+          "countryCode": "US",
+          "industry": "technology"
+        }
+      },
+      "sku": {
+        "name": "GlobalStandard",
+        "capacity": 25
+      }
+    },
+    "deploymentName": "deploymentName",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "title": "PutDeploymentWithModelProviderData",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "deploymentName",
+        "type": "Microsoft.CognitiveServices/accounts/deployments",
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/deployments/deploymentName",
+        "properties": {
+          "model": {
+            "name": "claude-sonnet-5",
+            "format": "Anthropic"
+          },
+          "modelProviderData": {
+            "organizationName": "Contoso, Ltd.",
+            "countryCode": "US",
+            "industry": "technology"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "sku": {
+          "name": "GlobalStandard",
+          "capacity": 25
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "deploymentName",
+        "type": "Microsoft.CognitiveServices/accounts/deployments",
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/deployments/deploymentName",
+        "properties": {
+          "model": {
+            "name": "claude-sonnet-5",
+            "format": "Anthropic"
+          },
+          "modelProviderData": {
+            "organizationName": "Contoso, Ltd.",
+            "countryCode": "US",
+            "industry": "technology"
+          },
+          "provisioningState": "Accepted"
+        },
+        "sku": {
+          "name": "GlobalStandard",
+          "capacity": 25
+        }
+      }
+    }
+  }
+}
