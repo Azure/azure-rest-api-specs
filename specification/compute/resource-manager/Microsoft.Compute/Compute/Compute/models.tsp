@@ -3629,6 +3629,7 @@ model VMGalleryApplication {
    * It is ignored if set in the request body of the PUT api.
    */
   @added(Versions.v2026_09_01)
+  @visibility(Lifecycle.Read)
   instanceView?: VMGalleryApplicationInstanceView;
 
   /**
@@ -3640,6 +3641,7 @@ model VMGalleryApplication {
    * Zero or more custom actions. These are always processed with PATCH semantics.
    */
   @added(Versions.v2026_09_01)
+  @identifiers(#[])
   customActions?: VMGalleryApplicationCustomAction[];
 }
 

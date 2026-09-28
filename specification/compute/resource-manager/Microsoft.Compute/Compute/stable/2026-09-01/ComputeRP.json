@@ -21398,7 +21398,8 @@
         },
         "instanceView": {
           "$ref": "#/definitions/VMGalleryApplicationInstanceView",
-          "description": "Contains the deployment status of this application\nPopulated only if requested using GET {VMApplicationName}?$expand=instanceView\nIt is ignored if set in the request body of the PUT api."
+          "description": "Contains the deployment status of this application\nPopulated only if requested using GET {VMApplicationName}?$expand=instanceView\nIt is ignored if set in the request body of the PUT api.",
+          "readOnly": true
         },
         "enableAutomaticUpgrade": {
           "type": "boolean",
@@ -21409,7 +21410,8 @@
           "description": "Zero or more custom actions. These are always processed with PATCH semantics.",
           "items": {
             "$ref": "#/definitions/VMGalleryApplicationCustomAction"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -21511,6 +21513,57 @@
         "result": {
           "type": "string",
           "description": "The result of the action performed."
+        }
+      }
+    },
+    "VMGalleryApplicationUpdate": {
+      "type": "object",
+      "description": "Describes an update to the properties of a gallery application installed on a virtual machine.",
+      "properties": {
+        "tags": {
+          "type": "string",
+          "description": "Optional, Specifies a passthrough value for more generic context."
+        },
+        "order": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional, Specifies the order in which the packages have to be installed"
+        },
+        "manuallyManaged": {
+          "type": "boolean",
+          "description": "Specifies whether the gallery application is managed outside the VM application extension."
+        },
+        "packageReferenceId": {
+          "type": "string",
+          "description": "Specifies the GalleryApplicationVersion resource id on the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/galleries/{galleryName}/applications/{application}/versions/{version}"
+        },
+        "sharedGalleryApplicationId": {
+          "type": "string",
+          "description": "This is the id of \"Directly\" SharedGalleries. Such references represent the \"fake\" proxy-only resources\ncreated in \"sharedTo\" subscriptions. These are shared directly to a subscription/AAD tenant, instead of using RBAC-based sharing.\nThe resource id looks like:\n/sharedGalleries/{SharedGalleryUniqueName}/applications/{applicationName}/versions/1.0.0"
+        },
+        "communityGalleryApplicationId": {
+          "type": "string",
+          "description": "Specifies the community gallery application version resource ID."
+        },
+        "configurationReference": {
+          "type": "string",
+          "description": "Optional, Specifies the uri to an azure blob that will replace the default configuration for the package if provided"
+        },
+        "treatFailureAsDeploymentFailure": {
+          "type": "boolean",
+          "description": "Optional, If true, any failure for any operation in the VmApplication will fail the deployment"
+        },
+        "enableAutomaticUpgrade": {
+          "type": "boolean",
+          "description": "If set to true, when a new Gallery Application version is available in PIR/SIG, it will be automatically updated for the VM/VMSS"
+        },
+        "customActions": {
+          "type": "array",
+          "description": "Zero or more custom actions. These are always processed with PATCH semantics.",
+          "items": {
+            "$ref": "#/definitions/VMGalleryApplicationCustomAction"
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -26860,7 +26913,7 @@
       "description": "Describes an update to a gallery application installed on a virtual machine.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/VMGalleryApplication",
+          "$ref": "#/definitions/VMGalleryApplicationUpdate",
           "description": "The gallery application properties. This can be omitted for a tags-only update."
         }
       }

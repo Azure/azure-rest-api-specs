@@ -29,6 +29,13 @@ model VirtualMachineVMGalleryApplication
 }
 
 /**
+ * Describes an update to the properties of a gallery application installed on a virtual machine.
+ */
+@added(Versions.v2026_09_01)
+model VMGalleryApplicationUpdate
+  is OptionalProperties<UpdateableProperties<VMGalleryApplication>>;
+
+/**
  * Describes an update to a gallery application installed on a virtual machine.
  */
 @added(Versions.v2026_09_01)
@@ -36,7 +43,7 @@ model VirtualMachineVMGalleryApplicationUpdate {
   /**
    * The gallery application properties. This can be omitted for a tags-only update.
    */
-  properties?: VMGalleryApplication;
+  properties?: VMGalleryApplicationUpdate;
 }
 
 /**
