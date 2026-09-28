@@ -1,3 +1,4 @@
+import type { Context, Core, GitHub, GitHubScriptArgs } from "../../src/github.ts";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts";
 
@@ -12,8 +13,8 @@ import { readFile } from "fs/promises";
 import yaml from "js-yaml";
 import checkLabel from "../../src/protected-labels/check-label.ts";
 
-function invokeCheckLabel(args: Partial<import("@actions/github-script").AsyncFunctionArguments>) {
-  return checkLabel(args as import("@actions/github-script").AsyncFunctionArguments);
+function invokeCheckLabel(args: Partial<GitHubScriptArgs>) {
+  return checkLabel(args as GitHubScriptArgs);
 }
 
 const protectedLabelsConfig = {
@@ -58,11 +59,11 @@ function createLabeledPayload({
 }
 
 describe("checkLabel", () => {
-  let github: import("../mocks.ts").GitHub & ReturnType<typeof createMockGithub>;
+  let github: GitHub & ReturnType<typeof createMockGithub>;
 
-  let core: import("../mocks.ts").Core;
+  let core: Core;
 
-  let context: import("../mocks.ts").Context;
+  let context: Context;
 
   beforeEach(() => {
     vi.resetAllMocks();
