@@ -71,8 +71,7 @@ async function enforceLabelAuthorization({
     body:
       `⚠️ @${actor} is not authorized to apply \`${labelName}\`. Label removed.\n\n` +
       "Please follow the **Next Steps to Merge** comment on this PR and the " +
-      `${link("review and merge process", "https://aka.ms/azsdk/specreview/merge")} ` +
-      "rather than pinging individual approvers directly.\n\n" +
+      `${link("review and merge process", "https://aka.ms/azsdk/specreview/merge")}.\n\n` +
       details("See allowed approvers", `Only ${authorizedList} can apply this label.`),
   });
 

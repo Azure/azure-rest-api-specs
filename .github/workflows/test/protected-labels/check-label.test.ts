@@ -184,8 +184,7 @@ describe("checkLabel", () => {
         body:
           "⚠️ @unauthorized-user is not authorized to apply `BreakingChange-Approved-Benign`. Label removed.\n\n" +
           "Please follow the **Next Steps to Merge** comment on this PR and the " +
-          "[review and merge process](https://aka.ms/azsdk/specreview/merge) " +
-          "rather than pinging individual approvers directly.\n\n" +
+          "[review and merge process](https://aka.ms/azsdk/specreview/merge).\n\n" +
           "<details><summary>See allowed approvers</summary>\n\n" +
           "Only [user1](https://github.com/user1), [user2](https://github.com/user2), " +
           "[global-admin](https://github.com/global-admin) can apply this label.\n\n</details>",
@@ -284,8 +283,7 @@ describe("checkLabel", () => {
         body:
           "⚠️ @mgmt-approver1 is not authorized to apply `package-name-dotnet-approved`. Label removed.\n\n" +
           "Please follow the **Next Steps to Merge** comment on this PR and the " +
-          "[review and merge process](https://aka.ms/azsdk/specreview/merge) " +
-          "rather than pinging individual approvers directly.\n\n" +
+          "[review and merge process](https://aka.ms/azsdk/specreview/merge).\n\n" +
           "<details><summary>See allowed approvers</summary>\n\n" +
           "Only [dp-approver1](https://github.com/dp-approver1), [dp-approver2](https://github.com/dp-approver2), " +
           "[global-admin](https://github.com/global-admin) can apply this label.\n\n</details>",
