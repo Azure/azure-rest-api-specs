@@ -163,7 +163,7 @@ describe("checkLabel", () => {
       expect(github.rest.issues.createComment).not.toHaveBeenCalled();
     });
 
-    it("removes label and links to the actor and approvers without mentioning them", async () => {
+    it("removes label and mentions the actor while linking to approvers without mentioning them", async () => {
       context.payload = createLabeledPayload({
         labelName: "BreakingChange-Approved-Benign",
         actor: "unauthorized-user",
@@ -182,7 +182,7 @@ describe("checkLabel", () => {
         repo: "azure-rest-api-specs",
         issue_number: 100,
         body:
-          "⚠️ [unauthorized-user](https://github.com/unauthorized-user) is not authorized to apply `BreakingChange-Approved-Benign`. " +
+          "⚠️ @unauthorized-user is not authorized to apply `BreakingChange-Approved-Benign`. " +
           "Only [user1](https://github.com/user1), [user2](https://github.com/user2), " +
           "[global-admin](https://github.com/global-admin) can apply this label.\n\nLabel removed.",
       });
@@ -278,7 +278,7 @@ describe("checkLabel", () => {
         repo: "azure-rest-api-specs",
         issue_number: 100,
         body:
-          "⚠️ [mgmt-approver1](https://github.com/mgmt-approver1) is not authorized to apply `package-name-dotnet-approved`. " +
+          "⚠️ @mgmt-approver1 is not authorized to apply `package-name-dotnet-approved`. " +
           "Only [dp-approver1](https://github.com/dp-approver1), [dp-approver2](https://github.com/dp-approver2), " +
           "[global-admin](https://github.com/global-admin) can apply this label.\n\nLabel removed.",
       });

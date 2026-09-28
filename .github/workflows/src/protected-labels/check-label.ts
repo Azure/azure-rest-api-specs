@@ -64,13 +64,12 @@ async function enforceLabelAuthorization({
   const authorizedList = authorizedUsers
     .map((u) => link(escapeMarkdown(u), `https://github.com/${u}`))
     .join(", ");
-  const actorLink = link(escapeMarkdown(actor), `https://github.com/${actor}`);
   await github.rest.issues.createComment({
     owner,
     repo,
     issue_number: issueNumber,
     body:
-      `⚠️ ${actorLink} is not authorized to apply \`${labelName}\`. ` +
+      `⚠️ @${actor} is not authorized to apply \`${labelName}\`. ` +
       `Only ${authorizedList} can apply this label.\n\nLabel removed.`,
   });
 
