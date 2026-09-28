@@ -90,6 +90,16 @@ jobs:
         displayName: 'Prime eval git fixtures'
         env:
           EVAL_ARGS: $(evalArgs)
+      
+      # Verify that the assessment evaluation paths are correctly set up before running the eval.
+      - script: |
+          pwd
+          ls -la
+          ls -la ../../../../spec-workspace
+          test -f ../SKILL.md
+          git -C ../../../../spec-workspace status
+        displayName: Verify assessment eval paths
+        workingDirectory: $(Build.SourcesDirectory)/.github/skills/azure-typespec-assessment/evals
 
       # Runs the eval via the invoke template (auth-conditional in the common default).
       - template: ${{ parameters.evalInvokeTemplate }}

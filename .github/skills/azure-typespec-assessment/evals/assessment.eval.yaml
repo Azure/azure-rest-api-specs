@@ -21,10 +21,15 @@ stimuli:
     tags:
       behavior: assess-pr
     prompt: |
-      Use azure-typespec-assessment to assess PR https://github.com/Azure/azure-rest-api-specs/pull/43308.
+      Use azure-typespec-assessment to assess PR https://github.com/Azure/azure-rest-api-specs/pull/43308
     environment:
       skills:
         - ..
+      git:
+        type: worktree
+        ref: v2.1.0
+        source: ../../../../spec-workspace
+        timeout: 10m # optional; raise for very large repos
     graders:
       - type: skill-invocation
         config:

@@ -40,7 +40,5 @@ steps:
       SKILL_BRANCH: $(SkillBranch)
 
   - script: |
-      set -e
-      npm ci
-    displayName: "Install the assessment scripts' dependencies"
-    workingDirectory: $(Build.SourcesDirectory)/.github/skills/azure-typespec-assessment
+      git clone https://github.com/Azure/azure-rest-api-specs.git "$(Build.SourcesDirectory)/spec-workspace"
+    displayName: "Clone spec repository"
