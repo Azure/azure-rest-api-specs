@@ -193,82 +193,82 @@ enum ListQueuesIncludeType {
   metadata: "metadata",
 }
 
-/** Storage Service Properties. */
+/** The service properties. */
 @Xml.name("StorageServiceProperties")
 model QueueServiceProperties {
-  /** Azure Analytics Logging settings. */
+  /** The logging properties. */
   @Xml.name("Logging") logging?: Logging;
 
-  /** A summary of request statistics grouped by API in hourly aggregates for queues. */
+  /** The hour metrics properties. */
   @Xml.name("HourMetrics") hourMetrics?: Metrics;
 
-  /** a summary of request statistics grouped by API in minute aggregates for queues. */
+  /** The minute metrics properties. */
   @Xml.name("MinuteMetrics") minuteMetrics?: Metrics;
 
-  /** The set of CORS rules. */
+  /** The CORS properties. */
   @Xml.name("Cors") cors?: CorsRule[];
 }
 
 /** Azure Analytics Logging settings. */
 model Logging {
-  /** The version of Storage Analytics to configure. */
+  /** The version of the logging properties. */
   @Xml.name("Version") version: string;
 
-  /** Indicates whether all delete requests should be logged. */
+  /** Whether delete operation is logged. */
   @Xml.name("Delete") delete: boolean;
 
-  /** Indicates whether all read requests should be logged. */
+  /** Whether read operation is logged. */
   @Xml.name("Read") read: boolean;
 
-  /** Indicates whether all write requests should be logged. */
+  /** Whether write operation is logged. */
   @Xml.name("Write") write: boolean;
 
-  /** the retention policy. */
+  /** The retention policy of the logs. */
   @Xml.name("RetentionPolicy") retentionPolicy: RetentionPolicy;
 }
 
-/** the retention policy. */
+/** The retention policy. */
 model RetentionPolicy {
-  /** Indicates whether a retention policy is enabled for the storage service. */
+  /** Whether to enable the retention policy. */
   @Xml.name("Enabled") enabled: boolean;
 
-  /** Indicates the number of days that metrics or logging or soft-deleted data should be retained. All data older than this value will be deleted. */
+  /** The number of days to retain the logs. */
   @Xml.name("Days")
   @minValue(1)
   days?: int32;
 }
 
-/** a summary of request statistics grouped by API in hour or minute aggregates for queues. */
+/** The metrics properties. */
 model Metrics {
-  /** The version of Storage Analytics to configure. */
+  /** The version of the metrics properties. */
   @Xml.name("Version") version?: string;
 
-  /** Indicates whether metrics are enabled for the Queue service. */
+  /** Whether it is enabled. */
   @Xml.name("Enabled") enabled: boolean;
 
-  /** Indicates whether metrics should generate summary statistics for called API operations. */
+  /** Whether to include API in the metrics. */
   @Xml.name("IncludeAPIs") includeApis?: boolean;
 
-  /** the retention policy. */
+  /** The retention policy of the metrics. */
   @Xml.name("RetentionPolicy") retentionPolicy?: RetentionPolicy;
 }
 
-/** CORS is an HTTP feature that enables a web application running under one domain to access resources in another domain. Web browsers implement a security restriction known as same-origin policy that prevents a web page from calling APIs in a different domain; CORS provides a secure way to allow one domain (the origin domain) to call APIs in another domain. */
+/** The CORS rules. */
 @Xml.name("CorsRule")
 model CorsRule {
-  /** The origin domains that are permitted to make a request against the storage service via CORS. The origin domain is the domain from which the request originates. Note that the origin must be an exact case-sensitive match with the origin that the user age sends to the service. You can also use the wildcard character '*' to allow all origin domains to make requests via CORS. */
+  /** The allowed origins. */
   @Xml.name("AllowedOrigins") allowedOrigins: string;
 
-  /** The methods (HTTP request verbs) that the origin domain may use for a CORS request. (comma separated). */
+  /** The allowed methods. */
   @Xml.name("AllowedMethods") allowedMethods: string;
 
-  /** the request headers that the origin domain may specify on the CORS request. */
+  /** The allowed headers. */
   @Xml.name("AllowedHeaders") allowedHeaders: string;
 
-  /** The response headers that may be sent in the response to the CORS request and exposed by the browser to the request issuer. */
+  /** The exposed headers. */
   @Xml.name("ExposedHeaders") exposedHeaders: string;
 
-  /** The maximum amount time that a browser should cache the preflight OPTIONS request. */
+  /** The maximum age in seconds. */
   @Xml.name("MaxAgeInSeconds")
   @minValue(0)
   maxAgeInSeconds: int32;
@@ -289,14 +289,14 @@ model Error {
   @Xml.name("Message") message?: string;
 }
 
-/** Stats for the storage service. */
+/** Statistics for the storage queue service. */
 @Xml.name("StorageServiceStats")
 model QueueServiceStats {
-  /** Geo-Replication information for the Secondary Storage Service. */
+  /** The geo replication stats. */
   @Xml.name("GeoReplication") geoReplication?: GeoReplication;
 }
 
-/** The GeoReplication model. */
+/** Geo replication information for the secondary storage location. */
 model GeoReplication {
   /** The status of the secondary location. */
   @Xml.name("Status") status: GeoReplicationStatus;
@@ -359,39 +359,39 @@ model ListQueuesResponse {
 /** An Azure Storage Queue. */
 @Xml.name("Queue")
 model QueueItem {
-  /** The name of the Queue. */
+  /** The name of the queue. */
   @Xml.name("Name") name: string;
 
-  /** Dictionary of <string>. */
+  /** The metadata of the queue. */
   @Xml.name("Metadata") metadata?: Record<string>;
 }
 
-/** signed identifier. */
+/** The signed identifier. */
 model SignedIdentifier {
-  /** a unique id. */
+  /** The unique ID for the signed identifier. */
   @Xml.name("Id") id: string;
 
-  /** The access policy. */
+  /** The access policy for the signed identifier. */
   @Xml.name("AccessPolicy") accessPolicy: AccessPolicy;
 }
 
-/** An Access policy. */
+/** The access policy. */
 model AccessPolicy {
-  /** the date-time the policy is active. */
+  /** The date-time the policy is active. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "rfc3339-fixed-width is required because the Queue service rejects timestamps that do not have exactly 7 fractional-second digits. Without this encoding the Rust time crate drops trailing zeros, producing variable precision (e.g. 6 digits instead of 7) which causes the service to return InvalidXmlDocument (HTTP 400)."
   #suppress "@azure-tools/typespec-autorest/unknown-format" "rfc3339-fixed-width is required because the Queue service rejects timestamps that do not have exactly 7 fractional-second digits. Without this encoding the Rust time crate drops trailing zeros, producing variable precision (e.g. 6 digits instead of 7) which causes the service to return InvalidXmlDocument (HTTP 400)."
   @Xml.name("Start")
   @encode("rfc3339-fixed-width")
   start?: utcDateTime;
 
-  /** the date-time the policy expires. */
+  /** The date-time the policy expires. */
   #suppress "@azure-tools/typespec-azure-core/known-encoding" "rfc3339-fixed-width is required because the Queue service rejects timestamps that do not have exactly 7 fractional-second digits. Without this encoding the Rust time crate drops trailing zeros, producing variable precision (e.g. 6 digits instead of 7) which causes the service to return InvalidXmlDocument (HTTP 400)."
   #suppress "@azure-tools/typespec-autorest/unknown-format" "rfc3339-fixed-width is required because the Queue service rejects timestamps that do not have exactly 7 fractional-second digits. Without this encoding the Rust time crate drops trailing zeros, producing variable precision (e.g. 6 digits instead of 7) which causes the service to return InvalidXmlDocument (HTTP 400)."
   @Xml.name("Expiry")
   @encode("rfc3339-fixed-width")
   expiry?: utcDateTime;
 
-  /** the permissions for the acl policy. */
+  /** The permissions for the policy. */
   @Xml.name("Permission") permission?: string;
 }
 
@@ -471,26 +471,29 @@ model QueueMessage {
   @Xml.name("MessageText") messageText: string;
 }
 
-/** The object returned in the QueueMessageList array when calling Put Message on a Queue. */
+/** The sent queue message. */
 @Xml.name("QueueMessage")
 model SentMessage {
-  /** The Id of the Message. */
+  /** The ID of the message. */
   @Xml.name("MessageId") messageId: string;
 
-  /** The time the Message was inserted into the Queue. */
+  /** The time the message was inserted into the queue. */
   @Xml.name("InsertionTime")
   @encode("rfc7231")
   insertionTime: utcDateTime;
 
-  /** The time that the Message will expire and be automatically deleted. */
+  /** The time that the message will expire and be automatically deleted. */
   @Xml.name("ExpirationTime")
   @encode("rfc7231")
   expirationTime: utcDateTime;
 
-  /** This value is required to delete the Message. If deletion fails using this popreceipt then the message has been dequeued by another client. */
+  /**
+   * An opaque value required to delete the message. If deletion fails using this
+   * PopReceipt then the message has been dequeued by another client.
+   */
   @Xml.name("PopReceipt") popReceipt: string;
 
-  /** The time that the message will again become visible in the Queue. */
+  /** The time that the message will again become visible in the queue. */
   @Xml.name("TimeNextVisible")
   @encode("rfc7231")
   timeNextVisible: utcDateTime;
@@ -675,11 +678,11 @@ model KeyInfo {
 
 /** A user delegation key. */
 model UserDelegationKey {
-  /** The Azure Active Directory object ID in GUID format. */
+  /** The Entra ID object ID in GUID format. */
   @Xml.name("SignedOid")
   signedOid: string;
 
-  /** The Azure Active Directory tenant ID in GUID format. */
+  /** The Entra ID tenant ID in GUID format. */
   @Xml.name("SignedTid")
   signedTid: string;
 
@@ -691,15 +694,15 @@ model UserDelegationKey {
   @Xml.name("SignedExpiry")
   signedExpiry: utcDateTime;
 
-  /** Abbreviation of the Azure Storage service that accepts the key. */
+  /** The service that created the key. */
   @Xml.name("SignedService")
   signedService: string;
 
-  /** The service version that created the key. */
+  /** The service version used when creating the key. */
   @Xml.name("SignedVersion")
   signedVersion: string;
 
-  /** The delegated user tenant id in Azure AD. Return if DelegatedUserTid is specified. */
+  /** The delegated user tenant ID in Entra ID. Return if DelegatedUserTid is specified. */
   @Xml.name("SignedDelegatedUserTid")
   signedDelegatedUserTid?: string;
 
