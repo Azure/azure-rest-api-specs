@@ -190,4 +190,35 @@ These settings apply only when `--tag=package-2026-11-01-preview` is specified o
 ```yaml $(tag) == 'package-2026-11-01-preview'
 input-file:
   - preview/2026-11-01-preview/iotoperations.json
+suppressions:
+  - code: LatestVersionOfCommonTypesMustBeUsed
+    from: iotoperations.json
+    where: $..['$ref']
+    reason: >-
+      Azure IoT Operations uses ARM common-types v5 across its existing API
+      versions. Moving only 2026-11-01-preview to v6 changes inherited common
+      resource schemas, including managed identity shapes, and introduces
+      cross-version breaking changes. This suppression is limited to reference
+      nodes in the generated 2026-11-01-preview specification so the API can
+      remain on its established v5 compatibility baseline.
+  - code: AvoidAdditionalProperties
+    from: iotoperations.json
+    where: $.definitions.McpAuthorizationPolicyRule.properties.context
+    reason: >-
+      MCP tools can define arbitrary parameters, so authorization policy
+      context values are intentionally modeled as a free-form object whose
+      properties cannot be known when the API is authored.
+  - code: PatchSkuProperty
+    from: iotoperations.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}"].patch.parameters[4]
+    reason: >-
+      The resource provider does not support SKU updates in this API version.
+      Exposing SKU in the PATCH body would advertise an unsupported operation.
+  - code: EnumInsteadOfBoolean
+    from: iotoperations.json
+    where: $.definitions.DataflowGraphFileStore.properties.readOnly
+    reason: >-
+      File-store access is inherently binary: the volume is mounted either
+      read-only or writable. A boolean directly represents these two states,
+      and an extensible string enum would advertise unsupported values.
 ```
