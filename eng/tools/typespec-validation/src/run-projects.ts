@@ -112,6 +112,18 @@ async function runProjects(
       try {
         if (!(await validateProject(project, context))) {
           failed.push(name);
+          const message =
+            `TypeSpec Validation failed for project ${name} run the following command locally to validate.\n` +
+            getFailureInstructions([name]);
+          if (githubActions) {
+            const escaped = message
+              .replaceAll("%", "%25")
+              .replaceAll("\r", "%0D")
+              .replaceAll("\n", "%0A");
+            console.log(`::error::${escaped}`);
+          } else {
+            console.error(message);
+          }
         }
       } finally {
         if (gitClean) {
@@ -127,9 +139,20 @@ async function runProjects(
   }
 
   if (failed.length > 0) {
-    console.error(`TypeSpec Validation failed for:\n${failed.join("\n")}`);
+    console.error(
+      "TypeSpec Validation failed for some folder to fix run and address any errors:\n" +
+        getFailureInstructions(failed),
+    );
   }
   return failed.length === 0;
+}
+
+function getFailureInstructions(projects: string[]): string {
+  return [
+    " > pnpm install",
+    ...projects.map((project) => ` > pnpm tsv ${project}`),
+    "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
+  ].join("\n");
 }
 
 /** Select a one-based shard, distributing extra projects to the first shards. */

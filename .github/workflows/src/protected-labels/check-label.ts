@@ -1,4 +1,4 @@
-import type { Core, WebhookEvent } from "../github.ts";
+import type { Core, GitHub, GitHubScriptArgs, WebhookEvent } from "../github.ts";
 // Protected Labels Enforcement
 // Entry point for .github/workflows/protected-labels.yaml
 //
@@ -9,6 +9,7 @@ import type { Core, WebhookEvent } from "../github.ts";
 //   Flat:  LabelName: [user1, user2]
 //   Plane: LabelName: { management-plane: [user1], data-plane: [user2] }
 
+import { escapeMarkdown, link } from "@azure-tools/specs-shared/markdown";
 import { extractInputs } from "../context.ts";
 import { evaluateLabelAuthorization, loadProtectedLabelsConfig } from "./authorization.ts";
 
@@ -26,7 +27,7 @@ async function enforceLabelAuthorization({
   actor,
   authorizedUsers,
 }: {
-  github: import("@actions/github-script").AsyncFunctionArguments["github"];
+  github: GitHub;
   core: Core;
   owner: string;
   repo: string;
@@ -60,7 +61,9 @@ async function enforceLabelAuthorization({
     }
   }
 
-  const authorizedList = authorizedUsers.map((u) => `@${u}`).join(", ");
+  const authorizedList = authorizedUsers
+    .map((u) => link(escapeMarkdown(u), `https://github.com/${u}`))
+    .join(", ");
   await github.rest.issues.createComment({
     owner,
     repo,
@@ -76,11 +79,7 @@ async function enforceLabelAuthorization({
 /**
  * Main entry point - called from the workflow via github-script.
  */
-export default async function checkLabel({
-  github,
-  context,
-  core,
-}: import("@actions/github-script").AsyncFunctionArguments) {
+export default async function checkLabel({ github, context, core }: GitHubScriptArgs) {
   const { owner, repo, issue_number } = await extractInputs(github, context, core);
 
   const payload = context.payload as WebhookEvent<"pull-request", "labeled">;

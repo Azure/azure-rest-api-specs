@@ -148,21 +148,36 @@ it("dry runs list project context but do not validate or clean a dirty checkout"
   expect(console.log).toHaveBeenLastCalledWith("::endgroup::");
 });
 
-it("continues after a failed changed project and returns failure", async () => {
-  const other = join(root, "specification/other/Project");
-  await mkdir(other, { recursive: true });
-  vi.mocked(findChangedProjects).mockResolvedValue({
-    projects: [project, other],
-    checkingAllSpecs: false,
-  });
-  vi.mocked(spawn).mockImplementationOnce(() => {
-    const child = new ChildProcess();
-    queueMicrotask(() => child.emit("close", 1, null));
-    return child;
-  });
-  await expect(runChanged(root)).resolves.toBe(false);
-  expect(spawn).toHaveBeenCalledTimes(2);
-  expect(console.error).toHaveBeenCalledWith(
-    "TypeSpec Validation failed for:\nspecification/service/Project",
-  );
-});
+it.each(["false", "true"])(
+  "continues after a failed changed project and reports failures with GITHUB_ACTIONS=%s",
+  async (githubActions) => {
+    vi.stubEnv("GITHUB_ACTIONS", githubActions);
+    const other = join(root, "specification/other/Project");
+    await mkdir(other, { recursive: true });
+    vi.mocked(findChangedProjects).mockResolvedValue({
+      projects: [project, other],
+      checkingAllSpecs: false,
+    });
+    vi.mocked(spawn).mockImplementationOnce(() => {
+      const child = new ChildProcess();
+      queueMicrotask(() => child.emit("close", 1, null));
+      return child;
+    });
+    await expect(runChanged(root)).resolves.toBe(false);
+    expect(spawn).toHaveBeenCalledTimes(2);
+    expect(console.error).toHaveBeenLastCalledWith(
+      "TypeSpec Validation failed for some folder to fix run and address any errors:\n" +
+        " > pnpm install\n > pnpm tsv specification/service/Project\n" +
+        "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
+    );
+    if (githubActions === "true") {
+      expect(console.log).toHaveBeenCalledWith(
+        "::error::TypeSpec Validation failed for project specification/service/Project run the following command locally to validate.%0A" +
+          " > pnpm install%0A > pnpm tsv specification/service/Project%0A" +
+          "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
+      );
+    } else {
+      expect(console.log).not.toHaveBeenCalledWith(expect.stringMatching(/^::error::/));
+    }
+  },
+);
