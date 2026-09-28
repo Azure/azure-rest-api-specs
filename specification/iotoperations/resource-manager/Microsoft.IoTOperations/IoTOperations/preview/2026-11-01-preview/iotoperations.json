@@ -12011,31 +12011,6 @@
             ]
           }
         },
-        "debugging": {
-          "type": "string",
-          "description": "When Enabled, diagnostic events are emitted for this graph using the debugging destination and sampling policy from the parent profile's diagnostics.debuggingSettings block.",
-          "default": "Disabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "OperationalMode",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "Enabled is equivalent to True"
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "Disabled is equivalent to False."
-              }
-            ]
-          }
-        },
         "requestDiskPersistence": {
           "$ref": "#/definitions/OperationalMode",
           "description": "Disk persistence mode."
@@ -12536,11 +12511,11 @@
     },
     "DataflowProfileStatus": {
       "type": "object",
-      "description": "Read-only runtime status reported by the service for a DataflowProfile.",
+      "description": "DataflowProfile status.",
       "properties": {
         "healthState": {
           "$ref": "#/definitions/ResourceHealthStatus",
-          "description": "Aggregated health state of the DataflowProfile and the resources it manages.",
+          "description": "The health state of the DataflowProfile.",
           "readOnly": true
         }
       }
@@ -14128,86 +14103,6 @@
         ]
       }
     },
-    "ProfileDebuggingCountSettings": {
-      "type": "object",
-      "description": "Settings controlling the cadence of count-based diagnostic sampling.",
-      "properties": {
-        "nth": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Emit diagnostic events for every Nth message processed by the graph (e.g. 100 emits diagnostics for one out of every 100 messages).",
-          "minimum": 1
-        }
-      },
-      "required": [
-        "nth"
-      ]
-    },
-    "ProfileDebuggingDestinationSettings": {
-      "type": "object",
-      "description": "Destination configuration for diagnostic events emitted by debugging-enabled dataflow graphs.",
-      "properties": {
-        "endpointRef": {
-          "type": "string",
-          "description": "Name of a DataflowEndpoint resource that diagnostic events are published to.\nOnly MQTT endpoints are supported in the initial release; the reference is rejected with an InvalidDataflow error otherwise.\nEach event is published to the topic `diagnostics/{pipeline-name}` derived at publish time."
-        }
-      },
-      "required": [
-        "endpointRef"
-      ]
-    },
-    "ProfileDebuggingSamplingMethod": {
-      "type": "string",
-      "description": "Supported sampling strategies for selecting messages to diagnose.",
-      "enum": [
-        "Count"
-      ],
-      "x-ms-enum": {
-        "name": "ProfileDebuggingSamplingMethod",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Count",
-            "value": "Count",
-            "description": "Tag every Nth message flowing through the graph for diagnostics."
-          }
-        ]
-      }
-    },
-    "ProfileDebuggingSamplingPolicy": {
-      "type": "object",
-      "description": "Sampling policy that selects which messages flowing through a dataflow graph are tagged for diagnostics.\nTagged messages carry a correlation ID that links every diagnostic event emitted during their traversal.\nNOTE - only the settings property matching `method` is allowed per entry.",
-      "properties": {
-        "method": {
-          "$ref": "#/definitions/ProfileDebuggingSamplingMethod",
-          "description": "The sampling method."
-        },
-        "countSettings": {
-          "$ref": "#/definitions/ProfileDebuggingCountSettings",
-          "description": "Settings controlling the count-based sampling cadence."
-        }
-      },
-      "required": [
-        "method"
-      ]
-    },
-    "ProfileDebuggingSettings": {
-      "type": "object",
-      "description": "Profile-wide settings controlling how diagnostic events are emitted from dataflow graphs.\nIndividual graphs opt in to debugging; this block defines the shared destination and sampling policy they use.",
-      "properties": {
-        "destinationSettings": {
-          "$ref": "#/definitions/ProfileDebuggingDestinationSettings",
-          "description": "Destination where diagnostic events for opted-in graphs are published. Required when debugging is configured."
-        },
-        "samplingPolicy": {
-          "$ref": "#/definitions/ProfileDebuggingSamplingPolicy",
-          "description": "Sampling policy that determines which messages produce diagnostic events as they traverse the pipeline.\nWhen absent, no sampling-based diagnostics are emitted."
-        }
-      },
-      "required": [
-        "destinationSettings"
-      ]
-    },
     "ProfileDiagnostics": {
       "type": "object",
       "description": "DataflowProfile Diagnostics properties",
@@ -14219,10 +14114,6 @@
         "metrics": {
           "$ref": "#/definitions/Metrics",
           "description": "The metrics settings for the resource."
-        },
-        "debuggingSettings": {
-          "$ref": "#/definitions/ProfileDebuggingSettings",
-          "description": "Profile-wide debugging configuration shared by all dataflow graphs under this profile.\nDefines where diagnostic events are published and how often they are sampled.\nWhen omitted, no diagnostic infrastructure is created and any graph-level debugging opt-in is ignored.\nUpdates to this block take effect on running pods without triggering a restart."
         }
       }
     },

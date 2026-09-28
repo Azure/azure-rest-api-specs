@@ -34,10 +34,6 @@ model DataflowGraphProperties {
   /** The mode of the dataflow graph. */
   mode?: OperationalMode = Enabled;
 
-  /** When Enabled, diagnostic events are emitted for this graph using the debugging destination and sampling policy from the parent profile's diagnostics.debuggingSettings block. */
-  @added(Versions.`2026-11-01-preview`)
-  debugging?: OperationalMode = Disabled;
-
   /** Disk persistence mode. */
   requestDiskPersistence?: OperationalMode;
 
