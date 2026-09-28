@@ -46,7 +46,7 @@ export async function runAll(
 
 export async function runChanged(
   folder: string,
-  options: RunOptions & Partial<ChangedProjectsOptions> = {},
+  options: RunOptions & Partial<Omit<ChangedProjectsOptions, "logger">> = {},
 ): Promise<boolean> {
   const root = await getRootFolder(folder);
   const { baseCommitish = "HEAD^", headCommitish = "HEAD", ignoreCoreFiles } = options;
@@ -54,7 +54,7 @@ export async function runChanged(
     baseCommitish,
     headCommitish,
     ignoreCoreFiles,
-    logger: options.verbose ? new ConsoleLogger(true) : undefined,
+    logger: new ConsoleLogger(options.verbose),
   });
   if (projects.length === 0) {
     if (checkingAllSpecs) {

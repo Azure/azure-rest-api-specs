@@ -1,4 +1,4 @@
-import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
+import { ConsoleLogger, defaultLogger } from "@azure-tools/specs-shared/logger";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { FormatRule } from "../src/rules/format.ts";
 import { gitDiffTopSpecFolder, runNodeBin } from "../src/utils.ts";
@@ -29,8 +29,8 @@ describe("FormatRule", () => {
     expect(runNodeBin).toHaveBeenCalledWith(
       "@typespec/compiler",
       ["tsp", "format", "../**/*.tsp", "tspconfig.yaml"],
-      mockFolder,
       logger,
+      mockFolder,
     );
     expect(runNodeBin).toHaveBeenCalledTimes(1);
     expect(gitDiffTopSpecFolder).toHaveBeenCalledWith(mockFolder);
@@ -48,7 +48,7 @@ describe("FormatRule", () => {
       "tsp stderr\n",
     ]);
 
-    const result = await new FormatRule().execute(mockFolder);
+    const result = await new FormatRule().execute(mockFolder, defaultLogger);
 
     expect(result).toEqual({
       success: false,
@@ -66,7 +66,7 @@ describe("FormatRule", () => {
       errorOutput: "changed tspconfig.yaml",
     });
 
-    const result = await new FormatRule().execute(mockFolder);
+    const result = await new FormatRule().execute(mockFolder, defaultLogger);
 
     expect(result.success).toBe(false);
     expect(result.stdOutput).toBe("git output");

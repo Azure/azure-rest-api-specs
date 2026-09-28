@@ -37,7 +37,7 @@ export async function runRules(
   rules: Rule[],
   folder: string,
   suppressions: Suppression[],
-  logger?: ILogger,
+  logger: ILogger,
 ): Promise<RunRulesResult> {
   const result: RunRulesResult = { success: true, suppressed: [], executed: [], failed: [] };
 
@@ -230,7 +230,7 @@ export async function main() {
     rules,
     absolutePath,
     suppressions,
-    values.verbose ? new ConsoleLogger(true) : undefined,
+    new ConsoleLogger(values.verbose),
   );
 
   if (!result.success) {

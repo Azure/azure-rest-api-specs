@@ -56,7 +56,7 @@ export class MultipleNewApiVersionsRule implements Rule {
   readonly description = "Require SDK emitters to target the oldest of several new API versions";
   readonly suppressable = true;
 
-  async execute(folder: string, logger?: ILogger): Promise<RuleResult> {
+  async execute(folder: string, logger: ILogger): Promise<RuleResult> {
     const resolved = await resolveNewApiVersions(folder);
     if (resolved.kind === "skip") return resolved.result;
 

@@ -7,7 +7,7 @@ export class FormatRule implements Rule {
   readonly name = "Format";
   readonly description = "Format TypeSpec";
 
-  async execute(folder: string, logger?: ILogger): Promise<RuleResult> {
+  async execute(folder: string, logger: ILogger): Promise<RuleResult> {
     let success = true;
     let stdOutput = "";
     let errorOutput = "";
@@ -16,8 +16,8 @@ export class FormatRule implements Rule {
       "@typespec/compiler",
       // Format parent folder to include shared files
       ["tsp", "format", "../**/*.tsp", "tspconfig.yaml"],
-      folder,
       logger,
+      folder,
     );
     if (err) {
       success = false;

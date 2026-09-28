@@ -13,7 +13,7 @@ export class CompileRule implements Rule {
   readonly name = "Compile";
   readonly description = "Compile TypeSpec";
 
-  async execute(folder: string, logger?: ILogger): Promise<RuleResult> {
+  async execute(folder: string, logger: ILogger): Promise<RuleResult> {
     let success = true;
     let stdOutput = "";
     let errorOutput = "";
@@ -22,7 +22,6 @@ export class CompileRule implements Rule {
       const [err, stdout, stderr] = await runNodeBin(
         "@typespec/compiler",
         ["tsp", "compile", "--list-files", "--warn-as-error", folder],
-        undefined,
         logger,
       );
 
@@ -213,7 +212,6 @@ export class CompileRule implements Rule {
       const [err, stdout, stderr] = await runNodeBin(
         "@typespec/compiler",
         ["tsp", "compile", "--no-emit", "--warn-as-error", clientTsp],
-        undefined,
         logger,
       );
       if (err) {

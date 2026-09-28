@@ -13,8 +13,8 @@ import { context } from "./index.ts";
 export async function runNodeBin(
   packageName: string,
   args: [string, ...string[]],
+  logger: ILogger,
   cwd?: string,
-  logger?: ILogger,
 ): Promise<[Error | null, string, string]> {
   try {
     const { stdout, stderr } = await execNodeBin(packageName, args, {

@@ -8,7 +8,7 @@ export interface ChangedProjectsOptions {
   baseCommitish: string;
   headCommitish: string;
   ignoreCoreFiles?: boolean;
-  logger?: ILogger;
+  logger: ILogger;
 }
 
 const coreFiles = new Set([
@@ -88,7 +88,7 @@ export async function findChangedProjects(
       }
     }
     if (!isDirectory) {
-      options.logger?.info(`Cannot find directory ${directory}`);
+      options.logger.debug(`Cannot find directory ${directory}`);
       continue;
     }
     for (const project of await findProjects(folder)) {

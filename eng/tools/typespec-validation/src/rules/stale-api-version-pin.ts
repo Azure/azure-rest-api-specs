@@ -56,7 +56,7 @@ export class StaleApiVersionPinRule implements Rule {
   readonly description = "Detect SDK emitters pinned to an API version older than the new one";
   readonly suppressable = true;
 
-  async execute(folder: string, logger?: ILogger): Promise<RuleResult> {
+  async execute(folder: string, logger: ILogger): Promise<RuleResult> {
     const resolved = await resolveNewApiVersions(folder);
     if (resolved.kind === "skip") return resolved.result;
 

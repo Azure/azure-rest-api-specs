@@ -1,4 +1,4 @@
-import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
+import { ConsoleLogger, defaultLogger } from "@azure-tools/specs-shared/logger";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { runRules } from "../src/index.ts";
 import { type RuleResult } from "../src/rule-result.ts";
@@ -22,7 +22,7 @@ function createRule(
 afterEach(() => vi.restoreAllMocks());
 
 describe("runRules", function () {
-  it.each([undefined, new ConsoleLogger(true)])(
+  it.each([new ConsoleLogger(false), new ConsoleLogger(true)])(
     "keeps rule diagnostics visible with logger=%j",
     async (logger) => {
       const log = vi.spyOn(console, "log").mockImplementation(() => {});
@@ -43,7 +43,7 @@ describe("runRules", function () {
     const rule1 = createRule("Rule1", { success: true }, { suppressable: true });
     const rule2 = createRule("Rule2", { success: true });
 
-    const result = await runRules([rule1, rule2], "/test", []);
+    const result = await runRules([rule1, rule2], "/test", [], defaultLogger);
 
     expect(result.success).toBe(true);
     expect(result.executed).toEqual(["Rule1", "Rule2"]);
@@ -59,7 +59,7 @@ describe("runRules", function () {
       { tool: "TypeSpecValidation", paths: ["."], reason: "test reason", rules: ["Rule1"] },
     ];
 
-    const result = await runRules([rule1, rule2], "/test", suppressions);
+    const result = await runRules([rule1, rule2], "/test", suppressions, defaultLogger);
 
     expect(result.success).toBe(true);
     expect(result.suppressed).toEqual(["Rule1"]);
@@ -74,7 +74,7 @@ describe("runRules", function () {
       { tool: "TypeSpecValidation", paths: ["."], reason: "test reason", rules: ["Rule1"] },
     ];
 
-    const result = await runRules([rule1], "/test", suppressions);
+    const result = await runRules([rule1], "/test", suppressions, defaultLogger);
 
     expect(result.success).toBe(true);
     expect(result.suppressed).toEqual([]);
@@ -89,7 +89,7 @@ describe("runRules", function () {
       { tool: "TypeSpecValidation", paths: ["."], reason: "test reason", rules: ["OtherRule"] },
     ];
 
-    const result = await runRules([rule1], "/test", suppressions);
+    const result = await runRules([rule1], "/test", suppressions, defaultLogger);
 
     expect(result.suppressed).toEqual([]);
     expect(result.executed).toEqual(["Rule1"]);
@@ -108,7 +108,7 @@ describe("runRules", function () {
       },
     ];
 
-    const result = await runRules([rule1], "/test", suppressions);
+    const result = await runRules([rule1], "/test", suppressions, defaultLogger);
 
     expect(result.suppressed).toEqual([]);
     expect(result.executed).toEqual(["Rule1"]);
@@ -118,7 +118,7 @@ describe("runRules", function () {
     const rule1 = createRule("Rule1", { success: false, errorOutput: "error" });
     const rule2 = createRule("Rule2", { success: true });
 
-    const result = await runRules([rule1, rule2], "/test", []);
+    const result = await runRules([rule1, rule2], "/test", [], defaultLogger);
 
     expect(result.success).toBe(false);
     expect(result.executed).toEqual(["Rule1"]);
@@ -135,7 +135,7 @@ describe("runRules", function () {
       { tool: "TypeSpecValidation", paths: ["."], reason: "skip rule2", rules: ["Rule2"] },
     ];
 
-    const result = await runRules([rule1, rule2, rule3], "/test", suppressions);
+    const result = await runRules([rule1, rule2, rule3], "/test", suppressions, defaultLogger);
 
     expect(result.success).toBe(true);
     expect(result.suppressed).toEqual(["Rule2"]);

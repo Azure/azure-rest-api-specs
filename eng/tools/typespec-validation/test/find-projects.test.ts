@@ -11,7 +11,7 @@ vi.mock("@azure-tools/specs-shared/changed-files", () => ({
 }));
 
 let root: string;
-const revisions = { baseCommitish: "base", headCommitish: "head" };
+const revisions = { baseCommitish: "base", headCommitish: "head", logger: new ConsoleLogger() };
 
 async function addProject(path: string, config = "tspconfig.yaml") {
   const folder = join(root, path);
@@ -24,6 +24,7 @@ beforeEach(async () => {
   root = await mkdtemp(join(tmpdir(), "tsv-find-projects-"));
   vi.mocked(getChangedFiles).mockReset().mockResolvedValue([]);
   vi.spyOn(console, "log").mockImplementation(() => {});
+  vi.spyOn(console, "debug").mockImplementation(() => {});
 });
 
 afterEach(async () => {
@@ -52,7 +53,6 @@ it("searches affected services recursively, deduplicates, and sorts projects", a
   expect(getChangedFiles).toHaveBeenCalledWith({
     cwd: root,
     ...revisions,
-    logger: undefined,
   });
 });
 
@@ -82,7 +82,7 @@ it("includes deleted files whose service survives and reports deleted service fo
     projects: [existing],
     checkingAllSpecs: false,
   });
-  expect(console.log).toHaveBeenCalledExactlyOnceWith(
+  expect(console.debug).toHaveBeenCalledExactlyOnceWith(
     "Cannot find directory specification/removed",
   );
 });
