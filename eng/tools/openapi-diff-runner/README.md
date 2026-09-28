@@ -93,6 +93,6 @@ pnpm test
 # Run tests with coverage
 pnpm test:ci
 
-# Lint code
-pnpm prettier
+# Format code
+pnpm format
 ```

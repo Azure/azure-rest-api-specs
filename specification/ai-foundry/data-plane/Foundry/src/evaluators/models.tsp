@@ -108,6 +108,7 @@ model CodeBasedEvaluatorDefinition extends EvaluatorDefinition {
   @doc("The container image tag to use for evaluator code execution")
   image_tag?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @extension(
     "x-ms-foundry-meta",
     #{ required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview] }
@@ -466,6 +467,7 @@ model EvaluatorVersion {
 )
 @doc("Request body for getting evaluator credentials")
 model EvaluatorCredentialRequest {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The blob URI for the evaluator storage. Example: `https://account.blob.core.windows.net:443/container`")
   blob_uri: url;
 }
