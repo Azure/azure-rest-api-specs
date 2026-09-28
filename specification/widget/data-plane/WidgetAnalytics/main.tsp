@@ -16,6 +16,7 @@ using Azure.Core;
 namespace WidgetAnalytics;
 
 @doc("Versions info.")
+#suppress "@azure-tools/typespec-azure-core/no-enum" "Test the TypeSpec suppression review workflow; this test PR will not be merged."
 enum Versions {
   @doc("The 2022-11-01-preview version.")
   v2022_11_01_Preview: "2022-11-01-preview",
