@@ -94,5 +94,5 @@ The **uniform versioning** has several implications and implementation decisions
 [API version lifecycle stage]: https://aka.ms/azsdk/api-versions
 [AutoRest config `README.md` file]: https://aka.ms/azsdk/autorest
 [common-types v6]: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/common-types/resource-management/
-[directory structure article]: ./directory-structure.md
-[glossary]: ./glossary.md
+[directory structure article]: https://github.com/Azure/azure-rest-api-specs/wiki/Specification-Folder-Structure-Guide
+[glossary]: https://github.com/Azure/azure-rest-api-specs/wiki/Specification-Glossary

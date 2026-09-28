@@ -55,11 +55,11 @@ jobs:
         id: detect
         env:
           ARM_LEASES_DIR: ${{ github.workspace }}/arm-leases
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9.0.0
         with:
           script: |
             const { default: armModelingReview } =
-              await import('${{ github.workspace }}/.github/workflows/src/arm-modeling-review/arm-modeling-review.js');
+              await import('${{ github.workspace }}/.github/workflows/src/arm-modeling-review/arm-modeling-review.ts');
             return await armModelingReview({ context, core });
 
       - name: Upload artifact for ARMModelingReviewRequired label
