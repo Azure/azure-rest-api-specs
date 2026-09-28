@@ -3544,11 +3544,11 @@ model SearchIndexerStatus {
   status: IndexerStatus;
 
   /** Snapshot of the indexer's cumulative runtime consumption for the service over the current UTC period. */
-  @removed(Versions.v2026_10_01)
+  @madeOptional(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
   @visibility(Lifecycle.Read)
-  runtime: IndexerRuntime;
+  runtime?: IndexerRuntime;
 
   /** The result of the most recent or an in-progress indexer execution. */
   @visibility(Lifecycle.Read)
@@ -5753,10 +5753,10 @@ model SearchServiceStatistics {
   limits: SearchServiceLimits;
 
   /** Service level indexer runtime consumption. */
-  @removed(Versions.v2026_10_01)
+  @madeOptional(Versions.v2026_10_01)
   @added(Versions.v2026_05_01_preview)
   @removed(Versions.v2026_04_01)
-  indexersRuntime: ServiceIndexersRuntime;
+  indexersRuntime?: ServiceIndexersRuntime;
 }
 
 /** Represents service-level resource counters and quotas. */

@@ -17600,6 +17600,11 @@
           "description": "Overall indexer status.",
           "readOnly": true
         },
+        "runtime": {
+          "$ref": "#/definitions/IndexerRuntime",
+          "description": "Snapshot of the indexer's cumulative runtime consumption for the service over the current UTC period.",
+          "readOnly": true
+        },
         "lastResult": {
           "$ref": "#/definitions/IndexerExecutionResult",
           "description": "The result of the most recent or an in-progress indexer execution.",
@@ -18040,6 +18045,10 @@
         "limits": {
           "$ref": "#/definitions/SearchServiceLimits",
           "description": "Service level general limits."
+        },
+        "indexersRuntime": {
+          "$ref": "#/definitions/ServiceIndexersRuntime",
+          "description": "Service level indexer runtime consumption."
         }
       },
       "required": [
