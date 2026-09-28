@@ -6,6 +6,7 @@ import "./models.tsp";
 import "./MapsAccount.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -14,6 +15,7 @@ namespace Microsoft.Maps;
 /**
  * An Azure resource which represents Maps Creator product and provides ability to manage private location data.
  */
+@removed(Versions.v2026_12_01)
 @parentResource(MapsAccount)
 model Creator is Azure.ResourceManager.TrackedResource<
   CreatorProperties,
@@ -27,6 +29,7 @@ model Creator is Azure.ResourceManager.TrackedResource<
   >;
 }
 
+@removed(Versions.v2026_12_01)
 @armResourceOperations
 interface Creators {
   /**
