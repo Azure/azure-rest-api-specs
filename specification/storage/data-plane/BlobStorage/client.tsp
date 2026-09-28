@@ -1302,7 +1302,7 @@ op uploadPagesNoStructuredMessage is StorageOperationRequestBody<
 )
 scalar HttpRange extends string;
 
-// ---- Java customizations (translated from the csharp scope; java shipped names track csharp) ----
+// ---- Java customizations ----
 @@clientName(BlobServicePropertiesCsharp, "BlobServiceProperties", "java");
 // The shipped java type is the public com.azure.storage.blob.models.GeoReplicationStatus, which is what
 // GeoReplication.getStatus() returns; the csharp/go name would both rename it and hide it in implementation.
@@ -1346,10 +1346,8 @@ scalar HttpRange extends string;
 // String (the caller supplies an already-base64-encoded block id). go and python carry the same overrides.
 @@alternateType(UserDelegationKey.value, string, "java");
 @@alternateType(Block.name, string, "java");
-// The block id lists are arrays: the override has to replace the ELEMENT type, so it must stay an array.
-// `string` on its own collapses the property to a single scalar, which generates `private String latest` and a
-// `toXml` that writes an unnamed text node instead of a repeated <Latest> element, breaking Put Block List and
-// the shipped `List<String>` public API.
+// These must stay `string[]`: the override replaces the element type, and a bare `string` would collapse the
+// property to a scalar and stop it serializing as repeated elements.
 @@alternateType(BlockLookupList.committed, string[], "java");
 @@alternateType(BlockLookupList.uncommitted, string[], "java");
 @@alternateType(BlockLookupList.latest, string[], "java");
@@ -1440,7 +1438,7 @@ scalar HttpRange extends string;
 @@access(DelimitedTextConfiguration, Access.internal, "java");
 @@access(JsonTextConfiguration, Access.internal, "java");
 @@access(BlobDeleteTypeCustom, Access.internal, "java");
-// Emit the error enum + list responses standalone for java (queue lesson).
+// BlobErrorCode is public on the shipped java API, so the enum has to be generated as a standalone type.
 @@access(StorageErrorCode, Access.public, "java");
 @@usage(StorageErrorCode, Usage.output, "java");
 
