@@ -1201,7 +1201,7 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ POST actions do NOT affect provisioningState; provisioningState transitions only non-terminal → non-terminal or non-terminal → terminal
 - ✅ `operationResults` are root-level resources (RPC021); `operationStatuses` may be under the original request or subscription-level operations (RPC028); subscription scope is preferred; no sensitive data in status properties
 - ✅ Operation IDs are unique (RPC022); fresh GUIDs are recommended and IDs should not reuse correlation/request IDs
-- ✅ `final-state-via` NOT specified on PUT/PATCH/DELETE following standard ARM patterns; only on POST LROs with response schema
+- ✅ `final-state-via` reviewed against the ARM template, response headers, logical `FinalResult`, and demonstrated SDK behavior; valid generated metadata is permitted on standard PUT/PATCH/DELETE operations
 
 ### Property Design (Properties Bag Review)
 
