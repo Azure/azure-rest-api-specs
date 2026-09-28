@@ -141,7 +141,9 @@ using Azure.AI.Projects;
   "python"
 );
 @@clientName(_PreviewAgentToolType.a2a_preview, exact("A2A_PREVIEW"), "python");
+@@clientName(_AgentToolType.a2a, exact("A2A"), "python");
 @@clientName(ToolboxToolType.a2a_preview, exact("A2A_PREVIEW"), "python");
+@@clientName(ToolboxToolType.a2a, exact("A2A"), "python");
 @@clientName(ProtocolConfiguration.a2a, exact("a2a"), "python");
 @@clientName(AgentEndpointProtocol.a2a, exact("A2A"), "python");
 @@clientName(A2ATool.a2a_version, exact("a2a_version"), "python");
