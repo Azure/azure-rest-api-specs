@@ -135,14 +135,9 @@ export function parseCommentTable(
 }
 
 /**
- * Decide whether the stale "Mgmt" plane label should be removed from the PR.
- *
- * post-results is the only writer of "Mgmt" (unlike "resource-manager"/"data-plane",
- * which summarize-checks reconciles), and it adds the label add-only. When a push
- * removes the management tspconfig, detection flips isMgmt to false but the label
- * lingers, causing authorization to treat the PR as management-plane and reject
- * data-plane approvers (see #46785). Remove it only when detection is confident the
- * PR is no longer management; genuinely mixed PRs (isMgmt && isDataPlane) keep it.
+ * Whether the add-only "Mgmt" label should be cleared. post-results is its only writer,
+ * so it goes stale when a push removes the management tspconfig. Label hygiene now that
+ * authorization keys off resource-manager, not "Mgmt" (#46785). Mixed PRs (isMgmt) keep it.
  */
 export function shouldRemoveStaleMgmtLabel(isMgmt: boolean, existingLabels: string[]): boolean {
   return !isMgmt && existingLabels.includes("Mgmt");
@@ -452,8 +447,7 @@ export default async function postResults({ github, context, core }: GitHubScrip
     }
   }
 
-  // Reconcile the "Mgmt" plane label. See shouldRemoveStaleMgmtLabel for why the
-  // add-only behavior above leaves it stale and why that misclassifies the PR (#46785).
+  // Clear the stale add-only "Mgmt" label. See shouldRemoveStaleMgmtLabel (#46785).
   if (shouldRemoveStaleMgmtLabel(results.isMgmt, existingLabels)) {
     await removeLabelIfPresent(github, owner, repo, issue_number, "Mgmt");
   }

@@ -57,7 +57,7 @@ function createPRLabeledPayload({
   labels?: string[];
   isMgmt?: boolean;
 }) {
-  const labelNames: string[] = [...(labels ?? []), ...(isMgmt ? ["Mgmt"] : [])];
+  const labelNames: string[] = [...(labels ?? []), ...(isMgmt ? ["resource-manager"] : [])];
   const allLabels = labelNames.map((name) => ({ name }));
   return {
     action,

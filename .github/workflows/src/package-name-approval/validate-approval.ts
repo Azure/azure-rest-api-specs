@@ -281,7 +281,8 @@ export default async function validateApproval({ github, context, core }: GitHub
     throw new Error("Pull request label event is missing a label name.");
   }
   const actor = payload.sender.login;
-  const isMgmt = labels.includes("Mgmt") || labels.includes("resource-manager");
+  // Plane from resource-manager (self-healing), not the add-only "Mgmt" label (#46785).
+  const isMgmt = labels.includes("resource-manager");
 
   if (payload.action === "unlabeled") {
     return await handleUnlabeled({

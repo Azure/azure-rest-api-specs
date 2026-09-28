@@ -9,7 +9,10 @@ export const ALLOWED_BOT_LOGINS = ["github-actions[bot]", "azure-sdk"];
 // only this explicit keyword opens a plane. See #46728.
 export const UNPROTECTED_PLANE = "unprotected";
 
-const MGMT_LABELS = ["Mgmt", "resource-manager"];
+// Plane is derived from resource-manager/data-plane, which summarize-checks reconciles
+// (adds and removes). "Mgmt" is intentionally excluded: it is written add-only by
+// package-name post-results and goes stale, which misclassified data-plane PRs (#46785).
+const MGMT_LABELS = ["resource-manager"];
 const DP_LABELS = ["data-plane"];
 
 // A plane maps either to an approver list or to the literal "unprotected".

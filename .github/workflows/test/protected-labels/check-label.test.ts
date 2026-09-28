@@ -312,10 +312,25 @@ describe("checkLabel", () => {
       });
     });
 
-    it("uses mgmt approvers when PR has Mgmt label", async () => {
+    it("uses mgmt approvers when PR has resource-manager label", async () => {
       context.payload = createLabeledPayload({
         labelName: "package-name-dotnet-approved",
         actor: "mgmt-approver1",
+        extraLabels: ["resource-manager"],
+      });
+
+      await invokeCheckLabel({ github, context, core });
+
+      expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
+    });
+
+    it("does not treat a stale add-only Mgmt label as a plane (#46785)", async () => {
+      // A data-plane approver on a PR whose only plane-ish label is a stale "Mgmt":
+      // "Mgmt" is no longer a plane signal, so the label is left untouched rather than
+      // rejected against the mgmt approver list.
+      context.payload = createLabeledPayload({
+        labelName: "package-name-dotnet-approved",
+        actor: "dp-approver1",
         extraLabels: ["Mgmt"],
       });
 
@@ -342,7 +357,7 @@ describe("checkLabel", () => {
       context.payload = createLabeledPayload({
         labelName: "package-name-dotnet-approved",
         actor: "global-admin",
-        extraLabels: ["Mgmt"],
+        extraLabels: ["resource-manager"],
       });
 
       await invokeCheckLabel({ github, context, core });
@@ -379,7 +394,7 @@ describe("checkLabel", () => {
       context.payload = createLabeledPayload({
         labelName: "package-name-approved-all",
         actor: "mgmt-approver1",
-        extraLabels: ["Mgmt"],
+        extraLabels: ["resource-manager"],
       });
 
       await invokeCheckLabel({ github, context, core });
