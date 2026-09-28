@@ -57,8 +57,8 @@ model Workbench is Azure.ResourceManager.ProxyResource<
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location?: string;
 
-  // Keep tags only in historical projections; the legacy name prevents unprojected
-  // ARM PATCH lint from requiring tags in the new update body.
+  // Keep tags only in historical projections; the legacy name prevents ARM PATCH
+  // lint from requiring tags in the new update body.
   /**
    * Resource tags.
    */
