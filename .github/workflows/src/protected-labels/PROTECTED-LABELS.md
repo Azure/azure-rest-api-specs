@@ -9,6 +9,9 @@ A system that enforces "only authorized people can apply this label."
 3. If an unauthorized user applies a protected label, the bot removes it
 4. Supports plane-aware policies: different approvers for management-plane vs data-plane PRs
 
+Warning comments link to the actor's and authorized approvers' GitHub profiles without
+`@mentions`, avoiding mention notifications.
+
 ## Configuration
 
 ```yaml

@@ -9,6 +9,7 @@ import type { Core, GitHub, GitHubScriptArgs, WebhookEvent } from "../github.ts"
 //   Flat:  LabelName: [user1, user2]
 //   Plane: LabelName: { management-plane: [user1], data-plane: [user2] }
 
+import { escapeMarkdown, link } from "@azure-tools/specs-shared/markdown";
 import { extractInputs } from "../context.ts";
 import { evaluateLabelAuthorization, loadProtectedLabelsConfig } from "./authorization.ts";
 
@@ -60,13 +61,16 @@ async function enforceLabelAuthorization({
     }
   }
 
-  const authorizedList = authorizedUsers.map((u) => `@${u}`).join(", ");
+  const authorizedList = authorizedUsers
+    .map((u) => link(escapeMarkdown(u), `https://github.com/${u}`))
+    .join(", ");
+  const actorLink = link(escapeMarkdown(actor), `https://github.com/${actor}`);
   await github.rest.issues.createComment({
     owner,
     repo,
     issue_number: issueNumber,
     body:
-      `⚠️ @${actor} is not authorized to apply \`${labelName}\`. ` +
+      `⚠️ ${actorLink} is not authorized to apply \`${labelName}\`. ` +
       `Only ${authorizedList} can apply this label.\n\nLabel removed.`,
   });
 
