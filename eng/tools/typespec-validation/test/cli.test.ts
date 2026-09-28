@@ -5,7 +5,7 @@ import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
 import { simpleGit } from "simple-git";
-import { afterEach, beforeEach, expect, it } from "vitest";
+import { afterEach, beforeEach, expect, it, vi } from "vitest";
 
 const execFileAsync = promisify(execFile);
 const cli = fileURLToPath(new URL("../cmd/tsv.js", import.meta.url));
@@ -24,9 +24,11 @@ function run(...args: string[]) {
 
 beforeEach(async () => {
   root = await realpath(await mkdtemp(join(tmpdir(), "tsv-cli-")));
+  vi.stubEnv("GITHUB_ACTIONS", "false");
 });
 
 afterEach(async () => {
+  vi.unstubAllEnvs();
   await rm(root, { recursive: true, force: true });
 });
 
@@ -64,10 +66,34 @@ it("uses an explicit root, exits nonzero on failure, and still runs later projec
   await expect(run("--all", "custom")).rejects.toMatchObject({
     code: 1,
     stdout: expect.stringContaining("Suppressed: later project") as unknown,
-    stderr: expect.stringContaining(
-      `TypeSpec Validation failed for:\n${join(root, "custom/a")}`,
-    ) as unknown,
+    stderr: expect.stringContaining("TypeSpec Validation failed for:\ncustom/a") as unknown,
   });
+});
+
+it("wraps child output in repository-relative GitHub Actions groups", async () => {
+  vi.stubEnv("GITHUB_ACTIONS", "true");
+  await addProject("specification/a");
+  await addProject("specification/b");
+  await simpleGit(root).init();
+  await writeFile(
+    join(root, "suppressions.yaml"),
+    `- tool: TypeSpecValidation
+  paths: [specification/a, specification/b]
+  reason: fixture
+`,
+  );
+
+  const { stdout } = await run("--all", join(root, "specification"));
+  expect(stdout).toContain("Checking 2 TypeSpec folders:\nspecification/a\nspecification/b");
+  const groups = [...stdout.matchAll(/::group::([^\n]+)\n([\s\S]*?)::endgroup::/g)];
+  expect(groups.map((group) => group[1])).toEqual([
+    "Validating specification/a",
+    "Validating specification/b",
+  ]);
+  for (const group of groups) {
+    expect(group[2]).toContain("Running TypeSpecValidation on folder:");
+    expect(group[2]).toContain("Suppressed: fixture");
+  }
 });
 
 it("preserves single-project validation and its positional context", async () => {
