@@ -14,8 +14,8 @@ emit:
     # "@azure-tools/typespec-ts": true
 linter:
   extends:
-    - "@azure-tools/typespec-azure-rulesets/data-plane"
-    - "@azure-tools/typespec-azure-rulesets/client-sdk"
+    - "file:../../../../eng/typespec-rulesets/data-plane.yaml"
+    - "file:../../../../eng/typespec-rulesets/client-sdk.yaml"
 options:
   "@azure-typespec/http-client-csharp":
     emitter-output-dir: "{output-dir}/sdk/loadtestservice/{namespace}"

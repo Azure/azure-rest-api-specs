@@ -11,8 +11,8 @@ Use this guidance whenever someone needs to add language emitters to an existing
 
 ## 1. Identify the service type
 
-- Path contains `/resource-manager/` or linter references `@azure-tools/typespec-azure-rulesets/resource-manager` → ARM
-- Path contains `/data-plane/` or linter references `@azure-tools/typespec-azure-rulesets/data-plane` → Data plane
+- Path contains `/resource-manager/` or the linter extends `file:<relative-path>/eng/typespec-rulesets/resource-manager.yaml` → ARM
+- Path contains `/data-plane/` or the linter extends `file:<relative-path>/eng/typespec-rulesets/data-plane.yaml` → Data plane
 
 ## 2. Reference the official widget template
 
