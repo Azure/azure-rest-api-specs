@@ -2588,6 +2588,66 @@ union ProvisioningStateUnion {
   "csharp"
 );
 @@clientName(
+  Microsoft.Network.ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,
+  Azure.ClientGenerator.Core.exact("TlsECDiffieHellmanRsaWithAes256CbcSha384"),
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,
+  Azure.ClientGenerator.Core.exact("TlsECDiffieHellmanRsaWithAes128CbcSha256"),
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,
+  Azure.ClientGenerator.Core.exact("TlsECDiffieHellmanRsaWithAes256CbcSha"),
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,
+  Azure.ClientGenerator.Core.exact("TlsECDiffieHellmanRsaWithAes128CbcSha"),
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewaySslCipherSuite.TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,
+  Azure.ClientGenerator.Core.exact("TlsECDiffieHellmanECDsaWithAes256GcmSha384"),
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewaySslCipherSuite.TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,
+  Azure.ClientGenerator.Core.exact("TlsECDiffieHellmanECDsaWithAes128GcmSha256"),
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewaySslCipherSuite.TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384,
+  Azure.ClientGenerator.Core.exact("TlsECDiffieHellmanECDsaWithAes256CbcSha384"),
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewaySslCipherSuite.TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,
+  Azure.ClientGenerator.Core.exact("TlsECDiffieHellmanECDsaWithAes128CbcSha256"),
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewaySslCipherSuite.TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,
+  Azure.ClientGenerator.Core.exact("TlsECDiffieHellmanECDsaWithAes256CbcSha"),
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewaySslCipherSuite.TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,
+  Azure.ClientGenerator.Core.exact("TlsECDiffieHellmanECDsaWithAes128CbcSha"),
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
+  Azure.ClientGenerator.Core.exact("TlsECDiffieHellmanRsaWithAes128GcmSha256"),
+  "csharp"
+);
+@@clientName(
+  Microsoft.Network.ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,
+  Azure.ClientGenerator.Core.exact("TlsECDiffieHellmanRsaWithAes256GcmSha384"),
+  "csharp"
+);
+@@clientName(
   Microsoft.Network.ApplicationGatewaySslCipherSuite.TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA,
   Azure.ClientGenerator.Core.exact("TlsDheDssWith3DesEdeCbcSha"),
   "csharp"
