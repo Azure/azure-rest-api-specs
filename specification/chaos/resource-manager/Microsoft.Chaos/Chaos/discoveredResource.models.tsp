@@ -81,13 +81,6 @@ model DiscoveredResourceProperties {
   @added(Microsoft.Chaos.Versions.v2026_11_01)
   @visibility(Lifecycle.Read)
   zones?: string[];
-
-  /**
-   * The names of scenarios in the workspace that currently include the discovered resource in scope.
-   */
-  @added(Microsoft.Chaos.Versions.v2026_11_01)
-  @visibility(Lifecycle.Read)
-  scenarios?: string[];
 }
 
 /**
