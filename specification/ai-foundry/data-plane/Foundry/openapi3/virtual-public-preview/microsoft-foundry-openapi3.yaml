@@ -54988,6 +54988,23 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Models=V1Preview
+    MCPToolboxRequestHeaderBinding:
+      type: object
+      required:
+        - header_name
+        - source
+        - required
+      properties:
+        header_name:
+          type: string
+          description: The name of the HTTP header to forward to the MCP server.
+        source:
+          type: string
+          description: The source of the header value, for example `client_headers`.
+        required:
+          type: boolean
+          description: Whether the client must supply this header.
+      description: A binding that supplies a request header to an MCP server.
     MCPToolboxTool:
       type: object
       required:
@@ -55084,6 +55101,11 @@ components:
         project_connection_id:
           type: string
           description: The connection ID in the project for the MCP server. The connection stores authentication and other connection details needed to connect to the MCP server.
+        request_header_bindings:
+          type: array
+          items:
+            $ref: '#/components/schemas/MCPToolboxRequestHeaderBinding'
+          description: Bindings that supply request headers to this MCP server.
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: An MCP tool stored in a toolbox.

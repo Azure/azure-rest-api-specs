@@ -232,11 +232,36 @@ model ShellToolboxTool extends ToolboxTool {
 }
 
 /**
+ * A binding that supplies a request header to an MCP server.
+ */
+model MCPToolboxRequestHeaderBinding {
+  /**
+   * The name of the HTTP header to forward to the MCP server.
+   */
+  header_name: string;
+
+  /**
+   * The source of the header value, for example `client_headers`.
+   */
+  source: string;
+
+  /**
+   * Whether the client must supply this header.
+   */
+  required: boolean;
+}
+
+/**
  * An MCP tool stored in a toolbox.
  */
 model MCPToolboxTool extends ToolboxTool {
   type: ToolboxMCPToolType;
   ...ToolFields<OpenAI.MCPTool>;
+
+  /**
+   * Bindings that supply request headers to this MCP server.
+   */
+  request_header_bindings?: MCPToolboxRequestHeaderBinding[];
 }
 
 /**
