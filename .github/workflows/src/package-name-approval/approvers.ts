@@ -1,5 +1,6 @@
 import {
   loadProtectedLabelsConfig,
+  UNPROTECTED_PLANE,
   type ProtectedLabelsConfig,
 } from "../protected-labels/authorization.ts";
 
@@ -9,6 +10,13 @@ export type ApproversConfig = {
     all?: string[];
   };
   tier1?: {
+    "data-plane"?: string[];
+    "management-plane"?: string[];
+  };
+  // Languages whose plane was explicitly set to the "unprotected" keyword. Such a
+  // plane has no approver list (anyone may approve), so it is tracked separately
+  // instead of leaving the language absent (which would look "not configured").
+  unprotected?: {
     "data-plane"?: string[];
     "management-plane"?: string[];
   };
@@ -28,6 +36,11 @@ export function createApproversConfig(config: ProtectedLabelsConfig): ApproversC
   const dataPlane: Record<string, string[]> = {};
 
   let mgmtAll: string[] = [];
+
+  // Languages whose data-plane / management-plane was set to the "unprotected"
+  // keyword. These have no approver list; post-results renders them as "anyone".
+  const unprotectedDataPlane: string[] = [];
+  const unprotectedMgmt: string[] = [];
 
   // Include global-approvers in data-plane.global so getAllApprovers()
   // (used by handleUnlabeled) recognizes them as authorized.
@@ -59,10 +72,12 @@ export function createApproversConfig(config: ProtectedLabelsConfig): ApproversC
     if (entry && typeof entry === "object") {
       const planeEntry = entry;
       const mgmt = planeEntry["management-plane"];
-      // A plane set to the "unprotected" literal has no approver list; skip it.
+      // A plane set to the "unprotected" literal has no approver list.
       if (Array.isArray(mgmt)) {
         // Collect unique mgmt approvers across all namespace labels
         mgmtAll = [...new Set([...mgmtAll, ...mgmt])];
+      } else if (mgmt === UNPROTECTED_PLANE) {
+        unprotectedMgmt.push(lang);
       }
       const dp = planeEntry["data-plane"];
       if (Array.isArray(dp)) {
@@ -71,6 +86,8 @@ export function createApproversConfig(config: ProtectedLabelsConfig): ApproversC
         } else {
           dataPlane[lang] = dp;
         }
+      } else if (dp === UNPROTECTED_PLANE) {
+        unprotectedDataPlane.push(lang);
       }
     }
   }
@@ -101,6 +118,10 @@ export function createApproversConfig(config: ProtectedLabelsConfig): ApproversC
     // for any language can approve any other language on mgmt plane.
     "management-plane": { all: mgmtAll },
     tier1: tier1Config,
+    unprotected: {
+      "data-plane": unprotectedDataPlane,
+      "management-plane": unprotectedMgmt,
+    },
   };
 }
 

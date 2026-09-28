@@ -166,7 +166,7 @@ export function evaluateLabelAuthorization({
   if (perLabelUsers === UNPROTECTED_PLANE) {
     // Distinct from "unprotected" (label absent from config): here the label IS
     // protected but this plane explicitly opted out. Consumers that fail-closed on
-    // unconfigured labels (e.g. package-name approval) must still honor this. See #46728.
+    // not configured labels (e.g. package-name approval) must still honor this. See #46728.
     return { status: "plane-unprotected", authorizedUsers: [] };
   }
 

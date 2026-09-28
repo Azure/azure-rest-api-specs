@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
-import { parseCommentTable } from "../../src/package-name-approval/post-results.ts";
+import { getApprovers, parseCommentTable } from "../../src/package-name-approval/post-results.ts";
+import { createApproversConfig } from "../../src/package-name-approval/approvers.ts";
 
 // Import only the pure functions we can test without heavy mocking
 // buildCommentBody and getApprovers are the key testable units
@@ -31,6 +32,38 @@ vi.mock("../../src/context.ts", () => ({
 }));
 
 describe("post-results", () => {
+  describe("getApprovers with unprotected planes (#46728)", () => {
+    const config = createApproversConfig({
+      globalApprovers: [],
+      labels: {
+        "package-name-go-approved": {
+          "management-plane": ["mgmt-approver"],
+          "data-plane": "unprotected",
+        },
+        "package-name-java-approved": {
+          "management-plane": "unprotected",
+          "data-plane": ["dp-approver"],
+        },
+      },
+    });
+
+    it("returns 'unprotected' for a data-plane plane opted out (no throw)", () => {
+      expect(getApprovers(config, false, "go")).toBe("unprotected");
+    });
+
+    it("returns 'unprotected' for a management-plane plane opted out", () => {
+      expect(getApprovers(config, true, "java")).toBe("unprotected");
+    });
+
+    it("still returns the approver list for a configured plane", () => {
+      expect(getApprovers(config, false, "java")).toEqual(["dp-approver"]);
+    });
+
+    it("still throws for a language absent from config (fail-closed)", () => {
+      expect(() => getApprovers(config, false, "ruby")).toThrow(/No approvers configured/);
+    });
+  });
+
   describe("parseCommentTable", () => {
     it("should extract language, package name, and pending status from table rows", () => {
       const body = [

@@ -80,16 +80,23 @@ async function downloadNamespaceResults(
   }
 }
 
-function getApprovers(
+export function getApprovers(
   approversConfig: import("./approvers.ts").ApproversConfig,
   isMgmt: boolean,
   language: string,
-): string[] {
+): string[] | "unprotected" {
   if (isMgmt) {
+    if (approversConfig.unprotected?.["management-plane"]?.includes(language)) {
+      return "unprotected";
+    }
     const mgmtApprovers = approversConfig["management-plane"]?.all;
     if (mgmtApprovers) {
       return mgmtApprovers;
     }
+  }
+
+  if (approversConfig.unprotected?.["data-plane"]?.includes(language)) {
+    return "unprotected";
   }
 
   const approvers = approversConfig["data-plane"]?.[language];
@@ -199,13 +206,10 @@ function buildCommentBody({
         : formatResult.valid
           ? "✅"
           : "⚠️ Invalid";
-    body += `| ${language} | ${displayName} | ${displayNs} | ${formatStatus} | ${status} | ${getApprovers(
-      approversConfig,
-      isMgmt,
-      language,
-    )
-      .map((a) => `@${a}`)
-      .join(", ")} |\n`;
+    const approversCell = getApprovers(approversConfig, isMgmt, language);
+    const approversText =
+      approversCell === "unprotected" ? "_anyone_" : approversCell.map((a) => `@${a}`).join(", ");
+    body += `| ${language} | ${displayName} | ${displayNs} | ${formatStatus} | ${status} | ${approversText} |\n`;
   }
 
   const formatErrors = formatResults.filter((result) => !result.valid);
