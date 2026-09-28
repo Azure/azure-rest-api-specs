@@ -1336,7 +1336,7 @@ scalar HttpRange extends string;
 @@clientName(AccessPolicy.expiry, "ExpiresOn", "java");
 @@clientName(AccessPolicy.permission, "Permissions", "java");
 
-// AccessPolicy.start/expiry use @encode("rfc3339-fixed-width"), which typespec-java does not recognise and so
+// AccessPolicy.start/expiry use @encode("rfc3339-fixed-width"), which typespec-java does not recognize and so
 // falls back to String. go and csharp override the same two properties for the same reason; without this java
 // generates getStartsOn(): String instead of the shipped OffsetDateTime.
 @@alternateType(AccessPolicy.start, utcDateTime, "java");
@@ -1363,7 +1363,11 @@ scalar HttpRange extends string;
 // The shipped java accessors spell these out; the spec's abbreviated property names would rename the public API.
 @@clientName(UserDelegationKey.signedOid, "signedObjectId", "java");
 @@clientName(UserDelegationKey.signedTid, "signedTenantId", "java");
-@@clientName(UserDelegationKey.signedDelegatedUserTid, "signedDelegatedUserTenantId", "java");
+@@clientName(
+  UserDelegationKey.signedDelegatedUserTid,
+  "signedDelegatedUserTenantId",
+  "java"
+);
 
 // The shipped java constant is UNCOMMITTEDBLOBS (no underscore); the emitter would otherwise derive
 // UNCOMMITTED_BLOBS from the spec member name, renaming a public constant.
@@ -1381,7 +1385,11 @@ scalar HttpRange extends string;
 // breaking public API change.
 
 // The shipped java accessor spells the container property the other way round.
-@@clientName(ContainerProperties.preventEncryptionScopeOverride, "encryptionScopeOverridePrevented", "java");
+@@clientName(
+  ContainerProperties.preventEncryptionScopeOverride,
+  "encryptionScopeOverridePrevented",
+  "java"
+);
 @@clientName(SkuName.StandardLRS, "StandardLrs", "java");
 @@clientName(SkuName.StandardGRS, "StandardGrs", "java");
 @@clientName(SkuName.StandardRAGRS, "StandardRagrs", "java");
@@ -1405,7 +1413,11 @@ scalar HttpRange extends string;
 @@clientName(LeaseStatus, "LeaseStatusType", "java");
 @@clientName(LeaseState, "LeaseStateType", "java");
 @@clientName(CopyStatus, "CopyStatusType", "java");
-@@clientName(ListContainersIncludeType, "ListBlobContainersIncludeType", "java");
+@@clientName(
+  ListContainersIncludeType,
+  "ListBlobContainersIncludeType",
+  "java"
+);
 @@clientName(ParquetConfiguration, "ParquetTextConfiguration", "java");
 @@clientName(BlobHierarchyList, "BlobHierarchyListSegment", "java");
 
@@ -1440,7 +1452,11 @@ scalar HttpRange extends string;
 
 // Same for the object replication rules: the shipped BlobDownloadHeaders exposes them as an x-ms-or-* collection
 // that ModelHelper.getObjectReplicationSourcePolicies parses. rust, javascript, python and go already carry this.
-@@alternateType(ObjectReplicationHeaders.objectReplicationRules, Record<string>, "java");
+@@alternateType(
+  ObjectReplicationHeaders.objectReplicationRules,
+  Record<string>,
+  "java"
+);
 #suppress "@azure-tools/typespec-client-generator-core/client-option"
 @@clientOption(
   MetadataHeaders.metadata,

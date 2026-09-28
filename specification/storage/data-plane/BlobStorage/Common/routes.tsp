@@ -82,7 +82,14 @@ op StorageOperationNoBody<
   TParams extends TypeSpec.Reflection.Model | void,
   TResponse extends TypeSpec.Reflection.Model | void,
   TError = Error
-> is StorageOperationBase<{ ...AcceptHeader; ...TParams }, TResponse, TError>;
+> is StorageOperationBase<
+  {
+    ...AcceptHeader;
+    ...TParams;
+  },
+  TResponse,
+  TError
+>;
 
 /** Azure Storage Blob basic operation template */
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "Existing API. Storage API version parameter pre-dates current guidance."
