@@ -22,8 +22,8 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-monitoragents"
-    namespace: "com.azure.resourcemanager.monitoragents"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-monitor-agents"
+    namespace: "com.azure.resourcemanager.monitor.agents"
     service-name: "Monitor Agents"
     flavor: azure
   "@azure-tools/typespec-ts":
@@ -32,10 +32,13 @@ options:
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-monitoragents"
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.Monitor.Agents"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/monitor"
-    emitter-output-dir: "{output-dir}/{service-dir}/armmonitor"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armmonitor"
+    emitter-output-dir: "{output-dir}/{service-dir}/armmonitoragents"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armmonitoragents"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

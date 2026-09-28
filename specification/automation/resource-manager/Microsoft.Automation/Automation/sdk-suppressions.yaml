@@ -1,0 +1,28 @@
+suppressions:
+  azure-sdk-for-python:
+    - package: azure-mgmt-automation
+      breaking-changes:
+        - Deleted or renamed client operation group `AutomationClient.dsc_compilation_job_stream`
+        - Deleted or renamed client operation group `AutomationClient.dsc_compilation_job`
+        - Deleted or renamed enum value `HttpStatusCode.CONTINUE_ENUM`
+        - Deleted or renamed enum value `ModuleProvisioningState.CANCELLED`
+        - Deleted or renamed model `CollectionItemUpdateConfiguration`
+        - Deleted or renamed model `DscCompilationJobCreateParameters`
+        - Deleted or renamed model `DscCompilationJobOperations`
+        - Deleted or renamed model `DscCompilationJobStreamOperations`
+        - Deleted or renamed model `DscCompilationJob`
+        - Deleted or renamed model `HybridRunbookWorkerGroupUpdateParameters`
+        - Deleted or renamed model `ScheduleProperties`
+        - Deleted or renamed model `SoftareUpdateConfigurationRunTaskProperties`
+        - Deleted or renamed model `SoftareUpdateConfigurationRunTasks`
+        - Method `AutomationAccount.__init__` removed default value `None` from its parameter `location`
+        - Method `AutomationClient.__init__` parameter `base_url` changed default value from `None` to `str`
+        - Method `DscConfiguration.__init__` removed default value `None` from its parameter `location`
+        - Method `HybridRunbookWorkerGroupOperations.update` deleted or renamed its parameter `parameters` of kind `positional_or_keyword`
+        - Method `HybridRunbookWorkerGroupOperations.update` inserted a `positional_or_keyword` parameter `hybrid_runbook_worker_group_updation_parameters`
+        - Method `HybridRunbookWorkerGroupOperations.update` re-ordered its parameters from `['self', 'resource_group_name', 'automation_account_name', 'hybrid_runbook_worker_group_name', 'parameters', 'kwargs']` to `['self', 'resource_group_name', 'automation_account_name', 'hybrid_runbook_worker_group_name', 'hybrid_runbook_worker_group_updation_parameters', 'kwargs']`
+        - Method `Module.__init__` removed default value `None` from its parameter `location`
+        - Method `Runbook.__init__` removed default value `None` from its parameter `location`
+        - Method `TrackedResource.__init__` removed default value `None` from its parameter `location`
+        - Model `HybridRunbookWorkerGroup` deleted or renamed its instance variable `hybrid_runbook_workers`
+        - Model `HybridRunbookWorker` deleted or renamed its instance variable `registration_time`

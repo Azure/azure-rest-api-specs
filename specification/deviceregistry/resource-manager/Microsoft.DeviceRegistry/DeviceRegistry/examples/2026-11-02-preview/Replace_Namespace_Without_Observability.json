@@ -1,0 +1,80 @@
+{
+  "title": "Replace a Namespace and Remove Observability",
+  "operationId": "Namespaces_CreateOrReplace",
+  "description": "Replace a namespace that previously had observability configured. Omitting observability removes the existing configuration.",
+  "parameters": {
+    "api-version": "2026-11-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "namespaceName": "mynamespace",
+    "resource": {
+      "location": "eastus",
+      "identity": {
+        "type": "SystemAssigned"
+      },
+      "properties": {
+        "outboundIdentity": {
+          "type": "SystemAssigned"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/mynamespace",
+        "name": "mynamespace",
+        "type": "Microsoft.DeviceRegistry/namespaces",
+        "location": "eastus",
+        "identity": {
+          "principalId": "00000000-0000-0000-0000-000000000001",
+          "tenantId": "00000000-0000-0000-0000-000000000002",
+          "type": "SystemAssigned"
+        },
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-07-16T00:00:00Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-07-16T00:00:00Z"
+        },
+        "properties": {
+          "uuid": "00000000-0000-0000-0000-000000000003",
+          "outboundIdentity": {
+            "type": "SystemAssigned"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.DeviceRegistry/namespaces/mynamespace",
+        "name": "mynamespace",
+        "type": "Microsoft.DeviceRegistry/namespaces",
+        "location": "eastus",
+        "identity": {
+          "principalId": "00000000-0000-0000-0000-000000000001",
+          "tenantId": "00000000-0000-0000-0000-000000000002",
+          "type": "SystemAssigned"
+        },
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-07-16T00:00:00Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-07-16T00:00:00Z"
+        },
+        "properties": {
+          "uuid": "00000000-0000-0000-0000-000000000003",
+          "outboundIdentity": {
+            "type": "SystemAssigned"
+          },
+          "provisioningState": "Accepted"
+        }
+      }
+    }
+  }
+}
