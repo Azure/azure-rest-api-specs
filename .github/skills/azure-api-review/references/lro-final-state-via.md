@@ -104,12 +104,12 @@ the intended result.
 
 ## When to Specify `final-state-via`
 
-| Scenario                                                                              | Review guidance                                                                                                                                                                                         |
-| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Scenario                                                                              | Review guidance                                                                                                                                                                                                        |
+| ------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **PUT/PATCH** -- standard ARM resource LRO                                            | Generated metadata is permitted. Verify the template, response headers, logical result, and any demonstrated SDK incompatibility; do not require the status monitor to contain the resource based on this value alone. |
-| **DELETE** -- ordinary status-only operation with a void logical result               | Generated metadata is permitted. Verify the polling contract and void result; do not flag the metadata solely because it is present.                                                                   |
-| **POST action** -- returns `202` with response schema on `Location` header completion | Specify `"final-state-via": "location"` so the SDK deserializes from the Location URL. (Also enforced by: `LongRunningOperationsOptionsValidator` linter rule R2010)                                    |
-| **POST action** -- returns `202` and the status monitor itself contains the result    | Specify `"final-state-via": "azure-async-operation"`. This is rare.                                                                                                                                     |
+| **DELETE** -- ordinary status-only operation with a void logical result               | Generated metadata is permitted. Verify the polling contract and void result; do not flag the metadata solely because it is present.                                                                                   |
+| **POST action** -- returns `202` with response schema on `Location` header completion | Specify `"final-state-via": "location"` so the SDK deserializes from the Location URL. (Also enforced by: `LongRunningOperationsOptionsValidator` linter rule R2010)                                                   |
+| **POST action** -- returns `202` and the status monitor itself contains the result    | Specify `"final-state-via": "azure-async-operation"`. This is rare.                                                                                                                                                    |
 
 Standard Azure.ResourceManager templates may emit `final-state-via` for PUT,
 PATCH, and DELETE. Its presence alone is not a review finding. Verify the async
