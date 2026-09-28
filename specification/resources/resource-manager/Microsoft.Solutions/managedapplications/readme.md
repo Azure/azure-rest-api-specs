@@ -40,6 +40,15 @@ input-file:
   - preview/2020-08-21-preview/managedapplications.json
 ```
 
+### Tag: package-2019-07
+
+These settings apply only when `--tag=package-2019-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-07'
+input-file:
+- stable/2019-07-01/managedapplications.json
+```
+
 ### Tag: package-managedapplications-2019-07
 
 These settings apply only when `--tag=package-managedapplications-2019-07` is specified on the command line.
