@@ -4577,7 +4577,10 @@
             "in": "path",
             "description": "The name of the express route LAG.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
           }
         ],
         "responses": {
@@ -4626,14 +4629,20 @@
             "in": "path",
             "description": "The name of the express route LAG.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
           },
           {
             "name": "authorizationName",
             "in": "path",
             "description": "The name of the authorization.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
           }
         ],
         "responses": {
@@ -4677,17 +4686,23 @@
             "in": "path",
             "description": "The name of the express route LAG.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
           },
           {
             "name": "authorizationName",
             "in": "path",
             "description": "The name of the authorization.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
           },
           {
-            "name": "resource",
+            "name": "authorizationParameters",
             "in": "body",
             "description": "Parameters supplied to the create or update express route LAG authorization operation.",
             "required": true,
@@ -4759,20 +4774,23 @@
             "in": "path",
             "description": "The name of the express route LAG.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
           },
           {
             "name": "authorizationName",
             "in": "path",
             "description": "The name of the authorization.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
@@ -4835,14 +4853,20 @@
             "in": "path",
             "description": "The name of the express route LAG.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
           },
           {
             "name": "authorizationName",
             "in": "path",
             "description": "The name of the authorization.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$"
           }
         ],
         "responses": {

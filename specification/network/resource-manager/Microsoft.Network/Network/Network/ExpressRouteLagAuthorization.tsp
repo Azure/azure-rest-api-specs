@@ -54,6 +54,9 @@ alias ExpressRouteLagAuthorizationOps = Azure.ResourceManager.Legacy.LegacyOpera
     @path
     @segment("expressRouteLags")
     @key
+    @minLength(1)
+    @maxLength(80)
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]*$")
     expressRouteLagName: string;
   },
   {
@@ -61,6 +64,9 @@ alias ExpressRouteLagAuthorizationOps = Azure.ResourceManager.Legacy.LegacyOpera
     @path
     @segment("authorizations")
     @key
+    @minLength(1)
+    @maxLength(80)
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]*$")
     authorizationName: string;
   }
 >;
@@ -95,7 +101,6 @@ interface ExpressRouteLagAuthorizations {
   delete is ExpressRouteLagAuthorizationOps.DeleteWithoutOkAsync<
     ExpressRouteLagAuthorization,
     Response =
-      | ArmDeletedResponse
       | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
           Azure.Core.Foundations.RetryAfterHeader>
       | ArmDeletedNoContentResponse,

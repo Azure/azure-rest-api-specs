@@ -1877,12 +1877,12 @@ union ExpressRouteLagAuthorizationUseStatus {
   string,
 
   /**
-   * Available
+   * The authorization is available and not currently associated with an ExpressRoute circuit.
    */
   Available: "Available",
 
   /**
-   * InUse
+   * The authorization is currently in use by an ExpressRoute circuit.
    */
   InUse: "InUse",
 }
