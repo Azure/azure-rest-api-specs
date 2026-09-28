@@ -275,6 +275,222 @@ model TextProtectedMaterialAnalysisResult {
   detected: boolean;
 }
 
+@added(ContentSafety.Versions.v2026_09_01_preview)
+@doc("The workload event source evaluated by Unified Moderate.")
+union UnifiedModerateSource {
+  string,
+
+  @doc("Input submitted to a model or agent. The content field must contain nonempty plain text. Tool fields do not apply.")
+  Input: "input",
+
+  @doc("Output produced by a model or agent. The content field must contain nonempty plain text. Tool fields do not apply.")
+  Output: "output",
+
+  @doc("A proposed tool invocation before it is executed. The content field must be a string containing a JSON-encoded object with the proposed tool arguments. toolName is required; toolCallId is optional; post-call fields do not apply.")
+  PreToolCall: "pre_tool_call",
+
+  @doc("A tool result after the invocation completes. The content field must be a string containing the JSON-encoded tool result. toolName is required; toolCallId, toolArguments, toolResultIsError, and toolDurationMs are optional.")
+  PostToolCall: "post_tool_call",
+}
+
+@added(ContentSafety.Versions.v2026_09_01_preview)
+@doc("Optional agent, session, and request context supplied to policy evaluation.")
+model UnifiedModerateContext {
+  @doc("Caller-provided identifier of the agent associated with the event.")
+  agentId?: string;
+
+  @doc("Caller-provided identifier of the session associated with the event.")
+  sessionId?: string;
+
+  @doc("Zero-based event sequence within the session, when available.")
+  @minValue(0)
+  sequence?: int64;
+
+  @doc("Caller-provided end-to-end correlation identifier.")
+  correlationId?: string;
+
+  @doc("Caller-provided workload user identifier.")
+  userId?: string;
+
+  @doc("Caller-provided workload tenant identifier.")
+  tenantId?: string;
+
+  @doc("A string containing a JSON-encoded object with validated host-specific context extensions.")
+  extensions?: string;
+}
+
+@added(ContentSafety.Versions.v2026_09_01_preview)
+@doc("A request to evaluate and enforce an applicable policy for one workload event. The service uses the first policy it can resolve from policyId and then from the policy binding for targetResourceId, in that order. The request fails if neither selector resolves a policy.")
+model UnifiedModerateOptions {
+  @doc("The identifier of a policy available to the Content Safety resource. When provided, the service attempts to resolve this policy before using the policy bound to targetResourceId.")
+  policyId?: string;
+
+  @doc("The Azure resource identifier whose policy binding is resolved if no policy is resolved from policyId. The target resource must already have a policy binding available to the Content Safety resource.")
+  targetResourceId?: string;
+
+  @doc("The workload event source. The source selects the policy intervention point.")
+  source: UnifiedModerateSource;
+
+  @doc("The content to evaluate. For input and output sources, provide nonempty plain text. For pre_tool_call, provide a string containing a JSON-encoded object with the proposed tool arguments. For post_tool_call, provide a string containing the JSON-encoded tool result.")
+  content: string;
+
+  @doc("The tool name. Required and nonempty for tool-call sources and not allowed for input or output sources.")
+  @minLength(1)
+  toolName?: string;
+
+  @doc("An optional caller-provided tool-call identifier. The service generates one when omitted for a tool-call source.")
+  toolCallId?: string;
+
+  @doc("A string containing a JSON-encoded object with the original arguments for a completed tool call. This property applies only to post_tool_call. The service uses an empty object when omitted.")
+  toolArguments?: string;
+
+  @doc("Whether the completed tool call returned an error. This property applies only to post_tool_call.")
+  toolResultIsError?: boolean;
+
+  @doc("The non-negative duration of the completed tool call, in milliseconds. This property applies only to post_tool_call.")
+  @minValue(0)
+  toolDurationMs?: float64;
+
+  @doc("Optional agent, session, and request context supplied to policy evaluation.")
+  context?: UnifiedModerateContext;
+}
+
+@added(ContentSafety.Versions.v2026_09_01_preview)
+@doc("The caller-facing enforcement result returned by Unified Moderate.")
+union UnifiedModerateVerdict {
+  string,
+
+  @doc("The content is allowed, including content modified by an allowed policy transform.")
+  Allowed: "allowed",
+
+  @doc("The content is blocked by policy.")
+  Blocked: "blocked",
+}
+
+@added(ContentSafety.Versions.v2026_09_01_preview)
+@doc("The canonical decision returned by Agent Control Specification policy evaluation.")
+union AcsDecision {
+  string,
+
+  @doc("Allow the original content.")
+  Allow: "allow",
+
+  @doc("Deny the content.")
+  Deny: "deny",
+
+  @doc("Apply an allowed canonical transform.")
+  Transform: "transform",
+}
+
+@added(ContentSafety.Versions.v2026_09_01_preview)
+@doc("The moderation and policy-attribution result for one harm category. The category name is the key in the harmResults map and is not restricted to a predefined set.")
+model AcsHarmResult {
+  @doc("Whether this harm contributed to the overall ACS verdict blocking the content.")
+  blocked: boolean;
+
+  @doc("Whether this harm was detected, regardless of whether it caused the overall verdict to block.")
+  detected: boolean;
+
+  @doc("An optional harm-specific severity value. The value is defined by the moderation model or policy that produced the result.")
+  severity?: string;
+
+  @doc("Optional blocklist results. Each item identifies one evaluated blocklist and whether it was detected.")
+  details?: AcsHarmDetail[];
+
+  @doc("An optional internet location associated with detected protected material.")
+  url?: url;
+
+  @doc("An optional license description associated with detected protected material.")
+  license?: string;
+}
+
+@added(ContentSafety.Versions.v2026_09_01_preview)
+@doc("The detection result for one blocklist evaluated as part of a harm result.")
+model AcsHarmDetail {
+  @doc("Whether the blocklist was detected.")
+  detected: boolean;
+
+  @doc("The identifier of the evaluated blocklist.")
+  id: string;
+}
+
+@added(ContentSafety.Versions.v2026_09_01_preview)
+@doc("Approval metadata returned by an ACS deny decision. Unified Moderate does not invoke an approval workflow.")
+model AcsApproval {
+  @doc("The type of approval required by the policy.")
+  type: string;
+}
+
+@added(ContentSafety.Versions.v2026_09_01_preview)
+@doc("A canonical ACS transform applied by Unified Moderate.")
+model AcsTransform {
+  @doc("The transformation target path. For input and output sources, the allowed path is `$target.content`. For tool sources, `$target` replaces the complete value and a path rooted at `$target` replaces an individual member.")
+  path: string;
+
+  @doc("A string containing the JSON-encoded replacement value applied at the target path.")
+  value: string;
+}
+
+@added(ContentSafety.Versions.v2026_09_01_preview)
+@doc("Evidence or a verification pointer returned by policy evaluation.")
+model AcsEvidence {
+  @doc("An optional evidence identifier.")
+  id?: string;
+
+  @doc("An optional evidence type.")
+  type?: string;
+
+  @doc("An optional location containing or describing the evidence.")
+  uri?: url;
+
+  @doc("An optional human-readable evidence description.")
+  description?: string;
+}
+
+@added(ContentSafety.Versions.v2026_09_01_preview)
+@doc("The complete Agent Control Specification policy verdict.")
+model AcsVerdict {
+  @doc("The canonical policy decision.")
+  decision: AcsDecision;
+
+  @doc("An optional machine-readable reason for the decision.")
+  reason?: string;
+
+  @doc("An optional human-readable message for the decision.")
+  message?: string;
+
+  @doc("Optional non-blocking warnings produced by policy evaluation.")
+  warnings?: string[];
+
+  @doc("Optional approval metadata for a deny decision. Unified Moderate does not invoke an approval workflow, so the content remains blocked.")
+  approval?: AcsApproval;
+
+  @doc("Canonical transform metadata. Required when the decision is transform.")
+  transform?: AcsTransform;
+
+  @doc("Optional policy evidence and verification pointers.")
+  evidence?: AcsEvidence[];
+
+  @doc("Optional moderation results keyed by harm category. Category names come from the policy harm configuration and are not restricted to a predefined set. A policy deny that is unrelated to a configured harm can omit this property.")
+  harmResults?: Record<AcsHarmResult>;
+}
+
+@added(ContentSafety.Versions.v2026_09_01_preview)
+@doc("The enforced result of unified moderation.")
+model UnifiedModerateResult {
+  @doc("The caller-facing enforcement outcome.")
+  verdict: UnifiedModerateVerdict;
+
+  @doc("An optional machine-readable policy reason.")
+  reason?: string;
+
+  @doc("The original or transformed content when allowed, using the same source-specific representation as the request content. Structured content is returned as a string containing the JSON-encoded value. This property is omitted when blocked.")
+  content?: string;
+
+  @doc("The complete Agent Control Specification policy verdict.")
+  acsVerdict: AcsVerdict;
+}
+
 alias ProvenanceRetryAfterTrait = ResponseHeadersTrait<
   Azure.Core.Foundations.RetryAfterHeader,
   TraitContext.Read
@@ -287,7 +503,7 @@ alias ProvenanceServiceTraits = NoRepeatableRequests &
 
 alias ProvenanceResourceOps = ResourceOperations<ProvenanceServiceTraits>;
 
-@added(ContentSafety.Versions.v2026_07_01_preview)
+@added(ContentSafety.Versions.v2026_09_01_preview)
 @resource("operations")
 @doc("Status and result of an asynchronous Content Provenance Detection operation.")
 model ProvenanceDetectOperation
@@ -305,7 +521,7 @@ model ProvenanceDetectOperation
   lastUpdatedAt?: utcDateTime;
 }
 
-@added(ContentSafety.Versions.v2026_07_01_preview)
+@added(ContentSafety.Versions.v2026_09_01_preview)
 @doc("Kind of asynchronous Content Provenance Detection operation.")
 union ProvenanceOperationKind {
   string,
@@ -314,7 +530,7 @@ union ProvenanceOperationKind {
   Detect: "Detect",
 }
 
-@added(ContentSafety.Versions.v2026_07_01_preview)
+@added(ContentSafety.Versions.v2026_09_01_preview)
 @doc("Source content descriptor for a Content Provenance Detection operation.")
 model ProvenanceContent {
   @doc("Blob URI of the media to inspect. Media up to 100 MB is supported. Supported formats: image (JPEG, PNG, GIF, WebP), audio (MP3, WAV), and video (MP4).")
@@ -322,14 +538,14 @@ model ProvenanceContent {
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
-@added(ContentSafety.Versions.v2026_07_01_preview)
+@added(ContentSafety.Versions.v2026_09_01_preview)
 @doc("Input describing the media to inspect using Content Provenance Detection.")
 model DetectProvenanceOptions {
   @doc("Source content to inspect.")
   content: ProvenanceContent;
 }
 
-@added(ContentSafety.Versions.v2026_07_01_preview)
+@added(ContentSafety.Versions.v2026_09_01_preview)
 @doc("Top-level outcome of a Content Provenance Detection operation.")
 union DetectOutcome {
   string,
@@ -344,7 +560,7 @@ union DetectOutcome {
   ProvenanceDetected: "ProvenanceDetected",
 }
 
-@added(ContentSafety.Versions.v2026_07_01_preview)
+@added(ContentSafety.Versions.v2026_09_01_preview)
 @doc("A Microsoft-issued provenance signal indicating the media was created or modified using AI.")
 model DetectedProvenance {
   @doc("Detected provenance record type.")
@@ -360,7 +576,7 @@ model DetectedProvenance {
   timestamp?: utcDateTime;
 }
 
-@added(ContentSafety.Versions.v2026_07_01_preview)
+@added(ContentSafety.Versions.v2026_09_01_preview)
 @doc("Detected provenance record type.")
 union DetectedProvenanceType {
   string,
@@ -372,7 +588,7 @@ union DetectedProvenanceType {
   Watermark: "Watermark",
 }
 
-@added(ContentSafety.Versions.v2026_07_01_preview)
+@added(ContentSafety.Versions.v2026_09_01_preview)
 @doc("Result of a Content Provenance Detection operation.")
 model DetectProvenanceResult {
   @doc("Top-level outcome of the Content Provenance Detection operation.")

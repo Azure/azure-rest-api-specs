@@ -20,7 +20,7 @@ namespace Microsoft.ContainerService;
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 @parentResource(ManagedCluster)
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_06_02_preview)
 model JWTAuthenticator is Azure.ResourceManager.ProxyResource<
   JWTAuthenticatorProperties,
   false
@@ -47,7 +47,7 @@ model JWTAuthenticator is Azure.ResourceManager.ProxyResource<
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
 @armResourceOperations
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_06_02_preview)
 interface JWTAuthenticators {
   /**
    * Gets the specified JWT authenticator of a managed cluster.
@@ -86,7 +86,7 @@ interface JWTAuthenticators {
  * The provisioning state of the last accepted operation.
  */
 @Azure.Core.lroStatus
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_06_02_preview)
 union JWTAuthenticatorProvisioningState {
   string,
 
@@ -125,7 +125,7 @@ union JWTAuthenticatorProvisioningState {
  * The properties of JWTAuthenticator. For details on how to configure the properties of a JWT authenticator, please refer to the Kubernetes documentation: https://kubernetes.io/docs/reference/access-authn-authz/authentication/#using-authentication-configuration. Please note that not all fields available in the Kubernetes documentation are supported by AKS. For troubleshooting, please see https://aka.ms/aks-external-issuers-docs.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_06_02_preview)
 model JWTAuthenticatorProperties {
   /**
    * The current provisioning state of the JWT authenticator.
@@ -154,13 +154,27 @@ model JWTAuthenticatorProperties {
    */
   @identifiers(#[])
   userValidationRules?: JWTAuthenticatorValidationRule[];
+
+  /**
+   * PEM-encoded CA certificate bundle used to validate the connection when fetching discovery information. Use this for issuer endpoints that use private certificate authorities
+   * or environments where TLS inspection is performed.
+   *
+   * The bundle must contain only CERTIFICATE PEM blocks, up to 10 CA certificates, and must be no larger than 20 KB in total. Include all CA certificates needed to validate
+   * the issuer endpoint's TLS certificate. Certificate revocation checking is not supported.
+   *
+   * If provided, only these CAs are trusted instead of the well-known root CAs.
+   * If not provided and the managed cluster's properties.securityProfile.customCATrustCertificates is set, those certificates will be used instead. Otherwise, only the well-known
+   * root CAs are trusted.
+   */
+  @added(Versions.v2026_06_02_preview)
+  certificateAuthorityBundle?: string;
 }
 
 /**
  * The OIDC issuer details for JWTAuthenticator.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_06_02_preview)
 model JWTAuthenticatorIssuer {
   /**
    * The issuer URL. The URL must begin with the scheme https and cannot contain a query string or fragment. This must match the "iss" claim in the presented JWT, and the issuer returned from discovery.
@@ -178,7 +192,7 @@ model JWTAuthenticatorIssuer {
  * The validation rule for JWTAuthenticator.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_06_02_preview)
 model JWTAuthenticatorValidationRule {
   /**
    * The CEL expression used to validate the claim or attribute.
@@ -195,7 +209,7 @@ model JWTAuthenticatorValidationRule {
  * The claim mappings for JWTAuthenticator.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_06_02_preview)
 model JWTAuthenticatorClaimMappings {
   /**
    * The expression to extract username attribute from the token claims.
@@ -223,7 +237,7 @@ model JWTAuthenticatorClaimMappings {
  * The claim mapping expression for JWTAuthenticator.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_06_02_preview)
 model JWTAuthenticatorClaimMappingExpression {
   /**
    * The CEL expression used to access token claims.
@@ -235,7 +249,7 @@ model JWTAuthenticatorClaimMappingExpression {
  * The extra claim mapping expression for JWTAuthenticator.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
-@added(Versions.v2026_05_02_preview)
+@added(Versions.v2026_06_02_preview)
 model JWTAuthenticatorExtraClaimMappingExpression {
   /**
    * The key of the extra attribute.
