@@ -168,6 +168,10 @@ Run `pnpm run check` in each affected package. All lint, formatting, and test ch
 
 Cover new or changed behavior and bug regressions with focused tests of repository-owned behavior and integration contracts. Reuse adequate existing coverage for mechanical refactors and dependency/API substitutions; add tests for uncovered repository behavior or compatibility risks, not to reproduce upstream test matrices. Preserve configured coverage requirements and justify removing existing tests.
 
+- Each assertion must catch a concrete behavioral regression, not restate configuration or test a third-party tool's implementation. Formatting-only changes normally need the existing formatter check, not new tests.
+- For YAML/JSON integration tests, inspect parsed values that affect behavior. Do not assert text offsets, file length, indentation, quote style, or display names unless they are part of the contract being tested.
+- When a test fails after an intentional change, remove obsolete expectations rather than replacing them with assertions that merely lock in the new implementation. Keep the fix scoped to the behavior at issue.
+
 - **Framework**: Vitest
 - **Test files**: `*.test.ts` files in `test/` directories
 - **Mocks**: Define mocks in test files or `test/mocks.ts`; prefer typed `vi.fn` and `vi.mocked` over casts

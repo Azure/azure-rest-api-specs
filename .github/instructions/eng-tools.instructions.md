@@ -202,6 +202,10 @@ Run `pnpm run check` from each affected tool directory. All applicable type, lin
 
 Cover new or changed behavior and bug regressions with focused tests of repository-owned behavior and integration contracts. Reuse adequate existing coverage for mechanical refactors and dependency/API substitutions; add tests for uncovered repository behavior or compatibility risks, not to reproduce upstream test matrices. Preserve configured coverage requirements and justify removing existing tests.
 
+- Each assertion must catch a concrete behavioral regression, not restate configuration or test a third-party tool's implementation. Formatting-only changes normally need the existing formatter check, not new tests.
+- For YAML/JSON integration tests, inspect parsed values that affect behavior. Do not assert text offsets, file length, indentation, quote style, or display names unless they are part of the contract being tested.
+- When a test fails after an intentional change, remove obsolete expectations rather than replacing them with assertions that merely lock in the new implementation. Keep the fix scoped to the behavior at issue.
+
 - **Framework**: Vitest
 - **Test files**: `*.test.ts` files under each tool's `test/` directory
 - **Fixtures**: Place test fixtures under `test/` (the root `.oxfmtrc.json` excludes `fixtures` and `specification` directories under tooling)
