@@ -38,11 +38,57 @@ async function commit(message: string) {
 beforeEach(async () => {
   root = await realpath(await mkdtemp(join(tmpdir(), "tsv-cli-")));
   vi.stubEnv("GITHUB_ACTIONS", "false");
+  vi.stubEnv("DEBUG", "");
 });
 
 afterEach(async () => {
   vi.unstubAllEnvs();
   await rm(root, { recursive: true, force: true });
+});
+
+it.each(["single", "all", "changed"])(
+  "makes Git tracing opt-in without hiding %s validation failures",
+  async (mode) => {
+    const project = "specification/service/Project";
+    await addProject(project);
+    await initGit();
+    await commit("Base");
+    await writeFile(join(root, project, "tspconfig.yaml"), "# changed");
+    await commit("Head");
+    const args = mode === "single" ? [project] : [`--${mode}`];
+    await expect(run(...args)).rejects.toMatchObject({
+      code: 1,
+      stdout: expect.stringContaining('must use "folder structure v2"') as unknown,
+      stderr: mode === "single" ? "" : (expect.not.stringContaining("simple-git") as unknown),
+    });
+    await expect(run(...args, "--verbose")).rejects.toMatchObject({
+      code: 1,
+      stdout: expect.stringContaining('must use "folder structure v2"') as unknown,
+      stderr: expect.stringContaining("simple-git") as unknown,
+    });
+  },
+);
+
+it("keeps changed-file inventories behind --verbose and supports -v", async () => {
+  await addProject("specification/service/Project");
+  await initGit();
+  await commit("Base");
+  await writeFile(join(root, "specification/service/Project/tspconfig.yaml"), "# changed");
+  await commit("Head");
+  const quiet = await run("--changed", "--dry-run");
+  expect(quiet.stdout).not.toContain("Changed Files:");
+  expect(quiet.stderr).toBe("");
+  const verbose = await run("--changed", "--dry-run", "-v");
+  expect(verbose.stdout).toContain("Changed Files:");
+  expect(verbose.stderr).toContain("simple-git");
+});
+
+it("respects explicit DEBUG selections without --verbose", async () => {
+  vi.stubEnv("DEBUG", "simple-git");
+  await addProject("specification/service/Project");
+  await initGit();
+  const { stderr } = await run("--all", "--dry-run");
+  expect(stderr).toContain("simple-git");
 });
 
 it("defaults --all to specification and passes all-spec context to children and suppressions", async () => {

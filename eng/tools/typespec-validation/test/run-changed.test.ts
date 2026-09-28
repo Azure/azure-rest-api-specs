@@ -55,6 +55,7 @@ it("uses the repository root and passes the default revisions to each project", 
     baseCommitish: "HEAD^",
     headCommitish: "HEAD",
     ignoreCoreFiles: undefined,
+    logger: undefined,
   });
   expect(vi.mocked(spawn).mock.calls[0][1]).toEqual([
     expect.stringMatching(/[/\\]cmd[/\\]tsv\.js$/),
@@ -75,10 +76,27 @@ it("passes explicit revisions and the core-file policy without losing context", 
     baseCommitish: "origin/main",
     headCommitish: "feature",
     ignoreCoreFiles: true,
+    logger: undefined,
   });
   expect(vi.mocked(spawn).mock.calls[0][1]?.[2]).toBe(
     '{"checkingAllSpecs":false,"baseCommitish":"origin/main","headCommitish":"feature"}',
   );
+});
+
+it("forwards verbose logging without adding presentation options to suppression context", async () => {
+  await expect(runChanged(root, { verbose: true })).resolves.toBe(true);
+  expect(findChangedProjects).toHaveBeenCalledWith(
+    root,
+    expect.objectContaining({
+      logger: expect.objectContaining({ isDebug: expect.any(Function) as unknown }) as unknown,
+    }),
+  );
+  expect(vi.mocked(spawn).mock.calls[0][1]).toEqual([
+    expect.stringMatching(/[/\\]cmd[/\\]tsv\.js$/),
+    project,
+    '{"checkingAllSpecs":false,"baseCommitish":"HEAD^","headCommitish":"HEAD"}',
+    "--verbose",
+  ]);
 });
 
 it("does not honor all-spec suppressions for scoped changed projects", async () => {

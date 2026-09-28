@@ -1,4 +1,5 @@
 import { getChangedFiles } from "@azure-tools/specs-shared/changed-files";
+import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -51,7 +52,7 @@ it("searches affected services recursively, deduplicates, and sorts projects", a
   expect(getChangedFiles).toHaveBeenCalledWith({
     cwd: root,
     ...revisions,
-    logger: expect.anything() as unknown,
+    logger: undefined,
   });
 });
 
@@ -75,7 +76,9 @@ it("includes deleted files whose service survives and reports deleted service fo
     "specification/removed/Project/tspconfig.yaml",
   ]);
 
-  await expect(findChangedProjects(root, revisions)).resolves.toEqual({
+  await expect(
+    findChangedProjects(root, { ...revisions, logger: new ConsoleLogger(true) }),
+  ).resolves.toEqual({
     projects: [existing],
     checkingAllSpecs: false,
   });

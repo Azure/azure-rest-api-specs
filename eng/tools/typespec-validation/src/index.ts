@@ -1,4 +1,6 @@
+import { ConsoleLogger, type ILogger } from "@azure-tools/specs-shared/logger";
 import { type Suppression } from "@azure-tools/suppressions";
+import debug from "debug";
 import { stat } from "node:fs/promises";
 import { type ParseArgsConfig, parseArgs } from "node:util";
 import { type Rule } from "./rule.ts";
@@ -35,6 +37,7 @@ export async function runRules(
   rules: Rule[],
   folder: string,
   suppressions: Suppression[],
+  logger?: ILogger,
 ): Promise<RunRulesResult> {
   const result: RunRulesResult = { success: true, suppressed: [], executed: [], failed: [] };
 
@@ -52,7 +55,7 @@ export async function runRules(
       }
     }
 
-    const ruleResult = await rule.execute(folder);
+    const ruleResult = await rule.execute(folder, logger);
     result.executed.push(rule.name);
     if (ruleResult.stdOutput) console.log(ruleResult.stdOutput);
     if (!ruleResult.success) {
@@ -73,6 +76,10 @@ export async function runRules(
 export async function main() {
   const args = process.argv.slice(2);
   const options = {
+    verbose: {
+      type: "boolean",
+      short: "v",
+    },
     folder: {
       type: "string",
       short: "f",
@@ -109,6 +116,9 @@ export async function main() {
   const parsedArgs = parseArgs({ args, options, allowPositionals: true });
 
   const { values } = parsedArgs;
+  if (values.verbose) {
+    debug.enable([process.env.DEBUG, "simple-git"].filter(Boolean).join(","));
+  }
   if (values.all && values.changed) {
     console.error("--all and --changed cannot be combined");
     process.exitCode = 1;
@@ -148,6 +158,7 @@ export async function main() {
       ignoreCoreFiles: values["ignore-core-files"],
       gitClean: values["git-clean"],
       dryRun: values["dry-run"],
+      verbose: values.verbose,
     });
     if (!success) process.exitCode = 1;
     return;
@@ -165,6 +176,7 @@ export async function main() {
       gitClean: values["git-clean"],
       shard: values.shard,
       dryRun: values["dry-run"],
+      verbose: values.verbose,
     });
     if (!success) process.exitCode = 1;
     return;
@@ -214,7 +226,12 @@ export async function main() {
     new StaleApiVersionPinRule(),
   ];
 
-  const result = await runRules(rules, absolutePath, suppressions);
+  const result = await runRules(
+    rules,
+    absolutePath,
+    suppressions,
+    values.verbose ? new ConsoleLogger(true) : undefined,
+  );
 
   if (!result.success) {
     process.exitCode = 1;

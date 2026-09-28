@@ -1,3 +1,4 @@
+import type { ILogger } from "@azure-tools/specs-shared/logger";
 import { type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
 import { gitDiffTopSpecFolder, runNodeBin } from "../utils.ts";
@@ -6,7 +7,7 @@ export class FormatRule implements Rule {
   readonly name = "Format";
   readonly description = "Format TypeSpec";
 
-  async execute(folder: string): Promise<RuleResult> {
+  async execute(folder: string, logger?: ILogger): Promise<RuleResult> {
     let success = true;
     let stdOutput = "";
     let errorOutput = "";
@@ -16,6 +17,7 @@ export class FormatRule implements Rule {
       // Format parent folder to include shared files
       ["tsp", "format", "../**/*.tsp", "tspconfig.yaml"],
       folder,
+      logger,
     );
     if (err) {
       success = false;

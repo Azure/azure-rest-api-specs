@@ -10,6 +10,19 @@ pnpm tsv --changed
 pnpm tsv --changed --base=origin/main --head=HEAD --dry-run
 ```
 
+Use `--verbose` (or `-v`) to include command traces, captured command output, Git
+debug logging, and changed-file discovery details:
+
+```sh
+pnpm tsv specification/<service>/<project> --verbose
+pnpm tsv --changed --verbose
+pnpm tsv --all specification/<service> --verbose
+```
+
+Normal rule output, validation errors, and CI annotations remain visible without
+this flag. Existing `DEBUG` environment selections are respected; TSV does not
+enable Git tracing merely by being imported.
+
 `--changed` compares committed changes between `--base` (default `HEAD^`) and
 `--head` (default `HEAD`). It validates the current checkout, not a separate
 checkout of `--head`. Uncommitted changes do not affect project selection.

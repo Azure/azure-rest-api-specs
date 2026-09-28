@@ -1,4 +1,5 @@
 import { mockFolder } from "./mocks.ts";
+import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 
 import { afterEach, beforeEach, describe, expect, it, type MockInstance, vi } from "vitest";
 
@@ -65,23 +66,24 @@ describe("compile", function () {
       Promise.resolve(path === swaggerPath ? '{"info": {"x-typespec-generated": true}}' : "{}"),
     );
 
-    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
+    const logger = new ConsoleLogger(true);
+    await expect(new CompileRule().execute(mockFolder, logger)).resolves.toMatchObject({
       success: true,
     });
-    expect(runNodeBinSpy).toHaveBeenNthCalledWith(1, "@typespec/compiler", [
-      "tsp",
-      "compile",
-      "--list-files",
-      "--warn-as-error",
-      mockFolder,
-    ]);
-    expect(runNodeBinSpy).toHaveBeenNthCalledWith(2, "@typespec/compiler", [
-      "tsp",
-      "compile",
-      "--no-emit",
-      "--warn-as-error",
-      path.join(mockFolder, "client.tsp"),
-    ]);
+    expect(runNodeBinSpy).toHaveBeenNthCalledWith(
+      1,
+      "@typespec/compiler",
+      ["tsp", "compile", "--list-files", "--warn-as-error", mockFolder],
+      undefined,
+      logger,
+    );
+    expect(runNodeBinSpy).toHaveBeenNthCalledWith(
+      2,
+      "@typespec/compiler",
+      ["tsp", "compile", "--no-emit", "--warn-as-error", path.join(mockFolder, "client.tsp")],
+      undefined,
+      logger,
+    );
   });
 
   it.each([

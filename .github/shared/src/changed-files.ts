@@ -1,10 +1,6 @@
-import debug from "debug";
 import { simpleGit } from "simple-git";
 import { KeyedCache } from "./cache.ts";
 import { includesSegment } from "./path.ts";
-
-// Enable simple-git debug logging to improve console output
-debug.enable("simple-git");
 
 // Cache results of the `example` filter, using the un-resolved path for maximum perf
 // The `example` filter is a hot path in spec-model for large specs like "network".

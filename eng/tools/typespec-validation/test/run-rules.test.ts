@@ -1,4 +1,5 @@
-import { describe, expect, it, vi } from "vitest";
+import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { runRules } from "../src/index.ts";
 import { type RuleResult } from "../src/rule-result.ts";
 import { type Rule } from "../src/rule.ts";
@@ -18,7 +19,26 @@ function createRule(
   };
 }
 
+afterEach(() => vi.restoreAllMocks());
+
 describe("runRules", function () {
+  it.each([undefined, new ConsoleLogger(true)])(
+    "keeps rule diagnostics visible with logger=%j",
+    async (logger) => {
+      const log = vi.spyOn(console, "log").mockImplementation(() => {});
+      const rule = createRule("Rule", {
+        success: false,
+        stdOutput: "diagnostic on stdout",
+        errorOutput: "diagnostic on stderr",
+      });
+      const result = await runRules([rule], "/test", [], logger);
+      expect(result.success).toBe(false);
+      expect(rule.executeFn).toHaveBeenCalledWith("/test", logger);
+      expect(log).toHaveBeenCalledWith("diagnostic on stdout");
+      expect(log).toHaveBeenCalledWith("diagnostic on stderr");
+    },
+  );
+
   it("should execute all rules when no suppressions", async function () {
     const rule1 = createRule("Rule1", { success: true }, { suppressable: true });
     const rule2 = createRule("Rule2", { success: true });
