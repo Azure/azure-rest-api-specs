@@ -159,15 +159,6 @@ namespace Azure.AI.Projects {
   // WebSocket protocol upgrades are not representable by the C# HTTP client generator.
   @@scope(VoiceAgentWebSocket.connectVoiceAgent, "!csharp");
 
-  // Keep the transport type reachable even though the WebSocket operation itself is excluded:
-  // the hand-written ProjectsRealtimeClient/ProjectsRealtimeSessionClient (which reimplements the
-  // WebSocket handshake, like Java's own hand-written Reactor Netty transport) accepts "transport"
-  // as a raw options.QueryString value today, but a strongly-typed VoiceAgentTransport gives future
-  // callers/tooling a real generated type to reference, matching sdk-java-azure-ai-agents/client.tsp's
-  // identical treatment of this same type.
-  @@usage(VoiceAgentTransport, Usage.input | Usage.json);
-  @@access(VoiceAgentTransport, Access.public, "csharp");
-
   // --------------------------------------------------------------------------------
   // Hide session operations, containing the foundry features
   // --------------------------------------------------------------------------------
