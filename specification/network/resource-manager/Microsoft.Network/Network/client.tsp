@@ -5209,120 +5209,6 @@ op replaceprivateDnsZoneGroupsList(
   "csharp"
 );
 
-@@access(
-  Common.FlowLogPropertiesFormat,
-  Azure.ClientGenerator.Core.Access.public,
-  "csharp"
-);
-
-@@access(
-  Microsoft.Network.FlowLogProperties,
-  Azure.ClientGenerator.Core.Access.public,
-  "csharp"
-);
-
-@@access(
-  Microsoft.Network.ConnectionMonitorQueryResult,
-  Azure.ClientGenerator.Core.Access.public,
-  "csharp"
-);
-
-@@access(
-  Microsoft.Network.ConnectionMonitorParameters,
-  Azure.ClientGenerator.Core.Access.public,
-  "csharp"
-);
-
-@@access(
-  Microsoft.Network.ConnectionMonitorSourceStatus,
-  Azure.ClientGenerator.Core.Access.public,
-  "csharp"
-);
-
-@@access(
-  Microsoft.Network.ConnectionStateSnapshot,
-  Azure.ClientGenerator.Core.Access.public,
-  "csharp"
-);
-
-@@access(
-  Microsoft.Network.EvaluationState,
-  Azure.ClientGenerator.Core.Access.public,
-  "csharp"
-);
-
-@@access(
-  Microsoft.Network.FirewallPolicyIDPSQuerySortOrder,
-  Azure.ClientGenerator.Core.Access.public,
-  "csharp"
-);
-
-@@access(
-  Microsoft.Network.FirewallPolicyIDPSSignatureDirection,
-  Azure.ClientGenerator.Core.Access.public,
-  "csharp"
-);
-
-@@access(
-  Microsoft.Network.FirewallPolicyIDPSSignatureMode,
-  Azure.ClientGenerator.Core.Access.public,
-  "csharp"
-);
-
-@@access(
-  Microsoft.Network.FirewallPolicyIDPSSignatureSeverity,
-  Azure.ClientGenerator.Core.Access.public,
-  "csharp"
-);
-
-@@access(
-  Microsoft.Network.Geo,
-  Azure.ClientGenerator.Core.Access.public,
-  "csharp"
-);
-
-@@access(
-  Microsoft.Network.InboundSecurityRule,
-  Azure.ClientGenerator.Core.Access.public,
-  "csharp"
-);
-
-@@access(
-  Microsoft.Network.PacketCaptureParameters,
-  Azure.ClientGenerator.Core.Access.public,
-  "csharp"
-);
-
-@@access(
-  Microsoft.Network.PropagatedRouteTable,
-  Azure.ClientGenerator.Core.Access.public,
-  "csharp"
-);
-
-@@access(
-  Microsoft.Network.ReferencedPublicIpAddress,
-  Azure.ClientGenerator.Core.Access.public,
-  "csharp"
-);
-
-@@access(
-  Common.LoadBalancingRulePropertiesFormat,
-  Azure.ClientGenerator.Core.Access.public,
-  "csharp"
-);
-
-@@access(
-  Common.InboundNatPoolPropertiesFormat,
-  Azure.ClientGenerator.Core.Access.public,
-  "csharp"
-);
-
-@@access(
-  Microsoft.Network.InternetIngressPublicIpsProperties,
-  Azure.ClientGenerator.Core.Access.public,
-  "csharp"
-);
-
 @@alternateType(Common.Resource.id, armResourceIdentifier, "csharp");
 
 @@alternateType(Common.SubResource.id, armResourceIdentifier, "csharp");
@@ -5537,12 +5423,6 @@ op replaceprivateDnsZoneGroupsList(
 
 @@alternateType(
   Microsoft.Network.EffectiveBaseSecurityAdminRule.id,
-  armResourceIdentifier,
-  "csharp"
-);
-
-@@alternateType(
-  Microsoft.Network.CustomIpPrefixPropertiesFormat.customIpPrefixParent,
   armResourceIdentifier,
   "csharp"
 );
@@ -6517,21 +6397,9 @@ op replaceprivateDnsZoneGroupsList(
   "csharp"
 );
 
-@@access(
-  Microsoft.Network.VpnServerConfigurationProperties.name,
-  Azure.ClientGenerator.Core.Access.internal,
-  "csharp"
-);
-
 @@clientName(
   Microsoft.Network.VpnServerConfigurationProperties.etag,
   "PropertiesETag",
-  "csharp"
-);
-
-@@access(
-  Microsoft.Network.VpnServerConfigurationProperties.etag,
-  Azure.ClientGenerator.Core.Access.internal,
   "csharp"
 );
 
@@ -6653,11 +6521,6 @@ op replaceprivateDnsZoneGroupsList(
 @@clientName(
   Microsoft.Network.ContainerNetworkInterfaceIpConfiguration.type,
   "ContainerNetworkInterfaceIpConfigurationType",
-  "csharp"
-);
-@@clientName(
-  Microsoft.Network.CustomIpPrefixPropertiesFormat.customIpPrefixParent,
-  "ParentCustomIPPrefixId",
   "csharp"
 );
 @@clientName(
