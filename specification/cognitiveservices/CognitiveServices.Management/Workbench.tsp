@@ -111,11 +111,42 @@ interface Workbenches {
   @tag("Workbenches")
   get is ArmResourceRead<Workbench>;
 
+  // Keep the legacy template so historical PUT projections retain their LRO metadata.
   /**
    * Creates or updates a workbench associated with the project.
    */
+  @sharedRoute
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_09_01)
+  @renamedFrom(Versions.v2026_09_15_preview, "createOrUpdate")
   @tag("Workbenches")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<Workbench>;
+  createOrUpdateLegacy is ArmResourceCreateOrReplaceAsync<Workbench>;
+
+  /**
+   * Creates or updates a workbench associated with the project.
+   */
+  @sharedRoute
+  @added(Versions.v2026_09_15_preview)
+  @tag("Workbenches")
+  // Explicit status-monitor responses infer the LRO without the Async template's final-state override.
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    Workbench,
+    Response =
+      | (ArmResourceUpdatedResponse<Workbench> &
+          ArmAsyncOperationHeader &
+          ArmLroLocationHeader<FinalResult = never> &
+          Azure.Core.Foundations.RetryAfterHeader)
+      | ArmResourceCreatedResponse<
+          Workbench,
+          ArmAsyncOperationHeader &
+            ArmLroLocationHeader<FinalResult = never> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+  >;
 
   // Keep the legacy template so historical PATCH projections retain their LRO metadata.
   /**
@@ -187,6 +218,10 @@ interface Workbenches {
 @@minLength(Workbench.name, 1);
 @@doc(Workbench.name, "The name of the workbench associated with the project.");
 @@doc(Workbench.properties, "Properties of the workbench resource.");
+@@doc(
+  Workbenches.createOrUpdateLegacy::parameters.resource,
+  "The workbench properties."
+);
 @@doc(
   Workbenches.createOrUpdate::parameters.resource,
   "The workbench properties."

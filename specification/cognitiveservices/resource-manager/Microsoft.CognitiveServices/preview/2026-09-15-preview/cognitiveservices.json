@@ -9540,9 +9540,24 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'Workbench' update operation succeeded",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Workbench"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "201": {
@@ -9559,6 +9574,10 @@
                 "type": "integer",
                 "format": "int32",
                 "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               }
             }
           },
@@ -9572,10 +9591,13 @@
         "x-ms-examples": {
           "PutWorkbench": {
             "$ref": "./examples/PutWorkbench.json"
+          },
+          "PutWorkbenchPending": {
+            "$ref": "./examples/PutWorkbenchPending.json"
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
+          "final-state-via": "original-uri",
           "final-state-schema": "#/definitions/Workbench"
         },
         "x-ms-long-running-operation": true
@@ -9653,6 +9675,12 @@
         "x-ms-examples": {
           "UpdateWorkbench": {
             "$ref": "./examples/UpdateWorkbench.json"
+          },
+          "UpdateWorkbenchComputeProperties": {
+            "$ref": "./examples/UpdateWorkbenchComputeProperties.json"
+          },
+          "UpdateWorkbenchResetComputeProperties": {
+            "$ref": "./examples/UpdateWorkbenchResetComputeProperties.json"
           }
         }
       },
@@ -24149,11 +24177,35 @@
       "properties": {
         "targetClusterId": {
           "type": "string",
-          "description": "ARM resource ID of the parent cluster that hosts this workbench."
+          "description": "Resource ID of the Foundry Compute or virtual cluster that hosts this workbench. Changing the cluster requires the workbench to be stopped."
         },
         "imageLink": {
           "type": "string",
-          "description": "Container image URI (e.g., MCR or ACR image path) for the workbench."
+          "description": "Container image URI (e.g., MCR or ACR image path) for the workbench. Immutable after creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "runtimeImage": {
+          "type": "string",
+          "description": "Runtime image from the mcr.microsoft.com/azureml/fci-runtime repository. Immutable after creation. If omitted or blank, the service selects its configured runtime image.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "instanceType": {
+          "type": "string",
+          "description": "For virtual clusters, an exact Singularity instance type or a full-node Azure VM size. If omitted or null on creation, defaults to Singularity.D4_v3. Foundry Compute ignores this override and uses the pool configuration. Changing the instance type requires the workbench to be stopped.",
+          "x-nullable": true
+        },
+        "gpuCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "GPU count for GPU pools or vCPU count for CPU pools. Must be 1, 2, 4, 8, or a positive multiple of 8. A full-node Azure VM size permits partition selection; omitted or null uses the full node. For an exact Singularity instance type, a supplied count must match that type; the Singularity.D4_v3 fallback accepts 4.",
+          "minimum": 1,
+          "x-nullable": true
         },
         "idleTimeBeforeShutdown": {
           "type": "string",
@@ -24161,11 +24213,19 @@
         },
         "datasetId": {
           "type": "string",
-          "description": "The dataset ID to mount for the workbench."
+          "description": "The dataset ID to mount for the workbench. Set only during creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "sshSettings": {
           "$ref": "#/definitions/SshSettings",
-          "description": "SSH configuration for remote access to the workbench."
+          "description": "SSH configuration for remote access to the workbench. Set only during creation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "connectivityEndpoints": {
           "$ref": "#/definitions/ConnectivityEndpoints",
@@ -24178,8 +24238,13 @@
           "readOnly": true
         },
         "provisioningState": {
-          "$ref": "#/definitions/ComputeProvisioningState",
-          "description": "Provisioning state of the workbench resource.",
+          "$ref": "#/definitions/WorkbenchProvisioningState",
+          "description": "Provisioning state of the workbench resource, independent of runtime lifecycle status.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/WorkbenchStatus",
+          "description": "Runtime lifecycle status of the workbench. Independent of resource provisioning; start, stop, restart, and runtime health changes do not change provisioningState.",
           "readOnly": true
         },
         "errors": {
@@ -24202,6 +24267,115 @@
         "imageLink"
       ]
     },
+    "WorkbenchProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of a workbench resource, independent of runtime lifecycle status.",
+      "enum": [
+        "Creating",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "WorkbenchProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The workbench resource is being created."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The workbench resource has been provisioned."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Provisioning of the workbench resource failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Provisioning of the workbench resource was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "WorkbenchStatus": {
+      "type": "string",
+      "description": "Runtime lifecycle status of a workbench.",
+      "enum": [
+        "Unknown",
+        "Creating",
+        "Starting",
+        "Running",
+        "Stopping",
+        "Stopped",
+        "Restarting",
+        "Updating",
+        "Deleting",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "WorkbenchStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "The runtime status is unknown."
+          },
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The runtime is being created."
+          },
+          {
+            "name": "Starting",
+            "value": "Starting",
+            "description": "The runtime is starting."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The runtime is running."
+          },
+          {
+            "name": "Stopping",
+            "value": "Stopping",
+            "description": "The runtime is stopping."
+          },
+          {
+            "name": "Stopped",
+            "value": "Stopped",
+            "description": "The runtime is stopped."
+          },
+          {
+            "name": "Restarting",
+            "value": "Restarting",
+            "description": "The runtime is restarting."
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "The runtime is being updated."
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The runtime is being deleted."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The runtime has failed."
+          }
+        ]
+      }
+    },
     "WorkbenchUpdate": {
       "type": "object",
       "description": "The mutable fields of a workbench resource.",
@@ -24222,11 +24396,23 @@
       "properties": {
         "targetClusterId": {
           "type": "string",
-          "description": "ARM resource ID of the parent cluster that hosts this workbench. May be changed only when the workbench is stopped."
+          "description": "Resource ID of the Foundry Compute or virtual cluster that hosts this workbench. Changing the cluster requires the workbench to be stopped."
         },
         "idleTimeBeforeShutdown": {
           "type": "string",
           "description": "ISO 8601 duration before the idle workbench is automatically shut down (e.g., 'PT30M')."
+        },
+        "instanceType": {
+          "type": "string",
+          "description": "For virtual clusters, an exact Singularity instance type or a full-node Azure VM size. Omit to preserve the current value; null resets to the Singularity.D4_v3 fallback. Foundry Compute ignores this override and uses the pool configuration. An actual instance type change requires the workbench to be stopped.",
+          "x-nullable": true
+        },
+        "gpuCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "GPU count for GPU pools or vCPU count for CPU pools. Must be 1, 2, 4, 8, or a positive multiple of 8. Omit to preserve the current value; null clears the override to use the full node or the instance type's default count. Full-node Azure VM sizes permit partition selection. A supplied count must match an exact Singularity instance type; the Singularity.D4_v3 fallback accepts 4.",
+          "minimum": 1,
+          "x-nullable": true
         }
       }
     }
