@@ -16450,6 +16450,10 @@
           "description": "A value indicating whether the field should be used as a permission filter.",
           "x-nullable": true
         },
+        "organizationAccessExpiration": {
+          "type": "boolean",
+          "description": "A value indicating whether the field contains the expiration timestamp for organization-scoped SharePoint sharing links. At most one top-level field of type Edm.DateTimeOffset can have this property set to true. On permission-filtered queries, expiration applies only to orgLink:<tenantId> values in a userIds permission-filter field whose tenant ID matches the validated user's tenant ID. The grant is valid only before the timestamp; an absent expiration field or a null timestamp means no time limit. Expiration does not affect orgGroup:<tenantId> values in groupIds permission-filter fields or ordinary user and group grants. If omitted or false, this field is not used for organization-link expiration."
+        },
         "sharepointSiteUrl": {
           "type": "boolean",
           "description": "A value indicating whether the field contains a SharePoint site URL used for SharePoint group-based filtering."

@@ -4200,6 +4200,10 @@ model SearchField {
   @removed(Versions.v2026_04_01)
   permissionFilter?: PermissionFilter | null;
 
+  /** A value indicating whether the field contains the expiration timestamp for organization-scoped SharePoint sharing links. At most one top-level field of type Edm.DateTimeOffset can have this property set to true. On permission-filtered queries, expiration applies only to orgLink:<tenantId> values in a userIds permission-filter field whose tenant ID matches the validated user's tenant ID. The grant is valid only before the timestamp; an absent expiration field or a null timestamp means no time limit. Expiration does not affect orgGroup:<tenantId> values in groupIds permission-filter fields or ordinary user and group grants. If omitted or false, this field is not used for organization-link expiration. */
+  @added(Versions.v2026_10_01)
+  organizationAccessExpiration?: boolean;
+
   /** A value indicating whether the field contains sensitivity label information. */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract"
   @removed(Versions.v2026_04_01)
