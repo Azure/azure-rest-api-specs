@@ -6878,6 +6878,11 @@
                 "type": "string",
                 "description": "The root squash mode for the share."
               },
+              "x-ms-share-creation-time": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "The creation time."
+              },
               "x-ms-share-included-burst-iops": {
                 "type": "integer",
                 "format": "int64",
@@ -11938,6 +11943,14 @@
           "description": "Whether SMB directory lease is enabled.",
           "xml": {
             "name": "EnableSmbDirectoryLease"
+          }
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time-rfc7231",
+          "description": "The creation time.",
+          "xml": {
+            "name": "Creation-Time"
           }
         }
       },

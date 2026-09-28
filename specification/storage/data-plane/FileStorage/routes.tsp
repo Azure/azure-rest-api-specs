@@ -285,6 +285,12 @@ interface Share {
       @header("x-ms-enable-smb-directory-lease")
       @clientName("EnableSMBDirectoryLease", "go")
       enableSmbDirectoryLease?: boolean;
+
+      /** The creation time. */
+      @added(Versions.v2027_03_07)
+      @encode("rfc7231")
+      @header("x-ms-share-creation-time")
+      creationTime?: utcDateTime;
     }
   >;
 
