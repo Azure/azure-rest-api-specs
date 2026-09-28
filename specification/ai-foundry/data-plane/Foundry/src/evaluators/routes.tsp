@@ -302,10 +302,6 @@ interface Evaluators {
 // Evaluator Generation Jobs (LRO — follows DataGenerationJobs pattern)
 // ============================================================================
 
-const EvaluatorGenerationJobsRequiredPreviews = #{
-  required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview],
-};
-
 #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "OpenAI-based operations are not conventionally versioned"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "OpenAI-based operations are definitionally non-standard"
 @tag("EvaluatorGenerationJobs")
@@ -316,23 +312,15 @@ interface EvaluatorGenerationJobs {
    */
   @summary("Create an evaluator generation job")
   @route("evaluator_generation_jobs")
-  @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
   @pollingOperation(EvaluatorGenerationJobs.get)
-  create is postJobPreview<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
-    EvaluatorGenerationJob
-  >;
+  create is postJob<EvaluatorGenerationJob>;
 
   /**
    * Gets the details of an evaluator generation job by its ID.
    */
   @summary("Get an evaluator generation job")
   @route("evaluator_generation_jobs/{jobId}")
-  @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
-  get is queryJobStatusPreview<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
-    EvaluatorGenerationJob
-  >;
+  get is queryJobStatus<EvaluatorGenerationJob>;
 
   /**
    * Returns a list of evaluator generation jobs. The List API has up to a few
@@ -342,22 +330,14 @@ interface EvaluatorGenerationJobs {
    */
   @summary("List evaluator generation jobs")
   @route("evaluator_generation_jobs")
-  @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
-  list is listJobsPreview<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
-    EvaluatorGenerationJob
-  >;
+  list is listJobs<EvaluatorGenerationJob>;
 
   /**
    * Cancels an evaluator generation job by its ID.
    */
   @summary("Cancel an evaluator generation job")
   @route("evaluator_generation_jobs/{jobId}:cancel")
-  @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
-  cancel is cancelJobPreview<
-    FoundryFeaturesOptInKeys.evaluations_v1_preview,
-    EvaluatorGenerationJob
-  >;
+  cancel is cancelJob<EvaluatorGenerationJob>;
 
   /**
    * Deletes an evaluator generation job by its ID. Deletes the job record only;
@@ -365,6 +345,5 @@ interface EvaluatorGenerationJobs {
    */
   @summary("Delete an evaluator generation job")
   @route("evaluator_generation_jobs/{jobId}")
-  @extension("x-ms-foundry-meta", EvaluatorGenerationJobsRequiredPreviews)
-  delete is deleteJobPreview<FoundryFeaturesOptInKeys.evaluations_v1_preview>;
+  delete is deleteJob<EvaluatorGenerationJob>;
 }

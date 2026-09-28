@@ -10,10 +10,6 @@ using OpenAPI;
 
 namespace Azure.AI.Projects;
 
-const EvaluatorsRequiredPreviews = #{
-  required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview],
-};
-
 @doc("The category of the evaluator")
 union EvaluatorCategory {
   string,
@@ -519,7 +515,6 @@ model EvaluatorGenerationArtifacts {
 // ============================================================================
 
 @doc("The supported source types for evaluator generation jobs.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union EvaluatorGenerationJobSourceType {
   string,
 
@@ -538,7 +533,6 @@ union EvaluatorGenerationJobSourceType {
 
 @doc("The base source model for evaluator generation jobs. Polymorphic over `type`.")
 @discriminator("type")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorGenerationJobSource {
   @doc("The type of source.")
   type: EvaluatorGenerationJobSourceType;
@@ -549,25 +543,21 @@ model EvaluatorGenerationJobSource {
 // the discriminated base would emit `description` twice in the union.
 
 @doc("Prompt source for evaluator generation jobs — inline text provided by the user.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model PromptEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
   ...PromptJobSource;
 }
 
 @doc("Agent source for evaluator generation jobs — references an agent to fetch instructions and metadata from.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model AgentEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
   ...AgentJobSource;
 }
 
 @doc("Traces source for evaluator generation jobs — conversation traces from Application Insights.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model TracesEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
   ...TracesJobSource;
 }
 
 @doc("Dataset source for evaluator generation jobs — reference to a dataset.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model DatasetEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
   ...DatasetJobSource;
 }
@@ -577,7 +567,6 @@ model DatasetEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
 // ============================================================================
 
 @doc("Caller-supplied inputs for an evaluator generation job.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorGenerationInputs {
   @doc("Source materials for generation: agent descriptions, prompts, traces, or datasets. Each entry is an `EvaluatorGenerationJobSource` variant discriminated by `type`.")
   sources: EvaluatorGenerationJobSource[];
@@ -599,7 +588,6 @@ model EvaluatorGenerationInputs {
 }
 
 @doc("Token consumption summary for an evaluator generation job. Populated when the job reaches a terminal state.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorGenerationTokenUsage {
   @doc("Number of input (prompt) tokens consumed.")
   input_tokens: int64;
@@ -617,7 +605,6 @@ model EvaluatorGenerationTokenUsage {
 // ============================================================================
 
 @doc("Warning source attribution for a rubric-generation input-quality warning. Per-source values (`prompt`, `agent`, `dataset`) match the source category visible to the generation runtime. `aggregate` is a synthetic value used only for warnings computed across successfully resolved sources. `traces` is not exposed because trace sources resolve into dataset content upstream.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union RubricGenerationInputQualityWarningSource {
   string,
 
@@ -635,7 +622,6 @@ union RubricGenerationInputQualityWarningSource {
 }
 
 @doc("Advisory severity for a rubric-generation input-quality warning. Initial value set: `warning`.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union RubricGenerationInputQualityWarningSeverity {
   string,
 
@@ -644,7 +630,6 @@ union RubricGenerationInputQualityWarningSeverity {
 }
 
 @doc("Stable searchable machine-readable warning code for a rubric-generation input-quality warning. Values are `snake_case`; clients must tolerate additional service-defined identifiers.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 union RubricGenerationInputQualityWarningCode {
   string,
 
@@ -674,7 +659,6 @@ union RubricGenerationInputQualityWarningCode {
 }
 
 @doc("A non-fatal advisory produced during rubric evaluator generation when resolved inputs are technically valid but likely too weak to produce a high-quality rubric. Read-only; service-generated. Persisted with the terminal EvaluatorGenerationJob.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model RubricGenerationInputQualityWarning {
   @doc("Stable searchable machine-readable warning code.")
   code: RubricGenerationInputQualityWarningCode;
@@ -702,7 +686,6 @@ union GenerationWarningType {
 }
 
 @doc("Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted unnumbered current Evaluator. Publishing that state is a separate operation.")
-@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EvaluatorGenerationJob is JobLike<Evaluator, EvaluatorGenerationInputs> {
   @doc("The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).")
   @visibility(Lifecycle.Read)
