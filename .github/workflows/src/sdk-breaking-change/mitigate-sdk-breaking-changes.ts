@@ -47,20 +47,6 @@ const CustomizedUpdateResultSchema = z.object({
   typeSpecChangesSummary: z.array(z.string()).nullable().optional(),
 });
 
-async function findFiles(directory: string, name: string): Promise<string[]> {
-  const entries = await readdir(directory, { withFileTypes: true });
-  const matches = await Promise.all(
-    entries.map(async (entry): Promise<string[]> => {
-      const path = join(directory, entry.name);
-      if (entry.isDirectory()) {
-        return findFiles(path, name);
-      }
-      return entry.isFile() && entry.name === name ? [path] : [];
-    }),
-  );
-  return matches.flat();
-}
-
 function isWithin(parent: string, child: string): boolean {
   const path = relative(parent, child);
   return path !== "" && path !== ".." && !path.startsWith(`..${sep}`) && !isAbsolute(path);
@@ -71,7 +57,7 @@ async function writeResult(path: string, result: MitigationResult): Promise<void
   await writeFile(path, `${JSON.stringify(validatedResult, null, 2)}\n`);
 }
 
-function BuildCustomizedUpdateResult(
+function BuildMigratedBreakingChange(
   rawResult: unknown,
   breakingChange: string,
   suggestedFix: string,
@@ -163,21 +149,25 @@ export async function mitigateSdkBreakingChanges({
           );
           await writeFile(commandResultPath, stdout);
 
-          let migratedResult: MitigatedChange = {
+          let mitigatedChange: MitigatedChange = {
             breakingChange: change.breakingChange,
             suggestedFix: change.suggestedFix,
             isResolved: false,
           };
           try {
-            migratedResult = BuildCustomizedUpdateResult(
+            mitigatedChange = BuildMigratedBreakingChange(
               JSON.parse(stdout),
               change.breakingChange,
               change.suggestedFix,
             );
           } catch {
-            migratedResult.isResolved = false;
+            mitigatedChange = {
+              breakingChange: change.breakingChange,
+              suggestedFix: change.suggestedFix,
+              isResolved: false,
+            };
           }
-          mitigationResult.projects[projectIndex].breakingChanges.push(migratedResult);
+          mitigationResult.projects[projectIndex].breakingChanges.push(mitigatedChange);
         } catch (error) {
           console.error(
             `Failed to mitigate SDK breaking change ${changeIndex + 1} for ${project.typespecProject}:`,

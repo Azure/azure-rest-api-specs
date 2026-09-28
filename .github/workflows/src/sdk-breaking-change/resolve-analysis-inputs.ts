@@ -9,23 +9,17 @@ type PullRequestFile = {
 };
 
 export type SdkLanguageConfig = {
-  language: "Cpp" | "DotNet" | "Go" | "Java" | "JavaScript" | "Python" | "Rust";
+  language: ".Net" | "Go" | "Java" | "JavaScript" | "Python";
   repository: string;
 };
 
 const SDK_LANGUAGE_CONFIGS: Readonly<Record<string, SdkLanguageConfig>> = {
-  cpp: { language: "Cpp", repository: "azure-sdk-for-cpp" },
-  csharp: { language: "DotNet", repository: "azure-sdk-for-net" },
-  ".net": { language: "DotNet", repository: "azure-sdk-for-net" },
-  dotnet: { language: "DotNet", repository: "azure-sdk-for-net" },
+  ".net": { language: ".Net", repository: "azure-sdk-for-net" },
   go: { language: "Go", repository: "azure-sdk-for-go" },
   java: { language: "Java", repository: "azure-sdk-for-java" },
   javascript: { language: "JavaScript", repository: "azure-sdk-for-js" },
   js: { language: "JavaScript", repository: "azure-sdk-for-js" },
   python: { language: "Python", repository: "azure-sdk-for-python" },
-  rust: { language: "Rust", repository: "azure-sdk-for-rust" },
-  typescript: { language: "JavaScript", repository: "azure-sdk-for-js" },
-  ts: { language: "JavaScript", repository: "azure-sdk-for-js" },
 };
 
 const SDK_LABELS = [

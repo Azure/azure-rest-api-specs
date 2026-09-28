@@ -1,7 +1,6 @@
 import { appendFile, mkdir, readdir, realpath, rename, stat, writeFile } from "node:fs/promises";
 import { basename, dirname, isAbsolute, join, relative, sep } from "node:path";
 import { execFile } from "../../../shared/src/exec.ts";
-// import { runCommand } from "./run-command.ts";
 
 type ProjectResult = {
   typespecProjectPath: string;
@@ -84,23 +83,17 @@ export async function analyzeSdkProjects({
       const generationStartedAt = Date.now();
 
       /* Generate the SDK package */
-      const { stdout } =await execFile("azsdk", ["package", "generate", "--local-sdk-repo-path", localSdkRepositoryPath, "--tsp-config-path", configPath, "--output", "json"]);
+      const { stdout } = await execFile("azsdk", [
+        "package",
+        "generate",
+        "--local-sdk-repo-path",
+        localSdkRepositoryPath,
+        "--tsp-config-path",
+        configPath,
+        "--output",
+        "json",
+      ]);
       await writeFile(generationResult, stdout);
-    //   await runCommand(
-    //     command: "azsdk",
-    //     args: [
-    //       "package",
-    //       "generate",
-    //       "--local-sdk-repo-path",
-    //       localSdkRepositoryPath,
-    //       "--tsp-config-path",
-    //       configPath,
-    //       "--output",
-    //       "json",
-    //     ],
-    //     logPath: analysisLog,
-    //     outputPath: generationResult,
-    //   });
       const generatedConfigs = await findGeneratedConfigs(
         localSdkRepositoryPath,
         generationStartedAt,
@@ -125,14 +118,16 @@ export async function analyzeSdkProjects({
       await rename(generationResult, join(projectResults, "generate.json"));
 
       /* Build the SDK package */
-      const { stdout: buildStdout } = await execFile("azsdk", ["package", "build", "--package-path", packagePath, "--output", "json"]);
+      const { stdout: buildStdout } = await execFile("azsdk", [
+        "package",
+        "build",
+        "--package-path",
+        packagePath,
+        "--output",
+        "json",
+      ]);
       await writeFile(join(projectResults, "build.json"), buildStdout);
-    //   await runCommand({
-    //     command: "azsdk",
-    //     args: ["package", "build", "--package-path", packagePath, "--output", "json"],
-    //     logPath: analysisLog,
-    //     outputPath: join(projectResults, "build.json"),
-    //   });
+
       /* Detect breaking changes */
       const { stdout: breakingChangesStdout } = await execFile("azsdk", [
         "package",
@@ -145,21 +140,6 @@ export async function analyzeSdkProjects({
         "json",
       ]);
       await writeFile(join(projectResults, "breaking-changes.json"), breakingChangesStdout);
-    //   await runCommand({
-    //     command: "azsdk",
-    //     args: [
-    //       "package",
-    //       "detect-breaking-change",
-    //       "--package-path",
-    //       packagePath,
-    //       "--tsp-config-path",
-    //       configPath,
-    //       "--output",
-    //       "json",
-    //     ],
-    //     logPath: analysisLog,
-    //     outputPath: join(projectResults, "breaking-changes.json"),
-    //   });
 
       projects.push({ typespecProjectPath: typeSpecProjectPath, packageName, resultsPath });
       await writeFile(join(resultsDirectory, "projects.json"), `${JSON.stringify(projects)}\n`);

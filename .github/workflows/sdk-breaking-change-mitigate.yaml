@@ -112,13 +112,6 @@ jobs:
         with:
           working-directory: repositories/azure-rest-api-specs
 
-      - name: Checkout target SDK repository
-        uses: actions/checkout@v7
-        with:
-          repository: Azure/${{ needs.resolve-trigger.outputs.sdk-repository }}
-          ref: main
-          path: repositories/${{ needs.resolve-trigger.outputs.sdk-repository }}
-          persist-credentials: false
       - name: Set up GitHub Copilot CLI
         id: setup-copilot-cli
         shell: bash
@@ -142,7 +135,6 @@ jobs:
           ANALYSIS_RESULT_PATH: ${{ runner.temp }}/published-analysis-results/sdk-breaking-change-analysis.json
           AZSDK_COPILOT_CLI_PATH: ${{ steps.setup-copilot-cli.outputs.path }}
           AZSDK_COPILOT_GITHUB_TOKEN: ${{ github.token }}
-          SDK_REPOSITORY_PATH: ${{ github.workspace }}/repositories/${{ needs.resolve-trigger.outputs.sdk-repository }}
           SPEC_REPOSITORY_PATH: ${{ github.workspace }}/repositories/azure-rest-api-specs
           MITIGATION_RESULT_PATH: ${{ runner.temp }}/published-mitigation-results/sdk-breaking-change-mitigation.json
           MITIGATION_WORKFLOW_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}

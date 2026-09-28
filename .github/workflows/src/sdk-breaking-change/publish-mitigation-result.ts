@@ -4,17 +4,7 @@ import { type MitigationResult, MitigationResultSchema } from "./mitigate-sdk-br
 import { publishResultInComment } from "./publish-result-in-comment.ts";
 import { escapeMarkdown } from "../../../shared/src/markdown.ts";
 
-const MAX_CHANGED_CODE_LENGTH = 50;
-
-// function escapeTableCell(value: unknown, fallback = "-"): string {
-//   const text =
-//     typeof value === "string" || typeof value === "number" || typeof value === "boolean"
-//       ? String(value).trim()
-//       : "";
-//   return text
-//     ? text.replaceAll("\r", "").replaceAll("\n", "<br>").replaceAll("|", "\\|")
-//     : fallback;
-// }
+const MAX_CHANGED_CODE_LENGTH = 12_000;
 
 export async function buildMitigationReport({
   github,

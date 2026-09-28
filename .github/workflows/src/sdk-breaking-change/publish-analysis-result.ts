@@ -3,16 +3,7 @@ import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { AnalysisResultSchema, type AnalysisResult } from "./create-analysis-result.ts";
 import { publishResultInComment } from "./publish-result-in-comment.ts";
-
-function escapeTableCell(value: unknown, fallback = "-"): string {
-  const text =
-    typeof value === "string" || typeof value === "number" || typeof value === "boolean"
-      ? String(value).trim()
-      : "";
-  return text
-    ? text.replaceAll("\r", "").replaceAll("|", "\\|").replaceAll("\n", "<br>")
-    : fallback;
-}
+import { escapeMarkdown } from "../../../shared/src/markdown.ts";
 
 export async function buildAnalysisReport(resultsPath: string): Promise<{
   command: string;
@@ -26,7 +17,7 @@ export async function buildAnalysisReport(resultsPath: string): Promise<{
     const tableRows = project.breakingChanges.length
       ? project.breakingChanges.map(
           (change) =>
-            `| ☐ | ${escapeTableCell(change.breakingChange)} | ${escapeTableCell(change.category)} | ${escapeTableCell(change.suggestedFix)} |`,
+            `| ☐ | ${escapeMarkdown(change.breakingChange)} | ${escapeMarkdown(change.category)} | ${escapeMarkdown(change.suggestedFix)} |`,
         )
       : ["| ☐ | No SDK breaking changes detected. | - | - |"];
 

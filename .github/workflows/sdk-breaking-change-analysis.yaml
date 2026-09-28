@@ -214,8 +214,8 @@ jobs:
             if [[ "$JOB_STATUS" == "failure" ]]; then
               echo "Breaking change analysis failed."
               echo
-              analysis_log="$RUNNER_TEMP/sdk-breaking-change-results/analysis.log"
-              if [[ "$ANALYSIS_OUTCOME" == "failure" && -f "$analysis_log" ]]; then
+              error_log="$RUNNER_TEMP/sdk-breaking-change-results/error.log"
+              if [[ "$ANALYSIS_OUTCOME" == "failure" && -f "$error_log" ]]; then
                 echo "### Error"
                 echo
                 tail -n 30 "$analysis_log" | sed 's/^/    /'
