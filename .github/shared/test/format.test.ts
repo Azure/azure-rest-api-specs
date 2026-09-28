@@ -47,18 +47,18 @@ describe("shared formatter", () => {
     },
   );
 
-  it("formats JSONC, YAML and Markdown without sorting package.json", async () => {
+  it("formats JSONC, YAML and Markdown in a default root scan without sorting package.json", async () => {
     const tsconfig = await addFile(
-      "eng/tools/example/tsconfig.json",
+      "eng/scripts/tsconfig.json",
       '{// compiler options\n"compilerOptions":{"strict":true,},}\n',
     );
-    const yaml = await addFile(".github/workflows/example.yaml", "name:   Example\n");
+    const yaml = await addFile("eng/pipelines/example.yaml", "name:   Example\n");
     const markdown = await addFile(".github/shared/README.md", "#   Example\n");
     const manifest = await addFile(
-      "eng/tools/example/package.json",
+      "package.json",
       '{"scripts":{"z":"z","a":"a"},"name":"example","private":true}\n',
     );
-    await format(["--write", ".github", "eng/tools"]);
+    await format(["--write"]);
     expect(await readFile(tsconfig, "utf8")).toContain("// compiler options");
     expect(await readFile(yaml, "utf8")).toBe("name: Example\n");
     expect(await readFile(markdown, "utf8")).toBe("# Example\n");
@@ -67,7 +67,7 @@ describe("shared formatter", () => {
     };
     expect(Object.keys(output)).toEqual(["scripts", "name", "private"]);
     expect(Object.keys(output.scripts)).toEqual(["z", "a"]);
-    await format(["--check", ".github", "eng/tools"]);
+    await format(["--check"]);
   });
 
   it("keeps excluded content untouched even when explicitly requested", async () => {
@@ -75,6 +75,8 @@ describe("shared formatter", () => {
       "specification/example/stable/api.json",
       "specification/example/examples/request.json",
       "specification/example/main.tsp",
+      "specification/example/tspconfig.yaml",
+      "eng/common/pipeline.yml",
       ".github/shared/test/fixtures/input.json",
       ".github/shared/test/specification/input.json",
       ".github/shared/coverage/output.json",
@@ -105,10 +107,13 @@ describe("shared formatter", () => {
     }
   });
 
-  it("still formats explicitly targeted TypeSpec configuration YAML", async () => {
-    const file = await addFile("specification/example/tspconfig.yaml", "emit:   []\n");
-    await format(["--write", "tspconfig.yaml"], dirname(file));
-    expect(await readFile(file, "utf8")).toBe("emit: []\n");
+  it("keeps explicitly targeted TypeSpec configuration YAML excluded", async () => {
+    const contents = "emit:   []\n";
+    const file = await addFile("specification/example/tspconfig.yaml", contents);
+    await expect(format(["--write", "tspconfig.yaml"], dirname(file))).rejects.toMatchObject({
+      code: 2,
+    });
+    expect(await readFile(file, "utf8")).toBe(contents);
   });
 
   it("fails on malformed managed input instead of silently skipping it", async () => {
