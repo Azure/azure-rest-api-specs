@@ -2,6 +2,8 @@
 applyTo: "specification/**/*.tsp"
 ---
 
+<!-- Upstream alignment: 2026-08-15 -->
+
 # TypeSpec Project Instructions
 
 Before creating or initializing a TypeSpec project, you must know your
@@ -61,7 +63,7 @@ Every TypeSpec project **MUST** contain:
 
 A TypeSpec project **MUST NOT** contain:
 
-- `package.json` or `package-lock.json` (use the repo-root one)
+- `package.json` or `pnpm-lock.yaml` (use the repo-root one)
 - Multiple `tspconfig.yaml` files for the same service
 
 ### 1.3 Generated Files
@@ -98,12 +100,13 @@ A TypeSpec project **MUST NOT** contain:
 
 - Every service **MUST** have a security definition (`@useAuth`). See:
   [Security definitions in TypeSpec][security-definitions]. The
-  `@useAuth` decorator **MUST** be defined exactly ONCE, above the
-  `@server` definition. ARM services use Azure AD OAuth2; data-plane
-  services may use OAuth2, API keys, or both.
-- All models, enums, unions, and operations **MUST** be declared under
-  the main namespace in `main.tsp`. The namespace **MUST** follow the
-  pattern `<Organization>.<ServiceName>` (e.g., `Azure.Compute`,
+  `@useAuth` decorator **MUST** be defined exactly once on the service
+  namespace. Its order relative to `@server` is not significant. ARM services
+  use Azure AD OAuth2; data-plane services may use OAuth2, API keys, or both.
+- All models, enums, unions, and operations **MUST** be declared under the main
+  service namespace. They may live in `main.tsp` or files such as `models.tsp`
+  and `operations.tsp` that `main.tsp` imports. The namespace **MUST** follow
+  the pattern `<Organization>.<ServiceName>` (e.g., `Azure.Compute`,
   `Microsoft.Storage`).
 - **DO NOT** declare types outside of a namespace.
 - **AVOID** adding new namespaces beyond the main service namespace.
@@ -258,14 +261,24 @@ model Widget {
 - **DO NOT** manually define `id`, `name`, `type`, `location`, `tags`,
   or `systemData` -- these come from the base types.
 - ARM tracked resources **MUST** define all standard CRUD operations
-  using ARM operation templates:
+  using ARM operation templates. Choose synchronous or asynchronous templates
+  to match actual runtime behavior:
   - `get` -- `ArmResourceRead<Resource>`
-  - `createOrUpdate` -- `ArmResourceCreateOrReplaceAsync<Resource>`
-  - `update` -- `ArmResourcePatchAsync<Resource, ResourceProperties>`
-    (or `ArmTagsPatchAsync`)
-  - `delete` -- `ArmResourceDeleteAsync<Resource>`
-  - `listByResourceGroup` -- `ArmResourceListByParent<Resource>`
-  - `listBySubscription` -- `ArmListBySubscription<Resource>`
+  - `createOrUpdate` -- `ArmResourceCreateOrReplaceSync<Resource>` or
+    `ArmResourceCreateOrReplaceAsync<Resource>`
+  - `update` -- preferably `ArmCustomPatchSync<Resource, PatchRequest>` or
+    `ArmCustomPatchAsync<Resource, PatchRequest>`; tags-only PATCH may use the
+    corresponding `ArmTagsPatch*` template
+  - `delete` -- `ArmResourceDeleteSync<Resource>` or
+    `ArmResourceDeleteWithoutOkAsync<Resource>`; do not use deprecated
+    `ArmResourceDeleteAsync`
+  - top-level tracked list by resource group --
+    `ArmResourceListByParent<Resource>`
+  - top-level tracked list by subscription --
+    `ArmListBySubscription<Resource>`
+  - nested resource list -- `ArmResourceListByParent<Resource>` under the
+    immediate parent; do not require additional resource-group/subscription
+    lists for the nested type
 - Every ARM resource provider **MUST** expose an `Operations` interface:
 
 ```tsp
@@ -287,10 +300,10 @@ Users can convert a specification from swagger to typespec by using `tsp-client`
 1. Install the dependencies specified in the package.json at the root of this repository. Command:
 
 ```
-npm ci
+pnpm ci
 ```
 
-2. `tsp-client` is installed as part of the dependencies specified at the root of this repository. To convert a swagger to typespec, run the following command: `npx tsp-client convert --swagger-readme <path to your readme>`
+2. `tsp-client` is installed as part of the dependencies specified at the root of this repository. To convert a swagger to typespec, run the following command: `pnpm tsp-client convert --swagger-readme <path to your readme>`
 3. Now that you have a newly converted typespec project, you should go through all files to verify the accuracy of the converted spec when compared to the original swagger definitions.
 4. For both data plane and management plane specifications, you should update the implementation according to the information provided under the Initial migration checklist section below.
 
@@ -312,9 +325,9 @@ steps:
 ### Additional considerations
 
 - DO ensure you pull in the latest `main` from the Azure/azure-rest-api-specs repo to stay up to date with latest dependencies
-- DO run `npm ci` to get a clean install of the package.json dependencies
-- Avoid modifying the package.json or package-lock.json files at the root of the azure-rest-api-specs repo
-- Avoid adding your own package.json or package-lock.json files in your project directory
+- DO run `pnpm ci` to get a clean install of the package.json dependencies
+- Avoid modifying the package.json or pnpm-lock.yaml files at the root of the azure-rest-api-specs repo
+- Avoid adding your own package.json or pnpm-lock.yaml files in your project directory
 - Avoid adding multiple tspconfig.yaml files for your service specification
 - DO consult [ci-fix.md][ci-fix] for fixes to common CI errors reported
 

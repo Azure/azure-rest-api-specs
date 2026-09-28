@@ -34,7 +34,25 @@ These are the global settings for the ContainerServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2026-05
+tag: package-2026-06
+```
+
+### Tag: package-preview-2026-06
+
+These settings apply only when `--tag=package-preview-2026-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2026-06'
+input-file:
+  - preview/2026-06-02-preview/managedClusters.json
+```
+
+### Tag: package-2026-06
+
+These settings apply only when `--tag=package-2026-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2026-06'
+input-file:
+  - stable/2026-06-01/managedClusters.json
 ```
 
 ### Tag: package-preview-2026-05
@@ -1540,4 +1558,12 @@ directive:
     from: managedClusters.json
     where: $.definitions.VmSkusListResult
     reason: The List VM Skus API is a proxy for the Compute Resource Skus API. Defining a GET endpoint that follows the SKU contract (which in turn does not follow the standard ARM resource model) is allowed as previously discussed in an ARM API review email thread. (tilovell@microsoft.com, suhasrao@microsoft.com)
+  - suppress: BodyTopLevelProperties
+    from: managedClusters.json
+    where: $.definitions.OperationStatusResult
+    reason: OperationStatusResult mirrors the ARM common type shape (`error`, `operations`, `resourceId`, plus `status`, `percentComplete`, `startTime`, `endTime`, etc.) and adds the AKS-specific read-only `operationType` and `subOperationType` properties. It is only used as an async-operation-status response body, not as a PUT resource body, so the tracked-resource envelope restriction does not apply.
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: managedClusters.json
+    where: $.definitions.OperationStatusResult
+    reason: OperationStatusResult is an async-operation-status response envelope, not an ARM tracked or proxy resource. It locally declares the ARM common OperationStatusResult fields and adds AKS-specific read-only fields. Therefore, the tracked-resource requirement for read-only name/id/type properties does not apply.
 ```

@@ -458,6 +458,16 @@ using Microsoft.DataProtection;
   azureLocation,
   "csharp"
 );
+@@clientName(
+  GenericBackupDatasourceParameters,
+  "GenericBackupDataSourceSettings",
+  "csharp"
+);
+@@clientName(
+  GenericRestoreDatasourceCriteria,
+  "GenericRestoreDataSourceCriteria",
+  "csharp"
+);
 @@clientName(IdentityDetails, "DataProtectionIdentityDetails", "csharp");
 @@clientName(
   IdentityDetails.userAssignedIdentityArmUrl,
@@ -814,7 +824,7 @@ using Microsoft.DataProtection;
   "csharp"
 );
 @@clientName(
-  BackupInstanceResources.resumeProtection::parameters.body,
+  BackupInstanceResources.resumeProtectionPreview::parameters.body,
   "content",
   "csharp"
 );
