@@ -37,12 +37,13 @@ jobs:
 
           echo "output-file=$AVOCADO_OUTPUT_FILE" >> "$GITHUB_OUTPUT"
 
-          npm exec --no -- avocado \
+          pnpm exec avocado \
             --excludePaths \
               "/common-types/" \
               "/scenarios/" \
               "/package.json" \
-              "/package-lock.json" \
+              "/pnpm-lock.yaml" \
+              "/pnpm-workspace.yaml" \
               "/cadl/examples/" \
               '(?=/examples/)(?!(?:/stable/|/preview/))' \
               "/\\.github/" \
@@ -73,11 +74,11 @@ jobs:
       - if: ${{ always() && (steps.run-avocado.outputs.output-file) }}
         name: Generate job summary
         id: generate-job-summary
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9.0.0
         with:
           script: |
             const { default: generateJobSummary } =
-              await import('${{ github.workspace }}/.github/workflows/src/avocado-code.js');
+              await import('${{ github.workspace }}/.github/workflows/src/avocado-code.ts');
             return await generateJobSummary({ core });
         env:
           AVOCADO_OUTPUT_FILE: ${{ steps.run-avocado.outputs.output-file }}

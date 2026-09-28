@@ -311,10 +311,48 @@ union ResourceProtectionSolutionType {
   @doc("Resource is not protected with native solution and using custom runbook automation scripts for recovery verbs.")
   CustomRunbook: "CustomRunbook",
 
+  @added(Versions.v2026_09_30_preview)
+  @doc("Resource recovery is orchestrated by deploying an Azure Resource Manager template.")
+  AzureTemplate: "AzureTemplate",
+
+  @added(Versions.v2026_09_30_preview)
+  @doc("Resource is protected with Azure Storage account customer-managed failover.")
+  AzureStorageAccount: "AzureStorageAccount",
+
+  @added(Versions.v2026_09_30_preview)
+  @doc("Resource is protected with Azure Service Bus geo-replication, where a premium namespace replicates data to a secondary region and recovery promotes that secondary in place.")
+  AzureServiceBus: "AzureServiceBus",
+
+  @added(Versions.v2026_09_30_preview)
+  @doc("Resource is protected with Azure NetApp Files cross-region replication, where recovery fails over to the destination volume.")
+  AzureNetAppFiles: "AzureNetAppFiles",
+
+  @added(Versions.v2026_09_30_preview)
+  @doc("Resource is protected with Azure Cosmos DB multiregion replication using customer-managed failover, where recovery promotes a secondary region to the write region.")
+  AzureCosmosDB: "AzureCosmosDB",
+
+  string,
+}
+
+@doc("ISO 8601 duration formats.")
+union IsoDuration {
+  @doc("15 minutes.")
+  PT15M: "PT15M",
+
+  @doc("1 hour.")
+  PT1H: "PT1H",
+
+  @doc("4 hours.")
+  PT4H: "PT4H",
+
+  @doc("24 hours.")
+  PT24H: "PT24H",
+
   string,
 }
 
 @doc("Model for service group membership.")
+@removed(Versions.v2026_09_30_preview)
 model ServiceGroupMembership {
   @doc("Arm Id of the service group.")
   serviceGroupId: armResourceIdentifier;
@@ -324,6 +362,7 @@ model ServiceGroupMembership {
 }
 
 @doc("Membership type of the service group to resource.")
+@removed(Versions.v2026_09_30_preview)
 union MembershipType {
   @doc("Resource is direct member of service group.")
   Direct: "Direct",
