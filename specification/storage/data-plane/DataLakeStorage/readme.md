@@ -15,6 +15,7 @@ To build the SDK for StorageDataLake, simply [Install AutoRest](https://aka.ms/a
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
@@ -23,7 +24,7 @@ To see additional help and options, run:
 
 These are the global settings for the StorageDataLake API.
 
-``` yaml
+```yaml
 openapi-type: data-plane
 tag: package-2026-06-tsp
 use-internal-constructors: true
@@ -34,117 +35,117 @@ add-credentials: true
 
 These settings apply only when `--tag=package-2018-11` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-11'
+```yaml $(tag) == 'package-2018-11'
 input-file:
-- stable/2018-11-09/DataLakeStorage.json
+  - stable/2018-11-09/DataLakeStorage.json
 ```
 
 ### Tag: package-2019-10
 
 These settings apply only when `--tag=package-2019-10` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-10'
+```yaml $(tag) == 'package-2019-10'
 input-file:
-- stable/2019-10-31/DataLakeStorage.json
+  - stable/2019-10-31/DataLakeStorage.json
 ```
 
 ### Tag: package-2018-06-preview
 
 These settings apply only when `--tag=package-2018-06-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-06-preview'
+```yaml $(tag) == 'package-2018-06-preview'
 input-file:
-- preview/2018-06-17/DataLakeStorage.json
+  - preview/2018-06-17/DataLakeStorage.json
 ```
 
 ### Tag: package-2020-06
 
 These settings apply only when `--tag=package-2020-06` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-06'
+```yaml $(tag) == 'package-2020-06'
 input-file:
-- preview/2020-06-12/DataLakeStorage.json
+  - preview/2020-06-12/DataLakeStorage.json
 ```
 
 ### Tag: package-2020-10
 
 These settings apply only when `--tag=package-2020-10` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-10'
+```yaml $(tag) == 'package-2020-10'
 input-file:
-- preview/2020-10-02/DataLakeStorage.json
+  - preview/2020-10-02/DataLakeStorage.json
 ```
 
 ### Tag: package-2021-04
 
 These settings apply only when `--tag=package-2021-04` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-04'
+```yaml $(tag) == 'package-2021-04'
 input-file:
-- preview/2021-04-10/DataLakeStorage.json
+  - preview/2021-04-10/DataLakeStorage.json
 ```
 
 ### Tag: package-2021-06
 
 These settings apply only when `--tag=package-2021-06` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-06'
+```yaml $(tag) == 'package-2021-06'
 input-file:
-- preview/2021-06-08/DataLakeStorage.json
+  - preview/2021-06-08/DataLakeStorage.json
 ```
 
 ### Tag: package-2023-05-preview
 
 These settings apply only when `--tag=package-2023-05-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-05-preview'
+```yaml $(tag) == 'package-2023-05-preview'
 input-file:
-- preview/2023-05-03/DataLakeStorage.json
+  - preview/2023-05-03/DataLakeStorage.json
 ```
 
 ### Tag: package-2023-05
 
 These settings apply only when `--tag=package-2023-05` is specified on the command line.
 
-``` yaml $(tag) == 'package-2023-05'
+```yaml $(tag) == 'package-2023-05'
 input-file:
-- stable/2023-05-03/DataLakeStorage.json
+  - stable/2023-05-03/DataLakeStorage.json
 ```
 
 ### Tag: package-2025-01
 
 These settings apply only when `--tag=package-2025-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2025-01'
+```yaml $(tag) == 'package-2025-01'
 input-file:
-- stable/2025-01-05/DataLakeStorage.json
+  - stable/2025-01-05/DataLakeStorage.json
 ```
 
 ### Tag: package-2025-05
 
 These settings apply only when `--tag=package-2025-05` is specified on the command line.
 
-``` yaml $(tag) == 'package-2025-05'
+```yaml $(tag) == 'package-2025-05'
 input-file:
-- stable/2025-05-05/DataLakeStorage.json
+  - stable/2025-05-05/DataLakeStorage.json
 ```
 
 ### Tag: package-2026-02
 
 These settings apply only when `--tag=package-2026-02` is specified on the command line.
 
-``` yaml $(tag) == 'package-2026-02'
+```yaml $(tag) == 'package-2026-02'
 input-file:
-- stable/2026-02-06/DataLakeStorage.json
+  - stable/2026-02-06/DataLakeStorage.json
 ```
 
 ### Tag: package-2026-06
 
 These settings apply only when `--tag=package-2026-06` is specified on the command line.
 
-``` yaml $(tag) == 'package-2026-06'
+```yaml $(tag) == 'package-2026-06'
 input-file:
-- stable/2026-06-06/DataLakeStorage.json
+  - stable/2026-06-06/DataLakeStorage.json
 ```
 
 ### Tag: package-2026-06-tsp
