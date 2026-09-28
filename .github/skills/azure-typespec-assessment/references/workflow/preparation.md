@@ -62,6 +62,9 @@ node (Join-Path $Skill "scripts\run-assessment-analysis.mjs") `
   --repo $Repo --base $Base --specification $Specification --output $Work
 ```
 
+For the authoring handoff, append `--assessment-mode fast`. Full mode is the
+default. The only accepted values are `full` and `fast`.
+
 For a PR, run directly without separate metadata or checkout commands:
 
 ```powershell

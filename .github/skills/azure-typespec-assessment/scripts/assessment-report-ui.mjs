@@ -1559,7 +1559,7 @@ export function renderReportSections(assessment, helpers, options = {}) {
   const unassessed = compliance.coverage?.unassessedIntentIds ?? [];
   const guidelineBody =
     guidelineCards ||
-    `<div class="report-empty">${compliance.status === "not-assessed" ? "Azure Guidelines could not be fully assessed." : "No Azure Guidelines findings."}</div>`;
+    `<div class="report-empty">${compliance.status === "skipped" ? "Azure Guidelines were skipped in fast assessment mode." : compliance.status === "not-assessed" ? "Azure Guidelines could not be fully assessed." : "No Azure Guidelines findings."}</div>`;
   const coverage = compliance.coverage;
   const documentQuality = dimensions.documentQuality ?? {};
   const documentBody = renderDocumentQuality(documentQuality, {
@@ -1691,7 +1691,7 @@ export function renderReportSections(assessment, helpers, options = {}) {
     },
     {
       findingCount: complianceFindings.length,
-      html: `<section id="azure-compliance">${sectionHead("Azure Guidelines", "Findings and affected intents at a glance; expand for expected guidance and actual changes.", status(compliance.status) + count(`${complianceFindings.length} findings`))}${coverage ? `<p class="report-small">${coverage.assessedIntentCount} of ${coverage.semanticIntentCount} semantic intents assessed · ${coverage.selectedDocumentCount} documents selected</p>` : ""}${guidelineBody}${noGuidance.length ? `<p class="report-small">No applicable guideline was found for: ${intentLinks(noGuidance)}.</p>` : ""}${unassessed.length ? `<div class="report-empty">Azure Guidelines not assessed for: ${intentLinks(unassessed)}</div>` : ""}</section>`,
+      html: `<section id="azure-compliance">${sectionHead("Azure Guidelines", compliance.status === "skipped" ? "Skipped by fast assessment mode." : "Findings and affected intents at a glance; expand for expected guidance and actual changes.", status(compliance.status) + count(`${complianceFindings.length} findings`))}${coverage && compliance.status !== "skipped" ? `<p class="report-small">${coverage.assessedIntentCount} of ${coverage.semanticIntentCount} semantic intents assessed · ${coverage.selectedDocumentCount} documents selected</p>` : ""}${guidelineBody}${noGuidance.length ? `<p class="report-small">No applicable guideline was found for: ${intentLinks(noGuidance)}.</p>` : ""}${unassessed.length ? `<div class="report-empty">Azure Guidelines not assessed for: ${intentLinks(unassessed)}</div>` : ""}</section>`,
     },
     {
       findingCount: restCount,

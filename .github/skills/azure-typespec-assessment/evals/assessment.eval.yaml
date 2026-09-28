@@ -82,7 +82,7 @@ stimuli:
       max_turns: 4
       max_tokens: 20000
 
-  - name: anti-trigger-author-typespec
+  - name: initial-route-author-typespec
     prompt: "Load the skill appropriate for adding stable API version 2026-09-01 under specification/contoso/widget. State which skill applies, but do not inspect or modify files."
     environment:
       skills:
@@ -93,6 +93,18 @@ stimuli:
         config:
           required: ["azure-typespec-author"]
           disallowed: ["azure-typespec-assessment"]
+    constraints: *routing_constraints
+
+  - name: trigger-post-authoring-fast-assessment
+    prompt: "TypeSpec authoring and validation have completed for specification/contoso/widget. Load the skill required to generate the report-only fast assessment now. State which skill applies, but do not inspect files or start the assessment."
+    environment:
+      skills:
+        - ..
+        - ../../azure-typespec-author
+    graders:
+      - type: skill-invocation
+        config:
+          required: ["azure-typespec-assessment"]
     constraints: *routing_constraints
 
   - name: anti-trigger-generate-sdk

@@ -1,10 +1,14 @@
 # Azure TypeSpec assessment eval
 
-`assessment.eval.yaml` contains four routing checks and one hermetic capability
+`assessment.eval.yaml` contains five routing checks and one hermetic capability
 check:
 
 - two prompts that must invoke `azure-typespec-assessment`;
-- one authoring prompt that must invoke `azure-typespec-author`;
+- one initial authoring-routing prompt that invokes `azure-typespec-author`
+  without prematurely invoking assessment; authoring invokes fast assessment
+  later, after validation;
+- one post-authoring prompt that must invoke `azure-typespec-assessment` for the
+  report-only fast assessment;
 - one SDK generation prompt that must invoke
   `azsdk-common-generate-sdk-locally`;
 - one no-changes assessment that invokes the production coordinator against a
