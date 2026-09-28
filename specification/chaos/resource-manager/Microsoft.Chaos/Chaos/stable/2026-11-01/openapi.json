@@ -4920,6 +4920,27 @@
           "type": "string",
           "description": "The scope of the discovered resource.",
           "readOnly": true
+        },
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The Azure region of the discovered resource.",
+          "readOnly": true
+        },
+        "zones": {
+          "type": "array",
+          "description": "The availability zones of the discovered resource.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "scenarios": {
+          "type": "array",
+          "description": "The names of scenarios in the workspace that currently include the discovered resource in scope.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       },
       "required": [
