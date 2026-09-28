@@ -32,6 +32,26 @@ model EmployeeProperties {
   provisioningState?: ProvisioningState;
 }
 
+/** Common options for employee actions. */
+model EmployeeActionConfig {
+  /** Whether to validate the request without applying the change. */
+  dryRun?: boolean;
+}
+
+/** Parameters for updating an employee's administrative state. */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Preserve the existing public SDK inheritance relationship."
+model UpdateEmployeeState extends EmployeeActionConfig {
+  /** Whether the employee is enabled. */
+  enabled?: boolean;
+}
+
+/** The employee's administrative state after updating or validating the request. */
+model UpdateEmployeeStateResult {
+  /** Whether the employee is currently enabled; validation alone does not change this value. */
+  @visibility(Lifecycle.Read)
+  enabled: boolean;
+}
+
 /** The resource provisioning state. */
 @lroStatus
 union ProvisioningState {
@@ -60,4 +80,11 @@ interface Employees {
   delete is ArmResourceDeleteWithoutOkAsync<Employee>;
   listByResourceGroup is ArmResourceListByParent<Employee>;
   listBySubscription is ArmListBySubscription<Employee>;
+
+  /** Updates an employee's administrative state, or validates the request without applying it. */
+  updateState is ArmResourceActionSync<
+    Employee,
+    UpdateEmployeeState,
+    UpdateEmployeeStateResult
+  >;
 }

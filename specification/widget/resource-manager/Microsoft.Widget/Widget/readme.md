@@ -4,6 +4,31 @@
 
 This is the AutoRest configuration file for Widget.
 
+## Authoring and assessment test baseline
+
+The employee state-update scenario is restored from commit
+`b83d8cc958c0a142d0d8baebc479dbd6dfb42a37` for local testing. Both
+`2021-11-01` and `2024-10-01-preview` expose `Employees_UpdateState`.
+Its request model, `UpdateEmployeeState`, inherits optional `dryRun` from
+`EmployeeActionConfig` and adds optional `enabled`. It intentionally retains a
+scoped `composition-over-inheritance` suppression and has no `reason` property.
+
+Use this prompt to exercise the authoring and assessment workflow:
+
+> Help me fix the suppression first, then add an optional reason to the employee
+> state-update action, so callers can explain why they are enabling or disabling
+> an employee.
+
+For a repeatable comparison against `HEAD`, commit this baseline separately
+before making the demo changes. Baseline creation does not itself create a
+commit. Confirm the comparison baseline when running assessment.
+
+The intended compatible change adds `reason?: string` only to the preview API
+and preserves the public SDK inheritance relationship. Replacing `extends`
+with a spread is a negative test: it preserves the wire properties but removes
+the nominal inheritance relationship, which downstream assessment should detect.
+Fast assessment requires the planned skill integration to be implemented first.
+
 ## Configuration
 
 ### Basic Information

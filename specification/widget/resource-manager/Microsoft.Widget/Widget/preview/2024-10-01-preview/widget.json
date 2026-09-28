@@ -408,6 +408,62 @@
         },
         "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Widget/employees/{employeeName}/updateState": {
+      "post": {
+        "operationId": "Employees_UpdateState",
+        "tags": [
+          "Employees"
+        ],
+        "description": "Updates an employee's administrative state, or validates the request without applying it.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "employeeName",
+            "in": "path",
+            "description": "The name of the Employee",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateEmployeeState"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdateEmployeeStateResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update an employee's administrative state": {
+            "$ref": "./examples/Employees_UpdateState.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -444,6 +500,16 @@
           "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
+    },
+    "EmployeeActionConfig": {
+      "type": "object",
+      "description": "Common options for employee actions.",
+      "properties": {
+        "dryRun": {
+          "type": "boolean",
+          "description": "Whether to validate the request without applying the change."
+        }
+      }
     },
     "EmployeeListResult": {
       "type": "object",
@@ -560,6 +626,35 @@
         ]
       },
       "readOnly": true
+    },
+    "UpdateEmployeeState": {
+      "type": "object",
+      "description": "Parameters for updating an employee's administrative state.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the employee is enabled."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EmployeeActionConfig"
+        }
+      ]
+    },
+    "UpdateEmployeeStateResult": {
+      "type": "object",
+      "description": "The employee's administrative state after updating or validating the request.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the employee is currently enabled; validation alone does not change this value.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "enabled"
+      ]
     }
   },
   "parameters": {}
