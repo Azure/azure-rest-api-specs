@@ -1,3 +1,4 @@
+import type { Context, Core, GitHub, GitHubScriptArgs } from "../../src/github.ts";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts";
 
@@ -12,8 +13,8 @@ import { readFile } from "fs/promises";
 import yaml from "js-yaml";
 import checkLabel from "../../src/protected-labels/check-label.ts";
 
-function invokeCheckLabel(args: Partial<import("@actions/github-script").AsyncFunctionArguments>) {
-  return checkLabel(args as import("@actions/github-script").AsyncFunctionArguments);
+function invokeCheckLabel(args: Partial<GitHubScriptArgs>) {
+  return checkLabel(args as GitHubScriptArgs);
 }
 
 const protectedLabelsConfig = {
@@ -58,11 +59,11 @@ function createLabeledPayload({
 }
 
 describe("checkLabel", () => {
-  let github: import("../mocks.ts").GitHub & ReturnType<typeof createMockGithub>;
+  let github: GitHub & ReturnType<typeof createMockGithub>;
 
-  let core: import("../mocks.ts").Core;
+  let core: Core;
 
-  let context: import("../mocks.ts").Context;
+  let context: Context;
 
   beforeEach(() => {
     vi.resetAllMocks();
@@ -74,6 +75,21 @@ describe("checkLabel", () => {
     // @ts-expect-error - createComment not in mock type but needed by check-label
     github.rest.issues.createComment = vi.fn().mockResolvedValue({});
     setupMocks();
+  });
+
+  it("rejects a labeled event without a label", async () => {
+    context.payload = {
+      ...createLabeledPayload({
+        labelName: "BreakingChange-Approved-Benign",
+        actor: "user1",
+      }),
+      label: undefined,
+    };
+
+    await expect(invokeCheckLabel({ github, context, core })).rejects.toThrow(
+      "Pull request label event is missing a label name.",
+    );
+    expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
   });
 
   describe("bot bypass", () => {
@@ -147,7 +163,7 @@ describe("checkLabel", () => {
       expect(github.rest.issues.createComment).not.toHaveBeenCalled();
     });
 
-    it("removes label and posts warning for unauthorized user", async () => {
+    it("mentions the actor and directs them to the merge process before a collapsed approver list", async () => {
       context.payload = createLabeledPayload({
         labelName: "BreakingChange-Approved-Benign",
         actor: "unauthorized-user",
@@ -161,12 +177,18 @@ describe("checkLabel", () => {
         issue_number: 100,
         name: "BreakingChange-Approved-Benign",
       });
-      expect(github.rest.issues.createComment).toHaveBeenCalledWith(
-        expect.objectContaining({
-          // oxlint-disable-next-line typescript/no-unsafe-assignment
-          body: expect.stringContaining("@unauthorized-user is not authorized"),
-        }),
-      );
+      expect(github.rest.issues.createComment).toHaveBeenCalledWith({
+        owner: "Azure",
+        repo: "azure-rest-api-specs",
+        issue_number: 100,
+        body:
+          "⚠️ @unauthorized-user is not authorized to apply `BreakingChange-Approved-Benign`. Label removed.\n\n" +
+          "Please follow the **Next Steps to Merge** comment on this PR and the " +
+          "[review and merge process](https://aka.ms/azsdk/specreview/merge).\n\n" +
+          "<details><summary>See allowed approvers</summary>\n\n" +
+          "Only [user1](https://github.com/user1), [user2](https://github.com/user2), " +
+          "[global-admin](https://github.com/global-admin) can apply this label.\n\n</details>",
+      });
     });
 
     it("handles 404 race condition on removeLabel gracefully", async () => {
@@ -254,6 +276,18 @@ describe("checkLabel", () => {
       expect(github.rest.issues.removeLabel).toHaveBeenCalledWith(
         expect.objectContaining({ name: "package-name-dotnet-approved" }),
       );
+      expect(github.rest.issues.createComment).toHaveBeenCalledWith({
+        owner: "Azure",
+        repo: "azure-rest-api-specs",
+        issue_number: 100,
+        body:
+          "⚠️ @mgmt-approver1 is not authorized to apply `package-name-dotnet-approved`. Label removed.\n\n" +
+          "Please follow the **Next Steps to Merge** comment on this PR and the " +
+          "[review and merge process](https://aka.ms/azsdk/specreview/merge).\n\n" +
+          "<details><summary>See allowed approvers</summary>\n\n" +
+          "Only [dp-approver1](https://github.com/dp-approver1), [dp-approver2](https://github.com/dp-approver2), " +
+          "[global-admin](https://github.com/global-admin) can apply this label.\n\n</details>",
+      });
     });
 
     it("uses mgmt approvers when PR has Mgmt label", async () => {
