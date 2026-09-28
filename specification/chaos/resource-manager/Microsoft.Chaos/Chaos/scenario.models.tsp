@@ -86,6 +86,14 @@ model ScenarioProperties {
   actions?: ScenarioAction[];
 
   /**
+   * Scenario-wide default for how a scenario run reacts when one of its actions fails.
+   * An action that does not supply its own `failureBehavior` inherits this value; when
+   * neither is supplied the effective behavior is `Stop`.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  failureBehavior?: FailureBehavior;
+
+  /**
    * The recommendation information for this scenario.
    */
   @visibility(Lifecycle.Read)
@@ -260,6 +268,34 @@ model ScenarioAction {
    * External resource reference for the action.
    */
   externalResource?: ExternalResource;
+
+  /**
+   * Per-action override for how the scenario run reacts when this action fails. When omitted,
+   * the action inherits the scenario-level `failureBehavior`; when neither is supplied the
+   * effective behavior is `Stop`.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  failureBehavior?: FailureBehavior;
+}
+
+/**
+ * Enum of how a scenario run reacts when an action fails.
+ */
+@added(Microsoft.Chaos.Versions.v2026_11_01)
+union FailureBehavior {
+  string,
+
+  /**
+   * The action failure stops the scenario run and drives it to the `Failed` terminal state.
+   * This is the effective behavior when no `failureBehavior` is supplied.
+   */
+  Stop: "Stop",
+
+  /**
+   * The action failure is suppressed: the scenario run continues executing the remaining
+   * actions, and terminates as `PartiallySucceeded` when every action failure was suppressed.
+   */
+  Continue: "Continue",
 }
 
 /**

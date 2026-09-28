@@ -3052,6 +3052,9 @@
           "Create a scenario from a built-in scenario template version.": {
             "$ref": "./examples/Scenarios_CreateOrUpdate_From_Template.json"
           },
+          "Create or update a scenario that continues past suppressed action failures.": {
+            "$ref": "./examples/Scenarios_CreateOrUpdate_With_Failure_Behavior.json"
+          },
           "Create or update a scenario.": {
             "$ref": "./examples/Scenarios_CreateOrUpdate.json"
           }
@@ -3796,6 +3799,9 @@
           }
         },
         "x-ms-examples": {
+          "Get a scenario run that completed with suppressed action failures.": {
+            "$ref": "./examples/ScenarioRuns_Get_Partially_Succeeded.json"
+          },
           "Get a scenario run.": {
             "$ref": "./examples/ScenarioRuns_Get.json"
           }
@@ -5332,6 +5338,30 @@
         }
       }
     },
+    "FailureBehavior": {
+      "type": "string",
+      "description": "Enum of how a scenario run reacts when an action fails.",
+      "enum": [
+        "Stop",
+        "Continue"
+      ],
+      "x-ms-enum": {
+        "name": "FailureBehavior",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Stop",
+            "value": "Stop",
+            "description": "The action failure stops the scenario run and drives it to the `Failed` terminal state.\nThis is the effective behavior when no `failureBehavior` is supplied."
+          },
+          {
+            "name": "Continue",
+            "value": "Continue",
+            "description": "The action failure is suppressed: the scenario run continues executing the remaining\nactions, and terminates as `PartiallySucceeded` when every action failure was suppressed."
+          }
+        ]
+      }
+    },
     "FilterType": {
       "type": "string",
       "description": "Enum that discriminates between filter types. Currently only `Simple` type is supported.",
@@ -6151,6 +6181,10 @@
         "externalResource": {
           "$ref": "#/definitions/ExternalResource",
           "description": "External resource reference for the action."
+        },
+        "failureBehavior": {
+          "$ref": "#/definitions/FailureBehavior",
+          "description": "Per-action override for how the scenario run reacts when this action fails. When omitted,\nthe action inherits the scenario-level `failureBehavior`; when neither is supplied the\neffective behavior is `Stop`."
         }
       },
       "required": [
@@ -6387,6 +6421,10 @@
             "name"
           ]
         },
+        "failureBehavior": {
+          "$ref": "#/definitions/FailureBehavior",
+          "description": "Scenario-wide default for how a scenario run reacts when one of its actions fails.\nAn action that does not supply its own `failureBehavior` inherits this value; when\nneither is supplied the effective behavior is `Stop`."
+        },
         "recommendation": {
           "$ref": "#/definitions/Recommendation",
           "description": "The recommendation information for this scenario.",
@@ -6574,6 +6612,7 @@
         "Canceling",
         "Canceled",
         "Succeeded",
+        "PartiallySucceeded",
         "Failed"
       ],
       "x-ms-enum": {
@@ -6641,6 +6680,11 @@
             "description": "The scenario run has completed successfully."
           },
           {
+            "name": "PartiallySucceeded",
+            "value": "PartiallySucceeded",
+            "description": "The scenario run completed, but one or more actions failed and every one of those\nfailures was suppressed by the effective `failureBehavior`."
+          },
+          {
             "name": "Failed",
             "value": "Failed",
             "description": "The scenario run has failed."
@@ -6684,6 +6728,11 @@
           "type": "string",
           "format": "date-time",
           "description": "When the action was completed.",
+          "readOnly": true
+        },
+        "failureSuppressed": {
+          "type": "boolean",
+          "description": "Whether this action's failure was suppressed by the effective `failureBehavior`\nand therefore did not fail the scenario run. Present only for actions in the\n`Failed` state; absent otherwise.",
           "readOnly": true
         }
       },
