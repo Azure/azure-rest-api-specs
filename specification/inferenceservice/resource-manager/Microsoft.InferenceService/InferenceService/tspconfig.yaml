@@ -18,18 +18,21 @@ options:
     flavor: "azure"
     namespace: "com.azure.resourcemanager.inferenceservice"
     service-name: "InferenceService"
+    api-version: "2026-01-15-preview"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-inferenceservice"
     namespace: "azure.mgmt.inferenceservice"
     flavor: "azure"
     generate-test: true
     generate-sample: true
+    api-version: "2026-01-15-preview"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
     emitter-output-dir: "{output-dir}/{service-dir}/arm-inferenceservice"
     flavor: azure
     package-details:
       name: "@azure/arm-inferenceservice"
+    api-version: "2026-01-15-preview"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/inferenceservice"
     emitter-output-dir: "{output-dir}/{service-dir}/arminferenceservice"
@@ -40,9 +43,11 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+    api-version: "2026-01-15-preview"
   "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.InferenceService"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    api-version: "2026-01-15-preview"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
