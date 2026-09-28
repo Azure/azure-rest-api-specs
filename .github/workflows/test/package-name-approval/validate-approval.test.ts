@@ -1,3 +1,4 @@
+import type { GitHubScriptArgs } from "../../src/github.ts";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts";
 
@@ -74,12 +75,12 @@ describe("validate-approval", () => {
 
   let core: ReturnType<typeof createMockCore>;
 
-  function args(): import("@actions/github-script").AsyncFunctionArguments {
+  function args(): GitHubScriptArgs {
     return {
       github,
       context,
       core,
-    } as unknown as import("@actions/github-script").AsyncFunctionArguments;
+    };
   }
 
   beforeEach(() => {

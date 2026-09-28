@@ -3,8 +3,13 @@
   "printWidth": 80,
   "sortPackageJson": false,
   "ignorePatterns": [
+    "eng/common/**",
     "**/*.tsp",
-    "specification/**/*.json",
+    "documentation/**/*",
+    "specification/**/*",
+    "profile/**/*",
+    "profiles/**/*",
+    "arm-compute/**/*",
     ".github/**/coverage/**",
     ".github/**/fixtures/**",
     ".github/**/specification/**",
@@ -21,10 +26,13 @@
     ".github/skills/azsdk-common-*/**",
     ".github/skills/evals/*/results/**",
     ".github/skills/evals/*/session-state/**",
-    "eng/tools/**/coverage/**",
-    "eng/tools/**/dist/**",
-    "eng/tools/**/fixtures/**",
-    "eng/tools/**/specification/**"
+    "eng/**/coverage/**",
+    "eng/**/dist/**",
+    "eng/**/fixtures/**",
+    "eng/**/specification/**",
+    // 1ES synced files
+    "SECURITY.md",
+    ".config/1espt/PipelineAutobaseliningConfig.yml"
   ],
   "overrides": [
     {
@@ -47,7 +55,7 @@
     {
       "files": [
         ".github/**",
-        "eng/tools/**"
+        "eng/**"
       ],
       "options": {
         "printWidth": 100,
