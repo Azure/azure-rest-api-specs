@@ -2559,6 +2559,10 @@
                 "type": "string",
                 "description": "The fileId of the directory."
               },
+              "x-ms-file-name": {
+                "type": "string",
+                "description": "The name of the file or directory."
+              },
               "x-ms-file-parent-id": {
                 "x-ms-client-name": "FileParentId",
                 "type": "string",
@@ -4388,6 +4392,10 @@
                 "x-ms-client-name": "FileId",
                 "type": "string",
                 "description": "The fileId of the file."
+              },
+              "x-ms-file-name": {
+                "type": "string",
+                "description": "The name of the file or directory."
               },
               "x-ms-file-parent-id": {
                 "x-ms-client-name": "FileParentId",
@@ -6641,6 +6649,313 @@
         }
       ]
     },
+    "?comp=hardlinks": {
+      "get": {
+        "tags": [
+          "file"
+        ],
+        "operationId": "File_GetHardLinks",
+        "description": "Returns the hard links of a file, along with all user-defined metadata, content properties, and system properties for the file. NFS only.",
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ShareSnapshot"
+          },
+          {
+            "$ref": "#/parameters/Timeout"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/LeaseIdOptional"
+          },
+          {
+            "$ref": "#/parameters/AllowTrailingDot"
+          },
+          {
+            "$ref": "#/parameters/FileRequestIntent"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success.",
+            "schema": {
+              "$ref": "#/definitions/HardLinkList"
+            },
+            "headers": {
+              "Last-Modified": {
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "Returns the date and time the file was last modified. The date format follows RFC 1123. Any operation that modifies the file or its properties updates the last modified time."
+              },
+              "x-ms-meta": {
+                "type": "string",
+                "description": "A set of name-value pairs associated with this file as user-defined metadata.",
+                "x-ms-client-name": "Metadata",
+                "x-ms-header-collection-prefix": "x-ms-meta-"
+              },
+              "x-ms-type": {
+                "x-ms-client-name": "FileType",
+                "description": "Returns the type File. Reserved for future use.",
+                "type": "string",
+                "enum": [
+                  "File"
+                ]
+              },
+              "ETag": {
+                "type": "string",
+                "description": "The ETag contains a value that you can use to perform operations conditionally, in quotes."
+              },
+              "x-ms-content-type": {
+                "type": "string",
+                "description": "The MIME content type of the file."
+              },
+              "x-ms-content-length": {
+                "type": "integer",
+                "format": "int64",
+                "description": "The length of the file."
+              },
+              "x-ms-content-md5": {
+                "type": "string",
+                "format": "byte",
+                "description": "The MD5 hash of the full file content."
+              },
+              "x-ms-content-encoding": {
+                "type": "string",
+                "description": "The content encodings that have been applied to the file."
+              },
+              "x-ms-content-language": {
+                "type": "string",
+                "description": "The natural languages used by the file."
+              },
+              "x-ms-cache-control": {
+                "type": "string",
+                "description": "The cache control of the file."
+              },
+              "x-ms-content-disposition": {
+                "type": "string",
+                "description": "The Content-Disposition of the file."
+              },
+              "x-ms-copy-completion-time": {
+                "x-ms-client-name": "CopyCompletionTime",
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "Conclusion time of the last attempted Copy File operation where this file was the destination file. This value can specify the time of a completed, aborted, or failed copy attempt."
+              },
+              "x-ms-copy-status-description": {
+                "x-ms-client-name": "CopyStatusDescription",
+                "type": "string",
+                "description": "Only appears when x-ms-copy-status is failed or pending. Describes cause of fatal or non-fatal copy operation failure."
+              },
+              "x-ms-copy-id": {
+                "x-ms-client-name": "CopyId",
+                "type": "string",
+                "description": "String identifier for the last attempted Copy File operation where this file was the destination file."
+              },
+              "x-ms-copy-progress": {
+                "x-ms-client-name": "CopyProgress",
+                "type": "string",
+                "description": "Contains the number of bytes copied and the total bytes in the source in the last attempted Copy File operation where this file was the destination file. Can show between 0 and Content-Length bytes copied."
+              },
+              "x-ms-copy-source": {
+                "x-ms-client-name": "CopySource",
+                "type": "string",
+                "description": "URL up to 2KB in length that specifies the source file used in the last attempted Copy File operation where this file was the destination file."
+              },
+              "x-ms-copy-status": {
+                "x-ms-client-name": "CopyStatus",
+                "description": "State of the copy operation identified by 'x-ms-copy-id'.",
+                "type": "string",
+                "enum": [
+                  "pending",
+                  "success",
+                  "aborted",
+                  "failed"
+                ],
+                "x-ms-enum": {
+                  "name": "CopyStatusType",
+                  "modelAsString": false
+                }
+              },
+              "x-ms-server-encrypted": {
+                "x-ms-client-name": "IsServerEncrypted",
+                "type": "boolean",
+                "description": "The value of this header is set to true if the file data and application metadata are completely encrypted using the specified algorithm. Otherwise, the value is set to false (when the file is unencrypted, or if only parts of the file/application metadata are encrypted)."
+              },
+              "x-ms-file-attributes": {
+                "x-ms-client-name": "FileAttributes",
+                "type": "string",
+                "description": "Attributes set for the file."
+              },
+              "x-ms-file-creation-time": {
+                "x-ms-client-name": "FileCreationTime",
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "Creation time for the file."
+              },
+              "x-ms-file-last-write-time": {
+                "x-ms-client-name": "FileLastWriteTime",
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "Last write time for the file."
+              },
+              "x-ms-file-change-time": {
+                "x-ms-client-name": "FileChangeTime",
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "Change time for the file."
+              },
+              "x-ms-file-permission-key": {
+                "x-ms-client-name": "FilePermissionKey",
+                "type": "string",
+                "description": "Key of the permission set for the file."
+              },
+              "x-ms-file-id": {
+                "x-ms-client-name": "FileId",
+                "type": "string",
+                "description": "The fileId of the file."
+              },
+              "x-ms-file-name": {
+                "type": "string",
+                "description": "The name of the file or directory."
+              },
+              "x-ms-file-parent-id": {
+                "x-ms-client-name": "FileParentId",
+                "type": "string",
+                "description": "The parent fileId of the file."
+              },
+              "x-ms-lease-duration": {
+                "x-ms-client-name": "LeaseDuration",
+                "description": "When a file is leased, specifies whether the lease is of infinite or fixed duration.",
+                "type": "string",
+                "enum": [
+                  "infinite",
+                  "fixed"
+                ],
+                "x-ms-enum": {
+                  "name": "LeaseDurationType",
+                  "modelAsString": false
+                }
+              },
+              "x-ms-lease-state": {
+                "x-ms-client-name": "LeaseState",
+                "description": "Lease state of the file.",
+                "type": "string",
+                "enum": [
+                  "available",
+                  "leased",
+                  "expired",
+                  "breaking",
+                  "broken"
+                ],
+                "x-ms-enum": {
+                  "name": "LeaseStateType",
+                  "modelAsString": false
+                }
+              },
+              "x-ms-lease-status": {
+                "x-ms-client-name": "LeaseStatus",
+                "description": "The current lease status of the file.",
+                "type": "string",
+                "enum": [
+                  "locked",
+                  "unlocked"
+                ],
+                "x-ms-enum": {
+                  "name": "LeaseStatusType",
+                  "modelAsString": false
+                }
+              },
+              "x-ms-mode": {
+                "x-ms-client-name": "fileMode",
+                "type": "string",
+                "description": "NFS only. The mode of the file or directory."
+              },
+              "x-ms-owner": {
+                "x-ms-client-name": "owner",
+                "type": "string",
+                "description": "NFS only. The owner of the file or directory."
+              },
+              "x-ms-group": {
+                "x-ms-client-name": "group",
+                "type": "string",
+                "description": "NFS only. The owning group of the file or directory."
+              },
+              "x-ms-link-count": {
+                "x-ms-client-name": "linkCount",
+                "type": "integer",
+                "format": "int32",
+                "description": "NFS only. The link count of the file or directory."
+              },
+              "x-ms-file-file-type": {
+                "x-ms-client-name": "nfsFileType",
+                "description": "NFS only. Type of the file or directory.",
+                "type": "string",
+                "enum": [
+                  "Regular",
+                  "Directory",
+                  "SymLink"
+                ],
+                "x-ms-enum": {
+                  "name": "NfsFileType",
+                  "modelAsString": true
+                }
+              },
+              "x-ms-request-id": {
+                "x-ms-client-name": "RequestId",
+                "type": "string",
+                "description": "This header uniquely identifies the request that was made and can be used for troubleshooting the request."
+              },
+              "x-ms-version": {
+                "x-ms-client-name": "Version",
+                "type": "string",
+                "description": "Indicates the version of the File service used to execute the request."
+              },
+              "Date": {
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "A UTC date/time value generated by the service that indicates the time at which the response was initiated."
+              },
+              "x-ms-client-request-id": {
+                "x-ms-client-name": "ClientRequestId",
+                "type": "string",
+                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
+              }
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "headers": {
+              "x-ms-error-code": {
+                "x-ms-client-name": "ErrorCode",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/StorageError"
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "comp",
+          "description": "comp",
+          "in": "query",
+          "required": true,
+          "type": "string",
+          "enum": [
+            "hardlinks"
+          ]
+        }
+      ]
+    },
     "/{shareName}/{directory}/{fileName}?restype=hardlink": {
       "put": {
         "tags": [
@@ -7246,6 +7561,53 @@
       "x-ms-enum": {
         "name": "NfsFileType",
         "modelAsString": true
+      }
+    },
+    "HardLink": {
+      "description": "A hard link to a file.",
+      "type": "object",
+      "required": [
+        "fileName",
+        "parentId"
+      ],
+      "properties": {
+        "fileName": {
+          "$ref": "#/definitions/StringEncoded",
+          "description": "The name of the hard link.",
+          "xml": {
+            "name": "FileName"
+          }
+        },
+        "parentId": {
+          "type": "string",
+          "description": "The fileId of the parent directory of the hard link.",
+          "xml": {
+            "name": "ParentId"
+          }
+        }
+      }
+    },
+    "HardLinkList": {
+      "description": "The list of hard links for a file.",
+      "type": "object",
+      "required": [
+        "hardLinks"
+      ],
+      "properties": {
+        "hardLinks": {
+          "description": "The hard links.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HardLink"
+          },
+          "xml": {
+            "name": "HardLink",
+            "wrapped": false
+          }
+        }
+      },
+      "xml": {
+        "name": "HardLinks"
       }
     },
     "StringEncoded": {
