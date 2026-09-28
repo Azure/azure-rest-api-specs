@@ -45,7 +45,7 @@ model EndpointRegistration is Azure.ResourceManager.ProxyResource<
     Resource = EndpointRegistration,
     KeyName = "endpointName",
     SegmentName = "endpoints",
-    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+    NamePattern = "^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,127}$"
   >;
 }
 
@@ -76,7 +76,7 @@ interface EndpointRegistrationOps
         @path
         @segment("endpoints")
         @key
-        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,127}$")
         endpointName: string,
       }
     > {}
@@ -114,7 +114,7 @@ interface NestedResourceTypeFirstEndpointRegistrationOps
         @path
         @segment("endpoints")
         @key
-        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,127}$")
         endpointName: string,
       }
     > {}
@@ -158,7 +158,7 @@ interface NestedResourceTypeSecondEndpointRegistrationOps
         @path
         @segment("endpoints")
         @key
-        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,127}$")
         endpointName: string,
       }
     > {}
@@ -208,7 +208,7 @@ interface NestedResourceTypeThirdEndpointRegistrationOps
         @path
         @segment("endpoints")
         @key
-        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
+        @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,127}$")
         endpointName: string,
       }
     > {}

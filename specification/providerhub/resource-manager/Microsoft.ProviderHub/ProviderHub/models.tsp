@@ -4344,6 +4344,7 @@ model EndpointRegistrationArrayResponseWithContinuation {
    * The link to the next page of endpoint registrations.
    */
   @nextLink
+  @visibility(Lifecycle.Read)
   nextLink?: url;
 }
 
