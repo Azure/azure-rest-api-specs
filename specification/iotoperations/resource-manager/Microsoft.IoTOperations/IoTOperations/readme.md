@@ -22,7 +22,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ## Suppression
 
-``` yaml
+```yaml
 directive:
   - suppress: AvoidAdditionalProperties
     where: $.definitions.BrokerAuthenticatorMethodCustom.properties.headers
@@ -66,7 +66,7 @@ directive:
   - suppress: AvoidAdditionalProperties
     where: $.definitions.InstanceFeature.properties.settings
     reason: User defined feature flag settings that are not subject to any validations and can differ between the versions of AIO deployed on the customer's cluster.
-    
+
   - suppress: AvoidAdditionalProperties
     where: $.definitions.AkriConnectorTemplateHelmConfigurationSettings.properties.values
     reason: There represent helm values to customer provided helm charts hence the properties are not known ahead of time.
@@ -99,7 +99,7 @@ These are the global settings for the IoTOperations.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2026-07-01
+tag: package-2026-11-01-preview
 ```
 
 ### Tag: package-2024-07-01-preview
@@ -181,4 +181,13 @@ These settings apply only when `--tag=package-2026-07-01` is specified on the co
 ```yaml $(tag) == 'package-2026-07-01'
 input-file:
   - stable/2026-07-01/iotoperations.json
+```
+
+### Tag: package-2026-11-01-preview
+
+These settings apply only when `--tag=package-2026-11-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-11-01-preview'
+input-file:
+  - preview/2026-11-01-preview/iotoperations.json
 ```
