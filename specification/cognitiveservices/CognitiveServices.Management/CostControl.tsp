@@ -84,7 +84,7 @@ model CostControlPatch {
   /**
    * The cost control properties to update.
    */
-  properties: CostControlPatchProperties;
+  properties?: CostControlPatchProperties;
 }
 
 /**
