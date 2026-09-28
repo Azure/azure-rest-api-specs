@@ -1,5 +1,5 @@
-/* eslint-disable */
-// TODO: Enable eslint, fix errors
+/* oxlint-disable */
+// TODO: Enable oxlint, fix errors
 
 import { afterEach, beforeEach, describe, it, type MockInstance, vi } from "vitest";
 
