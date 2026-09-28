@@ -1,0 +1,69 @@
+{
+  "title": "InferenceAccounts_CreateOrUpdate",
+  "operationId": "InferenceAccounts_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-08-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "inferencerg",
+    "inferenceAccountName": "inference-acc-specs",
+    "resource": {
+      "location": "eastus2",
+      "properties": {
+        "enableKeyBasedAuthentication": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "endpoint": "https://inference-acc.eastus2.dbinference.azure.com",
+          "provisioningState": "Succeeded",
+          "enableKeyBasedAuthentication": true,
+          "keysMetadata": {
+            "primaryKeyLastUsage": "2026-07-08T00:28:48.610Z",
+            "secondaryKeyLastUsage": "2026-07-07T00:28:48.610Z"
+          }
+        },
+        "location": "eastus2",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/inferencerg/providers/Microsoft.InferenceService/inferenceAccounts/inference-acc-specs",
+        "name": "inference-acc-specs",
+        "type": "Microsoft.InferenceService/inferenceAccounts",
+        "systemData": {
+          "createdBy": "APISpecsTeam",
+          "createdByType": "User",
+          "createdAt": "2023-05-19T00:28:48.610Z",
+          "lastModifiedBy": "APISpecsTeam",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-05-19T00:28:48.610Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/inferencerg/providers/Microsoft.InferenceService/inferenceAccounts/inference-acc-specs?api-version=2026-08-01-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.InferenceService/locations/eastus2/operationStatuses/00000000-0000-0000-0000-000000000000?api-version=2026-08-01-preview",
+        "Retry-After": 10
+      },
+      "body": {
+        "properties": {
+          "endpoint": "https://inference-acc.eastus2.dbinference.azure.com",
+          "provisioningState": "Provisioning",
+          "enableKeyBasedAuthentication": true
+        },
+        "location": "eastus2",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/inferencerg/providers/Microsoft.InferenceService/inferenceAccounts/inference-acc-specs",
+        "name": "inference-acc-specs",
+        "type": "Microsoft.InferenceService/inferenceAccounts",
+        "systemData": {
+          "createdBy": "APISpecsTeam",
+          "createdByType": "User",
+          "createdAt": "2023-05-19T00:28:48.610Z",
+          "lastModifiedBy": "APISpecsTeam",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-05-19T00:28:48.610Z"
+        }
+      }
+    }
+  }
+}
