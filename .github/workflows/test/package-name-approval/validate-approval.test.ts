@@ -33,6 +33,10 @@ const protectedLabelsYaml = {
     "management-plane": ["approver3", "approver4"],
     "data-plane": ["global-admin1", "global-admin2"],
   },
+  "package-name-go-approved": {
+    "management-plane": ["approver3", "approver4"],
+    "data-plane": "unprotected",
+  },
 };
 
 function setupMocks() {
@@ -232,6 +236,31 @@ describe("validate-approval", () => {
       expect(github.rest.pulls.get).not.toHaveBeenCalled();
       expect(core.warning).toHaveBeenCalledWith(
         "random-user is not authorized to apply package-name-java-approved, removing",
+      );
+    });
+
+    it("should allow any user when the plane is unprotected (#46728)", async () => {
+      context.payload = createPRLabeledPayload({
+        action: "labeled",
+        labelName: "package-name-go-approved",
+        actor: "random-user",
+        labels: ["package-name-review-required", "package-name-go-pending"],
+      });
+
+      github.rest.pulls.get.mockResolvedValue({
+        data: { labels: [{ name: "package-name-review-required" }] },
+      });
+      (github.rest.issues as Record<string, unknown>).listComments = vi
+        .fn()
+        .mockResolvedValue({ data: [] });
+
+      await validateApproval(args());
+
+      expect(github.rest.issues.removeLabel).toHaveBeenCalledWith(
+        expect.objectContaining({ name: "package-name-go-pending" }),
+      );
+      expect(github.rest.issues.removeLabel).not.toHaveBeenCalledWith(
+        expect.objectContaining({ name: "package-name-go-approved" }),
       );
     });
   });

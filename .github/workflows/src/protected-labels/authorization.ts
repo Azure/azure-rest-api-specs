@@ -4,14 +4,22 @@ import { join } from "path";
 
 export const ALLOWED_BOT_LOGINS = ["github-actions[bot]", "azure-sdk"];
 
+// Reserved plane value that opts a plane out of enforcement (anyone may apply).
+// Must not collide with a GitHub login. An OMITTED plane stays fail-closed (global-only);
+// only this explicit keyword opens a plane. See #46728.
+export const UNPROTECTED_PLANE = "unprotected";
+
 const MGMT_LABELS = ["Mgmt", "resource-manager"];
 const DP_LABELS = ["data-plane"];
+
+// A plane maps either to an approver list or to the literal "unprotected".
+export type PlaneApprovers = string[] | typeof UNPROTECTED_PLANE;
 
 export type LabelEntry =
   | string[]
   | {
-      "management-plane"?: string[];
-      "data-plane"?: string[];
+      "management-plane"?: PlaneApprovers;
+      "data-plane"?: PlaneApprovers;
     };
 
 export type ProtectedLabelsConfig = {
@@ -69,19 +77,25 @@ export async function loadProtectedLabelsConfig(
     const planeEntry = value as Record<string, unknown>;
     const managementPlane = planeEntry["management-plane"];
     const dataPlane = planeEntry["data-plane"];
+    const isValidPlaneValue = (v: unknown): boolean =>
+      v === undefined ||
+      v === UNPROTECTED_PLANE ||
+      (Array.isArray(v) && v.every((user) => typeof user === "string" && user.length > 0));
     if (
       (!managementPlane && !dataPlane) ||
-      (managementPlane && !Array.isArray(managementPlane)) ||
-      (dataPlane && !Array.isArray(dataPlane))
+      !isValidPlaneValue(managementPlane) ||
+      !isValidPlaneValue(dataPlane)
     ) {
       throw new Error(
-        `Invalid protected-labels.yml: "${label}" plane-aware entry must have "management-plane" and/or "data-plane" as arrays`,
+        `Invalid protected-labels.yml: "${label}" plane-aware entry must have "management-plane" and/or "data-plane", each an array of logins or the literal "${UNPROTECTED_PLANE}"`,
       );
     }
 
     labels[label] = {
-      ...(managementPlane ? { "management-plane": managementPlane as string[] } : {}),
-      ...(dataPlane ? { "data-plane": dataPlane as string[] } : {}),
+      ...(managementPlane !== undefined
+        ? { "management-plane": managementPlane as PlaneApprovers }
+        : {}),
+      ...(dataPlane !== undefined ? { "data-plane": dataPlane as PlaneApprovers } : {}),
     };
   }
 
@@ -92,19 +106,27 @@ function resolveAuthorizedUsers(
   entry: LabelEntry,
   prLabels: string[],
   plane?: LabelPlane,
-): string[] | null {
+): string[] | typeof UNPROTECTED_PLANE | null {
   if (Array.isArray(entry)) {
     return entry;
   }
 
+  const resolvePlane = (p: LabelPlane): string[] | typeof UNPROTECTED_PLANE => {
+    const value = entry[p];
+    if (value === UNPROTECTED_PLANE) {
+      return UNPROTECTED_PLANE;
+    }
+    return value ?? [];
+  };
+
   if (plane) {
-    return entry[plane] ?? [];
+    return resolvePlane(plane);
   }
   if (prLabels.some((label) => MGMT_LABELS.includes(label))) {
-    return entry["management-plane"] ?? [];
+    return resolvePlane("management-plane");
   }
   if (prLabels.some((label) => DP_LABELS.includes(label))) {
-    return entry["data-plane"] ?? [];
+    return resolvePlane("data-plane");
   }
   return null;
 }
@@ -134,6 +156,9 @@ export function evaluateLabelAuthorization({
   const perLabelUsers = resolveAuthorizedUsers(entry, prLabels, plane);
   if (perLabelUsers === null) {
     return { status: "unknown-plane", authorizedUsers: [] };
+  }
+  if (perLabelUsers === UNPROTECTED_PLANE) {
+    return { status: "unprotected", authorizedUsers: [] };
   }
 
   const authorizedUsers = [...new Set([...perLabelUsers, ...config.globalApprovers])];
