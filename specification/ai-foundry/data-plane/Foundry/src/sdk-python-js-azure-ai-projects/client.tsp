@@ -14,12 +14,12 @@ import "../connections/routes.tsp";
 import "../datasets/routes.tsp";
 import "../deployments/routes.tsp";
 import "../indexes/routes.tsp";
-import "../evaluators/routes.tsp";
 
 // Beta operations (preview routes, requiring opt-in request header)
 import "../voice-agents/routes.tsp";
 import "../agent-insights/routes.tsp";
 import "../evaluation-taxonomies/routes.tsp";
+import "../evaluators/routes.tsp";
 import "../insights/routes.tsp";
 import "../memory-stores/routes.tsp";
 import "../models/routes.tsp";
@@ -478,12 +478,13 @@ using Azure.AI.Projects;
 @@clientName(DispatchRoutineResponse, "DispatchRoutineResult", "python");
 
 // --------------------------------------------------------------------------------
-// Evaluator sub-clients
+// Beta Evaluators sub‐client
 // --------------------------------------------------------------------------------
 
-// Publication lineage is public on the GA Evaluators sub-client.
+// Need to explicitly mention both languages to avoid compile error
+@@clientName(Evaluators.listLatestVersions, "list", "python, javascript");
+
 @@access(Evaluators.listDiagnostics, Access.public);
-@@access(Evaluators.getDiagnostic, Access.public);
 
 // Evaluator pending upload
 @@clientName(Evaluators.startPendingUpload, "pendingUpload");
@@ -495,9 +496,7 @@ using Azure.AI.Projects;
 @@clientName(EvaluatorGenerationJobs.cancel, "cancelGenerationJob");
 @@clientName(EvaluatorGenerationJobs.delete, "deleteGenerationJob");
 
-// Evaluator datetime fields are typed as string in the spec but carry ISO-8601 timestamps
-@@alternateType(Evaluator.created_at, utcDateTime, "python");
-@@alternateType(Evaluator.modified_at, utcDateTime, "python");
+// EvaluatorVersion datetime fields are typed as string in the spec but carry ISO-8601 timestamps
 @@alternateType(EvaluatorVersion.created_at, utcDateTime, "python");
 @@alternateType(EvaluatorVersion.modified_at, utcDateTime, "python");
 

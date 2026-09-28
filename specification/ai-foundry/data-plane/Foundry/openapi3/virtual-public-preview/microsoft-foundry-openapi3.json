@@ -13599,7 +13599,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/EvaluatorGenerationJob"
+                "$ref": "#/components/schemas/EvaluatorGenerationJobCreate"
               }
             }
           },
@@ -13919,10 +13919,13 @@
     },
     "/evaluators": {
       "get": {
-        "operationId": "Evaluators_list",
+        "operationId": "Evaluators_listLatestVersions",
         "summary": "List latest evaluator versions",
-        "description": "Lists the latest published evaluator versions, preserving the existing collection contract.",
+        "description": "Lists the latest version of each evaluator.",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "name": "type",
             "in": "query",
@@ -13954,16 +13957,6 @@
               "default": 20
             },
             "explode": false
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
           }
         ],
         "responses": {
@@ -13979,75 +13972,10 @@
           },
           "4XX": {
             "description": "Client error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          },
-          "5XX": {
-            "description": "Server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Evaluators"
-        ]
-      }
-    },
-    "/evaluators/{name}": {
-      "put": {
-        "operationId": "Evaluators_createOrUpdate",
-        "summary": "Create or update the current evaluator",
-        "description": "Creates the unnumbered current evaluator, or replaces it when the name already exists. Existing current state requires a matching `If-Match` ETag.",
-        "parameters": [
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The evaluator name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "$ref": "#/components/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
-          },
-          {
-            "$ref": "#/components/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
-          },
-          {
-            "$ref": "#/components/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
-          },
-          {
-            "$ref": "#/components/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
             "headers": {
-              "ETag": {
+              "x-ms-error-code": {
                 "required": false,
-                "description": "The entity tag for the response.",
+                "description": "String error code indicating what went wrong.",
                 "schema": {
                   "type": "string"
                 }
@@ -14056,17 +13984,17 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Evaluator"
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
                 }
               }
             }
           },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
+          "5XX": {
+            "description": "Server error",
             "headers": {
-              "ETag": {
+              "x-ms-error-code": {
                 "required": false,
-                "description": "The entity tag for the response.",
+                "description": "String error code indicating what went wrong.",
                 "schema": {
                   "type": "string"
                 }
@@ -14075,120 +14003,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Evaluator"
-                }
-              }
-            }
-          },
-          "4XX": {
-            "description": "Client error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          },
-          "5XX": {
-            "description": "Server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Evaluators"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Evaluator"
-              }
-            }
-          },
-          "description": "The complete mutable evaluator state."
-        }
-      },
-      "get": {
-        "operationId": "Evaluators_get",
-        "summary": "Get the current evaluator",
-        "description": "Returns the unnumbered current evaluator and its ETag.",
-        "parameters": [
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The evaluator name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "$ref": "#/components/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
-          },
-          {
-            "$ref": "#/components/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
-          },
-          {
-            "$ref": "#/components/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
-          },
-          {
-            "$ref": "#/components/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "headers": {
-              "ETag": {
-                "required": false,
-                "description": "The entity tag for the response.",
-                "schema": {
-                  "type": "string"
-                }
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Evaluator"
-                }
-              }
-            }
-          },
-          "4XX": {
-            "description": "Client error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          },
-          "5XX": {
-            "description": "Server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
                 }
               }
             }
@@ -14197,154 +14012,26 @@
         "tags": [
           "Evaluators"
         ]
-      },
-      "delete": {
-        "operationId": "Evaluators_delete",
-        "summary": "Delete an evaluator",
-        "description": "Removes the current evaluator and all of its published versions. A matching ETag is required when current state exists.",
-        "parameters": [
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The evaluator name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "$ref": "#/components/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
-          },
-          {
-            "$ref": "#/components/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
-          },
-          {
-            "$ref": "#/components/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
-          },
-          {
-            "$ref": "#/components/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
-          },
-          "4XX": {
-            "description": "Client error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          },
-          "5XX": {
-            "description": "Server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Evaluators"
-        ]
-      }
-    },
-    "/evaluators/{name}/credentials": {
-      "post": {
-        "operationId": "Evaluators_getCredentials",
-        "summary": "Get current evaluator credentials",
-        "description": "Retrieves SAS credentials for a pending current evaluator upload. Publishing freezes the resulting immutable artifact identity.",
-        "parameters": [
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The name path parameter.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AssetCredentialResponse"
-                }
-              }
-            }
-          },
-          "4XX": {
-            "description": "Client error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          },
-          "5XX": {
-            "description": "Server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Evaluators"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/EvaluatorCredentialRequest"
-              }
-            }
-          },
-          "description": "The credential request parameters"
-        }
       }
     },
     "/evaluators/{name}/diagnostics": {
       "get": {
         "operationId": "Evaluators_listDiagnostics",
         "summary": "List evaluator diagnostics",
-        "description": "Returns immutable publication lineage for the specified evaluator.\n\nTime, evaluator-version, dimension, and type filters are intersected.\nDiagnostics are populated when a numbered evaluator version is published.\nEditing mutable current state does not publish lineage.",
+        "description": "Returns immutable publication lineage for the specified evaluator.\n\nTime, evaluator-version, dimension, and type filters are intersected.\nReturns recorded changes from completed evaluator version writes.\nHistorical backfill and diagnostic calculation jobs are not included.",
         "parameters": [
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
           {
             "name": "name",
             "in": "path",
@@ -14499,29 +14186,471 @@
         },
         "tags": [
           "Evaluators"
-        ]
+        ],
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       }
     },
-    "/evaluators/{name}/diagnostics/{diagnostic_id}": {
+    "/evaluators/{name}/versions": {
       "get": {
-        "operationId": "Evaluators_getDiagnostic",
-        "summary": "Get an evaluator diagnostic",
-        "description": "Returns one completed evaluator diagnostic by its stable identifier.",
+        "operationId": "Evaluators_listVersions",
+        "summary": "List evaluator versions",
+        "description": "Returns the available versions for the specified evaluator.",
         "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "name": "name",
             "in": "path",
             "required": true,
-            "description": "The evaluator name.",
+            "description": "The name of the resource",
             "schema": {
               "type": "string"
             }
           },
           {
-            "name": "diagnostic_id",
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "description": "Filter evaluators by type. Possible values: 'all', 'custom', 'builtin'.",
+            "schema": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/EvaluatorType"
+                },
+                {
+                  "type": "string",
+                  "enum": [
+                    "all"
+                  ]
+                }
+              ]
+            },
+            "explode": false
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 20
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedEvaluatorVersion"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Evaluators"
+        ]
+      },
+      "post": {
+        "operationId": "Evaluators_createVersion",
+        "summary": "Create an evaluator version",
+        "description": "Creates a new evaluator version with an auto-incremented version identifier.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
             "in": "path",
             "required": true,
-            "description": "The stable completed diagnostic identifier.",
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluatorVersion"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Evaluators"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvaluatorVersionCreate"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/evaluators/{name}/versions/{version}": {
+      "get": {
+        "operationId": "Evaluators_getVersion",
+        "summary": "Get an evaluator version",
+        "description": "Retrieves the specified evaluator version, returning 404 if it does not exist.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The specific version id of the EvaluatorVersion to retrieve.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluatorVersion"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Evaluators"
+        ]
+      },
+      "delete": {
+        "operationId": "Evaluators_deleteVersion",
+        "summary": "Delete an evaluator version",
+        "description": "Removes the specified evaluator version. Returns 204 whether the version existed or not.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The version of the EvaluatorVersion to delete.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "4XX": {
+            "description": "Client error",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Evaluators"
+        ]
+      },
+      "patch": {
+        "operationId": "Evaluators_updateVersion",
+        "summary": "Update an evaluator version",
+        "description": "Updates the specified evaluator version in place.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the resource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The version of the EvaluatorVersion to update.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EvaluatorVersion"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "description": "Client error",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          },
+          "5XX": {
+            "description": "Server error",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Evaluators"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvaluatorVersionUpdate"
+              }
+            }
+          },
+          "description": "Evaluator resource"
+        }
+      }
+    },
+    "/evaluators/{name}/versions/{version}/credentials": {
+      "post": {
+        "operationId": "Evaluators_getCredentials",
+        "summary": "Get evaluator credentials",
+        "description": "Retrieves SAS credentials for accessing the storage account associated with the specified evaluator version.",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name path parameter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The specific version id of the EvaluatorVersion to operate on.",
             "schema": {
               "type": "string"
             }
@@ -14543,7 +14672,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/EvaluatorDiagnostic"
+                  "$ref": "#/components/schemas/AssetCredentialResponse"
                 }
               }
             }
@@ -14571,20 +14700,40 @@
         },
         "tags": [
           "Evaluators"
-        ]
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvaluatorCredentialRequest"
+              }
+            }
+          },
+          "description": "The credential request parameters"
+        }
       }
     },
-    "/evaluators/{name}/startPendingUpload": {
+    "/evaluators/{name}/versions/{version}/startPendingUpload": {
       "post": {
         "operationId": "Evaluators_startPendingUpload",
-        "summary": "Start a current evaluator pending upload",
-        "description": "Initiates or retrieves a pending upload for mutable current evaluator state. Publishing freezes the resulting immutable artifact identity.",
+        "summary": "Start a pending upload",
+        "description": "Initiates a new pending upload or retrieves an existing one for the specified evaluator version.",
         "parameters": [
           {
             "name": "name",
             "in": "path",
             "required": true,
             "description": "The name path parameter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "description": "The specific version id of the EvaluatorVersion to operate on.",
             "schema": {
               "type": "string"
             }
@@ -14646,413 +14795,6 @@
           },
           "description": "The pending upload request parameters"
         }
-      }
-    },
-    "/evaluators/{name}/versions": {
-      "get": {
-        "operationId": "Evaluators_listVersions",
-        "summary": "List published evaluator versions",
-        "description": "Returns immutable published versions for the specified evaluator.",
-        "parameters": [
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The evaluator name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "type",
-            "in": "query",
-            "required": false,
-            "description": "Filter evaluators by type. Possible values: 'all', 'custom', 'builtin'.",
-            "schema": {
-              "anyOf": [
-                {
-                  "$ref": "#/components/schemas/EvaluatorType"
-                },
-                {
-                  "type": "string",
-                  "enum": [
-                    "all"
-                  ]
-                }
-              ]
-            },
-            "explode": false
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "default": 20
-            },
-            "explode": false
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PagedEvaluatorVersion"
-                }
-              }
-            }
-          },
-          "4XX": {
-            "description": "Client error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          },
-          "5XX": {
-            "description": "Server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Evaluators"
-        ]
-      },
-      "post": {
-        "operationId": "Evaluators_createVersion",
-        "summary": "Create a published evaluator version",
-        "description": "Atomically replaces current evaluator state and publishes that exact state as the next immutable numbered version.",
-        "parameters": [
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The evaluator name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "$ref": "#/components/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
-          },
-          {
-            "$ref": "#/components/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
-          },
-          {
-            "$ref": "#/components/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
-          },
-          {
-            "$ref": "#/components/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
-          },
-          {
-            "name": "Operation-Id",
-            "in": "header",
-            "required": false,
-            "description": "Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/EvaluatorVersion"
-                }
-              }
-            }
-          },
-          "4XX": {
-            "description": "Client error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          },
-          "5XX": {
-            "description": "Server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Evaluators"
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Evaluator"
-              }
-            }
-          },
-          "description": "The complete evaluator state to make current and publish."
-        }
-      }
-    },
-    "/evaluators/{name}/versions/{version}": {
-      "get": {
-        "operationId": "Evaluators_getVersion",
-        "summary": "Get a published evaluator version",
-        "description": "Retrieves the specified immutable published evaluator version.",
-        "parameters": [
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The evaluator name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "required": true,
-            "description": "The immutable published evaluator version.",
-            "schema": {
-              "$ref": "#/components/schemas/EvaluatorVersionNumber"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/EvaluatorVersion"
-                }
-              }
-            }
-          },
-          "4XX": {
-            "description": "Client error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          },
-          "5XX": {
-            "description": "Server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Evaluators"
-        ]
-      },
-      "delete": {
-        "operationId": "Evaluators_deleteVersion",
-        "summary": "Delete a published evaluator version",
-        "description": "Removes the specified immutable published version without changing current state.",
-        "parameters": [
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The evaluator name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "required": true,
-            "description": "The immutable published evaluator version.",
-            "schema": {
-              "$ref": "#/components/schemas/EvaluatorVersionNumber"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful."
-          },
-          "4XX": {
-            "description": "Client error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          },
-          "5XX": {
-            "description": "Server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Evaluators"
-        ]
-      }
-    },
-    "/evaluators/{name}:publish_version": {
-      "post": {
-        "operationId": "Evaluators_publishVersion",
-        "summary": "Publish the current evaluator",
-        "description": "Publishes the ETag-matched current evaluator as the next immutable numbered version.",
-        "parameters": [
-          {
-            "name": "name",
-            "in": "path",
-            "required": true,
-            "description": "The evaluator name.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "$ref": "#/components/parameters/Azure.Core.ConditionalRequestHeaders.ifMatch"
-          },
-          {
-            "$ref": "#/components/parameters/Azure.Core.ConditionalRequestHeaders.ifNoneMatch"
-          },
-          {
-            "$ref": "#/components/parameters/Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince"
-          },
-          {
-            "$ref": "#/components/parameters/Azure.Core.ConditionalRequestHeaders.ifModifiedSince"
-          },
-          {
-            "name": "Operation-Id",
-            "in": "header",
-            "required": false,
-            "description": "Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "description": "The API version to use for this operation.",
-            "schema": {
-              "type": "string"
-            },
-            "explode": false
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/EvaluatorVersion"
-                }
-              }
-            }
-          },
-          "4XX": {
-            "description": "Client error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          },
-          "5XX": {
-            "description": "Server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ApiErrorResponse"
-                }
-              }
-            }
-          }
-        },
-        "tags": [
-          "Evaluators"
-        ]
       }
     },
     "/indexes": {
@@ -35022,44 +34764,6 @@
           "$ref": "#/components/schemas/Azure.Core.uuid"
         }
       },
-      "Azure.Core.ConditionalRequestHeaders.ifMatch": {
-        "name": "If-Match",
-        "in": "header",
-        "required": false,
-        "description": "The request should only proceed if an entity matches this string.",
-        "schema": {
-          "type": "string"
-        }
-      },
-      "Azure.Core.ConditionalRequestHeaders.ifModifiedSince": {
-        "name": "If-Modified-Since",
-        "in": "header",
-        "required": false,
-        "description": "The request should only proceed if the entity was modified after this time.",
-        "schema": {
-          "type": "string",
-          "format": "http-date"
-        }
-      },
-      "Azure.Core.ConditionalRequestHeaders.ifNoneMatch": {
-        "name": "If-None-Match",
-        "in": "header",
-        "required": false,
-        "description": "The request should only proceed if no entity matches this string.",
-        "schema": {
-          "type": "string"
-        }
-      },
-      "Azure.Core.ConditionalRequestHeaders.ifUnmodifiedSince": {
-        "name": "If-Unmodified-Since",
-        "in": "header",
-        "required": false,
-        "description": "The request should only proceed if the entity was not modified after this time.",
-        "schema": {
-          "type": "string",
-          "format": "http-date"
-        }
-      },
       "Azure.Core.Foundations.ApiVersionParameter": {
         "name": "api-version",
         "in": "query",
@@ -42017,7 +41721,12 @@
             "description": "Whether more lineage entries are available."
           }
         },
-        "description": "A flat page of immutable evaluator lineage diagnostics."
+        "description": "A flat page of immutable evaluator lineage diagnostics.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "CompletionMessageToolCallChunk": {
         "type": "object",
@@ -42788,7 +42497,7 @@
                   "$ref": "#/components/schemas/OpenAI.EvalGraderScoreModel"
                 },
                 {
-                  "$ref": "#/components/schemas/TestingCriterionEvaluator"
+                  "$ref": "#/components/schemas/TestingCriterionAzureAIEvaluator"
                 },
                 {
                   "$ref": "#/components/schemas/EvalGraderInspectAI"
@@ -43894,7 +43603,12 @@
             "$ref": "#/components/schemas/EvaluatorLineageDiagnosticBase"
           }
         ],
-        "description": "A diagnostic change recording functional evaluator changes outside individual dimensions."
+        "description": "A diagnostic change recording functional evaluator changes outside individual dimensions.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "DeleteAgentResponse": {
         "type": "object",
@@ -44239,9 +43953,6 @@
         "properties": {
           "id": {
             "type": "string",
-            "minLength": 1,
-            "maxLength": 128,
-            "pattern": "^[a-z][a-z0-9_]*$",
             "description": "Stable identifier for this dimension (snake_case, e.g., `correct_resolution`). Required. Provided by the user when manually creating a rubric evaluator or during human-in-the-loop review of a generated set; the generation pipeline produces an initial value the user can edit. Editable when saving new versions."
           },
           "description": {
@@ -44302,7 +44013,12 @@
             "$ref": "#/components/schemas/EvaluatorLineageDiagnosticBase"
           }
         ],
-        "description": "A diagnostic change recording the addition of a rubric dimension."
+        "description": "A diagnostic change recording the addition of a rubric dimension.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "DimensionRemovedDiagnosticChange": {
         "type": "object",
@@ -44343,7 +44059,12 @@
             "$ref": "#/components/schemas/EvaluatorLineageDiagnosticBase"
           }
         ],
-        "description": "A diagnostic change recording the removal of a rubric dimension."
+        "description": "A diagnostic change recording the removal of a rubric dimension.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "DimensionUpdatedDiagnosticChange": {
         "type": "object",
@@ -44389,7 +44110,12 @@
             "$ref": "#/components/schemas/EvaluatorLineageDiagnosticBase"
           }
         ],
-        "description": "A diagnostic change recording an update to a rubric dimension."
+        "description": "A diagnostic change recording an update to a rubric dimension.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "DispatchRoutineRequest": {
         "type": "object",
@@ -44565,7 +44291,7 @@
                   "$ref": "#/components/schemas/OpenAI.EvalGraderScoreModel"
                 },
                 {
-                  "$ref": "#/components/schemas/TestingCriterionEvaluator"
+                  "$ref": "#/components/schemas/TestingCriterionAzureAIEvaluator"
                 },
                 {
                   "$ref": "#/components/schemas/EvalGraderInspectAI"
@@ -46293,7 +46019,7 @@
                   "$ref": "#/components/schemas/OpenAI.EvalGraderScoreModel"
                 },
                 {
-                  "$ref": "#/components/schemas/TestingCriterionEvaluator"
+                  "$ref": "#/components/schemas/TestingCriterionAzureAIEvaluator"
                 }
               ]
             },
@@ -46375,7 +46101,7 @@
                   "$ref": "#/components/schemas/OpenAI.EvalGraderScoreModel"
                 },
                 {
-                  "$ref": "#/components/schemas/TestingCriterionEvaluator"
+                  "$ref": "#/components/schemas/TestingCriterionAzureAIEvaluator"
                 }
               ]
             },
@@ -46458,7 +46184,7 @@
                   "$ref": "#/components/schemas/OpenAI.EvalGraderScoreModel"
                 },
                 {
-                  "$ref": "#/components/schemas/TestingCriterionEvaluator"
+                  "$ref": "#/components/schemas/TestingCriterionAzureAIEvaluator"
                 }
               ]
             },
@@ -46755,117 +46481,6 @@
         },
         "description": "Voice configuration used to convert text to speech for evaluation through the Voice Live endpoint."
       },
-      "Evaluator": {
-        "type": "object",
-        "required": [
-          "evaluator_type",
-          "categories",
-          "definition",
-          "created_by",
-          "created_at",
-          "modified_at",
-          "name",
-          "etag"
-        ],
-        "properties": {
-          "display_name": {
-            "type": "string",
-            "description": "Display Name for evaluator. It helps to find the evaluator easily in AI Foundry. It does not need to be unique."
-          },
-          "metadata": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "type": "string"
-            },
-            "description": "Metadata about the evaluator"
-          },
-          "evaluator_type": {
-            "$ref": "#/components/schemas/EvaluatorType",
-            "description": "The type of the evaluator"
-          },
-          "categories": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EvaluatorCategory"
-            },
-            "description": "The categories of the evaluator"
-          },
-          "supported_evaluation_levels": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EvaluationLevel"
-            },
-            "description": "Evaluation levels this evaluator supports (e.g., `turn`, `conversation`). When omitted on create, the service defaults to `[\"turn\"]`. Custom code-based evaluators support only `turn`; custom prompt-based evaluators support exactly one level (`turn` or `conversation`).",
-            "default": [
-              "turn"
-            ]
-          },
-          "definition": {
-            "$ref": "#/components/schemas/EvaluatorDefinition",
-            "description": "The evaluator's functional definition. Current evaluator state is mutable under ETag concurrency; the definition is immutable after publication in an EvaluatorVersion."
-          },
-          "generation_artifacts": {
-            "$ref": "#/components/schemas/EvaluatorGenerationArtifacts",
-            "description": "Provenance artifacts from the generation pipeline. Read-only; present on generated current state and copied into published versions. Each artifact resolves to a versioned Foundry Dataset.",
-            "readOnly": true
-          },
-          "generation_job_id": {
-            "type": "string",
-            "description": "Read-only provenance link back to the EvaluatorGenerationJob that produced this content. Absent for manually-authored content.",
-            "readOnly": true
-          },
-          "warnings": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/GenerationWarningType"
-            },
-            "description": "Categories of warnings surfaced on generated evaluator content. Present when the paired generation job produced non-empty warnings. Follow `generation_job_id` to fetch detailed warning payloads.",
-            "readOnly": true
-          },
-          "created_by": {
-            "type": "string",
-            "description": "Creator of the evaluator",
-            "readOnly": true
-          },
-          "created_at": {
-            "type": "string",
-            "description": "Creation date/time of the evaluator",
-            "readOnly": true
-          },
-          "modified_at": {
-            "type": "string",
-            "description": "Last modified date/time of the evaluator",
-            "readOnly": true
-          },
-          "description": {
-            "type": "string",
-            "description": "The evaluator catalog description."
-          },
-          "tags": {
-            "type": "object",
-            "unevaluatedProperties": {
-              "type": "string"
-            },
-            "description": "Evaluator catalog tags."
-          },
-          "id": {
-            "type": "string",
-            "description": "The evaluator resource identifier.",
-            "readOnly": true
-          },
-          "name": {
-            "type": "string",
-            "description": "The evaluator name.",
-            "readOnly": true
-          },
-          "etag": {
-            "$ref": "#/components/schemas/Azure.Core.eTag",
-            "description": "The entity tag for this resource.",
-            "readOnly": true
-          }
-        },
-        "description": "The mutable unnumbered current evaluator state."
-      },
       "EvaluatorCategory": {
         "anyOf": [
           {
@@ -47026,7 +46641,12 @@
             "definition_updated": "#/components/schemas/EvaluatorLineageDiagnosticBase"
           }
         },
-        "description": "The shared fields for immutable evaluator publication lineage."
+        "description": "The shared fields for immutable evaluator publication lineage.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluatorDiagnosticActor": {
         "type": "object",
@@ -47043,7 +46663,12 @@
             "description": "A stable opaque principal or service identifier, when available."
           }
         },
-        "description": "The actor responsible for an evaluator lineage diagnostic."
+        "description": "The actor responsible for an evaluator lineage diagnostic.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluatorDiagnosticActorType": {
         "anyOf": [
@@ -47058,7 +46683,12 @@
             ]
           }
         ],
-        "description": "The type of actor responsible for an evaluator lineage diagnostic."
+        "description": "The type of actor responsible for an evaluator lineage diagnostic.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluatorDiagnosticChangeType": {
         "anyOf": [
@@ -47080,7 +46710,12 @@
             ]
           }
         ],
-        "description": "Known machine-readable classifications for evaluator diagnostic changes."
+        "description": "Known machine-readable classifications for evaluator diagnostic changes.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluatorDiagnosticMessageSeverity": {
         "anyOf": [
@@ -47095,7 +46730,12 @@
             ]
           }
         ],
-        "description": "The severity of an evaluator diagnostic message."
+        "description": "The severity of an evaluator diagnostic message.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluatorDiagnosticType": {
         "anyOf": [
@@ -47113,7 +46753,12 @@
             ]
           }
         ],
-        "description": "The supported evaluator diagnostic change shapes."
+        "description": "The supported evaluator diagnostic change shapes.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluatorDimensionSourceCoverage": {
         "type": "object",
@@ -47145,7 +46790,12 @@
             "description": "A bounded explanation of the coverage status."
           }
         },
-        "description": "Recorded source coverage for one rubric dimension."
+        "description": "Recorded source coverage for one rubric dimension.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluatorDimensionSourceCoverageStatus": {
         "anyOf": [
@@ -47162,7 +46812,12 @@
             ]
           }
         ],
-        "description": "Whether one rubric dimension is covered by recorded generation sources."
+        "description": "Whether one rubric dimension is covered by recorded generation sources.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluatorFieldChange": {
         "type": "object",
@@ -47188,7 +46843,12 @@
             "description": "The resulting snapshot, mapping the exact `field` path to its JSON value. The mapped value may be a scalar, array, object, or null."
           }
         },
-        "description": "A change to one functional evaluator field."
+        "description": "A change to one functional evaluator field.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluatorGenerationArtifacts": {
         "type": "object",
@@ -47199,7 +46859,7 @@
         "properties": {
           "dataset": {
             "$ref": "#/components/schemas/DatasetReference",
-            "description": "Reference to the single Foundry Dataset holding all artifacts produced by the generation pipeline. Each row in the JSONL carries a `kind` field discriminating its content (e.g. `spec`, `tools`, `context`)."
+            "description": "Reference to the single Foundry Dataset (one combined JSONL file, version-aligned to `EvaluatorVersion.version`) holding all artifacts produced by the generation pipeline. Each row in the JSONL carries a `kind` field discriminating its content (e.g. `spec`, `tools`, `context`)."
           },
           "kinds": {
             "type": "array",
@@ -47209,7 +46869,7 @@
             "description": "The kinds of rows present in `dataset`. Always contains `\"spec\"` (the generated evaluation specification, a Markdown document describing what the evaluator measures). May additionally contain `\"tools\"` (when the generation pipeline produced or inferred OpenAI tool schemas) and/or `\"context\"` (when supplementary materials such as file uploads or trace samples were used during generation)."
           }
         },
-        "description": "Service-managed provenance artifacts produced by an evaluator generation job. Present on generated current evaluator state and copied into a published version when that state is published. The combined-JSONL Foundry Dataset is read-only and resolves to a versioned dataset in a service-reserved namespace."
+        "description": "Service-managed provenance artifacts produced by an evaluator generation job. Present only on EvaluatorVersion resources created via the generation pipeline. The combined-JSONL Foundry Dataset is read-only and resolves to a versioned dataset in a service-reserved namespace."
       },
       "EvaluatorGenerationInputs": {
         "type": "object",
@@ -47224,7 +46884,7 @@
             "items": {
               "$ref": "#/components/schemas/EvaluatorGenerationJobSource"
             },
-            "description": "Source materials for generation: agent descriptions, prompts, traces, or datasets. Each entry is an `EvaluatorGenerationJobSource` variant discriminated by `type`."
+            "description": "Source materials for generation — agent descriptions, prompts, traces, or datasets. Each entry is an `EvaluatorGenerationJobSource` variant discriminated by `type`."
           },
           "model": {
             "type": "string",
@@ -47235,15 +46895,15 @@
             "minLength": 1,
             "maxLength": 256,
             "pattern": "^[A-Za-z0-9_.~-]+$",
-            "description": "The evaluator name (immutable identifier). 1-256 characters; allowed characters are ASCII letters, digits, underscore (`_`), period (`.`), tilde (`~`), and hyphen (`-`). The prefix `builtin.` is reserved for system-managed evaluators and is rejected by the service. If a current rubric evaluator with this name exists, generation replaces that mutable current state and uses its dimensions as context for incremental improvement. Published versions remain immutable and queryable through `get_version(name, version)`. If the existing current evaluator is not rubric-based, the request is rejected with `400 Bad Request`."
+            "description": "The evaluator name (immutable identifier). 1-256 characters; allowed characters are ASCII letters, digits, underscore (`_`), period (`.`), tilde (`~`), and hyphen (`-`). The prefix `builtin.` is reserved for system-managed evaluators and is rejected by the service. If an evaluator with this name already exists in the project (and is rubric-subtype), the service creates a new version under the same name and uses the prior version's `dimensions` as context for incremental improvement (foundation of the post-//build adaptive loop). Old versions remain queryable via `get_version(name, version)`. If the existing evaluator is not a rubric-subtype evaluator (built-in, prompt-based, code-based), the request is rejected with `400 Bad Request`."
           },
           "evaluator_display_name": {
             "type": "string",
-            "description": "Optional human-friendly display name for the resulting current evaluator. Surfaced as `Evaluator.display_name`. When omitted, the service uses `evaluator_name` as the display name. The `evaluator_` prefix disambiguates this from the immutable `evaluator_name` identifier."
+            "description": "Optional human-friendly display name for the resulting evaluator. Surfaced as `EvaluatorVersion.display_name` on the persisted evaluator. When omitted, the service uses `evaluator_name` as the display name. The `evaluator_` prefix disambiguates this from the immutable `evaluator_name` identifier."
           },
           "evaluator_description": {
             "type": "string",
-            "description": "Optional human-friendly description for the resulting current evaluator. Surfaced as `Evaluator.description`. Typically collected from the UI alongside `evaluator_display_name`. The `evaluator_` prefix disambiguates this from any other description fields on related models."
+            "description": "Optional human-friendly description for the resulting evaluator. Surfaced as `EvaluatorVersion.description` on the persisted evaluator. Typically collected from the UI alongside `evaluator_display_name`. The `evaluator_` prefix disambiguates this from any other description fields on related models."
           }
         },
         "description": "Caller-supplied inputs for an evaluator generation job."
@@ -47266,7 +46926,7 @@
             "description": "Caller-supplied inputs."
           },
           "result": {
-            "$ref": "#/components/schemas/Evaluator",
+            "$ref": "#/components/schemas/EvaluatorVersion",
             "description": "Result produced on success.",
             "readOnly": true
           },
@@ -47300,11 +46960,21 @@
             "items": {
               "$ref": "#/components/schemas/RubricGenerationInputQualityWarning"
             },
-            "description": "Non-fatal input-quality advisories produced by the generation pipeline. Read-only; service-generated; populated only on terminal jobs when advisories fired and omitted when generation was clean.",
+            "description": "Non-fatal input-quality advisories produced by the generation pipeline. Read-only; service-generated; populated only on terminal jobs when advisories fired. Omitted when generation was clean. Cleared when a subsequent `PATCH` to the paired `EvaluatorVersion.definition` invalidates the advisories.",
             "readOnly": true
           }
         },
-        "description": "Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted unnumbered current Evaluator. Publishing that state is a separate operation."
+        "description": "Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion."
+      },
+      "EvaluatorGenerationJobCreate": {
+        "type": "object",
+        "properties": {
+          "inputs": {
+            "$ref": "#/components/schemas/EvaluatorGenerationInputs",
+            "description": "Caller-supplied inputs."
+          }
+        },
+        "description": "Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion."
       },
       "EvaluatorGenerationJobSource": {
         "type": "object",
@@ -47373,7 +47043,12 @@
             "description": "How the source was used."
           }
         },
-        "description": "A bounded evaluator generation source snapshot."
+        "description": "A bounded evaluator generation source snapshot.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluatorGenerationSourceUseStatus": {
         "anyOf": [
@@ -47389,7 +47064,12 @@
             ]
           }
         ],
-        "description": "How an evaluator generation source was used."
+        "description": "How an evaluator generation source was used.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluatorGenerationTokenUsage": {
         "type": "object",
@@ -47448,7 +47128,12 @@
             "$ref": "#/components/schemas/EvaluatorDiagnostic"
           }
         ],
-        "description": "The shared fields for completed evaluator lineage diagnostics."
+        "description": "The shared fields for completed evaluator lineage diagnostics.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluatorMetric": {
         "type": "object",
@@ -47548,7 +47233,12 @@
             "description": "A bounded explanation."
           }
         },
-        "description": "A bounded gap in evaluator source coverage."
+        "description": "A bounded gap in evaluator source coverage.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluatorSourceLineageSummary": {
         "type": "object",
@@ -47588,7 +47278,12 @@
             "description": "Bounded limitations of the recorded lineage."
           }
         },
-        "description": "Bounded source lineage and coverage recorded by evaluator generation."
+        "description": "Bounded source lineage and coverage recorded by evaluator generation.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "EvaluatorType": {
         "anyOf": [
@@ -47645,23 +47340,23 @@
             "items": {
               "$ref": "#/components/schemas/EvaluationLevel"
             },
-            "description": "Evaluation levels this evaluator supports (e.g., `turn`, `conversation`). When omitted on create, the service defaults to `[\"turn\"]`. Custom code-based evaluators support only `turn`; custom prompt-based evaluators support exactly one level (`turn` or `conversation`).",
+            "description": "Evaluation levels this evaluator supports (e.g., `turn`, `conversation`). When omitted on create, the service defaults to `[\"turn\"]`. On update, omitting this field leaves it unchanged; an empty list is rejected. Custom code-based evaluators support only `turn`; custom prompt-based evaluators support exactly one level (`turn` or `conversation`).",
             "default": [
               "turn"
             ]
           },
           "definition": {
             "$ref": "#/components/schemas/EvaluatorDefinition",
-            "description": "The evaluator's functional definition. Current evaluator state is mutable under ETag concurrency; the definition is immutable after publication in an EvaluatorVersion."
+            "description": "Definition of the evaluator"
           },
           "generation_artifacts": {
             "$ref": "#/components/schemas/EvaluatorGenerationArtifacts",
-            "description": "Provenance artifacts from the generation pipeline. Read-only; present on generated current state and copied into published versions. Each artifact resolves to a versioned Foundry Dataset.",
+            "description": "Provenance artifacts from the generation pipeline. Read-only; present only on evaluator versions created via an EvaluatorGenerationJob. Each artifact resolves to a versioned Foundry Dataset.",
             "readOnly": true
           },
           "generation_job_id": {
             "type": "string",
-            "description": "Read-only provenance link back to the EvaluatorGenerationJob that produced this content. Absent for manually-authored content.",
+            "description": "Read-only provenance link back to the EvaluatorGenerationJob that produced this version. Present only on evaluator versions created via the generation pipeline; absent for manually-created versions and unaffected by subsequent `PATCH` calls.",
             "readOnly": true
           },
           "warnings": {
@@ -47669,7 +47364,7 @@
             "items": {
               "$ref": "#/components/schemas/GenerationWarningType"
             },
-            "description": "Categories of warnings surfaced on generated evaluator content. Present when the paired generation job produced non-empty warnings. Follow `generation_job_id` to fetch detailed warning payloads.",
+            "description": "Categories of warnings surfaced on this generated evaluator version. Present only on versions created via an EvaluatorGenerationJob when the paired job produced non-empty warnings. Absent (treat as no warnings) when the version is not from generation, when the paired job was clean, or when a subsequent `PATCH` to `definition` cleared the paired job's advisories. Follow `generation_job_id` to fetch the detailed warning payloads.",
             "readOnly": true
           },
           "created_by": {
@@ -47687,41 +47382,138 @@
             "description": "Last modified date/time of the evaluator",
             "readOnly": true
           },
+          "id": {
+            "type": "string",
+            "description": "Asset ID, a unique identifier for the asset",
+            "readOnly": true
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the resource",
+            "readOnly": true
+          },
+          "version": {
+            "type": "string",
+            "description": "The version of the resource",
+            "readOnly": true
+          }
+        },
+        "description": "Evaluator Definition"
+      },
+      "EvaluatorVersionCreate": {
+        "type": "object",
+        "required": [
+          "evaluator_type",
+          "categories",
+          "definition"
+        ],
+        "properties": {
+          "display_name": {
+            "type": "string",
+            "description": "Display Name for evaluator. It helps to find the evaluator easily in AI Foundry. It does not need to be unique."
+          },
+          "metadata": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "type": "string"
+            },
+            "description": "Metadata about the evaluator"
+          },
+          "evaluator_type": {
+            "$ref": "#/components/schemas/EvaluatorType",
+            "description": "The type of the evaluator"
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvaluatorCategory"
+            },
+            "description": "The categories of the evaluator"
+          },
+          "supported_evaluation_levels": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvaluationLevel"
+            },
+            "description": "Evaluation levels this evaluator supports (e.g., `turn`, `conversation`). When omitted on create, the service defaults to `[\"turn\"]`. On update, omitting this field leaves it unchanged; an empty list is rejected. Custom code-based evaluators support only `turn`; custom prompt-based evaluators support exactly one level (`turn` or `conversation`).",
+            "default": [
+              "turn"
+            ]
+          },
+          "definition": {
+            "$ref": "#/components/schemas/EvaluatorDefinition",
+            "description": "Definition of the evaluator"
+          },
           "description": {
             "type": "string",
-            "description": "The evaluator catalog description."
+            "description": "The asset description text."
           },
           "tags": {
             "type": "object",
             "unevaluatedProperties": {
               "type": "string"
             },
-            "description": "Evaluator catalog tags."
-          },
-          "id": {
-            "type": "string",
-            "description": "The published evaluator version resource identifier.",
-            "readOnly": true
-          },
-          "name": {
-            "type": "string",
-            "description": "The evaluator name.",
-            "readOnly": true
-          },
-          "version": {
-            "$ref": "#/components/schemas/EvaluatorVersionNumber",
-            "description": "The immutable published version number.",
-            "readOnly": true
+            "description": "Tag dictionary. Tags can be added, removed, and updated."
           }
         },
-        "description": "An immutable published evaluator version."
+        "description": "Evaluator Definition"
       },
       "EvaluatorVersionNumber": {
         "type": "string",
         "minLength": 1,
         "maxLength": 10,
         "pattern": "^[1-9][0-9]*$",
-        "description": "A published evaluator version number represented as a decimal integer string."
+        "description": "A published evaluator version number represented as a decimal integer string.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
+      "EvaluatorVersionUpdate": {
+        "type": "object",
+        "properties": {
+          "display_name": {
+            "type": "string",
+            "description": "Display Name for evaluator. It helps to find the evaluator easily in AI Foundry. It does not need to be unique."
+          },
+          "metadata": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "type": "string"
+            },
+            "description": "Metadata about the evaluator"
+          },
+          "categories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvaluatorCategory"
+            },
+            "description": "The categories of the evaluator"
+          },
+          "supported_evaluation_levels": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvaluationLevel"
+            },
+            "description": "Evaluation levels this evaluator supports (e.g., `turn`, `conversation`). When omitted on create, the service defaults to `[\"turn\"]`. On update, omitting this field leaves it unchanged; an empty list is rejected. Custom code-based evaluators support only `turn`; custom prompt-based evaluators support exactly one level (`turn` or `conversation`).",
+            "default": [
+              "turn"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "description": "The asset description text."
+          },
+          "tags": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "type": "string"
+            },
+            "description": "Tag dictionary. Tags can be added, removed, and updated."
+          }
+        },
+        "description": "Evaluator Definition"
       },
       "ExternalAgentDefinition": {
         "type": "object",
@@ -90963,15 +90755,15 @@
             "items": {
               "$ref": "#/components/schemas/EvaluatorVersion"
             },
-            "description": "The requested list of items."
+            "description": "The EvaluatorVersion items on this page"
           },
           "nextLink": {
             "type": "string",
             "format": "uri",
-            "description": "The URL to fetch the next page of results, or absent if there are no additional pages."
+            "description": "The link to the next page of items"
           }
         },
-        "description": "A page of evaluator versions preserving the established JSON and SDK property names."
+        "description": "Paged collection of EvaluatorVersion items"
       },
       "PagedIndex": {
         "type": "object",
@@ -93364,7 +93156,12 @@
         "minLength": 64,
         "maxLength": 64,
         "pattern": "^[0-9a-f]{64}$",
-        "description": "A lowercase 64-character SHA-256 hexadecimal digest."
+        "description": "A lowercase 64-character SHA-256 hexadecimal digest.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "SharepointGroundingToolCall": {
         "type": "object",
@@ -96005,7 +95802,7 @@
           ]
         }
       },
-      "TestingCriterionEvaluator": {
+      "TestingCriterionAzureAIEvaluator": {
         "type": "object",
         "required": [
           "type",
@@ -96030,7 +95827,7 @@
           },
           "evaluator_version": {
             "type": "string",
-            "description": "The evaluator version. The latest published version is used when omitted or empty, preserving the existing evaluator-reference behavior."
+            "description": "The version of the evaluator. Latest version if not specified."
           },
           "initialization_parameters": {
             "type": "object",
@@ -96043,14 +95840,6 @@
               "type": "string"
             },
             "description": "Maps the evaluator's input names to fields in the evaluation data. Use\n`{{item.<field>}}` to reference a field from a dataset item and\n`{{sample.<field>}}` to reference output generated by a model or agent\ntarget. Field names are case-sensitive.\n\nThis property can be omitted when the evaluator uses standard dataset\ncolumns with matching names. Provide a mapping when dataset columns use\ndifferent names, when a target generates the response at run time, or when\nthe evaluator consumes structured target output."
-          },
-          "registry_name": {
-            "type": "string",
-            "description": "Optional registry containing the evaluator. Omit for a project evaluator or the default built-in evaluator registry."
-          },
-          "etag": {
-            "type": "string",
-            "description": "An explicit opt-in to binding mutable current evaluator state by its ETag. Omit `evaluator_version` when supplying this field. The service verifies and snapshots the current representation when accepting the evaluation. Without either field, the existing latest-published-version behavior is retained."
           }
         },
         "description": "An Azure AI evaluator grader used as a testing criterion.\n\nSee [rubric-based evaluators](https://learn.microsoft.com/en-us/azure/foundry/concepts/evaluation-evaluators/rubric-evaluators).",
@@ -97611,7 +97400,12 @@
             "$ref": "#/components/schemas/EvaluatorLineageDiagnosticBase"
           }
         ],
-        "description": "A diagnostic change recording the creation of an evaluator version."
+        "description": "A diagnostic change recording the creation of an evaluator version.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
       },
       "VersionIndicator": {
         "type": "object",

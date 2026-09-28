@@ -78,7 +78,7 @@ model GraderAzureAIEvaluator {
    */
   evaluator_name: string;
 
-  /** The evaluator version. The latest published version is used when omitted or empty, preserving the existing evaluator-reference behavior. */
+  /** The version of the evaluator. Latest version if not specified. */
   evaluator_version?: string;
 
   /**
@@ -112,14 +112,8 @@ model GraderAzureAIEvaluator {
  * See [rubric-based evaluators](https://learn.microsoft.com/en-us/azure/foundry/concepts/evaluation-evaluators/rubric-evaluators).
  */
 @summary("AzureAIEvaluatorGrader")
-model TestingCriterionEvaluator {
+model TestingCriterionAzureAIEvaluator {
   ...GraderAzureAIEvaluator;
-
-  /** Optional registry containing the evaluator. Omit for a project evaluator or the default built-in evaluator registry. */
-  registry_name?: string;
-
-  /** An explicit opt-in to binding mutable current evaluator state by its ETag. Omit `evaluator_version` when supplying this field. The service verifies and snapshots the current representation when accepting the evaluation. Without either field, the existing latest-published-version behavior is retained. */
-  etag?: string;
 }
 
 /** Grader inspect_ai definition for inspect_ai benchmark evaluators. */
@@ -244,7 +238,7 @@ model AzureAIBenchmarkDataSourceConfig extends AzureAIDataSourceConfig {
     | OpenAI.EvalGraderTextSimilarity
     | OpenAI.EvalGraderPython
     | OpenAI.EvalGraderScoreModel
-    | TestingCriterionEvaluator
+    | TestingCriterionAzureAIEvaluator
     | EvalGraderInspectAI)[]
 );
 
@@ -303,7 +297,7 @@ model Eval is OpenAI.Eval {
     | OpenAI.EvalGraderTextSimilarity
     | OpenAI.EvalGraderPython
     | OpenAI.EvalGraderScoreModel
-    | TestingCriterionEvaluator
+    | TestingCriterionAzureAIEvaluator
     | EvalGraderInspectAI)[]
 );
 

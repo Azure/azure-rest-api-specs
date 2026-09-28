@@ -1,13 +1,14 @@
 import "../common/models.tsp";
 import "../common/servicepatterns.tsp";
 import "./models.tsp";
+import "./diagnostics.tsp";
 
 namespace Azure.AI.Projects;
 using Http;
 using OpenAPI;
 using Azure.Core;
 
-alias ListEvaluatorsParameters = {
+alias ListEvaluatorVersionsParameters = {
   #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Auto-suppressed warnings non-applicable rules during import."
   @doc("Filter evaluators by type. Possible values: 'all', 'custom', 'builtin'.")
   @Http.query
@@ -17,14 +18,6 @@ alias ListEvaluatorsParameters = {
   @Http.query
   limit?: int32 = 20;
 };
-
-alias EvaluatorOkResponse = Azure.Core.Foundations.ResourceOkResponse<Evaluator> &
-  EtagResponseEnvelope;
-
-alias EvaluatorCreatedOrOkResponse =
-  | (Azure.Core.Foundations.ResourceCreatedResponse<Evaluator> &
-      EtagResponseEnvelope)
-  | EvaluatorOkResponse;
 
 alias ListEvaluatorDiagnosticsParameters = {
   ...OmitProperties<CommonPageQueryParameters, "order" | "limit">;
@@ -65,116 +58,21 @@ alias ListEvaluatorDiagnosticsParameters = {
 
 @tag("Evaluators")
 interface Evaluators {
-  /** Creates the unnumbered current evaluator, or replaces it when the name already exists. Existing current state requires a matching `If-Match` ETag. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The mutable current evaluator uses an explicit route and scoped conditional headers while published versions remain immutable."
-  @summary("Create or update the current evaluator")
-  @route("/evaluators/{name}")
-  @put
-  createOrUpdate is FoundryDataPlaneOperation<
-    {
-      @doc("The evaluator name.")
-      @path
-      name: string;
-
-      ...ConditionalRequestHeaders;
-
-      @doc("The complete mutable evaluator state.")
-      @bodyRoot
-      evaluator: Evaluator;
-    },
-    EvaluatorCreatedOrOkResponse
-  >;
-
-  /** Returns the unnumbered current evaluator and its ETag. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The mutable current evaluator uses an explicit route and scoped conditional headers while published versions remain immutable."
-  @summary("Get the current evaluator")
-  @route("/evaluators/{name}")
-  @get
-  get is FoundryDataPlaneOperation<
-    {
-      @doc("The evaluator name.")
-      @path
-      name: string;
-
-      ...ConditionalRequestHeaders;
-    },
-    EvaluatorOkResponse
-  >;
-
-  /** Removes the current evaluator and all of its published versions. A matching ETag is required when current state exists. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The mutable current evaluator uses an explicit route and scoped conditional headers while published versions remain immutable."
-  @summary("Delete an evaluator")
-  @route("/evaluators/{name}")
-  @delete
-  delete is FoundryDataPlaneOperation<
-    {
-      @doc("The evaluator name.")
-      @path
-      name: string;
-
-      ...ConditionalRequestHeaders;
-    },
-    Http.NoContentResponse
-  >;
-
-  /** Lists the latest published evaluator versions, preserving the existing collection contract. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The existing evaluator collection lists latest published versions."
-  @summary("List latest evaluator versions")
-  @route("/evaluators")
-  @get
-  @list
-  list is FoundryDataPlaneOperation<
-    ListEvaluatorsParameters,
-    PagedEvaluatorVersion
-  >;
-
-  /** Publishes the ETag-matched current evaluator as the next immutable numbered version. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Publishing is a service-specific resource action."
-  @summary("Publish the current evaluator")
-  @route("/evaluators/{name}:publish_version")
-  @post
-  publishVersion is FoundryDataPlaneOperation<
-    {
-      @doc("The evaluator name.")
-      @path
-      name: string;
-
-      ...ConditionalRequestHeaders;
-      ...WithOperationId;
-    },
-    Azure.Core.Foundations.ResourceCreatedResponse<EvaluatorVersion>
-  >;
-
-  /** Returns immutable published versions for the specified evaluator. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Published evaluator versions use an evaluator-scoped explicit route."
-  @summary("List published evaluator versions")
-  @route("/evaluators/{name}/versions")
-  @get
-  @list
-  listVersions is FoundryDataPlaneOperation<
-    {
-      @doc("The evaluator name.")
-      @path
-      name: string;
-
-      ...ListEvaluatorsParameters;
-    },
-    PagedEvaluatorVersion
-  >;
-
   /**
    * Returns immutable publication lineage for the specified evaluator.
    *
    * Time, evaluator-version, dimension, and type filters are intersected.
-   * Diagnostics are populated when a numbered evaluator version is published.
-   * Editing mutable current state does not publish lineage.
+   * Returns recorded changes from completed evaluator version writes.
+   * Historical backfill and diagnostic calculation jobs are not included.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Evaluator diagnostics are immutable completed resources with custom evaluator-scoped filtering."
   @summary("List evaluator diagnostics")
   @route("/evaluators/{name}/diagnostics")
   @get
   @list
-  listDiagnostics is FoundryDataPlaneOperation<
+  @extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
+  listDiagnostics is FoundryDataPlaneRequiredPreviewOperation<
+    FoundryFeaturesOptInKeys.evaluations_v1_preview,
     {
       @doc("The evaluator name.")
       @path
@@ -185,91 +83,116 @@ interface Evaluators {
     CompletedEvaluatorDiagnosticsPage
   >;
 
-  /** Returns one completed evaluator diagnostic by its stable identifier. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Evaluator diagnostics use an evaluator-scoped immutable read route."
-  @summary("Get an evaluator diagnostic")
-  @route("/evaluators/{name}/diagnostics/{diagnostic_id}")
-  @get
-  getDiagnostic is FoundryDataPlaneOperation<
-    {
-      @doc("The evaluator name.")
-      @path
-      name: string;
-
-      @doc("The stable completed diagnostic identifier.")
-      @path
-      diagnostic_id: string;
-    },
-    EvaluatorDiagnostic
+  // GET /evaluators/{name}/versions
+  /** Returns the available versions for the specified evaluator. */
+  #suppress "@azure-tools/typespec-azure-core/verb-conflict" "Resource action used as a building block."
+  @summary("List evaluator versions")
+  @Rest.action("versions")
+  @Rest.actionSeparator("/")
+  @Http.get
+  @list
+  listVersions is FoundryStandardResourceOperations.ResourceAction<
+    EvaluatorVersion,
+    ListEvaluatorVersionsParameters,
+    Azure.Core.Page<EvaluatorVersion>
   >;
 
-  /** Retrieves the specified immutable published evaluator version. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Published evaluator versions use an evaluator-scoped explicit route."
-  @summary("Get a published evaluator version")
-  @route("/evaluators/{name}/versions/{version}")
-  @get
-  getVersion is FoundryDataPlaneOperation<
-    {
-      @doc("The evaluator name.")
-      @path
-      name: string;
+  // GET /evaluators
+  /** Lists the latest version of each evaluator. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @summary("List latest evaluator versions")
+  @Rest.listsResource(EvaluatorVersion)
+  listLatestVersions is FoundryResourceList<
+    EvaluatorVersion,
+    ListEvaluatorVersionsParameters,
+    Azure.Core.Page<EvaluatorVersion>
+  >;
 
-      @doc("The immutable published evaluator version.")
-      @path
-      version: EvaluatorVersionNumber;
+  // GET /evaluators/{name}/versions/{version}
+  /** Retrieves the specified evaluator version, returning 404 if it does not exist. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @summary("Get an evaluator version")
+  getVersion is FoundryResourceOperation<
+    EvaluatorVersion,
+    {
+      @doc(
+        "The specific version id of the {name} to retrieve.",
+        EvaluatorVersion
+      )
+      @Rest.segment("versions")
+      @Http.path
+      version: string;
     },
     Azure.Core.Foundations.ResourceOkResponse<EvaluatorVersion>
   >;
 
-  /** Removes the specified immutable published version without changing current state. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Published evaluator versions use an evaluator-scoped explicit route."
-  @summary("Delete a published evaluator version")
-  @route("/evaluators/{name}/versions/{version}")
-  @delete
-  deleteVersion is FoundryDataPlaneOperation<
+  // DELETE /evaluators/{name}/versions/{version}
+  /** Removes the specified evaluator version. Returns 204 whether the version existed or not. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @summary("Delete an evaluator version")
+  @Http.delete
+  deleteVersion is FoundryResourceOperation<
+    EvaluatorVersion,
     {
-      @doc("The evaluator name.")
-      @path
-      name: string;
-
-      @doc("The immutable published evaluator version.")
-      @path
-      version: EvaluatorVersionNumber;
+      @doc("The version of the {name} to delete.", EvaluatorVersion)
+      @Rest.segment("versions")
+      @Http.path
+      version: string;
     },
     Http.NoContentResponse
   >;
 
-  /** Atomically replaces current evaluator state and publishes that exact state as the next immutable numbered version. */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Direct version creation atomically updates current state and publishes a service-numbered version."
-  @summary("Create a published evaluator version")
-  @route("/evaluators/{name}/versions")
-  @post
-  createVersion is FoundryDataPlaneOperation<
+  // POST /evaluators/{evaluatorName}/versions
+  /** Creates a new evaluator version with an auto-incremented version identifier. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @summary("Create an evaluator version")
+  @Rest.segment("versions")
+  @Http.post
+  createVersion is FoundryResourceOperation<
+    EvaluatorVersion,
     {
-      @doc("The evaluator name.")
-      @path
-      name: string;
-
-      ...ConditionalRequestHeaders;
-      ...WithOperationId;
-
-      @doc("The complete evaluator state to make current and publish.")
-      @bodyRoot
-      evaluator: Evaluator;
+      @Http.bodyRoot
+      evaluator_version: EvaluatorVersion;
     },
     Azure.Core.Foundations.ResourceCreatedResponse<EvaluatorVersion>
   >;
 
-  /** Initiates or retrieves a pending upload for mutable current evaluator state. Publishing freezes the resulting immutable artifact identity. */
+  // PATCH /evaluators/{evaluatorName}/versions/{version}
+  /** Updates the specified evaluator version in place. */
+  #suppress "@azure-tools/typespec-azure-core/no-response-body"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @summary("Start a current evaluator pending upload")
+  @summary("Update an evaluator version")
+  @Http.patch(#{ implicitOptionality: true })
+  updateVersion is FoundryResourceOperation<
+    EvaluatorVersion,
+    {
+      @doc("The version of the {name} to update.", EvaluatorVersion)
+      @Rest.segment("versions")
+      @Http.path
+      version: string;
+
+      @doc("Evaluator resource")
+      @Http.bodyRoot
+      evaluator_version: EvaluatorVersion;
+    },
+    Azure.Core.Foundations.ResourceOkResponse<EvaluatorVersion>
+  >;
+
+  /** Initiates a new pending upload or retrieves an existing one for the specified evaluator version. */
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @summary("Start a pending upload")
   @post
-  @route("/evaluators/{name}/startPendingUpload")
+  @route("/evaluators/{name}/versions/{version}/startPendingUpload")
   startPendingUpload is FoundryDataPlaneOperation<
     {
       /** The name path parameter. */
       @path
       name: string;
+
+      @doc("The specific version id of the EvaluatorVersion to operate on.")
+      @Rest.segment("versions")
+      @Http.path
+      version: string;
 
       @doc("The pending upload request parameters")
       @Http.bodyRoot
@@ -278,12 +201,12 @@ interface Evaluators {
     PendingUploadResponse
   >;
 
-  /** Retrieves SAS credentials for a pending current evaluator upload. Publishing freezes the resulting immutable artifact identity. */
+  /** Retrieves SAS credentials for accessing the storage account associated with the specified evaluator version. */
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @summary("Get current evaluator credentials")
+  @summary("Get evaluator credentials")
   @post
-  @route("/evaluators/{name}/credentials")
+  @route("/evaluators/{name}/versions/{version}/credentials")
   getCredentials is FoundryDataPlaneOperation<
     {
       /** The name path parameter. */
@@ -293,6 +216,11 @@ interface Evaluators {
       @doc("The credential request parameters")
       @Http.bodyRoot
       credential_request: EvaluatorCredentialRequest;
+
+      @doc("The specific version id of the EvaluatorVersion to operate on.")
+      @Rest.segment("versions")
+      @Http.path
+      version: string;
     },
     AssetCredentialResponse
   >;
