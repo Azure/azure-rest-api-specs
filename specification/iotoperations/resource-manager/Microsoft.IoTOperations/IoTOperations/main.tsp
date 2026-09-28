@@ -18,12 +18,10 @@ import "./models/dataflows/dataflowGraphs.tsp";
 import "./models/registryEndpoints/registryEndpoint.tsp";
 import "./models/akri/connectorTemplate.tsp";
 import "./models/akri/connector.tsp";
-import "./models/akri/discoveryHandler.tsp";
 import "./models/akri/service.tsp";
 import "./models/akri/aioApplicationDefinition.tsp";
 import "./models/akri/aioConnectorConfiguration.tsp";
 import "./models/akri/aioApplicationConfiguration.tsp";
-import "./models/diagnostics/diagnostic.tsp";
 import "./models/ai/mcpServerConnection.tsp";
 import "./models/ai/mcpAuthorizationPolicy.tsp";
 import "./client.tsp";
@@ -191,16 +189,6 @@ interface AkriConnector {
   listByTemplate is ArmResourceListByParent<AkriConnectorResource>;
 }
 
-// /instance/akriDiscoveryHandlers resource Operations
-@armResourceOperations
-@added(Versions.`2026-11-01-preview`)
-interface AkriDiscoveryHandler {
-  get is ArmResourceRead<AkriDiscoveryHandlerResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<AkriDiscoveryHandlerResource>;
-  delete is ArmResourceDeleteWithoutOkAsync<AkriDiscoveryHandlerResource>;
-  listByInstanceResource is ArmResourceListByParent<AkriDiscoveryHandlerResource>;
-}
-
 // /instance/akriService resource Operations
 @armResourceOperations
 @added(Versions.`2026-03-01`)
@@ -289,14 +277,4 @@ interface AioApplicationConfiguration {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<AioApplicationConfigurationResource>;
   delete is ArmResourceDeleteWithoutOkAsync<AioApplicationConfigurationResource>;
   listByAioApplicationDefinitionResource is ArmResourceListByParent<AioApplicationConfigurationResource>;
-}
-
-// /instance/diagnostics resource Operations
-@armResourceOperations
-@added(Versions.`2026-11-01-preview`)
-interface Diagnostic {
-  get is ArmResourceRead<DiagnosticResource>;
-  createOrUpdate is ArmResourceCreateOrUpdateAsync<DiagnosticResource>;
-  delete is ArmResourceDeleteWithoutOkAsync<DiagnosticResource>;
-  listByInstanceResource is ArmResourceListByParent<DiagnosticResource>;
 }
