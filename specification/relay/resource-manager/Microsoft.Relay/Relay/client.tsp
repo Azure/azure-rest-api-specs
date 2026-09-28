@@ -69,6 +69,16 @@ using Microsoft.Relay;
 @@clientName(RelayClusterSkuUpdate, "RelayClusterSkuPatch", "csharp");
 @@clientName(RelayClusterProperties.zoneRedundant, "IsZoneRedundant", "csharp");
 @@clientName(TlsVersion, "RelayTlsVersion", "csharp");
+@@clientName(
+  TlsVersion.`1.2`,
+  Azure.ClientGenerator.Core.exact("Tls1_2"),
+  "csharp"
+);
+@@clientName(
+  TlsVersion.`1.3`,
+  Azure.ClientGenerator.Core.exact("Tls1_3"),
+  "csharp"
+);
 
 // Acronym mapping: Ip -> IP (directive + acronym-mapping from autorest.md)
 @@clientName(NWRuleSetIpRules, "RelayNetworkRuleSetIPRule", "csharp");

@@ -8,33 +8,24 @@
   },
   "scripts": {
     "build": "tsc --noEmit",
-    "format": "prettier . --ignore-path ../.prettierignore --write",
-    "format:check": "prettier . --ignore-path ../.prettierignore --check",
-    "format:check:ci": "prettier . --ignore-path ../.prettierignore --check --log-level debug",
+    "format": "oxfmt . --write",
+    "format:check": "oxfmt . --check",
     "test": "vitest --run",
     "test:ci": "vitest run --coverage --reporter=verbose"
   },
   "dependencies": {
-    "@actions/core": "^3.0.0",
-    "@azure-tools/openapi-tools-common": "^1.2.2",
+    "@actions/core": "catalog:",
+    "@azure-tools/openapi-tools-common": "catalog:",
     "@azure-tools/specs-shared": "workspace:*",
-    "@azure/openapi-markdown": "0.9.4",
-    "@octokit/rest": "^22.0.0",
-    "commonmark": "0.31.2",
-    "glob": "^13.0.0",
+    "@azure/openapi-markdown": "catalog:",
+    "@octokit/rest": "catalog:",
+    "commonmark": "catalog:",
     "js-yaml": "catalog:",
-    "lodash": "^4.17.20",
     "simple-git": "catalog:"
   },
   "devDependencies": {
-    "@types/commonmark": "0.27.10",
-    "@types/lodash": "^4.14.161",
+    "@types/commonmark": "catalog:",
     "@types/node": "catalog:",
-    "@vitest/coverage-v8": "catalog:",
-    "prettier": "catalog:",
-    "prettier-plugin-organize-imports": "catalog:",
-    "typescript": "catalog:",
-    "vitest": "catalog:",
     "@types/js-yaml": "catalog:"
   },
   "engines": {

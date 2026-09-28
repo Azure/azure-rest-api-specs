@@ -55,12 +55,12 @@ jobs:
             .github
 
       - name: "Set Status"
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9.0.0
         id: set-status
         with:
           script: |
             const { default: setStatus } =
-                await import('${{ github.workspace }}/.github/workflows/src/set-status.js');
+                await import('${{ github.workspace }}/.github/workflows/src/set-status.ts');
             return await setStatus(
               { github, context, core },
               '${{ inputs.monitored_workflow_name }}',
