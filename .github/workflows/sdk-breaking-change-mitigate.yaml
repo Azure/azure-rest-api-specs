@@ -170,14 +170,17 @@ jobs:
           set -euo pipefail
           git add --intent-to-add --all
           changed_code="$(git diff --no-ext-diff --no-color)"
-          max_snippet_length=12000
-          if [[ ${#changed_code} -gt $max_snippet_length ]]; then
-            changed_code="${changed_code:0:$max_snippet_length}"$'\n... diff truncated.'
-          fi
+
           jq --arg customizationCode "$changed_code" \
             '.customizationCode = $customizationCode' \
             "$MITIGATION_RESULT_PATH" > "$MITIGATION_RESULT_PATH.tmp"
           mv "$MITIGATION_RESULT_PATH.tmp" "$MITIGATION_RESULT_PATH"
+
+          # Keep the full diff in the artifact; truncate it only when surfaced in comments or summaries.
+          max_snippet_length=12000
+          if [[ ${#changed_code} -gt $max_snippet_length ]]; then
+            changed_code="${changed_code:0:$max_snippet_length}"$'\n... diff truncated.'
+          fi
           delimiter="changed_code_${RANDOM}_${RANDOM}"
           {
             echo "changed-code<<$delimiter"

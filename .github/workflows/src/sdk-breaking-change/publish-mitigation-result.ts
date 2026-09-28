@@ -1,6 +1,7 @@
 import type { AsyncFunctionArguments } from "@actions/github-script";
 import { readFile } from "node:fs/promises";
 import { publishResultInComment } from "./publish-result-in-comment.ts";
+import { escapeMarkdown } from "../../../shared/src/markdown.ts";
 
 type MitigationResult = {
   prNumber: number;
@@ -21,15 +22,15 @@ type MitigationResult = {
   }>;
 };
 
-function escapeTableCell(value: unknown, fallback = "-"): string {
-  const text =
-    typeof value === "string" || typeof value === "number" || typeof value === "boolean"
-      ? String(value).trim()
-      : "";
-  return text
-    ? text.replaceAll("\r", "").replaceAll("\n", "<br>").replaceAll("|", "\\|")
-    : fallback;
-}
+// function escapeTableCell(value: unknown, fallback = "-"): string {
+//   const text =
+//     typeof value === "string" || typeof value === "number" || typeof value === "boolean"
+//       ? String(value).trim()
+//       : "";
+//   return text
+//     ? text.replaceAll("\r", "").replaceAll("\n", "<br>").replaceAll("|", "\\|")
+//     : fallback;
+// }
 
 export async function buildMitigationReport({
   github,
@@ -62,13 +63,13 @@ export async function buildMitigationReport({
       .filter((change) => change.isResolved)
       .map(
         (change) =>
-          `| ${escapeTableCell(change.breakingChange)} | ${escapeTableCell(change.suggestedFix)} | ${escapeTableCell(change.typespecChangesSummary?.[0])} |`,
+          `| ${escapeMarkdown(change.breakingChange)} | ${escapeMarkdown(change.suggestedFix)} | ${escapeMarkdown(change.typespecChangesSummary?.[0] as string)} |`,
       );
     const unresolvedChanges = project.breakingChanges
       .filter((change) => !change.isResolved)
       .map(
         (change) =>
-          `| ${escapeTableCell(change.breakingChange)} | ${escapeTableCell(change.suggestedFix)} |`,
+          `| ${escapeMarkdown(change.breakingChange)} | ${escapeMarkdown(change.suggestedFix)} |`,
       );
     return [
       `**TypeSpec project:** ${project.typespecProject}`,

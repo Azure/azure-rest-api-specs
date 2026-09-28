@@ -1,15 +1,14 @@
-import { EventEmitter } from "node:events";
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
-import { delimiter, join } from "node:path";
-import { PassThrough } from "node:stream";
+import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import type { ExecFileOptions, ExecResult } from "../../../shared/src/exec.ts";
 
-const { spawnMock } = vi.hoisted(() => ({
-  spawnMock:
-    vi.fn<(command: string, args: string[], options: { env: NodeJS.ProcessEnv }) => unknown>(),
+const { execFileMock } = vi.hoisted(() => ({
+  execFileMock:
+    vi.fn<(file: string, args?: string[], options?: ExecFileOptions) => Promise<ExecResult>>(),
 }));
 
-vi.mock("cross-spawn", () => ({ default: spawnMock }));
+vi.mock("../../../shared/src/exec.ts", () => ({ execFile: execFileMock }));
 
 import { mitigateSdkBreakingChanges } from "../../src/sdk-breaking-change/mitigate-sdk-breaking-changes.ts";
 
@@ -58,24 +57,14 @@ beforeEach(async () => {
     }),
   );
 
-  spawnMock.mockImplementation(() => {
-    const child = Object.assign(new EventEmitter(), {
-      stdout: new PassThrough(),
-      stderr: new PassThrough(),
-    });
-    queueMicrotask(() => {
-      child.stdout.end(
-        `${JSON.stringify({
-          result: {
-            success: true,
-            typeSpecChangesSummary: ["Added client customization"],
-          },
-        })}\n`,
-      );
-      child.stderr.end();
-      child.emit("close", 0, null);
-    });
-    return child;
+  execFileMock.mockResolvedValue({
+    stdout: `${JSON.stringify({
+      result: {
+        success: true,
+        typeSpecChangesSummary: ["Added client customization"],
+      },
+    })}\n`,
+    stderr: "",
   });
 });
 
@@ -107,10 +96,10 @@ describe("mitigateSdkBreakingChanges", () => {
         typespecChangesSummary: ["Added client customization"],
       },
     ]);
-    const [command, args, options] = spawnMock.mock.calls[0];
-    expect(command).toBe("azsdk");
+    const [command, args, options] = execFileMock.mock.calls[0];
+    expect(command).toBe(join(temporaryDirectory, "azsdk", "azsdk"));
     expect(args).toContain("customized-update");
-    expect(args[args.indexOf("--customization-request") + 1]).toContain("Model changed");
-    expect(options.env.PATH).toContain(`${join(temporaryDirectory, "azsdk")}${delimiter}`);
+    expect(args?.[(args?.indexOf("--customization-request") ?? -2) + 1]).toContain("Model changed");
+    expect(options).toBeUndefined();
   });
 });

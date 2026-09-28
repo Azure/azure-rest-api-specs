@@ -11,6 +11,7 @@ const execFileImpl = promisify(child_process.execFile);
 export interface ExecOptions {
   /** Current working directory. Defaults to process.cwd(). */
   cwd?: string;
+  env?: NodeJS.ProcessEnv;
   logger?: import("./logger.ts").ILogger;
   /** Maximum stdout or stderr size in bytes. Defaults to 16 MiB. */
   maxBuffer?: number;
@@ -56,6 +57,7 @@ export async function execFile(
 ): Promise<ExecResult> {
   const {
     cwd,
+    env,
     logger,
     timeout,
     // Node default is 1024 * 1024, which is too small for some git commands returning many entities or large file content.
@@ -69,6 +71,7 @@ export async function execFile(
     // execFile(file, args) is more secure than exec(cmd), since the latter is vulnerable to shell injection
     const result = await execFileImpl(file, args, {
       cwd,
+      env,
       maxBuffer,
       timeout,
     });

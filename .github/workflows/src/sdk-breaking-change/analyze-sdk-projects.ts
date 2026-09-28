@@ -1,6 +1,7 @@
 import { appendFile, mkdir, readdir, realpath, rename, stat, writeFile } from "node:fs/promises";
 import { basename, dirname, isAbsolute, join, relative, sep } from "node:path";
-import { runCommand } from "./run-command.ts";
+import { execFile } from "../../../shared/src/exec.ts";
+// import { runCommand } from "./run-command.ts";
 
 type ProjectResult = {
   typespecProjectPath: string;
@@ -82,22 +83,24 @@ export async function analyzeSdkProjects({
       const generationResult = join(runnerTemp, "sdk-generation-result.json");
       const generationStartedAt = Date.now();
 
-      await runCommand({
-        command: "azsdk",
-        args: [
-          "package",
-          "generate",
-          "--local-sdk-repo-path",
-          localSdkRepositoryPath,
-          "--tsp-config-path",
-          configPath,
-          "--output",
-          "json",
-        ],
-        logPath: analysisLog,
-        outputPath: generationResult,
-      });
-
+      /* Generate the SDK package */
+      const { stdout } =await execFile("azsdk", ["package", "generate", "--local-sdk-repo-path", localSdkRepositoryPath, "--tsp-config-path", configPath, "--output", "json"]);
+      await writeFile(generationResult, stdout);
+    //   await runCommand(
+    //     command: "azsdk",
+    //     args: [
+    //       "package",
+    //       "generate",
+    //       "--local-sdk-repo-path",
+    //       localSdkRepositoryPath,
+    //       "--tsp-config-path",
+    //       configPath,
+    //       "--output",
+    //       "json",
+    //     ],
+    //     logPath: analysisLog,
+    //     outputPath: generationResult,
+    //   });
       const generatedConfigs = await findGeneratedConfigs(
         localSdkRepositoryPath,
         generationStartedAt,
@@ -121,27 +124,42 @@ export async function analyzeSdkProjects({
       await mkdir(projectResults, { recursive: true });
       await rename(generationResult, join(projectResults, "generate.json"));
 
-      await runCommand({
-        command: "azsdk",
-        args: ["package", "build", "--package-path", packagePath, "--output", "json"],
-        logPath: analysisLog,
-        outputPath: join(projectResults, "build.json"),
-      });
-      await runCommand({
-        command: "azsdk",
-        args: [
-          "package",
-          "detect-breaking-change",
-          "--package-path",
-          packagePath,
-          "--tsp-config-path",
-          configPath,
-          "--output",
-          "json",
-        ],
-        logPath: analysisLog,
-        outputPath: join(projectResults, "breaking-changes.json"),
-      });
+      /* Build the SDK package */
+      const { stdout: buildStdout } = await execFile("azsdk", ["package", "build", "--package-path", packagePath, "--output", "json"]);
+      await writeFile(join(projectResults, "build.json"), buildStdout);
+    //   await runCommand({
+    //     command: "azsdk",
+    //     args: ["package", "build", "--package-path", packagePath, "--output", "json"],
+    //     logPath: analysisLog,
+    //     outputPath: join(projectResults, "build.json"),
+    //   });
+      /* Detect breaking changes */
+      const { stdout: breakingChangesStdout } = await execFile("azsdk", [
+        "package",
+        "detect-breaking-change",
+        "--package-path",
+        packagePath,
+        "--tsp-config-path",
+        configPath,
+        "--output",
+        "json",
+      ]);
+      await writeFile(join(projectResults, "breaking-changes.json"), breakingChangesStdout);
+    //   await runCommand({
+    //     command: "azsdk",
+    //     args: [
+    //       "package",
+    //       "detect-breaking-change",
+    //       "--package-path",
+    //       packagePath,
+    //       "--tsp-config-path",
+    //       configPath,
+    //       "--output",
+    //       "json",
+    //     ],
+    //     logPath: analysisLog,
+    //     outputPath: join(projectResults, "breaking-changes.json"),
+    //   });
 
       projects.push({ typespecProjectPath: typeSpecProjectPath, packageName, resultsPath });
       await writeFile(join(resultsDirectory, "projects.json"), `${JSON.stringify(projects)}\n`);

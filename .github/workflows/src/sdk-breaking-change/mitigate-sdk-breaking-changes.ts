@@ -1,8 +1,8 @@
 import { mkdir, readFile, readdir, realpath, stat, writeFile } from "node:fs/promises";
-import { basename, delimiter, dirname, isAbsolute, join, relative, sep } from "node:path";
+import { basename, dirname, isAbsolute, join, relative, sep } from "node:path";
 import { z } from "zod";
 import { AnalysisResultSchema } from "./create-analysis-result.ts";
-import { runCommand } from "./run-command.ts";
+import { execFile } from "../../../shared/src/exec.ts";
 
 type MitigatedChange = {
   breakingChange: string;
@@ -96,8 +96,6 @@ export async function mitigateSdkBreakingChanges({
   const specificationRepositoryPath = await realpath(unresolvedSpecificationRepositoryPath);
   const specificationRoot = await realpath(join(specificationRepositoryPath, "specification"));
   const sdkRepositoryPath = await realpath(unresolvedSdkRepositoryPath);
-  const mitigationLog = join(runnerTemp, "sdk-breaking-change-mitigation.log");
-  await writeFile(mitigationLog, "");
   await mkdir(dirname(mitigationResultPath), { recursive: true });
 
   const mitigationResult: MitigationResult = {
@@ -150,52 +148,42 @@ export async function mitigateSdkBreakingChanges({
         `Mitigating SDK breaking change ${changeIndex + 1} of ${project.breakingChanges.length} for ${project.typespecProject}.`,
       );
       const commandResultPath = join(runnerTemp, `sdk-mitigation-result-${changeIndex}.json`);
-      const succeeded = await runCommand({
-        command: "azsdk",
-        args: [
-          "typespec",
-          "client",
-          "customized-update",
-          "--tsp-project-path",
-          typeSpecProjectPath,
-          "--package-path",
-          packagePaths[0],
-          "--customization-request",
-          `Resolve this SDK breaking change: ${JSON.stringify({
-            breakingChange: change.breakingChange,
-            category: change.category,
-            suggestedFix: change.suggestedFix,
-          })}`,
-          "--edit-scope",
-          "2",
-          "--output",
-          "json",
-        ],
-        logPath: mitigationLog,
-        outputPath: commandResultPath,
-        env: {
-          ...process.env,
-          PATH: `${azureSdkCliPath}${delimiter}${process.env.PATH ?? ""}`,
-        },
-        throwOnFailure: false,
-      });
+      const { stdout } = await execFile(join(azureSdkCliPath, process.platform === "win32" ? "azsdk.exe" : "azsdk"), [
+        "typespec",
+        "client",
+        "customized-update",
+        "--tsp-project-path",
+        typeSpecProjectPath,
+        "--package-path",
+        packagePaths[0],
+        "--customization-request",
+        `Resolve this SDK breaking change: ${JSON.stringify({
+          breakingChange: change.breakingChange,
+          category: change.category,
+          suggestedFix: change.suggestedFix,
+        })}`,
+        "--edit-scope",
+        "2",
+        "--output",
+        "json",
+      ]);
+      await writeFile(commandResultPath, stdout);
 
       let cleanResult: MitigatedChange = {
         breakingChange: change.breakingChange,
         suggestedFix: change.suggestedFix,
         isResolved: false,
       };
-      if (succeeded) {
-        try {
-          cleanResult = cleanCustomizedUpdateResult(
-            JSON.parse(await readFile(commandResultPath, "utf8")),
-            change.breakingChange,
-            change.suggestedFix,
-          );
-        } catch {
-          cleanResult.isResolved = false;
-        }
+      try {
+        cleanResult = cleanCustomizedUpdateResult(
+          JSON.parse(stdout),
+          change.breakingChange,
+          change.suggestedFix,
+        );
+      } catch {
+        cleanResult.isResolved = false;
       }
+      const succeeded = cleanResult.isResolved;
       mitigationResult.projects[projectIndex].breakingChanges.push(cleanResult);
       await writeResult(mitigationResultPath, mitigationResult);
       if (!succeeded) {
