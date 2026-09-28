@@ -268,6 +268,10 @@ For more information see [cspell configuration](https://cspell.org/configuration
 
 ## `TypeSpec Validation`
 
+For failed batch validation, run the `pnpm install` and per-project `pnpm tsv`
+commands from the final failure summary at the repository root. In GitHub Actions,
+each failed project's error annotation also includes these reproduction instructions.
+
 https://github.com/Azure/azure-rest-api-specs/wiki/TypeSpec-Validation
 
 ## `TypeSpec Suppressions`
