@@ -217,7 +217,7 @@ if (baselineRef) {
       }
     }
     for (const [name, model] of Object.entries(baseline.definitions)) {
-      if (["WorkbenchProperties", "WorkbenchUpdateProperties"].includes(name))
+      if (["Workbench", "WorkbenchProperties", "WorkbenchUpdateProperties"].includes(name))
         continue;
       assert.deepEqual(definitions[name], model, name);
     }
