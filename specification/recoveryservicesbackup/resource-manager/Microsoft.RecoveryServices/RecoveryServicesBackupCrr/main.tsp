@@ -17,6 +17,7 @@ import "./VirtualResource.tsp";
 import "./BackupResourceConfigResource.tsp";
 import "./RecoveryPointResource.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

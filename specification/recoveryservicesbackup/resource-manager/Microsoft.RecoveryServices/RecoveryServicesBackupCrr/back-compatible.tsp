@@ -4,70 +4,6 @@ using Azure.ClientGenerator.Core;
 using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.RecoveryServices;
 
-@@clientLocation(
-  BackupResourceConfigResources.get,
-  "BackupResourceStorageConfigs"
-);
-@@clientLocation(
-  BackupResourceConfigResources.update,
-  "BackupResourceStorageConfigs"
-);
-@@clientName(
-  BackupResourceConfigResources.update::parameters.resource,
-  "parameters"
-);
-@@clientLocation(
-  BackupResourceConfigResources.patch,
-  "BackupResourceStorageConfigs"
-);
-@@clientName(BackupResourceConfigResources.patch, "patch");
-@@clientName(
-  BackupResourceConfigResources.patch::parameters.properties,
-  "parameters"
-);
-
-@@clientLocation(RecoveryPointResources.get, "RecoveryPointsCrr");
-@@clientLocation(RecoveryPointResources.list, "RecoveryPointsCrr");
-@@clientLocation(RecoveryPointGetAccessToken.getAccessToken, "RecoveryPoints");
-@@clientName(
-  RecoveryPointGetAccessToken.getAccessToken::parameters.body,
-  "parameters"
-);
-
-@@clientLocation(
-  BackupUsageSummariesCrrOperationGroup.list,
-  "BackupUsageSummariesCRR"
-);
-
-@@clientLocation(AadPropertiesOperationGroup.get, "AadProperties");
-
-@@clientLocation(
-  CrossRegionRestoreOperationGroup.trigger,
-  "CrossRegionRestore"
-);
-@@clientName(
-  CrossRegionRestoreOperationGroup.trigger::parameters.body,
-  "parameters"
-);
-
-@@clientLocation(BackupCrrJobDetailsOperationGroup.get, "BackupCrrJobDetails");
-@@clientName(
-  BackupCrrJobDetailsOperationGroup.get::parameters.body,
-  "parameters"
-);
-
-@@clientLocation(BackupCrrJobsOperationGroup.list, "BackupCrrJobs");
-@@clientName(BackupCrrJobsOperationGroup.list::parameters.body, "parameters");
-
-@@clientLocation(CrrOperationResultsOperationGroup.get, "CrrOperationResults");
-
-@@clientLocation(CrrOperationStatusOperationGroup.get, "CrrOperationStatus");
-
-@@clientLocation(
-  BackupProtectedItemsCrrOperationGroup.list,
-  "BackupProtectedItemsCrr"
-);
-
 // Preserve original SDK model names after PascalCase spec renames (casing-style).
 // Spec names favor standard TypeSpec casing; these mappings keep SDK/wire-adjacent
 // names identical to the shipped RecoveryServicesBackup contract to avoid SDK breaks.
@@ -153,23 +89,6 @@ using Microsoft.RecoveryServices;
 @@clientName(
   AzureWorkloadSqlPointInTimeRestoreRequest,
   "AzureWorkloadSQLPointInTimeRestoreRequest"
-);
-
-// The local frozen-contract `Resource` and `ErrorDetail` envelopes intentionally
-// mirror shapes that also exist in ARM common-types, which the resource-manager
-// library injects. The client generator rejects the duplicate client name for csharp/java/python
-// (Go/JS/Rust do not enforce it). Scope the rename to those SDK languages only so
-// the autorest emitter is unaffected and the swagger definition keys (`Resource`,
-// `ErrorDetail`) stay identical to the frozen 2023-01-15 contract.
-@@clientName(
-  Microsoft.RecoveryServices.Resource,
-  "CrrResource",
-  "csharp,java,python"
-);
-@@clientName(
-  Microsoft.RecoveryServices.ErrorDetail,
-  "CrrErrorDetail",
-  "csharp,java,python"
 );
 
 // Preserve the frozen nested discriminator hierarchy on the wire and in SDKs.

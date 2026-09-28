@@ -1264,6 +1264,8 @@ model AadProperties {
 /**
  * ARM Resource.
  */
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Faithful migration: the frozen stable 2023-01-15 Resource definition includes x-ms-azure-resource: true. This legacy extension is retained to preserve the generated OpenAPI contract."
+@extension("x-ms-azure-resource", true)
 model Resource {
   /**
    * Resource Id represents the complete path to the resource.
