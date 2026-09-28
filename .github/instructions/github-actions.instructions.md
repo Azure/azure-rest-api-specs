@@ -200,10 +200,10 @@ Composite actions are defined in `.github/actions/*/action.yaml`. Key patterns:
 
 ### Workflow TypeScript
 
-Scripts in `.github/workflows/src/` are typically used with `actions/github-script@v8`:
+Scripts in `.github/workflows/src/` are typically used with `actions/github-script@v9.0.0`:
 
 ```yaml
-- uses: actions/github-script@v8
+- uses: actions/github-script@v9.0.0
   with:
     script: |
       const { myFunction } = await import("${{ github.workspace }}/.github/workflows/src/my-script.ts");
@@ -268,6 +268,11 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
 3. Run `pnpm install` once from the **repo root** — `.github` and `.github/shared` are pnpm workspace packages, so a single install updates the single root `pnpm-lock.yaml` for the whole workspace. Do not edit the lockfile manually.
 4. Include the catalog, affected manifests, and generated lockfile together. Review actual dependency resolutions and isolate impactful upgrades from mechanical catalog conversions.
 5. Run the [required checks](#before-committing) in both directories and check affected engineering consumers.
+
+Keep handwritten `actions/github-script` workflow and composite-action refs pinned to the same
+release as the catalog's `@actions/github-script` development dependency. Update those refs,
+the catalog, the lockfile, and the commit-specific `allowBuilds` entry together. Preserve the
+production-only import checks; generated agentic workflows and their locks are managed separately.
 
 ### Node.js Version Management
 
