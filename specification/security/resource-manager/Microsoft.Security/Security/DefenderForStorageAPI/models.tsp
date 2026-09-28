@@ -1,11 +1,13 @@
 ﻿import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "../Common/main.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Common;
@@ -310,6 +312,13 @@ model ScanSummary {
    * A summary of the scan results of the files that were scanned.
    */
   files?: FilesScanSummary;
+
+  /**
+   * The estimated cost of the scan. Only available for a scan which has terminated.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserves the JSON response property name 'estimatedScanCostUSD' published in 2026-01-01-preview; changing its casing would break compatibility with existing clients."
+  @removed(Versions.v2026_06_01_preview)
+  estimatedScanCostUSD?: float64;
 }
 
 /**
