@@ -73,50 +73,10 @@ union FunctionAppVersionOperationStatus {
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("The runtime configuration of a Function App version.")
-model FunctionAppVersionRuntime {
-  /** The runtime name. */
-  name: string;
-
-  /** The runtime version. */
-  version?: string;
-}
-
-@added(Versions.v2026_10_01_preview)
-@doc("The Function App version artifact type.")
-union FunctionAppVersionArtifactType {
-  /** A ZIP package artifact. */
-  ZipPackage: "zipPackage",
-
-  /** A container image artifact. */
-  ContainerImage: "containerImage",
-
-  string,
-}
-
-@added(Versions.v2026_10_01_preview)
-@doc("The artifact used by a Function App version.")
-@discriminator("type")
+@doc("The ZIP package artifact used by a Function App version.")
 model FunctionAppVersionArtifact {
   /** The artifact type. */
-  type: FunctionAppVersionArtifactType;
-}
-
-@added(Versions.v2026_10_01_preview)
-@doc("A ZIP package artifact.")
-model ZipPackageAppArtifact extends FunctionAppVersionArtifact {
-  /** The artifact type. */
   type: "zipPackage";
-}
-
-@added(Versions.v2026_10_01_preview)
-@doc("A container image artifact.")
-model ContainerImageAppArtifact extends FunctionAppVersionArtifact {
-  /** The artifact type. */
-  type: "containerImage";
-
-  /** The container image reference. */
-  reference: string;
 }
 
 @added(Versions.v2026_10_01_preview)
@@ -124,37 +84,22 @@ model ContainerImageAppArtifact extends FunctionAppVersionArtifact {
 model FunctionAppVersionDeployment {
   /** The application artifact. */
   appArtifact: FunctionAppVersionArtifact;
-
-  /**
-   * The URI from which to materialize a ZIP package. This value is treated as a
-   * secret and is never returned by read or list operations.
-   */
-  @secret
-  @visibility(Lifecycle.Create, Lifecycle.Update)
-  packageUri?: url;
-
-  /** Whether to perform a remote build while materializing the ZIP package. */
-  @visibility(Lifecycle.Create, Lifecycle.Update)
-  remoteBuild?: boolean;
 }
 
 @added(Versions.v2026_10_01_preview)
 @doc("The immutable customer-authored configuration of a Function App version.")
 model FunctionAppVersionConfig {
-  /** The runtime configuration. */
-  runtime: FunctionAppVersionRuntime;
-
   /** The deployment configuration. */
   deployment: FunctionAppVersionDeployment;
 
   /**
-   * The complete version-scoped application settings. Values are omitted from
-   * normal read and list operations.
+   * Optional version-scoped application settings. Values are omitted from normal
+   * read and list operations.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Application settings are an open name-value dictionary by design."
   @secret
   @visibility(Lifecycle.Create, Lifecycle.Update)
-  appSettings: Record<string>;
+  appSettings?: Record<string>;
 }
 
 @added(Versions.v2026_10_01_preview)

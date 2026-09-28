@@ -13139,14 +13139,8 @@
           }
         },
         "x-ms-examples": {
-          "Create a Function App version from a ZIP package URI": {
-            "$ref": "./examples/CreateFunctionAppVersionZipPackageUri.json"
-          },
           "Create a ZIP placeholder Function App version": {
             "$ref": "./examples/CreateFunctionAppVersionZipPlaceholder.json"
-          },
-          "Create a container Function App version": {
-            "$ref": "./examples/CreateFunctionAppVersionContainer.json"
           },
           "Return an equivalent existing Function App version": {
             "$ref": "./examples/CreateFunctionAppVersionIdempotent.json"
@@ -43394,25 +43388,6 @@
         }
       }
     },
-    "ContainerImageAppArtifact": {
-      "type": "object",
-      "description": "A container image artifact.",
-      "properties": {
-        "reference": {
-          "type": "string",
-          "description": "The container image reference."
-        }
-      },
-      "required": [
-        "reference"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/FunctionAppVersionArtifact"
-        }
-      ],
-      "x-ms-discriminator-value": "containerImage"
-    },
     "ContainerInfo": {
       "type": "object",
       "properties": {
@@ -46607,50 +46582,27 @@
     },
     "FunctionAppVersionArtifact": {
       "type": "object",
-      "description": "The artifact used by a Function App version.",
+      "description": "The ZIP package artifact used by a Function App version.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/FunctionAppVersionArtifactType",
-          "description": "The artifact type."
+          "type": "string",
+          "description": "The artifact type.",
+          "enum": [
+            "zipPackage"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
         }
       },
-      "discriminator": "type",
       "required": [
         "type"
       ]
-    },
-    "FunctionAppVersionArtifactType": {
-      "type": "string",
-      "description": "The Function App version artifact type.",
-      "enum": [
-        "zipPackage",
-        "containerImage"
-      ],
-      "x-ms-enum": {
-        "name": "FunctionAppVersionArtifactType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ZipPackage",
-            "value": "zipPackage",
-            "description": "A ZIP package artifact."
-          },
-          {
-            "name": "ContainerImage",
-            "value": "containerImage",
-            "description": "A container image artifact."
-          }
-        ]
-      }
     },
     "FunctionAppVersionConfig": {
       "type": "object",
       "description": "The immutable customer-authored configuration of a Function App version.",
       "properties": {
-        "runtime": {
-          "$ref": "#/definitions/FunctionAppVersionRuntime",
-          "description": "The runtime configuration."
-        },
         "deployment": {
           "$ref": "#/definitions/FunctionAppVersionDeployment",
           "description": "The deployment configuration."
@@ -46658,7 +46610,7 @@
         "appSettings": {
           "type": "object",
           "format": "password",
-          "description": "The complete version-scoped application settings. Values are omitted from\nnormal read and list operations.",
+          "description": "Optional version-scoped application settings. Values are omitted from normal\nread and list operations.",
           "additionalProperties": {
             "type": "string"
           },
@@ -46670,9 +46622,7 @@
         }
       },
       "required": [
-        "runtime",
-        "deployment",
-        "appSettings"
+        "deployment"
       ]
     },
     "FunctionAppVersionDeployment": {
@@ -46682,24 +46632,6 @@
         "appArtifact": {
           "$ref": "#/definitions/FunctionAppVersionArtifact",
           "description": "The application artifact."
-        },
-        "packageUri": {
-          "type": "string",
-          "format": "password",
-          "description": "The URI from which to materialize a ZIP package. This value is treated as a\nsecret and is never returned by read or list operations.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ],
-          "x-ms-secret": true
-        },
-        "remoteBuild": {
-          "type": "boolean",
-          "description": "Whether to perform a remote build while materializing the ZIP package.",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
         }
       },
       "required": [
@@ -46840,23 +46772,6 @@
       },
       "required": [
         "functionAppVersionConfig"
-      ]
-    },
-    "FunctionAppVersionRuntime": {
-      "type": "object",
-      "description": "The runtime configuration of a Function App version.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The runtime name."
-        },
-        "version": {
-          "type": "string",
-          "description": "The runtime version."
-        }
-      },
-      "required": [
-        "name"
       ]
     },
     "FunctionAppVersionState": {
@@ -60342,16 +60257,6 @@
           }
         }
       }
-    },
-    "ZipPackageAppArtifact": {
-      "type": "object",
-      "description": "A ZIP package artifact.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/FunctionAppVersionArtifact"
-        }
-      ],
-      "x-ms-discriminator-value": "zipPackage"
     },
     "stringApplicationJson": {
       "type": "string"
