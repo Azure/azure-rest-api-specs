@@ -2,5 +2,5 @@ jobs:
   - job: "BranchProtectionForPrivateRepo"
     condition: and(variables['PRIVATE'], eq(variables['System.PullRequest.TargetBranch'], 'main'))
     steps:
-    - script: '>&2 echo "the branch is protected"'
-      failOnStderr: true
+      - script: '>&2 echo "the branch is protected"'
+        failOnStderr: true

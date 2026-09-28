@@ -153,9 +153,10 @@ checks on both OSes, plus actionlint and compiled agentic workflow lock checks o
 CI runs `pnpm lint` once from the repository root in `lint.yaml`, covering `.github`
 and `eng/tools`. Do not add lint or type-check steps to the test OS matrix.
 `.github/workflows/format.yaml` runs `pnpm format:check` once from the repository
-root for `.github`, `eng/tools`, and `vitest.config.mts`. Do not add formatting steps to package/OS
-test matrices. Package-local format commands inherit the root `.oxfmtrc.json`,
-including fixture, generated-file, and unmanaged-content exclusions.
+root for `.github`, `eng`, and `vitest.config.mts`. Do not add formatting steps to package/OS
+test matrices. Bare `pnpm oxfmt` and package-local format commands inherit the root
+`.oxfmtrc.json`, which defines the formatting scope and excludes mirrored `eng/common`,
+fixtures, generated files, and unmanaged content.
 See [the engineering guide](../../eng/README.md#linting-and-formatting) for package
 exclusions for packages not yet linted.
 
@@ -166,6 +167,10 @@ Run `pnpm run check` in each affected package. All lint, formatting, and test ch
 ### Testing Conventions
 
 Cover new or changed behavior and bug regressions with focused tests of repository-owned behavior and integration contracts. Reuse adequate existing coverage for mechanical refactors and dependency/API substitutions; add tests for uncovered repository behavior or compatibility risks, not to reproduce upstream test matrices. Preserve configured coverage requirements and justify removing existing tests.
+
+- Each assertion must catch a concrete behavioral regression, not restate configuration or test a third-party tool's implementation. Formatting-only changes normally need the existing formatter check, not new tests.
+- For YAML/JSON integration tests, inspect parsed values that affect behavior. Do not assert text offsets, file length, indentation, quote style, or display names unless they are part of the contract being tested.
+- When a test fails after an intentional change, remove obsolete expectations rather than replacing them with assertions that merely lock in the new implementation. Keep the fix scoped to the behavior at issue.
 
 - **Framework**: Vitest
 - **Test files**: `*.test.ts` files in `test/` directories
