@@ -47,11 +47,7 @@ using Microsoft.StorageDiscovery;
   "AzureBlobStoragePrefixConfigurationPatch",
   "csharp"
 );
-@@clientName(
-  CapabilityStatus,
-  "StorageDiscoveryCapabilityStatus",
-  "csharp"
-);
+@@clientName(CapabilityStatus, "StorageDiscoveryCapabilityStatus", "csharp");
 @@clientName(
   PrefixConfiguration,
   "AzureBlobStoragePrefixConfiguration",
