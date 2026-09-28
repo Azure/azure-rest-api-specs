@@ -9,8 +9,10 @@ A system that enforces "only authorized people can apply this label."
 3. If an unauthorized user applies a protected label, the bot removes it
 4. Supports plane-aware policies: different approvers for management-plane vs data-plane PRs
 
-Warning comments mention the unauthorized actor, but link to authorized approvers' GitHub
-profiles without `@mentions` to avoid notifying the approver list.
+Warning comments mention the unauthorized actor and direct them to the **Next Steps to Merge**
+comment and the [review and merge process](https://aka.ms/azsdk/specreview/merge), rather than
+pinging individual approvers directly. Authorized approvers' GitHub profile links are kept in a
+collapsed **See allowed approvers** section without `@mentions`.
 
 ## Configuration
 

@@ -163,7 +163,7 @@ describe("checkLabel", () => {
       expect(github.rest.issues.createComment).not.toHaveBeenCalled();
     });
 
-    it("removes label and mentions the actor while linking to approvers without mentioning them", async () => {
+    it("mentions the actor and directs them to the merge process before a collapsed approver list", async () => {
       context.payload = createLabeledPayload({
         labelName: "BreakingChange-Approved-Benign",
         actor: "unauthorized-user",
@@ -182,9 +182,13 @@ describe("checkLabel", () => {
         repo: "azure-rest-api-specs",
         issue_number: 100,
         body:
-          "⚠️ @unauthorized-user is not authorized to apply `BreakingChange-Approved-Benign`. " +
+          "⚠️ @unauthorized-user is not authorized to apply `BreakingChange-Approved-Benign`. Label removed.\n\n" +
+          "Please follow the **Next Steps to Merge** comment on this PR and the " +
+          "[review and merge process](https://aka.ms/azsdk/specreview/merge) " +
+          "rather than pinging individual approvers directly.\n\n" +
+          "<details><summary>See allowed approvers</summary>\n\n" +
           "Only [user1](https://github.com/user1), [user2](https://github.com/user2), " +
-          "[global-admin](https://github.com/global-admin) can apply this label.\n\nLabel removed.",
+          "[global-admin](https://github.com/global-admin) can apply this label.\n\n</details>",
       });
     });
 
@@ -278,9 +282,13 @@ describe("checkLabel", () => {
         repo: "azure-rest-api-specs",
         issue_number: 100,
         body:
-          "⚠️ @mgmt-approver1 is not authorized to apply `package-name-dotnet-approved`. " +
+          "⚠️ @mgmt-approver1 is not authorized to apply `package-name-dotnet-approved`. Label removed.\n\n" +
+          "Please follow the **Next Steps to Merge** comment on this PR and the " +
+          "[review and merge process](https://aka.ms/azsdk/specreview/merge) " +
+          "rather than pinging individual approvers directly.\n\n" +
+          "<details><summary>See allowed approvers</summary>\n\n" +
           "Only [dp-approver1](https://github.com/dp-approver1), [dp-approver2](https://github.com/dp-approver2), " +
-          "[global-admin](https://github.com/global-admin) can apply this label.\n\nLabel removed.",
+          "[global-admin](https://github.com/global-admin) can apply this label.\n\n</details>",
       });
     });
 
