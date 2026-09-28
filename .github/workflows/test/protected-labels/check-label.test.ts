@@ -163,7 +163,7 @@ describe("checkLabel", () => {
       expect(github.rest.issues.createComment).not.toHaveBeenCalled();
     });
 
-    it("removes label and posts warning for unauthorized user", async () => {
+    it("removes label and mentions the actor while linking to approvers without mentioning them", async () => {
       context.payload = createLabeledPayload({
         labelName: "BreakingChange-Approved-Benign",
         actor: "unauthorized-user",
@@ -177,12 +177,15 @@ describe("checkLabel", () => {
         issue_number: 100,
         name: "BreakingChange-Approved-Benign",
       });
-      expect(github.rest.issues.createComment).toHaveBeenCalledWith(
-        expect.objectContaining({
-          // oxlint-disable-next-line typescript/no-unsafe-assignment
-          body: expect.stringContaining("@unauthorized-user is not authorized"),
-        }),
-      );
+      expect(github.rest.issues.createComment).toHaveBeenCalledWith({
+        owner: "Azure",
+        repo: "azure-rest-api-specs",
+        issue_number: 100,
+        body:
+          "⚠️ @unauthorized-user is not authorized to apply `BreakingChange-Approved-Benign`. " +
+          "Only [user1](https://github.com/user1), [user2](https://github.com/user2), " +
+          "[global-admin](https://github.com/global-admin) can apply this label.\n\nLabel removed.",
+      });
     });
 
     it("handles 404 race condition on removeLabel gracefully", async () => {
@@ -270,6 +273,15 @@ describe("checkLabel", () => {
       expect(github.rest.issues.removeLabel).toHaveBeenCalledWith(
         expect.objectContaining({ name: "package-name-dotnet-approved" }),
       );
+      expect(github.rest.issues.createComment).toHaveBeenCalledWith({
+        owner: "Azure",
+        repo: "azure-rest-api-specs",
+        issue_number: 100,
+        body:
+          "⚠️ @mgmt-approver1 is not authorized to apply `package-name-dotnet-approved`. " +
+          "Only [dp-approver1](https://github.com/dp-approver1), [dp-approver2](https://github.com/dp-approver2), " +
+          "[global-admin](https://github.com/global-admin) can apply this label.\n\nLabel removed.",
+      });
     });
 
     it("uses mgmt approvers when PR has Mgmt label", async () => {
