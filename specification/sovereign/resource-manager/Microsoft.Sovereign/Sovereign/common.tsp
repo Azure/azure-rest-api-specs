@@ -15,6 +15,7 @@ enum Versions {
 
   @doc("The 2026-10-31 preview version.")
   @previewVersion
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   Preview20261031: "2026-10-31-preview",
 }
 

@@ -53,8 +53,16 @@ These settings apply only when `--tag=package-2026-10-31-preview` is specified o
 input-file:
   - preview/2026-10-31-preview/sovereign.json
 suppressions:
-  - code: AvoidAnonymousTypes
-    reason: This error is caused by typespec inbuilt managed identity model.
+  - code: AvoidAdditionalProperties
+    from: sovereign.json
+    where: $.definitions.SovereignViewPolicyInitiativeDetail.properties.assignmentParameters
+    reason: Parameters vary based on the selected policy initiatives.
+  - code: GuidUsage
+    from: sovereign.json
+    where:
+      - $.definitions["SovereignViewSubscriptionScope"].properties.id.format
+      - $.definitions["Azure.Core.uuid"].format
+    reason: Subscription Ids are uuids.
 ```
 
 ---

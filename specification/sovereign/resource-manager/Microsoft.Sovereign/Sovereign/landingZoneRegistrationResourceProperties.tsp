@@ -1,4 +1,4 @@
-﻿using Azure.ResourceManager;
+using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using Azure.Core;
 
@@ -6,6 +6,7 @@ namespace Microsoft.Sovereign;
 
 @added(Versions.Preview20250227)
 @doc("The properties of landing zone registration resource type.")
+@removed(Versions.Preview20261031)
 model LandingZoneRegistrationResourceProperties {
   @visibility(Lifecycle.Read)
   @doc("The state that reflects the current stage in the creation, updating, or deletion process of the landing zone registration resource type.")
