@@ -1,3 +1,4 @@
+import type { GitHubScriptArgs } from "../../src/github.ts";
 import { existsSync } from "fs";
 import { writeFile } from "fs/promises";
 import { dirname, join, resolve } from "path";
@@ -41,9 +42,9 @@ const runnerTemp = resolve("runner-temp");
 let core: ReturnType<typeof createMockCore>;
 let context: ReturnType<typeof createMockContext>;
 
-function args(): import("@actions/github-script").AsyncFunctionArguments {
-  const input: Partial<import("@actions/github-script").AsyncFunctionArguments> = { context, core };
-  return input as import("@actions/github-script").AsyncFunctionArguments;
+function args(): GitHubScriptArgs {
+  const input: Partial<GitHubScriptArgs> = { context, core };
+  return input as GitHubScriptArgs;
 }
 
 function mockFileStatuses(

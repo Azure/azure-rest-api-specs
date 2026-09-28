@@ -1,4 +1,4 @@
-import type { Core } from "../github.ts";
+import type { Core, GitHub, WorkflowRuns } from "../github.ts";
 /*
   Rendering for the dedicated "TypeSpec Suppressions Review" pull request comment.
 
@@ -24,7 +24,7 @@ import fs from "fs/promises";
 import os from "os";
 import path from "path";
 
-export type WorkflowRunInfo = import("../github.ts").WorkflowRuns[0];
+export type WorkflowRunInfo = WorkflowRuns[0];
 
 export type TypeSpecRuleMetadata = {
   packageName?: string;
@@ -83,7 +83,7 @@ const MAX_SUPPRESSIONS_SHOWN = 5;
  * Downloads a text artifact for a given workflow run.
  */
 export async function downloadArtifactText(
-  github: import("@actions/github-script").AsyncFunctionArguments["github"],
+  github: GitHub,
   core: Core,
   owner: string,
   repo: string,
@@ -129,7 +129,7 @@ export async function downloadArtifactText(
 }
 
 export async function getLatestTypeSpecSuppressionsWorkflowRun(
-  github: import("@actions/github-script").AsyncFunctionArguments["github"],
+  github: GitHub,
   core: Core,
   owner: string,
   repo: string,
@@ -375,7 +375,7 @@ export function renderSuppressionsCommentBody(
  * suppressions require review) and the definitive `requiresApproval` boolean.
  */
 export async function buildSuppressionsComment(
-  github: import("@actions/github-script").AsyncFunctionArguments["github"],
+  github: GitHub,
   core: Core,
   owner: string,
   repo: string,

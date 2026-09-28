@@ -1,3 +1,4 @@
+import type { GitHubScriptArgs } from "../github.ts";
 /*
   Entry point for the dedicated "TypeSpec Suppressions Review" pull request
   comment, mirroring the namespace-approval post-results.js pattern.
@@ -30,8 +31,8 @@ import {
 const RESOLVED_COMMENT_BODY = `## ${TYPESPEC_SUPPRESSIONS_SECTION_TITLE}\n\n✅ No TypeSpec suppressions require review for the latest commit.`;
 
 async function syncReviewRequiredLabel(
-  github: import("@actions/github-script").AsyncFunctionArguments["github"],
-  core: import("../github.ts").Core,
+  github: GitHubScriptArgs["github"],
+  core: GitHubScriptArgs["core"],
   owner: string,
   repo: string,
   issueNumber: number,
@@ -63,11 +64,7 @@ async function syncReviewRequiredLabel(
   }
 }
 
-export default async function postSuppressionsResults({
-  github,
-  context,
-  core,
-}: import("@actions/github-script").AsyncFunctionArguments) {
+export default async function postSuppressionsResults({ github, context, core }: GitHubScriptArgs) {
   const { owner, repo, issue_number, head_sha } = await extractInputs(github, context, core);
 
   const { data: pr } = await github.rest.pulls.get({
