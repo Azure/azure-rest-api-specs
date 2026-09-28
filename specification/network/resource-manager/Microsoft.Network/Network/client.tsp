@@ -3058,6 +3058,11 @@ union ProvisioningStateUnion {
   "csharp"
 );
 @@clientName(
+  Microsoft.Network.PfsGroup.PFSMM,
+  Azure.ClientGenerator.Core.exact("Pfs"),
+  "csharp"
+);
+@@clientName(
   Microsoft.Network.ActionType.CAPTCHA,
   Azure.ClientGenerator.Core.exact("Captcha"),
   "csharp"
