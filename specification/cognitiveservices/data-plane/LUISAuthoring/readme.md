@@ -53,7 +53,7 @@ directive:
 These settings apply only when `--tag=authoring_3_0_preview` is specified on the command line.
 
 ``` yaml $(tag) == 'authoring_3_0_preview'
-input-file: preview/v3.0/LUIS-Authoring.json
+input-file: preview/v3.0-preview/LUIS-Authoring.json
 ```
 
 Deprecated Pattern's Operations
@@ -151,7 +151,7 @@ require: $(this-folder)/../../../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/stable/v2.0/LUIS-Authoring.json
-  - $(this-folder)/preview/v3.0/LUIS-Authoring.json
+  - $(this-folder)/preview/v3.0-preview/LUIS-Authoring.json
 
 ```
 
