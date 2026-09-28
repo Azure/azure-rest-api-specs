@@ -6530,6 +6530,7 @@
           "type": "integer",
           "format": "int32",
           "description": "Duration in minutes for which the Instant Access snapshot is retained, when instantAccessSnapshotEnabled\nis true. Must be between 60 and 300 minutes; defaults to 300 minutes if not specified.",
+          "default": 300,
           "minimum": 60,
           "maximum": 300
         },
@@ -15089,7 +15090,9 @@
           "type": "array",
           "description": "List of disk ARM IDs the customer should detach in case of filesystem clash.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         }
       }

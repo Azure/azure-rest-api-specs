@@ -5251,7 +5251,7 @@ model SnapshotRestoreParameters {
    * List of disk ARM IDs the customer should detach in case of filesystem clash.
    */
   @added(Versions.v2026_10_01)
-  disksToDetachOnClash?: string[];
+  disksToDetachOnClash?: armResourceIdentifier[];
 }
 
 /**
