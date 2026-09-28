@@ -87,6 +87,7 @@ op FoundryDataPlaneOperation<
 // ---- Feature opt-in keys & preview headers ----
 
 /** Feature opt-in keys for agent definition operations supporting conditional preview features. */
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "API review requires this input-only opt-in contract to accept only the declared feature keys; arbitrary string opt-ins are not supported."
 union AgentDefinitionOptInKeys {
   workflow_agents_v1_preview: "WorkflowAgents=V1Preview",
   external_agents_v1_preview: "ExternalAgents=V1Preview",
@@ -103,6 +104,7 @@ union AgentDefinitionOptInKeys {
   container_agents_v1_preview: "ContainerAgents=V1Preview",
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "API review requires this input-only opt-in contract to accept only the declared feature keys; arbitrary string opt-ins are not supported."
 union FoundryFeaturesOptInKeys {
   evaluations_v1_preview: "Evaluations=V1Preview",
   schedules_v1_preview: "Schedules=V1Preview",
@@ -115,6 +117,7 @@ union FoundryFeaturesOptInKeys {
   data_generation_jobs_v1_preview: "DataGenerationJobs=V1Preview",
   models_v1_preview: "Models=V1Preview",
   model_router_controls_v1_preview: "ModelRouterControls=V1Preview",
+  finetuning_sessions_v1_preview: "FineTuningSessions=V1Preview",
 }
 
 alias WithRequiredFoundryPreviewHeader<
@@ -214,8 +217,12 @@ alias PageLimitQueryParameter = {
   @query limit?: int32 = 20;
 };
 
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "PageOrder is the two directions of ordering by created_at (ascending or descending); this value set is inherently immutable."
 union PageOrder {
+  /** Return items in ascending creation-time order. */
   "asc",
+
+  /** Return items in descending creation-time order. */
   "desc",
 }
 
