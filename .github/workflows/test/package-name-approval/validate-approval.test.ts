@@ -263,6 +263,26 @@ describe("validate-approval", () => {
         expect.objectContaining({ name: "package-name-go-approved" }),
       );
     });
+
+    it("should stay fail-closed for a label absent from config (not 'unprotected')", async () => {
+      // "unprotected" status (label not in protected-labels.yml) must NOT be treated
+      // as an opt-out here; only an explicit plane keyword (plane-unprotected) opens.
+      context.payload = createPRLabeledPayload({
+        action: "labeled",
+        labelName: "package-name-ruby-approved",
+        actor: "random-user",
+        labels: ["package-name-review-required", "package-name-ruby-pending"],
+      });
+
+      await validateApproval(args());
+
+      expect(github.rest.issues.removeLabel).toHaveBeenCalledWith(
+        expect.objectContaining({ name: "package-name-ruby-approved" }),
+      );
+      expect(github.rest.issues.removeLabel).not.toHaveBeenCalledWith(
+        expect.objectContaining({ name: "package-name-ruby-pending" }),
+      );
+    });
   });
 
   describe("labeled - package-name-approved-all shortcut", () => {

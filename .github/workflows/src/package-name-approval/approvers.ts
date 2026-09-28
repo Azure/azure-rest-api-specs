@@ -58,15 +58,18 @@ export function createApproversConfig(config: ProtectedLabelsConfig): ApproversC
     // Plane-aware entry
     if (entry && typeof entry === "object") {
       const planeEntry = entry;
-      if (planeEntry["management-plane"]) {
+      const mgmt = planeEntry["management-plane"];
+      // A plane set to the "unprotected" literal has no approver list; skip it.
+      if (Array.isArray(mgmt)) {
         // Collect unique mgmt approvers across all namespace labels
-        mgmtAll = [...new Set([...mgmtAll, ...planeEntry["management-plane"]])];
+        mgmtAll = [...new Set([...mgmtAll, ...mgmt])];
       }
-      if (planeEntry["data-plane"]) {
+      const dp = planeEntry["data-plane"];
+      if (Array.isArray(dp)) {
         if (lang === "all") {
-          dataPlane.global = planeEntry["data-plane"];
+          dataPlane.global = dp;
         } else {
-          dataPlane[lang] = planeEntry["data-plane"];
+          dataPlane[lang] = dp;
         }
       }
     }
@@ -77,9 +80,20 @@ export function createApproversConfig(config: ProtectedLabelsConfig): ApproversC
     dataPlane.global = [...new Set([...(dataPlane.global ?? []), ...globalApprovers])];
   }
 
-  // Parse tier1 configuration
+  // Parse tier1 configuration. Plane values are language lists; ignore any
+  // "unprotected" literal so the union type does not leak into string[] fields.
   const tier1Entry = config.labels["tier1"];
-  const tier1Config = Array.isArray(tier1Entry) ? {} : (tier1Entry ?? {});
+  const tier1Config: { "management-plane"?: string[]; "data-plane"?: string[] } =
+    tier1Entry && !Array.isArray(tier1Entry)
+      ? {
+          ...(Array.isArray(tier1Entry["management-plane"])
+            ? { "management-plane": tier1Entry["management-plane"] }
+            : {}),
+          ...(Array.isArray(tier1Entry["data-plane"])
+            ? { "data-plane": tier1Entry["data-plane"] }
+            : {}),
+        }
+      : {};
 
   return {
     "data-plane": dataPlane,

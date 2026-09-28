@@ -147,7 +147,7 @@ async function handleLabeled({
   if (
     authorization.status !== "authorized" &&
     authorization.status !== "trusted-bot" &&
-    authorization.status !== "unprotected"
+    authorization.status !== "plane-unprotected"
   ) {
     core.warning(`${actor} is not authorized to apply ${targetLabel}, removing`);
     await removeLabelIfPresent(github, owner, repo, prNumber, targetLabel);

@@ -28,7 +28,13 @@ export type ProtectedLabelsConfig = {
 };
 
 export type LabelAuthorization = {
-  status: "authorized" | "trusted-bot" | "unauthorized" | "unprotected" | "unknown-plane";
+  status:
+    | "authorized"
+    | "trusted-bot"
+    | "unauthorized"
+    | "unprotected"
+    | "plane-unprotected"
+    | "unknown-plane";
   authorizedUsers: string[];
 };
 
@@ -158,7 +164,10 @@ export function evaluateLabelAuthorization({
     return { status: "unknown-plane", authorizedUsers: [] };
   }
   if (perLabelUsers === UNPROTECTED_PLANE) {
-    return { status: "unprotected", authorizedUsers: [] };
+    // Distinct from "unprotected" (label absent from config): here the label IS
+    // protected but this plane explicitly opted out. Consumers that fail-closed on
+    // unconfigured labels (e.g. package-name approval) must still honor this. See #46728.
+    return { status: "plane-unprotected", authorizedUsers: [] };
   }
 
   const authorizedUsers = [...new Set([...perLabelUsers, ...config.globalApprovers])];

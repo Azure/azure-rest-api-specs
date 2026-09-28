@@ -109,6 +109,10 @@ export default async function checkLabel({ github, context, core }: GitHubScript
     core.info(`"${labelName}" is not a protected label, skipping`);
     return;
   }
+  if (authorization.status === "plane-unprotected") {
+    core.info(`"${labelName}" is unprotected on this PR's plane, skipping`);
+    return;
+  }
   if (authorization.status === "unknown-plane") {
     core.info(
       `"${labelName}" is plane-aware but PR has no plane label (Mgmt/resource-manager/data-plane), skipping`,
