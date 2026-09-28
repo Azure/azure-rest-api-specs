@@ -1,4 +1,4 @@
-import type { Core } from "../github.ts";
+import type { Core, WebhookEvent } from "../github.ts";
 /*
   This file is a github script. It will be called directly from a github-script action. This code is a simplified
   amalgamation of logic that previously resided in the `PR Summary` check and various events within the `pipelinebot`.
@@ -271,8 +271,7 @@ export default async function summarizeChecks({
 
   const targetBranch =
     context.eventName === "pull_request_target"
-      ? (context.payload as import("@octokit/webhooks-types").PullRequestEvent).pull_request.base
-          .ref
+      ? (context.payload as WebhookEvent<"pull-request">).pull_request.base.ref
       : undefined;
 
   core.info(`PR target branch: ${targetBranch}`);

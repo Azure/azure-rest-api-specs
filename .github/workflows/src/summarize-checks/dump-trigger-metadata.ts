@@ -1,7 +1,9 @@
+import type { WebhookEvent } from "../github.ts";
+
 export default function dumpTriggerMetadata({
   context,
   core,
-}: import("@actions/github-script").AsyncFunctionArguments) {
+}: Pick<import("@actions/github-script").AsyncFunctionArguments, "context" | "core">) {
   core.info(`Event name: ${context.eventName}`);
   core.info(`Action: ${context.payload.action}`);
 
@@ -10,7 +12,7 @@ export default function dumpTriggerMetadata({
     context.payload.action === "completed" &&
     context.payload.workflow_run
   ) {
-    const payload = context.payload as import("@octokit/webhooks-types").WorkflowRunCompletedEvent;
+    const payload = context.payload as WebhookEvent<"workflow-run", "completed">;
 
     const run = payload.workflow_run;
     core.info(`Triggering workflow: ${run.name}`);
@@ -29,13 +31,15 @@ export default function dumpTriggerMetadata({
 
     // If there's a pull request associated, show that too
     if (run.pull_requests && run.pull_requests.length > 0) {
-      run.pull_requests.forEach((pr) => {
-        const prUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/pull/${pr.number}`;
-        core.info(`🔗 Associated PR: ${prUrl}`);
-      });
+      run.pull_requests
+        .filter((pr) => pr !== null)
+        .forEach((pr) => {
+          const prUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/pull/${pr.number}`;
+          core.info(`🔗 Associated PR: ${prUrl}`);
+        });
     }
   } else if (context.eventName === "pull_request_target" && context.payload.pull_request) {
-    const payload = context.payload as import("@octokit/webhooks-types").PullRequestEvent;
+    const payload = context.payload as WebhookEvent<"pull-request">;
 
     const pr = payload.pull_request;
     core.info(`PR number: ${pr.number}`);

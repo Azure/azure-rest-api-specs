@@ -7,6 +7,7 @@ using TypeSpec.Http;
 namespace Customizations;
 
 /** Response containing a Web PubSub client access token. */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model GenerateClientTokenResponse {
   /** Access token used to connect to Azure Web PubSub. */
   token: string;

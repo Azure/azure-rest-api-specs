@@ -1,8 +1,22 @@
 import type { AsyncFunctionArguments } from "@actions/github-script";
+import type { operations } from "@octokit/openapi-webhooks-types";
 import { toPercent } from "../../shared/src/math.ts";
 import { Duration, formatDuration, getDuration, subtract } from "../../shared/src/time.ts";
 
 export type Core = AsyncFunctionArguments["core"];
+
+type WebhookEventName = {
+  [Name in keyof operations]: Name extends `${infer Event}/${string}` ? Event : Name;
+}[keyof operations];
+
+/** GitHub OpenAPI payloads for an event, optionally restricted to specific actions. */
+export type WebhookEvent<
+  Event extends WebhookEventName,
+  Action extends string = string,
+> = operations[Extract<
+  keyof operations,
+  Event | `${Event}/${Action}`
+>]["requestBody"]["content"]["application/json"];
 
 export type CommitStatuses =
   RestEndpointMethodTypes["repos"]["listCommitStatusesForRef"]["response"]["data"];
