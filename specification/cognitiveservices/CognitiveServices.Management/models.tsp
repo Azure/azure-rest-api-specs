@@ -3931,11 +3931,262 @@ model PatchResourceSku {
 @added(Versions.v2026_09_15_preview)
 model ManagedComputeDeploymentPatchProperties {
   /**
-   * Non-secret, string-valued runtime parameters for VmManagedCompute deployments.
-   * Other SKUs and unsupported parameter names are rejected.
+   * Runtime parameters for a VmManagedCompute deployment. Omitted parameters are unchanged; a null parameter removes its override.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Deployment parameters require an extensible string-keyed map"
-  deploymentParameters?: Record<string>;
+  deploymentParameters?: ManagedComputeDeploymentParameters;
+}
+
+/**
+ * Non-secret runtime parameters for a VmManagedCompute deployment. Supported only when sku.name is VmManagedCompute; other SKUs are rejected.
+ */
+@added(Versions.v2026_09_15_preview)
+model ManagedComputeDeploymentParameters {
+  /**
+   * Instance type that overrides the deployment template default. Immutable after creation.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  instanceType?: string;
+
+  /**
+   * Number of nodes allocated to each model instance. This is distinct from sku.capacity, which sets the number of model instances.
+   */
+  @minValue(1)
+  instanceCount?: int32;
+
+  /**
+   * Model name exposed by the serving runtime. When omitted, it is derived from the model.
+   */
+  servedModelName?: string;
+
+  /**
+   * Maximum context length passed to a managed serving engine. When omitted, the engine derives it from the model configuration.
+   */
+  @minValue(1)
+  maxModelLength?: int32;
+
+  /**
+   * Absolute container path that receives scoring requests, for example /v1/chat/completions.
+   */
+  scoringPath?: string;
+
+  /**
+   * Container port that receives scoring requests.
+   */
+  @minValue(1)
+  @maxValue(65535)
+  scoringPort?: int32;
+
+  /**
+   * Absolute Linux path where the model is mounted in the container.
+   */
+  @maxLength(256)
+  modelMountPath?: string;
+
+  /**
+   * Liveness probe override. successThreshold must be 1.
+   */
+  livenessProbe?: ManagedComputeDeploymentProbe;
+
+  /**
+   * Readiness probe override.
+   */
+  readinessProbe?: ManagedComputeDeploymentProbe;
+
+  /**
+   * Non-secret container environment variables. Names must be unique.
+   */
+  @identifiers(#["name"])
+  @maxItems(128)
+  environmentVariables?: ManagedComputeDeploymentEnvironmentVariable[];
+
+  /**
+   * Serving engine. Defaults to Vllm.
+   */
+  engineType?: ManagedComputeEngineType;
+
+  /**
+   * Container launch mode. Defaults to Managed. The Custom engine requires ImageDefault or Override.
+   */
+  launchMode?: ManagedComputeLaunchMode;
+
+  /**
+   * Container command. Supported only when launchMode is Override.
+   */
+  @minItems(1)
+  @maxItems(64)
+  containerCommand?: string[];
+
+  /**
+   * Container arguments. Supported only when launchMode is Override.
+   */
+  @maxItems(256)
+  containerArguments?: string[];
+
+  /**
+   * Scoring request timeout, in milliseconds.
+   */
+  @minValue(1)
+  requestTimeoutInMilliseconds?: int32;
+
+  /**
+   * Maximum number of concurrent scoring requests for each instance.
+   */
+  @minValue(1)
+  maxConcurrentRequestsPerInstance?: int32;
+
+  /**
+   * Resource ID of the Azure Storage connection in the deployment's project used to stage deployment artifacts. Required when the project has any Azure Storage connection.
+   */
+  projectStorageConnectionId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.CognitiveServices/accounts/projects/connections";
+    }
+  ]>;
+
+  /**
+   * Container image reference including the registry host, for example myregistry.azurecr.io/repository:tag. The deployment identity must be able to pull it. Immutable after creation.
+   */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  image?: string;
+}
+
+/**
+ * Container environment variable for a managed compute deployment.
+ */
+@added(Versions.v2026_09_15_preview)
+model ManagedComputeDeploymentEnvironmentVariable {
+  /**
+   * Environment variable name. It must start with a letter or underscore and contain only letters, digits and underscores.
+   */
+  @pattern("^[A-Za-z_][A-Za-z0-9_]*$")
+  @maxLength(256)
+  name: string;
+
+  /**
+   * Environment variable value. Do not include secrets.
+   */
+  @maxLength(4096)
+  value: string;
+}
+
+/**
+ * HTTP probe settings for a managed compute deployment container.
+ */
+@added(Versions.v2026_09_15_preview)
+model ManagedComputeDeploymentProbe {
+  /**
+   * Absolute HTTP path to probe.
+   */
+  path?: string;
+
+  /**
+   * Seconds to wait after container start before the first probe.
+   */
+  @minValue(0)
+  @maxValue(86400)
+  initialDelaySeconds?: int32;
+
+  /**
+   * Seconds between probes.
+   */
+  @minValue(1)
+  @maxValue(86400)
+  periodSeconds?: int32;
+
+  /**
+   * Seconds before a probe times out.
+   */
+  @minValue(1)
+  @maxValue(86400)
+  timeoutSeconds?: int32;
+
+  /**
+   * Consecutive failures required to mark the probe failed.
+   */
+  @minValue(1)
+  failureThreshold?: int32;
+
+  /**
+   * Consecutive successes required to mark the probe successful.
+   */
+  @minValue(1)
+  successThreshold?: int32;
+
+  /**
+   * Container port to probe.
+   */
+  @minValue(1)
+  @maxValue(65535)
+  port?: int32;
+
+  /**
+   * Probe scheme.
+   */
+  scheme?: ManagedComputeProbeScheme;
+}
+
+/**
+ * Serving engine for a managed compute deployment.
+ */
+@added(Versions.v2026_09_15_preview)
+union ManagedComputeEngineType {
+  string,
+
+  /**
+   * Managed vLLM serving.
+   */
+  Vllm: "Vllm",
+
+  /**
+   * Managed SGLang serving.
+   */
+  Sglang: "Sglang",
+
+  /**
+   * Custom engine launched from the container image.
+   */
+  Custom: "Custom",
+}
+
+/**
+ * Container launch mode for a managed compute deployment.
+ */
+@added(Versions.v2026_09_15_preview)
+union ManagedComputeLaunchMode {
+  string,
+
+  /**
+   * The service launches the selected managed engine.
+   */
+  Managed: "Managed",
+
+  /**
+   * The container image's default command and arguments are used.
+   */
+  ImageDefault: "ImageDefault",
+
+  /**
+   * containerCommand and containerArguments are used.
+   */
+  Override: "Override",
+}
+
+/**
+ * Scheme for a managed compute deployment probe.
+ */
+@added(Versions.v2026_09_15_preview)
+union ManagedComputeProbeScheme {
+  string,
+
+  /**
+   * HTTP.
+   */
+  Http: "Http",
+
+  /**
+   * HTTPS.
+   */
+  Https: "Https",
 }
 
 /**
@@ -6590,13 +6841,11 @@ model ManagedComputeDeploymentProperties {
   gatedModelAccess?: GatedModelAccessProperties;
 
   /**
-   * Non-secret, string-valued runtime parameters for VmManagedCompute deployments.
-   * Other SKUs and unsupported parameter names are rejected.
+   * Runtime parameters for a VmManagedCompute deployment.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Deployment parameters require an extensible string-keyed map"
   @added(Versions.v2026_09_15_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  deploymentParameters?: Record<string>;
+  deploymentParameters?: ManagedComputeDeploymentParameters;
 
   /**
    * Deployment capabilities represented as key-value pairs.
