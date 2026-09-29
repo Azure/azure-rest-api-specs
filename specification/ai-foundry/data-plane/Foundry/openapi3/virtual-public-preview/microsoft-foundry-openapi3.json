@@ -42805,8 +42805,8 @@
           "propertyName": "scenario",
           "mapping": {
             "evaluation": "#/components/schemas/EvaluationDataGenerationJob",
-            "supervised_finetuning": "#/components/schemas/SupervisedFineTuningDataGenerationJob",
-            "reinforcement_finetuning": "#/components/schemas/ReinforcementFineTuningDataGenerationJob"
+            "supervised_finetuning_preview": "#/components/schemas/SupervisedFineTuningDataGenerationJob",
+            "reinforcement_finetuning_preview": "#/components/schemas/ReinforcementFineTuningDataGenerationJob"
           }
         },
         "description": "Data Generation Job resource."
@@ -42844,8 +42844,8 @@
           "propertyName": "scenario",
           "mapping": {
             "evaluation": "#/components/schemas/EvaluationDataGenerationJobInputs",
-            "supervised_finetuning": "#/components/schemas/SupervisedFineTuningDataGenerationJobInputs",
-            "reinforcement_finetuning": "#/components/schemas/ReinforcementFineTuningDataGenerationJobInputs"
+            "supervised_finetuning_preview": "#/components/schemas/SupervisedFineTuningDataGenerationJobInputs",
+            "reinforcement_finetuning_preview": "#/components/schemas/ReinforcementFineTuningDataGenerationJobInputs"
           }
         },
         "description": "Caller-supplied inputs for a data generation job."
@@ -42966,8 +42966,8 @@
           {
             "type": "string",
             "enum": [
-              "supervised_finetuning",
-              "reinforcement_finetuning",
+              "supervised_finetuning_preview",
+              "reinforcement_finetuning_preview",
               "evaluation"
             ]
           }
@@ -90997,9 +90997,9 @@
           "scenario": {
             "type": "string",
             "enum": [
-              "reinforcement_finetuning"
+              "reinforcement_finetuning_preview"
             ],
-            "description": "The scenario of the data generation job, which is Reinforcement Fine-tuning for this model."
+            "description": "The scenario of the data generation job, which is Reinforcement Fine-tuning preview for this model."
           },
           "output_configuration": {
             "$ref": "#/components/schemas/ReinforcementFineTuningDataGenerationJobOutputTarget",
@@ -91027,9 +91027,9 @@
           "scenario": {
             "type": "string",
             "enum": [
-              "reinforcement_finetuning"
+              "reinforcement_finetuning_preview"
             ],
-            "description": "The scenario of the data generation job, which is Reinforcement Fine-tuning for this model."
+            "description": "The scenario of the data generation job, which is Reinforcement Fine-tuning preview for this model."
           },
           "output_configuration": {
             "$ref": "#/components/schemas/ReinforcementFineTuningDataGenerationJobOutputTarget",
@@ -92917,9 +92917,9 @@
           "scenario": {
             "type": "string",
             "enum": [
-              "supervised_finetuning"
+              "supervised_finetuning_preview"
             ],
-            "description": "The scenario of the data generation job, which is Supervised Fine-tuning for this model."
+            "description": "The scenario of the data generation job, which is Supervised Fine-tuning preview for this model."
           },
           "output_configuration": {
             "$ref": "#/components/schemas/SupervisedFineTuningDataGenerationJobOutputTarget",
@@ -92947,9 +92947,9 @@
           "scenario": {
             "type": "string",
             "enum": [
-              "supervised_finetuning"
+              "supervised_finetuning_preview"
             ],
-            "description": "The scenario of the data generation job, which is Supervised Fine-tuning for this model."
+            "description": "The scenario of the data generation job, which is Supervised Fine-tuning preview for this model."
           },
           "output_configuration": {
             "$ref": "#/components/schemas/SupervisedFineTuningDataGenerationJobOutputTarget",

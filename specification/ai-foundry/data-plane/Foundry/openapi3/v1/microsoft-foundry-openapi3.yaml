@@ -46405,8 +46405,8 @@ components:
         propertyName: scenario
         mapping:
           evaluation: '#/components/schemas/EvaluationDataGenerationJob'
-          supervised_finetuning: '#/components/schemas/SupervisedFineTuningDataGenerationJob'
-          reinforcement_finetuning: '#/components/schemas/ReinforcementFineTuningDataGenerationJob'
+          supervised_finetuning_preview: '#/components/schemas/SupervisedFineTuningDataGenerationJob'
+          reinforcement_finetuning_preview: '#/components/schemas/ReinforcementFineTuningDataGenerationJob'
       description: Data Generation Job resource.
     DataGenerationJobInputs:
       type: object
@@ -46434,8 +46434,8 @@ components:
         propertyName: scenario
         mapping:
           evaluation: '#/components/schemas/EvaluationDataGenerationJobInputs'
-          supervised_finetuning: '#/components/schemas/SupervisedFineTuningDataGenerationJobInputs'
-          reinforcement_finetuning: '#/components/schemas/ReinforcementFineTuningDataGenerationJobInputs'
+          supervised_finetuning_preview: '#/components/schemas/SupervisedFineTuningDataGenerationJobInputs'
+          reinforcement_finetuning_preview: '#/components/schemas/ReinforcementFineTuningDataGenerationJobInputs'
       description: Caller-supplied inputs for a data generation job.
     DataGenerationJobOptions:
       type: object
@@ -46515,8 +46515,8 @@ components:
         - type: string
         - type: string
           enum:
-            - supervised_finetuning
-            - reinforcement_finetuning
+            - supervised_finetuning_preview
+            - reinforcement_finetuning_preview
             - evaluation
       description: The supported scenarios for a data generation job.
     DataGenerationJobSource:
@@ -80558,8 +80558,8 @@ components:
         scenario:
           type: string
           enum:
-            - reinforcement_finetuning
-          description: The scenario of the data generation job, which is Reinforcement Fine-tuning for this model.
+            - reinforcement_finetuning_preview
+          description: The scenario of the data generation job, which is Reinforcement Fine-tuning preview for this model.
         output_configuration:
           $ref: '#/components/schemas/ReinforcementFineTuningDataGenerationJobOutputTarget'
           description: Optional file output configuration for the generated reinforcement fine-tuning data.
@@ -80577,8 +80577,8 @@ components:
         scenario:
           type: string
           enum:
-            - reinforcement_finetuning
-          description: The scenario of the data generation job, which is Reinforcement Fine-tuning for this model.
+            - reinforcement_finetuning_preview
+          description: The scenario of the data generation job, which is Reinforcement Fine-tuning preview for this model.
         output_configuration:
           $ref: '#/components/schemas/ReinforcementFineTuningDataGenerationJobOutputTarget'
           description: Optional file output configuration for the generated reinforcement fine-tuning data.
@@ -81899,8 +81899,8 @@ components:
         scenario:
           type: string
           enum:
-            - supervised_finetuning
-          description: The scenario of the data generation job, which is Supervised Fine-tuning for this model.
+            - supervised_finetuning_preview
+          description: The scenario of the data generation job, which is Supervised Fine-tuning preview for this model.
         output_configuration:
           $ref: '#/components/schemas/SupervisedFineTuningDataGenerationJobOutputTarget'
           description: Optional file output configuration for the generated supervised fine-tuning data.
@@ -81918,8 +81918,8 @@ components:
         scenario:
           type: string
           enum:
-            - supervised_finetuning
-          description: The scenario of the data generation job, which is Supervised Fine-tuning for this model.
+            - supervised_finetuning_preview
+          description: The scenario of the data generation job, which is Supervised Fine-tuning preview for this model.
         output_configuration:
           $ref: '#/components/schemas/SupervisedFineTuningDataGenerationJobOutputTarget'
           description: Optional file output configuration for the generated supervised fine-tuning data.
