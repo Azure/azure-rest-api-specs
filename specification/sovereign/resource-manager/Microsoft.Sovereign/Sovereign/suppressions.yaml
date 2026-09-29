@@ -13,11 +13,20 @@
     - options.@azure-typespec/http-client-csharp-mgmt.*
   paths:
     - tspconfig.yaml
-- tool: Swagger Avocado
-  path: ./preview/2025-02-27-preview/sovereign.json
+- tool: SwaggerAvocado
+  paths:
+    - ./preview/2025-02-27-preview/sovereign.json
+    - ./*.tsp
+    - ./readme.md
+    - ./service.yaml
+    - ./suppressions.yaml
+    - ./examples/2026-10-31-preview/**
+    - ./preview/2026-10-31-preview/**
   reason: >
     The landingZoneAccounts, landingZoneConfigurations, and
     landingZoneRegistrations resource types were intentionally retired in the
     2026-10-31-preview API version. This older version still contains them, so
     Avocado reports MISSING_APIS_IN_DEFAULT_TAG against the
-    2026-10-31-preview default tag.
+    2026-10-31-preview default tag. Avocado applies suppressions only to changed
+    input files, not individual findings, so the changed files that trigger the
+    directory-level comparison must also be covered.
