@@ -13075,9 +13075,9 @@
       "type": "object",
       "description": "Applies an error policy to a route for a specific set of error response status codes. The status codes live on the association rather than on the policy, so one policy can be reused by routes that fail with different status codes.",
       "properties": {
-        "errorPolicyReference": {
-          "$ref": "#/definitions/ResourceReference",
-          "description": "A reference to the error policy applied when the origin returns one of the error response status codes below."
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
         },
         "errorResponseCodes": {
           "type": "array",
@@ -13091,7 +13091,6 @@
         }
       },
       "required": [
-        "errorPolicyReference",
         "errorResponseCodes"
       ]
     },
@@ -17213,8 +17212,7 @@
           "maxItems": 38,
           "items": {
             "$ref": "#/definitions/ErrorPolicyAssociation"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "provisioningState": {
           "$ref": "#/definitions/AfdProvisioningState",
@@ -17379,8 +17377,7 @@
           "maxItems": 38,
           "items": {
             "$ref": "#/definitions/ErrorPolicyAssociation"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },

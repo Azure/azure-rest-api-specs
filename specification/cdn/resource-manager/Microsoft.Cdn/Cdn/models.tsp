@@ -3448,7 +3448,6 @@ model RouteUpdatePropertiesParameters {
    * The error policies applied to this route, each paired with the error response status codes that trigger it. Omit this property to leave the route's error responses untouched.
    */
   @added(Versions.v2026_09_01_preview)
-  @identifiers(#[])
   @maxItems(38)
   errorPolicies?: ErrorPolicyAssociation[];
 }
@@ -3459,9 +3458,9 @@ model RouteUpdatePropertiesParameters {
 @added(Versions.v2026_09_01_preview)
 model ErrorPolicyAssociation {
   /**
-   * A reference to the error policy applied when the origin returns one of the error response status codes below.
+   * Resource ID.
    */
-  errorPolicyReference: ResourceReference;
+  id?: string;
 
   /**
    * The error response status codes that trigger the referenced error policy on this route. Supported values are 400-417, 421-424, 426, 428, 429, 431, 451, 500-508, 510 and 511. A status code may be claimed by at most one of the route's error policies.
