@@ -134,6 +134,15 @@ export function parseCommentTable(
   return results;
 }
 
+/**
+ * Whether the add-only "Mgmt" label should be cleared. post-results is its only writer,
+ * so it goes stale when a push removes the management tspconfig. Label hygiene now that
+ * authorization keys off resource-manager, not "Mgmt" (#46785). Mixed PRs (isMgmt) keep it.
+ */
+export function shouldRemoveStaleMgmtLabel(isMgmt: boolean, existingLabels: string[]): boolean {
+  return !isMgmt && existingLabels.includes("Mgmt");
+}
+
 function buildCommentBody({
   approversConfig,
   namespacesFound,
@@ -276,6 +285,10 @@ export default async function postResults({ github, context, core }: GitHubScrip
       for (const label of packageNameLabels) {
         await removeLabelIfPresent(github, owner, repo, issue_number, label);
       }
+      // The tspconfig was removed, so this is no longer a package PR. Clear the stale
+      // add-only "Mgmt" label here too, since the results-based reconcile below is
+      // skipped on the no-artifact path (#46785).
+      await removeLabelIfPresent(github, owner, repo, issue_number, "Mgmt");
 
       // Update status check to success
       await github.rest.repos.createCommitStatus({
@@ -436,6 +449,11 @@ export default async function postResults({ github, context, core }: GitHubScrip
         labels: [label],
       });
     }
+  }
+
+  // Clear the stale add-only "Mgmt" label. See shouldRemoveStaleMgmtLabel (#46785).
+  if (shouldRemoveStaleMgmtLabel(results.isMgmt, existingLabels)) {
+    await removeLabelIfPresent(github, owner, repo, issue_number, "Mgmt");
   }
 
   const body = buildCommentBody({
