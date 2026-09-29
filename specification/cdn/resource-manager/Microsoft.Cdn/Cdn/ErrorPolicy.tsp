@@ -14,7 +14,7 @@ using TypeSpec.Versioning;
 
 namespace Microsoft.Cdn;
 /**
- * An error policy describes how AzureFrontDoor treats the error responses returned by an origin. A route references a policy and supplies the error response status codes that trigger it, so a single policy can be reused by routes that fail with different status codes.
+ * An error policy describes how Azure Front Door treats the error responses returned by an origin. Error policies are referenced by routes and can be reused across them.
  */
 @added(Versions.v2026_09_01_preview)
 @parentResource(Profile)
@@ -39,8 +39,8 @@ interface ErrorPolicies {
   /**
    * Creates a new error policy within the specified profile.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Creating an error policy is long running and returns 202, matching the other AzureFrontDoor resources in this specification."
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The 202 carries the in-progress resource, matching the other AzureFrontDoor resources in this specification."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Creating an error policy is long running and returns 202, matching the other Azure Front Door resources in this specification."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The 202 carries the in-progress resource, matching the other Azure Front Door resources in this specification."
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     ErrorPolicy,
@@ -57,7 +57,7 @@ interface ErrorPolicies {
   /**
    * Updates an existing error policy within a profile.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The 202 carries the in-progress resource, matching the other AzureFrontDoor resources in this specification."
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "The 202 carries the in-progress resource, matching the other Azure Front Door resources in this specification."
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
@@ -76,8 +76,8 @@ interface ErrorPolicies {
   /**
    * Deletes an existing error policy within a profile.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Deletion is tracked through azure-asyncoperation, matching the other AzureFrontDoor resources in this specification."
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Deleting an error policy is long running and returns 202, matching the other AzureFrontDoor resources in this specification."
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "Deletion is tracked through azure-asyncoperation, matching the other Azure Front Door resources in this specification."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Deleting an error policy is long running and returns 202, matching the other Azure Front Door resources in this specification."
   delete is ArmResourceDeleteWithoutOkAsync<
     ErrorPolicy,
     Response =

@@ -13057,7 +13057,7 @@
     },
     "ErrorPolicy": {
       "type": "object",
-      "description": "An error policy describes how AzureFrontDoor treats the error responses returned by an origin. A route references a policy and supplies the error response status codes that trigger it, so a single policy can be reused by routes that fail with different status codes.",
+      "description": "An error policy describes how Azure Front Door treats the error responses returned by an origin. Error policies are referenced by routes and can be reused across them.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/ErrorPolicyProperties",
@@ -14585,7 +14585,7 @@
     },
     "NegativeCachingConfiguration": {
       "type": "object",
-      "description": "Controls how AzureFrontDoor caches the error responses that trigger an error policy.",
+      "description": "Controls how Azure Front Door caches the error responses that trigger an error policy.",
       "properties": {
         "cacheBehavior": {
           "$ref": "#/definitions/NegativeCacheBehavior",
@@ -17208,7 +17208,7 @@
         },
         "errorPolicies": {
           "type": "array",
-          "description": "The error policies applied to this route, each paired with the error response status codes that trigger it. Omit this property to leave the route's error responses untouched.",
+          "description": "The error policies applied to this route. Each entry references an error policy and supplies the error response status codes that trigger it on this route, so a single policy can be reused by routes that fail with different status codes. Omit this property to leave the route's error responses untouched.",
           "maxItems": 38,
           "items": {
             "$ref": "#/definitions/ErrorPolicyAssociation"
@@ -17373,7 +17373,7 @@
         },
         "errorPolicies": {
           "type": "array",
-          "description": "The error policies applied to this route, each paired with the error response status codes that trigger it. Omit this property to leave the route's error responses untouched.",
+          "description": "The error policies applied to this route. Each entry references an error policy and supplies the error response status codes that trigger it on this route, so a single policy can be reused by routes that fail with different status codes. Omit this property to leave the route's error responses untouched.",
           "maxItems": 38,
           "items": {
             "$ref": "#/definitions/ErrorPolicyAssociation"

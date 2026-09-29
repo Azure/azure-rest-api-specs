@@ -3445,7 +3445,7 @@ model RouteUpdatePropertiesParameters {
   grpcState?: AFDRouteGrpcState;
 
   /**
-   * The error policies applied to this route, each paired with the error response status codes that trigger it. Omit this property to leave the route's error responses untouched.
+   * The error policies applied to this route. Each entry references an error policy and supplies the error response status codes that trigger it on this route, so a single policy can be reused by routes that fail with different status codes. Omit this property to leave the route's error responses untouched.
    */
   @added(Versions.v2026_09_01_preview)
   @maxItems(38)
@@ -3473,7 +3473,7 @@ model ErrorPolicyAssociation {
 /**
  * The JSON object that contains the properties of the error policy.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Error policies report deployment through AFDStateProperties, matching the other AzureFrontDoor resources in this specification."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Error policies report deployment through AFDStateProperties, matching the other Azure Front Door resources in this specification."
 @added(Versions.v2026_09_01_preview)
 model ErrorPolicyProperties {
   ...ErrorPolicyUpdatePropertiesParameters;
@@ -3505,13 +3505,13 @@ model ErrorPolicyUpdateParameters {
   /**
    * The JSON object that contains the properties of the error policy to update.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Error policies use the flattened properties envelope shared by the other AzureFrontDoor resources in this specification."
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Error policies use the flattened properties envelope shared by the other Azure Front Door resources in this specification."
   @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: ErrorPolicyUpdatePropertiesParameters;
 }
 
 /**
- * Controls how AzureFrontDoor caches the error responses that trigger an error policy.
+ * Controls how Azure Front Door caches the error responses that trigger an error policy.
  */
 @added(Versions.v2026_09_01_preview)
 model NegativeCachingConfiguration {
