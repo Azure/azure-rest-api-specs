@@ -9,12 +9,6 @@
     - agricultureplatform/AgriculturePlatform.Management
     - applink/AppLink.Management
     - awsconnector/**
-    - cognitiveservices/AnomalyDetector
-    - cognitiveservices/CognitiveServices.Management
-    - cognitiveservices/ContentSafety
-    - cognitiveservices/OpenAI.Inference
-    - cognitiveservices/Speech.Transcription
-    - cognitiveservices/Speech.VideoTranslation
     - computebulkactions/ComputeBulkActions.Management
     - discovery/Discovery.Management
     - discovery/Discovery.Bookshelf.Management
@@ -22,7 +16,6 @@
     - discovery/Discovery.Supercomputer.Management
     - discovery/Discovery.Workspace.Management
     - machinelearningservices/AzureAI.Assets
-    - machinelearningservices/MachineLearningServices.Management
     - managedoperations/ManagedOps.Management
     - manufacturingplatform/Manufacturingplatform.Management
     - playwrighttesting/PlaywrightTesting.AuthManager
@@ -35,10 +28,6 @@
     - purviewdatagovernance/Azure.Analytics.Purview.UnifiedCatalog
     - splitio/SplitIO.Experimentation.Management
     - storage/Storage.Management
-    - workloads/Workloads.Operations.Management
-    - workloads/Workloads.SAPDiscoverySite.Management
-    - workloads/Workloads.SAPMonitor.Management
-    - workloads/Workloads.SAPVirtualInstance.Management
 
 - tool: TypeSpecValidation
   rules: [Compile]
@@ -51,9 +40,9 @@
     - ai/data-plane/HealthInsights/preview/2023-03-01-preview/openapi.json
     - ai/data-plane/HealthInsights/preview/2023-09-01-preview/openapi.json
     - azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCIVM/preview/2024-07-15-preview/stackhcivm.json
-    - cognitiveservices/data-plane/AzureOpenAI/inference/preview/2023-08-01-preview/generated.json
-    - cognitiveservices/data-plane/AzureOpenAI/inference/preview/2023-09-01-preview/generated.json
-    - cognitiveservices/data-plane/AzureOpenAI/inference/preview/2023-12-01-preview/generated.json
+    - cognitiveservices/data-plane/OpenAIInference/preview/2023-08-01-preview/generated.json
+    - cognitiveservices/data-plane/OpenAIInference/preview/2023-09-01-preview/generated.json
+    - cognitiveservices/data-plane/OpenAIInference/preview/2023-12-01-preview/generated.json
     - cognitiveservices/data-plane/ContentSafety/preview/2023-04-30-preview/contentsafety.json
     - cognitiveservices/data-plane/ContentSafety/preview/2023-10-15-preview/contentsafety.json
     - cognitiveservices/data-plane/ContentSafety/preview/2024-02-15-preview/contentsafety.json
@@ -128,7 +117,7 @@
   sub-rules:
     - options.@azure-tools/typespec-python.emitter-output-dir
   paths:
-    - cognitiveservices/AnomalyDetector/tspconfig.yaml
+    - cognitiveservices/data-plane/AnomalyDetector/tspconfig.yaml
 
 - tool: TypeSpecValidation
   reason: Suppress until spec can be updated
@@ -138,7 +127,7 @@
     - options.@azure-tools/typespec-python.emitter-output-dir
     - options.@azure-tools/typespec-ts.package-details.name
   paths:
-    - cognitiveservices/Speech.VideoTranslation/tspconfig.yaml
+    - cognitiveservices/data-plane/SpeechVideoTranslation/tspconfig.yaml
 
 - tool: TypeSpecValidation
   reason: Suppress until spec can be updated
@@ -146,7 +135,7 @@
   sub-rules:
     - options.@azure-tools/typespec-python.emitter-output-dir
   paths:
-    - cognitiveservices/OpenAI.Inference/tspconfig.yaml
+    - cognitiveservices/data-plane/OpenAIInference/tspconfig.yaml
 
 - tool: TypeSpecValidation
   reason: Suppress until spec can be updated
