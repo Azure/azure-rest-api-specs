@@ -4,10 +4,7 @@ on:
   issue_comment:
     types: [created]
   workflow_run:
-    # Keep the previous notifier name for older PR branches and in-flight review runs.
-    workflows:
-      - "Contributor Readiness - Events - Testing"
-      - "Contributor Readiness - Review Event - Testing"
+    workflows: ["Contributor Readiness - Events - Testing"]
     types: [completed]
 
 permissions: {}

@@ -98,7 +98,7 @@ describe("contributor readiness", () => {
     expect(permissions.toJSON()).toEqual({});
     const workflows = publisher.getIn(["on", "workflow_run", "workflows"]);
     if (!isSeq(workflows)) throw new Error("Publisher must name its notifier workflows");
-    expect(workflows.toJSON()).toContain(notifier.get("name"));
+    expect(workflows.toJSON()).toEqual([notifier.get("name")]);
   });
 
   it("grants the publisher permission to comment on pull requests", () => {
