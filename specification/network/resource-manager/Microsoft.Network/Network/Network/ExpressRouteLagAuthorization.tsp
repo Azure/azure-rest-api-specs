@@ -110,6 +110,8 @@ interface ExpressRouteLagAuthorizations {
   /**
    * Creates or updates an authorization in the specified express route LAG.
    */
+  // The status monitor returns only operation status; retrieve the resource from its original URI.
+  @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ExpressRouteLagAuthorizationOps.CreateOrUpdateAsync<
     ExpressRouteLagAuthorization,
     Response =
@@ -126,7 +128,6 @@ interface ExpressRouteLagAuthorizations {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "The Network RP delete contract returns Location and Azure-AsyncOperation headers on the 202 response, matching existing ExpressRoute resources."
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "This asynchronous delete returns 202 and 204 to match the existing ExpressRoute LAG resource delete contract in Network RP."
-  @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ExpressRouteLagAuthorizationOps.DeleteWithoutOkAsync<
     ExpressRouteLagAuthorization,
     Response =
