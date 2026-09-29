@@ -73,6 +73,7 @@ namespace Microsoft.Monitor {
     @path
     @segment("providers")
     @key
+    @pattern("^[a-zA-Z0-9.-]+$")
     providerName: string;
 
     /**
@@ -87,6 +88,7 @@ namespace Microsoft.Monitor {
      */
     @path
     @key
+    @pattern("^[^/]+$")
     resourceName: string;
   };
 
