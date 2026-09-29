@@ -453,9 +453,6 @@ scalar TelephonyTransferTargetName extends string;
 @doc("A telephony provider supported by an agent binding. Known values are stable; additional values may be added over time.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyProvider {
-  @doc("Session Initiation Protocol.")
-  sip: "sip",
-
   string,
 
   @doc("Microsoft Teams Phone extensibility.")
@@ -463,6 +460,9 @@ union TelephonyProvider {
 
   @doc("Twilio Programmable Voice.")
   twilio: "twilio",
+
+  @doc("Session Initiation Protocol.")
+  sip: "sip",
 }
 
 @doc("The kind of telephony transfer destination. Known values are stable; additional values may be added over time.")
