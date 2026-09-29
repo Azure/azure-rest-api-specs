@@ -177,7 +177,7 @@ model StringSegment {
   hasValue?: boolean;
 }
 
-/** The provisioning state of a credential, connection or diskImage. */
+/** The provisioning state of a credential or connection. */
 union ConnectionState {
   /** An unrecognized state returned by the service. */
   StringValue: string,

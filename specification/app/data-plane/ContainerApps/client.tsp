@@ -567,6 +567,8 @@ namespace ContainerAppsSandbox {
     "uploadVolumeFile",
     "csharp"
   );
+  @@alternateType(DiskImageStatus.state, ConnectionState, "csharp");
+  @@alternateType(Connection.state, ConnectionState, "csharp");
   @@clientName(ConnectionState, "ResourceState", "csharp");
 
   // Model customizations

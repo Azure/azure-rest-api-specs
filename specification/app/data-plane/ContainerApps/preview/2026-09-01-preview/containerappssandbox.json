@@ -8668,7 +8668,7 @@
           "description": "Connection type."
         },
         "state": {
-          "$ref": "#/definitions/ConnectionState",
+          "type": "string",
           "description": "Current connection state.",
           "readOnly": true
         },
@@ -8726,7 +8726,7 @@
     },
     "ConnectionState": {
       "type": "string",
-      "description": "The provisioning state of a credential, connection or diskImage.",
+      "description": "The provisioning state of a credential or connection.",
       "enum": [
         "Creating",
         "Ready",
@@ -9999,7 +9999,7 @@
       "description": "The provisioning status of a disk image.",
       "properties": {
         "state": {
-          "$ref": "#/definitions/ConnectionState",
+          "type": "string",
           "description": "The current provisioning state."
         },
         "errorMessage": {
