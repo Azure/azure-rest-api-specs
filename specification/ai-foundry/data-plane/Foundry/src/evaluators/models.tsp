@@ -104,11 +104,11 @@ model CodeBasedEvaluatorDefinition extends EvaluatorDefinition {
   @doc("The container image tag to use for evaluator code execution")
   image_tag?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @extension(
     "x-ms-foundry-meta",
     #{ required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview] }
   )
-  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The blob URI for the evaluator storage")
   blob_uri?: url;
 }
@@ -157,6 +157,7 @@ model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
 }
 
 @doc("Endpoint-based evaluator definition. The customer owns and hosts an HTTP endpoint that implements the evaluation contract. The evaluator references a Project Connection by name; the connection stores the endpoint URL and credentials (API Key or Entra ID). At execution time, the service resolves the connection to obtain the endpoint URL and authentication details, then calls the endpoint for each evaluation row.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EndpointBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.endpoint;
 
