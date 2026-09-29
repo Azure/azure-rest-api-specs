@@ -31,14 +31,14 @@ model InstanceResource is TrackedResource<InstanceProperties> {
   ...ManagedServiceIdentityProperty;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "ResourceSkuProperty cannot represent this SKU set: SkuTier is a closed union (Free/Basic/Standard/Premium) with no Essentials, and size, family and capacity do not apply. InstanceSkuName advertises Essentials and Standard while staying extensible. Envelope placement follows ARM RPC v1 (Representing SKUs)."
-  #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "sku is immutable after create so it is absent from PATCH; the RP rejects changes with 400 SkuChangeNotAllowed. TypeSpec cannot mark an envelope property create-only."
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "SKU is mutable through resource PUT and is intentionally not exposed through PATCH."
   @doc("The billing SKU for the AIO Instance. Defaults to Standard.")
   @added(Versions.`2026-10-01`)
   @visibility(Lifecycle.Read, Lifecycle.Create)
   sku?: InstanceSku;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "sku is immutable after create and intentionally absent here. See InstanceResource.sku."
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "SKU is mutable through resource PUT and is intentionally not exposed through PATCH."
 @doc("The Instance update model.")
 model InstancePatchModel {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
