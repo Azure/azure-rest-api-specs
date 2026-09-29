@@ -1,4 +1,3 @@
-import * as exec from "@azure-tools/specs-shared/exec";
 import { execFileSync } from "node:child_process";
 import {
   existsSync,
@@ -11,9 +10,12 @@ import {
 } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
+import { simpleGit } from "simple-git";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { z } from "zod";
 import { cleanWorktree } from "../src/git-cleanup.ts";
+
+vi.mock("simple-git", { spy: true });
 
 let repo: string;
 
@@ -110,7 +112,7 @@ describe("cleanWorktree", () => {
   it.skipIf(process.platform === "win32")(
     "preserves NUL-delimited paths with newlines, quotes, and pathspec magic",
     async () => {
-      const paths = ["line\nbreak", 'a"quote', ":(glob)*", "*literal"];
+      const paths = ["line\nbreak", 'a"quote', ":(glob)*", "*literal", " leading", "trailing \n"];
       for (const path of paths) write(path, "original");
       commit();
       for (const path of paths) write(path, "modified");
@@ -312,11 +314,13 @@ describe("cleanWorktree", () => {
   it.each(["status", "restore", "clean", "ls-files"])("propagates %s failures", async (command) => {
     write("project/source.txt", "modified");
     write("generated.txt");
-    const original = exec.execFile;
-    vi.spyOn(exec, "execFile").mockImplementation(async (file, args, options) => {
-      if (args?.[1] === command) throw new Error(`${command} failed`);
-      return original(file, args, options);
+    const client = simpleGit(repo);
+    const raw = client.raw.bind(client);
+    vi.spyOn(client, "raw").mockImplementation((args: string | string[]) => {
+      if (Array.isArray(args) && args[1] === command) throw new Error(`${command} failed`);
+      return raw(args);
     });
+    vi.mocked(simpleGit).mockReturnValueOnce(client);
 
     await expect(cleanWorktree(repo)).rejects.toThrow(`${command} failed`);
 

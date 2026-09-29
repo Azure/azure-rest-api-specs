@@ -1,4 +1,3 @@
-import * as exec from "@azure-tools/specs-shared/exec";
 import { ChildProcess, execFileSync, spawn } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { access, mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
@@ -386,7 +385,6 @@ it("stops when a child is terminated by a signal", async () => {
 });
 
 it("leaves existing and generated changes alone without --git-clean", async () => {
-  const cleanupGit = vi.spyOn(exec, "execFile");
   await addProject("a");
   await commitFixture();
   await writeFile(join(root, "tracked.txt"), "local edits");
@@ -398,32 +396,24 @@ it("leaves existing and generated changes alone without --git-clean", async () =
   await expect(runAll(root)).resolves.toBe(false);
   expect(await readFile(join(root, "tracked.txt"), "utf8")).toBe("local edits");
   expect(await readFile(join(root, "generated.txt"), "utf8")).toBe("generated");
-  expect(cleanupGit).not.toHaveBeenCalled();
+  expect(console.log).not.toHaveBeenCalledWith(expect.stringMatching(/^TSV cleanup /));
 });
 
 it("runs only one status scan after each project that leaves the checkout clean", async () => {
   await addProject("specification/a");
   await addProject("specification/b");
   await commitFixture();
-  const cleanupGit = vi.spyOn(exec, "execFile");
 
   await expect(runAll(join(root, "specification"), { gitClean: true })).resolves.toBe(true);
 
   expect(spawn).toHaveBeenCalledTimes(2);
-  expect(cleanupGit.mock.calls.map(([, args]) => args?.[1])).toEqual(["status", "status"]);
-  expect(cleanupGit).toHaveBeenCalledWith(
-    "git",
-    [
-      "--literal-pathspecs",
-      "status",
-      "--porcelain=v2",
-      "-z",
-      "--untracked-files=normal",
-      "--no-renames",
-      "--ignore-submodules=none",
-    ],
-    { cwd: root },
-  );
+  const cleanupLogs = vi
+    .mocked(console.log)
+    .mock.calls.filter(([line]) => String(line).startsWith("TSV cleanup "));
+  expect(cleanupLogs).toEqual([
+    [expect.stringContaining('"command":"status"')],
+    [expect.stringContaining('"command":"status"')],
+  ]);
 });
 
 it("does not clean suppressed projects or dry runs", async () => {
@@ -433,7 +423,6 @@ it("does not clean suppressed projects or dry runs", async () => {
     "- tool: TypeSpecValidationAll\n  paths: [skip]\n  reason: skipped\n",
   );
   await commitFixture();
-  const cleanupGit = vi.spyOn(exec, "execFile");
 
   await expect(runAll(root, { gitClean: true })).resolves.toBe(true);
   await writeFile(join(root, "suppressions.yaml"), "[]");
@@ -441,7 +430,7 @@ it("does not clean suppressed projects or dry runs", async () => {
   await expect(runAll(root, { gitClean: true, dryRun: true })).resolves.toBe(true);
 
   expect(spawn).not.toHaveBeenCalled();
-  expect(cleanupGit).not.toHaveBeenCalled();
+  expect(console.log).not.toHaveBeenCalledWith(expect.stringMatching(/^TSV cleanup /));
   expect(await readFile(join(root, "local.txt"), "utf8")).toBe("keep");
 });
 

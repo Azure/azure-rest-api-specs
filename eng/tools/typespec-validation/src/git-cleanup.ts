@@ -1,16 +1,16 @@
-import { execFile } from "@azure-tools/specs-shared/exec";
 import { lstat } from "node:fs/promises";
 import { basename, join } from "node:path";
+import { simpleGit } from "simple-git";
 
 /** Restore the worktree from the index without changing staged or ignored files. */
 export async function cleanWorktree(repoRoot: string): Promise<void> {
-  async function git(command: string, args: string[]): Promise<string> {
+  const git = simpleGit(repoRoot, { trimmed: false });
+
+  async function runGit(command: string, args: string[]): Promise<string> {
     const start = performance.now();
     let success = false;
     try {
-      const { stdout } = await execFile("git", ["--literal-pathspecs", command, ...args], {
-        cwd: repoRoot,
-      });
+      const stdout = await git.raw(["--literal-pathspecs", command, ...args]);
       success = true;
       return stdout;
     } finally {
@@ -24,7 +24,7 @@ export async function cleanWorktree(repoRoot: string): Promise<void> {
     }
   }
 
-  const status = await git("status", [
+  const status = await runGit("status", [
     "--porcelain=v2",
     "-z",
     "--untracked-files=normal",
@@ -72,13 +72,13 @@ export async function cleanWorktree(repoRoot: string): Promise<void> {
   }
 
   for (const paths of pathBatches(tracked)) {
-    await git("restore", ["--worktree", "--", ...paths]);
+    await runGit("restore", ["--worktree", "--", ...paths]);
   }
   for (const paths of pathBatches(untracked)) {
-    await git("clean", ["-df", "--", ...paths]);
+    await runGit("clean", ["-df", "--", ...paths]);
     // git clean exits successfully when it skips a nested repository. Verify only
     // these paths, excluding ignored files and empty directories as Git normally does.
-    const remaining = await git("ls-files", [
+    const remaining = await runGit("ls-files", [
       "--others",
       "--exclude-standard",
       "--directory",
