@@ -3521,7 +3521,7 @@ model NegativeCachingConfiguration {
   cacheBehavior: NegativeCacheBehavior;
 
   /**
-   * How long a matched error response is cached, in seconds. Required unless cacheBehavior is HonorOrigin, which must omit it because the origin's own caching headers supply the lifetime.
+   * How long a matched error response is cached, in seconds. A numeric value is required unless cacheBehavior is HonorOrigin, which must omit it because the origin's own caching headers supply the lifetime.
    */
   @maxValue(604800)
   @minValue(1)
