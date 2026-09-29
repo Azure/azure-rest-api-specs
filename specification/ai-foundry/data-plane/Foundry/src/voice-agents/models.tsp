@@ -739,6 +739,12 @@ union SipAudioCodec {
 
   @doc("G.711 A-law audio.")
   pcma: "pcma",
+
+  @doc("Opus audio.")
+  opus: "opus",
+
+  @doc("Adaptive Multi-Rate Wideband audio.")
+  amr_wb: "amr-wb",
 }
 @doc("Inbound SIP configuration. Credentials are stored in the referenced connection and never returned in a binding.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
