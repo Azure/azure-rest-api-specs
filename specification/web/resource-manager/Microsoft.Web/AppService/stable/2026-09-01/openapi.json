@@ -10011,7 +10011,7 @@
           "WebApps"
         ],
         "summary": "Creates or replaces the egress configuration for an app.",
-        "description": "Creates or replaces the egress configuration for an app. The supplied\nconnections replace the stored ones in full, so connections omitted from\nthe request are deleted; omitting connections entirely, or supplying an\nempty object, deletes the configuration for the app. Returns 201 when no\nconfiguration was stored for the app beforehand and 200 otherwise, with the\nstored configuration in the response body.",
+        "description": "Creates or replaces the egress configuration for an app. The supplied\nconnections replace the stored ones in full, so connections omitted from\nthe request are deleted; omitting connections entirely, or supplying an\nempty object, deletes the configuration for the app. Returns 201 when no\nconfiguration was stored for the app beforehand and 200 otherwise, with the\nstored configuration in the response body.\n\nThe request is normalized and then structurally and semantically validated\nbefore persistence. Invalid configurations are rejected by create/update.\nClients can call the validate action first to obtain preflight diagnostics\nwithout writing the configuration.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -10110,7 +10110,7 @@
           "WebApps"
         ],
         "summary": "Validates an egress configuration without applying it.",
-        "description": "Validates an egress configuration without applying it. Returns\nvalidation errors for missing settings, unsupported protocols, or invalid\nrole/protocol/auth combinations.",
+        "description": "Validates an egress configuration without applying it.\n\nThis checks the same structural and semantic constraints enforced by\ncreate/update, including referenced setting existence and managed identity\nassignment requirements, and returns diagnostics for preflight use.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -22802,7 +22802,7 @@
           "WebApps"
         ],
         "summary": "Creates or replaces the egress configuration for a deployment slot.",
-        "description": "Creates or replaces the egress configuration for a deployment slot. The\nsupplied connections replace the stored ones in full, so connections\nomitted from the request are deleted; omitting connections entirely, or\nsupplying an empty object, deletes the configuration for the slot. Returns\n201 when no configuration was stored for the slot beforehand and 200\notherwise, with the stored configuration in the response body.",
+        "description": "Creates or replaces the egress configuration for a deployment slot. The\nsupplied connections replace the stored ones in full, so connections\nomitted from the request are deleted; omitting connections entirely, or\nsupplying an empty object, deletes the configuration for the slot. Returns\n201 when no configuration was stored for the slot beforehand and 200\notherwise, with the stored configuration in the response body.\n\nThe request is normalized and then structurally and semantically validated\nbefore persistence. Invalid configurations are rejected by create/update.\nClients can call the validate action first to obtain preflight diagnostics\nwithout writing the configuration.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -22915,7 +22915,7 @@
           "WebApps"
         ],
         "summary": "Validates an egress configuration for a deployment slot.",
-        "description": "Validates an egress configuration for a deployment slot without\napplying it.",
+        "description": "Validates an egress configuration for a deployment slot without applying\nit.\n\nThis checks the same structural and semantic constraints enforced by\ncreate/update, including referenced setting existence and managed identity\nassignment requirements, and returns diagnostics for preflight use.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -57383,7 +57383,7 @@
       "properties": {
         "settings": {
           "type": "object",
-          "description": "Settings that compose this connection. Key is the app setting\n(or connection string) name; value describes its role in the connection.\nSetting keys must be nonempty, must not end in whitespace, and must be\nunique within the connection regardless of casing.",
+          "description": "Settings that compose this connection. Key is the app setting\n(or connection string) name; value describes its role in the connection.\nSetting keys must be nonempty, must not end in whitespace, and must be\nunique within the connection regardless of casing.\n\nAll referenced setting names must already exist in the selected source\nwhen the egress configuration is written. Missing app settings, missing\nconnection strings, or ambiguous connection-string references cause\ncreate/update validation to fail.",
           "additionalProperties": {
             "$ref": "#/definitions/VirtualConnectionSetting"
           }
@@ -57428,7 +57428,7 @@
         "identityResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "Per-connection override for the user-assigned managed identity resource ID.\nUsed when multiple connections target different backends that require\ndifferent identities.",
+          "description": "Per-connection override for the user-assigned managed identity resource ID.\nUsed when multiple connections target different backends that require\ndifferent identities.\n\nOnly relevant when auth=ManagedIdentity. If omitted, create/update uses\nthe app's system-assigned identity and rejects the request if that identity\ndoes not exist. If supplied, the referenced identity must already be\nassigned to the app; otherwise create/update validation fails.",
           "x-ms-arm-id-details": {
             "allowedResources": [
               {

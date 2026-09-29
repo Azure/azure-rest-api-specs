@@ -76,6 +76,11 @@ model VirtualConnection {
    * (or connection string) name; value describes its role in the connection.
    * Setting keys must be nonempty, must not end in whitespace, and must be
    * unique within the connection regardless of casing.
+   *
+   * All referenced setting names must already exist in the selected source
+   * when the egress configuration is written. Missing app settings, missing
+   * connection strings, or ambiguous connection-string references cause
+   * create/update validation to fail.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Setting names are arbitrary customer-chosen keys and cannot be represented as a fixed set of model properties."
   settings: Record<VirtualConnectionSetting>;
@@ -108,6 +113,11 @@ model VirtualConnection {
    * Per-connection override for the user-assigned managed identity resource ID.
    * Used when multiple connections target different backends that require
    * different identities.
+   *
+   * Only relevant when auth=ManagedIdentity. If omitted, create/update uses
+   * the app's system-assigned identity and rejects the request if that identity
+   * does not exist. If supplied, the referenced identity must already be
+   * assigned to the app; otherwise create/update validation fails.
    */
   identityResourceId?: Azure.Core.armResourceIdentifier<[
     {
@@ -316,6 +326,11 @@ interface EgressConfigs {
    * empty object, deletes the configuration for the app. Returns 201 when no
    * configuration was stored for the app beforehand and 200 otherwise, with the
    * stored configuration in the response body.
+   *
+   * The request is normalized and then structurally and semantically validated
+   * before persistence. Invalid configurations are rejected by create/update.
+   * Clients can call the validate action first to obtain preflight diagnostics
+   * without writing the configuration.
    */
   @summary("Creates or replaces the egress configuration for an app.")
   createOrUpdateEgressConfig is EgressConfigOps.CreateOrUpdateSync<
@@ -342,9 +357,11 @@ interface EgressConfigs {
   >;
 
   /**
-   * Validates an egress configuration without applying it. Returns
-   * validation errors for missing settings, unsupported protocols, or invalid
-   * role/protocol/auth combinations.
+   * Validates an egress configuration without applying it.
+   *
+   * This checks the same structural and semantic constraints enforced by
+   * create/update, including referenced setting existence and managed identity
+   * assignment requirements, and returns diagnostics for preflight use.
    */
   @summary("Validates an egress configuration without applying it.")
   @action("validate")
@@ -404,6 +421,11 @@ interface EgressConfigSlotConfigs {
    * supplying an empty object, deletes the configuration for the slot. Returns
    * 201 when no configuration was stored for the slot beforehand and 200
    * otherwise, with the stored configuration in the response body.
+   *
+   * The request is normalized and then structurally and semantically validated
+   * before persistence. Invalid configurations are rejected by create/update.
+   * Clients can call the validate action first to obtain preflight diagnostics
+   * without writing the configuration.
    */
   @summary("Creates or replaces the egress configuration for a deployment slot.")
   createOrUpdateEgressConfigSlot is EgressConfigSlotOps.CreateOrUpdateSync<
@@ -430,8 +452,12 @@ interface EgressConfigSlotConfigs {
   >;
 
   /**
-   * Validates an egress configuration for a deployment slot without
-   * applying it.
+   * Validates an egress configuration for a deployment slot without applying
+   * it.
+   *
+   * This checks the same structural and semantic constraints enforced by
+   * create/update, including referenced setting existence and managed identity
+   * assignment requirements, and returns diagnostics for preflight use.
    */
   @summary("Validates an egress configuration for a deployment slot.")
   @action("validate")
