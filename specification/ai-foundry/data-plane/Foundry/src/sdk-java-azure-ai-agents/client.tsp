@@ -14,6 +14,7 @@ import "../agents-microsoft365/routes.tsp";
 import "../agents-optimization/routes.tsp";
 // We don't need the operations for these subclients, just the models
 // so we can customize visibility where necessary.
+import "../openai/evaluations/models.tsp";
 import "../openai/responses/models.tsp";
 import "../openai/conversations/routes.tsp";
 
@@ -22,6 +23,11 @@ using Azure.Core.Experimental;
 using TypeSpec.Http;
 
 using Azure.AI.Projects;
+
+// Preserve the accidentally GA Java type after optimization evaluation granularity
+// moved to the evaluation-set subtype.
+@@usage(Azure.AI.Projects.EvaluationLevel, Usage.input | Usage.output, "java");
+@@access(Azure.AI.Projects.EvaluationLevel, Access.public, "java");
 
 // Reuse equivalent openai-java models instead of generating duplicate public types.
 @@alternateType(
@@ -923,11 +929,7 @@ using Azure.AI.Projects;
 @@clientName(AgentOptimizationJobs.list, "listOptimizationJobs", "java");
 @@clientName(AgentOptimizationJobs.cancel, "cancelOptimizationJob", "java");
 @@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob", "java");
-@@clientName(
-  AgentOptimizationJobs.estimate,
-  "estimateOptimizationJob",
-  "java"
-);
+@@clientName(AgentOptimizationJobs.estimate, "estimateOptimizationJob", "java");
 @@clientName(
   AgentOptimizationJobCandidates.listCandidates,
   "listOptimizationCandidates",
