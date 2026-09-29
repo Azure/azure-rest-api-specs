@@ -502,11 +502,7 @@ File: `source/source-index.json`
             "startLine": 10,
             "endLine": 15
           },
-          "lines": [
-            " model Widget {",
-            "-  name: string;",
-            "+  name: WidgetName;"
-          ],
+          "lines": [" model Widget {", "-  name: string;", "+  name: WidgetName;"],
           "declarationOccurrenceIds": ["declaration-occurrence-<hash>"],
           "normalizedChanges": [
             {
