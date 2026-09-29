@@ -1,12 +1,10 @@
 name: Contributor Readiness - Testing
 
 on:
-  pull_request_target:
-    types: [opened, reopened, synchronize, ready_for_review]
   issue_comment:
     types: [created]
   workflow_run:
-    workflows: ["Contributor Readiness - Review Event - Testing"]
+    workflows: ["Contributor Readiness - Events - Testing"]
     types: [completed]
 
 permissions: {}
@@ -49,8 +47,8 @@ jobs:
       cancel-in-progress: false
     permissions:
       contents: read
-      pull-requests: read
-      issues: write
+      # PR conversation comments need pull-request write access, despite using the Issues API.
+      pull-requests: write
       checks: write
     steps:
       # Never check out or execute PR code, including when refreshing a fork review.

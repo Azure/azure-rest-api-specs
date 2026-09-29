@@ -33,14 +33,11 @@ function isAutomation(account: Account): boolean {
   return account.type === "Bot" || (account.id === 19864447 && account.login === "web-flow");
 }
 
-/** Resolves a trigger to its PR; ignored commands and unmatched review runs return null. */
+/** Resolves a trigger to its PR; ignored commands and unmatched notification runs return null. */
 export async function resolveReadinessPullRequest(
   inputs: GitHubScriptArgs,
 ): Promise<number | null> {
   const { context } = inputs;
-  if (context.eventName === "pull_request_target") {
-    return (context.payload as WebhookEvent<"pull-request">).pull_request.number;
-  }
   if (context.eventName === "issue_comment") {
     const { issue, comment, sender } = context.payload as WebhookEvent<"issue-comment", "created">;
     return issue.pull_request && comment.body.trim() === COMMAND && !isAutomation(sender)
@@ -48,14 +45,14 @@ export async function resolveReadinessPullRequest(
       : null;
   }
   if (context.eventName !== "workflow_run") throw new Error("Unsupported readiness trigger");
-  return resolveReviewWorkflowPullRequest(inputs);
+  return resolveNotificationPullRequest(inputs);
 }
 
 /**
- * Resolves a review notification from GitHub's run metadata, never fork-supplied artifacts.
+ * Resolves a PR/review notification from GitHub's run metadata, never fork-supplied artifacts.
  * Rejects unexpected workflows and incomplete or ambiguous PR associations.
  */
-async function resolveReviewWorkflowPullRequest({
+async function resolveNotificationPullRequest({
   github,
   context,
   core,
@@ -67,21 +64,21 @@ async function resolveReviewWorkflowPullRequest({
   });
   if (
     run.repository.id !== payload.repository.id ||
-    run.event !== "pull_request_review" ||
+    !["pull_request", "pull_request_review"].includes(run.event) ||
     run.path !== ".github/workflows/contributor-readiness-review.yaml"
   ) {
-    throw new Error("Unexpected contributor readiness review workflow");
+    throw new Error("Unexpected contributor readiness notification workflow");
   }
   let numbers = (run.pull_requests ?? [])
     .filter((pr) => pr.base.repo.id === payload.repository.id)
     .map((pr) => pr.number);
   if (numbers.length === 0) {
     const { data } = await github.rest.search.issuesAndPullRequests({
-      q: `repo:${context.repo.owner}/${context.repo.repo} is:pr is:open sha:${run.head_sha}`,
+      q: `repo:${context.repo.owner}/${context.repo.repo} is:pr is:open ${run.head_sha}`,
       per_page: PER_PAGE_MAX,
     });
     if (data.incomplete_results || data.total_count > data.items.length) {
-      throw new Error("Incomplete PR lookup for review workflow; use /azsdk check-access");
+      throw new Error("Incomplete PR lookup for notification workflow; use /azsdk check-access");
     }
     numbers = data.items.map((pr) => pr.number);
   }
@@ -92,10 +89,10 @@ async function resolveReviewWorkflowPullRequest({
   }
   if (candidates.length > 1) {
     throw new Error(
-      "Review workflow matches multiple PRs; use /azsdk check-access on the intended PR",
+      "Notification workflow matches multiple PRs; use /azsdk check-access on the intended PR",
     );
   }
-  if (!candidates.length) core.info("No open PR found for the review workflow.");
+  if (!candidates.length) core.info("No open PR found for the notification workflow.");
   return candidates[0] ?? null;
 }
 
@@ -399,6 +396,7 @@ async function publishReadinessReport(
     throw new Error("PR changed during evaluation; rerun contributor readiness");
   }
   const body = renderReadiness(participants, findings);
+  await core.summary.addRaw(body).write();
   await github.rest.checks.create({
     owner,
     repo,
@@ -417,7 +415,6 @@ async function publishReadinessReport(
     },
   });
   await updateReadinessComment(github, owner, repo, pr.number, body, findings.length > 0);
-  await core.summary.addRaw(body).write();
 }
 
 /**

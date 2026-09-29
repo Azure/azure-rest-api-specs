@@ -30,11 +30,16 @@ and other approval rules remain GitHub's responsibility. Unmapped identities,
 inaccessible API results, and PRs exceeding the commits API's 250-commit limit are
 reported as incomplete rather than silently passing.
 
-Submitted-review events use a read-only notification workflow followed by a
-trusted `workflow_run` publisher, so fork PR code is never executed with write
-permissions. Editing or dismissing a review does not rerun the check; those
-reviewers remain included. Fork workflow approval policies can delay automatic review refresh;
-the comment command is also available. Do not make this advisory check required.
+PR opening, reopening, new commits, ready-for-review transitions and submitted
+reviews use an unprivileged notification workflow followed by a trusted
+`workflow_run` publisher. The notifier has no checkout or token permissions;
+the publisher runs only default-branch code and resolves PRs from GitHub metadata.
+No `pull_request_target` trigger is used.
+
+Editing or dismissing a review does not rerun the check; those reviewers remain
+included. Fork workflow approval policies can delay automatic refreshes. The
+comment command runs from the default branch and remains available without
+waiting for the notifier. Do not make this advisory check required.
 
 ## Code conventions
 
