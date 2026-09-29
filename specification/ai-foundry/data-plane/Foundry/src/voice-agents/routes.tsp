@@ -92,12 +92,15 @@ interface VoiceAgentWebSocket {
 
       /**
        * Per-session values for the voice agent's declared `structured_inputs`, serialized as a JSON object and
+       * URL-encoded as this query parameter. Supplied values override definition defaults when rendering the
        * agent's instructions and session-start greeting for this session only. The decoded value must be a JSON
        * object no larger than 32 KiB with a maximum nesting depth of 16.
        */
       @query structured_input?: string;
 
       /** Selects a specific version of the voice agent for this session. */
+      @query("x-agent-version-override") agent_version_override?: string;
+
       /** The requested WebSocket subprotocol. Omit this header or request exactly `realtime`. */
       @header("Sec-WebSocket-Protocol")
       websocket_subprotocol?: VoiceAgentWebSocketSubprotocol;
@@ -465,6 +468,15 @@ interface AgentEndpointConversations {
   >;
 }
 
+/** Time filters for listing durable inbound telephony calls. */
+alias TelephonyCallListTimeQueryParameters = {
+  /** Includes calls that started at or after this Unix timestamp in seconds. */
+  @query started_after?: FoundryTimestamp;
+
+  /** Includes calls that started at or before this Unix timestamp in seconds. */
+  @query started_before?: FoundryTimestamp;
+};
+
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This interface combines agent-contained binding and call resources, call actions, and a singleton transfer-target collection, so it does not map to one standard resource operation template."
 @tag("Agent Telephony")
 interface AgentTelephony {
@@ -589,12 +601,7 @@ interface AgentTelephony {
       /** Filters calls by lifecycle status. */
       @query status?: TelephonyCallStatus;
 
-      /** Includes calls that started at or after this Unix timestamp in seconds. */
-      @query started_after?: FoundryTimestamp;
-
-      /** Includes calls that started at or before this Unix timestamp in seconds. */
-      @query started_before?: FoundryTimestamp;
-
+      ...TelephonyCallListTimeQueryParameters;
       ...CommonPageQueryParameters;
     },
     AgentsPagedResult<TelephonyCallSummary>
