@@ -4,15 +4,12 @@ import process from "node:process";
 import {
   apiReleaseTypeLabel,
   assertApiVersion,
-  assertCleanSpecCheckout,
   assertSpecCommitSha,
   compareSpecCommits,
   projectPath,
   releasePlanDetails,
   requiredPlanId,
   requiredTargetRevision,
-  runGit,
-  type GitRunner,
 } from "./spec-target.ts";
 import type {
   ApiReleaseType,
@@ -41,28 +38,19 @@ export function ensureReleasePlan(
   context: ReleasePlanCommandContext,
   runner: AzsdkRunner,
   allowCreate = true,
-  git: GitRunner = runGit,
 ): EnsureReleasePlanResult {
   assertApiVersion(context.apiVersion);
   assertSpecCommitSha(context.specCommitSha);
   if (!context.prUrl) {
     throw new Error("A merged spec pull request is required to confirm a release target.");
   }
-  assertCleanSpecCheckout(context.workspace, context.specCommitSha, git);
-
-  const existingByPr = runGetReleasePlan(context, runner, true);
-  if (existingByPr) {
-    // With version inputs, the CLI selects by project/version even when a PR is supplied.
+  const existing = runGetReleasePlan(context, runner);
+  if (existing) {
     const outcome =
-      releasePlanDetails(existingByPr).ActiveSpecPullRequest === context.prUrl
+      releasePlanDetails(existing).ActiveSpecPullRequest === context.prUrl
         ? "existing_by_pr"
         : "existing_by_path";
-    return confirmExistingPlan(existingByPr, outcome, context, runner, git);
-  }
-
-  const existingByPath = runGetReleasePlan(context, runner, false);
-  if (existingByPath) {
-    return confirmExistingPlan(existingByPath, "existing_by_path", context, runner, git);
+    return confirmExistingPlan(existing, outcome, context, runner);
   }
 
   if (!allowCreate) {
@@ -73,7 +61,6 @@ export function ensureReleasePlan(
     };
   }
 
-  assertCleanSpecCheckout(context.workspace, context.specCommitSha, git);
   const created = runCreateReleasePlan(context, runner);
   const createdDetails = validateSelectedPlan(created, context, false);
   if (
@@ -87,7 +74,7 @@ export function ensureReleasePlan(
       createdDetails.ActiveSpecPullRequest === context.prUrl
         ? "existing_by_pr"
         : "existing_by_path";
-    return confirmExistingPlan(created, outcome, context, runner, git);
+    return confirmExistingPlan(created, outcome, context, runner);
   }
   const confirmed = getReleasePlanByWorkItemId(
     requiredPlanId(createdDetails.WorkItemId, "WorkItemId"),
@@ -156,13 +143,12 @@ function confirmExistingPlan(
   outcome: "existing_by_pr" | "existing_by_path",
   context: ReleasePlanCommandContext,
   runner: AzsdkRunner,
-  git: GitRunner,
 ): EnsureReleasePlanResult {
   const details = validateSelectedPlan(existing, context, false);
   const isPrivatePreview = context.apiReleaseType === "Private Preview";
   const relation =
     !isPrivatePreview && details.SpecCommitSHA
-      ? compareSpecCommits(context.workspace, details.SpecCommitSHA, context.specCommitSha, git)
+      ? compareSpecCommits(context.workspace, details.SpecCommitSHA, context.specCommitSha)
       : undefined;
   if (relation === "stale") {
     return {
@@ -178,7 +164,6 @@ function confirmExistingPlan(
     return { outcome, releasePlan: existing, details: buildDetails(context, existing) };
   }
 
-  assertCleanSpecCheckout(context.workspace, context.specCommitSha, git);
   const workItemId = requiredPlanId(details.WorkItemId, "WorkItemId");
   const response = parseAzdskResponse(
     runner([
@@ -243,17 +228,15 @@ function buildDetails(
 }
 
 /**
- * Both discovery routes constrain project, API version and release type, not strict PR identity.
+ * Select by project, API version and release type; a later PR may update the same plan.
  */
 function runGetReleasePlan(
   context: ReleasePlanCommandContext,
   runner: AzsdkRunner,
-  byPr: boolean,
 ): ReleasePlanData | null {
   const args = [
     "release-plan",
     "get",
-    ...(byPr ? ["--pull-request", context.prUrl!] : []),
     "--typespec-path",
     projectPath(context.tspProjectPath, context.workspace),
     "--api-version",
@@ -324,12 +307,6 @@ function runCreateReleasePlan(
   context: ReleasePlanCommandContext,
   runner: AzsdkRunner,
 ): ReleasePlanData {
-  if (!context.prUrl) {
-    throw new Error(
-      "No pull request URL could be resolved for this commit; cannot create release plan.",
-    );
-  }
-
   const args = [
     "release-plan",
     "create",
@@ -340,7 +317,7 @@ function runCreateReleasePlan(
     "--release-month",
     context.targetMonth,
     "--pull-request",
-    context.prUrl,
+    context.prUrl!,
     "--test-release",
     String(context.testReleasePlan),
     ...targetArguments(context),

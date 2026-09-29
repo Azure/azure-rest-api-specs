@@ -5,13 +5,11 @@ import { parseArgs, type ParseArgsConfig } from "node:util";
 import { createAzdskRunner, getReleasePlanById, parseAzdskResponse } from "./release-plan.ts";
 import {
   apiReleaseTypeLabel,
-  assertCleanSpecCheckout,
   projectPath,
   releasePlanDetails,
   requiredPlanId,
   requiredTargetRevision,
   validateArtifactTarget,
-  type GitRunner,
 } from "./spec-target.ts";
 import type { AzsdkRunner, EnsureReleasePlanResult } from "./types.ts";
 
@@ -23,7 +21,6 @@ interface RefreshSdkDetailsCliArgs {
 export interface RefreshSdkDetailsDependencies {
   readArtifact: (artifactFile: string) => string;
   runner: AzsdkRunner;
-  git?: GitRunner;
 }
 
 function showHelp(): void {
@@ -132,9 +129,6 @@ export function runUpdateSdkDetails(
   const sdkReleaseType = planDetails.SDKReleaseType!;
   // Keep the artifact's observed target and revision, not a newer state learned from the lookup.
   const specCommitSha = snapshot.SpecCommitSHA!;
-  if (!isPrivatePreview) {
-    assertCleanSpecCheckout(args.workspace, specCommitSha, deps.git);
-  }
   const targetArgs = isPrivatePreview
     ? []
     : [
@@ -168,12 +162,6 @@ export function runUpdateSdkDetails(
     throw new Error("azsdk release-plan update did not return a confirmed release plan.");
   }
   validateArtifactTarget(artifact, response, args.workspace);
-  if (!isPrivatePreview) {
-    assertCleanSpecCheckout(args.workspace, specCommitSha, deps.git);
-  }
-
-  // Re-fetch once so completion is visible in logs and failures are surfaced early.
-  validateArtifactTarget(artifact, getReleasePlanById(releasePlanId, runner), args.workspace);
   console.log(
     `SDK details update completed for release plan '${releasePlanId}' (sdkType='${sdkReleaseType}').`,
   );

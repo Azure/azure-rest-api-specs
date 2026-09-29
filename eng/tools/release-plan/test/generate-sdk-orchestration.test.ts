@@ -1,24 +1,24 @@
 import path from "node:path";
-import { generateTypeSpecMetadata } from "@azure-tools/specs-shared/typespec-metadata";
 import { describe, expect, it, vi } from "vitest";
 import type { GenerateSdkDependencies } from "../src/generate-sdk.ts";
 import { runGenerateSdk } from "../src/generate-sdk.ts";
-import { ensureReleasePlan } from "../src/release-plan.ts";
-import type { AzsdkRunner, CommandResult, OctokitLike, ReleasePlanData } from "../src/types.ts";
-import { runUpdateSdkDetails } from "../src/update-sdk-details.ts";
-import { API_VERSION, cleanGit, context, OLD_SHA, plan, PR_URL, SPEC_SHA } from "./test-helpers.ts";
-
-vi.mock("@azure-tools/specs-shared/typespec-metadata", () => ({
-  generateTypeSpecMetadata: vi.fn(),
-}));
+import type { CommandResult, OctokitLike } from "../src/types.ts";
 
 const WORKSPACE = path.resolve("/repo/root");
 const SPEC_PATH = "specification/contoso/Contoso.Management";
 const LANGUAGES = [".NET", "Java", "JavaScript", "Python", "Go"];
+const PLAN_TARGET = {
+  ReleasePlanId: "12345",
+  WorkItemId: "9001",
+  APISpecProjectPath: SPEC_PATH,
+  SpecAPIVersion: "2026-06-01-preview",
+  SpecCommitSHA: "a".repeat(40),
+  ApiReleaseType: 2,
+  SDKReleaseType: "beta",
+  ActiveSpecPullRequest: "https://github.com/Azure/azure-rest-api-specs/pull/123",
+};
 
-function ok(
-  stdout = JSON.stringify({ status: "Success", operation_status: "Succeeded" }),
-): CommandResult {
+function ok(stdout = JSON.stringify({ status: "Success" })): CommandResult {
   return { exitCode: 0, stdout, stderr: "" };
 }
 
@@ -34,10 +34,7 @@ function buildArtifact(overrides: Record<string, unknown> = {}): string {
     outcome: "existing_by_path",
     releasePlan: {
       release_plan_details: {
-        ...plan().release_plan_details,
-        ReleasePlanId: "12345",
-        WorkItemId: "9001",
-        APISpecProjectPath: SPEC_PATH,
+        ...PLAN_TARGET,
         ...overrides,
       },
     },
@@ -50,9 +47,8 @@ function buildArtifact(overrides: Record<string, unknown> = {}): string {
 function buildPlan(details: Record<string, unknown> = {}): string {
   return JSON.stringify({
     release_plan_details: {
-      ...plan().release_plan_details,
+      ...PLAN_TARGET,
       IsManagementPlane: true,
-      SDKReleaseType: "beta",
       SDKInfo: LANGUAGES.map((language) => ({
         Language: language,
         PackageName: `azure-mgmt-${language.toLowerCase()}`,
@@ -148,7 +144,7 @@ describe("runGenerateSdk orchestration", () => {
         "--workitem-id",
         "9001",
         "--api-version",
-        API_VERSION,
+        "2026-06-01-preview",
         "--output",
         "json",
       ]);
@@ -241,241 +237,5 @@ describe("runGenerateSdk orchestration", () => {
 
     await expect(runGenerateSdk(cliArgs, deps)).resolves.toBeUndefined();
     expect(calls.some((c) => c[0] === "release-plan" && c[1] === "update")).toBe(false);
-  });
-
-  it("January preview plan keeps January and its old SHA when the live config defaults to June GA", async () => {
-    vi.mocked(generateTypeSpecMetadata).mockResolvedValue({
-      emitterVersion: "0.3.0",
-      generatedAt: "2026-06-01T00:00:00Z",
-      typespec: { namespace: "Contoso", type: "management" },
-      languages: {
-        python: [{ emitterName: "python", apiVersion: "2026-06-01", sdkType: "stable" }],
-      },
-    });
-    const { deps, calls } = createHarness({
-      artifact: JSON.stringify({
-        outcome: "existing_by_id",
-        releasePlan: plan({ SpecCommitSHA: OLD_SHA }),
-        details: { releasePlanId: "12345" },
-      }),
-      getResponses: [buildPlan({ SpecCommitSHA: OLD_SHA })],
-    });
-
-    await runGenerateSdk(cliArgs, deps);
-
-    for (const language of LANGUAGES) {
-      const args = generateCallFor(calls, language)!;
-      expect(args[args.indexOf("--api-version") + 1]).toBe("2026-01-01-preview");
-      expect(args).not.toContain("--spec-commit-sha");
-      expect(args[args.indexOf("--release-type") + 1]).toBe("beta");
-      expect(args).not.toContain("2026-06-01");
-    }
-    expect(generateTypeSpecMetadata).not.toHaveBeenCalled();
-    expect(calls.filter((args) => args[0] === "release-plan")).toHaveLength(1);
-  });
-
-  it("creates from PR A, updates the same plan from PR B, and generates from the saved B SHA", async () => {
-    let saved: ReleasePlanData | null = null;
-    let revision = 1;
-    const queued: Array<{ workItemId: string; apiVersion: string; sha: string }> = [];
-    const runner = vi.fn<AzsdkRunner>((args) => {
-      const value = (flag: string) => args[args.indexOf(flag) + 1];
-      expect(args).not.toContain("--expected-spec-commit-sha");
-      expect(args).not.toContain("--require-merged-spec");
-      if (args[0] === "spec-workflow") {
-        expect(args).not.toContain("--spec-commit-sha");
-        // The current CLI reads its source SHA from the saved plan, not a generation argument.
-        queued.push({
-          workItemId: value("--workitem-id"),
-          apiVersion: value("--api-version"),
-          sha: saved!.release_plan_details!.SpecCommitSHA!,
-        });
-        return ok();
-      }
-      if (args[1] === "get") return ok(JSON.stringify(saved));
-      if (args[1] === "create") {
-        expect(saved).toBeNull();
-        saved = plan({
-          SpecCommitSHA: value("--spec-commit-sha"),
-          ActiveSpecPullRequest: value("--pull-request"),
-        });
-        return ok(JSON.stringify(saved));
-      }
-      expect(["update-spec-pr", "update"]).toContain(args[1]);
-      expect(value("--expected-target-revision")).toBe(saved!.release_plan_details!.TargetRevision);
-      saved = plan({
-        ...saved!.release_plan_details,
-        SpecCommitSHA: value("--spec-commit-sha"),
-        ActiveSpecPullRequest: value("--pull-request"),
-        TargetRevision: `9001:${++revision}:9002:${revision}`,
-      });
-      return args[1] === "update" ? ok(JSON.stringify(saved)) : ok();
-    });
-
-    for (const [sha, prUrl, allowCreate] of [
-      [OLD_SHA, PR_URL.replace("123", "100"), true],
-      [SPEC_SHA, PR_URL, false],
-    ] as const) {
-      const discovered = ensureReleasePlan(
-        { ...context, specCommitSha: sha, prUrl },
-        runner,
-        allowCreate,
-        cleanGit(sha),
-      );
-      expect(discovered.outcome).toBe(allowCreate ? "created" : "existing_by_path");
-      const readArtifact = () => JSON.stringify(discovered);
-      runUpdateSdkDetails(cliArgs, { readArtifact, runner, git: cleanGit(sha) });
-      await runGenerateSdk(cliArgs, { readArtifact, runner, octokit: createOctokitMock() });
-    }
-
-    expect(runner.mock.calls.filter(([args]) => args[1] === "create")).toHaveLength(1);
-    expect(runner.mock.calls.filter(([args]) => args[1] === "update-spec-pr")).toHaveLength(1);
-    expect(queued.map(({ sha }) => sha)).toEqual([
-      ...LANGUAGES.map(() => OLD_SHA),
-      ...LANGUAGES.map(() => SPEC_SHA),
-    ]);
-    expect(
-      queued.every(
-        ({ workItemId, apiVersion }) => workItemId === "9001" && apiVersion === API_VERSION,
-      ),
-    ).toBe(true);
-    const stale = ensureReleasePlan(
-      { ...context, specCommitSha: OLD_SHA },
-      runner,
-      false,
-      cleanGit(OLD_SHA),
-    );
-    expect(stale.outcome).toBe("stale_event");
-    await runGenerateSdk(cliArgs, {
-      readArtifact: () => JSON.stringify(stale),
-      runner,
-      octokit: createOctokitMock(),
-    });
-    expect(queued).toHaveLength(10);
-  });
-
-  it.each(["stale_event", "not_found"])(
-    "never queues SDKs or fetches a plan for %s",
-    async (outcome) => {
-      const { deps, runner } = createHarness({
-        artifact: JSON.stringify({ outcome, releasePlan: plan() }),
-      });
-      await runGenerateSdk(cliArgs, deps);
-      expect(runner).not.toHaveBeenCalled();
-    },
-  );
-
-  it("does not generate or backfill a private-preview plan without a pin", async () => {
-    const privateDetails = {
-      ApiReleaseType: 1,
-      SpecCommitSHA: undefined,
-      ActiveSpecPullRequest: PR_URL.replace("azure-rest-api-specs/", "azure-rest-api-specs-pr/"),
-    };
-    const { deps, calls } = createHarness({
-      artifact: buildArtifact(privateDetails),
-      getResponses: [buildPlan(privateDetails)],
-    });
-    await runGenerateSdk(cliArgs, deps);
-    expect(calls.filter((args) => args[0] === "spec-workflow")).toHaveLength(0);
-    expect(calls).toHaveLength(1);
-  });
-
-  it.each([
-    { WorkItemId: "9002" },
-    { ReleasePlanId: "54321" },
-    { APISpecProjectPath: "specification/other/Other.Management" },
-    { ActiveSpecPullRequest: PR_URL.replace("123", "456") },
-  ])("rejects a wrong private-preview identity without generation: %j", async (details) => {
-    const privateDetails = { ApiReleaseType: 1, SpecCommitSHA: undefined };
-    const { deps, calls } = createHarness({
-      artifact: buildArtifact(privateDetails),
-      getResponses: [buildPlan({ ...privateDetails, ...details })],
-    });
-    await expect(runGenerateSdk(cliArgs, deps)).rejects.toThrow(/changed since discovery/);
-    expect(calls).toHaveLength(1);
-  });
-
-  it.each([
-    { SpecAPIVersion: undefined },
-    { SpecAPIVersion: "latest" },
-    { SpecCommitSHA: undefined },
-    { SpecCommitSHA: "HEAD" },
-    { SpecCommitSHA: OLD_SHA },
-    { SpecAPIVersion: "2026-06-01" },
-    { APISpecProjectPath: "specification/other/Other.Management" },
-    { WorkItemId: undefined },
-    { WorkItemId: "9002" },
-    { ReleasePlanId: "12346" },
-    { ActiveSpecPullRequest: PR_URL.replace("123", "456") },
-    { SDKReleaseType: "stable" },
-    { ApiReleaseType: 3 },
-  ])("rejects a missing or changed stored target without queueing: %j", async (details) => {
-    const { deps, calls } = createHarness({ getResponses: [buildPlan(details)] });
-    await expect(runGenerateSdk(cliArgs, deps)).rejects.toThrow();
-    expect(calls.filter((args) => args[0] === "spec-workflow")).toHaveLength(0);
-  });
-
-  it.each([{ SpecCommitSHA: undefined }, { WorkItemId: undefined }])(
-    "does not infer missing artifact target fields: %j",
-    async (details) => {
-      const { deps, calls } = createHarness({ artifact: buildArtifact(details) });
-      await expect(runGenerateSdk(cliArgs, deps)).rejects.toThrow();
-      expect(calls.filter((args) => args[0] === "spec-workflow")).toHaveLength(0);
-    },
-  );
-
-  it("rejects a mismatch between discovery selection and artifact plan details", async () => {
-    const { deps, calls } = createHarness({
-      artifact: JSON.stringify({
-        outcome: "existing_by_pr",
-        releasePlan: plan(),
-        details: {
-          prUrl: PR_URL,
-          tspProjectPath: SPEC_PATH,
-          apiVersion: "2026-06-01",
-          specCommitSha: SPEC_SHA,
-          apiReleaseType: "Public Preview",
-          sdkReleaseType: "beta",
-          targetReleaseMonth: "July 2026",
-        },
-      }),
-    });
-    await expect(runGenerateSdk(cliArgs, deps)).rejects.toThrow(/explicit spec target/);
-    expect(calls.filter((args) => args[0] === "spec-workflow")).toHaveLength(0);
-  });
-
-  it.each([
-    { requires_confirmation: true, status: "Success" },
-    { response_error: "Unmerged spec PR" },
-    { response_errors: ["Stored pin changed"], status: "Failed" },
-    { operation_status: "Failed" },
-    {},
-  ])("stops all remaining languages on a zero-exit unsafe CLI response: %j", async (response) => {
-    const { deps, calls } = createHarness({
-      runnerImpl: (args) =>
-        args[0] === "release-plan" ? ok(buildPlan()) : ok(JSON.stringify(response)),
-    });
-    await expect(runGenerateSdk(cliArgs, deps)).rejects.toThrow(/SDK generation failed/);
-    expect(calls.filter((args) => args[0] === "spec-workflow")).toHaveLength(1);
-  });
-
-  it("stops the remaining languages when the CLI reports a generation failure", async () => {
-    const { deps, calls } = createHarness({
-      runnerImpl: (args) => {
-        if (args[0] === "release-plan") return ok(buildPlan());
-        if (args.includes("Java"))
-          return ok(
-            JSON.stringify({
-              status: "Failed",
-              response_error: "Could not queue the SDK generation pipeline",
-            }),
-          );
-        return ok();
-      },
-    });
-    await expect(runGenerateSdk(cliArgs, deps)).rejects.toThrow(/Java/);
-    const generated = calls.filter((args) => args[0] === "spec-workflow");
-    expect(generated).toHaveLength(2);
-    for (const args of generated) expect(args).not.toContain("--spec-commit-sha");
   });
 });

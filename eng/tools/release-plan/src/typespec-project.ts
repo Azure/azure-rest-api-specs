@@ -6,7 +6,7 @@ import { Octokit } from "@octokit/rest";
 import { execSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
 import { join, posix } from "node:path";
-import { assertCleanSpecCheckout, assertSpecCommitSha, type GitRunner } from "./spec-target.ts";
+import { assertCleanSpecCheckout, assertSpecCommitSha } from "./spec-target.ts";
 import type {
   CommitProjectInfoResult,
   OctokitLike,
@@ -45,7 +45,6 @@ export async function getTypeSpecProjectInfoFromPr(params: {
   workspace: string;
   octokit: OctokitLike;
   commitSha?: string;
-  git?: GitRunner;
 }): Promise<TypeSpecProjectInfo | null> {
   const { prNumber, owner, repo, workspace, octokit } = params;
 
@@ -78,14 +77,14 @@ export async function getTypeSpecProjectInfoFromPr(params: {
   const tspProjectAbsPath = join(workspace, tspProjectRelPath);
 
   const specCommitSha = await getMergedSpecCommitSha(params);
-  assertCleanSpecCheckout(workspace, specCommitSha, params.git);
+  assertCleanSpecCheckout(workspace, specCommitSha);
   const info = await getTypeSpecProjectVersionFromMetadata(tspProjectAbsPath, tspProjectRelPath);
-  assertCleanSpecCheckout(workspace, specCommitSha, params.git);
+  assertCleanSpecCheckout(workspace, specCommitSha);
   return { ...info, specCommitSha };
 }
 
 /** Resolve only a merged PR's immutable commit, never its branch head or a test-merge ref. */
-export async function getMergedSpecCommitSha(params: {
+async function getMergedSpecCommitSha(params: {
   prNumber: number;
   owner: string;
   repo: string;
@@ -121,7 +120,6 @@ export async function getTypeSpecProjectInfoFromCommit(params: {
   repo: string;
   workspace: string;
   octokit: OctokitLike;
-  git?: GitRunner;
 }): Promise<CommitProjectInfoResult> {
   const { commitSha, owner, repo, workspace, octokit } = params;
 
@@ -164,7 +162,6 @@ export async function getTypeSpecProjectInfoFromCommit(params: {
       workspace,
       octokit,
       commitSha,
-      git: params.git,
     });
     return {
       projectInfo,

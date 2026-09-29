@@ -269,6 +269,7 @@ export async function runGenerateSdk(
 
   const sdkInfoItems = planDetails.SDKInfo ?? [];
   const outcomeNormalized = outcome.toLowerCase();
+  const failedLanguages: SdkLanguage[] = [];
 
   for (const language of languages) {
     console.log(`Checking if SDK needs to be generated for language '${language}'.`);
@@ -308,12 +309,21 @@ export async function runGenerateSdk(
         throw new Error("azsdk did not return a successful SDK generation response.");
       }
     } catch (error) {
-      throw new Error(`SDK generation failed for language '${language}'. ${String(error)}`, {
-        cause: error,
-      });
+      console.error(`SDK generation failed for language '${language}'. ${String(error)}`);
+      failedLanguages.push(language);
+      continue;
     }
     console.log(`SDK generation succeeded for language '${language}'.`);
-    console.log(generateResult.stdout.trim());
+    if (generateResult.stdout.trim()) {
+      console.log(generateResult.stdout.trim());
+    }
+    if (generateResult.stderr.trim()) {
+      console.log(generateResult.stderr.trim());
+    }
+  }
+
+  if (failedLanguages.length > 0) {
+    throw new Error(`SDK generation failed for language(s): ${failedLanguages.join(", ")}`);
   }
 
   console.log("SDK generation stage completed successfully.");

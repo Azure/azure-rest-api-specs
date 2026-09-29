@@ -23,9 +23,7 @@ export function assertSpecCommitSha(value: unknown): asserts value is string {
   }
 }
 
-export type GitRunner = (workspace: string, args: string[]) => CommandResult;
-
-export const runGit: GitRunner = (workspace, args) => {
+function runGit(workspace: string, args: string[]): CommandResult {
   const result = spawnSync("git", ["--no-optional-locks", "-C", workspace, ...args], {
     encoding: "utf8",
     env: { ...process.env, GIT_NO_LAZY_FETCH: "1" },
@@ -35,22 +33,18 @@ export const runGit: GitRunner = (workspace, args) => {
     stdout: result.stdout || "",
     stderr: result.error?.message || result.stderr || "",
   };
-};
+}
 
 /** Verify the caller's checkout without checking out, fetching, stashing, or resetting it. */
-export function assertCleanSpecCheckout(
-  workspace: string,
-  specCommitSha: string,
-  git: GitRunner = runGit,
-): void {
+export function assertCleanSpecCheckout(workspace: string, specCommitSha: string): void {
   assertSpecCommitSha(specCommitSha);
-  const head = git(workspace, ["rev-parse", "HEAD"]);
+  const head = runGit(workspace, ["rev-parse", "HEAD"]);
   if (head.exitCode !== 0 || head.stdout.trim().toLowerCase() !== specCommitSha.toLowerCase()) {
     throw new Error(
       `The workspace HEAD must equal the selected spec commit ${specCommitSha}. Prepare a separate checkout at that commit; automation will not switch it. ${head.stderr}`,
     );
   }
-  const status = git(workspace, ["status", "--porcelain=v1", "--untracked-files=all"]);
+  const status = runGit(workspace, ["status", "--porcelain=v1", "--untracked-files=all"]);
   if (status.exitCode !== 0 || status.stdout.trim()) {
     throw new Error(`The spec checkout must be clean before using its metadata. ${status.stderr}`);
   }
@@ -61,7 +55,6 @@ export function compareSpecCommits(
   workspace: string,
   storedSha: string,
   eventSha: string,
-  git: GitRunner = runGit,
 ): "same" | "advance" | "stale" {
   assertSpecCommitSha(storedSha);
   assertSpecCommitSha(eventSha);
@@ -70,7 +63,7 @@ export function compareSpecCommits(
   }
 
   const isAncestor = (ancestor: string, descendant: string): boolean => {
-    const result = git(workspace, ["merge-base", "--is-ancestor", ancestor, descendant]);
+    const result = runGit(workspace, ["merge-base", "--is-ancestor", ancestor, descendant]);
     if (result.exitCode !== 0 && result.exitCode !== 1) {
       throw new Error(`Cannot establish spec commit ancestry. ${result.stderr}`);
     }
