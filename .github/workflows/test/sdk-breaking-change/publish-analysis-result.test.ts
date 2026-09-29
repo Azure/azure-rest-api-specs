@@ -141,7 +141,8 @@ describe("buildAnalysisReport", () => {
     expect(result.report).toContain(
       `[SDK breaking change analysis details](${analysisWorkflowUrl})`,
     );
-    expect(result.report).toContain("| ☐ | Model changed | spec change | Restore the old shape |");
+    expect(result.report).toContain("| 1 | Model changed | spec change | Restore the old shape |");
+    expect(result.report).toContain("| 2 | Property changed | spec change |  |");
   });
 });
 
@@ -180,12 +181,18 @@ describe("publishAnalysisResult", () => {
 
     await publishAnalysisResult({ github, context: createMockContext(), core });
 
-    const errorMessage = `SDK generation failed.\n\n[See analysis workflow](${analysisWorkflowUrl})`;
+    const errorMessage = [
+      "SDK breaking-change analysis failed.",
+      "",
+      "SDK generation failed.",
+      "",
+      `[See analysis workflow](${analysisWorkflowUrl})`,
+    ].join("\n");
     expect(core.warning).toHaveBeenCalledWith(errorMessage);
     expect(github.rest.issues.createComment).toHaveBeenCalledWith(
       expect.objectContaining({
         issue_number: 42,
-        body: `/azsdk sdk-breaking-analysis Go\n\n${errorMessage}`,
+        body: `/azsdk sdk-breaking-analysis Go\n\n❌ ${errorMessage}`,
       }),
     );
     expect(github.rest.pulls.get).not.toHaveBeenCalled();
@@ -206,7 +213,7 @@ describe("publishAnalysisResult", () => {
         body: [
           "/azsdk sdk-breaking-analysis Go",
           "",
-          `Analysis result for ${analyzedSha} is stale; current PR head is ${currentSha}.`,
+          `⚠️ Analysis result for ${analyzedSha} is stale; current PR head is ${currentSha}.`,
         ].join("\n"),
       }),
     );

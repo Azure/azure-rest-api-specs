@@ -32,36 +32,45 @@ afterEach(async () => {
 });
 
 describe("resolveMitigationTrigger", () => {
-  it("resolves mitigation inputs from a successful analysis result", async () => {
-    await writeAnalysisResult();
-    const github = createMockGithub();
-    const context = createMockContext();
-    const core = createMockCore();
-    github.rest.pulls.get.mockResolvedValue({
-      data: {
-        head: {
-          ref: "feature",
-          repo: { full_name: "owner/repo" },
-          sha: "a".repeat(40),
+  it.each([
+    ["DotNet", "azure-sdk-for-net"],
+    ["Go", "azure-sdk-for-go"],
+    ["Java", "azure-sdk-for-java"],
+    ["JavaScript", "azure-sdk-for-js"],
+    ["Python", "azure-sdk-for-python"],
+  ] as const)(
+    "resolves %s mitigation inputs from a successful analysis result",
+    async (sdkLanguage, sdkRepository) => {
+      await writeAnalysisResult({ sdkLanguage });
+      const github = createMockGithub();
+      const context = createMockContext();
+      const core = createMockCore();
+      github.rest.pulls.get.mockResolvedValue({
+        data: {
+          head: {
+            ref: "feature",
+            repo: { full_name: "owner/repo" },
+            sha: "a".repeat(40),
+          },
         },
-      },
-    });
+      });
 
-    await resolveMitigationTrigger({
-      github,
-      context,
-      core,
-      publishedResultsPath: analysisResultPath,
-    });
+      await resolveMitigationTrigger({
+        github,
+        context,
+        core,
+        publishedResultsPath: analysisResultPath,
+      });
 
-    expect(core.setOutput).toHaveBeenCalledWith("should-run", "true");
-    expect(core.setOutput).toHaveBeenCalledWith("pull-number", 42);
-    expect(core.setOutput).toHaveBeenCalledWith("sdk-language", "Java");
-    expect(core.setOutput).toHaveBeenCalledWith("sdk-repository", "azure-sdk-for-java");
-    expect(core.setOutput).toHaveBeenCalledWith("head-repository", "owner/repo");
-    expect(core.setOutput).toHaveBeenCalledWith("head-sha", "a".repeat(40));
-    expect(core.setOutput).toHaveBeenCalledWith("head-branch", "feature");
-  });
+      expect(core.setOutput).toHaveBeenCalledWith("should-run", "true");
+      expect(core.setOutput).toHaveBeenCalledWith("pull-number", 42);
+      expect(core.setOutput).toHaveBeenCalledWith("sdk-language", sdkLanguage);
+      expect(core.setOutput).toHaveBeenCalledWith("sdk-repository", sdkRepository);
+      expect(core.setOutput).toHaveBeenCalledWith("head-repository", "owner/repo");
+      expect(core.setOutput).toHaveBeenCalledWith("head-sha", "a".repeat(40));
+      expect(core.setOutput).toHaveBeenCalledWith("head-branch", "feature");
+    },
+  );
 
   it("skips mitigation when analysis failed", async () => {
     await writeAnalysisResult({

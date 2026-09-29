@@ -16,17 +16,17 @@ export async function buildAnalysisReport(resultsPath: string): Promise<{
   const projectReports = result.projects.map((project) => {
     const tableRows = project.breakingChanges.length
       ? project.breakingChanges.map(
-          (change) =>
-            `| ☐ | ${escapeMarkdown(change.breakingChange)} | ${escapeMarkdown(change.category)} | ${escapeMarkdown(change.suggestedFix)} |`,
+          (change, index) =>
+            `| ${index + 1} | ${escapeMarkdown(change.breakingChange)} | ${escapeMarkdown(change.category)} | ${escapeMarkdown(change.suggestedFix)} |`,
         )
-      : ["| ☐ | No SDK breaking changes detected. | - | - |"];
+      : ["| - | No SDK breaking changes detected. | - | - |"];
 
     const projectReport = [
       `**Typespec Project:** ${project.typespecProject}`,
       "",
       `**SDK Package:** ${project.sdkPackage}`,
       "",
-      "|  | Breaking change | Category | Suggested fix |",
+      "| # | Breaking change | Category | Suggested fix |",
       "| --- | --- | --- | --- |",
       ...tableRows,
     ];
@@ -59,9 +59,14 @@ export async function publishAnalysisResult({
 
   const { command, report, result } = await buildAnalysisReport(resultsPath);
   if (result.status !== "success") {
-    const errorMessage = result.errorMessage ?? "The SDK breaking-change analysis did not succeed.";
+    const errorMessage = `SDK breaking-change analysis failed.\n\n${result.errorMessage ?? ""}\n\n[See analysis workflow](${result.analysisWorkflowUrl})`;
     core.warning(errorMessage);
-    await publishResultInComment({ github, context, core }, result.prNumber, command, errorMessage);
+    await publishResultInComment(
+      { github, context, core },
+      result.prNumber,
+      command,
+      `❌ ${errorMessage}`,
+    );
     return;
   }
   const { data: pull } = await github.rest.pulls.get({
@@ -71,7 +76,12 @@ export async function publishAnalysisResult({
   if (pull.head.sha !== result.headSha) {
     const staleMessage = `Analysis result for ${result.headSha} is stale; current PR head is ${pull.head.sha}.`;
     core.warning(staleMessage);
-    await publishResultInComment({ github, context, core }, result.prNumber, command, staleMessage);
+    await publishResultInComment(
+      { github, context, core },
+      result.prNumber,
+      command,
+      `⚠️ ${staleMessage}`,
+    );
     return;
   }
 

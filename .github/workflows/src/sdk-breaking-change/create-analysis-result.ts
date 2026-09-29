@@ -101,7 +101,6 @@ export async function createAnalysisResult({
       }
     }
     errorMessage ||= "SDK breaking-change analysis failed.";
-    errorMessage += `\n\n[See analysis workflow](${analysisWorkflowUrl})`;
   }
 
   const result = AnalysisResultSchema.parse({

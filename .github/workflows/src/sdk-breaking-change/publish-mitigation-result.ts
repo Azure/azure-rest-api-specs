@@ -20,19 +20,18 @@ export async function buildMitigationReport({
     JSON.parse(await readFile(mitigationResultPath, "utf8")),
   );
   if (result.status !== "success") {
-    const errorMessage =
-      result.errorMessage ?? "The SDK breaking-change mitigation did not succeed.";
+    const errorMessage = `SDK breaking change mitigation failed.\n\n${result.errorMessage ?? ""}\n\n[See mitigation workflow](${result.mitigationWorkflowUrl})`;
     core.warning(errorMessage); // Handle the failure case if needed
-    return { report: errorMessage, result };
+    return { report: `❌ ${errorMessage}`, result };
   }
   const { data: pull } = await github.rest.pulls.get({
     ...context.repo,
     pull_number: result.prNumber,
   });
   if (pull.head.sha !== result.headSha) {
-    const staleMessage = `Analysis result for ${result.headSha} is stale; current PR head is ${pull.head.sha}.`;
+    const staleMessage = `Mitigation result for ${result.headSha} is stale; current PR head is ${pull.head.sha}.`;
     core.warning(staleMessage);
-    return { report: staleMessage, result };
+    return { report: `⚠️ ${staleMessage}`, result };
   }
   const projectSections = result.projects.flatMap((project) => {
     const resolvedChanges = project.breakingChanges
@@ -78,7 +77,7 @@ export async function buildMitigationReport({
       : fullChangedCode;
   return {
     report: [
-      "## SDK breaking-change mitigation result",
+      `## SDK breaking-change mitigation for ${result.sdkLanguage}`,
       "",
       `**Mitigation upon commit:** \`${result.headSha}\``,
       "",
