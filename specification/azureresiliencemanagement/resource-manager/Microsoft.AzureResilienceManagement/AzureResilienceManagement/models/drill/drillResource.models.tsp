@@ -32,13 +32,13 @@ model DrillResource is ProxyResource<DrillResourceProperties> {
 
 @@typeChangedFrom(
   DrillResource.properties,
-  Versions.v2026_09_30_preview,
+  Versions.v2026_10_31_preview,
   LegacyDrillResourceProperties
 );
 
 @doc("Properties of the Resiliency Drill Resource")
-@removed(Versions.v2026_09_30_preview)
-@renamedFrom(Versions.v2026_09_30_preview, "DrillResourceProperties")
+@removed(Versions.v2026_10_31_preview)
+@renamedFrom(Versions.v2026_10_31_preview, "DrillResourceProperties")
 model LegacyDrillResourceProperties {
   @doc("ARM Id of the underlying resource.")
   resourceId: armResourceIdentifier<[]>;
@@ -143,7 +143,7 @@ model LegacyDrillResourceProperties {
 }
 
 @doc("Properties of the Resiliency Drill Resource")
-@added(Versions.v2026_09_30_preview)
+@added(Versions.v2026_10_31_preview)
 @discriminator("drillType")
 model DrillResourceProperties {
   // Retired fields remain in the legacy model but must not reappear in the new base.
@@ -180,7 +180,7 @@ model DrillResourceProperties {
 }
 
 @doc("Properties of a resource in a zonal Resiliency Drill.")
-@added(Versions.v2026_09_30_preview)
+@added(Versions.v2026_10_31_preview)
 model ZonalDrillResourceProperties extends DrillResourceProperties {
   @doc("The discriminator for the Drill Resource object hierarchy. Matches the parent Drill type.")
   @visibility(Lifecycle.Read)
@@ -196,7 +196,7 @@ model ZonalDrillResourceProperties extends DrillResourceProperties {
 }
 
 @doc("Properties of a resource in a regional Resiliency Drill.")
-@added(Versions.v2026_09_30_preview)
+@added(Versions.v2026_10_31_preview)
 model RegionalDrillResourceProperties extends DrillResourceProperties {
   @doc("The discriminator for the Drill Resource object hierarchy. Matches the parent Drill type.")
   @visibility(Lifecycle.Read)

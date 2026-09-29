@@ -98,7 +98,7 @@ interface AgentPools {
    * Completes the upgrade operation for the specified agent pool.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Keeping both 202 and 204 responses for passing the lintdiff validator. See https://github.com/Azure/azure-openapi-validator/issues/809"
-  @added(Versions.v2026_06_02_preview)
+  @added(Versions.v2026_07_02_preview)
   @summary("Completes the upgrade of an agent pool.")
   completeUpgrade is ArmResourceActionAsync<
     AgentPool,
@@ -141,7 +141,7 @@ interface AgentPools {
   /**
    * Returns pool-level bootstrap configuration for FlexNode machines.
    */
-  @added(Versions.v2026_06_02_preview)
+  @added(Versions.v2026_07_02_preview)
   @action("listBootstrapData")
   @summary("Lists bootstrap data for a FlexNode agent pool.")
   listBootstrapData is ArmResourceActionSync<
@@ -153,7 +153,7 @@ interface AgentPools {
   /**
    * Updates an agent pool in the specified managed cluster. Visit https://aka.ms/aks/concurrent-node-operations for more information.
    */
-  @added(Versions.v2026_06_02_preview)
+  @added(Versions.v2026_07_02_preview)
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     AgentPool,
@@ -175,7 +175,7 @@ interface AgentPools {
   @list
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/agentPools/{agentPoolName}/operations")
-  @added(Versions.v2026_06_02_preview)
+  @added(Versions.v2026_07_02_preview)
   listByAgentPool is AgentPoolsOps.ActionSync<
     AgentPool,
     void,
@@ -194,7 +194,7 @@ interface AgentPools {
    */
   @get
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/agentPools/{agentPoolName}/operations/{operationId}")
-  @added(Versions.v2026_06_02_preview)
+  @added(Versions.v2026_07_02_preview)
   getByAgentPool is AgentPoolsOps.ActionSync<
     AgentPool,
     void,
