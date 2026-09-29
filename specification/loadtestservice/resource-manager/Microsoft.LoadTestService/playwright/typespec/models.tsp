@@ -59,19 +59,25 @@ model PlaywrightWorkspaceProperties {
   ]>;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("Indicates whether session artifact collection is enabled for the workspace.")
-  sessionArtifacts?: EnablementStatus = EnablementStatus.Disabled;
-
-  @added(Versions.v2026_10_01_preview)
-  @doc("The managed identity used to upload session artifacts to the storage account.")
-  sessionArtifactsIdentity?: SessionArtifactsIdentity;
+  @doc("The session artifact configuration for the workspace.")
+  sessionArtifacts?: SessionArtifacts;
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("The managed identity used to upload session artifacts.")
-model SessionArtifactsIdentity {
-  @doc("The type of managed identity used to upload session artifacts.")
-  type: SessionArtifactsIdentityType;
+@doc("The session artifact configuration for the workspace.")
+model SessionArtifacts {
+  @doc("Indicates whether session artifact collection is enabled for the workspace.")
+  status?: EnablementStatus = EnablementStatus.Disabled;
+
+  @doc("The managed identity used to manage session artifacts in the storage account.")
+  identity?: ManagedIdentity;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The managed identity used to access a resource.")
+model ManagedIdentity {
+  @doc("The type of managed identity used to access a resource.")
+  type: IdentityType;
 
   @doc("The ARM resource ID of the user-assigned managed identity. This value is required when type is UserAssigned and must be omitted when type is SystemAssigned.")
   resourceId?: Azure.Core.armResourceIdentifier<[
@@ -82,8 +88,8 @@ model SessionArtifactsIdentity {
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("The type of managed identity used to upload session artifacts.")
-union SessionArtifactsIdentityType {
+@doc("The type of managed identity used to access a resource.")
+union IdentityType {
   string,
 
   @doc("Use the workspace system-assigned managed identity.")
@@ -94,10 +100,10 @@ union SessionArtifactsIdentityType {
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("The managed identity used to upload session artifacts during an update operation.")
-model SessionArtifactsIdentityUpdate {
-  @doc("The type of managed identity used to upload session artifacts.")
-  type?: SessionArtifactsIdentityType;
+@doc("The managed identity used to access a resource during an update operation.")
+model ManagedIdentityUpdate {
+  @doc("The type of managed identity used to access a resource.")
+  type?: IdentityType;
 
   @doc("The ARM resource ID of the user-assigned managed identity. This value is required when type is UserAssigned and must be omitted when type is SystemAssigned.")
   resourceId?: Azure.Core.armResourceIdentifier<[
@@ -105,6 +111,16 @@ model SessionArtifactsIdentityUpdate {
       type: "Microsoft.ManagedIdentity/userAssignedIdentities";
     }
   ]>;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The session artifact configuration for a workspace update.")
+model SessionArtifactsUpdate {
+  @doc("Indicates whether session artifact collection is enabled for the workspace.")
+  status?: EnablementStatus;
+
+  @doc("The managed identity used to manage session artifacts in the storage account.")
+  identity?: ManagedIdentityUpdate;
 }
 
 @doc("The updatable properties of the Playwright workspace.")
@@ -124,12 +140,8 @@ model PlaywrightWorkspaceUpdateProperties {
   storageUri?: url;
 
   @added(Versions.v2026_10_01_preview)
-  @doc("Indicates whether session artifact collection is enabled for the workspace.")
-  sessionArtifacts?: EnablementStatus;
-
-  @added(Versions.v2026_10_01_preview)
-  @doc("The managed identity used to upload session artifacts to the storage account.")
-  sessionArtifactsIdentity?: SessionArtifactsIdentityUpdate;
+  @doc("The session artifact configuration for the workspace.")
+  sessionArtifacts?: SessionArtifactsUpdate;
 }
 
 @doc("The status of the last resource operation.")

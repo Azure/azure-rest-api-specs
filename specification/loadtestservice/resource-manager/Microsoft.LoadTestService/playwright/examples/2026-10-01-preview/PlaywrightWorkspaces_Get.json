@@ -19,10 +19,12 @@
           "workspaceId": "00000000-0000-0000-0000-000000000000",
           "storageUri": "https://examplestorageaccount.blob.core.windows.net",
           "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet",
-          "sessionArtifacts": "Enabled",
-          "sessionArtifactsIdentity": {
-            "type": "UserAssigned",
-            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sessionArtifactIdentity"
+          "sessionArtifacts": {
+            "status": "Enabled",
+            "identity": {
+              "type": "UserAssigned",
+              "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dummyrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/sessionArtifactIdentity"
+            }
           },
           "provisioningState": "Succeeded"
         },
