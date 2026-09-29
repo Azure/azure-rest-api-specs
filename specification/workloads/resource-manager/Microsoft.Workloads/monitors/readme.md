@@ -37,7 +37,6 @@ These settings apply only when `--tag=package-preview-2024-02-01-preview` is spe
 ```yaml $(tag) == 'package-preview-2024-02-01-preview'
 input-file:
   - preview/2024-02-01-preview/monitors.json
-  - ../operations/preview/2024-02-01-preview/operations.json
 suppressions:
   - code: GuidUsage
     reason: GUIDs are used for principalId and tenantId under MSI properties.
@@ -50,7 +49,6 @@ These settings apply only when `--tag=package-preview-2023-12-01-preview` is spe
 ```yaml $(tag) == 'package-preview-2023-12-01-preview'
 input-file:
   - preview/2023-12-01-preview/monitors.json
-  - ../operations/preview/2023-12-01-preview/operations.json
 suppressions:
   - code: GuidUsage
     reason: GUIDs are used for principalId and tenantId under MSI properties.
@@ -64,7 +62,7 @@ These settings apply only when `--tag=package-preview-2023-10-01-preview` is spe
 input-file:
   - preview/2023-10-01-preview/monitors.json
   - preview/2023-10-01-preview/common-types/v2/commonTypes.json
-  - ../operations/preview/2023-10-01-preview/operations.json
+  - preview/2023-10-01-preview/operations.json
 suppressions:
   - code: GuidUsage
     reason: GUIDs are used for principalId and tenantId under MSI properties.
