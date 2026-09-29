@@ -196,7 +196,7 @@ test("accepted pending PUT and GET/LIST project validated pairs without inferrin
   assert.equal(pending.properties.encryption.status.state, "Pending");
   assert.equal(
     pending.properties.encryption.status.observedProtection,
-    "MicrosoftManaged",
+    "CustomerManaged",
   );
 });
 
@@ -300,7 +300,7 @@ test("Key Vault URL shape supports Premium RSA-HSM names but excludes Managed HS
   );
 });
 
-test("examples distinguish replacement, omission, null deletion, and URL-only PATCH", () => {
+test("examples distinguish MMK PUT omission from CMK PATCH omission and key replacement", () => {
   const put = example("Workspaces_CreateOrUpdate_OmitEncryption");
   assert.equal(put.parameters.resource.properties.encryption, undefined);
   assert.equal(
@@ -309,8 +309,8 @@ test("examples distinguish replacement, omission, null deletion, and URL-only PA
     undefined,
   );
   assert.equal(
-    put.responses["200"].body.properties.encryption.status.observedProtection,
-    "CustomerManaged",
+    put.responses["200"].body.properties.encryption.status.state,
+    "NotConfigured",
   );
   const patch = example("Workspaces_Update_OmitEncryption");
   assert.equal(patch.parameters.properties.properties, undefined);
@@ -318,11 +318,6 @@ test("examples distinguish replacement, omission, null deletion, and URL-only PA
     patch.responses["200"].body.properties.encryption
       .customerManagedKeyEncryption.keyEncryptionKeyUrl,
     "https://contoso-vault.vault.azure.net/keys/workspace-key",
-  );
-  assert.equal(
-    example("Workspaces_Update_RemoveCustomerKey").parameters.properties
-      .properties.encryption.customerManagedKeyEncryption,
-    null,
   );
   const replacement = example("Workspaces_Update_ReplaceCustomerKey");
   assert.deepEqual(
@@ -336,13 +331,6 @@ test("examples distinguish replacement, omission, null deletion, and URL-only PA
     failed.customerManagedKeyEncryption.keyEncryptionKeyUrl.split("/").at(-1),
   );
   assert.equal(failed.status.error.code, "CustomerKeyAccessFailed");
-  const removed = example("Workspaces_Update_RemoveCustomerKey").responses[
-    "200"
-  ].body.properties.encryption;
-  assert.equal(removed.customerManagedKeyEncryption, undefined);
-  assert.equal(removed.status.observedProtection, "MicrosoftManaged");
-  assert.equal(removed.status.observedKeyEncryptionKeyUrl, undefined);
-  assert.ok(removed.customerManagedKeyOnboarding.applicationId);
 });
 
 test("no retired wire aliases or customer-selectable identity configuration remain", () => {
@@ -364,7 +352,7 @@ test("no retired wire aliases or customer-selectable identity configuration rema
   }
 });
 
-test("empty PUT and nested deletion remove CMK while empty PATCH preserves an existing URL", () => {
+test("empty PUT is a Microsoft-managed example while empty PATCH retains the complete CMK pair", () => {
   const emptyPut = example("Workspaces_CreateOrUpdate_EmptyEncryption");
   assert.deepEqual(emptyPut.parameters.resource.properties.encryption, {});
   assert.equal(
@@ -372,11 +360,9 @@ test("empty PUT and nested deletion remove CMK while empty PATCH preserves an ex
       .customerManagedKeyEncryption,
     undefined,
   );
-  const wholeDelete = example("Workspaces_Update_RemoveEncryption");
-  assert.equal(wholeDelete.parameters.properties.properties.encryption, null);
-  assert.ok(
-    wholeDelete.responses["200"].body.properties.encryption
-      .customerManagedKeyOnboarding.applicationId,
+  assert.equal(
+    emptyPut.responses["200"].body.properties.encryption.status.state,
+    "NotConfigured",
   );
   const emptyPatch = example("Workspaces_Update_EmptyCustomerKeyPatch");
   assert.deepEqual(
@@ -393,6 +379,41 @@ test("empty PUT and nested deletion remove CMK while empty PATCH preserves an ex
     "keyVaultResourceId",
   ]);
   assert.equal(patchKeyProperties.required, undefined);
+});
+
+test("creation choice is documented without freezing updateable key fields or adding a mode selector", () => {
+  const cmk = fullEncryption.properties.customerManagedKeyEncryption;
+  assert.notEqual(cmk.readOnly, true);
+  assert.notDeepEqual(cmk["x-ms-mutability"], ["read", "create"]);
+  assert.notDeepEqual(cmk["x-ms-mutability"], ["create", "read"]);
+  for (const field of Object.values(fullCustomerKey.properties)) {
+    assert.notEqual(field.readOnly, true);
+    assert.equal(field["x-ms-mutability"], undefined);
+  }
+  assert.equal(fullEncryption.properties.mode, undefined);
+  assert.match(cmk.description, /presence is fixed by accepted/);
+  const readme = readFileSync(path.join(root, "readme.md"), "utf8");
+  assert.ok(
+    readme.includes(
+      '"message": "The encryption mode cannot be changed after Workspace creation."',
+    ),
+  );
+  assert.ok(
+    readme.includes(
+      '"target": "properties.encryption.customerManagedKeyEncryption"',
+    ),
+  );
+  assert.ok(readme.includes("Pending, Failed, and unknown observations"));
+  for (const folder of ["examples/2026-11-01", "stable/2026-11-01/examples"]) {
+    for (const file of readdirSync(path.join(root, folder))) {
+      assert.ok(
+        !/^Workspaces_Update_(EnableCustomerKey|ReenableCustomerKey|RemoveCustomerKey|RemoveEncryption)\.json$/.test(
+          file,
+        ),
+        file,
+      );
+    }
+  }
 });
 
 test("unknown observations omit protection and key URL instead of inferring the desired value", () => {
@@ -422,10 +443,8 @@ test("Workspace LROs retain their existing routes and response shapes", () => {
   }
   assert.equal(operations.patch.responses["202"].schema, undefined);
   for (const name of [
-    "Workspaces_Update_EnableCustomerKey",
     "Workspaces_Update_ReplaceCustomerKey",
-    "Workspaces_Update_RemoveCustomerKey",
-    "Workspaces_Update_ReenableCustomerKey",
+    "Workspaces_Update_ChangeKeyVault",
   ]) {
     const responses = example(name).responses;
     assert.equal(responses["202"].body, undefined);

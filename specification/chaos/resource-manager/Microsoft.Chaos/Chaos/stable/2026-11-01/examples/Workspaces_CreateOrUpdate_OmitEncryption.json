@@ -1,5 +1,5 @@
 {
-  "title": "Create or replace a Workspace with the Microsoft-managed encryption default",
+  "title": "Create or update a Microsoft-managed Workspace without encryption settings",
   "operationId": "Workspaces_CreateOrUpdate",
   "parameters": {
     "api-version": "2026-11-01",
@@ -32,10 +32,7 @@
           "provisioningState": "Updating",
           "encryption": {
             "status": {
-              "state": "Pending",
-              "observedProtection": "CustomerManaged",
-              "observedKeyEncryptionKeyUrl": "https://contoso-vault.vault.azure.net/keys/workspace-key/0123456789abcdef0123456789abcdef",
-              "lastCheckedAt": "2026-11-01T11:00:00Z"
+              "state": "NotConfigured"
             },
             "customerManagedKeyOnboarding": {
               "applicationId": "00000000-0000-0000-0000-000000000001"

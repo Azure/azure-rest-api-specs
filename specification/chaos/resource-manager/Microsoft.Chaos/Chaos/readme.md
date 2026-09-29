@@ -21,6 +21,14 @@ string, or fragment. Absence of `customerManagedKeyEncryption` means
 Microsoft-managed protection. There is no writable protection-mode enum or
 alternate key-setting shape.
 
+Customer-managed keys are selected only at Workspace creation. Accepted
+creation fixes the CMK object's presence: a Microsoft-managed Workspace cannot
+add CMK, and a CMK-created Workspace cannot remove it. The key URL/vault-ID pair
+remains updateable on CMK-created Workspaces, including after a failed create.
+There is no new public mode field, and the whole object is not create-only.
+Create a new Workspace to choose a different protection mode; no data-transfer
+or Microsoft-managed Workspace migration workflow is part of this feature.
+
 The ID must be the full
 `/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.KeyVault/vaults/{vaultName}`
 reference. It names the customer vault, not a key child, Managed HSM, internal
@@ -81,7 +89,7 @@ identity, application, and federated credential. Customers select a key, not
 that identity. [Health Data Services](https://github.com/Azure/azure-rest-api-specs/blob/84fc656cd2945daa4a7b1ef306c02e2b157e9f60/specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/HealthcareApis/models.tsp#L978-L994)
 provides a direct GA precedent for these preferred names without selectable
 encryption identity. Redis Enterprise and Mongo Cluster are additional adapted
-precedents, not sources for Chaos removal, rotation, or identity semantics.
+precedents, not sources for Chaos creation, rotation, or identity semantics.
 These precedents do not replace ARM review of Chaos lifecycle behavior.
 The vault resource ID is a Chaos addition for caller-bound metadata validation,
 not a field inherited from the Health Data Services naming precedent.
@@ -90,15 +98,16 @@ not a field inherited from the Health Data Services naming precedent.
 
 | Request | Result |
 | --- | --- |
-| PUT with a CMK object | Require both non-null `keyEncryptionKeyUrl` and `keyVaultResourceId`. Authorize and validate the pair even if unchanged. |
-| PUT without encryption or its CMK object, or with `encryption: {}` | Request Microsoft-managed protection. This removes existing customer-key protection. |
+| PUT with a CMK object on create or a CMK-created Workspace | Require both non-null `keyEncryptionKeyUrl` and `keyVaultResourceId`. Authorize and validate the pair even if unchanged. |
+| PUT/PATCH adds CMK to an existing Microsoft-managed Workspace | Return the mode-change HTTP 400 below before vault lookup or any effect. |
+| PUT without encryption or its CMK object, or with `encryption: {}` | Create/update Microsoft-managed normally; reject on a CMK-created Workspace. No hidden preservation or removal succeeds. |
 | PUT with null encryption, null CMK, or an incomplete CMK object | Return `400 InvalidEncryptionConfiguration` before any change. Empty encryption is valid; empty CMK is not. |
 | PATCH with encryption omitted or an empty object | Keep the existing encryption setting. No PUT default is applied to the patch. |
 | PATCH with CMK omitted | Keep the existing customer key. |
-| PATCH with `"customerManagedKeyEncryption": null` or `"encryption": null` | Remove the writable key configuration through the normal removal operation. Keep onboarding and observations. |
-| PATCH with only `keyEncryptionKeyUrl` | Retain the stored ID for same-vault rotation; authorize and validate the effective pair. Do not infer a vault ID from the URL. |
-| PATCH with only `keyVaultResourceId` | Retain the URL; authorize and validate both effective values. Reject an incoherent pair. |
-| PATCH changes vault | Supply a coherent new URL/ID pair. |
+| PATCH with `"customerManagedKeyEncryption": null` or `"encryption": null` | Reject removal on CMK; no-op only when already absent on Microsoft-managed. Keep onboarding and observations. |
+| PATCH with only `keyEncryptionKeyUrl` on CMK | Retain the stored ID for same-vault rotation; authorize and validate the effective pair. Do not infer a vault ID from the URL. |
+| PATCH with only `keyVaultResourceId` on CMK | Retain the URL; authorize and validate both effective values. Reject an incoherent pair. |
+| PATCH changes vault on CMK | Supply a coherent new URL/ID pair. |
 | PATCH with an empty CMK object | Retain an existing complete pair without lookup or encryption LRO when no member changes. Reject an incomplete merged result. |
 | PATCH deletes only the URL or ID | Reject the incomplete CMK object at that exact property. This is not removal of CMK. |
 
@@ -108,6 +117,43 @@ validation also completes synchronously before acceptance, as described below.
 Deleting either member while its CMK object remains is invalid. An empty patch is
 not a request to reset encryption. Read-only `customerManagedKeyOnboarding` and
 `status` inputs are ignored.
+
+Unsupported mode changes return HTTP 400 before vault lookup, public operation
+metadata, desired-state mutation, or Storage effects, including when the current
+key is inaccessible:
+
+```json
+{
+  "error": {
+    "code": "InvalidEncryptionConfiguration",
+    "message": "The encryption mode cannot be changed after Workspace creation.",
+    "target": "properties.encryption.customerManagedKeyEncryption"
+  }
+}
+```
+
+This applies to adding a complete CMK object to existing Microsoft-managed
+state, omitting CMK in full PUT on CMK-created state, and deleting CMK or its
+encryption envelope with PATCH on CMK-created state. Full PUT null remains
+invalid. Deleting only one required pair member targets that member instead.
+Mode validation uses authoritative accepted-creation state, not observed
+health. Pending, Failed, unknown, or inaccessible CMK does not become
+Microsoft-managed. Missing or corrupt bound state is not proof of that mode.
+
+Rejected-transition examples, using the HTTP 400 body above:
+
+| Existing Workspace | Request fragment | Result |
+| --- | --- | --- |
+| Microsoft-managed | PUT or PATCH `{"properties":{"encryption":{"customerManagedKeyEncryption":{"keyEncryptionKeyUrl":"https://contoso-vault.vault.azure.net/keys/workspace-key","keyVaultResourceId":"/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/customer-keys/providers/Microsoft.KeyVault/vaults/contoso-vault"}}}}` | Reject CMK addition. Include other required resource fields for PUT. |
+| CMK-created | Full PUT with required resource fields but no encryption, or `{"properties":{"encryption":{}}}` | Reject mode change; do not remove or silently preserve CMK under a successful PUT. |
+| CMK-created | PATCH `{"properties":{"encryption":{"customerManagedKeyEncryption":null}}}` | Reject CMK removal. |
+| CMK-created | PATCH `{"properties":{"encryption":null}}` | Reject CMK removal. |
+
+The two PATCH deletion fragments are no-ops only when CMK is already absent on
+a Microsoft-managed Workspace. An empty CMK object is not an absence marker:
+it retains the complete existing pair on CMK and is invalid on Microsoft-managed.
+These are documentation examples, not successful `x-ms-examples`; no new
+explicit HTTP error-response schema is introduced.
 
 ### Caller-bound ARM validation before acceptance
 
@@ -140,10 +186,12 @@ admitting Storage.
 
 | Request | Vault metadata validation |
 | --- | --- |
-| Full PUT with CMK, even unchanged | Required before acceptance. |
-| PATCH adds or changes either member | Authorize and validate the merged effective pair, including retained values. |
+| Full PUT with CMK on create or a CMK-created Workspace, even unchanged | Required before acceptance. |
+| PATCH changes either member on CMK | Authorize and validate the merged effective pair, including retained values. |
 | Unrelated or empty PATCH with no CMK change | No lookup or encryption LRO; still reject incomplete merged configuration. |
-| Full PUT without CMK, whole-CMK/encryption removal | No lookup. Revoked or deleted vaults do not block removal through this metadata prerequisite; Storage's separate removal requirements still apply. |
+| Full PUT without CMK | No lookup. Valid for Microsoft-managed create/update; mode-change error on CMK. |
+| CMK addition to existing Microsoft-managed or removal from CMK | Reject before lookup, operation creation, state mutation, or Storage effects. |
+| PATCH deletion of already absent CMK/encryption on Microsoft-managed | No-op; no lookup or encryption LRO. |
 | GET, status reads, DELETE, old-version supported partial PATCH | No new vault lookup or permission requirement. |
 
 ### Provider registration and effective linked access
@@ -154,7 +202,7 @@ defines `linkedAccessChecks` entries with `actionName`, `linkedProperty`,
 `onBehalfOfTokens`. These are RP registration settings, not Workspace fields or
 TypeSpec decorators. The typed ARM-ID schema does not deploy access checks.
 
-The Workspace registration must associate CMK configuration writes with the
+The Workspace registration must associate supported CMK creation/key-replacement writes with the
 vault-reference property, linked type `Microsoft.KeyVault/vaults`, and caller
 permission `Microsoft.KeyVault/vaults/read`. Configure signed-OBO issuance for
 the applicable Workspace writes and a caller-conditioned RP metadata-read
@@ -243,8 +291,8 @@ the public transform. The accepted PATCH-clear pattern in #45663 is prior art;
 it does not constitute approval of this change. PUT and response fields are not
 nullable.
 
-Full encryption is a named model with no synthetic default object. The absent
-CMK object is the Microsoft-managed default. GET keeps service-owned onboarding
+Full encryption is a named model with no synthetic default object. At accepted
+creation, absent CMK selects Microsoft-managed protection. GET keeps service-owned onboarding
 and observations available without adding a desired CMK object.
 C# client names use a `Uri` suffix through `client.tsp`; the public JSON names
 retain the ARM-preferred `Url` suffix without a wire alias.
@@ -266,22 +314,21 @@ GET/LIST can project that pair with `Pending` while observations continue to
 describe actual protection. Validation failure creates no pending requested
 state. The read-only
 `customerManagedKeyOnboarding.applicationId` identifies the service application
-for customer consent. It is returned for existing Workspaces before enrollment, including on a
+for customer consent before creating a new CMK Workspace. It is returned for existing Workspaces, including a
 Microsoft-managed Workspace. It is not a service principal object ID or a
 customer-supplied identity selector. The Workspace's top-level identity serves
 other features and does not select Storage CMK identity.
 No internal identity, storage account, scope, or anchor identifiers are exposed.
 There is no public `infrastructureEncryption` switch.
 
-### Onboarding before creation or enrollment
+### Onboarding before CMK creation
 
 For an existing Microsoft-managed Workspace, GET returns
-`customerManagedKeyOnboarding.applicationId` before enrollment, as shown in
-`Workspaces_Get_EncryptionNotConfigured.json`. Install or consent to that
-application and grant its local service principal access to the customer key,
-then use the paired PATCH in `Workspaces_Update_EnableCustomerKey.json`.
-The configuring caller separately needs `Microsoft.KeyVault/vaults/read` on
-the effective vault.
+`customerManagedKeyOnboarding.applicationId`, as shown in
+`Workspaces_Get_EncryptionNotConfigured.json`. This is information for creating
+a new CMK Workspace, not permission to enable CMK on that existing resource.
+Do not create a temporary Microsoft-managed Workspace for onboarding: its
+protection mode cannot change.
 
 To create a Workspace with customer-managed protection directly, first obtain
 the application name and client ID for the target cloud from the service
@@ -304,8 +351,9 @@ optional `observedKeyEncryptionKeyUrl`, optional `lastCheckedAt`, and optional
 is omitted when unknown. The observed URL is the active URL reported by Azure
 Storage, including its version when available. It is omitted for unknown or
 Microsoft-managed protection. A failed check must not copy requested values
-into observed fields. During removal, desired CMK is absent while observed
-protection can remain `CustomerManaged` until the change is verified.
+into observed fields. CMK-created Workspaces retain their requested pair during
+key failures. Microsoft-managed Workspaces omit the pair and use `NotConfigured`,
+not a successful CMK-removal state.
 
 | State | Meaning |
 | --- | --- |
@@ -329,16 +377,16 @@ same operation is not an alternative. After terminal failure, a valid
 Workspace update can retry or replace the key. No repair or cancellation action
 is required.
 
-First enable can temporarily reject new operations that write customer data.
-Existing operations finish before data moves; reads remain available. Key
-replacement, removal, and re-enable do not require a separate public data-move
-operation. Removal is not an emergency bypass for an inaccessible key: key
-access may need to be restored before removal can complete.
+CMK-created storage is configured before its first customer-data write. Key
+replacement and access restoration retain the same scoped binding. There is
+no existing-Workspace enablement pause, copy, or binding transfer, and no
+Microsoft-managed migration dependency. Restore access to the required key
+material after revocation; removal or re-enable is not an access-recovery path.
 
 Azure Storage follows versions of the requested key. Keep the old version
 available for at least 24 hours after rotation. Do not assume immediate adoption
-of a new version. Customer-key protection applies to active data; it does not
-retroactively protect retained pre-enable copies.
+of a new version. Customer-key protection applies only to copies under the
+Workspace's encryption scope.
 
 ### Protection, recovery, and support limits
 
@@ -389,6 +437,19 @@ The interval is retry guidance, not a restore completion guarantee. HEAD
 responses retain the status and retry header without a body. This read
 restriction does not itself change `provisioningState` or `encryption.status`
 and adds no public action, model, or permission.
+This maintenance fence is separate from CMK creation and key replacement;
+do not apply it as an enablement pause or replace configuration HTTP 409 or
+the existing DELETE behavior with it.
+
+While checkpoint capture or restore closes write admission, new independent
+customer-data writing work can return HTTP 503 `ServiceUnavailable` with
+positive numeric `Retry-After` and this message: "Workspace customer-data writes
+are temporarily unavailable while maintenance is in progress. Retry the request
+after the interval specified in the Retry-After header." This covers
+data-producing discovery/evaluation, scenario execute/validate, and
+permission-fix starts, not every HTTP write or metadata-only change.
+Previously admitted work can finish. This maintenance response does not apply
+as a planned pause to CMK creation or key replacement.
 
 ### Workspace deletion
 
@@ -411,6 +472,7 @@ permissions.
 
 | HTTP status or result | Code | Corrective action |
 | --- | --- | --- |
+| 400 unsupported mode change | `InvalidEncryptionConfiguration` | The encryption mode cannot be changed after Workspace creation. Target `properties.encryption.customerManagedKeyEncryption`; use the existing mode or create a new Workspace. |
 | 400 | `InvalidEncryptionConfiguration` | Correct a missing/malformed/wrong-type vault ID, confirmed missing vault, canonical-ID mismatch, or tenant mismatch. Target `properties.encryption.customerManagedKeyEncryption.keyVaultResourceId`. |
 | 400 | `InvalidEncryptionConfiguration` | Correct a missing/malformed key URL, unsupported host/path, or origin mismatch with the vault URI. Target `properties.encryption.customerManagedKeyEncryption.keyEncryptionKeyUrl`. |
 | 400 | `EncryptionNotSupportedForWorkspace` | Use a Workspace that supports customer-managed encryption. |
@@ -418,7 +480,7 @@ permissions.
 | 429 before acceptance | Standard throttling error | Honor `Retry-After` from the ARM metadata lookup. No encryption operation was accepted. |
 | 503 before acceptance | `EncryptionConfigurationFailed` | Retry after transient timeout/5xx or missing/unusable metadata. Unknown metadata is not a match or confirmed customer mismatch; no operation was accepted. |
 | 409 | Existing Workspace conflict code | Wait for the current operation to finish before another configuration request. |
-| 409 | `CmkEnrollmentDisabled` | New enrollment is unavailable. Retry when enrollment is available; existing key management remains supported. |
+| 409 | `CmkEnrollmentDisabled` | New CMK creation is unavailable. Retry when available; Microsoft-managed creation and existing CMK key management remain supported. |
 | 503 | `CmkCapacityUnavailable` | Service capacity is unavailable. Retry later. |
 | Failed operation or health check | `CustomerKeyAccessFailed` | Check key availability, service application access, and vault network rules. Restore access and retry. A platform 403 alone does not identify the exact cause. |
 | Failed operation or health check | `EncryptionConfigurationFailed` | Retry the Workspace update. Contact support if the service-side failure continues. |
@@ -442,7 +504,7 @@ It returns HTTP 400 without changing the Workspace:
 {
   "error": {
     "code": "InvalidEncryptionConfiguration",
-    "message": "The merged customerManagedKeyEncryption object has no valid key URL. Supply a versionless HTTPS Key Vault key URL and its matching vault resource ID, or delete the CMK object to select Microsoft-managed protection.",
+    "message": "The merged customerManagedKeyEncryption object has no valid key URL. Supply a versionless HTTPS Key Vault key URL and its matching vault resource ID. The encryption mode cannot be changed after Workspace creation.",
     "target": "properties.encryption.customerManagedKeyEncryption.keyEncryptionKeyUrl"
   }
 }
@@ -454,10 +516,9 @@ specific error status to the existing default-only error response.
 
 `ApiVersionNotSupportedForEncryption` is a service-specific compatibility
 restriction, not the standard error for an unknown API version. Before any side
-effect, a pre-CMK PUT is rejected if a desired CMK object exists, observed
-protection is customer-managed, or active protection is unknown for an enrolled
-Workspace. Deleting desired CMK does not bypass the check while observed
-protection remains customer-managed or unknown.
+effect, a pre-CMK full PUT is rejected for a CMK-created Workspace, including
+Pending, Failed, and unknown observations. A failed CMK create retains its
+creation choice; missing observations do not bypass this check.
 The check and write use the existing Workspace concurrency boundary. No
 customer-vault lookup is required.
 
@@ -465,7 +526,7 @@ Pre-CMK PUT still works for Microsoft-managed Workspaces. Older GET returns only
 that version's fields; supported partial PATCH and DELETE remain available for
 customer-key Workspaces. The `2026-08-01-preview` schema is unchanged. Older
 full-resource deployment templates must move to `2026-11-01` before they can
-replace a Workspace after customer-key enrollment.
+replace a CMK-created Workspace.
 
 For example, such an older PUT receives HTTP 409 with:
 
@@ -492,20 +553,20 @@ Before customer activation, service and SDK tests must establish these results:
 | --- | --- |
 | GET-to-PUT round trip | Supply both requested key URL and vault ID; perform required caller/vault validation and ignore read-only inputs. |
 | SDK PATCH omission versus null | Serialization preserves the difference between no change and deletion. |
-| What-If with a GA template that omits the CMK object | Show the change to Microsoft-managed protection. |
+| What-If with a GA template that omits CMK on a CMK-created Workspace | Do not present supported removal or successful hidden preservation; the PUT is invalid. |
 | What-If with an unchanged complete customer-key setting | No false encryption change from service-owned observations. |
-| Old-version template before and after enrollment | Succeed before enrollment; return the documented 409 after enrollment without changing any field. |
-| Concurrent enrollment and old-version PUT | No stale-state bypass of the compatibility check. |
-| Corrected GA template after enrollment | Succeed with the complete desired encryption setting. |
+| Old-version template on CMK-created state | Return the documented 409 without changing any field; old PUT continues to support Microsoft-managed resources. |
+| Concurrent CMK creation/key replacement and old-version PUT | No stale-state bypass of the compatibility check. |
+| GA replacement template on CMK-created state | Succeed with the complete desired encryption setting. |
 | Invalid merged PATCH or invalid PUT | Return 400 before persistence or storage work. |
 | Caller/vault denial, mismatch, throttle, transient failure, or unknown metadata | Return the documented synchronous error before public operation metadata, desired persistence, LRO acceptance, or Storage/customer-data work. |
 | URL-only or ID-only PATCH | Retain the omitted member, then authorize and validate the effective pair before acceptance. |
-| No-lookup operations | Unrelated/empty PATCH, whole-CMK removal, supported old PATCH, GET/status, and DELETE require no CMK metadata read. |
+| No-lookup operations | Unrelated/empty PATCH, rejected mode change, already-absent deletion on Microsoft-managed, supported old PATCH, GET/status, and DELETE require no CMK metadata read. |
 | Pending projection | Only after validation, PUT/GET/LIST can show the accepted pair with Pending; observed protection remains actual. |
 | Born-CMK onboarding | Published per-cloud application ID, Portal configuration, and GET agree; consent and key grant precede PUT. |
 | Identical request during configuration | Return HTTP 409; do not return the same operation as an alternative. |
 | DELETE with admitted writers | Close admission, drain writers, and complete the existing deletion LRO only when deletion conditions hold. |
-| Removal, re-enable, and failure after a key change | Requested and observed values remain distinct and accurate. |
+| Rejected mode changes and failure after a key change | Mode changes fail before effects; requested and observed values remain distinct and accurate. |
 
 The generated SDK, service implementation, and deployment tests must consume the
 same pinned CMK spec commit. Schema checks do not replace compatibility

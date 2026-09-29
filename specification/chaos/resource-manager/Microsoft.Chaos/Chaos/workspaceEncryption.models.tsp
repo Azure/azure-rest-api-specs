@@ -10,15 +10,18 @@ namespace Microsoft.Chaos;
 @added(Versions.v2026_11_01)
 model WorkspaceEncryption {
   /**
-   * The requested customer-managed key. Absence means Microsoft-managed
-   * protection. A present object requires a coherent keyEncryptionKeyUrl and
+   * The requested customer-managed key. Its presence is fixed by accepted
+   * Workspace creation: adding CMK to a Microsoft-managed Workspace or removing
+   * CMK from a CMK-created Workspace is rejected with InvalidEncryptionConfiguration.
+   * The key pair remains updateable on CMK-created Workspaces, including after
+   * a failed creation. A present object requires a coherent keyEncryptionKeyUrl and
    * keyVaultResourceId pair. After synchronous caller and vault validation,
    * the accepted pair can be returned while configuration is Pending.
    * It does not prove that active data already uses the requested key.
    */
   customerManagedKeyEncryption?: WorkspaceCustomerManagedKeyEncryption;
 
-  /** The service application used for customer consent, returned for existing Workspaces before enrollment. */
+  /** The service application to authorize before creating a new CMK Workspace; also returned for existing Workspaces. */
   @visibility(Lifecycle.Read)
   customerManagedKeyOnboarding?: WorkspaceCustomerManagedKeyOnboarding;
 
@@ -90,7 +93,8 @@ scalar WorkspaceKeyEncryptionKeyUrl extends url;
 model WorkspaceCustomerManagedKeyOnboarding {
   /**
    * The Microsoft Entra application ID used for customer consent, returned for
-   * existing Workspaces, including before customer-key enrollment. Before
+   * existing Workspaces, including Microsoft-managed Workspaces. This does not
+   * permit adding CMK to an existing Microsoft-managed Workspace. Before
    * creating a Workspace with a customer key, obtain the application name and
    * ID for the target cloud from the service onboarding documentation or Portal,
    * then consent and grant key access. The configuring caller separately needs
@@ -148,7 +152,7 @@ union WorkspaceEncryptionState {
   /** An encryption configuration operation is in progress. */
   Pending: "Pending",
 
-  /** A fresh check confirms the requested setting and customer-data access, for either key source. */
+  /** A fresh check confirms the requested customer key and scoped customer-data access. */
   Applied: "Applied",
 
   /** An encryption configuration step or health check failed. See the error for corrective action. */
@@ -162,19 +166,21 @@ union WorkspaceEncryptionState {
  * A partial encryption setting. Omitted fields are unchanged and null deletes a
  * writable field. A remaining customerManagedKeyEncryption object must have a
  * coherent key URL and vault resource ID. Read-only onboarding and status
- * inputs are ignored. Changing either member requires synchronous caller and
+ * inputs are ignored. The accepted creation choice cannot change. Only a
+ * CMK-created Workspace can update the pair. Changing either member requires synchronous caller and
  * vault validation of the merged pair, including any retained member.
  */
 @added(Versions.v2026_11_01)
 model WorkspaceEncryptionUpdate {
   /**
-   * The customer key configuration to merge. Null deletes the object and
-   * requests Microsoft-managed protection. An empty object retains an existing
+   * The customer key configuration to merge on a CMK-created Workspace.
+   * Null deletion is rejected on CMK and is a no-op only when already absent
+   * on a Microsoft-managed Workspace. An empty object retains an existing
    * complete pair without a lookup when neither member changes, but is invalid
-   * when the merged pair is incomplete. Whole-object removal does not require
-   * a vault metadata lookup.
+   * when the merged pair is incomplete. Unsupported mode changes are rejected
+   * before vault lookup, operation creation, desired mutation, or Storage effects.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Explicit null is required so JSON Merge Patch can delete customer-key properties when switching to Microsoft-managed protection."
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "JSON Merge Patch accepts deletion syntax. Deleting CMK is rejected for CMK-created Workspaces and is a no-op only when already absent on MMK."
   customerManagedKeyEncryption?: WorkspaceCustomerManagedKeyEncryptionUpdate;
 }
 

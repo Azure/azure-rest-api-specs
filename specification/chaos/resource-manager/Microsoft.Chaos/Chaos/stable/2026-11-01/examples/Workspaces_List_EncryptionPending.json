@@ -1,5 +1,5 @@
 {
-  "title": "List Workspaces with a validated customer key configuration pending",
+  "title": "List CMK-created Workspaces with customer key replacement pending",
   "operationId": "Workspaces_List",
   "parameters": {
     "api-version": "2026-11-01",
@@ -27,7 +27,8 @@
                 },
                 "status": {
                   "state": "Pending",
-                  "observedProtection": "MicrosoftManaged",
+                  "observedProtection": "CustomerManaged",
+                  "observedKeyEncryptionKeyUrl": "https://contoso-vault.vault.azure.net/keys/previous-key/0123456789abcdef0123456789abcdef",
                   "lastCheckedAt": "2026-11-01T11:00:00Z"
                 },
                 "customerManagedKeyOnboarding": {

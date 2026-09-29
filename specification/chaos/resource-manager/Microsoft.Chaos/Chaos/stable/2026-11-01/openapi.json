@@ -2152,7 +2152,7 @@
           }
         },
         "x-ms-examples": {
-          "List Workspaces with a validated customer key configuration pending": {
+          "List CMK-created Workspaces with customer key replacement pending": {
             "$ref": "./examples/Workspaces_List_EncryptionPending.json"
           },
           "List all Workspaces in a resource group.": {
@@ -2206,6 +2206,9 @@
           }
         },
         "x-ms-examples": {
+          "Get a CMK-created Workspace while its customer key is being replaced": {
+            "$ref": "./examples/Workspaces_Get_EncryptionPending.json"
+          },
           "Get a Workspace after a customer key replacement fails": {
             "$ref": "./examples/Workspaces_Get_EncryptionFailed.json"
           },
@@ -2217,9 +2220,6 @@
           },
           "Get a Workspace when active encryption protection is unknown": {
             "$ref": "./examples/Workspaces_Get_EncryptionUnknown.json"
-          },
-          "Get a Workspace while customer-managed encryption is being enabled": {
-            "$ref": "./examples/Workspaces_Get_EncryptionPending.json"
           }
         }
       },
@@ -2290,10 +2290,10 @@
           }
         },
         "x-ms-examples": {
-          "Create or replace a Workspace with an empty encryption object": {
+          "Create or update a Microsoft-managed Workspace with empty encryption settings": {
             "$ref": "./examples/Workspaces_CreateOrUpdate_EmptyEncryption.json"
           },
-          "Create or replace a Workspace with the Microsoft-managed encryption default": {
+          "Create or update a Microsoft-managed Workspace without encryption settings": {
             "$ref": "./examples/Workspaces_CreateOrUpdate_OmitEncryption.json"
           },
           "Create or update a Workspace with a customer-managed key": {
@@ -2377,18 +2377,6 @@
           },
           "Update a Workspace in a resource group.": {
             "$ref": "./examples/Workspaces_Update.json"
-          },
-          "Update a Workspace to enable customer-managed encryption": {
-            "$ref": "./examples/Workspaces_Update_EnableCustomerKey.json"
-          },
-          "Update a Workspace to re-enable a customer key after removal": {
-            "$ref": "./examples/Workspaces_Update_ReenableCustomerKey.json"
-          },
-          "Update a Workspace to remove customer-managed encryption with null": {
-            "$ref": "./examples/Workspaces_Update_RemoveCustomerKey.json"
-          },
-          "Update a Workspace to remove its writable encryption settings": {
-            "$ref": "./examples/Workspaces_Update_RemoveEncryption.json"
           },
           "Update a Workspace with a validated key and resource ID in another vault": {
             "$ref": "./examples/Workspaces_Update_ChangeKeyVault.json"
@@ -7439,7 +7427,7 @@
       "properties": {
         "applicationId": {
           "type": "string",
-          "description": "The Microsoft Entra application ID used for customer consent, returned for\nexisting Workspaces, including before customer-key enrollment. Before\ncreating a Workspace with a customer key, obtain the application name and\nID for the target cloud from the service onboarding documentation or Portal,\nthen consent and grant key access. The configuring caller separately needs\nMicrosoft.KeyVault/vaults/read on the referenced vault.\nGET returns the same application ID.\nThis is not a service principal object ID or an identity selector.\nThe Workspace's top-level identity does not select this application.",
+          "description": "The Microsoft Entra application ID used for customer consent, returned for\nexisting Workspaces, including Microsoft-managed Workspaces. This does not\npermit adding CMK to an existing Microsoft-managed Workspace. Before\ncreating a Workspace with a customer key, obtain the application name and\nID for the target cloud from the service onboarding documentation or Portal,\nthen consent and grant key access. The configuring caller separately needs\nMicrosoft.KeyVault/vaults/read on the referenced vault.\nGET returns the same application ID.\nThis is not a service principal object ID or an identity selector.\nThe Workspace's top-level identity does not select this application.",
           "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
           "readOnly": true
         }
@@ -7565,11 +7553,11 @@
       "properties": {
         "customerManagedKeyEncryption": {
           "$ref": "#/definitions/WorkspaceCustomerManagedKeyEncryption",
-          "description": "The requested customer-managed key. Absence means Microsoft-managed\nprotection. A present object requires a coherent keyEncryptionKeyUrl and\nkeyVaultResourceId pair. After synchronous caller and vault validation,\nthe accepted pair can be returned while configuration is Pending.\nIt does not prove that active data already uses the requested key."
+          "description": "The requested customer-managed key. Its presence is fixed by accepted\nWorkspace creation: adding CMK to a Microsoft-managed Workspace or removing\nCMK from a CMK-created Workspace is rejected with InvalidEncryptionConfiguration.\nThe key pair remains updateable on CMK-created Workspaces, including after\na failed creation. A present object requires a coherent keyEncryptionKeyUrl and\nkeyVaultResourceId pair. After synchronous caller and vault validation,\nthe accepted pair can be returned while configuration is Pending.\nIt does not prove that active data already uses the requested key."
         },
         "customerManagedKeyOnboarding": {
           "$ref": "#/definitions/WorkspaceCustomerManagedKeyOnboarding",
-          "description": "The service application used for customer consent, returned for existing Workspaces before enrollment.",
+          "description": "The service application to authorize before creating a new CMK Workspace; also returned for existing Workspaces.",
           "readOnly": true
         },
         "status": {
@@ -7630,7 +7618,7 @@
           {
             "name": "Applied",
             "value": "Applied",
-            "description": "A fresh check confirms the requested setting and customer-data access, for either key source."
+            "description": "A fresh check confirms the requested customer key and scoped customer-data access."
           },
           {
             "name": "Failed",
@@ -7683,11 +7671,11 @@
     },
     "WorkspaceEncryptionUpdateMergePatchUpdateOrCreate": {
       "type": "object",
-      "description": "A partial encryption setting. Omitted fields are unchanged and null deletes a\nwritable field. A remaining customerManagedKeyEncryption object must have a\ncoherent key URL and vault resource ID. Read-only onboarding and status\ninputs are ignored. Changing either member requires synchronous caller and\nvault validation of the merged pair, including any retained member.",
+      "description": "A partial encryption setting. Omitted fields are unchanged and null deletes a\nwritable field. A remaining customerManagedKeyEncryption object must have a\ncoherent key URL and vault resource ID. Read-only onboarding and status\ninputs are ignored. The accepted creation choice cannot change. Only a\nCMK-created Workspace can update the pair. Changing either member requires synchronous caller and\nvault validation of the merged pair, including any retained member.",
       "properties": {
         "customerManagedKeyEncryption": {
           "$ref": "#/definitions/WorkspaceCustomerManagedKeyEncryptionUpdateMergePatchUpdateOrCreate",
-          "description": "The customer key configuration to merge. Null deletes the object and\nrequests Microsoft-managed protection. An empty object retains an existing\ncomplete pair without a lookup when neither member changes, but is invalid\nwhen the merged pair is incomplete. Whole-object removal does not require\na vault metadata lookup.",
+          "description": "The customer key configuration to merge on a CMK-created Workspace.\nNull deletion is rejected on CMK and is a no-op only when already absent\non a Microsoft-managed Workspace. An empty object retains an existing\ncomplete pair without a lookup when neither member changes, but is invalid\nwhen the merged pair is incomplete. Unsupported mode changes are rejected\nbefore vault lookup, operation creation, desired mutation, or Storage effects.",
           "x-nullable": true
         }
       }
@@ -7902,7 +7890,7 @@
         },
         "encryption": {
           "$ref": "#/definitions/WorkspaceEncryption",
-          "description": "The requested customer key and service observations. On PUT, omission of\nencryption or customerManagedKeyEncryption, or an empty encryption object,\nselects Microsoft-managed protection, including when replacing a Workspace\nthat uses a customer key. Null is not a valid PUT value."
+          "description": "The requested customer key and service observations. Accepted creation fixes\nwhether customerManagedKeyEncryption is present. On PUT, omission of\nencryption or its CMK object, or an empty encryption object, is valid for\nMicrosoft-managed Workspaces but rejected for CMK-created Workspaces.\nNull is not a valid PUT value. A CMK-created Workspace can replace its key."
         }
       },
       "required": [
@@ -7936,7 +7924,7 @@
       "properties": {
         "encryption": {
           "$ref": "#/definitions/WorkspaceEncryptionUpdateMergePatchUpdateOrCreate",
-          "description": "A JSON Merge Patch of the requested encryption setting. Omission leaves the\nsetting unchanged. Null deletes the setting and selects Microsoft-managed\nprotection. The service validates the merged configuration before any change.",
+          "description": "A JSON Merge Patch of the requested encryption setting. Omission leaves the\nsetting unchanged. Null deletion is rejected on a CMK-created Workspace\nand is a no-op only when the setting is already absent on a Microsoft-managed\nWorkspace. The service validates the creation choice and merged pair first.",
           "x-nullable": true
         }
       }

@@ -1,5 +1,5 @@
 {
-  "title": "Get a Workspace while customer-managed encryption is being enabled",
+  "title": "Get a CMK-created Workspace while its customer key is being replaced",
   "operationId": "Workspaces_Get",
   "parameters": {
     "api-version": "2026-11-01",
@@ -26,7 +26,8 @@
             },
             "status": {
               "state": "Pending",
-              "observedProtection": "MicrosoftManaged",
+              "observedProtection": "CustomerManaged",
+              "observedKeyEncryptionKeyUrl": "https://contoso-vault.vault.azure.net/keys/previous-key/0123456789abcdef0123456789abcdef",
               "lastCheckedAt": "2026-11-01T11:00:00Z"
             },
             "customerManagedKeyOnboarding": {
