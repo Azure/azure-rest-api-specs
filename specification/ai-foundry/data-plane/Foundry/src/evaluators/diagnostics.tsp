@@ -109,9 +109,12 @@ union EvaluatorDiagnosticType {
 
   @doc("Functional evaluator fields outside individual dimensions were updated.")
   definition_updated: "definition_updated",
+
+  @doc("Existing rubric-health computations were recorded for a generated evaluator version.")
+  health_computed: "health_computed",
 }
 
-@doc("The shared fields for immutable evaluator publication lineage.")
+@doc("The shared fields for recorded evaluator changes and health snapshots.")
 @discriminator("type")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
 model EvaluatorDiagnostic {
@@ -119,7 +122,7 @@ model EvaluatorDiagnostic {
   @minLength(1)
   id: string;
 
-  @doc("The immutable published evaluator version to which the lineage entry applies.")
+  @doc("The evaluator version associated with the recorded snapshot.")
   evaluator_version: EvaluatorVersionNumber;
 
   @doc("The server-recorded time when the change occurred, expressed as Unix seconds.")
@@ -146,10 +149,10 @@ model EvaluatorLineageDiagnosticBase extends EvaluatorDiagnostic {
   actor: EvaluatorDiagnosticActor;
 }
 
-@doc("A flat page of immutable evaluator lineage diagnostics.")
+@doc("A flat page of recorded evaluator changes and computed health snapshots.")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
 model CompletedEvaluatorDiagnosticsPage {
-  @doc("The evaluator publication lineage entries.")
+  @doc("The recorded evaluator diagnostics.")
   @maxItems(100)
   @pageItems
   data: EvaluatorDiagnostic[];
@@ -163,8 +166,74 @@ model CompletedEvaluatorDiagnosticsPage {
   @continuationToken
   last_id?: string | null;
 
-  @doc("Whether more lineage entries are available.")
+  @doc("Whether more diagnostic entries are available.")
   has_more: boolean;
+}
+
+@doc("A normalized rubric-health score produced by the existing computation.")
+@minValue(0)
+@maxValue(1)
+@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
+scalar EvaluatorHealthScore extends float64;
+
+@doc("Two zero-based indices into the health snapshot's dimension_ids array.")
+@minItems(2)
+@maxItems(2)
+@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
+model EvaluatorHealthRedundantPair is Array<int32>;
+
+@doc("A snapshot of existing rubric-health computations. Missing components remain null and are not replaced with zeros.")
+@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
+model EvaluatorHealthMetrics {
+  @doc("The number of rubric dimensions used by the computation.")
+  @minValue(0)
+  n_dimensions: int32;
+
+  @doc("The dimension identifiers in their order when health was computed.")
+  dimension_ids: string[];
+
+  @doc("Embedding-based dimension diversity, or null when unavailable.")
+  diversity: EvaluatorHealthScore | null;
+
+  @doc("Embedding-based source coverage, or null when unavailable.")
+  coverage: EvaluatorHealthScore | null;
+
+  @doc("Failure-path balance computed by the existing keyword heuristic.")
+  negative_vs_positive: EvaluatorHealthScore;
+
+  @doc("The method used for negative/positive balance. Currently 'heuristic'.")
+  negpos_method: string;
+
+  @doc("The existing weighted overall score. Null if any component is unavailable; weights are not renormalized around missing components.")
+  overall: EvaluatorHealthScore | null;
+
+  @doc("Provisional structural confidence: 'low', 'med', or 'high'. This is not a calibrated statistical confidence.")
+  confidence: string;
+
+  @doc("Whether the embedding computation completed successfully.")
+  embeddings_ok: boolean;
+
+  @doc("The embedding provider used by the computation, such as 'local_tfidf'.")
+  embedding_provider: string;
+
+  @doc("Embedding availability: 'ok', 'not_configured', 'invalid_response', or 'failed'.")
+  embedding_status: string;
+
+  @doc("Pairs of dimension indices flagged as redundant by the existing computation.")
+  redundant_pairs: EvaluatorHealthRedundantPair[];
+}
+
+@doc("Health computed during evaluator generation and retained as a historical snapshot. GET does not recompute these values after later edits.")
+@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
+model HealthComputedDiagnosticChange extends EvaluatorLineageDiagnosticBase {
+  type: EvaluatorDiagnosticType.health_computed;
+
+  @doc("The generation job that produced the health snapshot.")
+  @minLength(1)
+  generation_job_id: string;
+
+  @doc("The computed health metrics and their availability.")
+  health: EvaluatorHealthMetrics;
 }
 
 @doc("A change to one functional evaluator field.")

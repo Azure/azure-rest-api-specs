@@ -48594,7 +48594,7 @@ components:
           items:
             $ref: '#/components/schemas/EvaluatorDiagnostic'
           maxItems: 100
-          description: The evaluator publication lineage entries.
+          description: The recorded evaluator diagnostics.
         first_id:
           anyOf:
             - type: string
@@ -48609,8 +48609,8 @@ components:
           description: The last diagnostic identifier represented in this page.
         has_more:
           type: boolean
-          description: Whether more lineage entries are available.
-      description: A flat page of immutable evaluator lineage diagnostics.
+          description: Whether more diagnostic entries are available.
+      description: A flat page of recorded evaluator changes and computed health snapshots.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
@@ -52397,7 +52397,7 @@ components:
           description: The stable server-assigned diagnostic identifier.
         evaluator_version:
           $ref: '#/components/schemas/EvaluatorVersionNumber'
-          description: The immutable published evaluator version to which the lineage entry applies.
+          description: The evaluator version associated with the recorded snapshot.
         occurred_at:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The server-recorded time when the change occurred, expressed as Unix seconds.
@@ -52418,7 +52418,8 @@ components:
           dimension_updated: '#/components/schemas/EvaluatorLineageDiagnosticBase'
           dimension_removed: '#/components/schemas/EvaluatorLineageDiagnosticBase'
           definition_updated: '#/components/schemas/EvaluatorLineageDiagnosticBase'
-      description: The shared fields for immutable evaluator publication lineage.
+          health_computed: '#/components/schemas/EvaluatorLineageDiagnosticBase'
+      description: The shared fields for recorded evaluator changes and health snapshots.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
@@ -52487,6 +52488,7 @@ components:
             - dimension_updated
             - dimension_removed
             - definition_updated
+            - health_computed
       description: The supported evaluator diagnostic change shapes.
       x-ms-foundry-meta:
         required_previews:
@@ -52733,6 +52735,94 @@ components:
           format: int64
           description: Total tokens consumed (input + output).
       description: Token consumption summary for an evaluator generation job. Populated when the job reaches a terminal state.
+    EvaluatorHealthMetrics:
+      type: object
+      required:
+        - n_dimensions
+        - dimension_ids
+        - diversity
+        - coverage
+        - negative_vs_positive
+        - negpos_method
+        - overall
+        - confidence
+        - embeddings_ok
+        - embedding_provider
+        - embedding_status
+        - redundant_pairs
+      properties:
+        n_dimensions:
+          type: integer
+          format: int32
+          minimum: 0
+          description: The number of rubric dimensions used by the computation.
+        dimension_ids:
+          type: array
+          items:
+            type: string
+          description: The dimension identifiers in their order when health was computed.
+        diversity:
+          anyOf:
+            - $ref: '#/components/schemas/EvaluatorHealthScore'
+            - type: 'null'
+          description: Embedding-based dimension diversity, or null when unavailable.
+        coverage:
+          anyOf:
+            - $ref: '#/components/schemas/EvaluatorHealthScore'
+            - type: 'null'
+          description: Embedding-based source coverage, or null when unavailable.
+        negative_vs_positive:
+          $ref: '#/components/schemas/EvaluatorHealthScore'
+          description: Failure-path balance computed by the existing keyword heuristic.
+        negpos_method:
+          type: string
+          description: The method used for negative/positive balance. Currently 'heuristic'.
+        overall:
+          anyOf:
+            - $ref: '#/components/schemas/EvaluatorHealthScore'
+            - type: 'null'
+          description: The existing weighted overall score. Null if any component is unavailable; weights are not renormalized around missing components.
+        confidence:
+          type: string
+          description: "Provisional structural confidence: 'low', 'med', or 'high'. This is not a calibrated statistical confidence."
+        embeddings_ok:
+          type: boolean
+          description: Whether the embedding computation completed successfully.
+        embedding_provider:
+          type: string
+          description: The embedding provider used by the computation, such as 'local_tfidf'.
+        embedding_status:
+          type: string
+          description: "Embedding availability: 'ok', 'not_configured', 'invalid_response', or 'failed'."
+        redundant_pairs:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluatorHealthRedundantPair'
+          description: Pairs of dimension indices flagged as redundant by the existing computation.
+      description: A snapshot of existing rubric-health computations. Missing components remain null and are not replaced with zeros.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
+    EvaluatorHealthRedundantPair:
+      type: array
+      items:
+        type: integer
+        format: int32
+      minItems: 2
+      maxItems: 2
+      description: Two zero-based indices into the health snapshot's dimension_ids array.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
+    EvaluatorHealthScore:
+      type: number
+      format: double
+      minimum: 0
+      maximum: 1
+      description: A normalized rubric-health score produced by the existing computation.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EvaluatorLineageDiagnosticBase:
       type: object
       required:
@@ -52748,6 +52838,7 @@ components:
       discriminator:
         propertyName: type
         mapping:
+          health_computed: '#/components/schemas/HealthComputedDiagnosticChange'
           version_created: '#/components/schemas/VersionCreatedDiagnosticChange'
           dimension_added: '#/components/schemas/DimensionAddedDiagnosticChange'
           dimension_updated: '#/components/schemas/DimensionUpdatedDiagnosticChange'
@@ -53680,6 +53771,30 @@ components:
       allOf:
         - $ref: '#/components/schemas/TelemetryEndpointAuth'
       description: Header-based secret authentication for a telemetry endpoint. The resolved secret value is injected as an HTTP header.
+    HealthComputedDiagnosticChange:
+      type: object
+      required:
+        - type
+        - generation_job_id
+        - health
+      properties:
+        type:
+          type: string
+          enum:
+            - health_computed
+        generation_job_id:
+          type: string
+          minLength: 1
+          description: The generation job that produced the health snapshot.
+        health:
+          $ref: '#/components/schemas/EvaluatorHealthMetrics'
+          description: The computed health metrics and their availability.
+      allOf:
+        - $ref: '#/components/schemas/EvaluatorLineageDiagnosticBase'
+      description: Health computed during evaluator generation and retained as a historical snapshot. GET does not recompute these values after later edits.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     HostedAgentDefinition:
       type: object
       required:
