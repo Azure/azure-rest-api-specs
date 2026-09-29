@@ -48802,19 +48802,7 @@ components:
             - regenerated
             - not_present_in_generated_rubric
             - generation_completed
-            - history_imported
       description: Known machine-readable classifications for evaluator diagnostic changes.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
-    EvaluatorDiagnosticMessageSeverity:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - info
-            - warning
-      description: The severity of an evaluator diagnostic message.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
@@ -48830,46 +48818,6 @@ components:
             - definition_updated
             - health_computed
       description: The supported evaluator diagnostic change shapes.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
-    EvaluatorDimensionSourceCoverage:
-      type: object
-      required:
-        - dimension_id
-        - source_ids
-        - coverage_status
-      properties:
-        dimension_id:
-          type: string
-          minLength: 1
-          maxLength: 128
-          description: The stable rubric dimension identifier.
-        source_ids:
-          type: array
-          items:
-            type: string
-          description: Stable source identifiers recorded for the dimension.
-        coverage_status:
-          $ref: '#/components/schemas/EvaluatorDimensionSourceCoverageStatus'
-          description: The recorded source-coverage status.
-        explanation:
-          type: string
-          description: A bounded explanation of the coverage status.
-      description: Recorded source coverage for one rubric dimension.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
-    EvaluatorDimensionSourceCoverageStatus:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - covered
-            - partial
-            - unresolved
-            - uncovered
-      description: Whether one rubric dimension is covered by recorded generation sources.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
@@ -49017,44 +48965,6 @@ components:
             - traces
             - dataset
       description: The supported source types for evaluator generation jobs.
-    EvaluatorGenerationSourceSnapshot:
-      type: object
-      required:
-        - source_id
-        - source_type
-        - content_hash
-        - status
-      properties:
-        source_id:
-          type: string
-          minLength: 1
-          description: The stable source identifier within the generation operation.
-        source_type:
-          type: string
-          minLength: 1
-          description: The source type.
-        content_hash:
-          $ref: '#/components/schemas/Sha256Hash'
-          description: The lowercase 64-character SHA-256 source content hash.
-        status:
-          $ref: '#/components/schemas/EvaluatorGenerationSourceUseStatus'
-          description: How the source was used.
-      description: A bounded evaluator generation source snapshot.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
-    EvaluatorGenerationSourceUseStatus:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - accepted
-            - partially_used
-            - rejected
-      description: How an evaluator generation source was used.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorGenerationTokenUsage:
       type: object
       required:
@@ -49233,68 +49143,6 @@ components:
             - continuous
             - boolean
       description: The type of the evaluator
-    EvaluatorSourceCoverageGap:
-      type: object
-      required:
-        - code
-        - severity
-        - explanation
-      properties:
-        code:
-          type: string
-          minLength: 1
-          description: The stable gap code.
-        severity:
-          $ref: '#/components/schemas/EvaluatorDiagnosticMessageSeverity'
-          description: The gap severity.
-        source_id:
-          type: string
-          minLength: 1
-          description: The related source identifier, when applicable.
-        dimension_id:
-          type: string
-          minLength: 1
-          maxLength: 128
-          description: The related dimension identifier, when applicable.
-        explanation:
-          type: string
-          description: A bounded explanation.
-      description: A bounded gap in evaluator source coverage.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
-    EvaluatorSourceLineageSummary:
-      type: object
-      required:
-        - sources
-        - dimension_coverage
-        - coverage_gaps
-        - limitations
-      properties:
-        sources:
-          type: array
-          items:
-            $ref: '#/components/schemas/EvaluatorGenerationSourceSnapshot'
-          description: Recorded generation source snapshots.
-        dimension_coverage:
-          type: array
-          items:
-            $ref: '#/components/schemas/EvaluatorDimensionSourceCoverage'
-          description: Recorded source coverage by rubric dimension.
-        coverage_gaps:
-          type: array
-          items:
-            $ref: '#/components/schemas/EvaluatorSourceCoverageGap'
-          description: Recorded source-coverage gaps.
-        limitations:
-          type: array
-          items:
-            type: string
-          description: Bounded limitations of the recorded lineage.
-      description: Bounded source lineage and coverage recorded by evaluator generation.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     EvaluatorType:
       anyOf:
         - type: string
@@ -82184,15 +82032,6 @@ components:
       description: |-
         Known SSE event types emitted by the hosted agent session log stream.
         Additional event types may be introduced in future versions.
-    Sha256Hash:
-      type: string
-      minLength: 64
-      maxLength: 64
-      pattern: ^[0-9a-f]{64}$
-      description: A lowercase 64-character SHA-256 hexadecimal digest.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
     SharepointGroundingToolCall:
       type: object
       required:
@@ -85137,9 +84976,6 @@ components:
           type: string
           minLength: 1
           description: The evaluator generation job that created the version, when applicable.
-        source_lineage:
-          $ref: '#/components/schemas/EvaluatorSourceLineageSummary'
-          description: Bounded source lineage recorded by evaluator generation, when available.
       allOf:
         - $ref: '#/components/schemas/EvaluatorLineageDiagnosticBase'
       description: A diagnostic change recording the creation of an evaluator version.

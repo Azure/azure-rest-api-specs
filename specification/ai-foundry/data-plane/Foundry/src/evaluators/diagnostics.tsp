@@ -9,13 +9,6 @@ const EvaluatorDiagnosticsRequiredPreviews = #{
   required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview],
 };
 
-@doc("A lowercase 64-character SHA-256 hexadecimal digest.")
-@minLength(64)
-@maxLength(64)
-@pattern("^[0-9a-f]{64}$")
-@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
-scalar Sha256Hash extends string;
-
 @doc("A published evaluator version number represented as a decimal integer string.")
 @minLength(1)
 @maxLength(10)
@@ -43,18 +36,6 @@ model EvaluatorDiagnosticActor {
 
   @doc("A stable opaque principal or service identifier, when available.")
   id?: string;
-}
-
-@doc("The severity of an evaluator diagnostic message.")
-@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
-union EvaluatorDiagnosticMessageSeverity {
-  string,
-
-  @doc("Informational diagnostic detail.")
-  info: "info",
-
-  @doc("A diagnostic condition that may require attention.")
-  warning: "warning",
 }
 
 @doc("Known machine-readable classifications for evaluator diagnostic changes.")
@@ -85,9 +66,6 @@ union EvaluatorDiagnosticChangeType {
 
   @doc("An evaluator version was published from completed generation.")
   generation_completed: "generation_completed",
-
-  @doc("The diagnostic change is a baseline imported from legacy evaluator history.")
-  history_imported: "history_imported",
 }
 
 @doc("The supported evaluator diagnostic change shapes.")
@@ -250,114 +228,6 @@ model EvaluatorFieldChange {
   after: Record<unknown>;
 }
 
-@doc("How an evaluator generation source was used.")
-@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
-union EvaluatorGenerationSourceUseStatus {
-  string,
-
-  @doc("The source was accepted and used.")
-  accepted: "accepted",
-
-  @doc("Only part of the source was used.")
-  partially_used: "partially_used",
-
-  @doc("The source was rejected.")
-  rejected: "rejected",
-}
-
-@doc("A bounded evaluator generation source snapshot.")
-@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
-model EvaluatorGenerationSourceSnapshot {
-  @doc("The stable source identifier within the generation operation.")
-  @minLength(1)
-  source_id: string;
-
-  @doc("The source type.")
-  @minLength(1)
-  source_type: string;
-
-  @doc("The lowercase 64-character SHA-256 source content hash.")
-  content_hash: Sha256Hash;
-
-  @doc("How the source was used.")
-  status: EvaluatorGenerationSourceUseStatus;
-}
-
-@doc("Whether one rubric dimension is covered by recorded generation sources.")
-@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
-union EvaluatorDimensionSourceCoverageStatus {
-  string,
-
-  @doc("The dimension has recorded source coverage.")
-  covered: "covered",
-
-  @doc("The dimension has partial recorded source coverage.")
-  partial: "partial",
-
-  @doc("The service could not resolve the dimension's source coverage.")
-  unresolved: "unresolved",
-
-  @doc("The dimension has no recorded source coverage.")
-  uncovered: "uncovered",
-}
-
-@doc("Recorded source coverage for one rubric dimension.")
-@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
-model EvaluatorDimensionSourceCoverage {
-  @doc("The stable rubric dimension identifier.")
-  @minLength(1)
-  @maxLength(128)
-  dimension_id: string;
-
-  @doc("Stable source identifiers recorded for the dimension.")
-  source_ids: string[];
-
-  @doc("The recorded source-coverage status.")
-  coverage_status: EvaluatorDimensionSourceCoverageStatus;
-
-  @doc("A bounded explanation of the coverage status.")
-  explanation?: string;
-}
-
-@doc("A bounded gap in evaluator source coverage.")
-@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
-model EvaluatorSourceCoverageGap {
-  @doc("The stable gap code.")
-  @minLength(1)
-  code: string;
-
-  @doc("The gap severity.")
-  severity: EvaluatorDiagnosticMessageSeverity;
-
-  @doc("The related source identifier, when applicable.")
-  @minLength(1)
-  source_id?: string;
-
-  @doc("The related dimension identifier, when applicable.")
-  @minLength(1)
-  @maxLength(128)
-  dimension_id?: string;
-
-  @doc("A bounded explanation.")
-  explanation: string;
-}
-
-@doc("Bounded source lineage and coverage recorded by evaluator generation.")
-@extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
-model EvaluatorSourceLineageSummary {
-  @doc("Recorded generation source snapshots.")
-  sources: EvaluatorGenerationSourceSnapshot[];
-
-  @doc("Recorded source coverage by rubric dimension.")
-  dimension_coverage: EvaluatorDimensionSourceCoverage[];
-
-  @doc("Recorded source-coverage gaps.")
-  coverage_gaps: EvaluatorSourceCoverageGap[];
-
-  @doc("Bounded limitations of the recorded lineage.")
-  limitations: string[];
-}
-
 @doc("A diagnostic change recording the creation of an evaluator version.")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
 model VersionCreatedDiagnosticChange extends EvaluatorLineageDiagnosticBase {
@@ -369,9 +239,6 @@ model VersionCreatedDiagnosticChange extends EvaluatorLineageDiagnosticBase {
   @doc("The evaluator generation job that created the version, when applicable.")
   @minLength(1)
   generation_job_id?: string;
-
-  @doc("Bounded source lineage recorded by evaluator generation, when available.")
-  source_lineage?: EvaluatorSourceLineageSummary;
 }
 
 @doc("A diagnostic change recording the addition of a rubric dimension.")
