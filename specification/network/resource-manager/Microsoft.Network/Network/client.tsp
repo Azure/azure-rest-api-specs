@@ -3229,13 +3229,6 @@ union ProvisioningStateUnion {
   "csharp"
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Retain ARM resource generation after rebasing the legacy custom resource hierarchy."
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "Retain ARM resource generation after rebasing the legacy custom resource hierarchy."
-@@Azure.ResourceManager.Legacy.customAzureResource(
-  Microsoft.Network.NetworkManagerConnection,
-  #{ isAzureResource: true }
-);
-
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the released C# ResourceData hierarchy while retaining the complete AdminRuleCollection wire model."
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
   Microsoft.Network.AdminRuleCollection,
