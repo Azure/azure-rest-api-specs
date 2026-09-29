@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2020-10` is specified on the comma
 
 ```yaml $(tag) == 'package-2020-10'
 input-file:
-  - preview/2020-10-02/blob.json
+  - stable/2020-10-02/blob.json
 ```
 
 ### Tag: package-2020-12
@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2020-12` is specified on the comma
 
 ```yaml $(tag) == 'package-2020-12'
 input-file:
-  - preview/2020-12-06/blob.json
+  - stable/2020-12-06/blob.json
 ```
 
 ### Tag: package-2021-02
@@ -55,7 +55,7 @@ These settings apply only when `--tag=package-2021-02` is specified on the comma
 
 ```yaml $(tag) == 'package-2021-02'
 input-file:
-  - preview/2021-02-12/blob.json
+  - stable/2021-02-12/blob.json
 ```
 
 ### Tag: package-2021-04
@@ -64,7 +64,7 @@ These settings apply only when `--tag=package-2021-04` is specified on the comma
 
 ```yaml $(tag) == 'package-2021-04'
 input-file:
-  - preview/2021-04-10/blob.json
+  - stable/2021-04-10/blob.json
 ```
 
 ### Tag: package-2021-08
@@ -73,16 +73,7 @@ These settings apply only when `--tag=package-2021-08` is specified on the comma
 
 ```yaml $(tag) == 'package-2021-08'
 input-file:
-  - preview/2021-08-06/blob.json
-```
-
-### Tag: package-2021-12-preview
-
-These settings apply only when `--tag=package-2021-12-preview` is specified on the command line.
-
-```yaml $(tag) == 'package-2021-12-preview'
-input-file:
-  - preview/2021-12-02/blob.json
+  - stable/2021-08-06/blob.json
 ```
 
 ### Tag: package-2021-12
