@@ -1,6 +1,5 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./MapsAccount.tsp";
@@ -8,7 +7,6 @@ import "./MapsAccount.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Maps;
 /**
@@ -22,14 +20,14 @@ interface PrivateEndpointConnections {
   /**
    * Gets the specified private endpoint connection associated with the Maps Account.
    */
-  get is PrivateEndpointOperations.Read<MapsAccount, PrivateEndpointConnection>;
+  get is PrivateEndpointOperations.Read<MapsAccount>;
 
   /**
    * Create or update the state of specified private endpoint connection associated with the Maps account.
    */
-  create is PrivateEndpointOperations.CreateOrReplaceAsync<
+  @Azure.Core.useFinalStateVia("location")
+  create is PrivateEndpointOperations.CreateOrUpdateAsync<
     MapsAccount,
-    PrivateEndpointConnection,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = PrivateEndpointConnection> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -37,10 +35,11 @@ interface PrivateEndpointConnections {
   /**
    * Deletes the specified private endpoint connection associated with the Maps Account.
    */
+  @Azure.Core.useFinalStateVia("location")
   delete is PrivateEndpointOperations.DeleteAsync<
     MapsAccount,
-    PrivateEndpointConnection,
-    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -48,7 +47,6 @@ interface PrivateEndpointConnections {
    */
   listByAccount is PrivateEndpointOperations.ListByParent<
     MapsAccount,
-    PrivateEndpointConnection,
     Response = ArmResponse<PrivateEndpointConnectionList>
   >;
 }

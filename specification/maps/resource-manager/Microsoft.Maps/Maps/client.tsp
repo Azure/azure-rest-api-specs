@@ -44,11 +44,6 @@ using Azure.ClientGenerator.Core;
 @@clientName(Microsoft.Maps.Kind, "MapsAccountKind", "csharp");
 @@clientName(Microsoft.Maps.Name, "MapsSkuName", "csharp");
 @@clientName(Microsoft.Maps.Sku, "MapsSku", "csharp");
-@@clientName(
-  Microsoft.Maps.InfrastructureEncryption,
-  "MapsInfrastructureEncryption",
-  "csharp"
-);
 @@clientName(Microsoft.Maps.SigningKey, "MapsSigningKey", "csharp");
 @@clientName(Microsoft.Maps.KeyType, "MapsKeyType", "csharp");
 @@clientName(Microsoft.Maps.LinkedResource, "MapsLinkedResource", "csharp");
@@ -93,8 +88,7 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 
-// Remove OperationResult/OperationStatus LRO polling operations from C# generation
-@@scope(Microsoft.Maps.OperationResultOperationGroup.get, "!csharp");
+// Remove the OperationStatus LRO polling operation from C# generation
 @@scope(Microsoft.Maps.OperationStatusOperationGroup.get, "!csharp");
 
 // Override clientLocation for Operations.list to avoid C# namespace conflict

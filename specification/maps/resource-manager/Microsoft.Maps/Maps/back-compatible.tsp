@@ -23,15 +23,20 @@ using Microsoft.Maps;
 );
 @@clientName(Azure.Core.uuid, "uuid");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserves the flattened Maps Account update model used by existing SDKs."
 @@Legacy.flattenProperty(MapsAccountUpdateParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserves the flattened Creator update model in the 2025 preview SDKs."
 @@Legacy.flattenProperty(CreatorUpdateParameters.properties);
 
 @@clientName(Accounts.createOrUpdate::parameters.resource, "MapsAccount");
+@@clientName(Accounts.createOrUpdateV1::parameters.resource, "MapsAccount");
 @@clientName(
   Accounts.update::parameters.properties,
+  "MapsAccountUpdateParameters"
+);
+@@clientName(
+  Accounts.updateV1::parameters.properties,
   "MapsAccountUpdateParameters"
 );
 @@clientName(Accounts.listSas::parameters.body, "MapsAccountSasParameters");
@@ -41,16 +46,14 @@ using Microsoft.Maps;
   PrivateEndpointConnections.create::parameters.resource,
   "properties"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserves the flattened private endpoint connection model used by existing SDKs."
 @@Legacy.flattenProperty(PrivateEndpointConnection.properties);
 
 @@clientName(Creators.createOrUpdate::parameters.resource, "CreatorResource");
 @@clientName(Creators.update::parameters.properties, "CreatorUpdateParameters");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserves the flattened private link resource model used by existing SDKs."
 @@Legacy.flattenProperty(PrivateLinkResource.properties);
-
-@@clientLocation(OperationResultOperationGroup.get, "OperationResult");
 
 @@clientLocation(OperationStatusOperationGroup.get, "OperationStatus");
 
