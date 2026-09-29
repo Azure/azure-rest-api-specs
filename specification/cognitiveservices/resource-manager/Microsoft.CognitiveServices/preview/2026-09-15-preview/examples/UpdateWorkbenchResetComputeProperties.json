@@ -1,0 +1,36 @@
+{
+  "operationId": "Workbenches_Update",
+  "title": "UpdateWorkbenchResetComputeProperties",
+  "parameters": {
+    "api-version": "2026-09-15-preview",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "rgcognitiveservices",
+    "accountName": "myAccount",
+    "projectName": "myProject",
+    "workbenchName": "myWorkbench",
+    "properties": {
+      "properties": {
+        "instanceType": null,
+        "gpuCount": null
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rgcognitiveservices/providers/Microsoft.CognitiveServices/accounts/myAccount/projects/myProject/workbenches/myWorkbench",
+        "name": "myWorkbench",
+        "type": "Microsoft.CognitiveServices/accounts/projects/workbenches",
+        "properties": {
+          "targetClusterId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/vc-rg/providers/Microsoft.MachineLearningServices/virtualClusters/test-vc",
+          "imageLink": "mcr.microsoft.com/azureml/curated/pytorch-gpu:latest",
+          "idleTimeBeforeShutdown": "PT1H",
+          "instanceType": null,
+          "gpuCount": null,
+          "provisioningState": "Succeeded",
+          "status": "Stopped"
+        }
+      }
+    }
+  }
+}

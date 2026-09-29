@@ -14,8 +14,10 @@
         "value": [
           {
             "properties": {
-              "targetClusterId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rgcognitiveservices/providers/Microsoft.CognitiveServices/accounts/myAccount/computes/myCluster",
+              "targetClusterId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/vc-rg/providers/Microsoft.MachineLearningServices/virtualClusters/test-vc",
               "imageLink": "mcr.microsoft.com/azureml/curated/pytorch-gpu:latest",
+              "instanceType": "Singularity.ND12_H100_v5-n1",
+              "gpuCount": 1,
               "idleTimeBeforeShutdown": "PT30M",
               "datasetId": "dataset-12345",
               "sshSettings": {
@@ -28,10 +30,10 @@
               },
               "webEndpoint": "https://myworkbench.eastus.api.azureml.ms",
               "provisioningState": "Succeeded",
+              "status": "Running",
               "errors": [],
               "creationTime": "2026-03-24T12:00:00.000Z"
             },
-            "location": "eastus",
             "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgcognitiveservices/providers/Microsoft.CognitiveServices/accounts/myAccount/projects/myProject/workbenches/myWorkbench",
             "name": "myWorkbench",
             "type": "Microsoft.CognitiveServices/accounts/projects/workbenches"

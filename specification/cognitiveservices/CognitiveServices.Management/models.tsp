@@ -7043,15 +7043,58 @@ model ComputeListResult {
 @removed(Versions.v2026_09_01)
 @added(Versions.v2026_09_15_preview)
 model WorkbenchProperties {
+  // Retain the published property descriptions and visibility in historical projections.
   /**
    * ARM resource ID of the parent cluster that hosts this workbench.
    */
+  @renamedFrom(Versions.v2026_09_15_preview, "targetClusterId")
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_09_01)
+  targetClusterIdLegacy: string;
+
+  /**
+   * Resource ID of the Foundry Compute or virtual cluster that hosts this workbench. Changing the cluster requires the workbench to be stopped.
+   */
+  @added(Versions.v2026_09_15_preview)
   targetClusterId: string;
 
   /**
    * Container image URI (e.g., MCR or ACR image path) for the workbench.
    */
+  @renamedFrom(Versions.v2026_09_15_preview, "imageLink")
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_09_01)
+  imageLinkLegacy: string;
+
+  /**
+   * Container image URI (e.g., MCR or ACR image path) for the workbench. Immutable after creation.
+   */
+  @added(Versions.v2026_09_15_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   imageLink: string;
+
+  /**
+   * For virtual clusters, an exact Singularity instance type or a full-node Azure VM size. If omitted or null on creation, defaults to Singularity.D4_v3. Foundry Compute ignores this override and uses the pool configuration. Changing the instance type requires the workbench to be stopped.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Explicit null selects the service fallback on create and resets the instance type on PATCH; omission preserves it on PATCH"
+  @added(Versions.v2026_09_15_preview)
+  instanceType?: string | null;
+
+  /**
+   * GPU count for GPU pools or vCPU count for CPU pools. Must be 1, 2, 4, 8, or a positive multiple of 8. A full-node Azure VM size permits partition selection; omitted or null uses the full node. For an exact Singularity instance type, a supplied count must match that type; the Singularity.D4_v3 fallback accepts 4.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Explicit null selects the full-node or instance-type default count; PATCH omission preserves the current override"
+  @added(Versions.v2026_09_15_preview)
+  @minValue(1)
+  gpuCount?: int32 | null;
 
   /**
    * ISO 8601 duration before the idle workbench is automatically shut down (e.g., 'PT30M').
@@ -7061,11 +7104,39 @@ model WorkbenchProperties {
   /**
    * The dataset ID to mount for the workbench.
    */
+  @renamedFrom(Versions.v2026_09_15_preview, "datasetId")
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_09_01)
+  datasetIdLegacy?: string;
+
+  /**
+   * The dataset ID to mount for the workbench. Set only during creation.
+   */
+  @added(Versions.v2026_09_15_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   datasetId?: string;
 
   /**
    * SSH configuration for remote access to the workbench.
    */
+  @renamedFrom(Versions.v2026_09_15_preview, "sshSettings")
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_09_01)
+  sshSettingsLegacy?: SshSettings;
+
+  /**
+   * SSH configuration for remote access to the workbench. Set only during creation.
+   */
+  @added(Versions.v2026_09_15_preview)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   sshSettings?: SshSettings;
 
   /**
@@ -7083,8 +7154,29 @@ model WorkbenchProperties {
   /**
    * Provisioning state of the workbench resource.
    */
+  @renamedFrom(Versions.v2026_09_15_preview, "provisioningState")
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_07_01)
+  @added(Versions.v2026_07_15_preview)
+  @removed(Versions.v2026_09_01)
   @visibility(Lifecycle.Read)
-  provisioningState?: ComputeProvisioningState;
+  provisioningStateLegacy?: ComputeProvisioningState;
+
+  /**
+   * Provisioning state of the workbench resource, independent of runtime lifecycle status.
+   */
+  @added(Versions.v2026_09_15_preview)
+  @visibility(Lifecycle.Read)
+  provisioningState?: WorkbenchProvisioningState;
+
+  /**
+   * Runtime lifecycle status of the workbench. Independent of resource provisioning; start, stop, restart, and runtime health changes do not change provisioningState.
+   */
+  @added(Versions.v2026_09_15_preview)
+  @visibility(Lifecycle.Read)
+  status?: WorkbenchStatus;
 
   /**
    * Error details for the workbench resource.
@@ -7097,6 +7189,93 @@ model WorkbenchProperties {
    */
   @visibility(Lifecycle.Read)
   creationTime?: utcDateTime;
+}
+
+/**
+ * Provisioning state of a workbench resource, independent of runtime lifecycle status.
+ */
+@added(Versions.v2026_09_15_preview)
+union WorkbenchProvisioningState {
+  string,
+
+  /** The workbench resource is being created. */
+  Creating: "Creating",
+
+  /** The workbench resource has been provisioned. */
+  Succeeded: "Succeeded",
+
+  /** Provisioning of the workbench resource failed. */
+  Failed: "Failed",
+
+  /** Provisioning of the workbench resource was canceled. */
+  Canceled: "Canceled",
+}
+
+/**
+ * Runtime lifecycle status of a workbench.
+ */
+@added(Versions.v2026_09_15_preview)
+union WorkbenchStatus {
+  string,
+
+  /** The runtime status is unknown. */
+  Unknown: "Unknown",
+
+  /** The runtime is being created. */
+  Creating: "Creating",
+
+  /** The runtime is starting. */
+  Starting: "Starting",
+
+  /** The runtime is running. */
+  Running: "Running",
+
+  /** The runtime is stopping. */
+  Stopping: "Stopping",
+
+  /** The runtime is stopped. */
+  Stopped: "Stopped",
+
+  /** The runtime is restarting. */
+  Restarting: "Restarting",
+
+  /** The runtime is being updated. */
+  Updating: "Updating",
+
+  /** The runtime is being deleted. */
+  Deleting: "Deleting",
+
+  /** The runtime has failed. */
+  Failed: "Failed",
+}
+
+/**
+ * Mutable properties for a Workbench resource.
+ */
+@added(Versions.v2026_09_15_preview)
+model WorkbenchUpdateProperties {
+  /**
+   * Resource ID of the Foundry Compute or virtual cluster that hosts this workbench. Changing the cluster requires the workbench to be stopped.
+   */
+  targetClusterId?: string;
+
+  /**
+   * ISO 8601 duration before the idle workbench is automatically shut down (e.g., 'PT30M').
+   */
+  idleTimeBeforeShutdown?: string;
+
+  /**
+   * For virtual clusters, an exact Singularity instance type or a full-node Azure VM size. Omit to preserve the current value; null resets to the Singularity.D4_v3 fallback. Foundry Compute ignores this override and uses the pool configuration. An actual instance type change requires the workbench to be stopped.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "PATCH distinguishes omission (preserve) from explicit null (reset the instance type)"
+  instanceType?: string | null;
+
+  /**
+   * GPU count for GPU pools or vCPU count for CPU pools. Must be 1, 2, 4, 8, or a positive multiple of 8. Omit to preserve the current value; null clears the override to use the full node or the instance type's default count. Full-node Azure VM sizes permit partition selection. A supplied count must match an exact Singularity instance type; the Singularity.D4_v3 fallback accepts 4.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "PATCH distinguishes omission (preserve) from explicit null (clear the count override)"
+  @minValue(1)
+  gpuCount?: int32 | null;
 }
 
 /**
