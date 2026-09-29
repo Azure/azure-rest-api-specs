@@ -465,18 +465,6 @@ union TelephonyProvider {
   twilio: "twilio",
 }
 
-@doc("The lifecycle status of a telephony binding.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union TelephonyBindingStatus {
-  string,
-
-  @doc("The binding accepts new inbound calls.")
-  active: "active",
-
-  @doc("The binding remains configured but rejects new inbound calls.")
-  suspended: "suspended",
-}
-
 @doc("The kind of telephony transfer destination. Known values are stable; additional values may be added over time.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyTransferDestinationKind {
@@ -609,9 +597,6 @@ model UpdateTelephonyBindingRequest {
   @doc("The SIP configuration changes. Only valid for SIP bindings. Omitted fields retain current values; null restores defaults, subject to enabled-direction validation.")
   sip?: SipTelephonyConfigurationPatch | null;
 
-  @doc("The new lifecycle status.")
-  status?: TelephonyBindingStatus;
-
   @doc("The replacement display label. Omit it to preserve the current value; use null to clear it.")
   @maxLength(128)
   label?: string | null;
@@ -639,9 +624,6 @@ model TelephonyBinding {
   @doc("The optional display label for the binding.")
   @maxLength(128)
   label?: string;
-
-  @doc("The lifecycle status.")
-  status: TelephonyBindingStatus;
 }
 
 @doc("A Microsoft Teams Phone extensibility binding owned by a voice agent.")
@@ -698,9 +680,6 @@ model TelephonyBindingListItem {
   @doc("The optional display label for the binding.")
   @maxLength(128)
   label?: string;
-
-  @doc("The lifecycle status.")
-  status: TelephonyBindingStatus;
 
   @doc("The entity tag to send in the `If-Match` header when updating or deleting this binding.")
   @visibility(Lifecycle.Read)
@@ -874,7 +853,7 @@ model SipTelephonyConfigurationPatch {
   @doc("The outbound configuration changes.")
   outbound?: SipOutboundConfigurationPatch | null;
 }
-@doc("The request to create a SIP binding. New SIP bindings are active. Use direction-specific connection references instead of a top-level connection_name.")
+@doc("The request to create a SIP binding. Use direction-specific connection references instead of a top-level connection_name.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @clientName("CreateSipTelephonyBindingContent", "csharp")
 model CreateSipTelephonyBindingRequest extends CreateTelephonyBindingRequest {

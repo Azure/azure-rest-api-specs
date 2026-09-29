@@ -4560,13 +4560,6 @@ paths:
           schema:
             $ref: '#/components/schemas/TelephonyProvider'
           explode: false
-        - name: status
-          in: query
-          required: false
-          description: Filters bindings by lifecycle status.
-          schema:
-            $ref: '#/components/schemas/TelephonyBindingStatus'
-          explode: false
         - name: limit
           in: query
           required: false
@@ -50161,7 +50154,7 @@ components:
           description: The SIP configuration. Enabled directions require connection references.
       allOf:
         - $ref: '#/components/schemas/CreateTelephonyBindingRequest'
-      description: The request to create a SIP binding. New SIP bindings are active. Use direction-specific connection references instead of a top-level connection_name.
+      description: The request to create a SIP binding. Use direction-specific connection references instead of a top-level connection_name.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -88466,7 +88459,6 @@ components:
       required:
         - id
         - provider
-        - status
       properties:
         id:
           $ref: '#/components/schemas/TelephonyBindingId'
@@ -88478,9 +88470,6 @@ components:
           type: string
           maxLength: 128
           description: The optional display label for the binding.
-        status:
-          $ref: '#/components/schemas/TelephonyBindingStatus'
-          description: The lifecycle status.
       discriminator:
         propertyName: provider
         mapping:
@@ -88504,7 +88493,6 @@ components:
       required:
         - id
         - provider
-        - status
         - etag
       properties:
         id:
@@ -88517,9 +88505,6 @@ components:
           type: string
           maxLength: 128
           description: The optional display label for the binding.
-        status:
-          $ref: '#/components/schemas/TelephonyBindingStatus'
-          description: The lifecycle status.
         etag:
           $ref: '#/components/schemas/Azure.Core.eTag'
           description: The entity tag to send in the `If-Match` header when updating or deleting this binding.
@@ -88531,17 +88516,6 @@ components:
           twilio: '#/components/schemas/TwilioTelephonyBindingListItem'
           sip: '#/components/schemas/SipTelephonyBindingListItem'
       description: A telephony binding returned in a list, including its entity tag.
-      x-ms-foundry-meta:
-        required_previews:
-          - VoiceAgents=V1Preview
-    TelephonyBindingStatus:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - active
-            - suspended
-      description: The lifecycle status of a telephony binding.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -90330,9 +90304,6 @@ components:
             - $ref: '#/components/schemas/SipTelephonyConfigurationPatch'
             - type: 'null'
           description: The SIP configuration changes. Only valid for SIP bindings. Omitted fields retain current values; null restores defaults, subject to enabled-direction validation.
-        status:
-          $ref: '#/components/schemas/TelephonyBindingStatus'
-          description: The new lifecycle status.
         label:
           anyOf:
             - type: string
