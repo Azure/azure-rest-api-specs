@@ -202,6 +202,10 @@ Run `pnpm run check` from each affected tool directory. All applicable type, lin
 
 Cover new or changed behavior and bug regressions with focused tests of repository-owned behavior and integration contracts. Reuse adequate existing coverage for mechanical refactors and dependency/API substitutions; add tests for uncovered repository behavior or compatibility risks, not to reproduce upstream test matrices. Preserve configured coverage requirements and justify removing existing tests.
 
+- Each assertion must catch a concrete behavioral regression, not restate configuration or test a third-party tool's implementation. Formatting-only changes normally need the existing formatter check, not new tests.
+- For YAML/JSON integration tests, inspect parsed values that affect behavior. Do not assert text offsets, file length, indentation, quote style, or display names unless they are part of the contract being tested.
+- When a test fails after an intentional change, remove obsolete expectations rather than replacing them with assertions that merely lock in the new implementation. Keep the fix scoped to the behavior at issue.
+
 - **Framework**: Vitest
 - **Test files**: `*.test.ts` files under each tool's `test/` directory
 - **Fixtures**: Place test fixtures under `test/` (the root `.oxfmtrc.json` excludes `fixtures` and `specification` directories under tooling)
@@ -218,7 +222,7 @@ dependencies once and runs the full Vitest workspace. Changes to tooling, shared
 configuration, or integration fixtures run all suites. Do not add per-tool
 workflows or type-check steps to the test OS matrix.
 
-`.github/workflows/format.yaml` runs `pnpm format:check` once from the repository root for `.github`, `eng/tools`, and `vitest.config.mts`. Do not add formatting steps to package/OS test matrices. Package-local formatting commands remain available and use the same root configuration.
+`.github/workflows/format.yaml` runs `pnpm format:check` once from the repository root for `.github`, `eng`, and `vitest.config.mts`. Do not add formatting steps to package/OS test matrices. Bare `pnpm oxfmt` and package-local formatting commands use the root `.oxfmtrc.json`, which defines the scope and excludes mirrored `eng/common`, fixtures, generated files, and unmanaged content.
 
 Code linting runs once for all packages in `.github/workflows/lint.yaml`, which automatically includes new tools. Do not add lint steps to the build/test workflow.
 
