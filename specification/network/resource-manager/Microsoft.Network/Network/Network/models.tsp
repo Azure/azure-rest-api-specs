@@ -11188,7 +11188,7 @@ model DdosMitigationRule extends SubResource {
 }
 
 /**
- * DDoS mitigation rule properties. Each rule must specify at least one applicable default mitigation or source policy override.
+ * DDoS mitigation rule properties. The service validates that each rule specifies at least one applicable default mitigation or source policy override and that the default mitigations match the selected trafficScope.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The DDoS custom policy contract is emitted in the existing virtualNetwork Swagger feature."
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
@@ -11371,7 +11371,7 @@ model DdosSourceMatchConditions {
 }
 
 /**
- * A geographic source match. At least one of continent or countryCode must be specified. If both are specified, the country must belong to the continent according to the service-defined mapping. For example, RU, TR, and KZ map to Asia, EG maps to Africa, and CY maps to Europe.
+ * A geographic source match. The service validates that at least one of continent or countryCode is specified. If both are specified, the service validates that the country belongs to the continent according to the service-defined mapping. For example, RU, TR, and KZ map to Asia, EG maps to Africa, and CY maps to Europe.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The DDoS custom policy contract is emitted in the existing virtualNetwork Swagger feature."
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
