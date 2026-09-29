@@ -12,11 +12,20 @@ using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.Projects {
   // Rubric-based evaluator generation jobs are grouped under the root Evaluators client.
-  @@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.create, Evaluators);
+  @@clientLocation(
+    Azure.AI.Projects.EvaluatorGenerationJobs.create,
+    Evaluators
+  );
   @@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.get, Evaluators);
   @@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.list, Evaluators);
-  @@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.cancel, Evaluators);
-  @@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.delete, Evaluators);
+  @@clientLocation(
+    Azure.AI.Projects.EvaluatorGenerationJobs.cancel,
+    Evaluators
+  );
+  @@clientLocation(
+    Azure.AI.Projects.EvaluatorGenerationJobs.delete,
+    Evaluators
+  );
 }
 
 namespace Azure.AI.Projects.Beta {
