@@ -88,7 +88,7 @@ These settings apply only when `--tag=package-preview-2023-05` is specified on t
 input-file:
   - preview/2023-05-01-preview/extensionTypes.json
   - stable/2023-05-01/operations.json
-  - common/2023-05-01-preview/definitions.json
+  - preview/2023-05-01-preview/definitions.json
 ```
 
 ### Tag: package-2022-11
