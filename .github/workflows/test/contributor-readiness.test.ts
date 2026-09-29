@@ -190,6 +190,22 @@ describe("contributor readiness", () => {
     expect(call[0].body).not.toContain("cannot satisfy");
   });
 
+  it.each([404, 403])(
+    "links organization names to their People pages for membership HTTP %s",
+    async (code) => {
+      const f = setup();
+      f.membership.mockRejectedValue(createMockRequestError(code));
+      await f.run();
+      const [comment] = f.github.rest.issues.createComment.mock.calls[0] as [{ body: string }];
+      expect(comment.body).toContain("[Microsoft](https://github.com/orgs/Microsoft/people)");
+      expect(comment.body).toContain("[Azure](https://github.com/orgs/Azure/people)");
+      expect(comment.body).not.toContain("\\[Microsoft\\]");
+      expect(comment.body).toContain("https://aka.ms/azsdk/access");
+      expect(comment.body).toContain(code === 403 ? "🟡" : "🔴");
+      expect(f.core.summary.addRaw).toHaveBeenCalledWith(comment.body.replace(`\n${marker}`, ""));
+    },
+  );
+
   it("explains reviewer and author access differently", async () => {
     const f = setup();
     f.permission.mockResolvedValue({ data: { permission: "read" } });
@@ -461,13 +477,13 @@ describe("contributor readiness", () => {
     const body = renderReadiness(
       [{ ...reviewer, roles: new Set(["submitted reviewer"]) }],
       [
-        { subject: reviewer.login, message: "Azure membership not public." },
-        { subject: reviewer.login, message: "Azure membership not public." },
+        { subject: reviewer.login, message: "Azure membership not public.", organization: "Azure" },
+        { subject: reviewer.login, message: "Azure membership not public.", organization: "Azure" },
         { subject: reviewer.login, message: "Could not verify repository access.", unknown: true },
       ],
     );
     expect(body.split("\n").filter((line) => line.startsWith("| 🔴"))).toHaveLength(1);
-    expect(body.match(/Azure membership not public/g)).toHaveLength(1);
+    expect(body.match(/\[Azure\]\(https:\/\/github.com\/orgs\/Azure\/people\)/g)).toHaveLength(1);
     expect(body).toContain("Could not verify repository access.");
   });
 
@@ -485,8 +501,12 @@ describe("contributor readiness", () => {
           { ...reviewer, roles: new Set(["submitted reviewer"]) },
         ],
         [
-          { subject: author.login, message: "Microsoft membership not public." },
-          { subject: author.login, message: "Azure membership not public." },
+          {
+            subject: author.login,
+            message: "Microsoft membership not public.",
+            organization: "Microsoft",
+          },
+          { subject: author.login, message: "Azure membership not public.", organization: "Azure" },
           {
             subject: reviewer.login,
             message: "No write access; approval cannot satisfy required reviews.",
@@ -509,6 +529,23 @@ describe("contributor readiness", () => {
         ],
       ),
     ).toMatchSnapshot();
+  });
+
+  it("escapes arbitrary finding content while adding only a known organization link", () => {
+    const body = renderReadiness(
+      [],
+      [
+        {
+          subject: "Unresolved",
+          message: "Microsoft [user](https://example.com) <script>@org/team</script>",
+          organization: "Microsoft",
+        },
+      ],
+    );
+    expect(body).toContain("[Microsoft](https://github.com/orgs/Microsoft/people)");
+    expect(body).toContain("\\[user\\]\\(https://example.com\\)");
+    expect(body).not.toContain("<script>");
+    expect(body).not.toContain("@org/team");
   });
 });
 
