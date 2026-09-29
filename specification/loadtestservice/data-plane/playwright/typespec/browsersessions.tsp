@@ -76,9 +76,7 @@ alias BrowserSessionOptionalProperties = {
   @visibility(Lifecycle.Read)
   @added(Versions.v2026_06_01_preview)
   liveViewUrl?: string;
-};
 
-alias BrowserSessionArtifactProperties = {
   @added(Versions.v2026_10_01_preview)
   @doc("The artifact configuration and finalized artifacts for the browser session.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
@@ -92,7 +90,6 @@ model BrowserSession {
   ...BrowserSessionRequiredProperties;
   ...BrowserSessionReadRequiredProperties;
   ...BrowserSessionOptionalProperties;
-  ...BrowserSessionArtifactProperties;
 }
 
 @doc("Model of a browser session used for tracking purposes.")
@@ -102,25 +99,24 @@ model PatchRequestBrowserSession {
   ...BrowserSessionRequiredProperties;
   ...OptionalProperties<BrowserSessionReadRequiredProperties>;
   ...BrowserSessionOptionalProperties;
-  ...BrowserSessionArtifactProperties;
 }
 
 @added(Versions.v2026_10_01_preview)
 @doc("The artifact configuration and finalized artifacts for a browser session.")
 model BrowserSessionArtifacts {
-  @doc("Indicates whether artifact collection is enabled for the browser session. When specified in a create or update request, this value overrides the workspace-level session artifact setting for the session.")
+  @doc("Indicates whether artifact collection is enabled for the browser session. This setting can only disable artifact collection for an individual session; it cannot enable it when artifact collection is disabled at the workspace level.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   enabled: boolean = false;
 
   @doc("The status of artifact collection for the browser session.")
   @visibility(Lifecycle.Read)
-  status: BrowserSessionArtifactsStatus;
+  status?: BrowserSessionArtifactsStatus;
 
   @doc("The error that occurred while collecting artifacts for the browser session.")
   @visibility(Lifecycle.Read)
   error?: BrowserSessionArtifactsError;
 
-  @doc("The shared access signature (SAS) URL of the blob container that stores the artifacts for the browser session.")
+  @doc("The URL of the blob container that stores the artifacts for the browser session.")
   @visibility(Lifecycle.Read)
   containerUrl?: url;
 
