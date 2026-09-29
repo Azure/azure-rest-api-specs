@@ -161,9 +161,9 @@ suppressions:
     reason: The deployed TraceAssociation synchronous DELETE contract returns 204 with no response body.
     from: azuremonitorworkspace.json
     where:
-     - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Monitor/traceAssociations/default"].delete
-     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/traceAssociations/default"].delete
-     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/{providerType}/{resourceName}/providers/Microsoft.Monitor/traceAssociations/default"].delete
+     - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Monitor/traceAssociations/default"].delete.responses
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/traceAssociations/default"].delete.responses
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/{providerType}/{resourceName}/providers/Microsoft.Monitor/traceAssociations/default"].delete.responses
   - code: EnumInsteadOfBoolean
     reason: enableAutoScale is an existing service boolean with only true and false states; null or omission preserves the current mode.
     from: azuremonitorworkspace.json
