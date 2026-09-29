@@ -1,11 +1,11 @@
 import { ChildProcess, spawn } from "node:child_process";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
-import { access, mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { access, mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { join, relative, sep } from "node:path";
 import { simpleGit } from "simple-git";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
-import { runAll } from "../src/run-all.ts";
+import { runAll } from "../src/run-projects.ts";
 
 vi.mock("node:child_process", async (importOriginal) => ({
   ...(await importOriginal()),
@@ -49,7 +49,8 @@ async function commitFixture() {
 }
 
 beforeEach(async () => {
-  root = await mkdtemp(join(tmpdir(), "tsv-all-"));
+  root = await realpath(await mkdtemp(join(tmpdir(), "tsv-all-")));
+  vi.stubEnv("GITHUB_ACTIONS", "false");
   vi.spyOn(console, "log").mockImplementation(() => {});
   vi.spyOn(console, "error").mockImplementation(() => {});
   vi.mocked(spawn)
@@ -59,6 +60,7 @@ beforeEach(async () => {
 
 afterEach(async () => {
   vi.restoreAllMocks();
+  vi.unstubAllEnvs();
   await rm(root, { recursive: true, force: true });
 });
 
@@ -84,6 +86,93 @@ it("discovers sorted, unique project folders, including invalid config extension
     process.execPath,
     [expect.stringMatching(/[/\\]cmd[/\\]tsv\.js$/), first, '{"checkingAllSpecs":true}'],
     { stdio: "inherit" },
+  );
+  expect(console.error).not.toHaveBeenCalled();
+});
+
+it("logs repository-relative paths but passes absolute paths to validation", async () => {
+  const project = await addProject("specification/service/Project");
+  await simpleGit(root).init();
+
+  await expect(runAll(join(root, "specification/service"))).resolves.toBe(true);
+
+  expect(console.log).toHaveBeenCalledWith(
+    "Checking 1 TypeSpec folders:\nspecification/service/Project",
+  );
+  expect(console.log).toHaveBeenCalledWith("\nValidating specification/service/Project");
+  expect(console.log).not.toHaveBeenCalledWith("::endgroup::");
+  expect(vi.mocked(spawn).mock.calls[0][1]?.[1]).toBe(project);
+});
+
+it("uses cwd-relative paths outside a Git repository", async () => {
+  const project = await addProject("project");
+  await expect(runAll(root)).resolves.toBe(true);
+  const name = relative(process.cwd(), project).split(sep).join("/");
+  expect(console.log).toHaveBeenCalledWith(`Checking 1 TypeSpec folders:\n${name}`);
+  expect(console.log).toHaveBeenCalledWith(`\nValidating ${name}`);
+});
+
+it("groups each project in GitHub Actions, including failures and suppressions", async () => {
+  vi.stubEnv("GITHUB_ACTIONS", "true");
+  await addProject("specification/a");
+  await addProject("specification/b");
+  await addProject("specification/c");
+  await simpleGit(root).init();
+  await writeFile(
+    join(root, "suppressions.yaml"),
+    "- tool: TypeSpecValidationAll\n  paths: [specification/b]\n  reason: skipped\n",
+  );
+  vi.mocked(spawn)
+    .mockImplementationOnce(() => {
+      console.log("validation failed");
+      return exitingChild(1);
+    })
+    .mockImplementationOnce(() => {
+      console.log("validation passed");
+      return exitingChild(0);
+    });
+
+  await expect(runAll(join(root, "specification"))).resolves.toBe(false);
+  expect(vi.mocked(console.log).mock.calls).toEqual([
+    ["Checking 3 TypeSpec folders:\nspecification/a\nspecification/b\nspecification/c"],
+    ["::group::Validating specification/a"],
+    ["validation failed"],
+    [
+      "::error::TypeSpec Validation failed for project specification/a run the following command locally to validate.%0A" +
+        " > pnpm install%0A > pnpm tsv specification/a%0A" +
+        "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
+    ],
+    ["::endgroup::"],
+    ["::group::Validating specification/b"],
+    ["Suppressed: skipped"],
+    ["::endgroup::"],
+    ["::group::Validating specification/c"],
+    ["validation passed"],
+    ["::endgroup::"],
+  ]);
+  expect(console.error).toHaveBeenCalledExactlyOnceWith(
+    "TypeSpec Validation failed for some folder to fix run and address any errors:\n" +
+      " > pnpm install\n > pnpm tsv specification/a\n" +
+      "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
+  );
+});
+
+it("escapes percent signs and newlines in GitHub error annotations", async () => {
+  vi.stubEnv("GITHUB_ACTIONS", "true");
+  await addProject("specification/service%0A/Project");
+  await simpleGit(root).init();
+  vi.mocked(spawn).mockImplementationOnce(() => exitingChild(1));
+
+  await expect(runAll(join(root, "specification"))).resolves.toBe(false);
+  expect(console.log).toHaveBeenCalledWith(
+    "::error::TypeSpec Validation failed for project specification/service%250A/Project run the following command locally to validate.%0A" +
+      " > pnpm install%0A > pnpm tsv specification/service%250A/Project%0A" +
+      "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
+  );
+  expect(console.error).toHaveBeenCalledExactlyOnceWith(
+    "TypeSpec Validation failed for some folder to fix run and address any errors:\n" +
+      " > pnpm install\n > pnpm tsv specification/service%0A/Project\n" +
+      "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
   );
 });
 
@@ -211,12 +300,14 @@ it("succeeds when all discovered projects are suppressed", async () => {
 
   await expect(runAll(root)).resolves.toBe(true);
   expect(spawn).not.toHaveBeenCalled();
+  expect(console.error).not.toHaveBeenCalled();
 });
 
 it("continues after validation failures and reports every failed project", async () => {
-  const first = await addProject("a");
+  await addProject("a");
   await addProject("b");
-  const last = await addProject("c");
+  await addProject("c");
+  await simpleGit(root).init();
   vi.mocked(spawn)
     .mockImplementationOnce(() => exitingChild(1))
     .mockImplementationOnce(() => exitingChild(0))
@@ -224,7 +315,24 @@ it("continues after validation failures and reports every failed project", async
 
   await expect(runAll(root)).resolves.toBe(false);
   expect(spawn).toHaveBeenCalledTimes(3);
-  expect(console.error).toHaveBeenCalledWith(`TypeSpec Validation failed for:\n${first}\n${last}`);
+  expect(vi.mocked(console.error).mock.calls).toEqual([
+    [
+      "TypeSpec Validation failed for project a run the following command locally to validate.\n" +
+        " > pnpm install\n > pnpm tsv a\n" +
+        "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
+    ],
+    [
+      "TypeSpec Validation failed for project c run the following command locally to validate.\n" +
+        " > pnpm install\n > pnpm tsv c\n" +
+        "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
+    ],
+    [
+      "TypeSpec Validation failed for some folder to fix run and address any errors:\n" +
+        " > pnpm install\n > pnpm tsv a\n > pnpm tsv c\n" +
+        "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
+    ],
+  ]);
+  expect(console.log).not.toHaveBeenCalledWith(expect.stringMatching(/^::error::/));
 });
 
 it("fails when no projects are discovered", async () => {
@@ -241,13 +349,16 @@ it("rejects a file instead of a directory", async () => {
 });
 
 it("surfaces invalid suppressions before starting validation", async () => {
+  vi.stubEnv("GITHUB_ACTIONS", "true");
   await addProject("a");
   await writeFile(join(root, "suppressions.yaml"), "- tool: TypeSpecValidationAll\n");
   await expect(runAll(root)).rejects.toThrow();
   expect(spawn).not.toHaveBeenCalled();
+  expect(console.log).toHaveBeenLastCalledWith("::endgroup::");
 });
 
 it("surfaces process launch errors instead of treating them as validation failures", async () => {
+  vi.stubEnv("GITHUB_ACTIONS", "true");
   await addProject("a");
   await addProject("b");
   const error = new Error("Cannot start node");
@@ -259,15 +370,18 @@ it("surfaces process launch errors instead of treating them as validation failur
 
   await expect(runAll(root)).rejects.toBe(error);
   expect(spawn).toHaveBeenCalledOnce();
+  expect(console.log).toHaveBeenLastCalledWith("::endgroup::");
 });
 
 it("stops when a child is terminated by a signal", async () => {
+  vi.stubEnv("GITHUB_ACTIONS", "true");
   const project = await addProject("a");
   await addProject("b");
   vi.mocked(spawn).mockImplementationOnce(() => exitingChild(null, "SIGTERM"));
 
   await expect(runAll(root)).rejects.toThrow(`${project} terminated by SIGTERM`);
   expect(spawn).toHaveBeenCalledOnce();
+  expect(console.log).toHaveBeenLastCalledWith("::endgroup::");
 });
 
 it("leaves existing and generated changes alone without --git-clean", async () => {
@@ -323,6 +437,7 @@ it.each(["modified", "staged", "untracked"])(
 );
 
 it("stops if cleanup fails rather than contaminating the next project", async () => {
+  vi.stubEnv("GITHUB_ACTIONS", "true");
   await addProject("a");
   await addProject("b");
   await commitFixture();
@@ -333,4 +448,11 @@ it("stops if cleanup fails rather than contaminating the next project", async ()
 
   await expect(runAll(root, { gitClean: true })).rejects.toThrow("index.lock");
   expect(spawn).toHaveBeenCalledOnce();
+  expect(console.log).toHaveBeenLastCalledWith("::endgroup::");
+});
+
+it("rejects cleanup outside a Git repository before running validation", async () => {
+  await addProject("a");
+  await expect(runAll(root, { gitClean: true })).rejects.toThrow();
+  expect(spawn).not.toHaveBeenCalled();
 });
