@@ -15927,7 +15927,6 @@
         "mitigationRules": {
           "type": "array",
           "description": "The list of DDoS mitigation rules associated with the custom policy.",
-          "maxItems": 2,
           "items": {
             "$ref": "#/definitions/DdosMitigationRule"
           },
@@ -16008,15 +16007,16 @@
     },
     "DdosGeoMatch": {
       "type": "object",
-      "description": "A geographic source match. At least one of continent or countryCode must be specified. If both are specified, the country must belong to the continent.",
+      "description": "A geographic source match. At least one of continent or countryCode must be specified. If both are specified, the country must belong to the continent according to the service-defined mapping. For example, RU, TR, and KZ map to Asia, EG maps to Africa, and CY maps to Europe.",
       "properties": {
         "continent": {
           "$ref": "./common.json#/definitions/DdosContinent",
-          "description": "The continent to match."
+          "description": "The continent to match. Country membership follows the service-defined mapping documented on DdosGeoMatch."
         },
         "countryCode": {
-          "$ref": "./common.json#/definitions/DdosCountryCode",
-          "description": "The two-letter country or territory code to match."
+          "type": "string",
+          "description": "The ISO 3166-1 alpha-2 country or territory code to match, for example, \"US\" or \"CA\". See https://www.iso.org/iso-3166-country-codes.html.",
+          "pattern": "^[A-Z]{2}$"
         }
       }
     },
@@ -16083,7 +16083,6 @@
         "sourcePolicyOverrides": {
           "type": "array",
           "description": "Source-specific actions that override the default mitigations. A rule supports at most one Deny override and one Permit override.",
-          "maxItems": 2,
           "items": {
             "$ref": "#/definitions/DdosSourcePolicyOverride"
           },
@@ -16261,8 +16260,7 @@
         "connectionsPerSecond": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of new TCP connections established per second from a source IP.",
-          "minimum": 0
+          "description": "The maximum number of new TCP connections established per second from a source IP."
         }
       },
       "required": [
@@ -16276,8 +16274,7 @@
         "packetsPerSecond": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of TCP packets allowed per second from a source IP.",
-          "minimum": 100
+          "description": "The maximum number of TCP packets allowed per second from a source IP."
         }
       },
       "required": [
@@ -16301,8 +16298,7 @@
         "packetsPerSecond": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of UDP packets allowed per second from a source IP.",
-          "minimum": 100
+          "description": "The maximum number of UDP packets allowed per second from a source IP."
         }
       },
       "required": [

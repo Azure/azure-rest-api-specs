@@ -11133,7 +11133,6 @@ model DdosCustomPolicyPropertiesFormat {
    */
   @added(Versions.v2026_03_01)
   @identifiers(#["name"])
-  @maxItems(2)
   mitigationRules?: DdosMitigationRule[];
 
   /**
@@ -11220,7 +11219,6 @@ model DdosMitigationRulePropertiesFormat {
    * Source-specific actions that override the default mitigations. A rule supports at most one Deny override and one Permit override.
    */
   @identifiers(#["policyAction/actionType"])
-  @maxItems(2)
   sourcePolicyOverrides?: DdosSourcePolicyOverride[];
 }
 
@@ -11279,7 +11277,6 @@ model DdosTcpPerSourceRateLimitPolicy {
   /**
    * The maximum number of TCP packets allowed per second from a source IP.
    */
-  @minValue(100)
   packetsPerSecond: int32;
 }
 
@@ -11293,7 +11290,6 @@ model DdosTcpPerSourceConnectionRateLimitPolicy {
   /**
    * The maximum number of new TCP connections established per second from a source IP.
    */
-  @minValue(0)
   connectionsPerSecond: int32;
 }
 
@@ -11307,7 +11303,6 @@ model DdosUdpPerSourceRateLimitPolicy {
   /**
    * The maximum number of UDP packets allowed per second from a source IP.
    */
-  @minValue(100)
   packetsPerSecond: int32;
 }
 
@@ -11376,21 +11371,22 @@ model DdosSourceMatchConditions {
 }
 
 /**
- * A geographic source match. At least one of continent or countryCode must be specified. If both are specified, the country must belong to the continent.
+ * A geographic source match. At least one of continent or countryCode must be specified. If both are specified, the country must belong to the continent according to the service-defined mapping. For example, RU, TR, and KZ map to Asia, EG maps to Africa, and CY maps to Europe.
  */
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The DDoS custom policy contract is emitted in the existing virtualNetwork Swagger feature."
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 @added(Versions.v2026_03_01)
 model DdosGeoMatch {
   /**
-   * The continent to match.
+   * The continent to match. Country membership follows the service-defined mapping documented on DdosGeoMatch.
    */
   continent?: DdosContinent;
 
   /**
-   * The two-letter country or territory code to match.
+   * The ISO 3166-1 alpha-2 country or territory code to match, for example, "US" or "CA". See https://www.iso.org/iso-3166-country-codes.html.
    */
-  countryCode?: DdosCountryCode;
+  @pattern("^[A-Z]{2}$")
+  countryCode?: string;
 }
 
 /**
@@ -11412,272 +11408,14 @@ union DdosContinent {
   /** Matches traffic originating from countries and territories in Europe. */
   Europe: "Europe",
 
-  /** North America. */
+  /** Matches traffic originating from countries and territories in North America. */
   NorthAmerica: "NorthAmerica",
 
   /** Matches traffic originating from countries and territories in Oceania. */
   Oceania: "Oceania",
 
-  /** South America. */
+  /** Matches traffic originating from countries and territories in South America. */
   SouthAmerica: "SouthAmerica",
-}
-
-/**
- * A two-letter country or territory code used for DDoS geographic source matching.
- */
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "The ISO-style member names are self-documenting."
-@added(Versions.v2026_03_01)
-union DdosCountryCode {
-  string,
-  AD: "AD",
-  AE: "AE",
-  AF: "AF",
-  AG: "AG",
-  AI: "AI",
-  AL: "AL",
-  AM: "AM",
-  AO: "AO",
-  AQ: "AQ",
-  AR: "AR",
-  AS: "AS",
-  AT: "AT",
-  AU: "AU",
-  AW: "AW",
-  AX: "AX",
-  AZ: "AZ",
-  BA: "BA",
-  BB: "BB",
-  BD: "BD",
-  BE: "BE",
-  BF: "BF",
-  BG: "BG",
-  BH: "BH",
-  BI: "BI",
-  BJ: "BJ",
-  BL: "BL",
-  BM: "BM",
-  BN: "BN",
-  BO: "BO",
-  BQ: "BQ",
-  BR: "BR",
-  BS: "BS",
-  BT: "BT",
-  BV: "BV",
-  BW: "BW",
-  BY: "BY",
-  BZ: "BZ",
-  CA: "CA",
-  CC: "CC",
-  CD: "CD",
-  CF: "CF",
-  CG: "CG",
-  CH: "CH",
-  CI: "CI",
-  CK: "CK",
-  CL: "CL",
-  CM: "CM",
-  CN: "CN",
-  CO: "CO",
-  CR: "CR",
-  CU: "CU",
-  CV: "CV",
-  CW: "CW",
-  CX: "CX",
-  CY: "CY",
-  CZ: "CZ",
-  DE: "DE",
-  DJ: "DJ",
-  DK: "DK",
-  DM: "DM",
-  DO: "DO",
-  DZ: "DZ",
-  EC: "EC",
-  EE: "EE",
-  EG: "EG",
-  EH: "EH",
-  ER: "ER",
-  ES: "ES",
-  ET: "ET",
-  FI: "FI",
-  FJ: "FJ",
-  FK: "FK",
-  FM: "FM",
-  FO: "FO",
-  FR: "FR",
-  GA: "GA",
-  GB: "GB",
-  GD: "GD",
-  GE: "GE",
-  GF: "GF",
-  GG: "GG",
-  GH: "GH",
-  GI: "GI",
-  GL: "GL",
-  GM: "GM",
-  GN: "GN",
-  GP: "GP",
-  GQ: "GQ",
-  GR: "GR",
-  GS: "GS",
-  GT: "GT",
-  GU: "GU",
-  GW: "GW",
-  GY: "GY",
-  HK: "HK",
-  HM: "HM",
-  HN: "HN",
-  HR: "HR",
-  HT: "HT",
-  HU: "HU",
-  ID: "ID",
-  IE: "IE",
-  IL: "IL",
-  IM: "IM",
-  IN: "IN",
-  IO: "IO",
-  IQ: "IQ",
-  IR: "IR",
-  IS: "IS",
-  IT: "IT",
-  JE: "JE",
-  JM: "JM",
-  JO: "JO",
-  JP: "JP",
-  KE: "KE",
-  KG: "KG",
-  KH: "KH",
-  KI: "KI",
-  KM: "KM",
-  KN: "KN",
-  KP: "KP",
-  KR: "KR",
-  KW: "KW",
-  KY: "KY",
-  KZ: "KZ",
-  LA: "LA",
-  LB: "LB",
-  LC: "LC",
-  LI: "LI",
-  LK: "LK",
-  LR: "LR",
-  LS: "LS",
-  LT: "LT",
-  LU: "LU",
-  LV: "LV",
-  LY: "LY",
-  MA: "MA",
-  MC: "MC",
-  MD: "MD",
-  ME: "ME",
-  MF: "MF",
-  MG: "MG",
-  MH: "MH",
-  MK: "MK",
-  ML: "ML",
-  MM: "MM",
-  MN: "MN",
-  MO: "MO",
-  MP: "MP",
-  MQ: "MQ",
-  MR: "MR",
-  MS: "MS",
-  MT: "MT",
-  MU: "MU",
-  MV: "MV",
-  MW: "MW",
-  MX: "MX",
-  MY: "MY",
-  MZ: "MZ",
-  NA: "NA",
-  NC: "NC",
-  NE: "NE",
-  NF: "NF",
-  NG: "NG",
-  NI: "NI",
-  NL: "NL",
-  NO: "NO",
-  NP: "NP",
-  NR: "NR",
-  NU: "NU",
-  NZ: "NZ",
-  OM: "OM",
-  PA: "PA",
-  PE: "PE",
-  PF: "PF",
-  PG: "PG",
-  PH: "PH",
-  PK: "PK",
-  PL: "PL",
-  PM: "PM",
-  PN: "PN",
-  PR: "PR",
-  PS: "PS",
-  PT: "PT",
-  PW: "PW",
-  PY: "PY",
-  QA: "QA",
-  RE: "RE",
-  RO: "RO",
-  RS: "RS",
-  RU: "RU",
-  RW: "RW",
-  SA: "SA",
-  SB: "SB",
-  SC: "SC",
-  SD: "SD",
-  SE: "SE",
-  SG: "SG",
-  SH: "SH",
-  SI: "SI",
-  SJ: "SJ",
-  SK: "SK",
-  SL: "SL",
-  SM: "SM",
-  SN: "SN",
-  SO: "SO",
-  SR: "SR",
-  SS: "SS",
-  ST: "ST",
-  SV: "SV",
-  SX: "SX",
-  SY: "SY",
-  SZ: "SZ",
-  TC: "TC",
-  TD: "TD",
-  TF: "TF",
-  TG: "TG",
-  TH: "TH",
-  TJ: "TJ",
-  TK: "TK",
-  TL: "TL",
-  TM: "TM",
-  TN: "TN",
-  TO: "TO",
-  TR: "TR",
-  TT: "TT",
-  TV: "TV",
-  TW: "TW",
-  TZ: "TZ",
-  UA: "UA",
-  UG: "UG",
-  UM: "UM",
-  US: "US",
-  UY: "UY",
-  UZ: "UZ",
-  VA: "VA",
-  VC: "VC",
-  VE: "VE",
-  VG: "VG",
-  VI: "VI",
-  VN: "VN",
-  VU: "VU",
-  WF: "WF",
-  WS: "WS",
-  YE: "YE",
-  YT: "YT",
-  ZA: "ZA",
-  ZM: "ZM",
-  ZW: "ZW",
 }
 
 /**
