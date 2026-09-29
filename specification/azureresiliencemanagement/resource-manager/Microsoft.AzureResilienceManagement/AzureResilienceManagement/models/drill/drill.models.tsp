@@ -60,7 +60,7 @@ model DrillProperties {
   recoveryPlanProperties?: RecoveryPlanPropertiesOfDrill;
 
   @doc("Goal Assignment properties.")
-  @added(Versions.v2026_10_31_preview)
+  @added(Versions.v2026_09_30_preview)
   goalAssignmentProperties?: GoalAssignmentPropertiesOfDrill;
 
   @doc("Properties for internal resources that are created for the Drill.")
@@ -451,7 +451,7 @@ model RecoveryPlanPropertiesOfDrill {
  * Model that represents the Goal Assignment properties
  */
 @doc("Goal assignment properties.")
-@added(Versions.v2026_10_31_preview)
+@added(Versions.v2026_09_30_preview)
 model GoalAssignmentPropertiesOfDrill {
   @doc("Identity to use for goal assignment operations.")
   identity: AssociatedIdentity;
@@ -701,19 +701,19 @@ model AttentionReason {
   sliAttentionStatuses?: SliAttentionStatus[];
 
   @doc("Drill object does not have the necessary RBAC on Goal Assignment.")
-  @added(Versions.v2026_10_31_preview)
+  @added(Versions.v2026_09_30_preview)
   drillRbacOnGoalAssignment?: RBACState;
 
   @doc("Permissions needed by the Drill MSI on Goal Assignment.")
-  @added(Versions.v2026_10_31_preview)
+  @added(Versions.v2026_09_30_preview)
   rbacNeededForDrillOnGoalAssignment?: string[];
 
   @doc("Goal Assignment not present.")
-  @added(Versions.v2026_10_31_preview)
+  @added(Versions.v2026_09_30_preview)
   goalAssignment?: ExtensionObjectState;
 
   @doc("Recovery plan not present.")
-  @added(Versions.v2026_10_31_preview)
+  @added(Versions.v2026_09_30_preview)
   recoveryPlan?: ExtensionObjectState;
 
   @doc("Indicates whether any entity in the selected Azure Health Model references the Drill Service Group through properties.signalGroups.azureResource.azureResourceId.")
@@ -866,7 +866,7 @@ model DrillPatchProperties {
   recoveryPlanProperties?: RecoveryPlanPropertiesOfDrill;
 
   @doc("Goal Assignment properties.")
-  @added(Versions.v2026_10_31_preview)
+  @added(Versions.v2026_09_30_preview)
   goalAssignmentProperties?: GoalAssignmentPropertiesOfDrill;
 
   @doc("Properties for internal resources that are created for the Drill.")
