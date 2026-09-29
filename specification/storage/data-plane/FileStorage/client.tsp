@@ -563,13 +563,15 @@ model DirectoryClientParameters {
 // java: carry the storage-wide client parameters on the service client so the generated
 // AzureFileStorageImpl constructor matches what the hand-written builders pass (mirrors the csharp
 // @clientInitialization blocks above).
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
+/** Storage-wide client parameters carried on the service client. */
 model AzureFileStorageClientParameters {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
+  /** Valid values are 'backup'. */
   fileRequestIntent?: ShareTokenIntent;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
+
+  /** If true, the trailing dot will not be trimmed from the target file/directory path. */
   allowTrailingDot?: boolean;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "Custom internal client parameter"
+
+  /** If true, the trailing dot will not be trimmed from the source URI. */
   allowSourceTrailingDot?: boolean;
 }
 
