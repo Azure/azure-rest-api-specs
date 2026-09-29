@@ -286,33 +286,6 @@ union NfsFileType {
   SymLink: "SymLink",
 }
 
-/** Type of the file. */
-@added(Versions.v2027_03_07)
-union FileType {
-  string,
-
-  /** Regular */
-  Regular: "Regular",
-
-  /** Directory */
-  Directory: "Directory",
-
-  /** SymLink */
-  SymLink: "SymLink",
-
-  /** BlockDevice */
-  BlockDevice: "BlockDevice",
-
-  /** CharacterDevice */
-  CharacterDevice: "CharacterDevice",
-
-  /** Socket */
-  Socket: "Socket",
-
-  /** Fifo */
-  Fifo: "Fifo",
-}
-
 /** The file property semantics. */
 union FilePropertySemantics {
   string,
@@ -707,11 +680,6 @@ model FileItem {
   @added(Versions.v2027_03_07)
   @Xml.name("LinkCount")
   linkCount?: int64;
-
-  /** Type of the file. */
-  @added(Versions.v2027_03_07)
-  @Xml.name("FileType")
-  fileType?: FileType;
 }
 
 /** A listed symbolic link item. */
