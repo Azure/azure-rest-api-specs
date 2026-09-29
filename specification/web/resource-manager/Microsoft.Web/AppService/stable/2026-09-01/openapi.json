@@ -45427,7 +45427,7 @@
       ],
       "x-ms-enum": {
         "name": "EgressEnabledState",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Enabled",
@@ -57260,6 +57260,7 @@
       "type": "string",
       "description": "Machine-readable error codes returned by the validate action.",
       "enum": [
+        "InvalidConfiguration",
         "MissingSetting",
         "InvalidRoleCombination",
         "InvalidCredentialInjection",
@@ -57272,8 +57273,13 @@
       ],
       "x-ms-enum": {
         "name": "ValidationErrorCode",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
+          {
+            "name": "InvalidConfiguration",
+            "value": "InvalidConfiguration",
+            "description": "The configuration contains invalid structure, names, values, or unsupported individual options."
+          },
           {
             "name": "MissingSetting",
             "value": "MissingSetting",
@@ -57392,7 +57398,7 @@
           ],
           "x-ms-enum": {
             "name": "VirtualConnectionSettingSource",
-            "modelAsString": true,
+            "modelAsString": false,
             "values": [
               {
                 "name": "AppSettings",
@@ -57451,7 +57457,7 @@
       ],
       "x-ms-enum": {
         "name": "VirtualConnectionAuthType",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Credential",
@@ -57494,7 +57500,7 @@
       ],
       "x-ms-enum": {
         "name": "VirtualConnectionProtocol",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Http",
@@ -57543,7 +57549,7 @@
       ],
       "x-ms-enum": {
         "name": "VirtualConnectionSettingRole",
-        "modelAsString": true,
+        "modelAsString": false,
         "values": [
           {
             "name": "Host",

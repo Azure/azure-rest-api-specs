@@ -55,14 +55,13 @@ model EgressConfigProperties {
 
 /** Enabled state for virtual connections. */
 @added(Versions.v2026_09_01)
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The 2026-09-01 service rejects unknown egress enabled states, so this union intentionally models a closed set."
 union EgressEnabledState {
   /** Virtual connections are enabled — proxy intercepts configured settings. */
   Enabled: "Enabled",
 
   /** Virtual connections are disabled — all settings pass through unchanged. */
   Disabled: "Disabled",
-
-  string,
 }
 
 /**
@@ -158,18 +157,18 @@ model VirtualConnectionSetting {
 
 /** Where to resolve settings from. */
 @added(Versions.v2026_09_01)
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The 2026-09-01 service rejects unknown virtual connection setting sources, so this union intentionally models a closed set."
 union VirtualConnectionSettingSource {
   /** App Settings (config/appsettings). */
   AppSettings: "AppSettings",
 
   /** Connection Strings (config/connectionstrings). */
   ConnectionStrings: "ConnectionStrings",
-
-  string,
 }
 
 /** Protocol for the backend service. */
 @added(Versions.v2026_09_01)
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The 2026-09-01 service rejects unsupported virtual connection protocols, so this union intentionally models a closed set."
 union VirtualConnectionProtocol {
   /** HTTP/HTTPS (Azure Storage, Cosmos DB REST, Key Vault, custom APIs). */
   Http: "Http",
@@ -182,24 +181,22 @@ union VirtualConnectionProtocol {
 
   /** PostgreSQL wire protocol (Azure Database for PostgreSQL). */
   Postgres: "Postgres",
-
-  string,
 }
 
 /** Authentication strategy for upstream connections. */
 @added(Versions.v2026_09_01)
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The 2026-09-01 service rejects unsupported virtual connection authentication types, so this union intentionally models a closed set."
 union VirtualConnectionAuthType {
   /** Proxy injects the original credential from the setting value. */
   Credential: "Credential",
 
   /** Proxy acquires a Managed Identity token for upstream auth. */
   ManagedIdentity: "ManagedIdentity",
-
-  string,
 }
 
 /** The role a setting plays in a connection. */
 @added(Versions.v2026_09_01)
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The 2026-09-01 service rejects unsupported virtual connection setting roles, so this union intentionally models a closed set."
 union VirtualConnectionSettingRole {
   /** Plain hostname or IP — identifies the intercept target. */
   Host: "Host",
@@ -212,8 +209,6 @@ union VirtualConnectionSettingRole {
 
   /** Composite value (connection string, SAS URL, DSN, Redis URI) — proxy parses based on protocol. */
   Value: "Value",
-
-  string,
 }
 
 /** Result of validating an egress configuration. */
@@ -245,7 +240,11 @@ model ValidationError {
 
 /** Machine-readable error codes returned by the validate action. */
 @added(Versions.v2026_09_01)
+#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Validation error codes are a stable machine-readable contract and unknown codes are not returned by the 2026-09-01 service."
 union ValidationErrorCode {
+  /** The configuration contains invalid structure, names, values, or unsupported individual options. */
+  InvalidConfiguration: "InvalidConfiguration",
+
   /** A referenced setting does not exist in the configured source. */
   MissingSetting: "MissingSetting",
 
@@ -272,8 +271,6 @@ union ValidationErrorCode {
 
   /** The configuration exceeds the maximum number of connections (50). */
   TooManyConnections: "TooManyConnections",
-
-  string,
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
