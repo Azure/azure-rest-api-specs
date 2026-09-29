@@ -5626,25 +5626,25 @@ op replaceprivateDnsZoneGroupsList(
 );
 
 @@alternateType(
-  Microsoft.Network.ExpressRouteCircuitPeeringPropertiesFormat.expressRouteConnection,
+  Microsoft.Network.ExpressRouteConnectionId.id,
   armResourceIdentifier,
   "csharp"
 );
 
 @@alternateType(
-  Microsoft.Network.ExpressRouteConnectionProperties.expressRouteCircuitPeering,
+  Microsoft.Network.ExpressRouteCircuitReference.id,
   armResourceIdentifier,
   "csharp"
 );
 
 @@alternateType(
-  Microsoft.Network.ExpressRouteCrossConnectionProperties.expressRouteCircuit,
+  Microsoft.Network.ExpressRouteCircuitPeeringId.id,
   armResourceIdentifier,
   "csharp"
 );
 
 @@alternateType(
-  Microsoft.Network.ExpressRouteGatewayProperties.virtualHub,
+  Microsoft.Network.VirtualHubId.id,
   armResourceIdentifier,
   "csharp"
 );
@@ -5657,12 +5657,6 @@ op replaceprivateDnsZoneGroupsList(
 
 @@alternateType(
   Common.FlowLogPropertiesFormat.storageId,
-  armResourceIdentifier,
-  "csharp"
-);
-
-@@alternateType(
-  Microsoft.Network.ApplicationGatewayRequestRoutingRulePropertiesFormat.entraJWTValidationConfig,
   armResourceIdentifier,
   "csharp"
 );
@@ -5735,12 +5729,6 @@ op replaceprivateDnsZoneGroupsList(
 
 @@alternateType(
   Microsoft.Network.StaticMemberProperties.resourceId,
-  armResourceIdentifier,
-  "csharp"
-);
-
-@@alternateType(
-  Common.LoadBalancerBackendAddressPropertiesFormat.loadBalancerFrontendIPConfiguration,
   armResourceIdentifier,
   "csharp"
 );
@@ -6698,7 +6686,7 @@ op replaceprivateDnsZoneGroupsList(
 );
 @@clientName(
   Microsoft.Network.ApplicationGatewayRequestRoutingRulePropertiesFormat.entraJWTValidationConfig,
-  "EntraJwtValidationConfigId",
+  "EntraJwtValidationConfig",
   "csharp"
 );
 @@clientName(
@@ -6722,33 +6710,13 @@ op replaceprivateDnsZoneGroupsList(
   "csharp"
 );
 @@clientName(
-  Microsoft.Network.ExpressRouteCircuitPeeringPropertiesFormat.expressRouteConnection,
-  "ExpressRouteConnectionId",
-  "csharp"
-);
-@@clientName(
-  Microsoft.Network.ExpressRouteConnectionProperties.expressRouteCircuitPeering,
-  "ExpressRouteCircuitPeeringId",
-  "csharp"
-);
-@@clientName(
-  Microsoft.Network.ExpressRouteCrossConnectionProperties.expressRouteCircuit,
-  "ExpressRouteCircuitId",
-  "csharp"
-);
-@@clientName(
-  Microsoft.Network.ExpressRouteGatewayProperties.virtualHub,
-  "VirtualHubId",
-  "csharp"
-);
-@@clientName(
   Common.GatewayLoadBalancerTunnelInterface.type,
   "InterfaceType",
   "csharp"
 );
 @@clientName(
   Common.LoadBalancerBackendAddressPropertiesFormat.loadBalancerFrontendIPConfiguration,
-  "LoadBalancerFrontendIPConfigurationId",
+  "LoadBalancerFrontendIPConfiguration",
   "csharp"
 );
 @@clientName(
