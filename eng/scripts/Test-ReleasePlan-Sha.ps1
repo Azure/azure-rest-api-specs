@@ -34,7 +34,7 @@ $wouldOpenAsDraft = $env:BUILD_SOURCEBRANCH -ne 'refs/heads/main' -or
     -not $env:SHA_TEST_TRIGGER_SOURCE.EndsWith('-release', [StringComparison]::Ordinal)
 $evidence = [ordered]@{
     testOnly = $true
-    probeRevision = 'snapshot-a'
+    probeRevision = 'snapshot-b'
     buildId = $env:BUILD_BUILDID
     definitionId = $env:SYSTEM_DEFINITIONID
     sourceBranch = $env:BUILD_SOURCEBRANCH
