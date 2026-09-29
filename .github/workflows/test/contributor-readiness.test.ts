@@ -29,6 +29,7 @@ const pr = {
   updated_at: "2026-09-23T10:00:00Z",
 };
 const marker = "<!-- contributor-readiness -->";
+const notifierPath = ".github/workflows/contributor-readiness-events.yaml";
 
 function setup() {
   const github = createMockGithub();
@@ -51,7 +52,7 @@ function setup() {
     data: {
       repository: { id: 100 },
       event: "pull_request_review",
-      path: ".github/workflows/contributor-readiness-review.yaml",
+      path: notifierPath,
       head_sha: pr.head.sha,
       pull_requests: [{ number: 1, base: { repo: { id: 100 } } }],
     },
@@ -84,7 +85,7 @@ describe("contributor readiness", () => {
       readFileSync(new URL("../contributor-readiness.yaml", import.meta.url), "utf8"),
     );
     const notifier = parseDocument(
-      readFileSync(new URL("../contributor-readiness-review.yaml", import.meta.url), "utf8"),
+      readFileSync(new URL("../contributor-readiness-events.yaml", import.meta.url), "utf8"),
     );
     expect(publisher.errors).toEqual([]);
     expect(notifier.errors).toEqual([]);
@@ -555,7 +556,7 @@ describe("readiness trigger resolution", () => {
         data: {
           repository: { id: 100 },
           event,
-          path: ".github/workflows/contributor-readiness-review.yaml",
+          path: notifierPath,
           head_sha: pr.head.sha,
           pull_requests: [{ number: 1, base: { repo: { id: 100 } } }],
         },
@@ -576,7 +577,7 @@ describe("readiness trigger resolution", () => {
         data: {
           repository: { id: 100 },
           event,
-          path: ".github/workflows/contributor-readiness-review.yaml",
+          path: notifierPath,
           head_sha: pr.head.sha,
           pull_requests: [],
         },
@@ -606,18 +607,23 @@ describe("readiness trigger resolution", () => {
     {
       repository: { id: 100 },
       event: "push",
-      path: ".github/workflows/contributor-readiness-review.yaml",
+      path: notifierPath,
     },
     {
       repository: { id: 100 },
       event: "pull_request_target",
-      path: ".github/workflows/contributor-readiness-review.yaml",
+      path: notifierPath,
     },
     { repository: { id: 100 }, event: "pull_request", path: ".github/workflows/other.yaml" },
     {
+      repository: { id: 100 },
+      event: "pull_request",
+      path: ".github/workflows/contributor-readiness-review.yaml",
+    },
+    {
       repository: { id: 200 },
       event: "pull_request_review",
-      path: ".github/workflows/contributor-readiness-review.yaml",
+      path: notifierPath,
     },
   ])("rejects unexpected notification provenance: %j", async (run) => {
     const f = setup();
@@ -633,7 +639,7 @@ describe("readiness trigger resolution", () => {
       data: {
         repository: { id: 100 },
         event: "pull_request",
-        path: ".github/workflows/contributor-readiness-review.yaml",
+        path: notifierPath,
         head_sha: pr.head.sha,
         pull_requests: [],
       },
@@ -651,7 +657,7 @@ describe("readiness trigger resolution", () => {
       data: {
         repository: { id: 100 },
         event: "pull_request",
-        path: ".github/workflows/contributor-readiness-review.yaml",
+        path: notifierPath,
         head_sha: pr.head.sha,
         pull_requests: [],
       },
@@ -672,7 +678,7 @@ describe("readiness trigger resolution", () => {
       data: {
         repository: { id: 100 },
         event: "pull_request_review",
-        path: ".github/workflows/contributor-readiness-review.yaml",
+        path: notifierPath,
         pull_requests: [1, 2].map((number) => ({ number, base: { repo: { id: 100 } } })),
       },
     });
