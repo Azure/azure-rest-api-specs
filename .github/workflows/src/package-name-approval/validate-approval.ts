@@ -1,5 +1,5 @@
 import { extractInputs } from "../context.ts";
-import type { Core, WebhookEvent } from "../github.ts";
+import type { Context, Core, GitHub, GitHubScriptArgs, WebhookEvent } from "../github.ts";
 import {
   ALLOWED_BOT_LOGINS,
   evaluateLabelAuthorization,
@@ -10,8 +10,8 @@ import { createApproversConfig } from "./approvers.ts";
 import { removeLabelIfPresent } from "./labels.ts";
 
 export type ValidateContext = {
-  github: import("@actions/github-script").AsyncFunctionArguments["github"];
-  context: import("@actions/github-script").AsyncFunctionArguments["context"];
+  github: GitHub;
+  context: Context;
   core: Core;
   approversConfig: import("./approvers.ts").ApproversConfig;
   owner: string;
@@ -263,11 +263,7 @@ async function handleLabeled({
  * Validate namespace label changes by authorized approvers.
  * Handles both labeled (approval) and unlabeled (guard against unauthorized removal).
  */
-export default async function validateApproval({
-  github,
-  context,
-  core,
-}: import("@actions/github-script").AsyncFunctionArguments) {
+export default async function validateApproval({ github, context, core }: GitHubScriptArgs) {
   const protectedLabelsConfig = await loadProtectedLabelsConfig();
   const approversConfig = createApproversConfig(protectedLabelsConfig);
 

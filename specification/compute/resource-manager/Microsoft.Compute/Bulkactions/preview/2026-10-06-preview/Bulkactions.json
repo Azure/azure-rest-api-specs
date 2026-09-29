@@ -1264,6 +1264,67 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/listBulkOperationErrors": {
+      "get": {
+        "operationId": "VirtualMachineBulkOperations_BulkListOperationErrors",
+        "description": "List recent errors for operations in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
+            "name": "lookbackInMinutes",
+            "in": "query",
+            "description": "The number of minutes before the current time to include when listing bulk action errors.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ListBulkOperationErrorsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "01 - List recent failed operation errors": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkListOperationErrors_BasicSuccess.json"
+          },
+          "02 - List failed operation errors with paginated response": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkListOperationErrors_PaginatedSuccess.json"
+          },
+          "03 - Response with an invalid lookback window error": {
+            "$ref": "./examples/VirtualMachineBulkOperations_BulkListOperationErrors_InvalidLookbackWindowError.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/locations/{location}/virtualMachinesBulkCancel": {
       "post": {
         "operationId": "VirtualMachineBulkOperations_BulkCancel",
@@ -4870,6 +4931,28 @@
           }
         ]
       }
+    },
+    "ListBulkOperationErrorsResponse": {
+      "type": "object",
+      "description": "A paged list of recent bulk action errors.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ResourceOperation items on this page",
+          "items": {
+            "$ref": "#/definitions/ResourceOperation"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "LocationBasedBulkCreate": {
       "type": "object",
