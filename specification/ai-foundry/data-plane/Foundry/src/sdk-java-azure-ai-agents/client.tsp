@@ -23,6 +23,31 @@ using TypeSpec.Http;
 
 using Azure.AI.Projects;
 
+// Reuse equivalent openai-java models instead of generating duplicate public types.
+@@alternateType(
+  OpenAI.ChatCompletionTool,
+  {
+    identity: "com.openai.models.chat.completions.ChatCompletionFunctionTool",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.FunctionObject,
+  {
+    identity: "com.openai.models.FunctionDefinition",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.FunctionParameters,
+  {
+    identity: "com.openai.models.FunctionParameters",
+  },
+  "java"
+);
+
+@@clientName(ModelSamplingParams, "ModelSamplingParameters", "java");
+
 // Azure Core's HTTP pipeline cannot expose the upgraded WebSocket channel.
 // Java uses a handwritten Reactor Netty transport while TypeSpec generates the event models.
 @@scope(VoiceAgentWebSocket.connectVoiceAgent, "!java");
