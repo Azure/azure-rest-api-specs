@@ -10,6 +10,10 @@ using OpenAPI;
 
 namespace Azure.AI.Projects;
 
+const EvaluatorsRequiredPreviews = #{
+  required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview],
+};
+
 @doc("The category of the evaluator")
 union EvaluatorCategory {
   string,
@@ -79,6 +83,7 @@ model EvaluatorDefinition {
 }
 
 @doc("Code-based evaluator definition using python code")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model CodeBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.code;
 
@@ -97,6 +102,7 @@ model CodeBasedEvaluatorDefinition extends EvaluatorDefinition {
 }
 
 @doc("Prompt-based evaluator")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model PromptBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.prompt;
 
@@ -139,6 +145,7 @@ model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
 }
 
 @doc("Endpoint-based evaluator definition. The customer owns and hosts an HTTP endpoint that implements the evaluation contract. The evaluator references a Project Connection by name; the connection stores the endpoint URL and credentials (API Key or Entra ID). At execution time, the service resolves the connection to obtain the endpoint URL and authentication details, then calls the endpoint for each evaluation row.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EndpointBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.endpoint;
 
