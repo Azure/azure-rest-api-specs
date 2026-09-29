@@ -50,7 +50,6 @@ directive:
     reason: A dictionary allow passing through various key-value pairs
     where:
     - $.definitions.AgentConnectorProperties.properties.extendedProperties
-    - $.definitions.AgentSpaceConnectorProperties.properties.extendedProperties
     - $.definitions.Connector.properties.extendedProperties
 
 ```
