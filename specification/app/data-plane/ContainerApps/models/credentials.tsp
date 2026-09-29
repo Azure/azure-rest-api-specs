@@ -12,21 +12,6 @@ namespace ContainerAppsSandbox {
     UserAssignedManagedIdentity: "UserAssignedManagedIdentity",
   }
 
-  /** The provisioning state of a credential or connection. */
-  union ConnectionState {
-    /** An unrecognized state returned by the service. */
-    StringValue: string,
-
-    /** The resource is being created. */
-    Creating: "Creating",
-
-    /** The resource is ready for use. */
-    Ready: "Ready",
-
-    /** The resource could not be provisioned. */
-    Error: "Error",
-  }
-
   /** Managed identity authentication for a gateway connection. */
   model GatewayConnectionAuthRecord {
     /** The managed identity type. */
@@ -98,7 +83,7 @@ namespace ContainerAppsSandbox {
 
     /** Current credential state. */
     @visibility(Lifecycle.Read)
-    state: ConnectionState;
+    state: ResourceState;
 
     /** The source metadata for the credential. */
     source: SandboxGroupCredentialSource;

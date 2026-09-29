@@ -123,7 +123,7 @@ namespace ContainerAppsSandbox {
   /** The provisioning status of a disk image. */
   model DiskImageStatus {
     /** The current provisioning state. */
-    state: string;
+    state: ResourceState;
 
     /** The failure message when provisioning did not succeed. */
     errorMessage?: string;
