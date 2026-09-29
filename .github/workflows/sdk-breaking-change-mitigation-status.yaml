@@ -12,9 +12,36 @@ permissions:
   pull-requests: write
 
 jobs:
+  check-mitigation-status:
+    if: >-
+      github.event.workflow_run.conclusion == 'success' ||
+      github.event.workflow_run.conclusion == 'failure'
+    runs-on: ubuntu-slim
+    outputs:
+      should-run: ${{ steps.read-status.outputs.should-run }}
+    steps:
+      - name: Download SDK mitigation status
+        uses: actions/download-artifact@v8
+        with:
+          name: sdk-breaking-change-mitigation-status
+          path: ${{ runner.temp }}/sdk-breaking-change-mitigation-status
+          github-token: ${{ github.token }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - name: Read mitigation status
+        id: read-status
+        shell: bash
+        run: |
+          should_run="$(cat "${{ runner.temp }}/sdk-breaking-change-mitigation-status/should-run")"
+          if [[ "$should_run" != "true" && "$should_run" != "false" ]]; then
+            echo "Invalid should-run value: $should_run" >&2
+            exit 1
+          fi
+          echo "should-run=$should_run" >> "$GITHUB_OUTPUT"
+
   publish-results:
-    if: github.event.workflow_run.conclusion == 'success' ||
-        github.event.workflow_run.conclusion == 'failure'
+    needs: check-mitigation-status
+    if: needs.check-mitigation-status.outputs.should-run == 'true'
     runs-on: ubuntu-slim
     steps:
       - uses: actions/checkout@v7

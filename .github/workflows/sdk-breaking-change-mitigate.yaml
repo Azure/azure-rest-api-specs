@@ -207,3 +207,25 @@ jobs:
               echo "No mitigation changes were produced."
             fi
           } >> "$GITHUB_STEP_SUMMARY"
+
+  propagate-status:
+    needs: [resolve-trigger, mitigate]
+    if: always() && needs.resolve-trigger.result == 'success'
+    runs-on: ubuntu-slim
+    steps:
+      - name: Write mitigation status
+        shell: bash
+        env:
+          SHOULD_RUN: ${{ needs.resolve-trigger.outputs.should-run }}
+        run: |
+          mkdir -p "${{ runner.temp }}/sdk-breaking-change-mitigation-status"
+          printf '%s\n' "$SHOULD_RUN" > \
+            "${{ runner.temp }}/sdk-breaking-change-mitigation-status/should-run"
+
+      - name: Upload mitigation status
+        uses: actions/upload-artifact@v7
+        with:
+          name: sdk-breaking-change-mitigation-status
+          path: ${{ runner.temp }}/sdk-breaking-change-mitigation-status/should-run
+          if-no-files-found: error
+          retention-days: 7
