@@ -18,6 +18,7 @@ import {
   PR_URL,
   SPEC_PATH,
   SPEC_SHA,
+  TARGET_REVISION,
   WORKSPACE,
 } from "./test-helpers.ts";
 
@@ -129,8 +130,8 @@ describe("ensureReleasePlan", () => {
       "--spec-commit-sha",
       SPEC_SHA,
       "--confirm-target",
-      "--expected-spec-commit-sha",
-      OLD_SHA,
+      "--expected-target-revision",
+      TARGET_REVISION,
       "--output",
       "json",
     ]);
@@ -150,26 +151,41 @@ describe("ensureReleasePlan", () => {
     const result = ensureReleasePlan(context, runner, true, cleanGit());
     expect(result.outcome).toBe("existing_by_path");
     expect(runner.mock.calls.map(([args]) => args[1])).toEqual(["get", "update-spec-pr", "get"]);
-    expect(runner.mock.calls[1][0]).toContain("--expected-spec-commit-sha");
+    expect(runner.mock.calls[1][0]).toContain("--expected-target-revision");
   });
 
-  it.each([undefined, ""])("uses an observed empty pin precondition (%s)", (SpecCommitSHA) => {
-    const runner = scriptedRunner(ok(plan({ SpecCommitSHA })), ok(), ok(plan()));
-    ensureReleasePlan(context, runner, true, cleanGit());
-    const updateArgs = runner.mock.calls[1][0];
-    expect(updateArgs[updateArgs.indexOf("--expected-spec-commit-sha") + 1]).toBe("none");
-    expect(runner.mock.calls.map(([args]) => args[1])).toEqual(["get", "update-spec-pr", "get"]);
-  });
+  it.each([undefined, ""])(
+    "pins a legacy plan using its observed revision (%s)",
+    (SpecCommitSHA) => {
+      const runner = scriptedRunner(ok(plan({ SpecCommitSHA })), ok(), ok(plan()));
+      ensureReleasePlan(context, runner, true, cleanGit());
+      const updateArgs = runner.mock.calls[1][0];
+      expect(updateArgs[updateArgs.indexOf("--expected-target-revision") + 1]).toBe(
+        TARGET_REVISION,
+      );
+      expect(updateArgs).not.toContain("--expected-spec-commit-sha");
+      expect(runner.mock.calls.map(([args]) => args[1])).toEqual(["get", "update-spec-pr", "get"]);
+    },
+  );
 
-  it("does not refresh the precondition or retry when a newer pin races discovery", () => {
+  it.each([undefined, "", " "])(
+    "does not update without a usable revision (%s)",
+    (TargetRevision) => {
+      const runner = scriptedRunner(ok(plan({ SpecCommitSHA: OLD_SHA, TargetRevision })));
+      expect(() => ensureReleasePlan(context, runner, true, cleanGit())).toThrow(/revision/i);
+      expect(runner).toHaveBeenCalledOnce();
+    },
+  );
+
+  it("does not refresh the precondition or retry when a revision races discovery", () => {
     const runner = scriptedRunner(
       ok(previous()),
-      ok({ operation_status: "Failed", response_error: "The expected spec commit changed." }),
+      ok({ operation_status: "Failed", response_error: "The target revision changed." }),
     );
-    expect(() => ensureReleasePlan(context, runner, true, cleanGit())).toThrow(/expected spec/);
+    expect(() => ensureReleasePlan(context, runner, true, cleanGit())).toThrow(/revision/);
     expect(runner).toHaveBeenCalledTimes(2);
     const updateArgs = runner.mock.calls[1][0];
-    expect(updateArgs[updateArgs.indexOf("--expected-spec-commit-sha") + 1]).toBe(OLD_SHA);
+    expect(updateArgs[updateArgs.indexOf("--expected-target-revision") + 1]).toBe(TARGET_REVISION);
     expect(updateArgs[updateArgs.indexOf("--spec-commit-sha") + 1]).toBe(SPEC_SHA);
   });
 
@@ -223,7 +239,26 @@ describe("ensureReleasePlan", () => {
       "get",
     ]);
     const updateArgs = runner.mock.calls[3][0];
-    expect(updateArgs[updateArgs.indexOf("--expected-spec-commit-sha") + 1]).toBe(OLD_SHA);
+    expect(updateArgs[updateArgs.indexOf("--expected-target-revision") + 1]).toBe(TARGET_REVISION);
+  });
+
+  it("pins an unconfigured plan reused concurrently by create", () => {
+    const runner = scriptedRunner(
+      ok(null),
+      ok(null),
+      ok(plan({ SpecCommitSHA: "" })),
+      ok(),
+      ok(plan()),
+    );
+    const result = ensureReleasePlan(context, runner, true, cleanGit());
+    expect(result.releasePlan?.release_plan_details?.SpecCommitSHA).toBe(SPEC_SHA);
+    expect(runner.mock.calls.map(([args]) => args[1])).toEqual([
+      "get",
+      "get",
+      "create",
+      "update-spec-pr",
+      "get",
+    ]);
   });
 
   it("never rolls back a newer pin returned by a concurrent create", () => {
@@ -373,9 +408,13 @@ describe("ensureReleasePlan", () => {
     expect(runner).toHaveBeenCalledTimes(2);
   });
 
-  it("rejects an old CLI create response without the selected commit pin", () => {
-    const runner = scriptedRunner(ok(null), ok(null), ok(plan({ SpecCommitSHA: undefined })));
-    expect(() => ensureReleasePlan(context, runner, true, cleanGit())).toThrow(/40-character/);
+  it("rejects an old CLI create response without a pin or revision", () => {
+    const runner = scriptedRunner(
+      ok(null),
+      ok(null),
+      ok(plan({ SpecCommitSHA: undefined, TargetRevision: undefined })),
+    );
+    expect(() => ensureReleasePlan(context, runner, true, cleanGit())).toThrow(/revision/i);
     expect(runner).toHaveBeenCalledTimes(3);
   });
 

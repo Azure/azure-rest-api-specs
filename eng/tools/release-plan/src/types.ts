@@ -60,6 +60,7 @@ export interface ReleasePlanDetails extends Record<string, unknown> {
   IsDataPlane?: boolean;
   SpecAPIVersion?: string;
   SpecCommitSHA?: string;
+  TargetRevision?: string;
   SpecType?: string;
   ProductType?: string;
   ProductLifecycle?: string;

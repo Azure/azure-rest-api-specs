@@ -134,6 +134,14 @@ export function requiredPlanId(value: unknown, field: string): string {
   return id;
 }
 
+/** Carry the CLI's observed parent/child revision verbatim; never replace it on a conflict. */
+export function requiredTargetRevision(details: ReleasePlanDetails): string {
+  if (typeof details.TargetRevision !== "string" || !details.TargetRevision.trim()) {
+    throw new Error("The release plan must contain a target revision before an automatic update.");
+  }
+  return details.TargetRevision;
+}
+
 /** Compare the immutable artifact selection with a freshly fetched plan, never local defaults. */
 export function validateArtifactTarget(
   artifact: EnsureReleasePlanResult,

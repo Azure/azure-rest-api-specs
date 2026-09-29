@@ -1,7 +1,7 @@
 # Release plan automation
 
-Discovers a versioned release plan from a merged spec PR, refreshes its SDK details, and generates SDKs
-from its confirmed target. Requires Node.js >=24.14.1, the repository's pnpm dependencies, and an
+Creates or updates the release plan for a merged spec PR's API version, saves the triggering main-branch
+SHA, and requests SDK generation from that saved SHA. Requires Node.js >=24.14.1, pnpm dependencies, and an
 authenticated `azsdk` executable (override its path with `AZSDK`).
 
 ## Commands
@@ -16,11 +16,18 @@ Run these entry points from the repository root:
 - `node eng/tools/release-plan/cmd/update-sdk-details.js --artifact-file <artifact-path> --workspace <spec-checkout>`
   refreshes an in-progress plan from discovery. ID-only, stale-event, and not-found artifacts are skipped.
 - `node eng/tools/release-plan/cmd/generate-sdk.js --artifact-file <artifact-path> --workspace <spec-checkout>`
-  requests eligible management-plane SDKs using the artifact's API version and stored commit pin.
+  requests eligible management-plane SDKs. The CLI reads the SHA from the saved release plan.
 
 Use `--repo Azure/azure-rest-api-specs-pr` for private specs and `--test-release-plan true` when creating
 test plans. Private previews retain API-version/project/PR identity checks and the general update that
 can finish a merged tracking plan; they do not receive public-target flags or generate SDKs.
+
+## Automatic SHA updates
+
+The pipeline passes `Build.SourceVersion` explicitly; it never substitutes a developer checkout's HEAD.
+An initial PR creates plan P with SHA A. A later PR for the same project, API version, and release type
+updates the same P to SHA B, even without a `new-api-version` label. Generation then uses B. A different
+API version uses a separate plan. Replayed events preserve the saved target; older events do not roll it back.
 
 ## Target and checkout requirements
 
@@ -29,31 +36,27 @@ can finish a merged tracking plan; they do not receive public-target flags or ge
   stashes, or fetches the checkout.
 - Same-version updates require complete commit ancestry (pipeline checkout: `fetchDepth: 0`). Missing
   or divergent history fails closed; older events cannot roll back a newer pin.
-- Recognized SDK metadata configurations must have a package and agree on one concrete API version.
-  Non-SDK emitters such as AutoRest's `unknown` entry are ignored, not used as version fallbacks.
+- API-version detection continues to use the existing TypeSpec metadata emitter and selection logic.
 - A combined PR/project/version lookup selects by project/version/release type, not strictly by PR.
   Returned identities are checked before updating; lookup failures never authorize creation.
-- Public mutations supply `--api-version`, `--spec-commit-sha`, and `--confirm-target` together.
-  Confirmation authorizes that specific target, not a newly inferred default. Updates also supply
-  `--expected-spec-commit-sha` from discovery (or `none` for an observed unpinned plan); SDK details
-  updates use the artifact's pin. A concurrency conflict stops processing without a blind retry.
-- SDK generation validates the unchanged artifact against the current plan and passes
-  `--require-merged-spec true`. ID-only generation uses the stored target, never current metadata.
+- Automation supplies the CLI's existing `--api-version`, `--spec-commit-sha`, and `--confirm-target`
+  inputs itself. Updates pass `--expected-target-revision` from discovery; the SDK-details stage uses
+  the artifact's observed revision. No manual confirmation is required for each merged PR. A revision
+  conflict stops processing without a blind retry.
+- Generation validates the artifact against the current plan and passes its plan ID, API version, and
+  SDK release type. It does not override the SHA. ID-only generation never reads current metadata.
 
 ## Validation and rollout
 
 From this package, run `pnpm check` for type checking, lint, formatting checks, and tests. Tests mock
 Git, GitHub, and azsdk boundaries; no release plans or SDK pipelines are created.
+Run `Invoke-Pester eng/scripts/Tests/Release-Plan-Pipeline.Tests.ps1` from the repository root to check
+pipeline argument construction with `pnpm` and `git` mocked.
 
 Deploy a compatible azsdk CLI before enabling this automation: `release-plan update` and
-`update-spec-pr` must accept `--expected-spec-commit-sha`, and generation must support the version,
-commit, and merged-spec arguments above. Unsupported CLI options, confirmation previews, and
-structured failures stop the workflow rather than falling back to an unpinned target.
+`update-spec-pr` must accept `--expected-target-revision`, and generation must consume the saved SHA.
+Unsupported CLI options, confirmation previews, and structured failures stop the workflow rather than
+falling back to an unpinned target.
 
-For generation completion guards, the selected spec commit must also contain the compatible
-generation pipeline template and `Confirm-ReleasePlan-Generation.ps1` helper. Historical snapshots
-with older pipeline definitions are not protected merely by upgrading the CLI. The worker checks
-its saved build inputs before pushing SDK changes and conditionally records only the current build's
-result before adding the auto-release label. These checks validate job provenance, not the API version
-actually emitted in every language's generated code.
-
+Tests include initial creation, same-version follow-up, metadata refresh, and generation using the
+newly saved SHA. Generation completion, SDK publishing, and notification policies are unchanged.

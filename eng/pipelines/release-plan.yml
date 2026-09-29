@@ -10,6 +10,9 @@ parameters:
     default: 0
 
 trigger:
+  branches:
+    include:
+      - main
   paths:
     include:
       - specification/**/*.tsp
@@ -72,23 +75,20 @@ stages:
                 if ($releasePlanId -gt 0) {
                   Write-Host "Using release plan ID: $releasePlanId"
                   $nodeArgs += @("--release-plan-id", $releasePlanId)
-                } elseif ($prNumber -gt 0) {
-                  Write-Host "Using PR number: $prNumber"
-                  $nodeArgs += @("--pr-number", $prNumber)
                 } else {
-                  $commitSha = "$(Build.SourceVersion)"
-                  if ([string]::IsNullOrWhiteSpace($commitSha)) {
-                    Write-Host "Build.SourceVersion is empty. Falling back to repo HEAD commit."
-                    $commitSha = (git -C "$(Build.SourcesDirectory)" rev-parse HEAD).Trim()
+                  if ("$(Build.SourceBranch)" -ne "refs/heads/main") {
+                    throw "Release-plan automation must use a commit from the spec repository main branch."
                   }
-
-                  if ([string]::IsNullOrWhiteSpace($commitSha)) {
-                    Write-Host "##vso[task.logissue type=error]Unable to determine commit SHA from Build.SourceVersion or repository HEAD."
-                    exit 1
+                  $commitSha = "$(Build.SourceVersion)"
+                  if ($commitSha -notmatch '^[0-9a-fA-F]{40}$') {
+                    throw "Build.SourceVersion must contain the full triggering spec commit SHA."
                   }
 
                   Write-Host "Using commit SHA: $commitSha"
                   $nodeArgs += @("--commit-sha", $commitSha)
+                  if ($prNumber -gt 0) {
+                    $nodeArgs += @("--pr-number", $prNumber)
+                  }
                 }
 
                 pnpm exec create-release-plan @nodeArgs

@@ -10,6 +10,7 @@ import {
   projectPath,
   releasePlanDetails,
   requiredPlanId,
+  requiredTargetRevision,
   runGit,
   type GitRunner,
 } from "./spec-target.ts";
@@ -75,15 +76,12 @@ export function ensureReleasePlan(
   assertCleanSpecCheckout(context.workspace, context.specCommitSha, git);
   const created = runCreateReleasePlan(context, runner);
   const createdDetails = validateSelectedPlan(created, context, false);
-  if (context.apiReleaseType !== "Private Preview") {
-    assertSpecCommitSha(createdDetails.SpecCommitSHA);
-  }
   if (
     createdDetails.ActiveSpecPullRequest !== context.prUrl ||
     (context.apiReleaseType !== "Private Preview" &&
-      createdDetails.SpecCommitSHA!.toLowerCase() !== context.specCommitSha.toLowerCase())
+      createdDetails.SpecCommitSHA?.toLowerCase() !== context.specCommitSha.toLowerCase())
   ) {
-    // Create may reuse a plan discovered concurrently. Confirm against that observed pin,
+    // Create may reuse a plan discovered concurrently. Update against its observed revision,
     // with the same ancestry and concurrency checks as an ordinary discovery result.
     const outcome =
       createdDetails.ActiveSpecPullRequest === context.prUrl
@@ -162,7 +160,6 @@ function confirmExistingPlan(
 ): EnsureReleasePlanResult {
   const details = validateSelectedPlan(existing, context, false);
   const isPrivatePreview = context.apiReleaseType === "Private Preview";
-  const expectedSpecCommitSha = details.SpecCommitSHA || "none";
   const relation =
     !isPrivatePreview && details.SpecCommitSHA
       ? compareSpecCommits(context.workspace, details.SpecCommitSHA, context.specCommitSha, git)
@@ -193,7 +190,7 @@ function confirmExistingPlan(
       projectPath(context.tspProjectPath, context.workspace),
       "--pull-request",
       context.prUrl!,
-      ...targetArguments(context, expectedSpecCommitSha),
+      ...targetArguments(context, isPrivatePreview ? undefined : requiredTargetRevision(details)),
       "--output",
       "json",
     ]),
@@ -210,7 +207,7 @@ function confirmExistingPlan(
 
 function targetArguments(
   context: ReleasePlanCommandContext,
-  expectedSpecCommitSha?: string,
+  expectedTargetRevision?: string,
 ): string[] {
   if (context.apiReleaseType === "Private Preview") {
     return [];
@@ -221,7 +218,7 @@ function targetArguments(
     "--spec-commit-sha",
     context.specCommitSha,
     "--confirm-target",
-    ...(expectedSpecCommitSha ? ["--expected-spec-commit-sha", expectedSpecCommitSha] : []),
+    ...(expectedTargetRevision ? ["--expected-target-revision", expectedTargetRevision] : []),
   ];
 }
 

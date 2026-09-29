@@ -9,6 +9,7 @@ import {
   projectPath,
   releasePlanDetails,
   requiredPlanId,
+  requiredTargetRevision,
   validateArtifactTarget,
   type GitRunner,
 } from "./spec-target.ts";
@@ -129,7 +130,7 @@ export function runUpdateSdkDetails(
   const workItemId = requiredPlanId(planDetails.WorkItemId, "WorkItemId");
   const typespecProjectPath = projectPath(planDetails.APISpecProjectPath, args.workspace);
   const sdkReleaseType = planDetails.SDKReleaseType!;
-  // The artifact is the observed precondition, not a new pin learned from the fresh lookup.
+  // Keep the artifact's observed target and revision, not a newer state learned from the lookup.
   const specCommitSha = snapshot.SpecCommitSHA!;
   if (!isPrivatePreview) {
     assertCleanSpecCheckout(args.workspace, specCommitSha, deps.git);
@@ -142,8 +143,8 @@ export function runUpdateSdkDetails(
         "--spec-commit-sha",
         specCommitSha,
         "--confirm-target",
-        "--expected-spec-commit-sha",
-        specCommitSha,
+        "--expected-target-revision",
+        requiredTargetRevision(snapshot),
       ];
   console.log("Running release plan update for an in-progress release plan.");
   const updateResult = runner([

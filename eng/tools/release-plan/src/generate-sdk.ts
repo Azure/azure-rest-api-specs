@@ -298,10 +298,6 @@ export async function runGenerateSdk(
       workItemId,
       "--api-version",
       apiVersion,
-      "--spec-commit-sha",
-      specCommitSha,
-      "--require-merged-spec",
-      "true",
       "--output",
       "json",
     ]);

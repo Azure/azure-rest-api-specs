@@ -660,54 +660,6 @@ describe("TypeSpec metadata resolution", () => {
     ).toThrow(/No valid language/);
   });
 
-  it.each(["csharp", "python", "typescript", "javascript", "java", "rust", "swift", "go"])(
-    "requires a concrete version and package for the recognized SDK language %s",
-    (language) => {
-      const config = {
-        emitterName: `@azure-tools/typespec-${language}`,
-        packageName: "sample-package",
-        apiVersion: "2025-08-01",
-      };
-      expect(resolveTypeSpecMetadata(createMetadata({ [language]: [config] }))).toEqual({
-        apiVersion: "2025-08-01",
-      });
-      for (const packageName of [undefined, "", "   "]) {
-        expect(() =>
-          resolveTypeSpecMetadata(createMetadata({ [language]: [{ ...config, packageName }] })),
-        ).toThrow(/packageName/);
-      }
-      for (const apiVersion of [undefined, "latest"]) {
-        expect(() =>
-          resolveTypeSpecMetadata(createMetadata({ [language]: [{ ...config, apiVersion }] })),
-        ).toThrow(/API version/);
-      }
-    },
-  );
-
-  it("still rejects a recognized SDK mismatch when AutoRest agrees with the first SDK", () => {
-    expect(() =>
-      resolveTypeSpecMetadata(
-        createMetadata({
-          unknown: [autoRestConfig],
-          csharp: [
-            {
-              emitterName: "@azure-typespec/http-client-csharp",
-              packageName: "Azure.ResourceManager.Sample",
-              apiVersion: "2025-08-01",
-            },
-          ],
-          rust: [
-            {
-              emitterName: "@azure-tools/typespec-rust",
-              packageName: "azure_mgmt_sample",
-              apiVersion: "2026-01-01-preview",
-            },
-          ],
-        }),
-      ),
-    ).toThrow(/Ambiguous API versions/);
-  });
-
   it("parses valid TypeSpec metadata with multiple languages", () => {
     const metadata = createMetadata({
       csharp: [
@@ -739,7 +691,7 @@ describe("TypeSpec metadata resolution", () => {
     expect(resolveTypeSpecMetadata(metadata)).toEqual({ apiVersion: "2025-08-01" });
   });
 
-  it("rejects inconsistent API versions instead of selecting the first or latest", () => {
+  it("preserves the existing first valid metadata version selection", () => {
     const metadata = createMetadata({
       csharp: [
         {
@@ -759,7 +711,7 @@ describe("TypeSpec metadata resolution", () => {
       ],
     });
 
-    expect(() => resolveTypeSpecMetadata(metadata)).toThrow(/Ambiguous API versions/);
+    expect(resolveTypeSpecMetadata(metadata)).toEqual({ apiVersion: "2025-08-01" });
   });
 
   it("ignores conflicting SDK types when resolving the API version", () => {
@@ -785,7 +737,7 @@ describe("TypeSpec metadata resolution", () => {
     expect(resolveTypeSpecMetadata(metadata)).toEqual({ apiVersion: "2025-08-01" });
   });
 
-  it("rejects missing apiVersion even when other languages have a concrete version", () => {
+  it("skips missing apiVersion when other languages have a concrete version", () => {
     const metadata = createMetadata({
       csharp: [
         {
@@ -812,7 +764,7 @@ describe("TypeSpec metadata resolution", () => {
       ],
     });
 
-    expect(() => resolveTypeSpecMetadata(metadata)).toThrow(/API version/);
+    expect(resolveTypeSpecMetadata(metadata)).toEqual({ apiVersion: "2025-08-01" });
   });
 
   it("uses language configs with missing SDK type", () => {
@@ -855,7 +807,7 @@ describe("TypeSpec metadata resolution", () => {
 
     expect(() => {
       resolveTypeSpecMetadata(metadata);
-    }).toThrow(/API version/);
+    }).toThrow(/No valid language/);
   });
 
   it("handles preview API versions correctly", () => {
@@ -890,33 +842,6 @@ describe("TypeSpec metadata resolution", () => {
     await expect(
       getTypeSpecProjectVersionFromMetadata(projectPath, "specification/foo"),
     ).rejects.toThrow("API version 'latest' must use YYYY-MM-DD or YYYY-MM-DD-preview format");
-  });
-
-  it.each(["all", "latest", "", "2026-01-01-preview,2026-06-01"])(
-    "rejects nonconcrete metadata version %s",
-    (apiVersion) => {
-      expect(() =>
-        resolveTypeSpecMetadata(
-          createMetadata({
-            python: [{ emitterName: "python", packageName: "azure-mgmt-test", apiVersion }],
-          }),
-        ),
-      ).toThrow(/API version/);
-    },
-  );
-
-  it("rejects multiple versions in a single language configuration array", () => {
-    expect(() =>
-      resolveTypeSpecMetadata(
-        createMetadata({
-          python: ["2026-01-01-preview", "2026-06-01"].map((apiVersion) => ({
-            emitterName: "python",
-            packageName: "azure-mgmt-test",
-            apiVersion,
-          })),
-        }),
-      ),
-    ).toThrow(/Ambiguous API versions/);
   });
 
   it("rejects empty metadata", () => {
@@ -1000,7 +925,7 @@ describe("explicit merged event and metadata boundary", () => {
     await expect(getTypeSpecProjectInfoFromPr(params)).rejects.toThrow(/HEAD/);
   });
 
-  it("propagates ambiguous metadata rather than reporting no changes", async () => {
+  it("adds the event SHA without changing existing API version detection", async () => {
     const params = boundary();
     vi.mocked(generateTypeSpecMetadata).mockResolvedValueOnce(
       createMetadata({
@@ -1011,7 +936,10 @@ describe("explicit merged event and metadata boundary", () => {
         })),
       }),
     );
-    await expect(getTypeSpecProjectInfoFromPr(params)).rejects.toThrow(/Ambiguous API versions/);
+    await expect(getTypeSpecProjectInfoFromPr(params)).resolves.toMatchObject({
+      apiVersion: "2026-01-01-preview",
+      specCommitSha: SPEC_SHA,
+    });
   });
 
   it("propagates compilation failure rather than reporting no changes", async () => {

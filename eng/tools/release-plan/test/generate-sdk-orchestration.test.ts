@@ -4,7 +4,8 @@ import { describe, expect, it, vi } from "vitest";
 import type { GenerateSdkDependencies } from "../src/generate-sdk.ts";
 import { runGenerateSdk } from "../src/generate-sdk.ts";
 import { ensureReleasePlan } from "../src/release-plan.ts";
-import type { AzsdkRunner, CommandResult, OctokitLike } from "../src/types.ts";
+import type { AzsdkRunner, CommandResult, OctokitLike, ReleasePlanData } from "../src/types.ts";
+import { runUpdateSdkDetails } from "../src/update-sdk-details.ts";
 import { API_VERSION, cleanGit, context, OLD_SHA, plan, PR_URL, SPEC_SHA } from "./test-helpers.ts";
 
 vi.mock("@azure-tools/specs-shared/typespec-metadata", () => ({
@@ -148,10 +149,6 @@ describe("runGenerateSdk orchestration", () => {
         "9001",
         "--api-version",
         API_VERSION,
-        "--spec-commit-sha",
-        SPEC_SHA,
-        "--require-merged-spec",
-        "true",
         "--output",
         "json",
       ]);
@@ -269,7 +266,7 @@ describe("runGenerateSdk orchestration", () => {
     for (const language of LANGUAGES) {
       const args = generateCallFor(calls, language)!;
       expect(args[args.indexOf("--api-version") + 1]).toBe("2026-01-01-preview");
-      expect(args[args.indexOf("--spec-commit-sha") + 1]).toBe(OLD_SHA);
+      expect(args).not.toContain("--spec-commit-sha");
       expect(args[args.indexOf("--release-type") + 1]).toBe("beta");
       expect(args).not.toContain("2026-06-01");
     }
@@ -277,31 +274,84 @@ describe("runGenerateSdk orchestration", () => {
     expect(calls.filter((args) => args[0] === "release-plan")).toHaveLength(1);
   });
 
-  it("confirms a same-version merged follow-up, then regenerates only that new pin", async () => {
-    const discoveryRunner = vi
-      .fn<AzsdkRunner>()
-      .mockReturnValueOnce(
-        ok(
-          JSON.stringify(
-            plan({ SpecCommitSHA: OLD_SHA, ActiveSpecPullRequest: PR_URL.replace("123", "100") }),
-          ),
-        ),
-      )
-      .mockReturnValueOnce(ok())
-      .mockReturnValueOnce(ok(buildPlan()));
-    const discovered = ensureReleasePlan(context, discoveryRunner, true, cleanGit());
-    const { deps, calls } = createHarness({ artifact: JSON.stringify(discovered) });
+  it("creates from PR A, updates the same plan from PR B, and generates from the saved B SHA", async () => {
+    let saved: ReleasePlanData | null = null;
+    let revision = 1;
+    const queued: Array<{ workItemId: string; apiVersion: string; sha: string }> = [];
+    const runner = vi.fn<AzsdkRunner>((args) => {
+      const value = (flag: string) => args[args.indexOf(flag) + 1];
+      expect(args).not.toContain("--expected-spec-commit-sha");
+      expect(args).not.toContain("--require-merged-spec");
+      if (args[0] === "spec-workflow") {
+        expect(args).not.toContain("--spec-commit-sha");
+        // The current CLI reads its source SHA from the saved plan, not a generation argument.
+        queued.push({
+          workItemId: value("--workitem-id"),
+          apiVersion: value("--api-version"),
+          sha: saved!.release_plan_details!.SpecCommitSHA!,
+        });
+        return ok();
+      }
+      if (args[1] === "get") return ok(JSON.stringify(saved));
+      if (args[1] === "create") {
+        expect(saved).toBeNull();
+        saved = plan({
+          SpecCommitSHA: value("--spec-commit-sha"),
+          ActiveSpecPullRequest: value("--pull-request"),
+        });
+        return ok(JSON.stringify(saved));
+      }
+      expect(["update-spec-pr", "update"]).toContain(args[1]);
+      expect(value("--expected-target-revision")).toBe(saved!.release_plan_details!.TargetRevision);
+      saved = plan({
+        ...saved!.release_plan_details,
+        SpecCommitSHA: value("--spec-commit-sha"),
+        ActiveSpecPullRequest: value("--pull-request"),
+        TargetRevision: `9001:${++revision}:9002:${revision}`,
+      });
+      return args[1] === "update" ? ok(JSON.stringify(saved)) : ok();
+    });
 
-    await runGenerateSdk(cliArgs, deps);
-
-    expect(discoveryRunner.mock.calls[1][0][1]).toBe("update-spec-pr");
-    const updateArgs = discoveryRunner.mock.calls[1][0];
-    expect(updateArgs[updateArgs.indexOf("--expected-spec-commit-sha") + 1]).toBe(OLD_SHA);
-    for (const language of LANGUAGES) {
-      const args = generateCallFor(calls, language)!;
-      expect(args[args.indexOf("--api-version") + 1]).toBe(API_VERSION);
-      expect(args[args.indexOf("--spec-commit-sha") + 1]).toBe(SPEC_SHA);
+    for (const [sha, prUrl, allowCreate] of [
+      [OLD_SHA, PR_URL.replace("123", "100"), true],
+      [SPEC_SHA, PR_URL, false],
+    ] as const) {
+      const discovered = ensureReleasePlan(
+        { ...context, specCommitSha: sha, prUrl },
+        runner,
+        allowCreate,
+        cleanGit(sha),
+      );
+      expect(discovered.outcome).toBe(allowCreate ? "created" : "existing_by_path");
+      const readArtifact = () => JSON.stringify(discovered);
+      runUpdateSdkDetails(cliArgs, { readArtifact, runner, git: cleanGit(sha) });
+      await runGenerateSdk(cliArgs, { readArtifact, runner, octokit: createOctokitMock() });
     }
+
+    expect(runner.mock.calls.filter(([args]) => args[1] === "create")).toHaveLength(1);
+    expect(runner.mock.calls.filter(([args]) => args[1] === "update-spec-pr")).toHaveLength(1);
+    expect(queued.map(({ sha }) => sha)).toEqual([
+      ...LANGUAGES.map(() => OLD_SHA),
+      ...LANGUAGES.map(() => SPEC_SHA),
+    ]);
+    expect(
+      queued.every(
+        ({ workItemId, apiVersion }) => workItemId === "9001" && apiVersion === API_VERSION,
+      ),
+    ).toBe(true);
+    const stale = ensureReleasePlan(
+      { ...context, specCommitSha: OLD_SHA },
+      runner,
+      false,
+      cleanGit(OLD_SHA),
+    );
+    expect(stale.outcome).toBe("stale_event");
+    await runGenerateSdk(cliArgs, {
+      readArtifact: () => JSON.stringify(stale),
+      runner,
+      octokit: createOctokitMock(),
+    });
+    expect(queued).toHaveLength(10);
   });
 
   it.each(["stale_event", "not_found"])(
@@ -409,7 +459,7 @@ describe("runGenerateSdk orchestration", () => {
     expect(calls.filter((args) => args[0] === "spec-workflow")).toHaveLength(1);
   });
 
-  it("uses the same expected pin and stops when the CLI detects a target race between languages", async () => {
+  it("stops the remaining languages when the CLI reports a generation failure", async () => {
     const { deps, calls } = createHarness({
       runnerImpl: (args) => {
         if (args[0] === "release-plan") return ok(buildPlan());
@@ -417,7 +467,7 @@ describe("runGenerateSdk orchestration", () => {
           return ok(
             JSON.stringify({
               status: "Failed",
-              response_error: "Expected spec commit no longer matches the release plan",
+              response_error: "Could not queue the SDK generation pipeline",
             }),
           );
         return ok();
@@ -426,7 +476,6 @@ describe("runGenerateSdk orchestration", () => {
     await expect(runGenerateSdk(cliArgs, deps)).rejects.toThrow(/Java/);
     const generated = calls.filter((args) => args[0] === "spec-workflow");
     expect(generated).toHaveLength(2);
-    for (const args of generated)
-      expect(args[args.indexOf("--spec-commit-sha") + 1]).toBe(SPEC_SHA);
+    for (const args of generated) expect(args).not.toContain("--spec-commit-sha");
   });
 });

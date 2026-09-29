@@ -2,7 +2,15 @@ import path from "node:path";
 import { describe, expect, it, vi } from "vitest";
 import type { AzsdkRunner, CommandResult } from "../src/types.ts";
 import { runUpdateSdkDetails } from "../src/update-sdk-details.ts";
-import { API_VERSION, cleanGit, OLD_SHA, plan, PR_URL, SPEC_SHA } from "./test-helpers.ts";
+import {
+  API_VERSION,
+  cleanGit,
+  OLD_SHA,
+  plan,
+  PR_URL,
+  SPEC_SHA,
+  TARGET_REVISION,
+} from "./test-helpers.ts";
 
 const WORKSPACE = path.resolve("/repo/root");
 const SPEC_PATH = "specification/contoso/Contoso.Management";
@@ -119,16 +127,16 @@ describe("runUpdateSdkDetails", () => {
       "--spec-commit-sha",
       SPEC_SHA,
       "--confirm-target",
-      "--expected-spec-commit-sha",
-      SPEC_SHA,
+      "--expected-target-revision",
+      TARGET_REVISION,
       "--output",
       "json",
     ]);
   });
 
-  it("keeps the artifact's exact observed pin rather than substituting the fresh representation", () => {
+  it("keeps the artifact's observed revision rather than approving a newer same-SHA revision", () => {
     const runner = vi.fn<AzsdkRunner>(() =>
-      ok(buildPlan({ SpecCommitSHA: SPEC_SHA.toUpperCase() })),
+      ok(buildPlan({ SpecCommitSHA: SPEC_SHA.toUpperCase(), TargetRevision: "9001:3:9002:2" })),
     );
     runUpdateSdkDetails(cliArgs, {
       readArtifact: () => buildArtifact("created"),
@@ -136,7 +144,20 @@ describe("runUpdateSdkDetails", () => {
       git: cleanGit(),
     });
     const updateArgs = runner.mock.calls[1][0];
-    expect(updateArgs[updateArgs.indexOf("--expected-spec-commit-sha") + 1]).toBe(SPEC_SHA);
+    expect(updateArgs[updateArgs.indexOf("--expected-target-revision") + 1]).toBe(TARGET_REVISION);
+    expect(updateArgs[updateArgs.indexOf("--spec-commit-sha") + 1]).toBe(SPEC_SHA);
+  });
+
+  it("does not update when the discovery artifact has no revision", () => {
+    const runner = vi.fn(() => ok(buildPlan({})));
+    expect(() =>
+      runUpdateSdkDetails(cliArgs, {
+        readArtifact: () => buildArtifact("created", { TargetRevision: undefined }),
+        runner,
+        git: cleanGit(),
+      }),
+    ).toThrow(/revision/i);
+    expect(runner).toHaveBeenCalledOnce();
   });
 
   it("refuses a fresh pin that changed since the artifact without updating", () => {
@@ -153,7 +174,7 @@ describe("runUpdateSdkDetails", () => {
     expect(git).not.toHaveBeenCalled();
   });
 
-  it("does not retry when the CLI rejects the artifact pin after the fresh lookup", () => {
+  it("does not retry when the CLI rejects the artifact revision after the fresh lookup", () => {
     const runner = vi
       .fn<AzsdkRunner>()
       .mockReturnValueOnce(ok(buildPlan({})))
@@ -161,7 +182,7 @@ describe("runUpdateSdkDetails", () => {
         ok(
           JSON.stringify({
             operation_status: "Failed",
-            response_error: "Expected spec commit changed",
+            response_error: "Expected target revision changed",
           }),
         ),
       );
@@ -171,10 +192,10 @@ describe("runUpdateSdkDetails", () => {
         runner,
         git: cleanGit(),
       }),
-    ).toThrow(/Expected spec commit changed/);
+    ).toThrow(/Expected target revision changed/);
     expect(runner).toHaveBeenCalledTimes(2);
     const updateArgs = runner.mock.calls[1][0];
-    expect(updateArgs[updateArgs.indexOf("--expected-spec-commit-sha") + 1]).toBe(SPEC_SHA);
+    expect(updateArgs[updateArgs.indexOf("--expected-target-revision") + 1]).toBe(TARGET_REVISION);
   });
 
   it("preserves the general private-preview update that can finish a merged tracking plan", () => {

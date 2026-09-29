@@ -9,6 +9,7 @@ export const API_VERSION = "2026-01-01-preview";
 export const OLD_SHA = "a".repeat(40);
 export const SPEC_SHA = "b".repeat(40);
 export const PR_URL = "https://github.com/Azure/azure-rest-api-specs/pull/123";
+export const TARGET_REVISION = "9001:1:9002:1";
 
 export const context: ReleasePlanCommandContext = {
   prUrl: PR_URL,
@@ -31,6 +32,7 @@ export function plan(details: Record<string, unknown> = {}): ReleasePlanData {
       APISpecProjectPath: SPEC_PATH,
       SpecAPIVersion: API_VERSION,
       SpecCommitSHA: SPEC_SHA,
+      TargetRevision: TARGET_REVISION,
       ActiveSpecPullRequest: PR_URL,
       ApiReleaseType: 2,
       SDKReleaseType: "beta",

@@ -6,12 +6,7 @@ import { Octokit } from "@octokit/rest";
 import { execSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
 import { join, posix } from "node:path";
-import {
-  assertApiVersion,
-  assertCleanSpecCheckout,
-  assertSpecCommitSha,
-  type GitRunner,
-} from "./spec-target.ts";
+import { assertCleanSpecCheckout, assertSpecCommitSha, type GitRunner } from "./spec-target.ts";
 import type {
   CommitProjectInfoResult,
   OctokitLike,
@@ -377,42 +372,28 @@ export function findTspConfigDir(relativeFilePath: string, workspace: string): s
   return null;
 }
 
-// Normalized SDK language keys emitted by @azure-tools/typespec-metadata.
-const METADATA_SDK_LANGUAGES = new Set([
-  "csharp",
-  "python",
-  "typescript",
-  "javascript",
-  "java",
-  "rust",
-  "swift",
-  "go",
-]);
-
 /**
- * Extracts one concrete API version shared by all recognized SDK configurations.
+ * Extracts the API version from TypeSpec metadata.
  */
 export function resolveTypeSpecMetadata(metadata: TypeSpecMetadata): {
   apiVersion: string;
 } {
   const apiVersions = new Set<string>();
 
-  for (const [language, langConfigs] of Object.entries(metadata.languages)) {
-    // Non-SDK emitters such as AutoRest appear under "unknown" without a package name.
-    if (!METADATA_SDK_LANGUAGES.has(language)) {
-      continue;
-    }
+  for (const [, langConfigs] of Object.entries(metadata.languages)) {
     if (!Array.isArray(langConfigs)) {
-      throw new Error("Invalid language configurations in TypeSpec metadata.");
+      continue;
     }
 
     for (const config of langConfigs) {
       const apiVersion = config.apiVersion;
       const packageName = config.packageName;
 
-      assertApiVersion(apiVersion);
-      if (typeof packageName !== "string" || !packageName.trim()) {
-        throw new Error("A TypeSpec language configuration is missing its packageName.");
+      if (!apiVersion || !packageName) {
+        console.warn(
+          `Skipping language config with missing apiVersion or packageName: ${JSON.stringify(config)}`,
+        );
+        continue;
       }
 
       console.log(`language config: ${JSON.stringify(config)}`);
@@ -422,11 +403,6 @@ export function resolveTypeSpecMetadata(metadata: TypeSpecMetadata): {
 
   if (apiVersions.size === 0) {
     throw new Error("No valid language configurations found in TypeSpec metadata");
-  }
-  if (apiVersions.size !== 1) {
-    throw new Error(
-      `Ambiguous API versions in TypeSpec metadata: ${[...apiVersions].join(", ")}. Select one concrete API version before release planning.`,
-    );
   }
 
   return { apiVersion: Array.from(apiVersions)[0] };
@@ -446,6 +422,11 @@ export async function getTypeSpecProjectVersionFromMetadata(
   try {
     const metadata = await generateTypeSpecMetadata(tspProjectAbsPath);
     const { apiVersion } = resolveTypeSpecMetadata(metadata);
+    if (!/^\d{4}-\d{2}-\d{2}(?:-preview)?$/.test(apiVersion)) {
+      throw new Error(
+        `API version '${apiVersion}' must use YYYY-MM-DD or YYYY-MM-DD-preview format`,
+      );
+    }
     const isPreview = apiVersion.endsWith("-preview");
 
     console.log(
