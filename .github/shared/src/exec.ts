@@ -16,6 +16,11 @@ export interface ExecOptions {
   maxBuffer?: number;
 }
 
+export interface ExecFileOptions extends ExecOptions {
+  /** Maximum execution time in milliseconds. Defaults to no timeout. */
+  timeout?: number;
+}
+
 export interface NpmPrefixOptions {
   /** Prefix passed to the package manager through --prefix. */
   prefix?: string;
@@ -47,23 +52,25 @@ export function isExecError(error: unknown): error is ExecError {
 export async function execFile(
   file: string,
   args?: string[],
-  options: ExecOptions = {},
+  options: ExecFileOptions = {},
 ): Promise<ExecResult> {
   const {
     cwd,
     logger,
+    timeout,
     // Node default is 1024 * 1024, which is too small for some git commands returning many entities or large file content.
     // To support "git show", should be larger than the largest swagger file in the repo (2.5 MB as of 2/28/2025).
     maxBuffer = 16 * 1024 * 1024,
   } = options;
 
-  logger?.info(`execFile("${file}", ${JSON.stringify(args)})`);
+  logger?.debug(`execFile("${file}", ${JSON.stringify(args)})`);
 
   try {
     // execFile(file, args) is more secure than exec(cmd), since the latter is vulnerable to shell injection
     const result = await execFileImpl(file, args, {
       cwd,
       maxBuffer,
+      timeout,
     });
 
     logger?.debug(`stdout: '${result.stdout}'`);
@@ -91,7 +98,7 @@ const nodeBinSchema = z.object({
 export async function execNodeBin(
   packageName: string,
   [binary, ...args]: [string, ...string[]],
-  options: ExecOptions = {},
+  options: ExecFileOptions = {},
 ): Promise<ExecResult> {
   const base = pathToFileURL(resolve(options.cwd ?? process.cwd(), "__resolve__.mjs"));
   const packageJsonPath = findPackageJSON(packageName, base);
@@ -175,7 +182,7 @@ export async function execPnpm(args: string[], options: ExecNpmOptions = {}): Pr
   const prefixArgs = prefix ? ["--prefix", prefix] : [];
   const allArgs = [...prefixArgs, ...args];
 
-  logger?.info(`execPnpm(${JSON.stringify(allArgs)})`);
+  logger?.debug(`execPnpm(${JSON.stringify(allArgs)})`);
 
   return await new Promise((resolve, reject) => {
     // cross-spawn resolves "pnpm" to the "pnpm.cmd" shim on Windows and spawns it

@@ -1,7 +1,10 @@
+import { ConsoleLogger, type ILogger } from "@azure-tools/specs-shared/logger";
 import { type Suppression } from "@azure-tools/suppressions";
+import debug from "debug";
 import { stat } from "node:fs/promises";
 import { type ParseArgsConfig, parseArgs } from "node:util";
 import { type Rule } from "./rule.ts";
+import { runAll, runChanged } from "./run-projects.ts";
 import { ClientTspImportRule } from "./rules/client-tsp-import.ts";
 import { CompileRule } from "./rules/compile.ts";
 import { EmitAutorestRule } from "./rules/emit-autorest.ts";
@@ -34,6 +37,7 @@ export async function runRules(
   rules: Rule[],
   folder: string,
   suppressions: Suppression[],
+  logger: ILogger,
 ): Promise<RunRulesResult> {
   const result: RunRulesResult = { success: true, suppressed: [], executed: [], failed: [] };
 
@@ -51,7 +55,7 @@ export async function runRules(
       }
     }
 
-    const ruleResult = await rule.execute(folder);
+    const ruleResult = await rule.execute(folder, logger);
     result.executed.push(rule.name);
     if (ruleResult.stdOutput) console.log(ruleResult.stdOutput);
     if (!ruleResult.success) {
@@ -72,6 +76,10 @@ export async function runRules(
 export async function main() {
   const args = process.argv.slice(2);
   const options = {
+    verbose: {
+      type: "boolean",
+      short: "v",
+    },
     folder: {
       type: "string",
       short: "f",
@@ -80,8 +88,100 @@ export async function main() {
       type: "string",
       short: "c",
     },
-  };
-  const parsedArgs = parseArgs({ args, options, allowPositionals: true } as ParseArgsConfig);
+    all: {
+      type: "boolean",
+    },
+    changed: {
+      type: "boolean",
+    },
+    base: {
+      type: "string",
+    },
+    head: {
+      type: "string",
+    },
+    "ignore-core-files": {
+      type: "boolean",
+    },
+    "dry-run": {
+      type: "boolean",
+    },
+    shard: {
+      type: "string",
+    },
+    "git-clean": {
+      type: "boolean",
+    },
+  } satisfies ParseArgsConfig["options"];
+  const parsedArgs = parseArgs({ args, options, allowPositionals: true });
+
+  const { values } = parsedArgs;
+  if (values.verbose) {
+    debug.enable([process.env.DEBUG, "simple-git"].filter(Boolean).join(","));
+  }
+  if (values.all && values.changed) {
+    console.error("--all and --changed cannot be combined");
+    process.exitCode = 1;
+    return;
+  }
+  if ((values["git-clean"] || values["dry-run"]) && !values.all && !values.changed) {
+    console.error("--git-clean and --dry-run require --all or --changed");
+    process.exitCode = 1;
+    return;
+  }
+  if (
+    (values.base !== undefined || values.head !== undefined || values["ignore-core-files"]) &&
+    !values.changed
+  ) {
+    console.error("--base, --head and --ignore-core-files require --changed");
+    process.exitCode = 1;
+    return;
+  }
+
+  if (values.shard !== undefined && !values.all) {
+    console.error("--shard requires --all");
+    process.exitCode = 1;
+    return;
+  }
+
+  if (values.changed) {
+    if (parsedArgs.positionals.length > 0) {
+      console.error(
+        "Usage: tsv --changed [--base=<commit>] [--head=<commit>] [--ignore-core-files] [--git-clean] [--dry-run]",
+      );
+      process.exitCode = 1;
+      return;
+    }
+    const success = await runChanged(process.cwd(), {
+      baseCommitish: values.base,
+      headCommitish: values.head,
+      ignoreCoreFiles: values["ignore-core-files"],
+      gitClean: values["git-clean"],
+      dryRun: values["dry-run"],
+      verbose: values.verbose,
+    });
+    if (!success) process.exitCode = 1;
+    return;
+  }
+
+  if (values.all) {
+    if (parsedArgs.positionals.length > 1) {
+      console.error(
+        "Usage: tsv --all [folder] [--shard=<index>/<count>] [--git-clean] [--dry-run]",
+      );
+      process.exitCode = 1;
+      return;
+    }
+    const success = await runAll(parsedArgs.positionals[0] ?? "specification", {
+      gitClean: values["git-clean"],
+      shard: values.shard,
+      dryRun: values["dry-run"],
+      verbose: values.verbose,
+    });
+    if (!success) process.exitCode = 1;
+    return;
+  }
+
   const folder = parsedArgs.positionals[0];
 
   if (parsedArgs.positionals[1]) {
@@ -126,7 +226,12 @@ export async function main() {
     new StaleApiVersionPinRule(),
   ];
 
-  const result = await runRules(rules, absolutePath, suppressions);
+  const result = await runRules(
+    rules,
+    absolutePath,
+    suppressions,
+    new ConsoleLogger(values.verbose),
+  );
 
   if (!result.success) {
     process.exitCode = 1;
