@@ -1,5 +1,5 @@
-// This file moves all beta operations (preview routes) from the Azure.AI.Projects namespace to
-// a new namespace Azure.AI.Projects.Beta, thus creating a sub-client ".beta" in the emitted SDKs.
+// This file moves beta operations (preview routes) from the Azure.AI.Projects namespace to
+// the Azure.AI.Projects.Beta namespace, thus creating a sub-client ".beta" in the emitted SDKs.
 // It is imported by the client.tsp file, which is used for emitting the Python and JS clients.
 // See https://azure.github.io/typespec-azure/docs/howtos/generate-client-libraries/03client/#move-all-operations-to-root-client
 
@@ -18,20 +18,14 @@ interface Models {}
 @@clientLocation(Azure.AI.Projects.Models.getCredentials, Models);
 
 interface Evaluators {}
-@@clientLocation(Azure.AI.Projects.Evaluators.listVersions, Evaluators);
-@@clientLocation(Azure.AI.Projects.Evaluators.listLatestVersions, Evaluators);
-@@clientLocation(Azure.AI.Projects.Evaluators.getVersion, Evaluators);
-@@clientLocation(Azure.AI.Projects.Evaluators.deleteVersion, Evaluators);
-@@clientLocation(Azure.AI.Projects.Evaluators.createVersion, Evaluators);
-@@clientLocation(Azure.AI.Projects.Evaluators.updateVersion, Evaluators);
 @@clientLocation(Azure.AI.Projects.Evaluators.startPendingUpload, Evaluators);
 @@clientLocation(Azure.AI.Projects.Evaluators.getCredentials, Evaluators);
 
-@@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.create, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.get, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.list, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.cancel, Evaluators);
-@@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.delete, Evaluators);
+@@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.create, Azure.AI.Projects.Evaluators);
+@@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.get, Azure.AI.Projects.Evaluators);
+@@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.list, Azure.AI.Projects.Evaluators);
+@@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.cancel, Azure.AI.Projects.Evaluators);
+@@clientLocation(Azure.AI.Projects.EvaluatorGenerationJobs.delete, Azure.AI.Projects.Evaluators);
 
 // These were removed from v1:
 // @@clientLocation(Azure.AI.Projects.EvaluationSuites.listVersions, Evaluators);
