@@ -49396,16 +49396,28 @@ components:
         entry_point:
           type: string
           description: The entry point Python file name for the uploaded evaluator code (e.g. 'answer_length_evaluator.py')
+          x-ms-foundry-meta:
+            required_previews:
+              - Evaluations=V1Preview
         image_tag:
           type: string
           description: The container image tag to use for evaluator code execution
+          x-ms-foundry-meta:
+            required_previews:
+              - Evaluations=V1Preview
         blob_uri:
           type: string
           format: uri
           description: The blob URI for the evaluator storage
+          x-ms-foundry-meta:
+            required_previews:
+              - Evaluations=V1Preview
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Code-based evaluator definition using python code
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     CodeConfiguration:
       type: object
       required:
@@ -84962,6 +84974,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Prompt-based evaluator
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     PromptDataGenerationJobSource:
       type: object
       required:

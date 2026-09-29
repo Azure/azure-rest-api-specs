@@ -10,6 +10,10 @@ using OpenAPI;
 
 namespace Azure.AI.Projects;
 
+const EvaluatorsRequiredPreviews = #{
+  required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview],
+};
+
 @doc("The category of the evaluator")
 union EvaluatorCategory {
   string,
@@ -79,24 +83,38 @@ model EvaluatorDefinition {
 }
 
 @doc("Code-based evaluator definition using python code")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model CodeBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.code;
 
   @doc("Inline code text for the evaluator")
   code_text?: string;
 
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview] }
+  )
   @doc("The entry point Python file name for the uploaded evaluator code (e.g. 'answer_length_evaluator.py')")
   entry_point?: string;
 
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview] }
+  )
   @doc("The container image tag to use for evaluator code execution")
   image_tag?: string;
 
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview] }
+  )
   #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The blob URI for the evaluator storage")
   blob_uri?: url;
 }
 
 @doc("Prompt-based evaluator")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model PromptBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.prompt;
 
