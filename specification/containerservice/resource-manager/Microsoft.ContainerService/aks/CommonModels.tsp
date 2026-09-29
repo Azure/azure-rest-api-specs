@@ -3600,6 +3600,30 @@ model ManagedClusterStorageProfileDiskCSIDriver {
    * Whether to enable AzureDisk CSI Driver. The default value is true.
    */
   enabled?: boolean;
+
+  /**
+   * Quick Attach Detach settings for the AzureDisk CSI driver. Quick Attach Detach enables faster, higher-scale Azure Disk attach and detach operations for stateful AKS workloads by bypassing ARM/CRP control-plane bottlenecks. For more information, see https://aka.ms/aks/qad.
+   */
+  @added(Versions.v2026_08_02_preview)
+  quickAttachDetach?: ManagedClusterStorageProfileDiskCSIDriverQuickAttachDetach;
+}
+
+/**
+ * Quick Attach Detach settings for the AzureDisk CSI driver.
+ */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for consistency with the parent CSI driver model"
+@added(Versions.v2026_08_02_preview)
+model ManagedClusterStorageProfileDiskCSIDriverQuickAttachDetach {
+  /**
+   * Whether to enable Quick Attach Detach for the AzureDisk CSI driver. The default value is false.
+   */
+  enabled?: boolean;
+
+  /**
+   * Identity used by Quick Attach Detach. This property is returned by GET and cannot be set by clients. The Quick Attach Detach feature uses a managed identity that is automatically created and managed by the AKS resource provider. In most scenarios, no user action is required. An exception applies when using customer-managed disks that are located outside of the AKS node resource group (Bring Your Own Disk scenario). In this case, users must grant the Quick Attach Detach managed identity the required permissions on the resource group containing the disk.
+   */
+  @visibility(Lifecycle.Read)
+  identity?: UserAssignedIdentity;
 }
 
 /**
