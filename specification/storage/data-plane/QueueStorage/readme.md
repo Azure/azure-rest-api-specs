@@ -2,21 +2,22 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for QueueStorage.
+This is the configuration file for QueueStorage swaggers.
 
 ---
 
 ## Getting Started
 
-To build the SDK for QueueStorage, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To generate the swagger in this folder, run:
 
-> `autorest`
+> `tsp compile .`
 
 To see additional help and options, run:
 
-> `autorest --help`
+> `tsp --help`
 
 ---
+
 
 ## Configuration
 
