@@ -34,8 +34,8 @@ jobs:
     displayName: Verify the exact queued SHA without generating an SDK
     timeoutInMinutes: 10
     pool:
-      name: azsdk-pool
-      demands: ImageOverride -equals ubuntu-24.04
+      name: Azure Pipelines
+      vmImage: ubuntu-24.04
     steps:
       - checkout: self
         clean: true
