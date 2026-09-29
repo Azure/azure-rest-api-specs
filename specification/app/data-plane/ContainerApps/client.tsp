@@ -687,6 +687,7 @@ namespace ContainerAppsSandbox {
   @@clientName(SandboxStatsResponse, "SandboxStatsResult", "csharp");
   @@clientName(SecretKeysResponse, "SecretKeysResult", "csharp");
   @@clientName(SecretPeekResponse, "SecretPeekResult", "csharp");
+  @@clientName(CreateSecretContent, "SetSecretContent", "csharp");
   @@clientName(CountResponse, "CountResult", "csharp");
   @@clientName(SandboxCountResponse, "SandboxCountResult", "csharp");
   @@clientName(SnapshotCountResponse, "SnapshotCountResult", "csharp");
