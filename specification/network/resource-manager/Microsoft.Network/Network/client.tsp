@@ -13,6 +13,29 @@ using Microsoft.Network;
 using Microsoft.Compute;
 using Common;
 
+// Preserve the naming requirements used by the released C# provisioning library.
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve C# provisioning resource naming compatibility."
+@@clientOption(
+  Common.NetworkSecurityGroup,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 80, pattern: "^[a-zA-Z0-9_.-]+$" },
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve C# provisioning resource naming compatibility."
+@@clientOption(
+  Common.VirtualNetwork,
+  "resource-name-constraint",
+  #{ minLength: 2, maxLength: 64, pattern: "^[a-zA-Z0-9_.-]+$" },
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Preserve C# provisioning resource naming compatibility."
+@@clientOption(
+  Common.NetworkInterface,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 80, pattern: "^[a-zA-Z0-9_.-]+$" },
+  "csharp"
+);
+
 // Cloud Services is deprecated and no longer represented by the current C# Compute SDK.
 @@scope(
   Microsoft.Network.NetworkInterfaces.getCloudServiceNetworkInterface,
