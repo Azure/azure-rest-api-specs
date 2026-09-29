@@ -29,7 +29,7 @@ const pr = {
   updated_at: "2026-09-23T10:00:00Z",
 };
 const marker = "<!-- contributor-readiness -->";
-const notifierPath = ".github/workflows/contributor-readiness-events.yaml";
+const notifierPath = ".github/workflows/contributor-readiness-notify.yaml";
 
 function setup() {
   const github = createMockGithub();
@@ -82,10 +82,10 @@ function setup() {
 describe("contributor readiness", () => {
   it("routes PR events through an unprivileged notifier and trusted workflow_run publisher", () => {
     const publisher = parseDocument(
-      readFileSync(new URL("../contributor-readiness.yaml", import.meta.url), "utf8"),
+      readFileSync(new URL("../contributor-readiness-report.yaml", import.meta.url), "utf8"),
     );
     const notifier = parseDocument(
-      readFileSync(new URL("../contributor-readiness-events.yaml", import.meta.url), "utf8"),
+      readFileSync(new URL("../contributor-readiness-notify.yaml", import.meta.url), "utf8"),
     );
     expect(publisher.errors).toEqual([]);
     expect(notifier.errors).toEqual([]);
@@ -104,7 +104,7 @@ describe("contributor readiness", () => {
 
   it("grants the publisher permission to comment on pull requests", () => {
     const workflow = parseDocument(
-      readFileSync(new URL("../contributor-readiness.yaml", import.meta.url), "utf8"),
+      readFileSync(new URL("../contributor-readiness-report.yaml", import.meta.url), "utf8"),
     );
     expect(workflow.errors).toEqual([]);
     expect(workflow.getIn(["jobs", "report", "permissions", "pull-requests"])).toBe("write");
@@ -619,6 +619,11 @@ describe("readiness trigger resolution", () => {
       repository: { id: 100 },
       event: "pull_request",
       path: ".github/workflows/contributor-readiness-review.yaml",
+    },
+    {
+      repository: { id: 100 },
+      event: "pull_request",
+      path: ".github/workflows/contributor-readiness-events.yaml",
     },
     {
       repository: { id: 200 },
