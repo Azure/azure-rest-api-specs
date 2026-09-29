@@ -18,6 +18,7 @@ interface Models {}
 @@clientLocation(Azure.AI.Projects.Models.getCredentials, Models);
 
 interface Evaluators {}
+@@clientLocation(Azure.AI.Projects.Evaluators.listDiagnostics, Evaluators);
 @@clientLocation(Azure.AI.Projects.Evaluators.listVersions, Evaluators);
 @@clientLocation(Azure.AI.Projects.Evaluators.listLatestVersions, Evaluators);
 @@clientLocation(Azure.AI.Projects.Evaluators.getVersion, Evaluators);
