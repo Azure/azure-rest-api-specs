@@ -1083,7 +1083,7 @@ model AuthenticationProperties {
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("Properties of the service-created PostgreSQL username-and-password authentication method. The control plane stores no administrator identity; PostgreSQL is the source of truth for the sole member of the service-owned administrator role.")
+@doc("Properties of the service-created PostgreSQL username-and-password authentication method. Administrator credentials are accepted only on update and are never returned.")
 model PasswordAuthenticationProperties {
   @doc("The state of PostgreSQL username-and-password authentication.")
   @visibility(Lifecycle.Read)
@@ -1107,20 +1107,20 @@ model MicrosoftEntraAuthenticationProperties {
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("Properties for updating PostgreSQL username-and-password authentication. Omitted properties preserve their current values. State-only requests enable or disable the authentication mechanism. Credentials are secrets and are never returned or stored by the control plane. Login-only, password-only, and combined credential updates require this authentication method to already be Enabled unless the request also sets state to Enabled.")
+@doc("Properties for updating PostgreSQL username-and-password authentication. Omitted properties preserve their current values. This API version supports enabling or disabling the authentication method, initially setting the administrator login, and resetting its password. Supported changes can be combined. Credentials are secrets and are never returned.")
 model PasswordAuthenticationPropertiesForPatchUpdate {
   @doc("The target password-authentication state. Enabled or Disabled can be supplied without credentials to toggle the feature. Disabled cannot be combined with administratorLogin or administratorLoginPassword. Disabling password authentication does not remove or modify existing database users or roles.")
   @visibility(Lifecycle.Update)
   state?: AuthenticationState;
 
-  @doc("The PostgreSQL administrator role name. A login-only update requires password authentication to already be Enabled unless state is set to Enabled in this request, and requires exactly one member in the AzureSU-owned special group. The current name is an idempotent no-op; a different name renames the current member only when that target role does not already exist. When supplied together with administratorLoginPassword, this value can create the administrator if the special group has no member, reset the matching member's password, or rename a differently named member and reset its password.")
+  @doc("The PostgreSQL administrator login name. In this API version, this property initially sets the login name. After it is set, supplying the current value is an idempotent no-op and supplying a different value is rejected because renaming is not supported. A future API version may support renaming through this property. Setting the login requires password authentication to already be Enabled unless state is set to Enabled in the same request.")
   @secret
   @minLength(1)
   @maxLength(63)
   @visibility(Lifecycle.Update)
   administratorLogin?: string;
 
-  @doc("The PostgreSQL administrator password. A password-only update requires password authentication to already be Enabled unless state is set to Enabled in this request, and requires exactly one member in the AzureSU-owned special group. When supplied together with administratorLogin, it can create the administrator if the special group has no member, reset the matching member's password, or rename a differently named member and reset its password.")
+  @doc("The PostgreSQL administrator password. Supplying this property resets the configured administrator's password. Resetting the password requires password authentication to already be Enabled unless state is set to Enabled in the same request. This property can be supplied with administratorLogin during initial login setup.")
   @secret
   @minLength(8)
   @maxLength(128)

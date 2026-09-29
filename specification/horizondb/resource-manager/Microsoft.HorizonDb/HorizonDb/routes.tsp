@@ -558,15 +558,19 @@ interface PasswordAuthentications {
     ErrorResponse
   >;
 
-  @doc("Updates the service-created PostgreSQL username-and-password authentication method. The request is sparse and omitted properties preserve their current values. A state-only request enables or disables the authentication mechanism; disabling cannot include credentials and does not remove or modify existing database users or roles. Login-only, password-only, and combined credential updates require this method to already be Enabled unless this request also sets state to Enabled. PostgreSQL is the sole source of truth; no administrator identity or credentials are stored. Both authentication methods may be Disabled.")
+  @doc("Updates the service-created PostgreSQL username-and-password authentication method. The request is sparse and omitted properties preserve their current values. This API version supports enabling or disabling the method, initially setting the administrator login, and resetting its password; supported changes can be combined. Disabling cannot include credentials and does not remove or modify existing database users or roles. Credential updates require this method to already be Enabled unless the same request sets state to Enabled. Administrator rename is not supported in this API version. Both authentication methods may be Disabled.")
   @autoRoute
   @armResourceUpdate(Authentication)
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is Azure.ResourceManager.Foundations.ArmUpdateOperation<
     ResourceInstanceParameters<PasswordAuthentication>,
     PasswordAuthenticationForPatchUpdate,
-    ArmResponse<Authentication>,
-    ErrorResponse
+    Response =
+      | ArmResponse<Authentication>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Authentication> &
+          Azure.Core.Foundations.RetryAfterHeader>,
+    ErrorResponse = ErrorResponse
   >;
 }
 
@@ -591,10 +595,14 @@ interface MicrosoftEntraAuthentications {
   @autoRoute
   @armResourceUpdate(Authentication)
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is Azure.ResourceManager.Foundations.ArmUpdateOperation<
     ResourceInstanceParameters<MicrosoftEntraAuthentication>,
     MicrosoftEntraAuthenticationForPatchUpdate,
-    ArmResponse<Authentication>,
-    ErrorResponse
+    Response =
+      | ArmResponse<Authentication>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Authentication> &
+          Azure.Core.Foundations.RetryAfterHeader>,
+    ErrorResponse = ErrorResponse
   >;
 }
