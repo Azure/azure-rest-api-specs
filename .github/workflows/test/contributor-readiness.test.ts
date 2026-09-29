@@ -24,6 +24,7 @@ const pr = {
   state: "open",
   user: author,
   commits: 1,
+  changed_files: 1,
   head: { sha: "a".repeat(40) },
   base: { repo: { id: 100 } },
   updated_at: "2026-09-23T10:00:00Z",
@@ -45,6 +46,9 @@ function setup() {
   const listReviews = vi.fn().mockResolvedValue({
     data: [{ id: 20, state: "APPROVED", user: reviewer }],
   });
+  const listFiles = vi.fn().mockResolvedValue({
+    data: [{ filename: "specification/widgets/main.tsp", status: "modified" }],
+  });
   const permission = vi.fn().mockResolvedValue({ data: { permission: "write" } });
   const membership = vi.fn().mockResolvedValue({ status: 204 });
   const createCheck = vi.fn().mockResolvedValue({});
@@ -57,7 +61,7 @@ function setup() {
       pull_requests: [{ number: 1, base: { repo: { id: 100 } } }],
     },
   });
-  Object.assign(github.rest.pulls, { listCommits, listReviews });
+  Object.assign(github.rest.pulls, { listCommits, listReviews, listFiles });
   Object.assign(github.rest.repos, { getCollaboratorPermissionLevel: permission });
   Object.assign(github.rest, { orgs: { checkPublicMembershipForUser: membership } });
   Object.assign(github.rest.checks, { create: createCheck });
@@ -71,6 +75,7 @@ function setup() {
     core,
     listCommits,
     listReviews,
+    listFiles,
     permission,
     membership,
     createCheck,
@@ -108,6 +113,97 @@ describe("contributor readiness", () => {
     );
     expect(workflow.errors).toEqual([]);
     expect(workflow.getIn(["jobs", "report", "permissions", "pull-requests"])).toBe("write");
+  });
+
+  it.each(["workflow_run", "issue_comment"])(
+    "skips engineering-only PRs for %s before checking accounts",
+    async (eventName) => {
+      const f = setup();
+      f.context.eventName = eventName;
+      if (eventName === "issue_comment") {
+        f.context.payload = {
+          issue: { number: 1 },
+          comment: { id: 1, body: "/azsdk check-access" },
+          sender: author,
+        };
+      }
+      f.listFiles.mockResolvedValue({ data: [{ filename: "eng/README.md", status: "modified" }] });
+      await f.run();
+      expect(f.listCommits).not.toHaveBeenCalled();
+      expect(f.listReviews).not.toHaveBeenCalled();
+      expect(f.membership).not.toHaveBeenCalled();
+      expect(f.permission).not.toHaveBeenCalled();
+      expect(f.createCheck).not.toHaveBeenCalled();
+      expect(f.github.rest.issues.createComment).not.toHaveBeenCalled();
+      expect(f.github.rest.issues.updateComment).not.toHaveBeenCalled();
+      expect(f.core.info).toHaveBeenCalledWith(
+        "Skipping contributor readiness: no changes under specification/.",
+      );
+    },
+  );
+
+  it.each([
+    { filename: "specification/widgets/main.tsp", status: "added" },
+    { filename: "specification/widgets/main.tsp", status: "removed" },
+    {
+      filename: "specification/widgets/main.tsp",
+      previous_filename: "eng/main.tsp",
+      status: "renamed",
+    },
+    {
+      filename: "eng/main.tsp",
+      previous_filename: "specification/widgets/main.tsp",
+      status: "renamed",
+    },
+  ])("checks a PR that changes specification content: %j", async (file) => {
+    const f = setup();
+    f.listFiles.mockResolvedValue({ data: [file] });
+    await f.run();
+    expect(f.createCheck).toHaveBeenCalledOnce();
+  });
+
+  it("includes mixed PRs and inspects the paginated file list", async () => {
+    const f = setup();
+    f.github.rest.pulls.get.mockResolvedValue({ data: { ...pr, changed_files: 101 } });
+    f.listFiles.mockResolvedValue({
+      data: [
+        ...Array.from({ length: 100 }, (_, index) => ({ filename: `eng/file-${index}.ts` })),
+        { filename: "specification/widgets/main.tsp" },
+      ],
+    });
+    const paginate = vi.spyOn(f.github, "paginate");
+    await f.run();
+    expect(paginate).toHaveBeenCalledWith(f.listFiles, {
+      owner: "Azure",
+      repo: "example",
+      pull_number: 1,
+      per_page: 100,
+    });
+    expect(f.createCheck).toHaveBeenCalledOnce();
+  });
+
+  it("does not mistake a similarly named folder for specification/", async () => {
+    const f = setup();
+    f.listFiles.mockResolvedValue({ data: [{ filename: "specification-tools/check.ts" }] });
+    await f.run();
+    expect(f.createCheck).not.toHaveBeenCalled();
+  });
+
+  it("does not silently skip when GitHub truncates the changed-file list", async () => {
+    const f = setup();
+    f.github.rest.pulls.get.mockResolvedValue({ data: { ...pr, changed_files: 3001 } });
+    f.listFiles.mockResolvedValue({ data: [{ filename: "eng/file.ts" }] });
+    await expect(f.run()).rejects.toThrow("Cannot determine specification scope");
+    expect(f.membership).not.toHaveBeenCalled();
+    expect(f.createCheck).not.toHaveBeenCalled();
+  });
+
+  it("propagates file lookup failures instead of claiming the PR is out of scope", async () => {
+    const f = setup();
+    f.listFiles.mockRejectedValue(createMockRequestError(503));
+    await expect(f.run()).rejects.toThrow("503");
+    expect(f.membership).not.toHaveBeenCalled();
+    expect(f.createCheck).not.toHaveBeenCalled();
   });
 
   it("deduplicates authors/committers and includes every submitted reviewer", async () => {
