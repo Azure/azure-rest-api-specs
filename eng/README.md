@@ -16,6 +16,8 @@ The comment groups findings by affected user: ðŸ”´ marks a confirmed issue and ð
 marks checks that could not be verified. It links to
 [setup and access renewal](https://aka.ms/azsdk/access); users without findings
 are omitted to keep the report short. The job summary shows the same report.
+Organization names in membership findings link to the organization's People page,
+with the affected user's login prefilled in the search.
 
 After changing access, comment `/azsdk check-access` on the PR. The PR author,
 resolved commit participants, submitted reviewers and maintainers can refresh,

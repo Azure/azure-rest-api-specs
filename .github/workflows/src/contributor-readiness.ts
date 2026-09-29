@@ -15,11 +15,17 @@ const COMMAND = "/azsdk check-access";
 const MARKER = "<!-- contributor-readiness -->";
 const CHECK_NAME = "Contributor readiness";
 const ONBOARDING = "https://aka.ms/azsdk/access";
+const ORGANIZATIONS = ["Microsoft", "Azure"] as const;
 
 type PullRequest = Awaited<ReturnType<GitHub["rest"]["pulls"]["get"]>>["data"];
 type Account = { id: number; login: string; type: string };
 type Participant = Account & { roles: Set<string> };
-export type ReadinessFinding = { subject: string; message: string; unknown?: boolean };
+export type ReadinessFinding = {
+  subject: string;
+  message: string;
+  unknown?: boolean;
+  organization?: (typeof ORGANIZATIONS)[number];
+};
 
 /** Extracts an HTTP status from an API error, leaving unrelated errors unclassified. */
 function status(error: unknown): number | undefined {
@@ -203,6 +209,7 @@ async function observe<T>(
   subject: string,
   operation: () => Promise<T>,
   unavailable = "Could not verify access; retry or ask a maintainer.",
+  organization?: ReadinessFinding["organization"],
 ): Promise<T | undefined> {
   try {
     return await operation();
@@ -214,6 +221,7 @@ async function observe<T>(
       subject,
       unknown: true,
       message: unavailable,
+      organization,
     });
     return undefined;
   }
@@ -230,18 +238,20 @@ export async function evaluateReadinessParticipants(
 ): Promise<void> {
   for (const participant of participants) {
     if (isAutomation(participant)) continue;
-    for (const org of ["Microsoft", "Azure"]) {
+    for (const org of ORGANIZATIONS) {
       const visible = await observe(
         core,
         findings,
         participant.login,
         () => publicMembership(github, org, participant.login),
         `Could not verify ${org} membership.`,
+        org,
       );
       if (visible === false)
         findings.push({
           subject: participant.login,
           message: `${org} membership not public.`,
+          organization: org,
         });
     }
     const write = await observe(
@@ -287,7 +297,7 @@ function renderReadinessFindings(
   const groups = new Map<string, { messages: Set<string>; unknown: boolean }>();
   for (const finding of findings) {
     const group = groups.get(finding.subject) ?? { messages: new Set<string>(), unknown: true };
-    group.messages.add(finding.message);
+    group.messages.add(renderFindingMessage(finding));
     group.unknown &&= finding.unknown === true;
     groups.set(finding.subject, group);
   }
@@ -302,14 +312,20 @@ function renderReadinessFindings(
         const user = users.has(subject)
           ? link(label, `https://github.com/${encodeURIComponent(subject)}`)
           : label;
-        return [
-          `${group.unknown ? "🟡" : "🔴"} **${user}**`,
-          [...group.messages].map(escapeMarkdown).join("<br>"),
-        ];
+        return [`${group.unknown ? "🟡" : "🔴"} **${user}**`, [...group.messages].join("<br>")];
       }),
     ]),
     entries.length > 100 ? `${entries.length - 100} more entries not shown.` : undefined,
   ];
+}
+
+/** Escapes finding text and links its organization to a People search for the affected user. */
+function renderFindingMessage(finding: ReadinessFinding): string {
+  const message = escapeMarkdown(finding.message);
+  const org = finding.organization;
+  if (!org) return message;
+  const query = new URLSearchParams({ query: finding.subject }).toString();
+  return message.replace(org, link(org, `https://github.com/orgs/${org}/people?${query}`));
 }
 
 /**
