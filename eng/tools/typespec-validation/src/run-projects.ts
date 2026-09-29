@@ -1,3 +1,4 @@
+import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 import { getSuppressions } from "@azure-tools/suppressions";
 import { spawn } from "node:child_process";
@@ -10,6 +11,7 @@ import { findChangedProjects, findProjects, type ChangedProjectsOptions } from "
 interface RunOptions {
   gitClean?: boolean;
   dryRun?: boolean;
+  verbose?: boolean;
 }
 
 interface RunContext {
@@ -44,7 +46,7 @@ export async function runAll(
 
 export async function runChanged(
   folder: string,
-  options: RunOptions & Partial<ChangedProjectsOptions> = {},
+  options: RunOptions & Partial<Omit<ChangedProjectsOptions, "logger">> = {},
 ): Promise<boolean> {
   const root = await getRootFolder(folder);
   const { baseCommitish = "HEAD^", headCommitish = "HEAD", ignoreCoreFiles } = options;
@@ -52,6 +54,7 @@ export async function runChanged(
     baseCommitish,
     headCommitish,
     ignoreCoreFiles,
+    logger: new ConsoleLogger(options.verbose),
   });
   if (projects.length === 0) {
     if (checkingAllSpecs) {
@@ -110,7 +113,7 @@ async function runProjects(
       }
 
       try {
-        if (!(await validateProject(project, context))) {
+        if (!(await validateProject(project, context, options.verbose))) {
           failed.push(name);
           const message =
             `TypeSpec Validation failed for project ${name} run the following command locally to validate.\n` +
@@ -185,12 +188,17 @@ function selectShard(projects: string[], shard: string): string[] {
   return projects.slice(start, end);
 }
 
-function validateProject(folder: string, context: RunContext): Promise<boolean> {
+function validateProject(folder: string, context: RunContext, verbose = false): Promise<boolean> {
   return new Promise((resolve, reject) => {
     // A child process keeps each project's context and exit status independent.
     const child = spawn(
       process.execPath,
-      [fileURLToPath(new URL("../cmd/tsv.js", import.meta.url)), folder, JSON.stringify(context)],
+      [
+        fileURLToPath(new URL("../cmd/tsv.js", import.meta.url)),
+        folder,
+        JSON.stringify(context),
+        ...(verbose ? ["--verbose"] : []),
+      ],
       { stdio: "inherit" },
     );
     child.once("error", reject);
