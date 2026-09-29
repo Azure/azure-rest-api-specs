@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import type { GitHubScriptArgs } from "../../src/github.ts";
 import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts";
 
 vi.mock("fs/promises", () => ({
@@ -33,12 +34,12 @@ describe("validate TypeSpec suppressions approval", () => {
   const context = createMockContext();
   const core = createMockCore();
 
-  function args(): import("@actions/github-script").AsyncFunctionArguments {
+  function args(): GitHubScriptArgs {
     return {
       github,
       context,
       core,
-    } as unknown as import("@actions/github-script").AsyncFunctionArguments;
+    };
   }
 
   beforeEach(() => {

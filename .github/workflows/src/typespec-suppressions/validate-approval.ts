@@ -1,5 +1,5 @@
 import { extractInputs } from "../context.ts";
-import type { WebhookEvent } from "../github.ts";
+import type { GitHubScriptArgs, WebhookEvent } from "../github.ts";
 import { TYPESPEC_SUPPRESSIONS_APPROVED_LABEL } from "../label.ts";
 import { removeLabelIfPresent } from "../package-name-approval/labels.ts";
 import {
@@ -7,11 +7,7 @@ import {
   loadProtectedLabelsConfig,
 } from "../protected-labels/authorization.ts";
 
-export default async function validateApproval({
-  github,
-  context,
-  core,
-}: import("@actions/github-script").AsyncFunctionArguments) {
+export default async function validateApproval({ github, context, core }: GitHubScriptArgs) {
   const payload = context.payload as WebhookEvent<"pull-request", "labeled">;
   const labelName = payload.label?.name;
   if (labelName !== TYPESPEC_SUPPRESSIONS_APPROVED_LABEL) {
