@@ -799,11 +799,22 @@ using Azure.AI.Projects;
 
 @@clientName(AgentOptimizationCandidateEvaluation.score, "averageScore");
 @@clientName(AgentOptimizationCandidateEvaluation.avg_tokens, "averageTokens");
+@@clientName(
+  AgentOptimizationCandidateEvaluation.avg_latency_ms,
+  "averageLatency",
+  "java"
+);
 @@clientName(AgentOptimizationCandidateEvaluation.eval_id, "evaluationId");
 @@clientName(
   AgentOptimizationCandidateEvaluation.eval_run_id,
   "evaluationRunId"
 );
+@@clientName(
+  AgentOptimizationJobLatency.avg_latency_ms,
+  "averageLatency",
+  "java"
+);
+@@clientName(AgentOptimizationJob.run_duration_ms, "runDuration", "java");
 @@clientName(AgentOptimizationEvaluator, "AgentOptimizationEvaluatorReference");
 
 @@clientName(SessionFileWriteResponse, "SessionFileWriteResult");
