@@ -9,33 +9,43 @@ namespace ContainerAppsSandbox {
   // populate the clients without changing the service interfaces or other languages.
   /** Operations on sandboxes within the group. */
   namespace Sandboxes {
+
   }
 
   namespace Connections {
+
   }
 
   namespace ContentPackages {
+
   }
 
   namespace Credentials {
+
   }
 
   namespace DiskImages {
+
   }
 
   namespace PublicDiskImages {
+
   }
 
   namespace EgressPolicies {
+
   }
 
   namespace Secrets {
+
   }
 
   namespace Snapshots {
+
   }
 
   namespace Volumes {
+
   }
 
   // Client initialization
@@ -130,11 +140,7 @@ namespace ContainerAppsSandbox {
     Sandboxes,
     "csharp"
   );
-  @@clientLocation(
-    SandboxFilesOperations.getSandboxFile,
-    Sandboxes,
-    "csharp"
-  );
+  @@clientLocation(SandboxFilesOperations.getSandboxFile, Sandboxes, "csharp");
   @@clientLocation(
     SandboxFilesOperations.getSandboxFilesList,
     Sandboxes,
@@ -150,11 +156,7 @@ namespace ContainerAppsSandbox {
     Sandboxes,
     "csharp"
   );
-  @@clientLocation(
-    SandboxFilesOperations.postSandboxFile,
-    Sandboxes,
-    "csharp"
-  );
+  @@clientLocation(SandboxFilesOperations.postSandboxFile, Sandboxes, "csharp");
 
   @@clientLocation(
     SandboxNetworkingOperations.getSandboxEgressDecisions,
@@ -224,16 +226,8 @@ namespace ContainerAppsSandbox {
     Connections,
     "csharp"
   );
-  @@clientLocation(
-    ConnectionsOperations.getConnection,
-    Connections,
-    "csharp"
-  );
-  @@clientLocation(
-    ConnectionsOperations.postConnection,
-    Connections,
-    "csharp"
-  );
+  @@clientLocation(ConnectionsOperations.getConnection, Connections, "csharp");
+  @@clientLocation(ConnectionsOperations.postConnection, Connections, "csharp");
   @@clientLocation(
     ConnectionsOperations.postConnectionAuthorize,
     Connections,
@@ -286,27 +280,11 @@ namespace ContainerAppsSandbox {
     Credentials,
     "csharp"
   );
-  @@clientLocation(
-    CredentialsOperations.getCredential,
-    Credentials,
-    "csharp"
-  );
-  @@clientLocation(
-    CredentialsOperations.putCredential,
-    Credentials,
-    "csharp"
-  );
+  @@clientLocation(CredentialsOperations.getCredential, Credentials, "csharp");
+  @@clientLocation(CredentialsOperations.putCredential, Credentials, "csharp");
 
-  @@clientLocation(
-    DiskImagesOperations.deleteDiskImage,
-    DiskImages,
-    "csharp"
-  );
-  @@clientLocation(
-    DiskImagesOperations.listDiskImages,
-    DiskImages,
-    "csharp"
-  );
+  @@clientLocation(DiskImagesOperations.deleteDiskImage, DiskImages, "csharp");
+  @@clientLocation(DiskImagesOperations.listDiskImages, DiskImages, "csharp");
   @@clientLocation(
     DiskImagesOperations.listDiskImagesPublic,
     PublicDiskImages,
@@ -317,16 +295,8 @@ namespace ContainerAppsSandbox {
     PublicDiskImages,
     "csharp"
   );
-  @@clientLocation(
-    DiskImagesOperations.getDiskImage,
-    DiskImages,
-    "csharp"
-  );
-  @@clientLocation(
-    DiskImagesOperations.postDiskImage,
-    DiskImages,
-    "csharp"
-  );
+  @@clientLocation(DiskImagesOperations.getDiskImage, DiskImages, "csharp");
+  @@clientLocation(DiskImagesOperations.postDiskImage, DiskImages, "csharp");
 
   @@clientLocation(
     EgressPoliciesOperations.deleteEgressPolicy,
@@ -349,86 +319,26 @@ namespace ContainerAppsSandbox {
     "csharp"
   );
 
-  @@clientLocation(
-    SecretsOperations.deleteSecret,
-    Secrets,
-    "csharp"
-  );
+  @@clientLocation(SecretsOperations.deleteSecret, Secrets, "csharp");
   @@clientLocation(SecretsOperations.listSecrets, Secrets, "csharp");
-  @@clientLocation(
-    SecretsOperations.getSecretKeys,
-    Secrets,
-    "csharp"
-  );
-  @@clientLocation(
-    SecretsOperations.postSecretPeek,
-    Secrets,
-    "csharp"
-  );
-  @@clientLocation(
-    SecretsOperations.putSecret,
-    Secrets,
-    "csharp"
-  );
+  @@clientLocation(SecretsOperations.getSecretKeys, Secrets, "csharp");
+  @@clientLocation(SecretsOperations.postSecretPeek, Secrets, "csharp");
+  @@clientLocation(SecretsOperations.putSecret, Secrets, "csharp");
 
-  @@clientLocation(
-    SnapshotsOperations.deleteSnapshot,
-    Snapshots,
-    "csharp"
-  );
-  @@clientLocation(
-    SnapshotsOperations.listSnapshots,
-    Snapshots,
-    "csharp"
-  );
-  @@clientLocation(
-    SnapshotsOperations.getSnapshotsCount,
-    Snapshots,
-    "csharp"
-  );
-  @@clientLocation(
-    SnapshotsOperations.getSnapshot,
-    Snapshots,
-    "csharp"
-  );
+  @@clientLocation(SnapshotsOperations.deleteSnapshot, Snapshots, "csharp");
+  @@clientLocation(SnapshotsOperations.listSnapshots, Snapshots, "csharp");
+  @@clientLocation(SnapshotsOperations.getSnapshotsCount, Snapshots, "csharp");
+  @@clientLocation(SnapshotsOperations.getSnapshot, Snapshots, "csharp");
 
-  @@clientLocation(
-    VolumesOperations.deleteVolume,
-    Volumes,
-    "csharp"
-  );
-  @@clientLocation(
-    VolumesOperations.deleteVolumeFile,
-    Volumes,
-    "csharp"
-  );
+  @@clientLocation(VolumesOperations.deleteVolume, Volumes, "csharp");
+  @@clientLocation(VolumesOperations.deleteVolumeFile, Volumes, "csharp");
   @@clientLocation(VolumesOperations.listVolumes, Volumes, "csharp");
   @@clientLocation(VolumesOperations.getVolumesCount, Volumes, "csharp");
-  @@clientLocation(
-    VolumesOperations.getVolume,
-    Volumes,
-    "csharp"
-  );
-  @@clientLocation(
-    VolumesOperations.getVolumeFiles,
-    Volumes,
-    "csharp"
-  );
-  @@clientLocation(
-    VolumesOperations.getVolumeFileDownload,
-    Volumes,
-    "csharp"
-  );
-  @@clientLocation(
-    VolumesOperations.postVolumeFileMkdir,
-    Volumes,
-    "csharp"
-  );
-  @@clientLocation(
-    VolumesOperations.postVolumeFork,
-    Volumes,
-    "csharp"
-  );
+  @@clientLocation(VolumesOperations.getVolume, Volumes, "csharp");
+  @@clientLocation(VolumesOperations.getVolumeFiles, Volumes, "csharp");
+  @@clientLocation(VolumesOperations.getVolumeFileDownload, Volumes, "csharp");
+  @@clientLocation(VolumesOperations.postVolumeFileMkdir, Volumes, "csharp");
+  @@clientLocation(VolumesOperations.postVolumeFork, Volumes, "csharp");
   @@clientLocation(VolumesOperations.createVolume, Volumes, "csharp");
   @@clientLocation(
     VolumesOperations.createOrReplaceVolumeFile,
@@ -439,16 +349,16 @@ namespace ContainerAppsSandbox {
   // Client names
   // The C# emitter prefixes nested clients with their parent names.
   @@clientName(ContainerAppsSandbox, "SandboxGroupClient", "csharp");
-  @@clientName(Sandboxes, "Sandboxes", "csharp");
-  @@clientName(Connections, "Connections", "csharp");
-  @@clientName(ContentPackages, "ContentPackages", "csharp");
-  @@clientName(Credentials, "Credentials", "csharp");
-  @@clientName(DiskImages, "DiskImages", "csharp");
-  @@clientName(PublicDiskImages, "PublicDiskImages", "csharp");
-  @@clientName(EgressPolicies, "EgressPolicies", "csharp");
-  @@clientName(Secrets, "Secrets", "csharp");
-  @@clientName(Snapshots, "Snapshots", "csharp");
-  @@clientName(Volumes, "Volumes", "csharp");
+  @@clientName(Sandboxes, "SandboxesClient", "csharp");
+  @@clientName(Connections, "ConnectionsClient", "csharp");
+  @@clientName(ContentPackages, "ContentPackagesClient", "csharp");
+  @@clientName(Credentials, "CredentialsClient", "csharp");
+  @@clientName(DiskImages, "DiskImagesClient", "csharp");
+  @@clientName(PublicDiskImages, "PublicDiskImagesClient", "csharp");
+  @@clientName(EgressPolicies, "EgressPoliciesClient", "csharp");
+  @@clientName(Secrets, "SecretsClient", "csharp");
+  @@clientName(Snapshots, "SnapshotsClient", "csharp");
+  @@clientName(Volumes, "VolumesClient", "csharp");
 
   // Operation names
   @@clientName(AzureSandboxes.list, "getSandboxes", "csharp");
@@ -686,7 +596,7 @@ namespace ContainerAppsSandbox {
   // Qualify generic model names to avoid collisions with other libraries.
   @@clientName(Connection, "SandboxConnection", "csharp");
   @@clientName(Secret, "SandboxSecret", "csharp");
-  @@clientName(Sandbox, "ContainerAppsSandboxProperties", "csharp");
+  @@clientName(Sandbox, "SandboxProperties", "csharp");
   @@clientName(Snapshot, "SandboxSnapshot", "csharp");
   @@clientName(FileInfo, "SandboxFileInfo", "csharp");
   @@clientName(MkDirContent, "SandboxDirectoryContent", "csharp");
