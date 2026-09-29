@@ -546,6 +546,11 @@ model CreateTelephonyBindingRequest {
   @doc("The telephony provider.")
   provider: TelephonyProvider;
 
+  @doc("The Foundry connection name for the telephony provider.")
+  @minLength(1)
+  @maxLength(256)
+  connection_name: string;
+
   @doc("An optional display label for the binding.")
   @maxLength(128)
   label?: string;
@@ -556,11 +561,6 @@ model CreateTelephonyBindingRequest {
 @clientName("CreateTeamsPhoneExtensibilityTelephonyBindingContent", "csharp")
 model CreateTeamsPhoneExtensibilityTelephonyBindingRequest
   extends CreateTelephonyBindingRequest {
-  @doc("The Foundry connection name for the telephony provider.")
-  @minLength(1)
-  @maxLength(256)
-  connection_name: string;
-
   @doc("The Microsoft Teams Phone extensibility provider.")
   provider: TelephonyProvider.teams_phone_extensibility;
 
@@ -577,11 +577,6 @@ model CreateTeamsPhoneExtensibilityTelephonyBindingRequest
 @clientName("CreateTwilioTelephonyBindingContent", "csharp")
 model CreateTwilioTelephonyBindingRequest
   extends CreateTelephonyBindingRequest {
-  @doc("The Foundry connection name for the telephony provider.")
-  @minLength(1)
-  @maxLength(256)
-  connection_name: string;
-
   @doc("The Twilio provider.")
   provider: TelephonyProvider.twilio;
 
@@ -594,14 +589,14 @@ model CreateTwilioTelephonyBindingRequest
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @clientName("UpdateTelephonyBindingContent", "csharp")
 model UpdateTelephonyBindingRequest {
-  @doc("The SIP configuration changes. Only valid for SIP bindings. Omitted fields retain current values; null restores defaults, subject to enabled-direction validation.")
+  @doc("The inbound SIP access-control changes. Only valid for SIP bindings. Omitted fields retain current values; null clears all inbound access-control restrictions.")
   sip?: SipTelephonyConfigurationPatch | null;
 
   @doc("The replacement display label. Omit it to preserve the current value; use null to clear it.")
   @maxLength(128)
   label?: string | null;
 
-  @doc("The replacement Foundry connection name. This property is valid only for a Teams Phone extensibility binding; a Twilio binding's connection is immutable.")
+  @doc("The replacement Foundry connection name. This property is valid for Teams Phone extensibility and SIP bindings; a Twilio binding's connection is immutable.")
   @minLength(1)
   @maxLength(256)
   connection_name?: string;
@@ -621,6 +616,11 @@ model TelephonyBinding {
   @doc("The telephony provider.")
   provider: TelephonyProvider;
 
+  @doc("The Foundry connection name for the telephony provider.")
+  @minLength(1)
+  @maxLength(256)
+  connection_name: string;
+
   @doc("The optional display label for the binding.")
   @maxLength(128)
   label?: string;
@@ -629,11 +629,6 @@ model TelephonyBinding {
 @doc("A Microsoft Teams Phone extensibility binding owned by a voice agent.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TeamsPhoneExtensibilityTelephonyBinding extends TelephonyBinding {
-  @doc("The Foundry connection name for the telephony provider.")
-  @minLength(1)
-  @maxLength(256)
-  connection_name: string;
-
   @doc("The service-generated webhook URL to configure with the telephony provider.")
   incoming_call_url: url;
 
@@ -651,11 +646,6 @@ model TeamsPhoneExtensibilityTelephonyBinding extends TelephonyBinding {
 @doc("A Twilio binding owned by a voice agent.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TwilioTelephonyBinding extends TelephonyBinding {
-  @doc("The Foundry connection name for the telephony provider.")
-  @minLength(1)
-  @maxLength(256)
-  connection_name: string;
-
   @doc("The service-generated webhook URL to configure with the telephony provider.")
   incoming_call_url: url;
 
@@ -677,6 +667,11 @@ model TelephonyBindingListItem {
   @doc("The telephony provider.")
   provider: TelephonyProvider;
 
+  @doc("The Foundry connection name for the telephony provider.")
+  @minLength(1)
+  @maxLength(256)
+  connection_name: string;
+
   @doc("The optional display label for the binding.")
   @maxLength(128)
   label?: string;
@@ -690,11 +685,6 @@ model TelephonyBindingListItem {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TeamsPhoneExtensibilityTelephonyBindingListItem
   extends TelephonyBindingListItem {
-  @doc("The Foundry connection name for the telephony provider.")
-  @minLength(1)
-  @maxLength(256)
-  connection_name: string;
-
   @doc("The service-generated webhook URL to configure with the telephony provider.")
   incoming_call_url: url;
 
@@ -712,11 +702,6 @@ model TeamsPhoneExtensibilityTelephonyBindingListItem
 @doc("A Twilio binding returned in a list, including its entity tag.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TwilioTelephonyBindingListItem extends TelephonyBindingListItem {
-  @doc("The Foundry connection name for the telephony provider.")
-  @minLength(1)
-  @maxLength(256)
-  connection_name: string;
-
   @doc("The service-generated webhook URL to configure with the telephony provider.")
   incoming_call_url: url;
 
@@ -728,38 +713,13 @@ model TwilioTelephonyBindingListItem extends TelephonyBindingListItem {
   phone_number: string;
 }
 
-@doc("An outbound SIP audio codec. Additional values may be added over time.")
+@doc("Inbound SIP access-control configuration.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-union SipAudioCodec {
-  string,
-
-  @doc("G.722 wideband audio.")
-  g722: "g722",
-
-  @doc("G.711 mu-law audio.")
-  pcmu: "pcmu",
-
-  @doc("G.711 A-law audio.")
-  pcma: "pcma",
-
-  @doc("Opus audio.")
-  opus: "opus",
-
-  @doc("Adaptive Multi-Rate Wideband audio.")
-  amr_wb: "amr-wb",
-}
-
-@doc("Inbound SIP configuration. Credentials are stored in the referenced connection and never returned in a binding.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model SipInboundConfiguration {
-  @doc("Whether inbound calls are enabled. Defaults to true.")
-  enabled?: boolean = true;
-
-  @doc("The Foundry project connection name containing inbound username and password credentials. Required when inbound is enabled.")
-  @minLength(1)
-  @maxLength(256)
-  connection?: string;
-
+@example(#{
+  allowed_source_cidrs: #["192.0.2.0/24"],
+  allowed_calling_numbers: #["^\\+1425\\d{7}$"],
+})
+model SipTelephonyConfiguration {
   @doc("Allowed source IP addresses or CIDR ranges. Omit or use an empty array for no source-address restriction.")
   @maxItems(64)
   allowed_source_cidrs?: string[];
@@ -769,114 +729,23 @@ model SipInboundConfiguration {
   allowed_calling_numbers?: string[];
 }
 
-@doc("Outbound SIP configuration.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model SipOutboundConfiguration {
-  @doc("Whether outbound calls are enabled. Defaults to false.")
-  enabled?: boolean = false;
-
-  @doc("The Foundry project connection name containing outbound username and password credentials. Required when outbound is enabled.")
-  @minLength(1)
-  @maxLength(256)
-  connection?: string;
-
-  @doc("The destination hostname or IP address with an optional port. Required when outbound is enabled. Do not include a scheme, user, path, query, or fragment.")
-  @minLength(1)
-  address?: string;
-
-  @doc("Enabled codecs in descending preference order. Defaults to g722, pcmu, pcma.")
-  @minItems(1)
-  enabled_codecs?: SipAudioCodec[] = #[
-    SipAudioCodec.g722,
-    SipAudioCodec.pcmu,
-    SipAudioCodec.pcma
-  ];
-
-  @doc("Custom SIP headers, limited to 32 entries. Names must be valid header tokens of at most 256 characters starting with X-. The X-MS- prefix is reserved except X-MS-Custom-. Names must be unique ignoring case. Values must contain no control characters and be at most 4096 characters.")
-  custom_headers?: Record<string>;
-}
-
-@doc("Direction-specific SIP configuration. Inbound defaults to enabled and outbound defaults to disabled.")
+@doc("Changes to inbound SIP access-control configuration. Omitted fields retain their current values; null clears a restriction.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @example(#{
-  inbound: #{
-    enabled: true,
-    connection: "sip-inbound",
-    allowed_source_cidrs: #["192.0.2.0/24"],
-  },
-  outbound: #{
-    enabled: true,
-    connection: "sip-outbound",
-    address: "sbc.example.com:5061",
-    enabled_codecs: #["g722", "pcmu", "pcma"],
-  },
+  allowed_source_cidrs: #[],
+  allowed_calling_numbers: #["+14255550123"],
 })
-model SipTelephonyConfiguration {
-  @doc("The inbound configuration.")
-  inbound?: SipInboundConfiguration;
-
-  @doc("The outbound configuration.")
-  outbound?: SipOutboundConfiguration;
-}
-
-@doc("Changes to inbound SIP configuration. The merged enabled direction must have a valid connection.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model SipInboundConfigurationPatch {
-  @doc("Whether inbound calls are enabled. Defaults to true. On update, omission preserves the current value; null restores the default or clears the value.")
-  enabled?: boolean | null;
-
-  @doc("The Foundry project connection name containing inbound username and password credentials. Required when inbound is enabled. On update, omission preserves the current value; null restores the default or clears the value.")
-  @minLength(1)
-  @maxLength(256)
-  connection?: string | null;
-
-  @doc("Allowed source IP addresses or CIDR ranges. Omit or use an empty array for no source-address restriction. On update, omission preserves the current value; null restores the default or clears the value.")
+model SipTelephonyConfigurationPatch {
+  @doc("Allowed source IP addresses or CIDR ranges. On update, omission preserves the current restriction; null or an empty array clears it.")
   @maxItems(64)
   allowed_source_cidrs?: string[] | null;
 
-  @doc("Allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. Omit or use an empty array for no caller-number restriction. On update, omission preserves the current value; null restores the default or clears the value.")
+  @doc("Allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. On update, omission preserves the current restriction; null or an empty array clears it.")
   @maxItems(64)
   allowed_calling_numbers?: string[] | null;
 }
 
-@doc("Changes to outbound SIP configuration. The merged enabled direction must have a valid connection and address.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model SipOutboundConfigurationPatch {
-  @doc("Whether outbound calls are enabled. Defaults to false. On update, omission preserves the current value; null restores the default or clears the value.")
-  enabled?: boolean | null;
-
-  @doc("The Foundry project connection name containing outbound username and password credentials. Required when outbound is enabled. On update, omission preserves the current value; null restores the default or clears the value.")
-  @minLength(1)
-  @maxLength(256)
-  connection?: string | null;
-
-  @doc("The destination hostname or IP address with an optional port. Required when outbound is enabled. Do not include a scheme, user, path, query, or fragment. On update, omission preserves the current value; null restores the default or clears the value.")
-  @minLength(1)
-  address?: string | null;
-
-  @doc("Enabled codecs in descending preference order. Defaults to g722, pcmu, pcma. On update, omission preserves the current value; null restores the default or clears the value.")
-  @minItems(1)
-  enabled_codecs?: SipAudioCodec[] | null;
-
-  @doc("Custom SIP headers, limited to 32 entries. Names must be valid header tokens of at most 256 characters starting with X-. The X-MS- prefix is reserved except X-MS-Custom-. Names must be unique ignoring case. Values must contain no control characters and be at most 4096 characters. On update, omission preserves the current value; null restores the default or clears the value.")
-  custom_headers?: Record<string> | null;
-}
-
-@doc("Changes to SIP configuration. Omitted directions retain their current values. Null resets a direction to its defaults, subject to enabled-direction validation.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@example(#{
-  outbound: #{ enabled: false },
-  inbound: #{ allowed_calling_numbers: #[] },
-})
-model SipTelephonyConfigurationPatch {
-  @doc("The inbound configuration changes.")
-  inbound?: SipInboundConfigurationPatch | null;
-
-  @doc("The outbound configuration changes.")
-  outbound?: SipOutboundConfigurationPatch | null;
-}
-
-@doc("The request to create a SIP binding. Use direction-specific connection references instead of a top-level connection_name.")
+@doc("The request to create an inbound SIP binding. Credentials are stored in the referenced Foundry connection.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @clientName("CreateSipTelephonyBindingContent", "csharp")
 model CreateSipTelephonyBindingRequest extends CreateTelephonyBindingRequest {
@@ -887,8 +756,8 @@ model CreateSipTelephonyBindingRequest extends CreateTelephonyBindingRequest {
   @maxLength(64)
   phone_number?: string;
 
-  @doc("The SIP configuration. Enabled directions require connection references.")
-  sip: SipTelephonyConfiguration;
+  @doc("The optional inbound SIP access-control configuration. Omit it for no source-address or caller-number restrictions.")
+  sip?: SipTelephonyConfiguration;
 }
 
 @doc("A SIP binding.")
@@ -901,10 +770,10 @@ model SipTelephonyBinding extends TelephonyBinding {
   @maxLength(64)
   phone_number?: string;
 
-  @doc("The SIP configuration, without credentials.")
+  @doc("The inbound SIP access-control configuration.")
   sip: SipTelephonyConfiguration;
 
-  @doc("The service-generated inbound SIP URI. Returned even when inbound is disabled; its presence does not indicate that calls are accepted.")
+  @doc("The service-generated inbound SIP URI.")
   sip_inbound_uri: url;
 }
 
@@ -918,10 +787,10 @@ model SipTelephonyBindingListItem extends TelephonyBindingListItem {
   @maxLength(64)
   phone_number?: string;
 
-  @doc("The SIP configuration, without credentials.")
+  @doc("The inbound SIP access-control configuration.")
   sip: SipTelephonyConfiguration;
 
-  @doc("The service-generated inbound SIP URI. Returned even when inbound is disabled; its presence does not indicate that calls are accepted.")
+  @doc("The service-generated inbound SIP URI.")
   sip_inbound_uri: url;
 }
 
