@@ -83,7 +83,7 @@ namespace ContainerAppsSandbox {
 
     /** Current credential state. */
     @visibility(Lifecycle.Read)
-    state: ResourceState;
+    state: ConnectionState;
 
     /** The source metadata for the credential. */
     source: SandboxGroupCredentialSource;

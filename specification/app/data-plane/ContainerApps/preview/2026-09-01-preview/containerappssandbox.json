@@ -8668,7 +8668,7 @@
           "description": "Connection type."
         },
         "state": {
-          "$ref": "#/definitions/ResourceState",
+          "$ref": "#/definitions/ConnectionState",
           "description": "Current connection state.",
           "readOnly": true
         },
@@ -8723,6 +8723,36 @@
     "ConnectionId": {
       "type": "string",
       "description": "A connection identifier."
+    },
+    "ConnectionState": {
+      "type": "string",
+      "description": "The provisioning state of a credential, connection or diskImage.",
+      "enum": [
+        "Creating",
+        "Ready",
+        "Error"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectionState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Creating",
+            "value": "Creating",
+            "description": "The resource is being created."
+          },
+          {
+            "name": "Ready",
+            "value": "Ready",
+            "description": "The resource is ready for use."
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "The resource could not be provisioned."
+          }
+        ]
+      }
     },
     "ConnectionsListResponse": {
       "type": "object",
@@ -9969,7 +9999,7 @@
       "description": "The provisioning status of a disk image.",
       "properties": {
         "state": {
-          "$ref": "#/definitions/ResourceState",
+          "$ref": "#/definitions/ConnectionState",
           "description": "The current provisioning state."
         },
         "errorMessage": {
@@ -12960,36 +12990,6 @@
         "resourceGroupName"
       ]
     },
-    "ResourceState": {
-      "type": "string",
-      "description": "The provisioning state of a credential, connection or diskImage.",
-      "enum": [
-        "Creating",
-        "Ready",
-        "Error"
-      ],
-      "x-ms-enum": {
-        "name": "ResourceState",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Creating",
-            "value": "Creating",
-            "description": "The resource is being created."
-          },
-          {
-            "name": "Ready",
-            "value": "Ready",
-            "description": "The resource is ready for use."
-          },
-          {
-            "name": "Error",
-            "value": "Error",
-            "description": "The resource could not be provisioned."
-          }
-        ]
-      }
-    },
     "Sandbox": {
       "type": "object",
       "description": "Customer-facing sandbox resource returned by the service.",
@@ -13400,7 +13400,7 @@
           "description": "The provider that uses the credential."
         },
         "state": {
-          "$ref": "#/definitions/ResourceState",
+          "$ref": "#/definitions/ConnectionState",
           "description": "Current credential state.",
           "readOnly": true
         },

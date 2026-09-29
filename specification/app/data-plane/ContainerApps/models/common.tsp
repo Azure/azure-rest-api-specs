@@ -178,7 +178,7 @@ model StringSegment {
 }
 
 /** The provisioning state of a credential, connection or diskImage. */
-union ResourceState {
+union ConnectionState {
   /** An unrecognized state returned by the service. */
   StringValue: string,
 

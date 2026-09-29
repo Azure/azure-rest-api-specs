@@ -50,7 +50,7 @@ namespace ContainerAppsSandbox {
 
     /** Current connection state. */
     @visibility(Lifecycle.Read)
-    state: ResourceState;
+    state: ConnectionState;
 
     /** Customer-defined labels. */
     labels?: Record<string>;
