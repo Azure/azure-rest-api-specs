@@ -66,7 +66,7 @@ union McpAuthorizationAction {
   string,
 
   /** Invoke an MCP tool. */
-  ToolCall: "tool-call",
+  ToolCall: "ToolCall",
 }
 
 /** The principal selector for an MCP authorization rule. */

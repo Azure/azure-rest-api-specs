@@ -87,10 +87,10 @@ union AioApplicationSource {
   string,
 
   /** An application deployed from Azure Marketplace. */
-  Marketplace: "marketplace",
+  Marketplace: "Marketplace",
 
   /** An application defined by the user. */
-  UserDefined: "userdefined",
+  UserDefined: "UserDefined",
 }
 
 /** The type of application defined by an application definition. */
@@ -99,10 +99,10 @@ union AioApplicationType {
   string,
 
   /** An AIO application. */
-  AioApplication: "aioApplication",
+  AioApplication: "AioApplication",
 
   /** A connector application. */
-  Connector: "connector",
+  Connector: "Connector",
 }
 
 /** AIO version metadata for the application image. */

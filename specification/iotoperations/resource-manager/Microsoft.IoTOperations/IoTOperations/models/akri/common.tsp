@@ -217,8 +217,8 @@ union AioApplicationExposedServiceProtocol {
   /** Uses gRPC. */
   Grpc: "Grpc",
 
-  /** AIO mRPC. */
-  MRpc: "mRPC",
+  /** AIO Mrpc. */
+  Mrpc: "Mrpc",
 }
 
 /** AkriConnectorsRegistrySettings properties. */
