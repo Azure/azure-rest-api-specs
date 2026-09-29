@@ -16,7 +16,7 @@ alias EvalQueryParameters = {
   limit?: integer = 20;
 
   /** The order query parameter. */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" ""
   @query
   @doc("Sort order for runs by timestamp. Use `asc` for ascending order or `desc` for descending order. Defaults to `asc`.")
   order?: "asc" | "desc" = "asc";
@@ -26,7 +26,7 @@ alias RunListQueryParameters = {
   ...EvalQueryParameters;
 
   /** The status query parameter. */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" ""
   @query
   @doc("Filter runs by status. One of `queued` | `in_progress` | `failed` | `completed` | `canceled`.")
   status?: "queued" | "in_progress" | "completed" | "canceled" | "failed";
@@ -39,7 +39,7 @@ alias EvalListQueryParameters = {
    * Evals can be ordered by creation time or last updated time.
    * Use `created_at` for creation time or `updated_at` for last updated time.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" ""
   @query(#{ explode: true })
   order_by?: "created_at" | "updated_at" = "created_at";
 };
@@ -51,7 +51,7 @@ alias EvalRunOutputItemsQueryParameters = {
    * Filter output items by status. Use `failed` to filter by failed output
    * items or `pass` to filter by passed output items.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unnamed-union" ""
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" ""
   @query(#{ explode: true })
   status?: "fail" | "pass";
 };

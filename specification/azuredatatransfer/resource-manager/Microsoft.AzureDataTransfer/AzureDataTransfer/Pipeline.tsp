@@ -27,8 +27,6 @@ model Pipeline is Azure.ResourceManager.TrackedResource<PipelineProperties> {
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
 }
 
-model ArmPipelineResponse is ArmResponse<Pipeline>;
-
 /**
  * Defines the set of operations available for managing Pipeline resources.
  */
@@ -81,17 +79,13 @@ interface Pipelines {
   approveConnection is ArmResourceActionAsync<
     Pipeline,
     ResourceBody,
-    ArmConnectionResponse
+    Connection
   >;
 
   /**
    * Executes a privileged or administrative action on the specified Pipeline.
    */
-  executeAction is ArmResourceActionAsync<
-    Pipeline,
-    Action,
-    ArmPipelineResponse
-  >;
+  executeAction is ArmResourceActionAsync<Pipeline, Action, Pipeline>;
 
   /**
    * Lists all Flows associated with the specified Pipeline.
@@ -129,7 +123,7 @@ interface Pipelines {
   rejectConnection is ArmResourceActionAsync<
     Pipeline,
     ResourceBody,
-    ArmConnectionResponse
+    Connection
   >;
 }
 

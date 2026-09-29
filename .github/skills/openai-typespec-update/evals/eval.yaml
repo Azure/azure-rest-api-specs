@@ -11,7 +11,7 @@ tags:
 config:
   runs: 3
   timeout: "90s"
-  model: claude-opus-4.6
+  model: gpt-5.4
   executor: copilot-sdk
 
 scoring:
@@ -19,7 +19,7 @@ scoring:
 
 stimuli:
   - name: exact-install-001
-    prompt: "This repo's package.json already lists @azure-tools/openai-typespec as a dependency. What is the exact npm command to update it to the latest version with an exact version pin (no caret)?"
+    prompt: "This repo's package.json references @azure-tools/openai-typespec with catalog:. How do I update it to the latest version with an exact pin (no caret) while keeping catalog: in the manifest?"
     environment:
       skills:
         - ..
@@ -29,17 +29,20 @@ stimuli:
           substring: "@azure-tools/openai-typespec"
       - type: output-contains
         config:
-          substring: "--save-exact"
+          substring: "pnpm-workspace.yaml"
+      - type: output-contains
+        config:
+          substring: "pnpm install"
 
   - name: warn-on-caret-001
-    prompt: 'Our package.json currently has "@azure-tools/openai-typespec": "^1.11.0". Update guidance for this package.'
+    prompt: 'Our package.json uses catalog: for @azure-tools/openai-typespec, but pnpm-workspace.yaml sets its catalog entry to "^1.11.0". Update guidance for this package.'
     environment:
       skills:
         - ..
     graders:
       - type: output-contains
         config:
-          substring: "--save-exact"
+          substring: "pnpm-workspace.yaml"
       - type: output-matches
         config:
           pattern: "(?i)warn"
@@ -48,7 +51,7 @@ stimuli:
           substring: "^1.11.0"
 
   - name: pinned-version-001
-    prompt: "What is the exact npm command to install the latest available version of @azure-tools/openai-typespec, pinned exactly (no caret) in package.json?"
+    prompt: "Update @azure-tools/openai-typespec to exactly 1.28.0. Keep the version in the default pnpm catalog and retain catalog: in package.json."
     environment:
       skills:
         - ..
@@ -58,4 +61,10 @@ stimuli:
           substring: "@azure-tools/openai-typespec"
       - type: output-contains
         config:
-          substring: "--save-exact"
+          substring: "pnpm-workspace.yaml"
+      - type: output-contains
+        config:
+          substring: "1.28.0"
+      - type: output-contains
+        config:
+          substring: "pnpm install"

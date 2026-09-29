@@ -421,6 +421,7 @@ model ProofOfPossessionNonceRequest {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatible"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing use case"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ProofOfPossessionNonceResponse extends CertificateProperties {}
 
 /**
@@ -807,6 +808,7 @@ model GenerateCapabilityImageRequest {
 /**
  * Signed device capability image response
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SignedCapabilityImageResponse {
   /**
    * The signed device capability image as a UTF-8 encoded base 64 string.

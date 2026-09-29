@@ -35,11 +35,6 @@ interface ServicesOperationGroup {
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
-      @OpenAPI.extension(
-        "x-ms-parameter-grouping",
-        #{ name: "search-management-request-options" }
-      )
-      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
     },
     Error = CloudError
@@ -69,11 +64,6 @@ interface UsagesOperationGroup {
       #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
       @format("uuid")
       @header("x-ms-client-request-id")
-      @OpenAPI.extension(
-        "x-ms-parameter-grouping",
-        #{ name: "search-management-request-options" }
-      )
-      @OpenAPI.extension("x-ms-client-request-id", true)
       clientRequestId?: string;
 
       ...LocationResourceParameter;
@@ -87,7 +77,9 @@ interface UsagesOperationGroup {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Pre-existing API contract: provider action group, not a resource interface."
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract: retains externalDocs."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Pre-existing API contract: provider-level action."
+#suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+#suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "Pre-existing API contract: provider-level action."
 @route("/subscriptions/{subscriptionId}/providers/Microsoft.Search/locations/{location}/usages/{skuName}")
 @get
 @externalDocs("https://aka.ms/search-manage")
@@ -101,11 +93,6 @@ op usageBySubscriptionSku(
   #suppress "@azure-tools/typespec-azure-core/no-format" "Pre-existing API contract: GUID header."
   @format("uuid")
   @header("x-ms-client-request-id")
-  @OpenAPI.extension(
-    "x-ms-parameter-grouping",
-    #{ name: "search-management-request-options" }
-  )
-  @OpenAPI.extension("x-ms-client-request-id", true)
   clientRequestId?: string,
 
   ...LocationResourceParameter,
@@ -128,13 +115,12 @@ interface Offerings {
   /**
    * Lists all of the features and SKUs offered by the Azure AI Search service in each region. Note: This API returns a non-ARM resource collection and is not RPC-compliant. It will be replaced with an action-style API in the next preview as a breaking change. Customers should avoid taking new dependencies on the current shape.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Pre-existing API contract"
   @removed(Versions.v2026_09_01_preview)
   @autoRoute
   @get
   @action("offerings")
   @tag("Offerings")
-  @OpenAPI.extension("x-ms-pageable", #{ nextLinkName: null })
+  @list
   list is ArmProviderActionSync<
     Request = void,
     Response = OfferingsListResult,

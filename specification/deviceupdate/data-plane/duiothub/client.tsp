@@ -13,42 +13,6 @@ namespace Customization;
   "logCollectionId"
 );
 
-@@clientName(
-  DeviceManagementOperationGroup.listBestUpdatesForGroup,
-  "GetBestUpdatesForGroups",
-  "csharp"
-);
-@@clientName(
-  DeviceManagementOperationGroup.listDeploymentsForDeviceClassSubgroup,
-  "GetDeploymentsForDeviceClassSubgroups",
-  "csharp"
-);
-@@clientName(
-  DeviceManagementOperationGroup.listDeploymentsForGroup,
-  "GetDeploymentsForGroups",
-  "csharp"
-);
-@@clientName(
-  DeviceManagementOperationGroup.listDeviceClassSubgroupsForGroup,
-  "GetDeviceClassSubgroupsForGroups",
-  "csharp"
-);
-@@clientName(
-  DeviceManagementOperationGroup.listDeviceStatesForDeviceClassSubgroupDeployment,
-  "GetDeviceStatesForDeviceClassSubgroupDeployments",
-  "csharp"
-);
-@@clientName(
-  DeviceManagementOperationGroup.listInstallableUpdatesForDeviceClass,
-  "GetInstallableUpdatesForDeviceClasses",
-  "csharp"
-);
-@@clientName(
-  DeviceUpdateOperationGroup.importUpdate,
-  "StartImportUpdate",
-  "csharp"
-);
-
 // Hoist `instanceId` from per-operation parameter to client-constructor
 // parameter, matching the original swagger's
 // `x-ms-parameter-location: "client"` on `InstanceIdParameter`.
@@ -147,6 +111,7 @@ namespace ClientDeviceUpdateService {
 )
 interface ClientDeviceUpdateClient {
   listUpdates is DeviceUpdateOperationGroup.listUpdates;
+  @clientName("StartImportUpdate", "csharp")
   importUpdate is DeviceUpdateOperationGroup.importUpdate;
   getUpdate is DeviceUpdateOperationGroup.getUpdate;
   deleteUpdate is DeviceUpdateOperationGroup.deleteUpdate;
@@ -177,6 +142,7 @@ interface DeviceManagementClient {
   getDeviceClass is DeviceManagementOperationGroup.getDeviceClass;
   updateDeviceClass is DeviceManagementOperationGroup.updateDeviceClass;
   deleteDeviceClass is DeviceManagementOperationGroup.deleteDeviceClass;
+  @clientName("GetInstallableUpdatesForDeviceClasses", "csharp")
   listInstallableUpdatesForDeviceClass is DeviceManagementOperationGroup.listInstallableUpdatesForDeviceClass;
   listDevices is DeviceManagementOperationGroup.listDevices;
   importDevices is DeviceManagementOperationGroup.importDevices;
@@ -187,23 +153,28 @@ interface DeviceManagementClient {
   getGroup is DeviceManagementOperationGroup.getGroup;
   deleteGroup is DeviceManagementOperationGroup.deleteGroup;
   getUpdateComplianceForGroup is DeviceManagementOperationGroup.getUpdateComplianceForGroup;
+  @clientName("GetBestUpdatesForGroups", "csharp")
   listBestUpdatesForGroup is DeviceManagementOperationGroup.listBestUpdatesForGroup;
+  @clientName("GetDeploymentsForGroups", "csharp")
   listDeploymentsForGroup is DeviceManagementOperationGroup.listDeploymentsForGroup;
   getDeployment is DeviceManagementOperationGroup.getDeployment;
   createOrUpdateDeployment is DeviceManagementOperationGroup.createOrUpdateDeployment;
   deleteDeployment is DeploymentManagementOperationGroup.deleteDeployment;
   getDeploymentStatus is DeviceManagementOperationGroup.getDeploymentStatus;
+  @clientName("GetDeviceClassSubgroupsForGroups", "csharp")
   listDeviceClassSubgroupsForGroup is DeviceManagementOperationGroup.listDeviceClassSubgroupsForGroup;
   getDeviceClassSubgroup is DeviceManagementOperationGroup.getDeviceClassSubgroup;
   deleteDeviceClassSubgroup is DeviceManagementOperationGroup.deleteDeviceClassSubgroup;
   getDeviceClassSubgroupUpdateCompliance is DeviceManagementOperationGroup.getDeviceClassSubgroupUpdateCompliance;
   getBestUpdatesForDeviceClassSubgroup is DeviceManagementOperationGroup.getBestUpdatesForDeviceClassSubgroup;
+  @clientName("GetDeploymentsForDeviceClassSubgroups", "csharp")
   listDeploymentsForDeviceClassSubgroup is DeviceManagementOperationGroup.listDeploymentsForDeviceClassSubgroup;
   getDeploymentForDeviceClassSubgroup is DeviceManagementOperationGroup.getDeploymentForDeviceClassSubgroup;
   deleteDeploymentForDeviceClassSubgroup is DeploymentManagementOperationGroup.deleteDeploymentForDeviceClassSubgroup;
   stopDeployment is DeviceManagementOperationGroup.stopDeployment;
   retryDeployment is DeviceManagementOperationGroup.retryDeployment;
   getDeviceClassSubgroupDeploymentStatus is DeviceManagementOperationGroup.getDeviceClassSubgroupDeploymentStatus;
+  @clientName("GetDeviceStatesForDeviceClassSubgroupDeployments", "csharp")
   listDeviceStatesForDeviceClassSubgroupDeployment is DeviceManagementOperationGroup.listDeviceStatesForDeviceClassSubgroupDeployment;
   getOperationStatus is DeviceManagementOperationGroup.getOperationStatus;
   listOperationStatuses is DeviceManagementOperationGroup.listOperationStatuses;

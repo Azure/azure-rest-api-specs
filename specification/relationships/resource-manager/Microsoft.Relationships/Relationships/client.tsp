@@ -8,6 +8,7 @@ using Azure.ResourceManager;
 using Microsoft.Relationships;
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -15,8 +16,8 @@ namespace Microsoft.Relationships {
   @doc("DependencyOf relationship resource for create or update.")
   model DependencyOfRelationshipCreateOrUpdate
     is ExtensionResource<DependencyOfRelationshipPropertiesCreateOrUpdate> {
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Name validation is owned by the RP service code from 2026-03-01-preview; the published swagger intentionally omits a name pattern so RPaaS does not gate names."
     @doc("Name of dependencyOf relationship.")
-    @pattern("^[a-zA-Z0-9]{3,64}$")
     @key
     @path
     @segment("dependencyOf")
@@ -36,8 +37,8 @@ namespace Microsoft.Relationships {
   @doc("ServiceGroupMember relationship resource for create or update.")
   model ServiceGroupMemberRelationshipCreateOrUpdate
     is ExtensionResource<ServiceGroupMemberRelationshipPropertiesCreateOrUpdate> {
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "Name validation is owned by the RP service code from 2026-03-01-preview; the published swagger intentionally omits a name pattern so RPaaS does not gate names."
     @doc("Name of ServiceGroupMember relationship.")
-    @pattern("^[a-zA-Z0-9]{3,64}$")
     @key
     @path
     @segment("serviceGroupMember")
@@ -47,6 +48,11 @@ namespace Microsoft.Relationships {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   model ServiceGroupMemberRelationshipPropertiesCreateOrUpdate {
+    @added(Versions.`2026-03-01-preview`)
+    @doc("The relationship source resource id. Must be a service group.")
+    sourceId: armResourceIdentifier;
+
+    @removed(Versions.`2026-03-01-preview`)
     @doc("The relationship target resource id.")
     targetId: armResourceIdentifier<[
       {
@@ -55,6 +61,11 @@ namespace Microsoft.Relationships {
       }
     ]>;
 
+    @added(Versions.`2026-03-01-preview`)
+    @doc("The relationship source tenant id.")
+    sourceTenant?: string;
+
+    @removed(Versions.`2026-03-01-preview`)
     @doc("The relationship target tenant id.")
     targetTenant?: string;
   }
@@ -79,3 +90,17 @@ namespace Microsoft.Relationships {
 @@alternateType(RelationshipMetadata.sourceType, armResourceType, "csharp");
 @@alternateType(RelationshipMetadata.targetType, armResourceType, "csharp");
 @@clientName(ProvisioningState, "RelationshipProvisioningState", "csharp");
+
+// Go SDK: preserve the original public model name for the 2026 shape while
+// assigning a distinct name to the legacy model to avoid a duplicate client name.
+@@clientName(
+  ServiceGroupMemberRelationshipProperties,
+  "ServiceGroupMemberRelationshipPropertiesLegacy",
+  "go"
+);
+
+@@clientName(
+  ServiceGroupMemberRelationshipPropertiesV2,
+  "ServiceGroupMemberRelationshipProperties",
+  "go"
+);

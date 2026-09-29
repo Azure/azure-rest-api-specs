@@ -7,8 +7,9 @@ options:
     output-file: "{project-root}/{version-status}/{version}/hci.json"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
   "@azure-tools/typespec-go":
+    api-version: "2026-10-01"
     service-dir: sdk/resourcemanager/azurestackhci
-    module: github.com/Azure/azure-sdk-for-go/{service-dir}/armazurestackhci/v3
+    module: github.com/Azure/azure-sdk-for-go/{service-dir}/armazurestackhci
     fix-const-stuttering: true
     generate-samples: true
     generate-fakes: true
@@ -17,6 +18,7 @@ options:
     flavor: "azure"
     emitter-output-dir: "{output-dir}/{service-dir}/armazurestackhci"
   "@azure-tools/typespec-python":
+    api-version: "2026-10-01"
     service-dir: "sdk/azurestackhci"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-azurestackhci"
     namespace: azure.mgmt.azurestackhci
@@ -24,6 +26,7 @@ options:
     generate-sample: true
     flavor: azure
   "@azure-tools/typespec-java":
+    api-version: "2026-10-01"
     flavor: azure
     namespace: com.azure.resourcemanager.azurestackhci
     service-dir: "sdk/azurestackhci"
@@ -34,7 +37,9 @@ options:
     namespace: "Azure.ResourceManager.Hci"
     emitter-output-dir: "{output-dir}/sdk/azurestackhci/{namespace}"
     enable-wire-path-attribute: true
+    api-version: "2026-10-01"
   "@azure-tools/typespec-ts":
+    api-version: "2026-10-01"
     service-dir: "sdk/azurestackhci"
     package-dir: "arm-azurestackhci"
     emitter-output-dir: "{output-dir}/{service-dir}/{package-dir}"

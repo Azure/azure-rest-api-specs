@@ -569,6 +569,7 @@ model WorkspaceCustomParameters {
   /**
    * Boolean indicating whether the public IP should be disabled. Default value is true. Not allowed in Serverless ComputeMode workspace.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   enableNoPublicIp?: WorkspaceNoPublicIPBooleanParameter;
 
   /**
@@ -589,6 +590,7 @@ model WorkspaceCustomParameters {
   /**
    * Name of the Public IP for No Public IP workspace with managed vNet. Not allowed in Serverless ComputeMode workspace.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   publicIpName?: WorkspaceCustomStringParameter;
 
   /**
@@ -1113,6 +1115,7 @@ model Resource {
 /**
  * Contains details when the response code indicates an error.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**
@@ -1250,70 +1253,6 @@ model GroupIdInformationProperties {
  */
 model PrivateEndpointConnectionsList
   is Azure.Core.Page<PrivateEndpointConnection>;
-
-/**
- * Egress endpoints which Workspace connects to for common purposes.
- */
-model OutboundEnvironmentEndpoint {
-  /**
-   * The category of endpoints accessed by the Workspace, e.g. azure-storage, azure-mysql, etc.
-   */
-  category?: string;
-
-  /**
-   * The endpoints that Workspace connect to
-   */
-  @identifiers(#[])
-  endpoints?: EndpointDependency[];
-}
-
-/**
- * Collection of outbound network dependency endpoints
- */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Existing model from original swagger"
-@identifiers(#[])
-model OutboundEnvironmentEndpointCollection is OutboundEnvironmentEndpoint[];
-
-/**
- * A domain name or IP address the Workspace is reaching at.
- */
-model EndpointDependency {
-  /**
-   * The domain name of the dependency.
-   */
-  domainName?: string;
-
-  /**
-   * The Ports used when connecting to domainName.
-   */
-  @identifiers(#[])
-  endpointDetails?: EndpointDetail[];
-}
-
-/**
- * Connect information from the Workspace to a single endpoint.
- */
-model EndpointDetail {
-  /**
-   * An IP Address that Domain Name currently resolves to.
-   */
-  ipAddress?: string;
-
-  /**
-   * The port an endpoint is connected to.
-   */
-  port?: int32;
-
-  /**
-   * The time in milliseconds it takes for the connection to be created from the Workspace to this IpAddress at this Port.
-   */
-  latency?: float64;
-
-  /**
-   * Whether it is possible to create a connection from the Workspace to this IpAddress at this Port.
-   */
-  isAccessible?: boolean;
-}
 
 /**
  * Properties of the virtual network peering.

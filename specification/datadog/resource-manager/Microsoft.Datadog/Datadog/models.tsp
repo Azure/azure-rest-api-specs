@@ -169,6 +169,7 @@ union Status {
 /**
  * Response of a list operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DatadogAgreementResourceListResponse
   is Azure.Core.Page<DatadogAgreementResource>;
 
@@ -307,6 +308,7 @@ model DatadogApplicationKey {
 /**
  * Response of a list operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DatadogApiKeyListResponse is Azure.Core.Page<DatadogApiKey>;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -336,6 +338,7 @@ model DatadogApiKey {
 /**
  * Response of a list operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DatadogHostListResponse is Azure.Core.Page<DatadogHost>;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -401,6 +404,7 @@ model DatadogLogsAgent {
 /**
  * Response of a list operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model LinkedResourceListResponse is Azure.Core.Page<LinkedResource>;
 
 /**
@@ -421,6 +425,7 @@ model LinkedResource {
 /**
  * Response of a list operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model MonitoredResourceListResponse is Azure.Core.Page<MonitoredResource>;
 
 /**
@@ -501,6 +506,7 @@ model OperationDisplay {
 /**
  * Response of a list operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DatadogMonitorResourceListResponse
   is Azure.Core.Page<DatadogMonitorResource>;
 
@@ -875,6 +881,7 @@ model DatadogSetPasswordLink {
 /**
  * Response of a list operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model MonitoringTagRulesListResponse is Azure.Core.Page<MonitoringTagRules>;
 
 /**
@@ -984,6 +991,7 @@ model AgentRules {
 /**
  * Response of a list operation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DatadogSingleSignOnResourceListResponse
   is Azure.Core.Page<DatadogSingleSignOnResource>;
 

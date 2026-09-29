@@ -1,0 +1,74 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2026-04-01",
+    "capacityReservationGroupName": "openCapacityReservationGroup",
+    "$expand": "instanceView"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/CapacityReservationGroups/openCapacityReservationGroup",
+        "properties": {
+          "capacityReservations": [
+            {
+              "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/openCapacityReservationGroup/capacityReservations/openCapacityReservation1"
+            }
+          ],
+          "sharingProfile": {
+            "subscriptionIds": [
+              {
+                "id": "/subscriptions/{subscription-id1}"
+              },
+              {
+                "id": "/subscriptions/{subscription-id2}"
+              }
+            ]
+          },
+          "instanceView": {
+            "capacityReservations": [
+              {
+                "name": "openCapacityReservation1",
+                "utilizationInfo": {
+                  "currentCapacity": 10,
+                  "usedReservedCountBySubscription": {
+                    "{subscription-id1}": 3,
+                    "{subscription-id2}": 2
+                  }
+                },
+                "statuses": [
+                  {
+                    "code": "ProvisioningState/succeeded",
+                    "level": "Info",
+                    "displayStatus": "Provisioning succeeded"
+                  }
+                ]
+              }
+            ],
+            "sharedSubscriptionIds": [
+              {
+                "id": "/subscriptions/{subscription-id1}"
+              },
+              {
+                "id": "/subscriptions/{subscription-id2}"
+              }
+            ]
+          },
+          "reservationType": "Open"
+        },
+        "location": "westus",
+        "tags": {
+          "{tagName}": "{tagValue}"
+        },
+        "name": "openCapacityReservationGroup",
+        "zones": [
+          "1",
+          "2"
+        ]
+      }
+    }
+  },
+  "operationId": "CapacityReservationGroups_Get",
+  "title": "Get an open capacity reservation group with instance view."
+}

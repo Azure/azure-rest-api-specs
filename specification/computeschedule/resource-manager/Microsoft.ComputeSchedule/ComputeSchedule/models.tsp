@@ -645,6 +645,7 @@ model FlexProperties {
   @maxItems(5)
   vmSizeProfiles: Array<VmSizeProfile>;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @doc("The operating system type for the VMs")
   osType: OsType;
 
