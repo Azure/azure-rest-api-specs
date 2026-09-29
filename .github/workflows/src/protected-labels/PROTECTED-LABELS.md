@@ -30,7 +30,7 @@ some-approval-label:
   - user2
 
 # Plane-aware: different approvers depending on whether the PR
-# is management-plane (has Mgmt/resource-manager label) or data-plane
+# is management-plane (has resource-manager label) or data-plane
 package-name-dotnet-approved:
   management-plane:
     - user1
@@ -50,7 +50,7 @@ typespec-suppressions-approved:
 
 Values are GitHub handles (case-insensitive). Plane detection uses PR labels explicitly:
 
-- `Mgmt` or `resource-manager` → management-plane
+- `resource-manager` → management-plane
 - `data-plane` → data-plane
 - Neither → plane-aware labels are not enforced (no action taken)
 

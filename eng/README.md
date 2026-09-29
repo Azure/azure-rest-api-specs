@@ -6,6 +6,12 @@ For context on this directory, see [Design guidelines for spec repos validation 
 
 ## Contributor readiness
 
+Contributor readiness runs only for PRs that change `specification/`, including
+mixed specification and engineering changes. Engineering-only PRs are skipped
+without account checks or a readiness comment/check, including review events and
+manual `/azsdk check-access` requests. The PR-event notifier uses a path filter;
+the publisher verifies current changed files for every trigger.
+
 The advisory **Contributor readiness** check reports public Microsoft/Azure
 membership visibility and effective repository access for the PR author, commit
 authors/committers, and all submitted reviewers. It does not change merge rules.
@@ -16,6 +22,8 @@ The comment groups findings by affected user: ðŸ”´ marks a confirmed issue and ð
 marks checks that could not be verified. It links to
 [setup and access renewal](https://aka.ms/azsdk/access); users without findings
 are omitted to keep the report short. The job summary shows the same report.
+Organization names in membership findings link to the organization's People page,
+with the affected user's login prefilled in the search.
 
 After changing access, comment `/azsdk check-access` on the PR. The PR author,
 resolved commit participants, submitted reviewers and maintainers can refresh,

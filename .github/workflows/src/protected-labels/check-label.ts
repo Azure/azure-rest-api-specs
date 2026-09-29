@@ -115,7 +115,7 @@ export default async function checkLabel({ github, context, core }: GitHubScript
   }
   if (authorization.status === "unknown-plane") {
     core.info(
-      `"${labelName}" is plane-aware but PR has no plane label (Mgmt/resource-manager/data-plane), skipping`,
+      `"${labelName}" is plane-aware but PR has no plane label (resource-manager/data-plane), skipping`,
     );
     return;
   }
