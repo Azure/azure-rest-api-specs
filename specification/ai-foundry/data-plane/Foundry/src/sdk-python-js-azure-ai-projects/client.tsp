@@ -6,6 +6,8 @@
 // Stable operations (GA routes) with preview features (optional opt-in request headers)
 import "../agents/routes.tsp";
 import "../evaluation-rules/routes.tsp";
+import "../data_generation_jobs/routes.tsp";
+import "../sdk-common/ops-relocation-datasets.tsp";
 
 // Stable operation (GA routes) without preview features
 import "../agents-optimization/routes.tsp";
@@ -29,7 +31,6 @@ import "../schedules/routes.tsp";
 import "../toolboxes/routes.tsp";
 import "../skills/routes.tsp";
 import "../agents-session-files/routes.tsp";
-import "../data_generation_jobs/routes.tsp";
 //import "../evaluation-suites/routes.tsp";
 
 // Create a ".beta" subclient for the above beta operations
@@ -197,11 +198,17 @@ using Azure.AI.Projects;
 // --------------------------------------------------------------------------------
 
 // Shorter method names for SDK datasets operations
-@@clientName(Datasets.listLatest, "list");
-@@clientName(Datasets.getVersion, "get");
-@@clientName(Datasets.deleteVersion, "delete");
-@@clientName(Datasets.createOrUpdateVersion, "createOrUpdate");
-@@clientName(Datasets.startPendingUploadVersion, "pendingUpload");
+@@clientName(Azure.AI.Projects.Datasets.listLatest, "list");
+@@clientName(Azure.AI.Projects.Datasets.getVersion, "get");
+@@clientName(Azure.AI.Projects.Datasets.deleteVersion, "delete");
+@@clientName(
+  Azure.AI.Projects.Datasets.createOrUpdateVersion,
+  "createOrUpdate"
+);
+@@clientName(
+  Azure.AI.Projects.Datasets.startPendingUploadVersion,
+  "pendingUpload"
+);
 
 // Data generation jobs — renamed for SDK discoverability
 @@clientName(DataGenerationJobs.get, "getGenerationJob");
