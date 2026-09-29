@@ -89,7 +89,7 @@ alias ExpressRouteLagAuthorizationLroHeaders = ArmAsyncOperationHeader<
   Azure.Core.Foundations.RetryAfterHeader;
 
 /** The request has succeeded. */
-model ExpressRouteLagAuthorizationUpdatedResponse {
+model ExpressRouteLagAuthorizationUpdatedResult {
   ...ArmResourceUpdatedResponse<ExpressRouteLagAuthorization>;
   ...ExpressRouteLagAuthorizationLroHeaders;
 }
@@ -115,7 +115,7 @@ interface ExpressRouteLagAuthorizations {
   createOrUpdate is ExpressRouteLagAuthorizationOps.CreateOrUpdateAsync<
     ExpressRouteLagAuthorization,
     Response =
-      | ExpressRouteLagAuthorizationUpdatedResponse
+      | ExpressRouteLagAuthorizationUpdatedResult
       | ArmResourceCreatedResponse<
           ExpressRouteLagAuthorization,
           ExpressRouteLagAuthorizationLroHeaders
