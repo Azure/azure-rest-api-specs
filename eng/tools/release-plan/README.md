@@ -60,12 +60,3 @@ falling back to an unpinned target.
 
 Tests include initial creation, same-version follow-up, metadata refresh, and generation using the
 newly saved SHA. Generation completion, SDK publishing, and notification policies are unchanged.
-
-### Live checkout probe
-
-`eng/pipelines/release-plan-sha-test.yml` is a manual-only pipeline named
-`TEST - release-plan SHA handoff 16848`. Queue it with an explicit native source version and source ref.
-It compares the agent's Git HEAD with `Build.SourceVersion` and publishes `sha-handoff-evidence`.
-SDK pipeline parameters are recorded but never used to generate SDKs, create PRs, or publish packages.
-The probe verifies SHA transport and checkout, not TypeSpec compilation or SDK output. Only test-tagged
-release plans should be used for caller-side persistence tests; retire them after validation.
