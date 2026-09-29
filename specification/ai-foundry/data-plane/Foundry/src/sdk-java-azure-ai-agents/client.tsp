@@ -923,6 +923,26 @@ using Azure.AI.Projects;
 @@clientName(AgentOptimizationJobs.list, "listOptimizationJobs", "java");
 @@clientName(AgentOptimizationJobs.cancel, "cancelOptimizationJob", "java");
 @@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob", "java");
+@@clientName(
+  AgentOptimizationJobs.estimate,
+  "estimateOptimizationJob",
+  "java"
+);
+@@clientName(
+  AgentOptimizationJobCandidates.listCandidates,
+  "listOptimizationCandidates",
+  "java"
+);
+@@clientName(
+  AgentOptimizationJobCandidates.getCandidate,
+  "getOptimizationCandidate",
+  "java"
+);
+@@clientName(
+  AgentOptimizationJobCandidates.promoteCandidate,
+  "promoteOptimizationCandidate",
+  "java"
+);
 
 // Voice Agent Renames
 @@clientName(
