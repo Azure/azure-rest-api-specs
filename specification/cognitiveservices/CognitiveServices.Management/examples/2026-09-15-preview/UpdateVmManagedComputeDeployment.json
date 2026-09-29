@@ -8,9 +8,11 @@
     "deploymentName": "gpt-oss-120b-byoc",
     "api-version": "2026-09-15-preview",
     "properties": {
-      "tags": {
-        "environment": "test",
-        "owner": "model-team"
+      "properties": {
+        "deploymentParameters": {
+          "scoringPort": 8080,
+          "maxConcurrentRequestsPerInstance": 16
+        }
       },
       "sku": {
         "name": "VmManagedCompute",
@@ -31,11 +33,26 @@
             "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.ManagedIdentity/userAssignedIdentities/deployment-identity": {}
           }
         },
-        "tags": {
-          "environment": "test",
-          "owner": "model-team"
-        },
         "properties": {
+          "deploymentParameters": {
+            "servedModelName": "gpt-oss-120b",
+            "maxModelLength": 32768,
+            "engineType": "Vllm",
+            "environmentVariables": [
+              {
+                "name": "VLLM_LOGGING_LEVEL",
+                "value": "INFO"
+              }
+            ],
+            "readinessProbe": {
+              "path": "/health",
+              "initialDelaySeconds": 30,
+              "periodSeconds": 10
+            },
+            "projectStorageConnectionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/projects/my-project/connections/my-storage-connection",
+            "scoringPort": 8080,
+            "maxConcurrentRequestsPerInstance": 16
+          },
           "model": "azureml://registries/azureml-openai-oss/models/gpt-oss-120b/versions/4",
           "deploymentTemplate": "projects/my-project/deploymentTemplates/gpt-oss-120b-vllm-tuned/versions/2",
           "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/computes/my-h100-pool",

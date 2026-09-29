@@ -5650,6 +5650,9 @@
           },
           "CreateOrUpdateVmManagedComputeDeployment": {
             "$ref": "./examples/CreateOrUpdateVmManagedComputeDeployment.json"
+          },
+          "CreateOrUpdateVmManagedComputeDeploymentCustomImage": {
+            "$ref": "./examples/CreateOrUpdateVmManagedComputeDeploymentCustomImage.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -18914,18 +18917,6 @@
             "create"
           ]
         },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
         "etag": {
           "type": "string",
           "description": "Resource Etag.",
@@ -18936,6 +18927,27 @@
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
+      ]
+    },
+    "ManagedComputeDeploymentEnvironmentVariable": {
+      "type": "object",
+      "description": "Container environment variable for a managed compute deployment.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Environment variable name. It must start with a letter or underscore and contain only letters, digits and underscores.",
+          "maxLength": 256,
+          "pattern": "^[A-Za-z_][A-Za-z0-9_]*$"
+        },
+        "value": {
+          "type": "string",
+          "description": "Environment variable value. Do not include secrets.",
+          "maxLength": 4096
+        }
+      },
+      "required": [
+        "name",
+        "value"
       ]
     },
     "ManagedComputeDeploymentInfo": {
@@ -18984,6 +18996,203 @@
         }
       }
     },
+    "ManagedComputeDeploymentParameters": {
+      "type": "object",
+      "description": "Non-secret runtime parameters for a VmManagedCompute deployment. Supported only when sku.name is VmManagedCompute; other SKUs are rejected.",
+      "properties": {
+        "instanceType": {
+          "type": "string",
+          "description": "Instance type that overrides the deployment template default. Immutable after creation.",
+          "minLength": 1,
+          "maxLength": 8192,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "instanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of nodes allocated to each model instance. This is distinct from sku.capacity, which sets the number of model instances.",
+          "minimum": 1
+        },
+        "servedModelName": {
+          "type": "string",
+          "description": "Model name exposed by the serving runtime. When omitted, it is derived from the model.",
+          "minLength": 1,
+          "maxLength": 8192
+        },
+        "maxModelLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum context length passed to a managed serving engine. When omitted, the engine derives it from the model configuration.",
+          "minimum": 1
+        },
+        "scoringPath": {
+          "type": "string",
+          "description": "Absolute container path that receives scoring requests, for example /v1/chat/completions.",
+          "minLength": 1,
+          "maxLength": 8192
+        },
+        "scoringPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Container port that receives scoring requests.",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "modelMountPath": {
+          "type": "string",
+          "description": "Absolute Linux path where the model is mounted in the container.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "livenessProbe": {
+          "$ref": "#/definitions/ManagedComputeDeploymentProbe",
+          "description": "Liveness probe override. successThreshold must be 1."
+        },
+        "readinessProbe": {
+          "$ref": "#/definitions/ManagedComputeDeploymentProbe",
+          "description": "Readiness probe override."
+        },
+        "environmentVariables": {
+          "type": "array",
+          "description": "Non-secret container environment variables. Names must be unique. The combined JSON encoding of all names and values must not exceed 8192 characters.",
+          "maxItems": 128,
+          "items": {
+            "$ref": "#/definitions/ManagedComputeDeploymentEnvironmentVariable"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "engineType": {
+          "$ref": "#/definitions/ManagedComputeEngineType",
+          "description": "Serving engine. Defaults to Vllm."
+        },
+        "launchMode": {
+          "$ref": "#/definitions/ManagedComputeLaunchMode",
+          "description": "Container launch mode. Defaults to Managed. The Custom engine requires ImageDefault or Override."
+        },
+        "containerCommand": {
+          "type": "array",
+          "description": "Container command. Supported only when launchMode is Override. Each item is limited to 4096 characters, and the JSON-encoded list to 8192 characters.",
+          "minItems": 1,
+          "maxItems": 64,
+          "items": {
+            "type": "string"
+          }
+        },
+        "containerArguments": {
+          "type": "array",
+          "description": "Container arguments. Supported only when launchMode is Override. Each item is limited to 4096 characters, and the JSON-encoded list to 8192 characters.",
+          "maxItems": 256,
+          "items": {
+            "type": "string"
+          }
+        },
+        "requestTimeoutInMilliseconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Scoring request timeout, in milliseconds.",
+          "minimum": 1
+        },
+        "maxConcurrentRequestsPerInstance": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of concurrent scoring requests for each instance.",
+          "minimum": 1
+        },
+        "projectStorageConnectionId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Resource ID of the Azure Storage connection in the deployment's project used to stage deployment artifacts. Required when the project has any Azure Storage connection.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.CognitiveServices/accounts/projects/connections"
+              }
+            ]
+          }
+        },
+        "image": {
+          "type": "string",
+          "description": "Container image reference including the registry host, for example contoso.azurecr.io/repository:tag. The deployment identity must be able to pull it. Immutable after creation.",
+          "minLength": 1,
+          "maxLength": 8192,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "ManagedComputeDeploymentPatchProperties": {
+      "type": "object",
+      "description": "Properties that may be changed through a managed compute deployment PATCH.",
+      "properties": {
+        "deploymentParameters": {
+          "$ref": "#/definitions/ManagedComputeDeploymentParameters",
+          "description": "Runtime parameters for a VmManagedCompute deployment. Omitted parameters are unchanged, and a supplied array replaces the current array. To remove a parameter override, replace the deployment with PUT."
+        }
+      }
+    },
+    "ManagedComputeDeploymentProbe": {
+      "type": "object",
+      "description": "HTTP probe settings for a managed compute deployment container.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "Absolute HTTP path to probe.",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "initialDelaySeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Seconds to wait after container start before the first probe.",
+          "minimum": 0,
+          "maximum": 86400
+        },
+        "periodSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Seconds between probes.",
+          "minimum": 1,
+          "maximum": 86400
+        },
+        "timeoutSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Seconds before a probe times out.",
+          "minimum": 1,
+          "maximum": 86400
+        },
+        "failureThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Consecutive failures required to mark the probe failed.",
+          "minimum": 1
+        },
+        "successThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Consecutive successes required to mark the probe successful.",
+          "minimum": 1
+        },
+        "port": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Container port to probe.",
+          "minimum": 1,
+          "maximum": 65535
+        },
+        "scheme": {
+          "$ref": "#/definitions/ManagedComputeProbeScheme",
+          "description": "Probe scheme."
+        }
+      }
+    },
     "ManagedComputeDeploymentProperties": {
       "type": "object",
       "description": "Properties of a Cognitive Services managed compute deployment.",
@@ -19026,6 +19235,15 @@
           "description": "Configuration used to authorize access to a gated model during deployment creation.",
           "x-ms-mutability": [
             "read",
+            "create"
+          ]
+        },
+        "deploymentParameters": {
+          "$ref": "#/definitions/ManagedComputeDeploymentParameters",
+          "description": "Runtime parameters for a VmManagedCompute deployment.",
+          "x-ms-mutability": [
+            "read",
+            "update",
             "create"
           ]
         },
@@ -19116,6 +19334,90 @@
           "type": "string",
           "description": "Relative path to the messages API scoring endpoint."
         }
+      }
+    },
+    "ManagedComputeEngineType": {
+      "type": "string",
+      "description": "Serving engine for a managed compute deployment.",
+      "enum": [
+        "Vllm",
+        "SGLang",
+        "Custom"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedComputeEngineType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Vllm",
+            "value": "Vllm",
+            "description": "Managed vLLM serving."
+          },
+          {
+            "name": "SGLang",
+            "value": "SGLang",
+            "description": "Managed SGLang serving."
+          },
+          {
+            "name": "Custom",
+            "value": "Custom",
+            "description": "Custom engine launched from the container image."
+          }
+        ]
+      }
+    },
+    "ManagedComputeLaunchMode": {
+      "type": "string",
+      "description": "Container launch mode for a managed compute deployment.",
+      "enum": [
+        "Managed",
+        "ImageDefault",
+        "Override"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedComputeLaunchMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Managed",
+            "value": "Managed",
+            "description": "The service launches the selected managed engine."
+          },
+          {
+            "name": "ImageDefault",
+            "value": "ImageDefault",
+            "description": "The container image's default command and arguments are used."
+          },
+          {
+            "name": "Override",
+            "value": "Override",
+            "description": "containerCommand and containerArguments are used."
+          }
+        ]
+      }
+    },
+    "ManagedComputeProbeScheme": {
+      "type": "string",
+      "description": "Scheme for a managed compute deployment probe.",
+      "enum": [
+        "Http",
+        "Https"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedComputeProbeScheme",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Http",
+            "value": "Http",
+            "description": "Probe the container over HTTP."
+          },
+          {
+            "name": "Https",
+            "value": "Https",
+            "description": "Probe the container over HTTPS."
+          }
+        ]
       }
     },
     "ManagedComputeUsage": {
@@ -20211,17 +20513,9 @@
           "$ref": "#/definitions/Sku",
           "description": "The resource model definition representing SKU"
         },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
+        "properties": {
+          "$ref": "#/definitions/ManagedComputeDeploymentPatchProperties",
+          "description": "Deployment properties that can be updated by PATCH."
         }
       }
     },
