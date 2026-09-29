@@ -1,3 +1,4 @@
+import { ConsoleLogger, defaultLogger } from "@azure-tools/specs-shared/logger";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { FormatRule } from "../src/rules/format.ts";
 import { gitDiffTopSpecFolder, runNodeBin } from "../src/utils.ts";
@@ -22,11 +23,13 @@ describe("FormatRule", () => {
   it("formats TypeSpec and tspconfig.yaml directly in one command before checking for changes", async () => {
     vi.mocked(runNodeBin).mockResolvedValueOnce([null, "tsp output\n", "tsp warning\n"]);
 
-    const result = await new FormatRule().execute(mockFolder);
+    const logger = new ConsoleLogger(true);
+    const result = await new FormatRule().execute(mockFolder, logger);
 
     expect(runNodeBin).toHaveBeenCalledWith(
       "@typespec/compiler",
       ["tsp", "format", "../**/*.tsp", "tspconfig.yaml"],
+      logger,
       mockFolder,
     );
     expect(runNodeBin).toHaveBeenCalledTimes(1);
@@ -45,7 +48,7 @@ describe("FormatRule", () => {
       "tsp stderr\n",
     ]);
 
-    const result = await new FormatRule().execute(mockFolder);
+    const result = await new FormatRule().execute(mockFolder, defaultLogger);
 
     expect(result).toEqual({
       success: false,
@@ -63,7 +66,7 @@ describe("FormatRule", () => {
       errorOutput: "changed tspconfig.yaml",
     });
 
-    const result = await new FormatRule().execute(mockFolder);
+    const result = await new FormatRule().execute(mockFolder, defaultLogger);
 
     expect(result.success).toBe(false);
     expect(result.stdOutput).toBe("git output");

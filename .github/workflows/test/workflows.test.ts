@@ -1,14 +1,41 @@
-import { copyFile, mkdir, mkdtemp, readdir, rm, writeFile } from "fs/promises";
+import { copyFile, mkdir, mkdtemp, readFile, readdir, rm, writeFile } from "fs/promises";
+import { load } from "js-yaml";
 import { tmpdir } from "os";
 import { dirname, extname, resolve } from "path";
 import { fileURLToPath } from "url";
 import { describe, expect, it } from "vitest";
+import * as z from "zod";
 import { execFile } from "../../shared/src/exec.ts";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const workflowsDir = resolve(__dirname, "..");
 
 describe("workflow files", () => {
+  it.each(["typespec-validation.yaml", "typespec-validation-all.yaml"])(
+    "%s enables TSV verbosity only for debug runs",
+    async (file) => {
+      const workflow = z
+        .object({
+          jobs: z.record(
+            z.string(),
+            z.object({
+              steps: z.array(z.object({ run: z.string().optional() })),
+            }),
+          ),
+        })
+        .parse(load(await readFile(resolve(workflowsDir, file), "utf8")));
+      const commands = Object.values(workflow.jobs)
+        .flatMap((job) => job.steps)
+        .flatMap((step) =>
+          step.run?.includes("node eng/tools/typespec-validation/cmd/tsv.js") ? [step.run] : [],
+        );
+      expect(commands).toHaveLength(1);
+      const debugFlag = "${{ runner.debug == '1' && '--verbose' || '' }}";
+      expect(commands[0]).toContain(debugFlag);
+      expect(commands[0].replace(debugFlag, "")).not.toContain("--verbose");
+    },
+  );
+
   it("should be named *.yaml or *.md", async () => {
     const entries = await readdir(workflowsDir, { withFileTypes: true });
 

@@ -1,4 +1,3 @@
-import debug from "debug";
 import { readFile } from "fs/promises";
 import path from "path";
 import { simpleGit } from "simple-git";
@@ -7,9 +6,6 @@ import { type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
 import { parse } from "../tsp-config.ts";
 import { fileExists, getSuppressions, normalizePath, readTspConfig } from "../utils.ts";
-
-// Enable simple-git debug logging to improve console output
-debug.enable("simple-git");
 
 export class FolderStructureRule implements Rule {
   readonly name = "FolderStructure";

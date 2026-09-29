@@ -1,3 +1,4 @@
+import type { ILogger } from "@azure-tools/specs-shared/logger";
 import {
   generateTypeSpecMetadata,
   type TypeSpecMetadata,
@@ -55,7 +56,7 @@ export class StaleApiVersionPinRule implements Rule {
   readonly description = "Detect SDK emitters pinned to an API version older than the new one";
   readonly suppressable = true;
 
-  async execute(folder: string): Promise<RuleResult> {
+  async execute(folder: string, logger: ILogger): Promise<RuleResult> {
     const resolved = await resolveNewApiVersions(folder);
     if (resolved.kind === "skip") return resolved.result;
 
@@ -64,7 +65,7 @@ export class StaleApiVersionPinRule implements Rule {
     }
 
     try {
-      const metadata = await generateTypeSpecMetadata(folder);
+      const metadata = await generateTypeSpecMetadata(folder, { logger });
       const result = evaluateStaleApiVersionPin(metadata, resolved.newApiVersions[0]);
       if (result.success) {
         return result;

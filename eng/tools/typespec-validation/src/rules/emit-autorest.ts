@@ -1,5 +1,6 @@
+import type { ILogger } from "@azure-tools/specs-shared/logger";
 import { join } from "path";
-import { type RuleResult } from "../rule-result.ts";
+import { failure, type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
 import { parse } from "../tsp-config.ts";
 import { fileExists, readTspConfig } from "../utils.ts";
@@ -11,35 +12,27 @@ export class EmitAutorestRule implements Rule {
 
   readonly suppressable = true;
 
-  async execute(folder: string): Promise<RuleResult> {
-    let success = true;
-    let stdOutput = "";
-    let errorOutput = "";
-
+  async execute(folder: string, logger: ILogger): Promise<RuleResult> {
     const mainTspExists = await fileExists(join(folder, "main.tsp"));
-    stdOutput += `mainTspExists: ${mainTspExists}\n`;
+    logger.debug(`mainTspExists: ${mainTspExists}`);
 
     if (mainTspExists) {
       const configText = await readTspConfig(folder);
-      const config = parse(configText);
+      const config = parse(configText, join(folder, "tspconfig.yaml"));
 
       const emit = config?.emit;
-      stdOutput += `emit: ${JSON.stringify(emit)}\n`;
-
+      logger.debug(`emit: ${JSON.stringify(emit)}`);
       if (!emit?.includes("@azure-tools/typespec-autorest")) {
-        success = false;
-        errorOutput +=
-          "tspconfig.yaml must include the following emitter by default:\n" +
-          "\n" +
-          "emit:\n" +
-          '  - "@azure-tools/typespec-autorest"\n';
+        return failure(
+          "emit-autorest",
+          'The default emit list must include "@azure-tools/typespec-autorest".',
+          {
+            path: join(folder, "tspconfig.yaml"),
+            help: 'Add "@azure-tools/typespec-autorest" to "emit".',
+          },
+        );
       }
     }
-
-    return {
-      success: success,
-      stdOutput: stdOutput,
-      errorOutput: errorOutput,
-    };
+    return { success: true, ...(mainTspExists ? {} : { skipped: "main.tsp not found" }) };
   }
 }
