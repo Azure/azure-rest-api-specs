@@ -57384,24 +57384,24 @@
         },
         "source": {
           "type": "string",
-          "description": "Where to look up the settings. Default: \"appSettings\". Each connection pulls\nfrom exactly one source — create separate connections if you need settings\nfrom both sources.",
-          "default": "appSettings",
+          "description": "Where to look up the settings. Default: \"AppSettings\". Each connection pulls\nfrom exactly one source — create separate connections if you need settings\nfrom both sources.",
+          "default": "AppSettings",
           "enum": [
-            "appSettings",
-            "connectionStrings"
+            "AppSettings",
+            "ConnectionStrings"
           ],
           "x-ms-enum": {
             "name": "VirtualConnectionSettingSource",
             "modelAsString": true,
             "values": [
               {
-                "name": "appSettings",
-                "value": "appSettings",
+                "name": "AppSettings",
+                "value": "AppSettings",
                 "description": "App Settings (config/appsettings)."
               },
               {
-                "name": "connectionStrings",
-                "value": "connectionStrings",
+                "name": "ConnectionStrings",
+                "value": "ConnectionStrings",
                 "description": "Connection Strings (config/connectionstrings)."
               }
             ]
@@ -57413,11 +57413,11 @@
         },
         "auth": {
           "$ref": "#/definitions/VirtualConnectionAuthType",
-          "description": "Authentication strategy for the backend connection.\n\"credential\" — proxy injects the original secret (from setting value).\n\"managedIdentity\" — proxy acquires a managed identity token for upstream auth."
+          "description": "Authentication strategy for the backend connection.\n\"Credential\" — proxy injects the original secret (from setting value).\n\"ManagedIdentity\" — proxy acquires a managed identity token for upstream auth."
         },
         "identityScope": {
           "type": "string",
-          "description": "Managed Identity scope for token acquisition. Only relevant when auth=managedIdentity.\nOptional — the platform infers a default scope from protocol + host.\nSpecify explicitly for custom hosts or non-standard resource URIs."
+          "description": "Managed Identity scope for token acquisition. Only relevant when auth=ManagedIdentity.\nOptional — the platform infers a default scope from protocol + host.\nSpecify explicitly for custom hosts or non-standard resource URIs."
         },
         "identityResourceId": {
           "type": "string",
@@ -57433,7 +57433,7 @@
         },
         "credentialInjection": {
           "$ref": "#/definitions/VirtualConnectionCredentialInjection",
-          "description": "How to inject a standalone credential into upstream HTTP requests.\nRequired when protocol=http + auth=credential and the credential is a\nseparate setting. Not needed for role=\"value\" or auth=managedIdentity."
+          "description": "How to inject a standalone credential into upstream HTTP requests.\nRequired when protocol=Http + auth=Credential and the credential is a\nseparate setting. Not needed for role=\"Value\" or auth=ManagedIdentity."
         }
       },
       "required": [
@@ -57446,21 +57446,21 @@
       "type": "string",
       "description": "Authentication strategy for upstream connections.",
       "enum": [
-        "credential",
-        "managedIdentity"
+        "Credential",
+        "ManagedIdentity"
       ],
       "x-ms-enum": {
         "name": "VirtualConnectionAuthType",
         "modelAsString": true,
         "values": [
           {
-            "name": "credential",
-            "value": "credential",
+            "name": "Credential",
+            "value": "Credential",
             "description": "Proxy injects the original credential from the setting value."
           },
           {
-            "name": "managedIdentity",
-            "value": "managedIdentity",
+            "name": "ManagedIdentity",
+            "value": "ManagedIdentity",
             "description": "Proxy acquires a Managed Identity token for upstream auth."
           }
         ]
@@ -57468,7 +57468,7 @@
     },
     "VirtualConnectionCredentialInjection": {
       "type": "object",
-      "description": "Describes how the proxy injects a standalone credential setting into upstream\nHTTP requests. Only applies when protocol=http and the credential is a\nseparate setting (not embedded in a value/URL).",
+      "description": "Describes how the proxy injects a standalone credential setting into upstream\nHTTP requests. Only applies when protocol=Http and the credential is a\nseparate setting (not embedded in a value/URL).",
       "properties": {
         "header": {
           "type": "string",
@@ -57487,33 +57487,33 @@
       "type": "string",
       "description": "Protocol for the backend service.",
       "enum": [
-        "http",
-        "tds",
-        "redis",
-        "postgres"
+        "Http",
+        "Tds",
+        "Redis",
+        "Postgres"
       ],
       "x-ms-enum": {
         "name": "VirtualConnectionProtocol",
         "modelAsString": true,
         "values": [
           {
-            "name": "http",
-            "value": "http",
+            "name": "Http",
+            "value": "Http",
             "description": "HTTP/HTTPS (Azure Storage, Cosmos DB REST, Key Vault, custom APIs)."
           },
           {
-            "name": "tds",
-            "value": "tds",
+            "name": "Tds",
+            "value": "Tds",
             "description": "TDS (Azure SQL, SQL Server)."
           },
           {
-            "name": "redis",
-            "value": "redis",
+            "name": "Redis",
+            "value": "Redis",
             "description": "RESP (Azure Cache for Redis)."
           },
           {
-            "name": "postgres",
-            "value": "postgres",
+            "name": "Postgres",
+            "value": "Postgres",
             "description": "PostgreSQL wire protocol (Azure Database for PostgreSQL)."
           }
         ]
@@ -57525,7 +57525,7 @@
       "properties": {
         "role": {
           "$ref": "#/definitions/VirtualConnectionSettingRole",
-          "description": "The role this setting plays in the connection. The platform uses this to\ndetermine runtime behavior:\n- \"credential\" settings are masked (app never sees the real value).\n- \"host\"/\"value\" settings identify the intercept target.\n- \"username\" settings feed protocol auth construction."
+          "description": "The role this setting plays in the connection. The platform uses this to\ndetermine runtime behavior:\n- \"Credential\" settings are masked (app never sees the real value).\n- \"Host\"/\"Value\" settings identify the intercept target.\n- \"Username\" settings feed protocol auth construction."
         }
       },
       "required": [
@@ -57536,33 +57536,33 @@
       "type": "string",
       "description": "The role a setting plays in a connection.",
       "enum": [
-        "host",
-        "credential",
-        "username",
-        "value"
+        "Host",
+        "Credential",
+        "Username",
+        "Value"
       ],
       "x-ms-enum": {
         "name": "VirtualConnectionSettingRole",
         "modelAsString": true,
         "values": [
           {
-            "name": "host",
-            "value": "host",
+            "name": "Host",
+            "value": "Host",
             "description": "Plain hostname or IP — identifies the intercept target."
           },
           {
-            "name": "credential",
-            "value": "credential",
+            "name": "Credential",
+            "value": "Credential",
             "description": "Standalone secret (password, key, SAS token) — masked from app, used or replaced by proxy."
           },
           {
-            "name": "username",
-            "value": "username",
+            "name": "Username",
+            "value": "Username",
             "description": "Standalone username — used for protocol auth construction (e.g., Redis ACL OID)."
           },
           {
-            "name": "value",
-            "value": "value",
+            "name": "Value",
+            "value": "Value",
             "description": "Composite value (connection string, SAS URL, DSN, Redis URI) — proxy parses based on protocol."
           }
         ]

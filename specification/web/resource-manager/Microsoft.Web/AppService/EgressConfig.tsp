@@ -80,24 +80,24 @@ model VirtualConnection {
   settings: Record<VirtualConnectionSetting>;
 
   /**
-   * Where to look up the settings. Default: "appSettings". Each connection pulls
+   * Where to look up the settings. Default: "AppSettings". Each connection pulls
    * from exactly one source — create separate connections if you need settings
    * from both sources.
    */
-  source?: VirtualConnectionSettingSource = VirtualConnectionSettingSource.appSettings;
+  source?: VirtualConnectionSettingSource = VirtualConnectionSettingSource.AppSettings;
 
   /** Protocol for the backend service. */
   protocol: VirtualConnectionProtocol;
 
   /**
    * Authentication strategy for the backend connection.
-   * "credential" — proxy injects the original secret (from setting value).
-   * "managedIdentity" — proxy acquires a managed identity token for upstream auth.
+   * "Credential" — proxy injects the original secret (from setting value).
+   * "ManagedIdentity" — proxy acquires a managed identity token for upstream auth.
    */
   auth: VirtualConnectionAuthType;
 
   /**
-   * Managed Identity scope for token acquisition. Only relevant when auth=managedIdentity.
+   * Managed Identity scope for token acquisition. Only relevant when auth=ManagedIdentity.
    * Optional — the platform infers a default scope from protocol + host.
    * Specify explicitly for custom hosts or non-standard resource URIs.
    */
@@ -116,15 +116,15 @@ model VirtualConnection {
 
   /**
    * How to inject a standalone credential into upstream HTTP requests.
-   * Required when protocol=http + auth=credential and the credential is a
-   * separate setting. Not needed for role="value" or auth=managedIdentity.
+   * Required when protocol=Http + auth=Credential and the credential is a
+   * separate setting. Not needed for role="Value" or auth=ManagedIdentity.
    */
   credentialInjection?: VirtualConnectionCredentialInjection;
 }
 
 /**
  * Describes how the proxy injects a standalone credential setting into upstream
- * HTTP requests. Only applies when protocol=http and the credential is a
+ * HTTP requests. Only applies when protocol=Http and the credential is a
  * separate setting (not embedded in a value/URL).
  */
 @added(Versions.v2026_09_01)
@@ -149,9 +149,9 @@ model VirtualConnectionSetting {
   /**
    * The role this setting plays in the connection. The platform uses this to
    * determine runtime behavior:
-   * - "credential" settings are masked (app never sees the real value).
-   * - "host"/"value" settings identify the intercept target.
-   * - "username" settings feed protocol auth construction.
+   * - "Credential" settings are masked (app never sees the real value).
+   * - "Host"/"Value" settings identify the intercept target.
+   * - "Username" settings feed protocol auth construction.
    */
   role: VirtualConnectionSettingRole;
 }
@@ -160,10 +160,10 @@ model VirtualConnectionSetting {
 @added(Versions.v2026_09_01)
 union VirtualConnectionSettingSource {
   /** App Settings (config/appsettings). */
-  appSettings: "appSettings",
+  AppSettings: "AppSettings",
 
   /** Connection Strings (config/connectionstrings). */
-  connectionStrings: "connectionStrings",
+  ConnectionStrings: "ConnectionStrings",
 
   string,
 }
@@ -172,16 +172,16 @@ union VirtualConnectionSettingSource {
 @added(Versions.v2026_09_01)
 union VirtualConnectionProtocol {
   /** HTTP/HTTPS (Azure Storage, Cosmos DB REST, Key Vault, custom APIs). */
-  http: "http",
+  Http: "Http",
 
   /** TDS (Azure SQL, SQL Server). */
-  tds: "tds",
+  Tds: "Tds",
 
   /** RESP (Azure Cache for Redis). */
-  redis: "redis",
+  Redis: "Redis",
 
   /** PostgreSQL wire protocol (Azure Database for PostgreSQL). */
-  postgres: "postgres",
+  Postgres: "Postgres",
 
   string,
 }
@@ -190,10 +190,10 @@ union VirtualConnectionProtocol {
 @added(Versions.v2026_09_01)
 union VirtualConnectionAuthType {
   /** Proxy injects the original credential from the setting value. */
-  credential: "credential",
+  Credential: "Credential",
 
   /** Proxy acquires a Managed Identity token for upstream auth. */
-  managedIdentity: "managedIdentity",
+  ManagedIdentity: "ManagedIdentity",
 
   string,
 }
@@ -202,16 +202,16 @@ union VirtualConnectionAuthType {
 @added(Versions.v2026_09_01)
 union VirtualConnectionSettingRole {
   /** Plain hostname or IP — identifies the intercept target. */
-  host: "host",
+  Host: "Host",
 
   /** Standalone secret (password, key, SAS token) — masked from app, used or replaced by proxy. */
-  credential: "credential",
+  Credential: "Credential",
 
   /** Standalone username — used for protocol auth construction (e.g., Redis ACL OID). */
-  username: "username",
+  Username: "Username",
 
   /** Composite value (connection string, SAS URL, DSN, Redis URI) — proxy parses based on protocol. */
-  value: "value",
+  Value: "Value",
 
   string,
 }
