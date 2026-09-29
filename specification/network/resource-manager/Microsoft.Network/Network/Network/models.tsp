@@ -11153,8 +11153,8 @@ model DdosCustomPolicyPropertiesFormat {
 /**
  * A DDoS mitigation rule resource.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The wire contract uses the existing Network child-resource shape."
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "The wire contract uses the existing Network child-resource shape."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The model must use the virtualNetwork legacy feature so it is emitted into the existing virtualNetwork.json contract."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance preserves the NRP wire contract's SubResource allOf envelope for this embedded child model."
 @Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
 @added(Versions.v2026_03_01)
 model DdosMitigationRule extends SubResource {
