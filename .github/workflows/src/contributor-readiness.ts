@@ -65,7 +65,7 @@ async function resolveNotificationPullRequest({
   if (
     run.repository.id !== payload.repository.id ||
     !["pull_request", "pull_request_review"].includes(run.event) ||
-    run.path !== ".github/workflows/contributor-readiness-review.yaml"
+    run.path !== ".github/workflows/contributor-readiness-notify.yaml"
   ) {
     throw new Error("Unexpected contributor readiness notification workflow");
   }
