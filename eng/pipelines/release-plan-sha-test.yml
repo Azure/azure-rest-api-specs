@@ -1,0 +1,61 @@
+# Checkout-only integration probe for the release-plan SHA queue handoff.
+# No SDK generation, work-item writes, GitHub writes, publishing, or email tasks.
+trigger: none
+pr: none
+
+parameters:
+  - name: ConfigType
+    type: string
+    default: TypeSpec
+  - name: ConfigPath
+    type: string
+    default: specification/contosowidgetmanager/Contoso.WidgetManager/tspconfig.yaml
+  - name: ApiVersion
+    type: string
+    default: '2024-01-01'
+  - name: SdkReleaseType
+    type: string
+    default: beta
+  - name: CreatePullRequest
+    type: boolean
+    default: false
+  - name: ReleasePlanWorkItemId
+    type: number
+    default: 0
+  - name: TriggerSource
+    type: string
+    default: sdk-release
+  - name: SdkRepoBranch
+    type: string
+    default: main
+
+jobs:
+  - job: VerifySavedSha
+    displayName: Verify the exact queued SHA without generating an SDK
+    timeoutInMinutes: 10
+    pool:
+      name: azsdk-pool
+      demands: ImageOverride -equals ubuntu-24.04
+    steps:
+      - checkout: self
+        clean: true
+        fetchDepth: 1
+        persistCredentials: false
+        sparseCheckoutDirectories: eng/scripts
+      - task: PowerShell@2
+        displayName: Compare queued SourceVersion with checked-out Git HEAD
+        inputs:
+          pwsh: true
+          filePath: eng/scripts/Test-ReleasePlan-Sha.ps1
+        env:
+          SHA_TEST_CONFIG_PATH: ${{ parameters.ConfigPath }}
+          SHA_TEST_API_VERSION: ${{ parameters.ApiVersion }}
+          SHA_TEST_SDK_RELEASE_TYPE: ${{ parameters.SdkReleaseType }}
+          SHA_TEST_PLAN_ID: ${{ parameters.ReleasePlanWorkItemId }}
+          SHA_TEST_TRIGGER_SOURCE: ${{ parameters.TriggerSource }}
+          SHA_TEST_CREATE_PR_INPUT: ${{ parameters.CreatePullRequest }}
+      - task: PublishPipelineArtifact@1
+        displayName: Publish nonsecret SHA handoff evidence
+        inputs:
+          targetPath: $(Build.ArtifactStagingDirectory)/sha-handoff.json
+          artifact: sha-handoff-evidence
