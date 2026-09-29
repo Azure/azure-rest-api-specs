@@ -10,54 +10,43 @@ namespace Microsoft.RecoveryServices;
 /**
  * Vault resource in Recovery Service.
  */
-@armVirtualResource
-model VaultResource {
-  ...ResourceNameParameter<VaultResource, "vaultName", "vaults", "">;
-}
+alias VaultResource = Extension.ExternalResource<
+  "Microsoft.RecoveryServices",
+  "vaults",
+  "vaultName",
+  NamePattern = "",
+  Description = "The name of the recovery services vault."
+>;
 
 /**
  * Backup Fabric virtual resource.
  */
-@parentResource(VaultResource)
-@armVirtualResource
-model BackupFabricResource {
-  ...ResourceNameParameter<
-    BackupFabricResource,
-    "fabricName",
-    "backupFabrics",
-    ""
-  >;
-}
+alias BackupFabricResource = Extension.ExternalChildResource<
+  VaultResource,
+  "backupFabrics",
+  "fabricName",
+  NamePattern = "",
+  Description = "Fabric name associated with the container."
+>;
 
 /**
  * Protection Container virtual resource.
  */
-@parentResource(BackupFabricResource)
-@armVirtualResource
-model ProtectionContainerResource {
-  ...ResourceNameParameter<
-    ProtectionContainerResource,
-    "containerName",
-    "protectionContainers",
-    ""
-  >;
-}
+alias ProtectionContainerResource = Extension.ExternalChildResource<
+  BackupFabricResource,
+  "protectionContainers",
+  "containerName",
+  NamePattern = "",
+  Description = "Name of the container."
+>;
 
 /**
  * Protected Item virtual resource. Routing parent for recovery points.
  */
-@parentResource(ProtectionContainerResource)
-@armVirtualResource
-model ProtectedItemVirtualResource {
-  ...ResourceNameParameter<
-    ProtectedItemVirtualResource,
-    "protectedItemName",
-    "protectedItems",
-    ""
-  >;
-}
-
-@@doc(VaultResource.name, "The name of the recovery services vault.");
-@@doc(BackupFabricResource.name, "Fabric name associated with the container.");
-@@doc(ProtectionContainerResource.name, "Name of the container.");
-@@doc(ProtectedItemVirtualResource.name, "Name of the Protected Item.");
+alias ProtectedItemVirtualResource = Extension.ExternalChildResource<
+  ProtectionContainerResource,
+  "protectedItems",
+  "protectedItemName",
+  NamePattern = "",
+  Description = "Name of the Protected Item."
+>;
