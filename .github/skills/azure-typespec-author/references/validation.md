@@ -9,7 +9,6 @@ Run **5.1 General Validation** for every case; run **5.2 Case-Specific Validatio
 | 5.1.1    | `azure-sdk-mcp:azsdk_run_typespec_validation` | Always                  |
 | 5.1.2    | `tsp compile .`                               | Always                  |
 | 5.2      | Case-specific validation                      | Case matches (see §5.2) |
-| 5.3      | Fast TypeSpec assessment                      | After validation passes |
 
 ---
 
@@ -42,30 +41,3 @@ Run after 5.1. Perform each check below and **report the result as a checklist**
 5. **Superseded version fully removed.** If a previous version was superseded/renamed (its enum entry no longer present), confirm there are **no** remaining occurrences of that old version identifier anywhere in the `.tsp` files, and that its example folder has been deleted (per check 1).
 6. **Carried-over vs. excluded features.** Confirm every feature the user chose to carry over is present in the new version **with its versioning decorators rebased onto the new version, not reverted** — e.g. a renamed property must keep its `@renamedFrom`/`@removed`/`@added` scaffolding retargeted to the new version (do not delete the decorators and restore the old shape, which would break the retained released version). Confirm every feature the user chose to exclude is not reintroduced (including any transitional decorator scaffolding — e.g. a property whose added default value was excluded must end up as a plain optional property, not a decorator-bridged rename).
 7. **Re-validate.** Re-run 5.1.1 and 5.1.2 and confirm both pass.
-
----
-
-## 5.3 Fast Assessment (Report-Only)
-
-After 5.1 and every applicable 5.2 check pass, invoke
-`azure-typespec-assessment` exactly once with `--assessment-mode fast`, the
-authored project scope, and a user-supplied or confirmed comparison baseline.
-Do not silently choose a baseline. Preserve its resolved commit for later
-user-requested remediation passes.
-
-Highlight the findings and return the clickable **Assessment report** link plus
-the absolute `assessment.json` path. This step is report-only: the instruction
-to fix failed validation checks does not apply to assessment findings. Do not
-edit source, re-enter validation, or assess again automatically.
-
-When findings exist, end with a non-blocking invitation such as:
-
-> No fixes were applied. To request fixes, reply **"Fix all findings"**,
-> **"Fix downstream breaking changes"**, or **"Fix finding 2."** I'll update the
-> code, validate it, and generate a fresh report.
-
-If the user explicitly requests fixes, start a new authoring pass, resolve the
-requested findings, run 5.1 and applicable 5.2 checks, then run one fresh 5.3
-assessment against the same resolved baseline and scope. Never reuse the old
-report for modified source or start another remediation cycle without a new
-user request.

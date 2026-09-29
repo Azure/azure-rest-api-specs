@@ -42,10 +42,11 @@ and the separation of REST compatibility from downstream SDK impact.
 ### Invocation and performance boundaries
 
 The coordinator supports `--assessment-mode full|fast`; `full` is the default.
-Fast mode is used by the authoring handoff and omits Azure Guidelines search and
-judgment while retaining every other assessment dimension. The selected mode is
-persisted in bounded input and final output. A fast report represents Azure
-Guidelines as explicitly skipped, never passed or blocked.
+Fast mode reports only REST breaking changes, downstream SDK breaking changes,
+and Documentation Completeness. Semantic analysis remains an internal
+correlation mechanism, but Semantic intents are omitted from the report. Azure
+Guidelines search and judgment are skipped. The selected mode is persisted in
+bounded input and final output.
 
 Run the documented CLI directly, including when the installed skill is a
 directory junction or symbolic link. The shared entrypoint guard resolves that
@@ -501,7 +502,11 @@ File: `source/source-index.json`
             "startLine": 10,
             "endLine": 15
           },
-          "lines": [" model Widget {", "-  name: string;", "+  name: WidgetName;"],
+          "lines": [
+            " model Widget {",
+            "-  name: string;",
+            "+  name: WidgetName;"
+          ],
           "declarationOccurrenceIds": ["declaration-occurrence-<hash>"],
           "normalizedChanges": [
             {

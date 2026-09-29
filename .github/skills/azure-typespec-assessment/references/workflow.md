@@ -11,7 +11,9 @@ the phase currently being performed.
 
 In fast mode (`--assessment-mode fast`), preparation emits no Azure Guidelines
 search requests. Skip guideline catalog scoring, retrieval, and judgments in
-steps 2-3, but complete every other dimension and the same guarded finalization.
+steps 2-3. Complete REST breaking, downstream SDK breaking, Documentation
+Completeness, and the same guarded finalization. Semantic analysis may still
+correlate evidence internally, but Semantic intents are omitted from the report.
 
 Do not skip phases, substitute manual repository inspection for preparation, or
 stop between preparation and Agent judgment. Assessment is complete only after

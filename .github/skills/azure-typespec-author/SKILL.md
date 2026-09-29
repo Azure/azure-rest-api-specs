@@ -3,7 +3,7 @@ name: azure-typespec-author
 license: MIT
 metadata:
   version: "1.0.0"
-description: "Authors and modifies Azure TypeSpec (.tsp) API specifications. MUST BE USED FOR ALL TypeSpec changes regardless of complexity — even adding a single property or enum value requires this skill's validation workflow. USE FOR: any TypeSpec/tsp change — api versions (add, bump, preview, stable, promote), resources, operations, models, properties, decorators, visibility, constraints, breaking changes, LRO, suppressions, operationId, spread model. Covers both ARM resource-manager (Azure.ResourceManager) and data-plane (Azure.Core) services. DO NOT USE FOR: SDK generation, releasing SDK packages, or single MCP tool calls. INVOKES: azure-sdk-mcp:azsdk_typespec_generate_authoring_plan, azure-sdk-mcp:azsdk_run_typespec_validation, and azure-typespec-assessment in fast mode after validation."
+description: "Authors and modifies Azure TypeSpec (.tsp) API specifications. MUST BE USED FOR ALL TypeSpec changes regardless of complexity — even adding a single property or enum value requires this skill's validation workflow. USE FOR: any TypeSpec/tsp change — api versions (add, bump, preview, stable, promote), resources, operations, models, properties, decorators, visibility, constraints, breaking changes, LRO, suppressions, operationId, spread model. Covers both ARM resource-manager (Azure.ResourceManager) and data-plane (Azure.Core) services. DO NOT USE FOR: SDK generation, releasing SDK packages, or single MCP tool calls. INVOKES: azure-sdk-mcp:azsdk_typespec_generate_authoring_plan, azure-sdk-mcp:azsdk_run_typespec_validation."
 compatibility: "azure-sdk-mcp server with azsdk_typespec_generate_authoring_plan and azsdk_run_typespec_validation tools"
 ---
 
@@ -48,15 +48,14 @@ This includes but is not limited to:
 
 ## Steps
 
-> Analyze → Intake → Plan → Apply → Validate → Assess once → Output reference links
+> Analyze → Intake → Plan → Apply → Validate → Output reference links
 
 - [ ] Step 1 — Analyze project
 - [ ] Step 2 — Intake
 - [ ] Step 3 — Build authoring plan
 - [ ] Step 4 — Apply changes
 - [ ] Step 5 — Validate
-- [ ] Step 6 — Fast assessment (report-only)
-- [ ] Step 7 — Output reference links
+- [ ] Step 6 — Output reference links
 
 ### Step 1: Analyze Project
 
@@ -80,19 +79,7 @@ See [validation.md](references/validation.md). Always run 5.1 general validation
 
 **Output the validation results as a checklist.** Report one line per check, each marked ✅ (pass) or ❌ (fail) with a short note. Fix every ❌ and re-run until all checks pass. For API Versioning (Case 3) the checklist **must** cover every §5.2 Case 3 check — including: the new version's `examples/` folder exists; no example folder remains for a version absent from the `Versions` enum; no decorator references a version absent from the enum; every carried-over feature is present with its decorators rebased onto the new version (not reverted); every excluded feature is fully removed.
 
-### Step 6: Fast Assessment
-
-After all validation and applicable case-specific checks pass, invoke
-`azure-typespec-assessment` exactly once in fast mode against the authored
-project and a user-supplied or confirmed baseline. Highlight findings, serve and
-link the report, and do not modify source to mitigate assessment findings.
-
-If the user later explicitly asks to fix findings, treat that as a new authoring
-pass: apply the requested fixes, validate, and generate one fresh fast
-assessment report against the same resolved baseline and scope. Stop after the
-new report; remaining findings do not authorize another automatic cycle.
-
-### Step 7: Output Reference Links
+### Step 6: Output Reference Links
 
 Output all referenced document URLs from Step 3. This gives the user direct links to the documentation that informed the changes.
 

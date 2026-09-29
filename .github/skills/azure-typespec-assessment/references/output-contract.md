@@ -165,22 +165,23 @@ HTML finding cards must not display `high`, `medium`, or `low` severity labels
 or severity-colored borders. Severity remains available in `assessment.json`
 for validation and machine consumers.
 
-The user-facing response must highlight REST, downstream SDK, and Documentation
-Completeness findings before the clickable report link. When findings exist,
-end with a non-blocking invitation explaining how to request all,
-category-specific, or individual fixes. Assessment itself remains read-only.
-
 Dimension statuses are derived, not authored:
 
 - semantic: `assessed` or `not-assessed`;
 - REST/downstream: `passed`, `failed`, or `not-assessed`;
-- Azure Guidelines: `passed`, `failed`, `not-assessed`, or `skipped`. `skipped`
-  is valid only when `assessmentMode` is `fast` and must contain no guideline
-  judgments, findings, retrieval failures, or blockers;
+- Azure Guidelines: `passed`, `failed`, or `not-assessed`, derived from
+  Semantic intent coverage and applicable fetched guidance;
 - Documentation Completeness (`documentQuality`): `passed`, `failed`,
   `not-assessed`, or `not-applicable`, with `assessmentVersion: 5` and
   declaration/documented/missing coverage;
 - safety scope: `rest-and-downstream-only`, never Azure Guidelines or document quality.
+
+Fast-mode HTML reports contain only REST breaking changes, downstream SDK
+breaking changes, and Documentation Completeness sections. They identify
+Semantic intents and Azure Guidelines as skipped in the report header without
+rendering those dimensions as report sections. Structured output retains
+internal Semantic correlation data and an explicit skipped Azure Guidelines
+dimension for provenance and validation.
 
 A blocked implemented dimension cannot pass. Documentation Completeness is
 `failed` when one or more eligible newly added declarations lack a nonempty effective

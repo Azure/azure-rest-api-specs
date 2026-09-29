@@ -321,7 +321,7 @@ void test("assembler restores API-version-wide intents without candidate decisio
   }
 });
 
-void test("fast assessment skips Azure Guidelines and renders that state", () => {
+void test("fast assessment renders only breaking and documentation dimensions", () => {
   const work = fixture();
   try {
     writeJson(path.join(work, "model-input.json"), {
@@ -358,10 +358,13 @@ void test("fast assessment skips Azure Guidelines and renders that state", () =>
     assert.equal(assessment.dimensions.compliance.status, "skipped");
     assert.deepEqual(validateAssessment(assessment), []);
     const html = renderAssessmentHtml(assessment);
-    assert.match(html, /Azure Guidelines were skipped in fast assessment mode/);
-    assert.match(html, />skipped</);
     assert.match(html, /Assessment mode: <strong>fast<\/strong>/);
-    assert.match(html, /Skipped in fast mode/);
+    assert.match(html, /Skipped: Semantic intents and Azure Guidelines/);
+    assert.doesNotMatch(html, /id="semantic-intents"/);
+    assert.doesNotMatch(html, /id="azure-compliance"/);
+    assert.match(html, /id="rest-breaking"/);
+    assert.match(html, /id="downstream-breaking"/);
+    assert.match(html, /id="document-quality"/);
   } finally {
     fs.rmSync(work, { recursive: true, force: true });
   }
