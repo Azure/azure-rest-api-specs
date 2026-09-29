@@ -11697,7 +11697,13 @@
         },
         "sshKey": {
           "type": "string",
-          "description": "The SSH public key of the virtual machine administrator."
+          "format": "password",
+          "description": "The SSH key of the virtual machine administrator.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
         },
         "isAuthenticationWithSshKey": {
           "type": "boolean",

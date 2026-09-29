@@ -1674,9 +1674,10 @@ model LabVirtualMachineCreationParameterProperties {
   password?: string;
 
   /**
-  * The SSH public key of the virtual machine administrator.
+   * The SSH key of the virtual machine administrator.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This field is the public key installed in authorized_keys, not a private credential."
+  @secret
+  @visibility(Lifecycle.Create, Lifecycle.Update)
   sshKey?: string;
 
   /**
