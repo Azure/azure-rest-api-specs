@@ -7,6 +7,7 @@
 import "../agents/routes.tsp";
 import "../evaluation-rules/routes.tsp";
 import "../data_generation_jobs/routes.tsp";
+import "../sdk-common/ops-relocation-datasets.tsp";
 
 // Stable operation (GA routes) without preview features
 import "../agents-optimization/routes.tsp";
