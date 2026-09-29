@@ -1,12 +1,13 @@
 name: Contributor Readiness - Testing
 
 on:
-  pull_request_target:
-    types: [opened, reopened, synchronize, ready_for_review]
   issue_comment:
     types: [created]
   workflow_run:
-    workflows: ["Contributor Readiness - Review Event - Testing"]
+    # Keep the previous notifier name for older PR branches and in-flight review runs.
+    workflows:
+      - "Contributor Readiness - Events - Testing"
+      - "Contributor Readiness - Review Event - Testing"
     types: [completed]
 
 permissions: {}
