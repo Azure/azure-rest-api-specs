@@ -74,6 +74,8 @@ model VirtualConnection {
   /**
    * Settings that compose this connection. Key is the app setting
    * (or connection string) name; value describes its role in the connection.
+   * Setting keys must be nonempty, must not end in whitespace, and must be
+   * unique within the connection regardless of casing.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Setting names are arbitrary customer-chosen keys and cannot be represented as a fixed set of model properties."
   settings: Record<VirtualConnectionSetting>;
