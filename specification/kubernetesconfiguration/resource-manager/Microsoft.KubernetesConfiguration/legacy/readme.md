@@ -37,6 +37,34 @@ These settings apply only when `--tag=package-preview-2024-04` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2024-04'
 input-file:
+  - stable/2023-05-01/extensions.json
+  - preview/2024-04-01-preview/fluxconfiguration.json
+  - stable/2023-05-01/kubernetesconfiguration.json
+  - stable/2023-05-01/operations.json
+suppressions:  
+  - code: ResourceNameRestriction
+    from: fluxconfiguration.json
+    reason: Existing service contract needs to be backward compatible, pattern validation exists in RP.
+  - code: DeleteResponseCodes
+    from: fluxconfiguration.json
+    reason: Existing service contract needs to be backward compatible, force delete does synchronous delete and returns 200.
+  - code: LroLocationHeader
+    from: fluxconfiguration.json
+    reason: Existing service contract needs to be backward compatible, 202 operations return Azure-Async-Operation header.
+  - code: AvoidAdditionalProperties
+    from: fluxconfiguration.json
+    reason: Existing service contract needs to be backward compatible.
+  - code: PatchResponseCodes
+    from: fluxconfiguration.json
+    reason: Existing service contract needs to be backward compatible.
+```
+
+### Tag: package-preview-2024-04-only
+
+These settings apply only when `--tag=package-preview-2024-04-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2024-04-only'
+input-file:
   - preview/2024-04-01-preview/fluxconfiguration.json
 ```
 
