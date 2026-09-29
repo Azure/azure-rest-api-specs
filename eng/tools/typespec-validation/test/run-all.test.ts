@@ -524,7 +524,7 @@ it("stops if Git skips a generated nested repository", async () => {
   });
 
   await expect(runAll(root, { gitClean: true })).rejects.toThrow(
-    "Git cleanup left untracked paths",
+    "Git cleanup left a dirty checkout",
   );
   expect(spawn).toHaveBeenCalledOnce();
   expect(existsSync(join(root, "nested", ".git"))).toBe(true);

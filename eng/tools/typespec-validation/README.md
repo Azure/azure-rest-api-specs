@@ -43,8 +43,7 @@ removes untracked files and directories across the entire repository after each
 project. It requires an initially clean checkout; ignored files are retained.
 Do not use it while other work is in progress. `--dry-run` disables cleanup.
 
-Cleanup stops validation on Git errors, conflicts, changed submodules,
-intent-to-add entries, changed `.gitignore` files, or tracked files replaced by
-directories. Nested repositories are not forcibly deleted: if Git skips one,
-cleanup reports the remaining untracked path and stops rather than continuing
-with a contaminated checkout.
+Cleanup is skipped when the checkout is already clean. Otherwise, tracked files
+are restored from the index and untracked files are cleaned repository-wide.
+Git errors or changes remaining after cleanup stop validation rather than letting
+the next project run in a dirty checkout. Nested repositories are not forcibly deleted.

@@ -68,8 +68,26 @@ afterEach(() => {
 
 describe("cleanWorktree", () => {
   it("runs only one status query for a clean checkout", async () => {
+    const client = simpleGit(repo);
+    const restore = vi.spyOn(client, "raw");
+    const clean = vi.spyOn(client, "clean");
+    vi.mocked(simpleGit).mockReturnValueOnce(client);
+
     await cleanWorktree(repo);
+
     expect(commands()).toEqual(["status"]);
+    expect(restore).not.toHaveBeenCalled();
+    expect(clean).not.toHaveBeenCalled();
+  });
+
+  it("finds generated files even when Git config hides untracked files", async () => {
+    git("config", "status.showUntrackedFiles", "no");
+    write("generated.txt");
+
+    await cleanWorktree(repo);
+
+    expect(existsSync(join(repo, "generated.txt"))).toBe(false);
+    expect(status()).toBe("");
   });
 
   it("restores modified and deleted files and cleans output across the repository", async () => {
@@ -89,10 +107,10 @@ describe("cleanWorktree", () => {
     expect(readFileSync(join(repo, "other/generated [1]/keep.ignored"), "utf8")).toBe("keep");
     expect(readFileSync(join(repo, "node_modules/dependency/index.js"), "utf8")).toBe("keep");
     expect(status()).toBe("");
-    expect(commands()).toEqual(["status", "restore", "clean", "ls-files"]);
+    expect(commands()).toEqual(["status", "restore", "clean", "status"]);
   });
 
-  it("uses literal paths for spaces, brackets, Unicode, and leading dashes", async () => {
+  it("handles filenames with spaces, brackets, Unicode, and leading dashes", async () => {
     const paths = ["space name", "[abc]", "-option", "caf\u00e9"];
     for (const path of paths) write(path, "original");
     write("a", "neighbor");
@@ -110,7 +128,7 @@ describe("cleanWorktree", () => {
   });
 
   it.skipIf(process.platform === "win32")(
-    "preserves NUL-delimited paths with newlines, quotes, and pathspec magic",
+    "handles filenames with newlines, quotes, whitespace, and pathspec magic",
     async () => {
       const paths = ["line\nbreak", 'a"quote', ":(glob)*", "*literal", " leading", "trailing \n"];
       for (const path of paths) write(path, "original");
@@ -127,7 +145,7 @@ describe("cleanWorktree", () => {
     },
   );
 
-  it("restores the index version while preserving staged additions, deletions, and renames", async () => {
+  it("restores from the index but stops if validation leaves staged changes", async () => {
     write("project/source.txt", "staged content");
     write("added.txt", "staged addition");
     git("rm", "--quiet", "outside/deleted.txt");
@@ -139,7 +157,7 @@ describe("cleanWorktree", () => {
     rmSync(join(repo, "added.txt"));
     write("outside/deleted.txt", "recreated after staged deletion");
 
-    await cleanWorktree(repo);
+    await expect(cleanWorktree(repo)).rejects.toThrow("Git cleanup left a dirty checkout");
 
     expect(git("ls-files", "--stage")).toBe(index);
     expect(status()).toBe(stagedStatus);
@@ -148,15 +166,15 @@ describe("cleanWorktree", () => {
     expect(existsSync(join(repo, "outside/deleted.txt"))).toBe(false);
   });
 
-  it("skips restore and clean for staged-only changes", async () => {
+  it("does not report a clean checkout when only staged changes remain", async () => {
     write("project/source.txt", "staged");
     git("add", ".");
     const stagedStatus = status();
 
-    await cleanWorktree(repo);
+    await expect(cleanWorktree(repo)).rejects.toThrow("Git cleanup left a dirty checkout");
 
     expect(status()).toBe(stagedStatus);
-    expect(commands()).toEqual(["status"]);
+    expect(commands()).toEqual(["status", "restore", "clean", "status"]);
   });
 
   it("treats an unstaged rename as a deletion and an untracked file", async () => {
@@ -181,14 +199,14 @@ describe("cleanWorktree", () => {
     expect(status()).toBe("");
   });
 
-  it("rejects a directory replacing a tracked file without deleting its contents", async () => {
+  it("restores a tracked file replaced by a generated directory", async () => {
     rmSync(join(repo, "project/source.txt"));
-    write("project/source.txt/keep.ignored", "keep");
+    write("project/source.txt/generated.txt");
 
-    await expect(cleanWorktree(repo)).rejects.toThrow("tracked file replaced by a directory");
+    await cleanWorktree(repo);
 
-    expect(readFileSync(join(repo, "project/source.txt/keep.ignored"), "utf8")).toBe("keep");
-    expect(commands()).toEqual(["status"]);
+    expect(readFileSync(join(repo, "project/source.txt"), "utf8")).toBe("original");
+    expect(status()).toBe("");
   });
 
   it("restores a tracked directory replaced by a file", async () => {
@@ -201,18 +219,16 @@ describe("cleanWorktree", () => {
     expect(status()).toBe("");
   });
 
-  it.each([".gitignore", "project/.gitignore", "project/.GITIGNORE"])(
-    "rejects changed ignore rules at %s that could hide generated output",
-    async (path) => {
-      write(path, "hidden.txt\n");
-      write("project/hidden.txt");
+  it("restores changed ignore rules before cleaning generated files", async () => {
+    write(".gitignore", "hidden.txt\n");
+    write("project/hidden.txt");
 
-      await expect(cleanWorktree(repo)).rejects.toThrow("changed .gitignore files");
+    await cleanWorktree(repo);
 
-      expect(existsSync(join(repo, "project/hidden.txt"))).toBe(true);
-      expect(commands()).toEqual(["status"]);
-    },
-  );
+    expect(readFileSync(join(repo, ".gitignore"), "utf8")).toBe("node_modules/\n*.ignored\n");
+    expect(existsSync(join(repo, "project/hidden.txt"))).toBe(false);
+    expect(status()).toBe("");
+  });
 
   it("rejects conflicts before restoring other files", async () => {
     const hash = git("rev-parse", "HEAD:project/source.txt").trim();
@@ -224,21 +240,11 @@ describe("cleanWorktree", () => {
     write("outside/deleted.txt", "modified");
     const before = status();
 
-    await expect(cleanWorktree(repo)).rejects.toThrow("Unsafe Git cleanup state");
+    await expect(cleanWorktree(repo)).rejects.toThrow("unmerged");
 
     expect(status()).toBe(before);
     expect(readFileSync(join(repo, "outside/deleted.txt"), "utf8")).toBe("modified");
-    expect(commands()).toEqual(["status"]);
-  });
-
-  it("rejects intent-to-add instead of silently dropping an unexpected status", async () => {
-    write("intent.txt");
-    git("add", "-N", "intent.txt");
-
-    await expect(cleanWorktree(repo)).rejects.toThrow("Unsafe Git cleanup state");
-
-    expect(existsSync(join(repo, "intent.txt"))).toBe(true);
-    expect(commands()).toEqual(["status"]);
+    expect(commands()).toEqual(["status", "restore"]);
   });
 
   it.each(["nested", "generated/nested"])(
@@ -247,7 +253,7 @@ describe("cleanWorktree", () => {
       write(`${path}/file.txt`);
       git("init", "--quiet", join(repo, path));
 
-      await expect(cleanWorktree(repo)).rejects.toThrow("Git cleanup left untracked paths");
+      await expect(cleanWorktree(repo)).rejects.toThrow("Git cleanup left a dirty checkout");
 
       expect(existsSync(join(repo, path, ".git"))).toBe(true);
       expect(existsSync(join(repo, path, "file.txt"))).toBe(true);
@@ -265,7 +271,7 @@ describe("cleanWorktree", () => {
     expect(status()).toBe("");
   });
 
-  it("rejects dirty submodules even when status config ignores them", async () => {
+  it("stops on dirty submodules even when status config ignores them", async () => {
     write("submodule/file.txt");
     git("init", "--quiet", join(repo, "submodule"));
     git("-C", "submodule", "add", ".");
@@ -289,13 +295,13 @@ describe("cleanWorktree", () => {
     git("config", "diff.ignoreSubmodules", "all");
     write("submodule/file.txt", "modified");
 
-    await expect(cleanWorktree(repo)).rejects.toThrow("Unsafe Git cleanup state");
+    await expect(cleanWorktree(repo)).rejects.toThrow("Git cleanup left a dirty checkout");
 
     expect(readFileSync(join(repo, "submodule/file.txt"), "utf8")).toBe("modified");
-    expect(commands()).toEqual(["status"]);
+    expect(commands()).toEqual(["status", "restore", "clean", "status"]);
   });
 
-  it("batches long path lists without falling back to full-tree cleanup", async () => {
+  it("cleans many changed files without constructing path argument lists", async () => {
     for (let i = 0; i < 120; i++) write(`project/${i}-${"x".repeat(100)}`, "original");
     commit();
     for (let i = 0; i < 120; i++) {
@@ -306,25 +312,35 @@ describe("cleanWorktree", () => {
     await cleanWorktree(repo);
 
     expect(status()).toBe("");
-    expect(commands().filter((command) => command === "status")).toHaveLength(1);
-    expect(commands().filter((command) => command === "restore").length).toBeGreaterThan(1);
-    expect(commands().filter((command) => command === "clean").length).toBeGreaterThan(1);
+    expect(commands()).toEqual(["status", "restore", "clean", "status"]);
   });
 
-  it.each(["status", "restore", "clean", "ls-files"])("propagates %s failures", async (command) => {
+  it.each(["status", "raw", "clean"] as const)("propagates %s failures", async (method) => {
     write("project/source.txt", "modified");
     write("generated.txt");
     const client = simpleGit(repo);
-    const raw = client.raw.bind(client);
-    vi.spyOn(client, "raw").mockImplementation((args: string | string[]) => {
-      if (Array.isArray(args) && args[1] === command) throw new Error(`${command} failed`);
-      return raw(args);
-    });
+    const command = method === "raw" ? "restore" : method;
+    vi.spyOn(client, method).mockRejectedValueOnce(new Error(`${command} failed`));
     vi.mocked(simpleGit).mockReturnValueOnce(client);
 
     await expect(cleanWorktree(repo)).rejects.toThrow(`${command} failed`);
 
     expect(commands().at(-1)).toBe(command);
+    expect(console.log).toHaveBeenLastCalledWith(expect.stringContaining('"success":false'));
+  });
+
+  it("propagates failures while verifying cleanup", async () => {
+    write("generated.txt");
+    const client = simpleGit(repo);
+    const getStatus = client.status.bind(client);
+    vi.spyOn(client, "status")
+      .mockImplementationOnce(getStatus)
+      .mockRejectedValueOnce(new Error("verification failed"));
+    vi.mocked(simpleGit).mockReturnValueOnce(client);
+
+    await expect(cleanWorktree(repo)).rejects.toThrow("verification failed");
+
+    expect(commands()).toEqual(["status", "restore", "clean", "status"]);
     expect(console.log).toHaveBeenLastCalledWith(expect.stringContaining('"success":false'));
   });
 });
