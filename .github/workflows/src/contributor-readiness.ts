@@ -329,7 +329,7 @@ function renderFindingMessage(finding: ReadinessFinding): string {
 }
 
 /**
- * Evaluates an open PR, authorizes manual refreshes, and publishes the advisory report.
+ * Evaluates an open PR touching specification/, authorizes refreshes, and publishes the report.
  * Unexpected lookup failures are rethrown after publishing the available incomplete evidence.
  */
 export async function checkContributorReadiness(
@@ -342,6 +342,10 @@ export async function checkContributorReadiness(
   const { data: pr } = await github.rest.pulls.get({ owner, repo, pull_number: number });
   if (pr.state !== "open") {
     core.info("Skipping contributor readiness for a closed PR.");
+    return;
+  }
+  if (!(await changesSpecifications(github, owner, repo, pr))) {
+    core.info("Skipping contributor readiness: no changes under specification/.");
     return;
   }
   const findings: ReadinessFinding[] = [];
@@ -369,6 +373,35 @@ export async function checkContributorReadiness(
   }
   await publishReadinessReport(inputs, pr, participants, findings);
   if (failure) throw failure;
+}
+
+/** Checks current PR files for spec changes, including renames, without guessing on truncated results. */
+async function changesSpecifications(
+  github: GitHub,
+  owner: string,
+  repo: string,
+  pr: PullRequest,
+): Promise<boolean> {
+  const files = await github.paginate(github.rest.pulls.listFiles, {
+    owner,
+    repo,
+    pull_number: pr.number,
+    per_page: PER_PAGE_MAX,
+  });
+  if (
+    files.some(
+      (file) =>
+        file.filename.startsWith("specification/") ||
+        file.previous_filename?.startsWith("specification/"),
+    )
+  )
+    return true;
+  if (files.length < pr.changed_files) {
+    throw new Error(
+      "Cannot determine specification scope: GitHub returned an incomplete changed-file list",
+    );
+  }
+  return false;
 }
 
 /** Returns participants for an authorized refresh, or undefined after logging a denied request. */
