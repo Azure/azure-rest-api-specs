@@ -793,7 +793,7 @@ union SourceType {
 /**
  * Current provisioning status
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Migration is an operation-tracking proxy resource whose provisioningState intentionally exposes the RP's migration lifecycle, including intermediate cancellation and endpoint-unlinking states. Changing this existing property or its values would break the RP payload and previously released clients."
 union MigrationProvisioningState {
   string,
 
@@ -1718,8 +1718,10 @@ model MigrationProperties {
   /**
    * Additional details about the migration operation's status in free text format.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "The service serializes this read-only property as explicit null when no status details are present, so nullability is distinct from optionality."
+  @typeChangedFrom(Versions.v2026_09_01, string)
   @visibility(Lifecycle.Read)
-  statusDetails?: string;
+  statusDetails?: string | null;
 
   /**
    * The timestamp when the migration operation was created.
