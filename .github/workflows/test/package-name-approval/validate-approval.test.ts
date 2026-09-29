@@ -50,14 +50,17 @@ function createPRLabeledPayload({
   actor,
   labels,
   isMgmt = false,
+  noPlane = false,
 }: {
   action: string;
   labelName: string;
   actor: string;
   labels?: string[];
   isMgmt?: boolean;
+  noPlane?: boolean;
 }) {
-  const labelNames: string[] = [...(labels ?? []), ...(isMgmt ? ["resource-manager"] : [])];
+  const planeLabels = isMgmt ? ["resource-manager"] : noPlane ? [] : ["data-plane"];
+  const labelNames: string[] = [...(labels ?? []), ...planeLabels];
   const allLabels = labelNames.map((name) => ({ name }));
   return {
     action,
@@ -282,6 +285,24 @@ describe("validate-approval", () => {
       expect(github.rest.issues.removeLabel).not.toHaveBeenCalledWith(
         expect.objectContaining({ name: "package-name-ruby-pending" }),
       );
+    });
+
+    it("should skip when the plane is not yet reconciled (only stale Mgmt present) (#46785)", async () => {
+      // A management PR in the window after post-results adds "Mgmt" + review-required but
+      // before summarize-checks adds "resource-manager". Neither reconciled plane label is
+      // present, so a data-plane approver must NOT be able to consume approvals; defer.
+      context.payload = createPRLabeledPayload({
+        action: "labeled",
+        labelName: "package-name-java-approved",
+        actor: "approver1", // authorized java data-plane approver in the test config
+        labels: ["package-name-review-required", "package-name-java-pending", "Mgmt"],
+        noPlane: true,
+      });
+
+      await validateApproval(args());
+
+      expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
+      expect(github.rest.issues.createComment).not.toHaveBeenCalled();
     });
   });
 
