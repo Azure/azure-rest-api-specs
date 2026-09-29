@@ -50141,6 +50141,30 @@ components:
             - Must start and end with alphanumeric characters,
             - Can contain hyphens in the middle
             - Must not exceed 63 characters.
+    CreateSipTelephonyBindingRequest:
+      type: object
+      required:
+        - provider
+        - sip
+      properties:
+        provider:
+          type: string
+          enum:
+            - sip
+          description: The SIP provider.
+        phone_number:
+          type: string
+          maxLength: 64
+          description: An optional display phone number. It is not the binding identifier.
+        sip:
+          $ref: '#/components/schemas/SipTelephonyConfiguration'
+          description: The SIP configuration. Enabled directions require connection references.
+      allOf:
+        - $ref: '#/components/schemas/CreateTelephonyBindingRequest'
+      description: The request to create a SIP binding. New SIP bindings are active. Use direction-specific connection references instead of a top-level connection_name.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     CreateSkillVersionFromFilesBody:
       type: object
       properties:
@@ -50156,9 +50180,15 @@ components:
     CreateTeamsPhoneExtensibilityTelephonyBindingRequest:
       type: object
       required:
+        - connection_name
         - provider
         - resource_account_object_id
       properties:
+        connection_name:
+          type: string
+          minLength: 1
+          maxLength: 256
+          description: The Foundry connection name for the telephony provider.
         provider:
           type: string
           enum:
@@ -50181,16 +50211,10 @@ components:
       type: object
       required:
         - provider
-        - connection_name
       properties:
         provider:
           $ref: '#/components/schemas/TelephonyProvider'
           description: The telephony provider.
-        connection_name:
-          type: string
-          minLength: 1
-          maxLength: 256
-          description: The Foundry connection name for the telephony provider.
         label:
           type: string
           maxLength: 128
@@ -50200,6 +50224,7 @@ components:
         mapping:
           teams_phone_extensibility: '#/components/schemas/CreateTeamsPhoneExtensibilityTelephonyBindingRequest'
           twilio: '#/components/schemas/CreateTwilioTelephonyBindingRequest'
+          sip: '#/components/schemas/CreateSipTelephonyBindingRequest'
       description: The request to create a telephony binding.
       x-ms-foundry-meta:
         required_previews:
@@ -50255,9 +50280,15 @@ components:
     CreateTwilioTelephonyBindingRequest:
       type: object
       required:
+        - connection_name
         - provider
         - phone_number
       properties:
+        connection_name:
+          type: string
+          minLength: 1
+          maxLength: 256
+          description: The Foundry connection name for the telephony provider.
         provider:
           type: string
           enum:
@@ -87450,6 +87481,251 @@ components:
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobOptions'
       description: The options for a task generation data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.
+    SipAudioCodec:
+      type: string
+      enum:
+        - g722
+        - pcmu
+        - pcma
+      description: A supported outbound SIP audio codec.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    SipInboundConfiguration:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether inbound calls are enabled. Defaults to true.
+        connection:
+          type: string
+          minLength: 1
+          description: The Foundry project connection name containing inbound username and password credentials. Required when inbound is enabled.
+        allowed_source_cidrs:
+          type: array
+          items:
+            type: string
+          maxItems: 64
+          description: Allowed source IP addresses or CIDR ranges. Omit or use an empty array for no source-address restriction.
+        allowed_calling_numbers:
+          type: array
+          items:
+            type: string
+          maxItems: 64
+          description: Allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. Omit or use an empty array for no caller-number restriction.
+      description: Inbound SIP configuration. Credentials are stored in the referenced connection and never returned in a binding.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    SipInboundConfigurationPatch:
+      type: object
+      properties:
+        enabled:
+          anyOf:
+            - type: boolean
+            - type: 'null'
+          description: Whether inbound calls are enabled. Defaults to true. On update, omission preserves the current value; null restores the default or clears the value.
+        connection:
+          anyOf:
+            - type: string
+            - type: 'null'
+          minLength: 1
+          description: The Foundry project connection name containing inbound username and password credentials. Required when inbound is enabled. On update, omission preserves the current value; null restores the default or clears the value.
+        allowed_source_cidrs:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: 'null'
+          maxItems: 64
+          description: Allowed source IP addresses or CIDR ranges. Omit or use an empty array for no source-address restriction. On update, omission preserves the current value; null restores the default or clears the value.
+        allowed_calling_numbers:
+          anyOf:
+            - type: array
+              items:
+                type: string
+            - type: 'null'
+          maxItems: 64
+          description: Allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. Omit or use an empty array for no caller-number restriction. On update, omission preserves the current value; null restores the default or clears the value.
+      description: Changes to inbound SIP configuration. The merged enabled direction must have a valid connection.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    SipOutboundConfiguration:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          description: Whether outbound calls are enabled. Defaults to false.
+        connection:
+          type: string
+          minLength: 1
+          description: The Foundry project connection name containing outbound username and password credentials. Required when outbound is enabled.
+        address:
+          type: string
+          minLength: 1
+          description: The destination hostname or IP address with an optional port. Required when outbound is enabled. Do not include a scheme, user, path, query, or fragment.
+        enabled_codecs:
+          type: array
+          items:
+            $ref: '#/components/schemas/SipAudioCodec'
+          minItems: 1
+          description: Enabled codecs in descending preference order. Defaults to g722, pcmu, pcma.
+        custom_headers:
+          type: object
+          unevaluatedProperties:
+            type: string
+          description: Custom SIP headers, limited to 32 entries. Names must be valid header tokens of at most 256 characters starting with X-. The X-MS- prefix is reserved except X-MS-Custom-. Names must be unique ignoring case. Values must contain no control characters and be at most 4096 characters.
+      description: Outbound SIP configuration.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    SipOutboundConfigurationPatch:
+      type: object
+      properties:
+        enabled:
+          anyOf:
+            - type: boolean
+            - type: 'null'
+          description: Whether outbound calls are enabled. Defaults to false. On update, omission preserves the current value; null restores the default or clears the value.
+        connection:
+          anyOf:
+            - type: string
+            - type: 'null'
+          minLength: 1
+          description: The Foundry project connection name containing outbound username and password credentials. Required when outbound is enabled. On update, omission preserves the current value; null restores the default or clears the value.
+        address:
+          anyOf:
+            - type: string
+            - type: 'null'
+          minLength: 1
+          description: The destination hostname or IP address with an optional port. Required when outbound is enabled. Do not include a scheme, user, path, query, or fragment. On update, omission preserves the current value; null restores the default or clears the value.
+        enabled_codecs:
+          anyOf:
+            - type: array
+              items:
+                $ref: '#/components/schemas/SipAudioCodec'
+            - type: 'null'
+          minItems: 1
+          description: Enabled codecs in descending preference order. Defaults to g722, pcmu, pcma. On update, omission preserves the current value; null restores the default or clears the value.
+        custom_headers:
+          anyOf:
+            - type: object
+              unevaluatedProperties:
+                type: string
+            - type: 'null'
+          description: Custom SIP headers, limited to 32 entries. Names must be valid header tokens of at most 256 characters starting with X-. The X-MS- prefix is reserved except X-MS-Custom-. Names must be unique ignoring case. Values must contain no control characters and be at most 4096 characters. On update, omission preserves the current value; null restores the default or clears the value.
+      description: Changes to outbound SIP configuration. The merged enabled direction must have a valid connection and address.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    SipTelephonyBinding:
+      type: object
+      required:
+        - provider
+        - sip
+        - sip_inbound_uri
+      properties:
+        provider:
+          type: string
+          enum:
+            - sip
+          description: The SIP provider.
+        phone_number:
+          type: string
+          maxLength: 64
+          description: An optional display phone number. It is not the binding identifier.
+        sip:
+          $ref: '#/components/schemas/SipTelephonyConfiguration'
+          description: The SIP configuration, without credentials.
+        sip_inbound_uri:
+          type: string
+          format: uri
+          description: The service-generated inbound SIP URI. Returned even when inbound is disabled; its presence does not indicate that calls are accepted.
+      allOf:
+        - $ref: '#/components/schemas/TelephonyBinding'
+      description: A SIP binding.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    SipTelephonyBindingListItem:
+      type: object
+      required:
+        - provider
+        - sip
+        - sip_inbound_uri
+      properties:
+        provider:
+          type: string
+          enum:
+            - sip
+          description: The SIP provider.
+        phone_number:
+          type: string
+          maxLength: 64
+          description: An optional display phone number. It is not the binding identifier.
+        sip:
+          $ref: '#/components/schemas/SipTelephonyConfiguration'
+          description: The SIP configuration, without credentials.
+        sip_inbound_uri:
+          type: string
+          format: uri
+          description: The service-generated inbound SIP URI. Returned even when inbound is disabled; its presence does not indicate that calls are accepted.
+      allOf:
+        - $ref: '#/components/schemas/TelephonyBindingListItem'
+      description: A SIP binding returned in a list, including its entity tag.
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    SipTelephonyConfiguration:
+      type: object
+      properties:
+        inbound:
+          $ref: '#/components/schemas/SipInboundConfiguration'
+          description: The inbound configuration.
+        outbound:
+          $ref: '#/components/schemas/SipOutboundConfiguration'
+          description: The outbound configuration.
+      description: Direction-specific SIP configuration. Inbound defaults to enabled and outbound defaults to disabled.
+      examples:
+        - inbound:
+            enabled: true
+            connection: sip-inbound
+            allowed_source_cidrs:
+              - 192.0.2.0/24
+          outbound:
+            enabled: true
+            connection: sip-outbound
+            address: sbc.example.com:5061
+            enabled_codecs:
+              - g722
+              - pcmu
+              - pcma
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
+    SipTelephonyConfigurationPatch:
+      type: object
+      properties:
+        inbound:
+          anyOf:
+            - $ref: '#/components/schemas/SipInboundConfigurationPatch'
+            - type: 'null'
+          description: The inbound configuration changes.
+        outbound:
+          anyOf:
+            - $ref: '#/components/schemas/SipOutboundConfigurationPatch'
+            - type: 'null'
+          description: The outbound configuration changes.
+      description: Changes to SIP configuration. Omitted directions retain their current values. Null resets a direction to its defaults, subject to enabled-direction validation.
+      examples:
+        - outbound:
+            enabled: false
+          inbound:
+            allowed_calling_numbers: []
+      x-ms-foundry-meta:
+        required_previews:
+          - VoiceAgents=V1Preview
     SipTelephonyTransferDestination:
       type: object
       required:
@@ -88013,9 +88289,20 @@ components:
     TeamsPhoneExtensibilityTelephonyBinding:
       type: object
       required:
+        - connection_name
+        - incoming_call_url
         - provider
         - resource_account_object_id
       properties:
+        connection_name:
+          type: string
+          minLength: 1
+          maxLength: 256
+          description: The Foundry connection name for the telephony provider.
+        incoming_call_url:
+          type: string
+          format: uri
+          description: The service-generated webhook URL to configure with the telephony provider.
         provider:
           type: string
           enum:
@@ -88037,9 +88324,20 @@ components:
     TeamsPhoneExtensibilityTelephonyBindingListItem:
       type: object
       required:
+        - connection_name
+        - incoming_call_url
         - provider
         - resource_account_object_id
       properties:
+        connection_name:
+          type: string
+          minLength: 1
+          maxLength: 256
+          description: The Foundry connection name for the telephony provider.
+        incoming_call_url:
+          type: string
+          format: uri
+          description: The service-generated webhook URL to configure with the telephony provider.
         provider:
           type: string
           enum:
@@ -88168,9 +88466,7 @@ components:
       required:
         - id
         - provider
-        - connection_name
         - status
-        - incoming_call_url
       properties:
         id:
           $ref: '#/components/schemas/TelephonyBindingId'
@@ -88178,11 +88474,6 @@ components:
         provider:
           $ref: '#/components/schemas/TelephonyProvider'
           description: The telephony provider.
-        connection_name:
-          type: string
-          minLength: 1
-          maxLength: 256
-          description: The Foundry connection name for the telephony provider.
         label:
           type: string
           maxLength: 128
@@ -88190,15 +88481,12 @@ components:
         status:
           $ref: '#/components/schemas/TelephonyBindingStatus'
           description: The lifecycle status.
-        incoming_call_url:
-          type: string
-          format: uri
-          description: The service-generated webhook URL to configure with the telephony provider.
       discriminator:
         propertyName: provider
         mapping:
           teams_phone_extensibility: '#/components/schemas/TeamsPhoneExtensibilityTelephonyBinding'
           twilio: '#/components/schemas/TwilioTelephonyBinding'
+          sip: '#/components/schemas/SipTelephonyBinding'
       description: A telephony binding owned by a voice agent.
       x-ms-foundry-meta:
         required_previews:
@@ -88216,9 +88504,7 @@ components:
       required:
         - id
         - provider
-        - connection_name
         - status
-        - incoming_call_url
         - etag
       properties:
         id:
@@ -88227,11 +88513,6 @@ components:
         provider:
           $ref: '#/components/schemas/TelephonyProvider'
           description: The telephony provider.
-        connection_name:
-          type: string
-          minLength: 1
-          maxLength: 256
-          description: The Foundry connection name for the telephony provider.
         label:
           type: string
           maxLength: 128
@@ -88239,10 +88520,6 @@ components:
         status:
           $ref: '#/components/schemas/TelephonyBindingStatus'
           description: The lifecycle status.
-        incoming_call_url:
-          type: string
-          format: uri
-          description: The service-generated webhook URL to configure with the telephony provider.
         etag:
           $ref: '#/components/schemas/Azure.Core.eTag'
           description: The entity tag to send in the `If-Match` header when updating or deleting this binding.
@@ -88252,6 +88529,7 @@ components:
         mapping:
           teams_phone_extensibility: '#/components/schemas/TeamsPhoneExtensibilityTelephonyBindingListItem'
           twilio: '#/components/schemas/TwilioTelephonyBindingListItem'
+          sip: '#/components/schemas/SipTelephonyBindingListItem'
       description: A telephony binding returned in a list, including its entity tag.
       x-ms-foundry-meta:
         required_previews:
@@ -89064,10 +89342,11 @@ components:
     TelephonyProvider:
       anyOf:
         - type: string
-        - type: string
           enum:
+            - sip
             - teams_phone_extensibility
             - twilio
+        - type: string
       description: A telephony provider supported by an agent binding. Known values are stable; additional values may be added over time.
       x-ms-foundry-meta:
         required_previews:
@@ -89877,9 +90156,20 @@ components:
     TwilioTelephonyBinding:
       type: object
       required:
+        - connection_name
+        - incoming_call_url
         - provider
         - phone_number
       properties:
+        connection_name:
+          type: string
+          minLength: 1
+          maxLength: 256
+          description: The Foundry connection name for the telephony provider.
+        incoming_call_url:
+          type: string
+          format: uri
+          description: The service-generated webhook URL to configure with the telephony provider.
         provider:
           type: string
           enum:
@@ -89898,9 +90188,20 @@ components:
     TwilioTelephonyBindingListItem:
       type: object
       required:
+        - connection_name
+        - incoming_call_url
         - provider
         - phone_number
       properties:
+        connection_name:
+          type: string
+          minLength: 1
+          maxLength: 256
+          description: The Foundry connection name for the telephony provider.
+        incoming_call_url:
+          type: string
+          format: uri
+          description: The service-generated webhook URL to configure with the telephony provider.
         provider:
           type: string
           enum:
@@ -90024,6 +90325,11 @@ components:
     UpdateTelephonyBindingRequest:
       type: object
       properties:
+        sip:
+          anyOf:
+            - $ref: '#/components/schemas/SipTelephonyConfigurationPatch'
+            - type: 'null'
+          description: The SIP configuration changes. Only valid for SIP bindings. Omitted fields retain current values; null restores defaults, subject to enabled-direction validation.
         status:
           $ref: '#/components/schemas/TelephonyBindingStatus'
           description: The new lifecycle status.
@@ -90043,7 +90349,7 @@ components:
             - type: string
             - type: 'null'
           maxLength: 64
-          description: The replacement Teams Phone extensibility display phone number. Omit it to preserve the current value; use null to clear it. This property is valid only for a Teams Phone extensibility binding.
+          description: The replacement Teams Phone extensibility or SIP display phone number. Omit it to preserve the current value; use null to clear it. Not supported for Twilio.
       description: The request to update an existing telephony binding. Every property is optional and the binding's provider is immutable.
       x-ms-foundry-meta:
         required_previews:
