@@ -11383,7 +11383,7 @@ model DdosGeoMatch {
   continent?: DdosContinent;
 
   /**
-   * The ISO 3166-1 alpha-2 country or territory code to match, for example, "US" or "CA". See https://www.iso.org/iso-3166-country-codes.html.
+   * The uppercase two-letter ISO 3166-1 alpha-2 code for the country or territory to match.
    */
   @pattern("^[A-Z]{2}$")
   countryCode?: string;
