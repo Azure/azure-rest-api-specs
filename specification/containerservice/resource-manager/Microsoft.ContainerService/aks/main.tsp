@@ -35,6 +35,7 @@ import "./LoadBalancer.tsp";
 import "./IdentityBinding.tsp";
 import "./JWTAuthenticator.tsp";
 import "./MeshMembership.tsp";
+import "./AgentFabricMembership.tsp";
 import "./Operations.tsp";
 import "./LocationRoutes.tsp";
 import "./AlertConfiguration.tsp";
