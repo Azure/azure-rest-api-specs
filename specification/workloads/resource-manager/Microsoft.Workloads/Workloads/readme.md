@@ -38,7 +38,6 @@ These settings apply only when `--tag=package-2023-04` is specified on the comma
 ```yaml $(tag) == 'package-2023-04'
 input-file:
   - stable/2023-04-01/SAPVirtualInstance.json
-  - stable/2023-04-01/commonTypes.json
   - stable/2023-04-01/monitors.json
   - stable/2023-04-01/operations.json
 ```
@@ -49,7 +48,6 @@ These settings apply only when `--tag=package-preview-2022-11` is specified on t
 ``` yaml $(tag) == 'package-preview-2022-11'
 input-file:
   - preview/2022-11-01-preview/SAPVirtualInstance.json
-  - preview/2022-11-01-preview/commonTypes.json
   - preview/2022-11-01-preview/monitors.json
   - preview/2022-11-01-preview/operations.json
 ```
