@@ -3,8 +3,7 @@ import {
   generateTypeSpecMetadata,
   type TypeSpecMetadata,
 } from "@azure-tools/specs-shared/typespec-metadata";
-import { join } from "node:path";
-import { failure, type RuleResult } from "../rule-result.ts";
+import { type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
 import {
   compareApiVersionsAsc,
@@ -34,19 +33,21 @@ export function evaluateStaleApiVersionPin(
     const details = staleEmitters.map(
       (emitter) => `  - ${emitter.emitterName}: ${emitter.apiVersion}`,
     );
-    return failure(
-      "stale-api-version-pin",
-      `This pull request adds API version ${newApiVersion}, but the SDK language ` +
+    return {
+      success: false,
+      errorOutput:
+        `ERROR: This pull request adds API version ${newApiVersion}, but the SDK language ` +
         `emitters below are pinned to an older API version, so their SDKs will be generated ` +
         `from the pinned version instead. To generate and release the SDKs from ` +
         `${newApiVersion}, remove the "api-version" setting from these emitters in ` +
-        `tspconfig.yaml:\n${details.join("\n")}`,
-      { url: wikiLink("staleapiversionpin") },
-    );
+        `tspconfig.yaml:\n${details.join("\n")}\n` +
+        `\nPlease refer to ${wikiLink("staleapiversionpin")} for detailed guidance.`,
+    };
   }
 
   return {
     success: true,
+    stdOutput: `No SDK emitter targets an API version older than ${newApiVersion}.`,
   };
 }
 
@@ -60,7 +61,7 @@ export class StaleApiVersionPinRule implements Rule {
     if (resolved.kind === "skip") return resolved.result;
 
     if (resolved.newApiVersions.length !== 1) {
-      return { success: true, skipped: "Multiple new API versions were added; skipping." };
+      return { success: true, stdOutput: "Multiple new API versions were added; skipping." };
     }
 
     try {
@@ -72,17 +73,10 @@ export class StaleApiVersionPinRule implements Rule {
 
       return {
         ...result,
-        diagnostics: result.diagnostics?.map((diagnostic) => ({
-          ...diagnostic,
-          path: join(folder, "tspconfig.yaml"),
-          help: reproduceLocallyHint(folder),
-        })),
+        errorOutput: `${result.errorOutput}\n\n${reproduceLocallyHint(folder)}`,
       };
     } catch (error) {
-      logger.debug(error instanceof Error ? (error.stack ?? error.message) : String(error));
-      return failure("sdk-metadata", error instanceof Error ? error.message : String(error), {
-        path: folder,
-      });
+      return { success: false, errorOutput: String(error) };
     }
   }
 }

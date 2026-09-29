@@ -1,4 +1,3 @@
-import { defaultLogger } from "@azure-tools/specs-shared/logger";
 import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import { strict as assert } from "node:assert";
 import { join } from "path";
@@ -23,7 +22,7 @@ describe("linter-ruleset", function () {
   });
 
   it("succeeds with default config", async function () {
-    const result = await new LinterRulesetRule().execute(mockFolder, defaultLogger);
+    const result = await new LinterRulesetRule().execute(mockFolder);
     assert(result.success);
   });
 
@@ -35,10 +34,7 @@ linter:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
 `),
     );
-    const result = await new LinterRulesetRule().execute(
-      "specification/foo/resource-manager/Foo",
-      defaultLogger,
-    );
+    const result = await new LinterRulesetRule().execute("specification/foo/resource-manager/Foo");
     assert(result.success);
   });
 
@@ -50,10 +46,7 @@ linter:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
 `),
     );
-    const result = await new LinterRulesetRule().execute(
-      "specification/foo/data-plane/Foo",
-      defaultLogger,
-    );
+    const result = await new LinterRulesetRule().execute("specification/foo/data-plane/Foo");
     assert(result.success);
   });
 
@@ -70,22 +63,19 @@ linter:
       Promise.resolve(file === join(mockFolder, "client.tsp")),
     );
 
-    const result = await new LinterRulesetRule().execute(mockFolder, defaultLogger);
+    const result = await new LinterRulesetRule().execute(mockFolder);
     assert(result.success);
   });
 
   it("fails with no-config", async function () {
     readTspConfigSpy.mockImplementation(() => Promise.resolve(""));
-    const result = await new LinterRulesetRule().execute(mockFolder, defaultLogger);
+    const result = await new LinterRulesetRule().execute(mockFolder);
     assert(!result.success);
   });
 
   it("fails with resource-manager/no-linter", async function () {
     readTspConfigSpy.mockImplementation(() => Promise.resolve(``));
-    const result = await new LinterRulesetRule().execute(
-      "specification/foo/resource-manager/Foo",
-      defaultLogger,
-    );
+    const result = await new LinterRulesetRule().execute("specification/foo/resource-manager/Foo");
     assert(!result.success);
   });
 
@@ -97,10 +87,7 @@ linter:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
 `),
     );
-    const result = await new LinterRulesetRule().execute(
-      "specification/foo/Foo.Management",
-      defaultLogger,
-    );
+    const result = await new LinterRulesetRule().execute("specification/foo/Foo.Management");
     assert(!result.success);
   });
 
@@ -112,10 +99,7 @@ linter:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
 `),
     );
-    const result = await new LinterRulesetRule().execute(
-      "specification/foo/data-plane/Foo",
-      defaultLogger,
-    );
+    const result = await new LinterRulesetRule().execute("specification/foo/data-plane/Foo");
     assert(!result.success);
   });
 
@@ -128,10 +112,7 @@ linter:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
 `),
     );
-    const result = await new LinterRulesetRule().execute(
-      "specification/foo/data-plane/Foo",
-      defaultLogger,
-    );
+    const result = await new LinterRulesetRule().execute("specification/foo/data-plane/Foo");
     assert(!result.success);
   });
 
@@ -144,10 +125,7 @@ linter:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
 `),
     );
-    const result = await new LinterRulesetRule().execute(
-      "specification/foo/resource-manager/Foo",
-      defaultLogger,
-    );
+    const result = await new LinterRulesetRule().execute("specification/foo/resource-manager/Foo");
 
     assert(!result.success);
   });
@@ -164,10 +142,7 @@ options:
     package-dir: "azure-contoso-widgetmanager"
 `),
     );
-    const result = await new LinterRulesetRule().execute(
-      "specification/foo/data-plane/Foo",
-      defaultLogger,
-    );
+    const result = await new LinterRulesetRule().execute("specification/foo/data-plane/Foo");
     assert(result.success);
   });
 
@@ -182,10 +157,7 @@ options:
     package-dir: "Azure.Template.Contoso"
 `),
     );
-    const result = await new LinterRulesetRule().execute(
-      "specification/foo/data-plane/Foo",
-      defaultLogger,
-    );
+    const result = await new LinterRulesetRule().execute("specification/foo/data-plane/Foo");
     assert(!result.success);
   });
 
@@ -197,10 +169,7 @@ linter:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
 `),
     );
-    const result = await new LinterRulesetRule().execute(
-      "specification/foo/data-plane/Foo",
-      defaultLogger,
-    );
+    const result = await new LinterRulesetRule().execute("specification/foo/data-plane/Foo");
     assert(result.success);
   });
 
@@ -218,10 +187,7 @@ options:
       - "specification/foo/Foo.Shared/"
 `),
     );
-    const result = await new LinterRulesetRule().execute(
-      "specification/foo/data-plane/Foo",
-      defaultLogger,
-    );
+    const result = await new LinterRulesetRule().execute("specification/foo/data-plane/Foo");
     assert(result.success);
   });
 });

@@ -45,14 +45,14 @@ export async function runRules(
   const diagnostics: Diagnostic[] = [];
 
   for (const rule of rules) {
-    logger.debug("Executing rule: " + rule.name);
+    console.log("\nExecuting rule: " + rule.name);
 
     if (rule.suppressable) {
       const ruleSuppressions = suppressions.filter(
         (s) => s.rules?.includes(rule.name) && (!s.subRules || s.subRules.length === 0),
       );
       if (ruleSuppressions.length > 0) {
-        logger.debug(`  Suppressed: ${ruleSuppressions[0].reason}`);
+        console.log(`  Suppressed: ${ruleSuppressions[0].reason}`);
         result.suppressed.push(rule.name);
         continue;
       }
@@ -77,12 +77,17 @@ export async function runRules(
         console.log("Rule " + rule.name + " failed");
         console.log(ruleResult.errorOutput);
       } else if (!ruleResult.diagnostics?.some((diagnostic) => diagnostic.severity === "error")) {
-        diagnostics.push({
-          severity: "error",
-          code: "rule-failed",
-          message: `Rule ${rule.name} failed without reporting an error.`,
-          path: folder,
-        });
+        // Some unmigrated rules, including SDK config validation, report errors in stdout.
+        if (ruleResult.stdOutput) {
+          console.log("Rule " + rule.name + " failed");
+        } else {
+          diagnostics.push({
+            severity: "error",
+            code: "rule-failed",
+            message: `Rule ${rule.name} failed without reporting an error.`,
+            path: folder,
+          });
+        }
       }
 
       // Stop executing more rules, since the results are more likely to be confusing than helpful

@@ -13,7 +13,7 @@ export interface RuleResult {
   readonly diagnostics?: Diagnostic[];
   readonly skipped?: string;
   readonly suppressed?: string;
-  /** Legacy compiler/formatter output; new rule findings belong in diagnostics. */
+  /** Legacy output for unmigrated rules; new rule findings belong in diagnostics. */
   readonly stdOutput?: string;
   readonly errorOutput?: string;
 }

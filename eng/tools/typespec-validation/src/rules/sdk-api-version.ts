@@ -1,7 +1,7 @@
 import { type TypeSpecMetadata } from "@azure-tools/specs-shared/typespec-metadata";
 import { join } from "node:path";
 import { context } from "../index.ts";
-import { failure, warning, type RuleResult } from "../rule-result.ts";
+import { type RuleResult } from "../rule-result.ts";
 import { parseServiceYaml } from "../service-yaml.ts";
 import { readFileAtCommit } from "../utils.ts";
 
@@ -25,17 +25,10 @@ export function wikiLink(anchor: string): string {
 }
 
 export function reproduceLocallyHint(folder: string): string {
-  const commits = JSON.stringify({
-    baseCommitish:
-      typeof context.baseCommitish === "string" ? context.baseCommitish : "{commitShaOfMain}",
-    headCommitish:
-      typeof context.headCommitish === "string" ? context.headCommitish : "{commitShaOfPRHead}",
-  });
-  const quote = (value: string) =>
-    process.platform === "win32"
-      ? `'${value.replaceAll("'", "''")}'`
-      : `'${value.replaceAll("'", "'\"'\"'")}'`;
-  return `To reproduce locally:\n    pnpm tsv ${quote(folder)} ${quote(commits)}`;
+  return (
+    `To reproduce locally:\n  npx tsv ${folder} '{"baseCommitish":"{commitShaOfMain}",` +
+    `"headCommitish":"{commitShaOfPRHead}"}'`
+  );
 }
 
 export function parseApiVersion(version: string) {
@@ -79,20 +72,21 @@ export function resolveSdkEmitters(metadata: TypeSpecMetadata): ResolvedSdkEmitt
   if (emitters.length === 0) {
     return {
       kind: "skip",
-      result: warning(
-        "sdk-api-version-skipped",
-        "No SDK language emitters are configured; skipping API-version validation.",
-      ),
+      result: {
+        success: true,
+        stdOutput:
+          "Warning: No SDK language emitters are configured; skipping API-version validation.",
+      },
     };
   }
 
   if (emitters.some((emitter) => emitter.apiVersion === MULTIPLE_SERVICE_API_VERSION)) {
     return {
       kind: "skip",
-      result: warning(
-        "sdk-api-version-skipped",
-        "This rule does not support multiple-service project scenarios.",
-      ),
+      result: {
+        success: true,
+        stdOutput: "Warning: This rule does not support multiple-service project scenarios.",
+      },
     };
   }
 
@@ -111,31 +105,23 @@ export async function resolveNewApiVersions(folder: string): Promise<ResolvedNew
       kind: "skip",
       result: {
         success: true,
-        skipped: "Validating all specs; skipping comparison of newly added API versions.",
+        stdOutput: "Validating all specs; skipping comparison of newly added API versions.",
       },
     };
   }
 
-  // A normal local run has no comparison context; skipping is expected, not a warning.
+  // Only the pull request check supplies commits; a bare "npx tsv <folder>" has nothing to diff.
   const { baseCommitish, headCommitish } = context;
-  if (baseCommitish === undefined && headCommitish === undefined) {
+  if (typeof baseCommitish !== "string" || typeof headCommitish !== "string") {
     return {
       kind: "skip",
       result: {
         success: true,
-        skipped: `No commits to compare; skipping API-version comparison. ${reproduceLocallyHint(folder)}`,
+        stdOutput:
+          "No commits to compare; skipping. To run this rule locally, pass the commits to " +
+          `compare:\n  npx tsv ${folder} '{"baseCommitish":"{commitShaOfMain}",` +
+          `"headCommitish":"{headShaOfLocalBranch}"}'`,
       },
-    };
-  }
-
-  if (typeof baseCommitish !== "string" || typeof headCommitish !== "string") {
-    return {
-      kind: "skip",
-      result: warning(
-        "sdk-api-version-skipped",
-        "Comparison requires both baseCommitish and headCommitish strings; skipping API-version comparison.",
-        { path: folder, help: reproduceLocallyHint(folder) },
-      ),
     };
   }
 
@@ -151,22 +137,22 @@ export async function resolveNewApiVersions(folder: string): Promise<ResolvedNew
   } catch (error) {
     return {
       kind: "skip",
-      result: failure(
-        "sdk-api-version",
-        `Unable to compare service.yaml between ${baseCommitish} and ${headCommitish}: ${String(error)}`,
-        { path: serviceYamlPath },
-      ),
+      result: {
+        success: false,
+        errorOutput:
+          `ERROR: Unable to compare service.yaml between ${baseCommitish} and ` +
+          `${headCommitish}: ${String(error)}`,
+      },
     };
   }
 
   if (headSource === undefined) {
     return {
       kind: "skip",
-      result: warning(
-        "sdk-api-version-skipped",
-        `service.yaml does not exist at ${headCommitish}; validation skipped.`,
-        { path: serviceYamlPath },
-      ),
+      result: {
+        success: true,
+        stdOutput: `Warning: service.yaml does not exist at ${headCommitish}; validation skipped.`,
+      },
     };
   }
 
@@ -174,9 +160,7 @@ export async function resolveNewApiVersions(folder: string): Promise<ResolvedNew
   if (!headService.success) {
     return {
       kind: "skip",
-      result: failure("sdk-api-version", `${headCommitish}: ${headService.error}`, {
-        path: serviceYamlPath,
-      }),
+      result: { success: false, errorOutput: `ERROR: ${headCommitish}: ${headService.error}` },
     };
   }
 
@@ -184,9 +168,7 @@ export async function resolveNewApiVersions(folder: string): Promise<ResolvedNew
   if (baseService && !baseService.success) {
     return {
       kind: "skip",
-      result: failure("sdk-api-version", `${baseCommitish}: ${baseService.error}`, {
-        path: serviceYamlPath,
-      }),
+      result: { success: false, errorOutput: `ERROR: ${baseCommitish}: ${baseService.error}` },
     };
   }
 
@@ -206,7 +188,7 @@ export async function resolveNewApiVersions(folder: string): Promise<ResolvedNew
   if (newApiVersions.length === 0) {
     return {
       kind: "skip",
-      result: { success: true, skipped: "No new TypeSpec API versions were added." },
+      result: { success: true, stdOutput: "No new TypeSpec API versions were added." },
     };
   }
 

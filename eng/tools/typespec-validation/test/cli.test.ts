@@ -3,7 +3,7 @@ import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promi
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { promisify } from "node:util";
+import { promisify, stripVTControlCharacters } from "node:util";
 import { simpleGit } from "simple-git";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 
@@ -60,14 +60,12 @@ it.each(["single", "all", "changed"])(
     const args = mode === "single" ? [project] : [`--${mode}`];
     await expect(run(...args)).rejects.toMatchObject({
       code: 1,
-      stdout: expect.not.stringContaining("Executing rule:") as unknown,
-      stderr: expect.stringContaining(
-        'error tsv/folder-structure: Project must use "folder structure v2"',
-      ) as unknown,
+      stdout: expect.stringContaining('must use "folder structure v2"') as unknown,
+      stderr: mode === "single" ? "" : (expect.not.stringContaining("simple-git") as unknown),
     });
     await expect(run(...args, "--verbose")).rejects.toMatchObject({
       code: 1,
-      stdout: expect.stringContaining("Executing rule: FolderStructure") as unknown,
+      stdout: expect.stringContaining('must use "folder structure v2"') as unknown,
       stderr: expect.stringContaining("simple-git") as unknown,
     });
   },
@@ -95,29 +93,26 @@ it("respects explicit DEBUG selections without --verbose", async () => {
   expect(stderr).toContain("simple-git");
 });
 
-it("colors structured diagnostics when explicitly requested, independently of verbosity", async () => {
-  vi.stubEnv("NO_COLOR", undefined);
-  vi.stubEnv("FORCE_COLOR", "1");
-  await addProject("custom/Project");
-  await initGit();
-  await expect(run("custom/Project")).rejects.toMatchObject({
-    code: 1,
-    stdout: expect.not.stringContaining("Executing rule:") as unknown,
-    stderr: expect.stringContaining("\x1b[31merror\x1b[39m") as unknown,
-  });
-});
-
 it.each([
-  { config: "emit: []\nemit: []\n", diagnostic: "tspconfig.yaml:2:1 - error tsv/invalid-yaml:" },
-  { config: "emit: false\n", diagnostic: "tspconfig.yaml - error tsv/invalid-config: emit:" },
   {
-    config: "emit: []\n",
-    diagnostic:
-      'error tsv/emit-autorest: The default emit list must include "@azure-tools/typespec-autorest".',
+    config: "emit: []\nemit: []\n",
+    diagnostic: "tspconfig.yaml:2:1 - error tsv/invalid-yaml:",
+    color: false,
   },
+  {
+    config: "emit: false\n",
+    diagnostic: "tspconfig.yaml - error tsv/invalid-config: emit:",
+    color: false,
+  },
+  { config: "emit: []\n", diagnostic: "tspconfig.yaml - error tsv/emit-autorest:", color: false },
+  { config: "emit: []\n", diagnostic: "tspconfig.yaml - error tsv/emit-autorest:", color: true },
 ])(
-  "reports configuration failures once without trace dumps: $diagnostic",
-  async ({ config, diagnostic }) => {
+  "renders the pilot diagnostic once (color=$color): $diagnostic",
+  async ({ config, diagnostic, color }) => {
+    if (color) {
+      vi.stubEnv("NO_COLOR", undefined);
+      vi.stubEnv("FORCE_COLOR", "1");
+    }
     const project = "specification/service/data-plane/Project";
     await addProject(project);
     await initGit();
@@ -129,17 +124,15 @@ it.each([
       await run(project);
       expect.fail("Expected validation to fail");
     } catch (error) {
-      expect(error).toMatchObject({
-        code: 1,
-        stdout: expect.stringContaining("Running TypeSpecValidation on folder:") as unknown,
-        stderr: expect.stringContaining(diagnostic) as unknown,
-      });
+      expect(error).toMatchObject({ code: 1 });
       if (!(error instanceof Error) || !("stdout" in error) || !("stderr" in error)) throw error;
-      expect(String(error.stdout)).not.toMatch(
-        /Executing rule:|config files:|imports:|Expected npm prefix:/,
-      );
-      expect(String(error.stderr).split(diagnostic)).toHaveLength(2);
-      expect(String(error.stderr)).not.toContain("\n    at ");
+      const stderr = String(error.stderr);
+      expect(stripVTControlCharacters(stderr).split(diagnostic)).toHaveLength(2);
+      expect(stderr.includes("\x1b[31merror\x1b[39m")).toBe(color);
+      expect(stderr).not.toContain("\n    at ");
+      expect(String(error.stdout)).toContain("Executing rule: EmitAutorest");
+      expect(String(error.stdout)).not.toContain("mainTspExists:");
+      expect(String(error.stdout)).not.toContain("Executing rule: ServiceYaml");
     }
   },
 );
