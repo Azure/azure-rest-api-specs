@@ -237,7 +237,6 @@ namespace Microsoft.Monitor {
     /**
      * Resource properties
      */
-    @removed(Versions.v2026_09_03_preview)
     properties?: AzureMonitorWorkspace;
   }
 }

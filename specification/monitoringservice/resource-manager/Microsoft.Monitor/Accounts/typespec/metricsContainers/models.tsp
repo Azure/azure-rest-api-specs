@@ -36,7 +36,6 @@ namespace Microsoft.Monitor {
     /**
      * The provisioning state of the metrics container.
      */
-    @removed(Versions.v2026_09_03_preview)
     @visibility(Lifecycle.Read)
     provisioningState?: Azure.ResourceManager.ResourceProvisioningState;
 

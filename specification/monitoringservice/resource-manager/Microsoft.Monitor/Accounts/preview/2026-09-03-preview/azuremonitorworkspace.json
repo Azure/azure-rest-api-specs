@@ -2334,6 +2334,10 @@
         "identity": {
           "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/AzureMonitorWorkspace",
+          "description": "Resource properties"
         }
       }
     },
@@ -2654,6 +2658,11 @@
       "type": "object",
       "description": "Properties of a metrics container.",
       "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
+          "description": "The provisioning state of the metrics container.",
+          "readOnly": true
+        },
         "limits": {
           "$ref": "#/definitions/MetricsLimits",
           "description": "Metrics limits."
