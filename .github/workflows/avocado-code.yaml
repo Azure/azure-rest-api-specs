@@ -74,7 +74,7 @@ jobs:
       - if: ${{ always() && (steps.run-avocado.outputs.output-file) }}
         name: Generate job summary
         id: generate-job-summary
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9.0.0
         with:
           script: |
             const { default: generateJobSummary } =

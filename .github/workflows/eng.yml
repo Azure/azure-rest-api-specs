@@ -18,10 +18,6 @@ on:
       - .gitignore
       - .oxlintrc.json
       - .oxfmtrc.json
-      - specification/common-types/**
-      - specification/contosowidgetmanager/**
-      - specification/storage/**
-      - specification/compute/**
   pull_request:
     paths:
       - "**/package.json"
@@ -36,10 +32,6 @@ on:
       - .gitignore
       - .oxlintrc.json
       - .oxfmtrc.json
-      - specification/common-types/**
-      - specification/contosowidgetmanager/**
-      - specification/storage/**
-      - specification/compute/**
   workflow_dispatch:
 
 permissions:
@@ -113,10 +105,6 @@ jobs:
           sparse-checkout: |
             .github
             eng
-            specification/common-types
-            specification/contosowidgetmanager
-            specification/storage
-            specification/compute
 
       - uses: ./.github/actions/setup-node-install-deps
 

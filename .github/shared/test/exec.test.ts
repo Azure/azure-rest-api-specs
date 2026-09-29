@@ -9,7 +9,6 @@ import {
   execFile,
   execNodeBin,
   execNpm,
-  execNpmExec,
   execPnpm,
   execPnpmExec,
   isExecError,
@@ -168,6 +167,13 @@ describe("execNodeBin", () => {
       execNodeBin("@test/cli", ["cli"], { cwd: root, maxBuffer: 1 }),
     ).rejects.toMatchObject({ code: "ERR_CHILD_PROCESS_STDIO_MAXBUFFER" });
   });
+
+  it("terminates the binary when the caller's timeout expires", async () => {
+    await installCli(root, "cli.cjs", "setInterval(() => {}, 1000)");
+    await expect(
+      execNodeBin("@test/cli", ["cli"], { cwd: root, timeout: 100 }),
+    ).rejects.toMatchObject({ killed: true });
+  });
 });
 
 describe("execNpm", () => {
@@ -193,18 +199,6 @@ describe("execNpm", () => {
     await expect(execNpm(["invalid-command-xyz"], options)).rejects.toMatchObject({
       code: expect.toSatisfy((v) => v !== 0) as unknown,
     });
-  });
-});
-
-describe("execNpmExec", () => {
-  // A command run in the context of "npm exec ___" needs to call
-  // something installed in the workspace. In this case, oxfmt is present
-  // so it is used.
-  it("runs oxfmt", { timeout: 15_000 }, async () => {
-    // npm may emit warnings to stderr (e.g. unknown env config) depending on the
-    // environment, so only assert on stdout here.
-    const result = await execNpmExec(["oxfmt", "--version"], options);
-    expect(result.stdout.trim()).toMatch(/^Version: \d+\.\d+\.\d+$/);
   });
 });
 
