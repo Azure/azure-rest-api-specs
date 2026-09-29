@@ -191,14 +191,20 @@ describe("contributor readiness", () => {
   });
 
   it.each([404, 403])(
-    "links organization names to their People pages for membership HTTP %s",
+    "prefills each user's organization People search for membership HTTP %s",
     async (code) => {
       const f = setup();
       f.membership.mockRejectedValue(createMockRequestError(code));
       await f.run();
       const [comment] = f.github.rest.issues.createComment.mock.calls[0] as [{ body: string }];
-      expect(comment.body).toContain("[Microsoft](https://github.com/orgs/Microsoft/people)");
-      expect(comment.body).toContain("[Azure](https://github.com/orgs/Azure/people)");
+      for (const user of [author, reviewer]) {
+        const row = comment.body.split("\n").find((line) => line.includes(`**[${user.login}]`));
+        for (const org of ["Microsoft", "Azure"]) {
+          expect(row).toContain(
+            `[${org}](https://github.com/orgs/${org}/people?query=${user.login})`,
+          );
+        }
+      }
       expect(comment.body).not.toContain("\\[Microsoft\\]");
       expect(comment.body).toContain("https://aka.ms/azsdk/access");
       expect(comment.body).toContain(code === 403 ? "🟡" : "🔴");
@@ -483,7 +489,9 @@ describe("contributor readiness", () => {
       ],
     );
     expect(body.split("\n").filter((line) => line.startsWith("| 🔴"))).toHaveLength(1);
-    expect(body.match(/\[Azure\]\(https:\/\/github.com\/orgs\/Azure\/people\)/g)).toHaveLength(1);
+    expect(
+      body.match(/\[Azure\]\(https:\/\/github.com\/orgs\/Azure\/people\?query=reviewer-example\)/g),
+    ).toHaveLength(1);
     expect(body).toContain("Could not verify repository access.");
   });
 
@@ -542,10 +550,28 @@ describe("contributor readiness", () => {
         },
       ],
     );
-    expect(body).toContain("[Microsoft](https://github.com/orgs/Microsoft/people)");
+    expect(body).toContain(
+      "[Microsoft](https://github.com/orgs/Microsoft/people?query=Unresolved)",
+    );
     expect(body).toContain("\\[user\\]\\(https://example.com\\)");
     expect(body).not.toContain("<script>");
     expect(body).not.toContain("@org/team");
+  });
+
+  it("encodes the organization search query without allowing extra parameters or Markdown", () => {
+    const body = renderReadiness(
+      [],
+      [
+        {
+          subject: "user &role=admin#')",
+          message: "Microsoft membership not public.",
+          organization: "Microsoft",
+        },
+      ],
+    );
+    expect(body).toContain(
+      "[Microsoft](https://github.com/orgs/Microsoft/people?query=user+%26role%3Dadmin%23%27%29)",
+    );
   });
 });
 

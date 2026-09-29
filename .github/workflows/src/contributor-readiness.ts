@@ -319,11 +319,13 @@ function renderReadinessFindings(
   ];
 }
 
-/** Escapes finding text before linking its known organization to the searchable People page. */
+/** Escapes finding text and links its organization to a People search for the affected user. */
 function renderFindingMessage(finding: ReadinessFinding): string {
   const message = escapeMarkdown(finding.message);
   const org = finding.organization;
-  return org ? message.replace(org, link(org, `https://github.com/orgs/${org}/people`)) : message;
+  if (!org) return message;
+  const query = new URLSearchParams({ query: finding.subject }).toString();
+  return message.replace(org, link(org, `https://github.com/orgs/${org}/people?${query}`));
 }
 
 /**
