@@ -37,7 +37,7 @@ model ExpressRouteLagAuthorization extends SubResourceModel {
   type?: string;
 
   /**
-   * The name of the resource that is unique within a resource group. This name can be used to access the resource.
+   * The authorization name, unique within the parent ExpressRoute LAG.
    */
   @visibility(Lifecycle.Read)
   @key("authorizationName")
@@ -70,7 +70,7 @@ alias ExpressRouteLagAuthorizationOps = Azure.ResourceManager.Legacy.LegacyOpera
     expressRouteLagName: string;
   },
   {
-    /** The name of the authorization. */
+    /** The authorization name, unique within the parent ExpressRoute LAG. */
     @path
     @segment("authorizations")
     @key
@@ -80,6 +80,19 @@ alias ExpressRouteLagAuthorizationOps = Azure.ResourceManager.Legacy.LegacyOpera
     authorizationName: string;
   }
 >;
+
+/** Polling headers returned when creating or updating an ExpressRoute LAG authorization. */
+alias ExpressRouteLagAuthorizationLroHeaders = ArmAsyncOperationHeader<
+  UrlValue = url,
+  FinalResult = ExpressRouteLagAuthorization
+> &
+  Azure.Core.Foundations.RetryAfterHeader;
+
+/** The request has succeeded. */
+model ExpressRouteLagAuthorizationUpdatedResponse {
+  ...ArmResourceUpdatedResponse<ExpressRouteLagAuthorization>;
+  ...ExpressRouteLagAuthorizationLroHeaders;
+}
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The containing service namespace still relies on Azure.ResourceManager.Legacy feature flags and templates; this interface follows the same established project-level pattern."
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
@@ -99,6 +112,12 @@ interface ExpressRouteLagAuthorizations {
    */
   createOrUpdate is ExpressRouteLagAuthorizationOps.CreateOrUpdateAsync<
     ExpressRouteLagAuthorization,
+    Response =
+      | ExpressRouteLagAuthorizationUpdatedResponse
+      | ArmResourceCreatedResponse<
+          ExpressRouteLagAuthorization,
+          ExpressRouteLagAuthorizationLroHeaders
+        >,
     OverrideErrorType = CloudError
   >;
 
@@ -111,7 +130,10 @@ interface ExpressRouteLagAuthorizations {
   delete is ExpressRouteLagAuthorizationOps.DeleteWithoutOkAsync<
     ExpressRouteLagAuthorization,
     Response =
-      | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders &
+      | ArmDeleteAcceptedLroResponse<ArmCombinedLroHeaders<
+          FinalResult = void,
+          FinalUrlValue = url
+        > &
           Azure.Core.Foundations.RetryAfterHeader>
       | ArmDeletedNoContentResponse,
     OverrideErrorType = CloudError
@@ -138,7 +160,10 @@ interface ExpressRouteLagAuthorizations {
   >;
 }
 
-@@doc(ExpressRouteLagAuthorization.name, "The name of the authorization.");
+@@doc(
+  ExpressRouteLagAuthorization.name,
+  "The authorization name, unique within the parent ExpressRoute LAG."
+);
 @@doc(
   ExpressRouteLagAuthorization.properties,
   "ExpressRouteLag authorization properties."
