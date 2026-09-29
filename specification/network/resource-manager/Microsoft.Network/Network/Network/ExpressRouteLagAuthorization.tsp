@@ -40,7 +40,6 @@ model ExpressRouteLagAuthorization extends SubResourceModel {
    * The name of the resource that is unique within a resource group. This name can be used to access the resource.
    */
   @visibility(Lifecycle.Read)
-  @path
   @key("authorizationName")
   @minLength(1)
   @maxLength(80)

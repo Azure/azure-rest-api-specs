@@ -7720,6 +7720,9 @@
         "name": {
           "type": "string",
           "description": "The name of the authorization.",
+          "minLength": 1,
+          "maxLength": 80,
+          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
           "readOnly": true
         },
         "etag": {
@@ -7729,8 +7732,6 @@
         }
       },
       "required": [
-        "id",
-        "type",
         "name"
       ],
       "allOf": [
