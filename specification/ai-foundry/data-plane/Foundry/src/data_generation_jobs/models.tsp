@@ -66,8 +66,8 @@ model EvaluationDataGenerationJobInputs extends DataGenerationJobInputs {
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model SupervisedFineTuningDataGenerationJobInputs
   extends DataGenerationJobInputs {
-  @doc("The scenario of the data generation job, which is Supervised Fine-tuning for this model.")
-  scenario: DataGenerationJobScenario.supervised_finetuning;
+  @doc("The scenario of the data generation job, which is Supervised Fine-tuning preview for this model.")
+  scenario: DataGenerationJobScenario.supervised_finetuning_preview;
 
   @doc("Optional file output configuration for the generated supervised fine-tuning data.")
   output_configuration?: SupervisedFineTuningDataGenerationJobOutputTarget;
@@ -78,8 +78,8 @@ model SupervisedFineTuningDataGenerationJobInputs
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model ReinforcementFineTuningDataGenerationJobInputs
   extends DataGenerationJobInputs {
-  @doc("The scenario of the data generation job, which is Reinforcement Fine-tuning for this model.")
-  scenario: DataGenerationJobScenario.reinforcement_finetuning;
+  @doc("The scenario of the data generation job, which is Reinforcement Fine-tuning preview for this model.")
+  scenario: DataGenerationJobScenario.reinforcement_finetuning_preview;
 
   @doc("Optional file output configuration for the generated reinforcement fine-tuning data.")
   output_configuration?: ReinforcementFineTuningDataGenerationJobOutputTarget;
@@ -190,8 +190,8 @@ model EvaluationDataGenerationJob extends DataGenerationJob {
 @doc("Supervised fine-tuning data generation job resource. This is a preview feature.")
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model SupervisedFineTuningDataGenerationJob extends DataGenerationJob {
-  @doc("The scenario of the data generation job, which is Supervised Fine-tuning for this model.")
-  scenario: DataGenerationJobScenario.supervised_finetuning;
+  @doc("The scenario of the data generation job, which is Supervised Fine-tuning preview for this model.")
+  scenario: DataGenerationJobScenario.supervised_finetuning_preview;
 
   @doc("Optional file output configuration for the generated supervised fine-tuning data.")
   output_configuration?: SupervisedFineTuningDataGenerationJobOutputTarget;
@@ -201,8 +201,8 @@ model SupervisedFineTuningDataGenerationJob extends DataGenerationJob {
 @doc("Reinforcement fine-tuning data generation job resource. This is a preview feature.")
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model ReinforcementFineTuningDataGenerationJob extends DataGenerationJob {
-  @doc("The scenario of the data generation job, which is Reinforcement Fine-tuning for this model.")
-  scenario: DataGenerationJobScenario.reinforcement_finetuning;
+  @doc("The scenario of the data generation job, which is Reinforcement Fine-tuning preview for this model.")
+  scenario: DataGenerationJobScenario.reinforcement_finetuning_preview;
 
   @doc("Optional file output configuration for the generated reinforcement fine-tuning data.")
   output_configuration?: ReinforcementFineTuningDataGenerationJobOutputTarget;
@@ -286,11 +286,11 @@ model DataGenerationTokenUsage {
 union DataGenerationJobScenario {
   string,
 
-  @doc("Supervised Fine-tuning scenario.")
-  supervised_finetuning: "supervised_finetuning",
+  @doc("Supervised Fine-tuning preview scenario.")
+  supervised_finetuning_preview: "supervised_finetuning_preview",
 
-  @doc("Reinforcement Fine-tuning scenario.")
-  reinforcement_finetuning: "reinforcement_finetuning",
+  @doc("Reinforcement Fine-tuning preview scenario.")
+  reinforcement_finetuning_preview: "reinforcement_finetuning_preview",
 
   @doc("Evaluation scenario.")
   evaluation: "evaluation",
