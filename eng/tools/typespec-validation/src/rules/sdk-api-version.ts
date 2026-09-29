@@ -116,14 +116,24 @@ export async function resolveNewApiVersions(folder: string): Promise<ResolvedNew
     };
   }
 
-  // Only the pull request check supplies commits; a bare "npx tsv <folder>" has nothing to diff.
+  // A normal local run has no comparison context; skipping is expected, not a warning.
   const { baseCommitish, headCommitish } = context;
+  if (baseCommitish === undefined && headCommitish === undefined) {
+    return {
+      kind: "skip",
+      result: {
+        success: true,
+        skipped: `No commits to compare; skipping API-version comparison. ${reproduceLocallyHint(folder)}`,
+      },
+    };
+  }
+
   if (typeof baseCommitish !== "string" || typeof headCommitish !== "string") {
     return {
       kind: "skip",
       result: warning(
         "sdk-api-version-skipped",
-        "No commits to compare; skipping API-version comparison.",
+        "Comparison requires both baseCommitish and headCommitish strings; skipping API-version comparison.",
         { path: folder, help: reproduceLocallyHint(folder) },
       ),
     };

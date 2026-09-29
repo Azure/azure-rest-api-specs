@@ -41,6 +41,10 @@ Validation still stops after the first failed rule in each project, and batch
 runs continue to later projects. Suppression rule names are unchanged. Compiler
 and formatter output, including emitted-file lists, retains its existing format.
 
+A local run without comparison commits skips API-version comparison without a
+warning; `--verbose` shows the reason. An explicitly supplied but incomplete or
+invalid comparison context still produces a warning.
+
 In GitHub Actions, both TSV workflows enable `--verbose` when debug logging is
 enabled. To diagnose a run without changing the normal default, choose
 **Re-run jobs > Enable debug logging**, or run:
