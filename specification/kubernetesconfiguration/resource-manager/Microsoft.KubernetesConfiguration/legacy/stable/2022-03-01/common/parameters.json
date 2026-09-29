@@ -1,0 +1,54 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-03-01",
+    "title": "Common types and definitions",
+    "description": "Definitions and parameters common for all resource types of KubernetesConfiguration RP"
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {},
+  "parameters": {
+    "ClusterRpParameter": {
+      "name": "clusterRp",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Kubernetes cluster RP - i.e. Microsoft.ContainerService, Microsoft.Kubernetes, Microsoft.HybridContainerService.",
+      "x-ms-parameter-location": "method"
+    },
+    "ClusterResourceNameParameter": {
+      "name": "clusterResourceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Kubernetes cluster resource name - i.e. managedClusters, connectedClusters, provisionedClusters.",
+      "x-ms-parameter-location": "method"
+    },
+    "ClusterNameParameter": {
+      "name": "clusterName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the kubernetes cluster.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
