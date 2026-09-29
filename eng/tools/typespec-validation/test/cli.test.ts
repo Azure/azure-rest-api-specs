@@ -39,6 +39,7 @@ beforeEach(async () => {
   root = await realpath(await mkdtemp(join(tmpdir(), "tsv-cli-")));
   vi.stubEnv("GITHUB_ACTIONS", "false");
   vi.stubEnv("DEBUG", "");
+  vi.stubEnv("NO_COLOR", "1");
 });
 
 afterEach(async () => {
@@ -58,12 +59,14 @@ it.each(["single", "all", "changed"])(
     const args = mode === "single" ? [project] : [`--${mode}`];
     await expect(run(...args)).rejects.toMatchObject({
       code: 1,
-      stdout: expect.stringContaining('must use "folder structure v2"') as unknown,
-      stderr: mode === "single" ? "" : (expect.not.stringContaining("simple-git") as unknown),
+      stdout: expect.not.stringContaining("Executing rule:") as unknown,
+      stderr: expect.stringContaining(
+        'error tsv/folder-structure: Project must use "folder structure v2"',
+      ) as unknown,
     });
     await expect(run(...args, "--verbose")).rejects.toMatchObject({
       code: 1,
-      stdout: expect.stringContaining('must use "folder structure v2"') as unknown,
+      stdout: expect.stringContaining("Executing rule: FolderStructure") as unknown,
       stderr: expect.stringContaining("simple-git") as unknown,
     });
   },
@@ -90,6 +93,43 @@ it("respects explicit DEBUG selections without --verbose", async () => {
   const { stderr } = await run("--all", "--dry-run");
   expect(stderr).toContain("simple-git");
 });
+
+it.each([
+  { config: "emit: []\nemit: []\n", diagnostic: "tspconfig.yaml:2:1 - error tsv/invalid-yaml:" },
+  { config: "emit: false\n", diagnostic: "tspconfig.yaml - error tsv/invalid-config: emit:" },
+  {
+    config: "emit: []\n",
+    diagnostic:
+      'error tsv/emit-autorest: The default emit list must include "@azure-tools/typespec-autorest".',
+  },
+])(
+  "reports configuration failures once without trace dumps: $diagnostic",
+  async ({ config, diagnostic }) => {
+    const project = "specification/service/data-plane/Project";
+    await addProject(project);
+    await initGit();
+    await writeFile(join(root, "package.json"), '{"private":true}');
+    await writeFile(join(root, project, "main.tsp"), "");
+    await mkdir(join(root, project, "examples"));
+    await writeFile(join(root, project, "tspconfig.yaml"), config);
+    try {
+      await run(project);
+      expect.fail("Expected validation to fail");
+    } catch (error) {
+      expect(error).toMatchObject({
+        code: 1,
+        stdout: expect.stringContaining("Running TypeSpecValidation on folder:") as unknown,
+        stderr: expect.stringContaining(diagnostic) as unknown,
+      });
+      if (!(error instanceof Error) || !("stdout" in error) || !("stderr" in error)) throw error;
+      expect(String(error.stdout)).not.toMatch(
+        /Executing rule:|config files:|imports:|Expected npm prefix:/,
+      );
+      expect(String(error.stderr).split(diagnostic)).toHaveLength(2);
+      expect(String(error.stderr)).not.toContain("\n    at ");
+    }
+  },
+);
 
 it("defaults --all to specification and passes all-spec context to children and suppressions", async () => {
   await addProject("specification/a");

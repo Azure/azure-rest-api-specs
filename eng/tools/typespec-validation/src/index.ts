@@ -3,6 +3,8 @@ import { type Suppression } from "@azure-tools/suppressions";
 import debug from "debug";
 import { stat } from "node:fs/promises";
 import { type ParseArgsConfig, parseArgs } from "node:util";
+import { exceptionDiagnostic, reportDiagnostics } from "./diagnostics.ts";
+import type { Diagnostic, RuleResult } from "./rule-result.ts";
 import { type Rule } from "./rule.ts";
 import { runAll, runChanged } from "./run-projects.ts";
 import { ClientTspImportRule } from "./rules/client-tsp-import.ts";
@@ -40,29 +42,48 @@ export async function runRules(
   logger: ILogger,
 ): Promise<RunRulesResult> {
   const result: RunRulesResult = { success: true, suppressed: [], executed: [], failed: [] };
+  const diagnostics: Diagnostic[] = [];
 
   for (const rule of rules) {
-    console.log("\nExecuting rule: " + rule.name);
+    logger.debug("Executing rule: " + rule.name);
 
     if (rule.suppressable) {
       const ruleSuppressions = suppressions.filter(
         (s) => s.rules?.includes(rule.name) && (!s.subRules || s.subRules.length === 0),
       );
       if (ruleSuppressions.length > 0) {
-        console.log(`  Suppressed: ${ruleSuppressions[0].reason}`);
+        logger.debug(`  Suppressed: ${ruleSuppressions[0].reason}`);
         result.suppressed.push(rule.name);
         continue;
       }
     }
 
-    const ruleResult = await rule.execute(folder, logger);
+    let ruleResult: RuleResult;
+    try {
+      ruleResult = await rule.execute(folder, logger);
+    } catch (error) {
+      logger.debug(error instanceof Error ? (error.stack ?? error.message) : String(error));
+      ruleResult = { success: false, diagnostics: [exceptionDiagnostic(error, folder)] };
+    }
     result.executed.push(rule.name);
+    diagnostics.push(...(ruleResult.diagnostics ?? []));
+    if (ruleResult.skipped) logger.debug(`  Skipped: ${ruleResult.skipped}`);
+    if (ruleResult.suppressed) logger.debug(`  Suppressed: ${ruleResult.suppressed}`);
     if (ruleResult.stdOutput) console.log(ruleResult.stdOutput);
     if (!ruleResult.success) {
       result.success = false;
       result.failed.push(rule.name);
-      console.log("Rule " + rule.name + " failed");
-      if (ruleResult.errorOutput) console.log(ruleResult.errorOutput);
+      if (ruleResult.errorOutput) {
+        console.log("Rule " + rule.name + " failed");
+        console.log(ruleResult.errorOutput);
+      } else if (!ruleResult.diagnostics?.some((diagnostic) => diagnostic.severity === "error")) {
+        diagnostics.push({
+          severity: "error",
+          code: "rule-failed",
+          message: `Rule ${rule.name} failed without reporting an error.`,
+          path: folder,
+        });
+      }
 
       // Stop executing more rules, since the results are more likely to be confusing than helpful
       // Can add property like "RuleResult.ContinueOnError" if some rules want to continue
@@ -70,6 +91,7 @@ export async function runRules(
     }
   }
 
+  reportDiagnostics(diagnostics, logger);
   return result;
 }
 

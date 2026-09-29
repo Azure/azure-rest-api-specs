@@ -1,3 +1,4 @@
+import { diagnosticText } from "./diagnostics.ts";
 import { generateTypeSpecMetadata } from "@azure-tools/specs-shared/typespec-metadata";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { context } from "../src/index.ts";
@@ -32,7 +33,7 @@ describe("resolveNewApiVersions", function () {
     const resolved = await resolveNewApiVersions("specification/foo/Foo");
 
     expect(resolved.kind).toBe("skip");
-    expect(resolved.kind === "skip" && resolved.result.stdOutput).toContain("Validating all specs");
+    expect(resolved.kind === "skip" && resolved.result.skipped).toContain("Validating all specs");
     expect(readFileAtCommit).not.toHaveBeenCalled();
   });
 
@@ -44,8 +45,8 @@ describe("resolveNewApiVersions", function () {
     const resolved = await resolveNewApiVersions("specification/foo/Foo");
 
     expect(resolved.kind).toBe("skip");
-    expect(resolved.kind === "skip" && resolved.result.stdOutput).toContain(
-      `npx tsv specification/foo/Foo '{"baseCommitish":"{commitShaOfMain}","headCommitish":"{headShaOfLocalBranch}"}'`,
+    expect(resolved.kind === "skip" && diagnosticText(resolved.result)).toContain(
+      `pnpm tsv 'specification/foo/Foo' '{"baseCommitish":"{commitShaOfMain}","headCommitish":"{commitShaOfPRHead}"}'`,
     );
     expect(readFileAtCommit).not.toHaveBeenCalled();
   });
@@ -56,8 +57,8 @@ describe("resolveNewApiVersions", function () {
     const resolved = await resolveNewApiVersions("specification/foo/Foo");
 
     expect(resolved.kind).toBe("skip");
-    expect(resolved.kind === "skip" && resolved.result.stdOutput).toContain(
-      "Warning: service.yaml does not exist at head",
+    expect(resolved.kind === "skip" && diagnosticText(resolved.result)).toContain(
+      "service.yaml does not exist at head",
     );
   });
 
@@ -67,7 +68,7 @@ describe("resolveNewApiVersions", function () {
     const resolved = await resolveNewApiVersions("specification/foo/Foo");
 
     expect(resolved.kind).toBe("skip");
-    expect(resolved.kind === "skip" && resolved.result.stdOutput).toContain(
+    expect(resolved.kind === "skip" && resolved.result.skipped).toContain(
       "No new TypeSpec API versions",
     );
   });
@@ -110,7 +111,7 @@ describe("resolveNewApiVersions", function () {
     const resolved = await resolveNewApiVersions("specification/foo/Foo");
 
     expect(resolved.kind === "skip" && resolved.result.success).toBe(false);
-    expect(resolved.kind === "skip" && resolved.result.errorOutput).toContain(
+    expect(resolved.kind === "skip" && diagnosticText(resolved.result)).toContain(
       "Unable to compare service.yaml",
     );
   });
@@ -121,7 +122,7 @@ describe("resolveNewApiVersions", function () {
     const resolved = await resolveNewApiVersions("specification/foo/Foo");
 
     expect(resolved.kind === "skip" && resolved.result.success).toBe(false);
-    expect(resolved.kind === "skip" && resolved.result.errorOutput).toContain("ERROR: head:");
+    expect(resolved.kind === "skip" && diagnosticText(resolved.result)).toContain("head:");
   });
 
   it("fails when service.yaml is malformed at base", async function () {
@@ -132,7 +133,7 @@ describe("resolveNewApiVersions", function () {
     const resolved = await resolveNewApiVersions("specification/foo/Foo");
 
     expect(resolved.kind === "skip" && resolved.result.success).toBe(false);
-    expect(resolved.kind === "skip" && resolved.result.errorOutput).toContain("ERROR: base:");
+    expect(resolved.kind === "skip" && diagnosticText(resolved.result)).toContain("base:");
   });
 });
 
@@ -141,8 +142,8 @@ describe("resolveSdkEmitters", function () {
     const resolved = resolveSdkEmitters(metadata({}));
 
     expect(resolved.kind).toBe("skip");
-    expect(resolved.kind === "skip" && resolved.result.stdOutput).toBe(
-      "Warning: No SDK language emitters are configured; skipping API-version validation.",
+    expect(resolved.kind === "skip" && diagnosticText(resolved.result)).toBe(
+      "No SDK language emitters are configured; skipping API-version validation.",
     );
   });
 
@@ -150,8 +151,8 @@ describe("resolveSdkEmitters", function () {
     const resolved = resolveSdkEmitters(metadata({ [pythonEmitter]: "multiple-versions" }));
 
     expect(resolved.kind).toBe("skip");
-    expect(resolved.kind === "skip" && resolved.result.stdOutput).toBe(
-      "Warning: This rule does not support multiple-service project scenarios.",
+    expect(resolved.kind === "skip" && diagnosticText(resolved.result)).toBe(
+      "This rule does not support multiple-service project scenarios.",
     );
   });
 

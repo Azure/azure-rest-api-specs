@@ -10,8 +10,8 @@ pnpm tsv --changed
 pnpm tsv --changed --base=origin/main --head=HEAD --dry-run
 ```
 
-Use `--verbose` (or `-v`) to include command traces, captured command output, Git
-debug logging, and changed-file discovery details:
+Use `--verbose` (or `-v`) to include rule progress, configuration/import details,
+routine skip reasons, command traces, Git debug logging, and changed-file discovery:
 
 ```sh
 pnpm tsv specification/<service>/<project> --verbose
@@ -19,9 +19,27 @@ pnpm tsv --changed --verbose
 pnpm tsv --all specification/<service> --verbose
 ```
 
-Normal rule output, validation errors, and CI annotations remain visible without
-this flag. Existing `DEBUG` environment selections are respected; TSV does not
-enable Git tracing merely by being imported.
+Rule errors, actionable warnings, and CI annotations remain visible without this
+flag. Existing `DEBUG` environment selections are respected; TSV does not enable
+Git tracing merely by being imported.
+
+Rule findings use TypeSpec-style formatting with a stable `tsv/` diagnostic code,
+an affected file or directory, and fix guidance when available:
+
+```text
+specification/example/data-plane/Example/tspconfig.yaml - error tsv/emit-autorest: The default emit list must include "@azure-tools/typespec-autorest".
+  help: Add "@azure-tools/typespec-autorest" to "emit".
+```
+
+Parser errors and invalid imports include line/column locations and a source
+excerpt. Diagnostics go to stderr; use `2>&1` to capture them together with stdout.
+Colors are enabled in terminals and GitHub Actions; `NO_COLOR` disables them and
+takes precedence over `FORCE_COLOR`. `FORCE_COLOR=1` enables colors for redirected
+output, while `FORCE_COLOR=0` disables them.
+
+Validation still stops after the first failed rule in each project, and batch
+runs continue to later projects. Suppression rule names are unchanged. Compiler
+and formatter output, including emitted-file lists, retains its existing format.
 
 In GitHub Actions, both TSV workflows enable `--verbose` when debug logging is
 enabled. To diagnose a run without changing the normal default, choose
