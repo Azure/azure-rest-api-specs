@@ -1,0 +1,32 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`contributor readiness > renders concise, red-marked user findings 1`] = `
+"## Contributor readiness (advisory)
+
+| User / area | Issue |
+| --- | --- |
+| 🔴 **[author-example](https://github.com/author-example)** | Microsoft membership not public.<br>Azure membership not public. |
+| 🔴 **[reviewer-example](https://github.com/reviewer-example)** | No write access; approval cannot satisfy required reviews. |
+
+Internal contributors: [setup / renew access](https://aka.ms/azsdk/access). Recheck: \`/azsdk check-access\`.
+
+Advisory only; GitHub review rules still apply."
+`;
+
+exports[`contributor readiness > renders incomplete findings without introducing Markdown or mentions 1`] = `
+"## Contributor readiness (advisory)
+
+| User / area | Issue |
+| --- | --- |
+| 🟡 **&#64;org/team &#124; &lt;script&gt;** | Account \\[unavailable\\]\\(https://example.com\\) &#96;unknown&#96; |
+
+Internal contributors: [setup / renew access](https://aka.ms/azsdk/access). Recheck: \`/azsdk check-access\`.
+
+Advisory only; GitHub review rules still apply."
+`;
+
+exports[`contributor readiness > renders the clean report consistently 1`] = `
+"## Contributor readiness (advisory)
+
+✅ No contributor-readiness issues found."
+`;
