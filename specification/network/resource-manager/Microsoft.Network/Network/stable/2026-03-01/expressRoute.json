@@ -7707,12 +7707,32 @@
           "$ref": "#/definitions/ExpressRouteLagAuthorizationPropertiesFormat",
           "description": "ExpressRouteLag authorization properties."
         },
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the resource.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the authorization.",
+          "readOnly": true
+        },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated.",
           "readOnly": true
         }
       },
+      "required": [
+        "id",
+        "type",
+        "name"
+      ],
       "allOf": [
         {
           "$ref": "./common.json#/definitions/SubResourceModel"

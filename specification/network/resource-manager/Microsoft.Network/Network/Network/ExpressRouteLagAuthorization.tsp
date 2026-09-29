@@ -28,12 +28,23 @@ model ExpressRouteLagAuthorization extends SubResourceModel {
   /** ExpressRouteLag authorization properties. */
   properties?: ExpressRouteLagAuthorizationPropertiesFormat;
 
+  /** The unique identifier of the resource. */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /** The type of the resource. */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
   /**
    * The name of the resource that is unique within a resource group. This name can be used to access the resource.
    */
   @visibility(Lifecycle.Read)
   @path
   @key("authorizationName")
+  @minLength(1)
+  @maxLength(80)
+  @pattern("^[a-zA-Z0-9][a-zA-Z0-9._-]*$")
   @segment("authorizations")
   name: string;
 
