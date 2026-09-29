@@ -7,7 +7,7 @@ import { DiagnosticError, type Diagnostic } from "./rule-result.ts";
 export function supportsColor(env = process.env, isTTY = process.stderr.isTTY): boolean {
   if (env.NO_COLOR !== undefined || env.FORCE_COLOR === "0") return false;
   if (env.FORCE_COLOR !== undefined) return true;
-  return Boolean(isTTY) || env.GITHUB_ACTIONS === "true";
+  return (Boolean(isTTY) && env.TERM !== "dumb") || env.GITHUB_ACTIONS === "true";
 }
 
 export function formatDiagnostic(

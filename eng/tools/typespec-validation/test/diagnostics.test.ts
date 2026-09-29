@@ -52,6 +52,7 @@ describe("diagnostic formatting", () => {
   it.each([
     [{}, false, false],
     [{}, true, true],
+    [{ TERM: "dumb" }, true, false],
     [{ GITHUB_ACTIONS: "true" }, false, true],
     [{ FORCE_COLOR: "1" }, false, true],
     [{ FORCE_COLOR: "0" }, true, false],

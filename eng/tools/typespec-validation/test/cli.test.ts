@@ -40,6 +40,7 @@ beforeEach(async () => {
   vi.stubEnv("GITHUB_ACTIONS", "false");
   vi.stubEnv("DEBUG", "");
   vi.stubEnv("NO_COLOR", "1");
+  vi.stubEnv("FORCE_COLOR", undefined);
 });
 
 afterEach(async () => {
@@ -92,6 +93,18 @@ it("respects explicit DEBUG selections without --verbose", async () => {
   await initGit();
   const { stderr } = await run("--all", "--dry-run");
   expect(stderr).toContain("simple-git");
+});
+
+it("colors structured diagnostics when explicitly requested, independently of verbosity", async () => {
+  vi.stubEnv("NO_COLOR", undefined);
+  vi.stubEnv("FORCE_COLOR", "1");
+  await addProject("custom/Project");
+  await initGit();
+  await expect(run("custom/Project")).rejects.toMatchObject({
+    code: 1,
+    stdout: expect.not.stringContaining("Executing rule:") as unknown,
+    stderr: expect.stringContaining("\x1b[31merror\x1b[39m") as unknown,
+  });
 });
 
 it.each([
