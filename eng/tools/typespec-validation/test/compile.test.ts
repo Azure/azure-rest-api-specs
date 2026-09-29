@@ -1,4 +1,5 @@
 import { mockFolder } from "./mocks.ts";
+import { ConsoleLogger, defaultLogger } from "@azure-tools/specs-shared/logger";
 
 import { afterEach, beforeEach, describe, expect, it, type MockInstance, vi } from "vitest";
 
@@ -15,7 +16,7 @@ const handwrittenSwaggerPath = "data-plane/Azure.Foo/preview/2021-11-01-preview/
 
 describe("compile", function () {
   let gitDiffTopSpecFolderSpy: MockInstance;
-  let runPnpmSpy: MockInstance;
+  let runNodeBinSpy: MockInstance;
 
   beforeEach(() => {
     vi.spyOn(utils, "fileExists").mockResolvedValue(true);
@@ -27,10 +28,10 @@ describe("compile", function () {
         errorOutput: "",
       }),
     );
-    runPnpmSpy = vi
-      .spyOn(utils, "runPnpm")
-      .mockImplementation((args, cwd) =>
-        Promise.resolve([null, `runPnpm ${args.join(" ")} at ${cwd}`, ""]),
+    runNodeBinSpy = vi
+      .spyOn(utils, "runNodeBin")
+      .mockImplementation((packageName, args, _logger, cwd) =>
+        Promise.resolve([null, `runNodeBin ${packageName} ${args.join(" ")} at ${cwd}`, ""]),
       );
   });
 
@@ -53,7 +54,7 @@ describe("compile", function () {
       // ensure examples are skipped
       `${swaggerPath.replace("foo.json", "examples/example.json")}\n`;
 
-    runPnpmSpy.mockImplementation((): Promise<[Error | null, string, string]> =>
+    runNodeBinSpy.mockImplementation((): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, compileOutput, ""]),
     );
 
@@ -65,9 +66,22 @@ describe("compile", function () {
       Promise.resolve(path === swaggerPath ? '{"info": {"x-typespec-generated": true}}' : "{}"),
     );
 
-    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
+    const logger = new ConsoleLogger(true);
+    await expect(new CompileRule().execute(mockFolder, logger)).resolves.toMatchObject({
       success: true,
     });
+    expect(runNodeBinSpy).toHaveBeenNthCalledWith(
+      1,
+      "@typespec/compiler",
+      ["tsp", "compile", "--list-files", "--warn-as-error", mockFolder],
+      logger,
+    );
+    expect(runNodeBinSpy).toHaveBeenNthCalledWith(
+      2,
+      "@typespec/compiler",
+      ["tsp", "compile", "--no-emit", "--warn-as-error", path.join(mockFolder, "client.tsp")],
+      logger,
+    );
   });
 
   it.each([
@@ -78,11 +92,11 @@ describe("compile", function () {
       `\u001b]8;;file:///foo.json\u001b\\${swaggerPath}\u001b]8;;\u001b\\`,
     ],
   ])("should recognize generated paths wrapped in %s", async (_name, output) => {
-    runPnpmSpy.mockResolvedValue([null, `${output}\r\n`, ""]);
+    runNodeBinSpy.mockResolvedValue([null, `${output}\r\n`, ""]);
     vi.mocked(nativeGlob.globFiles).mockResolvedValue([swaggerPath]);
     vi.mocked(fsPromises.readFile).mockResolvedValue('{"info": {"x-typespec-generated": true}}');
 
-    const result = await new CompileRule().execute(mockFolder);
+    const result = await new CompileRule().execute(mockFolder, defaultLogger);
 
     expect(result.success).toBe(true);
     expect(nativeGlob.globFiles).toHaveBeenCalledWith("data-plane/Azure.Foo/**/foo.json", {
@@ -92,18 +106,18 @@ describe("compile", function () {
   });
 
   it("should succeed if output has no generated swaggers", async function () {
-    runPnpmSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, "not-swagger", ""]),
     );
 
-    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
       success: true,
       stdOutput: expect.stringContaining("skipping extra swagger check") as unknown,
     });
   });
 
   it("should fail if extra swaggers", async function () {
-    runPnpmSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, swaggerPath, ""]),
     );
 
@@ -122,7 +136,7 @@ describe("compile", function () {
         : Promise.resolve('{"info": {"x-cadl-generated": true}}');
     });
 
-    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
       success: false,
       errorOutput: expect.stringContaining("not generated from the current") as unknown,
     });
@@ -133,7 +147,7 @@ describe("compile", function () {
     const latestPreviewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
     const olderPreviewPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
 
-    runPnpmSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, latestPreviewPath, ""]),
     );
 
@@ -146,7 +160,7 @@ describe("compile", function () {
       Promise.resolve('{"info": {"x-typespec-generated": true}}'),
     );
 
-    const result = await new CompileRule().execute(mockFolder);
+    const result = await new CompileRule().execute(mockFolder, defaultLogger);
     expect(result).toMatchObject({
       success: true,
       stdOutput: expect.stringContaining("older versions") as unknown,
@@ -157,7 +171,7 @@ describe("compile", function () {
     const latestPreviewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
     const anotherLatestPreviewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/bar.json";
 
-    runPnpmSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, latestPreviewPath, ""]),
     );
 
@@ -170,7 +184,7 @@ describe("compile", function () {
       Promise.resolve('{"info": {"x-typespec-generated": true}}'),
     );
 
-    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
       success: false,
       errorOutput: expect.stringContaining("not generated from the current") as unknown,
     });
@@ -180,7 +194,7 @@ describe("compile", function () {
     const previewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
     const stablePath = "data-plane/Azure.Foo/stable/2023-01-01/foo.json";
 
-    runPnpmSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, previewPath, ""]),
     );
 
@@ -193,7 +207,7 @@ describe("compile", function () {
       Promise.resolve('{"info": {"x-typespec-generated": true}}'),
     );
 
-    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
       success: false,
       errorOutput: expect.stringContaining("not generated from the current") as unknown,
     });
@@ -205,7 +219,7 @@ describe("compile", function () {
     const stablePath = "data-plane/Azure.Foo/stable/2024-03-01/foo.json";
     const olderPreviewPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
 
-    runPnpmSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, stablePath, ""]),
     );
 
@@ -218,7 +232,7 @@ describe("compile", function () {
       Promise.resolve('{"info": {"x-typespec-generated": true}}'),
     );
 
-    const result = await new CompileRule().execute(mockFolder);
+    const result = await new CompileRule().execute(mockFolder, defaultLogger);
     expect(result).toMatchObject({
       success: true,
       stdOutput: expect.stringContaining("older versions") as unknown,
@@ -231,7 +245,7 @@ describe("compile", function () {
     const stablePath = "data-plane/Azure.Foo/stable/2023-01-01/foo.json";
     const newerPreviewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
 
-    runPnpmSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, stablePath, ""]),
     );
 
@@ -244,7 +258,7 @@ describe("compile", function () {
       Promise.resolve('{"info": {"x-typespec-generated": true}}'),
     );
 
-    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
       success: false,
       errorOutput: expect.stringContaining("not generated from the current") as unknown,
     });
@@ -255,7 +269,7 @@ describe("compile", function () {
     const olderPreview1Path = "data-plane/Azure.Foo/preview/2023-01-01-preview/foo.json";
     const olderPreview2Path = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
 
-    runPnpmSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, latestPreviewPath, ""]),
     );
 
@@ -268,7 +282,7 @@ describe("compile", function () {
       Promise.resolve('{"info": {"x-typespec-generated": true}}'),
     );
 
-    const result = await new CompileRule().execute(mockFolder);
+    const result = await new CompileRule().execute(mockFolder, defaultLogger);
     expect(result).toMatchObject({
       success: true,
       stdOutput: expect.stringContaining("older versions") as unknown,
@@ -280,7 +294,7 @@ describe("compile", function () {
     const olderPreviewPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
     const stablePath = "data-plane/Azure.Foo/stable/2023-01-01/foo.json";
 
-    runPnpmSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, previewPath, ""]),
     );
 
@@ -293,14 +307,14 @@ describe("compile", function () {
       Promise.resolve('{"info": {"x-typespec-generated": true}}'),
     );
 
-    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
       success: false,
       errorOutput: expect.stringContaining("not generated from the current") as unknown,
     });
   });
 
   it("supports suppressions", async function () {
-    runPnpmSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, swaggerPath, ""]),
     );
 
@@ -333,13 +347,13 @@ describe("compile", function () {
         : Promise.resolve([]);
     });
 
-    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
       success: true,
     });
   });
 
   it("throws on invalid suppressions", async function () {
-    runPnpmSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, swaggerPath, ""]),
     );
 
@@ -355,12 +369,14 @@ describe("compile", function () {
       ]),
     );
 
-    await expect(new CompileRule().execute(mockFolder)).rejects.toThrow("Invalid path");
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).rejects.toThrow(
+      "Invalid path",
+    );
   });
 
   it("should skip git diff check if compile fails", async function () {
-    runPnpmSpy.mockImplementation(
-      async (args: string[]): Promise<[Error | null, string, string]> => {
+    runNodeBinSpy.mockImplementation(
+      async (_packageName: string, args: string[]): Promise<[Error | null, string, string]> => {
         if (args.join(" ").includes("tsp compile")) {
           return Promise.resolve([
             { name: "compilation_error", message: "compilation error" },
@@ -372,14 +388,14 @@ describe("compile", function () {
       },
     );
 
-    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
       success: false,
       stdOutput: expect.not.stringContaining("Running git diff") as unknown,
     });
   });
 
   it("should fail if git diff fails", async function () {
-    runPnpmSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, swaggerPath, ""]),
     );
 
@@ -395,14 +411,14 @@ describe("compile", function () {
       });
     });
 
-    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
       success: false,
       stdOutput: expect.stringContaining("Running git diff") as unknown,
     });
   });
 
   it("should succeed if git diff succeeds", async function () {
-    runPnpmSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
       Promise.resolve([null, swaggerPath, ""]),
     );
 
@@ -416,7 +432,7 @@ describe("compile", function () {
       });
     });
 
-    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
       success: true,
       stdOutput: expect.stringContaining("Running git diff") as unknown,
     });
