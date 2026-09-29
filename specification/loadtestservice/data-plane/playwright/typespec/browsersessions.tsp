@@ -75,7 +75,7 @@ alias BrowserSessionOptionalProperties = {
   @doc("The URL to view the live browser session.")
   @visibility(Lifecycle.Read)
   @added(Versions.v2026_06_01_preview)
-  liveViewUrl?: string;
+  liveViewUri?: string;
 };
 
 @doc("Model of a browser session used for tracking purposes.")
