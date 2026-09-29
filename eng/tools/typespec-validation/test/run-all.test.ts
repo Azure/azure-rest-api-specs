@@ -5,7 +5,7 @@ import { tmpdir } from "node:os";
 import { join, relative, sep } from "node:path";
 import { simpleGit } from "simple-git";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
-import { runAll } from "../src/run-all.ts";
+import { runAll } from "../src/run-projects.ts";
 
 vi.mock("node:child_process", async (importOriginal) => ({
   ...(await importOriginal()),
@@ -88,6 +88,17 @@ it("discovers sorted, unique project folders, including invalid config extension
     { stdio: "inherit" },
   );
   expect(console.error).not.toHaveBeenCalled();
+});
+
+it("forwards --verbose to child projects without changing their suppression context", async () => {
+  const project = await addProject("a");
+  await expect(runAll(root, { verbose: true })).resolves.toBe(true);
+  expect(vi.mocked(spawn).mock.calls[0][1]).toEqual([
+    expect.stringMatching(/[/\\]cmd[/\\]tsv\.js$/),
+    project,
+    '{"checkingAllSpecs":true}',
+    "--verbose",
+  ]);
 });
 
 it("logs repository-relative paths but passes absolute paths to validation", async () => {

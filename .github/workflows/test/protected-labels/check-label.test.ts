@@ -28,6 +28,10 @@ const protectedLabelsConfig = {
   "package-name-approved-all": {
     "management-plane": ["mgmt-approver1"],
   },
+  "typespec-suppressions-approved": {
+    "data-plane": ["dp-approver1"],
+    "management-plane": "unprotected",
+  },
 };
 
 function setupMocks() {
@@ -163,7 +167,7 @@ describe("checkLabel", () => {
       expect(github.rest.issues.createComment).not.toHaveBeenCalled();
     });
 
-    it("removes label and mentions the actor while linking to approvers without mentioning them", async () => {
+    it("mentions the actor and directs them to the merge process before a collapsed approver list", async () => {
       context.payload = createLabeledPayload({
         labelName: "BreakingChange-Approved-Benign",
         actor: "unauthorized-user",
@@ -182,9 +186,12 @@ describe("checkLabel", () => {
         repo: "azure-rest-api-specs",
         issue_number: 100,
         body:
-          "⚠️ @unauthorized-user is not authorized to apply `BreakingChange-Approved-Benign`. " +
+          "⚠️ @unauthorized-user is not authorized to apply `BreakingChange-Approved-Benign`. Label removed.\n\n" +
+          "Please follow the **Next Steps to Merge** comment on this PR and the " +
+          "[review and merge process](https://aka.ms/azsdk/specreview/merge).\n\n" +
+          "<details><summary>See allowed approvers</summary>\n\n" +
           "Only [user1](https://github.com/user1), [user2](https://github.com/user2), " +
-          "[global-admin](https://github.com/global-admin) can apply this label.\n\nLabel removed.",
+          "[global-admin](https://github.com/global-admin) can apply this label.\n\n</details>",
       });
     });
 
@@ -246,6 +253,24 @@ describe("checkLabel", () => {
         "must map to an array or a plane-aware object",
       );
     });
+
+    it("throws on invalid plane value (not an array or 'unprotected')", async () => {
+      (yaml.load as ReturnType<typeof vi.fn>).mockReturnValue({
+        "package-name-dotnet-approved": {
+          "management-plane": "open",
+        },
+      });
+
+      context.payload = createLabeledPayload({
+        labelName: "package-name-dotnet-approved",
+        actor: "someone",
+        extraLabels: ["resource-manager"],
+      });
+
+      await expect(invokeCheckLabel({ github, context, core })).rejects.toThrow(
+        'array of logins or the literal "unprotected"',
+      );
+    });
   });
 
   describe("plane-aware labels", () => {
@@ -278,9 +303,12 @@ describe("checkLabel", () => {
         repo: "azure-rest-api-specs",
         issue_number: 100,
         body:
-          "⚠️ @mgmt-approver1 is not authorized to apply `package-name-dotnet-approved`. " +
+          "⚠️ @mgmt-approver1 is not authorized to apply `package-name-dotnet-approved`. Label removed.\n\n" +
+          "Please follow the **Next Steps to Merge** comment on this PR and the " +
+          "[review and merge process](https://aka.ms/azsdk/specreview/merge).\n\n" +
+          "<details><summary>See allowed approvers</summary>\n\n" +
           "Only [dp-approver1](https://github.com/dp-approver1), [dp-approver2](https://github.com/dp-approver2), " +
-          "[global-admin](https://github.com/global-admin) can apply this label.\n\nLabel removed.",
+          "[global-admin](https://github.com/global-admin) can apply this label.\n\n</details>",
       });
     });
 
@@ -352,6 +380,47 @@ describe("checkLabel", () => {
         labelName: "package-name-approved-all",
         actor: "mgmt-approver1",
         extraLabels: ["Mgmt"],
+      });
+
+      await invokeCheckLabel({ github, context, core });
+
+      expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("per-plane unprotected opt-out (#46728)", () => {
+    it("does not enforce an unprotected plane (anyone may apply)", async () => {
+      context.payload = createLabeledPayload({
+        labelName: "typespec-suppressions-approved",
+        actor: "random-user",
+        extraLabels: ["resource-manager"],
+      });
+
+      await invokeCheckLabel({ github, context, core });
+
+      expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
+      expect(github.rest.issues.createComment).not.toHaveBeenCalled();
+    });
+
+    it("still enforces the gated plane on the same label", async () => {
+      context.payload = createLabeledPayload({
+        labelName: "typespec-suppressions-approved",
+        actor: "random-user",
+        extraLabels: ["data-plane"],
+      });
+
+      await invokeCheckLabel({ github, context, core });
+
+      expect(github.rest.issues.removeLabel).toHaveBeenCalledWith(
+        expect.objectContaining({ name: "typespec-suppressions-approved" }),
+      );
+    });
+
+    it("allows the gated plane's approver", async () => {
+      context.payload = createLabeledPayload({
+        labelName: "typespec-suppressions-approved",
+        actor: "dp-approver1",
+        extraLabels: ["data-plane"],
       });
 
       await invokeCheckLabel({ github, context, core });
