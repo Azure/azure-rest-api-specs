@@ -74,7 +74,7 @@ async function resolveNotificationPullRequest({
     .map((pr) => pr.number);
   if (numbers.length === 0) {
     const { data } = await github.rest.search.issuesAndPullRequests({
-      q: `repo:${context.repo.owner}/${context.repo.repo} is:pr is:open sha:${run.head_sha}`,
+      q: `repo:${context.repo.owner}/${context.repo.repo} is:pr is:open ${run.head_sha}`,
       per_page: PER_PAGE_MAX,
     });
     if (data.incomplete_results || data.total_count > data.items.length) {

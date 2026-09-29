@@ -567,7 +567,7 @@ describe("readiness trigger resolution", () => {
   );
 
   it.each(["pull_request", "pull_request_review"])(
-    "uses repository-scoped lookup for fork %s notifications without PR metadata",
+    "resolves fork %s notifications by bare SHA and publishes readiness",
     async (event) => {
       const f = setup();
       f.context.eventName = "workflow_run";
@@ -584,11 +584,21 @@ describe("readiness trigger resolution", () => {
       f.github.rest.search.issuesAndPullRequests.mockResolvedValue({
         data: { total_count: 1, incomplete_results: false, items: [{ number: 1 }] },
       });
-      expect(await resolveReadinessPullRequest(f.args)).toBe(1);
+      const number = await resolveReadinessPullRequest(f.args);
+      if (number === null) throw new Error("Expected a resolved fork PR");
+      expect(number).toBe(1);
       expect(f.github.rest.search.issuesAndPullRequests).toHaveBeenCalledWith({
-        q: `repo:Azure/example is:pr is:open sha:${pr.head.sha}`,
+        q: `repo:Azure/example is:pr is:open ${pr.head.sha}`,
         per_page: 100,
       });
+      f.permission.mockResolvedValue({ data: { permission: "read" } });
+      await checkContributorReadiness(f.args, number);
+      expect(f.createCheck).toHaveBeenCalledWith(
+        expect.objectContaining({ head_sha: pr.head.sha, conclusion: "neutral" }),
+      );
+      expect(f.github.rest.issues.createComment).toHaveBeenCalledWith(
+        expect.objectContaining({ issue_number: number }),
+      );
     },
   );
 
