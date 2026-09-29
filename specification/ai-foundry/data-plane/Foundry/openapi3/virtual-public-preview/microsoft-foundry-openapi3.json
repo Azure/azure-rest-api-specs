@@ -95430,15 +95430,22 @@
         "description": "The options for a task generation data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`."
       },
       "SipAudioCodec": {
-        "type": "string",
-        "enum": [
-          "g722",
-          "pcmu",
-          "pcma",
-          "opus",
-          "amr-wb"
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "g722",
+              "pcmu",
+              "pcma",
+              "opus",
+              "amr-wb"
+            ]
+          }
         ],
-        "description": "A supported outbound SIP audio codec.",
+        "description": "An outbound SIP audio codec. Additional values may be added over time.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -95450,11 +95457,13 @@
         "properties": {
           "enabled": {
             "type": "boolean",
-            "description": "Whether inbound calls are enabled. Defaults to true."
+            "description": "Whether inbound calls are enabled. Defaults to true.",
+            "default": true
           },
           "connection": {
             "type": "string",
             "minLength": 1,
+            "maxLength": 256,
             "description": "The Foundry project connection name containing inbound username and password credentials. Required when inbound is enabled."
           },
           "allowed_source_cidrs": {
@@ -95505,6 +95514,7 @@
               }
             ],
             "minLength": 1,
+            "maxLength": 256,
             "description": "The Foundry project connection name containing inbound username and password credentials. Required when inbound is enabled. On update, omission preserves the current value; null restores the default or clears the value."
           },
           "allowed_source_cidrs": {
@@ -95550,11 +95560,13 @@
         "properties": {
           "enabled": {
             "type": "boolean",
-            "description": "Whether outbound calls are enabled. Defaults to false."
+            "description": "Whether outbound calls are enabled. Defaults to false.",
+            "default": false
           },
           "connection": {
             "type": "string",
             "minLength": 1,
+            "maxLength": 256,
             "description": "The Foundry project connection name containing outbound username and password credentials. Required when outbound is enabled."
           },
           "address": {
@@ -95568,7 +95580,12 @@
               "$ref": "#/components/schemas/SipAudioCodec"
             },
             "minItems": 1,
-            "description": "Enabled codecs in descending preference order. Defaults to g722, pcmu, pcma."
+            "description": "Enabled codecs in descending preference order. Defaults to g722, pcmu, pcma.",
+            "default": [
+              "g722",
+              "pcmu",
+              "pcma"
+            ]
           },
           "custom_headers": {
             "type": "object",
@@ -95609,6 +95626,7 @@
               }
             ],
             "minLength": 1,
+            "maxLength": 256,
             "description": "The Foundry project connection name containing outbound username and password credentials. Required when outbound is enabled. On update, omission preserves the current value; null restores the default or clears the value."
           },
           "address": {
