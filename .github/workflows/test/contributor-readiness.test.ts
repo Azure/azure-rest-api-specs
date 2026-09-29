@@ -1,4 +1,6 @@
+import { readFileSync } from "node:fs";
 import { describe, expect, it, vi } from "vitest";
+import { parseDocument } from "yaml";
 import {
   checkContributorReadiness,
   collectReadinessParticipants,
@@ -77,6 +79,14 @@ function setup() {
 }
 
 describe("contributor readiness", () => {
+  it("grants the publisher permission to comment on pull requests", () => {
+    const workflow = parseDocument(
+      readFileSync(new URL("../contributor-readiness.yaml", import.meta.url), "utf8"),
+    );
+    expect(workflow.errors).toEqual([]);
+    expect(workflow.getIn(["jobs", "report", "permissions", "pull-requests"])).toBe("write");
+  });
+
   it("deduplicates authors/committers and includes every submitted reviewer", async () => {
     const f = setup();
     f.listReviews.mockResolvedValue({
@@ -118,6 +128,18 @@ describe("contributor readiness", () => {
       }),
     );
     expect(f.github.rest.issues.createComment).not.toHaveBeenCalled();
+    expect(f.core.summary.write).toHaveBeenCalledOnce();
+  });
+
+  it("keeps the job summary available when PR comment publication fails", async () => {
+    const f = setup();
+    f.permission.mockResolvedValue({ data: { permission: "read" } });
+    f.github.rest.issues.createComment.mockRejectedValue(createMockRequestError(403));
+
+    await expect(f.run()).rejects.toThrow("403");
+
+    expect(f.createCheck).toHaveBeenCalledOnce();
+    expect(f.core.summary.addRaw).toHaveBeenCalledWith(expect.stringContaining("No write access"));
     expect(f.core.summary.write).toHaveBeenCalledOnce();
   });
 

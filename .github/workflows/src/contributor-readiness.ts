@@ -399,6 +399,7 @@ async function publishReadinessReport(
     throw new Error("PR changed during evaluation; rerun contributor readiness");
   }
   const body = renderReadiness(participants, findings);
+  await core.summary.addRaw(body).write();
   await github.rest.checks.create({
     owner,
     repo,
@@ -417,7 +418,6 @@ async function publishReadinessReport(
     },
   });
   await updateReadinessComment(github, owner, repo, pr.number, body, findings.length > 0);
-  await core.summary.addRaw(body).write();
 }
 
 /**
