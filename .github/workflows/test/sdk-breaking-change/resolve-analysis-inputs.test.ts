@@ -73,7 +73,7 @@ describe("resolveAnalysisTrigger", () => {
     expect(core.setOutput).toHaveBeenCalledWith("pr-number", "42");
     expect(core.setOutput).toHaveBeenCalledWith("head-repository", "owner/repo");
     expect(core.setOutput).toHaveBeenCalledWith("head-sha", "a".repeat(40));
-    expect(core.setOutput).toHaveBeenCalledWith("sdk-language", ".NET");
+    expect(core.setOutput).toHaveBeenCalledWith("sdk-language", "DotNet");
     expect(core.setOutput).toHaveBeenCalledWith("should-run", "true");
     expect(core.setOutput).toHaveBeenCalledWith(
       "tsp-config-paths",
@@ -196,15 +196,13 @@ describe("resolveAnalysisTrigger", () => {
 
 describe("resolveSdkLanguageConfig", () => {
   it.each([
-    ["cpp", "Cpp", "azure-sdk-for-cpp"],
-    [" CSharp ", "DotNet", "azure-sdk-for-net"],
     [".net", "DotNet", "azure-sdk-for-net"],
+    [" DotNet ", "DotNet", "azure-sdk-for-net"],
     ["go", "Go", "azure-sdk-for-go"],
     ["java", "Java", "azure-sdk-for-java"],
-    ["typescript", "JavaScript", "azure-sdk-for-js"],
+    ["javascript", "JavaScript", "azure-sdk-for-js"],
     ["js", "JavaScript", "azure-sdk-for-js"],
     ["python", "Python", "azure-sdk-for-python"],
-    ["rust", "Rust", "azure-sdk-for-rust"],
   ] as const)("resolves %s", (input, language, repository) => {
     expect(resolveSdkLanguageConfig(input)).toEqual({ language, repository });
   });

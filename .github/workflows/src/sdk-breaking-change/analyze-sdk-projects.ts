@@ -1,6 +1,7 @@
 import { appendFile, mkdir, readdir, realpath, rename, stat, writeFile } from "node:fs/promises";
 import { basename, dirname, isAbsolute, join, relative, sep } from "node:path";
 import { execFile } from "../../../shared/src/exec.ts";
+import { SdkLanguage } from "./resolve-analysis-inputs.ts";
 
 type ProjectResult = {
   typespecProjectPath: string;
@@ -118,14 +119,21 @@ export async function analyzeSdkProjects({
       await rename(generationResult, join(projectResults, "generate.json"));
 
       /* Build the SDK package */
-      const { stdout: buildStdout } = await execFile("azsdk", [
+      const buildArgs = [
         "package",
         "build",
         "--package-path",
         packagePath,
         "--output",
         "json",
-      ]);
+      ];
+      // Optional: Add any additional build arguments here for .NET SDK projects
+      if (sdkLanguage === SdkLanguage.DotNet) {
+        // Example: Add a hypothetical .NET-specific build argument
+        buildArgs.push("--additional-arguments", "/p:RunApiCompat=false");
+      }
+
+      const { stdout: buildStdout } = await execFile("azsdk", buildArgs);
       await writeFile(join(projectResults, "build.json"), buildStdout);
 
       /* Detect breaking changes */

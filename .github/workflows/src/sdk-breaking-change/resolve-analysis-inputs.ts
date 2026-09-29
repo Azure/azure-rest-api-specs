@@ -8,18 +8,29 @@ type PullRequestFile = {
   previous_filename?: string;
 };
 
+export const SdkLanguage = Object.freeze({
+  DotNet: "DotNet",
+  Go: "Go",
+  Java: "Java",
+  JavaScript: "JavaScript",
+  Python: "Python",
+} as const);
+
+export type SdkLanguage = (typeof SdkLanguage)[keyof typeof SdkLanguage];
+
 export type SdkLanguageConfig = {
-  language: ".Net" | "Go" | "Java" | "JavaScript" | "Python";
+  language: SdkLanguage;
   repository: string;
 };
 
 const SDK_LANGUAGE_CONFIGS: Readonly<Record<string, SdkLanguageConfig>> = {
-  ".net": { language: ".Net", repository: "azure-sdk-for-net" },
-  go: { language: "Go", repository: "azure-sdk-for-go" },
-  java: { language: "Java", repository: "azure-sdk-for-java" },
-  javascript: { language: "JavaScript", repository: "azure-sdk-for-js" },
-  js: { language: "JavaScript", repository: "azure-sdk-for-js" },
-  python: { language: "Python", repository: "azure-sdk-for-python" },
+  ".net": { language: SdkLanguage.DotNet, repository: "azure-sdk-for-net" },
+  dotnet: { language: SdkLanguage.DotNet, repository: "azure-sdk-for-net" },
+  go: { language: SdkLanguage.Go, repository: "azure-sdk-for-go" },
+  java: { language: SdkLanguage.Java, repository: "azure-sdk-for-java" },
+  javascript: { language: SdkLanguage.JavaScript, repository: "azure-sdk-for-js" },
+  js: { language: SdkLanguage.JavaScript, repository: "azure-sdk-for-js" },
+  python: { language: SdkLanguage.Python, repository: "azure-sdk-for-python" },
 };
 
 const SDK_LABELS = [
@@ -30,12 +41,12 @@ const SDK_LABELS = [
   "BreakingChange-Python-Sdk",
 ] as const;
 
-const SDK_LANGUAGES_BY_LABEL = new Map<(typeof SDK_LABELS)[number], string>([
-  ["BreakingChange-.Net-Sdk", ".NET"],
-  ["BreakingChange-Go-Sdk", "Go"],
-  ["BreakingChange-Java-Sdk", "Java"],
-  ["BreakingChange-JavaScript-Sdk", "JavaScript"],
-  ["BreakingChange-Python-Sdk", "Python"],
+const SDK_LANGUAGES_BY_LABEL = new Map<(typeof SDK_LABELS)[number], SdkLanguage>([
+  ["BreakingChange-.Net-Sdk", SdkLanguage.DotNet],
+  ["BreakingChange-Go-Sdk", SdkLanguage.Go],
+  ["BreakingChange-Java-Sdk", SdkLanguage.Java],
+  ["BreakingChange-JavaScript-Sdk", SdkLanguage.JavaScript],
+  ["BreakingChange-Python-Sdk", SdkLanguage.Python],
 ]);
 
 function getWorkflowDispatchInput(payload: unknown, name: string): string | undefined {
@@ -75,7 +86,7 @@ export async function resolveAnalysisTrigger({
     core.setOutput("pr-number", pullNumber);
     core.setOutput("head-repository", pull.head.repo.full_name);
     core.setOutput("head-sha", pull.head.sha);
-    core.setOutput("sdk-language", sdkLanguageInput);
+    core.setOutput("sdk-language", languageConfig.language);
     core.setOutput("sdk-repository", languageConfig.repository);
     core.setOutput("should-run", "true");
     await resolveChangedTypeSpecConfigPathsFromPullRequest({
@@ -154,7 +165,7 @@ export async function resolveAnalysisTrigger({
   core.setOutput("pr-number", issueNumber);
   core.setOutput("head-repository", pull.head.repo.full_name);
   core.setOutput("head-sha", pull.head.sha);
-  core.setOutput("sdk-language", language);
+  core.setOutput("sdk-language", languageConfig.language);
   core.setOutput("sdk-repository", languageConfig.repository);
   core.setOutput("should-run", labelArtifact.labelValue);
   await resolveChangedTypeSpecConfigPathsFromPullRequest({

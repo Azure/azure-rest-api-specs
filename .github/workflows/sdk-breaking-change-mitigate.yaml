@@ -175,6 +175,7 @@ jobs:
           } >> "$GITHUB_OUTPUT"
 
       - name: Upload mitigation result
+        if: always()
         uses: actions/upload-artifact@v7
         with:
           name: sdk-breaking-change-mitigation-results
