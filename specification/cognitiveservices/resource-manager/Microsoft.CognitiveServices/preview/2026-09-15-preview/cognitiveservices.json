@@ -5650,6 +5650,9 @@
           },
           "CreateOrUpdateVmManagedComputeDeployment": {
             "$ref": "./examples/CreateOrUpdateVmManagedComputeDeployment.json"
+          },
+          "CreateOrUpdateVmManagedComputeDeploymentCustomImage": {
+            "$ref": "./examples/CreateOrUpdateVmManagedComputeDeploymentCustomImage.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -19000,6 +19003,8 @@
         "instanceType": {
           "type": "string",
           "description": "Instance type that overrides the deployment template default. Immutable after creation.",
+          "minLength": 1,
+          "maxLength": 8192,
           "x-ms-mutability": [
             "read",
             "create"
@@ -19013,7 +19018,9 @@
         },
         "servedModelName": {
           "type": "string",
-          "description": "Model name exposed by the serving runtime. When omitted, it is derived from the model."
+          "description": "Model name exposed by the serving runtime. When omitted, it is derived from the model.",
+          "minLength": 1,
+          "maxLength": 8192
         },
         "maxModelLength": {
           "type": "integer",
@@ -19023,7 +19030,9 @@
         },
         "scoringPath": {
           "type": "string",
-          "description": "Absolute container path that receives scoring requests, for example /v1/chat/completions."
+          "description": "Absolute container path that receives scoring requests, for example /v1/chat/completions.",
+          "minLength": 1,
+          "maxLength": 8192
         },
         "scoringPort": {
           "type": "integer",
@@ -19035,6 +19044,7 @@
         "modelMountPath": {
           "type": "string",
           "description": "Absolute Linux path where the model is mounted in the container.",
+          "minLength": 1,
           "maxLength": 256
         },
         "livenessProbe": {
@@ -19047,7 +19057,7 @@
         },
         "environmentVariables": {
           "type": "array",
-          "description": "Non-secret container environment variables. Names must be unique.",
+          "description": "Non-secret container environment variables. Names must be unique. The combined JSON encoding of all names and values must not exceed 8192 characters.",
           "maxItems": 128,
           "items": {
             "$ref": "#/definitions/ManagedComputeDeploymentEnvironmentVariable"
@@ -19066,7 +19076,7 @@
         },
         "containerCommand": {
           "type": "array",
-          "description": "Container command. Supported only when launchMode is Override.",
+          "description": "Container command. Supported only when launchMode is Override. Each item is limited to 4096 characters, and the JSON-encoded list to 8192 characters.",
           "minItems": 1,
           "maxItems": 64,
           "items": {
@@ -19075,7 +19085,7 @@
         },
         "containerArguments": {
           "type": "array",
-          "description": "Container arguments. Supported only when launchMode is Override.",
+          "description": "Container arguments. Supported only when launchMode is Override. Each item is limited to 4096 characters, and the JSON-encoded list to 8192 characters.",
           "maxItems": 256,
           "items": {
             "type": "string"
@@ -19107,7 +19117,9 @@
         },
         "image": {
           "type": "string",
-          "description": "Container image reference including the registry host, for example myregistry.azurecr.io/repository:tag. The deployment identity must be able to pull it. Immutable after creation.",
+          "description": "Container image reference including the registry host, for example contoso.azurecr.io/repository:tag. The deployment identity must be able to pull it. Immutable after creation.",
+          "minLength": 1,
+          "maxLength": 8192,
           "x-ms-mutability": [
             "read",
             "create"
@@ -19121,7 +19133,7 @@
       "properties": {
         "deploymentParameters": {
           "$ref": "#/definitions/ManagedComputeDeploymentParameters",
-          "description": "Runtime parameters for a VmManagedCompute deployment. Omitted parameters are unchanged; a null parameter removes its override."
+          "description": "Runtime parameters for a VmManagedCompute deployment. Omitted parameters are unchanged, and a supplied array replaces the current array. To remove a parameter override, replace the deployment with PUT."
         }
       }
     },
@@ -19131,7 +19143,9 @@
       "properties": {
         "path": {
           "type": "string",
-          "description": "Absolute HTTP path to probe."
+          "description": "Absolute HTTP path to probe.",
+          "minLength": 1,
+          "maxLength": 512
         },
         "initialDelaySeconds": {
           "type": "integer",
@@ -19327,7 +19341,7 @@
       "description": "Serving engine for a managed compute deployment.",
       "enum": [
         "Vllm",
-        "Sglang",
+        "SGLang",
         "Custom"
       ],
       "x-ms-enum": {
@@ -19340,8 +19354,8 @@
             "description": "Managed vLLM serving."
           },
           {
-            "name": "Sglang",
-            "value": "Sglang",
+            "name": "SGLang",
+            "value": "SGLang",
             "description": "Managed SGLang serving."
           },
           {
@@ -19396,12 +19410,12 @@
           {
             "name": "Http",
             "value": "Http",
-            "description": "HTTP."
+            "description": "Probe the container over HTTP."
           },
           {
             "name": "Https",
             "value": "Https",
-            "description": "HTTPS."
+            "description": "Probe the container over HTTPS."
           }
         ]
       }

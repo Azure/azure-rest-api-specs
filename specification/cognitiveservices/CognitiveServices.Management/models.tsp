@@ -3931,7 +3931,7 @@ model PatchResourceSku {
 @added(Versions.v2026_09_15_preview)
 model ManagedComputeDeploymentPatchProperties {
   /**
-   * Runtime parameters for a VmManagedCompute deployment. Omitted parameters are unchanged; a null parameter removes its override.
+   * Runtime parameters for a VmManagedCompute deployment. Omitted parameters are unchanged, and a supplied array replaces the current array. To remove a parameter override, replace the deployment with PUT.
    */
   deploymentParameters?: ManagedComputeDeploymentParameters;
 }
@@ -3945,6 +3945,8 @@ model ManagedComputeDeploymentParameters {
    * Instance type that overrides the deployment template default. Immutable after creation.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
+  @minLength(1)
+  @maxLength(8192)
   instanceType?: string;
 
   /**
@@ -3956,6 +3958,8 @@ model ManagedComputeDeploymentParameters {
   /**
    * Model name exposed by the serving runtime. When omitted, it is derived from the model.
    */
+  @minLength(1)
+  @maxLength(8192)
   servedModelName?: string;
 
   /**
@@ -3967,6 +3971,8 @@ model ManagedComputeDeploymentParameters {
   /**
    * Absolute container path that receives scoring requests, for example /v1/chat/completions.
    */
+  @minLength(1)
+  @maxLength(8192)
   scoringPath?: string;
 
   /**
@@ -3979,6 +3985,7 @@ model ManagedComputeDeploymentParameters {
   /**
    * Absolute Linux path where the model is mounted in the container.
    */
+  @minLength(1)
   @maxLength(256)
   modelMountPath?: string;
 
@@ -3993,7 +4000,7 @@ model ManagedComputeDeploymentParameters {
   readinessProbe?: ManagedComputeDeploymentProbe;
 
   /**
-   * Non-secret container environment variables. Names must be unique.
+   * Non-secret container environment variables. Names must be unique. The combined JSON encoding of all names and values must not exceed 8192 characters.
    */
   @identifiers(#["name"])
   @maxItems(128)
@@ -4010,14 +4017,14 @@ model ManagedComputeDeploymentParameters {
   launchMode?: ManagedComputeLaunchMode;
 
   /**
-   * Container command. Supported only when launchMode is Override.
+   * Container command. Supported only when launchMode is Override. Each item is limited to 4096 characters, and the JSON-encoded list to 8192 characters.
    */
   @minItems(1)
   @maxItems(64)
   containerCommand?: string[];
 
   /**
-   * Container arguments. Supported only when launchMode is Override.
+   * Container arguments. Supported only when launchMode is Override. Each item is limited to 4096 characters, and the JSON-encoded list to 8192 characters.
    */
   @maxItems(256)
   containerArguments?: string[];
@@ -4044,9 +4051,11 @@ model ManagedComputeDeploymentParameters {
   ]>;
 
   /**
-   * Container image reference including the registry host, for example myregistry.azurecr.io/repository:tag. The deployment identity must be able to pull it. Immutable after creation.
+   * Container image reference including the registry host, for example contoso.azurecr.io/repository:tag. The deployment identity must be able to pull it. Immutable after creation.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
+  @minLength(1)
+  @maxLength(8192)
   image?: string;
 }
 
@@ -4077,6 +4086,8 @@ model ManagedComputeDeploymentProbe {
   /**
    * Absolute HTTP path to probe.
    */
+  @minLength(1)
+  @maxLength(512)
   path?: string;
 
   /**
@@ -4140,7 +4151,7 @@ union ManagedComputeEngineType {
   /**
    * Managed SGLang serving.
    */
-  Sglang: "Sglang",
+  SGLang: "SGLang",
 
   /**
    * Custom engine launched from the container image.
@@ -4179,12 +4190,12 @@ union ManagedComputeProbeScheme {
   string,
 
   /**
-   * HTTP.
+   * Probe the container over HTTP.
    */
   Http: "Http",
 
   /**
-   * HTTPS.
+   * Probe the container over HTTPS.
    */
   Https: "Https",
 }
