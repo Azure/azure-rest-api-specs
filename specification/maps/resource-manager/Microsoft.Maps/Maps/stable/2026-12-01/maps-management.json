@@ -1061,6 +1061,37 @@
         "expiry"
       ]
     },
+    "Azure.ResourceManager.ResourceProvisioningState": {
+      "type": "string",
+      "description": "The provisioning state of a resource type.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          }
+        ]
+      },
+      "readOnly": true
+    },
     "CorsRule": {
       "type": "object",
       "description": "Specifies a CORS rule for the Map Account.",
@@ -1311,13 +1342,17 @@
         },
         "primaryKey": {
           "type": "string",
+          "format": "password",
           "description": "The primary key for accessing the Maps REST APIs.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         },
         "secondaryKey": {
           "type": "string",
+          "format": "password",
           "description": "The secondary key for accessing the Maps REST APIs.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         },
         "secondaryKeyLastUpdated": {
           "type": "string",
@@ -1341,7 +1376,7 @@
           "default": false
         },
         "provisioningState": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.ResourceManager.ResourceProvisioningState",
           "description": "The provisioning state of the Maps account resource, Account updates can only be performed on terminal states. Terminal states: `Succeeded` and `Failed`",
           "readOnly": true
         },
@@ -1394,8 +1429,10 @@
       "properties": {
         "accountSasToken": {
           "type": "string",
+          "format": "password",
           "description": "The shared access signature access token.",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         }
       }
     },
@@ -1405,7 +1442,7 @@
       "properties": {
         "tags": {
           "type": "object",
-          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters.",
+          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource across resource groups.",
           "additionalProperties": {
             "type": "string"
           }
