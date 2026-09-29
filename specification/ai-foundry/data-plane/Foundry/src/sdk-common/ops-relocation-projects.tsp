@@ -101,13 +101,6 @@ interface Skills {}
 @@clientLocation(Azure.AI.Projects.Skills.getSkillVersionContent, Skills);
 @@clientLocation(Azure.AI.Projects.Skills.deleteSkillVersion, Skills);
 
-interface Datasets {}
-@@clientLocation(Azure.AI.Projects.DataGenerationJobs.get, Datasets);
-@@clientLocation(Azure.AI.Projects.DataGenerationJobs.list, Datasets);
-@@clientLocation(Azure.AI.Projects.DataGenerationJobs.create, Datasets);
-@@clientLocation(Azure.AI.Projects.DataGenerationJobs.cancel, Datasets);
-@@clientLocation(Azure.AI.Projects.DataGenerationJobs.delete, Datasets);
-
 interface Routines {}
 @@clientLocation(Azure.AI.Projects.Routines.createOrUpdateRoutine, Routines);
 @@clientLocation(Azure.AI.Projects.Routines.getRoutine, Routines);
