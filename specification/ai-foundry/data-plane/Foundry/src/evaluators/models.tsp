@@ -10,6 +10,10 @@ using OpenAPI;
 
 namespace Azure.AI.Projects;
 
+const EvaluatorsRequiredPreviews = #{
+  required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview],
+};
+
 @doc("The category of the evaluator")
 union EvaluatorCategory {
   string,
@@ -79,23 +83,38 @@ model EvaluatorDefinition {
 }
 
 @doc("Code-based evaluator definition using python code")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model CodeBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.code;
 
   @doc("Inline code text for the evaluator")
   code_text?: string;
 
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview] }
+  )
   @doc("The entry point Python file name for the uploaded evaluator code (e.g. 'answer_length_evaluator.py')")
   entry_point?: string;
 
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview] }
+  )
   @doc("The container image tag to use for evaluator code execution")
   image_tag?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
+  @extension(
+    "x-ms-foundry-meta",
+    #{ required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview] }
+  )
   @doc("The blob URI for the evaluator storage")
   blob_uri?: url;
 }
 
 @doc("Prompt-based evaluator")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model PromptBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.prompt;
 
@@ -138,6 +157,7 @@ model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
 }
 
 @doc("Endpoint-based evaluator definition. The customer owns and hosts an HTTP endpoint that implements the evaluation contract. The evaluator references a Project Connection by name; the connection stores the endpoint URL and credentials (API Key or Entra ID). At execution time, the service resolves the connection to obtain the endpoint URL and authentication details, then calls the endpoint for each evaluation row.")
+@extension("x-ms-foundry-meta", EvaluatorsRequiredPreviews)
 model EndpointBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.endpoint;
 
@@ -421,6 +441,7 @@ model EvaluatorVersion {
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Request body for getting evaluator credentials")
 model EvaluatorCredentialRequest {
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The blob URI for the evaluator storage. Example: `https://account.blob.core.windows.net:443/container`")
   blob_uri: url;
 }

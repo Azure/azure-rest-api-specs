@@ -4,7 +4,7 @@
 
 - tool: TypeSpecValidation
   reason: >
-     Foundry does not emit autorest as OpenAPI 2 yields a very incomplete representation of the spec
+    Foundry does not emit autorest as OpenAPI 2 yields a very incomplete representation of the spec
   rules: [EmitAutorest, FolderStructure]
   paths:
     - "."
@@ -12,14 +12,26 @@
 
 - tool: TypeSpecValidation
   reason: >
-     SDKs are configured in nested config files.
+    SDKs are configured in nested config files.
   rules: [SdkTspConfigValidation]
   paths:
     - tspconfig.yaml
 
+- tool: TypeSpecValidation
+  reason: >
+    This entrypoint is the Python-only tested preview projection. Java and
+    TypeScript use separate Foundry entrypoints; declaring emitters here would
+    incorrectly expose Python compatibility models to other languages.
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-java.emitter-output-dir
+    - options.@azure-tools/typespec-ts.package-details.name
+  paths:
+    - src/sdk-python-azure-ai-finetuningsessions/tspconfig.yaml
+
 - tool: SwaggerAll
   reason: >
-     Foundry does not emit OpenAPI 2.
+    Foundry does not emit OpenAPI 2.
   paths:
     - "."
     - "**"
