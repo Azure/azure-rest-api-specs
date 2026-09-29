@@ -7,8 +7,9 @@ options:
     azure-resource-provider-folder: "resource-manager"
     output-file: "../{version-status}/{version}/defenderForStorageSettings.json"
     arm-types-dir: "{project-root}/../../../../../common-types/resource-management"
-    emit-lro-options: "all"
+    emit-lro-options: "none"
     examples-dir: "{project-root}/examples"
+    use-read-only-status-schema: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
