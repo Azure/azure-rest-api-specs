@@ -1,3 +1,6 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
+import { load } from "js-yaml";
 import { describe, expect, it, vi } from "vitest";
 import {
   checkContributorReadiness,
@@ -77,6 +80,18 @@ function setup() {
 }
 
 describe("contributor readiness", () => {
+  it("grants the report job permission to publish pull request comments", async () => {
+    const workflow = load(
+      await readFile(join(import.meta.dirname, "..", "contributor-readiness.yaml"), "utf8"),
+    ) as {
+      jobs: { report: { permissions: Record<string, string> } };
+    };
+    expect(workflow.jobs.report.permissions).toMatchObject({
+      "pull-requests": "write",
+      issues: "write",
+    });
+  });
+
   it("deduplicates authors/committers and includes every submitted reviewer", async () => {
     const f = setup();
     f.listReviews.mockResolvedValue({
