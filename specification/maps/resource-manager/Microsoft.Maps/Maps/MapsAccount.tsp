@@ -5,6 +5,7 @@ import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -47,15 +48,45 @@ interface Accounts {
   /**
    * Create or update a Maps Account. A Maps Account holds the keys which allow access to the Maps REST APIs.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<MapsAccount>;
+  @removed(Versions.v2026_12_01)
+  @renamedFrom(Versions.v2026_12_01, "createOrUpdate")
+  @sharedRoute
+  createOrUpdateV1 is ArmResourceCreateOrReplaceSync<MapsAccount>;
+
+  /**
+   * Create or update a Maps Account. A Maps Account holds the keys which allow access to the Maps REST APIs.
+   */
+  @added(Versions.v2026_12_01)
+  @sharedRoute
+  @Azure.Core.useFinalStateVia("location")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    MapsAccount,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = MapsAccount> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Updates a Maps Account. Only a subset of the parameters may be updated after creation, such as Sku, Tags, Properties.
    */
-  @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  @removed(Versions.v2026_12_01)
+  @renamedFrom(Versions.v2026_12_01, "update")
+  @sharedRoute
+  updateV1 is ArmCustomPatchSync<
     MapsAccount,
     PatchModel = MapsAccountUpdateParameters
+  >;
+
+  /**
+   * Updates a Maps Account. Only a subset of the parameters may be updated after creation, such as Sku, Tags, Properties.
+   */
+  @added(Versions.v2026_12_01)
+  @sharedRoute
+  @Azure.Core.useFinalStateVia("location")
+  update is ArmCustomPatchAsync<
+    MapsAccount,
+    PatchModel = MapsAccountUpdateParameters,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = MapsAccount> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -116,8 +147,16 @@ interface Accounts {
 @@doc(MapsAccount.name, "The name of the Maps Account.");
 @@doc(MapsAccount.properties, "The map account properties.");
 @@doc(
+  Accounts.createOrUpdateV1::parameters.resource,
+  "The new or updated parameters for the Maps Account."
+);
+@@doc(
   Accounts.createOrUpdate::parameters.resource,
   "The new or updated parameters for the Maps Account."
+);
+@@doc(
+  Accounts.updateV1::parameters.properties,
+  "The updated parameters for the Maps Account."
 );
 @@doc(
   Accounts.update::parameters.properties,

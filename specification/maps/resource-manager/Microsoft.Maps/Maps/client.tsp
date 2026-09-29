@@ -93,8 +93,7 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 
-// Remove OperationResult/OperationStatus LRO polling operations from C# generation
-@@scope(Microsoft.Maps.OperationResultOperationGroup.get, "!csharp");
+// Remove the OperationStatus LRO polling operation from C# generation
 @@scope(Microsoft.Maps.OperationStatusOperationGroup.get, "!csharp");
 
 // Override clientLocation for Operations.list to avoid C# namespace conflict

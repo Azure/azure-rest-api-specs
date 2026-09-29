@@ -30,8 +30,13 @@ using Microsoft.Maps;
 @@Legacy.flattenProperty(CreatorUpdateParameters.properties);
 
 @@clientName(Accounts.createOrUpdate::parameters.resource, "MapsAccount");
+@@clientName(Accounts.createOrUpdateV1::parameters.resource, "MapsAccount");
 @@clientName(
   Accounts.update::parameters.properties,
+  "MapsAccountUpdateParameters"
+);
+@@clientName(
+  Accounts.updateV1::parameters.properties,
   "MapsAccountUpdateParameters"
 );
 @@clientName(Accounts.listSas::parameters.body, "MapsAccountSasParameters");
@@ -49,8 +54,6 @@ using Microsoft.Maps;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PrivateLinkResource.properties);
-
-@@clientLocation(OperationResultOperationGroup.get, "OperationResult");
 
 @@clientLocation(OperationStatusOperationGroup.get, "OperationStatus");
 
