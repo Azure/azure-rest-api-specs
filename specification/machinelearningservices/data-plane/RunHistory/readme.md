@@ -37,3 +37,17 @@ These settings apply only when `--tag=package-runhistory-v1.0` is specified on t
 input-file:
   - stable/v1.0/run-history.json
 ```
+
+### Tag: package-runhistory-2019-08-01
+
+```yaml $(tag) == 'package-runhistory-2019-08-01'
+input-file:
+  - stable/2019-08-01/runHistory.json
+```
+
+### Tag: package-runhistory-2019-09-30
+
+```yaml $(tag) == 'package-runhistory-2019-09-30'
+input-file:
+  - stable/2019-09-30/runHistory.json
+```
