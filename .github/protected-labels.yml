@@ -91,6 +91,36 @@ package-name-approved-all:
     - ArthurMa1978
     - m-nash
 
+# SDK breaking-change board approval labels.
+# These labels clear the per-language SDK breaking-change merge gates (rulesPri2Sdk in
+# .github/workflows/src/summarize-checks/labelling.ts). Only the SDK breaking-change
+# board may apply them; if anyone else does, the bot removes the label.
+#
+# The roster below is derived from the users who actually apply these labels today (audited
+# from recent PR label history), so enforcement does not revert legitimate approvals. Expand
+# the list as additional reviewers join the board.
+#
+# Only the labels that currently exist in the repo are listed. The Java and Python-Track2
+# approval labels (BreakingChange-Java-Sdk-Approved, BreakingChange-Java-Sdk-Suppression-Approved,
+# BreakingChange-Python-Track2-Sdk-Approved) are defined in labelling.ts but not yet created
+# as repo labels; add them here once they exist.
+BreakingChange-Go-Sdk-Approved: &sdk-breaking-change-approvers
+  - ArcturusZhang
+  - ArthurMa1978
+  - kazrael2119
+  - msyyc
+  - nasc17
+  - qiaozha
+  - tadelesh
+  - v-jiaodi
+  - v-xuto
+  - weidongxu-microsoft
+BreakingChange-Go-Sdk-Suppression-Approved: *sdk-breaking-change-approvers
+BreakingChange-JavaScript-Sdk-Approved: *sdk-breaking-change-approvers
+BreakingChange-JavaScript-Sdk-Suppression-Approved: *sdk-breaking-change-approvers
+BreakingChange-Python-Sdk-Approved: *sdk-breaking-change-approvers
+BreakingChange-Python-Sdk-Suppression-Approved: *sdk-breaking-change-approvers
+
 # Label to skip release plan automation when applied to spec PR.
 Skip-ReleasePlan-Automation:
   - msyyc
