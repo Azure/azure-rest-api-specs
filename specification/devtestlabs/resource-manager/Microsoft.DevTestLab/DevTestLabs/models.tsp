@@ -1676,8 +1676,7 @@ model LabVirtualMachineCreationParameterProperties {
   /**
    * The SSH key of the virtual machine administrator.
    */
-  @secret
-  @visibility(Lifecycle.Create, Lifecycle.Update)
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "TODO: Check if this is a secret and add @secret or update reason"
   sshKey?: string;
 
   /**
