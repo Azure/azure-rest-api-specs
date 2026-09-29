@@ -38,6 +38,14 @@ package-name-dotnet-approved:
   data-plane:
     - user3
     - user4
+
+# Per-plane opt-out: gate one plane and leave the other open.
+# Here data-plane is restricted to its approvers while management-plane
+# is open to anyone (the label is never removed on management-plane PRs).
+typespec-suppressions-approved:
+  data-plane:
+    - user3
+  management-plane: unprotected
 ```
 
 Values are GitHub handles (case-insensitive). Plane detection uses PR labels explicitly:
@@ -45,6 +53,11 @@ Values are GitHub handles (case-insensitive). Plane detection uses PR labels exp
 - `Mgmt` or `resource-manager` → management-plane
 - `data-plane` → data-plane
 - Neither → plane-aware labels are not enforced (no action taken)
+
+A plane may be set to the literal `unprotected` instead of a list, which opts that
+plane out of enforcement (anyone may apply the label). An **omitted** plane stays
+fail-closed and resolves to `global-approvers` only; only the explicit `unprotected`
+keyword opens a plane.
 
 ## Security Model
 

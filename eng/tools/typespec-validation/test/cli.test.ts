@@ -3,7 +3,7 @@ import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promi
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { promisify } from "node:util";
+import { promisify, stripVTControlCharacters } from "node:util";
 import { simpleGit } from "simple-git";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 
@@ -39,6 +39,8 @@ beforeEach(async () => {
   root = await realpath(await mkdtemp(join(tmpdir(), "tsv-cli-")));
   vi.stubEnv("GITHUB_ACTIONS", "false");
   vi.stubEnv("DEBUG", "");
+  vi.stubEnv("NO_COLOR", "1");
+  vi.stubEnv("FORCE_COLOR", undefined);
 });
 
 afterEach(async () => {
@@ -90,6 +92,50 @@ it("respects explicit DEBUG selections without --verbose", async () => {
   const { stderr } = await run("--all", "--dry-run");
   expect(stderr).toContain("simple-git");
 });
+
+it.each([
+  {
+    config: "emit: []\nemit: []\n",
+    diagnostic: "tspconfig.yaml:2:1 - error tsv/invalid-yaml:",
+    color: false,
+  },
+  {
+    config: "emit: false\n",
+    diagnostic: "tspconfig.yaml - error tsv/invalid-config: emit:",
+    color: false,
+  },
+  { config: "emit: []\n", diagnostic: "tspconfig.yaml - error tsv/emit-autorest:", color: false },
+  { config: "emit: []\n", diagnostic: "tspconfig.yaml - error tsv/emit-autorest:", color: true },
+])(
+  "renders the pilot diagnostic once (color=$color): $diagnostic",
+  async ({ config, diagnostic, color }) => {
+    if (color) {
+      vi.stubEnv("NO_COLOR", undefined);
+      vi.stubEnv("FORCE_COLOR", "1");
+    }
+    const project = "specification/service/data-plane/Project";
+    await addProject(project);
+    await initGit();
+    await writeFile(join(root, "package.json"), '{"private":true}');
+    await writeFile(join(root, project, "main.tsp"), "");
+    await mkdir(join(root, project, "examples"));
+    await writeFile(join(root, project, "tspconfig.yaml"), config);
+    try {
+      await run(project);
+      expect.fail("Expected validation to fail");
+    } catch (error) {
+      expect(error).toMatchObject({ code: 1 });
+      if (!(error instanceof Error) || !("stdout" in error) || !("stderr" in error)) throw error;
+      const stderr = String(error.stderr);
+      expect(stripVTControlCharacters(stderr).split(diagnostic)).toHaveLength(2);
+      expect(stderr.includes("\x1b[31merror\x1b[39m")).toBe(color);
+      expect(stderr).not.toContain("\n    at ");
+      expect(String(error.stdout)).toContain("Executing rule: EmitAutorest");
+      expect(String(error.stdout)).not.toContain("mainTspExists:");
+      expect(String(error.stdout)).not.toContain("Executing rule: ServiceYaml");
+    }
+  },
+);
 
 it("defaults --all to specification and passes all-spec context to children and suppressions", async () => {
   await addProject("specification/a");

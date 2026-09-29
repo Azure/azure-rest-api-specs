@@ -144,7 +144,11 @@ async function handleLabeled({
     prLabels: labels,
     plane: isMgmt ? "management-plane" : "data-plane",
   });
-  if (authorization.status !== "authorized" && authorization.status !== "trusted-bot") {
+  if (
+    authorization.status !== "authorized" &&
+    authorization.status !== "trusted-bot" &&
+    authorization.status !== "plane-unprotected"
+  ) {
     core.warning(`${actor} is not authorized to apply ${targetLabel}, removing`);
     await removeLabelIfPresent(github, owner, repo, prNumber, targetLabel);
     return;
