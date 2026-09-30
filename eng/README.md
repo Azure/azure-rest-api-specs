@@ -80,6 +80,8 @@ changed tips. API and deletion failures fail the workflow.
 ## Repository labels
 
 Repository label definitions live in [`.github/labels.yaml`](../.github/labels.yaml).
+Keep service and team labels in their own section, separate from repository and
+workflow labels, and sort entries alphabetically within each section.
 Add or edit labels through a pull request, keeping names unchanged unless a
 separate migration is intended. Names, six-digit hex colors, and descriptions are
 validated before synchronization. Empty descriptions are allowed. Label
