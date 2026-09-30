@@ -181,7 +181,6 @@ model CostControlMatch {
   /**
    * The stable Foundry agent IDs to match.
    */
-  @encodedName("application/json", "foundry.caller.agent.id")
   @minItems(1)
   @maxItems(20)
   agentIds?: CostControlMatchValue[];
@@ -189,7 +188,6 @@ model CostControlMatch {
   /**
    * The authenticated principal object IDs to match.
    */
-  @encodedName("application/json", "foundry.caller.identity.oid")
   @minItems(1)
   @maxItems(20)
   identityObjectIds?: CostControlMatchValue[];
@@ -197,7 +195,6 @@ model CostControlMatch {
   /**
    * The Foundry session IDs to match.
    */
-  @encodedName("application/json", "foundry.caller.session.id")
   @minItems(1)
   @maxItems(20)
   sessionIds?: CostControlMatchValue[];
@@ -205,7 +202,6 @@ model CostControlMatch {
   /**
    * The Foundry project resource IDs to match.
    */
-  @encodedName("application/json", "foundry.project.id")
   @minItems(1)
   @maxItems(20)
   projectIds?: CostControlMatchValue[];
