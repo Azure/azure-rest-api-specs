@@ -15,6 +15,7 @@ export type RestEndpointMethodTypes =
 /**
  * Extracts inputs from context based on event name and properties.
  * run_id is only defined for "workflow_run:completed" events.
+ * artifactNames is returned when artifacts were needed to resolve a trusted workflow's PR.
  */
 export async function extractInputs(
   github: GitHub,
@@ -27,6 +28,7 @@ export async function extractInputs(
   issue_number: number;
   run_id: number;
   details_url?: string;
+  artifactNames?: string[];
 }> {
   core.info("extractInputs()");
   core.info(`  eventName: ${context.eventName}`);
@@ -56,6 +58,7 @@ export async function extractInputs(
     issue_number: number;
     run_id: number;
     details_url?: string;
+    artifactNames?: string[];
   };
 
   // Add support for more event types as needed
@@ -117,6 +120,7 @@ export async function extractInputs(
 
     let issue_number = NaN;
     let head_sha = "";
+    let artifactNames: string[] | undefined;
 
     if (
       payload.workflow_run.event === "pull_request" ||
@@ -220,7 +224,7 @@ export async function extractInputs(
         per_page: PER_PAGE_MAX,
       });
 
-      const artifactNames = artifacts.map((a) => a.name);
+      artifactNames = artifacts.map((a) => a.name);
 
       core.info(`artifactNames: ${JSON.stringify(artifactNames)}`);
 
@@ -279,6 +283,7 @@ export async function extractInputs(
       head_sha,
       issue_number,
       run_id: payload.workflow_run.id,
+      ...(artifactNames && { artifactNames }),
     };
   } else if (context.eventName === "check_run") {
     const payload = context.payload as WebhookEvent<"check-run">;

@@ -4,12 +4,8 @@ import { extractInputs } from "../src/context.ts";
 import type { Core, GitHubScriptArgs } from "./github.ts";
 
 export default async function updateLabels({ github, context, core }: GitHubScriptArgs) {
-  const { owner, repo, head_sha, issue_number, run_id } = await extractInputs(
-    github,
-    context,
-    core,
-  );
-  await updateLabelsImpl({ owner, repo, head_sha, issue_number, run_id, github, core });
+  const inputs = await extractInputs(github, context, core);
+  await updateLabelsImpl({ ...inputs, github, core });
 }
 
 export async function updateLabelsImpl({
@@ -20,6 +16,7 @@ export async function updateLabelsImpl({
   run_id,
   github,
   core,
+  artifactNames,
 }: {
   owner: string;
   repo: string;
@@ -31,6 +28,7 @@ export async function updateLabelsImpl({
       paginate: import("@octokit/plugin-paginate-rest").PaginateInterface;
     };
   core: Core;
+  artifactNames?: string[];
 }) {
   if (isFullGitSha(head_sha)) {
     core.setOutput("head_sha", head_sha);
@@ -49,16 +47,16 @@ export async function updateLabelsImpl({
     throw new Error("Required input 'run_id' not found in env or context");
   }
 
-  // List artifacts from a single run_id
-  core.info(`listWorkflowRunArtifacts(${owner}, ${repo}, ${run_id})`);
-  const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
-    owner: owner,
-    repo: repo,
-    run_id: run_id,
-    per_page: PER_PAGE_MAX,
-  });
-
-  const artifactNames: string[] = artifacts.map((a) => a.name);
+  if (artifactNames === undefined) {
+    core.info(`listWorkflowRunArtifacts(${owner}, ${repo}, ${run_id})`);
+    const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
+      owner,
+      repo,
+      run_id,
+      per_page: PER_PAGE_MAX,
+    });
+    artifactNames = artifacts.map((a) => a.name);
+  }
 
   core.info(`artifactNames: ${JSON.stringify(artifactNames)}`);
 
