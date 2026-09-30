@@ -16450,6 +16450,10 @@
           "description": "A value indicating whether the field should be used as a permission filter.",
           "x-nullable": true
         },
+        "organizationAccessExpiration": {
+          "type": "boolean",
+          "description": "A value indicating whether the field contains the expiration timestamp for organization-scoped SharePoint sharing links. At most one top-level field of type Edm.DateTimeOffset can have this property set to true. On permission-filtered queries, expiration applies only to orgLink:<tenantId> values in a userIds permission-filter field whose tenant ID matches the validated user's tenant ID. The grant is valid only before the timestamp; an absent expiration field or a null timestamp means no time limit. Expiration does not affect orgGroup:<tenantId> values in groupIds permission-filter fields or ordinary user and group grants. If omitted or false, this field is not used for organization-link expiration."
+        },
         "sharepointSiteUrl": {
           "type": "boolean",
           "description": "A value indicating whether the field contains a SharePoint site URL used for SharePoint group-based filtering."
@@ -17596,6 +17600,11 @@
           "description": "Overall indexer status.",
           "readOnly": true
         },
+        "runtime": {
+          "$ref": "#/definitions/IndexerRuntime",
+          "description": "Snapshot of the indexer's cumulative runtime consumption for the service over the current UTC period.",
+          "readOnly": true
+        },
         "lastResult": {
           "$ref": "#/definitions/IndexerExecutionResult",
           "description": "The result of the most recent or an in-progress indexer execution.",
@@ -18036,6 +18045,10 @@
         "limits": {
           "$ref": "#/definitions/SearchServiceLimits",
           "description": "Service level general limits."
+        },
+        "indexersRuntime": {
+          "$ref": "#/definitions/ServiceIndexersRuntime",
+          "description": "Service level indexer runtime consumption."
         }
       },
       "required": [
