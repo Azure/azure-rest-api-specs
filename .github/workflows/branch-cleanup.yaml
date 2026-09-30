@@ -9,6 +9,14 @@ on:
         description: "Report eligible branches without deleting them"
         type: boolean
         default: true
+      copilot-days:
+        description: "Minimum last-commit age for copilot/* branches, in positive whole days"
+        type: number
+        default: 90
+      other-days:
+        description: "Minimum last-commit age for other branches, in positive whole days"
+        type: number
+        default: 730
 
 permissions:
   contents: write
@@ -41,4 +49,10 @@ jobs:
               { github, context, core },
               ${{ github.event_name == 'workflow_dispatch' && inputs.dry-run }},
               (args) => exec.exec("git", args),
+              context.eventName === "workflow_dispatch"
+                ? {
+                    copilotDays: Number(context.payload.inputs["copilot-days"]),
+                    otherDays: Number(context.payload.inputs["other-days"]),
+                  }
+                : undefined,
             );
