@@ -47,6 +47,12 @@ branch does not enable backlog mutations. It uses the same organization-billed
 Copilot authentication as the API reviewers, a 30-minute agent timeout, and a
 250-AI-credit per-run cap. It does not need a personal access token.
 
+The trusted selection step also caches each issue's body, all comments, and
+timeline events. The agent reads this evidence from the run artifact and
+investigates sequentially without subagents. If the shared GitHub MCP becomes
+unavailable, it stops retrying that service and records unresolved investigations
+as blocked, without closing issues or asking authors to fix the tool failure.
+
 Inspect the run's agent output for the decisions and evidence, and the application
 job for actions and skipped/stale decisions. The source workflow is compiled with:
 
