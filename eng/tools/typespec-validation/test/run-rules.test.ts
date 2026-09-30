@@ -1,5 +1,6 @@
 import { ConsoleLogger, defaultLogger } from "@azure-tools/specs-shared/logger";
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { verbatim } from "../src/diagnostic-content.ts";
 import { context, runRules } from "../src/index.ts";
 import { type RuleResult } from "../src/rule-result.ts";
 import { type Rule } from "../src/rule.ts";
@@ -190,7 +191,9 @@ describe("runRules", function () {
             severity: "error",
             code: "compile",
             message: "TypeSpec compilation failed.",
-            output: "main.tsp:1:1 - error invalid-ref: Unknown identifier.\n> 1 | invalid\n    | ^",
+            details: verbatim(
+              "main.tsp:1:1 - error invalid-ref: Unknown identifier.\n> 1 | invalid\n    | ^",
+            ),
           },
         ],
       });

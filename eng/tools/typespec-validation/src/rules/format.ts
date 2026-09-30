@@ -1,5 +1,6 @@
 import type { ILogger } from "@azure-tools/specs-shared/logger";
 import { reportCommandOutput } from "../command-output.ts";
+import { blocks, filePath, indent, lines, verbatim } from "../diagnostic-content.ts";
 import { type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
 import { gitDiffTopSpecFolder, runNodeBin } from "../utils.ts";
@@ -28,8 +29,11 @@ export class FormatRule implements Rule {
           severity: "error",
           code: "format-changed",
           path: folder,
-          message: "Files changed by formatting (repository-relative paths):",
-          output: gitDiffResult.files.join("\n"),
+          message: "Files changed by formatting:",
+          details: blocks(
+            indent(lines(gitDiffResult.files.map(filePath))),
+            verbatim(gitDiffResult.diff ?? ""),
+          ),
           help: 'Run `pnpm exec tsp format "../**/*.tsp" tspconfig.yaml` from the project folder and include the changes.',
         },
       ],

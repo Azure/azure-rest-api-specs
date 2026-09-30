@@ -1,6 +1,7 @@
 import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 import { stripVTControlCharacters } from "node:util";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { blocks, filePath, indent, lines, text, verbatim } from "../src/diagnostic-content.ts";
 import {
   exceptionDiagnostic,
   formatDiagnostic,
@@ -89,6 +90,80 @@ describe("diagnostic formatting", () => {
   });
 
   it.each([
+    ["/repo", ["/repo/service/first.json", "service/second.json"]],
+    ["C:\\repo", ["C:\\repo\\service\\first.json", "service\\second.json"]],
+  ])("indents affected files and colors each path cyan with cwd=%s", (cwd, files) => {
+    const changedFiles: Diagnostic = {
+      severity: "error",
+      code: "generated-files-changed",
+      message: "Files have been changed after `tsp compile`.",
+      details: indent(lines(files.map(filePath))),
+      help: "Run `tsp compile` and include the changes.",
+    };
+    const plain = formatDiagnostic(changedFiles, { cwd, color: false });
+    const colored = formatDiagnostic(changedFiles, { cwd, color: true });
+    expect(plain).toBe(
+      "error tsv/generated-files-changed: Files have been changed after `tsp compile`.\n" +
+        "  service/first.json\n" +
+        "  service/second.json\n" +
+        "  help: Run `tsp compile` and include the changes.",
+    );
+    expect(colored).toContain("\n  \x1b[36mservice/first.json\x1b[39m\n");
+    expect(colored).toContain("\n  \x1b[36mservice/second.json\x1b[39m\n");
+    expect(stripVTControlCharacters(colored)).toBe(plain);
+  });
+
+  it("colors labeled file paths cyan while preserving their version labels", () => {
+    const missingFile: Diagnostic = {
+      severity: "error",
+      code: "service-yaml",
+      message: "Manifest references swagger files that do not exist:",
+      details: indent(
+        text`- version "2024-06-01": ${filePath("../stable/2024-06-01/contoso.json")}`,
+      ),
+      help: "Regenerate the swagger.",
+    };
+    const colored = formatDiagnostic(missingFile, { color: true });
+    const plain = formatDiagnostic(missingFile, { color: false });
+    expect(colored).toContain(
+      '\n  - version "2024-06-01": \x1b[36m../stable/2024-06-01/contoso.json\x1b[39m\n',
+    );
+    expect(stripVTControlCharacters(colored)).toBe(plain);
+    expect(plain).toBe(
+      "error tsv/service-yaml: Manifest references swagger files that do not exist:\n" +
+        '  - version "2024-06-01": ../stable/2024-06-01/contoso.json\n' +
+        "  help: Regenerate the swagger.",
+    );
+  });
+
+  it("shows a diff after the file list, preserving Git colors and separating fix guidance", () => {
+    const diff = "diff --git a/file.json b/file.json\n\x1b[31m-old\x1b[m\n\x1b[32m+new\x1b[m\n";
+    const changedFiles: Diagnostic = {
+      severity: "error",
+      code: "generated-files-changed",
+      message: "Files changed after TypeSpec compilation:",
+      details: blocks(indent(filePath("file.json")), verbatim(diff)),
+      help: "Include the generated files.",
+    };
+    const colored = formatDiagnostic(changedFiles, { color: true });
+    expect(colored).toContain(`  \x1b[36mfile.json\x1b[39m\n\n${diff.trimEnd()}\n\n`);
+    const plain = formatDiagnostic(changedFiles, { color: false });
+    expect(stripVTControlCharacters(colored)).toBe(plain);
+    expect(plain).toBe(
+      "error tsv/generated-files-changed: Files changed after TypeSpec compilation:\n" +
+        "  file.json\n\n" +
+        "diff --git a/file.json b/file.json\n-old\n+new\n\n" +
+        "  help: Include the generated files.",
+    );
+  });
+
+  it("does not add blank lines for empty details", () => {
+    expect(formatDiagnostic({ ...diagnostic, details: blocks(lines([]), "") })).toBe(
+      formatDiagnostic(diagnostic),
+    );
+  });
+
+  it.each([
     [{}, false, false],
     [{}, true, true],
     [{ TERM: "dumb" }, true, false],
@@ -126,6 +201,23 @@ describe("diagnostic formatting", () => {
         .join("\n")
         .match(/https:\/\/example.com\/help/g),
     ).toHaveLength(1);
+  });
+
+  it("deduplicates by plain rendered content rather than document structure or color", () => {
+    const logger = new ConsoleLogger(false);
+    const error = vi.spyOn(logger, "error").mockImplementation(() => {});
+    reportDiagnostics(
+      [
+        { ...diagnostic, details: filePath("service/file.json") },
+        { ...diagnostic, details: "service/file.json" },
+        { ...diagnostic, details: verbatim("\x1b[36mservice/file.json\x1b[39m") },
+        { ...diagnostic, details: filePath("service/other.json") },
+      ],
+      logger,
+    );
+    expect(error).toHaveBeenCalledTimes(2);
+    expect(error.mock.calls[0][0]).toContain("\nservice/file.json\n");
+    expect(error.mock.calls[1][0]).toContain("\nservice/other.json\n");
   });
 });
 

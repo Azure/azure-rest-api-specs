@@ -1,5 +1,6 @@
 import type { ILogger } from "@azure-tools/specs-shared/logger";
 import { stripVTControlCharacters } from "node:util";
+import { verbatim } from "./diagnostic-content.ts";
 import { failure, warning, type RuleResult } from "./rule-result.ts";
 
 export type CommandOutput = [Error | null, string, string];
@@ -26,7 +27,7 @@ export function reportCommandOutput(
       : undefined;
     if (frames) logger.debug(frames);
     return failure(command, `${label} failed${reason}.`, {
-      output: streams.join("\n") || error.message,
+      details: verbatim((streams.join("\n") || error.message).trimEnd()),
     });
   }
 
@@ -37,7 +38,7 @@ export function reportCommandOutput(
   }
   return unexpected.length
     ? warning(`${command}-output`, `${label} reported additional output.`, {
-        output: unexpected.join("\n"),
+        details: verbatim(unexpected.join("\n")),
       })
     : { success: true };
 }

@@ -1,7 +1,7 @@
 import type { ILogger } from "@azure-tools/specs-shared/logger";
-import { isAbsolute, relative, win32 } from "node:path";
 import { stripVTControlCharacters } from "node:util";
 import pc from "picocolors";
+import { filePath, renderDiagnosticContent } from "./diagnostic-content.ts";
 import { DiagnosticError, type Diagnostic } from "./rule-result.ts";
 
 export function supportsColor(env = process.env, isTTY = process.stderr.isTTY): boolean {
@@ -62,14 +62,7 @@ export function formatDiagnostic(
   const level = diagnostic.severity === "error" ? c.red("error") : c.yellow("warning");
   let location = "";
   if (diagnostic.path) {
-    const file = diagnostic.path;
-    const displayPath =
-      /^[A-Za-z]:[\\/]/.test(file) && /^[A-Za-z]:[\\/]/.test(cwd)
-        ? win32.relative(cwd, file)
-        : isAbsolute(file)
-          ? relative(cwd, file)
-          : file;
-    location = c.cyan(displayPath.replaceAll("\\", "/") || ".");
+    location = renderDiagnosticContent(filePath(diagnostic.path), { color, cwd });
     if (diagnostic.location) {
       location += `:${c.yellow(String(diagnostic.location.line))}:${c.yellow(String(diagnostic.location.column))}`;
     }
@@ -77,7 +70,10 @@ export function formatDiagnostic(
   const lines = [
     `${location ? `${location} - ` : ""}${level} ${c.dim(`tsv/${diagnostic.code}`)}: ${diagnostic.message.trimEnd()}`,
   ];
-  if (diagnostic.output) lines.push(diagnostic.output.trimEnd());
+  if (diagnostic.details !== undefined) {
+    const details = renderDiagnosticContent(diagnostic.details, { color, cwd });
+    if (details) lines.push(details);
+  }
   if (diagnostic.path && diagnostic.location?.text !== undefined) {
     const { line, column, text } = diagnostic.location;
     const source = text.split(/\r?\n/)[line - 1];
