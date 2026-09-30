@@ -8274,6 +8274,10 @@
           "x-ms-identifiers": [
             "actionType"
           ]
+        },
+        "outputSchemaSettings": {
+          "$ref": "#/definitions/DataflowGraphDestinationSchemaSettings",
+          "description": "Output schema settings."
         }
       },
       "required": [
@@ -8299,6 +8303,47 @@
         }
       ],
       "x-ms-discriminator-value": "Remove"
+    },
+    "DataflowGraphDestinationSchemaSerializationFormat": {
+      "type": "string",
+      "description": "Serialization format for dataflow graph.",
+      "enum": [
+        "Parquet",
+        "Delta"
+      ],
+      "x-ms-enum": {
+        "name": "DataflowGraphDestinationSchemaSerializationFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Parquet",
+            "value": "Parquet",
+            "description": "Parquet serialization format."
+          },
+          {
+            "name": "Delta",
+            "value": "Delta",
+            "description": "Delta serialization format."
+          }
+        ]
+      }
+    },
+    "DataflowGraphDestinationSchemaSettings": {
+      "type": "object",
+      "description": "DataflowGraph destination node output schema settings.",
+      "properties": {
+        "serializationFormat": {
+          "$ref": "#/definitions/DataflowGraphDestinationSchemaSerializationFormat",
+          "description": "The format of the output data."
+        },
+        "schemaRef": {
+          "type": "string",
+          "description": "Reference to the schema that describes the output of the transformation."
+        }
+      },
+      "required": [
+        "serializationFormat"
+      ]
     },
     "DataflowGraphGraphNode": {
       "type": "object",
