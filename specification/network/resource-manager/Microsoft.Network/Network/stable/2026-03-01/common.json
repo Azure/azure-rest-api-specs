@@ -2702,6 +2702,60 @@
         ]
       }
     },
+    "DdosContinent": {
+      "type": "string",
+      "description": "A continent used for DDoS geographic source matching.",
+      "enum": [
+        "Africa",
+        "Antarctica",
+        "Asia",
+        "Europe",
+        "NorthAmerica",
+        "Oceania",
+        "SouthAmerica"
+      ],
+      "x-ms-enum": {
+        "name": "DdosContinent",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Africa",
+            "value": "Africa",
+            "description": "Matches traffic originating from countries and territories in Africa."
+          },
+          {
+            "name": "Antarctica",
+            "value": "Antarctica",
+            "description": "Matches traffic originating from Antarctica."
+          },
+          {
+            "name": "Asia",
+            "value": "Asia",
+            "description": "Matches traffic originating from countries and territories in Asia."
+          },
+          {
+            "name": "Europe",
+            "value": "Europe",
+            "description": "Matches traffic originating from countries and territories in Europe."
+          },
+          {
+            "name": "NorthAmerica",
+            "value": "NorthAmerica",
+            "description": "Matches traffic originating from countries and territories in North America."
+          },
+          {
+            "name": "Oceania",
+            "value": "Oceania",
+            "description": "Matches traffic originating from countries and territories in Oceania."
+          },
+          {
+            "name": "SouthAmerica",
+            "value": "SouthAmerica",
+            "description": "Matches traffic originating from countries and territories in South America."
+          }
+        ]
+      }
+    },
     "DdosDetectionMode": {
       "type": "string",
       "description": "The detection mode for the DDoS detection rule.",
@@ -2730,6 +2784,30 @@
         }
       }
     },
+    "DdosMitigationTrafficScope": {
+      "type": "string",
+      "description": "The traffic protocol to which a DDoS mitigation rule applies.",
+      "enum": [
+        "Tcp",
+        "Udp"
+      ],
+      "x-ms-enum": {
+        "name": "DdosMitigationTrafficScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Tcp",
+            "value": "Tcp",
+            "description": "TCP traffic."
+          },
+          {
+            "name": "Udp",
+            "value": "Udp",
+            "description": "UDP traffic."
+          }
+        ]
+      }
+    },
     "DdosSettingsProtectionMode": {
       "type": "string",
       "description": "The DDoS protection mode of the public IP",
@@ -2756,6 +2834,30 @@
             "name": "Disabled",
             "value": "Disabled",
             "description": "Disabled"
+          }
+        ]
+      }
+    },
+    "DdosSourcePolicyActionType": {
+      "type": "string",
+      "description": "The action applied to traffic matching a source policy override.",
+      "enum": [
+        "Deny",
+        "Permit"
+      ],
+      "x-ms-enum": {
+        "name": "DdosSourcePolicyActionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Deny",
+            "value": "Deny",
+            "description": "Deny traffic from matching sources."
+          },
+          {
+            "name": "Permit",
+            "value": "Permit",
+            "description": "Permit traffic from matching sources."
           }
         ]
       }
