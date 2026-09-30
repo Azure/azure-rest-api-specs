@@ -1,8 +1,8 @@
-import { copyFile, mkdir, mkdtemp, readFile, readdir, rm, writeFile } from "fs/promises";
+import { copyFile, mkdir, mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { load } from "js-yaml";
-import { tmpdir } from "os";
-import { dirname, extname, resolve } from "path";
-import { fileURLToPath } from "url";
+import { tmpdir } from "node:os";
+import { dirname, extname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import * as z from "zod";
 import { execFile } from "../../shared/src/exec.ts";

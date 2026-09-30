@@ -1,9 +1,9 @@
 import { mkdir, mkdtemp, realpath, rm, writeFile } from "node:fs/promises";
 import { findPackageJSON } from "node:module";
 import { tmpdir } from "node:os";
-import { dirname, join } from "path";
+import { dirname, join } from "node:path";
 import semver from "semver";
-import { fileURLToPath } from "url";
+import { fileURLToPath } from "node:url";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   execFile,
@@ -28,6 +28,19 @@ describe("execFile", () => {
   const file = "node";
   const args = ["-e", `console.log("test")`];
   const expected = "test\n";
+
+  it("forwards command-specific environment without mutating the parent", async () => {
+    const original = process.env.TSV_EXEC_TEST;
+    const result = await execFile(
+      process.execPath,
+      ["-e", "process.stdout.write(process.env.TSV_EXEC_TEST)"],
+      {
+        env: { ...process.env, TSV_EXEC_TEST: "child-only" },
+      },
+    );
+    expect(result.stdout).toBe("child-only");
+    expect(process.env.TSV_EXEC_TEST).toBe(original);
+  });
 
   it.each([false, true])("uses debug level for command traces (verbose=%s)", async (verbose) => {
     const log = vi.spyOn(console, "log").mockImplementation(() => {});

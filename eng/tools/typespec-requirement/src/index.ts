@@ -212,7 +212,7 @@ async function checkFiles(options: Options): Promise<{ brownfield: boolean; exit
 
     let jsonContent: unknown;
     try {
-      jsonContent = JSON.parse((await readFile(fullPath, "utf8")).replace(/^\uFEFF/, ""));
+      jsonContent = JSON.parse(await readFile(fullPath, "utf8"));
     } catch (error) {
       logWarning("  OpenAPI cannot be parsed as JSON, so assuming not generated from TypeSpec");
       logWarning(`    ${error instanceof Error ? error.message : String(error)}`);

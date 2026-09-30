@@ -1,6 +1,6 @@
 import type { ILogger } from "@azure-tools/specs-shared/logger";
-import { readFile } from "fs/promises";
-import path from "path";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import { simpleGit } from "simple-git";
 import { globFiles } from "../glob.ts";
 import { failure, type Diagnostic, type RuleResult } from "../rule-result.ts";
