@@ -27,6 +27,52 @@ afterEach(() => {
 });
 
 describe("runRules", function () {
+  it("prints compact verbose statuses, accurately distinguishing skips and suppressions", async () => {
+    vi.stubEnv("NO_COLOR", "1");
+    const stdout = vi.spyOn(console, "log").mockImplementation(() => {});
+    const debug = vi.spyOn(console, "debug").mockImplementation(() => {});
+    const suppressed = createRule("Suppressed", { success: false }, { suppressable: true });
+    const rules = [
+      createRule("Passed", { success: true }),
+      createRule("Skipped", { success: true, skipped: "Not applicable" }),
+      suppressed,
+      createRule("InternallySuppressed", { success: true, suppressed: "Config exemption" }),
+      createRule("Warning", {
+        success: true,
+        diagnostics: [{ severity: "warning", code: "test", message: "Limited validation" }],
+      }),
+    ];
+    vi.spyOn(console, "warn").mockImplementation(() => {});
+    const result = await runRules(
+      rules,
+      "/test",
+      [
+        {
+          tool: "TypeSpecValidation",
+          paths: ["."],
+          rules: ["Suppressed"],
+          reason: "Known exemption",
+        },
+      ],
+      new ConsoleLogger(true),
+    );
+    expect(result.success).toBe(true);
+    expect(suppressed.executeFn).not.toHaveBeenCalled();
+    expect(stdout.mock.calls.flat()).toEqual([
+      "",
+      "1 passed | 1 with warnings | 1 skipped | 2 suppressed",
+    ]);
+    expect(
+      debug.mock.calls.flat().filter((line) => /^[\u2714\u00d7!-] /.test(String(line))),
+    ).toEqual([
+      "\u2714 Passed",
+      "- Skipped (skipped)",
+      "- Suppressed (suppressed)",
+      "- InternallySuppressed (suppressed)",
+      "! Warning (warnings)",
+    ]);
+  });
+
   it.each([false, true])(
     "logs ordinary local API-version skips only at debug level (verbose=%s)",
     async (verbose) => {
@@ -96,7 +142,8 @@ describe("runRules", function () {
       expect(third.executeFn).not.toHaveBeenCalled();
       expect(warning).toHaveBeenCalledExactlyOnceWith("warning tsv/coverage: Not compared.");
       expect(error).toHaveBeenCalledExactlyOnceWith("error tsv/bad-value: Invalid value.");
-      expect(stdout).not.toHaveBeenCalled();
+      expect(stdout.mock.calls.flat()).toEqual(["", "1 failed | 1 with warnings | 1 not run"]);
+      expect(stdout.mock.invocationCallOrder[0]).toBeGreaterThan(error.mock.invocationCallOrder[0]);
       expect(debug.mock.calls.length > 0).toBe(verbose);
     },
   );
@@ -131,39 +178,30 @@ describe("runRules", function () {
   });
 
   it.each([new ConsoleLogger(false), new ConsoleLogger(true)])(
-    "preserves an unmigrated stdout-only failure with logger=%j",
+    "reports native command diagnostics once with logger=%j",
     async (logger) => {
-      const stdout = vi.spyOn(console, "log").mockImplementation(() => {});
-      const stderr = vi.spyOn(console, "error").mockImplementation(() => {});
-      const rule = createRule("SdkTspConfigValidation", {
-        success: false,
-        stdOutput: "Invalid SDK configuration: please set the module name.",
-      });
-      const laterRule = createRule("Later", { success: true });
-      const result = await runRules([rule, laterRule], "/test", [], logger);
-      expect(result.success).toBe(false);
-      expect(result.failed).toEqual(["SdkTspConfigValidation"]);
-      expect(stdout).toHaveBeenCalledWith("Invalid SDK configuration: please set the module name.");
-      expect(stdout).toHaveBeenCalledWith("Rule SdkTspConfigValidation failed");
-      expect(stderr).not.toHaveBeenCalled();
-      expect(laterRule.executeFn).not.toHaveBeenCalled();
-    },
-  );
-
-  it.each([new ConsoleLogger(false), new ConsoleLogger(true)])(
-    "keeps rule diagnostics visible with logger=%j",
-    async (logger) => {
+      vi.stubEnv("NO_COLOR", "1");
       const log = vi.spyOn(console, "log").mockImplementation(() => {});
+      const error = vi.spyOn(console, "error").mockImplementation(() => {});
       const rule = createRule("Rule", {
         success: false,
-        stdOutput: "diagnostic on stdout",
-        errorOutput: "diagnostic on stderr",
+        diagnostics: [
+          {
+            severity: "error",
+            code: "compile",
+            message: "TypeSpec compilation failed.",
+            output: "main.tsp:1:1 - error invalid-ref: Unknown identifier.\n> 1 | invalid\n    | ^",
+          },
+        ],
       });
       const result = await runRules([rule], "/test", [], logger);
       expect(result.success).toBe(false);
       expect(rule.executeFn).toHaveBeenCalledWith("/test", logger);
-      expect(log).toHaveBeenCalledWith("diagnostic on stdout");
-      expect(log).toHaveBeenCalledWith("diagnostic on stderr");
+      expect(log.mock.calls.flat()).toEqual(["", "1 failed"]);
+      expect(log.mock.invocationCallOrder[0]).toBeGreaterThan(error.mock.invocationCallOrder[0]);
+      expect(error).toHaveBeenCalledExactlyOnceWith(
+        "error tsv/compile: TypeSpec compilation failed.\nmain.tsp:1:1 - error invalid-ref: Unknown identifier.\n> 1 | invalid\n    | ^",
+      );
     },
   );
 
@@ -243,7 +281,10 @@ describe("runRules", function () {
   });
 
   it("should stop executing rules after a failure", async function () {
-    const rule1 = createRule("Rule1", { success: false, errorOutput: "error" });
+    const rule1 = createRule("Rule1", {
+      success: false,
+      diagnostics: [{ severity: "error", code: "test", message: "error" }],
+    });
     const rule2 = createRule("Rule2", { success: true });
 
     const result = await runRules([rule1, rule2], "/test", [], defaultLogger);

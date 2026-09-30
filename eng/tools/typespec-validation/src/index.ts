@@ -3,7 +3,14 @@ import { ConsoleLogger, type ILogger } from "@azure-tools/specs-shared/logger";
 import { type Suppression } from "@azure-tools/suppressions";
 import debug from "debug";
 import { stat } from "node:fs/promises";
-import { exceptionDiagnostic, reportDiagnostics } from "./diagnostics.ts";
+import {
+  exceptionDiagnostic,
+  formatRuleStatus,
+  formatRuleSummary,
+  reportDiagnostics,
+  type RuleCounts,
+  type RuleStatus,
+} from "./diagnostics.ts";
 import type { Diagnostic, RuleResult } from "./rule-result.ts";
 import { type Rule } from "./rule.ts";
 import { runAll, runChanged } from "./run-projects.ts";
@@ -43,10 +50,13 @@ export async function runRules(
 ): Promise<RunRulesResult> {
   const result: RunRulesResult = { success: true, suppressed: [], executed: [], failed: [] };
   const diagnostics: Diagnostic[] = [];
+  const counts: RuleCounts = { PASS: 0, FAIL: 0, WARN: 0, SKIP: 0, SUPPRESSED: 0 };
+  const reportStatus = (name: string, status: RuleStatus) => {
+    counts[status]++;
+    logger.debug(formatRuleStatus(name, status));
+  };
 
   for (const rule of rules) {
-    logger.debug("Executing rule: " + rule.name);
-
     if (rule.suppressable) {
       const ruleSuppressions = suppressions.filter(
         (s) => s.rules?.includes(rule.name) && (!s.subRules || s.subRules.length === 0),
@@ -54,6 +64,7 @@ export async function runRules(
       if (ruleSuppressions.length > 0) {
         logger.debug(`  Suppressed: ${ruleSuppressions[0].reason}`);
         result.suppressed.push(rule.name);
+        reportStatus(rule.name, "SUPPRESSED");
         continue;
       }
     }
@@ -69,25 +80,28 @@ export async function runRules(
     diagnostics.push(...(ruleResult.diagnostics ?? []));
     if (ruleResult.skipped) logger.debug(`  Skipped: ${ruleResult.skipped}`);
     if (ruleResult.suppressed) logger.debug(`  Suppressed: ${ruleResult.suppressed}`);
-    if (ruleResult.stdOutput) console.log(ruleResult.stdOutput);
+    reportStatus(
+      rule.name,
+      !ruleResult.success
+        ? "FAIL"
+        : ruleResult.suppressed !== undefined
+          ? "SUPPRESSED"
+          : ruleResult.diagnostics?.some((diagnostic) => diagnostic.severity === "warning")
+            ? "WARN"
+            : ruleResult.skipped !== undefined
+              ? "SKIP"
+              : "PASS",
+    );
     if (!ruleResult.success) {
       result.success = false;
       result.failed.push(rule.name);
-      if (ruleResult.errorOutput) {
-        console.log("Rule " + rule.name + " failed");
-        console.log(ruleResult.errorOutput);
-      } else if (!ruleResult.diagnostics?.some((diagnostic) => diagnostic.severity === "error")) {
-        // Some unmigrated rules, including SDK config validation, report errors in stdout.
-        if (ruleResult.stdOutput) {
-          console.log("Rule " + rule.name + " failed");
-        } else {
-          diagnostics.push({
-            severity: "error",
-            code: "rule-failed",
-            message: `Rule ${rule.name} failed without reporting an error.`,
-            path: folder,
-          });
-        }
+      if (!ruleResult.diagnostics?.some((diagnostic) => diagnostic.severity === "error")) {
+        diagnostics.push({
+          severity: "error",
+          code: "rule-failed",
+          message: `Rule ${rule.name} failed without reporting an error.`,
+          path: folder,
+        });
       }
 
       // Stop executing more rules, since the results are more likely to be confusing than helpful
@@ -97,6 +111,9 @@ export async function runRules(
   }
 
   reportDiagnostics(diagnostics, logger);
+  const completed = Object.values(counts).reduce((total, count) => total + count, 0);
+  if (diagnostics.length > 0 || (logger.isDebug() && completed > 0)) logger.info("");
+  logger.info(formatRuleSummary(counts, rules.length - completed));
   return result;
 }
 
@@ -186,6 +203,7 @@ export async function main() {
   if (!parsedArgs) return;
 
   const { values } = parsedArgs;
+  const logger = new ConsoleLogger(values.verbose);
   if (values.verbose) {
     debug.enable([process.env.DEBUG, "simple-git"].filter(Boolean).join(","));
   }
@@ -268,7 +286,7 @@ export async function main() {
     console.log(`Please run TypeSpec Validation on a directory path`);
     process.exit(1);
   }
-  console.log("Running TypeSpecValidation on folder: ", absolutePath);
+  logger.debug(`Running TypeSpecValidation on folder: ${absolutePath}`);
 
   const suppressions: Suppression[] = await getSuppressions(absolutePath);
 
@@ -296,12 +314,7 @@ export async function main() {
     new StaleApiVersionPinRule(),
   ];
 
-  const result = await runRules(
-    rules,
-    absolutePath,
-    suppressions,
-    new ConsoleLogger(values.verbose),
-  );
+  const result = await runRules(rules, absolutePath, suppressions, logger);
 
   if (!result.success) {
     process.exitCode = 1;
