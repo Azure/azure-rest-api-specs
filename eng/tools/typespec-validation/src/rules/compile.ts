@@ -1,8 +1,8 @@
 import { filterAsync } from "@azure-tools/specs-shared/array";
 import type { ILogger } from "@azure-tools/specs-shared/logger";
-import { readFile } from "fs/promises";
+import { readFile } from "node:fs/promises";
 import { stripVTControlCharacters } from "node:util";
-import path, { basename, dirname, normalize } from "path";
+import path, { basename, dirname, normalize } from "node:path";
 import pc from "picocolors";
 import { globFiles } from "../glob.ts";
 import { type RuleResult } from "../rule-result.ts";

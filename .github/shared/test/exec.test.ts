@@ -1,9 +1,9 @@
 import { mkdir, mkdtemp, realpath, rm, writeFile } from "node:fs/promises";
 import { findPackageJSON } from "node:module";
 import { tmpdir } from "node:os";
-import { dirname, join } from "path";
+import { dirname, join } from "node:path";
 import semver from "semver";
-import { fileURLToPath } from "url";
+import { fileURLToPath } from "node:url";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   execFile,

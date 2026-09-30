@@ -1,10 +1,10 @@
-import child_process from "child_process";
+import child_process from "node:child_process";
 import spawn from "cross-spawn";
 import { readFile } from "node:fs/promises";
 import { findPackageJSON } from "node:module";
 import { pathToFileURL } from "node:url";
-import { basename, dirname, join, resolve } from "path";
-import { promisify } from "util";
+import { basename, dirname, join, resolve } from "node:path";
+import { promisify } from "node:util";
 import * as z from "zod";
 const execFileImpl = promisify(child_process.execFile);
 

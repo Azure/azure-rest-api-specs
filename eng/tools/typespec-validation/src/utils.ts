@@ -4,8 +4,8 @@ import {
   getSuppressions as getSuppressionsImpl,
   type Suppression,
 } from "@azure-tools/suppressions";
-import { access, readdir, readFile } from "fs/promises";
-import defaultPath, { basename, dirname, join, relative, type PlatformPath } from "path";
+import { access, readdir, readFile } from "node:fs/promises";
+import defaultPath, { basename, dirname, join, relative, type PlatformPath } from "node:path";
 import { simpleGit } from "simple-git";
 import { context } from "./index.ts";
 

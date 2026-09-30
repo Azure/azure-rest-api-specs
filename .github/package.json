@@ -37,6 +37,8 @@
     "@types/node": "catalog:",
     "@types/semver": "catalog:",
     "@vitest/utils": "catalog:",
+    "eslint": "catalog:",
+    "eslint-plugin-n": "catalog:",
     "fflate": "catalog:",
     "semver": "catalog:",
     "tinybench": "catalog:"
@@ -44,8 +46,9 @@
   "scripts": {
     "build": "tsc --noEmit",
     "check": "pnpm test:ci && pnpm lint && pnpm format:check",
-    "lint": "pnpm lint:oxlint && pnpm lint:tsc",
+    "lint": "pnpm lint:oxlint && pnpm lint:eslint && pnpm lint:tsc",
     "lint:oxlint": "oxlint .",
+    "lint:eslint": "eslint .",
     "lint:tsc": "pnpm build",
     "format": "oxfmt . --write",
     "format:check": "oxfmt . --check",

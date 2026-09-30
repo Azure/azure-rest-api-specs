@@ -4,7 +4,7 @@ import { mockFolder } from "./mocks.ts";
 import * as simpleGit from "simple-git";
 
 import { strict as assert } from "node:assert";
-import path from "path";
+import path from "node:path";
 import { afterEach, describe, it, vi } from "vitest";
 import { NpmPrefixRule } from "../src/rules/npm-prefix.ts";
 

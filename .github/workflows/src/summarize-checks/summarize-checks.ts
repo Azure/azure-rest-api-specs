@@ -51,9 +51,9 @@ import {
   typeSpecSuppressionsTsg,
 } from "./tsgs.ts";
 
-import fs from "fs/promises";
-import os from "os";
-import path from "path";
+import fs from "node:fs/promises";
+import os from "node:os";
+import path from "node:path";
 
 export type CheckMetadata = {
   precedence: number;
