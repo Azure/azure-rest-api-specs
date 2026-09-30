@@ -7,10 +7,10 @@ import {
   createNextStepsComment,
   getCheckInfo,
   getCheckRunTuple,
-  getExistingLabels,
   getImpactAssessment,
   updateLabels,
 } from "../../src/summarize-checks/summarize-checks.ts";
+import { getSummaryData } from "../../src/summarize-checks/summary-data.ts";
 import { createMockCore, createMockGithub } from "../mocks.ts";
 
 export type CheckRunData = import("../../src/summarize-checks/summarize-checks.ts").CheckRunData;
@@ -79,15 +79,15 @@ describe("Summarize Checks Integration Tests", () => {
         );
 
         const head_sha = "961faf0dd048e0b846026bc84fdd795f4b46e9e8";
-        const expectedLabels = await getExistingLabels(github, owner, repo, issue_number);
+        const summaryData = await getSummaryData(github, owner, repo, issue_number, head_sha);
+        const expectedLabels = summaryData.labels;
 
         const [requiredCheckRuns, fyiCheckRuns, impactAssessment] = await getCheckRunTuple(
           github,
           mockCore,
           owner,
           repo,
-          head_sha,
-          issue_number,
+          summaryData,
           [],
         );
 

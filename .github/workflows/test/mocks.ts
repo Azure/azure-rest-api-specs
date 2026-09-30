@@ -15,6 +15,7 @@ export type MockGithub = ReturnType<typeof createMockGithub>;
 // Partial mock of `github` parameter passed into github-script actions
 function createMockGithubImpl() {
   return {
+    graphql: vi.fn(),
     hook: {
       after: vi.fn(),
       before: vi.fn(),
@@ -53,6 +54,7 @@ function createMockGithubImpl() {
         get: vi.fn(),
       },
       repos: {
+        getBranchRules: vi.fn().mockResolvedValue({ data: [] }),
         createCommitStatus: vi.fn(),
         listCommitStatusesForRef: vi.fn().mockResolvedValue({ data: [] }),
         listPullRequestsAssociatedWithCommit: vi.fn().mockResolvedValue({

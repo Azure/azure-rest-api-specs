@@ -5,6 +5,7 @@ import {
   type CheckRunResult,
 } from "../../src/summarize-checks/summarize-checks.ts";
 import { createMockCore, createMockGithub } from "../mocks.ts";
+import { statusContext, summaryResponse } from "./summary-data-fixtures.ts";
 
 const statusName = "Automated merging requirements met";
 const pendingDescription =
@@ -37,41 +38,32 @@ async function summarize(github: ReturnType<typeof createMockGithub>) {
 describe("summary writes", () => {
   it("does not rewrite unchanged content or statuses just to refresh run URLs", async () => {
     const github = createMockGithub();
-    github.rest.issues.listComments.mockResolvedValue({
-      data: [{ id: 42, body: comment(pendingBody) }],
-    });
-    github.rest.repos.listCommitStatusesForRef.mockResolvedValue({
-      data: [
-        {
-          context: statusName,
-          state: "success",
-          description: "old",
-          updated_at: "2026-09-29T00:00:00Z",
-        },
-        {
-          context: statusName,
-          state: "pending",
-          description: pendingDescription,
-          updated_at: "2026-09-30T00:00:00Z",
-          target_url: previousRun,
-        },
-      ],
-    });
+    github.graphql.mockResolvedValue(
+      summaryResponse({
+        comments: [{ databaseId: 42, body: comment(pendingBody) }],
+        contexts: [statusContext({ context: statusName, description: pendingDescription })],
+      }),
+    );
 
     await summarize(github);
 
     expect(github.rest.issues.updateComment).not.toHaveBeenCalled();
     expect(github.rest.issues.createComment).not.toHaveBeenCalled();
     expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
-    expect(github.rest.repos.listCommitStatusesForRef).toHaveBeenCalledTimes(1);
-    expect(github.rest.issues.listComments).toHaveBeenCalledTimes(1);
+    expect(github.graphql).toHaveBeenCalledTimes(1);
+    expect(github.rest.repos.listCommitStatusesForRef).not.toHaveBeenCalled();
+    expect(github.rest.issues.listComments).not.toHaveBeenCalled();
   });
 
   it("updates changed guidance with the current run link", async () => {
     const github = createMockGithub();
-    github.rest.issues.listComments.mockResolvedValue({
-      data: [{ id: 42, body: comment("<h2>Next Steps to Merge</h2>Previous guidance") }],
-    });
+    github.graphql.mockResolvedValue(
+      summaryResponse({
+        comments: [
+          { databaseId: 42, body: comment("<h2>Next Steps to Merge</h2>Previous guidance") },
+        ],
+      }),
+    );
 
     await summarize(github);
 
@@ -88,6 +80,7 @@ describe("summary writes", () => {
 
   it("creates the first comment and status", async () => {
     const github = createMockGithub();
+    github.graphql.mockResolvedValue(summaryResponse());
     github.rest.issues.createComment.mockResolvedValue({ data: { id: 42 } });
 
     await summarize(github);
@@ -99,6 +92,18 @@ describe("summary writes", () => {
       body: comment(pendingBody, currentRun),
     });
     expect(github.rest.repos.createCommitStatus).toHaveBeenCalledTimes(1);
+    expect(github.rest.issues.listComments).not.toHaveBeenCalled();
+  });
+
+  it("does not publish anything when GraphQL fails", async () => {
+    const github = createMockGithub();
+    github.graphql.mockRejectedValue(new Error("GraphQL rate limit exceeded"));
+    await expect(summarize(github)).rejects.toThrow("GraphQL rate limit exceeded");
+    expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
+    expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
+    expect(github.rest.issues.updateComment).not.toHaveBeenCalled();
+    expect(github.rest.issues.createComment).not.toHaveBeenCalled();
+    expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
   });
 });
 
