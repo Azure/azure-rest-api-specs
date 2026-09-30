@@ -286,15 +286,15 @@ export function parseSelection(value: unknown): Selection[] {
 export function parseDecisions(output: unknown, selection: Selection[]): Decision[] {
   if (!record(output) || !Array.isArray(output.items)) throw new Error("Invalid safe output");
   const calls = output.items.filter((item) => record(item) && item.type === "apply_backlog_triage");
-  if (calls.length !== 1 || !record(calls[0]) || typeof calls[0].decisions !== "string") {
-    throw new Error("Expected exactly one apply_backlog_triage call");
-  }
-  const decisions: unknown = JSON.parse(calls[0].decisions);
-  if (!Array.isArray(decisions) || decisions.length !== selection.length) {
-    throw new Error("Every selected issue must have exactly one decision");
+  if (calls.length < 1 || calls.length > selection.length) {
+    throw new Error("Expected one checkpoint per completed issue, within the selected batch");
   }
   const seen = new Set<number>();
-  return decisions.map((item): Decision => {
+  return calls.map((call): Decision => {
+    if (!record(call) || typeof call.decision !== "string") {
+      throw new Error("Each checkpoint must contain a decision JSON string");
+    }
+    const item: unknown = JSON.parse(call.decision);
     if (
       !record(item) ||
       typeof item.number !== "number" ||
@@ -353,6 +353,14 @@ export async function applyBacklogTriage(
 ) {
   const decisions = parseDecisions(output, selection);
   const { github, context, core } = args;
+  const pending = selection.filter(
+    (issue) => !decisions.some((item) => item.number === issue.number),
+  );
+  if (pending.length > 0) {
+    const message = `No checkpoint submitted for issue(s) ${pending.map((issue) => issue.number).join(", ")}; leaving them eligible for the next run.`;
+    core.warning(message);
+    await core.summary.addRaw(`\n${message}\n`).write();
+  }
   let { state, sha } = await loadState(args);
   for (const decision of decisions) {
     const issueParams = { ...context.repo, issue_number: decision.number };
