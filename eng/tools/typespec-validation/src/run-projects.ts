@@ -30,6 +30,20 @@ interface OutputSegment {
   text: string;
 }
 
+/** Thrown when a child is terminated by a signal; carries any output captured before termination. */
+class ProjectTerminatedError extends Error {
+  readonly segments: OutputSegment[];
+  constructor(message: string, segments: OutputSegment[]) {
+    super(message);
+    this.name = "ProjectTerminatedError";
+    this.segments = segments;
+  }
+}
+
+// Cap captured output per project so a runaway diagnostic (e.g. a huge generated-file diff)
+// can't grow runner memory without bound; excess output is dropped, not buffered.
+const MAX_CAPTURED_OUTPUT_BYTES = 10 * 1024 * 1024;
+
 export async function runAll(
   folder: string,
   options: RunOptions & { shard?: string } = {},
@@ -151,6 +165,16 @@ async function runProjects(
           console.error(message);
         }
       }
+    } catch (error) {
+      // A child terminated by a signal may have already written diagnostics; surface them
+      // under a failed group instead of silently dropping the captured output.
+      if (error instanceof ProjectTerminatedError) {
+        printProjectGroup(githubActions, "fail", name, [
+          ...error.segments,
+          { stream: "stderr", text: error.message },
+        ]);
+      }
+      throw error;
     } finally {
       if (gitClean) {
         await git.raw(["restore", "--worktree", "--", "."]);
@@ -265,6 +289,22 @@ function validateProject(
     // Segments are recorded in capture order (not grouped by stream) so interleaved
     // stdout/stderr writes from the child can be replayed in their real relative order.
     const segments: OutputSegment[] = [];
+    let capturedBytes = 0;
+    let truncated = false;
+    const capture = (stream: OutputStream, chunk: Buffer) => {
+      // Keep draining the pipe even once truncated, so a chatty child can't stall on backpressure.
+      if (truncated) return;
+      capturedBytes += chunk.length;
+      if (capturedBytes > MAX_CAPTURED_OUTPUT_BYTES) {
+        truncated = true;
+        segments.push({
+          stream,
+          text: `\n[output truncated: exceeded ${MAX_CAPTURED_OUTPUT_BYTES / (1024 * 1024)} MiB]\n`,
+        });
+        return;
+      }
+      segments.push({ stream, text: chunk.toString("utf8") });
+    };
     // A child process keeps each project's context and exit status independent.
     const child = spawn(
       process.execPath,
@@ -276,16 +316,17 @@ function validateProject(
       ],
       { stdio: ["ignore", "pipe", "pipe"], env },
     );
-    child.stdout?.on("data", (chunk: Buffer) =>
-      segments.push({ stream: "stdout", text: chunk.toString("utf8") }),
-    );
-    child.stderr?.on("data", (chunk: Buffer) =>
-      segments.push({ stream: "stderr", text: chunk.toString("utf8") }),
-    );
+    child.stdout?.on("data", (chunk: Buffer) => capture("stdout", chunk));
+    child.stderr?.on("data", (chunk: Buffer) => capture("stderr", chunk));
     child.once("error", reject);
     child.once("close", (code, signal) => {
       if (signal) {
-        reject(new Error(`TypeSpec Validation for ${folder} terminated by ${signal}`));
+        reject(
+          new ProjectTerminatedError(
+            `TypeSpec Validation for ${folder} terminated by ${signal}`,
+            segments,
+          ),
+        );
       } else {
         resolvePromise({ success: code === 0, segments });
       }

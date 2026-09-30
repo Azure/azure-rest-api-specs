@@ -393,15 +393,41 @@ it("surfaces process launch errors instead of treating them as validation failur
   expect(console.log).not.toHaveBeenCalledWith(expect.stringMatching(/^::(?:end)?group::/));
 });
 
-it("stops when a child is terminated by a signal", async () => {
+it("stops when a child is terminated by a signal, surfacing any output captured first", async () => {
   vi.stubEnv("GITHUB_ACTIONS", "true");
+  vi.stubEnv("NO_COLOR", "1");
   const project = await addProject("a");
   await addProject("b");
-  vi.mocked(spawn).mockImplementationOnce(() => exitingChild(null, "SIGTERM"));
+  vi.mocked(spawn).mockImplementationOnce(() =>
+    exitingChild(null, "SIGTERM", "partial diagnostic"),
+  );
 
   await expect(runAll(root)).rejects.toThrow(`${project} terminated by SIGTERM`);
   expect(spawn).toHaveBeenCalledOnce();
-  expect(console.log).not.toHaveBeenCalledWith(expect.stringMatching(/^::(?:end)?group::/));
+  const groupTitle = vi
+    .mocked(console.log)
+    .mock.calls.map((call) => String(call[0]))
+    .find((line) => line.startsWith("::group::"));
+  expect(groupTitle).toMatch(/^::group::fail .*[/\\]a$/);
+  expect(console.log).toHaveBeenCalledWith("partial diagnostic");
+  expect(console.error).toHaveBeenCalledWith(
+    `TypeSpec Validation for ${project} terminated by SIGTERM`,
+  );
+  expect(console.log).toHaveBeenLastCalledWith("::endgroup::");
+});
+
+it("caps captured output per project so a runaway diagnostic can't grow memory without bound", async () => {
+  await addProject("a");
+  const bigOutput = "x".repeat(11 * 1024 * 1024); // 11 MiB, exceeds the 10 MiB cap
+  vi.mocked(spawn).mockImplementationOnce(() => exitingChild(0, null, bigOutput));
+
+  await expect(runAll(root)).resolves.toBe(true);
+  const printed = vi
+    .mocked(console.log)
+    .mock.calls.map((call) => String(call[0]))
+    .join("\n");
+  expect(printed).toContain("[output truncated: exceeded 10 MiB]");
+  expect(printed.length).toBeLessThan(bigOutput.length);
 });
 
 it("leaves existing and generated changes alone without --git-clean", async () => {
