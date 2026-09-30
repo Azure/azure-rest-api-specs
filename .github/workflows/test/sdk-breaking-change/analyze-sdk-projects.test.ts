@@ -1,4 +1,4 @@
-import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rm, utimes, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { ExecFileOptions, ExecResult } from "../../../shared/src/exec.ts";
@@ -30,7 +30,9 @@ beforeEach(async () => {
     if (operation === "generate") {
       const packagePath = join(sdkRepositoryPath, "sdk", "armwidget");
       await mkdir(packagePath, { recursive: true });
-      await writeFile(join(packagePath, "tsp-location.yaml"), "directory: specification\n");
+      const configPath = join(packagePath, "tsp-location.yaml");
+      await writeFile(configPath, "directory: specification\n");
+      await utimes(configPath, new Date(0), new Date(0));
     }
     return { stdout: `${JSON.stringify({ operation })}\n`, stderr: "" };
   });

@@ -1,7 +1,6 @@
-import type { AsyncFunctionArguments } from "@actions/github-script";
 import { existsSync, realpathSync } from "node:fs";
 import { dirname, isAbsolute, relative, resolve, sep } from "node:path";
-import type { WebhookEvent } from "../github.ts";
+import type { GitHubScriptArgs, WebhookEvent } from "../github.ts";
 
 type PullRequestFile = {
   filename: string;
@@ -65,7 +64,7 @@ export async function resolveAnalysisTrigger({
   github,
   context,
   core,
-}: Pick<AsyncFunctionArguments, "github" | "context" | "core">): Promise<void> {
+}: GitHubScriptArgs): Promise<void> {
   if (context.eventName === "workflow_dispatch") {
     const pullNumberInput = getWorkflowDispatchInput(context.payload, "pr_number");
     const sdkLanguageInput = getWorkflowDispatchInput(context.payload, "sdk_language");
@@ -258,7 +257,7 @@ export async function resolveChangedTypeSpecConfigPathsFromPullRequest({
   context,
   core,
   pullNumber,
-}: Pick<AsyncFunctionArguments, "github" | "context" | "core"> & {
+}: GitHubScriptArgs & {
   pullNumber: number;
 }): Promise<string[]> {
   if (!Number.isSafeInteger(pullNumber) || pullNumber <= 0) {

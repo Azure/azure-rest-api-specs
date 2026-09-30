@@ -1,9 +1,9 @@
-import type { AsyncFunctionArguments } from "@actions/github-script";
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { AnalysisResultSchema, type AnalysisResult } from "./create-analysis-result.ts";
 import { publishResultInComment } from "./publish-result-in-comment.ts";
 import { escapeMarkdown } from "../../../shared/src/markdown.ts";
+import type { GitHubScriptArgs } from "../github.ts";
 
 export async function buildAnalysisReport(resultsPath: string): Promise<{
   command: string;
@@ -51,7 +51,7 @@ export async function publishAnalysisResult({
   github,
   context,
   core,
-}: Pick<AsyncFunctionArguments, "github" | "context" | "core">): Promise<void> {
+}: GitHubScriptArgs): Promise<void> {
   const resultsPath = process.env.RESULTS_PATH;
   if (!resultsPath) {
     throw new Error("RESULTS_PATH is required.");

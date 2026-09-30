@@ -1,7 +1,7 @@
-import type { AsyncFunctionArguments } from "@actions/github-script";
+import type { GitHubScriptArgs } from "../github.ts";
 
 export async function publishResultInComment(
-  { github, context, core }: Pick<AsyncFunctionArguments, "github" | "context" | "core">,
+  { github, context, core }: GitHubScriptArgs,
   pullNumber: number,
   command: string,
   content: string,

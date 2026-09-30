@@ -1,4 +1,4 @@
-import type { AsyncFunctionArguments } from "@actions/github-script";
+import type { GitHubScriptArgs } from "../github.ts";
 import { readFile } from "node:fs/promises";
 import { type MitigationResult, MitigationResultSchema } from "./mitigate-sdk-breaking-changes.ts";
 import { publishResultInComment } from "./publish-result-in-comment.ts";
@@ -12,7 +12,7 @@ export async function buildMitigationReport({
   core,
   mitigationResultPath,
   workflowSummaryUrl,
-}: Pick<AsyncFunctionArguments, "github" | "context" | "core"> & {
+}: GitHubScriptArgs & {
   mitigationResultPath: string;
   workflowSummaryUrl: string;
 }): Promise<{ report: string; result: MitigationResult }> {
@@ -99,7 +99,7 @@ export async function publishMitigationResult({
   core,
   mitigationResultPath,
   workflowSummaryUrl,
-}: Pick<AsyncFunctionArguments, "github" | "context" | "core"> & {
+}: GitHubScriptArgs & {
   mitigationResultPath: string;
   workflowSummaryUrl: string;
 }): Promise<void> {

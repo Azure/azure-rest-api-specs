@@ -1,14 +1,14 @@
-import type { AsyncFunctionArguments } from "@actions/github-script";
 import { readFile } from "node:fs/promises";
 import { AnalysisResultSchema } from "./create-analysis-result.ts";
 import { resolveSdkLanguageConfig } from "./resolve-analysis-inputs.ts";
+import type { GitHubScriptArgs } from "../github.ts";
 
 export async function resolveMitigationTrigger({
   github,
   context,
   core,
   publishedResultsPath,
-}: Pick<AsyncFunctionArguments, "github" | "context" | "core"> & {
+}: GitHubScriptArgs & {
   publishedResultsPath: string;
 }): Promise<void> {
   const analysis = AnalysisResultSchema.parse(

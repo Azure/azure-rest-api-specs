@@ -34,12 +34,31 @@ async function findFiles(directory: string, name: string): Promise<string[]> {
   return matches.flat();
 }
 
-async function findGeneratedConfigs(repositoryPath: string, startedAt: number): Promise<string[]> {
+type ConfigSnapshot = Map<string, { mtimeMs: number; ctimeMs: number }>;
+
+async function snapshotGeneratedConfigs(repositoryPath: string): Promise<ConfigSnapshot> {
   const configs = await findFiles(repositoryPath, "tsp-location.yaml");
-  const generated = await Promise.all(
-    configs.map(async (path) => ((await stat(path)).mtimeMs >= startedAt ? path : undefined)),
+  return new Map(
+    await Promise.all(
+      configs.map(async (path) => {
+        const { mtimeMs, ctimeMs } = await stat(path);
+        return [path, { mtimeMs, ctimeMs }] as const;
+      }),
+    ),
   );
-  return generated.filter((path): path is string => path !== undefined);
+}
+
+async function findGeneratedConfigs(
+  repositoryPath: string,
+  previousConfigs: ConfigSnapshot,
+): Promise<string[]> {
+  const currentConfigs = await snapshotGeneratedConfigs(repositoryPath);
+  return [...currentConfigs].flatMap(([path, current]) => {
+    const previous = previousConfigs.get(path);
+    return !previous || current.mtimeMs !== previous.mtimeMs || current.ctimeMs !== previous.ctimeMs
+      ? [path]
+      : [];
+  });
 }
 
 function isWithin(parent: string, child: string): boolean {
@@ -81,7 +100,7 @@ export async function analyzeSdkProjects({
       const typeSpecProjectPath = relativeConfigPath.replace(/\/tspconfig\.yaml$/, "");
       const configPath = join(specificationRepositoryPath, relativeConfigPath);
       const generationResult = join(resultDir, "sdk-generation-result.json");
-      const generationStartedAt = Date.now();
+      const existingConfigs = await snapshotGeneratedConfigs(localSdkRepositoryPath);
 
       /* Generate the SDK package */
       const { stdout } = await execFile("azsdk", [
@@ -95,10 +114,7 @@ export async function analyzeSdkProjects({
         "json",
       ]);
       await writeFile(generationResult, stdout);
-      const generatedConfigs = await findGeneratedConfigs(
-        localSdkRepositoryPath,
-        generationStartedAt,
-      );
+      const generatedConfigs = await findGeneratedConfigs(localSdkRepositoryPath, existingConfigs);
       if (generatedConfigs.length !== 1) {
         throw new Error(
           `Expected exactly one generated tsp-location.yaml for ${typeSpecProjectPath}, found ${generatedConfigs.length}.`,
