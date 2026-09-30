@@ -100,20 +100,68 @@ export async function runRules(
   return result;
 }
 
+function showHelp() {
+  console.log(`TypeSpec Validation
+Validate Azure TypeSpec projects.
+
+Usage:
+  tsv <folder> [<context-json>] [options]
+  tsv --all [folder] [options]
+  tsv --changed [options]
+
+Arguments:
+  <folder>                 Project folder, or discovery root for --all
+                           (default for --all: specification).
+  <context-json>           Optional JSON context for rules and suppressions
+                           in single-project mode.
+
+Options:
+  -h, --help               Show help and exit without validation.
+  -v, --verbose            Include rule progress, debug details, and Git traces.
+      --all                Validate all projects under the discovery root.
+      --changed            Validate projects affected by committed changes
+                           using the current checkout.
+                           --all and --changed cannot be combined.
+
+Options for --changed:
+      --base <commit>      Base revision (default: HEAD^).
+      --head <commit>      Head revision (default: HEAD).
+      --ignore-core-files  Disable all-project fallback for core-file changes.
+
+Options for --all:
+      --shard <index>/<count>
+                           Select a shard using one-based indices.
+                           Each shard requires a separate checkout.
+
+Options for --all or --changed:
+      --dry-run            List selected projects and context without validation
+                           or cleanup; disables --git-clean.
+      --git-clean          Restore tracked files and remove untracked files and
+                           directories across the entire repository after each
+                           project. Requires a clean, disposable checkout;
+                           ignored files are retained.
+
+Validation may update generated files and formatting. Changes are retained
+unless --git-clean is used. Do not use --git-clean while other work is in progress.
+
+Examples (from the repository root):
+  pnpm tsv specification/<service>/<project>
+  pnpm tsv --all
+  pnpm tsv --changed --base=origin/main --head=HEAD --dry-run
+
+Documentation: https://aka.ms/azsdk/specs/typespec-validation`);
+}
+
 export async function main() {
   const args = process.argv.slice(2);
   const options = {
+    help: {
+      type: "boolean",
+      short: "h",
+    },
     verbose: {
       type: "boolean",
       short: "v",
-    },
-    folder: {
-      type: "string",
-      short: "f",
-    },
-    context: {
-      type: "string",
-      short: "c",
     },
     all: {
       type: "boolean",
@@ -143,6 +191,10 @@ export async function main() {
   const parsedArgs = parseArgs({ args, options, allowPositionals: true });
 
   const { values } = parsedArgs;
+  if (values.help) {
+    showHelp();
+    return;
+  }
   if (values.verbose) {
     debug.enable([process.env.DEBUG, "simple-git"].filter(Boolean).join(","));
   }

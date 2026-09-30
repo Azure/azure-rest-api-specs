@@ -3,11 +3,20 @@
 Run from the repository root after installing dependencies with `pnpm install`:
 
 ```sh
+pnpm tsv --help
 pnpm tsv specification/<service>/<project>
 pnpm tsv --all
 pnpm tsv --all specification/<service> --shard=1/3
 pnpm tsv --changed
 pnpm tsv --changed --base=origin/main --head=HEAD --dry-run
+```
+
+Use `--help` (or `-h`) to see all command-line options without running validation.
+For single-project validation, pass the folder and optional JSON context for rules
+and suppressions as positional arguments:
+
+```text
+pnpm tsv <folder> [<context-json>]
 ```
 
 Use `--verbose` (or `-v`) to include rule progress, configuration/import details,

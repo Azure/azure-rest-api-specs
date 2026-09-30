@@ -48,6 +48,100 @@ afterEach(async () => {
   await rm(root, { recursive: true, force: true });
 });
 
+it("shows the same help for --help and -h without a project or Git repository", async () => {
+  const help = await run("--help");
+  expect(await run("-h")).toEqual(help);
+  expect(help.stderr).toBe("");
+  for (const text of [
+    "Validate Azure TypeSpec projects.",
+    "tsv <folder> [<context-json>] [options]",
+    "tsv --all [folder] [options]",
+    "tsv --changed [options]",
+    "JSON context for rules and suppressions",
+    "-h, --help",
+    "-v, --verbose",
+    "--base <commit>",
+    "--head <commit>",
+    "--ignore-core-files",
+    "--shard <index>/<count>",
+    "--dry-run",
+    "--git-clean",
+    "default for --all: specification",
+    "default: HEAD^",
+    "default: HEAD)",
+    "--all and --changed cannot be combined",
+    "Options for --changed:",
+    "Options for --all:",
+    "Options for --all or --changed:",
+    "one-based indices",
+    "entire repository",
+    "clean, disposable checkout",
+    "ignored files are retained",
+    "disables --git-clean",
+    "pnpm tsv --changed --base=origin/main --head=HEAD --dry-run",
+    "https://aka.ms/azsdk/specs/typespec-validation",
+  ]) {
+    expect(help.stdout).toContain(text);
+  }
+  expect(help.stdout).not.toMatch(/(?:^|\s)(?:--folder|--context|-f|-c)(?=[\s,=]|$)/);
+});
+
+it.each([
+  ["--verbose"],
+  ["--all"],
+  ["--changed"],
+  ["--all", "--changed"],
+  ["--git-clean"],
+  ["--dry-run"],
+  ["--shard=invalid"],
+  ["--base=missing-ref"],
+  ["missing-project", "{invalid-json"],
+])("shows help before validation for %j", async (...args) => {
+  const { stdout, stderr } = await run(...args, "--help");
+  expect(stdout).toBe((await run("--help")).stdout);
+  expect(stderr).toBe("");
+});
+
+it("does not clean files when help is requested with --git-clean", async () => {
+  const sentinel = join(root, "local.txt");
+  await writeFile(sentinel, "keep");
+
+  const { stdout, stderr } = await run("--all", "--git-clean", "--help");
+  expect(stdout).toContain("Usage:");
+  expect(stdout).not.toMatch(/Checking \d+ TypeSpec folders|Running TypeSpecValidation on folder:/);
+  expect(stderr).toBe("");
+  expect(await readFile(sentinel, "utf8")).toBe("keep");
+});
+
+it.each(["--folder", "-f", "--context", "-c"])("rejects the unused option %s", async (option) => {
+  await expect(run(option, "unused")).rejects.toMatchObject({
+    code: 1,
+    stdout: "",
+    stderr: expect.stringContaining(`Unknown option '${option}'`) as unknown,
+  });
+});
+
+it.each([
+  { args: ["--unknown"], error: "ERR_PARSE_ARGS_UNKNOWN_OPTION" },
+  { args: ["--help", "--unknown"], error: "ERR_PARSE_ARGS_UNKNOWN_OPTION" },
+  { args: ["--base"], error: "ERR_PARSE_ARGS_INVALID_OPTION_VALUE" },
+  { args: ["--help", "--base"], error: "ERR_PARSE_ARGS_INVALID_OPTION_VALUE" },
+])("preserves parser errors for $args", async ({ args, error }) => {
+  await expect(run(...args)).rejects.toMatchObject({
+    code: 1,
+    stdout: "",
+    stderr: expect.stringContaining(error) as unknown,
+  });
+});
+
+it("treats --help after the option terminator as a positional folder", async () => {
+  await expect(run("--", "--help")).rejects.toMatchObject({
+    code: 1,
+    stdout: expect.stringContaining("/--help does not exist") as unknown,
+    stderr: "",
+  });
+});
+
 it.each(["single", "all", "changed"])(
   "makes Git tracing opt-in without hiding %s validation failures",
   async (mode) => {
