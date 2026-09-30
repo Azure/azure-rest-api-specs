@@ -60,12 +60,14 @@ it.each(["single", "all", "changed"])(
     const args = mode === "single" ? [project] : [`--${mode}`];
     await expect(run(...args)).rejects.toMatchObject({
       code: 1,
-      stdout: expect.stringContaining('must use "folder structure v2"') as unknown,
-      stderr: mode === "single" ? "" : (expect.not.stringContaining("simple-git") as unknown),
+      stdout: expect.not.stringContaining("Executing rule:") as unknown,
+      stderr: expect.stringContaining(
+        'error tsv/folder-structure: Project must use "folder structure v2"',
+      ) as unknown,
     });
     await expect(run(...args, "--verbose")).rejects.toMatchObject({
       code: 1,
-      stdout: expect.stringContaining('must use "folder structure v2"') as unknown,
+      stdout: expect.stringContaining("Executing rule: FolderStructure") as unknown,
       stderr: expect.stringContaining("simple-git") as unknown,
     });
   },
@@ -130,7 +132,9 @@ it.each([
       expect(stripVTControlCharacters(stderr).split(diagnostic)).toHaveLength(2);
       expect(stderr.includes("\x1b[31merror\x1b[39m")).toBe(color);
       expect(stderr).not.toContain("\n    at ");
-      expect(String(error.stdout)).toContain("Executing rule: EmitAutorest");
+      expect(String(error.stdout)).not.toMatch(
+        /Executing rule:|config files:|imports:|Expected npm prefix:/,
+      );
       expect(String(error.stdout)).not.toContain("mainTspExists:");
       expect(String(error.stdout)).not.toContain("Executing rule: ServiceYaml");
     }
