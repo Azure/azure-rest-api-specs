@@ -1,0 +1,21 @@
+- tool: TypeSpecRequirement
+  path: ./preview/2018-05-05-preview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./preview/2018-11-02-privatepreview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./preview/2019-05-05-preview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./preview/2021-01-01-preview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2018-05-05/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2019-03-01/*.json
+  reason: Brownfield service not ready to migrate
+- tool: Swagger Avocado
+  path: ./preview/2018-11-02-privatepreview/AlertsManagement.json
+  reason: This is an older API versions that was release to limited private preview. Swagger Avocado has been failing with MISSING_APIS_IN_DEFAULT_TAG for it and we want to permanently suppress it.

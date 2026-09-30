@@ -1,0 +1,57 @@
+{
+  "title": "Get KubernetesResources - VolumeAttachment",
+  "operationId": "KubernetesResources_Get",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000001",
+    "resourceGroupName": "rg1",
+    "clusterRp": "Microsoft.Kubernetes",
+    "clusterResourceName": "connectedClusters",
+    "clusterName": "clusterName1",
+    "kubernetesResourceName": "volumeattachment-csi-azuredisk-pvc-d0e1f2a3",
+    "api-version": "2026-07-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/kubernetesResources/volumeattachment-csi-azuredisk-pvc-d0e1f2a3",
+        "name": "volumeattachment-csi-azuredisk-pvc-d0e1f2a3",
+        "type": "Microsoft.KubernetesConfiguration/kubernetesResources",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2026-06-01T10:00:00.000Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2026-06-01T10:00:00.000Z"
+        },
+        "properties": {
+          "apiVersion": "storage.k8s.io/v1",
+          "kind": "VolumeAttachment",
+          "metadata": {
+            "name": "csi-azuredisk-pvc-d0e1f2a3-b4c5-6789-defa-901234567890",
+            "uid": "e1f2a3b4-c5d6-7890-efab-234567890123",
+            "resourceVersion": "9123456",
+            "creationTimestamp": "2026-03-01T10:00:10Z",
+            "labels": [
+              {
+                "name": "app.kubernetes.io/managed-by",
+                "value": "disk.csi.azure.com"
+              }
+            ]
+          },
+          "spec": {
+            "attacherName": "disk.csi.azure.com",
+            "attachedVolumeName": "pvc-d0e1f2a3-b4c5-6789-defa-901234567890",
+            "nodeName": "aks-nodepool1-12345678-0"
+          },
+          "status": {
+            "volumeAttached": true,
+            "conditions": []
+          },
+          "events": [],
+          "attachedToExtension": "azure-kube-inventory"
+        }
+      }
+    }
+  }
+}

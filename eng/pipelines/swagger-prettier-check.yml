@@ -1,15 +1,24 @@
 trigger: none
 
 jobs:
-- job:
-  pool:
-    name: azsdk-pool-mms-ubuntu-2204-general
-    vmImage: ubuntu-22.04
+  - job:
+    pool:
+      name: azsdk-pool
+      demands: ImageOverride -equals ubuntu-24.04
 
-  steps:
-  - template: /eng/pipelines/templates/steps/npm-install.yml
+    timeoutInMinutes: 120
 
-  - pwsh: |
-      $(Build.SourcesDirectory)/eng/scripts/Swagger-Prettier-Check.ps1 -Verbose
-    displayName: Swagger Prettier Check
-    ignoreLASTEXITCODE: true
+    variables:
+      - template: /eng/pipelines/templates/variables/globals.yml
+
+    steps:
+      - checkout: self
+        # Required to compare head commit with base commit
+        fetchDepth: 2
+
+      - template: /eng/pipelines/templates/steps/npm-install.yml
+
+      - pwsh: |
+          $(Build.SourcesDirectory)/eng/scripts/Swagger-Prettier-Check.ps1 -Verbose
+        displayName: Swagger Prettier Check
+        ignoreLASTEXITCODE: true

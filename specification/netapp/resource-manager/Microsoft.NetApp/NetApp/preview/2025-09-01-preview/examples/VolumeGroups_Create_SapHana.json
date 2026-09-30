@@ -1,0 +1,408 @@
+{
+  "parameters": {
+    "accountName": "account1",
+    "api-version": "2025-09-01-preview",
+    "body": {
+      "location": "westus",
+      "properties": {
+        "groupMetaData": {
+          "applicationIdentifier": "SH9",
+          "applicationType": "SAP-HANA",
+          "groupDescription": "Volume group"
+        },
+        "volumes": [
+          {
+            "name": "test-data-mnt00001",
+            "properties": {
+              "capacityPoolResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1",
+              "creationToken": "test-data-mnt00001",
+              "exportPolicy": {
+                "rules": [
+                  {
+                    "allowedClients": "0.0.0.0/0",
+                    "cifs": false,
+                    "hasRootAccess": true,
+                    "kerberos5ReadOnly": false,
+                    "kerberos5ReadWrite": false,
+                    "kerberos5iReadOnly": false,
+                    "kerberos5iReadWrite": false,
+                    "kerberos5pReadOnly": false,
+                    "kerberos5pReadWrite": false,
+                    "nfsv3": false,
+                    "nfsv41": true,
+                    "ruleIndex": 1,
+                    "unixReadOnly": true,
+                    "unixReadWrite": true
+                  }
+                ]
+              },
+              "protocolTypes": [
+                "NFSv4.1"
+              ],
+              "proximityPlacementGroup": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cys_sjain_fcp_rg/providers/Microsoft.Compute/proximityPlacementGroups/svlqa_sjain_multivolume_ppg",
+              "serviceLevel": "Premium",
+              "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRP/providers/Microsoft.Network/virtualNetworks/testvnet3/subnets/testsubnet3",
+              "throughputMibps": 10,
+              "usageThreshold": 107374182400,
+              "volumeSpecName": "data"
+            }
+          },
+          {
+            "name": "test-log-mnt00001",
+            "properties": {
+              "capacityPoolResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1",
+              "creationToken": "test-log-mnt00001",
+              "exportPolicy": {
+                "rules": [
+                  {
+                    "allowedClients": "0.0.0.0/0",
+                    "cifs": false,
+                    "hasRootAccess": true,
+                    "kerberos5ReadOnly": false,
+                    "kerberos5ReadWrite": false,
+                    "kerberos5iReadOnly": false,
+                    "kerberos5iReadWrite": false,
+                    "kerberos5pReadOnly": false,
+                    "kerberos5pReadWrite": false,
+                    "nfsv3": false,
+                    "nfsv41": true,
+                    "ruleIndex": 1,
+                    "unixReadOnly": true,
+                    "unixReadWrite": true
+                  }
+                ]
+              },
+              "protocolTypes": [
+                "NFSv4.1"
+              ],
+              "proximityPlacementGroup": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cys_sjain_fcp_rg/providers/Microsoft.Compute/proximityPlacementGroups/svlqa_sjain_multivolume_ppg",
+              "serviceLevel": "Premium",
+              "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRP/providers/Microsoft.Network/virtualNetworks/testvnet3/subnets/testsubnet3",
+              "throughputMibps": 10,
+              "usageThreshold": 107374182400,
+              "volumeSpecName": "log"
+            }
+          },
+          {
+            "name": "test-shared",
+            "properties": {
+              "capacityPoolResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1",
+              "creationToken": "test-shared",
+              "exportPolicy": {
+                "rules": [
+                  {
+                    "allowedClients": "0.0.0.0/0",
+                    "cifs": false,
+                    "hasRootAccess": true,
+                    "kerberos5ReadOnly": false,
+                    "kerberos5ReadWrite": false,
+                    "kerberos5iReadOnly": false,
+                    "kerberos5iReadWrite": false,
+                    "kerberos5pReadOnly": false,
+                    "kerberos5pReadWrite": false,
+                    "nfsv3": false,
+                    "nfsv41": true,
+                    "ruleIndex": 1,
+                    "unixReadOnly": true,
+                    "unixReadWrite": true
+                  }
+                ]
+              },
+              "protocolTypes": [
+                "NFSv4.1"
+              ],
+              "proximityPlacementGroup": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cys_sjain_fcp_rg/providers/Microsoft.Compute/proximityPlacementGroups/svlqa_sjain_multivolume_ppg",
+              "serviceLevel": "Premium",
+              "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRP/providers/Microsoft.Network/virtualNetworks/testvnet3/subnets/testsubnet3",
+              "throughputMibps": 10,
+              "usageThreshold": 107374182400,
+              "volumeSpecName": "shared"
+            }
+          },
+          {
+            "name": "test-data-backup",
+            "properties": {
+              "capacityPoolResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1",
+              "creationToken": "test-data-backup",
+              "exportPolicy": {
+                "rules": [
+                  {
+                    "allowedClients": "0.0.0.0/0",
+                    "cifs": false,
+                    "hasRootAccess": true,
+                    "kerberos5ReadOnly": false,
+                    "kerberos5ReadWrite": false,
+                    "kerberos5iReadOnly": false,
+                    "kerberos5iReadWrite": false,
+                    "kerberos5pReadOnly": false,
+                    "kerberos5pReadWrite": false,
+                    "nfsv3": false,
+                    "nfsv41": true,
+                    "ruleIndex": 1,
+                    "unixReadOnly": true,
+                    "unixReadWrite": true
+                  }
+                ]
+              },
+              "protocolTypes": [
+                "NFSv4.1"
+              ],
+              "proximityPlacementGroup": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cys_sjain_fcp_rg/providers/Microsoft.Compute/proximityPlacementGroups/svlqa_sjain_multivolume_ppg",
+              "serviceLevel": "Premium",
+              "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRP/providers/Microsoft.Network/virtualNetworks/testvnet3/subnets/testsubnet3",
+              "throughputMibps": 10,
+              "usageThreshold": 107374182400,
+              "volumeSpecName": "data-backup"
+            }
+          },
+          {
+            "name": "test-log-backup",
+            "properties": {
+              "capacityPoolResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1",
+              "creationToken": "test-log-backup",
+              "exportPolicy": {
+                "rules": [
+                  {
+                    "allowedClients": "0.0.0.0/0",
+                    "cifs": false,
+                    "hasRootAccess": true,
+                    "kerberos5ReadOnly": false,
+                    "kerberos5ReadWrite": false,
+                    "kerberos5iReadOnly": false,
+                    "kerberos5iReadWrite": false,
+                    "kerberos5pReadOnly": false,
+                    "kerberos5pReadWrite": false,
+                    "nfsv3": false,
+                    "nfsv41": true,
+                    "ruleIndex": 1,
+                    "unixReadOnly": true,
+                    "unixReadWrite": true
+                  }
+                ]
+              },
+              "protocolTypes": [
+                "NFSv4.1"
+              ],
+              "proximityPlacementGroup": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cys_sjain_fcp_rg/providers/Microsoft.Compute/proximityPlacementGroups/svlqa_sjain_multivolume_ppg",
+              "serviceLevel": "Premium",
+              "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRP/providers/Microsoft.Network/virtualNetworks/testvnet3/subnets/testsubnet3",
+              "throughputMibps": 10,
+              "usageThreshold": 107374182400,
+              "volumeSpecName": "log-backup"
+            }
+          }
+        ]
+      }
+    },
+    "resourceGroupName": "myRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "volumeGroupName": "group1"
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "group1",
+        "type": "Microsoft.NetApp/netAppAccounts/volumeGroups",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/volumeGroups/group1",
+        "location": "westus",
+        "properties": {
+          "groupMetaData": {
+            "applicationIdentifier": "SH9",
+            "applicationType": "SAP-HANA",
+            "groupDescription": "Volume group"
+          },
+          "provisioningState": "Creating",
+          "volumes": [
+            {
+              "name": "test-data-mnt00001",
+              "type": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1/volumes/test-data-mnt00001",
+              "properties": {
+                "creationToken": "test-data-mnt00001",
+                "exportPolicy": {
+                  "rules": [
+                    {
+                      "allowedClients": "0.0.0.0/0",
+                      "cifs": false,
+                      "hasRootAccess": true,
+                      "kerberos5ReadOnly": false,
+                      "kerberos5ReadWrite": false,
+                      "kerberos5iReadOnly": false,
+                      "kerberos5iReadWrite": false,
+                      "kerberos5pReadOnly": false,
+                      "kerberos5pReadWrite": false,
+                      "nfsv3": false,
+                      "nfsv41": true,
+                      "ruleIndex": 1,
+                      "unixReadOnly": true,
+                      "unixReadWrite": true
+                    }
+                  ]
+                },
+                "protocolTypes": [
+                  "NFSv4.1"
+                ],
+                "proximityPlacementGroup": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cys_sjain_fcp_rg/providers/Microsoft.Compute/proximityPlacementGroups/svlqa_sjain_multivolume_ppg",
+                "serviceLevel": "Premium",
+                "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRP/providers/Microsoft.Network/virtualNetworks/testvnet3/subnets/testsubnet3",
+                "throughputMibps": 10,
+                "usageThreshold": 107374182400,
+                "volumeSpecName": "data"
+              }
+            },
+            {
+              "name": "test-log-mnt00001",
+              "type": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1/volumes/test-log-mnt00001",
+              "properties": {
+                "creationToken": "test-log-mnt00001",
+                "exportPolicy": {
+                  "rules": [
+                    {
+                      "allowedClients": "0.0.0.0/0",
+                      "cifs": false,
+                      "hasRootAccess": true,
+                      "kerberos5ReadOnly": false,
+                      "kerberos5ReadWrite": false,
+                      "kerberos5iReadOnly": false,
+                      "kerberos5iReadWrite": false,
+                      "kerberos5pReadOnly": false,
+                      "kerberos5pReadWrite": false,
+                      "nfsv3": false,
+                      "nfsv41": true,
+                      "ruleIndex": 1,
+                      "unixReadOnly": true,
+                      "unixReadWrite": true
+                    }
+                  ]
+                },
+                "protocolTypes": [
+                  "NFSv4.1"
+                ],
+                "proximityPlacementGroup": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cys_sjain_fcp_rg/providers/Microsoft.Compute/proximityPlacementGroups/svlqa_sjain_multivolume_ppg",
+                "serviceLevel": "Premium",
+                "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRP/providers/Microsoft.Network/virtualNetworks/testvnet3/subnets/testsubnet3",
+                "throughputMibps": 10,
+                "usageThreshold": 107374182400,
+                "volumeSpecName": "log"
+              }
+            },
+            {
+              "name": "test-shared",
+              "type": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1/volumes/test-shared",
+              "properties": {
+                "creationToken": "test-shared",
+                "exportPolicy": {
+                  "rules": [
+                    {
+                      "allowedClients": "0.0.0.0/0",
+                      "cifs": false,
+                      "hasRootAccess": true,
+                      "kerberos5ReadOnly": false,
+                      "kerberos5ReadWrite": false,
+                      "kerberos5iReadOnly": false,
+                      "kerberos5iReadWrite": false,
+                      "kerberos5pReadOnly": false,
+                      "kerberos5pReadWrite": false,
+                      "nfsv3": false,
+                      "nfsv41": true,
+                      "ruleIndex": 1,
+                      "unixReadOnly": true,
+                      "unixReadWrite": true
+                    }
+                  ]
+                },
+                "protocolTypes": [
+                  "NFSv4.1"
+                ],
+                "proximityPlacementGroup": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cys_sjain_fcp_rg/providers/Microsoft.Compute/proximityPlacementGroups/svlqa_sjain_multivolume_ppg",
+                "serviceLevel": "Premium",
+                "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRP/providers/Microsoft.Network/virtualNetworks/testvnet3/subnets/testsubnet3",
+                "throughputMibps": 10,
+                "usageThreshold": 107374182400,
+                "volumeSpecName": "shared"
+              }
+            },
+            {
+              "name": "test-data-backup",
+              "type": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1/volumes/test-data-backup",
+              "properties": {
+                "creationToken": "test-data-backup",
+                "exportPolicy": {
+                  "rules": [
+                    {
+                      "allowedClients": "0.0.0.0/0",
+                      "cifs": false,
+                      "hasRootAccess": true,
+                      "kerberos5ReadOnly": false,
+                      "kerberos5ReadWrite": false,
+                      "kerberos5iReadOnly": false,
+                      "kerberos5iReadWrite": false,
+                      "kerberos5pReadOnly": false,
+                      "kerberos5pReadWrite": false,
+                      "nfsv3": false,
+                      "nfsv41": true,
+                      "ruleIndex": 1,
+                      "unixReadOnly": true,
+                      "unixReadWrite": true
+                    }
+                  ]
+                },
+                "protocolTypes": [
+                  "NFSv4.1"
+                ],
+                "proximityPlacementGroup": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cys_sjain_fcp_rg/providers/Microsoft.Compute/proximityPlacementGroups/svlqa_sjain_multivolume_ppg",
+                "serviceLevel": "Premium",
+                "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRP/providers/Microsoft.Network/virtualNetworks/testvnet3/subnets/testsubnet3",
+                "throughputMibps": 10,
+                "usageThreshold": 107374182400,
+                "volumeSpecName": "data-backup"
+              }
+            },
+            {
+              "name": "test-log-backup",
+              "type": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes",
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1/volumes/test-log-backup",
+              "properties": {
+                "creationToken": "test-log-backup",
+                "exportPolicy": {
+                  "rules": [
+                    {
+                      "allowedClients": "0.0.0.0/0",
+                      "cifs": false,
+                      "hasRootAccess": true,
+                      "kerberos5ReadOnly": false,
+                      "kerberos5ReadWrite": false,
+                      "kerberos5iReadOnly": false,
+                      "kerberos5iReadWrite": false,
+                      "kerberos5pReadOnly": false,
+                      "kerberos5pReadWrite": false,
+                      "nfsv3": false,
+                      "nfsv41": true,
+                      "ruleIndex": 1,
+                      "unixReadOnly": true,
+                      "unixReadWrite": true
+                    }
+                  ]
+                },
+                "protocolTypes": [
+                  "NFSv4.1"
+                ],
+                "proximityPlacementGroup": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/cys_sjain_fcp_rg/providers/Microsoft.Compute/proximityPlacementGroups/svlqa_sjain_multivolume_ppg",
+                "serviceLevel": "Premium",
+                "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRP/providers/Microsoft.Network/virtualNetworks/testvnet3/subnets/testsubnet3",
+                "throughputMibps": 10,
+                "usageThreshold": 107374182400,
+                "volumeSpecName": "log-backup"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "VolumeGroups_Create",
+  "title": "VolumeGroups_Create_SapHana"
+}

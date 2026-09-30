@@ -1,0 +1,97 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "maccName": "macc_20230614",
+    "resourceGroupName": "resource_group_name_01",
+    "subscriptionId": "10000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "macc_20230614",
+        "type": "Microsoft.BillingBenefits/maccs",
+        "id": "/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/maccs/macc_20230614",
+        "location": "global",
+        "properties": {
+          "allowContributors": true,
+          "automaticShortfall": "Enabled",
+          "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
+          "commitment": {
+            "amount": 20000,
+            "currencyCode": "USD",
+            "grain": "FullTerm"
+          },
+          "displayName": "macc 20230614",
+          "endAt": "2028-05-01T23:59:59Z",
+          "entityType": "Primary",
+          "milestones": [
+            {
+              "automaticShortfall": "Enabled",
+              "commitment": {
+                "amount": 10000,
+                "currencyCode": "USD"
+              },
+              "endAt": "2026-05-31T23:59:59Z",
+              "milestoneId": "11111111-1111-1111-1111-111111111111",
+              "shortfall": {
+                "balanceVersion": 1,
+                "charge": {
+                  "amount": 2000,
+                  "currencyCode": "USD",
+                  "grain": "FullTerm"
+                },
+                "endAt": "2027-07-01T23:59:59Z",
+                "productCode": "000278da-0000-0160-330f-a0b98cdbbdc4",
+                "resourceId": "/subscriptions/27507203-b094-420a-a716-b6fda046e1c2/resourceGroups/testcredit/providers/Microsoft.BillingBenefits/credits/taco0647052025",
+                "startAt": "2026-07-01T00:00:00Z",
+                "systemId": "lotId"
+              },
+              "status": "ShortfallCharged"
+            },
+            {
+              "automaticShortfall": "Disabled",
+              "commitment": {
+                "amount": 15000,
+                "currencyCode": "USD"
+              },
+              "endAt": "2027-05-31T23:59:59Z",
+              "milestoneId": "22222222-2222-2222-2222-222222222222",
+              "shortfall": null,
+              "status": "Completed"
+            }
+          ],
+          "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
+          "provisioningState": "Succeeded",
+          "shortfall": {
+            "balanceVersion": 3,
+            "charge": {
+              "amount": 5000,
+              "currencyCode": "USD",
+              "grain": "FullTerm"
+            },
+            "endAt": "2029-07-31T23:59:59Z",
+            "productCode": "000278da-0000-0160-330f-a0b98cdbbdc4",
+            "resourceId": "/subscriptions/27507203-b094-420a-a716-b6fda046e1c2/resourceGroups/testcredit/providers/Microsoft.BillingBenefits/credits/taco0647052025",
+            "startAt": "2028-07-01T00:00:00Z",
+            "systemId": "shortfall98765432"
+          },
+          "startAt": "2025-05-01T00:00:00Z",
+          "status": "ShortfallCharged",
+          "systemId": "13810867107109237"
+        },
+        "systemData": {
+          "createdAt": "2023-02-01T01:01:01.1075056Z",
+          "createdByType": "User",
+          "lastModifiedAt": "2023-02-01T01:01:01.1075056Z",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        }
+      }
+    }
+  },
+  "operationId": "Maccs_Get",
+  "title": "MaccWithMilestonesAndShortfall_Get"
+}

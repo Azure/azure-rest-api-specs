@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "managementGroupName": "MyManagementGroup",
+    "parameters": {
+      "operation": {
+        "httpMethod": "delete",
+        "uri": "https://management.azure.com/providers/Microsoft.Management/managementGroups/MyManagementGroup/providers/Microsoft.Authorization/roleAssignments/00000000-0000-0000-0000-000000000000?api-version=2022-04-01"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "expiration": "2025-01-01T21:30:00.00Z",
+        "result": "Succeeded",
+        "results": [
+          {
+            "claims": {
+              "date": "2025-01-01T19:30:00.00Z",
+              "double": 0.99,
+              "int": 2,
+              "isValid": false,
+              "string": "testString",
+              "testArray": [
+                "Apple",
+                "Banana",
+                "Cherry"
+              ],
+              "testObject": {
+                "name": "Complex Object",
+                "id": 12345,
+                "details": {
+                  "createdBy": "John Doe",
+                  "createdDate": "2024-12-13T12:00:00Z",
+                  "metadata": {
+                    "isActive": true,
+                    "tags": [
+                      "example",
+                      "test",
+                      "object"
+                    ],
+                    "version": "1.0.0"
+                  }
+                }
+              }
+            },
+            "expiration": "2025-01-01T21:30:00.00Z",
+            "message": "Coin flip successful (success probability: '1').",
+            "policyInfo": {
+              "policyAssignmentId": "/providers/Microsoft.Management/managementGroups/MyManagementGroup/providers/Microsoft.Authorization/policyAssignments/3f2def86",
+              "policyDefinitionId": "/providers/Microsoft.Management/managementGroups/MyManagementGroup/providers/Microsoft.Authorization/policyDefinitions/5ed64d02"
+            },
+            "result": "Succeeded"
+          }
+        ],
+        "token": "PoP 7zmVse52pjMKPQd5m2uiNjz5UV2pZ.LPGtRiTeuCDBomEVbzj9kIaL9odEmlNv4D9VzyrQLTAyv4HHnUR7oNytWnL.AQrZ5bSGAQZzr8eySqvugzrD-ceRVL311SL3Nn6f-4c9kgPgU_u1ArXQKW25QCxMlsAuWmaE",
+        "tokenId": "0da8a969-c660-4de0-a6a4-b2034d4325e4"
+      }
+    }
+  },
+  "operationId": "PolicyTokens_AcquireAtManagementGroup",
+  "title": "Acquire a policy token at management group level"
+}

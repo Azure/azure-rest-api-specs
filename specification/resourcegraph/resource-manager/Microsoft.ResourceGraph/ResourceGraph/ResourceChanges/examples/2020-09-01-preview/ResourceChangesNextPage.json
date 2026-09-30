@@ -1,0 +1,50 @@
+{
+  "description": "A resource changes query requesting the next page using a skip token.",
+  "parameters": {
+    "api-version": "2020-09-01-preview",
+    "parameters": {
+      "$skipToken": "ew0KICAiJGlkIjogIjEiLA0KICAiRW5kVGltZSI6ICJcL0RhdGUoMTU1MDc0NT",
+      "$top": 2,
+      "interval": {
+        "end": "2018-10-31T12:09:03.141Z",
+        "start": "2018-10-30T12:09:03.141Z"
+      },
+      "resourceIds": [
+        "/subscriptions/4d962866-1e3f-47f2-bd18-450c08f914c1/resourceGroups/MyResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorageaccount"
+      ]
+    }
+  },
+  "title": "Next page query",
+  "responses": {
+    "200": {
+      "body": {
+        "$skipToken": "kVGltZSI6ICJcL0RhdGUoMTU1MDc0NTew0KICAiJGlkIjogIjEiLA0KICAiRW5",
+        "changes": [
+          {
+            "afterSnapshot": {
+              "timestamp": "2018-10-31T05:12:32.087Z"
+            },
+            "beforeSnapshot": {
+              "timestamp": "2018-10-31T03:43:08.629Z"
+            },
+            "changeId": "55f458c4-f1c0-4963-bc6c-af275cd47702",
+            "changeType": "Update",
+            "resourceId": "/subscriptions/4d962866-1e3f-47f2-bd18-450c08f914c1/resourceGroups/MyResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorageaccount"
+          },
+          {
+            "afterSnapshot": {
+              "timestamp": "2018-10-31T02:01:02.163Z"
+            },
+            "beforeSnapshot": {
+              "timestamp": "2018-10-31T01:54:24.42Z"
+            },
+            "changeId": "0495b929-b86d-46cc-a972-939145feed90",
+            "changeType": "Create",
+            "resourceId": "/subscriptions/4d962866-1e3f-47f2-bd18-450c08f914c1/resourceGroups/MyResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorageaccount"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ResourceChanges"
+}

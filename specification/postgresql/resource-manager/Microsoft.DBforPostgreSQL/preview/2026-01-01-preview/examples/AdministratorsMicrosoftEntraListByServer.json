@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers/administrators",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/administrators/oooooooo-oooo-oooo-oooo-oooooooooooo",
+            "properties": {
+              "objectId": "oooooooo-oooo-oooo-oooo-oooooooooooo",
+              "principalName": "exampleuser@contoso.com",
+              "principalType": "User",
+              "tenantId": "tttttttt-tttt-tttt-tttt-tttttttttttt"
+            }
+          },
+          {
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers/administrators",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/administrators/gggggggg-gggg-gggg-gggg-gggggggggggg",
+            "properties": {
+              "objectId": "gggggggg-gggg-gggg-gggg-gggggggggggg",
+              "principalName": "examplegroup@contoso.com",
+              "principalType": "Group",
+              "tenantId": "tttttttt-tttt-tttt-tttt-tttttttttttt"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "AdministratorsMicrosoftEntra_ListByServer",
+  "title": "List information about all server administrators associated to Microsoft Entra principals."
+}

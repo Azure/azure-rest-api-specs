@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "api-version": "2026-02-01",
+    "resourceGroupName": "sample-group",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "sample-vault"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "name": "sample-pec",
+            "type": "Microsoft.KeyVault/vaults/privateEndpointConnections",
+            "etag": "",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault/privateEndpointConnections/sample-pec",
+            "properties": {
+              "privateEndpoint": {
+                "id": "/subscriptions/00000000-0000-0000-1234-000000000000/resourceGroups/sample-group/providers/Microsoft.Network/privateEndpoints/sample-pe"
+              },
+              "privateLinkServiceConnectionState": {
+                "description": "This was automatically approved by user1234@contoso.com",
+                "actionsRequired": "None",
+                "status": "Approved"
+              },
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "name": "sample-pec",
+            "type": "Microsoft.KeyVault/vaults/privateEndpointConnections",
+            "etag": "",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-group/providers/Microsoft.KeyVault/vaults/sample-vault/privateEndpointConnections/sample-pec",
+            "properties": {
+              "privateEndpoint": {
+                "id": "/subscriptions/00000000-0000-0000-1234-000000000000/resourceGroups/sample-group/providers/Microsoft.Network/privateEndpoints/sample-pe"
+              },
+              "privateLinkServiceConnectionState": {
+                "description": "This was automatically approved by user1234@contoso.com",
+                "actionsRequired": "None",
+                "status": "Approved"
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PrivateEndpointConnections_ListByResource",
+  "title": "KeyVaultListPrivateEndpointConnection"
+}

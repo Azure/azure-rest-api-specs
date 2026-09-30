@@ -1,0 +1,90 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "subscriptionId": "a0a37f63-7183-4e86-9ac7-ce8036a3ed31"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com:443/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.DevHub/iacProfiles?api-version=2018-05-05-preview&timeRange=1&$skipToken=",
+        "value": [
+          {
+            "name": "profilename",
+            "type": "Microsoft.DevHub/iacProfiles",
+            "id": "/subscriptions/a0a37f63-7183-4e86-9ac7-ce8036a3ed31/resourceGroups/resourceGroup1/providers/Microsoft.DevHub/iacProfiles/profilename",
+            "location": "",
+            "properties": {
+              "githubProfile": {
+                "authStatus": "Authorized",
+                "branchName": "aks-devhub-ybvmw",
+                "prStatus": "submitted",
+                "pullNumber": 8,
+                "repositoryMainBranch": "main",
+                "repositoryName": "localtest",
+                "repositoryOwner": "owner"
+              },
+              "stages": [
+                {
+                  "dependencies": [],
+                  "gitEnvironment": "Terraform",
+                  "stageName": "dev"
+                },
+                {
+                  "dependencies": [
+                    "dev"
+                  ],
+                  "gitEnvironment": "Terraform",
+                  "stageName": "qa"
+                },
+                {
+                  "dependencies": [
+                    "qa"
+                  ],
+                  "gitEnvironment": "Terraform",
+                  "stageName": "prod"
+                }
+              ],
+              "templates": [
+                {
+                  "instanceName": "contoso",
+                  "instanceStage": "dev",
+                  "sourceResourceId": "/subscriptions/xxxx/resourceGroups/xxxx",
+                  "templateDetails": [
+                    {
+                      "count": 1,
+                      "namingConvention": "$sitid-hci",
+                      "productName": "HCI"
+                    },
+                    {
+                      "count": 1,
+                      "namingConvention": "$sitid-aks",
+                      "productName": "AKSarc"
+                    }
+                  ],
+                  "templateName": "base"
+                }
+              ],
+              "terraformProfile": {
+                "storageAccountName": "hybridiac",
+                "storageAccountResourceGroup": "hybrid-iac",
+                "storageAccountSubscription": "subscription",
+                "storageContainerName": "hybridiac"
+              }
+            },
+            "systemData": {
+              "createdAt": "2024-01-16T09:56:23.933651400Z",
+              "createdBy": "",
+              "createdByType": "User",
+              "lastModifiedAt": "2024-01-16T14:32:00.783994200Z",
+              "lastModifiedBy": "aks-dev-hub-devhub",
+              "lastModifiedByType": "Application"
+            },
+            "tags": {}
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "IacProfiles_List",
+  "title": "List IacProfiles"
+}

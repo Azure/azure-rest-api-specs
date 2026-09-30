@@ -1,0 +1,70 @@
+{
+  "parameters": {
+    "name": "{artifactName}",
+    "api-version": "2018-09-15",
+    "artifactSourceName": "{artifactSourceName}",
+    "generateArmTemplateRequest": {
+      "fileUploadOptions": "None",
+      "location": "{location}",
+      "virtualMachineName": "{vmName}"
+    },
+    "labName": "{labName}",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "parameters": {
+          "extensionName": {
+            "value": "{vmName}/CustomScriptExtension"
+          },
+          "location": {
+            "value": "{location}"
+          }
+        },
+        "template": {
+          "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
+          "contentVersion": "1.0.0.0",
+          "parameters": {
+            "extensionName": {
+              "type": "string"
+            },
+            "location": {
+              "type": "string"
+            }
+          },
+          "resources": [
+            {
+              "name": "[parameters('extensionName')]",
+              "type": "Microsoft.Compute/virtualMachines/extensions",
+              "apiVersion": "2015-06-15",
+              "location": "[parameters('location')]",
+              "properties": {
+                "type": "CustomScriptExtension",
+                "autoUpgradeMinorVersion": "true",
+                "forceUpdateTag": "15/10/2018 00:00:00 +00:00",
+                "protectedSettings": {
+                  "commandToExecute": "[concat('cd {MsDtlScriptFolder}/scripts && ', variables('_commandToExecute'))]"
+                },
+                "publisher": "Microsoft.Compute",
+                "settings": {
+                  "commandToExecute": "",
+                  "fileUris": [
+                    "{MsDtlArtifactFileUris}"
+                  ]
+                },
+                "typeHandlerVersion": "1.9"
+              }
+            }
+          ],
+          "variables": {
+            "_commandToExecute": "{commandToExecute}."
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Artifacts_GenerateArmTemplate",
+  "title": "Artifacts_GenerateArmTemplate"
+}

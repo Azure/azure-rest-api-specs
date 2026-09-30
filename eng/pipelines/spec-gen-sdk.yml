@@ -1,38 +1,61 @@
 parameters:
-  - name: SpecRepoCommit
+  - name: SdkRepoBranch
     type: string
-    default: '$(Build.SourceBranch)'
-  - name: SdkRepoCommit
-    type: string
-    default: 'main'
+    default: "main"
+    displayName: "SDK repository branch"
   - name: ConfigType
     type: string
     values:
-      - 'TypeSpec'
-      - 'OpenAPI'
-    default: 'TypeSpec'
-    displayName: 'API specification type'
+      - "TypeSpec"
+      - "OpenAPI"
+    default: "TypeSpec"
+    displayName: "API specification type"
   - name: ConfigPath
     type: string
-    default: 'specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml'
-    displayName: 'Path to API specification file (TypeSpec/OpenAPI)'
-  - name: SkipPullRequestCreation
+    default: "specification/contosowidgetmanager/Contoso.Management/tspconfig.yaml"
+    displayName: "Path to API specification file (TypeSpec/OpenAPI)"
+  - name: ApiVersion
+    type: string
+    default: "none"
+    displayName: "API version"
+  - name: SdkReleaseType
+    type: string
+    values:
+      - "none"
+      - "beta"
+      - "stable"
+    default: "none"
+    displayName: "SDK release type"
+  - name: CreatePullRequest
     type: boolean
     default: false
-    
+    displayName: "Create SDK pull request"
+  - name: ForceCreateEvenWithFailures
+    type: boolean
+    default: false
+    displayName: 'Force create SDK pull request even with failures ("Create SDK Pull Request" must be checked)'
+  - name: ReleasePlanWorkItemId
+    type: number
+    default: 0
+    displayName: "Release plan work item id"
+  - name: TriggerSource
+    type: string
+    default: "unspecified"
+    displayName: "Trigger source"
+
 trigger: none
-pr:
-  branches:
-    include:
-      - user/spec-gen-pipeline-testing
 
 extends:
-  template: /eng/common/pipelines/templates/stages/archetype-spec-gen-sdk.yml
+  template: /eng/pipelines/templates/stages/archetype-spec-gen-sdk.yml
   parameters:
-    SpecRepoUrl: 'https://github.com/$(Build.Repository.Name)'
+    SpecRepoUrl: "https://github.com/$(Build.Repository.Name)"
     SdkRepoUrl: $(SdkRepoUrl)
-    SpecRepoCommit: ${{ parameters.SpecRepoCommit }}
-    SdkRepoCommit: ${{ parameters.SdkRepoCommit }}
+    SdkRepoBranch: ${{ parameters.SdkRepoBranch }}
     ConfigType: ${{ parameters.ConfigType }}
     ConfigPath: ${{ parameters.ConfigPath }}
-    SkipPullRequestCreation: ${{ parameters.SkipPullRequestCreation }}
+    ApiVersion: ${{ parameters.ApiVersion }}
+    SdkReleaseType: ${{ parameters.SdkReleaseType }}
+    CreatePullRequest: ${{ parameters.CreatePullRequest }}
+    ForceCreateEvenWithFailures: ${{ parameters.ForceCreateEvenWithFailures }}
+    ReleasePlanWorkItemId: ${{ parameters.ReleasePlanWorkItemId }}
+    TriggerSource: ${{ parameters.TriggerSource }}

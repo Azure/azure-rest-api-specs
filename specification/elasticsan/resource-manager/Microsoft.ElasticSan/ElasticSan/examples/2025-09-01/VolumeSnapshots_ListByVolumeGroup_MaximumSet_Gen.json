@@ -1,0 +1,42 @@
+{
+  "operationId": "VolumeSnapshots_ListByVolumeGroup",
+  "parameters": {
+    "$filter": "volumeName eq <volume name>",
+    "api-version": "2025-09-01",
+    "elasticSanName": "elasticsanname",
+    "resourceGroupName": "resourcegroupname",
+    "subscriptionId": "subscriptionid",
+    "volumeGroupName": "volumegroupname"
+  },
+  "title": "VolumeSnapshots_ListByVolumeGroup_MaximumSet_Gen",
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/subscriptionid/resourceGroups/resourcegroupname/providers/Microsoft.ElasticSan/elasticSans/elasticsanname/volumegroups/volumegroupname/snapshots?api-version=2024-07-01-preview&%24skiptoken=def123ghi456",
+        "value": [
+          {
+            "name": "qukfugetqthsufp",
+            "type": "Microsoft.ElasticSan/elasticSans/volumeGroups/snapshots",
+            "id": "bbqqgzxagggqgkdgjqq",
+            "properties": {
+              "creationData": {
+                "sourceId": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ElasticSan/elasticSans/{elasticSanName}/volumegroups/{volumeGroupName}/volumes/{volumeName}"
+              },
+              "provisioningState": "Succeeded",
+              "sourceVolumeSizeGiB": 28,
+              "volumeName": "volumename"
+            },
+            "systemData": {
+              "createdAt": "2023-09-06T06:58:45.864Z",
+              "createdBy": "f",
+              "createdByType": "User",
+              "lastModifiedAt": "2023-09-06T06:58:45.864Z",
+              "lastModifiedBy": "wifrlzeszzcckvdzdwxhvservlvarp",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

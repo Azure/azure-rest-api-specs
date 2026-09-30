@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "Query": {
+      "condition": {
+        "clauses": [
+          {
+            "field": "lastUpdatedTimeUtc",
+            "operator": "OnOrBeforeAbsolute",
+            "values": [
+              "2024-02-09T23:59:59.999Z"
+            ]
+          }
+        ],
+        "conditionConnective": null
+      }
+    },
+    "api-version": "2025-07-01-preview",
+    "resourceGroupName": "myRg",
+    "subscriptionId": "bd794837-4d29-4647-9105-6339bfdb4e6a",
+    "tiType": "main",
+    "workspaceName": "myWorkspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "count": 3
+      }
+    }
+  },
+  "operationId": "ThreatIntelligence_Count",
+  "title": "Get TI object count"
+}

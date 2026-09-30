@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "2025-07-15-preview",
+    "parentName": "exampletopic1",
+    "parentType": "topics",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "topic",
+            "type": "Microsoft.EventGrid/topics/privateLinkResources",
+            "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/amh/providers/Microsoft.EventGrid/topics/exampletopic1/privateLinkResources/topic",
+            "properties": {
+              "displayName": "Event Grid topic",
+              "groupId": "topic",
+              "requiredMembers": [
+                "topic"
+              ],
+              "requiredZoneNames": [
+                "privatelink.eventgrid.azure.net"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PrivateLinkResources_ListByResource",
+  "title": "PrivateLinkResources_ListByResource"
+}

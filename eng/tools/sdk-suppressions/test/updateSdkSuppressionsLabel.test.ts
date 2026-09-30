@@ -1,6 +1,10 @@
-import { vi, expect, test } from "vitest";
-import { filterSuppressionList, getSdkNamesWithChangedSuppressions, processLabels } from "../src/updateSdkSuppressionsLabel.js";
-import { validateSdkSuppressionsFile } from "../src/sdkSuppressions.js";
+import { expect, test, vi } from "vitest";
+import { validateSdkSuppressionsFile } from "../src/sdkSuppressions.ts";
+import {
+  filterSuppressionList,
+  getSdkNamesWithChangedSuppressions,
+  processLabels,
+} from "../src/updateSdkSuppressionsLabel.ts";
 
 vi.mock("process", () => ({
   exit: vi.fn(),
@@ -8,177 +12,258 @@ vi.mock("process", () => ({
 
 test("test filterSuppressionList for only resource-manager files", () => {
   const changeFiles = [
-      "specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/datafactory.json",
-      "specification/datafactory/resource-manager/sdk-suppressions.yaml"
+    "specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/datafactory.json",
+    "specification/datafactory/resource-manager/sdk-suppressions.yaml",
   ];
-  const suppressionsFiles: String[] = filterSuppressionList(changeFiles);
-  expect(suppressionsFiles).toEqual(["specification/datafactory/resource-manager/sdk-suppressions.yaml"]);
+  const suppressionsFiles: string[] = filterSuppressionList(changeFiles);
+  expect(suppressionsFiles).toEqual([
+    "specification/datafactory/resource-manager/sdk-suppressions.yaml",
+  ]);
 });
 
 test("test filterSuppressionList for both tsp files and resource-manager files", () => {
   const changeFiles = [
-      "specification/workloads/Workloads.Operations.Management/main.tsp",
-      "specification/workloads/Workloads.Operations.Management/sdk-suppressions.yaml",
-      "specification/workloads/resource-manager/Microsoft.Workloads/operations/preview/2023-10-01-preview/operations.json",
-      "specification/workloads/resource-manager/Microsoft.Workloads/operations/preview/2024-02-01-preview/operations.json",
-      "specification/workloads/resource-manager/Microsoft.Workloads/operations/preview/2023-12-01-preview/operations.json",
-      "specification/workloads/resource-manager/Microsoft.Workloads/operations/stable/2024-09-01/operations.json",
-      "specification/workloads/resource-manager/sdk-suppressions.yaml"
+    "specification/workloads/Workloads.Operations.Management/main.tsp",
+    "specification/workloads/Workloads.Operations.Management/sdk-suppressions.yaml",
+    "specification/workloads/resource-manager/Microsoft.Workloads/operations/preview/2023-10-01-preview/operations.json",
+    "specification/workloads/resource-manager/Microsoft.Workloads/operations/preview/2024-02-01-preview/operations.json",
+    "specification/workloads/resource-manager/Microsoft.Workloads/operations/preview/2023-12-01-preview/operations.json",
+    "specification/workloads/resource-manager/Microsoft.Workloads/operations/stable/2024-09-01/operations.json",
+    "specification/workloads/resource-manager/sdk-suppressions.yaml",
   ];
-  const suppressionsFiles: String[] = filterSuppressionList(changeFiles);
-  expect(suppressionsFiles).toEqual(["specification/workloads/Workloads.Operations.Management/sdk-suppressions.yaml"]);
+  const suppressionsFiles: string[] = filterSuppressionList(changeFiles);
+  expect(suppressionsFiles).toEqual([
+    "specification/workloads/Workloads.Operations.Management/sdk-suppressions.yaml",
+  ]);
 });
 
 test("test validateSdkSuppressionsFile for sdk-suppression file", () => {
   const suppressionContent = {
-    "suppressions": {
-        "azure-sdk-for-go": [
-            {
-                "package": "sdk/resourcemanager/appcontainers/armappcontainers",
-                "breaking-changes": [
-                    "Field `EndTime`, `StartTime`, `Status`, `Template` of struct `JobExecution` has been removed"
-                ]
-            }
-        ],
-        "azure-sdk-for-python": [
-            {
-                "package": "azure-mgmt-appcontainers",
-                "breaking-changes": [
-                    "Model BillingMeter no longer has parameter system_data"
-                ]
-            }
-        ]
-    }
+    suppressions: {
+      "azure-sdk-for-go": [
+        {
+          package: "sdk/resourcemanager/appcontainers/armappcontainers",
+          "breaking-changes": [
+            "Field `EndTime`, `StartTime`, `Status`, `Template` of struct `JobExecution` has been removed",
+          ],
+        },
+      ],
+      "azure-sdk-for-python": [
+        {
+          package: "azure-mgmt-appcontainers",
+          "breaking-changes": ["Model BillingMeter no longer has parameter system_data"],
+        },
+      ],
+    },
   };
-  
+
   const validateResult = validateSdkSuppressionsFile(suppressionContent);
-  expect(validateResult).toEqual({ result: true, message: 'This suppression file is a valid yaml.' });
+  expect(validateResult).toEqual({
+    result: true,
+    message: "This suppression file is a valid yaml.",
+  });
 });
 
 test("test validateSdkSuppressionsFile for empty file", () => {
   const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
-  const mockProcessExit = vi.spyOn(process, "exit").mockImplementation(() => {
-    throw new Error("process.exit called"); // Prevent actual exit
-  });
 
-  expect(() => validateSdkSuppressionsFile(null)).toThrow("process.exit called");
+  expect(validateSdkSuppressionsFile(null)).toEqual({
+    result: false,
+    message: "This suppression file is a empty file",
+  });
   expect(consoleSpy).toHaveBeenCalledWith("Error:", "This suppression file is a empty file");
-  expect(mockProcessExit).toHaveBeenCalledWith(1);
 
   consoleSpy.mockRestore();
-  mockProcessExit.mockRestore();
 });
 
 test("test validateSdkSuppressionsFile for undefined file", () => {
   const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
-  const mockProcessExit = vi.spyOn(process, "exit").mockImplementation(() => {
-    throw new Error("process.exit called"); // Prevent actual exit
-  });
 
-  expect(() => validateSdkSuppressionsFile(undefined)).toThrow("process.exit called");
-  expect(consoleSpy).toHaveBeenCalledWith("Error:", "This suppression file is not a valid yaml. Refer to https://aka.ms/azsdk/sdk-suppression for more information.");
-  expect(mockProcessExit).toHaveBeenCalledWith(1);
+  expect(validateSdkSuppressionsFile(undefined)).toEqual({
+    message:
+      "This suppression file is not a valid yaml. Refer to https://aka.ms/azsdk/sdk-suppression for more information.",
+    result: false,
+  });
+  expect(consoleSpy).toHaveBeenCalledWith(
+    "Error:",
+    "This suppression file is not a valid yaml. Refer to https://aka.ms/azsdk/sdk-suppression for more information.",
+  );
 
   consoleSpy.mockRestore();
-  mockProcessExit.mockRestore();
 });
 
 test("test validateSdkSuppressionsFile for error structor file", () => {
   const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
-  const mockProcessExit = vi.spyOn(process, "exit").mockImplementation(() => {
-    throw new Error("process.exit called"); // Prevent actual exit
-  });
 
   const suppressionContent = {
-    "suppressions": {
-        "azure-sdk-for-go": [
-            {
-                "package": "sdk/resourcemanager/appcontainers/armappcontainers"
-            }
-        ],
-        "azure-sdk-for-python": [
-            {
-                "package": "azure-mgmt-appcontainers",
-                "breaking-changes": [
-                    "Model BillingMeter no longer has parameter system_data"
-                ]
-            }
-        ]
-    }
+    suppressions: {
+      "azure-sdk-for-go": [
+        {
+          package: "sdk/resourcemanager/appcontainers/armappcontainers",
+        },
+      ],
+      "azure-sdk-for-python": [
+        {
+          package: "azure-mgmt-appcontainers",
+          "breaking-changes": ["Model BillingMeter no longer has parameter system_data"],
+        },
+      ],
+    },
   };
 
-  expect(() => validateSdkSuppressionsFile(suppressionContent)).toThrow("process.exit called");
-  expect(consoleSpy).toHaveBeenCalledWith("Error:", "This suppression file is a valid yaml but the schema is wrong: data/suppressions/azure-sdk-for-go/0 must have required property 'breaking-changes'");
-  expect(mockProcessExit).toHaveBeenCalledWith(1);
+  expect(validateSdkSuppressionsFile(suppressionContent)).toEqual({
+    message:
+      "This suppression file is a valid yaml but the schema is wrong: data/suppressions/azure-sdk-for-go/0 must have required property 'breaking-changes'",
+    result: false,
+  });
+  expect(consoleSpy).toHaveBeenCalledWith(
+    "Error:",
+    "This suppression file is a valid yaml but the schema is wrong: data/suppressions/azure-sdk-for-go/0 must have required property 'breaking-changes'",
+  );
 
   consoleSpy.mockRestore();
-  mockProcessExit.mockRestore();
 });
 
 test("test getSdkNamesWithChangedSuppressions", () => {
   const headCont = {
-    "suppressions": {
-        "azure-sdk-for-python": [
-            {
-                "package": "azure-mgmt-appcontainers",
-                "breaking-changes": [
-                    "Model BillingMeter no longer has parameter system_data AAA"
-                ]
-            }
-        ],
-        "azure-sdk-for-go": [
-            {
-                "package": "sdk/resourcemanager/appcontainers/armappcontainers",
-                "breaking-changes": [
-                    "Field `EndTime`, `StartTime`, `Status`, `Template` of struct `JobExecution` has been removed"
-                ]
-            }
-        ]
-    }
-  };
-  const baseCont = {
-    "suppressions": {
+    suppressions: {
       "azure-sdk-for-python": [
         {
-          "package": "azure-mgmt-appcontainers",
-          "breaking-changes": [
-              "Model BillingMeter no longer has parameter system_data"
-          ]
-        }
+          package: "azure-mgmt-appcontainers",
+          "breaking-changes": ["Model BillingMeter no longer has parameter system_data AAA"],
+        },
       ],
       "azure-sdk-for-go": [
         {
-          "package": "sdk/resourcemanager/appcontainers/armappcontainers",
+          package: "sdk/resourcemanager/appcontainers/armappcontainers",
           "breaking-changes": [
-              "Field `EndTime`, `StartTime`, `Status`, `Template` of struct `JobExecution` has been removed"
-          ]
-        }
-      ]
-    }
+            "Field `EndTime`, `StartTime`, `Status`, `Template` of struct `JobExecution` has been removed",
+          ],
+        },
+      ],
+    },
+  };
+  const baseCont = {
+    suppressions: {
+      "azure-sdk-for-python": [
+        {
+          package: "azure-mgmt-appcontainers",
+          "breaking-changes": ["Model BillingMeter no longer has parameter system_data"],
+        },
+      ],
+      "azure-sdk-for-go": [
+        {
+          package: "sdk/resourcemanager/appcontainers/armappcontainers",
+          "breaking-changes": [
+            "Field `EndTime`, `StartTime`, `Status`, `Template` of struct `JobExecution` has been removed",
+          ],
+        },
+      ],
+    },
   };
 
   const sdkNames = getSdkNamesWithChangedSuppressions(headCont, baseCont);
   expect(sdkNames).toEqual(["azure-sdk-for-python"]);
 });
 
+test("identifies added and removed SDKs in head-then-base order", () => {
+  expect(
+    getSdkNamesWithChangedSuppressions(
+      { suppressions: { "azure-sdk-for-js": [], "azure-sdk-for-go": [] } },
+      { suppressions: { "azure-sdk-for-python": [], "azure-sdk-for-go": [] } },
+    ),
+  ).toEqual(["azure-sdk-for-js", "azure-sdk-for-python"]);
+});
+
+test.each([
+  {
+    name: "package order does not matter",
+    base: [
+      { package: "first", "breaking-changes": ["a"] },
+      { package: "second", "breaking-changes": ["b"] },
+    ],
+    head: [
+      { package: "second", "breaking-changes": ["b"] },
+      { package: "first", "breaking-changes": ["a"] },
+    ],
+    changed: false,
+  },
+  {
+    name: "duplicate package names do not count as added packages",
+    base: [{ package: "first", "breaking-changes": ["a"] }],
+    head: [
+      { package: "first", "breaking-changes": ["a"] },
+      { package: "first", "breaking-changes": ["a"] },
+    ],
+    changed: false,
+  },
+  {
+    name: "added packages are detected",
+    base: [{ package: "first", "breaking-changes": ["a"] }],
+    head: [
+      { package: "first", "breaking-changes": ["a"] },
+      { package: "second", "breaking-changes": ["b"] },
+    ],
+    changed: true,
+  },
+  {
+    name: "removed packages are detected",
+    base: [
+      { package: "first", "breaking-changes": ["a"] },
+      { package: "second", "breaking-changes": ["b"] },
+    ],
+    head: [{ package: "first", "breaking-changes": ["a"] }],
+    changed: true,
+  },
+  {
+    name: "breaking-change order does not matter",
+    base: [{ package: "first", "breaking-changes": ["a", "b"] }],
+    head: [{ package: "first", "breaking-changes": ["b", "a"] }],
+    changed: false,
+  },
+  {
+    name: "duplicate breaking changes remain significant",
+    base: [{ package: "first", "breaking-changes": ["a"] }],
+    head: [{ package: "first", "breaking-changes": ["a", "a"] }],
+    changed: true,
+  },
+])("$name", ({ base, head, changed }) => {
+  expect(
+    getSdkNamesWithChangedSuppressions(
+      { suppressions: { "azure-sdk-for-js": head } },
+      { suppressions: { "azure-sdk-for-js": base } },
+    ),
+  ).toEqual(changed ? ["azure-sdk-for-js"] : []);
+});
+
 test("test processLabels will add new label when has sdkNames", () => {
   const sdkNames: string[] = ["azure-sdk-for-go", "azure-sdk-for-js"];
   const presentLabels: string[] = ["aa", "BreakingChange-Go-Sdk-Suppression"];
   const result = processLabels(presentLabels, sdkNames);
-  expect(result).toEqual({ labelsToAdd: ["BreakingChange-JavaScript-Sdk-Suppression"], labelsToRemove: [] });
- 
+  expect(result).toEqual({
+    labelsToAdd: ["BreakingChange-JavaScript-Sdk-Suppression"],
+    labelsToRemove: [],
+  });
 });
 
 test("test processLabels will remove old label when has the sdkNames not exist", () => {
-   const sdkNames: string[] = ["azure-sdk-for-js"];
-   const presentLabels: string[] = ["aa", "BreakingChange-Go-Sdk-Suppression"];
-   const result = processLabels(presentLabels, sdkNames);
-   expect(result).toEqual({ labelsToAdd: ["BreakingChange-JavaScript-Sdk-Suppression"], labelsToRemove: ["BreakingChange-Go-Sdk-Suppression"] });
- });
+  const sdkNames: string[] = ["azure-sdk-for-js"];
+  const presentLabels: string[] = ["aa", "BreakingChange-Go-Sdk-Suppression"];
+  const result = processLabels(presentLabels, sdkNames);
+  expect(result).toEqual({
+    labelsToAdd: ["BreakingChange-JavaScript-Sdk-Suppression"],
+    labelsToRemove: ["BreakingChange-Go-Sdk-Suppression"],
+  });
+});
 
 test("test processLabels will not remove old label when has the sdkNames not exist & has corresponding suppression approved", () => {
   const sdkNames: string[] = ["azure-sdk-for-go"];
-  const presentLabels: string[] = ["aa", "BreakingChange-Go-Sdk-Suppression", "BreakingChange-JavaScript-Sdk-Suppression", "BreakingChange-JavaScript-Sdk-Suppression-Approved"];
+  const presentLabels: string[] = [
+    "aa",
+    "BreakingChange-Go-Sdk-Suppression",
+    "BreakingChange-JavaScript-Sdk-Suppression",
+    "BreakingChange-JavaScript-Sdk-Suppression-Approved",
+  ];
   const result = processLabels(presentLabels, sdkNames);
   expect(result).toEqual({ labelsToAdd: [], labelsToRemove: [] });
 });

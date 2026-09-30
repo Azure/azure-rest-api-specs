@@ -1,0 +1,32 @@
+{
+  "title": "ServiceGroupMemberRelationships_Get",
+  "operationId": "ServiceGroupMemberRelationships_Get",
+  "parameters": {
+    "api-version": "2023-09-01-preview",
+    "resourceUri": "subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/testrg/providers/Microsoft.DocumentDb/databaseAccounts/test-db-account",
+    "name": "sg1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "sourceId": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/testrg/providers/Microsoft.DocumentDb/databaseAccounts/test-db-account",
+          "targetId": "/providers/Microsoft.Management/serviceGroups/sg1",
+          "targetTenant": "72f988bf-86f1-41af-91ab-2d7cd011db47",
+          "originInformation": {
+            "relationshipOriginType": "SystemExplicitlyCreated",
+            "discoveryEngine": "PEM"
+          },
+          "metadata": {
+            "sourceType": "Microsoft.DocumentDb/databaseAccounts",
+            "targetType": "Microsoft.Management/serviceGroups"
+          },
+          "provisioningState": "Succeeded"
+        },
+        "id": "/subscriptions/a925f2f7-5c63-4b7b-8799-25a5f97bc3b2/resourceGroups/testrg/providers/Microsoft.DocumentDb/databaseAccounts/test-db-account/providers/Microsoft.Relationships/ServiceGroupMember/sg1",
+        "name": "sg1",
+        "type": "Microsoft.Relationships/ServiceGroupMember"
+      }
+    }
+  }
+}

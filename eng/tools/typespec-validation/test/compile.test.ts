@@ -1,110 +1,440 @@
-import { describe, it } from "vitest";
-import { CompileRule } from "../src/rules/compile.js";
-import { TsvTestHost } from "./tsv-test-host.js";
-import { TsvHost } from "../src/tsv-host.js";
-import { RuleResult } from "../src/rule-result.js";
-import { strict as assert } from "node:assert";
+import { mockFolder } from "./mocks.ts";
+import { ConsoleLogger, defaultLogger } from "@azure-tools/specs-shared/logger";
+
+import { afterEach, beforeEach, describe, expect, it, type MockInstance, vi } from "vitest";
+
+import * as fsPromises from "fs/promises";
+import path from "path";
+import * as nativeGlob from "../src/glob.ts";
+import { type RuleResult } from "../src/rule-result.ts";
+import { CompileRule } from "../src/rules/compile.ts";
+
+import * as utils from "../src/utils.ts";
+
+const swaggerPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
+const handwrittenSwaggerPath = "data-plane/Azure.Foo/preview/2021-11-01-preview/foo.json";
+
 describe("compile", function () {
+  let gitDiffTopSpecFolderSpy: MockInstance;
+  let runNodeBinSpy: MockInstance;
+
+  beforeEach(() => {
+    vi.spyOn(utils, "fileExists").mockResolvedValue(true);
+    vi.spyOn(utils, "getSuppressions").mockResolvedValue([]);
+    gitDiffTopSpecFolderSpy = vi.spyOn(utils, "gitDiffTopSpecFolder").mockImplementation((folder) =>
+      Promise.resolve({
+        success: true,
+        stdOutput: `Running git diff on folder ${folder}}`,
+        errorOutput: "",
+      }),
+    );
+    runNodeBinSpy = vi
+      .spyOn(utils, "runNodeBin")
+      .mockImplementation((packageName, args, _logger, cwd) =>
+        Promise.resolve([null, `runNodeBin ${packageName} ${args.join(" ")} at ${cwd}`, ""]),
+      );
+  });
+
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
   it("should succeed if project can compile", async function () {
-    const result = await new CompileRule().execute(new TsvTestHost(), TsvTestHost.folder);
+    const compileOutput =
+      // header, not a filename
+      "header\n" +
+      // windows line endings
+      "\r\n" +
+      // ensure paths are trimmed
+      `\t${swaggerPath} \n` +
+      // ensure paths are normalized
+      `${path.normalize(swaggerPath)}\n` +
+      // ensure filtered to JSON files
+      "data-plane/readme.md\n" +
+      // ensure examples are skipped
+      `${swaggerPath.replace("foo.json", "examples/example.json")}\n`;
 
-    assert(result.success);
+    runNodeBinSpy.mockImplementation((): Promise<[Error | null, string, string]> =>
+      Promise.resolve([null, compileOutput, ""]),
+    );
+
+    // ensure handwritten swaggers are ignored
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
+      Promise.resolve([swaggerPath, handwrittenSwaggerPath]),
+    );
+    vi.mocked(fsPromises.readFile).mockImplementation((path) =>
+      Promise.resolve(path === swaggerPath ? '{"info": {"x-typespec-generated": true}}' : "{}"),
+    );
+
+    const logger = new ConsoleLogger(true);
+    await expect(new CompileRule().execute(mockFolder, logger)).resolves.toMatchObject({
+      success: true,
+    });
+    expect(runNodeBinSpy).toHaveBeenNthCalledWith(
+      1,
+      "@typespec/compiler",
+      ["tsp", "compile", "--list-files", "--warn-as-error", mockFolder],
+      logger,
+    );
+    expect(runNodeBinSpy).toHaveBeenNthCalledWith(
+      2,
+      "@typespec/compiler",
+      ["tsp", "compile", "--no-emit", "--warn-as-error", path.join(mockFolder, "client.tsp")],
+      logger,
+    );
   });
 
-  it("should fail if no emitter was configured", async function () {
-    let host = new TsvTestHost();
-    host.runCmd = async (cmd: string, _cwd: string): Promise<[Error | null, string, string]> => {
-      if (cmd.includes("tsp compile")) {
-        return [null, "no emitter was configured", ""];
-      } else {
-        return [null, "", ""];
-      }
-    };
+  it.each([
+    ["ANSI colors", `\u001b[32m${swaggerPath}\u001b[0m`],
+    ["OSC hyperlinks with BEL", `\u001b]8;;file:///foo.json\u0007${swaggerPath}\u001b]8;;\u0007`],
+    [
+      "OSC hyperlinks with ST",
+      `\u001b]8;;file:///foo.json\u001b\\${swaggerPath}\u001b]8;;\u001b\\`,
+    ],
+  ])("should recognize generated paths wrapped in %s", async (_name, output) => {
+    runNodeBinSpy.mockResolvedValue([null, `${output}\r\n`, ""]);
+    vi.mocked(nativeGlob.globFiles).mockResolvedValue([swaggerPath]);
+    vi.mocked(fsPromises.readFile).mockResolvedValue('{"info": {"x-typespec-generated": true}}');
 
-    const result = await new CompileRule().execute(host, TsvTestHost.folder);
+    const result = await new CompileRule().execute(mockFolder, defaultLogger);
 
-    assert(!result.success);
+    expect(result.success).toBe(true);
+    expect(nativeGlob.globFiles).toHaveBeenCalledWith("data-plane/Azure.Foo/**/foo.json", {
+      exclude: ["**/examples/**"],
+    });
+    expect(result.stdOutput).toContain(`\nGenerated Swaggers:\n${path.normalize(swaggerPath)}\n`);
   });
 
-  it("should fail if no output was generated", async function () {
-    let host = new TsvTestHost();
-    host.runCmd = async (cmd: string, _cwd: string): Promise<[Error | null, string, string]> => {
-      if (cmd.includes("tsp compile")) {
-        return [null, "no output was generated", ""];
-      } else {
-        return [null, "", ""];
-      }
-    };
+  it("should succeed if output has no generated swaggers", async function () {
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+      Promise.resolve([null, "not-swagger", ""]),
+    );
 
-    const result = await new CompileRule().execute(host, TsvTestHost.folder);
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
+      success: true,
+      stdOutput: expect.stringContaining("skipping extra swagger check") as unknown,
+    });
+  });
 
-    assert(!result.success);
+  it("should fail if extra swaggers", async function () {
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+      Promise.resolve([null, swaggerPath, ""]),
+    );
+
+    // Simulate extra swagger
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
+      Promise.resolve([
+        swaggerPath,
+        swaggerPath.replace("2022", "2023"),
+        swaggerPath.replace("2023", "2024"),
+      ]),
+    );
+
+    vi.mocked(fsPromises.readFile).mockImplementation((path) => {
+      return (path as string).includes("2024")
+        ? Promise.resolve('{"info": {"x-typespec-generated": true}}')
+        : Promise.resolve('{"info": {"x-cadl-generated": true}}');
+    });
+
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
+      success: false,
+      errorOutput: expect.stringContaining("not generated from the current") as unknown,
+    });
+  });
+
+  it("should succeed if extra swaggers are only older preview versions", async function () {
+    // Latest preview is 2024-03-01-preview, extra swagger is from 2022-11-01-preview
+    const latestPreviewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
+    const olderPreviewPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
+
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+      Promise.resolve([null, latestPreviewPath, ""]),
+    );
+
+    // Simulate extra older preview swagger (using POSIX paths)
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
+      Promise.resolve([latestPreviewPath, olderPreviewPath]),
+    );
+
+    vi.mocked(fsPromises.readFile).mockImplementation(() =>
+      Promise.resolve('{"info": {"x-typespec-generated": true}}'),
+    );
+
+    const result = await new CompileRule().execute(mockFolder, defaultLogger);
+    expect(result).toMatchObject({
+      success: true,
+      stdOutput: expect.stringContaining("older versions") as unknown,
+    });
+  });
+
+  it("should fail if extra swaggers include latest preview version", async function () {
+    const latestPreviewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
+    const anotherLatestPreviewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/bar.json";
+
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+      Promise.resolve([null, latestPreviewPath, ""]),
+    );
+
+    // Simulate extra swagger from the latest preview (using POSIX paths)
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
+      Promise.resolve([latestPreviewPath, anotherLatestPreviewPath]),
+    );
+
+    vi.mocked(fsPromises.readFile).mockImplementation(() =>
+      Promise.resolve('{"info": {"x-typespec-generated": true}}'),
+    );
+
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
+      success: false,
+      errorOutput: expect.stringContaining("not generated from the current") as unknown,
+    });
+  });
+
+  it("should fail if extra swaggers include stable versions", async function () {
+    const previewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
+    const stablePath = "data-plane/Azure.Foo/stable/2023-01-01/foo.json";
+
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+      Promise.resolve([null, previewPath, ""]),
+    );
+
+    // Simulate extra stable swagger (using POSIX paths)
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
+      Promise.resolve([previewPath, stablePath]),
+    );
+
+    vi.mocked(fsPromises.readFile).mockImplementation(() =>
+      Promise.resolve('{"info": {"x-typespec-generated": true}}'),
+    );
+
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
+      success: false,
+      errorOutput: expect.stringContaining("not generated from the current") as unknown,
+    });
+  });
+
+  it("should succeed if an older preview is superseded by a later stable version", async function () {
+    // Current TypeSpec only generates the stable 2024-03-01 version, but the older
+    // preview swagger is left in place. This should be allowed.
+    const stablePath = "data-plane/Azure.Foo/stable/2024-03-01/foo.json";
+    const olderPreviewPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
+
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+      Promise.resolve([null, stablePath, ""]),
+    );
+
+    // Simulate extra older preview swagger (using POSIX paths)
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
+      Promise.resolve([stablePath, olderPreviewPath]),
+    );
+
+    vi.mocked(fsPromises.readFile).mockImplementation(() =>
+      Promise.resolve('{"info": {"x-typespec-generated": true}}'),
+    );
+
+    const result = await new CompileRule().execute(mockFolder, defaultLogger);
+    expect(result).toMatchObject({
+      success: true,
+      stdOutput: expect.stringContaining("older versions") as unknown,
+    });
+  });
+
+  it("should fail if a preview is newer than the latest stable version", async function () {
+    // Current TypeSpec only generates the stable 2023-01-01 version, but a *newer*
+    // preview swagger is left in place. This is a genuine mismatch and should fail.
+    const stablePath = "data-plane/Azure.Foo/stable/2023-01-01/foo.json";
+    const newerPreviewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
+
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+      Promise.resolve([null, stablePath, ""]),
+    );
+
+    // Simulate extra newer preview swagger (using POSIX paths)
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
+      Promise.resolve([stablePath, newerPreviewPath]),
+    );
+
+    vi.mocked(fsPromises.readFile).mockImplementation(() =>
+      Promise.resolve('{"info": {"x-typespec-generated": true}}'),
+    );
+
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
+      success: false,
+      errorOutput: expect.stringContaining("not generated from the current") as unknown,
+    });
+  });
+
+  it("should succeed with multiple older preview versions", async function () {
+    const latestPreviewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
+    const olderPreview1Path = "data-plane/Azure.Foo/preview/2023-01-01-preview/foo.json";
+    const olderPreview2Path = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
+
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+      Promise.resolve([null, latestPreviewPath, ""]),
+    );
+
+    // Simulate multiple extra older preview swaggers (using POSIX paths)
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
+      Promise.resolve([latestPreviewPath, olderPreview1Path, olderPreview2Path]),
+    );
+
+    vi.mocked(fsPromises.readFile).mockImplementation(() =>
+      Promise.resolve('{"info": {"x-typespec-generated": true}}'),
+    );
+
+    const result = await new CompileRule().execute(mockFolder, defaultLogger);
+    expect(result).toMatchObject({
+      success: true,
+      stdOutput: expect.stringContaining("older versions") as unknown,
+    });
+  });
+
+  it("should fail if extra swaggers mix preview and stable versions", async function () {
+    const previewPath = "data-plane/Azure.Foo/preview/2024-03-01-preview/foo.json";
+    const olderPreviewPath = "data-plane/Azure.Foo/preview/2022-11-01-preview/foo.json";
+    const stablePath = "data-plane/Azure.Foo/stable/2023-01-01/foo.json";
+
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+      Promise.resolve([null, previewPath, ""]),
+    );
+
+    // Simulate extra swaggers with mix of preview and stable (using POSIX paths)
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
+      Promise.resolve([previewPath, olderPreviewPath, stablePath]),
+    );
+
+    vi.mocked(fsPromises.readFile).mockImplementation(() =>
+      Promise.resolve('{"info": {"x-typespec-generated": true}}'),
+    );
+
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
+      success: false,
+      errorOutput: expect.stringContaining("not generated from the current") as unknown,
+    });
+  });
+
+  it("supports suppressions", async function () {
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+      Promise.resolve([null, swaggerPath, ""]),
+    );
+
+    // Simulate extra swagger
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() =>
+      Promise.resolve([
+        swaggerPath,
+        swaggerPath.replace("2022", "2023"),
+        swaggerPath.replace("2023", "2024"),
+      ]),
+    );
+
+    vi.mocked(fsPromises.readFile).mockImplementation((path) => {
+      return (path as string).includes("2024")
+        ? Promise.resolve('{"info": {"x-typespec-generated": true}}')
+        : Promise.resolve('{"info": {"x-cadl-generated": true}}');
+    });
+
+    vi.spyOn(utils, "getSuppressions").mockImplementation((path) => {
+      return path.includes("2023") || path.includes("2024")
+        ? Promise.resolve([
+            {
+              tool: "TypeSpecValidation",
+              rules: ["Compile"],
+              subRules: ["ExtraSwagger"],
+              paths: [swaggerPath.replace("2022", "2023"), swaggerPath.replace("2023", "2024")],
+              reason: "test reason",
+            },
+          ])
+        : Promise.resolve([]);
+    });
+
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
+      success: true,
+    });
+  });
+
+  it("throws on invalid suppressions", async function () {
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+      Promise.resolve([null, swaggerPath, ""]),
+    );
+
+    vi.spyOn(utils, "getSuppressions").mockImplementation(() =>
+      Promise.resolve([
+        {
+          tool: "TypeSpecValidation",
+          rules: ["Compile"],
+          subRules: ["ExtraSwagger"],
+          paths: ["**/*"],
+          reason: "test reason",
+        },
+      ]),
+    );
+
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).rejects.toThrow(
+      "Invalid path",
+    );
   });
 
   it("should skip git diff check if compile fails", async function () {
-    let host = new TsvTestHost();
-    host.runCmd = async (cmd: string, _cwd: string): Promise<[Error | null, string, string]> => {
-      if (cmd.includes("tsp compile")) {
-        return [
-          { name: "compilation_error", message: "compilation error" },
-          "running tsp compile",
-          "compilation failure",
-        ];
-      }
-      return [null, "", ""];
-    };
-    host.gitDiffTopSpecFolder = async (host: TsvHost, folder: string): Promise<RuleResult> => {
-      let stdOut = `Running git diff on folder ${folder}, running default cmd ${host.runCmd(
-        "",
-        "",
-      )}`;
-      return {
-        success: true,
-        stdOutput: stdOut,
-      };
-    };
+    runNodeBinSpy.mockImplementation(
+      async (_packageName: string, args: string[]): Promise<[Error | null, string, string]> => {
+        if (args.join(" ").includes("tsp compile")) {
+          return Promise.resolve([
+            { name: "compilation_error", message: "compilation error" },
+            "running tsp compile",
+            "compilation failure",
+          ]);
+        }
+        return Promise.resolve([null, "", ""]);
+      },
+    );
 
-    const result = await new CompileRule().execute(host, TsvTestHost.folder);
-    assert(result.stdOutput);
-    assert(!result.stdOutput.includes("Running git diff"));
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
+      success: false,
+      stdOutput: expect.not.stringContaining("Running git diff") as unknown,
+    });
   });
 
   it("should fail if git diff fails", async function () {
-    let host = new TsvTestHost();
-    host.gitDiffTopSpecFolder = async (host: TsvHost, folder: string): Promise<RuleResult> => {
-      let stdOut = `Running git diff on folder ${folder}, running default cmd ${host.runCmd(
-        "",
-        "",
-      )}`;
-      return {
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+      Promise.resolve([null, swaggerPath, ""]),
+    );
+
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() => Promise.resolve([swaggerPath]));
+
+    gitDiffTopSpecFolderSpy.mockImplementation((folder: string): Promise<RuleResult> => {
+      const stdOut = `Running git diff on folder ${folder}`;
+
+      return Promise.resolve({
         success: false,
         stdOutput: stdOut,
         errorOutput: `Files generated: ${folder}/bar`,
-      };
-    };
+      });
+    });
 
-    const result = await new CompileRule().execute(host, TsvTestHost.folder);
-    assert(result.stdOutput);
-    assert(result.stdOutput.includes("Running git diff"));
-    assert(!result.success);
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
+      success: false,
+      stdOutput: expect.stringContaining("Running git diff") as unknown,
+    });
   });
 
   it("should succeed if git diff succeeds", async function () {
-    let host = new TsvTestHost();
-    host.gitDiffTopSpecFolder = async (host: TsvHost, folder: string): Promise<RuleResult> => {
-      let stdOut = `Running git diff on folder ${folder}, running default cmd ${host.runCmd(
-        "",
-        "",
-      )}`;
-      return {
+    runNodeBinSpy.mockImplementation(async (): Promise<[Error | null, string, string]> =>
+      Promise.resolve([null, swaggerPath, ""]),
+    );
+
+    vi.mocked(nativeGlob.globFiles).mockImplementation(() => Promise.resolve([swaggerPath]));
+
+    gitDiffTopSpecFolderSpy.mockImplementation((folder: string): Promise<RuleResult> => {
+      const stdOut = `Running git diff on folder ${folder}`;
+      return Promise.resolve({
         success: true,
         stdOutput: stdOut,
-      };
-    };
+      });
+    });
 
-    const result = await new CompileRule().execute(host, TsvTestHost.folder);
-    assert(result.stdOutput);
-    assert(result.stdOutput.includes("Running git diff"));
-    assert(result.success);
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
+      success: true,
+      stdOutput: expect.stringContaining("Running git diff") as unknown,
+    });
   });
 });

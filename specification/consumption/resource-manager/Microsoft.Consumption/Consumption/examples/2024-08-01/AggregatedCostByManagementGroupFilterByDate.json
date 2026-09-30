@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "$filter": "usageStart ge '2018-08-15' and properties/usageStart le '2018-08-31'",
+    "api-version": "2024-08-01",
+    "managementGroupId": "managementGroupForTest"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "aggregatedcostId1",
+        "type": "Microsoft.Consumption/aggregatedcost",
+        "id": "/providers/Microsoft.Management/managementGroups/managementGroupForTest/providers/Microsoft.Consumption/aggregatedcostId1",
+        "properties": {
+          "azureCharges": 150.9876,
+          "chargesBilledSeparately": 90.345,
+          "children": [
+            {
+              "name": "aggregatedcostId2",
+              "type": "Microsoft.Consumption/aggregatedcost",
+              "id": "/providers/Microsoft.Management/managementGroups/managementGroupChildForTest/providers/Microsoft.Consumption/aggregatedcostId2",
+              "properties": {
+                "azureCharges": 50,
+                "chargesBilledSeparately": 30.345,
+                "children": [],
+                "currency": "USD",
+                "excludedSubscriptions": [],
+                "includedSubscriptions": [
+                  "c349567d-c83a-48c9-ab0e-578c69dc97a4"
+                ],
+                "marketplaceCharges": 10.786,
+                "usageEnd": "2018-08-31T00:00:00.0000000Z",
+                "usageStart": "2018-08-15T00:00:00.0000000Z"
+              }
+            }
+          ],
+          "currency": "USD",
+          "excludedSubscriptions": [],
+          "includedSubscriptions": [
+            "1caaa5a3-2b66-438e-8ab4-bce37d518c5d"
+          ],
+          "marketplaceCharges": 80.786,
+          "usageEnd": "2018-08-31T00:00:00.0000000Z",
+          "usageStart": "2018-08-15T00:00:00.0000000Z"
+        }
+      }
+    }
+  },
+  "operationId": "AggregatedCost_GetByManagementGroup",
+  "title": "AggregatedCostByManagementGroupFilterByDate"
+}

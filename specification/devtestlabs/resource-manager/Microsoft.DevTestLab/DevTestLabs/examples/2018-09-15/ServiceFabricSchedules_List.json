@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2018-09-15",
+    "labName": "{labName}",
+    "resourceGroupName": "resourceGroupName",
+    "serviceFabricName": "{serviceFrabicName}",
+    "subscriptionId": "{subscriptionId}",
+    "userName": "@me"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "{scheduleName}",
+            "type": "microsoft.devtestlab/labs/users/servicefabrics/schedules",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.DevTestLab/labs/{labName}/users/{uniqueIdentifier}/servicefabrics/{serviceFrabicName}/schedules/{scheduleName}",
+            "location": "{location}",
+            "properties": {
+              "createdDate": "2018-09-15T00:00:00.0000000-00:00",
+              "notificationSettings": {
+                "emailRecipient": "{email}",
+                "notificationLocale": "EN",
+                "status": "Disabled",
+                "timeInMinutes": 15,
+                "webhookUrl": "{webhookUrl}"
+              },
+              "provisioningState": "Succeeded",
+              "status": "Enabled",
+              "targetResourceId": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.DevTestLab/labs/{labName}/users/{uniqueIdentifier}/servicefabrics/{serviceFrabicName}",
+              "taskType": "Unknown",
+              "timeZoneId": "Pacific Standard Time",
+              "uniqueIdentifier": "{uniqueIdentifier}",
+              "weeklyRecurrence": {
+                "time": "1900",
+                "weekdays": [
+                  "Sunday",
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday"
+                ]
+              }
+            },
+            "tags": {
+              "tagName1": "tagValue1"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ServiceFabricSchedules_List",
+  "title": "ServiceFabricSchedules_List"
+}

@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "alertId": "22222222-2222-2222-2222-222222222222",
+    "api-version": "2025-03-01",
+    "parameters": {
+      "properties": {
+        "status": "Dismissed"
+      }
+    },
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "22222222-2222-2222-2222-222222222222",
+        "type": "Microsoft.CostManagement/alerts",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/alerts/22222222-2222-2222-2222-222222222222",
+        "properties": {
+          "description": "",
+          "closeTime": "0001-01-01T00:00:00",
+          "costEntityId": "budget1",
+          "creationTime": "2020-04-27T11:07:52.7143901Z",
+          "definition": {
+            "type": "Budget",
+            "category": "Cost",
+            "criteria": "CostThresholdExceeded"
+          },
+          "modificationTime": "2020-04-28T11:06:02.8999373Z",
+          "source": "Preset",
+          "status": "Dismissed",
+          "statusModificationTime": "0001-01-01T00:00:00",
+          "statusModificationUserName": null,
+          "details": {
+            "amount": 200000,
+            "contactEmails": [
+              "1234@contoso.com"
+            ],
+            "contactGroups": [],
+            "contactRoles": [],
+            "currentSpend": 161000.12,
+            "meterFilter": [],
+            "operator": "GreaterThan",
+            "overridingAlert": null,
+            "periodStartDate": "2020-03-01T00:00:00Z",
+            "resourceFilter": [],
+            "resourceGroupFilter": [],
+            "tagFilter": {},
+            "threshold": 0.8,
+            "timeGrainType": "Quarterly",
+            "triggeredBy": "22222222-2222-2222-2222-222222222222_1_01",
+            "unit": "USD"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "Alerts_Dismiss",
+  "title": "PatchSubscriptionAlerts"
+}

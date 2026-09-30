@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "agentPoolName": "agentpool1",
+    "api-version": "2025-10-01",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "subscriptionId": "26fe00f8-9173-4872-9134-bb1d2e00343a"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "http://xxxx.azure.com?encodedToken=c2tpcFRva2VuPTE",
+        "value": [
+          {
+            "name": "aks-nodepool1-25481572-vmss000000",
+            "type": "Microsoft.ContainerService/managedClusters/agentPools/machines",
+            "id": "/subscriptions/26fe00f8-9173-4872-9134-bb1d2e00343a/resourceGroups/dummyRG/providers/Microsoft.ContainerService/managedClusters/round/agentPools/nodepool1/machines/aks-nodepool1-25481572-vmss000000",
+            "properties": {
+              "network": {
+                "ipAddresses": [
+                  {
+                    "family": "IPv4",
+                    "ip": "172.20.2.4"
+                  },
+                  {
+                    "family": "IPv4",
+                    "ip": "10.0.0.1"
+                  }
+                ]
+              },
+              "resourceId": "/subscriptions/26fe00f8-9173-4872-9134-bb1d2e00343a/resourceGroups/dummyRG/providers/Microsoft.Compute/virtualMachineScaleSets/aks-nodepool1-25481572-vmss/virtualMachines/0"
+            },
+            "zones": [
+              "1"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Machines_List",
+  "title": "List Machines in an Agentpool by Managed Cluster"
+}

@@ -1,0 +1,12 @@
+- tool: TypeSpecValidation
+  paths:
+    - tspconfig.yaml
+  rules:
+    - SdkTspConfigValidation
+  sub-rules:
+    # Suppress validation for a Go emitter options
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-go.package-dir
+  reason: 'Playwright does not support a Go SDK currently'

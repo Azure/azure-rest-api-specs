@@ -1,0 +1,32 @@
+{
+  "title": "GoldenGateConnectionAssignmentOperations_ConnectionAssignments_MaximumSet",
+  "operationId": "GoldenGateConnectionAssignmentOperations_ConnectionAssignments",
+  "parameters": {
+    "api-version": "2026-03-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgopenapi",
+    "goldenGateDeploymentName": "goldenGateDeployment1",
+    "body": {
+      "connectionId": "ocid1.goldengateconnection.oc1..exampleuniqueID"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "connectionId": "ocid1.goldengateconnection.oc1..exampleuniqueID",
+        "deploymentId": "ocid1.goldengatedeployment.oc1..exampleuniqueID",
+        "compartmentId": "ocid1.compartment.oc1..exampleuniqueID",
+        "ocid": "ocid1.goldengateconnectionassignment.oc1..exampleuniqueID",
+        "lifecycleState": "ACTIVE",
+        "timeCreated": "2026-03-01T10:05:00Z",
+        "timeUpdated": "2026-03-01T10:06:00Z"
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://contoso.com/operationstatus",
+        "Retry-After": 10
+      }
+    }
+  }
+}

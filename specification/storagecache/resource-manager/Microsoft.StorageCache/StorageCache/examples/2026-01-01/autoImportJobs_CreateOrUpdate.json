@@ -1,0 +1,136 @@
+{
+  "parameters": {
+    "amlFilesystemName": "fs1",
+    "api-version": "2026-01-01",
+    "autoImportJob": {
+      "location": "eastus",
+      "properties": {
+        "adminStatus": "Enable",
+        "autoImportPrefixes": [
+          "/"
+        ],
+        "conflictResolutionMode": "Skip",
+        "enableDeletions": false,
+        "maximumErrors": 0
+      },
+      "tags": {
+        "Dept": "ContosoAds"
+      }
+    },
+    "autoImportJobName": "autojob1",
+    "resourceGroupName": "scgroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "autojob1",
+        "type": "Microsoft.StorageCache/amlFilesystem/autoImportJob",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlfilesystems/fs1/autoImportJobs/autojob1",
+        "location": "eastus",
+        "properties": {
+          "adminStatus": "Enable",
+          "autoImportPrefixes": [
+            "/"
+          ],
+          "conflictResolutionMode": "Skip",
+          "enableDeletions": false,
+          "maximumErrors": 0,
+          "provisioningState": "Succeeded",
+          "status": {
+            "blobSyncEvents": {
+              "deletions": 20,
+              "importedDirectories": 100,
+              "importedFiles": 500,
+              "importedSymlinks": 50,
+              "lastChangeFeedEventConsumedTime": "2024-03-21T18:35:43.511Z",
+              "lastTimeFullySynchronized": "2024-03-21T18:25:43.511Z",
+              "preexistingDirectories": 1000,
+              "preexistingFiles": 10000,
+              "preexistingSymlinks": 200,
+              "rateOfBlobImport": 120,
+              "totalBlobsImported": 11850,
+              "totalConflicts": 1,
+              "totalErrors": 3
+            },
+            "importedDirectories": 1000,
+            "importedFiles": 8000,
+            "importedSymlinks": 1000,
+            "lastStartedTimeUTC": "2024-03-21T17:25:43.511Z",
+            "preexistingDirectories": 80000,
+            "preexistingFiles": 800000,
+            "preexistingSymlinks": 10000,
+            "rateOfBlobImport": 4000,
+            "rateOfBlobWalk": 10000,
+            "scanEndTime": "2024-03-21T18:25:43.511Z",
+            "scanStartTime": "2024-03-21T17:25:43.511Z",
+            "state": "InProgress",
+            "totalBlobsImported": 900000,
+            "totalBlobsWalked": 1000000,
+            "totalConflicts": 5,
+            "totalErrors": 10
+          }
+        },
+        "tags": {
+          "Dept": "ContosoAds"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "autojob1",
+        "type": "Microsoft.StorageCache/amlFilesystem/autoImportJob",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlfilesystems/fs1/autoImportJobs/autojob1",
+        "location": "eastus",
+        "properties": {
+          "adminStatus": "Enable",
+          "autoImportPrefixes": [
+            "/"
+          ],
+          "conflictResolutionMode": "Skip",
+          "enableDeletions": false,
+          "maximumErrors": 0,
+          "provisioningState": "Succeeded",
+          "status": {
+            "blobSyncEvents": {
+              "deletions": 20,
+              "importedDirectories": 100,
+              "importedFiles": 500,
+              "importedSymlinks": 50,
+              "lastChangeFeedEventConsumedTime": "2024-03-21T18:35:43.511Z",
+              "lastTimeFullySynchronized": "2024-03-21T18:25:43.511Z",
+              "preexistingDirectories": 1000,
+              "preexistingFiles": 10000,
+              "preexistingSymlinks": 200,
+              "rateOfBlobImport": 120,
+              "totalBlobsImported": 11850,
+              "totalConflicts": 1,
+              "totalErrors": 3
+            },
+            "importedDirectories": 1000,
+            "importedFiles": 8000,
+            "importedSymlinks": 1000,
+            "lastStartedTimeUTC": "2024-03-21T17:25:43.511Z",
+            "preexistingDirectories": 80000,
+            "preexistingFiles": 800000,
+            "preexistingSymlinks": 10000,
+            "rateOfBlobImport": 4000,
+            "rateOfBlobWalk": 10000,
+            "scanEndTime": "2024-03-21T18:25:43.511Z",
+            "scanStartTime": "2024-03-21T17:25:43.511Z",
+            "state": "InProgress",
+            "totalBlobsImported": 900000,
+            "totalBlobsWalked": 1000000,
+            "totalConflicts": 5,
+            "totalErrors": 10
+          }
+        },
+        "tags": {
+          "Dept": "ContosoAds"
+        }
+      }
+    }
+  },
+  "operationId": "autoImportJobs_CreateOrUpdate",
+  "title": "autoImportJobs_CreateOrUpdate"
+}

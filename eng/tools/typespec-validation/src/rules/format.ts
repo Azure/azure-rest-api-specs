@@ -1,29 +1,22 @@
-import { Rule } from "../rule.js";
-import { RuleResult } from "../rule-result.js";
-import { TsvHost } from "../tsv-host.js";
+import type { ILogger } from "@azure-tools/specs-shared/logger";
+import { type RuleResult } from "../rule-result.ts";
+import { type Rule } from "../rule.ts";
+import { gitDiffTopSpecFolder, runNodeBin } from "../utils.ts";
 
 export class FormatRule implements Rule {
   readonly name = "Format";
   readonly description = "Format TypeSpec";
 
-  async execute(host: TsvHost, folder: string): Promise<RuleResult> {
+  async execute(folder: string, logger: ILogger): Promise<RuleResult> {
     let success = true;
     let stdOutput = "";
     let errorOutput = "";
 
-    let [err, stdout, stderr] = await host.runCmd(
-      'npm exec --no -- tsp format "../**/*.tsp"', // Format parent folder to include shared files
-      folder,
-    );
-    if (err) {
-      success = false;
-      errorOutput += err.message;
-    }
-    stdOutput += stdout;
-    errorOutput += stderr;
-
-    [err, stdout, stderr] = await host.runCmd(
-      "npm exec --no -- prettier --write tspconfig.yaml",
+    const [err, stdout, stderr] = await runNodeBin(
+      "@typespec/compiler",
+      // Format parent folder to include shared files
+      ["tsp", "format", "../**/*.tsp", "tspconfig.yaml"],
+      logger,
       folder,
     );
     if (err) {
@@ -34,12 +27,12 @@ export class FormatRule implements Rule {
     errorOutput += stderr;
 
     if (success) {
-      const gitDiffResult = await host.gitDiffTopSpecFolder(host, folder);
+      const gitDiffResult = await gitDiffTopSpecFolder(folder);
       stdOutput += gitDiffResult.stdOutput;
       if (!gitDiffResult.success) {
         success = false;
         errorOutput += gitDiffResult.errorOutput;
-        errorOutput += `\nFiles have been changed after \`tsp format\`. Run \`tsp format\` and ensure all files are included in your change.`;
+        errorOutput += `\nFiles have been changed by formatting. Run \`pnpm exec tsp format "../**/*.tsp" tspconfig.yaml\` from the project folder and include the changes.`;
       }
     }
 

@@ -1,0 +1,213 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "containerAppEnvelope": {
+      "kind": "functionapp",
+      "location": "East Us",
+      "managedBy": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Web/sites/testcontainerAppFunctionKind",
+      "properties": {
+        "configuration": {
+          "activeRevisionsMode": "Single",
+          "ingress": {
+            "allowInsecure": false,
+            "external": true,
+            "targetPort": 80
+          }
+        },
+        "managedEnvironmentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/testmanagedenv3",
+        "template": {
+          "containers": [
+            {
+              "name": "function-app-container",
+              "env": [
+                {
+                  "name": "AzureWebJobsStorage",
+                  "value": "DefaultEndpointsProtocol=https;AccountName=mystorageaccount;AccountKey=mykey;EndpointSuffix=core.windows.net"
+                },
+                {
+                  "name": "FUNCTIONS_WORKER_RUNTIME",
+                  "value": "dotnet"
+                },
+                {
+                  "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE",
+                  "value": "false"
+                }
+              ],
+              "image": "mcr.microsoft.com/azure-functions/dotnet:4",
+              "resources": {
+                "cpu": 0.5,
+                "memory": "1.0Gi"
+              }
+            }
+          ],
+          "scale": {
+            "cooldownPeriod": 300,
+            "maxReplicas": 10,
+            "minReplicas": 0,
+            "pollingInterval": 30
+          }
+        }
+      }
+    },
+    "containerAppName": "testcontainerAppFunctionKind",
+    "resourceGroupName": "rg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testcontainerAppFunctionKind",
+        "type": "Microsoft.App/containerApps",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/containerapps/testcontainerAppFunctionKind",
+        "identity": {
+          "type": "None"
+        },
+        "kind": "functionapp",
+        "location": "East US",
+        "managedBy": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Web/sites/testcontainerAppFunctionKind",
+        "properties": {
+          "configuration": {
+            "activeRevisionsMode": "Single",
+            "ingress": {
+              "exposedPort": 0,
+              "external": true,
+              "fqdn": "testcontainerAppFunctionKind.nicefield-53acf186.eastus.azurecontainerapps-test.io",
+              "targetPort": 80,
+              "traffic": [
+                {
+                  "latestRevision": true,
+                  "weight": 100
+                }
+              ],
+              "transport": "auto"
+            }
+          },
+          "environmentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/testmanagedenv3",
+          "eventStreamEndpoint": "https://azurecontainerapps-test.dev/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/containerApps/testcontainerAppFunctionKind/eventstream",
+          "latestReadyRevisionName": "testcontainerAppFunctionKind--abc123",
+          "latestRevisionFqdn": "testcontainerAppFunctionKind--abc123.nicefield-53acf186.eastus.azurecontainerapps-test.io",
+          "latestRevisionName": "testcontainerAppFunctionKind--abc123",
+          "managedEnvironmentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/testmanagedenv3",
+          "provisioningState": "Succeeded",
+          "runningStatus": "Running",
+          "template": {
+            "containers": [
+              {
+                "name": "function-app-container",
+                "env": [
+                  {
+                    "name": "AzureWebJobsStorage",
+                    "value": "DefaultEndpointsProtocol=https;AccountName=mystorageaccount;AccountKey=mykey;EndpointSuffix=core.windows.net"
+                  },
+                  {
+                    "name": "FUNCTIONS_WORKER_RUNTIME",
+                    "value": "dotnet"
+                  },
+                  {
+                    "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE",
+                    "value": "false"
+                  }
+                ],
+                "image": "mcr.microsoft.com/azure-functions/dotnet:4",
+                "resources": {
+                  "cpu": 0.5,
+                  "ephemeralStorage": "2Gi",
+                  "memory": "1Gi"
+                }
+              }
+            ],
+            "initContainers": null,
+            "revisionSuffix": "",
+            "scale": {
+              "cooldownPeriod": 300,
+              "maxReplicas": 10,
+              "minReplicas": 0,
+              "pollingInterval": 30
+            },
+            "terminationGracePeriodSeconds": null
+          },
+          "workloadProfileName": null
+        }
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "testcontainerAppFunctionKind",
+        "type": "Microsoft.App/containerApps",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/containerapps/testcontainerAppFunctionKind",
+        "identity": {
+          "type": "None"
+        },
+        "kind": "functionapp",
+        "location": "East US",
+        "managedBy": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.Web/sites/testcontainerAppFunctionKind",
+        "properties": {
+          "configuration": {
+            "activeRevisionsMode": "Single",
+            "ingress": {
+              "exposedPort": 0,
+              "external": true,
+              "fqdn": "testcontainerAppFunctionKind.nicefield-53acf186.eastus.azurecontainerapps-test.io",
+              "targetPort": 80,
+              "traffic": [
+                {
+                  "latestRevision": true,
+                  "weight": 100
+                }
+              ],
+              "transport": "auto"
+            }
+          },
+          "environmentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/testmanagedenv3",
+          "eventStreamEndpoint": "https://azurecontainerapps-test.dev/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/containerApps/testcontainerAppFunctionKind/eventstream",
+          "latestReadyRevisionName": "testcontainerAppFunctionKind--abc123",
+          "latestRevisionFqdn": "testcontainerAppFunctionKind--abc123.nicefield-53acf186.eastus.azurecontainerapps-test.io",
+          "latestRevisionName": "testcontainerAppFunctionKind--abc123",
+          "managedEnvironmentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg/providers/Microsoft.App/managedEnvironments/testmanagedenv3",
+          "provisioningState": "InProgress",
+          "runningStatus": "Progressing",
+          "template": {
+            "containers": [
+              {
+                "name": "function-app-container",
+                "env": [
+                  {
+                    "name": "AzureWebJobsStorage",
+                    "value": "DefaultEndpointsProtocol=https;AccountName=mystorageaccount;AccountKey=mykey;EndpointSuffix=core.windows.net"
+                  },
+                  {
+                    "name": "FUNCTIONS_WORKER_RUNTIME",
+                    "value": "dotnet"
+                  },
+                  {
+                    "name": "WEBSITES_ENABLE_APP_SERVICE_STORAGE",
+                    "value": "false"
+                  }
+                ],
+                "image": "mcr.microsoft.com/azure-functions/dotnet:4",
+                "resources": {
+                  "cpu": 0.5,
+                  "ephemeralStorage": "2Gi",
+                  "memory": "1Gi"
+                }
+              }
+            ],
+            "revisionSuffix": "",
+            "scale": {
+              "cooldownPeriod": 300,
+              "maxReplicas": 10,
+              "minReplicas": 0,
+              "pollingInterval": 30
+            },
+            "terminationGracePeriodSeconds": null
+          },
+          "workloadProfileName": null
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ContainerApps_CreateOrUpdate",
+  "title": "Create or Update FunctionApp Kind"
+}

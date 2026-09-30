@@ -1,0 +1,134 @@
+{
+  "parameters": {
+    "$expand": "schedule",
+    "api-version": "2022-11-01",
+    "reservationOrderId": "a075419f-44cc-497f-b68a-14ee811d48b9"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "1f14354c-dc12-4c8d-8090-6f295a3a34aa",
+        "type": "Microsoft.Capacity/reservationOrders",
+        "etag": 7,
+        "id": "/providers/microsoft.capacity/reservationOrders/1f14354c-dc12-4c8d-8090-6f295a3a34aa",
+        "properties": {
+          "benefitStartTime": "2019-08-30T03:51:49Z",
+          "billingPlan": "Monthly",
+          "createdDateTime": "2019-08-30T03:51:49Z",
+          "displayName": "cabri",
+          "expiryDate": "2018-08-30",
+          "expiryDateTime": "2018-08-30T03:51:49Z",
+          "originalQuantity": 7,
+          "planInformation": {
+            "nextPaymentDueDate": "2019-09-30",
+            "pricingCurrencyTotal": {
+              "amount": 466,
+              "currencyCode": "USD"
+            },
+            "startDate": "2019-08-30",
+            "transactions": [
+              {
+                "billingAccount": "23456",
+                "billingCurrencyTotal": {
+                  "amount": 466,
+                  "currencyCode": "USD"
+                },
+                "dueDate": "2019-09-30",
+                "paymentDate": "2019-09-30",
+                "pricingCurrencyTotal": {
+                  "amount": 466,
+                  "currencyCode": "USD"
+                },
+                "status": "Succeeded"
+              },
+              {
+                "billingAccount": "23456",
+                "billingCurrencyTotal": {
+                  "amount": 466,
+                  "currencyCode": "USD"
+                },
+                "dueDate": "2019-10-30",
+                "extendedStatusInfo": {
+                  "message": "Credit card charge failed.",
+                  "statusCode": "PaymentDeclined"
+                },
+                "paymentDate": "2019-10-30",
+                "pricingCurrencyTotal": {
+                  "amount": 466,
+                  "currencyCode": "USD"
+                },
+                "status": "Failed"
+              },
+              {
+                "billingAccount": "23456",
+                "billingCurrencyTotal": {
+                  "amount": 466,
+                  "currencyCode": "USD"
+                },
+                "dueDate": "2019-10-31",
+                "paymentDate": "2019-10-31",
+                "pricingCurrencyTotal": {
+                  "amount": 466,
+                  "currencyCode": "USD"
+                },
+                "status": "Succeeded"
+              },
+              {
+                "billingAccount": "23456",
+                "billingCurrencyTotal": {
+                  "amount": 466,
+                  "currencyCode": "USD"
+                },
+                "dueDate": "2019-11-30",
+                "paymentDate": "2019-11-30",
+                "pricingCurrencyTotal": {
+                  "amount": 466,
+                  "currencyCode": "USD"
+                },
+                "status": "Succeeded"
+              },
+              {
+                "billingAccount": "23456",
+                "billingCurrencyTotal": {
+                  "amount": 466,
+                  "currencyCode": "USD"
+                },
+                "dueDate": "2019-07-14",
+                "paymentDate": "2019-06-14",
+                "pricingCurrencyTotal": {
+                  "amount": 466,
+                  "currencyCode": "USD"
+                },
+                "status": "Scheduled"
+              },
+              {
+                "billingAccount": "23456",
+                "billingCurrencyTotal": {
+                  "amount": 466,
+                  "currencyCode": "USD"
+                },
+                "dueDate": "2019-06-14",
+                "paymentDate": "2019-08-14",
+                "pricingCurrencyTotal": {
+                  "amount": 466,
+                  "currencyCode": "USD"
+                },
+                "status": "Scheduled"
+              }
+            ]
+          },
+          "provisioningState": "Succeeded",
+          "requestDateTime": "2019-08-30T03:49:19Z",
+          "reservations": [
+            {
+              "id": "/providers/microsoft.capacity/reservationOrders/1f14354c-dc12-4c8d-8090-6f295a3a34aa/reservations/c8c926bd-fc5d-4e29-9d43-b68340ac23a6"
+            }
+          ],
+          "term": "P1Y"
+        }
+      }
+    }
+  },
+  "operationId": "ReservationOrder_Get",
+  "title": "GetReservationWithExpandPayments"
+}

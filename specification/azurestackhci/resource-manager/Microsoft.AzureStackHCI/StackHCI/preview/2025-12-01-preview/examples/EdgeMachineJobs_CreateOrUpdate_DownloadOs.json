@@ -1,0 +1,155 @@
+{
+  "title": "EdgeMachineJobs_CreateOrUpdate_DownloadOs",
+  "operationId": "EdgeMachineJobs_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-12-01-preview",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "ArcInstance-rg",
+    "edgeMachineName": "machine1",
+    "jobsName": "DownloadOs",
+    "resource": {
+      "properties": {
+        "jobType": "DownloadOs",
+        "deploymentMode": "Deploy",
+        "downloadRequest": {
+          "target": "AzureLinux",
+          "osProfile": {
+            "osName": "AzureLinux",
+            "osType": "AzureLinux",
+            "osVersion": "3.0",
+            "osImageLocation": "https://aka.ms/aep/azlinux3.0",
+            "vsrVersion": "1.0.0",
+            "imageHash": "sha256:a8b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1",
+            "gpgPubKey": "LS0tLS1CRUdJTiBQR1AgUFVCTElDIEtFWSBCTE9DSy0tLS0tXG5WZXJzaW9uOiBHbnVQRyB2MlxuXG5tUUVOQkZYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYXG4tLS0tLUVORCBQR1AgUFVCTElDIEtFWSBCTE9DSy0tLS0t"
+          }
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine1/jobs/DownloadOs",
+        "name": "DownloadOs",
+        "type": "Microsoft.AzureStackHCI/edgeMachines/jobs",
+        "properties": {
+          "jobType": "DownloadOs",
+          "deploymentMode": "Deploy",
+          "downloadRequest": {
+            "target": "AzureLinux",
+            "osProfile": {
+              "osName": "AzureLinux",
+              "osType": "AzureLinux",
+              "osVersion": "3.0",
+              "osImageLocation": "https://aka.ms/aep/azlinux3.0",
+              "vsrVersion": "1.0.0",
+              "imageHash": "sha256:a8b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1",
+              "gpgPubKey": "LS0tLS1CRUdJTiBQR1AgUFVCTElDIEtFWSBCTE9DSy0tLS0tXG5WZXJzaW9uOiBHbnVQRyB2MlxuXG5tUUVOQkZYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYXG4tLS0tLUVORCBQR1AgUFVCTElDIEtFWSBCTE9DSy0tLS0t"
+            }
+          },
+          "reportedProperties": {
+            "percentComplete": 75,
+            "validationStatus": {
+              "status": "Succeeded",
+              "steps": [
+                {
+                  "name": "ValidateOsProfile",
+                  "startTimeUtc": "2024-08-19T16:45:01",
+                  "endTimeUtc": "2024-08-19T16:45:05",
+                  "status": "Succeeded"
+                },
+                {
+                  "name": "ValidateImageLocation",
+                  "startTimeUtc": "2024-08-19T16:45:05",
+                  "endTimeUtc": "2024-08-19T16:45:10",
+                  "status": "Succeeded"
+                }
+              ]
+            },
+            "deploymentStatus": {
+              "status": "InProgress",
+              "steps": [
+                {
+                  "name": "Initialize",
+                  "startTimeUtc": "2024-08-19T16:45:15",
+                  "endTimeUtc": "2024-08-19T16:45:16",
+                  "status": "Succeeded"
+                },
+                {
+                  "name": "DownloadOSPackage",
+                  "startTimeUtc": "2024-08-19T16:45:16",
+                  "endTimeUtc": "2024-08-19T16:50:30",
+                  "status": "Succeeded"
+                },
+                {
+                  "name": "VerifyPackageIntegrity",
+                  "startTimeUtc": "2024-08-19T16:50:30",
+                  "endTimeUtc": "",
+                  "status": "InProgress"
+                },
+                {
+                  "name": "StorePackageLocally",
+                  "startTimeUtc": "",
+                  "endTimeUtc": "",
+                  "status": "NotStarted"
+                }
+              ]
+            }
+          },
+          "provisioningState": "InProgress",
+          "jobId": "download-os-job-abc123def456",
+          "startTimeUtc": "2024-08-19T16:45:00.000Z",
+          "endTimeUtc": null,
+          "status": "DeploymentInProgress"
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2024-08-19T16:44:55.167Z",
+          "lastModifiedBy": "user1",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-19T16:50:30.167Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.AzureStackHCI/edgeMachines/machine1/jobs/DownloadOs",
+        "name": "DownloadOs",
+        "type": "Microsoft.AzureStackHCI/edgeMachines/jobs",
+        "properties": {
+          "jobType": "DownloadOs",
+          "deploymentMode": "Deploy",
+          "downloadRequest": {
+            "target": "AzureLinux",
+            "osProfile": {
+              "osName": "AzureLinux",
+              "osType": "AzureLinux",
+              "osVersion": "3.0",
+              "osImageLocation": "https://aka.ms/aep/azlinux3.0",
+              "vsrVersion": "1.0.0",
+              "imageHash": "sha256:a8b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1",
+              "gpgPubKey": "LS0tLS1CRUdJTiBQR1AgUFVCTElDIEtFWSBCTE9DSy0tLS0tXG5WZXJzaW9uOiBHbnVQRyB2MlxuXG5tUUVOQkZYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYXG4tLS0tLUVORCBQR1AgUFVCTElDIEtFWSBCTE9DSy0tLS0t"
+            }
+          },
+          "provisioningState": "Accepted",
+          "jobId": "download-os-job-abc123def456",
+          "startTimeUtc": "2024-08-19T16:45:00.000Z",
+          "endTimeUtc": null,
+          "status": "Scheduled"
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2024-08-19T16:44:55.167Z",
+          "lastModifiedBy": "user1",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-19T16:44:55.167Z"
+        }
+      }
+    }
+  }
+}

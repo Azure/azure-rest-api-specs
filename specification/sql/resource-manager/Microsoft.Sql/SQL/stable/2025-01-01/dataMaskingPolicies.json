@@ -1,0 +1,268 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-01-01",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "DataMaskingPolicies"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/dataMaskingPolicies/{dataMaskingPolicyName}": {
+      "get": {
+        "operationId": "DataMaskingPolicies_Get",
+        "tags": [
+          "DataMaskingPolicies"
+        ],
+        "description": "Gets the database data masking policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataMaskingPolicyName",
+            "in": "path",
+            "description": "The name of the database for which the data masking policy applies.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "DataMaskingPolicyName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Default",
+                  "value": "Default",
+                  "description": "Default"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DataMaskingPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the database data masking policies.": {
+            "$ref": "./examples/DataMaskingPolicyGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DataMaskingPolicies_CreateOrUpdate",
+        "tags": [
+          "DataMaskingPolicies"
+        ],
+        "description": "Creates or updates a database data masking policy.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataMaskingPolicyName",
+            "in": "path",
+            "description": "The name of the database for which the data masking policy applies.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "Default"
+            ],
+            "x-ms-enum": {
+              "name": "DataMaskingPolicyName",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "Default",
+                  "value": "Default",
+                  "description": "Default"
+                }
+              ]
+            }
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Parameters for creating or updating a data masking policy.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataMaskingPolicy"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DataMaskingPolicy' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DataMaskingPolicy"
+            }
+          },
+          "201": {
+            "description": "Resource 'DataMaskingPolicy' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DataMaskingPolicy"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or update data masking policy max": {
+            "$ref": "./examples/DataMaskingPolicyCreateOrUpdateMax.json"
+          },
+          "Create or update data masking policy min.": {
+            "$ref": "./examples/DataMaskingPolicyCreateOrUpdateMin.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DataMaskingPolicy": {
+      "type": "object",
+      "description": "A database data masking policy.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DataMaskingPolicyProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the data masking policy.",
+          "readOnly": true
+        },
+        "kind": {
+          "type": "string",
+          "description": "The kind of Data Masking Policy. Metadata, used for Azure portal.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "DataMaskingPolicyProperties": {
+      "type": "object",
+      "description": "The properties of a database data masking policy.",
+      "properties": {
+        "dataMaskingState": {
+          "$ref": "./common.json#/definitions/DataMaskingState",
+          "description": "The state of the data masking policy."
+        },
+        "exemptPrincipals": {
+          "type": "string",
+          "description": "The list of the exempt principals. Specifies the semicolon-separated list of database users for which the data masking policy does not apply. The specified users receive data results without masking for all of the database queries."
+        },
+        "applicationPrincipals": {
+          "type": "string",
+          "description": "The list of the application principals. This is a legacy parameter and is no longer used.",
+          "readOnly": true
+        },
+        "maskingLevel": {
+          "type": "string",
+          "description": "The masking level. This is a legacy parameter and is no longer used.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "dataMaskingState"
+      ]
+    }
+  },
+  "parameters": {}
+}

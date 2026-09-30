@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "kind": "Exchange",
+    "subscriptionId": "subId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "peeringLocation1",
+            "type": "Microsoft.Peering/peeringLocations",
+            "id": "/subscriptions/subId/providers/Microsoft.Peering/peeringLocations/peeringLocation1",
+            "kind": "Exchange",
+            "properties": {
+              "country": "country1",
+              "exchange": {
+                "peeringFacilities": [
+                  {
+                    "bandwidthInMbps": 10000,
+                    "exchangeName": "name1",
+                    "facilityIPv4Prefix": "192.168.128.0/17",
+                    "facilityIPv6Prefix": "fd00::1000:0/98",
+                    "microsoftIPv4Address": "192.168.131.1",
+                    "microsoftIPv6Address": "fd00::1:1",
+                    "peeringDBFacilityId": 99999,
+                    "peeringDBFacilityLink": "https://www.peeringdb.com/ix/99999"
+                  },
+                  {
+                    "bandwidthInMbps": 10000,
+                    "exchangeName": "name3",
+                    "facilityIPv4Prefix": "192.168.0.0/17",
+                    "facilityIPv6Prefix": "fd00::0/98",
+                    "microsoftIPv4Address": "192.168.2.2",
+                    "microsoftIPv6Address": "fd00::2",
+                    "peeringDBFacilityId": 99999,
+                    "peeringDBFacilityLink": "https://www.peeringdb.com/ix/99999"
+                  }
+                ]
+              },
+              "peeringLocation": "peeringLocation1"
+            }
+          },
+          {
+            "name": "peeringLocation2",
+            "type": "Microsoft.Peering/peeringLocations",
+            "id": "/subscriptions/subId/providers/Microsoft.Peering/peeringLocations/peeringLocation2",
+            "kind": "Exchange",
+            "properties": {
+              "country": "country2",
+              "exchange": {
+                "peeringFacilities": [
+                  {
+                    "bandwidthInMbps": 10000,
+                    "exchangeName": "name2",
+                    "facilityIPv4Prefix": "192.168.0.0/16",
+                    "facilityIPv6Prefix": "fd00::0/98",
+                    "microsoftIPv4Address": "192.168.2.1",
+                    "microsoftIPv6Address": "fd00::2",
+                    "peeringDBFacilityId": 99999,
+                    "peeringDBFacilityLink": "https://www.peeringdb.com/ix/99999"
+                  }
+                ]
+              },
+              "peeringLocation": "peeringLocation2"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PeeringLocations_List",
+  "title": "List exchange peering locations"
+}

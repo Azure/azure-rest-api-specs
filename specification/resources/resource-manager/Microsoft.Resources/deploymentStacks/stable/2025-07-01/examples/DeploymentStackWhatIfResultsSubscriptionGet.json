@@ -1,0 +1,80 @@
+{
+  "operationId": "DeploymentStacksWhatIfResultsAtSubscription_Get",
+  "title": "Get a subscription Deployment stack what-if result",
+  "parameters": {
+    "api-version": "2025-07-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "deploymentStacksWhatIfResultName": "simpleDeploymentStackWhatIfResult"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Resources/deploymentStacksWhatIfResults/simpleDeploymentStackWhatIfResult",
+        "type": "Microsoft.Resources/deploymentStacksWhatIfResults",
+        "name": "simpleDeploymentStackWhatIfResult",
+        "location": "eastus",
+        "systemData": {
+          "createdBy": "string",
+          "createdByType": "Application",
+          "createdAt": "2025-02-01T01:01:01.1075056Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application",
+          "lastModifiedAt": "2025-02-02T02:03:01.1974346Z"
+        },
+        "properties": {
+          "deploymentStackResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Resources/deploymentStacks/simpleDeploymentStack",
+          "deploymentStackLastModified": "2025-01-01T01:01:01.1075056Z",
+          "retentionInterval": "P7D",
+          "correlationId": "00000000-0000-0000-0000-000000000000",
+          "templateLink": {
+            "uri": "https://example.com/exampleTemplate.json"
+          },
+          "parameters": {},
+          "actionOnUnmanage": {
+            "resources": "delete",
+            "resourceGroups": "delete",
+            "managementGroups": "detach"
+          },
+          "denySettings": {
+            "mode": "none",
+            "applyToChildScopes": false
+          },
+          "provisioningState": "succeeded",
+          "changes": {
+            "resourceChanges": [
+              {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Authorization/policyAssignments/myPolicyAssignment",
+                "managementStatusChange": {
+                  "before": "notManaged",
+                  "after": "managed"
+                },
+                "changeType": "create",
+                "changeCertainty": "definite"
+              }
+            ],
+            "denySettingsChange": {
+              "after": {
+                "mode": "none",
+                "excludedPrincipals": [],
+                "excludedActions": [],
+                "applyToChildScopes": false
+              },
+              "delta": [
+                {
+                  "path": "Mode",
+                  "changeType": "create",
+                  "after": "none"
+                },
+                {
+                  "path": "ApplyToChildScopes",
+                  "changeType": "create",
+                  "after": false
+                }
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

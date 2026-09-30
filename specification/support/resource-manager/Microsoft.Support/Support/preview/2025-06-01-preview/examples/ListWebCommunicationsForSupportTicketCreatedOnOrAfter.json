@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "$filter": "communicationType eq 'web' and createdDate ge 2020-03-10T22:08:51Z",
+    "api-version": "2025-06-01-preview",
+    "supportTicketName": "testticket"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "testmessage1",
+            "type": "Microsoft.Support/communications",
+            "id": "/providers/Microsoft.Support/supportTickets/testticket/communications/testmessage1",
+            "properties": {
+              "body": "this is a test message",
+              "communicationDirection": "outbound",
+              "communicationType": "web",
+              "createdDate": "2020-03-11T20:18:19Z",
+              "sender": "user@contoso.com",
+              "subject": "this is a test message"
+            }
+          },
+          {
+            "name": "testmessage2",
+            "type": "Microsoft.Support/communications",
+            "id": "/providers/Microsoft.Support/supportTickets/testticket/communications/testmessage2",
+            "properties": {
+              "body": "test",
+              "communicationDirection": "outbound",
+              "communicationType": "web",
+              "createdDate": "2020-03-12T10:53:19Z",
+              "sender": "user@contoso.com",
+              "subject": "test"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "CommunicationsNoSubscription_List",
+  "title": "List web communication created on or after a specific date for a no-subscription support ticket"
+}

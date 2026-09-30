@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01-preview",
+    "applicationName": "myApp",
+    "clusterName": "myCluster",
+    "parameters": {
+      "tags": {
+        "a": "b"
+      }
+    },
+    "resourceGroupName": "resRg",
+    "serviceName": "myService",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myService",
+        "type": "Microsoft.ServiceFabric/managedClusters/applications/services",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedclusters/myCluster/applications/myApp/services/myService",
+        "properties": {
+          "correlationScheme": [
+            {
+              "scheme": "AlignedAffinity",
+              "serviceName": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedclusters/myCluster/applications/myApp/services/myService1"
+            }
+          ],
+          "defaultMoveCost": "Medium",
+          "instanceCount": 5,
+          "minInstanceCount": 3,
+          "minInstancePercentage": 30,
+          "partitionDescription": {
+            "partitionScheme": "Singleton"
+          },
+          "placementConstraints": "NodeType==frontend",
+          "provisioningState": "Succeeded",
+          "scalingPolicies": [
+            {
+              "scalingMechanism": {
+                "kind": "ScalePartitionInstanceCount",
+                "maxInstanceCount": 9,
+                "minInstanceCount": 3,
+                "scaleIncrement": 2
+              },
+              "scalingTrigger": {
+                "kind": "AveragePartitionLoadTrigger",
+                "lowerLoadThreshold": 2,
+                "metricName": "metricName",
+                "scaleInterval": "00:01:00",
+                "upperLoadThreshold": 8
+              }
+            }
+          ],
+          "serviceKind": "Stateless",
+          "serviceLoadMetrics": [
+            {
+              "name": "metric1",
+              "defaultLoad": 3,
+              "weight": "Low"
+            }
+          ],
+          "servicePackageActivationMode": "SharedProcess",
+          "servicePlacementPolicies": [
+            {
+              "type": "NonPartiallyPlaceService"
+            }
+          ],
+          "serviceTypeName": "myServiceType"
+        },
+        "tags": {
+          "a": "b"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Services_Update",
+  "title": "Patch a service"
+}

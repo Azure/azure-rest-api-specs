@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2025-03-03",
+    "galleryName": "myGalleryName",
+    "galleryImageName": "myGalleryImageName",
+    "galleryImage": {
+      "properties": {
+        "osType": "Windows",
+        "osState": "Generalized",
+        "hyperVGeneration": "V2",
+        "allowUpdateImage": true,
+        "features": [
+          {
+            "name": "SecurityType",
+            "value": "TrustedLaunch",
+            "startsAtVersion": "2.0.0"
+          }
+        ],
+        "identifier": {
+          "publisher": "myPublisherName",
+          "offer": "myOfferName",
+          "sku": "mySkuName"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "osType": "Windows",
+          "osState": "Generalized",
+          "hyperVGeneration": "V2",
+          "features": [
+            {
+              "name": "SecurityType",
+              "value": "TrustedLaunch",
+              "startsAtVersion": "2.0.0"
+            }
+          ],
+          "identifier": {
+            "publisher": "myPublisherName",
+            "offer": "myOfferName",
+            "sku": "mySkuName"
+          },
+          "provisioningState": "Updating"
+        },
+        "location": "West US",
+        "name": "myGalleryImageName"
+      }
+    }
+  },
+  "operationId": "GalleryImages_Update",
+  "title": "Update a gallery image feature."
+}

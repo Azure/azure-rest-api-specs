@@ -1,0 +1,78 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "resourceGroupName": "myRg",
+    "subscriptionId": "bd794837-4d29-4647-9105-6339bfdb4e6a",
+    "workspaceName": "myWorkspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "27d963e6-e6e4-e0f9-e9d7-c53985b3bbe8",
+            "type": "Microsoft.SecurityInsights/ThreatIntelligence",
+            "etag": "\"00002f2c-0000-0800-0000-5e976a8e0000\"",
+            "id": "/subscriptions/bd794837-4d29-4647-9105-6339bfdb4e6a/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/ThreatIntelligence/27d963e6-e6e4-e0f9-e9d7-c53985b3bbe8",
+            "kind": "indicator",
+            "properties": {
+              "description": "debugging indicators",
+              "confidence": 90,
+              "created": "2021-04-15T20:11:57.9666134Z",
+              "createdByRef": "contoso@contoso.com",
+              "displayName": "new schema 2",
+              "externalId": "indicator--8516d567-0daa-4614-8745-e3591e1b48cf",
+              "externalReferences": [],
+              "granularMarkings": [],
+              "killChainPhases": [],
+              "lastUpdatedTimeUtc": "2021-04-15T20:15:11.0746926Z",
+              "pattern": "[url:value = 'https://www.contoso.com']",
+              "patternType": "url",
+              "revoked": false,
+              "source": "Azure Sentinel",
+              "threatIntelligenceTags": [
+                "new schema"
+              ],
+              "threatTypes": [
+                "compromised"
+              ],
+              "validFrom": "2021-04-15T17:44:00.114052Z"
+            }
+          },
+          {
+            "name": "e16ef847-962e-d7b6-9c8b-a33e4bd30e47",
+            "type": "Microsoft.SecurityInsights/ThreatIntelligence",
+            "etag": "\"00002a2c-0000-0800-0000-5e97683b0000\"",
+            "id": "/subscriptions/bd794837-4d29-4647-9105-6339bfdb4e6a/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/ThreatIntelligence/e16ef847-962e-d7b6-9c8b-a33e4bd30e47",
+            "kind": "indicator",
+            "properties": {
+              "description": "debugging indicators",
+              "confidence": 78,
+              "created": "2021-04-15T19:51:17.1050923Z",
+              "createdByRef": "contoso@contoso.com",
+              "displayName": "updated indicator",
+              "externalId": "indicator--73be1729-babb-4348-a6c4-94621cae2530",
+              "externalReferences": [],
+              "granularMarkings": [],
+              "killChainPhases": [],
+              "lastUpdatedTimeUtc": "2021-04-15T20:15:11.074903Z",
+              "pattern": "[url:value = 'https://www.contoso.com']",
+              "patternType": "url",
+              "revoked": false,
+              "source": "Azure Sentinel",
+              "threatIntelligenceTags": [
+                "patching tags"
+              ],
+              "threatTypes": [
+                "compromised"
+              ],
+              "validFrom": "2021-04-15T17:44:00.114052Z"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ThreatIntelligenceIndicators_List",
+  "title": "Get all threat intelligence indicators"
+}

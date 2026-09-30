@@ -1,0 +1,110 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01",
+    "frontDoorName": "frontDoor1",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "rulesEngine1",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/rulesEngines/rulesEngine1",
+            "properties": {
+              "rules": [
+                {
+                  "name": "Rule1",
+                  "action": {
+                    "routeConfigurationOverride": {
+                      "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorRedirectConfiguration",
+                      "customFragment": "fragment",
+                      "customHost": "www.bing.com",
+                      "customPath": "/api",
+                      "customQueryString": "a=b",
+                      "redirectProtocol": "HttpsOnly",
+                      "redirectType": "Moved"
+                    }
+                  },
+                  "matchConditions": [
+                    {
+                      "rulesEngineMatchValue": [
+                        "CH"
+                      ],
+                      "rulesEngineMatchVariable": "RemoteAddr",
+                      "rulesEngineOperator": "GeoMatch"
+                    }
+                  ],
+                  "matchProcessingBehavior": "Stop",
+                  "priority": 1
+                },
+                {
+                  "name": "Rule2",
+                  "action": {
+                    "responseHeaderActions": [
+                      {
+                        "headerActionType": "Overwrite",
+                        "headerName": "Cache-Control",
+                        "value": "public, max-age=31536000"
+                      }
+                    ]
+                  },
+                  "matchConditions": [
+                    {
+                      "rulesEngineMatchValue": [
+                        "jpg"
+                      ],
+                      "rulesEngineMatchVariable": "RequestFilenameExtension",
+                      "rulesEngineOperator": "Equal",
+                      "transforms": [
+                        "Lowercase"
+                      ]
+                    }
+                  ],
+                  "priority": 2
+                },
+                {
+                  "name": "Rule3",
+                  "action": {
+                    "routeConfigurationOverride": {
+                      "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration",
+                      "backendPool": {
+                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/backendPools/backendPool1"
+                      },
+                      "cacheConfiguration": {
+                        "cacheDuration": "P1DT12H20M30S",
+                        "dynamicCompression": "Disabled",
+                        "queryParameterStripDirective": "StripOnly",
+                        "queryParameters": "a=b,p=q"
+                      },
+                      "customForwardingPath": null,
+                      "forwardingProtocol": "HttpsOnly"
+                    }
+                  },
+                  "matchConditions": [
+                    {
+                      "negateCondition": false,
+                      "rulesEngineMatchValue": [
+                        "allowoverride"
+                      ],
+                      "rulesEngineMatchVariable": "RequestHeader",
+                      "rulesEngineOperator": "Equal",
+                      "selector": "Rules-Engine-Route-Forward",
+                      "transforms": [
+                        "Lowercase"
+                      ]
+                    }
+                  ],
+                  "priority": 3
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "RulesEngines_ListByFrontDoor",
+  "title": "List Rules Engine Configurations in a Front Door"
+}

@@ -1,0 +1,75 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01",
+    "privateLink": {
+      "location": "eastus",
+      "properties": {},
+      "tags": {
+        "environment": "production",
+        "owner": "security-team",
+        "project": "private-links"
+      }
+    },
+    "privateLinkName": "spl",
+    "resourceGroupName": "rg",
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "spl",
+        "type": "Microsoft.Security/privateLinks",
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg/providers/Microsoft.Security/privateLinks/spl",
+        "location": "eastus",
+        "properties": {
+          "privateEndpointConnections": [],
+          "privateLinkResources": [
+            {
+              "name": "containers",
+              "type": "Microsoft.Security/privateLinks/privateLinkResources",
+              "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg/providers/Microsoft.Security/privateLinks/spl/privateLinkResources/containers",
+              "properties": {
+                "groupId": "containers",
+                "requiredMembers": [
+                  "api",
+                  "data"
+                ],
+                "requiredZoneNames": [
+                  "privatelink.cloud.defender.microsoft.com"
+                ]
+              }
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "publicNetworkAccess": "Disabled"
+        },
+        "tags": {
+          "environment": "production",
+          "owner": "security-team",
+          "project": "private-links"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "spl",
+        "type": "Microsoft.Security/privateLinks",
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg/providers/Microsoft.Security/privateLinks/spl",
+        "location": "eastus",
+        "properties": {
+          "privateEndpointConnections": [],
+          "privateLinkResources": [],
+          "provisioningState": "Creating",
+          "publicNetworkAccess": "Disabled"
+        },
+        "tags": {
+          "environment": "production",
+          "owner": "security-team",
+          "project": "private-links"
+        }
+      }
+    }
+  },
+  "operationId": "PrivateLinks_Create",
+  "title": "Create private link"
+}

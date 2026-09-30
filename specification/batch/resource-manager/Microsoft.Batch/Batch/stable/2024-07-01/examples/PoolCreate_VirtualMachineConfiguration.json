@@ -1,0 +1,201 @@
+{
+  "parameters": {
+    "accountName": "sampleacct",
+    "api-version": "2024-07-01",
+    "parameters": {
+      "properties": {
+        "deploymentConfiguration": {
+          "virtualMachineConfiguration": {
+            "dataDisks": [
+              {
+                "caching": "ReadWrite",
+                "diskSizeGB": 30,
+                "lun": 0,
+                "storageAccountType": "Premium_LRS"
+              },
+              {
+                "caching": "None",
+                "diskSizeGB": 200,
+                "lun": 1,
+                "storageAccountType": "Standard_LRS"
+              }
+            ],
+            "diskEncryptionConfiguration": {
+              "targets": [
+                "OsDisk",
+                "TemporaryDisk"
+              ]
+            },
+            "imageReference": {
+              "offer": "WindowsServer",
+              "publisher": "MicrosoftWindowsServer",
+              "sku": "2016-Datacenter-SmallDisk",
+              "version": "latest"
+            },
+            "licenseType": "Windows_Server",
+            "nodeAgentSkuId": "batch.node.windows amd64",
+            "nodePlacementConfiguration": {
+              "policy": "Zonal"
+            },
+            "osDisk": {
+              "ephemeralOSDiskSettings": {
+                "placement": "CacheDisk"
+              }
+            },
+            "windowsConfiguration": {
+              "enableAutomaticUpdates": false
+            }
+          }
+        },
+        "networkConfiguration": {
+          "endpointConfiguration": {
+            "inboundNatPools": [
+              {
+                "name": "testnat",
+                "backendPort": 12001,
+                "frontendPortRangeEnd": 15100,
+                "frontendPortRangeStart": 15000,
+                "networkSecurityGroupRules": [
+                  {
+                    "access": "Allow",
+                    "priority": 150,
+                    "sourceAddressPrefix": "192.100.12.45",
+                    "sourcePortRanges": [
+                      "1",
+                      "2"
+                    ]
+                  },
+                  {
+                    "access": "Deny",
+                    "priority": 3500,
+                    "sourceAddressPrefix": "*",
+                    "sourcePortRanges": [
+                      "*"
+                    ]
+                  }
+                ],
+                "protocol": "TCP"
+              }
+            ]
+          }
+        },
+        "scaleSettings": {
+          "autoScale": {
+            "evaluationInterval": "PT5M",
+            "formula": "$TargetDedicatedNodes=1"
+          }
+        },
+        "vmSize": "STANDARD_D4"
+      }
+    },
+    "poolName": "testpool",
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testpool",
+        "type": "Microsoft.Batch/batchAccounts/pools",
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool",
+        "properties": {
+          "allocationState": "Resizing",
+          "allocationStateTransitionTime": "2017-08-28T10:22:55.9407275Z",
+          "creationTime": "2017-08-28T10:22:55.9407275Z",
+          "currentDedicatedNodes": 0,
+          "currentLowPriorityNodes": 0,
+          "deploymentConfiguration": {
+            "virtualMachineConfiguration": {
+              "dataDisks": [
+                {
+                  "caching": "ReadWrite",
+                  "diskSizeGB": 30,
+                  "lun": 0,
+                  "storageAccountType": "Premium_LRS"
+                },
+                {
+                  "caching": "None",
+                  "diskSizeGB": 200,
+                  "lun": 1,
+                  "storageAccountType": "Standard_LRS"
+                }
+              ],
+              "diskEncryptionConfiguration": {
+                "targets": [
+                  "OsDisk",
+                  "TemporaryDisk"
+                ]
+              },
+              "imageReference": {
+                "offer": "WindowsServer",
+                "publisher": "MicrosoftWindowsServer",
+                "sku": "2016-Datacenter-SmallDisk",
+                "version": "latest"
+              },
+              "licenseType": "Windows_Server",
+              "nodeAgentSkuId": "batch.node.windows amd64",
+              "nodePlacementConfiguration": {
+                "policy": "Zonal"
+              },
+              "windowsConfiguration": {
+                "enableAutomaticUpdates": false
+              }
+            }
+          },
+          "interNodeCommunication": "Disabled",
+          "lastModified": "2017-08-28T10:22:55.9407275Z",
+          "networkConfiguration": {
+            "endpointConfiguration": {
+              "inboundNatPools": [
+                {
+                  "name": "testnat",
+                  "backendPort": 12001,
+                  "frontendPortRangeEnd": 15100,
+                  "frontendPortRangeStart": 15000,
+                  "networkSecurityGroupRules": [
+                    {
+                      "access": "Allow",
+                      "priority": 150,
+                      "sourceAddressPrefix": "192.100.12.45",
+                      "sourcePortRanges": [
+                        "1",
+                        "2"
+                      ]
+                    },
+                    {
+                      "access": "Deny",
+                      "priority": 3500,
+                      "sourceAddressPrefix": "*",
+                      "sourcePortRanges": [
+                        "*"
+                      ]
+                    }
+                  ],
+                  "protocol": "TCP"
+                }
+              ]
+            }
+          },
+          "provisioningState": "Succeeded",
+          "provisioningStateTransitionTime": "2017-08-28T10:22:55.9407275Z",
+          "scaleSettings": {
+            "autoScale": {
+              "evaluationInterval": "PT5M",
+              "formula": "$TargetDedicatedNodes=1"
+            }
+          },
+          "taskSchedulingPolicy": {
+            "nodeFillType": "Spread"
+          },
+          "taskSlotsPerNode": 1,
+          "vmSize": "STANDARD_D4"
+        }
+      },
+      "headers": {
+        "ETag": "W/\"0x8D4EDFEBFADF4AB\""
+      }
+    }
+  },
+  "operationId": "Pool_Create",
+  "title": "CreatePool - Full VirtualMachineConfiguration"
+}

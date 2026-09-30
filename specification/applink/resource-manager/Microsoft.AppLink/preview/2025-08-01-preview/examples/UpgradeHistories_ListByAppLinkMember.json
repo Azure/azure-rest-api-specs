@@ -1,0 +1,62 @@
+{
+  "title": "UpgradeHistories_ListByAppLinkMember",
+  "operationId": "UpgradeHistories_ListByAppLinkMember",
+  "parameters": {
+    "api-version": "2025-08-01-preview",
+    "subscriptionId": "11809CA1-E126-4017-945E-AA795CD5C5A9",
+    "resourceGroupName": "test_rg",
+    "appLinkName": "applink-test-01",
+    "appLinkMemberName": "member-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/test_rg/providers/Microsoft.AppLink/appLinks/applink-test-01/appLinkMembers/member-01/upgradeHistories/upgrade-20231201",
+            "name": "upgrade-20231201",
+            "type": "Microsoft.AppLink/appLinks/appLinkMembers/upgradeHistories",
+            "properties": {
+              "startTimestamp": "2023-12-01T10:00:00.000Z",
+              "endTimestamp": "2023-12-01T10:15:00.000Z",
+              "initiatedBy": "user@example.com",
+              "fromVersion": "1.18",
+              "toVersion": "1.19",
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdBy": "system",
+              "createdByType": "Application",
+              "createdAt": "2023-12-01T10:00:00.000Z",
+              "lastModifiedBy": "system",
+              "lastModifiedByType": "Application",
+              "lastModifiedAt": "2023-12-01T10:15:00.000Z"
+            }
+          },
+          {
+            "id": "/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/test_rg/providers/Microsoft.AppLink/appLinks/applink-test-01/appLinkMembers/member-01/upgradeHistories/upgrade-20231115",
+            "name": "upgrade-20231115",
+            "type": "Microsoft.AppLink/appLinks/appLinkMembers/upgradeHistories",
+            "properties": {
+              "startTimestamp": "2023-11-15T14:30:00.000Z",
+              "endTimestamp": "2023-11-15T14:45:00.000Z",
+              "initiatedBy": "Azure Portal",
+              "fromVersion": "1.17",
+              "toVersion": "1.18",
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdBy": "system",
+              "createdByType": "Application",
+              "createdAt": "2023-11-15T14:30:00.000Z",
+              "lastModifiedBy": "system",
+              "lastModifiedByType": "Application",
+              "lastModifiedAt": "2023-11-15T14:45:00.000Z"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/11809CA1-E126-4017-945E-AA795CD5C5A9/resourceGroups/test_rg/providers/Microsoft.AppLink/appLinks/applink-test-01/appLinkMembers/member-01/upgradeHistories?api-version=2025-08-01-preview&$skiptoken=eyJjb250aW51YXRpb24iOiAiMjAyMzEwMDEifQ%3D%3D"
+      }
+    }
+  }
+}

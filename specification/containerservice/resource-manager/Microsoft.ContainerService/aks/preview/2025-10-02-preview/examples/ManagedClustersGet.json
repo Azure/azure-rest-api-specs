@@ -1,0 +1,116 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "clustername1",
+        "type": "Microsoft.ContainerService/ManagedClusters",
+        "eTag": "beywbwei",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1",
+        "location": "location1",
+        "properties": {
+          "agentPoolProfiles": [
+            {
+              "name": "nodepool1",
+              "availabilityZones": [
+                "1",
+                "2",
+                "3"
+              ],
+              "count": 3,
+              "currentOrchestratorVersion": "1.9.6",
+              "eTag": "nvewbvoi",
+              "maxPods": 110,
+              "nodeImageVersion": "AKSUbuntu:1604:2020.03.11",
+              "orchestratorVersion": "1.9.6",
+              "osType": "Linux",
+              "provisioningState": "Succeeded",
+              "upgradeSettings": {
+                "maxSurge": "33%"
+              },
+              "vmSize": "Standard_DS1_v2"
+            }
+          ],
+          "azurePortalFQDN": "dnsprefix1-abcd1234.portal.hcp.eastus.azmk8s.io",
+          "diskEncryptionSetID": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/diskEncryptionSets/des",
+          "dnsPrefix": "dnsprefix1",
+          "enableRBAC": false,
+          "fqdn": "dnsprefix1-abcd1234.hcp.eastus.azmk8s.io",
+          "kubernetesVersion": "1.9.6",
+          "linuxProfile": {
+            "adminUsername": "azureuser",
+            "ssh": {
+              "publicKeys": [
+                {
+                  "keyData": "keydata"
+                }
+              ]
+            }
+          },
+          "maxAgentPools": 1,
+          "networkProfile": {
+            "dnsServiceIP": "10.0.0.10",
+            "ipFamilies": [
+              "IPv4"
+            ],
+            "loadBalancerProfile": {
+              "allocatedOutboundPorts": 2000,
+              "effectiveOutboundIPs": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MC_rg1/providers/Microsoft.Network/publicIPAddresses/mgdoutboundip1"
+                },
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MC_rg1/providers/Microsoft.Network/publicIPAddresses/mgdoutboundip2"
+                }
+              ],
+              "idleTimeoutInMinutes": 10,
+              "outboundIPs": {
+                "publicIPs": [
+                  {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/customeroutboundip1"
+                  },
+                  {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/customeroutboundip2"
+                  }
+                ]
+              }
+            },
+            "loadBalancerSku": "standard",
+            "networkPlugin": "kubenet",
+            "outboundType": "loadBalancer",
+            "podCidr": "10.244.0.0/16",
+            "podCidrs": [
+              "10.244.0.0/16"
+            ],
+            "serviceCidr": "10.0.0.0/16",
+            "serviceCidrs": [
+              "10.0.0.0/16"
+            ]
+          },
+          "nodeResourceGroup": "MC_rg1_clustername1_location1",
+          "provisioningState": "Succeeded",
+          "servicePrincipalProfile": {
+            "clientId": "clientid"
+          },
+          "upgradeSettings": {
+            "overrideSettings": {
+              "forceUpgrade": true,
+              "until": "2022-11-01T13:00:00Z"
+            }
+          }
+        },
+        "tags": {
+          "archv2": "",
+          "tier": "production"
+        }
+      }
+    }
+  },
+  "operationId": "ManagedClusters_Get",
+  "title": "Get Managed Cluster"
+}

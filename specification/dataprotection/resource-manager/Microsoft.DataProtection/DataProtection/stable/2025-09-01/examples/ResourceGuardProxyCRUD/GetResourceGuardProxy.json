@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01",
+    "resourceGroupName": "SampleResourceGroup",
+    "resourceGuardProxyName": "swaggerExample",
+    "subscriptionId": "5e13b949-1218-4d18-8b99-7e12155ec4f7",
+    "vaultName": "sampleVault"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "swaggerExample",
+        "type": "Microsoft.DataProtection/vaults/backupResourceGuardProxies",
+        "id": "/subscriptions/5e13b949-1218-4d18-8b99-7e12155ec4f7/resourceGroups/SampleResourceGroup/providers/Microsoft.DataProtection/backupVaults/sampleVault/backupResourceGuardProxies/swaggerExample",
+        "properties": {
+          "description": "Please take JIT access before performing any of the critical operation",
+          "lastUpdatedTime": "2022-09-16T11:44:37.6130487Z",
+          "resourceGuardOperationDetails": [
+            {
+              "defaultResourceRequest": "/subscriptions/f9e67185-f313-4e79-aa71-6458d429369d/resourceGroups/ResourceGuardSecurityAdminRG/providers/Microsoft.DataProtection/resourceGuards/ResourceGuardTestResource/deleteBackupInstanceRequests/default",
+              "vaultCriticalOperation": "Microsoft.DataProtection/backupVaults/backupInstances/delete"
+            },
+            {
+              "defaultResourceRequest": "/subscriptions/f9e67185-f313-4e79-aa71-6458d429369d/resourceGroups/ResourceGuardSecurityAdminRG/providers/Microsoft.DataProtection/resourceGuards/ResourceGuardTestResource/deleteResourceGuardProxyRequests/default",
+              "vaultCriticalOperation": "Microsoft.DataProtection/backupVaults/backupResourceGuardProxies/delete"
+            }
+          ],
+          "resourceGuardResourceId": "/subscriptions/f9e67185-f313-4e79-aa71-6458d429369d/resourceGroups/ResourceGuardSecurityAdminRG/providers/Microsoft.DataProtection/resourceGuards/ResourceGuardTestResource"
+        }
+      }
+    }
+  },
+  "operationId": "DppResourceGuardProxy_Get",
+  "title": "Get ResourceGuardProxy"
+}

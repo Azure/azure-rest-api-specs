@@ -1,0 +1,85 @@
+{
+  "title": "List Analyzers",
+  "operationId": "Analyzers_List",
+  "parameters": {
+    "api-version": "2024-12-01-preview",
+    "filter": "tags.createdBy eq 'John'"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "analyzerId": "myAnalyzer",
+            "description": "My custom analyzer",
+            "tags": {
+              "createdBy": "John"
+            },
+            "status": "succeeded",
+            "createdAt": "2024-10-14T18:46:36.051Z",
+            "lastModifiedAt": "2024-10-14T18:46:36.051Z",
+            "scenario": "document",
+            "config": {
+              "locales": null,
+              "enableFace": false,
+              "enableOcr": true,
+              "enableLayout": true,
+              "enableBarcode": true,
+              "enableFormula": false,
+              "returnDetails": true
+            },
+            "fieldSchema": {
+              "name": "MyForm",
+              "description": "My custom form",
+              "fields": {
+                "Company": {
+                  "type": "string",
+                  "description": "Name of company."
+                }
+              },
+              "definitions": {}
+            },
+            "trainingData": {
+              "kind": "blob",
+              "containerUrl": "https://myStorageAccount.blob.core.windows.net/myContainer",
+              "prefix": "trainingData",
+              "fileListPath": "trainingData/fileList.jsonl"
+            }
+          },
+          {
+            "analyzerId": "myAnalyzer2",
+            "description": "My custom analyzer 2",
+            "tags": {
+              "createdBy": "John"
+            },
+            "status": "running",
+            "createdAt": "2024-10-14T18:46:36.051Z",
+            "lastModifiedAt": "2024-10-14T18:46:36.051Z",
+            "scenario": "image",
+            "config": {
+              "locales": null,
+              "enableFace": false,
+              "enableOcr": true,
+              "enableLayout": true,
+              "enableBarcode": true,
+              "enableFormula": false,
+              "returnDetails": true
+            },
+            "fieldSchema": {
+              "name": "MyImage",
+              "description": "My custom image",
+              "fields": {
+                "Logo": {
+                  "type": "string",
+                  "description": "Text of the logo in the image, if any."
+                }
+              },
+              "definitions": {}
+            }
+          }
+        ],
+        "nextLink": "https://myendpoint.cognitiveservices.azure.com/contentunderstanding/analyzers?nextLink=nextLinkData&api-version=2024-12-01-preview"
+      }
+    }
+  }
+}

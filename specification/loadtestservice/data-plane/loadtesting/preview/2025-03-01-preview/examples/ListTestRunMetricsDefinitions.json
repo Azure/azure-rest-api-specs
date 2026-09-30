@@ -1,0 +1,156 @@
+{
+  "operationId": "LoadTestRun_ListMetricDefinitions",
+  "title": "List the metric definitions for a load test run.",
+  "parameters": {
+    "testRunId": "12316678-1234-1234-1234-122451189012",
+    "metricNamespace": "LoadTestRunMetrics",
+    "api-version": "2025-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "dimensions": [
+              {
+                "description": "Sampler Name",
+                "name": "SamplerName"
+              }
+            ],
+            "description": "No of concurrent virtual users",
+            "name": "VirtualUsers",
+            "namespace": "LoadTestRunMetrics",
+            "primaryAggregationType": "Total",
+            "supportedAggregationTypes": [
+              "Total"
+            ],
+            "unit": "Count",
+            "metricAvailabilities": [
+              {
+                "timeGrain": "PT5S"
+              },
+              {
+                "timeGrain": "PT10S"
+              },
+              {
+                "timeGrain": "PT1M"
+              },
+              {
+                "timeGrain": "PT5M"
+              },
+              {
+                "timeGrain": "PT1H"
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              {
+                "description": "Sampler Name",
+                "name": "SamplerName"
+              }
+            ],
+            "description": "Response time (Successful request)",
+            "name": "ResponseTime",
+            "namespace": "LoadTestRunMetrics",
+            "primaryAggregationType": "Percentile90",
+            "supportedAggregationTypes": [
+              "Average",
+              "Percentile90",
+              "Percentile95",
+              "Percentile99"
+            ],
+            "unit": "Milliseconds",
+            "metricAvailabilities": [
+              {
+                "timeGrain": "PT5S"
+              },
+              {
+                "timeGrain": "PT10S"
+              },
+              {
+                "timeGrain": "PT1M"
+              },
+              {
+                "timeGrain": "PT5M"
+              },
+              {
+                "timeGrain": "PT1H"
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              {
+                "description": "Sampler Name",
+                "name": "SamplerName"
+              }
+            ],
+            "description": "Total Requests",
+            "name": "TotalRequests",
+            "namespace": "LoadTestRunMetrics",
+            "primaryAggregationType": "Total",
+            "supportedAggregationTypes": [
+              "Total"
+            ],
+            "unit": "Count",
+            "metricAvailabilities": [
+              {
+                "timeGrain": "PT5S"
+              },
+              {
+                "timeGrain": "PT10S"
+              },
+              {
+                "timeGrain": "PT1M"
+              },
+              {
+                "timeGrain": "PT5M"
+              },
+              {
+                "timeGrain": "PT1H"
+              }
+            ]
+          },
+          {
+            "dimensions": [
+              {
+                "description": "Sampler Name",
+                "name": "SamplerName"
+              },
+              {
+                "description": "Error response code",
+                "name": "Errors"
+              }
+            ],
+            "description": "Total Errors",
+            "name": "Errors",
+            "namespace": "LoadTestRunMetrics",
+            "primaryAggregationType": "Total",
+            "supportedAggregationTypes": [
+              "Total"
+            ],
+            "unit": "Count",
+            "metricAvailabilities": [
+              {
+                "timeGrain": "PT5S"
+              },
+              {
+                "timeGrain": "PT10S"
+              },
+              {
+                "timeGrain": "PT1M"
+              },
+              {
+                "timeGrain": "PT5M"
+              },
+              {
+                "timeGrain": "PT1H"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

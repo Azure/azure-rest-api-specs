@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2024-07-01",
+    "clusterId": "cluster-1",
+    "environmentId": "env-12132",
+    "organizationName": "myOrganization",
+    "pageSize": 10,
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Confluent/organizations/myOrganization/environments/env-12132/clusters/cluster-1/topics?api-version=2024-07-01&$count=10&$skipToken=xoi3753asdfe",
+        "value": [
+          {
+            "name": "topic-1",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Confluent/organizations/myOrganization/environments/env-12132/clusters/cluster-1/topics/topic-1",
+            "properties": {
+              "configs": {
+                "related": "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-2/configs"
+              },
+              "kind": "KafkaTopic",
+              "metadata": {
+                "resourceName": "crn:///kafka=cluster-1/topic=topic-1",
+                "self": "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-1"
+              },
+              "partitions": {
+                "related": "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-2/partitions"
+              },
+              "partitionsCount": "1",
+              "partitionsReassignments": {
+                "related": "https://pkc-00000.region.provider.confluent.cloud/kafka/v3/clusters/cluster-1/topics/topic-2/partitions/-/reassignments"
+              },
+              "replicationFactor": "3"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Topics_List",
+  "title": "Organization_ListTopics"
+}

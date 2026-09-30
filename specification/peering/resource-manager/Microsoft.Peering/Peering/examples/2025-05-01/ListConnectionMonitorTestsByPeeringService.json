@@ -1,0 +1,54 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "peeringServiceName": "peeringServiceName",
+    "resourceGroupName": "rgName",
+    "subscriptionId": "subId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "connectionMonitorTestName1",
+            "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peeringServices/peeringServiceName/connectionMonitorTests/connectionMonitorTestName1",
+            "properties": {
+              "path": [
+                "source",
+                "hop1",
+                "hop2",
+                "destination"
+              ],
+              "destination": "Example Destination",
+              "destinationPort": 443,
+              "isTestSuccessful": true,
+              "provisioningState": "Succeeded",
+              "sourceAgent": "Example Source Agent",
+              "testFrequencyInSec": 30
+            }
+          },
+          {
+            "name": "connectionMonitorTestName2",
+            "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peeringServices/peeringServiceName/connectionMonitorTests/connectionMonitorTestName2",
+            "properties": {
+              "path": [
+                "source",
+                "hop1",
+                "hop2",
+                "destination"
+              ],
+              "destination": "Example Destination 2",
+              "destinationPort": 443,
+              "isTestSuccessful": false,
+              "provisioningState": "Succeeded",
+              "sourceAgent": "Example Source Agent",
+              "testFrequencyInSec": 30
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ConnectionMonitorTests_ListByPeeringService",
+  "title": "List all Connection Monitor Tests associated with the peering service"
+}

@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "location": "West US 2",
+    "staticSitesWorkflowPreviewRequest": {
+      "properties": {
+        "branch": "master",
+        "buildProperties": {
+          "apiLocation": "api",
+          "appArtifactLocation": "build",
+          "appLocation": "app"
+        },
+        "repositoryUrl": "https://github.com/username/RepoName"
+      }
+    },
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "path": ".github/workflows/azure-static-web-apps-<generated_hostname>.yml",
+          "contents": "base64encodedworkflowcontentspreview"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "StaticSites_PreviewWorkflow",
+  "title": "Generates a preview workflow file for the static site"
+}

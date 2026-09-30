@@ -1,0 +1,91 @@
+{
+  "parameters": {
+    "$filter": "(properties%2farchived+eq+false)",
+    "$orderby": "properties/displayName asc",
+    "$skiptoken": "50",
+    "api-version": "2024-11-01-preview",
+    "refreshsummary": "true",
+    "take": "1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "additionalProperties": [
+          {
+            "name": "summary",
+            "value": {
+              "cancelledCount": 0,
+              "expiredCount": 0,
+              "expiringCount": 0,
+              "failedCount": 0,
+              "noBenefitCount": 0,
+              "pendingCount": 0,
+              "processingCount": 0,
+              "succeededCount": 1,
+              "warningCount": 0
+            }
+          }
+        ],
+        "value": [
+          {
+            "name": "20000000-0000-0000-0000-000000000000/30000000-0000-0000-0000-000000000000",
+            "type": "Microsoft.BillingBenefits/savingsPlanOrders/savingsPlans",
+            "id": "/providers/microsoft.billingbenefits/savingsPlanOrders/20000000-0000-0000-0000-000000000000/savingsPlans/30000000-0000-0000-0000-000000000000",
+            "properties": {
+              "appliedScopeProperties": {
+                "displayName": "Azure subscription 1",
+                "subscriptionId": "/subscriptions/20000000-0000-0000-0000-000000000005"
+              },
+              "appliedScopeType": "Single",
+              "billingAccountId": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000000:20000000-0000-3000-0000-000000000000_2019-05-31",
+              "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000000:20000000-0000-3000-0000-000000000000_2019-05-31/billingProfiles/KPSV-DWNE-BG7-TGB",
+              "billingScopeId": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000009",
+              "commitment": {
+                "amount": 0.001,
+                "currencyCode": "USD",
+                "grain": "Hourly"
+              },
+              "displayName": "Compute_SavingsPlan_10-19-2022_11-03",
+              "displayProvisioningState": "Succeeded",
+              "effectiveDateTime": "2022-10-19T18:05:37.1034288Z",
+              "expiryDateTime": "2023-10-19T18:05:36.5252231Z",
+              "provisioningState": "Succeeded",
+              "purchaseDateTime": "2022-10-19T18:03:56.4032132Z",
+              "renew": false,
+              "term": "P1Y",
+              "userFriendlyAppliedScopeType": "Single",
+              "utilization": {
+                "aggregates": [
+                  {
+                    "grain": 1,
+                    "grainUnit": "days",
+                    "value": 100,
+                    "valueUnit": "percentage"
+                  },
+                  {
+                    "grain": 7,
+                    "grainUnit": "days",
+                    "value": 78,
+                    "valueUnit": "percentage"
+                  },
+                  {
+                    "grain": 30,
+                    "grainUnit": "days",
+                    "value": 78.12,
+                    "valueUnit": "percentage"
+                  }
+                ],
+                "trend": ""
+              }
+            },
+            "sku": {
+              "name": "Compute_Savings_Plan"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "SavingsPlan_ListAll",
+  "title": "SavingsPlansList"
+}

@@ -1,0 +1,139 @@
+{
+  "title": "AccessControlLists_Get_MaximumSet_Gen",
+  "operationId": "AccessControlLists_Get",
+  "parameters": {
+    "api-version": "2024-02-15-preview",
+    "subscriptionId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+    "resourceGroupName": "example-rg",
+    "accessControlListName": "example-acl"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "annotation": "annotation",
+          "configurationType": "File",
+          "aclsUrl": "https://ACL-Storage-URL",
+          "defaultAction": "Permit",
+          "matchConfigurations": [
+            {
+              "matchConfigurationName": "example-match",
+              "sequenceNumber": 123,
+              "ipAddressType": "IPv4",
+              "matchConditions": [
+                {
+                  "protocolTypes": [
+                    "TCP"
+                  ],
+                  "vlanMatchCondition": {
+                    "vlans": [
+                      "20-30"
+                    ],
+                    "innerVlans": [
+                      "30"
+                    ],
+                    "vlanGroupNames": [
+                      "example-vlanGroup"
+                    ]
+                  },
+                  "ipCondition": {
+                    "type": "SourceIP",
+                    "prefixType": "Prefix",
+                    "ipPrefixValues": [
+                      "10.20.20.20/12"
+                    ],
+                    "ipGroupNames": [
+                      "example-ipGroup"
+                    ]
+                  },
+                  "etherTypes": [
+                    "0x1"
+                  ],
+                  "fragments": [
+                    "0xff00-0xffff"
+                  ],
+                  "ipLengths": [
+                    "4094-9214"
+                  ],
+                  "ttlValues": [
+                    "23"
+                  ],
+                  "dscpMarkings": [
+                    "32"
+                  ],
+                  "portCondition": {
+                    "portType": "SourcePort",
+                    "layer4Protocol": "TCP",
+                    "ports": [
+                      "1-20"
+                    ],
+                    "portGroupNames": [
+                      "example-portGroup"
+                    ],
+                    "flags": [
+                      "established"
+                    ]
+                  }
+                }
+              ],
+              "actions": [
+                {
+                  "type": "Count",
+                  "counterName": "example-counter"
+                }
+              ]
+            }
+          ],
+          "dynamicMatchConfigurations": [
+            {
+              "ipGroups": [
+                {
+                  "name": "example-ipGroup",
+                  "ipAddressType": "IPv4",
+                  "ipPrefixes": [
+                    "10.20.3.1/20"
+                  ]
+                }
+              ],
+              "vlanGroups": [
+                {
+                  "name": "example-vlanGroup",
+                  "vlans": [
+                    "20-30"
+                  ]
+                }
+              ],
+              "portGroups": [
+                {
+                  "name": "example-portGroup",
+                  "ports": [
+                    "100-200"
+                  ]
+                }
+              ]
+            }
+          ],
+          "lastSyncedTime": "2023-06-17T08:56:23.203Z",
+          "configurationState": "Succeeded",
+          "provisioningState": "Accepted",
+          "administrativeState": "Enabled"
+        },
+        "tags": {
+          "KeyId": "keyValue"
+        },
+        "location": "eastUs",
+        "id": "/subscriptions/xxxxxx/resourceGroups/resourcegroupname/providers/Microsoft.ManagedNetworkFabric/accessControlLists/example-acl",
+        "name": "example-acl",
+        "type": "microsoft.managednetworkfabric/accessControlLists",
+        "systemData": {
+          "createdBy": "email@address.com",
+          "createdByType": "User",
+          "createdAt": "2023-06-09T04:51:41.251Z",
+          "lastModifiedBy": "UserId",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-06-09T04:51:41.251Z"
+        }
+      }
+    }
+  }
+}

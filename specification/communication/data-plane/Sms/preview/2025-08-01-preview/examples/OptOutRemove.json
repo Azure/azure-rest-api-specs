@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2025-08-01-preview",
+    "body": {
+      "from": "+18001234567",
+      "recipients": [
+        {
+          "to": "+15555555551"
+        },
+        {
+          "to": "+123"
+        },
+        {
+          "to": "+15555555553"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "to": "+15555555551",
+            "httpStatusCode": 200
+          },
+          {
+            "to": "+123",
+            "httpStatusCode": 400,
+            "errorMessage": "Invalid recipient phone number format"
+          },
+          {
+            "to": "+15555555553",
+            "httpStatusCode": 500,
+            "errorMessage": "Internal Server Error"
+          }
+        ]
+      }
+    }
+  }
+}

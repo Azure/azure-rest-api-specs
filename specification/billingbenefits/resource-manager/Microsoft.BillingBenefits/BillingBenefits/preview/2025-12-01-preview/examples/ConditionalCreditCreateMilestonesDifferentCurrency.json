@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "subscriptionId": "10000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resource_group_name_01",
+    "conditionalCreditName": "conditionalCredit_milestones_diff_currency_20251027",
+    "api-version": "2025-12-01-preview",
+    "body": {
+      "location": "global",
+      "properties": {
+        "entityType": "Primary",
+        "displayName": "Conditional Credit Milestones Different Currency Example",
+        "productCode": "000187f7-0000-0260-ab43-b8473ce57f1d",
+        "startAt": "2025-11-01T00:00:00Z",
+        "allowContributors": "Enabled",
+        "milestones": [
+          {
+            "name": "Milestone 1",
+            "spendTarget": {
+              "amount": 1000,
+              "currencyCode": "USD"
+            },
+            "award": {
+              "duration": "P1M",
+              "credit": {
+                "amount": 100,
+                "currencyCode": "USD"
+              }
+            },
+            "endAt": "2025-11-30T23:59:59Z"
+          },
+          {
+            "name": "Milestone 2",
+            "spendTarget": {
+              "amount": 2000,
+              "currencyCode": "EUR"
+            },
+            "award": {
+              "duration": "P1M",
+              "credit": {
+                "amount": 200,
+                "currencyCode": "EUR"
+              }
+            },
+            "endAt": "2025-12-31T23:59:59Z"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "400": {
+      "body": {
+        "error": {
+          "code": "InvalidRequest",
+          "message": "All milestones in a conditional credit must use the same currency."
+        }
+      }
+    }
+  }
+}

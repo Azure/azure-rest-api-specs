@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff//resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/firewallRules?api-version=2025-06-01-preview&$skiptoken=skiptoken",
+        "value": [
+          {
+            "name": "examplefirewallrule1",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers/firewallRules",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/firewallRules/examplefirewallrule1",
+            "properties": {
+              "endIpAddress": "255.255.255.255",
+              "startIpAddress": "0.0.0.0"
+            }
+          },
+          {
+            "name": "examplefirewallrule2",
+            "type": "Microsoft.DBforPostgreSQL/flexibleServers/firewallRules",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/firewallRules/examplefirewallrule2",
+            "properties": {
+              "endIpAddress": "255.0.0.0",
+              "startIpAddress": "1.0.0.0"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "FirewallRules_ListByServer",
+  "title": "List information about all firewall rules in a server."
+}

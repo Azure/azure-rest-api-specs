@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "resourceGroupName": "rg1",
+    "searchServiceName": "mysearchservice",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "testEndpoint.50bf4fbe-d7c1-4b48-a642-4f5892642546",
+            "type": "Microsoft.Search/searchServices/privateEndpointConnections",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice/privateEndpointConnections/testEndpoint.50bf4fbe-d7c1-4b48-a642-4f5892642546",
+            "properties": {
+              "privateEndpoint": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/testEndpoint"
+              },
+              "privateLinkServiceConnectionState": {
+                "description": "",
+                "actionsRequired": "None",
+                "status": "Approved"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PrivateEndpointConnections_ListByService",
+  "title": "ListPrivateEndpointConnectionsByService"
+}

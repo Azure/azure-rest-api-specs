@@ -1,0 +1,151 @@
+﻿{
+  "title": "PrivateClouds_CreateOrUpdate_FleetNative",
+  "operationId": "PrivateClouds_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "group1",
+    "privateCloudName": "cloud1",
+    "privateCloud": {
+      "location": "eastus2",
+      "sku": {
+        "name": "AV64"
+      },
+      "properties": {
+        "networkBlock": "192.168.48.0/22",
+        "virtualNetworkId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/virtualNetworks/vnet",
+        "dnsZoneType": "Private",
+        "managementCluster": {
+          "clusterSize": 4
+        },
+        "vcfLicense": {
+          "kind": "vcf5",
+          "licenseKey": "12345-12345-12345-12345-12345",
+          "endDate": "2025-12-31T23:59:59Z",
+          "cores": 16,
+          "broadcomSiteId": "123456",
+          "broadcomContractNumber": "123456"
+        }
+      },
+      "tags": {}
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1",
+        "location": "eastus2",
+        "name": "cloud1",
+        "properties": {
+          "availability": {
+            "strategy": "SingleZone"
+          },
+          "dnsZoneType": "Private",
+          "encryption": {
+            "status": "Disabled"
+          },
+          "endpoints": {
+            "hcxCloudManager": "https://hcx.c2e20fa95ec249939dc7e3.mockenvavs.azure.com/",
+            "hcxCloudManagerIp": "10.31.0.37",
+            "nsxtManager": "https://nsx.c2e20fa95ec249939dc7e3.mockenvavs.azure.com/",
+            "nsxtManagerIp": "10.31.0.4",
+            "vcenterIp": "10.31.0.36",
+            "vcsa": "https://vc.c2e20fa95ec249939dc7e3.mockenvavs.azure.com/"
+          },
+          "externalCloudLinks": [],
+          "identitySources": [],
+          "internet": "Disabled",
+          "managementCluster": {
+            "clusterId": 1,
+            "clusterSize": 4,
+            "hosts": [
+              "fakehost18.nyc1.kubernetes.center",
+              "fakehost19.nyc1.kubernetes.center",
+              "fakehost20.nyc1.kubernetes.center",
+              "fakehost21.nyc1.kubernetes.center"
+            ],
+            "provisioningState": "Building",
+            "vsanDatastoreName": "vsanDatastore"
+          },
+          "managementNetwork": "10.31.0.0/26",
+          "networkBlock": "10.31.0.0/22",
+          "nsxPublicIpQuotaRaised": "Disabled",
+          "provisioningState": "Building",
+          "virtualNetworkId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup/providers/Microsoft.Network/virtualNetworks/mock-vnet",
+          "vmotionNetwork": "10.31.2.0/24",
+          "vcfLicense": {
+            "kind": "vcf5",
+            "endDate": "2025-12-31T23:59:59Z",
+            "cores": 16,
+            "broadcomSiteId": "123456",
+            "broadcomContractNumber": "123456",
+            "provisioningState": "Succeeded"
+          }
+        },
+        "sku": {
+          "name": "av64"
+        },
+        "tags": {},
+        "type": "Microsoft.AVS/privateClouds"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1",
+        "location": "eastus2",
+        "name": "cloud1",
+        "properties": {
+          "availability": {
+            "strategy": "SingleZone"
+          },
+          "dnsZoneType": "Private",
+          "encryption": {
+            "status": "Disabled"
+          },
+          "endpoints": {
+            "hcxCloudManager": "https://hcx.c2e20fa95ec249939dc7e3.mockenvavs.azure.com/",
+            "hcxCloudManagerIp": "10.31.0.37",
+            "nsxtManager": "https://nsx.c2e20fa95ec249939dc7e3.mockenvavs.azure.com/",
+            "nsxtManagerIp": "10.31.0.4",
+            "vcenterIp": "10.31.0.36",
+            "vcsa": "https://vc.c2e20fa95ec249939dc7e3.mockenvavs.azure.com/"
+          },
+          "externalCloudLinks": [],
+          "identitySources": [],
+          "internet": "Disabled",
+          "managementCluster": {
+            "clusterId": 1,
+            "clusterSize": 4,
+            "hosts": [
+              "fakehost18.nyc1.kubernetes.center",
+              "fakehost19.nyc1.kubernetes.center",
+              "fakehost20.nyc1.kubernetes.center",
+              "fakehost21.nyc1.kubernetes.center"
+            ],
+            "provisioningState": "Building",
+            "vsanDatastoreName": "vsanDatastore"
+          },
+          "managementNetwork": "10.31.0.0/26",
+          "networkBlock": "10.31.0.0/22",
+          "nsxPublicIpQuotaRaised": "Disabled",
+          "provisioningState": "Building",
+          "virtualNetworkId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup/providers/Microsoft.Network/virtualNetworks/mock-vnet",
+          "vmotionNetwork": "10.31.2.0/24",
+          "vcfLicense": {
+            "kind": "vcf5",
+            "endDate": "2025-12-31T23:59:59Z",
+            "cores": 16,
+            "broadcomSiteId": "123456",
+            "broadcomContractNumber": "123456",
+            "provisioningState": "Succeeded"
+          }
+        },
+        "sku": {
+          "name": "av64"
+        },
+        "tags": {},
+        "type": "Microsoft.AVS/privateClouds"
+      }
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "@azure-tools/typespec-migration-validation",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "bin": {
+    "tsmv": "cmd/tsmv.js"
+  },
+  "dependencies": {
+    "@azure-tools/typespec-autorest": "catalog:",
+    "json-diff": "catalog:",
+    "yargs": "catalog:"
+  },
+  "devDependencies": {
+    "@types/json-diff": "catalog:",
+    "@types/node": "catalog:",
+    "@types/yargs": "catalog:"
+  },
+  "scripts": {
+    "build": "tsc --noEmit",
+    "format": "oxfmt . --write",
+    "format:check": "oxfmt . --check",
+    "test": "vitest",
+    "test:ci": "vitest run --coverage --reporter=verbose",
+    "watch": "tsc --build --watch"
+  },
+  "engines": {
+    "node": ">=24.14.1"
+  },
+  "version": "0.0.0"
+}

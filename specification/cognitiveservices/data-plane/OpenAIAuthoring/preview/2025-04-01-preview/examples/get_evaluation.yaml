@@ -1,0 +1,127 @@
+parameters:
+  endpoint: https://aoairesource.openai.azure.com
+  api-key: "{api key}"
+  api-version: "2025-04-01-preview"
+  eval-id: eval_6801694950848190b10968bb628b651d
+responses:
+  "200":
+    headers: {}
+    body:
+      object: eval
+      id: eval_6801694950848190b10968bb628b651d
+      data_source_config:
+        type: custom
+        schema:
+          type: object
+          properties:
+            item:
+              type: object
+              properties:
+                question:
+                  type: string
+                A:
+                  type: string
+                B:
+                  type: string
+                C:
+                  type: string
+                D:
+                  type: string
+                answer:
+                  type: string
+            sample:
+              type: object
+              properties:
+                model:
+                  type: string
+                choices:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      message:
+                        type: object
+                        properties:
+                          role:
+                            type: string
+                            enum:
+                              - assistant
+                          content:
+                            type:
+                              - string
+                              - null
+                          refusal:
+                            type:
+                              - boolean
+                              - null
+                          tool_calls:
+                            type:
+                              - array
+                              - null
+                            items:
+                              type: object
+                              properties:
+                                type:
+                                  type: string
+                                  enum:
+                                    - function
+                                function:
+                                  type: object
+                                  properties:
+                                    name:
+                                      type: string
+                                    arguments:
+                                      type: string
+                                  required:
+                                    - name
+                                    - arguments
+                                id:
+                                  type: string
+                              required:
+                                - type
+                                - function
+                                - id
+                          function_call:
+                            type:
+                              - object
+                              - null
+                            properties:
+                              name:
+                                type: string
+                              arguments:
+                                type: string
+                            required:
+                              - name
+                              - arguments
+                        required:
+                          - role
+                      finish_reason:
+                        type: string
+                    required:
+                      - index
+                      - message
+                      - finish_reason
+                output_text:
+                  type: string
+                output_json:
+                  type: object
+                output_tools:
+                  type: array
+                  items:
+                    type: object
+              required:
+                - model
+                - choices
+          required:
+            - item
+            - sample
+      testing_criteria:
+        - name: string check
+          id: string check-4e178578-84ff-45cd-9862-b88762678149
+          type: string_check
+          input: "{{sample.output_text}}"
+          reference: "{{item.answer}}"
+          operation: eq
+      name: Math Quiz
+      created_at: 1744922953
+      metadata: {}

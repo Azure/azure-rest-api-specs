@@ -1,0 +1,39 @@
+{
+  "name": "@azure-tools/lint-diff",
+  "private": true,
+  "type": "module",
+  "main": "src/lint-diff.ts",
+  "bin": {
+    "lint-diff": "cmd/lint-diff.js"
+  },
+  "scripts": {
+    "build": "tsc --noEmit",
+    "check": "pnpm build && pnpm lint && pnpm format:check && pnpm test:ci",
+    "clean": "rm -rf dist && rm -rf node_modules",
+    "format": "oxfmt . --write",
+    "format:check": "oxfmt . --check",
+    "lint": "oxlint .",
+    "test": "vitest",
+    "test:ci": "vitest run --coverage --reporter=verbose"
+  },
+  "engines": {
+    "node": ">=24.14.1"
+  },
+  "dependencies": {
+    "@apidevtools/json-schema-ref-parser": "catalog:",
+    "@azure-tools/specs-shared": "workspace:*",
+    "@azure-tools/suppressions": "workspace:*",
+    "@microsoft.azure/openapi-validator": "catalog:",
+    "@microsoft.azure/openapi-validator-core": "catalog:",
+    "@microsoft.azure/openapi-validator-rulesets": "catalog:",
+    "autorest": "catalog:",
+    "change-case": "catalog:",
+    "marked": "catalog:"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "execa": "catalog:",
+    "memfs": "catalog:"
+  },
+  "version": "0.0.0"
+}

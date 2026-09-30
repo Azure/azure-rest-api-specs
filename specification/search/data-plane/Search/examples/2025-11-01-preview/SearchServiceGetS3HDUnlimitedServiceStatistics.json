@@ -1,0 +1,65 @@
+{
+  "operationId": "GetServiceStatistics",
+  "title": "SearchServiceGetS3HDUnlimitedServiceStatistics",
+  "parameters": {
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "api-version": "2025-11-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "counters": {
+          "documentCount": {
+            "usage": 12
+          },
+          "indexesCount": {
+            "usage": 2,
+            "quota": 2
+          },
+          "indexersCount": {
+            "usage": 2,
+            "quota": 2
+          },
+          "dataSourcesCount": {
+            "usage": 2,
+            "quota": 2
+          },
+          "storageSize": {
+            "usage": 123456,
+            "quota": 10485760
+          },
+          "synonymMaps": {
+            "usage": 3,
+            "quota": 3
+          },
+          "skillsetCount": {
+            "usage": 2,
+            "quota": 2
+          },
+          "aliasesCount": {
+            "usage": 4,
+            "quota": 4
+          },
+          "vectorIndexSize": {
+            "usage": 123456
+          }
+        },
+        "indexersRuntime": {
+          "usedSeconds": 0,
+          "remainingSeconds": 86400,
+          "beginningTime": "2024-06-06T00:00:00.000Z",
+          "endingTime": "2024-06-07T00:00:00.000Z"
+        },
+        "limits": {
+          "maxStoragePerIndex": 10485760,
+          "maxFieldsPerIndex": 1000,
+          "maxFieldNestingDepthPerIndex": 10,
+          "maxComplexCollectionFieldsPerIndex": 40,
+          "maxComplexObjectsInCollectionsPerDocument": 3000,
+          "maxCumulativeIndexerRuntimeSeconds": 86400
+        }
+      }
+    }
+  }
+}

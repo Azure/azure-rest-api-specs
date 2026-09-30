@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "authsid": "newauthServer2",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "newauthServer2",
+        "type": "Microsoft.ApiManagement/service/authorizationServers",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/authorizationServers/newauthServer2",
+        "properties": {
+          "description": "test server",
+          "authorizationEndpoint": "https://www.contoso.com/oauth2/auth",
+          "authorizationMethods": [
+            "GET"
+          ],
+          "bearerTokenSendingMethods": [
+            "authorizationHeader"
+          ],
+          "clientAuthenticationMethod": [
+            "Basic"
+          ],
+          "clientId": "1",
+          "clientRegistrationEndpoint": "https://www.contoso.com/apps",
+          "defaultScope": "read write",
+          "displayName": "test3",
+          "grantTypes": [
+            "authorizationCode",
+            "implicit"
+          ],
+          "resourceOwnerPassword": "pwd",
+          "resourceOwnerUsername": "un",
+          "supportState": true,
+          "tokenEndpoint": "https://www.contoso.com/oauth2/token",
+          "useInApiDocumentation": true,
+          "useInTestConsole": false
+        }
+      }
+    }
+  },
+  "operationId": "AuthorizationServer_Get",
+  "title": "ApiManagementGetAuthorizationServer"
+}

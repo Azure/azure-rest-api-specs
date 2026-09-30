@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "api-version": "2024-04-24",
+    "monitorName": "myMonitor",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "default",
+            "type": "Dynatrace.Observability/monitors/monitoredSubscriptions",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Dynatrace.Observability/monitors/myMonitor/monitoredSubscriptions/default",
+            "properties": {
+              "monitoredSubscriptionList": [
+                {
+                  "status": "Active",
+                  "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000000",
+                  "tagRules": {
+                    "logRules": {
+                      "filteringTags": [
+                        {
+                          "name": "Environment",
+                          "action": "Include",
+                          "value": "Prod"
+                        },
+                        {
+                          "name": "Environment",
+                          "action": "Exclude",
+                          "value": "Dev"
+                        }
+                      ],
+                      "sendAadLogs": "Disabled",
+                      "sendActivityLogs": "Enabled",
+                      "sendSubscriptionLogs": "Enabled"
+                    },
+                    "metricRules": {
+                      "filteringTags": []
+                    }
+                  }
+                },
+                {
+                  "status": "Failed",
+                  "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000001",
+                  "tagRules": {
+                    "logRules": {
+                      "filteringTags": [
+                        {
+                          "name": "Environment",
+                          "action": "Include",
+                          "value": "Prod"
+                        },
+                        {
+                          "name": "Environment",
+                          "action": "Exclude",
+                          "value": "Dev"
+                        }
+                      ],
+                      "sendAadLogs": "Disabled",
+                      "sendActivityLogs": "Enabled",
+                      "sendSubscriptionLogs": "Enabled"
+                    },
+                    "metricRules": {
+                      "filteringTags": []
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "MonitoredSubscriptions_List",
+  "title": "Monitors_GetMonitoredSubscriptions"
+}

@@ -1,0 +1,114 @@
+{
+  "operationId": "MongoClusters_CreateOrUpdate",
+  "title": "Creates a Mongo Cluster resource from a point in time restore",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "TestResourceGroup",
+    "mongoClusterName": "myMongoCluster",
+    "api-version": "2025-04-01-preview",
+    "resource": {
+      "location": "westus2",
+      "properties": {
+        "createMode": "PointInTimeRestore",
+        "restoreParameters": {
+          "pointInTimeUTC": "2023-01-13T20:07:35Z",
+          "sourceResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/myOtherMongoCluster"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/myMongoCluster",
+        "name": "myMongoCluster",
+        "type": "/Microsoft.DocumentDB/mongoClusters",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "administrator": {
+            "userName": "mongoAdmin"
+          },
+          "authConfig": {
+            "allowedModes": [
+              "NativeAuth"
+            ]
+          },
+          "serverVersion": "5.0",
+          "storage": {
+            "sizeGb": 128,
+            "type": "PremiumSSD"
+          },
+          "compute": {
+            "tier": "M30"
+          },
+          "sharding": {
+            "shardCount": 1
+          },
+          "highAvailability": {
+            "targetMode": "SameZone"
+          },
+          "backup": {
+            "earliestRestoreTime": "2023-01-13T20:07:35Z"
+          },
+          "previewFeatures": [],
+          "infrastructureVersion": "2.0",
+          "publicNetworkAccess": "Enabled",
+          "connectionString": "mongodb+srv://<user>:<password>@myMongoCluster.mongocluster.cosmos.azure.com",
+          "replica": {
+            "role": "Primary"
+          },
+          "dataApi": {
+            "mode": "Disabled"
+          }
+        },
+        "location": "westus2"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DocumentDB/mongoClusters/myMongoCluster",
+        "name": "myMongoCluster",
+        "type": "/Microsoft.DocumentDB/mongoClusters",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "administrator": {
+            "userName": "mongoAdmin"
+          },
+          "authConfig": {
+            "allowedModes": [
+              "NativeAuth"
+            ]
+          },
+          "serverVersion": "5.0",
+          "storage": {
+            "sizeGb": 128,
+            "type": "PremiumSSD"
+          },
+          "compute": {
+            "tier": "M30"
+          },
+          "sharding": {
+            "shardCount": 1
+          },
+          "highAvailability": {
+            "targetMode": "SameZone"
+          },
+          "backup": {
+            "earliestRestoreTime": "2023-01-13T20:07:35Z"
+          },
+          "previewFeatures": [],
+          "infrastructureVersion": "2.0",
+          "publicNetworkAccess": "Enabled",
+          "connectionString": "mongodb+srv://<user>:<password>@myMongoCluster.mongocluster.cosmos.azure.com",
+          "replica": {
+            "role": "Primary"
+          },
+          "dataApi": {
+            "mode": "Disabled"
+          }
+        },
+        "location": "westus2"
+      }
+    }
+  }
+}

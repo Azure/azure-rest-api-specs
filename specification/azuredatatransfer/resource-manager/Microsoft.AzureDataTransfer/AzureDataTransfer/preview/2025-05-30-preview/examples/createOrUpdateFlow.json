@@ -1,0 +1,46 @@
+{
+  "operationId": "Flows_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-05-30-preview",
+    "connectionName": "testConnection",
+    "flow": {
+      "location": "East US",
+      "properties": {
+        "connection": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection"
+        },
+        "flowProfile": {
+          "pipeline": "testPipeline",
+          "name": "flowProfileName",
+          "flowProfileId": "25f2c41a-6e29-4c40-a033-b4de81d4a681",
+          "replicationScenario": "Files",
+          "status": "Enabled",
+          "description": "Testing 123"
+        },
+        "flowDataType": "Blob",
+        "storageAccountName": "testsa",
+        "storageContainerName": "testcontainer"
+      }
+    },
+    "flowName": "testFlow",
+    "resourceGroupName": "testRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Creates or updates the flow resource",
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.AzureDataTransfer/connections/flows",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection/flows/testFlow",
+        "location": "East US"
+      }
+    },
+    "201": {
+      "body": {
+        "type": "Microsoft.AzureDataTransfer/connections/flows",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection/flows/testFlow",
+        "location": "East US"
+      }
+    }
+  }
+}

@@ -1,0 +1,548 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "endpoint": {
+      "location": "WestUs",
+      "properties": {
+        "contentTypesToCompress": [
+          "text/html",
+          "application/octet-stream"
+        ],
+        "defaultOriginGroup": {
+          "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/originGroups/originGroup1"
+        },
+        "deliveryPolicy": {
+          "description": "Test description for a policy.",
+          "rules": [
+            {
+              "name": "rule1",
+              "actions": [
+                {
+                  "name": "CacheExpiration",
+                  "parameters": {
+                    "cacheBehavior": "Override",
+                    "cacheDuration": "10:10:09",
+                    "cacheType": "All",
+                    "typeName": "DeliveryRuleCacheExpirationActionParameters"
+                  }
+                },
+                {
+                  "name": "ModifyResponseHeader",
+                  "parameters": {
+                    "headerAction": "Overwrite",
+                    "headerName": "Access-Control-Allow-Origin",
+                    "typeName": "DeliveryRuleHeaderActionParameters",
+                    "value": "*"
+                  }
+                },
+                {
+                  "name": "ModifyRequestHeader",
+                  "parameters": {
+                    "headerAction": "Overwrite",
+                    "headerName": "Accept-Encoding",
+                    "typeName": "DeliveryRuleHeaderActionParameters",
+                    "value": "gzip"
+                  }
+                }
+              ],
+              "conditions": [
+                {
+                  "name": "RemoteAddress",
+                  "parameters": {
+                    "matchValues": [
+                      "192.168.1.0/24",
+                      "10.0.0.0/24"
+                    ],
+                    "negateCondition": true,
+                    "operator": "IPMatch",
+                    "typeName": "DeliveryRuleRemoteAddressConditionParameters"
+                  }
+                }
+              ],
+              "order": 1
+            }
+          ]
+        },
+        "isCompressionEnabled": true,
+        "isHttpAllowed": true,
+        "isHttpsAllowed": true,
+        "originGroups": [
+          {
+            "name": "originGroup1",
+            "properties": {
+              "healthProbeSettings": {
+                "probeIntervalInSeconds": 120,
+                "probePath": "/health.aspx",
+                "probeProtocol": "Http",
+                "probeRequestType": "GET"
+              },
+              "origins": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/origin1"
+                },
+                {
+                  "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/origin2"
+                }
+              ],
+              "responseBasedOriginErrorDetectionSettings": {
+                "responseBasedDetectedErrorTypes": "TcpErrorsOnly",
+                "responseBasedFailoverThresholdPercentage": 10
+              }
+            }
+          }
+        ],
+        "originHostHeader": "www.bing.com",
+        "originPath": "/photos",
+        "origins": [
+          {
+            "name": "origin1",
+            "properties": {
+              "enabled": true,
+              "hostName": "www.someDomain1.net",
+              "httpPort": 80,
+              "httpsPort": 443,
+              "originHostHeader": "www.someDomain1.net",
+              "priority": 1,
+              "weight": 50
+            }
+          },
+          {
+            "name": "origin2",
+            "properties": {
+              "enabled": true,
+              "hostName": "www.someDomain2.net",
+              "httpPort": 80,
+              "httpsPort": 443,
+              "originHostHeader": "www.someDomain2.net",
+              "priority": 2,
+              "weight": 50
+            }
+          }
+        ],
+        "queryStringCachingBehavior": "BypassCaching"
+      },
+      "tags": {
+        "key1": "value1"
+      }
+    },
+    "endpointName": "endpoint1",
+    "profileName": "profile1",
+    "resourceGroupName": "RG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "endpoint4899",
+        "type": "Microsoft.Cdn/profiles/endpoints",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1",
+        "location": "WestUs",
+        "properties": {
+          "contentTypesToCompress": [
+            "text/html",
+            "application/octet-stream"
+          ],
+          "defaultOriginGroup": {
+            "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/originGroups/originGroup1"
+          },
+          "deliveryPolicy": {
+            "description": "Test description for a policy.",
+            "rules": [
+              {
+                "name": "rule1",
+                "actions": [
+                  {
+                    "name": "CacheExpiration",
+                    "parameters": {
+                      "cacheBehavior": "Override",
+                      "cacheDuration": "10:10:09",
+                      "cacheType": "All",
+                      "typeName": "DeliveryRuleCacheExpirationActionParameters"
+                    }
+                  },
+                  {
+                    "name": "ModifyResponseHeader",
+                    "parameters": {
+                      "headerAction": "Overwrite",
+                      "headerName": "Access-Control-Allow-Origin",
+                      "typeName": "DeliveryRuleHeaderActionParameters",
+                      "value": "*"
+                    }
+                  },
+                  {
+                    "name": "ModifyRequestHeader",
+                    "parameters": {
+                      "headerAction": "Overwrite",
+                      "headerName": "Accept-Encoding",
+                      "typeName": "DeliveryRuleHeaderActionParameters",
+                      "value": "gzip"
+                    }
+                  }
+                ],
+                "conditions": [
+                  {
+                    "name": "RemoteAddress",
+                    "parameters": {
+                      "matchValues": [
+                        "192.168.1.0/24",
+                        "10.0.0.0/24"
+                      ],
+                      "negateCondition": true,
+                      "operator": "IPMatch",
+                      "transforms": [],
+                      "typeName": "DeliveryRuleRemoteAddressConditionParameters"
+                    }
+                  }
+                ],
+                "order": 1
+              }
+            ]
+          },
+          "geoFilters": [],
+          "hostName": "endpoint4899.azureedge-test.net",
+          "isCompressionEnabled": true,
+          "isHttpAllowed": true,
+          "isHttpsAllowed": true,
+          "optimizationType": null,
+          "originGroups": [
+            {
+              "name": "originGroup1",
+              "properties": {
+                "healthProbeSettings": {
+                  "probeIntervalInSeconds": 120,
+                  "probePath": "/health.aspx",
+                  "probeProtocol": "Http",
+                  "probeRequestType": "GET"
+                },
+                "origins": [
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/origin1"
+                  },
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/origin2"
+                  }
+                ],
+                "responseBasedOriginErrorDetectionSettings": {
+                  "responseBasedDetectedErrorTypes": "TcpErrorsOnly",
+                  "responseBasedFailoverThresholdPercentage": 10
+                }
+              }
+            }
+          ],
+          "originHostHeader": "www.bing.com",
+          "originPath": "/photos",
+          "origins": [
+            {
+              "name": "origin1",
+              "properties": {
+                "enabled": true,
+                "hostName": "www.someDomain1.net",
+                "httpPort": 80,
+                "httpsPort": 443,
+                "originHostHeader": "www.someDomain1.net",
+                "priority": 1,
+                "weight": 50
+              }
+            },
+            {
+              "name": "origin2",
+              "properties": {
+                "enabled": true,
+                "hostName": "www.someDomain2.net",
+                "httpPort": 80,
+                "httpsPort": 443,
+                "originHostHeader": "www.someDomain2.net",
+                "priority": 2,
+                "weight": 50
+              }
+            }
+          ],
+          "probePath": null,
+          "provisioningState": "Creating",
+          "queryStringCachingBehavior": "BypassCaching",
+          "resourceState": "Creating"
+        },
+        "tags": {
+          "kay1": "value1"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "endpoint4899",
+        "type": "Microsoft.Cdn/profiles/endpoints",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1",
+        "location": "WestUs",
+        "properties": {
+          "contentTypesToCompress": [
+            "text/html",
+            "application/octet-stream"
+          ],
+          "defaultOriginGroup": {
+            "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/originGroups/originGroup1"
+          },
+          "deliveryPolicy": {
+            "description": "Test description for a policy.",
+            "rules": [
+              {
+                "name": "rule1",
+                "actions": [
+                  {
+                    "name": "CacheExpiration",
+                    "parameters": {
+                      "cacheBehavior": "Override",
+                      "cacheDuration": "10:10:09",
+                      "cacheType": "All",
+                      "typeName": "DeliveryRuleCacheExpirationActionParameters"
+                    }
+                  },
+                  {
+                    "name": "ModifyResponseHeader",
+                    "parameters": {
+                      "headerAction": "Overwrite",
+                      "headerName": "Access-Control-Allow-Origin",
+                      "typeName": "DeliveryRuleHeaderActionParameters",
+                      "value": "*"
+                    }
+                  },
+                  {
+                    "name": "ModifyRequestHeader",
+                    "parameters": {
+                      "headerAction": "Overwrite",
+                      "headerName": "Accept-Encoding",
+                      "typeName": "DeliveryRuleHeaderActionParameters",
+                      "value": "gzip"
+                    }
+                  }
+                ],
+                "conditions": [
+                  {
+                    "name": "RemoteAddress",
+                    "parameters": {
+                      "matchValues": [
+                        "192.168.1.0/24",
+                        "10.0.0.0/24"
+                      ],
+                      "negateCondition": true,
+                      "operator": "IPMatch",
+                      "transforms": [],
+                      "typeName": "DeliveryRuleRemoteAddressConditionParameters"
+                    }
+                  }
+                ],
+                "order": 1
+              }
+            ]
+          },
+          "geoFilters": [],
+          "hostName": "endpoint4899.azureedge-test.net",
+          "isCompressionEnabled": true,
+          "isHttpAllowed": true,
+          "isHttpsAllowed": true,
+          "optimizationType": null,
+          "originGroups": [
+            {
+              "name": "originGroup1",
+              "properties": {
+                "healthProbeSettings": {
+                  "probeIntervalInSeconds": 120,
+                  "probePath": "/health.aspx",
+                  "probeProtocol": "Http",
+                  "probeRequestType": "GET"
+                },
+                "origins": [
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/origin1"
+                  },
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/origin2"
+                  }
+                ],
+                "responseBasedOriginErrorDetectionSettings": {
+                  "responseBasedDetectedErrorTypes": "TcpErrorsOnly",
+                  "responseBasedFailoverThresholdPercentage": 10
+                }
+              }
+            }
+          ],
+          "originHostHeader": "www.bing.com",
+          "originPath": "/photos",
+          "origins": [
+            {
+              "name": "origin1",
+              "properties": {
+                "enabled": true,
+                "hostName": "www.someDomain1.net",
+                "httpPort": 80,
+                "httpsPort": 443,
+                "originHostHeader": "www.someDomain1.net",
+                "priority": 1,
+                "weight": 50
+              }
+            },
+            {
+              "name": "origin2",
+              "properties": {
+                "enabled": true,
+                "hostName": "www.someDomain2.net",
+                "httpPort": 80,
+                "httpsPort": 443,
+                "originHostHeader": "www.someDomain2.net",
+                "priority": 2,
+                "weight": 50
+              }
+            }
+          ],
+          "probePath": null,
+          "provisioningState": "Creating",
+          "queryStringCachingBehavior": "BypassCaching",
+          "resourceState": "Creating"
+        },
+        "tags": {
+          "kay1": "value1"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "endpoint4899",
+        "type": "Microsoft.Cdn/profiles/endpoints",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1",
+        "location": "WestUs",
+        "properties": {
+          "contentTypesToCompress": [
+            "text/html",
+            "application/octet-stream"
+          ],
+          "defaultOriginGroup": {
+            "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/originGroups/originGroup1"
+          },
+          "deliveryPolicy": {
+            "description": "Test description for a policy.",
+            "rules": [
+              {
+                "name": "rule1",
+                "actions": [
+                  {
+                    "name": "CacheExpiration",
+                    "parameters": {
+                      "cacheBehavior": "Override",
+                      "cacheDuration": "10:10:09",
+                      "cacheType": "All",
+                      "typeName": "DeliveryRuleCacheExpirationActionParameters"
+                    }
+                  },
+                  {
+                    "name": "ModifyResponseHeader",
+                    "parameters": {
+                      "headerAction": "Overwrite",
+                      "headerName": "Access-Control-Allow-Origin",
+                      "typeName": "DeliveryRuleHeaderActionParameters",
+                      "value": "*"
+                    }
+                  },
+                  {
+                    "name": "ModifyRequestHeader",
+                    "parameters": {
+                      "headerAction": "Overwrite",
+                      "headerName": "Accept-Encoding",
+                      "typeName": "DeliveryRuleHeaderActionParameters",
+                      "value": "gzip"
+                    }
+                  }
+                ],
+                "conditions": [
+                  {
+                    "name": "RemoteAddress",
+                    "parameters": {
+                      "matchValues": [
+                        "192.168.1.0/24",
+                        "10.0.0.0/24"
+                      ],
+                      "negateCondition": true,
+                      "operator": "IPMatch",
+                      "transforms": [],
+                      "typeName": "DeliveryRuleRemoteAddressConditionParameters"
+                    }
+                  }
+                ],
+                "order": 1
+              }
+            ]
+          },
+          "geoFilters": [],
+          "hostName": "endpoint4899.azureedge-test.net",
+          "isCompressionEnabled": true,
+          "isHttpAllowed": true,
+          "isHttpsAllowed": true,
+          "optimizationType": null,
+          "originGroups": [
+            {
+              "name": "originGroup1",
+              "properties": {
+                "healthProbeSettings": {
+                  "probeIntervalInSeconds": 120,
+                  "probePath": "/health.aspx",
+                  "probeProtocol": "Http",
+                  "probeRequestType": "GET"
+                },
+                "origins": [
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/origin1"
+                  },
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/origin2"
+                  }
+                ],
+                "responseBasedOriginErrorDetectionSettings": {
+                  "responseBasedDetectedErrorTypes": "TcpErrorsOnly",
+                  "responseBasedFailoverThresholdPercentage": 10
+                }
+              }
+            }
+          ],
+          "originHostHeader": "www.bing.com",
+          "originPath": "/photos",
+          "origins": [
+            {
+              "name": "origin1",
+              "properties": {
+                "enabled": true,
+                "hostName": "www.someDomain1.net",
+                "httpPort": 80,
+                "httpsPort": 443,
+                "originHostHeader": "www.someDomain1.net",
+                "priority": 1,
+                "weight": 50
+              }
+            },
+            {
+              "name": "origin2",
+              "properties": {
+                "enabled": true,
+                "hostName": "www.someDomain2.net",
+                "httpPort": 80,
+                "httpsPort": 443,
+                "originHostHeader": "www.someDomain2.net",
+                "priority": 2,
+                "weight": 50
+              }
+            }
+          ],
+          "probePath": null,
+          "provisioningState": "Creating",
+          "queryStringCachingBehavior": "BypassCaching",
+          "resourceState": "Creating"
+        },
+        "tags": {
+          "kay1": "value1"
+        }
+      },
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2025-09-01-preview"
+      }
+    }
+  },
+  "operationId": "Endpoints_Create",
+  "title": "Endpoints_Create"
+}

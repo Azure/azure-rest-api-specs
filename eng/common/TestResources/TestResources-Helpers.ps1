@@ -129,9 +129,31 @@ function MergeHashes([hashtable] $source, [psvariable] $dest) {
     }
 }
 
+function IsBicepInstalled() {
+    try {
+        bicep --version | Out-Null
+        return $LASTEXITCODE -eq 0
+    }
+    catch {
+        return $false
+    }
+}
+
+function IsAzCliBicepInstalled() {
+    try {
+        az bicep version | Out-Null
+        return $LASTEXITCODE -eq 0
+    }
+    catch {
+        return $false
+    }
+}
+
 function BuildBicepFile([System.IO.FileSystemInfo] $file) {
-    if (!(Get-Command bicep -ErrorAction Ignore)) {
-        Write-Error "A bicep file was found at '$($file.FullName)' but the Azure Bicep CLI is not installed. See aka.ms/bicep-install"
+    $useBicepCli = IsBicepInstalled
+
+    if (!$useBicepCli -and !(IsAzCliBicepInstalled)) {
+        Write-Error "A bicep file was found at '$($file.FullName)' but the Azure Bicep CLI is not installed. See https://aka.ms/bicep-install"
         throw
     }
 
@@ -140,13 +162,52 @@ function BuildBicepFile([System.IO.FileSystemInfo] $file) {
 
     # Az can deploy bicep files natively, but by compiling here it becomes easier to parse the
     # outputted json for mismatched parameter declarations.
-    bicep build $file.FullName --outfile $templateFilePath
+    if ($useBicepCli) {
+        bicep build $file.FullName --outfile $templateFilePath
+    } else {
+        az bicep build --file $file.FullName --outfile $templateFilePath
+    }
+
     if ($LASTEXITCODE) {
         Write-Error "Failure building bicep file '$($file.FullName)'"
         throw
     }
 
     return $templateFilePath
+}
+
+function LintBicepFile([string] $path) {
+    $useBicepCli = IsBicepInstalled
+
+    if (!$useBicepCli -and !(IsAzCliBicepInstalled)) {
+        Write-Error "A bicep file was found at '$path' but the Azure Bicep CLI is not installed. See https://aka.ms/bicep-install"
+        throw
+    }
+
+    # Work around lack of config file override: https://github.com/Azure/bicep/issues/5013
+    if ($useBicepCli) {
+        $output = bicep lint $path 2>&1
+    } else {
+        $output = az bicep lint --file $path 2>&1
+    }
+
+    if ($LASTEXITCODE) {
+        Write-Error "Failed linting bicep file '$path'"
+        throw
+    }
+
+    $clean = $true
+    foreach ($line in $output) {
+        $line = $line.ToString()
+
+        # See https://learn.microsoft.com/azure/azure-resource-manager/bicep/bicep-config-linter for lints.
+        if ($line.Contains('outputs-should-not-contain-secrets')) {
+            $clean = $false
+        }
+        Write-Warning $line
+    }
+
+    $clean
 }
 
 function BuildDeploymentOutputs([string]$serviceName, [object]$azContext, [object]$deployment, [hashtable]$environmentVariables) {
@@ -201,21 +262,43 @@ function SetDeploymentOutputs(
 ) {
     $deploymentEnvironmentVariables = $environmentVariables.Clone()
     $deploymentOutputs = BuildDeploymentOutputs $serviceName $azContext $deployment $deploymentEnvironmentVariables
+    $isBicep = $templateFile.originalFilePath -and $templateFile.originalFilePath.EndsWith(".bicep")
 
-    if ($OutFile) {
-        if (!$IsWindows) {
-            Write-Host 'File option is supported only on Windows'
+    # Azure SDK for .NET on Windows uses DPAPI-encrypted, JSON-encoded environment variables.
+    if ($OutFile -and $IsWindows -and $Language -eq 'dotnet') {
+            $outputFile = "$($templateFile.originalFilePath).env"
+
+            $environmentText = $deploymentOutputs | ConvertTo-Json;
+            $bytes = [System.Text.Encoding]::UTF8.GetBytes($environmentText)
+            $protectedBytes = [Security.Cryptography.ProtectedData]::Protect($bytes, $null, [Security.Cryptography.DataProtectionScope]::CurrentUser)
+
+            Set-Content $outputFile -Value $protectedBytes -AsByteStream -Force
+
+            Write-Host "Test environment settings`n$environmentText`nstored into encrypted $outputFile"
+    }
+    # Any Bicep template in a repo that has opted into .env files.
+    elseif ($OutFile -and $isBicep) {
+        $bicepTemplateFile = $templateFile.originalFilePath
+
+        # Make sure the file would not write secrets to .env file.
+        if (!(LintBicepFile $bicepTemplateFile)) {
+            Write-Error "$bicepTemplateFile may write secrets. No file written."
         }
+        $outputFile = $bicepTemplateFile | Split-Path | Join-Path -ChildPath '.env'
 
-        $outputFile = "$($templateFile.originalFilePath).env"
+        # Make sure the file would be ignored.
+        git check-ignore -- "$outputFile" > $null
+        if ($?) {
+            $environmentText = foreach ($kv in $deploymentOutputs.GetEnumerator()) {
+                "$($kv.Key)=`"$($kv.Value)`""
+            }
 
-        $environmentText = $deploymentOutputs | ConvertTo-Json;
-        $bytes = [System.Text.Encoding]::UTF8.GetBytes($environmentText)
-        $protectedBytes = [Security.Cryptography.ProtectedData]::Protect($bytes, $null, [Security.Cryptography.DataProtectionScope]::CurrentUser)
-
-        Set-Content $outputFile -Value $protectedBytes -AsByteStream -Force
-
-        Write-Host "Test environment settings`n $environmentText`nstored into encrypted $outputFile"
+            Set-Content $outputFile -Value $environmentText -Force
+            Write-Host "Test environment settings`n$environmentText`nstored in $outputFile"
+        }
+        else {
+            Write-Error "$outputFile is not ignored by .gitignore. No file written."
+        }
     }
     else {
         if (!$CI) {
@@ -264,4 +347,62 @@ function SetDeploymentOutputs(
     }
 
     return $deploymentEnvironmentVariables, $deploymentOutputs
+}
+
+<#
+   Writes Resource Manager errors which often have nested exceptions.
+   https://learn.microsoft.com/dotnet/api/microsoft.azure.commands.resourcemanager.cmdlets.sdkmodels.psresourcemanagererror
+#>
+function Write-PSResourceManagerError($resourceManagerError, [int]$level, [int]$maxLevel) {
+    if (!$resourceManagerError -or !$resourceManagerError.Message) {
+        return;
+    }
+
+    # Retrieve one or more messages then decode the strings for readability (remove quote escapes, fix link readability, etc.)
+    $parsedMessage = ($resourceManagerError.Message -join "$([System.Environment]::NewLine)$([System.Environment]::NewLine)")
+    $parsedMessage = [System.Net.WebUtility]::UrlDecode($parsedMessage)
+
+    $prefix = " " * ($level * 2) + "-"
+    Write-Host "$prefix $parsedMessage"
+
+    # Limit the level of nested exceptions to prevent overwhelming users with details and infinite recursive calls.
+    if ($level -ge $maxLevel) {
+        if ($resourceManagerError.Details.Count -gt 0) {
+            Write-Host "$prefix ... (additional nested errors not shown)"
+        }
+
+        return;
+    }
+
+    foreach ($detail in $resourceManagerError.Details) {
+        Write-PSResourceManagerError $detail ($level + 1) $maxLevel
+    }
+}
+
+function HandleTemplateDeploymentError($templateValidationResult) {
+    Write-Warning "Deployment template validation failed"
+
+    if (!$templateValidationResult.Details.Message) {
+        Write-Warning "Could not parse template validation error"
+        return
+    }
+
+    Write-Warning "#####################################################"
+    Write-Warning "######### TEMPLATE VALIDATION ERROR DETAILS #########"
+    Write-Warning "#####################################################"
+    Write-PSResourceManagerError $templateValidationResult 0 5
+    Write-Warning "#####################################################"
+}
+
+function HandleDeploymentFailure($deployment) {
+    Write-Host "Deployment '$($deployment.DeploymentName)' has state '$($deployment.ProvisioningState)' with CorrelationId '$($deployment.CorrelationId)'. Exiting..."
+    Write-Host @'
+#####################################################
+# For help debugging live test provisioning issues, #
+# see http://aka.ms/azsdk/engsys/live-test-help     #
+#####################################################
+'@
+    $queryTime = (Get-Date).AddMinutes(-10).ToString("o")
+    Write-Host "To check the activity log with the below command after waiting 2 minutes for propagation:"
+    Write-Host "(Get-AzActivityLog -CorrelationId '$($deployment.CorrelationId)' -StartTime '$queryTime').Properties.Content.statusMessage"
 }

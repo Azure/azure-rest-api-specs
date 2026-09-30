@@ -1,0 +1,1017 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SubscriptionClient",
+    "version": "2022-12-01",
+    "description": "All resource groups and resources exist within subscriptions. These operation enable you get information about your subscriptions and tenants. A tenant is a dedicated instance of Azure Active Directory (Azure AD) for your organization.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Tenants"
+    },
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "Subscriptions"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Resources/checkResourceName": {
+      "post": {
+        "operationId": "checkResourceName",
+        "tags": [
+          "Tenants"
+        ],
+        "summary": "Checks resource name validity",
+        "description": "A resource name is valid if it is not a reserved word, does not contains a reserved word and does not start with a reserved word",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "Resource Name Definition",
+            "in": "body",
+            "description": "The request body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ResourceName"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CheckResourceNameResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CheckValidityForAResourceName": {
+            "$ref": "./examples/CheckResourceName.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Resources/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions": {
+      "get": {
+        "operationId": "Subscriptions_List",
+        "tags": [
+          "Subscriptions"
+        ],
+        "description": "Gets all subscriptions for a tenant.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetAllSubscriptions": {
+            "$ref": "./examples/GetSubscriptions.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}": {
+      "get": {
+        "operationId": "Subscriptions_Get",
+        "tags": [
+          "Subscriptions"
+        ],
+        "description": "Gets details about a specified subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Subscription"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetASingleSubscription": {
+            "$ref": "./examples/GetSubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/locations": {
+      "get": {
+        "operationId": "Subscriptions_ListLocations",
+        "tags": [
+          "Subscriptions"
+        ],
+        "summary": "Gets all available geo-locations.",
+        "description": "This operation provides all the locations that are available for resource providers; however, each resource provider may support a subset of this list.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "includeExtendedLocations",
+            "in": "query",
+            "description": "Whether to include extended locations.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LocationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetLocationsWithASubscriptionId": {
+            "$ref": "./examples/GetLocations.json"
+          },
+          "GetLocationsWithExtendedLocations": {
+            "$ref": "./examples/GetLocationsWithExtendedLocations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/checkZonePeers/": {
+      "post": {
+        "operationId": "Subscriptions_CheckZonePeers",
+        "tags": [
+          "Subscriptions"
+        ],
+        "description": "Compares a subscriptions logical zone mapping",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckZonePeersRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CheckZonePeersResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetLogicalZoneMapping": {
+            "$ref": "./examples/PostCheckZonePeers.json"
+          }
+        }
+      }
+    },
+    "/tenants": {
+      "get": {
+        "operationId": "Tenants_List",
+        "tags": [
+          "Tenants"
+        ],
+        "description": "Gets the tenants for your account.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/TenantListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetAllTenants": {
+            "$ref": "./examples/GetTenants.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AvailabilityZoneMappings": {
+      "type": "object",
+      "description": "Availability zone mappings for the region",
+      "properties": {
+        "logicalZone": {
+          "type": "string",
+          "description": "The logical zone id for the availability zone",
+          "readOnly": true
+        },
+        "physicalZone": {
+          "type": "string",
+          "description": "The fully qualified physical zone id of availability zone to which logical zone id is mapped to",
+          "readOnly": true
+        }
+      }
+    },
+    "AvailabilityZonePeers": {
+      "type": "object",
+      "description": "List of availability zones shared by the subscriptions.",
+      "properties": {
+        "availabilityZone": {
+          "type": "string",
+          "description": "The availabilityZone.",
+          "readOnly": true
+        },
+        "peers": {
+          "type": "array",
+          "description": "Details of shared availability zone.",
+          "items": {
+            "$ref": "#/definitions/Peers"
+          },
+          "x-ms-identifiers": [
+            "availabilityZone",
+            "subscriptionId"
+          ]
+        }
+      }
+    },
+    "CheckResourceNameResult": {
+      "type": "object",
+      "description": "Resource Name valid if not a reserved word, does not contain a reserved word and does not start with a reserved word",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of Resource"
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of Resource"
+        },
+        "status": {
+          "$ref": "#/definitions/ResourceNameStatus",
+          "description": "Is the resource name Allowed or Reserved"
+        }
+      }
+    },
+    "CheckZonePeersRequest": {
+      "type": "object",
+      "description": "Check zone peers request parameters.",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The Microsoft location.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "subscriptionIds": {
+          "type": "array",
+          "description": "The peer Microsoft Azure subscription ID.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CheckZonePeersResult": {
+      "type": "object",
+      "description": "Result of the Check zone peers operation.",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "The subscription ID.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "the location of the subscription.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "availabilityZonePeers": {
+          "type": "array",
+          "description": "The Availability Zones shared by the subscriptions.",
+          "items": {
+            "$ref": "#/definitions/AvailabilityZonePeers"
+          },
+          "x-ms-identifiers": [
+            "availabilityZone"
+          ]
+        }
+      }
+    },
+    "CloudError": {
+      "type": "object",
+      "description": "An error response for a resource management request.",
+      "properties": {
+        "error": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse",
+          "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations. (This also follows the OData error response format.)."
+        }
+      },
+      "x-ms-external": true
+    },
+    "Location": {
+      "type": "object",
+      "description": "Location information.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID of the location. For example, /subscriptions/8d65815f-a5b6-402f-9298-045155da7d74/locations/westus.",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "The subscription ID.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The location name.",
+          "readOnly": true
+        },
+        "type": {
+          "$ref": "#/definitions/LocationType",
+          "description": "The location type.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the location.",
+          "readOnly": true
+        },
+        "regionalDisplayName": {
+          "type": "string",
+          "description": "The display name of the location and its region.",
+          "readOnly": true
+        },
+        "metadata": {
+          "$ref": "#/definitions/LocationMetadata",
+          "description": "Metadata of the location, such as lat/long, paired region, and others."
+        },
+        "availabilityZoneMappings": {
+          "type": "array",
+          "description": "The availability zone mappings for this region.",
+          "items": {
+            "$ref": "#/definitions/AvailabilityZoneMappings"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "LocationListResult": {
+      "type": "object",
+      "description": "Location list operation response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "An array of locations.",
+          "items": {
+            "$ref": "#/definitions/Location"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      }
+    },
+    "LocationMetadata": {
+      "type": "object",
+      "description": "Location metadata information",
+      "properties": {
+        "regionType": {
+          "$ref": "#/definitions/RegionType",
+          "description": "The type of the region.",
+          "readOnly": true
+        },
+        "regionCategory": {
+          "$ref": "#/definitions/RegionCategory",
+          "description": "The category of the region.",
+          "readOnly": true
+        },
+        "geography": {
+          "type": "string",
+          "description": "The geography of the location.",
+          "readOnly": true
+        },
+        "geographyGroup": {
+          "type": "string",
+          "description": "The geography group of the location.",
+          "readOnly": true
+        },
+        "longitude": {
+          "type": "string",
+          "description": "The longitude of the location.",
+          "readOnly": true
+        },
+        "latitude": {
+          "type": "string",
+          "description": "The latitude of the location.",
+          "readOnly": true
+        },
+        "physicalLocation": {
+          "type": "string",
+          "description": "The physical location of the Azure location.",
+          "readOnly": true
+        },
+        "pairedRegion": {
+          "type": "array",
+          "description": "The regions paired to this region.",
+          "items": {
+            "$ref": "#/definitions/PairedRegion"
+          }
+        },
+        "homeLocation": {
+          "type": "string",
+          "description": "The home location of an edge zone.",
+          "readOnly": true
+        }
+      }
+    },
+    "LocationType": {
+      "type": "string",
+      "description": "The location type.",
+      "enum": [
+        "Region",
+        "EdgeZone"
+      ],
+      "x-ms-enum": {
+        "name": "LocationType",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Region",
+            "value": "Region",
+            "description": "Region"
+          },
+          {
+            "name": "EdgeZone",
+            "value": "EdgeZone",
+            "description": "EdgeZone"
+          }
+        ]
+      }
+    },
+    "ManagedByTenant": {
+      "type": "object",
+      "description": "Information about a tenant managing the subscription.",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID of the managing tenant. This is a GUID.",
+          "readOnly": true
+        }
+      }
+    },
+    "PairedRegion": {
+      "type": "object",
+      "description": "Information regarding paired region.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the paired region.",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID of the location. For example, /subscriptions/8d65815f-a5b6-402f-9298-045155da7d74/locations/westus.",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "The subscription ID.",
+          "readOnly": true
+        }
+      }
+    },
+    "Peers": {
+      "type": "object",
+      "description": "Information about shared availability zone.",
+      "properties": {
+        "subscriptionId": {
+          "type": "string",
+          "description": "The subscription ID.",
+          "readOnly": true
+        },
+        "availabilityZone": {
+          "type": "string",
+          "description": "The availabilityZone.",
+          "readOnly": true
+        }
+      }
+    },
+    "RegionCategory": {
+      "type": "string",
+      "description": "The category of the region.",
+      "enum": [
+        "Recommended",
+        "Extended",
+        "Other"
+      ],
+      "x-ms-enum": {
+        "name": "RegionCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Recommended",
+            "value": "Recommended",
+            "description": "Recommended"
+          },
+          {
+            "name": "Extended",
+            "value": "Extended",
+            "description": "Extended"
+          },
+          {
+            "name": "Other",
+            "value": "Other",
+            "description": "Other"
+          }
+        ]
+      }
+    },
+    "RegionType": {
+      "type": "string",
+      "description": "The type of the region.",
+      "enum": [
+        "Physical",
+        "Logical"
+      ],
+      "x-ms-enum": {
+        "name": "RegionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Physical",
+            "value": "Physical",
+            "description": "Physical"
+          },
+          {
+            "name": "Logical",
+            "value": "Logical",
+            "description": "Logical"
+          }
+        ]
+      }
+    },
+    "ResourceName": {
+      "type": "object",
+      "description": "Name and Type of the Resource",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the resource"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource"
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "ResourceNameStatus": {
+      "type": "string",
+      "description": "Is the resource name Allowed or Reserved",
+      "enum": [
+        "Allowed",
+        "Reserved"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceNameStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Allowed",
+            "value": "Allowed",
+            "description": "Allowed"
+          },
+          {
+            "name": "Reserved",
+            "value": "Reserved",
+            "description": "Reserved"
+          }
+        ]
+      }
+    },
+    "SpendingLimit": {
+      "type": "string",
+      "description": "The subscription spending limit.",
+      "enum": [
+        "On",
+        "Off",
+        "CurrentPeriodOff"
+      ],
+      "x-ms-enum": {
+        "name": "SpendingLimit",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "On",
+            "value": "On",
+            "description": "On"
+          },
+          {
+            "name": "Off",
+            "value": "Off",
+            "description": "Off"
+          },
+          {
+            "name": "CurrentPeriodOff",
+            "value": "CurrentPeriodOff",
+            "description": "CurrentPeriodOff"
+          }
+        ]
+      }
+    },
+    "Subscription": {
+      "type": "object",
+      "description": "Subscription information.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID for the subscription. For example, /subscriptions/8d65815f-a5b6-402f-9298-045155da7d74",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "The subscription ID.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The subscription display name.",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The subscription tenant ID.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/SubscriptionState",
+          "description": "The subscription state. Possible values are Enabled, Warned, PastDue, Disabled, and Deleted.",
+          "readOnly": true
+        },
+        "subscriptionPolicies": {
+          "$ref": "#/definitions/SubscriptionPolicies",
+          "description": "The subscription policies."
+        },
+        "authorizationSource": {
+          "type": "string",
+          "description": "The authorization source of the request. Valid values are one or more combinations of Legacy, RoleBased, Bypassed, Direct and Management. For example, 'Legacy, RoleBased'."
+        },
+        "managedByTenants": {
+          "type": "array",
+          "description": "An array containing the tenants managing the subscription.",
+          "items": {
+            "$ref": "#/definitions/ManagedByTenant"
+          },
+          "x-ms-identifiers": [
+            "tenantId"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "The tags attached to the subscription.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SubscriptionListResult": {
+      "type": "object",
+      "description": "Subscription list operation response.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Subscription items on this page",
+          "items": {
+            "$ref": "#/definitions/Subscription"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SubscriptionPolicies": {
+      "type": "object",
+      "description": "Subscription policies.",
+      "properties": {
+        "locationPlacementId": {
+          "type": "string",
+          "description": "The subscription location placement ID. The ID indicates which regions are visible for a subscription. For example, a subscription with a location placement Id of Public_2014-09-01 has access to Azure public regions.",
+          "readOnly": true
+        },
+        "quotaId": {
+          "type": "string",
+          "description": "The subscription quota ID.",
+          "readOnly": true
+        },
+        "spendingLimit": {
+          "$ref": "#/definitions/SpendingLimit",
+          "description": "The subscription spending limit.",
+          "readOnly": true
+        }
+      }
+    },
+    "SubscriptionState": {
+      "type": "string",
+      "description": "The subscription state. Possible values are Enabled, Warned, PastDue, Disabled, and Deleted.",
+      "enum": [
+        "Enabled",
+        "Warned",
+        "PastDue",
+        "Disabled",
+        "Deleted"
+      ],
+      "x-ms-enum": {
+        "name": "SubscriptionState",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Enabled"
+          },
+          {
+            "name": "Warned",
+            "value": "Warned",
+            "description": "Warned"
+          },
+          {
+            "name": "PastDue",
+            "value": "PastDue",
+            "description": "PastDue"
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Disabled"
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted",
+            "description": "Deleted"
+          }
+        ]
+      }
+    },
+    "TenantCategory": {
+      "type": "string",
+      "description": "Category of the tenant.",
+      "enum": [
+        "Home",
+        "ProjectedBy",
+        "ManagedBy"
+      ],
+      "x-ms-enum": {
+        "name": "TenantCategory",
+        "modelAsString": false,
+        "values": [
+          {
+            "name": "Home",
+            "value": "Home",
+            "description": "Home"
+          },
+          {
+            "name": "ProjectedBy",
+            "value": "ProjectedBy",
+            "description": "ProjectedBy"
+          },
+          {
+            "name": "ManagedBy",
+            "value": "ManagedBy",
+            "description": "ManagedBy"
+          }
+        ]
+      }
+    },
+    "TenantIdDescription": {
+      "type": "object",
+      "description": "Tenant Id information.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The fully qualified ID of the tenant. For example, /tenants/8d65815f-a5b6-402f-9298-045155da7d74",
+          "readOnly": true
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The tenant ID. For example, 8d65815f-a5b6-402f-9298-045155da7d74",
+          "readOnly": true
+        },
+        "tenantCategory": {
+          "$ref": "#/definitions/TenantCategory",
+          "description": "Category of the tenant.",
+          "readOnly": true
+        },
+        "country": {
+          "type": "string",
+          "description": "Country/region name of the address for the tenant.",
+          "readOnly": true
+        },
+        "countryCode": {
+          "type": "string",
+          "description": "Country/region abbreviation for the tenant.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the tenant.",
+          "readOnly": true
+        },
+        "domains": {
+          "type": "array",
+          "description": "The list of domains for the tenant.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "defaultDomain": {
+          "type": "string",
+          "description": "The default domain for the tenant.",
+          "readOnly": true
+        },
+        "tenantType": {
+          "type": "string",
+          "description": "The tenant type. Only available for 'Home' tenant category.",
+          "readOnly": true
+        },
+        "tenantBrandingLogoUrl": {
+          "type": "string",
+          "description": "The tenant's branding logo URL. Only available for 'Home' tenant category.",
+          "readOnly": true
+        }
+      }
+    },
+    "TenantListResult": {
+      "type": "object",
+      "description": "Tenant Ids information.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The TenantIdDescription items on this page",
+          "items": {
+            "$ref": "#/definitions/TenantIdDescription"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    }
+  },
+  "parameters": {}
+}

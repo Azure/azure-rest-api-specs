@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2024-07-01",
+    "body": {
+      "searchFilters": {
+        "crn_pattern": "crn://confluent.cloud/organization=1aa7de07-298e-479c-8f2f-16ac91fd8e76",
+        "namespace": "public,dataplane,networking,identity,datagovernance,connect,streamcatalog,pipelines,ksql"
+      }
+    },
+    "organizationName": "myOrganization",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "data": [
+          "MetricsViewer",
+          "OrganizationAdmin",
+          "Operator",
+          "NetworkAdmin",
+          "ResourceKeyAdmin",
+          "AccountAdmin"
+        ],
+        "kind": "RoleDisplayNameList",
+        "metadata": {
+          "first": "https://api.confluent.cloud/iam/v2/role-bindings",
+          "last": "https://api.confluent.cloud/iam/v2/role-bindings?page_token=bcAOehAY8F16YD84Z1wT",
+          "next": "https://api.confluent.cloud/iam/v2/role-bindings?page_token=UvmDWOB1iwfAIBPj6EYb",
+          "prev": "https://api.confluent.cloud/iam/v2/role-bindings?page_token=YIXRY97wWYmwzrax4dld",
+          "total_size": 123
+        }
+      }
+    }
+  },
+  "operationId": "Access_ListRoleBindingNameList",
+  "title": "Access_RoleBindingNameList"
+}

@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2025-07-15-preview",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "8f6b6269-84f2-4d09-9e31-1127efcd1e40",
+    "topicName": "exampletopic2"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "exampletopic2",
+        "type": "Microsoft.EventGrid/topics",
+        "id": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampletopic2",
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/azureeventgridrunnerrgcentraluseuap/providers/Microsoft.ManagedIdentity/userAssignedIdentities/user-assigned-id": {
+              "clientId": "11af827c-d951-4766-9c41-15565fa13157",
+              "principalId": "a5435982-c82d-453b-b244-3115b7c8789c"
+            }
+          }
+        },
+        "location": "westcentralus",
+        "properties": {
+          "encryption": {
+            "customerManagedKeyEncryption": [
+              {
+                "keyEncryptionKeyIdentity": {
+                  "type": "UserAssigned",
+                  "userAssignedIdentityResourceId": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/azureeventgridrunnerrgcentraluseuap/providers/Microsoft.ManagedIdentity/userAssignedIdentities/user-assigned-id"
+                },
+                "keyEncryptionKeyStatus": "Active",
+                "keyEncryptionKeyStatusFriendlyDescription": "Customer Managed Key (CMK) Encryption is 'Active' and running normally.",
+                "keyEncryptionKeyUrl": "https://ege2ekeyvault.vault.azure.net/keys/ValidKey1"
+              }
+            ]
+          },
+          "endpoint": "https://exampletopic2.westcentralus-1.eventgrid.azure.net/api/events",
+          "platformCapabilities": {
+            "confidentialCompute": {
+              "mode": "Enabled"
+            }
+          },
+          "provisioningState": "Succeeded"
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        }
+      }
+    }
+  },
+  "operationId": "Topics_Get",
+  "title": "Topics_Get"
+}

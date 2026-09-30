@@ -1,0 +1,76 @@
+{
+  "parameters": {
+    "api-version": "2025-12-01-preview",
+    "arcSetting": {
+      "properties": {
+        "connectivityProperties": {
+          "enabled": true,
+          "serviceConfigurations": [
+            {
+              "port": 6516,
+              "serviceName": "WAC"
+            }
+          ]
+        }
+      }
+    },
+    "arcSettingName": "default",
+    "clusterName": "myCluster",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.AzureStackHCI/clusters/arcSettings",
+        "id": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/test-rg/providers/Microsoft.AzureStackHCI/clusters/myCluster/arcSettings/default",
+        "properties": {
+          "aggregateState": "Creating",
+          "arcInstanceResourceGroup": "ArcInstance-rg",
+          "connectivityProperties": {
+            "enabled": true,
+            "serviceConfigurations": [
+              {
+                "port": 6516,
+                "serviceName": "WAC"
+              }
+            ]
+          },
+          "defaultExtensions": [
+            {
+              "category": "Telemetry",
+              "consentTime": "2023-01-01T17:18:19.1234567Z"
+            },
+            {
+              "category": "Supportability",
+              "consentTime": null
+            }
+          ],
+          "perNodeDetails": [
+            {
+              "name": "Node-1",
+              "arcInstance": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-1",
+              "state": "Creating"
+            },
+            {
+              "name": "Node-2",
+              "arcInstance": "/subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-2",
+              "state": "Creating"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "systemData": {
+          "createdAt": "2021-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "ArcSettings_Update",
+  "title": "Patch ArcSetting"
+}

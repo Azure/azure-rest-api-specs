@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "name": "testStaticSite0",
+    "api-version": "2025-05-01",
+    "resourceGroupName": "rg",
+    "staticSiteUserRolesInvitationEnvelope": {
+      "properties": {
+        "domain": "happy-sea-15afae3e.azurestaticwebsites.net",
+        "numHoursToExpiration": 1,
+        "provider": "aad",
+        "roles": "admin,contributor",
+        "userDetails": "username"
+      }
+    },
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "expiresOn": "2020-02-28T16:53:56.211Z",
+          "invitationUrl": "https://happy-sea-15afae3e.azurestaticwebsites.net?invite=asdf"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "StaticSites_CreateUserRolesInvitationLink",
+  "title": "Create an invitation link for a user for a static site"
+}

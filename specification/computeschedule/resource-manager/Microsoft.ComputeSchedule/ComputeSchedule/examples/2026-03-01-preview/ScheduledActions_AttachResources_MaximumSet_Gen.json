@@ -1,0 +1,47 @@
+{
+  "title": "ScheduledActions_AttachResources_MaximumSet",
+  "operationId": "ScheduledActions_AttachResources",
+  "parameters": {
+    "api-version": "2026-03-01-preview",
+    "subscriptionId": "732116BD-AF31-4E74-9283-B387C44B4A44",
+    "resourceGroupName": "rgcomputeschedule",
+    "scheduledActionName": "scheduled-action-01",
+    "body": {
+      "resources": [
+        {
+          "resourceId": "/subscriptions/1d04e8f1-ee04-4056-b0b2-718f5bb45b04/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/myVm",
+          "notificationSettings": [
+            {
+              "destination": "zaaoabozbhyuhejwsrennfsxowp",
+              "type": "Email",
+              "language": "en-us",
+              "disabled": true
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "totalResources": 4,
+        "resourcesStatuses": [
+          {
+            "resourceId": "/subscriptions/1d04e8f1-ee04-4056-b0b2-718f5bb45b04/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/myVm",
+            "status": "Succeeded",
+            "error": {
+              "code": "ewhmaevjwwzq",
+              "message": "sjdmnsfomnqhjzgjbdfxtcgfqo",
+              "target": "dtpqtljrtdukatlcsafxarelkkfv",
+              "details": [],
+              "innererror": {
+                "code": "mfwkrowlbvalcyreeq"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

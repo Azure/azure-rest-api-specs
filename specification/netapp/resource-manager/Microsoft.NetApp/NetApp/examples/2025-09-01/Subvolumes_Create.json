@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "accountName": "account1",
+    "api-version": "2025-09-01",
+    "body": {
+      "properties": {
+        "path": "/subvolumePath"
+      }
+    },
+    "poolName": "pool1",
+    "resourceGroupName": "myRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "subvolumeName": "subvolume1",
+    "volumeName": "volume1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "account1/pool1/volume1/subvolume1",
+        "type": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/subvolumes",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1/volumes/volume1/subvolumes/subvolume1",
+        "properties": {
+          "path": "/subvolumePath",
+          "provisioningState": "Succeeded",
+          "size": 0
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "account1/pool1/volume1/subvolume1",
+        "type": "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/subvolumes",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account1/capacityPools/pool1/volumes/volume1/subvolumes/subvolume1",
+        "properties": {
+          "path": "/subvolumePath",
+          "provisioningState": "Creating"
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "Subvolumes_Create",
+  "title": "Subvolumes_Create"
+}

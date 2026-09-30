@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myRG",
+    "accountName": "account1",
+    "poolName": "pool1",
+    "volumeName": "volume1",
+    "api-version": "2025-12-01",
+    "body": {
+      "exclude": "None"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "replicationSchedule": "daily",
+            "remoteVolumeResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/netAppAccounts/account-5999/capacityPools/pool-0977/volumes/volume-4508",
+            "remoteVolumeRegion": "westus",
+            "mirrorState": "Mirrored",
+            "replicationCreationTime": "2017-08-15T13:23:33Z",
+            "replicationDeletionTime": "2017-08-16T13:23:33Z"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Volumes_ListReplications",
+  "title": "Volumes_ListReplications"
+}

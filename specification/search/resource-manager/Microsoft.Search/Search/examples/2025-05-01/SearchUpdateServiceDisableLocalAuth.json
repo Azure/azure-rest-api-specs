@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "resourceGroupName": "rg1",
+    "searchServiceName": "mysearchservice",
+    "service": {
+      "properties": {
+        "disableLocalAuth": true,
+        "replicaCount": 2
+      },
+      "tags": {
+        "app-name": "My e-commerce app",
+        "new-tag": "Adding a new tag"
+      }
+    },
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "mysearchservice",
+        "type": "Microsoft.Search/searchServices",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice",
+        "location": "westus",
+        "properties": {
+          "authOptions": null,
+          "computeType": "Default",
+          "dataExfiltrationProtections": [],
+          "disableLocalAuth": true,
+          "encryptionWithCmk": {
+            "encryptionComplianceStatus": "Compliant",
+            "enforcement": "Unspecified"
+          },
+          "endpoint": "https://mysearchservice.search.windows.net/",
+          "hostingMode": "Default",
+          "networkRuleSet": {
+            "bypass": "None",
+            "ipRules": []
+          },
+          "partitionCount": 1,
+          "privateEndpointConnections": [],
+          "provisioningState": "provisioning",
+          "publicNetworkAccess": "Enabled",
+          "replicaCount": 2,
+          "serviceUpgradedAt": null,
+          "sharedPrivateLinkResources": [],
+          "status": "provisioning",
+          "statusDetails": "",
+          "upgradeAvailable": "notAvailable"
+        },
+        "sku": {
+          "name": "standard"
+        },
+        "systemData": {
+          "createdAt": "2024-01-01T00:00:00Z",
+          "createdBy": "My e-commerce app",
+          "createdByType": "Application",
+          "lastModifiedAt": "2024-11-01T00:00:00Z",
+          "lastModifiedBy": "fakeuser@contoso.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "app-name": "My e-commerce app",
+          "new-tag": "Adding a new tag"
+        }
+      }
+    }
+  },
+  "operationId": "Services_Update",
+  "title": "SearchUpdateServiceDisableLocalAuth"
+}

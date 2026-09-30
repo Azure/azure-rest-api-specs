@@ -1,0 +1,46 @@
+{
+  "operationId": "Resources",
+  "description": "A simple tenant scoped resources query.",
+  "parameters": {
+    "api-version": "2024-04-01",
+    "query": {
+      "query": "Resources | project id, name, type, location, tags | limit 3"
+    }
+  },
+  "title": "Basic tenant query",
+  "responses": {
+    "200": {
+      "body": {
+        "count": 3,
+        "data": [
+          {
+            "name": "myNetworkInterface",
+            "type": "microsoft.network/networkinterfaces",
+            "id": "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG1/providers/Microsoft.Network/networkInterfaces/myNetworkInterface",
+            "location": "centralus",
+            "tags": {
+              "tag1": "Value1"
+            }
+          },
+          {
+            "name": "myVnet",
+            "type": "microsoft.network/virtualnetworks",
+            "id": "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG2/providers/Microsoft.Network/virtualNetworks/myVnet",
+            "location": "westus",
+            "tags": {}
+          },
+          {
+            "name": "myPublicIp",
+            "type": "microsoft.network/publicipaddresses",
+            "id": "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG2/providers/Microsoft.Network/publicIPAddresses/myPublicIp",
+            "location": "westus",
+            "tags": {}
+          }
+        ],
+        "facets": [],
+        "resultTruncated": "false",
+        "totalRecords": 3
+      }
+    }
+  }
+}

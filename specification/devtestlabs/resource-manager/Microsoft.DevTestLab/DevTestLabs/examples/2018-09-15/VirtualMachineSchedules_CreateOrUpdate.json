@@ -1,0 +1,127 @@
+{
+  "parameters": {
+    "name": "LabVmsShutdown",
+    "api-version": "2018-09-15",
+    "labName": "{labName}",
+    "resourceGroupName": "resourceGroupName",
+    "schedule": {
+      "location": "{location}",
+      "properties": {
+        "dailyRecurrence": {
+          "time": "1900"
+        },
+        "hourlyRecurrence": {
+          "minute": 30
+        },
+        "notificationSettings": {
+          "emailRecipient": "{email}",
+          "notificationLocale": "EN",
+          "status": "Enabled",
+          "timeInMinutes": 30,
+          "webhookUrl": "{webhookUrl}"
+        },
+        "status": "Enabled",
+        "targetResourceId": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualMachines/{vmName}",
+        "taskType": "LabVmsShutdownTask",
+        "timeZoneId": "Pacific Standard Time",
+        "weeklyRecurrence": {
+          "time": "1700",
+          "weekdays": [
+            "Friday",
+            "Saturday",
+            "Sunday"
+          ]
+        }
+      },
+      "tags": {
+        "tagName1": "tagValue1"
+      }
+    },
+    "subscriptionId": "{subscriptionId}",
+    "virtualMachineName": "{vmName}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "LabVmsShutdown",
+        "type": "Microsoft.DevTestLab/labs/virtualMachines/schedules",
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualMachines/{vmName}/schedules/LabVmsShutdown",
+        "location": "{location}",
+        "properties": {
+          "createdDate": "2020-12-31T18:40:48.1739018-07:00",
+          "dailyRecurrence": {
+            "time": "1900"
+          },
+          "hourlyRecurrence": {
+            "minute": 30
+          },
+          "notificationSettings": {
+            "emailRecipient": "{email}",
+            "notificationLocale": "EN",
+            "status": "Enabled",
+            "timeInMinutes": 30,
+            "webhookUrl": "{webhookUrl}"
+          },
+          "provisioningState": "Created",
+          "status": "Enabled",
+          "targetResourceId": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualMachines/{vmName}",
+          "taskType": "LabVmsShutdownTask",
+          "timeZoneId": "Pacific Standard Time",
+          "weeklyRecurrence": {
+            "time": "1700",
+            "weekdays": [
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ]
+          }
+        },
+        "tags": {
+          "tagName1": "tagValue1"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "LabVmsShutdown",
+        "type": "Microsoft.DevTestLab/labs/virtualMachines/schedules",
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualMachines/{vmName}/schedules/LabVmsShutdown",
+        "location": "{location}",
+        "properties": {
+          "createdDate": "2020-12-31T18:40:48.1739018-07:00",
+          "dailyRecurrence": {
+            "time": "1900"
+          },
+          "hourlyRecurrence": {
+            "minute": 30
+          },
+          "notificationSettings": {
+            "emailRecipient": "{email}",
+            "notificationLocale": "EN",
+            "status": "Enabled",
+            "timeInMinutes": 30,
+            "webhookUrl": "{webhookUrl}"
+          },
+          "provisioningState": "Created",
+          "status": "Enabled",
+          "targetResourceId": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualMachines/{vmName}",
+          "taskType": "LabVmsShutdownTask",
+          "timeZoneId": "Pacific Standard Time",
+          "weeklyRecurrence": {
+            "time": "1700",
+            "weekdays": [
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ]
+          }
+        },
+        "tags": {
+          "tagName1": "tagValue1"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualMachineSchedules_CreateOrUpdate",
+  "title": "VirtualMachineSchedules_CreateOrUpdate"
+}

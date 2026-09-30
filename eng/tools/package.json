@@ -1,16 +1,26 @@
 {
   "name": "azure-rest-api-specs-eng-tools",
+  "private": true,
+  "type": "module",
   "devDependencies": {
-    "@azure-tools/specs-model": "file:specs-model",
-    "@azure-tools/suppressions": "file:suppressions",
-    "@azure-tools/tsp-client-tests": "file:tsp-client-tests",
-    "@azure-tools/typespec-requirement": "file:typespec-requirement",
-    "@azure-tools/typespec-validation": "file:typespec-validation",
-    "@azure-tools/sdk-suppressions": "file:sdk-suppressions"
+    "@azure-tools/lint-diff": "workspace:*",
+    "@azure-tools/oav-runner": "workspace:*",
+    "@azure-tools/release-plan": "workspace:*",
+    "@azure-tools/sdk-suppressions": "workspace:*",
+    "@azure-tools/openapi-diff-runner": "workspace:*",
+    "@azure-tools/spec-gen-sdk-runner": "workspace:*",
+    "@azure-tools/specs-shared": "workspace:*",
+    "@azure-tools/suppressions": "workspace:*",
+    "@azure-tools/tsp-client-tests": "workspace:*",
+    "@azure-tools/typespec-migration-validation": "workspace:*",
+    "@azure-tools/typespec-requirement": "workspace:*",
+    "@azure-tools/typespec-suppressions": "workspace:*",
+    "@azure-tools/typespec-validation": "workspace:*",
+    "@azure-tools/summarize-impact": "workspace:*",
+    "@types/node": "catalog:"
   },
   "scripts": {
-    "build": "tsc --build",
-    "postinstall": "npm run build"
+    "build": "tsc --noEmit"
   },
-  "private": true
+  "version": "0.0.0"
 }

@@ -1,0 +1,90 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01",
+    "scope": "providers/Microsoft.Billing/BillingAccounts/1234:56789/billingProfiles/2468"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "usageDetails_Id1",
+            "type": "Microsoft.Consumption/usageDetails",
+            "id": "/providers/Microsoft.Billing/BillingAccounts/1234:56789/billingProfiles/2468/providers/Microsoft.Consumption/usageDetails/usageDetails_Id1",
+            "kind": "modern",
+            "properties": {
+              "additionalInfo": "{  \"UsageType\": \"ComputeHR\",  \"ImageType\": \"Windows Client BYOL\",  \"ServiceType\": \"Standard_D1\",  \"VMName\": null,  \"VMProperties\": null,  \"VCPUs\": 1,  \"CPUs\": 0}",
+              "benefitId": "00000000-0000-0000-0000-000000000000",
+              "benefitName": "Reservation_purchase_03-09-2018_10-59",
+              "billingAccountId": "1234:56789",
+              "billingAccountName": "Account Name 1",
+              "billingCurrencyCode": "USD",
+              "billingPeriodEndDate": "2019-10-31T00:00:00.0000000Z",
+              "billingPeriodStartDate": "2019-09-01T00:00:00.0000000Z",
+              "billingProfileId": "2468",
+              "billingProfileName": "Account Name 1",
+              "chargeType": "Usage",
+              "consumedService": "Microsoft.Storage",
+              "costCenter": "DEV",
+              "costInBillingCurrency": 1.84763819095477,
+              "costInPricingCurrency": 1.84763819095477,
+              "costInUSD": 1.84763819095477,
+              "customerName": "Modern Azure Customer 1",
+              "customerTenantId": "00000000-0000-0000-0000-000000000000",
+              "date": "2019-10-30T00:00:00.0000000Z",
+              "exchangeRate": "1",
+              "exchangeRateDate": "2019-09-30T00:00:00Z",
+              "exchangeRatePricingToBilling": 0.077,
+              "frequency": "UsageBased",
+              "instanceName": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/Resource Group 1/providers/Microsoft.Storage/storageAccounts/Resource Name 1",
+              "invoiceId": "",
+              "invoiceSectionId": "98765",
+              "invoiceSectionName": "Invoice Section 1",
+              "isAzureCreditEligible": false,
+              "marketPrice": 0.077,
+              "meterId": "00000000-0000-0000-0000-000000000000",
+              "partnerEarnedCreditApplied": "0",
+              "partnerEarnedCreditRate": 0.077,
+              "partnerName": "Partner Name 1",
+              "partnerTenantId": "00000000-0000-0000-0000-000000000000",
+              "paygCostInBillingCurrency": 1.848,
+              "paygCostInUSD": 1.848,
+              "previousInvoiceId": "",
+              "pricingCurrencyCode": "USD",
+              "product": "Virtual Machines D Series - D1 - US East",
+              "productIdentifier": "DZH318Z0BQ4B00FV",
+              "productOrderId": "a3db7880-70eb-4b4c-6a79-1425a058df5a",
+              "productOrderName": "Azure plan",
+              "publisherId": "",
+              "publisherName": "Microsoft",
+              "publisherType": "Microsoft",
+              "quantity": 0.7329,
+              "resellerMpnId": "",
+              "resellerName": "Reseller Name 1",
+              "reservationId": "",
+              "reservationName": "",
+              "resourceGroup": "Resource Group 1",
+              "resourceLocation": "USEast",
+              "resourceLocationNormalized": "US East",
+              "serviceInfo1": "",
+              "serviceInfo2": "Windows Client BYOL",
+              "servicePeriodEndDate": "2019-12-01T00:00:00Z",
+              "servicePeriodStartDate": "2019-09-01T00:00:00Z",
+              "subscriptionGuid": "00000000-0000-0000-0000-000000000000",
+              "subscriptionName": "Subscription Name 1",
+              "term": "",
+              "unitPrice": 4.38
+            },
+            "tags": {
+              "dev": "tools",
+              "env": "newcrp"
+            }
+          }
+        ]
+      }
+    },
+    "204": {}
+  },
+  "operationId": "UsageDetails_List",
+  "title": "BillingProfileUsageDetailsList-Modern"
+}

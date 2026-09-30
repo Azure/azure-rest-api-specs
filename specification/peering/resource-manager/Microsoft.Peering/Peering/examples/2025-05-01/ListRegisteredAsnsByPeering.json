@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "peeringName": "peeringName",
+    "resourceGroupName": "rgName",
+    "subscriptionId": "subId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "registeredAsnName0",
+            "type": "Microsoft.Peering/registeredAsns",
+            "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peerings/peeringName/registeredAsns/registeredAsnName0",
+            "properties": {
+              "asn": 65000,
+              "peeringServicePrefixKey": "00000000-0000-0000-0000-000000000000",
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "name": "registeredAsnName1",
+            "type": "Microsoft.Peering/registeredAsns",
+            "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peerings/peeringName/registeredAsns/registeredAsnName1",
+            "properties": {
+              "asn": 65001,
+              "provisioningState": "Failed"
+            }
+          },
+          {
+            "name": "registeredAsnName2",
+            "type": "Microsoft.Peering/registeredAsns",
+            "id": "/subscriptions/subId/resourceGroups/rgName/providers/Microsoft.Peering/peerings/peeringName/registeredAsns/registeredAsnName2",
+            "properties": {
+              "asn": 65002,
+              "peeringServicePrefixKey": "00000000-0000-0000-0000-000000000000",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "RegisteredAsns_ListByPeering",
+  "title": "List all the registered ASNs associated with the peering"
+}

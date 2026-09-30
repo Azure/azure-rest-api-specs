@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "$filter": "PolicyAssignmentId eq '/subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/resourceGroups/myResourceGroup/providers/Microsoft.Authorization/policyAssignments/myPolicyAssignment' AND TrackedResourceId eq '/subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/resourceGroups/myResourceGroup/providers/Microsoft.Example/exampleResourceType/myResource/nestedResourceType/TrackedResource1'",
+    "$top": 1,
+    "api-version": "2018-07-01-preview",
+    "policyTrackedResourcesResource": "default",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "fffedd8f-ffff-fffd-fffd-fffed2f84852"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "createdBy": {
+              "deploymentId": "/subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/resourceGroups/myResourceGroup/providers/Microsoft.Resources/deployments/deploymentName",
+              "deploymentTime": "2018-03-09T00:00:00.0000000Z",
+              "policyDetails": {
+                "policyAssignmentId": "/subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/resourceGroups/myResourceGroup/providers/Microsoft.Authorization/policyAssignments/createdByPolicyAssignment",
+                "policyAssignmentScope": "/subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/",
+                "policyDefinitionId": "/subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/resourceGroups/myResourceGroup/providers/Microsoft.Authorization/policyDefinitions/createdByPolicyDefinition"
+              }
+            },
+            "lastModifiedBy": {
+              "deploymentId": "/subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/resourceGroups/myResourceGroup/providers/Microsoft.Resources/deployments/deploymentName",
+              "deploymentTime": "2018-04-09T00:00:00.0000000Z",
+              "policyDetails": {
+                "policyAssignmentId": "/subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/resourceGroups/myResourceGroup/providers/Microsoft.Authorization/policyAssignments/lastModifiedByPolicyAssignment",
+                "policyAssignmentScope": "/subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/",
+                "policyDefinitionId": "/subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/resourceGroups/myResourceGroup/providers/Microsoft.Authorization/policyDefinitions/lastModifiedByPolicyDefinition"
+              }
+            },
+            "lastUpdateUtc": "2018-08-09T20:40:17.3585243Z",
+            "policyDetails": {
+              "policyAssignmentDisplayName": "My Policy Assignment 1 Display name",
+              "policyAssignmentId": "/subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/resourceGroups/myResourceGroup/providers/Microsoft.Authorization/policyAssignments/myPolicyAssignment1",
+              "policyAssignmentScope": "/subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/resourceGroups/myResourceGroup/",
+              "policyDefinitionId": "/subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/resourceGroups/myResourceGroup/providers/Microsoft.Authorization/policyDefinitions/myPolicyDefinition1",
+              "policyDefinitionReferenceId": "123ABC",
+              "policySetDefinitionId": "/subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/providers/Microsoft.Authorization/policySetDefinitions/mySetDefinition"
+            },
+            "trackedResourceId": "/subscriptions/fff8dfdb-fff3-fff0-fff4-fffdcbe6b2ef/resourceGroups/myResourceGroup/providers/Microsoft.Example/exampleResourceType/myResource/nestedResourceType/TrackedResource1"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PolicyTrackedResources_ListQueryResultsForResourceGroup",
+  "title": "Query at resource group scope using query parameters"
+}

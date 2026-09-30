@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "$apply": "groupby((PolicyAssignmentId, PolicyDefinitionId, PolicyDefinitionAction, ResourceId))",
+    "$filter": "IsCompliant eq false and (PolicyDefinitionAction ne 'audit' and PolicyDefinitionAction ne 'append')",
+    "$from": "2019-10-05T18:00:00Z",
+    "$top": 2,
+    "api-version": "2024-10-01",
+    "policyStatesResource": "latest",
+    "subscriptionId": "fffedd8f-ffff-fffd-fffd-fffed2f84852"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@odata.context": "https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest",
+        "@odata.count": 2,
+        "value": [
+          {
+            "@odata.context": "https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity",
+            "@odata.id": null,
+            "policyAssignmentId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policyassignments/enable monitoring in azure security center",
+            "policyDefinitionAction": "auditifnotexists",
+            "policyDefinitionId": "/providers/microsoft.authorization/policydefinitions/44452482-524f-4bf4-b852-0bff7cc4a3ed",
+            "resourceId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourcegroups/myrg/providers/microsoft.network/virtualnetworks/vnet"
+          },
+          {
+            "@odata.context": "https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity",
+            "@odata.id": null,
+            "policyAssignmentId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/microsoft.authorization/policyassignments/89b27f38-e9e4-4468-ab81-801c84b8c017",
+            "policyDefinitionAction": "auditifnotexists",
+            "policyDefinitionId": "/providers/microsoft.authorization/policydefinitions/44452482-524f-4bf4-b852-0bff7cc4a3ed",
+            "resourceId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourcegroups/myrg/providers/microsoft.network/virtualnetworks/vnet"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PolicyStates_ListQueryResultsForSubscription",
+  "title": "Filter and group without aggregate"
+}

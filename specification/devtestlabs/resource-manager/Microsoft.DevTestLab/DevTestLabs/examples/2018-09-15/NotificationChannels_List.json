@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "api-version": "2018-09-15",
+    "labName": "{labName}",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "autoshutdown",
+            "type": "Microsoft.DevTestLab/labs/notificationChannels",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.DevTestLab/labs/{labName}/notificationChannels/{notificationChannelName}",
+            "location": "{location}",
+            "properties": {
+              "description": "Integration configured for auto-shutdown",
+              "createdDate": "2021-01-05T02:12:10.6566371+00:00",
+              "emailRecipient": "{email}",
+              "events": [
+                {
+                  "eventName": "AutoShutdown"
+                }
+              ],
+              "notificationLocale": "en",
+              "provisioningState": "Succeeded",
+              "uniqueIdentifier": "{uniqueIdentifier}",
+              "webHookUrl": "{webhookUrl}"
+            },
+            "tags": {
+              "tagName1": "tagValue1"
+            }
+          },
+          {
+            "name": "costThreshold",
+            "type": "Microsoft.DevTestLab/labs/notificationChannels",
+            "id": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.DevTestLab/labs/{labName}/notificationChannels/{notificationChannelName}",
+            "location": "{location}",
+            "properties": {
+              "description": "Integration configured for cost",
+              "createdDate": "2021-01-05T02:14:05.2392034+00:00",
+              "events": [
+                {
+                  "eventName": "Cost"
+                }
+              ],
+              "notificationLocale": "en",
+              "provisioningState": "Succeeded",
+              "uniqueIdentifier": "{uniqueIdentifier}",
+              "webHookUrl": "{webhookUrl}"
+            },
+            "tags": {
+              "tagName1": "tagValue1"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "NotificationChannels_List",
+  "title": "NotificationChannels_List"
+}

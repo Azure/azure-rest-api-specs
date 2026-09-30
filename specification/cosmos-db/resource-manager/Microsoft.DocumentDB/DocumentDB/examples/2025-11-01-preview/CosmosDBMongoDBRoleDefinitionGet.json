@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "accountName": "myAccountName",
+    "api-version": "2025-11-01-preview",
+    "databaseName": "sales",
+    "mongoRoleDefinitionId": "myMongoRoleDefinitionId",
+    "resourceGroupName": "myResourceGroupName",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myMongoRoleDefinitionId",
+        "type": "Microsoft.DocumentDB/databaseAccounts/mongodbRoleDefinitions",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/mongodbRoleDefinitions/myMongoDbRoleDefinitionId",
+        "properties": {
+          "type": "CustomRole",
+          "databaseName": "sales",
+          "privileges": [
+            {
+              "actions": [
+                "find",
+                "insert"
+              ],
+              "resource": {
+                "collection": "coll",
+                "db": "sales"
+              }
+            }
+          ],
+          "roleName": "myRoleName",
+          "roles": [
+            {
+              "db": "sales",
+              "role": "myReadRole"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "MongoDBResources_GetMongoRoleDefinition",
+  "title": "CosmosDBMongoRoleDefinitionGet"
+}

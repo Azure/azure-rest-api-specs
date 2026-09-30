@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "accountName": "ddb1",
+    "api-version": "2025-11-01-preview",
+    "createUpdateSqlDatabaseParameters": {
+      "location": "West US",
+      "properties": {
+        "options": {},
+        "resource": {
+          "createMode": "Restore",
+          "id": "databaseName",
+          "restoreParameters": {
+            "restoreSource": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.DocumentDB/locations/WestUS/restorableDatabaseAccounts/restorableDatabaseAccountId",
+            "restoreTimestampInUtc": "2022-07-20T18:28:00Z",
+            "restoreWithTtlDisabled": true
+          }
+        }
+      },
+      "tags": {}
+    },
+    "databaseName": "databaseName",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "databaseName",
+        "type": "Microsoft.DocumentDB/databaseAccounts/sqlDatabases",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/sqlDatabases/databaseName",
+        "location": "West US",
+        "properties": {
+          "resource": {
+            "_etag": "\"00000a00-0000-0000-0000-56672f920000\"",
+            "_rid": "CqNBAA==",
+            "_ts": 1449602962,
+            "id": "databaseName"
+          }
+        },
+        "tags": {}
+      }
+    },
+    "202": {}
+  },
+  "operationId": "SqlResources_CreateUpdateSqlDatabase",
+  "title": "CosmosDBSqlDatabaseRestore"
+}

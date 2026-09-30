@@ -1,0 +1,24 @@
+{
+  "parameters": {
+    "resourceGroupName": "myResourceGroup",
+    "vmScaleSetName": "{vmss-name}",
+    "parameters": {
+      "capacity": 5,
+      "properties": {
+        "zone": "1"
+      }
+    },
+    "api-version": "2025-04-01",
+    "subscriptionId": "{subscription-id}"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "location": "https://foo.com/operationstatus"
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSets_ScaleOut",
+  "title": "VirtualMachineScaleSet Scale Out."
+}

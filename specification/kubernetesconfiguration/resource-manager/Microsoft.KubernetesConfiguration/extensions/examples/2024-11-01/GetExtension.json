@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01",
+    "clusterName": "clusterName1",
+    "clusterResourceName": "connectedClusters",
+    "clusterRp": "Microsoft.Kubernetes",
+    "extensionName": "ClusterMonitor",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subId1"
+  },
+  "responses": {
+    "200": {
+      "description": "Details of the Kubernetes Extension's current status.",
+      "body": {
+        "name": "ClusterMonitor",
+        "type": "Microsoft.KubernetesConfiguration/extensions",
+        "id": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/ClusterMonitor",
+        "properties": {
+          "autoUpgradeMinorVersion": false,
+          "configurationSettings": {
+            "omsagent.env.clusterName": "clusterName1",
+            "omsagent.secret.wsid": "fakeTokenPlaceholder"
+          },
+          "currentVersion": "0.1.4",
+          "extensionType": "azuremonitor-containers",
+          "isSystemExtension": false,
+          "provisioningState": "Succeeded",
+          "releaseTrain": "Preview",
+          "scope": {
+            "cluster": {
+              "releaseNamespace": "kube-system"
+            }
+          },
+          "statuses": [],
+          "version": "0.1.4"
+        },
+        "systemData": {
+          "createdAt": "2021-09-08T05:10:57.027Z",
+          "createdBy": "string",
+          "createdByType": "Application",
+          "lastModifiedAt": "2021-09-08T05:10:57.027Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "Application"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Extensions_Get",
+  "title": "Get Extension"
+}

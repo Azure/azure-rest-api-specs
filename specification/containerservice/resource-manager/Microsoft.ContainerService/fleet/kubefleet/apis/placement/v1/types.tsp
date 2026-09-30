@@ -1,0 +1,233 @@
+import "@azure-tools/typespec-azure-resource-manager";
+import "../../../../k8s.io/api/core/v1/types.tsp";
+import "../../../../k8s.io/apimachinery/apis/meta/v1/types.tsp";
+
+using TypeSpec.Versioning;
+using Core.V1;
+using Meta.V1;
+using Azure.ResourceManager;
+
+namespace Placement.V1;
+
+@added(Microsoft.ContainerService.Versions.v2026_06_02_preview)
+@doc("The rollout strategy configuration.")
+model RolloutStrategy {
+  @doc("The type of rollout strategy. Default is RollingUpdate.")
+  type?: RolloutStrategyType;
+
+  @doc("Reference to an existing cluster update strategy. Required when type is External.")
+  clusterUpdateStrategy?: ClusterUpdateStrategyReference;
+}
+
+@added(Microsoft.ContainerService.Versions.v2026_06_02_preview)
+@doc("A reference to an existing cluster staged update strategy.")
+model ClusterUpdateStrategyReference {
+  @doc("The name of an existing cluster staged update strategy.")
+  name?: string;
+}
+
+@added(Microsoft.ContainerService.Versions.v2026_06_02_preview)
+@doc("The possible rollout strategy types.")
+union RolloutStrategyType {
+  @doc("Use rolling update strategy for rollout.")
+  RollingUpdate: "RollingUpdate",
+
+  @doc("Use external rollout strategy via Staged Update Run.")
+  External: "External",
+
+  string,
+}
+
+@doc("ClusterResourcePlacementSpec defines the desired state of ClusterResourcePlacement.")
+model ClusterResourcePlacementSpec {
+  @doc("Policy defines how to select member clusters to place the selected resources. If unspecified, all the joined member clusters are selected.")
+  policy?: PlacementPolicy;
+
+  @added(Microsoft.ContainerService.Versions.v2026_06_02_preview)
+  @doc("The rollout strategy configuration for the cluster resource placement.")
+  rolloutStrategy?: RolloutStrategy;
+}
+
+@doc("PlacementPolicy contains the rules to select target member clusters to place the selected resources. Note that only clusters that are both joined and satisfying the rules will be selected. You can only specify at most one of the two fields: ClusterNames and Affinity. If none is specified, all the joined clusters are selected.")
+model PlacementPolicy {
+  @doc("Type of placement. Can be \"PickAll\", \"PickN\" or \"PickFixed\". Default is PickAll.")
+  placementType?: PlacementType;
+
+  @doc("ClusterNames contains a list of names of MemberCluster to place the selected resources. Only valid if the placement type is \"PickFixed\"")
+  clusterNames?: string[];
+
+  @doc("Affinity contains cluster affinity scheduling rules. Defines which member clusters to place the selected resources. Only valid if the placement type is \"PickAll\" or \"PickN\".")
+  affinity?: Affinity;
+
+  @doc("If specified, the ClusterResourcePlacement's Tolerations. Tolerations cannot be updated or deleted. This field is beta-level and is for the taints and tolerations feature.")
+  @identifiers(#[])
+  tolerations?: Toleration[];
+}
+
+@doc("PlacementType identifies the type of placement.")
+union PlacementType {
+  @doc("PickAll picks all clusters that satisfy the rules.")
+  PickAll: "PickAll",
+
+  @doc("PickFixed picks a fixed set of clusters.")
+  PickFixed: "PickFixed",
+
+  string,
+}
+
+@doc("Affinity is a group of cluster affinity scheduling rules. More to be added.")
+model Affinity {
+  @doc("ClusterAffinity contains cluster affinity scheduling rules for the selected resources.")
+  clusterAffinity?: ClusterAffinity;
+}
+
+@doc("ClusterAffinity contains cluster affinity scheduling rules for the selected resources.")
+model ClusterAffinity {
+  @doc("If the affinity requirements specified by this field are not met at scheduling time, the resource will not be scheduled onto the cluster. If the affinity requirements specified by this field cease to be met at some point after the placement (e.g. due to an update), the system may or may not try to eventually remove the resource from the cluster.")
+  requiredDuringSchedulingIgnoredDuringExecution?: ClusterSelector;
+}
+
+@doc("ClusterSelector")
+model ClusterSelector {
+  @doc("ClusterSelectorTerms is a list of cluster selector terms. The terms are `ORed`.")
+  @identifiers(#[])
+  clusterSelectorTerms: ClusterSelectorTerm[];
+}
+
+@doc("ClusterSelectorTerm")
+model ClusterSelectorTerm {
+  @doc("LabelSelector is a label query over all the joined member clusters. Clusters matching the query are selected. If you specify both label and property selectors in the same term, the results are AND'd.")
+  labelSelector?: LabelSelector;
+
+  @doc("PropertySelector is a property query over all joined member clusters. Clusters matching the query are selected. If you specify both label and property selectors in the same term, the results are AND'd. At this moment, PropertySelector can only be used with `RequiredDuringSchedulingIgnoredDuringExecution` affinity terms. This field is beta-level; it is for the property-based scheduling feature and is only functional when a property provider is enabled in the deployment.")
+  propertySelector?: PropertySelector;
+}
+
+@doc("PropertySelector helps user specify property requirements when picking clusters for resource placement.")
+model PropertySelector {
+  @doc("MatchExpressions is an array of PropertySelectorRequirements. The requirements are AND'd.")
+  matchExpressions: PropertySelectorRequirement[];
+}
+
+@doc("PropertySelectorRequirement is a specific property requirement when picking clusters for resource placement.")
+model PropertySelectorRequirement {
+  @doc("Name is the name of the property; it should be a Kubernetes label name.")
+  name: string;
+
+  @doc("Operator specifies the relationship between a cluster's observed value of the specified property and the values given in the requirement.")
+  operator: PropertySelectorOperator;
+
+  @doc("Values are a list of values of the specified property which Fleet will compare against the observed values of individual member clusters in accordance with the given operator. At this moment, each value should be a Kubernetes quantity. For more information, see https://pkg.go.dev/k8s.io/apimachinery/pkg/api/resource#Quantity. If the operator is Gt (greater than), Ge (greater than or equal to), Lt (less than), or `Le` (less than or equal to), Eq (equal to), or Ne (ne), exactly one value must be specified in the list.")
+  values: string[];
+}
+
+@doc("PropertySelectorOperator is the operator that can be used with PropertySelectorRequirements.")
+union PropertySelectorOperator {
+  @doc("Gt dictates Fleet to select cluster if its observed value of a given property is greater than the value specified in the requirement.")
+  Gt: "Gt",
+
+  @doc("Ge dictates Fleet to select cluster if its observed value of a given property is greater than or equal to the value specified in the requirement.")
+  Ge: "Ge",
+
+  @doc("Eq dictates Fleet to select cluster if its observed value of a given property is equal to the values specified in the requirement.")
+  Eq: "Eq",
+
+  @doc("Ne dictates Fleet to select cluster if its observed value of a given property is not equal to the values specified in the requirement.")
+  Ne: "Ne",
+
+  @doc("Lt dictates Fleet to select cluster if its observed value of a given property is less than the value specified in the requirement.")
+  Lt: "Lt",
+
+  @doc("Le dictates Fleet to select cluster if its observed value of a given property is less than or equal to the value specified in the requirement.")
+  Le: "Le",
+
+  string,
+}
+
+@doc("Toleration allows ClusterResourcePlacement to tolerate any taint that matches the triple <key,value,effect> using the matching operator <operator>.")
+model Toleration {
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "This key is not sensitive; it's a taint key identifier in Kubernetes tolerations."
+  @doc("Key is the taint key that the toleration applies to. Empty means match all taint keys. If the key is empty, operator must be Exists; this combination means to match all values and all keys.")
+  key?: string;
+
+  @doc("Operator represents a key's relationship to the value. Valid operators are Exists and Equal. Defaults to Equal. Exists is equivalent to wildcard for value, so that a ClusterResourcePlacement can tolerate all taints of a particular category.")
+  operator?: TolerationOperator;
+
+  @doc("Value is the taint value the toleration matches to. If the operator is Exists, the value should be empty, otherwise just a regular string.")
+  value?: string;
+
+  @doc("Effect indicates the taint effect to match. Empty means match all taint effects. When specified, only allowed value is NoSchedule.")
+  effect?: TaintEffect;
+}
+
+@doc("The ClusterResourcePlacement settings that can be patched.")
+model ClusterResourcePlacementSpecPatch {
+  @doc("The placement policy that can be patched.")
+  policy?: PlacementPolicyPatch;
+
+  @doc("The rollout strategy configuration that can be patched.")
+  rolloutStrategy?: RolloutStrategy;
+}
+
+@doc("The placement policy settings that can be patched.")
+model PlacementPolicyPatch {
+  @doc("The placement type that can be patched.")
+  placementType?: PlacementType;
+
+  @doc("The member cluster names that can be patched.")
+  clusterNames?: string[];
+
+  @doc("The cluster affinity settings that can be patched.")
+  affinity?: AffinityPatch;
+
+  @doc("The tolerations that can be patched.")
+  @identifiers(#[])
+  tolerations?: Toleration[];
+}
+
+@doc("The affinity settings that can be patched.")
+model AffinityPatch {
+  @doc("The cluster affinity settings that can be patched.")
+  clusterAffinity?: ClusterAffinityPatch;
+}
+
+@doc("The cluster affinity rules that can be patched.")
+model ClusterAffinityPatch {
+  @doc("The required cluster selector that can be patched.")
+  requiredDuringSchedulingIgnoredDuringExecution?: ClusterSelectorPatch;
+}
+
+@doc("The cluster selector settings that can be patched.")
+model ClusterSelectorPatch {
+  @doc("The cluster selector terms that can be patched.")
+  @identifiers(#[])
+  clusterSelectorTerms?: ClusterSelectorTermPatch[];
+}
+
+@doc("A cluster selector term that can be patched.")
+model ClusterSelectorTermPatch {
+  @doc("The label selector that can be patched.")
+  labelSelector?: LabelSelectorPatch;
+
+  @doc("The property selector that can be patched.")
+  propertySelector?: PropertySelectorPatch;
+}
+
+@doc("The property selector settings that can be patched.")
+model PropertySelectorPatch {
+  @doc("The property selector requirements that can be patched.")
+  @identifiers(#[])
+  matchExpressions?: PropertySelectorRequirementPatch[];
+}
+
+@doc("A property selector requirement that can be patched.")
+model PropertySelectorRequirementPatch {
+  @doc("The property name that can be patched.")
+  name?: string;
+
+  @doc("The property selector operator that can be patched.")
+  operator?: PropertySelectorOperator;
+
+  @doc("The property values that can be patched.")
+  values?: string[];
+}

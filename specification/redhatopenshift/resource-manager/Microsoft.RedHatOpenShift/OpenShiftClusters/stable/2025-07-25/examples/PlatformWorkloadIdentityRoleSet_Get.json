@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "api-version": "2025-07-25",
+    "location": "location",
+    "openShiftMinorVersion": "4.14",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "4.14",
+        "type": "Microsoft.RedHatOpenShift/PlatformWorkloadIdentityRoleSet",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/resourceProviderNamespace/resourceType/resourceName",
+        "properties": {
+          "openShiftVersion": "4.14",
+          "platformWorkloadIdentityRoles": [
+            {
+              "operatorName": "aro-operator",
+              "roleDefinitionId": "/providers/Microsoft.Authorization/roleDefinitions/00000000-0000-0000-0000-000000000000",
+              "roleDefinitionName": "Azure Red Hat OpenShift Service Operator"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "PlatformWorkloadIdentityRoleSet_Get",
+  "title": "Gets a mapping of an OpenShift version to identity requirements, which includes operatorName, roleDefinitionName, roleDefinitionId, and serviceAccounts."
+}

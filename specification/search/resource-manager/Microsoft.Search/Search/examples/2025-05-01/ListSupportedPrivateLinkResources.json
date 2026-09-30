@@ -1,0 +1,90 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "resourceGroupName": "rg1",
+    "searchServiceName": "mysearchservice",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "searchService",
+            "type": "Microsoft.Search/searchServices/privateLinkResources",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice/privateLinkResources/searchService",
+            "properties": {
+              "groupId": "searchService",
+              "requiredMembers": [
+                "searchService"
+              ],
+              "requiredZoneNames": [
+                "privatelink.search.windows.net"
+              ],
+              "shareablePrivateLinkResourceTypes": [
+                {
+                  "name": "blob",
+                  "properties": {
+                    "type": "Microsoft.Storage/storageAccounts",
+                    "description": "Azure AI Search indexers can connect to blobs in Azure Storage for reading data from an indexer data source, for writing intermediate results of indexer execution or for storing any knowledge store projections.",
+                    "groupId": "blob"
+                  }
+                },
+                {
+                  "name": "table",
+                  "properties": {
+                    "type": "Microsoft.Storage/storageAccounts",
+                    "description": "Azure AI Search indexers can connect to tables in Azure Storage for reading data from an indexer data source, for writing intermediate results of indexer execution or for storing any knowledge store projections.",
+                    "groupId": "table"
+                  }
+                },
+                {
+                  "name": "Sql",
+                  "properties": {
+                    "type": "Microsoft.DocumentDB/databaseAccounts",
+                    "description": "Azure AI Search indexers can connect to Azure Cosmos DB API for NoSQL for reading data from an indexer data source.",
+                    "groupId": "Sql"
+                  }
+                },
+                {
+                  "name": "plr",
+                  "properties": {
+                    "type": "Microsoft.Sql/servers",
+                    "description": "Azure AI Search indexers can connect to Azure SQL database on a server for reading data from an indexer data source.",
+                    "groupId": "sqlServer"
+                  }
+                },
+                {
+                  "name": "vault",
+                  "properties": {
+                    "type": "Microsoft.KeyVault/vaults",
+                    "description": "Azure AI Search can access keys in Azure Key Vault to encrypt sensitive data in a search index and synonym map data.",
+                    "groupId": "vault"
+                  }
+                },
+                {
+                  "name": "plr",
+                  "properties": {
+                    "type": "Microsoft.DBforMySQL/servers",
+                    "description": "Azure AI Search indexers can connect to MySQL databases for reading data from an indexer data source.",
+                    "groupId": "mysqlServer"
+                  }
+                },
+                {
+                  "name": "site",
+                  "properties": {
+                    "type": "Microsoft.Web/sites",
+                    "description": "For custom skills that connect to an app service, you can specify sites as the group ID.",
+                    "groupId": "sites"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PrivateLinkResources_ListSupported",
+  "title": "ListSupportedPrivateLinkResources"
+}

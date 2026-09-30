@@ -1,0 +1,48 @@
+{
+  "operationId": "Resources",
+  "description": "A query on resources requesting the next page using skip token. Please note id field is required in the response to return the pages in stable sorted fashion.",
+  "parameters": {
+    "api-version": "2024-04-01",
+    "query": {
+      "options": {
+        "$skipToken": "eyAibm8iOiAibHVjayIsICJidXQiOiAibmljZSIsICJ0cnkiOiAiISIgfQ=="
+      },
+      "query": "Resources | where name contains 'test' | project id, name, type, location",
+      "subscriptions": [
+        "cfbbd179-59d2-4052-aa06-9270a38aa9d6"
+      ]
+    }
+  },
+  "title": "Next page query",
+  "responses": {
+    "200": {
+      "body": {
+        "$skipToken": "eyAibm8yIjogImx1Y2syIiwgImJ1dDIiOiAibmljZTIiLCAidHJ5MiI6ICIhIiB9",
+        "count": 3,
+        "data": [
+          {
+            "name": "second_OsDisk_dddddbcb625a457bb69fe2abf5975820",
+            "type": "microsoft.compute/disks",
+            "id": "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG1/providers/Microsoft.Compute/disks/second_OsDisk_dddddbcb625a457bb69fe2abf5975820",
+            "location": "eastus"
+          },
+          {
+            "name": "AATest",
+            "type": "microsoft.automation/automationaccounts",
+            "id": "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG2/providers/Microsoft.Automation/automationAccounts/AATest",
+            "location": "westcentralus"
+          },
+          {
+            "name": "RBTest",
+            "type": "microsoft.automation/automationaccounts/runbooks",
+            "id": "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG2/providers/Microsoft.Automation/automationAccounts/TestAA/runbooks/RBTest",
+            "location": "westcentralus"
+          }
+        ],
+        "facets": [],
+        "resultTruncated": "false",
+        "totalRecords": 386
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "parameters": {
+    "api-version": "2024-10-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "gatewayName": "gateway1",
+    "vpnConnectionName": "vpnConnection1",
+    "parameters": {
+      "linkConnectionNames": [
+        "siteLink1",
+        "siteLink2"
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/operationResults/{operationId}?api-version={api-version}"
+      }
+    },
+    "200": {
+      "body": "\"{\"Status\":\"Successful\",\"Data\":null}\""
+    }
+  }
+}

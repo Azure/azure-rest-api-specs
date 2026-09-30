@@ -1,0 +1,62 @@
+{
+  "operationId": "Report_GenerateReport",
+  "title": "Generate the StorageDiscoveryWorkspace data query",
+  "parameters": {
+    "storageDiscoveryWorkspaceName": "Sample-Storage-Workspace",
+    "resourceGroupName": "sample-rg",
+    "api-version": "2025-06-01-preview",
+    "subscriptionId": "b79cb3ba-745e-5d9a-8903-4a02327a7e09",
+    "discoveryResourceName": "reportTest2",
+    "body": {
+      "queries": [
+        "Q2FwYWNpdHlIb3VybHkgfCBzdW1tYXJpemUgc3VtKHRvdGFsT2JqZWN0U2l6ZUJ5dGVzKSBieSB0aW1lUGVyaW9k",
+        "Q2FwYWNpdHlIb3VybHkgfCBzdW1tYXJpemUgc3VtKHRvdGFsT2JqZWN0U2l6ZUJ5dGVzKSBieSzzzzzzzzzzzz"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "results": [
+          {
+            "columns": [
+              {
+                "name": "timePeriod",
+                "type": "datetime"
+              },
+              {
+                "name": "account",
+                "type": "string"
+              },
+              {
+                "name": "dateStoredGiB",
+                "type": "long"
+              }
+            ],
+            "rows": [
+              [
+                "2025-03-04 18:00",
+                "account1",
+                "100"
+              ],
+              [
+                "2025-03-04 18:00",
+                "account2",
+                "200"
+              ]
+            ]
+          },
+          {
+            "errorCode": "Failed: Bad Query"
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/Sample-Storage-Workspace/reports/reportTest2/operationResults/12345?api-version=2025-06-01-preview",
+        "Retry-After": 10
+      }
+    }
+  }
+}

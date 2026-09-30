@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2025-01-01",
+    "locationName": "japaneast",
+    "longTermRetentionDatabaseName": "testDatabase",
+    "longTermRetentionServerName": "testserver",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "55555555-6666-7777-8888-999999999999;131637960820000000;Hot",
+            "type": "Microsoft.Sql/locations/longTermRetentionServers/longTermRetentionDatabases/longTermRetentionBackups",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Sql/locations/japaneast/longTermRetentionServers/testserver/longTermRetentionDatabases/testDatabase/longTermRetentionBackups/55555555-6666-7777-8888-999999999999;131637960820000000;Hot",
+            "properties": {
+              "backupStorageAccessTier": "Hot",
+              "backupStorageRedundancy": "Geo",
+              "backupTime": "2017-08-23T08:00:00Z",
+              "databaseDeletionTime": null,
+              "databaseName": "testDatabase",
+              "isBackupImmutable": true,
+              "legalHoldImmutability": "Enabled",
+              "serverCreateTime": "2017-03-10T08:00:00Z",
+              "serverName": "testserver",
+              "timeBasedImmutability": "Disabled",
+              "timeBasedImmutabilityMode": "Unlocked"
+            }
+          },
+          {
+            "name": "55555555-6666-7777-8888-999999999999;131677960820000000;Hot",
+            "type": "Microsoft.Sql/locations/longTermRetentionServers/longTermRetentionDatabases/longTermRetentionBackups",
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Sql/locations/japaneast/longTermRetentionServers/testserver/longTermRetentionDatabases/testDatabase/longTermRetentionBackups/55555555-6666-7777-8888-999999999999;131677960820000000;Hot",
+            "properties": {
+              "backupStorageAccessTier": "Hot",
+              "backupStorageRedundancy": "Geo",
+              "backupTime": "2017-09-06T08:00:00Z",
+              "databaseDeletionTime": "2017-09-07T08:00:00Z",
+              "databaseName": "testDatabase",
+              "isBackupImmutable": true,
+              "legalHoldImmutability": "Disabled",
+              "serverCreateTime": "2017-03-10T08:00:00Z",
+              "serverName": "testserver",
+              "timeBasedImmutability": "Enabled",
+              "timeBasedImmutabilityMode": "Unlocked"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "LongTermRetentionBackups_ListByDatabase",
+  "title": "Get all long term retention backups under the database."
+}

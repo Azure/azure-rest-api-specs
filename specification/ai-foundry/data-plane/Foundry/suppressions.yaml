@@ -1,0 +1,25 @@
+# Area-specific suppressions to be removed at the earliest available opportunity
+# Pending TSV integration based on OAS3 emission; this area depends on external
+# API specifications that don't emit accurate OAS2 autorest output.
+
+- tool: TypeSpecValidation
+  reason: >
+     Foundry does not emit autorest as OpenAPI 2 yields a very incomplete representation of the spec
+  rules: [EmitAutorest, FolderStructure]
+  paths:
+    - "."
+    - "**"
+
+- tool: TypeSpecValidation
+  reason: >
+     SDKs are configured in nested config files.
+  rules: [SdkTspConfigValidation]
+  paths:
+    - tspconfig.yaml
+
+- tool: SwaggerAll
+  reason: >
+     Foundry does not emit OpenAPI 2.
+  paths:
+    - "."
+    - "**"

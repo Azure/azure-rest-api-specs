@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "location": "location1",
+    "parameters": {
+      "appName": "my-app",
+      "dockerfileGenerationMode": "enabled",
+      "dockerfileOutputDirectory": "./",
+      "generationLanguage": "javascript",
+      "imageName": "myimage",
+      "imageTag": "latest",
+      "languageVersion": "14",
+      "manifestGenerationMode": "enabled",
+      "manifestOutputDirectory": "./",
+      "manifestType": "kube",
+      "namespace": "my-namespace",
+      "port": "80"
+    },
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "dockerfiles/example-dockerfile": "dockerfile-content \n including newlines",
+        "manifests/example-manifest-file-1": "manifest file 1 content \n including newlines",
+        "manifests/example-manifest-file-2": "manifest file 2 content \n including newlines"
+      }
+    }
+  },
+  "operationId": "GeneratePreviewArtifacts",
+  "title": "Artifact Generation Properties"
+}

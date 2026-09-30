@@ -1,0 +1,77 @@
+{
+  "parameters": {
+    "api-version": "2024-11-01",
+    "clusterName": "clusterName1",
+    "clusterResourceName": "connectedClusters",
+    "clusterRp": "Microsoft.Kubernetes",
+    "extensionName": "ClusterMonitor",
+    "patchExtension": {
+      "properties": {
+        "autoUpgradeMinorVersion": true,
+        "configurationProtectedSettings": {
+          "omsagent.secret.key": "secretKeyValue01"
+        },
+        "configurationSettings": {
+          "omsagent.env.clusterName": "clusterName1",
+          "omsagent.secret.wsid": "fakeTokenPlaceholder"
+        },
+        "releaseTrain": "Preview"
+      }
+    },
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subId1"
+  },
+  "responses": {
+    "200": {
+      "description": "Extension properties from not updating any property values.",
+      "body": {
+        "properties": {
+          "autoUpgradeMinorVersion": true,
+          "configurationSettings": {
+            "omsagent.env.clusterName": "clusterName1",
+            "omsagent.secret.wsid": "fakeTokenPlaceholder"
+          },
+          "extensionType": "azuremonitor-containers",
+          "provisioningState": "Succeeded",
+          "releaseTrain": "Preview",
+          "scope": {
+            "cluster": {
+              "releaseNamespace": "kube-system"
+            }
+          },
+          "statuses": [],
+          "version": "0.1.4"
+        }
+      }
+    },
+    "202": {
+      "description": "Extension properties and details of the Patch operation, including AsyncOperation url.",
+      "body": {
+        "properties": {
+          "autoUpgradeMinorVersion": true,
+          "configurationSettings": {
+            "omsagent.env.clusterName": "clusterName1",
+            "omsagent.secret.wsid": "fakeTokenPlaceholder"
+          },
+          "extensionType": "azuremonitor-containers",
+          "provisioningState": "Updating",
+          "releaseTrain": "Preview",
+          "scope": {
+            "cluster": {
+              "releaseNamespace": "kube-system"
+            }
+          },
+          "statuses": [],
+          "version": "0.1.4"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Kubernetes/ConnectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/ClusterMonitor/operations/operationId?api-version=2024-11-01",
+        "Operation-Location": "/subscriptions/subId1/resourceGroups/rg1/providers/Microsoft.Kubernetes/connectedClusters/clusterName1/providers/Microsoft.KubernetesConfiguration/extensions/ClusterMonitor/operations/operationId",
+        "x-ms-async-operation-timeout": "PT48H"
+      }
+    }
+  },
+  "operationId": "Extensions_Update",
+  "title": "Update Extension"
+}

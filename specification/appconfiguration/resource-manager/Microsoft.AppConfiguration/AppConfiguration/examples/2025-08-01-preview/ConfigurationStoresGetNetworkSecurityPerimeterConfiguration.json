@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "subscriptionId": "c80fb759-c965-4c6a-9110-9b2b2d038882",
+    "resourceGroupName": "myResourceGroup",
+    "configStoreName": "contoso",
+    "networkSecurityPerimeterConfigurationName": "804a12bb-1349-4228-81be-8fe888aae04e.myAssociationName",
+    "api-version": "2025-08-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourceGroups/myResourceGroup/providers/Microsoft.AppConfiguration/configurationStores/contoso/networkSecurityPerimeterConfigurations/804a12bb-1349-4228-81be-8fe888aae04e.myAssociationName",
+        "name": "804a12bb-1349-4228-81be-8fe888aae04e.myAssociationName",
+        "type": "Microsoft.AppConfiguration/configurationStores/networkSecurityPerimeterConfigurations",
+        "properties": {
+          "provisioningState": "Accepted",
+          "provisioningIssues": [
+            {
+              "name": "{IssueName-1}",
+              "properties": {
+                "issueType": "MissingPerimeterConfiguration",
+                "severity": "Warning",
+                "description": "Sample description",
+                "suggestedResourceIds": [],
+                "suggestedAccessRules": []
+              }
+            }
+          ],
+          "networkSecurityPerimeter": {
+            "id": "/subscriptions/c80fb759-c965-4c6a-9110-9b2b2d038882/resourceGroups/myResourceGroup/providers/Microsoft.Network/networkSecurityPerimeters/myPerimeterName",
+            "perimeterGuid": "804a12bb-1349-4228-81be-8fe888aae04e",
+            "location": "eastus"
+          },
+          "resourceAssociation": {
+            "name": "myAssociationName",
+            "accessMode": "Enforced"
+          },
+          "profile": {
+            "name": "myProfileName",
+            "accessRulesVersion": 1,
+            "accessRules": [
+              {
+                "name": "accessRule1",
+                "properties": {
+                  "direction": "Inbound",
+                  "addressPrefixes": [
+                    "148.0.0.0/8",
+                    "152.4.6.0/24"
+                  ]
+                }
+              }
+            ],
+            "diagnosticSettingsVersion": 1,
+            "enabledLogCategories": [
+              "logCategory1",
+              "logCategory2"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "operationId": "NetworkSecurityPerimeterConfigurations_Get",
+  "title": "NetworkSecurityPerimeterConfigurations_GetNetworkSecurityPerimeterConfiguration"
+}

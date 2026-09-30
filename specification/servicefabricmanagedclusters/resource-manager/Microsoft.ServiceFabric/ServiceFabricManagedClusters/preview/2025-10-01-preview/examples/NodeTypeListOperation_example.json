@@ -1,0 +1,95 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01-preview",
+    "clusterName": "myCluster",
+    "resourceGroupName": "resRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "http://examplelink.com",
+        "value": [
+          {
+            "name": "FE",
+            "type": "Microsoft.ServiceFabric/managedClusters/nodeTypes",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedClusters/myCluster/nodeTypes/FE",
+            "properties": {
+              "capacities": {},
+              "dataDiskSizeGB": 100,
+              "dataDiskType": "StandardSSD_LRS",
+              "isPrimary": true,
+              "isStateless": false,
+              "placementProperties": {},
+              "vmImageOffer": "WindowsServer",
+              "vmImagePublisher": "MicrosoftWindowsServer",
+              "vmImageSku": "2016-Datacenter",
+              "vmImageVersion": "latest",
+              "vmInstanceCount": 5,
+              "vmSize": "Standard_D2"
+            },
+            "sku": {
+              "name": "Standard_P0",
+              "capacity": 5,
+              "tier": "Standard"
+            },
+            "tags": {}
+          },
+          {
+            "name": "BE",
+            "type": "Microsoft.ServiceFabric/managedClusters/nodeTypes",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedClusters/myCluster/nodeTypes/BE",
+            "properties": {
+              "capacities": {},
+              "dataDiskSizeGB": 200,
+              "dataDiskType": "Premium_LRS",
+              "isPrimary": false,
+              "isStateless": false,
+              "placementProperties": {},
+              "vmExtensions": [
+                {
+                  "name": "Microsoft.Azure.Geneva.GenevaMonitoring",
+                  "properties": {
+                    "type": "GenevaMonitoring",
+                    "autoUpgradeMinorVersion": true,
+                    "publisher": "Microsoft.Azure.Geneva",
+                    "settings": {},
+                    "typeHandlerVersion": "2.0"
+                  }
+                }
+              ],
+              "vmImageOffer": "WindowsServer",
+              "vmImagePublisher": "MicrosoftWindowsServer",
+              "vmImageSku": "2016-Datacenter-Server-Core",
+              "vmImageVersion": "latest",
+              "vmInstanceCount": 10,
+              "vmSecrets": [
+                {
+                  "sourceVault": {
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resRg/providers/Microsoft.KeyVault/vaults/myVault"
+                  },
+                  "vaultCertificates": [
+                    {
+                      "certificateStore": "My",
+                      "certificateUrl": "https://myVault.vault.azure.net:443/secrets/myCert/ef1a31d39e1f46bca33def54b6cda54c"
+                    }
+                  ]
+                }
+              ],
+              "vmSize": "Standard_DS3"
+            },
+            "sku": {
+              "name": "Standard_S0",
+              "capacity": 10,
+              "tier": "Standard"
+            },
+            "tags": {}
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "NodeTypes_ListByManagedClusters",
+  "title": "List node type of the specified managed cluster"
+}

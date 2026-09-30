@@ -1,0 +1,37 @@
+{
+  "operationId": "AutoUpgradeProfiles_ListByFleet",
+  "title": "Lists the AutoUpgradeProfile resources by fleet.",
+  "parameters": {
+    "api-version": "2025-04-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "fleetName": "fleet1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/fleets/myFleet/autoUpgradeProfiles/autoupgradeprofile1",
+            "name": "autoupgradeprofile1",
+            "type": "Microsoft.ContainerService/fleets/autoUpgradeProfiles",
+            "systemData": {
+              "createdBy": "@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2023-03-01T01:10:08.395Z",
+              "lastModifiedBy": "@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-03-01T01:10:08.395Z"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "channel": "Stable"
+            },
+            "eTag": "\"EtagValue\""
+          }
+        ],
+        "nextLink": "http://nextlink.contoso.com"
+      }
+    }
+  }
+}

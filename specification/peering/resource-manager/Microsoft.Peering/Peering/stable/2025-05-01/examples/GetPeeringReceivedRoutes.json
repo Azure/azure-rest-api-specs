@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "asPath": "123 456",
+    "originAsValidationState": "Valid",
+    "peeringName": "peeringName",
+    "prefix": "1.1.1.0/24",
+    "resourceGroupName": "rgName",
+    "rpkiValidationState": "Valid",
+    "subscriptionId": "subId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "asPath": "123 456",
+            "nextHop": "127.0.0.1",
+            "originAsValidationState": "Valid",
+            "prefix": "1.1.1.0/24",
+            "receivedTimestamp": "2020-04-05 03:39:20",
+            "rpkiValidationState": "Valid",
+            "trustAnchor": "Arin"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ReceivedRoutes_ListByPeering",
+  "title": "Lists the prefixes received over the specified peering under the given subscription and resource group."
+}

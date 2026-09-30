@@ -1,0 +1,126 @@
+import "./main.tsp";
+import "@azure-tools/typespec-client-generator-core";
+
+using Azure.ClientGenerator.Core;
+
+@@clientName(
+  Microsoft.KubernetesConfiguration.ProvisioningState,
+  "KubernetesConfigurationPrivateLinkScopeProvisioningState",
+  "csharp"
+);
+@@clientName(
+  Microsoft.KubernetesConfiguration.PublicNetworkAccessType,
+  "KubernetesConfigurationPrivateLinkScopePublicNetworkAccessType",
+  "csharp"
+);
+@@clientName(
+  Microsoft.KubernetesConfiguration.PrivateEndpointConnection,
+  "KubernetesConfigurationPrivateEndpointConnection",
+  "csharp"
+);
+@@clientName(
+  Microsoft.KubernetesConfiguration.PrivateLinkResource,
+  "KubernetesConfigurationPrivateLinkResource",
+  "csharp"
+);
+@@alternateType(
+  Microsoft.KubernetesConfiguration.KubernetesConfigurationPrivateLinkScopeProperties.clusterResourceId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Microsoft.KubernetesConfiguration.KubernetesConfigurationPrivateLinkScopeProperties.privateLinkScopeId,
+  Azure.Core.uuid,
+  "csharp"
+);
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.PrivateEndpoint.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the existing C# pageable collection."
+@@Legacy.markAsPageable(
+  Microsoft.KubernetesConfiguration.PrivateEndpointConnections.listByPrivateLinkScope,
+  "csharp"
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserve the existing C# pageable collection."
+@@Legacy.markAsPageable(
+  Microsoft.KubernetesConfiguration.PrivateLinkResources.listByPrivateLinkScope,
+  "csharp"
+);
+@@clientName(
+  Microsoft.KubernetesConfiguration,
+  "KubernetesConfigurationPrivateLinkScopesMgmtClient",
+  "python"
+);
+@@clientName(
+  Microsoft.KubernetesConfiguration,
+  "PrivateLinkScopesClient",
+  "javascript"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateEndpointConnection,
+  "ArmPrivateEndpointConnection",
+  "python"
+);
+@@clientName(Microsoft.KubernetesConfiguration, "ScopeClient", "java");
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionListResult,
+  "ConnectionListResult",
+  "java"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateLinkResourceListResult,
+  "ResourceListResult",
+  "java"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProperties,
+  "ConnectionProperties",
+  "java"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateEndpointServiceConnectionStatus,
+  "ServiceConnectionStatus",
+  "java"
+);
+@@clientName(
+  Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionProvisioningState,
+  "ConnectionProvisioningState",
+  "java"
+);
+@@clientName(
+  Microsoft.KubernetesConfiguration.KubernetesConfigurationPrivateLinkScope,
+  "PrivateLinkScope",
+  "java"
+);
+@@clientName(
+  Microsoft.KubernetesConfiguration.KubernetesConfigurationPrivateLinkScopes,
+  "Scopes",
+  "java"
+);
+@@clientName(
+  Microsoft.KubernetesConfiguration.KubernetesConfigurationPrivateLinkScopeProperties,
+  "PrivateLinkScopeProperties",
+  "java"
+);
+@@clientName(
+  Microsoft.KubernetesConfiguration.PrivateEndpointConnections,
+  "Connections",
+  "java"
+);
+@@clientName(
+  Microsoft.KubernetesConfiguration.PrivateEndpointConnection,
+  "Connection",
+  "java"
+);
+@@clientName(
+  Microsoft.KubernetesConfiguration.PrivateLinkResources,
+  "Resources",
+  "java"
+);

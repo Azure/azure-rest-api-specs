@@ -1,0 +1,141 @@
+import "../models/common.tsp";
+import "./L3IsolationDomain.tsp";
+
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.ResourceManager;
+using TypeSpec.Versioning;
+
+namespace Microsoft.ManagedNetworkFabric;
+@doc("Defines the External Network resource.")
+@parentResource(L3IsolationDomain)
+model ExternalNetwork is Azure.ResourceManager.ProxyResource<
+  ExternalNetworkProperties,
+  false
+> {
+  @doc("Name of the External Network.")
+  @pattern("^[a-zA-Z]{1}[a-zA-Z0-9-_]{2,127}$")
+  @path
+  @key("externalNetworkName")
+  @segment("externalNetworks")
+  @visibility(Lifecycle.Read)
+  name: string;
+}
+
+@@doc(ExternalNetwork.properties, "External Network Properties");
+
+@armResourceOperations
+interface ExternalNetworks {
+  @doc("Implements ExternalNetworks GET method.")
+  get is ArmResourceRead<ExternalNetwork>;
+
+  @doc("Creates ExternalNetwork PUT method.")
+  create is ArmResourceCreateOrReplaceAsync<ExternalNetwork>;
+
+  @doc("API to update certain properties of the ExternalNetworks resource.")
+  @patch(#{ implicitOptionality: false })
+  update is ArmCustomPatchAsync<ExternalNetwork, ExternalNetworkPatch>;
+
+  @doc("Implements ExternalNetworks DELETE method.")
+  delete is ArmResourceDeleteWithoutOkAsync<ExternalNetwork>;
+
+  @doc("Implements External Networks list by resource group GET method.")
+  listByL3IsolationDomain is ArmResourceListByParent<
+    ExternalNetwork,
+    Response = ExternalNetworksList
+  >;
+
+  @doc("Executes update operation to enable or disable administrative State for externalNetwork.")
+  @action("updateAdministrativeState")
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "updateAdministrativeState")
+  @sharedRoute
+  updateAdministrativeStateDeprecated is ArmResourceActionAsync<
+    ExternalNetwork,
+    UpdateAdministrativeState,
+    CommonPostActionResponseForStateUpdate
+  >;
+
+  @doc("Executes update operation to enable or disable administrative State for externalNetwork.")
+  @action("updateAdministrativeState")
+  @added(Versions.v2025_07_15)
+  @sharedRoute
+  updateAdministrativeState is ArmResourceActionAsync<
+    ExternalNetwork,
+    UpdateAdministrativeState,
+    UpdateAdministrativeStateResponse
+  >;
+
+  @doc("Update Static Route BFD for external Network.")
+  @removed(Versions.v2024_06_15_preview)
+  @renamedFrom(Versions.v2025_07_15, "updateStaticRouteBfdAdministrativeState")
+  @action("updateStaticRouteBfdAdministrativeState")
+  @sharedRoute
+  updateStaticRouteBfdAdministrativeStateDeprecated is ArmResourceActionAsync<
+    ExternalNetwork,
+    UpdateAdministrativeState,
+    CommonPostActionResponseForStateUpdate
+  >;
+
+  @doc("Update Static Route BFD for external Network.")
+  @action("updateStaticRouteBfdAdministrativeState")
+  @added(Versions.v2025_07_15)
+  @sharedRoute
+  updateStaticRouteBfdAdministrativeState is ArmResourceActionAsync<
+    ExternalNetwork,
+    UpdateAdministrativeState,
+    UpdateAdministrativeStateResponse
+  >;
+
+  @doc("BFD administrative state for either static or bgp for internalNetwork.")
+  @added(Versions.v2024_06_15_preview)
+  @action("updateBfdAdministrativeState")
+  @removed(Versions.v2025_07_15)
+  @renamedFrom(Versions.v2025_07_15, "updateBfdAdministrativeState")
+  @sharedRoute
+  updateBfdAdministrativeStateDeprecated is ArmResourceActionAsync<
+    ExternalNetwork,
+    ExternalNetworkBfdAdministrativeStateRequest,
+    ExternalNetworkBfdAdministrativeStateResponse
+  >;
+
+  @doc("BFD administrative state for either static or bgp for internalNetwork.")
+  @action("updateBfdAdministrativeState")
+  @added(Versions.v2025_07_15)
+  @sharedRoute
+  updateBfdAdministrativeState is ArmResourceActionAsync<
+    ExternalNetwork,
+    ExternalNetworkUpdateBfdAdministrativeStateRequest,
+    ExternalNetworkUpdateBfdAdministrativeStateResponse
+  >;
+}
+
+@@doc(ExternalNetworks.create::parameters.resource, "Request payload.");
+@@doc(
+  ExternalNetworks.update::parameters.properties,
+  "ExternalNetwork properties to update. Only annotations are supported."
+);
+@@doc(
+  ExternalNetworks.updateAdministrativeState::parameters.body,
+  "Request payload."
+);
+@@doc(
+  ExternalNetworks.updateAdministrativeStateDeprecated::parameters.body,
+  "Request payload."
+);
+@@doc(
+  ExternalNetworks.updateStaticRouteBfdAdministrativeStateDeprecated::parameters.body,
+  "Request payload."
+);
+@@doc(
+  ExternalNetworks.updateStaticRouteBfdAdministrativeState::parameters.body,
+  "Request payload."
+);
+@@doc(
+  ExternalNetworks.updateBfdAdministrativeState::parameters.body,
+  "Request payload."
+);
+@@doc(
+  ExternalNetworks.updateBfdAdministrativeStateDeprecated::parameters.body,
+  "Request payload."
+);

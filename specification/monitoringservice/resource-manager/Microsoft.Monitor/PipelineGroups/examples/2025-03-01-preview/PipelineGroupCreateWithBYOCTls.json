@@ -1,0 +1,453 @@
+{
+  "title": "Create a PipelineGroup instance using OTLP receiver with Bring Your Own Certificate mutual TLS configuration",
+  "operationId": "PipelineGroups_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "pipelineGroupName": "plGroup1",
+    "api-version": "2025-03-01-preview",
+    "resource": {
+      "location": "eastus2",
+      "extendedLocation": {
+        "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.extendedlocation/customlocations/myTestCustomLocation",
+        "type": "CustomLocation"
+      },
+      "tags": {
+        "tag1": "Production",
+        "tag2": "SecureIngestion"
+      },
+      "properties": {
+        "receivers": [
+          {
+            "type": "OTLP",
+            "name": "secure-otlp-receiver",
+            "tlsConfiguration": "byoc-mtls-config",
+            "otlp": {
+              "endpoint": "0.0.0.0:4317"
+            }
+          },
+          {
+            "type": "OTLP",
+            "name": "server-only-otlp-receiver",
+            "tlsConfiguration": "server-only-tls-config",
+            "otlp": {
+              "endpoint": "0.0.0.0:4318"
+            }
+          }
+        ],
+        "processors": [
+          {
+            "type": "Batch",
+            "name": "batch-processor1"
+          }
+        ],
+        "exporters": [
+          {
+            "type": "AzureMonitorWorkspaceLogs",
+            "name": "secure-logs-exporter",
+            "azureMonitorWorkspaceLogs": {
+              "api": {
+                "dataCollectionEndpointUrl": "https://logs-myingestion-eb0s.eastus-1.ingest.monitor.azure.com",
+                "stream": "Custom-SecureLogs_CL",
+                "dataCollectionRule": "dcr-00000000000000000000000000000000",
+                "schema": {
+                  "recordMap": [
+                    {
+                      "from": "severity_text",
+                      "to": "SeverityText"
+                    },
+                    {
+                      "from": "body",
+                      "to": "Body"
+                    },
+                    {
+                      "from": "time_unix_nano",
+                      "to": "TimeGenerated"
+                    },
+                    {
+                      "from": "resource.service.name",
+                      "to": "ServiceName"
+                    }
+                  ]
+                }
+              },
+              "concurrency": {
+                "workerCount": 2,
+                "batchQueueSize": 100
+              }
+            }
+          }
+        ],
+        "service": {
+          "pipelines": [
+            {
+              "name": "SecureMutualTLSPipeline",
+              "type": "Logs",
+              "receivers": [
+                "secure-otlp-receiver"
+              ],
+              "processors": [
+                "batch-processor1"
+              ],
+              "exporters": [
+                "secure-logs-exporter"
+              ]
+            },
+            {
+              "name": "ServerOnlyTLSPipeline",
+              "type": "Logs",
+              "receivers": [
+                "server-only-otlp-receiver"
+              ],
+              "processors": [
+                "batch-processor1"
+              ],
+              "exporters": [
+                "secure-logs-exporter"
+              ]
+            }
+          ]
+        },
+        "tlsConfigurations": [
+          {
+            "name": "byoc-mtls-config",
+            "mode": "mutualTls",
+            "tlsCertificate": {
+              "certificate": {
+                "type": "kubernetesSecret",
+                "location": "pipeline-tls-cert",
+                "subLocation": "tls.crt"
+              },
+              "privateKey": {
+                "type": "kubernetesSecret",
+                "location": "pipeline-tls-cert",
+                "subLocation": "tls.key"
+              }
+            },
+            "clientCa": {
+              "type": "kubernetesSecret",
+              "location": "client-ca-bundle",
+              "subLocation": "ca.crt"
+            }
+          },
+          {
+            "name": "server-only-tls-config",
+            "mode": "serverOnly",
+            "tlsCertificate": {
+              "certificate": {
+                "type": "kubernetesSecret",
+                "location": "server-tls-cert",
+                "subLocation": "tls.crt"
+              },
+              "privateKey": {
+                "type": "kubernetesSecret",
+                "location": "server-tls-cert",
+                "subLocation": "tls.key"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/pipelineGroups/plGroup1",
+        "name": "plGroup1",
+        "type": "Microsoft.Monitor/pipelineGroups",
+        "location": "eastus2",
+        "extendedLocation": {
+          "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.extendedlocation/customlocations/myTestCustomLocation",
+          "type": "CustomLocation"
+        },
+        "tags": {
+          "tag1": "Production",
+          "tag2": "SecureIngestion"
+        },
+        "properties": {
+          "receivers": [
+            {
+              "type": "OTLP",
+              "name": "secure-otlp-receiver",
+              "tlsConfiguration": "byoc-mtls-config",
+              "otlp": {
+                "endpoint": "0.0.0.0:4317"
+              }
+            },
+            {
+              "type": "OTLP",
+              "name": "server-only-otlp-receiver",
+              "tlsConfiguration": "server-only-tls-config",
+              "otlp": {
+                "endpoint": "0.0.0.0:4318"
+              }
+            }
+          ],
+          "processors": [
+            {
+              "type": "Batch",
+              "name": "batch-processor1"
+            }
+          ],
+          "exporters": [
+            {
+              "type": "AzureMonitorWorkspaceLogs",
+              "name": "secure-logs-exporter",
+              "azureMonitorWorkspaceLogs": {
+                "api": {
+                  "dataCollectionEndpointUrl": "https://logs-myingestion-eb0s.eastus-1.ingest.monitor.azure.com",
+                  "stream": "Custom-SecureLogs_CL",
+                  "dataCollectionRule": "dcr-00000000000000000000000000000000",
+                  "schema": {
+                    "recordMap": [
+                      {
+                        "from": "severity_text",
+                        "to": "SeverityText"
+                      },
+                      {
+                        "from": "body",
+                        "to": "Body"
+                      },
+                      {
+                        "from": "time_unix_nano",
+                        "to": "TimeGenerated"
+                      },
+                      {
+                        "from": "resource.service.name",
+                        "to": "ServiceName"
+                      }
+                    ]
+                  }
+                },
+                "concurrency": {
+                  "workerCount": 2,
+                  "batchQueueSize": 100
+                }
+              }
+            }
+          ],
+          "service": {
+            "pipelines": [
+              {
+                "name": "SecureMutualTLSPipeline",
+                "type": "Logs",
+                "receivers": [
+                  "secure-otlp-receiver"
+                ],
+                "processors": [
+                  "batch-processor1"
+                ],
+                "exporters": [
+                  "secure-logs-exporter"
+                ]
+              },
+              {
+                "name": "ServerOnlyTLSPipeline",
+                "type": "Logs",
+                "receivers": [
+                  "server-only-otlp-receiver"
+                ],
+                "processors": [
+                  "batch-processor1"
+                ],
+                "exporters": [
+                  "secure-logs-exporter"
+                ]
+              }
+            ]
+          },
+          "tlsConfigurations": [
+            {
+              "name": "byoc-mtls-config",
+              "mode": "mutualTls",
+              "tlsCertificate": {
+                "certificate": {
+                  "type": "kubernetesSecret",
+                  "location": "pipeline-tls-cert",
+                  "subLocation": "tls.crt"
+                },
+                "privateKey": {
+                  "type": "kubernetesSecret",
+                  "location": "pipeline-tls-cert",
+                  "subLocation": "tls.key"
+                }
+              },
+              "clientCa": {
+                "type": "kubernetesSecret",
+                "location": "client-ca-bundle",
+                "subLocation": "ca.crt"
+              }
+            },
+            {
+              "name": "server-only-tls-config",
+              "mode": "serverOnly",
+              "tlsCertificate": {
+                "certificate": {
+                  "type": "kubernetesSecret",
+                  "location": "server-tls-cert",
+                  "subLocation": "tls.crt"
+                },
+                "privateKey": {
+                  "type": "kubernetesSecret",
+                  "location": "server-tls-cert",
+                  "subLocation": "tls.key"
+                }
+              }
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Monitor/pipelineGroups/plGroup1",
+        "name": "plGroup1",
+        "type": "Microsoft.Monitor/pipelineGroups",
+        "location": "eastus2",
+        "extendedLocation": {
+          "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/microsoft.extendedlocation/customlocations/myTestCustomLocation",
+          "type": "CustomLocation"
+        },
+        "tags": {
+          "tag1": "Production",
+          "tag2": "SecureIngestion"
+        },
+        "properties": {
+          "receivers": [
+            {
+              "type": "OTLP",
+              "name": "secure-otlp-receiver",
+              "tlsConfiguration": "byoc-mtls-config",
+              "otlp": {
+                "endpoint": "0.0.0.0:4317"
+              }
+            },
+            {
+              "type": "OTLP",
+              "name": "server-only-otlp-receiver",
+              "tlsConfiguration": "server-only-tls-config",
+              "otlp": {
+                "endpoint": "0.0.0.0:4318"
+              }
+            }
+          ],
+          "processors": [
+            {
+              "type": "Batch",
+              "name": "batch-processor1"
+            }
+          ],
+          "exporters": [
+            {
+              "type": "AzureMonitorWorkspaceLogs",
+              "name": "secure-logs-exporter",
+              "azureMonitorWorkspaceLogs": {
+                "api": {
+                  "dataCollectionEndpointUrl": "https://logs-myingestion-eb0s.eastus-1.ingest.monitor.azure.com",
+                  "stream": "Custom-SecureLogs_CL",
+                  "dataCollectionRule": "dcr-00000000000000000000000000000000",
+                  "schema": {
+                    "recordMap": [
+                      {
+                        "from": "severity_text",
+                        "to": "SeverityText"
+                      },
+                      {
+                        "from": "body",
+                        "to": "Body"
+                      },
+                      {
+                        "from": "time_unix_nano",
+                        "to": "TimeGenerated"
+                      },
+                      {
+                        "from": "resource.service.name",
+                        "to": "ServiceName"
+                      }
+                    ]
+                  }
+                },
+                "concurrency": {
+                  "workerCount": 2,
+                  "batchQueueSize": 100
+                }
+              }
+            }
+          ],
+          "service": {
+            "pipelines": [
+              {
+                "name": "SecureMutualTLSPipeline",
+                "type": "Logs",
+                "receivers": [
+                  "secure-otlp-receiver"
+                ],
+                "processors": [
+                  "batch-processor1"
+                ],
+                "exporters": [
+                  "secure-logs-exporter"
+                ]
+              },
+              {
+                "name": "ServerOnlyTLSPipeline",
+                "type": "Logs",
+                "receivers": [
+                  "server-only-otlp-receiver"
+                ],
+                "processors": [
+                  "batch-processor1"
+                ],
+                "exporters": [
+                  "secure-logs-exporter"
+                ]
+              }
+            ]
+          },
+          "tlsConfigurations": [
+            {
+              "name": "byoc-mtls-config",
+              "mode": "mutualTls",
+              "tlsCertificate": {
+                "certificate": {
+                  "type": "kubernetesSecret",
+                  "location": "pipeline-tls-cert",
+                  "subLocation": "tls.crt"
+                },
+                "privateKey": {
+                  "type": "kubernetesSecret",
+                  "location": "pipeline-tls-cert",
+                  "subLocation": "tls.key"
+                }
+              },
+              "clientCa": {
+                "type": "kubernetesSecret",
+                "location": "client-ca-bundle",
+                "subLocation": "ca.crt"
+              }
+            },
+            {
+              "name": "server-only-tls-config",
+              "mode": "serverOnly",
+              "tlsCertificate": {
+                "certificate": {
+                  "type": "kubernetesSecret",
+                  "location": "server-tls-cert",
+                  "subLocation": "tls.crt"
+                },
+                "privateKey": {
+                  "type": "kubernetesSecret",
+                  "location": "server-tls-cert",
+                  "subLocation": "tls.key"
+                }
+              }
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

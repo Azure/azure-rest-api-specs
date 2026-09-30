@@ -1,0 +1,58 @@
+{
+  "title": "Sends a notification message - Interactive Button",
+  "operationId": "NotificationMessagesOperations_Send",
+  "parameters": {
+    "api-version": "2025-01-15-preview",
+    "content-type": "application/json",
+    "body": {
+      "channelRegistrationId": "0f0eb78e-a576-1dfc-b414-0f0756de3338",
+      "to": [
+        "14250000000"
+      ],
+      "kind": "interactive",
+      "interactiveMessage": {
+        "header": {
+          "text": "Test Header",
+          "kind": "text"
+        },
+        "body": {
+          "text": "Test Body",
+          "kind": "text"
+        },
+        "footer": {
+          "text": "Test Footer",
+          "kind": "text"
+        },
+        "action": {
+          "kind": "whatsAppButtonAction",
+          "content": {
+            "buttons": [
+              {
+                "id": "cancel",
+                "title": "Cancel"
+              },
+              {
+                "id": "agree",
+                "title": "Agree"
+              }
+            ],
+            "kind": "buttonSet"
+          }
+        }
+      }
+    },
+    "endpoint": "https://my-resource.communication.azure.com"
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "receipts": [
+          {
+            "messageId": "320fc2a1-4c4b-4387-9c1a-bd38b57795de",
+            "to": "14250000000"
+          }
+        ]
+      }
+    }
+  }
+}

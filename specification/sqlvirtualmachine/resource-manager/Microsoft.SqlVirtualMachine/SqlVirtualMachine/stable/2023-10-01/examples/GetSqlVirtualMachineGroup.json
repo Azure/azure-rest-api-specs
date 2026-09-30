@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2023-10-01",
+    "resourceGroupName": "testrg",
+    "sqlVirtualMachineGroupName": "testvmgroup",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testvmgroup",
+        "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups/testvmgroup",
+        "location": "northeurope",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "sqlImageOffer": "SQL2016-WS2016",
+          "sqlImageSku": "Enterprise",
+          "wsfcDomainProfile": {
+            "clusterBootstrapAccount": "testrpadmin",
+            "clusterOperatorAccount": "testrp@testdomain.com",
+            "domainFqdn": "testdomain.com",
+            "isSqlServiceAccountGmsa": false,
+            "ouPath": "OU=WSCluster,DC=testdomain,DC=com",
+            "sqlServiceAccount": "sqlservice@testdomain.com",
+            "storageAccountUrl": "https://storgact.blob.core.windows.net/"
+          }
+        },
+        "tags": {
+          "mytag": "myval"
+        }
+      }
+    }
+  },
+  "operationId": "SqlVirtualMachineGroups_Get",
+  "title": "Gets a SQL virtual machine group."
+}

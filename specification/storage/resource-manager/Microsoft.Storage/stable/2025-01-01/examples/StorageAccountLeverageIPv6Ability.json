@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "res9407",
+    "accountName": "sto8596",
+    "api-version": "2025-01-01",
+    "monitor": "true",
+    "parameters": {
+      "properties": {
+        "networkAcls": {
+          "ipv6Rules": [
+            {
+              "action": "Allow",
+              "value": "2001:0db8:85a3::/64"
+            }
+          ],
+          "defaultAction": "Deny"
+        },
+        "dualStackEndpointPreference": {
+          "publishIpv6Endpoint": true
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res9407/providers/Microsoft.Storage/storageAccounts/sto8596",
+        "kind": "Storage",
+        "location": "eastus2(stage)",
+        "name": "sto8596",
+        "properties": {
+          "keyCreationTime": {
+            "key1": "2021-03-18T04:42:22.4322836Z",
+            "key2": "2021-03-18T04:42:22.4322836Z"
+          },
+          "creationTime": "2017-06-01T02:42:41.7633306Z",
+          "networkAcls": {
+            "ipv6Rules": [
+              {
+                "action": "Allow",
+                "value": "2001:0db8:85a3::/64"
+              }
+            ],
+            "bypass": "AzureServices",
+            "defaultAction": "Deny",
+            "ipRules": [],
+            "virtualNetworkRules": []
+          },
+          "dualStackEndpointPreference": {
+            "publishIpv6Endpoint": true
+          },
+          "primaryEndpoints": {
+            "web": "https://sto8596.web.core.windows.net/",
+            "dfs": "https://sto8596.dfs.core.windows.net/",
+            "blob": "https://sto8596.blob.core.windows.net/",
+            "file": "https://sto8596.file.core.windows.net/",
+            "queue": "https://sto8596.queue.core.windows.net/",
+            "table": "https://sto8596.table.core.windows.net/",
+            "ipv6Endpoints": {
+              "web": "https://sto8596-ipv6.web.core.windows.net/",
+              "dfs": "https://sto8596-ipv6.dfs.core.windows.net/",
+              "blob": "https://sto8596-ipv6.blob.core.windows.net/",
+              "file": "https://sto8596-ipv6.file.core.windows.net/",
+              "queue": "https://sto8596-ipv6.queue.core.windows.net/",
+              "table": "https://sto8596-ipv6.table.core.windows.net/"
+            }
+          },
+          "primaryLocation": "eastus2(stage)",
+          "provisioningState": "Succeeded",
+          "statusOfPrimary": "available"
+        },
+        "sku": {
+          "name": "Standard_LRS",
+          "tier": "Standard"
+        },
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
+        "type": "Microsoft.Storage/storageAccounts"
+      }
+    }
+  }
+}

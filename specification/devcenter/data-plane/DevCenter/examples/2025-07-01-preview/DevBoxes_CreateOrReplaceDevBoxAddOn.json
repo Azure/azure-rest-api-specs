@@ -1,0 +1,45 @@
+{
+  "title": "Creates a Dev Box addon.",
+  "operationId": "DevBoxes_CreateOrReplaceDevBoxAddOn",
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "endpoint": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com",
+    "projectName": "myProject",
+    "userId": "me",
+    "devBoxName": "myDevBox",
+    "addOnName": "devboxtunnel-sys-default",
+    "body": {
+      "kind": "DevBoxTunnel",
+      "hostingResourceName": "Default"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "devboxtunnel-sys-default",
+        "kind": "DevBoxTunnel",
+        "actionState": "Disabled",
+        "status": "Disabled",
+        "hostingResourceName": "Default",
+        "codeTunnelName": "mdb-contoso-35268c5-e8da-8918-128b-d3a2c4645795",
+        "codeTunnelUrl": "https://vscode.dev/tunnel/mdb-contoso-35268c5-e8da-8918-128b-d3a2c4645795"
+      }
+    },
+    "201": {
+      "headers": {
+        "Location": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com/projects/myProject/operationstatuses/786a823c-8037-48ab-89b8-8599901e67d0",
+        "Operation-Location": "https://8a40af38-3b4c-4672-a6a4-5e964b1870ed-contosodevcenter.centralus.devcenter.azure.com/projects/myProject/operationstatuses/786a823c-8037-48ab-89b8-8599901e67d0"
+      },
+      "body": {
+        "name": "devboxtunnel-sys-default",
+        "kind": "DevBoxTunnel",
+        "actionState": "Disabled",
+        "status": "Disabled",
+        "provisioningState": "Creating",
+        "hostingResourceName": "Default",
+        "codeTunnelName": "mdb-contoso-35268c5-e8da-8918-128b-d3a2c4645795",
+        "codeTunnelUrl": "https://vscode.dev/tunnel/mdb-contoso-35268c5-e8da-8918-128b-d3a2c4645795"
+      }
+    }
+  }
+}

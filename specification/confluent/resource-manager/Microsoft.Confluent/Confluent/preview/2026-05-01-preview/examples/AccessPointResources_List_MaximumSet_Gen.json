@@ -1,0 +1,52 @@
+{
+  "title": "AccessPointResources_List_MaximumSet",
+  "operationId": "AccessPointResources_List",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "subscriptionId": "DC34558A-05D3-4370-AED8-75E60B381F94",
+    "resourceGroupName": "rgconfluent",
+    "organizationName": "myOrganization",
+    "environmentId": "env-abc123",
+    "networkGatewayId": "gw-def456"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/DC34558A-05D3-4370-AED8-75E60B381F94/resourceGroups/rgconfluent/providers/Microsoft.Confluent/organizations/myOrganization/environments/env-abc123/networkGateways/gw-def456/accessPoints/ap-xyz789",
+            "name": "ap-xyz789",
+            "type": "Microsoft.Confluent/organizations/environments/networkGateways/accessPoints",
+            "properties": {
+              "accessPointName": "my-access-point",
+              "region": "eastus",
+              "vnetInjection": {
+                "virtualNetworkResourceId": "/subscriptions/DC34558A-05D3-4370-AED8-75E60B381F94/resourceGroups/rgconfluent/providers/Microsoft.Network/virtualNetworks/myVnet",
+                "subnetResourceId": "/subscriptions/DC34558A-05D3-4370-AED8-75E60B381F94/resourceGroups/rgconfluent/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
+              },
+              "egressRoutes": [
+                "10.0.0.0/8",
+                "172.16.0.0/12"
+              ],
+              "metadata": {
+                "self": "https://api.confluent.cloud/networking/v1/access-points/ap-xyz789",
+                "resourceName": "ap-xyz789",
+                "createdTimestamp": "2026-01-15T10:00:00Z",
+                "updatedTimestamp": "2026-01-15T10:05:00Z",
+                "deletedTimestamp": ""
+              },
+              "provisioningState": "Succeeded",
+              "dictionary": [
+                {
+                  "key": "accessPointType",
+                  "value": "EgressPrivateLink"
+                }
+              ]
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/DC34558A-05D3-4370-AED8-75E60B381F94/resourceGroups/rgconfluent/providers/Microsoft.Confluent/organizations/myOrganization/environments/env-abc123/networkGateways/gw-def456/accessPoints?api-version=2026-05-01-preview&$skipToken=token123"
+      }
+    }
+  }
+}

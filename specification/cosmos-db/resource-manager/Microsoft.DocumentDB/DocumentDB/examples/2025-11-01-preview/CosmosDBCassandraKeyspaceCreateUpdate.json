@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "accountName": "ddb1",
+    "api-version": "2025-11-01-preview",
+    "createUpdateCassandraKeyspaceParameters": {
+      "location": "West US",
+      "properties": {
+        "options": {},
+        "resource": {
+          "id": "keyspaceName"
+        }
+      },
+      "tags": {}
+    },
+    "keyspaceName": "keyspaceName",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "d6beadc3-5469-4109-ab3c-22a036c7e175"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "keyspaceName",
+        "type": "Microsoft.DocumentDB/databaseAccounts/cassandraKeyspaces",
+        "id": "/subscriptions/d6beadc3-5469-4109-ab3c-22a036c7e175/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/cassandraKeyspaces/keyspaceName",
+        "location": "West US",
+        "properties": {
+          "resource": {
+            "id": "keyspaceName"
+          }
+        },
+        "tags": {}
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2025-11-01-preview",
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2025-11-01-preview"
+      }
+    }
+  },
+  "operationId": "CassandraResources_CreateUpdateCassandraKeyspace",
+  "title": "CosmosDBCassandraKeyspaceCreateUpdate"
+}

@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "name": "test-ase",
+    "api-version": "2025-05-01",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "customDnsSuffix",
+        "type": "Microsoft.Web/hostingEnvironments/configurations/customdnssuffix",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-rg/providers/Microsoft.Web/hostingEnvironments/test-ase/configurations/customdnssuffix",
+        "properties": {
+          "certificateUrl": "https://test-kv.vault.azure.net/secrets/contosocert",
+          "dnsSuffix": "contoso.com",
+          "keyVaultReferenceIdentity": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/test-rg/providers/microsoft.managedidentity/userassignedidentities/test-user-mi",
+          "provisioningDetails": null,
+          "provisioningState": "Succeeded"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "AppServiceEnvironments_GetAseCustomDnsSuffixConfiguration",
+  "title": "Get ASE custom DNS suffix configuration"
+}

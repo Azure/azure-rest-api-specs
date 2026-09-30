@@ -1,0 +1,157 @@
+{
+  "operationId": "CarbonService_QueryCarbonEmissionReports",
+  "title": "QueryCarbonEmission Top N resource monthly Report",
+  "parameters": {
+    "api-version": "2025-04-01",
+    "queryParameters": {
+      "reportType": "TopItemsMonthlySummaryReport",
+      "subscriptionList": [
+        "00000000-0000-0000-0000-000000000000",
+        "00000000-0000-0000-0000-000000000001,",
+        "00000000-0000-0000-0000-000000000002",
+        "00000000-0000-0000-0000-000000000003",
+        "00000000-0000-0000-0000-000000000004",
+        "00000000-0000-0000-0000-000000000005",
+        "00000000-0000-0000-0000-000000000006",
+        "00000000-0000-0000-0000-000000000007",
+        "00000000-0000-0000-0000-000000000008"
+      ],
+      "carbonScopeList": [
+        "Scope1",
+        "Scope3"
+      ],
+      "dateRange": {
+        "start": "2024-03-01",
+        "end": "2024-05-01"
+      },
+      "categoryType": "Resource",
+      "topItems": 2
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "Returns data for top n resource monthly report.",
+      "body": {
+        "subscriptionAccessDecisionList": [
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000000",
+            "decision": "Allowed"
+          },
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000001",
+            "decision": "Allowed"
+          },
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000002",
+            "decision": "Allowed"
+          },
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000003",
+            "decision": "Allowed"
+          },
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000004",
+            "decision": "Allowed"
+          },
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000005",
+            "decision": "Allowed"
+          },
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000006",
+            "decision": "Denied"
+          },
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000007",
+            "decision": "Denied"
+          },
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000008",
+            "decision": "Denied",
+            "denialReason": "Carbon Optimization Reader permisison required"
+          }
+        ],
+        "value": [
+          {
+            "dataType": "ResourceTopItemsMonthlySummaryData",
+            "latestMonthEmissions": 0.1,
+            "previousMonthEmissions": 0.05,
+            "monthOverMonthEmissionsChangeRatio": 1.0,
+            "monthlyEmissionsChangeValue": 0.05,
+            "itemName": "rgName1",
+            "resourceGroup": "rgGroup",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgGroup/providers/microsoft.storage/storageaccounts/rgName1",
+            "subscriptionId": "00000000-0000-0000-0000-000000000000",
+            "categoryType": "Resource",
+            "date": "2024-05-01"
+          },
+          {
+            "dataType": "ResourceTopItemsMonthlySummaryData",
+            "latestMonthEmissions": 0.1,
+            "previousMonthEmissions": 0.05,
+            "monthOverMonthEmissionsChangeRatio": 1.0,
+            "monthlyEmissionsChangeValue": 0.05,
+            "itemName": "rgName1",
+            "resourceGroup": "rgGroup",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgGroup/providers/microsoft.storage/storageaccounts/rgName1",
+            "subscriptionId": "00000000-0000-0000-0000-000000000000",
+            "categoryType": "Resource",
+            "date": "2024-04-01"
+          },
+          {
+            "dataType": "ResourceTopItemsMonthlySummaryData",
+            "latestMonthEmissions": 0.1,
+            "previousMonthEmissions": 0.05,
+            "monthOverMonthEmissionsChangeRatio": 1.0,
+            "monthlyEmissionsChangeValue": 0.05,
+            "itemName": "rgName1",
+            "resourceGroup": "rgGroup",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgGroup/providers/microsoft.storage/storageaccounts/rgName1",
+            "subscriptionId": "00000000-0000-0000-0000-000000000000",
+            "categoryType": "Resource",
+            "date": "2024-03-01"
+          },
+          {
+            "dataType": "ResourceTopItemsMonthlySummaryData",
+            "latestMonthEmissions": 0.1,
+            "previousMonthEmissions": 0.05,
+            "monthOverMonthEmissionsChangeRatio": 1.0,
+            "monthlyEmissionsChangeValue": 0.05,
+            "itemName": "rgName2",
+            "resourceGroup": "rgGroup",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgGroup/providers/microsoft.storage/storageaccounts/rgName2",
+            "subscriptionId": "00000000-0000-0000-0000-000000000000",
+            "categoryType": "Resource",
+            "date": "2024-05-01"
+          },
+          {
+            "dataType": "ResourceTopItemsMonthlySummaryData",
+            "latestMonthEmissions": 0.1,
+            "previousMonthEmissions": 0.05,
+            "monthOverMonthEmissionsChangeRatio": 1.0,
+            "monthlyEmissionsChangeValue": 0.05,
+            "itemName": "rgName2",
+            "resourceGroup": "rgGroup",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgGroup/providers/microsoft.storage/storageaccounts/rgName2",
+            "subscriptionId": "00000000-0000-0000-0000-000000000000",
+            "categoryType": "Resource",
+            "date": "2024-04-01"
+          },
+          {
+            "dataType": "ResourceTopItemsMonthlySummaryData",
+            "latestMonthEmissions": 0.1,
+            "previousMonthEmissions": 0.05,
+            "monthOverMonthEmissionsChangeRatio": 1.0,
+            "monthlyEmissionsChangeValue": 0.05,
+            "itemName": "rgName2",
+            "resourceGroup": "rgGroup",
+            "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgGroup/providers/microsoft.storage/storageaccounts/rgName2",
+            "subscriptionId": "00000000-0000-0000-0000-000000000000",
+            "categoryType": "Resource",
+            "date": "2024-03-01"
+          }
+        ]
+      }
+    }
+  }
+}

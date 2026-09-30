@@ -1,20 +1,25 @@
 parameters:
-- name: NodeVersion
-  type: string
-  default: 20.x
+  - name: NodeVersion
+    type: string
+    default: $(NodeVersion)
+  - name: WorkingDirectory
+    type: string
+    default: $(Build.SourcesDirectory)
+
 steps:
-  - task: NodeTool@0
-    inputs:
-      versionSpec: ${{ parameters.NodeVersion }}
-    displayName: "Use Node ${{ parameters.NodeVersion }}"
+  - template: /eng/pipelines/templates/steps/use-node-version.yml
+    parameters:
+      NodeVersion: ${{ parameters.NodeVersion }}
 
-  - script: npm --version --loglevel info
-    displayName: npm --version
+  - script: npm run install-pnpm
+    displayName: Install pnpm
+    workingDirectory: ${{ parameters.WorkingDirectory }}
 
-  - script: npm ci
-    displayName: npm ci
+  - script: pnpm ci
+    displayName: pnpm install
+    workingDirectory: ${{ parameters.WorkingDirectory }}
 
-  - script: npm ls -a
-    displayName: npm ls -a
+  - script: pnpm ls || true
+    displayName: pnpm ls
     condition: succeededOrFailed()
-    continueOnError: true
+    workingDirectory: ${{ parameters.WorkingDirectory }}

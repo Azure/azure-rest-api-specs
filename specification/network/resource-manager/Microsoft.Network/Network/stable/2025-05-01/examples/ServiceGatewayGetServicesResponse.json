@@ -1,0 +1,44 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "resourceGroupName": "rg1",
+    "serviceGatewayName": "sg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "Service1",
+            "properties": {
+              "isDefault": true,
+              "loadBalancerBackendPools": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/be1"
+                }
+              ],
+              "publicNatGatewayId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/natGateways/test-natGateway",
+              "serviceType": "Inbound"
+            }
+          },
+          {
+            "name": "Service2",
+            "properties": {
+              "isDefault": false,
+              "loadBalancerBackendPools": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/be1"
+                }
+              ],
+              "publicNatGatewayId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/natGateways/test-natGateway",
+              "serviceType": "Outbound"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ServiceGateways_GetServices",
+  "title": "Get services in service gateway"
+}

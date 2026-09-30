@@ -1,6 +1,14 @@
 name: TypeSpec Validation
 
-on: pull_request
+on:
+  pull_request:
+    types:
+      # default
+      - opened
+      - synchronize
+      - reopened
+      # re-run if base branch is changed, since previous merge commit may generate incorrect diff
+      - edited
 
 permissions:
   contents: read
@@ -11,7 +19,7 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 2
 
@@ -19,10 +27,8 @@ jobs:
         uses: ./.github/actions/setup-node-install-deps
 
       - name: Validate Impacted Specs
-        run: |
-          # Keep processing when errors are written. Nonzero exit will mark the 
-          # step as failed. 
-          $ErrorActionPreference = 'Continue'
-
-          ./eng/scripts/TypeSpec-Validation.ps1 -GitClean -Verbose
-        shell: pwsh
+        # Only main and RPSaaSMaster validate all specs when core files change.
+        run: >-
+          node eng/tools/typespec-validation/cmd/tsv.js --changed --git-clean
+          ${{ runner.debug == '1' && '--verbose' || '' }}
+          ${{ github.base_ref != 'main' && github.base_ref != 'RPSaaSMaster' && '--ignore-core-files' || '' }}

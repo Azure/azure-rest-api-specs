@@ -25,9 +25,10 @@ To see additional help and options, run:
 These are the global settings for Weather Client.
 
 ``` yaml
+# 
 title: WeatherClient
 openapi-type: data-plane
-tag: 1.1
+tag: package-stable-1.1
 # at some point those credentials will move away to Swagger according to [this](https://github.com/Azure/autorest/issues/3718)
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
@@ -35,20 +36,20 @@ credential-scopes: https://atlas.microsoft.com/.default
 ```
 
 
-### Tag: 1.1
+### Tag: package-stable-1.1
 
-These settings apply only when `--tag=1.1` is specified on the command line.
+These settings apply only when `--tag=package-stable-1.1` is specified on the command line.
 
-``` yaml $(tag) == '1.1'
+``` yaml $(tag) == 'package-stable-1.1'
 input-file:
   - stable/1.1/weather.json
 ```
 
-### Tag: 1.0-preview
+### Tag: package-stable-1.0
 
-These settings apply only when `--tag=1.0-preview` is specified on the command line.
+These settings apply only when `--tag=package-stable-1.0` is specified on the command line.
 
-``` yaml $(tag) == '1.0-preview'
+``` yaml $(tag) == 'package-stable-1.0'
 input-file:
   - preview/1.0/weather.json
 ```

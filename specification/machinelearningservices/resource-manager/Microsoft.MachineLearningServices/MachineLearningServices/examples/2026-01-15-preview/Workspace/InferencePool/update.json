@@ -1,0 +1,88 @@
+{
+  "parameters": {
+    "api-version": "2026-01-15-preview",
+    "body": {
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "string": {}
+        }
+      },
+      "sku": {
+        "name": "string",
+        "capacity": 1,
+        "family": "string",
+        "size": "string",
+        "tier": "Standard"
+      },
+      "tags": {}
+    },
+    "inferencePoolName": "string",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "00000000-1111-2222-3333-444444444444",
+          "tenantId": "00000000-1111-2222-3333-444444444444",
+          "userAssignedIdentities": {
+            "string": {
+              "clientId": "00000000-1111-2222-3333-444444444444",
+              "principalId": "00000000-1111-2222-3333-444444444444"
+            }
+          }
+        },
+        "kind": "string",
+        "location": "string",
+        "properties": {
+          "description": "string",
+          "properties": [
+            {
+              "key": "string",
+              "value": "string"
+            }
+          ],
+          "provisioningState": "Canceled",
+          "scaleUnitConfiguration": {
+            "disablePublicEgress": false,
+            "registries": [
+              "string",
+              "registryName1"
+            ]
+          }
+        },
+        "sku": {
+          "name": "string",
+          "capacity": 1,
+          "family": "string",
+          "size": "string",
+          "tier": "Standard"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999+00:22",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-01T12:34:56.999+00:22",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        },
+        "tags": {}
+      },
+      "headers": {}
+    },
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/locations/centraluseuap/mfeOperationResults/prefix:F0C6B8EC-0D53-432C-913B-1CD9E8CDE3A0"
+      }
+    }
+  },
+  "operationId": "InferencePools_Update",
+  "title": "Update Workspace Inference Pool."
+}

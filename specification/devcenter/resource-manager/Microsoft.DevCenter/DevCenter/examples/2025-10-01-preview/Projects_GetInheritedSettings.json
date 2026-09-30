@@ -1,0 +1,94 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01-preview",
+    "projectName": "Contoso",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "0ac520ee-14c0-480f-b6c9-0a90c58fffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "projectCatalogSettings": {
+          "catalogItemSyncEnableStatus": "Enabled",
+          "valuesModifiable": "Modifiable",
+          "defaultValues": [
+            {
+              "name": "environmentDefinitionCatalogItemSync",
+              "value": "Enabled"
+            },
+            {
+              "name": "imageDefinitionCatalogItemSync",
+              "value": "Enabled"
+            }
+          ]
+        },
+        "networkSettings": {
+          "microsoftHostedNetworkEnableStatus": "Enabled"
+        },
+        "azureAiServicesSettings": {
+          "statusModifiable": "Modifiable",
+          "defaultStatus": "AutoDeploy"
+        },
+        "devBoxScheduleDeleteSettings": {
+          "statusModifiable": "NotModifiable",
+          "valuesModifiable": "Modifiable",
+          "defaultStatus": "Enabled",
+          "defaultValues": [
+            {
+              "name": "inactiveThreshold",
+              "value": "P30D"
+            },
+            {
+              "name": "gracePeriod",
+              "value": "P3D"
+            },
+            {
+              "name": "cancelOnConnectEnableStatus",
+              "value": "false"
+            }
+          ]
+        },
+        "devBoxLimitsSettings": {
+          "statusModifiable": "Modifiable",
+          "valuesModifiable": "Modifiable",
+          "defaultValues": [
+            {
+              "name": "maxDevBoxesPerUser",
+              "value": "10"
+            }
+          ],
+          "defaultStatus": "Enabled"
+        },
+        "displayNameSettings": {
+          "statusModifiable": "NotModifiable",
+          "defaultStatus": "Disabled"
+        },
+        "devBoxTunnelSettings": {
+          "statusModifiable": "Modifiable",
+          "defaultStatus": "Disabled"
+        },
+        "serverlessGpuSessionsSettings": {
+          "statusModifiable": "Modifiable",
+          "valuesModifiable": "NotModifiable",
+          "defaultValues": [
+            {
+              "name": "maxConcurrentSessionsPerProject",
+              "value": "3"
+            }
+          ],
+          "defaultStatus": "AutoDeploy"
+        },
+        "userCustomizationsSettings": {
+          "statusModifiable": "Modifiable",
+          "defaultStatus": "Enabled"
+        },
+        "workspaceStorageSettings": {
+          "statusModifiable": "NotModifiable",
+          "defaultStatus": "Disabled"
+        }
+      }
+    }
+  },
+  "operationId": "Projects_GetInheritedSettings",
+  "title": "Projects_GetInheritedSettings"
+}

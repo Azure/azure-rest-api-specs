@@ -1,0 +1,84 @@
+{
+  "operationId": "ManagedComputeDeployments_List",
+  "title": "ListManagedComputeDeployments",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resourceGroupName",
+    "accountName": "accountName",
+    "api-version": "2026-03-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/managedComputeDeployments/gpt-oss-120b-gpu",
+            "name": "gpt-oss-120b-gpu",
+            "type": "Microsoft.CognitiveServices/accounts/managedComputeDeployments",
+            "properties": {
+              "model": "azureml://registries/azureml-openai-oss/models/gpt-oss-120b/versions/4",
+              "deploymentTemplate": "azureml://registries/azureml-openai-oss/deploymenttemplates/gpt-oss-120b-short-context/versions/1",
+              "acceleratorType": "H100_80GB",
+              "acceleratorsPerInstance": 4,
+              "totalAccelerators": 4,
+              "versionUpgradeOption": "OnceNewDefaultVersionAvailable",
+              "provisioningState": "Succeeded",
+              "routes": {
+                "chatCompletionsScoringPath": "/managedComputeDeployments/gpt-oss-120b-gpu/chat/completions",
+                "swagger": "/managedComputeDeployments/gpt-oss-120b-gpu/swagger.json",
+                "messagesApiScoringPath": "/managedComputeDeployments/gpt-oss-120b-gpu/messages"
+              }
+            },
+            "sku": {
+              "name": "GlobalManagedCompute",
+              "capacity": 1
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/managedComputeDeployments/llama-3-gpu",
+            "name": "llama-3-gpu",
+            "type": "Microsoft.CognitiveServices/accounts/managedComputeDeployments",
+            "properties": {
+              "model": "azureml://registries/azureml-meta/models/Meta-Llama-3.1-405B-Instruct/versions/2",
+              "deploymentTemplate": "azureml://registries/azureml-meta/deploymenttemplates/llama-3-405b-fp8/versions/1",
+              "acceleratorType": "H100_80GB",
+              "acceleratorsPerInstance": 8,
+              "totalAccelerators": 16,
+              "versionUpgradeOption": "OnceNewDefaultVersionAvailable",
+              "provisioningState": "Succeeded",
+              "routes": {
+                "chatCompletionsScoringPath": "/managedComputeDeployments/llama-3-gpu/chat/completions",
+                "swagger": "/managedComputeDeployments/llama-3-gpu/swagger.json"
+              }
+            },
+            "sku": {
+              "name": "GlobalManagedCompute",
+              "capacity": 2
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/managedComputeDeployments/gpt-oss-120b-byoc",
+            "name": "gpt-oss-120b-byoc",
+            "type": "Microsoft.CognitiveServices/accounts/managedComputeDeployments",
+            "properties": {
+              "model": "azureml://registries/azureml-openai-oss/models/gpt-oss-120b/versions/4",
+              "deploymentTemplate": "projects/my-project/deploymentTemplates/gpt-oss-120b-vllm-tuned/versions/2",
+              "computeId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/computes/my-h100-pool",
+              "priority": "High",
+              "versionUpgradeOption": "OnceNewDefaultVersionAvailable",
+              "provisioningState": "Succeeded",
+              "routes": {
+                "chatCompletionsScoringPath": "/managed-deployments/gpt-oss-120b-byoc/v1/chat/completions"
+              }
+            },
+            "sku": {
+              "name": "VmManagedCompute",
+              "capacity": 2
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

@@ -1,0 +1,63 @@
+{
+  "operationId": "CarbonService_QueryCarbonEmissionReports",
+  "title": "QueryCarbonEmission Overall Monthly Summary Report",
+  "parameters": {
+    "api-version": "2025-04-01",
+    "queryParameters": {
+      "reportType": "MonthlySummaryReport",
+      "subscriptionList": [
+        "00000000-0000-0000-0000-000000000000"
+      ],
+      "carbonScopeList": [
+        "Scope1",
+        "Scope3"
+      ],
+      "dateRange": {
+        "start": "2024-03-01",
+        "end": "2024-05-01"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "Returns data for overall monthly summary report.",
+      "body": {
+        "subscriptionAccessDecisionList": [
+          {
+            "subscriptionId": "00000000-0000-0000-0000-000000000000",
+            "decision": "Allowed"
+          }
+        ],
+        "value": [
+          {
+            "dataType": "MonthlySummaryData",
+            "latestMonthEmissions": 0.1,
+            "previousMonthEmissions": 0.05,
+            "monthOverMonthEmissionsChangeRatio": 1.0,
+            "monthlyEmissionsChangeValue": 0.05,
+            "date": "2024-05-01",
+            "carbonIntensity": 22
+          },
+          {
+            "dataType": "MonthlySummaryData",
+            "latestMonthEmissions": 0.1,
+            "previousMonthEmissions": 0.05,
+            "monthOverMonthEmissionsChangeRatio": 1.0,
+            "monthlyEmissionsChangeValue": 0.05,
+            "date": "2024-04-01",
+            "carbonIntensity": 22
+          },
+          {
+            "dataType": "MonthlySummaryData",
+            "latestMonthEmissions": 0.1,
+            "previousMonthEmissions": 0.05,
+            "monthOverMonthEmissionsChangeRatio": 1.0,
+            "monthlyEmissionsChangeValue": 0.05,
+            "date": "2024-03-01",
+            "carbonIntensity": 22
+          }
+        ]
+      }
+    }
+  }
+}

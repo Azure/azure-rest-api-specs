@@ -1,0 +1,23 @@
+{
+  "parameters": {
+    "name": "{vmName}",
+    "api-version": "2018-09-15",
+    "labName": "{labName}",
+    "monitor": "true",
+    "resizeLabVirtualMachineProperties": {
+      "size": "Standard_A4_v2"
+    },
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.DevTestLabs/locations/{location}"
+      }
+    }
+  },
+  "operationId": "VirtualMachines_Resize",
+  "title": "VirtualMachines_Resize"
+}

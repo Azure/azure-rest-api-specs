@@ -1,0 +1,41 @@
+{
+  "description": "A simple query that returns query results.",
+  "parameters": {
+    "query": "StorageBlobLogs | summarize count() by OperationName | top 10 by count_ desc",
+    "resourceId": "subscriptions/fffa080af-c2d8-40ad-9cce-e1a450bawb57/resourceGroups/test-resourcegroup/providers/Microsoft.Storage/storageAccounts/storageaccountname",
+    "timespan": "PT24H"
+  },
+  "title": "Simple resource-centric GET query",
+  "responses": {
+    "200": {
+      "body": {
+        "tables": [
+          {
+            "name": "PrimaryResult",
+            "columns": [
+              {
+                "name": "OperationName",
+                "type": "string"
+              },
+              {
+                "name": "count_",
+                "type": "long"
+              }
+            ],
+            "rows": [
+              [
+                "operation1",
+                "10"
+              ]
+            ]
+          }
+        ]
+      },
+      "headers": {
+        "x-ms-correlation-request-id": "58a37988-2c05-427a-891f-5e0e1266fcc5",
+        "x-ms-request-id": "58a37988-2c05-427a-891f-5e0e1266fcc5"
+      }
+    }
+  },
+  "operationId": "Query_GetWithResourceId"
+}

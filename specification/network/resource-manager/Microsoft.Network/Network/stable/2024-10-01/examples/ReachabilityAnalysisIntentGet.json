@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2024-10-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "networkManagerName": "testNetworkManager",
+    "workspaceName": "testWorkspace",
+    "reachabilityAnalysisIntentName": "testAnalysisIntentName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/verifierWorkspaces/testWorkspace/reachabilityAnalysisIntents/testAnalysisIntentName",
+        "name": "testAnalysisIntentName",
+        "type": "Microsoft.Network/networkManagers/verifierWorkspaces/reachabilityAnalysisIntents",
+        "systemData": {
+          "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+          "createdByType": "User",
+          "createdAt": "2021-01-11T18:52:27Z",
+          "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2021-01-11T18:52:27Z"
+        },
+        "properties": {
+          "description": "A sample  reachability analysis intent",
+          "provisioningState": "Succeeded",
+          "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/testVmSrc",
+          "destinationResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/testVmDest",
+          "ipTraffic": {
+            "sourceIps": [
+              "10.4.0.0"
+            ],
+            "destinationIps": [
+              "10.4.0.1"
+            ],
+            "sourcePorts": [
+              "0"
+            ],
+            "destinationPorts": [
+              "0"
+            ],
+            "protocols": [
+              "Any"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

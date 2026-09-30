@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "$filter": "status eq 'active' AND source eq 'consumptioncommitment'",
+    "api-version": "2024-08-01",
+    "billingAccountId": "1234:5678"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "lot1",
+            "type": "Microsoft.Consumption/lots",
+            "id": "/providers/Microsoft.Billing/billingAccounts/1234:5678/billingProfiles/2468/providers/Microsoft.Consumption/lots/lot1",
+            "properties": {
+              "closedBalance": {
+                "currency": "USD",
+                "value": 60.9
+              },
+              "expirationDate": "2019-11-01T00:00:00Z",
+              "originalAmount": {
+                "currency": "USD",
+                "value": 5000
+              },
+              "purchasedDate": "2019-09-01T00:00:00Z",
+              "source": "ConsumptionCommitment",
+              "startDate": "2019-10-01T00:00:00Z",
+              "status": "Active"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Lots_ListByBillingAccount",
+  "title": "LotsListByBillingAccountWithStatusFilter"
+}

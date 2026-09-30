@@ -1,0 +1,30 @@
+- tool: TypeSpecValidation
+  paths:
+    - tspconfig.yaml
+  rules:
+    - SdkTspConfigValidation
+  sub-rules:
+    # Suppress all SDK generator validations as this is REST-only spec
+    - options.@azure-tools/typespec-java.package-dir
+    - options.@azure-tools/typespec-ts.package-dir
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-go.generate-fakes
+    - options.@azure-tools/typespec-go.inject-spans
+    - options.@azure-tools/typespec-go.service-dir
+    - options.@azure-tools/typespec-go.package-dir
+    - options.@azure-tools/typespec-go.options.emitter-output-dir
+    - options.@azure-tools/typespec-python.package-dir
+    - options.@azure-tools/typespec-csharp.package-dir
+    - options.@azure-tools/typespec-csharp.namespace
+    - options.@azure-tools/typespec-csharp.clear-output-folder
+  reason: 'This specification is REST-only and does not generate SDKs'
+
+- tool: TypeSpecRequirement
+  path: ./preview/2022-08-17-preview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./preview/2022-09-25-preview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./preview/2023-01-01-preview/*.json
+  reason: Brownfield service not ready to migrate

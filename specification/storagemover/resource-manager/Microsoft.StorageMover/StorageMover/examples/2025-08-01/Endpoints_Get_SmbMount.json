@@ -1,0 +1,32 @@
+{
+  "operationId": "Endpoints_Get",
+  "parameters": {
+    "api-version": "2025-08-01",
+    "endpointName": "examples-endpointName",
+    "resourceGroupName": "examples-rg",
+    "storageMoverName": "examples-storageMoverName",
+    "subscriptionId": "60bcfc77-6589-4da2-b7fd-f9ec9322cf95"
+  },
+  "title": "Endpoints_Get_SmbMount",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "examples-endpointName",
+        "type": "Microsoft.StorageMover/storageMovers/endpoints",
+        "id": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/endpoints/examples-endpointName",
+        "properties": {
+          "description": "Example SMB Mount Endpoint Description",
+          "credentials": {
+            "type": "AzureKeyVaultSmb",
+            "passwordUri": "https://examples-azureKeyVault.vault.azure.net/secrets/examples-password",
+            "usernameUri": "https://examples-azureKeyVault.vault.azure.net/secrets/examples-username"
+          },
+          "endpointType": "SmbMount",
+          "host": "0.0.0.0",
+          "provisioningState": "Succeeded",
+          "shareName": "examples-shareName"
+        }
+      }
+    }
+  }
+}

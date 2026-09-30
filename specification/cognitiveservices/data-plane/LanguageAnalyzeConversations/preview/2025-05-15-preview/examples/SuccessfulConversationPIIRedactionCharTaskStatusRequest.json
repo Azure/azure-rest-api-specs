@@ -1,0 +1,76 @@
+{
+  "operationId": "AnalyzeConversationsJobStatus",
+  "title": "SuccessfulConversationPIIRedactionCharTaskStatusRequest",
+  "parameters": {
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "api-version": "2025-05-15-preview",
+    "Endpoint": "{Endpoint}",
+    "jobId": "c0f2a446-05d9-48fc-ba8f-3ef4af8d0b18"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "createdDateTime": "2020-10-01T15:00:45Z",
+        "displayName": "Redacting PII from transcribed audio",
+        "expirationDateTime": "2020-10-03T15:01:03Z",
+        "jobId": "c0f2a446-05d9-48fc-ba8f-3ef4af8d0b18",
+        "lastUpdatedDateTime": "2022-01-25T15:01:03Z",
+        "status": "succeeded",
+        "tasks": {
+          "completed": 1,
+          "failed": 0,
+          "inProgress": 0,
+          "total": 1,
+          "items": [
+            {
+              "kind": "conversationalPIIResults",
+              "taskName": "Conversation PII",
+              "lastUpdateDateTime": "2022-01-25T15:01:03Z",
+              "status": "succeeded",
+              "results": {
+                "conversations": [
+                  {
+                    "id": "1",
+                    "conversationItems": [
+                      {
+                        "id": "1",
+                        "redactedContent": {
+                          "text": "Good morning -------------.",
+                          "itn": "good morning -------------",
+                          "maskedItn": "good morning -------------",
+                          "lexical": "good morning -------------",
+                          "audioTimings": [
+                            {
+                              "offset": 590000,
+                              "duration": 920000
+                            }
+                          ]
+                        },
+                        "entities": [
+                          {
+                            "category": "Person",
+                            "confidenceScore": 0.91,
+                            "length": 8,
+                            "offset": 13,
+                            "text": "john doe"
+                          }
+                        ]
+                      }
+                    ],
+                    "warnings": [],
+                    "statistics": {
+                      "transactionsCount": 1
+                    }
+                  }
+                ],
+                "errors": [],
+                "modelVersion": "2022-05-15-preview"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

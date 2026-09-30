@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2024-10-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "networkManagerName": "testNetworkManager",
+    "workspaceName": "testVerifierWorkspace1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/verifierWorkspaces/testVerifierWorkspace1/reachabilityAnalysisRuns/testReachabilityAnalysisRun1",
+            "name": "testReachabilityAnalysisRun1",
+            "type": "Microsoft.Network/networkManagers/verifierWorkspaces/reachabilityAnalysisRuns",
+            "systemData": {
+              "createdBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+              "createdByType": "User",
+              "createdAt": "2021-01-11T18:52:27Z",
+              "lastModifiedBy": "b69a9388-9488-4534-b470-7ec6d41beef5",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2021-01-11T18:52:27Z"
+            },
+            "properties": {
+              "description": "A sample  reachability analysis intent",
+              "intentId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/verifierWorkspaces/testVerifierWorkspace1/reachabilityAnalysisIntents/testReachabilityAnalysisIntenant1",
+              "provisioningState": "Succeeded",
+              "intentContent": {
+                "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/testVmSrc",
+                "destinationResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/testVmDest",
+                "ipTraffic": {
+                  "sourceIps": [
+                    "10.4.0.0"
+                  ],
+                  "destinationIps": [
+                    "10.4.0.1"
+                  ],
+                  "sourcePorts": [
+                    "0"
+                  ],
+                  "destinationPorts": [
+                    "0"
+                  ],
+                  "protocols": [
+                    "Any"
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroup/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager/verifierWorkspaces/testVerifierWorkspace1/reachabilityAnalysisRuns?api-version=2024-10-01&$skipToken=10"
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "If-Match": "*",
+    "api-version": "2025-03-01-preview",
+    "parameters": {
+      "properties": {
+        "format": "rawxml",
+        "value": "<policies>\r\n     <inbound>\r\n     <base />\r\n  <set-header name=\"newvalue\" exists-action=\"override\">\r\n   <value>\"@(context.Request.Headers.FirstOrDefault(h => h.Ke==\"Via\"))\" </value>\r\n    </set-header>\r\n  </inbound>\r\n      </policies>"
+      }
+    },
+    "policyId": "policy",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "workspaceId": "wks1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "policy",
+        "type": "Microsoft.ApiManagement/service/workspaces/policies",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/policies/policy",
+        "properties": {
+          "value": "<policies>\r\n  <inbound>\r\n    <base />\r\n    <set-header name=\"newvalue\" exists-action=\"override\">\r\n      <value>\"@(context.Request.Headers.FirstOrDefault(h =&gt; h.Ke==\"Via\"))\" </value>\r\n    </set-header>\r\n  </inbound>\r\n</policies>"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "policy",
+        "type": "Microsoft.ApiManagement/service/workspaces/policies",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/policies/policy",
+        "properties": {
+          "value": "<policies>\r\n  <inbound>\r\n    <base />\r\n    <set-header name=\"newvalue\" exists-action=\"override\">\r\n      <value>\"@(context.Request.Headers.FirstOrDefault(h =&gt; h.Ke==\"Via\"))\" </value>\r\n    </set-header>\r\n  </inbound>\r\n</policies>"
+        }
+      }
+    }
+  },
+  "operationId": "WorkspacePolicy_CreateOrUpdate",
+  "title": "ApiManagementCreateWorkspacePolicyNonXmlEncoded"
+}

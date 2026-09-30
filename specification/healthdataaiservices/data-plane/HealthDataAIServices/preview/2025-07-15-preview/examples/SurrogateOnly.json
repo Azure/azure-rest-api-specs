@@ -1,0 +1,46 @@
+{
+  "title": "De-identify text using SurrogateOnly operation.",
+  "operationId": "DeidentifyText",
+  "parameters": {
+    "api-version": "2025-07-15-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "body": {
+      "inputText": "Patient John Doe was seen by Dr. Smith on 2024-01-15",
+      "operation": "SurrogateOnly",
+      "taggedEntities": {
+        "encoding": "Utf16",
+        "entities": [
+          {
+            "category": "Patient",
+            "offset": 8,
+            "length": 8,
+            "text": "John Doe"
+          },
+          {
+            "category": "Doctor",
+            "offset": 29,
+            "length": 9,
+            "text": "Dr. Smith"
+          },
+          {
+            "category": "Date",
+            "offset": 42,
+            "length": 10,
+            "text": "2024-01-15"
+          }
+        ]
+      },
+      "customizations": {
+        "inputLocale": "es-US",
+        "surrogateLocale": "en-US"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "outputText": "Patient Michael Johnson was seen by Dr. Brown on 1987-06-23"
+      }
+    }
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "parameters": {
+    "resourceGroupName": "scgroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2025-07-01",
+    "amlFilesystemName": "fs1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "tags": {
+              "Dept": "ContosoAds"
+            },
+            "name": "autojob1",
+            "location": "eastus",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlfilesystems/fs1/autoImportJobs/autojob1",
+            "type": "Microsoft.StorageCache/amlFilesystem/autoImportJob",
+            "properties": {
+              "adminStatus": "Enable",
+              "provisioningState": "Succeeded",
+              "autoImportPrefixes": [
+                "/"
+              ],
+              "conflictResolutionMode": "Skip",
+              "enableDeletions": false,
+              "maximumErrors": 0,
+              "status": {
+                "state": "InProgress",
+                "scanStartTime": "2024-03-21T17:25:43.511Z",
+                "scanEndTime": "2024-03-21T18:25:43.511Z",
+                "totalBlobsWalked": 1000000,
+                "rateOfBlobWalk": 10000,
+                "totalBlobsImported": 900000,
+                "rateOfBlobImport": 4000,
+                "importedFiles": 8000,
+                "importedDirectories": 1000,
+                "importedSymlinks": 1000,
+                "preexistingFiles": 800000,
+                "preexistingDirectories": 80000,
+                "preexistingSymlinks": 10000,
+                "totalErrors": 10,
+                "totalConflicts": 5,
+                "blobSyncEvents": {
+                  "importedFiles": 500,
+                  "importedDirectories": 100,
+                  "importedSymlinks": 50,
+                  "preexistingFiles": 10000,
+                  "preexistingDirectories": 1000,
+                  "preexistingSymlinks": 200,
+                  "totalBlobsImported": 11850,
+                  "rateOfBlobImport": 120,
+                  "totalErrors": 3,
+                  "totalConflicts": 1,
+                  "deletions": 20,
+                  "lastChangeFeedEventConsumedTime": "2024-03-21T18:35:43.511Z",
+                  "lastTimeFullySynchronized": "2024-03-21T18:25:43.511Z"
+                },
+                "lastStartedTimeUTC": "2024-03-21T17:25:43.511Z"
+              }
+            }
+          },
+          {
+            "tags": {
+              "Dept": "ContosoFinance"
+            },
+            "name": "autojob2",
+            "location": "eastus",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlfilesystems/fs1/autoImportJobs/autojob2",
+            "type": "Microsoft.StorageCache/amlFilesystem/autoImportJob",
+            "properties": {
+              "adminStatus": "Disable",
+              "provisioningState": "Succeeded",
+              "autoImportPrefixes": [
+                "/finance"
+              ],
+              "conflictResolutionMode": "Fail",
+              "enableDeletions": true,
+              "maximumErrors": 0,
+              "status": {
+                "state": "Disabled",
+                "statusMessage": "Disabled",
+                "scanStartTime": "2024-03-19T17:25:43.511Z",
+                "scanEndTime": "2024-03-19T18:25:43.511Z",
+                "totalBlobsWalked": 800000,
+                "rateOfBlobWalk": 0,
+                "totalBlobsImported": 750000,
+                "rateOfBlobImport": 0,
+                "importedFiles": 7000,
+                "importedDirectories": 800,
+                "importedSymlinks": 500,
+                "preexistingFiles": 700000,
+                "preexistingDirectories": 70000,
+                "preexistingSymlinks": 8000,
+                "totalErrors": 8,
+                "totalConflicts": 3,
+                "blobSyncEvents": {
+                  "importedFiles": 300,
+                  "importedDirectories": 80,
+                  "importedSymlinks": 20,
+                  "preexistingFiles": 8000,
+                  "preexistingDirectories": 800,
+                  "preexistingSymlinks": 150,
+                  "totalBlobsImported": 9350,
+                  "rateOfBlobImport": 0,
+                  "totalErrors": 2,
+                  "totalConflicts": 0,
+                  "deletions": 15,
+                  "lastChangeFeedEventConsumedTime": "2024-03-19T18:35:43.511Z",
+                  "lastTimeFullySynchronized": "2024-03-19T18:25:43.511Z"
+                },
+                "lastStartedTimeUTC": "2024-03-21T17:25:43.511Z",
+                "lastCompletionTimeUTC": "2024-03-21T18:25:43.511Z"
+              }
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlFilesystems/fs1/autoImportJobs?$skipToken=autojob2&api-version=2025-07-01"
+      }
+    }
+  }
+}

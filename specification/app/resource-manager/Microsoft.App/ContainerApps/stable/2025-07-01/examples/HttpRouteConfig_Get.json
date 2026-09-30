@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "examplerg",
+    "environmentName": "testcontainerenv",
+    "httpRouteName": "httproutefriendlyname",
+    "api-version": "2025-07-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/httpRouteConfigs/route-1",
+        "type": "Microsoft.App/managedEnvironments/httpRouteConfigs",
+        "properties": {
+          "fqdn": "app1.example.com",
+          "provisioningState": "Succeeded",
+          "customDomains": [
+            {
+              "name": "example.com",
+              "bindingType": "SniEnabled",
+              "certificateId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/managedEnvironments/testcontainerenv/certificates/certificate-1"
+            }
+          ],
+          "rules": [
+            {
+              "targets": [
+                {
+                  "containerApp": "capp-1",
+                  "revision": "capp-1--0000001"
+                }
+              ],
+              "routes": [
+                {
+                  "match": {
+                    "prefix": "/api",
+                    "caseSensitive": true
+                  },
+                  "action": {
+                    "prefixRewrite": "/v1/api"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

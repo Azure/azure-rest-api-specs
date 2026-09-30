@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "containerAppName": "testcanadacentral",
+    "resourceGroupName": "workerapps-rg-xj",
+    "subscriptionId": "651f8027-33e8-4ec4-97b4-f6e9f3dc8744"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "name": "current",
+            "type": "Microsoft.App/containerapps/sourcecontrols",
+            "id": "/subscriptions/651f8027-33e8-4ec4-97b4-f6e9f3dc8744/resourceGroups/workerapps-rg-xj/providers/Microsoft.App/containerApps/testcanadacentral/sourcecontrols/current",
+            "properties": {
+              "branch": "master",
+              "githubActionConfiguration": {
+                "buildEnvironmentVariables": [
+                  {
+                    "name": "foo1",
+                    "value": "bar1"
+                  },
+                  {
+                    "name": "foo2",
+                    "value": "bar2"
+                  }
+                ],
+                "contextPath": "./",
+                "dockerfilePath": "./Dockerfile",
+                "image": "image/tag",
+                "registryInfo": {
+                  "registryUrl": "xwang971reg.azurecr.io",
+                  "registryUserName": "xwang971reg"
+                }
+              },
+              "repoUrl": "https://github.com/xwang971/ghatest"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "ContainerAppsSourceControls_ListByContainerApp",
+  "title": "List App's Source Controls"
+}

@@ -1,0 +1,1300 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NetworkManagerVerifierManagementClient",
+    "version": "2024-10-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/verifierWorkspaces/{workspaceName}/reachabilityAnalysisIntents": {
+      "get": {
+        "tags": [
+          "ReachabilityAnalysisIntents"
+        ],
+        "summary": "Gets list of Reachability Analysis Intents .",
+        "operationId": "ReachabilityAnalysisIntents_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/NetworkManagerNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "workspaceName",
+            "description": "Workspace name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "in": "query",
+            "name": "skipToken",
+            "description": "Optional skip token.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "Optional num entries to skip.",
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "description": "Optional num entries to show.",
+            "type": "integer",
+            "format": "int32",
+            "default": 50
+          },
+          {
+            "in": "query",
+            "name": "sortKey",
+            "description": "Optional key by which to sort.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "sortValue",
+            "description": "Optional sort value for pagination.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of ReachabilityAnalysisIntents",
+            "schema": {
+              "$ref": "#/definitions/ReachabilityAnalysisIntentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CommonErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ReachabilityAnalysisIntentList": {
+            "$ref": "./examples/ReachabilityAnalysisIntentList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/verifierWorkspaces/{workspaceName}/reachabilityAnalysisIntents/{reachabilityAnalysisIntentName}": {
+      "get": {
+        "tags": [
+          "ReachabilityAnalysisIntents"
+        ],
+        "summary": "Get the Reachability Analysis Intent.",
+        "operationId": "ReachabilityAnalysisIntents_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/NetworkManagerNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "workspaceName",
+            "description": "Workspace name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "in": "path",
+            "name": "reachabilityAnalysisIntentName",
+            "description": "Reachability Analysis Intent name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get a reachabilityAnalysisIntent",
+            "schema": {
+              "$ref": "#/definitions/ReachabilityAnalysisIntent"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CommonErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReachabilityAnalysisIntentGet": {
+            "$ref": "./examples/ReachabilityAnalysisIntentGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ReachabilityAnalysisIntents"
+        ],
+        "summary": "Creates Reachability Analysis Intent.",
+        "operationId": "ReachabilityAnalysisIntents_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/NetworkManagerNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "workspaceName",
+            "description": "Workspace name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "in": "path",
+            "name": "reachabilityAnalysisIntentName",
+            "description": "Reachability Analysis Intent name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Reachability Analysis Intent object to create/update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReachabilityAnalysisIntent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ReachabilityAnalysisIntent updated.",
+            "schema": {
+              "$ref": "#/definitions/ReachabilityAnalysisIntent"
+            }
+          },
+          "201": {
+            "description": "ReachabilityAnalysisIntent created.",
+            "schema": {
+              "$ref": "#/definitions/ReachabilityAnalysisIntent"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CommonErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReachabilityAnalysisIntentCreate": {
+            "$ref": "./examples/ReachabilityAnalysisIntentPut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ReachabilityAnalysisIntent"
+        ],
+        "summary": "Deletes Reachability Analysis Intent.",
+        "operationId": "ReachabilityAnalysisIntents_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/NetworkManagerNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "workspaceName",
+            "description": "Workspace name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "in": "path",
+            "name": "reachabilityAnalysisIntentName",
+            "description": "Reachability Analysis Intent name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ReachabilityAnalysisIntent was deleted."
+          },
+          "204": {
+            "description": "ReachabilityAnalysisIntent delete request succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CommonErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReachabilityAnalysisIntentDelete": {
+            "$ref": "./examples/ReachabilityAnalysisIntentDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/verifierWorkspaces/{workspaceName}/reachabilityAnalysisRuns": {
+      "get": {
+        "tags": [
+          "ReachabilityAnalysisRuns"
+        ],
+        "summary": "Gets list of Reachability Analysis Runs.",
+        "operationId": "ReachabilityAnalysisRuns_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/NetworkManagerNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "workspaceName",
+            "description": "Workspace name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "in": "query",
+            "name": "skipToken",
+            "description": "Optional skip token.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "Optional num entries to skip.",
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "description": "Optional num entries to show.",
+            "type": "integer",
+            "format": "int32",
+            "default": 50
+          },
+          {
+            "in": "query",
+            "name": "sortKey",
+            "description": "Optional key by which to sort.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "sortValue",
+            "description": "Optional sort value for pagination.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of ReachabilityAnalysisRuns",
+            "schema": {
+              "$ref": "#/definitions/ReachabilityAnalysisRunListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CommonErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ReachabilityAnalysisRunList": {
+            "$ref": "./examples/ReachabilityAnalysisRunList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/verifierWorkspaces/{workspaceName}/reachabilityAnalysisRuns/{reachabilityAnalysisRunName}": {
+      "get": {
+        "tags": [
+          "ReachabilityAnalysisRuns"
+        ],
+        "summary": "Gets Reachability Analysis Run.",
+        "operationId": "ReachabilityAnalysisRuns_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/NetworkManagerNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "workspaceName",
+            "description": "Workspace name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "in": "path",
+            "name": "reachabilityAnalysisRunName",
+            "description": "Reachability Analysis Run name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get a reachabilityAnalysisRun",
+            "schema": {
+              "$ref": "#/definitions/ReachabilityAnalysisRun"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CommonErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReachabilityAnalysisRunGet": {
+            "$ref": "./examples/ReachabilityAnalysisRunGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ReachabilityAnalysisRuns"
+        ],
+        "summary": "Creates Reachability Analysis Runs.",
+        "operationId": "ReachabilityAnalysisRuns_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/NetworkManagerNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "workspaceName",
+            "description": "Workspace name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "in": "path",
+            "name": "reachabilityAnalysisRunName",
+            "description": "Reachability Analysis Run name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Analysis Run resource object to create/update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReachabilityAnalysisRun"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ReachabilityAnalysisRun updated.",
+            "schema": {
+              "$ref": "#/definitions/ReachabilityAnalysisRun"
+            }
+          },
+          "201": {
+            "description": "ReachabilityAnalysisRun created and will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/ReachabilityAnalysisRun"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CommonErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ReachabilityAnalysisRunCreate": {
+            "$ref": "./examples/ReachabilityAnalysisRunPut.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ReachabilityAnalysisRuns"
+        ],
+        "summary": "Deletes Reachability Analysis Run.",
+        "operationId": "ReachabilityAnalysisRuns_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/NetworkManagerNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "workspaceName",
+            "description": "Workspace name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "in": "path",
+            "name": "reachabilityAnalysisRunName",
+            "description": "Reachability Analysis Run name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "ReachabilityAnalysisRun  delete request accepted and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "ReachabilityAnalysisRun delete request succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CommonErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "ReachabilityAnalysisRunDelete": {
+            "$ref": "./examples/ReachabilityAnalysisRunDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/verifierWorkspaces": {
+      "get": {
+        "tags": [
+          "VerifierWorkspaces"
+        ],
+        "summary": "Gets list of Verifier Workspaces.",
+        "operationId": "VerifierWorkspaces_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/NetworkManagerNameParameter"
+          },
+          {
+            "in": "query",
+            "name": "skipToken",
+            "description": "Optional skip token.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "skip",
+            "description": "Optional num entries to skip.",
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "description": "Optional num entries to show.",
+            "type": "integer",
+            "format": "int32",
+            "default": 50
+          },
+          {
+            "in": "query",
+            "name": "sortKey",
+            "description": "Optional key by which to sort.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "sortValue",
+            "description": "Optional sort value for pagination.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of VerifierWorkspaces.",
+            "schema": {
+              "$ref": "#/definitions/VerifierWorkspaceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CommonErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "VerifierWorkspaceList": {
+            "$ref": "./examples/VerifierWorkspaceList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/verifierWorkspaces/{workspaceName}": {
+      "get": {
+        "tags": [
+          "VerifierWorkspaces"
+        ],
+        "summary": "Gets Verifier Workspace.",
+        "operationId": "VerifierWorkspaces_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/NetworkManagerNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "workspaceName",
+            "description": "Workspace name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get a VerifierWorkspace.",
+            "schema": {
+              "$ref": "#/definitions/VerifierWorkspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CommonErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VerifierWorkspaceGet": {
+            "$ref": "./examples/VerifierWorkspaceGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "VerifierWorkspaces"
+        ],
+        "summary": "Creates Verifier Workspace.",
+        "operationId": "VerifierWorkspaces_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/NetworkManagerNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "workspaceName",
+            "description": "Workspace name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Verifier Workspace object to create/update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VerifierWorkspace"
+            }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "The entity state (ETag) version of the pool to update. This value can be omitted or set to \"*\" to apply the operation unconditionally."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "VerifierWorkspace updated.",
+            "schema": {
+              "$ref": "#/definitions/VerifierWorkspace"
+            }
+          },
+          "201": {
+            "description": "VerifierWorkspace created.",
+            "schema": {
+              "$ref": "#/definitions/VerifierWorkspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CommonErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VerifierWorkspaceCreate": {
+            "$ref": "./examples/VerifierWorkspacePut.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "VerifierWorkspaces"
+        ],
+        "summary": "Updates Verifier Workspace.",
+        "operationId": "VerifierWorkspaces_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/NetworkManagerNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "workspaceName",
+            "description": "Workspace name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Verifier Workspace object to create/update.",
+            "schema": {
+              "$ref": "#/definitions/VerifierWorkspaceUpdate"
+            }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "The entity state (ETag) version of the pool to update. This value can be omitted or set to \"*\" to apply the operation unconditionally."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "VerifierWorkspace updated.",
+            "schema": {
+              "$ref": "#/definitions/VerifierWorkspace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CommonErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VerifierWorkspacePatch": {
+            "$ref": "./examples/VerifierWorkspacePatch.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "VerifierWorkspaces"
+        ],
+        "summary": "Deletes Verifier Workspace.",
+        "operationId": "VerifierWorkspaces_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./networkManager.json#/parameters/NetworkManagerNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "workspaceName",
+            "description": "Workspace name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[0-9a-zA-Z]([0-9a-zA-Z_.-]{0,62}[0-9a-zA-Z_])?$"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "The entity state (ETag) version of the pool to update. This value can be omitted or set to \"*\" to apply the operation unconditionally."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "VerifierWorkspace  delete request accepted and will complete asynchronously.",
+            "headers": {
+              "Location": {
+                "description": "The URL of the resource used to check the status of the asynchronous operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "VerifierWorkspace delete request succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./network.json#/definitions/CommonErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "VerifierWorkspaceDelete": {
+            "$ref": "./examples/VerifierWorkspaceDelete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "IPTraffic": {
+      "required": [
+        "sourceIps",
+        "destinationIps",
+        "sourcePorts",
+        "destinationPorts",
+        "protocols"
+      ],
+      "description": "IP traffic information.",
+      "type": "object",
+      "properties": {
+        "sourceIps": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Source IP address of the traffic.."
+          },
+          "description": "List of source IP addresses of the traffic.."
+        },
+        "destinationIps": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Destination IP address of the traffic.."
+          },
+          "description": "List of destination IP addresses of the traffic.."
+        },
+        "sourcePorts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The source port."
+          },
+          "description": "The source ports of the traffic."
+        },
+        "destinationPorts": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The destination port."
+          },
+          "description": "The destination ports of the traffic."
+        },
+        "protocols": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkProtocol",
+            "description": "Network protocol this resource applies to."
+          }
+        }
+      }
+    },
+    "IntentContent": {
+      "required": [
+        "destinationResourceId",
+        "ipTraffic",
+        "sourceResourceId"
+      ],
+      "description": "Intent information.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "sourceResourceId": {
+          "format": "arm-id",
+          "type": "string",
+          "description": "Source resource id of the intent."
+        },
+        "destinationResourceId": {
+          "format": "arm-id",
+          "type": "string",
+          "description": "Destination resource id of the intent."
+        },
+        "ipTraffic": {
+          "$ref": "#/definitions/IPTraffic",
+          "description": "IP traffic information."
+        }
+      }
+    },
+    "NetworkProtocol": {
+      "enum": [
+        "Any",
+        "TCP",
+        "UDP",
+        "ICMP"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkProtocol",
+        "modelAsString": true
+      },
+      "description": "Network Protocol.",
+      "type": "string"
+    },
+    "ProvisioningState": {
+      "enum": [
+        "Failed",
+        "Succeeded",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "description": "Provisioning states of a resource.",
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      },
+      "type": "string",
+      "readOnly": true
+    },
+    "ReachabilityAnalysisIntentListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReachabilityAnalysisIntent"
+          },
+          "description": "Gets a page of Reachability Analysis Intents"
+        },
+        "nextLink": {
+          "description": "Gets the URL to get the next page of results.",
+          "type": "string"
+        }
+      },
+      "description": "A list of Reachability Analysis Intents."
+    },
+    "ReachabilityAnalysisIntent": {
+      "description": "Configuration information or intent on which to do the analysis on.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ReachabilityAnalysisIntentProperties"
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system metadata related to this resource.",
+          "$ref": "./network.json#/definitions/SystemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/CommonProxyResource"
+        }
+      ]
+    },
+    "ReachabilityAnalysisIntentProperties": {
+      "required": [
+        "destinationResourceId",
+        "ipTraffic",
+        "sourceResourceId"
+      ],
+      "description": "Represents the Reachability Analysis Intent properties.",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "description": {
+          "type": "string"
+        },
+        "sourceResourceId": {
+          "format": "arm-id",
+          "type": "string",
+          "description": "Source resource id to verify the reachability path of."
+        },
+        "destinationResourceId": {
+          "format": "arm-id",
+          "type": "string",
+          "description": "Destination resource id to verify the reachability path of."
+        },
+        "ipTraffic": {
+          "$ref": "#/definitions/IPTraffic",
+          "description": "IP traffic information."
+        }
+      }
+    },
+    "ReachabilityAnalysisRunListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReachabilityAnalysisRun"
+          },
+          "description": "Gets a page of Reachability Analysis Runs."
+        },
+        "nextLink": {
+          "description": "Gets the URL to get the next page of results.",
+          "type": "string"
+        }
+      },
+      "description": "A list of Reachability Analysis Run"
+    },
+    "ReachabilityAnalysisRun": {
+      "required": [
+        "properties"
+      ],
+      "description": "Configuration information for analysis run.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ReachabilityAnalysisRunProperties"
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system metadata related to this resource.",
+          "$ref": "./network.json#/definitions/SystemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/CommonProxyResource"
+        }
+      ]
+    },
+    "ReachabilityAnalysisRunProperties": {
+      "required": [
+        "intentId"
+      ],
+      "description": "Represents the Reachability Analysis Run properties.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "intentId": {
+          "type": "string",
+          "description": "Id of the intent resource to run analysis on."
+        },
+        "intentContent": {
+          "readOnly": true,
+          "$ref": "#/definitions/IntentContent",
+          "description": "Intent information."
+        },
+        "analysisResult": {
+          "type": "string",
+          "readOnly": true
+        },
+        "errorMessage": {
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "VerifierWorkspaceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VerifierWorkspace"
+          },
+          "description": "Gets a page of Verifier Workspaces."
+        },
+        "nextLink": {
+          "description": "Gets the URL to get the next page of results.",
+          "type": "string"
+        }
+      },
+      "description": "A list of Verifier Workspace"
+    },
+    "VerifierWorkspace": {
+      "description": "Instance of Verifier Workspace.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VerifierWorkspaceProperties"
+        },
+        "etag": {
+          "description": "String representing unique etag for the resource document.",
+          "type": "string",
+          "readOnly": true
+        },
+        "systemData": {
+          "readOnly": true,
+          "description": "The system metadata related to this resource.",
+          "$ref": "./network.json#/definitions/SystemData"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/CommonTrackedResource"
+        }
+      ]
+    },
+    "VerifierWorkspaceProperties": {
+      "type": "object",
+      "description": "Properties of Verifier Workspace resource.",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        }
+      }
+    },
+    "VerifierWorkspaceUpdate": {
+      "type": "object",
+      "description": "Represents the VerifierWorkspace update API request interface.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/VerifierWorkspaceUpdateProperties"
+        }
+      }
+    },
+    "VerifierWorkspaceUpdateProperties": {
+      "type": "object",
+      "description": "Represents the VerifierWorkspace update properties.",
+      "properties": {
+        "description": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow."
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

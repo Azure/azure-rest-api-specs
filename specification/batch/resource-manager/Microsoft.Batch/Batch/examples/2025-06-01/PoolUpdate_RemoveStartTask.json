@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "accountName": "sampleacct",
+    "api-version": "2025-06-01",
+    "parameters": {
+      "properties": {
+        "startTask": {}
+      }
+    },
+    "poolName": "testpool",
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testpool",
+        "type": "Microsoft.Batch/batchAccounts/pools",
+        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool",
+        "properties": {
+          "allocationState": "Resizing",
+          "allocationStateTransitionTime": "2017-08-29T10:22:55.9407275Z",
+          "autoScaleRun": {
+            "evaluationTime": "2017-08-29T10:22:55.9407275Z",
+            "results": "$TargetDedicatedNodes=34;NodeDeallocationOption=requeue"
+          },
+          "creationTime": "2017-08-28T10:22:55.9407275Z",
+          "currentDedicatedNodes": 12,
+          "currentLowPriorityNodes": 0,
+          "deploymentConfiguration": {
+            "virtualMachineConfiguration": {
+              "imageReference": {
+                "offer": "WindowsServer",
+                "publisher": "MicrosoftWindowsServer",
+                "sku": "2016-Datacenter-SmallDisk",
+                "version": "latest"
+              },
+              "nodeAgentSkuId": "batch.node.windows amd64"
+            }
+          },
+          "interNodeCommunication": "Disabled",
+          "lastModified": "2017-08-29T10:22:55.9407275Z",
+          "provisioningState": "Succeeded",
+          "provisioningStateTransitionTime": "2017-08-28T10:22:55.9407275Z",
+          "resizeOperationStatus": {
+            "nodeDeallocationOption": "Requeue",
+            "resizeTimeout": "PT15M",
+            "startTime": "2017-08-29T10:22:55.9407275Z",
+            "targetDedicatedNodes": 34
+          },
+          "scaleSettings": {
+            "autoScale": {
+              "evaluationInterval": "PT15M",
+              "formula": "$TargetDedicated=34"
+            }
+          },
+          "taskSchedulingPolicy": {
+            "nodeFillType": "Spread"
+          },
+          "taskSlotsPerNode": 1,
+          "vmSize": "STANDARD_D4"
+        }
+      },
+      "headers": {
+        "ETag": "W/\"0x8D4EDFEBFADF4AB\""
+      }
+    }
+  },
+  "operationId": "Pool_Update",
+  "title": "UpdatePool - Remove Start Task"
+}

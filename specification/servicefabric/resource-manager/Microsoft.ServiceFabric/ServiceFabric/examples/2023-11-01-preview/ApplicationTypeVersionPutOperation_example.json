@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2023-11-01-preview",
+    "applicationTypeName": "myAppType",
+    "clusterName": "myCluster",
+    "parameters": {
+      "properties": {
+        "appPackageUrl": "http://fakelink.test.com/MyAppType"
+      },
+      "tags": {}
+    },
+    "resourceGroupName": "resRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "version": "1.0"
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "name": "myCluster",
+        "type": "versions",
+        "etag": "W/\"636462502176040417\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster/applicationTypes/myAppType/versions/1.0",
+        "location": "eastus",
+        "properties": {
+          "appPackageUrl": "http://fakelink.test.com/MyAppType",
+          "defaultParameterList": {},
+          "provisioningState": "Updating"
+        },
+        "tags": {}
+      },
+      "headers": {
+        "Location": "http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/e2413c7e-d51b-40ac-8155-bc85bf8ae856?api-version=2023-11-01-preview",
+        "Retry-After": "10"
+      }
+    }
+  },
+  "operationId": "ApplicationTypeVersions_CreateOrUpdate",
+  "title": "Put an application type version"
+}

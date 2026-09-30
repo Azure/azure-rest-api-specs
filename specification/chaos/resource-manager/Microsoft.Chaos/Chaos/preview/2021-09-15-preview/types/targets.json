@@ -1,0 +1,64 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Target Types",
+    "version": "2021-09-15-preview"
+  },
+  "paths": {},
+  "definitions": {
+    "target": {
+      "type": "object",
+      "description": "Model that represents a Target resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../../../common-types/resource-management/v2/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "description": "The system metadata of the target resource.",
+          "$ref": "../../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Location of the target resource."
+        },
+        "properties": {
+          "description": "The properties of the target resource.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/targetProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "targetProperties": {
+      "type": "object",
+      "description": "Model that represents the base Target properties model.",
+      "properties": {},
+      "additionalProperties": true
+    },
+    "targetListResult": {
+      "type": "object",
+      "description": "Model that represents a list of Target resources and a link for pagination.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/target"
+          },
+          "description": "List of Target resources.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "$ref": "./common.json#/definitions/urlNullable",
+          "description": "URL to retrieve the next page of Target resources.",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

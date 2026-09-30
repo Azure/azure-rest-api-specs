@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01",
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG",
+    "viewName": "swaggerExample"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "swaggerExample",
+        "type": "Microsoft.CostManagement/Views",
+        "eTag": "\"1d4ff9fe66f1d10\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.CostManagement/views/swaggerExample",
+        "properties": {
+          "accumulated": "true",
+          "chart": "Table",
+          "displayName": "swagger Example",
+          "kpis": [
+            {
+              "type": "Forecast",
+              "enabled": true,
+              "id": null
+            },
+            {
+              "type": "Budget",
+              "enabled": true,
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG/providers/Microsoft.Consumption/budgets/swaggerDemo"
+            }
+          ],
+          "metric": "ActualCost",
+          "pivots": [
+            {
+              "name": "ServiceName",
+              "type": "Dimension"
+            },
+            {
+              "name": "MeterCategory",
+              "type": "Dimension"
+            },
+            {
+              "name": "swaggerTagKey",
+              "type": "TagKey"
+            }
+          ],
+          "query": {
+            "type": "Usage",
+            "dataSet": {
+              "aggregation": {
+                "totalCost": {
+                  "name": "PreTaxCost",
+                  "function": "Sum"
+                }
+              },
+              "granularity": "Daily",
+              "grouping": [],
+              "sorting": [
+                {
+                  "name": "UsageDate",
+                  "direction": "Ascending"
+                }
+              ]
+            },
+            "timeframe": "MonthToDate"
+          },
+          "scope": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/MYDEVTESTRG"
+        }
+      }
+    }
+  },
+  "operationId": "Views_GetByScope",
+  "title": "ResourceGroupView"
+}

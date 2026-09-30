@@ -1,0 +1,97 @@
+{
+  "parameters": {
+    "api-version": "2025-12-01",
+    "id": "string",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "my-aml-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "string",
+        "type": "string",
+        "id": "string",
+        "properties": {
+          "description": "string",
+          "computeId": "string",
+          "displayName": "string",
+          "earlyTermination": {
+            "delayEvaluation": 1,
+            "evaluationInterval": 1,
+            "policyType": "MedianStopping"
+          },
+          "experimentName": "string",
+          "jobType": "Sweep",
+          "limits": {
+            "jobLimitsType": "Sweep",
+            "maxConcurrentTrials": 1,
+            "maxTotalTrials": 1,
+            "trialTimeout": "PT1S"
+          },
+          "objective": {
+            "goal": "Minimize",
+            "primaryMetric": "string"
+          },
+          "properties": {
+            "string": "string"
+          },
+          "samplingAlgorithm": {
+            "samplingAlgorithmType": "Grid"
+          },
+          "searchSpace": {
+            "string": {}
+          },
+          "services": {
+            "string": {
+              "endpoint": "string",
+              "errorMessage": "string",
+              "jobServiceType": "string",
+              "port": 1,
+              "properties": {
+                "string": "string"
+              },
+              "status": "string"
+            }
+          },
+          "status": "NotStarted",
+          "tags": {
+            "string": "string"
+          },
+          "trial": {
+            "codeId": "string",
+            "command": "string",
+            "distribution": {
+              "distributionType": "Mpi",
+              "processCountPerInstance": 1
+            },
+            "environmentId": "string",
+            "environmentVariables": {
+              "string": "string"
+            },
+            "resources": {
+              "instanceCount": 1,
+              "instanceType": "string",
+              "properties": {
+                "string": {
+                  "e6b6493e-7d5e-4db3-be1e-306ec641327e": null
+                }
+              }
+            }
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T12:34:56.999Z",
+          "createdBy": "string",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-01T12:34:56.999Z",
+          "lastModifiedBy": "string",
+          "lastModifiedByType": "User"
+        }
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Jobs_Get",
+  "title": "Get Sweep Job."
+}

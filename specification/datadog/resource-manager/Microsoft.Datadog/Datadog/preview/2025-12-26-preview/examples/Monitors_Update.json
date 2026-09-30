@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "api-version": "2025-12-26-preview",
+    "body": {
+      "properties": {
+        "monitoringStatus": "Enabled"
+      },
+      "tags": {
+        "Environment": "Dev"
+      }
+    },
+    "monitorName": "myMonitor",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myMonitor",
+        "type": "Microsoft.Datadog/monitors",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor",
+        "location": "West US",
+        "properties": {
+          "datadogOrganizationProperties": {
+            "name": "myOrg",
+            "enterpriseAppId": null,
+            "id": "myOrg123",
+            "linkingAuthCode": null,
+            "linkingClientId": null
+          },
+          "marketplaceOfferDetails": {
+            "publisherId": "datadog1591740804488",
+            "offerId": "dd_liftr_v3_decoupled"
+          },
+          "liftrResourceCategory": "MonitorLogs",
+          "liftrResourcePreference": 1,
+          "monitoringStatus": "Enabled",
+          "provisioningState": "Succeeded"
+        },
+        "sku": {
+          "name": "free_Monthly"
+        },
+        "tags": {
+          "Environment": "Dev"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "myMonitor",
+        "type": "Microsoft.Datadog/monitors",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/monitors/myMonitor",
+        "location": "West US",
+        "properties": {
+          "datadogOrganizationProperties": {
+            "name": "myOrg",
+            "id": "myOrg123"
+          },
+          "marketplaceOfferDetails": {
+            "publisherId": "datadog1591740804488",
+            "offerId": "dd_liftr_v3_decoupled"
+          },
+          "liftrResourceCategory": "MonitorLogs",
+          "liftrResourcePreference": 1,
+          "monitoringStatus": "Enabled",
+          "provisioningState": "Accepted"
+        },
+        "sku": {
+          "name": "free_Monthly"
+        },
+        "tags": {
+          "Environment": "Dev"
+        }
+      }
+    }
+  },
+  "operationId": "Monitors_Update",
+  "title": "Monitors_Update"
+}

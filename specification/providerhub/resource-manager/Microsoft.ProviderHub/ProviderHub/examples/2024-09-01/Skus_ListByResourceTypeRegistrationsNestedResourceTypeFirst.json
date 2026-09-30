@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "api-version": "2024-09-01",
+    "nestedResourceTypeFirst": "nestedResourceTypeFirst",
+    "providerNamespace": "Microsoft.Contoso",
+    "resourceType": "testResourceType",
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "Microsoft.Contoso/employees/nestedEmployee/sku1",
+            "type": "Microsoft.ProviderHub/providerRegistrations/resourcetypeRegistrations/resourcetypeRegistrations/skus",
+            "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/resourcetypeRegistrations/employees/resourcetypeRegistrations/nestedEmployee/skus/sku1",
+            "properties": {
+              "skuSettings": [
+                {
+                  "name": "freeSku",
+                  "kind": "Standard",
+                  "tier": "Tier1"
+                },
+                {
+                  "name": "premiumSku",
+                  "costs": [
+                    {
+                      "meterId": "xxx"
+                    }
+                  ],
+                  "kind": "Premium",
+                  "tier": "Tier2"
+                }
+              ]
+            },
+            "systemData": {
+              "createdAt": "2020-02-01T01:01:01.1075056Z",
+              "createdBy": "string",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-02-01T01:01:01.1075056Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Skus_ListByResourceTypeRegistrationsNestedResourceTypeFirst",
+  "title": "Skus_ListByResourceTypeRegistrationsNestedResourceTypeFirst"
+}

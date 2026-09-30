@@ -1,0 +1,65 @@
+{
+  "operationId": "KnowledgeAgents_Create",
+  "title": "SearchServiceCreateKnowledgeAgent",
+  "parameters": {
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "api-version": "2025-11-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "knowledgeAgent": {
+      "name": "myagent",
+      "description": "My knowledge agent for customer support",
+      "models": [
+        {
+          "kind": "azureOpenAI",
+          "azureOpenAIParameters": {
+            "resourceUri": "https://myopenai.openai.azure.com",
+            "deploymentId": "gpt-4",
+            "apiKey": "myApiKey",
+            "modelName": "gpt-4"
+          }
+        }
+      ],
+      "knowledgeSources": [
+        {
+          "name": "myknowledgesource",
+          "includeReferences": true,
+          "includeReferenceSourceData": true
+        }
+      ],
+      "retrievalInstructions": "Provide accurate and helpful information to customer queries.",
+      "outputConfiguration": {
+        "modality": "answerSynthesis"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "myagent",
+        "description": "My knowledge agent for customer support",
+        "models": [
+          {
+            "kind": "azureOpenAI",
+            "azureOpenAIParameters": {
+              "resourceUri": "https://myopenai.openai.azure.com",
+              "deploymentId": "gpt-4",
+              "modelName": "gpt-4"
+            }
+          }
+        ],
+        "knowledgeSources": [
+          {
+            "name": "myknowledgesource",
+            "includeReferences": true,
+            "includeReferenceSourceData": true
+          }
+        ],
+        "retrievalInstructions": "Provide accurate and helpful information to customer queries.",
+        "outputConfiguration": {
+          "modality": "answerSynthesis"
+        },
+        "eTag": "0x8D9A1234567890A"
+      }
+    }
+  }
+}

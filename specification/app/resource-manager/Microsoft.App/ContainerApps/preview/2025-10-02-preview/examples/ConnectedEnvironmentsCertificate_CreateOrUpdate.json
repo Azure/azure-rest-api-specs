@@ -1,0 +1,61 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "certificateEnvelope": {
+      "location": "East US",
+      "properties": {
+        "password": "private key password",
+        "value": "Y2VydA=="
+      }
+    },
+    "certificateName": "certificate-firendly-name",
+    "connectedEnvironmentName": "testcontainerenv",
+    "resourceGroupName": "examplerg",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.App/ConnectedEnvironments/Certificates",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/connectedEnvironments/testcontainerenv/certififcates/certificate-firendly-name",
+        "location": "East US",
+        "properties": {
+          "deploymentErrors": null,
+          "expirationDate": "2022-11-06T04:00:00Z",
+          "issueDate": "2021-11-06T04:00:00Z",
+          "issuer": "Issuer Name",
+          "provisioningState": "Succeeded",
+          "subjectAlternativeNames": [
+            "CN=my-subject-name.com"
+          ],
+          "subjectName": "my-subject-name.company.country.net",
+          "thumbprint": "CERTIFICATE_THUMBPRINT",
+          "valid": true
+        }
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "testenv",
+        "type": "Microsoft.App/ConnectedEnvironments/Certificates",
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/examplerg/providers/Microsoft.App/connectedEnvironments/testcontainerenv/certififcates/certificate-firendly-name",
+        "location": "East US",
+        "properties": {
+          "expirationDate": "2022-11-06T04:00:00Z",
+          "issueDate": "2021-11-06T04:00:00Z",
+          "issuer": "Issuer Name",
+          "provisioningState": "InProgress",
+          "subjectAlternativeNames": [
+            "CN=my-subject-name.com"
+          ],
+          "subjectName": "my-subject-name.company.country.net",
+          "thumbprint": "CERTIFICATE_THUMBPRINT",
+          "valid": true
+        }
+      }
+    }
+  },
+  "operationId": "ConnectedEnvironmentsCertificates_CreateOrUpdate",
+  "title": "Create or Update Certificate"
+}

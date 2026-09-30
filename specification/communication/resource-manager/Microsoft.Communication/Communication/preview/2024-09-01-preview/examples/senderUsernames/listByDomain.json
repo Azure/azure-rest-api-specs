@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "subscriptionId": "11112222-3333-4444-5555-666677778888",
+    "resourceGroupName": "contosoResourceGroup",
+    "emailServiceName": "contosoEmailService",
+    "domainName": "contoso.com",
+    "api-version": "2024-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/11112222-3333-4444-5555-666677778888/resourceGroups/contosoResourceGroup/providers/Microsoft.Communication/EmailServices/contosoEmailService/Domains/contoso.com/senderUsernames/contosoNews",
+            "name": "contosoNews",
+            "type": "Microsoft.Communication/EmailServices/Domains/SenderUsernames",
+            "properties": {
+              "dataLocation": "United States",
+              "username": "contosoNews",
+              "displayName": "Contoso News"
+            }
+          },
+          {
+            "id": "/subscriptions/11112222-3333-4444-5555-666677778888/resourceGroups/contosoResourceGroup/providers/Microsoft.Communication/EmailServices/contosoEmailService/Domains/contoso.com/senderUsernames/contosoAlerts",
+            "name": "contosoAlerts",
+            "type": "Microsoft.Communication/EmailServices/Domains/SenderUsernames",
+            "properties": {
+              "dataLocation": "United States",
+              "username": "contosoAlerts",
+              "displayName": "Contoso Alerts"
+            }
+          }
+        ]
+      }
+    },
+    "default": {
+      "body": {
+        "error": {
+          "code": "ResourceNotFound",
+          "message": "The requested resource was not found"
+        }
+      }
+    }
+  }
+}

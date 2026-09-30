@@ -1,0 +1,55 @@
+{
+  "title": "Sends a notification message - Template",
+  "operationId": "NotificationMessagesOperations_Send",
+  "parameters": {
+    "api-version": "2025-01-15-preview",
+    "content-type": "application/json",
+    "body": {
+      "channelRegistrationId": "0f0eb78e-a576-1dfc-b414-0f0756de3338",
+      "to": [
+        "14250000000"
+      ],
+      "kind": "template",
+      "template": {
+        "name": "example",
+        "language": "en",
+        "values": [
+          {
+            "name": "userName",
+            "kind": "text",
+            "text": "John Doe"
+          },
+          {
+            "name": "orderNumber",
+            "kind": "text",
+            "text": "12345"
+          }
+        ],
+        "bindings": {
+          "body": [
+            {
+              "refValue": "userName"
+            },
+            {
+              "refValue": "orderNumber"
+            }
+          ],
+          "kind": "whatsApp"
+        }
+      }
+    },
+    "endpoint": "https://my-resource.communication.azure.com"
+  },
+  "responses": {
+    "202": {
+      "body": {
+        "receipts": [
+          {
+            "messageId": "320fc2a1-4c4b-4387-9c1a-bd38b57795de",
+            "to": "14250000000"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "parameters": {
+    "$expand": "components($filter=ComplianceState eq 'NonCompliant' or ComplianceState eq 'Compliant')",
+    "$filter": "policyAssignmentId eq '/subscriptions/e78961ba-36fe-4739-9212-e3031b4c8db7/providers/microsoft.authorization/policyassignments/560050f83dbb4a24974323f8'",
+    "api-version": "2024-10-01",
+    "policyStatesResource": "latest",
+    "resourceId": "subscriptions/e78961ba-36fe-4739-9212-e3031b4c8db7/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/Vaults/myKVName"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@odata.context": "https://management.azure.com/subscriptions/e78961ba-36fe-4739-9212-e3031b4c8db7/resourcegroups/myResourceGroup/providers/Microsoft.KeyVault/Vaults/myKVName/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest",
+        "@odata.count": 1,
+        "value": [
+          {
+            "@odata.context": "https://management.azure.com/subscriptions/e78961ba-36fe-4739-9212-e3031b4c8db7/resourcegroups/myResourceGroup/providers/Microsoft.KeyVault/Vaults/myKVName/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity",
+            "@odata.id": null,
+            "complianceState": "NonCompliant",
+            "components": [
+              {
+                "name": "cert-RSA-cert-3",
+                "type": "Certificate",
+                "complianceState": "NonCompliant",
+                "id": "cert-RSA-cert-3",
+                "timestamp": "2020-02-21T17:45:23.0367Z"
+              },
+              {
+                "name": "cert-RSA-cert-2",
+                "type": "Certificate",
+                "complianceState": "NonCompliant",
+                "id": "cert-RSA-cert-2",
+                "timestamp": "2020-02-21T17:45:22.7682778Z"
+              },
+              {
+                "name": "cert-rsa-cert-expires-2months",
+                "type": "Certificate",
+                "complianceState": "NonCompliant",
+                "id": "cert-rsa-cert-expires-2months",
+                "timestamp": "2020-02-21T17:45:22.6849056Z"
+              },
+              {
+                "name": "cert-RSA-cert-1",
+                "type": "Certificate",
+                "complianceState": "Compliant",
+                "id": "cert-RSA-cert-1",
+                "timestamp": "2020-02-21T17:45:22.6504951Z"
+              },
+              {
+                "name": "cert-rsa-cert-expires-1month",
+                "type": "Certificate",
+                "complianceState": "NonCompliant",
+                "id": "cert-rsa-cert-expires-1month",
+                "timestamp": "2020-02-21T17:45:22.5523666Z"
+              }
+            ],
+            "effectiveParameters": "",
+            "isCompliant": false,
+            "managementGroupIds": "PolicyUIMG,AzGovTest5,72f988bf-86f1-41af-91ab-2d7cd011db47",
+            "policyAssignmentId": "/subscriptions/e78961ba-36fe-4739-9212-e3031b4c8db7/providers/microsoft.authorization/policyassignments/560050f83dbb4a24974323f8",
+            "policyAssignmentName": "560050f83dbb4a24974323f8",
+            "policyAssignmentOwner": "tbd",
+            "policyAssignmentParameters": "",
+            "policyAssignmentScope": "/subscriptions/e78961ba-36fe-4739-9212-e3031b4c8db7",
+            "policyDefinitionAction": "audit",
+            "policyDefinitionCategory": "tbd",
+            "policyDefinitionId": "/subscriptions/e78961ba-36fe-4739-9212-e3031b4c8db7/providers/microsoft.authorization/policydefinitions/ab108bc4-32df-4677-8b38-fa8b2905df59",
+            "policyDefinitionName": "ab108bc4-32df-4677-8b38-fa8b2905df59",
+            "policyDefinitionReferenceId": "",
+            "policySetDefinitionCategory": "",
+            "policySetDefinitionId": "",
+            "policySetDefinitionName": "",
+            "policySetDefinitionOwner": "",
+            "policySetDefinitionParameters": "",
+            "resourceGroup": "myResourceGroup",
+            "resourceId": "/subscriptions/e78961ba-36fe-4739-9212-e3031b4c8db7/resourcegroups/myResourceGroup/providers/microsoft.keyvault/vaults/myKVName",
+            "resourceLocation": "westcentralus",
+            "resourceTags": "tbd",
+            "resourceType": "Microsoft.KeyVault/vaults",
+            "subscriptionId": "e78961ba-36fe-4739-9212-e3031b4c8db7",
+            "timestamp": "2020-02-21T19:42:08.3252921Z"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PolicyStates_ListQueryResultsForResource",
+  "title": "Query component policy compliance state at resource scope filtered by given assignment."
+}

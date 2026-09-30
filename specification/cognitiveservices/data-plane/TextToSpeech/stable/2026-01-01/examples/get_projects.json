@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "Endpoint": "https://eastus.api.cognitive.microsoft.com/",
+    "Ocp-Apim-Subscription-Key": "{API Key}",
+    "api-version": "2026-01-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://eastus.api.cognitive.microsoft.com/customvoice/projects?skip=2&maxpagesize=2&api-version=2026-01-01",
+        "value": [
+          {
+            "description": "Project for Jessica Voice",
+            "createdDateTime": "2023-04-01T05:30:00.000Z",
+            "id": "Jessica",
+            "kind": "ProfessionalVoice",
+            "locale": "en-US"
+          },
+          {
+            "description": "Project for personal voice",
+            "createdDateTime": "2023-04-01T05:30:00.000Z",
+            "id": "PersonalVoice",
+            "kind": "PersonalVoice",
+            "locale": "en-US"
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "Projects_List",
+  "title": "Get all projects"
+}

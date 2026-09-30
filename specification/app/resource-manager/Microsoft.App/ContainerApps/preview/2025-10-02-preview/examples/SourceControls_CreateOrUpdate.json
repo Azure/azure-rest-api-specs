@@ -1,0 +1,111 @@
+{
+  "parameters": {
+    "api-version": "2025-10-02-preview",
+    "containerAppName": "testcanadacentral",
+    "resourceGroupName": "workerapps-rg-xj",
+    "sourceControlEnvelope": {
+      "properties": {
+        "branch": "master",
+        "githubActionConfiguration": {
+          "azureCredentials": {
+            "clientId": "<clientid>",
+            "clientSecret": "<clientsecret>",
+            "kind": "feaderated",
+            "tenantId": "<tenantid>"
+          },
+          "buildEnvironmentVariables": [
+            {
+              "name": "foo1",
+              "value": "bar1"
+            },
+            {
+              "name": "foo2",
+              "value": "bar2"
+            }
+          ],
+          "contextPath": "./",
+          "dockerfilePath": "./Dockerfile",
+          "githubPersonalAccessToken": "test",
+          "image": "image/tag",
+          "registryInfo": {
+            "registryPassword": "<registrypassword>",
+            "registryUrl": "test-registry.azurecr.io",
+            "registryUserName": "test-registry"
+          }
+        },
+        "repoUrl": "https://github.com/xwang971/ghatest"
+      }
+    },
+    "sourceControlName": "current",
+    "subscriptionId": "651f8027-33e8-4ec4-97b4-f6e9f3dc8744",
+    "x-ms-github-auxiliary": "githubaccesstoken"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "current",
+        "type": "Microsoft.App/containerapps/sourcecontrols",
+        "id": "/subscriptions/651f8027-33e8-4ec4-97b4-f6e9f3dc8744/resourceGroups/workerapps-rg-xj/providers/Microsoft.App/containerApps/myapp/sourcecontrols/current",
+        "properties": {
+          "branch": "master",
+          "githubActionConfiguration": {
+            "buildEnvironmentVariables": [
+              {
+                "name": "foo1",
+                "value": "bar1"
+              },
+              {
+                "name": "foo2",
+                "value": "bar2"
+              }
+            ],
+            "contextPath": "./",
+            "image": "image/tag",
+            "registryInfo": {
+              "registryUrl": "test-registry.azurecr.io",
+              "registryUserName": "testreg"
+            }
+          },
+          "operationState": "InProgress",
+          "repoUrl": "https://github.com/xwang971/ghatest"
+        }
+      },
+      "headers": {}
+    },
+    "201": {
+      "body": {
+        "name": "current",
+        "type": "Microsoft.App/containerapps/sourcecontrols",
+        "id": "/subscriptions/651f8027-33e8-4ec4-97b4-f6e9f3dc8744/resourceGroups/workerapps-rg-xj/providers/Microsoft.App/containerApps/myapp/sourcecontrols/current",
+        "properties": {
+          "branch": "master",
+          "githubActionConfiguration": {
+            "buildEnvironmentVariables": [
+              {
+                "name": "foo1",
+                "value": "bar1"
+              },
+              {
+                "name": "foo2",
+                "value": "bar2"
+              }
+            ],
+            "contextPath": "./",
+            "image": "image/tag",
+            "registryInfo": {
+              "registryUrl": "test-registry.azurecr.io",
+              "registryUserName": "test-registry"
+            }
+          },
+          "operationState": "InProgress",
+          "repoUrl": "https://github.com/xwang971/ghatest"
+        }
+      },
+      "headers": {
+        "location": "https://localhost/subscriptions/651f8027-33e8-4ec4-97b4-f6e9f3dc8744/resourceGroups/workerapps-rg-xj/providers/Microsoft.App/containerApps/myapp/sourcecontrols/currentInOperationModel/operationresults/5a7f31af-8ae5-489b-a67e-f0a2d11df796?api-version=2021-03-01"
+      }
+    }
+  },
+  "operationId": "ContainerAppsSourceControls_CreateOrUpdate",
+  "title": "Create or Update Container App SourceControl"
+}

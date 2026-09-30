@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01",
+    "customDomainName": "www-someDomain-net",
+    "customHttpsParameters": {
+      "MinimumTLSVersion": "TLS12",
+      "certificateSource": "AzureKeyVault",
+      "certificateSourceParameters": {
+        "deleteRule": "NoAction",
+        "resourceGroupName": "RG",
+        "secretName": "secret1",
+        "secretVersion": "00000000-0000-0000-0000-000000000000",
+        "subscriptionId": "00000000-0000-0000-0000-000000000000",
+        "typeName": "KeyVaultCertificateSourceParameters",
+        "updateRule": "NoAction",
+        "vaultName": "kv"
+      },
+      "protocolType": "ServerNameIndication"
+    },
+    "endpointName": "endpoint1",
+    "profileName": "profile1",
+    "resourceGroupName": "RG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "www-someDomain-net",
+        "type": "Microsoft.Cdn/profiles/endpoints/customdomains",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/customdomains/www-someDomain-net",
+        "properties": {
+          "customHttpsProvisioningState": "Enabled",
+          "customHttpsProvisioningSubstate": "CertificateDeployed",
+          "hostName": "www.someDomain.net",
+          "provisioningState": "Succeeded",
+          "resourceState": "Active",
+          "validationData": "validationdata"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "www-someDomain-net",
+        "type": "Microsoft.Cdn/profiles/endpoints/customdomains",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/customdomains/www-someDomain-net",
+        "properties": {
+          "customHttpsProvisioningState": "Enabling",
+          "customHttpsProvisioningSubstate": "PendingDomainControlValidationREquestApproval",
+          "hostName": "www.someDomain.net",
+          "provisioningState": "Succeeded",
+          "resourceState": "Active",
+          "validationData": "validationdata"
+        }
+      },
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2025-06-01"
+      }
+    }
+  },
+  "operationId": "CustomDomains_EnableCustomHttps",
+  "title": "CustomDomains_EnableCustomHttpsUsingYourOwnCertificate"
+}

@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "accountName": "account1",
+    "api-version": "2025-09-01",
+    "poolName": "pool1",
+    "resourceGroupName": "myRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "volumeName": "volume1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "isDerivedQuota": false,
+            "percentageUsed": 5,
+            "quotaLimitTotalInKiBs": 204914688,
+            "quotaLimitUsedInKiBs": 8192,
+            "quotaTarget": "1013",
+            "quotaType": "IndividualUserQuota"
+          },
+          {
+            "isDerivedQuota": false,
+            "percentageUsed": 5,
+            "quotaLimitTotalInKiBs": 204914688,
+            "quotaLimitUsedInKiBs": 8192,
+            "quotaTarget": "1012",
+            "quotaType": "IndividualGroupQuota"
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/616ee961-4042-4935-b4a0-ed6f4dae0172?api-version=2025-07-01-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.NetApp/locations/eastus/operationResults/616ee961-4042-4935-b4a0-ed6f4dae0172?api-version=2025-07-01-preview&operationResultResponseType=Location"
+      }
+    }
+  },
+  "operationId": "Volumes_ListQuotaReport",
+  "title": "ListQuotaReport"
+}

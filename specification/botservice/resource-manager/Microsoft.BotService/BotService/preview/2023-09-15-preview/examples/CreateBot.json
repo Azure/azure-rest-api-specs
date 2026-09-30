@@ -1,0 +1,131 @@
+{
+  "parameters": {
+    "api-version": "2023-09-15-preview",
+    "parameters": {
+      "etag": "etag1",
+      "kind": "sdk",
+      "location": "West US",
+      "properties": {
+        "description": "The description of the bot",
+        "cmekKeyVaultUrl": "https://myCmekKey",
+        "developerAppInsightKey": "appinsightskey",
+        "developerAppInsightsApiKey": "appinsightsapikey",
+        "developerAppInsightsApplicationId": "appinsightsappid",
+        "disableLocalAuth": true,
+        "displayName": "The Name of the bot",
+        "endpoint": "http://mybot.coffee",
+        "iconUrl": "http://myicon",
+        "isCmekEnabled": true,
+        "luisAppIds": [
+          "luisappid1",
+          "luisappid2"
+        ],
+        "luisKey": "luiskey",
+        "msaAppId": "exampleappid",
+        "msaAppMSIResourceId": "/subscriptions/foo/resourcegroups/bar/providers/microsoft.managedidentity/userassignedidentities/sampleId",
+        "msaAppTenantId": "exampleapptenantid",
+        "msaAppType": "UserAssignedMSI",
+        "publicNetworkAccess": "Enabled",
+        "schemaTransformationVersion": "1.0"
+      },
+      "sku": {
+        "name": "S1"
+      },
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    },
+    "resourceGroupName": "OneResourceGroupName",
+    "resourceName": "samplebotname",
+    "subscriptionId": "subscription-id"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "samplebotname",
+        "type": "Microsoft.BotService/botServices",
+        "etag": "etag1",
+        "id": "/subscriptions/subscription-id/resourceGroups/OneResourceGroupName/providers/Microsoft.BotService/botServices/samplebotname",
+        "kind": "sdk",
+        "location": "West US",
+        "properties": {
+          "description": "The description of the bot",
+          "cmekKeyVaultUrl": "https://myCmekKey",
+          "configuredChannels": [
+            "facebook",
+            "groupme"
+          ],
+          "developerAppInsightKey": "appinsightskey",
+          "developerAppInsightsApplicationId": "appinsightsappid",
+          "disableLocalAuth": true,
+          "displayName": "The Name of the bot",
+          "enabledChannels": [
+            "facebook"
+          ],
+          "endpoint": "http://mybot.coffee",
+          "endpointVersion": "version",
+          "iconUrl": "http://myicon",
+          "isCmekEnabled": true,
+          "luisAppIds": [
+            "luisappid1",
+            "luisappid2"
+          ],
+          "msaAppId": "msaappid",
+          "msaAppMSIResourceId": "/subscriptions/foo/resourcegroups/bar/providers/microsoft.managedidentity/userassignedidentities/sampleId",
+          "msaAppTenantId": "msaapptenantid",
+          "msaAppType": "UserAssignedMSI",
+          "publicNetworkAccess": "Enabled",
+          "schemaTransformationVersion": "1.0"
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "samplebotname",
+        "type": "Microsoft.BotService/botServices",
+        "id": "/subscriptions/subscription-id/resourceGroups/OneResourceGroupName/providers/Microsoft.BotService/botServices/samplebotname",
+        "kind": "sdk",
+        "location": "West US",
+        "properties": {
+          "description": "The description of the bot",
+          "cmekKeyVaultUrl": "https://myCmekKey",
+          "configuredChannels": [
+            "facebook",
+            "groupme"
+          ],
+          "developerAppInsightsApplicationId": "appinsightsappid",
+          "disableLocalAuth": true,
+          "displayName": "The Name of the bot",
+          "enabledChannels": [
+            "facebook"
+          ],
+          "endpoint": "http://mybot.coffee",
+          "endpointVersion": "version",
+          "iconUrl": "http://myicon",
+          "isCmekEnabled": true,
+          "luisAppIds": [
+            "luisappid1",
+            "luisappid2"
+          ],
+          "msaAppId": "msaappid",
+          "msaAppMSIResourceId": "/subscriptions/foo/resourcegroups/bar/providers/microsoft.managedidentity/userassignedidentities/sampleId",
+          "msaAppTenantId": "msaapptenantid",
+          "msaAppType": "UserAssignedMSI",
+          "publicNetworkAccess": "Enabled",
+          "schemaTransformationVersion": "1.0"
+        },
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        }
+      }
+    }
+  },
+  "operationId": "Bots_Create",
+  "title": "Create Bot"
+}

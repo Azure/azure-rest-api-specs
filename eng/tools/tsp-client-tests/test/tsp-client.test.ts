@@ -1,47 +1,39 @@
-import { execa } from "execa";
-import { access, constants, mkdir, rm } from "fs/promises";
-import { dirname, join } from "path";
-import { ExpectStatic, test } from "vitest";
+import { execPnpmExec } from "@azure-tools/specs-shared/exec";
+import { debugLogger } from "@azure-tools/specs-shared/logger";
 
-const repoRoot = join(__dirname, "..", "..", "..", "..");
+import { access, constants, mkdtemp, rm } from "fs/promises";
+import { join } from "path";
+import { test } from "vitest";
 
-async function npmExec(...args: string[]) {
-  const allArgs = ["exec", "--no", "--"].concat(args);
-  console.log(`${repoRoot}$ npm ${allArgs.join(" ")}`);
+const repoRoot = join(import.meta.dirname, "..", "..", "..", "..");
 
-  const result = await execa("npm", allArgs, { all: true, cwd: repoRoot, reject: false });
-  console.log(result.all);
-  return result;
-}
+const options = { cwd: repoRoot, logger: debugLogger };
 
-async function convert(expect: ExpectStatic, readme: string) {
-  const resMan = readme.includes("resource-manager");
-  const specFolder = dirname(dirname(join(repoRoot, readme)));
-  const tspFolder = "Test.TspClientConvert" + (resMan ? ".Management" : "");
-  const outputFolder = join(specFolder, tspFolder);
+test.concurrent("Usage", async ({ expect }) => {
+  await expect(execPnpmExec(["tsp-client"], options)).rejects.toThrow("Usage");
+});
+
+test.concurrent("Convert resource-manager fixture", async ({ expect }) => {
+  const readme = join(import.meta.dirname, "fixtures", "resource-manager", "readme.md");
+  // Keep generated files under the package so compilation resolves the workspace dependencies.
+  const outputFolder = await mkdtemp(join(import.meta.dirname, "tsp-client-convert-"));
 
   try {
-    await mkdir(outputFolder);
-  } catch {
-    // Delete and retry
-    await rm(outputFolder, { recursive: true, force: true });
-    await mkdir(outputFolder);
-  }
-
-  try {
-    let { stdout, all, exitCode } = await npmExec(
-      "tsp-client",
-      "convert",
-      "--no-prompt",
-      "--swagger-readme",
-      readme,
-      "-o",
-      outputFolder,
-      resMan ? "--arm" : "",
+    let result = await execPnpmExec(
+      [
+        "tsp-client",
+        "convert",
+        "--no-prompt",
+        "--swagger-readme",
+        readme,
+        "-o",
+        outputFolder,
+        "--arm",
+      ],
+      options,
     );
 
-    expect(stdout).toContain("Converting");
-    expect(exitCode, all).toBe(0);
+    expect(result.stdout).toContain("Converting");
 
     const tspConfigYaml = join(outputFolder, "tspconfig.yaml");
     await access(tspConfigYaml, constants.R_OK);
@@ -52,30 +44,13 @@ async function convert(expect: ExpectStatic, readme: string) {
     console.log(`File exists: ${mainTsp}`);
 
     // Use "--no-emit" to avoid generating output files that would need to be cleaned up
-    ({ stdout, all, exitCode } = await npmExec("tsp", "compile", "--no-emit", outputFolder));
+    result = await execPnpmExec(["tsp", "compile", "--no-emit", outputFolder], options);
 
-    expect(stdout).toContain("TypeSpec compiler");
-    expect(exitCode, all).toBe(0);
+    expect(result.stdout).toContain("TypeSpec compiler");
   } finally {
-    await rm(outputFolder, { recursive: true, force: true });
+    await rm(outputFolder, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 });
   }
 
   // Ensure outputFolder is deleted
   await expect(() => access(outputFolder)).rejects.toThrowError();
-}
-
-test.concurrent("Usage", async ({ expect }) => {
-  const { all, exitCode } = await npmExec("tsp-client");
-
-  expect(all).toContain("Usage");
-  expect(exitCode).not.toBe(0);
-});
-
-// Disabled since tsp-client is failing on data-plane
-test.skip.concurrent("Convert contosowidgetmanager/data-plane", async ({ expect }) => {
-  await convert(expect, "specification/contosowidgetmanager/data-plane/readme.md");
-});
-
-test.concurrent("Convert contosowidgetmanager/resource-manager", async ({ expect }) => {
-  await convert(expect, "specification/contosowidgetmanager/resource-manager/readme.md");
 });

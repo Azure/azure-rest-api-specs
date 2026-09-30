@@ -1,0 +1,88 @@
+{
+  "parameters": {
+    "api-version": "2024-08-01",
+    "resourceScope": "providers/Microsoft.Billing/billingAccounts/123456"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Consumption/reservationRecommendations?api-version=2024-08-01&$skiptoken=AQAAAA%3D%3D&",
+        "value": [
+          {
+            "name": "00000000-0000-0000-0000-000000000000",
+            "type": "Microsoft.Consumption/reservationRecommendations",
+            "id": "billingAccount/123456/providers/Microsoft.Consumption/reservationRecommendations/00000000-0000-0000-0000-000000000000",
+            "kind": "legacy",
+            "location": "westus",
+            "properties": {
+              "costWithNoReservedInstances": 12.0785105,
+              "firstUsageDate": "2019-07-07T00:00:00-07:00",
+              "instanceFlexibilityGroup": "DSv2 Series",
+              "instanceFlexibilityRatio": 1,
+              "lastUsageDate": "2019-08-07T00:00:00-07:00",
+              "lookBackPeriod": "Last7Days",
+              "meterId": "00000000-0000-0000-0000-000000000000",
+              "netSavings": 0.588546019225182,
+              "normalizedSize": "Standard_DS1_v2",
+              "recommendedQuantity": 1,
+              "recommendedQuantityNormalized": 1,
+              "scope": "Shared",
+              "skuProperties": [
+                {
+                  "name": "Cores",
+                  "value": "1"
+                },
+                {
+                  "name": "Ram",
+                  "value": "1"
+                }
+              ],
+              "term": "P1Y",
+              "totalCostWithReservedInstances": 11.4899644807748,
+              "totalHours": 701
+            },
+            "sku": "Standard_DS1_v2"
+          },
+          {
+            "name": "00000000-0000-0000-0000-000000000000",
+            "type": "Microsoft.Consumption/reservationRecommendations",
+            "id": "billingAccount/123456/providers/Microsoft.Consumption/reservationRecommendations/00000000-0000-0000-0000-000000000000",
+            "kind": "legacy",
+            "location": "westus",
+            "properties": {
+              "costWithNoReservedInstances": 10.0785105,
+              "firstUsageDate": "2019-07-07T00:00:00-07:00",
+              "instanceFlexibilityGroup": "DSv2 Series",
+              "instanceFlexibilityRatio": 1,
+              "lastUsageDate": "2019-08-09T00:00:00-07:00",
+              "lookBackPeriod": "Last7Days",
+              "meterId": "00000000-0000-0000-0000-000000000000",
+              "netSavings": 0.68,
+              "normalizedSize": "Standard_DS1",
+              "recommendedQuantity": 1,
+              "recommendedQuantityNormalized": 1.2,
+              "scope": "Shared",
+              "skuProperties": [
+                {
+                  "name": "SkuDisplayName",
+                  "value": "B"
+                },
+                {
+                  "name": "CPU",
+                  "value": "1"
+                }
+              ],
+              "term": "P1Y",
+              "totalCostWithReservedInstances": 13.48,
+              "totalHours": 805
+            },
+            "sku": "Standard_DS1_v2"
+          }
+        ]
+      }
+    },
+    "204": {}
+  },
+  "operationId": "ReservationRecommendations_List",
+  "title": "ReservationRecommendationsByBillingAccount-Legacy"
+}

@@ -1,3 +1,7 @@
+# Shared 1ES stage-list redirect: selects the Official (internal project, non-PR) vs Unofficial
+# 1ES pipeline template so callers only ever author a plain `stages:` list. This is the repo-local
+# SWAP POINT that eng/common's stage archetypes (e.g. archetype-eval.yml) extend by convention.
+
 resources:
   repositories:
     - repository: 1ESPipelineTemplates
@@ -6,15 +10,12 @@ resources:
       ref: refs/tags/release
 
 parameters:
-- name: stages
-  type: stageList
-  default: []
-- name: Use1ESOfficial
-  type: boolean
-  default: true
-- name: GenerateBaselines
-  type: boolean
-  default: false
+  - name: stages
+    type: stageList
+    default: []
+  - name: Use1ESOfficial
+    type: boolean
+    default: true
 
 extends:
   ${{ if and(parameters.Use1ESOfficial, eq(variables['System.TeamProject'], 'internal')) }}:
@@ -25,18 +26,15 @@ extends:
     settings:
       skipBuildTagsForGitHubPullRequests: true
     sdl:
-      ${{ if and(parameters.GenerateBaselines, eq(variables['Build.SourceBranchName'], 'main'), eq(variables['System.TeamProject'], 'internal')) }}:
-        autobaseline:
-          isMainPipeline: true
-          disableAutoBaselineOnNonDefaultBranches: true
-          enableForGitHub: true
+      # Every azure-sdk-for-* repo's 1es-redirect.yml points sourceAnalysisPool at Windows
+      # regardless of the main build's OS - it's a separate job, and Windows-only SDL tools
+      # (e.g. AntiMalware, which requires Windows Defender) need it. Tried disabling AntiMalware
+      # for a Linux sourceAnalysisPool instead (antimalwareScan.enabled: false, then
+      # enableAllTools: false) but: the former only suppressed the Binary-scan pass (Source-scan
+      # still ran and failed with ConfigurationPathNotFoundException: antimalware-linux), and the
+      # latter isn't a valid field in the Official template. Matching the org-standard pattern.
       sourceAnalysisPool:
-        name: azsdk-pool-mms-win-2022-general
-        image: azsdk-pool-mms-win-2022-1espt
+        name: $(WINDOWSPOOL)
+        image: $(WINDOWSVMIMAGE)
         os: windows
-      psscriptanalyzer:
-        compiled: true
-        break: true
-      policy: M365
-
     stages: ${{ parameters.stages }}

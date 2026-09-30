@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "Referer": [
+      "https://management.azure.com/subscriptions/eb5dc900-6186-49d8-b7d7-febd866fdc1d/resourceGroups/YourResourceGroupName/providers/Microsoft.EdgeOrder/locations/eastus/orders/TestOrderName3?api-version=2024-02-01"
+    ],
+    "User-Agent": [
+      "vscode-restclient"
+    ],
+    "api-version": "2024-02-01",
+    "location": "eastus",
+    "orderName": "TestOrderName3",
+    "resourceGroupName": "YourResourceGroupName",
+    "subscriptionId": "eb5dc900-6186-49d8-b7d7-febd866fdc1d"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "TestOrderName3",
+        "type": "Microsoft.EdgeOrder/orders",
+        "id": "/subscriptions/eb5dc900-6186-49d8-b7d7-febd866fdc1d/resourceGroups/YourResourceGroupName/providers/Microsoft.EdgeOrder/locations/eastus/orders/TestOrderName3",
+        "properties": {
+          "currentStage": {
+            "stageName": "InReview",
+            "stageStatus": "Succeeded",
+            "startTime": "2022-03-04T11:35:20.8521455+05:30"
+          },
+          "orderItemIds": [
+            "/subscriptions/eb5dc900-6186-49d8-b7d7-febd866fdc1d/resourceGroups/YourResourceGroupName/providers/Microsoft.EdgeOrder/orderItems/TestOrderItemName3"
+          ],
+          "orderStageHistory": [
+            {
+              "stageName": "Placed",
+              "stageStatus": "Succeeded",
+              "startTime": "2022-03-04T11:30:30.2717243+05:30"
+            },
+            {
+              "stageName": "InReview",
+              "stageStatus": "Succeeded",
+              "startTime": "2022-03-04T11:35:20.8521455+05:30"
+            }
+          ]
+        },
+        "systemData": {
+          "createdAt": "0001-01-01T05:30:00+05:30",
+          "lastModifiedAt": "0001-01-01T05:30:00+05:30"
+        }
+      }
+    }
+  },
+  "operationId": "Orders_Get",
+  "title": "GetOrderByName"
+}

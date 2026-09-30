@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "api-version": "2024-06-01",
+    "parameters": {
+      "properties": {
+        "metadata": {
+          "key2": "value2"
+        }
+      }
+    },
+    "privateZoneName": "privatezone1.com",
+    "recordType": "AAAA",
+    "relativeRecordSetName": "recordAAAA",
+    "resourceGroupName": "resourceGroup1",
+    "subscriptionId": "subscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "recordaaaa",
+        "type": "Microsoft.Network/privateDnsZones/AAAA",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/AAAA/recordaaaa",
+        "properties": {
+          "aaaaRecords": [
+            {
+              "ipv6Address": "::1"
+            }
+          ],
+          "fqdn": "recordaaaa.privatezone1.com.",
+          "isAutoRegistered": false,
+          "metadata": {
+            "key2": "value2"
+          },
+          "ttl": 3600
+        }
+      }
+    }
+  },
+  "operationId": "RecordSets_Update",
+  "title": "PATCH Private DNS Zone AAAA Record Set"
+}

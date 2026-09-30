@@ -1,0 +1,34 @@
+{
+  "operationId": "Resources",
+  "description": "A query accessing one of the resource properties.",
+  "parameters": {
+    "api-version": "2024-04-01",
+    "query": {
+      "query": "Resources | where type =~ 'Microsoft.Compute/virtualMachines' | summarize count() by tostring(properties.storageProfile.osDisk.osType)",
+      "subscriptions": [
+        "cfbbd179-59d2-4052-aa06-9270a38aa9d6"
+      ]
+    }
+  },
+  "title": "Access a properties field",
+  "responses": {
+    "200": {
+      "body": {
+        "count": 2,
+        "data": [
+          {
+            "count": 7,
+            "properties_storageProfile_osDisk_osType": "Linux"
+          },
+          {
+            "count": 23,
+            "properties_storageProfile_osDisk_osType": "Windows"
+          }
+        ],
+        "facets": [],
+        "resultTruncated": "false",
+        "totalRecords": 2
+      }
+    }
+  }
+}

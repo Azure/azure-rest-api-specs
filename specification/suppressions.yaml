@@ -1,0 +1,127 @@
+# Managed centrally by the Azure SDK Team
+# Remove suppressions as specs are fixed
+
+- tool: TypeSpecValidation
+  rules: [FolderStructure]
+  sub-rules: [MustUseV2]
+  reason: Specs added as folder structure v1, not yet converted to v2
+  paths:
+    - agricultureplatform/AgriculturePlatform.Management
+    - applink/AppLink.Management
+    - awsconnector/**
+    - computebulkactions/ComputeBulkActions.Management
+    - discovery/Discovery.Bookshelf.Management
+    - discovery/Discovery.Management.Shared
+    - discovery/Discovery.Supercomputer.Management
+    - discovery/Discovery.Workspace.Management
+    - machinelearningservices/AzureAI.Assets
+    - managedoperations/ManagedOps.Management
+    - manufacturingplatform/Manufacturingplatform.Management
+    - playwrighttesting/PlaywrightTesting.AuthManager
+    - playwrighttesting/PlaywrightTesting.Management
+    - playwrighttesting/PlaywrightTesting.Shared
+    - programmableconnectivity/Azure.ProgrammableConnectivity
+    - programmableconnectivity/ProgrammableConnectivity.Management
+    - purviewdatagovernace/Azure.Analaytics.Purview.DataQuality
+    - purviewdatagovernance/Azure.Analytics.Purview.UnifiedCatalog
+    - splitio/SplitIO.Experimentation.Management
+    - storage/Storage.Management
+
+- tool: TypeSpecValidation
+  rules: [Compile]
+  sub-rules: [ExtraSwagger]
+  reason: Extra swaggers left behind when versions were removed from *.tsp files
+  paths:
+    - devopsinfrastructure/resource-manager/Microsoft.DevOpsInfrastructure/DevOpsInfrastructure/stable/2024-10-19/devopsinfrastructure.json
+    - purview/data-plane/datamap/preview/2024-03-01-preview/purviewdatamap.json
+
+- tool: TypeSpecValidation
+  reason: Suppress until spec can be updated
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-java.emitter-output-dir
+    - options.@azure-tools/typespec-python.emitter-output-dir
+    - options.@azure-tools/typespec-ts.package-details.name
+  paths:
+    - app/data-plane/DynamicSessions/tspconfig.yaml
+
+- tool: TypeSpecValidation
+  reason: Suppress until spec can be updated
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-python.emitter-output-dir
+  paths:
+    - cognitiveservices/data-plane/AnomalyDetector/tspconfig.yaml
+
+- tool: TypeSpecValidation
+  reason: Suppress until spec can be updated
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-java.emitter-output-dir
+    - options.@azure-tools/typespec-python.emitter-output-dir
+    - options.@azure-tools/typespec-ts.package-details.name
+  paths:
+    - cognitiveservices/data-plane/SpeechVideoTranslation/tspconfig.yaml
+
+- tool: TypeSpecValidation
+  reason: Suppress until spec can be updated
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-python.emitter-output-dir
+  paths:
+    - cognitiveservices/data-plane/OpenAIInference/tspconfig.yaml
+
+- tool: TypeSpecValidation
+  reason: Suppress until spec can be updated
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-java.emitter-output-dir
+    - options.@azure-tools/typespec-python.emitter-output-dir
+    - options.@azure-tools/typespec-ts.package-details.name
+  paths:
+    - keyvault/data-plane/Administration/BackupRestore/tspconfig.yaml
+    - keyvault/data-plane/Administration/RBAC/tspconfig.yaml
+    - keyvault/data-plane/Administration/Settings/tspconfig.yaml
+
+- tool: TypeSpecValidation
+  reason: Suppress until spec can be updated
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-java.emitter-output-dir
+    - options.@azure-tools/typespec-ts.package-details.name
+  paths:
+    - keyvault/data-plane/SecurityDomain/tspconfig.yaml
+
+- tool: TypeSpecValidation
+  reason: Suppress until spec can be updated
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-java.emitter-output-dir
+    - options.@azure-tools/typespec-python.emitter-output-dir
+  paths:
+    - marketplacecatalog/data-plane/Products/tspconfig.yaml
+
+- tool: TypeSpecValidation
+  reason: Suppress until spec can be updated
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-java.emitter-output-dir
+  paths:
+    - programmableconnectivity/Azure.ProgrammableConnectivity/tspconfig.yaml
+
+- tool: TypeSpecValidation
+  reason: Suppress until spec can be updated
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-python.emitter-output-dir
+  paths:
+    - riskiq/data-plane/Easm/tspconfig.yaml
+
+- tool: TypeSpecValidation
+  reason: Suppress until spec can be updated
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-ts.package-details.name
+    - options.@azure-tools/typespec-ts.emitter-output-dir
+  paths:
+    - schemaregistry/data-plane/SchemaRegistry/tspconfig.yaml

@@ -56,8 +56,7 @@ These settings apply only when `--tag=package-preview-2023-10` is specified on t
 ``` yaml $(tag) == 'package-preview-2023-10'
 input-file:
   - preview/2023-10-01-preview/SAPVirtualInstance.json
-  - ../common-types/v1/commonTypes.json
-  - ../operations/preview/2023-10-01-preview/operations.json
+  - preview/2023-10-01-preview/operations.json
 ```
 ---
 
@@ -74,7 +73,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-go-track2
-  - repo: azure-sdk-for-js
   - repo: azure-resource-manager-schemas
   - repo: azure-cli-extensions
 ```
@@ -90,10 +88,6 @@ See configuration in [readme.go.md](./readme.go.md)
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
-
-## TypeScript
-
-See configuration in [readme.typescript.md](./readme.typescript.md)
 
 ## CSharp
 

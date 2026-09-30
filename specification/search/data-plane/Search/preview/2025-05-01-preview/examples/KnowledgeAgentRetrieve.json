@@ -1,0 +1,111 @@
+{
+  "operationId": "KnowledgeRetrieval_Retrieve",
+  "title": "KnowledgeAgentRetrieve",
+  "parameters": {
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "agentName": "agent-preview-test",
+    "api-version": "2025-05-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "x-ms-query-source-authorization": null,
+    "retrievalRequest": {
+      "messages": [
+        {
+          "role": "user",
+          "content": [
+            {
+              "text": "hello world",
+              "type": "text"
+            }
+          ]
+        }
+      ],
+      "targetIndexParams": [
+        {
+          "indexName": "preview-test",
+          "filterAddOn": "foo eq bar",
+          "maxDocsForReranker": 100,
+          "rerankerThreshold": 2.5,
+          "includeReferenceSourceData": true
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "response": [
+          {
+            "role": "assistant",
+            "content": [
+              {
+                "type": "text",
+                "text": "[{...}]"
+              }
+            ]
+          }
+        ],
+        "activity": [
+          {
+            "type": "ModelQueryPlanning",
+            "id": 0,
+            "inputTokens": 11,
+            "outputTokens": 22
+          },
+          {
+            "type": "AzureSearchQuery",
+            "id": 1,
+            "targetIndex": "preview-test",
+            "query": {
+              "search": "hello world",
+              "filter": "foo eq bar"
+            },
+            "queryTime": "2025-01-01T00:08:45.045Z",
+            "count": 2,
+            "elapsedMs": 1234
+          },
+          {
+            "type": "AzureSearchQuery",
+            "id": 2,
+            "targetIndex": "preview-test",
+            "query": {
+              "search": "hello world two",
+              "filter": "foo eq bar"
+            },
+            "queryTime": "2025-01-01T00:08:45.045Z",
+            "count": 2,
+            "elapsedMs": 1234
+          },
+          {
+            "type": "AzureSearchSemanticRanker",
+            "id": 3,
+            "inputTokens": 74
+          }
+        ],
+        "references": [
+          {
+            "type": "AzureSearchDoc",
+            "id": "83dd7d40",
+            "activitySource": 1,
+            "docKey": "myDocKey1",
+            "sourceData": {
+              "id": "myDocKey1",
+              "title": "high_doc",
+              "content": "hello world"
+            }
+          },
+          {
+            "type": "AzureSearchDoc",
+            "id": "83dd7d41",
+            "activitySource": 1,
+            "docKey": "myDocKey2",
+            "sourceData": {
+              "id": "myDocKey2",
+              "title": "low_doc",
+              "content": "goodbye world"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

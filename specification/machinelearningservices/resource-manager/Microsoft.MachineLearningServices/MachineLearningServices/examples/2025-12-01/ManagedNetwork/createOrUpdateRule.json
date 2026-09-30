@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2025-12-01",
+    "body": {
+      "properties": {
+        "type": "FQDN",
+        "category": "UserDefined",
+        "destination": "destination_endpoint",
+        "status": "Active"
+      }
+    },
+    "resourceGroupName": "test-rg",
+    "ruleName": "rule_name_1",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "aml-workspace-name"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "rule_name_1",
+        "type": "workspace/outboundRules",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.MachineLearningServices/workspaces/aml-workspace-name/outboundRules/rule_name_1",
+        "properties": {
+          "type": "FQDN",
+          "category": "UserDefined",
+          "destination": "destination_endpoint",
+          "status": "Active"
+        }
+      },
+      "headers": {}
+    },
+    "202": {
+      "headers": {
+        "Location": "example_location"
+      }
+    }
+  },
+  "operationId": "ManagedNetworkSettingsRule_CreateOrUpdate",
+  "title": "CreateOrUpdate ManagedNetworkSettingsRule"
+}

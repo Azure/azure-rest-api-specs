@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "knowledgeSourceName": "myKnowledgeSource1",
+    "knowledgeSourceUpdateParameters": {
+      "properties": {
+        "description": "Updated website knowledge source for FAQ and help content",
+        "updateFrequency": "EverySixHours",
+        "url": "https://example.com/sitemap.xml"
+      }
+    },
+    "resourceGroupName": "RG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "webAgentName": "myWebAgent1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myKnowledgeSource1",
+        "type": "Microsoft.Cdn/webAgents/knowledgeSources",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/RG/providers/Microsoft.Cdn/webAgents/myWebAgent1/knowledgeSources/myKnowledgeSource1",
+        "properties": {
+          "sourceType": "Sitemap",
+          "description": "Updated website knowledge source for FAQ and help content",
+          "lastRefreshedTime": "2025-09-01T11:00:00Z",
+          "provisioningState": "Succeeded",
+          "updateFrequency": "EverySixHours",
+          "url": "https://example.com/sitemap.xml"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "myKnowledgeSource1",
+        "type": "Microsoft.Cdn/webAgents/knowledgeSources",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/RG/providers/Microsoft.Cdn/webAgents/myWebAgent1/knowledgeSources/myKnowledgeSource1",
+        "properties": {
+          "sourceType": "Sitemap",
+          "description": "Updated website knowledge source for FAQ and help content",
+          "lastRefreshedTime": "2025-09-01T11:00:00Z",
+          "provisioningState": "Updating",
+          "updateFrequency": "EverySixHours",
+          "url": "https://example.com/sitemap.xml"
+        }
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/RG/providers/Microsoft.Cdn/webAgents/myWebAgent1/knowledgeSources/myKnowledgeSource1/operationresults/operationId?api-version=2025-09-01-preview"
+      }
+    }
+  },
+  "operationId": "KnowledgeSources_Update",
+  "title": "Update Knowledge Source"
+}

@@ -1,0 +1,122 @@
+{
+  "parameters": {
+    "api-version": "2025-07-25",
+    "resourceGroupName": "resourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "resourceName",
+            "type": "Microsoft.RedHatOpenShift/OpenShiftClusters",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup/providers/Microsoft.RedHatOpenShift/OpenShiftClusters/resourceName",
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentities": {
+                "": {}
+              }
+            },
+            "location": "location",
+            "properties": {
+              "apiserverProfile": {
+                "ip": "1.2.3.4",
+                "url": "https://api.cluster.location.aroapp.io:6443/",
+                "visibility": "Public"
+              },
+              "clusterProfile": {
+                "domain": "cluster.location.aroapp.io",
+                "resourceGroupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clusterResourceGroup",
+                "version": "4.11.0"
+              },
+              "consoleProfile": {
+                "url": "https://console-openshift-console.apps.cluster.location.aroapp.io/"
+              },
+              "ingressProfiles": [
+                {
+                  "name": "default",
+                  "ip": "1.2.3.4",
+                  "visibility": "Public"
+                }
+              ],
+              "masterProfile": {
+                "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/vnetResourceGroup/providers/Microsoft.Network/virtualNetworks/vnet/subnets/master",
+                "vmSize": "Standard_D8s_v3"
+              },
+              "networkProfile": {
+                "loadBalancerProfile": {
+                  "effectiveOutboundIps": [
+                    {
+                      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/clusterResourceGroup/providers/Microsoft.Network/publicIPAddresses/publicIPAddressName"
+                    }
+                  ],
+                  "managedOutboundIps": {
+                    "count": 1
+                  }
+                },
+                "podCidr": "10.128.0.0/14",
+                "preconfiguredNSG": "Disabled",
+                "serviceCidr": "172.30.0.0/16"
+              },
+              "platformWorkloadIdentityProfile": {
+                "platformWorkloadIdentities": {
+                  "": {}
+                }
+              },
+              "provisioningState": "Succeeded",
+              "servicePrincipalProfile": {
+                "clientId": "clientId"
+              },
+              "workerProfiles": [
+                {
+                  "name": "worker",
+                  "count": 3,
+                  "diskSizeGB": 128,
+                  "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/vnetResourceGroup/providers/Microsoft.Network/virtualNetworks/vnet/subnets/worker",
+                  "vmSize": "Standard_D2s_v3"
+                }
+              ],
+              "workerProfilesStatus": [
+                {
+                  "name": "worker1",
+                  "count": 1,
+                  "diskSizeGB": 128,
+                  "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/vnetResourceGroup/providers/Microsoft.Network/virtualNetworks/vnet/subnets/worker",
+                  "vmSize": "Standard_D2s_v3"
+                },
+                {
+                  "name": "worker2",
+                  "count": 1,
+                  "diskSizeGB": 128,
+                  "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/vnetResourceGroup/providers/Microsoft.Network/virtualNetworks/vnet/subnets/worker",
+                  "vmSize": "Standard_D2s_v3"
+                },
+                {
+                  "name": "worker3",
+                  "count": 1,
+                  "diskSizeGB": 128,
+                  "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/vnetResourceGroup/providers/Microsoft.Network/virtualNetworks/vnet/subnets/worker",
+                  "vmSize": "Standard_D2s_v3"
+                }
+              ]
+            },
+            "systemData": {
+              "createdAt": "2020-02-03T01:01:01.1075056Z",
+              "createdBy": "string",
+              "createdByType": "Application",
+              "lastModifiedAt": "2020-02-03T01:01:01.1075056Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "Application"
+            },
+            "tags": {
+              "key": "value"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "OpenShiftClusters_ListByResourceGroup",
+  "title": "Lists OpenShift clusters in the specified subscription and resource group."
+}

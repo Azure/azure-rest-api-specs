@@ -1,0 +1,34 @@
+{
+  "operationId": "CloudHsmClusterPrivateLinkResources_ListByCloudHsmCluster",
+  "parameters": {
+    "api-version": "2025-03-31",
+    "cloudHsmClusterName": "chsm1",
+    "resourceGroupName": "rgcloudhsm",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "CloudHsmClusterPrivateLinkResources_ListByResource_MaximumSet_Gen",
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "sample-pls",
+            "type": "Microsoft.HardwareSecurityModules/cloudHsmClusters/privateLinkResources",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgcloudhsm/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/chsm1/privateLinkResources/sample-pls",
+            "properties": {
+              "groupId": "cloudHsm",
+              "requiredMembers": [
+                "hsm1",
+                "hsm2",
+                "hsm3"
+              ],
+              "requiredZoneNames": [
+                "privatelink.cloudhsm.azure-int.net"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -521,8 +521,7 @@
           "description": "A list of Availability Zones where instances in the Auto Scaling group can be created. Used for launching into the default VPC subnet in each Availability Zone when not using the ``VPCZoneIdentifier`` property, or for attaching a network interface when an existing network interface ID is specified in a launch template.",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "capacityRebalance": {
           "type": "boolean",
@@ -587,8 +586,7 @@
           "description": "A list of Classic Load Balancers associated with this Auto Scaling group. For Application Load Balancers, Network Load Balancers, and Gateway Load Balancers, specify the ``TargetGroupARNs`` property instead.",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "maxInstanceLifetime": {
           "type": "integer",
@@ -652,24 +650,21 @@
           "description": "The Amazon Resource Names (ARN) of the Elastic Load Balancing target groups to associate with the Auto Scaling group. Instances are registered as targets with the target groups. The target groups receive incoming traffic and route requests to one or more registered targets. For more information, see [Use Elastic Load Balancing to distribute traffic across the instances in your Auto Scaling group](https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html) in the *Amazon EC2 Auto Scaling User Guide*.",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "terminationPolicies": {
           "type": "array",
           "description": "A policy or a list of policies that are used to select the instance to terminate. These policies are executed in the order that you list them. For more information, see [Work with Amazon EC2 Auto Scaling termination policies](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-termination-policies.html) in the *Amazon EC2 Auto Scaling User Guide*. Valid values: ``Default`` | ``AllocationStrategy`` | ``ClosestToNextInstanceHour`` | ``NewestInstance`` | ``OldestInstance`` | ``OldestLaunchConfiguration`` | ``OldestLaunchTemplate`` | ``arn:aws:lambda:region:account-id:function:my-function:my-alias``",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "vpcZoneIdentifier": {
           "type": "array",
           "description": "A list of subnet IDs for a virtual private cloud (VPC) where instances in the Auto Scaling group can be created. If this resource specifies public subnets and is also in a VPC that is defined in the same stack template, you must use the [DependsOn attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-dependson.html) to declare a dependency on the [VPC-gateway attachment](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-vpc-gateway-attachment.html).  When you update ``VPCZoneIdentifier``, this retains the same Auto Scaling group and replaces old instances with new ones, according to the specified subnets. You can optionally specify how CloudFormation handles these updates by using an [UpdatePolicy attribute](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-attribute-updatepolicy.html).  Required to launch instances into a nondefault VPC. If you specify ``VPCZoneIdentifier`` with ``AvailabilityZones``, the subnets that you specify for this property must reside in those Availability Zones.",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -718,16 +713,14 @@
           "description": "Indicates whether instance types must have accelerators by specific manufacturers.  +  For instance types with NVIDIA devices, specify ``nvidia``.  +  For instance types with AMD devices, specify ``amd``.  +  For instance types with AWS devices, specify ``amazon-web-services``.  +  For instance types with Xilinx devices, specify ``xilinx``.   Default: Any manufacturer",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "acceleratorNames": {
           "type": "array",
           "description": "Lists the accelerators that must be on an instance type.  +  For instance types with NVIDIA A100 GPUs, specify ``a100``.  +  For instance types with NVIDIA V100 GPUs, specify ``v100``.  +  For instance types with NVIDIA K80 GPUs, specify ``k80``.  +  For instance types with NVIDIA T4 GPUs, specify ``t4``.  +  For instance types with NVIDIA M60 GPUs, specify ``m60``.  +  For instance types with AMD Radeon Pro V520 GPUs, specify ``radeon-pro-v520``.  +  For instance types with Xilinx VU9P FPGAs, specify ``vu9p``.   Default: Any accelerator",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "acceleratorTotalMemoryMiB": {
           "$ref": "#/definitions/AcceleratorTotalMemoryMiBRequest",
@@ -738,16 +731,14 @@
           "description": "Lists the accelerator types that must be on an instance type.  +  For instance types with GPU accelerators, specify ``gpu``.  +  For instance types with FPGA accelerators, specify ``fpga``.  +  For instance types with inference accelerators, specify ``inference``.   Default: Any accelerator type",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "allowedInstanceTypes": {
           "type": "array",
           "description": "The instance types to apply your specified attributes against. All other instance types are ignored, even if they match your specified attributes. You can use strings with one or more wild cards, represented by an asterisk (``*``), to allow an instance type, size, or generation. The following are examples: ``m5.8xlarge``, ``c5*.*``, ``m5a.*``, ``r*``, ``*3*``. For example, if you specify ``c5*``, Amazon EC2 Auto Scaling will allow the entire C5 instance family, which includes all C5a and C5n instance types. If you specify ``m5a.*``, Amazon EC2 Auto Scaling will allow all the M5a instance types, but not the M5n instance types.  If you specify ``AllowedInstanceTypes``, you can't specify ``ExcludedInstanceTypes``.  Default: All instance types",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "bareMetal": {
           "type": "string",
@@ -766,24 +757,21 @@
           "description": "Lists which specific CPU manufacturers to include.  +  For instance types with Intel CPUs, specify ``intel``.  +  For instance types with AMD CPUs, specify ``amd``.  +  For instance types with AWS CPUs, specify ``amazon-web-services``.    Don't confuse the CPU hardware manufacturer with the CPU hardware architecture. Instances will be launched with a compatible CPU architecture based on the Amazon Machine Image (AMI) that you specify in your launch template.   Default: Any manufacturer",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "excludedInstanceTypes": {
           "type": "array",
           "description": "The instance types to exclude. You can use strings with one or more wild cards, represented by an asterisk (``*``), to exclude an instance family, type, size, or generation. The following are examples: ``m5.8xlarge``, ``c5*.*``, ``m5a.*``, ``r*``, ``*3*``.  For example, if you specify ``c5*``, you are excluding the entire C5 instance family, which includes all C5a and C5n instance types. If you specify ``m5a.*``, Amazon EC2 Auto Scaling will exclude all the M5a instance types, but not the M5n instance types.  If you specify ``ExcludedInstanceTypes``, you can't specify ``AllowedInstanceTypes``.  Default: No excluded instance types",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "instanceGenerations": {
           "type": "array",
           "description": "Indicates whether current or previous generation instance types are included.  +  For current generation instance types, specify ``current``. The current generation includes EC2 instance types currently recommended for use. This typically includes the latest two to three generations in each instance family. For more information, see [Instance types](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the *Amazon EC2 User Guide for Linux Instances*.  +  For previous generation instance types, specify ``previous``.   Default: Any current or previous generation",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "localStorage": {
           "type": "string",
@@ -794,8 +782,7 @@
           "description": "Indicates the type of local storage that is required.  +  For instance types with hard disk drive (HDD) storage, specify ``hdd``.  +  For instance types with solid state drive (SSD) storage, specify ``ssd``.   Default: Any local storage type",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "maxSpotPriceAsPercentageOfOptimalOnDemandPrice": {
           "type": "integer",
@@ -1013,8 +1000,7 @@
           "description": "Identifies the metrics to enable. You can specify one or more of the following metrics:  +   ``GroupMinSize``   +   ``GroupMaxSize``   +   ``GroupDesiredCapacity``   +   ``GroupInServiceInstances``   +   ``GroupPendingInstances``   +   ``GroupStandbyInstances``   +   ``GroupTerminatingInstances``   +   ``GroupTotalInstances``   +   ``GroupInServiceCapacity``   +   ``GroupPendingCapacity``   +   ``GroupStandbyCapacity``   +   ``GroupTerminatingCapacity``   +   ``GroupTotalCapacity``   +   ``WarmPoolDesiredCapacity``   +   ``WarmPoolWarmedCapacity``   +   ``WarmPoolPendingCapacity``   +   ``WarmPoolTerminatingCapacity``   +   ``WarmPoolTotalCapacity``   +   ``GroupAndWarmPoolDesiredCapacity``   +   ``GroupAndWarmPoolTotalCapacity``    If you specify ``Granularity`` and don't specify any metrics, all metrics are enabled. For more information, see [Auto Scaling group metrics](https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-cloudwatch-monitoring.html#as-group-metrics) in the *Amazon EC2 Auto Scaling User Guide*.",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -1073,8 +1059,7 @@
           "description": "A list of event types that send a notification. Event types can include any of the following types.  *Allowed values*:  +   ``autoscaling:EC2_INSTANCE_LAUNCH``   +   ``autoscaling:EC2_INSTANCE_LAUNCH_ERROR``   +   ``autoscaling:EC2_INSTANCE_TERMINATE``   +   ``autoscaling:EC2_INSTANCE_TERMINATE_ERROR``   +   ``autoscaling:TEST_NOTIFICATION``",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "topicARN": {
           "type": "string",

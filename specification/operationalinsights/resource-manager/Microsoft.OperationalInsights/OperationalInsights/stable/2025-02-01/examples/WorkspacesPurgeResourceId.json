@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "resourceGroupName": "OIAutoRest5123",
+    "workspaceName": "aztest5048",
+    "api-version": "2025-02-01",
+    "subscriptionId": "00000000-0000-0000-0000-00000000000",
+    "body": {
+      "table": "Heartbeat",
+      "filters": [
+        {
+          "column": "_ResourceId",
+          "operator": "==",
+          "value": "/subscriptions/12341234-1234-1234-1234-123412341234/resourceGroups/SomeResourceGroup/providers/microsoft.insights/components/AppInsightResource"
+        }
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "x-ms-status-location": "https://management.azure.com/subscriptions/b96161de-b34a-480f-7343-59b099299283/resourceGroups/example/providers/microsoft.operationalinsights/workspaces/test/operations/purge-970318e7-b859-4edb-8903-83b1b54d0b74?api-version=2025-02-01"
+      },
+      "body": {
+        "operationId": "7d7cf277-9113-4ab3-8359-d0364b74d01d"
+      }
+    }
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "resourceGroupName": "RG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "webAgentName": "myWebAgent1",
+    "webAgentUpdateParameters": {
+      "properties": {
+        "description": "Updated web agent description",
+        "paths": [
+          {
+            "type": "Chat",
+            "path": "/chat/v2"
+          },
+          {
+            "type": "McpServer",
+            "path": "/mcp/v2"
+          }
+        ],
+        "systemPrompt": "You are an expert AI assistant for advanced customer support. Provide detailed and helpful responses with examples when appropriate."
+      },
+      "tags": {
+        "key1": "value1",
+        "key2": "value2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myWebAgent1",
+        "type": "Microsoft.Cdn/webAgents",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/RG/providers/Microsoft.Cdn/webAgents/myWebAgent1",
+        "location": "WestUs",
+        "properties": {
+          "description": "Updated web agent description",
+          "paths": [
+            {
+              "type": "Chat",
+              "path": "/chat/v2"
+            },
+            {
+              "type": "McpServer",
+              "path": "/mcp/v2"
+            }
+          ],
+          "profileAgentLinks": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/agents/agent1"
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "systemPrompt": "You are an expert AI assistant for advanced customer support. Provide detailed and helpful responses with examples when appropriate."
+        },
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "myWebAgent1",
+        "type": "Microsoft.Cdn/webAgents",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/RG/providers/Microsoft.Cdn/webAgents/myWebAgent1",
+        "location": "WestUs",
+        "properties": {
+          "description": "Updated web agent description",
+          "paths": [
+            {
+              "type": "Chat",
+              "path": "/chat/v2"
+            },
+            {
+              "type": "McpServer",
+              "path": "/mcp/v2"
+            }
+          ],
+          "profileAgentLinks": [
+            {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/agents/agent1"
+            }
+          ],
+          "provisioningState": "Updating",
+          "systemPrompt": "You are an expert AI assistant for advanced customer support. Provide detailed and helpful responses with examples when appropriate."
+        },
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        }
+      },
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/RG/providers/Microsoft.Cdn/webAgents/myWebAgent1/operationresults/operationId?api-version=2025-09-01-preview"
+      }
+    }
+  },
+  "operationId": "WebAgents_Update",
+  "title": "Update Web Agent"
+}

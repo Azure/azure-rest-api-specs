@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "api-version": "2024-04-24",
+    "monitorName": "myMonitor",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Dynatrace.Observability/monitors?api-version=2024-04-24&$skiptoken=abc123",
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Dynatrace.Observability/monitors/myMonitor/singleSignOnConfigurations/default",
+            "properties": {
+              "aadDomains": [
+                "mpliftrdt20210811outlook.onmicrosoft.com"
+              ],
+              "singleSignOnUrl": "https://www.dynatrace.io/IAmSomeHash"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "SingleSignOn_List",
+  "title": "SingleSignOn_List_MinimumSet_Gen"
+}

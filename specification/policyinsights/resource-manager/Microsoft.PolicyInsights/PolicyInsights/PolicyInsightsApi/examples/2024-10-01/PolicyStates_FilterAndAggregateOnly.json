@@ -1,0 +1,27 @@
+{
+  "parameters": {
+    "$apply": "aggregate($count as NumDenyStates)",
+    "$filter": "PolicyDefinitionAction eq 'deny'",
+    "$from": "2019-10-05T18:00:00Z",
+    "api-version": "2024-10-01",
+    "policyStatesResource": "latest",
+    "subscriptionId": "fffedd8f-ffff-fffd-fffd-fffed2f84852"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@odata.context": "https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest",
+        "@odata.count": 1,
+        "value": [
+          {
+            "@odata.context": "https://management.azure.com/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/providers/Microsoft.PolicyInsights/policyStates/$metadata#latest/$entity",
+            "@odata.id": null,
+            "NumDenyStates": 6
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PolicyStates_ListQueryResultsForSubscription",
+  "title": "Filter and aggregate only"
+}

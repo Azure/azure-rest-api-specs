@@ -1,0 +1,89 @@
+{
+  "parameters": {
+    "SendMessageRequest": {
+      "from": "+18001110000",
+      "smsRecipients": [
+        {
+          "to": "+11234567890"
+        },
+        {
+          "to": "+11234567891"
+        },
+        {
+          "to": "+112345678901"
+        },
+        {
+          "to": "+11234567892"
+        },
+        {
+          "to": "+11234567893",
+          "repeatabilityRequestId": "fda6d242-46aa-4247-8bf6-619a1206f9c3",
+          "repeatabilityFirstSent": "Mon, 01 Apr 2019 06:22:03 GMT"
+        },
+        {
+          "to": "+11234567894",
+          "repeatabilityRequestId": "fda6d242-46aa-4247-8bf6-619a1206f9c3"
+        }
+      ],
+      "message": "Hello world!",
+      "smsSendOptions": {
+        "enableDeliveryReport": true,
+        "tag": "testSmsRequest",
+        "deliveryReportTimeoutInSeconds": 300,
+        "messagingConnect": {
+          "apiKey": "FAKE_API_KEY_1234567890abcdef",
+          "partner": "Connect_Partner"
+        }
+      }
+    },
+    "api-version": "2025-08-01-preview",
+    "endpoint": "https://contoso.communication.azure.com/"
+  },
+  "responses": {
+    "202": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "to": "+11234567890",
+            "messageId": "Outgoing_20200610203725bfd4ba70-70bf-4f77-925d-c0bdb5161bb3",
+            "httpStatusCode": 202,
+            "successful": true
+          },
+          {
+            "to": "+11234567891",
+            "messageId": "Outgoing_2020061020025100d1-d07e-4b19-b25d-13525d552822",
+            "httpStatusCode": 202,
+            "successful": true
+          },
+          {
+            "to": "+112345678901",
+            "httpStatusCode": 400,
+            "errorMessage": "Invalid To phone number format.",
+            "successful": false
+          },
+          {
+            "to": "+11234567892",
+            "httpStatusCode": 503,
+            "errorMessage": "ServiceUnavailable",
+            "successful": false
+          },
+          {
+            "to": "+11234567893",
+            "messageId": "Outgoing_2020061020025100d1-d07e-4b19-b25d-13525d552822_noam",
+            "httpStatusCode": 202,
+            "repeatabilityResult": "accepted",
+            "successful": true
+          },
+          {
+            "to": "+11234567894",
+            "httpStatusCode": 400,
+            "repeatabilityResult": "rejected",
+            "errorMessage": "Request sent with Invalid DateTime value for repeatability-first-sent. Expected is DateTime ,RFC1123 pattern.",
+            "successful": false
+          }
+        ]
+      }
+    }
+  }
+}

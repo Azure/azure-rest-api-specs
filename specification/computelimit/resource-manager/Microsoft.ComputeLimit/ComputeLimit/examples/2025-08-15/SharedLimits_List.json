@@ -1,0 +1,45 @@
+{
+  "title": "List all shared limits for a scope",
+  "operationId": "SharedLimits_ListBySubscriptionLocationResource",
+  "parameters": {
+    "api-version": "2025-08-15",
+    "subscriptionId": "12345678-1234-1234-1234-123456789012",
+    "location": "eastus"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789012/providers/Microsoft.ComputeLimit/locations/eastus/sharedLimits/StandardDSv3Family",
+            "name": "StandardDSv3Family",
+            "type": "Microsoft.ComputeLimit/locations/sharedLimits",
+            "properties": {
+              "resourceName": {
+                "value": "StandardDSv3Family",
+                "localizedValue": "Standard DSv3 Family vCPUs"
+              },
+              "limit": 100,
+              "unit": "Count",
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/12345678-1234-1234-1234-123456789012/providers/Microsoft.ComputeLimit/locations/eastus/sharedLimits/StandardFSv2Family",
+            "name": "StandardFSv2Family",
+            "type": "Microsoft.ComputeLimit/locations/sharedLimits",
+            "properties": {
+              "resourceName": {
+                "value": "StandardFSv2Family",
+                "localizedValue": "Standard FSv2 Family vCPUs"
+              },
+              "limit": 50,
+              "unit": "Count",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

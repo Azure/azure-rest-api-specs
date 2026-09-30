@@ -46,16 +46,13 @@ using Microsoft.PlaywrightTesting.Shared;
     ]>
   ]
 )
-@service({
-  title: "Microsoft PlaywrightTesting AuthManager Service API",
-})
+@service(#{ title: "Microsoft PlaywrightTesting AuthManager Service API" })
 @versioned(Microsoft.PlaywrightTesting.AuthManager.Versions)
 namespace Microsoft.PlaywrightTesting.AuthManager;
 
 @doc("The PlaywrightTesting Auth Manager service version.")
 enum Versions {
   @doc("Version 2024-12-01")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @useDependency(Microsoft.PlaywrightTesting.Shared.Versions.v1_0)
   `2024-12-01`,
 }
@@ -70,30 +67,30 @@ model AccessToken {
   @doc("The access-token id.")
   @maxLength(64)
   @pattern("[A-Za-z0-9]+(-[A-Za-z0-9]+)+")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   id: uuid;
 
   @minLength(3)
   @maxLength(64)
   @pattern("^[a-zA-Z]{1}[a-zA-Z0-9]{2,63}$")
   @doc("The access-token name.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   name: string;
 
   @doc("The access-token value in JWT format.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   jwtToken?: string;
 
   @doc("The access-token createdAt utcDateTime.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   createdAt: utcDateTime;
 
   @doc("The access-token expiryAt utcDateTime.")
-  @visibility("read", "create")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   expiryAt: utcDateTime;
 
   @doc("The access-token state - Active | Expired.")
-  @visibility("read")
+  @visibility(Lifecycle.Read)
   state: AccessTokenState;
 }
 
@@ -151,6 +148,7 @@ alias GetBrowsersParams = {
   @doc("The run id provided by client for corresponding remote test run.")
   runId?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   @query
   @doc("The os provided by client for remote test runs.")
   os?: OS = OS.Linux;

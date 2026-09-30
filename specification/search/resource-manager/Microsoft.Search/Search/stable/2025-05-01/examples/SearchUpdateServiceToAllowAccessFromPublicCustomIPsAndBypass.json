@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01",
+    "resourceGroupName": "rg1",
+    "searchServiceName": "mysearchservice",
+    "service": {
+      "properties": {
+        "networkRuleSet": {
+          "bypass": "AzureServices",
+          "ipRules": [
+            {
+              "value": "123.4.5.6"
+            },
+            {
+              "value": "123.4.6.0/18"
+            }
+          ]
+        },
+        "partitionCount": 1,
+        "publicNetworkAccess": "Enabled",
+        "replicaCount": 3
+      }
+    },
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "mysearchservice",
+        "type": "Microsoft.Search/searchServices",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Search/searchServices/mysearchservice",
+        "location": "westus",
+        "properties": {
+          "authOptions": {
+            "apiKeyOnly": {}
+          },
+          "computeType": "Default",
+          "dataExfiltrationProtections": [],
+          "disableLocalAuth": false,
+          "encryptionWithCmk": {
+            "encryptionComplianceStatus": "Compliant",
+            "enforcement": "Unspecified"
+          },
+          "endpoint": "https://mysearchservice.search.windows.net/",
+          "hostingMode": "Default",
+          "networkRuleSet": {
+            "bypass": "AzureServices",
+            "ipRules": [
+              {
+                "value": "10.2.3.4"
+              }
+            ]
+          },
+          "partitionCount": 1,
+          "privateEndpointConnections": [],
+          "provisioningState": "succeeded",
+          "publicNetworkAccess": "Enabled",
+          "replicaCount": 3,
+          "serviceUpgradedAt": null,
+          "sharedPrivateLinkResources": [],
+          "status": "running",
+          "statusDetails": "",
+          "upgradeAvailable": "notAvailable"
+        },
+        "sku": {
+          "name": "standard"
+        },
+        "systemData": {
+          "createdAt": "2024-01-01T00:00:00Z",
+          "createdBy": "My e-commerce app",
+          "createdByType": "Application",
+          "lastModifiedAt": "2024-11-01T00:00:00Z",
+          "lastModifiedBy": "fakeuser@contoso.com",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "app-name": "My e-commerce app",
+          "new-tag": "Adding a new tag"
+        }
+      }
+    }
+  },
+  "operationId": "Services_Update",
+  "title": "SearchUpdateServiceToAllowAccessFromPublicCustomIPsAndBypass"
+}

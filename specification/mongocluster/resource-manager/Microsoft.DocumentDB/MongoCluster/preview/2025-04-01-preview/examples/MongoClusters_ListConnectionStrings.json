@@ -1,0 +1,22 @@
+{
+  "operationId": "MongoClusters_ListConnectionStrings",
+  "title": "List the available connection strings for the Mongo Cluster resource.",
+  "parameters": {
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "TestGroup",
+    "mongoClusterName": "myMongoCluster",
+    "api-version": "2025-04-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "connectionStrings": [
+          {
+            "connectionString": "mongodb+srv://<user>:<password>@myMongoCluster.mongocluster.cosmos.azure.com",
+            "description": "default connection string"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "registryName": "myRegistry",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "4385cf00-2d3a-425a-832f-f4285b1c9dce",
+    "taskRunName": "myRun"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myRun",
+        "type": "Microsoft.ContainerRegistry/registries/TaskRuns",
+        "id": "/subscriptions/3647315e-0c5b-4ce4-8739-b071e144b2c9/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/taskRuns/myRun",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "runRequest": {
+            "type": "EncodedTaskRunRequest",
+            "credentials": {},
+            "encodedTaskContent": "c3RlcHM6IAogIC0gY21kOiB7eyAuVmFsdWVzLmNvbW1hbmQgfX0K",
+            "encodedValuesContent": "Y29tbWFuZDogYmFzaCBlY2hvIHt7LlJ1bi5SZWdpc3RyeX19Cg==",
+            "isArchiveEnabled": true,
+            "platform": {
+              "architecture": "amd64",
+              "os": "Linux"
+            },
+            "values": []
+          },
+          "runResult": {
+            "name": "yd5",
+            "type": "Microsoft.ContainerRegistry/registries/runs",
+            "id": "/subscriptions/3647315e-0c5b-4ce4-8739-b071e144b2c9/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/runs/yd5",
+            "properties": {
+              "agentConfiguration": {
+                "cpu": 2
+              },
+              "createTime": "2019-09-06T17:23:21.9261521+00:00",
+              "finishTime": "2019-09-06T17:23:29.8792157+00:00",
+              "isArchiveEnabled": true,
+              "lastUpdatedTime": "2019-09-06T17:23:29+00:00",
+              "platform": {
+                "architecture": "amd64",
+                "os": "Linux"
+              },
+              "provisioningState": "Succeeded",
+              "runId": "yd5",
+              "runType": "QuickRun",
+              "startTime": "2019-09-06T17:23:22.1348714+00:00",
+              "status": "Succeeded"
+            }
+          }
+        }
+      }
+    }
+  },
+  "operationId": "TaskRuns_Get",
+  "title": "TaskRuns_Get"
+}

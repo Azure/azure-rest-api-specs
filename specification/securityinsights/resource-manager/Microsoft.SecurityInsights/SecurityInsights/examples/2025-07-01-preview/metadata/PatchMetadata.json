@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "metadataName": "metadataName",
+    "metadataPatch": {
+      "properties": {
+        "author": {
+          "name": "User Name",
+          "email": "email@microsoft.com"
+        }
+      }
+    },
+    "resourceGroupName": "myRg",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "workspaceName": "myWorkspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "metadataName",
+        "type": "Microsoft.SecurityInsights/metadata",
+        "id": "/subscriptions/2e1dc338-d04d-4443-b721-037eff4fdcac/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/metadata/metadataName",
+        "properties": {
+          "author": {
+            "name": "User Name",
+            "email": "email@microsoft.com"
+          },
+          "contentId": "c00ee137-7475-47c8-9cce-ec6f0f1bedd0",
+          "kind": "AnalyticsRule",
+          "parentId": "/subscriptions/2e1dc338-d04d-4443-b721-037eff4fdcac/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/alertRules/ruleName"
+        }
+      }
+    }
+  },
+  "operationId": "Metadata_Update",
+  "title": "Update metadata."
+}

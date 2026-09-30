@@ -1,0 +1,31 @@
+{
+  "title": "StacQueryables_Replace",
+  "operationId": "StacQueryables_Replace",
+  "parameters": {
+    "collectionId": "naip-atl",
+    "queryableName": "test%3Aproperty",
+    "api-version": "2025-04-30-preview",
+    "body": {
+      "name": "test:property",
+      "data_type": "number",
+      "create_index": false,
+      "definition": {
+        "data_type": "number",
+        "description": "Test property - updated"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "test:property",
+        "definition": {
+          "data_type": "number",
+          "description": "Test property - updated"
+        },
+        "create_index": false,
+        "data_type": null
+      }
+    }
+  }
+}

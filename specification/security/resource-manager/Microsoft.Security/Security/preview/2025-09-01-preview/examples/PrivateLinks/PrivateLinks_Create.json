@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "resourceGroupName": "rg",
+    "privateLinkName": "pls",
+    "api-version": "2025-09-01-preview",
+    "privateLink": {
+      "location": "eastus",
+      "tags": {
+        "environment": "production",
+        "owner": "security-team",
+        "project": "private-links"
+      },
+      "properties": {}
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg/providers/Microsoft.Security/privateLinks/pls",
+        "name": "pls",
+        "type": "Microsoft.Security/privateLinks",
+        "location": "eastus",
+        "tags": {
+          "environment": "production",
+          "owner": "security-team",
+          "project": "private-links"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "privateEndpointConnections": [],
+          "privateLinkResources": [
+            {
+              "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg/providers/Microsoft.Security/privateLinks/pls/privateLinkResources/containers",
+              "name": "containers",
+              "type": "Microsoft.Security/privateLinks/privateLinkResources",
+              "properties": {
+                "groupId": "containers",
+                "requiredMembers": [
+                  "api",
+                  "data"
+                ],
+                "requiredZoneNames": [
+                  "privatelink.cloud.defender.microsoft.com"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/rg/providers/Microsoft.Security/privateLinks/pls",
+        "name": "pls",
+        "type": "Microsoft.Security/privateLinks",
+        "location": "eastus",
+        "tags": {
+          "environment": "production",
+          "owner": "security-team",
+          "project": "private-links"
+        },
+        "properties": {
+          "provisioningState": "Creating",
+          "privateEndpointConnections": [],
+          "privateLinkResources": []
+        }
+      }
+    }
+  }
+}

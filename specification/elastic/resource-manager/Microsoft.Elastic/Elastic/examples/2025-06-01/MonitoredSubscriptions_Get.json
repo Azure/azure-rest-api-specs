@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01",
+    "configurationName": "default",
+    "monitorName": "myMonitor",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "default",
+        "type": "Microsoft.Elastic/monitors/monitoredSubscriptions",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Elastic/monitors/myMonitor/monitoredSubscriptions/default",
+        "properties": {
+          "monitoredSubscriptionList": [
+            {
+              "status": "Active",
+              "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000000",
+              "tagRules": {
+                "logRules": {
+                  "filteringTags": [
+                    {
+                      "name": "saokgpjvdlorciqbjmjxazpee",
+                      "action": "Include",
+                      "value": "sarxrqsxouhdjwsrqqicbeirdb"
+                    }
+                  ],
+                  "sendAadLogs": true,
+                  "sendActivityLogs": true,
+                  "sendSubscriptionLogs": true
+                },
+                "provisioningState": "Accepted"
+              }
+            },
+            {
+              "status": "Failed",
+              "subscriptionId": "/subscriptions/00000000-0000-0000-0000-000000000001",
+              "tagRules": {
+                "logRules": {
+                  "filteringTags": [
+                    {
+                      "name": "saokgpjvdlorciqbjmjxazpee",
+                      "action": "Include",
+                      "value": "sarxrqsxouhdjwsrqqicbeirdb"
+                    }
+                  ],
+                  "sendAadLogs": true,
+                  "sendActivityLogs": true,
+                  "sendSubscriptionLogs": true
+                },
+                "provisioningState": "Accepted"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "MonitoredSubscriptions_Get",
+  "title": "Monitors_GetMonitoredSubscriptions"
+}

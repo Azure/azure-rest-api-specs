@@ -1,0 +1,30 @@
+{
+  "operationId": "StorageAppliances_RunReadCommands",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "resourceGroupName": "resourceGroupName",
+    "storageApplianceName": "storageApplianceName",
+    "storageApplianceRunReadCommandsParameters": {
+      "commands": [
+        {
+          "arguments": [
+            "list",
+            "--filter",
+            "state='open'"
+          ],
+          "command": "purealert"
+        }
+      ],
+      "limitTimeSeconds": 60
+    },
+    "subscriptionId": "123e4567-e89b-12d3-a456-426655440000"
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/123e4567-e89b-12d3-a456-426655440000/providers/Microsoft.NetworkCloud/locations/location/operationStatuses/operationId?api-version=2026-01-01-preview"
+      }
+    }
+  },
+  "title": "Run and retrieve output from read only commands on storage appliance."
+}

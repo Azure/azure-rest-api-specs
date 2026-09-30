@@ -1,0 +1,109 @@
+{
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "migrationName": "examplemigration",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "dbsToMigrate": [
+          "exampledatabase1",
+          "exampledatabase2",
+          "exampledatabase3",
+          "exampledatabase4"
+        ],
+        "migrationMode": "Offline",
+        "migrationOption": "ValidateAndMigrate",
+        "overwriteDbsInTarget": "True",
+        "secretParameters": {
+          "adminCredentials": {
+            "sourceServerPassword": "examplesourcepassword",
+            "targetServerPassword": "exampletargetpassword"
+          }
+        },
+        "sourceDbServerResourceId": "examplesource:5432@exampleuser",
+        "sourceType": "OnPremises",
+        "sslMode": "Prefer"
+      }
+    },
+    "resourceGroupName": "exampleresourcegroup",
+    "serverName": "exampleserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "examplemigration",
+        "type": "Microsoft.DBForPostgreSql/flexibleServers/migrations",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget/migrations/examplemigration",
+        "location": "eastus",
+        "properties": {
+          "currentStatus": {
+            "currentSubStateDetails": {
+              "currentSubState": "ValidationInProgress"
+            },
+            "error": "",
+            "state": "InProgress"
+          },
+          "dbsToMigrate": [
+            "exampledatabase1",
+            "exampledatabase2",
+            "exampledatabase3",
+            "exampledatabase4"
+          ],
+          "migrateRoles": "False",
+          "migrationId": "d3ceacbb-a5fd-43dc-a9db-6022b5154856",
+          "migrationOption": "ValidateAndMigrate",
+          "migrationWindowStartTimeInUtc": "2025-06-01T18:30:22.123456Z",
+          "overwriteDbsInTarget": "True",
+          "setupLogicalReplicationOnSourceDbIfNeeded": "False",
+          "sourceDbServerResourceId": "examplesource:5432@exampleuser",
+          "sourceType": "OnPremises",
+          "sslMode": "Prefer",
+          "startDataMigration": "False",
+          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget",
+          "triggerCutover": "False"
+        },
+        "tags": {
+          "key1624": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "examplemigration",
+        "type": "Microsoft.DBForPostgreSql/flexibleServers/migrations",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget/migrations/examplemigration",
+        "location": "eastus",
+        "properties": {
+          "currentStatus": {
+            "currentSubStateDetails": {
+              "currentSubState": "ValidationInProgress"
+            },
+            "error": "",
+            "state": "InProgress"
+          },
+          "dbsToMigrate": [
+            "exampledatabase1",
+            "exampledatabase2",
+            "exampledatabase3",
+            "exampledatabase4"
+          ],
+          "migrateRoles": "False",
+          "migrationId": "d3ceacbb-a5fd-43dc-a9db-6022b5154856",
+          "migrationOption": "ValidateAndMigrate",
+          "migrationWindowStartTimeInUtc": "2025-06-01T18:30:22.123456Z",
+          "overwriteDbsInTarget": "True",
+          "setupLogicalReplicationOnSourceDbIfNeeded": "False",
+          "sourceDbServerResourceId": "examplesource:5432@exampleuser",
+          "sourceType": "OnPremises",
+          "sslMode": "Prefer",
+          "startDataMigration": "False",
+          "targetDbServerResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBForPostgreSql/flexibleServers/exampletarget",
+          "triggerCutover": "False"
+        }
+      }
+    }
+  },
+  "operationId": "Migrations_Create",
+  "title": "Create a migration with other source type for validating and migrating."
+}

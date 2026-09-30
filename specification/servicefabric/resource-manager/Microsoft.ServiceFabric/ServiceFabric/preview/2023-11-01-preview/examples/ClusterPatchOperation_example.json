@@ -1,0 +1,348 @@
+{
+  "parameters": {
+    "api-version": "2023-11-01-preview",
+    "clusterName": "myCluster",
+    "parameters": {
+      "properties": {
+        "enableHttpGatewayExclusiveAuthMode": true,
+        "eventStoreServiceEnabled": true,
+        "nodeTypes": [
+          {
+            "name": "nt1vm",
+            "applicationPorts": {
+              "endPort": 30000,
+              "startPort": 20000
+            },
+            "clientConnectionEndpointPort": 19000,
+            "durabilityLevel": "Bronze",
+            "ephemeralPorts": {
+              "endPort": 64000,
+              "startPort": 49000
+            },
+            "httpGatewayEndpointPort": 19007,
+            "httpGatewayTokenAuthEndpointPort": 19081,
+            "isPrimary": true,
+            "vmInstanceCount": 5
+          },
+          {
+            "name": "testnt1",
+            "applicationPorts": {
+              "endPort": 2000,
+              "startPort": 1000
+            },
+            "clientConnectionEndpointPort": 0,
+            "durabilityLevel": "Bronze",
+            "ephemeralPorts": {
+              "endPort": 4000,
+              "startPort": 3000
+            },
+            "httpGatewayEndpointPort": 0,
+            "httpGatewayTokenAuthEndpointPort": 19081,
+            "isPrimary": false,
+            "vmInstanceCount": 3
+          }
+        ],
+        "reliabilityLevel": "Bronze",
+        "upgradeMode": "Automatic",
+        "upgradePauseEndTimestampUtc": "2021-06-25T22:00:00Z",
+        "upgradePauseStartTimestampUtc": "2021-06-21T22:00:00Z",
+        "upgradeWave": "Wave"
+      },
+      "tags": {
+        "a": "b"
+      }
+    },
+    "resourceGroupName": "resRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myCluster",
+        "type": "Microsoft.ServiceFabric/clusters",
+        "etag": "W/\"636462502169240744\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster",
+        "location": "eastus",
+        "properties": {
+          "availableClusterVersions": [
+            {
+              "codeVersion": "6.1.480.9494",
+              "environment": "Windows",
+              "supportExpiryUtc": "2018-06-15T23:59:59.9999999"
+            }
+          ],
+          "certificateCommonNames": {
+            "commonNames": [
+              {
+                "certificateCommonName": "abc.com",
+                "certificateIssuerThumbprint": "12599211F8F14C90AFA9532AD79A6F2CA1C00622"
+              }
+            ],
+            "x509StoreName": "My"
+          },
+          "clientCertificateCommonNames": [],
+          "clientCertificateThumbprints": [],
+          "clusterCodeVersion": "6.1.480.9494",
+          "clusterEndpoint": "https://eastus.servicefabric.azure.com",
+          "clusterId": "92584666-9889-4ae8-8d02-91902923d37f",
+          "clusterState": "WaitingForNodes",
+          "diagnosticsStorageAccountConfig": {
+            "blobEndpoint": "https://diag.blob.core.windows.net/",
+            "protectedAccountKeyName": "StorageAccountKey1",
+            "queueEndpoint": "https://diag.queue.core.windows.net/",
+            "storageAccountName": "diag",
+            "tableEndpoint": "https://diag.table.core.windows.net/"
+          },
+          "enableHttpGatewayExclusiveAuthMode": true,
+          "eventStoreServiceEnabled": true,
+          "fabricSettings": [
+            {
+              "name": "UpgradeService",
+              "parameters": [
+                {
+                  "name": "AppPollIntervalInSeconds",
+                  "value": "60"
+                }
+              ]
+            }
+          ],
+          "managementEndpoint": "http://myCluster.eastus.cloudapp.azure.com:19080",
+          "nodeTypes": [
+            {
+              "name": "nt1vm",
+              "applicationPorts": {
+                "endPort": 30000,
+                "startPort": 20000
+              },
+              "clientConnectionEndpointPort": 19000,
+              "durabilityLevel": "Bronze",
+              "ephemeralPorts": {
+                "endPort": 64000,
+                "startPort": 49000
+              },
+              "httpGatewayEndpointPort": 19007,
+              "httpGatewayTokenAuthEndpointPort": 19081,
+              "isPrimary": true,
+              "vmInstanceCount": 5
+            },
+            {
+              "name": "testnt1",
+              "applicationPorts": {
+                "endPort": 2000,
+                "startPort": 1000
+              },
+              "clientConnectionEndpointPort": 0,
+              "durabilityLevel": "Bronze",
+              "ephemeralPorts": {
+                "endPort": 4000,
+                "startPort": 3000
+              },
+              "httpGatewayEndpointPort": 0,
+              "httpGatewayTokenAuthEndpointPort": 19081,
+              "isPrimary": false,
+              "vmInstanceCount": 3
+            }
+          ],
+          "notifications": [
+            {
+              "isEnabled": true,
+              "notificationCategory": "WaveProgress",
+              "notificationLevel": "Critical",
+              "notificationTargets": [
+                {
+                  "notificationChannel": "EmailUser",
+                  "receivers": [
+                    "****@microsoft.com",
+                    "****@microsoft.com"
+                  ]
+                },
+                {
+                  "notificationChannel": "EmailSubscription",
+                  "receivers": [
+                    "Owner",
+                    "AccountAdmin"
+                  ]
+                }
+              ]
+            },
+            {
+              "isEnabled": true,
+              "notificationCategory": "WaveProgress",
+              "notificationLevel": "All",
+              "notificationTargets": [
+                {
+                  "notificationChannel": "EmailUser",
+                  "receivers": [
+                    "****@microsoft.com",
+                    "****@microsoft.com"
+                  ]
+                },
+                {
+                  "notificationChannel": "EmailSubscription",
+                  "receivers": [
+                    "Owner",
+                    "AccountAdmin"
+                  ]
+                }
+              ]
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "reliabilityLevel": "Bronze",
+          "upgradeDescription": {
+            "deltaHealthPolicy": {
+              "maxPercentDeltaUnhealthyApplications": 0,
+              "maxPercentDeltaUnhealthyNodes": 0,
+              "maxPercentUpgradeDomainDeltaUnhealthyNodes": 0
+            },
+            "forceRestart": false,
+            "healthCheckRetryTimeout": "00:05:00",
+            "healthCheckStableDuration": "00:00:30",
+            "healthCheckWaitDuration": "00:00:30",
+            "healthPolicy": {
+              "maxPercentUnhealthyApplications": 0,
+              "maxPercentUnhealthyNodes": 0
+            },
+            "upgradeDomainTimeout": "00:15:00",
+            "upgradeReplicaSetCheckTimeout": "00:10:00",
+            "upgradeTimeout": "01:00:00"
+          },
+          "upgradeMode": "Automatic",
+          "upgradePauseEndTimestampUtc": "2021-06-25T22:00:00Z",
+          "upgradePauseStartTimestampUtc": "2021-06-21T22:00:00Z",
+          "upgradeWave": "Wave2"
+        },
+        "tags": {
+          "a": "b"
+        }
+      },
+      "headers": {
+        "Location": "http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2019-03-01",
+        "Retry-After": "10"
+      }
+    },
+    "202": {
+      "body": {
+        "name": "myCluster",
+        "type": "Microsoft.ServiceFabric/clusters",
+        "etag": "W/\"636462502169240744\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster",
+        "location": "eastus",
+        "properties": {
+          "availableClusterVersions": [
+            {
+              "codeVersion": "6.1.480.9494",
+              "environment": "Windows",
+              "supportExpiryUtc": "2018-06-15T23:59:59.9999999"
+            }
+          ],
+          "certificateCommonNames": {
+            "commonNames": [
+              {
+                "certificateCommonName": "abc.com",
+                "certificateIssuerThumbprint": "12599211F8F14C90AFA9532AD79A6F2CA1C00622"
+              }
+            ],
+            "x509StoreName": "My"
+          },
+          "clientCertificateCommonNames": [],
+          "clientCertificateThumbprints": [],
+          "clusterCodeVersion": "6.1.480.9494",
+          "clusterEndpoint": "https://eastus.servicefabric.azure.com",
+          "clusterId": "92584666-9889-4ae8-8d02-91902923d37f",
+          "clusterState": "WaitingForNodes",
+          "diagnosticsStorageAccountConfig": {
+            "blobEndpoint": "https://diag.blob.core.windows.net/",
+            "protectedAccountKeyName": "StorageAccountKey1",
+            "queueEndpoint": "https://diag.queue.core.windows.net/",
+            "storageAccountName": "diag",
+            "tableEndpoint": "https://diag.table.core.windows.net/"
+          },
+          "enableHttpGatewayExclusiveAuthMode": true,
+          "eventStoreServiceEnabled": true,
+          "fabricSettings": [
+            {
+              "name": "UpgradeService",
+              "parameters": [
+                {
+                  "name": "AppPollIntervalInSeconds",
+                  "value": "60"
+                }
+              ]
+            }
+          ],
+          "managementEndpoint": "http://myCluster.eastus.cloudapp.azure.com:19080",
+          "nodeTypes": [
+            {
+              "name": "nt1vm",
+              "applicationPorts": {
+                "endPort": 30000,
+                "startPort": 20000
+              },
+              "clientConnectionEndpointPort": 19000,
+              "durabilityLevel": "Bronze",
+              "ephemeralPorts": {
+                "endPort": 64000,
+                "startPort": 49000
+              },
+              "httpGatewayEndpointPort": 19007,
+              "httpGatewayTokenAuthEndpointPort": 19081,
+              "isPrimary": true,
+              "vmInstanceCount": 5
+            },
+            {
+              "name": "testnt1",
+              "applicationPorts": {
+                "endPort": 2000,
+                "startPort": 1000
+              },
+              "clientConnectionEndpointPort": 0,
+              "durabilityLevel": "Bronze",
+              "ephemeralPorts": {
+                "endPort": 4000,
+                "startPort": 3000
+              },
+              "httpGatewayEndpointPort": 0,
+              "httpGatewayTokenAuthEndpointPort": 19081,
+              "isPrimary": false,
+              "vmInstanceCount": 3
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "reliabilityLevel": "Bronze",
+          "upgradeDescription": {
+            "deltaHealthPolicy": {
+              "maxPercentDeltaUnhealthyApplications": 0,
+              "maxPercentDeltaUnhealthyNodes": 0,
+              "maxPercentUpgradeDomainDeltaUnhealthyNodes": 0
+            },
+            "forceRestart": false,
+            "healthCheckRetryTimeout": "00:05:00",
+            "healthCheckStableDuration": "00:00:30",
+            "healthCheckWaitDuration": "00:00:30",
+            "healthPolicy": {
+              "maxPercentUnhealthyApplications": 0,
+              "maxPercentUnhealthyNodes": 0
+            },
+            "upgradeDomainTimeout": "00:15:00",
+            "upgradeReplicaSetCheckTimeout": "00:10:00",
+            "upgradeTimeout": "01:00:00"
+          },
+          "upgradeMode": "Automatic",
+          "upgradePauseEndTimestampUtc": "2021-06-25T22:00:00Z",
+          "upgradePauseStartTimestampUtc": "2021-06-21T22:00:00Z",
+          "upgradeWave": "Wave2"
+        },
+        "tags": {
+          "a": "b"
+        }
+      },
+      "headers": {
+        "Location": "http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2019-03-01",
+        "Retry-After": "10"
+      }
+    }
+  },
+  "operationId": "Clusters_Update",
+  "title": "Patch a cluster"
+}

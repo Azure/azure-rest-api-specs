@@ -3,17 +3,20 @@
   "private": true,
   "type": "module",
   "devDependencies": {
-    "@types/node": "^18.19.31",
-    "execa": "^9.3.0",
-    "typescript": "~5.6.2",
-    "vitest": "^3.0.2"
+    "@types/node": "catalog:",
+    "execa": "catalog:"
   },
   "scripts": {
-    "build": "tsc --build",
+    "build": "tsc --noEmit",
+    "check": "pnpm build && pnpm lint && pnpm format:check && pnpm test:ci",
+    "format": "oxfmt . --write",
+    "format:check": "oxfmt . --check",
+    "lint": "oxlint .",
     "test": "vitest",
     "test:ci": "vitest run --reporter=verbose"
   },
   "engines": {
-    "node": ">= 18.0.0"
-  }
+    "node": ">=24.14.1"
+  },
+  "version": "0.0.0"
 }
