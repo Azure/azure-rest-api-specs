@@ -5,8 +5,9 @@ import { spawn } from "node:child_process";
 import { stat } from "node:fs/promises";
 import { relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
+import pc from "picocolors";
 import { simpleGit } from "simple-git";
-import { formatRuleSummary, type RuleCounts } from "./diagnostics.ts";
+import { formatRuleSummary, supportsColor, type RuleCounts } from "./diagnostics.ts";
 import { findChangedProjects, findProjects, type ChangedProjectsOptions } from "./find-projects.ts";
 
 interface RunOptions {
@@ -20,6 +21,8 @@ interface RunContext {
   baseCommitish?: string;
   headCommitish?: string;
 }
+
+type ProjectStatus = "pass" | "fail" | "skip";
 
 export async function runAll(
   folder: string,
@@ -97,52 +100,48 @@ async function runProjects(
 
   for (const project of projects) {
     const name = displayPath(project);
-    console.log(githubActions ? `::group::Validating ${name}` : `\nValidating ${name}`);
-    try {
-      if (context.checkingAllSpecs) {
-        const suppressions = await getSuppressions("TypeSpecValidationAll", project, {
-          ...context,
-        });
-        const suppression = suppressions.find((s) => !s.rules?.length && !s.subRules?.length);
-        if (suppression) {
-          console.log(`Suppressed: ${suppression.reason}`);
-          counts.SUPPRESSED++;
-          continue;
-        }
-      }
-      if (options.dryRun) {
-        console.log(`Dry run: would validate ${name} with context ${JSON.stringify(context)}`);
+    if (context.checkingAllSpecs) {
+      const suppressions = await getSuppressions("TypeSpecValidationAll", project, {
+        ...context,
+      });
+      const suppression = suppressions.find((s) => !s.rules?.length && !s.subRules?.length);
+      if (suppression) {
+        counts.SUPPRESSED++;
+        printProjectGroup(githubActions, "skip", name, `Suppressed: ${suppression.reason}`, "");
         continue;
       }
+    }
+    if (options.dryRun) {
+      console.log(`Dry run: would validate ${name} with context ${JSON.stringify(context)}`);
+      continue;
+    }
 
-      try {
-        if (await validateProject(project, context, options.verbose)) {
-          counts.PASS++;
+    try {
+      const { success, stdout, stderr } = await validateProject(project, context, options.verbose);
+      if (success) {
+        counts.PASS++;
+        printProjectGroup(githubActions, "pass", name, stdout, stderr);
+      } else {
+        counts.FAIL++;
+        failed.push(name);
+        const message =
+          `TypeSpec Validation failed for project ${name} run the following command locally to validate.\n` +
+          getFailureInstructions([name]);
+        if (githubActions) {
+          const escaped = message
+            .replaceAll("%", "%25")
+            .replaceAll("\r", "%0D")
+            .replaceAll("\n", "%0A");
+          printProjectGroup(githubActions, "fail", name, stdout, stderr, `::error::${escaped}`);
         } else {
-          counts.FAIL++;
-          failed.push(name);
-          const message =
-            `TypeSpec Validation failed for project ${name} run the following command locally to validate.\n` +
-            getFailureInstructions([name]);
-          if (githubActions) {
-            const escaped = message
-              .replaceAll("%", "%25")
-              .replaceAll("\r", "%0D")
-              .replaceAll("\n", "%0A");
-            console.log(`::error::${escaped}`);
-          } else {
-            console.error(message);
-          }
-        }
-      } finally {
-        if (gitClean) {
-          await git.raw(["restore", "--worktree", "--", "."]);
-          await git.clean("f", ["-d"]);
+          printProjectGroup(githubActions, "fail", name, stdout, stderr);
+          console.error(message);
         }
       }
     } finally {
-      if (githubActions) {
-        console.log("::endgroup::");
+      if (gitClean) {
+        await git.raw(["restore", "--worktree", "--", "."]);
+        await git.clean("f", ["-d"]);
       }
     }
   }
@@ -159,6 +158,26 @@ async function runProjects(
     );
   }
   return failed.length === 0;
+}
+
+/** Print a project's result as a GitHub Actions group (or a plain heading locally), titled with its status. */
+function printProjectGroup(
+  githubActions: boolean,
+  status: ProjectStatus,
+  name: string,
+  stdout: string,
+  stderr: string,
+  annotation?: string,
+): void {
+  const c = pc.createColors(supportsColor());
+  const label =
+    status === "pass" ? c.green("pass") : status === "fail" ? c.red("fail") : c.gray("skip");
+  const title = `${label} ${name}`;
+  console.log(githubActions ? `::group::${title}` : `\n${title}`);
+  if (stdout) console.log(stdout);
+  if (stderr) console.error(stderr);
+  if (annotation) console.log(annotation);
+  if (githubActions) console.log("::endgroup::");
 }
 
 function getFailureInstructions(projects: string[]): string {
@@ -199,8 +218,23 @@ function selectShard(projects: string[], shard: string): string[] {
   return projects.slice(start, end);
 }
 
-function validateProject(folder: string, context: RunContext, verbose = false): Promise<boolean> {
-  return new Promise((resolve, reject) => {
+/** Run a project's validation as a child process, capturing its output to attribute it to a titled group. */
+function validateProject(
+  folder: string,
+  context: RunContext,
+  verbose = false,
+): Promise<{ success: boolean; stdout: string; stderr: string }> {
+  return new Promise((resolvePromise, reject) => {
+    const env = { ...process.env };
+    if (supportsColor()) {
+      delete env.NO_COLOR;
+      env.FORCE_COLOR = "1";
+    } else {
+      delete env.FORCE_COLOR;
+      env.NO_COLOR = "1";
+    }
+    const stdoutChunks: Buffer[] = [];
+    const stderrChunks: Buffer[] = [];
     // A child process keeps each project's context and exit status independent.
     const child = spawn(
       process.execPath,
@@ -210,14 +244,20 @@ function validateProject(folder: string, context: RunContext, verbose = false): 
         JSON.stringify(context),
         ...(verbose ? ["--verbose"] : []),
       ],
-      { stdio: "inherit" },
+      { stdio: ["ignore", "pipe", "pipe"], env },
     );
+    child.stdout?.on("data", (chunk: Buffer) => stdoutChunks.push(chunk));
+    child.stderr?.on("data", (chunk: Buffer) => stderrChunks.push(chunk));
     child.once("error", reject);
     child.once("close", (code, signal) => {
       if (signal) {
         reject(new Error(`TypeSpec Validation for ${folder} terminated by ${signal}`));
       } else {
-        resolve(code === 0);
+        resolvePromise({
+          success: code === 0,
+          stdout: Buffer.concat(stdoutChunks).toString("utf8").replace(/\n+$/, ""),
+          stderr: Buffer.concat(stderrChunks).toString("utf8").replace(/\n+$/, ""),
+        });
       }
     });
   });

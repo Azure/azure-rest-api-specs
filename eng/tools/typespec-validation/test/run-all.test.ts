@@ -3,6 +3,7 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { access, mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, relative, sep } from "node:path";
+import { PassThrough } from "node:stream";
 import { simpleGit } from "simple-git";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { formatRuleSummary } from "../src/diagnostics.ts";
@@ -13,9 +14,19 @@ vi.mock("node:child_process", async (importOriginal) => ({
   spawn: vi.fn(),
 }));
 
-function exitingChild(code: number | null = 0, signal: NodeJS.Signals | null = null) {
+function exitingChild(
+  code: number | null = 0,
+  signal: NodeJS.Signals | null = null,
+  output?: string,
+) {
   const child = new ChildProcess();
-  queueMicrotask(() => child.emit("close", code, signal));
+  const stdout = new PassThrough();
+  const stderr = new PassThrough();
+  Object.assign(child, { stdout, stderr });
+  queueMicrotask(() => {
+    if (output) stdout.write(output);
+    child.emit("close", code, signal);
+  });
   return child;
 }
 
@@ -86,7 +97,7 @@ it("discovers sorted, unique project folders, including invalid config extension
   expect(spawn).toHaveBeenCalledWith(
     process.execPath,
     [expect.stringMatching(/[/\\]cmd[/\\]tsv\.js$/), first, '{"checkingAllSpecs":true}'],
-    { stdio: "inherit" },
+    { stdio: ["ignore", "pipe", "pipe"], env: expect.any(Object) as unknown },
   );
   expect(console.error).not.toHaveBeenCalled();
 });
@@ -111,7 +122,7 @@ it("logs repository-relative paths but passes absolute paths to validation", asy
   expect(console.log).toHaveBeenCalledWith(
     "Checking 1 TypeSpec folders:\nspecification/service/Project",
   );
-  expect(console.log).toHaveBeenCalledWith("\nValidating specification/service/Project");
+  expect(console.log).toHaveBeenCalledWith("\npass specification/service/Project");
   expect(console.log).not.toHaveBeenCalledWith("::endgroup::");
   expect(vi.mocked(spawn).mock.calls[0][1]?.[1]).toBe(project);
 });
@@ -121,11 +132,12 @@ it("uses cwd-relative paths outside a Git repository", async () => {
   await expect(runAll(root)).resolves.toBe(true);
   const name = relative(process.cwd(), project).split(sep).join("/");
   expect(console.log).toHaveBeenCalledWith(`Checking 1 TypeSpec folders:\n${name}`);
-  expect(console.log).toHaveBeenCalledWith(`\nValidating ${name}`);
+  expect(console.log).toHaveBeenCalledWith(`\npass ${name}`);
 });
 
 it("groups each project in GitHub Actions, including failures and suppressions", async () => {
   vi.stubEnv("GITHUB_ACTIONS", "true");
+  vi.stubEnv("NO_COLOR", "1");
   await addProject("specification/a");
   await addProject("specification/b");
   await addProject("specification/c");
@@ -135,19 +147,13 @@ it("groups each project in GitHub Actions, including failures and suppressions",
     "- tool: TypeSpecValidationAll\n  paths: [specification/b]\n  reason: skipped\n",
   );
   vi.mocked(spawn)
-    .mockImplementationOnce(() => {
-      console.log("validation failed");
-      return exitingChild(1);
-    })
-    .mockImplementationOnce(() => {
-      console.log("validation passed");
-      return exitingChild(0);
-    });
+    .mockImplementationOnce(() => exitingChild(1, null, "validation failed"))
+    .mockImplementationOnce(() => exitingChild(0, null, "validation passed"));
 
   await expect(runAll(join(root, "specification"))).resolves.toBe(false);
   expect(vi.mocked(console.log).mock.calls).toEqual([
     ["Checking 3 TypeSpec folders:\nspecification/a\nspecification/b\nspecification/c"],
-    ["::group::Validating specification/a"],
+    ["::group::fail specification/a"],
     ["validation failed"],
     [
       "::error::TypeSpec Validation failed for project specification/a run the following command locally to validate.%0A" +
@@ -155,10 +161,10 @@ it("groups each project in GitHub Actions, including failures and suppressions",
         "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
     ],
     ["::endgroup::"],
-    ["::group::Validating specification/b"],
+    ["::group::skip specification/b"],
     ["Suppressed: skipped"],
     ["::endgroup::"],
-    ["::group::Validating specification/c"],
+    ["::group::pass specification/c"],
     ["validation passed"],
     ["::endgroup::"],
     [""],
@@ -368,7 +374,7 @@ it("surfaces invalid suppressions before starting validation", async () => {
   await writeFile(join(root, "suppressions.yaml"), "- tool: TypeSpecValidationAll\n");
   await expect(runAll(root)).rejects.toThrow();
   expect(spawn).not.toHaveBeenCalled();
-  expect(console.log).toHaveBeenLastCalledWith("::endgroup::");
+  expect(console.log).not.toHaveBeenCalledWith(expect.stringMatching(/^::(?:end)?group::/));
 });
 
 it("surfaces process launch errors instead of treating them as validation failures", async () => {
@@ -384,7 +390,7 @@ it("surfaces process launch errors instead of treating them as validation failur
 
   await expect(runAll(root)).rejects.toBe(error);
   expect(spawn).toHaveBeenCalledOnce();
-  expect(console.log).toHaveBeenLastCalledWith("::endgroup::");
+  expect(console.log).not.toHaveBeenCalledWith(expect.stringMatching(/^::(?:end)?group::/));
 });
 
 it("stops when a child is terminated by a signal", async () => {
@@ -395,7 +401,7 @@ it("stops when a child is terminated by a signal", async () => {
 
   await expect(runAll(root)).rejects.toThrow(`${project} terminated by SIGTERM`);
   expect(spawn).toHaveBeenCalledOnce();
-  expect(console.log).toHaveBeenLastCalledWith("::endgroup::");
+  expect(console.log).not.toHaveBeenCalledWith(expect.stringMatching(/^::(?:end)?group::/));
 });
 
 it("leaves existing and generated changes alone without --git-clean", async () => {
