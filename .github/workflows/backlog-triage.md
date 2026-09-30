@@ -69,7 +69,8 @@ permissions:
 checkout: false
 engine:
   id: copilot
-model: gpt-5.6-sol?effort=high
+# Copilot receives this ID verbatim; query suffixes such as ?effort=high are rejected.
+model: gpt-5.6-sol
 timeout-minutes: 30
 max-ai-credits: 250
 network:
@@ -147,7 +148,7 @@ safe-outputs:
   threat-detection:
     engine:
       id: copilot
-      model: gpt-5.6-sol?effort=high
+      model: gpt-5.6-sol
 ---
 
 # Backlog triage
