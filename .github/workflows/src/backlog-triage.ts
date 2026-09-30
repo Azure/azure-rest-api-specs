@@ -284,7 +284,15 @@ export function parseSelection(value: unknown): Selection[] {
 }
 
 export function parseDecisions(output: unknown, selection: Selection[]): Decision[] {
-  if (!record(output) || !Array.isArray(output.items)) throw new Error("Invalid safe output");
+  if (
+    !record(output) ||
+    !Array.isArray(output.items) ||
+    (output.errors !== undefined &&
+      (!Array.isArray(output.errors) ||
+        !output.errors.every((error: unknown) => typeof error === "string")))
+  ) {
+    throw new Error("Invalid safe output");
+  }
   const calls = output.items.filter((item) => record(item) && item.type === "apply_backlog_triage");
   if (calls.length < 1 || calls.length > selection.length) {
     throw new Error("Expected one checkpoint per completed issue, within the selected batch");
@@ -357,7 +365,7 @@ export async function applyBacklogTriage(
     (issue) => !decisions.some((item) => item.number === issue.number),
   );
   if (pending.length > 0) {
-    const message = `No checkpoint submitted for issue(s) ${pending.map((issue) => issue.number).join(", ")}; leaving them eligible for the next run.`;
+    const message = `No accepted checkpoint for issue(s) ${pending.map((issue) => issue.number).join(", ")}; leaving them eligible for the next run.`;
     core.warning(message);
     await core.summary.addRaw(`\n${message}\n`).write();
   }
@@ -468,5 +476,10 @@ export async function applyBacklogTriage(
         `\n- [${decision.number}](${issue.html_url}) **${decision.action === "blocked" ? "Retry scheduled" : "Applied"}:** ${result}\n`,
       )
       .write();
+  }
+  if (record(output) && Array.isArray(output.errors) && output.errors.length > 0) {
+    core.setFailed(
+      `Safe-output collection rejected ${output.errors.length} item(s). Accepted checkpoints were processed; inspect agent_output.json errors for the rejected outputs.`,
+    );
   }
 }

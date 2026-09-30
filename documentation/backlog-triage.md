@@ -90,6 +90,10 @@ Checkpoint submission does not immediately post to GitHub: application happens
 after the agent job ends. An issue without a submitted checkpoint remains eligible
 for the next run, and a failed agent run remains failed even when earlier
 checkpoints were recovered. Dry runs preview checkpoints without persisting progress.
+The safe-output allowance matches the five-issue batch. If output collection
+rejects a checkpoint, accepted checkpoints can still be applied, but the
+application job reports failure instead of presenting the partial batch as a
+clean run.
 
 Unchanged keep-open issues are revisited after 90 days, or sooner when their
 activity changes or a maintainer explicitly selects them. Blocked investigations
