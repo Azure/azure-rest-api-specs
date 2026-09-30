@@ -154,9 +154,9 @@ it("groups each project in GitHub Actions, including failures and suppressions",
   expect(vi.mocked(console.log).mock.calls).toEqual([
     ["Checking 3 TypeSpec folders:\nspecification/a\nspecification/b\nspecification/c"],
     ["::group::fail specification/a"],
-    ["validation failed"],
     [
-      "::error::TypeSpec Validation failed for project specification/a run the following command locally to validate.%0A" +
+      "validation failed\n" +
+        "::error::TypeSpec Validation failed for project specification/a run the following command locally to validate.%0A" +
         " > pnpm install%0A > pnpm tsv specification/a%0A" +
         "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
     ],

@@ -24,6 +24,12 @@ interface RunContext {
 
 type ProjectStatus = "pass" | "fail" | "skip";
 
+type OutputStream = "stdout" | "stderr";
+interface OutputSegment {
+  stream: OutputStream;
+  text: string;
+}
+
 export async function runAll(
   folder: string,
   options: RunOptions & { shard?: string } = {},
@@ -107,7 +113,9 @@ async function runProjects(
       const suppression = suppressions.find((s) => !s.rules?.length && !s.subRules?.length);
       if (suppression) {
         counts.SUPPRESSED++;
-        printProjectGroup(githubActions, "skip", name, `Suppressed: ${suppression.reason}`, "");
+        printProjectGroup(githubActions, "skip", name, [
+          { stream: "stdout", text: `Suppressed: ${suppression.reason}` },
+        ]);
         continue;
       }
     }
@@ -117,10 +125,10 @@ async function runProjects(
     }
 
     try {
-      const { success, stdout, stderr } = await validateProject(project, context, options.verbose);
+      const { success, segments } = await validateProject(project, context, options.verbose);
       if (success) {
         counts.PASS++;
-        printProjectGroup(githubActions, "pass", name, stdout, stderr);
+        printProjectGroup(githubActions, "pass", name, segments);
       } else {
         counts.FAIL++;
         failed.push(name);
@@ -132,9 +140,14 @@ async function runProjects(
             .replaceAll("%", "%25")
             .replaceAll("\r", "%0D")
             .replaceAll("\n", "%0A");
-          printProjectGroup(githubActions, "fail", name, stdout, stderr, `::error::${escaped}`);
+          const lastSegment = segments.at(-1);
+          const needsNewline = lastSegment !== undefined && !lastSegment.text.endsWith("\n");
+          printProjectGroup(githubActions, "fail", name, [
+            ...segments,
+            { stream: "stdout", text: `${needsNewline ? "\n" : ""}::error::${escaped}` },
+          ]);
         } else {
-          printProjectGroup(githubActions, "fail", name, stdout, stderr);
+          printProjectGroup(githubActions, "fail", name, segments);
           console.error(message);
         }
       }
@@ -160,23 +173,39 @@ async function runProjects(
   return failed.length === 0;
 }
 
-/** Print a project's result as a GitHub Actions group (or a plain heading locally), titled with its status. */
+/**
+ * Print a project's result as a GitHub Actions group (or a plain heading locally), titled with its
+ * status. Segments are replayed to their original stream in capture order so interleaved stdout/stderr
+ * writes (e.g. a warning followed by a summary line) keep their real relative order.
+ */
 function printProjectGroup(
   githubActions: boolean,
   status: ProjectStatus,
   name: string,
-  stdout: string,
-  stderr: string,
-  annotation?: string,
+  segments: OutputSegment[],
 ): void {
   const c = pc.createColors(supportsColor());
   const label =
     status === "pass" ? c.green("pass") : status === "fail" ? c.red("fail") : c.gray("skip");
   const title = `${label} ${name}`;
   console.log(githubActions ? `::group::${title}` : `\n${title}`);
-  if (stdout) console.log(stdout);
-  if (stderr) console.error(stderr);
-  if (annotation) console.log(annotation);
+  // Merge consecutive same-stream segments into a single write, trimming only the very last
+  // segment's trailing newlines so no stray blank line is left before ::endgroup::.
+  const merged: OutputSegment[] = [];
+  for (const segment of segments) {
+    const previous = merged.at(-1);
+    if (previous && previous.stream === segment.stream) {
+      previous.text += segment.text;
+    } else {
+      merged.push({ ...segment });
+    }
+  }
+  const last = merged.at(-1);
+  if (last) last.text = last.text.replace(/\n+$/, "");
+  for (const segment of merged) {
+    if (!segment.text) continue;
+    (segment.stream === "stdout" ? console.log : console.error)(segment.text);
+  }
   if (githubActions) console.log("::endgroup::");
 }
 
@@ -223,7 +252,7 @@ function validateProject(
   folder: string,
   context: RunContext,
   verbose = false,
-): Promise<{ success: boolean; stdout: string; stderr: string }> {
+): Promise<{ success: boolean; segments: OutputSegment[] }> {
   return new Promise((resolvePromise, reject) => {
     const env = { ...process.env };
     if (supportsColor()) {
@@ -233,8 +262,9 @@ function validateProject(
       delete env.FORCE_COLOR;
       env.NO_COLOR = "1";
     }
-    const stdoutChunks: Buffer[] = [];
-    const stderrChunks: Buffer[] = [];
+    // Segments are recorded in capture order (not grouped by stream) so interleaved
+    // stdout/stderr writes from the child can be replayed in their real relative order.
+    const segments: OutputSegment[] = [];
     // A child process keeps each project's context and exit status independent.
     const child = spawn(
       process.execPath,
@@ -246,18 +276,18 @@ function validateProject(
       ],
       { stdio: ["ignore", "pipe", "pipe"], env },
     );
-    child.stdout?.on("data", (chunk: Buffer) => stdoutChunks.push(chunk));
-    child.stderr?.on("data", (chunk: Buffer) => stderrChunks.push(chunk));
+    child.stdout?.on("data", (chunk: Buffer) =>
+      segments.push({ stream: "stdout", text: chunk.toString("utf8") }),
+    );
+    child.stderr?.on("data", (chunk: Buffer) =>
+      segments.push({ stream: "stderr", text: chunk.toString("utf8") }),
+    );
     child.once("error", reject);
     child.once("close", (code, signal) => {
       if (signal) {
         reject(new Error(`TypeSpec Validation for ${folder} terminated by ${signal}`));
       } else {
-        resolvePromise({
-          success: code === 0,
-          stdout: Buffer.concat(stdoutChunks).toString("utf8").replace(/\n+$/, ""),
-          stderr: Buffer.concat(stderrChunks).toString("utf8").replace(/\n+$/, ""),
-        });
+        resolvePromise({ success: code === 0, segments });
       }
     });
   });
