@@ -181,7 +181,7 @@ union RecommendationListMode {
   All: "all";
 
   /**
-   * Returns recommendations that are relevant to the current context.
+   * Returns recommendations in descending order of criticality score, if present.
    */
   Contextual: "contextual";
 }
