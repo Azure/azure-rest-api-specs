@@ -1,3 +1,4 @@
+import { diagnosticText } from "./diagnostics.ts";
 import { generateTypeSpecMetadata } from "@azure-tools/specs-shared/typespec-metadata";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { context } from "../src/index.ts";
@@ -32,11 +33,11 @@ describe("resolveNewApiVersions", function () {
     const resolved = await resolveNewApiVersions("specification/foo/Foo");
 
     expect(resolved.kind).toBe("skip");
-    expect(resolved.kind === "skip" && resolved.result.stdOutput).toContain("Validating all specs");
+    expect(resolved.kind === "skip" && resolved.result.skipped).toContain("Validating all specs");
     expect(readFileAtCommit).not.toHaveBeenCalled();
   });
 
-  it("skips when no commits are provided", async function () {
+  it("skips without a warning when no comparison was requested", async function () {
     delete context.baseCommitish;
     delete context.headCommitish;
     const readFileAtCommit = vi.spyOn(utils, "readFileAtCommit");
@@ -44,11 +45,35 @@ describe("resolveNewApiVersions", function () {
     const resolved = await resolveNewApiVersions("specification/foo/Foo");
 
     expect(resolved.kind).toBe("skip");
-    expect(resolved.kind === "skip" && resolved.result.stdOutput).toContain(
-      `npx tsv specification/foo/Foo '{"baseCommitish":"{commitShaOfMain}","headCommitish":"{headShaOfLocalBranch}"}'`,
+    expect(resolved.kind === "skip" && resolved.result.success).toBe(true);
+    expect(resolved.kind === "skip" && resolved.result.diagnostics).toBeUndefined();
+    expect(resolved.kind === "skip" && resolved.result.skipped).toContain(
+      `pnpm tsv 'specification/foo/Foo' '{"baseCommitish":"{commitShaOfMain}","headCommitish":"{commitShaOfPRHead}"}'`,
     );
     expect(readFileAtCommit).not.toHaveBeenCalled();
   });
+
+  it.each([
+    { base: "base", head: undefined },
+    { base: undefined, head: "head" },
+    { base: null, head: "head" },
+    { base: "base", head: 42 },
+  ])(
+    "warns when supplied comparison context is incomplete or invalid: %j",
+    async ({ base, head }) => {
+      context.baseCommitish = base;
+      context.headCommitish = head;
+      const readFileAtCommit = vi.spyOn(utils, "readFileAtCommit");
+      const resolved = await resolveNewApiVersions("specification/foo/Foo");
+      expect(resolved.kind).toBe("skip");
+      expect(resolved.kind === "skip" && resolved.result.success).toBe(true);
+      expect(resolved.kind === "skip" && resolved.result.diagnostics?.[0].severity).toBe("warning");
+      expect(resolved.kind === "skip" && diagnosticText(resolved.result)).toContain(
+        "requires both baseCommitish and headCommitish",
+      );
+      expect(readFileAtCommit).not.toHaveBeenCalled();
+    },
+  );
 
   it("skips projects without service.yaml at head", async function () {
     vi.spyOn(utils, "readFileAtCommit").mockResolvedValue(undefined);
@@ -56,8 +81,8 @@ describe("resolveNewApiVersions", function () {
     const resolved = await resolveNewApiVersions("specification/foo/Foo");
 
     expect(resolved.kind).toBe("skip");
-    expect(resolved.kind === "skip" && resolved.result.stdOutput).toContain(
-      "Warning: service.yaml does not exist at head",
+    expect(resolved.kind === "skip" && diagnosticText(resolved.result)).toContain(
+      "service.yaml does not exist at head",
     );
   });
 
@@ -67,7 +92,7 @@ describe("resolveNewApiVersions", function () {
     const resolved = await resolveNewApiVersions("specification/foo/Foo");
 
     expect(resolved.kind).toBe("skip");
-    expect(resolved.kind === "skip" && resolved.result.stdOutput).toContain(
+    expect(resolved.kind === "skip" && resolved.result.skipped).toContain(
       "No new TypeSpec API versions",
     );
   });
@@ -110,7 +135,7 @@ describe("resolveNewApiVersions", function () {
     const resolved = await resolveNewApiVersions("specification/foo/Foo");
 
     expect(resolved.kind === "skip" && resolved.result.success).toBe(false);
-    expect(resolved.kind === "skip" && resolved.result.errorOutput).toContain(
+    expect(resolved.kind === "skip" && diagnosticText(resolved.result)).toContain(
       "Unable to compare service.yaml",
     );
   });
@@ -121,7 +146,7 @@ describe("resolveNewApiVersions", function () {
     const resolved = await resolveNewApiVersions("specification/foo/Foo");
 
     expect(resolved.kind === "skip" && resolved.result.success).toBe(false);
-    expect(resolved.kind === "skip" && resolved.result.errorOutput).toContain("ERROR: head:");
+    expect(resolved.kind === "skip" && diagnosticText(resolved.result)).toContain("head:");
   });
 
   it("fails when service.yaml is malformed at base", async function () {
@@ -132,7 +157,7 @@ describe("resolveNewApiVersions", function () {
     const resolved = await resolveNewApiVersions("specification/foo/Foo");
 
     expect(resolved.kind === "skip" && resolved.result.success).toBe(false);
-    expect(resolved.kind === "skip" && resolved.result.errorOutput).toContain("ERROR: base:");
+    expect(resolved.kind === "skip" && diagnosticText(resolved.result)).toContain("base:");
   });
 });
 
@@ -141,8 +166,8 @@ describe("resolveSdkEmitters", function () {
     const resolved = resolveSdkEmitters(metadata({}));
 
     expect(resolved.kind).toBe("skip");
-    expect(resolved.kind === "skip" && resolved.result.stdOutput).toBe(
-      "Warning: No SDK language emitters are configured; skipping API-version validation.",
+    expect(resolved.kind === "skip" && diagnosticText(resolved.result)).toBe(
+      "No SDK language emitters are configured; skipping API-version validation.",
     );
   });
 
@@ -150,8 +175,8 @@ describe("resolveSdkEmitters", function () {
     const resolved = resolveSdkEmitters(metadata({ [pythonEmitter]: "multiple-versions" }));
 
     expect(resolved.kind).toBe("skip");
-    expect(resolved.kind === "skip" && resolved.result.stdOutput).toBe(
-      "Warning: This rule does not support multiple-service project scenarios.",
+    expect(resolved.kind === "skip" && diagnosticText(resolved.result)).toBe(
+      "This rule does not support multiple-service project scenarios.",
     );
   });
 
