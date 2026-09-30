@@ -7,6 +7,7 @@ import { commentOrUpdate, parseExistingComments } from "../comment.ts";
 import { extractInputs } from "../context.ts";
 import type { Core, GitHub, GitHubScriptArgs } from "../github.ts";
 import { loadApproversConfig } from "./approvers.ts";
+import { buildApprovalResetComment } from "../protected-labels/label-comments.ts";
 import { removeLabelIfPresent } from "./labels.ts";
 
 const FormatValidationResultSchema = z.object({
@@ -141,6 +142,16 @@ export function parseCommentTable(
  */
 export function shouldRemoveStaleMgmtLabel(isMgmt: boolean, existingLabels: string[]): boolean {
   return !isMgmt && existingLabels.includes("Mgmt");
+}
+
+/**
+ * Extract the approver login from a review-table status cell such as
+ * "✅ Approved by @alice", so a reset notice can @-mention whoever's sign-off was
+ * invalidated by a package name change (#46786). Returns undefined when the status is
+ * pending or otherwise has no recorded approver.
+ */
+export function parseApproverFromStatus(status: string | undefined): string | undefined {
+  return status?.match(/Approved by @([\w-]+)/)?.[1];
 }
 
 function buildCommentBody({
@@ -329,6 +340,9 @@ export default async function postResults({ github, context, core }: GitHubScrip
   const languages = Object.keys(results.namespacesFound);
 
   const resetLanguages: string[] = [];
+  // Prior approvers of each reset language, parsed from the existing table's "Approved by
+  // @login" status, so the reset notice can @-mention them (#46786).
+  const resetApprovers = new Set<string>();
 
   const preservedApprovals: Map<string, { namespace: string; status: string }> = new Map();
 
@@ -360,6 +374,8 @@ export default async function postResults({ github, context, core }: GitHubScrip
           await removeLabelIfPresent(github, owner, repo, issue_number, approvedLabel);
           existingLabels.splice(existingLabels.indexOf(approvedLabel), 1);
           resetLanguages.push(language);
+          const approver = parseApproverFromStatus(prev.status);
+          if (approver) resetApprovers.add(approver);
         }
       } else if (prev && prev.status && !prev.status.includes("Pending")) {
         // Package name unchanged and previously approved: preserve status
@@ -392,6 +408,8 @@ export default async function postResults({ github, context, core }: GitHubScrip
           await removeLabelIfPresent(github, owner, repo, issue_number, approvedLabel);
           existingLabels.splice(existingLabels.indexOf(approvedLabel), 1);
           resetLanguages.push(lang);
+          const approver = parseApproverFromStatus(previousTable.get(lang)?.status);
+          if (approver) resetApprovers.add(approver);
         }
       }
       for (const label of ["package-name-approved-all", "package-name-approved"]) {
@@ -471,4 +489,17 @@ export default async function postResults({ github, context, core }: GitHubScrip
   });
 
   await commentOrUpdate(github, core, owner, repo, issue_number, body, "package-name-review-bot");
+
+  // Notify approvers whose sign-off was invalidated by the package name change (#46786).
+  // The review table already shows the reset row, but updating that comment does not send
+  // a notification, so post a distinct note (naturally de-duplicated: the approved label is
+  // gone after the reset, so a later synchronize will not re-detect the same reset).
+  if (resetLanguages.length > 0) {
+    await github.rest.issues.createComment({
+      owner,
+      repo,
+      issue_number,
+      body: buildApprovalResetComment({ resetLanguages, approvers: [...resetApprovers] }),
+    });
+  }
 }

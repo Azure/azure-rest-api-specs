@@ -1,6 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import {
   getApprovers,
+  parseApproverFromStatus,
   parseCommentTable,
   shouldRemoveStaleMgmtLabel,
 } from "../../src/package-name-approval/post-results.ts";
@@ -537,6 +538,25 @@ describe("post-results", () => {
 
     it("is a no-op when Mgmt is not present", () => {
       expect(shouldRemoveStaleMgmtLabel(false, ["data-plane"])).toBe(false);
+    });
+  });
+
+  describe("parseApproverFromStatus (#46786)", () => {
+    it("extracts the approver login from an approved status cell", () => {
+      expect(parseApproverFromStatus("✅ Approved by @JoshLove-msft")).toBe("JoshLove-msft");
+    });
+
+    it("returns undefined for a pending status", () => {
+      expect(parseApproverFromStatus("⏳ Pending")).toBeUndefined();
+      expect(parseApproverFromStatus("⏳ Pending _(unchanged)_")).toBeUndefined();
+    });
+
+    it("returns undefined for a reconciled approval with no recorded login", () => {
+      expect(parseApproverFromStatus("✅ Approved")).toBeUndefined();
+    });
+
+    it("returns undefined for an undefined status", () => {
+      expect(parseApproverFromStatus(undefined)).toBeUndefined();
     });
   });
 });
