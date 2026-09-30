@@ -1,5 +1,5 @@
 import { extractInputs } from "../context.ts";
-import type { Core, WebhookEvent } from "../github.ts";
+import type { Context, Core, GitHub, GitHubScriptArgs, WebhookEvent } from "../github.ts";
 import {
   ALLOWED_BOT_LOGINS,
   evaluateLabelAuthorization,
@@ -10,8 +10,8 @@ import { createApproversConfig } from "./approvers.ts";
 import { removeLabelIfPresent } from "./labels.ts";
 
 export type ValidateContext = {
-  github: import("@actions/github-script").AsyncFunctionArguments["github"];
-  context: import("@actions/github-script").AsyncFunctionArguments["context"];
+  github: GitHub;
+  context: Context;
   core: Core;
   approversConfig: import("./approvers.ts").ApproversConfig;
   owner: string;
@@ -144,7 +144,11 @@ async function handleLabeled({
     prLabels: labels,
     plane: isMgmt ? "management-plane" : "data-plane",
   });
-  if (authorization.status !== "authorized" && authorization.status !== "trusted-bot") {
+  if (
+    authorization.status !== "authorized" &&
+    authorization.status !== "trusted-bot" &&
+    authorization.status !== "plane-unprotected"
+  ) {
     core.warning(`${actor} is not authorized to apply ${targetLabel}, removing`);
     await removeLabelIfPresent(github, owner, repo, prNumber, targetLabel);
     return;
@@ -263,11 +267,7 @@ async function handleLabeled({
  * Validate namespace label changes by authorized approvers.
  * Handles both labeled (approval) and unlabeled (guard against unauthorized removal).
  */
-export default async function validateApproval({
-  github,
-  context,
-  core,
-}: import("@actions/github-script").AsyncFunctionArguments) {
+export default async function validateApproval({ github, context, core }: GitHubScriptArgs) {
   const protectedLabelsConfig = await loadProtectedLabelsConfig();
   const approversConfig = createApproversConfig(protectedLabelsConfig);
 
@@ -281,7 +281,8 @@ export default async function validateApproval({
     throw new Error("Pull request label event is missing a label name.");
   }
   const actor = payload.sender.login;
-  const isMgmt = labels.includes("Mgmt") || labels.includes("resource-manager");
+  // Plane from resource-manager (self-healing), not the add-only "Mgmt" label (#46785).
+  const isMgmt = labels.includes("resource-manager");
 
   if (payload.action === "unlabeled") {
     return await handleUnlabeled({
@@ -300,6 +301,16 @@ export default async function validateApproval({
 
   if (!labels.includes("package-name-review-required")) {
     core.info("No namespace review, skipping");
+    return;
+  }
+
+  // Plane is derived from the labels summarize-checks reconciles (resource-manager /
+  // data-plane). If neither is present, the plane is unknown: defer rather than defaulting
+  // to data-plane, otherwise a data-plane approver could consume approvals on a PR that is
+  // actually management (before resource-manager lands, only the add-only "Mgmt" may exist).
+  // Mirrors check-label's tri-state skip (#46785).
+  if (!isMgmt && !labels.includes("data-plane")) {
+    core.info("Plane not yet reconciled (no resource-manager/data-plane label), skipping");
     return;
   }
 

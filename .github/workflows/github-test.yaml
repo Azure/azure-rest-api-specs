@@ -60,7 +60,7 @@ jobs:
 
       - if: ${{ github.event_name == 'pull_request' && matrix.os == 'ubuntu' }}
         name: Require compiled agentic workflow locks
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9.0.0
         with:
           script: |
             const files = await github.paginate(github.rest.pulls.listFiles, {
@@ -91,7 +91,7 @@ jobs:
         uses: ./.github/actions/install-deps-github-script
 
       - name: Verify all modules are importable
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9.0.0
         with:
           script: |
             const { join } = await import("path");

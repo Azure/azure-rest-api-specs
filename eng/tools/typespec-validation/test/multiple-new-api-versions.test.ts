@@ -1,3 +1,4 @@
+import { defaultLogger } from "@azure-tools/specs-shared/logger";
 import { generateTypeSpecMetadata } from "@azure-tools/specs-shared/typespec-metadata";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { context } from "../src/index.ts";
@@ -29,7 +30,10 @@ describe("MultipleNewApiVersionsRule", function () {
       .mockResolvedValueOnce(serviceYaml("2025-01-01"))
       .mockResolvedValueOnce(serviceYaml("2025-01-01", "2026-01-01"));
 
-    const result = await new MultipleNewApiVersionsRule().execute("specification/foo/Foo");
+    const result = await new MultipleNewApiVersionsRule().execute(
+      "specification/foo/Foo",
+      defaultLogger,
+    );
 
     expect(result.success).toBe(true);
     expect(result.stdOutput).toContain("Only one new API version was added");
@@ -44,7 +48,10 @@ describe("MultipleNewApiVersionsRule", function () {
       metadata({ [pythonEmitter]: "2026-01-01" }),
     );
 
-    const result = await new MultipleNewApiVersionsRule().execute("specification/foo/Foo");
+    const result = await new MultipleNewApiVersionsRule().execute(
+      "specification/foo/Foo",
+      defaultLogger,
+    );
 
     expect(result.success).toBe(true);
     expect(result.stdOutput).toBe("All SDK language emitters target 2026-01-01.");
@@ -59,7 +66,10 @@ describe("MultipleNewApiVersionsRule", function () {
       metadata({ [pythonEmitter]: "2026-02-01" }),
     );
 
-    const result = await new MultipleNewApiVersionsRule().execute("specification/foo/Foo");
+    const result = await new MultipleNewApiVersionsRule().execute(
+      "specification/foo/Foo",
+      defaultLogger,
+    );
 
     expect(result.success).toBe(false);
     expect(result.errorOutput).toContain("To reproduce locally:");
@@ -71,7 +81,10 @@ describe("MultipleNewApiVersionsRule", function () {
       .mockResolvedValueOnce(serviceYaml("2025-01-01", "2026-01-01", "2026-02-01"));
     vi.mocked(generateTypeSpecMetadata).mockRejectedValue(new Error("metadata failed"));
 
-    const result = await new MultipleNewApiVersionsRule().execute("specification/foo/Foo");
+    const result = await new MultipleNewApiVersionsRule().execute(
+      "specification/foo/Foo",
+      defaultLogger,
+    );
 
     expect(result.success).toBe(false);
     expect(result.errorOutput).toContain("metadata failed");

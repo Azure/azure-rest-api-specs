@@ -9,6 +9,11 @@ A system that enforces "only authorized people can apply this label."
 3. If an unauthorized user applies a protected label, the bot removes it
 4. Supports plane-aware policies: different approvers for management-plane vs data-plane PRs
 
+Warning comments mention the unauthorized actor and direct them to the **Next Steps to Merge**
+comment and the [review and merge process](https://aka.ms/azsdk/specreview/merge).
+Authorized approvers' GitHub profile links are kept in a
+collapsed **See allowed approvers** section without `@mentions`.
+
 ## Configuration
 
 ```yaml
@@ -25,7 +30,7 @@ some-approval-label:
   - user2
 
 # Plane-aware: different approvers depending on whether the PR
-# is management-plane (has Mgmt/resource-manager label) or data-plane
+# is management-plane (has resource-manager label) or data-plane
 package-name-dotnet-approved:
   management-plane:
     - user1
@@ -33,13 +38,26 @@ package-name-dotnet-approved:
   data-plane:
     - user3
     - user4
+
+# Per-plane opt-out: gate one plane and leave the other open.
+# Here data-plane is restricted to its approvers while management-plane
+# is open to anyone (the label is never removed on management-plane PRs).
+typespec-suppressions-approved:
+  data-plane:
+    - user3
+  management-plane: unprotected
 ```
 
 Values are GitHub handles (case-insensitive). Plane detection uses PR labels explicitly:
 
-- `Mgmt` or `resource-manager` → management-plane
+- `resource-manager` → management-plane
 - `data-plane` → data-plane
 - Neither → plane-aware labels are not enforced (no action taken)
+
+A plane may be set to the literal `unprotected` instead of a list, which opts that
+plane out of enforcement (anyone may apply the label). An **omitted** plane stays
+fail-closed and resolves to `global-approvers` only; only the explicit `unprotected`
+keyword opens a plane.
 
 ## Security Model
 
