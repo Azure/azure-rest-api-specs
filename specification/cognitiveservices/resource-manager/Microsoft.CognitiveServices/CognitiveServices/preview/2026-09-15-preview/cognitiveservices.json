@@ -17044,45 +17044,41 @@
       "type": "object",
       "description": "Up to four trusted request attributes and their allowed values used to select matching requests.",
       "properties": {
-        "foundry.caller.agent.id": {
+        "agentIds": {
           "type": "array",
           "description": "The stable Foundry agent IDs to match.",
           "minItems": 1,
           "maxItems": 20,
           "items": {
             "$ref": "#/definitions/CostControlMatchValue"
-          },
-          "x-ms-client-name": "agentIds"
+          }
         },
-        "foundry.caller.identity.oid": {
+        "identityObjectIds": {
           "type": "array",
           "description": "The authenticated principal object IDs to match.",
           "minItems": 1,
           "maxItems": 20,
           "items": {
             "$ref": "#/definitions/CostControlMatchValue"
-          },
-          "x-ms-client-name": "identityObjectIds"
+          }
         },
-        "foundry.caller.session.id": {
+        "sessionIds": {
           "type": "array",
           "description": "The Foundry session IDs to match.",
           "minItems": 1,
           "maxItems": 20,
           "items": {
             "$ref": "#/definitions/CostControlMatchValue"
-          },
-          "x-ms-client-name": "sessionIds"
+          }
         },
-        "foundry.project.id": {
+        "projectIds": {
           "type": "array",
           "description": "The Foundry project resource IDs to match.",
           "minItems": 1,
           "maxItems": 20,
           "items": {
             "$ref": "#/definitions/CostControlMatchValue"
-          },
-          "x-ms-client-name": "projectIds"
+          }
         }
       }
     },
