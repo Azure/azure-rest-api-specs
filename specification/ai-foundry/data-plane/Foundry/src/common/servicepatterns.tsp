@@ -444,6 +444,9 @@ alias JobStatusResponse<TJob extends TypeSpec.Reflection.Model> = TJob & {
   retryAfter?: int32;
 };
 
+@maxLength(512)
+scalar OperationId512 extends string;
+
 /** Optional Operation-Id header for idempotent job creation retries. */
 alias WithOperationId = {
   /** Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally. */
@@ -451,14 +454,24 @@ alias WithOperationId = {
   operationId?: string;
 };
 
+/** Optional bounded Operation-Id header for agent optimization retries. */
+alias WithBoundedOperationId = {
+  /** Client-generated unique ID for idempotent retries. When absent, the server creates the job unconditionally. */
+  @header("Operation-Id")
+  operationId?: OperationId512;
+};
+
 // ---- Operation templates ----
 
 /** Create a new job. Returns 201 Created. Accepts an optional Operation-Id header for idempotent retries. */
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
 @post
-op postJob<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperation<
+op postJob<
+  TJob extends TypeSpec.Reflection.Model,
+  TOperationHeaders extends TypeSpec.Reflection.Model = WithOperationId,
+> is FoundryDataPlaneOperation<
   {
-    ...WithOperationId;
+    ...TOperationHeaders;
 
     /** The job to create. */
     @body job: TJob;
