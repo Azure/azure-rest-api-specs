@@ -13,7 +13,7 @@ import {
   execPnpmExec,
   isExecError,
 } from "../src/exec.ts";
-import { debugLogger } from "../src/logger.ts";
+import { ConsoleLogger, debugLogger } from "../src/logger.ts";
 
 vi.mock("node:module", async (importOriginal) => {
   const original = await importOriginal<typeof import("node:module")>();
@@ -28,6 +28,25 @@ describe("execFile", () => {
   const file = "node";
   const args = ["-e", `console.log("test")`];
   const expected = "test\n";
+
+  it.each([false, true])("uses debug level for command traces (verbose=%s)", async (verbose) => {
+    const log = vi.spyOn(console, "log").mockImplementation(() => {});
+    const debug = vi.spyOn(console, "debug").mockImplementation(() => {});
+    try {
+      const result = await execFile(file, args, { logger: new ConsoleLogger(verbose) });
+      expect(result.stdout).toBe(expected);
+      expect(log).not.toHaveBeenCalled();
+      if (verbose) {
+        expect(debug).toHaveBeenCalledWith(`execFile("${file}", ${JSON.stringify(args)})`);
+        expect(debug).toHaveBeenCalledWith(`stdout: '${expected}'`);
+      } else {
+        expect(debug).not.toHaveBeenCalled();
+      }
+    } finally {
+      log.mockRestore();
+      debug.mockRestore();
+    }
+  });
 
   it.each([{}, options])("exec succeeds with default buffer (options: %o)", async (options) => {
     await expect(execFile(file, args, options)).resolves.toEqual({
@@ -203,6 +222,15 @@ describe("execNpm", () => {
 });
 
 describe("execPnpm", () => {
+  it("logs command invocations at debug rather than info level", async () => {
+    const logger = new ConsoleLogger();
+    const debug = vi.spyOn(logger, "debug");
+    const info = vi.spyOn(logger, "info");
+    await execPnpm(["--version"], { logger });
+    expect(debug).toHaveBeenCalledWith('execPnpm(["--version"])');
+    expect(info).not.toHaveBeenCalled();
+  });
+
   it("succeeds with --version", async () => {
     await expect(execPnpm(["--version"], options)).resolves.toMatchObject({
       stdout: expect.toSatisfy((v) => semver.valid(String(v)) !== null) as unknown,

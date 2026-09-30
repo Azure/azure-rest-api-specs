@@ -40,7 +40,7 @@ jobs:
       - name: Get impacted TypeSpec folders
         shell: pwsh
         run: |
-          $ignoreCoreFiles = -not (@('main', 'RPSaaSMaster') -contains $Env:GITHUB_BASE_REF)
+          $ignoreCoreFiles = $true
           $typespecFolders, $checkedAll = & "./eng/scripts/Get-TypeSpec-Folders.ps1" `
             -BaseCommitish:"${{ steps.revisions.outputs.base }}" `
             -HeadCommitish:"${{ steps.revisions.outputs.head }}" `
@@ -58,6 +58,7 @@ jobs:
           }
 
       - name: Run TypeSpec suppressions analysis
+        id: typespec-suppressions-analysis
         shell: bash
         env:
           # Emit inline PR `::warning` annotations only for meaningful analysis runs.
@@ -69,6 +70,8 @@ jobs:
           # `github.event.changes.base` is set and annotations are emitted again.
           EMIT_ANNOTATIONS: ${{ github.event.action != 'edited' || github.event.changes.base != null }}
         run: |
+          echo "summary=$GITHUB_STEP_SUMMARY" >> "$GITHUB_OUTPUT"
+
           if [[ ! -s typespec-folders.txt ]]; then
             {
               echo "# TypeSpec Suppressions"
@@ -111,8 +114,19 @@ jobs:
             --json-output "typespec-suppressions-report.json" \
             --markdown-output "$GITHUB_STEP_SUMMARY" \
             --check-rules-file "eng/tools/typespec-suppressions/check-rules.json" \
+            --fail-on-approval \
             "${annotations_flag[@]}" \
             "${spec_folders[@]}"
+
+      # Used by other workflows like set-status
+      - name: Set job-summary artifact
+        if: ${{ always() && steps.typespec-suppressions-analysis.outputs.summary }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: job-summary
+          path: ${{ steps.typespec-suppressions-analysis.outputs.summary }}
+          # If the file doesn't exist, just don't add the artifact
+          if-no-files-found: ignore
 
       - name: Upload report artifact
         if: ${{ always() }}

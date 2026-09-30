@@ -1,5 +1,10 @@
 import { describe, expect, it, vi } from "vitest";
-import { parseCommentTable } from "../../src/package-name-approval/post-results.ts";
+import {
+  getApprovers,
+  parseCommentTable,
+  shouldRemoveStaleMgmtLabel,
+} from "../../src/package-name-approval/post-results.ts";
+import { createApproversConfig } from "../../src/package-name-approval/approvers.ts";
 
 // Import only the pure functions we can test without heavy mocking
 // buildCommentBody and getApprovers are the key testable units
@@ -31,6 +36,38 @@ vi.mock("../../src/context.ts", () => ({
 }));
 
 describe("post-results", () => {
+  describe("getApprovers with unprotected planes (#46728)", () => {
+    const config = createApproversConfig({
+      globalApprovers: [],
+      labels: {
+        "package-name-go-approved": {
+          "management-plane": ["mgmt-approver"],
+          "data-plane": "unprotected",
+        },
+        "package-name-java-approved": {
+          "management-plane": "unprotected",
+          "data-plane": ["dp-approver"],
+        },
+      },
+    });
+
+    it("returns 'unprotected' for a data-plane plane opted out (no throw)", () => {
+      expect(getApprovers(config, false, "go")).toBe("unprotected");
+    });
+
+    it("returns 'unprotected' for a management-plane plane opted out", () => {
+      expect(getApprovers(config, true, "java")).toBe("unprotected");
+    });
+
+    it("still returns the approver list for a configured plane", () => {
+      expect(getApprovers(config, false, "java")).toEqual(["dp-approver"]);
+    });
+
+    it("still throws for a language absent from config (fail-closed)", () => {
+      expect(() => getApprovers(config, false, "ruby")).toThrow(/No approvers configured/);
+    });
+  });
+
   describe("parseCommentTable", () => {
     it("should extract language, package name, and pending status from table rows", () => {
       const body = [
@@ -479,6 +516,27 @@ describe("post-results", () => {
       // Should remain unchanged — already approved
       expect(result).toContain("Approved by @someone");
       expect(result).not.toContain("Approved by @other");
+    });
+  });
+
+  describe("stale Mgmt label reconciliation (#46785)", () => {
+    it("removes Mgmt when the PR is no longer management-plane", () => {
+      // A push removed the management tspconfig, so detection reports isMgmt=false,
+      // but the add-only label is still on the PR from a previous run.
+      expect(shouldRemoveStaleMgmtLabel(false, ["Mgmt", "data-plane"])).toBe(true);
+    });
+
+    it("keeps Mgmt when the PR is still management-plane", () => {
+      expect(shouldRemoveStaleMgmtLabel(true, ["Mgmt"])).toBe(false);
+    });
+
+    it("keeps Mgmt on a genuinely mixed PR (isMgmt stays true)", () => {
+      // Mixed PRs set both isMgmt and isDataPlane; isMgmt true means we do not remove it.
+      expect(shouldRemoveStaleMgmtLabel(true, ["Mgmt", "data-plane"])).toBe(false);
+    });
+
+    it("is a no-op when Mgmt is not present", () => {
+      expect(shouldRemoveStaleMgmtLabel(false, ["data-plane"])).toBe(false);
     });
   });
 });
