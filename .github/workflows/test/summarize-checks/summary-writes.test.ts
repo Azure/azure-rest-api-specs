@@ -1,3 +1,4 @@
+import { strToU8, zipSync } from "fflate";
 import { describe, expect, it, vi } from "vitest";
 import {
   summarizeChecksImpl,
@@ -5,13 +6,14 @@ import {
   type CheckRunResult,
 } from "../../src/summarize-checks/summarize-checks.ts";
 import { createMockCore, createMockGithub } from "../mocks.ts";
-import { statusContext, summaryResponse } from "./summary-data-fixtures.ts";
+import { checkRun, statusContext, summaryResponse } from "./summary-data-fixtures.ts";
 
 const statusName = "Automated merging requirements met";
 const pendingDescription =
   "The requirements for merging this PR are still being evaluated. Please wait.";
 const previousRun = "https://github.com/owner/repo/actions/runs/1";
 const currentRun = "https://github.com/owner/repo/actions/runs/2";
+const commentUrl = "https://github.com/owner/repo/pull/123#issuecomment-42";
 const pendingBody =
   "<h2>Next Steps to Merge</h2>⌛ Please wait. Next steps to merge this PR are being evaluated by automation. ⌛";
 const comment = (body: string, run = previousRun) =>
@@ -28,7 +30,7 @@ async function summarize(github: ReturnType<typeof createMockGithub>) {
     "owner",
     "repo",
     123,
-    "head-sha",
+    "sha",
     "workflow_run",
     "main",
     currentRun,
@@ -41,7 +43,13 @@ describe("summary writes", () => {
     github.graphql.mockResolvedValue(
       summaryResponse({
         comments: [{ databaseId: 42, body: comment(pendingBody) }],
-        contexts: [statusContext({ context: statusName, description: pendingDescription })],
+        contexts: [
+          statusContext({
+            context: statusName,
+            description: pendingDescription,
+            targetUrl: commentUrl,
+          }),
+        ],
       }),
     );
 
@@ -74,7 +82,7 @@ describe("summary writes", () => {
       body: comment(pendingBody, currentRun),
     });
     expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
-      expect.objectContaining({ state: "pending", target_url: currentRun }),
+      expect.objectContaining({ state: "pending", target_url: commentUrl }),
     );
   });
 
@@ -92,6 +100,9 @@ describe("summary writes", () => {
       body: comment(pendingBody, currentRun),
     });
     expect(github.rest.repos.createCommitStatus).toHaveBeenCalledTimes(1);
+    expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+      expect.objectContaining({ target_url: commentUrl }),
+    );
     expect(github.rest.issues.listComments).not.toHaveBeenCalled();
   });
 
@@ -105,6 +116,161 @@ describe("summary writes", () => {
     expect(github.rest.issues.createComment).not.toHaveBeenCalled();
     expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
   });
+
+  it("migrates an unchanged status from a run report to the stable summary comment", async () => {
+    const github = createMockGithub();
+    github.graphql.mockResolvedValue(
+      summaryResponse({
+        comments: [{ databaseId: 42, body: comment(pendingBody) }],
+        contexts: [
+          statusContext({
+            context: statusName,
+            description: pendingDescription,
+            targetUrl: previousRun,
+          }),
+        ],
+      }),
+    );
+
+    await summarize(github);
+
+    expect(github.rest.issues.updateComment).not.toHaveBeenCalled();
+    expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+      expect.objectContaining({ target_url: commentUrl }),
+    );
+  });
+});
+
+function createPolicyGithub() {
+  const github = createMockGithub();
+  const impact = {
+    resourceManagerRequired: false,
+    dataPlaneRequired: false,
+    suppressionReviewRequired: false,
+    isNewApiVersion: false,
+    rpaasRpNotInPrivateRepo: false,
+    rpaasChange: false,
+    newRP: false,
+    rpaasRPMissing: false,
+    typeSpecChanged: true,
+    isDraft: false,
+    targetBranch: "main",
+  };
+  github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+    data: { artifacts: [{ id: 991234, name: "job-summary" }] },
+  });
+  github.rest.actions.downloadArtifact.mockResolvedValue({
+    data: Buffer.from(zipSync({ "summary.json": strToU8(JSON.stringify(impact)) })),
+  });
+  github.rest.repos.getBranchRules.mockResolvedValue({
+    data: [
+      {
+        type: "required_status_checks",
+        parameters: {
+          required_status_checks: [{ context: "TypeSpec Validation" }, { context: "license/cla" }],
+        },
+      },
+    ],
+  });
+  const state = {
+    failingCheck: "",
+    body: comment("Previous guidance"),
+    status: {
+      context: statusName,
+      state: "failure",
+      description:
+        "❌ This PR cannot be merged because some requirements are not met. See the details.",
+      target_url: commentUrl,
+      updated_at: "2026-09-30T00:00:00Z",
+    },
+  };
+  github.graphql.mockImplementation(() =>
+    Promise.resolve(
+      summaryResponse({
+        comments: [{ databaseId: 42, body: state.body }],
+        contexts: [
+          ...["Summarize PR Impact", "TypeSpec Validation", "license/cla"].map((name) =>
+            checkRun({
+              name,
+              conclusion: name === state.failingCheck ? "FAILURE" : "SUCCESS",
+              checkSuite: { workflowRun: { databaseId: 991234 } },
+            }),
+          ),
+          statusContext({
+            context: statusName,
+            state: state.status.state.toUpperCase(),
+            description: state.status.description,
+            targetUrl: state.status.target_url,
+          }),
+        ],
+      }),
+    ),
+  );
+  github.rest.issues.updateComment.mockImplementation(({ body }: { body: string }) => {
+    state.body = body;
+    return Promise.resolve();
+  });
+  github.rest.repos.createCommitStatus.mockImplementation(
+    (next: { context: string; state: string; description: string; target_url: string }) => {
+      state.status = { ...next, updated_at: "2026-09-30T00:02:00Z" };
+      return Promise.resolve();
+    },
+  );
+  return { github, state };
+}
+
+describe("serialized summary evaluations", () => {
+  it("reconciles the current head when an older event replaces a pending summary", async () => {
+    const github = createMockGithub();
+    github.rest.issues.createComment.mockResolvedValue({ data: { id: 42 } });
+    github.graphql.mockResolvedValue(summaryResponse({ headSha: "current-head" }));
+
+    await summarize(github);
+
+    expect(github.graphql).toHaveBeenNthCalledWith(
+      2,
+      expect.any(String),
+      expect.objectContaining({ sha: "current-head" }),
+    );
+    expect(github.rest.repos.createCommitStatus).toHaveBeenCalledWith(
+      expect.objectContaining({ sha: "current-head" }),
+    );
+    expect(github.rest.pulls.get).not.toHaveBeenCalled();
+    expect(github.rest.issues.listLabelsOnIssue).not.toHaveBeenCalled();
+  });
+
+  it("rereads the status after the previous summary publishes success", async () => {
+    const { github, state } = createPolicyGithub();
+    await summarize(github);
+    expect(state.status.state).toBe("success");
+
+    state.failingCheck = "TypeSpec Validation";
+    await summarize(github);
+
+    expect(state.status.state).toBe("failure");
+    expect(github.rest.repos.createCommitStatus).toHaveBeenCalledTimes(2);
+    expect(github.graphql).toHaveBeenCalledTimes(2);
+    expect(github.rest.repos.listCommitStatusesForRef).not.toHaveBeenCalled();
+  });
+
+  it("keeps Details current when blockers change but state and description do not", async () => {
+    const { github, state } = createPolicyGithub();
+    state.failingCheck = "TypeSpec Validation";
+    await summarize(github);
+    const previousBody = state.body;
+    const previousStatus = { ...state.status };
+
+    state.failingCheck = "license/cla";
+    await summarize(github);
+
+    expect(state.body).not.toBe(previousBody);
+    expect(state.body).toContain("license/cla");
+    expect(state.body).not.toContain("TypeSpec Validation");
+    expect(state.status).toEqual(previousStatus);
+    expect(state.status.target_url).toBe(commentUrl);
+    expect(github.rest.issues.updateComment).toHaveBeenCalledTimes(2);
+    expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
+  });
 });
 
 describe("updateCommitStatus", () => {
@@ -116,9 +282,30 @@ describe("updateCommitStatus", () => {
   };
 
   it.each([
-    { context: statusName, state: "failure", description: pendingDescription },
-    { context: statusName, state: "pending", description: "Different description" },
-    { context: "Other check", state: "pending", description: pendingDescription },
+    {
+      context: statusName,
+      state: "failure",
+      description: pendingDescription,
+      target_url: currentRun,
+    },
+    {
+      context: statusName,
+      state: "pending",
+      description: "Different description",
+      target_url: currentRun,
+    },
+    {
+      context: "Other check",
+      state: "pending",
+      description: pendingDescription,
+      target_url: currentRun,
+    },
+    {
+      context: statusName,
+      state: "pending",
+      description: pendingDescription,
+      target_url: previousRun,
+    },
     undefined,
   ])("publishes when the prior status is different or missing (%j)", async (existing) => {
     const github = createMockGithub();
@@ -136,7 +323,12 @@ describe("updateCommitStatus", () => {
       "repo",
       "sha",
       { ...result, summary },
-      { context: statusName, state: "pending", description: `${"x".repeat(137)}...` },
+      {
+        context: statusName,
+        state: "pending",
+        description: `${"x".repeat(137)}...`,
+        target_url: currentRun,
+      },
     );
     expect(github.rest.repos.createCommitStatus).not.toHaveBeenCalled();
   });

@@ -53,7 +53,7 @@ export function parseExistingComments(
  * @param commentIdentifier - The value that will be stored in an html comment so we can retrieve this comment later
  * @param options.normalizeBody - Ignores caller-specific provenance when comparing comment content.
  * @param options.comments - Reuses a complete comment collection already fetched by the caller.
- * @returns Resolves when the comment is created or updated.
+ * @returns The ID of the existing or newly created comment.
  */
 export async function commentOrUpdate(
   github: GitHub,
@@ -64,7 +64,7 @@ export async function commentOrUpdate(
   body: string,
   commentIdentifier: string,
   options: { normalizeBody?: (body: string) => string; comments?: IssueComment[] } = {},
-): Promise<void> {
+): Promise<number> {
   const computedBody = body + `\n<!-- ${commentIdentifier} -->`;
 
   const comments =
@@ -82,7 +82,7 @@ export async function commentOrUpdate(
     const normalizeBody = options.normalizeBody ?? ((value: string) => value);
     if (commentBody !== undefined && normalizeBody(commentBody) === normalizeBody(computedBody)) {
       core.info(`No update needed for comment ${commentId}.`);
-      return; // No-op if the body is the same
+      return commentId;
     }
     await github.rest.issues.updateComment({
       owner,
@@ -91,6 +91,7 @@ export async function commentOrUpdate(
       body: computedBody,
     });
     core.info(`Updated existing comment ${commentId}.`);
+    return commentId;
   } else {
     // Create a new comment
     const { data: newComment } = await github.rest.issues.createComment({
@@ -100,5 +101,6 @@ export async function commentOrUpdate(
       body: computedBody,
     });
     core.info(`Created new comment #${newComment.id}`);
+    return newComment.id;
   }
 }

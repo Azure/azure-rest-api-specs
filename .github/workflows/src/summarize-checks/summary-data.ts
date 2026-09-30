@@ -22,12 +22,15 @@ export type CheckContext =
       context: string;
       state: string;
       description: string | null;
+      targetUrl: string | null;
       createdAt: string;
     };
 
 export interface SummaryQueryResponse {
   repository: {
     pullRequest: {
+      headRefOid: string;
+      baseRefName: string;
       labels?: Connection<{ name: string }> | null;
       comments?: Connection<{ databaseId: number | null; body: string }> | null;
     } | null;
@@ -51,10 +54,13 @@ export interface SummaryCommitStatus {
   context: string;
   state: string;
   description: string | null;
+  target_url: string | null;
   updated_at: string;
 }
 
 export interface SummaryData {
+  headSha: string;
+  targetBranch: string;
   labels: string[];
   comments: IssueComment[];
   checkRuns: SummaryCheckRun[];
@@ -69,6 +75,8 @@ export const summaryQuery = `
   ) {
     repository(owner: $owner, name: $repo) {
       pullRequest(number: $number) {
+        headRefOid
+        baseRefName
         labels(first: $pageSize, after: $labelsCursor) @include(if: $includeLabels) {
           nodes { name }
           pageInfo { hasNextPage endCursor }
@@ -90,7 +98,7 @@ export const summaryQuery = `
                   checkSuite { workflowRun { databaseId } }
                 }
                 ... on StatusContext {
-                  context state description createdAt
+                  context state description targetUrl createdAt
                 }
               }
               pageInfo { hasNextPage endCursor }
@@ -116,6 +124,8 @@ export async function getSummaryData(
   let labelsCursor: string | null | undefined = null;
   let commentsCursor: string | null | undefined = null;
   let checksCursor: string | null | undefined = null;
+  let refreshedHead = false;
+  let targetBranch: string | undefined;
 
   do {
     const response: SummaryQueryResponse = await github.graphql<SummaryQueryResponse>(
@@ -135,9 +145,24 @@ export async function getSummaryData(
       },
     );
     const repository: SummaryQueryResponse["repository"] = response.repository;
-    if (!repository?.pullRequest || repository.object?.__typename !== "Commit") {
+    if (!repository?.pullRequest?.headRefOid || !repository.pullRequest.baseRefName) {
       throw new Error(`Unable to load check summary for ${owner}/${repo}#${number} at ${sha}`);
     }
+    if (repository.pullRequest.headRefOid !== sha) {
+      if (refreshedHead) {
+        throw new Error("PR head changed while reading the check summary; retry the workflow");
+      }
+      // A queued event can refer to an obsolete head. Restart all connections for the current PR.
+      sha = repository.pullRequest.headRefOid;
+      refreshedHead = true;
+      labels.length = comments.length = contexts.length = 0;
+      labelsCursor = commentsCursor = checksCursor = null;
+      continue;
+    }
+    if (repository.object?.__typename !== "Commit") {
+      throw new Error(`Unable to load check summary for ${owner}/${repo}#${number} at ${sha}`);
+    }
+    targetBranch = repository.pullRequest.baseRefName;
     if (labelsCursor !== undefined) {
       labelsCursor = appendPage(labels, repository.pullRequest.labels, labelsCursor);
     }
@@ -156,6 +181,8 @@ export async function getSummaryData(
     checksCursor !== undefined
   );
 
+  if (!targetBranch) throw new Error("Check summary has no target branch");
+
   const checkRuns: SummaryCheckRun[] = [];
   const statuses: SummaryCommitStatus[] = [];
   for (const context of contexts) {
@@ -173,11 +200,14 @@ export async function getSummaryData(
         context: context.context,
         state: context.state.toLowerCase(),
         description: context.description,
+        target_url: context.targetUrl,
         updated_at: context.createdAt,
       });
     }
   }
   return {
+    headSha: sha,
+    targetBranch,
     labels: labels.map((label) => label.name),
     comments: comments.map((comment) => {
       if (comment.databaseId === null) throw new Error("PR comment has no REST database ID");

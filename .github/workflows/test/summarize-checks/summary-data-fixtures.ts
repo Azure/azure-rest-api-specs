@@ -11,14 +11,23 @@ export function summaryResponse({
   labels = [],
   comments = [],
   contexts = [],
+  headSha = "sha",
+  targetBranch = "main",
 }: {
   labels?: { name: string }[];
   comments?: { databaseId: number | null; body: string }[];
   contexts?: CheckContext[];
+  headSha?: string;
+  targetBranch?: string;
 } = {}) {
   return {
     repository: {
-      pullRequest: { labels: page(labels), comments: page(comments) },
+      pullRequest: {
+        headRefOid: headSha,
+        baseRefName: targetBranch,
+        labels: page(labels),
+        comments: page(comments),
+      },
       object: { __typename: "Commit", statusCheckRollup: { contexts: page(contexts) } },
     },
   } satisfies SummaryQueryResponse;
@@ -47,6 +56,7 @@ export function statusContext(
     context: "SDK Validation Status",
     state: "PENDING",
     description: "Waiting",
+    targetUrl: null,
     createdAt: "2026-09-30T00:00:00Z",
     ...overrides,
   };

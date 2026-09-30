@@ -30,9 +30,11 @@ import { CheckConclusion, PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { intersect } from "../../../shared/src/set.ts";
 import { byDate, invert } from "../../../shared/src/sort.ts";
 import { commentOrUpdate } from "../comment.ts";
-import { extractInputs } from "../context.ts";
+import { CoreLogger } from "../core-logger.ts";
+import { configureGitHubLogging } from "../github.ts";
 import { TYPESPEC_SUPPRESSIONS_APPROVED_LABEL } from "../label.ts";
 import { getSummaryData, type SummaryData, type SummaryCommitStatus } from "./summary-data.ts";
+import type { SummaryInputs } from "./resolve-inputs.ts";
 import {
   ImpactAssessmentSchema,
   brChRevApproval,
@@ -264,26 +266,11 @@ const EXCLUDED_CHECK_NAMES: string[] = [];
 // #endregion
 // #region core
 
-export default async function summarizeChecks({
-  github,
-  context,
-  core,
-}: GitHubScriptArgs): Promise<void> {
-  const { owner, repo, issue_number, head_sha } = await extractInputs(github, context, core);
-
-  if (!issue_number) {
-    core.warning(`No issue number found for this event. Exiting summarize-checks.js early.`);
-    return;
-  }
-
-  // Publish PR identity as step outputs so the workflow can upload issue-number / head-sha
-  // handoff artifacts. Downstream workflow_run consumers (e.g. data-plane review assignment)
-  // resolve the PR from these via extractInputs, since labels applied below use the default
-  // token and are invisible to `labeled` triggers.
-  core.setOutput("issue_number", issue_number);
-  if (head_sha) {
-    core.setOutput("head_sha", head_sha);
-  }
+export default async function summarizeChecks(
+  { github, context, core }: GitHubScriptArgs,
+  { owner, repo, issue_number, head_sha }: SummaryInputs,
+): Promise<void> {
+  configureGitHubLogging(github, new CoreLogger(core));
 
   const targetBranch =
     context.eventName === "pull_request_target"
@@ -349,7 +336,11 @@ export async function summarizeChecksImpl(
   core.setOutput("summary", process.env.GITHUB_STEP_SUMMARY);
 
   const summaryData = await getSummaryData(github, owner, repo, issue_number, head_sha);
+  head_sha = summaryData.headSha;
+  targetBranch = summaryData.targetBranch;
   let labelNames = summaryData.labels;
+  core.setOutput("issue_number", issue_number);
+  core.setOutput("head_sha", head_sha);
 
   const [requiredCheckRuns, fyiCheckRuns, impactAssessment, existingStatus] =
     await getCheckRunTuple(github, core, owner, repo, summaryData, EXCLUDED_CHECK_NAMES);
@@ -416,15 +407,13 @@ export async function summarizeChecksImpl(
     target_url,
   );
 
-  automatedChecksMet.target_url = target_url;
-
   core.info(
     `Updating comment '${NEXT_STEPS_COMMENT_ID}' on ${owner}/${repo}#${issue_number} with body: ${commentBody}`,
   );
   core.summary.addRaw(`\n${commentBody}\n\n`);
   await core.summary.write();
 
-  await commentOrUpdate(
+  const commentId = await commentOrUpdate(
     github,
     core,
     owner,
@@ -434,6 +423,7 @@ export async function summarizeChecksImpl(
     NEXT_STEPS_COMMENT_ID,
     { normalizeBody: normalizeNextStepsComment, comments: summaryData.comments },
   );
+  automatedChecksMet.target_url = `${prUrl}#issuecomment-${commentId}`;
 
   // finally, update the "Automated merging requirements met" commit status
   await updateCommitStatus(github, core, owner, repo, head_sha, automatedChecksMet, existingStatus);
@@ -457,7 +447,7 @@ function normalizeNextStepsComment(body: string): string {
 }
 
 /**
- * Creates a commit status only when its state or description changed.
+ * Creates a commit status only when its state, description, or diagnostic link changed.
  */
 export async function updateCommitStatus(
   github: GitHub,
@@ -466,7 +456,7 @@ export async function updateCommitStatus(
   repo: string,
   head_sha: string,
   checkResult: CheckRunResult,
-  existingStatus?: Pick<CommitStatus, "context" | "state" | "description">,
+  existingStatus?: Pick<CommitStatus, "context" | "state" | "description" | "target_url">,
 ): Promise<void> {
   // Map CheckRunResult status to commit status state
 
@@ -486,7 +476,8 @@ export async function updateCommitStatus(
   if (
     existingStatus?.context === checkResult.name &&
     existingStatus.state === state &&
-    existingStatus.description === description
+    existingStatus.description === description &&
+    existingStatus.target_url === checkResult.target_url
   ) {
     core.info(`No update needed for commit status ${checkResult.name}.`);
     return;

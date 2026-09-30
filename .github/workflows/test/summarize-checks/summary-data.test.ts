@@ -6,6 +6,84 @@ import { createMockCore, createMockGithub } from "../mocks.ts";
 import { checkRun, page, statusContext, summaryResponse } from "./summary-data-fixtures.ts";
 
 describe("getSummaryData", () => {
+  it("restarts the snapshot for the current head when an event was queued for an older commit", async () => {
+    const github = createMockGithub();
+    github.graphql
+      .mockResolvedValueOnce(
+        summaryResponse({
+          headSha: "current",
+          labels: [{ name: "old-label" }],
+          contexts: [checkRun({ name: "old-check" })],
+        }),
+      )
+      .mockResolvedValueOnce(
+        summaryResponse({
+          headSha: "current",
+          targetBranch: "release",
+          labels: [{ name: "current-label" }],
+          contexts: [checkRun({ name: "current-check" })],
+        }),
+      );
+
+    const data = await getSummaryData(github, "owner", "repo", 123, "old");
+
+    expect(data.headSha).toBe("current");
+    expect(data.targetBranch).toBe("release");
+    expect(data.labels).toEqual(["current-label"]);
+    expect(data.checkRuns.map((check) => check.name)).toEqual(["current-check"]);
+    expect(github.graphql).toHaveBeenCalledTimes(2);
+    expect(github.graphql).toHaveBeenNthCalledWith(
+      2,
+      expect.any(String),
+      expect.objectContaining({
+        sha: "current",
+        labelsCursor: null,
+        commentsCursor: null,
+        checksCursor: null,
+      }),
+    );
+  });
+
+  it("discards already collected pages if the head changes during pagination", async () => {
+    const github = createMockGithub();
+    const first = summaryResponse({ labels: [{ name: "old-label" }], contexts: [checkRun()] });
+    first.repository.pullRequest.labels.pageInfo = { hasNextPage: true, endCursor: "old-cursor" };
+    const current = summaryResponse({ headSha: "current", labels: [{ name: "current-label" }] });
+    github.graphql
+      .mockResolvedValueOnce(first)
+      .mockResolvedValueOnce(current)
+      .mockResolvedValueOnce(current);
+
+    const data = await getSummaryData(github, "owner", "repo", 123, "sha");
+
+    expect(data.labels).toEqual(["current-label"]);
+    expect(data.checkRuns).toEqual([]);
+    expect(github.graphql).toHaveBeenNthCalledWith(
+      3,
+      expect.any(String),
+      expect.objectContaining({
+        sha: "current",
+        includeLabels: true,
+        includeComments: true,
+        includeChecks: true,
+        labelsCursor: null,
+        commentsCursor: null,
+        checksCursor: null,
+      }),
+    );
+  });
+
+  it("fails rather than publishing mixed heads if the PR keeps changing", async () => {
+    const github = createMockGithub();
+    github.graphql
+      .mockResolvedValueOnce(summaryResponse({ headSha: "new" }))
+      .mockResolvedValueOnce(summaryResponse({ headSha: "newer" }));
+    await expect(getSummaryData(github, "owner", "repo", 123, "old")).rejects.toThrow(
+      "PR head changed while reading",
+    );
+    expect(github.graphql).toHaveBeenCalledTimes(2);
+  });
+
   it("loads labels, comments, checks, latest statuses and workflow identity in one query", async () => {
     const github = createMockGithub();
     github.graphql.mockResolvedValue(
@@ -17,6 +95,8 @@ describe("getSummaryData", () => {
     );
 
     await expect(getSummaryData(github, "owner", "repo", 123, "sha")).resolves.toEqual({
+      headSha: "sha",
+      targetBranch: "main",
       labels: ["ARMReview"],
       comments: [{ id: 42, body: "Existing comment" }],
       checkRuns: [
@@ -34,6 +114,7 @@ describe("getSummaryData", () => {
           context: "SDK Validation Status",
           state: "pending",
           description: "Waiting",
+          target_url: null,
           updated_at: "2026-09-30T00:00:00Z",
         },
       ],
@@ -132,6 +213,8 @@ describe("getSummaryData", () => {
       },
     });
     await expect(getSummaryData(github, "owner", "repo", 123, "sha")).resolves.toEqual({
+      headSha: "sha",
+      targetBranch: "main",
       labels: [],
       comments: [],
       checkRuns: [],
