@@ -24,51 +24,21 @@ jobs:
       github.repository == 'Azure/azure-rest-api-specs' &&
       github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
     runs-on: ubuntu-24.04
-    timeout-minutes: 45
+    timeout-minutes: 30
     steps:
       - name: Checkout default branch
         uses: actions/checkout@v7
         with:
           ref: ${{ github.event.repository.default_branch }}
-          sparse-checkout: |
-            .github
-            eng/scripts
+          sparse-checkout: .github/workflows/src
 
-      - uses: ./.github/actions/install-deps-github-script
-
-      - name: Plan cleanup
+      - name: Clean up stale branches
         uses: actions/github-script@v9
-        env:
-          REPORT_DIRECTORY: ${{ runner.temp }}/branch-cleanup
         with:
           script: |
-            const { planCleanup } = await import("${{ github.workspace }}/.github/workflows/src/branch-cleanup.ts");
-            await planCleanup({ github, context, core }, process.env.REPORT_DIRECTORY);
-
-      - name: Save branch names and SHAs before deletion
-        uses: actions/upload-artifact@v7
-        with:
-          name: branch-cleanup-plan-${{ github.run_attempt }}
-          path: ${{ runner.temp }}/branch-cleanup/plan.json
-          if-no-files-found: error
-          retention-days: 90
-
-      - name: Delete eligible branches
-        id: cleanup
-        if: github.event_name == 'schedule' || !inputs.dry-run
-        uses: actions/github-script@v9
-        env:
-          REPORT_DIRECTORY: ${{ runner.temp }}/branch-cleanup
-        with:
-          script: |
-            const { applyCleanup } = await import("${{ github.workspace }}/.github/workflows/src/branch-cleanup.ts");
-            await applyCleanup({ github, context, core }, process.env.REPORT_DIRECTORY);
-
-      - name: Save cleanup results
-        if: always() && steps.cleanup.outcome != 'skipped'
-        uses: actions/upload-artifact@v7
-        with:
-          name: branch-cleanup-results-${{ github.run_attempt }}
-          path: ${{ runner.temp }}/branch-cleanup/results.json
-          if-no-files-found: warn
-          retention-days: 90
+            const { cleanupBranches } = await import("${{ github.workspace }}/.github/workflows/src/branch-cleanup.ts");
+            await cleanupBranches(
+              { github, context, core },
+              ${{ github.event_name == 'workflow_dispatch' && inputs.dry-run }},
+              (args) => exec.exec("git", args),
+            );

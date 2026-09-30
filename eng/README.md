@@ -53,31 +53,20 @@ waiting for the notifier. Do not make this advisory check required.
 
 [Cleanup stale branches](../.github/workflows/branch-cleanup.yaml) runs weekly on
 Monday at 05:23 UTC. Scheduled runs delete eligible branches automatically.
-Manual runs default to **dry-run**, which uploads a plan without deleting anything.
+Manual runs default to **dry-run**, which logs candidates without deleting anything.
 Run the workflow from the default branch; it is disabled on forks.
 
-Branches under `copilot/` are eligible after **90 days**. Other non-preserved
-branches are eligible after **3 calendar years**. Both the tip commit and the
-most recently updated associated PR must be older than the cutoff. Closed,
-unmerged PRs and branches with no PR are included: this is an inactivity policy,
-not a guarantee that the work was merged. Commit dates do not indicate when a
-branch was created or last pushed.
+A branch is eligible when its last commit is older than **90 days** for `copilot/*`,
+or **3 years (1,095 days)** for other branches. Closed-unmerged and no-PR branches
+are included; recent comments on a closed PR do not extend retention.
 
-The workflow always preserves the default branch, branches covered by active
-branch rulesets or classic protection, and any source or target of an open PR
-(including drafts). It also preserves `main`, `master`, `develop`, `gh-pages`,
-`typespec-next`, the RPSaaS and ARMCoreRPDev integration branches, and the prefixes
-`dev-`, `dev/`, `release-`, `release/`, `feature-`, `feature/`, `published/`,
-`archive/`, and `hotfix/`. To retain other long-lived branches, protect them with
-a branch ruleset or add them to the preserved names in the workflow script.
-
-The plan artifact records branch names, tip SHAs, activity dates, and skip reasons
-before any deletion. Each batch rechecks protections and PR activity, then uses
-an atomic Git push with an explicit SHA lease so a changed tip cannot be deleted.
-API errors stop cleanup rather than treating unknown state as inactivity.
-Results record completed, skipped, and unconfirmed deletions. Both artifacts are
-retained for 90 days; a recorded SHA helps recovery but is not a durable backup
-of otherwise unreachable commits.
+The default branch, protected branches, and sources and targets of open PRs
+(including drafts) are skipped. Long-lived names and prefixes such as `dev-`,
+`release-`, `feature/`, `published/`, and `archive/` are also excluded; the complete
+list is at the top of the [script](../.github/workflows/src/branch-cleanup.ts).
+Keep a long-lived branch by protecting it or adding it to those exclusions.
+Candidates and their SHAs are logged, and SHA-guarded Git pushes refuse to delete
+changed tips. API and deletion failures fail the workflow.
 
 ## Code conventions
 
