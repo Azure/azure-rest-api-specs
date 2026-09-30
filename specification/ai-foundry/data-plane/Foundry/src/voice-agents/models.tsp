@@ -597,6 +597,21 @@ model CreateTwilioTelephonyBindingRequest
   phone_number: string;
 }
 
+@doc("The request to create an inbound SIP binding. New SIP bindings are active. Credentials are stored in the referenced Foundry connection.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+@clientName("CreateSipTelephonyBindingContent", "csharp")
+model CreateSipTelephonyBindingRequest extends CreateTelephonyBindingRequest {
+  @doc("The SIP provider.")
+  provider: TelephonyProvider.sip;
+
+  @doc("An optional display phone number. It is not the binding identifier.")
+  @maxLength(64)
+  phone_number?: string;
+
+  @doc("The optional inbound SIP access-control configuration. Omit it for no source-address or caller-number restrictions.")
+  sip?: SipTelephonyConfiguration;
+}
+
 @doc("The request to update an existing telephony binding. Every property is optional and the binding's provider is immutable.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @clientName("UpdateTelephonyBindingContent", "csharp")
@@ -675,6 +690,23 @@ model TwilioTelephonyBinding extends TelephonyBinding {
   phone_number: string;
 }
 
+@doc("A SIP binding.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model SipTelephonyBinding extends TelephonyBinding {
+  @doc("The SIP provider.")
+  provider: TelephonyProvider.sip;
+
+  @doc("An optional display phone number. It is not the binding identifier.")
+  @maxLength(64)
+  phone_number?: string;
+
+  @doc("The inbound SIP access-control configuration.")
+  sip: SipTelephonyConfiguration;
+
+  @doc("The service-generated inbound SIP URI.")
+  sip_inbound_uri: url;
+}
+
 @doc("A telephony binding returned in a list, including its entity tag.")
 @discriminator("provider")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
@@ -734,6 +766,23 @@ model TwilioTelephonyBindingListItem extends TelephonyBindingListItem {
   phone_number: string;
 }
 
+@doc("A SIP binding returned in a list, including its entity tag.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+model SipTelephonyBindingListItem extends TelephonyBindingListItem {
+  @doc("The SIP provider.")
+  provider: TelephonyProvider.sip;
+
+  @doc("An optional display phone number. It is not the binding identifier.")
+  @maxLength(64)
+  phone_number?: string;
+
+  @doc("The inbound SIP access-control configuration.")
+  sip: SipTelephonyConfiguration;
+
+  @doc("The service-generated inbound SIP URI.")
+  sip_inbound_uri: url;
+}
+
 @doc("Inbound SIP access-control configuration.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @example(#{
@@ -764,55 +813,6 @@ model SipTelephonyConfigurationPatch {
   @doc("Allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. On update, omission preserves the current restriction; null or an empty array clears it.")
   @maxItems(64)
   allowed_calling_numbers?: string[] | null;
-}
-
-@doc("The request to create an inbound SIP binding. New SIP bindings are active. Credentials are stored in the referenced Foundry connection.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@clientName("CreateSipTelephonyBindingContent", "csharp")
-model CreateSipTelephonyBindingRequest extends CreateTelephonyBindingRequest {
-  @doc("The SIP provider.")
-  provider: TelephonyProvider.sip;
-
-  @doc("An optional display phone number. It is not the binding identifier.")
-  @maxLength(64)
-  phone_number?: string;
-
-  @doc("The optional inbound SIP access-control configuration. Omit it for no source-address or caller-number restrictions.")
-  sip?: SipTelephonyConfiguration;
-}
-
-@doc("A SIP binding.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model SipTelephonyBinding extends TelephonyBinding {
-  @doc("The SIP provider.")
-  provider: TelephonyProvider.sip;
-
-  @doc("An optional display phone number. It is not the binding identifier.")
-  @maxLength(64)
-  phone_number?: string;
-
-  @doc("The inbound SIP access-control configuration.")
-  sip: SipTelephonyConfiguration;
-
-  @doc("The service-generated inbound SIP URI.")
-  sip_inbound_uri: url;
-}
-
-@doc("A SIP binding returned in a list, including its entity tag.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-model SipTelephonyBindingListItem extends TelephonyBindingListItem {
-  @doc("The SIP provider.")
-  provider: TelephonyProvider.sip;
-
-  @doc("An optional display phone number. It is not the binding identifier.")
-  @maxLength(64)
-  phone_number?: string;
-
-  @doc("The inbound SIP access-control configuration.")
-  sip: SipTelephonyConfiguration;
-
-  @doc("The service-generated inbound SIP URI.")
-  sip_inbound_uri: url;
 }
 
 /** A telephony binding response with its entity tag. */
