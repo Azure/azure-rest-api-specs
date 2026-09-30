@@ -70,6 +70,52 @@ namespace Azure.AI.Projects {
      * User security context contains several parameters that describe the application itself, and the end user that interacts with the application. These fields assist your security operations teams to investigate and mitigate security incidents by providing a comprehensive approach to protecting your AI applications. [Learn more](https://aka.ms/TP4AI/Documentation/EndUserContext) about protecting AI applications using Microsoft Defender for Cloud.
      */
     user_security_context?: AzureUserSecurityContext;
+
+    /**
+     * Per-request configuration for Model Router inference calls.
+     * Supported on Model Router endpoints (deployed or instant if supported).
+     * Returns a 400 (Bad Request) error when the target is not a Model Router endpoint.
+     */
+    @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+    routing_config?: RoutingConfiguration;
+  }
+
+  /**
+   * Per-request configuration for Model Router inference calls.
+   * Supported on Model Router endpoints (deployed or instant if supported).
+   * Returns a 400 (Bad Request) error when the target is not a Model Router endpoint.
+   */
+  model RoutingConfiguration {
+    /**
+     * Session affinity configuration for reusing an eligible model across requests in the same conversation.
+     * If omitted, sticky affinity is used when a supported conversation identifier is available.
+     */
+    @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+    session_affinity?: SessionAffinityConfiguration;
+  }
+
+  /** Request settings that control Model Router session affinity. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+  model SessionAffinityConfiguration {
+    /** Controls whether Model Router applies session affinity to this request. */
+    mode?: SessionAffinityRequestMode = SessionAffinityRequestMode.sticky;
+
+    /**
+     * An opaque, application-owned conversation identifier. Use the same value for related requests.
+     * The value is not returned in the response and must not contain secrets or personally identifiable information.
+     */
+    session_id?: string;
+  }
+
+  /** Request modes supported by Model Router session affinity. */
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "The service rejects unknown request modes with a 400 response."
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+  union SessionAffinityRequestMode {
+    /** Attempts to reuse the model associated with the selected conversation identifier. */
+    sticky: "sticky",
+
+    /** Disables affinity state lookup and update for this request. */
+    none: "none",
   }
 
   @@copyProperties(
@@ -185,8 +231,72 @@ namespace Azure.AI.Projects {
     /** The routing mode for the request. */
     mode: ModelRouterMode;
 
+    /** Session affinity metadata for the routing decision. Omitted when affinity metadata is unavailable or the preview feature is not enabled. */
+    session_affinity?: SessionAffinityDetails;
+
     /** Ordered trace of routing decisions. Contains one entry for Chat Completions, and may contain multiple entries for Responses API or agent scenarios where multiple inference turns occur. */
     routing_trace: RoutingTraceEntry[];
+  }
+
+  /** Effective Model Router session affinity metadata for a request. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+  model SessionAffinityDetails {
+    /** The effective session affinity mode. */
+    mode: SessionAffinityMode;
+
+    /** The identity source selected after applying precedence. `conversation` and `previous_response_id` apply only to the Responses API. Omitted when affinity is disabled. */
+    source?: SessionAffinitySource;
+
+    /** The final affinity outcome for the model that served the response. Omitted when affinity is disabled or no usable identity was available. */
+    decision?: SessionAffinityDecision;
+  }
+
+  /** Effective modes reported for Model Router session affinity. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+  union SessionAffinityMode {
+    string,
+
+    /** Affinity was enabled for the request. */
+    sticky: "sticky",
+
+    /** Affinity was disabled for the request. */
+    none: "none",
+  }
+
+  /** Conversation identifier sources supported by Model Router session affinity. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+  union SessionAffinitySource {
+    string,
+
+    /** An explicit session identifier supplied in the request body. */
+    session_id_payload: "session_id_payload",
+
+    /** An explicit session identifier supplied in the `x-ms-session-id` request header. */
+    session_id_header: "session_id_header",
+
+    /** No usable conversation identifier was available. */
+    not_available: "not_available",
+
+    /** The Responses conversation identifier. */
+    conversation: "conversation",
+
+    /** The Responses previous response identifier. */
+    previous_response_id: "previous_response_id",
+  }
+
+  /** Final outcomes reported for Model Router session affinity. */
+  @extension("x-ms-foundry-meta", ModelRoutersRequiredPreviews)
+  union SessionAffinityDecision {
+    string,
+
+    /** A new model association was initialized. */
+    initialize: "initialize",
+
+    /** The previously associated model served the response. */
+    retain: "retain",
+
+    /** A different model served the response and the association is updated after success. */
+    switch: "switch",
   }
 
   /** Model selection metadata providing visibility into routing decisions. */
