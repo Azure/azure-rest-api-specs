@@ -70,6 +70,21 @@ jobs:
               await import('${{ github.workspace }}/.github/workflows/src/summarize-checks/dump-trigger-metadata.ts');
             return await dumpTriggerMetadata({ context, core });
 
+      # Validate before summarization reads the current labels. This prevents an unauthorized
+      # approval label from briefly satisfying the merge requirements while the independent
+      # protected-label workflow is still removing it.
+      - if: >-
+          github.event_name == 'pull_request_target' &&
+          github.event.action == 'labeled' &&
+          github.event.label.name == 'typespec-suppressions-approved'
+        name: Validate TypeSpec suppressions approval label
+        uses: actions/github-script@v9.0.0
+        with:
+          script: |
+            const { default: validateApproval } =
+              await import('${{ github.workspace }}/.github/workflows/src/typespec-suppressions/validate-approval.ts');
+            await validateApproval({ github, context, core });
+
       - id: summarize-checks
         name: Summarize Checks
         uses: actions/github-script@v9.0.0
