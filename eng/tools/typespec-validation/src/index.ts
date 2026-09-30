@@ -53,7 +53,7 @@ export async function runRules(
   const counts: RuleCounts = { PASS: 0, FAIL: 0, WARN: 0, SKIP: 0, SUPPRESSED: 0 };
   const reportStatus = (name: string, status: RuleStatus) => {
     counts[status]++;
-    logger.info(formatRuleStatus(name, status));
+    logger.debug(formatRuleStatus(name, status));
   };
 
   for (const rule of rules) {
@@ -159,6 +159,7 @@ export async function main() {
   const parsedArgs = parseArgs({ args, options, allowPositionals: true });
 
   const { values } = parsedArgs;
+  const logger = new ConsoleLogger(values.verbose);
   if (values.verbose) {
     debug.enable([process.env.DEBUG, "simple-git"].filter(Boolean).join(","));
   }
@@ -241,7 +242,7 @@ export async function main() {
     console.log(`Please run TypeSpec Validation on a directory path`);
     process.exit(1);
   }
-  console.log("Running TypeSpecValidation on folder: ", absolutePath);
+  logger.debug(`Running TypeSpecValidation on folder: ${absolutePath}`);
 
   const suppressions: Suppression[] = await getSuppressions(absolutePath);
 
@@ -269,12 +270,7 @@ export async function main() {
     new StaleApiVersionPinRule(),
   ];
 
-  const result = await runRules(
-    rules,
-    absolutePath,
-    suppressions,
-    new ConsoleLogger(values.verbose),
-  );
+  const result = await runRules(rules, absolutePath, suppressions, logger);
 
   if (!result.success) {
     process.exitCode = 1;

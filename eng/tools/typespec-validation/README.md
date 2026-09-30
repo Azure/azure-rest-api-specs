@@ -10,19 +10,17 @@ pnpm tsv --changed
 pnpm tsv --changed --base=origin/main --head=HEAD --dry-run
 ```
 
-Each completed rule prints one status line (`PASS`, `FAIL`, `WARN`, `SKIP`, or
-`SUPPRESSED`), followed by a rule-count summary. When validation stops early,
-the summary includes rules that were not run. `WARN` is non-failing.
+Successful single-project runs print only the final rule-count summary. Errors
+and warnings remain visible. When validation stops early, the summary includes
+rules that were not run.
 
 ```text
-PASS FolderStructure
-PASS NpmPrefix
-FAIL EmitAutorest
-...
-Rules: 2 passed | 1 failed | 9 not run
+Rules: 9 passed | 3 skipped
 ```
 
-Use `--verbose` (or `-v`) to include configuration/import details,
+With `--verbose` (or `-v`), each rule also gets a compact completion indicator:
+checkmark for pass, cross for failure, `!` for a non-failing warning, and `-` with
+a label for skipped/suppressed rules. Verbose output also includes configuration/import details,
 routine skip reasons, successful compiler/formatter output, emitted-file
 inventories, full Git diffs, command traces, and changed-file discovery:
 

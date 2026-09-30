@@ -21,13 +21,21 @@ export function formatRuleStatus(
   const c = pc.createColors(color);
   const label =
     status === "FAIL"
-      ? c.red(status)
+      ? c.red("\u00d7")
       : status === "WARN"
-        ? c.yellow(status)
+        ? c.yellow("!")
         : status === "PASS"
-          ? c.green(status)
-          : c.dim(status);
-  return `${label} ${name}`;
+          ? c.green("\u2714")
+          : c.dim("-");
+  const detail =
+    status === "SKIP"
+      ? " (skipped)"
+      : status === "SUPPRESSED"
+        ? " (suppressed)"
+        : status === "WARN"
+          ? " (warnings)"
+          : "";
+  return `${label} ${name}${detail}`;
 }
 
 export function formatRuleSummary(

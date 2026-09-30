@@ -29,10 +29,12 @@ const diagnostic: Diagnostic = {
 
 describe("diagnostic formatting", () => {
   it("renders concise colored rule statuses and an honest incomplete-run summary", () => {
-    expect(formatRuleStatus("Compile", "PASS", false)).toBe("PASS Compile");
-    expect(formatRuleStatus("Compile", "PASS", true)).toBe("\x1b[32mPASS\x1b[39m Compile");
-    expect(formatRuleStatus("Compile", "FAIL", true)).toBe("\x1b[31mFAIL\x1b[39m Compile");
-    expect(formatRuleStatus("Compile", "WARN", true)).toBe("\x1b[33mWARN\x1b[39m Compile");
+    expect(formatRuleStatus("Compile", "PASS", false)).toBe("\u2714 Compile");
+    expect(formatRuleStatus("Compile", "PASS", true)).toBe("\x1b[32m\u2714\x1b[39m Compile");
+    expect(formatRuleStatus("Compile", "FAIL", true)).toBe("\x1b[31m\u00d7\x1b[39m Compile");
+    expect(formatRuleStatus("Compile", "WARN", true)).toBe("\x1b[33m!\x1b[39m Compile (warnings)");
+    expect(formatRuleStatus("Compile", "SKIP", false)).toBe("- Compile (skipped)");
+    expect(formatRuleStatus("Compile", "SUPPRESSED", false)).toBe("- Compile (suppressed)");
     expect(formatRuleSummary({ PASS: 2, FAIL: 1, WARN: 0, SKIP: 1, SUPPRESSED: 1 }, 3, false)).toBe(
       "Rules: 2 passed | 1 failed | 1 skipped | 1 suppressed | 3 not run",
     );
