@@ -19,7 +19,7 @@ const repo = { owner: "Azure", repo: "azure-rest-api-specs" };
 const prefix = "/repos/Azure/azure-rest-api-specs";
 const marker: ExistingLabel = {
   name: "label-deleted",
-  color: "ededed",
+  color: "123456",
   description: "Removed label",
   id: 1,
   node_id: "label-1",

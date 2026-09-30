@@ -6,7 +6,7 @@ import type { ExistingLabel, LabelCatalog, LabelDefinition } from "../src/label-
 
 const marker: LabelDefinition = {
   name: DELETED_LABEL,
-  color: "ededed",
+  color: "123456",
   description: "A label was removed",
 };
 const bug: LabelDefinition = { name: "bug", color: "abcdef", description: "" };
@@ -47,7 +47,7 @@ describe("label catalog", () => {
     { ...catalog, labels: [marker, { ...bug, color: "#123456" }] },
     { ...catalog, labels: [marker, { ...bug, color: 123456 }] },
     { ...catalog, labels: [marker, { ...bug, description: "x".repeat(101) }] },
-    { ...catalog, labels: [marker, { ...bug, descripton: "misspelled" }] },
+    { ...catalog, labels: [marker, { ...bug, summary: "unexpected property" }] },
   ])("rejects invalid definitions or policy: %j", (invalid) => {
     expect(() => parseLabelCatalog(stringify(invalid))).toThrow();
   });

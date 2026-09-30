@@ -274,6 +274,17 @@ describe("execPnpm", () => {
     });
   });
 
+  it("preserves nonzero exit codes when stderr is empty", async () => {
+    await expect(
+      execPnpm(["exec", "node", "-e", "process.exit(7)"], options),
+    ).rejects.toMatchObject({
+      code: 7,
+      stdout: "",
+      stderr: "",
+      message: "pnpm exec node -e process.exit(7) exited with code 7",
+    });
+  });
+
   it("captures stderr", async () => {
     const result = await execPnpm(
       ["exec", "node", "-e", "process.stderr.write('hello-stderr')"],
