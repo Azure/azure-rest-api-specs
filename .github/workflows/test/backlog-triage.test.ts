@@ -408,6 +408,33 @@ describe("backlog triage output boundary", () => {
 });
 
 describe("backlog triage workflow", () => {
+  it("passes a bare Copilot model ID to both investigation and threat detection", () => {
+    const content = readFileSync(new URL("../backlog-triage.md", import.meta.url), "utf8");
+    const match = /^---\n([\s\S]*?)\n---/.exec(content);
+    const source = parseDocument(match![1]);
+    const compiled = parseDocument(
+      readFileSync(new URL("../backlog-triage.lock.yml", import.meta.url), "utf8"),
+    );
+    expect(source.errors).toEqual([]);
+    expect(compiled.errors).toEqual([]);
+    const model = source.get("model");
+    expect(model).toBeTypeOf("string");
+    expect(model).not.toContain("?");
+    expect(source.getIn(["safe-outputs", "threat-detection", "engine", "model"])).toBe(model);
+    for (const job of ["agent", "detection"]) {
+      const steps = compiled.getIn(["jobs", job, "steps"]);
+      if (!isSeq(steps)) throw new Error(`Missing ${job} steps`);
+      const modelSteps = steps.items.filter(
+        (step) => isMap(step) && step.hasIn(["env", "COPILOT_MODEL"]),
+      );
+      expect(modelSteps).toHaveLength(1);
+      for (const step of modelSteps) {
+        if (!isMap(step)) throw new Error("Expected model configuration step");
+        expect(step.getIn(["env", "COPILOT_MODEL"])).toBe(model);
+      }
+    }
+  });
+
   it("isolates writes to the trusted bounded applier and defaults manual runs to previews", () => {
     const content = readFileSync(new URL("../backlog-triage.md", import.meta.url), "utf8");
     const match = /^---\n([\s\S]*?)\n---/.exec(content);
