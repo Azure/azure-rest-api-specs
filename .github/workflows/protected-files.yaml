@@ -41,37 +41,67 @@ jobs:
 
       - name: Detect changes to protected files
         if: ${{ env.user-allowed != 'true' }}
-        run: |
-          . eng/scripts/ChangedFiles-Functions.ps1
+        uses: actions/github-script@v9.0.0
+        with:
+          script: |
+            const { execFileSync } = require("node:child_process");
 
-          # powershell glob syntax
-          $protectedFiles = @(".gitignore", "cspell.json", "cspell.yaml", "package.json", "pnpm-lock.yaml", "pnpm-workspace.yaml", ".github/*", ".github/azsdk-common-*", ".vscode/*", "eng/*")
-          # regex syntax, for files synced from Azure/azure-sdk-tools
-          $azureSdkToolsFiles = @('^\.github/skills/azsdk-common-[^/]+(/.*)?$', '^eng/common(/.*)?$')
-          # regex syntax, to support protected paths within larger excluded paths
-          $excludedFiles = @('.github/CODEOWNERS', '.github/skills/(?!azsdk-common-).+')
-          $changedFiles = @(Get-ChangedFiles -baseCommitish HEAD^ -headCommitish HEAD -diffFilter "")
+            const protectedFiles = [
+              /^\.gitignore$/i,
+              /^cspell\.(?:json|yaml)$/i,
+              /^(?:package\.json|pnpm-lock\.yaml|pnpm-workspace\.yaml)$/i,
+              /^\.github\//i,
+              /^\.vscode\//i,
+              /^eng\//i,
+            ];
+            const excludedFiles = [
+              /^\.github\/CODEOWNERS$/i,
+              /^\.github\/skills\/(?!azsdk-common-).+/i,
+            ];
+            const azureSdkToolsFiles = [
+              /^\.github\/skills\/azsdk-common-[^/]+(?:\/.*)?$/i,
+              /^eng\/common(?:\/.*)?$/i,
+            ];
+            const changedFiles = execFileSync(
+              "git",
+              [
+                "-c",
+                "core.quotepath=off",
+                "diff",
+                "--name-only",
+                "-z",
+                "--diff-filter=",
+                "HEAD^",
+                "HEAD",
+              ],
+              { encoding: "utf8" },
+            )
+              .split("\0")
+              .filter((file) => file && !file.includes("ChangedFiles-Functions"));
 
-          $matchedFiles = @(
-            $changedFiles | Where-Object {
-              $changedFile = $_;
-              ($protectedFiles | Where-Object { $changedFile -like $_ }) -and
-              -not ($excludedFiles | Where-Object { $changedFile -match $_ })
-            }
-          )
+            const matchedFiles = changedFiles.filter(
+              (file) =>
+                protectedFiles.some((pattern) => pattern.test(file)) &&
+                !excludedFiles.some((pattern) => pattern.test(file)),
+            );
 
-          if ($matchedFiles.Count -gt 0) {
-            foreach ($file in $matchedFiles) {
-              if ($azureSdkToolsFiles | Where-Object { $file -match $_ }) {
-                Write-Output "::error file=$file::File '$file' is synced from Azure/azure-sdk-tools and should not be updated directly in this repo."
+            if (matchedFiles.length > 0) {
+              for (const file of matchedFiles) {
+                if (azureSdkToolsFiles.some((pattern) => pattern.test(file))) {
+                  core.error(
+                    `File '${file}' is synced from Azure/azure-sdk-tools and should not be updated directly in this repo.`,
+                    { file },
+                  );
+                } else {
+                  core.error(
+                    `File '${file}' should only be updated by the Azure SDK team.  If intentional, the PR may be merged by the Azure SDK team via bypassing the branch protections.`,
+                    { file },
+                  );
+                }
               }
-              else {
-                Write-Output "::error file=$file::File '$file' should only be updated by the Azure SDK team.  If intentional, the PR may be merged by the Azure SDK team via bypassing the branch protections."
-              }
+              core.setFailed(`Found ${matchedFiles.length} protected file(s).`);
+            } else {
+              core.info(
+                "No changes to protected files: [.gitignore, cspell.json, cspell.yaml, package.json, pnpm-lock.yaml, pnpm-workspace.yaml, .github/*, .github/azsdk-common-*, .vscode/*, eng/*]",
+              );
             }
-            exit 1
-          }
-          else {
-            Write-Output "No changes to protected files: [$($protectedFiles -join ', ')]"
-          }
-        shell: pwsh
