@@ -45,14 +45,14 @@ export async function runRules(
   const diagnostics: Diagnostic[] = [];
 
   for (const rule of rules) {
-    console.log("\nExecuting rule: " + rule.name);
+    logger.debug("Executing rule: " + rule.name);
 
     if (rule.suppressable) {
       const ruleSuppressions = suppressions.filter(
         (s) => s.rules?.includes(rule.name) && (!s.subRules || s.subRules.length === 0),
       );
       if (ruleSuppressions.length > 0) {
-        console.log(`  Suppressed: ${ruleSuppressions[0].reason}`);
+        logger.debug(`  Suppressed: ${ruleSuppressions[0].reason}`);
         result.suppressed.push(rule.name);
         continue;
       }

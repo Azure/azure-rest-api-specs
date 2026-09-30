@@ -1,3 +1,4 @@
+import { defaultLogger } from "@azure-tools/specs-shared/logger";
 import { mockFolder } from "./mocks.ts";
 
 import * as simpleGit from "simple-git";
@@ -32,7 +33,7 @@ describe("npm-prefix", function () {
       utils.normalizePathImpl(folder, path.win32),
     );
 
-    const result = await new NpmPrefixRule().execute(mockFolder);
+    const result = await new NpmPrefixRule().execute(mockFolder, defaultLogger);
 
     assert(result.success);
   });
@@ -42,7 +43,7 @@ describe("npm-prefix", function () {
     // oxlint-disable-next-line typescript/unbound-method
     vi.mocked(simpleGit.simpleGit().revparse).mockResolvedValue("/Git/azure-rest-api-specs");
 
-    const result = await new NpmPrefixRule().execute(mockFolder);
+    const result = await new NpmPrefixRule().execute(mockFolder, defaultLogger);
 
     assert(!result.success);
   });

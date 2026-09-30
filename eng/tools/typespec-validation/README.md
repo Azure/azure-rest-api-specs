@@ -10,8 +10,8 @@ pnpm tsv --changed
 pnpm tsv --changed --base=origin/main --head=HEAD --dry-run
 ```
 
-Use `--verbose` (or `-v`) to include command traces, captured command output, Git
-debug logging, and changed-file discovery details:
+Use `--verbose` (or `-v`) to include rule progress, configuration/import details,
+routine skip reasons, command traces, Git debug logging, and changed-file discovery:
 
 ```sh
 pnpm tsv specification/<service>/<project> --verbose
@@ -23,25 +23,27 @@ Rule errors, actionable warnings, and CI annotations remain visible without this
 flag. Existing `DEBUG` environment selections are respected; TSV does not enable
 Git tracing merely by being imported.
 
-The `EmitAutorest` rule uses TypeSpec-style formatting with a stable `tsv/`
-diagnostic code, an affected file, and fix guidance:
+Rule findings use TypeSpec-style formatting with a stable `tsv/` diagnostic code,
+an affected file or directory, and fix guidance when available:
 
 ```text
 specification/example/data-plane/Example/tspconfig.yaml - error tsv/emit-autorest: The default emit list must include "@azure-tools/typespec-autorest".
   help: Add "@azure-tools/typespec-autorest" to "emit".
 ```
 
-YAML parser errors include line/column locations and a source excerpt when a
-file path is provided. Structured diagnostics go to stderr; use `2>&1` to capture
-them together with stdout.
+Parser errors and invalid imports include line/column locations and a source
+excerpt. Diagnostics go to stderr; use `2>&1` to capture them together with stdout.
 Colors are enabled in terminals and GitHub Actions; `NO_COLOR` disables them and
 takes precedence over `FORCE_COLOR`. `FORCE_COLOR=1` enables colors for redirected
 output, while `FORCE_COLOR=0` disables them.
 
 Validation still stops after the first failed rule in each project, and batch
-runs continue to later projects. Suppression rule names are unchanged. Other
-rules, including SDK configuration validation, retain their existing output
-format. Compiler and formatter output, including emitted-file lists, is unchanged.
+runs continue to later projects. Suppression rule names are unchanged. Compiler
+and formatter output, including emitted-file lists, retains its existing format.
+
+A local run without comparison commits skips API-version comparison without a
+warning; `--verbose` shows the reason. An explicitly supplied but incomplete or
+invalid comparison context still produces a warning.
 
 In GitHub Actions, both TSV workflows enable `--verbose` when debug logging is
 enabled. To diagnose a run without changing the normal default, choose
