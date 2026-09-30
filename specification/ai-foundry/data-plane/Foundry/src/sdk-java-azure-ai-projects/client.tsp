@@ -20,6 +20,7 @@ import "../data_generation_jobs/routes.tsp";
 
 import "../sdk-common/ops-relocation-agent-insights.tsp";
 import "../sdk-common/ops-relocation-projects.tsp";
+import "../sdk-common/ops-relocation-datasets.tsp";
 
 using Azure.ClientGenerator.Core;
 namespace Azure.AI.Projects;
