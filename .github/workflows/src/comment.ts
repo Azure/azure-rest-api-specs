@@ -51,6 +51,7 @@ export function parseExistingComments(
  * @param issue_number - The issue or pull request number.
  * @param body - The markdown content of the comment.
  * @param commentIdentifier - The value that will be stored in an html comment so we can retrieve this comment later
+ * @param options.normalizeBody - Ignores caller-specific provenance when comparing comment content.
  * @returns Resolves when the comment is created or updated.
  */
 export async function commentOrUpdate(
@@ -61,6 +62,7 @@ export async function commentOrUpdate(
   issue_number: number,
   body: string,
   commentIdentifier: string,
+  options: { normalizeBody?: (body: string) => string } = {},
 ): Promise<void> {
   const computedBody = body + `\n<!-- ${commentIdentifier} -->`;
 
@@ -74,7 +76,8 @@ export async function commentOrUpdate(
   const [commentId, commentBody] = parseExistingComments(comments, commentIdentifier);
 
   if (commentId) {
-    if (commentBody === computedBody) {
+    const normalizeBody = options.normalizeBody ?? ((value: string) => value);
+    if (commentBody !== undefined && normalizeBody(commentBody) === normalizeBody(computedBody)) {
       core.info(`No update needed for comment ${commentId}.`);
       return; // No-op if the body is the same
     }
