@@ -5133,6 +5133,12 @@
           },
           "Create network interface with Gateway Load Balancer Consumer configured": {
             "$ref": "./examples/NetworkInterfaceCreateGatewayLoadBalancerConsumer.json"
+          },
+          "Create network interface with Guest RDMA disabled": {
+            "$ref": "./examples/NetworkInterfaces_CreateOrUpdate_EnableGuestRdmaFalse.json"
+          },
+          "Create network interface with Guest RDMA enabled": {
+            "$ref": "./examples/NetworkInterfaces_CreateOrUpdate_EnableGuestRdmaTrue.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -17741,6 +17747,10 @@
         "enableAcceleratedNetworking": {
           "type": "boolean",
           "description": "If the network interface is configured for accelerated networking. Not applicable to VM sizes which require accelerated networking."
+        },
+        "enableGuestRdma": {
+          "type": "boolean",
+          "description": "Whether Guest RDMA is enabled on the network interface. If omitted when updating an existing network interface, the current setting is preserved."
         },
         "disableTcpStateTracking": {
           "type": "boolean",

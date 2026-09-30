@@ -998,6 +998,12 @@ model NetworkInterfacePropertiesFormat {
   enableAcceleratedNetworking?: boolean;
 
   /**
+   * Whether Guest RDMA is enabled on the network interface. If omitted when updating an existing network interface, the current setting is preserved.
+   */
+  @added(Versions.v2026_07_01)
+  enableGuestRdma?: boolean;
+
+  /**
    * Indicates whether to disable tcp state tracking.
    */
   disableTcpStateTracking?: boolean;
