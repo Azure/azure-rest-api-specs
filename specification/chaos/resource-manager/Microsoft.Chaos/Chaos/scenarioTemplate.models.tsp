@@ -96,6 +96,11 @@ model ScenarioTemplateVersionProperties {
    * - `%%\{filters.\<dimension\>\}%%` — deprecated spelling of `resourceTargeting.include.`,
    *   retained only so that superseded template versions keep resolving. Do not depend on it;
    *   the newest version of every template uses `resourceTargeting.include.`.
+   *
+   * A template expresses its failure policy only through the per-action `failureBehavior`
+   * override carried by these actions. This version publishes no template-wide default, so a
+   * scenario created from a template starts from the `Stop` default and applies each action's
+   * override on top of it.
    */
   @visibility(Lifecycle.Read)
   @minItems(1)

@@ -89,6 +89,12 @@ model ScenarioProperties {
    * Scenario-wide default for how a scenario run reacts when one of its actions fails.
    * An action that does not supply its own `failureBehavior` inherits this value; when
    * neither is supplied the effective behavior is `Stop`.
+   *
+   * Not used when `createdFrom` is supplied, for the same reason as `parameters` and
+   * `actions`: the referenced template version is then the authoritative source for the
+   * scenario's structure, and it supplies this policy too. A value sent in the request is
+   * ignored in that case — on create the referenced template's policy is used, and on update
+   * the policy of the already persisted template is preserved.
    */
   @added(Microsoft.Chaos.Versions.v2026_11_01)
   failureBehavior?: FailureBehavior;
@@ -292,8 +298,14 @@ union FailureBehavior {
   Stop: "Stop",
 
   /**
-   * The action failure is suppressed: the scenario run continues executing the remaining
-   * actions, and terminates as `PartiallySucceeded` when every action failure was suppressed.
+   * The action failure is suppressed: it does not by itself end the scenario run, and the run
+   * continues with its remaining actions. Suppression affects the run's result only. It does not
+   * change dependency scheduling, which stays under the control of each action's `runAfter` —
+   * an action that should still start after a failed dependency says so there.
+   *
+   * A run that completes normally and whose action failures were all suppressed terminates as
+   * `PartiallySucceeded`. Any failure that is not suppressed still drives the run to `Failed`,
+   * and cancellation keeps its existing result.
    */
   Continue: "Continue",
 }
