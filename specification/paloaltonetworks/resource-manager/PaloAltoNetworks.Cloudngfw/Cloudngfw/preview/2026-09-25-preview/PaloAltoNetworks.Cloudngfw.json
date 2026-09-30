@@ -2700,6 +2700,90 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/PaloAltoNetworks.Cloudngfw/marketplaceOffers": {
+      "get": {
+        "operationId": "PaloAltoNetworksCloudngfwOperations_listMarketplaceOffers",
+        "description": "List the Marketplace offers, and the plans within each offer, that are available to the\nsubscription, each plan annotated with the firewall mode it provisions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MarketplaceOffersResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PaloAltoNetworksCloudngfwOperations_listMarketplaceOffers_MaximumSet_Gen": {
+            "$ref": "./examples/PaloAltoNetworksCloudngfwOperations_listMarketplaceOffers_MaximumSet_Gen.json"
+          },
+          "PaloAltoNetworksCloudngfwOperations_listMarketplaceOffers_MinimumSet_Gen": {
+            "$ref": "./examples/PaloAltoNetworksCloudngfwOperations_listMarketplaceOffers_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/PaloAltoNetworks.Cloudngfw/resolveStrataCloudManager": {
+      "post": {
+        "operationId": "PaloAltoNetworksCloudngfwOperations_resolveStrataCloudManager",
+        "description": "Resolve a Strata Cloud Manager link code into the Strata Cloud Manager instance it is bound to,\nso the instance can be shown to the customer before it is committed onto a firewall.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ScmLinkCodeRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/StrataCloudManagerInstance"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PaloAltoNetworksCloudngfwOperations_resolveStrataCloudManager_MaximumSet_Gen": {
+            "$ref": "./examples/PaloAltoNetworksCloudngfwOperations_resolveStrataCloudManager_MaximumSet_Gen.json"
+          },
+          "PaloAltoNetworksCloudngfwOperations_resolveStrataCloudManager_MinimumSet_Gen": {
+            "$ref": "./examples/PaloAltoNetworksCloudngfwOperations_resolveStrataCloudManager_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/PaloAltoNetworks.Cloudngfw/firewalls": {
       "get": {
         "operationId": "Firewalls_ListByResourceGroup",
@@ -7127,6 +7211,11 @@
           "$ref": "#/definitions/StrataCloudManagerConfig",
           "description": "Strata Cloud Manager Configuration, only applicable if Strata Cloud Manager is selected."
         },
+        "firewallMode": {
+          "$ref": "#/definitions/FirewallMode",
+          "description": "The firewall mode this resource provisions, derived by the service from the Marketplace plan.\nThis property is read-only: any caller-supplied value is discarded and replaced with the mode\nderived from the plan. It is absent on firewalls stored before this property was introduced,\nand a reader must treat an absent value as CNGFW.",
+          "readOnly": true
+        },
         "associatedRulestack": {
           "$ref": "#/definitions/RulestackDetails",
           "description": "Associated Rulestack"
@@ -7163,6 +7252,30 @@
         "planData",
         "marketplaceDetails"
       ]
+    },
+    "FirewallMode": {
+      "type": "string",
+      "description": "The firewall mode a Marketplace plan provisions. The value is derived by the service from the\nMarketplace plan the firewall is purchased under and is never supplied by the caller.",
+      "enum": [
+        "CNGFW",
+        "AIRSM"
+      ],
+      "x-ms-enum": {
+        "name": "FirewallMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CNGFW",
+            "value": "CNGFW",
+            "description": "Cloud Next-Generation Firewall."
+          },
+          {
+            "name": "AIRSM",
+            "value": "AIRSM",
+            "description": "Managed AI Runtime Security."
+          }
+        ]
+      }
     },
     "FirewallResource": {
       "type": "object",
@@ -8201,6 +8314,54 @@
         "publisherId"
       ]
     },
+    "MarketplaceOffersResult": {
+      "type": "object",
+      "description": "The Marketplace offers available to the subscription, each carrying the plans visible to the caller.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The offer groups. An empty catalogue is returned as an empty list.",
+          "items": {
+            "$ref": "#/definitions/OfferPlanGroup"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of offer groups. The catalogue is returned in a single page today,\nso this is not populated; it is declared so that pagination can be introduced later without a\nbreaking change. Clients must follow it when present and stop when it is absent."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "MarketplacePlanInfo": {
+      "type": "object",
+      "description": "A single Marketplace plan, enriched with the firewall mode it provisions.",
+      "properties": {
+        "planId": {
+          "type": "string",
+          "description": "The Marketplace plan identifier."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The plan display name shown to the customer."
+        },
+        "description": {
+          "type": "string",
+          "description": "The plan description."
+        },
+        "firewallMode": {
+          "$ref": "#/definitions/FirewallMode",
+          "description": "The firewall mode this plan provisions. The property is omitted when the plan cannot be\nclassified into exactly one mode, in which case the mode is left out rather than guessed."
+        }
+      },
+      "required": [
+        "planId",
+        "displayName"
+      ]
+    },
     "MarketplaceSubscriptionStatus": {
       "type": "string",
       "description": "Marketplace Subscription Status",
@@ -8476,6 +8637,33 @@
           }
         ]
       }
+    },
+    "OfferPlanGroup": {
+      "type": "object",
+      "description": "The plans belonging to a single Marketplace offer.",
+      "properties": {
+        "publisherId": {
+          "type": "string",
+          "description": "The Marketplace publisher identifier."
+        },
+        "offerId": {
+          "type": "string",
+          "description": "The Marketplace offer identifier."
+        },
+        "plans": {
+          "type": "array",
+          "description": "The plans visible to the caller for this offer. The list may be empty.",
+          "items": {
+            "$ref": "#/definitions/MarketplacePlanInfo"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "publisherId",
+        "offerId",
+        "plans"
+      ]
     },
     "PanoramaConfig": {
       "type": "object",
@@ -9233,6 +9421,19 @@
         }
       }
     },
+    "ScmLinkCodeRequest": {
+      "type": "object",
+      "description": "The Strata Cloud Manager link code to resolve.",
+      "properties": {
+        "scmLinkCode": {
+          "type": "string",
+          "description": "The Strata Cloud Manager link code supplied by the customer."
+        }
+      },
+      "required": [
+        "scmLinkCode"
+      ]
+    },
     "ScopeType": {
       "type": "string",
       "description": "Rulestack Type",
@@ -9358,6 +9559,10 @@
         "cloudManagerName": {
           "type": "string",
           "description": "Strata Cloud Manager name which is intended to manage the policy for this firewall."
+        },
+        "scmLinkCode": {
+          "type": "string",
+          "description": "The Strata Cloud Manager link code supplied by the customer and validated through the\nresolveStrataCloudManager provider action."
         }
       },
       "required": [
@@ -9377,6 +9582,19 @@
           "description": "URL for Strata Cloud Manager"
         }
       }
+    },
+    "StrataCloudManagerInstance": {
+      "type": "object",
+      "description": "The Strata Cloud Manager instance a link code is bound to.",
+      "properties": {
+        "cloudManagerTenantName": {
+          "type": "string",
+          "description": "The resolved Strata Cloud Manager instance name. This value feeds\nproperties.strataCloudManagerConfig.cloudManagerName on the firewall create payload."
+        }
+      },
+      "required": [
+        "cloudManagerTenantName"
+      ]
     },
     "SupportInfo": {
       "type": "object",
