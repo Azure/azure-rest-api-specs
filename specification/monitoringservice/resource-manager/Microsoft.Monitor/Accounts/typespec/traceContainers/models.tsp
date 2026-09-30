@@ -42,6 +42,13 @@ namespace Microsoft.Monitor {
     traceDurationWindowInSeconds: int32;
 
     /**
+     * The number of days for which the traces are retained. Value must be between 4 and 730 days. The service defaults this property to 30 when it is omitted.
+     */
+    @minValue(4)
+    @maxValue(730)
+    traceRetentionInDays?: int32 = 30;
+
+    /**
      * The state of trace-derived metrics. The service defaults this property to Enabled when it is omitted.
      */
     traceMetricsState?: TraceMetricsState = TraceMetricsState.Enabled;

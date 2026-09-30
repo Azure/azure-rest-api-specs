@@ -3122,6 +3122,14 @@
           "minimum": 120,
           "maximum": 600
         },
+        "traceRetentionInDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of days for which the traces are retained. Value must be between 4 and 730 days. The service defaults this property to 30 when it is omitted.",
+          "default": 30,
+          "minimum": 4,
+          "maximum": 730
+        },
         "traceMetricsState": {
           "type": "string",
           "description": "The state of trace-derived metrics. The service defaults this property to Enabled when it is omitted.",
