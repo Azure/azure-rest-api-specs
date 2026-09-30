@@ -174,8 +174,8 @@ export async function resolveResetApprovers(
   // earlier one for the same label, leaving the most recent approver per label.
   const latestApproverByLabel = new Map<string, string>();
   for (const event of events) {
-    if (event.event !== "labeled") continue;
-    const labelName = (event as { label?: { name?: string } }).label?.name;
+    if (event.event !== "labeled" || !("label" in event)) continue;
+    const labelName = event.label?.name;
     const login = event.actor?.login;
     if (
       labelName &&
