@@ -12,9 +12,11 @@ describe("parseArgsWithHelp", () => {
       throw new Error("Help must not terminate the process");
     });
 
-    expect(parseArgsWithHelp({ args: [flag], help: { header: "Example tool" } })).toBeUndefined();
+    expect(parseArgsWithHelp({ args: [flag], help: { command: "example" } })).toBeUndefined();
     expect(log).toHaveBeenCalledExactlyOnceWith(
-      expect.stringMatching(/^Example tool\n\nOptions:\n\s+-h, --help\s+Show help and exit\.$/),
+      expect.stringMatching(
+        /^example\n\nUsage:\n\s+example \[options\]\n\nOptions:\n\s+-h, --help\s+Show help and exit\.$/,
+      ),
     );
     expect(exit).not.toHaveBeenCalled();
   });
@@ -42,7 +44,7 @@ describe("parseArgsWithHelp", () => {
       parseArgsWithHelp({
         args: ["--help"],
         options,
-        help: { header: "Example tool", footer: "More information." },
+        help: { command: "example" },
       }),
     ).toBeUndefined();
 
@@ -52,14 +54,89 @@ describe("parseArgsWithHelp", () => {
     expect(output).toMatch(/Revisions:\n\s+--base <commit>\s+Base revision\./);
     expect(output).toMatch(/--long-option-with-a-value <path>\n\s+First line\.\n\s+Second line\./);
     expect(output.match(/Revisions:/g)).toHaveLength(1);
-    expect(output).toMatch(/\n\nMore information\.$/);
     expect(options).not.toHaveProperty("help");
   });
 
-  it("omits empty help sections", () => {
+  it("generates usage, argument descriptions and supporting sections from metadata", () => {
     const log = vi.spyOn(console, "log").mockImplementation(() => {});
-    parseArgsWithHelp({ args: ["--help"], options: {}, help: { header: "", footer: "" } });
-    expect(log).toHaveBeenCalledExactlyOnceWith(expect.stringMatching(/^Options:\n/));
+    parseArgsWithHelp({
+      args: ["--help"],
+      options: {
+        all: {
+          type: "boolean",
+          description: "Process all files.",
+          mode: [{ name: "root", optional: true, description: "Discovery root." }],
+        },
+        changed: { type: "boolean", description: "Process changed files.", mode: [] },
+      },
+      help: {
+        command: "pnpm example",
+        title: "Example tool",
+        description: "Process files.",
+        positionals: [
+          { name: "file", description: "Input file." },
+          { name: "context", optional: true, description: "JSON context." },
+        ],
+        examples: ["input.json", "--all", ""],
+        notes: ["Run from the repository root."],
+        documentation: "https://example.com/docs",
+      },
+    });
+    const output = String(log.mock.calls[0][0]);
+    expect(output).toContain("Example tool\nProcess files.");
+    expect(output).toContain(
+      "Usage:\n" +
+        "  pnpm example <file> [context] [options]\n" +
+        "  pnpm example --all [root] [options]\n" +
+        "  pnpm example --changed [options]",
+    );
+    expect(output).toMatch(/Arguments:\n\s+<file>\s+Input file\.\n\s+\[context\]\s+JSON context\./);
+    expect(output).toMatch(/Arguments for --all:\n\s+\[root\]\s+Discovery root\./);
+    expect(output).not.toContain("Arguments for --changed:");
+    expect(output).toContain("Notes:\n  Run from the repository root.");
+    expect(output).toContain(
+      "Examples:\n  pnpm example input.json\n  pnpm example --all\n  pnpm example\n",
+    );
+    expect(output).toContain("Documentation: https://example.com/docs");
+  });
+
+  it("omits empty optional sections", () => {
+    const log = vi.spyOn(console, "log").mockImplementation(() => {});
+    parseArgsWithHelp({
+      args: ["--help"],
+      options: {},
+      help: {
+        command: "example",
+        description: "",
+        positionals: [],
+        examples: [],
+        notes: [],
+        documentation: "",
+      },
+    });
+    const output = String(log.mock.calls[0][0]);
+    expect(output).toContain("Usage:\n  example [options]");
+    expect(output).not.toMatch(/Arguments:|Examples:|Notes:|Documentation:/);
+  });
+
+  it("wraps descriptions and notes without requiring manually formatted text", () => {
+    const log = vi.spyOn(console, "log").mockImplementation(() => {});
+    const description = "Use this option to select the output location for the generated files. "
+      .repeat(3)
+      .trim();
+    const note = "Always retain a copy of the original files before modifying them. "
+      .repeat(3)
+      .trim();
+    parseArgsWithHelp({
+      args: ["--help"],
+      options: { output: { type: "string", description: `${description}\n\nNext paragraph.` } },
+      help: { command: "example", notes: [note] },
+    });
+    const output = String(log.mock.calls[0][0]);
+    expect(output.split("\n").every((line) => line.length <= 80)).toBe(true);
+    expect(output.replace(/\s+/g, " ")).toContain(description);
+    expect(output.replace(/\s+/g, " ")).toContain(note);
+    expect(output).toMatch(/\n\s*\n\s+Next paragraph\./);
   });
 
   it("preserves parsed values, defaults, repeated options, positionals and tokens with their types", () => {
@@ -73,7 +150,7 @@ describe("parseArgsWithHelp", () => {
       },
       allowPositionals: true,
       tokens: true,
-      help: { header: "Example tool" },
+      help: { command: "example" },
     });
     expect(result).toBeDefined();
     if (!result) throw new Error("Expected parsed arguments");
@@ -98,7 +175,7 @@ describe("parseArgsWithHelp", () => {
     const argv = process.argv;
     try {
       process.argv = ["node", "example.ts", "-h"];
-      expect(parseArgsWithHelp({ help: { header: "Example tool" } })).toBeUndefined();
+      expect(parseArgsWithHelp({ help: { command: "example" } })).toBeUndefined();
       expect(log).toHaveBeenCalledOnce();
     } finally {
       process.argv = argv;
@@ -116,7 +193,7 @@ describe("parseArgsWithHelp", () => {
             description: "Conflicting option.",
           },
         },
-        help: { header: "Example tool" },
+        help: { command: "example" },
       }),
     ).toThrow("--help and -h are reserved");
   });
@@ -126,7 +203,7 @@ describe("parseArgsWithHelp", () => {
     const result = parseArgsWithHelp({
       args: ["--no-help"],
       allowNegative: true,
-      help: { header: "Example tool" },
+      help: { command: "example" },
     });
     expect(result?.values).toEqual({ help: false });
     expect(log).not.toHaveBeenCalled();
@@ -141,7 +218,7 @@ describe("parseArgsWithHelp", () => {
       parseArgsWithHelp({
         args,
         options: { output: { type: "string", description: "Output path." } },
-        help: { header: "Example tool" },
+        help: { command: "example" },
       }),
     ).toThrow(expect.objectContaining({ code: error }));
     expect(log).not.toHaveBeenCalled();
@@ -152,9 +229,21 @@ describe("parseArgsWithHelp", () => {
     const result = parseArgsWithHelp({
       args: ["--", "--help"],
       allowPositionals: true,
-      help: { header: "Example tool" },
+      help: { command: "example" },
     });
     expect(result?.positionals).toEqual(["--help"]);
     expect(log).not.toHaveBeenCalled();
+  });
+
+  it("does not change parsing or enforce positional help metadata", () => {
+    const result = parseArgsWithHelp({
+      args: [],
+      allowPositionals: true,
+      help: {
+        command: "example",
+        positionals: [{ name: "file", description: "Input file." }],
+      },
+    });
+    expect(result?.positionals).toEqual([]);
   });
 });

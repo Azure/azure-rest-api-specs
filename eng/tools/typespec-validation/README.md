@@ -16,7 +16,7 @@ For single-project validation, pass the folder and optional JSON context for rul
 and suppressions as positional arguments:
 
 ```text
-pnpm tsv <folder> [<context-json>]
+pnpm tsv <folder> [context-json]
 ```
 
 Use `--verbose` (or `-v`) to include rule progress, configuration/import details,

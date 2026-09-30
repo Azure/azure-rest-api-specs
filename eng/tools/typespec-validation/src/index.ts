@@ -101,28 +101,28 @@ export async function runRules(
 }
 
 const help = {
-  header: `TypeSpec Validation
-Validate Azure TypeSpec projects.
-
-Usage:
-  tsv <folder> [<context-json>] [options]
-  tsv --all [folder] [options]
-  tsv --changed [options]
-
-Arguments:
-  <folder>                 Project folder, or discovery root for --all
-                           (default for --all: specification).
-  <context-json>           Optional JSON context for rules and suppressions
-                           in single-project mode.`,
-  footer: `Validation may update generated files and formatting. Changes are retained
-unless --git-clean is used. Do not use --git-clean while other work is in progress.
-
-Examples (from the repository root):
-  pnpm tsv specification/<service>/<project>
-  pnpm tsv --all
-  pnpm tsv --changed --base=origin/main --head=HEAD --dry-run
-
-Documentation: https://aka.ms/azsdk/specs/typespec-validation`,
+  command: "pnpm tsv",
+  title: "TypeSpec Validation",
+  description: "Validate Azure TypeSpec projects.",
+  positionals: [
+    { name: "folder", description: "Project folder." },
+    {
+      name: "context-json",
+      optional: true,
+      description: "Optional JSON context for rules and suppressions in single-project mode.",
+    },
+  ],
+  notes: [
+    "Run from the repository root after installing dependencies with pnpm install.",
+    "Validation may update generated files and formatting. Changes are retained unless --git-clean is used.",
+    "Do not use --git-clean while other work is in progress.",
+  ],
+  examples: [
+    "specification/<service>/<project>",
+    "--all",
+    "--changed --base=origin/main --head=HEAD --dry-run",
+  ],
+  documentation: "https://aka.ms/azsdk/specs/typespec-validation",
 };
 
 export async function main() {
@@ -136,13 +136,16 @@ export async function main() {
     all: {
       type: "boolean",
       description: "Validate all projects under the discovery root.",
+      mode: [
+        { name: "folder", optional: true, description: "Discovery root (default: specification)." },
+      ],
     },
     changed: {
       type: "boolean",
       description:
-        "Validate projects affected by committed changes\n" +
-        "using the current checkout.\n" +
+        "Validate projects affected by committed changes using the current checkout. " +
         "--all and --changed cannot be combined.",
+      mode: [],
     },
     base: {
       type: "string",
@@ -166,22 +169,20 @@ export async function main() {
       valueLabel: "<index>/<count>",
       group: "Options for --all",
       description:
-        "Select a shard using one-based indices.\nEach shard requires a separate checkout.",
+        "Select a shard using one-based indices. Each shard requires a separate checkout.",
     },
     "dry-run": {
       type: "boolean",
       group: "Options for --all or --changed",
       description:
-        "List selected projects and context without validation\n" +
-        "or cleanup; disables --git-clean.",
+        "List selected projects and context without validation or cleanup; disables --git-clean.",
     },
     "git-clean": {
       type: "boolean",
       group: "Options for --all or --changed",
       description:
-        "Restore tracked files and remove untracked files and\n" +
-        "directories across the entire repository after each\n" +
-        "project. Requires a clean, disposable checkout;\n" +
+        "Restore tracked files and remove untracked files and directories across the entire repository " +
+        "after each project. Requires a clean, disposable checkout; " +
         "ignored files are retained.",
     },
   } satisfies Record<string, CliOption>;

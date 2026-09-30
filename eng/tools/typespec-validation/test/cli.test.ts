@@ -54,16 +54,17 @@ it("shows the same help for --help and -h without a project or Git repository", 
   expect(help.stderr).toBe("");
   for (const text of [
     "Validate Azure TypeSpec projects.",
-    "tsv <folder> [<context-json>] [options]",
-    "tsv --all [folder] [options]",
-    "tsv --changed [options]",
+    "pnpm tsv <folder> [context-json] [options]",
+    "pnpm tsv --all [folder] [options]",
+    "pnpm tsv --changed [options]",
     "JSON context for rules and suppressions",
     "-v, --verbose",
     "--head <commit>",
     "--ignore-core-files",
     "--dry-run",
     "--git-clean",
-    "default for --all: specification",
+    "Arguments for --all:",
+    "Discovery root (default: specification)",
     "default: HEAD^",
     "default: HEAD)",
     "--all and --changed cannot be combined",
@@ -78,7 +79,7 @@ it("shows the same help for --help and -h without a project or Git repository", 
     "pnpm tsv --changed --base=origin/main --head=HEAD --dry-run",
     "https://aka.ms/azsdk/specs/typespec-validation",
   ]) {
-    expect(help.stdout).toContain(text);
+    expect(help.stdout.replace(/\s+/g, " ")).toContain(text);
   }
   expect(help.stdout).toMatch(/^\s+-h, --help\s+Show help and exit\.$/m);
   expect(help.stdout).toMatch(/^\s+--base <commit>\s+Base revision \(default: HEAD\^\)\.$/m);
