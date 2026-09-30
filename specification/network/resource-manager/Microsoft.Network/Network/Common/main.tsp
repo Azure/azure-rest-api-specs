@@ -65,6 +65,11 @@ enum Versions {
    * The 2026-01-01 API version.
    */
   v2026_01_01: "2026-01-01",
+
+  /**
+   * The 2026-07-01 API version.
+   */
+  v2026_07_01: "2026-07-01",
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
