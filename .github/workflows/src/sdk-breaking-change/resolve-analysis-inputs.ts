@@ -1,6 +1,7 @@
 import { existsSync, realpathSync } from "node:fs";
 import { dirname, isAbsolute, relative, resolve, sep } from "node:path";
 import type { GitHubScriptArgs, WebhookEvent } from "../github.ts";
+import { detectChangedSpecConfigFromChangedFiles } from "@azure-tools/spec-gen-sdk-runner";
 
 type PullRequestFile = {
   filename: string;
@@ -88,12 +89,13 @@ export async function resolveAnalysisTrigger({
     core.setOutput("sdk-language", languageConfig.language);
     core.setOutput("sdk-repository", languageConfig.repository);
     core.setOutput("should-run", "true");
-    await resolveChangedTypeSpecConfigPathsFromPullRequest({
-      github,
-      context,
-      core,
-      pullNumber,
-    });
+    // await resolveChangedTypeSpecConfigPathsFromPullRequest({
+    //   github,
+    //   context,
+    //   core,
+    //   pullNumber,
+    //   localSpecRepoPath,
+    // });
     return;
   }
 
@@ -167,12 +169,13 @@ export async function resolveAnalysisTrigger({
   core.setOutput("sdk-language", languageConfig.language);
   core.setOutput("sdk-repository", languageConfig.repository);
   core.setOutput("should-run", labelArtifact.labelValue);
-  await resolveChangedTypeSpecConfigPathsFromPullRequest({
-    github,
-    context,
-    core,
-    pullNumber,
-  });
+  // await resolveChangedTypeSpecConfigPathsFromPullRequest({
+  //   github,
+  //   context,
+  //   core,
+  //   pullNumber,
+  //   localSpecRepoPath
+  // });
 }
 
 export function resolveSdkLanguageConfig(input: string | undefined): SdkLanguageConfig {
@@ -257,8 +260,10 @@ export async function resolveChangedTypeSpecConfigPathsFromPullRequest({
   context,
   core,
   pullNumber,
+  localSpecRepoPath,
 }: GitHubScriptArgs & {
   pullNumber: number;
+  localSpecRepoPath: string;
 }): Promise<string[]> {
   if (!Number.isSafeInteger(pullNumber) || pullNumber <= 0) {
     throw new Error(`Invalid pull request number: ${pullNumber}`);
@@ -280,46 +285,54 @@ export async function resolveChangedTypeSpecConfigPathsFromPullRequest({
   const changedFiles = files.flatMap(({ filename, previous_filename }) =>
     [filename, previous_filename].filter((path): path is string => path !== undefined),
   );
-  const configPaths = new Set<string>();
-  for (const changedFile of changedFiles) {
-    const normalizedPath = changedFile.replaceAll("\\", "/");
-    if (!normalizedPath.endsWith(".tsp") && !normalizedPath.endsWith("/tspconfig.yaml")) {
-      continue;
-    }
+  // const configPaths = new Set<string>();
+  // for (const changedFile of changedFiles) {
+  //   const normalizedPath = changedFile.replaceAll("\\", "/");
+  //   if (!normalizedPath.endsWith(".tsp") && !normalizedPath.endsWith("/tspconfig.yaml")) {
+  //     continue;
+  //   }
 
-    validateRepositoryPath(normalizedPath);
-    let directory = dirname(normalizedPath).replaceAll("\\", "/");
-    const belongsToKnownProject = [...configPaths].some((configPath) => {
-      const projectDirectory = dirname(configPath).replaceAll("\\", "/");
-      return directory === projectDirectory || directory.startsWith(`${projectDirectory}/`);
-    });
-    if (belongsToKnownProject) {
-      continue;
-    }
-    while (directory.startsWith("specification/")) {
-      const configPath = `${directory}/tspconfig.yaml`;
-      try {
-        await github.rest.repos.getContent({
-          ...context.repo,
-          path: configPath,
-          ref: headSha,
-        });
-        configPaths.add(configPath);
-        break;
-      } catch (error) {
-        if (!(error instanceof Error && "status" in error && error.status === 404)) {
-          throw error;
-        }
-      }
-      directory = dirname(directory).replaceAll("\\", "/");
-    }
-  }
+  //   validateRepositoryPath(normalizedPath);
+  //   let directory = dirname(normalizedPath).replaceAll("\\", "/");
+  //   const belongsToKnownProject = [...configPaths].some((configPath) => {
+  //     const projectDirectory = dirname(configPath).replaceAll("\\", "/");
+  //     return directory === projectDirectory || directory.startsWith(`${projectDirectory}/`);
+  //   });
+  //   if (belongsToKnownProject) {
+  //     continue;
+  //   }
+  //   while (directory.startsWith("specification/")) {
+  //     const configPath = `${directory}/tspconfig.yaml`;
+  //     try {
+  //       await github.rest.repos.getContent({
+  //         ...context.repo,
+  //         path: configPath,
+  //         ref: headSha,
+  //       });
+  //       configPaths.add(configPath);
+  //       break;
+  //     } catch (error) {
+  //       if (!(error instanceof Error && "status" in error && error.status === 404)) {
+  //         throw error;
+  //       }
+  //     }
+  //     directory = dirname(directory).replaceAll("\\", "/");
+  //   }
 
-  if (configPaths.size === 0) {
+  // if (configPaths.size === 0) {
+  //   throw new Error("No tspconfig.yaml could be resolved from the changed TypeSpec files.");
+  // }
+
+  // const sortedConfigPaths = [...configPaths].sort();
+  const configPaths = detectChangedSpecConfigFromChangedFiles(localSpecRepoPath, changedFiles);
+  if (configPaths.length === 0) {
     throw new Error("No tspconfig.yaml could be resolved from the changed TypeSpec files.");
   }
-
-  const sortedConfigPaths = [...configPaths].sort();
+  const sortedConfigPaths = configPaths
+    .map((config) => config.typespecProject)
+    .filter((path): path is string => path !== undefined)
+    .map(toPosixPath)
+    .sort();
   core.setOutput("tsp-config-paths", JSON.stringify(sortedConfigPaths));
   return sortedConfigPaths;
 }

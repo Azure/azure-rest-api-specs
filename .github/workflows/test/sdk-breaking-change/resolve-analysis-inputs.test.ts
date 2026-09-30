@@ -18,6 +18,9 @@ function createRepository(): string {
   mkdirSync(join(repositoryPath, "specification", "service", "Widget.Service", "models"), {
     recursive: true,
   });
+  mkdirSync(join(repositoryPath, "specification", "service", "Widget.Service", "new"), {
+    recursive: true,
+  });
   mkdirSync(join(repositoryPath, "specification", "other", "Other.Service"), {
     recursive: true,
   });
@@ -61,12 +64,6 @@ describe("resolveAnalysisTrigger", () => {
         head: { repo: { full_name: "owner/repo" }, sha: "a".repeat(40) },
       },
     });
-    Object.assign(github.rest.pulls, {
-      listFiles: vi.fn().mockResolvedValue({
-        data: [{ filename: "specification/service/Widget.Service/main.tsp" }],
-      }),
-    });
-    github.rest.repos.getContent.mockResolvedValue({ data: { type: "file" } });
 
     await resolveAnalysisTrigger({ github, context, core });
 
@@ -75,10 +72,7 @@ describe("resolveAnalysisTrigger", () => {
     expect(core.setOutput).toHaveBeenCalledWith("head-sha", "a".repeat(40));
     expect(core.setOutput).toHaveBeenCalledWith("sdk-language", "DotNet");
     expect(core.setOutput).toHaveBeenCalledWith("should-run", "true");
-    expect(core.setOutput).toHaveBeenCalledWith(
-      "tsp-config-paths",
-      '["specification/service/Widget.Service/tspconfig.yaml"]',
-    );
+    expect(core.setOutput).not.toHaveBeenCalledWith("tsp-config-paths", expect.anything());
   });
 
   it("skips when no supported label artifact exists", async () => {
@@ -279,6 +273,7 @@ describe("resolveChangedTypeSpecConfigPathsFromPullRequest", () => {
     const github = createMockGithub();
     const context = createMockContext();
     const core = createMockCore();
+    const localSpecRepoPath = createRepository();
     const listFiles = vi.fn().mockResolvedValue({
       data: [
         {
@@ -289,9 +284,6 @@ describe("resolveChangedTypeSpecConfigPathsFromPullRequest", () => {
     });
     Object.assign(github.rest.pulls, { listFiles });
     github.rest.pulls.get.mockResolvedValue({ data: { head: { sha: "a".repeat(40) } } });
-    github.rest.repos.getContent
-      .mockRejectedValueOnce(Object.assign(new Error("Not Found"), { status: 404 }))
-      .mockResolvedValueOnce({ data: { type: "file" } });
 
     await expect(
       resolveChangedTypeSpecConfigPathsFromPullRequest({
@@ -299,6 +291,7 @@ describe("resolveChangedTypeSpecConfigPathsFromPullRequest", () => {
         context,
         core,
         pullNumber: 42,
+        localSpecRepoPath,
       }),
     ).resolves.toEqual(["specification/service/Widget.Service/tspconfig.yaml"]);
     expect(listFiles).toHaveBeenCalledWith({
@@ -307,18 +300,7 @@ describe("resolveChangedTypeSpecConfigPathsFromPullRequest", () => {
       pull_number: 42,
       per_page: 100,
     });
-    expect(github.rest.repos.getContent).toHaveBeenNthCalledWith(1, {
-      owner: "owner",
-      repo: "repo",
-      path: "specification/service/Widget.Service/new/tspconfig.yaml",
-      ref: "a".repeat(40),
-    });
-    expect(github.rest.repos.getContent).toHaveBeenNthCalledWith(2, {
-      owner: "owner",
-      repo: "repo",
-      path: "specification/service/Widget.Service/tspconfig.yaml",
-      ref: "a".repeat(40),
-    });
+    expect(github.rest.repos.getContent).not.toHaveBeenCalled();
     expect(core.setOutput).toHaveBeenCalledWith(
       "tsp-config-paths",
       '["specification/service/Widget.Service/tspconfig.yaml"]',

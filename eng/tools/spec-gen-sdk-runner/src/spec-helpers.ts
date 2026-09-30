@@ -154,31 +154,37 @@ export async function detectChangedSpecConfigFiles(
     return [];
   }
   logMessage(`Related readme.md and typespec project list:`);
-  const changedSpecs: ChangedSpecs[] = [];
+  return detectChangedSpecConfigFromChangedFiles(commandInput.localSpecRepoPath, fileList);
+}
 
+export function detectChangedSpecConfigFromChangedFiles(
+  localSpecRepoPath: string,
+  fileList: string[],
+): ChangedSpecs[] {
+  const changedSpecs: ChangedSpecs[] = [];
   const readmeMDResult = searchRelatedParentFolders(fileList, {
     searchFileRegex: readmeMdRegex,
-    specRepoFolder: commandInput.localSpecRepoPath,
+    specRepoFolder: localSpecRepoPath,
     stopAtFolder: "specification",
   });
 
   const typespecProjectResult = searchRelatedParentFolders(fileList, {
     searchFileRegex: typespecProjectRegex,
-    specRepoFolder: commandInput.localSpecRepoPath,
+    specRepoFolder: localSpecRepoPath,
     stopAtFolder: "specification",
     findAll: true,
   });
 
   const typespecProjectSharedLibraries = searchSharedLibrary(fileList, {
     searchFileRegex: typespecProjectSharedLibraryRegex,
-    specRepoFolder: commandInput.localSpecRepoPath,
+    specRepoFolder: localSpecRepoPath,
   });
 
   const typespecProjectResultSearchedBySharedLibrary = searchRelatedTypeSpecProjectBySharedLibrary(
     typespecProjectSharedLibraries,
     {
       searchFileRegex: typespecProjectRegex,
-      specRepoFolder: commandInput.localSpecRepoPath,
+      specRepoFolder: localSpecRepoPath,
     },
   );
 

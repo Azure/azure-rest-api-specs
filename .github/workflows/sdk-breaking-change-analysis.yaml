@@ -33,15 +33,17 @@ jobs:
       sdk-language: ${{ steps.resolve.outputs.sdk-language }}
       sdk-repository: ${{ steps.resolve.outputs.sdk-repository }}
       should-run: ${{ steps.resolve.outputs.should-run }}
-      tsp-config-paths: ${{ steps.resolve.outputs.tsp-config-paths }}
+      tsp-config-paths: ${{ steps.resolve-tsp-config-paths.outputs.tsp-config-paths }}
     steps:
       - name: Checkout workflow repository
         uses: actions/checkout@v7
         with:
           sparse-checkout: |
             .github
+            eng
           persist-credentials: false
-
+      - name: Install dependencies for github-script actions
+        uses: ./.github/actions/install-deps-github-script
       - name: Resolve trigger inputs
         id: resolve
         uses: actions/github-script@v9
@@ -49,7 +51,30 @@ jobs:
           script: |
             const { resolveAnalysisTrigger } =
               await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change/resolve-analysis-inputs.ts');
-            await resolveAnalysisTrigger({ github, context, core });
+            await resolveAnalysisTrigger({ github, context, core }, "${{ github.workspace }}/repositories/azure-rest-api-specs");
+      - name: Checkout specification PR head
+        uses: actions/checkout@v7
+        with:
+          repository: ${{ github.repository }}
+          # resolve-trigger restricts this to the current SHA of a branch in this repository.
+          # codeql[actions/untrusted-checkout/critical]
+          ref: refs/pull/${{ steps.resolve.outputs.pr-number }}/merge
+          path: repositories/azure-rest-api-specs
+          persist-credentials: false
+      - name: Resolve changed TypeSpec config paths
+        id: resolve-tsp-config-paths
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const { resolveChangedTypeSpecConfigPathsFromPullRequest } =
+              await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change/resolve-analysis-inputs.ts');
+            await resolveChangedTypeSpecConfigPathsFromPullRequest({
+              github,
+              context,
+              core,
+              pullNumber: Number('${{ steps.resolve.outputs.pr-number }}'),
+              localSpecRepoPath: '${{ github.workspace }}/repositories/azure-rest-api-specs',
+            });
 
   analyze:
     needs: resolve

@@ -8,6 +8,8 @@ import {
 } from "./commands.ts";
 import { getArgumentValue } from "./utils.ts";
 
+export { detectChangedSpecConfigFromChangedFiles } from "./spec-helpers.ts";
+
 export async function main() {
   // Get the arguments passed to the script
   const args: string[] = process.argv.slice(2);
