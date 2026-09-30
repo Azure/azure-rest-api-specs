@@ -47,11 +47,7 @@ using Microsoft.Advisor;
   "Recommendations",
   "!csharp"
 );
-@@clientLocation(
-  ServiceGroupRecommendations.get,
-  "Recommendations",
-  "!csharp"
-);
+@@clientLocation(ServiceGroupRecommendations.get, "Recommendations", "!csharp");
 @@clientLocation(
   ServiceGroupRecommendations.list,
   "Recommendations",

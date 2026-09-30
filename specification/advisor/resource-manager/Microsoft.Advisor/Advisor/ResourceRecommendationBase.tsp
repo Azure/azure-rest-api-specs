@@ -178,12 +178,12 @@ union RecommendationListMode {
   /**
    * Returns all recommendations.
    */
-  All: "all";
+  All: "all",
 
   /**
    * Returns recommendations in descending order of criticality score, if present.
    */
-  Contextual: "contextual";
+  Contextual: "contextual",
 }
 
 /**

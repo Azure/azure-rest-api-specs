@@ -22,18 +22,9 @@ using Microsoft.Advisor;
   ResourceRecommendationBases.patch::parameters.properties,
   "trackedProperties"
 );
-@@clientName(
-  ServiceGroupRecommendations.get,
-  "getByServiceGroup"
-);
-@@clientName(
-  ServiceGroupRecommendations.list,
-  "listByServiceGroup"
-);
-@@clientName(
-  ServiceGroupRecommendations.update,
-  "updateByServiceGroup"
-);
+@@clientName(ServiceGroupRecommendations.get, "getByServiceGroup");
+@@clientName(ServiceGroupRecommendations.list, "listByServiceGroup");
+@@clientName(ServiceGroupRecommendations.update, "updateByServiceGroup");
 @@clientName(
   SuppressionContracts.create::parameters.resource,
   "suppressionContract"
