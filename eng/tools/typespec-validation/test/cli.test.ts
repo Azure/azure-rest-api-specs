@@ -80,7 +80,7 @@ it("shows the same help for --help and -h without a project or Git repository", 
   ]) {
     expect(help.stdout).toContain(text);
   }
-  expect(help.stdout).toMatch(/^\s+-h, --help\s+Show help and exit without validation\.$/m);
+  expect(help.stdout).toMatch(/^\s+-h, --help\s+Show help and exit\.$/m);
   expect(help.stdout).toMatch(/^\s+--base <commit>\s+Base revision \(default: HEAD\^\)\.$/m);
   expect(help.stdout).toMatch(
     /^\s+--shard <index>\/<count>\s+Select a shard using one-based indices\./m,

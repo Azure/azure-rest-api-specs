@@ -1,8 +1,8 @@
+import { parseArgsWithHelp, type CliOption } from "@azure-tools/specs-shared/cli";
 import { ConsoleLogger, type ILogger } from "@azure-tools/specs-shared/logger";
 import { type Suppression } from "@azure-tools/suppressions";
 import debug from "debug";
 import { stat } from "node:fs/promises";
-import { type ParseArgsConfig, parseArgs } from "node:util";
 import { exceptionDiagnostic, reportDiagnostics } from "./diagnostics.ts";
 import type { Diagnostic, RuleResult } from "./rule-result.ts";
 import { type Rule } from "./rule.ts";
@@ -100,34 +100,8 @@ export async function runRules(
   return result;
 }
 
-type CliOption = NonNullable<ParseArgsConfig["options"]>[string] & {
-  description: string;
-  valueLabel?: string;
-  group?: string;
-};
-
-function showHelp(options: Record<string, CliOption>) {
-  const groups = new Map<string, string[]>();
-  const indent = " ".repeat(27);
-  for (const [name, option] of Object.entries(options)) {
-    const alias = option.short ? `-${option.short}, ` : "    ";
-    const value = option.type === "string" ? ` ${option.valueLabel ?? "<value>"}` : "";
-    const label = `  ${alias}--${name}${value}`;
-    const description = option.description.replaceAll("\n", `\n${indent}`);
-    const entry =
-      label.length >= indent.length
-        ? `${label}\n${indent}${description}`
-        : `${label.padEnd(indent.length)}${description}`;
-    const heading = option.group ?? "Options";
-    const entries = groups.get(heading) ?? [];
-    entries.push(entry);
-    groups.set(heading, entries);
-  }
-  const optionHelp = [...groups]
-    .map(([heading, entries]) => `${heading}:\n${entries.join("\n")}`)
-    .join("\n\n");
-
-  console.log(`TypeSpec Validation
+const help = {
+  header: `TypeSpec Validation
 Validate Azure TypeSpec projects.
 
 Usage:
@@ -139,11 +113,8 @@ Arguments:
   <folder>                 Project folder, or discovery root for --all
                            (default for --all: specification).
   <context-json>           Optional JSON context for rules and suppressions
-                           in single-project mode.
-
-${optionHelp}
-
-Validation may update generated files and formatting. Changes are retained
+                           in single-project mode.`,
+  footer: `Validation may update generated files and formatting. Changes are retained
 unless --git-clean is used. Do not use --git-clean while other work is in progress.
 
 Examples (from the repository root):
@@ -151,17 +122,12 @@ Examples (from the repository root):
   pnpm tsv --all
   pnpm tsv --changed --base=origin/main --head=HEAD --dry-run
 
-Documentation: https://aka.ms/azsdk/specs/typespec-validation`);
-}
+Documentation: https://aka.ms/azsdk/specs/typespec-validation`,
+};
 
 export async function main() {
   const args = process.argv.slice(2);
   const options = {
-    help: {
-      type: "boolean",
-      short: "h",
-      description: "Show help and exit without validation.",
-    },
     verbose: {
       type: "boolean",
       short: "v",
@@ -219,13 +185,10 @@ export async function main() {
         "ignored files are retained.",
     },
   } satisfies Record<string, CliOption>;
-  const parsedArgs = parseArgs({ args, options, allowPositionals: true });
+  const parsedArgs = parseArgsWithHelp({ args, options, allowPositionals: true, help });
+  if (!parsedArgs) return;
 
   const { values } = parsedArgs;
-  if (values.help) {
-    showHelp(options);
-    return;
-  }
   if (values.verbose) {
     debug.enable([process.env.DEBUG, "simple-git"].filter(Boolean).join(","));
   }
