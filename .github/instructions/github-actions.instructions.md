@@ -217,7 +217,9 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
 
 ### Common Patterns
 
-- **GitHub API calls**: All GitHub API calls go through `github.rest.*` (Octokit)
+- **GitHub API calls**: Use Octokit's `github.rest.*` or `github.graphql`. Batch related reads with
+  GraphQL where appropriate, and paginate every connection before evaluating policy or publishing
+  results. Do not treat partial responses or API failures as empty results.
 - **Logging**: Use `core.info()`, `core.warning()`, `core.error()`, `core.debug()`
 - **Outputs**: Use `core.setOutput()` or append to `$GITHUB_OUTPUT` file
 - **Context**: Always accept `github`, `context`, `core` as parameters from github-script

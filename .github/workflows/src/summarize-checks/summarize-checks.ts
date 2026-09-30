@@ -33,6 +33,7 @@ import { commentOrUpdate } from "../comment.ts";
 import { CoreLogger } from "../core-logger.ts";
 import { configureGitHubLogging } from "../github.ts";
 import { TYPESPEC_SUPPRESSIONS_APPROVED_LABEL } from "../label.ts";
+import { getSummaryData, type SummaryData, type SummaryCommitStatus } from "./summary-data.ts";
 import type { SummaryInputs } from "./resolve-inputs.ts";
 import {
   ImpactAssessmentSchema,
@@ -334,16 +335,15 @@ export async function summarizeChecksImpl(
   await core.summary.write();
   core.setOutput("summary", process.env.GITHUB_STEP_SUMMARY);
 
-  // Pending jobs can be coalesced by GitHub. Reconcile the current PR head, not a queued event's SHA.
-  const { data: pr } = await github.rest.pulls.get({ owner, repo, pull_number: issue_number });
-  head_sha = pr.head.sha;
-  targetBranch = pr.base.ref;
-  let labelNames = pr.labels.map((label) => label.name);
+  const summaryData = await getSummaryData(github, owner, repo, issue_number, head_sha);
+  head_sha = summaryData.headSha;
+  targetBranch = summaryData.targetBranch;
+  let labelNames = summaryData.labels;
   core.setOutput("issue_number", issue_number);
   core.setOutput("head_sha", head_sha);
 
   const [requiredCheckRuns, fyiCheckRuns, impactAssessment, existingStatus] =
-    await getCheckRunTuple(github, core, owner, repo, head_sha, issue_number, EXCLUDED_CHECK_NAMES);
+    await getCheckRunTuple(github, core, owner, repo, summaryData, EXCLUDED_CHECK_NAMES);
 
   outputRunDetails(core, requiredCheckRuns, fyiCheckRuns);
 
@@ -421,7 +421,7 @@ export async function summarizeChecksImpl(
     issue_number,
     commentBody,
     NEXT_STEPS_COMMENT_ID,
-    { normalizeBody: normalizeNextStepsComment },
+    { normalizeBody: normalizeNextStepsComment, comments: summaryData.comments },
   );
   automatedChecksMet.target_url = `${prUrl}#issuecomment-${commentId}`;
 
@@ -498,21 +498,6 @@ export async function updateCommitStatus(
   );
 }
 
-export async function getExistingLabels(
-  github: GitHub,
-  owner: string,
-  repo: string,
-  issue_number: number,
-): Promise<string[]> {
-  const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
-    owner,
-    repo,
-    issue_number: issue_number,
-    per_page: PER_PAGE_MAX,
-  });
-  return labels.map((label) => label.name);
-}
-
 // #endregion
 // #region label update
 
@@ -579,23 +564,21 @@ export function getRequiredChecksFromBranchRuleOutput(
 /**
  * @param owner - The repository owner.
  * @param repo - The repository name.
- * @param head_sha - The commit SHA to check.
- * @param prNumber - The pull request number.
+ * @param data - The complete check summary read from GraphQL.
  */
 export async function getCheckRunTuple(
   github: GitHub,
   core: Core,
   owner: string,
   repo: string,
-  head_sha: string,
-  prNumber: number,
+  data: SummaryData,
   excludedCheckNames: string[],
 ): Promise<
   [
     CheckRunData[],
     CheckRunData[],
     import("./labelling.ts").ImpactAssessment | undefined,
-    CommitStatus | undefined,
+    SummaryCommitStatus | undefined,
   ]
 > {
   // This function was originally a version of getRequiredAndFyiAndAutomatedMergingRequirementsMetCheckRuns
@@ -607,28 +590,15 @@ export async function getCheckRunTuple(
 
   let impactAssessment: import("./labelling.ts").ImpactAssessment | undefined = undefined;
 
-  const allCheckRuns = await github.paginate(github.rest.checks.listForRef, {
-    owner: owner,
-    repo: repo,
-    ref: head_sha,
-    per_page: PER_PAGE_MAX,
-  });
-
-  const allCommitStatuses = await github.paginate(github.rest.repos.listCommitStatusesForRef, {
-    owner: owner,
-    repo: repo,
-    ref: head_sha,
-    per_page: PER_PAGE_MAX,
-  });
+  const allCheckRuns = data.checkRuns;
+  const allCommitStatuses = data.statuses;
 
   // Process allCheckRuns and allCommitStatuses into unified CheckRunData array
   // all checks will be considered as "FYI" until we have an impact assessment, so we can
   // determine the target branch, and from there pull branch protect rulesets to ensure we
   // are marking the required checks correctly.
 
-  const allChecks: Array<
-    CheckRunData & { _originalData: CheckRun | CommitStatus; _source: string }
-  > = [];
+  const allChecks: Array<CheckRunData & { _updatedAt: string; _workflowRunId?: number }> = [];
 
   allCheckRuns.forEach((checkRun) => {
     allChecks.push({
@@ -636,9 +606,8 @@ export async function getCheckRunTuple(
       status: checkRun.status,
       conclusion: checkRun.conclusion || null,
       checkInfo: getCheckInfo(checkRun.name),
-      // Store original object for date sorting
-      _originalData: checkRun,
-      _source: "checkRun",
+      _updatedAt: checkRun.completed_at || checkRun.started_at || "1970",
+      _workflowRunId: checkRun.workflowRunId,
     });
   });
 
@@ -668,18 +637,13 @@ export async function getCheckRunTuple(
       status: checkStatus,
       conclusion: conclusion,
       checkInfo: getCheckInfo(status.context),
-      // Store original object for date sorting and data access
-      _originalData: status,
-      _source: "commitStatus",
+      _updatedAt: status.updated_at,
     });
   });
 
   // Group by name and take the latest for each
 
-  const checksByName: Map<
-    string,
-    Array<CheckRunData & { _originalData: CheckRun | CommitStatus; _source: string }>
-  > = new Map();
+  const checksByName = new Map<string, typeof allChecks>();
 
   allChecks.forEach((check) => {
     const name = check.name;
@@ -695,20 +659,7 @@ export async function getCheckRunTuple(
   const unifiedCheckRuns = [];
   for (const [, checks] of checksByName) {
     // Sort by date - newest first using invert(byDate(...))
-    const sortedChecks = checks.sort(
-      invert(
-        byDate((check) => {
-          if (check._source === "checkRun") {
-            const originalData = check._originalData as CheckRun;
-            // Use the most recent available date, or "1970" (oldest possible) if the data contains no dates
-            return originalData.completed_at || originalData.started_at || "1970";
-          } else {
-            const originalData = check._originalData as CommitStatus;
-            return originalData.updated_at;
-          }
-        }),
-      ),
-    );
+    const sortedChecks = checks.sort(invert(byDate((check) => check._updatedAt)));
 
     const latestCheck = sortedChecks[0];
 
@@ -717,29 +668,9 @@ export async function getCheckRunTuple(
       latestCheck.status === "completed" &&
       latestCheck.conclusion === "success"
     ) {
-      const originalData = latestCheck._originalData as CheckRun;
-      const workflowRuns = await github.paginate(github.rest.actions.listWorkflowRunsForRepo, {
-        owner,
-        repo,
-        head_sha: head_sha,
-        check_suite_id: originalData.check_suite?.id,
-        per_page: PER_PAGE_MAX,
-      });
-
-      if (workflowRuns.length === 0) {
-        core.warning(`No workflow runs found for check suite ID: ${originalData.check_suite?.id}`);
-      } else {
-        // Sort by updated_at to get the most recent run
-        const sortedRuns = workflowRuns.sort(
-          (a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime(),
-        );
-        impactAssessmentWorkflowRun = sortedRuns[0].id;
-
-        if (workflowRuns.length > 1) {
-          core.info(
-            `Found ${workflowRuns.length} workflow runs for check suite ID: ${originalData.check_suite?.id}, using most recent: ${sortedRuns[0].id}`,
-          );
-        }
+      impactAssessmentWorkflowRun = latestCheck._workflowRunId;
+      if (!impactAssessmentWorkflowRun) {
+        core.warning("No workflow run found for the completed impact assessment check");
       }
     }
 

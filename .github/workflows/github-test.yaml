@@ -37,6 +37,11 @@ jobs:
   test:
     name: test (${{ matrix.os }})
     timeout-minutes: 10
+    permissions:
+      contents: read
+      pull-requests: read
+      checks: read
+      actions: read
     strategy:
       fail-fast: false
       matrix:
@@ -99,6 +104,17 @@ jobs:
             const fullPath = join(process.env.GITHUB_WORKSPACE, ".github", "workflows", "src", "github-test.ts");
             const { default: importAllModules } = await import(pathToFileURL(fullPath).href);
             await importAllModules({ core });
+
+      - if: ${{ github.event_name == 'pull_request' && matrix.os == 'ubuntu' }}
+        name: Read check summary with workflow token
+        uses: actions/github-script@v9.0.0
+        with:
+          script: |
+            const { getSummaryData } =
+              await import('${{ github.workspace }}/.github/workflows/src/summarize-checks/summary-data.ts');
+            const pr = context.payload.pull_request;
+            const data = await getSummaryData(github, context.repo.owner, context.repo.repo, pr.number, pr.head.sha);
+            core.info(`Read ${data.checkRuns.length} check runs and ${data.statuses.length} statuses with GITHUB_TOKEN`);
 
       # Content copied from https://raw.githubusercontent.com/rhysd/actionlint/2ab3a12c7848f6c15faca9a92612ef4261d0e370/.github/actionlint-matcher.json
       - if: ${{ matrix.os == 'ubuntu' }}

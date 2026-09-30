@@ -52,6 +52,7 @@ export function parseExistingComments(
  * @param body - The markdown content of the comment.
  * @param commentIdentifier - The value that will be stored in an html comment so we can retrieve this comment later
  * @param options.normalizeBody - Ignores caller-specific provenance when comparing comment content.
+ * @param options.comments - Reuses a complete comment collection already fetched by the caller.
  * @returns The ID of the existing or newly created comment.
  */
 export async function commentOrUpdate(
@@ -62,16 +63,18 @@ export async function commentOrUpdate(
   issue_number: number,
   body: string,
   commentIdentifier: string,
-  options: { normalizeBody?: (body: string) => string } = {},
+  options: { normalizeBody?: (body: string) => string; comments?: IssueComment[] } = {},
 ): Promise<number> {
   const computedBody = body + `\n<!-- ${commentIdentifier} -->`;
 
-  const comments: IssueComment[] = await github.paginate(github.rest.issues.listComments, {
-    owner,
-    repo,
-    issue_number,
-    per_page: PER_PAGE_MAX,
-  });
+  const comments =
+    options.comments ??
+    (await github.paginate(github.rest.issues.listComments, {
+      owner,
+      repo,
+      issue_number,
+      per_page: PER_PAGE_MAX,
+    }));
 
   const [commentId, commentBody] = parseExistingComments(comments, commentIdentifier);
 

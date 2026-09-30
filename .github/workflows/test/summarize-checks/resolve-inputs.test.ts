@@ -3,6 +3,7 @@ import { fullGitSha } from "../../../shared/test/examples.ts";
 import { resolveSummaryInputs } from "../../src/summarize-checks/resolve-inputs.ts";
 import summarizeChecks from "../../src/summarize-checks/summarize-checks.ts";
 import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts";
+import { summaryResponse } from "./summary-data-fixtures.ts";
 
 const repository = { id: 1, name: "repo", owner: { login: "owner" } };
 const expected = { owner: "owner", repo: "repo", issue_number: 123, head_sha: fullGitSha };
@@ -70,9 +71,7 @@ describe("summary identity resolution", () => {
       data: { artifacts: [{ name: "issue-number=123" }, { name: `head-sha=${fullGitSha}` }] },
     });
     github.rest.issues.createComment.mockResolvedValue({ data: { id: 42 } });
-    github.rest.pulls.get.mockResolvedValue({
-      data: { labels: [], head: { sha: fullGitSha }, base: { ref: "main" } },
-    });
+    github.graphql.mockResolvedValue(summaryResponse({ headSha: fullGitSha }));
     const inputs = await resolveSummaryInputs({ github, context, core });
     expect(inputs).toEqual(expected);
     if (!inputs) throw new Error("Expected resolved inputs");
@@ -80,7 +79,8 @@ describe("summary identity resolution", () => {
     await summarizeChecks({ github, context, core }, inputs);
 
     expect(github.rest.actions.listWorkflowRunArtifacts).toHaveBeenCalledTimes(1);
-    expect(github.rest.repos.listCommitStatusesForRef).toHaveBeenCalledTimes(1);
+    expect(github.graphql).toHaveBeenCalledTimes(1);
+    expect(github.rest.repos.listCommitStatusesForRef).not.toHaveBeenCalled();
     expect(core.setOutput).toHaveBeenCalledWith("head_sha", fullGitSha);
   });
 
