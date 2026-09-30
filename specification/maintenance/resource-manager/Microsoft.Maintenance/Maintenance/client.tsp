@@ -173,11 +173,6 @@ using Microsoft.Maintenance;
   "DeleteEx",
   "csharp"
 );
-@@clientName(
-  MaintenanceConfigurationOperationGroup,
-  "MaintenanceConfiguration",
-  "csharp"
-);
 @@clientName(ApplyUpdates, "MaintenanceApplyUpdate", "csharp");
 @@clientName(ApplyUpdate, "MaintenanceApplyUpdate", "csharp");
 @@clientName(ImpactType, "MaintenanceImpactType", "csharp");
