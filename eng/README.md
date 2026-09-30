@@ -6,6 +6,12 @@ For context on this directory, see [Design guidelines for spec repos validation 
 
 ## Contributor readiness
 
+Contributor readiness runs only for PRs that change `specification/`, including
+mixed specification and engineering changes. Engineering-only PRs are skipped
+without account checks or a readiness comment/check, including review events and
+manual `/azsdk check-access` requests. The PR-event notifier uses a path filter;
+the publisher verifies current changed files for every trigger.
+
 The advisory **Contributor readiness** check reports public Microsoft/Azure
 membership visibility and effective repository access for the PR author, commit
 authors/committers, and all submitted reviewers. It does not change merge rules.
