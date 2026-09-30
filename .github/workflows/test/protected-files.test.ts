@@ -251,6 +251,20 @@ describe("Protected Files", () => {
     expect(workflow.hasIn(["jobs", "protected-files", "if"])).toBe(false);
     const steps = workflow.getIn(["jobs", "protected-files", "steps"]);
     if (!isSeq(steps)) throw new Error("Expected workflow steps");
+    const allowed = workflow.getIn(["env", "user-allowed"]);
+    if (typeof allowed !== "string") throw new Error("Expected a trusted-author condition");
+    expect(allowed.replace(/\s+/g, " ")).toBe(
+      "${{ github.event.pull_request.user.login == 'azure-sdk' || " +
+        "github.event.pull_request.user.login == 'azure-sdk-automation[bot]' }}",
+    );
+    const exempt = steps.items[0];
+    if (!isMap(exempt)) throw new Error("Expected a trusted-author exemption step");
+    expect(exempt.get("if")).toBe("${{ env.user-allowed == 'true' }}");
+    expect(exempt.get("run")).toContain("allowed to update protected files");
+    for (const step of steps.items.slice(1)) {
+      if (!isMap(step)) throw new Error("Expected a workflow step");
+      expect(step.get("if")).toBe("${{ env.user-allowed != 'true' }}");
+    }
     const checkout = steps.items.find(
       (step) => isMap(step) && String(step.get("uses")).startsWith("actions/checkout@"),
     );
