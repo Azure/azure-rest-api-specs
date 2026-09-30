@@ -129,7 +129,7 @@ function setup(initialState?: unknown) {
     save,
     createRef,
     state: () => stored,
-    apply: (results = output(), staged = false) =>
+    apply: (results: unknown = output(), staged = false) =>
       applyBacklogTriage(args, selected, results, staged, now),
   };
 }
@@ -326,6 +326,51 @@ describe("backlog triage output boundary", () => {
     expect(parseDecisions(output(completed), batch)).toEqual(completed);
   });
 
+  it("accepts all five unique issue checkpoints", () => {
+    const batch = [1, 2, 3, 4, 5].map((number) => ({ number, updatedAt }));
+    const completed = batch.map(({ number }) => decision({ number }));
+    expect(parseDecisions(output(completed), batch)).toEqual(completed);
+  });
+
+  it("reports collector rejections as failures without discarding accepted checkpoints", async () => {
+    const t = setup();
+    await applyBacklogTriage(
+      t.args,
+      [...selected, { number: 2, updatedAt }],
+      {
+        ...output([decision({ action: "keep_open" })]),
+        errors: ["Line 2: Too many items of type 'apply_backlog_triage'. Maximum allowed: 1."],
+      },
+      false,
+      now,
+    );
+    expect(parseState(t.state()).issues).toEqual({
+      1: { action: "keep_open", updatedAt, reviewedAt: now.toISOString() },
+    });
+    expect(t.core.setFailed).toHaveBeenCalledExactlyOnceWith(
+      expect.stringContaining("Safe-output collection rejected 1 item"),
+    );
+    expect(await selectBacklogIssues(t.args, "", now)).toEqual([{ number: 2, updatedAt }]);
+  });
+
+  it("surfaces collector errors in dry runs without changing issues or progress", async () => {
+    const t = setup();
+    await t.apply({ ...output(), errors: ["A later checkpoint was rejected"] }, true);
+    expect(t.core.setFailed).toHaveBeenCalled();
+    expect(t.state()).toBeUndefined();
+    expect(t.update).not.toHaveBeenCalled();
+    expect(t.github.rest.issues.createComment).not.toHaveBeenCalled();
+  });
+
+  it("rejects malformed collector errors before applying checkpoints", async () => {
+    const t = setup();
+    await expect(t.apply({ ...output(), errors: "not an array" })).rejects.toThrow(
+      "Invalid safe output",
+    );
+    await expect(t.apply({ ...output(), errors: [null] })).rejects.toThrow("Invalid safe output");
+    expect(t.github.rest.issues.createComment).not.toHaveBeenCalled();
+  });
+
   it("rejects malformed checkpoint payloads instead of treating them as completed work", () => {
     for (const item of [
       { type: "apply_backlog_triage", decisions: JSON.stringify([decision()]) },
@@ -351,7 +396,7 @@ describe("backlog triage output boundary", () => {
       1: { action: "keep_open", updatedAt, reviewedAt: now.toISOString() },
     });
     expect(t.get.mock.calls.every(([params]) => params.issue_number === 1)).toBe(true);
-    expect(t.core.warning).toHaveBeenCalledWith(expect.stringContaining("No checkpoint submitted"));
+    expect(t.core.warning).toHaveBeenCalledWith(expect.stringContaining("No accepted checkpoint"));
     expect(await selectBacklogIssues(t.args, "", now)).toEqual([{ number: 2, updatedAt }]);
   });
 

@@ -116,6 +116,8 @@ safe-outputs:
   jobs:
     apply-backlog-triage:
       description: Checkpoint one completed issue decision now; validated checkpoints are applied after investigation, even if a later issue exhausts the agent budget.
+      # Custom outputs default to one call; allow one checkpoint per selected issue.
+      max: 5
       if: >-
         (needs.agent.result == 'success' || needs.agent.result == 'failure') &&
         needs.detection.result == 'success' &&
