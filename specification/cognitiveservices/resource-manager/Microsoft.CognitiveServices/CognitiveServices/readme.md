@@ -59,14 +59,6 @@ suppressions:
       - $.definitions.RaiAcsModerationBindingExtension.properties.harm_configs
       - $.definitions.RaiAcsPolicyBinding.properties.aacs_moderation
       - $.definitions.RaiAcsToolDefinition.properties.security_labels
-  - code: DefinitionsPropertiesNamesCamelCase
-    reason: Cost control match keys are trusted request attribute names defined by the service contract. Their dotted wire names must be preserved so the service can evaluate matches; generated SDKs expose idiomatic camelCase names through x-ms-client-name.
-    from: cognitiveservices.json
-    where:
-      - $.definitions.CostControlMatch.properties["foundry.caller.agent.id"]
-      - $.definitions.CostControlMatch.properties["foundry.caller.identity.oid"]
-      - $.definitions.CostControlMatch.properties["foundry.caller.session.id"]
-      - $.definitions.CostControlMatch.properties["foundry.project.id"]
   - code: AvoidAdditionalProperties
     reason: The canonical ACS manifest defines metadata and tool entries as extensible JSON objects, and policies and tools as name-keyed maps. Replacing these objects with closed properties or arrays would break ACS manifest portability and round-tripping.
     from: cognitiveservices.json
