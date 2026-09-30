@@ -82,6 +82,7 @@ async function resolveNotificationPullRequest({
     const { data } = await github.rest.search.issuesAndPullRequests({
       q: `repo:${context.repo.owner}/${context.repo.repo} is:pr is:open ${run.head_sha}`,
       per_page: PER_PAGE_MAX,
+      advanced_search: "true",
     });
     if (data.incomplete_results || data.total_count > data.items.length) {
       throw new Error("Incomplete PR lookup for notification workflow; use /azsdk check-access");
