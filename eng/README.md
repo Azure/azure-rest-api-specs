@@ -77,6 +77,73 @@ Keep a long-lived branch by protecting it or adding it to those exclusions.
 Candidates and their SHAs are logged, and SHA-guarded Git pushes refuse to delete
 changed tips. API and deletion failures fail the workflow.
 
+## Repository labels
+
+Repository label definitions live in [`.github/labels.yaml`](../.github/labels.yaml).
+Add or edit labels through a pull request, keeping names unchanged unless a
+separate migration is intended. Names, six-digit hex colors, and descriptions are
+validated before synchronization. Empty descriptions are allowed. Label
+authorization remains separate in `.github/protected-labels.yml`; defining a
+label does not grant permission to apply it.
+
+After installing dependencies from the repository root, validate or preview:
+
+```bash
+pnpm --dir .github labels
+pnpm --dir .github labels --preview
+```
+
+Validation is offline. Preview reads upstream labels without changing anything;
+set `GITHUB_TOKEN` to authenticate if needed. It lists proposed creates, metadata
+updates, and unconfigured labels. It does not enumerate replacement assignments.
+
+[Sync repository labels](../.github/workflows/sync-repo-labels.yaml) runs after
+relevant changes on `main`, when repository label definitions change, and daily.
+The schedule also catches changes made by workflows using `GITHUB_TOKEN`, which
+do not trigger further label-event workflows. Manual runs default to dry-run.
+Mutating runs use the upstream default branch and are disabled on forks. PR
+validation never changes GitHub labels.
+
+The current `unconfiguredLabels: preserve` policy creates/updates configured
+labels and warns about unconfigured ones. It does not automatically import or
+delete them. Removing an entry from YAML therefore leaves its GitHub label and
+assignments intact. Resolve warnings by adding legitimate labels through a PR
+or reviewing the unwanted labels separately.
+
+### Disabled label replacement
+
+Replacement is implemented but **disabled**. Only a reviewed change to
+`unconfiguredLabels: replace` enables it; manual workflow inputs cannot override
+the catalog policy. Do not enable it until migration is complete and external
+automation, affected-item volume, and audit retention have been reviewed.
+
+When enabled, unconfigured labels are replaced on all affected issues and PRs,
+including closed and merged items, with the reserved `label-deleted` label.
+Its description explains why the replacement happened. Other labels are
+preserved, and **no comments are posted**. An unused unconfigured label is
+deleted without applying the marker anywhere.
+
+Each run uploads `label-audit-before-<run-id>-<attempt>` before applying changes.
+It records original label metadata and, in replacement mode, affected item
+numbers, types, URLs, and states. `label-audit-outcome-<run-id>-<attempt>` records
+operations and failures. Download them from the workflow run's **Artifacts**
+section. Artifacts request 90-day retention, subject to repository policy; they
+are not permanent history. Export them before expiration if permanent retention
+is needed.
+
+Discovery, audit upload, or marker failures prevent deletion. Catalog changes,
+renamed labels, or new unaudited assignments also stop replacement. On partial
+failure, some items may have both the original label and the marker. Inspect the
+outcome artifact, resolve the error, and rerun; marker additions are idempotent.
+If a run is interrupted, `pending` operations may or may not have completed:
+compare the audit with live state before recovery.
+
+GitHub does not provide an atomic replacement-and-deletion transaction. The
+workflow rechecks assignments before deletion, but concurrent manual changes can
+still race it. Restoring a deleted label does not restore its assignments; use
+the audit to guide manual recovery. This workflow detects/reconciles label
+creation afterward, rather than preventing creation in the GitHub UI.
+
 ## Code conventions
 
 Below are code convention we strive to follow in `eng` directory:
