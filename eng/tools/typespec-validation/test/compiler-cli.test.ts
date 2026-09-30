@@ -125,7 +125,10 @@ it.each([
 ])(
   "shows changed-file diffs once for $command with color=$color verbose=$verbose",
   async ({ command, color, verbose }) => {
-    await simpleGit(root).addConfig("color.diff.new", "green");
+    await simpleGit(root)
+      .addConfig("color.diff.new", "green")
+      .addConfig("core.autocrlf", "true")
+      .addConfig("core.safecrlf", "warn");
     if (color) {
       vi.stubEnv("NO_COLOR", undefined);
       vi.stubEnv("FORCE_COLOR", "1");
@@ -142,6 +145,7 @@ it.each([
     expect(output).toContain(`error tsv/${code}:`);
     expect(output).toContain(`\n  ${project}/generated.json\n\ndiff --git`);
     expect(output).toContain("\n+new content\n\n  help:");
+    expect(output).toContain("LF will be replaced by CRLF");
     expect(output.match(/diff --git/g)).toHaveLength(1);
     expect(result.stdout).not.toContain("diff --git");
     expect(result.stderr.includes("\x1b[32m")).toBe(color);

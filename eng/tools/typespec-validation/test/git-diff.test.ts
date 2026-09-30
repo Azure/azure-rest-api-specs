@@ -1,3 +1,4 @@
+import * as exec from "@azure-tools/specs-shared/exec";
 import { ConsoleLogger, defaultLogger } from "@azure-tools/specs-shared/logger";
 import { mkdir, mkdtemp, rename, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -96,6 +97,36 @@ it.each([false, true])("shows only the service diff with verbose=%s", async (ver
   expect(output).not.toContain("diff --git");
   expect(output).not.toContain("unrelated.json");
   if (!verbose) expect(debug).not.toHaveBeenCalled();
+});
+
+it("keeps untracked file diffs when Git reports line-ending warnings", async () => {
+  await git.addConfig("core.autocrlf", "true");
+  await git.addConfig("core.safecrlf", "warn");
+  await writeFile(join(folder, "new.json"), "new content\n");
+  const warning = vi.spyOn(defaultLogger, "warning").mockImplementation(() => {});
+
+  const result = await gitDiffTopSpecFolder(folder, defaultLogger);
+
+  expect(result.success).toBe(false);
+  expect(result.files).toEqual([`${project}/new.json`]);
+  expect(result.diff).toContain(`diff --git a/${project}/new.json`);
+  expect(result.diff).toContain("+new content");
+  expect(warning).toHaveBeenCalledWith(expect.stringContaining("LF will be replaced by CRLF"));
+  expect(await git.diff(["--cached"])).toBe("");
+  expect((await git.status()).not_added).toEqual([`${project}/new.json`]);
+});
+
+it.each([
+  { code: 1, stdout: "" },
+  { code: 128, stdout: "partial output" },
+  { code: "ENOENT", stdout: "" },
+  { code: "ERR_CHILD_PROCESS_STDIO_MAXBUFFER", stdout: "partial output" },
+])("propagates genuine untracked diff failures: %j", async ({ code, stdout }) => {
+  await writeFile(join(folder, "new.json"), "new content\n");
+  const error = Object.assign(new Error("Git failed"), { code, stdout, stderr: "Git failed\n" });
+  vi.spyOn(exec, "execFile").mockRejectedValueOnce(error);
+
+  await expect(gitDiffTopSpecFolder(folder, defaultLogger)).rejects.toBe(error);
 });
 
 it.each([

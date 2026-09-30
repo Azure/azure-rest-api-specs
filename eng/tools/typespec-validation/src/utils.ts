@@ -1,4 +1,9 @@
-import { execNodeBin, isExecError } from "@azure-tools/specs-shared/exec";
+import {
+  execFile,
+  execNodeBin,
+  isExecError,
+  type ExecResult,
+} from "@azure-tools/specs-shared/exec";
 import type { ILogger } from "@azure-tools/specs-shared/logger";
 import {
   getSuppressions as getSuppressionsImpl,
@@ -112,9 +117,8 @@ export async function gitDiffTopSpecFolder(folder: string, logger: ILogger) {
   ];
   if (gitStatus.not_added.length > 0) {
     const repositoryRoot = (await git.revparse(["--show-toplevel"])).trim();
-    const rootGit = simpleGit(repositoryRoot);
     for (const file of gitStatus.not_added) {
-      diffs.push(await rootGit.diff([color, "--no-index", "--", "/dev/null", file]));
+      diffs.push(await diffUntrackedFile(repositoryRoot, file, color, logger));
     }
   }
 
@@ -123,4 +127,34 @@ export async function gitDiffTopSpecFolder(folder: string, logger: ILogger) {
     files: gitStatus.files.map((file) => file.path),
     diff: diffs.filter(Boolean).join("\n"),
   };
+}
+
+async function diffUntrackedFile(
+  folder: string,
+  file: string,
+  color: string,
+  logger: ILogger,
+): Promise<string> {
+  logger.debug(`git diff --no-index: ${file}`);
+  let result: ExecResult;
+  try {
+    result = await execFile("git", ["diff", color, "--no-index", "--", "/dev/null", file], {
+      cwd: folder,
+      maxBuffer: 64 * 1024 * 1024,
+    });
+  } catch (error) {
+    // --no-index returns 1 for differences, even when Git also emits warnings.
+    // Missing output still indicates a real failure, such as an unreadable path.
+    if (
+      !isExecError(error) ||
+      error.code !== 1 ||
+      typeof error.stdout !== "string" ||
+      error.stdout.length === 0
+    ) {
+      throw error;
+    }
+    result = { stdout: error.stdout, stderr: error.stderr ?? "" };
+  }
+  if (result.stderr) logger.warning(result.stderr.trimEnd());
+  return result.stdout;
 }
