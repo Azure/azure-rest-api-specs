@@ -44,11 +44,11 @@ jobs:
 
       - name: Get label and action
         id: get-label-and-action
-        uses: actions/github-script@v8
+        uses: actions/github-script@v9.0.0
         with:
           script: |
             const { getLabelAndAction } =
-              await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change-labels.js');
+              await import('${{ github.workspace }}/.github/workflows/src/sdk-breaking-change-labels.ts');
             return await getLabelAndAction({ github, context, core });
 
       - if: |

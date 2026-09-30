@@ -1,5 +1,5 @@
 <!-- NOTE: This comment is for file maintainers only and is not rendered.
-     Upstream alignment: 2026-05-29
+     Upstream alignment: 2026-08-15
      Derived from:
        - @microsoft.azure/openapi-validator rule R3017 (GuidUsage)
        - LintDiff suppression entries across specification/**/readme.md
