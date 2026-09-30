@@ -48,6 +48,99 @@ afterEach(async () => {
   await rm(root, { recursive: true, force: true });
 });
 
+it("shows the same help for --help and -h without a project or Git repository", async () => {
+  const help = await run("--help");
+  expect(await run("-h")).toEqual(help);
+  expect(help.stderr).toBe("");
+  for (const text of [
+    "Validate Azure TypeSpec projects.",
+    "pnpm tsv <folder> [context-json] [options]",
+    "JSON context for rules and suppressions",
+    "-v, --verbose",
+    "--head <commit>",
+    "--ignore-core-files",
+    "--dry-run",
+    "--git-clean",
+    "default: HEAD^",
+    "default: HEAD)",
+    "--all and --changed cannot be combined",
+    "Options for --changed:",
+    "Options for --all:",
+    "Options for --all or --changed:",
+    "one-based indices",
+    "entire repository",
+    "clean, disposable checkout",
+    "ignored files are retained",
+    "disables --git-clean",
+    "pnpm tsv --changed --base=origin/main --head=HEAD --dry-run",
+    "https://aka.ms/azsdk/specs/typespec-validation",
+  ]) {
+    expect(help.stdout.replace(/\s+/g, " ")).toContain(text);
+  }
+  expect(help.stdout).toMatch(/^\s+-h, --help\s+Show help and exit\.$/m);
+  expect(help.stdout).toMatch(/^\s+--base <commit>\s+Base revision \(default: HEAD\^\)\.$/m);
+  expect(help.stdout).toMatch(
+    /^\s+--shard <index>\/<count>\s+Select a shard using one-based indices\./m,
+  );
+  expect(help.stdout).not.toMatch(/(?:^|\s)(?:--folder|--context|-f|-c)(?=[\s,=]|$)/);
+});
+
+it.each([
+  ["--verbose"],
+  ["--all"],
+  ["--changed"],
+  ["--all", "--changed"],
+  ["--git-clean"],
+  ["--dry-run"],
+  ["--shard=invalid"],
+  ["--base=missing-ref"],
+  ["missing-project", "{invalid-json"],
+])("shows help before validation for %j", async (...args) => {
+  const { stdout, stderr } = await run(...args, "--help");
+  expect(stdout).toBe((await run("--help")).stdout);
+  expect(stderr).toBe("");
+});
+
+it("does not clean files when help is requested with --git-clean", async () => {
+  const sentinel = join(root, "local.txt");
+  await writeFile(sentinel, "keep");
+
+  const { stdout, stderr } = await run("--all", "--git-clean", "--help");
+  expect(stdout).toContain("Usage:");
+  expect(stdout).not.toMatch(/Checking \d+ TypeSpec folders|Running TypeSpecValidation on folder:/);
+  expect(stderr).toBe("");
+  expect(await readFile(sentinel, "utf8")).toBe("keep");
+});
+
+it.each(["--folder", "-f", "--context", "-c"])("rejects the unused option %s", async (option) => {
+  await expect(run(option, "unused")).rejects.toMatchObject({
+    code: 1,
+    stdout: "",
+    stderr: expect.stringContaining(`Unknown option '${option}'`) as unknown,
+  });
+});
+
+it.each([
+  { args: ["--unknown"], error: "ERR_PARSE_ARGS_UNKNOWN_OPTION" },
+  { args: ["--help", "--unknown"], error: "ERR_PARSE_ARGS_UNKNOWN_OPTION" },
+  { args: ["--base"], error: "ERR_PARSE_ARGS_INVALID_OPTION_VALUE" },
+  { args: ["--help", "--base"], error: "ERR_PARSE_ARGS_INVALID_OPTION_VALUE" },
+])("preserves parser errors for $args", async ({ args, error }) => {
+  await expect(run(...args)).rejects.toMatchObject({
+    code: 1,
+    stdout: "",
+    stderr: expect.stringContaining(error) as unknown,
+  });
+});
+
+it("treats --help after the option terminator as a positional folder", async () => {
+  await expect(run("--", "--help")).rejects.toMatchObject({
+    code: 1,
+    stdout: expect.stringContaining("/--help does not exist") as unknown,
+    stderr: "",
+  });
+});
+
 it.each(["single", "all", "changed"])(
   "makes Git tracing opt-in without hiding %s validation failures",
   async (mode) => {
@@ -67,7 +160,7 @@ it.each(["single", "all", "changed"])(
     });
     await expect(run(...args, "--verbose")).rejects.toMatchObject({
       code: 1,
-      stdout: expect.stringContaining("Executing rule: FolderStructure") as unknown,
+      stdout: expect.stringContaining("\u00d7 FolderStructure") as unknown,
       stderr: expect.stringContaining("simple-git") as unknown,
     });
   },
@@ -132,6 +225,9 @@ it.each([
       expect(stripVTControlCharacters(stderr).split(diagnostic)).toHaveLength(2);
       expect(stderr.includes("\x1b[31merror\x1b[39m")).toBe(color);
       expect(stderr).not.toContain("\n    at ");
+      expect(stripVTControlCharacters(String(error.stdout))).toBe(
+        "\n2 passed | 1 failed | 9 not run\n",
+      );
       expect(String(error.stdout)).not.toMatch(
         /Executing rule:|config files:|imports:|Expected npm prefix:/,
       );
@@ -230,7 +326,7 @@ it("wraps child output in repository-relative GitHub Actions groups", async () =
     "Validating specification/b",
   ]);
   for (const group of groups) {
-    expect(group[2]).toContain("Running TypeSpecValidation on folder:");
+    expect(group[2]).not.toContain("Running TypeSpecValidation on folder:");
     expect(group[2]).toContain("Suppressed: fixture");
   }
 });

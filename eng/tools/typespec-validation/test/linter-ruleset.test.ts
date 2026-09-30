@@ -1,7 +1,7 @@
 import { defaultLogger } from "@azure-tools/specs-shared/logger";
 import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import { strict as assert } from "node:assert";
-import { join } from "path";
+import { join } from "node:path";
 import { afterEach, beforeEach, describe, it, type MockInstance, vi } from "vitest";
 import { LinterRulesetRule } from "../src/rules/linter-ruleset.ts";
 

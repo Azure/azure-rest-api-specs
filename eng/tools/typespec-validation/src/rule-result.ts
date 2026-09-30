@@ -6,6 +6,8 @@ export interface Diagnostic {
   readonly location?: { line: number; column: number; text?: string };
   readonly help?: string;
   readonly url?: string;
+  /** Multiline details, including native command diagnostics or affected file paths. */
+  readonly output?: string;
 }
 
 export interface RuleResult {
@@ -13,9 +15,6 @@ export interface RuleResult {
   readonly diagnostics?: Diagnostic[];
   readonly skipped?: string;
   readonly suppressed?: string;
-  /** Legacy output for unmigrated rules; new rule findings belong in diagnostics. */
-  readonly stdOutput?: string;
-  readonly errorOutput?: string;
 }
 
 export class DiagnosticError extends Error {

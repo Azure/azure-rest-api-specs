@@ -12,7 +12,7 @@ import { createApproversConfig } from "../../src/package-name-approval/approvers
 // We need to import the module, but it has side-effect imports.
 // Use dynamic import with mocks.
 
-vi.mock("fs/promises", () => ({
+vi.mock("node:fs/promises", () => ({
   readFile: vi.fn(),
   writeFile: vi.fn(),
   unlink: vi.fn(),

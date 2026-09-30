@@ -6,7 +6,7 @@ import { resolve } from "node:path";
 import { afterEach, beforeEach, describe, expect, it, type MockInstance, vi } from "vitest";
 import { ServiceYamlRule } from "../src/rules/service-yaml.ts";
 
-import * as fsPromises from "fs/promises";
+import * as fsPromises from "node:fs/promises";
 import * as utils from "../src/utils.ts";
 
 const validServiceYaml = `versions:

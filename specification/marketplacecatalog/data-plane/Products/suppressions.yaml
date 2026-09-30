@@ -17,3 +17,10 @@
     - options.@azure-tools/typespec-csharp.namespace
     - options.@azure-tools/typespec-csharp.clear-output-folder
   reason: 'This specification is REST-only and does not generate SDKs'
+
+- tool: TypeSpecRequirement
+  path: ./preview/2023-01-01-preview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./preview/2023-05-01-preview/*.json
+  reason: Brownfield service not ready to migrate

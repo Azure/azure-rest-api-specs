@@ -4,10 +4,12 @@ import {
   getSuppressions as getSuppressionsImpl,
   type Suppression,
 } from "@azure-tools/suppressions";
-import { access, readdir, readFile } from "fs/promises";
-import defaultPath, { basename, dirname, join, relative, type PlatformPath } from "path";
+import { access, readdir, readFile } from "node:fs/promises";
+import defaultPath, { basename, dirname, join, relative, type PlatformPath } from "node:path";
 import { simpleGit } from "simple-git";
 import { context } from "./index.ts";
+import { supportsColor } from "./diagnostics.ts";
+import type { CommandOutput } from "./command-output.ts";
 
 // Return command failures to the validation rule along with captured output.
 export async function runNodeBin(
@@ -15,10 +17,20 @@ export async function runNodeBin(
   args: [string, ...string[]],
   logger: ILogger,
   cwd?: string,
-): Promise<[Error | null, string, string]> {
+): Promise<CommandOutput> {
+  const env = { ...process.env };
+  if (supportsColor()) {
+    delete env.NO_COLOR;
+    env.FORCE_COLOR = "1";
+  } else {
+    delete env.FORCE_COLOR;
+    env.NO_COLOR = "1";
+  }
+  logger.debug(`runNodeBin(${JSON.stringify(packageName)}, ${JSON.stringify(args)})`);
   try {
     const { stdout, stderr } = await execNodeBin(packageName, args, {
-      logger,
+      // The calling rule owns captured output, including errors; do not log it twice.
+      env,
       maxBuffer: 64 * 1024 * 1024,
       cwd,
     });
@@ -84,24 +96,18 @@ export async function readFileAtCommit(
   }
 }
 
-export async function gitDiffTopSpecFolder(folder: string) {
+export async function gitDiffTopSpecFolder(folder: string, logger: ILogger) {
   const git = simpleGit(folder);
-  const topSpecFolder = folder.replace(/(^.*specification\/[^/]*)(.*)/, "$1");
-  const stdOutput = `Running git diff on folder ${topSpecFolder}`;
+  const topSpecFolder = normalizePath(folder).replace(/(^.*specification\/[^/]*)(.*)/, "$1");
+  logger.debug(`Checking generated files in ${topSpecFolder}`);
   const gitStatus = await git.status(["--porcelain", topSpecFolder]);
-
-  let success = true;
-  let errorOutput: string | undefined;
-
-  if (!gitStatus.isClean()) {
-    success = false;
-    errorOutput = JSON.stringify(await git.status());
-    errorOutput += await git.diff();
+  if (!gitStatus.isClean() && logger.isDebug()) {
+    logger.debug(JSON.stringify(await git.status()));
+    logger.debug(await git.diff());
   }
 
   return {
-    success: success,
-    stdOutput: stdOutput,
-    errorOutput: errorOutput,
+    success: gitStatus.isClean(),
+    files: gitStatus.files.map((file) => file.path),
   };
 }

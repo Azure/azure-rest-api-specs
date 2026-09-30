@@ -3,6 +3,7 @@
 Run from the repository root after installing dependencies with `pnpm install`:
 
 ```sh
+pnpm tsv --help
 pnpm tsv specification/<service>/<project>
 pnpm tsv --all
 pnpm tsv --all specification/<service> --shard=1/3
@@ -10,8 +11,32 @@ pnpm tsv --changed
 pnpm tsv --changed --base=origin/main --head=HEAD --dry-run
 ```
 
-Use `--verbose` (or `-v`) to include rule progress, configuration/import details,
-routine skip reasons, command traces, Git debug logging, and changed-file discovery:
+Use `--help` (or `-h`) to see all command-line options without running validation.
+For single-project validation, pass the folder and optional JSON context for rules
+and suppressions as positional arguments:
+
+```text
+pnpm tsv <folder> [context-json]
+```
+
+Successful single-project runs print only the final rule-count summary. Errors
+and warnings remain visible. When validation stops early, the summary includes
+rules that were not run. A blank line separates preceding diagnostics or verbose
+output from the summary; quiet successful runs have no leading blank line.
+
+The summary uses green for passed rules, bold red for failures, yellow for
+warnings, and gray for skipped, suppressed, or not-run counts. Separators are
+dimmed so the results stand out; plain-text output keeps the same information.
+
+```text
+9 passed | 3 skipped
+```
+
+With `--verbose` (or `-v`), each rule also gets a compact completion indicator:
+checkmark for pass, cross for failure, `!` for a non-failing warning, and `-` with
+a label for skipped/suppressed rules. Verbose output also includes configuration/import details,
+routine skip reasons, successful compiler/formatter output, emitted-file
+inventories, full Git diffs, command traces, and changed-file discovery:
 
 ```sh
 pnpm tsv specification/<service>/<project> --verbose
@@ -38,8 +63,18 @@ takes precedence over `FORCE_COLOR`. `FORCE_COLOR=1` enables colors for redirect
 output, while `FORCE_COLOR=0` disables them.
 
 Validation still stops after the first failed rule in each project, and batch
-runs continue to later projects. Suppression rule names are unchanged. Compiler
-and formatter output, including emitted-file lists, retains its existing format.
+runs continue to later projects. Suppression rule names are unchanged.
+
+Compiler and formatter failures retain their native diagnostic codes, source
+excerpts, and colors, reported once beneath a TSV command-failure diagnostic.
+Unexpected output from successful commands also remains visible. Successful
+compiler banners, progress messages, and emitted-file lists are debug-only.
+If compilation or formatting changes files, TSV lists the affected
+repository-relative paths and the command to fix them; `--verbose` includes the
+full Git status and diff.
+
+TSV still captures `tsp compile --list-files` internally to detect stale generated
+Swagger files. Hiding that inventory in normal output does not disable the check.
 
 A local run without comparison commits skips API-version comparison without a
 warning; `--verbose` shows the reason. An explicitly supplied but incomplete or
