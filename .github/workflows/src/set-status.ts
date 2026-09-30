@@ -8,13 +8,13 @@ import {
 } from "../../shared/src/github.ts";
 import { byDate, invert } from "../../shared/src/sort.ts";
 import { extractInputs } from "./context.ts";
-import type { Core } from "./github.ts";
+import type { Core, GitHubScriptArgs } from "./github.ts";
 
 // TODO: Add tests
 /* v8 ignore start */
 
 export default async function setStatus(
-  { github, context, core }: import("@actions/github-script").AsyncFunctionArguments,
+  { github, context, core }: GitHubScriptArgs,
   monitoredWorkflowName: string,
   requiredStatusName: string,
   overridingLabel: string,
@@ -96,29 +96,6 @@ export async function setStatusImpl({
         .filter((label) => label) // Filter out empty labels
     : [];
 
-  // Check if any overriding label is present
-  const foundOverridingLabel = overridingLabelsArray.find((label) => prLabels.includes(label));
-
-  if (foundOverridingLabel) {
-    const description = `Found label '${foundOverridingLabel}'`;
-    core.info(description);
-
-    const state = CheckConclusion.SUCCESS;
-    core.info(`Setting status to '${state}' for '${requiredStatusName}'`);
-
-    await github.rest.repos.createCommitStatus({
-      owner,
-      repo,
-      sha: head_sha,
-      state,
-      context: requiredStatusName,
-      description,
-      target_url,
-    });
-
-    return;
-  }
-
   const workflowRuns = await github.paginate(github.rest.actions.listWorkflowRunsForRepo, {
     owner,
     repo,
@@ -199,6 +176,30 @@ export async function setStatusImpl({
         }
       }
     }
+  }
+
+  // Check if any overriding label is present after resolving the analyzer run so the successful
+  // status still links to its report.
+  const foundOverridingLabel = overridingLabelsArray.find((label) => prLabels.includes(label));
+
+  if (foundOverridingLabel) {
+    const description = `Found label '${foundOverridingLabel}'`;
+    core.info(description);
+
+    const state = CheckConclusion.SUCCESS;
+    core.info(`Setting status to '${state}' for '${requiredStatusName}'`);
+
+    await github.rest.repos.createCommitStatus({
+      owner,
+      repo,
+      sha: head_sha,
+      state,
+      context: requiredStatusName,
+      description,
+      target_url,
+    });
+
+    return;
   }
 
   if (run?.status === CheckStatus.COMPLETED) {

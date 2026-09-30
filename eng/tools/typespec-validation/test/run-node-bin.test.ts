@@ -1,5 +1,5 @@
 import { execNodeBin } from "@azure-tools/specs-shared/exec";
-import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
+import { ConsoleLogger, defaultLogger } from "@azure-tools/specs-shared/logger";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { runNodeBin } from "../src/utils.ts";
 
@@ -13,24 +13,25 @@ describe("runNodeBin", () => {
     vi.resetAllMocks();
   });
 
-  it("preserves command arguments, cwd, logging, and output limits", async () => {
-    vi.mocked(execNodeBin).mockResolvedValue({ stdout: "output", stderr: "diagnostic" });
-    await expect(runNodeBin("prettier", ["prettier", "--version"], "project")).resolves.toEqual([
-      null,
-      "output",
-      "diagnostic",
-    ]);
-    expect(execNodeBin).toHaveBeenCalledWith("prettier", ["prettier", "--version"], {
-      cwd: "project",
-      logger: expect.any(ConsoleLogger) as unknown,
-      maxBuffer: 64 * 1024 * 1024,
-    });
-  });
+  it.each([new ConsoleLogger(false), new ConsoleLogger(true)])(
+    "preserves command output with logger=%j",
+    async (logger) => {
+      vi.mocked(execNodeBin).mockResolvedValue({ stdout: "output", stderr: "diagnostic" });
+      await expect(
+        runNodeBin("prettier", ["prettier", "--version"], logger, "project"),
+      ).resolves.toEqual([null, "output", "diagnostic"]);
+      expect(execNodeBin).toHaveBeenCalledWith("prettier", ["prettier", "--version"], {
+        cwd: "project",
+        logger,
+        maxBuffer: 64 * 1024 * 1024,
+      });
+    },
+  );
 
   it("returns command failures and their diagnostics to the rule", async () => {
     const error = Object.assign(new Error("failed"), { stdout: "output", stderr: "diagnostic" });
     vi.mocked(execNodeBin).mockRejectedValue(error);
-    await expect(runNodeBin("prettier", ["prettier"])).resolves.toEqual([
+    await expect(runNodeBin("prettier", ["prettier"], defaultLogger)).resolves.toEqual([
       error,
       "output",
       "diagnostic",
@@ -40,6 +41,6 @@ describe("runNodeBin", () => {
   it("does not hide dependency resolution failures", async () => {
     const error = new Error("Cannot find module");
     vi.mocked(execNodeBin).mockRejectedValue(error);
-    await expect(runNodeBin("missing", ["missing"])).rejects.toBe(error);
+    await expect(runNodeBin("missing", ["missing"], defaultLogger)).rejects.toBe(error);
   });
 });

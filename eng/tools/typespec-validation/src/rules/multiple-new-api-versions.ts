@@ -1,3 +1,4 @@
+import type { ILogger } from "@azure-tools/specs-shared/logger";
 import {
   generateTypeSpecMetadata,
   type TypeSpecMetadata,
@@ -55,7 +56,7 @@ export class MultipleNewApiVersionsRule implements Rule {
   readonly description = "Require SDK emitters to target the oldest of several new API versions";
   readonly suppressable = true;
 
-  async execute(folder: string): Promise<RuleResult> {
+  async execute(folder: string, logger: ILogger): Promise<RuleResult> {
     const resolved = await resolveNewApiVersions(folder);
     if (resolved.kind === "skip") return resolved.result;
 
@@ -64,7 +65,7 @@ export class MultipleNewApiVersionsRule implements Rule {
     }
 
     try {
-      const metadata = await generateTypeSpecMetadata(folder);
+      const metadata = await generateTypeSpecMetadata(folder, { logger });
       const result = evaluateMultipleNewApiVersions(metadata, resolved.newApiVersions);
       if (result.success) {
         return result;

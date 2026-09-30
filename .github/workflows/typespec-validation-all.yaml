@@ -78,3 +78,4 @@ jobs:
         run: >-
           node eng/tools/typespec-validation/cmd/tsv.js --all
           --shard=${{ matrix.shard }}/${{ matrix.total-shards }} --git-clean specification
+          ${{ runner.debug == '1' && '--verbose' || '' }}

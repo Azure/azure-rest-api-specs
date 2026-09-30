@@ -65,7 +65,7 @@ export async function execFile(
     maxBuffer = 16 * 1024 * 1024,
   } = options;
 
-  logger?.info(`execFile("${file}", ${JSON.stringify(args)})`);
+  logger?.debug(`execFile("${file}", ${JSON.stringify(args)})`);
 
   try {
     // execFile(file, args) is more secure than exec(cmd), since the latter is vulnerable to shell injection
@@ -185,7 +185,7 @@ export async function execPnpm(args: string[], options: ExecNpmOptions = {}): Pr
   const prefixArgs = prefix ? ["--prefix", prefix] : [];
   const allArgs = [...prefixArgs, ...args];
 
-  logger?.info(`execPnpm(${JSON.stringify(allArgs)})`);
+  logger?.debug(`execPnpm(${JSON.stringify(allArgs)})`);
 
   return await new Promise((resolve, reject) => {
     // cross-spawn resolves "pnpm" to the "pnpm.cmd" shim on Windows and spawns it
