@@ -1,5 +1,4 @@
-import { existsSync, realpathSync } from "node:fs";
-import { dirname, isAbsolute, relative, resolve, sep } from "node:path";
+import { sep } from "node:path";
 import type { GitHubScriptArgs, WebhookEvent } from "../github.ts";
 import { detectChangedSpecConfigFromChangedFiles } from "@azure-tools/spec-gen-sdk-runner";
 
