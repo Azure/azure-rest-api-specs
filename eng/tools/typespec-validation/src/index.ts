@@ -1,8 +1,8 @@
+import { parseArgsWithHelp, type CliOption } from "@azure-tools/specs-shared/cli";
 import { ConsoleLogger, type ILogger } from "@azure-tools/specs-shared/logger";
 import { type Suppression } from "@azure-tools/suppressions";
 import debug from "debug";
 import { stat } from "node:fs/promises";
-import { type ParseArgsConfig, parseArgs } from "node:util";
 import {
   exceptionDiagnostic,
   formatRuleStatus,
@@ -117,47 +117,90 @@ export async function runRules(
   return result;
 }
 
+const help = {
+  command: "pnpm tsv",
+  title: "TypeSpec Validation",
+  description: "Validate Azure TypeSpec projects.",
+  positionals: [
+    { name: "folder", description: "Project folder." },
+    {
+      name: "context-json",
+      optional: true,
+      description: "Optional JSON context for rules and suppressions in single-project mode.",
+    },
+  ],
+  notes: [
+    "Run from the repository root after installing dependencies with pnpm install.",
+    "Validation may update generated files and formatting. Changes are retained unless --git-clean is used.",
+    "Do not use --git-clean while other work is in progress.",
+  ],
+  examples: [
+    "specification/<service>/<project>",
+    "--all",
+    "--changed --base=origin/main --head=HEAD --dry-run",
+  ],
+  documentation: "https://aka.ms/azsdk/specs/typespec-validation",
+};
+
 export async function main() {
   const args = process.argv.slice(2);
   const options = {
     verbose: {
       type: "boolean",
       short: "v",
-    },
-    folder: {
-      type: "string",
-      short: "f",
-    },
-    context: {
-      type: "string",
-      short: "c",
+      description: "Include rule progress, debug details, and Git traces.",
     },
     all: {
       type: "boolean",
+      description: "Validate all projects under the discovery root.",
     },
     changed: {
       type: "boolean",
+      description:
+        "Validate projects affected by committed changes using the current checkout. " +
+        "--all and --changed cannot be combined.",
     },
     base: {
       type: "string",
+      valueLabel: "<commit>",
+      group: "Options for --changed",
+      description: "Base revision (default: HEAD^).",
     },
     head: {
       type: "string",
+      valueLabel: "<commit>",
+      group: "Options for --changed",
+      description: "Head revision (default: HEAD).",
     },
     "ignore-core-files": {
       type: "boolean",
-    },
-    "dry-run": {
-      type: "boolean",
+      group: "Options for --changed",
+      description: "Disable all-project fallback for core-file changes.",
     },
     shard: {
       type: "string",
+      valueLabel: "<index>/<count>",
+      group: "Options for --all",
+      description:
+        "Select a shard using one-based indices. Each shard requires a separate checkout.",
+    },
+    "dry-run": {
+      type: "boolean",
+      group: "Options for --all or --changed",
+      description:
+        "List selected projects and context without validation or cleanup; disables --git-clean.",
     },
     "git-clean": {
       type: "boolean",
+      group: "Options for --all or --changed",
+      description:
+        "Restore tracked files and remove untracked files and directories across the entire repository " +
+        "after each project. Requires a clean, disposable checkout; " +
+        "ignored files are retained.",
     },
-  } satisfies ParseArgsConfig["options"];
-  const parsedArgs = parseArgs({ args, options, allowPositionals: true });
+  } satisfies Record<string, CliOption>;
+  const parsedArgs = parseArgsWithHelp({ args, options, allowPositionals: true, help });
+  if (!parsedArgs) return;
 
   const { values } = parsedArgs;
   const logger = new ConsoleLogger(values.verbose);

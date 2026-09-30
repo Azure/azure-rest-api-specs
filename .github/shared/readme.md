@@ -57,6 +57,53 @@ Single source of truth for breaking-change and versioning approval label names a
   `readme`, `dataPlane`, `resourceManager`, `preview`, `stable`, `example`, `typespec`,
   `quickstartTemplate`, `swagger`, `scenario`.
 
+### `cli` — command-line arguments and help
+
+- `parseArgsWithHelp(config)` — Node's `parseArgs` with automatic `--help` / `-h` support.
+  Options include a required `description` and optional `valueLabel` and `group` for generated
+  help. Supply `help.command` and structured metadata rather than formatting a header or footer.
+- `CliOption`, `CliPositional`, `CliHelp`, `CliArgsConfig` — argument definitions, help metadata,
+  and parser configuration.
+
+The helper generates usage, positional-argument descriptions, options, notes, examples, and a
+documentation link. `help.title` and `help.description` introduce the tool. Define the
+positional arguments in `help.positionals`, with a `name`, `description`, and `optional: true`
+for optional arguments. Required positionals appear as `<name>`, optional ones as `[name]`.
+Descriptions and notes wrap automatically.
+
+`help.examples` contains argument strings; the helper prefixes each with `help.command`.
+Use `help.notes` for additional guidance and `help.documentation` for a documentation URL.
+These are help metadata only: Node still returns positionals as an array, and callers retain
+responsibility for validating required arguments and option combinations.
+
+The helper preserves Node's parser options, errors, and inferred result types. When help is
+requested it prints to stdout and returns `undefined`; the caller must return before doing any
+work. It does not call `process.exit`. The option names `help` and `h` and short alias `h` are
+reserved; conflicting definitions throw rather than silently overriding an option.
+
+```typescript
+import { parseArgsWithHelp } from "@azure-tools/specs-shared/cli";
+
+function main() {
+  const args = parseArgsWithHelp({
+    options: {
+      verbose: { type: "boolean", short: "v", description: "Show details." },
+      output: { type: "string", valueLabel: "<path>", description: "Output file." },
+    },
+    allowPositionals: true,
+    help: {
+      command: "example",
+      description: "Process input files.",
+      positionals: [{ name: "file", description: "Input file." }],
+      examples: ["input.json --verbose", "input.json --output result.json"],
+    },
+  });
+  if (!args) return;
+
+  // Run the command using args.values.
+}
+```
+
 ### `console` — console output
 
 - `log(...args)` — async wrapper around `console.log`.
