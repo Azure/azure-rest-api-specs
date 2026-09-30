@@ -1013,6 +1013,27 @@ model ShareFileRangeListSegment {
   nextMarker?: string;
 }
 
+/** A hard link to a file. */
+@added(Versions.v2027_03_07)
+@Xml.name("HardLink")
+model HardLink {
+  /** The name of the hard link. */
+  @Xml.name("FileName") fileName: StringEncoded;
+
+  /** The fileId of the parent directory of the hard link. */
+  @Xml.name("ParentId") parentId: string;
+}
+
+/** The list of hard links for a file. */
+@added(Versions.v2027_03_07)
+@Xml.name("HardLinks")
+model HardLinkList {
+  /** The hard links. */
+  @Xml.unwrapped
+  @Xml.name("HardLink")
+  hardLinks: HardLink[];
+}
+
 /**
  * The error response.
  *
@@ -1452,6 +1473,27 @@ alias FileContentRequestHeaders = {
   @header("x-ms-content-disposition") fileContentDisposition?: string;
 };
 
+/** The file's own content properties, x-ms-prefixed so they do not collide with the headers describing the response body. */
+alias FileMsContentResponseHeaders = {
+  /** The MIME content type of the file. */
+  @header("x-ms-content-type") fileContentType?: string;
+
+  ...FileContentLengthResponseHeader;
+  ...FileContentMD5ResponseHeader;
+
+  /** The content encodings that have been applied to the file. */
+  @header("x-ms-content-encoding") fileContentEncoding?: string;
+
+  /** The natural languages used by the file. */
+  @header("x-ms-content-language") fileContentLanguage?: string;
+
+  /** The cache control of the file. */
+  @header("x-ms-cache-control") fileCacheControl?: string;
+
+  /** The Content-Disposition of the file. */
+  @header("x-ms-content-disposition") fileContentDisposition?: string;
+};
+
 //
 // Share Paid Bursting Headers
 //
@@ -1670,6 +1712,14 @@ alias FileLastWrittenModeHeader = {
 alias LinkCountResponseHeader = {
   /** NFS only. The link count. */
   @header("x-ms-link-count") linkCount?: int32;
+};
+
+/** File name response header. */
+alias FileNameResponseHeader = {
+  /** The name of the file or directory. */
+  @added(Versions.v2027_03_07)
+  @header("x-ms-file-name")
+  fileName?: string;
 };
 
 /** Content-MD5 request header. */
