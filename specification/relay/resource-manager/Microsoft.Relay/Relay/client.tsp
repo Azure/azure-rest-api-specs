@@ -115,6 +115,14 @@ using Microsoft.Relay;
 // Back-compat: PrivateEndpoint.id was ResourceIdentifier in the old SDK
 @@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
 
+// Surface the cluster ARM ID as ResourceIdentifier in C#, consistent with the
+// equivalent Event Hubs namespace property (EHNamespaceProperties.clusterArmId)
+@@alternateType(
+  RelayNamespaceProperties.clusterArmId,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
+
 // Back-compat: property was named ConnectionState in the old SDK
 @@clientName(
   PrivateEndpointConnectionProperties.privateLinkServiceConnectionState,
