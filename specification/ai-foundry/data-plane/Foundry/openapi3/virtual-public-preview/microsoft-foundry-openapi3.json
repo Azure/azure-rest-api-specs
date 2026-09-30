@@ -6646,6 +6646,16 @@
             "explode": false
           },
           {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "description": "Filters bindings by lifecycle status.",
+            "schema": {
+              "$ref": "#/components/schemas/TelephonyBindingStatus"
+            },
+            "explode": false
+          },
+          {
             "name": "limit",
             "in": "query",
             "required": false,
@@ -43903,7 +43913,7 @@
             "$ref": "#/components/schemas/CreateTelephonyBindingRequest"
           }
         ],
-        "description": "The request to create an inbound SIP binding. Credentials are stored in the referenced Foundry connection.",
+        "description": "The request to create an inbound SIP binding. New SIP bindings are active. Credentials are stored in the referenced Foundry connection.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -96628,7 +96638,8 @@
         "required": [
           "id",
           "provider",
-          "connection_name"
+          "connection_name",
+          "status"
         ],
         "properties": {
           "id": {
@@ -96649,6 +96660,10 @@
             "type": "string",
             "maxLength": 128,
             "description": "The optional display label for the binding."
+          },
+          "status": {
+            "$ref": "#/components/schemas/TelephonyBindingStatus",
+            "description": "The lifecycle status."
           }
         },
         "discriminator": {
@@ -96683,6 +96698,7 @@
           "id",
           "provider",
           "connection_name",
+          "status",
           "etag"
         ],
         "properties": {
@@ -96705,6 +96721,10 @@
             "maxLength": 128,
             "description": "The optional display label for the binding."
           },
+          "status": {
+            "$ref": "#/components/schemas/TelephonyBindingStatus",
+            "description": "The lifecycle status."
+          },
           "etag": {
             "$ref": "#/components/schemas/Azure.Core.eTag",
             "description": "The entity tag to send in the `If-Match` header when updating or deleting this binding.",
@@ -96720,6 +96740,26 @@
           }
         },
         "description": "A telephony binding returned in a list, including its entity tag.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "VoiceAgents=V1Preview"
+          ]
+        }
+      },
+      "TelephonyBindingStatus": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "active",
+              "suspended"
+            ]
+          }
+        ],
+        "description": "The lifecycle status of a telephony binding.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -99166,6 +99206,10 @@
               }
             ],
             "description": "The inbound SIP access-control changes. Only valid for SIP bindings. Omitted fields retain current values; null clears all inbound access-control restrictions."
+          },
+          "status": {
+            "$ref": "#/components/schemas/TelephonyBindingStatus",
+            "description": "The new lifecycle status."
           },
           "label": {
             "anyOf": [

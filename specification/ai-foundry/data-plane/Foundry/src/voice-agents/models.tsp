@@ -465,6 +465,18 @@ union TelephonyProvider {
   sip: "sip",
 }
 
+@doc("The lifecycle status of a telephony binding.")
+@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
+union TelephonyBindingStatus {
+  string,
+
+  @doc("The binding accepts new inbound calls.")
+  active: "active",
+
+  @doc("The binding remains configured but rejects new inbound calls.")
+  suspended: "suspended",
+}
+
 @doc("The kind of telephony transfer destination. Known values are stable; additional values may be added over time.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 union TelephonyTransferDestinationKind {
@@ -592,6 +604,9 @@ model UpdateTelephonyBindingRequest {
   @doc("The inbound SIP access-control changes. Only valid for SIP bindings. Omitted fields retain current values; null clears all inbound access-control restrictions.")
   sip?: SipTelephonyConfigurationPatch | null;
 
+  @doc("The new lifecycle status.")
+  status?: TelephonyBindingStatus;
+
   @doc("The replacement display label. Omit it to preserve the current value; use null to clear it.")
   @maxLength(128)
   label?: string | null;
@@ -624,6 +639,9 @@ model TelephonyBinding {
   @doc("The optional display label for the binding.")
   @maxLength(128)
   label?: string;
+
+  @doc("The lifecycle status.")
+  status: TelephonyBindingStatus;
 }
 
 @doc("A Microsoft Teams Phone extensibility binding owned by a voice agent.")
@@ -675,6 +693,9 @@ model TelephonyBindingListItem {
   @doc("The optional display label for the binding.")
   @maxLength(128)
   label?: string;
+
+  @doc("The lifecycle status.")
+  status: TelephonyBindingStatus;
 
   @doc("The entity tag to send in the `If-Match` header when updating or deleting this binding.")
   @visibility(Lifecycle.Read)
@@ -745,7 +766,7 @@ model SipTelephonyConfigurationPatch {
   allowed_calling_numbers?: string[] | null;
 }
 
-@doc("The request to create an inbound SIP binding. Credentials are stored in the referenced Foundry connection.")
+@doc("The request to create an inbound SIP binding. New SIP bindings are active. Credentials are stored in the referenced Foundry connection.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @clientName("CreateSipTelephonyBindingContent", "csharp")
 model CreateSipTelephonyBindingRequest extends CreateTelephonyBindingRequest {
