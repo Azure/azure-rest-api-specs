@@ -1,27 +1,24 @@
 import { execNodeBin, isExecError } from "@azure-tools/specs-shared/exec";
-import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
+import type { ILogger } from "@azure-tools/specs-shared/logger";
 import {
   getSuppressions as getSuppressionsImpl,
   type Suppression,
 } from "@azure-tools/suppressions";
-import debug from "debug";
 import { access, readdir, readFile } from "fs/promises";
 import defaultPath, { basename, dirname, join, relative, type PlatformPath } from "path";
 import { simpleGit } from "simple-git";
 import { context } from "./index.ts";
 
-// Enable simple-git debug logging to improve console output
-debug.enable("simple-git");
-
 // Return command failures to the validation rule along with captured output.
 export async function runNodeBin(
   packageName: string,
   args: [string, ...string[]],
+  logger: ILogger,
   cwd?: string,
 ): Promise<[Error | null, string, string]> {
   try {
     const { stdout, stderr } = await execNodeBin(packageName, args, {
-      logger: new ConsoleLogger(),
+      logger,
       maxBuffer: 64 * 1024 * 1024,
       cwd,
     });
