@@ -98,7 +98,7 @@ export async function readFileAtCommit(
 
 export async function gitDiffTopSpecFolder(folder: string, logger: ILogger) {
   const git = simpleGit(folder);
-  const topSpecFolder = folder.replace(/(^.*specification\/[^/]*)(.*)/, "$1");
+  const topSpecFolder = normalizePath(folder).replace(/(^.*specification\/[^/]*)(.*)/, "$1");
   logger.debug(`Checking generated files in ${topSpecFolder}`);
   const gitStatus = await git.status(["--porcelain", topSpecFolder]);
   if (!gitStatus.isClean() && logger.isDebug()) {

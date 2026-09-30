@@ -73,7 +73,7 @@ async function run(...args: string[]): Promise<{ code: number; stdout: string; s
   }
 }
 
-it("keeps a successful single spec quiet, with successful output restored by --verbose", async () => {
+it("prints rule statuses and a summary, with compiler details restored by --verbose", async () => {
   await compiler(`if (process.argv[2] === "compile") {
     console.log("TypeSpec compiler v1.16.0\\n\\nCompilation completed successfully.\\n");
     process.stderr.write("- Compiling...\\n\\u2714 Compiling\\n");
@@ -82,7 +82,21 @@ it("keeps a successful single spec quiet, with successful output restored by --v
   }`);
   const quiet = await run(project);
   expect(quiet.code).toBe(0);
-  expect(quiet.stdout.trim().split("\n")).toHaveLength(1);
+  expect(quiet.stdout.trim().split("\n").slice(1)).toEqual([
+    "PASS FolderStructure",
+    "PASS NpmPrefix",
+    "PASS EmitAutorest",
+    "PASS ServiceYaml",
+    "PASS FlavorAzure",
+    "PASS LinterRuleset",
+    "SKIP ClientTspImport",
+    "PASS Compile",
+    "PASS Format",
+    "SUPPRESSED SdkTspConfigValidation",
+    "SKIP MultipleNewApiVersions",
+    "SKIP StaleApiVersionPin",
+    "Rules: 8 passed | 3 skipped | 1 suppressed",
+  ]);
   expect(quiet.stdout).toContain("Running TypeSpecValidation on folder:");
   expect(quiet.stderr).toBe("");
   const verbose = await run(project, "--verbose");
@@ -118,6 +132,11 @@ it.each([
       "error tsv/compile: TypeSpec compilation failed (exit code 1).",
     );
     expect(result.stderr).toContain("> 3 | invalid");
+    expect(stripVTControlCharacters(result.stdout)).toContain("FAIL Compile");
+    expect(stripVTControlCharacters(result.stdout)).toContain(
+      "Rules: 6 passed | 1 failed | 1 skipped | 4 not run",
+    );
+    expect(stripVTControlCharacters(result.stdout)).not.toContain("PASS Format");
   },
 );
 

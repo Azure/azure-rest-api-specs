@@ -67,7 +67,7 @@ it.each(["single", "all", "changed"])(
     });
     await expect(run(...args, "--verbose")).rejects.toMatchObject({
       code: 1,
-      stdout: expect.stringContaining("Executing rule: FolderStructure") as unknown,
+      stdout: expect.stringContaining("FAIL FolderStructure") as unknown,
       stderr: expect.stringContaining("simple-git") as unknown,
     });
   },

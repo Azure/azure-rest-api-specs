@@ -3,7 +3,14 @@ import { type Suppression } from "@azure-tools/suppressions";
 import debug from "debug";
 import { stat } from "node:fs/promises";
 import { type ParseArgsConfig, parseArgs } from "node:util";
-import { exceptionDiagnostic, reportDiagnostics } from "./diagnostics.ts";
+import {
+  exceptionDiagnostic,
+  formatRuleStatus,
+  formatRuleSummary,
+  reportDiagnostics,
+  type RuleCounts,
+  type RuleStatus,
+} from "./diagnostics.ts";
 import type { Diagnostic, RuleResult } from "./rule-result.ts";
 import { type Rule } from "./rule.ts";
 import { runAll, runChanged } from "./run-projects.ts";
@@ -43,10 +50,13 @@ export async function runRules(
 ): Promise<RunRulesResult> {
   const result: RunRulesResult = { success: true, suppressed: [], executed: [], failed: [] };
   const diagnostics: Diagnostic[] = [];
+  const counts: RuleCounts = { PASS: 0, FAIL: 0, WARN: 0, SKIP: 0, SUPPRESSED: 0 };
+  const reportStatus = (name: string, status: RuleStatus) => {
+    counts[status]++;
+    logger.info(formatRuleStatus(name, status));
+  };
 
   for (const rule of rules) {
-    logger.debug("Executing rule: " + rule.name);
-
     if (rule.suppressable) {
       const ruleSuppressions = suppressions.filter(
         (s) => s.rules?.includes(rule.name) && (!s.subRules || s.subRules.length === 0),
@@ -54,6 +64,7 @@ export async function runRules(
       if (ruleSuppressions.length > 0) {
         logger.debug(`  Suppressed: ${ruleSuppressions[0].reason}`);
         result.suppressed.push(rule.name);
+        reportStatus(rule.name, "SUPPRESSED");
         continue;
       }
     }
@@ -69,6 +80,18 @@ export async function runRules(
     diagnostics.push(...(ruleResult.diagnostics ?? []));
     if (ruleResult.skipped) logger.debug(`  Skipped: ${ruleResult.skipped}`);
     if (ruleResult.suppressed) logger.debug(`  Suppressed: ${ruleResult.suppressed}`);
+    reportStatus(
+      rule.name,
+      !ruleResult.success
+        ? "FAIL"
+        : ruleResult.suppressed !== undefined
+          ? "SUPPRESSED"
+          : ruleResult.diagnostics?.some((diagnostic) => diagnostic.severity === "warning")
+            ? "WARN"
+            : ruleResult.skipped !== undefined
+              ? "SKIP"
+              : "PASS",
+    );
     if (!ruleResult.success) {
       result.success = false;
       result.failed.push(rule.name);
@@ -88,6 +111,8 @@ export async function runRules(
   }
 
   reportDiagnostics(diagnostics, logger);
+  const completed = Object.values(counts).reduce((total, count) => total + count, 0);
+  logger.info(formatRuleSummary(counts, rules.length - completed));
   return result;
 }
 

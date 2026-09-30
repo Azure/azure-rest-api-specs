@@ -10,6 +10,42 @@ export function supportsColor(env = process.env, isTTY = process.stderr.isTTY): 
   return (Boolean(isTTY) && env.TERM !== "dumb") || env.GITHUB_ACTIONS === "true";
 }
 
+export type RuleStatus = "PASS" | "FAIL" | "WARN" | "SKIP" | "SUPPRESSED";
+export type RuleCounts = Record<RuleStatus, number>;
+
+export function formatRuleStatus(
+  name: string,
+  status: RuleStatus,
+  color = supportsColor(process.env, process.stdout.isTTY),
+): string {
+  const c = pc.createColors(color);
+  const label =
+    status === "FAIL"
+      ? c.red(status)
+      : status === "WARN"
+        ? c.yellow(status)
+        : status === "PASS"
+          ? c.green(status)
+          : c.dim(status);
+  return `${label} ${name}`;
+}
+
+export function formatRuleSummary(
+  counts: RuleCounts,
+  notRun: number,
+  color = supportsColor(process.env, process.stdout.isTTY),
+): string {
+  const c = pc.createColors(color);
+  const parts: string[] = [];
+  if (counts.PASS) parts.push(c.green(`${counts.PASS} passed`));
+  if (counts.FAIL) parts.push(c.red(`${counts.FAIL} failed`));
+  if (counts.WARN) parts.push(c.yellow(`${counts.WARN} with warnings`));
+  if (counts.SKIP) parts.push(`${counts.SKIP} skipped`);
+  if (counts.SUPPRESSED) parts.push(`${counts.SUPPRESSED} suppressed`);
+  if (notRun) parts.push(`${notRun} not run`);
+  return `Rules: ${parts.join(" | ") || "0 run"}`;
+}
+
 export function formatDiagnostic(
   diagnostic: Diagnostic,
   { color = supportsColor(), cwd = process.cwd() }: { color?: boolean; cwd?: string } = {},

@@ -4,6 +4,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   exceptionDiagnostic,
   formatDiagnostic,
+  formatRuleStatus,
+  formatRuleSummary,
   reportDiagnostics,
   supportsColor,
 } from "../src/diagnostics.ts";
@@ -26,6 +28,19 @@ const diagnostic: Diagnostic = {
 };
 
 describe("diagnostic formatting", () => {
+  it("renders concise colored rule statuses and an honest incomplete-run summary", () => {
+    expect(formatRuleStatus("Compile", "PASS", false)).toBe("PASS Compile");
+    expect(formatRuleStatus("Compile", "PASS", true)).toBe("\x1b[32mPASS\x1b[39m Compile");
+    expect(formatRuleStatus("Compile", "FAIL", true)).toBe("\x1b[31mFAIL\x1b[39m Compile");
+    expect(formatRuleStatus("Compile", "WARN", true)).toBe("\x1b[33mWARN\x1b[39m Compile");
+    expect(formatRuleSummary({ PASS: 2, FAIL: 1, WARN: 0, SKIP: 1, SUPPRESSED: 1 }, 3, false)).toBe(
+      "Rules: 2 passed | 1 failed | 1 skipped | 1 suppressed | 3 not run",
+    );
+    expect(formatRuleSummary({ PASS: 0, FAIL: 0, WARN: 0, SKIP: 0, SUPPRESSED: 0 }, 0, false)).toBe(
+      "Rules: 0 run",
+    );
+  });
+
   it("uses TypeSpec-style locations, severity, codes and a real source excerpt", () => {
     expect(formatDiagnostic(diagnostic, { cwd: "/repo" })).toBe(
       "service/tspconfig.yaml:2:3 - error tsv/invalid-option: Invalid option.\n" +
