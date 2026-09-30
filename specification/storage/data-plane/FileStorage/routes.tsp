@@ -183,6 +183,7 @@ interface Share {
       ...ShareProvisionedIopsOptionalHeader;
       ...ShareProvisionedBandwidthOptionalHeader;
       ...EnableSmbDirectoryLeaseHeader;
+      ...ChangeFeedRequestHeaders;
     },
     {
       @statusCode statusCode: 201;
@@ -285,6 +286,8 @@ interface Share {
       @header("x-ms-enable-smb-directory-lease")
       @clientName("EnableSMBDirectoryLease", "go")
       enableSmbDirectoryLease?: boolean;
+
+      ...ChangeFeedResponseHeaders;
     }
   >;
 
@@ -481,6 +484,7 @@ interface Share {
       ...ShareProvisionedIopsOptionalHeader;
       ...ShareProvisionedBandwidthOptionalHeader;
       ...EnableSmbDirectoryLeaseHeader;
+      ...ChangeFeedRequestHeaders;
     },
     {
       ...EtagResponseHeader;
