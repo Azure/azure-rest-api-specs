@@ -39960,7 +39960,7 @@
           "test_cases": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/UserConversationSimulationTestCase"
+              "$ref": "#/components/schemas/AgentOptimizationUserConversationSimulationTestCase"
             },
             "minItems": 1,
             "maxItems": 2000,
@@ -39973,6 +39973,33 @@
           }
         ],
         "description": "Supplies Evals user-conversation simulation test cases directly in the optimization request."
+      },
+      "AgentOptimizationUserConversationSimulationTestCase": {
+        "type": "object",
+        "required": [
+          "test_case_description"
+        ],
+        "properties": {
+          "test_case_id": {
+            "type": "string",
+            "description": "Identifier for the test case. When omitted, the service generates a random identifier."
+          },
+          "test_case_category": {
+            "type": "string",
+            "description": "Category used to group related test cases. When omitted, the service leaves the category null."
+          },
+          "test_case_description": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 2500,
+            "description": "Scenario, simulated user goal, and behavioral constraints that guide the conversation. The length must be from 1 through 2,500 characters."
+          },
+          "simulation_configuration": {
+            "$ref": "#/components/schemas/UserConversationSimulationConfiguration",
+            "description": "Configuration for conversations generated from this test case. Each specified property overrides the corresponding property in `default_simulation_configuration`."
+          }
+        },
+        "description": "Defines one optimization conversation scenario. Simulation configuration properties specified here override the corresponding data-source defaults."
       },
       "AgentReference": {
         "type": "object",

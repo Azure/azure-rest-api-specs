@@ -121,6 +121,23 @@ model AgentOptimizationTargetCompletionInlineDataSource
   test_cases: AgentOptimizationTargetCompletionTestCase[];
 }
 
+/** Defines one optimization conversation scenario. Simulation configuration properties specified here override the corresponding data-source defaults. */
+model AgentOptimizationUserConversationSimulationTestCase {
+  /** Identifier for the test case. When omitted, the service generates a random identifier. */
+  test_case_id?: string;
+
+  /** Category used to group related test cases. When omitted, the service leaves the category null. */
+  test_case_category?: string;
+
+  /** Scenario, simulated user goal, and behavioral constraints that guide the conversation. The length must be from 1 through 2,500 characters. */
+  @minLength(1)
+  @maxLength(2500)
+  test_case_description: string;
+
+  /** Configuration for conversations generated from this test case. Each specified property overrides the corresponding property in `default_simulation_configuration`. */
+  simulation_configuration?: UserConversationSimulationConfiguration;
+}
+
 /** Supplies Evals user-conversation simulation test cases directly in the optimization request. */
 model AgentOptimizationUserConversationSimulationInlineDataSource
   extends AgentOptimizationUserConversationSimulationDataSource {
@@ -130,7 +147,7 @@ model AgentOptimizationUserConversationSimulationInlineDataSource
   @doc("Conversation test scenarios.")
   @minItems(1)
   @maxItems(2000)
-  test_cases: UserConversationSimulationTestCase[];
+  test_cases: AgentOptimizationUserConversationSimulationTestCase[];
 }
 
 /** References an explicitly versioned registered Foundry dataset for target-completion evaluation. */
