@@ -53,6 +53,17 @@ using Azure.AI.Projects;
 );
 
 @@clientName(ModelSamplingParams, "ModelSamplingParameters", "java");
+@@clientName(
+  UserConversationSimulationConfiguration.max_num_turns,
+  "maximumNumberOfTurns",
+  "java"
+);
+@@clientName(
+  UserConversationSimulationConfiguration.desired_num_turns,
+  "desiredNumberOfTurns",
+  "java"
+);
+@@alternateType(ModelSamplingParams.max_completion_tokens, int64, "java");
 
 // Azure Core's HTTP pipeline cannot expose the upgraded WebSocket channel.
 // Java uses a handwritten Reactor Netty transport while TypeSpec generates the event models.
