@@ -1086,7 +1086,7 @@ model GPUProfile {
 @added(Versions.v2026_08_01)
 model NvidiaGPUProfile {
   /**
-   * The Fully Managed GPU experience installs and manages the GPU driver, Kubernetes device plugin, and DCGM metrics exporter. For more details, see https://aka.ms/aks/managed-gpu.
+   * The Managed GPU experience installs additional components, such as the Data Center GPU Manager (DCGM) metrics for monitoring, on top of the GPU driver for you. For more details of what is installed, check out aka.ms/aks/managed-gpu.
    */
   managementMode?: ManagementMode;
 

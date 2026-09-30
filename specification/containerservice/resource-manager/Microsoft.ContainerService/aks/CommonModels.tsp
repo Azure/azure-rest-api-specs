@@ -567,19 +567,19 @@ union DriverType {
 }
 
 /**
- * The Managed GPU experience installs additional components, such as the Data Center GPU Manager (DCGM) metrics for monitoring, on top of the GPU driver for you. For more details of what is installed, see https://aka.ms/aks/managed-gpu.
+ * The Managed GPU experience installs additional components, such as the Data Center GPU Manager (DCGM) metrics for monitoring, on top of the GPU driver for you. For more details of what is installed, check out aka.ms/aks/managed-gpu.
  */
 @added(Versions.v2026_08_01)
 union ManagementMode {
   string,
 
   /**
-   * Managed GPU experience is disabled for NVIDIA GPUs. AKS installs only the GPU driver.
+   * Managed GPU experience is disabled for NVIDIA GPUs.
    */
   Unmanaged: "Unmanaged",
 
   /**
-   * Managed GPU experience is enabled for NVIDIA GPUs. AKS installs and manages the GPU driver, Kubernetes device plugin, and DCGM metrics exporter.
+   * Managed GPU experience is enabled for NVIDIA GPUs.
    */
   Managed: "Managed",
 }
