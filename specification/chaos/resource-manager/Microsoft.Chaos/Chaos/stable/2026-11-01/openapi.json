@@ -5041,6 +5041,19 @@
             "description": "A type definition that refers the id to an Azure Resource Manager resource."
           },
           "readOnly": true
+        },
+        "location": {
+          "$ref": "#/definitions/Azure.Core.azureLocation",
+          "description": "The Azure region of the discovered resource.",
+          "readOnly": true
+        },
+        "zones": {
+          "type": "array",
+          "description": "The availability zones of the discovered resource.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       },
       "required": [

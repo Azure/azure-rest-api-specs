@@ -75,6 +75,20 @@ model DiscoveredResourceProperties {
   @added(Microsoft.Chaos.Versions.v2026_11_01)
   @visibility(Lifecycle.Read)
   subscribers?: Azure.Core.armResourceIdentifier[];
+
+  /**
+   * The Azure region of the discovered resource.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  @visibility(Lifecycle.Read)
+  location?: azureLocation;
+
+  /**
+   * The availability zones of the discovered resource.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  @visibility(Lifecycle.Read)
+  zones?: string[];
 }
 
 /**
