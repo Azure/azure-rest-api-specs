@@ -1,5 +1,6 @@
 import { execNodeBin, isExecError } from "@azure-tools/specs-shared/exec";
 import type { ILogger } from "@azure-tools/specs-shared/logger";
+import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 import {
   getSuppressions as getSuppressionsImpl,
   type Suppression,
@@ -111,8 +112,7 @@ export async function gitDiffTopSpecFolder(folder: string, logger: ILogger) {
     await git.diff([color, "--", topSpecFolder]),
   ];
   if (gitStatus.not_added.length > 0) {
-    const repositoryRoot = (await git.revparse(["--show-toplevel"])).trim();
-    const rootGit = simpleGit(repositoryRoot);
+    const rootGit = simpleGit(await getRootFolder(folder));
     for (const file of gitStatus.not_added) {
       diffs.push(await rootGit.diff([color, "--no-index", "--", "/dev/null", file]));
     }

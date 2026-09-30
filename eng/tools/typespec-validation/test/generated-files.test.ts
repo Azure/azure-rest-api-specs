@@ -1,4 +1,4 @@
-import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
+import { ConsoleLogger, defaultLogger } from "@azure-tools/specs-shared/logger";
 import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -16,6 +16,7 @@ beforeEach(async () => {
   await mkdir(folder, { recursive: true });
   await mkdir(join(root, "specification/service/Sibling"));
   await writeFile(join(folder, "main.tsp"), "original");
+  await writeFile(join(root, "unrelated.txt"), "original");
   await simpleGit(root)
     .init()
     .addConfig("user.name", "Test")
@@ -25,13 +26,17 @@ beforeEach(async () => {
     .commit("Fixture");
 });
 afterEach(async () => {
+  vi.restoreAllMocks();
+  vi.unstubAllEnvs();
   await rm(root, { recursive: true, force: true });
 });
 
 it.each([false, true])(
-  "checks the entire service and returns diffs with verbose=%s",
+  "returns only the service's staged, unstaged and untracked diffs with verbose=%s",
   async (verbose) => {
     await writeFile(join(folder, "main.tsp"), "modified");
+    await writeFile(join(folder, "staged.json"), "staged");
+    await simpleGit(root).add("specification/service/Project/staged.json");
     await writeFile(join(root, "specification/service/Sibling/output.json"), "{}");
     await writeFile(join(root, "unrelated.txt"), "outside the service");
     const logger = new ConsoleLogger(verbose);
@@ -40,14 +45,18 @@ it.each([false, true])(
     expect(result.success).toBe(false);
     expect(result.files.sort()).toEqual([
       "specification/service/Project/main.tsp",
+      "specification/service/Project/staged.json",
       "specification/service/Sibling/output.json",
     ]);
     const diff = stripVTControlCharacters(result.diff ?? "");
     expect(diff).toContain("diff --git");
     expect(diff).toContain("+modified");
+    expect(diff).toContain("+staged");
     expect(diff).toContain("+{}");
+    expect(diff).not.toContain("unrelated.txt");
     const traces = debug.mock.calls.flat().join("\n");
     expect(traces).not.toContain("diff --git");
+    expect(traces).not.toContain("unrelated.txt");
     expect(traces.includes('"modified":')).toBe(verbose);
     expect(await readFile(join(folder, "main.tsp"), "utf8")).toBe("modified");
   },
@@ -59,4 +68,18 @@ it("does not fail on changes outside the service or dump a clean repository", as
   const debug = vi.spyOn(logger, "debug").mockImplementation(() => {});
   expect(await gitDiffTopSpecFolder(folder, logger)).toEqual({ success: true, files: [] });
   expect(debug).toHaveBeenCalledTimes(1);
+});
+
+it.each([false, true])("applies TSV's color setting to Git output (color=%s)", async (color) => {
+  vi.stubEnv("NO_COLOR", color ? undefined : "1");
+  vi.stubEnv("FORCE_COLOR", "1");
+  await simpleGit(root).addConfig("color.ui", "always");
+  await writeFile(join(folder, "main.tsp"), "modified");
+  await writeFile(join(root, "specification/service/Sibling/output.json"), "{}");
+
+  const result = await gitDiffTopSpecFolder(folder, defaultLogger);
+  const diff = result.diff ?? "";
+  expect(stripVTControlCharacters(diff)).toContain("+modified");
+  expect(stripVTControlCharacters(diff)).toContain("+{}");
+  expect(diff.includes("\x1b")).toBe(color);
 });

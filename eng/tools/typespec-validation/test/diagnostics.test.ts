@@ -136,23 +136,6 @@ describe("diagnostic formatting", () => {
     );
   });
 
-  it.each([
-    [{ NO_COLOR: undefined, FORCE_COLOR: "1" }, true],
-    [{ NO_COLOR: "", FORCE_COLOR: "1" }, false],
-    [{ NO_COLOR: undefined, FORCE_COLOR: "0" }, false],
-  ])("respects color controls for affected files with env=%j", (env, colored) => {
-    for (const [name, value] of Object.entries(env)) vi.stubEnv(name, value);
-    const output = formatDiagnostic({
-      severity: "error",
-      code: "generated-files-changed",
-      message: "Files changed.",
-      details: indent(filePath("service/generated.json")),
-    });
-    expect(output.includes("\x1b[36mservice/generated.json\x1b[39m")).toBe(colored);
-    expect(stripVTControlCharacters(output)).toContain("\n  service/generated.json");
-    if (!colored) expect(output).not.toContain("\x1b");
-  });
-
   it("shows a diff after the file list, preserving Git colors and separating fix guidance", () => {
     const diff = "diff --git a/file.json b/file.json\n\x1b[31m-old\x1b[m\n\x1b[32m+new\x1b[m\n";
     const changedFiles: Diagnostic = {
