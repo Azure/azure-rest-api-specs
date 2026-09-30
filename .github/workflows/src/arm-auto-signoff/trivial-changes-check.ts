@@ -2,7 +2,7 @@ import type { Core } from "../github.ts";
 // For now, treat all paths as posix, since this is the format returned from git commands
 import debug from "debug";
 import { simpleGit } from "simple-git";
-import { inspect } from "util";
+import { inspect } from "node:util";
 import {
   example,
   getChangedFilesStatuses,

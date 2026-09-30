@@ -1,5 +1,5 @@
 import type { GitHub } from "./github.ts";
-import { inspect } from "util";
+import { inspect } from "node:util";
 
 /**
  * Retrieves the PR number associated with a specific commit SHA
