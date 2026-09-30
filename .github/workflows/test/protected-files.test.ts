@@ -75,6 +75,11 @@ describe("Protected Files", () => {
     "PACKAGE.JSON",
     ".GITHUB/WORKFLOWS/test.yaml",
     ".github/workflows/with spaces.yaml",
+    ".github/.hidden/config.yaml",
+    ".github/workflows/.hidden.yaml",
+    ".vscode/.hidden",
+    "eng/.hidden/nested/config.json",
+    ".github/skills",
   ])("fails for protected path %s", async (file) => {
     const { core, run } = setup();
     vi.mocked(getChangedFiles).mockResolvedValue([file]);
@@ -90,6 +95,9 @@ describe("Protected Files", () => {
       [".github/CODEOWNERS"],
       [".github/skills/custom/SKILL.md"],
       [".github/skills/custom/nested/file.ts"],
+      [".github/skills/custom"],
+      [".github/skills/.custom/.hidden"],
+      [".github/skills/custom/.hidden/config.json"],
       [".github/skills/custom/azsdk-common-example/SKILL.md"],
       [".github/skills/azsdk-custom/SKILL.md"],
       [".GITHUB/codeowners", ".GITHUB/SKILLS/CUSTOM/skill.md"],
@@ -131,6 +139,9 @@ describe("Protected Files", () => {
     "eng/common",
     ".github/skills/azsdk-common-example/SKILL.md",
     ".github/skills/azsdk-common-example",
+    ".github/skills/azsdk-common-example/.hidden/config.json",
+    ".GITHUB/SKILLS/AZSDK-COMMON-EXAMPLE/SKILL.md",
+    "eng/common/.hidden",
   ])("directs synced changes in %s to their source repository", async (file) => {
     const { core, run } = setup();
     vi.mocked(getChangedFiles).mockResolvedValue([file]);

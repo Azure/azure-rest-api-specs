@@ -1,19 +1,34 @@
+import { minimatch } from "minimatch";
 import { getChangedFiles } from "../../shared/src/changed-files.ts";
 import { CoreLogger } from "./core-logger.ts";
 import type { GitHubScriptArgs, WebhookEvent } from "./github.ts";
 
 const ALLOWED_AUTHORS = new Set(["azure-sdk", "azure-sdk-automation[bot]"]);
-const PROTECTED_FILES = new Set([
+const PROTECTED_PATHS = [
   ".gitignore",
   "cspell.json",
   "cspell.yaml",
   "package.json",
   "pnpm-lock.yaml",
   "pnpm-workspace.yaml",
-]);
-const PROTECTED_DIRECTORIES = [".github/", ".vscode/", "eng/"];
-const EXCLUDED_SKILLS = /^\.github\/skills\/(?!azsdk-common-).+/i;
-const SYNCED_PATHS = [/^\.github\/skills\/azsdk-common-[^/]+(?:\/|$)/i, /^eng\/common(?:\/|$)/i];
+  ".github/**",
+  ".vscode/**",
+  "eng/**",
+];
+const EXCLUDED_PATHS = [".github/CODEOWNERS", ".github/skills/*", ".github/skills/*/**"];
+const SYNCED_PATHS = [
+  ".github/skills/azsdk-common-*",
+  ".github/skills/azsdk-common-*/**",
+  "eng/common",
+  "eng/common/**",
+];
+
+function matchesAny(file: string, patterns: string[]): boolean {
+  // Match hidden files and preserve PowerShell's case-insensitive behavior.
+  return patterns.some((pattern) =>
+    minimatch(file, pattern, { dot: true, nocase: true, platform: "linux" }),
+  );
+}
 
 export async function checkProtectedFiles({
   context,
@@ -38,16 +53,11 @@ export async function checkProtectedFiles({
     gitOptions: ["--no-renames"],
     logger: new CoreLogger(core),
   });
-  const protectedFiles = changedFiles.filter((file) => {
-    // Preserve the case-insensitive matching of the original PowerShell check.
-    const path = file.toLowerCase();
-    return (
-      (PROTECTED_FILES.has(path) ||
-        PROTECTED_DIRECTORIES.some((directory) => path.startsWith(directory))) &&
-      path !== ".github/codeowners" &&
-      !EXCLUDED_SKILLS.test(file)
-    );
-  });
+  const protectedFiles = changedFiles.filter(
+    (file) =>
+      matchesAny(file, SYNCED_PATHS) ||
+      (matchesAny(file, PROTECTED_PATHS) && !matchesAny(file, EXCLUDED_PATHS)),
+  );
 
   if (protectedFiles.length === 0) {
     core.info("No changes to protected files.");
@@ -55,7 +65,7 @@ export async function checkProtectedFiles({
   }
 
   for (const file of protectedFiles) {
-    const message = SYNCED_PATHS.some((pattern) => pattern.test(file))
+    const message = matchesAny(file, SYNCED_PATHS)
       ? `File '${file}' is synced from Azure/azure-sdk-tools. Remove this change from your PR and make the change in Azure/azure-sdk-tools instead.`
       : `File '${file}' is repository-managed and outside the scope of a specification contribution. Remove this change from your PR. If a tooling change is needed, open an issue for the repository maintainers.`;
     core.error(message, { file });
