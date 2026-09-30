@@ -2,7 +2,6 @@ import { appendFile, readdir, readFile } from "node:fs/promises";
 import { relative, resolve, sep } from "node:path";
 import { getChangedFiles } from "@azure-tools/specs-shared/changed-files";
 import { getSuppressions } from "@azure-tools/suppressions";
-import { parse, printParseErrorCode, type ParseError } from "jsonc-parser";
 
 type SpecType = "data-plane" | "resource-manager";
 
@@ -213,20 +212,7 @@ async function checkFiles(options: Options): Promise<{ brownfield: boolean; exit
 
     let jsonContent: unknown;
     try {
-      const errors: ParseError[] = [];
-      const parsed: unknown = parse(
-        (await readFile(fullPath, "utf8")).replace(/^\uFEFF/, ""),
-        errors,
-        {
-          allowTrailingComma: true,
-        },
-      );
-      if (errors.length > 0) {
-        throw new SyntaxError(
-          `${printParseErrorCode(errors[0].error)} at offset ${errors[0].offset}`,
-        );
-      }
-      jsonContent = parsed;
+      jsonContent = JSON.parse((await readFile(fullPath, "utf8")).replace(/^\uFEFF/, ""));
     } catch (error) {
       logWarning("  OpenAPI cannot be parsed as JSON, so assuming not generated from TypeSpec");
       logWarning(`    ${error instanceof Error ? error.message : String(error)}`);

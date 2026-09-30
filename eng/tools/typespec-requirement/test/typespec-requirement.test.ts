@@ -158,18 +158,11 @@ test.concurrent("Finds tspconfig.yaml regardless of casing", async ({ expect }) 
   expect(exitCode).toBe(0);
 });
 
-test.concurrent.each([
-  { label: "UTF-8 BOM", content: '\uFEFF{"info":{"x-typespec-generated":true}}' },
-  {
-    label: "comments",
-    content: '{/* generated */"info":{// marker\n"x-typespec-generated":true}}',
-  },
-  { label: "trailing commas", content: '{"info":{"x-typespec-generated":true,},}' },
-])("Recognizes generated JSON with $label", async ({ content }) => {
+test.concurrent("Recognizes generated JSON with a UTF-8 BOM", async ({ expect }) => {
   const apiVersion = "generated/data-plane/Generated/stable/2026-01-01";
   const { stdout, exitCode } = await checkFixtures(
     {
-      [`${apiVersion}/openapi.json`]: content,
+      [`${apiVersion}/openapi.json`]: '\uFEFF{"info":{"x-typespec-generated":true}}',
       "generated/Generated/tspconfig.yaml": "{}",
     },
     {
@@ -182,9 +175,7 @@ test.concurrent.each([
   expect(exitCode).toBe(0);
 });
 
-test.concurrent("Rejects malformed JSON even if the generated marker can be recovered", async ({
-  expect,
-}) => {
+test.concurrent("Treats malformed JSON as handwritten", async ({ expect }) => {
   const apiVersion = "generated/data-plane/Generated/stable/2026-01-01";
   const { stdout, exitCode } = await checkFixtures(
     {
