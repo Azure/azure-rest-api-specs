@@ -1,0 +1,1206 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.DigitalAssets",
+    "version": "2025-09-01-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "ZkpRollups"
+    },
+    {
+      "name": "Partitions"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.DigitalAssets/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListOperations": {
+            "$ref": "../../examples/2025-09-01-preview/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DigitalAssets/zkpRollups": {
+      "get": {
+        "operationId": "ZkpRollups_ListBySubscription",
+        "tags": [
+          "ZkpRollups"
+        ],
+        "description": "List ZkpRollup resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ZkpRollupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListZkpRollupsBySubscription": {
+            "$ref": "../../examples/2025-09-01-preview/ZkpRollups_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalAssets/zkpRollups": {
+      "get": {
+        "operationId": "ZkpRollups_ListByResourceGroup",
+        "tags": [
+          "ZkpRollups"
+        ],
+        "description": "List ZkpRollup resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ZkpRollupListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListZkpRollupsByResourceGroup": {
+            "$ref": "../../examples/2025-09-01-preview/ZkpRollups_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalAssets/zkpRollups/{zkpRollupName}": {
+      "get": {
+        "operationId": "ZkpRollups_Get",
+        "tags": [
+          "ZkpRollups"
+        ],
+        "description": "Get a ZkpRollup",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "zkpRollupName",
+            "in": "path",
+            "description": "The name of the ZKP rollup resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ZkpRollup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetZkpRollup": {
+            "$ref": "../../examples/2025-09-01-preview/ZkpRollups_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ZkpRollups_CreateOrUpdate",
+        "tags": [
+          "ZkpRollups"
+        ],
+        "description": "Create a ZkpRollup",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "zkpRollupName",
+            "in": "path",
+            "description": "The name of the ZKP rollup resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ZkpRollup"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ZkpRollup' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ZkpRollup"
+            }
+          },
+          "201": {
+            "description": "Resource 'ZkpRollup' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ZkpRollup"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateZkpRollup": {
+            "$ref": "../../examples/2025-09-01-preview/ZkpRollups_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ZkpRollups_Update",
+        "tags": [
+          "ZkpRollups"
+        ],
+        "description": "Update a ZkpRollup",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "zkpRollupName",
+            "in": "path",
+            "description": "The name of the ZKP rollup resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ZkpRollupUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ZkpRollup"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdateZkpRollup": {
+            "$ref": "../../examples/2025-09-01-preview/ZkpRollups_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ZkpRollups_Delete",
+        "tags": [
+          "ZkpRollups"
+        ],
+        "description": "Delete a ZkpRollup",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "zkpRollupName",
+            "in": "path",
+            "description": "The name of the ZKP rollup resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteZkpRollup": {
+            "$ref": "../../examples/2025-09-01-preview/ZkpRollups_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalAssets/zkpRollups/{zkpRollupName}/partitions": {
+      "get": {
+        "operationId": "Partitions_ListByParent",
+        "tags": [
+          "Partitions"
+        ],
+        "description": "List Partition resources by ZkpRollup",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "zkpRollupName",
+            "in": "path",
+            "description": "The name of the ZKP rollup resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PartitionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListPartitionsByParent": {
+            "$ref": "../../examples/2025-09-01-preview/Partitions_ListByParent.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DigitalAssets/zkpRollups/{zkpRollupName}/partitions/{partitionName}": {
+      "get": {
+        "operationId": "Partitions_Get",
+        "tags": [
+          "Partitions"
+        ],
+        "description": "Get a Partition",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "zkpRollupName",
+            "in": "path",
+            "description": "The name of the ZKP rollup resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "partitionName",
+            "in": "path",
+            "description": "The name of the partition.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Partition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetPartition": {
+            "$ref": "../../examples/2025-09-01-preview/Partitions_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Partitions_CreateOrUpdate",
+        "tags": [
+          "Partitions"
+        ],
+        "description": "Create a Partition",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "zkpRollupName",
+            "in": "path",
+            "description": "The name of the ZKP rollup resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "partitionName",
+            "in": "path",
+            "description": "The name of the partition.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Partition"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Partition' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Partition"
+            }
+          },
+          "201": {
+            "description": "Resource 'Partition' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Partition"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreatePartition": {
+            "$ref": "../../examples/2025-09-01-preview/Partitions_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Partitions_Update",
+        "tags": [
+          "Partitions"
+        ],
+        "description": "Update a Partition",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "zkpRollupName",
+            "in": "path",
+            "description": "The name of the ZKP rollup resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "partitionName",
+            "in": "path",
+            "description": "The name of the partition.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PartitionTagsUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Partition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdatePartition": {
+            "$ref": "../../examples/2025-09-01-preview/Partitions_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Partitions_Delete",
+        "tags": [
+          "Partitions"
+        ],
+        "description": "Delete a Partition",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "zkpRollupName",
+            "in": "path",
+            "description": "The name of the ZKP rollup resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "partitionName",
+            "in": "path",
+            "description": "The name of the partition.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeletePartition": {
+            "$ref": "../../examples/2025-09-01-preview/Partitions_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "EvmContractAddress": {
+      "type": "string",
+      "description": "An EVM contract address in canonical 0x-prefixed hex form.",
+      "pattern": "^0x[a-fA-F0-9]{40}$"
+    },
+    "KeyVaultPatchReference": {
+      "type": "object",
+      "description": "Key Vault reference properties that may be updated via PATCH.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource ID of the Key Vault.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.KeyVault/vaults"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "KeyVaultReference": {
+      "type": "object",
+      "description": "Reference to an Azure Key Vault resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The ARM resource ID of the Key Vault.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.KeyVault/vaults"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "Partition": {
+      "type": "object",
+      "description": "A deployable partition of a ZkpRollup.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PartitionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "PartitionListResult": {
+      "type": "object",
+      "description": "The response of a Partition list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Partition items on this page",
+          "items": {
+            "$ref": "#/definitions/Partition"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PartitionProperties": {
+      "type": "object",
+      "description": "Properties of a ZkpRollup partition. The partition properties are not patchable at this point in the Private Preview.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      }
+    },
+    "PartitionTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in Partition resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The status of the current operation.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Provisioning",
+        "Updating",
+        "Deleting",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Initial provisioning in progress"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Update in progress"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Deletion in progress"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Change accepted for processing"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ZkpRollup": {
+      "type": "object",
+      "description": "A DigitalAssets ZKP rollup resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ZkpRollupProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ZkpRollupListResult": {
+      "type": "object",
+      "description": "The response of a ZkpRollup list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ZkpRollup items on this page",
+          "items": {
+            "$ref": "#/definitions/ZkpRollup"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ZkpRollupPatchSource": {
+      "type": "object",
+      "description": "Connection settings that may be changed in a rollup PATCH request.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Source configuration kind."
+        },
+        "bootnodes": {
+          "type": "array",
+          "description": "Boot node enode URLs used for peer discovery.",
+          "maxItems": 25,
+          "items": {
+            "type": "string"
+          }
+        },
+        "staticPeers": {
+          "type": "array",
+          "description": "Static peer enode URLs used for ledger connectivity.",
+          "maxItems": 25,
+          "items": {
+            "type": "string"
+          }
+        },
+        "rpcEndpoints": {
+          "type": "array",
+          "description": "RPC endpoint URLs used to initialize the ledger.",
+          "maxItems": 25,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ZkpRollupProperties": {
+      "type": "object",
+      "description": "Details of the DigitalAssets ZkpRollup.",
+      "properties": {
+        "tokenOwnerAccounts": {
+          "type": "array",
+          "description": "Rollup-level list of token owner account addresses used for auto-discovery.",
+          "minItems": 1,
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/definitions/EvmContractAddress"
+          }
+        },
+        "source": {
+          "$ref": "#/definitions/ZkpRollupSource",
+          "description": "Connection settings for the customer's source ledger."
+        },
+        "keyVault": {
+          "$ref": "#/definitions/KeyVaultReference",
+          "description": "Rollup-level Key Vault reference used to resolve Besu node private keys."
+        },
+        "keyVaultUserAssignedIdentityResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "User-assigned managed identity resource ID used for customer Key Vault reads.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        },
+        "blocksPerProof": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of L2 blocks batched into a single proof. Must be a power of 2 (runtime-enforced). Immutable after create; changing it requires deleting and recreating the rollup. Default is 2 when omitted on create.",
+          "default": 2,
+          "minimum": 1,
+          "maximum": 16384,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "customerVpnPublicIp": {
+          "type": "string",
+          "description": "Public IPv4 address of the customer's VPN device. Set on create or replace; not updatable via PATCH.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "customerOnPremAddressPrefixes": {
+          "type": "array",
+          "description": "Customer on-premises address prefixes reachable across the VPN tunnel (the Local Network Gateway address space). Must not overlap the RP-reserved 10.128.0.0/10 block. Set on create or replace; not updatable via PATCH.",
+          "maxItems": 25,
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "serviceVpnPublicIp": {
+          "type": "string",
+          "description": "Read-only public IP address of this service's VPN Gateway. This is the far-end address the customer configures on their Local Network Gateway and Site-to-Site VPN connection. Populated once the service's VPN tunnel is provisioned.",
+          "readOnly": true
+        },
+        "serviceVpnAddressSpace": {
+          "type": "string",
+          "description": "Read-only address space (a /21 CIDR, e.g. 10.160.0.0/21) assigned to this service's end of the VPN tunnel. Populated once the service's VPN tunnel is provisioned.",
+          "readOnly": true
+        },
+        "bootNodeId": {
+          "type": "string",
+          "description": "Enode id (public key) of the customer's L2 Besu boot node. Set on create or replace; not updatable via PATCH.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "bootNodeIp": {
+          "type": "string",
+          "description": "Private IPv4 address of the customer's L2 Besu boot node. Set on create or replace; not updatable via PATCH.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "bootNodeP2pPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "P2P (devp2p) port of the customer's L2 Besu boot node. Set on create or replace; not updatable via PATCH.",
+          "minimum": 1,
+          "maximum": 65535,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "bootNodeRpcPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "JSON-RPC (HTTP) port of the customer's L2 Besu boot node. Set on create or replace; not updatable via PATCH.",
+          "minimum": 1,
+          "maximum": 65535,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "serviceBusEndpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "Service Bus endpoint (URL) for customer access. Set on create or replace; not updatable via PATCH.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "serviceBusQueueName": {
+          "type": "string",
+          "description": "Queue name for customer Service Bus access. Set on create or replace; not updatable via PATCH.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "serviceBusConsumerPrincipalId": {
+          "type": "string",
+          "description": "Optional customer-supplied Microsoft Entra object ID for the Service Bus consumer principal. Supply it on initial create; subsequent replacements preserve the original value. When provided, it must be a GUID. A role assignment is not guaranteed.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "tokenOwnerAccounts",
+        "keyVault",
+        "keyVaultUserAssignedIdentityResourceId",
+        "bootNodeId",
+        "bootNodeIp",
+        "bootNodeP2pPort",
+        "bootNodeRpcPort",
+        "serviceBusEndpoint",
+        "serviceBusQueueName"
+      ]
+    },
+    "ZkpRollupSource": {
+      "type": "object",
+      "description": "Connection settings for the customer's source ledger.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Source configuration kind."
+        },
+        "bootnodes": {
+          "type": "array",
+          "description": "Boot node enode URLs used for peer discovery.",
+          "maxItems": 25,
+          "items": {
+            "type": "string"
+          }
+        },
+        "staticPeers": {
+          "type": "array",
+          "description": "Static peer enode URLs used for ledger connectivity.",
+          "maxItems": 25,
+          "items": {
+            "type": "string"
+          }
+        },
+        "rpcEndpoints": {
+          "type": "array",
+          "description": "RPC endpoint URLs used to initialize the ledger.",
+          "maxItems": 25,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ZkpRollupUpdate": {
+      "type": "object",
+      "description": "The type used for update operations of the ZkpRollup.",
+      "properties": {
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ZkpRollupUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "ZkpRollupUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the ZkpRollup.",
+      "properties": {
+        "tokenOwnerAccounts": {
+          "type": "array",
+          "description": "Rollup-level list of token owner account addresses used for auto-discovery.",
+          "minItems": 1,
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/definitions/EvmContractAddress"
+          }
+        },
+        "source": {
+          "$ref": "#/definitions/ZkpRollupPatchSource",
+          "description": "Connection settings for the customer's source ledger."
+        },
+        "keyVault": {
+          "$ref": "#/definitions/KeyVaultPatchReference",
+          "description": "Rollup-level Key Vault reference used to resolve Besu node private keys."
+        },
+        "keyVaultUserAssignedIdentityResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "User-assigned managed identity resource ID used for customer Key Vault reads.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

@@ -1,0 +1,62 @@
+{
+  "operationId": "ZkpRollups_ListBySubscription",
+  "title": "ListZkpRollupsBySubscription",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2025-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.DigitalAssets/zkpRollups/Jack",
+            "name": "Jack",
+            "type": "Microsoft.DigitalAssets/zkpRollups",
+            "location": "eastus",
+            "tags": {},
+            "identity": {
+              "type": "UserAssigned",
+              "userAssignedIdentities": {
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/kvReader": {
+                  "principalId": "11111111-1111-1111-1111-111111111111",
+                  "clientId": "22222222-2222-2222-2222-222222222222"
+                }
+              }
+            },
+            "systemData": {
+              "createdBy": "user@example.com",
+              "createdByType": "User",
+              "createdAt": "2025-01-01T00:00:00.000Z",
+              "lastModifiedBy": "user@example.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-01-01T00:00:00.000Z"
+            },
+            "properties": {
+              "keyVault": {
+                "id": "/subscriptions/sub1/resourceGroups/rg1/providers/Microsoft.KeyVault/vaults/myKv"
+              },
+              "keyVaultUserAssignedIdentityResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/kvReader",
+              "tokenOwnerAccounts": [
+                "0x1111111111111111111111111111111111111111"
+              ],
+              "customerVpnPublicIp": "203.0.113.10",
+              "bootNodeId": "0x0000000000000000000000000000000000000000000000000000000000000000",
+              "bootNodeIp": "10.0.0.4",
+              "bootNodeP2pPort": 30303,
+              "bootNodeRpcPort": 8545,
+              "customerOnPremAddressPrefixes": [
+                "192.168.100.0/24"
+              ],
+              "serviceVpnPublicIp": "20.62.129.44",
+              "serviceVpnAddressSpace": "10.160.0.0/21",
+              "serviceBusEndpoint": "https://sb-da-customer.servicebus.windows.net",
+              "serviceBusQueueName": "proofs-output",
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

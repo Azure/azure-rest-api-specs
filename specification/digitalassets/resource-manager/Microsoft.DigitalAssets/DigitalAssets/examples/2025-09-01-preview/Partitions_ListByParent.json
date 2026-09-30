@@ -1,0 +1,36 @@
+{
+  "operationId": "Partitions_ListByParent",
+  "title": "ListPartitionsByParent",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2025-09-01-preview",
+    "zkpRollupName": "Jack"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.DigitalAssets/zkpRollups/Jack/partitions/Partition1",
+            "name": "Partition1",
+            "type": "Microsoft.DigitalAssets/zkpRollups/partitions",
+            "location": "eastus",
+            "tags": {},
+            "systemData": {
+              "createdBy": "user@example.com",
+              "createdByType": "User",
+              "createdAt": "2025-01-01T00:00:00.000Z",
+              "lastModifiedBy": "user@example.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2025-01-01T00:00:00.000Z"
+            },
+            "properties": {
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
