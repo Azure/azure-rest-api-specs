@@ -56,6 +56,19 @@ function run(github: ReturnType<typeof createMockGithub>) {
 }
 
 describe("getLabelActionImpl", () => {
+  it("matches required status contexts regardless of returned casing", async () => {
+    const github = createMockGithub({
+      labelNames: ["ARMReview"],
+      statuses: successfulStatuses.map((status) => ({
+        ...status,
+        context: status.context.toUpperCase(),
+      })),
+    });
+
+    const result = await run(github);
+    expect(result.labelActions[ArmAutoSignoffLabel.ArmAutoSignedOffTest]).toBe(LabelAction.Add);
+  });
+
   it("ignores failures in unrelated status contexts", async () => {
     const github = createMockGithub({ labelNames: ["ARMReview"] });
     github.rest.repos.getCombinedStatusForRef.mockResolvedValue({

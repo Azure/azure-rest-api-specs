@@ -1,6 +1,5 @@
 import { inspect } from "node:util";
 import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.ts";
-import { byDate, invert } from "../../../shared/src/sort.ts";
 import { getLatestCommitStatuses } from "../commit-statuses.ts";
 import { extractInputs } from "../context.ts";
 import type { Core, GitHubScriptArgs } from "../github.ts";
@@ -142,11 +141,9 @@ async function getDesiredLabelAction({
   const statuses = await getLatestCommitStatuses(github, owner, repo, head_sha);
 
   for (const statusName of requiredStatusNames) {
-    // Preserve case-insensitive matching if differently cased contexts coexist.
-    const matchingStatuses = statuses
-      .filter((status) => status.context.toLowerCase() === statusName.toLowerCase())
-      .sort(invert(byDate((status) => status.updated_at)));
-    const latestStatus = matchingStatuses[0];
+    const latestStatus = statuses.find(
+      (status) => status.context.toLowerCase() === statusName.toLowerCase(),
+    );
 
     core.info(`${statusName}: ${latestStatus?.state ?? "missing"}`);
     if (latestStatus?.state !== CommitStatusState.SUCCESS) {

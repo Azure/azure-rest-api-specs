@@ -319,7 +319,7 @@ describe("getLabelActionImpl", () => {
     ).resolves.toEqual(createRemoveManagedLabelsResult("abc123", 123));
   });
 
-  it.each(["Swagger Avocado", "Swagger LintDiff"])(
+  it.each(["Swagger Avocado", "Swagger LintDiff", "swagger avocado", "SWAGGER LINTDIFF"])(
     "removes label if check %s failed",
     async (check) => {
       const github = createMockGithub({ incrementalTypeSpec: true });

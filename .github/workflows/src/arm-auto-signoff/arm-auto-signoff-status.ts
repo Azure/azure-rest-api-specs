@@ -1,7 +1,6 @@
 import { inspect } from "node:util";
 import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { equals } from "../../../shared/src/set.ts";
-import { byDate, invert } from "../../../shared/src/sort.ts";
 import { getLatestCommitStatuses, type LatestCommitStatus } from "../commit-statuses.ts";
 import { extractInputs } from "../context.ts";
 import type { Core, GitHub, GitHubScriptArgs } from "../github.ts";
@@ -195,13 +194,9 @@ export async function getLabelActionImpl({
   const requiredStatuses: CommitStatus[] = [];
 
   for (const statusName of requiredStatusNames) {
-    // Preserve case-insensitive matching if differently cased contexts coexist.
-    const matchingStatuses = statuses
-      .filter((status) => status.context.toLowerCase() === statusName.toLowerCase())
-      .sort(invert(byDate((status) => status.updated_at)));
-
-    // undefined if matchingStatuses.length === 0 (which is OK)
-    const matchingStatus = matchingStatuses[0];
+    const matchingStatus = statuses.find(
+      (status) => status.context.toLowerCase() === statusName.toLowerCase(),
+    );
 
     core.info(`${statusName}: State='${matchingStatus?.state}'`);
 
