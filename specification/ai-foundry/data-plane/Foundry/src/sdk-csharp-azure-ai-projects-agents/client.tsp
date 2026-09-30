@@ -1347,9 +1347,9 @@ namespace Azure.AI.Projects {
   // named e.g. `OpenAI.VoiceResponseBaseStatus` to target directly: such names
   // only exist post-emission, invented by the C# emitter for anonymous types.
   // Instead, each property is first retyped (@@alternateType) to a small local
-  // named union declared here (keeping the original leaked names so the public
-  // API surface is unchanged other than its namespace), and that local union is
-  // the one namespaced.
+  // named union declared here. Unions already shipped by OpenAI .NET are then
+  // mapped to those external types; only Foundry-specific unions are emitted
+  // in the Azure.AI.Projects.Agents namespace.
   //
   // Several of these properties are spread into a Foundry-local model via
   // `OmitProperties`/`ToolFields` (e.g. VoiceResponseBase spreads
@@ -1373,9 +1373,13 @@ namespace Azure.AI.Projects {
     VoiceResponseBaseStatus,
     "csharp"
   );
-  @@clientNamespace(
+  @@alternateType(
     VoiceResponseBaseStatus,
-    "Azure.AI.Projects.Agents",
+    {
+      identity: "OpenAI.Realtime.RealtimeResponseStatus",
+      package: "OpenAI",
+      minVersion: "2.14.0",
+    },
     "csharp"
   );
 
@@ -1388,9 +1392,13 @@ namespace Azure.AI.Projects {
     VoiceResponseBaseOutputModality[],
     "csharp"
   );
-  @@clientNamespace(
+  @@alternateType(
     VoiceResponseBaseOutputModality,
-    "Azure.AI.Projects.Agents",
+    {
+      identity: "OpenAI.Realtime.RealtimeOutputModality",
+      package: "OpenAI",
+      minVersion: "2.14.0",
+    },
     "csharp"
   );
 
@@ -1409,9 +1417,13 @@ namespace Azure.AI.Projects {
     "Azure.AI.Projects.Agents",
     "csharp"
   );
-  @@clientNamespace(
+  @@alternateType(
     OpenAI.ContainerMemoryLimit,
-    "Azure.AI.Projects.Agents",
+    {
+      identity: "OpenAI.Containers.ContainerMemoryLimit",
+      package: "OpenAI",
+      minVersion: "2.14.0",
+    },
     "csharp"
   );
   @@clientNamespace(
@@ -1440,9 +1452,8 @@ namespace Azure.AI.Projects {
     "csharp"
   );
 
-  // The four unions below are also anonymous inline unions on the OpenAI side
-  // (same situation as above); give each a clientNamespace instead of an
-  // external alias since they have no real OpenAI SDK equivalent to alias to.
+  // These unions are also anonymous inline unions on the OpenAI side. Only
+  // transcription delay lacks an equivalent in the published OpenAI .NET SDK.
   union MCPToolboxToolConnectorId {
     "connector_dropbox",
     "connector_gmail",
@@ -1458,9 +1469,13 @@ namespace Azure.AI.Projects {
     MCPToolboxToolConnectorId,
     "csharp"
   );
-  @@clientNamespace(
+  @@alternateType(
     MCPToolboxToolConnectorId,
-    "Azure.AI.Projects.Agents",
+    {
+      identity: "OpenAI.Responses.McpToolConnectorId",
+      package: "OpenAI",
+      minVersion: "2.14.0",
+    },
     "csharp"
   );
 
@@ -1493,9 +1508,13 @@ namespace Azure.AI.Projects {
     VoiceAgentSemanticVadTurnDetectionEagerness,
     "csharp"
   );
-  @@clientNamespace(
+  @@alternateType(
     VoiceAgentSemanticVadTurnDetectionEagerness,
-    "Azure.AI.Projects.Agents",
+    {
+      identity: "OpenAI.Realtime.RealtimeSemanticVadEagernessLevel",
+      package: "OpenAI",
+      minVersion: "2.14.0",
+    },
     "csharp"
   );
 
@@ -1509,9 +1528,13 @@ namespace Azure.AI.Projects {
     WebSearchToolSearchContextSize,
     "csharp"
   );
-  @@clientNamespace(
+  @@alternateType(
     WebSearchToolSearchContextSize,
-    "Azure.AI.Projects.Agents",
+    {
+      identity: "OpenAI.Responses.WebSearchToolContextSize",
+      package: "OpenAI",
+      minVersion: "2.14.0",
+    },
     "csharp"
   );
 }
