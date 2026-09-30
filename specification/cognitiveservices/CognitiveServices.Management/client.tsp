@@ -1229,11 +1229,6 @@ op regenerateKeyCustom(
 );
 @@alternateType(ManagedComputeDeployment.etag, eTag, "csharp");
 @@alternateType(
-  ManagedComputeDeployment.identity,
-  Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
-  "csharp"
-);
-@@alternateType(
   ManagedComputeCapacityProperties.location,
   azureLocation,
   "csharp"
