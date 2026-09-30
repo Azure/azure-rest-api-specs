@@ -43,7 +43,12 @@ function decision(overrides: Partial<Decision> = {}): Decision {
   };
 }
 function output(decisions: Decision[] = [decision()]) {
-  return { items: [{ type: "apply_backlog_triage", decisions: JSON.stringify(decisions) }] };
+  return {
+    items: decisions.map((item) => ({
+      type: "apply_backlog_triage",
+      decision: JSON.stringify(item),
+    })),
+  };
 }
 
 function setup(initialState?: unknown) {
@@ -124,7 +129,7 @@ function setup(initialState?: unknown) {
     save,
     createRef,
     state: () => stored,
-    apply: (results = output(), staged = false) =>
+    apply: (results: unknown = output(), staged = false) =>
       applyBacklogTriage(args, selected, results, staged, now),
   };
 }
@@ -301,16 +306,150 @@ describe("backlog triage evidence collection", () => {
 });
 
 describe("backlog triage output boundary", () => {
-  it("rejects oversized/duplicate selections and out-of-batch or incomplete decisions", () => {
+  it("rejects oversized/duplicate selections and out-of-batch or duplicate checkpoints", () => {
     expect(() => parseSelection(Array(6).fill(selected[0]))).toThrow();
     expect(() => parseSelection([selected[0], selected[0]])).toThrow("Duplicate");
     expect(() => parseDecisions(output([decision({ number: 2 })]), selected)).toThrow(
       "out-of-batch",
     );
-    expect(() => parseDecisions(output([]), selected)).toThrow("Every selected");
-    expect(() =>
-      parseDecisions({ items: [...output().items, ...output().items] }, selected),
-    ).toThrow("exactly one");
+    expect(() => parseDecisions(output([]), selected)).toThrow("checkpoint");
+    const batch = [...selected, { number: 2, updatedAt }];
+    expect(() => parseDecisions({ items: [...output().items, ...output().items] }, batch)).toThrow(
+      "out-of-batch",
+    );
+    expect(() => parseDecisions(output([decision(), decision()]), selected)).toThrow("checkpoint");
+  });
+
+  it("accepts completed checkpoints without requiring the rest of the selected batch", () => {
+    const batch = [1, 2, 3, 4, 5].map((number) => ({ number, updatedAt }));
+    const completed = [decision(), decision({ number: 2, action: "keep_open" })];
+    expect(parseDecisions(output(completed), batch)).toEqual(completed);
+  });
+
+  it("accepts all five unique issue checkpoints", () => {
+    const batch = [1, 2, 3, 4, 5].map((number) => ({ number, updatedAt }));
+    const completed = batch.map(({ number }) => decision({ number }));
+    expect(parseDecisions(output(completed), batch)).toEqual(completed);
+  });
+
+  it("reports collector rejections as failures without discarding accepted checkpoints", async () => {
+    const t = setup();
+    await applyBacklogTriage(
+      t.args,
+      [...selected, { number: 2, updatedAt }],
+      {
+        ...output([decision({ action: "keep_open" })]),
+        errors: ["Line 2: Too many items of type 'apply_backlog_triage'. Maximum allowed: 1."],
+      },
+      false,
+      now,
+    );
+    expect(parseState(t.state()).issues).toEqual({
+      1: { action: "keep_open", updatedAt, reviewedAt: now.toISOString() },
+    });
+    expect(t.core.setFailed).toHaveBeenCalledExactlyOnceWith(
+      expect.stringContaining("Safe-output collection rejected 1 item"),
+    );
+    expect(await selectBacklogIssues(t.args, "", now)).toEqual([{ number: 2, updatedAt }]);
+  });
+
+  it("surfaces collector errors in dry runs without changing issues or progress", async () => {
+    const t = setup();
+    await t.apply({ ...output(), errors: ["A later checkpoint was rejected"] }, true);
+    expect(t.core.setFailed).toHaveBeenCalled();
+    expect(t.state()).toBeUndefined();
+    expect(t.update).not.toHaveBeenCalled();
+    expect(t.github.rest.issues.createComment).not.toHaveBeenCalled();
+  });
+
+  it("rejects malformed collector errors before applying checkpoints", async () => {
+    const t = setup();
+    await expect(t.apply({ ...output(), errors: "not an array" })).rejects.toThrow(
+      "Invalid safe output",
+    );
+    await expect(t.apply({ ...output(), errors: [null] })).rejects.toThrow("Invalid safe output");
+    expect(t.github.rest.issues.createComment).not.toHaveBeenCalled();
+  });
+
+  it("rejects malformed checkpoint payloads instead of treating them as completed work", () => {
+    for (const item of [
+      { type: "apply_backlog_triage", decisions: JSON.stringify([decision()]) },
+      { type: "apply_backlog_triage", decision: "[" },
+      { type: "apply_backlog_triage", decision: JSON.stringify([decision()]) },
+      { type: "apply_backlog_triage", decision: JSON.stringify(null) },
+    ]) {
+      expect(() => parseDecisions({ items: [item] }, selected)).toThrow();
+    }
+  });
+
+  it("persists completed partial-batch work and selects unfinished issues on the next run", async () => {
+    const t = setup();
+    const batch = [...selected, { number: 2, updatedAt }];
+    await applyBacklogTriage(
+      t.args,
+      batch,
+      output([decision({ action: "keep_open" })]),
+      false,
+      now,
+    );
+    expect(parseState(t.state()).issues).toEqual({
+      1: { action: "keep_open", updatedAt, reviewedAt: now.toISOString() },
+    });
+    expect(t.get.mock.calls.every(([params]) => params.issue_number === 1)).toBe(true);
+    expect(t.core.warning).toHaveBeenCalledWith(expect.stringContaining("No accepted checkpoint"));
+    expect(await selectBacklogIssues(t.args, "", now)).toEqual([{ number: 2, updatedAt }]);
+  });
+
+  it("applies multiple checkpoints in submission order and persists every successful outcome", async () => {
+    const t = setup();
+    const batch = [...selected, { number: 2, updatedAt }];
+    await applyBacklogTriage(
+      t.args,
+      batch,
+      output([decision({ action: "keep_open" }), decision({ number: 2 })]),
+      false,
+      now,
+    );
+    expect(parseState(t.state()).issues).toEqual({
+      1: { action: "keep_open", updatedAt, reviewedAt: now.toISOString() },
+      2: { action: "resolved", updatedAt, reviewedAt: now.toISOString() },
+    });
+    expect(t.update).toHaveBeenCalledExactlyOnceWith(
+      expect.objectContaining({
+        issue_number: 2,
+        state: "closed",
+      }),
+    );
+    expect(t.save).toHaveBeenCalledTimes(1);
+  });
+
+  it("preserves the first checkpoint if applying a later checkpoint fails", async () => {
+    const t = setup();
+    const batch = [...selected, { number: 2, updatedAt }];
+    t.update.mockRejectedValueOnce(createMockRequestError(502));
+    await expect(
+      applyBacklogTriage(
+        t.args,
+        batch,
+        output([decision({ action: "keep_open" }), decision({ number: 2 })]),
+        false,
+        now,
+      ),
+    ).rejects.toThrow("502");
+    expect(parseState(t.state()).issues).toEqual({
+      1: { action: "keep_open", updatedAt, reviewedAt: now.toISOString() },
+    });
+    expect(t.issues.get(2)!.state).toBe("open");
+    expect(await selectBacklogIssues(t.args, "", now)).toEqual([{ number: 2, updatedAt }]);
+  });
+
+  it("previews a partial batch without saving any checkpoint", async () => {
+    const t = setup();
+    await applyBacklogTriage(t.args, [...selected, { number: 2, updatedAt }], output(), true, now);
+    expect(t.state()).toBeUndefined();
+    expect(t.update).not.toHaveBeenCalled();
+    expect(t.github.rest.issues.createComment).not.toHaveBeenCalled();
+    expect(t.core.summary.addRaw).toHaveBeenCalledWith(expect.stringContaining("Preview"));
   });
 
   it("requires high-confidence closure evidence, concrete questions, and valid duplicate targets", () => {
@@ -519,9 +658,6 @@ describe("backlog triage workflow", () => {
     expect(download.getIn(["with", "name"])).toBe("backlog-triage-selection");
     expect(doc.getIn(["jobs", "apply_backlog_triage", "if"])).toContain(
       "needs.detection.result == 'success'",
-    );
-    expect(doc.getIn(["jobs", "apply_backlog_triage", "if"])).toContain(
-      "needs.agent.result == 'success'",
     );
     const apply = applySteps.items.find(
       (step) => isMap(step) && step.get("name") === "Apply bounded triage decisions",
