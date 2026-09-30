@@ -40,12 +40,12 @@ jobs:
     with:
       monitored_workflow_name: "TypeSpec Suppressions - Analyze Code"
       required_check_name: "TypeSpec Suppressions"
-      overriding_label: "Approved-TypeSpecSuppression"
+      overriding_label: "typespec-suppressions-approved"
 
   post-comment:
     name: Post TypeSpec Suppressions Comment
     # Only refresh the dedicated review comment when the analyzer report
-    # completes or when the Approved-TypeSpecSuppression label is added/removed.
+    # completes or when the typespec-suppressions-approved label is added/removed.
     # Skip plain opened/synchronize/reopened events, which fire before a report
     # artifact exists (the status job still runs on those to update the check).
     if: >-

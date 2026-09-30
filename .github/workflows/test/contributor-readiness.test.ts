@@ -1,4 +1,6 @@
+import { readFileSync } from "node:fs";
 import { describe, expect, it, vi } from "vitest";
+import { isMap, isSeq, parseDocument } from "yaml";
 import {
   checkContributorReadiness,
   collectReadinessParticipants,
@@ -22,25 +24,30 @@ const pr = {
   state: "open",
   user: author,
   commits: 1,
+  changed_files: 1,
   head: { sha: "a".repeat(40) },
   base: { repo: { id: 100 } },
   updated_at: "2026-09-23T10:00:00Z",
 };
 const marker = "<!-- contributor-readiness -->";
+const notifierPath = ".github/workflows/contributor-readiness-notify.yaml";
 
 function setup() {
   const github = createMockGithub();
   const context = createMockContext();
-  context.eventName = "pull_request_target";
+  context.eventName = "workflow_run";
   context.repo.owner = "Azure";
   context.repo.repo = "example";
-  context.payload = { pull_request: { number: 1 } };
+  context.payload = { workflow_run: { id: 123 }, repository };
   const core = createMockCore();
   const listCommits = vi.fn().mockResolvedValue({
     data: [{ sha: pr.head.sha, author, committer: author }],
   });
   const listReviews = vi.fn().mockResolvedValue({
     data: [{ id: 20, state: "APPROVED", user: reviewer }],
+  });
+  const listFiles = vi.fn().mockResolvedValue({
+    data: [{ filename: "specification/widgets/main.tsp", status: "modified" }],
   });
   const permission = vi.fn().mockResolvedValue({ data: { permission: "write" } });
   const membership = vi.fn().mockResolvedValue({ status: 204 });
@@ -49,12 +56,12 @@ function setup() {
     data: {
       repository: { id: 100 },
       event: "pull_request_review",
-      path: ".github/workflows/contributor-readiness-review.yaml",
+      path: notifierPath,
       head_sha: pr.head.sha,
       pull_requests: [{ number: 1, base: { repo: { id: 100 } } }],
     },
   });
-  Object.assign(github.rest.pulls, { listCommits, listReviews });
+  Object.assign(github.rest.pulls, { listCommits, listReviews, listFiles });
   Object.assign(github.rest.repos, { getCollaboratorPermissionLevel: permission });
   Object.assign(github.rest, { orgs: { checkPublicMembershipForUser: membership } });
   Object.assign(github.rest.checks, { create: createCheck });
@@ -68,6 +75,7 @@ function setup() {
     core,
     listCommits,
     listReviews,
+    listFiles,
     permission,
     membership,
     createCheck,
@@ -77,6 +85,127 @@ function setup() {
 }
 
 describe("contributor readiness", () => {
+  it("routes PR events through an unprivileged notifier and trusted workflow_run publisher", () => {
+    const publisher = parseDocument(
+      readFileSync(new URL("../contributor-readiness-report.yaml", import.meta.url), "utf8"),
+    );
+    const notifier = parseDocument(
+      readFileSync(new URL("../contributor-readiness-notify.yaml", import.meta.url), "utf8"),
+    );
+    expect(publisher.errors).toEqual([]);
+    expect(notifier.errors).toEqual([]);
+    expect(publisher.hasIn(["on", "pull_request_target"])).toBe(false);
+    expect(publisher.hasIn(["on", "pull_request"])).toBe(false);
+    expect(notifier.hasIn(["on", "pull_request"])).toBe(true);
+    expect(notifier.hasIn(["on", "pull_request_review"])).toBe(true);
+
+    const permissions = notifier.get("permissions");
+    if (!isMap(permissions)) throw new Error("Notifier permissions must be explicit");
+    expect(permissions.toJSON()).toEqual({});
+    const workflows = publisher.getIn(["on", "workflow_run", "workflows"]);
+    if (!isSeq(workflows)) throw new Error("Publisher must name its notifier workflows");
+    expect(workflows.toJSON()).toEqual([notifier.get("name")]);
+  });
+
+  it("grants the publisher permission to comment on pull requests", () => {
+    const workflow = parseDocument(
+      readFileSync(new URL("../contributor-readiness-report.yaml", import.meta.url), "utf8"),
+    );
+    expect(workflow.errors).toEqual([]);
+    expect(workflow.getIn(["jobs", "report", "permissions", "pull-requests"])).toBe("write");
+  });
+
+  it.each(["workflow_run", "issue_comment"])(
+    "skips engineering-only PRs for %s before checking accounts",
+    async (eventName) => {
+      const f = setup();
+      f.context.eventName = eventName;
+      if (eventName === "issue_comment") {
+        f.context.payload = {
+          issue: { number: 1 },
+          comment: { id: 1, body: "/azsdk check-access" },
+          sender: author,
+        };
+      }
+      f.listFiles.mockResolvedValue({ data: [{ filename: "eng/README.md", status: "modified" }] });
+      await f.run();
+      expect(f.listCommits).not.toHaveBeenCalled();
+      expect(f.listReviews).not.toHaveBeenCalled();
+      expect(f.membership).not.toHaveBeenCalled();
+      expect(f.permission).not.toHaveBeenCalled();
+      expect(f.createCheck).not.toHaveBeenCalled();
+      expect(f.github.rest.issues.createComment).not.toHaveBeenCalled();
+      expect(f.github.rest.issues.updateComment).not.toHaveBeenCalled();
+      expect(f.core.info).toHaveBeenCalledWith(
+        "Skipping contributor readiness: no changes under specification/.",
+      );
+    },
+  );
+
+  it.each([
+    { filename: "specification/widgets/main.tsp", status: "added" },
+    { filename: "specification/widgets/main.tsp", status: "removed" },
+    {
+      filename: "specification/widgets/main.tsp",
+      previous_filename: "eng/main.tsp",
+      status: "renamed",
+    },
+    {
+      filename: "eng/main.tsp",
+      previous_filename: "specification/widgets/main.tsp",
+      status: "renamed",
+    },
+  ])("checks a PR that changes specification content: %j", async (file) => {
+    const f = setup();
+    f.listFiles.mockResolvedValue({ data: [file] });
+    await f.run();
+    expect(f.createCheck).toHaveBeenCalledOnce();
+  });
+
+  it("includes mixed PRs and inspects the paginated file list", async () => {
+    const f = setup();
+    f.github.rest.pulls.get.mockResolvedValue({ data: { ...pr, changed_files: 101 } });
+    f.listFiles.mockResolvedValue({
+      data: [
+        ...Array.from({ length: 100 }, (_, index) => ({ filename: `eng/file-${index}.ts` })),
+        { filename: "specification/widgets/main.tsp" },
+      ],
+    });
+    const paginate = vi.spyOn(f.github, "paginate");
+    await f.run();
+    expect(paginate).toHaveBeenCalledWith(f.listFiles, {
+      owner: "Azure",
+      repo: "example",
+      pull_number: 1,
+      per_page: 100,
+    });
+    expect(f.createCheck).toHaveBeenCalledOnce();
+  });
+
+  it("does not mistake a similarly named folder for specification/", async () => {
+    const f = setup();
+    f.listFiles.mockResolvedValue({ data: [{ filename: "specification-tools/check.ts" }] });
+    await f.run();
+    expect(f.createCheck).not.toHaveBeenCalled();
+  });
+
+  it("does not silently skip when GitHub truncates the changed-file list", async () => {
+    const f = setup();
+    f.github.rest.pulls.get.mockResolvedValue({ data: { ...pr, changed_files: 3001 } });
+    f.listFiles.mockResolvedValue({ data: [{ filename: "eng/file.ts" }] });
+    await expect(f.run()).rejects.toThrow("Cannot determine specification scope");
+    expect(f.membership).not.toHaveBeenCalled();
+    expect(f.createCheck).not.toHaveBeenCalled();
+  });
+
+  it("propagates file lookup failures instead of claiming the PR is out of scope", async () => {
+    const f = setup();
+    f.listFiles.mockRejectedValue(createMockRequestError(503));
+    await expect(f.run()).rejects.toThrow("503");
+    expect(f.membership).not.toHaveBeenCalled();
+    expect(f.createCheck).not.toHaveBeenCalled();
+  });
+
   it("deduplicates authors/committers and includes every submitted reviewer", async () => {
     const f = setup();
     f.listReviews.mockResolvedValue({
@@ -121,6 +250,18 @@ describe("contributor readiness", () => {
     expect(f.core.summary.write).toHaveBeenCalledOnce();
   });
 
+  it("keeps the job summary available when PR comment publication fails", async () => {
+    const f = setup();
+    f.permission.mockResolvedValue({ data: { permission: "read" } });
+    f.github.rest.issues.createComment.mockRejectedValue(createMockRequestError(403));
+
+    await expect(f.run()).rejects.toThrow("403");
+
+    expect(f.createCheck).toHaveBeenCalledOnce();
+    expect(f.core.summary.addRaw).toHaveBeenCalledWith(expect.stringContaining("No write access"));
+    expect(f.core.summary.write).toHaveBeenCalledOnce();
+  });
+
   it.each([null, {}])("reports an unavailable PR author as incomplete: %j", async (user) => {
     const f = setup();
     f.github.rest.pulls.get.mockResolvedValue({ data: { ...pr, user } });
@@ -144,6 +285,28 @@ describe("contributor readiness", () => {
     expect(call[0].body).toContain("GitHub review rules still apply");
     expect(call[0].body).not.toContain("cannot satisfy");
   });
+
+  it.each([404, 403])(
+    "prefills each user's organization People search for membership HTTP %s",
+    async (code) => {
+      const f = setup();
+      f.membership.mockRejectedValue(createMockRequestError(code));
+      await f.run();
+      const [comment] = f.github.rest.issues.createComment.mock.calls[0] as [{ body: string }];
+      for (const user of [author, reviewer]) {
+        const row = comment.body.split("\n").find((line) => line.includes(`**[${user.login}]`));
+        for (const org of ["Microsoft", "Azure"]) {
+          expect(row).toContain(
+            `[${org}](https://github.com/orgs/${org}/people?query=${user.login})`,
+          );
+        }
+      }
+      expect(comment.body).not.toContain("\\[Microsoft\\]");
+      expect(comment.body).toContain("https://aka.ms/azsdk/access");
+      expect(comment.body).toContain(code === 403 ? "🟡" : "🔴");
+      expect(f.core.summary.addRaw).toHaveBeenCalledWith(comment.body.replace(`\n${marker}`, ""));
+    },
+  );
 
   it("explains reviewer and author access differently", async () => {
     const f = setup();
@@ -416,13 +579,15 @@ describe("contributor readiness", () => {
     const body = renderReadiness(
       [{ ...reviewer, roles: new Set(["submitted reviewer"]) }],
       [
-        { subject: reviewer.login, message: "Azure membership not public." },
-        { subject: reviewer.login, message: "Azure membership not public." },
+        { subject: reviewer.login, message: "Azure membership not public.", organization: "Azure" },
+        { subject: reviewer.login, message: "Azure membership not public.", organization: "Azure" },
         { subject: reviewer.login, message: "Could not verify repository access.", unknown: true },
       ],
     );
     expect(body.split("\n").filter((line) => line.startsWith("| 🔴"))).toHaveLength(1);
-    expect(body.match(/Azure membership not public/g)).toHaveLength(1);
+    expect(
+      body.match(/\[Azure\]\(https:\/\/github.com\/orgs\/Azure\/people\?query=reviewer-example\)/g),
+    ).toHaveLength(1);
     expect(body).toContain("Could not verify repository access.");
   });
 
@@ -440,8 +605,12 @@ describe("contributor readiness", () => {
           { ...reviewer, roles: new Set(["submitted reviewer"]) },
         ],
         [
-          { subject: author.login, message: "Microsoft membership not public." },
-          { subject: author.login, message: "Azure membership not public." },
+          {
+            subject: author.login,
+            message: "Microsoft membership not public.",
+            organization: "Microsoft",
+          },
+          { subject: author.login, message: "Azure membership not public.", organization: "Azure" },
           {
             subject: reviewer.login,
             message: "No write access; approval cannot satisfy required reviews.",
@@ -465,13 +634,55 @@ describe("contributor readiness", () => {
       ),
     ).toMatchSnapshot();
   });
+
+  it("escapes arbitrary finding content while adding only a known organization link", () => {
+    const body = renderReadiness(
+      [],
+      [
+        {
+          subject: "Unresolved",
+          message: "Microsoft [user](https://example.com) <script>@org/team</script>",
+          organization: "Microsoft",
+        },
+      ],
+    );
+    expect(body).toContain(
+      "[Microsoft](https://github.com/orgs/Microsoft/people?query=Unresolved)",
+    );
+    expect(body).toContain("\\[user\\]\\(https://example.com\\)");
+    expect(body).not.toContain("<script>");
+    expect(body).not.toContain("@org/team");
+  });
+
+  it("encodes the organization search query without allowing extra parameters or Markdown", () => {
+    const body = renderReadiness(
+      [],
+      [
+        {
+          subject: "user &role=admin#')",
+          message: "Microsoft membership not public.",
+          organization: "Microsoft",
+        },
+      ],
+    );
+    expect(body).toContain(
+      "[Microsoft](https://github.com/orgs/Microsoft/people?query=user+%26role%3Dadmin%23%27%29)",
+    );
+  });
 });
 
 describe("readiness trigger resolution", () => {
-  it("takes the PR number from a trusted target event", async () => {
-    const f = setup();
-    expect(await resolveReadinessPullRequest(f.args)).toBe(1);
-  });
+  it.each(["pull_request_target", "pull_request"])(
+    "rejects a direct %s publisher trigger",
+    async (event) => {
+      const f = setup();
+      f.context.eventName = event;
+      f.context.payload = { pull_request: { number: 1 } };
+      await expect(resolveReadinessPullRequest(f.args)).rejects.toThrow(
+        "Unsupported readiness trigger",
+      );
+    },
+  );
 
   it("ignores unrelated comments and ordinary issues", async () => {
     const f = setup();
@@ -484,24 +695,133 @@ describe("readiness trigger resolution", () => {
     expect(await resolveReadinessPullRequest(f.args)).toBeNull();
   });
 
-  it("resolves the review workflow using server metadata instead of untrusted artifacts", async () => {
+  it("resolves a manual PR refresh without requiring a notifier run", async () => {
     const f = setup();
-    f.context.eventName = "workflow_run";
-    f.context.payload = { workflow_run: { id: 123 }, repository };
+    f.context.eventName = "issue_comment";
+    f.context.payload = {
+      issue: { number: 1, pull_request: {} },
+      comment: { id: 1, body: "/azsdk check-access" },
+      sender: reviewer,
+    };
     expect(await resolveReadinessPullRequest(f.args)).toBe(1);
-    expect(f.getRun).toHaveBeenCalledWith({ owner: "Azure", repo: "example", run_id: 123 });
-    expect(f.github.rest.actions.listWorkflowRunArtifacts).not.toHaveBeenCalled();
+    expect(f.getRun).not.toHaveBeenCalled();
   });
 
-  it("uses repository-scoped lookup when GitHub omits fork PR metadata", async () => {
+  it.each(["pull_request", "pull_request_review"])(
+    "resolves %s notifications using server metadata instead of untrusted artifacts",
+    async (event) => {
+      const f = setup();
+      f.getRun.mockResolvedValue({
+        data: {
+          repository: { id: 100 },
+          event,
+          path: notifierPath,
+          head_sha: pr.head.sha,
+          pull_requests: [{ number: 1, base: { repo: { id: 100 } } }],
+        },
+      });
+      expect(await resolveReadinessPullRequest(f.args)).toBe(1);
+      expect(f.getRun).toHaveBeenCalledWith({ owner: "Azure", repo: "example", run_id: 123 });
+      expect(f.github.rest.actions.listWorkflowRunArtifacts).not.toHaveBeenCalled();
+    },
+  );
+
+  it.each(["pull_request", "pull_request_review"])(
+    "resolves fork %s notifications by bare SHA and publishes readiness",
+    async (event) => {
+      const f = setup();
+      f.context.eventName = "workflow_run";
+      f.context.payload = { workflow_run: { id: 123 }, repository };
+      f.getRun.mockResolvedValue({
+        data: {
+          repository: { id: 100 },
+          event,
+          path: notifierPath,
+          head_sha: pr.head.sha,
+          pull_requests: [],
+        },
+      });
+      f.github.rest.search.issuesAndPullRequests.mockResolvedValue({
+        data: { total_count: 1, incomplete_results: false, items: [{ number: 1 }] },
+      });
+      const number = await resolveReadinessPullRequest(f.args);
+      if (number === null) throw new Error("Expected a resolved fork PR");
+      expect(number).toBe(1);
+      expect(f.github.rest.search.issuesAndPullRequests).toHaveBeenCalledWith({
+        q: `repo:Azure/example is:pr is:open ${pr.head.sha}`,
+        per_page: 100,
+      });
+      f.permission.mockResolvedValue({ data: { permission: "read" } });
+      await checkContributorReadiness(f.args, number);
+      expect(f.createCheck).toHaveBeenCalledWith(
+        expect.objectContaining({ head_sha: pr.head.sha, conclusion: "neutral" }),
+      );
+      expect(f.github.rest.issues.createComment).toHaveBeenCalledWith(
+        expect.objectContaining({ issue_number: number }),
+      );
+    },
+  );
+
+  it.each([
+    {
+      repository: { id: 100 },
+      event: "push",
+      path: notifierPath,
+    },
+    {
+      repository: { id: 100 },
+      event: "pull_request_target",
+      path: notifierPath,
+    },
+    { repository: { id: 100 }, event: "pull_request", path: ".github/workflows/other.yaml" },
+    {
+      repository: { id: 100 },
+      event: "pull_request",
+      path: ".github/workflows/contributor-readiness-review.yaml",
+    },
+    {
+      repository: { id: 100 },
+      event: "pull_request",
+      path: ".github/workflows/contributor-readiness-events.yaml",
+    },
+    {
+      repository: { id: 200 },
+      event: "pull_request_review",
+      path: notifierPath,
+    },
+  ])("rejects unexpected notification provenance: %j", async (run) => {
     const f = setup();
     f.context.eventName = "workflow_run";
     f.context.payload = { workflow_run: { id: 123 }, repository };
+    f.getRun.mockResolvedValue({ data: run });
+    await expect(resolveReadinessPullRequest(f.args)).rejects.toThrow("Unexpected");
+  });
+
+  it("rejects an incomplete fork lookup instead of selecting the first match", async () => {
+    const f = setup();
     f.getRun.mockResolvedValue({
       data: {
         repository: { id: 100 },
-        event: "pull_request_review",
-        path: ".github/workflows/contributor-readiness-review.yaml",
+        event: "pull_request",
+        path: notifierPath,
+        head_sha: pr.head.sha,
+        pull_requests: [],
+      },
+    });
+    f.github.rest.search.issuesAndPullRequests.mockResolvedValue({
+      data: { total_count: 2, incomplete_results: true, items: [{ number: 1 }] },
+    });
+    await expect(resolveReadinessPullRequest(f.args)).rejects.toThrow("Incomplete PR lookup");
+    expect(f.github.rest.pulls.get).not.toHaveBeenCalled();
+  });
+
+  it("does not publish a fork lookup result belonging to another base repository", async () => {
+    const f = setup();
+    f.getRun.mockResolvedValue({
+      data: {
+        repository: { id: 100 },
+        event: "pull_request",
+        path: notifierPath,
         head_sha: pr.head.sha,
         pull_requests: [],
       },
@@ -509,21 +829,9 @@ describe("readiness trigger resolution", () => {
     f.github.rest.search.issuesAndPullRequests.mockResolvedValue({
       data: { total_count: 1, incomplete_results: false, items: [{ number: 1 }] },
     });
-    expect(await resolveReadinessPullRequest(f.args)).toBe(1);
-    expect(f.github.rest.search.issuesAndPullRequests).toHaveBeenCalledWith({
-      q: `repo:Azure/example is:pr is:open sha:${pr.head.sha}`,
-      per_page: 100,
-    });
-  });
-
-  it("rejects unexpected workflow paths and events", async () => {
-    const f = setup();
-    f.context.eventName = "workflow_run";
-    f.context.payload = { workflow_run: { id: 123 }, repository };
-    f.getRun.mockResolvedValue({
-      data: { repository: { id: 100 }, event: "push", path: "untrusted.yaml" },
-    });
-    await expect(resolveReadinessPullRequest(f.args)).rejects.toThrow("Unexpected");
+    f.github.rest.pulls.get.mockResolvedValue({ data: { ...pr, base: { repo: { id: 200 } } } });
+    expect(await resolveReadinessPullRequest(f.args)).toBeNull();
+    expect(f.createCheck).not.toHaveBeenCalled();
   });
 
   it("rejects ambiguous PR associations rather than reporting on an arbitrary PR", async () => {
@@ -534,7 +842,7 @@ describe("readiness trigger resolution", () => {
       data: {
         repository: { id: 100 },
         event: "pull_request_review",
-        path: ".github/workflows/contributor-readiness-review.yaml",
+        path: notifierPath,
         pull_requests: [1, 2].map((number) => ({ number, base: { repo: { id: 100 } } })),
       },
     });

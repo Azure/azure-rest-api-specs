@@ -15,11 +15,17 @@ const COMMAND = "/azsdk check-access";
 const MARKER = "<!-- contributor-readiness -->";
 const CHECK_NAME = "Contributor readiness";
 const ONBOARDING = "https://aka.ms/azsdk/access";
+const ORGANIZATIONS = ["Microsoft", "Azure"] as const;
 
 type PullRequest = Awaited<ReturnType<GitHub["rest"]["pulls"]["get"]>>["data"];
 type Account = { id: number; login: string; type: string };
 type Participant = Account & { roles: Set<string> };
-export type ReadinessFinding = { subject: string; message: string; unknown?: boolean };
+export type ReadinessFinding = {
+  subject: string;
+  message: string;
+  unknown?: boolean;
+  organization?: (typeof ORGANIZATIONS)[number];
+};
 
 /** Extracts an HTTP status from an API error, leaving unrelated errors unclassified. */
 function status(error: unknown): number | undefined {
@@ -33,14 +39,11 @@ function isAutomation(account: Account): boolean {
   return account.type === "Bot" || (account.id === 19864447 && account.login === "web-flow");
 }
 
-/** Resolves a trigger to its PR; ignored commands and unmatched review runs return null. */
+/** Resolves a trigger to its PR; ignored commands and unmatched notification runs return null. */
 export async function resolveReadinessPullRequest(
   inputs: GitHubScriptArgs,
 ): Promise<number | null> {
   const { context } = inputs;
-  if (context.eventName === "pull_request_target") {
-    return (context.payload as WebhookEvent<"pull-request">).pull_request.number;
-  }
   if (context.eventName === "issue_comment") {
     const { issue, comment, sender } = context.payload as WebhookEvent<"issue-comment", "created">;
     return issue.pull_request && comment.body.trim() === COMMAND && !isAutomation(sender)
@@ -48,14 +51,14 @@ export async function resolveReadinessPullRequest(
       : null;
   }
   if (context.eventName !== "workflow_run") throw new Error("Unsupported readiness trigger");
-  return resolveReviewWorkflowPullRequest(inputs);
+  return resolveNotificationPullRequest(inputs);
 }
 
 /**
- * Resolves a review notification from GitHub's run metadata, never fork-supplied artifacts.
+ * Resolves a PR/review notification from GitHub's run metadata, never fork-supplied artifacts.
  * Rejects unexpected workflows and incomplete or ambiguous PR associations.
  */
-async function resolveReviewWorkflowPullRequest({
+async function resolveNotificationPullRequest({
   github,
   context,
   core,
@@ -67,21 +70,21 @@ async function resolveReviewWorkflowPullRequest({
   });
   if (
     run.repository.id !== payload.repository.id ||
-    run.event !== "pull_request_review" ||
-    run.path !== ".github/workflows/contributor-readiness-review.yaml"
+    !["pull_request", "pull_request_review"].includes(run.event) ||
+    run.path !== ".github/workflows/contributor-readiness-notify.yaml"
   ) {
-    throw new Error("Unexpected contributor readiness review workflow");
+    throw new Error("Unexpected contributor readiness notification workflow");
   }
   let numbers = (run.pull_requests ?? [])
     .filter((pr) => pr.base.repo.id === payload.repository.id)
     .map((pr) => pr.number);
   if (numbers.length === 0) {
     const { data } = await github.rest.search.issuesAndPullRequests({
-      q: `repo:${context.repo.owner}/${context.repo.repo} is:pr is:open sha:${run.head_sha}`,
+      q: `repo:${context.repo.owner}/${context.repo.repo} is:pr is:open ${run.head_sha}`,
       per_page: PER_PAGE_MAX,
     });
     if (data.incomplete_results || data.total_count > data.items.length) {
-      throw new Error("Incomplete PR lookup for review workflow; use /azsdk check-access");
+      throw new Error("Incomplete PR lookup for notification workflow; use /azsdk check-access");
     }
     numbers = data.items.map((pr) => pr.number);
   }
@@ -92,10 +95,10 @@ async function resolveReviewWorkflowPullRequest({
   }
   if (candidates.length > 1) {
     throw new Error(
-      "Review workflow matches multiple PRs; use /azsdk check-access on the intended PR",
+      "Notification workflow matches multiple PRs; use /azsdk check-access on the intended PR",
     );
   }
-  if (!candidates.length) core.info("No open PR found for the review workflow.");
+  if (!candidates.length) core.info("No open PR found for the notification workflow.");
   return candidates[0] ?? null;
 }
 
@@ -206,6 +209,7 @@ async function observe<T>(
   subject: string,
   operation: () => Promise<T>,
   unavailable = "Could not verify access; retry or ask a maintainer.",
+  organization?: ReadinessFinding["organization"],
 ): Promise<T | undefined> {
   try {
     return await operation();
@@ -217,6 +221,7 @@ async function observe<T>(
       subject,
       unknown: true,
       message: unavailable,
+      organization,
     });
     return undefined;
   }
@@ -233,18 +238,20 @@ export async function evaluateReadinessParticipants(
 ): Promise<void> {
   for (const participant of participants) {
     if (isAutomation(participant)) continue;
-    for (const org of ["Microsoft", "Azure"]) {
+    for (const org of ORGANIZATIONS) {
       const visible = await observe(
         core,
         findings,
         participant.login,
         () => publicMembership(github, org, participant.login),
         `Could not verify ${org} membership.`,
+        org,
       );
       if (visible === false)
         findings.push({
           subject: participant.login,
           message: `${org} membership not public.`,
+          organization: org,
         });
     }
     const write = await observe(
@@ -290,7 +297,7 @@ function renderReadinessFindings(
   const groups = new Map<string, { messages: Set<string>; unknown: boolean }>();
   for (const finding of findings) {
     const group = groups.get(finding.subject) ?? { messages: new Set<string>(), unknown: true };
-    group.messages.add(finding.message);
+    group.messages.add(renderFindingMessage(finding));
     group.unknown &&= finding.unknown === true;
     groups.set(finding.subject, group);
   }
@@ -305,18 +312,24 @@ function renderReadinessFindings(
         const user = users.has(subject)
           ? link(label, `https://github.com/${encodeURIComponent(subject)}`)
           : label;
-        return [
-          `${group.unknown ? "🟡" : "🔴"} **${user}**`,
-          [...group.messages].map(escapeMarkdown).join("<br>"),
-        ];
+        return [`${group.unknown ? "🟡" : "🔴"} **${user}**`, [...group.messages].join("<br>")];
       }),
     ]),
     entries.length > 100 ? `${entries.length - 100} more entries not shown.` : undefined,
   ];
 }
 
+/** Escapes finding text and links its organization to a People search for the affected user. */
+function renderFindingMessage(finding: ReadinessFinding): string {
+  const message = escapeMarkdown(finding.message);
+  const org = finding.organization;
+  if (!org) return message;
+  const query = new URLSearchParams({ query: finding.subject }).toString();
+  return message.replace(org, link(org, `https://github.com/orgs/${org}/people?${query}`));
+}
+
 /**
- * Evaluates an open PR, authorizes manual refreshes, and publishes the advisory report.
+ * Evaluates an open PR touching specification/, authorizes refreshes, and publishes the report.
  * Unexpected lookup failures are rethrown after publishing the available incomplete evidence.
  */
 export async function checkContributorReadiness(
@@ -329,6 +342,10 @@ export async function checkContributorReadiness(
   const { data: pr } = await github.rest.pulls.get({ owner, repo, pull_number: number });
   if (pr.state !== "open") {
     core.info("Skipping contributor readiness for a closed PR.");
+    return;
+  }
+  if (!(await changesSpecifications(github, owner, repo, pr))) {
+    core.info("Skipping contributor readiness: no changes under specification/.");
     return;
   }
   const findings: ReadinessFinding[] = [];
@@ -356,6 +373,35 @@ export async function checkContributorReadiness(
   }
   await publishReadinessReport(inputs, pr, participants, findings);
   if (failure) throw failure;
+}
+
+/** Checks current PR files for spec changes, including renames, without guessing on truncated results. */
+async function changesSpecifications(
+  github: GitHub,
+  owner: string,
+  repo: string,
+  pr: PullRequest,
+): Promise<boolean> {
+  const files = await github.paginate(github.rest.pulls.listFiles, {
+    owner,
+    repo,
+    pull_number: pr.number,
+    per_page: PER_PAGE_MAX,
+  });
+  if (
+    files.some(
+      (file) =>
+        file.filename.startsWith("specification/") ||
+        file.previous_filename?.startsWith("specification/"),
+    )
+  )
+    return true;
+  if (files.length < pr.changed_files) {
+    throw new Error(
+      "Cannot determine specification scope: GitHub returned an incomplete changed-file list",
+    );
+  }
+  return false;
 }
 
 /** Returns participants for an authorized refresh, or undefined after logging a denied request. */
@@ -399,6 +445,7 @@ async function publishReadinessReport(
     throw new Error("PR changed during evaluation; rerun contributor readiness");
   }
   const body = renderReadiness(participants, findings);
+  await core.summary.addRaw(body).write();
   await github.rest.checks.create({
     owner,
     repo,
@@ -417,7 +464,6 @@ async function publishReadinessReport(
     },
   });
   await updateReadinessComment(github, owner, repo, pr.number, body, findings.length > 0);
-  await core.summary.addRaw(body).write();
 }
 
 /**
