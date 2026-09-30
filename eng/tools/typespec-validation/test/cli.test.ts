@@ -1,3 +1,4 @@
+import { d } from "@azure-tools/specs-shared/testing";
 import { execFile } from "node:child_process";
 import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -271,11 +272,12 @@ it("uses an explicit root, exits nonzero on failure, and still runs later projec
   await expect(run("--all", "custom")).rejects.toMatchObject({
     code: 1,
     stdout: expect.stringContaining("Suppressed: later project") as unknown,
-    stderr: expect.stringContaining(
-      "TypeSpec Validation failed for some folder to fix run and address any errors:\n" +
-        " > pnpm install\n > pnpm tsv custom/a\n" +
-        "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
-    ) as unknown,
+    stderr: expect.stringContaining(d`
+      TypeSpec Validation failed for some folder to fix run and address any errors:
+       > pnpm install
+       > pnpm tsv custom/a
+      For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation
+    `) as unknown,
   });
 });
 
@@ -297,11 +299,12 @@ it("emits a failure annotation inside its project group and a final reproduction
         "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation\n" +
         "::endgroup::\n::group::Validating custom/b",
     ) as unknown,
-    stderr: expect.stringContaining(
-      "TypeSpec Validation failed for some folder to fix run and address any errors:\n" +
-        " > pnpm install\n > pnpm tsv custom/a\n" +
-        "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
-    ) as unknown,
+    stderr: expect.stringContaining(d`
+      TypeSpec Validation failed for some folder to fix run and address any errors:
+       > pnpm install
+       > pnpm tsv custom/a
+      For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation
+    `) as unknown,
   });
 });
 
@@ -319,7 +322,11 @@ it("wraps child output in repository-relative GitHub Actions groups", async () =
   );
 
   const { stdout } = await run("--all", join(root, "specification"));
-  expect(stdout).toContain("Checking 2 TypeSpec folders:\nspecification/a\nspecification/b");
+  expect(stdout).toContain(d`
+    Checking 2 TypeSpec folders:
+    specification/a
+    specification/b
+  `);
   const groups = [...stdout.matchAll(/::group::([^\n]+)\n([\s\S]*?)::endgroup::/g)];
   expect(groups.map((group) => group[1])).toEqual([
     "Validating specification/a",
@@ -553,11 +560,12 @@ it("returns a failure exit code and still validates later impacted projects", as
   await expect(run("--changed")).rejects.toMatchObject({
     code: 1,
     stdout: expect.stringContaining("Suppressed: later project") as unknown,
-    stderr: expect.stringContaining(
-      "TypeSpec Validation failed for some folder to fix run and address any errors:\n" +
-        " > pnpm install\n > pnpm tsv specification/service/a\n" +
-        "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
-    ) as unknown,
+    stderr: expect.stringContaining(d`
+      TypeSpec Validation failed for some folder to fix run and address any errors:
+       > pnpm install
+       > pnpm tsv specification/service/a
+      For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation
+    `) as unknown,
   });
 });
 
