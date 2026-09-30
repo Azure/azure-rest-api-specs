@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2022-01-01-preview",
+    "version": "2022-04-02-preview",
     "title": "Common types and definitions",
     "description": "Definitions and parameters common for all resource types of KubernetesConfiguration RP"
   },
@@ -31,15 +31,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "enum": [
-        "Microsoft.ContainerService",
-        "Microsoft.Kubernetes"
-      ],
-      "x-ms-enum": {
-        "name": "ExtensionsClusterRp",
-        "modelAsString": true
-      },
-      "description": "The Kubernetes cluster RP - either Microsoft.ContainerService (for AKS clusters) or Microsoft.Kubernetes (for OnPrem K8S clusters).",
+      "description": "The Kubernetes cluster RP - i.e. Microsoft.ContainerService, Microsoft.Kubernetes, Microsoft.HybridContainerService.",
       "x-ms-parameter-location": "method"
     },
     "ClusterResourceNameParameter": {
@@ -47,15 +39,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "enum": [
-        "managedClusters",
-        "connectedClusters"
-      ],
-      "x-ms-enum": {
-        "name": "ExtensionsClusterResourceName",
-        "modelAsString": true
-      },
-      "description": "The Kubernetes cluster resource name - either managedClusters (for AKS clusters) or connectedClusters (for OnPrem K8S clusters).",
+      "description": "The Kubernetes cluster resource name - i.e. managedClusters, connectedClusters, provisionedClusters.",
       "x-ms-parameter-location": "method"
     },
     "ClusterNameParameter": {

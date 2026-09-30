@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2023-05-01-preview",
+    "version": "2024-11-01",
     "title": "Common types and definitions",
     "description": "Definitions and parameters common for all resource types of KubernetesConfiguration RP"
   },
@@ -40,6 +40,62 @@
       "x-ms-enum": {
         "name": "ProvisioningState",
         "modelAsString": true
+      }
+    },
+    "OperationStatusResult": {
+      "description": "The current status of an async operation.",
+      "type": "object",
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "description": "Fully qualified ID for the async operation.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the async operation.",
+          "type": "string"
+        },
+        "status": {
+          "description": "Operation status.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Additional information, if available.",
+          "type": "object",
+          "x-nullable": true,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "error": {
+          "description": "If present, details of the operation error.",
+          "type": "object",
+          "readOnly": true,
+          "x-nullable": true,
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorDetail"
+        }
+      }
+    },
+    "OperationStatusList": {
+      "description": "The async operations in progress, in the cluster.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/OperationStatusResult"
+          },
+          "description": "List of async operations in progress, in the cluster."
+        },
+        "nextLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "URL to get the next set of Operation Result objects, if any."
+        }
       }
     },
     "ResourceProviderOperation": {
