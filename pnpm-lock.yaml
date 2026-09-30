@@ -1030,6 +1030,13 @@ importers:
         version: 17.0.35
 
   eng/tools/typespec-requirement:
+    dependencies:
+      '@azure-tools/specs-shared':
+        specifier: workspace:*
+        version: link:../../../.github/shared
+      '@azure-tools/suppressions':
+        specifier: workspace:*
+        version: link:../suppressions
     devDependencies:
       '@types/node':
         specifier: 'catalog:'
