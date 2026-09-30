@@ -221,6 +221,46 @@ export async function selectBacklogIssues(
   return selected;
 }
 
+export async function collectBacklogEvidence(
+  { github, context }: GitHubScriptArgs,
+  selection: Selection[],
+) {
+  const issues = [];
+  for (const { number } of selection) {
+    const params = { ...context.repo, issue_number: number };
+    const [{ data: issue }, comments, timeline] = await Promise.all([
+      github.rest.issues.get(params),
+      github.paginate(github.rest.issues.listComments, { ...params, per_page: PER_PAGE_MAX }),
+      github.paginate(github.rest.issues.listEventsForTimeline, {
+        ...params,
+        per_page: PER_PAGE_MAX,
+      }),
+    ]);
+    issues.push({
+      number: issue.number,
+      title: issue.title,
+      body: issue.body,
+      url: issue.html_url,
+      state: issue.state,
+      updatedAt: issue.updated_at,
+      labels: issue.labels.map((label) => (typeof label === "string" ? label : label.name)),
+      comments: comments.map((comment) => ({
+        body: comment.body,
+        url: comment.html_url,
+        author: comment.user?.login,
+        createdAt: comment.created_at,
+        updatedAt: comment.updated_at,
+      })),
+      timeline: timeline.filter((event) => event.event !== "commented"),
+    });
+  }
+  return {
+    repository: `${context.repo.owner}/${context.repo.repo}`,
+    sourceSha: context.sha,
+    issues,
+  };
+}
+
 export function parseSelection(value: unknown): Selection[] {
   if (!Array.isArray(value) || value.length < 1 || value.length > BATCH_SIZE) {
     throw new Error("Expected one to five selected issues");

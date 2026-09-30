@@ -3,6 +3,7 @@ import { describe, expect, it, vi } from "vitest";
 import { isMap, isSeq, parseDocument } from "yaml";
 import {
   applyBacklogTriage,
+  collectBacklogEvidence,
   parseDecisions,
   parseSelection,
   parseState,
@@ -227,6 +228,75 @@ describe("backlog triage selection", () => {
     expect(() => parseState({ version: 1, issues: { 1: { action: "resolved" } } })).toThrow(
       "entry",
     );
+  });
+});
+
+describe("backlog triage evidence collection", () => {
+  it("captures selected issue text, comments, and linked history before investigation", async () => {
+    const t = setup();
+    Object.assign(t.issues.get(1)!, { title: "API defect", body: "Reported behavior" });
+    t.github.rest.issues.listComments.mockResolvedValueOnce({
+      data: [
+        { body: "First comment", html_url: "https://example.com/1", user: { login: "reporter" } },
+        {
+          body: "Second comment",
+          html_url: "https://example.com/2",
+          user: { login: "maintainer" },
+        },
+      ],
+    });
+    const crossReference = { event: "cross-referenced", source: { issue: { number: 123 } } };
+    const listEventsForTimeline = vi.fn().mockResolvedValue({
+      data: [{ event: "commented", body: "Already captured above" }, crossReference],
+    });
+    Object.assign(t.github.rest.issues, { listEventsForTimeline });
+
+    const evidence = await collectBacklogEvidence(t.args, selected);
+    expect(evidence.repository).toBe("Azure/azure-rest-api-specs");
+    expect(evidence.sourceSha).toBe(t.args.context.sha);
+    expect(evidence.issues).toHaveLength(1);
+    expect(evidence.issues[0]).toMatchObject({
+      number: 1,
+      title: "API defect",
+      body: "Reported behavior",
+      updatedAt,
+      comments: [
+        { body: "First comment", url: "https://example.com/1", author: "reporter" },
+        { body: "Second comment", url: "https://example.com/2", author: "maintainer" },
+      ],
+      timeline: [crossReference],
+    });
+    expect(listEventsForTimeline).toHaveBeenCalledWith({
+      owner: "Azure",
+      repo: "azure-rest-api-specs",
+      issue_number: 1,
+      per_page: 100,
+    });
+    expect(t.github.rest.issues.listComments).toHaveBeenCalledWith({
+      owner: "Azure",
+      repo: "azure-rest-api-specs",
+      issue_number: 1,
+      per_page: 100,
+    });
+    expect(t.github.rest.issues.createComment).not.toHaveBeenCalled();
+    expect(t.createRef).not.toHaveBeenCalled();
+  });
+
+  it("does not return a success-shaped partial snapshot when a discussion fetch fails", async () => {
+    const t = setup();
+    t.github.rest.issues.listComments.mockRejectedValueOnce(createMockRequestError(403));
+    Object.assign(t.github.rest.issues, {
+      listEventsForTimeline: vi.fn().mockResolvedValue({ data: [] }),
+    });
+    await expect(collectBacklogEvidence(t.args, selected)).rejects.toThrow("403");
+    expect(t.github.rest.issues.createComment).not.toHaveBeenCalled();
+  });
+
+  it("does not fetch other issues when the selected batch is empty", async () => {
+    const t = setup();
+    expect((await collectBacklogEvidence(t.args, [])).issues).toEqual([]);
+    expect(t.get).not.toHaveBeenCalled();
+    expect(t.github.rest.issues.listComments).not.toHaveBeenCalled();
   });
 });
 
