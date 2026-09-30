@@ -1,6 +1,7 @@
 import type { ILogger } from "@azure-tools/specs-shared/logger";
 import { readFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
+import { filePath, indent, lines, text, type DiagnosticContent } from "../diagnostic-content.ts";
 import { failure, type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
 import { parseServiceYaml } from "../service-yaml.ts";
@@ -52,14 +53,14 @@ export class ServiceYamlRule implements Rule {
     }
 
     const serviceYamlFolder = dirname(serviceYamlPath);
-    const missing: string[] = [];
+    const missing: DiagnosticContent[] = [];
     let swaggerFileCount = 0;
 
     for (const version of parsed.value.versions) {
       for (const swaggerFile of version["swagger-files"] ?? []) {
         swaggerFileCount++;
         if (!(await fileExists(resolve(serviceYamlFolder, swaggerFile)))) {
-          missing.push(`  - version "${version.version}": ${swaggerFile}`);
+          missing.push(text`- version "${version.version}": ${filePath(swaggerFile)}`);
         }
       }
     }
@@ -69,18 +70,19 @@ export class ServiceYamlRule implements Rule {
     );
 
     if (missing.length > 0) {
-      return {
-        ...failure(
-          "service-yaml",
-          `Manifest references swagger files that do not exist ` +
-            `(paths are relative to service.yaml and are case-sensitive):\n\n` +
-            `${missing.join("\n")}\n\n` +
+      return failure(
+        "service-yaml",
+        `Manifest references swagger files that do not exist ` +
+          `(paths are relative to service.yaml and are case-sensitive):`,
+        {
+          path: serviceYamlPath,
+          details: indent(lines(missing)),
+          help:
             `For "source: typespec" versions, run "tsp compile ." to regenerate the swagger and ` +
             `update service.yaml. For "source: swagger" versions, correct the path by hand or remove ` +
             `the version if it no longer exists.`,
-          { path: serviceYamlPath },
-        ),
-      };
+        },
+      );
     }
 
     return { success: true };

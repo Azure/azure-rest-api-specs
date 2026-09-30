@@ -2,6 +2,7 @@ import { ConsoleLogger, defaultLogger } from "@azure-tools/specs-shared/logger";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { FormatRule } from "../src/rules/format.ts";
 import { gitDiffTopSpecFolder, runNodeBin } from "../src/utils.ts";
+import { diagnosticDetails } from "./diagnostics.ts";
 
 const mockFolder = "specification/foo/Foo";
 vi.mock("../src/utils.ts", () => ({
@@ -44,17 +45,19 @@ describe("FormatRule", () => {
       {
         severity: "error",
         code: "format",
-        output: "native stdout\nnative stderr",
       },
     ]);
+    expect(diagnosticDetails(result.diagnostics?.[0])).toBe("native stdout\nnative stderr");
     expect(runNodeBin).toHaveBeenCalledTimes(1);
     expect(gitDiffTopSpecFolder).not.toHaveBeenCalled();
   });
 
-  it("reports affected paths and a fix command without a full status or diff dump", async () => {
+  it("reports affected paths, their diff and a fix command", async () => {
+    const diff = "diff --git a/tspconfig.yaml b/tspconfig.yaml\n-old\n+new\n";
     vi.mocked(gitDiffTopSpecFolder).mockResolvedValue({
       success: false,
       files: ["specification/foo/Foo/tspconfig.yaml", "specification/foo/Shared/main.tsp"],
+      diff,
     });
     const result = await new FormatRule().execute(mockFolder, defaultLogger);
     expect(result).toMatchObject({
@@ -63,24 +66,31 @@ describe("FormatRule", () => {
         {
           code: "format-changed",
           path: mockFolder,
-          output: "specification/foo/Foo/tspconfig.yaml\nspecification/foo/Shared/main.tsp",
           help: expect.stringContaining(
             'pnpm exec tsp format "../**/*.tsp" tspconfig.yaml',
           ) as unknown,
         },
       ],
     });
+    expect(diagnosticDetails(result.diagnostics?.[0])).toBe(
+      `  specification/foo/Foo/tspconfig.yaml\n  specification/foo/Shared/main.tsp\n\n${diff}`,
+    );
   });
 
   it("preserves unexpected successful output even when formatting also changes files", async () => {
     vi.mocked(runNodeBin).mockResolvedValueOnce([null, "Formatter warning\n", ""]);
-    vi.mocked(gitDiffTopSpecFolder).mockResolvedValue({ success: false, files: ["main.tsp"] });
+    vi.mocked(gitDiffTopSpecFolder).mockResolvedValue({
+      success: false,
+      files: ["main.tsp"],
+      diff: "-old\n+new\n",
+    });
     const result = await new FormatRule().execute(mockFolder, defaultLogger);
     expect(result.success).toBe(false);
     expect(result.diagnostics?.map((diagnostic) => diagnostic.code)).toEqual([
       "format-output",
       "format-changed",
     ]);
-    expect(result.diagnostics?.[0].output).toBe("Formatter warning");
+    expect(diagnosticDetails(result.diagnostics?.[0])).toBe("Formatter warning");
+    expect(diagnosticDetails(result.diagnostics?.[1])).toBe("  main.tsp\n\n-old\n+new\n");
   });
 });

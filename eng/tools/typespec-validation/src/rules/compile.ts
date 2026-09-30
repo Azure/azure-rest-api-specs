@@ -4,6 +4,7 @@ import { readFile } from "node:fs/promises";
 import { stripVTControlCharacters } from "node:util";
 import path, { basename, dirname, normalize } from "node:path";
 import { reportCommandOutput } from "../command-output.ts";
+import { blocks, filePath, indent, lines, verbatim } from "../diagnostic-content.ts";
 import { globFiles } from "../glob.ts";
 import { type Diagnostic, type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
@@ -47,11 +48,11 @@ export class CompileRule implements Rule {
           // Compilation completed successfully.
 
           // Remove ANSI color codes, handle windows and linux line endings
-          const lines = stripVTControlCharacters(stdout).split(/\r?\n/);
+          const outputLines = stripVTControlCharacters(stdout).split(/\r?\n/);
 
           // TODO: Use helpers in /.github once they support platform-specific paths
           // Header, footer, and empty lines should be excluded by JSON filter
-          const outputSwaggers = lines
+          const outputSwaggers = outputLines
             // Remove leading and trailing whitespace
             .map((l) => l.trim())
             // Normalize to platform-specific path
@@ -192,7 +193,7 @@ export class CompileRule implements Rule {
                   message:
                     "Found TypeSpec-generated Swagger files not generated from the current TypeSpec sources.",
                   help: "If a version was removed, delete its associated Swagger files.",
-                  output: extraSwaggers.join("\n"),
+                  details: indent(lines(extraSwaggers.map(filePath))),
                 });
               } else {
                 logger.debug(
@@ -234,8 +235,11 @@ export class CompileRule implements Rule {
           severity: "error",
           code: "generated-files-changed",
           path: folder,
-          message: "Files changed after TypeSpec compilation (repository-relative paths):",
-          output: gitDiffResult.files.join("\n"),
+          message: "Files changed after TypeSpec compilation:",
+          details: blocks(
+            indent(lines(gitDiffResult.files.map(filePath))),
+            verbatim(gitDiffResult.diff ?? ""),
+          ),
           help: "Run `pnpm exec tsp compile .` from the project folder and include the generated files in your change.",
         });
       }

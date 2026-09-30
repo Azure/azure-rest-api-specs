@@ -1,5 +1,5 @@
 import { defaultLogger } from "@azure-tools/specs-shared/logger";
-import { diagnosticText } from "./diagnostics.ts";
+import { diagnosticDetails, diagnosticText } from "./diagnostics.ts";
 import { mockFolder } from "./mocks.ts";
 
 import { resolve } from "node:path";
@@ -113,7 +113,9 @@ describe("service-yaml", function () {
     const result = await new ServiceYamlRule().execute(mockFolder, defaultLogger);
     expect(result.success).toBe(false);
     expect(diagnosticText(result)).toContain("swagger files that do not exist");
-    expect(diagnosticText(result)).toContain("2024-06-01");
+    expect(diagnosticDetails(result.diagnostics?.[0])).toBe(
+      '  - version "2024-06-01": resource-manager/Contoso/stable/2024-06-01/openapi.json',
+    );
   });
 
   it("should report all broken swagger paths, not just the first", async function () {
@@ -123,10 +125,12 @@ describe("service-yaml", function () {
 
     const result = await new ServiceYamlRule().execute(mockFolder, defaultLogger);
     expect(result.success).toBe(false);
-    expect(diagnosticText(result)).toContain(
-      "resource-manager/Contoso/stable/2024-06-01/openapi.json",
+    expect(diagnosticDetails(result.diagnostics?.[0])).toBe(
+      '  - version "2024-06-01": resource-manager/Contoso/stable/2024-06-01/openapi.json\n' +
+        '  - version "2023-01-01": ../legacy/stable/2023-01-01/contoso.json',
     );
-    expect(diagnosticText(result)).toContain("../legacy/stable/2023-01-01/contoso.json");
+    expect(result.diagnostics?.[0].help).toContain('For "source: typespec" versions');
+    expect(result.diagnostics?.[0].help).toContain('For "source: swagger" versions');
   });
 
   it("should resolve swagger paths relative to service.yaml", async function () {

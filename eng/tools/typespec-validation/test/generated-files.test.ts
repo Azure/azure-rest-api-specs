@@ -2,6 +2,7 @@ import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { stripVTControlCharacters } from "node:util";
 import { simpleGit } from "simple-git";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { gitDiffTopSpecFolder } from "../src/utils.ts";
@@ -27,7 +28,7 @@ afterEach(async () => {
 });
 
 it.each([false, true])(
-  "checks the entire service, with diff details only for verbose=%s",
+  "checks the entire service and returns diffs with verbose=%s",
   async (verbose) => {
     await writeFile(join(folder, "main.tsp"), "modified");
     await writeFile(join(root, "specification/service/Sibling/output.json"), "{}");
@@ -40,8 +41,12 @@ it.each([false, true])(
       "specification/service/Project/main.tsp",
       "specification/service/Sibling/output.json",
     ]);
+    const diff = stripVTControlCharacters(result.diff ?? "");
+    expect(diff).toContain("diff --git");
+    expect(diff).toContain("+modified");
+    expect(diff).toContain("+{}");
     const traces = debug.mock.calls.flat().join("\n");
-    expect(traces.includes("diff --git")).toBe(verbose);
+    expect(traces).not.toContain("diff --git");
     expect(traces.includes('"modified":')).toBe(verbose);
     expect(await readFile(join(folder, "main.tsp"), "utf8")).toBe("modified");
   },

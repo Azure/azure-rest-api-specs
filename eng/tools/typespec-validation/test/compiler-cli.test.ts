@@ -118,6 +118,37 @@ it("prints only a final summary by default and compact rule statuses with --verb
 });
 
 it.each([
+  { command: "compile", color: false, verbose: false },
+  { command: "compile", color: true, verbose: true },
+  { command: "format", color: false, verbose: true },
+  { command: "format", color: true, verbose: false },
+])(
+  "shows changed-file diffs once for $command with color=$color verbose=$verbose",
+  async ({ command, color, verbose }) => {
+    await simpleGit(root).addConfig("color.diff.new", "green");
+    if (color) {
+      vi.stubEnv("NO_COLOR", undefined);
+      vi.stubEnv("FORCE_COLOR", "1");
+    }
+    const generatedFile = JSON.stringify(join(root, project, "generated.json"));
+    await compiler(`if (process.argv[2] === "${command}") {
+      require("node:fs").writeFileSync(${generatedFile}, "new content\\n");
+    }`);
+
+    const result = await run(project, ...(verbose ? ["--verbose"] : []));
+    expect(result.code).toBe(1);
+    const output = stripVTControlCharacters(result.stderr);
+    const code = command === "compile" ? "generated-files-changed" : "format-changed";
+    expect(output).toContain(`error tsv/${code}:`);
+    expect(output).toContain(`\n  ${project}/generated.json\n\ndiff --git`);
+    expect(output).toContain("\n+new content\n\n  help:");
+    expect(output.match(/diff --git/g)).toHaveLength(1);
+    expect(result.stdout).not.toContain("diff --git");
+    expect(result.stderr.includes("\x1b[32m")).toBe(color);
+  },
+);
+
+it.each([
   { color: false, verbose: false },
   { color: true, verbose: false },
   { color: false, verbose: true },
