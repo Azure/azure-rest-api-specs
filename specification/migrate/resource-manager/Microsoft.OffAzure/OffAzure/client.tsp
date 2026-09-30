@@ -46,7 +46,11 @@ using Microsoft.OffAzure;
 );
 
 // Match current Azure.ResourceManager C# resource data base types.
-@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id, armResourceIdentifier, "csharp");
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.Resource.id,
+  armResourceIdentifier,
+  "csharp"
+);
 @@alternateType(BaseResource.id, armResourceIdentifier, "csharp");
 
 // Resolve C# analyzer model suffix rules.
@@ -80,24 +84,56 @@ using Microsoft.OffAzure;
   "MigrationDiscoveryDependencyMapServiceMapExtensionsSingleMachineDetailedMapContent",
   "csharp"
 );
-@@clientName(ErrorSummaryRequest, "MigrationDiscoveryErrorSummaryRequestContent", "csharp");
+@@clientName(
+  ErrorSummaryRequest,
+  "MigrationDiscoveryErrorSummaryRequestContent",
+  "csharp"
+);
 @@clientName(
   ExportMachineErrorsRequest,
   "MigrationDiscoveryExportMachineErrorsRequestContent",
   "csharp"
 );
-@@clientName(ExportMachinesRequest, "MigrationDiscoveryExportMachinesRequestContent", "csharp");
-@@clientName(ExportSqlServersRequest, "MigrationDiscoveryExportSqlServersRequestContent", "csharp");
-@@clientName(ExportWebAppsRequest, "MigrationDiscoveryExportWebAppsRequestContent", "csharp");
+@@clientName(
+  ExportMachinesRequest,
+  "MigrationDiscoveryExportMachinesRequestContent",
+  "csharp"
+);
+@@clientName(
+  ExportSqlServersRequest,
+  "MigrationDiscoveryExportSqlServersRequestContent",
+  "csharp"
+);
+@@clientName(
+  ExportWebAppsRequest,
+  "MigrationDiscoveryExportWebAppsRequestContent",
+  "csharp"
+);
 @@clientName(FileMetaData, "FileMetadata", "csharp");
-@@clientName(MachineMetadataCollection, "MigrationDiscoveryMachineMetadataList", "csharp");
+@@clientName(
+  MachineMetadataCollection,
+  "MigrationDiscoveryMachineMetadataList",
+  "csharp"
+);
 @@clientName(ProxySiteRefreshBody, "ProxySiteRefreshContent", "csharp");
 @@clientName(SasUriResponse, "MigrationDiscoverySasUriResult", "csharp");
-@@clientName(ServerSiteUsageResponse, "MigrationDiscoveryServerSiteUsageResult", "csharp");
-@@clientName(SiteHealthSummaryCollection, "MigrationDiscoverySiteHealthSummaryList", "csharp");
+@@clientName(
+  ServerSiteUsageResponse,
+  "MigrationDiscoveryServerSiteUsageResult",
+  "csharp"
+);
+@@clientName(
+  SiteHealthSummaryCollection,
+  "MigrationDiscoverySiteHealthSummaryList",
+  "csharp"
+);
 @@clientName(SQLInventoryImportBody, "SqlInventoryImportContent", "csharp");
 @@clientName(SqlSiteRefreshBody, "SqlSiteRefreshContent", "csharp");
-@@clientName(WebAppPropertiesCollection, "MigrationDiscoveryWebAppPropertiesList", "csharp");
+@@clientName(
+  WebAppPropertiesCollection,
+  "MigrationDiscoveryWebAppPropertiesList",
+  "csharp"
+);
 
 // Resolve C# status member spelling without changing wire values.
 @@clientName(
