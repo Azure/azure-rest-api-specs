@@ -1,6 +1,5 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "@typespec/versioning";
 
@@ -8,22 +7,59 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.Core;
-using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
 namespace Microsoft.ApiManagement;
 
+/** Resource identifier of a virtual network subnet. */
+@added(Versions.v2026_09_01_preview)
+scalar AiGatewaySubnetResourceId
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Network/virtualNetworks/subnets",
+    }
+  ]>;
+
+/** Subnet used by an AI Gateway. */
+@added(Versions.v2026_09_01_preview)
+model AiGatewaySubnet {
+  /** Resource identifier of the subnet. The subnet must be delegated to Microsoft.App/environments and be in the same region as the AI Gateway. */
+  id: AiGatewaySubnetResourceId;
+}
+
+/** Backend networking configuration of an AI Gateway. */
+@added(Versions.v2026_09_01_preview)
+model AiGatewayBackend {
+  /** Subnet through which the AI Gateway reaches backends. */
+  subnet?: AiGatewaySubnet;
+}
+
+/** Frontend configuration of an AI Gateway. */
+@added(Versions.v2026_09_01_preview)
+model AiGatewayFrontend {
+  /** Default hostname used to invoke the AI Gateway. */
+  @visibility(Lifecycle.Read)
+  defaultHostname?: string;
+}
+
 /** Properties of an AI Gateway. */
-#suppress "@azure-tools/typespec-azure-resource-manager/empty-updateable-properties" "The AI Gateway resource supports updating ARM tags; its RP-specific properties are read-only."
 @added(Versions.v2026_09_01_preview)
 model AiGatewayProperties {
-  /** Runtime hostname used to invoke this AI Gateway. */
-  @visibility(Lifecycle.Read)
-  runtimeHostname?: string;
-
   /** Provisioning state of the resource. */
   @visibility(Lifecycle.Read)
   provisioningState?: AiGatewayProvisioningState;
+
+  /** Provisioning state targeted by an operation in progress. */
+  @visibility(Lifecycle.Read)
+  targetProvisioningState?: string;
+
+  /** Frontend configuration of the AI Gateway. */
+  @visibility(Lifecycle.Read)
+  frontend?: AiGatewayFrontend;
+
+  /** Backend networking configuration. Can only be set when the AI Gateway is created. */
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  backend?: AiGatewayBackend;
 }
 
 /** An AI Gateway resource. */
@@ -36,12 +72,29 @@ model AiGatewayResource is Azure.ResourceManager.TrackedResource<
     Resource = AiGatewayResource,
     KeyName = "aiGatewayName",
     SegmentName = "aigateways",
-    NamePattern = "^[a-z0-9][a-z0-9-]{1,61}[a-z0-9]$"
+    NamePattern = "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
   >;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+  ...Azure.ResourceManager.ResourceSkuProperty;
   ...Azure.ResourceManager.EntityTagProperty;
 }
 
 /** Parameters for updating an AI Gateway. */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "The SKU cannot be changed after the AI Gateway is created."
 @added(Versions.v2026_09_01_preview)
-model AiGatewayUpdateParameters
-  is Azure.ResourceManager.Foundations.TagsUpdateModel<AiGatewayResource>;
+model AiGatewayUpdateParameters {
+  ...Azure.ResourceManager.Foundations.TagsUpdateModel<AiGatewayResource>;
+  ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+}
+
+/** Primary and secondary secret values of an AI Gateway. */
+@added(Versions.v2026_09_01_preview)
+model AiGatewaySecrets {
+  /** Primary secret value. */
+  @secret
+  primary: string;
+
+  /** Secondary secret value. */
+  @secret
+  secondary: string;
+}
