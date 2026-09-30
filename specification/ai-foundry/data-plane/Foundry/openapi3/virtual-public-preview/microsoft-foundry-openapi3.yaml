@@ -49396,16 +49396,28 @@ components:
         entry_point:
           type: string
           description: The entry point Python file name for the uploaded evaluator code (e.g. 'answer_length_evaluator.py')
+          x-ms-foundry-meta:
+            required_previews:
+              - Evaluations=V1Preview
         image_tag:
           type: string
           description: The container image tag to use for evaluator code execution
+          x-ms-foundry-meta:
+            required_previews:
+              - Evaluations=V1Preview
         blob_uri:
           type: string
           format: uri
           description: The blob URI for the evaluator storage
+          x-ms-foundry-meta:
+            required_previews:
+              - Evaluations=V1Preview
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Code-based evaluator definition using python code
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     CodeConfiguration:
       type: object
       required:
@@ -50445,8 +50457,8 @@ components:
         propertyName: scenario
         mapping:
           evaluation: '#/components/schemas/EvaluationDataGenerationJob'
-          supervised_finetuning: '#/components/schemas/SupervisedFineTuningDataGenerationJob'
-          reinforcement_finetuning: '#/components/schemas/ReinforcementFineTuningDataGenerationJob'
+          supervised_finetuning_preview: '#/components/schemas/SupervisedFineTuningDataGenerationJob'
+          reinforcement_finetuning_preview: '#/components/schemas/ReinforcementFineTuningDataGenerationJob'
       description: Data Generation Job resource.
     DataGenerationJobInputs:
       type: object
@@ -50474,8 +50486,8 @@ components:
         propertyName: scenario
         mapping:
           evaluation: '#/components/schemas/EvaluationDataGenerationJobInputs'
-          supervised_finetuning: '#/components/schemas/SupervisedFineTuningDataGenerationJobInputs'
-          reinforcement_finetuning: '#/components/schemas/ReinforcementFineTuningDataGenerationJobInputs'
+          supervised_finetuning_preview: '#/components/schemas/SupervisedFineTuningDataGenerationJobInputs'
+          reinforcement_finetuning_preview: '#/components/schemas/ReinforcementFineTuningDataGenerationJobInputs'
       description: Caller-supplied inputs for a data generation job.
     DataGenerationJobOptions:
       type: object
@@ -50555,8 +50567,8 @@ components:
         - type: string
         - type: string
           enum:
-            - supervised_finetuning
-            - reinforcement_finetuning
+            - supervised_finetuning_preview
+            - reinforcement_finetuning_preview
             - evaluation
       description: The supported scenarios for a data generation job.
     DataGenerationJobSource:
@@ -51134,6 +51146,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Endpoint-based evaluator definition. The customer owns and hosts an HTTP endpoint that implements the evaluation contract. The evaluator references a Project Connection by name; the connection stores the endpoint URL and credentials (API Key or Entra ID). At execution time, the service resolves the connection to obtain the endpoint URL and authentication details, then calls the endpoint for each evaluation row.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EntraAuthorizationScheme:
       type: object
       required:
@@ -84962,6 +84977,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Prompt-based evaluator
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     PromptDataGenerationJobSource:
       type: object
       required:
@@ -85418,8 +85436,8 @@ components:
         scenario:
           type: string
           enum:
-            - reinforcement_finetuning
-          description: The scenario of the data generation job, which is Reinforcement Fine-tuning for this model.
+            - reinforcement_finetuning_preview
+          description: The scenario of the data generation job, which is Reinforcement Fine-tuning preview for this model.
         output_configuration:
           $ref: '#/components/schemas/ReinforcementFineTuningDataGenerationJobOutputTarget'
           description: Optional file output configuration for the generated reinforcement fine-tuning data.
@@ -85437,8 +85455,8 @@ components:
         scenario:
           type: string
           enum:
-            - reinforcement_finetuning
-          description: The scenario of the data generation job, which is Reinforcement Fine-tuning for this model.
+            - reinforcement_finetuning_preview
+          description: The scenario of the data generation job, which is Reinforcement Fine-tuning preview for this model.
         output_configuration:
           $ref: '#/components/schemas/ReinforcementFineTuningDataGenerationJobOutputTarget'
           description: Optional file output configuration for the generated reinforcement fine-tuning data.
@@ -87698,8 +87716,8 @@ components:
         scenario:
           type: string
           enum:
-            - supervised_finetuning
-          description: The scenario of the data generation job, which is Supervised Fine-tuning for this model.
+            - supervised_finetuning_preview
+          description: The scenario of the data generation job, which is Supervised Fine-tuning preview for this model.
         output_configuration:
           $ref: '#/components/schemas/SupervisedFineTuningDataGenerationJobOutputTarget'
           description: Optional file output configuration for the generated supervised fine-tuning data.
@@ -87717,8 +87735,8 @@ components:
         scenario:
           type: string
           enum:
-            - supervised_finetuning
-          description: The scenario of the data generation job, which is Supervised Fine-tuning for this model.
+            - supervised_finetuning_preview
+          description: The scenario of the data generation job, which is Supervised Fine-tuning preview for this model.
         output_configuration:
           $ref: '#/components/schemas/SupervisedFineTuningDataGenerationJobOutputTarget'
           description: Optional file output configuration for the generated supervised fine-tuning data.

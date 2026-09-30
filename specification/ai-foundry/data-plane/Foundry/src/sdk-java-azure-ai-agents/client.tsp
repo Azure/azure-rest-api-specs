@@ -14,6 +14,7 @@ import "../agents-microsoft365/routes.tsp";
 import "../agents-optimization/routes.tsp";
 // We don't need the operations for these subclients, just the models
 // so we can customize visibility where necessary.
+import "../openai/evaluations/models.tsp";
 import "../openai/responses/models.tsp";
 import "../openai/conversations/routes.tsp";
 
@@ -22,6 +23,36 @@ using Azure.Core.Experimental;
 using TypeSpec.Http;
 
 using Azure.AI.Projects;
+
+// Preserve the accidentally GA Java type after optimization evaluation granularity
+// moved to the evaluation-set subtype.
+@@usage(Azure.AI.Projects.EvaluationLevel, Usage.input | Usage.output, "java");
+@@access(Azure.AI.Projects.EvaluationLevel, Access.public, "java");
+
+// Reuse equivalent openai-java models instead of generating duplicate public types.
+@@alternateType(
+  OpenAI.ChatCompletionTool,
+  {
+    identity: "com.openai.models.chat.completions.ChatCompletionFunctionTool",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.FunctionObject,
+  {
+    identity: "com.openai.models.FunctionDefinition",
+  },
+  "java"
+);
+@@alternateType(
+  OpenAI.FunctionParameters,
+  {
+    identity: "com.openai.models.FunctionParameters",
+  },
+  "java"
+);
+
+@@clientName(ModelSamplingParams, "ModelSamplingParameters", "java");
 
 // Azure Core's HTTP pipeline cannot expose the upgraded WebSocket channel.
 // Java uses a handwritten Reactor Netty transport while TypeSpec generates the event models.
@@ -774,11 +805,22 @@ using Azure.AI.Projects;
 
 @@clientName(AgentOptimizationCandidateEvaluation.score, "averageScore");
 @@clientName(AgentOptimizationCandidateEvaluation.avg_tokens, "averageTokens");
+@@clientName(
+  AgentOptimizationCandidateEvaluation.avg_latency_ms,
+  "averageLatency",
+  "java"
+);
 @@clientName(AgentOptimizationCandidateEvaluation.eval_id, "evaluationId");
 @@clientName(
   AgentOptimizationCandidateEvaluation.eval_run_id,
   "evaluationRunId"
 );
+@@clientName(
+  AgentOptimizationJobLatency.avg_latency_ms,
+  "averageLatency",
+  "java"
+);
+@@clientName(AgentOptimizationJob.run_duration_ms, "runDuration", "java");
 @@clientName(AgentOptimizationEvaluator, "AgentOptimizationEvaluatorReference");
 
 @@clientName(SessionFileWriteResponse, "SessionFileWriteResult");
@@ -887,6 +929,22 @@ using Azure.AI.Projects;
 @@clientName(AgentOptimizationJobs.list, "listOptimizationJobs", "java");
 @@clientName(AgentOptimizationJobs.cancel, "cancelOptimizationJob", "java");
 @@clientName(AgentOptimizationJobs.delete, "deleteOptimizationJob", "java");
+@@clientName(AgentOptimizationJobs.estimate, "estimateOptimizationJob", "java");
+@@clientName(
+  AgentOptimizationJobCandidates.listCandidates,
+  "listOptimizationCandidates",
+  "java"
+);
+@@clientName(
+  AgentOptimizationJobCandidates.getCandidate,
+  "getOptimizationCandidate",
+  "java"
+);
+@@clientName(
+  AgentOptimizationJobCandidates.promoteCandidate,
+  "promoteOptimizationCandidate",
+  "java"
+);
 
 // Voice Agent Renames
 @@clientName(
