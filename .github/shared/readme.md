@@ -246,6 +246,27 @@ const report = renderMarkdownDoc(
 - `Tag` — model of an autorest tag: `inputFiles`, `name`, `readme`, `toJSONAsync(options)`,
   `toString()`.
 
+### `testing` — test helpers
+
+- `d` — template tag for readable multiline assertions. Removes one leading newline, the trailing
+  newline and spaces before the closing backtick, and the first line's indentation from lines
+  sharing that prefix. Nested indentation, interior blank lines, and other whitespace are preserved.
+  Values are interpolated before dedenting; `null` and `undefined` become empty strings.
+
+```typescript
+import { d } from "@azure-tools/specs-shared/testing";
+
+expect(output).toBe(d`
+  Summary
+    Details
+
+  Next section
+`);
+```
+
+The expected string is `"Summary\n  Details\n\nNext section"`. Only the expectation is dedented,
+so the assertion still catches whitespace changes in the actual output.
+
 ### `time` — time/duration helpers
 
 - `Duration` — frozen map of common durations in milliseconds.

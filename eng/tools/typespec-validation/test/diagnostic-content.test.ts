@@ -1,3 +1,4 @@
+import { d } from "@azure-tools/specs-shared/testing";
 import { stripVTControlCharacters } from "node:util";
 import { describe, expect, it } from "vitest";
 import {
@@ -33,12 +34,15 @@ describe("diagnostic content", () => {
       ),
       "Fix guidance last",
     );
-    expect(renderDiagnosticContent(content)).toBe(
-      "Native output first\n\n" +
-        "  Version 2026-01-01: generated.json\n\n" +
-        "    Nested explanation\n\n" +
-        "Fix guidance last",
-    );
+    expect(renderDiagnosticContent(content)).toBe(d`
+      Native output first
+
+        Version 2026-01-01: generated.json
+
+          Nested explanation
+
+      Fix guidance last
+    `);
   });
 
   it("omits empty blocks without creating phantom paragraphs", () => {
