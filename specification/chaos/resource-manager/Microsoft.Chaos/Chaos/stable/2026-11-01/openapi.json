@@ -7309,19 +7309,6 @@
           "format": "arm-id",
           "description": "The `discoveredResources/{id}` this agent maps to.",
           "readOnly": true
-        },
-        "capabilities": {
-          "type": "array",
-          "description": "The fault vocabulary this specific agent instance supports, used to recommend\nscenarios for it. This is the per-agent capability set reported at registration,\ndistinct from the target-type `capabilityTypes` (actions) API, which describes what\na resource type supports rather than what this live agent supports.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "customGroup": {
-          "type": "string",
-          "description": "An optional grouping identifier that matches a custom scope.",
-          "readOnly": true
         }
       },
       "required": [
@@ -7332,8 +7319,7 @@
         "lastSeenAt",
         "host",
         "scope",
-        "discoveredResourceId",
-        "capabilities"
+        "discoveredResourceId"
       ]
     },
     "SubscriberStatus": {

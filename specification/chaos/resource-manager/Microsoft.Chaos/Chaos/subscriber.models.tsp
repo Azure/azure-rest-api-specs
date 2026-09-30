@@ -145,21 +145,6 @@ model SubscriberProperties {
    */
   @visibility(Lifecycle.Read)
   discoveredResourceId: Azure.Core.armResourceIdentifier;
-
-  /**
-   * The fault vocabulary this specific agent instance supports, used to recommend
-   * scenarios for it. This is the per-agent capability set reported at registration,
-   * distinct from the target-type `capabilityTypes` (actions) API, which describes what
-   * a resource type supports rather than what this live agent supports.
-   */
-  @visibility(Lifecycle.Read)
-  capabilities: string[];
-
-  /**
-   * An optional grouping identifier that matches a custom scope.
-   */
-  @visibility(Lifecycle.Read)
-  customGroup?: string;
 }
 
 /**
