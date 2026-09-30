@@ -6115,6 +6115,22 @@
           },
           "readOnly": true
         },
+        "activePhysicalZones": {
+          "type": "array",
+          "description": "Active Resource location and physical zones of Azure Resource.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "recoveryPhysicalZones": {
+          "type": "array",
+          "description": "Recovery Resource location and physical zones of HA Azure Resource.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
         "inclusionState": {
           "$ref": "#/definitions/DrillResourceInclusionState",
           "description": "Inclusion State of the Drill resource in Drill"
@@ -6154,6 +6170,11 @@
           "description": "ForceInclusion status for this resource. Has the customer forceIncluded it?",
           "readOnly": true
         },
+        "haStatus": {
+          "$ref": "#/definitions/HAStatus",
+          "description": "HA status of the Drill resource",
+          "readOnly": true
+        },
         "attentionReason": {
           "$ref": "#/definitions/DrillResourceAttentionReason",
           "description": "Attention reason if the Status is 'NeedsAttention'.",
@@ -6163,6 +6184,19 @@
           "type": "string",
           "description": "Recommendation Type Id for the recommendation.",
           "readOnly": true
+        },
+        "advisorHaRecommendationId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Associated Advisor Recommendation link, if HA is not enabled on this resource.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Advisor/recommendations"
+              }
+            ]
+          }
         },
         "rbacAssignmentError": {
           "$ref": "#/definitions/ErrorDetails",
@@ -6178,28 +6212,11 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state",
           "readOnly": true
-        },
-        "drillType": {
-          "$ref": "#/definitions/DrillType",
-          "description": "The discriminator for the Drill Resource object hierarchy. Matches the parent Drill type.",
-          "readOnly": true
-        },
-        "faultEligibility": {
-          "$ref": "#/definitions/FaultEligibility",
-          "description": "Normal fault eligibility for a drill resource. Currently populated for regional resources only.\nOmitted until evaluated. Eligibility does not indicate inclusion or readiness,\nand force inclusion does not change this value.",
-          "readOnly": true
-        },
-        "faultIneligibleReason": {
-          "$ref": "#/definitions/FaultIneligibleReason",
-          "description": "Reason the resource is ineligible under normal fault inclusion policy. Currently populated for regional resources only.\nContains the single applicable recovery-plan reason when Ineligible.\nOmitted when Eligible, Unknown, or not yet evaluated. Failed or incomplete recovery-plan reads do not establish non-inclusion.\nBinding and permission errors are reported separately in attentionReason and error fields.",
-          "readOnly": true
         }
       },
-      "discriminator": "drillType",
       "required": [
         "resourceId",
-        "resourceType",
-        "drillType"
+        "resourceType"
       ]
     },
     "DrillResourceQualification": {
@@ -6471,11 +6488,6 @@
           "$ref": "#/definitions/DrillReportSummary",
           "description": "Summary of report generation for this Drill Run.",
           "readOnly": true
-        },
-        "recoveryTimeObjective": {
-          "$ref": "#/definitions/IsoDuration",
-          "description": "Recovery time objective for the drill run.",
-          "readOnly": true
         }
       },
       "allOf": [
@@ -6646,7 +6658,8 @@
       "type": "string",
       "description": "Enum for Drill type object hierarchy.",
       "enum": [
-        "Zonal"
+        "Zonal",
+        "Regional"
       ],
       "x-ms-enum": {
         "name": "DrillType",
@@ -6656,6 +6669,11 @@
             "name": "Zonal",
             "value": "Zonal",
             "description": "Zonal Drill."
+          },
+          {
+            "name": "Regional",
+            "value": "Regional",
+            "description": "Regional Drill."
           }
         ]
       }
@@ -7215,60 +7233,6 @@
         "targetResourceId"
       ]
     },
-    "FaultEligibility": {
-      "type": "string",
-      "description": "Normal fault eligibility of a drill resource, independent of inclusion and readiness.",
-      "enum": [
-        "Unknown",
-        "Eligible",
-        "Ineligible"
-      ],
-      "x-ms-enum": {
-        "name": "FaultEligibility",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Unknown",
-            "value": "Unknown",
-            "description": "The available information is insufficient to determine normal fault eligibility."
-          },
-          {
-            "name": "Eligible",
-            "value": "Eligible",
-            "description": "The resource satisfies the normal fault inclusion policy."
-          },
-          {
-            "name": "Ineligible",
-            "value": "Ineligible",
-            "description": "The resource does not satisfy the normal fault inclusion policy."
-          }
-        ]
-      }
-    },
-    "FaultIneligibleReason": {
-      "type": "string",
-      "description": "Reason requiring attention for a resource that requires recovery-plan participation and has no independent fault eligibility path.",
-      "enum": [
-        "RecoveryPlanNotConfigured",
-        "ResourceNotIncludedInRecoveryPlan"
-      ],
-      "x-ms-enum": {
-        "name": "FaultIneligibleReason",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "RecoveryPlanNotConfigured",
-            "value": "RecoveryPlanNotConfigured",
-            "description": "The parent drill has no associated recovery plan required by the resource's normal fault inclusion policy."
-          },
-          {
-            "name": "ResourceNotIncludedInRecoveryPlan",
-            "value": "ResourceNotIncludedInRecoveryPlan",
-            "description": "The associated recovery plan's complete membership collection was successfully read and the resource is absent or explicitly Excluded."
-          }
-        ]
-      }
-    },
     "FaultProperties": {
       "type": "object",
       "description": "Fault Properties",
@@ -7528,10 +7492,6 @@
         "zonalResiliency": {
           "$ref": "#/definitions/UnifiedResilienceItemGoalRequirement",
           "description": "Zonal resiliency goal copied from the goal assignment."
-        },
-        "regionalResiliency": {
-          "$ref": "#/definitions/UnifiedResilienceItemGoalRequirement",
-          "description": "Regional resiliency goal copied from the goal assignment."
         }
       },
       "required": [
@@ -8312,12 +8272,6 @@
         "lastRunAttestation": {
           "$ref": "#/definitions/DrillAttestation",
           "description": "Attestation state of the last run of this Drill.",
-          "readOnly": true
-        },
-        "lastRunRecoveryTimeActual": {
-          "type": "string",
-          "format": "duration",
-          "description": "Actual recovery time of the last run of this Drill.",
           "readOnly": true
         }
       }
@@ -9815,6 +9769,35 @@
         }
       }
     },
+    "RegionalDrill": {
+      "type": "object",
+      "description": "Regional Drill resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RegionalDrillProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RegionalDrillProperties": {
+      "type": "object",
+      "description": "Definition of Regional Drill properties.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DrillProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Regional"
+    },
     "RelativeResourceCompositionState": {
       "type": "string",
       "description": "Enum for AttentionReason - Resource state sync between two objects.",
@@ -11041,41 +11024,6 @@
         "lastModifiedTime"
       ]
     },
-    "UnifiedResilienceItemRegionalResiliencyPosture": {
-      "type": "object",
-      "description": "Definition of the regional resiliency posture computed for the unified resilience item.",
-      "properties": {
-        "enabledResourceCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Count of resources that have regional resiliency enabled."
-        },
-        "notEnabledResourceCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Count of resources that do not have regional resiliency enabled."
-        },
-        "notEvaluatedResourceCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Count of resources that have not been evaluated for regional resiliency."
-        },
-        "userConfirmationNeededCount": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Count of resources that require user confirmation for regional resiliency."
-        },
-        "evaluationDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date and time when the regional resiliency posture was last evaluated."
-        },
-        "estimatedRecoveryPointObjective": {
-          "$ref": "#/definitions/IsoDuration",
-          "description": "The estimated recovery point objective computed for the service group, expressed as an ISO 8601 duration."
-        }
-      }
-    },
     "UnifiedResilienceItemResiliencyPosture": {
       "type": "object",
       "description": "Definition of the resiliency posture computed for the unified resilience item.",
@@ -11083,10 +11031,6 @@
         "zonalResiliency": {
           "$ref": "#/definitions/UnifiedResilienceItemZonalResiliencyPosture",
           "description": "The zonal resiliency section of the resiliency posture."
-        },
-        "regionalResiliency": {
-          "$ref": "#/definitions/UnifiedResilienceItemRegionalResiliencyPosture",
-          "description": "The regional resiliency section of the resiliency posture."
         }
       },
       "required": [
@@ -11464,52 +11408,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/DrillProperties"
-        }
-      ],
-      "x-ms-discriminator-value": "Zonal"
-    },
-    "ZonalDrillResourceProperties": {
-      "type": "object",
-      "description": "Properties of a resource in a zonal Resiliency Drill.",
-      "properties": {
-        "activePhysicalZones": {
-          "type": "array",
-          "description": "Active Resource location and physical zones of Azure Resource.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "recoveryPhysicalZones": {
-          "type": "array",
-          "description": "Recovery Resource location and physical zones of HA Azure Resource.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "haStatus": {
-          "$ref": "#/definitions/HAStatus",
-          "description": "HA status of the Drill resource",
-          "readOnly": true
-        },
-        "advisorHaRecommendationId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Associated Advisor Recommendation link, if HA is not enabled on this resource.",
-          "readOnly": true,
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Advisor/recommendations"
-              }
-            ]
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/DrillResourceProperties"
         }
       ],
       "x-ms-discriminator-value": "Zonal"

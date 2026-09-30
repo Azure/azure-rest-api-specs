@@ -25,8 +25,7 @@ model ServiceLevelResource {
   serviceLevelObjectiveResourceId?: armResourceIdentifier;
 }
 
-@added(Versions.v2026_09_30_preview)
-@removed(Versions.v2026_10_01)
+@added(Versions.v2026_10_31_preview)
 @doc("Recovery objectives targeted by a goal assignment for regional resiliency.")
 model RegionalObjectives {
   @doc("Target regional recovery point objective. eg, PT15M for 15 minutes.")
@@ -55,13 +54,11 @@ model GoalAssignmentProperties {
   requireZonalResiliency: boolean;
 
   @doc("Whether regional resiliency is required for this goal assignment.")
-  @added(Versions.v2026_09_30_preview)
-  @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_10_31_preview)
   requireRegionalResiliency?: boolean;
 
   @doc("Recovery objectives targeted for regional resiliency.")
-  @added(Versions.v2026_09_30_preview)
-  @removed(Versions.v2026_10_01)
+  @added(Versions.v2026_10_31_preview)
   regionalObjectives?: RegionalObjectives;
 
   @doc("List of service level resources.")

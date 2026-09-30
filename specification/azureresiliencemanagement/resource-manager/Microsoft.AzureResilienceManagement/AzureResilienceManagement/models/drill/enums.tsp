@@ -236,7 +236,6 @@ union DrillType {
   Zonal: "Zonal",
 
   @doc("Regional Drill.")
-  @removed(Versions.v2026_10_01)
   Regional: "Regional",
 }
 
@@ -503,8 +502,7 @@ union DrillReportFinalizationState {
 }
 
 /** Regional resiliency posture reported by the selected protection solution. */
-@added(Versions.v2026_09_30_preview)
-@removed(Versions.v2026_10_01)
+@added(Versions.v2026_10_31_preview)
 union RegionalResiliencyStatus {
   string,
 
@@ -516,7 +514,7 @@ union RegionalResiliencyStatus {
 }
 
 /** Normal fault eligibility of a drill resource, independent of inclusion and readiness. */
-@added(Versions.v2026_09_30_preview)
+@added(Versions.v2026_10_31_preview)
 union FaultEligibility {
   string,
 
@@ -531,7 +529,7 @@ union FaultEligibility {
 }
 
 /** Reason requiring attention for a resource that requires recovery-plan participation and has no independent fault eligibility path. */
-@added(Versions.v2026_09_30_preview)
+@added(Versions.v2026_10_31_preview)
 union FaultIneligibleReason {
   string,
 
