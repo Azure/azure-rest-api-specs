@@ -4,6 +4,51 @@ The `eng` directory contains source code for automated tooling running on this r
 
 For context on this directory, see [Design guidelines for spec repos validation tooling] (Microsoft-internal).
 
+## Contributor readiness
+
+Contributor readiness runs only for PRs that change `specification/`, including
+mixed specification and engineering changes. Engineering-only PRs are skipped
+without account checks or a readiness comment/check, including review events and
+manual `/azsdk check-access` requests. The PR-event notifier uses a path filter;
+the publisher verifies current changed files for every trigger.
+
+The advisory **Contributor readiness** check reports public Microsoft/Azure
+membership visibility and effective repository access for the PR author, commit
+authors/committers, and all submitted reviewers. It does not change merge rules.
+Missing public membership produces conditional internal-onboarding guidance, not
+a claim that an external contributor is unauthorized.
+
+The comment groups findings by affected user: 🔴 marks a confirmed issue and 🟡
+marks checks that could not be verified. It links to
+[setup and access renewal](https://aka.ms/azsdk/access); users without findings
+are omitted to keep the report short. The job summary shows the same report.
+Organization names in membership findings link to the organization's People page,
+with the affected user's login prefilled in the search.
+
+After changing access, comment `/azsdk check-access` on the PR. The PR author,
+resolved commit participants, submitted reviewers and maintainers can refresh,
+including affected participants without write access. One bot comment is updated
+when findings exist and resolved when they are fixed; clean PRs receive only the
+check. Permission changes alone do not trigger an automatic refresh.
+
+The check uses `GITHUB_TOKEN`: no additional credentials, bot service or Azure
+resources are needed. Private memberships, team membership, manager approvals,
+access expiry dates and Azure DevOps roles are not inspected. CODEOWNER coverage
+and other approval rules remain GitHub's responsibility. Unmapped identities,
+inaccessible API results, and PRs exceeding the commits API's 250-commit limit are
+reported as incomplete rather than silently passing.
+
+PR opening, reopening, new commits, ready-for-review transitions and submitted
+reviews use an unprivileged notification workflow followed by a trusted
+`workflow_run` publisher. The notifier has no checkout or token permissions;
+the publisher runs only default-branch code and resolves PRs from GitHub metadata.
+No `pull_request_target` trigger is used.
+
+Editing or dismissing a review does not rerun the check; those reviewers remain
+included. Fork workflow approval policies can delay automatic refreshes. The
+comment command runs from the default branch and remains available without
+waiting for the notifier. Do not make this advisory check required.
+
 ## Code conventions
 
 Below are code convention we strive to follow in `eng` directory:

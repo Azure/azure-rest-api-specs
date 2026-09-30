@@ -1,4 +1,11 @@
-import type { Core, WebhookEvent } from "../github.ts";
+import type {
+  CheckRuns,
+  CommitStatuses,
+  Core,
+  GitHub,
+  GitHubScriptArgs,
+  WebhookEvent,
+} from "../github.ts";
 /*
   This file is a github script. It will be called directly from a github-script action. This code is a simplified
   amalgamation of logic that previously resided in the `PR Summary` check and various events within the `pipelinebot`.
@@ -24,6 +31,7 @@ import { intersect } from "../../../shared/src/set.ts";
 import { byDate, invert } from "../../../shared/src/sort.ts";
 import { commentOrUpdate } from "../comment.ts";
 import { extractInputs } from "../context.ts";
+import { TYPESPEC_SUPPRESSIONS_APPROVED_LABEL } from "../label.ts";
 import {
   ImpactAssessmentSchema,
   brChRevApproval,
@@ -40,6 +48,7 @@ import {
   reqMetCheckTsg,
   typeSpecRequirementArmTsg,
   typeSpecRequirementDataPlaneTsg,
+  typeSpecSuppressionsTsg,
 } from "./tsgs.ts";
 
 import fs from "fs/promises";
@@ -88,9 +97,9 @@ export type CheckRunResult = {
   target_url?: string;
 };
 
-export type CommitStatus = import("../github.ts").CommitStatuses[0];
+export type CommitStatus = CommitStatuses[0];
 
-export type CheckRun = import("../github.ts").CheckRuns[0];
+export type CheckRun = CheckRuns[0];
 
 // Placing these configuration items here until we decide another way to pull them in.
 const FYI_CHECK_NAMES = [
@@ -121,6 +130,12 @@ const CHECK_METADATA: CheckMetadata[] = [
     name: "TypeSpec Validation",
     suppressionLabels: [],
     troubleshootingGuide: defaultTsg,
+  },
+  {
+    precedence: 0,
+    name: "TypeSpec Suppressions",
+    suppressionLabels: [TYPESPEC_SUPPRESSIONS_APPROVED_LABEL],
+    troubleshootingGuide: typeSpecSuppressionsTsg,
   },
   {
     precedence: 0,
@@ -252,7 +267,7 @@ export default async function summarizeChecks({
   github,
   context,
   core,
-}: import("@actions/github-script").AsyncFunctionArguments): Promise<void> {
+}: GitHubScriptArgs): Promise<void> {
   const { owner, repo, issue_number, head_sha } = await extractInputs(github, context, core);
 
   if (!issue_number) {
@@ -314,7 +329,7 @@ export function outputRunDetails(
 }
 
 export async function summarizeChecksImpl(
-  github: import("@actions/github-script").AsyncFunctionArguments["github"],
+  github: GitHub,
   core: Core,
   owner: string,
   repo: string,
@@ -440,7 +455,7 @@ export async function summarizeChecksImpl(
  * Updates or creates a commit status with the given status
  */
 export async function updateCommitStatus(
-  github: import("@actions/github-script").AsyncFunctionArguments["github"],
+  github: GitHub,
   core: Core,
   owner: string,
   repo: string,
@@ -478,7 +493,7 @@ export async function updateCommitStatus(
 }
 
 export async function getExistingLabels(
-  github: import("@actions/github-script").AsyncFunctionArguments["github"],
+  github: GitHub,
   owner: string,
   repo: string,
   issue_number: number,
@@ -562,7 +577,7 @@ export function getRequiredChecksFromBranchRuleOutput(
  * @param prNumber - The pull request number.
  */
 export async function getCheckRunTuple(
-  github: import("@actions/github-script").AsyncFunctionArguments["github"],
+  github: GitHub,
   core: Core,
   owner: string,
   repo: string,
@@ -1070,7 +1085,7 @@ function buildViolatedLabelRulesNextStepsText(
  * @returns The parsed job summary data
  */
 export async function getImpactAssessment(
-  github: import("@actions/github-script").AsyncFunctionArguments["github"],
+  github: GitHub,
   core: Core,
   owner: string,
   repo: string,
