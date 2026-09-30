@@ -89,13 +89,6 @@ export async function resolveAnalysisTrigger({
     core.setOutput("sdk-language", languageConfig.language);
     core.setOutput("sdk-repository", languageConfig.repository);
     core.setOutput("should-run", "true");
-    // await resolveChangedTypeSpecConfigPathsFromPullRequest({
-    //   github,
-    //   context,
-    //   core,
-    //   pullNumber,
-    //   localSpecRepoPath,
-    // });
     return;
   }
 
@@ -169,13 +162,6 @@ export async function resolveAnalysisTrigger({
   core.setOutput("sdk-language", languageConfig.language);
   core.setOutput("sdk-repository", languageConfig.repository);
   core.setOutput("should-run", labelArtifact.labelValue);
-  // await resolveChangedTypeSpecConfigPathsFromPullRequest({
-  //   github,
-  //   context,
-  //   core,
-  //   pullNumber,
-  //   localSpecRepoPath
-  // });
 }
 
 export function resolveSdkLanguageConfig(input: string | undefined): SdkLanguageConfig {
@@ -209,52 +195,6 @@ function toPosixPath(path: string): string {
   return path.split(sep).join("/");
 }
 
-function validateRepositoryPath(path: string): void {
-  const segments = path.split("/");
-  if (
-    isAbsolute(path) ||
-    !path.startsWith("specification/") ||
-    segments.includes("") ||
-    segments.includes(".") ||
-    segments.includes("..")
-  ) {
-    throw new Error(`Invalid changed TypeSpec file path: ${path}`);
-  }
-}
-
-export function resolveChangedTypeSpecConfigPaths(
-  repositoryPath: string,
-  changedFiles: string[],
-): string[] {
-  const specificationRoot = realpathSync(resolve(repositoryPath, "specification"));
-  const configPaths = new Set<string>();
-
-  for (const changedFile of changedFiles) {
-    const normalizedPath = changedFile.replaceAll("\\", "/");
-    if (!normalizedPath.endsWith(".tsp") && !normalizedPath.endsWith("/tspconfig.yaml")) {
-      continue;
-    }
-
-    validateRepositoryPath(normalizedPath);
-    let directory = resolve(repositoryPath, dirname(normalizedPath));
-
-    while (directory.startsWith(`${specificationRoot}${sep}`)) {
-      const candidate = resolve(directory, "tspconfig.yaml");
-      if (existsSync(candidate)) {
-        const resolvedConfig = realpathSync(candidate);
-        if (!resolvedConfig.startsWith(`${specificationRoot}${sep}`)) {
-          throw new Error(`TypeSpec config resolves outside specification/: ${normalizedPath}`);
-        }
-        configPaths.add(toPosixPath(relative(repositoryPath, resolvedConfig)));
-        break;
-      }
-      directory = dirname(directory);
-    }
-  }
-
-  return [...configPaths].sort();
-}
-
 export async function resolveChangedTypeSpecConfigPathsFromPullRequest({
   github,
   context,
@@ -285,45 +225,7 @@ export async function resolveChangedTypeSpecConfigPathsFromPullRequest({
   const changedFiles = files.flatMap(({ filename, previous_filename }) =>
     [filename, previous_filename].filter((path): path is string => path !== undefined),
   );
-  // const configPaths = new Set<string>();
-  // for (const changedFile of changedFiles) {
-  //   const normalizedPath = changedFile.replaceAll("\\", "/");
-  //   if (!normalizedPath.endsWith(".tsp") && !normalizedPath.endsWith("/tspconfig.yaml")) {
-  //     continue;
-  //   }
 
-  //   validateRepositoryPath(normalizedPath);
-  //   let directory = dirname(normalizedPath).replaceAll("\\", "/");
-  //   const belongsToKnownProject = [...configPaths].some((configPath) => {
-  //     const projectDirectory = dirname(configPath).replaceAll("\\", "/");
-  //     return directory === projectDirectory || directory.startsWith(`${projectDirectory}/`);
-  //   });
-  //   if (belongsToKnownProject) {
-  //     continue;
-  //   }
-  //   while (directory.startsWith("specification/")) {
-  //     const configPath = `${directory}/tspconfig.yaml`;
-  //     try {
-  //       await github.rest.repos.getContent({
-  //         ...context.repo,
-  //         path: configPath,
-  //         ref: headSha,
-  //       });
-  //       configPaths.add(configPath);
-  //       break;
-  //     } catch (error) {
-  //       if (!(error instanceof Error && "status" in error && error.status === 404)) {
-  //         throw error;
-  //       }
-  //     }
-  //     directory = dirname(directory).replaceAll("\\", "/");
-  //   }
-
-  // if (configPaths.size === 0) {
-  //   throw new Error("No tspconfig.yaml could be resolved from the changed TypeSpec files.");
-  // }
-
-  // const sortedConfigPaths = [...configPaths].sort();
   const configPaths = detectChangedSpecConfigFromChangedFiles(localSpecRepoPath, changedFiles);
   if (configPaths.length === 0) {
     throw new Error("No tspconfig.yaml could be resolved from the changed TypeSpec files.");

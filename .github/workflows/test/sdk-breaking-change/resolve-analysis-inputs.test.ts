@@ -3,7 +3,6 @@ import { join } from "node:path";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import {
   resolveAnalysisTrigger,
-  resolveChangedTypeSpecConfigPaths,
   resolveChangedTypeSpecConfigPathsFromPullRequest,
   resolveSdkLanguageConfig,
   validateAnalysisSource,
@@ -237,34 +236,6 @@ describe("validateAnalysisSource", () => {
         actualSha: "b".repeat(40),
       }),
     ).toThrow("Pull request head changed");
-  });
-});
-
-describe("resolveChangedTypeSpecConfigPaths", () => {
-  it("returns sorted, deduplicated config paths for the nearest owning projects", () => {
-    const repositoryPath = createRepository();
-
-    expect(
-      resolveChangedTypeSpecConfigPaths(repositoryPath, [
-        "README.md",
-        "specification/service/Widget.Service/main.tsp",
-        "specification/service/Widget.Service/models/widget.tsp",
-        "specification/other/Other.Service/tspconfig.yaml",
-      ]),
-    ).toEqual([
-      "specification/other/Other.Service/tspconfig.yaml",
-      "specification/service/Widget.Service/tspconfig.yaml",
-    ]);
-  });
-
-  it("rejects a TypeSpec path that can escape the specification directory", () => {
-    const repositoryPath = createRepository();
-
-    expect(() =>
-      resolveChangedTypeSpecConfigPaths(repositoryPath, [
-        "specification/service/../outside/main.tsp",
-      ]),
-    ).toThrow("Invalid changed TypeSpec file path");
   });
 });
 

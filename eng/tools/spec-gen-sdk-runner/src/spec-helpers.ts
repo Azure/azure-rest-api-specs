@@ -157,6 +157,13 @@ export async function detectChangedSpecConfigFiles(
   return detectChangedSpecConfigFromChangedFiles(commandInput.localSpecRepoPath, fileList);
 }
 
+/**
+ * Finds spec configurations affected by repository-relative changed files, including TypeSpec
+ * projects that depend on changed shared libraries.
+ * @param localSpecRepoPath - Path to the local specification repository checkout.
+ * @param fileList - Repository-relative paths of changed specification files.
+ * @returns The affected readme and TypeSpec project configurations.
+ */
 export function detectChangedSpecConfigFromChangedFiles(
   localSpecRepoPath: string,
   fileList: string[],
