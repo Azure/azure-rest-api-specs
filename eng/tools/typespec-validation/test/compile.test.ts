@@ -1,4 +1,5 @@
 import { mockFolder } from "./mocks.ts";
+import { ConsoleLogger, defaultLogger } from "@azure-tools/specs-shared/logger";
 
 import { afterEach, beforeEach, describe, expect, it, type MockInstance, vi } from "vitest";
 
@@ -29,7 +30,7 @@ describe("compile", function () {
     );
     runNodeBinSpy = vi
       .spyOn(utils, "runNodeBin")
-      .mockImplementation((packageName, args, cwd) =>
+      .mockImplementation((packageName, args, _logger, cwd) =>
         Promise.resolve([null, `runNodeBin ${packageName} ${args.join(" ")} at ${cwd}`, ""]),
       );
   });
@@ -65,23 +66,22 @@ describe("compile", function () {
       Promise.resolve(path === swaggerPath ? '{"info": {"x-typespec-generated": true}}' : "{}"),
     );
 
-    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
+    const logger = new ConsoleLogger(true);
+    await expect(new CompileRule().execute(mockFolder, logger)).resolves.toMatchObject({
       success: true,
     });
-    expect(runNodeBinSpy).toHaveBeenNthCalledWith(1, "@typespec/compiler", [
-      "tsp",
-      "compile",
-      "--list-files",
-      "--warn-as-error",
-      mockFolder,
-    ]);
-    expect(runNodeBinSpy).toHaveBeenNthCalledWith(2, "@typespec/compiler", [
-      "tsp",
-      "compile",
-      "--no-emit",
-      "--warn-as-error",
-      path.join(mockFolder, "client.tsp"),
-    ]);
+    expect(runNodeBinSpy).toHaveBeenNthCalledWith(
+      1,
+      "@typespec/compiler",
+      ["tsp", "compile", "--list-files", "--warn-as-error", mockFolder],
+      logger,
+    );
+    expect(runNodeBinSpy).toHaveBeenNthCalledWith(
+      2,
+      "@typespec/compiler",
+      ["tsp", "compile", "--no-emit", "--warn-as-error", path.join(mockFolder, "client.tsp")],
+      logger,
+    );
   });
 
   it.each([
@@ -96,7 +96,7 @@ describe("compile", function () {
     vi.mocked(nativeGlob.globFiles).mockResolvedValue([swaggerPath]);
     vi.mocked(fsPromises.readFile).mockResolvedValue('{"info": {"x-typespec-generated": true}}');
 
-    const result = await new CompileRule().execute(mockFolder);
+    const result = await new CompileRule().execute(mockFolder, defaultLogger);
 
     expect(result.success).toBe(true);
     expect(nativeGlob.globFiles).toHaveBeenCalledWith("data-plane/Azure.Foo/**/foo.json", {
@@ -110,7 +110,7 @@ describe("compile", function () {
       Promise.resolve([null, "not-swagger", ""]),
     );
 
-    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
       success: true,
       stdOutput: expect.stringContaining("skipping extra swagger check") as unknown,
     });
@@ -136,7 +136,7 @@ describe("compile", function () {
         : Promise.resolve('{"info": {"x-cadl-generated": true}}');
     });
 
-    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
       success: false,
       errorOutput: expect.stringContaining("not generated from the current") as unknown,
     });
@@ -160,7 +160,7 @@ describe("compile", function () {
       Promise.resolve('{"info": {"x-typespec-generated": true}}'),
     );
 
-    const result = await new CompileRule().execute(mockFolder);
+    const result = await new CompileRule().execute(mockFolder, defaultLogger);
     expect(result).toMatchObject({
       success: true,
       stdOutput: expect.stringContaining("older versions") as unknown,
@@ -184,7 +184,7 @@ describe("compile", function () {
       Promise.resolve('{"info": {"x-typespec-generated": true}}'),
     );
 
-    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
       success: false,
       errorOutput: expect.stringContaining("not generated from the current") as unknown,
     });
@@ -207,7 +207,7 @@ describe("compile", function () {
       Promise.resolve('{"info": {"x-typespec-generated": true}}'),
     );
 
-    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
       success: false,
       errorOutput: expect.stringContaining("not generated from the current") as unknown,
     });
@@ -232,7 +232,7 @@ describe("compile", function () {
       Promise.resolve('{"info": {"x-typespec-generated": true}}'),
     );
 
-    const result = await new CompileRule().execute(mockFolder);
+    const result = await new CompileRule().execute(mockFolder, defaultLogger);
     expect(result).toMatchObject({
       success: true,
       stdOutput: expect.stringContaining("older versions") as unknown,
@@ -258,7 +258,7 @@ describe("compile", function () {
       Promise.resolve('{"info": {"x-typespec-generated": true}}'),
     );
 
-    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
       success: false,
       errorOutput: expect.stringContaining("not generated from the current") as unknown,
     });
@@ -282,7 +282,7 @@ describe("compile", function () {
       Promise.resolve('{"info": {"x-typespec-generated": true}}'),
     );
 
-    const result = await new CompileRule().execute(mockFolder);
+    const result = await new CompileRule().execute(mockFolder, defaultLogger);
     expect(result).toMatchObject({
       success: true,
       stdOutput: expect.stringContaining("older versions") as unknown,
@@ -307,7 +307,7 @@ describe("compile", function () {
       Promise.resolve('{"info": {"x-typespec-generated": true}}'),
     );
 
-    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
       success: false,
       errorOutput: expect.stringContaining("not generated from the current") as unknown,
     });
@@ -347,7 +347,7 @@ describe("compile", function () {
         : Promise.resolve([]);
     });
 
-    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
       success: true,
     });
   });
@@ -369,7 +369,9 @@ describe("compile", function () {
       ]),
     );
 
-    await expect(new CompileRule().execute(mockFolder)).rejects.toThrow("Invalid path");
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).rejects.toThrow(
+      "Invalid path",
+    );
   });
 
   it("should skip git diff check if compile fails", async function () {
@@ -386,7 +388,7 @@ describe("compile", function () {
       },
     );
 
-    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
       success: false,
       stdOutput: expect.not.stringContaining("Running git diff") as unknown,
     });
@@ -409,7 +411,7 @@ describe("compile", function () {
       });
     });
 
-    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
       success: false,
       stdOutput: expect.stringContaining("Running git diff") as unknown,
     });
@@ -430,7 +432,7 @@ describe("compile", function () {
       });
     });
 
-    await expect(new CompileRule().execute(mockFolder)).resolves.toMatchObject({
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
       success: true,
       stdOutput: expect.stringContaining("Running git diff") as unknown,
     });

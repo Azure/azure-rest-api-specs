@@ -5,7 +5,7 @@ import { tmpdir } from "node:os";
 import { join, relative, sep } from "node:path";
 import { simpleGit } from "simple-git";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
-import { runAll } from "../src/run-all.ts";
+import { runAll } from "../src/run-projects.ts";
 
 vi.mock("node:child_process", async (importOriginal) => ({
   ...(await importOriginal()),
@@ -87,6 +87,18 @@ it("discovers sorted, unique project folders, including invalid config extension
     [expect.stringMatching(/[/\\]cmd[/\\]tsv\.js$/), first, '{"checkingAllSpecs":true}'],
     { stdio: "inherit" },
   );
+  expect(console.error).not.toHaveBeenCalled();
+});
+
+it("forwards --verbose to child projects without changing their suppression context", async () => {
+  const project = await addProject("a");
+  await expect(runAll(root, { verbose: true })).resolves.toBe(true);
+  expect(vi.mocked(spawn).mock.calls[0][1]).toEqual([
+    expect.stringMatching(/[/\\]cmd[/\\]tsv\.js$/),
+    project,
+    '{"checkingAllSpecs":true}',
+    "--verbose",
+  ]);
 });
 
 it("logs repository-relative paths but passes absolute paths to validation", async () => {
@@ -136,6 +148,11 @@ it("groups each project in GitHub Actions, including failures and suppressions",
     ["Checking 3 TypeSpec folders:\nspecification/a\nspecification/b\nspecification/c"],
     ["::group::Validating specification/a"],
     ["validation failed"],
+    [
+      "::error::TypeSpec Validation failed for project specification/a run the following command locally to validate.%0A" +
+        " > pnpm install%0A > pnpm tsv specification/a%0A" +
+        "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
+    ],
     ["::endgroup::"],
     ["::group::Validating specification/b"],
     ["Suppressed: skipped"],
@@ -144,7 +161,30 @@ it("groups each project in GitHub Actions, including failures and suppressions",
     ["validation passed"],
     ["::endgroup::"],
   ]);
-  expect(console.error).toHaveBeenCalledWith("TypeSpec Validation failed for:\nspecification/a");
+  expect(console.error).toHaveBeenCalledExactlyOnceWith(
+    "TypeSpec Validation failed for some folder to fix run and address any errors:\n" +
+      " > pnpm install\n > pnpm tsv specification/a\n" +
+      "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
+  );
+});
+
+it("escapes percent signs and newlines in GitHub error annotations", async () => {
+  vi.stubEnv("GITHUB_ACTIONS", "true");
+  await addProject("specification/service%0A/Project");
+  await simpleGit(root).init();
+  vi.mocked(spawn).mockImplementationOnce(() => exitingChild(1));
+
+  await expect(runAll(join(root, "specification"))).resolves.toBe(false);
+  expect(console.log).toHaveBeenCalledWith(
+    "::error::TypeSpec Validation failed for project specification/service%250A/Project run the following command locally to validate.%0A" +
+      " > pnpm install%0A > pnpm tsv specification/service%250A/Project%0A" +
+      "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
+  );
+  expect(console.error).toHaveBeenCalledExactlyOnceWith(
+    "TypeSpec Validation failed for some folder to fix run and address any errors:\n" +
+      " > pnpm install\n > pnpm tsv specification/service%0A/Project\n" +
+      "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
+  );
 });
 
 it.each([
@@ -271,6 +311,7 @@ it("succeeds when all discovered projects are suppressed", async () => {
 
   await expect(runAll(root)).resolves.toBe(true);
   expect(spawn).not.toHaveBeenCalled();
+  expect(console.error).not.toHaveBeenCalled();
 });
 
 it("continues after validation failures and reports every failed project", async () => {
@@ -285,7 +326,24 @@ it("continues after validation failures and reports every failed project", async
 
   await expect(runAll(root)).resolves.toBe(false);
   expect(spawn).toHaveBeenCalledTimes(3);
-  expect(console.error).toHaveBeenCalledWith("TypeSpec Validation failed for:\na\nc");
+  expect(vi.mocked(console.error).mock.calls).toEqual([
+    [
+      "TypeSpec Validation failed for project a run the following command locally to validate.\n" +
+        " > pnpm install\n > pnpm tsv a\n" +
+        "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
+    ],
+    [
+      "TypeSpec Validation failed for project c run the following command locally to validate.\n" +
+        " > pnpm install\n > pnpm tsv c\n" +
+        "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
+    ],
+    [
+      "TypeSpec Validation failed for some folder to fix run and address any errors:\n" +
+        " > pnpm install\n > pnpm tsv a\n > pnpm tsv c\n" +
+        "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
+    ],
+  ]);
+  expect(console.log).not.toHaveBeenCalledWith(expect.stringMatching(/^::error::/));
 });
 
 it("fails when no projects are discovered", async () => {

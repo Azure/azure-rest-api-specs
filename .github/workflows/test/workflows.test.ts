@@ -1,14 +1,80 @@
-import { copyFile, mkdir, mkdtemp, readdir, rm, writeFile } from "fs/promises";
+import { copyFile, mkdir, mkdtemp, readFile, readdir, rm, writeFile } from "fs/promises";
+import { load } from "js-yaml";
 import { tmpdir } from "os";
 import { dirname, extname, resolve } from "path";
 import { fileURLToPath } from "url";
 import { describe, expect, it } from "vitest";
+import * as z from "zod";
 import { execFile } from "../../shared/src/exec.ts";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const workflowsDir = resolve(__dirname, "..");
 
 describe("workflow files", () => {
+  it("publishes the TypeSpec suppressions markdown as a job-summary artifact", async () => {
+    const workflow = z
+      .object({
+        jobs: z.object({
+          "typespec-suppressions": z.object({
+            steps: z.array(
+              z.object({
+                name: z.string().optional(),
+                id: z.string().optional(),
+                uses: z.string().optional(),
+                if: z.string().optional(),
+                run: z.string().optional(),
+                with: z.record(z.string(), z.unknown()).optional(),
+              }),
+            ),
+          }),
+        }),
+      })
+      .parse(
+        load(await readFile(resolve(workflowsDir, "typespec-suppressions-code.yaml"), "utf8")),
+      );
+    const steps = workflow.jobs["typespec-suppressions"].steps;
+    const analysis = steps.find((step) => step.name === "Run TypeSpec suppressions analysis");
+    const summaryArtifact = steps.find((step) => step.name === "Set job-summary artifact");
+
+    expect(analysis).toMatchObject({
+      id: "typespec-suppressions-analysis",
+    });
+    expect(analysis?.run).toContain('echo "summary=$GITHUB_STEP_SUMMARY" >> "$GITHUB_OUTPUT"');
+    expect(summaryArtifact).toMatchObject({
+      if: "${{ always() && steps.typespec-suppressions-analysis.outputs.summary }}",
+      uses: "actions/upload-artifact@v7",
+      with: {
+        name: "job-summary",
+        path: "${{ steps.typespec-suppressions-analysis.outputs.summary }}",
+      },
+    });
+  });
+
+  it.each(["typespec-validation.yaml", "typespec-validation-all.yaml"])(
+    "%s enables TSV verbosity only for debug runs",
+    async (file) => {
+      const workflow = z
+        .object({
+          jobs: z.record(
+            z.string(),
+            z.object({
+              steps: z.array(z.object({ run: z.string().optional() })),
+            }),
+          ),
+        })
+        .parse(load(await readFile(resolve(workflowsDir, file), "utf8")));
+      const commands = Object.values(workflow.jobs)
+        .flatMap((job) => job.steps)
+        .flatMap((step) =>
+          step.run?.includes("node eng/tools/typespec-validation/cmd/tsv.js") ? [step.run] : [],
+        );
+      expect(commands).toHaveLength(1);
+      const debugFlag = "${{ runner.debug == '1' && '--verbose' || '' }}";
+      expect(commands[0]).toContain(debugFlag);
+      expect(commands[0].replace(debugFlag, "")).not.toContain("--verbose");
+    },
+  );
+
   it("should be named *.yaml or *.md", async () => {
     const entries = await readdir(workflowsDir, { withFileTypes: true });
 
