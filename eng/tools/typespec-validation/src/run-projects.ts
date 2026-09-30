@@ -6,6 +6,7 @@ import { stat } from "node:fs/promises";
 import { relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { simpleGit } from "simple-git";
+import { formatRuleSummary, type RuleCounts } from "./diagnostics.ts";
 import { findChangedProjects, findProjects, type ChangedProjectsOptions } from "./find-projects.ts";
 
 interface RunOptions {
@@ -92,6 +93,7 @@ async function runProjects(
   );
   const failed: string[] = [];
   const githubActions = process.env.GITHUB_ACTIONS === "true";
+  const counts: RuleCounts = { PASS: 0, FAIL: 0, WARN: 0, SKIP: 0, SUPPRESSED: 0 };
 
   for (const project of projects) {
     const name = displayPath(project);
@@ -104,6 +106,7 @@ async function runProjects(
         const suppression = suppressions.find((s) => !s.rules?.length && !s.subRules?.length);
         if (suppression) {
           console.log(`Suppressed: ${suppression.reason}`);
+          counts.SUPPRESSED++;
           continue;
         }
       }
@@ -113,7 +116,10 @@ async function runProjects(
       }
 
       try {
-        if (!(await validateProject(project, context, options.verbose))) {
+        if (await validateProject(project, context, options.verbose)) {
+          counts.PASS++;
+        } else {
+          counts.FAIL++;
           failed.push(name);
           const message =
             `TypeSpec Validation failed for project ${name} run the following command locally to validate.\n` +
@@ -139,6 +145,11 @@ async function runProjects(
         console.log("::endgroup::");
       }
     }
+  }
+
+  if (!options.dryRun) {
+    console.log("");
+    console.log(formatRuleSummary(counts, 0));
   }
 
   if (failed.length > 0) {

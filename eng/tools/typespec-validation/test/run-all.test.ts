@@ -5,6 +5,7 @@ import { tmpdir } from "node:os";
 import { join, relative, sep } from "node:path";
 import { simpleGit } from "simple-git";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
+import { formatRuleSummary } from "../src/diagnostics.ts";
 import { runAll } from "../src/run-projects.ts";
 
 vi.mock("node:child_process", async (importOriginal) => ({
@@ -160,6 +161,8 @@ it("groups each project in GitHub Actions, including failures and suppressions",
     ["::group::Validating specification/c"],
     ["validation passed"],
     ["::endgroup::"],
+    [""],
+    [formatRuleSummary({ PASS: 1, FAIL: 1, WARN: 0, SKIP: 0, SUPPRESSED: 1 }, 0)],
   ]);
   expect(console.error).toHaveBeenCalledExactlyOnceWith(
     "TypeSpec Validation failed for some folder to fix run and address any errors:\n" +
