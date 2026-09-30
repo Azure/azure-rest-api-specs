@@ -119,14 +119,7 @@ export async function analyzeSdkProjects({
       await rename(generationResult, join(projectResults, "generate.json"));
 
       /* Build the SDK package */
-      const buildArgs = [
-        "package",
-        "build",
-        "--package-path",
-        packagePath,
-        "--output",
-        "json",
-      ];
+      const buildArgs = ["package", "build", "--package-path", packagePath, "--output", "json"];
       // Optional: Add any additional build arguments here for .NET SDK projects
       if (sdkLanguage === SdkLanguage.DotNet) {
         // Example: Add a hypothetical .NET-specific build argument

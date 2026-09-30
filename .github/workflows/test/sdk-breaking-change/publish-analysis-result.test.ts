@@ -111,9 +111,7 @@ describe("createAnalysisResult", () => {
       status: "failure",
     });
 
-    expect(artifact.errorMessage).toBe(
-      `Analysis failed with exit code 1.\n\n[See analysis workflow](${analysisWorkflowUrl})`,
-    );
+    expect(artifact.errorMessage).toBe("Analysis failed with exit code 1.");
   });
 
   it("uses a fallback error message when no failure log exists", async () => {
@@ -126,9 +124,7 @@ describe("createAnalysisResult", () => {
       status: "failure",
     });
 
-    expect(artifact.errorMessage).toBe(
-      `SDK breaking-change analysis failed.\n\n[See analysis workflow](${analysisWorkflowUrl})`,
-    );
+    expect(artifact.errorMessage).toBe("SDK breaking-change analysis failed.");
   });
 });
 

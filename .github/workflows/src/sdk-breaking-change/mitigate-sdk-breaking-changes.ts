@@ -1,5 +1,5 @@
-import { mkdir, readFile, readdir, realpath, stat, writeFile } from "node:fs/promises";
-import { basename, dirname, isAbsolute, join, relative, sep } from "node:path";
+import { mkdir, readFile, realpath, stat, writeFile } from "node:fs/promises";
+import { dirname, isAbsolute, join, relative, sep } from "node:path";
 import { z } from "zod";
 import { AnalysisResultSchema } from "./create-analysis-result.ts";
 import { execFile } from "../../../shared/src/exec.ts";
@@ -179,7 +179,7 @@ export async function mitigateSdkBreakingChanges({
     }
   } catch (error) {
     console.error("SDK breaking-change mitigation failed.", error);
-    let failureResult: MitigationResult = {
+    const failureResult: MitigationResult = {
       schemaVersion: 1,
       status: "failure",
       prNumber: analysisResult.prNumber,
