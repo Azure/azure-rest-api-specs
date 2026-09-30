@@ -11,6 +11,7 @@ let root: string;
 let folder: string;
 beforeEach(async () => {
   root = await realpath(await mkdtemp(join(tmpdir(), "tsv-generated-")));
+  await writeFile(join(root, ".gitattributes"), "* text=auto eol=lf\n");
   folder = join(root, "specification/service/Project");
   await mkdir(folder, { recursive: true });
   await mkdir(join(root, "specification/service/Sibling"));

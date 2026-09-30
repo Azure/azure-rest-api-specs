@@ -14,6 +14,7 @@ let root: string;
 
 beforeEach(async () => {
   root = await realpath(await mkdtemp(join(tmpdir(), "tsv-command-cli-")));
+  await writeFile(join(root, ".gitattributes"), "* text=auto eol=lf\n");
   vi.stubEnv("DEBUG", "");
   vi.stubEnv("GITHUB_ACTIONS", "false");
   vi.stubEnv("NO_COLOR", "1");
@@ -145,7 +146,7 @@ it.each([
     expect(output).toContain(`error tsv/${code}:`);
     expect(output).toContain(`\n  ${project}/generated.json\n\ndiff --git`);
     expect(output).toContain("\n+new content\n\n  help:");
-    expect(output).toContain("LF will be replaced by CRLF");
+    expect(output).not.toContain("LF will be replaced by CRLF");
     expect(output.match(/diff --git/g)).toHaveLength(1);
     expect(result.stdout).not.toContain("diff --git");
     expect(result.stderr.includes("\x1b[32m")).toBe(color);
