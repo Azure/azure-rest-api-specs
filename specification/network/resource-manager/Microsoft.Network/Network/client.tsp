@@ -5412,9 +5412,13 @@ op replaceprivateDnsZoneGroupsList(
 
 @@clientName(Common.Resource, "NetworkTrackedResourceData", "csharp");
 
+@@clientName(Common.Resource.type, "ResourceType", "csharp");
+
 @@clientName(Common.SubResource, "NetworkSubResource", "csharp");
 
 @@clientName(Common.SubResourceModel, "NetworkResourceData", "csharp");
+
+@@clientName(Common.SubResourceModel.type, "ResourceType", "csharp");
 
 @@clientName(
   Common.WritableSubResourceModel,
@@ -5425,6 +5429,14 @@ op replaceprivateDnsZoneGroupsList(
 @@clientName(Common.WritableSubResourceModel.type, "ResourceType", "csharp");
 
 @@clientName(
+  Microsoft.Network.EndpointServiceResult.type,
+  "ResourceType",
+  "csharp"
+);
+
+@@clientName(Microsoft.Network.WritableResource.type, "ResourceType", "csharp");
+
+@@clientName(
   Common.InboundNatPoolPropertiesFormat,
   "LoadBalancerInboundNatPoolProperties",
   "csharp"
@@ -5432,10 +5444,30 @@ op replaceprivateDnsZoneGroupsList(
 
 @@alternateType(Common.Resource.id, armResourceIdentifier, "csharp");
 
+@@alternateType(Common.Resource.type, Azure.Core.armResourceType, "csharp");
+
 @@alternateType(Common.SubResource.id, armResourceIdentifier, "csharp");
 
 @@alternateType(
+  Common.SubResourceModel.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+
+@@alternateType(
   Common.WritableSubResourceModel.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+
+@@alternateType(
+  Microsoft.Network.EndpointServiceResult.type,
+  Azure.Core.armResourceType,
+  "csharp"
+);
+
+@@alternateType(
+  Microsoft.Network.WritableResource.type,
   Azure.Core.armResourceType,
   "csharp"
 );
