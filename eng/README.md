@@ -4,6 +4,17 @@ The `eng` directory contains source code for automated tooling running on this r
 
 For context on this directory, see [Design guidelines for spec repos validation tooling] (Microsoft-internal).
 
+## Protected files
+
+The **Protected Files** check keeps repository-managed files out of specification
+contributions. It is a contribution-scope check, not a request for code-owner approval.
+Contributor guidance is in the [CI Fix Guide](../documentation/ci-fix.md#protected-files).
+
+Intentional repository-maintenance PRs also fail this check. Repository maintainers
+can use their existing bypass permissions to merge those changes after reviewing
+the applicable validation results and code-owner requirements. Changes authored by
+the trusted `azure-sdk` and `azure-sdk-automation[bot]` accounts pass automatically.
+
 ## Contributor readiness
 
 Contributor readiness runs only for PRs that change `specification/`, including
