@@ -3,7 +3,7 @@ import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promi
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { promisify } from "node:util";
+import { promisify, stripVTControlCharacters } from "node:util";
 import { simpleGit } from "simple-git";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 
@@ -38,12 +38,104 @@ async function commit(message: string) {
 beforeEach(async () => {
   root = await realpath(await mkdtemp(join(tmpdir(), "tsv-cli-")));
   vi.stubEnv("GITHUB_ACTIONS", "false");
+  vi.stubEnv("DEBUG", "");
+  vi.stubEnv("NO_COLOR", "1");
+  vi.stubEnv("FORCE_COLOR", undefined);
 });
 
 afterEach(async () => {
   vi.unstubAllEnvs();
   await rm(root, { recursive: true, force: true });
 });
+
+it.each(["single", "all", "changed"])(
+  "makes Git tracing opt-in without hiding %s validation failures",
+  async (mode) => {
+    const project = "specification/service/Project";
+    await addProject(project);
+    await initGit();
+    await commit("Base");
+    await writeFile(join(root, project, "tspconfig.yaml"), "# changed");
+    await commit("Head");
+    const args = mode === "single" ? [project] : [`--${mode}`];
+    await expect(run(...args)).rejects.toMatchObject({
+      code: 1,
+      stdout: expect.stringContaining('must use "folder structure v2"') as unknown,
+      stderr: mode === "single" ? "" : (expect.not.stringContaining("simple-git") as unknown),
+    });
+    await expect(run(...args, "--verbose")).rejects.toMatchObject({
+      code: 1,
+      stdout: expect.stringContaining('must use "folder structure v2"') as unknown,
+      stderr: expect.stringContaining("simple-git") as unknown,
+    });
+  },
+);
+
+it("keeps changed-file inventories behind --verbose and supports -v", async () => {
+  await addProject("specification/service/Project");
+  await initGit();
+  await commit("Base");
+  await writeFile(join(root, "specification/service/Project/tspconfig.yaml"), "# changed");
+  await commit("Head");
+  const quiet = await run("--changed", "--dry-run");
+  expect(quiet.stdout).not.toContain("Changed Files:");
+  expect(quiet.stderr).toBe("");
+  const verbose = await run("--changed", "--dry-run", "-v");
+  expect(verbose.stdout).toContain("Changed Files:");
+  expect(verbose.stderr).toContain("simple-git");
+});
+
+it("respects explicit DEBUG selections without --verbose", async () => {
+  vi.stubEnv("DEBUG", "simple-git");
+  await addProject("specification/service/Project");
+  await initGit();
+  const { stderr } = await run("--all", "--dry-run");
+  expect(stderr).toContain("simple-git");
+});
+
+it.each([
+  {
+    config: "emit: []\nemit: []\n",
+    diagnostic: "tspconfig.yaml:2:1 - error tsv/invalid-yaml:",
+    color: false,
+  },
+  {
+    config: "emit: false\n",
+    diagnostic: "tspconfig.yaml - error tsv/invalid-config: emit:",
+    color: false,
+  },
+  { config: "emit: []\n", diagnostic: "tspconfig.yaml - error tsv/emit-autorest:", color: false },
+  { config: "emit: []\n", diagnostic: "tspconfig.yaml - error tsv/emit-autorest:", color: true },
+])(
+  "renders the pilot diagnostic once (color=$color): $diagnostic",
+  async ({ config, diagnostic, color }) => {
+    if (color) {
+      vi.stubEnv("NO_COLOR", undefined);
+      vi.stubEnv("FORCE_COLOR", "1");
+    }
+    const project = "specification/service/data-plane/Project";
+    await addProject(project);
+    await initGit();
+    await writeFile(join(root, "package.json"), '{"private":true}');
+    await writeFile(join(root, project, "main.tsp"), "");
+    await mkdir(join(root, project, "examples"));
+    await writeFile(join(root, project, "tspconfig.yaml"), config);
+    try {
+      await run(project);
+      expect.fail("Expected validation to fail");
+    } catch (error) {
+      expect(error).toMatchObject({ code: 1 });
+      if (!(error instanceof Error) || !("stdout" in error) || !("stderr" in error)) throw error;
+      const stderr = String(error.stderr);
+      expect(stripVTControlCharacters(stderr).split(diagnostic)).toHaveLength(2);
+      expect(stderr.includes("\x1b[31merror\x1b[39m")).toBe(color);
+      expect(stderr).not.toContain("\n    at ");
+      expect(String(error.stdout)).toContain("Executing rule: EmitAutorest");
+      expect(String(error.stdout)).not.toContain("mainTspExists:");
+      expect(String(error.stdout)).not.toContain("Executing rule: ServiceYaml");
+    }
+  },
+);
 
 it("defaults --all to specification and passes all-spec context to children and suppressions", async () => {
   await addProject("specification/a");

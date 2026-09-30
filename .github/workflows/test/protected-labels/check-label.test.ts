@@ -28,6 +28,10 @@ const protectedLabelsConfig = {
   "package-name-approved-all": {
     "management-plane": ["mgmt-approver1"],
   },
+  "typespec-suppressions-approved": {
+    "data-plane": ["dp-approver1"],
+    "management-plane": "unprotected",
+  },
 };
 
 function setupMocks() {
@@ -249,6 +253,24 @@ describe("checkLabel", () => {
         "must map to an array or a plane-aware object",
       );
     });
+
+    it("throws on invalid plane value (not an array or 'unprotected')", async () => {
+      (yaml.load as ReturnType<typeof vi.fn>).mockReturnValue({
+        "package-name-dotnet-approved": {
+          "management-plane": "open",
+        },
+      });
+
+      context.payload = createLabeledPayload({
+        labelName: "package-name-dotnet-approved",
+        actor: "someone",
+        extraLabels: ["resource-manager"],
+      });
+
+      await expect(invokeCheckLabel({ github, context, core })).rejects.toThrow(
+        'array of logins or the literal "unprotected"',
+      );
+    });
   });
 
   describe("plane-aware labels", () => {
@@ -290,10 +312,25 @@ describe("checkLabel", () => {
       });
     });
 
-    it("uses mgmt approvers when PR has Mgmt label", async () => {
+    it("uses mgmt approvers when PR has resource-manager label", async () => {
       context.payload = createLabeledPayload({
         labelName: "package-name-dotnet-approved",
         actor: "mgmt-approver1",
+        extraLabels: ["resource-manager"],
+      });
+
+      await invokeCheckLabel({ github, context, core });
+
+      expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
+    });
+
+    it("does not treat a stale add-only Mgmt label as a plane (#46785)", async () => {
+      // A data-plane approver on a PR whose only plane-ish label is a stale "Mgmt":
+      // "Mgmt" is no longer a plane signal, so the label is left untouched rather than
+      // rejected against the mgmt approver list.
+      context.payload = createLabeledPayload({
+        labelName: "package-name-dotnet-approved",
+        actor: "dp-approver1",
         extraLabels: ["Mgmt"],
       });
 
@@ -320,7 +357,7 @@ describe("checkLabel", () => {
       context.payload = createLabeledPayload({
         labelName: "package-name-dotnet-approved",
         actor: "global-admin",
-        extraLabels: ["Mgmt"],
+        extraLabels: ["resource-manager"],
       });
 
       await invokeCheckLabel({ github, context, core });
@@ -357,7 +394,48 @@ describe("checkLabel", () => {
       context.payload = createLabeledPayload({
         labelName: "package-name-approved-all",
         actor: "mgmt-approver1",
-        extraLabels: ["Mgmt"],
+        extraLabels: ["resource-manager"],
+      });
+
+      await invokeCheckLabel({ github, context, core });
+
+      expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("per-plane unprotected opt-out (#46728)", () => {
+    it("does not enforce an unprotected plane (anyone may apply)", async () => {
+      context.payload = createLabeledPayload({
+        labelName: "typespec-suppressions-approved",
+        actor: "random-user",
+        extraLabels: ["resource-manager"],
+      });
+
+      await invokeCheckLabel({ github, context, core });
+
+      expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
+      expect(github.rest.issues.createComment).not.toHaveBeenCalled();
+    });
+
+    it("still enforces the gated plane on the same label", async () => {
+      context.payload = createLabeledPayload({
+        labelName: "typespec-suppressions-approved",
+        actor: "random-user",
+        extraLabels: ["data-plane"],
+      });
+
+      await invokeCheckLabel({ github, context, core });
+
+      expect(github.rest.issues.removeLabel).toHaveBeenCalledWith(
+        expect.objectContaining({ name: "typespec-suppressions-approved" }),
+      );
+    });
+
+    it("allows the gated plane's approver", async () => {
+      context.payload = createLabeledPayload({
+        labelName: "typespec-suppressions-approved",
+        actor: "dp-approver1",
+        extraLabels: ["data-plane"],
       });
 
       await invokeCheckLabel({ github, context, core });
