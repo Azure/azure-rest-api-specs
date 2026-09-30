@@ -1722,7 +1722,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/AgentOptimizationJob"
+                "$ref": "#/components/schemas/AgentOptimizationJobCreate"
               }
             }
           },
@@ -35391,7 +35391,6 @@
         "required": [
           "id",
           "status",
-          "optimization_model_configuration",
           "optimization_configuration",
           "run_duration_ms",
           "created_at",
@@ -35427,9 +35426,80 @@
             "$ref": "#/components/schemas/AgentOptimizationTargetConfiguration",
             "description": "Foundry agent whose configuration is optimized. Omitted when the workflow does not target a registered Foundry agent."
           },
+          "optimization_configuration": {
+            "$ref": "#/components/schemas/AgentOptimizationConfigurationBase",
+            "description": "Type-specific optimization configuration."
+          },
+          "run_duration_ms": {
+            "$ref": "#/components/schemas/FoundryDurationMilliseconds",
+            "description": "Duration for which the job has been running, in milliseconds.",
+            "readOnly": true
+          },
+          "created_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The timestamp when the job was created, represented in Unix time.",
+            "readOnly": true
+          },
+          "updated_at": {
+            "$ref": "#/components/schemas/FoundryTimestamp",
+            "description": "The timestamp when the job was last updated, represented in Unix time.",
+            "readOnly": true
+          },
+          "warnings": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Non-fatal warnings emitted during optimization. Omitted when no warnings were produced.",
+            "readOnly": true
+          },
           "optimization_model_configuration": {
             "$ref": "#/components/schemas/AgentOptimizationModelConfiguration",
-            "description": "Model used to generate candidate changes. An existing deployment name is also accepted."
+            "description": "Model used to generate candidate changes when recorded for the job. Historical jobs may omit this value."
+          }
+        },
+        "description": "Agent optimization job resource — a long-running job that produces candidate changes to a Foundry agent configuration."
+      },
+      "AgentOptimizationJobCreate": {
+        "type": "object",
+        "required": [
+          "id",
+          "status",
+          "optimization_configuration",
+          "run_duration_ms",
+          "created_at",
+          "updated_at",
+          "optimization_model_configuration"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Server-assigned unique identifier.",
+            "readOnly": true
+          },
+          "result": {
+            "$ref": "#/components/schemas/AgentOptimizationJobResult",
+            "description": "Result produced on success.",
+            "readOnly": true
+          },
+          "status": {
+            "$ref": "#/components/schemas/JobStatus",
+            "description": "Current lifecycle status.",
+            "readOnly": true
+          },
+          "error": {
+            "$ref": "#/components/schemas/OpenAI.Error",
+            "description": "Error details — populated only on failure.",
+            "readOnly": true
+          },
+          "display_name": {
+            "type": "string",
+            "maxLength": 256,
+            "description": "Human-readable label. Omitted when no label is needed; it has no uniqueness, routing, or idempotency semantics."
+          },
+          "target_configuration": {
+            "$ref": "#/components/schemas/AgentOptimizationTargetConfiguration",
+            "description": "Foundry agent whose configuration is optimized. Omitted when the workflow does not target a registered Foundry agent."
           },
           "optimization_configuration": {
             "$ref": "#/components/schemas/AgentOptimizationConfigurationBase",
@@ -35457,9 +35527,13 @@
             },
             "description": "Non-fatal warnings emitted during optimization. Omitted when no warnings were produced.",
             "readOnly": true
+          },
+          "optimization_model_configuration": {
+            "$ref": "#/components/schemas/AgentOptimizationModelConfiguration",
+            "description": "Model used to generate candidate changes. An existing deployment name is also accepted."
           }
         },
-        "description": "Agent optimization job resource — a long-running job that produces candidate changes to a Foundry agent configuration."
+        "description": "Inputs for creating an agent optimization job."
       },
       "AgentOptimizationJobLatency": {
         "type": "object",

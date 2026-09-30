@@ -16,7 +16,7 @@ interface AgentOptimizationJobs {
   @summary("Create an agent optimization job")
   @route("agent_optimization_jobs")
   @pollingOperation(AgentOptimizationJobs.get)
-  create is postJob<AgentOptimizationJob>;
+  create is postJob<AgentOptimizationJobCreate, AgentOptimizationJob>;
 
   /**
    * Estimates validation-set rows, per-stage model call volumes, and cost bands without submitting the job.

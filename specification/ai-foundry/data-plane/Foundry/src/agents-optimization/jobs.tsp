@@ -129,17 +129,13 @@ model AgentOptimizationJobResult {
 // Job resource — extends JobLike per Foundry job guidelines
 // ---------------------------------------------------------------------------
 
-@doc("Agent optimization job resource — a long-running job that produces candidate changes to a Foundry agent configuration.")
-model AgentOptimizationJob is JobLike<AgentOptimizationJobResult, never> {
+model AgentOptimizationJobBase is JobLike<AgentOptimizationJobResult, never> {
   @doc("Human-readable label. Omitted when no label is needed; it has no uniqueness, routing, or idempotency semantics.")
   @maxLength(256)
   display_name?: string;
 
   @doc("Foundry agent whose configuration is optimized. Omitted when the workflow does not target a registered Foundry agent.")
   target_configuration?: AgentOptimizationTargetConfiguration;
-
-  @doc("Model used to generate candidate changes. An existing deployment name is also accepted.")
-  optimization_model_configuration: AgentOptimizationModelConfiguration;
 
   @doc("Type-specific optimization configuration.")
   optimization_configuration: AgentOptimizationConfigurationBase;
@@ -159,4 +155,16 @@ model AgentOptimizationJob is JobLike<AgentOptimizationJobResult, never> {
   @doc("Non-fatal warnings emitted during optimization. Omitted when no warnings were produced.")
   @visibility(Lifecycle.Read)
   warnings?: string[];
+}
+
+@doc("Inputs for creating an agent optimization job.")
+model AgentOptimizationJobCreate is AgentOptimizationJobBase {
+  @doc("Model used to generate candidate changes. An existing deployment name is also accepted.")
+  optimization_model_configuration: AgentOptimizationModelConfiguration;
+}
+
+@doc("Agent optimization job resource — a long-running job that produces candidate changes to a Foundry agent configuration.")
+model AgentOptimizationJob is AgentOptimizationJobBase {
+  @doc("Model used to generate candidate changes when recorded for the job. Historical jobs may omit this value.")
+  optimization_model_configuration?: AgentOptimizationModelConfiguration;
 }

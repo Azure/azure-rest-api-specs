@@ -456,14 +456,17 @@ alias WithOperationId = {
 /** Create a new job. Returns 201 Created. Accepts an optional Operation-Id header for idempotent retries. */
 #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
 @post
-op postJob<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperation<
+op postJob<
+  TRequestJob extends TypeSpec.Reflection.Model,
+  TResponseJob extends TypeSpec.Reflection.Model = TRequestJob,
+> is FoundryDataPlaneOperation<
   {
     ...WithOperationId;
 
     /** The job to create. */
-    @body job: TJob;
+    @body job: TRequestJob;
   },
-  JobCreatedResponse<TJob>
+  JobCreatedResponse<TResponseJob>
 >;
 
 /** Get a job by ID with an optional Retry-After header for polling guidance. */
