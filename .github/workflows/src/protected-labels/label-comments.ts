@@ -1,4 +1,4 @@
-import { details, escapeMarkdown, link } from "@azure-tools/specs-shared/markdown";
+import { details, escapeMarkdown, inlineCode, link } from "@azure-tools/specs-shared/markdown";
 
 // Shared wording for label-enforcement feedback. Centralized so every "your label was
 // removed / reset" message reads identically across the protected-labels and package-name
@@ -22,7 +22,7 @@ export function buildUnauthorizedApplyComment({
     .map((user) => link(escapeMarkdown(user), `https://github.com/${user}`))
     .join(", ");
   return (
-    `⚠️ @${actor} is not authorized to apply \`${labelName}\`. Label removed.\n\n` +
+    `⚠️ @${actor} is not authorized to apply ${inlineCode(labelName)}. Label removed.\n\n` +
     "Please follow the **Next Steps to Merge** comment on this PR and the " +
     `${link("review and merge process", "https://aka.ms/azsdk/specreview/merge")}.\n\n` +
     details("See allowed approvers", `Only ${authorizedList} can apply this label.`)
@@ -47,6 +47,6 @@ export function buildApprovalResetComment({
     approvers && approvers.length > 0 ? `${approvers.map((user) => `@${user}`).join(", ")} ` : "";
   return (
     `⚠️ ${mentions}Approvals for ${languages} were cleared because the package name changed, and must be re-applied.\n\n` +
-    "Re-apply the `package-name-<language>-approved` label after reviewing the new name."
+    `Re-apply the ${inlineCode("package-name-<language>-approved")} label after reviewing the new name.`
   );
 }

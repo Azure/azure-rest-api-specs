@@ -1,11 +1,12 @@
 import { describe, expect, it, vi } from "vitest";
 import {
   getApprovers,
-  parseApproverFromStatus,
   parseCommentTable,
+  resolveResetApprovers,
   shouldRemoveStaleMgmtLabel,
 } from "../../src/package-name-approval/post-results.ts";
 import { createApproversConfig } from "../../src/package-name-approval/approvers.ts";
+import { createMockGithub } from "../mocks.ts";
 
 // Import only the pure functions we can test without heavy mocking
 // buildCommentBody and getApprovers are the key testable units
@@ -541,22 +542,66 @@ describe("post-results", () => {
     });
   });
 
-  describe("parseApproverFromStatus (#46786)", () => {
-    it("extracts the approver login from an approved status cell", () => {
-      expect(parseApproverFromStatus("✅ Approved by @JoshLove-msft")).toBe("JoshLove-msft");
+  describe("resolveResetApprovers (#46786)", () => {
+    const labeled = (labelName: string, login: string) => ({
+      event: "labeled",
+      label: { name: labelName },
+      actor: { login },
     });
 
-    it("returns undefined for a pending status", () => {
-      expect(parseApproverFromStatus("⏳ Pending")).toBeUndefined();
-      expect(parseApproverFromStatus("⏳ Pending _(unchanged)_")).toBeUndefined();
+    it("returns [] when there are no reset languages", async () => {
+      const github = createMockGithub();
+      const approvers = await resolveResetApprovers(github, "Azure", "repo", 1, []);
+      expect(approvers).toEqual([]);
+      expect(github.rest.issues.listEvents).not.toHaveBeenCalled();
     });
 
-    it("returns undefined for a reconciled approval with no recorded login", () => {
-      expect(parseApproverFromStatus("✅ Approved")).toBeUndefined();
+    it("resolves the approver login for each reset language from labeled events", async () => {
+      const github = createMockGithub();
+      github.rest.issues.listEvents.mockResolvedValue({
+        data: [
+          labeled("package-name-go-approved", "alice"),
+          labeled("package-name-python-approved", "bob"),
+        ],
+      });
+      const approvers = await resolveResetApprovers(github, "Azure", "repo", 1, ["go", "python"]);
+      expect(approvers.sort()).toEqual(["alice", "bob"]);
     });
 
-    it("returns undefined for an undefined status", () => {
-      expect(parseApproverFromStatus(undefined)).toBeUndefined();
+    it("keeps only the latest approver per label", async () => {
+      const github = createMockGithub();
+      github.rest.issues.listEvents.mockResolvedValue({
+        data: [
+          labeled("package-name-go-approved", "alice"),
+          labeled("package-name-go-approved", "carol"),
+        ],
+      });
+      const approvers = await resolveResetApprovers(github, "Azure", "repo", 1, ["go"]);
+      expect(approvers).toEqual(["carol"]);
+    });
+
+    it("de-duplicates the same approver across labels", async () => {
+      const github = createMockGithub();
+      github.rest.issues.listEvents.mockResolvedValue({
+        data: [
+          labeled("package-name-go-approved", "alice"),
+          labeled("package-name-python-approved", "alice"),
+        ],
+      });
+      const approvers = await resolveResetApprovers(github, "Azure", "repo", 1, ["go", "python"]);
+      expect(approvers).toEqual(["alice"]);
+    });
+
+    it("excludes trusted bots and ignores non-reset labels", async () => {
+      const github = createMockGithub();
+      github.rest.issues.listEvents.mockResolvedValue({
+        data: [
+          labeled("package-name-go-approved", "github-actions[bot]"),
+          labeled("package-name-java-approved", "dave"),
+        ],
+      });
+      const approvers = await resolveResetApprovers(github, "Azure", "repo", 1, ["go"]);
+      expect(approvers).toEqual([]);
     });
   });
 });
