@@ -1,4 +1,5 @@
 import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
+import { d } from "@azure-tools/specs-shared/testing";
 import { stripVTControlCharacters } from "node:util";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { blocks, filePath, indent, lines, text, verbatim } from "../src/diagnostic-content.ts";
@@ -67,13 +68,16 @@ describe("diagnostic formatting", () => {
   });
 
   it("uses TypeSpec-style locations, severity, codes and a real source excerpt", () => {
-    expect(formatDiagnostic(diagnostic, { cwd: "/repo" })).toBe(
-      "service/tspconfig.yaml:2:3 - error tsv/invalid-option: Invalid option.\n" +
-        "  2 |   invalid: true\n    |   ^\n  help: Remove the option.",
-    );
-    expect(formatDiagnostic({ ...diagnostic, location: undefined }, { cwd: "/repo" })).toBe(
-      "service/tspconfig.yaml - error tsv/invalid-option: Invalid option.\n  help: Remove the option.",
-    );
+    expect(formatDiagnostic(diagnostic, { cwd: "/repo" })).toBe(d`
+      service/tspconfig.yaml:2:3 - error tsv/invalid-option: Invalid option.
+        2 |   invalid: true
+          |   ^
+        help: Remove the option.
+    `);
+    expect(formatDiagnostic({ ...diagnostic, location: undefined }, { cwd: "/repo" })).toBe(d`
+      service/tspconfig.yaml - error tsv/invalid-option: Invalid option.
+        help: Remove the option.
+    `);
     expect(
       formatDiagnostic({ severity: "warning", code: "skipped", message: "Comparison skipped." }),
     ).toBe("warning tsv/skipped: Comparison skipped.");
@@ -102,12 +106,12 @@ describe("diagnostic formatting", () => {
     };
     const plain = formatDiagnostic(changedFiles, { cwd, color: false });
     const colored = formatDiagnostic(changedFiles, { cwd, color: true });
-    expect(plain).toBe(
-      "error tsv/generated-files-changed: Files have been changed after `tsp compile`.\n" +
-        "  service/first.json\n" +
-        "  service/second.json\n" +
-        "  help: Run `tsp compile` and include the changes.",
-    );
+    expect(plain).toBe(d`
+      error tsv/generated-files-changed: Files have been changed after \`tsp compile\`.
+        service/first.json
+        service/second.json
+        help: Run \`tsp compile\` and include the changes.
+    `);
     expect(colored).toContain("\n  \x1b[36mservice/first.json\x1b[39m\n");
     expect(colored).toContain("\n  \x1b[36mservice/second.json\x1b[39m\n");
     expect(stripVTControlCharacters(colored)).toBe(plain);
@@ -129,11 +133,11 @@ describe("diagnostic formatting", () => {
       '\n  - version "2024-06-01": \x1b[36m../stable/2024-06-01/contoso.json\x1b[39m\n',
     );
     expect(stripVTControlCharacters(colored)).toBe(plain);
-    expect(plain).toBe(
-      "error tsv/service-yaml: Manifest references swagger files that do not exist:\n" +
-        '  - version "2024-06-01": ../stable/2024-06-01/contoso.json\n' +
-        "  help: Regenerate the swagger.",
-    );
+    expect(plain).toBe(d`
+      error tsv/service-yaml: Manifest references swagger files that do not exist:
+        - version "2024-06-01": ../stable/2024-06-01/contoso.json
+        help: Regenerate the swagger.
+    `);
   });
 
   it("shows a diff after the file list, preserving Git colors and separating fix guidance", () => {
@@ -149,12 +153,16 @@ describe("diagnostic formatting", () => {
     expect(colored).toContain(`  \x1b[36mfile.json\x1b[39m\n\n${diff.trimEnd()}\n\n`);
     const plain = formatDiagnostic(changedFiles, { color: false });
     expect(stripVTControlCharacters(colored)).toBe(plain);
-    expect(plain).toBe(
-      "error tsv/generated-files-changed: Files changed after TypeSpec compilation:\n" +
-        "  file.json\n\n" +
-        "diff --git a/file.json b/file.json\n-old\n+new\n\n" +
-        "  help: Include the generated files.",
-    );
+    expect(plain).toBe(d`
+      error tsv/generated-files-changed: Files changed after TypeSpec compilation:
+        file.json
+
+      diff --git a/file.json b/file.json
+      -old
+      +new
+
+        help: Include the generated files.
+    `);
   });
 
   it("does not add blank lines for empty details", () => {

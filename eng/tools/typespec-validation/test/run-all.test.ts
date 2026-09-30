@@ -1,3 +1,4 @@
+import { d } from "@azure-tools/specs-shared/testing";
 import { ChildProcess, spawn } from "node:child_process";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { access, mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
@@ -145,7 +146,14 @@ it("groups each project in GitHub Actions, including failures and suppressions",
 
   await expect(runAll(join(root, "specification"))).resolves.toBe(false);
   expect(vi.mocked(console.log).mock.calls).toEqual([
-    ["Checking 3 TypeSpec folders:\nspecification/a\nspecification/b\nspecification/c"],
+    [
+      d`
+        Checking 3 TypeSpec folders:
+        specification/a
+        specification/b
+        specification/c
+      `,
+    ],
     ["::group::Validating specification/a"],
     ["validation failed"],
     [
@@ -161,11 +169,12 @@ it("groups each project in GitHub Actions, including failures and suppressions",
     ["validation passed"],
     ["::endgroup::"],
   ]);
-  expect(console.error).toHaveBeenCalledExactlyOnceWith(
-    "TypeSpec Validation failed for some folder to fix run and address any errors:\n" +
-      " > pnpm install\n > pnpm tsv specification/a\n" +
-      "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
-  );
+  expect(console.error).toHaveBeenCalledExactlyOnceWith(d`
+    TypeSpec Validation failed for some folder to fix run and address any errors:
+     > pnpm install
+     > pnpm tsv specification/a
+    For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation
+  `);
 });
 
 it("escapes percent signs and newlines in GitHub error annotations", async () => {
@@ -180,11 +189,12 @@ it("escapes percent signs and newlines in GitHub error annotations", async () =>
       " > pnpm install%0A > pnpm tsv specification/service%250A/Project%0A" +
       "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
   );
-  expect(console.error).toHaveBeenCalledExactlyOnceWith(
-    "TypeSpec Validation failed for some folder to fix run and address any errors:\n" +
-      " > pnpm install\n > pnpm tsv specification/service%0A/Project\n" +
-      "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
-  );
+  expect(console.error).toHaveBeenCalledExactlyOnceWith(d`
+    TypeSpec Validation failed for some folder to fix run and address any errors:
+     > pnpm install
+     > pnpm tsv specification/service%0A/Project
+    For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation
+  `);
 });
 
 it.each([
@@ -328,19 +338,29 @@ it("continues after validation failures and reports every failed project", async
   expect(spawn).toHaveBeenCalledTimes(3);
   expect(vi.mocked(console.error).mock.calls).toEqual([
     [
-      "TypeSpec Validation failed for project a run the following command locally to validate.\n" +
-        " > pnpm install\n > pnpm tsv a\n" +
-        "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
+      d`
+        TypeSpec Validation failed for project a run the following command locally to validate.
+         > pnpm install
+         > pnpm tsv a
+        For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation
+      `,
     ],
     [
-      "TypeSpec Validation failed for project c run the following command locally to validate.\n" +
-        " > pnpm install\n > pnpm tsv c\n" +
-        "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
+      d`
+        TypeSpec Validation failed for project c run the following command locally to validate.
+         > pnpm install
+         > pnpm tsv c
+        For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation
+      `,
     ],
     [
-      "TypeSpec Validation failed for some folder to fix run and address any errors:\n" +
-        " > pnpm install\n > pnpm tsv a\n > pnpm tsv c\n" +
-        "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
+      d`
+        TypeSpec Validation failed for some folder to fix run and address any errors:
+         > pnpm install
+         > pnpm tsv a
+         > pnpm tsv c
+        For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation
+      `,
     ],
   ]);
   expect(console.log).not.toHaveBeenCalledWith(expect.stringMatching(/^::error::/));
