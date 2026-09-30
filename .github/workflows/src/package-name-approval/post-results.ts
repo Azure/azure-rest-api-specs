@@ -5,7 +5,7 @@ import { execFile } from "../../../shared/src/exec.ts";
 import { PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { commentOrUpdate, parseExistingComments } from "../comment.ts";
 import { extractInputs } from "../context.ts";
-import type { Core } from "../github.ts";
+import type { Core, GitHub, GitHubScriptArgs } from "../github.ts";
 import { loadApproversConfig } from "./approvers.ts";
 import { removeLabelIfPresent } from "./labels.ts";
 
@@ -30,7 +30,7 @@ const NamespaceResultsSchema = z.object({
 });
 
 async function downloadNamespaceResults(
-  github: import("@actions/github-script").AsyncFunctionArguments["github"],
+  github: GitHub,
   core: Core,
   owner: string,
   repo: string,
@@ -80,16 +80,23 @@ async function downloadNamespaceResults(
   }
 }
 
-function getApprovers(
+export function getApprovers(
   approversConfig: import("./approvers.ts").ApproversConfig,
   isMgmt: boolean,
   language: string,
-): string[] {
+): string[] | "unprotected" {
   if (isMgmt) {
+    if (approversConfig.unprotected?.["management-plane"]?.includes(language)) {
+      return "unprotected";
+    }
     const mgmtApprovers = approversConfig["management-plane"]?.all;
     if (mgmtApprovers) {
       return mgmtApprovers;
     }
+  }
+
+  if (approversConfig.unprotected?.["data-plane"]?.includes(language)) {
+    return "unprotected";
   }
 
   const approvers = approversConfig["data-plane"]?.[language];
@@ -125,6 +132,15 @@ export function parseCommentTable(
     }
   }
   return results;
+}
+
+/**
+ * Whether the add-only "Mgmt" label should be cleared. post-results is its only writer,
+ * so it goes stale when a push removes the management tspconfig. Label hygiene now that
+ * authorization keys off resource-manager, not "Mgmt" (#46785). Mixed PRs (isMgmt) keep it.
+ */
+export function shouldRemoveStaleMgmtLabel(isMgmt: boolean, existingLabels: string[]): boolean {
+  return !isMgmt && existingLabels.includes("Mgmt");
 }
 
 function buildCommentBody({
@@ -199,13 +215,10 @@ function buildCommentBody({
         : formatResult.valid
           ? "✅"
           : "⚠️ Invalid";
-    body += `| ${language} | ${displayName} | ${displayNs} | ${formatStatus} | ${status} | ${getApprovers(
-      approversConfig,
-      isMgmt,
-      language,
-    )
-      .map((a) => `@${a}`)
-      .join(", ")} |\n`;
+    const approversCell = getApprovers(approversConfig, isMgmt, language);
+    const approversText =
+      approversCell === "unprotected" ? "_anyone_" : approversCell.map((a) => `@${a}`).join(", ");
+    body += `| ${language} | ${displayName} | ${displayNs} | ${formatStatus} | ${status} | ${approversText} |\n`;
   }
 
   const formatErrors = formatResults.filter((result) => !result.valid);
@@ -230,11 +243,7 @@ function buildCommentBody({
   return body;
 }
 
-export default async function postResults({
-  github,
-  context,
-  core,
-}: import("@actions/github-script").AsyncFunctionArguments) {
+export default async function postResults({ github, context, core }: GitHubScriptArgs) {
   const { owner, repo, issue_number, run_id } = await extractInputs(github, context, core);
   const approversConfig = await loadApproversConfig();
   const results = await downloadNamespaceResults(github, core, owner, repo, run_id);
@@ -276,6 +285,10 @@ export default async function postResults({
       for (const label of packageNameLabels) {
         await removeLabelIfPresent(github, owner, repo, issue_number, label);
       }
+      // The tspconfig was removed, so this is no longer a package PR. Clear the stale
+      // add-only "Mgmt" label here too, since the results-based reconcile below is
+      // skipped on the no-artifact path (#46785).
+      await removeLabelIfPresent(github, owner, repo, issue_number, "Mgmt");
 
       // Update status check to success
       await github.rest.repos.createCommitStatus({
@@ -436,6 +449,11 @@ export default async function postResults({
         labels: [label],
       });
     }
+  }
+
+  // Clear the stale add-only "Mgmt" label. See shouldRemoveStaleMgmtLabel (#46785).
+  if (shouldRemoveStaleMgmtLabel(results.isMgmt, existingLabels)) {
+    await removeLabelIfPresent(github, owner, repo, issue_number, "Mgmt");
   }
 
   const body = buildCommentBody({

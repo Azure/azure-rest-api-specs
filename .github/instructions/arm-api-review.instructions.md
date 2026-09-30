@@ -492,12 +492,12 @@ The TypeSpec-required rule applies to all new ARM API versions. The full rule de
 
 ### 6.7 Polling Behavior and `final-state-via`
 
-> **Full rule definition:** See [`.github/skills/azure-api-review/references/lro-final-state-via.md`](../skills/azure-api-review/references/lro-final-state-via.md) for the complete `final-state-via` decision table and anti-patterns.
+> **Full rule definition:** See [`.github/skills/azure-api-review/references/lro-final-state-via.md`](../skills/azure-api-review/references/lro-final-state-via.md) for the complete method-specific guidance and implementation evidence.
 
 - **`Location` header polling**: The polling URL returns `202` (with no body) while the operation is in progress and returns the **exact same response** as the synchronous completion when the operation finishes. For DELETE, the final response is `200` or `204`. For PATCH, the final response is `200` with the updated resource body. For POST, the final response is `200` or `204`.
 - **`Azure-AsyncOperation` header polling**: The polling URL always returns `200` with a status object in the response body containing `status`, `error` (if failed/canceled), and optional `id`, `name`, `startTime`, `endTime`, `percentComplete`, `properties`. A `4xx`/`5xx` on the polling URL indicates a failure reading the _status_, not a failure of the underlying operation.
 - The `Azure-AsyncOperation` status object **MUST** include `status`, whose terminal values include `Succeeded`, `Failed`, and `Canceled`; resource providers may define additional non-terminal values. `id` and `name` are optional. `properties` appears only on successful completion. If status is `Failed` or `Canceled`, `error` and `error.code` are required; `error.message` is required for `Failed` and optional for `Canceled`.
-- For PUT, PATCH, and DELETE following standard ARM patterns, do **NOT** specify `x-ms-long-running-operation-options` / `final-state-via` -- the default SDK behavior is correct. Only specify `"final-state-via": "location"` for POST LROs with a response schema.
+- For standard ARM PUT/PATCH/DELETE operations, do not flag `x-ms-long-running-operation-options` or `final-state-via` solely because it is present. Apply the shared LRO reference to verify the template, headers, logical result, and method-specific SDK behavior. For POST LROs, ensure final-result retrieval matches the service contract and applicable linter requirements.
 
 ### 6.8 Operation Results Placement
 
@@ -1201,7 +1201,7 @@ When reviewing ARM resource-manager swagger files, verify:
 - ✅ POST actions do NOT affect provisioningState; provisioningState transitions only non-terminal → non-terminal or non-terminal → terminal
 - ✅ `operationResults` are root-level resources (RPC021); `operationStatuses` may be under the original request or subscription-level operations (RPC028); subscription scope is preferred; no sensitive data in status properties
 - ✅ Operation IDs are unique (RPC022); fresh GUIDs are recommended and IDs should not reuse correlation/request IDs
-- ✅ `final-state-via` NOT specified on PUT/PATCH/DELETE following standard ARM patterns; only on POST LROs with response schema
+- ✅ `final-state-via` reviewed against the ARM template, response headers, logical `FinalResult`, and demonstrated SDK behavior; valid generated metadata is permitted on standard PUT/PATCH/DELETE operations
 
 ### Property Design (Properties Bag Review)
 
