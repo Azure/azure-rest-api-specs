@@ -57,8 +57,17 @@ Manual runs default to **dry-run**, which logs candidates without deleting anyth
 Run the workflow from the default branch; it is disabled on forks.
 
 A branch is eligible when its last commit is older than **90 days** for `copilot/*`,
-or **3 years (1,095 days)** for other branches. Closed-unmerged and no-PR branches
+or **2 years (730 days)** for other branches. Closed-unmerged and no-PR branches
 are included; recent comments on a closed PR do not extend retention.
+
+Manual runs can override these cutoffs independently using `copilot-days` and
+`other-days`. Both must be positive whole numbers. Scheduled runs always use the
+90-day and 730-day defaults. For example, to preview a shorter range:
+
+```bash
+gh workflow run branch-cleanup.yaml --repo Azure/azure-rest-api-specs --ref main \
+  -f dry-run=true -f copilot-days=30 -f other-days=365
+```
 
 The default branch, protected branches, and sources and targets of open PRs
 (including drafts) are skipped. Long-lived names and prefixes such as `dev-`,
