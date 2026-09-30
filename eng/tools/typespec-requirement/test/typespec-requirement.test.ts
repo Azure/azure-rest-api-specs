@@ -1,7 +1,7 @@
 import { execa } from "execa";
-import { mkdtemp, readFile, rm } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { dirname, join, resolve } from "node:path";
 import { expect, test } from "vitest";
 
 async function checkAllUnder(
@@ -17,12 +17,15 @@ async function checkAllUnder(
   const outputFile = outputDirectory ? join(outputDirectory, "github-output") : undefined;
 
   try {
+    if (outputFile) {
+      await writeFile(outputFile, "");
+    }
     const result = await execa(
       process.execPath,
       [
         script,
         "--check-all-under",
-        join(import.meta.dirname, path),
+        resolve(import.meta.dirname, path),
         "--response-cache",
         JSON.stringify(responseCache),
       ],
@@ -35,12 +38,30 @@ async function checkAllUnder(
     return {
       stdout: result.stdout + result.stderr,
       exitCode: result.exitCode,
-      githubOutput: outputFile ? await readFile(outputFile, "utf8").catch(() => "") : "",
+      githubOutput: outputFile ? await readFile(outputFile, "utf8") : "",
     };
   } finally {
     if (outputDirectory) {
       await rm(outputDirectory, { recursive: true, force: true });
     }
+  }
+}
+
+async function checkFixtures(
+  files: Record<string, string>,
+  responseCache: Record<string, number> = {},
+  captureGithubOutput = false,
+) {
+  const directory = await mkdtemp(join(tmpdir(), "typespec-requirement-fixtures-"));
+  try {
+    for (const [path, content] of Object.entries(files)) {
+      const fullPath = join(directory, "specification", path);
+      await mkdir(dirname(fullPath), { recursive: true });
+      await writeFile(fullPath, content);
+    }
+    return await checkAllUnder(directory, responseCache, captureGithubOutput);
+  } finally {
+    await rm(directory, { recursive: true, force: true });
   }
 }
 
@@ -80,6 +101,135 @@ test.concurrent("Generated from TypeSpec", async ({ expect }) => {
   expect(stdout).toContain("was generated from TypeSpec");
   expect(exitCode).toBe(0);
 });
+
+test.concurrent.each(["Common", "Common-Types", "Examples", "Scenarios", "Restler"])(
+  "Excludes %s paths regardless of casing",
+  async (folder) => {
+    const apiVersion = `excluded/data-plane/${folder}/stable/2026-01-01`;
+    const { stdout, exitCode } = await checkFixtures(
+      { [`${apiVersion}/openapi.json`]: "{}" },
+      {
+        [`https://github.com/Azure/azure-rest-api-specs/tree/main/specification/${apiVersion}`]: 404,
+      },
+    );
+
+    expect(stdout).toBe("No OpenAPI files found to check");
+    expect(exitCode).toBe(0);
+  },
+);
+
+test.concurrent.each(["Stable", "Preview"])(
+  "Checks %s paths regardless of casing",
+  async (folder) => {
+    const apiVersion = `case-sensitive/data-plane/CaseSensitive/${folder}/2026-01-01`;
+    const { stdout, exitCode } = await checkFixtures(
+      { [`${apiVersion}/openapi.json`]: "{}" },
+      {
+        [`https://github.com/Azure/azure-rest-api-specs/tree/main/specification/${apiVersion}`]: 404,
+      },
+    );
+
+    expect(stdout).toContain("API version is new and must use TypeSpec");
+    expect(exitCode).toBe(1);
+  },
+);
+
+test.concurrent("Finds tspconfig.yaml regardless of casing", async ({ expect }) => {
+  const { stdout, exitCode } = await checkFixtures({
+    "generated/data-plane/Generated/stable/2026-01-01/openapi.json":
+      '{"info":{"x-typespec-generated":true}}',
+    "generated/Generated/TspConfig.yaml": "{}",
+  });
+
+  expect(stdout).toContain("contains 1 file(s) named 'tspconfig.yaml'");
+  expect(exitCode).toBe(0);
+});
+
+test.concurrent.each([
+  { label: "UTF-8 BOM", content: '\uFEFF{"info":{"x-typespec-generated":true}}' },
+  {
+    label: "comments",
+    content: '{/* generated */"info":{// marker\n"x-typespec-generated":true}}',
+  },
+  { label: "trailing commas", content: '{"info":{"x-typespec-generated":true,},}' },
+])("Recognizes generated JSON with $label", async ({ content }) => {
+  const apiVersion = "generated/data-plane/Generated/stable/2026-01-01";
+  const { stdout, exitCode } = await checkFixtures(
+    {
+      [`${apiVersion}/openapi.json`]: content,
+      "generated/Generated/tspconfig.yaml": "{}",
+    },
+    {
+      [`https://github.com/Azure/azure-rest-api-specs/tree/main/specification/${apiVersion}`]: 404,
+    },
+  );
+
+  expect(stdout).toContain("was generated from TypeSpec");
+  expect(stdout).not.toContain("cannot be parsed as JSON");
+  expect(exitCode).toBe(0);
+});
+
+test.concurrent("Rejects malformed JSON even if the generated marker can be recovered", async ({
+  expect,
+}) => {
+  const apiVersion = "generated/data-plane/Generated/stable/2026-01-01";
+  const { stdout, exitCode } = await checkFixtures(
+    {
+      [`${apiVersion}/openapi.json`]: '{"info":{"x-typespec-generated":true}',
+      "generated/Generated/tspconfig.yaml": "{}",
+    },
+    {
+      [`https://github.com/Azure/azure-rest-api-specs/tree/main/specification/${apiVersion}`]: 404,
+    },
+  );
+
+  expect(stdout).toContain("cannot be parsed as JSON");
+  expect(stdout).toContain("API version is new and must use TypeSpec");
+  expect(exitCode).toBe(1);
+});
+
+test.concurrent.each([
+  { label: "single version", version: "2026-01-01", exitCode: 0, message: "Suppressed" },
+  { label: "wildcard version", version: "*", exitCode: 1, message: "Invalid path" },
+])("Validates $label suppressions with mixed-case paths", async (scenario) => {
+  const { stdout, exitCode } = await checkFixtures({
+    "suppressed/data-plane/Suppressed/Stable/2026-01-01/openapi.json": "{}",
+    "suppressed/suppressions.yaml":
+      `- tool: TypeSpecRequirement\n` +
+      `  paths: ["data-plane/Suppressed/Stable/${scenario.version}/*.json"]\n` +
+      `  reason: Allowed version\n`,
+  });
+
+  expect(stdout).toContain(scenario.message);
+  expect(exitCode).toBe(scenario.exitCode);
+});
+
+test.concurrent.each([
+  { status: 404, message: "API version is new and must use TypeSpec" },
+  { status: 519, message: "Unexpected response" },
+])(
+  "Preserves brownfield output when another version returns $status",
+  async ({ status, message }) => {
+    const existingVersion = "mixed/data-plane/Mixed/stable/2026-01-01";
+    const failingVersion = "mixed/data-plane/Mixed/stable/2026-02-01";
+    const { stdout, exitCode, githubOutput } = await checkFixtures(
+      {
+        [`${existingVersion}/openapi.json`]: "{}",
+        [`${failingVersion}/openapi.json`]: "{}",
+      },
+      {
+        [`https://github.com/Azure/azure-rest-api-specs/tree/main/specification/${existingVersion}`]: 200,
+        [`https://github.com/Azure/azure-rest-api-specs/tree/main/specification/${failingVersion}`]:
+          status,
+      },
+      true,
+    );
+
+    expect(stdout).toContain(message);
+    expect(exitCode).toBe(1);
+    expect(githubOutput).toBe("brownfield=true\n");
+  },
+);
 
 test.concurrent.each([
   {

@@ -2,6 +2,7 @@ import { appendFile, readdir, readFile } from "node:fs/promises";
 import { relative, resolve, sep } from "node:path";
 import { getChangedFiles } from "@azure-tools/specs-shared/changed-files";
 import { getSuppressions } from "@azure-tools/suppressions";
+import { parse, printParseErrorCode, type ParseError } from "jsonc-parser";
 
 interface Options {
   baseCommitish: string;
@@ -99,7 +100,7 @@ async function findFilesNamed(directory: string, fileName: string): Promise<stri
     const path = resolve(directory, entry.name);
     if (entry.isDirectory()) {
       files.push(...(await findFilesNamed(path, fileName)));
-    } else if (entry.isFile() && entry.name === fileName) {
+    } else if (entry.isFile() && entry.name.toLowerCase() === fileName.toLowerCase()) {
       files.push(path);
     }
   }
@@ -130,16 +131,22 @@ async function getFilesToCheck(options: Options): Promise<FileToCheck[]> {
         gitOptions: ["--diff-filter=d"],
       })
     )
-      .filter((file) => !file.includes("ChangedFiles-Functions"))
+      .filter(
+        (file) =>
+          file.startsWith("specification/") &&
+          file.endsWith(".json") &&
+          !file.includes("ChangedFiles-Functions"),
+      )
       .map((path) => ({ path, fullPath: resolve(repoRoot, path) }));
   }
 
   const specTypePattern = new RegExp(
     `^specification/[^/]+/(${options.specType}).*?/(preview|stable)/[^/]+/[^/]+\\.json$`,
+    "i",
   );
   return files.filter(
     ({ path }) =>
-      !/\/(examples|scenarios|restler|common|common-types)\//.test(path) &&
+      !/\/(examples|scenarios|restler|common|common-types)\//i.test(path) &&
       specTypePattern.test(path),
   );
 }
@@ -147,6 +154,7 @@ async function getFilesToCheck(options: Options): Promise<FileToCheck[]> {
 function getApiVersion(file: string, specType: string): string | undefined {
   const match = new RegExp(
     `^specification/((?:[^/]+/)(?:${specType}).*?/(?:preview|stable)/[^/]+)/[^/]+\\.json$`,
+    "i",
   ).exec(file);
   return match?.[1];
 }
@@ -181,7 +189,7 @@ async function checkFiles(options: Options): Promise<{ brownfield: boolean; exit
     const suppressions = await getSuppressions("TypeSpecRequirement", fullPath);
     const suppression = suppressions[0];
     if (suppression) {
-      const singleVersionPattern = /\/(preview|stable)\/[A-Za-z0-9._-]+\//;
+      const singleVersionPattern = /\/(preview|stable)\/[A-Za-z0-9._-]+\//i;
       for (const path of suppression.paths) {
         const suppressionPath = String(path);
         if (!singleVersionPattern.test(suppressionPath)) {
@@ -198,7 +206,20 @@ async function checkFiles(options: Options): Promise<{ brownfield: boolean; exit
 
     let jsonContent: unknown;
     try {
-      jsonContent = JSON.parse(await readFile(fullPath, "utf8"));
+      const errors: ParseError[] = [];
+      const parsed: unknown = parse(
+        (await readFile(fullPath, "utf8")).replace(/^\uFEFF/, ""),
+        errors,
+        {
+          allowTrailingComma: true,
+        },
+      );
+      if (errors.length > 0) {
+        throw new SyntaxError(
+          `${printParseErrorCode(errors[0].error)} at offset ${errors[0].offset}`,
+        );
+      }
+      jsonContent = parsed;
     } catch (error) {
       logWarning("  OpenAPI cannot be parsed as JSON, so assuming not generated from TypeSpec");
       logWarning(`    ${error instanceof Error ? error.message : String(error)}`);
@@ -279,6 +300,9 @@ async function checkFiles(options: Options): Promise<{ brownfield: boolean; exit
         "WARNING: This PR uses OpenAPI / Swagger. All Azure services are required to convert to TypeSpec by March 30, 2026. PRs not using TypeSpec will be blocked after that date. Starting July 1, 2026, all SDKs will be generated from TypeSpec as the autorest toolchain is being retired. Please reach out to tspconversion@service.microsoft.com with any questions and see http://aka.ms/azsdk/typespec for more details on TypeSpec.";
       logWarningForFile(file, warning);
       brownfield = true;
+      if (process.env.GITHUB_OUTPUT) {
+        await appendFile(process.env.GITHUB_OUTPUT, "brownfield=true\n");
+      }
     } else if (responseStatus === 404) {
       logInfo(
         `  Branch 'main' does not contain path '${apiVersion}', so API version is new and must use TypeSpec`,
@@ -305,9 +329,6 @@ async function checkFiles(options: Options): Promise<{ brownfield: boolean; exit
     return { brownfield, exitCode: 1 };
   }
 
-  if (brownfield && process.env.GITHUB_OUTPUT) {
-    await appendFile(process.env.GITHUB_OUTPUT, "brownfield=true\n");
-  }
   return { brownfield, exitCode: 0 };
 }
 
