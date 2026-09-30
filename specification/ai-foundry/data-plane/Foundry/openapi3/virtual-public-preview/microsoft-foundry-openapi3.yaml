@@ -49298,7 +49298,7 @@ components:
           type: boolean
           description: When true, the LLM judge always scores this dimension regardless of relevance (skips applicability assessment). The service-generated general quality/policy dimension has this set to true and is non-editable. Users may set this on their own custom dimensions. The service defaults to `false` if a value is not specified by the caller.
           default: false
-      description: A single dimension — one independent, measurable quality dimension within a rubric evaluator's scoring blueprint.
+      description: One measurable criterion within a rubric. Quality criteria may use rating weights; safety criteria classify a behavior as permissible or impermissible.
     DispatchRoutineRequest:
       type: object
       properties:
@@ -49996,7 +49996,7 @@ components:
           description: The grader type (for example, "string-check-grader").
         score:
           $ref: '#/components/schemas/OpenAI.numeric'
-          description: The numeric score produced by the grader.
+          description: The numeric metric score. Safety violation metrics use 1 for a known violation and 0 for no violation on relevant evaluable behavior. An irrelevant or indeterminate group has a null score, not a clear result.
         passed:
           type: boolean
           description: Whether the grader considered the output a pass.
@@ -50011,7 +50011,7 @@ components:
           description: 'The evaluation status for this result item. Values: "completed", "errored", "skipped". Null if not provided by evaluator. When status is skipped, passed/score can be ignored.'
         metric:
           type: string
-          description: The name of the metric (e.g., "fluency", "f1_score").
+          description: The metric name. Safety rubrics report impermissible_behavior_violated and permissible_behavior_violated separately, using lower-is-better event scores.
         label:
           type: string
           description: The label associated with the test criteria metric (e.g., "pass", "fail", "good", "bad").
@@ -50028,7 +50028,7 @@ components:
             type: string
           description: Additional details about the test criteria metric.
       unevaluatedProperties: {}
-      description: A single grader result for an evaluation run output item.
+      description: A named metric result for an evaluation run output item. One safety evaluator reports two entries, one for each permissibility group, with no overall safety aggregate.
       title: EvalRunOutputItemResult
     EvalRunOutputItemResultStatus:
       anyOf:
@@ -51292,7 +51292,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/EvaluatorGenerationJobSource'
-          description: Source materials for generation — agent descriptions, prompts, traces, or datasets. Each entry is an `EvaluatorGenerationJobSource` variant discriminated by `type`.
+          description: Source materials for generation. Safety generation requires a nonempty prompt source for the objective and at least one agent or trace source for application context. An arbitrary dataset cannot replace safety application context. Ordinary generation keeps its existing supported sources.
         model:
           type: string
           description: The LLM model to use for rubric generation (e.g., 'gpt-4o'). Required — users must provide their own model rather than relying on service-owned capacity.
@@ -83959,7 +83959,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Dimension'
-          description: The quality checks or grading criteria. Rating generation includes a service residual; Boolean generation does not inject a generic residual. Existing v1 and legacy definitions retain their behavior.
+          description: The rubric criteria. Safety dimensions require permissible and omit weight. Rating generation includes a service residual; Boolean generation does not inject a generic residual. Existing ordinary and legacy definitions retain their behavior.
         pass_threshold:
           type: number
           format: float
@@ -83969,7 +83969,7 @@ components:
           default: 0.5
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
-      description: Rubric-based evaluator definition — stores dimensions produced by the generate API. Used for both quality and safety evaluators.
+      description: Rubric evaluator definition. Ordinary quality rubrics report one aggregate. Safety rubrics require Boolean scoring and an explicit permissible classification on every dimension, and report impermissible_behavior_violated and permissible_behavior_violated as two independent lower-is-better metrics. Safety rubrics have no weights, threshold, or combined safety score.
     RubricGenerationInputQualityWarning:
       type: object
       required:

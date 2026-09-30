@@ -38162,6 +38162,15 @@
             "type": "string",
             "description": "What this dimension measures (e.g., 'Correctly identifies the user's reservation intent and pursues the appropriate workflow')."
           },
+          "permissible": {
+            "type": "boolean",
+            "description": "Safety behavior classification: true means permissible behavior and false means impermissible behavior. Required on every safety criterion instead of weight. This is not an evaluation verdict. Omit for ordinary quality criteria; omission never defaults a safety criterion to false. Preserved through edits and regeneration.",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "Evaluations=V1Preview"
+              ]
+            }
+          },
           "weight": {
             "type": "integer",
             "format": "int32",
@@ -38175,7 +38184,7 @@
             "default": false
           }
         },
-        "description": "A single dimension — one independent, measurable quality dimension within a rubric evaluator's scoring blueprint."
+        "description": "One measurable criterion within a rubric. Quality criteria may use rating weights; safety criteria classify a behavior as permissible or impermissible."
       },
       "DispatchRoutineRequest": {
         "type": "object",
@@ -38804,7 +38813,7 @@
                 "type": "null"
               }
             ],
-            "description": "The numeric score produced by the grader."
+            "description": "The numeric metric score. Safety violation metrics use 1 for a known violation and 0 for no violation on relevant evaluable behavior. An irrelevant or indeterminate group has a null score, not a clear result."
           },
           "passed": {
             "type": "boolean",
@@ -38828,7 +38837,7 @@
           },
           "metric": {
             "type": "string",
-            "description": "The name of the metric (e.g., \"fluency\", \"f1_score\")."
+            "description": "The metric name. Safety rubrics report impermissible_behavior_violated and permissible_behavior_violated separately, using lower-is-better event scores."
           },
           "label": {
             "type": "string",
@@ -38852,11 +38861,11 @@
           },
           "rubric_scoring": {
             "$ref": "#/components/schemas/RubricScoringResult",
-            "description": "Dimension judgments and the rubric's scoring decision. Present for evaluators using explicit rubric scoring."
+            "description": "The ordinary rubric's aggregate scoring detail. Safety rubrics report two independent named metric results instead and do not publish this as an overall safety score."
           }
         },
         "unevaluatedProperties": {},
-        "description": "A single grader result for an evaluation run output item.",
+        "description": "A named metric result for an evaluation run output item. One safety evaluator reports two entries, one for each permissibility group, with no overall safety aggregate.",
         "title": "EvalRunOutputItemResult"
       },
       "EvalRunOutputItemResultStatus": {
@@ -39833,6 +39842,26 @@
         },
         "description": "Service-managed provenance artifacts produced by an evaluator generation job. Present only on EvaluatorVersion resources created via the generation pipeline. The combined-JSONL Foundry Dataset is read-only and resolves to a versioned dataset in a service-reserved namespace."
       },
+      "EvaluatorGenerationCategory": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "quality",
+              "safety"
+            ]
+          }
+        ],
+        "description": "The requested evaluator generation category.",
+        "x-ms-foundry-meta": {
+          "required_previews": [
+            "Evaluations=V1Preview"
+          ]
+        }
+      },
       "EvaluatorGenerationInputs": {
         "type": "object",
         "required": [
@@ -39846,7 +39875,16 @@
             "items": {
               "$ref": "#/components/schemas/EvaluatorGenerationJobSource"
             },
-            "description": "Source materials for generation — agent descriptions, prompts, traces, or datasets. Each entry is an `EvaluatorGenerationJobSource` variant discriminated by `type`."
+            "description": "Source materials for generation. Safety generation requires a nonempty prompt source for the objective and at least one agent or trace source for application context. An arbitrary dataset cannot replace safety application context. Ordinary generation keeps its existing supported sources."
+          },
+          "category": {
+            "$ref": "#/components/schemas/EvaluatorGenerationCategory",
+            "description": "Generation intent. Omission preserves the existing quality path. Explicitly select safety for safety generation and regeneration; this does not change the execution profile of an existing incompatible evaluator. Safety output uses Boolean scoring, permissible classifications, and two named violation metrics.",
+            "x-ms-foundry-meta": {
+              "required_previews": [
+                "Evaluations=V1Preview"
+              ]
+            }
           },
           "model": {
             "type": "string",
@@ -39869,14 +39907,14 @@
           },
           "scoring": {
             "$ref": "#/components/schemas/RubricScoring",
-            "description": "Scoring choices for the generated evaluator. Supplied scoring defaults to Likert. On first creation, omitted weights yield equal contribution without configured weight fields. On regeneration, prior scoring and weights are preserved unless explicitly changed in a reviewed evaluator definition. Omitting scoring preserves legacy generation on first creation and inherits saved choices on regeneration."
+            "description": "Scoring choices for the generated evaluator. For quality, supplied scoring defaults to Likert; omitted weights on first creation yield equal contribution, and regeneration preserves saved choices. Omitting scoring preserves existing quality generation behavior. Safety generation resolves omitted scoring to Boolean and rejects a conflicting supplied mode; its dimensions use permissible rather than weights and its two metric results are not combined."
           },
           "dimensions": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Dimension"
             },
-            "description": "Caller-approved dimensions to preserve while generating other checks. All dimensions use the selected rubric scoring mode. Omission preserves prior approved dimensions on regeneration; an explicit list replaces the fixed set."
+            "description": "Caller-approved dimensions to preserve while generating other checks. Omission preserves prior approved dimensions on regeneration; an explicit list replaces the fixed set. Safety fixed dimensions require an explicit permissible Boolean, omit weights, and preserve classification as part of their policy meaning."
           }
         },
         "description": "Caller-supplied inputs for an evaluator generation job."
@@ -56387,6 +56425,10 @@
           },
           "failed": {
             "$ref": "#/components/schemas/OpenAI.integer"
+          },
+          "metric": {
+            "type": "string",
+            "description": "Optional metric identity when one testing criterion reports multiple metrics. Safety rubrics return separate entries for impermissible_behavior_violated and permissible_behavior_violated, each counting evaluable conversations independently."
           },
           "errored": {
             "$ref": "#/components/schemas/integer",
@@ -84902,7 +84944,7 @@
             "items": {
               "$ref": "#/components/schemas/Dimension"
             },
-            "description": "The quality checks or grading criteria. Rating generation includes a service residual; Boolean generation does not inject a generic residual. Existing v1 and legacy definitions retain their behavior."
+            "description": "The rubric criteria. Safety dimensions require permissible and omit weight. Rating generation includes a service residual; Boolean generation does not inject a generic residual. Existing ordinary and legacy definitions retain their behavior."
           },
           "pass_threshold": {
             "type": "number",
@@ -84921,7 +84963,7 @@
             "$ref": "#/components/schemas/EvaluatorDefinition"
           }
         ],
-        "description": "Rubric-based evaluator definition — stores dimensions produced by the generate API. Used for both quality and safety evaluators."
+        "description": "Rubric evaluator definition. Ordinary quality rubrics report one aggregate. Safety rubrics require Boolean scoring and an explicit permissible classification on every dimension, and report impermissible_behavior_violated and permissible_behavior_violated as two independent lower-is-better metrics. Safety rubrics have no weights, threshold, or combined safety score."
       },
       "RubricDimensionResult": {
         "type": "object",
@@ -85119,7 +85161,7 @@
             ]
           }
         ],
-        "description": "The quality-scoring mode selected for an entire rubric.",
+        "description": "The judgment mode selected for an entire rubric. Safety rubrics use Boolean judgments with separately reported permissibility metrics.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "Evaluations=V1Preview"
@@ -85168,7 +85210,7 @@
             "description": "One result list for every dimension, using the rubric's scoring mode."
           }
         },
-        "description": "Explainable scoring results for a rubric. Boolean scoring requires every applicable check to pass; Likert scoring compares the weighted average with the threshold.",
+        "description": "Explainable aggregate results for an ordinary rubric. Boolean scoring requires every applicable check to pass; Likert scoring compares the weighted average with the threshold. Safety rubric results instead contain two named metric entries, not this overall aggregate.",
         "x-ms-foundry-meta": {
           "required_previews": [
             "Evaluations=V1Preview"
