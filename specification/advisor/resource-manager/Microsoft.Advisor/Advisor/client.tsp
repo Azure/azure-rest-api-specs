@@ -23,6 +23,18 @@ using Microsoft.Advisor;
   "trackedProperties"
 );
 @@clientName(
+  ServiceGroupRecommendations.get,
+  "getByServiceGroup"
+);
+@@clientName(
+  ServiceGroupRecommendations.list,
+  "listByServiceGroup"
+);
+@@clientName(
+  ServiceGroupRecommendations.update,
+  "updateByServiceGroup"
+);
+@@clientName(
   SuppressionContracts.create::parameters.resource,
   "suppressionContract"
 );
@@ -59,6 +71,7 @@ using Microsoft.Advisor;
 @@clientName(Microsoft.Advisor.CpuThreshold.`20`, "TWENTY", "python");
 
 @@scope(ResourceRecommendationBases.list, "!csharp");
+@@scope(ResourceRecommendationBases.listV1, "!csharp");
 @@scope(Operations.list, "!csharp");
 @@clientName(PredictionResponse, "AdvisorPredictionResult", "csharp");
 @@clientName(
