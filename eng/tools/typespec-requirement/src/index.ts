@@ -4,12 +4,14 @@ import { getChangedFiles } from "@azure-tools/specs-shared/changed-files";
 import { getSuppressions } from "@azure-tools/suppressions";
 import { parse, printParseErrorCode, type ParseError } from "jsonc-parser";
 
+type SpecType = "data-plane" | "resource-manager";
+
 interface Options {
   baseCommitish: string;
   checkAllUnder?: string;
   headCommitish: string;
   responseCache: Record<string, number>;
-  specType: string;
+  specType?: SpecType;
 }
 
 interface FileToCheck {
@@ -140,10 +142,12 @@ async function getFilesToCheck(options: Options): Promise<FileToCheck[]> {
       .map((path) => ({ path, fullPath: resolve(repoRoot, path) }));
   }
 
-  const specTypePattern = new RegExp(
-    `^specification/[^/]+/(${options.specType}).*?/(preview|stable)/[^/]+/[^/]+\\.json$`,
-    "i",
-  );
+  const specTypePattern =
+    options.specType === "data-plane"
+      ? /^specification\/[^/]+\/(data-plane).*?\/(preview|stable)\/[^/]+\/[^/]+\.json$/i
+      : options.specType === "resource-manager"
+        ? /^specification\/[^/]+\/(resource-manager).*?\/(preview|stable)\/[^/]+\/[^/]+\.json$/i
+        : /^specification\/[^/]+\/(data-plane|resource-manager).*?\/(preview|stable)\/[^/]+\/[^/]+\.json$/i;
   return files.filter(
     ({ path }) =>
       !/\/(examples|scenarios|restler|common|common-types)\//i.test(path) &&
@@ -151,11 +155,14 @@ async function getFilesToCheck(options: Options): Promise<FileToCheck[]> {
   );
 }
 
-function getApiVersion(file: string, specType: string): string | undefined {
-  const match = new RegExp(
-    `^specification/((?:[^/]+/)(?:${specType}).*?/(?:preview|stable)/[^/]+)/[^/]+\\.json$`,
-    "i",
-  ).exec(file);
+function getApiVersion(file: string, specType?: SpecType): string | undefined {
+  const pattern =
+    specType === "data-plane"
+      ? /^specification\/((?:[^/]+\/)(?:data-plane).*?\/(?:preview|stable)\/[^/]+)\/[^/]+\.json$/i
+      : specType === "resource-manager"
+        ? /^specification\/((?:[^/]+\/)(?:resource-manager).*?\/(?:preview|stable)\/[^/]+)\/[^/]+\.json$/i
+        : /^specification\/((?:[^/]+\/)(?:data-plane|resource-manager).*?\/(?:preview|stable)\/[^/]+)\/[^/]+\.json$/i;
+  const match = pattern.exec(file);
   return match?.[1];
 }
 
@@ -337,7 +344,6 @@ function parseArgs(args: string[]): Options {
     baseCommitish: "HEAD^",
     headCommitish: "HEAD",
     responseCache: {},
-    specType: "data-plane|resource-manager",
   };
 
   for (let index = 0; index < args.length; index++) {
@@ -355,6 +361,9 @@ function parseArgs(args: string[]): Options {
         options.headCommitish = value;
         break;
       case "--spec-type":
+        if (value !== "data-plane" && value !== "resource-manager") {
+          throw new Error("--spec-type must be either 'data-plane' or 'resource-manager'");
+        }
         options.specType = value;
         break;
       case "--check-all-under":

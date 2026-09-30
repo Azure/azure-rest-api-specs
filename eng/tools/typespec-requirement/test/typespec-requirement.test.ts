@@ -72,6 +72,19 @@ test.concurrent("No files to check", async ({ expect }) => {
   expect(exitCode).toBe(0);
 });
 
+test("Rejects an invalid spec type", async ({ expect }) => {
+  const repoRoot = join(import.meta.dirname, "..", "..", "..", "..");
+  const script = join(repoRoot, "eng", "tools", "typespec-requirement", "src", "index.ts");
+  const { stderr, exitCode } = await execa(
+    process.execPath,
+    [script, "--spec-type", "data-plane)|.*"],
+    { cwd: repoRoot, reject: false },
+  );
+
+  expect(stderr).toContain("--spec-type must be either 'data-plane' or 'resource-manager'");
+  expect(exitCode).toBe(1);
+});
+
 test.concurrent("Suppression", async ({ expect }) => {
   const { stdout, exitCode } = await checkAllUnder("specification/suppression");
 
