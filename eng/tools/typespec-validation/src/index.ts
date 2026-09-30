@@ -136,16 +136,12 @@ export async function main() {
     all: {
       type: "boolean",
       description: "Validate all projects under the discovery root.",
-      mode: [
-        { name: "folder", optional: true, description: "Discovery root (default: specification)." },
-      ],
     },
     changed: {
       type: "boolean",
       description:
         "Validate projects affected by committed changes using the current checkout. " +
         "--all and --changed cannot be combined.",
-      mode: [],
     },
     base: {
       type: "string",

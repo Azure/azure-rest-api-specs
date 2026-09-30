@@ -65,9 +65,7 @@ describe("parseArgsWithHelp", () => {
         all: {
           type: "boolean",
           description: "Process all files.",
-          mode: [{ name: "root", optional: true, description: "Discovery root." }],
         },
-        changed: { type: "boolean", description: "Process changed files.", mode: [] },
       },
       help: {
         command: "pnpm example",
@@ -84,15 +82,8 @@ describe("parseArgsWithHelp", () => {
     });
     const output = String(log.mock.calls[0][0]);
     expect(output).toContain("Example tool\nProcess files.");
-    expect(output).toContain(
-      "Usage:\n" +
-        "  pnpm example <file> [context] [options]\n" +
-        "  pnpm example --all [root] [options]\n" +
-        "  pnpm example --changed [options]",
-    );
+    expect(output).toContain("Usage:\n  pnpm example <file> [context] [options]");
     expect(output).toMatch(/Arguments:\n\s+<file>\s+Input file\.\n\s+\[context\]\s+JSON context\./);
-    expect(output).toMatch(/Arguments for --all:\n\s+\[root\]\s+Discovery root\./);
-    expect(output).not.toContain("Arguments for --changed:");
     expect(output).toContain("Notes:\n  Run from the repository root.");
     expect(output).toContain(
       "Examples:\n  pnpm example input.json\n  pnpm example --all\n  pnpm example\n",

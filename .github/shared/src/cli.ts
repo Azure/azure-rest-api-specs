@@ -1,18 +1,11 @@
 import { parseArgs, type ParseArgsConfig, type ParseArgsOptionDescriptor } from "node:util";
 
 /** A Node.js argument definition with help text and optional display metadata. */
-export type CliOption = ParseArgsOptionDescriptor & {
+export interface CliOption extends ParseArgsOptionDescriptor {
   description: string;
   valueLabel?: string;
   group?: string;
-} & (
-    | {
-        type: "boolean";
-        /** Adds an alternative invocation selected by this boolean option. */
-        mode?: readonly CliPositional[];
-      }
-    | { type: "string"; mode?: never }
-  );
+}
 
 /** Describes a positional argument in help; validation remains the caller's responsibility. */
 export interface CliPositional {
@@ -70,25 +63,14 @@ export function parseArgsWithHelp<const T extends CliArgsConfig>(config: T) {
 
 function formatHelp(help: CliHelp, options: Record<string, CliOption>): string {
   const positionals = help.positionals ?? [];
-  const usages = [formatUsage(help.command, positionals)];
-  const argumentsSections: string[] = [];
-  if (positionals.length > 0) {
-    argumentsSections.push(formatPositionals("Arguments", positionals));
-  }
-  for (const [name, option] of Object.entries(options)) {
-    if (option.mode !== undefined) {
-      usages.push(formatUsage(`${help.command} --${name}`, option.mode));
-      if (option.mode.length > 0) {
-        argumentsSections.push(formatPositionals(`Arguments for --${name}`, option.mode));
-      }
-    }
-  }
   const sections = [
     [help.title ?? help.command, help.description].filter(Boolean).join("\n"),
-    `Usage:\n${usages.join("\n")}`,
-    ...argumentsSections,
-    formatOptions(options),
+    `Usage:\n${formatUsage(help.command, positionals)}`,
   ];
+  if (positionals.length > 0) {
+    sections.push(formatPositionals(positionals));
+  }
+  sections.push(formatOptions(options));
   if (help.notes?.length) {
     sections.push(`Notes:\n${help.notes.map((note) => formatEntry("", note, 2)).join("\n")}`);
   }
@@ -112,8 +94,8 @@ function formatUsage(command: string, positionals: readonly CliPositional[]): st
   return `  ${[command, ...positionals.map(positionalLabel), "[options]"].join(" ")}`;
 }
 
-function formatPositionals(heading: string, positionals: readonly CliPositional[]): string {
-  return `${heading}:\n${positionals
+function formatPositionals(positionals: readonly CliPositional[]): string {
+  return `Arguments:\n${positionals
     .map((positional) => formatEntry(`  ${positionalLabel(positional)}`, positional.description))
     .join("\n")}`;
 }
