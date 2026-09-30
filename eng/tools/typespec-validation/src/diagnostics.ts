@@ -46,12 +46,12 @@ export function formatRuleSummary(
   const c = pc.createColors(color);
   const parts: string[] = [];
   if (counts.PASS) parts.push(c.green(`${counts.PASS} passed`));
-  if (counts.FAIL) parts.push(c.red(`${counts.FAIL} failed`));
+  if (counts.FAIL) parts.push(c.bold(c.red(`${counts.FAIL} failed`)));
   if (counts.WARN) parts.push(c.yellow(`${counts.WARN} with warnings`));
-  if (counts.SKIP) parts.push(`${counts.SKIP} skipped`);
-  if (counts.SUPPRESSED) parts.push(`${counts.SUPPRESSED} suppressed`);
-  if (notRun) parts.push(`${notRun} not run`);
-  return `Rules: ${parts.join(" | ") || "0 run"}`;
+  if (counts.SKIP) parts.push(c.gray(`${counts.SKIP} skipped`));
+  if (counts.SUPPRESSED) parts.push(c.gray(`${counts.SUPPRESSED} suppressed`));
+  if (notRun) parts.push(c.gray(`${notRun} not run`));
+  return `${c.bold("Rules:")} ${parts.join(c.dim(" | ")) || c.gray("0 run")}`;
 }
 
 export function formatDiagnostic(
