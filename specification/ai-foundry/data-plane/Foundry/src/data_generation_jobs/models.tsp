@@ -357,59 +357,6 @@ model ToolUseFineTuningDataGenerationJobOptions
   max_samples: int32;
 }
 
-@doc("The supported source types for data generation jobs.")
-union DataGenerationJobSourceType {
-  string,
-
-  @doc("Prompt source — inline text provided by the user.")
-  prompt: "prompt",
-
-  @doc("Agent source — references an agent.")
-  agent: "agent",
-
-  @doc("Traces source — conversation traces from Application Insights.")
-  traces: "traces",
-
-  @doc("File source — Azure OpenAI file.")
-  file: "file",
-}
-
-@doc("The base source model for data generation jobs.")
-@discriminator("type")
-model DataGenerationJobSource {
-  @doc("The type of source.")
-  type: DataGenerationJobSourceType;
-
-  ...JobSourceDescription;
-}
-
-@doc("Prompt source for data generation jobs — inline text provided by the user.")
-model PromptDataGenerationJobSource extends DataGenerationJobSource {
-  ...PromptJobSource;
-}
-
-@doc("Agent source for data generation jobs — references an agent to fetch instructions and metadata from.")
-model AgentDataGenerationJobSource extends DataGenerationJobSource {
-  ...AgentJobSource;
-}
-
-@doc("Traces source for data generation jobs — conversation traces from Application Insights.")
-model TracesDataGenerationJobSource extends DataGenerationJobSource {
-  ...TracesJobSource;
-
-  @doc("Optional explicit list of trace IDs to include.")
-  trace_ids?: string[];
-}
-
-@doc("File source for data generation jobs — Azure OpenAI file input.")
-model FileDataGenerationJobSource extends DataGenerationJobSource {
-  @doc("The source type for this job, which is File.")
-  type: DataGenerationJobSourceType.file;
-
-  @doc("Input Azure Open AI file id used for data generation.")
-  id: string;
-}
-
 @doc("The supported question types for SimpleQnA data generation jobs used for fine-tuning scenarios. This is a preview feature.")
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 union SimpleQnAFineTuningQuestionType {
