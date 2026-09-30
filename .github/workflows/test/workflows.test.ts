@@ -50,6 +50,39 @@ describe("workflow files", () => {
     });
   });
 
+  it("builds TypeSpec libraries when their sources change", async () => {
+    const workflow = z
+      .object({
+        on: z.object({
+          push: z.object({ paths: z.array(z.string()) }),
+          pull_request: z.object({ paths: z.array(z.string()) }),
+        }),
+        jobs: z.record(
+          z.string(),
+          z.object({
+            steps: z.array(
+              z.object({
+                uses: z.string().optional(),
+                run: z.string().optional(),
+                with: z.object({ "sparse-checkout": z.string().optional() }).optional(),
+              }),
+            ),
+          }),
+        ),
+      })
+      .parse(load(await readFile(resolve(workflowsDir, "eng.yml"), "utf8")));
+
+    for (const event of [workflow.on.push, workflow.on.pull_request]) {
+      expect(event.paths).toContain("libs/**");
+    }
+    const buildJob = Object.values(workflow.jobs).find((job) =>
+      job.steps.some((step) => step.run === "pnpm run build"),
+    );
+    expect(buildJob).toBeDefined();
+    const checkout = buildJob?.steps.find((step) => step.uses?.startsWith("actions/checkout@"));
+    expect(checkout?.with?.["sparse-checkout"]?.trim().split(/\s+/)).toContain("libs");
+  });
+
   it.each(["typespec-validation.yaml", "typespec-validation-all.yaml"])(
     "%s enables TSV verbosity only for debug runs",
     async (file) => {
@@ -99,6 +132,7 @@ describe("workflow files", () => {
         ".github/shared",
         ".github/workflows",
         "eng/tools",
+        "libs/foundry-core",
         ...[
           "lint-diff",
           "oav-runner",
