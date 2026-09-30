@@ -67,7 +67,7 @@ it.each(["single", "all", "changed"])(
     });
     await expect(run(...args, "--verbose")).rejects.toMatchObject({
       code: 1,
-      stdout: expect.stringContaining("Executing rule: FolderStructure") as unknown,
+      stdout: expect.stringContaining("\u00d7 FolderStructure") as unknown,
       stderr: expect.stringContaining("simple-git") as unknown,
     });
   },
@@ -132,6 +132,9 @@ it.each([
       expect(stripVTControlCharacters(stderr).split(diagnostic)).toHaveLength(2);
       expect(stderr.includes("\x1b[31merror\x1b[39m")).toBe(color);
       expect(stderr).not.toContain("\n    at ");
+      expect(stripVTControlCharacters(String(error.stdout))).toBe(
+        "\n2 passed | 1 failed | 9 not run\n",
+      );
       expect(String(error.stdout)).not.toMatch(
         /Executing rule:|config files:|imports:|Expected npm prefix:/,
       );
@@ -230,7 +233,7 @@ it("wraps child output in repository-relative GitHub Actions groups", async () =
     "Validating specification/b",
   ]);
   for (const group of groups) {
-    expect(group[2]).toContain("Running TypeSpecValidation on folder:");
+    expect(group[2]).not.toContain("Running TypeSpecValidation on folder:");
     expect(group[2]).toContain("Suppressed: fixture");
   }
 });

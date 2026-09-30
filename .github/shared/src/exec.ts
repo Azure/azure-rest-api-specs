@@ -17,6 +17,8 @@ export interface ExecOptions {
 }
 
 export interface ExecFileOptions extends ExecOptions {
+  /** Environment for this command. Defaults to the current process environment. */
+  env?: NodeJS.ProcessEnv;
   /** Maximum execution time in milliseconds. Defaults to no timeout. */
   timeout?: number;
 }
@@ -58,6 +60,7 @@ export async function execFile(
     cwd,
     logger,
     timeout,
+    env,
     // Node default is 1024 * 1024, which is too small for some git commands returning many entities or large file content.
     // To support "git show", should be larger than the largest swagger file in the repo (2.5 MB as of 2/28/2025).
     maxBuffer = 16 * 1024 * 1024,
@@ -71,6 +74,7 @@ export async function execFile(
       cwd,
       maxBuffer,
       timeout,
+      ...(env === undefined ? {} : { env }),
     });
 
     logger?.debug(`stdout: '${result.stdout}'`);

@@ -6,7 +6,6 @@ import { afterEach, beforeEach, describe, expect, it, type MockInstance, vi } fr
 import * as fsPromises from "node:fs/promises";
 import path from "node:path";
 import * as nativeGlob from "../src/glob.ts";
-import { type RuleResult } from "../src/rule-result.ts";
 import { CompileRule } from "../src/rules/compile.ts";
 
 import * as utils from "../src/utils.ts";
@@ -21,22 +20,64 @@ describe("compile", function () {
   beforeEach(() => {
     vi.spyOn(utils, "fileExists").mockResolvedValue(true);
     vi.spyOn(utils, "getSuppressions").mockResolvedValue([]);
-    gitDiffTopSpecFolderSpy = vi.spyOn(utils, "gitDiffTopSpecFolder").mockImplementation((folder) =>
-      Promise.resolve({
-        success: true,
-        stdOutput: `Running git diff on folder ${folder}}`,
-        errorOutput: "",
-      }),
-    );
-    runNodeBinSpy = vi
-      .spyOn(utils, "runNodeBin")
-      .mockImplementation((packageName, args, _logger, cwd) =>
-        Promise.resolve([null, `runNodeBin ${packageName} ${args.join(" ")} at ${cwd}`, ""]),
-      );
+    gitDiffTopSpecFolderSpy = vi
+      .spyOn(utils, "gitDiffTopSpecFolder")
+      .mockResolvedValue({ success: true, files: [] });
+    runNodeBinSpy = vi.spyOn(utils, "runNodeBin").mockResolvedValue([null, "", ""]);
   });
 
   afterEach(() => {
     vi.clearAllMocks();
+  });
+
+  it.each([false, true])(
+    "hides routine output but retains stale-file validation with verbose=%s",
+    async (verbose) => {
+      const logger = new ConsoleLogger(verbose);
+      const debug = vi.spyOn(console, "debug").mockImplementation(() => {});
+      try {
+        // Only main.tsp exists so the fixture compiles once.
+        vi.mocked(utils.fileExists).mockImplementation((file) =>
+          Promise.resolve(file.endsWith("main.tsp")),
+        );
+        const output = `TypeSpec compiler v1.16.0\n\n    ${swaggerPath}\n\nCompilation completed successfully.\n\n`;
+        runNodeBinSpy.mockResolvedValue([null, output, "- Compiling...\n\u2714 Compiling\n"]);
+        vi.mocked(nativeGlob.globFiles).mockResolvedValue([swaggerPath, handwrittenSwaggerPath]);
+        vi.mocked(fsPromises.readFile).mockResolvedValue('{"info":{"x-typespec-generated":true}}');
+        const result = await new CompileRule().execute(mockFolder, logger);
+        expect(result.success).toBe(true); // Older preview is allowed.
+        expect(result.diagnostics).toEqual([]);
+        expect(runNodeBinSpy).toHaveBeenCalledExactlyOnceWith(
+          "@typespec/compiler",
+          ["tsp", "compile", "--list-files", "--warn-as-error", mockFolder],
+          logger,
+        );
+        expect(nativeGlob.globFiles).toHaveBeenCalled();
+        if (verbose)
+          expect(debug).toHaveBeenCalledWith(expect.stringContaining("Generated Swaggers:"));
+        else expect(debug).not.toHaveBeenCalled();
+      } finally {
+        debug.mockRestore();
+      }
+    },
+  );
+
+  it("retains both main and client native failures, without running the dirty-file check", async () => {
+    runNodeBinSpy
+      .mockResolvedValueOnce([new Error("main failed"), "main.tsp:1:1 - error first: message", ""])
+      .mockResolvedValueOnce([
+        new Error("client failed"),
+        "",
+        "client.tsp:1:1 - error second: message",
+      ]);
+    const result = await new CompileRule().execute(mockFolder, defaultLogger);
+    expect(result.success).toBe(false);
+    expect(result.diagnostics?.map((diagnostic) => diagnostic.output)).toEqual([
+      "main.tsp:1:1 - error first: message",
+      "client.tsp:1:1 - error second: message",
+    ]);
+    expect(gitDiffTopSpecFolderSpy).not.toHaveBeenCalled();
+    expect(runNodeBinSpy).toHaveBeenCalledTimes(2);
   });
 
   it("should succeed if project can compile", async function () {
@@ -102,7 +143,10 @@ describe("compile", function () {
     expect(nativeGlob.globFiles).toHaveBeenCalledWith("data-plane/Azure.Foo/**/foo.json", {
       exclude: ["**/examples/**"],
     });
-    expect(result.stdOutput).toContain(`\nGenerated Swaggers:\n${path.normalize(swaggerPath)}\n`);
+    // Inventory is still used even though normal output is hidden.
+    expect(result.diagnostics?.some((diagnostic) => diagnostic.code === "extra-swagger")).toBe(
+      false,
+    );
   });
 
   it("should succeed if output has no generated swaggers", async function () {
@@ -112,7 +156,6 @@ describe("compile", function () {
 
     await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
       success: true,
-      stdOutput: expect.stringContaining("skipping extra swagger check") as unknown,
     });
   });
 
@@ -138,7 +181,9 @@ describe("compile", function () {
 
     await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
       success: false,
-      errorOutput: expect.stringContaining("not generated from the current") as unknown,
+      diagnostics: expect.arrayContaining([
+        expect.objectContaining({ code: "extra-swagger" }),
+      ]) as unknown,
     });
   });
 
@@ -163,7 +208,6 @@ describe("compile", function () {
     const result = await new CompileRule().execute(mockFolder, defaultLogger);
     expect(result).toMatchObject({
       success: true,
-      stdOutput: expect.stringContaining("older versions") as unknown,
     });
   });
 
@@ -186,7 +230,9 @@ describe("compile", function () {
 
     await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
       success: false,
-      errorOutput: expect.stringContaining("not generated from the current") as unknown,
+      diagnostics: expect.arrayContaining([
+        expect.objectContaining({ code: "extra-swagger" }),
+      ]) as unknown,
     });
   });
 
@@ -209,7 +255,9 @@ describe("compile", function () {
 
     await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
       success: false,
-      errorOutput: expect.stringContaining("not generated from the current") as unknown,
+      diagnostics: expect.arrayContaining([
+        expect.objectContaining({ code: "extra-swagger" }),
+      ]) as unknown,
     });
   });
 
@@ -235,7 +283,6 @@ describe("compile", function () {
     const result = await new CompileRule().execute(mockFolder, defaultLogger);
     expect(result).toMatchObject({
       success: true,
-      stdOutput: expect.stringContaining("older versions") as unknown,
     });
   });
 
@@ -260,7 +307,9 @@ describe("compile", function () {
 
     await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
       success: false,
-      errorOutput: expect.stringContaining("not generated from the current") as unknown,
+      diagnostics: expect.arrayContaining([
+        expect.objectContaining({ code: "extra-swagger" }),
+      ]) as unknown,
     });
   });
 
@@ -285,7 +334,6 @@ describe("compile", function () {
     const result = await new CompileRule().execute(mockFolder, defaultLogger);
     expect(result).toMatchObject({
       success: true,
-      stdOutput: expect.stringContaining("older versions") as unknown,
     });
   });
 
@@ -309,7 +357,9 @@ describe("compile", function () {
 
     await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
       success: false,
-      errorOutput: expect.stringContaining("not generated from the current") as unknown,
+      diagnostics: expect.arrayContaining([
+        expect.objectContaining({ code: "extra-swagger" }),
+      ]) as unknown,
     });
   });
 
@@ -390,8 +440,14 @@ describe("compile", function () {
 
     await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
       success: false,
-      stdOutput: expect.not.stringContaining("Running git diff") as unknown,
+      diagnostics: expect.arrayContaining([
+        expect.objectContaining({
+          code: "compile",
+          output: "running tsp compile\ncompilation failure",
+        }),
+      ]) as unknown,
     });
+    expect(gitDiffTopSpecFolderSpy).not.toHaveBeenCalled();
   });
 
   it("should fail if git diff fails", async function () {
@@ -401,19 +457,16 @@ describe("compile", function () {
 
     vi.mocked(nativeGlob.globFiles).mockImplementation(() => Promise.resolve([swaggerPath]));
 
-    gitDiffTopSpecFolderSpy.mockImplementation((folder: string): Promise<RuleResult> => {
-      const stdOut = `Running git diff on folder ${folder}`;
-
-      return Promise.resolve({
-        success: false,
-        stdOutput: stdOut,
-        errorOutput: `Files generated: ${folder}/bar`,
-      });
-    });
+    gitDiffTopSpecFolderSpy.mockResolvedValue({ success: false, files: [`${mockFolder}/bar`] });
 
     await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
       success: false,
-      stdOutput: expect.stringContaining("Running git diff") as unknown,
+      diagnostics: expect.arrayContaining([
+        expect.objectContaining({
+          code: "generated-files-changed",
+          output: `${mockFolder}/bar`,
+        }),
+      ]) as unknown,
     });
   });
 
@@ -424,17 +477,10 @@ describe("compile", function () {
 
     vi.mocked(nativeGlob.globFiles).mockImplementation(() => Promise.resolve([swaggerPath]));
 
-    gitDiffTopSpecFolderSpy.mockImplementation((folder: string): Promise<RuleResult> => {
-      const stdOut = `Running git diff on folder ${folder}`;
-      return Promise.resolve({
-        success: true,
-        stdOutput: stdOut,
-      });
-    });
+    gitDiffTopSpecFolderSpy.mockResolvedValue({ success: true, files: [] });
 
     await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
       success: true,
-      stdOutput: expect.stringContaining("Running git diff") as unknown,
     });
   });
 });

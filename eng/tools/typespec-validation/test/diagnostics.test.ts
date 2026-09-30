@@ -4,6 +4,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {
   exceptionDiagnostic,
   formatDiagnostic,
+  formatRuleStatus,
+  formatRuleSummary,
   reportDiagnostics,
   supportsColor,
 } from "../src/diagnostics.ts";
@@ -26,6 +28,43 @@ const diagnostic: Diagnostic = {
 };
 
 describe("diagnostic formatting", () => {
+  it("keeps skipped counts and separators muted while emphasizing failures", () => {
+    const counts = { PASS: 2, FAIL: 1, WARN: 1, SKIP: 3, SUPPRESSED: 1 };
+    const plain = formatRuleSummary(counts, 4, false);
+    const colored = formatRuleSummary(counts, 4, true);
+    expect(colored).not.toContain("Rules:");
+    expect(colored).toContain("\x1b[32m2 passed\x1b[39m");
+    expect(colored).toContain("\x1b[1m\x1b[31m1 failed\x1b[39m\x1b[22m");
+    expect(colored).toContain("\x1b[33m1 with warnings\x1b[39m");
+    for (const text of ["3 skipped", "1 suppressed", "4 not run"]) {
+      expect(colored).toContain(`\x1b[90m${text}\x1b[39m`);
+    }
+    expect(colored).toContain("\x1b[2m | \x1b[22m");
+    expect(stripVTControlCharacters(colored)).toBe(plain);
+    expect(plain).toBe(
+      "2 passed | 1 failed | 1 with warnings | 3 skipped | 1 suppressed | 4 not run",
+    );
+    expect(plain).not.toContain("\x1b");
+    expect(
+      formatRuleSummary({ PASS: 0, FAIL: 0, WARN: 0, SKIP: 0, SUPPRESSED: 0 }, 0, true),
+    ).toContain("\x1b[90m0 run\x1b[39m");
+  });
+
+  it("renders concise colored rule statuses and an honest incomplete-run summary", () => {
+    expect(formatRuleStatus("Compile", "PASS", false)).toBe("\u2714 Compile");
+    expect(formatRuleStatus("Compile", "PASS", true)).toBe("\x1b[32m\u2714\x1b[39m Compile");
+    expect(formatRuleStatus("Compile", "FAIL", true)).toBe("\x1b[31m\u00d7\x1b[39m Compile");
+    expect(formatRuleStatus("Compile", "WARN", true)).toBe("\x1b[33m!\x1b[39m Compile (warnings)");
+    expect(formatRuleStatus("Compile", "SKIP", false)).toBe("- Compile (skipped)");
+    expect(formatRuleStatus("Compile", "SUPPRESSED", false)).toBe("- Compile (suppressed)");
+    expect(formatRuleSummary({ PASS: 2, FAIL: 1, WARN: 0, SKIP: 1, SUPPRESSED: 1 }, 3, false)).toBe(
+      "2 passed | 1 failed | 1 skipped | 1 suppressed | 3 not run",
+    );
+    expect(formatRuleSummary({ PASS: 0, FAIL: 0, WARN: 0, SKIP: 0, SUPPRESSED: 0 }, 0, false)).toBe(
+      "0 run",
+    );
+  });
+
   it("uses TypeSpec-style locations, severity, codes and a real source excerpt", () => {
     expect(formatDiagnostic(diagnostic, { cwd: "/repo" })).toBe(
       "service/tspconfig.yaml:2:3 - error tsv/invalid-option: Invalid option.\n" +

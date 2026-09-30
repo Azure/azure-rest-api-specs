@@ -29,6 +29,19 @@ describe("execFile", () => {
   const args = ["-e", `console.log("test")`];
   const expected = "test\n";
 
+  it("forwards command-specific environment without mutating the parent", async () => {
+    const original = process.env.TSV_EXEC_TEST;
+    const result = await execFile(
+      process.execPath,
+      ["-e", "process.stdout.write(process.env.TSV_EXEC_TEST)"],
+      {
+        env: { ...process.env, TSV_EXEC_TEST: "child-only" },
+      },
+    );
+    expect(result.stdout).toBe("child-only");
+    expect(process.env.TSV_EXEC_TEST).toBe(original);
+  });
+
   it.each([false, true])("uses debug level for command traces (verbose=%s)", async (verbose) => {
     const log = vi.spyOn(console, "log").mockImplementation(() => {});
     const debug = vi.spyOn(console, "debug").mockImplementation(() => {});
