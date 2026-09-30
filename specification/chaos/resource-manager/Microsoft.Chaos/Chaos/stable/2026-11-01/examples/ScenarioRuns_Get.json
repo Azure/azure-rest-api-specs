@@ -18,7 +18,7 @@
           "scenarioName": "12345678-1234-1234-1234-123456789012",
           "workspaceName": "exampleWorkspace",
           "managedIdentityPrincipalId": "d04ab567-2c07-43ef-a7f4-4527626b7f56",
-          "status": "Succeeded",
+          "status": "PartiallySucceeded",
           "resources": [
             {
               "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM1"
@@ -45,6 +45,42 @@
                 },
                 {
                   "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM2"
+                }
+              ]
+            },
+            {
+              "actionUrn": "urn:csci:provider:microsoft:VirtualMachine_Restart/1.0",
+              "state": "Failed",
+              "startedAt": "2025-01-20T14:40:00.000Z",
+              "completedAt": "2025-01-20T14:42:00.000Z",
+              "resources": [
+                {
+                  "id": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM2"
+                }
+              ],
+              "error": {
+                "code": "ActionExecutionFailed",
+                "message": "The action failed on one or more targets.",
+                "details": [
+                  {
+                    "code": "TargetExecutionFailed",
+                    "message": "The target rejected the requested operation.",
+                    "target": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM2"
+                  }
+                ]
+              },
+              "failureSuppressed": true
+            }
+          ],
+          "warnings": [
+            {
+              "code": "AgentCleanupIncomplete",
+              "message": "Cleanup could not be confirmed for one target.",
+              "details": [
+                {
+                  "code": "CleanupConfirmationTimedOut",
+                  "message": "The target did not confirm cleanup before the operation timed out.",
+                  "target": "/subscriptions/6b052e15-03d3-4f17-b2e1-be7f07588291/resourceGroups/exampleRG/providers/Microsoft.Compute/virtualMachines/exampleVM2"
                 }
               ]
             }

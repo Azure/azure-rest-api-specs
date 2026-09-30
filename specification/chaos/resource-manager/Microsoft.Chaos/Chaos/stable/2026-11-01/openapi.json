@@ -3940,6 +3940,60 @@
         ]
       }
     },
+    "ActionError": {
+      "type": "object",
+      "description": "Structured information about a scenario action failure.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The stable code that identifies the action failure.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The customer-safe description of the action failure.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "Additional customer-safe details about the action failure.",
+          "items": {
+            "$ref": "#/definitions/ActionErrorDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ActionErrorDetail": {
+      "type": "object",
+      "description": "Additional information about a scenario action failure.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The stable code that identifies the failure detail.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The customer-safe description of the failure detail.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The target associated with the failure detail.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
     "ActionKind": {
       "type": "string",
       "description": "Union of action types.",
@@ -5837,8 +5891,7 @@
           "readOnly": true
         },
         "errorCode": {
-          "type": "integer",
-          "format": "int32",
+          "type": "string",
           "description": "The error code.",
           "readOnly": true
         },
@@ -6495,6 +6548,15 @@
           "readOnly": true,
           "x-ms-identifiers": []
         },
+        "warnings": {
+          "type": "array",
+          "description": "Customer-actionable warnings encountered during the scenario run.",
+          "items": {
+            "$ref": "#/definitions/ScenarioRunWarning"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
         "executionErrors": {
           "$ref": "#/definitions/ScenarioErrors",
           "description": "Business errors from fault injection — permission and resource state issues.",
@@ -6574,6 +6636,7 @@
         "Canceling",
         "Canceled",
         "Succeeded",
+        "PartiallySucceeded",
         "Failed"
       ],
       "x-ms-enum": {
@@ -6641,6 +6704,11 @@
             "description": "The scenario run has completed successfully."
           },
           {
+            "name": "PartiallySucceeded",
+            "value": "PartiallySucceeded",
+            "description": "The scenario run completed with one or more suppressed action failures."
+          },
+          {
             "name": "Failed",
             "value": "Failed",
             "description": "The scenario run has failed."
@@ -6685,12 +6753,76 @@
           "format": "date-time",
           "description": "When the action was completed.",
           "readOnly": true
+        },
+        "error": {
+          "$ref": "#/definitions/ActionError",
+          "description": "Structured information about the action failure.",
+          "readOnly": true
+        },
+        "failureSuppressed": {
+          "type": "boolean",
+          "description": "Whether the action failure was suppressed so later actions could continue.",
+          "readOnly": true
         }
       },
       "required": [
         "resources",
         "actionUrn",
         "state"
+      ]
+    },
+    "ScenarioRunWarning": {
+      "type": "object",
+      "description": "Customer-actionable warning associated with a scenario run.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The stable code that identifies the warning.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The customer-safe description of the warning.",
+          "readOnly": true
+        },
+        "details": {
+          "type": "array",
+          "description": "Additional customer-safe details about the warning.",
+          "items": {
+            "$ref": "#/definitions/ScenarioRunWarningDetail"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "ScenarioRunWarningDetail": {
+      "type": "object",
+      "description": "Additional information about a scenario run warning.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The stable code that identifies the warning detail.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "The customer-safe description of the warning detail.",
+          "readOnly": true
+        },
+        "target": {
+          "type": "string",
+          "description": "The target associated with the warning detail.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "code",
+        "message"
       ]
     },
     "ScenarioSummaryState": {
