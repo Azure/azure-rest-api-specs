@@ -1,5 +1,6 @@
 import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 import { ChildProcess, spawn } from "node:child_process";
+import { writeFileSync } from "node:fs";
 import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -167,6 +168,35 @@ it("dry runs list project context but do not validate or clean a dirty checkout"
     'Dry run: would validate specification/service/Project with context {"checkingAllSpecs":false,"baseCommitish":"HEAD^","headCommitish":"HEAD"}',
   );
   expect(console.log).toHaveBeenLastCalledWith("::endgroup::");
+});
+
+it("cleans generated output outside the changed project without hiding validation failures", async () => {
+  const git = simpleGit(root);
+  await git.add(".");
+  await git.raw([
+    "-c",
+    "user.name=Test",
+    "-c",
+    "user.email=test@example.com",
+    "-c",
+    "commit.gpgsign=false",
+    "commit",
+    "-m",
+    "Fixture",
+  ]);
+  vi.mocked(spawn).mockImplementationOnce(() => {
+    writeFileSync(join(root, "generated.txt"), "generated");
+    const child = new ChildProcess();
+    queueMicrotask(() => child.emit("close", 1, null));
+    return child;
+  });
+
+  await expect(runChanged(project, { gitClean: true })).resolves.toBe(false);
+  expect(spawn).toHaveBeenCalledOnce();
+  expect((await git.status()).isClean()).toBe(true);
+  expect(console.log).toHaveBeenCalledWith(
+    expect.stringContaining('TSV cleanup {"command":"clean"'),
+  );
 });
 
 it.each(["false", "true"])(

@@ -1,5 +1,5 @@
-import { ChildProcess, spawn } from "node:child_process";
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { ChildProcess, execFileSync, spawn } from "node:child_process";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { access, mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, relative, sep } from "node:path";
@@ -407,6 +407,42 @@ it("leaves existing and generated changes alone without --git-clean", async () =
   await expect(runAll(root)).resolves.toBe(false);
   expect(await readFile(join(root, "tracked.txt"), "utf8")).toBe("local edits");
   expect(await readFile(join(root, "generated.txt"), "utf8")).toBe("generated");
+  expect(console.log).not.toHaveBeenCalledWith(expect.stringMatching(/^TSV cleanup /));
+});
+
+it("runs only one status scan after each project that leaves the checkout clean", async () => {
+  await addProject("specification/a");
+  await addProject("specification/b");
+  await commitFixture();
+
+  await expect(runAll(join(root, "specification"), { gitClean: true })).resolves.toBe(true);
+
+  expect(spawn).toHaveBeenCalledTimes(2);
+  const cleanupLogs = vi
+    .mocked(console.log)
+    .mock.calls.filter(([line]) => String(line).startsWith("TSV cleanup "));
+  expect(cleanupLogs).toEqual([
+    [expect.stringContaining('"command":"status"')],
+    [expect.stringContaining('"command":"status"')],
+  ]);
+});
+
+it("does not clean suppressed projects or dry runs", async () => {
+  await addProject("skip");
+  await writeFile(
+    join(root, "suppressions.yaml"),
+    "- tool: TypeSpecValidationAll\n  paths: [skip]\n  reason: skipped\n",
+  );
+  await commitFixture();
+
+  await expect(runAll(root, { gitClean: true })).resolves.toBe(true);
+  await writeFile(join(root, "suppressions.yaml"), "[]");
+  await writeFile(join(root, "local.txt"), "keep");
+  await expect(runAll(root, { gitClean: true, dryRun: true })).resolves.toBe(true);
+
+  expect(spawn).not.toHaveBeenCalled();
+  expect(console.log).not.toHaveBeenCalledWith(expect.stringMatching(/^TSV cleanup /));
+  expect(await readFile(join(root, "local.txt"), "utf8")).toBe("keep");
 });
 
 it("cleans the entire checkout after failed and successful projects, retaining ignored files", async () => {
@@ -422,6 +458,7 @@ it("cleans the entire checkout after failed and successful projects, retaining i
     })
     .mockImplementationOnce(() => {
       expect(readFileSync(join(root, "tracked.txt"), "utf8")).toBe("original");
+      expect(existsSync(join(root, "generated"))).toBe(false);
       writeFileSync(join(root, "tracked.txt"), "changed again");
       return exitingChild();
     });
@@ -430,6 +467,29 @@ it("cleans the entire checkout after failed and successful projects, retaining i
   expect((await git.status()).isClean()).toBe(true);
   await expect(access(join(root, "generated"))).rejects.toMatchObject({ code: "ENOENT" });
   expect(await readFile(join(root, "cache.tmp"), "utf8")).toBe("keep");
+});
+
+it.each(["error", "signal"])("cleans before propagating a child %s", async (failure) => {
+  vi.stubEnv("GITHUB_ACTIONS", "true");
+  await addProject("a");
+  await addProject("b");
+  const git = await commitFixture();
+  vi.mocked(spawn).mockImplementationOnce(() => {
+    writeFileSync(join(root, "tracked.txt"), "changed");
+    writeFileSync(join(root, "generated.txt"), "generated");
+    if (failure === "signal") return exitingChild(null, "SIGTERM");
+    const child = new ChildProcess();
+    queueMicrotask(() => child.emit("error", new Error("Cannot start node")));
+    return child;
+  });
+
+  await expect(runAll(root, { gitClean: true })).rejects.toThrow(
+    failure === "signal" ? "terminated by SIGTERM" : "Cannot start node",
+  );
+  expect(spawn).toHaveBeenCalledOnce();
+  expect((await git.status()).isClean()).toBe(true);
+  expect(await readFile(join(root, "tracked.txt"), "utf8")).toBe("original");
+  expect(console.log).toHaveBeenLastCalledWith("::endgroup::");
 });
 
 it.each(["modified", "staged", "untracked"])(
@@ -453,12 +513,32 @@ it("stops if cleanup fails rather than contaminating the next project", async ()
   await addProject("b");
   await commitFixture();
   vi.mocked(spawn).mockImplementationOnce(() => {
+    writeFileSync(join(root, "tracked.txt"), "changed");
     writeFileSync(join(root, ".git", "index.lock"), "");
     return exitingChild();
   });
 
   await expect(runAll(root, { gitClean: true })).rejects.toThrow("index.lock");
   expect(spawn).toHaveBeenCalledOnce();
+  expect(console.log).toHaveBeenLastCalledWith("::endgroup::");
+});
+
+it("stops if Git skips a generated nested repository", async () => {
+  vi.stubEnv("GITHUB_ACTIONS", "true");
+  await addProject("a");
+  await addProject("b");
+  await commitFixture();
+  vi.mocked(spawn).mockImplementationOnce(() => {
+    mkdirSync(join(root, "nested"));
+    execFileSync("git", ["init", "--quiet", "nested"], { cwd: root });
+    return exitingChild();
+  });
+
+  await expect(runAll(root, { gitClean: true })).rejects.toThrow(
+    "Git cleanup left a dirty checkout",
+  );
+  expect(spawn).toHaveBeenCalledOnce();
+  expect(existsSync(join(root, "nested", ".git"))).toBe(true);
   expect(console.log).toHaveBeenLastCalledWith("::endgroup::");
 });
 

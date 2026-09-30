@@ -7,6 +7,7 @@ import { relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import { simpleGit } from "simple-git";
 import { findChangedProjects, findProjects, type ChangedProjectsOptions } from "./find-projects.ts";
+import { cleanWorktree } from "./git-cleanup.ts";
 
 interface RunOptions {
   gitClean?: boolean;
@@ -130,8 +131,7 @@ async function runProjects(
         }
       } finally {
         if (gitClean) {
-          await git.raw(["restore", "--worktree", "--", "."]);
-          await git.clean("f", ["-d"]);
+          await cleanWorktree(displayRoot);
         }
       }
     } finally {
