@@ -8,5 +8,5 @@ try {
 } catch (error) {
   const message = error instanceof Error ? error.message : String(error);
   console.error(`release-plan generate-sdk tool failed: ${message}`);
-  process.exitCode = 1;
+  process.exit(1);
 }

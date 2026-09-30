@@ -40,7 +40,7 @@ The top-level `eng/tools` directory holds shared configuration that the individu
 - **Runtime**: Node.js >=24.14.1; CI uses Node 24 on Ubuntu and Windows
 - **Type Checking**: `tsc --noEmit` (the `build` script only type-checks; it does not emit JavaScript)
 - **Testing**: Vitest for unit and integration tests
-- **Linting**: oxlint with type-aware rules from `oxlint-tsgolint` and ESLint with `eslint-plugin-n`
+- **Linting**: oxlint with type-aware rules from `oxlint-tsgolint`
 - **Formatting**: Oxfmt using the root `.oxfmtrc.json`; import organization and package.json sorting are disabled
 - **Package Manager**: pnpm workspaces (`pnpm ci` for clean installs)
 
@@ -127,9 +127,8 @@ Every tool package is a thin extension of the shared `eng/tools` configuration. 
 
 ### Lint configuration
 
-Use the repository-root `.oxlintrc.json` and `eslint.config.mjs`; do not add per-tool
-lint configurations or dependencies. The root package provides `oxlint`,
-`oxlint-tsgolint`, `eslint`, and `eslint-plugin-n`. A local
+Use the repository-root `.oxlintrc.json`; do not add per-tool lint configurations or
+dependencies. The root package provides `oxlint` and `oxlint-tsgolint`. A local
 `"lint": "oxlint ."` script can lint one tool during development; `pnpm lint` from
 the repository root lints the enabled packages in one invocation.
 

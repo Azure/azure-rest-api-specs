@@ -8,5 +8,5 @@ try {
 } catch (error) {
   const message = error instanceof Error ? error.message : String(error);
   console.error(`release-plan update-sdk-details tool failed: ${message}`);
-  process.exitCode = 1;
+  process.exit(1);
 }

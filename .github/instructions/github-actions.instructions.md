@@ -33,7 +33,7 @@ The `.github` directory contains all the code and configuration for GitHub Actio
 - **Runtime**: Node.js 24.x (on GitHub Actions runners)
 - **Type Checking**: `tsc --noEmit`; Node.js executes the `.ts` sources directly
 - **Testing**: Vitest for unit and integration tests
-- **Linting**: oxlint with type-aware rules from `oxlint-tsgolint` and ESLint with `eslint-plugin-n`
+- **Linting**: oxlint with type-aware rules from `oxlint-tsgolint`, configured in the root `.oxlintrc.json`
 - **Formatting**: Oxfmt using the root `.oxfmtrc.json`; import organization and package.json sorting are disabled
 - **Package Manager**: pnpm workspaces (`pnpm ci` for clean installs)
 
@@ -115,7 +115,7 @@ From `package.json` comments:
 - `js-yaml`: YAML parsing
 - `debug`: Debug logging
 - `vitest`, `@vitest/coverage-v8`: Root development dependencies for testing and coverage
-- `oxlint`, `oxlint-tsgolint`, `eslint`, `eslint-plugin-n`: Root development dependencies for linting
+- `oxlint`, `oxlint-tsgolint`: Root development dependencies for linting
 - `typescript`: Root development dependency for type checking
 - `oxfmt`: Code formatting
 
@@ -130,7 +130,6 @@ pnpm run build           # Run this package's TypeScript check
 pnpm run check           # Run all checks (lint + format:check + test:ci)
 pnpm run lint            # Run both oxlint and TypeScript checks
 pnpm run lint:oxlint     # Run oxlint only
-pnpm run lint:eslint     # Run ESLint with eslint-plugin-n
 pnpm run lint:tsc        # Run TypeScript type checking only
 pnpm run format          # Format code with Oxfmt
 pnpm run format:check    # Check formatting without modifying files
