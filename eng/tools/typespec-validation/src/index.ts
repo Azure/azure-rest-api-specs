@@ -100,7 +100,33 @@ export async function runRules(
   return result;
 }
 
-function showHelp() {
+type CliOption = NonNullable<ParseArgsConfig["options"]>[string] & {
+  description: string;
+  valueLabel?: string;
+  group?: string;
+};
+
+function showHelp(options: Record<string, CliOption>) {
+  const groups = new Map<string, string[]>();
+  const indent = " ".repeat(27);
+  for (const [name, option] of Object.entries(options)) {
+    const alias = option.short ? `-${option.short}, ` : "    ";
+    const value = option.type === "string" ? ` ${option.valueLabel ?? "<value>"}` : "";
+    const label = `  ${alias}--${name}${value}`;
+    const description = option.description.replaceAll("\n", `\n${indent}`);
+    const entry =
+      label.length >= indent.length
+        ? `${label}\n${indent}${description}`
+        : `${label.padEnd(indent.length)}${description}`;
+    const heading = option.group ?? "Options";
+    const entries = groups.get(heading) ?? [];
+    entries.push(entry);
+    groups.set(heading, entries);
+  }
+  const optionHelp = [...groups]
+    .map(([heading, entries]) => `${heading}:\n${entries.join("\n")}`)
+    .join("\n\n");
+
   console.log(`TypeSpec Validation
 Validate Azure TypeSpec projects.
 
@@ -115,31 +141,7 @@ Arguments:
   <context-json>           Optional JSON context for rules and suppressions
                            in single-project mode.
 
-Options:
-  -h, --help               Show help and exit without validation.
-  -v, --verbose            Include rule progress, debug details, and Git traces.
-      --all                Validate all projects under the discovery root.
-      --changed            Validate projects affected by committed changes
-                           using the current checkout.
-                           --all and --changed cannot be combined.
-
-Options for --changed:
-      --base <commit>      Base revision (default: HEAD^).
-      --head <commit>      Head revision (default: HEAD).
-      --ignore-core-files  Disable all-project fallback for core-file changes.
-
-Options for --all:
-      --shard <index>/<count>
-                           Select a shard using one-based indices.
-                           Each shard requires a separate checkout.
-
-Options for --all or --changed:
-      --dry-run            List selected projects and context without validation
-                           or cleanup; disables --git-clean.
-      --git-clean          Restore tracked files and remove untracked files and
-                           directories across the entire repository after each
-                           project. Requires a clean, disposable checkout;
-                           ignored files are retained.
+${optionHelp}
 
 Validation may update generated files and formatting. Changes are retained
 unless --git-clean is used. Do not use --git-clean while other work is in progress.
@@ -158,41 +160,70 @@ export async function main() {
     help: {
       type: "boolean",
       short: "h",
+      description: "Show help and exit without validation.",
     },
     verbose: {
       type: "boolean",
       short: "v",
+      description: "Include rule progress, debug details, and Git traces.",
     },
     all: {
       type: "boolean",
+      description: "Validate all projects under the discovery root.",
     },
     changed: {
       type: "boolean",
+      description:
+        "Validate projects affected by committed changes\n" +
+        "using the current checkout.\n" +
+        "--all and --changed cannot be combined.",
     },
     base: {
       type: "string",
+      valueLabel: "<commit>",
+      group: "Options for --changed",
+      description: "Base revision (default: HEAD^).",
     },
     head: {
       type: "string",
+      valueLabel: "<commit>",
+      group: "Options for --changed",
+      description: "Head revision (default: HEAD).",
     },
     "ignore-core-files": {
       type: "boolean",
-    },
-    "dry-run": {
-      type: "boolean",
+      group: "Options for --changed",
+      description: "Disable all-project fallback for core-file changes.",
     },
     shard: {
       type: "string",
+      valueLabel: "<index>/<count>",
+      group: "Options for --all",
+      description:
+        "Select a shard using one-based indices.\nEach shard requires a separate checkout.",
+    },
+    "dry-run": {
+      type: "boolean",
+      group: "Options for --all or --changed",
+      description:
+        "List selected projects and context without validation\n" +
+        "or cleanup; disables --git-clean.",
     },
     "git-clean": {
       type: "boolean",
+      group: "Options for --all or --changed",
+      description:
+        "Restore tracked files and remove untracked files and\n" +
+        "directories across the entire repository after each\n" +
+        "project. Requires a clean, disposable checkout;\n" +
+        "ignored files are retained.",
     },
-  } satisfies ParseArgsConfig["options"];
+  } satisfies Record<string, CliOption>;
   const parsedArgs = parseArgs({ args, options, allowPositionals: true });
 
   const { values } = parsedArgs;
   if (values.help) {
-    showHelp();
+    showHelp(options);
     return;
   }
   if (values.verbose) {

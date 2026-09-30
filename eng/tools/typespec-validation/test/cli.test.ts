@@ -58,12 +58,9 @@ it("shows the same help for --help and -h without a project or Git repository", 
     "tsv --all [folder] [options]",
     "tsv --changed [options]",
     "JSON context for rules and suppressions",
-    "-h, --help",
     "-v, --verbose",
-    "--base <commit>",
     "--head <commit>",
     "--ignore-core-files",
-    "--shard <index>/<count>",
     "--dry-run",
     "--git-clean",
     "default for --all: specification",
@@ -83,6 +80,11 @@ it("shows the same help for --help and -h without a project or Git repository", 
   ]) {
     expect(help.stdout).toContain(text);
   }
+  expect(help.stdout).toMatch(/^\s+-h, --help\s+Show help and exit without validation\.$/m);
+  expect(help.stdout).toMatch(/^\s+--base <commit>\s+Base revision \(default: HEAD\^\)\.$/m);
+  expect(help.stdout).toMatch(
+    /^\s+--shard <index>\/<count>\s+Select a shard using one-based indices\./m,
+  );
   expect(help.stdout).not.toMatch(/(?:^|\s)(?:--folder|--context|-f|-c)(?=[\s,=]|$)/);
 });
 
