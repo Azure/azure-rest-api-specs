@@ -9,13 +9,25 @@ using Microsoft.Compute.WorkloadManager;
 @@clientName(CapabilityKind, "WorkloadCapabilityKind", "csharp");
 @@clientName(EgressMode, "RuntimeEgressMode", "csharp");
 @@clientName(CapacityProfile, "RuntimeLinkCapacityProfile", "csharp");
-@@clientName(CapacityProfileUpdate, "RuntimeLinkCapacityProfilePatch", "csharp");
+@@clientName(
+  CapacityProfileUpdate,
+  "RuntimeLinkCapacityProfilePatch",
+  "csharp"
+);
 @@access(CapacityProfileUpdate, Access.public, "csharp");
 @@clientName(CapabilityProperties, "WorkloadCapabilityProperties", "csharp");
 @@clientName(Capability, "WorkloadCapability", "csharp");
 @@clientName(CapabilityUpdate, "WorkloadCapabilityPatch", "csharp");
-@@clientName(RuntimeLinkMutableProperties.capacityProfile, "CapacityProfile", "csharp");
-@@clientName(CapabilityMutableProperties.versionPolicy, "VersionPolicy", "csharp");
+@@clientName(
+  RuntimeLinkMutableProperties.capacityProfile,
+  "CapacityProfile",
+  "csharp"
+);
+@@clientName(
+  CapabilityMutableProperties.versionPolicy,
+  "VersionPolicy",
+  "csharp"
+);
 
 @@clientName(
   Microsoft.Compute.WorkloadManager,
