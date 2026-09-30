@@ -2,8 +2,8 @@ import { mockFolder } from "./mocks.ts";
 import { defaultLogger } from "@azure-tools/specs-shared/logger";
 
 import { strict as assert } from "node:assert";
-import path from "path";
-import process from "process";
+import path from "node:path";
+import process from "node:process";
 import { simpleGit } from "simple-git";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { gitDiffTopSpecFolder, normalizePath, readFileAtCommit } from "../src/utils.ts";

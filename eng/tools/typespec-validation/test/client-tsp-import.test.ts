@@ -6,7 +6,7 @@ import { strict as assert } from "node:assert";
 import { afterEach, beforeEach, describe, it, type MockInstance, vi } from "vitest";
 import { ClientTspImportRule } from "../src/rules/client-tsp-import.ts";
 
-import * as fsPromises from "fs/promises";
+import * as fsPromises from "node:fs/promises";
 import * as utils from "../src/utils.ts";
 
 describe("client-tsp-import", function () {
