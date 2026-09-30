@@ -156,9 +156,9 @@ model CostControlRule {
   period?: CostControlPeriod;
 
   /**
-   * Whether the cost control renews. The default is true.
+   * Whether the cost control renews. When creating a cost control, the service defaults this property to true. When updating a cost control, omitting this property leaves the existing value unchanged.
    */
-  recurring?: boolean = true;
+  recurring?: boolean;
 
   /**
    * Trusted request attributes and allowed values used to select matching requests.
@@ -340,9 +340,9 @@ model CostControlThreshold {
   value: float64;
 
   /**
-   * The action taken when the threshold is reached. Omitted actions default to audit and therefore require a value of zero.
+   * The action taken when the threshold is reached. When creating a cost control, the service defaults this property to audit. When updating a cost control, omitting this property leaves the existing value unchanged. An audit action requires a value of zero.
    */
-  action?: CostControlThresholdAction = CostControlThresholdAction.Audit;
+  action?: CostControlThresholdAction;
 }
 
 /**

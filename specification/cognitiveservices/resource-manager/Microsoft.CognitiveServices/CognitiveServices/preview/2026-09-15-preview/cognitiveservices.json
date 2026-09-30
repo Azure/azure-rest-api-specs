@@ -17237,8 +17237,7 @@
         },
         "recurring": {
           "type": "boolean",
-          "description": "Whether the cost control renews. The default is true.",
-          "default": true
+          "description": "Whether the cost control renews. When creating a cost control, the service defaults this property to true. When updating a cost control, omitting this property leaves the existing value unchanged."
         },
         "match": {
           "$ref": "#/definitions/CostControlMatch",
@@ -17276,35 +17275,8 @@
           "minimum": 0
         },
         "action": {
-          "type": "string",
-          "description": "The action taken when the threshold is reached. Omitted actions default to audit and therefore require a value of zero.",
-          "default": "audit",
-          "enum": [
-            "audit",
-            "alert",
-            "block"
-          ],
-          "x-ms-enum": {
-            "name": "CostControlThresholdAction",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Audit",
-                "value": "audit",
-                "description": "Audits every applied usage update. Authored audit thresholds must use zero. This action is retained in the current preview for compatibility; audit-only rules may omit thresholds."
-              },
-              {
-                "name": "Alert",
-                "value": "alert",
-                "description": "Emits a customer-facing alert without blocking requests."
-              },
-              {
-                "name": "Block",
-                "value": "block",
-                "description": "Blocks the request without emitting a customer-facing alert."
-              }
-            ]
-          }
+          "$ref": "#/definitions/CostControlThresholdAction",
+          "description": "The action taken when the threshold is reached. When creating a cost control, the service defaults this property to audit. When updating a cost control, omitting this property leaves the existing value unchanged. An audit action requires a value of zero."
         }
       },
       "required": [
