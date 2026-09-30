@@ -33,6 +33,7 @@ export function formatDiagnostic(
   const lines = [
     `${location ? `${location} - ` : ""}${level} ${c.dim(`tsv/${diagnostic.code}`)}: ${diagnostic.message.trimEnd()}`,
   ];
+  if (diagnostic.output) lines.push(diagnostic.output.trimEnd());
   if (diagnostic.path && diagnostic.location?.text !== undefined) {
     const { line, column, text } = diagnostic.location;
     const source = text.split(/\r?\n/)[line - 1];

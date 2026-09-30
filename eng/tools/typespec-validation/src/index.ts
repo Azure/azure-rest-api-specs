@@ -69,25 +69,16 @@ export async function runRules(
     diagnostics.push(...(ruleResult.diagnostics ?? []));
     if (ruleResult.skipped) logger.debug(`  Skipped: ${ruleResult.skipped}`);
     if (ruleResult.suppressed) logger.debug(`  Suppressed: ${ruleResult.suppressed}`);
-    if (ruleResult.stdOutput) console.log(ruleResult.stdOutput);
     if (!ruleResult.success) {
       result.success = false;
       result.failed.push(rule.name);
-      if (ruleResult.errorOutput) {
-        console.log("Rule " + rule.name + " failed");
-        console.log(ruleResult.errorOutput);
-      } else if (!ruleResult.diagnostics?.some((diagnostic) => diagnostic.severity === "error")) {
-        // Some unmigrated rules, including SDK config validation, report errors in stdout.
-        if (ruleResult.stdOutput) {
-          console.log("Rule " + rule.name + " failed");
-        } else {
-          diagnostics.push({
-            severity: "error",
-            code: "rule-failed",
-            message: `Rule ${rule.name} failed without reporting an error.`,
-            path: folder,
-          });
-        }
+      if (!ruleResult.diagnostics?.some((diagnostic) => diagnostic.severity === "error")) {
+        diagnostics.push({
+          severity: "error",
+          code: "rule-failed",
+          message: `Rule ${rule.name} failed without reporting an error.`,
+          path: folder,
+        });
       }
 
       // Stop executing more rules, since the results are more likely to be confusing than helpful

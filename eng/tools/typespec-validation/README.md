@@ -11,7 +11,8 @@ pnpm tsv --changed --base=origin/main --head=HEAD --dry-run
 ```
 
 Use `--verbose` (or `-v`) to include rule progress, configuration/import details,
-routine skip reasons, command traces, Git debug logging, and changed-file discovery:
+routine skip reasons, successful compiler/formatter output, emitted-file
+inventories, full Git diffs, command traces, and changed-file discovery:
 
 ```sh
 pnpm tsv specification/<service>/<project> --verbose
@@ -38,8 +39,18 @@ takes precedence over `FORCE_COLOR`. `FORCE_COLOR=1` enables colors for redirect
 output, while `FORCE_COLOR=0` disables them.
 
 Validation still stops after the first failed rule in each project, and batch
-runs continue to later projects. Suppression rule names are unchanged. Compiler
-and formatter output, including emitted-file lists, retains its existing format.
+runs continue to later projects. Suppression rule names are unchanged.
+
+Compiler and formatter failures retain their native diagnostic codes, source
+excerpts, and colors, reported once beneath a TSV command-failure diagnostic.
+Unexpected output from successful commands also remains visible. Successful
+compiler banners, progress messages, and emitted-file lists are debug-only.
+If compilation or formatting changes files, TSV lists the affected
+repository-relative paths and the command to fix them; `--verbose` includes the
+full Git status and diff.
+
+TSV still captures `tsp compile --list-files` internally to detect stale generated
+Swagger files. Hiding that inventory in normal output does not disable the check.
 
 A local run without comparison commits skips API-version comparison without a
 warning; `--verbose` shows the reason. An explicitly supplied but incomplete or
