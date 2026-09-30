@@ -51,7 +51,7 @@ export function formatRuleSummary(
   if (counts.SKIP) parts.push(c.gray(`${counts.SKIP} skipped`));
   if (counts.SUPPRESSED) parts.push(c.gray(`${counts.SUPPRESSED} suppressed`));
   if (notRun) parts.push(c.gray(`${notRun} not run`));
-  return `${c.bold("Rules:")} ${parts.join(c.dim(" | ")) || c.gray("0 run")}`;
+  return parts.join(c.dim(" | ")) || c.gray("0 run");
 }
 
 export function formatDiagnostic(

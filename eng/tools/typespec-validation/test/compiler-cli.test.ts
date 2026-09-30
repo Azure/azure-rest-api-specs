@@ -82,7 +82,7 @@ it("prints only a final summary by default and compact rule statuses with --verb
   }`);
   const quiet = await run(project);
   expect(quiet.code).toBe(0);
-  expect(quiet.stdout).toBe("Rules: 8 passed | 3 skipped | 1 suppressed\n");
+  expect(quiet.stdout).toBe("8 passed | 3 skipped | 1 suppressed\n");
   expect(quiet.stderr).toBe("");
   const verbose = await run(project, "--verbose");
   expect(verbose.code).toBe(quiet.code);
@@ -112,7 +112,9 @@ it("prints only a final summary by default and compact rule statuses with --verb
     "- MultipleNewApiVersions (skipped)",
     "- StaleApiVersionPin (skipped)",
   ]);
-  expect(verbose.stdout).toContain("Rules: 8 passed | 3 skipped | 1 suppressed");
+  expect(verbose.stdout).toContain(
+    "- StaleApiVersionPin (skipped)\n\n8 passed | 3 skipped | 1 suppressed",
+  );
 });
 
 it.each([
@@ -143,12 +145,12 @@ it.each([
     expect(result.stderr).toContain("> 3 | invalid");
     expect(stripVTControlCharacters(result.stdout).includes("\u00d7 Compile")).toBe(verbose);
     expect(stripVTControlCharacters(result.stdout)).toContain(
-      "Rules: 6 passed | 1 failed | 1 skipped | 4 not run",
+      "6 passed | 1 failed | 1 skipped | 4 not run",
     );
     expect(stripVTControlCharacters(result.stdout)).not.toContain("\u2714 Format");
     if (!verbose) {
       expect(stripVTControlCharacters(result.stdout)).toBe(
-        "Rules: 6 passed | 1 failed | 1 skipped | 4 not run\n",
+        "\n6 passed | 1 failed | 1 skipped | 4 not run\n",
       );
     }
   },

@@ -112,6 +112,7 @@ export async function runRules(
 
   reportDiagnostics(diagnostics, logger);
   const completed = Object.values(counts).reduce((total, count) => total + count, 0);
+  if (diagnostics.length > 0 || (logger.isDebug() && completed > 0)) logger.info("");
   logger.info(formatRuleSummary(counts, rules.length - completed));
   return result;
 }

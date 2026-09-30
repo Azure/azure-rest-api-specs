@@ -12,14 +12,15 @@ pnpm tsv --changed --base=origin/main --head=HEAD --dry-run
 
 Successful single-project runs print only the final rule-count summary. Errors
 and warnings remain visible. When validation stops early, the summary includes
-rules that were not run.
+rules that were not run. A blank line separates preceding diagnostics or verbose
+output from the summary; quiet successful runs have no leading blank line.
 
 The summary uses green for passed rules, bold red for failures, yellow for
 warnings, and gray for skipped, suppressed, or not-run counts. Separators are
 dimmed so the results stand out; plain-text output keeps the same information.
 
 ```text
-Rules: 9 passed | 3 skipped
+9 passed | 3 skipped
 ```
 
 With `--verbose` (or `-v`), each rule also gets a compact completion indicator:

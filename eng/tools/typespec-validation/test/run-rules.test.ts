@@ -59,7 +59,8 @@ describe("runRules", function () {
     expect(result.success).toBe(true);
     expect(suppressed.executeFn).not.toHaveBeenCalled();
     expect(stdout.mock.calls.flat()).toEqual([
-      "Rules: 1 passed | 1 with warnings | 1 skipped | 2 suppressed",
+      "",
+      "1 passed | 1 with warnings | 1 skipped | 2 suppressed",
     ]);
     expect(
       debug.mock.calls.flat().filter((line) => /^[\u2714\u00d7!-] /.test(String(line))),
@@ -141,7 +142,8 @@ describe("runRules", function () {
       expect(third.executeFn).not.toHaveBeenCalled();
       expect(warning).toHaveBeenCalledExactlyOnceWith("warning tsv/coverage: Not compared.");
       expect(error).toHaveBeenCalledExactlyOnceWith("error tsv/bad-value: Invalid value.");
-      expect(stdout.mock.calls.flat()).toEqual(["Rules: 1 failed | 1 with warnings | 1 not run"]);
+      expect(stdout.mock.calls.flat()).toEqual(["", "1 failed | 1 with warnings | 1 not run"]);
+      expect(stdout.mock.invocationCallOrder[0]).toBeGreaterThan(error.mock.invocationCallOrder[0]);
       expect(debug.mock.calls.length > 0).toBe(verbose);
     },
   );
@@ -195,7 +197,8 @@ describe("runRules", function () {
       const result = await runRules([rule], "/test", [], logger);
       expect(result.success).toBe(false);
       expect(rule.executeFn).toHaveBeenCalledWith("/test", logger);
-      expect(log.mock.calls.flat()).toEqual(["Rules: 1 failed"]);
+      expect(log.mock.calls.flat()).toEqual(["", "1 failed"]);
+      expect(log.mock.invocationCallOrder[0]).toBeGreaterThan(error.mock.invocationCallOrder[0]);
       expect(error).toHaveBeenCalledExactlyOnceWith(
         "error tsv/compile: TypeSpec compilation failed.\nmain.tsp:1:1 - error invalid-ref: Unknown identifier.\n> 1 | invalid\n    | ^",
       );
