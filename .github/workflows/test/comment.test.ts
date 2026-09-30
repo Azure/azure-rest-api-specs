@@ -9,7 +9,9 @@ describe("commentOrUpdate", () => {
       data: [{ id: 42, body: "Previous body\n<!-- marker -->" }],
     });
 
-    await commentOrUpdate(github, createMockCore(), "owner", "repo", 123, "New body", "marker");
+    await expect(
+      commentOrUpdate(github, createMockCore(), "owner", "repo", 123, "New body", "marker"),
+    ).resolves.toBe(42);
 
     expect(github.rest.issues.updateComment).toHaveBeenCalledExactlyOnceWith({
       owner: "owner",
@@ -25,8 +27,21 @@ describe("commentOrUpdate", () => {
       data: [{ id: 42, body: "Same body\n<!-- marker -->" }],
     });
 
-    await commentOrUpdate(github, createMockCore(), "owner", "repo", 123, "Same body", "marker");
+    await expect(
+      commentOrUpdate(github, createMockCore(), "owner", "repo", 123, "Same body", "marker"),
+    ).resolves.toBe(42);
 
     expect(github.rest.issues.updateComment).not.toHaveBeenCalled();
+  });
+
+  it("returns the new comment's ID without another lookup", async () => {
+    const github = createMockGithub();
+    github.rest.issues.createComment.mockResolvedValue({ data: { id: 43 } });
+
+    await expect(
+      commentOrUpdate(github, createMockCore(), "owner", "repo", 123, "New body", "marker"),
+    ).resolves.toBe(43);
+    expect(github.rest.issues.listComments).toHaveBeenCalledTimes(1);
+    expect(github.rest.issues.createComment).toHaveBeenCalledTimes(1);
   });
 });

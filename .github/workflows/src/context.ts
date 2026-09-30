@@ -3,7 +3,7 @@ import { isFullGitSha } from "../../shared/src/git.ts";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import { CoreLogger } from "./core-logger.ts";
 import type { Context, Core, GitHub, WebhookEvent } from "./github.ts";
-import { createLogHook, createRateLimitHook } from "./github.ts";
+import { configureGitHubLogging } from "./github.ts";
 import { getIssueNumber } from "./issues.ts";
 
 export type PullRequest =
@@ -46,8 +46,7 @@ export async function extractInputs(
   }
 
   const coreLogger = new CoreLogger(core);
-  github.hook.before("request", createLogHook(github.request.endpoint, coreLogger));
-  github.hook.after("request", createRateLimitHook(coreLogger));
+  configureGitHubLogging(github, coreLogger);
 
   let inputs: {
     owner: string;

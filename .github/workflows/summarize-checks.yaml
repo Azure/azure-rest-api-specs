@@ -38,10 +38,38 @@ permissions:
   pull-requests: write # to post comments via the Pull Requests API
 
 jobs:
-  run-summarize-checks:
+  resolve:
     if: ${{ github.event_name == 'pull_request_target' || github.event.workflow_run.conclusion != 'skipped' }}
+    name: Resolve PR
+    runs-on: ubuntu-slim
+    permissions:
+      actions: read
+      contents: read
+      pull-requests: read
+    outputs:
+      inputs: ${{ steps.resolve.outputs.result }}
+      issue-number: ${{ steps.resolve.outputs.issue_number }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          sparse-checkout: .github
+      - id: resolve
+        uses: actions/github-script@v9.0.0
+        with:
+          script: |
+            const { resolveSummaryInputs } =
+              await import('${{ github.workspace }}/.github/workflows/src/summarize-checks/resolve-inputs.ts');
+            return await resolveSummaryInputs({ github, context, core });
+
+  run-summarize-checks:
+    needs: resolve
+    if: ${{ needs.resolve.outputs.issue-number }}
     name: "Summarize Checks"
     runs-on: ubuntu-slim
+    # Resolve fork/artifact-based identity first, but read mutable policy data only under this lock.
+    concurrency:
+      group: summarize-checks-${{ github.repository }}-${{ needs.resolve.outputs.issue-number }}
+      cancel-in-progress: false
 
     steps:
       # *** IMPORTANT ***
@@ -73,11 +101,13 @@ jobs:
       - id: summarize-checks
         name: Summarize Checks
         uses: actions/github-script@v9.0.0
+        env:
+          SUMMARY_INPUTS: ${{ needs.resolve.outputs.inputs }}
         with:
           script: |
             const { default: summarizeChecks } =
               await import('${{ github.workspace }}/.github/workflows/src/summarize-checks/summarize-checks.ts');
-            return await summarizeChecks({ github, context, core });
+            return await summarizeChecks({ github, context, core }, JSON.parse(process.env.SUMMARY_INPUTS));
 
       # May be used by downstream workflows
       - name: Set job-summary artifact

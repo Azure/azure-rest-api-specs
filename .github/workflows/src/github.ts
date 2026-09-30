@@ -41,6 +41,11 @@ export type CheckRuns =
 export type RestEndpointMethodTypes =
   import("@octokit/plugin-rest-endpoint-methods").RestEndpointMethodTypes;
 
+export function configureGitHubLogging(github: GitHub, logger: ILogger): void {
+  github.hook.before("request", createLogHook(github.request.endpoint, logger));
+  github.hook.after("request", createRateLimitHook(logger));
+}
+
 export function createLogHook(
   endpoint: typeof octokitEndpoint,
   logger: ILogger,
