@@ -1,3 +1,4 @@
+import { d } from "@azure-tools/specs-shared/testing";
 import { execFile } from "node:child_process";
 import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -48,6 +49,99 @@ afterEach(async () => {
   await rm(root, { recursive: true, force: true });
 });
 
+it("shows the same help for --help and -h without a project or Git repository", async () => {
+  const help = await run("--help");
+  expect(await run("-h")).toEqual(help);
+  expect(help.stderr).toBe("");
+  for (const text of [
+    "Validate Azure TypeSpec projects.",
+    "pnpm tsv <folder> [context-json] [options]",
+    "JSON context for rules and suppressions",
+    "-v, --verbose",
+    "--head <commit>",
+    "--ignore-core-files",
+    "--dry-run",
+    "--git-clean",
+    "default: HEAD^",
+    "default: HEAD)",
+    "--all and --changed cannot be combined",
+    "Options for --changed:",
+    "Options for --all:",
+    "Options for --all or --changed:",
+    "one-based indices",
+    "entire repository",
+    "clean, disposable checkout",
+    "ignored files are retained",
+    "disables --git-clean",
+    "pnpm tsv --changed --base=origin/main --head=HEAD --dry-run",
+    "https://aka.ms/azsdk/specs/typespec-validation",
+  ]) {
+    expect(help.stdout.replace(/\s+/g, " ")).toContain(text);
+  }
+  expect(help.stdout).toMatch(/^\s+-h, --help\s+Show help and exit\.$/m);
+  expect(help.stdout).toMatch(/^\s+--base <commit>\s+Base revision \(default: HEAD\^\)\.$/m);
+  expect(help.stdout).toMatch(
+    /^\s+--shard <index>\/<count>\s+Select a shard using one-based indices\./m,
+  );
+  expect(help.stdout).not.toMatch(/(?:^|\s)(?:--folder|--context|-f|-c)(?=[\s,=]|$)/);
+});
+
+it.each([
+  ["--verbose"],
+  ["--all"],
+  ["--changed"],
+  ["--all", "--changed"],
+  ["--git-clean"],
+  ["--dry-run"],
+  ["--shard=invalid"],
+  ["--base=missing-ref"],
+  ["missing-project", "{invalid-json"],
+])("shows help before validation for %j", async (...args) => {
+  const { stdout, stderr } = await run(...args, "--help");
+  expect(stdout).toBe((await run("--help")).stdout);
+  expect(stderr).toBe("");
+});
+
+it("does not clean files when help is requested with --git-clean", async () => {
+  const sentinel = join(root, "local.txt");
+  await writeFile(sentinel, "keep");
+
+  const { stdout, stderr } = await run("--all", "--git-clean", "--help");
+  expect(stdout).toContain("Usage:");
+  expect(stdout).not.toMatch(/Checking \d+ TypeSpec folders|Running TypeSpecValidation on folder:/);
+  expect(stderr).toBe("");
+  expect(await readFile(sentinel, "utf8")).toBe("keep");
+});
+
+it.each(["--folder", "-f", "--context", "-c"])("rejects the unused option %s", async (option) => {
+  await expect(run(option, "unused")).rejects.toMatchObject({
+    code: 1,
+    stdout: "",
+    stderr: expect.stringContaining(`Unknown option '${option}'`) as unknown,
+  });
+});
+
+it.each([
+  { args: ["--unknown"], error: "ERR_PARSE_ARGS_UNKNOWN_OPTION" },
+  { args: ["--help", "--unknown"], error: "ERR_PARSE_ARGS_UNKNOWN_OPTION" },
+  { args: ["--base"], error: "ERR_PARSE_ARGS_INVALID_OPTION_VALUE" },
+  { args: ["--help", "--base"], error: "ERR_PARSE_ARGS_INVALID_OPTION_VALUE" },
+])("preserves parser errors for $args", async ({ args, error }) => {
+  await expect(run(...args)).rejects.toMatchObject({
+    code: 1,
+    stdout: "",
+    stderr: expect.stringContaining(error) as unknown,
+  });
+});
+
+it("treats --help after the option terminator as a positional folder", async () => {
+  await expect(run("--", "--help")).rejects.toMatchObject({
+    code: 1,
+    stdout: expect.stringContaining("/--help does not exist") as unknown,
+    stderr: "",
+  });
+});
+
 it.each(["single", "all", "changed"])(
   "makes Git tracing opt-in without hiding %s validation failures",
   async (mode) => {
@@ -60,12 +154,14 @@ it.each(["single", "all", "changed"])(
     const args = mode === "single" ? [project] : [`--${mode}`];
     await expect(run(...args)).rejects.toMatchObject({
       code: 1,
-      stdout: expect.stringContaining('must use "folder structure v2"') as unknown,
-      stderr: mode === "single" ? "" : (expect.not.stringContaining("simple-git") as unknown),
+      stdout: expect.not.stringContaining("Executing rule:") as unknown,
+      stderr: expect.stringContaining(
+        'error tsv/folder-structure: Project must use "folder structure v2"',
+      ) as unknown,
     });
     await expect(run(...args, "--verbose")).rejects.toMatchObject({
       code: 1,
-      stdout: expect.stringContaining('must use "folder structure v2"') as unknown,
+      stdout: expect.stringContaining("\u00d7 FolderStructure") as unknown,
       stderr: expect.stringContaining("simple-git") as unknown,
     });
   },
@@ -130,7 +226,12 @@ it.each([
       expect(stripVTControlCharacters(stderr).split(diagnostic)).toHaveLength(2);
       expect(stderr.includes("\x1b[31merror\x1b[39m")).toBe(color);
       expect(stderr).not.toContain("\n    at ");
-      expect(String(error.stdout)).toContain("Executing rule: EmitAutorest");
+      expect(stripVTControlCharacters(String(error.stdout))).toBe(
+        "\n2 passed | 1 failed | 9 not run\n",
+      );
+      expect(String(error.stdout)).not.toMatch(
+        /Executing rule:|config files:|imports:|Expected npm prefix:/,
+      );
       expect(String(error.stdout)).not.toContain("mainTspExists:");
       expect(String(error.stdout)).not.toContain("Executing rule: ServiceYaml");
     }
@@ -171,11 +272,12 @@ it("uses an explicit root, exits nonzero on failure, and still runs later projec
   await expect(run("--all", "custom")).rejects.toMatchObject({
     code: 1,
     stdout: expect.stringContaining("Suppressed: later project") as unknown,
-    stderr: expect.stringContaining(
-      "TypeSpec Validation failed for some folder to fix run and address any errors:\n" +
-        " > pnpm install\n > pnpm tsv custom/a\n" +
-        "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
-    ) as unknown,
+    stderr: expect.stringContaining(d`
+      TypeSpec Validation failed for some folder to fix run and address any errors:
+       > pnpm install
+       > pnpm tsv custom/a
+      For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation
+    `) as unknown,
   });
 });
 
@@ -197,11 +299,12 @@ it("emits a failure annotation inside its project group and a final reproduction
         "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation\n" +
         "::endgroup::\n::group::Validating custom/b",
     ) as unknown,
-    stderr: expect.stringContaining(
-      "TypeSpec Validation failed for some folder to fix run and address any errors:\n" +
-        " > pnpm install\n > pnpm tsv custom/a\n" +
-        "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
-    ) as unknown,
+    stderr: expect.stringContaining(d`
+      TypeSpec Validation failed for some folder to fix run and address any errors:
+       > pnpm install
+       > pnpm tsv custom/a
+      For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation
+    `) as unknown,
   });
 });
 
@@ -219,14 +322,18 @@ it("wraps child output in repository-relative GitHub Actions groups", async () =
   );
 
   const { stdout } = await run("--all", join(root, "specification"));
-  expect(stdout).toContain("Checking 2 TypeSpec folders:\nspecification/a\nspecification/b");
+  expect(stdout).toContain(d`
+    Checking 2 TypeSpec folders:
+    specification/a
+    specification/b
+  `);
   const groups = [...stdout.matchAll(/::group::([^\n]+)\n([\s\S]*?)::endgroup::/g)];
   expect(groups.map((group) => group[1])).toEqual([
     "Validating specification/a",
     "Validating specification/b",
   ]);
   for (const group of groups) {
-    expect(group[2]).toContain("Running TypeSpecValidation on folder:");
+    expect(group[2]).not.toContain("Running TypeSpecValidation on folder:");
     expect(group[2]).toContain("Suppressed: fixture");
   }
 });
@@ -453,11 +560,12 @@ it("returns a failure exit code and still validates later impacted projects", as
   await expect(run("--changed")).rejects.toMatchObject({
     code: 1,
     stdout: expect.stringContaining("Suppressed: later project") as unknown,
-    stderr: expect.stringContaining(
-      "TypeSpec Validation failed for some folder to fix run and address any errors:\n" +
-        " > pnpm install\n > pnpm tsv specification/service/a\n" +
-        "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
-    ) as unknown,
+    stderr: expect.stringContaining(d`
+      TypeSpec Validation failed for some folder to fix run and address any errors:
+       > pnpm install
+       > pnpm tsv specification/service/a
+      For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation
+    `) as unknown,
   });
 });
 

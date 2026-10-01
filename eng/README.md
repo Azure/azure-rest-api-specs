@@ -49,6 +49,34 @@ included. Fork workflow approval policies can delay automatic refreshes. The
 comment command runs from the default branch and remains available without
 waiting for the notifier. Do not make this advisory check required.
 
+## Branch cleanup
+
+[Cleanup stale branches](../.github/workflows/branch-cleanup.yaml) runs weekly on
+Monday at 05:23 UTC. Scheduled runs delete eligible branches automatically.
+Manual runs default to **dry-run**, which logs candidates without deleting anything.
+Run the workflow from the default branch; it is disabled on forks.
+
+A branch is eligible when its last commit is older than **90 days** for `copilot/*`,
+or **2 years (730 days)** for other branches. Closed-unmerged and no-PR branches
+are included; recent comments on a closed PR do not extend retention.
+
+Manual runs can override these cutoffs independently using `copilot-days` and
+`other-days`. Both must be positive whole numbers. Scheduled runs always use the
+90-day and 730-day defaults. For example, to preview a shorter range:
+
+```bash
+gh workflow run branch-cleanup.yaml --repo Azure/azure-rest-api-specs --ref main \
+  -f dry-run=true -f copilot-days=30 -f other-days=365
+```
+
+The default branch, protected branches, and sources and targets of open PRs
+(including drafts) are skipped. Long-lived names and prefixes such as `dev-`,
+`release-`, `feature/`, `published/`, and `archive/` are also excluded; the complete
+list is at the top of the [script](../.github/workflows/src/branch-cleanup.ts).
+Keep a long-lived branch by protecting it or adding it to those exclusions.
+Candidates and their SHAs are logged, and SHA-guarded Git pushes refuse to delete
+changed tips. API and deletion failures fail the workflow.
+
 ## Code conventions
 
 Below are code convention we strive to follow in `eng` directory:

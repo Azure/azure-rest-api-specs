@@ -1,11 +1,12 @@
 import { filterAsync } from "@azure-tools/specs-shared/array";
 import type { ILogger } from "@azure-tools/specs-shared/logger";
-import { readFile } from "fs/promises";
+import { readFile } from "node:fs/promises";
 import { stripVTControlCharacters } from "node:util";
-import path, { basename, dirname, normalize } from "path";
-import pc from "picocolors";
+import path, { basename, dirname, normalize } from "node:path";
+import { reportCommandOutput } from "../command-output.ts";
+import { blocks, filePath, indent, lines, verbatim } from "../diagnostic-content.ts";
 import { globFiles } from "../glob.ts";
-import { type RuleResult } from "../rule-result.ts";
+import { type Diagnostic, type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
 import { fileExists, getSuppressions, gitDiffTopSpecFolder, runNodeBin } from "../utils.ts";
 
@@ -15,20 +16,22 @@ export class CompileRule implements Rule {
 
   async execute(folder: string, logger: ILogger): Promise<RuleResult> {
     let success = true;
-    let stdOutput = "";
-    let errorOutput = "";
+    const diagnostics: Diagnostic[] = [];
 
     if (await fileExists(path.join(folder, "main.tsp"))) {
       const [err, stdout, stderr] = await runNodeBin(
         "@typespec/compiler",
+        // Capture the inventory even when quiet: ExtraSwagger validation depends on it.
         ["tsp", "compile", "--list-files", "--warn-as-error", folder],
         logger,
       );
-
-      stdOutput += stdout;
-
-      // Rule output is easier to read if "tsp compile" stderr is redirected to stdOutput
-      stdOutput += stderr;
+      const compiled = reportCommandOutput(
+        "compile",
+        "TypeSpec compilation",
+        [err, stdout, stderr],
+        logger,
+      );
+      diagnostics.push(...(compiled.diagnostics ?? []));
 
       if (success) {
         if (!err) {
@@ -45,11 +48,11 @@ export class CompileRule implements Rule {
           // Compilation completed successfully.
 
           // Remove ANSI color codes, handle windows and linux line endings
-          const lines = stripVTControlCharacters(stdout).split(/\r?\n/);
+          const outputLines = stripVTControlCharacters(stdout).split(/\r?\n/);
 
           // TODO: Use helpers in /.github once they support platform-specific paths
           // Header, footer, and empty lines should be excluded by JSON filter
-          const outputSwaggers = lines
+          const outputSwaggers = outputLines
             // Remove leading and trailing whitespace
             .map((l) => l.trim())
             // Normalize to platform-specific path
@@ -59,18 +62,16 @@ export class CompileRule implements Rule {
             // Exclude examples
             .filter((p) => !p.split(path.sep).includes("examples"));
 
-          stdOutput += "\nGenerated Swaggers:\n";
-          stdOutput += outputSwaggers.join("\n") + "\n";
+          logger.debug(`Generated Swaggers:\n${outputSwaggers.join("\n")}`);
 
           if (outputSwaggers.length === 0) {
-            stdOutput += "No generated swaggers found, skipping extra swagger check.\n";
+            logger.debug("No generated swaggers found, skipping extra swagger check.");
           } else {
             // ../resource-manager/Microsoft.Contoso
             const outputFolder = dirname(dirname(dirname(outputSwaggers[0])));
             const outputFilename = basename(outputSwaggers[0]);
 
-            stdOutput += "\nOutput folder:\n";
-            stdOutput += outputFolder + "\n";
+            logger.debug(`Output folder:\n${outputFolder}`);
 
             // Filter to only specs matching the folder and filename extracted from the first output-file.
             // Necessary to handle multi-project specs like keyvault.
@@ -96,8 +97,9 @@ export class CompileRule implements Rule {
               },
             );
 
-            stdOutput += `\nSwaggers matching output folder and filename:\n`;
-            stdOutput += tspGeneratedSwaggers.join("\n") + "\n";
+            logger.debug(
+              `Swaggers matching output folder and filename:\n${tspGeneratedSwaggers.join("\n")}`,
+            );
 
             const suppressedSwaggers = await filterAsync(
               tspGeneratedSwaggers,
@@ -131,15 +133,15 @@ export class CompileRule implements Rule {
               },
             );
 
-            stdOutput += `\nSwaggers excluded via suppressions.yaml:\n`;
-            stdOutput += suppressedSwaggers.join("\n") + "\n";
+            logger.debug(
+              `Swaggers excluded via suppressions.yaml:\n${suppressedSwaggers.join("\n")}`,
+            );
 
             const remainingSwaggers = tspGeneratedSwaggers.filter(
               (s) => !suppressedSwaggers.includes(s),
             );
 
-            stdOutput += `\nRemaining swaggers:\n`;
-            stdOutput += remainingSwaggers.join("\n") + "\n";
+            logger.debug(`Remaining swaggers:\n${remainingSwaggers.join("\n")}`);
 
             const extraSwaggers = remainingSwaggers.filter((s) => !outputSwaggers.includes(s));
 
@@ -184,25 +186,24 @@ export class CompileRule implements Rule {
 
               if (!isOnlyOlderPreviews) {
                 success = false;
-                errorOutput += pc.red(
-                  `\nOutput folder '${outputFolder}' appears to contain TypeSpec-generated ` +
-                    `swagger files, not generated from the current TypeSpec sources. ` +
-                    `Perhaps you deleted a version from your TypeSpec, but didn't delete ` +
-                    `the associated swaggers?\n\n`,
-                );
-                errorOutput += pc.red(extraSwaggers.join("\n") + "\n");
+                diagnostics.push({
+                  severity: "error",
+                  code: "extra-swagger",
+                  path: outputFolder,
+                  message:
+                    "Found TypeSpec-generated Swagger files not generated from the current TypeSpec sources.",
+                  help: "If a version was removed, delete its associated Swagger files.",
+                  details: indent(lines(extraSwaggers.map(filePath))),
+                });
               } else {
-                stdOutput += pc.yellow(
-                  `\nNote: Found extra preview swaggers from older versions (not the latest version). ` +
-                    `These are allowed to remain:\n`,
+                logger.debug(
+                  `Found extra preview swaggers from older versions (not the latest version). These are allowed to remain:\n${extraSwaggers.join("\n")}`,
                 );
-                stdOutput += pc.yellow(extraSwaggers.join("\n") + "\n");
               }
             }
           }
         } else {
           success = false;
-          errorOutput += err.message;
         }
       }
     }
@@ -214,28 +215,39 @@ export class CompileRule implements Rule {
         ["tsp", "compile", "--no-emit", "--warn-as-error", clientTsp],
         logger,
       );
+      const compiled = reportCommandOutput(
+        "compile",
+        "Client TypeSpec compilation",
+        [err, stdout, stderr],
+        logger,
+      );
+      diagnostics.push(...(compiled.diagnostics ?? []));
       if (err) {
         success = false;
-        errorOutput += err.message;
       }
-      stdOutput += stdout;
-      errorOutput += stderr;
     }
 
     if (success) {
-      const gitDiffResult = await gitDiffTopSpecFolder(folder);
-      stdOutput += gitDiffResult.stdOutput;
+      const gitDiffResult = await gitDiffTopSpecFolder(folder, logger);
       if (!gitDiffResult.success) {
         success = false;
-        errorOutput += gitDiffResult.errorOutput;
-        errorOutput += `\nFiles have been changed after \`tsp compile\`. Run \`tsp compile\` and ensure all files are included in your change.`;
+        diagnostics.push({
+          severity: "error",
+          code: "generated-files-changed",
+          path: folder,
+          message: "Files changed after TypeSpec compilation:",
+          details: blocks(
+            indent(lines(gitDiffResult.files.map(filePath))),
+            verbatim(gitDiffResult.diff ?? ""),
+          ),
+          help: "Run `pnpm exec tsp compile .` from the project folder and include the generated files in your change.",
+        });
       }
     }
 
     return {
       success: success,
-      stdOutput: stdOutput,
-      errorOutput: errorOutput,
+      diagnostics,
     };
   }
 }

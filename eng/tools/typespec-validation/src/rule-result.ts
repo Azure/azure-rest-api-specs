@@ -1,8 +1,11 @@
+import type { DiagnosticContent } from "./diagnostic-content.ts";
+
 export interface Diagnostic {
   readonly severity: "error" | "warning";
   readonly code: string;
   readonly message: string;
   readonly path?: string;
+  readonly details?: DiagnosticContent;
   readonly location?: { line: number; column: number; text?: string };
   readonly help?: string;
   readonly url?: string;
@@ -13,9 +16,6 @@ export interface RuleResult {
   readonly diagnostics?: Diagnostic[];
   readonly skipped?: string;
   readonly suppressed?: string;
-  /** Legacy output for unmigrated rules; new rule findings belong in diagnostics. */
-  readonly stdOutput?: string;
-  readonly errorOutput?: string;
 }
 
 export class DiagnosticError extends Error {

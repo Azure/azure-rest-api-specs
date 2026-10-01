@@ -750,6 +750,7 @@ describe("readiness trigger resolution", () => {
       expect(f.github.rest.search.issuesAndPullRequests).toHaveBeenCalledWith({
         q: `repo:Azure/example is:pr is:open ${pr.head.sha}`,
         per_page: 100,
+        advanced_search: "true",
       });
       f.permission.mockResolvedValue({ data: { permission: "read" } });
       await checkContributorReadiness(f.args, number);
