@@ -234,6 +234,7 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
 - **Token usage**: Use `GITHUB_TOKEN` with least privilege
 - **Action references**: Pin external actions to a full commit SHA and retain a version comment for dependency updates.
 - **Repository references**: Use `$/...` for actions and reusable workflows at the running commit. Retain `./...` only when an action intentionally comes from a different checkout.
+- **Checkout**: Use `$/.github/actions/checkout` in handwritten workflows. It centralizes the upstream SHA pin and defaults to `persist-credentials: false`; explicitly enable credentials only for later authenticated Git operations.
 
 ### Code Quality
 

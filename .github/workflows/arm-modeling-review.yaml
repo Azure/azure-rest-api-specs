@@ -33,14 +33,14 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        uses: $/.github/actions/checkout
         with:
           fetch-depth: 2
 
       # Public main is the single source of truth for leases, so a lease merged there is
       # honored without syncing it into each private branch.
       - name: Checkout ARM leases from public main
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        uses: $/.github/actions/checkout
         with:
           repository: Azure/azure-rest-api-specs
           ref: main
