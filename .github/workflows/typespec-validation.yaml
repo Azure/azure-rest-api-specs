@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-      - uses: actions/checkout@v7
+      - uses: $/.github/actions/checkout
         with:
           fetch-depth: 2
 
@@ -38,7 +38,7 @@ jobs:
           fi
 
       - name: Setup Node and install deps
-        uses: ./.github/actions/setup-node-install-deps
+        uses: $/.github/actions/setup-node-install-deps
         with:
           # PRs into typespec-next hold spec changes that need the upcoming TypeSpec release.
           typespec-channel: ${{ github.base_ref == 'typespec-next' && 'next' || 'stable' }}

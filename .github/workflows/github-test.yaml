@@ -53,14 +53,14 @@ jobs:
         run: git config --global core.longpaths true
 
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: $/.github/actions/checkout
         with:
           sparse-checkout: |
             .github
 
       - if: ${{ github.event_name == 'pull_request' && matrix.os == 'ubuntu' }}
         name: Require compiled agentic workflow locks
-        uses: actions/github-script@v9.0.0
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const files = await github.paginate(github.rest.pulls.listFiles, {
@@ -88,10 +88,10 @@ jobs:
             }
 
       - name: Install dependencies for github-script actions
-        uses: ./.github/actions/install-deps-github-script
+        uses: $/.github/actions/install-deps-github-script
 
       - name: Verify all modules are importable
-        uses: actions/github-script@v9.0.0
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const { join } = await import("path");

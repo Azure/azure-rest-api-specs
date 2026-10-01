@@ -78,7 +78,7 @@ jobs:
         if: runner.os == 'Windows'
         run: git config --global core.longpaths true
 
-      - uses: actions/checkout@v7
+      - uses: $/.github/actions/checkout
         with:
           # Overlaying typespec-next needs the history to find a merge base.
           fetch-depth: ${{ fromJSON(env.OVERLAY_TYPESPEC_NEXT == 'true' && '0' || '1') }}
@@ -96,6 +96,7 @@ jobs:
             commit --allow-empty --quiet -m "Overlay typespec-next spec changes"
 
       - name: Setup Node and install deps
+        # Use the checked-out branch, which can be typespec-next rather than the workflow's commit.
         uses: ./.github/actions/setup-node-install-deps
         with:
           typespec-channel: ${{ matrix.channel }}

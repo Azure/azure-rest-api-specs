@@ -19,7 +19,7 @@ jobs:
       contains(github.event.check_run.name, 'SDK Validation') )
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: $/.github/actions/checkout
         with:
           sparse-checkout: "eng/common"
 
