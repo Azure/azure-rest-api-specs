@@ -624,6 +624,12 @@
                 "description": "Version 2023-08-03 and newer. Specifies whether the snapshot virtual directory should be accessible at the root of share mount point when NFS is enabled. This header is only returned for shares, not for snapshots.",
                 "type": "boolean"
               },
+              "x-ms-share-creation-time": {
+                "x-ms-client-name": "ShareCreationTime",
+                "description": "Returns the creation time of the share.",
+                "type": "string",
+                "format": "date-time-rfc1123"
+              },
               "x-ms-share-paid-bursting-enabled": {
                 "x-ms-client-name": "PaidBurstingEnabled",
                 "description": "Optional. Boolean. Default if not specified is false. This property enables paid bursting.",
@@ -7855,6 +7861,10 @@
         },
         "EnableSmbDirectoryLease": {
           "type": "boolean"
+        },
+        "CreationTime": {
+          "type": "string",
+          "format": "date-time-rfc1123"
         }
       }
     },
