@@ -26,6 +26,7 @@ This directory contains documentation specific to the Azure REST API specificati
 | Document | Purpose | Audience | Applies to |
 | --- | --- | --- | --- |
 | [ARM API Reviewer agent](./api-reviewer-agent.md) | User and maintainer documentation for the repository's ARM API review agent. | Specification authors, reviewers, and agent maintainers | TypeSpec and OpenAPI |
+| [Backlog triage](./backlog-triage.md) | Automatic oldest-first issue investigation, cleanup criteria, and maintainer controls. | Issue reporters and repository maintainers | Repository issues |
 
 ## SDK and release automation implementation
 

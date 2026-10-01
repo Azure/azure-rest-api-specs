@@ -82,7 +82,7 @@ The `.github` directory contains all the code and configuration for GitHub Actio
 - TypeScript is configured with `noEmit`, `allowImportingTsExtensions`, `erasableSyntaxOnly`, and `verbatimModuleSyntax`
 - Use `.ts` relative imports and `import type` for type-only dependencies
 - Do not introduce enums, parameter properties, or namespaces; use frozen objects and value-union type aliases instead of enums
-- Type injected `github`, `context`, and `core` values using `AsyncFunctionArguments` from `@actions/github-script`
+- Type injected `github`, `context`, and `core` values using `GitHubScriptArgs` from `workflows/src/github.ts`; use its `GitHub`, `Context`, and `Core` types for individual values
 - For helpers that take `core` separately, import the shared `Core` type from `workflows/src/github.ts`
 - Type webhook payloads with `WebhookEvent<"pull-request", "labeled">` from `workflows/src/github.ts`, using GitHub OpenAPI event and action names. Omit the action to accept all actions for an event.
 - Inline `actions/github-script` YAML snippets remain JavaScript; they dynamically import the `.ts` modules
@@ -109,7 +109,7 @@ From `package.json` comments:
 
 ### Key Dependencies
 
-- `@actions/github-script`: GitHub Actions toolkit (devDependency)
+- `@actions/core`, `@actions/github`: Types for the injected GitHub Actions toolkit (devDependencies)
 - `@octokit/rest`, `@octokit/types`: GitHub REST API client
 - `simple-git`: Git operations
 - `js-yaml`: YAML parsing
@@ -149,13 +149,17 @@ Vitest commands still run directly and do not forward to the root.
 `eng.yml` validates the workspace, runs root `pnpm build` once on Linux, and runs
 the Vitest workspace on Ubuntu and Windows. `github-test.yaml` retains production-only module import
 checks on both OSes, plus actionlint and compiled agentic workflow lock checks on Linux.
+The Linux job also runs zizmor on tracked workflow and action YAML, excluding generated `.lock.yml`
+files. External actions must be SHA-pinned. Keep any necessary audit exceptions narrowly scoped and
+explain them inline; preserve credentials only when a later Git operation requires authentication.
 
 CI runs `pnpm lint` once from the repository root in `lint.yaml`, covering `.github`
 and `eng/tools`. Do not add lint or type-check steps to the test OS matrix.
 `.github/workflows/format.yaml` runs `pnpm format:check` once from the repository
-root for `.github`, `eng/tools`, and `vitest.config.mts`. Do not add formatting steps to package/OS
-test matrices. Package-local format commands inherit the root `.oxfmtrc.json`,
-including fixture, generated-file, and unmanaged-content exclusions.
+root for `.github`, `eng`, and `vitest.config.mts`. Do not add formatting steps to package/OS
+test matrices. Bare `pnpm oxfmt` and package-local format commands inherit the root
+`.oxfmtrc.json`, which defines the formatting scope and excludes mirrored `eng/common`,
+fixtures, generated files, and unmanaged content.
 See [the engineering guide](../../eng/README.md#linting-and-formatting) for package
 exclusions for packages not yet linted.
 
@@ -166,6 +170,10 @@ Run `pnpm run check` in each affected package. All lint, formatting, and test ch
 ### Testing Conventions
 
 Cover new or changed behavior and bug regressions with focused tests of repository-owned behavior and integration contracts. Reuse adequate existing coverage for mechanical refactors and dependency/API substitutions; add tests for uncovered repository behavior or compatibility risks, not to reproduce upstream test matrices. Preserve configured coverage requirements and justify removing existing tests.
+
+- Each assertion must catch a concrete behavioral regression, not restate configuration or test a third-party tool's implementation. Formatting-only changes normally need the existing formatter check, not new tests.
+- For YAML/JSON integration tests, inspect parsed values that affect behavior. Do not assert text offsets, file length, indentation, quote style, or display names unless they are part of the contract being tested.
+- When a test fails after an intentional change, remove obsolete expectations rather than replacing them with assertions that merely lock in the new implementation. Keep the fix scoped to the behavior at issue.
 
 - **Framework**: Vitest
 - **Test files**: `*.test.ts` files in `test/` directories
@@ -227,6 +235,9 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
 - **Pull request target**: Use `pull_request_target` carefully; only support specific actions
 - **Permissions**: Define minimal `permissions` in workflow files
 - **Token usage**: Use `GITHUB_TOKEN` with least privilege
+- **Action references**: Pin external actions to a full commit SHA and retain a version comment for dependency updates.
+- **Repository references**: Use `$/...` for actions and reusable workflows at the running commit. Retain `./...` only when an action intentionally comes from a different checkout.
+- **Checkout**: Use `$/.github/actions/checkout` in handwritten workflows. It centralizes the upstream SHA pin and defaults to `persist-credentials: false`; explicitly enable credentials only for later authenticated Git operations.
 
 ### Code Quality
 
@@ -270,9 +281,10 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
 5. Run the [required checks](#before-committing) in both directories and check affected engineering consumers.
 
 Keep handwritten `actions/github-script` workflow and composite-action refs pinned to the same
-release as the catalog's `@actions/github-script` development dependency. Update those refs,
-the catalog, the lockfile, and the commit-specific `allowBuilds` entry together. Preserve the
-production-only import checks; generated agentic workflows and their locks are managed separately.
+release. When updating that release, check that the toolkit versions used by `GitHubScriptArgs`
+remain compatible with the action's injected APIs. Use the existing toolkit catalog entries rather
+than installing the action itself as an npm dependency. Preserve the production-only import checks;
+generated agentic workflows and their locks are managed separately.
 
 ### Node.js Version Management
 
