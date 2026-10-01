@@ -1,13 +1,14 @@
+import type { DiagnosticContent } from "./diagnostic-content.ts";
+
 export interface Diagnostic {
   readonly severity: "error" | "warning";
   readonly code: string;
   readonly message: string;
   readonly path?: string;
+  readonly details?: DiagnosticContent;
   readonly location?: { line: number; column: number; text?: string };
   readonly help?: string;
   readonly url?: string;
-  /** Multiline details, including native command diagnostics or affected file paths. */
-  readonly output?: string;
 }
 
 export interface RuleResult {

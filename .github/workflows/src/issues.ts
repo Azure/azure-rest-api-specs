@@ -23,6 +23,7 @@ export async function getIssueNumber(
   try {
     const searchResponse = await github.rest.search.issuesAndPullRequests({
       q: `sha:${head_sha} type:pr state:open`,
+      advanced_search: "true",
     });
 
     const totalCount = searchResponse.data.total_count;

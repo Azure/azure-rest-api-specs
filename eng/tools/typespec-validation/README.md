@@ -36,7 +36,7 @@ With `--verbose` (or `-v`), each rule also gets a compact completion indicator:
 checkmark for pass, cross for failure, `!` for a non-failing warning, and `-` with
 a label for skipped/suppressed rules. Verbose output also includes configuration/import details,
 routine skip reasons, successful compiler/formatter output, emitted-file
-inventories, full Git diffs, command traces, and changed-file discovery:
+inventories, Git status, command traces, and changed-file discovery:
 
 ```sh
 pnpm tsv specification/<service>/<project> --verbose
@@ -69,9 +69,10 @@ Compiler and formatter failures retain their native diagnostic codes, source
 excerpts, and colors, reported once beneath a TSV command-failure diagnostic.
 Unexpected output from successful commands also remains visible. Successful
 compiler banners, progress messages, and emitted-file lists are debug-only.
-If compilation or formatting changes files, TSV lists the affected
-repository-relative paths and the command to fix them; `--verbose` includes the
-full Git status and diff.
+If compilation or formatting changes files, TSV shows an indented cyan file list,
+the Git diff, and the command to fix them. The diff includes staged, unstaged, and
+untracked files under the project's service folder and retains Git's colors when
+color output is enabled. `--verbose` also includes Git status.
 
 TSV still captures `tsp compile --list-files` internally to detect stale generated
 Swagger files. Hiding that inventory in normal output does not disable the check.

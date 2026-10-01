@@ -14,6 +14,7 @@ let root: string;
 
 beforeEach(async () => {
   root = await realpath(await mkdtemp(join(tmpdir(), "tsv-command-cli-")));
+  await writeFile(join(root, ".gitattributes"), "* text=auto eol=lf\n");
   vi.stubEnv("DEBUG", "");
   vi.stubEnv("GITHUB_ACTIONS", "false");
   vi.stubEnv("NO_COLOR", "1");
@@ -116,6 +117,40 @@ it("prints only a final summary by default and compact rule statuses with --verb
     "- StaleApiVersionPin (skipped)\n\n8 passed | 3 skipped | 1 suppressed",
   );
 });
+
+it.each([
+  { command: "compile", color: false, verbose: false },
+  { command: "compile", color: true, verbose: true },
+  { command: "format", color: false, verbose: true },
+  { command: "format", color: true, verbose: false },
+])(
+  "shows changed-file diffs once for $command with color=$color verbose=$verbose",
+  async ({ command, color, verbose }) => {
+    await simpleGit(root)
+      .addConfig("color.diff.new", "green")
+      .addConfig("core.autocrlf", "true")
+      .addConfig("core.safecrlf", "warn");
+    if (color) {
+      vi.stubEnv("NO_COLOR", undefined);
+      vi.stubEnv("FORCE_COLOR", "1");
+    }
+    const generatedFile = JSON.stringify(join(root, project, "generated.json"));
+    await compiler(`if (process.argv[2] === "${command}") {
+      require("node:fs").writeFileSync(${generatedFile}, "new content\\n");
+    }`);
+
+    const result = await run(project, ...(verbose ? ["--verbose"] : []));
+    expect(result.code).toBe(1);
+    const output = stripVTControlCharacters(result.stderr);
+    const code = command === "compile" ? "generated-files-changed" : "format-changed";
+    expect(output).toContain(`error tsv/${code}:`);
+    expect(output).toContain(`\n  ${project}/generated.json\n\ndiff --git`);
+    expect(output).toContain("\n+new content\n\n  help:");
+    expect(output.match(/diff --git/g)).toHaveLength(1);
+    expect(result.stdout).not.toContain("diff --git");
+    expect(result.stderr.includes("\x1b[32m")).toBe(color);
+  },
+);
 
 it.each([
   { color: false, verbose: false },
