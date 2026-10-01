@@ -448,6 +448,8 @@ namespace Azure.ResourceManager.Models {
 @@clientName(FrontendConfiguration.ipAddressType, "IPAddressType", "csharp");
 @@clientName(NodeTypeActionParameters, "NodeTypeActionContent", "csharp");
 @@clientName(NodeTypeActionParameters.force, "IsForced", "csharp");
+@@clientName(ReimageAllDisksParameters, "ReimageAllDisksContent", "csharp");
+@@clientName(ReimageAllDisksParameters.force, "IsForced", "csharp");
 @@clientName(FaultSimulationContent.force, "IsForced", "csharp");
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding decorator for backwards compatibility with existing spec"
 @@Azure.ClientGenerator.Core.Legacy.hierarchyBuilding(
