@@ -769,8 +769,6 @@ stimuli:
   - name: top-level-comment-suppresses-duplicate
     environment:
       files:
-        - src: "../../../../agents/arm-api-reviewer.agent.md"
-          dest: ".github/agents/arm-api-reviewer.agent.md"
         - src: "../../../azure-api-review/references/reviewer-posted-parity.md"
           dest: ".github/skills/azure-api-review/references/reviewer-posted-parity.md"
     prompt: |
@@ -827,8 +825,6 @@ stimuli:
   - name: contradictory-thread-requires-clarification
     environment:
       files:
-        - src: "../../../../agents/arm-api-reviewer.agent.md"
-          dest: ".github/agents/arm-api-reviewer.agent.md"
         - src: "../../../azure-api-review/references/reviewer-posted-parity.md"
           dest: ".github/skills/azure-api-review/references/reviewer-posted-parity.md"
     prompt: |
@@ -1479,3 +1475,52 @@ stimuli:
       - Uses RESOLVE-AND-REPOST because the matching inline anchor moved and both marker and trusted author prove workflow ownership
       - Does not use SKIP-COVERED even though line movement does not change semantic finding identity
       - Plans one replacement at the current line and no duplicate standalone finding
+
+  # 160029 -- The interim shell self-check never prefixes the final Critic payload
+  - name: critic-shell-self-check-keeps-final-marker-first
+    tags:
+      focus: critic-output-contract
+    prompt: |
+      Read `.github/agents/arm-api-review-critic.agent.md` and the shared
+      protocol. Act as the ARM API Review Critic.
+
+      Earlier in this turn, immediately before an allowed read-only shell
+      call, you emitted this standalone interim transcript line:
+
+      `Pre-tool self-check passed: Q1 yes, Q2 yes, Q3 yes`
+
+      The shell call completed successfully. Now return the final Critic
+      payload for these inputs:
+
+      - Review target: Azure/azure-rest-api-specs#46000
+      - Session SHA: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+      - Base SHA: bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+      - Previous-version source: None - new service
+      - Step 6 findings report: No findings.
+      - Files reviewed: `specification/contoso/resource-manager/Microsoft.Contoso/main.tsp`
+      - Step 5.5 reconciliation plan: reconciliation skipped
+      - Graphs: false; graph-mode: fast-path
+      - Iteration: 1
+
+      Emit only the final Critic response. Do not repeat the interim self-check.
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "final payload starts with Critic verdict marker"
+        config:
+          pattern: '(?s)^<!-- critic-verdict: [^\r\n]+ -->\r?\n\r?\n## ARM API Review Critique'
+      - type: output-not-contains
+        name: "interim self-check excluded from final payload"
+        config:
+          substring: "Pre-tool self-check passed"
+      - type: output-matches
+        name: "clean report receives passing finding verdict"
+        config:
+          pattern: "(?is)Finding accuracy.{0,100}PASS"
+      - type: prompt
+    rubric:
+      - The final returned payload begins with the critic-verdict marker as the literal first line
+      - The standalone pre-tool audit line is not repeated in the final returned payload
+      - The clean no-findings report receives a valid passing verdict

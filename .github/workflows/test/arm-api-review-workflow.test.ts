@@ -1003,12 +1003,13 @@ describe("ARM API review consistency and hardening", () => {
 
     for (const file of files) {
       const text = await readFile(join(dir, file), "utf8");
-      // The agent under test must match the production model, or eval results
-      // describe a model that never reviews a real PR. Anchored to the line
-      // start because plain `model:` also matches `judge_model:`.
-      expect(text, `${file} agent model`).toContain(`model: ${canonicalModel}`);
-      // The judge is a separate role and deliberately stays cheaper.
-      expect(text, `${file} judge model`).toContain("judge_model: claude-sonnet-4.6");
+      // The scheduled release gate uses CLI-available model identifiers so
+      // query-string or entitlement changes cannot prevent qualification.
+      // Full qualification continues to match the production model.
+      const agentModel = file === "release-smoke.yaml" ? "gpt-5.6-sol" : canonicalModel;
+      const judgeModel = file === "release-smoke.yaml" ? "gpt-5.4" : "claude-sonnet-4.6";
+      expect(text, `${file} agent model`).toContain(`model: ${agentModel}`);
+      expect(text, `${file} judge model`).toContain(`judge_model: ${judgeModel}`);
     }
   });
   it("routes findings to a drop group by recorded category, not by rule ID", async () => {
@@ -1547,9 +1548,9 @@ describe("ARM paging and example enum calibration", () => {
     }
   });
 
-  it("keeps the eval catalog counts aligned with 90 scenarios and 57 fixtures", async () => {
+  it("keeps the full and release-smoke eval catalogs aligned", async () => {
     const evalDir = join(ROOT, ".github/skills/evals/arm-api-reviewer/vally");
-    const evalFiles = (await readdir(evalDir)).filter((file) => file.endsWith(".yaml"));
+    const evalFiles = (await readdir(evalDir)).filter((file) => /^eval-.*\.yaml$/.test(file));
     let stimulusCount = 0;
 
     for (const file of evalFiles) {
@@ -1558,6 +1559,15 @@ describe("ARM paging and example enum calibration", () => {
       };
       stimulusCount += parsed.stimuli?.length ?? 0;
     }
+    const releaseSmoke = load(await readFile(join(evalDir, "release-smoke.yaml"), "utf8")) as {
+      defaults?: { model?: string; judge_model?: string };
+      stimuli?: Array<{ tags?: { safetyCritical?: string } }>;
+    };
+    const exportDefinition = JSON.parse(
+      await readFile(join(ROOT, ".github/agents/arm-api-reviewer.export.json"), "utf8"),
+    ) as {
+      validation?: { reviewerModel?: string; judgeModel?: string };
+    };
 
     const readme = await readFile(
       join(ROOT, ".github/skills/evals/arm-api-reviewer/README.md"),
@@ -1568,11 +1578,18 @@ describe("ARM paging and example enum calibration", () => {
       { recursive: true, withFileTypes: true },
     );
     expect(evalFiles).toHaveLength(18);
-    expect(stimulusCount).toBe(90);
+    expect(stimulusCount).toBe(91);
+    expect(releaseSmoke.stimuli).toHaveLength(5);
+    expect(
+      releaseSmoke.stimuli?.filter((stimulus) => stimulus.tags?.safetyCritical === "true"),
+    ).toHaveLength(2);
+    expect(releaseSmoke.defaults?.model).toBe(exportDefinition.validation?.reviewerModel);
+    expect(releaseSmoke.defaults?.judge_model).toBe(exportDefinition.validation?.judgeModel);
     expect(
       fixtureEntries.filter((entry) => entry.isFile() && entry.name !== "README.md"),
     ).toHaveLength(57);
-    expect(readme).toContain("Total: 90 stimuli across 18 eval files.");
+    expect(readme).toContain("Total: 91 stimuli across 18 full-suite eval files.");
+    expect(readme).toContain("five-stimulus");
     expect(readme).toContain("All 57 fixture data files");
     expect(readme).toContain("`--timeout <duration>`");
     expect(readme).toContain("`defaults.timeout`");
