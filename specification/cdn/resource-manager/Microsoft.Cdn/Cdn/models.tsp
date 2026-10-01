@@ -2193,7 +2193,7 @@ union InvocationPoint {
   OriginRequest: "OriginRequest",
 
   /**
-   * The edge action is invoked on the response before it is returned to the client.
+   * Invoked at the client response stage, before the response is returned to the client. Currently only supported for edge actions.
    */
   @added(Versions.v2026_09_01_preview)
   ClientResponse: "ClientResponse",
