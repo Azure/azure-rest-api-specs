@@ -394,15 +394,15 @@ model AgentOptimizationEstimateInputs {
   optimization_configuration: AgentOptimizationConfiguration;
 }
 
-@doc("A low/typical/ceiling range for an estimated quantity. Expected values may be fractional, including estimated model-call counts.")
+@doc("A low/typical/ceiling range for an estimated quantity. Cost values apply average per-call usage assumptions to each call-count scenario. Expected values may be fractional, including estimated model-call counts.")
 model AgentOptimizationEstimateBand {
-  @doc("Lower estimate for the configured workload, calculated using required model calls and average usage per call.")
+  @doc("Lower estimate based on model calls required for every run.")
   low: float64;
 
-  @doc("Expected estimate for the configured workload, calculated using typical model calls and average usage per call.")
+  @doc("Expected estimate based on model calls consumed by a typical run.")
   typical: float64;
 
-  @doc("Guaranteed upper bound for the configured workload. Monetary values use the pricing snapshot identified by `prices_as_of`.")
+  @doc("Upper bound calculated from the maximum number of model calls.")
   ceiling: float64;
 }
 
