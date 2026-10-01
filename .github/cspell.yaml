@@ -11,13 +11,15 @@ ignorePaths:
 words:
   - apiver
   - azmanager
-  - azsdk
   - brch
   - buildid
   - byval
   - contosowidget
   - contosowidgetmanager
   - dapr
+  - dedented
+  - dedenting
+  - dedents
   - fflate
   - oapi
   - plcy
@@ -32,6 +34,14 @@ words:
   - whatif
 
 overrides:
+  - filename: "**/.github/workflows/src/protected-files.ts"
+    words:
+      - nocase
+
+  - filename: "**/.github/workflows/test/protected-files.test.ts"
+    words:
+      - gpgsign
+
   - filename: "**/.github/chatmodes/api-review-feedback.chatmode.md"
     words:
       - Swathi
