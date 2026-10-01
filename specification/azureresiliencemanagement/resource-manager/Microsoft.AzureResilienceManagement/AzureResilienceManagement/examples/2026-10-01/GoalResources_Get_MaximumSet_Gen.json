@@ -2,10 +2,10 @@
   "title": "GoalResources_Get_MaximumSet",
   "operationId": "GoalResources_Get",
   "parameters": {
-    "serviceGroupName": "umyghwnfpzsgrhpczizcn",
+    "serviceGroupName": "production-sg",
     "api-version": "2026-10-01",
-    "goalAssignmentName": "ga1",
-    "goalResourceName": "gr1"
+    "goalAssignmentName": "zonal-resiliency-goal",
+    "goalResourceName": "primary-vm"
   },
   "responses": {
     "200": {
@@ -31,14 +31,14 @@
           },
           "provisioningState": "Succeeded"
         },
-        "id": "/providers/Microsoft.AzureResilienceManagement/goalAssignments/ga1/goalResources/gr1",
-        "name": "gr1",
-        "type": "lvbclp",
+        "id": "/providers/Microsoft.Management/serviceGroups/production-sg/providers/Microsoft.AzureResilienceManagement/goalAssignments/zonal-resiliency-goal/goalResources/primary-vm",
+        "name": "primary-vm",
+        "type": "Microsoft.AzureResilienceManagement/goalAssignments/goalResources",
         "systemData": {
-          "createdBy": "dvnfxbuyqhvivfjddjccdtlwajfht",
+          "createdBy": "admin@contoso.com",
           "createdByType": "User",
           "createdAt": "2025-02-06T15:03:42.796Z",
-          "lastModifiedBy": "lndhhaimomorael",
+          "lastModifiedBy": "admin@contoso.com",
           "lastModifiedByType": "User",
           "lastModifiedAt": "2025-02-06T15:03:42.797Z"
         }

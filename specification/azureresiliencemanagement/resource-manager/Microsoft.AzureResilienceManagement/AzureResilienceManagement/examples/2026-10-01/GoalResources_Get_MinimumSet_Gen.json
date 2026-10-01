@@ -2,10 +2,10 @@
   "title": "GoalResources_Get_MinimumSet",
   "operationId": "GoalResources_Get",
   "parameters": {
-    "serviceGroupName": "sg1",
+    "serviceGroupName": "production-sg",
     "api-version": "2026-10-01",
-    "goalAssignmentName": "ga1",
-    "goalResourceName": "gr1"
+    "goalAssignmentName": "zonal-resiliency-goal",
+    "goalResourceName": "primary-vm"
   },
   "responses": {
     "200": {
@@ -18,9 +18,9 @@
             "attestationStatus": "NotAttested"
           }
         },
-        "id": "/providers/Microsoft.AzureResilienceManagement/goalAssignments/ga1/goalResources/gr1",
-        "name": "gr1",
-        "type": "Microsoft.AzureResilienceManagement/goalResources",
+        "id": "/providers/Microsoft.Management/serviceGroups/production-sg/providers/Microsoft.AzureResilienceManagement/goalAssignments/zonal-resiliency-goal/goalResources/primary-vm",
+        "name": "primary-vm",
+        "type": "Microsoft.AzureResilienceManagement/goalAssignments/goalResources",
         "systemData": {
           "createdBy": "admin@contoso.com",
           "createdByType": "User",

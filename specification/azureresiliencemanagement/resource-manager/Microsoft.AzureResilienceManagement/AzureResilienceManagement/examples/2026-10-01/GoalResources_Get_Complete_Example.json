@@ -4,14 +4,14 @@
   "parameters": {
     "serviceGroupName": "production-sg",
     "api-version": "2026-10-01",
-    "goalAssignmentName": "resiliencyGoalAssignment",
-    "goalResourceName": "web-app-resource"
+    "goalAssignmentName": "zonal-resiliency-goal",
+    "goalResourceName": "primary-vm"
   },
   "responses": {
     "200": {
       "body": {
         "properties": {
-          "resourceArmId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/ProductionRG/providers/Microsoft.Web/sites/MyWebApp",
+          "resourceArmId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/ProductionRG/providers/Microsoft.Compute/virtualMachines/PrimaryVm",
           "zonalResiliency": {
             "userConfirmation": [
               {
@@ -21,14 +21,13 @@
               }
             ],
             "goalParticipation": "Included",
-            "attestationStatus": "ManuallyAttested",
-            "exclusionReason": null
+            "attestationStatus": "ManuallyAttested"
           },
           "provisioningState": "Succeeded"
         },
-        "id": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/ProductionRG/providers/Microsoft.AzureResilienceManagement/goalAssignments/resiliency-goal-assignment/goalResources/web-app-resource",
-        "name": "web-app-resource",
-        "type": "Microsoft.AzureResilienceManagement/goalResources",
+        "id": "/providers/Microsoft.Management/serviceGroups/production-sg/providers/Microsoft.AzureResilienceManagement/goalAssignments/zonal-resiliency-goal/goalResources/primary-vm",
+        "name": "primary-vm",
+        "type": "Microsoft.AzureResilienceManagement/goalAssignments/goalResources",
         "systemData": {
           "createdBy": "admin@contoso.com",
           "createdByType": "User",

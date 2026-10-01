@@ -2,9 +2,9 @@
   "title": "GoalAssignments_UpdateGoalResources_MaximumSet",
   "operationId": "GoalAssignments_UpdateGoalResources",
   "parameters": {
-    "serviceGroupName": "sg1",
+    "serviceGroupName": "production-sg",
     "api-version": "2026-10-01",
-    "goalAssignmentName": "ga1",
+    "goalAssignmentName": "zonal-resiliency-goal",
     "body": {
       "resources": [
         {
@@ -42,8 +42,8 @@
                 "exclusionReason": "UserSelectedExclusion"
               }
             },
-            "id": "/providers/Microsoft.AzureResilienceManagement/goalAssignments/ga1/goalResources/gr1",
-            "name": "gr1",
+            "id": "/providers/Microsoft.Management/serviceGroups/production-sg/providers/Microsoft.AzureResilienceManagement/goalAssignments/zonal-resiliency-goal/goalResources/primary-vm",
+            "name": "primary-vm",
             "type": "Microsoft.AzureResilienceManagement/goalAssignments/goalResources",
             "systemData": {
               "createdBy": "admin@contoso.com",
@@ -63,8 +63,8 @@
                 "attestationStatus": "ManuallyAttested"
               }
             },
-            "id": "/providers/Microsoft.AzureResilienceManagement/goalAssignments/ga1/goalResources/gr2",
-            "name": "gr2",
+            "id": "/providers/Microsoft.Management/serviceGroups/production-sg/providers/Microsoft.AzureResilienceManagement/goalAssignments/zonal-resiliency-goal/goalResources/secondary-vm",
+            "name": "secondary-vm",
             "type": "Microsoft.AzureResilienceManagement/goalAssignments/goalResources",
             "systemData": {
               "createdBy": "admin@contoso.com",
