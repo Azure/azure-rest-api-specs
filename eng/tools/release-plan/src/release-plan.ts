@@ -64,6 +64,7 @@ export function ensureReleasePlan(
   const created = runCreateReleasePlan(context, runner);
   const createdDetails = validateSelectedPlan(created, context, false);
   if (
+    createdDetails.SpecAPIVersion !== context.apiVersion ||
     createdDetails.ActiveSpecPullRequest !== context.prUrl ||
     (context.apiReleaseType !== "Private Preview" &&
       createdDetails.SpecCommitSHA?.toLowerCase() !== context.specCommitSha.toLowerCase())
@@ -97,8 +98,14 @@ function validateSelectedPlan(
   const details = releasePlanDetails(plan);
   requiredPlanId(details.WorkItemId, "WorkItemId");
   requiredPlanId(details.ReleasePlanId, "ReleasePlanId");
+  // A reused plan for this PR can have no version yet; the confirmed readback cannot.
+  const canConfigureVersion =
+    !requireTarget &&
+    context.apiReleaseType !== "Private Preview" &&
+    !details.SpecAPIVersion?.trim() &&
+    details.ActiveSpecPullRequest === context.prUrl;
   if (
-    details.SpecAPIVersion !== context.apiVersion ||
+    (details.SpecAPIVersion !== context.apiVersion && !canConfigureVersion) ||
     apiReleaseTypeLabel(details.ApiReleaseType) !== context.apiReleaseType ||
     projectPath(details.APISpecProjectPath, context.workspace) !==
       projectPath(context.tspProjectPath, context.workspace)
@@ -165,6 +172,7 @@ function confirmExistingPlan(
   }
   if (
     samePullRequest &&
+    details.SpecAPIVersion === context.apiVersion &&
     (isPrivatePreview ||
       details.SpecCommitSHA?.toLowerCase() === context.specCommitSha.toLowerCase())
   ) {

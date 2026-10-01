@@ -149,6 +149,53 @@ describe("ensureReleasePlan", () => {
     const result = ensureReleasePlan(baseContext, runner);
     expect(result.outcome).toBe("created");
     expect(result.releasePlan).toEqual(buildPlan(999));
+
+    // Create can reuse a legacy plan for this PR instead of creating another one.
+    for (const apiVersion of [undefined, "", "   "]) {
+      for (const specCommitSha of ["", baseContext.specCommitSha]) {
+        const legacyPlan = buildPlan(999, {
+          SpecAPIVersion: apiVersion,
+          SpecCommitSHA: specCommitSha,
+        });
+        const calls: string[][] = [];
+        const legacyRunner: AzsdkRunner = (args) => {
+          calls.push(args);
+          const response =
+            args[1] === "create"
+              ? legacyPlan
+              : args[1] === "update-spec-pr"
+                ? { status: "Success" }
+                : args.includes("--workitem-id")
+                  ? buildPlan(999)
+                  : null;
+          return { exitCode: 0, stdout: JSON.stringify(response), stderr: "" };
+        };
+
+        const reused = ensureReleasePlan(baseContext, legacyRunner);
+        expect(reused.outcome).toBe("existing_by_pr");
+        expect(reused.releasePlan).toEqual(buildPlan(999));
+        expect(calls.map((args) => args[1])).toEqual(["get", "create", "update-spec-pr", "get"]);
+        expect(calls[2]).toEqual([
+          "release-plan",
+          "update-spec-pr",
+          "--workitem-id",
+          "999",
+          "--typespec-path",
+          typespecPath,
+          "--pull-request",
+          baseContext.prUrl,
+          "--api-version",
+          baseContext.apiVersion,
+          "--spec-commit-sha",
+          baseContext.specCommitSha,
+          "--confirm-target",
+          "--expected-target-revision",
+          "999:1:1000:1",
+          "--output",
+          "json",
+        ]);
+      }
+    }
   });
 
   it("passes test-release true when enabled", () => {
