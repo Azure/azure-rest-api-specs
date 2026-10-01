@@ -106,13 +106,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/AADPropertiesResource"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/NewErrorResponse"
             }
@@ -151,7 +151,7 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "The request body",
+            "description": "resource cross region restore request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CrossRegionRestoreRequest"
@@ -160,10 +160,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "OK"
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "Accepted",
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
@@ -181,7 +181,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/NewErrorResponse"
             }
@@ -226,7 +226,7 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "The request body",
+            "description": "CRR Job request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CrrJobRequest"
@@ -235,13 +235,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/JobResource"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/NewErrorResponse"
             }
@@ -293,7 +293,7 @@
           {
             "name": "parameters",
             "in": "body",
-            "description": "The request body",
+            "description": "Backup CRR Job request",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CrrJobRequest"
@@ -302,13 +302,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/JobResourceList"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/NewErrorResponse"
             }
@@ -356,10 +356,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "OK"
           },
           "202": {
-            "description": "Resource operation accepted.",
+            "description": "Accepted",
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
@@ -377,7 +377,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/NewErrorResponse"
             }
@@ -427,7 +427,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/NewErrorResponse"
             }
@@ -488,7 +488,7 @@
           {
             "name": "recoveryPointId",
             "in": "path",
-            "description": "RecoveryPointID represents the backed up data to be fetched.",
+            "description": "Recovery Point Id",
             "required": true,
             "type": "string"
           }
@@ -501,7 +501,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/NewErrorResponse"
             }
@@ -563,7 +563,7 @@
           {
             "name": "recoveryPointId",
             "in": "path",
-            "description": "RecoveryPointID represents the backed up data to be fetched.",
+            "description": "Recovery Point Id",
             "required": true,
             "type": "string"
           },
@@ -585,7 +585,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/NewErrorResponse"
             }
@@ -625,14 +625,14 @@
           {
             "name": "fabricName",
             "in": "path",
-            "description": "Fabric name associated with backed up item.",
+            "description": "Fabric name associated with the backed up item.",
             "required": true,
             "type": "string"
           },
           {
             "name": "containerName",
             "in": "path",
-            "description": "Container name associated with backed up item.",
+            "description": "Container name associated with the backed up item.",
             "required": true,
             "type": "string"
           },
@@ -659,7 +659,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/NewErrorResponse"
             }
@@ -717,13 +717,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/ProtectedItemResourceList"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/NewErrorResponse"
             }
@@ -781,13 +781,13 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded.",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/BackupManagementUsageList"
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/NewErrorResponse"
             }
@@ -840,7 +840,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/NewErrorResponse"
             }
@@ -893,7 +893,7 @@
             }
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/NewErrorResponse"
             }
@@ -943,7 +943,7 @@
             "description": "Operation completed successfully."
           },
           "default": {
-            "description": "An unexpected error response.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/NewErrorResponse"
             }

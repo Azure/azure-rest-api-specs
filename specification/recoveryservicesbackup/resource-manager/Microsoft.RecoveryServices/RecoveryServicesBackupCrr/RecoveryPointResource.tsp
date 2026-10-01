@@ -39,6 +39,7 @@ interface RecoveryPointResources {
    * Provides the information of the backed up data identified using RecoveryPointID.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @errorsDoc("Error response describing why the operation failed.")
   @operationId("RecoveryPointsCrr_Get")
   get is ArmResourceRead<RecoveryPointResource, Error = NewErrorResponse>;
 
@@ -46,6 +47,7 @@ interface RecoveryPointResources {
    * Lists the backup copies for the backed up item.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @errorsDoc("Error response describing why the operation failed.")
   @operationId("RecoveryPointsCrr_List")
   @armResourceList(RecoveryPointResource)
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/")
@@ -62,12 +64,12 @@ interface RecoveryPointResources {
     ...SubscriptionIdParameter,
 
     /**
-     * Fabric name associated with backed up item.
+     * Fabric name associated with the backed up item.
      */
     @path fabricName: string,
 
     /**
-     * Container name associated with backed up item.
+     * Container name associated with the backed up item.
      */
     @path containerName: string,
 
@@ -90,6 +92,7 @@ interface RecoveryPointGetAccessToken {
    * Returns the Access token for communication between BMS and Protection service
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @errorsDoc("Error response describing why the operation failed.")
   @operationId("RecoveryPoints_GetAccessToken")
   @summary("Returns the Access token for communication between BMS and Protection service")
   @action("accessToken")
@@ -101,10 +104,7 @@ interface RecoveryPointGetAccessToken {
   >;
 }
 
-@@doc(
-  RecoveryPointResource.name,
-  "RecoveryPointID represents the backed up data to be fetched."
-);
+@@doc(RecoveryPointResource.name, "Recovery Point Id");
 @@doc(RecoveryPointResource.properties, "RecoveryPointResource properties");
 @@doc(
   RecoveryPointGetAccessToken.getAccessToken::parameters.body,

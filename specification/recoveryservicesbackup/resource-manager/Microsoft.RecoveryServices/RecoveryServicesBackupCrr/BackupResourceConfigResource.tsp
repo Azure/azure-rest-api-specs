@@ -10,6 +10,7 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.RecoveryServices;
+
 /**
  * The resource storage details.
  */
@@ -40,6 +41,7 @@ interface BackupResourceConfigResources {
    * Fetches resource storage config.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @errorsDoc("Error response describing why the operation failed.")
   @operationId("BackupResourceStorageConfigs_Get")
   get is ArmResourceRead<
     BackupResourceConfigResource,
@@ -51,6 +53,7 @@ interface BackupResourceConfigResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @errorsDoc("Error response describing why the operation failed.")
   @operationId("BackupResourceStorageConfigs_Update")
   update is ArmResourceCreateOrReplaceSync<
     BackupResourceConfigResource,
@@ -62,6 +65,7 @@ interface BackupResourceConfigResources {
    * Updates vault storage model type.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @errorsDoc("Error response describing why the operation failed.")
   @operationId("BackupResourceStorageConfigs_patch")
   @patch(#{ implicitOptionality: false })
   patch is ArmCustomPatchSync<
