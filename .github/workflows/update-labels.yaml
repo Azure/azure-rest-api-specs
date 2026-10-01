@@ -30,14 +30,14 @@ jobs:
     runs-on: ubuntu-slim
 
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           sparse-checkout: |
             .github
 
       - name: Update Labels
         id: update-labels
-        uses: actions/github-script@v9.0.0
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const { default: updateLabels } =
@@ -46,14 +46,14 @@ jobs:
 
       - if: ${{ always() && steps.update-labels.outputs.head_sha }}
         name: Upload artifact with head SHA
-        uses: ./.github/actions/add-empty-artifact
+        uses: $/.github/actions/add-empty-artifact
         with:
           name: head-sha
           value: ${{ steps.update-labels.outputs.head_sha }}
 
       - if: ${{ always() && steps.update-labels.outputs.issue_number }}
         name: Upload artifact with issue number
-        uses: ./.github/actions/add-empty-artifact
+        uses: $/.github/actions/add-empty-artifact
         with:
           name: issue-number
           value: ${{ steps.update-labels.outputs.issue_number }}

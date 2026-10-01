@@ -293,6 +293,9 @@ catalogs:
     '@typespec/http':
       specifier: 1.16.0
       version: 1.16.0
+    '@typespec/library-linter':
+      specifier: 0.86.0
+      version: 0.86.0
     '@typespec/openapi':
       specifier: 1.16.0
       version: 1.16.0
@@ -381,8 +384,8 @@ catalogs:
       specifier: ^1.1.1
       version: 1.1.1
     prettier:
-      specifier: 3.9.8
-      version: 3.9.8
+      specifier: 3.9.9
+      version: 3.9.9
     semver:
       specifier: ^7.7.1
       version: 7.8.5
@@ -472,6 +475,9 @@ importers:
       '@azure-tools/typespec-client-generator-core':
         specifier: 'catalog:'
         version: 0.72.2(a67670347f12c7f75fe322b80ebd19d1)
+      '@azure-tools/typespec-foundry-core':
+        specifier: workspace:*
+        version: link:libs/foundry-core
       '@azure-tools/typespec-liftr-base':
         specifier: 'catalog:'
         version: 0.13.0
@@ -552,7 +558,7 @@ importers:
         version: 7.0.2001
       prettier:
         specifier: 'catalog:'
-        version: 3.9.8
+        version: 3.9.9
       typescript:
         specifier: 'catalog:'
         version: 7.0.2
@@ -586,6 +592,9 @@ importers:
       marked:
         specifier: 'catalog:'
         version: 18.0.5
+      minimatch:
+        specifier: 'catalog:'
+        version: 10.2.6
       simple-git:
         specifier: 'catalog:'
         version: 3.36.0
@@ -1053,6 +1062,27 @@ importers:
       '@types/node':
         specifier: 'catalog:'
         version: 24.13.1
+
+  libs/foundry-core:
+    devDependencies:
+      '@azure-tools/specs-shared':
+        specifier: workspace:*
+        version: link:../../.github/shared
+      '@types/node':
+        specifier: 'catalog:'
+        version: 24.13.1
+      '@typespec/compiler':
+        specifier: 'catalog:'
+        version: 1.16.0(@types/node@24.13.1)
+      '@typespec/library-linter':
+        specifier: 'catalog:'
+        version: 0.86.0(@typespec/compiler@1.16.0(@types/node@24.13.1))
+      typescript:
+        specifier: 'catalog:'
+        version: 7.0.2
+      vitest:
+        specifier: 'catalog:'
+        version: 5.0.0(@types/node@24.13.1)(@vitest/coverage-v8@5.0.0)(vite@8.0.16(@types/node@24.13.1)(yaml@2.9.0))
 
 packages:
 
@@ -2505,6 +2535,12 @@ packages:
       '@typespec/streams':
         optional: true
 
+  '@typespec/library-linter@0.86.0':
+    resolution: {integrity: sha512-EQ+0S6/O9kqikTIGYdE4cEnBswzvtmT/ZHGHxwtJkzztyJxP+c8Qp0DeHxGW/9ZBkyZmhgUEcCXOIUeVTtYTQw==}
+    engines: {node: '>=22.0.0'}
+    peerDependencies:
+      '@typespec/compiler': ^1.16.0
+
   '@typespec/openapi3@1.16.0':
     resolution: {integrity: sha512-eRyTwn4w5hWSRm15ys20O2Jp1aHDPHp6TZsctOsG3nxo+N50Qg7Epgu44ATsxaELmnCEg9G0B7N9czZKb51dSQ==}
     engines: {node: '>=22.0.0'}
@@ -3799,8 +3835,8 @@ packages:
     engines: {node: '>=14'}
     hasBin: true
 
-  prettier@3.9.8:
-    resolution: {integrity: sha512-WRFq3Wn3WId7LLROfMLdH7xaFr2jR62wU8nLO6rQUOLOxNZUviyJQs1M0iIhLexSFy+L+w0ch66wtoO2jRjG0A==}
+  prettier@3.9.9:
+    resolution: {integrity: sha512-Z/CJHIkdujO/OtN7nXUii0Rf3VT5SRuhjBA82Xvu2XhBUgX3nhP67T0LHceBdQLex7OOFGTox+Q5Yg8Jk2Qivg==}
     engines: {node: '>=14'}
     hasBin: true
 
@@ -5895,7 +5931,7 @@ snapshots:
       is-unicode-supported: 2.1.0
       mustache: 4.2.0
       picocolors: 1.1.1
-      prettier: 3.9.8
+      prettier: 3.9.9
       semver: 7.8.5
       tar: 7.5.22
       temporal-polyfill: 1.0.4
@@ -5915,6 +5951,10 @@ snapshots:
       '@typespec/compiler': 1.16.0(@types/node@24.13.1)
     optionalDependencies:
       '@typespec/streams': 0.86.0(@typespec/compiler@1.16.0(@types/node@24.13.1))
+
+  '@typespec/library-linter@0.86.0(@typespec/compiler@1.16.0(@types/node@24.13.1))':
+    dependencies:
+      '@typespec/compiler': 1.16.0(@types/node@24.13.1)
 
   '@typespec/openapi3@1.16.0(6105008f9166ca0923da9c955039bb2c)':
     dependencies:
@@ -5940,7 +5980,7 @@ snapshots:
 
   '@typespec/prettier-plugin-typespec@1.16.0':
     dependencies:
-      prettier: 3.9.8
+      prettier: 3.9.9
 
   '@typespec/rest@0.86.0(@typespec/compiler@1.16.0(@types/node@24.13.1))(@typespec/http@1.16.0(@typespec/compiler@1.16.0(@types/node@24.13.1))(@typespec/streams@0.86.0(@typespec/compiler@1.16.0(@types/node@24.13.1))))':
     dependencies:
@@ -7225,7 +7265,7 @@ snapshots:
 
   prettier@3.5.3: {}
 
-  prettier@3.9.8: {}
+  prettier@3.9.9: {}
 
   pretty-ms@9.3.0:
     dependencies:
