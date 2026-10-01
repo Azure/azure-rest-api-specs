@@ -41,7 +41,7 @@ jobs:
           sparse-checkout: |
             .github
 
-      - uses: ./.github/actions/install-deps-github-script
+      - uses: $/.github/actions/install-deps-github-script
         if: ${{ env.user-allowed != 'true' }}
 
       - name: Detect changes to protected files

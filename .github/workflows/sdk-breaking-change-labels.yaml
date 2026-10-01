@@ -40,7 +40,7 @@ jobs:
           echo "ADO_TOKEN=$ADO_TOKEN" >> "$GITHUB_ENV"
 
       - name: Install dependencies for github-script actions
-        uses: ./.github/actions/install-deps-github-script
+        uses: $/.github/actions/install-deps-github-script
 
       - name: Get label and action
         id: get-label-and-action
@@ -55,7 +55,7 @@ jobs:
           (fromJson(steps.get-label-and-action.outputs.result).labelAction == 'add' ||
           fromJson(steps.get-label-and-action.outputs.result).labelAction == 'remove')
         name: Upload artifact with results
-        uses: ./.github/actions/add-label-artifact
+        uses: $/.github/actions/add-label-artifact
         with:
           name: "${{ fromJson(steps.get-label-and-action.outputs.result).labelName}}"
           # Convert "add/remove" to "true/false"
@@ -63,14 +63,14 @@ jobs:
 
       - if: ${{ always() && fromJson(steps.get-label-and-action.outputs.result).headSha }}
         name: Upload artifact with head SHA
-        uses: ./.github/actions/add-empty-artifact
+        uses: $/.github/actions/add-empty-artifact
         with:
           name: "head-sha"
           value: "${{ fromJson(steps.get-label-and-action.outputs.result).headSha }}"
 
       - if: ${{ always() && fromJson(steps.get-label-and-action.outputs.result).issueNumber > 0 }}
         name: Upload artifact with issue number
-        uses: ./.github/actions/add-empty-artifact
+        uses: $/.github/actions/add-empty-artifact
         with:
           name: "issue-number"
           value: "${{ fromJson(steps.get-label-and-action.outputs.result).issueNumber }}"

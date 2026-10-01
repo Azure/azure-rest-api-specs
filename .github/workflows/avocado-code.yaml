@@ -26,7 +26,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Node and install deps
-        uses: ./.github/actions/setup-node-install-deps
+        uses: $/.github/actions/setup-node-install-deps
 
       - name: Run Avocado
         id: run-avocado
@@ -69,7 +69,7 @@ jobs:
 
       - if: ${{ always() && (steps.run-avocado.outputs.output-file) }}
         name: Install dependencies for github-script actions
-        uses: ./.github/actions/install-deps-github-script
+        uses: $/.github/actions/install-deps-github-script
 
       - if: ${{ always() && (steps.run-avocado.outputs.output-file) }}
         name: Generate job summary

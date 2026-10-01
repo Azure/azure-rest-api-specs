@@ -72,6 +72,7 @@ jobs:
           ref: ${{ matrix.ref == 'next' && 'typespec-next' || '' }}
 
       - name: Setup Node and install deps
+        # Use the checked-out branch, which can be typespec-next rather than the workflow's commit.
         uses: ./.github/actions/setup-node-install-deps
 
       - name: Validate All Specs

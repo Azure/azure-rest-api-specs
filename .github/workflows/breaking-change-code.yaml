@@ -25,7 +25,7 @@ jobs:
           fetch-depth: 0
 
       - name: Setup Node and install deps
-        uses: ./.github/actions/setup-node-install-deps
+        uses: $/.github/actions/setup-node-install-deps
 
       - name: Setup .NET 6 SDK
         uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
@@ -50,7 +50,7 @@ jobs:
           always() && 
           (steps.swagger-breaking-change-analyze-code.outputs.breakingChangeReviewLabelName != '')
         name: Upload artifact with BreakingChangeReviewRequired status
-        uses: ./.github/actions/add-empty-artifact
+        uses: $/.github/actions/add-empty-artifact
         with:
           name: "${{ steps.swagger-breaking-change-analyze-code.outputs.breakingChangeReviewLabelName }}"
           value: "${{ steps.swagger-breaking-change-analyze-code.outputs.breakingChangeReviewLabelValue == 'true' }}"
@@ -60,7 +60,7 @@ jobs:
           always() && 
           (steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelName != '')
         name: Upload artifact with VersioningReviewRequired status
-        uses: ./.github/actions/add-empty-artifact
+        uses: $/.github/actions/add-empty-artifact
         with:
           name: "${{ steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelName }}"
           value: "${{ steps.swagger-breaking-change-analyze-code.outputs.versioningReviewLabelValue == 'true' }}"

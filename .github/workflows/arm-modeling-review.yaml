@@ -49,7 +49,7 @@ jobs:
             .github/arm-leases/
 
       - name: Install dependencies for github-script actions
-        uses: ./.github/actions/install-deps-github-script
+        uses: $/.github/actions/install-deps-github-script
 
       - name: ARM Modeling Review
         id: detect
@@ -64,21 +64,21 @@ jobs:
 
       - name: Upload artifact for ARMModelingReviewRequired label
         if: always() && steps.detect.outputs.result && fromJson(steps.detect.outputs.result).labelActions['ARMModelingReviewRequired'] != 'none'
-        uses: ./.github/actions/add-label-artifact
+        uses: $/.github/actions/add-label-artifact
         with:
           name: "ARMModelingReviewRequired"
           value: "${{ fromJson(steps.detect.outputs.result).labelActions['ARMModelingReviewRequired'] == 'add' }}"
 
       - name: Upload artifact for ARMModelingSignedOff label
         if: always() && steps.detect.outputs.result && fromJson(steps.detect.outputs.result).labelActions['ARMModelingSignedOff'] != 'none'
-        uses: ./.github/actions/add-label-artifact
+        uses: $/.github/actions/add-label-artifact
         with:
           name: "ARMModelingSignedOff"
           value: "${{ fromJson(steps.detect.outputs.result).labelActions['ARMModelingSignedOff'] == 'add' }}"
 
       - name: Upload artifact for ARMModelingAutoSignedOff label
         if: always() && steps.detect.outputs.result && fromJson(steps.detect.outputs.result).labelActions['ARMModelingAutoSignedOff'] != 'none'
-        uses: ./.github/actions/add-label-artifact
+        uses: $/.github/actions/add-label-artifact
         with:
           name: "ARMModelingAutoSignedOff"
           value: "${{ fromJson(steps.detect.outputs.result).labelActions['ARMModelingAutoSignedOff'] == 'add' }}"

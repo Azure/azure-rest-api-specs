@@ -92,21 +92,21 @@ jobs:
         # The action is explicit: 'add' | 'remove' | 'none'.
       - if: fromJson(steps.get-label-action.outputs.result).labelActions['ARMSignedOff'] != 'none'
         name: Upload artifact for ARMSignedOff label
-        uses: ./.github/actions/add-label-artifact
+        uses: $/.github/actions/add-label-artifact
         with:
           name: "ARMSignedOff"
           value: "${{ fromJson(steps.get-label-action.outputs.result).labelActions['ARMSignedOff'] == 'add' }}"
 
       - if: fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-IncrementalTSP'] != 'none'
         name: Upload artifact for ARMAutoSignedOff-IncrementalTSP label
-        uses: ./.github/actions/add-label-artifact
+        uses: $/.github/actions/add-label-artifact
         with:
           name: "ARMAutoSignedOff-IncrementalTSP"
           value: "${{ fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-IncrementalTSP'] == 'add' }}"
 
       - if: fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-Trivial'] != 'none'
         name: Upload artifact for ARMAutoSignedOff-Trivial label
-        uses: ./.github/actions/add-label-artifact
+        uses: $/.github/actions/add-label-artifact
         with:
           name: "ARMAutoSignedOff-Trivial"
           value: "${{ fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-Trivial'] == 'add' }}"
@@ -120,7 +120,7 @@ jobs:
           (github.event_name == 'issue_comment' || github.event_name == 'workflow_run') &&
           fromJson(steps.get-label-action.outputs.result).headSha
         name: Upload artifact with head SHA
-        uses: ./.github/actions/add-empty-artifact
+        uses: $/.github/actions/add-empty-artifact
         with:
           name: "head-sha"
           value: "${{ fromJson(steps.get-label-action.outputs.result).headSha }}"
@@ -134,7 +134,7 @@ jobs:
           (github.event_name == 'issue_comment' || github.event_name == 'workflow_run') &&
           fromJson(steps.get-label-action.outputs.result).issueNumber > 0
         name: Upload artifact with issue number
-        uses: ./.github/actions/add-empty-artifact
+        uses: $/.github/actions/add-empty-artifact
         with:
           name: "issue-number"
           value: "${{ fromJson(steps.get-label-action.outputs.result).issueNumber }}"
