@@ -85,7 +85,6 @@ model ReinforcementFineTuningDataGenerationJobInputs
   output_configuration?: ReinforcementFineTuningDataGenerationJobOutputConfiguration;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Dataset output configuration for an evaluation data generation job.")
 model EvaluationDataGenerationJobOutputConfiguration {
   @doc("Dataset name to assign to the output.")
@@ -101,7 +100,6 @@ model EvaluationDataGenerationJobOutputConfiguration {
   write_mode?: DataGenerationJobOutputWriteMode = DataGenerationJobOutputWriteMode.overwrite;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("File output configuration for a supervised fine-tuning data generation job. This is a preview feature.")
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model SupervisedFineTuningDataGenerationJobOutputConfiguration {
@@ -115,7 +113,6 @@ model SupervisedFineTuningDataGenerationJobOutputConfiguration {
   merge_file_id?: string;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("File output configuration for a reinforcement fine-tuning data generation job. This is a preview feature.")
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model ReinforcementFineTuningDataGenerationJobOutputConfiguration {
@@ -296,7 +293,6 @@ union DataGenerationJobScenario {
   evaluation: "evaluation",
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("Configuration for managing data generation jobs.")
 @discriminator("type")
 model DataGenerationJobConfiguration {
@@ -312,7 +308,6 @@ model DataGenerationJobConfiguration {
   model_options?: DataGenerationModelOptions;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The configuration for a data generation job with SimpleQnA type.")
 model SimpleQnADataGenerationJobConfiguration
   extends DataGenerationJobConfiguration {
@@ -326,7 +321,6 @@ model SimpleQnADataGenerationJobConfiguration
   question_types?: SimpleQnAFineTuningQuestionType[];
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The configuration for a data generation job with Traces type.")
 model TracesDataGenerationJobConfiguration
   extends DataGenerationJobConfiguration {
@@ -340,7 +334,6 @@ model TracesDataGenerationJobConfiguration
   redact_private_content?: boolean = true;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The configuration for a task generation data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.")
 model SimulationSeedDataGenerationJobConfiguration
   extends DataGenerationJobConfiguration {
@@ -348,7 +341,6 @@ model SimulationSeedDataGenerationJobConfiguration
   type: DataGenerationJobType.simulation_seed;
 }
 
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @doc("The configuration for a data generation job with ToolUse type. This is a preview feature used only for fine-tuning scenarios.")
 @extension("x-ms-foundry-meta", DataGenerationJobsRequiredPreviews)
 model ToolUseFineTuningDataGenerationJobConfiguration
