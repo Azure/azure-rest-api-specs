@@ -1534,11 +1534,11 @@ enum ProvisioningStateEnum {
 @@alternateType(
   ContextCache.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
-  "csharp,java,python,typescript,go"
+  "csharp,java,python,javascript,go"
 );
 
 @@alternateType(
   ContextCacheUpdate.identity,
   Azure.ResourceManager.CommonTypes.ManagedServiceIdentity,
-  "csharp,java,python,typescript,go"
+  "csharp,java,python,javascript,go"
 );
