@@ -8640,6 +8640,21 @@
     },
     "OfferPlanGroup": {
       "type": "object",
+      "description": "A single Marketplace offer and the plans it exposes to the caller. The entry carries the standard\nAzure Resource Manager proxy-resource identity so that each catalogue entry is addressable by name\nwithin the marketplaceOffers collection.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/OfferPlanGroupProperties",
+          "description": "The plans belonging to this Marketplace offer."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "OfferPlanGroupProperties": {
+      "type": "object",
       "description": "The plans belonging to a single Marketplace offer.",
       "properties": {
         "publisherId": {
