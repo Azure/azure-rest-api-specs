@@ -1,13 +1,41 @@
+// FIXME: Operations in this file are not detected as a resource operation, please confirm the conversion result manually
+
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.Maps;
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@removed(Versions.v2026_12_01)
+interface OperationResultOperationGroup {
+  /**
+   * Get the result of a long running azure asynchronous operation.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @tag("AsyncOperations")
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Maps/locations/{location}/operationResults/{operationId}")
+  @get
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...LocationResourceParameter,
+
+    /**
+     * The ID of an ongoing async operation.
+     */
+    @minLength(1)
+    @path
+    operationId: string,
+  ): OkResponse | (ArmAcceptedResponse & ArmLroLocationHeader) | ErrorResponse;
+}
 
 @armResourceOperations(#{ omitTags: true })
 interface OperationStatusOperationGroup {

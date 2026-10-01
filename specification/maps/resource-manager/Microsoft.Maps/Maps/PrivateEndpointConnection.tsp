@@ -1,10 +1,12 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./MapsAccount.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 
@@ -25,7 +27,22 @@ interface PrivateEndpointConnections {
   /**
    * Create or update the state of specified private endpoint connection associated with the Maps account.
    */
+  @removed(Versions.v2026_12_01)
+  @renamedFrom(Versions.v2026_12_01, "create")
+  @sharedRoute
   @Azure.Core.useFinalStateVia("location")
+  createV1 is PrivateEndpointOperations.CreateOrUpdateAsync<
+    MapsAccount,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = PrivateEndpointConnection> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+   * Create or update the state of specified private endpoint connection associated with the Maps account.
+   */
+  @added(Versions.v2026_12_01)
+  @sharedRoute
+  @Azure.Core.useFinalStateVia("original-uri")
   create is PrivateEndpointOperations.CreateOrUpdateAsync<
     MapsAccount,
     LroHeaders = ArmCombinedLroHeaders<FinalResult = PrivateEndpointConnection> &
@@ -58,5 +75,9 @@ interface PrivateEndpointConnections {
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
 @@doc(
   PrivateEndpointConnections.create::parameters.resource,
+  "The private endpoint connection properties."
+);
+@@doc(
+  PrivateEndpointConnections.createV1::parameters.resource,
   "The private endpoint connection properties."
 );

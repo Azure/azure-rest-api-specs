@@ -46,6 +46,10 @@ using Microsoft.Maps;
   PrivateEndpointConnections.create::parameters.resource,
   "properties"
 );
+@@clientName(
+  PrivateEndpointConnections.createV1::parameters.resource,
+  "properties"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserves the flattened private endpoint connection model used by existing SDKs."
 @@Legacy.flattenProperty(PrivateEndpointConnection.properties);
 
@@ -54,6 +58,8 @@ using Microsoft.Maps;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserves the flattened private link resource model used by existing SDKs."
 @@Legacy.flattenProperty(PrivateLinkResource.properties);
+
+@@clientLocation(OperationResultOperationGroup.get, "OperationResult");
 
 @@clientLocation(OperationStatusOperationGroup.get, "OperationStatus");
 
