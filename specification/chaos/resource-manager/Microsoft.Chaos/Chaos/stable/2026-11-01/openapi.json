@@ -3052,6 +3052,9 @@
           "Create a scenario from a built-in scenario template version.": {
             "$ref": "./examples/Scenarios_CreateOrUpdate_From_Template.json"
           },
+          "Create or update a scenario that continues past suppressed action failures.": {
+            "$ref": "./examples/Scenarios_CreateOrUpdate_With_Failure_Behavior.json"
+          },
           "Create or update a scenario.": {
             "$ref": "./examples/Scenarios_CreateOrUpdate.json"
           }
@@ -3796,6 +3799,9 @@
           }
         },
         "x-ms-examples": {
+          "Get a scenario run that completed with suppressed action failures.": {
+            "$ref": "./examples/ScenarioRuns_Get_Partially_Succeeded.json"
+          },
           "Get a scenario run.": {
             "$ref": "./examples/ScenarioRuns_Get.json"
           }
@@ -5386,6 +5392,30 @@
         }
       }
     },
+    "FailureBehavior": {
+      "type": "string",
+      "description": "Enum of how a scenario run reacts when an action fails.",
+      "enum": [
+        "Stop",
+        "Continue"
+      ],
+      "x-ms-enum": {
+        "name": "FailureBehavior",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Stop",
+            "value": "Stop",
+            "description": "The action failure stops the scenario run and drives it to the `Failed` terminal state.\nThis is the effective behavior when no `failureBehavior` is supplied."
+          },
+          {
+            "name": "Continue",
+            "value": "Continue",
+            "description": "The action failure is suppressed: it does not by itself end the scenario run, and the run\ncontinues with its remaining actions. Suppression affects the run's result only. It does not\nchange dependency scheduling, which stays under the control of each action's `runAfter` —\nan action that should still start after a failed dependency says so there.\n\nA run that completes normally and whose action failures were all suppressed terminates as\n`PartiallySucceeded`. Any failure that is not suppressed still drives the run to `Failed`,\nand cancellation keeps its existing result."
+          }
+        ]
+      }
+    },
     "FilterType": {
       "type": "string",
       "description": "Enum that discriminates between filter types. Currently only `Simple` type is supported.",
@@ -6204,6 +6234,10 @@
         "externalResource": {
           "$ref": "#/definitions/ExternalResource",
           "description": "External resource reference for the action."
+        },
+        "failureBehavior": {
+          "$ref": "#/definitions/FailureBehavior",
+          "description": "Per-action override for how the scenario run reacts when this action fails. When omitted,\nthe action inherits the scenario-level `failureBehavior`; when neither is supplied the\neffective behavior is `Stop`."
         }
       },
       "required": [
@@ -6439,6 +6473,10 @@
           "x-ms-identifiers": [
             "name"
           ]
+        },
+        "failureBehavior": {
+          "$ref": "#/definitions/FailureBehavior",
+          "description": "Scenario-wide default for how a scenario run reacts when one of its actions fails.\nAn action that does not supply its own `failureBehavior` inherits this value; when\nneither is supplied the effective behavior is `Stop`.\n\nNot used when `createdFrom` is supplied, for the same reason as `parameters` and\n`actions`: the referenced template version is then the authoritative source for the\nscenario's structure, and it supplies this policy too. A value sent in the request is\nignored in that case — on create the referenced template's policy is used, and on update\nthe policy of the already persisted template is preserved."
         },
         "recommendation": {
           "$ref": "#/definitions/Recommendation",
@@ -6761,7 +6799,7 @@
         },
         "failureSuppressed": {
           "type": "boolean",
-          "description": "Whether the action failure was suppressed so later actions could continue.",
+          "description": "Whether this action's failure was suppressed by the effective `failureBehavior`\nand therefore did not fail the scenario run. Present only for actions in the\n`Failed` state; absent otherwise.",
           "readOnly": true
         }
       },
@@ -6969,7 +7007,7 @@
         },
         "actions": {
           "type": "array",
-          "description": "The actions that define the template's orchestration. These are the same model a scenario\npublishes, and carry unresolved `%%\\{...\\}%%` macros; the macros are substituted when the\nscenario runs, not when it is read or created.\n\nThree macro namespaces may appear:\n\n- `%%\\{parameters.\\<name\\>\\}%%` — resolves from the parameter values supplied when the\nscenario is configured. The accepted names are declared by `parameters`.\n- `%%\\{resourceTargeting.include.\\<dimension\\>\\}%%` — resolves from the resource targeting\nof the scenario's configuration (for example `zones`, `locations`). The template does not\ndeclare these; they are dimensions of the configuration supplied at run time.\n- `%%\\{filters.\\<dimension\\>\\}%%` — deprecated spelling of `resourceTargeting.include.`,\nretained only so that superseded template versions keep resolving. Do not depend on it;\nthe newest version of every template uses `resourceTargeting.include.`.",
+          "description": "The actions that define the template's orchestration. These are the same model a scenario\npublishes, and carry unresolved `%%\\{...\\}%%` macros; the macros are substituted when the\nscenario runs, not when it is read or created.\n\nThree macro namespaces may appear:\n\n- `%%\\{parameters.\\<name\\>\\}%%` — resolves from the parameter values supplied when the\nscenario is configured. The accepted names are declared by `parameters`.\n- `%%\\{resourceTargeting.include.\\<dimension\\>\\}%%` — resolves from the resource targeting\nof the scenario's configuration (for example `zones`, `locations`). The template does not\ndeclare these; they are dimensions of the configuration supplied at run time.\n- `%%\\{filters.\\<dimension\\>\\}%%` — deprecated spelling of `resourceTargeting.include.`,\nretained only so that superseded template versions keep resolving. Do not depend on it;\nthe newest version of every template uses `resourceTargeting.include.`.\n\nA template expresses its failure policy only through the per-action `failureBehavior`\noverride carried by these actions. This version publishes no template-wide default, so a\nscenario created from a template starts from the `Stop` default and applies each action's\noverride on top of it.",
           "minItems": 1,
           "items": {
             "$ref": "#/definitions/ScenarioAction"
@@ -7051,7 +7089,7 @@
         },
         "actions": {
           "type": "array",
-          "description": "The actions that define the template's orchestration. These are the same model a scenario\npublishes, and carry unresolved `%%\\{...\\}%%` macros; the macros are substituted when the\nscenario runs, not when it is read or created.\n\nThree macro namespaces may appear:\n\n- `%%\\{parameters.\\<name\\>\\}%%` — resolves from the parameter values supplied when the\nscenario is configured. The accepted names are declared by `parameters`.\n- `%%\\{resourceTargeting.include.\\<dimension\\>\\}%%` — resolves from the resource targeting\nof the scenario's configuration (for example `zones`, `locations`). The template does not\ndeclare these; they are dimensions of the configuration supplied at run time.\n- `%%\\{filters.\\<dimension\\>\\}%%` — deprecated spelling of `resourceTargeting.include.`,\nretained only so that superseded template versions keep resolving. Do not depend on it;\nthe newest version of every template uses `resourceTargeting.include.`.",
+          "description": "The actions that define the template's orchestration. These are the same model a scenario\npublishes, and carry unresolved `%%\\{...\\}%%` macros; the macros are substituted when the\nscenario runs, not when it is read or created.\n\nThree macro namespaces may appear:\n\n- `%%\\{parameters.\\<name\\>\\}%%` — resolves from the parameter values supplied when the\nscenario is configured. The accepted names are declared by `parameters`.\n- `%%\\{resourceTargeting.include.\\<dimension\\>\\}%%` — resolves from the resource targeting\nof the scenario's configuration (for example `zones`, `locations`). The template does not\ndeclare these; they are dimensions of the configuration supplied at run time.\n- `%%\\{filters.\\<dimension\\>\\}%%` — deprecated spelling of `resourceTargeting.include.`,\nretained only so that superseded template versions keep resolving. Do not depend on it;\nthe newest version of every template uses `resourceTargeting.include.`.\n\nA template expresses its failure policy only through the per-action `failureBehavior`\noverride carried by these actions. This version publishes no template-wide default, so a\nscenario created from a template starts from the `Stop` default and applies each action's\noverride on top of it.",
           "minItems": 1,
           "items": {
             "$ref": "#/definitions/ScenarioAction"

@@ -304,7 +304,9 @@ model ScenarioRunSummaryAction {
   error?: ActionError;
 
   /**
-   * Whether the action failure was suppressed so later actions could continue.
+   * Whether this action's failure was suppressed by the effective `failureBehavior`
+   * and therefore did not fail the scenario run. Present only for actions in the
+   * `Failed` state; absent otherwise.
    */
   @added(Microsoft.Chaos.Versions.v2026_11_01)
   @visibility(Lifecycle.Read)
