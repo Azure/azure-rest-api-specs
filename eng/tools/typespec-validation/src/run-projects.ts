@@ -2,7 +2,7 @@ import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 import { getSuppressions } from "@azure-tools/suppressions";
 import { spawn } from "node:child_process";
-import { stat } from "node:fs/promises";
+import { appendFile, stat } from "node:fs/promises";
 import { relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import pc from "picocolors";
@@ -14,6 +14,7 @@ interface RunOptions {
   gitClean?: boolean;
   dryRun?: boolean;
   verbose?: boolean;
+  summaryFile?: string;
 }
 
 interface RunContext {
@@ -194,13 +195,35 @@ async function runProjects(
         getFailureInstructions(failed),
     );
   }
+  if (options.summaryFile) {
+    await writeGithubSummary(options.summaryFile, counts, failed);
+  }
   return failed.length === 0;
+}
+
+async function writeGithubSummary(
+  summaryFile: string,
+  counts: RuleCounts,
+  failed: string[],
+): Promise<void> {
+  const completed = counts.PASS + counts.FAIL + counts.SUPPRESSED;
+  const lines =
+    failed.length > 0
+      ? [
+          `❌ **${failed.length} of ${completed} projects failed.**`,
+          "",
+          "### Failed projects",
+          "",
+          ...failed.map((project) => `- \`${project}\``),
+        ]
+      : [`✅ **No projects failed (${counts.PASS} passed, ${counts.SUPPRESSED} suppressed).**`];
+  await appendFile(summaryFile, ["## TypeSpec Validation", "", ...lines, ""].join("\n"));
 }
 
 /**
  * Print a project's result as a GitHub Actions group (or a plain heading locally), titled with its
- * status. Segments are replayed to their original stream in capture order so interleaved stdout/stderr
- * writes (e.g. a warning followed by a summary line) keep their real relative order.
+ * status. GitHub group markers and captured output use stdout so independently flushed stderr cannot
+ * appear after the end marker. Local runs preserve each segment's original stream.
  */
 function printProjectGroup(
   githubActions: boolean,
@@ -228,7 +251,7 @@ function printProjectGroup(
   if (last) last.text = last.text.replace(/\n+$/, "");
   for (const segment of merged) {
     if (!segment.text) continue;
-    (segment.stream === "stdout" ? console.log : console.error)(segment.text);
+    (githubActions || segment.stream === "stdout" ? console.log : console.error)(segment.text);
   }
   if (githubActions) console.log("::endgroup::");
 }

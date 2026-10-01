@@ -31,6 +31,20 @@ function exitingChild(
   return child;
 }
 
+function segmentedChild(segments: { stream: "stdout" | "stderr"; text: string }[]) {
+  const child = new ChildProcess();
+  const stdout = new PassThrough();
+  const stderr = new PassThrough();
+  Object.assign(child, { stdout, stderr });
+  queueMicrotask(() => {
+    for (const segment of segments) {
+      (segment.stream === "stdout" ? stdout : stderr).write(segment.text);
+    }
+    child.emit("close", 0, null);
+  });
+  return child;
+}
+
 let root: string;
 
 async function addProject(name: string, config = "tspconfig.yaml") {
@@ -184,6 +198,90 @@ it("groups each project in GitHub Actions, including failures and suppressions",
      > pnpm tsv specification/a
     For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation
   `);
+});
+
+it("keeps stderr warnings inside GitHub groups by writing grouped output to stdout", async () => {
+  vi.stubEnv("GITHUB_ACTIONS", "true");
+  vi.stubEnv("NO_COLOR", "1");
+  await addProject("specification/a");
+  await simpleGit(root).init();
+  vi.mocked(spawn).mockImplementationOnce(() =>
+    segmentedChild([
+      { stream: "stdout", text: "before warning\n" },
+      { stream: "stderr", text: "warning tsv/compile-output: additional output\n" },
+      { stream: "stdout", text: "after warning\n" },
+    ]),
+  );
+
+  await expect(runAll(join(root, "specification"))).resolves.toBe(true);
+  const output = vi.mocked(console.log).mock.calls.map((call) => String(call[0]));
+  const groupStart = output.indexOf("::group::pass specification/a");
+  expect(output.slice(groupStart, groupStart + 5)).toEqual([
+    "::group::pass specification/a",
+    "before warning\n",
+    "warning tsv/compile-output: additional output\n",
+    "after warning",
+    "::endgroup::",
+  ]);
+  expect(console.error).not.toHaveBeenCalled();
+});
+
+it("preserves captured stderr for local runs", async () => {
+  await addProject("a");
+  vi.mocked(spawn).mockImplementationOnce(() =>
+    segmentedChild([{ stream: "stderr", text: "local warning\n" }]),
+  );
+
+  await expect(runAll(root)).resolves.toBe(true);
+  expect(console.error).toHaveBeenCalledWith("local warning");
+});
+
+it("appends all failed projects to the GitHub job summary", async () => {
+  await addProject("specification/a");
+  await addProject("specification/b");
+  await addProject("specification/c");
+  await simpleGit(root).init();
+  vi.mocked(spawn)
+    .mockImplementationOnce(() => exitingChild(1))
+    .mockImplementationOnce(() => exitingChild())
+    .mockImplementationOnce(() => exitingChild(1));
+  const summaryFile = join(root, "summary.md");
+  await writeFile(summaryFile, "Existing summary\n");
+
+  await expect(runAll(join(root, "specification"), { summaryFile })).resolves.toBe(false);
+  expect(await readFile(summaryFile, "utf8")).toBe(
+    d`
+      Existing summary
+      ## TypeSpec Validation
+
+      ❌ **2 of 3 projects failed.**
+
+      ### Failed projects
+
+      - \`specification/a\`
+      - \`specification/c\`
+    ` + "\n",
+  );
+});
+
+it("reports successful and suppressed project counts in the GitHub job summary", async () => {
+  await addProject("specification/a");
+  await addProject("specification/b");
+  await simpleGit(root).init();
+  await writeFile(
+    join(root, "suppressions.yaml"),
+    "- tool: TypeSpecValidationAll\n  paths: [specification/b]\n  reason: skipped\n",
+  );
+  const summaryFile = join(root, "summary.md");
+
+  await expect(runAll(join(root, "specification"), { summaryFile })).resolves.toBe(true);
+  expect(await readFile(summaryFile, "utf8")).toBe(
+    d`
+      ## TypeSpec Validation
+
+      ✅ **No projects failed (1 passed, 1 suppressed).**
+    ` + "\n",
+  );
 });
 
 it("escapes percent signs and newlines in GitHub error annotations", async () => {
@@ -430,9 +528,10 @@ it("stops when a child is terminated by a signal, surfacing any output captured 
     .find((line) => line.startsWith("::group::"));
   expect(groupTitle).toMatch(/^::group::fail .*[/\\]a$/);
   expect(console.log).toHaveBeenCalledWith("partial diagnostic");
-  expect(console.error).toHaveBeenCalledWith(
+  expect(console.log).toHaveBeenCalledWith(
     `TypeSpec Validation for ${project} terminated by SIGTERM`,
   );
+  expect(console.error).not.toHaveBeenCalled();
   expect(console.log).toHaveBeenLastCalledWith("::endgroup::");
 });
 
