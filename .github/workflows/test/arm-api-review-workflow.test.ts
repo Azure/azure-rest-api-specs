@@ -3,6 +3,7 @@ import { load } from "js-yaml";
 import { join } from "node:path";
 import { beforeAll, describe, expect, it, vi } from "vitest";
 import { runInNewContext } from "node:vm";
+import { fullGitSha } from "../../shared/test/examples.ts";
 
 // cspell:ignore REPOST vally
 
@@ -209,7 +210,7 @@ describe("ARM API review workflow", () => {
   describe("target PR resolver", () => {
     it("resolves a workflow-dispatch target and publishes the canonical PR number", async () => {
       const harness = createResolverHarness(resolverScript, { value: "44499" });
-      harness.get.mockResolvedValue({ data: { number: 44499 } });
+      harness.get.mockResolvedValue({ data: { number: 44499, head: { sha: fullGitSha } } });
 
       await harness.run();
 
@@ -220,6 +221,7 @@ describe("ARM API review workflow", () => {
         pull_number: 44499,
       });
       expect(harness.setOutput).toHaveBeenCalledWith("target_pr_number", "44499");
+      expect(harness.setOutput).toHaveBeenCalledWith("target_head_sha", fullGitSha);
     });
 
     it("accepts an issue-shaped pull request comment payload", async () => {
@@ -228,7 +230,7 @@ describe("ARM API review workflow", () => {
         eventName: "issue_comment",
         payload: { issue: { pull_request: { url: "https://api.github.com/pulls/44499" } } },
       });
-      harness.get.mockResolvedValue({ data: { number: 44499 } });
+      harness.get.mockResolvedValue({ data: { number: 44499, head: { sha: fullGitSha } } });
 
       await harness.run();
 
@@ -444,15 +446,21 @@ describe("ARM API review workflow", () => {
 
   it("keeps the agent read-only and preserves the human queue after a clean review", async () => {
     const [source, compiled] = await readWorkflowFiles();
+    const collapsed = collapseWhitespace(source);
 
-    expect(source).toContain("permissions:\n    pull-requests: read\n  steps:");
     expect(source).toContain(
-      "**At least one Blocking `POST-NEW` or Blocking `RESOLVE-AND-REPOST` queued",
+      "permissions:\n    pull-requests: read\n    statuses: write\n  steps:",
     );
-    expect(source).toContain("_and_ the Critic returned a verdict**");
-    expect(source).toContain("**No Blocking finding queued for publication**");
+    expect(source).toContain("**The review is scoped, incomplete, or degraded**");
     expect(source).toContain(
-      "clean, covered,\n  clarification-only, Critic-dropped, or overflow-only",
+      "**The review is full and complete, and at least one verified, currently",
+    );
+    expect(collapsed).toContain("including `SKIP-COVERED`, `POST-NEW`, and `RESOLVE-AND-REPOST`");
+    expect(source).toContain(
+      "**No verified, currently applicable Blocking finding remains, and the review",
+    );
+    expect(collapsed).toContain(
+      "remove `ARMChangesRequested` if present; leave `WaitForARMFeedback`",
     );
     expect(source).not.toContain("**Blocking findings found**");
 
@@ -478,6 +486,7 @@ describe("ARM API review workflow", () => {
     expect(agentJob).not.toContain("issues: write");
     expect(agentJob).not.toContain("pull-requests: write");
     expect(preActivationJob).toContain("pull-requests: read");
+    expect(preActivationJob).toContain("statuses: write");
     expect(preActivationJob).not.toContain("issues: write");
     expect(safeOutputsJob).toContain("issues: write");
     expect(safeOutputsJob).toContain("pull-requests: write");
@@ -533,18 +542,32 @@ describe("ARM API review posting reliability", () => {
   it("leaves no metadata-driven exception to the ARMChangesRequested label rule", async () => {
     const source = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
 
-    expect(source).toContain("These three rules are **exhaustive**.");
+    expect(source).toContain("These rules are **exhaustive**.");
     expect(source).toContain(
       "draft status, a `[Test]` or `[Do-Not-Merge]` title, a revert, a bot-authored PR, or the author's stated intent not to merge are **not** grounds to skip a label change",
     );
-    // The decision now has exactly two inputs, not one: a Blocking finding must
-    // be queued AND the Critic must have verified it. PR metadata still may not
-    // influence the outcome.
     expect(source).toContain(
-      "There are exactly **two** inputs to this decision: whether a Blocking finding was queued for publication, and whether the Critic verified it.",
+      "The decision uses only the verified, currently applicable Blocking findings after reconciliation, review scope, and review completeness.",
     );
-    expect(source).toContain(
-      "Nothing else, and in particular nothing read from PR metadata, may change the outcome.",
+    expect(source).toContain("Nothing read from unrelated PR metadata may change the outcome.");
+  });
+
+  it("records one head-bound semantic review result for completion-time finalization", async () => {
+    const [source, compiled] = await readWorkflowFiles();
+    const collapsed = collapseWhitespace(source);
+
+    expect(source).toContain("name: Set ARM semantic review pending");
+    expect(source).toContain('context: "ARM Semantic Review"');
+    expect(source).toContain("record-arm-semantic-review:");
+    expect(source).toContain("### Step 9: Record Semantic Result");
+    expect(collapsed).toContain(
+      "Call `record_arm_semantic_review` exactly once after queuing the summary",
+    );
+    expect(compiled).toContain("record_arm_semantic_review");
+    expect(compiled).toContain("ARM Semantic Review");
+    expect(compiled).toContain("Upload ARM semantic review receipt");
+    expect(collapsed).toContain(
+      "Universal Auto-Signoff publishes the final `ARM Semantic Review` status only after the entire reviewer workflow completes.",
     );
   });
 
@@ -749,11 +772,10 @@ describe("ARM API review consistency and hardening", () => {
   it("gives the label rules a single unambiguous outcome per case", async () => {
     const source = collapseWhitespace(await readFile(join(ROOT, SOURCE_FILE), "utf8"));
 
-    // Rule 1 and the Critic-unavailable rule both matched the case
-    // (Blocking queued AND Critic unavailable) with opposite outcomes and no
-    // stated precedence. Rule 1 now carries the Critic condition itself.
+    // Unverified findings from a Critic-unavailable run do not satisfy the
+    // full-and-complete rule, so the explicit Critic-unavailable rule remains authoritative.
     expect(source).toContain(
-      "**At least one Blocking `POST-NEW` or Blocking `RESOLVE-AND-REPOST` queued _and_ the Critic returned a verdict**",
+      "**The review is full and complete, and at least one verified, currently applicable Blocking finding remains**",
     );
   });
 
