@@ -35161,20 +35161,20 @@
           "low": {
             "type": "number",
             "format": "double",
-            "description": "Lower bound."
+            "description": "Lower estimate based on model calls required for every run."
           },
           "typical": {
             "type": "number",
             "format": "double",
-            "description": "Central estimate."
+            "description": "Expected estimate based on model calls consumed by a typical run."
           },
           "ceiling": {
             "type": "number",
             "format": "double",
-            "description": "Upper bound."
+            "description": "Upper bound calculated from the maximum number of model calls."
           }
         },
-        "description": "A low/typical/ceiling range for an estimated quantity. Expected values may be fractional, including estimated model-call counts."
+        "description": "A low/typical/ceiling range for an estimated quantity. Cost values apply average per-call usage assumptions to each call-count scenario. Expected values may be fractional, including estimated model-call counts."
       },
       "AgentOptimizationEstimateInputs": {
         "type": "object",
