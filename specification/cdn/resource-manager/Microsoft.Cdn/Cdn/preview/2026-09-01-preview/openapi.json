@@ -7640,6 +7640,9 @@
           },
           "Rules_Create_AfdUrlSigningAction": {
             "$ref": "./examples/Rules_Create_AfdUrlSigningAction.json"
+          },
+          "Rules_Create_EdgeAction": {
+            "$ref": "./examples/Rules_Create_EdgeAction.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -13661,7 +13664,8 @@
       "description": "Defines at which point in the request processing pipeline the edge action will be invoked.",
       "enum": [
         "ClientRequest",
-        "OriginRequest"
+        "OriginRequest",
+        "ClientResponse"
       ],
       "x-ms-enum": {
         "name": "InvocationPoint",
@@ -13674,6 +13678,11 @@
           {
             "name": "OriginRequest",
             "value": "OriginRequest"
+          },
+          {
+            "name": "ClientResponse",
+            "value": "ClientResponse",
+            "description": "The edge action is invoked on the response before it is returned to the client."
           }
         ]
       }
