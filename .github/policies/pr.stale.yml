@@ -8,6 +8,22 @@ where:
 configuration:
   resourceManagementConfiguration:
     scheduledSearches:
+      - description: Close PRs with no activity for 365 days without requiring a stale label
+        frequencies:
+          - daily:
+              time: 14:00
+        filters:
+          - isPullRequest
+          - isOpen
+          - noActivitySince:
+              days: 1461
+        actions:
+          - closeIssue
+          - addReply:
+              reply: >-
+                Hi @${issueAuthor}.
+                This PR has been closed since it had no activity for more than 1 year. If you still need this change, please reopen the PR and @mention the assignee for review.
+
       - description: Mark PRs with no activity for 14 days as stale
         frequencies:
           - daily:
@@ -28,7 +44,27 @@ configuration:
                 Your PR has had no activity for 14 days and is marked as stale. If no further updates are made within 14 days, this PR will automatically be closed.
                 To keep this PR active, please leave a comment as the PR author or remove the `no-recent-activity` label.
 
-      - description: Close PRs that have been stale for 5 more days (19 days total)
+      - description: Close stale PRs older than 3 months after 5 days of inactivity
+        frequencies:
+          - daily:
+              time: 13:00
+        filters:
+          - isPullRequest
+          - isOpen
+          - hasLabel:
+              label: no-recent-activity
+          - created:
+              before: 90
+          - noActivitySince:
+              days: 5
+        actions:
+          - closeIssue
+          - addReply:
+              reply: >-
+                Hi @${issueAuthor}.
+                This PR has been closed as part of a backlog cleanup. If you still need this change, please reopen the PR and @mention the assignee for review.
+
+      - description: Close PRs that have been stale for 14 more days (28 days total)
         frequencies:
           - daily:
               time: 13:00
@@ -38,7 +74,7 @@ configuration:
           - hasLabel:
               label: no-recent-activity
           - noActivitySince:
-              days: 5
+              days: 14
         actions:
           - closeIssue
           - addReply:
