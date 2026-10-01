@@ -28,7 +28,7 @@ These are the global settings for the AzureResilienceManagement.
 title: AzureResilienceManagementClient
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2026-10-31-preview
+tag: package-2026-10-01
 ```
 
 ### Tag: package-2026-10-31-preview
