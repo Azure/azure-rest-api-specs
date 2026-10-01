@@ -36,7 +36,7 @@ jobs:
       issues: read
       pull-requests: read
       statuses: write
-    uses: ./.github/workflows/_reusable-set-check-status.yaml
+    uses: $/.github/workflows/_reusable-set-check-status.yaml
     with:
       monitored_workflow_name: "TypeSpec Suppressions - Analyze Code"
       required_check_name: "TypeSpec Suppressions"
@@ -64,7 +64,7 @@ jobs:
             .github/
 
       - name: Install dependencies for github-script actions
-        uses: ./.github/actions/install-deps-github-script
+        uses: $/.github/actions/install-deps-github-script
 
       - name: Post TypeSpec suppressions review comment
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0

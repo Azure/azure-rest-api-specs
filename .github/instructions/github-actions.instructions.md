@@ -233,6 +233,7 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
 - **Permissions**: Define minimal `permissions` in workflow files
 - **Token usage**: Use `GITHUB_TOKEN` with least privilege
 - **Action references**: Pin external actions to a full commit SHA and retain a version comment for dependency updates.
+- **Repository references**: Use `$/...` for actions and reusable workflows at the running commit. Retain `./...` only when an action intentionally comes from a different checkout.
 
 ### Code Quality
 

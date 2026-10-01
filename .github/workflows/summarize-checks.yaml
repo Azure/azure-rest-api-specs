@@ -59,7 +59,7 @@ jobs:
             .github
 
       - name: Install dependencies for github-script actions
-        uses: ./.github/actions/install-deps-github-script
+        uses: $/.github/actions/install-deps-github-script
 
       - id: dump-trigger-metadata
         name: Dump Trigger Metadata
@@ -94,14 +94,14 @@ jobs:
       # so consumers react to this run and resolve the PR from these artifacts.
       - if: ${{ always() && steps.summarize-checks.outputs.issue_number }}
         name: Upload artifact with issue number
-        uses: ./.github/actions/add-empty-artifact
+        uses: $/.github/actions/add-empty-artifact
         with:
           name: issue-number
           value: ${{ steps.summarize-checks.outputs.issue_number }}
 
       - if: ${{ always() && steps.summarize-checks.outputs.head_sha }}
         name: Upload artifact with head SHA
-        uses: ./.github/actions/add-empty-artifact
+        uses: $/.github/actions/add-empty-artifact
         with:
           name: head-sha
           value: ${{ steps.summarize-checks.outputs.head_sha }}

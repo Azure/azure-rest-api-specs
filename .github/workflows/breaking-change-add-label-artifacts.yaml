@@ -50,7 +50,7 @@ jobs:
           always() && 
           (steps.get-label-actions.outputs.breakingChangeReviewLabelName != '')
         name: Upload artifact with BreakingChangeReviewRequiredLabel label
-        uses: ./.github/actions/add-label-artifact
+        uses: $/.github/actions/add-label-artifact
         with:
           name: "${{ steps.get-label-actions.outputs.breakingChangeReviewLabelName }}"
           value: "${{ steps.get-label-actions.outputs.breakingChangeReviewLabelValue == 'true' }}"
@@ -60,21 +60,21 @@ jobs:
           always() && 
           (steps.get-label-actions.outputs.versioningReviewLabelName != '')
         name: Upload artifact with VersioningReviewRequiredLabel label
-        uses: ./.github/actions/add-label-artifact
+        uses: $/.github/actions/add-label-artifact
         with:
           name: "${{ steps.get-label-actions.outputs.versioningReviewLabelName }}"
           value: "${{ steps.get-label-actions.outputs.versioningReviewLabelValue == 'true' }}"
 
       - if: ${{ always() && steps.get-label-actions.outputs.head_sha }}
         name: Upload artifact with head SHA
-        uses: ./.github/actions/add-empty-artifact
+        uses: $/.github/actions/add-empty-artifact
         with:
           name: head-sha
           value: ${{ steps.get-label-actions.outputs.head_sha }}
 
       - if: ${{ always() && steps.get-label-actions.outputs.issue_number > 0 }}
         name: Upload artifact with issue number
-        uses: ./.github/actions/add-empty-artifact
+        uses: $/.github/actions/add-empty-artifact
         with:
           name: issue-number
           value: ${{ steps.get-label-actions.outputs.issue_number }}

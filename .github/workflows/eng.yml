@@ -59,7 +59,7 @@ jobs:
             /.github/shared/
             /.github/workflows/src/validate-workspace.ts
 
-      - uses: ./.github/actions/setup-node-install-deps
+      - uses: $/.github/actions/setup-node-install-deps
         with:
           install-command: "pnpm install --frozen-lockfile --prod --prefer-offline --filter=azure-rest-api-specs-github..."
           cache-name: workspace-validation
@@ -78,7 +78,7 @@ jobs:
             .github
             eng
 
-      - uses: ./.github/actions/setup-node-install-deps
+      - uses: $/.github/actions/setup-node-install-deps
 
       - run: pnpm run build
 
@@ -106,6 +106,6 @@ jobs:
             .github
             eng
 
-      - uses: ./.github/actions/setup-node-install-deps
+      - uses: $/.github/actions/setup-node-install-deps
 
       - run: pnpm run test:ci

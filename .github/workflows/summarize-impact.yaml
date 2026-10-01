@@ -44,6 +44,7 @@ jobs:
           path: before
 
       - name: Setup Node and install deps
+        # Use the PR head checkout, not the workflow's PR merge commit.
         uses: ./after/.github/actions/setup-node-install-deps
         with:
           # The repository is checked out into "after/", so that is the workspace
