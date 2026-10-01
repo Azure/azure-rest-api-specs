@@ -6115,22 +6115,6 @@
           },
           "readOnly": true
         },
-        "activePhysicalZones": {
-          "type": "array",
-          "description": "Active Resource location and physical zones of Azure Resource.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "recoveryPhysicalZones": {
-          "type": "array",
-          "description": "Recovery Resource location and physical zones of HA Azure Resource.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
         "inclusionState": {
           "$ref": "#/definitions/DrillResourceInclusionState",
           "description": "Inclusion State of the Drill resource in Drill"
@@ -6170,11 +6154,6 @@
           "description": "ForceInclusion status for this resource. Has the customer forceIncluded it?",
           "readOnly": true
         },
-        "haStatus": {
-          "$ref": "#/definitions/HAStatus",
-          "description": "HA status of the Drill resource",
-          "readOnly": true
-        },
         "attentionReason": {
           "$ref": "#/definitions/DrillResourceAttentionReason",
           "description": "Attention reason if the Status is 'NeedsAttention'.",
@@ -6184,19 +6163,6 @@
           "type": "string",
           "description": "Recommendation Type Id for the recommendation.",
           "readOnly": true
-        },
-        "advisorHaRecommendationId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Associated Advisor Recommendation link, if HA is not enabled on this resource.",
-          "readOnly": true,
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Advisor/recommendations"
-              }
-            ]
-          }
         },
         "rbacAssignmentError": {
           "$ref": "#/definitions/ErrorDetails",
@@ -6212,11 +6178,18 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state",
           "readOnly": true
+        },
+        "drillType": {
+          "$ref": "#/definitions/DrillType",
+          "description": "The discriminator for the Drill Resource object hierarchy. Matches the parent Drill type.",
+          "readOnly": true
         }
       },
+      "discriminator": "drillType",
       "required": [
         "resourceId",
-        "resourceType"
+        "resourceType",
+        "drillType"
       ]
     },
     "DrillResourceQualification": {
@@ -9798,6 +9771,16 @@
       ],
       "x-ms-discriminator-value": "Regional"
     },
+    "RegionalDrillResourceProperties": {
+      "type": "object",
+      "description": "Properties of a resource in a regional Resiliency Drill.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DrillResourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Regional"
+    },
     "RelativeResourceCompositionState": {
       "type": "string",
       "description": "Enum for AttentionReason - Resource state sync between two objects.",
@@ -10517,7 +10500,7 @@
           {
             "name": "AzureSiteRecoveryVMsPresent",
             "value": "AzureSiteRecoveryVMsPresent",
-            "description": "Indicates that alteast one Azure Site Recovery VMs are present."
+            "description": "Indicates that at least one Azure Site Recovery VM is present."
           }
         ]
       }
@@ -11291,7 +11274,7 @@
           {
             "name": "Present",
             "value": "Present",
-            "description": "Atleast one VM Present."
+            "description": "At least one VM is present."
           },
           {
             "name": "Absent",
@@ -11408,6 +11391,52 @@
       "allOf": [
         {
           "$ref": "#/definitions/DrillProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Zonal"
+    },
+    "ZonalDrillResourceProperties": {
+      "type": "object",
+      "description": "Properties of a resource in a zonal Resiliency Drill.",
+      "properties": {
+        "activePhysicalZones": {
+          "type": "array",
+          "description": "Active Resource location and physical zones of Azure Resource.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "recoveryPhysicalZones": {
+          "type": "array",
+          "description": "Recovery Resource location and physical zones of HA Azure Resource.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "haStatus": {
+          "$ref": "#/definitions/HAStatus",
+          "description": "HA status of the Drill resource",
+          "readOnly": true
+        },
+        "advisorHaRecommendationId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Associated Advisor Recommendation link, if HA is not enabled on this resource.",
+          "readOnly": true,
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Advisor/recommendations"
+              }
+            ]
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DrillResourceProperties"
         }
       ],
       "x-ms-discriminator-value": "Zonal"
