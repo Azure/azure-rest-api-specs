@@ -184,6 +184,12 @@ union VolumeCreateOption {
   Disk: "Disk",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DiskRestorePoint: "DiskRestorePoint",
+
+  /**
+   * The volume is created as a clone of another volume in the same volume group.
+   */
+  @added(Versions.v2026_10_01_preview)
+  Volume: "Volume",
 }
 
 /**
@@ -829,6 +835,92 @@ model VolumeGroupUpdateProperties {
 }
 
 /**
+ * The replica type of a volume clone. A Thin clone shares data blocks with its
+ * source volume until it is promoted, while a Full clone is an independent copy
+ * of the source volume.
+ */
+@added(Versions.v2026_10_01_preview)
+union ReplicaType {
+  string,
+
+  /**
+   * The clone shares data blocks with its source volume.
+   */
+  Thin: "Thin",
+
+  /**
+   * The clone is an independent copy of its source volume.
+   */
+  Full: "Full",
+}
+
+/**
+ * The status of the background copy that makes a thin clone independent of its
+ * source volume.
+ */
+@added(Versions.v2026_10_01_preview)
+union BackfillStatus {
+  string,
+
+  /**
+   * The clone is still thin and no background copy has been started.
+   */
+  NotStarted: "NotStarted",
+
+  /**
+   * The background copy is running.
+   */
+  InProgress: "InProgress",
+
+  /**
+   * The background copy has finished and the clone is fully independent of its source volume.
+   */
+  Complete: "Complete",
+}
+
+/**
+ * Clone information for a volume. This is only populated for volumes that were
+ * created as a clone of another volume, that is, when createSource is Volume.
+ */
+@added(Versions.v2026_10_01_preview)
+model CloneDetails {
+  /**
+   * The replica type of the clone. This can be set when the clone is created and
+   * can later be changed from Thin to Full to promote the clone. Promoting a clone
+   * starts a background copy and cannot be reversed.
+   */
+  replicaType?: ReplicaType;
+
+  /**
+   * The status of the background copy that makes a thin clone independent of its
+   * source volume. The clone is independent once this is Complete.
+   */
+  @visibility(Lifecycle.Read)
+  backfillStatus?: BackfillStatus;
+
+  /**
+   * The time at which the background copy started. This is not populated until the
+   * clone is promoted.
+   */
+  @visibility(Lifecycle.Read)
+  backfillStartedAt?: utcDateTime;
+
+  /**
+   * The time at which the background copy completed. This is not populated until
+   * backfillStatus is Complete.
+   */
+  @visibility(Lifecycle.Read)
+  backfillCompletedAt?: utcDateTime;
+
+  /**
+   * The deadline by which a thin clone is automatically promoted to a full clone.
+   * This is not populated for a full clone.
+   */
+  @visibility(Lifecycle.Read)
+  timeToPromoteAt?: utcDateTime;
+}
+
+/**
  * Volume response properties.
  */
 model VolumeProperties {
@@ -858,6 +950,21 @@ model VolumeProperties {
    * Parent resource information.
    */
   managedBy?: ManagedByInfo;
+
+  /**
+   * Clone information for the volume. This is only populated for volumes that were
+   * created as a clone of another volume, that is, when createSource is Volume.
+   */
+  @added(Versions.v2026_10_01_preview)
+  cloneDetails?: CloneDetails;
+
+  /**
+   * The number of live thin clones that were created from this volume. A volume
+   * cannot be deleted while it still has dependent thin clones.
+   */
+  @added(Versions.v2026_10_01_preview)
+  @visibility(Lifecycle.Read)
+  activeCloneCount?: int32;
 
   /**
    * State of the operation on the resource.
@@ -949,6 +1056,14 @@ model VolumeUpdateProperties {
    * Parent resource information.
    */
   managedBy?: ManagedByInfo;
+
+  /**
+   * Clone information for the volume. Setting replicaType to Full promotes a thin
+   * clone, which starts a background copy that makes the clone independent of its
+   * source volume.
+   */
+  @added(Versions.v2026_10_01_preview)
+  cloneDetails?: CloneDetails;
 }
 
 /**

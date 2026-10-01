@@ -1,0 +1,55 @@
+{
+  "operationId": "Volumes_ListByVolumeGroup",
+  "title": "Volumes_ListByVolumeGroup_FilterByCloneSource",
+  "parameters": {
+    "api-version": "2026-10-01-preview",
+    "subscriptionId": "subscriptionid",
+    "resourceGroupName": "resourcegroupname",
+    "elasticSanName": "elasticsanname",
+    "volumeGroupName": "volumegroupname",
+    "$filter": "creationData/sourceId eq '/subscriptions/subscriptionid/resourceGroups/resourcegroupname/providers/Microsoft.ElasticSan/elasticSans/elasticsanname/volumeGroups/volumegroupname/volumes/sourcevolumename' and creationData/createSource eq 'Volume'"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subscriptionid/resourceGroups/resourcegroupname/providers/Microsoft.ElasticSan/elasticSans/elasticsanname/volumeGroups/volumegroupname/volumes/clonevolumename",
+            "name": "clonevolumename",
+            "type": "Microsoft.ElasticSan/elasticSans/volumeGroups/volumes",
+            "properties": {
+              "volumeId": "tbwshhvrbqyseonkeztlbzhrckd",
+              "creationData": {
+                "createSource": "Volume",
+                "sourceId": "/subscriptions/subscriptionid/resourceGroups/resourcegroupname/providers/Microsoft.ElasticSan/elasticSans/elasticsanname/volumeGroups/volumegroupname/volumes/sourcevolumename"
+              },
+              "cloneDetails": {
+                "replicaType": "Thin",
+                "backfillStatus": "NotStarted",
+                "timeToPromoteAt": "2026-10-29T14:22:13.546Z"
+              },
+              "activeCloneCount": 0,
+              "provisioningState": "Succeeded",
+              "sizeGiB": 23,
+              "storageTarget": {
+                "provisioningState": "Succeeded",
+                "status": "Healthy",
+                "targetIqn": "iqn.2005-03.org.iscsi:server",
+                "targetPortalHostname": "oqtcavqpjaonaudz",
+                "targetPortalPort": 1
+              }
+            },
+            "systemData": {
+              "createdAt": "2026-10-29T14:22:13.546Z",
+              "createdBy": "bpuxtfzqwdhifevjtucoc",
+              "createdByType": "User",
+              "lastModifiedAt": "2026-10-29T14:22:13.547Z",
+              "lastModifiedBy": "ourjjlolgugpxnkbiegumkicksibep",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
