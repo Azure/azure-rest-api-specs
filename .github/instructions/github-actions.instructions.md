@@ -149,6 +149,9 @@ Vitest commands still run directly and do not forward to the root.
 `eng.yml` validates the workspace, runs root `pnpm build` once on Linux, and runs
 the Vitest workspace on Ubuntu and Windows. `github-test.yaml` retains production-only module import
 checks on both OSes, plus actionlint and compiled agentic workflow lock checks on Linux.
+The Linux job also runs zizmor on tracked workflow and action YAML, excluding generated `.lock.yml`
+files. External actions must be SHA-pinned. Keep any necessary audit exceptions narrowly scoped and
+explain them inline; preserve credentials only when a later Git operation requires authentication.
 
 CI runs `pnpm lint` once from the repository root in `lint.yaml`, covering `.github`
 and `eng/tools`. Do not add lint or type-check steps to the test OS matrix.
