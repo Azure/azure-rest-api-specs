@@ -22,7 +22,7 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ## Suppression
 
-``` yaml
+```yaml
 directive:
   - suppress: AvoidAdditionalProperties
     where: $.definitions.BrokerAuthenticatorMethodCustom.properties.headers
@@ -66,7 +66,7 @@ directive:
   - suppress: AvoidAdditionalProperties
     where: $.definitions.InstanceFeature.properties.settings
     reason: User defined feature flag settings that are not subject to any validations and can differ between the versions of AIO deployed on the customer's cluster.
-    
+
   - suppress: AvoidAdditionalProperties
     where: $.definitions.AkriConnectorTemplateHelmConfigurationSettings.properties.values
     reason: There represent helm values to customer provided helm charts hence the properties are not known ahead of time.
@@ -99,7 +99,7 @@ These are the global settings for the IoTOperations.
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2026-07-01
+tag: package-2026-11-01-preview
 ```
 
 ### Tag: package-2024-07-01-preview
@@ -181,4 +181,44 @@ These settings apply only when `--tag=package-2026-07-01` is specified on the co
 ```yaml $(tag) == 'package-2026-07-01'
 input-file:
   - stable/2026-07-01/iotoperations.json
+```
+
+### Tag: package-2026-11-01-preview
+
+These settings apply only when `--tag=package-2026-11-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-11-01-preview'
+input-file:
+  - preview/2026-11-01-preview/iotoperations.json
+suppressions:
+  - code: LatestVersionOfCommonTypesMustBeUsed
+    from: iotoperations.json
+    where: $..['$ref']
+    reason: >-
+      Azure IoT Operations uses ARM common-types v5 across its existing API
+      versions. Moving only 2026-11-01-preview to v6 changes inherited common
+      resource schemas, including managed identity shapes, and introduces
+      cross-version breaking changes. This suppression is limited to reference
+      nodes in the generated 2026-11-01-preview specification so the API can
+      remain on its established v5 compatibility baseline.
+  - code: AvoidAdditionalProperties
+    from: iotoperations.json
+    where: $.definitions.McpAuthorizationPolicyRule.properties.context
+    reason: >-
+      MCP tools can define arbitrary parameters, so authorization policy
+      context values are intentionally modeled as a free-form object whose
+      properties cannot be known when the API is authored.
+  - code: PatchSkuProperty
+    from: iotoperations.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}"].patch.parameters[4]
+    reason: >-
+      The resource provider does not support SKU updates in this API version.
+      Exposing SKU in the PATCH body would advertise an unsupported operation.
+  - code: EnumInsteadOfBoolean
+    from: iotoperations.json
+    where: $.definitions.DataflowGraphFileStore.properties.readOnly
+    reason: >-
+      File-store access is inherently binary: the volume is mounted either
+      read-only or writable. A boolean directly represents these two states,
+      and an extensible string enum would advertise unsupported values.
 ```

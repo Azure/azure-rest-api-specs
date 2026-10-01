@@ -29,8 +29,16 @@ model InstanceResource is TrackedResource<InstanceProperties> {
   extendedLocation: ExtendedLocation;
 
   ...ManagedServiceIdentityProperty;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "ResourceSkuProperty cannot represent this SKU set: SkuTier is a closed union (Free/Basic/Standard/Premium) with no Essentials, and size, family and capacity do not apply. InstanceSkuName advertises Essentials and Standard while staying extensible. Envelope placement follows ARM RPC v1 (Representing SKUs)."
+  #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "sku is immutable after create so it is absent from PATCH; the RP rejects changes with 400 SkuChangeNotAllowed. TypeSpec cannot mark an envelope property create-only."
+  @doc("The billing SKU for the AIO Instance. Defaults to Standard.")
+  @added(Versions.`2026-11-01-preview`)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  sku?: InstanceSku;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "sku is immutable after create and intentionally absent here. See InstanceResource.sku."
 @doc("The Instance update model.")
 model InstancePatchModel {
   ...Azure.ResourceManager.Foundations.ArmTagsProperty;
@@ -114,4 +122,23 @@ model SchemaRegistryRef {
 model AzureDeviceRegistryNamespaceRef {
   @doc("The resource ID of the Azure Device Registry Namespace.")
   resourceId: AzureDeviceRegistryNamespaceID;
+}
+
+@doc("The billing SKU for an AIO Instance.")
+@added(Versions.`2026-11-01-preview`)
+model InstanceSku {
+  @doc("The name of the SKU. Determines the billing meter applied to this instance.")
+  name: InstanceSkuName;
+}
+
+@doc("The set of supported SKU names for an AIO Instance.")
+@added(Versions.`2026-11-01-preview`)
+union InstanceSkuName {
+  string,
+
+  @doc("Essentials SKU. Reduced feature set targeted at constrained edge and entry-level workloads.")
+  Essentials: "Essentials",
+
+  @doc("Standard SKU. Full feature set. Default when sku is not specified.")
+  Standard: "Standard",
 }
