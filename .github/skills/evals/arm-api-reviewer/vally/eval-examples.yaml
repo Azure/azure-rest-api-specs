@@ -1,8 +1,8 @@
 name: arm-api-reviewer-eval-examples
 description: |
   Example file validation tests (06xxxx).
-  Validates detection of invalid resource IDs and realistic secrets
-  in example JSON files.
+  Validates invalid resource IDs, realistic secrets, and EX-PAYLOAD severity
+  for extensible enums, closed enums, discriminators, and request URL values.
 
 # The skill under test. Declared once here rather than per stimulus: vally merges the
 # root environment into each stimulus environment, and the path resolves relative to this
@@ -11,6 +11,13 @@ description: |
 environment:
   skills:
     - "../../../azure-api-review"
+  files:
+    - src: "../../../../instructions/openapi-review.instructions.md"
+      dest: ".github/instructions/openapi-review.instructions.md"
+    - src: "../../../azure-api-review/references/example-quality.md"
+      dest: ".github/skills/azure-api-review/references/example-quality.md"
+    - src: "../../../../../specification/common-types/resource-management/v5/types.json"
+      dest: "specification/common-types/resource-management/v5/types.json"
 
 tags:
   area: arm-api-reviewer
@@ -18,8 +25,8 @@ tags:
 defaults:
   runs: 1
   timeout: "120s"
-  model: gpt-5.4
-  judge_model: gpt-5.4
+  model: gpt-5.6-sol?effort=high
+  judge_model: claude-sonnet-4.6
 
 scoring:
   threshold: 0.7
@@ -74,3 +81,163 @@ stimuli:
       - Flagged a realistic password "SuperSecretP@ssw0rd123!" in adminPassword
       - Flagged a Base64-encoded string in primaryKey that looks like a real key
       - Recommended placeholder values instead of realistic secrets
+
+  # 060003 — Unknown ordinary response value on extensible enum is Warning
+  - name: extensible-enum-response-value-warning
+    tags:
+      issue: "43747"
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/ex-payload-enum-cases.json"
+          dest: "specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/expayload.json"
+        - src: "../fixtures/examples/example-ex-payload-extensible-enum.json"
+          dest: "specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/ExtensibleEnum_Get.json"
+        - src: "../fixtures/examples/example-ex-payload-closed-enum.json"
+          dest: "specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/ClosedEnum_Get.json"
+        - src: "../fixtures/examples/example-ex-payload-discriminator.json"
+          dest: "specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/Discriminator_Get.json"
+        - src: "../fixtures/examples/example-ex-payload-path-param.json"
+          dest: "specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/PathParameter_Get.json"
+    prompt: >
+      Read `.github/instructions/openapi-review.instructions.md` section 22.7
+      and `.github/skills/azure-api-review/references/example-quality.md`. Do
+      not edit any file. Return a standard review finding for
+      `ExtensibleOperations_Get`, focused on EX-PAYLOAD severity for the
+      undeclared `Investigate` value when `operationType` is an ordinary
+      response property whose enum has `modelAsString: true`.
+
+      Spec: specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/expayload.json
+      Example: specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/ExtensibleEnum_Get.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "extensible response value is Warning"
+        config:
+          pattern: '(?is)(?:🟠\s*Warning|\bWarning\b).{0,500}EX-PAYLOAD|EX-PAYLOAD.{0,500}(?:🟠\s*Warning|\bWarning\b)'
+      - type: output-not-matches
+        name: "no Blocking EX-PAYLOAD finding"
+        config:
+          pattern: '(?is)\*\*\[(?:NEW|EXISTING)\]\s*🔴\s*Blocking.{0,500}EX-PAYLOAD'
+      - type: prompt
+    rubric:
+      - The undeclared ordinary response-body literal is an EX-PAYLOAD Warning
+      - "The response explains that `modelAsString: true` accepts unknown strings"
+      - It does not claim schema validators reject this payload
+
+  # 060004 — Unknown ordinary response value on closed enum is Blocking
+  - name: closed-enum-response-value-blocking
+    tags:
+      issue: "43747"
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/ex-payload-enum-cases.json"
+          dest: "specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/expayload.json"
+        - src: "../fixtures/examples/example-ex-payload-closed-enum.json"
+          dest: "specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/ClosedEnum_Get.json"
+        - src: "../fixtures/examples/example-ex-payload-extensible-enum.json"
+          dest: "specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/ExtensibleEnum_Get.json"
+        - src: "../fixtures/examples/example-ex-payload-discriminator.json"
+          dest: "specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/Discriminator_Get.json"
+        - src: "../fixtures/examples/example-ex-payload-path-param.json"
+          dest: "specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/PathParameter_Get.json"
+    prompt: >
+      Read `.github/instructions/openapi-review.instructions.md` section 22.7
+      and `.github/skills/azure-api-review/references/example-quality.md`. Do
+      not edit any file. Return a standard review finding for
+      `ClosedOperations_Get`, focused on EX-PAYLOAD severity for the undeclared
+      `Investigate` value when `operationType` is an ordinary response property
+      whose enum has `modelAsString: false`.
+
+      Spec: specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/expayload.json
+      Example: specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/ClosedEnum_Get.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "closed response value is Blocking"
+        config:
+          pattern: '(?is)(?:🔴\s*Blocking|\bBlocking\b).{0,500}EX-PAYLOAD|EX-PAYLOAD.{0,500}(?:🔴\s*Blocking|\bBlocking\b)'
+      - type: prompt
+    rubric:
+      - The undeclared closed-enum response literal is an EX-PAYLOAD Blocking finding
+      - "The response explains that `modelAsString: false` makes the enum closed"
+
+  # 060005 — Unknown discriminator value is Blocking even when extensible
+  - name: extensible-enum-discriminator-value-blocking
+    tags:
+      issue: "43747"
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/ex-payload-enum-cases.json"
+          dest: "specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/expayload.json"
+        - src: "../fixtures/examples/example-ex-payload-discriminator.json"
+          dest: "specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/Discriminator_Get.json"
+        - src: "../fixtures/examples/example-ex-payload-extensible-enum.json"
+          dest: "specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/ExtensibleEnum_Get.json"
+        - src: "../fixtures/examples/example-ex-payload-closed-enum.json"
+          dest: "specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/ClosedEnum_Get.json"
+        - src: "../fixtures/examples/example-ex-payload-path-param.json"
+          dest: "specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/PathParameter_Get.json"
+    prompt: >
+      Read `.github/instructions/openapi-review.instructions.md` section 22.7
+      and `.github/skills/azure-api-review/references/example-quality.md`. Do
+      not edit any file. Return a standard review finding for
+      `PolymorphicWidgets_Get`, focused on EX-PAYLOAD severity for the
+      undeclared required discriminator value `UnknownWidget`; the
+      discriminator enum has `modelAsString: true`.
+
+      Spec: specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/expayload.json
+      Example: specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/Discriminator_Get.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "unknown discriminator is Blocking"
+        config:
+          pattern: '(?is)(?:🔴\s*Blocking|\bBlocking\b).{0,500}(?:EX-PAYLOAD|discriminator)|(?:EX-PAYLOAD|discriminator).{0,500}(?:🔴\s*Blocking|\bBlocking\b)'
+      - type: prompt
+    rubric:
+      - "The unknown required discriminator is Blocking despite `modelAsString: true`"
+      - The response explains the subtype or deserialization impact
+
+  # 060006 — Unknown enum value in request path is Blocking
+  - name: extensible-enum-path-value-blocking
+    tags:
+      issue: "43747"
+    environment:
+      files:
+        - src: "../fixtures/arm-openapi/ex-payload-enum-cases.json"
+          dest: "specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/expayload.json"
+        - src: "../fixtures/examples/example-ex-payload-path-param.json"
+          dest: "specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/PathParameter_Get.json"
+        - src: "../fixtures/examples/example-ex-payload-extensible-enum.json"
+          dest: "specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/ExtensibleEnum_Get.json"
+        - src: "../fixtures/examples/example-ex-payload-closed-enum.json"
+          dest: "specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/ClosedEnum_Get.json"
+        - src: "../fixtures/examples/example-ex-payload-discriminator.json"
+          dest: "specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/Discriminator_Get.json"
+    prompt: >
+      Read `.github/instructions/openapi-review.instructions.md` section 22.7
+      and `.github/skills/azure-api-review/references/example-quality.md`. Do
+      not edit any file. Return a standard review finding for `WidgetKinds_Get`,
+      focused on EX-PAYLOAD severity for the undeclared path value `Enterprise`;
+      the `widgetKind` enum has `modelAsString: true`.
+
+      Spec: specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/expayload.json
+      Example: specification/expayload/resource-manager/Microsoft.ExPayload/stable/2025-01-01/examples/PathParameter_Get.json
+    constraints:
+      expect_skills:
+        - azure-api-review
+    graders:
+      - type: output-matches
+        name: "unknown request path value is Blocking"
+        config:
+          pattern: '(?is)(?:🔴\s*Blocking|\bBlocking\b).{0,500}(?:EX-PAYLOAD|widgetKind|path)|(?:EX-PAYLOAD|widgetKind|path).{0,500}(?:🔴\s*Blocking|\bBlocking\b)'
+      - type: prompt
+    rubric:
+      - "The undeclared `widgetKind` request path value is Blocking despite `modelAsString: true`"
+      - The response distinguishes request URL validation from response-body enum extensibility
