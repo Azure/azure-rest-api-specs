@@ -141,4 +141,46 @@ describe("workflow files", () => {
       await rm(folder, { recursive: true, force: true });
     }
   });
+
+  it("serializes the entire summary job by resolved PR before reading mutable state", async () => {
+    const step = z.object({
+      id: z.string().optional(),
+      env: z.record(z.string(), z.string()).optional(),
+      with: z.object({ script: z.string().optional() }).passthrough().optional(),
+    });
+    const workflow = z
+      .object({
+        jobs: z.object({
+          resolve: z.object({
+            outputs: z.record(z.string(), z.string()),
+            steps: z.array(step),
+          }),
+          "run-summarize-checks": z.object({
+            needs: z.string(),
+            if: z.string(),
+            concurrency: z.object({
+              group: z.string(),
+              "cancel-in-progress": z.boolean(),
+            }),
+            steps: z.array(step),
+          }),
+        }),
+      })
+      .parse(load(await readFile(resolve(workflowsDir, "summarize-checks.yaml"), "utf8")));
+
+    const job = workflow.jobs["run-summarize-checks"];
+    expect(job.needs).toBe("resolve");
+    expect(job.if).toBe("${{ needs.resolve.outputs.issue-number }}");
+    expect(job.concurrency).toEqual({
+      group: "summarize-checks-${{ github.repository }}-${{ needs.resolve.outputs.issue-number }}",
+      "cancel-in-progress": false,
+    });
+    expect(workflow.jobs.resolve.outputs).toEqual({
+      inputs: "${{ steps.resolve.outputs.result }}",
+      "issue-number": "${{ steps.resolve.outputs.issue_number }}",
+    });
+    const summaryStep = job.steps.find((item) => item.id === "summarize-checks");
+    expect(summaryStep?.env).toEqual({ SUMMARY_INPUTS: "${{ needs.resolve.outputs.inputs }}" });
+    expect(summaryStep?.with?.script).toContain("JSON.parse(process.env.SUMMARY_INPUTS)");
+  });
 });

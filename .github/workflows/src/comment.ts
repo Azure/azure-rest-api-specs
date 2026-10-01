@@ -51,7 +51,8 @@ export function parseExistingComments(
  * @param issue_number - The issue or pull request number.
  * @param body - The markdown content of the comment.
  * @param commentIdentifier - The value that will be stored in an html comment so we can retrieve this comment later
- * @returns Resolves when the comment is created or updated.
+ * @param options.normalizeBody - Ignores caller-specific provenance when comparing comment content.
+ * @returns The ID of the existing or newly created comment.
  */
 export async function commentOrUpdate(
   github: GitHub,
@@ -61,7 +62,8 @@ export async function commentOrUpdate(
   issue_number: number,
   body: string,
   commentIdentifier: string,
-): Promise<void> {
+  options: { normalizeBody?: (body: string) => string } = {},
+): Promise<number> {
   const computedBody = body + `\n<!-- ${commentIdentifier} -->`;
 
   const comments: IssueComment[] = await github.paginate(github.rest.issues.listComments, {
@@ -74,9 +76,10 @@ export async function commentOrUpdate(
   const [commentId, commentBody] = parseExistingComments(comments, commentIdentifier);
 
   if (commentId) {
-    if (commentBody === computedBody) {
+    const normalizeBody = options.normalizeBody ?? ((value: string) => value);
+    if (commentBody !== undefined && normalizeBody(commentBody) === normalizeBody(computedBody)) {
       core.info(`No update needed for comment ${commentId}.`);
-      return; // No-op if the body is the same
+      return commentId;
     }
     await github.rest.issues.updateComment({
       owner,
@@ -85,6 +88,7 @@ export async function commentOrUpdate(
       body: computedBody,
     });
     core.info(`Updated existing comment ${commentId}.`);
+    return commentId;
   } else {
     // Create a new comment
     const { data: newComment } = await github.rest.issues.createComment({
@@ -94,5 +98,6 @@ export async function commentOrUpdate(
       body: computedBody,
     });
     core.info(`Created new comment #${newComment.id}`);
+    return newComment.id;
   }
 }

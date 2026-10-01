@@ -53,6 +53,7 @@ function createMockGithubImpl() {
         get: vi.fn(),
       },
       repos: {
+        getBranchRules: vi.fn().mockResolvedValue({ data: [] }),
         createCommitStatus: vi.fn(),
         listCommitStatusesForRef: vi.fn().mockResolvedValue({ data: [] }),
         listPullRequestsAssociatedWithCommit: vi.fn().mockResolvedValue({
