@@ -24,11 +24,6 @@ using TypeSpec.Http;
 
 using Azure.AI.Projects;
 
-// Preserve the accidentally GA Java type after optimization evaluation granularity
-// moved to the evaluation-set subtype.
-@@usage(Azure.AI.Projects.EvaluationLevel, Usage.input | Usage.output, "java");
-@@access(Azure.AI.Projects.EvaluationLevel, Access.public, "java");
-
 // Reuse equivalent openai-java models instead of generating duplicate public types.
 @@alternateType(
   OpenAI.ChatCompletionTool,
@@ -53,6 +48,17 @@ using Azure.AI.Projects;
 );
 
 @@clientName(ModelSamplingParams, "ModelSamplingParameters", "java");
+@@clientName(
+  UserConversationSimulationConfiguration.max_num_turns,
+  "maximumNumberOfTurns",
+  "java"
+);
+@@clientName(
+  UserConversationSimulationConfiguration.desired_num_turns,
+  "desiredNumberOfTurns",
+  "java"
+);
+@@alternateType(ModelSamplingParams.max_completion_tokens, int64, "java");
 
 // Azure Core's HTTP pipeline cannot expose the upgraded WebSocket channel.
 // Java uses a handwritten Reactor Netty transport while TypeSpec generates the event models.
