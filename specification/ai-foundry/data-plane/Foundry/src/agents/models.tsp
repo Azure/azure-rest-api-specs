@@ -548,9 +548,8 @@ model ContainerConfiguration {
 @doc("Session defaults applied to sessions created for a hosted agent version.")
 model SessionConfiguration {
   @doc("""
-    The idle duration, in seconds, before a session's sandbox is suspended. Optional — when
-    unset, the server default of 900 seconds is used. Must be between 120 and 14400 seconds
-    (inclusive).
+    The idle duration, in seconds, before a session's sandbox is suspended. When omitted,
+    the server defaults to 900 seconds. Must be between 120 and 14400 seconds (4 hours).
     """)
   @minValue(duration.fromISO("PT120S"))
   @maxValue(duration.fromISO("PT14400S"))
