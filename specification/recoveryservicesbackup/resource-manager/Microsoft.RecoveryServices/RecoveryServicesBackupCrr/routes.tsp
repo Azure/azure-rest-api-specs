@@ -225,9 +225,12 @@ interface CrrOperationResultsOperationGroup {
     operationId: string,
   ):
     | OkResponse
-    | ArmAcceptedLroResponse<"Accepted", LroHeaders = CrrLroLocationHeader &
-        ArmAsyncOperationHeader<FinalResult = void> &
-        Azure.Core.Foundations.RetryAfterHeader>
+    | ArmAcceptedLroResponse<
+        "Accepted",
+        LroHeaders = CrrLroLocationHeader &
+          ArmAsyncOperationHeader<FinalResult = void> &
+          Azure.Core.Foundations.RetryAfterHeader
+      >
     | NewErrorResponse;
 }
 
