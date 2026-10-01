@@ -90,6 +90,7 @@ interface ServiceGroups {
    */
   @added(Versions.v2026_08_01)
   @sharedRoute
+  @Azure.Core.useFinalStateVia("original-uri")
   @patch(#{ implicitOptionality: false })
   updateServiceGroup is ArmCustomPatchAsync<
     ServiceGroup,
