@@ -1,12 +1,14 @@
 ---
 name: engineering-code-review
-description: "Review engineering tooling and GitHub Actions changes for system design, correctness, and GitHub API request efficiency. Use for pull request reviews affecting eng/**, .github/actions/**, .github/shared/**, or .github/workflows/**. Do not use for API specification review, TypeSpec authoring, or SDK generation."
+description: "Review engineering tooling and GitHub Actions changes for system design, correctness, and GitHub API request efficiency. Use for pull request reviews affecting eng/tools/**, eng/scripts/**, eng/pipelines/**, eng/README.md, .github/actions/**, .github/shared/**, or .github/workflows/**. Do not use for mirrored eng/common/** changes, API specification review, TypeSpec authoring, or SDK generation."
 ---
 
 # Engineering Code Review
 
 Use this procedure only for engineering changes in the paths above. In a mixed pull request,
 review API specifications separately with their applicable instructions.
+Skip deep review of mirrored `eng/common/**` updates; fixes belong upstream in `azure-sdk-tools`.
+Read mirrored code only as needed to understand a repo-owned caller's integration.
 
 ## Establish the Design Context
 
@@ -34,9 +36,11 @@ across those boundaries, not only isolated helper outputs.
 
 ## Account for GitHub API Calls
 
-For changed API-consuming paths, build a request inventory from the code. Record the endpoint,
-purpose, available payload or response data, pagination, and frequency. Compare the before and
-after paths, including downstream jobs and repeated event triggers.
+When a change affects GitHub API requests or their execution frequency, ordering, pagination,
+or data reuse, build a request inventory from the code. Include indirect effects from callers
+and workflow triggers, but skip inventories for unrelated edits such as log wording changes.
+Record the endpoint, purpose, available payload or response data, pagination, and frequency.
+Compare the before and after paths, including downstream jobs and repeated event triggers.
 
 Separate fixed requests from costs that scale with pages, files, jobs, or retries. State assumptions
 when estimating counts; do not present a single-page estimate as an upper bound. Distinguish HTTP
