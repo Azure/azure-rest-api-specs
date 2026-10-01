@@ -34,6 +34,8 @@ jobs:
 
       - name: Breaking Change(Cross-Version) - Analyze Code
         id: breaking-change-cross-version-analyze-code
+        env:
+          SOURCE_REPOSITORY: ${{ github.event.pull_request.head.repo.full_name }}
         run: |
           echo "summary=$GITHUB_STEP_SUMMARY" >> "$GITHUB_OUTPUT"
           pnpm exec openapi-diff-runner \
@@ -43,7 +45,7 @@ jobs:
             --pr-target-branch "$GITHUB_BASE_REF" \
             --head-commit "${{ github.event.pull_request.head.sha }}" \
             --pr-number "${{ github.event.pull_request.number }}" \
-            --source-repo "${{ github.event.pull_request.head.repo.full_name }}" \
+            --source-repo "$SOURCE_REPOSITORY" \
             --target-repo "$GITHUB_REPOSITORY"
 
       # Upload artifact for 'BreakingChangeReviewRequired' label

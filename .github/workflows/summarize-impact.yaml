@@ -45,7 +45,7 @@ jobs:
 
       - name: Setup Node and install deps
         # Use the PR head checkout, not the workflow's PR merge commit.
-        uses: ./after/.github/actions/setup-node-install-deps
+        uses: ./after/.github/actions/setup-node-install-deps # zizmor: ignore[self-repository]
         with:
           # The repository is checked out into "after/", so that is the workspace
           # root (and where the root package.json with "packageManager" lives).
@@ -58,15 +58,17 @@ jobs:
           pnpm exec summarize-impact --sourceDirectory . --targetDirectory ../before \
             --number "${{ github.event.pull_request.number }}" \
             --sourceBranch "$HEAD_REF" \
-            --targetBranch "${{ github.event.pull_request.base.ref }}" \
+            --targetBranch "$BASE_REF" \
             --sha "${{ github.event.pull_request.head.sha }}" \
-            --repo "${{ github.event.repository.name }}" \
+            --repo "$REPOSITORY_NAME" \
             --owner "${{ github.repository_owner }}" \
             ${{ github.event.pull_request.draft && '--isDraft' || '' }}
         env:
           # We absolutely need to avoid OOM errors due to certain inherited types from openapi-alps
           NODE_OPTIONS: "--max-old-space-size=8192"
           HEAD_REF: ${{ github.event.pull_request.head.ref }}
+          BASE_REF: ${{ github.event.pull_request.base.ref }}
+          REPOSITORY_NAME: ${{ github.event.repository.name }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set job-summary artifact

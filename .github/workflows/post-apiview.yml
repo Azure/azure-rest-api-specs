@@ -26,7 +26,9 @@ jobs:
       - name: Create APIView Comment on PR
         run: |
           . "eng/common/scripts/Helpers/ApiView-Helpers.ps1"
-          Set-ApiViewCommentForRelatedIssues -HeadCommitish ${{ github.event.check_run.head_sha }} -AuthToken ${{ secrets.GITHUB_TOKEN }} -GitHubActionRunUrl $env:GITHUB_ACTION_RUN_URL
+          Set-ApiViewCommentForRelatedIssues -HeadCommitish $env:HEAD_SHA -AuthToken $env:GITHUB_TOKEN -GitHubActionRunUrl $env:GITHUB_ACTION_RUN_URL
         shell: pwsh
         env:
+          HEAD_SHA: ${{ github.event.check_run.head_sha }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_ACTION_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}

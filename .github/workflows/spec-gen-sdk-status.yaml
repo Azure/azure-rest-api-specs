@@ -1,6 +1,6 @@
 name: "SDK Validation Status"
 
-on:
+on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base/default-branch code runs.
   check_run:
     types: [completed]
   # Azure DevOps pipelines (which report the "SDK Validation" check runs) do not re-trigger when a
@@ -49,10 +49,12 @@ jobs:
 
       - if: github.event.repository.name == 'azure-rest-api-specs-pr'
         name: Get ADO Token via Managed Identity
+        id: ado-token
         run: |
           # Get token for Azure DevOps resource
           ADO_TOKEN=$(az account get-access-token --resource "499b84ac-1321-427f-aa17-267ca6975798" --query "accessToken" -o tsv)
-          echo "ADO_TOKEN=$ADO_TOKEN" >> "$GITHUB_ENV"
+          echo "::add-mask::$ADO_TOKEN"
+          echo "token=$ADO_TOKEN" >> "$GITHUB_OUTPUT"
 
       - name: Install dependencies for github-script actions
         uses: $/.github/actions/install-deps-github-script
@@ -60,6 +62,8 @@ jobs:
       - name: "SDK Validation Set Status"
         id: sdk-validation-status
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          ADO_TOKEN: ${{ steps.ado-token.outputs.token }}
         with:
           script: |
             const setStatus =
