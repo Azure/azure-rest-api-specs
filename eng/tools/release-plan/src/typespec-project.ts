@@ -28,7 +28,7 @@ export const SKIP_RELEASE_PLAN_AUTOMATION_LABEL = "Skip-ReleasePlan-Automation";
 
 /**
  * Identifies one TypeSpec project path and selected API version from a pull request.
- * Returns null when no TypeSpec files were modified; ambiguous targets fail closed.
+ * Returns null when no specification files were modified, or when zero/multiple projects found.
  * Uses TypeSpec metadata emitter to determine API version and SDK type.
  * @param params Object containing PR details, owner, repo, workspace, and Octokit instance
  * @param params.prNumber Pull request number
@@ -36,7 +36,7 @@ export const SKIP_RELEASE_PLAN_AUTOMATION_LABEL = "Skip-ReleasePlan-Automation";
  * @param params.repo Repository name
  * @param params.workspace Absolute path to workspace root
  * @param params.octokit Octokit instance for GitHub API calls
- * @returns The unique versioned project at the merge commit, or null for no TypeSpec changes
+ * @returns TypeSpec project info with path and API version, or null if no spec changes, no projects found, multiple projects found, or API version detection fails
  */
 export async function getTypeSpecProjectInfoFromPr(params: {
   prNumber: number;
@@ -56,21 +56,21 @@ export async function getTypeSpecProjectInfoFromPr(params: {
   });
 
   const specFiles = allFiles.filter((f) => f.filename.startsWith("specification/"));
-  if (
-    !specFiles.some((f) => f.filename.endsWith(".tsp") || f.filename.endsWith("tspconfig.yaml"))
-  ) {
+  if (specFiles.length === 0) {
     return null;
   }
 
   const tspProjectPaths = collectTypeSpecProjectPaths(specFiles, workspace);
 
   if (tspProjectPaths.length === 0) {
-    throw new Error("Unable to locate TypeSpec project (tspconfig.yaml) for modified files.");
+    console.log("Unable to locate TypeSpec project (tspconfig.yaml) for modified files.");
+    return null;
   }
   if (tspProjectPaths.length > 1) {
-    throw new Error(
+    console.log(
       `Multiple TypeSpec projects found in PR: ${tspProjectPaths.join(", ")}. Create release plan manually using aka.ms/azsdk/releaseplan-dashboard.`,
     );
+    return null;
   }
 
   const tspProjectRelPath = tspProjectPaths[0];
@@ -78,7 +78,13 @@ export async function getTypeSpecProjectInfoFromPr(params: {
 
   const specCommitSha = await getMergedSpecCommitSha(params);
   assertCleanSpecCheckout(workspace, specCommitSha);
-  const info = await getTypeSpecProjectVersionFromMetadata(tspProjectAbsPath, tspProjectRelPath);
+  let info: TypeSpecProjectInfo;
+  try {
+    info = await getTypeSpecProjectVersionFromMetadata(tspProjectAbsPath, tspProjectRelPath);
+  } catch {
+    console.error(`Failed to determine API version for TypeSpec project at ${tspProjectRelPath}`);
+    return null;
+  }
   assertCleanSpecCheckout(workspace, specCommitSha);
   return { ...info, specCommitSha };
 }

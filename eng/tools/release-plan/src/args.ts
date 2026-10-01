@@ -104,19 +104,17 @@ function showHelp(): void {
   );
   console.log("");
   console.log("Options:");
+  console.log("  -c, --commit-sha      Commit SHA to resolve PR or analyze changed files");
   console.log(
-    "  -c, --commit-sha      Full merged spec commit SHA; workspace must be clean at this SHA",
+    "      --pr-number       PR number to analyze directly (alternative to --commit-sha)",
   );
   console.log(
-    "      --pr-number       Merged PR to analyze; workspace must be clean at its merge commit",
-  );
-  console.log(
-    "      --release-plan-id Get an existing plan's stored target; no discovery, updates or checkout",
+    "      --release-plan-id Get an existing release plan directly; skips discovery and creation",
   );
   console.log("  -r, --repo            GitHub repository in owner/repo format");
   console.log("  -w, --workspace       Path to local repo root (default: cwd)");
   console.log("                        Uses AZSDK environment variable for the azsdk executable");
-  console.log("      --output-file     Write JSON result outside the clean spec checkout");
+  console.log("      --output-file     Write JSON result to this file path");
   console.log(
     "      --test-release-plan  Create release plan as test (true|false, default: false)",
   );

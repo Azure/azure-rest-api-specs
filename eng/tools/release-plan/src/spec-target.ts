@@ -1,6 +1,7 @@
 import { isFullGitSha } from "@azure-tools/specs-shared/git";
 import { spawnSync } from "node:child_process";
 import path from "node:path";
+import { resolveTypespecProjectPath, toStringValue } from "./sdk-workflow-common.ts";
 import type {
   ApiReleaseType,
   CommandResult,
@@ -103,7 +104,7 @@ export function projectPath(value: unknown, workspace: string): string {
   if (typeof value !== "string" || !value.trim()) {
     throw new Error("The release target must contain a TypeSpec project path.");
   }
-  const resolved = path.resolve(workspace, value.replace(/\\/g, "/"));
+  const resolved = path.resolve(resolveTypespecProjectPath(value.replace(/\\/g, "/"), workspace));
   const relative = path.relative(path.resolve(workspace), resolved);
   if (!relative || relative.startsWith("..") || path.isAbsolute(relative)) {
     throw new Error("The TypeSpec project must be inside the specified workspace.");
@@ -120,7 +121,7 @@ export function releasePlanDetails(plan: ReleasePlanData | null | undefined): Re
 }
 
 export function requiredPlanId(value: unknown, field: string): string {
-  const id = typeof value === "number" || typeof value === "string" ? String(value) : "";
+  const id = toStringValue(value);
   if (!/^[1-9]\d*$/.test(id)) {
     throw new Error(`The release plan must contain a valid ${field}.`);
   }

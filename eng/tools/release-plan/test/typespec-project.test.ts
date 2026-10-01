@@ -258,7 +258,7 @@ describe("TypeSpec project detection edge cases", () => {
     expect(listFiles).toHaveBeenCalled();
   });
 
-  it("rejects a PR with multiple tsp projects", async () => {
+  it("returns null when PR has multiple tsp projects", async () => {
     const get = vi.fn().mockResolvedValueOnce({ data: { labels: [{ name: "new-api-version" }] } });
     const listFiles = vi
       .fn()
@@ -270,7 +270,7 @@ describe("TypeSpec project detection edge cases", () => {
       })
       .mockResolvedValueOnce({ data: [] });
 
-    const result = getTypeSpecProjectInfoFromPr({
+    const result = await getTypeSpecProjectInfoFromPr({
       prNumber: 42,
       owner: "Azure",
       repo: "azure-rest-api-specs",
@@ -285,7 +285,7 @@ describe("TypeSpec project detection edge cases", () => {
       },
     });
 
-    await expect(result).rejects.toThrow("Multiple TypeSpec projects found in PR");
+    expect(result).toBeNull();
   });
 
   it("handles paginated file responses across multiple pages", async () => {

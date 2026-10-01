@@ -146,20 +146,27 @@ function confirmExistingPlan(
 ): EnsureReleasePlanResult {
   const details = validateSelectedPlan(existing, context, false);
   const isPrivatePreview = context.apiReleaseType === "Private Preview";
-  const relation =
-    !isPrivatePreview && details.SpecCommitSHA
-      ? compareSpecCommits(context.workspace, details.SpecCommitSHA, context.specCommitSha)
-      : undefined;
-  if (relation === "stale") {
-    return {
-      outcome: "stale_event",
-      releasePlan: existing,
-      details: buildDetails(context, existing),
-    };
+  const samePullRequest = details.ActiveSpecPullRequest === context.prUrl;
+  if (!isPrivatePreview && details.SpecCommitSHA) {
+    assertSpecCommitSha(details.SpecCommitSHA);
+    // Squash/rebase merges replace the same PR's saved source commit. The CLI
+    // checks the event SHA against that PR again before saving the update.
+    if (
+      !samePullRequest &&
+      compareSpecCommits(context.workspace, details.SpecCommitSHA, context.specCommitSha) ===
+        "stale"
+    ) {
+      return {
+        outcome: "stale_event",
+        releasePlan: existing,
+        details: buildDetails(context, existing),
+      };
+    }
   }
   if (
-    (relation === "same" || isPrivatePreview) &&
-    details.ActiveSpecPullRequest === context.prUrl
+    samePullRequest &&
+    (isPrivatePreview ||
+      details.SpecCommitSHA?.toLowerCase() === context.specCommitSha.toLowerCase())
   ) {
     return { outcome, releasePlan: existing, details: buildDetails(context, existing) };
   }

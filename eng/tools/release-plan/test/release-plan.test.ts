@@ -85,6 +85,23 @@ describe("ensureReleasePlan", () => {
     const result = ensureReleasePlan(baseContext, runner);
     expect(result.outcome).toBe("existing_by_pr");
     expect(result.releasePlan).toEqual(buildPlan(100));
+
+    // A squash/rebase merge replaces the same PR's saved source commit.
+    const mergeSha = "b".repeat(40);
+    const mergedPlan = buildPlan(100, { SpecCommitSHA: mergeSha });
+    const mergeRunner = createRunner({
+      [`release-plan get --typespec-path ${typespecPath} --api-version 2026-06-01-preview --api-release-type Public Preview --output json`]:
+        { code: 0, out: JSON.stringify(buildPlan(100)) },
+      [`release-plan update-spec-pr --workitem-id 100 --typespec-path ${typespecPath} --pull-request https://github.com/Azure/azure-rest-api-specs/pull/123 --api-version 2026-06-01-preview --spec-commit-sha ${mergeSha} --confirm-target --expected-target-revision 100:1:101:1 --output json`]:
+        { code: 0, out: JSON.stringify({ status: "Success" }) },
+      "release-plan get --workitem-id 100 --output json": {
+        code: 0,
+        out: JSON.stringify(mergedPlan),
+      },
+    });
+    const merged = ensureReleasePlan({ ...baseContext, specCommitSha: mergeSha }, mergeRunner);
+    expect(merged.outcome).toBe("existing_by_pr");
+    expect(merged.releasePlan).toEqual(mergedPlan);
   });
 
   it("returns existing release plan when found by path with a different linked PR", () => {

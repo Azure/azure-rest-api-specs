@@ -11,7 +11,7 @@ import {
   getReleasePlanResultById,
   getSdkReleaseType,
 } from "./release-plan.ts";
-import { assertCleanSpecCheckout, assertSpecCommitSha } from "./spec-target.ts";
+import { assertSpecCommitSha } from "./spec-target.ts";
 import type {
   CliArguments,
   EnsureReleasePlanResult,
@@ -197,7 +197,6 @@ export async function main(): Promise<void> {
     );
     releasePlanEnsured = true;
 
-    assertCleanSpecCheckout(args.workspace, specCommitSha);
     writeReleasePlanResult(result, args.outputFile);
 
     // Post comment on PR if release plan was created
