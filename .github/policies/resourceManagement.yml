@@ -9,30 +9,6 @@ configuration:
   resourceManagementConfiguration:
     eventResponderTasks:
     - if:
-      - payloadType: Issues
-      - isAction:
-          action: Labeled
-      - hasLabel:
-          label: needs-triage
-      - not:
-          labelAdded:
-            label: needs-triage
-      then:
-      - removeLabel:
-          label: needs-triage
-      description: 
-    - if:
-      - payloadType: Issues
-      - isOpen
-      - hasLabel:
-          label: customer-reported
-      - labelRemoved:
-          label: Service Attention
-      then:
-      - addLabel:
-          label: needs-team-triage
-      description: 
-    - if:
       - payloadType: Pull_Request
       # If a PR changes no files, "includesModifiedFiles()" incorrectly returns "true" instead of "false",
       # which adds all labels to the PR.
@@ -83,29 +59,6 @@ configuration:
         then:
         - addLabel:
             label: Synapses
-      description: 
-    - if:
-      - payloadType: Issues
-      - isAction:
-          action: Opened
-      - and:
-        - not:
-            activitySenderHasPermission:
-              permission: Write
-        - not:
-            activitySenderHasAssociation:
-              association: Member
-        - not:
-            activitySenderHasAssociation:
-              association: Collaborator
-        - not:
-            activitySenderHasPermission:
-              permission: Admin
-      then:
-      - addLabel:
-          label: customer-reported
-      - addLabel:
-          label: question
       description: 
     - if:
       - payloadType: Pull_Request
@@ -792,18 +745,6 @@ configuration:
         then:
         - addLabel:
             label: Profile
-      description: 
-    - if:
-      - payloadType: Issues
-      - hasLabel:
-          label: customer-reported
-      - hasLabel:
-          label: needs-triage
-      - isAction:
-          action: Labeled
-      then:
-      - addLabel:
-          label: CXP Attention
       description: 
 onFailure: 
 onSuccess: 
