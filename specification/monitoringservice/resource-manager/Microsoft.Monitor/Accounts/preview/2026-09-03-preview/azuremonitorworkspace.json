@@ -3125,35 +3125,13 @@
         "traceRetentionInDays": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of days for which the traces are retained. Value must be between 4 and 730 days. The service defaults this property to 30 when it is omitted.",
-          "default": 30,
+          "description": "The number of days for which the traces are retained. Value must be between 4 and 730 days. When omitted while creating a trace container, the service applies a default of 30; when omitted while updating an existing trace container, the current value is preserved.",
           "minimum": 4,
           "maximum": 730
         },
         "traceMetricsState": {
-          "type": "string",
-          "description": "The state of trace-derived metrics. The service defaults this property to Enabled when it is omitted.",
-          "default": "Enabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "TraceMetricsState",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "Trace-derived metrics are emitted."
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "Trace-derived metrics are not emitted."
-              }
-            ]
-          }
+          "$ref": "#/definitions/TraceMetricsState",
+          "description": "The state of trace-derived metrics. When omitted while creating a trace container, the service applies a default of Enabled; when omitted while updating an existing trace container, the current value is preserved."
         }
       },
       "required": [
@@ -3195,6 +3173,30 @@
       "required": [
         "value"
       ]
+    },
+    "TraceMetricsState": {
+      "type": "string",
+      "description": "The state of trace-derived metrics for a trace container.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "TraceMetricsState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Trace-derived metrics are emitted."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Trace-derived metrics are not emitted."
+          }
+        ]
+      }
     },
     "UpdateType": {
       "type": "string",
