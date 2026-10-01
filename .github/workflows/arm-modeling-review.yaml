@@ -33,14 +33,14 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           fetch-depth: 2
 
       # Public main is the single source of truth for leases, so a lease merged there is
       # honored without syncing it into each private branch.
       - name: Checkout ARM leases from public main
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           repository: Azure/azure-rest-api-specs
           ref: main
@@ -55,7 +55,7 @@ jobs:
         id: detect
         env:
           ARM_LEASES_DIR: ${{ github.workspace }}/arm-leases
-        uses: actions/github-script@v9.0.0
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const { default: armModelingReview } =

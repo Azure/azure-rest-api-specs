@@ -232,6 +232,7 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
 - **Pull request target**: Use `pull_request_target` carefully; only support specific actions
 - **Permissions**: Define minimal `permissions` in workflow files
 - **Token usage**: Use `GITHUB_TOKEN` with least privilege
+- **Action references**: Pin external actions to a full commit SHA and retain a version comment for dependency updates.
 
 ### Code Quality
 

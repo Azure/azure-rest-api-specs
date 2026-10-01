@@ -40,9 +40,9 @@ describe("workflow files", () => {
       id: "typespec-suppressions-analysis",
     });
     expect(analysis?.run).toContain('echo "summary=$GITHUB_STEP_SUMMARY" >> "$GITHUB_OUTPUT"');
+    expect(summaryArtifact?.uses).toMatch(/^actions\/upload-artifact@[0-9a-f]{40}$/);
     expect(summaryArtifact).toMatchObject({
       if: "${{ always() && steps.typespec-suppressions-analysis.outputs.summary }}",
-      uses: "actions/upload-artifact@v7",
       with: {
         name: "job-summary",
         path: "${{ steps.typespec-suppressions-analysis.outputs.summary }}",
