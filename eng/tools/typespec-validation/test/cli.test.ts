@@ -297,7 +297,7 @@ it("emits a failure annotation inside its project group and a final reproduction
       "::error::TypeSpec Validation failed for project custom/a run the following command locally to validate.%0A" +
         " > pnpm install%0A > pnpm tsv custom/a%0A" +
         "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation\n" +
-        "::endgroup::\n::group::Validating custom/b",
+        "::endgroup::\n::group::pass custom/b",
     ) as unknown,
     stderr: expect.stringContaining(d`
       TypeSpec Validation failed for some folder to fix run and address any errors:
@@ -328,10 +328,7 @@ it("wraps child output in repository-relative GitHub Actions groups", async () =
     specification/b
   `);
   const groups = [...stdout.matchAll(/::group::([^\n]+)\n([\s\S]*?)::endgroup::/g)];
-  expect(groups.map((group) => group[1])).toEqual([
-    "Validating specification/a",
-    "Validating specification/b",
-  ]);
+  expect(groups.map((group) => group[1])).toEqual(["pass specification/a", "pass specification/b"]);
   for (const group of groups) {
     expect(group[2]).not.toContain("Running TypeSpecValidation on folder:");
     expect(group[2]).toContain("Suppressed: fixture");

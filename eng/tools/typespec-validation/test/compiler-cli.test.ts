@@ -198,7 +198,7 @@ it("retains per-project CI annotations and native diagnostics in batch mode", as
   );
   const result = await run("--all");
   expect(result.code).toBe(1);
-  expect(result.stdout).toContain(`::group::Validating ${project}`);
+  expect(result.stdout).toContain(`::group::fail ${project}`);
   expect(result.stdout).toContain(`::error::TypeSpec Validation failed for project ${project}`);
   expect(result.stdout).toContain("::endgroup::");
   expect(result.stderr.match(/native failure/g)).toHaveLength(1);
