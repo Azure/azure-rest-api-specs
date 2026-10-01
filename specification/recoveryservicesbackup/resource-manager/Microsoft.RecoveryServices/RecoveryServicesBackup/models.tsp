@@ -7741,7 +7741,6 @@ model ValidateRestoreOperationRequest extends ValidateOperationRequest {
  * Restore validation request for Azure Workload backups.
  * This subtype provides the distinct objectType discriminator used for Azure Workload (SQL/HANA/SAP ASE/AnyDatabase) restore validation.
  */
-#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @added(Versions.v2026_10_01)
 model ValidateAzureWorkloadRestoreOperationRequest
   extends ValidateOperationRequest {
