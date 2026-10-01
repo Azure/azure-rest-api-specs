@@ -1,4 +1,5 @@
 import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
+import { d } from "@azure-tools/specs-shared/testing";
 import { ChildProcess, spawn } from "node:child_process";
 import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
@@ -185,11 +186,12 @@ it.each(["false", "true"])(
     });
     await expect(runChanged(root)).resolves.toBe(false);
     expect(spawn).toHaveBeenCalledTimes(2);
-    expect(console.error).toHaveBeenLastCalledWith(
-      "TypeSpec Validation failed for some folder to fix run and address any errors:\n" +
-        " > pnpm install\n > pnpm tsv specification/service/Project\n" +
-        "For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation",
-    );
+    expect(console.error).toHaveBeenLastCalledWith(d`
+      TypeSpec Validation failed for some folder to fix run and address any errors:
+       > pnpm install
+       > pnpm tsv specification/service/Project
+      For more detailed docs see https://aka.ms/azsdk/specs/typespec-validation
+    `);
     if (githubActions === "true") {
       expect(console.log).toHaveBeenCalledWith(
         "::error::TypeSpec Validation failed for project specification/service/Project run the following command locally to validate.%0A" +

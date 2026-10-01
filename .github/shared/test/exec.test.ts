@@ -274,6 +274,24 @@ describe("execPnpm", () => {
     });
   });
 
+  it.each([
+    { stderr: "", messageEnding: "exited with code 7" },
+    { stderr: "command diagnostic", messageEnding: "exited with code 7\ncommand diagnostic" },
+  ])("preserves failure details with stderr $stderr", async ({ stderr, messageEnding }) => {
+    const args = [
+      "exec",
+      "node",
+      "-e",
+      `process.stdout.write('command output'); process.stderr.write(${JSON.stringify(stderr)}); process.exitCode = 7;`,
+    ];
+    await expect(execPnpm(args, options)).rejects.toMatchObject({
+      code: 7,
+      stdout: "command output",
+      stderr,
+      message: `pnpm ${args.join(" ")} ${messageEnding}`,
+    });
+  });
+
   it("captures stderr", async () => {
     const result = await execPnpm(
       ["exec", "node", "-e", "process.stderr.write('hello-stderr')"],
