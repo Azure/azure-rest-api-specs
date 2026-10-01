@@ -14,6 +14,8 @@ interface RunOptions {
   gitClean?: boolean;
   /** With gitClean, append each project's changes to this patch file before they are discarded. */
   diffOutput?: string;
+  /** Report generated-file and formatting changes as warnings instead of failing. */
+  allowGeneratedChanges?: boolean;
   dryRun?: boolean;
   verbose?: boolean;
   summaryFile?: string;
@@ -23,6 +25,7 @@ interface RunContext {
   checkingAllSpecs: boolean;
   baseCommitish?: string;
   headCommitish?: string;
+  allowGeneratedChanges?: boolean;
 }
 
 type ProjectStatus = "pass" | "fail" | "skip";
@@ -111,6 +114,7 @@ async function runProjects(
   context: RunContext,
   options: RunOptions,
 ): Promise<boolean> {
+  if (options.allowGeneratedChanges) context = { ...context, allowGeneratedChanges: true };
   const git = simpleGit(root);
   const gitClean = options.gitClean && !options.dryRun;
   const displayRoot =

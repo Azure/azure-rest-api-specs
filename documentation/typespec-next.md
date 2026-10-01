@@ -21,9 +21,11 @@ node eng/scripts/typespec-channel.mts next --set @typespec/compiler=<tarball-url
 node eng/scripts/typespec-channel.mts stable
 ```
 
+The script adds the requested versions to `overrides` in `pnpm-workspace.yaml` and installs them.
 While a channel is in use, `pnpm-workspace.yaml` and `pnpm-lock.yaml` stay modified so `pnpm exec`
-and `pnpm tsv` keep the switched packages. Do not commit them. CI passes `--clean-checkout`, which
-restores both files right after install so `tsv --git-clean` sees a clean checkout.
+and `pnpm tsv` keep the switched packages. Do not commit them. `stable` restores both files from git,
+discarding any local edits to them. GitHub Actions restores them right after install so
+`tsv --git-clean` sees a clean checkout, and invokes TSV with `node`.
 
 CI selects the channel the same way:
 
@@ -33,6 +35,10 @@ CI selects the channel the same way:
 | PRs into and pushes to `typespec-next` | `next` |
 | Scheduled **TypeSpec Validation - All** | `stable` and `next` (`next` includes the `typespec-next` spec changes) |
 | Manual **TypeSpec Validation - All** | the `typespec-channel` input, e.g. a dev version |
+
+With an upcoming release, TSV runs with `--allow-generated-changes`: generated Swagger and formatting
+that differ from the committed files are reported as warnings, so only real breaks fail. PRs into
+`typespec-next` fail if they change anything outside `specification/` that differs from `main`.
 
 ## Where a change goes
 
@@ -49,12 +55,8 @@ from `main` under `specification/`; tooling changes always go to `main`.
 ## Moving `main` to a new release
 
 1. Merge `origin/typespec-next` into a branch from `main`.
-2. Pin the release in the catalog and lockfile:
-
-   ```bash
-   node eng/scripts/typespec-channel.mts latest --persist
-   ```
-
+2. Set the new versions of the TypeSpec packages in the `catalog` (and the `@typespec/asset-emitter`
+   override) of `pnpm-workspace.yaml`, then run `pnpm install`.
 3. Regenerate Swagger. Either apply the `typespec-next-generated-changes-*` patches from the latest
    scheduled **TypeSpec Validation - All** run (`git apply <patch>`), or run
    `pnpm tsv --all` without `--git-clean`.

@@ -84,12 +84,16 @@ jobs:
           fetch-depth: ${{ fromJSON(env.OVERLAY_TYPESPEC_NEXT == 'true' && '0' || '1') }}
 
       # On main, an upcoming TypeSpec release is validated together with the spec changes waiting
-      # on typespec-next. That branch only differs from main under specification/.
+      # on typespec-next. Only specification/ is taken from that branch, so tooling always comes
+      # from main. A conflict fails the job: sync main into typespec-next to resolve it.
       - name: Overlay typespec-next spec changes
         if: env.OVERLAY_TYPESPEC_NEXT == 'true'
-        run: >-
-          git -c user.name="azure-sdk" -c user.email="azuresdk@microsoft.com"
-          merge --no-edit -X theirs origin/typespec-next
+        shell: bash
+        run: |
+          git merge --no-commit --no-ff origin/typespec-next
+          git restore --source=HEAD --staged --worktree -- . ':!specification'
+          git -c user.name="azure-sdk" -c user.email="azuresdk@microsoft.com" \
+            commit --allow-empty --quiet -m "Overlay typespec-next spec changes"
 
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
@@ -101,7 +105,7 @@ jobs:
           node eng/tools/typespec-validation/cmd/tsv.js --all
           --shard=${{ matrix.shard }}/${{ matrix.total-shards }} --git-clean specification
           --github-summary
-          ${{ matrix.channel != 'stable' && format('--diff-output={0}/generated-changes.patch', runner.temp) || '' }}
+          ${{ matrix.channel != 'stable' && format('--allow-generated-changes --diff-output={0}/generated-changes.patch', runner.temp) || '' }}
           ${{ runner.debug == '1' && '--verbose' || '' }}
 
       # Generated Swagger that changes with the upcoming release. Apply the merged patches in the PR
