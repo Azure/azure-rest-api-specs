@@ -5100,10 +5100,7 @@
             }
           },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorPolicy"
-            },
+            "description": "Resource operation accepted.",
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
@@ -5112,6 +5109,11 @@
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -5184,10 +5186,7 @@
             }
           },
           "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorPolicy"
-            },
+            "description": "Resource operation accepted.",
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
@@ -5266,6 +5265,10 @@
               "Azure-AsyncOperation": {
                 "type": "string",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
