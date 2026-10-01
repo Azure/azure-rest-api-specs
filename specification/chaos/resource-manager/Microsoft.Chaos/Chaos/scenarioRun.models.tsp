@@ -287,6 +287,15 @@ model ScenarioRunSummaryAction {
    */
   @visibility(Lifecycle.Read)
   completedAt?: utcDateTime;
+
+  /**
+   * Whether this action's failure was suppressed by the effective `failureBehavior`
+   * and therefore did not fail the scenario run. Present only for actions in the
+   * `Failed` state; absent otherwise.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  @visibility(Lifecycle.Read)
+  failureSuppressed?: boolean;
 }
 
 /**
@@ -425,6 +434,14 @@ union ScenarioRunState {
    */
   @lroSucceeded
   Succeeded: "Succeeded",
+
+  /**
+   * The scenario run completed, but one or more actions failed and every one of those
+   * failures was suppressed by the effective `failureBehavior`.
+   */
+  @added(Microsoft.Chaos.Versions.v2026_11_01)
+  @lroSucceeded
+  PartiallySucceeded: "PartiallySucceeded",
 
   /**
    * The scenario run has failed.
