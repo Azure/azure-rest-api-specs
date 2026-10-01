@@ -222,8 +222,8 @@ async function writeGithubSummary(
 
 /**
  * Print a project's result as a GitHub Actions group (or a plain heading locally), titled with its
- * status. Segments are replayed to their original stream in capture order so interleaved stdout/stderr
- * writes (e.g. a warning followed by a summary line) keep their real relative order.
+ * status. GitHub group markers and captured output use stdout so independently flushed stderr cannot
+ * appear after the end marker. Local runs preserve each segment's original stream.
  */
 function printProjectGroup(
   githubActions: boolean,
@@ -251,7 +251,7 @@ function printProjectGroup(
   if (last) last.text = last.text.replace(/\n+$/, "");
   for (const segment of merged) {
     if (!segment.text) continue;
-    (segment.stream === "stdout" ? console.log : console.error)(segment.text);
+    (githubActions || segment.stream === "stdout" ? console.log : console.error)(segment.text);
   }
   if (githubActions) console.log("::endgroup::");
 }
