@@ -24,22 +24,4 @@ union AiGatewayProvisioningState {
 
   /** The resource operation was canceled. */
   Canceled: "Canceled",
-
-  /** The resource has been created and is waiting for activation. */
-  Created: "Created",
-
-  /** The resource is being activated. */
-  Activating: "Activating",
-
-  /** The resource is being updated. */
-  Updating: "Updating",
-
-  /** The resource runtime is being upgraded. */
-  Upgrading: "Upgrading",
-
-  /** The resource is being deleted. */
-  Deleting: "Deleting",
-
-  /** The resource deletion failed. */
-  DeleteFailed: "DeleteFailed",
 }

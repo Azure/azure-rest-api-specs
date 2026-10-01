@@ -28,11 +28,4 @@ interface AiGatewayResources {
   >;
   listByResourceGroup is ArmResourceListByParent<AiGatewayResource>;
   listBySubscription is ArmListBySubscription<AiGatewayResource>;
-
-  /** Returns the primary and secondary secret values of an AI Gateway. */
-  listSecrets is ArmResourceActionSync<
-    AiGatewayResource,
-    void,
-    ArmResponse<AiGatewaySecrets>
-  >;
 }

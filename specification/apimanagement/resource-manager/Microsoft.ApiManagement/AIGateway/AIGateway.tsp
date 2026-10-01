@@ -49,10 +49,6 @@ model AiGatewayProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: AiGatewayProvisioningState;
 
-  /** Provisioning state targeted by an operation in progress. */
-  @visibility(Lifecycle.Read)
-  targetProvisioningState?: string;
-
   /** Frontend configuration of the AI Gateway. */
   @visibility(Lifecycle.Read)
   frontend?: AiGatewayFrontend;
@@ -85,16 +81,4 @@ model AiGatewayResource is Azure.ResourceManager.TrackedResource<
 model AiGatewayUpdateParameters {
   ...Azure.ResourceManager.Foundations.TagsUpdateModel<AiGatewayResource>;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
-}
-
-/** Primary and secondary secret values of an AI Gateway. */
-@added(Versions.v2026_09_01_preview)
-model AiGatewaySecrets {
-  /** Primary secret value. */
-  @secret
-  primary: string;
-
-  /** Secondary secret value. */
-  @secret
-  secondary: string;
 }

@@ -428,53 +428,6 @@
         },
         "x-ms-long-running-operation": true
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}/listSecrets": {
-      "post": {
-        "operationId": "AiGatewayResources_ListSecrets",
-        "tags": [
-          "AiGatewayResources"
-        ],
-        "description": "Returns the primary and secondary secret values of an AI Gateway.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "aiGatewayName",
-            "in": "path",
-            "description": "The name of the AiGatewayResource",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AiGatewaySecrets"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "List AI Gateway secrets": {
-            "$ref": "./examples/AiGatewayListSecrets.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -508,11 +461,6 @@
           "description": "Provisioning state of the resource.",
           "readOnly": true
         },
-        "targetProvisioningState": {
-          "type": "string",
-          "description": "Provisioning state targeted by an operation in progress.",
-          "readOnly": true
-        },
         "frontend": {
           "$ref": "#/definitions/AiGatewayFrontend",
           "description": "Frontend configuration of the AI Gateway.",
@@ -534,13 +482,7 @@
       "enum": [
         "Succeeded",
         "Failed",
-        "Canceled",
-        "Created",
-        "Activating",
-        "Updating",
-        "Upgrading",
-        "Deleting",
-        "DeleteFailed"
+        "Canceled"
       ],
       "x-ms-enum": {
         "name": "AiGatewayProvisioningState",
@@ -560,36 +502,6 @@
             "name": "Canceled",
             "value": "Canceled",
             "description": "The resource operation was canceled."
-          },
-          {
-            "name": "Created",
-            "value": "Created",
-            "description": "The resource has been created and is waiting for activation."
-          },
-          {
-            "name": "Activating",
-            "value": "Activating",
-            "description": "The resource is being activated."
-          },
-          {
-            "name": "Updating",
-            "value": "Updating",
-            "description": "The resource is being updated."
-          },
-          {
-            "name": "Upgrading",
-            "value": "Upgrading",
-            "description": "The resource runtime is being upgraded."
-          },
-          {
-            "name": "Deleting",
-            "value": "Deleting",
-            "description": "The resource is being deleted."
-          },
-          {
-            "name": "DeleteFailed",
-            "value": "DeleteFailed",
-            "description": "The resource deletion failed."
           }
         ]
       }
@@ -644,28 +556,6 @@
       },
       "required": [
         "value"
-      ]
-    },
-    "AiGatewaySecrets": {
-      "type": "object",
-      "description": "Primary and secondary secret values of an AI Gateway.",
-      "properties": {
-        "primary": {
-          "type": "string",
-          "format": "password",
-          "description": "Primary secret value.",
-          "x-ms-secret": true
-        },
-        "secondary": {
-          "type": "string",
-          "format": "password",
-          "description": "Secondary secret value.",
-          "x-ms-secret": true
-        }
-      },
-      "required": [
-        "primary",
-        "secondary"
       ]
     },
     "AiGatewaySubnet": {
