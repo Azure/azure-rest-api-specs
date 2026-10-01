@@ -53,6 +53,7 @@ using Microsoft.Storage;
 // csharp rename-mapping decorators
 @@clientName(AccessTier, "StorageAccountAccessTier", "csharp");
 @@clientName(AccountStatus, "StorageAccountStatus", "csharp");
+@@clientName(AiProvider, "AIProvider", "csharp");
 @@clientName(
   AzureFilesIdentityBasedAuthentication,
   "FilesIdentityBasedAuthentication",
@@ -860,6 +861,11 @@ namespace Azure.ResourceManager.Models {
 @@clientName(TableAccessPolicy.expiryTime, "ExpireOn", "csharp");
 @@clientName(ManagementPolicyRule.type, "RuleType", "csharp");
 @@clientName(BlobInventoryPolicySchema.type, "RuleType", "csharp");
+@@clientName(
+  AdvancedPlatformMetricsRuleProperties.enabled,
+  "IsEnabled",
+  "csharp"
+);
 
 // Additional property renames for StorageAccount properties
 @@clientName(
@@ -985,6 +991,16 @@ namespace Azure.ResourceManager.Models {
   "ShouldTestConnection",
   "csharp"
 );
+@@clientName(
+  ContextCacheContainerProperties.timeToLive,
+  "TimeToLiveInDays",
+  "csharp"
+);
+@@clientName(
+  ContextCacheContainerPropertiesUpdate.timeToLive,
+  "TimeToLiveInDays",
+  "csharp"
+);
 
 // LocalUser property renames
 @@clientName(
@@ -1024,6 +1040,11 @@ namespace Azure.ResourceManager.Models {
 @@alternateType(ActiveDirectoryProperties.domainGuid, uuid, "csharp");
 @@alternateType(EncryptionScopeKeyVaultProperties.keyUri, url, "csharp");
 @@alternateType(KeyVaultProperties.keyvaulturi, url, "csharp");
+@@alternateType(
+  Azure.ResourceManager.CommonTypes.CustomerManagedKeyEncryption.keyEncryptionKeyUrl,
+  url,
+  "csharp"
+);
 
 // Rename DomainGuid → ActiveDirectoryDomainGuid for backward compat
 @@clientName(
