@@ -6,12 +6,14 @@ import { appendFile, stat } from "node:fs/promises";
 import { relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import pc from "picocolors";
-import { simpleGit } from "simple-git";
+import { simpleGit, type SimpleGit } from "simple-git";
 import { formatRuleSummary, supportsColor, type RuleCounts } from "./diagnostics.ts";
 import { findChangedProjects, findProjects, type ChangedProjectsOptions } from "./find-projects.ts";
 
 interface RunOptions {
   gitClean?: boolean;
+  /** With gitClean, append each project's changes to this patch file before they are discarded. */
+  diffOutput?: string;
   dryRun?: boolean;
   verbose?: boolean;
   summaryFile?: string;
@@ -90,6 +92,17 @@ export async function runChanged(
     return true;
   }
   return runProjects(root, projects, { checkingAllSpecs, baseCommitish, headCommitish }, options);
+}
+
+/** Appends tracked and untracked changes to a patch that `git apply` accepts. */
+async function saveDiff(git: SimpleGit, project: string, file: string): Promise<void> {
+  await git.raw(["add", "--intent-to-add", "--all"]);
+  try {
+    const diff = await git.raw(["diff", "--binary"]);
+    if (diff) await appendFile(file, `# ${project}\n${diff}`);
+  } finally {
+    await git.raw(["reset", "--quiet"]);
+  }
 }
 
 async function runProjects(
@@ -178,6 +191,7 @@ async function runProjects(
       throw error;
     } finally {
       if (gitClean) {
+        if (options.diffOutput) await saveDiff(git, name, options.diffOutput);
         await git.raw(["restore", "--worktree", "--", "."]);
         await git.clean("f", ["-d"]);
       }

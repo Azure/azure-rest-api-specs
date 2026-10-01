@@ -25,6 +25,9 @@ jobs:
 
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
+        with:
+          # PRs into typespec-next hold spec changes that need the upcoming TypeSpec release.
+          typespec-channel: ${{ github.base_ref == 'typespec-next' && 'next' || 'stable' }}
 
       - name: Validate Impacted Specs
         # Only main and RPSaaSMaster validate all specs when core files change.

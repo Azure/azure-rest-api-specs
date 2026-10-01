@@ -586,6 +586,32 @@ it("cleans the entire checkout after failed and successful projects, retaining i
   expect(await readFile(join(root, "cache.tmp"), "utf8")).toBe("keep");
 });
 
+it("saves each project's changes as an applicable patch before cleanup", async () => {
+  await addProject("specification/a");
+  await addProject("specification/b");
+  const git = await commitFixture();
+  const patch = join(await mkdtemp(join(tmpdir(), "tsv-diff-")), "changes.patch");
+  vi.mocked(spawn)
+    .mockImplementationOnce(() => {
+      writeFileSync(join(root, "tracked.txt"), "changed");
+      writeFileSync(join(root, "specification", "a", "new.json"), "{}");
+      return exitingChild(1);
+    })
+    .mockImplementationOnce(() => exitingChild());
+
+  await expect(
+    runAll(join(root, "specification"), { gitClean: true, diffOutput: patch }),
+  ).resolves.toBe(false);
+  expect((await git.status()).isClean()).toBe(true);
+
+  const content = await readFile(patch, "utf8");
+  expect(content).toMatch(/^# specification\/a\n/);
+  expect(content).not.toContain("# specification/b");
+  await git.raw(["apply", patch]);
+  expect(await readFile(join(root, "tracked.txt"), "utf8")).toBe("changed");
+  expect(await readFile(join(root, "specification", "a", "new.json"), "utf8")).toBe("{}");
+});
+
 it.each(["modified", "staged", "untracked"])(
   "refuses cleanup with pre-existing %s files",
   async (state) => {

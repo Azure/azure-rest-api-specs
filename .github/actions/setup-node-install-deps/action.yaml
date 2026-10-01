@@ -17,6 +17,9 @@ inputs:
   cache:
     description: 'Whether to cache the pnpm store. Disable for tiny installs (e.g. a "--prod --filter" subset of a few packages) where restoring/saving the cache costs more time than it saves.'
     default: "true"
+  typespec-channel:
+    description: 'TypeSpec packages to install: "stable" for the committed versions, or an npm dist-tag/version such as "next". Any other value replaces "install-command" with eng/scripts/typespec-channel.mts, which installs the requested versions and leaves the checkout clean.'
+    default: "stable"
 
 runs:
   using: "composite"
@@ -55,13 +58,22 @@ runs:
         restore-keys: |
           pnpm-store-${{ runner.os }}-${{ runner.arch }}-${{ inputs.cache-name }}-
 
-    - run: |
+    - if: ${{ inputs.typespec-channel == 'stable' }}
+      run: |
         echo "::group::$INSTALL_COMMAND"
         $INSTALL_COMMAND
         echo "::endgroup::"
       shell: bash
       env:
         INSTALL_COMMAND: ${{ inputs.install-command }}
+      working-directory: ${{ inputs.working-directory }}
+
+    - if: ${{ inputs.typespec-channel != 'stable' }}
+      name: Install TypeSpec ${{ inputs.typespec-channel }}
+      run: node eng/scripts/typespec-channel.mts "$TYPESPEC_CHANNEL" --clean-checkout
+      shell: bash
+      env:
+        TYPESPEC_CHANNEL: ${{ inputs.typespec-channel }}
       working-directory: ${{ inputs.working-directory }}
 
     - run: |

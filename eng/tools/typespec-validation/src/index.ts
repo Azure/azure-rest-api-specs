@@ -203,6 +203,14 @@ export async function main() {
         "after each project. Requires a clean, disposable checkout; " +
         "ignored files are retained.",
     },
+    "diff-output": {
+      type: "string",
+      valueLabel: "<file>",
+      group: "Options for --all or --changed",
+      description:
+        "With --git-clean, append each project's generated changes to <file> before cleanup, " +
+        "as a patch for `git apply`. Use a path outside the checkout.",
+    },
   } satisfies Record<string, CliOption>;
   const parsedArgs = parseArgsWithHelp({ args, options, allowPositionals: true, help });
   if (!parsedArgs) return;
@@ -219,6 +227,11 @@ export async function main() {
   }
   if ((values["git-clean"] || values["dry-run"]) && !values.all && !values.changed) {
     console.error("--git-clean and --dry-run require --all or --changed");
+    process.exitCode = 1;
+    return;
+  }
+  if (values["diff-output"] !== undefined && !values["git-clean"]) {
+    console.error("--diff-output requires --git-clean");
     process.exitCode = 1;
     return;
   }
@@ -261,6 +274,7 @@ export async function main() {
       headCommitish: values.head,
       ignoreCoreFiles: values["ignore-core-files"],
       gitClean: values["git-clean"],
+      diffOutput: values["diff-output"],
       dryRun: values["dry-run"],
       verbose: values.verbose,
     });
@@ -278,6 +292,7 @@ export async function main() {
     }
     const success = await runAll(parsedArgs.positionals[0] ?? "specification", {
       gitClean: values["git-clean"],
+      diffOutput: values["diff-output"],
       shard: values.shard,
       dryRun: values["dry-run"],
       verbose: values.verbose,
