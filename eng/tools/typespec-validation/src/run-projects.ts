@@ -2,7 +2,7 @@ import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
 import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 import { getSuppressions } from "@azure-tools/suppressions";
 import { spawn } from "node:child_process";
-import { stat } from "node:fs/promises";
+import { appendFile, stat } from "node:fs/promises";
 import { relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import pc from "picocolors";
@@ -14,6 +14,7 @@ interface RunOptions {
   gitClean?: boolean;
   dryRun?: boolean;
   verbose?: boolean;
+  summaryFile?: string;
 }
 
 interface RunContext {
@@ -194,7 +195,29 @@ async function runProjects(
         getFailureInstructions(failed),
     );
   }
+  if (options.summaryFile) {
+    await writeGithubSummary(options.summaryFile, counts, failed);
+  }
   return failed.length === 0;
+}
+
+async function writeGithubSummary(
+  summaryFile: string,
+  counts: RuleCounts,
+  failed: string[],
+): Promise<void> {
+  const completed = counts.PASS + counts.FAIL + counts.SUPPRESSED;
+  const lines =
+    failed.length > 0
+      ? [
+          `❌ **${failed.length} of ${completed} projects failed.**`,
+          "",
+          "### Failed projects",
+          "",
+          ...failed.map((project) => `- \`${project}\``),
+        ]
+      : [`✅ **No projects failed (${counts.PASS} passed, ${counts.SUPPRESSED} suppressed).**`];
+  await appendFile(summaryFile, ["## TypeSpec Validation", "", ...lines, ""].join("\n"));
 }
 
 /**

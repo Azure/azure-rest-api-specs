@@ -75,6 +75,22 @@ describe("workflow files", () => {
     },
   );
 
+  it("publishes TSV all failures to the GitHub job summary", async () => {
+    const workflow = z
+      .object({
+        jobs: z.object({
+          "typespec-validation-all": z.object({
+            steps: z.array(z.object({ run: z.string().optional() })),
+          }),
+        }),
+      })
+      .parse(load(await readFile(resolve(workflowsDir, "typespec-validation-all.yaml"), "utf8")));
+    const command = workflow.jobs["typespec-validation-all"].steps.find((step) =>
+      step.run?.includes("node eng/tools/typespec-validation/cmd/tsv.js"),
+    )?.run;
+    expect(command).toContain("--github-summary");
+  });
+
   it("should be named *.yaml or *.md", async () => {
     const entries = await readdir(workflowsDir, { withFileTypes: true });
 

@@ -62,6 +62,7 @@ it("shows the same help for --help and -h without a project or Git repository", 
     "--ignore-core-files",
     "--dry-run",
     "--git-clean",
+    "--github-summary",
     "default: HEAD^",
     "default: HEAD)",
     "--all and --changed cannot be combined",
@@ -93,6 +94,7 @@ it.each([
   ["--all", "--changed"],
   ["--git-clean"],
   ["--dry-run"],
+  ["--github-summary"],
   ["--shard=invalid"],
   ["--base=missing-ref"],
   ["missing-project", "{invalid-json"],
@@ -374,6 +376,19 @@ it("requires --all for --shard", async () => {
   });
 });
 
+it("requires --all and the GitHub summary environment for --github-summary", async () => {
+  await expect(run("--github-summary", "project")).rejects.toMatchObject({
+    code: 1,
+    stderr: expect.stringContaining("--github-summary requires --all") as unknown,
+  });
+  await expect(run("--all", "--github-summary")).rejects.toMatchObject({
+    code: 1,
+    stderr: expect.stringContaining(
+      "--github-summary requires the GITHUB_STEP_SUMMARY environment variable",
+    ) as unknown,
+  });
+});
+
 it.each(["1", "0/2", "3/2"])("exits nonzero for invalid --shard=%s", async (shard) => {
   await addProject("specification/a");
   await expect(run("--all", `--shard=${shard}`)).rejects.toMatchObject({
@@ -425,7 +440,7 @@ it("rejects extra positional arguments to --all", async () => {
   await expect(run("--all", "specification", "extra")).rejects.toMatchObject({
     code: 1,
     stderr: expect.stringContaining(
-      "Usage: tsv --all [folder] [--shard=<index>/<count>] [--git-clean] [--dry-run]",
+      "Usage: tsv --all [folder] [--shard=<index>/<count>] [--github-summary] [--git-clean] [--dry-run]",
     ) as unknown,
   });
 });
@@ -578,6 +593,7 @@ it("supports --dry-run with --all", async () => {
 it.each([
   { args: ["--all", "--changed"], error: "--all and --changed cannot be combined" },
   { args: ["--changed", "--shard=1/2"], error: "--shard requires --all" },
+  { args: ["--changed", "--github-summary"], error: "--github-summary requires --all" },
   {
     args: ["--all", "--base=HEAD"],
     error: "--base, --head and --ignore-core-files require --changed",

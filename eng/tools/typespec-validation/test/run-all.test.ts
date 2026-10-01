@@ -186,6 +186,54 @@ it("groups each project in GitHub Actions, including failures and suppressions",
   `);
 });
 
+it("appends all failed projects to the GitHub job summary", async () => {
+  await addProject("specification/a");
+  await addProject("specification/b");
+  await addProject("specification/c");
+  await simpleGit(root).init();
+  vi.mocked(spawn)
+    .mockImplementationOnce(() => exitingChild(1))
+    .mockImplementationOnce(() => exitingChild())
+    .mockImplementationOnce(() => exitingChild(1));
+  const summaryFile = join(root, "summary.md");
+  await writeFile(summaryFile, "Existing summary\n");
+
+  await expect(runAll(join(root, "specification"), { summaryFile })).resolves.toBe(false);
+  expect(await readFile(summaryFile, "utf8")).toBe(
+    d`
+      Existing summary
+      ## TypeSpec Validation
+
+      ❌ **2 of 3 projects failed.**
+
+      ### Failed projects
+
+      - \`specification/a\`
+      - \`specification/c\`
+    ` + "\n",
+  );
+});
+
+it("reports successful and suppressed project counts in the GitHub job summary", async () => {
+  await addProject("specification/a");
+  await addProject("specification/b");
+  await simpleGit(root).init();
+  await writeFile(
+    join(root, "suppressions.yaml"),
+    "- tool: TypeSpecValidationAll\n  paths: [specification/b]\n  reason: skipped\n",
+  );
+  const summaryFile = join(root, "summary.md");
+
+  await expect(runAll(join(root, "specification"), { summaryFile })).resolves.toBe(true);
+  expect(await readFile(summaryFile, "utf8")).toBe(
+    d`
+      ## TypeSpec Validation
+
+      ✅ **No projects failed (1 passed, 1 suppressed).**
+    ` + "\n",
+  );
+});
+
 it("escapes percent signs and newlines in GitHub error annotations", async () => {
   vi.stubEnv("GITHUB_ACTIONS", "true");
   await addProject("specification/service%0A/Project");
