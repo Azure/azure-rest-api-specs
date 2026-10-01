@@ -74,6 +74,7 @@ model StorageDiscoveryWorkspacePropertiesUpdate
 @added(ApiVersion.v2026_10_01_preview)
 model StorageDiscoveryCapabilitiesUpdate {
   @doc("The Azure Blob Storage capability configuration to update.")
+  @Azure.ClientGenerator.Core.clientName("AzureBlobStorageCapabilities", "csharp")
   azureBlobStorage?: AzureBlobStorageCapabilityUpdate;
 }
 
@@ -139,6 +140,7 @@ model StorageDiscoveryScope {
 @added(ApiVersion.v2026_10_01_preview)
 model StorageDiscoveryCapabilities {
   @doc("The Azure Blob Storage capability configuration for the storage discovery workspace.")
+  @Azure.ClientGenerator.Core.clientName("AzureBlobStorageCapabilities", "csharp")
   azureBlobStorage: AzureBlobStorageCapability;
 }
 
