@@ -74,6 +74,7 @@ export class CompileRule implements Rule {
 
             logger.debug(`Output folder:\n${outputFolder}`);
 
+            // Projects may intentionally share emitted Swagger at their service's specification root.
             const allowedOutputFolderPath = untilLastSegmentWithParent(folder, "specification");
             if (!allowedOutputFolderPath) {
               throw new Error(`Could not determine the allowed output folder for '${folder}'`);
