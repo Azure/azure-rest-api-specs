@@ -75,10 +75,12 @@ model AiGatewayResource is Azure.ResourceManager.TrackedResource<
     NamePattern = "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
   >;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
+  ...Azure.ResourceManager.ResourceSkuProperty;
   ...Azure.ResourceManager.EntityTagProperty;
 }
 
 /** Parameters for updating an AI Gateway. */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "The SKU cannot be changed after the AI Gateway is created."
 @added(Versions.v2026_09_01_preview)
 model AiGatewayUpdateParameters {
   ...Azure.ResourceManager.Foundations.TagsUpdateModel<AiGatewayResource>;
