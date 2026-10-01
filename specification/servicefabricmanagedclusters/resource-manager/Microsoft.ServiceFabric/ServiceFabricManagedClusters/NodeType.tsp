@@ -813,7 +813,7 @@ model NodeTypeActionParameters {
 }
 
 /**
- * Parameters for reimaging all disks on a single node.
+ * Parameters for the operation that reimages all disks on a single node.
  */
 @added(Versions.v2026_09_01_preview)
 model ReimageAllDisksParameters {
