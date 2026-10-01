@@ -76,7 +76,7 @@ model StorageDiscoveryCapabilitiesUpdate {
   @doc("The Azure Blob Storage capability configuration to update.")
   @Azure.ClientGenerator.Core.clientName(
     "AzureBlobStorageCapabilities",
-     "csharp"
+    "csharp"
   )
   azureBlobStorage?: AzureBlobStorageCapabilityUpdate;
 }
@@ -145,7 +145,7 @@ model StorageDiscoveryCapabilities {
   @doc("The Azure Blob Storage capability configuration for the storage discovery workspace.")
   @Azure.ClientGenerator.Core.clientName(
     "AzureBlobStorageCapabilities",
-     "csharp"
+    "csharp"
   )
   azureBlobStorage: AzureBlobStorageCapability;
 }
