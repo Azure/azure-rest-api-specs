@@ -1512,9 +1512,6 @@
               }
             }
           },
-          "204": {
-            "description": "Operation completed successfully."
-          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -1822,6 +1819,25 @@
           }
         }
       }
+    },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
     },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
@@ -2164,30 +2180,9 @@
         "user"
       ]
     },
-    "CloudAccountUpdate": {
+    "CloudAccountPropertiesUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the CloudAccount.",
-      "properties": {
-        "identity": {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
-          "description": "The managed service identities assigned to this resource."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/CloudAccountUpdateProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      }
-    },
-    "CloudAccountUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the CloudAccount.",
+      "description": "Properties specific to Commvault Cloud Account resource",
       "properties": {
         "marketplace": {
           "$ref": "#/definitions/LiftrBase.MarketplaceDetailsUpdate",
@@ -2203,6 +2198,25 @@
           "description": "Details of the user."
         }
       }
+    },
+    "CloudAccountUpdate": {
+      "type": "object",
+      "description": "A Commvault Cloud Account Resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/CloudAccountPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
     },
     "CommvaultPlan": {
       "type": "object",
@@ -2972,7 +2986,10 @@
       "required": [
         "dataSourceType",
         "plan",
-        "resources"
+        "resources",
+        "protectionStatus",
+        "numberOfProtectedItems",
+        "lastBackUpTime"
       ]
     },
     "ProtectionGroupResources": {
