@@ -3608,7 +3608,7 @@ model VMGalleryApplication {
   sharedGalleryApplicationId?: string;
 
   /**
-   * Specifies the community gallery application version resource ID.
+   * Specifies the community gallery application version resource id on the form of /communityGalleries/{PublicGalleryName}/applications/{applicationName}/versions/{version}
    */
   @added(Versions.v2026_09_01)
   communityGalleryApplicationId?: string;
@@ -3646,6 +3646,14 @@ model VMGalleryApplication {
 }
 
 /**
+ * Specifies the properties of a gallery application resource.
+ */
+@added(Versions.v2026_09_01)
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "The existing VM application response does not include provisioningState."
+model VMGalleryApplicationProperties
+  is OmitProperties<VMGalleryApplication, "tags">;
+
+/**
  * Specifies a custom action for a gallery application.
  */
 @added(Versions.v2026_09_01)
@@ -3670,6 +3678,7 @@ model VMGalleryApplicationCustomAction {
   /**
    * Optional. The list of parameters for the custom action.
    */
+  @identifiers(#[])
   parameters?: VMGalleryApplicationCustomActionParameter[];
 }
 

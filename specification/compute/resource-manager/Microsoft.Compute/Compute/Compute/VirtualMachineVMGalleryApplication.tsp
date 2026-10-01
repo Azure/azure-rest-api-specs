@@ -19,7 +19,7 @@ namespace Compute;
 @added(Versions.v2026_09_01)
 @parentResource(VirtualMachine)
 model VirtualMachineVMGalleryApplication
-  is Azure.ResourceManager.ProxyResource<VMGalleryApplication> {
+  is Azure.ResourceManager.ProxyResource<VMGalleryApplicationProperties> {
   ...ResourceNameParameter<
     Resource = VirtualMachineVMGalleryApplication,
     KeyName = "applicationName",
@@ -33,7 +33,7 @@ model VirtualMachineVMGalleryApplication
  */
 @added(Versions.v2026_09_01)
 model VMGalleryApplicationUpdate
-  is OptionalProperties<UpdateableProperties<VMGalleryApplication>>;
+  is OptionalProperties<UpdateableProperties<VMGalleryApplicationProperties>>;
 
 /**
  * Describes an update to a gallery application installed on a virtual machine.
@@ -41,7 +41,7 @@ model VMGalleryApplicationUpdate
 @added(Versions.v2026_09_01)
 model VirtualMachineVMGalleryApplicationUpdate {
   /**
-   * The gallery application properties. This can be omitted for a tags-only update.
+   * The gallery application properties.
    */
   properties?: VMGalleryApplicationUpdate;
 }

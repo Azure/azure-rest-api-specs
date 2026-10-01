@@ -19,7 +19,7 @@ namespace Compute;
 @added(Versions.v2026_09_01)
 @parentResource(VirtualMachineScaleSetVM)
 model VirtualMachineScaleSetVMGalleryApplication
-  is Azure.ResourceManager.ProxyResource<VMGalleryApplication> {
+  is Azure.ResourceManager.ProxyResource<VMGalleryApplicationProperties> {
   ...ResourceNameParameter<
     Resource = VirtualMachineScaleSetVMGalleryApplication,
     KeyName = "applicationName",
