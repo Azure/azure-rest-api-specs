@@ -172,9 +172,11 @@ describe("compile", function () {
     );
   });
 
-  it("should allow output swaggers under a v2 project folder", async () => {
-    const folder = "specification/foo/data-plane/Azure.Foo";
-    const output = `${folder}/stable/2024-01-01/foo.json`;
+  it("should allow output swaggers in a shared v2 service folder", async () => {
+    const folder =
+      "specification/authorization/resource-manager/Microsoft.Authorization/Authorization/AccessReview";
+    const output =
+      "specification/authorization/resource-manager/Microsoft.Authorization/Authorization/stable/2021-12-01-preview/authorization-AccessReviewCalls.json";
     runNodeBinSpy.mockResolvedValue([null, output, ""]);
     vi.mocked(nativeGlob.globFiles).mockResolvedValue([]);
 

@@ -6,13 +6,7 @@ import { globFiles } from "../glob.ts";
 import { failure, type Diagnostic, type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
 import { parse } from "../tsp-config.ts";
-import {
-  fileExists,
-  getStructureVersion,
-  getSuppressions,
-  normalizePath,
-  readTspConfig,
-} from "../utils.ts";
+import { fileExists, getSuppressions, normalizePath, readTspConfig } from "../utils.ts";
 
 export class FolderStructureRule implements Rule {
   readonly name = "FolderStructure";
@@ -23,7 +17,11 @@ export class FolderStructureRule implements Rule {
     const diagnostics: Diagnostic[] = [];
     const gitRoot = normalizePath(await simpleGit(folder).revparse("--show-toplevel"));
     const relativePath = path.relative(gitRoot, folder).split(path.sep).join("/");
-    const structureVersion = getStructureVersion(relativePath);
+
+    // If the folder containing TypeSpec sources is under "data-plane" or "resource-manager", the spec
+    // must be using "folder structure v2".  Otherwise, it must be using v1.
+    const structureVersion =
+      relativePath.includes("data-plane") || relativePath.includes("resource-manager") ? 2 : 1;
 
     if (structureVersion === 1) {
       const suppressions = (await getSuppressions(folder)).filter((s) =>

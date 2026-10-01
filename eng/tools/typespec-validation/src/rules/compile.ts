@@ -1,5 +1,4 @@
 import { filterAsync } from "@azure-tools/specs-shared/array";
-import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 import { untilLastSegmentWithParent } from "@azure-tools/specs-shared/path";
 import type { ILogger } from "@azure-tools/specs-shared/logger";
 import { readFile } from "node:fs/promises";
@@ -10,13 +9,7 @@ import { blocks, filePath, indent, lines, verbatim } from "../diagnostic-content
 import { globFiles } from "../glob.ts";
 import { type Diagnostic, type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
-import {
-  fileExists,
-  getStructureVersion,
-  getSuppressions,
-  gitDiffTopSpecFolder,
-  runNodeBin,
-} from "../utils.ts";
+import { fileExists, getSuppressions, gitDiffTopSpecFolder, runNodeBin } from "../utils.ts";
 
 export class CompileRule implements Rule {
   readonly name = "Compile";
@@ -81,11 +74,7 @@ export class CompileRule implements Rule {
 
             logger.debug(`Output folder:\n${outputFolder}`);
 
-            const gitRoot = await getRootFolder(folder);
-            const relativeFolder = path.relative(gitRoot, folder).split(path.sep).join("/");
-            const structureVersion = getStructureVersion(relativeFolder);
-            const allowedOutputFolderPath =
-              structureVersion === 2 ? folder : untilLastSegmentWithParent(folder, "specification");
+            const allowedOutputFolderPath = untilLastSegmentWithParent(folder, "specification");
             if (!allowedOutputFolderPath) {
               throw new Error(`Could not determine the allowed output folder for '${folder}'`);
             }
