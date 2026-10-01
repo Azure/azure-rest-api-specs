@@ -36,7 +36,8 @@ stages:
 
         steps:
           - checkout: self
-            # Versioned follow-ups compare the saved and event commits before advancing a pin.
+            # Download full Git history to compare this run's commit with the saved commit.
+            # This prevents an older run from overwriting a newer commit in the release plan.
             fetchDepth: 0
 
           - template: /eng/common/pipelines/templates/steps/login-to-github.yml
