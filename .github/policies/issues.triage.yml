@@ -58,18 +58,5 @@ configuration:
           - addLabel:
               label: question
 
-      - description: Mark customer-reported issues for CXP attention when triaged
-        if:
-          - payloadType: Issues
-          - hasLabel:
-              label: customer-reported
-          - hasLabel:
-              label: needs-triage
-          - isAction:
-              action: Labeled
-        then:
-          - addLabel:
-              label: CXP Attention
-
 onFailure:
 onSuccess:
