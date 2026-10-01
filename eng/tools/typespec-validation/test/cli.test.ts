@@ -42,6 +42,7 @@ beforeEach(async () => {
   vi.stubEnv("DEBUG", "");
   vi.stubEnv("NO_COLOR", "1");
   vi.stubEnv("FORCE_COLOR", undefined);
+  vi.stubEnv("GITHUB_STEP_SUMMARY", undefined);
 });
 
 afterEach(async () => {
