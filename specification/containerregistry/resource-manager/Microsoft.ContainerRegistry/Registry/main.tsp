@@ -33,6 +33,9 @@ import "./CredentialSet.tsp";
 // Connected Registry feature
 import "./ConnectedRegistry.tsp";
 
+// Capacity reservation feature
+import "./CapacityReservation.tsp";
+
 // Private endpoint feature
 import "./PrivateLinkResource.tsp";
 import "./PrivateEndpointConnection.tsp";
@@ -72,6 +75,11 @@ enum Versions {
    * The 2025-11-01 API version.
    */
   v2025_11_01: "2025-11-01",
+
+  /**
+   * The 2026-11-01 API version.
+   */
+  v2026_11_01: "2026-11-01",
 
   /**
    * The latest preview API version.
