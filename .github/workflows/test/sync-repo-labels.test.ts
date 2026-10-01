@@ -42,6 +42,7 @@ interface Item {
 }
 interface Body {
   name?: string;
+  new_name?: string;
   color?: string;
   description?: string;
   archived?: boolean;
@@ -66,6 +67,7 @@ function fixture() {
     items: [] as Item[],
     failure: "",
     archiveUpdatesEnabled: true,
+    renameUpdatesEnabled: true,
     afterMark: () => {},
     requests: [] as { method: string; path: string; body: Body }[],
     graphTransform: (value: unknown): unknown => value,
@@ -114,9 +116,23 @@ function fixture() {
     }
     if (path.startsWith(`${prefix}/labels/`)) {
       const name = path.slice(`${prefix}/labels/`.length);
-      const label = state.labels.find((entry) => entry.name === name);
+      const label = state.labels.find((entry) => entry.name.toLowerCase() === name.toLowerCase());
       if (!label) return response({ message: "Not Found" }, 404);
       if (method === "PATCH") {
+        if (body.new_name !== undefined && state.renameUpdatesEnabled) {
+          if (
+            state.labels.some(
+              (entry) =>
+                entry.id !== label.id && entry.name.toLowerCase() === body.new_name!.toLowerCase(),
+            )
+          ) {
+            return response({ message: "Label already exists" }, 422);
+          }
+          for (const item of state.items) {
+            if (item.labels.delete(label.name)) item.labels.add(body.new_name);
+          }
+          label.name = body.new_name;
+        }
         if (body.color !== undefined) label.color = body.color;
         if (body.description !== undefined) label.description = body.description;
         if (body.archived !== undefined && state.archiveUpdatesEnabled) {
@@ -231,23 +247,29 @@ describe("native label archival", () => {
     f.state.labels[1] = active;
     f.state.items = [{ number: 1, kind: "issue", state: "CLOSED", labels: new Set([extra.name]) }];
     const run = await f.prepare();
-    expect(run.audit.plan.archive).toEqual([active]);
+    expect(run.audit.plan.archive).toEqual([{ before: active, name: "archived: unconfigured" }]);
     expect(run.audit.plan.delete).toEqual([]);
     expect(run.audit.replacements).toEqual([]);
     await run.apply();
     expect(f.state.labels[1]).toMatchObject({
-      name: extra.name,
+      name: "archived: unconfigured",
       color: extra.color,
       description: ARCHIVE_DESCRIPTION,
+      id: extra.id,
+      node_id: extra.node_id,
     });
     const archivedAt = f.state.labels[1].archived_at;
     expect(archivedAt).not.toBeNull();
-    expect(f.state.items[0].labels).toEqual(new Set([extra.name]));
+    expect(f.state.items[0].labels).toEqual(new Set(["archived: unconfigured"]));
     expect(f.mutations()).toEqual([
       {
         method: "PATCH",
         path: `${prefix}/labels/${extra.name}`,
-        body: { archived: true, description: ARCHIVE_DESCRIPTION },
+        body: {
+          new_name: "archived: unconfigured",
+          archived: true,
+          description: ARCHIVE_DESCRIPTION,
+        },
       },
     ]);
     const archiveRequest = f.fetch.mock.calls.find(([, init]) => init?.method === "PATCH");
@@ -255,7 +277,14 @@ describe("native label archival", () => {
       "2026-03-10",
     );
     expect(await run.outcome()).toMatchObject({
-      operations: [{ action: "archive", label: extra.name, status: "completed" }],
+      operations: [
+        {
+          action: "archive",
+          label: extra.name,
+          newName: "archived: unconfigured",
+          status: "completed",
+        },
+      ],
     });
     f.state.requests = [];
     await (await f.prepare()).apply();
@@ -292,7 +321,12 @@ describe("native label archival", () => {
     expect(f.mutations().map(({ method, body }) => ({ method, body }))).toEqual([
       {
         method: "PATCH",
-        body: { color: "abcdef", description: "Restored to the catalog", archived: false },
+        body: {
+          new_name: extra.name,
+          color: "abcdef",
+          description: "Restored to the catalog",
+          archived: false,
+        },
       },
     ]);
   });
@@ -394,6 +428,174 @@ describe("native label archival", () => {
     run.options.auditHash = catalogHash(content);
     await expect(run.apply()).rejects.toThrow("grace period");
     expect(f.mutations()).toEqual([]);
+  });
+});
+
+describe("archive label names", () => {
+  it.each(["preserve", "archive"] as const)(
+    "restores the name and assignments on the same label in %s mode",
+    async (policy) => {
+      const f = fixture();
+      f.state.catalog.unconfiguredLabels = policy;
+      f.state.labels[1].name = "archived: unconfigured";
+      f.state.items = [
+        {
+          number: 1,
+          kind: "issue",
+          state: "CLOSED",
+          labels: new Set(["archived: unconfigured", "keep"]),
+        },
+        {
+          number: 2,
+          kind: "pull_request",
+          state: "MERGED",
+          labels: new Set(["archived: unconfigured"]),
+        },
+      ];
+      f.state.catalog.labels.push({
+        name: extra.name,
+        color: "abcdef",
+        description: "Restored",
+      });
+      const run = await f.prepare();
+      expect(run.audit.plan.create).toEqual([]);
+      expect(run.audit.plan.delete).toEqual([]);
+      await run.apply();
+      expect(f.state.labels[1]).toEqual({
+        ...extra,
+        description: "Restored",
+        color: "abcdef",
+        archived_at: null,
+      });
+      expect(f.state.items.map(({ labels }) => [...labels].sort())).toEqual([
+        ["keep", extra.name],
+        [extra.name],
+      ]);
+      expect(f.mutations()).toEqual([
+        {
+          method: "PATCH",
+          path: `${prefix}/labels/archived: unconfigured`,
+          body: { new_name: extra.name, color: "abcdef", description: "Restored", archived: false },
+        },
+      ]);
+      f.state.requests = [];
+      await (await f.prepare()).apply();
+      expect(f.mutations()).toEqual([]);
+    },
+  );
+
+  it("renames older managed archives without resetting archived_at", async () => {
+    const f = fixture();
+    f.state.catalog.unconfiguredLabels = "archive";
+    const archivedAt = new Date().toISOString();
+    f.state.labels[1].archived_at = archivedAt;
+    const run = await f.prepare();
+    await run.apply();
+    expect(f.state.labels[1].name).toBe("archived: unconfigured");
+    expect(f.state.labels[1].archived_at).toBe(archivedAt);
+    expect(f.mutations()[0].body).toEqual({
+      new_name: "archived: unconfigured",
+      description: ARCHIVE_DESCRIPTION,
+    });
+    f.state.requests = [];
+    await (await f.prepare()).apply();
+    expect(f.mutations()).toEqual([]);
+  });
+
+  it("archives a manually restored managed label without stacking prefixes", async () => {
+    const f = fixture();
+    f.state.catalog.unconfiguredLabels = "archive";
+    f.state.labels[1].name = "archived: unconfigured";
+    f.state.labels[1].archived_at = null;
+    await (await f.prepare()).apply();
+    expect(f.state.labels[1].name).toBe("archived: unconfigured");
+    expect(f.state.labels[1].archived_at).not.toBeNull();
+    expect(f.mutations()).toHaveLength(1);
+  });
+
+  it("deletes an expired prefixed label through the existing audited replacement path", async () => {
+    const f = fixture();
+    f.state.catalog.unconfiguredLabels = "archive";
+    f.state.labels[1].name = "archived: unconfigured";
+    f.state.items = [
+      {
+        number: 1,
+        kind: "issue",
+        state: "CLOSED",
+        labels: new Set(["archived: unconfigured", "keep"]),
+      },
+    ];
+    const run = await f.prepare();
+    expect(run.audit.replacements[0].label.name).toBe("archived: unconfigured");
+    await run.apply();
+    expect(f.state.labels).toEqual([marker]);
+    expect(f.state.items[0].labels).toEqual(new Set(["keep", marker.name]));
+    expect(f.mutations().at(-1)).toMatchObject({
+      method: "DELETE",
+      path: `${prefix}/labels/archived: unconfigured`,
+    });
+  });
+
+  it.each(["archive", "restore"])("fails if a name collision appears before %s", async (action) => {
+    const f = fixture();
+    f.state.catalog.unconfiguredLabels = "archive";
+    let target = "archived: unconfigured";
+    if (action === "archive") {
+      f.state.labels[1].archived_at = null;
+    } else {
+      f.state.labels[1].name = target;
+      target = extra.name;
+      f.state.catalog.labels.push({
+        name: extra.name,
+        color: extra.color,
+        description: "Restored",
+      });
+    }
+    const run = await f.prepare();
+    const before = structuredClone(f.state.labels[1]);
+    f.state.labels.push({ ...marker, id: 99, node_id: "collision", name: target.toUpperCase() });
+    await expect(run.apply()).rejects.toThrow("Label name collision");
+    expect(f.state.labels[1]).toEqual(before);
+    expect(f.mutations()).toEqual([]);
+  });
+
+  it("propagates rename-target lookup failures instead of treating them as availability", async () => {
+    const f = fixture();
+    f.state.catalog.unconfiguredLabels = "archive";
+    f.state.labels[1].archived_at = null;
+    const run = await f.prepare();
+    f.state.failure = `GET ${prefix}/labels/archived: unconfigured`;
+    await expect(run.apply()).rejects.toThrow("Injected failure");
+    expect(f.mutations()).toEqual([]);
+  });
+
+  it("rejects an overlong archive name before persisting a plan or making writes", async () => {
+    const f = fixture();
+    f.state.catalog.unconfiguredLabels = "archive";
+    f.state.labels[1] = { ...extra, name: "x".repeat(41), archived_at: null };
+    await expect(f.prepare()).rejects.toThrow("exceeds 50 characters");
+    expect(f.mutations()).toEqual([]);
+  });
+
+  it.each(["archive", "restore"])("verifies GitHub actually renames during %s", async (action) => {
+    const f = fixture();
+    f.state.catalog.unconfiguredLabels = "archive";
+    if (action === "archive") {
+      f.state.labels[1].archived_at = null;
+    } else {
+      f.state.labels[1].name = "archived: unconfigured";
+      f.state.catalog.labels.push({
+        name: extra.name,
+        color: extra.color,
+        description: "Restored",
+      });
+    }
+    const run = await f.prepare();
+    f.state.renameUpdatesEnabled = false;
+    await expect(run.apply()).rejects.toThrow(
+      action === "archive" ? "GitHub did not archive" : "GitHub did not unarchive",
+    );
+    expect(f.mutations().some(({ method }) => method === "DELETE")).toBe(false);
   });
 });
 

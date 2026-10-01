@@ -120,10 +120,15 @@ Archival and deletion are implemented but **disabled**. Only a reviewed change t
 the catalog policy. Do not enable it until migration is complete and external
 automation, affected-item volume, and audit retention have been reviewed.
 
-In archive mode, an active label absent from the catalog is natively archived
-in GitHub and given this description:
+In archive mode, an active label absent from the catalog is renamed in place to
+`archived: <original name>`, natively archived in GitHub, and given this description:
 
 > Archived by label sync: absent from .github/labels.yaml. Eligible for deletion after 14 days.
+
+The prefix makes the status visible on existing issues and PRs. Renaming preserves
+the label's ID and assignments, but changes name-based searches and automation;
+any automation needing the original label should define it in the catalog.
+The `archived: ` prefix is reserved and cannot be used in catalog definitions.
 
 Archiving preserves existing assignments and prevents new ones. GitHub records
 the archive date in `archived_at`; subsequent synchronization does not reset it.
@@ -133,9 +138,19 @@ that exact warning description. Manually archived labels without the warning
 are left alone, even if they are old. Missing or invalid archive timestamps fail
 validation rather than being inferred.
 
-Adding a label back to the catalog unarchives it and restores its configured
-description and color, including in migration mode. This cancels its deletion.
+Adding the original name back to the catalog restores the same label's name,
+description, and color and removes its archived state, including in migration
+mode. The synchronizer recognizes the prefix together with the exact warning;
+it does not create a duplicate. This cancels its deletion.
 Removing it again starts a new grace period on the next archive.
+
+Name collisions stop synchronization for manual resolution, including when both
+the original and managed archived name already exist. Prefixing a name longer
+than 40 characters exceeds GitHub's 50-character limit and also fails explicitly:
+rename it deliberately before removing it from the catalog. Names are never
+silently truncated. Earlier managed archives without the prefix acquire it on
+the next archive-mode run without resetting their timestamp, unless already
+eligible for deletion.
 
 After the grace period, the existing replacement safeguard still applies: all
 affected issues and PRs, including closed and merged items, receive the reserved
