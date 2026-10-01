@@ -1,5 +1,4 @@
-import { inlineCode, renderMarkdownDoc } from "@azure-tools/specs-shared/markdown";
-import { d } from "@azure-tools/specs-shared/text";
+import { renderMarkdownDoc } from "@azure-tools/specs-shared/markdown";
 import { unlink, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { z } from "zod";
@@ -228,11 +227,8 @@ export function buildCommentBody({
 
   const formatErrors = formatResults.filter((result) => !result.valid);
   return renderMarkdownDoc([
-    d`
-      ## Package Name Review Required
-
-      **Plane:** ${planeType}
-    `,
+    "## Package Name Review Required",
+    `**Plane:** ${planeType}`,
     reviewTable.join("\n"),
     formatErrors.length > 0
       ? [
@@ -242,21 +238,21 @@ export function buildCommentBody({
           "> _Format validation does not block approval but should be reviewed._",
         ].join("\n")
       : undefined,
-    d`
-      **How to approve:**
-      - Per language: apply ${inlineCode("package-name-<language>-approved")} label
-      - All at once: apply ${inlineCode("package-name-approved-all")} label (shortcut for mgmt plane)
-
-      Merge is blocked until all languages are approved.
-    `,
+    [
+      "**How to approve:**",
+      "- Per language: apply `package-name-<language>-approved` label",
+      "- All at once: apply `package-name-approved-all` label (shortcut for mgmt plane)",
+      "",
+      "Merge is blocked until all languages are approved.",
+    ].join("\n"),
     resetLanguages && resetLanguages.length > 0
       ? `> ⚠️ **Package name changed** -- approvals for ${resetLanguages.join(", ")} have been reset.`
       : undefined,
-    d`
-      _Approver list: [.github/protected-labels.yml](../blob/${baseRef}/.github/protected-labels.yml)_
-      _Process: [.github/workflows/src/package-name-approval/PACKAGE-NAME-REVIEW-PROCESS.md](../blob/${baseRef}/.github/workflows/src/package-name-approval/PACKAGE-NAME-REVIEW-PROCESS.md)_
-      _Package names extracted via tsp compile with typespec-metadata emitter_
-    `,
+    [
+      `_Approver list: [.github/protected-labels.yml](../blob/${baseRef}/.github/protected-labels.yml)_`,
+      `_Process: [.github/workflows/src/package-name-approval/PACKAGE-NAME-REVIEW-PROCESS.md](../blob/${baseRef}/.github/workflows/src/package-name-approval/PACKAGE-NAME-REVIEW-PROCESS.md)_`,
+      "_Package names extracted via tsp compile with typespec-metadata emitter_",
+    ].join("\n"),
   ]);
 }
 
