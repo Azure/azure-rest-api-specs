@@ -1,5 +1,6 @@
 import { filterAsync } from "@azure-tools/specs-shared/array";
 import { untilLastSegmentWithParent } from "@azure-tools/specs-shared/path";
+import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
 import type { ILogger } from "@azure-tools/specs-shared/logger";
 import { readFile } from "node:fs/promises";
 import { stripVTControlCharacters } from "node:util";
@@ -9,7 +10,13 @@ import { blocks, filePath, indent, lines, verbatim } from "../diagnostic-content
 import { globFiles } from "../glob.ts";
 import { type Diagnostic, type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
-import { fileExists, getSuppressions, gitDiffTopSpecFolder, runNodeBin } from "../utils.ts";
+import {
+  fileExists,
+  getStructureVersion,
+  getSuppressions,
+  gitDiffTopSpecFolder,
+  runNodeBin,
+} from "../utils.ts";
 
 export class CompileRule implements Rule {
   readonly name = "Compile";
@@ -74,28 +81,33 @@ export class CompileRule implements Rule {
 
             logger.debug(`Output folder:\n${outputFolder}`);
 
-            // Projects may intentionally share emitted Swagger at their service's specification root.
-            const allowedOutputFolderPath = untilLastSegmentWithParent(folder, "specification");
-            if (!allowedOutputFolderPath) {
-              throw new Error(`Could not determine the allowed output folder for '${folder}'`);
-            }
+            const gitRoot = await getRootFolder(folder);
+            const relativeFolder = path.relative(gitRoot, folder).split(path.sep).join("/");
 
-            const allowedOutputFolder = path.relative(process.cwd(), allowedOutputFolderPath);
-            const outputFolderRelativeToAllowed = path.relative(
-              allowedOutputFolderPath,
-              path.resolve(outputFolder),
-            );
+            if (getStructureVersion(relativeFolder) === 2) {
+              // Projects may intentionally share emitted Swagger at their service's specification root.
+              const allowedOutputFolderPath = untilLastSegmentWithParent(folder, "specification");
+              if (!allowedOutputFolderPath) {
+                throw new Error(`Could not determine the allowed output folder for '${folder}'`);
+              }
 
-            logger.debug(`Allowed output folder:\n${allowedOutputFolder}`);
-
-            if (
-              outputFolderRelativeToAllowed === ".." ||
-              outputFolderRelativeToAllowed.startsWith(`..${path.sep}`) ||
-              path.isAbsolute(outputFolderRelativeToAllowed)
-            ) {
-              throw new Error(
-                `Output folder '${outputFolder}' must be under path '${allowedOutputFolder}'`,
+              const allowedOutputFolder = path.relative(process.cwd(), allowedOutputFolderPath);
+              const outputFolderRelativeToAllowed = path.relative(
+                allowedOutputFolderPath,
+                path.resolve(outputFolder),
               );
+
+              logger.debug(`Allowed output folder:\n${allowedOutputFolder}`);
+
+              if (
+                outputFolderRelativeToAllowed === ".." ||
+                outputFolderRelativeToAllowed.startsWith(`..${path.sep}`) ||
+                path.isAbsolute(outputFolderRelativeToAllowed)
+              ) {
+                throw new Error(
+                  `Output folder '${outputFolder}' must be under path '${allowedOutputFolder}'`,
+                );
+              }
             }
 
             // Filter to only specs matching the folder and filename extracted from the first output-file.

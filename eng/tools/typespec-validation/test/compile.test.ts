@@ -165,11 +165,21 @@ describe("compile", function () {
   });
 
   it("should fail if output swaggers are outside the allowed folder", async () => {
+    const folder = "specification/foo/data-plane/Azure.Foo";
     runNodeBinSpy.mockResolvedValue([null, "tsp-output/contoso.json", ""]);
 
-    await expect(new CompileRule().execute(mockFolder, defaultLogger)).rejects.toThrow(
+    await expect(new CompileRule().execute(folder, defaultLogger)).rejects.toThrow(
       /Output folder .* must be under path/,
     );
+  });
+
+  it("should skip output-folder validation for v1 specs", async () => {
+    runNodeBinSpy.mockResolvedValue([null, "tsp-output/contoso.json", ""]);
+    vi.mocked(nativeGlob.globFiles).mockResolvedValue([]);
+
+    await expect(new CompileRule().execute(mockFolder, defaultLogger)).resolves.toMatchObject({
+      success: true,
+    });
   });
 
   it("should allow output swaggers in a shared v2 service folder", async () => {
