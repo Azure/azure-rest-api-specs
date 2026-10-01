@@ -2561,9 +2561,10 @@ model MarketplacePlanInfo {
   planId: string;
 
   /**
-   * The plan display name shown to the customer.
+   * The plan display name shown to the customer. The property is omitted when the Marketplace
+   * catalogue does not publish a display name for the plan.
    */
-  displayName: string;
+  displayName?: string;
 
   /**
    * The plan description.
