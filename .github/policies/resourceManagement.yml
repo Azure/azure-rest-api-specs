@@ -2378,6 +2378,23 @@ configuration:
       then:
       - addLabel:
           label: customer-reported
+      - if:
+        - and:
+          - not:
+              isActivitySender:
+                user: dependabot[bot]
+          - not:
+              isActivitySender:
+                user: azure-sdk-automation[bot]
+          - not:
+              isActivitySender:
+                user: github-actions[bot]
+          - not:
+              isActivitySender:
+                user: Copilot
+        then:
+        - addReply:
+            reply: Thank you for your contribution ${issueAuthor}! We will review the pull request and get back to you soon.
       description: 
     - if:
       - payloadType: Pull_Request
