@@ -94,7 +94,6 @@ suppressions:
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/afdEndpoints/{endpointName}"].delete
   - code: LroLocationHeader
     reason: Deletion is tracked through azure-asyncoperation, matching the other AzureFrontDoor resources in this specification.
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/errorPolicies/{errorPolicyName}"].delete
   - code: ArmResourcePropertiesBag
     reason: This is the API design and therefore exempted
     where: $.definitions.KnowledgeSource
