@@ -1023,7 +1023,7 @@ model ServerProperties {
   /**
    * The fully qualified Azure resource ID of the subnet for private outbound connectivity. Specify this property when creating or restoring a server, or to enable private outbound connectivity on an existing server. Once configured, the subnet cannot be changed or removed. Multiple servers can share a subnet. Cannot be used with network.delegatedSubnetResourceId.
    */
-  @added(Versions.v2026_03_01_preview)
+  @added(Versions.v2025_12_01_preview)
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   privateOutboundSubnetResourceId?: string;
 }
@@ -1334,7 +1334,7 @@ model ServerPropertiesForUpdate {
   /**
    * The fully qualified Azure resource ID of the subnet to enable private outbound connectivity on an existing server. Once configured, the subnet cannot be changed or removed. Omitting this property preserves the existing configuration. Multiple servers can share a subnet. Cannot be used with network.delegatedSubnetResourceId.
    */
-  @added(Versions.v2026_03_01_preview)
+  @added(Versions.v2025_12_01_preview)
   privateOutboundSubnetResourceId?: string;
 }
 

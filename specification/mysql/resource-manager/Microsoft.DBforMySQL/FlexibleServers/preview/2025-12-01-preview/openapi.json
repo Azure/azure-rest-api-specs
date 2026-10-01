@@ -582,6 +582,9 @@
         "x-ms-examples": {
           "List servers in a resource group": {
             "$ref": "./examples/ServersListByResourceGroup.json"
+          },
+          "List servers sharing a private outbound subnet": {
+            "$ref": "./examples/ServersListByResourceGroupWithSharedPrivateOutboundSubnet.json"
           }
         },
         "x-ms-pageable": {
@@ -634,6 +637,9 @@
         "x-ms-examples": {
           "Get a server": {
             "$ref": "./examples/ServerGet.json"
+          },
+          "Get a server with private outbound connectivity": {
+            "$ref": "./examples/ServerGetWithPrivateOutboundConnectivity.json"
           },
           "Get a server with vnet": {
             "$ref": "./examples/ServerGetWithVnet.json"
@@ -740,6 +746,15 @@
           "Create a server with non-default database port": {
             "$ref": "./examples/ServerCreateWithDatabasePort.json"
           },
+          "Create a server with private outbound connectivity": {
+            "$ref": "./examples/ServerCreateWithPrivateOutboundConnectivity.json"
+          },
+          "Create a server with private outbound connectivity and same-zone high availability": {
+            "$ref": "./examples/ServerCreateWithPrivateOutboundConnectivityAndHighAvailability.json"
+          },
+          "Restore a server to a point in time with an explicit private outbound subnet": {
+            "$ref": "./examples/ServerCreateWithPointInTimeRestoreAndPrivateOutboundConnectivity.json"
+          },
           "rename server": {
             "$ref": "./examples/ServerRename.json"
           }
@@ -815,6 +830,9 @@
           }
         },
         "x-ms-examples": {
+          "Enable private outbound connectivity on an existing server": {
+            "$ref": "./examples/ServerUpdateWithPrivateOutboundConnectivity.json"
+          },
           "Update a server": {
             "$ref": "./examples/ServerUpdate.json"
           },
@@ -7101,6 +7119,15 @@
             "read",
             "create"
           ]
+        },
+        "privateOutboundSubnetResourceId": {
+          "type": "string",
+          "description": "The fully qualified Azure resource ID of the subnet for private outbound connectivity. Specify this property when creating or restoring a server, or to enable private outbound connectivity on an existing server. Once configured, the subnet cannot be changed or removed. Multiple servers can share a subnet. Cannot be used with network.delegatedSubnetResourceId.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         }
       }
     },
@@ -7149,6 +7176,10 @@
         "network": {
           "$ref": "#/definitions/Network",
           "description": "Network related properties of a server"
+        },
+        "privateOutboundSubnetResourceId": {
+          "type": "string",
+          "description": "The fully qualified Azure resource ID of the subnet to enable private outbound connectivity on an existing server. Once configured, the subnet cannot be changed or removed. Omitting this property preserves the existing configuration. Multiple servers can share a subnet. Cannot be used with network.delegatedSubnetResourceId."
         }
       }
     },
