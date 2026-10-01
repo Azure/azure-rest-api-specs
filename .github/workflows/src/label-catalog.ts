@@ -2,6 +2,8 @@ import { parseDocument } from "yaml";
 import { z } from "zod";
 
 export const DELETED_LABEL = "label-deleted";
+export const ARCHIVE_RETENTION_DAYS = 14;
+export const ARCHIVE_DESCRIPTION = `Archived by label sync: absent from .github/labels.yaml. Eligible for deletion after ${ARCHIVE_RETENTION_DAYS} days.`;
 
 export const labelDefinitionSchema = z.strictObject({
   name: z
@@ -15,7 +17,7 @@ export const labelDefinitionSchema = z.strictObject({
 
 export const labelCatalogSchema = z
   .strictObject({
-    unconfiguredLabels: z.enum(["preserve", "replace"]),
+    unconfiguredLabels: z.enum(["preserve", "archive"]),
     labels: z.array(labelDefinitionSchema).min(1),
   })
   .superRefine((catalog, ctx) => {
@@ -45,12 +47,15 @@ export const existingLabelSchema = labelDefinitionSchema
     id: z.number().int().positive(),
     node_id: z.string().min(1),
     description: z.string().nullable(),
+    archived_at: z.iso.datetime({ offset: true }).nullable(),
   })
   .strip();
 
 export const labelPlanSchema = z.strictObject({
   create: z.array(labelDefinitionSchema),
   update: z.array(z.strictObject({ before: existingLabelSchema, after: labelDefinitionSchema })),
+  archive: z.array(existingLabelSchema),
+  delete: z.array(existingLabelSchema),
   unconfigured: z.array(existingLabelSchema),
   unchanged: z.number().int().nonnegative(),
 });
@@ -81,17 +86,36 @@ export function sameLabel(
   );
 }
 
-export function planLabels(catalog: LabelCatalog, existing: ExistingLabel[]): LabelPlan {
+export function isArchivedLabelExpired(label: ExistingLabel, now = new Date()): boolean {
+  return (
+    label.archived_at !== null &&
+    label.description === ARCHIVE_DESCRIPTION &&
+    Date.parse(label.archived_at) <= now.getTime() - ARCHIVE_RETENTION_DAYS * 24 * 60 * 60 * 1000
+  );
+}
+
+export function planLabels(
+  catalog: LabelCatalog,
+  existing: ExistingLabel[],
+  now = new Date(),
+): LabelPlan {
   const remaining = new Map(existing.map((label) => [label.name.toLowerCase(), label]));
   if (remaining.size !== existing.length) {
     throw new Error("GitHub returned duplicate label names");
   }
-  const plan: LabelPlan = { create: [], update: [], unconfigured: [], unchanged: 0 };
+  const plan: LabelPlan = {
+    create: [],
+    update: [],
+    archive: [],
+    delete: [],
+    unconfigured: [],
+    unchanged: 0,
+  };
   for (const label of catalog.labels.toSorted((a, b) => a.name.localeCompare(b.name, "en"))) {
     const before = remaining.get(label.name.toLowerCase());
     if (!before) {
       plan.create.push(label);
-    } else if (!sameLabel(before, label)) {
+    } else if (!sameLabel(before, label) || before.archived_at !== null) {
       plan.update.push({ before, after: label });
     } else {
       plan.unchanged++;
@@ -99,5 +123,9 @@ export function planLabels(catalog: LabelCatalog, existing: ExistingLabel[]): La
     remaining.delete(label.name.toLowerCase());
   }
   plan.unconfigured = [...remaining.values()].sort((a, b) => a.name.localeCompare(b.name, "en"));
+  if (catalog.unconfiguredLabels === "archive") {
+    plan.archive = plan.unconfigured.filter((label) => label.archived_at === null);
+    plan.delete = plan.unconfigured.filter((label) => isArchivedLabelExpired(label, now));
+  }
   return plan;
 }

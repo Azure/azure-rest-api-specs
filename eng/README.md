@@ -97,7 +97,8 @@ pnpm --dir .github labels --preview
 
 Validation is offline. Preview reads upstream labels without changing anything;
 set `GITHUB_TOKEN` to authenticate if needed. It lists proposed creates, metadata
-updates, and unconfigured labels. It does not enumerate replacement assignments.
+updates (including unarchiving), archives, expired archives to delete, and
+unconfigured labels. It does not enumerate replacement assignments.
 
 [Sync repository labels](../.github/workflows/sync-repo-labels.yaml) runs after
 relevant changes on `main`, when repository label definitions change, and daily.
@@ -107,34 +108,53 @@ Mutating runs use the upstream default branch and are disabled on forks. PR
 validation never changes GitHub labels.
 
 The current `unconfiguredLabels: preserve` policy creates/updates configured
-labels and warns about unconfigured ones. It does not automatically import or
-delete them. Removing an entry from YAML therefore leaves its GitHub label and
+labels and warns about unconfigured ones. It does not automatically import,
+archive, or delete them. Removing an entry from YAML therefore leaves its GitHub label and
 assignments intact. Resolve warnings by adding legitimate labels through a PR
 or reviewing the unwanted labels separately.
 
-### Disabled label replacement
+### Disabled archive lifecycle
 
-Replacement is implemented but **disabled**. Only a reviewed change to
-`unconfiguredLabels: replace` enables it; manual workflow inputs cannot override
+Archival and deletion are implemented but **disabled**. Only a reviewed change to
+`unconfiguredLabels: archive` enables them; manual workflow inputs cannot override
 the catalog policy. Do not enable it until migration is complete and external
 automation, affected-item volume, and audit retention have been reviewed.
 
-When enabled, unconfigured labels are replaced on all affected issues and PRs,
-including closed and merged items, with the reserved `label-deleted` label.
-Its description explains why the replacement happened. Other labels are
-preserved, and **no comments are posted**. An unused unconfigured label is
-deleted without applying the marker anywhere.
+In archive mode, an active label absent from the catalog is natively archived
+in GitHub and given this description:
+
+> Archived by label sync: absent from .github/labels.yaml. Eligible for deletion after 14 days.
+
+Archiving preserves existing assignments and prevents new ones. GitHub records
+the archive date in `archived_at`; subsequent synchronization does not reset it.
+The daily workflow only considers a label for deletion when it is still absent
+from the catalog, has been archived for at least **14 full days**, and still has
+that exact warning description. Manually archived labels without the warning
+are left alone, even if they are old. Missing or invalid archive timestamps fail
+validation rather than being inferred.
+
+Adding a label back to the catalog unarchives it and restores its configured
+description and color, including in migration mode. This cancels its deletion.
+Removing it again starts a new grace period on the next archive.
+
+After the grace period, the existing replacement safeguard still applies: all
+affected issues and PRs, including closed and merged items, receive the reserved
+`label-deleted` label before the archived label is deleted. Other labels are
+preserved, and **no comments are posted**. An unused expired label is deleted
+without applying the marker anywhere.
 
 Each run uploads `label-audit-before-<run-id>-<attempt>` before applying changes.
-It records original label metadata and, in replacement mode, affected item
-numbers, types, URLs, and states. `label-audit-outcome-<run-id>-<attempt>` records
+It records original label metadata, archive timestamps, and, for expired labels,
+affected item numbers, types, URLs, and states.
+`label-audit-outcome-<run-id>-<attempt>` records
 operations and failures. Download them from the workflow run's **Artifacts**
 section. Artifacts request 90-day retention, subject to repository policy; they
 are not permanent history. Export them before expiration if permanent retention
 is needed.
 
 Discovery, audit upload, or marker failures prevent deletion. Catalog changes,
-renamed labels, or new unaudited assignments also stop replacement. On partial
+renamed labels, changed archive timestamps/warnings, or new unaudited assignments
+also stop replacement. On partial
 failure, some items may have both the original label and the marker. Inspect the
 outcome artifact, resolve the error, and rerun; marker additions are idempotent.
 If a run is interrupted, `pending` operations may or may not have completed:

@@ -1,7 +1,14 @@
 import { readFile } from "node:fs/promises";
 import { describe, expect, it } from "vitest";
 import { stringify } from "yaml";
-import { DELETED_LABEL, parseLabelCatalog, planLabels } from "../src/label-catalog.ts";
+import {
+  ARCHIVE_DESCRIPTION,
+  DELETED_LABEL,
+  existingLabelSchema,
+  labelDefinitionSchema,
+  parseLabelCatalog,
+  planLabels,
+} from "../src/label-catalog.ts";
 import type { ExistingLabel, LabelCatalog, LabelDefinition } from "../src/label-catalog.ts";
 
 const marker: LabelDefinition = {
@@ -15,10 +22,11 @@ const existing = (label: LabelDefinition, id = 1): ExistingLabel => ({
   ...label,
   id,
   node_id: `label-${id}`,
+  archived_at: null,
 });
 
 describe("label catalog", () => {
-  it("validates the checked-in migration catalog without enabling replacement", async () => {
+  it("validates the checked-in migration catalog without enabling archival or deletion", async () => {
     const parsed = parseLabelCatalog(
       await readFile(new URL("../../labels.yaml", import.meta.url), "utf8"),
     );
@@ -31,13 +39,14 @@ describe("label catalog", () => {
 
   it("rejects duplicate YAML keys rather than accepting the last value", () => {
     expect(() =>
-      parseLabelCatalog("unconfiguredLabels: preserve\nunconfiguredLabels: replace\n"),
+      parseLabelCatalog("unconfiguredLabels: preserve\nunconfiguredLabels: archive\n"),
     ).toThrow("Invalid label YAML");
   });
 
   it.each([
     { ...catalog, unconfiguredLabels: undefined },
     { ...catalog, unconfiguredLabels: "delete" },
+    { ...catalog, unconfiguredLabels: "replace" },
     { ...catalog, labels: [] },
     { ...catalog, labels: [bug] },
     { ...catalog, labels: [marker, bug, { ...bug, name: "BUG" }] },
@@ -71,6 +80,8 @@ describe("label planning", () => {
     expect(planLabels(catalog, [oldBug, unknown])).toEqual({
       create: [marker],
       update: [{ before: oldBug, after: bug }],
+      archive: [],
+      delete: [],
       unconfigured: [unknown],
       unchanged: 0,
     });
@@ -81,12 +92,76 @@ describe("label planning", () => {
     expect(planLabels(catalog, [existing(marker, 2), actual])).toEqual({
       create: [],
       update: [],
+      archive: [],
+      delete: [],
       unconfigured: [],
       unchanged: 2,
     });
     expect(actual.description).toBeNull();
   });
 
+  describe("archive lifecycle planning", () => {
+    const archiveCatalog: LabelCatalog = { ...catalog, unconfiguredLabels: "archive" };
+    const now = new Date("2026-10-15T00:00:00.000Z");
+    const archived: ExistingLabel = {
+      ...existing({ ...bug, name: "retired" }, 3),
+      description: ARCHIVE_DESCRIPTION,
+      archived_at: "2026-10-01T00:00:00.000Z",
+    };
+
+    it("archives new unconfigured labels without deleting them or changing assignments", () => {
+      const active = { ...archived, archived_at: null, description: "Original description" };
+      const plan = planLabels(archiveCatalog, [active], now);
+      expect(plan.archive).toEqual([active]);
+      expect(plan.delete).toEqual([]);
+    });
+
+    it.each([
+      ["2026-10-01T00:00:00.001Z", false],
+      ["2026-10-01T00:00:00.000Z", true],
+      ["2026-09-30T23:59:59.999Z", true],
+      ["2026-10-16T00:00:00.000Z", false],
+    ])("deletes only after 14 full days (archived at %s)", (archived_at, expired) => {
+      const label = { ...archived, archived_at };
+      const plan = planLabels(archiveCatalog, [label], now);
+      expect(plan.archive).toEqual([]);
+      expect(plan.delete).toEqual(expired ? [label] : []);
+    });
+
+    it.each([null, "", "Manually archived", `${ARCHIVE_DESCRIPTION} `])(
+      "leaves already archived labels without our exact warning alone: %s",
+      (description) => {
+        const plan = planLabels(archiveCatalog, [{ ...archived, description }], now);
+        expect(plan.archive).toEqual([]);
+        expect(plan.delete).toEqual([]);
+      },
+    );
+
+    it("restores configured labels even if their metadata already matches", () => {
+      const label = { ...existing(bug), archived_at: archived.archived_at };
+      const plan = planLabels(archiveCatalog, [label], now);
+      expect(plan.update).toEqual([{ before: label, after: bug }]);
+      expect(plan.archive).toEqual([]);
+      expect(plan.delete).toEqual([]);
+    });
+
+    it("preserves even expired managed archives during migration", () => {
+      const plan = planLabels(catalog, [archived], now);
+      expect(plan.archive).toEqual([]);
+      expect(plan.delete).toEqual([]);
+    });
+
+    it("requires valid native timestamps rather than inferring an archive date", () => {
+      expect(() => existingLabelSchema.parse({ ...archived, archived_at: "not a date" })).toThrow();
+      expect(() => existingLabelSchema.parse({ ...archived, archived_at: undefined })).toThrow();
+    });
+
+    it("keeps the managed warning within GitHub's description limit", () => {
+      expect(() =>
+        labelDefinitionSchema.parse({ ...bug, description: ARCHIVE_DESCRIPTION }),
+      ).not.toThrow();
+    });
+  });
   it("rejects an ambiguous live inventory", () => {
     expect(() =>
       planLabels(catalog, [existing(bug), existing({ ...bug, name: "BUG" }, 2)]),

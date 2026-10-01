@@ -6,6 +6,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { parse, stringify } from "yaml";
 import { z } from "zod";
 import type { ExistingLabel, LabelCatalog } from "../src/label-catalog.ts";
+import { ARCHIVE_DESCRIPTION } from "../src/label-catalog.ts";
 import {
   applyLabelSync,
   catalogHash,
@@ -23,13 +24,15 @@ const marker: ExistingLabel = {
   description: "Removed label",
   id: 1,
   node_id: "label-1",
+  archived_at: null,
 };
 const extra: ExistingLabel = {
   name: "unconfigured",
   color: "123456",
-  description: "An old label",
+  description: ARCHIVE_DESCRIPTION,
   id: 2,
   node_id: "label-2",
+  archived_at: "2000-01-01T00:00:00Z",
 };
 interface Item {
   number: number;
@@ -41,6 +44,7 @@ interface Body {
   name?: string;
   color?: string;
   description?: string;
+  archived?: boolean;
   labels?: string[];
   query?: string;
   variables?: { id: string; cursor: string | null; count: number };
@@ -61,6 +65,7 @@ function fixture() {
     labels: [structuredClone(marker), structuredClone(extra)],
     items: [] as Item[],
     failure: "",
+    archiveUpdatesEnabled: true,
     afterMark: () => {},
     requests: [] as { method: string; path: string; body: Body }[],
     graphTransform: (value: unknown): unknown => value,
@@ -102,6 +107,7 @@ function fixture() {
         name: body.name!,
         color: body.color!,
         description: body.description ?? "",
+        archived_at: null,
       };
       state.labels.push(label);
       return response(label, 201);
@@ -111,7 +117,13 @@ function fixture() {
       const label = state.labels.find((entry) => entry.name === name);
       if (!label) return response({ message: "Not Found" }, 404);
       if (method === "PATCH") {
-        Object.assign(label, { color: body.color, description: body.description });
+        if (body.color !== undefined) label.color = body.color;
+        if (body.description !== undefined) label.description = body.description;
+        if (body.archived !== undefined && state.archiveUpdatesEnabled) {
+          label.archived_at = body.archived
+            ? (label.archived_at ?? new Date().toISOString())
+            : null;
+        }
       }
       if (method === "DELETE") {
         state.labels = state.labels.filter((entry) => entry !== label);
@@ -211,6 +223,180 @@ function fixture() {
   return { state, args, fetch, mutations, prepare };
 }
 
+describe("native label archival", () => {
+  it("archives an active unconfigured label once, preserving its assignments and archive timestamp", async () => {
+    const f = fixture();
+    f.state.catalog.unconfiguredLabels = "archive";
+    const active = { ...extra, description: "Original description", archived_at: null };
+    f.state.labels[1] = active;
+    f.state.items = [{ number: 1, kind: "issue", state: "CLOSED", labels: new Set([extra.name]) }];
+    const run = await f.prepare();
+    expect(run.audit.plan.archive).toEqual([active]);
+    expect(run.audit.plan.delete).toEqual([]);
+    expect(run.audit.replacements).toEqual([]);
+    await run.apply();
+    expect(f.state.labels[1]).toMatchObject({
+      name: extra.name,
+      color: extra.color,
+      description: ARCHIVE_DESCRIPTION,
+    });
+    const archivedAt = f.state.labels[1].archived_at;
+    expect(archivedAt).not.toBeNull();
+    expect(f.state.items[0].labels).toEqual(new Set([extra.name]));
+    expect(f.mutations()).toEqual([
+      {
+        method: "PATCH",
+        path: `${prefix}/labels/${extra.name}`,
+        body: { archived: true, description: ARCHIVE_DESCRIPTION },
+      },
+    ]);
+    const archiveRequest = f.fetch.mock.calls.find(([, init]) => init?.method === "PATCH");
+    expect(new Headers(archiveRequest?.[1]?.headers).get("x-github-api-version")).toBe(
+      "2026-03-10",
+    );
+    expect(await run.outcome()).toMatchObject({
+      operations: [{ action: "archive", label: extra.name, status: "completed" }],
+    });
+    f.state.requests = [];
+    await (await f.prepare()).apply();
+    expect(f.mutations()).toEqual([]);
+    expect(f.state.labels[1].archived_at).toBe(archivedAt);
+    expect(f.state.requests.some(({ path }) => path === "/graphql")).toBe(false);
+  });
+
+  it.each(["migration", "dry-run"])("does not archive active labels during %s", async (mode) => {
+    const f = fixture();
+    f.state.labels[1].archived_at = null;
+    if (mode === "dry-run") f.state.catalog.unconfiguredLabels = "archive";
+    await (await f.prepare(mode === "dry-run")).apply();
+    expect(f.mutations()).toEqual([]);
+    expect(f.state.labels[1].archived_at).toBeNull();
+  });
+
+  it("restores an archived label added to the catalog instead of deleting it", async () => {
+    const f = fixture();
+    f.state.catalog.unconfiguredLabels = "archive";
+    f.state.catalog.labels.push({
+      name: extra.name,
+      color: "abcdef",
+      description: "Restored to the catalog",
+    });
+    const run = await f.prepare();
+    expect(run.audit.plan.delete).toEqual([]);
+    await run.apply();
+    expect(f.state.labels[1]).toMatchObject({
+      archived_at: null,
+      color: "abcdef",
+      description: "Restored to the catalog",
+    });
+    expect(f.mutations().map(({ method, body }) => ({ method, body }))).toEqual([
+      {
+        method: "PATCH",
+        body: { color: "abcdef", description: "Restored to the catalog", archived: false },
+      },
+    ]);
+  });
+
+  it("does not adopt manually archived labels or assign them a deletion warning", async () => {
+    const f = fixture();
+    f.state.catalog.unconfiguredLabels = "archive";
+    f.state.labels[1].description = "Manually archived";
+    const run = await f.prepare();
+    expect(run.audit.plan.archive).toEqual([]);
+    expect(run.audit.plan.delete).toEqual([]);
+    await run.apply();
+    expect(f.mutations()).toEqual([]);
+    expect(f.state.labels[1].description).toBe("Manually archived");
+  });
+
+  it("surfaces archive failures without deleting the label", async () => {
+    const f = fixture();
+    f.state.catalog.unconfiguredLabels = "archive";
+    f.state.labels[1].archived_at = null;
+    const run = await f.prepare();
+    f.state.failure = `PATCH ${prefix}/labels/${extra.name}`;
+    await expect(run.apply()).rejects.toThrow("Injected failure");
+    expect(f.state.labels[1].archived_at).toBeNull();
+    expect(await run.outcome()).toMatchObject({
+      error: "Injected failure",
+      operations: [{ action: "archive", label: extra.name, status: "failed" }],
+    });
+  });
+
+  it.each(["archive", "restore"])(
+    "verifies GitHub actually performs the %s operation",
+    async (operation) => {
+      const f = fixture();
+      f.state.catalog.unconfiguredLabels = "archive";
+      if (operation === "archive") {
+        f.state.labels[1].archived_at = null;
+      } else {
+        f.state.catalog.labels.push({
+          name: extra.name,
+          color: extra.color,
+          description: "Restored label",
+        });
+      }
+      const run = await f.prepare();
+      f.state.archiveUpdatesEnabled = false;
+      await expect(run.apply()).rejects.toThrow(
+        operation === "archive" ? "GitHub did not archive" : "GitHub did not unarchive",
+      );
+      expect(f.mutations().some(({ method }) => method === "DELETE")).toBe(false);
+    },
+  );
+
+  it.each(["unarchive", "archive timestamp", "warning"])(
+    "blocks deletion if the %s changes after the audit",
+    async (change) => {
+      const f = fixture();
+      f.state.catalog.unconfiguredLabels = "archive";
+      const run = await f.prepare();
+      if (change === "unarchive") f.state.labels[1].archived_at = null;
+      if (change === "archive timestamp") f.state.labels[1].archived_at = "2001-01-01T00:00:00Z";
+      if (change === "warning") f.state.labels[1].description = "Warning removed";
+      await expect(run.apply()).rejects.toThrow("Label changed");
+      expect(f.mutations()).toEqual([]);
+    },
+  );
+
+  it("does not reset a label archived by someone else between discovery and apply", async () => {
+    const f = fixture();
+    f.state.catalog.unconfiguredLabels = "archive";
+    f.state.labels[1].archived_at = null;
+    const run = await f.prepare();
+    f.state.labels[1].archived_at = new Date().toISOString();
+    await expect(run.apply()).rejects.toThrow("Label changed");
+    expect(f.mutations()).toEqual([]);
+  });
+
+  it("rechecks native archive state immediately before deletion", async () => {
+    const f = fixture();
+    f.state.catalog.unconfiguredLabels = "archive";
+    f.state.items = [{ number: 1, kind: "issue", state: "OPEN", labels: new Set([extra.name]) }];
+    const run = await f.prepare();
+    f.state.afterMark = () => {
+      f.state.labels[1].archived_at = null;
+    };
+    await expect(run.apply()).rejects.toThrow("Label changed");
+    expect(f.mutations().some(({ method }) => method === "DELETE")).toBe(false);
+  });
+
+  it("rejects an audited deletion that has not completed its grace period", async () => {
+    const f = fixture();
+    f.state.catalog.unconfiguredLabels = "archive";
+    f.state.labels[1].archived_at = new Date().toISOString();
+    const run = await f.prepare();
+    run.audit.plan.delete = [f.state.labels[1]];
+    run.audit.replacements = [{ label: f.state.labels[1], items: [] }];
+    const content = JSON.stringify(run.audit);
+    await writeFile(join(run.options.auditDirectory, "before.json"), content);
+    run.options.auditHash = catalogHash(content);
+    await expect(run.apply()).rejects.toThrow("grace period");
+    expect(f.mutations()).toEqual([]);
+  });
+});
+
 describe("repository label synchronization", () => {
   it("paginates the complete live label inventory", async () => {
     const f = fixture();
@@ -248,9 +434,9 @@ describe("repository label synchronization", () => {
     expect(f.mutations()).toEqual([]);
   });
 
-  it("does not write in dry-run, even with replacement enabled", async () => {
+  it("does not write in dry-run, even with archival and deletion enabled", async () => {
     const f = fixture();
-    f.state.catalog.unconfiguredLabels = "replace";
+    f.state.catalog.unconfiguredLabels = "archive";
     f.state.labels = [extra];
     const run = await f.prepare(true);
     await run.apply();
@@ -304,7 +490,7 @@ describe("repository label synchronization", () => {
   it("refuses to apply an obsolete catalog", async () => {
     const f = fixture();
     const run = await f.prepare();
-    f.state.catalog.unconfiguredLabels = "replace";
+    f.state.catalog.unconfiguredLabels = "archive";
     await expect(run.apply()).rejects.toThrow("catalog changed");
     expect(f.mutations()).toEqual([]);
   });
@@ -317,10 +503,10 @@ describe("repository label synchronization", () => {
   });
 });
 
-describe("disabled replacement implementation", () => {
+describe("expired archive replacement", () => {
   it("paginates issues and PRs in all states and preserves unrelated labels without comments", async () => {
     const f = fixture();
-    f.state.catalog.unconfiguredLabels = "replace";
+    f.state.catalog.unconfiguredLabels = "archive";
     f.state.items = Array.from({ length: 205 }, (_, i) => ({
       number: i + 1,
       kind: i < 102 ? "issue" : "pull_request",
@@ -349,7 +535,7 @@ describe("disabled replacement implementation", () => {
 
   it("audits and deletes an unused label without adding a marker to any item", async () => {
     const f = fixture();
-    f.state.catalog.unconfiguredLabels = "replace";
+    f.state.catalog.unconfiguredLabels = "archive";
     const run = await f.prepare();
     expect(run.audit.replacements).toEqual([{ label: extra, items: [] }]);
     await run.apply();
@@ -363,7 +549,7 @@ describe("disabled replacement implementation", () => {
 
   it("keeps the original on marker failure and safely resumes without re-marking items", async () => {
     const f = fixture();
-    f.state.catalog.unconfiguredLabels = "replace";
+    f.state.catalog.unconfiguredLabels = "archive";
     f.state.items = [1, 2].map((number) => ({
       number,
       kind: "issue",
@@ -392,7 +578,7 @@ describe("disabled replacement implementation", () => {
 
   it("preserves each original association when several labels affect one item", async () => {
     const f = fixture();
-    f.state.catalog.unconfiguredLabels = "replace";
+    f.state.catalog.unconfiguredLabels = "archive";
     const other = { ...extra, id: 3, node_id: "label-3", name: "other" };
     f.state.labels.push(other);
     f.state.items = [
@@ -415,7 +601,7 @@ describe("disabled replacement implementation", () => {
 
   it("does not delete a label that was recreated with the same name", async () => {
     const f = fixture();
-    f.state.catalog.unconfiguredLabels = "replace";
+    f.state.catalog.unconfiguredLabels = "archive";
     const run = await f.prepare();
     f.state.labels[1].id = 999;
     await expect(run.apply()).rejects.toThrow("Label changed");
@@ -424,7 +610,7 @@ describe("disabled replacement implementation", () => {
 
   it("stops when a new unaudited association appears during replacement", async () => {
     const f = fixture();
-    f.state.catalog.unconfiguredLabels = "replace";
+    f.state.catalog.unconfiguredLabels = "archive";
     f.state.items = [{ number: 1, kind: "issue", state: "OPEN", labels: new Set([extra.name]) }];
     const run = await f.prepare();
     f.state.afterMark = () => {
@@ -441,7 +627,7 @@ describe("disabled replacement implementation", () => {
 
   it("does not delete if the marker disappears after it was applied", async () => {
     const f = fixture();
-    f.state.catalog.unconfiguredLabels = "replace";
+    f.state.catalog.unconfiguredLabels = "archive";
     f.state.items = [{ number: 1, kind: "issue", state: "OPEN", labels: new Set([extra.name]) }];
     const run = await f.prepare();
     f.state.afterMark = () => f.state.items[0].labels.delete(marker.name);
@@ -451,7 +637,7 @@ describe("disabled replacement implementation", () => {
 
   it("does not mark items whose original assignment was removed after discovery", async () => {
     const f = fixture();
-    f.state.catalog.unconfiguredLabels = "replace";
+    f.state.catalog.unconfiguredLabels = "archive";
     f.state.items = [
       { number: 1, kind: "issue", state: "OPEN", labels: new Set([extra.name, "keep"]) },
     ];
@@ -464,7 +650,7 @@ describe("disabled replacement implementation", () => {
 
   it("records a deletion failure without discarding the original label", async () => {
     const f = fixture();
-    f.state.catalog.unconfiguredLabels = "replace";
+    f.state.catalog.unconfiguredLabels = "archive";
     const run = await f.prepare();
     f.state.failure = `DELETE ${prefix}/labels/${extra.name}`;
     await expect(run.apply()).rejects.toThrow("Injected failure");
@@ -477,7 +663,7 @@ describe("disabled replacement implementation", () => {
 
   it("stops deletion if policy changes during replacement", async () => {
     const f = fixture();
-    f.state.catalog.unconfiguredLabels = "replace";
+    f.state.catalog.unconfiguredLabels = "archive";
     f.state.items = [{ number: 1, kind: "issue", state: "OPEN", labels: new Set([extra.name]) }];
     const run = await f.prepare();
     f.state.afterMark = () => {
@@ -569,7 +755,7 @@ describe("label workflow contract", () => {
       .object({
         on: z.object({
           pull_request: z.object({ paths: z.array(z.string()) }),
-          label: z.object({ types: z.array(z.string()) }),
+          label: z.strictObject({}),
           schedule: z.array(z.object({ cron: z.string() })),
           workflow_dispatch: z.object({
             inputs: z.record(z.string(), z.object({ default: z.boolean() })),
@@ -590,7 +776,7 @@ describe("label workflow contract", () => {
       group: "sync-repo-labels",
       "cancel-in-progress": false,
     });
-    expect(workflow.on.label.types).toEqual(["created", "edited", "deleted"]);
+    expect(workflow.on.label).toEqual({});
     expect(workflow.on.schedule).not.toHaveLength(0);
     expect(Object.keys(workflow.on.workflow_dispatch.inputs)).toEqual(["dry-run"]);
     expect(workflow.on.workflow_dispatch.inputs["dry-run"].default).toBe(true);

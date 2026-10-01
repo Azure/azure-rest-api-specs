@@ -5,8 +5,10 @@ import { z } from "zod";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import type { GitHub, GitHubScriptArgs } from "./github.ts";
 import {
+  ARCHIVE_DESCRIPTION,
   DELETED_LABEL,
   existingLabelSchema,
+  isArchivedLabelExpired,
   labelCatalogSchema,
   labelPlanSchema,
   parseLabelCatalog,
@@ -16,6 +18,7 @@ import {
 import type { ExistingLabel } from "./label-catalog.ts";
 
 const CATALOG_PATH = ".github/labels.yaml";
+const LABEL_API_HEADERS = { "X-GitHub-Api-Version": "2026-03-10" };
 const itemSchema = z.strictObject({
   number: z.number().int().positive(),
   url: z.string().url(),
@@ -175,9 +178,9 @@ export async function prepareLabelSync(
     args.core.warning(
       `Label not in ${CATALOG_PATH}: ${JSON.stringify(label.name)} (${catalog.unconfiguredLabels})`,
     );
-    if (catalog.unconfiguredLabels === "replace") {
-      replacements.push({ label, items: await findLabelAssignments(args.github, label) });
-    }
+  }
+  for (const label of plan.delete) {
+    replacements.push({ label, items: await findLabelAssignments(args.github, label) });
   }
   const audit = auditSchema.parse({
     version: 1,
@@ -201,6 +204,7 @@ export async function prepareLabelSync(
     .addRaw(
       `## Repository labels\n\nPolicy: **${catalog.unconfiguredLabels}**; dry-run: **${options.dryRun}**.\n\n` +
         `Create: ${plan.create.length}; update: ${plan.update.length}; ` +
+        `archive: ${plan.archive.length}; delete after grace period: ${plan.delete.length}; ` +
         `unconfigured: ${plan.unconfigured.length}; unchanged: ${plan.unchanged}.\n\n` +
         "Full definitions and proposed changes are in the pre-change audit artifact.\n",
     )
@@ -219,6 +223,7 @@ async function verifyLabel(
     current.id !== label.id ||
     current.node_id !== label.node_id ||
     current.name !== label.name ||
+    current.archived_at !== label.archived_at ||
     !sameLabel(current, label)
   ) {
     throw new Error(`Label changed since the audit: ${label.name}; rerun`);
@@ -226,21 +231,36 @@ async function verifyLabel(
 }
 
 function validateReplacementPlan(audit: Audit) {
-  if (audit.catalog.unconfiguredLabels === "preserve" && audit.replacements.length !== 0) {
-    throw new Error("Replacement is disabled by the catalog");
+  const candidates = [...audit.plan.archive, ...audit.plan.delete];
+  if (audit.catalog.unconfiguredLabels === "preserve" && candidates.length !== 0) {
+    throw new Error("Archival and deletion are disabled by the catalog");
   }
-  const expected = audit.catalog.unconfiguredLabels === "replace" ? audit.plan.unconfigured : [];
-  if (JSON.stringify(audit.replacements.map(({ label }) => label)) !== JSON.stringify(expected)) {
+  if (
+    JSON.stringify(audit.replacements.map(({ label }) => label)) !==
+    JSON.stringify(audit.plan.delete)
+  ) {
     throw new Error("Replacement candidates do not match the audited plan");
   }
   const configured = new Set(audit.catalog.labels.map((label) => label.name.toLowerCase()));
-  if (audit.replacements.some(({ label }) => configured.has(label.name.toLowerCase()))) {
-    throw new Error("Cannot replace a configured label");
+  if (candidates.some((label) => configured.has(label.name.toLowerCase()))) {
+    throw new Error("Cannot archive or delete a configured label");
+  }
+  const unconfigured = new Map(audit.plan.unconfigured.map((label) => [label.id, label]));
+  if (
+    candidates.some((label) => JSON.stringify(label) !== JSON.stringify(unconfigured.get(label.id)))
+  ) {
+    throw new Error("Archive or deletion candidates are not in the audited inventory");
+  }
+  if (audit.plan.archive.some((label) => label.archived_at !== null)) {
+    throw new Error("Cannot reset the archive timestamp of an already archived label");
+  }
+  if (audit.plan.delete.some((label) => !isArchivedLabelExpired(label))) {
+    throw new Error("Deletion requires an archived label with our warning past its grace period");
   }
 }
 
 interface Operation {
-  action: "create" | "update" | "mark" | "delete";
+  action: "create" | "update" | "archive" | "mark" | "delete";
   label: string;
   number?: number;
   status: "pending" | "completed" | "failed";
@@ -311,14 +331,36 @@ export async function applyLabelSync(
     }
     for (const { before, after } of audit.plan.update) {
       await verifyLabel(github, context.repo, before);
-      await mutate({ action: "update", label: before.name }, () =>
-        github.rest.issues.updateLabel({
+      await mutate({ action: "update", label: before.name }, async () => {
+        const { data } = await github.rest.issues.updateLabel({
           ...context.repo,
           name: before.name,
           color: after.color,
           description: after.description,
-        }),
-      );
+          archived: false,
+          headers: LABEL_API_HEADERS,
+        });
+        if (existingLabelSchema.parse(data).archived_at !== null) {
+          throw new Error(`GitHub did not unarchive configured label ${before.name}`);
+        }
+      });
+    }
+    for (const label of audit.plan.archive) {
+      await verifyCatalog(args, branch, audit.catalogHash);
+      await verifyLabel(github, context.repo, label);
+      await mutate({ action: "archive", label: label.name }, async () => {
+        const { data } = await github.rest.issues.updateLabel({
+          ...context.repo,
+          name: label.name,
+          archived: true,
+          description: ARCHIVE_DESCRIPTION,
+          headers: LABEL_API_HEADERS,
+        });
+        const archived = existingLabelSchema.parse(data);
+        if (archived.archived_at === null || archived.description !== ARCHIVE_DESCRIPTION) {
+          throw new Error(`GitHub did not archive label ${label.name} with the managed warning`);
+        }
+      });
     }
     for (const { label, items } of audit.replacements) {
       await verifyCatalog(args, branch, audit.catalogHash);
@@ -359,6 +401,9 @@ export async function applyLabelSync(
       }
       await verifyCatalog(args, branch, audit.catalogHash);
       await verifyLabel(github, context.repo, label);
+      if (!isArchivedLabelExpired(label)) {
+        throw new Error(`Archive grace period has not elapsed for ${label.name}`);
+      }
       await mutate({ action: "delete", label: label.name }, () =>
         github.rest.issues.deleteLabel({ ...context.repo, name: label.name }),
       );
