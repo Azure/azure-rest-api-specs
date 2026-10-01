@@ -82,7 +82,6 @@ interface Workspaces {
 }
 
 @armResourceOperations
-@added(Versions.v2025_08_11_preview)
 interface SuiteOffers {
   /**
    * Returns the SuiteOffer resource associated with the given name.

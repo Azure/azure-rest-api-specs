@@ -2,11 +2,14 @@
   "name": "@azure-tools/typespec-requirement",
   "private": true,
   "type": "module",
+  "main": "src/index.ts",
+  "dependencies": {
+    "@azure-tools/specs-shared": "workspace:*",
+    "@azure-tools/suppressions": "workspace:*"
+  },
   "devDependencies": {
     "@types/node": "catalog:",
-    "execa": "catalog:",
-    "typescript": "catalog:",
-    "vitest": "catalog:"
+    "execa": "catalog:"
   },
   "scripts": {
     "build": "tsc --noEmit",
