@@ -6,12 +6,16 @@ import { appendFile, stat } from "node:fs/promises";
 import { relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 import pc from "picocolors";
-import { simpleGit } from "simple-git";
+import { simpleGit, type SimpleGit } from "simple-git";
 import { formatRuleSummary, supportsColor, type RuleCounts } from "./diagnostics.ts";
 import { findChangedProjects, findProjects, type ChangedProjectsOptions } from "./find-projects.ts";
 
 interface RunOptions {
   gitClean?: boolean;
+  /** With gitClean, append each project's changes to this patch file before they are discarded. */
+  diffOutput?: string;
+  /** Report generated-file and formatting changes as warnings instead of failing. */
+  allowGeneratedChanges?: boolean;
   dryRun?: boolean;
   verbose?: boolean;
   summaryFile?: string;
@@ -21,6 +25,7 @@ interface RunContext {
   checkingAllSpecs: boolean;
   baseCommitish?: string;
   headCommitish?: string;
+  allowGeneratedChanges?: boolean;
 }
 
 type ProjectStatus = "pass" | "fail" | "skip";
@@ -92,12 +97,24 @@ export async function runChanged(
   return runProjects(root, projects, { checkingAllSpecs, baseCommitish, headCommitish }, options);
 }
 
+/** Appends tracked and untracked changes to a patch that `git apply` accepts. */
+async function saveDiff(git: SimpleGit, project: string, file: string): Promise<void> {
+  await git.raw(["add", "--intent-to-add", "--all"]);
+  try {
+    const diff = await git.raw(["diff", "--binary"]);
+    if (diff) await appendFile(file, `# ${project}\n${diff}`);
+  } finally {
+    await git.raw(["reset", "--quiet"]);
+  }
+}
+
 async function runProjects(
   root: string,
   projects: string[],
   context: RunContext,
   options: RunOptions,
 ): Promise<boolean> {
+  if (options.allowGeneratedChanges) context = { ...context, allowGeneratedChanges: true };
   const git = simpleGit(root);
   const gitClean = options.gitClean && !options.dryRun;
   const displayRoot =
@@ -178,6 +195,7 @@ async function runProjects(
       throw error;
     } finally {
       if (gitClean) {
+        if (options.diffOutput) await saveDiff(git, name, options.diffOutput);
         await git.raw(["restore", "--worktree", "--", "."]);
         await git.clean("f", ["-d"]);
       }

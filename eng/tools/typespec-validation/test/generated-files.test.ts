@@ -62,6 +62,33 @@ it.each([false, true])(
   },
 );
 
+it("limits the check to files matching globs relative to the service folder", async () => {
+  await mkdir(join(root, "specification/service/Shared"));
+  await writeFile(join(folder, "main.tsp"), "modified");
+  await writeFile(join(folder, "tspconfig.yaml"), "new");
+  await writeFile(join(folder, "output.json"), "{}");
+  await writeFile(join(root, "specification/service/Shared/models.tsp"), "new");
+
+  const result = await gitDiffTopSpecFolder(folder, defaultLogger, [
+    "**/*.tsp",
+    "**/tspconfig.yaml",
+  ]);
+  expect(result.files.sort()).toEqual([
+    "specification/service/Project/main.tsp",
+    "specification/service/Project/tspconfig.yaml",
+    "specification/service/Shared/models.tsp",
+  ]);
+  expect(result.diff).not.toContain("output.json");
+
+  await simpleGit(root).raw(["checkout", "--", "."]);
+  await rm(join(folder, "tspconfig.yaml"));
+  await rm(join(root, "specification/service/Shared"), { recursive: true });
+  expect(await gitDiffTopSpecFolder(folder, defaultLogger, ["**/*.tsp"])).toEqual({
+    success: true,
+    files: [],
+  });
+});
+
 it("does not fail on changes outside the service or dump a clean repository", async () => {
   await writeFile(join(root, "unrelated.txt"), "keep");
   const logger = new ConsoleLogger(true);
