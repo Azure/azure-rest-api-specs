@@ -28353,6 +28353,12 @@ model VirtualNetworkAppliancePropertiesFormat {
   bandwidthInGbps?: float64;
 
   /**
+   * The reference to the capacity provider resource.
+   */
+  @added(Versions.v2026_03_01)
+  capacityProvider?: SubResource;
+
+  /**
    * A list of IPConfigurations of the virtual network appliance.
    */
   @visibility(Lifecycle.Read)

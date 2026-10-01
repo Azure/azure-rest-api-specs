@@ -242,6 +242,9 @@
         "x-ms-examples": {
           "Create virtual network appliance": {
             "$ref": "./examples/VirtualNetworkAppliances_CreateOrUpdate.json"
+          },
+          "Create virtual network appliance with capacity provider": {
+            "$ref": "./examples/VirtualNetworkAppliances_CreateOrUpdate_WithCapacityProvider.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -860,6 +863,10 @@
           "type": "number",
           "format": "double",
           "description": "Bandwidth of the VirtualNetworkAppliance resource in Gbps."
+        },
+        "capacityProvider": {
+          "$ref": "./common.json#/definitions/SubResource",
+          "description": "The reference to the capacity provider resource."
         },
         "ipConfigurations": {
           "type": "array",
