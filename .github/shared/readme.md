@@ -248,24 +248,37 @@ const report = renderMarkdownDoc(
 
 ### `testing` — test helpers
 
-- `d` — template tag for readable multiline assertions. Removes one leading newline, the trailing
+- `d` — re-export of the [`text`](#text--multiline-text) helper for readable multiline assertions.
+  Dedent only the expectation so assertions still catch whitespace changes in actual output.
+
+### `text` — multiline text
+
+- `d` — template tag for readable multiline text. Removes one leading newline, the trailing
   newline and spaces before the closing backtick, and the first line's indentation from lines
   sharing that prefix. Nested indentation, interior blank lines, and other whitespace are preserved.
   Values are interpolated before dedenting; `null` and `undefined` become empty strings.
 
+Use `d` for authored Markdown blocks and the Markdown helpers for document structure and dynamic
+content. `d` does not escape Markdown; keep using `escapeMarkdown`, `inlineCode`, and other helpers
+where needed. Because interpolation happens before indentation removal, compose preformatted
+multiline blocks separately rather than interpolating them into a `d` template.
+
 ```typescript
-import { d } from "@azure-tools/specs-shared/testing";
+import { details, inlineCode, renderMarkdownDoc } from "@azure-tools/specs-shared/markdown";
+import { d } from "@azure-tools/specs-shared/text";
 
-expect(output).toBe(d`
-  Summary
-    Details
+const comment = renderMarkdownDoc([
+  d`
+    **How to approve:**
+    - Apply the ${inlineCode("package-name-approved-all")} label.
 
-  Next section
-`);
+    Merge is blocked until approval is complete.
+  `,
+  details("Checks", "All checks passed."),
+]);
 ```
 
-The expected string is `"Summary\n  Details\n\nNext section"`. Only the expectation is dedented,
-so the assertion still catches whitespace changes in the actual output.
+The composer separates the blocks with blank lines without dedenting the generated details block.
 
 ### `time` — time/duration helpers
 
