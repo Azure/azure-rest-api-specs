@@ -1,8 +1,8 @@
-import { readFile, readdir } from "fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import { load } from "js-yaml";
-import { join } from "path";
+import { join } from "node:path";
 import { beforeAll, describe, expect, it, vi } from "vitest";
-import { runInNewContext } from "vm";
+import { runInNewContext } from "node:vm";
 
 // cspell:ignore REPOST vally
 
@@ -66,7 +66,7 @@ function createResolverHarness(
 
 /**
  * Collapse runs of whitespace so prose assertions do not depend on where
- * Prettier happens to wrap a Markdown paragraph.
+ * the formatter happens to wrap a Markdown paragraph.
  */
 function collapseWhitespace(text: string) {
   return text.replace(/\s+/g, " ");

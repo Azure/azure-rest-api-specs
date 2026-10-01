@@ -313,6 +313,7 @@ model Step {
 /**
  * Import update input metadata.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ImportUpdateRequest {
   /**
    * Import update input metadata.
