@@ -46,7 +46,10 @@ interface RedisCacheAccessPolicyAssignments {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Legacy approved usage of non-standard operation response codes. Consider revising in a future api version."
   delete is ArmResourceDeleteWithoutOkAsync<
     RedisCacheAccessPolicyAssignment,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -60,12 +63,15 @@ interface RedisCacheAccessPolicyAssignments {
 
 @@maxLength(RedisCacheAccessPolicyAssignment.name, 63);
 @@minLength(RedisCacheAccessPolicyAssignment.name, 3);
-@@doc(RedisCacheAccessPolicyAssignment.name,
+@@doc(
+  RedisCacheAccessPolicyAssignment.name,
   "The name of the access policy assignment."
 );
-@@doc(RedisCacheAccessPolicyAssignment.properties,
+@@doc(
+  RedisCacheAccessPolicyAssignment.properties,
   "Properties of an access policy assignment"
 );
-@@doc(RedisCacheAccessPolicyAssignments.createUpdate::parameters.resource,
+@@doc(
+  RedisCacheAccessPolicyAssignments.createUpdate::parameters.resource,
   "Parameters supplied to the Create Update Access Policy Assignment operation."
 );

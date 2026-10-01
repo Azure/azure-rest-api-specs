@@ -257,6 +257,15 @@ directive:
     reason: 'Pre-existing error (i.e. this PR did not introduce this issue). Will be fixed in next API version release'
 ```
 
+### Tag: package-2025-01-23-preview
+
+These settings apply only when `--tag=package-2025-01-23-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2025-01-23-preview'
+input-file:
+  - preview/2025-01-23-preview/components_API.json
+```
+
 ### Tag: package-2024-08-01
 
 These settings apply only when `--tag=package-2024-08-01` is specified on the command line.
@@ -264,12 +273,7 @@ These settings apply only when `--tag=package-2024-08-01` is specified on the co
 ``` yaml $(tag) == 'package-2024-08-01'
 input-file:
   - stable/2020-02-02/components_API.json
-  - stable/2015-05-01/componentAnnotations_API.json
-  - stable/2015-05-01/componentApiKeys_API.json
-  - stable/2015-05-01/componentContinuousExport_API.json
-  - stable/2015-05-01/componentFeaturesAndPricing_API.json
-  - stable/2015-05-01/componentProactiveDetection_API.json
-  - stable/2015-05-01/componentWorkItemConfigs_API.json
+  - stable/2015-05-01/openapi.json
   - stable/2015-05-01/favorites_API.json
   - stable/2015-05-01/webTestLocations_API.json
   - stable/2022-06-15/webTests_API.json

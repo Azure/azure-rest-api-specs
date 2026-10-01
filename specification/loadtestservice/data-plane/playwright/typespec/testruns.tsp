@@ -1,7 +1,9 @@
 import "@typespec/rest";
 import "./models.tsp";
+import "@typespec/versioning";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 namespace Playwright;
 
@@ -108,6 +110,7 @@ model CiConfig {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   commitId?: string;
 
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @doc("The CI revision URL.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   revisionUrl?: string;
@@ -168,6 +171,10 @@ interface TestRuns {
   // TestRun Operations
   @doc("Creates or updates a test run for the workspace with the specified test run ID. Requires Bearer JWT access token provided by Entra ID or Playwright Service.")
   createOrUpdate is Operations.ResourceCreateOrUpdate<TestRun>;
+
+  @added(Versions.v2026_04_01_preview)
+  @doc("Gets a test run for the specified run and workspace ID. Requires Bearer JWT access token provided by Entra ID or Playwright Service.")
+  get is Operations.ResourceRead<TestRun>;
 
   @doc("Lists test runs for the specified workspace ID. Supports OData query parameters such as $filter and $top. Default page size is 10. Use nextLink in response to fetch additional results. Requires Bearer JWT access token provided by Entra ID or Playwright Service.")
   list is Operations.ResourceList<TestRun>;

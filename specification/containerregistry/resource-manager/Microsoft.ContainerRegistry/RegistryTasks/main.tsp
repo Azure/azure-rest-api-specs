@@ -18,6 +18,7 @@ import "./Run.tsp";
 import "./TaskRun.tsp";
 import "./Task.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

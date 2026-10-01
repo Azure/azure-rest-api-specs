@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "api-version": "2026-03-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "myInterconnectBlock1",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup1/providers/Microsoft.Compute/interconnectBlocks/myInterconnectBlock1",
+            "type": "Microsoft.Compute/interconnectBlocks",
+            "location": "westus",
+            "tags": {
+              "department": "HR"
+            },
+            "sku": {
+              "name": "Standard_ND128isr_GB300_v6",
+              "capacity": 18
+            },
+            "zones": [
+              "1"
+            ],
+            "properties": {
+              "interconnectGroup": {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup1/providers/Microsoft.Network/interconnectGroups/myInterconnectGroup1"
+              },
+              "interconnectBlockId": "{GUID}",
+              "provisioningTime": "2026-03-01T01:02:38.3138469+00:00",
+              "virtualMachinesAssociated": [
+                {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup1/providers/Microsoft.Compute/virtualMachines/myVM1"
+                },
+                {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup1/providers/Microsoft.Compute/virtualMachines/myVM2"
+                }
+              ],
+              "provisioningState": "Succeeded",
+              "timeCreated": "2026-03-01T01:02:38.3138469+00:00"
+            }
+          },
+          {
+            "name": "myInterconnectBlock2",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup2/providers/Microsoft.Compute/interconnectBlocks/myInterconnectBlock2",
+            "type": "Microsoft.Compute/interconnectBlocks",
+            "location": "westus",
+            "tags": {
+              "department": "HR"
+            },
+            "sku": {
+              "name": "Standard_ND128isr_GB300_v6",
+              "capacity": 18
+            },
+            "zones": [
+              "1"
+            ],
+            "properties": {
+              "interconnectGroup": {
+                "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup2/providers/Microsoft.Network/interconnectGroups/myInterconnectGroup2"
+              },
+              "interconnectBlockId": "{GUID}",
+              "provisioningTime": "2026-03-01T01:02:38.3138469+00:00",
+              "virtualMachinesAssociated": [
+                {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup2/providers/Microsoft.Compute/virtualMachines/myVM3"
+                }
+              ],
+              "provisioningState": "Succeeded",
+              "timeCreated": "2026-03-01T01:02:38.3138469+00:00"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "InterconnectBlocks_ListBySubscription",
+  "title": "List Interconnect Blocks in a subscription."
+}

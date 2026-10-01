@@ -27,7 +27,7 @@ options:
   "@azure-tools/typespec-ts":
     service-dir: sdk/datafactory
     emitter-output-dir: "{output-dir}/{service-dir}/arm-datafactory"
-    is-modular-library: true
+    compatibility-lro: true
     flavor: "azure"
     experimental-extensible-enums: true
     package-details:
@@ -42,6 +42,10 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.DataFactory"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

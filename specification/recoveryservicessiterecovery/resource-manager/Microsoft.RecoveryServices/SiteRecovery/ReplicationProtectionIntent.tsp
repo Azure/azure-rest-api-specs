@@ -77,6 +77,7 @@ interface ReplicationProtectionIntents {
 
 @@doc(ReplicationProtectionIntent.name, "Replication protection intent name.");
 @@doc(ReplicationProtectionIntent.properties, "The custom data.");
-@@doc(ReplicationProtectionIntents.create::parameters.resource,
+@@doc(
+  ReplicationProtectionIntents.create::parameters.resource,
   "Create Protection Intent Input."
 );

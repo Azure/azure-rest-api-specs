@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "subscriptionId": "77777777-b0c6-47a2-b37c-d8e65a629c18",
+    "location": "westus",
+    "deletedVaultName": "swaggerExample",
+    "api-version": "2026-01-01",
+    "body": {
+      "properties": {
+        "recoveryResourceGroupId": "/subscriptions/77777777-b0c6-47a2-b37c-d8e65a629c18/resourceGroups/Default-RecoveryServices-ResourceGroup"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/77777777-b0c6-47a2-b37c-d8e65a629c18/providers/Microsoft.RecoveryServices/locations/westus/deletedVaults/swaggerExample",
+        "name": "swaggerExample",
+        "type": "Microsoft.RecoveryServices/locations/deletedVaults",
+        "properties": {
+          "vaultId": "/subscriptions/77777777-b0c6-47a2-b37c-d8e65a629c18/resourceGroups/Default-RecoveryServices-ResourceGroup/providers/Microsoft.RecoveryServices/vaults/swaggerExample",
+          "vaultDeletionTime": "2024-09-20T09:49:46Z",
+          "purgeAt": "2024-10-20T09:49:46Z"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/77777777-b0c6-47a2-b37c-d8e65a629c18/providers/Microsoft.RecoveryServices/locations/westus/deletedVaults/swaggerExample/operations/a93f3cd5-9035-4b1e-a2c9-b16df6d5d34b?api-version=2024-09-30-preview"
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/77777777-b0c6-47a2-b37c-d8e65a629c18/providers/Microsoft.RecoveryServices/locations/westus/deletedVaults/swaggerExample/operations/a93f3cd5-9035-4b1e-a2c9-b16df6d5d34b?api-version=2024-09-30-preview",
+        "Retry-After": 30
+      }
+    }
+  },
+  "operationId": "DeletedVaults_Undelete",
+  "title": "Undelete a deleted vault"
+}

@@ -3310,7 +3310,6 @@ model PaymentOnAccount {
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PaymentOnAccountAmount extends Amount {}
 
 /**
@@ -3318,7 +3317,6 @@ model PaymentOnAccountAmount extends Amount {}
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AvailableBalancePropertiesTotalPaymentsOnAccount extends Amount {}
 
 /**
@@ -5452,6 +5450,7 @@ model UtilizationAggregates {
 /**
  * Savings plan patch request
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model SavingsPlanUpdateRequest {
   /**
    * Savings plan patch request
@@ -6438,6 +6437,7 @@ model InvoiceDocument {
   /**
    * The URL to download the invoice document if the source is external to Microsoft.Billing.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   externalUrl?: string;
 
@@ -7795,6 +7795,7 @@ model RenewPropertiesResponse {
 /**
  * The request for reservation purchase
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ReservationPurchaseRequest {
   /**
    * The name of sku
@@ -8879,6 +8880,7 @@ model RecipientTransferProperties {
 /**
  * Result of transfer validation.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ValidateTransferListResponse {
   /**
    * The list of transfer validation results.

@@ -42,8 +42,9 @@ interface ManagedCCFs {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   create is ArmResourceCreateOrReplaceAsync<
     ManagedCCF,
-    Response = ArmResourceUpdatedResponse<ManagedCCF> | (CreatedResponse &
-      ArmAsyncOperationHeader<FinalResult = ManagedCCF>)
+    Response =
+      | ArmResourceUpdatedResponse<ManagedCCF>
+      | (CreatedResponse & ArmAsyncOperationHeader<FinalResult = ManagedCCF>)
   >;
 
   /**
@@ -58,7 +59,10 @@ interface ManagedCCFs {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ManagedCCF,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -112,10 +116,12 @@ interface ManagedCCFs {
 
 @@doc(ManagedCCF.name, "Name of the Managed CCF");
 @@doc(ManagedCCF.properties, "Properties of Managed CCF Resource.");
-@@doc(ManagedCCFs.create::parameters.resource,
+@@doc(
+  ManagedCCFs.create::parameters.resource,
   "Managed CCF Create Request Body"
 );
-@@doc(ManagedCCFs.update::parameters.properties,
+@@doc(
+  ManagedCCFs.update::parameters.properties,
   "Request body for Updating Managed CCF App"
 );
 @@doc(ManagedCCFs.backup::parameters.body, "Managed CCF Backup Request Body");

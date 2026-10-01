@@ -41,7 +41,9 @@ interface OperationResultOperationGroup {
    * Gets the operation result for a resource
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the operation status for a resource.")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/operationResults/{operationId}")
   @get
@@ -54,18 +56,21 @@ interface OperationResultOperationGroup {
     operationId: string,
 
     ...LocationResourceParameter,
-  ): OperationJobExtendedInfo | {
-    @statusCode _: 202;
+  ):
+    | OperationJobExtendedInfo
+    | {
+        @statusCode _: 202;
 
-    @header("Azure-AsyncOperation")
-    azureAsyncOperation?: string;
+        @header("Azure-AsyncOperation")
+        azureAsyncOperation?: string;
 
-    @header("Location")
-    location?: string;
+        @header("Location")
+        location?: string;
 
-    @header("Retry-After")
-    retryAfter?: int32;
-  } | CloudError;
+        @header("Retry-After")
+        retryAfter?: int32;
+      }
+    | CloudError;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -117,7 +122,7 @@ interface DataProtectionOperationGroup {
     Request = FeatureValidationRequestBase,
     Response = FeatureValidationResponseBase,
     Scope = SubscriptionActionScope,
-    Parameters = LocationParameter,
+    Parameters = LocationResourceParameter,
     Error = CloudError
   >;
 }
@@ -140,7 +145,10 @@ interface BackupInstancesOperationGroup {
      */
     @bodyRoot
     parameters: CrossRegionRestoreRequestObject,
-  ): OperationJobExtendedInfo | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = OperationJobExtendedInfo>> | ErrorResponse;
+  ):
+    | OperationJobExtendedInfo
+    | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = OperationJobExtendedInfo>>
+    | ErrorResponse;
 
   /**
    * Validates whether Cross Region Restore can be triggered for DataSource.
@@ -158,7 +166,10 @@ interface BackupInstancesOperationGroup {
      */
     @bodyRoot
     parameters: ValidateCrossRegionRestoreRequestObject,
-  ): OperationJobExtendedInfo | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = OperationJobExtendedInfo>> | ErrorResponse;
+  ):
+    | OperationJobExtendedInfo
+    | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = OperationJobExtendedInfo>>
+    | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

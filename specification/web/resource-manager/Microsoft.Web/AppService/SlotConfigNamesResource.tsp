@@ -33,7 +33,8 @@ model SlotConfigNamesResource
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface SlotConfigNamesResources {
   /**
    * Description for Gets the names of app settings and connection strings that stick to the slot (not swapped).
@@ -58,6 +59,7 @@ interface SlotConfigNamesResources {
 
 @@doc(SlotConfigNamesResource.name, "");
 @@doc(SlotConfigNamesResource.properties, "Core resource properties");
-@@doc(SlotConfigNamesResources.updateSlotConfigurationNames::parameters.resource,
+@@doc(
+  SlotConfigNamesResources.updateSlotConfigurationNames::parameters.resource,
   "Names of application settings and connection strings. See example."
 );

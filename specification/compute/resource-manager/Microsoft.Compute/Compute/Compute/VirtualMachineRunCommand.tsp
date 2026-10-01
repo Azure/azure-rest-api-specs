@@ -27,7 +27,10 @@ model VirtualMachineRunCommand
 }
 
 alias VirtualMachinePath = {
-  ...Azure.ResourceManager.Legacy.BasePath;
+  ...ApiVersionParameter;
+  ...SubscriptionIdParameter;
+  ...ResourceGroupParameter;
+  ...Azure.ResourceManager.Legacy.Provider;
   ...KeysOf<ResourceNameParameter<
     VirtualMachine,
     SegmentName = "virtualMachines",
@@ -38,7 +41,7 @@ alias VirtualMachinePath = {
 
 @armResourceOperations
 interface VirtualMachineRunCommandOps
-  extends Azure.ResourceManager.Legacy.ComputeLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       VirtualMachinePath,
       KeysOf<{
         ...ResourceNameParameter<
@@ -47,7 +50,8 @@ interface VirtualMachineRunCommandOps
           KeyName = "runCommandName",
           NamePattern = ""
         >,
-      }>
+      }>,
+      CloudError
     > {}
 
 @armResourceOperations
@@ -90,10 +94,13 @@ interface VirtualMachineRunCommands {
   /**
    * The operation to delete the run command.
    */
-  #suppress "deprecated" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  delete is VirtualMachineRunCommandOps.DeleteAsync<VirtualMachineRunCommand>;
+  delete is VirtualMachineRunCommandOps.DeleteWithoutOkAsync<
+    VirtualMachineRunCommand,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
+  >;
 
   /**
    * The operation to get all run commands of a Virtual Machine.
@@ -113,7 +120,10 @@ interface VirtualMachineRunCommands {
 }
 
 alias VirtualMachineScaleSetVMPath = {
-  ...Azure.ResourceManager.Legacy.BasePath;
+  ...ApiVersionParameter;
+  ...SubscriptionIdParameter;
+  ...ResourceGroupParameter;
+  ...Azure.ResourceManager.Legacy.Provider;
   ...KeysOf<ResourceNameParameter<
     VirtualMachineScaleSet,
     SegmentName = "virtualMachineScaleSets",
@@ -130,7 +140,7 @@ alias VirtualMachineScaleSetVMPath = {
 
 @armResourceOperations
 interface VirtualMachineScaleSetVMRunCommandOps
-  extends Azure.ResourceManager.Legacy.ComputeLegacyOperations<
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
       VirtualMachineScaleSetVMPath,
       KeysOf<{
         ...ResourceNameParameter<
@@ -139,7 +149,8 @@ interface VirtualMachineScaleSetVMRunCommandOps
           KeyName = "runCommandName",
           NamePattern = ""
         >,
-      }>
+      }>,
+      CloudError
     > {}
 
 @armResourceOperations
@@ -191,7 +202,13 @@ interface VirtualMachineScaleSetVMRunCommands {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes"
   @operationId("VirtualMachineScaleSetVMRunCommands_Delete")
-  delete is VirtualMachineScaleSetVMRunCommandOps.DeleteAsync<VirtualMachineRunCommand>;
+  delete is VirtualMachineScaleSetVMRunCommandOps.DeleteWithoutOkAsync<
+    VirtualMachineRunCommand,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
+  >;
 
   /**
    * The operation to get all run commands of an instance in Virtual Machine Scaleset.
@@ -212,18 +229,23 @@ interface VirtualMachineScaleSetVMRunCommands {
   >;
 }
 
-@@doc(VirtualMachineRunCommand.name,
+@@doc(
+  VirtualMachineRunCommand.name,
   "The name of the virtual machine run command."
 );
-@@doc(VirtualMachineRunCommand.properties,
+@@doc(
+  VirtualMachineRunCommand.properties,
   "Describes the properties of a Virtual Machine run command."
 );
-@@doc(VirtualMachineRunCommands.createOrUpdate::parameters.body,
+@@doc(
+  VirtualMachineRunCommands.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Virtual Machine RunCommand operation."
 );
-@@doc(VirtualMachineRunCommands.update::parameters.body,
+@@doc(
+  VirtualMachineRunCommands.update::parameters.properties,
   "Parameters supplied to the Update Virtual Machine RunCommand operation."
 );
-@@doc(VirtualMachineScaleSetVMRunCommands.createOrUpdate::parameters.body,
+@@doc(
+  VirtualMachineScaleSetVMRunCommands.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Virtual Machine RunCommand operation."
 );

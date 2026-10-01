@@ -51,10 +51,12 @@ interface BackupItemOps
         @segment("backups")
         @key
         backupId: string,
-      }
+      },
+      ResourceName = "SiteBackup"
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface BackupItems {
   /**
    * Description for Gets a backup of an app by its ID.
@@ -140,10 +142,12 @@ interface BackupItemOperationGroupOps
         @segment("backups")
         @key
         backupId: string,
-      }
+      },
+      ResourceName = "SiteSlotBackup"
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface BackupItemOperationGroup {
   /**
    * Description for Gets a backup of an app by its ID.
@@ -206,13 +210,16 @@ interface BackupItemOperationGroup {
 
 @@doc(BackupItem.name, "ID of the backup.");
 @@doc(BackupItem.properties, "BackupItem resource specific properties");
-@@doc(BackupItems.listBackupStatusSecrets::parameters.body,
+@@doc(
+  BackupItems.listBackupStatusSecrets::parameters.body,
   "Information on backup request."
 );
 @@doc(BackupItems.restore::parameters.body, "Information on restore request .");
-@@doc(BackupItemOperationGroup.listBackupStatusSecretsSlot::parameters.body,
+@@doc(
+  BackupItemOperationGroup.listBackupStatusSecretsSlot::parameters.body,
   "Information on backup request."
 );
-@@doc(BackupItemOperationGroup.restoreSlot::parameters.body,
+@@doc(
+  BackupItemOperationGroup.restoreSlot::parameters.body,
   "Information on restore request ."
 );

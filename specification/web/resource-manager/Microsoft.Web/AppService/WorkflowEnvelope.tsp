@@ -68,10 +68,12 @@ interface WorkflowEnvelopeOps
         @maxLength(63)
         @minLength(3)
         workflowName: string,
-      }
+      },
+      ResourceName = "SiteSlotWorkflow"
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface WorkflowEnvelopes {
   /**
    * Get workflow information by its ID for web site, or a deployment slot.
@@ -117,10 +119,12 @@ interface WorkflowEnvelopeOperationGroupOps
         @maxLength(63)
         @minLength(3)
         workflowName: string,
-      }
+      },
+      ResourceName = "SiteWorkflow"
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface WorkflowEnvelopeOperationGroup {
   /**
    * Get workflow information by its ID for web site, or a deployment slot.

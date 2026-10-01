@@ -80,6 +80,7 @@ interface Budgets {
 
 @@doc(Budget.name, "Budget Name.");
 @@doc(Budget.properties, "The properties of the budget.");
-@@doc(Budgets.createOrUpdate::parameters.resource,
+@@doc(
+  Budgets.createOrUpdate::parameters.resource,
   "Parameters supplied to the Create Budget operation."
 );

@@ -109,6 +109,7 @@ interface MetadataModels {
 @@doc(MetadataModel.name, "The Metadata name.");
 @@doc(MetadataModel.properties, "Metadata properties");
 @@doc(MetadataModels.create::parameters.resource, "Metadata resource.");
-@@doc(MetadataModels.update::parameters.properties,
+@@doc(
+  MetadataModels.update::parameters.properties,
   "Partial metadata request."
 );

@@ -44,8 +44,10 @@ interface BatchAccounts {
   create is Legacy.CreateOrReplaceAsync<
     BatchAccount,
     Request = BatchAccountCreateParameters,
-    Response = ArmResourceUpdatedResponse<BatchAccount> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BatchAccount> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResourceUpdatedResponse<BatchAccount>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = BatchAccount> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 
@@ -65,7 +67,10 @@ interface BatchAccounts {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Legacy design"
   delete is ArmResourceDeleteWithoutOkAsync<
     BatchAccount,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -136,22 +141,28 @@ interface BatchAccounts {
 
 @@maxLength(BatchAccount.name, 24);
 @@minLength(BatchAccount.name, 3);
-@@doc(BatchAccount.name,
+@@doc(
+  BatchAccount.name,
   "A name for the Batch account which must be unique within the region. Batch account names must be between 3 and 24 characters in length and must use only numbers and lowercase letters. This name is used as part of the DNS name that is used to access the Batch service in the region in which the account is created. For example: http://accountname.region.batch.azure.com/."
 );
 @@doc(BatchAccount.properties, "The properties associated with the account.");
-@@doc(BatchAccounts.create::parameters.resource,
+@@doc(
+  BatchAccounts.create::parameters.resource,
   "Additional parameters for account creation."
 );
-@@doc(BatchAccounts.update::parameters.properties,
+@@doc(
+  BatchAccounts.update::parameters.properties,
   "Additional parameters for account update."
 );
-@@doc(BatchAccounts.regenerateKey::parameters.body,
+@@doc(
+  BatchAccounts.regenerateKey::parameters.body,
   "The type of key to regenerate."
 );
-@@summary(BatchAccounts.getKeys,
+@@summary(
+  BatchAccounts.getKeys,
   "Gets the account keys for the specified Batch account."
 );
-@@summary(BatchAccounts.regenerateKey,
+@@summary(
+  BatchAccounts.regenerateKey,
   "Regenerates the specified account key for the Batch account."
 );

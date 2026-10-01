@@ -1,0 +1,5104 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Machine Learning Dataset Management Client",
+    "version": "1.5.0",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Supported Azure ML endpoints.",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "OAuth2Auth": [
+        "https://ml.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2Auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+      "scopes": {
+        "https://ml.azure.com/.default": ""
+      }
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/data/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datacontainer": {
+      "get": {
+        "operationId": "DataContainerOps_ListDataContainer",
+        "description": "List data containers.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedDataContainerEntityList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "DataContainerOps_CreateDataContainer",
+        "description": "Create a data container.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The data container to create.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataContainer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataContainerEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datacontainer/{name}": {
+      "get": {
+        "operationId": "DataContainerOps_GetDataContainer",
+        "description": "Get a data container by name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The data container name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataContainerEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "DataContainerOps_ModifyDataContainer",
+        "description": "Modify a data container.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The data container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataContainerMutable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataContainerEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DataContainerOps_DeleteDataContainer",
+        "description": "Delete a data container.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The data container name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/HttpResponseMessage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/dataversion/{name}/versions": {
+      "get": {
+        "operationId": "DataVersionOps_List",
+        "description": "List data versions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The data container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "Order by.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "Top count.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedDataVersionEntityList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "DataVersionOps_Create",
+        "description": "Create a data version.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The data container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The data version to create.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataVersion"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataVersionEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/dataversion/{name}/versions/{version}": {
+      "get": {
+        "operationId": "DataVersionOps_Get",
+        "description": "Get a specific data version.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The data container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The data version.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataVersionEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "DataVersionOps_Modify",
+        "description": "Modify a data version.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The data container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The data version.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataVersionMutable"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataVersionEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DataVersionOps_DeleteVersion",
+        "description": "Delete a data version.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The data container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The data version.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/HttpResponseMessage"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/dataversion/{name}/versions/{version}/exists": {
+      "get": {
+        "operationId": "DataVersionOps_Exists",
+        "description": "Check if a data version exists.",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The data container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The data version.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/dataversion/batchGetResolvedUris": {
+      "post": {
+        "operationId": "DataVersionOps_BatchGetResolvedUris",
+        "description": "Batch get resolved URIs.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The batch request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BatchGetResolvedURIs"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BatchDataUriResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/dataversion/createUnregisteredInput": {
+      "post": {
+        "operationId": "DataVersionOps_CreateUnregisteredInputData",
+        "description": "Create unregistered input data.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The unregistered input data to create.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateUnregisteredInputData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataContainerEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/dataversion/createUnregisteredOutput": {
+      "post": {
+        "operationId": "DataVersionOps_CreateUnregisteredOutputData",
+        "description": "Create unregistered output data.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The unregistered output data to create.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateUnregisteredOutputData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataContainerEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/dataversion/getByAssetId": {
+      "post": {
+        "operationId": "DataVersionOps_GetByAssetId",
+        "description": "Get a data version by asset ID.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The asset ID.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AssetId"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataVersionEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/dataversion/registerExisting": {
+      "post": {
+        "operationId": "DataVersionOps_RegisterExistingData",
+        "description": "Register existing data as a named data asset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The register existing data request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegisterExistingData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataContainerEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datacall/preview": {
+      "post": {
+        "operationId": "DataCall_GetPreviewForMLTable",
+        "description": "Get a preview for an MLTable.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The data call request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataCallRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataViewSetResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datacall/quickprofile": {
+      "post": {
+        "operationId": "DataCall_GetQuickProfileForMLTable",
+        "description": "Get a quick profile for an MLTable.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The data call request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataCallRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ProfileResult"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/data/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datacall/schema": {
+      "post": {
+        "operationId": "DataCall_GetSchemaForMLTable",
+        "description": "Get the schema for an MLTable.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The data call request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataCallRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ColumnDefinition"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dataset/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets": {
+      "get": {
+        "operationId": "DatasetsV1_List",
+        "description": "List datasets.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "datasetNames",
+            "in": "query",
+            "description": "Dataset names to filter by.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "name": "searchText",
+            "in": "query",
+            "description": "Search text.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "includeInvisible",
+            "in": "query",
+            "description": "Include invisible datasets.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Filter by status.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "Continuation token for pagination.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Page size.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "includeLatestDefinition",
+            "in": "query",
+            "description": "Include latest definition.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "Order by field.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "orderByAsc",
+            "in": "query",
+            "description": "Order ascending.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "datasetTypes",
+            "in": "query",
+            "description": "Dataset types to filter by.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedDatasetList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "DatasetsV1_Register",
+        "description": "Register a dataset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "registerAsPending",
+            "in": "query",
+            "description": "Register as pending.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "ifExistsOk",
+            "in": "query",
+            "description": "If exists, return OK.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "updateDefinitionIfExists",
+            "in": "query",
+            "description": "Update definition if exists.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "withDataHash",
+            "in": "query",
+            "description": "With data hash.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "userVersionId",
+            "in": "query",
+            "description": "User version ID.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The dataset to register.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Dataset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Dataset"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DatasetsV1_DeleteAllDatasets",
+        "description": "Delete all datasets.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dataset/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{datasetId}": {
+      "put": {
+        "operationId": "DatasetsV1_UpdateDataset",
+        "description": "Update a dataset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "The dataset ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "forceUpdate",
+            "in": "query",
+            "description": "Force update.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The dataset to update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Dataset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Dataset"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dataset/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{name}": {
+      "delete": {
+        "operationId": "DatasetsV1_UnregisterDataset",
+        "description": "Unregister a dataset by name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The dataset name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dataset/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{datasetId}/definitions": {
+      "get": {
+        "operationId": "DatasetsV1_GetAllDatasetDefinitions",
+        "description": "Get all dataset definitions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "The dataset ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "Continuation token for pagination.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Page size.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedDatasetDefinitionList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "DatasetsV1_UpdateDefinition",
+        "description": "Update a dataset definition.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "The dataset ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "registerAsPending",
+            "in": "query",
+            "description": "Register as pending.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "forceUpdate",
+            "in": "query",
+            "description": "Force update.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "datasetType",
+            "in": "query",
+            "description": "Dataset type.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "userVersionId",
+            "in": "query",
+            "description": "User version ID.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The dataset definition.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatasetDefinition"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Dataset"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dataset/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{datasetId}/definitions/{version}": {
+      "get": {
+        "operationId": "DatasetsV1_GetDatasetDefinition",
+        "description": "Get a specific dataset definition version.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "The dataset ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The definition version.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DatasetDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dataset/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{datasetId}/versions": {
+      "get": {
+        "operationId": "DatasetsV1_GetAllDatasetVersions",
+        "description": "Get all dataset versions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "The dataset ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "Continuation token for pagination.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Page size.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedStringList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dataset/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/query/name={datasetName}": {
+      "get": {
+        "operationId": "DatasetsV1_GetDatasetByName",
+        "description": "Get a dataset by name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "datasetName",
+            "in": "path",
+            "description": "The dataset name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "query",
+            "description": "The version ID.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "includeLatestDefinition",
+            "in": "query",
+            "description": "Include latest definition.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Dataset"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dataset/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/operations/{operationId}": {
+      "get": {
+        "operationId": "GetOperationStatus_GetDatasetOperationStatus",
+        "description": "Get dataset operation status.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "The operation ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LongRunningOperationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dataset/v1.2/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets": {
+      "get": {
+        "operationId": "DatasetControllerV2_List",
+        "description": "List datasets (v1.2).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "datasetNames",
+            "in": "query",
+            "description": "Dataset names to filter by.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "name": "searchText",
+            "in": "query",
+            "description": "Search text.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "includeInvisible",
+            "in": "query",
+            "description": "Include invisible datasets.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "description": "Filter by status.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "Continuation token for pagination.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Page size.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "includeLatestDefinition",
+            "in": "query",
+            "description": "Include latest definition.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "Order by field.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "orderByAsc",
+            "in": "query",
+            "description": "Order ascending.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "datasetTypes",
+            "in": "query",
+            "description": "Dataset types to filter by.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedDatasetList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "DatasetControllerV2_Register",
+        "description": "Register a dataset (v1.2).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "registerAsPending",
+            "in": "query",
+            "description": "Register as pending.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "ifExistsOk",
+            "in": "query",
+            "description": "If exists, return OK.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "updateDefinitionIfExists",
+            "in": "query",
+            "description": "Update definition if exists.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "withDataHash",
+            "in": "query",
+            "description": "With data hash.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "userVersionId",
+            "in": "query",
+            "description": "User version ID.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The dataset to register.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Dataset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Dataset"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DatasetControllerV2_DeleteAllDatasets",
+        "description": "Delete all datasets (v1.2).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dataset/v1.2/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{datasetId}": {
+      "put": {
+        "operationId": "DatasetControllerV2_UpdateDataset",
+        "description": "Update a dataset (v1.2).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "The dataset ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "forceUpdate",
+            "in": "query",
+            "description": "Force update.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The dataset to update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Dataset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Dataset"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dataset/v1.2/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{name}": {
+      "delete": {
+        "operationId": "DatasetControllerV2_UnregisterDataset",
+        "description": "Unregister a dataset by name (v1.2).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The dataset name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dataset/v1.2/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{datasetId}/definitions": {
+      "get": {
+        "operationId": "DatasetControllerV2_GetAllDatasetDefinitions",
+        "description": "Get all dataset definitions (v1.2).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "The dataset ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "Continuation token for pagination.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Page size.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedDatasetDefinitionList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "DatasetControllerV2_UpdateDefinition",
+        "description": "Update a dataset definition (v1.2).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "The dataset ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "registerAsPending",
+            "in": "query",
+            "description": "Register as pending.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "forceUpdate",
+            "in": "query",
+            "description": "Force update.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "datasetType",
+            "in": "query",
+            "description": "Dataset type.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "userVersionId",
+            "in": "query",
+            "description": "User version ID.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The dataset definition.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatasetDefinition"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Dataset"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dataset/v1.2/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{datasetId}/definitions/{version}": {
+      "get": {
+        "operationId": "DatasetControllerV2_GetDatasetDefinition",
+        "description": "Get a specific dataset definition version (v1.2).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "The dataset ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The definition version.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DatasetDefinition"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dataset/v1.2/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{datasetId}/versions": {
+      "get": {
+        "operationId": "DatasetControllerV2_GetAllDatasetVersions",
+        "description": "Get all dataset versions (v1.2).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "The dataset ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "Continuation token for pagination.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Page size.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedStringList"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dataset/v1.2/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/query/name={datasetName}": {
+      "get": {
+        "operationId": "DatasetControllerV2_GetDatasetByName",
+        "description": "Get a dataset by name (v1.2).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "datasetName",
+            "in": "path",
+            "description": "The dataset name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "query",
+            "description": "The version ID.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "includeLatestDefinition",
+            "in": "query",
+            "description": "Include latest definition.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Dataset"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dataset/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets": {
+      "get": {
+        "operationId": "DatasetV2Operations_List",
+        "description": "List datasets (v2).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "names",
+            "in": "query",
+            "description": "Dataset names to filter by.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "name": "searchText",
+            "in": "query",
+            "description": "Search text.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "Continuation token for pagination.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Page size.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedDatasetV2List"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "DatasetV2Operations_Create",
+        "description": "Create a dataset (v2).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "ifExistsUpdate",
+            "in": "query",
+            "description": "If exists, update.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The dataset to create.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatasetV2"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DatasetV2"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DatasetV2Operations_DeleteAllDatasets",
+        "description": "Delete all datasets (v2).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dataset/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{datasetId}": {
+      "get": {
+        "operationId": "DatasetV2Operations_GetDatasetById",
+        "description": "Get a dataset by ID (v2).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "The dataset ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DatasetV2"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DatasetV2Operations_UpdateDataset",
+        "description": "Update a dataset (v2).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "datasetId",
+            "in": "path",
+            "description": "The dataset ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The dataset to update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatasetV2"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DatasetV2"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dataset/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/{name}/versions/{versionId}": {
+      "put": {
+        "operationId": "DatasetV2Operations_UpdateDatasetByNameAndVersion",
+        "description": "Update a dataset by name and version (v2).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The dataset name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The version ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The dataset to update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatasetV2"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DatasetV2"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DatasetV2Operations_DeleteDatasetByName",
+        "description": "Delete a dataset by name and version (v2).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The dataset name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "path",
+            "description": "The version ID.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dataset/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/datasets/query/name={datasetName}": {
+      "get": {
+        "operationId": "DatasetV2Operations_GetDatasetByName",
+        "description": "Get a dataset by name (v2).",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/WorkspacePathParameters.workspaceName"
+          },
+          {
+            "name": "datasetName",
+            "in": "path",
+            "description": "The dataset name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "versionId",
+            "in": "query",
+            "description": "The version ID.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DatasetV2"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ActionResult": {
+      "type": "object",
+      "description": "The result of a profile action.",
+      "properties": {
+        "isUpToDate": {
+          "type": "boolean",
+          "description": "Whether the data is up to date."
+        },
+        "isUpToDateError": {
+          "type": "string",
+          "description": "Error if up-to-date check failed."
+        },
+        "resultArtifactIds": {
+          "type": "array",
+          "description": "The result artifact IDs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "inProgressActionId": {
+          "type": "string",
+          "description": "The in-progress action ID."
+        },
+        "runId": {
+          "type": "string",
+          "description": "The run ID."
+        },
+        "experimentName": {
+          "type": "string",
+          "description": "The experiment name."
+        },
+        "datastoreName": {
+          "type": "string",
+          "description": "The datastore name."
+        }
+      }
+    },
+    "AssetId": {
+      "type": "object",
+      "description": "An asset identifier.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The asset ID value."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.Core.eTag": {
+      "type": "string",
+      "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
+    },
+    "BatchDataUriResponse": {
+      "type": "object",
+      "description": "Batch response containing resolved data URIs.",
+      "properties": {
+        "values": {
+          "type": "object",
+          "description": "Map of resolved data URIs.",
+          "additionalProperties": {
+            "$ref": "#/definitions/DataUriV2Response"
+          }
+        }
+      }
+    },
+    "BatchGetResolvedURIs": {
+      "type": "object",
+      "description": "Request to batch-resolve data URIs.",
+      "properties": {
+        "values": {
+          "type": "array",
+          "description": "The list of URIs to resolve.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "values"
+      ]
+    },
+    "ColumnDefinition": {
+      "type": "object",
+      "description": "A column definition for a data view schema.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The column ID."
+        },
+        "type": {
+          "$ref": "#/definitions/FieldType",
+          "description": "The column field type."
+        }
+      }
+    },
+    "CreateUnregisteredInputData": {
+      "type": "object",
+      "description": "Request to create unregistered input data.",
+      "properties": {
+        "runId": {
+          "type": "string",
+          "description": "The run ID."
+        },
+        "inputName": {
+          "type": "string",
+          "description": "The input name."
+        },
+        "uri": {
+          "type": "string",
+          "description": "The data URI."
+        },
+        "type": {
+          "type": "string",
+          "description": "The data type."
+        }
+      },
+      "required": [
+        "runId",
+        "inputName",
+        "uri",
+        "type"
+      ]
+    },
+    "CreateUnregisteredOutputData": {
+      "type": "object",
+      "description": "Request to create unregistered output data.",
+      "properties": {
+        "runId": {
+          "type": "string",
+          "description": "The run ID."
+        },
+        "outputName": {
+          "type": "string",
+          "description": "The output name."
+        },
+        "uri": {
+          "type": "string",
+          "description": "The data URI."
+        },
+        "type": {
+          "type": "string",
+          "description": "The data type."
+        }
+      },
+      "required": [
+        "runId",
+        "outputName",
+        "uri",
+        "type"
+      ]
+    },
+    "DataCallRequest": {
+      "type": "object",
+      "description": "Request for data call operations (preview, profile, schema).",
+      "properties": {
+        "dataUri": {
+          "type": "string",
+          "description": "The data URI."
+        },
+        "dataType": {
+          "type": "string",
+          "description": "The data type."
+        },
+        "assetId": {
+          "type": "string",
+          "description": "The asset ID."
+        },
+        "dataContainerName": {
+          "type": "string",
+          "description": "The data container name."
+        },
+        "versionId": {
+          "type": "string",
+          "description": "The version ID."
+        }
+      }
+    },
+    "DataContainer": {
+      "type": "object",
+      "description": "A data container definition.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the data container."
+        },
+        "dataType": {
+          "type": "string",
+          "description": "The data type."
+        },
+        "mutableProps": {
+          "$ref": "#/definitions/DataContainerMutable",
+          "description": "Mutable properties."
+        },
+        "isRegistered": {
+          "type": "boolean",
+          "description": "Whether the data container is registered."
+        }
+      },
+      "required": [
+        "name",
+        "dataType"
+      ]
+    },
+    "DataContainerEntity": {
+      "type": "object",
+      "description": "A data container entity with metadata.",
+      "properties": {
+        "dataContainer": {
+          "$ref": "#/definitions/DataContainer",
+          "description": "The data container."
+        },
+        "entityMetadata": {
+          "$ref": "#/definitions/EntityMetadata",
+          "description": "Entity metadata."
+        },
+        "latestVersion": {
+          "$ref": "#/definitions/DataVersionEntity",
+          "description": "The latest version entity."
+        },
+        "nextVersionId": {
+          "type": "string",
+          "description": "The next version ID."
+        },
+        "legacyDatasetType": {
+          "type": "string",
+          "description": "The legacy dataset type."
+        }
+      }
+    },
+    "DataContainerMutable": {
+      "type": "object",
+      "description": "Mutable properties of a data container.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The description."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tags for the data container.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "isArchived": {
+          "type": "boolean",
+          "description": "Whether the data container is archived."
+        }
+      }
+    },
+    "DataField": {
+      "type": "object",
+      "description": "A data field value.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FieldType",
+          "description": "The field type."
+        },
+        "value": {
+          "type": "string",
+          "description": "The field value."
+        }
+      }
+    },
+    "DataUriV2Response": {
+      "type": "object",
+      "description": "A resolved data URI response.",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "description": "The URI."
+        },
+        "type": {
+          "type": "string",
+          "description": "The data type."
+        }
+      }
+    },
+    "DataVersion": {
+      "type": "object",
+      "description": "A data version definition.",
+      "properties": {
+        "assetId": {
+          "type": "string",
+          "description": "The asset ID."
+        },
+        "dataContainerName": {
+          "type": "string",
+          "description": "The data container name."
+        },
+        "dataType": {
+          "type": "string",
+          "description": "The data type."
+        },
+        "dataUri": {
+          "type": "string",
+          "description": "The data URI."
+        },
+        "versionId": {
+          "type": "string",
+          "description": "The version ID."
+        },
+        "mutableProps": {
+          "$ref": "#/definitions/DataVersionMutable",
+          "description": "Mutable properties."
+        },
+        "referencedDataUris": {
+          "type": "array",
+          "description": "Referenced data URIs.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Additional properties.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "dataContainerName",
+        "dataType",
+        "dataUri",
+        "versionId"
+      ]
+    },
+    "DataVersionEntity": {
+      "type": "object",
+      "description": "A data version entity with metadata.",
+      "properties": {
+        "dataVersion": {
+          "$ref": "#/definitions/DataVersion",
+          "description": "The data version."
+        },
+        "entityMetadata": {
+          "$ref": "#/definitions/EntityMetadata",
+          "description": "Entity metadata."
+        }
+      }
+    },
+    "DataVersionMutable": {
+      "type": "object",
+      "description": "Mutable properties of a data version.",
+      "properties": {
+        "dataExpiryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The data expiry time."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tags for the data version.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "isArchived": {
+          "type": "boolean",
+          "description": "Whether the data version is archived."
+        }
+      }
+    },
+    "DataViewSetResult": {
+      "type": "object",
+      "description": "The result of a data view set operation.",
+      "properties": {
+        "schema": {
+          "type": "array",
+          "description": "The schema columns.",
+          "items": {
+            "$ref": "#/definitions/ColumnDefinition"
+          }
+        },
+        "rows": {
+          "type": "array",
+          "description": "The data rows.",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/DataField"
+            }
+          }
+        }
+      }
+    },
+    "DataflowType": {
+      "type": "string",
+      "description": "The type of dataflow serialization.",
+      "enum": [
+        "Json",
+        "Yaml"
+      ],
+      "x-ms-enum": {
+        "name": "DataflowType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Json",
+            "value": "Json",
+            "description": "JSON format."
+          },
+          {
+            "name": "Yaml",
+            "value": "Yaml",
+            "description": "YAML format."
+          }
+        ]
+      }
+    },
+    "Dataset": {
+      "type": "object",
+      "description": "A dataset (v1).",
+      "properties": {
+        "datasetId": {
+          "type": "string",
+          "description": "The dataset ID."
+        },
+        "datasetState": {
+          "$ref": "#/definitions/DatasetState",
+          "description": "The dataset state."
+        },
+        "latest": {
+          "$ref": "#/definitions/DatasetDefinition",
+          "description": "The latest definition."
+        },
+        "nextVersionId": {
+          "type": "string",
+          "description": "The next version ID."
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The created time."
+        },
+        "modifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The modified time."
+        },
+        "etag": {
+          "$ref": "#/definitions/Azure.Core.eTag",
+          "description": "The ETag."
+        },
+        "name": {
+          "type": "string",
+          "description": "The dataset name."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tags for the dataset.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "isVisible": {
+          "type": "boolean",
+          "description": "Whether the dataset is visible."
+        },
+        "defaultCompute": {
+          "type": "string",
+          "description": "The default compute target."
+        },
+        "datasetType": {
+          "type": "string",
+          "description": "The dataset type."
+        }
+      }
+    },
+    "DatasetDefinition": {
+      "type": "object",
+      "description": "A dataset definition.",
+      "properties": {
+        "datasetId": {
+          "type": "string",
+          "description": "The dataset ID."
+        },
+        "versionId": {
+          "type": "string",
+          "description": "The version ID."
+        },
+        "datasetDefinitionState": {
+          "$ref": "#/definitions/DatasetState",
+          "description": "The dataset definition state."
+        },
+        "dataflow": {
+          "type": "string",
+          "description": "The dataflow."
+        },
+        "dataflowType": {
+          "$ref": "#/definitions/DataflowType",
+          "description": "The dataflow type."
+        },
+        "dataPath": {
+          "$ref": "#/definitions/DatasetPath",
+          "description": "The data path."
+        },
+        "partitionFormatInPath": {
+          "type": "string",
+          "description": "The partition format in path."
+        },
+        "profileActionResult": {
+          "$ref": "#/definitions/ProfileActionResult",
+          "description": "The profile action result."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Notes for the definition."
+        },
+        "etag": {
+          "$ref": "#/definitions/Azure.Core.eTag",
+          "description": "The ETag."
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The created time."
+        },
+        "modifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The modified time."
+        },
+        "dataExpiryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The data expiry time."
+        },
+        "createdBy": {
+          "$ref": "#/definitions/User",
+          "description": "The user who created this definition."
+        },
+        "modifiedBy": {
+          "$ref": "#/definitions/User",
+          "description": "The user who last modified this definition."
+        },
+        "fileType": {
+          "type": "string",
+          "description": "The file type."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Additional properties.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "savedDatasetId": {
+          "type": "string",
+          "description": "The saved dataset ID."
+        },
+        "telemetryInfo": {
+          "type": "object",
+          "description": "Telemetry information.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "useDescriptionTagsFromDefinition": {
+          "type": "boolean",
+          "description": "Whether to use description and tags from definition."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tags for the definition.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DatasetDefinitionReference": {
+      "type": "object",
+      "description": "A dataset definition reference.",
+      "properties": {
+        "datasetId": {
+          "type": "string",
+          "description": "The dataset ID."
+        },
+        "definitionVersion": {
+          "type": "string",
+          "description": "The definition version."
+        }
+      }
+    },
+    "DatasetPath": {
+      "type": "object",
+      "description": "A dataset path.",
+      "properties": {
+        "datastoreName": {
+          "type": "string",
+          "description": "The datastore name."
+        },
+        "relativePath": {
+          "type": "string",
+          "description": "The relative path."
+        },
+        "azureFilePath": {
+          "type": "string",
+          "description": "The Azure file path."
+        },
+        "paths": {
+          "type": "array",
+          "description": "The list of paths.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sqlDataPath": {
+          "$ref": "#/definitions/SqlDataPath",
+          "description": "The SQL data path."
+        },
+        "httpUrl": {
+          "type": "string",
+          "description": "The HTTP URL."
+        },
+        "additionalProperties": {
+          "type": "object",
+          "description": "Additional properties.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "partitionFormat": {
+          "type": "string",
+          "description": "The partition format."
+        },
+        "partitionFormatIgnoreError": {
+          "type": "boolean",
+          "description": "Whether to ignore partition format errors."
+        }
+      }
+    },
+    "DatasetState": {
+      "type": "object",
+      "description": "The state of a dataset.",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "The state value."
+        },
+        "deprecatedBy": {
+          "$ref": "#/definitions/DatasetDefinitionReference",
+          "description": "The definition that deprecated this dataset."
+        },
+        "etag": {
+          "$ref": "#/definitions/Azure.Core.eTag",
+          "description": "The ETag."
+        }
+      }
+    },
+    "DatasetV2": {
+      "type": "object",
+      "description": "A dataset (v2).",
+      "properties": {
+        "datasetId": {
+          "type": "string",
+          "description": "The dataset ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "The dataset name."
+        },
+        "versionId": {
+          "type": "string",
+          "description": "The version ID."
+        },
+        "dataflow": {
+          "type": "string",
+          "description": "The dataflow."
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The created time."
+        },
+        "modifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The modified time."
+        },
+        "createdBy": {
+          "$ref": "#/definitions/User",
+          "description": "The user who created this dataset."
+        },
+        "modifiedBy": {
+          "$ref": "#/definitions/User",
+          "description": "The user who last modified this dataset."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Properties.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "telemetryInfo": {
+          "type": "object",
+          "description": "Telemetry information.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "description": {
+          "type": "string",
+          "description": "The description."
+        },
+        "isAnonymous": {
+          "type": "boolean",
+          "description": "Whether the dataset is anonymous."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tags for the dataset.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "legacyProperties": {
+          "type": "object",
+          "description": "Legacy properties.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "dataExpiryTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The data expiry time."
+        },
+        "legacy": {
+          "type": "object",
+          "description": "Legacy data.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "EntityMetadata": {
+      "type": "object",
+      "description": "Entity metadata.",
+      "properties": {
+        "etag": {
+          "$ref": "#/definitions/Azure.Core.eTag",
+          "description": "The ETag."
+        },
+        "createdTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The created time."
+        },
+        "modifiedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The modified time."
+        },
+        "createdBy": {
+          "$ref": "#/definitions/User",
+          "description": "The user who created the entity."
+        },
+        "modifiedBy": {
+          "$ref": "#/definitions/User",
+          "description": "The user who last modified the entity."
+        }
+      }
+    },
+    "ErrorAdditionalInfo": {
+      "type": "object",
+      "description": "The resource management error additional info.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The additional info type."
+        },
+        "info": {
+          "type": "string",
+          "description": "The additional info."
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "description": "The error response.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/RootError",
+          "description": "The root error."
+        },
+        "correlation": {
+          "type": "object",
+          "description": "Dictionary containing correlation details for the error.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "environment": {
+          "type": "string",
+          "description": "The hosting environment."
+        },
+        "location": {
+          "type": "string",
+          "description": "The Azure region."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time in UTC."
+        },
+        "componentName": {
+          "type": "string",
+          "description": "Component name where error originated/encountered."
+        }
+      }
+    },
+    "FieldType": {
+      "type": "string",
+      "description": "The field type for data columns.",
+      "enum": [
+        "String",
+        "Boolean",
+        "Integer",
+        "Decimal",
+        "Date",
+        "Unknown",
+        "Error",
+        "Null",
+        "DataRow",
+        "List",
+        "Stream"
+      ],
+      "x-ms-enum": {
+        "name": "FieldType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "String",
+            "value": "String",
+            "description": "String type."
+          },
+          {
+            "name": "Boolean",
+            "value": "Boolean",
+            "description": "Boolean type."
+          },
+          {
+            "name": "Integer",
+            "value": "Integer",
+            "description": "Integer type."
+          },
+          {
+            "name": "Decimal",
+            "value": "Decimal",
+            "description": "Decimal type."
+          },
+          {
+            "name": "Date",
+            "value": "Date",
+            "description": "Date type."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Unknown type."
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "Error type."
+          },
+          {
+            "name": "Null",
+            "value": "Null",
+            "description": "Null type."
+          },
+          {
+            "name": "DataRow",
+            "value": "DataRow",
+            "description": "DataRow type."
+          },
+          {
+            "name": "List",
+            "value": "List",
+            "description": "List type."
+          },
+          {
+            "name": "Stream",
+            "value": "Stream",
+            "description": "Stream type."
+          }
+        ]
+      }
+    },
+    "HistogramBin": {
+      "type": "object",
+      "description": "A histogram bin for profile results.",
+      "properties": {
+        "lowerBound": {
+          "type": "number",
+          "format": "double",
+          "description": "The lower bound."
+        },
+        "upperBound": {
+          "type": "number",
+          "format": "double",
+          "description": "The upper bound."
+        },
+        "count": {
+          "type": "number",
+          "format": "double",
+          "description": "The count."
+        }
+      }
+    },
+    "HttpContent": {
+      "type": "object",
+      "description": "HTTP content.",
+      "properties": {
+        "headers": {
+          "type": "array",
+          "description": "The content headers.",
+          "items": {
+            "$ref": "#/definitions/KeyValuePairStringIEnumerable"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "HttpMethod": {
+      "type": "object",
+      "description": "An HTTP method.",
+      "properties": {
+        "method": {
+          "type": "string",
+          "description": "The method name."
+        }
+      }
+    },
+    "HttpRequestMessage": {
+      "type": "object",
+      "description": "An HTTP request message.",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "The HTTP version."
+        },
+        "versionPolicy": {
+          "$ref": "#/definitions/HttpVersionPolicy",
+          "description": "The version policy."
+        },
+        "content": {
+          "$ref": "#/definitions/HttpContent",
+          "description": "The request content."
+        },
+        "method": {
+          "$ref": "#/definitions/HttpMethod",
+          "description": "The HTTP method."
+        },
+        "requestUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The request URI."
+        },
+        "headers": {
+          "type": "array",
+          "description": "The request headers.",
+          "items": {
+            "$ref": "#/definitions/KeyValuePairStringIEnumerable"
+          },
+          "readOnly": true
+        },
+        "options": {
+          "type": "object",
+          "description": "The request options.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "HttpResponseMessage": {
+      "type": "object",
+      "description": "An HTTP response message.",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "The HTTP version."
+        },
+        "content": {
+          "$ref": "#/definitions/HttpContent",
+          "description": "The response content."
+        },
+        "statusCode": {
+          "$ref": "#/definitions/HttpStatusCode",
+          "description": "The status code."
+        },
+        "reasonPhrase": {
+          "type": "string",
+          "description": "The reason phrase."
+        },
+        "headers": {
+          "type": "array",
+          "description": "The response headers.",
+          "items": {
+            "$ref": "#/definitions/KeyValuePairStringIEnumerable"
+          },
+          "readOnly": true
+        },
+        "trailingHeaders": {
+          "type": "array",
+          "description": "The trailing headers.",
+          "items": {
+            "$ref": "#/definitions/KeyValuePairStringIEnumerable"
+          },
+          "readOnly": true
+        },
+        "requestMessage": {
+          "$ref": "#/definitions/HttpRequestMessage",
+          "description": "The request message."
+        },
+        "isSuccessStatusCode": {
+          "type": "boolean",
+          "description": "Whether the status code indicates success.",
+          "readOnly": true
+        }
+      }
+    },
+    "HttpStatusCode": {
+      "type": "string",
+      "description": "The HTTP status code.",
+      "enum": [
+        "Continue",
+        "SwitchingProtocols",
+        "Processing",
+        "EarlyHints",
+        "OK",
+        "Created",
+        "Accepted",
+        "NonAuthoritativeInformation",
+        "NoContent",
+        "ResetContent",
+        "PartialContent",
+        "MultiStatus",
+        "AlreadyReported",
+        "IMUsed",
+        "Ambiguous",
+        "Moved",
+        "Redirect",
+        "RedirectMethod",
+        "NotModified",
+        "UseProxy",
+        "Unused",
+        "TemporaryRedirect",
+        "PermanentRedirect",
+        "BadRequest",
+        "Unauthorized",
+        "PaymentRequired",
+        "Forbidden",
+        "NotFound",
+        "MethodNotAllowed",
+        "NotAcceptable",
+        "ProxyAuthenticationRequired",
+        "RequestTimeout",
+        "Conflict",
+        "Gone",
+        "LengthRequired",
+        "PreconditionFailed",
+        "RequestEntityTooLarge",
+        "RequestUriTooLong",
+        "UnsupportedMediaType",
+        "RequestedRangeNotSatisfiable",
+        "ExpectationFailed",
+        "MisdirectedRequest",
+        "UnprocessableEntity",
+        "Locked",
+        "FailedDependency",
+        "UpgradeRequired",
+        "PreconditionRequired",
+        "TooManyRequests",
+        "RequestHeaderFieldsTooLarge",
+        "UnavailableForLegalReasons",
+        "InternalServerError",
+        "NotImplemented",
+        "BadGateway",
+        "ServiceUnavailable",
+        "GatewayTimeout",
+        "HttpVersionNotSupported",
+        "VariantAlsoNegotiates",
+        "InsufficientStorage",
+        "LoopDetected",
+        "NotExtended",
+        "NetworkAuthenticationRequired"
+      ],
+      "x-ms-enum": {
+        "name": "HttpStatusCode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Continue",
+            "value": "Continue",
+            "description": "Continue status code."
+          },
+          {
+            "name": "SwitchingProtocols",
+            "value": "SwitchingProtocols",
+            "description": "SwitchingProtocols status code."
+          },
+          {
+            "name": "Processing",
+            "value": "Processing",
+            "description": "Processing status code."
+          },
+          {
+            "name": "EarlyHints",
+            "value": "EarlyHints",
+            "description": "EarlyHints status code."
+          },
+          {
+            "name": "OK",
+            "value": "OK",
+            "description": "OK status code."
+          },
+          {
+            "name": "Created",
+            "value": "Created",
+            "description": "Created status code."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Accepted status code."
+          },
+          {
+            "name": "NonAuthoritativeInformation",
+            "value": "NonAuthoritativeInformation",
+            "description": "NonAuthoritativeInformation status code."
+          },
+          {
+            "name": "NoContent",
+            "value": "NoContent",
+            "description": "NoContent status code."
+          },
+          {
+            "name": "ResetContent",
+            "value": "ResetContent",
+            "description": "ResetContent status code."
+          },
+          {
+            "name": "PartialContent",
+            "value": "PartialContent",
+            "description": "PartialContent status code."
+          },
+          {
+            "name": "MultiStatus",
+            "value": "MultiStatus",
+            "description": "MultiStatus status code."
+          },
+          {
+            "name": "AlreadyReported",
+            "value": "AlreadyReported",
+            "description": "AlreadyReported status code."
+          },
+          {
+            "name": "IMUsed",
+            "value": "IMUsed",
+            "description": "IMUsed status code."
+          },
+          {
+            "name": "Ambiguous",
+            "value": "Ambiguous",
+            "description": "Ambiguous status code."
+          },
+          {
+            "name": "Moved",
+            "value": "Moved",
+            "description": "Moved status code."
+          },
+          {
+            "name": "Redirect",
+            "value": "Redirect",
+            "description": "Redirect status code."
+          },
+          {
+            "name": "RedirectMethod",
+            "value": "RedirectMethod",
+            "description": "RedirectMethod status code."
+          },
+          {
+            "name": "NotModified",
+            "value": "NotModified",
+            "description": "NotModified status code."
+          },
+          {
+            "name": "UseProxy",
+            "value": "UseProxy",
+            "description": "UseProxy status code."
+          },
+          {
+            "name": "Unused",
+            "value": "Unused",
+            "description": "Unused status code."
+          },
+          {
+            "name": "TemporaryRedirect",
+            "value": "TemporaryRedirect",
+            "description": "TemporaryRedirect status code."
+          },
+          {
+            "name": "PermanentRedirect",
+            "value": "PermanentRedirect",
+            "description": "PermanentRedirect status code."
+          },
+          {
+            "name": "BadRequest",
+            "value": "BadRequest",
+            "description": "BadRequest status code."
+          },
+          {
+            "name": "Unauthorized",
+            "value": "Unauthorized",
+            "description": "Unauthorized status code."
+          },
+          {
+            "name": "PaymentRequired",
+            "value": "PaymentRequired",
+            "description": "PaymentRequired status code."
+          },
+          {
+            "name": "Forbidden",
+            "value": "Forbidden",
+            "description": "Forbidden status code."
+          },
+          {
+            "name": "NotFound",
+            "value": "NotFound",
+            "description": "NotFound status code."
+          },
+          {
+            "name": "MethodNotAllowed",
+            "value": "MethodNotAllowed",
+            "description": "MethodNotAllowed status code."
+          },
+          {
+            "name": "NotAcceptable",
+            "value": "NotAcceptable",
+            "description": "NotAcceptable status code."
+          },
+          {
+            "name": "ProxyAuthenticationRequired",
+            "value": "ProxyAuthenticationRequired",
+            "description": "ProxyAuthenticationRequired status code."
+          },
+          {
+            "name": "RequestTimeout",
+            "value": "RequestTimeout",
+            "description": "RequestTimeout status code."
+          },
+          {
+            "name": "Conflict",
+            "value": "Conflict",
+            "description": "Conflict status code."
+          },
+          {
+            "name": "Gone",
+            "value": "Gone",
+            "description": "Gone status code."
+          },
+          {
+            "name": "LengthRequired",
+            "value": "LengthRequired",
+            "description": "LengthRequired status code."
+          },
+          {
+            "name": "PreconditionFailed",
+            "value": "PreconditionFailed",
+            "description": "PreconditionFailed status code."
+          },
+          {
+            "name": "RequestEntityTooLarge",
+            "value": "RequestEntityTooLarge",
+            "description": "RequestEntityTooLarge status code."
+          },
+          {
+            "name": "RequestUriTooLong",
+            "value": "RequestUriTooLong",
+            "description": "RequestUriTooLong status code."
+          },
+          {
+            "name": "UnsupportedMediaType",
+            "value": "UnsupportedMediaType",
+            "description": "UnsupportedMediaType status code."
+          },
+          {
+            "name": "RequestedRangeNotSatisfiable",
+            "value": "RequestedRangeNotSatisfiable",
+            "description": "RequestedRangeNotSatisfiable status code."
+          },
+          {
+            "name": "ExpectationFailed",
+            "value": "ExpectationFailed",
+            "description": "ExpectationFailed status code."
+          },
+          {
+            "name": "MisdirectedRequest",
+            "value": "MisdirectedRequest",
+            "description": "MisdirectedRequest status code."
+          },
+          {
+            "name": "UnprocessableEntity",
+            "value": "UnprocessableEntity",
+            "description": "UnprocessableEntity status code."
+          },
+          {
+            "name": "Locked",
+            "value": "Locked",
+            "description": "Locked status code."
+          },
+          {
+            "name": "FailedDependency",
+            "value": "FailedDependency",
+            "description": "FailedDependency status code."
+          },
+          {
+            "name": "UpgradeRequired",
+            "value": "UpgradeRequired",
+            "description": "UpgradeRequired status code."
+          },
+          {
+            "name": "PreconditionRequired",
+            "value": "PreconditionRequired",
+            "description": "PreconditionRequired status code."
+          },
+          {
+            "name": "TooManyRequests",
+            "value": "TooManyRequests",
+            "description": "TooManyRequests status code."
+          },
+          {
+            "name": "RequestHeaderFieldsTooLarge",
+            "value": "RequestHeaderFieldsTooLarge",
+            "description": "RequestHeaderFieldsTooLarge status code."
+          },
+          {
+            "name": "UnavailableForLegalReasons",
+            "value": "UnavailableForLegalReasons",
+            "description": "UnavailableForLegalReasons status code."
+          },
+          {
+            "name": "InternalServerError",
+            "value": "InternalServerError",
+            "description": "InternalServerError status code."
+          },
+          {
+            "name": "NotImplemented",
+            "value": "NotImplemented",
+            "description": "NotImplemented status code."
+          },
+          {
+            "name": "BadGateway",
+            "value": "BadGateway",
+            "description": "BadGateway status code."
+          },
+          {
+            "name": "ServiceUnavailable",
+            "value": "ServiceUnavailable",
+            "description": "ServiceUnavailable status code."
+          },
+          {
+            "name": "GatewayTimeout",
+            "value": "GatewayTimeout",
+            "description": "GatewayTimeout status code."
+          },
+          {
+            "name": "HttpVersionNotSupported",
+            "value": "HttpVersionNotSupported",
+            "description": "HttpVersionNotSupported status code."
+          },
+          {
+            "name": "VariantAlsoNegotiates",
+            "value": "VariantAlsoNegotiates",
+            "description": "VariantAlsoNegotiates status code."
+          },
+          {
+            "name": "InsufficientStorage",
+            "value": "InsufficientStorage",
+            "description": "InsufficientStorage status code."
+          },
+          {
+            "name": "LoopDetected",
+            "value": "LoopDetected",
+            "description": "LoopDetected status code."
+          },
+          {
+            "name": "NotExtended",
+            "value": "NotExtended",
+            "description": "NotExtended status code."
+          },
+          {
+            "name": "NetworkAuthenticationRequired",
+            "value": "NetworkAuthenticationRequired",
+            "description": "NetworkAuthenticationRequired status code."
+          }
+        ]
+      }
+    },
+    "HttpVersionPolicy": {
+      "type": "string",
+      "description": "The HTTP version policy.",
+      "enum": [
+        "RequestVersionOrLower",
+        "RequestVersionOrHigher",
+        "RequestVersionExact"
+      ],
+      "x-ms-enum": {
+        "name": "HttpVersionPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RequestVersionOrLower",
+            "value": "RequestVersionOrLower",
+            "description": "Request version or lower."
+          },
+          {
+            "name": "RequestVersionOrHigher",
+            "value": "RequestVersionOrHigher",
+            "description": "Request version or higher."
+          },
+          {
+            "name": "RequestVersionExact",
+            "value": "RequestVersionExact",
+            "description": "Request version exact."
+          }
+        ]
+      }
+    },
+    "InnerErrorResponse": {
+      "type": "object",
+      "description": "A nested structure of errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code."
+        },
+        "innerError": {
+          "$ref": "#/definitions/InnerErrorResponse",
+          "description": "The inner error."
+        }
+      }
+    },
+    "KeyValuePairStringIEnumerable": {
+      "type": "object",
+      "description": "A key-value pair where the value is a list of strings.",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key."
+        },
+        "value": {
+          "type": "array",
+          "description": "The values.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "LongRunningOperationResponse": {
+      "type": "object",
+      "description": "A long-running operation response.",
+      "properties": {
+        "completionResult": {
+          "type": "string",
+          "description": "The completion result."
+        },
+        "location": {
+          "type": "string",
+          "format": "uri",
+          "description": "The location URI."
+        },
+        "operationResult": {
+          "type": "string",
+          "format": "uri",
+          "description": "The operation result URI."
+        }
+      }
+    },
+    "Moments": {
+      "type": "object",
+      "description": "Statistical moments for profile results.",
+      "properties": {
+        "mean": {
+          "type": "number",
+          "format": "double",
+          "description": "The mean."
+        },
+        "standardDeviation": {
+          "type": "number",
+          "format": "double",
+          "description": "The standard deviation."
+        },
+        "variance": {
+          "type": "number",
+          "format": "double",
+          "description": "The variance."
+        },
+        "skewness": {
+          "type": "number",
+          "format": "double",
+          "description": "The skewness."
+        },
+        "kurtosis": {
+          "type": "number",
+          "format": "double",
+          "description": "The kurtosis."
+        }
+      }
+    },
+    "PaginatedDataContainerEntityList": {
+      "type": "object",
+      "description": "A paginated list of DataContainerEntity objects.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "An array of objects of type DataContainerEntity.",
+          "items": {
+            "$ref": "#/definitions/DataContainerEntity"
+          }
+        },
+        "continuationToken": {
+          "type": "string",
+          "description": "The token used in retrieving the next page. If null, there are no additional pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page constructed using the continuationToken. If null, there are no additional pages."
+        }
+      }
+    },
+    "PaginatedDataVersionEntityList": {
+      "type": "object",
+      "description": "A paginated list of DataVersionEntity objects.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "An array of objects of type DataVersionEntity.",
+          "items": {
+            "$ref": "#/definitions/DataVersionEntity"
+          }
+        },
+        "continuationToken": {
+          "type": "string",
+          "description": "The token used in retrieving the next page. If null, there are no additional pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page constructed using the continuationToken. If null, there are no additional pages."
+        }
+      }
+    },
+    "PaginatedDatasetDefinitionList": {
+      "type": "object",
+      "description": "A paginated list of DatasetDefinition objects.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "An array of objects of type DatasetDefinition.",
+          "items": {
+            "$ref": "#/definitions/DatasetDefinition"
+          }
+        },
+        "continuationToken": {
+          "type": "string",
+          "description": "The token used in retrieving the next page. If null, there are no additional pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page constructed using the continuationToken. If null, there are no additional pages."
+        }
+      }
+    },
+    "PaginatedDatasetList": {
+      "type": "object",
+      "description": "A paginated list of Dataset objects.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "An array of objects of type Dataset.",
+          "items": {
+            "$ref": "#/definitions/Dataset"
+          }
+        },
+        "continuationToken": {
+          "type": "string",
+          "description": "The token used in retrieving the next page. If null, there are no additional pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page constructed using the continuationToken. If null, there are no additional pages."
+        }
+      }
+    },
+    "PaginatedDatasetV2List": {
+      "type": "object",
+      "description": "A paginated list of DatasetV2 objects.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "An array of objects of type DatasetV2.",
+          "items": {
+            "$ref": "#/definitions/DatasetV2"
+          }
+        },
+        "continuationToken": {
+          "type": "string",
+          "description": "The token used in retrieving the next page. If null, there are no additional pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page constructed using the continuationToken. If null, there are no additional pages."
+        }
+      }
+    },
+    "PaginatedStringList": {
+      "type": "object",
+      "description": "A paginated list of String objects.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "An array of objects of type String.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "continuationToken": {
+          "type": "string",
+          "description": "The token used in retrieving the next page. If null, there are no additional pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The link to the next page constructed using the continuationToken. If null, there are no additional pages."
+        }
+      }
+    },
+    "ProfileActionResult": {
+      "type": "object",
+      "description": "The profile action result.",
+      "properties": {
+        "profileActionId": {
+          "type": "string",
+          "description": "The profile action ID."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status."
+        },
+        "completedOnUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The completion time in UTC."
+        },
+        "actionResult": {
+          "$ref": "#/definitions/ActionResult",
+          "description": "The action result."
+        }
+      }
+    },
+    "ProfileResult": {
+      "type": "object",
+      "description": "A profile result for a column.",
+      "properties": {
+        "columnName": {
+          "type": "string",
+          "description": "The column name."
+        },
+        "type": {
+          "$ref": "#/definitions/FieldType",
+          "description": "The column type."
+        },
+        "min": {
+          "$ref": "#/definitions/DataField",
+          "description": "The minimum value."
+        },
+        "max": {
+          "$ref": "#/definitions/DataField",
+          "description": "The maximum value."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The total count."
+        },
+        "missingCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The missing count."
+        },
+        "notMissingCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The not-missing count."
+        },
+        "percentMissing": {
+          "type": "number",
+          "format": "double",
+          "description": "The percent missing."
+        },
+        "errorCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The error count."
+        },
+        "emptyCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The empty count."
+        },
+        "quantiles": {
+          "$ref": "#/definitions/Quantiles",
+          "description": "The quantiles."
+        },
+        "whiskerTop": {
+          "type": "number",
+          "format": "double",
+          "description": "The whisker top value."
+        },
+        "whiskerBottom": {
+          "type": "number",
+          "format": "double",
+          "description": "The whisker bottom value."
+        },
+        "moments": {
+          "$ref": "#/definitions/Moments",
+          "description": "The statistical moments."
+        },
+        "typeCounts": {
+          "type": "array",
+          "description": "The type counts.",
+          "items": {
+            "$ref": "#/definitions/TypeCount"
+          }
+        },
+        "valueCounts": {
+          "type": "array",
+          "description": "The value counts.",
+          "items": {
+            "$ref": "#/definitions/ValueCount"
+          }
+        },
+        "uniqueValues": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of unique values."
+        },
+        "histogram": {
+          "type": "array",
+          "description": "The histogram bins.",
+          "items": {
+            "$ref": "#/definitions/HistogramBin"
+          }
+        },
+        "sTypeCounts": {
+          "type": "array",
+          "description": "The semantic type counts.",
+          "items": {
+            "$ref": "#/definitions/STypeCount"
+          }
+        },
+        "averageSpacesCount": {
+          "type": "number",
+          "format": "double",
+          "description": "The average spaces count."
+        },
+        "stringLengths": {
+          "type": "array",
+          "description": "The string lengths.",
+          "items": {
+            "$ref": "#/definitions/StringLengthCount"
+          }
+        }
+      }
+    },
+    "Quantiles": {
+      "type": "object",
+      "description": "Quantile values for profile results.",
+      "properties": {
+        "p0D1": {
+          "type": "number",
+          "format": "double",
+          "description": "The 0.1 percentile."
+        },
+        "p1": {
+          "type": "number",
+          "format": "double",
+          "description": "The 1st percentile."
+        },
+        "p5": {
+          "type": "number",
+          "format": "double",
+          "description": "The 5th percentile."
+        },
+        "p25": {
+          "type": "number",
+          "format": "double",
+          "description": "The 25th percentile."
+        },
+        "p50": {
+          "type": "number",
+          "format": "double",
+          "description": "The 50th percentile (median)."
+        },
+        "p75": {
+          "type": "number",
+          "format": "double",
+          "description": "The 75th percentile."
+        },
+        "p95": {
+          "type": "number",
+          "format": "double",
+          "description": "The 95th percentile."
+        },
+        "p99": {
+          "type": "number",
+          "format": "double",
+          "description": "The 99th percentile."
+        },
+        "p99D9": {
+          "type": "number",
+          "format": "double",
+          "description": "The 99.9 percentile."
+        }
+      }
+    },
+    "RegisterExistingData": {
+      "type": "object",
+      "description": "Request to register existing data as a named data asset.",
+      "properties": {
+        "existingUnregisteredAssetId": {
+          "type": "string",
+          "description": "The existing unregistered asset ID."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name."
+        },
+        "version": {
+          "type": "string",
+          "description": "The version."
+        }
+      },
+      "required": [
+        "existingUnregisteredAssetId",
+        "name"
+      ]
+    },
+    "RootError": {
+      "type": "object",
+      "description": "The root error.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The service-defined error code."
+        },
+        "severity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The severity of error."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "messageFormat": {
+          "type": "string",
+          "description": "An unformatted version of the message with no variable substitution."
+        },
+        "messageParameters": {
+          "type": "object",
+          "description": "Value substitutions corresponding to the contents of MessageFormat.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "referenceCode": {
+          "type": "string",
+          "description": "Reference code to classify the problem."
+        },
+        "detailsUri": {
+          "type": "string",
+          "format": "uri",
+          "description": "A URI which points to more details about the context of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "The related errors that occurred during the request.",
+          "items": {
+            "$ref": "#/definitions/RootError"
+          }
+        },
+        "innerError": {
+          "$ref": "#/definitions/InnerErrorResponse",
+          "description": "The inner error."
+        },
+        "additionalInfo": {
+          "type": "array",
+          "description": "The error additional info.",
+          "items": {
+            "$ref": "#/definitions/ErrorAdditionalInfo"
+          }
+        }
+      }
+    },
+    "SType": {
+      "type": "string",
+      "description": "The semantic type for profiling.",
+      "enum": [
+        "EmailAddress",
+        "GeographicCoordinate",
+        "Ipv4Address",
+        "Ipv6Address",
+        "UsPhoneNumber",
+        "ZipCode"
+      ],
+      "x-ms-enum": {
+        "name": "SType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EmailAddress",
+            "value": "EmailAddress",
+            "description": "Email address."
+          },
+          {
+            "name": "GeographicCoordinate",
+            "value": "GeographicCoordinate",
+            "description": "Geographic coordinate."
+          },
+          {
+            "name": "Ipv4Address",
+            "value": "Ipv4Address",
+            "description": "IPv4 address."
+          },
+          {
+            "name": "Ipv6Address",
+            "value": "Ipv6Address",
+            "description": "IPv6 address."
+          },
+          {
+            "name": "UsPhoneNumber",
+            "value": "UsPhoneNumber",
+            "description": "US phone number."
+          },
+          {
+            "name": "ZipCode",
+            "value": "ZipCode",
+            "description": "Zip code."
+          }
+        ]
+      }
+    },
+    "STypeCount": {
+      "type": "object",
+      "description": "A semantic type count for profile results.",
+      "properties": {
+        "sType": {
+          "$ref": "#/definitions/SType",
+          "description": "The semantic type."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The count."
+        }
+      }
+    },
+    "SqlDataPath": {
+      "type": "object",
+      "description": "A SQL data path.",
+      "properties": {
+        "sqlTableName": {
+          "type": "string",
+          "description": "The SQL table name."
+        },
+        "sqlQuery": {
+          "type": "string",
+          "description": "The SQL query."
+        },
+        "sqlStoredProcedureName": {
+          "type": "string",
+          "description": "The SQL stored procedure name."
+        },
+        "sqlStoredProcedureParams": {
+          "type": "array",
+          "description": "The SQL stored procedure parameters.",
+          "items": {
+            "$ref": "#/definitions/StoredProcedureParameter"
+          }
+        },
+        "queryTimeout": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The query timeout in seconds."
+        }
+      }
+    },
+    "StoredProcedureParameter": {
+      "type": "object",
+      "description": "A stored procedure parameter.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The parameter name."
+        },
+        "value": {
+          "type": "string",
+          "description": "The parameter value."
+        },
+        "type": {
+          "$ref": "#/definitions/StoredProcedureParameterType",
+          "description": "The parameter type."
+        }
+      }
+    },
+    "StoredProcedureParameterType": {
+      "type": "string",
+      "description": "The type of stored procedure parameter.",
+      "enum": [
+        "String",
+        "Int",
+        "Decimal",
+        "Guid",
+        "Boolean",
+        "Date"
+      ],
+      "x-ms-enum": {
+        "name": "StoredProcedureParameterType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "String",
+            "value": "String",
+            "description": "String type."
+          },
+          {
+            "name": "Int",
+            "value": "Int",
+            "description": "Int type."
+          },
+          {
+            "name": "Decimal",
+            "value": "Decimal",
+            "description": "Decimal type."
+          },
+          {
+            "name": "Guid",
+            "value": "Guid",
+            "description": "Guid type."
+          },
+          {
+            "name": "Boolean",
+            "value": "Boolean",
+            "description": "Boolean type."
+          },
+          {
+            "name": "Date",
+            "value": "Date",
+            "description": "Date type."
+          }
+        ]
+      }
+    },
+    "StringLengthCount": {
+      "type": "object",
+      "description": "A string length count for profile results.",
+      "properties": {
+        "length": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The string length."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The count."
+        }
+      }
+    },
+    "TypeCount": {
+      "type": "object",
+      "description": "A type count for profile results.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FieldType",
+          "description": "The field type."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The count."
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "description": "A user or service principal identity.",
+      "properties": {
+        "userObjectId": {
+          "type": "string",
+          "description": "A user or service principal's object ID."
+        },
+        "userPuId": {
+          "type": "string",
+          "description": "A user or service principal's PuID."
+        },
+        "userIdp": {
+          "type": "string",
+          "description": "A user identity provider."
+        },
+        "userAltSecId": {
+          "type": "string",
+          "description": "A user alternate sec id."
+        },
+        "userIss": {
+          "type": "string",
+          "description": "The issuer which issued the token for this user."
+        },
+        "userTenantId": {
+          "type": "string",
+          "description": "A user or service principal's tenant ID."
+        },
+        "userName": {
+          "type": "string",
+          "description": "A user's full name or a service principal's app ID."
+        },
+        "upn": {
+          "type": "string",
+          "description": "A user's principal name (UPN)."
+        }
+      }
+    },
+    "ValueCount": {
+      "type": "object",
+      "description": "A value count for profile results.",
+      "properties": {
+        "value": {
+          "$ref": "#/definitions/DataField",
+          "description": "The value."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The count."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "WorkspacePathParameters.resourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The Name of the resource group in which the workspace is located.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "WorkspacePathParameters.subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The Azure Subscription ID.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "WorkspacePathParameters.workspaceName": {
+      "name": "workspaceName",
+      "in": "path",
+      "description": "The name of the workspace.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

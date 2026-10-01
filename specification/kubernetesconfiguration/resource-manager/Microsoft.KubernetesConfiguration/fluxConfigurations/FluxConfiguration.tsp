@@ -134,11 +134,13 @@ interface FluxConfigurations {
   update is FluxConfigurationOperationGroupOps.CustomPatchAsync<
     FluxConfiguration,
     PatchModel = FluxConfigurationPatch,
-    Response = ArmResponse<FluxConfiguration> | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = FluxConfiguration> &
-      Azure.Core.Foundations.RetryAfterHeader> & {
-      @bodyRoot
-      _: FluxConfiguration;
-    })
+    Response =
+      | ArmResponse<FluxConfiguration>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader<FinalResult = FluxConfiguration> &
+          Azure.Core.Foundations.RetryAfterHeader> & {
+          @bodyRoot
+          _: FluxConfiguration;
+        })
   >;
 
   /**
@@ -157,8 +159,11 @@ interface FluxConfigurations {
       @query("forceDelete")
       forceDelete?: boolean;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+          Azure.Core.Foundations.RetryAfterHeader>
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -185,12 +190,15 @@ interface FluxConfigurations {
 }
 
 @@doc(FluxConfiguration.name, "Name of the Flux Configuration.");
-@@doc(FluxConfiguration.properties,
+@@doc(
+  FluxConfiguration.properties,
   "Properties to create a Flux Configuration resource"
 );
-@@doc(FluxConfigurations.createOrUpdate::parameters.resource,
+@@doc(
+  FluxConfigurations.createOrUpdate::parameters.resource,
   "Properties necessary to Create a FluxConfiguration."
 );
-@@doc(FluxConfigurations.update::parameters.properties,
+@@doc(
+  FluxConfigurations.update::parameters.properties,
   "Properties to Patch in an existing Flux Configuration."
 );

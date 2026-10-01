@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2026-05-02-preview",
+    "configName": "aksManagedAutoUpgradeSchedule",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "aksManagedAutoUpgradeSchedule",
+        "type": "Microsoft.ContainerService/managedClusters/maintenanceConfigurations",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/maintenanceConfigurations/aksManagedAutoUpgradeSchedule",
+        "properties": {
+          "maintenanceWindowId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/maintenanceWindows/myMaintenanceWindow",
+          "maintenanceWindow": {
+            "durationHours": 8,
+            "notAllowedDates": [
+              {
+                "end": "2027-01-03",
+                "start": "2026-12-23"
+              }
+            ],
+            "schedule": {
+              "weekly": {
+                "dayOfWeek": "Saturday",
+                "intervalWeeks": 1
+              }
+            },
+            "startTime": "02:00",
+            "utcOffset": "-07:00"
+          }
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        }
+      }
+    }
+  },
+  "operationId": "MaintenanceConfigurations_Get",
+  "title": "Get a Linked Maintenance Configuration"
+}

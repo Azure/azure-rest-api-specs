@@ -1,0 +1,48 @@
+{
+  "title": "NetworkTapRules_UpdateAdministrativeState_MaximumSet_Gen",
+  "operationId": "NetworkTapRules_UpdateAdministrativeState",
+  "parameters": {
+    "api-version": "2025-07-15",
+    "subscriptionId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+    "resourceGroupName": "example-rg",
+    "networkTapRuleName": "example-tapRule",
+    "body": {
+      "resourceIds": [
+        "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourcegroups/example-rg/providers/Microsoft.ManagedNetworkFabric/networkTapRules/example-tapRule"
+      ],
+      "state": "Enable"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "error": {
+          "code": "ConfigurationStateError",
+          "message": "The operation resulted in a degraded state",
+          "target": "NetworkTapRule",
+          "details": [
+            {
+              "code": "EnabledDegraded",
+              "message": "The resource is in a degraded state",
+              "target": "AdministrativeState"
+            }
+          ],
+          "additionalInfo": [
+            {
+              "type": "NetworkTapRuleInfo",
+              "info": {
+                "state": "EnabledDegraded"
+              }
+            }
+          ]
+        },
+        "configurationState": "PendingAdministrativeUpdate"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

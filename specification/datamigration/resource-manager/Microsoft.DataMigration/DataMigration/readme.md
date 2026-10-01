@@ -38,45 +38,7 @@ These settings apply only when `--tag=package-preview-2025-09` is specified on t
 
 ```yaml $(tag) == 'package-preview-2025-09'
 input-file:
-  - ./preview/2025-09-01-preview/sqlmigration.json
-  - ./preview/2025-09-01-preview/datamigration.json
-  - ./preview/2025-09-01-preview/definitions/Commands.json
-  - ./preview/2025-09-01-preview/definitions/Common.json
-  - ./preview/2025-09-01-preview/definitions/ConnectToSourceMySqlTask.json
-  - ./preview/2025-09-01-preview/definitions/ConnectToSourceSqlServerTask.json
-  - ./preview/2025-09-01-preview/definitions/ConnectToSourcePostgreSqlSyncTask.json
-  - ./preview/2025-09-01-preview/definitions/ConnectToTargetAzureDbForMySqlTask.json
-  - ./preview/2025-09-01-preview/definitions/ConnectToTargetSqlDbTask.json
-  - ./preview/2025-09-01-preview/definitions/ConnectToTargetSqlMiSyncTask.json
-  - ./preview/2025-09-01-preview/definitions/ConnectToTargetSqlMITask.json
-  - ./preview/2025-09-01-preview/definitions/ConnectToTargetSqlSqlDbSyncTask.json
-  - ./preview/2025-09-01-preview/definitions/ConnectToTargetAzureDbForPostgreSqlSyncTask.json
-  - ./preview/2025-09-01-preview/definitions/GetUserTablesMySqlTask.json
-  - ./preview/2025-09-01-preview/definitions/Files.json
-  - ./preview/2025-09-01-preview/definitions/GetTdeCertificatesSqlTask.json
-  - ./preview/2025-09-01-preview/definitions/GetUserTablesSqlSyncTask.json
-  - ./preview/2025-09-01-preview/definitions/GetUserTablesSqlTask.json
-  - ./preview/2025-09-01-preview/definitions/MigrateSchemaSqlServerSqlDbTask.json
-  - ./preview/2025-09-01-preview/definitions/MigrateMySqlAzureDbForMySqlSyncTask.json
-  - ./preview/2025-09-01-preview/definitions/MigratePostgreSqlAzureDbForPostgreSqlSyncTask.json
-  - ./preview/2025-09-01-preview/definitions/MigrateSqlServerSqlDbSyncTask.json
-  - ./preview/2025-09-01-preview/definitions/MigrateSqlServerSqlDbTask.json
-  - ./preview/2025-09-01-preview/definitions/MigrateSqlServerSqlMiSyncTask.json
-  - ./preview/2025-09-01-preview/definitions/MigrateSqlServerSqlMITask.json
-  - ./preview/2025-09-01-preview/definitions/MigrateSsisTask.json
-  - ./preview/2025-09-01-preview/definitions/MigrationValidation.json
-  - ./preview/2025-09-01-preview/definitions/MongoDbTasks.json
-  - ./preview/2025-09-01-preview/definitions/OracleAzureDbPostgreSqlSyncTask.json
-  - ./preview/2025-09-01-preview/definitions/Projects.json
-  - ./preview/2025-09-01-preview/definitions/ResourceSkus.json
-  - ./preview/2025-09-01-preview/definitions/ServiceFeatureOCITask.json
-  - ./preview/2025-09-01-preview/definitions/Services.json
-  - ./preview/2025-09-01-preview/definitions/ServiceTasks.json
-  - ./preview/2025-09-01-preview/definitions/Tasks.json
-  - ./preview/2025-09-01-preview/definitions/TasksCommon.json
-  - ./preview/2025-09-01-preview/definitions/ValidateMigrationInputSqlServerSqlMITask.json
-  - ./preview/2025-09-01-preview/definitions/ValidateMigrationInputSqlServerSqlMiSyncTask.json
-  - ./preview/2025-09-01-preview/definitions/ValidateSyncMigrationInputSqlServerTask.json
+  - ./preview/2025-09-01-preview/openapi.json
 modelerfour:
   lenient-model-deduplication: true # !!temporary!! to solve the duplicate schema issue of ProxyResource, TrackedResource and Resource in common-types v2 and v3 introduced in this PR
 directive:

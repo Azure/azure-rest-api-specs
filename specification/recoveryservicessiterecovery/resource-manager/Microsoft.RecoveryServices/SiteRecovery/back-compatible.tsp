@@ -8,10 +8,12 @@ using Microsoft.RecoveryServices;
 @@clientName(Alerts.create::parameters.resource, "request");
 @@clientLocation(Alerts.list, "ReplicationAlertSettings");
 
-@@clientLocation(ReplicationEligibilityResultsOperationGroup.get,
+@@clientLocation(
+  ReplicationEligibilityResultsOperationGroup.get,
   "ReplicationEligibilityResults"
 );
-@@clientLocation(ReplicationEligibilityResultsOperationGroup.list,
+@@clientLocation(
+  ReplicationEligibilityResultsOperationGroup.list,
   "ReplicationEligibilityResults"
 );
 
@@ -26,7 +28,8 @@ using Microsoft.RecoveryServices;
 @@clientLocation(Fabrics.checkConsistency, "ReplicationFabrics");
 @@clientLocation(Fabrics.migrateToAad, "ReplicationFabrics");
 @@clientLocation(Fabrics.reassociateGateway, "ReplicationFabrics");
-@@clientName(Fabrics.reassociateGateway::parameters.body,
+@@clientName(
+  Fabrics.reassociateGateway::parameters.body,
   "failoverProcessServerRequest"
 );
 @@clientLocation(Fabrics.delete, "ReplicationFabrics");
@@ -35,7 +38,8 @@ using Microsoft.RecoveryServices;
 @@clientLocation(Fabrics.removeInfra, "ReplicationFabrics");
 
 @@clientLocation(LogicalNetworks.get, "ReplicationLogicalNetworks");
-@@clientLocation(LogicalNetworks.listByReplicationFabrics,
+@@clientLocation(
+  LogicalNetworks.listByReplicationFabrics,
   "ReplicationLogicalNetworks"
 );
 
@@ -48,37 +52,47 @@ using Microsoft.RecoveryServices;
 @@clientLocation(NetworkMappings.update, "ReplicationNetworkMappings");
 @@clientName(NetworkMappings.update::parameters.properties, "input");
 @@clientLocation(NetworkMappings.delete, "ReplicationNetworkMappings");
-@@clientLocation(NetworkMappings.listByReplicationNetworks,
+@@clientLocation(
+  NetworkMappings.listByReplicationNetworks,
   "ReplicationNetworkMappings"
 );
 
 @@clientLocation(ProtectionContainers.get, "ReplicationProtectionContainers");
-@@clientLocation(ProtectionContainers.create,
+@@clientLocation(
+  ProtectionContainers.create,
   "ReplicationProtectionContainers"
 );
 @@clientName(ProtectionContainers.create::parameters.resource, "creationInput");
-@@clientLocation(ProtectionContainers.listByReplicationFabrics,
+@@clientLocation(
+  ProtectionContainers.listByReplicationFabrics,
   "ReplicationProtectionContainers"
 );
-@@clientLocation(ProtectionContainers.discoverProtectableItem,
+@@clientLocation(
+  ProtectionContainers.discoverProtectableItem,
   "ReplicationProtectionContainers"
 );
-@@clientName(ProtectionContainers.discoverProtectableItem::parameters.body,
+@@clientName(
+  ProtectionContainers.discoverProtectableItem::parameters.body,
   "discoverProtectableItemRequest"
 );
-@@clientLocation(ProtectionContainers.delete,
+@@clientLocation(
+  ProtectionContainers.delete,
   "ReplicationProtectionContainers"
 );
-@@clientLocation(ProtectionContainers.switchClusterProtection,
+@@clientLocation(
+  ProtectionContainers.switchClusterProtection,
   "ReplicationProtectionContainers"
 );
-@@clientName(ProtectionContainers.switchClusterProtection::parameters.body,
+@@clientName(
+  ProtectionContainers.switchClusterProtection::parameters.body,
   "switchInput"
 );
-@@clientLocation(ProtectionContainers.switchProtection,
+@@clientLocation(
+  ProtectionContainers.switchProtection,
   "ReplicationProtectionContainers"
 );
-@@clientName(ProtectionContainers.switchProtection::parameters.body,
+@@clientName(
+  ProtectionContainers.switchProtection::parameters.body,
   "switchInput"
 );
 
@@ -88,183 +102,235 @@ using Microsoft.RecoveryServices;
 @@clientLocation(MigrationItems.update, "ReplicationMigrationItems");
 @@clientName(MigrationItems.update::parameters.properties, "input");
 @@clientLocation(MigrationItems.delete, "ReplicationMigrationItems");
-@@clientLocation(MigrationItems.listByReplicationProtectionContainers,
+@@clientLocation(
+  MigrationItems.listByReplicationProtectionContainers,
   "ReplicationMigrationItems"
 );
 @@clientLocation(MigrationItems.migrate, "ReplicationMigrationItems");
 @@clientName(MigrationItems.migrate::parameters.body, "migrateInput");
 @@clientLocation(MigrationItems.pauseReplication, "ReplicationMigrationItems");
-@@clientName(MigrationItems.pauseReplication::parameters.body,
+@@clientName(
+  MigrationItems.pauseReplication::parameters.body,
   "pauseReplicationInput"
 );
 @@clientLocation(MigrationItems.resumeReplication, "ReplicationMigrationItems");
-@@clientName(MigrationItems.resumeReplication::parameters.body,
+@@clientName(
+  MigrationItems.resumeReplication::parameters.body,
   "resumeReplicationInput"
 );
 @@clientLocation(MigrationItems.resync, "ReplicationMigrationItems");
 @@clientName(MigrationItems.resync::parameters.body, "input");
 @@clientLocation(MigrationItems.testMigrate, "ReplicationMigrationItems");
 @@clientName(MigrationItems.testMigrate::parameters.body, "testMigrateInput");
-@@clientLocation(MigrationItems.testMigrateCleanup,
+@@clientLocation(
+  MigrationItems.testMigrateCleanup,
   "ReplicationMigrationItems"
 );
-@@clientName(MigrationItems.testMigrateCleanup::parameters.body,
+@@clientName(
+  MigrationItems.testMigrateCleanup::parameters.body,
   "testMigrateCleanupInput"
 );
 
 @@clientLocation(ProtectableItems.get, "ReplicationProtectableItems");
-@@clientLocation(ProtectableItems.listByReplicationProtectionContainers,
+@@clientLocation(
+  ProtectableItems.listByReplicationProtectionContainers,
   "ReplicationProtectableItems"
 );
 
 @@clientName(ReplicationProtectedItems.create::parameters.resource, "input");
-@@clientName(ReplicationProtectedItems.update::parameters.properties,
+@@clientName(
+  ReplicationProtectedItems.update::parameters.properties,
   "updateProtectionInput"
 );
-@@clientName(ReplicationProtectedItems.addDisks::parameters.body,
+@@clientName(
+  ReplicationProtectedItems.addDisks::parameters.body,
   "addDisksInput"
 );
-@@clientName(ReplicationProtectedItems.applyRecoveryPoint::parameters.body,
+@@clientName(
+  ReplicationProtectedItems.applyRecoveryPoint::parameters.body,
   "applyRecoveryPointInput"
 );
-@@clientName(ReplicationProtectedItems.plannedFailover::parameters.body,
+@@clientName(
+  ReplicationProtectedItems.plannedFailover::parameters.body,
   "failoverInput"
 );
-@@clientName(ReplicationProtectedItems.delete::parameters.body,
+@@clientName(
+  ReplicationProtectedItems.delete::parameters.body,
   "disableProtectionInput"
 );
-@@clientName(ReplicationProtectedItems.removeDisks::parameters.body,
+@@clientName(
+  ReplicationProtectedItems.removeDisks::parameters.body,
   "removeDisksInput"
 );
-@@clientName(ReplicationProtectedItems.reprotect::parameters.body,
+@@clientName(
+  ReplicationProtectedItems.reprotect::parameters.body,
   "reprotectInput"
 );
-@@clientName(ReplicationProtectedItems.resolveHealthErrors::parameters.body,
+@@clientName(
+  ReplicationProtectedItems.resolveHealthErrors::parameters.body,
   "resolveHealthInput"
 );
-@@clientName(ReplicationProtectedItems.switchProvider::parameters.body,
+@@clientName(
+  ReplicationProtectedItems.switchProvider::parameters.body,
   "switchProviderInput"
 );
-@@clientName(ReplicationProtectedItems.testFailover::parameters.body,
+@@clientName(
+  ReplicationProtectedItems.testFailover::parameters.body,
   "testfailoverInput"
 );
-@@clientName(ReplicationProtectedItems.testFailoverCleanup::parameters.body,
+@@clientName(
+  ReplicationProtectedItems.testFailoverCleanup::parameters.body,
   "cleanupInput"
 );
-@@clientName(ReplicationProtectedItems.unplannedFailover::parameters.body,
+@@clientName(
+  ReplicationProtectedItems.unplannedFailover::parameters.body,
   "failoverInput"
 );
-@@clientName(ReplicationProtectedItems.updateAppliance::parameters.body,
+@@clientName(
+  ReplicationProtectedItems.updateAppliance::parameters.body,
   "applianceUpdateInput"
 );
-@@clientName(ReplicationProtectedItems.updateMobilityService::parameters.body,
+@@clientName(
+  ReplicationProtectedItems.updateMobilityService::parameters.body,
   "updateMobilityServiceRequest"
 );
-@@clientName(ReplicationProtectedItems.reinstallMobilityService::parameters.body,
+@@clientName(
+  ReplicationProtectedItems.reinstallMobilityService::parameters.body,
   "updateMobilityServiceRequest"
 );
 
-@@clientName(ReplicationProtectionClusters.create::parameters.resource,
+@@clientName(
+  ReplicationProtectionClusters.create::parameters.resource,
   "replicationProtectionCluster"
 );
-@@clientName(ReplicationProtectionClusters.applyRecoveryPoint::parameters.body,
+@@clientName(
+  ReplicationProtectionClusters.applyRecoveryPoint::parameters.body,
   "applyClusterRecoveryPointInput"
 );
-@@clientName(ReplicationProtectionClusters.testFailover::parameters.body,
+@@clientName(
+  ReplicationProtectionClusters.testFailover::parameters.body,
   "failoverInput"
 );
-@@clientName(ReplicationProtectionClusters.testFailoverCleanup::parameters.body,
+@@clientName(
+  ReplicationProtectionClusters.testFailoverCleanup::parameters.body,
   "cleanupInput"
 );
-@@clientName(ReplicationProtectionClusters.unplannedFailover::parameters.body,
+@@clientName(
+  ReplicationProtectionClusters.unplannedFailover::parameters.body,
   "failoverInput"
 );
-@@clientLocation(ReplicationProtectionClusterOperationGroup.getOperationResults,
+@@clientLocation(
+  ReplicationProtectionClusterOperationGroup.getOperationResults,
   ReplicationProtectionClusters
 );
-@@clientLocation(ReplicationProtectionClusterOperationGroup.listByReplicationProtectionContainers,
+@@clientLocation(
+  ReplicationProtectionClusterOperationGroup.listByReplicationProtectionContainers,
   ReplicationProtectionClusters
 );
 
-@@clientLocation(ClusterRecoveryPointsOperationGroup.get,
+@@clientLocation(
+  ClusterRecoveryPointsOperationGroup.get,
   "ClusterRecoveryPoint"
 );
 
-@@clientLocation(ProtectionContainerMappings.get,
+@@clientLocation(
+  ProtectionContainerMappings.get,
   "ReplicationProtectionContainerMappings"
 );
-@@clientLocation(ProtectionContainerMappings.create,
+@@clientLocation(
+  ProtectionContainerMappings.create,
   "ReplicationProtectionContainerMappings"
 );
-@@clientName(ProtectionContainerMappings.create::parameters.resource,
+@@clientName(
+  ProtectionContainerMappings.create::parameters.resource,
   "creationInput"
 );
-@@clientLocation(ProtectionContainerMappings.update,
+@@clientLocation(
+  ProtectionContainerMappings.update,
   "ReplicationProtectionContainerMappings"
 );
-@@clientName(ProtectionContainerMappings.update::parameters.properties,
+@@clientName(
+  ProtectionContainerMappings.update::parameters.properties,
   "updateInput"
 );
-@@clientLocation(ProtectionContainerMappings.purge,
+@@clientLocation(
+  ProtectionContainerMappings.purge,
   "ReplicationProtectionContainerMappings"
 );
-@@clientLocation(ProtectionContainerMappings.listByReplicationProtectionContainers,
+@@clientLocation(
+  ProtectionContainerMappings.listByReplicationProtectionContainers,
   "ReplicationProtectionContainerMappings"
 );
-@@clientLocation(ProtectionContainerMappings.delete,
+@@clientLocation(
+  ProtectionContainerMappings.delete,
   "ReplicationProtectionContainerMappings"
 );
-@@clientName(ProtectionContainerMappings.delete::parameters.body,
+@@clientName(
+  ProtectionContainerMappings.delete::parameters.body,
   "removalInput"
 );
 
-@@clientLocation(RecoveryServicesProviders.get,
+@@clientLocation(
+  RecoveryServicesProviders.get,
   "ReplicationRecoveryServicesProviders"
 );
-@@clientLocation(RecoveryServicesProviders.create,
+@@clientLocation(
+  RecoveryServicesProviders.create,
   "ReplicationRecoveryServicesProviders"
 );
-@@clientName(RecoveryServicesProviders.create::parameters.resource,
+@@clientName(
+  RecoveryServicesProviders.create::parameters.resource,
   "addProviderInput"
 );
-@@clientLocation(RecoveryServicesProviders.purge,
+@@clientLocation(
+  RecoveryServicesProviders.purge,
   "ReplicationRecoveryServicesProviders"
 );
-@@clientLocation(RecoveryServicesProviders.listByReplicationFabrics,
+@@clientLocation(
+  RecoveryServicesProviders.listByReplicationFabrics,
   "ReplicationRecoveryServicesProviders"
 );
-@@clientLocation(RecoveryServicesProviders.refreshProvider,
+@@clientLocation(
+  RecoveryServicesProviders.refreshProvider,
   "ReplicationRecoveryServicesProviders"
 );
-@@clientLocation(RecoveryServicesProviders.delete,
+@@clientLocation(
+  RecoveryServicesProviders.delete,
   "ReplicationRecoveryServicesProviders"
 );
 
-@@clientLocation(StorageClassifications.get,
+@@clientLocation(
+  StorageClassifications.get,
   "ReplicationStorageClassifications",
   "!java"
 );
-@@clientLocation(StorageClassifications.listByReplicationFabrics,
+@@clientLocation(
+  StorageClassifications.listByReplicationFabrics,
   "ReplicationStorageClassifications",
   "!java"
 );
 
-@@clientLocation(StorageClassificationMappings.get,
+@@clientLocation(
+  StorageClassificationMappings.get,
   "ReplicationStorageClassificationMappings",
   "!java"
 );
-@@clientLocation(StorageClassificationMappings.create,
+@@clientLocation(
+  StorageClassificationMappings.create,
   "ReplicationStorageClassificationMappings",
   "!java"
 );
-@@clientName(StorageClassificationMappings.create::parameters.resource,
+@@clientName(
+  StorageClassificationMappings.create::parameters.resource,
   "pairingInput"
 );
-@@clientLocation(StorageClassificationMappings.delete,
+@@clientLocation(
+  StorageClassificationMappings.delete,
   "ReplicationStorageClassificationMappings",
   "!java"
 );
-@@clientLocation(StorageClassificationMappings.listByReplicationStorageClassifications,
+@@clientLocation(
+  StorageClassificationMappings.listByReplicationStorageClassifications,
   "ReplicationStorageClassificationMappings",
   "!java"
 );
@@ -320,56 +386,68 @@ using Microsoft.RecoveryServices;
 
 @@clientLocation(OperationsOperationGroup.list, "Operations");
 
-@@clientLocation(ReplicationAppliancesOperationGroup.list,
+@@clientLocation(
+  ReplicationAppliancesOperationGroup.list,
   "ReplicationAppliances"
 );
 
 @@clientLocation(ReplicationNetworksOperationGroup.list, "ReplicationNetworks");
 
-@@clientLocation(ReplicationNetworkMappingsOperationGroup.list,
+@@clientLocation(
+  ReplicationNetworkMappingsOperationGroup.list,
   "ReplicationNetworkMappings"
 );
 
-@@clientLocation(ReplicationProtectionContainersOperationGroup.list,
+@@clientLocation(
+  ReplicationProtectionContainersOperationGroup.list,
   "ReplicationProtectionContainers"
 );
 
-@@clientLocation(ReplicationMigrationItemsOperationGroup.list,
+@@clientLocation(
+  ReplicationMigrationItemsOperationGroup.list,
   "ReplicationMigrationItems"
 );
 
-@@clientLocation(ReplicationProtectedItemsOperationGroup.list,
+@@clientLocation(
+  ReplicationProtectedItemsOperationGroup.list,
   ReplicationProtectedItems
 );
 
-@@clientLocation(ReplicationProtectionClustersOperationGroup.list,
+@@clientLocation(
+  ReplicationProtectionClustersOperationGroup.list,
   ReplicationProtectionClusters
 );
 
-@@clientLocation(ReplicationProtectionContainerMappingsOperationGroup.list,
+@@clientLocation(
+  ReplicationProtectionContainerMappingsOperationGroup.list,
   "ReplicationProtectionContainerMappings"
 );
 
-@@clientLocation(ReplicationRecoveryServicesProvidersOperationGroup.list,
+@@clientLocation(
+  ReplicationRecoveryServicesProvidersOperationGroup.list,
   "ReplicationRecoveryServicesProviders"
 );
 
-@@clientLocation(ReplicationStorageClassificationsOperationGroup.list,
+@@clientLocation(
+  ReplicationStorageClassificationsOperationGroup.list,
   "ReplicationStorageClassifications",
   "!java"
 );
 
-@@clientLocation(ReplicationStorageClassificationMappingsOperationGroup.list,
+@@clientLocation(
+  ReplicationStorageClassificationMappingsOperationGroup.list,
   "ReplicationStorageClassificationMappings",
   "!java"
 );
 
-@@clientLocation(ReplicationStorageClassificationsOperationGroup.list,
+@@clientLocation(
+  ReplicationStorageClassificationsOperationGroup.list,
   StorageClassifications,
   "java"
 );
 
-@@clientLocation(ReplicationStorageClassificationMappingsOperationGroup.list,
+@@clientLocation(
+  ReplicationStorageClassificationMappingsOperationGroup.list,
   StorageClassificationMappings,
   "java"
 );
@@ -378,16 +456,20 @@ using Microsoft.RecoveryServices;
 
 @@clientLocation(ReplicationJobsOperationGroup.export, "ReplicationJobs");
 
-@@clientLocation(SupportedOperatingSystemsOperationGroup.get,
+@@clientLocation(
+  SupportedOperatingSystemsOperationGroup.get,
   "SupportedOperatingSystems"
 );
 
-@@clientLocation(ReplicationVaultHealthOperationGroup.get,
+@@clientLocation(
+  ReplicationVaultHealthOperationGroup.get,
   "ReplicationVaultHealth"
 );
-@@clientLocation(ReplicationVaultHealthOperationGroup.refresh,
+@@clientLocation(
+  ReplicationVaultHealthOperationGroup.refresh,
   "ReplicationVaultHealth"
 );
-@@clientName(ReplicationJobsOperationGroup.export::parameters.body,
+@@clientName(
+  ReplicationJobsOperationGroup.export::parameters.body,
   "jobQueryParameter"
 );

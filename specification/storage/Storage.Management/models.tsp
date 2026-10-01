@@ -371,6 +371,29 @@ union PublicNetworkAccess {
 }
 
 /**
+ * The action to perform when a user delegation SAS (shared access signature) policy requirement is violated.
+ */
+@added(Versions.v2026_06_01)
+union PolicyViolationAction {
+  string,
+
+  /**
+   * No action is taken when the policy requirement is violated.
+   */
+  None: "None",
+
+  /**
+   * The policy violation is logged for audit purposes.
+   */
+  Log: "Log",
+
+  /**
+   * The request is blocked and denied when the policy requirement is violated.
+   */
+  Block: "Block",
+}
+
+/**
  * The SAS Expiration Action defines the action to be performed when sasPolicy.sasExpirationPeriod is violated. The 'Log' action can be used for audit purposes and the 'Block' action can be used to block and deny the usage of SAS tokens that do not adhere to the sas policy expiration period.
  */
 union ExpirationAction {
@@ -499,7 +522,7 @@ union RoutingChoice {
 }
 
 /**
- * Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property.
+ * Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property. Minimum TLS version 1.3 version is not supported.
  */
 union MinimumTlsVersion {
   string,
@@ -1853,6 +1876,7 @@ model LeaseContainerRequest {
 /**
  * Lease Container response schema.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model LeaseContainerResponse {
   /**
    * Returned unique lease ID that must be included with any request to delete the container, or to renew, change, or release the lease.
@@ -2132,6 +2156,21 @@ model FileShareLimits {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   maxProvisionedBandwidthMiBPerSec?: int32;
+
+  /**
+   * The IO scalar used for guardrail calculations for a file share in the storage account.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name uses IO abbreviation for Input Output"
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  guardrailIOScalar?: float64;
+
+  /**
+   * The bandwidth scalar used for guardrail calculations for a file share in the storage account.
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  guardrailBandwidthScalar?: float64;
 }
 
 /**
@@ -2519,6 +2558,7 @@ model LeaseShareRequest {
 /**
  * Lease Share response schema.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model LeaseShareResponse {
   /**
    * Returned unique lease ID that must be included with any request to delete the share, or to renew, change, or release the lease.
@@ -3119,7 +3159,7 @@ model StorageAccountPropertiesCreateParameters {
   allowBlobPublicAccess?: boolean;
 
   /**
-   * Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property.
+   * Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property. Minimum TLS version 1.3 version is not supported.
    */
   minimumTlsVersion?: MinimumTlsVersion;
 
@@ -3170,6 +3210,12 @@ model StorageAccountPropertiesCreateParameters {
    */
   @added(Versions.v2025_08_01)
   dataCollaborationPolicyProperties?: StorageDataCollaborationPolicyProperties;
+
+  /**
+   * Allow or disallow cross AAD tenant user delegation SAS (shared access signature). The default interpretation is false for this property.
+   */
+  @added(Versions.v2026_06_01)
+  allowCrossTenantDelegationSas?: boolean;
 }
 
 /**
@@ -3185,6 +3231,18 @@ model SasPolicy {
    * The SAS Expiration Action defines the action to be performed when sasPolicy.sasExpirationPeriod is violated. The 'Log' action can be used for audit purposes and the 'Block' action can be used to block and deny the usage of SAS tokens that do not adhere to the sas policy expiration period.
    */
   expirationAction: ExpirationAction = ExpirationAction.Log;
+
+  /**
+   * Indicates whether user delegation SAS (shared access signature) tokens are required to be bound to a specific user. The default interpretation is false for this property.
+   */
+  @added(Versions.v2026_06_01)
+  requireUserBoundUserDelegationSas?: boolean;
+
+  /**
+   * The action to perform when a user delegation SAS (shared access signature) token is not bound to a user as required by requireUserBoundUserDelegationSas.
+   */
+  @added(Versions.v2026_06_01)
+  requireUserBoundUserDelegationSasAction?: PolicyViolationAction;
 }
 
 /**
@@ -3817,7 +3875,7 @@ model StorageAccountProperties {
   allowBlobPublicAccess?: boolean;
 
   /**
-   * Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property.
+   * Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property. Minimum TLS version 1.3 version is not supported.
    */
   minimumTlsVersion?: MinimumTlsVersion;
 
@@ -3895,6 +3953,12 @@ model StorageAccountProperties {
    */
   @added(Versions.v2025_08_01)
   dataCollaborationPolicyProperties?: StorageDataCollaborationPolicyProperties;
+
+  /**
+   * Allow or disallow cross AAD tenant user delegation SAS (shared access signature). The default interpretation is false for this property.
+   */
+  @added(Versions.v2026_06_01)
+  allowCrossTenantDelegationSas?: boolean;
 }
 
 /**
@@ -4392,7 +4456,7 @@ model StorageAccountPropertiesUpdateParameters {
   allowBlobPublicAccess?: boolean;
 
   /**
-   * Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property.
+   * Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property. Minimum TLS version 1.3 version is not supported.
    */
   minimumTlsVersion?: MinimumTlsVersion;
 
@@ -4448,6 +4512,12 @@ model StorageAccountPropertiesUpdateParameters {
    */
   @added(Versions.v2025_08_01)
   dataCollaborationPolicyProperties?: StorageDataCollaborationPolicyProperties;
+
+  /**
+   * Allow or disallow cross AAD tenant user delegation SAS (shared access signature). The default interpretation is false for this property.
+   */
+  @added(Versions.v2026_06_01)
+  allowCrossTenantDelegationSas?: boolean;
 }
 
 /**
@@ -4489,6 +4559,7 @@ model DeletedAccountProperties {
 /**
  * An error response from the storage resource provider.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**
@@ -6331,6 +6402,66 @@ alias ETagHeader = {
 };
 
 /**
+ * A Connector is a tracked ARM resource modeled as a sub-resource of a Storage Account.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "To match existing API shape"
+@added(Versions.v2025_08_01)
+model ConnectorUpdate extends TrackedResourceUpdate {
+  /**
+   * The properties of the Storage Connector.
+   */
+  properties?: StorageConnectorPropertiesUpdate;
+}
+
+/**
+ * The storage connector properties
+ */
+@added(Versions.v2025_08_01)
+model StorageConnectorPropertiesUpdate {
+  /**
+   * State - Active or Inactive. Whether or not the Storage Connector should start as active (default: Active)
+   * (While set to false on the Storage Connector, all data plane requests using this Storage Connector fail, and this Storage Connector is not billed if it would be otherwise.
+   */
+  state?: StorageConnectorState = StorageConnectorState.Active;
+
+  /**
+   * Arbitrary description of this Storage Connector. Max 250 characters.
+   */
+  @maxLength(250)
+  description?: string;
+
+  /**
+   * Test connection to backing data source before creating the storage connector.
+   */
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  testConnection?: boolean = false;
+
+  /**
+   * Information about how to communicate with and authenticate to the backing data store.
+   */
+  source?: StorageConnectorSourceUpdate;
+}
+
+/** The storage connector backing data source information */
+@added(Versions.v2025_08_01)
+@discriminator("type")
+model StorageConnectorSourceUpdate {
+  /** Type of the Storage Connector. Not mutable once the Storage Connector is created." */
+  type: StorageConnectorSourceType;
+}
+
+/** The managed identity auth properties for dataShare connection. */
+@added(Versions.v2025_08_01)
+model ManagedIdentityAuthPropertiesUpdate
+  extends StorageConnectorAuthPropertiesUpdate {
+  /** Discriminator value for ManagedIdentity */
+  type: StorageConnectorAuthType.ManagedIdentity;
+
+  /** ARM ResourceId of the managed identity that should be used to authenticate to the backing data source. */
+  identityResourceId?: string;
+}
+
+/**
  * The storage connector properties
  */
 @added(Versions.v2025_08_01)
@@ -6404,7 +6535,6 @@ model DataShareSource extends StorageConnectorSource {
   /**
    * The type for data share source
    */
-  @visibility(Lifecycle.Read)
   type: StorageConnectorSourceType.DataShare;
 
   /**
@@ -6417,6 +6547,24 @@ model DataShareSource extends StorageConnectorSource {
    * Details for how to authenticate to the backing data store.
    */
   authProperties: StorageConnectorAuthProperties;
+}
+
+/** The properties of data share source */
+@added(Versions.v2025_08_01)
+model DataShareSourceUpdate extends StorageConnectorSourceUpdate {
+  /** Discriminator value for DataShare */
+  type: StorageConnectorSourceType.DataShare;
+
+  /** Details for how to authenticate to the backing data store. */
+  authProperties?: StorageConnectorAuthPropertiesUpdate;
+}
+
+/** The authentication properties of the backing data source */
+@added(Versions.v2025_08_01)
+@discriminator("type")
+model StorageConnectorAuthPropertiesUpdate {
+  /** Type of the authentication properties. Controls the type of the authProperties object */
+  type: StorageConnectorAuthType;
 }
 
 /**
@@ -6439,7 +6587,6 @@ model DataShareConnection extends StorageConnectorConnection {
   /**
    * The type for data share connection
    */
-  @visibility(Lifecycle.Read)
   type: StorageConnectorConnectionType.DataShare;
 
   /**
@@ -6469,7 +6616,6 @@ model ManagedIdentityAuthProperties extends StorageConnectorAuthProperties {
   /**
    * The type of managed identity auth
    */
-  @visibility(Lifecycle.Read)
   type: StorageConnectorAuthType.ManagedIdentity;
 
   /**
@@ -6543,12 +6689,18 @@ model StorageDataShareProperties {
 
   /**
    * List of access policies that specify the permission allowed to a managed identity.
+   * For Create - This property is required and cannot be null. If no access policies are provided at creation time, specify an empty array.
+   * For Update - This property is optional. If set to null or not passed, the existing access policies are left unchanged.
+   * If provided with a non-null value, the existing access policies are replaced with the specified list.
    */
   @identifiers(#[])
   accessPolicies: StorageDataShareAccessPolicy[];
 
   /**
    * List of assets that specify the properties of the shared resources.
+   * For Create - This property is required and cannot be null. If no assets are provided at creation time, specify an empty array.
+   * For Update - This property is optional. If set to null or not passed, the existing assets are left unchanged.
+   * If provided with a non-null value, the existing assets are replaced with the specified list.
    */
   @identifiers(#[])
   assets: StorageDataShareAsset[];
@@ -6558,6 +6710,61 @@ model StorageDataShareProperties {
    */
   @visibility(Lifecycle.Read)
   provisioningState?: NativeDataSharingProvisioningState;
+}
+
+/**
+ * A DataShare is a tracked ARM resource modeled as a sub-resource of a Storage Account.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "To match existing API shape"
+@added(Versions.v2025_08_01)
+model DataShareUpdate extends TrackedResourceUpdate {
+  /**
+   * The properties of the Storage DataShare.
+   */
+  properties?: StorageDataSharePropertiesUpdate;
+}
+
+/**
+ * The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "To match existing API shape"
+@added(Versions.v2025_08_01)
+model TrackedResourceUpdate extends Azure.ResourceManager.CommonTypes.Resource {
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "To match existing API shape."
+  tags?: Record<string>;
+}
+
+/**
+ * The storage datashare properties
+ */
+@added(Versions.v2025_08_01)
+model StorageDataSharePropertiesUpdate {
+  /**
+   * Arbitrary description of this Data Share. Max 250 characters.
+   */
+  @maxLength(250)
+  description?: string;
+
+  /**
+   * List of access policies that specify the permission allowed to a managed identity.
+   * For Create - This property is required and cannot be null. If no access policies are provided at creation time, specify an empty array.
+   * For Update - This property is optional. If set to null or not passed, the existing access policies are left unchanged.
+   * If provided with a non-null value, the existing access policies are replaced with the specified list.
+   */
+  @identifiers(#[])
+  accessPolicies?: StorageDataShareAccessPolicy[];
+
+  /**
+   * List of assets that specify the properties of the shared resources.
+   * For Create - This property is required and cannot be null. If no assets are provided at creation time, specify an empty array.
+   * For Update - This property is optional. If set to null or not passed, the existing assets are left unchanged.
+   * If provided with a non-null value, the existing assets are replaced with the specified list.
+   */
+  @identifiers(#[])
+  assets?: StorageDataShareAsset[];
 }
 
 /**
@@ -6598,4 +6805,159 @@ model StorageDataShareAsset {
    * Consumer visible name of the original path.
    */
   displayName: string;
+}
+
+//
+// Context Cache resources (added in the 2026-06-01 API version).
+//
+
+/**
+ * The kind of context cache account, determining storage topology.
+ */
+@added(Versions.v2026_06_01)
+union ContextCacheAccountKind {
+  /** Single-region storage account */
+  Regional: "Regional",
+
+  /** Multi-region within a data zone */
+  DataZone: "DataZone",
+
+  /** All regions with global distribution */
+  Global: "Global",
+
+  string,
+}
+
+/**
+ * The AI provider associated with a container.
+ */
+@added(Versions.v2026_06_01)
+union AiProvider {
+  string,
+
+  /** OpenAI provider. */
+  OpenAI: "OpenAI",
+}
+
+/**
+ * The status of the current operation.
+ */
+@added(Versions.v2026_06_01)
+@Azure.Core.lroStatus
+union ContextCacheProvisioningState {
+  ResourceProvisioningState,
+
+  /** Initial provisioning in progress */
+  Creating: "Creating",
+
+  /** Update in progress */
+  Updating: "Updating",
+
+  /** Deletion in progress */
+  Deleting: "Deleting",
+
+  /** Change accepted for processing */
+  Accepted: "Accepted",
+
+  string,
+}
+
+/**
+ * Details of the Context Cache.
+ */
+@added(Versions.v2026_06_01)
+model ContextCacheProperties {
+  /** The kind of account determining storage topology. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  accountKind: ContextCacheAccountKind;
+
+  /** Account description. */
+  @maxLength(250)
+  description?: string;
+
+  /** The status of the last operation. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ContextCacheProvisioningState;
+
+  /** Encryption settings for the account. */
+  encryption?: Azure.ResourceManager.CommonTypes.Encryption;
+}
+
+/**
+ * Updatable properties of the Context Cache.
+ */
+@added(Versions.v2026_06_01)
+model ContextCachePropertiesUpdate {
+  /** Account description. */
+  @maxLength(250)
+  description?: string;
+
+  /** Encryption settings for the account. */
+  encryption?: Azure.ResourceManager.CommonTypes.Encryption;
+}
+
+/**
+ * The type used for update operations of the Context Cache.
+ */
+@added(Versions.v2026_06_01)
+model ContextCacheUpdate {
+  /** Resource tags. */
+  ...Azure.ResourceManager.Foundations.ArmTagsProperty;
+
+  /** The managed service identity. */
+  identity?: Azure.ResourceManager.CommonTypes.SystemAssignedServiceIdentity;
+
+  /** The updatable properties of the Context Cache. */
+  properties?: ContextCachePropertiesUpdate;
+}
+
+/**
+ * Details of a container within a Context Cache.
+ */
+@added(Versions.v2026_06_01)
+model ContextCacheContainerProperties {
+  /** Container description. */
+  @maxLength(250)
+  description?: string;
+
+  /** The model name associated with this container (e.g., gpt-4, claude-3). */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  modelName: string;
+
+  /** The AI provider associated with this container. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  provider: AiProvider;
+
+  /** The Time to Live (TTL) in days (1–30) for this container. Blobs in the container that have not been accessed within this number of days will be automatically deleted. If not specified at creation time, it defaults to 1 day. */
+  @minValue(1)
+  @maxValue(30)
+  timeToLive?: int32;
+
+  /** The status of the last operation. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ContextCacheProvisioningState;
+}
+
+/**
+ * Updatable properties of a container within a Context Cache.
+ */
+@added(Versions.v2026_06_01)
+model ContextCacheContainerPropertiesUpdate {
+  /** Container description. */
+  @maxLength(250)
+  description?: string;
+
+  /** The Time to Live (TTL) in days (1–30) for this container. Blobs in the container that have not been accessed within this number of days will be automatically deleted. */
+  @minValue(1)
+  @maxValue(30)
+  timeToLive?: int32;
+}
+
+/**
+ * The type used for update operations of the Context Cache Container.
+ */
+@added(Versions.v2026_06_01)
+model ContextCacheContainerUpdate {
+  /** The updatable properties of the Context Cache Container. */
+  properties?: ContextCacheContainerPropertiesUpdate;
 }

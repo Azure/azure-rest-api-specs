@@ -62,7 +62,7 @@ alias NotificationRecipientEmailOps = Azure.ResourceManager.Legacy.RoutedOperati
   NotificationRecipientEmailParentParameters,
   NotificationRecipientEmailParameters,
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientEmails/{email}",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientEmails/{email}",
   }
 >;
 
@@ -104,7 +104,7 @@ alias NotificationRecipientUserOps = Azure.ResourceManager.Legacy.RoutedOperatio
   NotificationRecipientUserParentParameters,
   NotificationRecipientUserParameters,
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientUsers",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientUsers",
   }
 >;
 
@@ -214,7 +214,8 @@ interface NotificationContractOps
         @segment("notifications")
         @key
         notificationName: NotificationName,
-      }
+      },
+      ResourceName = "ApiManagementNotification"
     > {}
 
 @armResourceOperations(#{ allowStaticRoutes: true })
@@ -291,19 +292,25 @@ interface NotificationContracts {
   /**
    * Adds the API Management User to the list of Recipients for the Notification.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientUsers/{userId}")
   notificationRecipientUserCreateOrUpdate is NotificationRecipientUserOps.ActionSync<
     NotificationContract,
     void,
-    Response = ArmResponse<RecipientUserContract> | ArmResourceCreatedSyncResponse<RecipientUserContract>
+    Response =
+      | ArmResponse<RecipientUserContract>
+      | ArmResourceCreatedSyncResponse<RecipientUserContract>
   >;
 
   /**
    * Removes the API Management user from the list of Notification.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientUsers/{userId}")
   delete is NotificationRecipientUserOps.ActionSync<
@@ -337,19 +344,25 @@ interface NotificationContracts {
   /**
    * Adds the Email address to the list of Recipients for the Notification.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientEmails/{email}")
   notificationRecipientEmailCreateOrUpdate is NotificationRecipientEmailOps.ActionSync<
     NotificationContract,
     void,
-    Response = ArmResponse<RecipientEmailContract> | ArmResourceCreatedSyncResponse<RecipientEmailContract>
+    Response =
+      | ArmResponse<RecipientEmailContract>
+      | ArmResourceCreatedSyncResponse<RecipientEmailContract>
   >;
 
   /**
    * Removes the email from the list of Notification.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/notifications/{notificationName}/recipientEmails/{email}")
   notificationRecipientEmailDelete is NotificationRecipientEmailOps.ActionSync<
@@ -391,7 +404,8 @@ interface WorkspaceNotificationOps
         @segment("notifications")
         @key
         notificationName: NotificationName,
-      }
+      },
+      ResourceName = "ServiceWorkspaceNotification"
     > {}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -459,9 +473,10 @@ interface WorkspaceNotification {
    * Determine if the Notification Recipient User is subscribed to the notification.
    */
   @head
-  checkEntityExists(
-    ...WorkspaceNotificationRecipientUserParameters,
-  ): NoContentResponse | NotFoundResponse | ErrorResponse;
+  checkEntityExists(...WorkspaceNotificationRecipientUserParameters):
+    | NoContentResponse
+    | NotFoundResponse
+    | ErrorResponse;
 
   /**
    * Adds the API Management User to the list of Recipients for the Notification.
@@ -470,7 +485,9 @@ interface WorkspaceNotification {
   workspaceNotificationRecipientUserCreateOrUpdate is WorkspaceNotificationOps.CreateOrUpdateSync<
     NotificationContract,
     Request = void,
-    Response = ArmResponse<RecipientUserContract> | ArmResourceCreatedSyncResponse<RecipientUserContract>,
+    Response =
+      | ArmResponse<RecipientUserContract>
+      | ArmResourceCreatedSyncResponse<RecipientUserContract>,
     Parameters = {
       /**
        * User identifier. Must be unique in the current API Management service instance.
@@ -486,12 +503,14 @@ interface WorkspaceNotification {
   /**
    * Removes the API Management user from the list of Notification.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
-  delete(
-    ...WorkspaceNotificationRecipientUserParameters,
-  ): OkResponse | NoContentResponse | ErrorResponse;
+  delete(...WorkspaceNotificationRecipientUserParameters):
+    | OkResponse
+    | NoContentResponse
+    | ErrorResponse;
 
   /**
    * Gets the list of the Notification Recipient Emails subscribed to a notification.
@@ -519,7 +538,9 @@ interface WorkspaceNotification {
   workspaceNotificationRecipientEmailCreateOrUpdate is WorkspaceNotificationOps.CreateOrUpdateSync<
     NotificationContract,
     Request = void,
-    Response = ArmResponse<RecipientEmailContract> | ArmResourceCreatedSyncResponse<RecipientEmailContract>,
+    Response =
+      | ArmResponse<RecipientEmailContract>
+      | ArmResourceCreatedSyncResponse<RecipientEmailContract>,
     Parameters = {
       /**
        * Email identifier.
@@ -533,7 +554,9 @@ interface WorkspaceNotification {
   /**
    * Removes the email from the list of Notification.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
   workspaceNotificationRecipientEmailDelete(
     ...WorkspaceNotificationRecipientEmailParameters,
@@ -541,6 +564,7 @@ interface WorkspaceNotification {
 }
 
 @@doc(NotificationContract.name, "Notification Name Identifier.");
-@@doc(NotificationContract.properties,
+@@doc(
+  NotificationContract.properties,
   "Notification entity contract properties."
 );

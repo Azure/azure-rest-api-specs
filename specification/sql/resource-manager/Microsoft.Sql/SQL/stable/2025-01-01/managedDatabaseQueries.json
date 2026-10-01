@@ -1,0 +1,283 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-01-01",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ManagedDatabaseQueries"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/queries/{queryId}": {
+      "get": {
+        "operationId": "ManagedDatabaseQueries_Get",
+        "tags": [
+          "ManagedDatabaseQueries"
+        ],
+        "description": "Get query by query id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "queryId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceQuery"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Obtain query properties": {
+            "$ref": "./examples/ManagedInstanceQueryGet.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances/{managedInstanceName}/databases/{databaseName}/queries/{queryId}/statistics": {
+      "get": {
+        "operationId": "ManagedDatabaseQueries_ListByQuery",
+        "tags": [
+          "ManagedDatabaseQueries"
+        ],
+        "description": "Get query execution statistics by query id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "managedInstanceName",
+            "in": "path",
+            "description": "The name of the managed instance.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "queryId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "Start time for observed period.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "End time for observed period.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "description": "The time step to be used to summarize the metric values.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "PT1H",
+              "P1D"
+            ],
+            "x-ms-enum": {
+              "name": "QueryTimeGrainType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "PT1H",
+                  "value": "PT1H",
+                  "description": "PT1H"
+                },
+                {
+                  "name": "P1D",
+                  "value": "P1D",
+                  "description": "P1D"
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceQueryStatistics"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Obtain query execution statistics": {
+            "$ref": "./examples/ManagedInstanceQueryStatisticsList.json"
+          },
+          "Obtain query execution statistics. Example with all request parameters.": {
+            "$ref": "./examples/ManagedInstanceQueryStatisticsListMax.json"
+          },
+          "Obtain query execution statistics. Minimal example with only mandatory request parameters.": {
+            "$ref": "./examples/ManagedInstanceQueryStatisticsListMin.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ManagedInstanceQuery": {
+      "type": "object",
+      "description": "Database query.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/QueryProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ManagedInstanceQueryStatistics": {
+      "type": "object",
+      "description": "Execution statistics for one particular query",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The QueryStatistics items on this page",
+          "items": {
+            "$ref": "#/definitions/QueryStatistics"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "QueryProperties": {
+      "type": "object",
+      "description": "Properties of a database query.",
+      "properties": {
+        "queryText": {
+          "type": "string",
+          "description": "Query text."
+        }
+      }
+    },
+    "QueryStatistics": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "./common.json#/definitions/QueryStatisticsProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    }
+  },
+  "parameters": {}
+}

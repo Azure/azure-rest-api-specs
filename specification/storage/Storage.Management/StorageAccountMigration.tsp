@@ -15,11 +15,10 @@ namespace Microsoft.Storage;
  * The parameters or status associated with an ongoing or enqueued storage account migration in order to update its current SKU or region.
  */
 @parentResource(StorageAccount)
-model StorageAccountMigration
-  is Azure.ResourceManager.ProxyResource<
-    StorageAccountMigrationProperties,
-    false
-  > {
+model StorageAccountMigration is Azure.ResourceManager.ProxyResource<
+  StorageAccountMigrationProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = StorageAccountMigration,
     KeyName = "migrationName",
@@ -40,9 +39,11 @@ interface StorageAccountMigrations {
   >;
 }
 
-@@doc(StorageAccountMigration.name,
+@@doc(
+  StorageAccountMigration.name,
   "The name of the Storage Account Migration. It should always be 'default'"
 );
-@@doc(StorageAccountMigration.properties,
+@@doc(
+  StorageAccountMigration.properties,
   "The properties of a storage account’s ongoing or enqueued migration."
 );

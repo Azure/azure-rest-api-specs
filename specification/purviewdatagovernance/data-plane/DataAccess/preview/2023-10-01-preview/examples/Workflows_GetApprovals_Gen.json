@@ -1,0 +1,44 @@
+{
+  "title": "Workflows_GetApprovals",
+  "operationId": "Workflows_GetApprovals",
+  "parameters": {
+    "api-version": "2023-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "approvalRequestId": "d3d3d3d3-eeee-ffff-aaaa-b3b3b3b3b3b3",
+            "workflowRunId": "c2c2c2c2-dddd-eeee-ffff-a2a2a2a2a2a2",
+            "workflowId": "b1b1b1b1-cccc-dddd-eeee-f1f1f1f1f1f1",
+            "callbackUrl": "https://logic-apps.azure.com/callbacks/approval/d3d3d3d3-eeee-ffff-aaaa-b3b3b3b3b3b3",
+            "isPendingOnAll": false,
+            "approvers": [
+              "11111111-2222-3333-4444-555555555555",
+              "22222222-3333-4444-5555-666666666666"
+            ],
+            "title": "Approval required for Sales Data Product access",
+            "status": "InProgress",
+            "requestorIdentity": {
+              "identityType": "User",
+              "objectId": "33333333-4444-5555-6666-777777777777",
+              "displayName": "Requestor User",
+              "email": "requestor@contoso.com"
+            },
+            "subscriberIdentity": {
+              "identityType": "User",
+              "objectId": "33333333-4444-5555-6666-777777777777",
+              "displayName": "Subscriber User",
+              "email": "subscriber@contoso.com"
+            },
+            "workflowType": "DataAccessRequestSubmitted",
+            "workflowName": "Data Access Request Workflow",
+            "businessConcept": "Sales Data Product",
+            "governanceDomain": "Finance"
+          }
+        ]
+      }
+    }
+  }
+}

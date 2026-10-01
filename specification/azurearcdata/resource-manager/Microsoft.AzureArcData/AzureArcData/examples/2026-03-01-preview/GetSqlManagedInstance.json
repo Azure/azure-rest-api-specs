@@ -1,0 +1,101 @@
+{
+  "parameters": {
+    "api-version": "2026-03-01-preview",
+    "resourceGroupName": "testrg",
+    "sqlManagedInstanceName": "testsqlManagedInstance",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testsqlManagedInstance",
+        "type": "Microsoft.AzureArcData/sqlManagedInstance",
+        "extendedLocation": {
+          "name": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.ExtendedLocation/customLocations/arclocation",
+          "type": "CustomLocation"
+        },
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.AzureArcData/sqlManagedInstances/testsqlManagedInstance",
+        "location": "northeurope",
+        "properties": {
+          "activeDirectoryInformation": {
+            "keytabInformation": {}
+          },
+          "admin": "Admin user",
+          "basicLoginInformation": {
+            "username": "username"
+          },
+          "clusterId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/connectedk8s",
+          "endTime": "Instance end time",
+          "extensionId": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/connectedk8s/providers/Microsoft.KubernetesConfiguration/extensions/extension",
+          "k8sRaw": {
+            "additionalProperty": 1234,
+            "spec": {
+              "replicas": 1,
+              "scheduling": {
+                "default": {
+                  "resources": {
+                    "limits": {
+                      "additionalProperty": "additionalValue",
+                      "cpu": "1",
+                      "memory": "8Gi"
+                    },
+                    "requests": {
+                      "additionalProperty": "additionalValue",
+                      "cpu": "1",
+                      "memory": "8Gi"
+                    }
+                  }
+                }
+              },
+              "security": {
+                "activeDirectory": {
+                  "accountName": "Account name",
+                  "connector": {
+                    "name": "Name of connector",
+                    "namespace": "Namespace of connector"
+                  },
+                  "encryptionTypes": [
+                    "Encryption type item1, Encryption type item2,..."
+                  ],
+                  "keytabSecret": "Key tab secret of account"
+                },
+                "adminLoginSecret": "test-sql-login-secret",
+                "serviceCertificateSecret": "Service Certificate Secret",
+                "transparentDataEncryption": {
+                  "mode": "SystemManaged"
+                }
+              },
+              "settings": {
+                "network": {
+                  "forceencryption": 0,
+                  "tlsciphers": "ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES128-SHA256:ECDHE-RSA-AES256-SHA384",
+                  "tlsprotocols": "1.2"
+                }
+              }
+            }
+          },
+          "licenseType": "LicenseIncluded",
+          "startTime": "Instance start time"
+        },
+        "sku": {
+          "name": "vCore",
+          "dev": true,
+          "tier": "GeneralPurpose"
+        },
+        "systemData": {
+          "createdAt": "2020-01-01T17:18:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2020-01-02T17:18:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "mytag": "myval"
+        }
+      }
+    }
+  },
+  "operationId": "SqlManagedInstances_Get",
+  "title": "Updates a SQL Instance tags."
+}

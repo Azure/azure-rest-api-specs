@@ -44,10 +44,12 @@ interface Domains {
   @summary("Creates or updates a domain.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Domain,
-    Response = ArmResourceUpdatedResponse<Domain> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Domain>> & {
-      @bodyRoot
-      _: Domain;
-    }),
+    Response =
+      | ArmResourceUpdatedResponse<Domain>
+      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Domain>> & {
+          @bodyRoot
+          _: Domain;
+        }),
     Error = DefaultErrorResponse
   >;
 
@@ -61,10 +63,12 @@ interface Domains {
   update is ArmCustomPatchSync<
     Domain,
     PatchModel = DomainPatchResource,
-    Response = ArmResponse<Domain> | (AcceptedResponse & {
-      @bodyRoot
-      _: Domain;
-    }),
+    Response =
+      | ArmResponse<Domain>
+      | (AcceptedResponse & {
+          @bodyRoot
+          _: Domain;
+        }),
     Error = DefaultErrorResponse
   >;
 
@@ -133,9 +137,11 @@ interface Domains {
 
 @@doc(Domain.name, "Name of the domain.");
 @@doc(Domain.properties, "Domain resource specific properties");
-@@doc(Domains.createOrUpdate::parameters.resource,
+@@doc(
+  Domains.createOrUpdate::parameters.resource,
   "Domain registration information."
 );
-@@doc(Domains.update::parameters.properties,
+@@doc(
+  Domains.update::parameters.properties,
   "Domain registration information."
 );

@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -7,6 +8,7 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Network;
 
@@ -208,6 +210,18 @@ union VariableName {
    * None
    */
   None: "None",
+
+  /**
+   * Autonomous System Number
+   */
+  @added(Versions.v2026_04_01)
+  Asn: "Asn",
+
+  /**
+   * JA4 TLS fingerprint
+   */
+  @added(Versions.v2026_04_01)
+  Ja4: "Ja4",
 }
 
 /**
@@ -260,6 +274,12 @@ union MatchVariable {
    * SocketAddr
    */
   SocketAddr: "SocketAddr",
+
+  /**
+   * JA4 Match Variable
+   */
+  @added(Versions.v2025_11_01)
+  JA4: "JA4",
 }
 
 /**
@@ -332,6 +352,18 @@ union Operator {
    * ServiceTagMatch
    */
   ServiceTagMatch: "ServiceTagMatch",
+
+  /**
+   * Autonomous System Number Match Operator
+   */
+  @added(Versions.v2025_11_01)
+  AsnMatch: "AsnMatch",
+
+  /**
+   * Client Finger print Operator
+   */
+  @added(Versions.v2025_11_01)
+  ClientFingerprint: "ClientFingerprint",
 }
 
 /**
@@ -536,6 +568,62 @@ union SensitivityType {
    * High Sensitivity - triggers the rule by smaller spikes in traffic
    */
   High: "High",
+}
+
+/**
+ * Status of a managed rule set.
+ */
+@added(Versions.v2026_04_01)
+union ManagedRuleSetStatus {
+  string,
+
+  /**
+   * The managed rule set is in preview.
+   */
+  Preview: "Preview",
+
+  /**
+   * The managed rule set is generally available.
+   */
+  GA: "GA",
+
+  /**
+   * The managed rule set is deprecated.
+   */
+  Deprecated: "Deprecated",
+
+  /**
+   * The managed rule set is supported.
+   */
+  Supported: "Supported",
+}
+
+/**
+ * OWASP CRS paranoia level of a managed rule. Applicable only for DRS rules.
+ */
+@added(Versions.v2026_04_01)
+union ParanoiaLevel {
+  string,
+
+  /**
+   * Paranoia level 1.
+   */
+  PL1: "PL1",
+
+  /**
+   * Paranoia level 2.
+   */
+  PL2: "PL2",
+
+  /**
+   * Paranoia level 3.
+   */
+  PL3: "PL3",
+
+  /**
+   * Paranoia level 4.
+   */
+  PL4: "PL4",
 }
 
 /**
@@ -1569,6 +1657,7 @@ model PolicySettings {
   /**
    * If action type is redirect, this field represents redirect URL for the client.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   redirectUrl?: string;
 
   /**
@@ -1766,8 +1855,192 @@ model ManagedRuleSetList {
   /**
    * List of rule sets.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Managed rule sets are identified by a composite key of ruleSetType and ruleSetVersion properties."
   managedRuleSets?: ManagedRuleSet[];
+
+  /**
+   * List of exceptions applied on the managed rule sets.
+   */
+  @added(Versions.v2025_11_01)
+  exceptionsList?: ManagedRuleSetExceptionList;
+}
+
+/**
+ * Defines the list of exceptions for the managed rule sets.
+ */
+@added(Versions.v2025_11_01)
+model ManagedRuleSetExceptionList {
+  /**
+   * List of exceptions.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Exceptions do not have a single natural identifier; they are identified by a composite key of matchVariable, selector, valueMatchOperator, and matchValues properties."
+  exceptions?: ManagedRuleSetException[];
+}
+
+/**
+ * Excludes whole requests from managed rule evaluation according to match conditions.
+ */
+@added(Versions.v2025_11_01)
+model ManagedRuleSetException {
+  /**
+   * The variable to be evaluated for excluding the request.
+   */
+  matchVariable: ExceptionMatchVariable;
+
+  /**
+   * Comparison operator to apply to the selector when specifying which elements
+   * in the collection this exception applies to.
+   */
+  selectorMatchOperator?: ExceptionSelectorMatchOperator;
+
+  /**
+   * When matchVariable is a collection, operator used to specify which elements
+   * in the collection this exception applies to.
+   * Currently supported only for RequestHeaderNames.
+   */
+  selector?: string;
+
+  /**
+   * Comparison operator to apply to the value to be matched.
+   */
+  valueMatchOperator: ExceptionValueMatchOperator;
+
+  /**
+   * List of values to be matched with.
+   */
+  matchValues: string[];
+
+  /**
+   * Scope(s) of the exception.
+   */
+  @identifiers(#["ruleSetType", "ruleSetVersion"])
+  scopes: ManagedRuleSetScope[];
+}
+
+/**
+ * Defines the scope of the managed rules.
+ */
+@added(Versions.v2025_11_01)
+model ManagedRuleSetScope {
+  /**
+   * Defines the rule set type.
+   * Examples: DefaultRuleSet, Microsoft_DefaultRuleSet,
+   * Microsoft_BotManagerRuleSet, Microsoft_HTTPDDoSRuleSet, BotProtection
+   */
+  ruleSetType: string;
+
+  /**
+   * Defines the version of the rule set.
+   */
+  ruleSetVersion: string;
+
+  /**
+   * List of rule group scopes.
+   */
+  @identifiers(#["ruleGroupName"])
+  ruleGroupScopes?: RuleGroupScope[];
+}
+
+/**
+ * Defines the scope of the rule group.
+ */
+@added(Versions.v2025_11_01)
+model RuleGroupScope {
+  /**
+   * Defines the rule group name.
+   */
+  ruleGroupName: string;
+
+  /**
+   * List of rule scopes.
+   */
+  @identifiers(#["ruleId"])
+  ruleScopes?: RuleScope[];
+}
+
+/**
+ * Defines the scope of the rule.
+ */
+@added(Versions.v2025_11_01)
+model RuleScope {
+  /**
+   * Defines the rule id.
+   */
+  ruleId: string;
+}
+
+/**
+ * The variable to be evaluated for excluding the request.
+ */
+@added(Versions.v2025_11_01)
+union ExceptionMatchVariable {
+  string,
+
+  /**
+   * Request Uri Exception Match Variable
+   */
+  RequestUri: "RequestUri",
+
+  /**
+   * Socket Address Exception Match Variable
+   */
+  SocketAddr: "SocketAddr",
+
+  /**
+   * Request Header Names Exception Match Variable
+   */
+  RequestHeaderNames: "RequestHeaderNames",
+}
+
+/**
+ * Comparison operator to apply to the selector when specifying which elements in the collection this exception applies to..
+ */
+@added(Versions.v2025_11_01)
+union ExceptionSelectorMatchOperator {
+  string,
+
+  /**
+   * Equals Selector Match Operator
+   */
+  Equals: "Equals",
+}
+
+/**
+ * Comparison operator to apply to the value to be matched..
+ */
+@added(Versions.v2025_11_01)
+union ExceptionValueMatchOperator {
+  string,
+
+  /**
+   * Equals Exception Value Match Operator
+   */
+  Equals: "Equals",
+
+  /**
+   * Contains Exception Value Match Operator
+   */
+  Contains: "Contains",
+
+  /**
+   * StartsWith Exception Value Match Operator
+   */
+  StartsWith: "StartsWith",
+
+  /**
+   * EndsWith Exception Value Match Operator
+   */
+  EndsWith: "EndsWith",
+
+  /**
+   * EqualsAny Exception Value Match Operator
+   */
+  EqualsAny: "EqualsAny",
+
+  /**
+   * IPMatch Exception Value Match Operator
+   */
+  IPMatch: "IPMatch",
 }
 
 /**
@@ -2048,6 +2321,7 @@ model ResourcewithSettableName {
 /**
  * Error response indicates Front Door service is not able to process the incoming request. The reason is provided in the error message.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model ErrorResponse {
   /**
@@ -2066,6 +2340,7 @@ model ErrorResponse {
 /**
  * Error response indicates Front Door service is not able to process the incoming request. The reason is provided in the error message.
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 @error
 model DefaultErrorResponse {
   /**
@@ -2154,6 +2429,20 @@ model ManagedRuleSetDefinitionProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   ruleGroups?: ManagedRuleGroupDefinition[];
+
+  /**
+   * Human-readable display name for the managed rule set version (e.g., 'Default Ruleset 2.2 (Latest, Recommended)').
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  displayName?: string;
+
+  /**
+   * Describes the lifecycle status of the managed rule set version.
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  status?: ManagedRuleSetStatus;
 }
 
 /**
@@ -2213,6 +2502,13 @@ model ManagedRuleDefinition {
    */
   @visibility(Lifecycle.Read)
   description?: string;
+
+  /**
+   * Describes the paranoia level of the managed rule. Applicable only for DRS rules. Omitted for Bot Manager, DDoS, and AI rules.
+   */
+  @added(Versions.v2026_04_01)
+  @visibility(Lifecycle.Read)
+  paranoiaLevel?: ParanoiaLevel;
 }
 
 /**
@@ -3664,9 +3960,11 @@ model RulesEngineListResult is Azure.Core.Page<RulesEngine>;
 @@visibility(ProfileList.value, Lifecycle.Read);
 @@visibility(RulesEngineListResult.value, Lifecycle.Read);
 @@visibility(WebApplicationFirewallPolicyList.value, Lifecycle.Read);
-@@Azure.ClientGenerator.Core.clientName(ScrubbingRuleEntryMatchOperator,
+@@Azure.ClientGenerator.Core.clientName(
+  ScrubbingRuleEntryMatchOperator,
   "scrubbingRuleEntryMatchOperator"
 );
-@@Azure.ClientGenerator.Core.clientName(ScrubbingRuleEntryState,
+@@Azure.ClientGenerator.Core.clientName(
+  ScrubbingRuleEntryState,
   "scrubbingRuleEntryState"
 );

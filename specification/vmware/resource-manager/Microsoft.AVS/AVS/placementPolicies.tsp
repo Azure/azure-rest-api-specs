@@ -28,15 +28,17 @@ interface PlacementPolicies {
   update is ArmCustomPatchAsync<
     PlacementPolicy,
     PlacementPolicyUpdate,
-    Response = ArmResponse<PlacementPolicy> | ArmAcceptedLroResponseWithResponseBody<
-      PlacementPolicy,
-      LroHeaders = ArmLroLocationHeader<
-        Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
-        PlacementPolicy,
-        string
-      > &
-        Azure.Core.Foundations.RetryAfterHeader
-    >
+    Response =
+      | ArmResponse<PlacementPolicy>
+      | ArmAcceptedLroResponseWithResponseBody<
+          PlacementPolicy,
+          LroHeaders = ArmLroLocationHeader<
+            Azure.Core.StatusMonitorPollingOptions<ArmOperationStatus>,
+            PlacementPolicy,
+            string
+          > &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
   >;
 
   #suppress "deprecated"
@@ -44,11 +46,13 @@ interface PlacementPolicies {
   delete is ArmResourceDeleteAsync<PlacementPolicy>;
 }
 
-@@clientName(PlacementPolicies.createOrUpdate::parameters.resource,
+@@clientName(
+  PlacementPolicies.createOrUpdate::parameters.resource,
   "placementPolicy"
 );
 
-@@clientName(PlacementPolicies.update::parameters.properties,
+@@clientName(
+  PlacementPolicies.update::parameters.properties,
   "placementPolicyUpdate"
 );
 

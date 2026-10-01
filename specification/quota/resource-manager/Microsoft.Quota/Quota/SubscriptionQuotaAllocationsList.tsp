@@ -92,14 +92,17 @@ interface SubscriptionQuotaAllocationsLists {
   update is SubscriptionQuotaAllocationsListsOps.CustomPatchAsync<
     SubscriptionQuotaAllocationsList,
     PatchModel = SubscriptionQuotaAllocationsList,
-    Response = ArmResponse<SubscriptionQuotaAllocationsList> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SubscriptionQuotaAllocationsList> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response =
+      | ArmResponse<SubscriptionQuotaAllocationsList>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SubscriptionQuotaAllocationsList> &
+          Azure.Core.Foundations.RetryAfterHeader>
   >;
 }
 
 @@minLength(SubscriptionQuotaAllocationsList.name, 1);
 @@doc(SubscriptionQuotaAllocationsList.name, "The name of the Azure region.");
 @@doc(SubscriptionQuotaAllocationsList.properties, "");
-@@doc(SubscriptionQuotaAllocationsLists.update::parameters.properties,
+@@doc(
+  SubscriptionQuotaAllocationsLists.update::parameters.properties,
   "Quota requests payload."
 );

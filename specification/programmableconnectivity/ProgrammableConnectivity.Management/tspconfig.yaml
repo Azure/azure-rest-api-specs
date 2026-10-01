@@ -11,6 +11,9 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
     emit-common-types-schema: never
 
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.ProgrammableConnectivity"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-programmableconnectivity"
     namespace: "azure.mgmt.programmableconnectivity"
@@ -23,12 +26,6 @@ options:
     namespace: "com.azure.resourcemanager.programmableconnectivity"
     flavor: "azure"
     service-name: "Programmable Connectivity"
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    flavor: azure
-    clear-output-folder: true
-    model-namespace: false
-    namespace: "Azure.ResourceManager.ProgrammableConnectivity"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/programmableconnectivity"
     emitter-output-dir: "{output-dir}/{service-dir}/armprogrammableconnectivity"
@@ -48,3 +45,4 @@ options:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+    - "@azure-tools/typespec-azure-rulesets/client-sdk"

@@ -1,11 +1,12 @@
+import { defaultLogger } from "@azure-tools/specs-shared/logger";
 import { contosoTspConfig } from "@azure-tools/specs-shared/test/examples";
 import { strict as assert } from "node:assert";
-import { join } from "path";
-import { afterEach, beforeEach, describe, it, MockInstance, vi } from "vitest";
-import { EmitAutorestRule } from "../src/rules/emit-autorest.js";
+import { join } from "node:path";
+import { afterEach, beforeEach, describe, it, type MockInstance, vi } from "vitest";
+import { EmitAutorestRule } from "../src/rules/emit-autorest.ts";
 
-import * as utils from "../src/utils.js";
-import { mockFolder } from "./mocks.js";
+import * as utils from "../src/utils.ts";
+import { mockFolder } from "./mocks.ts";
 
 describe("emit-autorest", function () {
   let fileExistsSpy: MockInstance;
@@ -24,7 +25,7 @@ describe("emit-autorest", function () {
   it("should succeed if no main.tsp", async function () {
     fileExistsSpy.mockImplementation((file: string) => file != join(mockFolder, "main.tsp"));
 
-    const result = await new EmitAutorestRule().execute(mockFolder);
+    const result = await new EmitAutorestRule().execute(mockFolder, defaultLogger);
 
     assert(result.success);
   });
@@ -37,7 +38,7 @@ emit:
 `),
     );
 
-    const result = await new EmitAutorestRule().execute(mockFolder);
+    const result = await new EmitAutorestRule().execute(mockFolder, defaultLogger);
 
     assert(result.success);
   });
@@ -45,7 +46,7 @@ emit:
   it("should fail if config is empty", async function () {
     readTspConfigSpy.mockImplementation(() => Promise.resolve(""));
 
-    const result = await new EmitAutorestRule().execute(mockFolder);
+    const result = await new EmitAutorestRule().execute(mockFolder, defaultLogger);
 
     assert(!result.success);
   });
@@ -59,7 +60,7 @@ linter:
 `),
     );
 
-    const result = await new EmitAutorestRule().execute(mockFolder);
+    const result = await new EmitAutorestRule().execute(mockFolder, defaultLogger);
 
     assert(!result.success);
   });
@@ -72,8 +73,12 @@ emit:
 `),
     );
 
-    const result = await new EmitAutorestRule().execute(mockFolder);
+    const result = await new EmitAutorestRule().execute(mockFolder, defaultLogger);
 
     assert(!result.success);
+  });
+
+  it("should have suppressable flag set to true", function () {
+    assert.equal(new EmitAutorestRule().suppressable, true);
   });
 });

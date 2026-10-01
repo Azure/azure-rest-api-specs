@@ -36,7 +36,11 @@ import "./NetworkSecurityPerimeterConfiguration.tsp";
 import "./StorageTaskAssignment.tsp";
 import "./StorageConnector.tsp";
 import "./StorageDataShare.tsp";
+import "./StorageContextCache.tsp";
+import "./StorageContextCacheContainer.tsp";
+import "./AdvancedPlatformMetrics.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -66,6 +70,16 @@ enum Versions {
    * The 2025-08-01 API version.
    */
   v2025_08_01: "2025-08-01",
+
+  /**
+   * The 2026-04-01 API version.
+   */
+  v2026_04_01: "2026-04-01",
+
+  /**
+   * The 2026-06-01 API version.
+   */
+  v2026_06_01: "2026-06-01",
 }
 
 interface Operations
@@ -74,6 +88,7 @@ interface Operations
       ErrorResponse
     > {}
 
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists all of the available Storage Rest API operations."
 );

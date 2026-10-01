@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "subscriptionId": "30000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "macc-rg",
+    "maccName": "macc-20250101-001",
+    "transactionName": "txn-macc-001",
+    "api-version": "2026-06-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/30000000-0000-0000-0000-000000000000/resourceGroups/macc-rg/providers/Microsoft.BillingBenefits/maccs/macc-20250101-001/transactions/txn-macc-001",
+        "name": "txn-macc-001",
+        "type": "Microsoft.BillingBenefits/maccs/transactions",
+        "properties": {
+          "date": "2025-07-20T10:30:00Z",
+          "chargeType": "Usage",
+          "billingStatus": "Closed",
+          "invoiceResourceId": "/providers/Microsoft.Billing/billingAccounts/20000000-1000-0000-0000-000000000000/billingProfiles/DDFF-TTNN-BG7-GGG/invoices/INV-X001540275",
+          "amountInBillingCurrency": {
+            "currencyCode": "USD",
+            "amount": 100.0
+          },
+          "amountInPricingCurrency": {
+            "currencyCode": "USD",
+            "amount": 100.0
+          },
+          "productCode": "UPN242544",
+          "productDetails": {
+            "skuTitle": "Standard D2s v3",
+            "productFamily": "Azure",
+            "productType": "Virtual Machines Dv2 Series Windows",
+            "serviceFamily": "Compute",
+            "publisherType": "Microsoft"
+          }
+        }
+      }
+    }
+  },
+  "operationId": "MaccTransactions_Get",
+  "title": "MaccTransactionGet"
+}

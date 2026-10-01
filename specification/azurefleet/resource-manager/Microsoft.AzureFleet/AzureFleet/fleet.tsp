@@ -104,19 +104,25 @@ model FleetProperties {
   uniqueId?: string;
 
   /** Mode of the Fleet. */
-  @added(Versions.v2025_07_01_preview)
+  @added(Versions.v2026_04_01_preview)
   mode?: FleetMode;
+
+  /** VirtualMachine prefix to be used for the virtual machines launched by Fleet. Can be used only with Launch mode. */
+  @added(Versions.v2026_04_01_preview)
+  @pattern("^[^_\\W][\\w\\-._]{0,64}(?<![-.])$")
+  vmNamePrefix?: string;
 
   /**
    * Specifies capacity type for Fleet Regular and Spot priority profiles.
    * capacityType is an immutable property. Once set during Fleet creation, it cannot be updated.
    * Specifying different capacity type for Fleet Regular and Spot priority profiles is not allowed.
    */
-  @added(Versions.v2025_07_01_preview)
+  @added(Versions.v2026_04_01_preview)
   capacityType?: CapacityType;
 
   /** Zone Allocation Policy for Fleet. */
-  @added(Versions.v2025_07_01_preview)
+  @added(Versions.v2026_04_01_preview)
+  @removed(Versions.v2026_08_01)
   zoneAllocationPolicy?: ZoneAllocationPolicy;
 }
 
@@ -534,19 +540,19 @@ model AdditionalLocationsProfile {
 }
 
 /** Modes for Compute Fleet. */
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2026_04_01_preview)
 union FleetMode {
   string,
 
-  /** Default. Managed is the default mode for Compute Fleet where VMs are provisioned via VMSS. */
+  /** Default. Managed mode where Compute Fleet provisions the VMs, manages them and their lifecycle. */
   managed: "Managed",
 
-  /** Instance mode for Compute Fleet will directly provision VM instances. */
-  instance: "Instance",
+  /** Launch mode where Compute Fleet launches the VMs and the customer manages them and their lifecycle. */
+  launch: "Launch",
 }
 
 /** Capacity types for Compute Fleet. */
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2026_04_01_preview)
 union CapacityType {
   string,
 
@@ -561,7 +567,8 @@ union CapacityType {
 }
 
 /** ZoneAllocationPolicy for Compute Fleet. */
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_08_01)
 model ZoneAllocationPolicy {
   /** Distribution strategy used for zone allocation policy. */
   distributionStrategy: ZoneDistributionStrategy;
@@ -572,7 +579,7 @@ model ZoneAllocationPolicy {
 }
 
 /** Distribution strategies for Compute Fleet zone allocation policy. */
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2026_04_01_preview)
 union ZoneDistributionStrategy {
   string,
 
@@ -590,7 +597,7 @@ union ZoneDistributionStrategy {
 }
 
 /** Zone preferences for Compute Fleet zone allocation policy. */
-@added(Versions.v2025_07_01_preview)
+@added(Versions.v2026_04_01_preview)
 model ZonePreference {
   /** Name of the zone. */
   zone: string;
@@ -652,8 +659,8 @@ interface Fleets {
     Response = VirtualMachineScaleSetListResult
   >;
 
-  /** List VirtualMachine resources of an instance Fleet. */
-  @added(Versions.v2025_07_01_preview)
+  /** List VirtualMachine resources of a Launch mode Fleet. */
+  @added(Versions.v2026_04_01_preview)
   @action("virtualMachines")
   @list
   @get
@@ -663,11 +670,6 @@ interface Fleets {
     Response = VirtualMachineListResult,
     Parameters = ListVirtualMachinesParameters
   >;
-
-  /** Cancels an instance Fleet creation that is in progress. */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @added(Versions.v2025_07_01_preview)
-  cancel is ArmResourceActionNoResponseContentAsync<Fleet, void>;
 }
 
 alias ListVirtualMachinesParameters = {

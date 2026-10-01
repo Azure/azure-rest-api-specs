@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.SecurityInsights;
 // FIXME: Entity has no properties property
@@ -32,12 +33,14 @@ interface Entities {
    * Gets an entity.
    */
   @tag("Entities")
+  @added(Versions.v2025_10_01_preview)
   get is Extension.Read<workspaceExternalResource, Entity, Error = CloudError>;
 
   /**
    * Gets all entities.
    */
   @tag("Entities")
+  @added(Versions.v2025_10_01_preview)
   list is Extension.ListByTarget<
     workspaceExternalResource,
     Entity,
@@ -67,6 +70,7 @@ interface Entities {
    * Expands an entity.
    */
   @tag("Entities")
+  @added(Versions.v2025_10_01_preview)
   expand is Extension.ActionSync<
     workspaceExternalResource,
     Entity,
@@ -81,6 +85,7 @@ interface Entities {
   @get
   @list
   @tag("Entities")
+  @added(Versions.v2025_10_01_preview)
   queries is Extension.ActionSync<
     workspaceExternalResource,
     Entity,
@@ -100,6 +105,7 @@ interface Entities {
    * Execute Insights for an entity.
    */
   @tag("Entities")
+  @added(Versions.v2025_10_01_preview)
   getInsights is Extension.ActionSync<
     workspaceExternalResource,
     Entity,
@@ -115,6 +121,7 @@ interface Entities {
   @operationId("EntitiesGetTimeline_list")
   @action("getTimeline")
   @tag("Entities")
+  @added(Versions.v2025_10_01_preview)
   entitiesGetTimelineList is Extension.ActionSync<
     workspaceExternalResource,
     Entity,
@@ -125,15 +132,19 @@ interface Entities {
 }
 
 @@doc(Entity.name, "entity ID");
-@@doc(Entities.runPlaybook::parameters.body,
+@@doc(
+  Entities.runPlaybook::parameters.body,
   "Describes the request body for triggering a playbook on an entity."
 );
-@@doc(Entities.expand::parameters.body,
+@@doc(
+  Entities.expand::parameters.body,
   "The parameters required to execute an expand operation on the given entity."
 );
-@@doc(Entities.getInsights::parameters.body,
+@@doc(
+  Entities.getInsights::parameters.body,
   "The parameters required to execute insights on the given entity."
 );
-@@doc(Entities.entitiesGetTimelineList::parameters.body,
+@@doc(
+  Entities.entitiesGetTimelineList::parameters.body,
   "The parameters required to execute an timeline operation on the given entity."
 );

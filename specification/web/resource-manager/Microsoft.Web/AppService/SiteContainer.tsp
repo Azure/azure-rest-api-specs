@@ -53,10 +53,12 @@ interface SiteContainerOps
         @key
         @pattern("(^[a-zA-Z0-9]$)|(^[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]$)")
         containerName: string,
-      }
+      },
+      ResourceName = "SiteContainer"
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface SiteContainers {
   /**
    * Gets a site container of a site, or a deployment slot.
@@ -123,10 +125,12 @@ interface SiteContainerOperationGroupOps
         @key
         @pattern("(^[a-zA-Z0-9]$)|(^[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]$)")
         containerName: string,
-      }
+      },
+      ResourceName = "SiteSlotSiteContainer"
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface SiteContainerOperationGroup {
   /**
    * Gets a site container of a site, or a deployment slot.
@@ -168,9 +172,11 @@ interface SiteContainerOperationGroup {
 
 @@doc(SiteContainer.name, "Site Container Name");
 @@doc(SiteContainer.properties, "SiteContainer resource specific properties");
-@@doc(SiteContainers.createOrUpdateSiteContainer::parameters.resource,
+@@doc(
+  SiteContainers.createOrUpdateSiteContainer::parameters.resource,
   "Container Entity"
 );
-@@doc(SiteContainerOperationGroup.createOrUpdateSiteContainerSlot::parameters.resource,
+@@doc(
+  SiteContainerOperationGroup.createOrUpdateSiteContainerSlot::parameters.resource,
   "Container Entity"
 );

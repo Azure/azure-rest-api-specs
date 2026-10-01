@@ -20,7 +20,9 @@ import "./HybridConnection.tsp";
 import "./WcfRelay.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./PrivateLinkResource.tsp";
+import "./Cluster.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -46,6 +48,17 @@ enum Versions {
    * The 2024-01-01 API version.
    */
   v2024_01_01: "2024-01-01",
+
+  /**
+   * The 2026-01-01 API version.
+   */
+  v2026_01_01: "2026-01-01",
+
+  /**
+   * The 2026-07-01-preview API version.
+   */
+  @Azure.Core.previewVersion
+  v2026_07_01_preview: "2026-07-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

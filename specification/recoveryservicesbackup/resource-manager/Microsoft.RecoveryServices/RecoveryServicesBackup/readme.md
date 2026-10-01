@@ -28,7 +28,7 @@ These are the global settings for the RecoveryServicesBackup API.
 title: Recovery Services Backup Client
 description: Open API 2.0 Specs for Azure RecoveryServices Backup service
 openapi-type: arm
-tag: package-2025-08-01
+tag: package-2026-08-01
 csharp-sdks-folder: ./Generated/CSharp
 python-sdks-folder: ./Generated/Python
 go-sdk-folder: ./Generated/Golang
@@ -41,7 +41,7 @@ tag: package-passivestamp-2023-01-15
 ```
 
 ```yaml $(package-activestamp)
-tag: package-2025-08-01
+tag: package-2026-08-01
 ```
 
 ### Validations
@@ -55,13 +55,85 @@ semantic-validator: true
 message-format: json
 ```
 
-### Tag: package-preview-2026-01-01-preview
+### Tag: package-preview-2026-08-31-preview
 
-These settings apply only when `--tag=package-preview-2026-01-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-preview-2026-08-31-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2026-01-01-preview'
+```yaml $(tag) == 'package-preview-2026-08-31-preview'
 input-file:
-  - preview/2026-01-01-preview/bms.json
+  - preview/2026-08-31-preview/bms.json
+```
+
+### Tag: package-2026-08-01
+
+These settings apply only when `--tag=package-2026-08-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-08-01'
+input-file:
+  - stable/2026-08-01/bms.json
+```
+
+### Tag: package-2026-07-01
+
+These settings apply only when `--tag=package-2026-07-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-07-01'
+input-file:
+  - stable/2026-07-01/bms.json
+```
+
+### Tag: package-preview-2026-05-31-preview
+
+These settings apply only when `--tag=package-preview-2026-05-31-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-05-31-preview'
+input-file:
+  - preview/2026-05-31-preview/bms.json
+```
+
+### Tag: package-2026-05-01
+
+These settings apply only when `--tag=package-2026-05-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-05-01'
+input-file:
+  - stable/2026-05-01/bms.json
+```
+
+### Tag: package-preview-2026-03-31-preview
+
+These settings apply only when `--tag=package-preview-2026-03-31-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-03-31-preview'
+input-file:
+  - preview/2026-03-31-preview/bms.json
+```
+
+### Tag: package-2026-02-01
+
+These settings apply only when `--tag=package-2026-02-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-02-01'
+input-file:
+  - stable/2026-02-01/bms.json
+```
+
+### Tag: package-preview-2026-01-31-preview
+
+These settings apply only when `--tag=package-preview-2026-01-31-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-01-31-preview'
+input-file:
+  - preview/2026-01-31-preview/bms.json
+```
+
+### Tag: package-2026-01-01
+
+These settings apply only when `--tag=package-2026-01-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-01-01'
+input-file:
+  - stable/2026-01-01/bms.json
 ```
 
 ### Tag: package-2025-08-01
@@ -551,6 +623,26 @@ directive:
     from: bms.json
     where: $.definitions.RecoveryPointResource
     reason: This is an existing resource in our service and is present across API version. Suppressing for API versions 2021-11-15, 2023-01-15 for fixing completeness for CRR Get recoverypoints API.
+  - suppress: TrackedResourceBeyondsThirdLevel
+    from: bms.json
+    where: $.definitions.JobResource
+    reason: JobResource is an existing resource whose shape and tracked-resource status are unchanged from prior API versions. The cross-tenant child-jobs pass-through API (backupCrossTenantVaultMappings/{name}/backupJobs/{jobName}/backupChildJobs) exposes this existing resource for read-only retrieval of jobs from the source vault; it does not introduce a new tracked resource or a new writable resource path beyond the third nesting level, so the constraint the rule enforces does not apply to this read-only pass-through.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: bms.json
+    where: $.definitions.IaaSVMBulkRestoreRequest.properties.skipPreOLRBackup
+    reason: skipPreOLRBackup preserves the exact wire property name used by the service's IaaS VM restore requests (OLR = Original Location Restore, an established Azure Backup domain acronym). Renaming the acronym to satisfy strict camelCase would break wire compatibility with the service and existing clients.
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: bms.json
+    where: $.definitions.BulkRestoreRecoveryPointsResponse
+    reason: BulkRestoreRecoveryPointsResponse is the payload of the bulk recovery-point-discovery operation-result GET, not an ARM resource. The service returns a dictionary (ResourceDictionary<RecoveryPoint>) keyed by the source protected item's ARM ID; this is a transient operation result with no ARM resource identity, so it has no id/name/type and none can be added without diverging from the shipped wire.
+  - suppress: BodyTopLevelProperties
+    from: bms.json
+    where: $.definitions.BulkRestoreRecoveryPointsResponse
+    reason: BulkRestoreRecoveryPointsResponse is a dictionary-shaped operation-result payload whose top-level members (value = map of protected-item ARM ID to recovery point, and nextLink) are dictated by the service's ResourceDictionary<RecoveryPoint> wire contract. It is not an ARM resource envelope, so its top-level properties cannot be limited to the ARM resource property set.
+  - suppress: AvoidAdditionalProperties
+    from: bms.json
+    where: $.definitions.BulkRestoreRecoveryPointsResponse.properties.value
+    reason: The value member of BulkRestoreRecoveryPointsResponse is a dynamic map keyed by the source protected item's ARM ID (service ResourceDictionary<RecoveryPoint>). The key set is caller-supplied and unbounded, so the response is inherently an additionalProperties map and cannot be expressed as a fixed-property object without diverging from the shipped wire.
   - suppress: LroErrorContent
     from: bms.json
     reason: The azure backup service's API infra handles the conversation from exceptions to custom error CloudError. Changing this would be breaking change for our service.
@@ -559,10 +651,46 @@ directive:
     where: 
      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints/{recoveryPointId}"].patch.parameters[8]["schema"]
     reason: Known false alarm for the discriminator pattern that causes ConsistentPatchProperties rule to fail.
+  - suppress: AllTrackedResourcesMustHaveDelete
+    from: bms.json
+    where: $.definitions.ProtectedItemResource
+    reason: ProtectedItemResource is exposed read-only on the cross-tenant pass-through paths (BackupProtectedItemsFromCrossTenantVault) where DELETE is intentionally not supported. The standard (non-cross-tenant) path retains DELETE; the lint rule cannot scope its check to exclude the read-only cross-tenant mirror.
+  - suppress: NestedResourcesMustHaveListOperation
+    from: bms.json
+    where: $.definitions.CrossTenantVaultMapping
+    reason: CrossTenantVaultMapping has a list operation at /backupCrossTenantVaultMappings (operationId CrossTenantVaultMappings_List). The lint rule cannot match the resource to its list path due to the custom path segment name.
+  - suppress: NestedResourcesMustHaveListOperation
+    from: bms.json
+    where: $.definitions.VaultCredentialCertificateResponse
+    reason: VaultCredentialCertificateResponse is returned by the operationResults GET endpoint as an async polling result, not as a standalone nested resource with CRUD lifecycle.
+  - suppress: ResourceNameRestriction
+    from: bms.json
+    reason: |
+      crossTenantVaultMappingName on the CrossTenantVaultMapping resource model has a real pattern (^[A-Za-z][A-Za-z0-9]{1,99}$). The remaining ResourceNameRestriction surface comes from vaultName, which is inherited from the parent VaultResource with NamePattern="" for backward compatibility across all stable api-versions (2025-02-01, 2025-08-01, 2026-01-01). Adding a pattern at the source would propagate via shared TypeSpec into all stable versions and trip openapi-diff rule 1036 (ConstraintChanged) on every vault path.
 
 suppressions:
   - from: bms.json
     code: ProvisioningStateSpecifiedForLROPut
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}"].put
     reason: The existing API contract is legacy code and not be able to change.
+  - from: bms.json
+    code: ProvisioningStateMustBeReadOnly
+    reason: |
+      provisioningState is modeled as a named union (CrossTenantProvisioningState) with @visibility(Lifecycle.Read)
+      in TypeSpec, but the Swagger emitter outputs $ref + sibling readOnly:true; per OpenAPI 2.0 / JSON Reference
+      semantics, siblings of $ref are stripped at resolution, so LintDiff's Spectral rule (which runs with
+      resolved:true) cannot observe the readOnly. The rule source
+      (azure-openapi-validator/.../provisioning-state-must-be-read-only.ts) checks for literal readOnly===true on
+      the resolved property -- there is no x-ms-mutability / @extension escape hatch, and decorators alone do not
+      inject readOnly into the union definition.
+      The only emitter-level fix is the autorest option `use-read-only-status-schema: true`, but enabling it
+      re-emits every stable api-version's bms.json (adds readOnly:true inside 4 pre-existing LRO-status unions
+      per file).
+      The same emission shape exists in azurefleet.json (FleetProperties.provisioningState) and several other
+      RPs (playwrighttesting, newrelic, eventhub, cdn, eventgrid, ...); LintDiff is diff-only so those are
+      grandfathered. Net-new cross-tenant resources introduced by this PR (CrossTenantVaultMapping,
+      VaultCredentialCertificateResponse) trip the rule from scratch -- hence this suppression.
+  - from: bms.json
+    code: GuidUsage
+    reason: GUIDs are used for sourceTenantId, aadTenantId, servicePrincipalClientId, and servicePrincipalObjectId under Cross Tenant Restore properties. Suppression added upon feedback from ARM reviewer.
 ```

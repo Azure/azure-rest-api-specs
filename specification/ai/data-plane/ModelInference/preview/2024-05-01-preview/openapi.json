@@ -3,6 +3,7 @@
   "info": {
     "title": "AI Model Inference",
     "version": "2024-05-01-preview",
+    "description": "**Deprecated**: The Azure AI Model Inference API is deprecated and will be retired in the future.\nMigrate to the OpenAI API, which provides equivalent functionality with broader model support and\nunified SDK access. For migration guidance, see\n[How to migrate from Azure AI Inference SDK to OpenAI SDK](https://learn.microsoft.com/azure/foundry/how-to/model-inference-to-openai-migration).",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -61,7 +62,7 @@
     "/chat/completions": {
       "post": {
         "operationId": "GetChatCompletions",
-        "description": "Gets chat completions for the provided chat messages.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data. The method makes a REST API call to the `/chat/completions` route\non the given endpoint.",
+        "description": "Gets chat completions for the provided chat messages.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data. The method makes a REST API call to the `/chat/completions` route\non the given endpoint.\n\n**Deprecated**: This API is deprecated. Use the OpenAI API instead.\nSee [migration guide](https://learn.microsoft.com/azure/foundry/how-to/model-inference-to-openai-migration).",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -146,7 +147,7 @@
     "/embeddings": {
       "post": {
         "operationId": "GetEmbeddings",
-        "description": "Return the embedding vectors for given text prompts.\nThe method makes a REST API call to the `/embeddings` route on the given endpoint.",
+        "description": "Return the embedding vectors for given text prompts.\nThe method makes a REST API call to the `/embeddings` route on the given endpoint.\n\n**Deprecated**: This API is deprecated. Use the OpenAI API instead.\nSee [migration guide](https://learn.microsoft.com/azure/foundry/how-to/model-inference-to-openai-migration).",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -228,7 +229,7 @@
     "/images/embeddings": {
       "post": {
         "operationId": "GetImageEmbeddings",
-        "description": "Return the embedding vectors for given images.\nThe method makes a REST API call to the `/images/embeddings` route on the given endpoint.",
+        "description": "Return the embedding vectors for given images.\nThe method makes a REST API call to the `/images/embeddings` route on the given endpoint.\n\n**Deprecated**: This API is deprecated. Use the OpenAI API instead.\nSee [migration guide](https://learn.microsoft.com/azure/foundry/how-to/model-inference-to-openai-migration).",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -310,7 +311,7 @@
     "/info": {
       "get": {
         "operationId": "GetModelInfo",
-        "description": "Returns information about the AI model deployed.\nThe method makes a REST API call to the `/info` route on the given endpoint.\nThis method will only work when using Serverless API, Managed Compute, or Model .\ninference endpoint. Azure OpenAI endpoints don't support i.",
+        "description": "Returns information about the AI model deployed.\nThe method makes a REST API call to the `/info` route on the given endpoint.\nThis method will only work when using Serverless API, Managed Compute, or Model\nInference endpoints. Azure OpenAI endpoints don't support it.\n\n**Deprecated**: This API is deprecated. Use the OpenAI API instead.\nSee [migration guide](https://learn.microsoft.com/azure/foundry/how-to/model-inference-to-openai-migration).",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -443,7 +444,7 @@
         },
         "finish_reason": {
           "$ref": "#/definitions/CompletionsFinishReason",
-          "description": "The reason that this chat completions choice completed its generated.",
+          "description": "The reason that this chat completions choice completed its generation.",
           "x-nullable": true,
           "readOnly": true
         },
@@ -680,7 +681,7 @@
         },
         "tools": {
           "type": "array",
-          "description": "A list of tools the model may request to call. Currently, only functions are supported as a tool. The model\nmay response with a function call request and provide the input arguments in JSON format for that function.",
+          "description": "A list of tools the model may request to call. Currently, only functions are supported as a tool. The model\nmay respond with a function call request and provide the input arguments in JSON format for that function.",
           "minItems": 1,
           "items": {
             "$ref": "#/definitions/ChatCompletionsToolDefinition"
@@ -701,7 +702,7 @@
         },
         "modalities": {
           "type": "array",
-          "description": "The modalities that the model is allowed to use for the chat completions response. The default modality\nis `text`. Indicating an unsupported modality combination results in an 422 error.",
+          "description": "The modalities that the model is allowed to use for the chat completions response. The default modality\nis `text`.     Indicating an unsupported modality combination results in a 422 error.",
           "items": {
             "$ref": "#/definitions/ChatCompletionsModality"
           }
@@ -898,7 +899,7 @@
     },
     "ChatMessageAudioUrl": {
       "type": "object",
-      "description": "An internet location from which the model may retrieve an audio.",
+      "description": "An internet location from which the model may retrieve audio.",
       "properties": {
         "url": {
           "type": "string",
@@ -929,7 +930,7 @@
       "properties": {
         "image_url": {
           "$ref": "#/definitions/ChatMessageImageUrl",
-          "description": "An internet location, which must be accessible to the model,from which the image may be retrieved.",
+          "description": "An internet location, which must be accessible to the model, from which the image may be retrieved.",
           "x-ms-client-name": "imageUrl"
         }
       },
@@ -1338,7 +1339,7 @@
     },
     "EmbeddingEncodingFormat": {
       "type": "string",
-      "description": "Specifies the types of embeddings to generate. Compressed embeddings types like `uint8`, `int8`, `ubinary` and \n`binary`, may reduce storage costs without sacrificing the integrity of the data. Returns a 422 error if the\nmodel doesn't support the value or parameter. Read the model's documentation to know the values supported by\nthe your model.",
+      "description": "Specifies the types of embeddings to generate. Compressed embeddings types like `uint8`, `int8`, `ubinary` and \n`binary`, may reduce storage costs without sacrificing the integrity of the data. Returns a 422 error if the\nmodel doesn't support the value or parameter. Read the model's documentation to know the values supported by\nyour model.",
       "enum": [
         "base64",
         "binary",
@@ -1659,7 +1660,7 @@
         },
         "encoding_format": {
           "$ref": "#/definitions/EmbeddingEncodingFormat",
-          "description": "Optional. The number of dimensions the resulting output embeddings should have.\nPassing null causes the model to use its default value.\nReturns a 422 error if the model doesn't support the value or parameter."
+          "description": "Optional. The desired format for the returned embeddings.\nReturns a 422 error if the model doesn't support the value or parameter."
         },
         "input_type": {
           "$ref": "#/definitions/EmbeddingInputType",
@@ -1758,7 +1759,7 @@
         },
         "finish_reason": {
           "$ref": "#/definitions/CompletionsFinishReason",
-          "description": "The reason that this chat completions choice completed its generated.",
+          "description": "The reason that this chat completions choice completed its generation.",
           "x-nullable": true,
           "readOnly": true
         },

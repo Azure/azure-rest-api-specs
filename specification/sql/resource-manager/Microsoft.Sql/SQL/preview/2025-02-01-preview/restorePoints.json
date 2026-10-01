@@ -1,0 +1,397 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SqlManagementClient",
+    "version": "2025-02-01-preview",
+    "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "RestorePoints"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/restorePoints": {
+      "get": {
+        "operationId": "RestorePoints_ListByDatabase",
+        "tags": [
+          "RestorePoints"
+        ],
+        "description": "Gets a list of database restore points.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RestorePointListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List database restore points.": {
+            "$ref": "./examples/DatabaseRestorePointsListByDatabase.json"
+          },
+          "List datawarehouse database restore points.": {
+            "$ref": "./examples/DataWarehouseRestorePointsListByDatabase.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post": {
+        "operationId": "RestorePoints_Create",
+        "tags": [
+          "RestorePoints"
+        ],
+        "description": "Creates a restore point for a data warehouse.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The definition for creating the restore point of this database.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateDatabaseRestorePointDefinition"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RestorePoint"
+            }
+          },
+          "201": {
+            "description": "Resource 'RestorePoint' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/RestorePoint"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates datawarehouse database restore point.": {
+            "$ref": "./examples/DatabaseRestorePointsPost.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/RestorePoint"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/restorePoints/{restorePointName}": {
+      "get": {
+        "operationId": "RestorePoints_Get",
+        "tags": [
+          "RestorePoints"
+        ],
+        "description": "Gets a restore point.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "restorePointName",
+            "in": "path",
+            "description": "The name of the restore point.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/RestorePoint"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets a database restore point.": {
+            "$ref": "./examples/DatabaseRestorePointsGet.json"
+          },
+          "Gets a datawarehouse database restore point.": {
+            "$ref": "./examples/DataWarehouseRestorePointsGet.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "RestorePoints_Delete",
+        "tags": [
+          "RestorePoints"
+        ],
+        "description": "Deletes a restore point.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "serverName",
+            "in": "path",
+            "description": "The name of the server.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "description": "The name of the database.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "restorePointName",
+            "in": "path",
+            "description": "The name of the restore point.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deletes a restore point.": {
+            "$ref": "./examples/DatabaseRestorePointsDelete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "CreateDatabaseRestorePointDefinition": {
+      "type": "object",
+      "description": "Contains the information necessary to perform a create database restore point operation.",
+      "properties": {
+        "restorePointLabel": {
+          "type": "string",
+          "description": "The restore point label to apply"
+        }
+      },
+      "required": [
+        "restorePointLabel"
+      ]
+    },
+    "RestorePoint": {
+      "type": "object",
+      "description": "Database restore points.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/RestorePointProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location.",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RestorePointListResult": {
+      "type": "object",
+      "description": "The response of a RestorePoint list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The RestorePoint items on this page",
+          "items": {
+            "$ref": "#/definitions/RestorePoint"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "RestorePointProperties": {
+      "type": "object",
+      "description": "Properties of a database restore point",
+      "properties": {
+        "restorePointType": {
+          "$ref": "./common.json#/definitions/RestorePointType",
+          "description": "The type of restore point",
+          "readOnly": true
+        },
+        "earliestRestoreDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The earliest time to which this database can be restored",
+          "readOnly": true
+        },
+        "restorePointCreationDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the backup was taken",
+          "readOnly": true
+        },
+        "restorePointLabel": {
+          "type": "string",
+          "description": "The label of restore point for backup request by user",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

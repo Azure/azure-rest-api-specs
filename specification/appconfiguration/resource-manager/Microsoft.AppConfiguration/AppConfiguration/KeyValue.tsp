@@ -46,14 +46,19 @@ interface KeyValues {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     KeyValue,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 }
 
-@@doc(KeyValue.name,
+@@doc(
+  KeyValue.name,
   "Identifier of key and label combination. Key and label are joined by $ character. Label is optional."
 );
 @@doc(KeyValue.properties, "All key-value properties.");
-@@doc(KeyValues.createOrUpdate::parameters.resource,
+@@doc(
+  KeyValues.createOrUpdate::parameters.resource,
   "The parameters for creating a key-value."
 );

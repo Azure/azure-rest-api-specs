@@ -1,12 +1,12 @@
 import { BREAKING_CHANGES_CHECK_TYPES } from "@azure-tools/specs-shared/breaking-change";
 import { describe, expect, it } from "vitest";
-import { Context } from "../../src/types/breaking-change.js";
+import { type Context } from "../../src/types/breaking-change.ts";
 import {
   addOadTrace,
   createOadTrace,
   generateOadMarkdown,
   setOadBaseBranch,
-} from "../../src/types/oad-types.js";
+} from "../../src/types/oad-types.ts";
 
 const mockContext: Context = {
   runType: BREAKING_CHANGES_CHECK_TYPES.SAME_VERSION,

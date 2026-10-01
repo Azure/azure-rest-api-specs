@@ -31,7 +31,13 @@ model RecoveryServicesProvider
   location?: string;
 }
 
-model RecoveryServicesProviderAcceptedLroResponse<FinalResult extends TypeSpec.Reflection.Model | unknown | void = RecoveryServicesProvider>
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+model RecoveryServicesProviderAcceptedLroResponse<
+  FinalResult extends
+    | TypeSpec.Reflection.Model
+    | unknown
+    | void = RecoveryServicesProvider
+>
   is ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = FinalResult> &
     Azure.Core.Foundations.RetryAfterHeader>;
 
@@ -52,8 +58,10 @@ interface RecoveryServicesProviders {
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     RecoveryServicesProvider,
     Request = AddRecoveryServicesProviderInput,
-    Response = ArmResourceUpdatedResponse<RecoveryServicesProvider> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RecoveryServicesProvider> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResourceUpdatedResponse<RecoveryServicesProvider>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = RecoveryServicesProvider> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = never
   >;
 
@@ -85,7 +93,8 @@ interface RecoveryServicesProviders {
   refreshProvider is ArmResourceActionAsyncBase<
     RecoveryServicesProvider,
     void,
-    ArmResponse<RecoveryServicesProvider> | RecoveryServicesProviderAcceptedLroResponse,
+    | ArmResponse<RecoveryServicesProvider>
+    | RecoveryServicesProviderAcceptedLroResponse,
     Azure.ResourceManager.Foundations.DefaultBaseParameters<RecoveryServicesProvider>,
     Error = never
   >;
@@ -107,6 +116,7 @@ interface RecoveryServicesProviders {
 
 @@doc(RecoveryServicesProvider.name, "Recovery services provider name.");
 @@doc(RecoveryServicesProvider.properties, "Provider properties.");
-@@doc(RecoveryServicesProviders.create::parameters.resource,
+@@doc(
+  RecoveryServicesProviders.create::parameters.resource,
   "Add provider input."
 );

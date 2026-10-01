@@ -13,7 +13,6 @@ namespace Microsoft.Support;
 /**
  * Object that represents FileWorkspaceDetails resource
  */
-@subscriptionResource
 model FileWorkspaceDetails
   is Azure.ResourceManager.ProxyResource<FileWorkspaceDetailsProperties> {
   ...ResourceNameParameter<

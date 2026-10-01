@@ -13,8 +13,10 @@ namespace Microsoft.ElasticSan;
 /**
  * Response for ElasticSan request.
  */
-model ElasticSan
-  is Azure.ResourceManager.TrackedResource<ElasticSanProperties, false> {
+model ElasticSan is Azure.ResourceManager.TrackedResource<
+  ElasticSanProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = ElasticSan,
     KeyName = "elasticSanName",
@@ -51,7 +53,10 @@ interface ElasticSans {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ElasticSan,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**

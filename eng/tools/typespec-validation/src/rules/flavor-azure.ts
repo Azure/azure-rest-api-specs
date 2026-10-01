@@ -1,45 +1,42 @@
-import { RuleResult } from "../rule-result.js";
-import { Rule } from "../rule.js";
-import { parse } from "../tsp-config.js";
-import { readTspConfig } from "../utils.js";
+import type { ILogger } from "@azure-tools/specs-shared/logger";
+import { join } from "node:path";
+import { type Diagnostic, type RuleResult } from "../rule-result.ts";
+import { type Rule } from "../rule.ts";
+import { parse } from "../tsp-config.ts";
+import { readTspConfig } from "../utils.ts";
 
 export class FlavorAzureRule implements Rule {
   readonly name = "FlavorAzure";
 
   readonly description = "Client emitters must set 'flavor:azure'";
 
-  async execute(folder: string): Promise<RuleResult> {
-    let success = true;
-    let stdOutput = "";
-    let errorOutput = "";
+  async execute(folder: string, logger: ILogger): Promise<RuleResult> {
+    const diagnostics: Diagnostic[] = [];
 
     const configText = await readTspConfig(folder);
-    const config = parse(configText);
+    const config = parse(configText, join(folder, "tspconfig.yaml"));
 
     const options = config?.options;
     for (const emitter in options) {
       if (this.requiresAzureFlavor(emitter)) {
         const flavor = options[emitter]?.flavor;
-
-        stdOutput += `"${emitter}":\n`;
-        stdOutput += `  flavor: ${flavor}\n`;
+        logger.debug(`${emitter}.flavor: ${JSON.stringify(flavor)}`);
 
         if (flavor !== "azure") {
-          success = false;
-          errorOutput +=
-            "tspconfig.yaml must define the following property:\n" +
-            "\n" +
-            "options:\n" +
-            `  "${emitter}":\n` +
-            "    flavor: azure\n\n";
+          diagnostics.push({
+            severity: "error",
+            code: "flavor-azure",
+            path: join(folder, "tspconfig.yaml"),
+            message: `Emitter "${emitter}" must use the Azure flavor.`,
+            help: `Set options.${emitter}.flavor to "azure".`,
+          });
         }
       }
     }
 
     return {
-      success: success,
-      stdOutput: stdOutput,
-      errorOutput: errorOutput,
+      success: diagnostics.length === 0,
+      diagnostics,
     };
   }
 

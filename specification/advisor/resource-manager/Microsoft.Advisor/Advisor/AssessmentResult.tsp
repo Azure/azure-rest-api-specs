@@ -70,9 +70,11 @@ interface AssessmentResults {
 }
 
 @@doc(AssessmentResult.name, "Advisor assessment name.");
-@@doc(AssessmentResult.properties,
+@@doc(
+  AssessmentResult.properties,
   "The Advisor assessment result properties structure."
 );
-@@doc(AssessmentResults.put::parameters.resource,
+@@doc(
+  AssessmentResults.put::parameters.resource,
   "The Azure Advisor assessment data structure."
 );

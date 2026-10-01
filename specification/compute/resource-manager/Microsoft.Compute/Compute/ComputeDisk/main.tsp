@@ -8,7 +8,6 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "../common/legacy.tsp";
 import "../common/operations.tsp";
 import "../common/models-ref.tsp";
 import "./models.tsp";
@@ -19,6 +18,7 @@ import "./DiskEncryptionSet.tsp";
 import "./DiskRestorePoint.tsp";
 import "./Snapshot.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -50,4 +50,10 @@ enum Versions {
    */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
   v2025_01_02: "2025-01-02",
+
+  /**
+   * The 2026-03-02 API version.
+   */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+  v2026_03_02: "2026-03-02",
 }

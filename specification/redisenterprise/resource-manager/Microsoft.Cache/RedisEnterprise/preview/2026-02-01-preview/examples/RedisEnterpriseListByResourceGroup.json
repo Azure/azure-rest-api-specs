@@ -1,0 +1,43 @@
+{
+  "parameters": {
+    "api-version": "2026-02-01-preview",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "name": "cache1",
+            "type": "Microsoft.Cache/redisEnterprise",
+            "id": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1",
+            "kind": "v1",
+            "location": "West US",
+            "properties": {
+              "hostName": "cache1.westus.something.azure.com",
+              "minimumTlsVersion": "1.2",
+              "provisioningState": "Succeeded",
+              "publicNetworkAccess": "Disabled",
+              "redisVersion": "5",
+              "resourceState": "Running"
+            },
+            "sku": {
+              "name": "EnterpriseFlash_F300",
+              "capacity": 3
+            },
+            "tags": {},
+            "zones": [
+              "1",
+              "2",
+              "3"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "RedisEnterprise_ListByResourceGroup",
+  "title": "RedisEnterpriseListByResourceGroup"
+}

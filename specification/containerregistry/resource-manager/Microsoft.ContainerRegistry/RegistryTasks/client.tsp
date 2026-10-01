@@ -5,7 +5,8 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Microsoft.ContainerRegistry;
 
-@@clientName(Microsoft.ContainerRegistry,
+@@clientName(
+  Microsoft.ContainerRegistry,
   "ContainerRegistryTasksManagementClient",
   "javascript"
 );
@@ -13,59 +14,87 @@ using Microsoft.ContainerRegistry;
 @@clientName(Architecture.`386`, "ThreeHundredEightySix", "javascript");
 @@clientName(Architecture.`386`, "X86_386", "java");
 
-@@clientName(Microsoft.ContainerRegistry,
+@@clientName(
+  Microsoft.ContainerRegistry,
   "ContainerRegistryTasksMgmtClient",
   "python"
 );
 
 // C# client naming: avoid suffixes "Request", "Parameters", "Definition" (AZC0030/AZC0031)
-@@clientName(AuthInfoUpdateParameters,
+@@clientName(
+  AuthInfoUpdateParameters,
   "ContainerRegistryTaskAuthInfoUpdateContent",
   "csharp"
 );
-@@clientName(BaseImageTriggerUpdateParameters,
+@@clientName(
+  BaseImageTriggerUpdateParameters,
   "ContainerRegistryTaskBaseImageTriggerUpdateContent",
   "csharp"
 );
-@@clientName(DockerBuildRequest, "DockerBuildContent", "csharp");
-@@clientName(DockerBuildStepUpdateParameters,
-  "DockerBuildStepUpdateContent",
+@@clientName(
+  DockerBuildRequest,
+  "ContainerRegistryDockerBuildContent",
   "csharp"
 );
-@@clientName(EncodedTaskRunRequest, "EncodedTaskRunContent", "csharp");
-@@clientName(EncodedTaskStepUpdateParameters,
-  "EncodedTaskStepUpdateContent",
+@@clientName(
+  DockerBuildStepUpdateParameters,
+  "ContainerRegistryDockerBuildStepUpdateContent",
   "csharp"
 );
-@@clientName(FileTaskRunRequest, "FileTaskRunContent", "csharp");
-@@clientName(FileTaskStepUpdateParameters,
-  "FileTaskStepUpdateContent",
+@@clientName(
+  EncodedTaskRunRequest,
+  "ContainerRegistryEncodedTaskRunContent",
   "csharp"
 );
-@@clientName(PlatformUpdateParameters,
+@@clientName(
+  EncodedTaskStepUpdateParameters,
+  "ContainerRegistryEncodedTaskStepUpdateContent",
+  "csharp"
+);
+@@clientName(
+  FileTaskRunRequest,
+  "ContainerRegistryFileTaskRunContent",
+  "csharp"
+);
+@@clientName(
+  FileTaskStepUpdateParameters,
+  "ContainerRegistryFileTaskStepUpdateContent",
+  "csharp"
+);
+@@clientName(
+  PlatformUpdateParameters,
   "ContainerRegistryTaskPlatformUpdateContent",
   "csharp"
 );
-@@clientName(RunRequest, "RunContent", "csharp");
-@@clientName(SourceTriggerUpdateParameters,
+@@clientName(RunRequest, "ContainerRegistryRunContent", "csharp");
+@@clientName(
+  SourceTriggerUpdateParameters,
   "ContainerRegistryTaskSourceTriggerUpdateContent",
   "csharp"
 );
-@@clientName(SourceUpdateParameters,
+@@clientName(
+  SourceUpdateParameters,
   "ContainerRegistryTaskSourceUpdateContent",
   "csharp"
 );
-@@clientName(SourceUploadDefinition,
+@@clientName(
+  SourceUploadDefinition,
   "ContainerRegistryTaskSourceUploadResult",
   "csharp"
 );
-@@clientName(TaskRunRequest, "TaskRunContent", "csharp");
-@@clientName(TaskStepUpdateParameters, "TaskStepUpdateContent", "csharp");
-@@clientName(TimerTriggerUpdateParameters,
+@@clientName(TaskRunRequest, "ContainerRegistryTaskRunContent", "csharp");
+@@clientName(
+  TaskStepUpdateParameters,
+  "ContainerRegistryTaskStepUpdateContent",
+  "csharp"
+);
+@@clientName(
+  TimerTriggerUpdateParameters,
   "ContainerRegistryTaskTimerTriggerUpdateContent",
   "csharp"
 );
-@@clientName(TriggerUpdateParameters,
+@@clientName(
+  TriggerUpdateParameters,
   "ContainerRegistryTaskTriggerUpdateContent",
   "csharp"
 );
@@ -76,13 +105,15 @@ using Microsoft.ContainerRegistry;
 @@clientName(OS, "ContainerRegistryTaskOS", "csharp");
 @@clientName(Architecture, "ContainerRegistryTaskArchitecture", "csharp");
 @@clientName(Variant, "ContainerRegistryTaskVariant", "csharp");
-@@clientName(ProvisioningState,
+@@clientName(
+  ProvisioningState,
   "ContainerRegistryTaskProvisioningState",
   "csharp"
 );
 @@clientName(SetValue, "ContainerRegistryTaskSetValue", "csharp");
 @@clientName(SecretObject, "ContainerRegistryTaskSecretObject", "csharp");
-@@clientName(SecretObjectType,
+@@clientName(
+  SecretObjectType,
   "ContainerRegistryTaskSecretObjectType",
   "csharp"
 );
@@ -91,6 +122,10 @@ using Microsoft.ContainerRegistry;
 @@clientName(RunStatus, "ContainerRegistryTaskRunStatus", "csharp");
 @@clientName(TaskStatus, "ContainerRegistryTaskStatus", "csharp");
 @@clientName(TriggerStatus, "ContainerRegistryTaskTriggerStatus", "csharp");
+@@clientName(AgentPool, "ContainerRegistryAgentPool", "csharp");
+@@clientName(Run, "ContainerRegistryRun", "csharp");
+@@clientName(Task, "ContainerRegistryTask", "csharp");
+@@clientName(TaskRun, "ContainerRegistryTaskRun", "csharp");
 
 // C# client naming: fix enum value casing
 @@clientName(SecretObjectType.Vaultsecret, "VaultSecret", "csharp");
@@ -101,7 +136,8 @@ using Microsoft.ContainerRegistry;
 @@clientName(AuthInfoUpdateParameters.expiresIn, "ExpiresInSeconds", "csharp");
 @@clientName(DockerBuildRequest.noCache, "IsCacheDisabled", "csharp");
 @@clientName(DockerBuildStep.noCache, "IsCacheDisabled", "csharp");
-@@clientName(DockerBuildStepUpdateParameters.noCache,
+@@clientName(
+  DockerBuildStepUpdateParameters.noCache,
   "IsCacheDisabled",
   "csharp"
 );
@@ -109,7 +145,8 @@ using Microsoft.ContainerRegistry;
 @@clientName(RunFilter.createTime, "CreatedOn", "csharp");
 
 // C# type correctness
-@@alternateType(AgentPoolProperties.virtualNetworkSubnetResourceId,
+@@alternateType(
+  AgentPoolProperties.virtualNetworkSubnetResourceId,
   armResourceIdentifier,
   "csharp"
 );
@@ -124,7 +161,8 @@ using Microsoft.ContainerRegistry;
 
 // Property rename: integer duration properties must include units in the name
 @@clientName(TaskProperties.timeout, "TimeoutInSeconds", "csharp");
-@@clientName(TaskPropertiesUpdateParameters.timeout,
+@@clientName(
+  TaskPropertiesUpdateParameters.timeout,
   "TimeoutInSeconds",
   "csharp"
 );
@@ -140,88 +178,123 @@ using Microsoft.ContainerRegistry;
 
 // C# client naming: prefix generic names with service context
 @@clientName(AuthInfo, "ContainerRegistryTaskAuthInfo", "csharp");
-@@clientName(IdentityProperties,
+@@clientName(
+  IdentityProperties,
   "ContainerRegistryTaskIdentityProperties",
   "csharp"
 );
-@@clientName(UserIdentityProperties,
+@@clientName(
+  UserIdentityProperties,
   "ContainerRegistryTaskUserIdentityProperties",
   "csharp"
 );
-@@clientName(PlatformProperties,
+@@clientName(
+  PlatformProperties,
   "ContainerRegistryTaskPlatformProperties",
   "csharp"
 );
-@@clientName(SourceControlType,
+@@clientName(
+  SourceControlType,
   "ContainerRegistryTaskSourceControlType",
   "csharp"
 );
-@@clientName(SourceRegistryLoginMode,
+@@clientName(
+  SourceRegistryLoginMode,
   "ContainerRegistryTaskSourceRegistryLoginMode",
   "csharp"
 );
-@@clientName(SourceRegistryCredentials,
+@@clientName(
+  SourceRegistryCredentials,
   "ContainerRegistryTaskSourceRegistryCredentials",
   "csharp"
 );
-@@clientName(SourceProperties,
+@@clientName(
+  SourceProperties,
   "ContainerRegistryTaskSourceProperties",
   "csharp"
 );
 @@clientName(SourceTrigger, "ContainerRegistryTaskSourceTrigger", "csharp");
-@@clientName(SourceTriggerDescriptor,
+@@clientName(
+  SourceTriggerDescriptor,
   "ContainerRegistryTaskSourceTriggerDescriptor",
   "csharp"
 );
-@@clientName(SourceTriggerEvent,
+@@clientName(
+  SourceTriggerEvent,
   "ContainerRegistryTaskSourceTriggerEvent",
   "csharp"
 );
-@@clientName(CustomRegistryCredentials,
+@@clientName(
+  CustomRegistryCredentials,
   "ContainerRegistryTaskCustomRegistryCredentials",
   "csharp"
 );
-@@clientName(BaseImageDependency,
+@@clientName(
+  BaseImageDependency,
   "ContainerRegistryTaskBaseImageDependency",
   "csharp"
 );
-@@clientName(BaseImageDependencyType,
+@@clientName(
+  BaseImageDependencyType,
   "ContainerRegistryTaskBaseImageDependencyType",
   "csharp"
 );
-@@clientName(BaseImageTrigger,
+@@clientName(
+  BaseImageTrigger,
   "ContainerRegistryTaskBaseImageTrigger",
   "csharp"
 );
-@@clientName(BaseImageTriggerType,
+@@clientName(
+  BaseImageTriggerType,
   "ContainerRegistryTaskBaseImageTriggerType",
   "csharp"
 );
 @@clientName(ImageDescriptor, "ContainerRegistryTaskImageDescriptor", "csharp");
-@@clientName(ImageUpdateTrigger,
+@@clientName(
+  ImageUpdateTrigger,
   "ContainerRegistryTaskImageUpdateTrigger",
   "csharp"
 );
-@@clientName(TriggerProperties,
+@@clientName(
+  TriggerProperties,
   "ContainerRegistryTaskTriggerProperties",
   "csharp"
 );
 @@clientName(TimerTrigger, "ContainerRegistryTaskTimerTrigger", "csharp");
-@@clientName(TimerTriggerDescriptor,
+@@clientName(
+  TimerTriggerDescriptor,
   "ContainerRegistryTaskTimerTriggerDescriptor",
   "csharp"
 );
-@@clientName(OverrideTaskStepProperties,
+@@clientName(
+  OverrideTaskStepProperties,
   "ContainerRegistryTaskOverrideStepProperties",
   "csharp"
 );
-@@clientName(UpdateTriggerPayloadType,
+@@clientName(
+  UpdateTriggerPayloadType,
   "ContainerRegistryTaskUpdateTriggerPayloadType",
   "csharp"
 );
 @@clientName(RunGetLogResult, "ContainerRegistryTaskRunLogResult", "csharp");
-@@clientName(ResourceIdentityType,
+@@clientName(
+  ResourceIdentityType,
   "ContainerRegistryTaskResourceIdentityType",
+  "csharp"
+);
+
+// C# client naming: prefix step, status and request models with service context
+@@clientName(
+  TaskStepProperties,
+  "ContainerRegistryTaskStepProperties",
+  "csharp"
+);
+@@clientName(DockerBuildStep, "ContainerRegistryDockerBuildStep", "csharp");
+@@clientName(EncodedTaskStep, "ContainerRegistryEncodedTaskStep", "csharp");
+@@clientName(FileTaskStep, "ContainerRegistryFileTaskStep", "csharp");
+@@clientName(
+  AgentPoolQueueStatus,
+  "ContainerRegistryAgentPoolQueueStatus",
   "csharp"
 );
 

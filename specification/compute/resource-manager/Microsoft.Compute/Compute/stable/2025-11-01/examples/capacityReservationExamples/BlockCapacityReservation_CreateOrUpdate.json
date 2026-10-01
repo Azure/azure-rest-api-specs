@@ -1,0 +1,86 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2025-11-01",
+    "parameters": {
+      "location": "westus",
+      "tags": {
+        "department": "HR"
+      },
+      "sku": {
+        "name": "Standard_ND96isr_H100_v5",
+        "capacity": 1
+      },
+      "properties": {
+        "scheduleProfile": {
+          "start": "2025-08-01",
+          "end": "2025-08-02"
+        }
+      },
+      "zones": [
+        "1"
+      ]
+    },
+    "capacityReservationGroupName": "blockCapacityReservationGroup",
+    "capacityReservationName": "blockCapacityReservation"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "blockCapacityReservation",
+        "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/blockCapacityReservationGroup/capacityReservations/blockCapacityReservation",
+        "tags": {
+          "department": "HR"
+        },
+        "sku": {
+          "name": "Standard_ND96isr_H100_v5",
+          "capacity": 1
+        },
+        "zones": [
+          "1"
+        ],
+        "properties": {
+          "platformFaultDomainCount": 3,
+          "reservationId": "{GUID}",
+          "provisioningState": "Creating",
+          "scheduleProfile": {
+            "start": "2025-08-01",
+            "end": "2025-08-02"
+          },
+          "provisioningTime": "2021-06-27T01:02:38.3138469+00:00"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "blockCapacityReservation",
+        "location": "westus",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/blockCapacityReservationGroup/capacityReservations/blockCapacityReservation",
+        "tags": {
+          "department": "HR"
+        },
+        "sku": {
+          "name": "Standard_ND96isr_H100_v5",
+          "capacity": 1
+        },
+        "zones": [
+          "1"
+        ],
+        "properties": {
+          "platformFaultDomainCount": 3,
+          "reservationId": "{GUID}",
+          "provisioningState": "Creating",
+          "scheduleProfile": {
+            "start": "2025-08-01",
+            "end": "2025-08-02"
+          },
+          "provisioningTime": "2021-06-27T01:02:38.3138469+00:00"
+        }
+      }
+    }
+  },
+  "operationId": "CapacityReservations_CreateOrUpdate",
+  "title": "Create or update a block capacity reservation."
+}

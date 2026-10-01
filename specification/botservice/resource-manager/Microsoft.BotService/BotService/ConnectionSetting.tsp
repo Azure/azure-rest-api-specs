@@ -85,7 +85,9 @@ interface ConnectionSettings {
   update is ArmCustomPatchSync<
     ConnectionSetting,
     PatchModel = ConnectionSetting,
-    Response = ArmResponse<ConnectionSetting> | ArmResourceCreatedSyncResponse<ConnectionSetting>,
+    Response =
+      | ArmResponse<ConnectionSetting>
+      | ArmResourceCreatedSyncResponse<ConnectionSetting>,
     Error = Error
   >;
 
@@ -119,15 +121,19 @@ interface ConnectionSettings {
 
 @@maxLength(ConnectionSetting.name, 64);
 @@minLength(ConnectionSetting.name, 2);
-@@doc(ConnectionSetting.name,
+@@doc(
+  ConnectionSetting.name,
   "The name of the Bot Service Connection Setting resource."
 );
-@@doc(ConnectionSetting.properties,
+@@doc(
+  ConnectionSetting.properties,
   "The set of properties specific to bot channel resource"
 );
-@@doc(ConnectionSettings.create::parameters.resource,
+@@doc(
+  ConnectionSettings.create::parameters.resource,
   "The parameters to provide for creating the Connection Setting."
 );
-@@doc(ConnectionSettings.update::parameters.properties,
+@@doc(
+  ConnectionSettings.update::parameters.properties,
   "The parameters to provide for updating the Connection Setting."
 );

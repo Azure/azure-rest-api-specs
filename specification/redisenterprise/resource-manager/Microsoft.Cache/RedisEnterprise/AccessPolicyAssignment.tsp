@@ -57,12 +57,15 @@ interface AccessPolicyAssignments {
   >;
 }
 
-@@doc(AccessPolicyAssignment.name,
+@@doc(
+  AccessPolicyAssignment.name,
   "The name of the Redis Enterprise database access policy assignment."
 );
-@@doc(AccessPolicyAssignment.properties,
+@@doc(
+  AccessPolicyAssignment.properties,
   "Properties of the access policy assignment."
 );
-@@doc(AccessPolicyAssignments.createUpdate::parameters.resource,
+@@doc(
+  AccessPolicyAssignments.createUpdate::parameters.resource,
   "Parameters supplied to the create access policy assignment for database."
 );

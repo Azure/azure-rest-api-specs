@@ -1466,6 +1466,235 @@
     }
   },
   "x-ms-paths": {
+    "?restype=service&comp=properties": {
+      "put": {
+        "operationId": "Service_SetProperties",
+        "description": "Sets properties for an account's Table service endpoint, including properties\nfor Analytics and CORS (Cross-Origin Resource Sharing) rules.",
+        "produces": [
+          "application/xml"
+        ],
+        "consumes": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "The API version.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          },
+          {
+            "name": "Accept",
+            "in": "header",
+            "description": "Even though the response is 204, we need explicit Accept.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "application/xml"
+            ],
+            "x-ms-enum": {
+              "modelAsString": false
+            },
+            "x-ms-client-name": "accept"
+          },
+          {
+            "name": "tableServiceProperties",
+            "in": "body",
+            "description": "The table service properties to set.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TableServiceProperties"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-version": {
+                "type": "string",
+                "description": "The API version."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/TablesServiceError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code."
+              }
+            }
+          }
+        }
+      }
+    },
+    "?restype=service&comp=properties&_overload=getProperties": {
+      "get": {
+        "operationId": "Service_GetProperties",
+        "description": "Gets the properties of an account's Table service, including properties for\nAnalytics and CORS (Cross-Origin Resource Sharing) rules.",
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "The API version.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TableServiceProperties"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-version": {
+                "type": "string",
+                "description": "The API version."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/TablesServiceError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code."
+              }
+            }
+          }
+        }
+      }
+    },
+    "?restype=service&comp=stats": {
+      "get": {
+        "operationId": "Service_GetStatistics",
+        "description": "Retrieves statistics related to replication for the Table service. It is only\navailable on the secondary location endpoint when read-access geo-redundant\nreplication is enabled for the account.",
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "name": "x-ms-version",
+            "in": "header",
+            "description": "The API version.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "apiVersion"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          },
+          {
+            "name": "timeout",
+            "in": "query",
+            "description": "The timeout parameter is expressed in seconds.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "minimum": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TableServiceStats"
+            },
+            "headers": {
+              "Date": {
+                "type": "string",
+                "format": "date-time-rfc7231",
+                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
+              },
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              },
+              "x-ms-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, server-generated string identifier for the request."
+              },
+              "x-ms-version": {
+                "type": "string",
+                "description": "The API version."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/TablesServiceError"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "The error code."
+              }
+            }
+          }
+        }
+      }
+    },
     "/{table}?comp=acl": {
       "get": {
         "operationId": "Table_GetAccessPolicy",
@@ -1610,235 +1839,6 @@
         "responses": {
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful. ",
-            "headers": {
-              "Date": {
-                "type": "string",
-                "format": "date-time-rfc7231",
-                "description": "UTC date/time value generated by the service that indicates the time at which the response was initiated"
-              },
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              },
-              "x-ms-version": {
-                "type": "string",
-                "description": "The API version."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/TablesServiceError"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/?restype=service&comp=properties": {
-      "put": {
-        "operationId": "Service_SetProperties",
-        "description": "Sets properties for an account's Table service endpoint, including properties\nfor Analytics and CORS (Cross-Origin Resource Sharing) rules.",
-        "produces": [
-          "application/xml"
-        ],
-        "consumes": [
-          "application/xml"
-        ],
-        "parameters": [
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "The API version.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "apiVersion"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "description": "Even though the response is 204, we need explicit Accept.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "application/xml"
-            ],
-            "x-ms-enum": {
-              "modelAsString": false
-            },
-            "x-ms-client-name": "accept"
-          },
-          {
-            "name": "tableServiceProperties",
-            "in": "body",
-            "description": "The table service properties to set.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TableServiceProperties"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              },
-              "x-ms-version": {
-                "type": "string",
-                "description": "The API version."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/TablesServiceError"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/?restype=service&comp=properties&_overload=getProperties": {
-      "get": {
-        "operationId": "Service_GetProperties",
-        "description": "Gets the properties of an account's Table service, including properties for\nAnalytics and CORS (Cross-Origin Resource Sharing) rules.",
-        "produces": [
-          "application/xml"
-        ],
-        "parameters": [
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "The API version.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "apiVersion"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/TableServiceProperties"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              },
-              "x-ms-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, server-generated string identifier for the request."
-              },
-              "x-ms-version": {
-                "type": "string",
-                "description": "The API version."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/TablesServiceError"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "The error code."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/?restype=service&comp=stats": {
-      "get": {
-        "operationId": "Service_GetStatistics",
-        "description": "Retrieves statistics related to replication for the Table service. It is only\navailable on the secondary location endpoint when read-access geo-redundant\nreplication is enabled for the account.",
-        "produces": [
-          "application/xml"
-        ],
-        "parameters": [
-          {
-            "name": "x-ms-version",
-            "in": "header",
-            "description": "The API version.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "apiVersion"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          },
-          {
-            "name": "timeout",
-            "in": "query",
-            "description": "The timeout parameter is expressed in seconds.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "minimum": 0
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/TableServiceStats"
-            },
             "headers": {
               "Date": {
                 "type": "string",

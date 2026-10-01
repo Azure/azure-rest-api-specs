@@ -2,33 +2,42 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 //Models
-@@usage(Microsoft.EventGrid.SystemEvents.PolicyInsightsPolicyStateCreatedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.PolicyInsightsPolicyStateCreatedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.PolicyInsightsPolicyStateCreatedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.PolicyInsightsPolicyStateCreatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.PolicyInsightsPolicyStateChangedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.PolicyInsightsPolicyStateChangedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.PolicyInsightsPolicyStateChangedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.PolicyInsightsPolicyStateChangedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.PolicyInsightsPolicyStateDeletedEventData,
+@@usage(
+  Microsoft.EventGrid.SystemEvents.PolicyInsightsPolicyStateDeletedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.PolicyInsightsPolicyStateDeletedEventData,
+@@access(
+  Microsoft.EventGrid.SystemEvents.PolicyInsightsPolicyStateDeletedEventData,
   Access.public
 );
 //Enums
 
 //useSystemTextJsonConverter decorators
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.PolicyInsightsPolicyStateCreatedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.PolicyInsightsPolicyStateCreatedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.PolicyInsightsPolicyStateChangedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.PolicyInsightsPolicyStateChangedEventData,
   "csharp"
 );
-@@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.PolicyInsightsPolicyStateDeletedEventData,
+@@useSystemTextJsonConverter(
+  Microsoft.EventGrid.SystemEvents.PolicyInsightsPolicyStateDeletedEventData,
   "csharp"
 );

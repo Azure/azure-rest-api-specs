@@ -1,4 +1,4 @@
-import { jsonOutput } from "./jsonOutput.js";
+import { jsonOutput } from "./jsonOutput.ts";
 
 /**
  * Interface representing a value and the set of JSON paths where it appears

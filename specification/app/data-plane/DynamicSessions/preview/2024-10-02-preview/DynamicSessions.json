@@ -55,7 +55,7 @@
     "/executions": {
       "post": {
         "operationId": "CodeExecution_Execute",
-        "description": "Execute code in a session.",
+        "description": "Execute code in a session. This is only supported for code-interpreter session pools.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -131,7 +131,7 @@
     "/executions/{executionId}": {
       "get": {
         "operationId": "CodeExecution_Get",
-        "description": "Get the code execution result.",
+        "description": "Get the code execution result. This is only supported for code-interpreter session pools.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -186,7 +186,7 @@
     "/files": {
       "get": {
         "operationId": "SessionResourceFiles_List",
-        "description": "List the file resources.",
+        "description": "List the file resources. This is only supported for code-interpreter session pools.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -229,7 +229,7 @@
       },
       "post": {
         "operationId": "SessionResourceFiles_Upload",
-        "description": "Upload a file to a session.",
+        "description": "Upload a file to a session. This is only supported for code-interpreter session pools.",
         "consumes": [
           "multipart/form-data"
         ],
@@ -281,7 +281,7 @@
     "/files/{name}": {
       "get": {
         "operationId": "SessionResourceFiles_Get",
-        "description": "Get the file resource.",
+        "description": "Get the file resource. This is only supported for code-interpreter session pools.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -328,7 +328,7 @@
       },
       "delete": {
         "operationId": "SessionResourceFiles_Delete",
-        "description": "Delete the file.",
+        "description": "Delete the file. This is only supported for code-interpreter session pools.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -374,7 +374,7 @@
     "/files/{name}/content": {
       "get": {
         "operationId": "SessionResourceFiles_GetContent",
-        "description": "Get the content of the file.",
+        "description": "Get the content of the file. This is only supported for code-interpreter session pools.",
         "produces": [
           "application/octet-stream",
           "application/json"

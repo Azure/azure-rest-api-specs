@@ -9334,8 +9334,7 @@
           "description": "The Availability zone in which machine is located.",
           "items": {
             "type": "string"
-          },
-          "readOnly": true
+          }
         }
       },
       "allOf": [
@@ -9618,8 +9617,7 @@
       "properties": {
         "network": {
           "$ref": "#/definitions/MachineNetworkProperties",
-          "description": "network properties of the machine",
-          "readOnly": true
+          "description": "network properties of the machine"
         },
         "resourceId": {
           "type": "string",
@@ -10247,8 +10245,7 @@
         },
         "nodeImageVersion": {
           "type": "string",
-          "description": "The version of node image",
-          "readOnly": true
+          "description": "The version of node image"
         },
         "upgradeStrategy": {
           "$ref": "#/definitions/UpgradeStrategy",
@@ -11867,15 +11864,18 @@
       "properties": {
         "kubernetesVersion": {
           "type": "string",
-          "description": "The current kubernetes version."
+          "description": "The current kubernetes version.",
+          "readOnly": true
         },
         "sku": {
           "$ref": "#/definitions/ManagedClusterSKU",
-          "description": "The current managed cluster sku."
+          "description": "The current managed cluster sku.",
+          "readOnly": true
         },
         "enableRbac": {
           "type": "boolean",
-          "description": "Whether the cluster has enabled Kubernetes Role-Based Access Control or not."
+          "description": "Whether the cluster has enabled Kubernetes Role-Based Access Control or not.",
+          "readOnly": true
         },
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfileForSnapshot",

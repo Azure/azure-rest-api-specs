@@ -17,6 +17,7 @@ namespace Microsoft.Cdn;
  * Deployment version object
  */
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @parentResource(Profile)
 model DeploymentVersion
   is Azure.ResourceManager.ProxyResource<DeploymentVersionProperties> {
@@ -29,6 +30,7 @@ model DeploymentVersion
 }
 
 @added(Versions.v2025_09_01_preview)
+@removed(Versions.v2025_12_01)
 @armResourceOperations
 interface DeploymentVersions {
   /**
@@ -72,15 +74,19 @@ interface DeploymentVersions {
 
 @@maxLength(DeploymentVersion.name, 260);
 @@minLength(DeploymentVersion.name, 1);
-@@doc(DeploymentVersion.name,
+@@doc(
+  DeploymentVersion.name,
   "Name of the DeploymentVersion under the profile."
 );
-@@doc(DeploymentVersion.properties,
+@@doc(
+  DeploymentVersion.properties,
   "The JSON object that contains the properties of the deployment version."
 );
-@@doc(DeploymentVersions.update::parameters.properties,
+@@doc(
+  DeploymentVersions.update::parameters.properties,
   "Deployment version properties"
 );
-@@doc(DeploymentVersions.compare::parameters.body,
+@@doc(
+  DeploymentVersions.compare::parameters.body,
   "The deployment version to be compared to"
 );

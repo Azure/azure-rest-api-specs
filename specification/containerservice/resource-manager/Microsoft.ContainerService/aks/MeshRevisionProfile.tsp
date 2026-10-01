@@ -28,7 +28,8 @@ model MeshRevisionProfile is ProxyResource<MeshRevisionProfileProperties> {
 @@maxLength(MeshRevisionProfile.name, 24);
 @@minLength(MeshRevisionProfile.name, 1);
 @@doc(MeshRevisionProfile.name, "The mode of the mesh.");
-@@doc(MeshRevisionProfile.properties,
+@@doc(
+  MeshRevisionProfile.properties,
   "Mesh revision profile properties for a mesh"
 );
 

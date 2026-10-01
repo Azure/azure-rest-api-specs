@@ -52,10 +52,12 @@ interface HostNameBindingOps
         @segment("hostNameBindings")
         @key
         hostName: string,
-      }
+      },
+      ResourceName = "SiteHostNameBinding"
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface HostNameBindings {
   /**
    * Description for Get the named hostname binding for an app (or deployment slot, if specified).
@@ -123,10 +125,12 @@ interface HostNameBindingOperationGroupOps
         @segment("hostNameBindings")
         @key
         hostName: string,
-      }
+      },
+      ResourceName = "SiteSlotHostNameBinding"
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface HostNameBindingOperationGroup {
   /**
    * Description for Get the named hostname binding for an app (or deployment slot, if specified).
@@ -170,12 +174,15 @@ interface HostNameBindingOperationGroup {
 }
 
 @@doc(HostNameBinding.name, "Hostname in the hostname binding.");
-@@doc(HostNameBinding.properties,
+@@doc(
+  HostNameBinding.properties,
   "HostNameBinding resource specific properties"
 );
-@@doc(HostNameBindings.createOrUpdateHostNameBinding::parameters.resource,
+@@doc(
+  HostNameBindings.createOrUpdateHostNameBinding::parameters.resource,
   "Binding details. This is the JSON representation of a HostNameBinding object."
 );
-@@doc(HostNameBindingOperationGroup.createOrUpdateHostNameBindingSlot::parameters.resource,
+@@doc(
+  HostNameBindingOperationGroup.createOrUpdateHostNameBindingSlot::parameters.resource,
   "Binding details. This is the JSON representation of a HostNameBinding object."
 );

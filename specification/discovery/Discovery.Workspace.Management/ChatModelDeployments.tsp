@@ -37,6 +37,22 @@ model ChatModelDeploymentProperties {
   @doc("Canonical provider model name available in the selected region. Verify supported values per region using the Model Catalog API.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
   modelName: string;
+
+  @doc("Provider-published version of the selected model.")
+  @added(Versions.v2026_06_01)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  modelVersion?: string;
+
+  @doc("SKU tier used by this chat model deployment.")
+  @added(Versions.v2026_06_01)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  skuName?: string;
+
+  @doc("Provisioned SKU capacity units for this chat model deployment.")
+  @added(Versions.v2026_06_01)
+  @minValue(1)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  capacity?: int32;
 }
 
 @armResourceOperations

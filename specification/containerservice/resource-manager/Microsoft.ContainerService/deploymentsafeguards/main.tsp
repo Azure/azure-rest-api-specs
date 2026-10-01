@@ -2,6 +2,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./deploymentsafeguards.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Http;
@@ -24,6 +25,7 @@ enum Versions {
   v2025_04_02_preview: "2025-04-02-preview",
 
   /** 2025-04-01 version */
+  #suppress "@azure-tools/typespec-azure-resource-manager/version-progression" "Existing API"
   @doc("Deployment Safeguards api version 2025-04-01")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   v2025_04_01: "2025-04-01",

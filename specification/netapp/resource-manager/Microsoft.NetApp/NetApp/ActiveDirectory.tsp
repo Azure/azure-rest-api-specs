@@ -16,6 +16,16 @@ namespace Microsoft.NetApp;
  * Active Directory Configuration resource
  */
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_04_01)
+@added(Versions.v2026_04_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_15_preview)
 model ActiveDirectoryConfig
   is TrackedResource<ActiveDirectoryConfigProperties> {
   ...ResourceNameParameter<
@@ -33,6 +43,16 @@ model ActiveDirectoryConfig
  * Active Directory Configuration properties
  */
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_04_01)
+@added(Versions.v2026_04_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_15_preview)
 model ActiveDirectoryConfigProperties {
   ...ActiveDirectoryConfigCommonProperties;
 
@@ -52,6 +72,16 @@ model ActiveDirectoryConfigProperties {
 
 /** Active Directory Configuration common properties */
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_04_01)
+@added(Versions.v2026_04_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_15_preview)
 model ActiveDirectoryConfigCommonProperties {
   /** A domain user account with permission to create machine accounts */
   @maxLength(255)
@@ -70,7 +100,7 @@ model ActiveDirectoryConfigCommonProperties {
 
   /** The Active Directory site the service will limit Domain Controller discovery to */
   @maxLength(63)
-  site?: string;
+  site: string;
 
   /** Users to be added to the Built-in Backup Operator active directory group. A list of unique usernames without domain specifier */
   backupOperators?: string[];
@@ -88,6 +118,16 @@ model ActiveDirectoryConfigCommonProperties {
 
 /** Access password from Azure KeyVault Secrets to connect Active Directory */
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_04_01)
+@added(Versions.v2026_04_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_15_preview)
 model SecretPassword {
   /** Properties provided by KeyVault. */
   keyVaultProperties?: SecretPasswordKeyVaultProperties;
@@ -98,6 +138,16 @@ model SecretPassword {
 
 /** Properties of key vault to get the secrets for password. */
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_04_01)
+@added(Versions.v2026_04_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_15_preview)
 model SecretPasswordKeyVaultProperties {
   /** The Uri of KeyVault. */
   @maxLength(255)
@@ -110,6 +160,16 @@ model SecretPasswordKeyVaultProperties {
 
 /** Identity used to authenticate with key vault. */
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_04_01)
+@added(Versions.v2026_04_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_15_preview)
 model SecretPasswordIdentity {
   /** The principal ID (object ID) of the identity used to authenticate with key vault. Read-only. */
   @visibility(Lifecycle.Read)
@@ -121,6 +181,16 @@ model SecretPasswordIdentity {
 
 /** Active Directory Configuration patch properties */
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_04_01)
+@added(Versions.v2026_04_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_15_preview)
 model ActiveDirectoryConfigPatchProperties {
   ...ActiveDirectoryConfigCommonProperties;
 
@@ -130,6 +200,16 @@ model ActiveDirectoryConfigPatchProperties {
 
 /** Access Password from Azure KeyVault Secret to connect Active Directory on patch */
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_04_01)
+@added(Versions.v2026_04_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_15_preview)
 model SecretPasswordPatch {
   /** Patch Properties provided by KeyVault. */
   keyVaultProperties?: SecretPasswordKeyVaultPatchProperties;
@@ -140,6 +220,16 @@ model SecretPasswordPatch {
 
 /** Patch Properties of key vault to get the secrets for password. */
 @added(Versions.v2025_12_15_preview)
+@removed(Versions.v2026_01_01)
+@added(Versions.v2026_01_15_preview)
+@removed(Versions.v2026_03_01)
+@added(Versions.v2026_03_15_preview)
+@removed(Versions.v2026_04_01)
+@added(Versions.v2026_04_15_preview)
+@removed(Versions.v2026_05_01)
+@added(Versions.v2026_05_15_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_06_15_preview)
 model SecretPasswordKeyVaultPatchProperties {
   /** The Uri of KeyVault. */
   @maxLength(255)
@@ -154,14 +244,45 @@ model SecretPasswordKeyVaultPatchProperties {
 interface ActiveDirectoryConfigs {
   /** Get the details of the specified active directory configuration */
   @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_06_01)
+  @added(Versions.v2026_06_15_preview)
   get is ArmResourceRead<ActiveDirectoryConfig>;
 
   /** Create or update the specified active directory configuration */
   @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_06_01)
+  @added(Versions.v2026_06_15_preview)
   createOrUpdate is ArmResourceCreateOrUpdateAsync<ActiveDirectoryConfig>;
 
   /** Patch the specified active directory configuration */
+  #suppress "@typespec/http/deprecated-implicit-optionality" "Legacy implicit optionality - DO NOT COPY"
   @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_06_01)
+  @added(Versions.v2026_06_15_preview)
   @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     ActiveDirectoryConfig,
@@ -175,14 +296,44 @@ interface ActiveDirectoryConfigs {
 
   /** Delete the specified Active Directory configuration */
   @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_06_01)
+  @added(Versions.v2026_06_15_preview)
   delete is ArmResourceDeleteWithoutOkAsync<ActiveDirectoryConfig>;
 
   /** List all active directory configurations within the resource group. */
   @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_06_01)
+  @added(Versions.v2026_06_15_preview)
   listByResourceGroup is ArmResourceListByParent<ActiveDirectoryConfig>;
 
   /** List all active directory configurations within the subscription */
   @added(Versions.v2025_12_15_preview)
+  @removed(Versions.v2026_01_01)
+  @added(Versions.v2026_01_15_preview)
+  @removed(Versions.v2026_03_01)
+  @added(Versions.v2026_03_15_preview)
+  @removed(Versions.v2026_04_01)
+  @added(Versions.v2026_04_15_preview)
+  @removed(Versions.v2026_05_01)
+  @added(Versions.v2026_05_15_preview)
+  @removed(Versions.v2026_06_01)
+  @added(Versions.v2026_06_15_preview)
   listBySubscription is ArmListBySubscription<ActiveDirectoryConfig>;
 }
 

@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.SecurityInsights;
 /**
@@ -36,7 +37,12 @@ interface Relations {
    * Gets a relation for a given incident.
    */
   @tag("IncidentRelations")
-  get is Extension.Read<OperationalInsights, Relation, Error = CloudError>;
+  get is Extension.Read<
+    OperationalInsights,
+    Relation,
+    Error = CloudError,
+    OverrideResourceName = "SecurityInsightsIncidentRelation"
+  >;
 
   /**
    * Creates or updates a relation for a given incident.
@@ -45,7 +51,8 @@ interface Relations {
   createOrUpdate is Extension.CreateOrReplaceSync<
     OperationalInsights,
     Relation,
-    Error = CloudError
+    Error = CloudError,
+    OverrideResourceName = "SecurityInsightsIncidentRelation"
   >;
 
   /**
@@ -55,7 +62,8 @@ interface Relations {
   delete is Extension.DeleteSync<
     OperationalInsights,
     Relation,
-    Error = CloudError
+    Error = CloudError,
+    OverrideResourceName = "SecurityInsightsIncidentRelation"
   >;
 
   /**
@@ -91,11 +99,13 @@ interface Relations {
       $skipToken?: string;
     },
     Response = ArmResponse<RelationList>,
-    Error = CloudError
+    Error = CloudError,
+    OverrideResourceName = "SecurityInsightsIncidentRelation"
   >;
 }
 
 @armResourceOperations
+@added(Versions.v2025_10_01_preview)
 interface BookmarkRelationsOps
   extends Azure.ResourceManager.Legacy.ExtensionOperations<
       {
@@ -144,10 +154,12 @@ interface BookmarkRelationsOps
         @minLength(3)
         @maxLength(63)
         relationName: string,
-      }
+      },
+      ResourceName = "SecurityInsightsBookmarkRelation"
     > {}
 
 @armResourceOperations
+@added(Versions.v2025_10_01_preview)
 interface BookmarkRelations {
   /**
    * Gets a bookmark relation.
@@ -204,6 +216,7 @@ interface BookmarkRelations {
 }
 
 @armResourceOperations
+@added(Versions.v2025_10_01_preview)
 interface EntityRelationOps
   extends Azure.ResourceManager.Legacy.ExtensionOperations<
       {
@@ -250,10 +263,12 @@ interface EntityRelationOps
         @minLength(3)
         @maxLength(63)
         relationName: string,
-      }
+      },
+      ResourceName = "SecurityInsightsEntityRelation"
     > {}
 
 @armResourceOperations
+@added(Versions.v2025_10_01_preview)
 interface EntityRelations {
   /**
    * Gets an entity relation.

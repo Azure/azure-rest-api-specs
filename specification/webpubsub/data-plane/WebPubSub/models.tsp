@@ -2,9 +2,55 @@ import "@typespec/http";
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
 
-using Azure.Core;
+using TypeSpec.Http;
 
-namespace WebPubSub;
+namespace WebPubSubService;
+
+/**
+ * Inner error detail.
+ */
+model InnerError {
+  /** A more specific error code than was provided by the containing error. */
+  code?: string;
+
+  /** Inner error. */
+  inner?: InnerError;
+}
+
+/**
+ * The error object.
+ */
+model ErrorDetail {
+  /** One of a server-defined set of error codes. */
+  code?: string;
+
+  /** A human-readable representation of the error. */
+  message?: string;
+
+  /** The target of the error. */
+  target?: string;
+
+  /** An array of details about specific errors that led to this reported error. */
+  details?: ErrorDetail[];
+
+  /** An object containing more specific information about the error. */
+  inner?: InnerError;
+}
+
+/**
+ * The error response.
+ */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
+@error
+model ErrorResponse {
+  /** The error detail body. */
+  @body
+  body: ErrorDetail;
+
+  /** The error code. */
+  @header("x-ms-error-code")
+  errorCode?: string;
+}
 
 /**
  * Details about the client.
@@ -20,17 +66,19 @@ model ClientDetail {
 /**
  * The response object containing the client access token
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model ClientTokenResponse {
   /** Access token for the client to connect Azure Web PubSub service */
-  token?: string;
+  token: string;
 }
 
 /**
  * Request object to add connections to groups
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model AddToGroupsRequest {
   /** Target groups */
-  groups?: string[];
+  groups: string[];
 
   /** Following OData filter syntax to filter out the subscribers receiving the messages */
   filter?: string;
@@ -39,9 +87,10 @@ model AddToGroupsRequest {
 /**
  * Request object to remove connections from groups
  */
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model RemoveFromGroupsRequest {
   /** Target groups */
-  groups?: string[];
+  groups: string[];
 
   /** Following OData filter syntax to filter out the subscribers receiving the messages */
   filter?: string;
@@ -96,6 +145,11 @@ union MessageContentType {
 #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "Intentionally closed for HTTP Content-Type header compliance"
 union ResponseContentType {
   /**
+   * Content Type 'text/plain'
+   */
+  "text/plain",
+
+  /**
    * Content Type 'application/json'
    */
   "application/json",
@@ -123,7 +177,7 @@ model GroupMember {
 model GroupMemberPagedValues {
   /** The group members */
   @pageItems
-  value?: GroupMember[];
+  value: GroupMember[];
 
   /** The link to the next page of results */
   @nextLink

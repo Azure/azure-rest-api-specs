@@ -19,7 +19,6 @@ namespace Microsoft.DataBoxEdge;
 model Order is Azure.ResourceManager.ProxyResource<OrderProperties> {
   ...ResourceNameParameter<
     Resource = Order,
-    KeyName = "order",
     SegmentName = "orders",
     NamePattern = ""
   >;
@@ -47,8 +46,10 @@ interface Orders {
   @summary("Creates or updates an order.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Order,
-    Response = ArmResourceUpdatedResponse<Order> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Order> &
-      Azure.Core.Foundations.RetryAfterHeader>,
+    Response =
+      | ArmResourceUpdatedResponse<Order>
+      | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Order> &
+          Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 
@@ -59,7 +60,10 @@ interface Orders {
   @summary("Deletes the order related to the device.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Order,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -88,6 +92,7 @@ interface Orders {
 
 @@doc(Order.name, "");
 @@doc(Order.properties, "The order properties.");
-@@doc(Orders.createOrUpdate::parameters.resource,
+@@doc(
+  Orders.createOrUpdate::parameters.resource,
   "The order to be created or updated."
 );

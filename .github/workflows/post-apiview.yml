@@ -1,0 +1,34 @@
+name: After APIView
+
+on:
+  check_run:
+    types: [completed]
+
+permissions:
+  pull-requests: write
+  contents: read
+
+jobs:
+  post-apiview:
+    name: After APIView
+    runs-on: ${{ github.repository == 'Azure/azure-rest-api-specs' && 'azsdk-pool-github-test' || 'azsdk-pool-github-test-pr' }}
+    if: |
+      github.event.check_run.check_suite.app.name == 'Azure Pipelines' && (
+      contains(github.event.check_run.name, 'Build Build') ||
+      contains(github.event.check_run.name, 'Build Analyze') ||
+      contains(github.event.check_run.name, 'SDK Validation') )
+    steps:
+      - name: Checkout
+        uses: $/.github/actions/checkout
+        with:
+          sparse-checkout: "eng/common"
+
+      - name: Create APIView Comment on PR
+        run: |
+          . "eng/common/scripts/Helpers/ApiView-Helpers.ps1"
+          Set-ApiViewCommentForRelatedIssues -HeadCommitish $env:HEAD_SHA -AuthToken $env:GITHUB_TOKEN -GitHubActionRunUrl $env:GITHUB_ACTION_RUN_URL
+        shell: pwsh
+        env:
+          HEAD_SHA: ${{ github.event.check_run.head_sha }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ACTION_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}

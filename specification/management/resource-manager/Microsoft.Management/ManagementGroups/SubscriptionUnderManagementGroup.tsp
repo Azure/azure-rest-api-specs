@@ -91,6 +91,7 @@ interface SubscriptionUnderManagementGroups {
 }
 
 @@doc(SubscriptionUnderManagementGroup.name, "Subscription ID.");
-@@doc(SubscriptionUnderManagementGroup.properties,
+@@doc(
+  SubscriptionUnderManagementGroup.properties,
   "The generic properties of subscription under a management group."
 );

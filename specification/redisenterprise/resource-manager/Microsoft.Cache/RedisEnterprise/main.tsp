@@ -19,6 +19,7 @@ import "./AccessPolicyAssignment.tsp";
 import "./PrivateEndpointConnection.tsp";
 import "./Migration.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -43,10 +44,26 @@ enum Versions {
    * The 2025-08-01-preview API version.
    */
   v2025_08_01_preview: "2025-08-01-preview",
+
+  /**
+   * The 2026-02-01-preview API version.
+   */
+  v2026_02_01_preview: "2026-02-01-preview",
+
+  /**
+   * The 2026-05-01-preview API version.
+   */
+  v2026_05_01_preview: "2026-05-01-preview",
+
+  /**
+   * The 2026-06-01-preview API version.
+   */
+  v2026_06_01_preview: "2026-06-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@@doc(Operations.list,
+@@doc(
+  Operations.list,
   "Lists all of the available REST API operations of the Microsoft.Cache provider."
 );

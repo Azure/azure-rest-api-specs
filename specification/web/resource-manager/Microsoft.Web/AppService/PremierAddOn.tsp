@@ -52,10 +52,12 @@ interface PremierAddOnOps
         @segment("premieraddons")
         @key
         premierAddOnName: string,
-      }
+      },
+      ResourceName = "WebSitePremierAddon"
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface PremierAddOns {
   /**
    * Description for Gets a named add-on of an app.
@@ -126,10 +128,12 @@ interface PremierAddOnOperationGroupOps
         @segment("premieraddons")
         @key
         premierAddOnName: string,
-      }
+      },
+      ResourceName = "WebSiteSlotPremierAddOn"
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface PremierAddOnOperationGroup {
   /**
    * Description for Gets a named add-on of an app.
@@ -176,15 +180,19 @@ interface PremierAddOnOperationGroup {
 
 @@doc(PremierAddOn.name, "Add-on name.");
 @@doc(PremierAddOn.properties, "PremierAddOn resource specific properties");
-@@doc(PremierAddOns.addPremierAddOn::parameters.resource,
+@@doc(
+  PremierAddOns.addPremierAddOn::parameters.resource,
   "A JSON representation of the edited premier add-on."
 );
-@@doc(PremierAddOns.updatePremierAddOn::parameters.properties,
+@@doc(
+  PremierAddOns.updatePremierAddOn::parameters.properties,
   "A JSON representation of the edited premier add-on."
 );
-@@doc(PremierAddOnOperationGroup.addPremierAddOnSlot::parameters.resource,
+@@doc(
+  PremierAddOnOperationGroup.addPremierAddOnSlot::parameters.resource,
   "A JSON representation of the edited premier add-on."
 );
-@@doc(PremierAddOnOperationGroup.updatePremierAddOnSlot::parameters.properties,
+@@doc(
+  PremierAddOnOperationGroup.updatePremierAddOnSlot::parameters.properties,
   "A JSON representation of the edited premier add-on."
 );

@@ -187,13 +187,14 @@ interface ContainerRegistry {
       @path
       name: string;
     },
-    {
-      /** The repository is deleted */
-      @statusCode statusCode: 202;
-    } | {
-      /** The repository was not found */
-      @statusCode statusCode: 404;
-    }
+    | {
+        /** The repository is deleted */
+        @statusCode statusCode: 202;
+      }
+    | {
+        /** The repository was not found */
+        @statusCode statusCode: 404;
+      }
   >;
 
   /**
@@ -341,9 +342,10 @@ interface ContainerRegistry {
       @path
       reference: string;
     },
-    {
-      @statusCode statusCode: 202;
-    } | NotFoundResponse
+    | {
+        @statusCode statusCode: 202;
+      }
+    | NotFoundResponse
   >;
 
   /**
@@ -464,25 +466,26 @@ interface ContainerRegistryBlob {
       @path
       digest: string;
     },
-    {
-      /** The blob identified by digest is available. The blob content will be present in the body of the response. */
-      @statusCode statusCode: 200;
+    | {
+        /** The blob identified by digest is available. The blob content will be present in the body of the response. */
+        @statusCode statusCode: 200;
 
-      /** The length of the requested blob content. */
-      @header("Content-Length") contentLength: int64;
+        /** The length of the requested blob content. */
+        @header("Content-Length") contentLength: int64;
 
-      /** Digest of the targeted content for the request. */
-      @header("Docker-Content-Digest") dockerContentDigest: string;
+        /** Digest of the targeted content for the request. */
+        @header("Docker-Content-Digest") dockerContentDigest: string;
 
-      /** blob binary data */
-      @bodyRoot body: bytes;
-    } | {
-      /** The blob identified by digest is available at the provided location. */
-      @statusCode statusCode: 307;
+        /** blob binary data */
+        @bodyRoot body: bytes;
+      }
+    | {
+        /** The blob identified by digest is available at the provided location. */
+        @statusCode statusCode: 307;
 
-      /** The location where the layer should be accessible. */
-      @header("Location") location: string;
-    }
+        /** The location where the layer should be accessible. */
+        @header("Location") location: string;
+      }
   >;
 
   /**
@@ -506,22 +509,23 @@ interface ContainerRegistryBlob {
       @path
       digest: string;
     },
-    {
-      /** The blob identified by digest is available. The blob content will be present in the body of the response. */
-      @statusCode statusCode: 200;
+    | {
+        /** The blob identified by digest is available. The blob content will be present in the body of the response. */
+        @statusCode statusCode: 200;
 
-      /** The length of the requested blob content. */
-      @header("Content-Length") contentLength: int64;
+        /** The length of the requested blob content. */
+        @header("Content-Length") contentLength: int64;
 
-      /** Digest of the targeted content for the request. */
-      @header("Docker-Content-Digest") dockerContentDigest: string;
-    } | {
-      /** The blob identified by digest is available at the provided location. */
-      @statusCode statusCode: 307;
+        /** Digest of the targeted content for the request. */
+        @header("Docker-Content-Digest") dockerContentDigest: string;
+      }
+    | {
+        /** The blob identified by digest is available at the provided location. */
+        @statusCode statusCode: 307;
 
-      /** The location where the layer should be accessible. */
-      @header("Location") location: string;
-    }
+        /** The location where the layer should be accessible. */
+        @header("Location") location: string;
+      }
   >;
 
   /**

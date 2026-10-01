@@ -14,8 +14,10 @@ namespace Microsoft.DevTestLab;
  * A virtual machine.
  */
 @parentResource(Lab)
-model LabVirtualMachine
-  is Azure.ResourceManager.ProxyResource<LabVirtualMachineProperties, false> {
+model LabVirtualMachine is Azure.ResourceManager.ProxyResource<
+  LabVirtualMachineProperties,
+  false
+> {
   ...ResourceNameParameter<
     Resource = LabVirtualMachine,
     KeyName = "virtualMachineName",
@@ -77,7 +79,10 @@ interface VirtualMachines {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     LabVirtualMachine,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse
   >;
 
   /**
@@ -291,19 +296,24 @@ interface VirtualMachines {
 
 @@doc(LabVirtualMachine.name, "The name of the virtual machine.");
 @@doc(LabVirtualMachine.properties, "The properties of the resource.");
-@@doc(VirtualMachines.createOrUpdate::parameters.resource,
+@@doc(
+  VirtualMachines.createOrUpdate::parameters.resource,
   "A virtual machine."
 );
 @@doc(VirtualMachines.update::parameters.properties, "A virtual machine.");
-@@doc(VirtualMachines.addDataDisk::parameters.body,
+@@doc(
+  VirtualMachines.addDataDisk::parameters.body,
   "Request body for adding a new or existing data disk to a virtual machine."
 );
-@@doc(VirtualMachines.applyArtifacts::parameters.body,
+@@doc(
+  VirtualMachines.applyArtifacts::parameters.body,
   "Request body for applying artifacts to a virtual machine."
 );
-@@doc(VirtualMachines.detachDataDisk::parameters.body,
+@@doc(
+  VirtualMachines.detachDataDisk::parameters.body,
   "Request body for detaching data disk from a virtual machine."
 );
-@@doc(VirtualMachines.resize::parameters.body,
+@@doc(
+  VirtualMachines.resize::parameters.body,
   "Request body for resizing a virtual machine."
 );

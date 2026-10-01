@@ -1,12 +1,15 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using Azure.Core;
 
 namespace Microsoft.Cache;
 
@@ -828,6 +831,11 @@ union MigrationProvisioningState {
    * The migration operation has been cancelled.
    */
   Cancelled: "Cancelled",
+
+  /**
+   * The migration operation cancellation has failed.
+   */
+  CancellationFailed: "CancellationFailed",
 }
 
 /**
@@ -998,6 +1006,13 @@ model ClusterProperties {
    */
   @visibility(Lifecycle.Read)
   privateEndpointConnections?: PrivateEndpointConnection[];
+
+  /**
+   * The endpoint of the source resource that is currently pointing to this resource as a result of an ACR/ACRE to AMR migration.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_08_01_preview)
+  migratedEndpoint?: string;
 }
 
 /** Cluster-level maintenance configuration. */
@@ -1079,6 +1094,7 @@ model ClusterPropertiesEncryptionCustomerManagedKeyEncryption {
   /**
    * Key encryption key Url, versioned only. Ex: https://contosovault.vault.azure.net/keys/contosokek/562a4bb76b524a1493a6afe8e536ee78
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   keyEncryptionKeyUrl?: string;
 }
 
@@ -1114,7 +1130,8 @@ model ClusterUpdate {
   /**
    * The identity of the resource.
    */
-  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Existing usage of legacy type"
+  ...Azure.ResourceManager.Legacy.ManagedServiceIdentityV4Property;
 
   /**
    * Resource tags.
@@ -1229,6 +1246,12 @@ model DatabaseProperties {
    * This property can be Enabled/Disabled to allow or deny access with the current access keys. Can be updated even after database is created.
    */
   accessKeysAuthentication?: AccessKeysAuthentication;
+
+  /**
+   * Specifies which keyspace events should trigger notifications. Default is an empty string, meaning this feature is disabled. When enabled, at least 'K' (keyspace events) or 'E' (keyevent events) must be present. For example, 'AKE' enables all standard events. See https://redis.io/docs/latest/develop/use/keyspace-notifications/ for the complete list of event types.
+   */
+  @added(Versions.v2026_02_01_preview)
+  notifyKeyspaceEvents?: string;
 }
 
 /**
@@ -1430,10 +1453,25 @@ model AccessPolicyAssignmentProperties {
   provisioningState?: ProvisioningState;
 
   /**
-   * Name of access policy under specific access policy assignment. Only "default" policy is supported for now.
+   * **Deprecated.** This property always returns "default". Use `accessString` to configure custom Redis ACL permissions instead.
    */
+  #deprecated "`accessPolicyName` is being deprecated. Use `accessString` to configure custom Redis ACL permissions instead."
   @pattern("^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]|[a-zA-Z0-9])$")
-  accessPolicyName: string;
+  @madeOptional(Versions.v2026_05_01_preview)
+  accessPolicyName?: string;
+
+  /**
+   * The Redis ACL permissions string applied to this assignment, for example `+@read ~cache:*`. Defaults to `+@all ~*` if not specified.
+   */
+  @added(Versions.v2026_05_01_preview)
+  accessString?: string;
+
+  /**
+   * Provisioning error details when the access string failed to apply (e.g., invalid ACL syntax). Null when provisioning succeeded.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_05_01_preview)
+  provisioningError?: AccessPolicyAssignmentProvisioningError;
 
   /**
    * The user associated with the access policy.
@@ -1449,6 +1487,27 @@ model AccessPolicyAssignmentPropertiesUser {
    * The object ID of the user.
    */
   objectId?: string;
+}
+
+/**
+ * Error details for access policy assignment provisioning failures.
+ */
+@added(Versions.v2026_05_01_preview)
+model AccessPolicyAssignmentProvisioningError {
+  /**
+   * Machine-readable error code (e.g., "InvalidAccessString").
+   */
+  code: string;
+
+  /**
+   * Human-readable error message describing the failure.
+   */
+  message: string;
+
+  /**
+   * The property that caused the error (e.g., "properties.accessString").
+   */
+  target?: string;
 }
 
 /**
@@ -1663,7 +1722,95 @@ model AzureCacheForRedisMigrationProperties extends MigrationProperties {
   skipDataMigration: boolean;
 
   /**
+   * Sets whether to ignore warnings when performing validation of the migration request. If this property is true, warning-level disparities between the source and target resources will be ignored, and the request will only fail validation if there are error-level disparities. The default value is false.
+   */
+  forceMigrate?: boolean;
+
+  /**
    * Describes the source of the migration operation.
    */
   sourceType: "AzureCacheForRedis";
+}
+
+/**
+ * Properties for validating migration from Azure Cache for Redis to Redis Enterprise.
+ */
+model MigrationValidationRequest {
+  /**
+   * The source resource ID to validate migration from. This is the resource ID of the Azure Cache for Redis.
+   */
+  sourceResourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Cache/redis";
+    }
+  ]>;
+
+  /**
+   * Sets whether the data is migrated from source to target or not. The default value is true.
+   */
+  skipDataMigration?: boolean;
+
+  /**
+   * Sets whether to ignore warnings when validating if the source cache can be migrated to the target cache. If this property is true, the isValid property in the response will ignore warning-level disparities between the source and target resource. The default value is false.
+   */
+  forceMigrate?: boolean;
+}
+
+/**
+ * Response for migration validation operation.
+ */
+model MigrationValidationResponse {
+  /**
+   * Indicates whether the migration validation passed.
+   */
+  isValid: boolean;
+
+  /**
+   * List of validation errors that prevent migration.
+   */
+  @identifiers(#[])
+  errors?: MigrationValidationError[];
+
+  /**
+   * List of validation warnings that may impact migration.
+   */
+  @identifiers(#[])
+  warnings?: MigrationValidationWarning[];
+}
+
+/**
+ * Represents a validation error that prevents migration.
+ */
+model MigrationValidationError {
+  /**
+   * List of specific disparities that cause this error.
+   */
+  @identifiers(#[])
+  disparities: MigrationValidationDisparity[];
+}
+
+/**
+ * Represents a validation warning that may impact migration.
+ */
+model MigrationValidationWarning {
+  /**
+   * List of specific disparities that cause this warning.
+   */
+  @identifiers(#[])
+  disparities: MigrationValidationDisparity[];
+}
+
+/**
+ * Represents a specific validation issue found during migration validation.
+ */
+model MigrationValidationDisparity {
+  /**
+   * A localized string denoting the category of the validation issue. Examples are "Region", "Data", "Identity", "Clustering Mode", and "TLS".
+   */
+  category: string;
+
+  /**
+   * Detailed message describing the validation issue.
+   */
+  message: string;
 }

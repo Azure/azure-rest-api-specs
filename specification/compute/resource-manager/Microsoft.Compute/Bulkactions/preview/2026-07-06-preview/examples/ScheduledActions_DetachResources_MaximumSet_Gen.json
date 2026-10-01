@@ -1,0 +1,44 @@
+{
+  "title": "ScheduledActions_DetachResources_MaximumSet",
+  "operationId": "ScheduledActions_DetachResources",
+  "parameters": {
+    "api-version": "2026-07-06-preview",
+    "subscriptionId": "CB26D7CB-3E27-465F-99C8-EAF7A4118245",
+    "resourceGroupName": "rgcompute",
+    "scheduledActionName": "myScheduledAction",
+    "body": {
+      "resources": [
+        "/subscriptions/1d04e8f1-ee04-4056-b0b2-718f5bb45b04/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/myVm"
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus",
+        "Location": "https://contoso.com/operationstatus",
+        "Retry-After": 10
+      }
+    },
+    "200": {
+      "body": {
+        "totalResources": 11,
+        "resourcesStatuses": [
+          {
+            "resourceId": "/subscriptions/1d04e8f1-ee04-4056-b0b2-718f5bb45b04/resourceGroups/myRg/providers/Microsoft.Compute/virtualMachines/myVm",
+            "status": "Succeeded",
+            "error": {
+              "code": "InternalServerError",
+              "message": "An internal error occurred.",
+              "target": "virtualMachines",
+              "details": [],
+              "innererror": {
+                "code": "InnerErrorCode"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

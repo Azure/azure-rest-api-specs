@@ -1,0 +1,131 @@
+{
+  "parameters": {
+    "api-version": "2026-01-15-preview",
+    "resourceGroupName": "test-rg",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "workspaceName": "aml-workspace-name"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "ada",
+            "format": "OpenAI",
+            "capabilities": {
+              "FineTuneTokensMaxValue": "2000000000",
+              "completion": "true",
+              "fineTune": "true",
+              "inference": "false",
+              "scaleType": "Manual",
+              "search": "true"
+            },
+            "deprecation": {
+              "fineTune": "2024-07-05T00:00:00+00:00",
+              "inference": "2024-07-05T00:00:00+00:00"
+            },
+            "finetuneCapabilities": {
+              "FineTuneTokensMaxValue": "2000000000",
+              "completion": "true",
+              "scaleType": "Manual,Standard",
+              "search": "true"
+            },
+            "isDefaultVersion": false,
+            "maxCapacity": 3,
+            "skus": [
+              {
+                "name": "Standard",
+                "capacity": {
+                  "maximum": 10000
+                },
+                "connectionIds": [
+                  "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1/providers/Microsoft.MachineLearningServices/workspaces/workspace-1/connections/connection-1",
+                  "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1/providers/Microsoft.MachineLearningServices/workspaces/workspace-1/connections/connection-2"
+                ],
+                "deprecationDate": "2024-03-01T00:00:00+00:00",
+                "rateLimits": [
+                  {
+                    "count": 1,
+                    "renewalPeriod": 10,
+                    "rules": []
+                  },
+                  {
+                    "count": 1000,
+                    "renewalPeriod": 60,
+                    "rules": []
+                  }
+                ],
+                "usageName": "OpenAI.Standard.ada"
+              }
+            ],
+            "systemData": {
+              "createdBy": "Microsoft",
+              "createdByType": null,
+              "lastModifiedBy": "Microsoft",
+              "lastModifiedByType": null
+            },
+            "version": "1"
+          },
+          {
+            "name": "babbage",
+            "format": "OpenAI",
+            "capabilities": {
+              "FineTuneTokensMaxValue": "2000000000",
+              "completion": "true",
+              "fineTune": "true",
+              "inference": "false",
+              "scaleType": "Manual",
+              "search": "true"
+            },
+            "deprecation": {
+              "fineTune": "2024-07-05T00:00:00+00:00",
+              "inference": "2024-07-05T00:00:00+00:00"
+            },
+            "finetuneCapabilities": {
+              "FineTuneTokensMaxValue": "2000000000",
+              "completion": "true",
+              "scaleType": "Manual,Standard",
+              "search": "true"
+            },
+            "isDefaultVersion": false,
+            "maxCapacity": 3,
+            "skus": [
+              {
+                "name": "Standard",
+                "capacity": {
+                  "maximum": 10000
+                },
+                "connectionIds": [
+                  "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup-1/providers/Microsoft.MachineLearningServices/workspaces/workspace-1/connections/connection-1"
+                ],
+                "deprecationDate": "2024-03-01T00:00:00+00:00",
+                "rateLimits": [
+                  {
+                    "count": 1,
+                    "renewalPeriod": 10,
+                    "rules": []
+                  },
+                  {
+                    "count": 1000,
+                    "renewalPeriod": 60,
+                    "rules": []
+                  }
+                ],
+                "usageName": "OpenAI.Standard.babbage"
+              }
+            ],
+            "systemData": {
+              "createdBy": "Microsoft",
+              "createdByType": null,
+              "lastModifiedBy": "Microsoft",
+              "lastModifiedByType": null
+            },
+            "version": "1"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Connection_GetAllModels",
+  "title": "Get models under the Azure ML workspace for all Azure OpenAI connections that the user can deploy"
+}

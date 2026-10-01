@@ -1,6 +1,8 @@
 import "./common/common.tsp";
 import "./BackupRestore/models.tsp";
 import "./BackupRestore/routes.tsp";
+import "./EKM/models.tsp";
+import "./EKM/routes.tsp";
 import "./RBAC/models.tsp";
 import "./RBAC/routes.tsp";
 import "./Settings/models.tsp";

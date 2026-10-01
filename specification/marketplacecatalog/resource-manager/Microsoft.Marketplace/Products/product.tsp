@@ -54,7 +54,7 @@ model ProductBase {
   @doc("Operating system info for this product")
   operatingSystems?: string[];
 
-  @doc("Indicates the billing models and cost structures available for the plan.\n- `Free` - No charge for plan usage, typically for community editions or basic service tiers\n- `FreeTrial` - Time-limited free access period before transitioning to paid billing model\n- `Byol` - Bring Your Own License model where customers provide existing software licenses\n- `Payg` - Pay As You Go consumption-based billing calculated on actual resource usage\n- `Ri` - Reserved Instance billing with upfront commitment for discounted long-term pricing")
+  @doc("Indicates the billing models and cost structures available for the plan.\n- `Free` - No charge for plan usage, typically for community editions or basic service tiers\n- `FreeTrial` - Time-limited free access period before transitioning to paid billing model\n- `Byol` - Bring Your Own License model where customers provide existing software licenses\n- `Payg` - Pay As You Go consumption-based billing calculated on actual resource usage\n- `Ri` - Reserved Instance billing with upfront commitment for discounted long-term pricing\n- `ContactPublisher` - Pricing is not listed and the customer must contact the publisher to obtain pricing details\n- `Freemium` - Free base tier with paid upgrades, applies to Microsoft managed products\n- `RequestPrivateOffer` - Customer must request a private offer to obtain pricing, applies to Marketplace products\n- `PrivateOffer` - Indicates the plan is a promo plan tied to a private offer")
   pricingTypes?: string[];
 
   @doc("Publisher display name")
@@ -117,6 +117,9 @@ model ProductBase {
   @doc("Set of products attributes")
   @identifiers(#[])
   attributes?: Attribute[];
+
+  @doc("Offering type of product family Offers")
+  offeringType?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only metadata resource."
@@ -223,6 +226,9 @@ model ProductDetails {
 
   @doc("Indicates that the SKU has add-ons")
   hasAddOns?: boolean;
+
+  @doc("The product code")
+  productCode?: string;
 }
 
 @doc("Returns a subset of Plan attributes")
@@ -260,7 +266,7 @@ model PlanSummary {
   @doc("Set to true if plan has artifacts that are to be hidden for non authenticated users")
   hasProtectedArtifacts?: boolean;
 
-  @doc("Indicates the billing models and cost structures available for the plan.\n- `Free` - No charge for plan usage, typically for community editions or basic service tiers\n- `FreeTrial` - Time-limited free access period before transitioning to paid billing model\n- `Byol` - Bring Your Own License model where customers provide existing software licenses\n- `Payg` - Pay As You Go consumption-based billing calculated on actual resource usage\n- `Ri` - Reserved Instance billing with upfront commitment for discounted long-term pricing")
+  @doc("Indicates the billing models and cost structures available for the plan.\n- `Free` - No charge for plan usage, typically for community editions or basic service tiers\n- `FreeTrial` - Time-limited free access period before transitioning to paid billing model\n- `Byol` - Bring Your Own License model where customers provide existing software licenses\n- `Payg` - Pay As You Go consumption-based billing calculated on actual resource usage\n- `Ri` - Reserved Instance billing with upfront commitment for discounted long-term pricing\n- `ContactPublisher` - Pricing is not listed and the customer must contact the publisher to obtain pricing details\n- `Freemium` - Free base tier with paid upgrades, applies to Microsoft managed products\n- `RequestPrivateOffer` - Customer must request a private offer to obtain pricing, applies to Marketplace products\n- `PrivateOffer` - Indicates the plan is a promo plan tied to a private offer")
   pricingTypes?: string[];
 
   @doc("Defines the security enhancement level for virtual machine deployments. Applies exclusively to Virtual Machine product types.\n- `None` - Standard virtual machine security without additional protection features\n- `Trusted` - Trusted Launch security with secure boot and virtual Trusted Platform Module capabilities\n- `Confidential` - Confidential computing with memory encryption and attestation for sensitive workloads")
@@ -694,6 +700,79 @@ model Availability {
 
   @doc("Display rank")
   displayRank: int32;
+
+  @doc("Prerequisite constraints for the availability")
+  prerequisiteConstraints?: PrerequisiteConstraints;
+
+  @doc("Subscription status eligibility constraints for the availability")
+  subscriptionStatusConstraints?: SubscriptionStatusConstraints;
+
+  @doc("Pricing benefit applicable to the availability (e.g. percent discounts)")
+  pricingBenefit?: PricingBenefit;
+}
+
+@doc("Prerequisite constraints for the availability")
+model PrerequisiteConstraints {
+  @doc("Constraint requiring all of the specified prerequisites to be met")
+  mustHaveAll?: PrerequisiteConstraint;
+
+  @doc("Constraint requiring any of the specified prerequisites to be met")
+  mustHaveAny?: PrerequisiteConstraint;
+
+  @doc("Constraint requiring none of the specified prerequisites to be met")
+  mustHaveNone?: PrerequisiteConstraint;
+}
+
+@doc("A single prerequisite constraint")
+model PrerequisiteConstraint {
+  @doc("Prerequisite products")
+  @identifiers(#[])
+  products?: PrerequisiteProduct[];
+
+  @doc("Seat constraint")
+  seatConstraint?: MinMaxSeatsConstraint;
+
+  @doc("Lookback window")
+  lookbackWindow?: LookbackWindow;
+}
+
+@doc("A prerequisite product")
+model PrerequisiteProduct {
+  @doc("Base plan id")
+  basePlanId?: string;
+
+  @doc("Minimum seats")
+  minSeats?: int32;
+
+  @doc("Maximum seats")
+  maxSeats?: int32;
+}
+
+@doc("Lookback window for a prerequisite constraint")
+model LookbackWindow {
+  @doc("Lookback window type")
+  type?: string;
+
+  @doc("Lookback window period")
+  period?: string;
+}
+
+@doc("Subscription status eligibility constraints for the availability")
+model SubscriptionStatusConstraints {
+  @doc("List of subscription statuses of which any must be satisfied")
+  requireAnyOf?: string[];
+}
+
+@doc("Pricing benefit applicable to the availability (e.g. percent discounts)")
+model PricingBenefit {
+  @doc("Rank of the pricing benefit")
+  rank?: int32;
+
+  @doc("Type of the pricing benefit (e.g. PercentDiscount)")
+  type?: string;
+
+  @doc("Value of the pricing benefit (e.g. 0.2 for a 20% discount)")
+  value?: float64;
 }
 
 @doc("Retail price with currency")
@@ -803,6 +882,12 @@ model Benefit {
 
   @doc("Term duration. Examples: 'P1M' (1 month), 'P30D' (30 days)")
   termDuration?: string;
+
+  @doc("Meter type")
+  meterType?: string;
+
+  @doc("Base product code")
+  baseProductCode?: string;
 }
 
 @doc("Constraints data for a plan")

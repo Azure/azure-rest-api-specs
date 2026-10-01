@@ -1,0 +1,30 @@
+{
+  "title": "VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors_Example",
+  "operationId": "VirtualMachineBulkOperations_BulkAcknowledgeOperationErrors",
+  "parameters": {
+    "api-version": "2026-07-06-preview",
+    "subscriptionId": "1FBA3C66-5C9C-4391-B72F-9F52735FC9F2",
+    "resourceGroupName": "rgBulkactions",
+    "location": "useast2euap",
+    "body": {
+      "operationIds": [
+        "af449548-8e1a-4079-874e-2caa4ff783cc"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "acknowledged": [
+          "af449548-8e1a-4079-874e-2caa4ff783cc"
+        ],
+        "notFound": [
+          "bf559658-9f2b-5180-985f-3dbb5678901d"
+        ],
+        "skipped": [
+          "cf669768-af3c-6291-a96g-4ecc6789012e"
+        ]
+      }
+    }
+  }
+}

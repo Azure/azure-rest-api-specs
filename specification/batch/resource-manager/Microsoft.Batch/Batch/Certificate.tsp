@@ -129,7 +129,10 @@ interface Certificates {
   @removed(Versions.v2025_06_01)
   delete is ArmResourceDeleteWithoutOkAsync<
     Certificate,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse
+      | ArmDeletedNoContentResponse,
     Error = CloudError
   >;
 
@@ -187,31 +190,40 @@ interface Certificates {
 
 @@maxLength(Certificate.name, 45);
 @@minLength(Certificate.name, 5);
-@@doc(Certificate.name,
+@@doc(
+  Certificate.name,
   "The identifier for the certificate. This must be made up of algorithm and thumbprint separated by a dash, and must match the certificate data in the request. For example SHA1-a3d1c5."
 );
-@@doc(Certificate.properties,
+@@doc(
+  Certificate.properties,
   "The properties associated with the certificate."
 );
-@@doc(Certificates.create::parameters.resource,
+@@doc(
+  Certificates.create::parameters.resource,
   "Additional parameters for certificate creation."
 );
-@@doc(Certificates.update::parameters.properties,
+@@doc(
+  Certificates.update::parameters.properties,
   "Certificate entity to update."
 );
-@@summary(Certificates.listByBatchAccount,
+@@summary(
+  Certificates.listByBatchAccount,
   "Lists all of the certificates in the specified account."
 );
-@@summary(Certificates.get,
+@@summary(
+  Certificates.get,
   "Gets information about the specified certificate."
 );
-@@summary(Certificates.create,
+@@summary(
+  Certificates.create,
   "Creates a new certificate inside the specified account."
 );
-@@summary(Certificates.update,
+@@summary(
+  Certificates.update,
   "Updates the properties of an existing certificate."
 );
 @@summary(Certificates.delete, "Deletes the specified certificate.");
-@@summary(Certificates.cancelDeletion,
+@@summary(
+  Certificates.cancelDeletion,
   "Cancels a failed deletion of a certificate from the specified account."
 );

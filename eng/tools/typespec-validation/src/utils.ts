@@ -1,23 +1,37 @@
-import { execNpm, isExecError } from "@azure-tools/specs-shared/exec";
-import { ConsoleLogger } from "@azure-tools/specs-shared/logger";
-import debug from "debug";
-import { access, readdir, readFile } from "fs/promises";
-import defaultPath, { basename, dirname, join, PlatformPath } from "path";
+import { execNodeBin, isExecError } from "@azure-tools/specs-shared/exec";
+import type { ILogger } from "@azure-tools/specs-shared/logger";
+import { getRootFolder } from "@azure-tools/specs-shared/simple-git";
+import {
+  getSuppressions as getSuppressionsImpl,
+  type Suppression,
+} from "@azure-tools/suppressions";
+import { access, readdir, readFile } from "node:fs/promises";
+import defaultPath, { basename, dirname, join, relative, type PlatformPath } from "node:path";
 import { simpleGit } from "simple-git";
-import { getSuppressions as getSuppressionsImpl, Suppression } from "suppressions";
-import { context } from "./index.js";
+import { context } from "./index.ts";
+import { supportsColor } from "./diagnostics.ts";
+import type { CommandOutput } from "./command-output.ts";
 
-// Enable simple-git debug logging to improve console output
-debug.enable("simple-git");
-
-// Wraps execNpm() to return error (and coalesce stdout and stderr) instead of throwing
-export async function runNpm(
-  args: string[],
+// Return command failures to the validation rule along with captured output.
+export async function runNodeBin(
+  packageName: string,
+  args: [string, ...string[]],
+  logger: ILogger,
   cwd?: string,
-): Promise<[Error | null, string, string]> {
+): Promise<CommandOutput> {
+  const env = { ...process.env };
+  if (supportsColor()) {
+    delete env.NO_COLOR;
+    env.FORCE_COLOR = "1";
+  } else {
+    delete env.FORCE_COLOR;
+    env.NO_COLOR = "1";
+  }
+  logger.debug(`runNodeBin(${JSON.stringify(packageName)}, ${JSON.stringify(args)})`);
   try {
-    const { stdout, stderr } = await execNpm(args, {
-      logger: new ConsoleLogger(),
+    const { stdout, stderr } = await execNodeBin(packageName, args, {
+      // The calling rule owns captured output, including errors; do not log it twice.
+      env,
       maxBuffer: 64 * 1024 * 1024,
       cwd,
     });
@@ -66,24 +80,47 @@ export function normalizePathImpl(folder: string, path: PlatformPath = defaultPa
     .replace(/^([a-z]):/, (_match, driveLetter: string) => driveLetter.toUpperCase() + ":");
 }
 
-export async function gitDiffTopSpecFolder(folder: string) {
+export async function readFileAtCommit(
+  folder: string,
+  commitish: string,
+  file: string,
+): Promise<string | undefined> {
   const git = simpleGit(folder);
-  const topSpecFolder = folder.replace(/(^.*specification\/[^/]*)(.*)/, "$1");
-  const stdOutput = `Running git diff on folder ${topSpecFolder}`;
-  const gitStatus = await git.status(["--porcelain", topSpecFolder]);
+  await git.revparse(["--verify", `${commitish}^{commit}`]);
+  const repositoryRoot = (await git.revparse(["--show-toplevel"])).trim();
+  const repositoryPath = relative(repositoryRoot, file).split(defaultPath.sep).join("/");
 
-  let success = true;
-  let errorOutput: string | undefined;
+  try {
+    return await git.show([`${commitish}:${repositoryPath}`]);
+  } catch {
+    return undefined;
+  }
+}
 
-  if (!gitStatus.isClean()) {
-    success = false;
-    errorOutput = JSON.stringify(await git.status());
-    errorOutput += await git.diff();
+export async function gitDiffTopSpecFolder(folder: string, logger: ILogger) {
+  const git = simpleGit(folder);
+  const topSpecFolder = normalizePath(folder).replace(/(^.*specification\/[^/]*)(.*)/, "$1");
+  logger.debug(`Checking generated files in ${topSpecFolder}`);
+  const gitStatus = await git.status(["--porcelain", "--untracked-files=all", "--", topSpecFolder]);
+
+  if (gitStatus.isClean()) return { success: true, files: [] };
+
+  if (logger.isDebug()) logger.debug(JSON.stringify(gitStatus));
+  const color = supportsColor() ? "--color=always" : "--color=never";
+  const diffs = [
+    await git.diff([color, "--cached", "--", topSpecFolder]),
+    await git.diff([color, "--", topSpecFolder]),
+  ];
+  if (gitStatus.not_added.length > 0) {
+    const rootGit = simpleGit(await getRootFolder(folder));
+    for (const file of gitStatus.not_added) {
+      diffs.push(await rootGit.diff([color, "--no-index", "--", "/dev/null", file]));
+    }
   }
 
   return {
-    success: success,
-    stdOutput: stdOutput,
-    errorOutput: errorOutput,
+    success: false,
+    files: gitStatus.files.map((file) => file.path),
+    diff: diffs.filter(Boolean).join("\n"),
   };
 }

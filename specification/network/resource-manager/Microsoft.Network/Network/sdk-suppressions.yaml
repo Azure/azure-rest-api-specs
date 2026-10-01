@@ -1,27 +1,19 @@
 suppressions:
   azure-sdk-for-go:
-    - package: 'sdk/resourcemanager/network/armnetwork'
+    - package: sdk/resourcemanager/network/armnetwork
       breaking-changes:
-        - Field `Etag` of struct `AdminRuleCollection` has been removed
-        - Field `Etag` of struct `AdminRule` has been removed
-        - Field `Etag` of struct `BaseAdminRule` has been removed
-        - Field `Etag` of struct `DefaultAdminRule` has been removed
-        - Field `Etag` of struct `SecurityAdminConfiguration` has been removed
-        - Function `*ConnectionMonitorsClient.BeginQuery` has been removed
-        - Function `*ConnectionMonitorsClient.BeginStart` has been removed
-        - Type of `LoadBalancerHealthPerRulePerBackendAddress.NetworkInterfaceIPConfigurationID` has been changed from `*InterfaceIPConfiguration` to `*string`
-        - "`ApplicationGatewayWafRuleSensitivityTypesNone` from enum `ApplicationGatewayWafRuleSensitivityTypes` has been removed"
-        - "`SensitivityTypeNone` from enum `SensitivityType` has been removed"
+        - Type of `ManagedRuleSetRuleGroup.Rules` has been changed from `[]*string` to `[]*int32`
+        - Type of `HubVirtualNetworkConnectionProperties.EnableOnlyIPv6Peering` has been changed from `*EnableOnlyIPv6PeeringState` to `*bool`
+        - Enum `EnableOnlyIPv6PeeringState` has been removed
   azure-sdk-for-js:
     - package: '@azure/arm-network'
       breaking-changes:
-        - Interface AdminRuleCollection no longer has parameter systemData
-        - Interface BaseAdminRule no longer has parameter systemData
-        - Interface SecurityAdminConfiguration no longer has parameter systemData
-        - Removed operation ConnectionMonitors.beginQuery
-        - Removed operation ConnectionMonitors.beginQueryAndWait
-        - Removed operation ConnectionMonitors.beginStart
-        - Removed operation ConnectionMonitors.beginStartAndWait
-        - Type of parameter networkInterfaceIPConfigurationId of interface LoadBalancerHealthPerRulePerBackendAddress is changed from NetworkInterfaceIPConfiguration to string
-
-        
+        - Type of parameter rules of interface ManagedRuleSetRuleGroup is changed from string[] to number[]
+        - Operation WebApplicationFirewallPoliciesOperations.createOrUpdate has a new signature
+        - Operation WebApplicationFirewallPoliciesOperations.get has a new signature
+        - Operation WebApplicationFirewallPoliciesOperations.list has a new signature
+        - Operation WebApplicationFirewallPoliciesOperations.listAll has a new signature
+        - Interface HubVirtualNetworkConnection no longer has parameter enableOnlyIpv6Peering
+        - Interface HubVirtualNetworkConnectionProperties no longer has parameter enableOnlyIpv6Peering
+        - Removed Type Alias EnableOnlyIpv6PeeringState
+        - Removed Enum KnownEnableOnlyIpv6PeeringState

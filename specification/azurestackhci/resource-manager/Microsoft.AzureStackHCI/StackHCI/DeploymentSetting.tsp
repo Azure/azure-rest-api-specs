@@ -48,7 +48,8 @@ interface DeploymentSettings {
 }
 
 @@doc(DeploymentSetting.name, "Name of Deployment Setting");
-@@doc(DeploymentSetting.properties,
+@@doc(
+  DeploymentSetting.properties,
   "The resource-specific properties for this resource."
 );
 @@visibility(DeploymentSetting.properties, Lifecycle.Read, Lifecycle.Create);

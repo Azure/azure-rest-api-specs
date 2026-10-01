@@ -8,6 +8,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.SecurityInsights;
 /**
@@ -92,3 +93,6 @@ interface Hunts {
 @@doc(Hunt.name, "The hunt id (GUID)");
 @@doc(Hunt.properties, "Hunt properties");
 @@doc(Hunts.createOrUpdate::parameters.resource, "The hunt");
+
+@@added(Hunt, Versions.v2025_10_01_preview);
+@@added(Hunts, Versions.v2025_10_01_preview);

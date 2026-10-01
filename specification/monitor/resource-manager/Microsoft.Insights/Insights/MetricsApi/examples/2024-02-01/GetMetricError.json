@@ -1,0 +1,62 @@
+{
+  "operationId": "Metrics_List",
+  "parameters": {
+    "AutoAdjustTimegrain": true,
+    "ValidateDimensions": false,
+    "aggregation": "average",
+    "api-version": "2024-02-01",
+    "interval": "FULL",
+    "metricnames": "MongoRequestsCount,MongoRequests",
+    "metricnamespace": "microsoft.documentdb/databaseaccounts",
+    "resourceUri": "subscriptions/ac41e21f-afd6-4a79-8070-f01eba278f97/resourceGroups/todking/providers/Microsoft.DocumentDb/databaseAccounts/tk-cosmos-mongo",
+    "timespan": "2021-06-07T21:51:00Z/2021-06-08T01:51:00Z"
+  },
+  "title": "Get Metric with error",
+  "responses": {
+    "200": {
+      "body": {
+        "cost": 239,
+        "interval": "PT4H",
+        "namespace": "microsoft.documentdb/databaseaccounts",
+        "resourceregion": "westus2",
+        "timespan": "2021-06-07T21:51:00Z/2021-06-08T01:51:00Z",
+        "value": [
+          {
+            "name": {
+              "localizedValue": "(deprecated) Mongo Request Rate",
+              "value": "MongoRequestsCount"
+            },
+            "type": "Microsoft.Insights/metrics",
+            "errorCode": "InvalidSamplingType",
+            "errorMessage": "Sampling type is not found. Metric:CosmosDBCustomer,AzureMonitor,MongoRequests, SamplingType:NullableAverage.",
+            "id": "/subscriptions/ac41e21f-afd6-4a79-8070-f01eba278f97/resourceGroups/todking/providers/Microsoft.DocumentDb/databaseAccounts/tk-cosmos-mongo/providers/Microsoft.Insights/metrics/MongoRequestsCount",
+            "timeseries": [],
+            "unit": "CountPerSecond"
+          },
+          {
+            "name": {
+              "localizedValue": "Mongo Requests",
+              "value": "MongoRequests"
+            },
+            "type": "Microsoft.Insights/metrics",
+            "displayDescription": "Number of Mongo Requests Made",
+            "errorCode": "Success",
+            "id": "/subscriptions/ac41e21f-afd6-4a79-8070-f01eba278f97/resourceGroups/todking/providers/Microsoft.DocumentDb/databaseAccounts/tk-cosmos-mongo/providers/Microsoft.Insights/metrics/MongoRequests",
+            "timeseries": [
+              {
+                "data": [
+                  {
+                    "average": 0,
+                    "timeStamp": "2021-06-07T21:51:00Z"
+                  }
+                ],
+                "metadatavalues": []
+              }
+            ],
+            "unit": "Count"
+          }
+        ]
+      }
+    }
+  }
+}

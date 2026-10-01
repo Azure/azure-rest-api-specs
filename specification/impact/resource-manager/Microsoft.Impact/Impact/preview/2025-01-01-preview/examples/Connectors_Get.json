@@ -1,0 +1,55 @@
+{
+  "operationId": "Connectors_Get",
+  "title": "GetConnector",
+  "parameters": {
+    "api-version": "2025-01-01-preview",
+    "subscriptionId": "74f5e23f-d4d9-410a-bb4d-8f0608adb10d",
+    "connectorName": "testconnector1",
+    "resource": {
+      "properties": {
+        "connectorType": "AzureMonitor"
+      },
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/eu2cgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {}
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "connectorId": "430a444e-6a84-4a6f-8c50-124843ca7cd4",
+          "tenantId": "23a8d1da-a7e9-4443-9797-4cd3e3aeb8f8",
+          "connectorType": "AzureMonitor",
+          "lastRunTimeStamp": "2024-03-19T06:23:56.238Z",
+          "processingState": "Initialized",
+          "processingStateMessage": ""
+        },
+        "identity": {
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/fa5fc227-a624-475e-b696-cdd604c735bc/resourceGroups/eu2cgroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/id1": {
+              "clientId": "fbe75b66-01c5-4f87-a220-233af3270436",
+              "principalId": "075a0ca6-43f6-4434-9abf-c9b1b79f9219"
+            }
+          }
+        },
+        "id": "/subscriptions/74f5e23f-d4d9-410a-bb4d-8f0608adb10d/providers/Microsoft.Impact/connectors/testconnector1",
+        "name": "testconnector1",
+        "type": "microsoft.impact/connectors",
+        "systemData": {
+          "createdBy": "testuser@hotmail.com",
+          "createdByType": "User",
+          "createdAt": "2024-03-07T06:19:01.6431721Z",
+          "lastModifiedBy": "testuser@hotmail.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-03-15T08:29:20.8549373Z"
+        }
+      }
+    }
+  }
+}

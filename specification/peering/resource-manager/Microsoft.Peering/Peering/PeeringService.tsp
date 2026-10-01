@@ -64,10 +64,12 @@ interface PeeringServices {
 }
 
 @@doc(PeeringService.name, "The name of the peering.");
-@@doc(PeeringService.properties,
+@@doc(
+  PeeringService.properties,
   "The properties that define a peering service."
 );
-@@doc(PeeringServices.createOrUpdate::parameters.resource,
+@@doc(
+  PeeringServices.createOrUpdate::parameters.resource,
   "The properties needed to create or update a peering service."
 );
 @@doc(PeeringServices.update::parameters.properties, "The resource tags.");

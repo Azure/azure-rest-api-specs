@@ -24,6 +24,7 @@ import "./DnsSecurityRule.tsp";
 import "./DnsResolverPolicyVirtualNetworkLink.tsp";
 import "./DnsResolverDomainList.tsp";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

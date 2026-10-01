@@ -1,0 +1,24 @@
+# cspell:ignore existingsvc noreasonsvc vaguesvc
+# Fixture: suppressions.yaml entry with a missing/empty reason field.
+# Used by eval-suppressions-yaml (150001).
+# Mirrors the layout of specification/suppressions.yaml at the repo root.
+
+- tool: TypeSpecValidation
+  rules: [FolderStructure]
+  sub-rules: [MustUseV2]
+  reason: Specs added as folder structure v1, not yet converted to v2
+  paths:
+    - existingsvc/Existing.Management
+
+# New entry added in this PR — has no `reason:` field at all.
+- tool: TypeSpecValidation
+  rules: [NoUnreferencedTypes]
+  paths:
+    - noreasonsvc/NoReason.Management
+
+# New entry added in this PR — has a vague placeholder reason.
+- tool: TypeSpecValidation
+  rules: [RequireDocumentation]
+  reason: existing pattern
+  paths:
+    - vaguesvc/Vague.Management

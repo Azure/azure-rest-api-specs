@@ -12,6 +12,7 @@ import "@typespec/http";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./routes.tsp";
+import "./client.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -40,7 +41,7 @@ using TypeSpec.Versioning;
     }
   ]>
 )
-namespace WebPubSub;
+namespace WebPubSubService;
 
 /**
  * The available API versions.

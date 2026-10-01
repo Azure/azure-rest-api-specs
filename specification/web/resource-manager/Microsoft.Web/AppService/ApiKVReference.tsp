@@ -60,10 +60,12 @@ interface ApiKVReferenceOps
         @segment("appsettings")
         @key
         appSettingKey: string,
-      }
+      },
+      ResourceName = "SiteConfigAppsetting"
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface AppSettingKeyVaultReference {
   /**
    * Description for Gets the config reference and status of an app
@@ -113,10 +115,12 @@ interface ApiKVReferenceOperationGroupOps
         @segment("connectionstrings")
         @key
         connectionStringKey: string,
-      }
+      },
+      ResourceName = "WebSiteConfigConnectionString"
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface SiteConnectionStringKeyVaultReference {
   /**
    * Description for Gets the config reference and status of an app
@@ -171,10 +175,12 @@ interface AppSettingKeyVaultReferenceSlotOps
         @segment("appsettings")
         @key
         appSettingKey: string,
-      }
+      },
+      ResourceName = "WebSiteSlotConfigAppSetting"
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface AppSettingKeyVaultReferenceSlot {
   /**
    * Description for Gets the config reference and status of an app
@@ -229,10 +235,12 @@ interface SiteConnectionStringKeyVaultReferenceSlotOps
         @segment("connectionstrings")
         @key
         connectionStringKey: string,
-      }
+      },
+      ResourceName = "WebSiteSlotConfigConnectionString"
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface SiteConnectionStringKeyVaultReferenceSlot {
   /**
    * Description for Gets the config reference and status of an app

@@ -1,0 +1,33 @@
+{
+  "operationId": "KnowledgeSources_Get",
+  "title": "SearchServiceGetKnowledgeSourceFabricDataAgent",
+  "parameters": {
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "api-version": "2026-05-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "sourceName": "ks-fabric-agent-test"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@odata.etag": "0x1234568AE7E58A1",
+        "name": "ks-fabric-agent-test",
+        "kind": "fabricDataAgent",
+        "description": "Description of the Fabric Data Agent knowledge source.",
+        "encryptionKey": {
+          "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
+          "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
+          "keyVaultUri": "https://myKeyVault.vault.azure.net",
+          "accessCredentials": {
+            "applicationId": "00000000-0000-0000-0000-000000000000",
+            "applicationSecret": "<applicationSecret>"
+          }
+        },
+        "fabricDataAgentParameters": {
+          "workspaceId": "fakeWorkspaceId",
+          "dataAgentId": "fakeAgentId"
+        }
+      }
+    }
+  }
+}

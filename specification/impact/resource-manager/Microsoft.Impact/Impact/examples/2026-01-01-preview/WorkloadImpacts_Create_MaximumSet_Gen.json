@@ -1,0 +1,211 @@
+{
+  "title": "WorkloadImpacts_Create_MaximumSet",
+  "operationId": "WorkloadImpacts_Create",
+  "parameters": {
+    "api-version": "2026-01-01-preview",
+    "subscriptionId": "0D045314-435A-41DA-B0A4-2CA7E9F87D12",
+    "workloadImpactName": "testWorkloadImpact",
+    "resource": {
+      "properties": {
+        "startDateTime": "2024-12-04T19:51:13.274Z",
+        "endDateTime": "2024-12-04T19:51:13.274Z",
+        "impactedResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-rg/providers/Microsoft.Sql/sqlserver/dbservername",
+        "impactCategory": "Resource.Other",
+        "impactDescription": "test description",
+        "armCorrelationIds": [
+          "4D045314-435A-41DA-B0A4-2CA7E9F87D12"
+        ],
+        "performance": [
+          {
+            "metricName": "testMetric",
+            "expected": 23,
+            "actual": 20,
+            "expectedValueRange": {
+              "min": 1,
+              "max": 27
+            },
+            "unit": "ByteSeconds"
+          }
+        ],
+        "connectivity": {
+          "protocol": "TCP",
+          "port": 6,
+          "source": {
+            "azureResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-rg/providers/Microsoft.compute/virtualmachines/vm1"
+          },
+          "target": {
+            "azureResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-rg/providers/Microsoft.compute/virtualmachines/vm2"
+          }
+        },
+        "additionalProperties": {},
+        "errorDetails": {
+          "errorCode": "504",
+          "errorMessage": "Gateway timeout error"
+        },
+        "workload": {
+          "context": "webapp/scenario1",
+          "toolset": "Other"
+        },
+        "impactGroupId": "testGroup1",
+        "confidenceLevel": "Low",
+        "clientIncidentDetails": {
+          "clientIncidentId": "123456",
+          "clientIncidentSource": "AzureDevops"
+        },
+        "ongoingImpact": true,
+        "severity": "Critical",
+        "durationInSec": 26,
+        "detectionType": "BusinessAlert",
+        "durationMarginInSec": 28,
+        "hitCount": 21
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "startDateTime": "2024-12-04T19:51:13.274Z",
+          "endDateTime": "2024-12-04T19:51:13.274Z",
+          "impactedResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-rg/providers/Microsoft.compute/virtualmachines/vm1",
+          "impactUniqueId": "d7f24d04-e7f0-48bf-b09c-9d36ca9e1777",
+          "reportedTimeUtc": "2024-12-04T19:51:13.274Z",
+          "impactCategory": "Resource.Other",
+          "impactDescription": "Test description",
+          "armCorrelationIds": [
+            "4D045314-435A-41DA-B0A4-2CA7E9F87D12"
+          ],
+          "performance": [
+            {
+              "metricName": "testMetric",
+              "expected": 23,
+              "actual": 20,
+              "expectedValueRange": {
+                "min": 1,
+                "max": 27
+              },
+              "unit": "ByteSeconds"
+            }
+          ],
+          "connectivity": {
+            "protocol": "TCP",
+            "port": 6,
+            "source": {
+              "azureResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-rg/providers/Microsoft.compute/virtualmachines/vm1"
+            },
+            "target": {
+              "azureResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-rg/providers/Microsoft.compute/virtualmachines/vm2"
+            }
+          },
+          "additionalProperties": {},
+          "errorDetails": {
+            "errorCode": "504",
+            "errorMessage": "Gateway timeout error"
+          },
+          "workload": {
+            "context": "webapp/scenario1",
+            "toolset": "Other"
+          },
+          "impactGroupId": "testGroup1",
+          "confidenceLevel": "Low",
+          "clientIncidentDetails": {
+            "clientIncidentId": "123456",
+            "clientIncidentSource": "AzureDevops"
+          },
+          "ongoingImpact": true,
+          "severity": "Critical",
+          "durationInSec": 26,
+          "detectionType": "BusinessAlert",
+          "durationMarginInSec": 28,
+          "hitCount": 21
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/Impacts-rg/providers/Microsoft.Impact/workloadImpacts/impact2",
+        "name": "testWorkloadImpact",
+        "type": "Microsoft.Impact/workloadImpacts",
+        "systemData": {
+          "createdBy": "testuser@hotmail.com",
+          "createdByType": "User",
+          "createdAt": "2024-03-07T06:19:01.6431721Z",
+          "lastModifiedBy": "testuser@hotmail.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-03-15T08:29:20.8549373Z"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "startDateTime": "2024-12-04T19:51:13.274Z",
+          "endDateTime": "2024-12-04T19:51:13.274Z",
+          "impactedResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-rg/providers/Microsoft.compute/virtualmachines/vm1",
+          "impactUniqueId": "d7f24d04-e7f0-48bf-b09c-9d36ca9e1777",
+          "reportedTimeUtc": "2024-12-04T19:51:13.274Z",
+          "impactCategory": "Resource.Other",
+          "impactDescription": "Test description",
+          "armCorrelationIds": [
+            "4D045314-435A-41DA-B0A4-2CA7E9F87D12"
+          ],
+          "performance": [
+            {
+              "metricName": "testMetric",
+              "expected": 23,
+              "actual": 20,
+              "expectedValueRange": {
+                "min": 1,
+                "max": 27
+              },
+              "unit": "ByteSeconds"
+            }
+          ],
+          "connectivity": {
+            "protocol": "TCP",
+            "port": 6,
+            "source": {
+              "azureResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-rg/providers/Microsoft.compute/virtualmachines/vm1"
+            },
+            "target": {
+              "azureResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resource-rg/providers/Microsoft.compute/virtualmachines/vm2"
+            }
+          },
+          "additionalProperties": {},
+          "errorDetails": {
+            "errorCode": "504",
+            "errorMessage": "Gateway timeout error"
+          },
+          "workload": {
+            "context": "webapp/scenario1",
+            "toolset": "Other"
+          },
+          "impactGroupId": "testGroup1",
+          "confidenceLevel": "Low",
+          "clientIncidentDetails": {
+            "clientIncidentId": "123456",
+            "clientIncidentSource": "AzureDevops"
+          },
+          "ongoingImpact": true,
+          "severity": "Critical",
+          "durationInSec": 26,
+          "detectionType": "BusinessAlert",
+          "durationMarginInSec": 28,
+          "hitCount": 21
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/Impacts-rg/providers/Microsoft.Impact/workloadImpacts/impact2",
+        "name": "testWorkloadImpact",
+        "type": "Microsoft.Impact/workloadImpacts",
+        "systemData": {
+          "createdBy": "testuser@hotmail.com",
+          "createdByType": "User",
+          "createdAt": "2024-03-07T06:19:01.6431721Z",
+          "lastModifiedBy": "testuser@hotmail.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-03-15T08:29:20.8549373Z"
+        }
+      }
+    }
+  }
+}

@@ -93,13 +93,16 @@ interface ApplicationPackages {
 @@maxLength(ApplicationPackage.name, 64);
 @@minLength(ApplicationPackage.name, 1);
 @@doc(ApplicationPackage.name, "The version of the application.");
-@@doc(ApplicationPackage.properties,
+@@doc(
+  ApplicationPackage.properties,
   "The properties associated with the Application Package."
 );
-@@doc(ApplicationPackages.create::parameters.resource,
+@@doc(
+  ApplicationPackages.create::parameters.resource,
   "The parameters for the request."
 );
-@@doc(ApplicationPackages.activate::parameters.body,
+@@doc(
+  ApplicationPackages.activate::parameters.body,
   "The parameters for the request."
 );
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Legacy design that typespec didn't have a direct translation for"

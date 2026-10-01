@@ -7,6 +7,7 @@ import "./Gateway.tsp";
 import "./OperatorApiConnection.tsp";
 import "./OperatorApiPlan.tsp";
 import "./back-compatible.tsp";
+import "./client.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;

@@ -124,9 +124,11 @@ interface PipelineResources {
 @@minLength(PipelineResource.name, 1);
 @@doc(PipelineResource.name, "The pipeline name.");
 @@doc(PipelineResource.properties, "Properties of the pipeline.");
-@@doc(PipelineResources.createOrUpdate::parameters.resource,
+@@doc(
+  PipelineResources.createOrUpdate::parameters.resource,
   "Pipeline resource definition."
 );
-@@doc(PipelineResources.createRun::parameters.body,
+@@doc(
+  PipelineResources.createRun::parameters.body,
   "Parameters of the pipeline run. These parameters will be used only if the runId is not specified."
 );

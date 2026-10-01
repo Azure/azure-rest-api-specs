@@ -52,7 +52,8 @@ interface FunctionEnvelopeOps
         @segment("functions")
         @key
         functionName: string,
-      }
+      },
+      ResourceName = "SiteFunction"
     > {}
 
 alias FunctionEnvelopesOps = Azure.ResourceManager.Legacy.RoutedOperations<
@@ -75,7 +76,7 @@ alias FunctionEnvelopesOps = Azure.ResourceManager.Legacy.RoutedOperations<
     functionName: string;
   },
   ResourceRoute = #{
-    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/functions",
+    route: "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions",
   }
 >;
 
@@ -112,7 +113,8 @@ interface FunctionEnvelopeSlotOperationGroupOps
         @segment("keys")
         @key
         keyName: string,
-      }
+      },
+      ResourceName = "SiteSlotFunctionKey"
     > {}
 
 @armResourceOperations
@@ -142,10 +144,12 @@ interface FunctionEnvelopeSlotOperationWithoutKeysGroupOps
         @segment("functions")
         @key
         functionName: string,
-      }
+      },
+      ResourceName = "SiteSlotFunction"
     > {}
 
-@armResourceOperations(#{ allowStaticRoutes: true })
+@tag("WebApps")
+@armResourceOperations(#{ allowStaticRoutes: true, omitTags: true })
 interface FunctionEnvelopes {
   /**
    * Description for Get function information by its ID for web site, or a deployment slot.
@@ -199,7 +203,7 @@ interface FunctionEnvelopes {
    */
   @summary("Add or update a function secret.")
   @put
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/functions/{functionName}/keys/{keyName}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions/{functionName}/keys/{keyName}")
   createOrUpdateFunctionSecret is FunctionEnvelopesOps.ActionSync<
     FunctionEnvelope,
     KeyInfo,
@@ -217,7 +221,7 @@ interface FunctionEnvelopes {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Delete a function secret.")
   @delete
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Web/sites/{name}/functions/{functionName}/keys/{keyName}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions/{functionName}/keys/{keyName}")
   deleteFunctionSecret is FunctionEnvelopesOps.ActionSync<
     FunctionEnvelope,
     void,
@@ -281,10 +285,12 @@ interface FunctionEnvelopeOperationGroupOps
         @segment("functions")
         @key
         functionName: string,
-      }
+      },
+      ResourceName = "SiteSlotFunction"
     > {}
 
-@armResourceOperations
+@tag("WebApps")
+@armResourceOperations(#{ omitTags: true })
 interface FunctionEnvelopeOperationGroup {
   /**
    * Description for Get function information by its ID for web site, or a deployment slot.
@@ -336,7 +342,9 @@ interface FunctionEnvelopeOperationGroup {
   /**
    * Description for Add or update a function secret.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
   @summary("Add or update a function secret.")
   createOrUpdateFunctionSecretSlot is FunctionEnvelopeSlotOperationGroupOps.CreateOrUpdateAsync<
@@ -351,7 +359,9 @@ interface FunctionEnvelopeOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-api-version" "FIXME: review suppression and update justification"
+  #suppress "@azure-tools/typespec-azure-resource-manager/use-interface" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Delete a function secret.")
   @delete
   deleteFunctionSecretSlot is FunctionEnvelopeSlotOperationGroupOps.DeleteSync<
@@ -386,18 +396,23 @@ interface FunctionEnvelopeOperationGroup {
 }
 
 @@doc(FunctionEnvelope.name, "Function name.");
-@@doc(FunctionEnvelope.properties,
+@@doc(
+  FunctionEnvelope.properties,
   "FunctionEnvelope resource specific properties"
 );
-@@doc(FunctionEnvelopes.createFunction::parameters.resource,
+@@doc(
+  FunctionEnvelopes.createFunction::parameters.resource,
   "Function details."
 );
-@@doc(FunctionEnvelopes.createOrUpdateFunctionSecret::parameters.body,
+@@doc(
+  FunctionEnvelopes.createOrUpdateFunctionSecret::parameters.body,
   "The key to create or update"
 );
-@@doc(FunctionEnvelopeOperationGroup.createInstanceFunctionSlot::parameters.resource,
+@@doc(
+  FunctionEnvelopeOperationGroup.createInstanceFunctionSlot::parameters.resource,
   "Function details."
 );
-@@doc(FunctionEnvelopeOperationGroup.createOrUpdateFunctionSecretSlot::parameters.resource,
+@@doc(
+  FunctionEnvelopeOperationGroup.createOrUpdateFunctionSecretSlot::parameters.resource,
   "The key to create or update"
 );

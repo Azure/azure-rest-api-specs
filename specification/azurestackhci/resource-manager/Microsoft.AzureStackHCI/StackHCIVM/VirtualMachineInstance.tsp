@@ -2,16 +2,19 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.AzureStackHCI;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "x-ms-azure-resource legacy"
+#suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-azure-resource' OpenAPI extension predates the no-openapi-client-extensions rule; suppressed pending migration to Azure.ResourceManager resource types."
 @doc("The virtual machine instance resource definition.")
 @extension("x-ms-azure-resource", true)
 @singleton("default")
@@ -85,5 +88,13 @@ interface VirtualMachineInstances {
   save is ArmResourceActionNoResponseContentAsync<
     VirtualMachineInstance,
     Request = void
+  >;
+
+  @added(Versions.v2026_04_01_preview)
+  @doc("The operation to power off a virtual machine instance.")
+  powerOff is ArmResourceActionAsync<
+    VirtualMachineInstance,
+    PowerOffVirtualMachineOptions,
+    Foundations.OperationStatusResult
   >;
 }

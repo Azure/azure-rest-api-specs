@@ -19,6 +19,17 @@ union AlertsState {
   Disabled: "Disabled",
 }
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+union GranularityLevel {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  VaultLevel: "VaultLevel",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  ProtectedItemLevel: "ProtectedItemLevel",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  ProtectedItemWithParentTag: "ProtectedItemWithParentTag",
+}
+
 /**
  * Provisioning state of the BackupVault resource
  */
@@ -407,6 +418,22 @@ union AKSVolumeTypes {
 }
 
 /**
+ * Backup solution types for PostgreSQL Flexible Server.
+ */
+@added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_07_01)
+union BackupSolutionType {
+  string,
+
+  /** Logical backup type */
+  LogicalBackup: "LogicalBackup",
+
+  /** Physical backup type */
+  PhysicalBackup: "PhysicalBackup",
+}
+
+/**
  * backup support feature type.
  */
 union FeatureType {
@@ -583,6 +610,12 @@ model BackupVault {
   monitoringSettings?: MonitoringSettings;
 
   /**
+   * Cost Management Settings of the vault
+   */
+  @added(Versions.v2026_06_01)
+  costManagementSettings?: CostManagementSettings;
+
+  /**
    * Provisioning state of the BackupVault resource
    */
   @visibility(Lifecycle.Read)
@@ -609,7 +642,8 @@ model BackupVault {
    * Storage Settings
    */
   @identifiers(#[])
-  storageSettings: StorageSetting[];
+  @madeOptional(Versions.v2026_03_01)
+  storageSettings?: StorageSetting[];
 
   /**
    * Is vault protected by resource guard
@@ -661,6 +695,17 @@ model MonitoringSettings {
 model AzureMonitorAlertSettings {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   alertsForAllJobFailures?: AlertsState;
+}
+
+/**
+ * Cost Management Settings of the vault
+ */
+@added(Versions.v2026_06_01)
+model CostManagementSettings {
+  /**
+   * Settings for granularity level
+   */
+  granularityLevel?: GranularityLevel;
 }
 
 /**
@@ -736,6 +781,60 @@ model ImmutabilitySettings {
    * Immutability state
    */
   state?: ImmutabilityState;
+
+  /**
+   * Immutability configuration containing type and duration.
+   */
+  @added(Versions.v2026_07_01)
+  configuration?: ImmutabilityConfiguration;
+}
+
+/**
+ * Type of immutability configuration.
+ */
+@added(Versions.v2026_07_01)
+union ImmutabilityType {
+  string,
+
+  /** Immutability is enforced as per the backup policy retention. */
+  AsPerPolicy: "AsPerPolicy",
+
+  /** Time-based immutability with a configurable duration window. */
+  TimeBased: "TimeBased",
+}
+
+/**
+ * Immutability configuration containing type and duration.
+ */
+@added(Versions.v2026_07_01)
+model ImmutabilityConfiguration {
+  /**
+   * Type of immutability. Supported values: AsPerPolicy or TimeBased.
+   */
+  type?: ImmutabilityType;
+
+  /**
+   * Duration in days for time-based immutability.
+   * Required when type is TimeBased. Must be null when type is AsPerPolicy.
+   */
+  durationInDays?: int32;
+}
+
+/**
+ * Immutability properties of a recovery point.
+ */
+@added(Versions.v2026_07_01)
+model RecoveryPointImmutabilityProperties {
+  /**
+   * Whether the recovery point is currently within its immutability window.
+   */
+  isImmutable: boolean;
+
+  /**
+   * UTC time when the recovery point's immutability window expires.
+   * Null for AsPerPolicy vaults.
+   */
+  expiryTime?: utcDateTime;
 }
 
 /**
@@ -1068,7 +1167,7 @@ model OperationResource {
 
   /**
    * Required if status == failed or status == canceled. This is the OData v4 error format, used by the RPC and will go into the v2.2 Azure REST API guidelines.
-   * The full set of optional properties (e.g. inner errors / details) can be found in the "Error Response" section.
+   * The full set of optional properties (e.g. inner errors / details) can be found in the `Error Response` section.
    */
   error?: Error;
 
@@ -1078,7 +1177,7 @@ model OperationResource {
   id?: string;
 
   /**
-   * It must match the last segment of the "id" field, and will typically be a GUID / system generated value
+   * It must match the last segment of the `id` field, and will typically be a GUID / system generated value.
    */
   name?: string;
 
@@ -1136,6 +1235,12 @@ model PatchBackupVaultInput {
    * Feature Settings
    */
   featureSettings?: FeatureSettings;
+
+  /**
+   * Cost Management Settings of the vault
+   */
+  @added(Versions.v2026_06_01)
+  costManagementSettings?: CostManagementSettings;
 
   /**
    * ResourceGuardOperationRequests on which LAC check will be performed
@@ -1715,6 +1820,7 @@ model IdentityDetails {
   /**
    * ARM URL for User Assigned Identity.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   userAssignedIdentityArmUrl?: string;
 }
 
@@ -2060,6 +2166,7 @@ model AzureBackupJob {
   /**
    * Url which contains job's progress
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   progressUrl?: string;
 
@@ -2276,6 +2383,36 @@ model AzureBackupRehydrationRequest {
 }
 
 /**
+ * Type of Datasource object, used to initialize the right inherited type
+ */
+@added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_06_01)
+union ResumeProtectionRequestObjectType {
+  string,
+
+  @doc("Resume Protection Request Type.")
+  ResumeProtectionRequest: "ResumeProtectionRequest",
+}
+
+/**
+ * Request body of Resume protection when MSI is to be changed
+ */
+@discriminator("objectType")
+@added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_06_01)
+model ResumeProtectionRequest {
+  /**
+   * Type of Datasource object, used to initialize the right inherited type
+   */
+  objectType: ResumeProtectionRequestObjectType;
+
+  /**
+   * identity details of the MSI
+   */
+  identityDetails?: IdentityDetails;
+}
+
+/**
  * Request body of Stop protection when MUA is Enabled
  */
 model StopProtectionRequest {
@@ -2338,7 +2475,7 @@ model AzureBackupFindRestorableTimeRangesRequest {
 /**
  * List Restore Ranges Response
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Composition is used here to reuse common resource model."
 model AzureBackupFindRestorableTimeRangesResponseResource extends DppResource {
   /**
    * AzureBackupFindRestorableTimeRangesResponseResource properties
@@ -2383,6 +2520,7 @@ model ExportJobsResult {
   /**
    * URL of the blob into which the serialized string of list of jobs is exported.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   blobUrl?: string;
 
@@ -2396,6 +2534,7 @@ model ExportJobsResult {
   /**
    * URL of the blob into which the ExcelFile is uploaded.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   excelFileBlobUrl?: string;
 
@@ -2750,6 +2889,13 @@ model AzureBackupDiscreteRecoveryPoint extends AzureBackupRecoveryPoint {
    */
   recoveryPointState?: RecoveryPointCompletionState;
 
+  /**
+   * Immutability properties of the recovery point.
+   */
+  @added(Versions.v2026_07_01)
+  @visibility(Lifecycle.Read)
+  immutabilityProperties?: RecoveryPointImmutabilityProperties;
+
   objectType: "AzureBackupDiscreteRecoveryPoint";
 }
 
@@ -2799,6 +2945,7 @@ model AzureBackupFindRestorableTimeRangesRequestResource
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept for backward compatibility"
 model DppWorkerRequest {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   subscriptionId?: string;
@@ -3038,6 +3185,91 @@ model NamespacedNameResource {
 }
 
 /**
+ * The settings for Blob Backup Auto Protection.
+ */
+@added(Versions.v2026_03_01)
+@discriminator("objectType")
+model BlobBackupAutoProtectionSettings {
+  /**
+   * Type of the specific object - used for deserializing
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  objectType: string;
+
+  /**
+   * Flag to enable whether auto protection.
+   */
+  enabled: boolean;
+}
+
+/**
+ * Rule mode (Only Exclude supported for now).
+ */
+@added(Versions.v2026_03_01)
+union BlobBackupRuleMode {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Exclude: "Exclude",
+}
+
+/**
+ * Pattern type. Only Prefix supported for now.
+ */
+@added(Versions.v2026_03_01)
+union BlobBackupPatternType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Prefix: "Prefix",
+}
+
+/**
+ * Indicates a Blob Backup Auto Protection Rule.
+ */
+@added(Versions.v2026_03_01)
+model BlobBackupAutoProtectionRule {
+  /**
+   * Type of the specific object - used for deserializing
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  objectType: string;
+
+  /**
+   * Exclude removes candidates (after inclusion)
+   */
+  mode: BlobBackupRuleMode;
+
+  /**
+   * Pattern type: Prefix, only pattern type supported for now.
+   */
+  type: BlobBackupPatternType;
+
+  /**
+   * The string pattern to evaluate against container names. For now this accepts literal strings only (no wildcards or regex).
+   */
+  pattern: string;
+}
+
+/**
+ * Parameters to be used for Blob Backup Rule Based Auto Protection settings.
+ */
+@added(Versions.v2026_03_01)
+model BlobBackupRuleBasedAutoProtectionSettings
+  extends BlobBackupAutoProtectionSettings {
+  /*
+   * Type of the specific object - used for deserializing
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  objectType: "BlobBackupRuleBasedAutoProtectionSettings";
+
+  /**
+   * Rules are evaluated in the order provided. Inclusion adds candidates; exclusion removes candidates.
+   * If no rules are present, all containers are considered eligible when enabled = true.
+   */
+  @identifiers(#[])
+  rules?: BlobBackupAutoProtectionRule[];
+}
+
+/**
  * Parameters to be used during configuration of backup of blobs
  */
 model BlobBackupDatasourceParameters extends BackupDatasourceParameters {
@@ -3050,12 +3282,37 @@ model BlobBackupDatasourceParameters extends BackupDatasourceParameters {
   objectType: "BlobBackupDatasourceParameters";
 }
 
+/**
+ * Paramters to be used during configuration of backup of blobs using AutoProtection settings
+ */
+@added(Versions.v2026_03_01)
+model BlobBackupDatasourceParametersForAutoProtection
+  extends BackupDatasourceParameters {
+  ...BlobBackupDatasourceCommonParametersForAutoProtection;
+
+  /**
+   * Type of the specific object - used for deserializing
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  objectType: "BlobBackupDatasourceParametersForAutoProtection";
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BlobBackupDatasourceCommonParameters {
   /**
    * List of containers to be backed up during configuration of backup of blobs
    */
   containersList: string[];
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@added(Versions.v2026_03_01)
+model BlobBackupDatasourceCommonParametersForAutoProtection {
+  /**
+   * AutoProtection settings
+   */
+  @added(Versions.v2026_03_01)
+  autoProtectionSettings: BlobBackupRuleBasedAutoProtectionSettings;
 }
 
 /**
@@ -3068,6 +3325,53 @@ model AdlsBlobBackupDatasourceParameters extends BackupDatasourceParameters {
    * Type of the specific object - used for deserializing
    */
   objectType: "AdlsBlobBackupDatasourceParameters";
+}
+
+/**
+ * Parameters to be used during configuration of backup of azure data lake storage account blobs using AutoProtection settings
+ */
+@added(Versions.v2026_03_01)
+model AdlsBlobBackupDatasourceParametersForAutoProtection
+  extends BackupDatasourceParameters {
+  ...BlobBackupDatasourceCommonParametersForAutoProtection;
+
+  /**
+   * Type of the specific object - used for deserializing
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  objectType: "AdlsBlobBackupDatasourceParametersForAutoProtection";
+}
+
+/**
+ * Parameters to be used during configuration of backup of PostgreSQL Flexible Servers
+ */
+@added(Versions.v2026_04_01_preview)
+@removed(Versions.v2026_06_01)
+@added(Versions.v2026_07_01)
+model PostgreSqlFlexibleServerBackupDatasourceParameters
+  extends BackupDatasourceParameters {
+  /**
+   * Type of backup taken, Logical/Physical
+   */
+  backupSolutionType?: BackupSolutionType;
+
+  objectType: "PostgreSqlFlexibleServerBackupDatasourceParameters";
+}
+
+/**
+ * Generic parameters to be used during configuration of backup
+ */
+@added(Versions.v2026_06_01)
+model GenericBackupDatasourceParameters extends BackupDatasourceParameters {
+  /**
+   * List of resource selectors to be backed up during configuration of backup
+   */
+  resourceSelectors: string[];
+
+  /**
+   * Type of the specific object - used for deserializing
+   */
+  objectType: "GenericBackupDatasourceParameters";
 }
 
 /**
@@ -3414,6 +3718,44 @@ model RangeBasedItemLevelRestoreCriteria extends ItemLevelRestoreCriteria {
 }
 
 /**
+ * Generic criteria to be used during restore
+ */
+@added(Versions.v2026_06_01)
+model GenericRestoreDatasourceCriteria extends ItemLevelRestoreCriteria {
+  /**
+   * List of resource identifiers that need to be restored
+   */
+  resourceSelectors: ResourceListSelectionCriteria;
+
+  /**
+   * Type of the specific object - used for deserializing
+   */
+  objectType: "GenericRestoreDatasourceCriteria";
+}
+
+/**
+ * Specifies the list of resources to be restored
+ */
+@added(Versions.v2026_06_01)
+model ResourceListSelectionCriteria {
+  /**
+   * Type of the specific object - used for deserializing
+   */
+  objectType: string;
+
+  /**
+   * List of resource identifiers to restore from
+   */
+  resourceIdentifiers: string[];
+
+  /**
+   * This is a map of source resource names to target resources names to restore into. Any source name not included in the map will be restored with a default naming format
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Backward-compatible source-to-target name override map for generic restore"
+  resourceNameOverrides?: Record<string>;
+}
+
+/**
  * Item Level kubernetes storage class target info for restore operation
  */
 model KubernetesStorageClassRestoreCriteria extends ItemLevelRestoreCriteria {
@@ -3678,8 +4020,8 @@ model RestoreTargetInfo extends RestoreTargetInfoBase {
  */
 model ScheduleBasedBackupCriteria extends BackupCriteria {
   /**
-   * it contains absolute values like "AllBackup" / "FirstOfDay" / "FirstOfWeek" / "FirstOfMonth"
-   * and should be part of AbsoluteMarker enum
+   * It contains absolute marker values such as `AllBackup`, `FirstOfDay`, `FirstOfWeek`, and `FirstOfMonth`.
+   * These values should be part of the `AbsoluteMarker` enum.
    */
   absoluteCriteria?: AbsoluteMarker[];
 

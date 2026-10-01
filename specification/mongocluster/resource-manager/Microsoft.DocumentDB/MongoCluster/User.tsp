@@ -63,6 +63,7 @@ model IdentityUserProperties {
 @added(Versions.v2025_04_01_preview)
 model DatabaseRole {
   /** Database scope that the role is assigned to. */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-use-standard-acronyms" "Name kept for backward compatibility"
   db: string;
 
   /** The role that is assigned to the user on the database scope. */

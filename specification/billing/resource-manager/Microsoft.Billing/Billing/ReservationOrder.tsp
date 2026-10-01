@@ -87,6 +87,7 @@ interface ReservationOrders {
 }
 
 @@doc(ReservationOrder.name, "Order Id of the reservation");
-@@doc(ReservationOrder.properties,
+@@doc(
+  ReservationOrder.properties,
   "The properties associated to this reservation order"
 );

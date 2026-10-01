@@ -29,6 +29,14 @@ openapi-type: arm
 tag: package-2024-11
 ```
 
+### Tag: package-preview-2025-08
+
+These settings apply only when `--tag=package-preview-2025-08` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-08'
+input-file:
+  - preview/2025-08-01-preview/redis.json
+```
 
 ### Tag: package-2024-11
 

@@ -1,0 +1,1628 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.App SreAgent management service",
+    "version": "2026-01-01",
+    "description": "Microsoft.App Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Agents"
+    },
+    {
+      "name": "AgentsConnectors"
+    },
+    {
+      "name": "SupportedAgentModels"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.App/agents": {
+      "get": {
+        "operationId": "Agents_ListBySubscription",
+        "tags": [
+          "Agents"
+        ],
+        "description": "Get all agents for a subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AgentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_ListBySubscription": {
+            "$ref": "./examples/Agents_ListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.App/locations/{location}/supportedAgentModels": {
+      "get": {
+        "operationId": "SupportedAgentModels_ListByLocation",
+        "tags": [
+          "SupportedAgentModels"
+        ],
+        "description": "List SupportedAgentModel resources by SubscriptionLocationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SupportedAgentModelListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SupportedAgentModels_ListByLocation": {
+            "$ref": "./examples/SupportedAgentModels_ListByLocation.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/agents": {
+      "get": {
+        "operationId": "Agents_ListByResourceGroup",
+        "tags": [
+          "Agents"
+        ],
+        "description": "Get all the agents in a resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AgentListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_ListByResourceGroup": {
+            "$ref": "./examples/Agents_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/agents/{agentName}": {
+      "get": {
+        "operationId": "Agents_Get",
+        "tags": [
+          "Agents"
+        ],
+        "description": "Get the properties of an Agent",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "The name of the Agent",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_Get": {
+            "$ref": "./examples/Agents_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Agents_CreateOrUpdate",
+        "tags": [
+          "Agents"
+        ],
+        "description": "Creates or updates an Agent",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "The name of the Agent",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'Agent' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "201": {
+            "description": "Resource 'Agent' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_CreateOrUpdate": {
+            "$ref": "./examples/Agents_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Agents_Update",
+        "tags": [
+          "Agents"
+        ],
+        "description": "Update Agent's properties",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "The name of the Agent",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgentPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_Update": {
+            "$ref": "./examples/Agents_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Agents_Delete",
+        "tags": [
+          "Agents"
+        ],
+        "description": "Delete an Agent",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "The name of the Agent",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_Delete": {
+            "$ref": "./examples/Agents_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/agents/{agentName}/connectors": {
+      "get": {
+        "operationId": "AgentsConnectors_ListByAgent",
+        "tags": [
+          "AgentsConnectors"
+        ],
+        "description": "Get all the connectors for an Agent",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "The name of the Agent",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AgentConnectorListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AgentsConnectors_ListByAgent": {
+            "$ref": "./examples/AgentsConnectors_ListByAgent.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/agents/{agentName}/connectors/{connectorName}": {
+      "get": {
+        "operationId": "AgentsConnectors_Get",
+        "tags": [
+          "AgentsConnectors"
+        ],
+        "description": "Get the properties of an Agent Connector",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "The name of the Agent",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
+          },
+          {
+            "name": "connectorName",
+            "in": "path",
+            "description": "The name of the AgentConnector",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AgentConnector"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AgentsConnectors_Get": {
+            "$ref": "./examples/AgentsConnectors_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AgentsConnectors_CreateOrUpdate",
+        "tags": [
+          "AgentsConnectors"
+        ],
+        "description": "Creates or updates an Agent Connector",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "The name of the Agent",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
+          },
+          {
+            "name": "connectorName",
+            "in": "path",
+            "description": "The name of the AgentConnector",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgentConnector"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AgentConnector' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AgentConnector"
+            }
+          },
+          "201": {
+            "description": "Resource 'AgentConnector' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AgentConnector"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AgentsConnectors_CreateOrUpdate": {
+            "$ref": "./examples/AgentsConnectors_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "AgentsConnectors_Delete",
+        "tags": [
+          "AgentsConnectors"
+        ],
+        "description": "Delete an Agent Connector",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "The name of the Agent",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
+          },
+          {
+            "name": "connectorName",
+            "in": "path",
+            "description": "The name of the AgentConnector",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AgentsConnectors_Delete": {
+            "$ref": "./examples/AgentsConnectors_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/agents/{agentName}/connectors/{connectorName}/listSecrets": {
+      "post": {
+        "operationId": "AgentsConnectors_ListSecrets",
+        "tags": [
+          "AgentsConnectors"
+        ],
+        "description": "Get a Data Connector with secrets from an Agent",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "The name of the Agent",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
+          },
+          {
+            "name": "connectorName",
+            "in": "path",
+            "description": "The name of the AgentConnector",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AgentConnector"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AgentsConnectors_ListSecrets": {
+            "$ref": "./examples/AgentsConnectors_ListSecrets.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/agents/{agentName}/listConnectorsWithSecrets": {
+      "post": {
+        "operationId": "AgentsConnectors_ListWithSecretsByAgent",
+        "tags": [
+          "AgentsConnectors"
+        ],
+        "description": "List all Data Connectors with secrets from an Agent",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "The name of the Agent",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AgentConnectorCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "AgentsConnectors_ListWithSecretsByAgent": {
+            "$ref": "./examples/AgentsConnectors_ListWithSecretsByAgent.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/agents/{agentName}/start": {
+      "post": {
+        "operationId": "Agents_Start",
+        "tags": [
+          "Agents"
+        ],
+        "description": "Start an Agent",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "The name of the Agent",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_Start": {
+            "$ref": "./examples/Agents_Start.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/agents/{agentName}/stop": {
+      "post": {
+        "operationId": "Agents_Stop",
+        "tags": [
+          "Agents"
+        ],
+        "description": "Stop an Agent",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "agentName",
+            "in": "path",
+            "description": "The name of the Agent",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z]([-A-Za-z0-9]{0,30}[A-Za-z0-9])$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Agent"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Agents_Stop": {
+            "$ref": "./examples/Agents_Stop.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ActionConfiguration": {
+      "type": "object",
+      "description": "Configuration for action",
+      "properties": {
+        "identity": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The identity used by the action"
+        },
+        "mode": {
+          "$ref": "#/definitions/AgentMode",
+          "description": "The mode of the action"
+        },
+        "accessLevel": {
+          "$ref": "#/definitions/AgentAccessLevel",
+          "description": "The access level of the action"
+        }
+      }
+    },
+    "Agent": {
+      "type": "object",
+      "description": "Site Reliability Engineer (SRE) Agent resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AgentProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AgentAccessLevel": {
+      "type": "string",
+      "description": "Agent access level",
+      "enum": [
+        "Low",
+        "High"
+      ],
+      "x-ms-enum": {
+        "name": "AgentAccessLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Low",
+            "value": "Low",
+            "description": "Agent has read-only permissions on managed resource groups"
+          },
+          {
+            "name": "High",
+            "value": "High",
+            "description": "Agent can take approved actions on resources using its own managed identity"
+          }
+        ]
+      }
+    },
+    "AgentConnector": {
+      "type": "object",
+      "description": "Agent Connector used to connect to data sources",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AgentConnectorProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "AgentConnectorCollection": {
+      "type": "object",
+      "description": "Collection of Agent Connectors",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AgentConnector items on this page",
+          "items": {
+            "$ref": "#/definitions/AgentConnector"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AgentConnectorListResult": {
+      "type": "object",
+      "description": "The response of a AgentConnector list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AgentConnector items on this page",
+          "items": {
+            "$ref": "#/definitions/AgentConnector"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AgentConnectorProperties": {
+      "type": "object",
+      "description": "Agent Connector Properties",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "Endpoint of the connector"
+        },
+        "dataSource": {
+          "type": "string",
+          "format": "password",
+          "description": "Data source connection string or endpoint",
+          "x-ms-secret": true
+        },
+        "identity": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Identity used to access the data source"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ConnectorProvisioningState",
+          "description": "Provisioning state of the connector",
+          "readOnly": true
+        },
+        "deploymentError": {
+          "type": "string",
+          "description": "Deployment error message if provisioning failed",
+          "readOnly": true
+        },
+        "extendedProperties": {
+          "type": "object",
+          "description": "Additional properties for the data connector which can be used to store custom key-value pairs",
+          "additionalProperties": {}
+        },
+        "dataConnectorType": {
+          "type": "string",
+          "description": "The type of the data connector"
+        }
+      }
+    },
+    "AgentIdentity": {
+      "type": "object",
+      "description": "Agent identity configuration",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether the agent identity is enabled",
+          "readOnly": true
+        },
+        "clientId": {
+          "type": "string",
+          "description": "Client ID (GUID) for the agent identity",
+          "readOnly": true
+        },
+        "initialSponsorGroupId": {
+          "type": "string",
+          "description": "Initial sponsor group ID (required for agent identity)"
+        }
+      },
+      "required": [
+        "initialSponsorGroupId"
+      ]
+    },
+    "AgentIdentityPatch": {
+      "type": "object",
+      "description": "Agent identity configuration for PATCH requests",
+      "properties": {
+        "initialSponsorGroupId": {
+          "type": "string",
+          "description": "Initial sponsor group ID (required for PUT but optional for PATCH)"
+        }
+      }
+    },
+    "AgentListResult": {
+      "type": "object",
+      "description": "The response of a Agent list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Agent items on this page",
+          "items": {
+            "$ref": "#/definitions/Agent"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AgentMode": {
+      "type": "string",
+      "description": "Agent mode",
+      "enum": [
+        "Autonomous",
+        "Review",
+        "ReadOnly"
+      ],
+      "x-ms-enum": {
+        "name": "AgentMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Autonomous",
+            "value": "Autonomous",
+            "description": "Write actions are executed automatically without user approval"
+          },
+          {
+            "name": "Review",
+            "value": "Review",
+            "description": "Write actions require user approval before execution"
+          },
+          {
+            "name": "ReadOnly",
+            "value": "ReadOnly",
+            "description": "No write actions are executed"
+          }
+        ]
+      }
+    },
+    "AgentPatch": {
+      "type": "object",
+      "description": "Agent update model",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/AgentPatchProperties",
+          "description": "Agent specific properties"
+        }
+      }
+    },
+    "AgentPatchProperties": {
+      "type": "object",
+      "description": "Agent specific properties for PATCH requests.\n\nPATCH request bodies must not include required properties and should not include read-only properties.",
+      "properties": {
+        "knowledgeGraphConfiguration": {
+          "$ref": "#/definitions/KnowledgeGraphConfiguration",
+          "description": "Knowledge graph configuration for agent"
+        },
+        "actionConfiguration": {
+          "$ref": "#/definitions/ActionConfiguration",
+          "description": "Configuration for action"
+        },
+        "logConfiguration": {
+          "$ref": "#/definitions/LogConfiguration",
+          "description": "Log configurations"
+        },
+        "incidentManagementConfiguration": {
+          "$ref": "#/definitions/IncidentManagementConfiguration",
+          "description": "Incident management configurations"
+        },
+        "upgradeChannel": {
+          "$ref": "#/definitions/UpgradeChannel",
+          "description": "The upgrade channel of the agent"
+        },
+        "agentIdentity": {
+          "$ref": "#/definitions/AgentIdentityPatch",
+          "description": "Agent identity configuration for accessing resources"
+        },
+        "defaultModel": {
+          "$ref": "#/definitions/DefaultModel",
+          "description": "Default AI model configuration for the agent"
+        }
+      }
+    },
+    "AgentPowerState": {
+      "type": "string",
+      "description": "Power state of the Agent",
+      "enum": [
+        "Running",
+        "Stopped"
+      ],
+      "x-ms-enum": {
+        "name": "AgentPowerState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The Agent is running"
+          },
+          {
+            "name": "Stopped",
+            "value": "Stopped",
+            "description": "The Agent is stopped"
+          }
+        ]
+      }
+    },
+    "AgentProperties": {
+      "type": "object",
+      "description": "Properties of the Agent",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/AgentProvisioningState",
+          "description": "Provisioning state of the Agent",
+          "readOnly": true
+        },
+        "agentEndpoint": {
+          "type": "string",
+          "description": "The endpoint of the Agent",
+          "readOnly": true
+        },
+        "runningState": {
+          "type": "string",
+          "description": "The running state of the Agent",
+          "readOnly": true
+        },
+        "powerState": {
+          "$ref": "#/definitions/AgentPowerState",
+          "description": "The power state of the Agent",
+          "readOnly": true
+        },
+        "knowledgeGraphConfiguration": {
+          "$ref": "#/definitions/KnowledgeGraphConfiguration",
+          "description": "Knowledge graph configuration for agent"
+        },
+        "actionConfiguration": {
+          "$ref": "#/definitions/ActionConfiguration",
+          "description": "Configuration for action"
+        },
+        "logConfiguration": {
+          "$ref": "#/definitions/LogConfiguration",
+          "description": "Log configurations"
+        },
+        "incidentManagementConfiguration": {
+          "$ref": "#/definitions/IncidentManagementConfiguration",
+          "description": "Incident management configurations"
+        },
+        "upgradeChannel": {
+          "$ref": "#/definitions/UpgradeChannel",
+          "description": "The upgrade channel of the agent"
+        },
+        "agentIdentity": {
+          "$ref": "#/definitions/AgentIdentity",
+          "description": "Agent identity configuration for accessing resources"
+        },
+        "defaultModel": {
+          "$ref": "#/definitions/DefaultModel",
+          "description": "Default AI model configuration for the agent"
+        }
+      }
+    },
+    "AgentProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of the Agent",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "InProgress",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "AgentProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The Agent provisioning succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The Agent provisioning failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The Agent provisioning was canceled"
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The Agent is being provisioned"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The Agent is being deleted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ApplicationInsightsConfiguration": {
+      "type": "object",
+      "description": "Application Insights Configuration",
+      "properties": {
+        "appId": {
+          "type": "string",
+          "description": "The Application ID for the Application Insights resource"
+        },
+        "connectionString": {
+          "type": "string",
+          "format": "password",
+          "description": "The connection string for the Application Insights resource",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "Connector": {
+      "type": "object",
+      "description": "Base connector properties",
+      "properties": {
+        "endpoint": {
+          "type": "string",
+          "format": "uri",
+          "description": "Endpoint of the connector"
+        },
+        "dataSource": {
+          "type": "string",
+          "format": "password",
+          "description": "Data source connection string or endpoint",
+          "x-ms-secret": true
+        },
+        "identity": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Identity used to access the data source"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ConnectorProvisioningState",
+          "description": "Provisioning state of the connector",
+          "readOnly": true
+        },
+        "deploymentError": {
+          "type": "string",
+          "description": "Deployment error message if provisioning failed",
+          "readOnly": true
+        },
+        "extendedProperties": {
+          "type": "object",
+          "description": "Additional properties for the data connector which can be used to store custom key-value pairs",
+          "additionalProperties": {}
+        }
+      }
+    },
+    "ConnectorProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of a connector",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "InProgress",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectorProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The connector provisioning succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The connector provisioning failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The connector provisioning was canceled"
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The connector is being provisioned"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "The connector is being deleted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "DefaultModel": {
+      "type": "object",
+      "description": "Default AI model configuration",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "AI provider name (e.g., MicrosoftFoundry, Anthropic)"
+        },
+        "name": {
+          "type": "string",
+          "description": "Model name (e.g., gpt-5, claude-opus-4-5, claude-sonnet-4-5)"
+        }
+      }
+    },
+    "IncidentManagementConfiguration": {
+      "type": "object",
+      "description": "Incident Management Configurations",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of incident management system"
+        },
+        "connectionName": {
+          "type": "string",
+          "description": "The name of the connection"
+        },
+        "connectionUrl": {
+          "type": "string",
+          "description": "The URL of the connection"
+        },
+        "connectionKey": {
+          "type": "string",
+          "format": "password",
+          "description": "The key for the connection",
+          "x-ms-secret": true
+        },
+        "oboUser": {
+          "type": "string",
+          "description": "The user for the connection"
+        }
+      }
+    },
+    "KnowledgeGraphConfiguration": {
+      "type": "object",
+      "description": "Knowledge graph configuration for agent",
+      "properties": {
+        "identity": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The identity used to access the knowledge graph"
+        },
+        "managedResources": {
+          "type": "array",
+          "description": "The list of resources managed by agent",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
+          }
+        }
+      }
+    },
+    "LogConfiguration": {
+      "type": "object",
+      "description": "Log Configurations",
+      "properties": {
+        "applicationInsightsConfiguration": {
+          "$ref": "#/definitions/ApplicationInsightsConfiguration",
+          "description": "Application Insights Configuration"
+        }
+      }
+    },
+    "ResourceTags": {
+      "type": "object",
+      "description": "Resource tags update model",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "SupportedAgentModel": {
+      "type": "object",
+      "description": "Collection of supported AI models",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SupportedAgentModelProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "SupportedAgentModelListResult": {
+      "type": "object",
+      "description": "The response of a SupportedAgentModel list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SupportedAgentModel items on this page",
+          "items": {
+            "$ref": "#/definitions/SupportedAgentModel"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SupportedAgentModelProperties": {
+      "type": "object",
+      "description": "Supported AI model properties",
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "The provider name (e.g., MicrosoftFoundry, Anthropic)"
+        },
+        "providerDisplayName": {
+          "type": "string",
+          "description": "The display name of the provider (e.g., Microsoft Foundry, Anthropic)"
+        },
+        "model": {
+          "type": "string",
+          "description": "The model name (e.g., gpt-5.2, claude-sonnet-4-5)"
+        },
+        "modelDisplayName": {
+          "type": "string",
+          "description": "The display name of the model (e.g., GPT-5.2, Claude Sonnet 4.5)"
+        },
+        "multiplier": {
+          "type": "string",
+          "description": "Billing multiplier for the model (e.g., 1x, 2x)"
+        },
+        "default": {
+          "type": "boolean",
+          "description": "Indicates whether this is the default model"
+        }
+      },
+      "required": [
+        "provider",
+        "model",
+        "default"
+      ]
+    },
+    "UpgradeChannel": {
+      "type": "string",
+      "description": "Upgrade channel for Agent",
+      "enum": [
+        "Preview",
+        "Stable"
+      ],
+      "x-ms-enum": {
+        "name": "UpgradeChannel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Preview",
+            "value": "Preview",
+            "description": "Preview upgrade channel"
+          },
+          {
+            "name": "Stable",
+            "value": "Stable",
+            "description": "Stable upgrade channel"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}
