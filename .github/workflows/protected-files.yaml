@@ -33,7 +33,7 @@ jobs:
         if: ${{ env.user-allowed == 'true' }}
         run: echo "Trusted automation account is allowed to update protected files"
 
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: $/.github/actions/checkout
         if: ${{ env.user-allowed != 'true' }}
         with:
           # Compare the PR merge commit with its base-branch parent.
