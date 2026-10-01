@@ -1181,43 +1181,39 @@ model NewErrorResponse {
   /**
    * The error object.
    */
-  error?: NewErrorResponseError;
-}
+  #suppress "@azure-tools/typespec-azure-core/no-unnamed-types" "Faithful migration: the original error property is an anonymous inline object in stable/2023-01-15; extracting a named model changes the frozen OpenAPI contract."
+  error?: {
+    /**
+     * The error code.
+     */
+    @visibility(Lifecycle.Read)
+    code?: string;
 
-/**
- * The error object.
- */
-model NewErrorResponseError {
-  /**
-   * The error code.
-   */
-  @visibility(Lifecycle.Read)
-  code?: string;
+    /**
+     * The error message.
+     */
+    @visibility(Lifecycle.Read)
+    message?: string;
 
-  /**
-   * The error message.
-   */
-  @visibility(Lifecycle.Read)
-  message?: string;
+    /**
+     * The error target.
+     */
+    @visibility(Lifecycle.Read)
+    target?: string;
 
-  /**
-   * The error target.
-   */
-  @visibility(Lifecycle.Read)
-  target?: string;
+    /**
+     * The error details.
+     */
+    #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Faithful migration: the original array property has no x-ms-identifiers in stable/2023-01-15; emitting identifiers would change the frozen contract."
+    @visibility(Lifecycle.Read)
+    details?: NewErrorResponse[];
 
-  /**
-   * The error details.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "Faithful migration: the original array property has no x-ms-identifiers in stable/2023-01-15; emitting identifiers would change the frozen contract."
-  @visibility(Lifecycle.Read)
-  details?: NewErrorResponse[];
-
-  /**
-   * The error additional info.
-   */
-  @visibility(Lifecycle.Read)
-  additionalInfo?: ErrorAdditionalInfo[];
+    /**
+     * The error additional info.
+     */
+    @visibility(Lifecycle.Read)
+    additionalInfo?: ErrorAdditionalInfo[];
+  };
 }
 
 /**
