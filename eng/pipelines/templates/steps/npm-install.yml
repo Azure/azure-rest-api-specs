@@ -15,8 +15,8 @@ steps:
     displayName: Install pnpm
     workingDirectory: ${{ parameters.WorkingDirectory }}
 
-  - script: pnpm ci
-    displayName: pnpm install
+  - script: pnpm install --no-lockfile
+    displayName: pnpm install --no-lockfile
     workingDirectory: ${{ parameters.WorkingDirectory }}
 
   - script: pnpm ls || true
