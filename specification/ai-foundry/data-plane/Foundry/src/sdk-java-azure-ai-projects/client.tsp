@@ -204,6 +204,8 @@ namespace Azure.AI.Projects;
 
 @@clientName(EvaluatorDefinition.init_parameters, "initializationParameters");
 
+@@clientName(DataGenerationJobResult.generated_samples, "generatedSampleCount", "java");
+
 @@clientName(AttackStrategy.Base64, "Base_64");
 @@clientName(AttackStrategy.ROT13, "ROT_13");
 
