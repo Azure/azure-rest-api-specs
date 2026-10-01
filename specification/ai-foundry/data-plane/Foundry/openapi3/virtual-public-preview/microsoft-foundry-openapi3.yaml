@@ -46636,15 +46636,15 @@ components:
         low:
           type: number
           format: double
-          description: Lower bound.
+          description: Lower estimate for the configured workload, calculated using required model calls and average usage per call.
         typical:
           type: number
           format: double
-          description: Central estimate.
+          description: Expected estimate for the configured workload, calculated using typical model calls and average usage per call.
         ceiling:
           type: number
           format: double
-          description: Upper bound.
+          description: Guaranteed upper bound for the configured workload. Monetary values use the pricing snapshot identified by `prices_as_of`.
       description: A low/typical/ceiling range for an estimated quantity. Expected values may be fractional, including estimated model-call counts.
     AgentOptimizationEstimateInputs:
       type: object
