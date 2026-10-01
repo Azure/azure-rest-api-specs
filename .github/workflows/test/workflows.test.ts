@@ -99,6 +99,7 @@ describe("workflow files", () => {
         ".github/shared",
         ".github/workflows",
         "eng/tools",
+        "libs/foundry-core",
         ...[
           "lint-diff",
           "oav-runner",
