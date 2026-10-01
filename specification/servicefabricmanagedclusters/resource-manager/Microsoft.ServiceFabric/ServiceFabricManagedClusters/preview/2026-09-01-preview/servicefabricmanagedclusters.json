@@ -3754,6 +3754,80 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/reimageAllDisks": {
+      "post": {
+        "operationId": "NodeTypes_ReimageAllDisks",
+        "tags": [
+          "NodeTypes"
+        ],
+        "description": "Reimages a single node on the node type, including its OS disk and all data disks.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nodeTypeName",
+            "in": "path",
+            "description": "The name of the node type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReimageAllDisksParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Reimage all disks on a node": {
+            "$ref": "./examples/ReimageAllDisks_example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/nodeTypes/{nodeTypeName}/restart": {
       "post": {
         "operationId": "NodeTypes_Restart",
@@ -7655,6 +7729,28 @@
       },
       "required": [
         "name"
+      ]
+    },
+    "ReimageAllDisksParameters": {
+      "type": "object",
+      "description": "Parameters for reimaging all disks on a single node.",
+      "properties": {
+        "nodes": {
+          "type": "array",
+          "description": "The name of the node to reimage.",
+          "minItems": 1,
+          "maxItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "force": {
+          "type": "boolean",
+          "description": "Force the action to go through."
+        }
+      },
+      "required": [
+        "nodes"
       ]
     },
     "ResourceAzStatus": {

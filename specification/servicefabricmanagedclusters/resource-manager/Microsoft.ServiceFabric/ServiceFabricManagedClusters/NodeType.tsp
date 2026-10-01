@@ -119,6 +119,17 @@ interface NodeTypes {
   >;
 
   /**
+   * Reimages a single node on the node type, including its OS disk and all data disks.
+   */
+  @added(Versions.v2026_09_01_preview)
+  reimageAllDisks is ArmResourceActionAsync<
+    NodeType,
+    ReimageAllDisksParameters,
+    never,
+    LroHeaders = ArmCombinedLroHeaders
+  >;
+
+  /**
    * Restarts one or more nodes on the node type. It will disable the fabric nodes, trigger a restart on the VMs and activate the nodes back again.
    */
   restart is ArmResourceActionAsync<
@@ -799,6 +810,24 @@ model NodeTypeActionParameters {
    * Specifies the way the operation will be performed.
    */
   updateType?: UpdateType;
+}
+
+/**
+ * Parameters for reimaging all disks on a single node.
+ */
+@added(Versions.v2026_09_01_preview)
+model ReimageAllDisksParameters {
+  /**
+   * The name of the node to reimage.
+   */
+  @minItems(1)
+  @maxItems(1)
+  nodes: string[];
+
+  /**
+   * Force the action to go through.
+   */
+  force?: boolean;
 }
 
 /**

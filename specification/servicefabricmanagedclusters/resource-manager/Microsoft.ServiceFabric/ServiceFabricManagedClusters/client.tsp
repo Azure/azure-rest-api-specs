@@ -144,6 +144,7 @@ namespace Azure.ResourceManager.Models {
 @@clientName(NodeTypes.getFaultSimulation::parameters.body, "parameters");
 @@clientName(NodeTypes.redeploy::parameters.body, "parameters");
 @@clientName(NodeTypes.reimage::parameters.body, "parameters");
+@@clientName(NodeTypes.reimageAllDisks::parameters.body, "parameters");
 @@clientName(NodeTypes.restart::parameters.body, "parameters");
 @@clientName(NodeTypes.start::parameters.body, "parameters");
 @@clientName(NodeTypes.startFaultSimulation::parameters.body, "parameters");
@@ -820,6 +821,7 @@ namespace Azure.ResourceManager.Models {
 );
 @@clientName(NodeTypes.redeploy::parameters.body, "content", "csharp");
 @@clientName(NodeTypes.reimage::parameters.body, "content", "csharp");
+@@clientName(NodeTypes.reimageAllDisks::parameters.body, "content", "csharp");
 @@clientName(NodeTypes.restart::parameters.body, "content", "csharp");
 @@clientName(NodeTypes.start::parameters.body, "content", "csharp");
 @@clientName(
