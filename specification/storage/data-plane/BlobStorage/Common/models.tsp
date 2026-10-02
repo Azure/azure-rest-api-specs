@@ -246,6 +246,10 @@ union StorageErrorCode {
   /** Feature version mismatch. */
   FeatureVersionMismatch: "FeatureVersionMismatch",
 
+  /** Feature is not enabled. */
+  @added(Versions.v2026_12_06)
+  FeatureNotEnabled: "FeatureNotEnabled",
+
   /** Incremental copy blob mismatch. */
   IncrementalCopyBlobMismatch: "IncrementalCopyBlobMismatch",
 
