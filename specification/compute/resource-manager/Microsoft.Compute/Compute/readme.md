@@ -367,12 +367,14 @@ suppressions:
     from: ComputeRP.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/deallocate"].post.parameters
 # Suppressions for existing API versions for ComputeRP.json
-- code: ParametersInPointGet
+  - code: ParametersInPointGet
     reason: The optional $expand=instanceView query parameter is required to retrieve the gallery application instance view.
     from: ComputeRP.json
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/applications/{applicationName}"].get.parameters
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/applications/{applicationName}"].get.parameters
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/applications/{applicationName}"].get.parameters
+  - code: ParametersInPointGet
+    reason: The optional $expand=instanceView query parameter is required to retrieve the gallery application instance view.
+    from: ComputeRP.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/applications/{applicationName}"].get.parameters
   - code: ProvisioningStateSpecifiedForLROPut
     reason: The existing VM gallery application response contract does not include provisioningState.
     from: ComputeRP.json
