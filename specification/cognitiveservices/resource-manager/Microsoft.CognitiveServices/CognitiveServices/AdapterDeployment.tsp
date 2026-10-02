@@ -53,8 +53,34 @@ model AdapterDeploymentListResult {
    * URL used to retrieve the next page, when one exists.
    */
   @nextLink
-  nextLink?: string;
+  nextLink?: url;
 }
+
+alias AdapterDeploymentIfMatchHeader = {
+  /** Proceed only when the current adapter deployment ETag matches this value. */
+  @header("If-Match")
+  ifMatch?: string;
+};
+
+alias AdapterDeploymentPutConditionalHeaders = {
+  ...AdapterDeploymentIfMatchHeader;
+
+  /** Proceed only when no current adapter deployment ETag matches this value. */
+  @header("If-None-Match")
+  ifNoneMatch?: string;
+};
+
+alias AdapterDeploymentEtagResponseHeader = {
+  /** The concurrency token for the adapter deployment. */
+  @header("ETag")
+  etag?: string;
+};
+
+alias AdapterDeploymentLroHeaders = {
+  ...ArmCombinedLroHeaders<FinalResult = AdapterDeployment>;
+  ...Azure.Core.Foundations.RetryAfterHeader;
+  ...AdapterDeploymentEtagResponseHeader;
+};
 
 @added(Versions.v2026_09_15_preview)
 @armResourceOperations
@@ -62,29 +88,30 @@ interface AdapterDeployments {
   /**
    * Gets an adapter deployment by name.
    */
-  get is ArmResourceRead<AdapterDeployment>;
+  get is ArmResourceRead<
+    AdapterDeployment,
+    Response = ArmResponse<AdapterDeployment> &
+      AdapterDeploymentEtagResponseHeader
+  >;
 
   /**
    * Creates an adapter deployment or re-targets it to another compatible
    * managed compute deployment. The source model ID is immutable.
+   * Returns 201 for a new adapter or 200 for an existing adapter, including retries.
+   * Either response may require polling while provisioning is in progress.
    * After polling completes, retrieve the final resource from the original resource URL.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "Adapter deployment PUT returns 202 Accepted with the resource body, matching the existing backend contract."
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Adapter deployment PUT includes the current resource in its 202 Accepted response."
   @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AdapterDeployment,
+    Parameters = AdapterDeploymentPutConditionalHeaders,
     Response =
-      | ArmResourceUpdatedResponse<AdapterDeployment>
-      | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = AdapterDeployment> &
-          Azure.Core.Foundations.RetryAfterHeader> & {
-          /** The concurrency token for the accepted adapter deployment. */
-          @header("ETag")
-          etag?: string;
-
-          @bodyRoot
-          _: AdapterDeployment;
-        })
+      | (ArmResourceUpdatedResponse<AdapterDeployment> &
+          AdapterDeploymentLroHeaders)
+      | ArmResourceCreatedResponse<
+          AdapterDeployment,
+          AdapterDeploymentLroHeaders
+        >
   >;
 
   /**
@@ -100,6 +127,7 @@ interface AdapterDeployments {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     AdapterDeployment,
+    Parameters = AdapterDeploymentIfMatchHeader,
     LroHeaders = ArmCombinedLroHeaders<ArmOperationStatus, void> &
       Azure.Core.Foundations.RetryAfterHeader
   >;

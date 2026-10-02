@@ -1,13 +1,13 @@
 {
   "operationId": "AdapterDeployments_CreateOrUpdate",
-  "title": "CreateOrUpdateAdapterDeployment",
+  "title": "UpdateAdapterDeployment",
   "parameters": {
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "resourceGroupName",
     "accountName": "accountName",
     "adapterDeploymentName": "adapterDeploymentName",
     "api-version": "2026-09-15-preview",
-    "If-None-Match": "*",
+    "If-Match": "\"0x8D1234567890ABC\"",
     "resource": {
       "properties": {
         "sourceModelId": "azureai://accounts/accountName/projects/projectName/models/modelName/versions/1",
@@ -16,22 +16,22 @@
     }
   },
   "responses": {
-    "201": {
+    "200": {
       "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000001?api-version=2026-09-15-preview",
-        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000001?api-version=2026-09-15-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000002?api-version=2026-09-15-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000002?api-version=2026-09-15-preview",
         "Retry-After": "10",
-        "ETag": "\"0x8D1234567890ABC\""
+        "ETag": "\"0x8D1234567890ABD\""
       },
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/adapterDeployments/adapterDeploymentName",
         "name": "adapterDeploymentName",
         "type": "Microsoft.CognitiveServices/accounts/adapterDeployments",
-        "etag": "\"0x8D1234567890ABC\"",
+        "etag": "\"0x8D1234567890ABD\"",
         "properties": {
           "sourceModelId": "azureai://accounts/accountName/projects/projectName/models/modelName/versions/1",
           "targetDeploymentName": "managedComputeDeploymentName",
-          "provisioningState": "Creating"
+          "provisioningState": "Updating"
         }
       }
     }
