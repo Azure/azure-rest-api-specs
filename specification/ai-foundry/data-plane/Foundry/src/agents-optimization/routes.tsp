@@ -16,7 +16,17 @@ interface AgentOptimizationJobs {
   @summary("Create an agent optimization job")
   @route("agent_optimization_jobs")
   @pollingOperation(AgentOptimizationJobs.get)
-  create is postJob<AgentOptimizationJob>;
+  #suppress "@azure-tools/typespec-azure-core/long-running-polling-operation-required" "LRO polling is handled by the client via Operation-Location"
+  @post
+  create is FoundryDataPlaneOperation<
+    {
+      ...WithOperationId;
+
+      /** The agent optimization job inputs to create. */
+      @body inputs: AgentOptimizationJobInputs;
+    },
+    JobCreatedResponse<AgentOptimizationJob>
+  >;
 
   /**
    * Estimates validation-set rows, per-stage model call volumes, and cost bands without submitting the job.
