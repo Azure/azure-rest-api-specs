@@ -2,7 +2,7 @@
 # to "ARM Auto SignOff" and remove the legacy workflow.
 name: ARM Universal Auto SignOff
 
-on:
+on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base/default-branch code runs.
   # Must run on pull_request_target instead of pull_request, since the latter cannot trigger on
   # labels from bot accounts in fork PRs. pull_request_target is also more similar to the other
   # trigger "workflow_run" -- they are both privileged and run in the target branch and repo --
@@ -61,7 +61,7 @@ jobs:
       # For workflows that are triggered by the pull_request_target event, the workflow runs in the
       # context of the base of the pull request.  You should make sure that you do not check out,
       # build, or run untrusted code from the head of the pull request.
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: $/.github/actions/checkout
         with:
           # Only needs .github folder for automation, not the files in the PR (analyzed in a
           # separate workflow).

@@ -3,7 +3,7 @@
 # If an unauthorized user applies a protected label, the bot removes it and posts a warning.
 name: "Protected Labels"
 
-on:
+on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base/default-branch code runs.
   pull_request_target:
     types:
       - labeled
@@ -17,7 +17,7 @@ jobs:
     name: Check Protected Label
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: $/.github/actions/checkout
         with:
           sparse-checkout: |
             .github/

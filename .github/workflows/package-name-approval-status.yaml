@@ -1,6 +1,6 @@
 name: "Package Name Approval - Set Status"
 
-on:
+on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base/default-branch code runs.
   workflow_run:
     workflows: ["Package Name Approval - Analyze Code"]
     types: [completed]
@@ -16,7 +16,7 @@ jobs:
     name: Post Package Name Results
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: $/.github/actions/checkout
         with:
           sparse-checkout: |
             .github/
