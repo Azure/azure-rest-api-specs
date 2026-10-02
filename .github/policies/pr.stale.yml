@@ -63,6 +63,18 @@ configuration:
                 This PR has been closed since it had no activity for 28 days. If you still need this change, please reopen the PR and @mention the assignee for review.
 
     eventResponderTasks:
+      - description: Remove the stale label when the PR author updates the PR
+        if:
+          - payloadType: Pull_Request
+          - isActivitySender:
+              issueAuthor: true
+          - hasLabel:
+              label: no-recent-activity
+          - isOpen
+        then:
+          - removeLabel:
+              label: no-recent-activity
+
       - description: Remove the stale label when the PR author comments
         if:
           - payloadType: Issue_Comment
