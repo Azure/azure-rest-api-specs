@@ -1299,6 +1299,9 @@
           "Create Managed Private Cluster with fqdn subdomain specified": {
             "$ref": "./examples/ManagedClustersCreate_PrivateClusterFQDNSubdomain.json"
           },
+          "Create or Update Managed Cluster with Pod Snapshot Restore enabled": {
+            "$ref": "./examples/ManagedClustersCreate_EnablePodSnapshotRestore.json"
+          },
           "Create/Update AAD Managed Cluster with EnableAzureRBAC": {
             "$ref": "./examples/ManagedClustersCreate_UpdateWithEnableAzureRBAC.json"
           },
@@ -13765,6 +13768,16 @@
       },
       "readOnly": true
     },
+    "ManagedClusterPodSnapshotProfile": {
+      "type": "object",
+      "description": "The Pod Snapshot Restore profile for the managed cluster.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the Pod Snapshot Restore core extension is enabled for the managed cluster."
+        }
+      }
+    },
     "ManagedClusterPoolUpgradeProfile": {
       "type": "object",
       "description": "The list of available upgrade versions.",
@@ -14067,6 +14080,10 @@
         "aiToolchainOperatorProfile": {
           "$ref": "#/definitions/ManagedClusterAIToolchainOperatorProfile",
           "description": "AI toolchain operator settings that apply to the whole cluster."
+        },
+        "podSnapshotProfile": {
+          "$ref": "#/definitions/ManagedClusterPodSnapshotProfile",
+          "description": "The Pod Snapshot Restore profile for the managed cluster."
         },
         "schedulerProfile": {
           "$ref": "#/definitions/SchedulerProfile",
