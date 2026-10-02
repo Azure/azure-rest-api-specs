@@ -461,7 +461,7 @@ op postJob<TJob extends TypeSpec.Reflection.Model> is FoundryDataPlaneOperation<
     ...WithOperationId;
 
     /** The job to create. */
-    @body body: TJob;
+    @body job: TJob;
   },
   JobCreatedResponse<TJob>
 >;

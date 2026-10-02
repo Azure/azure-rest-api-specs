@@ -9155,8 +9155,8 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/EvaluatorGenerationJobCreate'
-        description: The job to create.
+              $ref: '#/components/schemas/EvaluatorGenerationInputs'
+        description: The evaluator generation job inputs to create.
     get:
       operationId: EvaluatorGenerationJobs_list
       summary: List evaluator generation jobs
@@ -46636,16 +46636,16 @@ components:
         low:
           type: number
           format: double
-          description: Lower bound.
+          description: Lower estimate based on model calls required for every run.
         typical:
           type: number
           format: double
-          description: Central estimate.
+          description: Expected estimate based on model calls consumed by a typical run.
         ceiling:
           type: number
           format: double
-          description: Upper bound.
-      description: A low/typical/ceiling range for an estimated quantity. Expected values may be fractional, including estimated model-call counts.
+          description: Upper bound calculated from the maximum number of model calls.
+      description: A low/typical/ceiling range for an estimated quantity. Cost values apply average per-call usage assumptions to each call-count scenario. Expected values may be fractional, including estimated model-call counts.
     AgentOptimizationEstimateInputs:
       type: object
       required:
@@ -49396,16 +49396,28 @@ components:
         entry_point:
           type: string
           description: The entry point Python file name for the uploaded evaluator code (e.g. 'answer_length_evaluator.py')
+          x-ms-foundry-meta:
+            required_previews:
+              - Evaluations=V1Preview
         image_tag:
           type: string
           description: The container image tag to use for evaluator code execution
+          x-ms-foundry-meta:
+            required_previews:
+              - Evaluations=V1Preview
         blob_uri:
           type: string
           format: uri
           description: The blob URI for the evaluator storage
+          x-ms-foundry-meta:
+            required_previews:
+              - Evaluations=V1Preview
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Code-based evaluator definition using python code
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     CodeConfiguration:
       type: object
       required:
@@ -50153,7 +50165,7 @@ components:
           description: Whether to set this version as the default. Defaults to false.
       required:
         - files
-    CreateTeamsPhoneExtensionTelephonyBindingRequest:
+    CreateTeamsPhoneExtensibilityTelephonyBindingRequest:
       type: object
       required:
         - provider
@@ -50162,8 +50174,8 @@ components:
         provider:
           type: string
           enum:
-            - teams_phone_extension
-          description: The Microsoft Teams Phone Extension provider.
+            - teams_phone_extensibility
+          description: The Microsoft Teams Phone extensibility provider.
         phone_number:
           type: string
           maxLength: 64
@@ -50173,7 +50185,7 @@ components:
           description: The Microsoft Teams resource-account object identifier as a GUID.
       allOf:
         - $ref: '#/components/schemas/CreateTelephonyBindingRequest'
-      description: The request to create a Microsoft Teams Phone Extension binding.
+      description: The request to create a Microsoft Teams Phone extensibility binding.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -50198,7 +50210,7 @@ components:
       discriminator:
         propertyName: provider
         mapping:
-          teams_phone_extension: '#/components/schemas/CreateTeamsPhoneExtensionTelephonyBindingRequest'
+          teams_phone_extensibility: '#/components/schemas/CreateTeamsPhoneExtensibilityTelephonyBindingRequest'
           twilio: '#/components/schemas/CreateTwilioTelephonyBindingRequest'
       description: The request to create a telephony binding.
       x-ms-foundry-meta:
@@ -50218,11 +50230,11 @@ components:
           type: string
           minLength: 1
           maxLength: 256
-          description: The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone Extension. No inbound telephony binding is required.
+          description: The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone extensibility. No inbound telephony binding is required.
         source:
           $ref: '#/components/schemas/TelephonyOutboundSource'
           minLength: 1
-          description: The caller identity used to originate the call. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone Extension connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing.
+          description: The caller identity used to originate the call. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone extensibility connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing.
         purpose:
           type: string
           minLength: 1
@@ -50428,7 +50440,7 @@ components:
             $ref: '#/components/schemas/DataGenerationJobSource'
           description: The sources used for the data generation job.
         generation_configuration:
-          $ref: '#/components/schemas/DataGenerationJobOptions'
+          $ref: '#/components/schemas/DataGenerationJobConfiguration'
           description: The generation configuration for the data generation job.
         scenario:
           $ref: '#/components/schemas/DataGenerationJobScenario'
@@ -50445,39 +50457,10 @@ components:
         propertyName: scenario
         mapping:
           evaluation: '#/components/schemas/EvaluationDataGenerationJob'
-          supervised_finetuning: '#/components/schemas/SupervisedFineTuningDataGenerationJob'
-          reinforcement_finetuning: '#/components/schemas/ReinforcementFineTuningDataGenerationJob'
+          supervised_finetuning_preview: '#/components/schemas/SupervisedFineTuningDataGenerationJob'
+          reinforcement_finetuning_preview: '#/components/schemas/ReinforcementFineTuningDataGenerationJob'
       description: Data Generation Job resource.
-    DataGenerationJobInputs:
-      type: object
-      required:
-        - name
-        - sources
-        - generation_configuration
-        - scenario
-      properties:
-        name:
-          type: string
-          description: The display name of the data generation job.
-        sources:
-          type: array
-          items:
-            $ref: '#/components/schemas/DataGenerationJobSource'
-          description: The sources used for the data generation job.
-        generation_configuration:
-          $ref: '#/components/schemas/DataGenerationJobOptions'
-          description: The generation configuration for the data generation job.
-        scenario:
-          $ref: '#/components/schemas/DataGenerationJobScenario'
-          description: The scenario of the data generation job. Either for fine-tuning or evaluation.
-      discriminator:
-        propertyName: scenario
-        mapping:
-          evaluation: '#/components/schemas/EvaluationDataGenerationJobInputs'
-          supervised_finetuning: '#/components/schemas/SupervisedFineTuningDataGenerationJobInputs'
-          reinforcement_finetuning: '#/components/schemas/ReinforcementFineTuningDataGenerationJobInputs'
-      description: Caller-supplied inputs for a data generation job.
-    DataGenerationJobOptions:
+    DataGenerationJobConfiguration:
       type: object
       required:
         - type
@@ -50497,11 +50480,40 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          simple_qna: '#/components/schemas/SimpleQnADataGenerationJobOptions'
-          traces: '#/components/schemas/TracesDataGenerationJobOptions'
-          simulation_seed: '#/components/schemas/SimulationSeedDataGenerationJobOptions'
-          tool_use: '#/components/schemas/ToolUseFineTuningDataGenerationJobOptions'
-      description: Options for managing data generation jobs.
+          simple_qna: '#/components/schemas/SimpleQnADataGenerationJobConfiguration'
+          traces: '#/components/schemas/TracesDataGenerationJobConfiguration'
+          simulation_seed: '#/components/schemas/SimulationSeedDataGenerationJobConfiguration'
+          tool_use: '#/components/schemas/ToolUseFineTuningDataGenerationJobConfiguration'
+      description: Configuration for managing data generation jobs.
+    DataGenerationJobInputs:
+      type: object
+      required:
+        - name
+        - sources
+        - generation_configuration
+        - scenario
+      properties:
+        name:
+          type: string
+          description: The display name of the data generation job.
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/DataGenerationJobSource'
+          description: The sources used for the data generation job.
+        generation_configuration:
+          $ref: '#/components/schemas/DataGenerationJobConfiguration'
+          description: The generation configuration for the data generation job.
+        scenario:
+          $ref: '#/components/schemas/DataGenerationJobScenario'
+          description: The scenario of the data generation job. Either for fine-tuning or evaluation.
+      discriminator:
+        propertyName: scenario
+        mapping:
+          evaluation: '#/components/schemas/EvaluationDataGenerationJobInputs'
+          supervised_finetuning_preview: '#/components/schemas/SupervisedFineTuningDataGenerationJobInputs'
+          reinforcement_finetuning_preview: '#/components/schemas/ReinforcementFineTuningDataGenerationJobInputs'
+      description: Caller-supplied inputs for a data generation job.
     DataGenerationJobOutput:
       type: object
       required:
@@ -50555,8 +50567,8 @@ components:
         - type: string
         - type: string
           enum:
-            - supervised_finetuning
-            - reinforcement_finetuning
+            - supervised_finetuning_preview
+            - reinforcement_finetuning_preview
             - evaluation
       description: The supported scenarios for a data generation job.
     DataGenerationJobSource:
@@ -51134,6 +51146,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Endpoint-based evaluator definition. The customer owns and hosts an HTTP endpoint that implements the evaluation contract. The evaluator references a Project Connection by name; the connection stores the endpoint URL and credentials (API Key or Entra ID). At execution time, the service resolves the connection to obtain the endpoint URL and authentication details, then calls the endpoint for each evaluation row.
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     EntraAuthorizationScheme:
       type: object
       required:
@@ -52090,7 +52105,7 @@ components:
             - evaluation
           description: The scenario of the data generation job, which is Evaluation for this model.
         output_configuration:
-          $ref: '#/components/schemas/EvaluationDataGenerationJobOutputTarget'
+          $ref: '#/components/schemas/EvaluationDataGenerationJobOutputConfiguration'
           description: Optional dataset output configuration for the generated evaluation data.
       allOf:
         - $ref: '#/components/schemas/DataGenerationJob'
@@ -52106,12 +52121,12 @@ components:
             - evaluation
           description: The scenario of the data generation job, which is Evaluation for this model.
         output_configuration:
-          $ref: '#/components/schemas/EvaluationDataGenerationJobOutputTarget'
+          $ref: '#/components/schemas/EvaluationDataGenerationJobOutputConfiguration'
           description: Optional dataset output configuration for the generated evaluation data.
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobInputs'
       description: Caller-supplied inputs for an evaluation data generation job.
-    EvaluationDataGenerationJobOutputTarget:
+    EvaluationDataGenerationJobOutputConfiguration:
       type: object
       properties:
         name:
@@ -52129,7 +52144,7 @@ components:
           $ref: '#/components/schemas/DataGenerationJobOutputWriteMode'
           description: Controls how dataset outputs are written. If omitted, defaults to `overwrite` and creates the next dataset version using only newly generated rows.
           default: overwrite
-      description: Dataset output target for an evaluation data generation job.
+      description: Dataset output configuration for an evaluation data generation job.
     EvaluationDataGenerationType:
       anyOf:
         - type: string
@@ -53163,15 +53178,15 @@ components:
       required:
         - id
         - status
+        - sources
+        - model
+        - evaluator_name
         - created_at
       properties:
         id:
           type: string
           description: Server-assigned unique identifier.
           readOnly: true
-        inputs:
-          $ref: '#/components/schemas/EvaluatorGenerationInputs'
-          description: Caller-supplied inputs.
         result:
           $ref: '#/components/schemas/EvaluatorVersion'
           description: Result produced on success.
@@ -53184,6 +53199,26 @@ components:
           $ref: '#/components/schemas/OpenAI.Error'
           description: Error details — populated only on failure.
           readOnly: true
+        sources:
+          type: array
+          items:
+            $ref: '#/components/schemas/EvaluatorGenerationJobSource'
+          description: Source materials for generation — agent descriptions, prompts, traces, or datasets. Each entry is an `EvaluatorGenerationJobSource` variant discriminated by `type`.
+        model:
+          type: string
+          description: The LLM model to use for rubric generation (e.g., 'gpt-4o'). Required — users must provide their own model rather than relying on service-owned capacity.
+        evaluator_name:
+          type: string
+          minLength: 1
+          maxLength: 256
+          pattern: ^[A-Za-z0-9_.~-]+$
+          description: The evaluator name (immutable identifier). 1-256 characters; allowed characters are ASCII letters, digits, underscore (`_`), period (`.`), tilde (`~`), and hyphen (`-`). The prefix `builtin.` is reserved for system-managed evaluators and is rejected by the service. If an evaluator with this name already exists in the project (and is rubric-subtype), the service creates a new version under the same name and uses the prior version's `dimensions` as context for incremental improvement (foundation of the post-//build adaptive loop). Old versions remain queryable via `get_version(name, version)`. If the existing evaluator is not a rubric-subtype evaluator (built-in, prompt-based, code-based), the request is rejected with `400 Bad Request`.
+        evaluator_display_name:
+          type: string
+          description: Optional human-friendly display name for the resulting evaluator. Surfaced as `EvaluatorVersion.display_name` on the persisted evaluator. When omitted, the service uses `evaluator_name` as the display name. The `evaluator_` prefix disambiguates this from the immutable `evaluator_name` identifier.
+        evaluator_description:
+          type: string
+          description: Optional human-friendly description for the resulting evaluator. Surfaced as `EvaluatorVersion.description` on the persisted evaluator. Typically collected from the UI alongside `evaluator_display_name`. The `evaluator_` prefix disambiguates this from any other description fields on related models.
         created_at:
           $ref: '#/components/schemas/FoundryTimestamp'
           description: The timestamp when the job was created, represented in Unix time (seconds since January 1, 1970).
@@ -53202,13 +53237,6 @@ components:
             $ref: '#/components/schemas/RubricGenerationInputQualityWarning'
           description: Non-fatal input-quality advisories produced by the generation pipeline. Read-only; service-generated; populated only on terminal jobs when advisories fired. Omitted when generation was clean. Cleared when a subsequent `PATCH` to the paired `EvaluatorVersion.definition` invalidates the advisories.
           readOnly: true
-      description: Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion.
-    EvaluatorGenerationJobCreate:
-      type: object
-      properties:
-        inputs:
-          $ref: '#/components/schemas/EvaluatorGenerationInputs'
-          description: Caller-supplied inputs.
       description: Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion.
     EvaluatorGenerationJobSource:
       type: object
@@ -84962,6 +84990,9 @@ components:
       allOf:
         - $ref: '#/components/schemas/EvaluatorDefinition'
       description: Prompt-based evaluator
+      x-ms-foundry-meta:
+        required_previews:
+          - Evaluations=V1Preview
     PromptDataGenerationJobSource:
       type: object
       required:
@@ -85418,10 +85449,10 @@ components:
         scenario:
           type: string
           enum:
-            - reinforcement_finetuning
-          description: The scenario of the data generation job, which is Reinforcement Fine-tuning for this model.
+            - reinforcement_finetuning_preview
+          description: The scenario of the data generation job, which is Reinforcement Fine-tuning preview for this model.
         output_configuration:
-          $ref: '#/components/schemas/ReinforcementFineTuningDataGenerationJobOutputTarget'
+          $ref: '#/components/schemas/ReinforcementFineTuningDataGenerationJobOutputConfiguration'
           description: Optional file output configuration for the generated reinforcement fine-tuning data.
       allOf:
         - $ref: '#/components/schemas/DataGenerationJob'
@@ -85437,10 +85468,10 @@ components:
         scenario:
           type: string
           enum:
-            - reinforcement_finetuning
-          description: The scenario of the data generation job, which is Reinforcement Fine-tuning for this model.
+            - reinforcement_finetuning_preview
+          description: The scenario of the data generation job, which is Reinforcement Fine-tuning preview for this model.
         output_configuration:
-          $ref: '#/components/schemas/ReinforcementFineTuningDataGenerationJobOutputTarget'
+          $ref: '#/components/schemas/ReinforcementFineTuningDataGenerationJobOutputConfiguration'
           description: Optional file output configuration for the generated reinforcement fine-tuning data.
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobInputs'
@@ -85448,7 +85479,7 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - DataGenerationJobs=V1Preview
-    ReinforcementFineTuningDataGenerationJobOutputTarget:
+    ReinforcementFineTuningDataGenerationJobOutputConfiguration:
       type: object
       required:
         - name
@@ -85463,7 +85494,7 @@ components:
         merge_file_id:
           type: string
           description: File ID to merge into when `write_mode` is `merge`.
-      description: File output target for a reinforcement fine-tuning data generation job. This is a preview feature.
+      description: File output configuration for a reinforcement fine-tuning data generation job. This is a preview feature.
       x-ms-foundry-meta:
         conditional_previews:
           - DataGenerationJobs=V1Preview
@@ -85913,7 +85944,7 @@ components:
           type: integer
           format: int32
           minimum: 0
-          description: Zero-based index into `EvaluatorGenerationJob.inputs.sources` when the warning applies to a specific source. Omitted for aggregate warnings and for warnings not tied to one source.
+          description: Zero-based index into `EvaluatorGenerationJob.sources` when the warning applies to a specific source. Omitted for aggregate warnings and for warnings not tied to one source.
       description: A non-fatal advisory produced during rubric evaluator generation when resolved inputs are technically valid but likely too weak to produce a high-quality rubric. Read-only; service-generated. Persisted with the terminal EvaluatorGenerationJob.
     RubricGenerationInputQualityWarningCode:
       anyOf:
@@ -87403,7 +87434,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: A shell tool stored in a toolbox. This model is additive to toolbox configuration and does not modify the OpenAI tool contract or existing toolbox tool definitions.
-    SimpleQnADataGenerationJobOptions:
+    SimpleQnADataGenerationJobConfiguration:
       type: object
       required:
         - type
@@ -87424,8 +87455,8 @@ components:
             $ref: '#/components/schemas/SimpleQnAFineTuningQuestionType'
           description: The question types to generate. Used only for fine-tuning scenarios.
       allOf:
-        - $ref: '#/components/schemas/DataGenerationJobOptions'
-      description: The options for a data generation job with SimpleQnA type.
+        - $ref: '#/components/schemas/DataGenerationJobConfiguration'
+      description: The configuration for a data generation job with SimpleQnA type.
     SimpleQnAFineTuningQuestionType:
       anyOf:
         - type: string
@@ -87437,7 +87468,7 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - DataGenerationJobs=V1Preview
-    SimulationSeedDataGenerationJobOptions:
+    SimulationSeedDataGenerationJobConfiguration:
       type: object
       required:
         - type
@@ -87448,8 +87479,8 @@ components:
             - simulation_seed
           description: The data generation job type, which is SimulationSeed for this model.
       allOf:
-        - $ref: '#/components/schemas/DataGenerationJobOptions'
-      description: The options for a task generation data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.
+        - $ref: '#/components/schemas/DataGenerationJobConfiguration'
+      description: The configuration for a task generation data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`.
     SipTelephonyTransferDestination:
       type: object
       required:
@@ -87698,10 +87729,10 @@ components:
         scenario:
           type: string
           enum:
-            - supervised_finetuning
-          description: The scenario of the data generation job, which is Supervised Fine-tuning for this model.
+            - supervised_finetuning_preview
+          description: The scenario of the data generation job, which is Supervised Fine-tuning preview for this model.
         output_configuration:
-          $ref: '#/components/schemas/SupervisedFineTuningDataGenerationJobOutputTarget'
+          $ref: '#/components/schemas/SupervisedFineTuningDataGenerationJobOutputConfiguration'
           description: Optional file output configuration for the generated supervised fine-tuning data.
       allOf:
         - $ref: '#/components/schemas/DataGenerationJob'
@@ -87717,10 +87748,10 @@ components:
         scenario:
           type: string
           enum:
-            - supervised_finetuning
-          description: The scenario of the data generation job, which is Supervised Fine-tuning for this model.
+            - supervised_finetuning_preview
+          description: The scenario of the data generation job, which is Supervised Fine-tuning preview for this model.
         output_configuration:
-          $ref: '#/components/schemas/SupervisedFineTuningDataGenerationJobOutputTarget'
+          $ref: '#/components/schemas/SupervisedFineTuningDataGenerationJobOutputConfiguration'
           description: Optional file output configuration for the generated supervised fine-tuning data.
       allOf:
         - $ref: '#/components/schemas/DataGenerationJobInputs'
@@ -87728,7 +87759,7 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - DataGenerationJobs=V1Preview
-    SupervisedFineTuningDataGenerationJobOutputTarget:
+    SupervisedFineTuningDataGenerationJobOutputConfiguration:
       type: object
       required:
         - name
@@ -87743,7 +87774,7 @@ components:
         merge_file_id:
           type: string
           description: File ID to merge into when `write_mode` is `merge`.
-      description: File output target for a supervised fine-tuning data generation job. This is a preview feature.
+      description: File output configuration for a supervised fine-tuning data generation job. This is a preview feature.
       x-ms-foundry-meta:
         conditional_previews:
           - DataGenerationJobs=V1Preview
@@ -88010,7 +88041,7 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
-    TeamsPhoneExtensionTelephonyBinding:
+    TeamsPhoneExtensibilityTelephonyBinding:
       type: object
       required:
         - provider
@@ -88019,8 +88050,8 @@ components:
         provider:
           type: string
           enum:
-            - teams_phone_extension
-          description: The Microsoft Teams Phone Extension provider.
+            - teams_phone_extensibility
+          description: The Microsoft Teams Phone extensibility provider.
         phone_number:
           type: string
           maxLength: 64
@@ -88030,11 +88061,11 @@ components:
           description: The Microsoft Teams resource-account object identifier as a GUID.
       allOf:
         - $ref: '#/components/schemas/TelephonyBinding'
-      description: A Microsoft Teams Phone Extension binding owned by a voice agent.
+      description: A Microsoft Teams Phone extensibility binding owned by a voice agent.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
-    TeamsPhoneExtensionTelephonyBindingListItem:
+    TeamsPhoneExtensibilityTelephonyBindingListItem:
       type: object
       required:
         - provider
@@ -88043,8 +88074,8 @@ components:
         provider:
           type: string
           enum:
-            - teams_phone_extension
-          description: The Microsoft Teams Phone Extension provider.
+            - teams_phone_extensibility
+          description: The Microsoft Teams Phone extensibility provider.
         phone_number:
           type: string
           maxLength: 64
@@ -88054,7 +88085,7 @@ components:
           description: The Microsoft Teams resource-account object identifier as a GUID.
       allOf:
         - $ref: '#/components/schemas/TelephonyBindingListItem'
-      description: A Microsoft Teams Phone Extension binding returned in a list, including its entity tag.
+      description: A Microsoft Teams Phone extensibility binding returned in a list, including its entity tag.
       x-ms-foundry-meta:
         required_previews:
           - VoiceAgents=V1Preview
@@ -88197,7 +88228,7 @@ components:
       discriminator:
         propertyName: provider
         mapping:
-          teams_phone_extension: '#/components/schemas/TeamsPhoneExtensionTelephonyBinding'
+          teams_phone_extensibility: '#/components/schemas/TeamsPhoneExtensibilityTelephonyBinding'
           twilio: '#/components/schemas/TwilioTelephonyBinding'
       description: A telephony binding owned by a voice agent.
       x-ms-foundry-meta:
@@ -88250,7 +88281,7 @@ components:
       discriminator:
         propertyName: provider
         mapping:
-          teams_phone_extension: '#/components/schemas/TeamsPhoneExtensionTelephonyBindingListItem'
+          teams_phone_extensibility: '#/components/schemas/TeamsPhoneExtensibilityTelephonyBindingListItem'
           twilio: '#/components/schemas/TwilioTelephonyBindingListItem'
       description: A telephony binding returned in a list, including its entity tag.
       x-ms-foundry-meta:
@@ -88348,11 +88379,11 @@ components:
           type: string
           minLength: 1
           maxLength: 256
-          description: The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone Extension. No inbound telephony binding is required.
+          description: The Foundry connection name in the current project used to originate the call. Its category selects Twilio or Azure Communication Services / Teams Phone extensibility. No inbound telephony binding is required.
         source:
           $ref: '#/components/schemas/TelephonyOutboundSource'
           minLength: 1
-          description: The caller identity used to originate the call. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone Extension connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing.
+          description: The caller identity used to originate the call. For a Twilio connection, provide an authorized E.164 phone number. For an Azure Communication Services / Teams Phone extensibility connection, provide the Teams Resource Account object ID. The identity type is inferred from the connection category; originating does not change inbound routing.
         purpose:
           type: string
           minLength: 1
@@ -88647,7 +88678,7 @@ components:
         - type: string
           enum:
             - gateway
-            - teams_phone_extension
+            - teams_phone_extensibility
             - twilio
             - voice_agent
       description: The component that supplied a telephony lifecycle observation.
@@ -88704,7 +88735,7 @@ components:
         provider_number:
           type: string
           maxLength: 64
-          description: The Teams Phone Extension or Twilio number that received the call.
+          description: The Teams Phone extensibility or Twilio number that received the call.
         status:
           $ref: '#/components/schemas/TelephonyCallStatus'
           description: The lifecycle status of the call.
@@ -88803,7 +88834,7 @@ components:
         provider_number:
           type: string
           maxLength: 64
-          description: The Teams Phone Extension or Twilio number that received the call.
+          description: The Teams Phone extensibility or Twilio number that received the call.
         status:
           $ref: '#/components/schemas/TelephonyCallStatus'
           description: The lifecycle status of the call.
@@ -89066,7 +89097,7 @@ components:
         - type: string
         - type: string
           enum:
-            - teams_phone_extension
+            - teams_phone_extensibility
             - twilio
       description: A telephony provider supported by an agent binding. Known values are stable; additional values may be added over time.
       x-ms-foundry-meta:
@@ -89289,7 +89320,7 @@ components:
       allOf:
         - $ref: '#/components/schemas/ToolboxTool'
       description: A toolbox search tool stored in a toolbox.
-    ToolUseFineTuningDataGenerationJobOptions:
+    ToolUseFineTuningDataGenerationJobConfiguration:
       type: object
       required:
         - type
@@ -89305,8 +89336,8 @@ components:
           format: int32
           description: Maximum number of samples to generate, up to service-defined limits.
       allOf:
-        - $ref: '#/components/schemas/DataGenerationJobOptions'
-      description: The options for a data generation job with ToolUse type. This is a preview feature used only for fine-tuning scenarios.
+        - $ref: '#/components/schemas/DataGenerationJobConfiguration'
+      description: The configuration for a data generation job with ToolUse type. This is a preview feature used only for fine-tuning scenarios.
       x-ms-foundry-meta:
         conditional_previews:
           - DataGenerationJobs=V1Preview
@@ -89653,7 +89684,7 @@ components:
             - conversation_id_source
             - agent_filter
       description: Specifies the type of trace source used to select traces for evaluation.
-    TracesDataGenerationJobOptions:
+    TracesDataGenerationJobConfiguration:
       type: object
       required:
         - type
@@ -89672,8 +89703,8 @@ components:
           description: Whether to redact private content from traces. When omitted or set to true, private content is redacted. Set to false to opt out of redaction.
           default: true
       allOf:
-        - $ref: '#/components/schemas/DataGenerationJobOptions'
-      description: The options for a data generation job with Traces type.
+        - $ref: '#/components/schemas/DataGenerationJobConfiguration'
+      description: The configuration for a data generation job with Traces type.
     TracesDataGenerationJobSource:
       type: object
       required:
@@ -90037,13 +90068,13 @@ components:
           type: string
           minLength: 1
           maxLength: 256
-          description: The replacement Foundry connection name. This property is valid only for a Teams Phone Extension binding; a Twilio binding's connection is immutable.
+          description: The replacement Foundry connection name. This property is valid only for a Teams Phone extensibility binding; a Twilio binding's connection is immutable.
         phone_number:
           anyOf:
             - type: string
             - type: 'null'
           maxLength: 64
-          description: The replacement Teams Phone Extension display phone number. Omit it to preserve the current value; use null to clear it. This property is valid only for a Teams Phone Extension binding.
+          description: The replacement Teams Phone extensibility display phone number. Omit it to preserve the current value; use null to clear it. This property is valid only for a Teams Phone extensibility binding.
       description: The request to update an existing telephony binding. Every property is optional and the binding's provider is immutable.
       x-ms-foundry-meta:
         required_previews:
