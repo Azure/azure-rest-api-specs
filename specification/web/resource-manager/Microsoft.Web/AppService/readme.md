@@ -43,8 +43,16 @@ tag: package-2026-07
 directive:
   - suppress: AvoidAdditionalProperties
     from: openapi.json
-    where: $.definitions.FunctionAppVersionConfig.properties.appSettings
-    reason: FunctionAppVersionConfig.appSettings intentionally uses a direct object map because application-setting names are customer-defined and the complete immutable version configuration is supplied atomically.
+    where: $.definitions.FunctionAppVersionProperties.properties.appSettings
+    reason: FunctionAppVersionProperties.appSettings intentionally uses a direct object map because application-setting names are customer-defined and the complete immutable version configuration is supplied atomically.
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: openapi.json
+    where: $.definitions.FunctionAppVersionOperationStatusResult
+    reason: FunctionAppVersionOperationStatusResult is an asynchronous operation-status payload, not an Azure resource.
+  - suppress: BodyTopLevelProperties
+    from: openapi.json
+    where: $.definitions.FunctionAppVersionOperationStatusResult
+    reason: FunctionAppVersionOperationStatusResult is an asynchronous operation-status payload, not an Azure resource.
   - suppress: EnumInsteadOfBoolean
     from: openapi.json
     where: $.definitions.FunctionAppVersionDeployment.properties.remoteBuild
