@@ -378,6 +378,12 @@
           },
           {
             "$ref": "#/parameters/EnableSmbDirectoryLease"
+          },
+          {
+            "$ref": "#/parameters/FileEnableChangeFeed"
+          },
+          {
+            "$ref": "#/parameters/FileChangeFeedRetentionInDays"
           }
         ],
         "responses": {
@@ -669,6 +675,16 @@
                 "x-ms-client-name": "enableSmbDirectoryLease",
                 "description": "Specifies whether granting of new directory leases for directories present in a share is enabled(allowed) or disabled(blocked).  Header is only returned for a SMB Share.",
                 "type": "boolean"
+              },
+              "x-ms-file-change-feed-retention-in-days": {
+                "x-ms-client-name": "FileChangeFeedRetentionInDays",
+                "type": "integer",
+                "description": "The number of days that change feed records are retained."
+              },
+              "x-ms-file-enable-change-feed": {
+                "x-ms-client-name": "FileChangeFeedEnabled",
+                "type": "boolean",
+                "description": "Whether change feed is enabled for the share."
               }
             }
           },
@@ -1696,6 +1712,12 @@
           },
           {
             "$ref": "#/parameters/EnableSmbDirectoryLease"
+          },
+          {
+            "$ref": "#/parameters/FileEnableChangeFeed"
+          },
+          {
+            "$ref": "#/parameters/FileChangeFeedRetentionInDays"
           }
         ],
         "responses": {
@@ -8506,6 +8528,27 @@
       "required": false,
       "type": "string",
       "format": "date-time-rfc1123",
+      "x-ms-parameter-location": "method"
+    },
+    "FileEnableChangeFeed" : {
+      "name": "x-ms-file-enable-change-feed",
+      "x-ms-client-name": "FileEnableChangeFeed",
+      "in": "header",
+      "description": "Optional. Boolean. Default if not specified is false. This property enables change feed on the share.",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method"
+    },
+    "FileChangeFeedRetentionInDays" : {
+      "name": "x-ms-file-change-feed-retention-in-days",
+      "x-ms-client-name": "FileChangeFeedRetentionInDays",
+      "in": "header",
+      "description": "Optional. Integer. Specifies the number of days that change feed records are retained, between 1 and 365. Default if not specified is 7 days.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "minimum": 1,
+      "maximum": 365,
       "x-ms-parameter-location": "method"
     },
     "FileLastWriteTimeMode": {
