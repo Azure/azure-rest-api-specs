@@ -2827,7 +2827,10 @@ model VirtualNetworkTapPropertiesFormat {
    * The reference to the private IP address on the internal Load Balancer that will receive the tap.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Preserve the service's existing acronym capitalization in this public property name."
-  @renamedFrom(Versions.v2025_09_01, "destinationLoadBalancerFrontEndIPConfiguration")
+  @renamedFrom(
+    Versions.v2025_09_01,
+    "destinationLoadBalancerFrontEndIPConfiguration"
+  )
   destinationLoadBalancerFrontendIPConfiguration?: FrontendIPConfiguration;
 
   /**
@@ -2842,8 +2845,10 @@ model VirtualNetworkTapPropertiesFormat {
 union VirtualNetworkTapType {
   /** Basic virtual network tap. */
   Basic: "Basic",
+
   /** Managed virtual network tap. */
   ManagedVtap: "ManagedVtap",
+
   string,
 }
 
