@@ -50,27 +50,3 @@ interface OracleChildResource<
   extends ResourceCreateAsync<T>,
     ResourceRead<T>,
     ResourceDeleteWithoutOkAsync<T> {}
-
-@armResourceOperations
-interface ListActions {
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO - Migrate to LRO pattern"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi-client-extensions" "Existing use of the 'x-ms-long-running-operation', 'x-ms-long-running-operation-options' OpenAPI extension(s) predates the no-openapi-client-extensions rule; suppressed pending migration to first-class TypeSpec constructs."
-  @doc("Generic Async Get operation")
-  @extension("x-ms-long-running-operation", true)
-  @extension(
-    "x-ms-long-running-operation-options",
-    #{ `final-state-via`: "location" }
-  )
-  @autoRoute
-  @armResourceAction(TResource)
-  @post
-  ArmResourceGetActionAsync<
-    TResource extends Foundations.Resource,
-    TResponse extends {} | void,
-    TBaseParameters = BaseParameters<TResource>
-  >(...ResourceInstanceParameters<TResource, TBaseParameters>):
-    | ArmResponse<TResponse>
-    | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = TResponse> &
-        Azure.Core.Foundations.RetryAfterHeader>
-    | ErrorResponse;
-}

@@ -95,6 +95,18 @@ using Http;
 );
 
 @@clientName(WebPubSubResource, "WebPubSub", "csharp");
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "RBAC roles for provisioning"
+@@clientOption(
+  WebPubSubResource,
+  "resource-rbac-roles",
+  #{
+    WebPubSubServiceReader: "bfb1c7d2-fb1a-466b-b2ba-aee63b92deaf",
+    WebPubSubServiceOwner: "12cf5a90-567b-43ae-8102-96cf46c7d9b4",
+    WebPubSubContributor: "8cf5e20a-e4b2-4e9d-b3a1-5ceb692c2761",
+  },
+  "csharp"
+);
 @@clientName(WebPubSubProperties.disableAadAuth, "IsAadAuthDisabled", "csharp");
 @@clientName(
   WebPubSubTlsSettings.clientCertEnabled,
@@ -236,9 +248,7 @@ using Http;
 @@clientName(UpstreamAuthSettings.type, "AuthType", "csharp");
 @@alternateType(SignalRServiceUsage.id, armResourceIdentifier, "csharp");
 @@clientName(LiveTraceCategory.enabled, "IsEnabled", "csharp");
-@@alternateType(LiveTraceCategory.enabled, boolean, "csharp");
 @@clientName(LiveTraceConfiguration.enabled, "IsEnabled", "csharp");
-@@alternateType(LiveTraceConfiguration.enabled, boolean, "csharp");
 @@clientName(
   WebPubSubResources.list,
   "GetWebPubSubPrivateLinkResources",
