@@ -2196,6 +2196,12 @@ union InvocationPoint {
   ClientRequest: "ClientRequest",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   OriginRequest: "OriginRequest",
+
+  /**
+   * Invoked at the client response stage, before the response is returned to the client. Currently only supported for edge actions.
+   */
+  @added(Versions.v2026_10_01)
+  ClientResponse: "ClientResponse",
 }
 
 /**
