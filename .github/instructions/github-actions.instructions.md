@@ -149,6 +149,9 @@ Vitest commands still run directly and do not forward to the root.
 `eng.yml` validates the workspace, runs root `pnpm build` once on Linux, and runs
 the Vitest workspace on Ubuntu and Windows. `github-test.yaml` retains production-only module import
 checks on both OSes, plus actionlint and compiled agentic workflow lock checks on Linux.
+The Linux job also runs zizmor on tracked workflow and action YAML, excluding generated `.lock.yml`
+files. External actions must be SHA-pinned. Keep any necessary audit exceptions narrowly scoped and
+explain them inline; preserve credentials only when a later Git operation requires authentication.
 
 CI runs `pnpm lint` once from the repository root in `lint.yaml`, covering `.github`
 and `eng/tools`. Do not add lint or type-check steps to the test OS matrix.
@@ -232,6 +235,9 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
 - **Pull request target**: Use `pull_request_target` carefully; only support specific actions
 - **Permissions**: Define minimal `permissions` in workflow files
 - **Token usage**: Use `GITHUB_TOKEN` with least privilege
+- **Action references**: Pin external actions to a full commit SHA and retain a version comment for dependency updates.
+- **Repository references**: Use `$/...` for actions and reusable workflows at the running commit. Retain `./...` only when an action intentionally comes from a different checkout.
+- **Checkout**: Use `$/.github/actions/checkout` in handwritten workflows. It centralizes the upstream SHA pin and defaults to `persist-credentials: false`; explicitly enable credentials only for later authenticated Git operations.
 
 ### Code Quality
 
