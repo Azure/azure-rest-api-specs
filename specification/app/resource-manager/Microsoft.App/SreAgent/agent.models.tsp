@@ -27,6 +27,7 @@ model AgentPatch {
  */
 model AgentPatchProperties {
   /** Knowledge graph configuration for agent */
+  @removed(Versions.v2026_07_01)
   knowledgeGraphConfiguration?: KnowledgeGraphConfiguration;
 
   /** Configuration for action */
@@ -88,6 +89,7 @@ model AgentProperties {
   powerState?: AgentPowerState;
 
   /** Knowledge graph configuration for agent */
+  @removed(Versions.v2026_07_01)
   knowledgeGraphConfiguration?: KnowledgeGraphConfiguration;
 
   /** Configuration for action */
@@ -401,10 +403,12 @@ model DefaultModel {
   provider?: string;
 
   /** Model name (e.g., gpt-5, claude-opus-4-5, claude-sonnet-4-5) */
+  @removed(Versions.v2026_07_01)
   name?: string;
 }
 
 /** Knowledge graph configuration for agent */
+@removed(Versions.v2026_07_01)
 model KnowledgeGraphConfiguration {
   /** The identity used to access the knowledge graph */
   identity?: armResourceIdentifier;
@@ -436,6 +440,7 @@ union AgentMode {
   Review: "Review",
 
   /** No write actions are executed */
+  @removed(Versions.v2026_07_01)
   ReadOnly: "ReadOnly",
 }
 
