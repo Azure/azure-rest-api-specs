@@ -19,10 +19,10 @@ import { PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { byDate, invert } from "../../../shared/src/sort.ts";
 import { TYPESPEC_SUPPRESSIONS_APPROVED_LABEL } from "../label.ts";
 
-import { createHash } from "crypto";
-import fs from "fs/promises";
-import os from "os";
-import path from "path";
+import { createHash } from "node:crypto";
+import fs from "node:fs/promises";
+import os from "node:os";
+import path from "node:path";
 
 export type WorkflowRunInfo = WorkflowRuns[0];
 

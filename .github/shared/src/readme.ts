@@ -1,8 +1,8 @@
-import { readFile } from "fs/promises";
+import { readFile } from "node:fs/promises";
 import yaml from "js-yaml";
 import { marked } from "marked";
-import { dirname, normalize, relative } from "path";
-import { inspect } from "util";
+import { dirname, normalize, relative } from "node:path";
+import { inspect } from "node:util";
 import * as z from "zod";
 import { mapAsync } from "./array.ts";
 import { resolvePairCached } from "./path.ts";
