@@ -216,6 +216,15 @@
         "x-ms-examples": {
           "Agents_Get": {
             "$ref": "./examples/Agents_Get.json"
+          },
+          "Agents_Get_FullNetworkConfiguration": {
+            "$ref": "./examples/Agents_Get_FullNetworkConfiguration.json"
+          },
+          "Agents_Get_Vnet": {
+            "$ref": "./examples/Agents_Get_Vnet.json"
+          },
+          "Agents_Get_WithoutNetworkConfiguration": {
+            "$ref": "./examples/Agents_Get_WithoutNetworkConfiguration.json"
           }
         }
       },
@@ -287,6 +296,15 @@
         "x-ms-examples": {
           "Agents_CreateOrUpdate": {
             "$ref": "./examples/Agents_CreateOrUpdate.json"
+          },
+          "Agents_CreateOrUpdate_FullNetworkConfiguration": {
+            "$ref": "./examples/Agents_CreateOrUpdate_FullNetworkConfiguration.json"
+          },
+          "Agents_CreateOrUpdate_Minimum": {
+            "$ref": "./examples/Agents_CreateOrUpdate_Minimum.json"
+          },
+          "Agents_CreateOrUpdate_Vnet": {
+            "$ref": "./examples/Agents_CreateOrUpdate_Vnet.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -359,6 +377,24 @@
         "x-ms-examples": {
           "Agents_Update": {
             "$ref": "./examples/Agents_Update.json"
+          },
+          "Agents_Update_AttachSubnet": {
+            "$ref": "./examples/Agents_Update_AttachSubnet.json"
+          },
+          "Agents_Update_ClearNetworkOverrides": {
+            "$ref": "./examples/Agents_Update_ClearNetworkOverrides.json"
+          },
+          "Agents_Update_DetachSubnet": {
+            "$ref": "./examples/Agents_Update_DetachSubnet.json"
+          },
+          "Agents_Update_NetworkSettings": {
+            "$ref": "./examples/Agents_Update_NetworkSettings.json"
+          },
+          "Agents_Update_PreserveNetworkConfiguration": {
+            "$ref": "./examples/Agents_Update_PreserveNetworkConfiguration.json"
+          },
+          "Agents_Update_ReplaceSubnet": {
+            "$ref": "./examples/Agents_Update_ReplaceSubnet.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1218,6 +1254,14 @@
         "defaultModel": {
           "$ref": "#/definitions/DefaultModel",
           "description": "Default AI model configuration for the agent"
+        },
+        "vnetConfiguration": {
+          "$ref": "#/definitions/VnetConfiguration",
+          "description": "Virtual network configuration to update. Omission or an empty object preserves the subnet; JSON merge-patch null clears it.\nTo detach, clear the subnet and update sandbox egress in the same request so the resulting mode is not AzureVNet.\nThe detach example explicitly selects Limited.\nThe resulting subnet and AzureVNet egress mode must be configured together."
+        },
+        "sandboxConfiguration": {
+          "$ref": "#/definitions/SandboxConfiguration",
+          "description": "Sandbox configuration to update. Omission or null preserves the stored configuration.\nA supplied object merges its members with the stored configuration."
         }
       }
     },
@@ -1259,6 +1303,14 @@
           "description": "The endpoint of the Agent",
           "readOnly": true
         },
+        "outboundIpAddresses": {
+          "type": "array",
+          "description": "Outbound IP addresses reported for the Agent's provisioned networking resources.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
         "runningState": {
           "type": "string",
           "description": "The running state of the Agent",
@@ -1296,6 +1348,14 @@
         "defaultModel": {
           "$ref": "#/definitions/DefaultModel",
           "description": "Default AI model configuration for the agent"
+        },
+        "vnetConfiguration": {
+          "$ref": "#/definitions/VnetConfiguration",
+          "description": "Desired virtual network configuration. A subnet and AzureVNet egress mode must be configured together.\nWhen no subnet is attached, GET returns a null subnetResourceId.\nUse PATCH for selective updates. Omitting networking settings from PUT can clear them or fail validation."
+        },
+        "sandboxConfiguration": {
+          "$ref": "#/definitions/SandboxConfiguration",
+          "description": "Desired sandbox configuration. GET returns null when no configuration is stored.\nPUT represents the complete desired configuration and does not preserve an existing value when this property is omitted.\nUse PATCH to preserve the stored configuration while updating other properties."
         }
       }
     },
@@ -1528,6 +1588,261 @@
         }
       }
     },
+    "SandboxAllowedHost": {
+      "type": "string",
+      "description": "A DNS hostname or a leading wildcard hostname pattern allowed on the managed network path.",
+      "minLength": 1,
+      "maxLength": 253,
+      "pattern": "^(\\*\\.(?=[^.]+\\.))?[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?(\\.[A-Za-z0-9]([A-Za-z0-9-]{0,61}[A-Za-z0-9])?)*$"
+    },
+    "SandboxCodeRepository": {
+      "type": "string",
+      "description": "Code repository providers that can be allowed on the managed network path.",
+      "enum": [
+        "Github",
+        "GithubEnterprise",
+        "AzureDevOps",
+        "GitLab"
+      ],
+      "x-ms-enum": {
+        "name": "SandboxCodeRepository",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Github",
+            "value": "Github",
+            "description": "Repositories hosted on GitHub.com."
+          },
+          {
+            "name": "GithubEnterprise",
+            "value": "GithubEnterprise",
+            "description": "Repositories hosted on GitHub Enterprise."
+          },
+          {
+            "name": "AzureDevOps",
+            "value": "AzureDevOps",
+            "description": "Repositories hosted in Azure DevOps."
+          },
+          {
+            "name": "GitLab",
+            "value": "GitLab",
+            "description": "Repositories hosted on GitLab."
+          }
+        ]
+      }
+    },
+    "SandboxConfiguration": {
+      "type": "object",
+      "description": "Desired configuration for the agent's sandbox.",
+      "properties": {
+        "egress": {
+          "$ref": "#/definitions/SandboxEgressConfiguration",
+          "description": "Sandbox egress configuration. In PATCH, omission preserves egress and JSON merge-patch null clears it.\nClearing egress is invalid while a subnet remains configured."
+        },
+        "packages": {
+          "type": "array",
+          "description": "Packages to preinstall in the sandbox. In PATCH, omission preserves the package list.\nA supplied array replaces the entire list; JSON merge-patch null clears it. An empty array selects no packages.\nEach supplied package must include its name and package manager.",
+          "maxItems": 200,
+          "items": {
+            "$ref": "#/definitions/SandboxPackageSpec"
+          }
+        }
+      }
+    },
+    "SandboxEgressConfiguration": {
+      "type": "object",
+      "description": "Desired outbound network configuration for the agent's sandbox.",
+      "properties": {
+        "mode": {
+          "$ref": "#/definitions/SandboxEgressMode",
+          "description": "Sandbox egress mode. AzureVNet requires a subnet, and a configured subnet requires AzureVNet.\nIn PATCH, omission preserves the mode and JSON merge-patch null clears it.\nClearing the mode is invalid while a subnet remains configured.\nNo unconditional default applies."
+        },
+        "allowHttpMcpServerNetworkAccess": {
+          "type": "boolean",
+          "description": "Whether remote HTTP MCP servers can use the managed network path.\nIn PATCH, omission preserves the setting and JSON merge-patch null clears it."
+        },
+        "allowedHosts": {
+          "type": "array",
+          "description": "Additional hostnames allowed on the managed network path.\nEntries are DNS hostnames or leading wildcard patterns such as '*.example.com'; a bare '*' is invalid.\nEach entry has at most 253 characters and each DNS label at most 63 characters.\nWildcard patterns must contain at least two labels after '*.'.\nIn PATCH, omission preserves the list, a supplied array replaces it, and JSON merge-patch null clears it.",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/definitions/SandboxAllowedHost"
+          }
+        },
+        "allowedRegistries": {
+          "type": "array",
+          "description": "Package registry identifiers allowed on the managed network path. Values are matched without regard to case.\nIn PATCH, omission preserves the list, a supplied array replaces it, and JSON merge-patch null clears it.",
+          "items": {
+            "$ref": "#/definitions/SandboxRegistry"
+          }
+        },
+        "allowedCodeRepositories": {
+          "type": "array",
+          "description": "Code repository provider identifiers allowed on the managed network path. Values are matched case-sensitively.\nIn PATCH, omission preserves the list, a supplied array replaces it, and JSON merge-patch null clears it.",
+          "items": {
+            "$ref": "#/definitions/SandboxCodeRepository"
+          }
+        },
+        "httpProxy": {
+          "$ref": "#/definitions/SandboxHttpProxyConfiguration",
+          "description": "Forward-proxy configuration for sandbox outbound requests.\nUsed only when forward-proxy support is enabled for the Agent and the egress mode is AzureVNet.\nSupplying this configuration does not enable forward-proxy support.\nIn PATCH, omission preserves the configuration, JSON merge-patch null clears it, and a supplied object merges its members.\nThe resulting proxy configuration must include httpsUrl."
+        }
+      }
+    },
+    "SandboxEgressMode": {
+      "type": "string",
+      "description": "Supported modes for outbound network access from the agent's sandbox.",
+      "enum": [
+        "Unrestricted",
+        "Limited",
+        "AzureVNet"
+      ],
+      "x-ms-enum": {
+        "name": "SandboxEgressMode",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Unrestricted",
+            "value": "Unrestricted",
+            "description": "Allows sandbox egress without destination restrictions from this mode."
+          },
+          {
+            "name": "Limited",
+            "value": "Limited",
+            "description": "Restricts sandbox egress to allowed destinations."
+          },
+          {
+            "name": "AzureVNet",
+            "value": "AzureVNet",
+            "description": "Uses the configured virtual network subnet for sandbox egress."
+          }
+        ]
+      }
+    },
+    "SandboxHttpProxyConfiguration": {
+      "type": "object",
+      "description": "Forward-proxy endpoints and additional destinations that bypass the proxy.",
+      "properties": {
+        "httpUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Optional proxy endpoint for HTTP destinations. When set, it must be the same proxy origin as httpsUrl;\ndifferent HTTP and HTTPS proxies are not supported.\nThe value must be an absolute http:// origin with a host. Credentials, paths other than '/', query strings,\nfragments, and ports 0, 80, and 443 are not supported.\nIn PATCH, omission preserves the endpoint and JSON merge-patch null clears it."
+        },
+        "httpsUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Proxy endpoint for HTTPS destinations. Required whenever a proxy configuration is stored.\nThe proxy URL itself must use http:// for CONNECT tunneling and must be an origin with a host.\nCredentials, paths other than '/', query strings, fragments, and ports 0, 80, and 443 are not supported.\nIn PATCH, omission preserves the endpoint."
+        },
+        "noProxy": {
+          "type": "array",
+          "description": "Additional destinations that bypass the forward proxy.\nEntries can be DNS hostnames, leading-dot or '*.' suffix patterns, or exact IPv4 addresses.\nCIDR blocks, IPv6 addresses, ports, empty entries, and a bare '*' are invalid.\nIn PATCH, omission preserves the list, a supplied array replaces it, and JSON merge-patch null clears it.",
+          "items": {
+            "$ref": "#/definitions/SandboxNoProxyEntry"
+          }
+        }
+      }
+    },
+    "SandboxNoProxyEntry": {
+      "type": "string",
+      "description": "A destination that bypasses the forward proxy.\nThe value is an exact IPv4 address, a DNS hostname, or a DNS suffix prefixed with '.' or '*.'.",
+      "minLength": 1,
+      "maxLength": 253,
+      "pattern": "^(?:(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)(?:\\.(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]?\\d)){3}|(?:\\*\\.|\\.)?(?=.{1,253}$)(?=.*[A-Za-z_])(?:[A-Za-z0-9_](?:[A-Za-z0-9_-]{0,61}[A-Za-z0-9_])?)(?:\\.(?:[A-Za-z0-9_](?:[A-Za-z0-9_-]{0,61}[A-Za-z0-9_])?))*)$"
+    },
+    "SandboxPackageManager": {
+      "type": "string",
+      "description": "Supported package managers for sandbox packages.",
+      "enum": [
+        "pip",
+        "npm",
+        "nuget"
+      ],
+      "x-ms-enum": {
+        "name": "SandboxPackageManager",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pip",
+            "value": "pip",
+            "description": "Python packages installed with pip."
+          },
+          {
+            "name": "Npm",
+            "value": "npm",
+            "description": "JavaScript packages installed with npm."
+          },
+          {
+            "name": "Nuget",
+            "value": "nuget",
+            "description": ".NET tools installed from NuGet."
+          }
+        ]
+      }
+    },
+    "SandboxPackageSpec": {
+      "type": "object",
+      "description": "A package to preinstall in the sandbox. Package arrays are replaced as a whole.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Package name, optionally including a scope or namespace prefix.",
+          "minLength": 1,
+          "maxLength": 214,
+          "pattern": "^@?[A-Za-z0-9][A-Za-z0-9._-]*(/[A-Za-z0-9][A-Za-z0-9._-]*)?$"
+        },
+        "version": {
+          "type": "string",
+          "description": "Optional package version or version constraint. Omit it or send null to leave the version unspecified.",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[A-Za-z0-9._+\\-~^<>=,*\\[\\]()]+$"
+        },
+        "packageManager": {
+          "$ref": "#/definitions/SandboxPackageManager",
+          "description": "Package manager used to install the package. Values are case-sensitive."
+        }
+      },
+      "required": [
+        "name",
+        "packageManager"
+      ]
+    },
+    "SandboxRegistry": {
+      "type": "string",
+      "description": "Package registries that can be allowed on the managed network path.",
+      "enum": [
+        "pypi",
+        "npmjs",
+        "nuget-org",
+        "ubuntu"
+      ],
+      "x-ms-enum": {
+        "name": "SandboxRegistry",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pypi",
+            "value": "pypi",
+            "description": "The Python Package Index."
+          },
+          {
+            "name": "Npmjs",
+            "value": "npmjs",
+            "description": "The public npm registry."
+          },
+          {
+            "name": "NugetOrg",
+            "value": "nuget-org",
+            "description": "The public NuGet gallery."
+          },
+          {
+            "name": "Ubuntu",
+            "value": "ubuntu",
+            "description": "Ubuntu package archives."
+          }
+        ]
+      }
+    },
     "SupportedAgentModel": {
       "type": "object",
       "description": "Collection of supported AI models",
@@ -1621,6 +1936,24 @@
             "description": "Stable upgrade channel"
           }
         ]
+      }
+    },
+    "VnetConfiguration": {
+      "type": "object",
+      "description": "Desired subnet configuration for the agent's sandbox.",
+      "properties": {
+        "subnetResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Azure resource ID of the subnet used with AzureVNet egress mode. GET returns null when detached.\nIn PATCH, omission preserves the subnet and JSON merge-patch null clears it.\nSetting or replacing a subnet requires the resulting egress mode to be AzureVNet.\nWhen clearing the subnet, also update sandbox egress in the same PATCH request so the resulting mode is not AzureVNet.\nThe detach example explicitly selects Limited.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
+        }
       }
     }
   },
