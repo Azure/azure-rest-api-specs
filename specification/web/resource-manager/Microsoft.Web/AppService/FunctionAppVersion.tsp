@@ -175,5 +175,4 @@ interface FunctionAppVersions {
     ArmResponse<StringDictionary>,
     OptionalRequestBody = true
   >;
-
 }
