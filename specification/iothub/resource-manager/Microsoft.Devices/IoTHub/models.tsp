@@ -171,6 +171,7 @@ union RoutingSource {
   /**
    * DigitalTwinChangeEvents
    */
+  @removed(Versions.v2026_11_01)
   DigitalTwinChangeEvents: "DigitalTwinChangeEvents",
 
   /**
@@ -181,6 +182,7 @@ union RoutingSource {
   /**
    * MqttBrokerMessages
    */
+  @removed(Versions.v2026_11_01)
   MqttBrokerMessages: "MqttBrokerMessages",
 }
 
