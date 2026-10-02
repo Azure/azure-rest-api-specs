@@ -13505,11 +13505,15 @@
         "sourceModelId": {
           "type": "string",
           "description": "The immutable Project Models version produced by Foundry fine-tuning.\nThe identifier uses the Azure AI project model URI format.\nThe service validates LoRA weight type, protected status, provenance,\ncompatibility metadata, and registration state.",
-          "pattern": "^azure(?:ai)://accounts/[^/]+/projects/[^/]+/models/[^/]+/versions/[^/]+$"
+          "pattern": "^azure(?:ai)://accounts/[^/]+/projects/[^/]+/models/[^/]+/versions/[^/]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "targetDeploymentName": {
           "type": "string",
-          "description": "The name of the compatible managed compute parent deployment.\nThe service resolves this name within the adapter's owning account; full\nARM resource IDs and cross-account references are not accepted. It cannot\nequal the adapter deployment's resource name. Updating this value\nre-targets the adapter while its source model remains unchanged."
+          "description": "The name of the compatible managed compute parent deployment.\nThe service resolves this name within the adapter's owning account; full\nAzure Resource Manager resource IDs and cross-account references are not accepted. It cannot\nequal the adapter deployment's resource name. Updating this value\nre-targets the adapter while its source model remains unchanged."
         },
         "activeTargetDeploymentName": {
           "type": "string",
@@ -17251,7 +17255,8 @@
           "x-nullable": true,
           "items": {
             "$ref": "#/definitions/CostControlThreshold"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -21060,7 +21065,7 @@
     },
     "RaiAcsHarmConfiguration": {
       "type": "object",
-      "description": "Selects one AACS harm-detector configuration.",
+      "description": "Selects one Azure AI Content Safety harm-detector configuration.",
       "properties": {
         "category": {
           "$ref": "#/definitions/RaiAcsHarmCategory",
@@ -21068,7 +21073,7 @@
         },
         "harm_config_id": {
           "type": "string",
-          "description": "The AACS detector configuration identifier. When supplied, it must be the\nconfiguration supported for the selected category.",
+          "description": "The Azure AI Content Safety detector configuration identifier. When supplied, it must be the\nconfiguration supported for the selected category.",
           "minLength": 1,
           "x-ms-client-name": "harmConfigId"
         }
@@ -21079,7 +21084,7 @@
     },
     "RaiAcsInterventionPoint": {
       "type": "object",
-      "description": "Binds one logical policy to an ACS intervention point.",
+      "description": "Binds one logical policy to an Agent Control Specification intervention point.",
       "properties": {
         "policy_target": {
           "$ref": "#/definitions/RaiAcsPolicyTarget",
@@ -21097,7 +21102,7 @@
         },
         "annotations": {
           "$ref": "#/definitions/RaiAcsEmptyObject",
-          "description": "Standard ACS annotation bindings are disabled; when present, this object must be empty."
+          "description": "Standard Agent Control Specification annotation bindings are disabled; when present, this object must be empty."
         }
       },
       "required": [
@@ -21108,7 +21113,7 @@
     },
     "RaiAcsInterventionPoints": {
       "type": "object",
-      "description": "Intervention points supported by the Unified Moderate AACS host profile.",
+      "description": "Intervention points supported by the Azure AI Content Safety Unified Moderate host profile.",
       "properties": {
         "input": {
           "$ref": "#/definitions/RaiAcsInterventionPoint",
@@ -21132,7 +21137,7 @@
     },
     "RaiAcsManifest": {
       "type": "object",
-      "description": "The closed Rego-only Agent Control Specification profile supported by\nUnified Moderate.",
+      "description": "The closed Rego-only Agent Control Specification (ACS) profile supported by\nAzure AI Content Safety Unified Moderate.",
       "properties": {
         "agent_control_specification_version": {
           "type": "string",
@@ -21153,7 +21158,7 @@
         },
         "intervention_points": {
           "$ref": "#/definitions/RaiAcsInterventionPoints",
-          "description": "ACS intervention-point bindings. At least one intervention point is required.",
+          "description": "Agent Control Specification intervention-point bindings. At least one intervention point is required.",
           "x-ms-client-name": "interventionPoints"
         },
         "tools": {
@@ -21165,7 +21170,7 @@
         },
         "annotators": {
           "$ref": "#/definitions/RaiAcsEmptyObject",
-          "description": "Standard ACS annotator dispatch is disabled; when present, this object must be empty."
+          "description": "Standard Agent Control Specification annotator dispatch is disabled; when present, this object must be empty."
         }
       },
       "required": [
@@ -21176,7 +21181,7 @@
     },
     "RaiAcsModerationBindingExtension": {
       "type": "object",
-      "description": "AACS-specific moderation work performed before ACS evaluates the selected\nRego query.",
+      "description": "Azure AI Content Safety moderation work performed before the Agent Control\nSpecification runtime evaluates the selected Rego query.",
       "properties": {
         "subject_format": {
           "$ref": "#/definitions/RaiAcsModerationSubjectFormat",
@@ -21202,7 +21207,7 @@
     },
     "RaiAcsModerationSubjectFormat": {
       "type": "string",
-      "description": "The representation sent to AACS moderation capabilities.",
+      "description": "The representation sent to Azure AI Content Safety moderation capabilities.",
       "enum": [
         "text",
         "canonical_json"
@@ -21226,7 +21231,7 @@
     },
     "RaiAcsPolicyBinding": {
       "type": "object",
-      "description": "Identifies the logical policy evaluated at an ACS intervention point.",
+      "description": "Identifies the logical policy evaluated at an Agent Control Specification intervention point.",
       "properties": {
         "id": {
           "type": "string",
@@ -21240,7 +21245,7 @@
         },
         "aacs_moderation": {
           "$ref": "#/definitions/RaiAcsModerationBindingExtension",
-          "description": "Optional AACS moderation capabilities invoked before Rego evaluation.",
+          "description": "Optional Azure AI Content Safety moderation capabilities invoked before Rego evaluation.",
           "x-ms-client-name": "aacsModeration"
         }
       },
@@ -21250,7 +21255,7 @@
     },
     "RaiAcsPolicyDefinitionType": {
       "type": "string",
-      "description": "The policy language supported by the Unified Moderate AACS host profile.",
+      "description": "The policy language supported by the Azure AI Content Safety Unified Moderate host profile.",
       "enum": [
         "rego"
       ],
@@ -21268,7 +21273,7 @@
     },
     "RaiAcsPolicyTarget": {
       "type": "string",
-      "description": "Canonical policy targets supported by the Unified Moderate AACS host profile.",
+      "description": "Canonical policy targets supported by the Azure AI Content Safety Unified Moderate host profile.",
       "enum": [
         "$snap.input",
         "$snap.output",
@@ -21304,7 +21309,7 @@
     },
     "RaiAcsPolicyTargetKind": {
       "type": "string",
-      "description": "Canonical target kinds supported by the Unified Moderate AACS host profile.",
+      "description": "Canonical target kinds supported by the Azure AI Content Safety Unified Moderate host profile.",
       "enum": [
         "user_input",
         "assistant_output",
@@ -21340,7 +21345,7 @@
     },
     "RaiAcsRegoPolicyDefinition": {
       "type": "object",
-      "description": "A Rego policy definition in the Unified Moderate AACS host profile.",
+      "description": "A Rego policy definition in the Azure AI Content Safety Unified Moderate host profile.",
       "properties": {
         "type": {
           "$ref": "#/definitions/RaiAcsPolicyDefinitionType",
@@ -21359,7 +21364,7 @@
     },
     "RaiAcsToolDefinition": {
       "type": "object",
-      "description": "Static policy metadata for one ACS tool catalog entry.",
+      "description": "Static policy metadata for one Agent Control Specification tool catalog entry.",
       "properties": {
         "id": {
           "type": "string",
@@ -21411,7 +21416,7 @@
         },
         "annotations": {
           "$ref": "#/definitions/RaiAcsEmptyObject",
-          "description": "Standard ACS annotation bindings are disabled; when present, this object must be empty."
+          "description": "Standard Agent Control Specification annotation bindings are disabled; when present, this object must be empty."
         },
         "tool_name_from": {
           "$ref": "#/definitions/RaiAcsToolNameSelector",
@@ -21427,7 +21432,7 @@
     },
     "RaiAcsToolNameSelector": {
       "type": "string",
-      "description": "Snapshot paths for selecting a tool catalog entry.\nThe listed values are recognized by the Unified Moderate AACS host profile; other values are allowed for forward compatibility.",
+      "description": "Snapshot paths for selecting a tool catalog entry.\nThe listed values are recognized by the Azure AI Content Safety Unified Moderate host profile; other values are allowed for forward compatibility.",
       "enum": [
         "$snap.tool_call.name",
         "$.tool_call.name"
@@ -21488,7 +21493,7 @@
     },
     "RaiBinding": {
       "type": "object",
-      "description": "An account-scoped binding from an Azure resource to an ACS policy.",
+      "description": "An account-scoped binding from an Azure resource to an Agent Control Specification policy.",
       "properties": {
         "properties": {
           "$ref": "#/definitions/RaiBindingProperties",
@@ -21543,12 +21548,12 @@
     },
     "RaiBindingProperties": {
       "type": "object",
-      "description": "Properties of a binding from an Azure resource to an ACS policy.",
+      "description": "Properties of a binding from an Azure resource to an Agent Control Specification policy.",
       "properties": {
         "boundResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "A valid ARM resource ID of the resource to bind to the target RAI policy.",
+          "description": "A valid Azure Resource Manager resource ID of the resource to bind to the target RAI policy.",
           "x-ms-mutability": [
             "read",
             "update",
@@ -21557,7 +21562,7 @@
         },
         "targetPolicyName": {
           "type": "string",
-          "description": "The same-account ACS policy name targeted by the binding.",
+          "description": "The same-account Agent Control Specification policy name targeted by the binding.",
           "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
         }
       },

@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
@@ -170,6 +171,8 @@ model CostControlRule {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "The current preview accepts omitted, null, or empty thresholds as an audit-only rule."
   @maxItems(10)
+  // @identifiers does not accept nullable array unions.
+  @TypeSpec.OpenAPI.extension("x-ms-identifiers", #[])
   thresholds?: CostControlThreshold[] | null;
 }
 

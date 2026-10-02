@@ -547,7 +547,7 @@ model RaiPolicyCustomExternalSafetyProviderReference {
   blocking?: boolean;
 }
 
-/** The policy language supported by the Unified Moderate AACS host profile. */
+/** The policy language supported by the Azure AI Content Safety Unified Moderate host profile. */
 @added(Versions.v2026_09_15_preview)
 union RaiAcsPolicyDefinitionType {
   string,
@@ -556,7 +556,7 @@ union RaiAcsPolicyDefinitionType {
   Rego: "rego",
 }
 
-/** The representation sent to AACS moderation capabilities. */
+/** The representation sent to Azure AI Content Safety moderation capabilities. */
 @added(Versions.v2026_09_15_preview)
 union RaiAcsModerationSubjectFormat {
   string,
@@ -595,7 +595,7 @@ union RaiAcsHarmCategory {
   ProtectedMaterialCode: "ProtectedMaterialCode",
 }
 
-/** A Rego policy definition in the Unified Moderate AACS host profile. */
+/** A Rego policy definition in the Azure AI Content Safety Unified Moderate host profile. */
 @added(Versions.v2026_09_15_preview)
 model RaiAcsRegoPolicyDefinition {
   /** The policy language. This profile supports only Rego. */
@@ -606,14 +606,14 @@ model RaiAcsRegoPolicyDefinition {
   query: string;
 }
 
-/** Selects one AACS harm-detector configuration. */
+/** Selects one Azure AI Content Safety harm-detector configuration. */
 @added(Versions.v2026_09_15_preview)
 model RaiAcsHarmConfiguration {
   /** The logical harm category exposed under input.snapshot.moderation.harm. */
   category: RaiAcsHarmCategory;
 
   /**
-   * The AACS detector configuration identifier. When supplied, it must be the
+   * The Azure AI Content Safety detector configuration identifier. When supplied, it must be the
    * configuration supported for the selected category.
    */
   @encodedName("application/json", "harm_config_id")
@@ -622,8 +622,8 @@ model RaiAcsHarmConfiguration {
 }
 
 /**
- * AACS-specific moderation work performed before ACS evaluates the selected
- * Rego query.
+ * Azure AI Content Safety moderation work performed before the Agent Control
+ * Specification runtime evaluates the selected Rego query.
  */
 @added(Versions.v2026_09_15_preview)
 model RaiAcsModerationBindingExtension {
@@ -642,7 +642,7 @@ model RaiAcsModerationBindingExtension {
 @added(Versions.v2026_09_15_preview)
 model RaiAcsEmptyObject {}
 
-/** Static policy metadata for one ACS tool catalog entry. */
+/** Static policy metadata for one Agent Control Specification tool catalog entry. */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ACS tool entries permit extensible policy metadata"
 @added(Versions.v2026_09_15_preview)
 model RaiAcsToolDefinition {
@@ -669,7 +669,7 @@ model RaiAcsToolDefinition {
 }
 
 /**
- * Identifies the logical policy evaluated at an ACS intervention point.
+ * Identifies the logical policy evaluated at an Agent Control Specification intervention point.
  */
 @added(Versions.v2026_09_15_preview)
 model RaiAcsPolicyBinding {
@@ -681,12 +681,12 @@ model RaiAcsPolicyBinding {
   @minLength(1)
   query?: string;
 
-  /** Optional AACS moderation capabilities invoked before Rego evaluation. */
+  /** Optional Azure AI Content Safety moderation capabilities invoked before Rego evaluation. */
   @encodedName("application/json", "aacs_moderation")
   aacsModeration?: RaiAcsModerationBindingExtension;
 }
 
-/** Canonical policy targets supported by the Unified Moderate AACS host profile. */
+/** Canonical policy targets supported by the Azure AI Content Safety Unified Moderate host profile. */
 @added(Versions.v2026_09_15_preview)
 union RaiAcsPolicyTarget {
   string,
@@ -704,7 +704,7 @@ union RaiAcsPolicyTarget {
   ToolResult: "$snap.tool_result.value",
 }
 
-/** Canonical target kinds supported by the Unified Moderate AACS host profile. */
+/** Canonical target kinds supported by the Azure AI Content Safety Unified Moderate host profile. */
 @added(Versions.v2026_09_15_preview)
 union RaiAcsPolicyTargetKind {
   string,
@@ -724,7 +724,7 @@ union RaiAcsPolicyTargetKind {
 
 /**
  * Snapshot paths for selecting a tool catalog entry.
- * The listed values are recognized by the Unified Moderate AACS host profile; other values are allowed for forward compatibility.
+ * The listed values are recognized by the Azure AI Content Safety Unified Moderate host profile; other values are allowed for forward compatibility.
  */
 @added(Versions.v2026_09_15_preview)
 union RaiAcsToolNameSelector {
@@ -738,7 +738,7 @@ union RaiAcsToolNameSelector {
 }
 
 /**
- * Binds one logical policy to an ACS intervention point.
+ * Binds one logical policy to an Agent Control Specification intervention point.
  */
 @added(Versions.v2026_09_15_preview)
 model RaiAcsInterventionPoint {
@@ -753,7 +753,7 @@ model RaiAcsInterventionPoint {
   /** The logical policy evaluated at this intervention point. */
   policy: RaiAcsPolicyBinding;
 
-  /** Standard ACS annotation bindings are disabled; when present, this object must be empty. */
+  /** Standard Agent Control Specification annotation bindings are disabled; when present, this object must be empty. */
   annotations?: RaiAcsEmptyObject;
 }
 
@@ -767,7 +767,7 @@ model RaiAcsToolInterventionPoint {
   toolNameFrom?: RaiAcsToolNameSelector;
 }
 
-/** Intervention points supported by the Unified Moderate AACS host profile. */
+/** Intervention points supported by the Azure AI Content Safety Unified Moderate host profile. */
 @added(Versions.v2026_09_15_preview)
 model RaiAcsInterventionPoints {
   /** The policy evaluated for user input. */
@@ -786,8 +786,8 @@ model RaiAcsInterventionPoints {
 }
 
 /**
- * The closed Rego-only Agent Control Specification profile supported by
- * Unified Moderate.
+ * The closed Rego-only Agent Control Specification (ACS) profile supported by
+ * Azure AI Content Safety Unified Moderate.
  */
 @added(Versions.v2026_09_15_preview)
 model RaiAcsManifest {
@@ -803,7 +803,7 @@ model RaiAcsManifest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ACS defines policies as a name-keyed map"
   policies: Record<RaiAcsRegoPolicyDefinition>;
 
-  /** ACS intervention-point bindings. At least one intervention point is required. */
+  /** Agent Control Specification intervention-point bindings. At least one intervention point is required. */
   @encodedName("application/json", "intervention_points")
   interventionPoints: RaiAcsInterventionPoints;
 
@@ -815,7 +815,7 @@ model RaiAcsManifest {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "ACS defines tools as a name-keyed extensible map"
   tools?: Record<RaiAcsToolDefinition>;
 
-  /** Standard ACS annotator dispatch is disabled; when present, this object must be empty. */
+  /** Standard Agent Control Specification annotator dispatch is disabled; when present, this object must be empty. */
   annotators?: RaiAcsEmptyObject;
 }
 
@@ -846,16 +846,16 @@ model RaiRegoProperties {
 }
 
 /**
- * Properties of a binding from an Azure resource to an ACS policy.
+ * Properties of a binding from an Azure resource to an Agent Control Specification policy.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "RAI bindings are synchronously persisted and do not expose provisioningState"
 @added(Versions.v2026_09_15_preview)
 model RaiBindingProperties {
-  /** A valid ARM resource ID of the resource to bind to the target RAI policy. */
+  /** A valid Azure Resource Manager resource ID of the resource to bind to the target RAI policy. */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   boundResourceId: Azure.Core.armResourceIdentifier;
 
-  /** The same-account ACS policy name targeted by the binding. */
+  /** The same-account Agent Control Specification policy name targeted by the binding. */
   @pattern("^[a-zA-Z0-9][a-zA-Z0-9_.-]*$")
   targetPolicyName: string;
 }
@@ -6403,12 +6403,13 @@ model AdapterDeploymentProperties {
    * compatibility metadata, and registration state.
    */
   @pattern("^azure(?:ai)://accounts/[^/]+/projects/[^/]+/models/[^/]+/versions/[^/]+$")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   sourceModelId: string;
 
   /**
    * The name of the compatible managed compute parent deployment.
    * The service resolves this name within the adapter's owning account; full
-   * ARM resource IDs and cross-account references are not accepted. It cannot
+   * Azure Resource Manager resource IDs and cross-account references are not accepted. It cannot
    * equal the adapter deployment's resource name. Updating this value
    * re-targets the adapter while its source model remains unchanged.
    */
