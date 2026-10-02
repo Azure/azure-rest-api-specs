@@ -4,6 +4,90 @@ The `eng` directory contains source code for automated tooling running on this r
 
 For context on this directory, see [Design guidelines for spec repos validation tooling] (Microsoft-internal).
 
+## Protected files
+
+The **Protected Files** check keeps repository-managed files out of specification
+contributions. It is a contribution-scope check, not a request for code-owner approval.
+Contributor guidance is in the [CI Fix Guide](../documentation/ci-fix.md#protected-files).
+
+Intentional repository-maintenance PRs also fail this check. Repository maintainers
+can use their existing bypass permissions to merge those changes after reviewing
+the applicable validation results and code-owner requirements. Changes authored by
+the trusted `azure-sdk` and `azure-sdk-automation[bot]` accounts pass automatically.
+
+## Contributor readiness
+
+Contributor readiness runs only for PRs that change `specification/`, including
+mixed specification and engineering changes. Engineering-only PRs are skipped
+without account checks or a readiness comment/check, including review events and
+manual `/azsdk check-access` requests. The PR-event notifier uses a path filter;
+the publisher verifies current changed files for every trigger.
+
+The advisory **Contributor readiness** check reports public Microsoft/Azure
+membership visibility and effective repository access for the PR author, commit
+authors/committers, and all submitted reviewers. It does not change merge rules.
+Missing public membership produces conditional internal-onboarding guidance, not
+a claim that an external contributor is unauthorized.
+
+The comment groups findings by affected user: 🔴 marks a confirmed issue and 🟡
+marks checks that could not be verified. It links to
+[setup and access renewal](https://aka.ms/azsdk/access); users without findings
+are omitted to keep the report short. The job summary shows the same report.
+Organization names in membership findings link to the organization's People page,
+with the affected user's login prefilled in the search.
+
+After changing access, comment `/azsdk check-access` on the PR. The PR author,
+resolved commit participants, submitted reviewers and maintainers can refresh,
+including affected participants without write access. One bot comment is updated
+when findings exist and resolved when they are fixed; clean PRs receive only the
+check. Permission changes alone do not trigger an automatic refresh.
+
+The check uses `GITHUB_TOKEN`: no additional credentials, bot service or Azure
+resources are needed. Private memberships, team membership, manager approvals,
+access expiry dates and Azure DevOps roles are not inspected. CODEOWNER coverage
+and other approval rules remain GitHub's responsibility. Unmapped identities,
+inaccessible API results, and PRs exceeding the commits API's 250-commit limit are
+reported as incomplete rather than silently passing.
+
+PR opening, reopening, new commits, ready-for-review transitions and submitted
+reviews use an unprivileged notification workflow followed by a trusted
+`workflow_run` publisher. The notifier has no checkout or token permissions;
+the publisher runs only default-branch code and resolves PRs from GitHub metadata.
+No `pull_request_target` trigger is used.
+
+Editing or dismissing a review does not rerun the check; those reviewers remain
+included. Fork workflow approval policies can delay automatic refreshes. The
+comment command runs from the default branch and remains available without
+waiting for the notifier. Do not make this advisory check required.
+
+## Branch cleanup
+
+[Cleanup stale branches](../.github/workflows/branch-cleanup.yaml) runs weekly on
+Monday at 05:23 UTC. Scheduled runs delete eligible branches automatically.
+Manual runs default to **dry-run**, which logs candidates without deleting anything.
+Run the workflow from the default branch; it is disabled on forks.
+
+A branch is eligible when its last commit is older than **90 days** for `copilot/*`,
+or **2 years (730 days)** for other branches. Closed-unmerged and no-PR branches
+are included; recent comments on a closed PR do not extend retention.
+
+Manual runs can override these cutoffs independently using `copilot-days` and
+`other-days`. Both must be positive whole numbers. Scheduled runs always use the
+90-day and 730-day defaults. For example, to preview a shorter range:
+
+```bash
+gh workflow run branch-cleanup.yaml --repo Azure/azure-rest-api-specs --ref main \
+  -f dry-run=true -f copilot-days=30 -f other-days=365
+```
+
+The default branch, protected branches, and sources and targets of open PRs
+(including drafts) are skipped. Long-lived names and prefixes such as `dev-`,
+`release-`, `feature/`, `published/`, and `archive/` are also excluded; the complete
+list is at the top of the [script](../.github/workflows/src/branch-cleanup.ts).
+Keep a long-lived branch by protecting it or adding it to those exclusions.
+Candidates and their SHAs are logged, and SHA-guarded Git pushes refuse to delete
+changed tips. API and deletion failures fail the workflow.
+
 ## Code conventions
 
 Below are code convention we strive to follow in `eng` directory:
@@ -63,16 +147,20 @@ Below are code convention we strive to follow in `eng` directory:
 Run these commands from the repository root after `pnpm install`:
 
 ```bash
-pnpm build       # Run each tooling package's build script with pnpm -r
+pnpm build       # Build tooling and TypeSpec libraries with pnpm -r
 pnpm test        # Run all Vitest projects (watch mode locally)
 pnpm test:ci     # Run all projects once with coverage
 pnpm check       # Workspace validation, build, lint, format:check, and test:ci
 ```
 
-Root `pnpm build` delegates to `.github`, `.github/shared`, `eng/scripts`, and
-each tool's build script. It excludes the `eng/tools` aggregate package to avoid
+Root `pnpm build` delegates to `.github`, `.github/shared`, `eng/scripts`,
+each tool's build script, and libraries under `libs/`. It excludes the `eng/tools` aggregate package to avoid
 building the tools twice; that package's local `pnpm build` remains available.
-Builds perform type checking only, with no JavaScript output.
+Tooling builds perform type checking only, with no JavaScript output. TypeSpec
+libraries compile with the library linter enabled and warnings treated as errors.
+Foundry Core also type-checks its TypeScript without emitting JavaScript. Its
+workspace exports load TypeScript directly; only packing emits JavaScript for
+npm consumers.
 
 Root `vitest.config.mts` defines one workspace using `test.projects` and exports
 `defaultVitestConfig` for standalone package configs. Packages inherit shared
@@ -94,7 +182,7 @@ and participates only in the root build.
 
 The full test run requires PowerShell (`pwsh`). The conversion smoke test uses a
 self-contained Swagger fixture under `eng/tools/tsp-client-tests/test/fixtures/`.
-CI's sparse checkout only needs `.github` and `eng`, along with the root configuration
+CI's sparse checkout only needs `.github`, `eng`, and `libs`, along with the root configuration
 files. The ARM resource-provider tests retain their existing behavior when
 `specification/` is absent. Resolve test fixture paths from `import.meta.dirname`,
 not the invocation working directory, to support both modes.
@@ -105,15 +193,56 @@ The `.mts` extension keeps the root Vitest config as ESM without changing the
 repository's default module type. Root `tsconfig.json` checks this config and is
 also covered by the GitHub package build.
 
-[Eng](../.github/workflows/eng.yml) validates the workspace, type-checks once on Linux,
+[Eng](../.github/workflows/eng.yml) validates the workspace, builds once on Linux,
 and runs the Vitest workspace on Ubuntu and Windows with Node 24.
 New tools do not need their own workflows. `github-test.yaml` separately verifies
 production-only module imports, workflow YAML, and compiled agentic workflow locks.
 
+## Publishing TypeSpec libraries
+
+Publishable TypeSpec libraries live under `libs/` and participate in the pnpm
+workspace. [Foundry Core](../libs/foundry-core/README.md) is the initial package.
+
+The manual [publish-libraries pipeline](pipelines/publish-libraries.yml) builds and
+packs Foundry Core into a `packages` pipeline artifact. It follows the
+[TypeSpec publishing pipeline](https://github.com/microsoft/typespec/blob/main/eng/tsp-core/pipelines/publish.yml):
+1ES builds produce package artifacts, and a separate release job publishes them
+to npm through ESRP. `pnpm pack` resolves catalog dependencies in the published
+manifest. Foundry Core's `prepack` script compiles its runtime to JavaScript, and
+`publishConfig` switches the packed exports from source TypeScript to that output.
+No Chronus, automatic version bumps, or nightly releases are configured.
+
+Before the first release, an Azure SDK pipeline administrator must register this
+YAML as a pipeline in the **internal** Azure DevOps project, authorize its 1ES
+templates, agent pools, and Azure SDK ESRP service connection, and configure the
+`package-publish` environment with the required approvers. Confirm authorization
+to publish `@azure-tools/typespec-foundry-core` in the `@azure-tools` npm scope.
+These are external setup steps, not resources created by the YAML.
+
+For each release:
+
+1. Update `libs/foundry-core/package.json` to an unpublished version, run
+   `pnpm install`, and merge the changes into `main`.
+2. Queue the pipeline with `Publish` left **false** to inspect the package artifact.
+3. Queue the same commit on `main` with `Publish` set to **true**, then approve the
+   release environment. Publishing is available only from this public repository's
+   `main` branch in the internal Azure DevOps project.
+
+The shared publishing job uses the `beta` npm tag for prerelease versions and
+`latest` for stable versions. Versions are not bumped or skipped automatically;
+publishing an already released version fails.
+
+To inspect a package locally without publishing:
+
+```bash
+pnpm --filter @azure-tools/typespec-foundry-core build
+pnpm --filter @azure-tools/typespec-foundry-core pack --pack-destination "$PWD/tmp/packages"
+```
+
 ## Linting and formatting
 
 - Run `pnpm lint` from the repository root to lint the enabled packages
-  in `.github` and `eng/tools`, plus root `vitest.config.mts`, in one oxlint invocation.
+  in `.github`, `eng/tools`, and `libs`, plus root `vitest.config.mts`, in one oxlint invocation.
   Use `pnpm lint:fix` to apply
   safe fixes. File selection lives in the root `.oxlintrc.json`, so the root command
   is simply `oxlint .`; other repository folders and root-level files are excluded.
@@ -130,7 +259,7 @@ production-only module imports, workflow YAML, and compiled agentic workflow loc
   Unused suppressions in linted packages fail linting.
 - Discuss any desired rule divergences and explain them in the configuration.
 - Run `pnpm format` or `pnpm format:check` from the repository root to format or
-  check `.github`, `eng/tools`, and `vitest.config.mts` in one Oxfmt invocation. Package-local commands
+  check `.github`, `eng/tools`, `libs`, and `vitest.config.mts` in one Oxfmt invocation. Package-local commands
   remain available and inherit the root `.oxfmtrc.json`.
 - `.github/workflows/format.yaml` checks formatting once on Linux, outside the
   test OS matrix. Do not add formatting steps to build/test jobs.

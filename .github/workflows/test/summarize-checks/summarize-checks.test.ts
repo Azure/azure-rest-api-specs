@@ -2,6 +2,7 @@ import { Octokit } from "@octokit/rest";
 import { strToU8, zipSync } from "fflate";
 import { describe, expect, it } from "vitest";
 import { execFile } from "../../../shared/src/exec.ts";
+import type { GitHub } from "../../src/github.ts";
 import {
   createNextStepsComment,
   getCheckInfo,
@@ -21,12 +22,7 @@ const WORKFLOW_URL = "http://github.com/a/fake/workflowrun/url";
  * Find and extract the "Next Steps to Merge" existing comment on a PR.
  * Used in the integration test.
  */
-async function getNextStepsComment(
-  github: import("../mocks.ts").GitHub,
-  owner: string,
-  repo: string,
-  prNumber: number,
-) {
+async function getNextStepsComment(github: GitHub, owner: string, repo: string, prNumber: number) {
   try {
     const { data: comments } = await github.rest.issues.listComments({
       owner: owner,
@@ -66,7 +62,7 @@ describe("Summarize Checks Integration Tests", () => {
 
         const github = new Octokit({
           auth: process.env.GITHUB_TOKEN,
-        }) as unknown as import("../mocks.ts").GitHub;
+        }) as unknown as GitHub;
 
         const { data: pr } = await github.rest.pulls.get({
           owner: owner,

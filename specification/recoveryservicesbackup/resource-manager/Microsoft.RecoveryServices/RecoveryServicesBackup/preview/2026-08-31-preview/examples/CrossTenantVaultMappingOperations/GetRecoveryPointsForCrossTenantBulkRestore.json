@@ -1,0 +1,27 @@
+{
+  "operationId": "RecoveryPointsFromCrossTenantVault_List",
+  "title": "Get Recovery Points For Cross-Tenant Bulk Restore",
+  "parameters": {
+    "api-version": "2026-08-31-preview",
+    "vaultName": "NetSDKTestRsVault",
+    "crossTenantVaultMappingName": "crossTenantVaultMapping1",
+    "fabricName": "Azure",
+    "resourceGroupName": "SwaggerTestRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "body": {
+      "protectedItemIds": [
+        "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/SourceRG/providers/Microsoft.RecoveryServices/vaults/SourceVault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;SourceRG;testVM1/protectedItems/VM;iaasvmcontainerv2;SourceRG;testVM1",
+        "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/SourceRG/providers/Microsoft.RecoveryServices/vaults/SourceVault/backupFabrics/Azure/protectionContainers/IaasVMContainer;iaasvmcontainerv2;SourceRG;testVM2/protectedItems/VM;iaasvmcontainerv2;SourceRG;testVM2"
+      ]
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupCrossTenantVaultMappings/crossTenantVaultMapping1/backupFabrics/Azure/recoveryPointOperationResults/00000000-0000-0000-0000-000000000000?api-version=2026-08-31-preview",
+        "Retry-After": 60
+      }
+    },
+    "204": {}
+  }
+}

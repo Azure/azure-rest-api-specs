@@ -1,6 +1,6 @@
 import { Readme } from "@azure-tools/specs-shared/readme";
-import { basename, join, relative } from "path";
-import { isDeepStrictEqual } from "util";
+import { basename, join, relative } from "node:path";
+import { isDeepStrictEqual } from "node:util";
 import {
   type AutorestRunResult,
   type BeforeAfter,
