@@ -9,8 +9,7 @@ import getLabelActionsImpl, {
 import { createMockContext, createMockCore, createMockGithub } from "./mocks.ts";
 
 // Mock dependencies
-vi.mock(import("../src/context.ts"), async (importOriginal) => ({
-  ...(await importOriginal()),
+vi.mock("../src/context.ts", () => ({
   extractInputs: vi.fn(),
 }));
 
@@ -29,7 +28,6 @@ describe("breaking-change-add-label-artifacts", () => {
 
     // Create fresh mock instances for each test
     mockGithub = createMockGithub();
-    mockGithub.rest.pulls.get.mockResolvedValue({ data: { state: "open" } });
     mockContext = createMockContext();
     mockCore = createMockCore();
   });

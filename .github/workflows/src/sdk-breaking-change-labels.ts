@@ -1,6 +1,6 @@
 import { SpecGenSdkArtifactInfoSchema, sdkLabels } from "../../shared/src/sdk-types.ts";
 import { getAdoBuildInfoFromUrl, getAzurePipelineArtifact } from "./artifacts.ts";
-import { extractInputs, getOpenPullRequest } from "./context.ts";
+import { extractInputs } from "./context.ts";
 import type { Core, GitHubScriptArgs } from "./github.ts";
 import { LabelAction } from "./label.ts";
 
@@ -19,7 +19,6 @@ export type Artifacts = {
 export async function getLabelAndAction({ github, context, core }: GitHubScriptArgs): Promise<{
   labelName: string | undefined;
   labelAction: LabelAction;
-  headSha: string;
   issueNumber: number;
 }> {
   const inputs = await extractInputs(github, context, core);
@@ -32,16 +31,12 @@ export async function getLabelAndAction({ github, context, core }: GitHubScriptA
     core,
   });
 
-  const pullRequest = await getOpenPullRequest(github, core, {
-    ...context.repo,
-    issue_number: result.issueNumber,
-  });
-  if (!pullRequest) {
-    return { ...result, labelAction: LabelAction.None, headSha: "", issueNumber: NaN };
-  }
-
   // This requirement only scopes label additions; target-branch handling for removals will be added later.
-  if (result.labelAction === LabelAction.Add) {
+  if (result.issueNumber > 0 && result.labelAction === LabelAction.Add) {
+    const { data: pullRequest } = await github.rest.pulls.get({
+      ...context.repo,
+      pull_number: result.issueNumber,
+    });
     const targetBranch = pullRequest.base.ref;
     core.info(`PR target branch: ${targetBranch}`);
 

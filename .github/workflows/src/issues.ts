@@ -11,7 +11,6 @@ export async function getIssueNumber(
   github: GitHub,
   head_sha: string,
   logger?: import("../../shared/src/logger.ts").ILogger,
-  repository?: { owner: string; repo: string },
 ): Promise<{ issueNumber: number }> {
   let issueNumber = NaN;
 
@@ -23,9 +22,7 @@ export async function getIssueNumber(
 
   try {
     const searchResponse = await github.rest.search.issuesAndPullRequests({
-      q: `sha:${head_sha} type:pr state:open${
-        repository ? ` repo:${repository.owner}/${repository.repo}` : ""
-      }`,
+      q: `sha:${head_sha} type:pr state:open`,
       advanced_search: "true",
     });
 
