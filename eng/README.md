@@ -92,10 +92,12 @@ changed tips. API and deletion failures fail the workflow.
 
 Repository label configuration starts at [`.github/labels.yaml`](../.github/labels.yaml).
 It extends local definition files under `.github/labels/`: `common.yaml` contains
-the labels shared with the SDK catalog, `services.yaml` contains additional
-service/team labels, and `workflow.yaml` contains repository-specific process labels.
-Sort entries alphabetically within each file. The common file is a checked-in
-copy, not a live import from another repository.
+shared process/triage labels, `services.yaml` contains service/team labels
+(both shared and repository-specific), and `workflow.yaml` contains
+repository-specific process labels. Shared labels follow the SDK registry's
+classification: color `e99695` identifies its service/area labels. These are
+checked-in definitions, not live imports from another repository.
+Sort entries alphabetically within each file.
 Add or edit labels through a pull request, keeping names unchanged unless a
 separate migration is intended. Names, six-digit hex colors, and descriptions are
 validated before synchronization. Empty descriptions are allowed. Label
