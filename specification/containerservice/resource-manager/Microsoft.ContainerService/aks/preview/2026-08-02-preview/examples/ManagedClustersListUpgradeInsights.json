@@ -1,0 +1,83 @@
+{
+  "parameters": {
+    "api-version": "2026-08-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/upgradeInsights/controlPlane",
+            "name": "controlPlane",
+            "type": "Microsoft.ContainerService/managedClusters/upgradeInsights",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "upgradeType": "ControlPlane",
+              "lastEvaluatedAt": "2026-07-07T10:00:00Z",
+              "expiresAt": "2026-07-21T10:00:00Z",
+              "currentKubernetesVersion": "1.32.7",
+              "targetKubernetesVersion": "1.33.5",
+              "evaluation": {
+                "status": "Passed",
+                "evaluatedAt": "2026-07-07T10:00:00Z"
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/upgradeInsights/agentPool-nodepool1",
+            "name": "agentPool-nodepool1",
+            "type": "Microsoft.ContainerService/managedClusters/upgradeInsights",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "upgradeType": "AgentPool",
+              "lastEvaluatedAt": "2026-07-07T10:00:00Z",
+              "expiresAt": "2026-07-21T10:00:00Z",
+              "agentPoolName": "nodepool1",
+              "currentKubernetesVersion": "1.32.7",
+              "targetKubernetesVersion": "1.33.5",
+              "evaluation": {
+                "status": "Failed",
+                "evaluatedAt": "2026-07-07T10:00:00Z"
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/upgradeInsights/nodeImage-nodepool1",
+            "name": "nodeImage-nodepool1",
+            "type": "Microsoft.ContainerService/managedClusters/upgradeInsights",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "upgradeType": "NodeImage",
+              "lastEvaluatedAt": "2026-07-07T10:00:00Z",
+              "expiresAt": "2026-07-21T10:00:00Z",
+              "agentPoolName": "nodepool1",
+              "currentNodeImageVersion": "AKSUbuntu-2204gen2-202605.01.0",
+              "targetNodeImageVersion": "AKSUbuntu-2204gen2-202607.01.0",
+              "evaluation": {
+                "status": "Warning",
+                "evaluatedAt": "2026-07-07T10:00:00Z"
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/upgradeInsights/controlPlaneAndAgentPools",
+            "name": "controlPlaneAndAgentPools",
+            "type": "Microsoft.ContainerService/managedClusters/upgradeInsights",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "upgradeType": "ControlPlaneAndAgentPools",
+              "lastEvaluatedAt": "2026-07-07T10:00:00Z",
+              "expiresAt": "2026-07-21T10:00:00Z",
+              "targetKubernetesVersion": "1.33.5"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "UpgradeInsights_List",
+  "title": "List the stored upgrade insights for a managed cluster"
+}
