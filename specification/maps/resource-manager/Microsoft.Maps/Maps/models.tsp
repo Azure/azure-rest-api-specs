@@ -215,6 +215,40 @@ model LocationsItem {
 /**
  * Parameters used to update an existing Maps Account.
  */
+@removed(Versions.v2026_12_01)
+@renamedFrom(Versions.v2026_12_01, "MapsAccountUpdateParameters")
+model MapsAccountUpdateParametersV1 {
+  /**
+   * Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
+
+  /**
+   * Get or Set Kind property.
+   */
+  kind?: Kind;
+
+  /**
+   * The SKU of this account.
+   */
+  sku?: Sku;
+
+  /**
+   * Managed service identity (system assigned and/or user assigned identities)
+   */
+  identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
+
+  /**
+   * The map account properties.
+   */
+  properties?: MapsAccountProperties;
+}
+
+/**
+ * Parameters used to update an existing Maps Account.
+ */
+@added(Versions.v2026_12_01)
 model MapsAccountUpdateParameters {
   ...ArmTagsProperty;
 
@@ -293,6 +327,16 @@ model MapsAccountSasToken {
   /**
    * The shared access signature access token.
    */
+  @removed(Versions.v2026_12_01)
+  @renamedFrom(Versions.v2026_12_01, "accountSasToken")
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  accountSasTokenV1?: string;
+
+  /**
+   * The shared access signature access token.
+   */
+  @added(Versions.v2026_12_01)
   @secret
   @visibility(Lifecycle.Read)
   accountSasToken?: string;
@@ -311,6 +355,16 @@ model MapsAccountKeys {
   /**
    * The primary key for accessing the Maps REST APIs.
    */
+  @removed(Versions.v2026_12_01)
+  @renamedFrom(Versions.v2026_12_01, "primaryKey")
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  primaryKeyV1?: string;
+
+  /**
+   * The primary key for accessing the Maps REST APIs.
+   */
+  @added(Versions.v2026_12_01)
   @secret
   @visibility(Lifecycle.Read)
   primaryKey?: string;
@@ -318,6 +372,16 @@ model MapsAccountKeys {
   /**
    * The secondary key for accessing the Maps REST APIs.
    */
+  @removed(Versions.v2026_12_01)
+  @renamedFrom(Versions.v2026_12_01, "secondaryKey")
+  #suppress "@azure-tools/typespec-azure-resource-manager/secret-prop" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  secondaryKeyV1?: string;
+
+  /**
+   * The secondary key for accessing the Maps REST APIs.
+   */
+  @added(Versions.v2026_12_01)
   @secret
   @visibility(Lifecycle.Read)
   secondaryKey?: string;
@@ -377,18 +441,17 @@ model CreatorProperties {
  * Parameters used to update an existing Creator resource.
  */
 model CreatorUpdateParameters {
-  ...ArmTagsProperty;
+  /**
+   * Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  tags?: Record<string>;
 
   /**
    * Creator resource properties.
    */
   properties?: CreatorProperties;
 }
-
-@@doc(
-  CreatorUpdateParameters.tags,
-  "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource across resource groups."
-);
 
 /**
  * A list of private link resources for a Maps Account resource type.

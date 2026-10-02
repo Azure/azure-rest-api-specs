@@ -71,7 +71,7 @@ interface Accounts {
   @sharedRoute
   updateV1 is ArmCustomPatchSync<
     MapsAccount,
-    PatchModel = MapsAccountUpdateParameters
+    PatchModel = MapsAccountUpdateParametersV1
   >;
 
   /**

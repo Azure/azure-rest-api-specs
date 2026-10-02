@@ -198,7 +198,7 @@
         "tags": [
           "AsyncOperations"
         ],
-        "description": "Gets the status of a long-running asynchronous operation.",
+        "description": "Get the status of a long running azure asynchronous operation.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -212,7 +212,7 @@
           {
             "name": "operationId",
             "in": "path",
-            "description": "The operation ID.",
+            "description": "The ID of an ongoing async operation.",
             "required": true,
             "type": "string",
             "minLength": 1
@@ -1481,7 +1481,7 @@
       "properties": {
         "tags": {
           "type": "object",
-          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource across resource groups.",
+          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters.",
           "additionalProperties": {
             "type": "string"
           }
@@ -1712,17 +1712,13 @@
         },
         "primaryKey": {
           "type": "string",
-          "format": "password",
           "description": "The primary key for accessing the Maps REST APIs.",
-          "readOnly": true,
-          "x-ms-secret": true
+          "readOnly": true
         },
         "secondaryKey": {
           "type": "string",
-          "format": "password",
           "description": "The secondary key for accessing the Maps REST APIs.",
-          "readOnly": true,
-          "x-ms-secret": true
+          "readOnly": true
         },
         "secondaryKeyLastUpdated": {
           "type": "string",
@@ -1799,10 +1795,8 @@
       "properties": {
         "accountSasToken": {
           "type": "string",
-          "format": "password",
           "description": "The shared access signature access token.",
-          "readOnly": true,
-          "x-ms-secret": true
+          "readOnly": true
         }
       }
     },
@@ -1812,7 +1806,7 @@
       "properties": {
         "tags": {
           "type": "object",
-          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource across resource groups.",
+          "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters.",
           "additionalProperties": {
             "type": "string"
           }

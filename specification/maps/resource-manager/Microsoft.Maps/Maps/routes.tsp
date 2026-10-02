@@ -37,16 +37,26 @@ interface OperationResultOperationGroup {
   ): OkResponse | (ArmAcceptedResponse & ArmLroLocationHeader) | ErrorResponse;
 }
 
-@armResourceOperations(#{ omitTags: true })
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface OperationStatusOperationGroup {
   /**
-   * Gets the status of a long-running asynchronous operation.
+   * Get the status of a long running azure asynchronous operation.
    */
   @tag("AsyncOperations")
-  get is GetResourceOperationStatus<
-    Azure.ResourceManager.CommonTypes.OperationStatusResult,
-    SubscriptionLocationActionScope
-  >;
-}
+  @route("/subscriptions/{subscriptionId}/providers/Microsoft.Maps/locations/{location}/operationStatuses/{operationId}")
+  @get
+  get(
+    ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
+    ...LocationResourceParameter,
 
-@@minLength(OperationStatusOperationGroup.get::parameters.operationId, 1);
+    /**
+     * The ID of an ongoing async operation.
+     */
+    @minLength(1)
+    @path
+    operationId: string,
+  ):
+    | ArmResponse<Azure.ResourceManager.CommonTypes.OperationStatusResult>
+    | ErrorResponse;
+}

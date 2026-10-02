@@ -26,6 +26,9 @@ using Microsoft.Maps;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserves the flattened Maps Account update model used by existing SDKs."
 @@Legacy.flattenProperty(MapsAccountUpdateParameters.properties);
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserves the flattened Maps Account update model used by existing SDKs."
+@@Legacy.flattenProperty(MapsAccountUpdateParametersV1.properties);
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Preserves the flattened Creator update model in the 2025 preview SDKs."
 @@Legacy.flattenProperty(CreatorUpdateParameters.properties);
 
