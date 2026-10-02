@@ -2072,6 +2072,12 @@ model ManagedClusterProperties {
   aiToolchainOperatorProfile?: ManagedClusterAIToolchainOperatorProfile;
 
   /**
+   * Agent Sandbox settings that apply to the whole cluster. For more information, see https://aka.ms/aks/agent-sandbox.
+   */
+  @added(Versions.v2026_08_02_preview)
+  agentSandboxProfile?: ManagedClusterAgentSandboxProfile;
+
+  /**
    * Profile with scheduler-related settings, like the configuration mode for each scheduler managed by AKS. See https://aka.ms/aks/scheduler-profile.
    */
   @added(Versions.v2026_05_01)
@@ -4217,6 +4223,19 @@ model ManagedClusterAIToolchainOperatorProfile {
   /**
    * Whether to enable AI toolchain operator to the cluster. Indicates if AI toolchain operator  enabled or not.
    */
+  enabled?: boolean;
+}
+
+/**
+ * Settings for the Agent Sandbox core extension managed by Azure Kubernetes Service (AKS).
+ * For more information, see https://aka.ms/aks/agent-sandbox.
+ */
+@added(Versions.v2026_08_02_preview)
+model ManagedClusterAgentSandboxProfile {
+  /**
+   * Whether the Agent Sandbox core extension is enabled for the cluster. On cluster creation, the default is false.
+   */
+  @added(Versions.v2026_08_02_preview)
   enabled?: boolean;
 }
 
