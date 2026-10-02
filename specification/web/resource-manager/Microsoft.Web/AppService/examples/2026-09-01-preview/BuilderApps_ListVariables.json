@@ -1,0 +1,26 @@
+{
+  "title": "List current desired builder app variable values",
+  "operationId": "BuilderApps_ListVariables",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "my-resource-group",
+    "name": "my-builder-app",
+    "api-version": "2026-09-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "LOG_LEVEL",
+            "value": "debug"
+          },
+          {
+            "name": "DATABASE_PASSWORD",
+            "value": "example-sensitive-value"
+          }
+        ]
+      }
+    }
+  }
+}
