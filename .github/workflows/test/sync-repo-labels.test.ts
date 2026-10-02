@@ -1,5 +1,5 @@
 import { Octokit } from "@octokit/rest";
-import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, describe, expect, it, vi } from "vitest";
@@ -62,6 +62,9 @@ function fixture() {
   };
   const state = {
     catalog,
+    rootContent: undefined as string | undefined,
+    fragments: new Map<string, string>(),
+    sourceSha: "a".repeat(40),
     labels: [structuredClone(marker), structuredClone(extra)],
     items: [] as Item[],
     failure: "",
@@ -84,11 +87,18 @@ function fixture() {
     state.requests.push({ method, path, body });
     if (state.failure === `${method} ${path}`)
       return response({ message: "Injected failure" }, 403);
-    if (path === `${prefix}/contents/.github/labels.yaml`) {
+    if (path === `${prefix}/commits/main`) return response({ sha: state.sourceSha });
+    if (path.startsWith(`${prefix}/contents/`)) {
+      const file = path.slice(`${prefix}/contents/`.length);
+      const content =
+        file === ".github/labels.yaml"
+          ? (state.rootContent ?? stringify(state.catalog))
+          : state.fragments.get(file);
+      if (content === undefined) return response({ message: "Not Found" }, 404);
       return response({
         type: "file",
         encoding: "base64",
-        content: Buffer.from(stringify(state.catalog)).toString("base64"),
+        content: Buffer.from(content).toString("base64"),
       });
     }
     if (path === `${prefix}/labels` && method === "GET") {
@@ -217,8 +227,10 @@ function fixture() {
   async function prepare(dryRun = false) {
     const directory = await mkdtemp(join(tmpdir(), "label-sync-"));
     directories.push(directory);
-    const catalogPath = join(directory, "labels.yaml");
-    await writeFile(catalogPath, stringify(state.catalog));
+    const catalogPath = join(directory, ".github", "labels.yaml");
+    await mkdir(join(directory, ".github", "labels"), { recursive: true });
+    await writeFile(catalogPath, state.rootContent ?? stringify(state.catalog));
+    for (const [path, content] of state.fragments) await writeFile(join(directory, path), content);
     const audit = await prepareLabelSync(args, {
       catalogPath,
       auditDirectory: directory,
@@ -237,6 +249,49 @@ function fixture() {
   }
   return { state, args, fetch, mutations, prepare };
 }
+
+describe("inherited catalog safety", () => {
+  it("records all sources and refuses changed inherited definitions before any writes", async () => {
+    const f = fixture();
+    f.state.rootContent = stringify({
+      unconfiguredLabels: "archive",
+      extends: ["./labels/base.yaml"],
+    });
+    f.state.fragments.set(
+      ".github/labels/base.yaml",
+      stringify({ labels: f.state.catalog.labels }),
+    );
+    const run = await f.prepare();
+    expect(run.audit.catalogSources.map((s) => s.path)).toEqual([
+      ".github/labels.yaml",
+      ".github/labels/base.yaml",
+    ]);
+    f.state.fragments.set(
+      ".github/labels/base.yaml",
+      stringify({
+        labels: [{ ...f.state.catalog.labels[0], description: "Changed" }],
+      }),
+    );
+    await expect(run.apply()).rejects.toThrow("catalog changed");
+    expect(f.mutations()).toEqual([]);
+  });
+
+  it("fails when an inherited file disappears, rather than archiving its labels", async () => {
+    const f = fixture();
+    f.state.rootContent = stringify({
+      unconfiguredLabels: "archive",
+      extends: ["./labels/base.yaml"],
+    });
+    f.state.fragments.set(
+      ".github/labels/base.yaml",
+      stringify({ labels: f.state.catalog.labels }),
+    );
+    const run = await f.prepare();
+    f.state.fragments.clear();
+    await expect(run.apply()).rejects.toThrow("Not Found");
+    expect(f.mutations()).toEqual([]);
+  });
+});
 
 describe("native label archival", () => {
   it("archives an active unconfigured label once, preserving its assignments and archive timestamp", async () => {
