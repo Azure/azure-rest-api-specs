@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import { execFile } from "../../../shared/src/exec.ts";
 import {
   buildSuppressionsComment,
+  getSuppressionApprovalFingerprint,
   renderSuppressionsCommentBody,
 } from "../../src/typespec-suppressions/suppressions-comment.ts";
 import { createMockCore, createMockGithub } from "../mocks.ts";
@@ -37,6 +38,85 @@ function mockAnalyzeCodeRun(github: import("../mocks.ts").MockGithub, runOverrid
     data: { artifacts: [{ id: 1, name: "typespec-suppressions-report" }] },
   });
 }
+
+describe("getSuppressionApprovalFingerprint", () => {
+  const suppression = {
+    specPath: "specification/demo",
+    sourceKind: "inline" as const,
+    ruleName: "@azure-tools/typespec-azure-core/no-rpc-path-params",
+    justification: "approved for demo",
+    sourceFile: "specification/demo/main.tsp",
+    anchorPath: "namespace:Demo",
+    location: { line: 12, column: 3 },
+    rawText: '#suppress "@azure-tools/typespec-azure-core/no-rpc-path-params"',
+  };
+
+  it("ignores analysis revisions, locations, metadata, and report ordering", () => {
+    const first = {
+      baseRevision: "base-one",
+      headRevision: "head-one",
+      checkedSuppressions: {
+        checkRules: ["rule-b", "rule-a"],
+        requiresApproval: true,
+        newSuppressions: [
+          suppression,
+          {
+            ...suppression,
+            ruleName: "rule-two",
+            anchorPath: "namespace:Demo/model:Two",
+          },
+        ],
+      },
+    };
+    const second = {
+      baseRevision: "base-two",
+      headRevision: "head-two",
+      checkedSuppressions: {
+        checkRules: ["rule-c"],
+        requiresApproval: true,
+        newSuppressions: [
+          {
+            ...suppression,
+            ruleName: "rule-two",
+            anchorPath: "namespace:Demo/model:Two",
+            location: { line: 99, column: 1 },
+            rawText: "  #suppress changed formatting",
+            ruleMetadata: { description: "updated documentation" },
+          },
+          {
+            ...suppression,
+            location: { line: 42, column: 7 },
+          },
+        ],
+      },
+    };
+
+    expect(getSuppressionApprovalFingerprint(first)).toBe(
+      getSuppressionApprovalFingerprint(second),
+    );
+  });
+
+  it("changes when approval-relevant suppression content changes", () => {
+    const approved = {
+      checkedSuppressions: {
+        checkRules: [],
+        requiresApproval: true,
+        newSuppressions: [suppression],
+      },
+    };
+    const changed = {
+      checkedSuppressions: {
+        checkRules: [],
+        requiresApproval: true,
+        newSuppressions: [{ ...suppression, justification: "a different reason" }],
+      },
+    };
+
+    expect(getSuppressionApprovalFingerprint(approved)).not.toBe(
+      getSuppressionApprovalFingerprint(changed),
+    );
+  });
+});
 
 describe("renderSuppressionsCommentBody", () => {
   const options = {
