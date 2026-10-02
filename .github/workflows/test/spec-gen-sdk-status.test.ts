@@ -23,7 +23,7 @@ describe("spec-gen-sdk-status", () => {
     // Setup specific mocks
     getAzurePipelineArtifactMock = vi
       .spyOn(artifacts, "getAzurePipelineArtifact")
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      // oxlint-disable-next-line eslint/no-unused-vars
       .mockImplementation(async ({ ado_build_id, ado_project_url, artifactName }) => {
         return Promise.resolve({
           artifactData: JSON.stringify(

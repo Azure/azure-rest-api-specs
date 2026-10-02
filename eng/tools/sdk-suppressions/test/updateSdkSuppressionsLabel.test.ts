@@ -15,7 +15,7 @@ test("test filterSuppressionList for only resource-manager files", () => {
     "specification/datafactory/resource-manager/Microsoft.DataFactory/stable/2018-06-01/datafactory.json",
     "specification/datafactory/resource-manager/sdk-suppressions.yaml",
   ];
-  const suppressionsFiles: String[] = filterSuppressionList(changeFiles);
+  const suppressionsFiles: string[] = filterSuppressionList(changeFiles);
   expect(suppressionsFiles).toEqual([
     "specification/datafactory/resource-manager/sdk-suppressions.yaml",
   ]);
@@ -31,7 +31,7 @@ test("test filterSuppressionList for both tsp files and resource-manager files",
     "specification/workloads/resource-manager/Microsoft.Workloads/operations/stable/2024-09-01/operations.json",
     "specification/workloads/resource-manager/sdk-suppressions.yaml",
   ];
-  const suppressionsFiles: String[] = filterSuppressionList(changeFiles);
+  const suppressionsFiles: string[] = filterSuppressionList(changeFiles);
   expect(suppressionsFiles).toEqual([
     "specification/workloads/Workloads.Operations.Management/sdk-suppressions.yaml",
   ]);

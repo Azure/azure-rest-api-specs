@@ -379,6 +379,7 @@ model PlatformProfile {
   /** URL for the OIDC provider to be used for authentication
    * to authenticate against user Azure cloud account
    */
+  #suppress "@azure-tools/typespec-client-generator-core/csharp-no-url-suffix" "Name kept for backward compatibility"
   @visibility(Lifecycle.Read)
   issuerUrl: url;
 }
