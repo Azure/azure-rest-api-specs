@@ -387,6 +387,8 @@ using Azure.AI.Projects;
 );
 @@clientName(AgentTelephony.createTelephonyCallJob, "createCallJob");
 @@clientName(AgentTelephony.getTelephonyCallJob, "getCallJob");
+@@clientName(AgentTelephony.listTelephonyCallJobs, "listCallJobs");
+@@clientName(AgentTelephony.deleteTelephonyCallJob, "deleteCallJob");
 @@clientName(AgentTelephony.cancelTelephonyCallJob, "cancelCallJob");
 
 // --------------------------------------------------------------------------------
