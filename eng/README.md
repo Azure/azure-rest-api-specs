@@ -118,18 +118,18 @@ do not trigger further label-event workflows. Manual runs default to dry-run.
 Mutating runs use the upstream default branch and are disabled on forks. PR
 validation never changes GitHub labels.
 
-The current `unconfiguredLabels: preserve` policy creates/updates configured
-labels and warns about unconfigured ones. It does not automatically import,
-archive, or delete them. Removing an entry from YAML therefore leaves its GitHub label and
-assignments intact. Resolve warnings by adding legitimate labels through a PR
-or reviewing the unwanted labels separately.
+The `unconfiguredLabels: archive` policy creates/updates configured labels and
+archives labels absent from the catalog. This applies repository-wide, including
+labels created manually or by other automation. Add legitimate labels through
+a PR before consumers begin using them. Removing a catalog entry starts the
+archive lifecycle described below on the next synchronization.
 
-### Disabled archive lifecycle
+To pause archival and deletion, change the policy to `unconfiguredLabels: preserve`
+through a reviewed PR. That mode still synchronizes configured labels but only
+warns about unconfigured ones. Manual workflow inputs cannot override the
+checked-in policy.
 
-Archival and deletion are implemented but **disabled**. Only a reviewed change to
-`unconfiguredLabels: archive` enables them; manual workflow inputs cannot override
-the catalog policy. Do not enable it until migration is complete and external
-automation, affected-item volume, and audit retention have been reviewed.
+### Archive lifecycle
 
 In archive mode, an active label absent from the catalog is renamed in place to
 `archived: <original name>`, natively archived in GitHub, and given this description:
@@ -150,7 +150,7 @@ are left alone, even if they are old. Missing or invalid archive timestamps fail
 validation rather than being inferred.
 
 Adding the original name back to the catalog restores the same label's name,
-description, and color and removes its archived state, including in migration
+description, and color and removes its archived state, including in preserve
 mode. The synchronizer recognizes the prefix together with the exact warning;
 it does not create a duplicate. This cancels its deletion.
 Removing it again starts a new grace period on the next archive.
