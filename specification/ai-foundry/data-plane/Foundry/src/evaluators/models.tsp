@@ -126,7 +126,115 @@ model PromptBasedEvaluatorDefinition extends EvaluatorDefinition {
 // Dimensions + Rubric-based Evaluator Definition
 // ============================================================================
 
-@doc("A single dimension — one independent, measurable quality dimension within a rubric evaluator's scoring blueprint.")
+const RubricScoringRequiredPreviews = #{
+  required_previews: #[FoundryFeaturesOptInKeys.evaluations_v1_preview],
+};
+
+@doc("The judgment mode selected for an entire rubric. Safety rubrics use Boolean judgments with separately reported permissibility metrics.")
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
+union RubricScoringMode {
+  string,
+
+  @doc("Use Boolean judgments without weights or thresholds. Ordinary rubrics require every applicable check to pass; safety rubrics report permissible and impermissible behavior violations separately.")
+  boolean: "boolean",
+
+  @doc("Grade applicable quality dimensions from 1 through 5, with optional relative weights.")
+  likert: "likert",
+}
+
+@doc("Simple rubric scoring choices. Omission preserves existing legacy scoring.")
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
+model RubricScoring {
+  @doc("Rubric-level scoring mode. Defaults to Likert when scoring is supplied. Omitting scoring preserves existing legacy behavior.")
+  mode?: RubricScoringMode = RubricScoringMode.likert;
+}
+
+@doc("The deterministic overall rubric acceptance decision.")
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
+union RubricScoringDecision {
+  string,
+
+  @doc("Applicable dimensions meet the selected scoring rule.")
+  pass: "pass",
+
+  @doc("The selected scoring rule fails.")
+  fail: "fail",
+
+  @doc("No quality dimension applies and no known failure establishes rejection.")
+  not_applicable: "not_applicable",
+
+  @doc("No known failure establishes rejection, but evidence is insufficient.")
+  indeterminate: "indeterminate",
+}
+
+@doc("Explainable aggregate results for an ordinary rubric. Boolean scoring requires every applicable check to pass; Likert scoring compares the weighted average with the threshold. Safety rubric results instead contain two named metric entries, not this overall aggregate.")
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
+model RubricScoringResult {
+  @doc("The resolved scoring mode.")
+  mode: RubricScoringMode;
+
+  @doc("Quality score, equal to the top-level score when known. Rating uses a normalized 0-1 value; Boolean uses 1 for quality pass and 0 for quality fail, never a fraction of passed checks. Absent for unknown or N/A quality.")
+  @minValue(0)
+  @maxValue(1)
+  quality_score?: float64;
+
+  @doc("Whether the quality score meets its threshold. Absent when quality is unavailable.")
+  quality_passed?: boolean;
+
+  @doc("The configured rating threshold. Required for rating and absent for Boolean.")
+  @minValue(0)
+  @maxValue(1)
+  quality_threshold?: float32;
+
+  @doc("Overall decision from the selected scoring rule.")
+  decision: RubricScoringDecision;
+
+  @doc("One result list for every dimension, using the rubric's scoring mode.")
+  dimension_results: RubricDimensionResult[];
+}
+
+@doc("A typed result for one dimension in the unified rubric.")
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
+model RubricDimensionResult {
+  @doc("The dimension identifier.")
+  id: string;
+
+  @doc("Whether the dimension applies.")
+  applicable: boolean;
+
+  @doc("Known Boolean verdict. Absent for N/A or insufficient evidence and for rating dimensions.")
+  passed?: boolean;
+
+  @doc("Applicable Likert grade. Absent for Boolean dimensions.")
+  @minValue(1)
+  @maxValue(5)
+  raw_score?: int32;
+
+  @doc("Explicitly configured rating weight. Omitted for every dimension when weights are implicit, and always absent for Boolean dimensions. If configured, all rating dimensions include a weight.")
+  @minValue(1)
+  @maxValue(10)
+  weight?: int32;
+
+  @doc("Normalized rating weight among applicable rating dimensions.")
+  @minValue(0)
+  @maxValue(1)
+  effective_weight?: float64;
+
+  @doc("Contribution to the rating aggregate.")
+  @minValue(0)
+  @maxValue(1)
+  contribution?: float64;
+
+  @doc("Brief evidence-based explanation.")
+  reason?: string;
+}
+
+@doc("One measurable criterion within a rubric. Quality criteria may use rating weights; safety criteria classify a behavior as permissible or impermissible.")
 model Dimension {
   @doc("Stable identifier for this dimension (snake_case, e.g., `correct_resolution`). Required. Provided by the user when manually creating a rubric evaluator or during human-in-the-loop review of a generated set; the generation pipeline produces an initial value the user can edit. Editable when saving new versions.")
   id: string;
@@ -134,26 +242,51 @@ model Dimension {
   @doc("What this dimension measures (e.g., 'Correctly identifies the user's reservation intent and pursues the appropriate workflow').")
   description: string;
 
+  @doc("Safety behavior classification: true means permissible behavior and false means impermissible behavior. Required on every safety criterion instead of weight. This is not an evaluation verdict. Omit for ordinary quality criteria; omission never defaults a safety criterion to false. Preserved through edits and regeneration.")
+  @added(Versions.v1)
+  @extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
+  permissible?: boolean;
+
   @doc("Relative weight of this dimension (1-10). The generation pipeline assigns exactly one dimension weight 8-10; all others use 1-6. User edits are not constrained by this heuristic.")
+  @removed(Versions.v1)
+  @renamedFrom(Versions.v1, "weight")
   @minValue(1)
   @maxValue(10)
-  weight: int32;
+  legacy_weight: int32;
+
+  @doc("Optional configured rating weight. For new scoring definitions, omit every weight for equal contribution or supply a weight for every dimension. Partially weighted definitions are rejected, including a mix of explicit unit weights and omitted weights. Boolean mode rejects weights. No schema default is emitted.")
+  @added(Versions.v1)
+  @minValue(1)
+  @maxValue(10)
+  weight?: int32;
 
   @doc("When true, the LLM judge always scores this dimension regardless of relevance (skips applicability assessment). The service-generated general quality/policy dimension has this set to true and is non-editable. Users may set this on their own custom dimensions. The service defaults to `false` if a value is not specified by the caller.")
   always_applicable?: boolean = false;
 }
 
-@doc("Rubric-based evaluator definition — stores dimensions produced by the generate API. Used for both quality and safety evaluators.")
+@doc("Rubric evaluator definition. Ordinary quality rubrics report one aggregate. Safety rubrics require Boolean scoring and an explicit permissible classification on every dimension, and report impermissible_behavior_violated and permissible_behavior_violated as two independent lower-is-better metrics. Safety rubrics have no weights, threshold, or combined safety score.")
 model RubricBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.rubric;
 
-  @doc("The set of dimensions — the scoring blueprint used by the LLM judge. Quality evaluators include a non-editable residual dimension with id 'general_quality' (always_applicable: true); safety evaluators include 'general_policy_compliance'. Both use the same Dimension structure.")
+  @doc("The rubric criteria. Safety dimensions require permissible and omit weight. Rating generation includes a service residual; Boolean generation does not inject a generic residual. Existing ordinary and legacy definitions retain their behavior.")
   dimensions: Dimension[];
 
-  @doc("Pass/fail threshold for the aggregate rubric score, on the same normalized 0.0-1.0 scale as the emitted `score`. When the runtime weighted average meets or exceeds this value, the result is `pass`. Defaults to 0.5 (equivalent to a raw 1-5 weighted average of 3.0). The 'any dimension scored 1 → fail' rule still applies regardless of this threshold.")
+  @doc("Quality threshold on the same normalized 0.0-1.0 scale as the emitted score. Defaults to 0.5, equivalent to a raw weighted grade of 3.0. The score >= threshold determines pass/fail; there is no implicit score-1 veto.")
+  @removed(Versions.v1)
+  @renamedFrom(Versions.v1, "pass_threshold")
   @minValue(0.0)
   @maxValue(1.0)
-  pass_threshold?: float32 = 0.5;
+  legacy_pass_threshold?: float32 = 0.5;
+
+  @doc("Optional rating threshold on the normalized 0-1 scale, interpreted as 0.5 when omitted. Boolean mode rejects this field.")
+  @added(Versions.v1)
+  @minValue(0.0)
+  @maxValue(1.0)
+  pass_threshold?: float32;
+
+  @doc("Simple scoring choices. Omission preserves existing legacy scoring for existing clients. No policy version is required from the caller.")
+  @added(Versions.v1)
+  scoring?: RubricScoring;
 }
 
 @doc("Endpoint-based evaluator definition. The customer owns and hosts an HTTP endpoint that implements the evaluation contract. The evaluator references a Project Connection by name; the connection stores the endpoint URL and credentials (API Key or Entra ID). At execution time, the service resolves the connection to obtain the endpoint URL and authentication details, then calls the endpoint for each evaluation row.")
@@ -247,10 +380,28 @@ model DatasetEvaluatorGenerationJobSource extends EvaluatorGenerationJobSource {
 // Evaluator Generation Job (LRO — follows DataGenerationJob pattern)
 // ============================================================================
 
+@doc("The requested evaluator generation category.")
+@added(Versions.v1)
+@extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
+union EvaluatorGenerationCategory {
+  string,
+
+  @doc("Generate an ordinary quality rubric, preserving existing scoring and regeneration behavior.")
+  quality: "quality",
+
+  @doc("Generate or regenerate a safety rubric with Boolean judgments, explicit permissibility, and two separate violation metrics.")
+  safety: "safety",
+}
+
 @doc("Caller-supplied inputs for an evaluator generation job.")
 model EvaluatorGenerationInputs {
-  @doc("Source materials for generation — agent descriptions, prompts, traces, or datasets. Each entry is an `EvaluatorGenerationJobSource` variant discriminated by `type`.")
+  @doc("Source materials for generation. Safety generation requires a nonempty prompt source for the objective and at least one agent or trace source for application context. An arbitrary dataset cannot replace safety application context. Ordinary generation keeps its existing supported sources.")
   sources: EvaluatorGenerationJobSource[];
+
+  @doc("Generation intent. Omission preserves the existing quality path. Explicitly select safety for safety generation and regeneration; this does not change the execution profile of an existing incompatible evaluator. Safety output uses Boolean scoring, permissible classifications, and two named violation metrics.")
+  @added(Versions.v1)
+  @extension("x-ms-foundry-meta", RubricScoringRequiredPreviews)
+  category?: EvaluatorGenerationCategory;
 
   @doc("The LLM model to use for rubric generation (e.g., 'gpt-4o'). Required — users must provide their own model rather than relying on service-owned capacity.")
   `model`: string;
@@ -266,6 +417,14 @@ model EvaluatorGenerationInputs {
 
   @doc("Optional human-friendly description for the resulting evaluator. Surfaced as `EvaluatorVersion.description` on the persisted evaluator. Typically collected from the UI alongside `evaluator_display_name`. The `evaluator_` prefix disambiguates this from any other description fields on related models.")
   evaluator_description?: string;
+
+  @doc("Scoring choices for the generated evaluator. For quality, supplied scoring defaults to Likert; omitted weights on first creation yield equal contribution, and regeneration preserves saved choices. Omitting scoring preserves existing quality generation behavior. Safety generation resolves omitted scoring to Boolean and rejects a conflicting supplied mode; its dimensions use permissible rather than weights and its two metric results are not combined.")
+  @added(Versions.v1)
+  scoring?: RubricScoring;
+
+  @doc("Caller-approved dimensions to preserve while generating other checks. Omission preserves prior approved dimensions on regeneration; an explicit list replaces the fixed set. Safety fixed dimensions require an explicit permissible Boolean, omit weights, and preserve classification as part of their policy meaning.")
+  @added(Versions.v1)
+  dimensions?: Dimension[];
 }
 
 @doc("Token consumption summary for an evaluator generation job. Populated when the job reaches a terminal state.")
