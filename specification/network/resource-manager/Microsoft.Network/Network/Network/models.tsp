@@ -11147,6 +11147,13 @@ model DdosCustomPolicyPropertiesFormat {
   detectionRules?: DdosDetectionRule[];
 
   /**
+   * The list of DDoS mitigation rules associated with the custom policy.
+   */
+  @added(Versions.v2026_03_01)
+  @identifiers(#["name"])
+  mitigationRules?: DdosMitigationRule[];
+
+  /**
    * The list of frontend IP configurations associated with the custom policy.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -11159,6 +11166,274 @@ model DdosCustomPolicyPropertiesFormat {
   @added(Versions.v2025_07_01)
   @visibility(Lifecycle.Read)
   publicIPAddresses?: SubResource[];
+}
+
+/**
+ * A DDoS mitigation rule resource.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The model must use the virtualNetwork legacy feature so it is emitted into the existing virtualNetwork.json contract."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance preserves the NRP wire contract's SubResource allOf envelope for this embedded child model."
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@added(Versions.v2026_03_01)
+model DdosMitigationRule extends SubResource {
+  /**
+   * The name of the DDoS mitigation rule.
+   */
+  name: string;
+
+  /**
+   * The resource ID of the DDoS mitigation rule.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * A unique read-only string that changes whenever the resource is updated.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * The resource type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * Properties of the DDoS mitigation rule.
+   */
+  properties: DdosMitigationRulePropertiesFormat;
+}
+
+/**
+ * DDoS mitigation rule properties. The service validates that each rule specifies at least one applicable default mitigation or source policy override and that the default mitigations match the selected trafficScope.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The DDoS custom policy contract is emitted in the existing virtualNetwork Swagger feature."
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@added(Versions.v2026_03_01)
+model DdosMitigationRulePropertiesFormat {
+  /**
+   * The provisioning state of the DDoS mitigation rule.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /**
+   * The traffic protocol to which the mitigation rule applies.
+   */
+  trafficScope: DdosMitigationTrafficScope;
+
+  /**
+   * The default TCP mitigations. This property is valid only when trafficScope is Tcp.
+   */
+  tcpDefaultMitigations?: DdosTcpDefaultMitigations;
+
+  /**
+   * The default UDP mitigations. This property is valid only when trafficScope is Udp.
+   */
+  udpDefaultMitigations?: DdosUdpDefaultMitigations;
+
+  /**
+   * Source-specific actions that override the default mitigations. A rule supports at most one Deny override and one Permit override.
+   */
+  @identifiers(#["policyAction/actionType"])
+  sourcePolicyOverrides?: DdosSourcePolicyOverride[];
+}
+
+/**
+ * The traffic protocol to which a DDoS mitigation rule applies.
+ */
+@added(Versions.v2026_03_01)
+union DdosMitigationTrafficScope {
+  string,
+
+  /** TCP traffic. */
+  Tcp: "Tcp",
+
+  /** UDP traffic. */
+  Udp: "Udp",
+}
+
+/**
+ * Default mitigations for TCP traffic.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The DDoS custom policy contract is emitted in the existing virtualNetwork Swagger feature."
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@added(Versions.v2026_03_01)
+model DdosTcpDefaultMitigations {
+  /**
+   * The per-source TCP packet rate limit.
+   */
+  perSourceRateLimiting?: DdosTcpPerSourceRateLimitPolicy;
+
+  /**
+   * The per-source rate limit for new TCP connection establishments.
+   */
+  perSourceConnectionRateLimiting?: DdosTcpPerSourceConnectionRateLimitPolicy;
+}
+
+/**
+ * Default mitigations for UDP traffic.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The DDoS custom policy contract is emitted in the existing virtualNetwork Swagger feature."
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@added(Versions.v2026_03_01)
+model DdosUdpDefaultMitigations {
+  /**
+   * The per-source UDP packet rate limit.
+   */
+  perSourceRateLimiting?: DdosUdpPerSourceRateLimitPolicy;
+}
+
+/**
+ * A per-source TCP packet rate limit.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The DDoS custom policy contract is emitted in the existing virtualNetwork Swagger feature."
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@added(Versions.v2026_03_01)
+model DdosTcpPerSourceRateLimitPolicy {
+  /**
+   * The maximum number of TCP packets allowed per second from a source IP.
+   */
+  packetsPerSecond: int32;
+}
+
+/**
+ * A per-source TCP connection establishment rate limit.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The DDoS custom policy contract is emitted in the existing virtualNetwork Swagger feature."
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@added(Versions.v2026_03_01)
+model DdosTcpPerSourceConnectionRateLimitPolicy {
+  /**
+   * The maximum number of new TCP connections established per second from a source IP.
+   */
+  connectionsPerSecond: int32;
+}
+
+/**
+ * A per-source UDP packet rate limit.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The DDoS custom policy contract is emitted in the existing virtualNetwork Swagger feature."
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@added(Versions.v2026_03_01)
+model DdosUdpPerSourceRateLimitPolicy {
+  /**
+   * The maximum number of UDP packets allowed per second from a source IP.
+   */
+  packetsPerSecond: int32;
+}
+
+/**
+ * A source-specific action that overrides the default mitigations.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The DDoS custom policy contract is emitted in the existing virtualNetwork Swagger feature."
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@added(Versions.v2026_03_01)
+model DdosSourcePolicyOverride {
+  /**
+   * The action to apply to matching traffic.
+   */
+  policyAction: DdosSourcePolicyAction;
+
+  /**
+   * The source conditions that select traffic for the action.
+   */
+  conditions: DdosSourceMatchConditions;
+}
+
+/**
+ * The action to apply to traffic matching a source policy override.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The DDoS custom policy contract is emitted in the existing virtualNetwork Swagger feature."
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@added(Versions.v2026_03_01)
+model DdosSourcePolicyAction {
+  /**
+   * The source policy action type.
+   */
+  actionType: DdosSourcePolicyActionType;
+}
+
+/**
+ * The action applied to traffic matching a source policy override.
+ */
+@added(Versions.v2026_03_01)
+union DdosSourcePolicyActionType {
+  string,
+
+  /** Deny traffic from matching sources. */
+  Deny: "Deny",
+
+  /** Permit traffic from matching sources. */
+  Permit: "Permit",
+}
+
+/**
+ * Source conditions for a DDoS source policy override. A source matches when it matches any IP prefix or any geographic match.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The DDoS custom policy contract is emitted in the existing virtualNetwork Swagger feature."
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@added(Versions.v2026_03_01)
+model DdosSourceMatchConditions {
+  /**
+   * The IPv4 or IPv6 CIDR prefixes in `<address>/<prefix-length>` format. Entries are evaluated with OR semantics.
+   */
+  ipPrefixes?: string[];
+
+  /**
+   * The geographic matches. Entries are evaluated with OR semantics.
+   */
+  @identifiers(#[])
+  geoMatches?: DdosGeoMatch[];
+}
+
+/**
+ * A geographic source match. The service validates that at least one of continent or countryCode is specified. If both are specified, the service validates that the country belongs to the continent according to the service-defined mapping. For example, RU, TR, and KZ map to Asia, EG maps to Africa, and CY maps to Europe.
+ */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The DDoS custom policy contract is emitted in the existing virtualNetwork Swagger feature."
+@Azure.ResourceManager.Legacy.feature(Features.virtualNetwork)
+@added(Versions.v2026_03_01)
+model DdosGeoMatch {
+  /**
+   * The continent to match. Country membership follows the service-defined mapping documented on DdosGeoMatch.
+   */
+  continent?: DdosContinent;
+
+  /**
+   * The uppercase two-letter ISO 3166-1 alpha-2 code for the country or territory to match.
+   */
+  @pattern("^[A-Z]{2}$")
+  countryCode?: string;
+}
+
+/**
+ * A continent used for DDoS geographic source matching.
+ */
+@added(Versions.v2026_03_01)
+union DdosContinent {
+  string,
+
+  /** Matches traffic originating from countries and territories in Africa. */
+  Africa: "Africa",
+
+  /** Matches traffic originating from Antarctica. */
+  Antarctica: "Antarctica",
+
+  /** Matches traffic originating from countries and territories in Asia. */
+  Asia: "Asia",
+
+  /** Matches traffic originating from countries and territories in Europe. */
+  Europe: "Europe",
+
+  /** Matches traffic originating from countries and territories in North America. */
+  NorthAmerica: "NorthAmerica",
+
+  /** Matches traffic originating from countries and territories in Oceania. */
+  Oceania: "Oceania",
+
+  /** Matches traffic originating from countries and territories in South America. */
+  SouthAmerica: "SouthAmerica",
 }
 
 /**
@@ -28135,6 +28410,12 @@ model VirtualNetworkAppliancePropertiesFormat {
    */
   @typeChangedFrom(Versions.v2025_07_01, string)
   bandwidthInGbps?: float64;
+
+  /**
+   * The reference to the capacity provider resource.
+   */
+  @added(Versions.v2026_03_01)
+  capacityProvider?: SubResource;
 
   /**
    * A list of IPConfigurations of the virtual network appliance.

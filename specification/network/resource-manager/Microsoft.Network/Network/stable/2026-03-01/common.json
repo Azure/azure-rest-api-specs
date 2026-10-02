@@ -2702,6 +2702,60 @@
         ]
       }
     },
+    "DdosContinent": {
+      "type": "string",
+      "description": "A continent used for DDoS geographic source matching.",
+      "enum": [
+        "Africa",
+        "Antarctica",
+        "Asia",
+        "Europe",
+        "NorthAmerica",
+        "Oceania",
+        "SouthAmerica"
+      ],
+      "x-ms-enum": {
+        "name": "DdosContinent",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Africa",
+            "value": "Africa",
+            "description": "Matches traffic originating from countries and territories in Africa."
+          },
+          {
+            "name": "Antarctica",
+            "value": "Antarctica",
+            "description": "Matches traffic originating from Antarctica."
+          },
+          {
+            "name": "Asia",
+            "value": "Asia",
+            "description": "Matches traffic originating from countries and territories in Asia."
+          },
+          {
+            "name": "Europe",
+            "value": "Europe",
+            "description": "Matches traffic originating from countries and territories in Europe."
+          },
+          {
+            "name": "NorthAmerica",
+            "value": "NorthAmerica",
+            "description": "Matches traffic originating from countries and territories in North America."
+          },
+          {
+            "name": "Oceania",
+            "value": "Oceania",
+            "description": "Matches traffic originating from countries and territories in Oceania."
+          },
+          {
+            "name": "SouthAmerica",
+            "value": "SouthAmerica",
+            "description": "Matches traffic originating from countries and territories in South America."
+          }
+        ]
+      }
+    },
     "DdosDetectionMode": {
       "type": "string",
       "description": "The detection mode for the DDoS detection rule.",
@@ -2730,6 +2784,30 @@
         }
       }
     },
+    "DdosMitigationTrafficScope": {
+      "type": "string",
+      "description": "The traffic protocol to which a DDoS mitigation rule applies.",
+      "enum": [
+        "Tcp",
+        "Udp"
+      ],
+      "x-ms-enum": {
+        "name": "DdosMitigationTrafficScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Tcp",
+            "value": "Tcp",
+            "description": "TCP traffic."
+          },
+          {
+            "name": "Udp",
+            "value": "Udp",
+            "description": "UDP traffic."
+          }
+        ]
+      }
+    },
     "DdosSettingsProtectionMode": {
       "type": "string",
       "description": "The DDoS protection mode of the public IP",
@@ -2756,6 +2834,30 @@
             "name": "Disabled",
             "value": "Disabled",
             "description": "Disabled"
+          }
+        ]
+      }
+    },
+    "DdosSourcePolicyActionType": {
+      "type": "string",
+      "description": "The action applied to traffic matching a source policy override.",
+      "enum": [
+        "Deny",
+        "Permit"
+      ],
+      "x-ms-enum": {
+        "name": "DdosSourcePolicyActionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Deny",
+            "value": "Deny",
+            "description": "Deny traffic from matching sources."
+          },
+          {
+            "name": "Permit",
+            "value": "Permit",
+            "description": "Permit traffic from matching sources."
           }
         ]
       }
@@ -8857,6 +8959,66 @@
             "name": "Full",
             "value": "Full",
             "description": "Full"
+          }
+        ]
+      }
+    },
+    "VirtualNetworkApplianceCapabilityIpVersion": {
+      "type": "string",
+      "description": "The IP versions a virtual network appliance capability can apply to. See `ipVersion` on\nVirtualNetworkApplianceCapabilityProperties for the per-`kind` constraint.",
+      "enum": [
+        "IPv6",
+        "DualStack"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualNetworkApplianceCapabilityIpVersion",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IPv6",
+            "value": "IPv6",
+            "description": "Single stack IPv6 only."
+          },
+          {
+            "name": "DualStack",
+            "value": "DualStack",
+            "description": "Dual stack (both IPv4 and IPv6)."
+          }
+        ]
+      }
+    },
+    "VirtualNetworkApplianceCapabilityKind": {
+      "type": "string",
+      "description": "The kinds of virtual network appliance capability. The value is the top-level `kind` discriminator.",
+      "enum": [
+        "PLGatewayFastpath",
+        "PLGateway",
+        "PLIPForwarders",
+        "NAT64"
+      ],
+      "x-ms-enum": {
+        "name": "VirtualNetworkApplianceCapabilityKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "PLGatewayFastpath",
+            "value": "PLGatewayFastpath",
+            "description": "Private Link Gateway FastPath."
+          },
+          {
+            "name": "PLGateway",
+            "value": "PLGateway",
+            "description": "Private Link Gateway (slow-path)."
+          },
+          {
+            "name": "PLIPForwarders",
+            "value": "PLIPForwarders",
+            "description": "Private Link IP-forwarders (NVA)."
+          },
+          {
+            "name": "NAT64",
+            "value": "NAT64",
+            "description": "NAT64 (stateful IPv6-to-IPv4 translation)."
           }
         ]
       }
