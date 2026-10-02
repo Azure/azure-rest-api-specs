@@ -19,7 +19,7 @@ namespace Microsoft.AzureStackHCI;
 /**
  * Edge Machine Network Adapter Resource.
  */
-@added(Versions.v2026_05_01_preview)
+@added(Versions.v2026_10_01)
 @parentResource(EdgeMachine)
 model EdgeMachineNetworkAdapter
   is Azure.ResourceManager.ProxyResource<EdgeMachineNetworkAdapterProperties> {
@@ -34,7 +34,7 @@ model EdgeMachineNetworkAdapter
 /**
  * Operations for Edge Machine Network Adapters.
  */
-@added(Versions.v2026_05_01_preview)
+@added(Versions.v2026_10_01)
 @armResourceOperations
 interface EdgeMachineNetworkAdapters {
   /** Get a specific network adapter on an Edge Machine. */
@@ -50,7 +50,7 @@ interface EdgeMachineNetworkAdapters {
  * Job for an Edge Machine Network Adapter.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" ""
-@added(Versions.v2026_05_01_preview)
+@added(Versions.v2026_10_01)
 @parentResource(EdgeMachineNetworkAdapter)
 model EdgeMachineNetworkAdapterJob
   is Azure.ResourceManager.ProxyResource<EdgeMachineNetworkAdapterJobProperties> {
@@ -65,7 +65,7 @@ model EdgeMachineNetworkAdapterJob
 /**
  * Operations for Edge Machine Network Adapter Jobs.
  */
-@added(Versions.v2026_05_01_preview)
+@added(Versions.v2026_10_01)
 @armResourceOperations
 interface EdgeMachineNetworkAdapterJobs {
   /** Get a specific network adapter job. */

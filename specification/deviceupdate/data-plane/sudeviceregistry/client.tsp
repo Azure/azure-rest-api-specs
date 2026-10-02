@@ -27,3 +27,14 @@ using DeviceRegistrySoftwareUpdateClient;
 @@clientLocation(DeviceClasses.list, "DeviceClasses");
 @@clientLocation(DeviceClasses.getDeviceClass, "DeviceClasses");
 @@clientLocation(DeviceClasses.delete, "DeviceClasses");
+
+// Rename generic models for .NET to avoid analyzer AZC0012
+// (type names too generic / high collision risk with BCL types).
+@@clientName(Compatibility, "SoftwareUpdateCompatibility", "csharp");
+@@clientName(Instructions, "SoftwareUpdateInstructions", "csharp");
+@@clientName(Step, "SoftwareUpdateStep", "csharp");
+@@clientName(
+  DeviceRegistrySoftwareUpdateClient.Update,
+  "UpdateContent",
+  "csharp"
+);

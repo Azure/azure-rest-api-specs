@@ -1,5 +1,5 @@
 <!-- NOTE: This comment is for file maintainers only and is not rendered.
-     Upstream alignment: 2026-04-15
+     Upstream alignment: 2026-08-15
      Derived from:
        - Azure Resource Provider Contract (RPC) v1.0 — PUT Resource
        - Azure REST API Guidelines (vNext) — JSON
@@ -15,7 +15,7 @@ inconsistent SDK behavior.
 
 **Authoritative references:**
 
-- [Azure Resource Provider Contract -- PUT Resource](https://github.com/cloud-and-ai-microsoft/resource-provider-contract/blob/master/v1.0/put-resource.md)
+- [Azure Resource Provider Contract -- PUT Resource](https://eng.ms/docs/products/arm/api_contracts/resource-provider-contract/v10/put-resource)
 - [Azure REST API Guidelines -- JSON](https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#json)
 
 ---

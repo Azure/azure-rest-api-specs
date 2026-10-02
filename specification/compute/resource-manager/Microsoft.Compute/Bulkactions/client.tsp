@@ -217,6 +217,21 @@ namespace Microsoft.Compute;
   "BulkCreateCustomResolvedItem",
   "csharp"
 );
+@@clientName(
+  CapacityRecommendationParameters.availabilityZones,
+  "isAvailabilityZoneEnabled",
+  "csharp"
+);
+@@clientName(
+  CapacityRecommendationDetails.availabilityZones,
+  "isSplitByAvailabilityZone",
+  "csharp"
+);
+@@clientName(
+  CapacityRecommendationDetails.recommendationRequestedAtUtc,
+  "recommendationRequestedAt",
+  "csharp"
+);
 // Expand "Op" abbreviation to "Operation".
 @@clientName(ResourceOperationDetails.opType, "operationKind", "csharp");
 @@clientName(FallbackOperationInfo.lastOpType, "lastOperationKind", "csharp");
@@ -491,3 +506,13 @@ namespace Microsoft.Compute;
 @@clientName(DelayRequest.delay, "scheduleAt", "csharp");
 @@clientName(Mode, "ProxyAgentMode", "csharp");
 @@clientName(Modes, "ImdsAccessControlMode", "csharp");
+
+// .NET flattens unbound subscription-scoped operations into SubscriptionResource
+// extension methods named from the operationId suffix, so BulkCreate and
+// BulkCreateCustom both generated GetAsyncOperationStatus and failed with CS0111.
+// BulkCreateCustom keeps the original name because it already shipped in 1.2.0-beta.2.
+@@clientName(
+  BulkCreate.getAsyncOperationStatus,
+  "getBulkCreateAsyncOperationStatus",
+  "csharp"
+);
