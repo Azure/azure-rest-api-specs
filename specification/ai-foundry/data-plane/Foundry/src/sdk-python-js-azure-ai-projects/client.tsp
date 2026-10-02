@@ -313,6 +313,10 @@ using Azure.AI.Projects;
 // operation entirely from the emitted SDK; it remains in the spec for raw REST documentation only.
 @@scope(VoiceAgentWebSocket.connectVoiceAgent, "!(python, javascript)");
 
+// Keep VoiceAgentTransport reachable even though the WebSocket operation that references it is excluded.
+@@usage(VoiceAgentTransport, Usage.input | Usage.json);
+@@access(VoiceAgentTransport, Access.public);
+
 // --------------------------------------------------------------------------------
 // Beta Voice Agent Conversations sub-client
 // --------------------------------------------------------------------------------
