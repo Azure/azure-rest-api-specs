@@ -549,7 +549,8 @@ union ScenarioRunState {
   Succeeded: "Succeeded",
 
   /**
-   * The scenario run completed with one or more suppressed action failures.
+   * The scenario run completed, but one or more actions failed and every one of those
+   * failures was suppressed by the effective `failureBehavior`.
    */
   @added(Microsoft.Chaos.Versions.v2026_11_01)
   @lroSucceeded
