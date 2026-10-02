@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "api-version": "2026-08-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "body": {
+      "upgradeType": "AgentPool",
+      "agentPoolName": "nodepool1",
+      "targetKubernetesVersion": "1.33.5"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/upgradeInsights/agentPool-nodepool1",
+        "name": "agentPool-nodepool1",
+        "type": "Microsoft.ContainerService/managedClusters/upgradeInsights",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "upgradeType": "AgentPool",
+          "lastEvaluatedAt": "2026-07-07T10:00:00Z",
+          "expiresAt": "2026-07-21T10:00:00Z",
+          "agentPoolName": "nodepool1",
+          "targetKubernetesVersion": "1.33.5",
+          "currentKubernetesVersion": "1.32.7",
+          "kubernetesVersionSupportStatus": "InSupport",
+          "kubernetesVersionEndOfSupportDate": "2026-11-30",
+          "context": {
+            "currentUpgradeStrategy": "Manual"
+          },
+          "evaluation": {
+            "status": "Failed",
+            "evaluatedAt": "2026-07-07T10:00:00Z",
+            "detectedIssues": [
+              {
+                "issueType": "QuotaExceeded",
+                "severity": "Blocking",
+                "message": "The compute quota for the agent pool VM SKU is insufficient to accommodate surge nodes during upgrade.",
+                "impactedResources": [
+                  {
+                    "kind": "Arm",
+                    "resourceType": "Microsoft.ContainerService/managedClusters/agentPools",
+                    "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1/agentPools/nodepool1"
+                  }
+                ],
+                "recommendedActions": [
+                  {
+                    "title": "Request a compute quota increase",
+                    "details": "Request additional vCPU quota for the agent pool VM SKU, or reduce maxSurge so fewer surge nodes are required during the upgrade.",
+                    "documentationLink": "https://learn.microsoft.com/azure/aks/upgradeinsights"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "operationId": "UpgradeInsights_GenerateUpgradeInsights",
+  "title": "Generate a single agent pool Kubernetes version upgrade insight"
+}
