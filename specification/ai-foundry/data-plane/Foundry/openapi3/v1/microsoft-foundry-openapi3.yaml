@@ -46910,6 +46910,7 @@ components:
       required:
         - name
         - score
+        - passed
       properties:
         name:
           type: string
@@ -46918,10 +46919,7 @@ components:
           type: string
           description: The grader type (for example, "string-check-grader").
         score:
-          anyOf:
-            - type: number
-              format: double
-            - type: 'null'
+          $ref: '#/components/schemas/OpenAI.numeric'
           description: The numeric score produced by the grader.
         passed:
           type: boolean

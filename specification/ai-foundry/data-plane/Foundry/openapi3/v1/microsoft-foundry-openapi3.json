@@ -38783,7 +38783,8 @@
         "type": "object",
         "required": [
           "name",
-          "score"
+          "score",
+          "passed"
         ],
         "properties": {
           "name": {
@@ -38795,15 +38796,7 @@
             "description": "The grader type (for example, \"string-check-grader\")."
           },
           "score": {
-            "anyOf": [
-              {
-                "type": "number",
-                "format": "double"
-              },
-              {
-                "type": "null"
-              }
-            ],
+            "$ref": "#/components/schemas/OpenAI.numeric",
             "description": "The numeric score produced by the grader."
           },
           "passed": {
