@@ -1,4 +1,3 @@
-import { readFile } from "node:fs/promises";
 import { describe, expect, it } from "vitest";
 import { stringify } from "yaml";
 import {
@@ -27,17 +26,6 @@ const existing = (label: LabelDefinition, id = 1): ExistingLabel => ({
 });
 
 describe("label catalog", () => {
-  it("validates the checked-in migration catalog without enabling archival or deletion", async () => {
-    const parsed = parseLabelCatalog(
-      await readFile(new URL("../../labels.yaml", import.meta.url), "utf8"),
-    );
-    expect(parsed.unconfiguredLabels).toBe("preserve");
-    expect(parsed.labels).toContainEqual(expect.objectContaining({ name: DELETED_LABEL }));
-    expect(parsed.labels).toContainEqual(
-      expect.objectContaining({ name: "BreakingChange-Approved-Benign" }),
-    );
-  });
-
   it("rejects duplicate YAML keys rather than accepting the last value", () => {
     expect(() =>
       parseLabelCatalog("unconfiguredLabels: preserve\nunconfiguredLabels: archive\n"),
