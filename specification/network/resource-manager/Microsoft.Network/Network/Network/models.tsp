@@ -13110,7 +13110,7 @@ model ExpressRouteLagPropertiesFormat {
 /**
  * Properties of ExpressRouteLag Authorization.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The Network RP TypeSpec project uses Azure.ResourceManager.Legacy patterns for consistency with existing ExpressRoute resources."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The feature decorator places this properties schema in expressRoute.json under output-splitting: legacy-feature-files."
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 @summary("ExpressRoute Lag Authorization Properties")
 @added(Versions.v2026_03_01)
@@ -27845,7 +27845,7 @@ model ExpressRouteLagLinkListResult is Azure.Core.Page<ExpressRouteLagLink>;
 @added(Versions.v2025_09_01)
 model ExpressRouteLagMemberListResult is Azure.Core.Page<ExpressRouteLagMember>;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The Network RP TypeSpec project uses Azure.ResourceManager.Legacy patterns for consistency with existing ExpressRoute resources."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The feature decorator places this paged response schema in expressRoute.json under output-splitting: legacy-feature-files."
 @summary("ExpressRoute Lag Authorization List Result")
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 @added(Versions.v2026_03_01)

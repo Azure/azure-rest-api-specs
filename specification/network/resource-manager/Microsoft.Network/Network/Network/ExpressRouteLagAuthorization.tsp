@@ -16,30 +16,23 @@ namespace Microsoft.Network;
 /**
  * ExpressRouteLag Authorization resource definition.
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "The includeInapplicableMetadataInPayload decorator is currently under Http.Private and is required to keep payload shape aligned with existing Network RP swagger output."
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "This child resource explicitly defines the name/etag envelope fields to preserve the existing Network RP contract and generated OpenAPI shape for ExpressRoute LAG authorizations."
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "This child resource extends the shared SubResourceModel envelope used across Network RP to maintain consistency with existing model composition."
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The Network RP TypeSpec project currently uses Azure.ResourceManager.Legacy feature toggles and operation templates across this API surface; this file must remain consistent with that project pattern."
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "This decorator excludes the local @path name from the JSON payload so the proxy base supplies the optional read-only name instead of requiring it in the PUT body."
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "The resource inherits the existing Network ProxyResourceWithReadOnlyID custom envelope to expose read-only id, name and type without declaring systemData that the backend does not return."
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Inheritance preserves the separate proxy identity schema when the local @path name is excluded from the payload; spreading the base would replace its payload name with the path-only property."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The feature decorator routes this resource to expressRoute.json under output-splitting: legacy-feature-files."
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 @summary("ExpressRoute Lag Authorization")
 @Http.Private.includeInapplicableMetadataInPayload(false)
 @added(Versions.v2026_03_01)
-model ExpressRouteLagAuthorization extends SubResourceModel {
+model ExpressRouteLagAuthorization extends ProxyResourceWithReadOnlyID {
   /** ExpressRouteLag authorization properties. */
   properties?: ExpressRouteLagAuthorizationPropertiesFormat;
-
-  /** The unique identifier of the resource. */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /** The type of the resource. */
-  @visibility(Lifecycle.Read)
-  type?: string;
 
   /**
    * The authorization name, unique within the parent ExpressRoute LAG.
    */
   @visibility(Lifecycle.Read)
+  @path
   @key("authorizationName")
   @minLength(1)
   @maxLength(80)
@@ -48,7 +41,6 @@ model ExpressRouteLagAuthorization extends SubResourceModel {
   name: string;
 
   /** A unique read-only string that changes whenever the resource is updated. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "etag is intentionally modeled as a read-only envelope field to match existing ExpressRoute resource contracts in Network RP."
   @visibility(Lifecycle.Read)
   etag?: string;
 }
@@ -94,7 +86,7 @@ model ExpressRouteLagAuthorizationUpdatedResult {
   ...ExpressRouteLagAuthorizationLroHeaders;
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "The containing service namespace still relies on Azure.ResourceManager.Legacy feature flags and templates; this interface follows the same established project-level pattern."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "LegacyOperations supplies the explicit Network route parameter groups, and the feature decorator routes these operations to expressRoute.json under output-splitting: legacy-feature-files."
 @Azure.ResourceManager.Legacy.feature(Features.expressRoute)
 @armResourceOperations
 @added(Versions.v2026_03_01)
@@ -126,8 +118,6 @@ interface ExpressRouteLagAuthorizations {
   /**
    * Deletes the specified authorization from the specified express route LAG.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "The Network RP delete contract returns Location and Azure-AsyncOperation headers on the 202 response, matching existing ExpressRoute resources."
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "This asynchronous delete returns 202 and 204 to match the existing ExpressRoute LAG resource delete contract in Network RP."
   delete is ExpressRouteLagAuthorizationOps.DeleteWithoutOkAsync<
     ExpressRouteLagAuthorization,
     Response =

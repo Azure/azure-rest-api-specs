@@ -7721,36 +7721,15 @@
           "$ref": "#/definitions/ExpressRouteLagAuthorizationPropertiesFormat",
           "description": "ExpressRouteLag authorization properties."
         },
-        "id": {
-          "type": "string",
-          "description": "The unique identifier of the resource.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The authorization name, unique within the parent ExpressRoute LAG.",
-          "minLength": 1,
-          "maxLength": 80,
-          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]*$",
-          "readOnly": true
-        },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated.",
           "readOnly": true
         }
       },
-      "required": [
-        "name"
-      ],
       "allOf": [
         {
-          "$ref": "./common.json#/definitions/SubResourceModel"
+          "$ref": "./common.json#/definitions/ProxyResourceWithReadOnlyID"
         }
       ]
     },
