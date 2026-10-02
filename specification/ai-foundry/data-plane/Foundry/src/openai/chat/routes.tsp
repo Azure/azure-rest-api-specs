@@ -28,6 +28,7 @@ interface Chat {
       body: OpenAI.CreateChatCompletionRequest;
 
       ...SessionAffinityRequestHeader;
+      ...CostContextRequestHeader;
     },
     OpenAI.CreateChatCompletionResponse
   >;
