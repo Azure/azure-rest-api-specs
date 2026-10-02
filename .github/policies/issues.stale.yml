@@ -81,6 +81,7 @@ configuration:
       - description: Remove the stale label when an issue changes
         if:
           - payloadType: Issues
+          - isIssue
           - not:
               isAction:
                 action: Closed

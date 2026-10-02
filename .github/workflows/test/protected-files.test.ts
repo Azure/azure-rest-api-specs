@@ -266,7 +266,7 @@ describe("Protected Files", () => {
       expect(step.get("if")).toBe("${{ env.user-allowed != 'true' }}");
     }
     const checkout = steps.items.find(
-      (step) => isMap(step) && String(step.get("uses")).startsWith("actions/checkout@"),
+      (step) => isMap(step) && step.get("uses") === "$/.github/actions/checkout",
     );
     if (!isMap(checkout)) throw new Error("Expected a checkout step");
     expect(checkout.getIn(["with", "fetch-depth"])).toBe(2);
