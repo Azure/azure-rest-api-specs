@@ -7,7 +7,6 @@ import type { GitHub, GitHubScriptArgs } from "./github.ts";
 import {
   ARCHIVE_DESCRIPTION,
   ARCHIVE_PREFIX,
-  DELETED_LABEL,
   existingLabelSchema,
   isArchivedLabelExpired,
   labelCatalogSchema,
@@ -44,9 +43,16 @@ const auditSchema = z.strictObject({
   dryRun: z.boolean(),
   catalog: labelCatalogSchema,
   plan: labelPlanSchema,
-  replacements: z.array(
+  deletions: z.array(
     z.strictObject({
       label: existingLabelSchema,
+      items: z.array(itemSchema),
+    }),
+  ),
+  migrations: z.array(
+    z.strictObject({
+      before: existingLabelSchema,
+      target: z.string(),
       items: z.array(itemSchema),
     }),
   ),
@@ -190,14 +196,23 @@ export async function prepareLabelSync(
   const { catalog, hash, sources } = await loadLabelCatalog(options.catalogPath);
   await verifyCatalog(args, defaultBranch, hash);
   const plan = planLabels(catalog, await listRepositoryLabels(args.github, args.context.repo));
-  const replacements: Audit["replacements"] = [];
+  const deletions: Audit["deletions"] = [];
+  const migrations: Audit["migrations"] = [];
   for (const label of plan.unconfigured) {
     args.core.warning(
       `Label not in ${CATALOG_PATH}: ${JSON.stringify(label.name)} (${catalog.unconfiguredLabels})`,
     );
   }
   for (const label of plan.delete) {
-    replacements.push({ label, items: await findLabelAssignments(args.github, label) });
+    deletions.push({ label, items: await findLabelAssignments(args.github, label) });
+  }
+  for (const migration of plan.migrate) {
+    migrations.push({
+      ...migration,
+      items:
+        deletions.find(({ label }) => label.id === migration.before.id)?.items ??
+        (await findLabelAssignments(args.github, migration.before)),
+    });
   }
   const audit = auditSchema.parse({
     version: 1,
@@ -211,7 +226,8 @@ export async function prepareLabelSync(
     dryRun: options.dryRun,
     catalog,
     plan,
-    replacements,
+    deletions,
+    migrations,
   });
   const serialized = JSON.stringify(audit, null, 2);
   await mkdir(options.auditDirectory, { recursive: true });
@@ -223,6 +239,7 @@ export async function prepareLabelSync(
       `## Repository labels\n\nPolicy: **${catalog.unconfiguredLabels}**; dry-run: **${options.dryRun}**.\n\n` +
         `Create: ${plan.create.length}; update: ${plan.update.length}; ` +
         `archive: ${plan.archive.length}; delete after grace period: ${plan.delete.length}; ` +
+        `alias migrations: ${plan.migrate.length}; ` +
         `unconfigured: ${plan.unconfigured.length}; unchanged: ${plan.unchanged}.\n\n` +
         "Full definitions and proposed changes are in the pre-change audit artifact.\n",
     )
@@ -248,16 +265,34 @@ async function verifyLabel(
   }
 }
 
-function validateReplacementPlan(audit: Audit) {
+function validateCleanupPlan(audit: Audit) {
   const candidates = [...audit.plan.archive.map(({ before }) => before), ...audit.plan.delete];
-  if (audit.catalog.unconfiguredLabels === "preserve" && candidates.length !== 0) {
+  if (
+    audit.catalog.unconfiguredLabels === "preserve" &&
+    (candidates.length !== 0 || audit.migrations.length !== 0)
+  ) {
     throw new Error("Archival and deletion are disabled by the catalog");
   }
   if (
-    JSON.stringify(audit.replacements.map(({ label }) => label)) !==
-    JSON.stringify(audit.plan.delete)
+    JSON.stringify(audit.deletions.map(({ label }) => label)) !== JSON.stringify(audit.plan.delete)
   ) {
-    throw new Error("Replacement candidates do not match the audited plan");
+    throw new Error("Deletion candidates do not match the audited plan");
+  }
+  if (
+    JSON.stringify(audit.migrations.map(({ before, target }) => ({ before, target }))) !==
+    JSON.stringify(audit.plan.migrate)
+  ) {
+    throw new Error("Alias migrations do not match the audited plan");
+  }
+  for (const { before, target } of audit.migrations) {
+    const definition = audit.catalog.labels.find((label) => label.name === target);
+    if (
+      !definition?.aliases?.some(
+        (alias) => alias.toLowerCase() === originalLabelName(before).toLowerCase(),
+      )
+    ) {
+      throw new Error(`Unconfigured alias migration: ${before.name} -> ${target}`);
+    }
   }
   const configured = new Set(audit.catalog.labels.map((label) => label.name.toLowerCase()));
   if (candidates.some((label) => configured.has(originalLabelName(label).toLowerCase()))) {
@@ -284,7 +319,7 @@ function validateReplacementPlan(audit: Audit) {
 }
 
 interface Operation {
-  action: "create" | "update" | "archive" | "mark" | "delete";
+  action: "create" | "update" | "archive" | "migrate" | "delete";
   label: string;
   newName?: string;
   number?: number;
@@ -355,7 +390,7 @@ export async function applyLabelSync(
     ) {
       throw new Error("The audit does not belong to this repository and workflow run");
     }
-    validateReplacementPlan(audit);
+    validateCleanupPlan(audit);
     outcome.dryRun = audit.dryRun;
     await verifyCatalog(args, branch, audit.catalogHash);
     if (audit.dryRun) {
@@ -398,9 +433,65 @@ export async function applyLabelSync(
         }
       });
     }
+    async function verifyAssignments(label: ExistingLabel, items: AffectedItem[], target?: string) {
+      const current = await findLabelAssignments(github, label);
+      const recorded = new Set(items.map((item) => item.number));
+      for (const item of current) {
+        if (!recorded.has(item.number)) {
+          throw new Error(`New unaudited assignment of ${label.name} on #${item.number}; rerun`);
+        }
+        if (target) {
+          const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
+            ...context.repo,
+            issue_number: item.number,
+            per_page: PER_PAGE_MAX,
+          });
+          if (!labels.some((entry) => entry.name.toLowerCase() === target.toLowerCase())) {
+            throw new Error(
+              `Canonical label ${target} missing on #${item.number}; keeping ${label.name}`,
+            );
+          }
+        }
+      }
+    }
+    for (const { before, target, items } of audit.migrations) {
+      await verifyCatalog(args, branch, audit.catalogHash);
+      await verifyLabel(github, context.repo, before);
+      const { data: targetLabel } = await github.rest.issues.getLabel({
+        ...context.repo,
+        name: target,
+      });
+      if (existingLabelSchema.parse(targetLabel).archived_at !== null) {
+        throw new Error(`Canonical label is archived: ${target}`);
+      }
+      for (const item of items) {
+        const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
+          ...context.repo,
+          issue_number: item.number,
+          per_page: PER_PAGE_MAX,
+        });
+        if (
+          labels.some((label) => label.name === before.name) &&
+          !labels.some((label) => label.name.toLowerCase() === target.toLowerCase())
+        ) {
+          await mutate(
+            { action: "migrate", label: before.name, newName: target, number: item.number },
+            () =>
+              github.rest.issues.addLabels({
+                ...context.repo,
+                issue_number: item.number,
+                labels: [target],
+              }),
+          );
+        }
+      }
+      await verifyAssignments(before, items, target);
+    }
     for (const { before: label, name } of audit.plan.archive) {
       await verifyCatalog(args, branch, audit.catalogHash);
       await verifyLabel(github, context.repo, label);
+      const migration = audit.migrations.find(({ before }) => before.id === label.id);
+      if (migration) await verifyAssignments(label, migration.items, migration.target);
       await verifyRenameTarget(github, context.repo, label, name);
       await mutate({ action: "archive", label: label.name, newName: name }, async () => {
         const { data } = await github.rest.issues.updateLabel({
@@ -424,43 +515,11 @@ export async function applyLabelSync(
         }
       });
     }
-    for (const { label, items } of audit.replacements) {
+    for (const { label, items } of audit.deletions) {
       await verifyCatalog(args, branch, audit.catalogHash);
       await verifyLabel(github, context.repo, label);
-      for (const item of items) {
-        const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
-          ...context.repo,
-          issue_number: item.number,
-          per_page: PER_PAGE_MAX,
-        });
-        if (
-          labels.some((entry) => entry.name === label.name) &&
-          !labels.some((entry) => entry.name.toLowerCase() === DELETED_LABEL)
-        ) {
-          await mutate({ action: "mark", label: label.name, number: item.number }, () =>
-            github.rest.issues.addLabels({
-              ...context.repo,
-              issue_number: item.number,
-              labels: [DELETED_LABEL],
-            }),
-          );
-        }
-      }
-      const currentItems = await findLabelAssignments(github, label);
-      const auditedItems = new Set(items.map((item) => item.number));
-      for (const item of currentItems) {
-        if (!auditedItems.has(item.number)) {
-          throw new Error(`New unaudited assignment of ${label.name} on #${item.number}; rerun`);
-        }
-        const labels = await github.paginate(github.rest.issues.listLabelsOnIssue, {
-          ...context.repo,
-          issue_number: item.number,
-          per_page: PER_PAGE_MAX,
-        });
-        if (!labels.some((entry) => entry.name.toLowerCase() === DELETED_LABEL)) {
-          throw new Error(`Replacement marker missing on #${item.number}; keeping ${label.name}`);
-        }
-      }
+      const migration = audit.migrations.find(({ before }) => before.id === label.id);
+      await verifyAssignments(label, items, migration?.target);
       await verifyCatalog(args, branch, audit.catalogHash);
       await verifyLabel(github, context.repo, label);
       if (!isArchivedLabelExpired(label)) {

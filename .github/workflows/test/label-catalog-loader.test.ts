@@ -5,7 +5,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { loadLabelCatalog, resolveLabelCatalog } from "../src/label-catalog-loader.ts";
 
-const marker = { name: "label-deleted", color: "123456", description: "Marker" };
+const canonical = { name: "canonical", color: "123456", description: "Marker" };
 const bug = { name: "bug", color: "abcdef", description: "Bug" };
 const root = ".github/labels.yaml";
 function files(documents: Record<string, unknown>) {
@@ -22,7 +22,7 @@ function files(documents: Record<string, unknown>) {
 
 describe("label catalog inheritance", () => {
   it("supports existing single-file catalogs", async () => {
-    const catalog = { unconfiguredLabels: "archive", labels: [marker, bug] };
+    const catalog = { unconfiguredLabels: "archive", labels: [canonical, bug] };
     expect((await files({ [root]: catalog }).load()).catalog).toEqual(catalog);
   });
   it("resolves nested relative paths and overrides inherited fields by case-insensitive name", async () => {
@@ -36,11 +36,11 @@ describe("label catalog inheritance", () => {
         extends: ["../base.yaml"],
         labels: [{ name: "bug", color: "654321" }],
       },
-      ".github/labels/base.yaml": { labels: [marker, bug] },
+      ".github/labels/base.yaml": { labels: [canonical, bug] },
     });
     const result = await f.load();
     expect(result.catalog.labels).toEqual([
-      marker,
+      canonical,
       { name: "BUG", color: "654321", description: "Local" },
     ]);
     expect(result.sources).toHaveLength(3);
@@ -50,15 +50,15 @@ describe("label catalog inheritance", () => {
       [root]: { unconfiguredLabels: "preserve", extends: ["./labels/a.yaml", "./labels/b.yaml"] },
       ".github/labels/a.yaml": { extends: ["./common.yaml"] },
       ".github/labels/b.yaml": { extends: ["./common.yaml"] },
-      ".github/labels/common.yaml": { labels: [marker, bug] },
+      ".github/labels/common.yaml": { labels: [canonical, bug] },
     });
-    expect((await f.load()).catalog.labels).toEqual([marker, bug]);
+    expect((await f.load()).catalog.labels).toEqual([canonical, bug]);
     expect(f.read.mock.calls.filter(([path]) => path.endsWith("common.yaml"))).toHaveLength(1);
   });
   it("rejects conflicting sibling bases unless the extending file overrides the conflicting field", async () => {
     const f = files({
       [root]: { unconfiguredLabels: "archive", extends: ["./labels/a.yaml", "./labels/b.yaml"] },
-      ".github/labels/a.yaml": { labels: [marker, bug] },
+      ".github/labels/a.yaml": { labels: [canonical, bug] },
       ".github/labels/b.yaml": { labels: [{ ...bug, color: "654321" }] },
     });
     await expect(f.load()).rejects.toThrow("Conflicting inherited color");
@@ -91,8 +91,8 @@ describe("label catalog inheritance", () => {
     await expect(f.load()).rejects.toThrow("inheritance cycle");
   });
   it.each([
-    { labels: [marker, bug, { ...bug, name: "BUG" }] },
-    { labels: [marker], unconfiguredLabels: "archive" },
+    { labels: [canonical, bug, { ...bug, name: "BUG" }] },
+    { labels: [canonical], unconfiguredLabels: "archive" },
     { labels: [{ name: "new" }] },
   ])("rejects invalid fragment %j", async (base) => {
     await expect(
@@ -108,7 +108,7 @@ describe("label catalog inheritance", () => {
         [root]: {
           unconfiguredLabels: "archive",
           extends: ["./labels/missing.yaml"],
-          labels: [marker],
+          labels: [canonical],
         },
       }).load(),
     ).rejects.toThrow("Missing file");
@@ -116,12 +116,12 @@ describe("label catalog inheritance", () => {
   it("changes the audit hash when only an inherited source changes", async () => {
     const f = files({
       [root]: { unconfiguredLabels: "archive", extends: ["./labels/base.yaml"] },
-      ".github/labels/base.yaml": { labels: [marker] },
+      ".github/labels/base.yaml": { labels: [canonical] },
     });
     const before = await f.load();
     f.contents.set(
       ".github/labels/base.yaml",
-      stringify({ labels: [{ ...marker, description: "Updated" }] }),
+      stringify({ labels: [{ ...canonical, description: "Updated" }] }),
     );
     expect((await f.load()).hash).not.toBe(before.hash);
   });
@@ -140,12 +140,12 @@ describe("label catalog inheritance", () => {
         path,
         stringify({ unconfiguredLabels: "archive", extends: ["./labels/base.yaml"] }),
       );
-      await writeFile(join(directory, "outside.yaml"), stringify({ labels: [marker] }));
+      await writeFile(join(directory, "outside.yaml"), stringify({ labels: [canonical] }));
       await symlink(join(directory, "outside.yaml"), join(repo, ".github/labels/base.yaml"));
       await expect(loadLabelCatalog(path)).rejects.toThrow("escapes");
       await rm(join(repo, ".github/labels/base.yaml"));
-      await writeFile(join(repo, ".github/labels/base.yaml"), stringify({ labels: [marker] }));
-      expect((await loadLabelCatalog(path)).catalog.labels).toEqual([marker]);
+      await writeFile(join(repo, ".github/labels/base.yaml"), stringify({ labels: [canonical] }));
+      expect((await loadLabelCatalog(path)).catalog.labels).toEqual([canonical]);
     } finally {
       await rm(directory, { recursive: true, force: true });
     }
