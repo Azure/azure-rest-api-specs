@@ -925,6 +925,7 @@ model IotHubProperties {
   /**
    * The device streams properties of iothub.
    */
+  @removed(Versions.v2026_11_01)
   deviceStreams?: IotHubPropertiesDeviceStreams;
 
   /**
@@ -935,6 +936,7 @@ model IotHubProperties {
   /**
    * The encryption properties for the IoT hub.
    */
+  @removed(Versions.v2026_11_01)
   encryption?: EncryptionPropertiesDescription;
 
   /**
@@ -958,6 +960,7 @@ model IotHubProperties {
   /**
    * This property specifies the IP Version the hub is currently utilizing.
    */
+  @removed(Versions.v2026_11_01)
   ipVersion?: IpVersion;
 
   /**

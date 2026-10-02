@@ -2745,26 +2745,6 @@
         ]
       }
     },
-    "EncryptionPropertiesDescription": {
-      "type": "object",
-      "description": "The encryption properties for the IoT hub.",
-      "properties": {
-        "keySource": {
-          "type": "string",
-          "description": "The source of the key."
-        },
-        "keyVaultProperties": {
-          "type": "array",
-          "description": "The properties of the KeyVault key.",
-          "items": {
-            "$ref": "#/definitions/KeyVaultKeyProperties"
-          },
-          "x-ms-identifiers": [
-            "keyIdentifier"
-          ]
-        }
-      }
-    },
     "EndpointHealthData": {
       "type": "object",
       "description": "The health data for an endpoint",
@@ -3536,17 +3516,9 @@
           "type": "string",
           "description": "IoT hub comments."
         },
-        "deviceStreams": {
-          "$ref": "#/definitions/IotHubPropertiesDeviceStreams",
-          "description": "The device streams properties of iothub."
-        },
         "features": {
           "$ref": "#/definitions/Capabilities",
           "description": "The capabilities and features enabled for the IoT hub."
-        },
-        "encryption": {
-          "$ref": "#/definitions/EncryptionPropertiesDescription",
-          "description": "The encryption properties for the IoT hub."
         },
         "locations": {
           "type": "array",
@@ -3561,10 +3533,6 @@
           "type": "boolean",
           "description": "This property when set to true, will enable data residency, thus, disabling disaster recovery."
         },
-        "ipVersion": {
-          "$ref": "#/definitions/IpVersion",
-          "description": "This property specifies the IP Version the hub is currently utilizing."
-        },
         "deviceRegistry": {
           "$ref": "#/definitions/DeviceRegistry",
           "description": "Represents properties related to the Azure Device Registry (ADR).",
@@ -3574,19 +3542,6 @@
           "$ref": "#/definitions/IotHubDetails",
           "description": "Set of additional read-only properties for the IoT hub.",
           "readOnly": true
-        }
-      }
-    },
-    "IotHubPropertiesDeviceStreams": {
-      "type": "object",
-      "description": "The device streams properties of iothub.",
-      "properties": {
-        "streamingEndpoints": {
-          "type": "array",
-          "description": "List of Device Streams Endpoints.",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
@@ -3886,36 +3841,6 @@
         "ipMask"
       ]
     },
-    "IpVersion": {
-      "type": "string",
-      "description": "This property specifies the IP Version the hub is currently utilizing.",
-      "enum": [
-        "ipv4",
-        "ipv6",
-        "ipv4ipv6"
-      ],
-      "x-ms-enum": {
-        "name": "IpVersion",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ipv4",
-            "value": "ipv4",
-            "description": "ipv4"
-          },
-          {
-            "name": "ipv6",
-            "value": "ipv6",
-            "description": "ipv6"
-          },
-          {
-            "name": "ipv4ipv6",
-            "value": "ipv4ipv6",
-            "description": "ipv4ipv6"
-          }
-        ]
-      }
-    },
     "JobResponse": {
       "type": "object",
       "description": "The properties of the Job Response object.",
@@ -4103,20 +4028,6 @@
             "description": "firmwareUpdate"
           }
         ]
-      }
-    },
-    "KeyVaultKeyProperties": {
-      "type": "object",
-      "description": "The properties of the KeyVault key.",
-      "properties": {
-        "keyIdentifier": {
-          "type": "string",
-          "description": "The identifier of the key."
-        },
-        "identity": {
-          "$ref": "#/definitions/ManagedIdentity",
-          "description": "Managed identity properties of KeyVault Key."
-        }
       }
     },
     "ManagedIdentity": {
