@@ -25,8 +25,8 @@ namespace Azure.AI.Projects {
   // These operations are temporarily preserved to root request/response models for
   // interim convenience layer support; to be removed once available in
   // https://github.com/openai/openai-dotnet
-  @@scope(Conversations.createConversation, "!csharp");
-  @@scope(Conversations.updateConversation, "!csharp");
+  // @@scope(Conversations.createConversation, "!csharp");
+  // @@scope(Conversations.updateConversation, "!csharp");
 
   @@scope(Conversations.listConversations, "!csharp");
   @@scope(Conversations.getConversation, "!csharp");
@@ -38,20 +38,27 @@ namespace Azure.AI.Projects {
 
   // --------------------------------------------------------------------------------
   // Fix the xref.
-  // Set it to default move all of OpenAI to "Internal" to make detecting new models
-  // simpler.
   // --------------------------------------------------------------------------------
-  @@clientNamespace(OpenAI, "Azure.AI.Extensions.OpenAI.Internal", "csharp");
+  @@clientNamespace(OpenAI, "Azure.AI.Extensions.OpenAI", "csharp");
 
   // --------------------------------------------------------------------------------
   // Root client
   // --------------------------------------------------------------------------------
   @@clientName(OpenAI, "ProjectOpenAIClient");
 
-  // The conversation data models (ConversationResource, CreateConversationBody,
-  // UpdateConversationBody) are now emitted by the OpenAI SDK (2.12+), so they are
-  // no longer generated here. The Foundry ProjectConversationsClient wrapper consumes
-  // OpenAI's OpenAI.Conversations.* types directly.
+  @@usage(OpenAI.ConversationResource, Usage.output);
+  @@access(OpenAI.ConversationResource, Access.public);
+  @@clientName(OpenAI.ConversationResource, "ProjectConversation");
+  @@usage(
+    OpenAI.CreateConversationBody,
+    Usage.output | Usage.json | Usage.input
+  );
+  @@access(OpenAI.CreateConversationBody, Access.public);
+  @@usage(OpenAI.UpdateConversationBody, Usage.input);
+  @@access(OpenAI.UpdateConversationBody, Access.public);
+
+  @@access(OpenAI.Metadata, Access.internal);
+  @@clientName(OpenAI.Metadata, "InternalMetadataContainer");
 
   @@clientNamespace(Azure.AI.Projects, "Azure.AI.Extensions.OpenAI", "csharp");
 
@@ -86,620 +93,8 @@ namespace Azure.AI.Projects {
 
   @@clientName(WorkflowActionOutputItem.kind, "CSDLActionKind");
 
-  // Now take the OpenAI models, and ensure that they are emitted as consumption points from the OpenAI SDK instead of re-emitting them here.
-  // This is to ensure that the OpenAI SDK is the source of truth for these models, and we don't have duplicate definitions.
+  @@clientName(OpenAI.OutputItemType, "AgentResponseItemKind");
   @@usage(OpenAI.OutputItemType, Usage.output | Usage.json | Usage.input);
-  @@alternateType(
-    OpenAI.OutputItemType,
-    {
-      identity: "OpenAI.Responses.ResponseItemKind",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-
-  @@usage(OpenAI.ToolType, Usage.output | Usage.json | Usage.input);
-
-  @@alternateType(
-    OpenAI.ToolType,
-    {
-      identity: "OpenAI.Responses.ResponseToolKind",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.Tool,
-    {
-      identity: "OpenAI.Responses.ResponseTool",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.ComputerTool,
-    {
-      identity: "OpenAI.Responses.ComputerTool",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-
-  @@alternateType(
-    OpenAI.WebSearchTool,
-    {
-      identity: "OpenAI.Responses.WebSearchTool",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.FunctionTool,
-    {
-      identity: "OpenAI.Responses.FunctionTool",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.AnnotationType,
-    {
-      identity: "OpenAI.Responses.ResponseMessageAnnotationKind",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.ApplyPatchCallOutputStatus,
-    {
-      identity: "OpenAI.Responses.ApplyPatchCallOutputStatus",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.ImageGenTool,
-    {
-      identity: "OpenAI.Responses.ImageGenerationTool",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.ImageGenTool,
-    {
-      identity: "OpenAI.Responses.ImageGenerationTool",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-
-  @@alternateType(
-    OpenAI.CodeInterpreterOutputImage,
-    {
-      identity: "OpenAI.Responses.CodeInterpreterCallImageOutput",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.CodeInterpreterOutputLogs,
-    {
-      identity: "OpenAI.Responses.CodeInterpreterCallLogsOutput",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  // --------------------------------------------------------------------------------
-  // Export OpenAI types from the OpenAI package instead of re-emitting them.
-  // Each target verified public in OpenAI 2.11.0. Input/output TypeSpec twins
-  // (the "...Param" variants) are mapped onto the single OpenAI package type.
-  // --------------------------------------------------------------------------------
-
-  // ApplyPatch tool: status enums (closed enum -> extensible struct in package)
-  @@alternateType(
-    OpenAI.ApplyPatchCallOutputStatusParam,
-    {
-      identity: "OpenAI.Responses.ApplyPatchCallOutputStatus",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.ApplyPatchCallStatus,
-    {
-      identity: "OpenAI.Responses.ApplyPatchCallStatus",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.ApplyPatchCallStatusParam,
-    {
-      identity: "OpenAI.Responses.ApplyPatchCallStatus",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-
-  // ApplyPatch tool: file operations
-  @@alternateType(
-    OpenAI.ApplyPatchOperationParam,
-    {
-      identity: "OpenAI.Responses.ApplyPatchOperation",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.ApplyPatchCreateFileOperation,
-    {
-      identity: "OpenAI.Responses.ApplyPatchCreateFileOperation",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.ApplyPatchDeleteFileOperation,
-    {
-      identity: "OpenAI.Responses.ApplyPatchDeleteFileOperation",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.ApplyPatchDeleteFileOperationParam,
-    {
-      identity: "OpenAI.Responses.ApplyPatchDeleteFileOperation",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.ApplyPatchUpdateFileOperation,
-    {
-      identity: "OpenAI.Responses.ApplyPatchUpdateFileOperation",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.ApplyPatchUpdateFileOperationParam,
-    {
-      identity: "OpenAI.Responses.ApplyPatchUpdateFileOperation",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-
-  // Computer tool
-  // @@alternateType(OpenAI.ComputerActionType, {  identity: "OpenAI.Responses.ComputerCallActionKind",  package: "OpenAI",  minVersion: "2.12.0"}, "csharp");
-  @@alternateType(
-    OpenAI.ComputerCallSafetyCheckParam,
-    {
-      identity: "OpenAI.Responses.ComputerCallSafetyCheck",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-
-  // Message item
-  //@@alternateType(OpenAI.MessageRole, {  identity: "OpenAI.Responses.MessageRole",  package: "OpenAI",  minVersion: "2.12.0"}, "csharp");
-  //@@alternateType(OpenAI.MessageStatus, {  identity: "OpenAI.Responses.MessageStatus",  package: "OpenAI",  minVersion: "2.12.0"}, "csharp");
-
-  // Annotations
-  @@alternateType(
-    OpenAI.ContainerFileCitationBody,
-    {
-      identity: "OpenAI.Responses.ContainerFileCitationMessageAnnotation",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-
-  // Response-level enums / details
-  @@alternateType(
-    OpenAI.ResponseErrorCode,
-    {
-      identity: "OpenAI.Responses.ResponseErrorCode",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  // NOTE: the TypeSpec model is `union ServiceTier`; the emitter prefixes it to
-  // ResponseServiceTier, so the alternateType source must be OpenAI.ServiceTier.
-  @@alternateType(
-    OpenAI.ServiceTier,
-    {
-      identity: "OpenAI.Responses.ResponseServiceTier",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-
-  // Token usage
-  @@alternateType(
-    OpenAI.ResponseUsage,
-    {
-      identity: "OpenAI.Responses.ResponseTokenUsage",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.ResponseUsageInputTokensDetails,
-    {
-      identity: "OpenAI.Responses.ResponseInputTokenUsageDetails",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.ResponseUsageOutputTokensDetails,
-    {
-      identity: "OpenAI.Responses.ResponseOutputTokenUsageDetails",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-
-  @@alternateType(
-    OpenAI.Annotation,
-    {
-      identity: "OpenAI.Responses.ResponseMessageAnnotation",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-
-  @@alternateType(
-    OpenAI.Response,
-    {
-      identity: "OpenAI.Responses.ResponseResult",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-
-  @@alternateType(
-    OpenAI.DetailEnum,
-    {
-      identity: "OpenAI.Responses.ResponseImageDetailLevel",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.ImageGenActionEnum,
-    {
-      identity: "OpenAI.Responses.ImageGenerationToolAction",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.InputFidelity,
-    {
-      identity: "OpenAI.Responses.ImageGenerationToolInputFidelity",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.TopLogProb,
-    {
-      identity: "OpenAI.Responses.ResponseTokenTopLogProbabilityDetails",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.LogProb,
-    {
-      identity: "OpenAI.Responses.ResponseTokenLogProbabilityDetails",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-
-  @@alternateType(
-    OpenAI.Reasoning,
-    {
-      identity: "OpenAI.Responses.ResponseReasoningOptions",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.ResponseError,
-    {
-      identity: "OpenAI.Responses.ResponseError",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.ApproximateLocation,
-    {
-      identity: "OpenAI.Responses.WebSearchToolApproximateLocation",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-
-  @@alternateType(
-    OpenAI.MCPTool,
-    {
-      identity: "OpenAI.Responses.McpTool",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.WebSearchPreviewTool,
-    {
-      identity: "OpenAI.Responses.WebSearchPreviewTool",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.CodeInterpreterTool,
-    {
-      identity: "OpenAI.Responses.CodeInterpreterToolContainer",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.MCPListToolsTool,
-    {
-      identity: "OpenAI.Responses.McpToolDefinition",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.WebSearchActionSearch,
-    {
-      identity: "OpenAI.Responses.WebSearchSearchAction",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.WebSearchActionOpenPage,
-    {
-      identity: "OpenAI.Responses.WebSearchOpenPageAction",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.WebSearchActionFind,
-    {
-      identity: "OpenAI.Responses.WebSearchFindInPageAction",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.MCPToolRequireApproval,
-    {
-      identity: "OpenAI.Responses.McpToolCallApprovalPolicy",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.MCPToolFilter,
-    {
-      identity: "OpenAI.Responses.McpToolFilter",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.RankingOptions,
-    {
-      identity: "OpenAI.Responses.FileSearchToolRankingOptions",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.AutoCodeInterpreterToolParam,
-    {
-      identity: "OpenAI.Responses.AutomaticCodeInterpreterToolContainerConfiguration",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-
-  // And now drop classes that aren't referenced, and aren't pruned.
-  @@alternateType(
-    OpenAI.InputTextContent,
-    {
-      identity: "System.Object",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.InputTextContentParam,
-    {
-      identity: "System.Object",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.InputImageContent,
-    {
-      identity: "System.Object",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.ComparisonFilter,
-    {
-      identity: "System.Object",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.CompoundFilter,
-    {
-      identity: "System.Object",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.InputImageContentParamAutoParam,
-    {
-      identity: "System.Object",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.InputFileContent,
-    {
-      identity: "System.Object",
-    },
-    "csharp"
-  );
-  // GAP (FD-2): The Foundry service accepts `memory_limit` and `network_policy` on the code-interpreter
-  // "auto" container config (see AutoCodeInterpreterToolParam in the compiled openapi3), but OpenAI's
-  // .NET type `OpenAI.Responses.AutomaticCodeInterpreterToolContainerConfiguration` (2.12.0) models only
-  // `file_ids`. This is an upstream source-of-truth lag: openai-dotnet/specification's CodeInterpreterToolAuto
-  // omits these fields while openai-openapi-pr defines them, so no richer OpenAI type exists to map to.
-  // Dropping to System.Object intentionally leaves the gap unfilled (file_ids and container-id selection are
-  // unaffected). Revisit once the OpenAI .NET SDK models memory_limit/network_policy. See CHANGELOG 3.0.0-beta.1.
-  @@alternateType(
-    OpenAI.AutoCodeInterpreterToolParam,
-    {
-      identity: "System.Object",
-    },
-    "csharp"
-  );
-
-  @@alternateType(
-    OpenAI.ToolChoiceOptions,
-    {
-      identity: "System.Object",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.VectorStoreFileAttributes,
-    {
-      identity: "System.Object",
-    },
-    "csharp"
-  );
-
-  @@alternateType(
-    OpenAI.ResponseFormatJsonSchemaSchema,
-    {
-      identity: "System.Object",
-    },
-    "csharp"
-  );
-  // OpenAI SDK: internal partial class InternalItemContentInputFile
-  @@alternateType(
-    OpenAI.InputFileContentParam,
-    {
-      identity: "System.Object",
-    },
-    "csharp"
-  );
-  // ToolType = "local_shell"
-  @@alternateType(
-    OpenAI.LocalShellToolParam,
-    {
-      identity: "System.Object",
-    },
-    "csharp"
-  );
-  // ToolType = "shell"
-  @@alternateType(
-    OpenAI.FunctionShellToolParam,
-    {
-      identity: "System.Object",
-    },
-    "csharp"
-  );
-  // ToolType = "custom"
-  @@alternateType(
-    OpenAI.CustomToolParam,
-    {
-      identity: "System.Object",
-    },
-    "csharp"
-  );
-  // ToolType = "namespace"
-  @@alternateType(
-    OpenAI.NamespaceToolParam,
-    {
-      identity: "System.Object",
-    },
-    "csharp"
-  );
-  // ToolType = "tool_search"
-  @@alternateType(
-    OpenAI.ToolSearchToolParam,
-    {
-      identity: "System.Object",
-    },
-    "csharp"
-  );
-
-  //@@alternateType(OpenAI.CompactResource, { identity: "System.Object" }, "csharp");
 
   // --------------------------------------------------------------------------------
   // --------------------------------------------------------------------------------
@@ -715,6 +110,12 @@ namespace Azure.AI.Projects {
     null,
   }
 
+  // Replace the inline union with a named type for SDK generation.
+  @@alternateType(
+    OpenAI.LocalShellToolCallOutput.status,
+    LocalShellToolCallOutputStatus
+  );
+
   // Rename and include in typegraph
   @@clientName(
     LocalShellToolCallOutputStatus,
@@ -725,10 +126,273 @@ namespace Azure.AI.Projects {
   // Renames and visibility changes for targeted suppressions
   // --------------------------------------------------------------------------------
 
+  @@access(OpenAI.ItemLocalShellToolCall, Access.internal);
+  @@clientName(OpenAI.ItemLocalShellToolCall, "InternalLocalShellToolCallItem");
+  @@access(OpenAI.ItemLocalShellToolCallOutput, Access.internal);
+  @@clientName(
+    OpenAI.ItemLocalShellToolCallOutput,
+    "InternalLocalShellToolCallOutputItem"
+  );
+
+  @@access(OpenAI.ApplyPatchToolParam, Access.internal);
+  @@clientName(OpenAI.ApplyPatchToolParam, "InternalApplyPatchToolParam");
+
+  @@access(OpenAI.ApplyPatchToolCallItemParam, Access.internal);
+  @@clientName(
+    OpenAI.ApplyPatchToolCallItemParam,
+    "InternalApplyPatchToolCallItemParam"
+  );
+
+  @@access(OpenAI.ApplyPatchToolCall, Access.internal);
+  @@clientName(OpenAI.ApplyPatchToolCall, "InternalApplyPatchToolCall");
+
+  @@access(OpenAI.OutputItemApplyPatchToolCall, Access.internal);
+  @@clientName(
+    OpenAI.OutputItemApplyPatchToolCall,
+    "InternalOutputItemApplyPatchToolCall"
+  );
+
+  @@access(OpenAI.OutputItemApplyPatchToolCallOutput, Access.internal);
+  @@clientName(
+    OpenAI.OutputItemApplyPatchToolCallOutput,
+    "InternalOutputItemApplyPatchToolCallOutput"
+  );
+
+  @@access(OpenAI.ApplyPatchFileOperation, Access.internal);
+  @@clientName(
+    OpenAI.ApplyPatchFileOperation,
+    "InternalApplyPatchFileOperation"
+  );
+
+  @@access(OpenAI.ApplyPatchCreateFileOperationParam, Access.internal);
+  @@clientName(
+    OpenAI.ApplyPatchCreateFileOperationParam,
+    "InternalApplyPatchCreateFileOperationParam"
+  );
+
+  @@access(OpenAI.OutputItemOutputMessage, Access.internal);
+  @@clientName(
+    OpenAI.OutputItemOutputMessage,
+    "InternalOutputItemOutputMessage"
+  );
+
+  @@access(OpenAI.ItemComputerToolCall, Access.internal);
+  @@clientName(OpenAI.ItemComputerToolCall, "InternalItemComputerToolCall");
+
+  @@access(OpenAI.FileSearchToolCall, Access.internal);
+  @@clientName(OpenAI.FileSearchToolCall, "InternalFileSearchToolCall");
+
+  @@access(OpenAI.OutputItemFileSearchToolCall, Access.internal);
+  @@clientName(
+    OpenAI.OutputItemFileSearchToolCall,
+    "InternalOutputItemFileSearchToolCall"
+  );
+
+  @@access(OpenAI.ItemMcpListTools, Access.internal);
+  @@clientName(OpenAI.ItemMcpListTools, "InternalItemMcpListTools");
+
+  @@access(OpenAI.MessageContent, Access.internal);
+  @@clientName(OpenAI.MessageContent, "InternalMessageContent");
+
+  @@access(OpenAI.OutputMessageContent, Access.internal);
+  @@clientName(OpenAI.OutputMessageContent, "InternalOutputMessageContent");
+
+  @@access(OpenAI.InputImageContent, Access.internal);
+  @@clientName(OpenAI.InputImageContent, "InternalInputImageContent");
+
+  @@access(OpenAI.InputFileContent, Access.internal);
+  @@clientName(OpenAI.InputFileContent, "InternalInputFileContent");
+
+  @@access(OpenAI.InputFileContentParam, Access.internal);
+  @@clientName(OpenAI.InputFileContentParam, "InternalInputFileContentParam");
+
+  @@access(OpenAI.InputImageContentParamAutoParam, Access.internal);
+  @@clientName(
+    OpenAI.InputImageContentParamAutoParam,
+    "InternalInputImageContentParamAutoParam"
+  );
+
+  @@access(OpenAI.InputTextContent, Access.internal);
+  @@clientName(OpenAI.InputTextContent, "InternalInputTextContent");
+
+  @@access(OpenAI.InputTextContentParam, Access.internal);
+  @@clientName(OpenAI.InputTextContentParam, "InternalInputTextContentParam");
+
+  @@access(OpenAI.OutputItemMcpListTools, Access.internal);
+  @@clientName(OpenAI.OutputItemMcpListTools, "InternalOutputItemMcpListTools");
+
+  @@access(OpenAI.OutputMessageContentOutputTextContent, Access.internal);
+  @@clientName(
+    OpenAI.OutputMessageContentOutputTextContent,
+    "InternalOutputMessageContentOutputTextContent"
+  );
+
+  @@access(OpenAI.OutputContentOutputTextContent, Access.internal);
+  @@clientName(
+    OpenAI.OutputContentOutputTextContent,
+    "InternalOutputContentOutputTextContent"
+  );
+
+  @@access(OpenAI.OutputItemComputerToolCall, Access.internal);
+  @@clientName(
+    OpenAI.OutputItemComputerToolCall,
+    "InternalOutputItemComputerToolCall"
+  );
+
+  @@access(OpenAI.OutputItemCodeInterpreterToolCall, Access.internal);
+  @@clientName(
+    OpenAI.OutputItemCodeInterpreterToolCall,
+    "InternalOutputItemCodeInterpreterToolCall"
+  );
+
+  @@access(OpenAI.ItemOutputMessage, Access.internal);
+  @@clientName(OpenAI.ItemOutputMessage, "InternalItemMessage");
+
+  @@access(OpenAI.FunctionAndCustomToolCallOutput, Access.internal);
+  @@clientName(
+    OpenAI.FunctionAndCustomToolCallOutput,
+    "InternalFunctionAndCustomToolCallOutput"
+  );
+
+  @@access(OpenAI.OutputItemMcpToolCall, Access.internal);
+  @@clientName(OpenAI.OutputItemMcpToolCall, "InternalOutputItemMcpToolCall");
+
+  @@access(OpenAI.ItemResourceMcpApprovalResponseResource, Access.internal);
+  @@clientName(
+    OpenAI.ItemResourceMcpApprovalResponseResource,
+    "InternalOutputItemMcpApprovalResponseResource"
+  );
+
+  @@access(OpenAI.OutputItemMcpApprovalRequest, Access.internal);
+  @@clientName(
+    OpenAI.OutputItemMcpApprovalRequest,
+    "InternalOutputItemMcpApprovalRequest"
+  );
+
+  @@access(OpenAI.OutputItemFunctionShellCallOutput, Access.internal);
+  @@clientName(
+    OpenAI.OutputItemFunctionShellCallOutput,
+    "InternalOutputItemFunctionShellCallOutput"
+  );
+
+  @@access(OpenAI.OutputItemFunctionShellCall, Access.internal);
+  @@clientName(
+    OpenAI.OutputItemFunctionShellCall,
+    "InternalOutputItemFunctionShellCall"
+  );
+
+  @@access(OpenAI.ItemLocalShellToolCallOutput, Access.internal);
+  @@clientName(
+    OpenAI.ItemLocalShellToolCallOutput,
+    "InternalOutputItemLocalShellToolCallOutput"
+  );
+
+  @@access(OpenAI.OutputItemLocalShellToolCall, Access.internal);
+  @@clientName(
+    OpenAI.OutputItemLocalShellToolCall,
+    "InternalOutputItemLocalShellToolCall"
+  );
+
+  @@access(OpenAI.OutputItemImageGenToolCall, Access.internal);
+  @@clientName(
+    OpenAI.OutputItemImageGenToolCall,
+    "InternalOutputItemImageGenToolCall"
+  );
+
+  @@access(OpenAI.FunctionToolCallOutput, Access.internal);
+  @@clientName(
+    OpenAI.FunctionToolCallOutput,
+    "InternalOutputItemFunctionToolCallOutput"
+  );
+
+  @@access(OpenAI.OutputItemFunctionToolCall, Access.internal);
+  @@clientName(
+    OpenAI.OutputItemFunctionToolCall,
+    "InternalOutputItemFunctionToolCall"
+  );
+
+  @@access(OpenAI.OutputItemWebSearchToolCall, Access.internal);
+  @@clientName(
+    OpenAI.OutputItemWebSearchToolCall,
+    "InternalOutputItemWebSearchToolCall"
+  );
+
+  @@access(OpenAI.ItemResourceComputerToolCallOutput, Access.internal);
+  @@clientName(
+    OpenAI.ItemResourceComputerToolCallOutput,
+    "InternalOutputItemComputerToolCallOutput"
+  );
+
+  @@access(OpenAI.ItemCustomToolCallOutput, Access.internal);
+  @@clientName(
+    OpenAI.ItemCustomToolCallOutput,
+    "InternalOutputItemCustomToolCallOutput"
+  );
+
+  @@access(OpenAI.OutputItemReasoningItem, Access.internal);
+  @@clientName(
+    OpenAI.OutputItemReasoningItem,
+    "InternalOutputItemReasoningItem"
+  );
+
   @@clientName(MemoryItem, "MemoryOutputItem");
+
+  @@access(OpenAI.SummaryTextContent, Access.internal);
+  @@clientName(OpenAI.SummaryTextContent, "InternalSummaryTextObject");
+
+  @@access(OpenAI.OutputItemCompactionBody, Access.internal);
+  @@clientName(
+    OpenAI.OutputItemCompactionBody,
+    "InternalOutputItemCompactionBody"
+  );
+
+  @@access(OpenAI.OutputItemCustomToolCallResource, Access.internal);
+  @@clientName(
+    OpenAI.OutputItemCustomToolCallResource,
+    "InternalOutputItemCustomToolCallResource"
+  );
 
   @@clientName(_AgentItemType.a2a_preview_call, "A2APreviewCall ");
   @@clientName(_AgentItemType.a2a_preview_call_output, "A2APreviewCallOutput");
+
+  @@access(OpenAI.WebSearchActionFind, Access.internal);
+  @@clientName(OpenAI.WebSearchActionFind, "InternalWebSearchActionFind");
+
+  @@access(OpenAI.WebSearchActionOpenPage, Access.internal);
+  @@clientName(
+    OpenAI.WebSearchActionOpenPage,
+    "InternalWebSearchActionOpenPage"
+  );
+
+  @@access(OpenAI.WebSearchActionSearch, Access.internal);
+  @@clientName(OpenAI.WebSearchActionSearch, "InternalWebSearchActionSearch");
+
+  @@access(OpenAI.CodeInterpreterOutputImage, Access.internal);
+  @@clientName(
+    OpenAI.CodeInterpreterOutputImage,
+    "InternalCodeInterpreterOutputImage"
+  );
+
+  @@access(OpenAI.CodeInterpreterOutputLogs, Access.internal);
+  @@clientName(
+    OpenAI.CodeInterpreterOutputLogs,
+    "InternalCodeInterpreterOutputLogs"
+  );
+
+  @@access(OpenAI.ComparisonFilter, Access.internal);
+  @@clientName(OpenAI.ComparisonFilter, "InternalComparisonFilter");
+
+  @@access(OpenAI.CompoundFilter, Access.internal);
+  @@clientName(OpenAI.CompoundFilter, "InternalCompoundFilter");
+
+  @@access(OpenAI.ComputerUsePreviewTool, Access.internal);
+  @@clientName(OpenAI.ComputerUsePreviewTool, "InternalComputerUsePreviewTool");
+
+  @@access(OpenAI.FileSearchTool, Access.internal);
+  @@clientName(OpenAI.FileSearchTool, "InternalFileSearchTool");
+
+  @@access(OpenAI.ToolChoiceParam, Access.internal);
+  @@clientName(OpenAI.ToolChoiceParam, "InternalToolChoiceParam");
 
   // Emit Azure-specific OutputItem subtypes as public classes
   @@access(BingGroundingToolCall, Access.public);
@@ -905,6 +569,17 @@ namespace Azure.AI.Projects {
   @@clientName(AzureFunctionBinding.type, "Kind");
   @@access(AzureFunctionBinding.type, Access.internal);
   @@clientName(BingGroundingSearchConfiguration.set_lang, "Language");
+  @@clientName(OpenAI.DetailEnum, "ImageDetailLevel");
+  @@clientName(OpenAI.ComputerScreenshotImage.image_url, "ImageUri");
+  @@clientName(OpenAI.ComputerScreenshotImage.type, "ImageKind");
+  @@clientName(OpenAI.AutoCodeInterpreterToolParam.type, "Kind");
+  @@access(OpenAI.AutoCodeInterpreterToolParam.type, Access.internal);
+  @@clientName(OpenAI.CustomToolParam.defer_loading, "ShouldDeferLoading");
+  @@clientName(OpenAI.FunctionToolParam.defer_loading, "ShouldDeferLoading");
+  @@clientName(OpenAI.FunctionToolParam.strict, "IsStrict");
+  @@access(OpenAI.FunctionToolParam.type, Access.internal);
+  @@access(OpenAI.InlineSkillSourceParam.type, Access.internal);
+  @@clientName(OpenAI.MCPToolFilter.read_only, "IsReadOnly");
 
   @@clientName(MemorySearchPreviewTool.update_delay, "UpdateDelayInSeconds");
   @@clientName(MemorySearchOptions, "MemorySearchResultOptions");
@@ -950,49 +625,11 @@ namespace Azure.AI.Projects {
     }
   );
 
-  @@alternateType(
-    OpenAI.OutputItem,
-    {
-      identity: "OpenAI.Responses.ResponseItem",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
+  @@usage(OpenAI.OutputItem, Usage.input | Usage.output);
+  @@access(OpenAI.OutputItem, Access.public);
+  @@clientName(OpenAI.OutputItem, "AgentResponseItem");
 
-  // Memory Stores search/update operations are the only Foundry operations that define
-  // OpenAI.InputItem as inputs, which otherwise pulls in the entire OpenAI input-item
-  // hierarchy (InputItem -> InputItemComputerToolCall -> ComputerAction -> ClickParam, etc.).
-  // Map it to the OpenAI .NET library's ResponseItem, consistent with OutputItem above.
-  @@alternateType(
-    OpenAI.InputItem,
-    {
-      identity: "OpenAI.Responses.ResponseItem",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-  @@alternateType(
-    OpenAI.InputItemType,
-    {
-      identity: "OpenAI.Responses.ResponseItemKind",
-      package: "OpenAI",
-      minVersion: "2.12.0",
-    },
-    "csharp"
-  );
-
-  // Just disappear it.
-  @@alternateType(
-    OpenAI.EasyInputMessage,
-    {
-      identity: "System.Object",
-    },
-    "csharp"
-  );
-
-  //@@usage(OpenAI.CreateResponseStreamingResponse, Usage.json);
+  @@usage(OpenAI.CreateResponseStreamingResponse, Usage.json);
 
   @@usage(AgentId, Usage.output);
   @@access(AgentId, Access.public);
