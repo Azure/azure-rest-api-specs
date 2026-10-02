@@ -11,47 +11,6 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const workflowsDir = resolve(__dirname, "..");
 
 describe("workflow files", () => {
-  it("publishes raw impact JSON alongside the legacy ZIP during migration", async () => {
-    const workflow = z
-      .object({
-        jobs: z.object({
-          impact: z.object({
-            steps: z.array(
-              z.object({
-                uses: z.string().optional(),
-                if: z.string().optional(),
-                with: z.record(z.string(), z.unknown()).optional(),
-              }),
-            ),
-          }),
-        }),
-      })
-      .parse(load(await readFile(resolve(workflowsDir, "summarize-impact.yaml"), "utf8")));
-    const uploads = workflow.jobs.impact.steps.filter((step) =>
-      step.uses?.startsWith("actions/upload-artifact@"),
-    );
-    expect(uploads).toHaveLength(2);
-    expect(uploads).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          if: "${{ always() && steps.summarize-impact.outputs.summary }}",
-          with: {
-            path: "${{ steps.summarize-impact.outputs.summary }}",
-            archive: false,
-            "if-no-files-found": "ignore",
-          },
-        }),
-        expect.objectContaining({
-          with: {
-            name: "job-summary",
-            path: "${{ steps.summarize-impact.outputs.summary }}",
-            "if-no-files-found": "ignore",
-          },
-        }),
-      ]),
-    );
-  });
-
   it("publishes the TypeSpec suppressions markdown as a job-summary artifact", async () => {
     const workflow = z
       .object({

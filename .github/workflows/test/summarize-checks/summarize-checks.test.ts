@@ -1272,7 +1272,11 @@ describe("Summarize Checks Unit Tests", () => {
     };
     const summaryJson = JSON.stringify(impactAssessment);
 
-    function mockArtifactDownload(content: string | Uint8Array, name = "summary.json") {
+    function mockArtifactDownload(
+      content: string | Uint8Array,
+      name = "summary.json",
+      sizeInBytes = Buffer.byteLength(content),
+    ) {
       const github = createMockGithub();
       github.rest.actions.downloadArtifact.mockImplementation(() =>
         Promise.resolve({
@@ -1282,7 +1286,7 @@ describe("Summarize Checks Unit Tests", () => {
       github.rest.actions.listWorkflowRunArtifacts.mockImplementation((params: { name?: string }) =>
         Promise.resolve({
           data: {
-            artifacts: params.name === name ? [{ id: 1, name }] : [],
+            artifacts: params.name === name ? [{ id: 1, name, size_in_bytes: sizeInBytes }] : [],
           },
         }),
       );
@@ -1377,18 +1381,41 @@ describe("Summarize Checks Unit Tests", () => {
       },
     );
 
-    it.each([0, 1])("enforces the raw JSON byte limit with %i extra bytes", async (extraBytes) => {
-      const json =
-        summaryJson + " ".repeat(16 * 1024 * 1024 + extraBytes - Buffer.byteLength(summaryJson));
-      const github = mockArtifactDownload(json);
-      const result = getImpactAssessment(github, mockCore, "test-owner", "test-repo", 123);
+    it.each([0, 1])(
+      "checks the advertised size before downloading with %i extra bytes",
+      async (extraBytes) => {
+        const github = mockArtifactDownload(
+          summaryJson,
+          "summary.json",
+          16 * 1024 * 1024 + extraBytes,
+        );
+        const result = getImpactAssessment(github, mockCore, "test-owner", "test-repo", 123);
 
-      if (extraBytes === 0) {
-        await expect(result).resolves.toEqual(impactAssessment);
-      } else {
-        await expect(result).rejects.toThrow("summary.json in artifact ID: 1 exceeds 16 MiB.");
-      }
-    });
+        if (extraBytes === 0) {
+          await expect(result).resolves.toEqual(impactAssessment);
+          expect(github.rest.actions.downloadArtifact).toHaveBeenCalledTimes(1);
+        } else {
+          await expect(result).rejects.toThrow("summary.json in artifact ID: 1 exceeds 16 MiB.");
+          expect(github.rest.actions.downloadArtifact).not.toHaveBeenCalled();
+        }
+      },
+    );
+
+    it.each([0, 1])(
+      "checks actual bytes when metadata understates the size with %i extra bytes",
+      async (extraBytes) => {
+        const json =
+          summaryJson + " ".repeat(16 * 1024 * 1024 + extraBytes - Buffer.byteLength(summaryJson));
+        const github = mockArtifactDownload(json, "summary.json", Buffer.byteLength(summaryJson));
+        const result = getImpactAssessment(github, mockCore, "test-owner", "test-repo", 123);
+
+        if (extraBytes === 0) {
+          await expect(result).resolves.toEqual(impactAssessment);
+        } else {
+          await expect(result).rejects.toThrow("summary.json in artifact ID: 1 exceeds 16 MiB.");
+        }
+      },
+    );
 
     it("rejects a missing download stream", async () => {
       const github = mockArtifactDownload(summaryJson);

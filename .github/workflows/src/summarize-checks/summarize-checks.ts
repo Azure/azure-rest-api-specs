@@ -1123,6 +1123,13 @@ export async function getImpactAssessment(
     );
   }
 
+  if (
+    jobSummaryArtifact.name === "summary.json" &&
+    jobSummaryArtifact.size_in_bytes > MAX_IMPACT_ASSESSMENT_BYTES
+  ) {
+    throw new Error(`summary.json in artifact ID: ${jobSummaryArtifact.id} exceeds 16 MiB.`);
+  }
+
   const download = await github.rest.actions.downloadArtifact({
     owner,
     repo,
