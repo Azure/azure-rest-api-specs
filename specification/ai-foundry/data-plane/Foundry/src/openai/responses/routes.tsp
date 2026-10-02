@@ -27,7 +27,8 @@ interface Responses {
   createResponse is OpenAIOperation<
     OpenAI.CreateResponse &
       UserDelegationHeader &
-      SessionAffinityRequestHeader,
+      SessionAffinityRequestHeader &
+      CostContextRequestHeader,
     | (AgentSessionIdResponseHeader & OpenAI.Response)
     | (AgentSessionIdResponseHeader &
         SseResponseOf<OpenAI.CreateResponseStreamingResponse>)
