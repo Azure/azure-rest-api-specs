@@ -16,7 +16,7 @@ configuration:
           - isPullRequest
           - isOpen
           - noActivitySince:
-              days: 1461
+              days: 365
         actions:
           - closeIssue
           - addReply:
@@ -44,22 +44,6 @@ configuration:
                 Your PR has had no activity for 14 days and is marked as stale. If no further updates are made within 14 days, this PR will automatically be closed.
                 To keep this PR active, please leave a comment as the PR author or remove the `no-recent-activity` label.
 
-      - description: Close stale PRs older than 3 months after 5 days of inactivity
-        frequencies:
-          - daily:
-              time: 08:00
-        filters:
-          - isPullRequest
-          - isOpen
-          - hasLabel:
-              label: no-recent-activity
-          - created:
-              before: 90
-          - noActivitySince:
-              days: 5
-        actions:
-          - closeIssue
-
       - description: Close PRs that have been stale for 14 more days (28 days total)
         frequencies:
           - daily:
@@ -79,6 +63,18 @@ configuration:
                 This PR has been closed since it had no activity for 28 days. If you still need this change, please reopen the PR and @mention the assignee for review.
 
     eventResponderTasks:
+      - description: Remove the stale label when the PR author updates the PR
+        if:
+          - payloadType: Pull_Request
+          - isActivitySender:
+              issueAuthor: true
+          - hasLabel:
+              label: no-recent-activity
+          - isOpen
+        then:
+          - removeLabel:
+              label: no-recent-activity
+
       - description: Remove the stale label when the PR author comments
         if:
           - payloadType: Issue_Comment
