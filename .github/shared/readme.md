@@ -23,6 +23,12 @@ import { mapAsync } from "@azure-tools/specs-shared/array";
 > The list below is generated from the `export` statements under [`src`](./src). When in doubt, read
 > the TypeScript declarations and documentation on the function/class itself.
 
+### `api-version` — API version ordering
+
+- `parseApiVersion(version)` — parses `YYYY-MM-DD` and `YYYY-MM-DD-preview` versions.
+- `compareApiVersionsAsc(left, right)` — compares dates oldest first, with preview before stable
+  on the same date. Other version formats use lexical ordering.
+
 ### `array` — async array helpers
 
 - `filterAsync(array, asyncPredicate)` — `Array.prototype.filter` with an async predicate.

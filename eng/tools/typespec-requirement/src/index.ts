@@ -1,7 +1,9 @@
 import { appendFile, readdir, readFile } from "node:fs/promises";
-import { relative, resolve, sep } from "node:path";
+import { basename, relative, resolve, sep } from "node:path";
+import { compareApiVersionsAsc } from "@azure-tools/specs-shared/api-version";
 import { getChangedFiles } from "@azure-tools/specs-shared/changed-files";
 import { getSuppressions } from "@azure-tools/suppressions";
+import { findFirstTypeSpecVersion, isTypeSpecGenerated } from "./migration.ts";
 
 type SpecType = "data-plane" | "resource-manager";
 
@@ -182,6 +184,8 @@ function getServiceDirectory(fullPath: string, servicePath: string): string | un
 
 async function checkFiles(options: Options): Promise<{ brownfield: boolean; exitCode: number }> {
   const pathsWithErrors: string[] = [];
+  let hasMigrationErrors = false;
+  const firstTypeSpecVersions = new Map<string, string | undefined>();
   let brownfield = false;
   const filesToCheck = await getFilesToCheck(options);
 
@@ -191,6 +195,33 @@ async function checkFiles(options: Options): Promise<{ brownfield: boolean; exit
 
   for (const { fullPath, path: file } of filesToCheck) {
     logInfo(`Checking ${file}`);
+
+    const generated = isTypeSpecGenerated(await readFile(fullPath, "utf8"), file, logWarning);
+    if (!generated) {
+      const serviceDirectory = resolve(fullPath, "../../..");
+      const version = basename(resolve(fullPath, ".."));
+      if (!firstTypeSpecVersions.has(serviceDirectory)) {
+        firstTypeSpecVersions.set(
+          serviceDirectory,
+          await findFirstTypeSpecVersion(
+            serviceDirectory,
+            logWarning,
+            options.checkAllUnder ? undefined : { repoRoot, commitish: options.baseCommitish },
+          ),
+        );
+      }
+      const firstVersion = firstTypeSpecVersions.get(serviceDirectory);
+      if (firstVersion !== undefined && compareApiVersionsAsc(version, firstVersion) >= 0) {
+        logErrorForFile(
+          file,
+          `API version '${version}' must use TypeSpec because this service contains TypeSpec-generated Swagger starting at '${firstVersion}'. ` +
+            "Generate this Swagger from TypeSpec; TypeSpecRequirement suppressions cannot bypass this requirement.",
+        );
+        logJobFailure();
+        hasMigrationErrors = true;
+        continue;
+      }
+    }
 
     const suppressions = await getSuppressions("TypeSpecRequirement", fullPath);
     const suppression = suppressions[0];
@@ -210,24 +241,7 @@ async function checkFiles(options: Options): Promise<{ brownfield: boolean; exit
       continue;
     }
 
-    let jsonContent: unknown;
-    try {
-      jsonContent = JSON.parse(await readFile(fullPath, "utf8"));
-    } catch (error) {
-      logWarning("  OpenAPI cannot be parsed as JSON, so assuming not generated from TypeSpec");
-      logWarning(`    ${error instanceof Error ? error.message : String(error)}`);
-    }
-
-    const info =
-      jsonContent !== null && typeof jsonContent === "object"
-        ? (jsonContent as Record<string, unknown>).info
-        : undefined;
-    const generatedMarker =
-      info !== null && typeof info === "object"
-        ? (info as Record<string, unknown>)["x-typespec-generated"]
-        : undefined;
-
-    if (generatedMarker !== null && generatedMarker !== undefined) {
+    if (generated) {
       logInfo("  OpenAPI was generated from TypeSpec (contains '/info/x-typespec-generated')");
       const rpFolder = /^specification\/[^/]+\//.exec(file)?.[0];
       if (!rpFolder) {
@@ -322,7 +336,7 @@ async function checkFiles(options: Options): Promise<{ brownfield: boolean; exit
     return { brownfield, exitCode: 1 };
   }
 
-  return { brownfield, exitCode: 0 };
+  return { brownfield, exitCode: hasMigrationErrors ? 1 : 0 };
 }
 
 function parseArgs(args: string[]): Options {

@@ -52,6 +52,18 @@ Example `suppressions.yaml`:
   paths: [Automation.Management]
 ```
 
+`TypeSpecRequirement` suppressions cannot permit handwritten Swagger at or after the first
+TypeSpec-generated API version of the same service. The check compares versions across `preview`
+and `stable` under the directory immediately containing those folders, independently of other
+services and API planes. Preview precedes stable on the same date; non-date versions use lexical
+ordering. It uses generated Swagger in both the current checkout and the PR's base commit, so
+deleting or rewriting the generated files does not reset the migration boundary.
+Local `--check-all-under` scans use only the current checkout.
+
+Versions before that boundary retain their existing behavior: existing handwritten versions warn,
+and new handwritten versions require a version-specific suppression. Suppressions for other tools
+are unaffected. Generate the affected Swagger from TypeSpec rather than adding a suppression.
+
 ### Command line
 
 Build the package (see [contributing](#folder-structure--contributing)), then query suppressions
