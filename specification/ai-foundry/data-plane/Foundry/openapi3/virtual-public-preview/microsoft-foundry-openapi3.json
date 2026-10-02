@@ -95446,8 +95446,7 @@
       "SipTelephonyBinding": {
         "type": "object",
         "required": [
-          "provider",
-          "incoming_call_url"
+          "provider"
         ],
         "properties": {
           "provider": {
@@ -95477,11 +95476,6 @@
             },
             "maxItems": 64,
             "description": "Allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. Omission or an empty array indicates no caller-number restriction."
-          },
-          "incoming_call_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The service-generated inbound SIP URI."
           }
         },
         "allOf": [
@@ -95499,8 +95493,7 @@
       "SipTelephonyBindingListItem": {
         "type": "object",
         "required": [
-          "provider",
-          "incoming_call_url"
+          "provider"
         ],
         "properties": {
           "provider": {
@@ -95530,11 +95523,6 @@
             },
             "maxItems": 64,
             "description": "Allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. Omission or an empty array indicates no caller-number restriction."
-          },
-          "incoming_call_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The service-generated inbound SIP URI."
           }
         },
         "allOf": [
@@ -96333,16 +96321,10 @@
       "TeamsPhoneExtensibilityTelephonyBinding": {
         "type": "object",
         "required": [
-          "incoming_call_url",
           "provider",
           "resource_account_object_id"
         ],
         "properties": {
-          "incoming_call_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The service-generated webhook URL to configure with the telephony provider."
-          },
           "provider": {
             "type": "string",
             "enum": [
@@ -96375,16 +96357,10 @@
       "TeamsPhoneExtensibilityTelephonyBindingListItem": {
         "type": "object",
         "required": [
-          "incoming_call_url",
           "provider",
           "resource_account_object_id"
         ],
         "properties": {
-          "incoming_call_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The service-generated webhook URL to configure with the telephony provider."
-          },
           "provider": {
             "type": "string",
             "enum": [
@@ -96587,7 +96563,8 @@
           "id",
           "provider",
           "connection_name",
-          "status"
+          "status",
+          "incoming_call_url"
         ],
         "properties": {
           "id": {
@@ -96612,6 +96589,11 @@
           "status": {
             "$ref": "#/components/schemas/TelephonyBindingStatus",
             "description": "The lifecycle status."
+          },
+          "incoming_call_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The service-generated address for receiving incoming calls. This is an HTTPS webhook URL for webhook-based providers and a SIP URI for SIP."
           }
         },
         "discriminator": {
@@ -96647,6 +96629,7 @@
           "provider",
           "connection_name",
           "status",
+          "incoming_call_url",
           "etag"
         ],
         "properties": {
@@ -96672,6 +96655,11 @@
           "status": {
             "$ref": "#/components/schemas/TelephonyBindingStatus",
             "description": "The lifecycle status."
+          },
+          "incoming_call_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The service-generated address for receiving incoming calls. This is an HTTPS webhook URL for webhook-based providers and a SIP URI for SIP."
           },
           "etag": {
             "$ref": "#/components/schemas/Azure.Core.eTag",
@@ -98939,16 +98927,10 @@
       "TwilioTelephonyBinding": {
         "type": "object",
         "required": [
-          "incoming_call_url",
           "provider",
           "phone_number"
         ],
         "properties": {
-          "incoming_call_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The service-generated webhook URL to configure with the telephony provider."
-          },
           "provider": {
             "type": "string",
             "enum": [
@@ -98977,16 +98959,10 @@
       "TwilioTelephonyBindingListItem": {
         "type": "object",
         "required": [
-          "incoming_call_url",
           "provider",
           "phone_number"
         ],
         "properties": {
-          "incoming_call_url": {
-            "type": "string",
-            "format": "uri",
-            "description": "The service-generated webhook URL to configure with the telephony provider."
-          },
           "provider": {
             "type": "string",
             "enum": [

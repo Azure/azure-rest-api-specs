@@ -667,14 +667,14 @@ model TelephonyBinding {
 
   @doc("The lifecycle status.")
   status: TelephonyBindingStatus;
+
+  @doc("The service-generated address for receiving incoming calls. This is an HTTPS webhook URL for webhook-based providers and a SIP URI for SIP.")
+  incoming_call_url: url;
 }
 
 @doc("A Microsoft Teams Phone extensibility binding owned by a voice agent.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TeamsPhoneExtensibilityTelephonyBinding extends TelephonyBinding {
-  @doc("The service-generated webhook URL to configure with the telephony provider.")
-  incoming_call_url: url;
-
   @doc("The Microsoft Teams Phone extensibility provider.")
   provider: TelephonyProvider.teams_phone_extensibility;
 
@@ -689,9 +689,6 @@ model TeamsPhoneExtensibilityTelephonyBinding extends TelephonyBinding {
 @doc("A Twilio binding owned by a voice agent.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TwilioTelephonyBinding extends TelephonyBinding {
-  @doc("The service-generated webhook URL to configure with the telephony provider.")
-  incoming_call_url: url;
-
   @doc("The Twilio provider.")
   provider: TelephonyProvider.twilio;
 
@@ -717,9 +714,6 @@ model SipTelephonyBinding extends TelephonyBinding {
   @doc("Allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. Omission or an empty array indicates no caller-number restriction.")
   @maxItems(64)
   allowed_calling_numbers?: string[];
-
-  @doc("The service-generated inbound SIP URI.")
-  incoming_call_url: url;
 }
 
 @doc("A telephony binding returned in a list, including its entity tag.")
@@ -744,6 +738,9 @@ model TelephonyBindingListItem {
   @doc("The lifecycle status.")
   status: TelephonyBindingStatus;
 
+  @doc("The service-generated address for receiving incoming calls. This is an HTTPS webhook URL for webhook-based providers and a SIP URI for SIP.")
+  incoming_call_url: url;
+
   @doc("The entity tag to send in the `If-Match` header when updating or deleting this binding.")
   @visibility(Lifecycle.Read)
   etag: Azure.Core.eTag;
@@ -753,9 +750,6 @@ model TelephonyBindingListItem {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TeamsPhoneExtensibilityTelephonyBindingListItem
   extends TelephonyBindingListItem {
-  @doc("The service-generated webhook URL to configure with the telephony provider.")
-  incoming_call_url: url;
-
   @doc("The Microsoft Teams Phone extensibility provider.")
   provider: TelephonyProvider.teams_phone_extensibility;
 
@@ -770,9 +764,6 @@ model TeamsPhoneExtensibilityTelephonyBindingListItem
 @doc("A Twilio binding returned in a list, including its entity tag.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 model TwilioTelephonyBindingListItem extends TelephonyBindingListItem {
-  @doc("The service-generated webhook URL to configure with the telephony provider.")
-  incoming_call_url: url;
-
   @doc("The Twilio provider.")
   provider: TelephonyProvider.twilio;
 
@@ -798,9 +789,6 @@ model SipTelephonyBindingListItem extends TelephonyBindingListItem {
   @doc("Allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. Omission or an empty array indicates no caller-number restriction.")
   @maxItems(64)
   allowed_calling_numbers?: string[];
-
-  @doc("The service-generated inbound SIP URI.")
-  incoming_call_url: url;
 }
 
 /** A telephony binding response with its entity tag. */
