@@ -946,6 +946,7 @@ describe("label workflow contract", () => {
       uses: z.string().optional(),
       if: z.string().optional(),
       with: z.record(z.string(), z.unknown()).optional(),
+      env: z.record(z.string(), z.string()).optional(),
     });
     const job = z.object({
       if: z.string(),
@@ -993,8 +994,52 @@ describe("label workflow contract", () => {
     expect(apply).toBeGreaterThan(audit);
     expect(steps[audit].with?.["if-no-files-found"]).toBe("error");
     expect(steps[apply].if).toBeUndefined();
-    expect(steps.find((s) => s.id === "checkout")?.with?.ref).toBe(
-      "${{ github.event.repository.default_branch }}",
+    const checkout = steps.find((s) => s.id === "checkout");
+    expect(checkout).toMatchObject({
+      uses: "$/.github/actions/checkout",
+      with: {
+        ref: "${{ github.event.repository.default_branch }}",
+        "sparse-checkout": ".github",
+      },
+    });
+    expect(workflow.jobs.validate.steps[0]).toMatchObject({
+      uses: "$/.github/actions/checkout",
+      with: { "sparse-checkout": ".github" },
+    });
+    expect(workflow.jobs.validate.steps[0].with?.ref).toBeUndefined();
+    for (const job of Object.values(workflow.jobs)) {
+      expect(job.steps.some((s) => s.uses === "$/.github/actions/install-deps-github-script")).toBe(
+        true,
+      );
+      for (const { uses } of job.steps) {
+        if (uses)
+          expect(uses).toMatch(/^(?:\$\/\.github\/actions\/[\w-]+|actions\/[\w-]+@[0-9a-f]{40})$/);
+      }
+    }
+    const checkoutAction = z
+      .object({
+        inputs: z.record(z.string(), z.object({ default: z.string() })),
+        outputs: z.object({ commit: z.object({ value: z.string() }) }),
+        runs: z.object({ steps: z.array(step) }),
+      })
+      .parse(
+        parse(
+          await readFile(new URL("../../actions/checkout/action.yaml", import.meta.url), "utf8"),
+        ),
+      );
+    const upstreamCheckout = checkoutAction.runs.steps.find((s) =>
+      s.uses?.startsWith("actions/checkout@"),
+    );
+    expect(upstreamCheckout?.id).toBe("checkout");
+    expect(upstreamCheckout?.uses).toMatch(/^actions\/checkout@[0-9a-f]{40}$/);
+    expect(upstreamCheckout?.with?.ref).toBe("${{ inputs.ref }}");
+    expect(upstreamCheckout?.with?.["persist-credentials"]).toBe(
+      "${{ inputs.persist-credentials }}",
+    );
+    expect(checkoutAction.inputs["persist-credentials"].default).toBe("false");
+    expect(checkoutAction.outputs.commit.value).toBe("${{ steps.checkout.outputs.commit }}");
+    expect(steps.find((s) => s.id === "prepare")?.env?.SOURCE_SHA).toBe(
+      "${{ steps.checkout.outputs.commit }}",
     );
   });
 });
