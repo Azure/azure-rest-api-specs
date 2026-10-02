@@ -11054,11 +11054,11 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/EvaluatorGenerationJobCreate"
+                "$ref": "#/components/schemas/EvaluatorGenerationInputs"
               }
             }
           },
-          "description": "The job to create."
+          "description": "The evaluator generation job inputs to create."
         }
       },
       "get": {
@@ -40953,6 +40953,9 @@
         "required": [
           "id",
           "status",
+          "sources",
+          "model",
+          "evaluator_name",
           "created_at"
         ],
         "properties": {
@@ -40960,10 +40963,6 @@
             "type": "string",
             "description": "Server-assigned unique identifier.",
             "readOnly": true
-          },
-          "inputs": {
-            "$ref": "#/components/schemas/EvaluatorGenerationInputs",
-            "description": "Caller-supplied inputs."
           },
           "result": {
             "$ref": "#/components/schemas/EvaluatorVersion",
@@ -40979,6 +40978,32 @@
             "$ref": "#/components/schemas/OpenAI.Error",
             "description": "Error details — populated only on failure.",
             "readOnly": true
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EvaluatorGenerationJobSource"
+            },
+            "description": "Source materials for generation — agent descriptions, prompts, traces, or datasets. Each entry is an `EvaluatorGenerationJobSource` variant discriminated by `type`."
+          },
+          "model": {
+            "type": "string",
+            "description": "The LLM model to use for rubric generation (e.g., 'gpt-4o'). Required — users must provide their own model rather than relying on service-owned capacity."
+          },
+          "evaluator_name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256,
+            "pattern": "^[A-Za-z0-9_.~-]+$",
+            "description": "The evaluator name (immutable identifier). 1-256 characters; allowed characters are ASCII letters, digits, underscore (`_`), period (`.`), tilde (`~`), and hyphen (`-`). The prefix `builtin.` is reserved for system-managed evaluators and is rejected by the service. If an evaluator with this name already exists in the project (and is rubric-subtype), the service creates a new version under the same name and uses the prior version's `dimensions` as context for incremental improvement (foundation of the post-//build adaptive loop). Old versions remain queryable via `get_version(name, version)`. If the existing evaluator is not a rubric-subtype evaluator (built-in, prompt-based, code-based), the request is rejected with `400 Bad Request`."
+          },
+          "evaluator_display_name": {
+            "type": "string",
+            "description": "Optional human-friendly display name for the resulting evaluator. Surfaced as `EvaluatorVersion.display_name` on the persisted evaluator. When omitted, the service uses `evaluator_name` as the display name. The `evaluator_` prefix disambiguates this from the immutable `evaluator_name` identifier."
+          },
+          "evaluator_description": {
+            "type": "string",
+            "description": "Optional human-friendly description for the resulting evaluator. Surfaced as `EvaluatorVersion.description` on the persisted evaluator. Typically collected from the UI alongside `evaluator_display_name`. The `evaluator_` prefix disambiguates this from any other description fields on related models."
           },
           "created_at": {
             "$ref": "#/components/schemas/FoundryTimestamp",
@@ -41002,16 +41027,6 @@
             },
             "description": "Non-fatal input-quality advisories produced by the generation pipeline. Read-only; service-generated; populated only on terminal jobs when advisories fired. Omitted when generation was clean. Cleared when a subsequent `PATCH` to the paired `EvaluatorVersion.definition` invalidates the advisories.",
             "readOnly": true
-          }
-        },
-        "description": "Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion."
-      },
-      "EvaluatorGenerationJobCreate": {
-        "type": "object",
-        "properties": {
-          "inputs": {
-            "$ref": "#/components/schemas/EvaluatorGenerationInputs",
-            "description": "Caller-supplied inputs."
           }
         },
         "description": "Evaluator Generation Job resource — a long-running job that generates rubric-based evaluator definitions from source materials. On success, the result is the persisted EvaluatorVersion."
@@ -86113,7 +86128,7 @@
             "type": "integer",
             "format": "int32",
             "minimum": 0,
-            "description": "Zero-based index into `EvaluatorGenerationJob.inputs.sources` when the warning applies to a specific source. Omitted for aggregate warnings and for warnings not tied to one source."
+            "description": "Zero-based index into `EvaluatorGenerationJob.sources` when the warning applies to a specific source. Omitted for aggregate warnings and for warnings not tied to one source."
           }
         },
         "description": "A non-fatal advisory produced during rubric evaluator generation when resolved inputs are technically valid but likely too weak to produce a high-quality rubric. Read-only; service-generated. Persisted with the terminal EvaluatorGenerationJob."
