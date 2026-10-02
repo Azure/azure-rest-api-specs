@@ -52,17 +52,21 @@ Example `suppressions.yaml`:
   paths: [Automation.Management]
 ```
 
-`TypeSpecRequirement` suppressions cannot permit handwritten Swagger at or after the first
-TypeSpec-generated API version of the same service. The check compares versions across `preview`
-and `stable` under the directory immediately containing those folders, independently of other
-services and API planes. Preview precedes stable on the same date; non-date versions use lexical
-ordering. It uses generated Swagger in both the current checkout and the PR's base commit, so
-deleting or rewriting the generated files does not reset the migration boundary.
-Local `--check-all-under` scans use only the current checkout.
+Once a service contains TypeSpec-generated Swagger, `TypeSpecRequirement` suppressions cannot
+permit newly added handwritten Swagger files, regardless of API version. This includes adding a
+file to an older, already-existing version. Patches to files that already exist at the same path
+in the PR's base retain their previous behavior, including applicable suppressions.
 
-Versions before that boundary retain their existing behavior: existing handwritten versions warn,
-and new handwritten versions require a version-specific suppression. Suppressions for other tools
-are unaffected. Generate the affected Swagger from TypeSpec rather than adding a suppression.
+Migration is detected across `preview` and `stable` under the directory immediately containing
+those folders, independently of other services and API planes. The check looks for generated
+Swagger in both the current checkout and the PR's base commit. Deleting or rewriting generated
+files in the same PR therefore does not permit new handwritten files. A rename to a new path
+counts as an addition.
+
+Services without generated Swagger retain the existing requirement: new handwritten API versions
+require a version-specific suppression. Suppressions for other tools are unaffected.
+Local `--check-all-under` scans have no PR diff and audit every selected file as an addition,
+using only the current checkout to detect migration.
 
 ### Command line
 

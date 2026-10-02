@@ -349,7 +349,7 @@ test.concurrent.each([
       `specification/${apiVersion}`,
     );
     expect(exitCode).toBe(1);
-    expect(stdout).toContain(`starting at '2026-01-01'`);
+    expect(stdout).toContain("New Swagger files must use TypeSpec");
     expect(stdout).toContain("TypeSpecRequirement suppressions cannot bypass");
     expect(stdout).not.toContain("making web request");
     expect(githubOutput).toBe("");
@@ -357,28 +357,32 @@ test.concurrent.each([
 );
 
 test.concurrent.each([
-  { first: "preview/2026-01-01-preview", target: "stable/2026-01-01", exitCode: 1 },
-  { first: "stable/2026-01-01", target: "preview/2026-01-01-preview", exitCode: 0 },
-  { first: "stable/2026-01-01", target: "preview/2026-02-01-preview", exitCode: 1 },
-  { first: "preview/2026-01-01-preview", target: "stable/2025-12-01", exitCode: 0 },
-])("Compares $target against first TypeSpec version $first", async (scenario) => {
-  const target = `${migratedService}/${scenario.target}`;
-  const { stdout, exitCode } = await checkFixtures(
-    {
-      [`${migratedService}/${scenario.first}/generated.json`]: generatedSwagger,
-      [`${target}/handwritten.json`]: "{}",
-    },
-    { [`https://github.com/Azure/azure-rest-api-specs/tree/main/specification/${target}`]: 200 },
-    false,
-    `specification/${target}`,
-  );
-  expect(exitCode).toBe(scenario.exitCode);
-  expect(stdout).toContain(
-    scenario.exitCode === 1 ? "suppressions cannot bypass" : "not required to use TypeSpec",
-  );
-});
+  { first: "preview/2026-01-01-preview", target: "stable/2026-01-01" },
+  { first: "stable/2026-01-01", target: "preview/2026-01-01-preview" },
+  { first: "stable/2026-01-01", target: "preview/2026-02-01-preview" },
+  { first: "preview/2026-01-01-preview", target: "stable/2025-12-01" },
+  { first: "stable/2.0", target: "stable/1.0" },
+])(
+  "Rejects handwritten $target when $first uses TypeSpec, regardless of order",
+  async (scenario) => {
+    const target = `${migratedService}/${scenario.target}`;
+    const { stdout, exitCode } = await checkFixtures(
+      {
+        [`${migratedService}/${scenario.first}/generated.json`]: generatedSwagger,
+        [`${target}/handwritten.json`]: "{}",
+      },
+      { [`https://github.com/Azure/azure-rest-api-specs/tree/main/specification/${target}`]: 200 },
+      false,
+      `specification/${target}`,
+    );
+    expect(exitCode).toBe(1);
+    expect(stdout).toContain("suppressions cannot bypass");
+  },
+);
 
-test.concurrent("Preserves a suppression for a new pre-migration version", async ({ expect }) => {
+test.concurrent("Rejects a suppression for a newly added pre-migration version", async ({
+  expect,
+}) => {
   const target = `${migratedService}/stable/2025-01-01`;
   const { stdout, exitCode } = await checkFixtures(
     {
@@ -391,8 +395,8 @@ test.concurrent("Preserves a suppression for a new pre-migration version", async
     false,
     `specification/${target}`,
   );
-  expect(exitCode).toBe(0);
-  expect(stdout).toContain("Suppressed: Historical version");
+  expect(exitCode).toBe(1);
+  expect(stdout).toContain("TypeSpecRequirement suppressions cannot bypass");
 });
 
 test.concurrent.each([
@@ -412,22 +416,6 @@ test.concurrent.each([
   );
   expect(exitCode).toBe(0);
   expect(stdout).toContain("not required to use TypeSpec");
-});
-
-test.concurrent("Uses the earliest generated version, not the latest", async ({ expect }) => {
-  const target = `${migratedService}/stable/2026-02-01`;
-  const { stdout, exitCode } = await checkFixtures(
-    {
-      [`${migratedService}/stable/2026-01-01/generated.json`]: generatedSwagger,
-      [`${migratedService}/stable/2026-03-01/generated.json`]: generatedSwagger,
-      [`${target}/handwritten.json`]: "{}",
-    },
-    {},
-    false,
-    `specification/${target}`,
-  );
-  expect(exitCode).toBe(1);
-  expect(stdout).toContain("starting at '2026-01-01'");
 });
 
 test.concurrent("Does not infer migration from examples, common types, or tspconfig alone", async ({

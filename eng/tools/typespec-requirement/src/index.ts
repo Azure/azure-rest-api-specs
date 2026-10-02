@@ -1,9 +1,8 @@
 import { appendFile, readdir, readFile } from "node:fs/promises";
-import { basename, relative, resolve, sep } from "node:path";
-import { compareApiVersionsAsc } from "@azure-tools/specs-shared/api-version";
-import { getChangedFiles } from "@azure-tools/specs-shared/changed-files";
+import { relative, resolve, sep } from "node:path";
+import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
 import { getSuppressions } from "@azure-tools/suppressions";
-import { findFirstTypeSpecVersion, isTypeSpecGenerated } from "./migration.ts";
+import { findTypeSpecSwagger, isTypeSpecGenerated } from "./migration.ts";
 
 type SpecType = "data-plane" | "resource-manager";
 
@@ -18,9 +17,10 @@ interface Options {
 interface FileToCheck {
   fullPath: string;
   path: string;
+  isNew: boolean;
 }
 
-const repoRoot = resolve(import.meta.dirname, "../../../../");
+const defaultRepoRoot = resolve(import.meta.dirname, "../../../../");
 
 function escapeData(value: string): string {
   return value.replaceAll("%", "%25").replaceAll("\r", "%0D").replaceAll("\n", "%0A");
@@ -110,7 +110,7 @@ async function findFilesNamed(directory: string, fileName: string): Promise<stri
   return files;
 }
 
-async function getFilesToCheck(options: Options): Promise<FileToCheck[]> {
+async function getFilesToCheck(options: Options, repoRoot: string): Promise<FileToCheck[]> {
   let files: FileToCheck[];
   if (options.checkAllUnder) {
     const directory = resolve(repoRoot, options.checkAllUnder);
@@ -119,6 +119,7 @@ async function getFilesToCheck(options: Options): Promise<FileToCheck[]> {
       const specificationIndex = pathSegments.lastIndexOf("specification");
       return {
         fullPath,
+        isNew: true,
         path:
           specificationIndex >= 0
             ? pathSegments.slice(specificationIndex).join("/")
@@ -126,21 +127,23 @@ async function getFilesToCheck(options: Options): Promise<FileToCheck[]> {
       };
     });
   } else {
-    files = (
-      await getChangedFiles({
-        cwd: repoRoot,
-        baseCommitish: options.baseCommitish,
-        headCommitish: options.headCommitish,
-        gitOptions: ["--diff-filter=d"],
-      })
-    )
+    const changes = await getChangedFilesStatuses({
+      cwd: repoRoot,
+      baseCommitish: options.baseCommitish,
+      headCommitish: options.headCommitish,
+      // A new path must not inherit an exemption through Git's similarity-based rename detection.
+      gitOptions: ["--no-renames"],
+    });
+    const additions = new Set(changes.additions);
+    files = [...changes.additions, ...changes.modifications]
+      .sort()
       .filter(
         (file) =>
           file.startsWith("specification/") &&
           file.endsWith(".json") &&
           !file.includes("ChangedFiles-Functions"),
       )
-      .map((path) => ({ path, fullPath: resolve(repoRoot, path) }));
+      .map((path) => ({ path, fullPath: resolve(repoRoot, path), isNew: additions.has(path) }));
   }
 
   const specTypePattern =
@@ -182,39 +185,41 @@ function getServiceDirectory(fullPath: string, servicePath: string): string | un
   return normalizedPath.slice(0, serviceIndex + serviceMarker.length - 1);
 }
 
-async function checkFiles(options: Options): Promise<{ brownfield: boolean; exitCode: number }> {
+export async function checkFiles(
+  options: Options,
+  repoRoot = defaultRepoRoot,
+): Promise<{ brownfield: boolean; exitCode: number }> {
   const pathsWithErrors: string[] = [];
   let hasMigrationErrors = false;
-  const firstTypeSpecVersions = new Map<string, string | undefined>();
+  const typeSpecSwaggers = new Map<string, string | undefined>();
   let brownfield = false;
-  const filesToCheck = await getFilesToCheck(options);
+  const filesToCheck = await getFilesToCheck(options, repoRoot);
 
   if (filesToCheck.length === 0) {
     logInfo("No OpenAPI files found to check");
   }
 
-  for (const { fullPath, path: file } of filesToCheck) {
+  for (const { fullPath, path: file, isNew } of filesToCheck) {
     logInfo(`Checking ${file}`);
 
     const generated = isTypeSpecGenerated(await readFile(fullPath, "utf8"), file, logWarning);
-    if (!generated) {
+    if (isNew && !generated) {
       const serviceDirectory = resolve(fullPath, "../../..");
-      const version = basename(resolve(fullPath, ".."));
-      if (!firstTypeSpecVersions.has(serviceDirectory)) {
-        firstTypeSpecVersions.set(
+      if (!typeSpecSwaggers.has(serviceDirectory)) {
+        typeSpecSwaggers.set(
           serviceDirectory,
-          await findFirstTypeSpecVersion(
+          await findTypeSpecSwagger(
             serviceDirectory,
             logWarning,
             options.checkAllUnder ? undefined : { repoRoot, commitish: options.baseCommitish },
           ),
         );
       }
-      const firstVersion = firstTypeSpecVersions.get(serviceDirectory);
-      if (firstVersion !== undefined && compareApiVersionsAsc(version, firstVersion) >= 0) {
+      const typeSpecSwagger = typeSpecSwaggers.get(serviceDirectory);
+      if (typeSpecSwagger !== undefined) {
         logErrorForFile(
           file,
-          `API version '${version}' must use TypeSpec because this service contains TypeSpec-generated Swagger starting at '${firstVersion}'. ` +
+          `New Swagger files must use TypeSpec because this service already contains TypeSpec-generated Swagger (${typeSpecSwagger}). ` +
             "Generate this Swagger from TypeSpec; TypeSpecRequirement suppressions cannot bypass this requirement.",
         );
         logJobFailure();
@@ -400,4 +405,6 @@ async function main(): Promise<void> {
   }
 }
 
-await main();
+if (import.meta.main) {
+  await main();
+}
