@@ -42,6 +42,18 @@ suppressions:
   - code: ProvisioningStateMustBeReadOnly
     reason: provisioningState is server-populated and ignored on input, but is emitted without readOnly by the shared TypeSpec emitter configuration. Enabling use-read-only-status-schema globally would also rewrite the already published 2025-11-15-preview swagger, so it is deferred to a follow-up change covering all TypeSpec versions.
     from: EventGrid.json
+    where:
+      - $.definitions.ChannelProperties.properties.provisioningState
+      - $.definitions.NetworkSecurityPerimeterConfigurationProperties.properties.provisioningState
+      - $.definitions.PartnerConfigurationProperties.properties.provisioningState
+      - $.definitions.PrivateEndpointConnectionProperties.properties.provisioningState
+      - $.definitions.TopicTypeProperties.properties.provisioningState
+      - $.definitions.VerifiedPartnerProperties.properties.provisioningState
+
+  - code: PutInOperationName
+    reason: The PrivateEndpointConnections_Update operationId is from an existing API contract (previous stable and preview versions). Renaming to CreateOrUpdate would introduce a cross-version breaking change (ModifiedOperationId) and break existing SDKs, with no functional benefit.
+    from: EventGrid.json
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/{parentType}/{parentName}/privateEndpointConnections/{privateEndpointConnectionName}"].put
 
   - code: ResourceNameRestriction
     reason: Resource name path parameters are unchanged from previously published API versions, which do not define a 'pattern'. Adding a pattern restriction now would be a breaking change for existing resources whose names do not match it.
