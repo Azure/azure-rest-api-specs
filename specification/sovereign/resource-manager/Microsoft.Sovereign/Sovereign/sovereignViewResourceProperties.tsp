@@ -34,6 +34,10 @@ model SovereignViewResourceProperties {
   @doc("Optional per-dimension evaluation settings.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
   dimensionSettings?: SovereignViewDimensionSettings;
+
+  @doc("Indicates whether the Sovereign View is considered a workload.")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  isWorkload?: boolean;
 }
 
 @added(Versions.Preview20261031)
@@ -802,7 +806,7 @@ model SovereignViewComplianceResourceDetailsRequest {
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept consistent with the sibling action request/response models."
 @added(Versions.Preview20261031)
-@doc("The compliance reasoning for one resource and dimension, including the reasoning for its linked and replica resources.")
+@doc("The compliance reasoning for given resource and dimension, including the reasoning for its linked and replica resources.")
 model SovereignViewComplianceResourceDetailsResponse {
   @doc("The evaluated resource ARM identifier.")
   resourceId: armResourceIdentifier;
@@ -872,28 +876,28 @@ union SovereignViewLinkedResourceEvaluationSource {
 @doc("The compliance reasoning outcome produced by an evaluation query for a single resource.")
 model SovereignViewDataEvaluationOutcome {
   @doc("The ARM identifier of the linked or replica resource associated with the outcome.")
-  resourceId: armResourceIdentifier;
+  resourceId?: armResourceIdentifier;
 
   @doc("The compliance state of the outcome.")
   state: PolicyComplianceState;
 
   @doc("The actual value observed by the evaluation.")
-  actualValue: string;
+  actualValue?: string;
 
   @doc("The value expected by the evaluation.")
-  expectedValue: string;
+  expectedValue?: string;
 
   @doc("The reason for the outcome, in the service default language. Empty when the outcome has no reason. Clients that need a localized reason should resolve reasonCodeId instead.")
-  reason: string;
+  reason?: string;
 
   @doc("The stable, language-neutral code that identifies the reason. Clients use this code to look up the localized reason string.")
-  reasonCodeId: string;
+  reasonCodeId?: string;
 
   @doc("Additional remediation or explanatory information, in the service default language. Clients that need localized text should resolve additionalInfoCodeId instead.")
-  additionalInfo: string;
+  additionalInfo?: string;
 
   @doc("The stable, language-neutral code that identifies the additional information. Clients use this code to look up the localized additional information string.")
-  additionalInfoCodeId: string;
+  additionalInfoCodeId?: string;
 }
 
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept consistent with the sibling action request/response models in this resource provider."
@@ -933,7 +937,7 @@ model SovereignViewResidencyRemediationConfiguration {
 @doc("A single resource targeted by a residency remediation request.")
 model SovereignViewResidencyRemediationResource {
   @doc("The ARM resource ID of the resource to remediate.")
-  id: string;
+  id: armResourceIdentifier;
 
   @doc("The residency remediation configuration for this resource.")
   configuration: SovereignViewResidencyRemediationResourceConfiguration;
@@ -968,6 +972,18 @@ model SovereignViewRemediationResultRequest {
   remediationId: string;
 }
 
+@added(Versions.Preview20261031)
+@doc("The status of a sovereign view remediation.")
+union SovereignViewRemediationStatus {
+  @doc("The remediation completed successfully.")
+  Succeeded: "Succeeded",
+
+  @doc("The remediation failed.")
+  Failed: "Failed",
+
+  string,
+}
+
 #suppress "@azure-tools/typespec-client-generator-core/csharp-model-suffix" "Name kept consistent with the sibling action request/response models in this resource provider."
 @added(Versions.Preview20261031)
 @doc("The response for the sovereign view remediationResult action.")
@@ -979,10 +995,10 @@ model SovereignViewRemediationResultResponse {
   dimensionType: ComplianceDimension;
 
   @doc("The status of the remediation, e.g. \"Succeeded\".")
-  status: string;
+  status: SovereignViewRemediationStatus;
 
   @doc("The remediation results.")
-  @identifiers(#[])
+  @identifiers(#["resourceIds"])
   results?: SovereignViewRemediationResultItem[];
 
   @doc("The error encountered while remediating, if any.")
@@ -1008,7 +1024,7 @@ union SovereignViewRemediationPayloadType {
 @doc("A single remediation result item.")
 model SovereignViewRemediationResultItem {
   @doc("The ARM resource IDs this result item applies to.")
-  resourceIds: string[];
+  resourceIds: armResourceIdentifier[];
 
   @doc("The type of remediation payload returned.")
   type: SovereignViewRemediationPayloadType;

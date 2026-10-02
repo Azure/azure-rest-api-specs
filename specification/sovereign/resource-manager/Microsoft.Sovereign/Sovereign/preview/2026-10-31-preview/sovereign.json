@@ -566,7 +566,7 @@
         "tags": [
           "SovereignViewOperations"
         ],
-        "description": "Gets the compliance reasoning for one resource and one dimension, including the reasoning for its linked and replica resources.",
+        "description": "Gets the compliance reasoning for given resource and dimension, including the reasoning for its linked and replica resources.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1812,7 +1812,7 @@
     },
     "SovereignViewComplianceResourceDetailsResponse": {
       "type": "object",
-      "description": "The compliance reasoning for one resource and dimension, including the reasoning for its linked and replica resources.",
+      "description": "The compliance reasoning for given resource and dimension, including the reasoning for its linked and replica resources.",
       "properties": {
         "resourceId": {
           "type": "string",
@@ -1974,14 +1974,7 @@
         }
       },
       "required": [
-        "resourceId",
-        "state",
-        "actualValue",
-        "expectedValue",
-        "reason",
-        "reasonCodeId",
-        "additionalInfo",
-        "additionalInfoCodeId"
+        "state"
       ]
     },
     "SovereignViewDataResidencyDimensionSettings": {
@@ -2530,7 +2523,9 @@
           "type": "array",
           "description": "The ARM resource IDs this result item applies to.",
           "items": {
-            "type": "string"
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource."
           }
         },
         "type": {
@@ -2574,7 +2569,7 @@
           "description": "The remediation dimension this result corresponds to. Only \"DataResidency\" is currently supported for remediation."
         },
         "status": {
-          "type": "string",
+          "$ref": "#/definitions/SovereignViewRemediationStatus",
           "description": "The status of the remediation, e.g. \"Succeeded\"."
         },
         "results": {
@@ -2583,7 +2578,9 @@
           "items": {
             "$ref": "#/definitions/SovereignViewRemediationResultItem"
           },
-          "x-ms-identifiers": []
+          "x-ms-identifiers": [
+            "resourceIds"
+          ]
         },
         "error": {
           "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
@@ -2605,6 +2602,31 @@
         "dimensionType",
         "status"
       ]
+    },
+    "SovereignViewRemediationStatus": {
+      "type": "string",
+      "description": "The status of a sovereign view remediation.",
+      "enum": [
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "SovereignViewRemediationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The remediation completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The remediation failed."
+          }
+        ]
+      },
+      "readOnly": true
     },
     "SovereignViewResidencyRemediationConfiguration": {
       "type": "object",
@@ -2653,6 +2675,7 @@
       "properties": {
         "id": {
           "type": "string",
+          "format": "arm-id",
           "description": "The ARM resource ID of the resource to remediate."
         },
         "configuration": {
@@ -2805,6 +2828,14 @@
         "dimensionSettings": {
           "$ref": "#/definitions/SovereignViewDimensionSettings",
           "description": "Optional per-dimension evaluation settings.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "isWorkload": {
+          "type": "boolean",
+          "description": "Indicates whether the Sovereign View is considered a workload.",
           "x-ms-mutability": [
             "read",
             "create"

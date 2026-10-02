@@ -241,7 +241,7 @@ interface SovereignViewOperations {
   >;
 
   @action("complianceResourceDetails")
-  @doc("Gets the compliance reasoning for one resource and one dimension, including the reasoning for its linked and replica resources.")
+  @doc("Gets the compliance reasoning for given resource and dimension, including the reasoning for its linked and replica resources.")
   @armResourceAction(SovereignViewResource)
   complianceResourceDetails is ArmResourceActionSync<
     SovereignViewResource,
@@ -249,7 +249,7 @@ interface SovereignViewOperations {
     SovereignViewComplianceResourceDetailsResponse
   >;
 
-  @action("remediate")
+  @action("Remediate")
   @doc("Remediates the Sovereign View resource for the given ARM resource IDs.")
   @armResourceAction(SovereignViewResource)
   remediate is ArmResourceActionAsync<
