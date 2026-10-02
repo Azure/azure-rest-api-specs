@@ -5,6 +5,9 @@ parameters:
   - name: PrNumber
     type: number
     default: 0
+  - name: ReleasePlanId
+    type: number
+    default: 0
 
 trigger:
   paths:
@@ -55,6 +58,7 @@ stages:
                 $ErrorActionPreference = "Stop"
 
                 $prNumber = ${{ parameters.PrNumber }}
+                $releasePlanId = ${{ parameters.ReleasePlanId }}
                 $outputPath = "$(Build.ArtifactStagingDirectory)/release-plan/release-plan.json"
 
                 $nodeArgs = @(
@@ -64,7 +68,10 @@ stages:
                   "--output-file", $outputPath
                 )
 
-                if ($prNumber -gt 0) {
+                if ($releasePlanId -gt 0) {
+                  Write-Host "Using release plan ID: $releasePlanId"
+                  $nodeArgs += @("--release-plan-id", $releasePlanId)
+                } elseif ($prNumber -gt 0) {
                   Write-Host "Using PR number: $prNumber"
                   $nodeArgs += @("--pr-number", $prNumber)
                 } else {

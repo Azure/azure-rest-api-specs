@@ -1,6 +1,6 @@
 name: Update Labels
 
-on:
+on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base/default-branch code runs.
   # TODO: If a pull request is manually labeled or unlabeled, get all artifacts associated with PR, and update labels
   # pull_request:
   #   types: [labeled, unlabeled]
@@ -30,14 +30,14 @@ jobs:
     runs-on: ubuntu-slim
 
     steps:
-      - uses: actions/checkout@v7
+      - uses: $/.github/actions/checkout
         with:
           sparse-checkout: |
             .github
 
       - name: Update Labels
         id: update-labels
-        uses: actions/github-script@v8
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const { default: updateLabels } =
@@ -46,14 +46,14 @@ jobs:
 
       - if: ${{ always() && steps.update-labels.outputs.head_sha }}
         name: Upload artifact with head SHA
-        uses: ./.github/actions/add-empty-artifact
+        uses: $/.github/actions/add-empty-artifact
         with:
           name: head-sha
           value: ${{ steps.update-labels.outputs.head_sha }}
 
       - if: ${{ always() && steps.update-labels.outputs.issue_number }}
         name: Upload artifact with issue number
-        uses: ./.github/actions/add-empty-artifact
+        uses: $/.github/actions/add-empty-artifact
         with:
           name: issue-number
           value: ${{ steps.update-labels.outputs.issue_number }}

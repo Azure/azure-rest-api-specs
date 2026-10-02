@@ -22,4 +22,12 @@ describe("parseCliArguments", () => {
       ]),
     ).toThrow(/Unknown option '--azsdk-path'/);
   });
+
+  it("accepts a release plan id without a commit or PR", () => {
+    const result = parseCliArguments(["--release-plan-id", "12345"]);
+
+    expect(result.releasePlanId).toBe("12345");
+    expect(result.commitSha).toBeUndefined();
+    expect(result.prNumber).toBeUndefined();
+  });
 });

@@ -20,13 +20,13 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-      - uses: actions/checkout@v7
+      - uses: $/.github/actions/checkout
         with:
           # Must include all branches, for git branch logic in Avocado to work correctly
           fetch-depth: 0
 
       - name: Setup Node and install deps
-        uses: ./.github/actions/setup-node-install-deps
+        uses: $/.github/actions/setup-node-install-deps
 
       - name: Run Avocado
         id: run-avocado
@@ -69,12 +69,12 @@ jobs:
 
       - if: ${{ always() && (steps.run-avocado.outputs.output-file) }}
         name: Install dependencies for github-script actions
-        uses: ./.github/actions/install-deps-github-script
+        uses: $/.github/actions/install-deps-github-script
 
       - if: ${{ always() && (steps.run-avocado.outputs.output-file) }}
         name: Generate job summary
         id: generate-job-summary
-        uses: actions/github-script@v8
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const { default: generateJobSummary } =
@@ -86,7 +86,7 @@ jobs:
       # Used by other workflows like set-status
       - if: ${{ always() && steps.generate-job-summary.outputs.summary }}
         name: Set job-summary artifact
-        uses: actions/upload-artifact@v7
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: job-summary
           path: ${{ steps.generate-job-summary.outputs.summary }}
