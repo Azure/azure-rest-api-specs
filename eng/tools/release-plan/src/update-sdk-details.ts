@@ -2,15 +2,14 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import process from "node:process";
 import { parseArgs, type ParseArgsConfig } from "node:util";
-import { createAzdskRunner, getReleasePlanById, parseAzdskResponse } from "./release-plan.ts";
-import {
-  apiReleaseTypeLabel,
-  projectPath,
-  releasePlanDetails,
-  requiredPlanId,
-  validateArtifactTarget,
-} from "./spec-target.ts";
-import type { AzsdkRunner, EnsureReleasePlanResult } from "./types.ts";
+import { createAzdskRunner, getReleasePlanById } from "./release-plan.ts";
+import { resolveTypespecProjectPath, toStringValue } from "./sdk-workflow-common.ts";
+import type {
+  AzsdkRunner,
+  EnsureReleasePlanResult,
+  ReleasePlanData,
+  ReleasePlanDetails,
+} from "./types.ts";
 
 interface RefreshSdkDetailsCliArgs {
   artifactFile: string;
@@ -79,7 +78,10 @@ export function parseRefreshCliArguments(
 function shouldRunForOutcome(outcome: string): boolean {
   const normalized = outcome.trim().toLowerCase();
   return (
-    normalized === "created" || normalized === "existing_by_path" || normalized === "existing_by_pr"
+    normalized === "created" ||
+    normalized === "existing_by_id" ||
+    normalized === "existing_by_path" ||
+    normalized === "existing_by_pr"
   );
 }
 
@@ -100,35 +102,67 @@ export function runUpdateSdkDetails(
   const artifactRaw = readArtifact(args.artifactFile);
   const artifact = JSON.parse(artifactRaw) as EnsureReleasePlanResult;
 
+  const selection = artifact.details;
+  if ("apiReleaseType" in selection && selection.apiReleaseType === "Private Preview") {
+    console.log("Private preview plans do not require SDK details updates.");
+    return;
+  }
+
   const outcome = artifact.outcome;
-  if (!shouldRunForOutcome(outcome)) {
+  const artifactReleasePlan = artifact.releasePlan;
+  const artifactPlanDetails = artifactReleasePlan?.release_plan_details;
+
+  const releasePlanId = toStringValue(artifactPlanDetails?.ReleasePlanId);
+  const workItemId = toStringValue(artifactPlanDetails?.WorkItemId) || releasePlanId;
+  const typespecProjectPath = resolveTypespecProjectPath(
+    artifactPlanDetails?.APISpecProjectPath ?? "",
+    args.workspace,
+  );
+
+  if (!shouldRunForOutcome(outcome) || !releasePlanId) {
     console.log(
-      `Skipping SDK details update for outcome '${outcome}'. Only current discovery targets are eligible.`,
+      `Skipping SDK details update for outcome '${outcome}'. Only created/existing release plans are eligible.`,
     );
     return;
   }
 
-  const snapshot = releasePlanDetails(artifact.releasePlan);
-  const releasePlanId = requiredPlanId(snapshot.ReleasePlanId, "ReleasePlanId");
-  const plan = getReleasePlanById(releasePlanId, runner);
-  const freshDetails = releasePlanDetails(plan);
-  const releasePlanStatus = (freshDetails.Status ?? "").trim().toLowerCase();
+  if (!workItemId) {
+    throw new Error("Work item id could not be determined from release-plan artifact.");
+  }
+
+  let plan: ReleasePlanData = getReleasePlanById(releasePlanId, runner);
+  let planDetails: ReleasePlanDetails | undefined = plan.release_plan_details;
+
+  const sdkReleaseType = planDetails?.SDKReleaseType ?? "";
+  const releasePlanStatus = (planDetails?.Status ?? "").trim().toLowerCase();
 
   if (releasePlanStatus !== "in progress") {
     console.log(
-      `Release plan status is '${freshDetails.Status ?? ""}'. SDK details update only runs when status is 'In progress'.`,
+      `Release plan status is '${planDetails?.Status ?? ""}'. SDK details update only runs when status is 'In progress'.`,
     );
     return;
   }
 
-  const planDetails = validateArtifactTarget(artifact, plan, args.workspace);
-  const isPrivatePreview = apiReleaseTypeLabel(planDetails.ApiReleaseType) === "Private Preview";
-  const workItemId = requiredPlanId(planDetails.WorkItemId, "WorkItemId");
-  const typespecProjectPath = projectPath(planDetails.APISpecProjectPath, args.workspace);
-  const sdkReleaseType = planDetails.SDKReleaseType!;
-  // Keep the artifact's selected commit, not a newer state learned from the lookup.
-  const targetArgs = isPrivatePreview ? [] : ["--spec-commit-sha", snapshot.SpecCommitSHA!];
+  if (!typespecProjectPath) {
+    throw new Error(
+      "TypeSpec project path could not be determined from artifact or release plan details.",
+    );
+  }
+
+  if (!sdkReleaseType) {
+    throw new Error("SDK release type could not be determined from release plan details.");
+  }
+
+  const targetArgs =
+    "specCommitSha" in selection
+      ? ["--spec-commit-sha", selection.specCommitSha, "--pull-request", selection.prUrl]
+      : [];
   console.log("Running release plan update for an in-progress release plan.");
+  if ("specCommitSha" in selection) {
+    console.log(
+      `Updating release plan '${releasePlanId}' spec PR and commit: project='${selection.tspProjectPath}', PR='${selection.prUrl}', commit='${selection.specCommitSha}', API version='${selection.apiVersion}'.`,
+    );
+  }
   const updateResult = runner([
     "release-plan",
     "update",
@@ -138,19 +172,19 @@ export function runUpdateSdkDetails(
     workItemId,
     "--sdk-type",
     sdkReleaseType,
-    "--pull-request",
-    planDetails.ActiveSpecPullRequest!,
     ...targetArgs,
-    "--output",
-    "json",
   ]);
 
-  const response = parseAzdskResponse(updateResult, "release-plan update");
-  if (!response) {
-    throw new Error("azsdk release-plan update did not return the updated release plan.");
+  if (updateResult.exitCode !== 0) {
+    throw new Error(
+      `azsdk release-plan update failed. ${updateResult.stderr || updateResult.stdout}`,
+    );
   }
-  validateArtifactTarget(artifact, response, args.workspace);
+
+  // Re-fetch once so completion is visible in logs and failures are surfaced early.
+  plan = getReleasePlanById(releasePlanId, runner);
+  planDetails = plan.release_plan_details;
   console.log(
-    `SDK details update completed for release plan '${releasePlanId}' (sdkType='${sdkReleaseType}').`,
+    `SDK details update completed for release plan '${releasePlanId}' (sdkType='${planDetails?.SDKReleaseType ?? ""}').`,
   );
 }

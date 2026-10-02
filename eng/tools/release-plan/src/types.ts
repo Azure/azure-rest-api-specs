@@ -9,7 +9,6 @@ export interface TypeSpecProjectInfo {
   tspProjectPath: string;
   apiVersion: string;
   isPreview: boolean;
-  specCommitSha?: string;
 }
 
 export interface CommandResult {
@@ -23,7 +22,6 @@ export type AzsdkRunner = (args: string[]) => CommandResult;
 export interface ReleasePlanCommandContext {
   prUrl?: string;
   tspProjectPath: string;
-  workspace: string;
   specCommitSha: string;
   apiReleaseType: ApiReleaseType;
   sdkReleaseType: "beta" | "stable";
@@ -59,7 +57,6 @@ export interface ReleasePlanDetails extends Record<string, unknown> {
   IsManagementPlane?: boolean;
   IsDataPlane?: boolean;
   SpecAPIVersion?: string;
-  SpecCommitSHA?: string;
   SpecType?: string;
   ProductType?: string;
   ProductLifecycle?: string;
@@ -94,14 +91,7 @@ export interface ReleasePlanDetails extends Record<string, unknown> {
 }
 
 export interface EnsureReleasePlanResult {
-  outcome:
-    | "existing_by_id"
-    | "existing_by_pr"
-    | "existing_by_path"
-    | "created"
-    | "not_found"
-    | "inactive_plan"
-    | "stale_event";
+  outcome: "existing_by_id" | "existing_by_pr" | "existing_by_path" | "created" | "not_found";
   releasePlan: ReleasePlanData | null;
   details:
     | { releasePlanId: string }
@@ -125,7 +115,6 @@ export interface CommitProjectInfoResult {
 
 export interface CliArguments {
   commitSha?: string;
-  prNumber?: number;
   releasePlanId?: string;
   owner: string;
   repo: string;
@@ -140,9 +129,7 @@ export interface OctokitLike {
       get: (params: { owner: string; repo: string; pull_number: number }) => Promise<{
         data: {
           state?: string;
-          merged?: boolean;
           merged_at?: string | null;
-          merge_commit_sha?: string | null;
           labels?: Array<{ name: string }>;
         };
       }>;

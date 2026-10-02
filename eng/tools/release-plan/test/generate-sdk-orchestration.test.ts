@@ -7,18 +7,8 @@ import type { CommandResult, OctokitLike } from "../src/types.ts";
 const WORKSPACE = path.resolve("/repo/root");
 const SPEC_PATH = "specification/contoso/Contoso.Management";
 const LANGUAGES = [".NET", "Java", "JavaScript", "Python", "Go"];
-const PLAN_TARGET = {
-  ReleasePlanId: "12345",
-  WorkItemId: "9001",
-  APISpecProjectPath: SPEC_PATH,
-  SpecAPIVersion: "2026-06-01-preview",
-  SpecCommitSHA: "a".repeat(40),
-  ApiReleaseType: 2,
-  SDKReleaseType: "beta",
-  ActiveSpecPullRequest: "https://github.com/Azure/azure-rest-api-specs/pull/123",
-};
 
-function ok(stdout = JSON.stringify({ status: "Success" })): CommandResult {
+function ok(stdout = ""): CommandResult {
   return { exitCode: 0, stdout, stderr: "" };
 }
 
@@ -34,7 +24,9 @@ function buildArtifact(overrides: Record<string, unknown> = {}): string {
     outcome: "existing_by_path",
     releasePlan: {
       release_plan_details: {
-        ...PLAN_TARGET,
+        ReleasePlanId: "12345",
+        WorkItemId: "9001",
+        APISpecProjectPath: SPEC_PATH,
         ...overrides,
       },
     },
@@ -47,8 +39,8 @@ function buildArtifact(overrides: Record<string, unknown> = {}): string {
 function buildPlan(details: Record<string, unknown> = {}): string {
   return JSON.stringify({
     release_plan_details: {
-      ...PLAN_TARGET,
       IsManagementPlane: true,
+      SDKReleaseType: "beta",
       SDKInfo: LANGUAGES.map((language) => ({
         Language: language,
         PackageName: `azure-mgmt-${language.toLowerCase()}`,
@@ -143,10 +135,6 @@ describe("runGenerateSdk orchestration", () => {
         language,
         "--workitem-id",
         "9001",
-        "--api-version",
-        "2026-06-01-preview",
-        "--output",
-        "json",
       ]);
     }
   });
@@ -239,31 +227,21 @@ describe("runGenerateSdk orchestration", () => {
     expect(calls.some((c) => c[0] === "release-plan" && c[1] === "update")).toBe(false);
   });
 
-  it.each(["Finished", "Abandoned", "Closed", "Duplicate"])(
-    "does not queue SDKs when the plan is now %s",
-    async (status) => {
-      const { deps, calls } = createHarness({ getResponses: [buildPlan({ Status: status })] });
-      await runGenerateSdk(cliArgs, deps);
-      expect(calls.some((args) => args[0] === "spec-workflow")).toBe(false);
-    },
-  );
-
-  it("skips an inactive-plan artifact without calling the CLI", async () => {
-    const { deps, runner } = createHarness({
-      artifact: JSON.stringify({ outcome: "inactive_plan", releasePlan: null }),
-    });
-    await runGenerateSdk(cliArgs, deps);
-    expect(runner).not.toHaveBeenCalled();
-  });
-
   it.each(["", "a".repeat(40)])(
     "allows an existing-ID plan with an empty API version and SHA '%s'",
     async (sha) => {
-      const target = { ...PLAN_TARGET, SpecAPIVersion: "", SpecCommitSHA: sha };
+      const target = { SpecAPIVersion: "", SpecCommitSHA: sha };
       const { deps, calls } = createHarness({
         artifact: JSON.stringify({
           outcome: "existing_by_id",
-          releasePlan: { release_plan_details: target },
+          releasePlan: {
+            release_plan_details: {
+              ReleasePlanId: "12345",
+              WorkItemId: "9001",
+              APISpecProjectPath: SPEC_PATH,
+              ...target,
+            },
+          },
           details: { releasePlanId: "12345" },
         }),
         getResponses: [buildPlan(target)],
@@ -273,14 +251,4 @@ describe("runGenerateSdk orchestration", () => {
       expect(calls.some((args) => args.includes("--api-version"))).toBe(false);
     },
   );
-
-  it("does not treat an incomplete stored commit as a legacy plan", async () => {
-    const target = { ...PLAN_TARGET, SpecCommitSHA: "updating" };
-    const { deps, calls } = createHarness({
-      artifact: buildArtifact(target),
-      getResponses: [buildPlan(target)],
-    });
-    await expect(runGenerateSdk(cliArgs, deps)).rejects.toThrow("full 40-character");
-    expect(calls.some((args) => args[0] === "spec-workflow")).toBe(false);
-  });
 });
