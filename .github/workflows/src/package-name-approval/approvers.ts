@@ -13,7 +13,7 @@ export type ApproversConfig = {
     "data-plane"?: string[];
     "management-plane"?: string[];
   };
-  // Languages whose plane was explicitly set to the "unprotected" keyword. Such a
+  // Languages whose plane was explicitly set to the "__unprotected__" keyword. Such a
   // plane has no approver list (anyone may approve), so it is tracked separately
   // instead of leaving the language absent (which would look "not configured").
   unprotected?: {
@@ -37,7 +37,7 @@ export function createApproversConfig(config: ProtectedLabelsConfig): ApproversC
 
   let mgmtAll: string[] = [];
 
-  // Languages whose data-plane / management-plane was set to the "unprotected"
+  // Languages whose data-plane / management-plane was set to the "__unprotected__"
   // keyword. These have no approver list; post-results renders them as "anyone".
   const unprotectedDataPlane: string[] = [];
   const unprotectedMgmt: string[] = [];
@@ -72,7 +72,7 @@ export function createApproversConfig(config: ProtectedLabelsConfig): ApproversC
     if (entry && typeof entry === "object") {
       const planeEntry = entry;
       const mgmt = planeEntry["management-plane"];
-      // A plane set to the "unprotected" literal has no approver list.
+      // A plane set to the "__unprotected__" literal has no approver list.
       if (Array.isArray(mgmt)) {
         // Collect unique mgmt approvers across all namespace labels
         mgmtAll = [...new Set([...mgmtAll, ...mgmt])];
@@ -98,7 +98,7 @@ export function createApproversConfig(config: ProtectedLabelsConfig): ApproversC
   }
 
   // Parse tier1 configuration. Plane values are language lists; ignore any
-  // "unprotected" literal so the union type does not leak into string[] fields.
+  // "__unprotected__" literal so the union type does not leak into string[] fields.
   const tier1Entry = config.labels["tier1"];
   const tier1Config: { "management-plane"?: string[]; "data-plane"?: string[] } =
     tier1Entry && !Array.isArray(tier1Entry)
