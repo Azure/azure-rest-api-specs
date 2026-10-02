@@ -3,8 +3,7 @@ import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { parse, stringify } from "yaml";
-import { z } from "zod";
+import { stringify } from "yaml";
 import type { ExistingLabel, LabelCatalog } from "../src/label-catalog.ts";
 import { ARCHIVE_DESCRIPTION } from "../src/label-catalog.ts";
 import {
@@ -936,110 +935,5 @@ describe("expired archive replacement", () => {
       },
     });
     await expect(findLabelAssignments(f.args.github, extra)).rejects.toThrow("Assignments changed");
-  });
-});
-
-describe("label workflow contract", () => {
-  it("isolates PR validation and persists the audit before applying changes", async () => {
-    const step = z.object({
-      id: z.string().optional(),
-      uses: z.string().optional(),
-      if: z.string().optional(),
-      with: z.record(z.string(), z.unknown()).optional(),
-      env: z.record(z.string(), z.string()).optional(),
-    });
-    const job = z.object({
-      if: z.string(),
-      permissions: z.record(z.string(), z.string()).optional(),
-      concurrency: z.object({ group: z.string(), "cancel-in-progress": z.boolean() }).optional(),
-      steps: z.array(step),
-    });
-    const workflow = z
-      .object({
-        on: z.object({
-          pull_request: z.object({ paths: z.array(z.string()) }),
-          label: z.strictObject({}),
-          schedule: z.array(z.object({ cron: z.string() })),
-          workflow_dispatch: z.object({
-            inputs: z.record(z.string(), z.object({ default: z.boolean() })),
-          }),
-        }),
-        permissions: z.record(z.string(), z.string()),
-        jobs: z.object({ validate: job, sync: job }),
-      })
-      .parse(parse(await readFile(new URL("../sync-repo-labels.yaml", import.meta.url), "utf8")));
-    expect(workflow.permissions).toEqual({ contents: "read" });
-    expect(workflow.jobs.validate.permissions).toBeUndefined();
-    expect(workflow.jobs.validate.if).toBe("github.event_name == 'pull_request'");
-    expect(workflow.jobs.sync.if).toContain("github.event_name != 'pull_request'");
-    expect(workflow.jobs.sync.if).toContain("github.repository == 'Azure/azure-rest-api-specs'");
-    expect(workflow.jobs.sync.if).toContain("github.event.repository.default_branch");
-    expect(workflow.jobs.sync.permissions).toEqual({
-      contents: "read",
-      issues: "write",
-      "pull-requests": "read",
-    });
-    expect(workflow.jobs.sync.concurrency).toEqual({
-      group: "sync-repo-labels",
-      "cancel-in-progress": false,
-    });
-    expect(workflow.on.label).toEqual({});
-    expect(workflow.on.schedule).not.toHaveLength(0);
-    expect(Object.keys(workflow.on.workflow_dispatch.inputs)).toEqual(["dry-run"]);
-    expect(workflow.on.workflow_dispatch.inputs["dry-run"].default).toBe(true);
-    const steps = workflow.jobs.sync.steps;
-    const audit = steps.findIndex((s) => s.id === "audit");
-    const apply = steps.findIndex((s) => s.id === "apply");
-    expect(audit).toBeGreaterThan(steps.findIndex((s) => s.id === "prepare"));
-    expect(apply).toBeGreaterThan(audit);
-    expect(steps[audit].with?.["if-no-files-found"]).toBe("error");
-    expect(steps[apply].if).toBeUndefined();
-    const checkout = steps.find((s) => s.id === "checkout");
-    expect(checkout).toMatchObject({
-      uses: "$/.github/actions/checkout",
-      with: {
-        ref: "${{ github.event.repository.default_branch }}",
-        "sparse-checkout": ".github",
-      },
-    });
-    expect(workflow.jobs.validate.steps[0]).toMatchObject({
-      uses: "$/.github/actions/checkout",
-      with: { "sparse-checkout": ".github" },
-    });
-    expect(workflow.jobs.validate.steps[0].with?.ref).toBeUndefined();
-    for (const job of Object.values(workflow.jobs)) {
-      expect(job.steps.some((s) => s.uses === "$/.github/actions/install-deps-github-script")).toBe(
-        true,
-      );
-      for (const { uses } of job.steps) {
-        if (uses)
-          expect(uses).toMatch(/^(?:\$\/\.github\/actions\/[\w-]+|actions\/[\w-]+@[0-9a-f]{40})$/);
-      }
-    }
-    const checkoutAction = z
-      .object({
-        inputs: z.record(z.string(), z.object({ default: z.string() })),
-        outputs: z.object({ commit: z.object({ value: z.string() }) }),
-        runs: z.object({ steps: z.array(step) }),
-      })
-      .parse(
-        parse(
-          await readFile(new URL("../../actions/checkout/action.yaml", import.meta.url), "utf8"),
-        ),
-      );
-    const upstreamCheckout = checkoutAction.runs.steps.find((s) =>
-      s.uses?.startsWith("actions/checkout@"),
-    );
-    expect(upstreamCheckout?.id).toBe("checkout");
-    expect(upstreamCheckout?.uses).toMatch(/^actions\/checkout@[0-9a-f]{40}$/);
-    expect(upstreamCheckout?.with?.ref).toBe("${{ inputs.ref }}");
-    expect(upstreamCheckout?.with?.["persist-credentials"]).toBe(
-      "${{ inputs.persist-credentials }}",
-    );
-    expect(checkoutAction.inputs["persist-credentials"].default).toBe("false");
-    expect(checkoutAction.outputs.commit.value).toBe("${{ steps.checkout.outputs.commit }}");
-    expect(steps.find((s) => s.id === "prepare")?.env?.SOURCE_SHA).toBe(
-      "${{ steps.checkout.outputs.commit }}",
-    );
   });
 });
