@@ -16,6 +16,12 @@
   },
   "responses": {
     "200": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000001?api-version=2026-09-15-preview",
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000001?api-version=2026-09-15-preview",
+        "Retry-After": "10",
+        "ETag": "\"0x8D1234567890ABC\""
+      },
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/adapterDeployments/adapterDeploymentName",
         "name": "adapterDeploymentName",
@@ -24,11 +30,11 @@
         "properties": {
           "sourceModelId": "azureai://accounts/accountName/projects/projectName/models/modelName/versions/1",
           "targetDeploymentName": "managedComputeDeploymentName",
-          "provisioningState": "Succeeded"
+          "provisioningState": "Updating"
         }
       }
     },
-    "202": {
+    "201": {
       "headers": {
         "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000001?api-version=2026-09-15-preview",
         "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CognitiveServices/locations/eastus/operationResults/00000000-0000-0000-0000-000000000001?api-version=2026-09-15-preview",
