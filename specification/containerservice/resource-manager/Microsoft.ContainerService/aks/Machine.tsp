@@ -542,6 +542,13 @@ model MachineNetworkProperties {
   ]>;
 
   /**
+   * Pod IP Allocation Mode. The IP allocation mode for pods on the machine. Must be used with podSubnetID. The default is 'DynamicIndividual'.
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
+  @added(Versions.v2026_08_02_preview)
+  podIPAllocationMode?: PodIPAllocationMode;
+
+  /**
    * Whether the machine is allocated its own public IP. Some scenarios may require the machine to receive their own dedicated public IP addresses. A common scenario is for gaming workloads, where a console needs to make a direct connection to a cloud virtual machine to minimize hops. The default is false.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Property name maintained for backward compatibility with existing API versions"
