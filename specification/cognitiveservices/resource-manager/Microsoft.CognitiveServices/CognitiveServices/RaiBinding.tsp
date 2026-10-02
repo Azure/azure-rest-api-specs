@@ -15,7 +15,7 @@ using TypeSpec.Versioning;
 namespace Microsoft.CognitiveServices;
 
 /**
- * An account-scoped binding from an Azure resource to an ACS policy.
+ * An account-scoped binding from an Azure resource to an Agent Control Specification policy.
  */
 @added(Versions.v2026_09_15_preview)
 @parentResource(Account)

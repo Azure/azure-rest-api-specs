@@ -129,15 +129,6 @@ suppressions:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}"].patch.parameters[3].schema.properties.sku
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/connections/{connectionName}"].patch.parameters[6].schema.properties.properties
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedComputeDeployments/{deploymentName}"].patch.parameters[5].schema.properties.sku
-  - code: PatchBodyParametersSchema
-    reason: The service requires the top-level properties envelope in a cost control PATCH request while every field inside the patch properties model remains optional.
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/costControls/{costControlName}"].patch.parameters[6].schema
-  - code: PatchBodyParametersSchema
-    reason: Workbench uses PatchModel = Workbench (full resource as PATCH body). Required properties (targetClusterId, imageLink) are within the optional properties bag.
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/workbenches/{workbenchName}"].patch.parameters[6].schema.properties.properties
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/workbenches/{workbenchName}"].patch.parameters[6].schema
   - code: GuidUsage
     reason: Approved to be suppressed in AML swagger.
     where:
