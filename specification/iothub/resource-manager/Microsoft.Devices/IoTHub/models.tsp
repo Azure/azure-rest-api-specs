@@ -185,6 +185,19 @@ union RoutingSource {
 }
 
 /**
+ * The source to which the fallback route is applied.
+ */
+@added(Versions.v2026_11_01)
+union FallbackRouteSource {
+  string,
+
+  /**
+   * DeviceMessages
+   */
+  DeviceMessages: "DeviceMessages",
+}
+
+/**
  * The capabilities and features enabled for the IoT hub.
  */
 union Capabilities {
@@ -1735,7 +1748,8 @@ model FallbackRouteProperties {
   /**
    * The source to which the routing rule is to be applied to. For example, DeviceMessages
    */
-  source: RoutingSource;
+  @typeChangedFrom(Versions.v2026_11_01, RoutingSource)
+  source: FallbackRouteSource;
 
   /**
    * The condition which is evaluated in order to apply the fallback route. If the condition is not provided it will evaluate to true by default. For grammar, See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language
