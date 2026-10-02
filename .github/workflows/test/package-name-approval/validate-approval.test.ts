@@ -1,14 +1,15 @@
+import type { GitHubScriptArgs } from "../../src/github.ts";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { createMockContext, createMockCore, createMockGithub } from "../mocks.ts";
 
-vi.mock("fs/promises", () => ({
+vi.mock("node:fs/promises", () => ({
   readFile: vi.fn(),
 }));
 vi.mock("js-yaml", () => ({
   default: { load: vi.fn() },
 }));
 
-import { readFile } from "fs/promises";
+import { readFile } from "node:fs/promises";
 import yaml from "js-yaml";
 import validateApproval from "../../src/package-name-approval/validate-approval.ts";
 
@@ -32,6 +33,10 @@ const protectedLabelsYaml = {
     "management-plane": ["approver3", "approver4"],
     "data-plane": ["global-admin1", "global-admin2"],
   },
+  "package-name-go-approved": {
+    "management-plane": ["approver3", "approver4"],
+    "data-plane": "unprotected",
+  },
 };
 
 function setupMocks() {
@@ -45,14 +50,17 @@ function createPRLabeledPayload({
   actor,
   labels,
   isMgmt = false,
+  noPlane = false,
 }: {
   action: string;
   labelName: string;
   actor: string;
   labels?: string[];
   isMgmt?: boolean;
+  noPlane?: boolean;
 }) {
-  const labelNames: string[] = [...(labels ?? []), ...(isMgmt ? ["Mgmt"] : [])];
+  const planeLabels = isMgmt ? ["resource-manager"] : noPlane ? [] : ["data-plane"];
+  const labelNames: string[] = [...(labels ?? []), ...planeLabels];
   const allLabels = labelNames.map((name) => ({ name }));
   return {
     action,
@@ -74,12 +82,12 @@ describe("validate-approval", () => {
 
   let core: ReturnType<typeof createMockCore>;
 
-  function args(): import("@actions/github-script").AsyncFunctionArguments {
+  function args(): GitHubScriptArgs {
     return {
       github,
       context,
       core,
-    } as unknown as import("@actions/github-script").AsyncFunctionArguments;
+    };
   }
 
   beforeEach(() => {
@@ -96,6 +104,22 @@ describe("validate-approval", () => {
     (github.rest.issues as Record<string, unknown>).listComments = vi
       .fn()
       .mockResolvedValue({ data: [] });
+  });
+
+  it.each(["labeled", "unlabeled"])("rejects a %s event without a label", async (action) => {
+    context.payload = {
+      ...createPRLabeledPayload({
+        action,
+        labelName: "package-name-java-approved",
+        actor: "approver1",
+      }),
+      label: undefined,
+    };
+
+    await expect(validateApproval(args())).rejects.toThrow(
+      "Pull request label event is missing a label name.",
+    );
+    expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
   });
 
   describe("labeled - per-language approval", () => {
@@ -194,6 +218,102 @@ describe("validate-approval", () => {
         expect.objectContaining({ name: "package-name-dotnet-pending" }),
       );
     });
+
+    it("should reject an unauthorized per-language approver before changing review state", async () => {
+      context.payload = createPRLabeledPayload({
+        action: "labeled",
+        labelName: "package-name-java-approved",
+        actor: "random-user",
+        labels: ["package-name-review-required", "package-name-java-pending"],
+      });
+
+      await validateApproval(args());
+
+      expect(github.rest.issues.removeLabel).toHaveBeenCalledTimes(1);
+      expect(github.rest.issues.removeLabel).toHaveBeenCalledWith(
+        expect.objectContaining({ name: "package-name-java-approved" }),
+      );
+      expect(github.rest.issues.removeLabel).not.toHaveBeenCalledWith(
+        expect.objectContaining({ name: "package-name-java-pending" }),
+      );
+      expect(github.rest.pulls.get).not.toHaveBeenCalled();
+      expect(core.warning).toHaveBeenCalledWith(
+        "random-user is not authorized to apply package-name-java-approved, removing",
+      );
+      expect(github.rest.issues.createComment).toHaveBeenCalledWith(
+        expect.objectContaining({
+          body: expect.stringContaining(
+            "is not authorized to apply `package-name-java-approved`. Label removed.",
+          ) as unknown,
+        }),
+      );
+    });
+
+    it("should allow any user when the plane is unprotected (#46728)", async () => {
+      context.payload = createPRLabeledPayload({
+        action: "labeled",
+        labelName: "package-name-go-approved",
+        actor: "random-user",
+        labels: ["package-name-review-required", "package-name-go-pending"],
+      });
+
+      github.rest.pulls.get.mockResolvedValue({
+        data: { labels: [{ name: "package-name-review-required" }] },
+      });
+      (github.rest.issues as Record<string, unknown>).listComments = vi
+        .fn()
+        .mockResolvedValue({ data: [] });
+
+      await validateApproval(args());
+
+      expect(github.rest.issues.removeLabel).toHaveBeenCalledWith(
+        expect.objectContaining({ name: "package-name-go-pending" }),
+      );
+      expect(github.rest.issues.removeLabel).not.toHaveBeenCalledWith(
+        expect.objectContaining({ name: "package-name-go-approved" }),
+      );
+    });
+
+    it("should stay fail-closed for a label absent from config (not 'unprotected')", async () => {
+      // "unprotected" status (label not in protected-labels.yml) must NOT be treated
+      // as an opt-out here; only an explicit plane keyword (plane-unprotected) opens.
+      context.payload = createPRLabeledPayload({
+        action: "labeled",
+        labelName: "package-name-ruby-approved",
+        actor: "random-user",
+        labels: ["package-name-review-required", "package-name-ruby-pending"],
+      });
+
+      await validateApproval(args());
+
+      expect(github.rest.issues.removeLabel).toHaveBeenCalledWith(
+        expect.objectContaining({ name: "package-name-ruby-approved" }),
+      );
+      expect(github.rest.issues.removeLabel).not.toHaveBeenCalledWith(
+        expect.objectContaining({ name: "package-name-ruby-pending" }),
+      );
+      // A label absent from protected-labels.yml has no known approver list, so the removal
+      // stays silent rather than posting an empty "Only  can apply this label" message.
+      expect(github.rest.issues.createComment).not.toHaveBeenCalled();
+    });
+
+    it("should skip when the plane is not yet reconciled (only stale Mgmt present) (#46785)", async () => {
+      // A management PR in the window after post-results adds "Mgmt" + review-required but
+      // before summarize-checks adds "resource-manager". Neither reconciled plane label is
+      // present, so a data-plane approver must NOT be able to consume approvals; defer.
+      context.payload = createPRLabeledPayload({
+        action: "labeled",
+        labelName: "package-name-java-approved",
+        actor: "approver1", // authorized java data-plane approver in the test config
+        labels: ["package-name-review-required", "package-name-java-pending", "Mgmt"],
+        noPlane: true,
+      });
+
+      await validateApproval(args());
+
+      expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
+      expect(github.rest.issues.createComment).not.toHaveBeenCalled();
+    });
   });
 
   describe("labeled - package-name-approved-all shortcut", () => {
@@ -243,6 +363,39 @@ describe("validate-approval", () => {
       expect(github.rest.issues.createComment).toHaveBeenCalledWith(
         expect.objectContaining({
           body: expect.stringContaining("only available on management-plane") as unknown,
+        }),
+      );
+    });
+
+    it("should reject an unauthorized shortcut before expanding approvals", async () => {
+      context.payload = createPRLabeledPayload({
+        action: "labeled",
+        labelName: "package-name-approved-all",
+        actor: "random-user",
+        labels: [
+          "package-name-review-required",
+          "package-name-dotnet-pending",
+          "package-name-java-pending",
+        ],
+        isMgmt: true,
+      });
+
+      await validateApproval(args());
+
+      expect(github.rest.issues.removeLabel).toHaveBeenCalledTimes(1);
+      expect(github.rest.issues.removeLabel).toHaveBeenCalledWith(
+        expect.objectContaining({ name: "package-name-approved-all" }),
+      );
+      expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
+      expect(github.rest.pulls.get).not.toHaveBeenCalled();
+      expect(core.warning).toHaveBeenCalledWith(
+        "random-user is not authorized to apply package-name-approved-all, removing",
+      );
+      expect(github.rest.issues.createComment).toHaveBeenCalledWith(
+        expect.objectContaining({
+          body: expect.stringContaining(
+            "is not authorized to apply `package-name-approved-all`. Label removed.",
+          ) as unknown,
         }),
       );
     });

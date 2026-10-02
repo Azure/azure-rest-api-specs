@@ -1,0 +1,52 @@
+trigger: none
+pr: none
+
+parameters:
+  - name: Publish
+    displayName: Publish packages to npm (internal main-branch runs only)
+    type: boolean
+    default: false
+
+variables:
+  - template: /eng/pipelines/templates/variables/globals.yml
+  - template: /eng/pipelines/templates/variables/image.yml
+
+extends:
+  template: /eng/pipelines/templates/stages/1es-redirect.yml
+  parameters:
+    stages:
+      - stage: Build
+        displayName: Build and pack libraries
+        jobs:
+          - job: Build
+            pool:
+              name: $(LINUXPOOL)
+              image: $(LINUXVMIMAGE)
+              os: linux
+            steps:
+              - checkout: self
+              - template: /eng/pipelines/templates/steps/npm-install.yml
+              - script: pnpm --filter @azure-tools/typespec-foundry-core build
+                displayName: Compile and lint Foundry Core
+              - script: pnpm --filter @azure-tools/typespec-foundry-core test:ci
+                displayName: Test Foundry Core
+              - script: pnpm --filter @azure-tools/typespec-foundry-core pack --pack-destination "$(Build.ArtifactStagingDirectory)/packages"
+                displayName: Pack Foundry Core
+            templateContext:
+              outputs:
+                - output: pipelineArtifact
+                  path: $(Build.ArtifactStagingDirectory)/packages
+                  artifact: packages
+                  displayName: Publish npm package artifacts
+
+      - ${{ if and(parameters.Publish, eq(variables['System.TeamProject'], 'internal'), eq(variables['Build.SourceBranch'], 'refs/heads/main'), eq(variables['Build.Repository.Name'], 'Azure/azure-rest-api-specs')) }}:
+          - stage: Publish
+            displayName: Publish libraries to npm
+            dependsOn: Build
+            condition: succeeded()
+            jobs:
+              - template: /eng/common/pipelines/templates/jobs/npm-publish.yml
+                parameters:
+                  ArtifactName: packages
+                  Environment: package-publish
+                  Tag: auto
