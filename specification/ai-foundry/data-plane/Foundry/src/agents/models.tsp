@@ -559,6 +559,16 @@ model SessionConfiguration {
   idle_timeout_seconds?: duration = duration.fromISO("PT900S");
 }
 
+@doc("Standby (warm) pool configuration for a hosted agent version. Keeps pre-provisioned sessions ready to be claimed, reducing cold-start latency for invocations.")
+@removed(Versions.v1)
+model StandbyPool {
+  @doc("The number of pre-provisioned standby sessions to keep ready for this agent version. Must be between 0 and 50 (inclusive). 0 disables the standby pool.")
+  @minValue(0)
+  @maxValue(50)
+  @example(3)
+  size?: int32 = 0;
+}
+
 @doc("Code-based deployment configuration for a hosted agent.")
 model CodeConfiguration {
   @doc("The runtime identifier for code execution (e.g., 'python_3_11', 'python_3_12', 'python_3_13').")
@@ -652,6 +662,10 @@ model HostedAgentDefinition extends AgentDefinition {
   @doc("Optional session defaults (for example, the idle timeout) applied to sessions created for this agent version.")
   @example(#{ idle_timeout_seconds: duration.fromISO("PT300S") })
   session_configuration?: SessionConfiguration;
+
+  @doc("Optional standby (warm) pool configuration. When set with a positive size, the service keeps pre-provisioned sessions ready to be claimed for this agent version.")
+  @removed(Versions.v1)
+  standby_pool?: StandbyPool;
 }
 
 @doc("The container app agent definition.")
@@ -1138,6 +1152,10 @@ union AgentSessionStatus {
 
   /** Session TTL exceeded (30 days from last activity). */
   Expired: "expired",
+
+  /** Session is an unclaimed standby-pool session, kept ready to be claimed. */
+  @removed(Versions.v1)
+  Standby: "standby",
 }
 
 // ── Version Indicator ───────────────────────────────────
