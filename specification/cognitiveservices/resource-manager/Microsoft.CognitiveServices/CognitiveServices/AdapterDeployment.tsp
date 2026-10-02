@@ -53,7 +53,7 @@ model AdapterDeploymentListResult {
    * URL used to retrieve the next page, when one exists.
    */
   @nextLink
-  nextLink?: string;
+  nextLink?: url;
 }
 
 @added(Versions.v2026_09_15_preview)
