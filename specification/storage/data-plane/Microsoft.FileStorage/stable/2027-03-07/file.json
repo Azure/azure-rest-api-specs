@@ -378,6 +378,12 @@
           },
           {
             "$ref": "#/parameters/EnableSmbDirectoryLease"
+          },
+          {
+            "$ref": "#/parameters/FileEnableChangeFeed"
+          },
+          {
+            "$ref": "#/parameters/FileChangeFeedRetentionInDays"
           }
         ],
         "responses": {
@@ -669,6 +675,24 @@
                 "x-ms-client-name": "enableSmbDirectoryLease",
                 "description": "Specifies whether granting of new directory leases for directories present in a share is enabled(allowed) or disabled(blocked).  Header is only returned for a SMB Share.",
                 "type": "boolean"
+              },
+              "x-ms-file-blob-container-for-xfiles-change-feed": {
+                "x-ms-client-name": "FileBlobContainerForXFilesChangeFeed",
+                "type": "string",
+                "description": "The blob container in which change feed records are stored, in the format \"$fileschangefeed-<guid>\"."
+              },
+              "x-ms-file-change-feed-retention-in-days": {
+                "x-ms-client-name": "FileChangeFeedRetentionInDays",
+                "type": "integer",
+                "format": "int32",
+                "minimum": 1,
+                "maximum": 365,
+                "description": "The number of days that change feed records are retained."
+              },
+              "x-ms-file-enable-change-feed": {
+                "x-ms-client-name": "FileChangeFeedEnabled",
+                "type": "boolean",
+                "description": "Whether change feed is enabled for the share."
               }
             }
           },
@@ -1696,6 +1720,12 @@
           },
           {
             "$ref": "#/parameters/EnableSmbDirectoryLease"
+          },
+          {
+            "$ref": "#/parameters/FileEnableChangeFeed"
+          },
+          {
+            "$ref": "#/parameters/FileChangeFeedRetentionInDays"
           }
         ],
         "responses": {
@@ -6980,6 +7010,36 @@
           "items": {
             "$ref": "#/definitions/FileItem"
           }
+        },
+        "SymLinkItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SymLinkItem"
+          }
+        },
+        "BlockDeviceItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BlockDeviceItem"
+          }
+        },
+        "CharDeviceItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CharDeviceItem"
+          }
+        },
+        "FifoItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FifoItem"
+          }
+        },
+        "SocketItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SocketItem"
+          }
         }
       },
       "xml": {
@@ -7010,6 +7070,10 @@
         },
         "PermissionKey": {
           "type": "string"
+        },
+        "LinkCount": {
+          "type": "integer",
+          "format": "int64"
         }
       }
     },
@@ -7038,7 +7102,180 @@
         },
         "PermissionKey": {
           "type": "string"
+        },
+        "LinkCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "FileType": {
+          "$ref": "#/definitions/FileType"
         }
+      }
+    },
+    "SymLinkItem": {
+      "xml": {
+        "name": "SymLink"
+      },
+      "description": "A listed symbolic link item.",
+      "type": "object",
+      "required": [
+        "Name",
+        "Properties"
+      ],
+      "properties": {
+        "Name": {
+          "$ref": "#/definitions/StringEncoded"
+        },
+        "FileId": {
+          "type": "string"
+        },
+        "Properties": {
+          "$ref": "#/definitions/FileProperty"
+        },
+        "LinkCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "LinkText": {
+          "type": "string"
+        }
+      }
+    },
+    "BlockDeviceItem": {
+      "xml": {
+        "name": "BlockDevice"
+      },
+      "description": "A listed block device item.",
+      "type": "object",
+      "required": [
+        "Name",
+        "Properties"
+      ],
+      "properties": {
+        "Name": {
+          "$ref": "#/definitions/StringEncoded"
+        },
+        "FileId": {
+          "type": "string"
+        },
+        "Properties": {
+          "$ref": "#/definitions/FileProperty"
+        },
+        "LinkCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "DeviceMajor": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "DeviceMinor": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "CharDeviceItem": {
+      "xml": {
+        "name": "CharDevice"
+      },
+      "description": "A listed character device item.",
+      "type": "object",
+      "required": [
+        "Name",
+        "Properties"
+      ],
+      "properties": {
+        "Name": {
+          "$ref": "#/definitions/StringEncoded"
+        },
+        "FileId": {
+          "type": "string"
+        },
+        "Properties": {
+          "$ref": "#/definitions/FileProperty"
+        },
+        "LinkCount": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "DeviceMajor": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "DeviceMinor": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "FifoItem": {
+      "xml": {
+        "name": "Fifo"
+      },
+      "description": "A listed FIFO item.",
+      "type": "object",
+      "required": [
+        "Name",
+        "Properties"
+      ],
+      "properties": {
+        "Name": {
+          "$ref": "#/definitions/StringEncoded"
+        },
+        "FileId": {
+          "type": "string"
+        },
+        "Properties": {
+          "$ref": "#/definitions/FileProperty"
+        },
+        "LinkCount": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "SocketItem": {
+      "xml": {
+        "name": "Socket"
+      },
+      "description": "A listed socket item.",
+      "type": "object",
+      "required": [
+        "Name",
+        "Properties"
+      ],
+      "properties": {
+        "Name": {
+          "$ref": "#/definitions/StringEncoded"
+        },
+        "FileId": {
+          "type": "string"
+        },
+        "Properties": {
+          "$ref": "#/definitions/FileProperty"
+        },
+        "LinkCount": {
+          "type": "integer",
+          "format": "int64"
+        }
+      }
+    },
+    "FileType": {
+      "description": "Type of the file.",
+      "type": "string",
+      "enum": [
+        "Regular",
+        "Directory",
+        "SymLink",
+        "BlockDevice",
+        "CharacterDevice",
+        "Socket",
+        "Fifo"
+      ],
+      "x-ms-enum": {
+        "name": "NfsFileType",
+        "modelAsString": true
       }
     },
     "StringEncoded": {
@@ -7092,6 +7329,15 @@
           "format": "date-time-rfc1123"
         },
         "Etag": {
+          "type": "string"
+        },
+        "Uid": {
+          "type": "string"
+        },
+        "Gid": {
+          "type": "string"
+        },
+        "Mode": {
           "type": "string"
         }
       }
@@ -8292,6 +8538,27 @@
       "format": "date-time-rfc1123",
       "x-ms-parameter-location": "method"
     },
+    "FileEnableChangeFeed": {
+      "name": "x-ms-file-enable-change-feed",
+      "x-ms-client-name": "FileEnableChangeFeed",
+      "in": "header",
+      "description": "Optional. Boolean. Default if not specified is false. This property enables change feed on the share.",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method"
+    },
+    "FileChangeFeedRetentionInDays": {
+      "name": "x-ms-file-change-feed-retention-in-days",
+      "x-ms-client-name": "FileChangeFeedRetentionInDays",
+      "in": "header",
+      "description": "Optional. Integer. Specifies the number of days that change feed records are retained, between 1 and 365. Default if not specified is 7 days.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "minimum": 1,
+      "maximum": 365,
+      "x-ms-parameter-location": "method"
+    },
     "FileLastWriteTimeMode": {
       "name": "x-ms-file-last-write-time",
       "x-ms-client-name": "FileLastWrittenMode",
@@ -8504,7 +8771,11 @@
           "Timestamps",
           "Etag",
           "Attributes",
-          "PermissionKey"
+          "PermissionKey",
+          "Permissions",
+          "LinkCount",
+          "NfsAttributes",
+          "All"
         ],
         "x-ms-enum": {
           "name": "ListFilesIncludeType",
