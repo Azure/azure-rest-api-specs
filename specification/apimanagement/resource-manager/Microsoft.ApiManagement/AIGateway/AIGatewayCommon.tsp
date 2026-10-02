@@ -25,3 +25,90 @@ union AiGatewayProvisioningState {
   /** The resource operation was canceled. */
   Canceled: "Canceled",
 }
+
+/** The type of an AI model provider. */
+@added(Versions.v2026_09_01_preview)
+union AiGatewayModelProviderKind {
+  string,
+
+  /** Azure AI Foundry provider. */
+  Foundry: "Foundry",
+
+  /** Custom model provider. */
+  Custom: "Custom",
+}
+
+/** Authentication type used by an AI model provider. */
+@added(Versions.v2026_09_01_preview)
+union AiGatewayModelProviderAuthenticationKind {
+  string,
+
+  /** Authenticate using a managed identity. */
+  ManagedIdentity: "ManagedIdentity",
+
+  /** Authenticate using an API key. */
+  ApiKey: "ApiKey",
+}
+
+/** Authentication type used by a tool server endpoint. */
+@added(Versions.v2026_09_01_preview)
+union AiGatewayToolServerCredentialKind {
+  string,
+
+  /** No credentials. */
+  None: "None",
+
+  /** Authenticate using an API key. */
+  ApiKey: "ApiKey",
+}
+
+/** The type of a tool server endpoint. */
+@added(Versions.v2026_09_01_preview)
+union AiGatewayToolServerEndpointKind {
+  string,
+
+  /** Connect to an MCP server URL. */
+  McpUrl: "McpUrl",
+
+  /** Create an MCP endpoint from an OpenAPI document. */
+  McpFromOpenApi: "McpFromOpenApi",
+}
+
+/** Transport used to connect to an MCP server. */
+@added(Versions.v2026_09_01_preview)
+union AiGatewayMcpTransport {
+  string,
+
+  /** Streamable HTTP transport. */
+  StreamableHttp: "StreamableHttp",
+}
+
+/** Source type for an OpenAPI document. */
+@added(Versions.v2026_09_01_preview)
+union AiGatewayOpenApiSpecSourceKind {
+  string,
+
+  /** The OpenAPI document is supplied inline. */
+  Inline: "Inline",
+
+  /** The OpenAPI document is loaded from a URL. */
+  Url: "Url",
+}
+
+/** API key slot to regenerate. */
+@added(Versions.v2026_09_01_preview)
+union AiGatewayApiKeyTarget {
+  string,
+
+  /** The primary key. */
+  Primary: "Primary",
+
+  /** The secondary key. */
+  Secondary: "Secondary",
+}
+
+alias AiGatewayIfMatchOptional = {
+  /** ETag of the resource. Required for an update. */
+  @header("If-Match")
+  ifMatch?: string;
+};
