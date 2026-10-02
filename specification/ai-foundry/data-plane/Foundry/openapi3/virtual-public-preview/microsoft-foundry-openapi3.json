@@ -43903,9 +43903,21 @@
             "maxLength": 64,
             "description": "An optional display phone number. It is not the binding identifier."
           },
-          "sip": {
-            "$ref": "#/components/schemas/SipTelephonyConfiguration",
-            "description": "The optional inbound SIP access-control configuration. Omit it for no source-address or caller-number restrictions."
+          "allowed_source_cidrs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 64,
+            "description": "Allowed source IP addresses or CIDR ranges. Omit or use an empty array for no source-address restriction."
+          },
+          "allowed_calling_numbers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 64,
+            "description": "Allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. Omit or use an empty array for no caller-number restriction."
           }
         },
         "allOf": [
@@ -95435,7 +95447,6 @@
         "type": "object",
         "required": [
           "provider",
-          "sip",
           "sip_inbound_uri"
         ],
         "properties": {
@@ -95451,9 +95462,21 @@
             "maxLength": 64,
             "description": "An optional display phone number. It is not the binding identifier."
           },
-          "sip": {
-            "$ref": "#/components/schemas/SipTelephonyConfiguration",
-            "description": "The inbound SIP access-control configuration."
+          "allowed_source_cidrs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 64,
+            "description": "Allowed source IP addresses or CIDR ranges. Omission or an empty array indicates no source-address restriction."
+          },
+          "allowed_calling_numbers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 64,
+            "description": "Allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. Omission or an empty array indicates no caller-number restriction."
           },
           "sip_inbound_uri": {
             "type": "string",
@@ -95477,7 +95500,6 @@
         "type": "object",
         "required": [
           "provider",
-          "sip",
           "sip_inbound_uri"
         ],
         "properties": {
@@ -95493,9 +95515,21 @@
             "maxLength": 64,
             "description": "An optional display phone number. It is not the binding identifier."
           },
-          "sip": {
-            "$ref": "#/components/schemas/SipTelephonyConfiguration",
-            "description": "The inbound SIP access-control configuration."
+          "allowed_source_cidrs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 64,
+            "description": "Allowed source IP addresses or CIDR ranges. Omission or an empty array indicates no source-address restriction."
+          },
+          "allowed_calling_numbers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 64,
+            "description": "Allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. Omission or an empty array indicates no caller-number restriction."
           },
           "sip_inbound_uri": {
             "type": "string",
@@ -95509,92 +95543,6 @@
           }
         ],
         "description": "A SIP binding returned in a list, including its entity tag.",
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "SipTelephonyConfiguration": {
-        "type": "object",
-        "properties": {
-          "allowed_source_cidrs": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "maxItems": 64,
-            "description": "Allowed source IP addresses or CIDR ranges. Omit or use an empty array for no source-address restriction."
-          },
-          "allowed_calling_numbers": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "maxItems": 64,
-            "description": "Allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. Omit or use an empty array for no caller-number restriction."
-          }
-        },
-        "description": "Inbound SIP access-control configuration.",
-        "examples": [
-          {
-            "allowed_source_cidrs": [
-              "192.0.2.0/24"
-            ],
-            "allowed_calling_numbers": [
-              "^\\+1425\\d{7}$"
-            ]
-          }
-        ],
-        "x-ms-foundry-meta": {
-          "required_previews": [
-            "VoiceAgents=V1Preview"
-          ]
-        }
-      },
-      "SipTelephonyConfigurationPatch": {
-        "type": "object",
-        "properties": {
-          "allowed_source_cidrs": {
-            "anyOf": [
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "maxItems": 64,
-            "description": "Allowed source IP addresses or CIDR ranges. On update, omission preserves the current restriction; null or an empty array clears it."
-          },
-          "allowed_calling_numbers": {
-            "anyOf": [
-              {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "maxItems": 64,
-            "description": "Allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. On update, omission preserves the current restriction; null or an empty array clears it."
-          }
-        },
-        "description": "Changes to inbound SIP access-control configuration. Omitted fields retain their current values; null clears a restriction.",
-        "examples": [
-          {
-            "allowed_source_cidrs": [],
-            "allowed_calling_numbers": [
-              "+14255550123"
-            ]
-          }
-        ],
         "x-ms-foundry-meta": {
           "required_previews": [
             "VoiceAgents=V1Preview"
@@ -99196,16 +99144,21 @@
       "UpdateTelephonyBindingRequest": {
         "type": "object",
         "properties": {
-          "sip": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/SipTelephonyConfigurationPatch"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "description": "The inbound SIP access-control changes. Only valid for SIP bindings. Omitted fields retain current values; null clears all inbound access-control restrictions."
+          "allowed_source_cidrs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 64,
+            "description": "Replacement allowed source IP addresses or CIDR ranges. Only valid for SIP bindings. Omit to preserve the current restriction; use an empty array to clear it."
+          },
+          "allowed_calling_numbers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 64,
+            "description": "Replacement allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. Only valid for SIP bindings. Omit to preserve the current restriction; use an empty array to clear it."
           },
           "status": {
             "$ref": "#/components/schemas/TelephonyBindingStatus",

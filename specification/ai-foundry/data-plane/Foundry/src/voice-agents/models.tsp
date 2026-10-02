@@ -608,16 +608,26 @@ model CreateSipTelephonyBindingRequest extends CreateTelephonyBindingRequest {
   @maxLength(64)
   phone_number?: string;
 
-  @doc("The optional inbound SIP access-control configuration. Omit it for no source-address or caller-number restrictions.")
-  sip?: SipTelephonyConfiguration;
+  @doc("Allowed source IP addresses or CIDR ranges. Omit or use an empty array for no source-address restriction.")
+  @maxItems(64)
+  allowed_source_cidrs?: string[];
+
+  @doc("Allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. Omit or use an empty array for no caller-number restriction.")
+  @maxItems(64)
+  allowed_calling_numbers?: string[];
 }
 
 @doc("The request to update an existing telephony binding. Every property is optional and the binding's provider is immutable.")
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @clientName("UpdateTelephonyBindingContent", "csharp")
 model UpdateTelephonyBindingRequest {
-  @doc("The inbound SIP access-control changes. Only valid for SIP bindings. Omitted fields retain current values; null clears all inbound access-control restrictions.")
-  sip?: SipTelephonyConfigurationPatch | null;
+  @doc("Replacement allowed source IP addresses or CIDR ranges. Only valid for SIP bindings. Omit to preserve the current restriction; use an empty array to clear it.")
+  @maxItems(64)
+  allowed_source_cidrs?: string[];
+
+  @doc("Replacement allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. Only valid for SIP bindings. Omit to preserve the current restriction; use an empty array to clear it.")
+  @maxItems(64)
+  allowed_calling_numbers?: string[];
 
   @doc("The new lifecycle status.")
   status?: TelephonyBindingStatus;
@@ -700,8 +710,13 @@ model SipTelephonyBinding extends TelephonyBinding {
   @maxLength(64)
   phone_number?: string;
 
-  @doc("The inbound SIP access-control configuration.")
-  sip: SipTelephonyConfiguration;
+  @doc("Allowed source IP addresses or CIDR ranges. Omission or an empty array indicates no source-address restriction.")
+  @maxItems(64)
+  allowed_source_cidrs?: string[];
+
+  @doc("Allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. Omission or an empty array indicates no caller-number restriction.")
+  @maxItems(64)
+  allowed_calling_numbers?: string[];
 
   @doc("The service-generated inbound SIP URI.")
   sip_inbound_uri: url;
@@ -776,43 +791,16 @@ model SipTelephonyBindingListItem extends TelephonyBindingListItem {
   @maxLength(64)
   phone_number?: string;
 
-  @doc("The inbound SIP access-control configuration.")
-  sip: SipTelephonyConfiguration;
-
-  @doc("The service-generated inbound SIP URI.")
-  sip_inbound_uri: url;
-}
-
-@doc("Inbound SIP access-control configuration.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@example(#{
-  allowed_source_cidrs: #["192.0.2.0/24"],
-  allowed_calling_numbers: #["^\\+1425\\d{7}$"],
-})
-model SipTelephonyConfiguration {
-  @doc("Allowed source IP addresses or CIDR ranges. Omit or use an empty array for no source-address restriction.")
+  @doc("Allowed source IP addresses or CIDR ranges. Omission or an empty array indicates no source-address restriction.")
   @maxItems(64)
   allowed_source_cidrs?: string[];
 
-  @doc("Allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. Omit or use an empty array for no caller-number restriction.")
+  @doc("Allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. Omission or an empty array indicates no caller-number restriction.")
   @maxItems(64)
   allowed_calling_numbers?: string[];
-}
 
-@doc("Changes to inbound SIP access-control configuration. Omitted fields retain their current values; null clears a restriction.")
-@extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
-@example(#{
-  allowed_source_cidrs: #[],
-  allowed_calling_numbers: #["+14255550123"],
-})
-model SipTelephonyConfigurationPatch {
-  @doc("Allowed source IP addresses or CIDR ranges. On update, omission preserves the current restriction; null or an empty array clears it.")
-  @maxItems(64)
-  allowed_source_cidrs?: string[] | null;
-
-  @doc("Allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. On update, omission preserves the current restriction; null or an empty array clears it.")
-  @maxItems(64)
-  allowed_calling_numbers?: string[] | null;
+  @doc("The service-generated inbound SIP URI.")
+  sip_inbound_uri: url;
 }
 
 /** A telephony binding response with its entity tag. */
