@@ -253,6 +253,12 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
 
 - **Caching**: Use appropriate caching strategies (e.g., pnpm cache in setup-node)
 - **Early exits**: Return early when conditions aren't met
+- **PR lifecycle**: Gate direct PR check jobs on an open PR. Before writing PR labels, comments, or
+  statuses, use `getOpenPullRequest()` from `workflows/src/context.ts` to recheck live state;
+  queued event payloads can be stale. Ignore skipped upstream runs in downstream job conditions.
+  Label-only consumers should also ignore cancelled runs, but status consumers must still report
+  failures and cancellations when needed. Keep approval-label authorization enforcement active
+  on closed PRs so reopening cannot bypass it.
 
 ## Common Tasks
 

@@ -2,7 +2,7 @@ import type { GitHubScriptArgs } from "./github.ts";
 import { REVIEW_REQUIRED_LABELS } from "../../shared/src/breaking-change.ts";
 import { PER_PAGE_MAX } from "../../shared/src/github.ts";
 import { byDate, invert } from "../../shared/src/sort.ts";
-import { extractInputs } from "./context.ts";
+import { extractInputs, getOpenPullRequest } from "./context.ts";
 
 export const SWAGGER_BREAKING_CHANGE_WORKFLOW_NAME = "Swagger BreakingChange - Analyze Code";
 export const CROSS_VERSION_BREAKING_CHANGE_WORKFLOW_NAME =
@@ -14,6 +14,7 @@ export default async function getLabelActions({
   core,
 }: GitHubScriptArgs): Promise<void> {
   const { owner, repo, head_sha, issue_number } = await extractInputs(github, context, core);
+  if (!(await getOpenPullRequest(github, core, { owner, repo, issue_number }))) return;
 
   core.setOutput("head_sha", head_sha);
   core.setOutput("issue_number", issue_number);
