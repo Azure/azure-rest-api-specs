@@ -9,7 +9,6 @@ import {
   projectPath,
   releasePlanDetails,
   requiredPlanId,
-  requiredTargetRevision,
 } from "./spec-target.ts";
 import type {
   ApiReleaseType,
@@ -29,7 +28,7 @@ export function createAzdskRunner(): AzsdkRunner {
 }
 
 /**
- * Selects a plan by project, API version and release type, then explicitly confirms its spec target.
+ * Selects a plan by project, API version and release type, then updates its spec target if needed.
  * @param context The release plan command context containing PR, project, and release info
  * @param runner Function to execute azsdk release-plan commands
  * @returns Result indicating whether plan was found by PR, by path, or newly created
@@ -42,7 +41,7 @@ export function ensureReleasePlan(
   assertApiVersion(context.apiVersion);
   assertSpecCommitSha(context.specCommitSha);
   if (!context.prUrl) {
-    throw new Error("A merged spec pull request is required to confirm a release target.");
+    throw new Error("A merged spec pull request is required to update a release target.");
   }
   const existing = runGetReleasePlan(context, runner);
   if (existing) {
@@ -50,7 +49,7 @@ export function ensureReleasePlan(
       releasePlanDetails(existing).ActiveSpecPullRequest === context.prUrl
         ? "existing_by_pr"
         : "existing_by_path";
-    return confirmExistingPlan(existing, outcome, context, runner);
+    return updateExistingPlan(existing, outcome, context, runner);
   }
 
   if (!allowCreate) {
@@ -62,31 +61,38 @@ export function ensureReleasePlan(
   }
 
   const created = runCreateReleasePlan(context, runner);
+  if (isInactivePlan(created)) {
+    return {
+      outcome: "inactive_plan",
+      releasePlan: created,
+      details: buildDetails(context, created),
+    };
+  }
   const createdDetails = validateSelectedPlan(created, context, false);
   if (
-    createdDetails.SpecAPIVersion !== context.apiVersion ||
     createdDetails.ActiveSpecPullRequest !== context.prUrl ||
     (context.apiReleaseType !== "Private Preview" &&
-      createdDetails.SpecCommitSHA?.toLowerCase() !== context.specCommitSha.toLowerCase())
+      (createdDetails.SpecAPIVersion !== context.apiVersion ||
+        createdDetails.SpecCommitSHA?.toLowerCase() !== context.specCommitSha.toLowerCase()))
   ) {
-    // Create may reuse a plan discovered concurrently. Update against its observed revision,
-    // with the same ancestry and concurrency checks as an ordinary discovery result.
+    // Create may reuse a plan discovered concurrently. Apply the same ancestry checks as
+    // an ordinary discovery result; the CLI handles conditional writes internally.
     const outcome =
       createdDetails.ActiveSpecPullRequest === context.prUrl
         ? "existing_by_pr"
         : "existing_by_path";
-    return confirmExistingPlan(created, outcome, context, runner);
+    return updateExistingPlan(created, outcome, context, runner);
   }
-  const confirmed = getReleasePlanByWorkItemId(
+  const saved = getReleasePlanByWorkItemId(
     requiredPlanId(createdDetails.WorkItemId, "WorkItemId"),
     runner,
   );
-  validateSelectedPlan(confirmed, context, true);
-  validateSamePlan(created, confirmed);
+  validateSelectedPlan(saved, context, true);
+  validateSamePlan(created, saved);
   return {
     outcome: "created",
-    releasePlan: confirmed,
-    details: buildDetails(context, confirmed),
+    releasePlan: saved,
+    details: buildDetails(context, saved),
   };
 }
 
@@ -98,14 +104,14 @@ function validateSelectedPlan(
   const details = releasePlanDetails(plan);
   requiredPlanId(details.WorkItemId, "WorkItemId");
   requiredPlanId(details.ReleasePlanId, "ReleasePlanId");
-  // A reused plan for this PR can have no version yet; the confirmed readback cannot.
-  const canConfigureVersion =
-    !requireTarget &&
-    context.apiReleaseType !== "Private Preview" &&
+  // Private preview updates are link-only. A reused public plan for this PR can lack a
+  // version, but its saved target must include the metadata-derived version.
+  const allowMissingVersion =
     !details.SpecAPIVersion?.trim() &&
-    details.ActiveSpecPullRequest === context.prUrl;
+    (context.apiReleaseType === "Private Preview" ||
+      (!requireTarget && details.ActiveSpecPullRequest === context.prUrl));
   if (
-    (details.SpecAPIVersion !== context.apiVersion && !canConfigureVersion) ||
+    (details.SpecAPIVersion !== context.apiVersion && !allowMissingVersion) ||
     apiReleaseTypeLabel(details.ApiReleaseType) !== context.apiReleaseType ||
     projectPath(details.APISpecProjectPath, context.workspace) !==
       projectPath(context.tspProjectPath, context.workspace)
@@ -121,11 +127,11 @@ function validateSelectedPlan(
     if (context.apiReleaseType !== "Private Preview") {
       assertSpecCommitSha(details.SpecCommitSHA);
       if (details.SpecCommitSHA.toLowerCase() !== context.specCommitSha.toLowerCase()) {
-        throw new Error("The confirmed release plan spec commit does not match the event target.");
+        throw new Error("The saved release plan spec commit does not match the event target.");
       }
     }
     if (details.ActiveSpecPullRequest !== context.prUrl) {
-      throw new Error("The confirmed release plan spec PR does not match the event target.");
+      throw new Error("The saved release plan spec PR does not match the event target.");
     }
   }
   return details;
@@ -140,17 +146,24 @@ function validateSamePlan(before: ReleasePlanData, after: ReleasePlanData): void
     previous.SDKReleaseType !== current.SDKReleaseType
   ) {
     throw new Error(
-      "The release plan identity or SDK release type changed during spec target confirmation.",
+      "The release plan identity or SDK release type changed during the spec target update.",
     );
   }
 }
 
-function confirmExistingPlan(
+function updateExistingPlan(
   existing: ReleasePlanData,
   outcome: "existing_by_pr" | "existing_by_path",
   context: ReleasePlanCommandContext,
   runner: AzsdkRunner,
 ): EnsureReleasePlanResult {
+  if (isInactivePlan(existing)) {
+    return {
+      outcome: "inactive_plan",
+      releasePlan: existing,
+      details: buildDetails(context, existing),
+    };
+  }
   const details = validateSelectedPlan(existing, context, false);
   const isPrivatePreview = context.apiReleaseType === "Private Preview";
   const samePullRequest = details.ActiveSpecPullRequest === context.prUrl;
@@ -172,9 +185,9 @@ function confirmExistingPlan(
   }
   if (
     samePullRequest &&
-    details.SpecAPIVersion === context.apiVersion &&
     (isPrivatePreview ||
-      details.SpecCommitSHA?.toLowerCase() === context.specCommitSha.toLowerCase())
+      (details.SpecAPIVersion === context.apiVersion &&
+        details.SpecCommitSHA?.toLowerCase() === context.specCommitSha.toLowerCase()))
   ) {
     return { outcome, releasePlan: existing, details: buildDetails(context, existing) };
   }
@@ -190,36 +203,31 @@ function confirmExistingPlan(
       projectPath(context.tspProjectPath, context.workspace),
       "--pull-request",
       context.prUrl!,
-      ...targetArguments(context, isPrivatePreview ? undefined : requiredTargetRevision(details)),
+      ...targetArguments(context),
       "--output",
       "json",
     ]),
     "release-plan update-spec-pr",
   );
   if (response?.status !== "Success") {
-    throw new Error("azsdk did not confirm a successful spec target update.");
+    throw new Error("azsdk did not return a successful spec target update.");
   }
-  const confirmed = getReleasePlanByWorkItemId(workItemId, runner);
-  validateSelectedPlan(confirmed, context, true);
-  validateSamePlan(existing, confirmed);
-  return { outcome, releasePlan: confirmed, details: buildDetails(context, confirmed) };
+  const saved = getReleasePlanByWorkItemId(workItemId, runner);
+  validateSelectedPlan(saved, context, true);
+  validateSamePlan(existing, saved);
+  return { outcome, releasePlan: saved, details: buildDetails(context, saved) };
 }
 
-function targetArguments(
-  context: ReleasePlanCommandContext,
-  expectedTargetRevision?: string,
-): string[] {
+function isInactivePlan(plan: ReleasePlanData): boolean {
+  const state = releasePlanDetails(plan).Status?.trim().toLowerCase();
+  return ["finished", "abandoned", "closed", "duplicate"].includes(state ?? "");
+}
+
+function targetArguments(context: ReleasePlanCommandContext): string[] {
   if (context.apiReleaseType === "Private Preview") {
     return [];
   }
-  return [
-    "--api-version",
-    context.apiVersion,
-    "--spec-commit-sha",
-    context.specCommitSha,
-    "--confirm-target",
-    ...(expectedTargetRevision ? ["--expected-target-revision", expectedTargetRevision] : []),
-  ];
+  return ["--spec-commit-sha", context.specCommitSha];
 }
 
 /**
@@ -265,7 +273,7 @@ function runGetReleasePlan(
 }
 
 /**
- * Exit zero alone is not success: confirmation previews and response errors never authorize work.
+ * Exit zero alone is not success: response errors and failure statuses never authorize work.
  * Only the CLI's exact lookup-miss response (or JSON null) permits discovery to continue.
  */
 export function parseAzdskResponse(
@@ -286,9 +294,6 @@ export function parseAzdskResponse(
     throw new Error(`Expected a JSON object from azsdk ${command}.`);
   }
   const response = parsed as ReleasePlanData;
-  if (response.requires_confirmation) {
-    throw new Error(`azsdk ${command} requires confirmation; no confirmed target was returned.`);
-  }
   if (
     allowNotFound &&
     response.response_error === "Failed to get release plan details." &&
@@ -403,7 +408,7 @@ function getReleasePlanByWorkItemId(workItemId: string, runner: AzsdkRunner): Re
     "release-plan get",
   );
   if (!response) {
-    throw new Error("azsdk release-plan get did not return the confirmed release plan.");
+    throw new Error("azsdk release-plan get did not return the saved release plan.");
   }
   return response;
 }

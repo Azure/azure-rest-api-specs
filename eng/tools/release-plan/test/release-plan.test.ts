@@ -1,5 +1,22 @@
 import path from "node:path";
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+const { mockGit } = vi.hoisted(() => ({
+  mockGit: vi.fn<
+    (
+      command: string,
+      args: string[],
+      options: unknown,
+    ) => {
+      status: number;
+      stdout: string;
+      stderr: string;
+    }
+  >(),
+}));
+vi.mock("node:child_process", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("node:child_process")>()),
+  spawnSync: mockGit,
+}));
 import {
   ensureReleasePlan,
   getApiReleaseType,
@@ -7,6 +24,9 @@ import {
   getSdkReleaseType,
 } from "../src/release-plan.ts";
 import type { AzsdkRunner, ReleasePlanDetails } from "../src/types.ts";
+import { compareSpecCommits } from "../src/spec-target.ts";
+
+beforeEach(() => mockGit.mockReset());
 
 describe("release type helpers", () => {
   it("sets Private Preview for private specs repo", () => {
@@ -68,9 +88,9 @@ describe("ensureReleasePlan", () => {
         SpecAPIVersion: baseContext.apiVersion,
         ApiReleaseType: 2,
         SDKReleaseType: baseContext.sdkReleaseType,
+        Status: "In Progress",
         SpecCommitSHA: baseContext.specCommitSha,
         ActiveSpecPullRequest: baseContext.prUrl,
-        TargetRevision: `${id}:1:${id + 1}:1`,
         ...details,
       },
     };
@@ -92,7 +112,7 @@ describe("ensureReleasePlan", () => {
     const mergeRunner = createRunner({
       [`release-plan get --typespec-path ${typespecPath} --api-version 2026-06-01-preview --api-release-type Public Preview --output json`]:
         { code: 0, out: JSON.stringify(buildPlan(100)) },
-      [`release-plan update-spec-pr --workitem-id 100 --typespec-path ${typespecPath} --pull-request https://github.com/Azure/azure-rest-api-specs/pull/123 --api-version 2026-06-01-preview --spec-commit-sha ${mergeSha} --confirm-target --expected-target-revision 100:1:101:1 --output json`]:
+      [`release-plan update-spec-pr --workitem-id 100 --typespec-path ${typespecPath} --pull-request https://github.com/Azure/azure-rest-api-specs/pull/123 --spec-commit-sha ${mergeSha} --output json`]:
         { code: 0, out: JSON.stringify({ status: "Success" }) },
       "release-plan get --workitem-id 100 --output json": {
         code: 0,
@@ -115,7 +135,7 @@ describe("ensureReleasePlan", () => {
             }),
           ),
         },
-      [`release-plan update-spec-pr --workitem-id 101 --typespec-path ${typespecPath} --pull-request https://github.com/Azure/azure-rest-api-specs/pull/123 --api-version 2026-06-01-preview --spec-commit-sha ${baseContext.specCommitSha} --confirm-target --expected-target-revision 101:1:102:1 --output json`]:
+      [`release-plan update-spec-pr --workitem-id 101 --typespec-path ${typespecPath} --pull-request https://github.com/Azure/azure-rest-api-specs/pull/123 --spec-commit-sha ${baseContext.specCommitSha} --output json`]:
         { code: 0, out: JSON.stringify({ status: "Success" }) },
       "release-plan get --workitem-id 101 --output json": {
         code: 0,
@@ -135,7 +155,7 @@ describe("ensureReleasePlan", () => {
           code: 0,
           out: "null",
         },
-      [`release-plan create --typespec-path ${typespecPath} --api-release-type Public Preview --release-month July 2026 --pull-request https://github.com/Azure/azure-rest-api-specs/pull/123 --test-release false --api-version 2026-06-01-preview --spec-commit-sha ${baseContext.specCommitSha} --confirm-target --output json`]:
+      [`release-plan create --typespec-path ${typespecPath} --api-release-type Public Preview --release-month July 2026 --pull-request https://github.com/Azure/azure-rest-api-specs/pull/123 --test-release false --spec-commit-sha ${baseContext.specCommitSha} --output json`]:
         {
           code: 0,
           out: JSON.stringify(buildPlan(999)),
@@ -184,13 +204,8 @@ describe("ensureReleasePlan", () => {
           typespecPath,
           "--pull-request",
           baseContext.prUrl,
-          "--api-version",
-          baseContext.apiVersion,
           "--spec-commit-sha",
           baseContext.specCommitSha,
-          "--confirm-target",
-          "--expected-target-revision",
-          "999:1:1000:1",
           "--output",
           "json",
         ]);
@@ -206,7 +221,7 @@ describe("ensureReleasePlan", () => {
           code: 0,
           out: "null",
         },
-      [`release-plan create --typespec-path ${typespecPath} --api-release-type Public Preview --release-month July 2026 --pull-request https://github.com/Azure/azure-rest-api-specs/pull/123 --test-release true --api-version 2026-06-01-preview --spec-commit-sha ${baseContext.specCommitSha} --confirm-target --output json`]:
+      [`release-plan create --typespec-path ${typespecPath} --api-release-type Public Preview --release-month July 2026 --pull-request https://github.com/Azure/azure-rest-api-specs/pull/123 --test-release true --spec-commit-sha ${baseContext.specCommitSha} --output json`]:
         {
           code: 0,
           out: JSON.stringify(buildPlan(1000)),
@@ -278,7 +293,7 @@ describe("ensureReleasePlan", () => {
           code: 0,
           out: "null",
         },
-      [`release-plan create --typespec-path ${typespecPath} --api-release-type Public Preview --release-month July 2026 --pull-request https://github.com/Azure/azure-rest-api-specs/pull/123 --test-release false --api-version 2026-06-01-preview --spec-commit-sha ${baseContext.specCommitSha} --confirm-target --output json`]:
+      [`release-plan create --typespec-path ${typespecPath} --api-release-type Public Preview --release-month July 2026 --pull-request https://github.com/Azure/azure-rest-api-specs/pull/123 --test-release false --spec-commit-sha ${baseContext.specCommitSha} --output json`]:
         {
           code: 0,
           out: "{ broken json",
@@ -297,7 +312,7 @@ describe("ensureReleasePlan", () => {
           code: 0,
           out: "null",
         },
-      [`release-plan create --typespec-path ${typespecPath} --api-release-type Public Preview --release-month July 2026 --pull-request https://github.com/Azure/azure-rest-api-specs/pull/123 --test-release false --api-version 2026-06-01-preview --spec-commit-sha ${baseContext.specCommitSha} --confirm-target --output json`]:
+      [`release-plan create --typespec-path ${typespecPath} --api-release-type Public Preview --release-month July 2026 --pull-request https://github.com/Azure/azure-rest-api-specs/pull/123 --test-release false --spec-commit-sha ${baseContext.specCommitSha} --output json`]:
         {
           code: 1,
           out: "",
@@ -316,7 +331,7 @@ describe("ensureReleasePlan", () => {
           code: 0,
           out: "null",
         },
-      [`release-plan create --typespec-path ${typespecPath} --api-release-type Public Preview --release-month December 2025 --pull-request https://github.com/Azure/azure-rest-api-specs/pull/123 --test-release false --api-version 2026-06-01-preview --spec-commit-sha ${baseContext.specCommitSha} --confirm-target --output json`]:
+      [`release-plan create --typespec-path ${typespecPath} --api-release-type Public Preview --release-month December 2025 --pull-request https://github.com/Azure/azure-rest-api-specs/pull/123 --test-release false --spec-commit-sha ${baseContext.specCommitSha} --output json`]:
         {
           code: 0,
           out: JSON.stringify(buildPlan(500)),
@@ -360,5 +375,97 @@ describe("ensureReleasePlan", () => {
     const result = ensureReleasePlan(baseContext, runner, false);
     expect(result.outcome).toBe("not_found");
     expect(result.releasePlan).toBeNull();
+  });
+
+  it.each(["Finished", "Abandoned", "Closed", "Duplicate"])(
+    "does not update a %s plan returned by versioned lookup or concurrent create reuse",
+    (status) => {
+      for (const reusedByCreate of [false, true]) {
+        const plan = buildPlan(100, {
+          Status: status,
+          ActiveSpecPullRequest: "https://github.com/Azure/azure-rest-api-specs/pull/122",
+        });
+        const calls: string[][] = [];
+        const runner: AzsdkRunner = (args) => {
+          calls.push(args);
+          return {
+            exitCode: 0,
+            stdout: JSON.stringify(reusedByCreate && calls.length === 1 ? null : plan),
+            stderr: "",
+          };
+        };
+        const result = ensureReleasePlan(baseContext, runner);
+        expect(result.outcome).toBe("inactive_plan");
+        expect(calls.map((args) => args[1])).toEqual(reusedByCreate ? ["get", "create"] : ["get"]);
+        expect(result.releasePlan).toEqual(plan);
+      }
+    },
+  );
+
+  it("skips an older event without requesting a target update", () => {
+    mockGit
+      .mockReturnValueOnce({ status: 1, stdout: "", stderr: "" })
+      .mockReturnValueOnce({ status: 0, stdout: "", stderr: "" });
+    const runner = vi.fn(() => ({
+      exitCode: 0,
+      stdout: JSON.stringify(
+        buildPlan(100, {
+          SpecCommitSHA: "b".repeat(40),
+          ActiveSpecPullRequest: "https://github.com/Azure/azure-rest-api-specs/pull/124",
+        }),
+      ),
+      stderr: "",
+    }));
+    expect(ensureReleasePlan(baseContext, runner).outcome).toBe("stale_event");
+    expect(runner).toHaveBeenCalledOnce();
+  });
+
+  it("does not retry a concurrent writer failure or accept it as success", () => {
+    const calls: string[][] = [];
+    const runner: AzsdkRunner = (args) => {
+      calls.push(args);
+      return args[1] === "update-spec-pr"
+        ? { exitCode: 1, stdout: JSON.stringify({ response_error: "target changed" }), stderr: "" }
+        : {
+            exitCode: 0,
+            stdout: JSON.stringify(buildPlan(100, { SpecCommitSHA: "" })),
+            stderr: "",
+          };
+    };
+    expect(() => ensureReleasePlan(baseContext, runner)).toThrow("target changed");
+    expect(calls.map((args) => args[1])).toEqual(["get", "update-spec-pr"]);
+  });
+});
+
+describe("spec commit ancestry", () => {
+  const older = "a".repeat(40);
+  const newer = "b".repeat(40);
+
+  it("accepts the same commit without reading history", () => {
+    expect(compareSpecCommits("/repo", older, older)).toBe("same");
+    expect(mockGit).not.toHaveBeenCalled();
+  });
+
+  it.each([
+    [0, "advance"],
+    [1, "stale"],
+  ] as const)(
+    "classifies complete history with first ancestor result %s",
+    (firstResult, expected) => {
+      mockGit
+        .mockReturnValueOnce({ status: firstResult, stdout: "", stderr: "" })
+        .mockReturnValueOnce({ status: 0, stdout: "", stderr: "" });
+      expect(compareSpecCommits("/repo", older, newer)).toBe(expected);
+      expect(mockGit).toHaveBeenCalledWith(
+        "git",
+        ["--no-optional-locks", "-C", "/repo", "merge-base", "--is-ancestor", older, newer],
+        expect.any(Object),
+      );
+    },
+  );
+
+  it.each([1, 128])("rejects divergent or unavailable history (%s)", (status) => {
+    mockGit.mockReturnValue({ status, stdout: "", stderr: "missing history" });
+    expect(() => compareSpecCommits("/repo", older, newer)).toThrow(/history|ancestry/);
   });
 });

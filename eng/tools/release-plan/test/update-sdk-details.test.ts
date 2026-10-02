@@ -11,7 +11,6 @@ const PLAN_TARGET = {
   APISpecProjectPath: SPEC_PATH,
   SpecAPIVersion: "2026-06-01-preview",
   SpecCommitSHA: "a".repeat(40),
-  TargetRevision: "9001:1:9002:1",
   ApiReleaseType: 2,
   SDKReleaseType: "beta",
   ActiveSpecPullRequest: "https://github.com/Azure/azure-rest-api-specs/pull/123",
@@ -91,40 +90,61 @@ describe("runUpdateSdkDetails", () => {
   });
 
   it("updates SDK details when release plan is in progress", () => {
-    const calls: string[][] = [];
-    const runner = vi.fn((args: string[]) => {
-      calls.push(args);
-      if (args[0] === "release-plan" && args[1] === "get") {
-        return ok(buildPlan({ Status: "In progress" }));
-      }
-      return ok(buildPlan({ Status: "In progress" }));
-    });
+    for (const isPrivatePreview of [false, true]) {
+      const target = {
+        ...PLAN_TARGET,
+        ...(isPrivatePreview
+          ? {
+              ApiReleaseType: 1,
+              SpecAPIVersion: undefined,
+              SpecCommitSHA: undefined,
+              ActiveSpecPullRequest: "https://github.com/Azure/azure-rest-api-specs-pr/pull/123",
+            }
+          : {}),
+      };
+      const calls: string[][] = [];
+      const runner = vi.fn((args: string[]) => {
+        calls.push(args);
+        return ok(buildPlan(target));
+      });
 
-    runUpdateSdkDetails(cliArgs, {
-      readArtifact: vi.fn(() => buildArtifact("created")),
-      runner,
-    });
+      runUpdateSdkDetails(cliArgs, {
+        readArtifact: vi.fn(() =>
+          JSON.stringify({
+            outcome: "created",
+            releasePlan: { release_plan_details: target },
+            details: {
+              prUrl: target.ActiveSpecPullRequest,
+              tspProjectPath: SPEC_PATH,
+              apiVersion: PLAN_TARGET.SpecAPIVersion,
+              specCommitSha: PLAN_TARGET.SpecCommitSHA,
+              apiReleaseType: isPrivatePreview ? "Private Preview" : "Public Preview",
+              sdkReleaseType: PLAN_TARGET.SDKReleaseType,
+              targetReleaseMonth: "July 2026",
+            },
+          }),
+        ),
+        runner,
+      });
 
-    expect(calls).toContainEqual([
-      "release-plan",
-      "update",
-      "--typespec-path",
-      path.resolve(WORKSPACE, SPEC_PATH),
-      "--workitem-id",
-      "9001",
-      "--sdk-type",
-      "beta",
-      "--pull-request",
-      PLAN_TARGET.ActiveSpecPullRequest,
-      "--api-version",
-      "2026-06-01-preview",
-      "--spec-commit-sha",
-      PLAN_TARGET.SpecCommitSHA,
-      "--confirm-target",
-      "--expected-target-revision",
-      "9001:1:9002:1",
-      "--output",
-      "json",
-    ]);
+      expect(calls).toEqual([
+        ["release-plan", "get", "--release-plan-id", "12345", "--output", "json"],
+        [
+          "release-plan",
+          "update",
+          "--typespec-path",
+          path.resolve(WORKSPACE, SPEC_PATH),
+          "--workitem-id",
+          "9001",
+          "--sdk-type",
+          "beta",
+          "--pull-request",
+          target.ActiveSpecPullRequest,
+          ...(isPrivatePreview ? [] : ["--spec-commit-sha", PLAN_TARGET.SpecCommitSHA]),
+          "--output",
+          "json",
+        ],
+      ]);
+    }
   });
 });

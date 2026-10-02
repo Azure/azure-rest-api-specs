@@ -407,6 +407,11 @@ export function resolveTypeSpecMetadata(metadata: TypeSpecMetadata): {
   if (apiVersions.size === 0) {
     throw new Error("No valid language configurations found in TypeSpec metadata");
   }
+  if (apiVersions.size > 1) {
+    throw new Error(
+      "Metadata contains multiple API versions. Use an explicit release plan ID instead of selecting one language's version.",
+    );
+  }
 
   return { apiVersion: Array.from(apiVersions)[0] };
 }

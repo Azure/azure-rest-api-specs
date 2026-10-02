@@ -8,7 +8,6 @@ import {
   projectPath,
   releasePlanDetails,
   requiredPlanId,
-  requiredTargetRevision,
   validateArtifactTarget,
 } from "./spec-target.ts";
 import type { AzsdkRunner, EnsureReleasePlanResult } from "./types.ts";
@@ -127,19 +126,8 @@ export function runUpdateSdkDetails(
   const workItemId = requiredPlanId(planDetails.WorkItemId, "WorkItemId");
   const typespecProjectPath = projectPath(planDetails.APISpecProjectPath, args.workspace);
   const sdkReleaseType = planDetails.SDKReleaseType!;
-  // Keep the artifact's observed target and revision, not a newer state learned from the lookup.
-  const specCommitSha = snapshot.SpecCommitSHA!;
-  const targetArgs = isPrivatePreview
-    ? []
-    : [
-        "--api-version",
-        snapshot.SpecAPIVersion!,
-        "--spec-commit-sha",
-        specCommitSha,
-        "--confirm-target",
-        "--expected-target-revision",
-        requiredTargetRevision(snapshot),
-      ];
+  // Keep the artifact's selected commit, not a newer state learned from the lookup.
+  const targetArgs = isPrivatePreview ? [] : ["--spec-commit-sha", snapshot.SpecCommitSHA!];
   console.log("Running release plan update for an in-progress release plan.");
   const updateResult = runner([
     "release-plan",
@@ -159,7 +147,7 @@ export function runUpdateSdkDetails(
 
   const response = parseAzdskResponse(updateResult, "release-plan update");
   if (!response) {
-    throw new Error("azsdk release-plan update did not return a confirmed release plan.");
+    throw new Error("azsdk release-plan update did not return the updated release plan.");
   }
   validateArtifactTarget(artifact, response, args.workspace);
   console.log(

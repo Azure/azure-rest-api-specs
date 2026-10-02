@@ -128,14 +128,6 @@ export function requiredPlanId(value: unknown, field: string): string {
   return id;
 }
 
-/** Carry the CLI's observed parent/child revision verbatim; never replace it on a conflict. */
-export function requiredTargetRevision(details: ReleasePlanDetails): string {
-  if (typeof details.TargetRevision !== "string" || !details.TargetRevision.trim()) {
-    throw new Error("The release plan must contain a target revision before an automatic update.");
-  }
-  return details.TargetRevision;
-}
-
 /** Compare the immutable artifact selection with a freshly fetched plan, never local defaults. */
 export function validateArtifactTarget(
   artifact: EnsureReleasePlanResult,
@@ -146,9 +138,13 @@ export function validateArtifactTarget(
   const fresh = releasePlanDetails(plan);
   const isPrivatePreview = apiReleaseTypeLabel(snapshot.ApiReleaseType) === "Private Preview";
   for (const details of [snapshot, fresh]) {
-    assertApiVersion(details.SpecAPIVersion);
     if (!isPrivatePreview) {
-      assertSpecCommitSha(details.SpecCommitSHA);
+      if (details.SpecAPIVersion) {
+        assertApiVersion(details.SpecAPIVersion);
+      }
+      if (details.SpecCommitSHA) {
+        assertSpecCommitSha(details.SpecCommitSHA);
+      }
     }
     projectPath(details.APISpecProjectPath, workspace);
     requiredPlanId(details.ReleasePlanId, "ReleasePlanId");
@@ -163,9 +159,9 @@ export function validateArtifactTarget(
   if (
     String(snapshot.ReleasePlanId) !== String(fresh.ReleasePlanId) ||
     String(snapshot.WorkItemId) !== String(fresh.WorkItemId) ||
-    snapshot.SpecAPIVersion !== fresh.SpecAPIVersion ||
+    (!isPrivatePreview && (snapshot.SpecAPIVersion ?? "") !== (fresh.SpecAPIVersion ?? "")) ||
     (!isPrivatePreview &&
-      snapshot.SpecCommitSHA!.toLowerCase() !== fresh.SpecCommitSHA!.toLowerCase()) ||
+      (snapshot.SpecCommitSHA ?? "").toLowerCase() !== (fresh.SpecCommitSHA ?? "").toLowerCase()) ||
     projectPath(snapshot.APISpecProjectPath, workspace) !==
       projectPath(fresh.APISpecProjectPath, workspace) ||
     snapshot.ActiveSpecPullRequest !== fresh.ActiveSpecPullRequest ||
@@ -183,7 +179,7 @@ export function validateArtifactTarget(
       assertSpecCommitSha(selection.specCommitSha);
     }
     if (
-      selection.apiVersion !== fresh.SpecAPIVersion ||
+      (!isPrivatePreview && selection.apiVersion !== fresh.SpecAPIVersion) ||
       (!isPrivatePreview &&
         selection.specCommitSha.toLowerCase() !== fresh.SpecCommitSHA!.toLowerCase()) ||
       projectPath(selection.tspProjectPath, workspace) !==

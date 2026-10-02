@@ -238,4 +238,49 @@ describe("runGenerateSdk orchestration", () => {
     await expect(runGenerateSdk(cliArgs, deps)).resolves.toBeUndefined();
     expect(calls.some((c) => c[0] === "release-plan" && c[1] === "update")).toBe(false);
   });
+
+  it.each(["Finished", "Abandoned", "Closed", "Duplicate"])(
+    "does not queue SDKs when the plan is now %s",
+    async (status) => {
+      const { deps, calls } = createHarness({ getResponses: [buildPlan({ Status: status })] });
+      await runGenerateSdk(cliArgs, deps);
+      expect(calls.some((args) => args[0] === "spec-workflow")).toBe(false);
+    },
+  );
+
+  it("skips an inactive-plan artifact without calling the CLI", async () => {
+    const { deps, runner } = createHarness({
+      artifact: JSON.stringify({ outcome: "inactive_plan", releasePlan: null }),
+    });
+    await runGenerateSdk(cliArgs, deps);
+    expect(runner).not.toHaveBeenCalled();
+  });
+
+  it.each(["", "a".repeat(40)])(
+    "allows an existing-ID plan with an empty API version and SHA '%s'",
+    async (sha) => {
+      const target = { ...PLAN_TARGET, SpecAPIVersion: "", SpecCommitSHA: sha };
+      const { deps, calls } = createHarness({
+        artifact: JSON.stringify({
+          outcome: "existing_by_id",
+          releasePlan: { release_plan_details: target },
+          details: { releasePlanId: "12345" },
+        }),
+        getResponses: [buildPlan(target)],
+      });
+      await runGenerateSdk(cliArgs, deps);
+      expect(calls.filter((args) => args[0] === "spec-workflow")).toHaveLength(5);
+      expect(calls.some((args) => args.includes("--api-version"))).toBe(false);
+    },
+  );
+
+  it("does not treat an incomplete stored commit as a legacy plan", async () => {
+    const target = { ...PLAN_TARGET, SpecCommitSHA: "updating" };
+    const { deps, calls } = createHarness({
+      artifact: buildArtifact(target),
+      getResponses: [buildPlan(target)],
+    });
+    await expect(runGenerateSdk(cliArgs, deps)).rejects.toThrow("full 40-character");
+    expect(calls.some((args) => args[0] === "spec-workflow")).toBe(false);
+  });
 });

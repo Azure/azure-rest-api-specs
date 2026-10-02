@@ -231,7 +231,7 @@ export async function runGenerateSdk(
 
   const outcome = artifact.outcome;
   console.log(`Outcome: ${outcome}`);
-  if (outcome === "not_found" || outcome === "stale_event") {
+  if (outcome === "not_found" || outcome === "stale_event" || outcome === "inactive_plan") {
     console.log("No current release target from this event. Skipping SDK generation stage.");
     return;
   }
@@ -243,6 +243,14 @@ export async function runGenerateSdk(
   const releasePlanId = requiredPlanId(artifactPlanDetails.ReleasePlanId, "ReleasePlanId");
   const plan = getReleasePlanById(releasePlanId, runner);
   const freshDetails = releasePlanDetails(plan);
+  if (
+    ["finished", "abandoned", "closed", "duplicate"].includes(
+      freshDetails.Status?.trim().toLowerCase() ?? "",
+    )
+  ) {
+    console.log("Inactive release plans are not eligible for automatic SDK generation.");
+    return;
+  }
   if (apiReleaseTypeLabel(freshDetails.ApiReleaseType) === "Private Preview") {
     validateArtifactTarget(artifact, plan, args.workspace);
     console.log("Private preview plans are not eligible for automatic SDK generation.");
@@ -259,8 +267,8 @@ export async function runGenerateSdk(
   const workItemId = requiredPlanId(planDetails.WorkItemId, "WorkItemId");
   const typespecProjectPath = projectPath(planDetails.APISpecProjectPath, args.workspace);
   const sdkReleaseType = planDetails.SDKReleaseType!;
-  const apiVersion = planDetails.SpecAPIVersion!;
-  const specCommitSha = planDetails.SpecCommitSHA!;
+  const apiVersion = planDetails.SpecAPIVersion ?? "";
+  const specCommitSha = planDetails.SpecCommitSHA ?? "";
   console.log(`TypeSpec Project Path: ${typespecProjectPath}`);
   console.log(
     `ReleasePlanId: ${releasePlanId}; API version: ${apiVersion}; spec commit: ${specCommitSha}`,
@@ -297,8 +305,7 @@ export async function runGenerateSdk(
       language,
       "--workitem-id",
       workItemId,
-      "--api-version",
-      apiVersion,
+      ...(apiVersion ? ["--api-version", apiVersion] : []),
       "--output",
       "json",
     ]);

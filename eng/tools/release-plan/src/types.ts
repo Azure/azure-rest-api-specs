@@ -60,7 +60,6 @@ export interface ReleasePlanDetails extends Record<string, unknown> {
   IsDataPlane?: boolean;
   SpecAPIVersion?: string;
   SpecCommitSHA?: string;
-  TargetRevision?: string;
   SpecType?: string;
   ProductType?: string;
   ProductLifecycle?: string;
@@ -101,6 +100,7 @@ export interface EnsureReleasePlanResult {
     | "existing_by_path"
     | "created"
     | "not_found"
+    | "inactive_plan"
     | "stale_event";
   releasePlan: ReleasePlanData | null;
   details:
