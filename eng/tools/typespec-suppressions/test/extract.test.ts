@@ -2,6 +2,12 @@ import { describe, expect, it } from "vitest";
 import { extractInlineSuppressions, extractTspconfigSuppressions } from "../src/extract.ts";
 
 describe("extractTspconfigSuppressions", () => {
+  it("rejects invalid disables instead of reporting an empty inventory", () => {
+    expect(() =>
+      extractTspconfigSuppressions("demo", "demo/tspconfig.yaml", "linter: { disable: { rule } }"),
+    ).toThrow("Failed to parse demo/tspconfig.yaml:");
+  });
+
   it("extracts linter.disable suppressions with locations", () => {
     const suppressions = extractTspconfigSuppressions(
       "specification/demo/resource-manager/Microsoft.Demo/Demo",
@@ -39,6 +45,28 @@ describe("extractTspconfigSuppressions", () => {
 });
 
 describe("extractInlineSuppressions", () => {
+  it("reports suppressions on and inside block namespaces", () => {
+    const suppressions = extractInlineSuppressions(
+      "demo",
+      "demo/main.tsp",
+      `#suppress "library/namespace" "namespace reason"
+namespace Demo.Service {
+  #suppress "library/model" "model reason"
+  model Widget {}
+}`,
+    );
+    expect(suppressions.map(({ ruleName, anchorPath }) => [ruleName, anchorPath])).toEqual([
+      ["library/namespace", "namespace:Demo.Service"],
+      ["library/model", "namespace:Demo.Service/model:Widget"],
+    ]);
+  });
+
+  it("rejects parse errors instead of producing a partial inventory", () => {
+    expect(() =>
+      extractInlineSuppressions("demo", "demo/main.tsp", "#suppress 123\nmodel Widget {}"),
+    ).toThrow("Failed to parse demo/main.tsp:");
+  });
+
   it("extracts inline suppressions with semantic-ish anchors", () => {
     const suppressions = extractInlineSuppressions(
       "specification/demo/resource-manager/Microsoft.Demo/Demo",
