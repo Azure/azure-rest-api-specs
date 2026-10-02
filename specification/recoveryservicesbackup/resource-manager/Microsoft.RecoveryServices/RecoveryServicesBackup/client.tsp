@@ -2255,6 +2255,11 @@ op protectionPolicyOperationStatusesGet(
 @@clientName(RestoreRequestResource, "TriggerRestoreContent", "csharp");
 @@clientName(RestoreRequest, "RestoreContent", "csharp");
 @@clientName(GetRPExtendedInfoRequest, "GetRPExtendedInfoContent", "csharp");
+@@clientName(
+  ValidateAzureWorkloadRestoreOperationRequest,
+  "ValidateAzureWorkloadRestoreOperationContent",
+  "csharp"
+);
 @@clientName(IaaSVMBulkRestoreRequest, "IaaSVMBulkRestoreContent", "csharp");
 @@clientName(
   FetchRPForBulkRestoreRequest,
