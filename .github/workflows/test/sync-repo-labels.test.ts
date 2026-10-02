@@ -973,7 +973,11 @@ describe("label workflow contract", () => {
     expect(workflow.jobs.sync.if).toContain("github.event_name != 'pull_request'");
     expect(workflow.jobs.sync.if).toContain("github.repository == 'Azure/azure-rest-api-specs'");
     expect(workflow.jobs.sync.if).toContain("github.event.repository.default_branch");
-    expect(workflow.jobs.sync.permissions).toEqual({ contents: "read", issues: "write" });
+    expect(workflow.jobs.sync.permissions).toEqual({
+      contents: "read",
+      issues: "write",
+      "pull-requests": "read",
+    });
     expect(workflow.jobs.sync.concurrency).toEqual({
       group: "sync-repo-labels",
       "cancel-in-progress": false,
