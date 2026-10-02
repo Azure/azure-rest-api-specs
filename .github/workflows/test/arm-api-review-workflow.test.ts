@@ -1,8 +1,8 @@
-import { readFile, readdir } from "fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import { load } from "js-yaml";
-import { join } from "path";
+import { join } from "node:path";
 import { beforeAll, describe, expect, it, vi } from "vitest";
-import { runInNewContext } from "vm";
+import { runInNewContext } from "node:vm";
 
 // cspell:ignore REPOST vally
 
