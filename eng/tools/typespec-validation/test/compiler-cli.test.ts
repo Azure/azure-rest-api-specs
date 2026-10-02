@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 import { promisify, stripVTControlCharacters } from "node:util";
 import { simpleGit } from "simple-git";
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
+import { normalizePath } from "../src/utils.ts";
 
 const exec = promisify(execFile);
 const cli = fileURLToPath(new URL("../cmd/tsv.js", import.meta.url));
@@ -147,7 +148,7 @@ it.each([false, true])("compiles one entrypoint with main present=%s", async (ma
     .map((line): unknown => JSON.parse(line));
   expect(args).toEqual([
     mainExists
-      ? ["compile", "--list-files", "--warn-as-error", folder]
+      ? ["compile", "--list-files", "--warn-as-error", normalizePath(folder)]
       : ["compile", "--no-emit", "--warn-as-error", join(folder, "client.tsp")],
   ]);
 });
