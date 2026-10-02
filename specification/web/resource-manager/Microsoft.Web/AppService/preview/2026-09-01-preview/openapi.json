@@ -2625,6 +2625,54 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/builderApps/{name}/listVariables": {
+      "post": {
+        "operationId": "BuilderApps_ListVariables",
+        "tags": [
+          "BuilderApps"
+        ],
+        "summary": "Lists the current desired variable values for a builder app.",
+        "description": "Lists the current desired variable values for a builder app.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the BuilderApp",
+            "required": true,
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]{1,58}[A-Za-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BuilderAppVariableValueCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List current desired builder app variable values": {
+            "$ref": "./examples/BuilderApps_ListVariables.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/certificates": {
       "get": {
         "operationId": "Certificates_ListByResourceGroup",
@@ -41116,6 +41164,47 @@
           }
         ]
       }
+    },
+    "BuilderAppVariableValue": {
+      "type": "object",
+      "description": "A current desired variable and its value.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the environment variable.",
+          "readOnly": true
+        },
+        "value": {
+          "type": "string",
+          "format": "password",
+          "description": "The current desired value of the variable.",
+          "readOnly": true,
+          "x-ms-secret": true
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "BuilderAppVariableValueCollection": {
+      "type": "object",
+      "description": "The current desired variables and their values for a builder app.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The current desired variables.",
+          "items": {
+            "$ref": "#/definitions/BuilderAppVariableValue"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "BuiltInAuthenticationProvider": {
       "type": "string",

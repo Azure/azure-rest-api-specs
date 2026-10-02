@@ -303,6 +303,38 @@ model BuilderAppVariable {
 }
 
 /**
+ * The current desired variables and their values for a builder app.
+ */
+@added(Versions.v2026_09_01_preview)
+model BuilderAppVariableValueCollection {
+  /**
+   * The current desired variables.
+   */
+  @pageItems
+  @identifiers(#["name"])
+  value: BuilderAppVariableValue[];
+}
+
+/**
+ * A current desired variable and its value.
+ */
+@added(Versions.v2026_09_01_preview)
+model BuilderAppVariableValue {
+  /**
+   * The name of the environment variable.
+   */
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  /**
+   * The current desired value of the variable.
+   */
+  @visibility(Lifecycle.Read)
+  @secret
+  value: string;
+}
+
+/**
  * Where the value of a builder app variable comes from.
  */
 @added(Versions.v2026_09_01_preview)
@@ -338,4 +370,15 @@ interface BuilderApps {
   delete is ArmResourceDeleteWithoutOkAsync<BuilderApp>;
   listByResourceGroup is ArmResourceListByParent<BuilderApp>;
   listBySubscription is ArmListBySubscription<BuilderApp>;
+
+  /**
+   * Lists the current desired variable values for a builder app.
+   */
+  @summary("Lists the current desired variable values for a builder app.")
+  @action("listVariables")
+  listVariables is ArmResourceActionSync<
+    BuilderApp,
+    void,
+    ArmResponse<BuilderAppVariableValueCollection>
+  >;
 }
