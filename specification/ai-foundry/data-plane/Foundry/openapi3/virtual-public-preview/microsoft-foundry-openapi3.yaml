@@ -87487,6 +87487,7 @@ components:
       type: object
       required:
         - provider
+        - incoming_call_url
       properties:
         provider:
           type: string
@@ -87509,6 +87510,10 @@ components:
             type: string
           maxItems: 64
           description: Allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. Omission or an empty array indicates no caller-number restriction.
+        incoming_call_url:
+          type: string
+          format: uri
+          description: The service-generated inbound SIP URI.
       allOf:
         - $ref: '#/components/schemas/TelephonyBinding'
       description: A SIP binding.
@@ -87519,6 +87524,7 @@ components:
       type: object
       required:
         - provider
+        - incoming_call_url
       properties:
         provider:
           type: string
@@ -87541,6 +87547,10 @@ components:
             type: string
           maxItems: 64
           description: Allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. Omission or an empty array indicates no caller-number restriction.
+        incoming_call_url:
+          type: string
+          format: uri
+          description: The service-generated inbound SIP URI.
       allOf:
         - $ref: '#/components/schemas/TelephonyBindingListItem'
       description: A SIP binding returned in a list, including its entity tag.
@@ -88110,9 +88120,14 @@ components:
     TeamsPhoneExtensibilityTelephonyBinding:
       type: object
       required:
+        - incoming_call_url
         - provider
         - resource_account_object_id
       properties:
+        incoming_call_url:
+          type: string
+          format: uri
+          description: The service-generated webhook URL to configure with the telephony provider.
         provider:
           type: string
           enum:
@@ -88134,9 +88149,14 @@ components:
     TeamsPhoneExtensibilityTelephonyBindingListItem:
       type: object
       required:
+        - incoming_call_url
         - provider
         - resource_account_object_id
       properties:
+        incoming_call_url:
+          type: string
+          format: uri
+          description: The service-generated webhook URL to configure with the telephony provider.
         provider:
           type: string
           enum:
@@ -88267,7 +88287,6 @@ components:
         - provider
         - connection_name
         - status
-        - incoming_call_url
       properties:
         id:
           $ref: '#/components/schemas/TelephonyBindingId'
@@ -88287,10 +88306,6 @@ components:
         status:
           $ref: '#/components/schemas/TelephonyBindingStatus'
           description: The lifecycle status.
-        incoming_call_url:
-          type: string
-          format: uri
-          description: The service-generated address for receiving incoming calls. This is an HTTPS webhook URL for webhook-based providers and a SIP URI for SIP.
       discriminator:
         propertyName: provider
         mapping:
@@ -88317,7 +88332,6 @@ components:
         - connection_name
         - status
         - etag
-        - incoming_call_url
       properties:
         id:
           $ref: '#/components/schemas/TelephonyBindingId'
@@ -88341,10 +88355,6 @@ components:
           $ref: '#/components/schemas/Azure.Core.eTag'
           description: The entity tag to send in the `If-Match` header when updating or deleting this binding.
           readOnly: true
-        incoming_call_url:
-          type: string
-          format: uri
-          description: The service-generated address for receiving incoming calls. This is an HTTPS webhook URL for webhook-based providers and a SIP URI for SIP.
       discriminator:
         propertyName: provider
         mapping:
@@ -89977,9 +89987,14 @@ components:
     TwilioTelephonyBinding:
       type: object
       required:
+        - incoming_call_url
         - provider
         - phone_number
       properties:
+        incoming_call_url:
+          type: string
+          format: uri
+          description: The service-generated webhook URL to configure with the telephony provider.
         provider:
           type: string
           enum:
@@ -89998,9 +90013,14 @@ components:
     TwilioTelephonyBindingListItem:
       type: object
       required:
+        - incoming_call_url
         - provider
         - phone_number
       properties:
+        incoming_call_url:
+          type: string
+          format: uri
+          description: The service-generated webhook URL to configure with the telephony provider.
         provider:
           type: string
           enum:
