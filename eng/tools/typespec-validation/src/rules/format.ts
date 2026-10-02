@@ -3,20 +3,16 @@ import { reportCommandOutput } from "../command-output.ts";
 import { blocks, filePath, indent, lines, verbatim } from "../diagnostic-content.ts";
 import { type RuleResult } from "../rule-result.ts";
 import { type Rule } from "../rule.ts";
-import { gitDiffTopSpecFolder, runNodeBin } from "../utils.ts";
+import { formatTypeSpec } from "../typespec-compiler.ts";
+import { gitDiffTopSpecFolder } from "../utils.ts";
 
 export class FormatRule implements Rule {
   readonly name = "Format";
   readonly description = "Format TypeSpec";
 
   async execute(folder: string, logger: ILogger): Promise<RuleResult> {
-    const output = await runNodeBin(
-      "@typespec/compiler",
-      // Format parent folder to include shared files
-      ["tsp", "format", "../**/*.tsp", "tspconfig.yaml"],
-      logger,
-      folder,
-    );
+    // Format parent folder to include shared files
+    const output = await formatTypeSpec(folder, ["../**/*.tsp", "tspconfig.yaml"]);
     const result = reportCommandOutput("format", "TypeSpec formatting", output, logger);
     if (!result.success) return result;
     const gitDiffResult = await gitDiffTopSpecFolder(folder, logger);
