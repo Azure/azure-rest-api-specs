@@ -45,18 +45,6 @@ directive:
     from: openapi.json
     where: $.definitions.FunctionAppVersionProperties.properties.appSettings
     reason: FunctionAppVersionProperties.appSettings intentionally uses a direct object map because application-setting names are customer-defined and the complete immutable version configuration is supplied atomically.
-  - suppress: RequiredPropertiesMissingInResourceModel
-    from: openapi.json
-    where: $.definitions.FunctionAppVersionOperationStatusResult
-    reason: FunctionAppVersionOperationStatusResult is an asynchronous operation-status payload, not an Azure resource.
-  - suppress: BodyTopLevelProperties
-    from: openapi.json
-    where: $.definitions.FunctionAppVersionOperationStatusResult
-    reason: FunctionAppVersionOperationStatusResult is an asynchronous operation-status payload, not an Azure resource.
-  - suppress: EnumInsteadOfBoolean
-    from: openapi.json
-    where: $.definitions.FunctionAppVersionDeployment.properties.remoteBuild
-    reason: remoteBuild is an intentional binary request option that enables or disables remote build.
   - suppress: XmsResourceInPutResponse
     from: WebApps.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/functions/{functionName}/keys/{keyName}"].put

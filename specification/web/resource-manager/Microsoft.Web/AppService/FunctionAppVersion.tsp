@@ -24,10 +24,7 @@ union FunctionAppVersionState {
   /** A package is being uploaded for the ZIP version. */
   Uploading: "Uploading",
 
-  /** A package is being built for the ZIP version. */
-  Building: "Building",
-
-  /** The version is being validated, including resolving a container image reference. */
+  /** The uploaded ZIP package is being validated. */
   Validating: "Validating",
 
   /** The version is ready to receive traffic. */
@@ -55,58 +52,10 @@ union FunctionAppVersionValidationStatus {
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("The status of a Function App version operation.")
-union FunctionAppVersionOperationStatus {
-  /** The operation is running. */
-  InProgress: "InProgress",
-
-  /** The operation succeeded. */
-  Succeeded: "Succeeded",
-
-  /** The operation failed. */
-  Failed: "Failed",
-
-  /** The operation was canceled. */
-  Canceled: "Canceled",
-
-  string,
-}
-
-@added(Versions.v2026_10_01_preview)
-@doc("The Function App version artifact type.")
-union FunctionAppVersionArtifactType {
-  /** A ZIP package artifact. */
-  ZipPackage: "zipPackage",
-
-  /** A container image artifact. */
-  ContainerImage: "containerImage",
-
-  string,
-}
-
-@added(Versions.v2026_10_01_preview)
-@doc("The artifact used by a Function App version.")
-@discriminator("type")
+@doc("The ZIP package artifact used by a Function App version.")
 model FunctionAppVersionArtifact {
   /** The artifact type. */
-  type: FunctionAppVersionArtifactType;
-}
-
-@added(Versions.v2026_10_01_preview)
-@doc("A ZIP package artifact.")
-model ZipPackageAppArtifact extends FunctionAppVersionArtifact {
-  /** The artifact type. */
   type: "zipPackage";
-}
-
-@added(Versions.v2026_10_01_preview)
-@doc("A container image artifact.")
-model ContainerImageAppArtifact extends FunctionAppVersionArtifact {
-  /** The artifact type. */
-  type: "containerImage";
-
-  /** The container image reference. */
-  reference: string;
 }
 
 @added(Versions.v2026_10_01_preview)
@@ -114,18 +63,6 @@ model ContainerImageAppArtifact extends FunctionAppVersionArtifact {
 model FunctionAppVersionDeployment {
   /** The application artifact. */
   appArtifact: FunctionAppVersionArtifact;
-
-  /**
-   * The URI from which to materialize a ZIP package. This value is treated as a
-   * secret and is never returned by read or list operations.
-   */
-  @secret
-  @visibility(Lifecycle.Create, Lifecycle.Update)
-  packageUri?: url;
-
-  /** Whether to perform a remote build while materializing the ZIP package. */
-  @visibility(Lifecycle.Create, Lifecycle.Update)
-  remoteBuild?: boolean;
 }
 
 @added(Versions.v2026_10_01_preview)
@@ -207,11 +144,6 @@ model FunctionAppVersion
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("The status of an asynchronous Function App version operation.")
-model FunctionAppVersionOperationStatusResult
-  is ArmOperationStatus<StatusValues = FunctionAppVersionOperationStatus>;
-
-@added(Versions.v2026_10_01_preview)
 @tag("FunctionAppVersions")
 @armResourceOperations
 @doc("Operations for Function App versions.")
@@ -244,42 +176,4 @@ interface FunctionAppVersions {
     OptionalRequestBody = true
   >;
 
-  /** Retries validation of an inactive failed Function App version. */
-  @action("validate")
-  validate is ArmResourceActionAsync<
-    FunctionAppVersion,
-    void,
-    FunctionAppVersion,
-    LroHeaders = ArmCombinedLroHeaders<
-      FunctionAppVersionOperationStatusResult,
-      FunctionAppVersion
-    > &
-      Azure.Core.Foundations.RetryAfterHeader,
-    OptionalRequestBody = true
-  >;
 }
-
-@added(Versions.v2026_10_01_preview)
-@tag("FunctionAppVersionOperations")
-@armResourceOperations
-@doc("Operations for tracking asynchronous Function App version work.")
-interface FunctionAppVersionOperations {
-  /** Gets the status of an asynchronous Function App version operation. */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Matches the provider namespace behavior of GetResourceOperationStatus while using the ARM common operationId parameter."
-  #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "Operation status is a provider collection action, not a resource lifecycle operation."
-  @autoRoute
-  @get
-  @armResourceCollectionAction
-  @Azure.ResourceManager.Private.armUpdateProviderNamespace
-  get(
-    ...DefaultBaseParameters<SubscriptionLocationActionScope>,
-    ...ProviderNamespace<SubscriptionLocationActionScope>,
-    ...SubscriptionLocationActionScope,
-    ...Azure.ResourceManager.CommonTypes.OperationIdParameter,
-  ): ArmResponse<FunctionAppVersionOperationStatusResult> | ErrorResponse;
-}
-
-@@segment(
-  FunctionAppVersionOperations.get::parameters.operationId,
-  "functionAppVersionOperations"
-);

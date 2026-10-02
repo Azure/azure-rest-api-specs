@@ -8,6 +8,7 @@ import "./Site.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
@@ -52,7 +53,11 @@ interface FunctionAppLabels {
   get is ArmResourceRead<FunctionAppLabel>;
 
   /** Assigns a retained Function App version to a Function App label. The preview supports only the production label. */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<FunctionAppLabel>;
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    FunctionAppLabel,
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = FunctionAppLabel> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /** Lists Function App labels for a site. */
   listBySite is ArmResourceListByParent<FunctionAppLabel>;
