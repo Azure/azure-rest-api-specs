@@ -192,7 +192,7 @@ union FallbackRouteSource {
   string,
 
   /**
-   * DeviceMessages
+   * Device-to-cloud messages sent by devices.
    */
   DeviceMessages: "DeviceMessages",
 }
