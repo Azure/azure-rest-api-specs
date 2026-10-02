@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "example-rg",
+    "aiGatewayName": "example-gateway",
+    "workspaceName": "default-workspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/example-rg/providers/Microsoft.ApiManagement/aigateways/example-gateway/workspaces/default-workspace/modelProviders/foundry-provider/models/gpt-4o",
+            "name": "gpt-4o",
+            "type": "Microsoft.ApiManagement/aigateways/workspaces/modelProviders/models",
+            "eTag": "W/\"1\"",
+            "properties": {
+              "description": "Primary chat model",
+              "providerKind": "Foundry",
+              "deployment": {
+                "modelName": "gpt-4o",
+                "modelVersion": "2024-11-20"
+              },
+              "supportedEndpoints": [
+                "chatCompletions",
+                "responses"
+              ],
+              "provisioningState": "Succeeded",
+              "name": "GPT-4o"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "AiGatewayWorkspaceModelOperations_ListByWorkspace",
+  "title": "List all models in a workspace"
+}
