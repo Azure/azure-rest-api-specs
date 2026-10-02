@@ -116,13 +116,9 @@ model EvaluatorDiagnostic {
   type: EvaluatorDiagnosticType;
 }
 
-@doc("The shared fields for completed evaluator lineage diagnostics.")
-@discriminator("type")
+@doc("Actor properties shared by recorded evaluator diagnostics without introducing another discriminator level.")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
-model EvaluatorLineageDiagnosticBase extends EvaluatorDiagnostic {
-  @doc("The lineage diagnostic change shape.")
-  type: EvaluatorDiagnosticType;
-
+model EvaluatorDiagnosticActorProperties {
   @doc("The authenticated user or service responsible for the lineage event.")
   actor: EvaluatorDiagnosticActor;
 }
@@ -203,7 +199,8 @@ model EvaluatorHealthMetrics {
 
 @doc("Health computed during evaluator generation and retained as a historical snapshot. GET does not recompute these values after later edits.")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
-model HealthComputedDiagnosticChange extends EvaluatorLineageDiagnosticBase {
+model HealthComputedDiagnosticChange extends EvaluatorDiagnostic {
+  ...EvaluatorDiagnosticActorProperties;
   type: EvaluatorDiagnosticType.health_computed;
 
   @doc("The generation job that produced the health snapshot.")
@@ -230,7 +227,8 @@ model EvaluatorFieldChange {
 
 @doc("A diagnostic change recording the creation of an evaluator version.")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
-model VersionCreatedDiagnosticChange extends EvaluatorLineageDiagnosticBase {
+model VersionCreatedDiagnosticChange extends EvaluatorDiagnostic {
+  ...EvaluatorDiagnosticActorProperties;
   type: EvaluatorDiagnosticType.version_created;
 
   @doc("The preceding published evaluator version, when one exists.")
@@ -243,7 +241,8 @@ model VersionCreatedDiagnosticChange extends EvaluatorLineageDiagnosticBase {
 
 @doc("A diagnostic change recording the addition of a rubric dimension.")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
-model DimensionAddedDiagnosticChange extends EvaluatorLineageDiagnosticBase {
+model DimensionAddedDiagnosticChange extends EvaluatorDiagnostic {
+  ...EvaluatorDiagnosticActorProperties;
   type: EvaluatorDiagnosticType.dimension_added;
 
   @doc("The public dimension identifier associated with the change. It remains stable until explicitly changed; changing an identifier produces a removal change for the prior identifier and an addition change for the new identifier.")
@@ -262,7 +261,8 @@ model DimensionAddedDiagnosticChange extends EvaluatorLineageDiagnosticBase {
 
 @doc("A diagnostic change recording an update to a rubric dimension.")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
-model DimensionUpdatedDiagnosticChange extends EvaluatorLineageDiagnosticBase {
+model DimensionUpdatedDiagnosticChange extends EvaluatorDiagnostic {
+  ...EvaluatorDiagnosticActorProperties;
   type: EvaluatorDiagnosticType.dimension_updated;
 
   @doc("The public dimension identifier associated with the change. It remains stable until explicitly changed; changing an identifier produces a removal change for the prior identifier and an addition change for the new identifier.")
@@ -284,7 +284,8 @@ model DimensionUpdatedDiagnosticChange extends EvaluatorLineageDiagnosticBase {
 
 @doc("A diagnostic change recording the removal of a rubric dimension.")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
-model DimensionRemovedDiagnosticChange extends EvaluatorLineageDiagnosticBase {
+model DimensionRemovedDiagnosticChange extends EvaluatorDiagnostic {
+  ...EvaluatorDiagnosticActorProperties;
   type: EvaluatorDiagnosticType.dimension_removed;
 
   @doc("The public dimension identifier associated with the change. It remains stable until explicitly changed; changing an identifier produces a removal change for the prior identifier and an addition change for the new identifier.")
@@ -303,7 +304,8 @@ model DimensionRemovedDiagnosticChange extends EvaluatorLineageDiagnosticBase {
 
 @doc("A diagnostic change recording functional evaluator changes outside individual dimensions.")
 @extension("x-ms-foundry-meta", EvaluatorDiagnosticsRequiredPreviews)
-model DefinitionUpdatedDiagnosticChange extends EvaluatorLineageDiagnosticBase {
+model DefinitionUpdatedDiagnosticChange extends EvaluatorDiagnostic {
+  ...EvaluatorDiagnosticActorProperties;
   type: EvaluatorDiagnosticType.definition_updated;
 
   @doc("The functional field changes applied.")

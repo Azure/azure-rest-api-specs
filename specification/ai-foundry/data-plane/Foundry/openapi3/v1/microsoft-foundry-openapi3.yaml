@@ -46925,9 +46925,13 @@ components:
     DefinitionUpdatedDiagnosticChange:
       type: object
       required:
+        - actor
         - type
         - field_changes
       properties:
+        actor:
+          $ref: '#/components/schemas/EvaluatorDiagnosticActor'
+          description: The authenticated user or service responsible for the lineage event.
         type:
           type: string
           enum:
@@ -46939,7 +46943,7 @@ components:
           minItems: 1
           description: The functional field changes applied.
       allOf:
-        - $ref: '#/components/schemas/EvaluatorLineageDiagnosticBase'
+        - $ref: '#/components/schemas/EvaluatorDiagnostic'
       description: A diagnostic change recording functional evaluator changes outside individual dimensions.
       x-ms-foundry-meta:
         required_previews:
@@ -47186,10 +47190,14 @@ components:
     DimensionAddedDiagnosticChange:
       type: object
       required:
+        - actor
         - type
         - dimension_id
         - after
       properties:
+        actor:
+          $ref: '#/components/schemas/EvaluatorDiagnosticActor'
+          description: The authenticated user or service responsible for the lineage event.
         type:
           type: string
           enum:
@@ -47210,7 +47218,7 @@ components:
           maxItems: 3
           description: The public dimension fields changed, when reported.
       allOf:
-        - $ref: '#/components/schemas/EvaluatorLineageDiagnosticBase'
+        - $ref: '#/components/schemas/EvaluatorDiagnostic'
       description: A diagnostic change recording the addition of a rubric dimension.
       x-ms-foundry-meta:
         required_previews:
@@ -47218,10 +47226,14 @@ components:
     DimensionRemovedDiagnosticChange:
       type: object
       required:
+        - actor
         - type
         - dimension_id
         - before
       properties:
+        actor:
+          $ref: '#/components/schemas/EvaluatorDiagnosticActor'
+          description: The authenticated user or service responsible for the lineage event.
         type:
           type: string
           enum:
@@ -47242,7 +47254,7 @@ components:
           maxItems: 3
           description: The public dimension fields changed, when reported.
       allOf:
-        - $ref: '#/components/schemas/EvaluatorLineageDiagnosticBase'
+        - $ref: '#/components/schemas/EvaluatorDiagnostic'
       description: A diagnostic change recording the removal of a rubric dimension.
       x-ms-foundry-meta:
         required_previews:
@@ -47250,11 +47262,15 @@ components:
     DimensionUpdatedDiagnosticChange:
       type: object
       required:
+        - actor
         - type
         - dimension_id
         - before
         - after
       properties:
+        actor:
+          $ref: '#/components/schemas/EvaluatorDiagnosticActor'
+          description: The authenticated user or service responsible for the lineage event.
         type:
           type: string
           enum:
@@ -47278,7 +47294,7 @@ components:
           maxItems: 3
           description: The public dimension fields changed, when reported.
       allOf:
-        - $ref: '#/components/schemas/EvaluatorLineageDiagnosticBase'
+        - $ref: '#/components/schemas/EvaluatorDiagnostic'
       description: A diagnostic change recording an update to a rubric dimension.
       x-ms-foundry-meta:
         required_previews:
@@ -48753,12 +48769,12 @@ components:
       discriminator:
         propertyName: type
         mapping:
-          version_created: '#/components/schemas/EvaluatorLineageDiagnosticBase'
-          dimension_added: '#/components/schemas/EvaluatorLineageDiagnosticBase'
-          dimension_updated: '#/components/schemas/EvaluatorLineageDiagnosticBase'
-          dimension_removed: '#/components/schemas/EvaluatorLineageDiagnosticBase'
-          definition_updated: '#/components/schemas/EvaluatorLineageDiagnosticBase'
-          health_computed: '#/components/schemas/EvaluatorLineageDiagnosticBase'
+          health_computed: '#/components/schemas/HealthComputedDiagnosticChange'
+          version_created: '#/components/schemas/VersionCreatedDiagnosticChange'
+          dimension_added: '#/components/schemas/DimensionAddedDiagnosticChange'
+          dimension_updated: '#/components/schemas/DimensionUpdatedDiagnosticChange'
+          dimension_removed: '#/components/schemas/DimensionRemovedDiagnosticChange'
+          definition_updated: '#/components/schemas/DefinitionUpdatedDiagnosticChange'
       description: The shared fields for recorded evaluator changes and health snapshots.
       x-ms-foundry-meta:
         required_previews:
@@ -49070,33 +49086,6 @@ components:
       minimum: 0
       maximum: 1
       description: A normalized rubric-health score produced by the existing computation.
-      x-ms-foundry-meta:
-        required_previews:
-          - Evaluations=V1Preview
-    EvaluatorLineageDiagnosticBase:
-      type: object
-      required:
-        - type
-        - actor
-      properties:
-        type:
-          $ref: '#/components/schemas/EvaluatorDiagnosticType'
-          description: The lineage diagnostic change shape.
-        actor:
-          $ref: '#/components/schemas/EvaluatorDiagnosticActor'
-          description: The authenticated user or service responsible for the lineage event.
-      discriminator:
-        propertyName: type
-        mapping:
-          health_computed: '#/components/schemas/HealthComputedDiagnosticChange'
-          version_created: '#/components/schemas/VersionCreatedDiagnosticChange'
-          dimension_added: '#/components/schemas/DimensionAddedDiagnosticChange'
-          dimension_updated: '#/components/schemas/DimensionUpdatedDiagnosticChange'
-          dimension_removed: '#/components/schemas/DimensionRemovedDiagnosticChange'
-          definition_updated: '#/components/schemas/DefinitionUpdatedDiagnosticChange'
-      allOf:
-        - $ref: '#/components/schemas/EvaluatorDiagnostic'
-      description: The shared fields for completed evaluator lineage diagnostics.
       x-ms-foundry-meta:
         required_previews:
           - Evaluations=V1Preview
@@ -49962,10 +49951,14 @@ components:
     HealthComputedDiagnosticChange:
       type: object
       required:
+        - actor
         - type
         - generation_job_id
         - health
       properties:
+        actor:
+          $ref: '#/components/schemas/EvaluatorDiagnosticActor'
+          description: The authenticated user or service responsible for the lineage event.
         type:
           type: string
           enum:
@@ -49978,7 +49971,7 @@ components:
           $ref: '#/components/schemas/EvaluatorHealthMetrics'
           description: The computed health metrics and their availability.
       allOf:
-        - $ref: '#/components/schemas/EvaluatorLineageDiagnosticBase'
+        - $ref: '#/components/schemas/EvaluatorDiagnostic'
       description: Health computed during evaluator generation and retained as a historical snapshot. GET does not recompute these values after later edits.
       x-ms-foundry-meta:
         required_previews:
@@ -84963,8 +84956,12 @@ components:
     VersionCreatedDiagnosticChange:
       type: object
       required:
+        - actor
         - type
       properties:
+        actor:
+          $ref: '#/components/schemas/EvaluatorDiagnosticActor'
+          description: The authenticated user or service responsible for the lineage event.
         type:
           type: string
           enum:
@@ -84977,7 +84974,7 @@ components:
           minLength: 1
           description: The evaluator generation job that created the version, when applicable.
       allOf:
-        - $ref: '#/components/schemas/EvaluatorLineageDiagnosticBase'
+        - $ref: '#/components/schemas/EvaluatorDiagnostic'
       description: A diagnostic change recording the creation of an evaluator version.
       x-ms-foundry-meta:
         required_previews:
