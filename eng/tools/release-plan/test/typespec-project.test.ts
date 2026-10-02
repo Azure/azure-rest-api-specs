@@ -660,7 +660,7 @@ describe("TypeSpec metadata resolution", () => {
     expect(resolveTypeSpecMetadata(metadata)).toEqual({ apiVersion: "2025-08-01" });
   });
 
-  it("does not choose a language's version when metadata contains multiple versions", () => {
+  it("keeps the existing first-version selection when metadata contains multiple versions", () => {
     const metadata = createMetadata({
       csharp: [
         {
@@ -680,7 +680,7 @@ describe("TypeSpec metadata resolution", () => {
       ],
     });
 
-    expect(resolveTypeSpecMetadata(metadata)).toEqual({ apiVersion: "" });
+    expect(resolveTypeSpecMetadata(metadata)).toEqual({ apiVersion: "2025-08-01" });
   });
 
   it("ignores conflicting SDK types when resolving the API version", () => {
@@ -706,7 +706,7 @@ describe("TypeSpec metadata resolution", () => {
     expect(resolveTypeSpecMetadata(metadata)).toEqual({ apiVersion: "2025-08-01" });
   });
 
-  it("keeps an empty API version when one language has no version", () => {
+  it("keeps the existing concrete version when one language has no version", () => {
     const metadata = createMetadata({
       csharp: [
         {
@@ -733,7 +733,7 @@ describe("TypeSpec metadata resolution", () => {
       ],
     });
 
-    expect(resolveTypeSpecMetadata(metadata)).toEqual({ apiVersion: "" });
+    expect(resolveTypeSpecMetadata(metadata)).toEqual({ apiVersion: "2025-08-01" });
   });
 
   it("uses language configs with missing SDK type", () => {

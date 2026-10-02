@@ -370,6 +370,7 @@ export function resolveTypeSpecMetadata(metadata: TypeSpecMetadata): {
   apiVersion: string;
 } {
   const apiVersions = new Set<string>();
+  let hasPackage = false;
 
   for (const [, langConfigs] of Object.entries(metadata.languages)) {
     if (!Array.isArray(langConfigs)) {
@@ -377,12 +378,13 @@ export function resolveTypeSpecMetadata(metadata: TypeSpecMetadata): {
     }
 
     for (const config of langConfigs) {
-      const apiVersion = config.apiVersion ?? "";
+      const apiVersion = config.apiVersion;
       const packageName = config.packageName;
+      hasPackage ||= Boolean(packageName);
 
-      if (!packageName) {
+      if (!apiVersion || !packageName) {
         console.warn(
-          `Skipping language config with missing packageName: ${JSON.stringify(config)}`,
+          `Skipping language config with missing apiVersion or packageName: ${JSON.stringify(config)}`,
         );
         continue;
       }
@@ -392,11 +394,11 @@ export function resolveTypeSpecMetadata(metadata: TypeSpecMetadata): {
     }
   }
 
-  if (apiVersions.size === 0) {
+  if (apiVersions.size === 0 && !hasPackage) {
     throw new Error("No valid language configurations found in TypeSpec metadata");
   }
 
-  return { apiVersion: apiVersions.size === 1 ? Array.from(apiVersions)[0] : "" };
+  return { apiVersion: Array.from(apiVersions)[0] ?? "" };
 }
 
 /**

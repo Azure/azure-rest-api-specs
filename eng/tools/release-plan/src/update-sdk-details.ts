@@ -102,12 +102,6 @@ export function runUpdateSdkDetails(
   const artifactRaw = readArtifact(args.artifactFile);
   const artifact = JSON.parse(artifactRaw) as EnsureReleasePlanResult;
 
-  const selection = artifact.details;
-  if ("apiReleaseType" in selection && selection.apiReleaseType === "Private Preview") {
-    console.log("Private preview plans do not require SDK details updates.");
-    return;
-  }
-
   const outcome = artifact.outcome;
   const artifactReleasePlan = artifact.releasePlan;
   const artifactPlanDetails = artifactReleasePlan?.release_plan_details;
@@ -153,16 +147,12 @@ export function runUpdateSdkDetails(
     throw new Error("SDK release type could not be determined from release plan details.");
   }
 
+  const selection = artifact.details;
   const targetArgs =
-    "specCommitSha" in selection
+    "specCommitSha" in selection && selection.apiReleaseType !== "Private Preview"
       ? ["--spec-commit-sha", selection.specCommitSha, "--pull-request", selection.prUrl]
       : [];
   console.log("Running release plan update for an in-progress release plan.");
-  if ("specCommitSha" in selection) {
-    console.log(
-      `Updating release plan '${releasePlanId}' spec PR and commit: project='${selection.tspProjectPath}', PR='${selection.prUrl}', commit='${selection.specCommitSha}', API version='${selection.apiVersion}'.`,
-    );
-  }
   const updateResult = runner([
     "release-plan",
     "update",

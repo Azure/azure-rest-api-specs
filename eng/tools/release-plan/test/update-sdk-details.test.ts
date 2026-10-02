@@ -155,13 +155,23 @@ describe("runUpdateSdkDetails", () => {
     expect(runner.mock.calls.some(([args]) => args.includes("--api-version"))).toBe(false);
   });
 
-  it("skips private preview immediately without calling azsdk", () => {
-    const runner = vi.fn();
+  it("keeps the existing private-preview update payload without a public commit pin", () => {
+    const runner = vi.fn((args: string[]) => (args[1] === "get" ? ok(buildPlan()) : ok()));
     runUpdateSdkDetails(cliArgs, {
       readArtifact: () => buildArtifact("created", "", "Private Preview"),
       runner,
     });
-    expect(runner).not.toHaveBeenCalled();
+    expect(runner.mock.calls.map(([args]) => args[1])).toEqual(["get", "update", "get"]);
+    expect(runner).toHaveBeenCalledWith([
+      "release-plan",
+      "update",
+      "--typespec-path",
+      path.resolve(WORKSPACE, SPEC_PATH),
+      "--workitem-id",
+      "9001",
+      "--sdk-type",
+      "beta",
+    ]);
   });
 
   it("reports a failed update without continuing to the completion lookup", () => {
