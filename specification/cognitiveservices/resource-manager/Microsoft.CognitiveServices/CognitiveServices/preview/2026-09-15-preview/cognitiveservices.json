@@ -2117,9 +2117,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/AdapterDeployment"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string",
+                "description": "The concurrency token for the adapter deployment."
+              }
             }
           },
           "default": {
@@ -2168,6 +2174,22 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "Proceed only when the current adapter deployment ETag matches this value.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
+          },
+          {
+            "name": "If-None-Match",
+            "in": "header",
+            "description": "Proceed only when no current adapter deployment ETag matches this value.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifNoneMatch"
           },
           {
             "name": "resource",
@@ -2242,6 +2264,9 @@
         "x-ms-examples": {
           "CreateOrUpdateAdapterDeployment": {
             "$ref": "./examples/CreateOrUpdateAdapterDeployment.json"
+          },
+          "UpdateAdapterDeployment": {
+            "$ref": "./examples/UpdateAdapterDeployment.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2283,6 +2308,14 @@
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "description": "Proceed only when the current adapter deployment ETag matches this value.",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "ifMatch"
           }
         ],
         "responses": {

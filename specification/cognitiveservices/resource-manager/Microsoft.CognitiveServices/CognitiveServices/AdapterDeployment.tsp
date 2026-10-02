@@ -56,13 +56,30 @@ model AdapterDeploymentListResult {
   nextLink?: url;
 }
 
-alias AdapterDeploymentLroHeaders = {
-  ...ArmCombinedLroHeaders<FinalResult = AdapterDeployment>;
-  ...Azure.Core.Foundations.RetryAfterHeader;
+alias AdapterDeploymentIfMatchHeader = {
+  /** Proceed only when the current adapter deployment ETag matches this value. */
+  @header("If-Match")
+  ifMatch?: string;
+};
 
+alias AdapterDeploymentPutConditionalHeaders = {
+  ...AdapterDeploymentIfMatchHeader;
+
+  /** Proceed only when no current adapter deployment ETag matches this value. */
+  @header("If-None-Match")
+  ifNoneMatch?: string;
+};
+
+alias AdapterDeploymentEtagResponseHeader = {
   /** The concurrency token for the adapter deployment. */
   @header("ETag")
   etag?: string;
+};
+
+alias AdapterDeploymentLroHeaders = {
+  ...ArmCombinedLroHeaders<FinalResult = AdapterDeployment>;
+  ...Azure.Core.Foundations.RetryAfterHeader;
+  ...AdapterDeploymentEtagResponseHeader;
 };
 
 @added(Versions.v2026_09_15_preview)
@@ -71,7 +88,11 @@ interface AdapterDeployments {
   /**
    * Gets an adapter deployment by name.
    */
-  get is ArmResourceRead<AdapterDeployment>;
+  get is ArmResourceRead<
+    AdapterDeployment,
+    Response = ArmResponse<AdapterDeployment> &
+      AdapterDeploymentEtagResponseHeader
+  >;
 
   /**
    * Creates an adapter deployment or re-targets it to another compatible
@@ -83,6 +104,7 @@ interface AdapterDeployments {
   @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AdapterDeployment,
+    Parameters = AdapterDeploymentPutConditionalHeaders,
     Response =
       | (ArmResourceUpdatedResponse<AdapterDeployment> &
           AdapterDeploymentLroHeaders)
@@ -105,6 +127,7 @@ interface AdapterDeployments {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     AdapterDeployment,
+    Parameters = AdapterDeploymentIfMatchHeader,
     LroHeaders = ArmCombinedLroHeaders<ArmOperationStatus, void> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
