@@ -1,4 +1,4 @@
-import { inspect } from "util";
+import { inspect } from "node:util";
 import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { equals } from "../../../shared/src/set.ts";
 import { byDate, invert } from "../../../shared/src/sort.ts";

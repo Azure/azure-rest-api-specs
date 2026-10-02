@@ -19,15 +19,16 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-      - uses: actions/checkout@v7
+      - uses: $/.github/actions/checkout
         with:
           fetch-depth: 2
 
       - name: Setup Node and install deps
-        uses: ./.github/actions/setup-node-install-deps
+        uses: $/.github/actions/setup-node-install-deps
 
       - name: Validate Impacted Specs
         # Only main and RPSaaSMaster validate all specs when core files change.
         run: >-
           node eng/tools/typespec-validation/cmd/tsv.js --changed --git-clean
+          ${{ runner.debug == '1' && '--verbose' || '' }}
           ${{ github.base_ref != 'main' && github.base_ref != 'RPSaaSMaster' && '--ignore-core-files' || '' }}
