@@ -1299,6 +1299,9 @@
           "Create Managed Private Cluster with fqdn subdomain specified": {
             "$ref": "./examples/ManagedClustersCreate_PrivateClusterFQDNSubdomain.json"
           },
+          "Create or Update Managed Cluster with Agent Sandbox enabled": {
+            "$ref": "./examples/ManagedClustersCreate_EnableAgentSandbox.json"
+          },
           "Create/Update AAD Managed Cluster with EnableAzureRBAC": {
             "$ref": "./examples/ManagedClustersCreate_UpdateWithEnableAzureRBAC.json"
           },
@@ -12727,6 +12730,16 @@
         }
       }
     },
+    "ManagedClusterAgentSandboxProfile": {
+      "type": "object",
+      "description": "Settings for the Agent Sandbox core extension managed by Azure Kubernetes Service (AKS).\nFor more information, see https://aka.ms/aks/agent-sandbox.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether the Agent Sandbox core extension is enabled for the cluster. On cluster creation, the default is false."
+        }
+      }
+    },
     "ManagedClusterAppRoutingIstio": {
       "type": "object",
       "description": "Configuration for using a sidecar-less Istio control plane for managed ingress via the Gateway API with App Routing. See https://aka.ms/gateway-on-istio for information on using Istio for ingress via the Gateway API.",
@@ -14067,6 +14080,10 @@
         "aiToolchainOperatorProfile": {
           "$ref": "#/definitions/ManagedClusterAIToolchainOperatorProfile",
           "description": "AI toolchain operator settings that apply to the whole cluster."
+        },
+        "agentSandboxProfile": {
+          "$ref": "#/definitions/ManagedClusterAgentSandboxProfile",
+          "description": "Agent Sandbox settings that apply to the whole cluster. For more information, see https://aka.ms/aks/agent-sandbox."
         },
         "schedulerProfile": {
           "$ref": "#/definitions/SchedulerProfile",
