@@ -621,14 +621,6 @@ model CreateSipTelephonyBindingRequest extends CreateTelephonyBindingRequest {
 @extension("x-ms-foundry-meta", VoiceAgentRequiredPreview)
 @clientName("UpdateTelephonyBindingContent", "csharp")
 model UpdateTelephonyBindingRequest {
-  @doc("Replacement allowed source IP addresses or CIDR ranges. Only valid for SIP bindings. Omit to preserve the current restriction; use an empty array to clear it.")
-  @maxItems(64)
-  allowed_source_cidrs?: string[];
-
-  @doc("Replacement allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. Only valid for SIP bindings. Omit to preserve the current restriction; use an empty array to clear it.")
-  @maxItems(64)
-  allowed_calling_numbers?: string[];
-
   @doc("The new lifecycle status.")
   status?: TelephonyBindingStatus;
 
@@ -644,6 +636,14 @@ model UpdateTelephonyBindingRequest {
   @doc("The replacement Teams Phone extensibility or SIP display phone number. Omit it to preserve the current value; use null to clear it. Not supported for Twilio.")
   @maxLength(64)
   phone_number?: string | null;
+
+  @doc("Replacement allowed source IP addresses or CIDR ranges. Only valid for SIP bindings. Omit to preserve the current restriction; use an empty array to clear it.")
+  @maxItems(64)
+  allowed_source_cidrs?: string[];
+
+  @doc("Replacement allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. Only valid for SIP bindings. Omit to preserve the current restriction; use an empty array to clear it.")
+  @maxItems(64)
+  allowed_calling_numbers?: string[];
 }
 
 @doc("A telephony binding owned by a voice agent.")

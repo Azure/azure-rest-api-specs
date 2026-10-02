@@ -90144,18 +90144,6 @@ components:
     UpdateTelephonyBindingRequest:
       type: object
       properties:
-        allowed_source_cidrs:
-          type: array
-          items:
-            type: string
-          maxItems: 64
-          description: Replacement allowed source IP addresses or CIDR ranges. Only valid for SIP bindings. Omit to preserve the current restriction; use an empty array to clear it.
-        allowed_calling_numbers:
-          type: array
-          items:
-            type: string
-          maxItems: 64
-          description: Replacement allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. Only valid for SIP bindings. Omit to preserve the current restriction; use an empty array to clear it.
         status:
           $ref: '#/components/schemas/TelephonyBindingStatus'
           description: The new lifecycle status.
@@ -90176,6 +90164,18 @@ components:
             - type: 'null'
           maxLength: 64
           description: The replacement Teams Phone extensibility or SIP display phone number. Omit it to preserve the current value; use null to clear it. Not supported for Twilio.
+        allowed_source_cidrs:
+          type: array
+          items:
+            type: string
+          maxItems: 64
+          description: Replacement allowed source IP addresses or CIDR ranges. Only valid for SIP bindings. Omit to preserve the current restriction; use an empty array to clear it.
+        allowed_calling_numbers:
+          type: array
+          items:
+            type: string
+          maxItems: 64
+          description: Replacement allowed canonical E.164 numbers or regular-expression patterns of at most 256 characters. Only valid for SIP bindings. Omit to preserve the current restriction; use an empty array to clear it.
       description: The request to update an existing telephony binding. Every property is optional and the binding's provider is immutable.
       x-ms-foundry-meta:
         required_previews:
