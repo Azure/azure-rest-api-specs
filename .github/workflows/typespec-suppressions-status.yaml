@@ -49,9 +49,11 @@ jobs:
     # Skip plain opened/synchronize/reopened events, which fire before a report
     # artifact exists (the status job still runs on those to update the check).
     if: >-
-      github.event_name == 'workflow_run' ||
-      github.event.action == 'labeled' ||
-      github.event.action == 'unlabeled'
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion != 'skipped') ||
+      (github.event_name == 'pull_request_target' &&
+       github.event.pull_request.state == 'open' &&
+       (github.event.action == 'labeled' || github.event.action == 'unlabeled') &&
+       github.event.label.name == 'typespec-suppressions-approved')
     runs-on: ubuntu-24.04
     permissions:
       actions: read

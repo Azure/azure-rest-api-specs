@@ -7,7 +7,7 @@ import {
   PER_PAGE_MAX,
 } from "../../shared/src/github.ts";
 import { byDate, invert } from "../../shared/src/sort.ts";
-import { extractInputs } from "./context.ts";
+import { extractInputs, getOpenPullRequest } from "./context.ts";
 import type { Core, GitHubScriptArgs } from "./github.ts";
 
 // TODO: Add tests
@@ -20,6 +20,7 @@ export default async function setStatus(
   overridingLabel: string,
 ): Promise<void> {
   const { owner, repo, head_sha, issue_number } = await extractInputs(github, context, core);
+  if (!(await getOpenPullRequest(github, core, { owner, repo, issue_number }))) return;
 
   // Default target is this run itself
   const target_url =
