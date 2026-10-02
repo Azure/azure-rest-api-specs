@@ -38304,7 +38304,7 @@
             "description": "The sources used for the data generation job."
           },
           "generation_configuration": {
-            "$ref": "#/components/schemas/DataGenerationJobOptions",
+            "$ref": "#/components/schemas/DataGenerationJobConfiguration",
             "description": "The generation configuration for the data generation job."
           },
           "scenario": {
@@ -38332,46 +38332,7 @@
         },
         "description": "Data Generation Job resource."
       },
-      "DataGenerationJobInputs": {
-        "type": "object",
-        "required": [
-          "name",
-          "sources",
-          "generation_configuration",
-          "scenario"
-        ],
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "The display name of the data generation job."
-          },
-          "sources": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DataGenerationJobSource"
-            },
-            "description": "The sources used for the data generation job."
-          },
-          "generation_configuration": {
-            "$ref": "#/components/schemas/DataGenerationJobOptions",
-            "description": "The generation configuration for the data generation job."
-          },
-          "scenario": {
-            "$ref": "#/components/schemas/DataGenerationJobScenario",
-            "description": "The scenario of the data generation job. Either for fine-tuning or evaluation."
-          }
-        },
-        "discriminator": {
-          "propertyName": "scenario",
-          "mapping": {
-            "evaluation": "#/components/schemas/EvaluationDataGenerationJobInputs",
-            "supervised_finetuning_preview": "#/components/schemas/SupervisedFineTuningDataGenerationJobInputs",
-            "reinforcement_finetuning_preview": "#/components/schemas/ReinforcementFineTuningDataGenerationJobInputs"
-          }
-        },
-        "description": "Caller-supplied inputs for a data generation job."
-      },
-      "DataGenerationJobOptions": {
+      "DataGenerationJobConfiguration": {
         "type": "object",
         "required": [
           "type"
@@ -38396,13 +38357,52 @@
         "discriminator": {
           "propertyName": "type",
           "mapping": {
-            "simple_qna": "#/components/schemas/SimpleQnADataGenerationJobOptions",
-            "traces": "#/components/schemas/TracesDataGenerationJobOptions",
-            "simulation_seed": "#/components/schemas/SimulationSeedDataGenerationJobOptions",
-            "tool_use": "#/components/schemas/ToolUseFineTuningDataGenerationJobOptions"
+            "simple_qna": "#/components/schemas/SimpleQnADataGenerationJobConfiguration",
+            "traces": "#/components/schemas/TracesDataGenerationJobConfiguration",
+            "simulation_seed": "#/components/schemas/SimulationSeedDataGenerationJobConfiguration",
+            "tool_use": "#/components/schemas/ToolUseFineTuningDataGenerationJobConfiguration"
           }
         },
-        "description": "Options for managing data generation jobs."
+        "description": "Configuration for managing data generation jobs."
+      },
+      "DataGenerationJobInputs": {
+        "type": "object",
+        "required": [
+          "name",
+          "sources",
+          "generation_configuration",
+          "scenario"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The display name of the data generation job."
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataGenerationJobSource"
+            },
+            "description": "The sources used for the data generation job."
+          },
+          "generation_configuration": {
+            "$ref": "#/components/schemas/DataGenerationJobConfiguration",
+            "description": "The generation configuration for the data generation job."
+          },
+          "scenario": {
+            "$ref": "#/components/schemas/DataGenerationJobScenario",
+            "description": "The scenario of the data generation job. Either for fine-tuning or evaluation."
+          }
+        },
+        "discriminator": {
+          "propertyName": "scenario",
+          "mapping": {
+            "evaluation": "#/components/schemas/EvaluationDataGenerationJobInputs",
+            "supervised_finetuning_preview": "#/components/schemas/SupervisedFineTuningDataGenerationJobInputs",
+            "reinforcement_finetuning_preview": "#/components/schemas/ReinforcementFineTuningDataGenerationJobInputs"
+          }
+        },
+        "description": "Caller-supplied inputs for a data generation job."
       },
       "DataGenerationJobOutput": {
         "type": "object",
@@ -40171,7 +40171,7 @@
             "description": "The scenario of the data generation job, which is Evaluation for this model."
           },
           "output_configuration": {
-            "$ref": "#/components/schemas/EvaluationDataGenerationJobOutputTarget",
+            "$ref": "#/components/schemas/EvaluationDataGenerationJobOutputConfiguration",
             "description": "Optional dataset output configuration for the generated evaluation data."
           }
         },
@@ -40196,7 +40196,7 @@
             "description": "The scenario of the data generation job, which is Evaluation for this model."
           },
           "output_configuration": {
-            "$ref": "#/components/schemas/EvaluationDataGenerationJobOutputTarget",
+            "$ref": "#/components/schemas/EvaluationDataGenerationJobOutputConfiguration",
             "description": "Optional dataset output configuration for the generated evaluation data."
           }
         },
@@ -40207,7 +40207,7 @@
         ],
         "description": "Caller-supplied inputs for an evaluation data generation job."
       },
-      "EvaluationDataGenerationJobOutputTarget": {
+      "EvaluationDataGenerationJobOutputConfiguration": {
         "type": "object",
         "properties": {
           "name": {
@@ -40231,7 +40231,7 @@
             "default": "overwrite"
           }
         },
-        "description": "Dataset output target for an evaluation data generation job."
+        "description": "Dataset output configuration for an evaluation data generation job."
       },
       "EvaluationDataset": {
         "type": "object",
@@ -85419,7 +85419,7 @@
             "description": "The scenario of the data generation job, which is Reinforcement Fine-tuning preview for this model."
           },
           "output_configuration": {
-            "$ref": "#/components/schemas/ReinforcementFineTuningDataGenerationJobOutputTarget",
+            "$ref": "#/components/schemas/ReinforcementFineTuningDataGenerationJobOutputConfiguration",
             "description": "Optional file output configuration for the generated reinforcement fine-tuning data."
           }
         },
@@ -85449,7 +85449,7 @@
             "description": "The scenario of the data generation job, which is Reinforcement Fine-tuning preview for this model."
           },
           "output_configuration": {
-            "$ref": "#/components/schemas/ReinforcementFineTuningDataGenerationJobOutputTarget",
+            "$ref": "#/components/schemas/ReinforcementFineTuningDataGenerationJobOutputConfiguration",
             "description": "Optional file output configuration for the generated reinforcement fine-tuning data."
           }
         },
@@ -85465,7 +85465,7 @@
           ]
         }
       },
-      "ReinforcementFineTuningDataGenerationJobOutputTarget": {
+      "ReinforcementFineTuningDataGenerationJobOutputConfiguration": {
         "type": "object",
         "required": [
           "name"
@@ -85485,7 +85485,7 @@
             "description": "File ID to merge into when `write_mode` is `merge`."
           }
         },
-        "description": "File output target for a reinforcement fine-tuning data generation job. This is a preview feature.",
+        "description": "File output configuration for a reinforcement fine-tuning data generation job. This is a preview feature.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "DataGenerationJobs=V1Preview"
@@ -86912,7 +86912,7 @@
         ],
         "description": "A shell tool stored in a toolbox. This model is additive to toolbox configuration and does not modify the OpenAI tool contract or existing toolbox tool definitions."
       },
-      "SimpleQnADataGenerationJobOptions": {
+      "SimpleQnADataGenerationJobConfiguration": {
         "type": "object",
         "required": [
           "type",
@@ -86941,10 +86941,10 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/DataGenerationJobOptions"
+            "$ref": "#/components/schemas/DataGenerationJobConfiguration"
           }
         ],
-        "description": "The options for a data generation job with SimpleQnA type."
+        "description": "The configuration for a data generation job with SimpleQnA type."
       },
       "SimpleQnAFineTuningQuestionType": {
         "anyOf": [
@@ -86966,7 +86966,7 @@
           ]
         }
       },
-      "SimulationSeedDataGenerationJobOptions": {
+      "SimulationSeedDataGenerationJobConfiguration": {
         "type": "object",
         "required": [
           "type"
@@ -86982,10 +86982,10 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/DataGenerationJobOptions"
+            "$ref": "#/components/schemas/DataGenerationJobConfiguration"
           }
         ],
-        "description": "The options for a task generation data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`."
+        "description": "The configuration for a task generation data generation job. Use with multiturn evaluation scenarios and with prompt, file, or agent sources. Generated dataset rows include fields such as `id`, `category`, `test_case_description`, and `desired_num_turns`."
       },
       "SipTelephonyTransferDestination": {
         "type": "object",
@@ -87339,7 +87339,7 @@
             "description": "The scenario of the data generation job, which is Supervised Fine-tuning preview for this model."
           },
           "output_configuration": {
-            "$ref": "#/components/schemas/SupervisedFineTuningDataGenerationJobOutputTarget",
+            "$ref": "#/components/schemas/SupervisedFineTuningDataGenerationJobOutputConfiguration",
             "description": "Optional file output configuration for the generated supervised fine-tuning data."
           }
         },
@@ -87369,7 +87369,7 @@
             "description": "The scenario of the data generation job, which is Supervised Fine-tuning preview for this model."
           },
           "output_configuration": {
-            "$ref": "#/components/schemas/SupervisedFineTuningDataGenerationJobOutputTarget",
+            "$ref": "#/components/schemas/SupervisedFineTuningDataGenerationJobOutputConfiguration",
             "description": "Optional file output configuration for the generated supervised fine-tuning data."
           }
         },
@@ -87385,7 +87385,7 @@
           ]
         }
       },
-      "SupervisedFineTuningDataGenerationJobOutputTarget": {
+      "SupervisedFineTuningDataGenerationJobOutputConfiguration": {
         "type": "object",
         "required": [
           "name"
@@ -87405,7 +87405,7 @@
             "description": "File ID to merge into when `write_mode` is `merge`."
           }
         },
-        "description": "File output target for a supervised fine-tuning data generation job. This is a preview feature.",
+        "description": "File output configuration for a supervised fine-tuning data generation job. This is a preview feature.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "DataGenerationJobs=V1Preview"
@@ -89519,7 +89519,7 @@
         ],
         "description": "A toolbox search tool stored in a toolbox."
       },
-      "ToolUseFineTuningDataGenerationJobOptions": {
+      "ToolUseFineTuningDataGenerationJobConfiguration": {
         "type": "object",
         "required": [
           "type",
@@ -89541,10 +89541,10 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/DataGenerationJobOptions"
+            "$ref": "#/components/schemas/DataGenerationJobConfiguration"
           }
         ],
-        "description": "The options for a data generation job with ToolUse type. This is a preview feature used only for fine-tuning scenarios.",
+        "description": "The configuration for a data generation job with ToolUse type. This is a preview feature used only for fine-tuning scenarios.",
         "x-ms-foundry-meta": {
           "conditional_previews": [
             "DataGenerationJobs=V1Preview"
@@ -90029,7 +90029,7 @@
         ],
         "description": "Specifies the type of trace source used to select traces for evaluation."
       },
-      "TracesDataGenerationJobOptions": {
+      "TracesDataGenerationJobConfiguration": {
         "type": "object",
         "required": [
           "type"
@@ -90055,10 +90055,10 @@
         },
         "allOf": [
           {
-            "$ref": "#/components/schemas/DataGenerationJobOptions"
+            "$ref": "#/components/schemas/DataGenerationJobConfiguration"
           }
         ],
-        "description": "The options for a data generation job with Traces type."
+        "description": "The configuration for a data generation job with Traces type."
       },
       "TracesDataGenerationJobSource": {
         "type": "object",
