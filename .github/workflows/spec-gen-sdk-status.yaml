@@ -18,7 +18,7 @@ permissions:
 jobs:
   sdk-validation-status:
     if: |
-      github.event_name == 'pull_request_target' ||
+      (github.event_name == 'pull_request_target' && github.event.pull_request.state == 'open') ||
       (github.event.check_run.check_suite.app.name == 'Azure Pipelines' &&
       contains(github.event.check_run.name, 'SDK Validation'))
     name: "SDK Validation Status"

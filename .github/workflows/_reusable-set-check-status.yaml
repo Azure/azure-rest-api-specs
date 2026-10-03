@@ -29,8 +29,9 @@ jobs:
     name: "${{ inputs.required_check_name }} - Set Status"
 
     if: |
-      github.event_name == 'workflow_run' ||
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion != 'skipped') ||
       (github.event_name == 'pull_request_target' &&
+       github.event.pull_request.state == 'open' &&
        ((github.event.action == 'opened' ||
          github.event.action == 'synchronize' ||
          github.event.action == 'reopened') ||

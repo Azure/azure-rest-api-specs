@@ -16,6 +16,8 @@ permissions:
 jobs:
   validate-approval:
     name: Validate Package Name Approval
+    # Keep authorization enforcement active on closed PRs so reopening cannot bypass approvals.
+    if: startsWith(github.event.label.name, 'package-name-')
     runs-on: ubuntu-24.04
     steps:
       # IMPORTANT: This workflow uses pull_request_target, which runs with repo write permissions.
@@ -37,6 +39,7 @@ jobs:
             await validateApproval({ github, context, core });
 
       - name: Update package name approval status
+        if: github.event.pull_request.state == 'open'
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |

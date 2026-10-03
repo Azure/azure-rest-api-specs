@@ -37,11 +37,13 @@ permissions:
 jobs:
   arm-universal-auto-signoff:
     name: ARM Universal Auto SignOff
-    # workflow_run is already filtered above. For pull_request_target, run for PR-head changes
-    # and only for labels that can affect eligibility.
+    # Ignore skipped/cancelled parents. For open PRs, only handle changes that affect eligibility.
     if: |
-      github.event_name == 'workflow_run' ||
+      (github.event_name == 'workflow_run' &&
+       github.event.workflow_run.conclusion != 'skipped' &&
+       github.event.workflow_run.conclusion != 'cancelled') ||
       (github.event_name == 'pull_request_target' &&
+       github.event.pull_request.state == 'open' &&
        (github.event.action == 'opened' ||
         github.event.action == 'synchronize' ||
         github.event.action == 'reopened' ||

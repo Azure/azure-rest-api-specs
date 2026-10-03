@@ -36,11 +36,14 @@ jobs:
   arm-auto-signoff-status:
     name: ARM Auto SignOff - Set Status
 
-    # workflow_run - already filtered by triggers above
+    # Ignore upstream runs that did not finish their work.
     # pull_request_target:labeled - filter to only the input and output labels
     if: |
-      github.event_name == 'workflow_run' ||
+      (github.event_name == 'workflow_run' &&
+       github.event.workflow_run.conclusion != 'skipped' &&
+       github.event.workflow_run.conclusion != 'cancelled') ||
       (github.event_name == 'pull_request_target' &&
+       github.event.pull_request.state == 'open' &&
        (github.event.action == 'labeled' ||
         github.event.action == 'unlabeled') &&
        (github.event.label.name == 'Approved-Suppression' ||
