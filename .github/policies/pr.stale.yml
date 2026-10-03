@@ -16,7 +16,7 @@ configuration:
           - isPullRequest
           - isOpen
           - hasLabel:
-              label: short-lived-pr
+              label: ttl
           - created:
               before: 14
         actions:
@@ -90,7 +90,7 @@ configuration:
               branch: typespec-next
         then:
           - addLabel:
-              label: short-lived-pr
+              label: ttl
 
       - description: Remove the stale label when the PR author updates the PR
         if:
