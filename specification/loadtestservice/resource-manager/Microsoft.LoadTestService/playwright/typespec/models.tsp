@@ -57,6 +57,91 @@ model PlaywrightWorkspaceProperties {
       type: "Microsoft.Network/virtualNetworks/subnets";
     }
   ]>;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The session artifact configuration for the workspace.")
+  sessionArtifacts?: SessionArtifacts;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The session artifact configuration for the workspace.")
+model SessionArtifacts {
+  @doc("Indicates whether session artifact collection is enabled for the workspace.")
+  status?: EnablementStatus = EnablementStatus.Disabled;
+
+  @doc("The managed identity used to manage session artifacts in the storage account.")
+  identity?: ManagedIdentity;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The managed identity used to access a resource.")
+model ManagedIdentity {
+  @doc("The type of managed identity used to access a resource.")
+  type: IdentityType;
+
+  @doc("The ARM resource ID of the user-assigned managed identity. This value is required when type is UserAssigned and must be omitted when type is SystemAssigned.")
+  resourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The type of managed identity used to access a resource.")
+union IdentityType {
+  string,
+
+  @doc("Use the workspace system-assigned managed identity.")
+  SystemAssigned: "SystemAssigned",
+
+  @doc("Use a user-assigned managed identity.")
+  UserAssigned: "UserAssigned",
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The managed identity used to access a resource during an update operation.")
+model ManagedIdentityUpdate {
+  @doc("The type of managed identity used to access a resource.")
+  type?: IdentityType;
+
+  @doc("The ARM resource ID of the user-assigned managed identity. This value is required when type is UserAssigned and must be omitted when type is SystemAssigned.")
+  resourceId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+}
+
+@added(Versions.v2026_10_01_preview)
+@doc("The session artifact configuration for a workspace update.")
+model SessionArtifactsUpdate {
+  @doc("Indicates whether session artifact collection is enabled for the workspace.")
+  status?: EnablementStatus;
+
+  @doc("The managed identity used to manage session artifacts in the storage account.")
+  identity?: ManagedIdentityUpdate;
+}
+
+@doc("The updatable properties of the Playwright workspace.")
+model PlaywrightWorkspaceUpdateProperties {
+  @doc("Controls the connection region for client workers to cloud-hosted browsers. When enabled, workers connect to browsers in the closest Azure region for lower latency. When disabled, workers connect to browsers in the Azure region where the workspace was created.")
+  regionalAffinity?: EnablementStatus;
+
+  @doc("Enables the workspace to use local authentication through service access tokens for operations.")
+  localAuth?: EnablementStatus;
+
+  @added(Versions.v2026_02_01_preview)
+  @doc("Indicates whether reporting is enabled for the workspace. When set to true, reports will be generated and available for the workspace.")
+  reporting?: EnablementStatus;
+
+  @added(Versions.v2026_01_01_preview)
+  @doc("The URI of the Azure storage account used to store workspace artifacts, test results, and reports.")
+  storageUri?: url;
+
+  @added(Versions.v2026_10_01_preview)
+  @doc("The session artifact configuration for the workspace.")
+  sessionArtifacts?: SessionArtifactsUpdate;
 }
 
 @doc("The status of the last resource operation.")
