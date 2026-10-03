@@ -57,6 +57,10 @@ union ServiceIdentifier {
 
   @doc("Service identifier for Storage")
   Storage: "Storage",
+
+  @added(Microsoft.Mission.Versions.v2026_05_01_preview)
+  @doc("Service identifier for Azure Local")
+  AzureLocal: "AzureLocal",
 }
 
 @doc("GovernedServiceItem Properties")

@@ -26,6 +26,10 @@ union DiagnosticDestination {
 
   @doc("DiagnosticDestination Type Both")
   Both: "Both",
+
+  @added(Microsoft.Mission.Versions.v2026_05_01_preview)
+  @doc("DiagnosticDestination Type Unspecified")
+  Unspecified: "Unspecified",
 }
 
 @doc("Rbac Inheritance Mode")
@@ -80,6 +84,7 @@ model SubnetConfiguration {
   networkSecurityGroupResourceId?: NsgResourceId;
 }
 
+@removed(Microsoft.Mission.Versions.v2026_07_01_preview)
 @doc("Enclave Virtual Network Properties")
 model EnclaveVirtualNetworkModel {
   @renamedFrom(Microsoft.Mission.Versions.v2025_05_01_preview, "name")
@@ -130,6 +135,7 @@ model EnclaveDefaultSettingsModel {
   diagnosticDestination?: DiagnosticDestination = DiagnosticDestination.EnclaveOnly;
 }
 
+@removed(Microsoft.Mission.Versions.v2026_07_01_preview)
 @doc("Enclave Address Spaces")
 model EnclaveAddressSpacesModel {
   @doc("Enclave Address Space")
@@ -137,6 +143,34 @@ model EnclaveAddressSpacesModel {
 
   @doc("Managed Address Space")
   managedAddressSpace?: string;
+}
+
+@added(Microsoft.Mission.Versions.v2026_07_01_preview)
+@doc("Indicates who manages the address space lifecycle.")
+union AddressSpaceOwnership {
+  string,
+
+  @doc("Customer-provided address space. Customer specifies prefixLength, RP allocates CIDR.")
+  CustomerManaged: "CustomerManaged",
+
+  @doc("Product-managed address space. RP-injected for internal platform use (e.g., hub connectivity).")
+  ProductManaged: "ProductManaged",
+}
+
+@added(Microsoft.Mission.Versions.v2026_07_01_preview)
+@doc("An address space entry for the enclave.")
+model AddressSpaceEntry {
+  @minValue(8)
+  @maxValue(26)
+  @doc("The CIDR prefix length that determines the address space size.")
+  prefixLength?: int32;
+
+  @doc("The CIDR notation address space.")
+  addressSpace?: string;
+
+  @doc("The address space lifecycle owner.")
+  @visibility(Lifecycle.Read)
+  ownership?: AddressSpaceOwnership;
 }
 
 @added(Microsoft.Mission.Versions.v2025_11_01_preview)
@@ -166,9 +200,11 @@ model VirtualEnclaveBaseModel {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
+  @removed(Microsoft.Mission.Versions.v2026_07_01_preview)
   @doc("Virtual Network.")
   enclaveVirtualNetwork: EnclaveVirtualNetworkModel;
 
+  @removed(Microsoft.Mission.Versions.v2026_07_01_preview)
   @doc("Enclave Address Spaces")
   @visibility(Lifecycle.Read)
   enclaveAddressSpaces?: EnclaveAddressSpacesModel;
@@ -227,6 +263,26 @@ model VirtualEnclaveBaseModel {
 
 @doc("Virtual Enclave Resource properties")
 model VirtualEnclaveProperties is VirtualEnclaveBaseModel {
+  @added(Microsoft.Mission.Versions.v2026_07_01_preview)
+  @identifiers(#[])
+  @doc("The address spaces for the enclave.")
+  addressSpaces?: AddressSpaceEntry[];
+
+  @added(Microsoft.Mission.Versions.v2026_07_01_preview)
+  @doc("The name of the enclave virtual network.")
+  @visibility(Lifecycle.Read)
+  networkName?: string;
+
+  @added(Microsoft.Mission.Versions.v2026_07_01_preview)
+  @identifiers(#["subnetName"])
+  @doc("The subnet configurations for the enclave network.")
+  subnetConfigurations?: SubnetConfiguration[];
+
+  @added(Microsoft.Mission.Versions.v2026_07_01_preview)
+  @doc("Whether subnets within the enclave can communicate with each other.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  allowSubnetCommunication?: boolean = false;
+
   @doc("Enclave default settings.")
   enclaveDefaultSettings?: EnclaveDefaultSettingsModel;
 
@@ -249,6 +305,20 @@ model VirtualEnclaveProperties is VirtualEnclaveBaseModel {
 @doc("Virtual Enclave Patchable Properties")
 model VirtualEnclavePatchProperties
   is UpdateableProperties<OmitDefaults<VirtualEnclaveBaseModel>> {
+  @added(Microsoft.Mission.Versions.v2026_07_01_preview)
+  @identifiers(#[])
+  @doc("The address spaces for the enclave.")
+  addressSpaces?: AddressSpaceEntry[];
+
+  @added(Microsoft.Mission.Versions.v2026_07_01_preview)
+  @identifiers(#["subnetName"])
+  @doc("The subnet configurations for the enclave network.")
+  subnetConfigurations?: SubnetConfiguration[];
+
+  @added(Microsoft.Mission.Versions.v2026_07_01_preview)
+  @doc("Whether subnets within the enclave can communicate with each other.")
+  allowSubnetCommunication?: boolean;
+
   @doc("Enclave default settings.")
   enclaveDefaultSettings?: EnclaveDefaultSettingsPatchModel;
 
