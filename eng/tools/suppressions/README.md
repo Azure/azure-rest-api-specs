@@ -52,6 +52,22 @@ Example `suppressions.yaml`:
   paths: [Automation.Management]
 ```
 
+Once a service contains TypeSpec-generated Swagger, `TypeSpecRequirement` suppressions cannot
+permit newly added handwritten Swagger files, regardless of API version. This includes adding a
+file to an older, already-existing version. Patches to files that already exist at the same path
+in the PR's base retain their previous behavior, including applicable suppressions.
+
+Migration is detected across `preview` and `stable` under the directory immediately containing
+those folders, independently of other services and API planes. The check looks for generated
+Swagger in both the current checkout and the PR's base commit. Deleting or rewriting generated
+files in the same PR therefore does not permit new handwritten files. A rename to a new path
+counts as an addition.
+
+Services without generated Swagger retain the existing requirement: new handwritten API versions
+require a version-specific suppression. Suppressions for other tools are unaffected.
+Local `--check-all-under` scans have no PR diff and audit every selected file as an addition,
+using only the current checkout to detect migration.
+
 ### Command line
 
 Build the package (see [contributing](#folder-structure--contributing)), then query suppressions

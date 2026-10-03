@@ -1,7 +1,8 @@
 import { appendFile, readdir, readFile } from "node:fs/promises";
 import { relative, resolve, sep } from "node:path";
-import { getChangedFiles } from "@azure-tools/specs-shared/changed-files";
+import { getChangedFilesStatuses } from "@azure-tools/specs-shared/changed-files";
 import { getSuppressions } from "@azure-tools/suppressions";
+import { findTypeSpecSwagger, isTypeSpecGenerated } from "./migration.ts";
 
 type SpecType = "data-plane" | "resource-manager";
 
@@ -16,9 +17,10 @@ interface Options {
 interface FileToCheck {
   fullPath: string;
   path: string;
+  isNew: boolean;
 }
 
-const repoRoot = resolve(import.meta.dirname, "../../../../");
+const defaultRepoRoot = resolve(import.meta.dirname, "../../../../");
 
 function escapeData(value: string): string {
   return value.replaceAll("%", "%25").replaceAll("\r", "%0D").replaceAll("\n", "%0A");
@@ -108,7 +110,7 @@ async function findFilesNamed(directory: string, fileName: string): Promise<stri
   return files;
 }
 
-async function getFilesToCheck(options: Options): Promise<FileToCheck[]> {
+async function getFilesToCheck(options: Options, repoRoot: string): Promise<FileToCheck[]> {
   let files: FileToCheck[];
   if (options.checkAllUnder) {
     const directory = resolve(repoRoot, options.checkAllUnder);
@@ -117,6 +119,7 @@ async function getFilesToCheck(options: Options): Promise<FileToCheck[]> {
       const specificationIndex = pathSegments.lastIndexOf("specification");
       return {
         fullPath,
+        isNew: true,
         path:
           specificationIndex >= 0
             ? pathSegments.slice(specificationIndex).join("/")
@@ -124,21 +127,23 @@ async function getFilesToCheck(options: Options): Promise<FileToCheck[]> {
       };
     });
   } else {
-    files = (
-      await getChangedFiles({
-        cwd: repoRoot,
-        baseCommitish: options.baseCommitish,
-        headCommitish: options.headCommitish,
-        gitOptions: ["--diff-filter=d"],
-      })
-    )
+    const changes = await getChangedFilesStatuses({
+      cwd: repoRoot,
+      baseCommitish: options.baseCommitish,
+      headCommitish: options.headCommitish,
+      // A new path must not inherit an exemption through Git's similarity-based rename detection.
+      gitOptions: ["--no-renames"],
+    });
+    const additions = new Set(changes.additions);
+    files = [...changes.additions, ...changes.modifications]
+      .sort()
       .filter(
         (file) =>
           file.startsWith("specification/") &&
           file.endsWith(".json") &&
           !file.includes("ChangedFiles-Functions"),
       )
-      .map((path) => ({ path, fullPath: resolve(repoRoot, path) }));
+      .map((path) => ({ path, fullPath: resolve(repoRoot, path), isNew: additions.has(path) }));
   }
 
   const specTypePattern =
@@ -180,17 +185,48 @@ function getServiceDirectory(fullPath: string, servicePath: string): string | un
   return normalizedPath.slice(0, serviceIndex + serviceMarker.length - 1);
 }
 
-async function checkFiles(options: Options): Promise<{ brownfield: boolean; exitCode: number }> {
+export async function checkFiles(
+  options: Options,
+  repoRoot = defaultRepoRoot,
+): Promise<{ brownfield: boolean; exitCode: number }> {
   const pathsWithErrors: string[] = [];
+  let hasMigrationErrors = false;
+  const typeSpecSwaggers = new Map<string, string | undefined>();
   let brownfield = false;
-  const filesToCheck = await getFilesToCheck(options);
+  const filesToCheck = await getFilesToCheck(options, repoRoot);
 
   if (filesToCheck.length === 0) {
     logInfo("No OpenAPI files found to check");
   }
 
-  for (const { fullPath, path: file } of filesToCheck) {
+  for (const { fullPath, path: file, isNew } of filesToCheck) {
     logInfo(`Checking ${file}`);
+
+    const generated = isTypeSpecGenerated(await readFile(fullPath, "utf8"), file, logWarning);
+    if (isNew && !generated) {
+      const serviceDirectory = resolve(fullPath, "../../..");
+      if (!typeSpecSwaggers.has(serviceDirectory)) {
+        typeSpecSwaggers.set(
+          serviceDirectory,
+          await findTypeSpecSwagger(
+            serviceDirectory,
+            logWarning,
+            options.checkAllUnder ? undefined : { repoRoot, commitish: options.baseCommitish },
+          ),
+        );
+      }
+      const typeSpecSwagger = typeSpecSwaggers.get(serviceDirectory);
+      if (typeSpecSwagger !== undefined) {
+        logErrorForFile(
+          file,
+          `New Swagger files must use TypeSpec because this service already contains TypeSpec-generated Swagger (${typeSpecSwagger}). ` +
+            "Generate this Swagger from TypeSpec; TypeSpecRequirement suppressions cannot bypass this requirement.",
+        );
+        logJobFailure();
+        hasMigrationErrors = true;
+        continue;
+      }
+    }
 
     const suppressions = await getSuppressions("TypeSpecRequirement", fullPath);
     const suppression = suppressions[0];
@@ -210,24 +246,7 @@ async function checkFiles(options: Options): Promise<{ brownfield: boolean; exit
       continue;
     }
 
-    let jsonContent: unknown;
-    try {
-      jsonContent = JSON.parse(await readFile(fullPath, "utf8"));
-    } catch (error) {
-      logWarning("  OpenAPI cannot be parsed as JSON, so assuming not generated from TypeSpec");
-      logWarning(`    ${error instanceof Error ? error.message : String(error)}`);
-    }
-
-    const info =
-      jsonContent !== null && typeof jsonContent === "object"
-        ? (jsonContent as Record<string, unknown>).info
-        : undefined;
-    const generatedMarker =
-      info !== null && typeof info === "object"
-        ? (info as Record<string, unknown>)["x-typespec-generated"]
-        : undefined;
-
-    if (generatedMarker !== null && generatedMarker !== undefined) {
+    if (generated) {
       logInfo("  OpenAPI was generated from TypeSpec (contains '/info/x-typespec-generated')");
       const rpFolder = /^specification\/[^/]+\//.exec(file)?.[0];
       if (!rpFolder) {
@@ -322,7 +341,7 @@ async function checkFiles(options: Options): Promise<{ brownfield: boolean; exit
     return { brownfield, exitCode: 1 };
   }
 
-  return { brownfield, exitCode: 0 };
+  return { brownfield, exitCode: hasMigrationErrors ? 1 : 0 };
 }
 
 function parseArgs(args: string[]): Options {
@@ -386,4 +405,6 @@ async function main(): Promise<void> {
   }
 }
 
-await main();
+if (import.meta.main) {
+  await main();
+}
