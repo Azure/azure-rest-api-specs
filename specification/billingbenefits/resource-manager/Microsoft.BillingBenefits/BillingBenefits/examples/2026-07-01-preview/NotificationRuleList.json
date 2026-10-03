@@ -1,0 +1,112 @@
+{
+  "operationId": "NotificationRules_List",
+  "title": "NotificationRuleList",
+  "parameters": {
+    "resourceUri": "subscriptions/eef82110-c91b-4c6a-a0b3-9e3a5e7c081b/resourceGroups/TestRG/providers/Microsoft.BillingBenefits/maccs/testMacc01",
+    "api-version": "2026-07-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/eef82110-c91b-4c6a-a0b3-9e3a5e7c081b/resourceGroups/TestRG/providers/Microsoft.BillingBenefits/maccs/testMacc01/providers/Microsoft.BillingBenefits/notifications/expiryNotification",
+            "name": "expiryNotification",
+            "type": "Microsoft.BillingBenefits/notifications",
+            "kind": "BuiltIn",
+            "properties": {
+              "scope": "/subscriptions/eef82110-c91b-4c6a-a0b3-9e3a5e7c081b/resourceGroups/TestRG/providers/Microsoft.BillingBenefits/maccs/testMacc01",
+              "displayName": "MACC end date Notification",
+              "description": "Notify owners 30 days before savings plan expires",
+              "status": "Active",
+              "startAt": "2026-01-01T00:00:00Z",
+              "endAt": "2027-01-01T00:00:00Z",
+              "notificationBehavior": {
+                "firingMode": "OneTime",
+                "maxNotificationsPerDay": 1,
+                "cooldownPeriod": "P1D"
+              },
+              "condition": {
+                "expression": "properties.endAt <= utcNow() + duration('P30D')",
+                "trigger": {
+                  "type": "Scheduled",
+                  "schedule": {
+                    "relativeToProperty": "properties.endAt",
+                    "offset": "-P30D"
+                  }
+                }
+              },
+              "recipients": [
+                {
+                  "scope": "/subscriptions/eef82110-c91b-4c6a-a0b3-9e3a5e7c081b/resourceGroups/TestRG/providers/Microsoft.BillingBenefits/maccs/testMacc01",
+                  "roleDefinitionId": "/providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7"
+                }
+              ],
+              "deliveryState": {
+                "lastTriggeredAt": null,
+                "lastDeliveredAt": null,
+                "notificationsSentToday": 0,
+                "totalNotificationsSent": 0
+              },
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdBy": "system",
+              "createdByType": "Application",
+              "createdAt": "2026-01-01T00:00:00Z",
+              "lastModifiedBy": "system",
+              "lastModifiedByType": "Application",
+              "lastModifiedAt": "2026-01-01T00:00:00Z"
+            }
+          },
+          {
+            "id": "/subscriptions/eef82110-c91b-4c6a-a0b3-9e3a5e7c081b/resourceGroups/TestRG/providers/Microsoft.BillingBenefits/maccs/testMacc01/providers/Microsoft.BillingBenefits/notifications/customExpiry30Days",
+            "name": "customExpiry30Days",
+            "type": "Microsoft.BillingBenefits/notifications",
+            "kind": "Custom",
+            "properties": {
+              "scope": "/subscriptions/eef82110-c91b-4c6a-a0b3-9e3a5e7c081b/resourceGroups/TestRG/providers/Microsoft.BillingBenefits/maccs/testMacc01",
+              "displayName": "Custom 30-Day Expiry Alert",
+              "description": "Alert owners 30 days before the savings plan expires",
+              "status": "Active",
+              "startAt": "2026-02-01T00:00:00Z",
+              "endAt": "2027-02-01T00:00:00Z",
+              "notificationBehavior": {
+                "firingMode": "Recurring",
+                "maxNotificationsPerDay": 3,
+                "cooldownPeriod": "PT8H"
+              },
+              "condition": {
+                "expression": "properties.status == 'Active'",
+                "trigger": {
+                  "type": "OnResourceChange"
+                }
+              },
+              "recipients": [
+                {
+                  "scope": "/subscriptions/eef82110-c91b-4c6a-a0b3-9e3a5e7c081b/resourceGroups/TestRG/providers/Microsoft.BillingBenefits/maccs/testMacc01",
+                  "roleDefinitionId": "/providers/Microsoft.Authorization/roleDefinitions/acdd72a7-3385-48ef-bd42-f606fba81ae7"
+                }
+              ],
+              "deliveryState": {
+                "lastTriggeredAt": "2026-03-15T14:30:00Z",
+                "lastDeliveredAt": "2026-03-15T14:30:05Z",
+                "notificationsSentToday": 1,
+                "totalNotificationsSent": 5
+              },
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdBy": "user@example.com",
+              "createdByType": "User",
+              "createdAt": "2026-02-01T10:00:00Z",
+              "lastModifiedBy": "user@example.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2026-02-01T10:00:00Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
