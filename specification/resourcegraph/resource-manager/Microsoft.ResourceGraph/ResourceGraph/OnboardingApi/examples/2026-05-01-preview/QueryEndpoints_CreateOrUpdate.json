@@ -1,0 +1,51 @@
+{
+  "operationId": "QueryEndpoints_CreateOrUpdate",
+  "title": "Create a query endpoint over an approved ontology",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "offeringName": "contoso-insights",
+    "queryEndpointName": "topology-explorer",
+    "resource": {
+      "properties": {
+        "displayName": "Topology Explorer",
+        "ontologyRef": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ResourceGraph/offerings/contoso-insights/ontologies/network-topology",
+        "enginePreference": "Pacific",
+        "estimatedQueriesPerDay": 250000,
+        "peakQueriesPerMinute": 900
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ResourceGraph/offerings/contoso-insights/queryEndpoints/topology-explorer",
+        "name": "topology-explorer",
+        "type": "Microsoft.ResourceGraph/offerings/queryEndpoints",
+        "properties": {
+          "displayName": "Topology Explorer",
+          "ontologyRef": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ResourceGraph/offerings/contoso-insights/ontologies/network-topology",
+          "enginePreference": "Pacific",
+          "estimatedQueriesPerDay": 250000,
+          "peakQueriesPerMinute": 900,
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ResourceGraph/offerings/contoso-insights/queryEndpoints/topology-explorer",
+        "name": "topology-explorer",
+        "type": "Microsoft.ResourceGraph/offerings/queryEndpoints",
+        "properties": {
+          "displayName": "Topology Explorer",
+          "ontologyRef": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ResourceGraph/offerings/contoso-insights/ontologies/network-topology",
+          "enginePreference": "Pacific",
+          "estimatedQueriesPerDay": 250000,
+          "peakQueriesPerMinute": 900,
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

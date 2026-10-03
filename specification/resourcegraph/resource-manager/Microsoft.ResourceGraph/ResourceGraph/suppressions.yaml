@@ -29,12 +29,17 @@
 - tool: TypeSpecValidation
   reason: >
     Not ready to split as independent services.
+    OnboardingApi is an independently versioned module of the existing ResourceGraph
+    aggregate SDK, with its own emit configuration and published preview under the
+    existing service. Its nested project preserves the legacy modular layout;
+    this additional structural exception requires normal review.
   rules: [FolderStructure]
   paths:
     - ResourceChanges
     - ResourceGraphApi
     - ResourceHistory
     - GraphQueryApi
+    - OnboardingApi
 
 - tool: TypeSpecValidation
   reason: >
@@ -47,7 +52,7 @@
     - options.@azure-tools/typespec-ts.*
     - parameters.service-dir.default
     - options.@azure-typespec/http-client-csharp-mgmt.*
-  paths: 
+  paths:
     - ResourceChanges/tspconfig.yaml
     - ResourceGraphApi/tspconfig.yaml
     - ResourceHistory/tspconfig.yaml
