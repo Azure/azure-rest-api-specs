@@ -40,6 +40,14 @@ enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   @doc("2026-05-01-preview")
   v2026_05_01_Preview: "2026-05-01-preview",
+
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  @doc("2026-06-01")
+  v2026_06_01: "2026-06-01",
+
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  @doc("2026-07-01")
+  v2026_07_01: "2026-07-01",
 }
 
 @doc("The status of the current operation")
