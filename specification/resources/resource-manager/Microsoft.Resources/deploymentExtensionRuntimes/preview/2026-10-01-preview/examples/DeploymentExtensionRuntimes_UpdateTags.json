@@ -1,0 +1,68 @@
+{
+  "operationId": "DeploymentExtensionRuntimes_UpdateTags",
+  "title": "Update the tags of a deployment extension runtime",
+  "parameters": {
+    "api-version": "2026-10-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "ext-rg",
+    "runtimeName": "github-ext",
+    "properties": {
+      "tags": {
+        "team": "platform",
+        "environment": "staging"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/ext-rg/providers/Microsoft.Resources/deploymentExtensionRuntimes/github-ext",
+        "name": "github-ext",
+        "type": "Microsoft.Resources/deploymentExtensionRuntimes",
+        "location": "eastus",
+        "tags": {
+          "team": "platform",
+          "environment": "staging"
+        },
+        "identity": {
+          "type": "SystemAssigned",
+          "principalId": "abc12345-6789-0abc-def0-123456789abc",
+          "tenantId": "def12345-6789-0abc-def0-123456789abc"
+        },
+        "systemData": {
+          "createdBy": "user@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2026-10-15T10:30:00Z",
+          "lastModifiedBy": "user@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2026-10-15T11:00:00Z"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "hosting": {
+            "runtimeKind": "ContainerApps",
+            "tenantId": "def12345-6789-0abc-def0-123456789abc",
+            "artifactUri": "myacr.azurecr.io/extensions/github:1.0",
+            "audienceAppId": "11111111-1111-1111-1111-111111111111",
+            "scaling": {
+              "minReplicas": 1,
+              "maxReplicas": 5,
+              "concurrentRequestsPerReplica": 10
+            },
+            "resources": {
+              "cpu": 0.5,
+              "memory": "1Gi"
+            },
+            "fqdn": "github-ext-app.happyocean-abc12345.eastus.azurecontainerapps.io"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Resources/locations/eastus/operationStatuses/44444444-4444-4444-4444-444444444444?api-version=2026-10-01-preview",
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Resources/locations/eastus/operationStatuses/44444444-4444-4444-4444-444444444444?api-version=2026-10-01-preview"
+      }
+    }
+  }
+}
