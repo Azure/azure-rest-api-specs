@@ -4,8 +4,10 @@ on:
   pull_request:
     paths:
       - .github/labels.yaml
+      - .github/labels/**
       - .github/workflows/sync-repo-labels.yaml
       - .github/workflows/src/label-catalog.ts
+      - .github/workflows/src/label-catalog-loader.ts
       - .github/workflows/src/sync-repo-labels.ts
       - .github/workflows/cmd/labels.ts
       - .github/workflows/test/*label*.test.ts
@@ -16,8 +18,10 @@ on:
     branches: [main]
     paths:
       - .github/labels.yaml
+      - .github/labels/**
       - .github/workflows/sync-repo-labels.yaml
       - .github/workflows/src/label-catalog.ts
+      - .github/workflows/src/label-catalog-loader.ts
       - .github/workflows/src/sync-repo-labels.ts
       - .github/package.json
       - pnpm-lock.yaml
