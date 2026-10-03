@@ -2911,13 +2911,13 @@
         },
         "storageUrl": {
           "type": "string",
-          "description": "The URL for the application package in Azure Storage.",
+          "description": "The URL for the application package in Azure Storage. This property is only returned for the PUT application package (create or update) operation. For the GET application package and POST activate application package operations, this property is not populated for API versions newer than 2025-06-01.",
           "readOnly": true
         },
         "storageUrlExpiry": {
           "type": "string",
           "format": "date-time",
-          "description": "The UTC time at which the Azure Storage URL will expire.",
+          "description": "The UTC time at which the Azure Storage URL will expire. This property is only returned for the PUT application package (create or update) operation. For the GET application package and POST activate application package operations, this property is not populated for API versions newer than 2025-06-01.",
           "readOnly": true
         },
         "lastActivationTime": {
