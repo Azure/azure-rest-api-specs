@@ -1,0 +1,63 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/rest";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+
+namespace Microsoft.RecoveryServices;
+
+/**
+ * Vault resource in Recovery Service.
+ */
+@armVirtualResource
+model VaultResource {
+  ...ResourceNameParameter<VaultResource, "vaultName", "vaults", "">;
+}
+
+/**
+ * Backup Fabric virtual resource.
+ */
+@parentResource(VaultResource)
+@armVirtualResource
+model BackupFabricResource {
+  ...ResourceNameParameter<
+    BackupFabricResource,
+    "fabricName",
+    "backupFabrics",
+    ""
+  >;
+}
+
+/**
+ * Protection Container virtual resource.
+ */
+@parentResource(BackupFabricResource)
+@armVirtualResource
+model ProtectionContainerResource {
+  ...ResourceNameParameter<
+    ProtectionContainerResource,
+    "containerName",
+    "protectionContainers",
+    ""
+  >;
+}
+
+/**
+ * Protected Item virtual resource. Routing parent for recovery points.
+ */
+@parentResource(ProtectionContainerResource)
+@armVirtualResource
+model ProtectedItemVirtualResource {
+  ...ResourceNameParameter<
+    ProtectedItemVirtualResource,
+    "protectedItemName",
+    "protectedItems",
+    ""
+  >;
+}
+
+@@doc(VaultResource.name, "The name of the recovery services vault.");
+@@doc(BackupFabricResource.name, "Fabric name associated with the container.");
+@@doc(ProtectionContainerResource.name, "Name of the container.");
+@@doc(ProtectedItemVirtualResource.name, "Name of the Protected Item.");
