@@ -544,19 +544,31 @@ union TlsVersion {
   string,
 
   /**
-   * 1.0
-   */
-  `1.0`: "1.0",
-
-  /**
-   * 1.1
-   */
-  `1.1`: "1.1",
-
-  /**
    * 1.2
    */
   `1.2`: "1.2",
+
+  /**
+   * 1.3
+   */
+  `1.3`: "1.3",
+}
+
+/**
+ * The IP address type of the namespace. This determines whether the namespace is reachable over IPv4 only, or over both IPv4 and IPv6.
+ */
+union IpAddressType {
+  string,
+
+  /**
+   * IPv4
+   */
+  IPv4: "IPv4",
+
+  /**
+   * DualStack
+   */
+  DualStack: "DualStack",
 }
 
 /**
@@ -2665,7 +2677,7 @@ model DomainProperties {
   /**
    * Minimum TLS version of the publisher allowed to publish to this domain
    */
-  minimumTlsVersionAllowed?: TlsVersion;
+  minimumTlsVersionAllowed?: TlsVersion = TlsVersion.`1.2`;
 
   /**
    * Endpoint for the Event Grid Domain Resource which is used for publishing the events.
@@ -3574,9 +3586,14 @@ model NamespaceProperties {
   inboundIpRules?: InboundIpRule[];
 
   /**
-   * Minimum TLS version of the publisher allowed to publish to this namespace. Only TLS version 1.2 is supported.
+   * Minimum TLS version of the publisher allowed to publish to this namespace. Only TLS versions 1.2 and 1.3 are supported.
    */
   minimumTlsVersionAllowed?: TlsVersion;
+
+  /**
+   * The IP address type of the namespace. When set to DualStack, the namespace is reachable over both IPv4 and IPv6. Defaults to IPv4.
+   */
+  ipAddressType?: IpAddressType;
 
   /**
    * Auto-scale configuration for the namespace resource
@@ -4020,6 +4037,11 @@ model NamespaceUpdateParameterProperties {
   inboundIpRules?: InboundIpRule[];
 
   /**
+   * The IP address type of the namespace. When set to DualStack, the namespace is reachable over both IPv4 and IPv6. Defaults to IPv4.
+   */
+  ipAddressType?: IpAddressType;
+
+  /**
    * Auto-scale configuration for the namespace resource
    */
   autoScaleConfiguration?: UpdateAutoScaleConfiguration;
@@ -4406,7 +4428,7 @@ model PartnerNamespaceProperties {
   /**
    * Minimum TLS version of the publisher allowed to publish to this partner namespace
    */
-  minimumTlsVersionAllowed?: TlsVersion;
+  minimumTlsVersionAllowed?: TlsVersion = TlsVersion.`1.2`;
 
   /**
    * Endpoint for the partner namespace.
@@ -5044,7 +5066,7 @@ model TopicProperties {
   /**
    * Minimum TLS version of the publisher allowed to publish to this topic
    */
-  minimumTlsVersionAllowed?: TlsVersion;
+  minimumTlsVersionAllowed?: TlsVersion = TlsVersion.`1.2`;
 
   /**
    * This determines the format that Event Grid should expect for incoming events published to the topic.
