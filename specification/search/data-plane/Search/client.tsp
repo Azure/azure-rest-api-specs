@@ -7,13 +7,30 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 using Search;
 
-@TypeSpec.Versioning.useDependency(
-  Search.Versions.v2025_11_01_preview,
-  Search.Versions.v2026_04_01,
-  Search.Versions.v2026_05_01_preview,
-  Search.Versions.v2026_08_01_preview
-)
+@versioned(CustomizationVersions)
 namespace Customizations;
+
+/** The service API versions supported by client customizations. */
+enum CustomizationVersions {
+  /** Client customizations for the 2025-11-01-preview API version. */
+  @useDependency(Search.Versions.v2025_11_01_preview)
+  v2025_11_01_preview: "2025-11-01-preview",
+
+  /** Client customizations for the 2026-04-01 API version. */
+  @useDependency(Search.Versions.v2026_04_01)
+  v2026_04_01: "2026-04-01",
+
+  /** Client customizations for the 2026-05-01-preview API version. */
+  @useDependency(Search.Versions.v2026_05_01_preview)
+  v2026_05_01_preview: "2026-05-01-preview",
+
+  /** Client customizations for the 2026-08-01-preview API version. */
+  @useDependency(Search.Versions.v2026_08_01_preview)
+  v2026_08_01_preview: "2026-08-01-preview",
+
+  @useDependency(Search.Versions.v2026_10_01)
+  v2026_10_01: "2026-10-01",
+}
 
 @client({
   name: "SearchClient",
@@ -22,6 +39,7 @@ namespace Customizations;
 @clientInitialization(Search.SearchIndexClientOptions)
 @clientNamespace("Azure.Search.Documents")
 @clientNamespace("com.azure.search.documents", "java")
+@versioned(CustomizationVersions)
 namespace SearchClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -66,6 +84,7 @@ namespace SearchClient {
 })
 @clientNamespace("Azure.Search.Documents.Indexes")
 @clientNamespace("com.azure.search.documents.indexes", "java")
+@versioned(CustomizationVersions)
 namespace SearchIndexClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -110,7 +129,7 @@ namespace SearchIndexClient {
   // method in every SDK version and avoids a customer breaking change.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  op listIndexesOffsetPaged is Search.Indexes.listOffsetPaged;
+  op listIndexesOffsetPaged is Search.LegacyIndexes.list;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -120,7 +139,7 @@ namespace SearchIndexClient {
   // version-disjoint unification as `listIndexesOffsetPaged` above.
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  op listIndexesWithSelectedPropertiesOffsetPaged is Search.Indexes.listWithSelectedPropertiesOffsetPaged;
+  op listIndexesWithSelectedPropertiesOffsetPaged is Search.LegacyIndexes.listWithSelectedProperties;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -232,6 +251,7 @@ namespace SearchIndexClient {
 })
 @clientNamespace("Azure.Search.Documents.Indexes")
 @clientNamespace("com.azure.search.documents.indexes", "java")
+@versioned(CustomizationVersions)
 namespace SearchIndexerClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -331,6 +351,7 @@ model KnowledgeBaseRetrievalClientOptions {
 })
 @clientNamespace("Azure.Search.Documents.KnowledgeBases")
 @clientNamespace("com.azure.search.documents.knowledgebases", "java")
+@versioned(CustomizationVersions)
 namespace KnowledgeBaseRetrievalClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -356,11 +377,6 @@ namespace KnowledgeBaseRetrievalClient {
   KnowledgeBaseModelWebSummarizationActivityRecord.outputTokens,
   "outputTokensCount",
   "!autorest"
-);
-@@clientName(
-  KnowledgeBaseActivityRecord.elapsedMs,
-  "elapsedInMs",
-  "javascript"
 );
 
 @@access(ListingSearchType, Access.public);

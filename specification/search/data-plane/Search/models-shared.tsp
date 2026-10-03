@@ -143,6 +143,7 @@ alias querySourceAuthorizationHeader = {
 alias queryWorkIQSourceAuthorizationHeader = {
   /** User assertion token for a customer-owned Entra app registration configured on a Work IQ knowledge source. Used for on-behalf-of authentication to the Work IQ API. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "WorkIQ is a product name where IQ is an acronym."
+  @removed(Versions.v2026_10_01)
   @added(Versions.v2026_08_01_preview)
   @secret
   @header("x-ms-query-work-iq-source-authorization")
@@ -170,7 +171,7 @@ alias SearchOperation<
   Traits extends Reflection.Model = {},
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
-  TParams & ClientRequestIdHeader,
+  ClientRequestIdHeader & TParams,
   TResponse,
   Traits,
   TError
@@ -182,7 +183,7 @@ alias SearchIndexOperation<
   Traits extends Reflection.Model = {},
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
-  TParams & ClientRequestIdHeader & indexNamePath,
+  ClientRequestIdHeader & indexNamePath & TParams,
   TResponse,
   Traits,
   TError
@@ -194,7 +195,7 @@ alias SearchIndexerOperation<
   Traits extends Reflection.Model = {},
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
-  TParams & ClientRequestIdHeader & indexerNamePath,
+  ClientRequestIdHeader & indexerNamePath & TParams,
   TResponse,
   Traits,
   TError
@@ -206,7 +207,7 @@ alias SearchDataSourceOperation<
   Traits extends Reflection.Model = {},
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
-  TParams & ClientRequestIdHeader & dataSourceNamePath,
+  ClientRequestIdHeader & dataSourceNamePath & TParams,
   TResponse,
   Traits,
   TError
@@ -218,7 +219,7 @@ alias SearchSkillsetOperation<
   Traits extends Reflection.Model = {},
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
-  TParams & ClientRequestIdHeader & skillsetNamePath,
+  ClientRequestIdHeader & skillsetNamePath & TParams,
   TResponse,
   Traits,
   TError
@@ -230,7 +231,7 @@ alias SearchSynonymMapOperation<
   Traits extends Reflection.Model = {},
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
-  TParams & ClientRequestIdHeader & synonymMapNamePath,
+  ClientRequestIdHeader & synonymMapNamePath & TParams,
   TResponse,
   Traits,
   TError
@@ -242,7 +243,7 @@ alias SearchAliasOperation<
   Traits extends Reflection.Model = {},
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
-  TParams & ClientRequestIdHeader & aliasNamePath,
+  ClientRequestIdHeader & aliasNamePath & TParams,
   TResponse,
   Traits,
   TError
@@ -254,7 +255,7 @@ alias SearchSourceOperation<
   Traits extends Reflection.Model = {},
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
-  TParams & ClientRequestIdHeader & sourceNamePath,
+  ClientRequestIdHeader & sourceNamePath & TParams,
   TResponse,
   Traits,
   TError
@@ -266,7 +267,7 @@ alias SearchKnowledgeBaseOperation<
   Traits extends Reflection.Model = {},
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
-  TParams & ClientRequestIdHeader & knowledgeBaseNamePath,
+  ClientRequestIdHeader & knowledgeBaseNamePath & TParams,
   TResponse,
   Traits,
   TError
