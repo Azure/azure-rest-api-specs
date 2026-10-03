@@ -88,7 +88,7 @@ interface MongoDBCollectionGetResultsOperationGroup {
    * Merges the partitions of a MongoDB Collection
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @added(Versions.v2026_04_01_preview)
+  @added(Versions.v2026_09_01_preview)
   @action("partitionMerge")
   listMongoDBCollectionPartitionMerge is ArmResourceActionAsyncBase<
     MongoDBCollectionGetResults,
