@@ -8,6 +8,25 @@ where:
 configuration:
   resourceManagementConfiguration:
     scheduledSearches:
+      - description: Close PRs against typespec-next 14 days after creation
+        frequencies:
+          - daily:
+              time: 14:00
+        filters:
+          - isPullRequest
+          - isOpen
+          - targetsBranch:
+              branch: typespec-next
+          - created:
+              before: 14
+        actions:
+          - closeIssue
+          - addReply:
+              reply: >-
+                Hi @${issueAuthor}.
+                This PR has been closed because PRs targeting the `typespec-next` branch are automatically closed 14 days after creation, since that branch is periodically rewritten and long-lived PRs against it fall out of date.
+                If you still need this change, please reopen the PR and rebase it onto the latest `typespec-next`, or retarget it to `main`.
+
       - description: Close PRs with no activity for 365 days without requiring a stale label
         frequencies:
           - daily:
