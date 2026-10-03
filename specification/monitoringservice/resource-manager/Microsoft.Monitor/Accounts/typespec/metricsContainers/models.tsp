@@ -11,6 +11,14 @@ namespace Microsoft.Monitor {
    */
   model MetricsLimits {
     /**
+     * Indicates whether automatic scaling of ingestion limits is enabled.
+     * Omit this property or specify null to preserve the existing automatic scaling mode.
+     */
+    #suppress "@azure-tools/typespec-azure-core/no-nullable" "The deployed API distinguishes explicit null and accepts it to preserve the existing mode."
+    @added(Versions.v2026_09_03_preview)
+    enableAutoScale?: boolean | null;
+
+    /**
      * Maximum number of active time series allowed on the metrics containers.
      */
     maxActiveTimeSeries?: int64;
@@ -35,6 +43,7 @@ namespace Microsoft.Monitor {
      * Metrics limits.
      */
     @removed(Versions.v2025_10_03_stable)
+    @added(Versions.v2026_09_03_preview)
     limits?: MetricsLimits;
 
     /**

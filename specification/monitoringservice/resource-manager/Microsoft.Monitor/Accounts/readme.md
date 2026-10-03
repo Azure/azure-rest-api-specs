@@ -32,7 +32,16 @@ title: AzureMonitorAccountsClient
 description: Azure Monitor Accounts Management Client
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-10-03
+tag: package-2026-09-03-preview
+```
+
+### Tag: package-2026-09-03-preview
+
+These settings apply only when `--tag=package-2026-09-03-preview` is specified on the command line
+
+``` yaml $(tag) == 'package-2026-09-03-preview'
+input-file:
+- preview/2026-09-03-preview/azuremonitorworkspace.json
 ```
 
 ### Tag: package-2025-10-03
@@ -133,4 +142,36 @@ suppressions:
     from: azuremonitorworkspace.json
     where:
      - $.definitions["Azure.Core.uuid"].format
+  - code: PutResponseCodes
+    reason: The deployed TraceContainer and TraceAssociation synchronous PUT contracts return 200 for both create and update.
+    from: azuremonitorworkspace.json
+    where:
+     - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Monitor/traceAssociations/default"].put
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/traceAssociations/default"].put
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/{providerType}/{resourceName}/providers/Microsoft.Monitor/traceAssociations/default"].put
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/accounts/{azureMonitorWorkspaceName}/traceContainers/default"].put
+  - code: DeleteResponseCodes
+    reason: The deployed TraceAssociation synchronous DELETE contract returns 204 when deletion succeeds.
+    from: azuremonitorworkspace.json
+    where:
+     - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Monitor/traceAssociations/default"].delete
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/traceAssociations/default"].delete
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/{providerType}/{resourceName}/providers/Microsoft.Monitor/traceAssociations/default"].delete
+  - code: DeleteOperationResponses
+    reason: The deployed TraceAssociation synchronous DELETE contract returns 204 with no response body.
+    from: azuremonitorworkspace.json
+    where:
+     - $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Monitor/traceAssociations/default"].delete.responses
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Monitor/traceAssociations/default"].delete.responses
+     - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerName}/{providerType}/{resourceName}/providers/Microsoft.Monitor/traceAssociations/default"].delete.responses
+  - code: EnumInsteadOfBoolean
+    reason: enableAutoScale is an existing service boolean with only true and false states; null or omission preserves the current mode.
+    from: azuremonitorworkspace.json
+    where:
+     - $.definitions.MetricsLimits.properties.enableAutoScale
+  - code: AllProxyResourcesShouldHaveDelete
+    reason: TraceContainer is a service-managed singleton that cannot be deleted independently from its Azure Monitor Workspace.
+    from: azuremonitorworkspace.json
+    where:
+     - $.definitions.TraceContainerResource
 ```
