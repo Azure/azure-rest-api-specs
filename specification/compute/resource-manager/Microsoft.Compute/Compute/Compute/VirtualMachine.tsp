@@ -415,6 +415,17 @@ interface VirtualMachines {
   >;
 
   /**
+   * Cancels the currently running patch installation on the VM.
+   */
+  @added(Versions.v2026_04_01)
+  cancelPatchInstallation is ComputeResourceActionAsync<
+    VirtualMachine,
+    void,
+    OkResponse,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
    * Migrate a virtual machine from availability set to Flexible Virtual Machine Scale Set.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
