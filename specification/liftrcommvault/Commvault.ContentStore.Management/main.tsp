@@ -54,9 +54,12 @@ enum Versions {
   v8_preview: "2026-07-03-preview",
 
   @doc("The 2026-08-01-preview API version, using LiftrBase.Versions.v3_preview.")
-  @Azure.Core.previewVersion
   @useDependency(LiftrBase.Versions.v3_preview)
   v9_preview: "2026-08-01-preview",
+
+  @doc("The 2026-09-30 API version, using LiftrBase.Versions.v3_preview.")
+  @useDependency(LiftrBase.Versions.v3_preview)
+  v2026_09_30: "2026-09-30",
 }
 interface Operations extends Azure.ResourceManager.Operations {}
 
@@ -990,7 +993,7 @@ interface ProtectionGroups {
   createOrupdate is ArmResourceCreateOrUpdateAsync<ProtectionGroup>;
   delete is ArmResourceDeleteWithoutOkAsync<ProtectionGroup>;
   listByCloudAccount is ArmResourceListByParent<ProtectionGroup>;
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "stopBackup is a long-running operation that returns 204 with no content on completion."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "Preserve the published 202/204 no-content LRO contract: OpenAPI PostResponseCodes requires 204, but the pinned TypeSpec ARM 0.72.1 rule rejects it."
   @doc("Stop Backup for a Protection Group")
   stopBackup is ArmResourceActionAsync<
     ProtectionGroup,
