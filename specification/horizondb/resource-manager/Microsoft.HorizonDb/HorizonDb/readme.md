@@ -41,7 +41,7 @@ input-file:
 suppressions:
   - code: EvenSegmentedPathForPutOperation
     from: openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/authentications/passwordMethod"].put
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/authentications/passwordMethod"]
     reason: >-
       PasswordAuthentication is a service-created singleton resource with the
       fixed name passwordMethod. Its path follows the approved singleton
