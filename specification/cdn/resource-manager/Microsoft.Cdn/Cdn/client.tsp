@@ -1562,6 +1562,32 @@ using Azure.ResourceManager;
 );
 @@clientName(MatchProcessingBehavior.Continue, "CONTINUE_ENUM", "python");
 
+// Surface documented Front Door name constraints to the C# provisioning emitter only.
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning"
+@@clientOption(
+  AFDOriginGroup,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 50, pattern: "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$" },
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning"
+@@clientOption(
+  AFDOrigin,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 50, pattern: "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$" },
+  "csharp"
+);
+#suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning"
+#suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning"
+@@clientOption(
+  Route,
+  "resource-name-constraint",
+  #{ minLength: 1, maxLength: 50, pattern: "^[a-zA-Z0-9]+(-*[a-zA-Z0-9])*$" },
+  "csharp"
+);
+
 // Mark CustomDomains.create as ARM CreateOrUpdate operation
 // so that the SDK generator produces CreateOrUpdate methods
 @@armResourceCreateOrUpdate(CustomDomains.create, CustomDomain);
