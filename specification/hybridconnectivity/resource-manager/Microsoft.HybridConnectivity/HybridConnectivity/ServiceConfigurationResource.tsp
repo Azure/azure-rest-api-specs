@@ -30,8 +30,6 @@ interface ServiceConfigurationResources {
   /**
    * Gets the details about the service to the resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ServiceConfigurations_Get")
   get is ArmResourceRead<
     ServiceConfigurationResource,
     Azure.ResourceManager.Foundations.ExtensionBaseParameters
@@ -40,8 +38,6 @@ interface ServiceConfigurationResources {
   /**
    * Create or update a service in serviceConfiguration for the endpoint resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ServiceConfigurations_CreateOrupdate")
   createOrupdate is ArmResourceCreateOrReplaceSync<
     ServiceConfigurationResource,
     Azure.ResourceManager.Foundations.ExtensionBaseParameters
@@ -50,9 +46,7 @@ interface ServiceConfigurationResources {
   /**
    * Update the service details in the service configurations of the target resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
-  @operationId("ServiceConfigurations_Update")
   update is ArmCustomPatchSync<
     ServiceConfigurationResource,
     ServiceConfigurationResourcePatch,
@@ -62,9 +56,6 @@ interface ServiceConfigurationResources {
   /**
    * Deletes the service details to the target resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-  @operationId("ServiceConfigurations_Delete")
   delete is ArmResourceDeleteSync<
     ServiceConfigurationResource,
     Azure.ResourceManager.Foundations.ExtensionBaseParameters
@@ -73,8 +64,6 @@ interface ServiceConfigurationResources {
   /**
    * API to enumerate registered services in service configurations under a Endpoint Resource
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ServiceConfigurations_ListByEndpointResource")
   listByEndpointResource is ArmResourceListByParent<
     ServiceConfigurationResource,
     Azure.ResourceManager.Foundations.ExtensionBaseParameters,

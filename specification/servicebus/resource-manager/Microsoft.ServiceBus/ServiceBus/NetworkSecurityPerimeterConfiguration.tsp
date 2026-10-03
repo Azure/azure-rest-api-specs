@@ -45,8 +45,6 @@ interface NetworkSecurityPerimeterConfigurations {
   /**
    * Gets list of current NetworkSecurityPerimeterConfiguration for Namespace
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("NetworkSecurityPerimeterConfiguration_List")
   list is ArmResourceListByParent<
     NetworkSecurityPerimeterConfiguration,
     Response = ArmResponse<NetworkSecurityPerimeterConfigurationList>,

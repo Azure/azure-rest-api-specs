@@ -4,12 +4,10 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
-using TypeSpec.OpenAPI;
 using Common;
 
 namespace Compute;
@@ -20,8 +18,6 @@ interface UsageOperationGroup {
   /**
    * Gets, for the specified location, the current compute resource usage information as well as the limits for compute resources under the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Usage_List")
   @autoRoute
   @get
   @action("usages")
@@ -39,8 +35,6 @@ interface VirtualMachineSizesOperationGroup {
   /**
    * This API is deprecated. Use [Resources Skus](https://docs.microsoft.com/rest/api/compute/resourceskus/list)
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachineSizes_List")
   @autoRoute
   @get
   @action("vmSizes")
@@ -58,8 +52,6 @@ interface VirtualMachineScaleSetsOperationGroup {
   /**
    * Gets all the VM scale sets under the specified subscription for the specified location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachineScaleSets_ListByLocation")
   @autoRoute
   @get
   @action("virtualMachineScaleSets")
@@ -77,8 +69,6 @@ interface VirtualMachinesOperationGroup {
   /**
    * Gets all the virtual machines under the specified subscription for the specified location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachines_ListByLocation")
   @autoRoute
   @get
   @action("virtualMachines")
@@ -96,9 +86,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
   /**
    * Gets a list of virtual machine image publishers for the specified Azure location and edge zone.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
-  @operationId("VirtualMachineImagesEdgeZone_ListPublishers")
   @autoRoute
   @get
   @action("publishers")
@@ -119,9 +107,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
   /**
    * Gets a list of virtual machine image offers for the specified location, edge zone and publisher.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
-  @operationId("VirtualMachineImagesEdgeZone_ListOffers")
   @autoRoute
   @get
   @action("artifacttypes/vmimage/offers")
@@ -149,9 +135,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
   /**
    * Gets a list of virtual machine image SKUs for the specified location, edge zone, publisher, and offer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
-  @operationId("VirtualMachineImagesEdgeZone_ListSkus")
   @autoRoute
   @get
   @action("skus")
@@ -193,9 +177,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
   /**
    * Gets a list of all virtual machine image versions for the specified location, edge zone, publisher, offer, and SKU.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
-  @operationId("VirtualMachineImagesEdgeZone_List")
   @autoRoute
   @get
   @action("versions")
@@ -262,9 +244,7 @@ interface VirtualMachineImagesEdgeZoneOperationGroup {
   /**
    * Gets a virtual machine image in an edge zone.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
-  @operationId("VirtualMachineImagesEdgeZone_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/edgeZones/{edgeZone}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}")
   @get
   get(
@@ -311,9 +291,7 @@ interface VirtualMachineImagesOperationGroup {
   /**
    * Gets a list of all virtual machine image versions for the specified edge zone
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
-  @operationId("VirtualMachineImages_ListByEdgeZone")
   @autoRoute
   @get
   @action("vmimages")
@@ -334,8 +312,6 @@ interface VirtualMachineImagesOperationGroup {
   /**
    * Gets a list of virtual machine image publishers for the specified Azure location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachineImages_ListPublishers")
   @autoRoute
   @get
   @action("publishers")
@@ -347,9 +323,7 @@ interface VirtualMachineImagesOperationGroup {
   /**
    * Gets a list of virtual machine image offers for the specified location and publisher.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
-  @operationId("VirtualMachineImages_ListOffers")
   @autoRoute
   @get
   @action("artifacttypes/vmimage/offers")
@@ -370,9 +344,7 @@ interface VirtualMachineImagesOperationGroup {
   /**
    * Gets a list of virtual machine image SKUs for the specified location, publisher, and offer.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
-  @operationId("VirtualMachineImages_ListSkus")
   @autoRoute
   @get
   @action("skus")
@@ -407,9 +379,7 @@ interface VirtualMachineImagesOperationGroup {
   /**
    * Gets a list of all virtual machine image versions for the specified location, publisher, offer, and SKU.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
-  @operationId("VirtualMachineImages_List")
   @autoRoute
   @get
   @action("versions")
@@ -464,8 +434,6 @@ interface VirtualMachineImagesOperationGroup {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VirtualMachineImages_ListWithProperties")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions?$expand=Properties")
   @get
   listWithProperties(
@@ -511,9 +479,7 @@ interface VirtualMachineImagesOperationGroup {
   /**
    * Gets a virtual machine image.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
-  @operationId("VirtualMachineImages_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/publishers/{publisherName}/artifacttypes/vmimage/offers/{offer}/skus/{skus}/versions/{version}")
   @get
   get(
@@ -555,8 +521,6 @@ interface LogAnalyticsOperationGroup {
    * Export logs that show Api requests made by this subscription in the given time window to show throttling activities.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("LogAnalytics_ExportRequestRateByInterval")
   @autoRoute
   @post
   @action("logAnalytics/apiAccess/getRequestRateByInterval")
@@ -572,8 +536,6 @@ interface LogAnalyticsOperationGroup {
    * Export logs that show total throttled Api requests for this subscription in the given time window.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("LogAnalytics_ExportThrottledRequests")
   @autoRoute
   @action("logAnalytics/apiAccess/getThrottledRequests")
   exportThrottledRequests is ComputeProviderActionAsync<
@@ -592,9 +554,7 @@ interface VirtualMachineRunCommandsOperationGroup {
   /**
    * Lists all available run commands for a subscription in a location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
-  @operationId("VirtualMachineRunCommands_List")
   @autoRoute
   @get
   @action("runCommands")
@@ -607,9 +567,7 @@ interface VirtualMachineRunCommandsOperationGroup {
   /**
    * Gets specific run command for a subscription in a location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/use-operation-decorator" "For backward compatibility"
-  @operationId("VirtualMachineRunCommands_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.Compute/locations/{location}/runCommands/{commandId}")
   @get
   get(
