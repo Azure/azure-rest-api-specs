@@ -10,7 +10,7 @@ namespace Azure.AI.Projects;
 alias JobsPreviewHeader = WithRequiredFoundryPreviewHeader<FoundryFeaturesOptInKeys.jobs_v1_preview>;
 
 alias JobsFilterQueryParams = {
-  @doc("Filter by job type (e.g. 'Command').")
+  @doc("Filter by job type (e.g. 'Command' or 'Pipeline').")
   @query
   jobType?: JobType;
 
@@ -29,7 +29,7 @@ alias JobsFilterQueryParams = {
 
 alias JobOperations = FoundryAzureOperations<{}>;
 
-@tag("CommandJob")
+@tag("Jobs")
 interface Jobs {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We need explicit definition for header support"
   @doc("List Jobs.")
