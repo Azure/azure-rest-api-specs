@@ -126,11 +126,74 @@ interface ServiceGroups {
    * Get the details of the serviceGroup's ancestors
    */
   @removed(Versions.v2026_08_01)
+  @sharedRoute
   listAncestors is ArmResourceActionSync<
     ServiceGroup,
     void,
     ArmResponse<ServiceGroupCollectionResponse>,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+  >;
+
+  /**
+   * Get the details of the serviceGroup's ancestors.
+   *
+   * This is a paginated POST action. When the response contains a skipToken,
+   * more results are available; callers must re-POST to the same listAncestors
+   * URL with that skipToken value in the request body to fetch the next page.
+   * When skipToken is absent, the current page is the last page. SDKs do not
+   * natively support POST-based pagination, so callers must loop manually.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "operationId must be pinned so SDK method name stays 'ListAncestors' across the versioned reshape."
+  @added(Versions.v2026_09_01_preview)
+  @operationId("ServiceGroups_ListAncestors")
+  @action("listAncestors")
+  @sharedRoute
+  listAncestorsPaged is ArmResourceActionSync<
+    ServiceGroup,
+    ListAncestorsRequest,
+    ArmResponse<ListAncestorsResponse>,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+  >;
+
+  /**
+   * List the descendant serviceGroups of the serviceGroup, ordered by hierarchy.
+   *
+   * This is a paginated POST action. When the response contains a skipToken,
+   * more results are available; callers must re-POST to the same listDescendants
+   * URL with that skipToken value in the request body to fetch the next page.
+   * When skipToken is absent, the current page is the last page. SDKs do not
+   * natively support POST-based pagination, so callers must loop manually. An
+   * invalid, expired, modified, or incorrectly scoped token may return the
+   * InvalidSkipToken error code.
+   */
+  @added(Versions.v2026_09_01_preview)
+  listDescendants is ArmResourceActionSync<
+    ServiceGroup,
+    ListDescendantsRequest,
+    ArmResponse<ListDescendantsResponse>,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters
+  >;
+
+  /**
+   * Lists all members associated with the service group, including members
+   * discovered through its service group hierarchy at any depth. The response
+   * includes direct resource members, subscription and resource-group container
+   * members, and resources found by expanding those containers. Service groups
+   * in the hierarchy are not returned.
+   *
+   * This is a paginated POST action. When the response contains a skipToken,
+   * more results are available; callers must re-POST to the same listMembers
+   * URL with that skipToken value in the request body to fetch the next page.
+   * When skipToken is absent, the current page is the last page. SDKs do not
+   * natively support POST-based pagination, so callers must loop manually.
+   */
+  @added(Versions.v2026_09_01_preview)
+  listMembers is ArmResourceActionSync<
+    ServiceGroup,
+    ListMembersRequest,
+    ArmResponse<ListMembersResponse>,
+    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
+    OptionalRequestBody = true
   >;
 }
 
