@@ -10,6 +10,9 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Maintenance;
+
+// Common-types v5 emits this resource's id as arm-id, which is an expected difference
+// when 2025-11-01 is compared with older stable API versions.
 /**
  * Apply Update request
  */
