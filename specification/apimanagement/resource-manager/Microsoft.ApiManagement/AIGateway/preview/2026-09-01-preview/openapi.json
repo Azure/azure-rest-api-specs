@@ -1,0 +1,615 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "AIGatewayClient",
+    "version": "2026-09-01-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "AIGatewayOperations"
+    },
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "AiGatewayResources"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.ApiManagement/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "AIGatewayOperations",
+          "Operations"
+        ],
+        "description": "Lists all of the available REST API operations of the Microsoft.ApiManagement provider.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List AI Gateway operations": {
+            "$ref": "./examples/AIGatewayListOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/aigateways": {
+      "get": {
+        "operationId": "AiGatewayResources_ListBySubscription",
+        "tags": [
+          "AiGatewayResources"
+        ],
+        "description": "List AiGatewayResource resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List AI Gateways by subscription": {
+            "$ref": "./examples/AiGatewayListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways": {
+      "get": {
+        "operationId": "AiGatewayResources_ListByResourceGroup",
+        "tags": [
+          "AiGatewayResources"
+        ],
+        "description": "List AiGatewayResource resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List AI Gateways by resource group": {
+            "$ref": "./examples/AiGatewayListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/aigateways/{aiGatewayName}": {
+      "get": {
+        "operationId": "AiGatewayResources_Get",
+        "tags": [
+          "AiGatewayResources"
+        ],
+        "description": "Get a AiGatewayResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an AI Gateway": {
+            "$ref": "./examples/AiGatewayGet.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "AiGatewayResources_CreateOrUpdate",
+        "tags": [
+          "AiGatewayResources"
+        ],
+        "description": "Create a AiGatewayResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AiGatewayResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'AiGatewayResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayResource"
+            }
+          },
+          "201": {
+            "description": "Resource 'AiGatewayResource' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayResource"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create an AI Gateway": {
+            "$ref": "./examples/AiGatewayCreate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/AiGatewayResource"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "AiGatewayResources_Update",
+        "tags": [
+          "AiGatewayResources"
+        ],
+        "description": "Update a AiGatewayResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/If-Match"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AiGatewayUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AiGatewayResource"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update AI Gateway tags": {
+            "$ref": "./examples/AiGatewayUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/AiGatewayResource"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "AiGatewayResources_Delete",
+        "tags": [
+          "AiGatewayResources"
+        ],
+        "description": "Delete a AiGatewayResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "aiGatewayName",
+            "in": "path",
+            "description": "The name of the AiGatewayResource",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9-]{1,22}[a-z0-9]$"
+          },
+          {
+            "$ref": "#/parameters/If-Match"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete an AI Gateway": {
+            "$ref": "./examples/AiGatewayDelete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AiGatewayBackend": {
+      "type": "object",
+      "description": "Backend networking configuration of an AI Gateway.",
+      "properties": {
+        "subnet": {
+          "$ref": "#/definitions/AiGatewaySubnet",
+          "description": "Subnet through which the AI Gateway reaches backends."
+        }
+      }
+    },
+    "AiGatewayFrontend": {
+      "type": "object",
+      "description": "Frontend configuration of an AI Gateway.",
+      "properties": {
+        "defaultHostname": {
+          "type": "string",
+          "description": "Default hostname used to invoke the AI Gateway.",
+          "readOnly": true
+        }
+      }
+    },
+    "AiGatewayProperties": {
+      "type": "object",
+      "description": "Properties of an AI Gateway.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/AiGatewayProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        },
+        "frontend": {
+          "$ref": "#/definitions/AiGatewayFrontend",
+          "description": "Frontend configuration of the AI Gateway.",
+          "readOnly": true
+        },
+        "backend": {
+          "$ref": "#/definitions/AiGatewayBackend",
+          "description": "Backend networking configuration. Can only be set when the AI Gateway is created.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "AiGatewayProvisioningState": {
+      "type": "string",
+      "description": "Provisioning state of an AI Gateway resource.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "AiGatewayProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The resource is ready."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The resource operation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The resource operation was canceled."
+          }
+        ]
+      }
+    },
+    "AiGatewayResource": {
+      "type": "object",
+      "description": "An AI Gateway resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AiGatewayProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        },
+        "sku": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Sku",
+          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "If eTag is provided in the response body, it may also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "AiGatewayResourceListResult": {
+      "type": "object",
+      "description": "The response of a AiGatewayResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The AiGatewayResource items on this page",
+          "items": {
+            "$ref": "#/definitions/AiGatewayResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AiGatewaySubnet": {
+      "type": "object",
+      "description": "Subnet used by an AI Gateway.",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/AiGatewaySubnetResourceId",
+          "description": "Resource identifier of the subnet. The subnet must be delegated to Microsoft.App/environments and be in the same region as the AI Gateway."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "AiGatewaySubnetResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "Resource identifier of a virtual network subnet.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Network/virtualNetworks/subnets"
+          }
+        ]
+      }
+    },
+    "AiGatewayUpdateParameters": {
+      "type": "object",
+      "description": "Parameters for updating an AI Gateway.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "If-Match": {
+      "name": "If-Match",
+      "in": "header",
+      "description": "The If-Match header that makes a request conditional.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "ifMatch"
+    }
+  }
+}
