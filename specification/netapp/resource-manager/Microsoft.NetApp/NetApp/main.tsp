@@ -29,6 +29,8 @@ import "./Backup.tsp";
 import "./BackupVault.tsp";
 import "./Bucket.tsp";
 import "./Cache.tsp";
+import "./PolicyGroup.tsp";
+import "./ExtendedSnapshotRetention.tsp";
 import "./Elastic/ElasticAccount.tsp";
 import "./Elastic/ElasticCapacityPool.tsp";
 import "./Elastic/ElasticVolume.tsp";
@@ -38,6 +40,11 @@ import "./Elastic/ElasticBackupVault.tsp";
 import "./Elastic/ElasticBackupPolicy.tsp";
 import "./Elastic/ElasticBackup.tsp";
 import "./ActiveDirectory.tsp";
+import "./ExternalResources/ExternalResourceEnums.tsp";
+import "./ExternalResources/ExternalCluster.tsp";
+import "./ExternalResources/ExternalSvm.tsp";
+import "./ExternalResources/ExternalCache.tsp";
+import "./ExternalResources/ExternalCacheConnection.tsp";
 import "./routes.tsp";
 import "./client.tsp";
 
@@ -133,8 +140,18 @@ enum Versions {
   /**
    * The 2026-06-15-preview API version.
    */
-  @Azure.Core.previewVersion
   v2026_06_15_preview: "2026-06-15-preview",
+
+  /**
+   * The 2026-08-01 API version.
+   */
+  v2026_08_01: "2026-08-01",
+
+  /**
+   * The 2026-08-15-preview API version.
+   */
+  @Azure.Core.previewVersion
+  v2026_08_15_preview: "2026-08-15-preview",
 }
 
 interface Operations

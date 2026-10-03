@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myRG",
+    "policyGroupName": "policyGroup1",
+    "extendedSnapshotRetentionPolicyName": "extendedSnapshotRetentionPolicy1",
+    "api-version": "2026-08-15-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myRG/providers/Microsoft.NetApp/policyGroups/policyGroup1/extendedSnapshotRetentionPolicies/extendedSnapshotRetentionPolicy1",
+        "name": "policyGroup1/extendedSnapshotRetentionPolicy1",
+        "type": "Microsoft.NetApp/policyGroups/extendedSnapshotRetentionPolicies",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "rules": {
+            "hourly": {
+              "snapshotsToKeep": 24
+            },
+            "daily": {
+              "snapshotsToKeep": 7
+            },
+            "weekly": {
+              "snapshotsToKeep": 4
+            },
+            "monthly": {
+              "snapshotsToKeep": 12
+            },
+            "yearly": {
+              "snapshotsToKeep": 5
+            }
+          }
+        }
+      }
+    }
+  },
+  "operationId": "ExtendedSnapshotRetentionPolicies_Get",
+  "title": "ExtendedSnapshotRetentionPolicies_Get"
+}
