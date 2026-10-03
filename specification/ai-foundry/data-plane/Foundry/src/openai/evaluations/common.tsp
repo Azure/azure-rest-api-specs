@@ -2,6 +2,17 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
+@doc("The level at which evaluation is performed.")
+union EvaluationLevel {
+  @doc("Evaluation is performed at the turn level.")
+  turn: "turn",
+
+  @doc("Evaluation is performed at the conversation level.")
+  conversation: "conversation",
+
+  string,
+}
+
 /** Base class for targets with discriminator support. */
 @discriminator("type")
 model FoundryEvaluationTarget {
@@ -57,6 +68,21 @@ model EvaluationAzureStandardVoiceModelConfiguration
   @minValue(0)
   @maxValue(1)
   temperature?: float32;
+}
+
+/** Represents a set of parameters used to control the sampling behavior of a language model during text generation. */
+model ModelSamplingParams {
+  /** The temperature parameter for sampling. Defaults to 1.0. */
+  temperature?: float32 = 1.0;
+
+  /** The top-p parameter for nucleus sampling. Defaults to 1.0. */
+  top_p?: float32 = 1.0;
+
+  /** The random seed for reproducibility. Defaults to 42. */
+  seed?: int32 = 42;
+
+  /** The maximum number of tokens allowed in the completion. */
+  max_completion_tokens?: int32;
 }
 
 /** Configures the model that plays the simulated user. This model is separate from the evaluated `target`. */

@@ -1,0 +1,56 @@
+{
+  "title": "Evals_createEvalRun_Traces",
+  "operationId": "Evals_createEvalRun",
+  "parameters": {
+    "api-version": "v1",
+    "eval_id": "eval_67e579652b548190aaa83ada4b125f47",
+    "body": {
+      "name": "agent traces eval run",
+      "evaluation_level": "conversation",
+      "data_source": {
+        "type": "azure_ai_trace_data_source",
+        "trace_source": {
+          "type": "conversation_id_source",
+          "conversation_ids": [
+            "conv_abc123",
+            "conv_def456"
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "object": "eval.run",
+        "id": "evalrun_67e57965b480819094274e3a32235e4c",
+        "eval_id": "eval_67e579652b548190aaa83ada4b125f47",
+        "status": "queued",
+        "name": "agent traces eval run",
+        "evaluation_level": "conversation",
+        "created_at": 1743092069,
+        "report_url": "https://ai.azure.com/evaluations/eval_67e579652b548190aaa83ada4b125f47?run_id=evalrun_67e57965b480819094274e3a32235e4c",
+        "result_counts": {
+          "total": 0,
+          "errored": 0,
+          "failed": 0,
+          "passed": 0
+        },
+        "per_model_usage": [],
+        "per_testing_criteria_results": [],
+        "data_source": {
+          "type": "azure_ai_trace_data_source",
+          "trace_source": {
+            "type": "conversation_id_source",
+            "conversation_ids": [
+              "conv_abc123",
+              "conv_def456"
+            ]
+          }
+        },
+        "error": null,
+        "metadata": {}
+      }
+    }
+  }
+}
