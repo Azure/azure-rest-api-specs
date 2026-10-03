@@ -3,53 +3,80 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Billing;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
 @@Legacy.flattenProperty(ExtendedStatusInfo.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
 @@Legacy.flattenProperty(PurchaseRequest.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
 @@Legacy.flattenProperty(
   BillingSubscriptionProperties.enrollmentAccountSubscriptionDetails
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Legacy.flattenProperty(BillingSubscriptionPatch.properties);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
 @@Legacy.flattenProperty(ReservationProperty.utilization);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
 @@Legacy.flattenProperty(ReservationPurchaseRequest.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
 @@Legacy.flattenProperty(
   ReservationPurchaseRequestProperties.reservedResourceProperties
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
 @@Legacy.flattenProperty(Patch.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
 @@Legacy.flattenProperty(PatchProperties.renewProperties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
 @@Legacy.flattenProperty(InitiateTransferRequest.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
 @@Legacy.flattenProperty(PartnerInitiateTransferRequest.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
+@@Legacy.flattenProperty(PurchaseOrder.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
+@@Legacy.flattenProperty(PurchaseOrderMapping.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
+@@Legacy.flattenProperty(InvoicingPreferences.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
+@@Legacy.flattenProperty(Alert.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
+@@Legacy.flattenProperty(LicenseReservation.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
 @@Legacy.flattenProperty(AcceptTransferRequest.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
 @@Legacy.flattenProperty(ValidateTransferResponse.properties);
 
 @@clientName(
   AssociatedTenants.createOrUpdate::parameters.resource,
   "parameters"
 );
+
+@@clientName(BillingAccounts.putAddress::parameters.resource, "parameters");
+
+@@clientName(Alerts.createOrUpdate::parameters.resource, "parameters");
+
+@@clientName(
+  BillingProfiles.updateInvoiceRecipientContacts::parameters.body,
+  "parameters"
+);
+
+@@clientName(Invoices.paynow::parameters.body, "parameters");
+
+@@clientName(LicenseReservations.cancel::parameters.body, "parameters");
+
+@@clientName(LicenseReservations.create::parameters.resource, "parameters");
 
 @@clientLocation(
   AvailableBalanceOperationGroup.getByBillingProfile,
@@ -150,7 +177,7 @@ using Microsoft.Billing;
   "ListByBillingProfile"
 );
 @@clientLocation(BillingProfiles.productsListByBillingProfile, Products);
-#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "FIXME: why is it conflicting for c#"
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentionally restores GA 1.2.2 shared GetProducts method name for the billing profile products list operation."
 @@clientName(
   BillingProfiles.productsListByBillingProfile,
   "ListByBillingProfile"
@@ -320,7 +347,7 @@ using Microsoft.Billing;
   SavingsPlanOrderModels.listByBillingAccount,
   "SavingsPlanOrders"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
 @@Legacy.flattenProperty(SavingsPlanOrderModel.properties);
 
 @@clientLocation(SavingsPlanModels.getByBillingAccount, "SavingsPlans");
@@ -334,7 +361,7 @@ using Microsoft.Billing;
   SavingsPlanModels.validateUpdateByBillingAccount,
   "SavingsPlans"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
 @@Legacy.flattenProperty(SavingsPlanModel.properties);
 
 @@clientLocation(BillingSubscriptionOperationGroup.get, BillingSubscriptions);
@@ -385,7 +412,7 @@ using Microsoft.Billing;
   BillingSubscriptionOperationGroup.validateMoveEligibility::parameters.body,
   "parameters"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
 @@Legacy.flattenProperty(BillingSubscription.properties);
 
 @@clientLocation(BillingSubscriptionAliases.get, "BillingSubscriptionsAliases");
@@ -401,7 +428,7 @@ using Microsoft.Billing;
   BillingSubscriptionAliases.listByBillingAccount,
   "BillingSubscriptionsAliases"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
 @@Legacy.flattenProperty(BillingSubscriptionAlias.properties);
 
 @@clientLocation(Customers.listByCustomer, "BillingPermissions");
@@ -417,8 +444,11 @@ using Microsoft.Billing;
   BillingSubscriptions
 );
 @@clientName(Customers.billingSubscriptionsListByCustomer, "ListByCustomer");
-@@clientLocation(Customers.createOrUpdateByCustomer, Policies);
-@@clientName(Customers.createOrUpdateByCustomer::parameters.body, "parameters");
+@@clientLocation(CustomerPolicies.createOrUpdateByCustomer, Policies);
+@@clientName(
+  CustomerPolicies.createOrUpdateByCustomer::parameters.body,
+  "parameters"
+);
 @@clientLocation(Customers.transactionsListByCustomer, "Transactions");
 @@clientName(Customers.transactionsListByCustomer, "ListByCustomer");
 @@clientLocation(CustomerOperationGroup.getByBillingAccount, Customers);
@@ -526,7 +556,7 @@ using Microsoft.Billing;
   "ListByInvoiceSection"
 );
 @@clientLocation(InvoiceSections.productsListByInvoiceSection, Products);
-#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "FIXME: why is it conflicting for c#"
+#suppress "@azure-tools/typespec-client-generator-core/duplicate-client-name-warning" "Intentionally restores GA 1.2.2 shared GetProducts method name for the invoice section products list operation."
 @@clientName(
   InvoiceSections.productsListByInvoiceSection,
   "ListByInvoiceSection"
@@ -541,14 +571,15 @@ using Microsoft.Billing;
 );
 
 @@clientLocation(PaymentMethodLinks.getByBillingProfile, PaymentMethods);
+@@clientLocation(PaymentMethodLinks.deleteAtBillingProfile, PaymentMethods);
 @@clientLocation(PaymentMethodLinks.listByBillingProfile, PaymentMethods);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
 @@Legacy.flattenProperty(PaymentMethodLink.properties);
 
 @@clientLocation(PaymentMethodOperationGroup.getByUser, PaymentMethods);
 @@clientLocation(PaymentMethodOperationGroup.deleteByUser, PaymentMethods);
 @@clientLocation(PaymentMethodOperationGroup.listByUser, PaymentMethods);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
 @@Legacy.flattenProperty(PaymentMethod.properties);
 
 @@clientLocation(CustomerPolicies.getByCustomer, Policies);
@@ -587,23 +618,23 @@ using Microsoft.Billing;
   Reservations.updateByBillingAccount::parameters.properties,
   "body"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
 @@Legacy.flattenProperty(Reservation.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
 @@Legacy.flattenProperty(ReservationOrder.properties);
 
 @@clientName(Transfers.initiate::parameters.resource, "parameters");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
 @@Legacy.flattenProperty(TransferDetails.properties);
 
 @@clientName(PartnerTransfers.initiate::parameters.resource, "parameters");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
 @@Legacy.flattenProperty(PartnerTransferDetails.properties);
 
 @@clientName(RecipientTransfers.accept::parameters.body, "parameters");
 @@clientName(RecipientTransfers.validate::parameters.body, "parameters");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Was flattened before the change to TypeSpec."
 @@Legacy.flattenProperty(RecipientTransferDetails.properties);
 
 @@clientLocation(AddressOperationGroup.validate, "Address");
