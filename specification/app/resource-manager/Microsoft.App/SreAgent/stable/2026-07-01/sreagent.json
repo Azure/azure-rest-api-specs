@@ -1172,8 +1172,7 @@
       "description": "Agent mode",
       "enum": [
         "Autonomous",
-        "Review",
-        "ReadOnly"
+        "Review"
       ],
       "x-ms-enum": {
         "name": "AgentMode",
@@ -1188,11 +1187,6 @@
             "name": "Review",
             "value": "Review",
             "description": "Write actions require user approval before execution"
-          },
-          {
-            "name": "ReadOnly",
-            "value": "ReadOnly",
-            "description": "No write actions are executed"
           }
         ]
       }
@@ -1227,10 +1221,6 @@
       "type": "object",
       "description": "Agent specific properties for PATCH requests.\n\nPATCH request bodies must not include required properties and should not include read-only properties.",
       "properties": {
-        "knowledgeGraphConfiguration": {
-          "$ref": "#/definitions/KnowledgeGraphConfiguration",
-          "description": "Knowledge graph configuration for agent"
-        },
         "actionConfiguration": {
           "$ref": "#/definitions/ActionConfiguration",
           "description": "Configuration for action"
@@ -1320,10 +1310,6 @@
           "$ref": "#/definitions/AgentPowerState",
           "description": "The power state of the Agent",
           "readOnly": true
-        },
-        "knowledgeGraphConfiguration": {
-          "$ref": "#/definitions/KnowledgeGraphConfiguration",
-          "description": "Knowledge graph configuration for agent"
         },
         "actionConfiguration": {
           "$ref": "#/definitions/ActionConfiguration",
@@ -1505,10 +1491,6 @@
         "provider": {
           "type": "string",
           "description": "AI provider name (e.g., MicrosoftFoundry, Anthropic)"
-        },
-        "name": {
-          "type": "string",
-          "description": "Model name (e.g., gpt-5, claude-opus-4-5, claude-sonnet-4-5)"
         }
       }
     },
@@ -1537,26 +1519,6 @@
         "oboUser": {
           "type": "string",
           "description": "The user for the connection"
-        }
-      }
-    },
-    "KnowledgeGraphConfiguration": {
-      "type": "object",
-      "description": "Knowledge graph configuration for agent",
-      "properties": {
-        "identity": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The identity used to access the knowledge graph"
-        },
-        "managedResources": {
-          "type": "array",
-          "description": "The list of resources managed by agent",
-          "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource."
-          }
         }
       }
     },
@@ -1876,7 +1838,7 @@
       "type": "object",
       "description": "Supported AI model properties",
       "properties": {
-        "provider": {
+        "providerName": {
           "type": "string",
           "description": "The provider name (e.g., MicrosoftFoundry, Anthropic)"
         },
@@ -1884,7 +1846,7 @@
           "type": "string",
           "description": "The display name of the provider (e.g., Microsoft Foundry, Anthropic)"
         },
-        "model": {
+        "modelName": {
           "type": "string",
           "description": "The model name (e.g., gpt-5.2, claude-sonnet-4-5)"
         },
@@ -1902,8 +1864,8 @@
         }
       },
       "required": [
-        "provider",
-        "model",
+        "providerName",
+        "modelName",
         "default"
       ]
     },
