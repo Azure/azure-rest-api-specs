@@ -136,7 +136,6 @@ union SearchSemanticSearch {
  * Specifies the billing plan for agentic retrieval on the Azure AI Search service. This configuration is only available for certain pricing tiers in certain regions.
  */
 @added(Versions.v2026_03_01_preview)
-@removed(Versions.v2026_11_01)
 union KnowledgeRetrieval {
   string,
 
@@ -349,7 +348,6 @@ union SkuName {
    * Serverless tier, offering low-touch, consumption-based, and pay-as-you-go experience, with auto-scaling capabilities.
    */
   @added(Versions.v2026_03_01_preview)
-  @removed(Versions.v2026_11_01)
   Serverless: "serverless",
 }
 
@@ -817,7 +815,6 @@ model SearchServiceProperties {
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "Pre-existing API contract: null denotes unset plan."
   @added(Versions.v2026_03_01_preview)
-  @removed(Versions.v2026_11_01)
   knowledgeRetrieval?: KnowledgeRetrieval | null;
 
   /**

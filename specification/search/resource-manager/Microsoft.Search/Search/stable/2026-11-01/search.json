@@ -541,6 +541,12 @@
           "SearchCreateOrUpdateServiceWithIdentity": {
             "$ref": "./examples/SearchCreateOrUpdateServiceWithIdentity.json"
           },
+          "SearchCreateOrUpdateServiceWithServerless": {
+            "$ref": "./examples/SearchCreateOrUpdateServiceWithServerless.json"
+          },
+          "SearchCreateOrUpdateWithKnowledgeRetrieval": {
+            "$ref": "./examples/SearchCreateOrUpdateWithKnowledgeRetrieval.json"
+          },
           "SearchCreateOrUpdateWithSemanticSearch": {
             "$ref": "./examples/SearchCreateOrUpdateWithSemanticSearch.json"
           }
@@ -638,6 +644,9 @@
           },
           "SearchUpdateServiceWithDataExfiltration": {
             "$ref": "./examples/SearchUpdateServiceWithDataExfiltration.json"
+          },
+          "SearchUpdateServiceWithKnowledgeRetrieval": {
+            "$ref": "./examples/SearchUpdateServiceWithKnowledgeRetrieval.json"
           },
           "SearchUpdateServiceWithSemanticSearch": {
             "$ref": "./examples/SearchUpdateServiceWithSemanticSearch.json"
@@ -2320,6 +2329,30 @@
         ]
       }
     },
+    "KnowledgeRetrieval": {
+      "type": "string",
+      "description": "Specifies the billing plan for agentic retrieval on the Azure AI Search service. This configuration is only available for certain pricing tiers in certain regions.",
+      "enum": [
+        "free",
+        "standard"
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeRetrieval",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "free",
+            "value": "free",
+            "description": "Enables knowledge retrieval on a search service and indicates that it is to be used within the limits of the free plan. The free plan would cap the volume of knowledge retrieval requests and is offered at no extra charge."
+          },
+          {
+            "name": "standard",
+            "value": "standard",
+            "description": "Enables knowledge retrieval on a search service as a billable feature after the free quota is exhausted, with higher throughput and volume of knowledge retrieval requests."
+          }
+        ]
+      }
+    },
     "ListQueryKeysResult": {
       "type": "object",
       "description": "Response containing the query API keys for a given Azure AI Search service.",
@@ -3105,6 +3138,11 @@
           "description": "Specifies the availability and billing plan for semantic search on the Azure AI Search service. This configuration is only available for certain pricing tiers in certain regions.",
           "x-nullable": true
         },
+        "knowledgeRetrieval": {
+          "$ref": "#/definitions/KnowledgeRetrieval",
+          "description": "Specifies the billing plan for agentic retrieval on the Azure AI Search service. This configuration is only available for certain pricing tiers in certain regions.",
+          "x-nullable": true
+        },
         "privateEndpointConnections": {
           "type": "array",
           "description": "The list of private endpoint connections to the Azure AI Search service.",
@@ -3492,7 +3530,8 @@
         "standard2",
         "standard3",
         "storage_optimized_l1",
-        "storage_optimized_l2"
+        "storage_optimized_l2",
+        "serverless"
       ],
       "x-ms-enum": {
         "name": "SkuName",
@@ -3532,6 +3571,11 @@
             "name": "StorageOptimizedL2",
             "value": "storage_optimized_l2",
             "description": "Billable tier for a dedicated service that supports 2TB per partition, up to 12 partitions."
+          },
+          {
+            "name": "Serverless",
+            "value": "serverless",
+            "description": "Serverless tier, offering low-touch, consumption-based, and pay-as-you-go experience, with auto-scaling capabilities."
           }
         ]
       }
