@@ -575,6 +575,41 @@ model RecommendationProperties {
   impactedValue?: string;
 
   /**
+   * The criticality score assigned to the recommendation.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  criticalityScore?: string;
+
+  /**
+   * The criticality assigned to the recommendation.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  criticality?: string;
+
+  /**
+   * The time when the recommendation's criticality score last changed.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  scoreChangedAt?: string;
+
+  /**
+   * The service group ID associated with the recommendation.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  serviceGroupId?: string;
+
+  /**
+   * The estimated savings associated with the recommendation.
+   */
+  @added(Versions.v2026_08_01_preview)
+  @visibility(Lifecycle.Read)
+  savings?: string;
+
+  /**
    * The state of the Recommendation
    */
   @added(Versions.v2026_02_01_preview)

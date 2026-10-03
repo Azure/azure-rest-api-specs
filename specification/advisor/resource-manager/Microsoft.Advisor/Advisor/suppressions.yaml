@@ -36,3 +36,12 @@
 - tool: TypeSpecRequirement
   path: ./stable/2025-01-01/*.json
   reason: Brownfield service not ready to migrate
+- tool: SwaggerBreakingChange
+  paths:
+    - ./preview/2025-05-01-preview/openapi.json
+    - ./preview/2026-02-01-preview/openapi.json
+    - ./preview/2026-03-01-preview/openapi.json
+  reason: >-
+    The metadata $filter parameter existed in the 2025-01-01 API but was
+    accidentally omitted during the TypeSpec conversion. Restoring it in the
+    TypeSpec-backed versions preserves the existing service contract.
