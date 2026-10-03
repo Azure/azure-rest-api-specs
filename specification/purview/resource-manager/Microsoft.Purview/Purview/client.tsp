@@ -103,7 +103,6 @@ using Microsoft.Purview;
 @@clientName(UserAssignedIdentity, "PurviewUserAssignedIdentity", "csharp");
 
 // --- clientName: property renames ---
-@@clientName(AccountProperties.createdAt, "CreatedOn", "csharp");
 @@clientName(AccountMergeInfo.deprovisioned, "IsDeprovisioned", "csharp");
 @@clientName(AccountStatus.errorDetails, "Error", "csharp");
 @@clientName(CheckNameAvailabilityRequest.type, "ResourceType", "csharp");

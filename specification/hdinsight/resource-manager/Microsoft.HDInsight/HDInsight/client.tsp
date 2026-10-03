@@ -57,7 +57,6 @@ using Azure.ClientGenerator.Core;
 @@clientName(Cluster, "HDInsightCluster", "csharp");
 @@clientName(Clusters, "HDInsightCluster", "csharp");
 @@clientName(ApplicationProperties, "HDInsightApplicationProperties", "csharp");
-@@clientName(ApplicationProperties.createdDate, "CreatedOn", "csharp");
 @@clientName(ApplicationGetEndpoint, "HDInsightApplicationEndpoint", "csharp");
 @@clientName(ApplicationGetEndpoint.location, "EndpointLocation", "csharp");
 @@clientName(
@@ -152,7 +151,6 @@ using Azure.ClientGenerator.Core;
 @@clientName(StorageProfile.storageaccounts, "Accounts ", "csharp");
 @@clientName(ClusterGetProperties, "HDInsightClusterProperties", "csharp");
 @@clientName(ClusterGetProperties.osType, "OSType", "csharp");
-@@clientName(ClusterGetProperties.createdDate, "CreatedOn", "csharp");
 @@clientName(ClusterDefinition, "HDInsightClusterDefinition", "csharp");
 @@clientName(
   ClusterDiskEncryptionParameters,
@@ -401,8 +399,6 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 @@clientName(RegionalQuotaCapability.regionName, "Region", "csharp");
-@@clientName(RuntimeScriptActionDetail.startTime, "StartOn", "csharp");
-@@clientName(RuntimeScriptActionDetail.endTime, "EndOn", "csharp");
 @@clientName(JsonWebKeyEncryptionAlgorithm.`RSA-OAEP`, "RsaOaep", "csharp");
 @@clientName(
   JsonWebKeyEncryptionAlgorithm.`RSA-OAEP-256`,

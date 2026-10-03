@@ -321,10 +321,6 @@ using Microsoft.ContainerInstance;
 @@clientName(ContainerGroupProfileProperties.osType, "OSType", "csharp");
 @@clientName(ContainerGroupProfileProperties.ipAddress, "IPAddress", "csharp");
 
-// Category 5: Uri properties for EncryptionProperties and ImageRegistryCredential
-@@clientName(EncryptionProperties.vaultBaseUrl, "VaultBaseUri", "csharp");
-@@clientName(ImageRegistryCredential.identityUrl, "IdentityUri", "csharp");
-
 // Category 5: ContainerGroupProfileStub.resource → ResourceId
 @@clientName(ApiEntityReference.id, "ResourceId", "csharp");
 

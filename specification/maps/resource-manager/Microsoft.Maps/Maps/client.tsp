@@ -140,8 +140,3 @@ using Azure.ClientGenerator.Core;
   url,
   "csharp"
 );
-@@clientName(
-  Azure.ResourceManager.CommonTypes.CustomerManagedKeyEncryption.keyEncryptionKeyUrl,
-  "KeyEncryptionKeyUri",
-  "csharp"
-);

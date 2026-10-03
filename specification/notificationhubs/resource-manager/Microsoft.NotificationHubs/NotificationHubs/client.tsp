@@ -54,19 +54,9 @@ using Microsoft.NotificationHubs;
   "NotificationHubAuthorizationRule",
   "csharp"
 );
-@@clientName(
-  SharedAccessAuthorizationRuleProperties.createdTime,
-  "CreatedOn",
-  "csharp"
-);
 @@alternateType(
   SharedAccessAuthorizationRuleProperties.createdTime,
   utcDateTime,
-  "csharp"
-);
-@@clientName(
-  SharedAccessAuthorizationRuleProperties.modifiedTime,
-  "ModifiedOn",
   "csharp"
 );
 @@alternateType(

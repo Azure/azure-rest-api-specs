@@ -707,26 +707,6 @@ using Microsoft.ManagedNetworkFabric;
   "csharp"
 );
 @@clientName(
-  CommonPostActionResponseForDeviceROCommands.outputUrl,
-  "OutputUri",
-  "csharp"
-);
-@@clientName(
-  CommonPostActionResponseForDeviceRWCommands.outputUrl,
-  "OutputUri",
-  "csharp"
-);
-@@clientName(
-  ArmConfigurationDiffResponseProperties.configurationDiffUrl,
-  "ConfigurationDiffUri",
-  "csharp"
-);
-@@clientName(
-  ViewDeviceConfigurationResponseProperties.deviceConfigurationUrl,
-  "DeviceConfigurationUri",
-  "csharp"
-);
-@@clientName(
   StatementActionProperties.ipCommunityProperties,
   "IPCommunityProperties",
   "csharp"

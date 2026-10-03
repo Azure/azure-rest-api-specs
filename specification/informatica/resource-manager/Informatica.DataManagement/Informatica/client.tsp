@@ -98,11 +98,6 @@ namespace Informatica.DataManagement {
   @@clientName(ApplicationType.CDI, "Cdi", "csharp");
   @@clientName(ApplicationType.CDIE, "Cdie", "csharp");
   @@clientName(InfaRuntimeResourceFetchMetaData.type, "RuntimeType", "csharp");
-  @@clientName(
-    InformaticaProperties.singleSignOnUrl,
-    "SingleSignOnUri",
-    "csharp"
-  );
   @@clientName(PlatformType.AZURE, "Azure", "csharp");
   @@clientName(RuntimeType.SERVERLESS, "Serverless", "csharp");
   @@clientName(ServerlessMetadataResponse.type, "RuntimeType", "csharp");

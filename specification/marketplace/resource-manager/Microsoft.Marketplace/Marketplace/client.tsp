@@ -58,8 +58,6 @@ using Microsoft.Marketplace;
   "IsEntireInStopSell",
   "csharp"
 );
-@@clientName(OfferProperties.createdAt, "CreatedOn", "csharp");
-@@clientName(OfferProperties.modifiedAt, "ModifiedOn", "csharp");
 @@clientName(
   OfferProperties.updateSuppressedDueIdempotence,
   "IsUpdateSuppressedDueToIdempotence",

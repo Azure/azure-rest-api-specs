@@ -510,7 +510,6 @@ using Microsoft.Billing;
   "ReservationExpireOn",
   "csharp"
 );
-@@clientName(ReservationProperty.purchaseDate, "PurchaseOn", "csharp");
 @@clientName(
   ReservationProperty.purchaseDateTime,
   "ReservationPurchaseOn",

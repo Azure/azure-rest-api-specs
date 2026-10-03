@@ -83,9 +83,7 @@ using Microsoft.EventHub;
 @@clientName(Encryption.keySource, "KeySource", "csharp");
 @@clientName(SchemaType, "EventHubsSchemaType", "csharp");
 @@clientName(SchemaCompatibility, "EventHubsSchemaCompatibility", "csharp");
-@@clientName(ClusterProperties.createdAt, "CreatedOn", "csharp");
 @@alternateType(ClusterProperties.createdAt, utcDateTime, "csharp");
-@@clientName(ClusterProperties.updatedAt, "UpdatedOn", "csharp");
 @@alternateType(ClusterProperties.updatedAt, utcDateTime, "csharp");
 @@alternateType(
   EHNamespaceProperties.clusterArmId,

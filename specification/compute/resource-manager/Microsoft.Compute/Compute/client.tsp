@@ -2557,11 +2557,6 @@ union ComputeUsageUnit {
   utcDateTime,
   "csharp"
 );
-@@clientName(
-  GallerySoftDeletedResourceProperties.softDeletedTime,
-  "softDeletedOn",
-  "csharp"
-);
 
 // C# enum singular←plural rename.
 @@clientName(SharedToValues, "SharedToValue", "csharp");

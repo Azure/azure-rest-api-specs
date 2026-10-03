@@ -474,11 +474,6 @@ namespace ApplicationInsightsManagementClient;
   "csharp"
 );
 @@clientName(
-  ComponentAPIs.ApplicationInsightsComponentProactiveDetectionConfiguration.lastUpdatedTime,
-  "LastUpdatedOn",
-  "csharp"
-);
-@@clientName(
   ComponentAPIs.ApplicationInsightsComponentFeatureCapabilities.SupportExportData,
   "IsExportDataSupported",
   "csharp"
@@ -515,18 +510,8 @@ namespace ApplicationInsightsManagementClient;
 );
 @@clientName(ComponentAPIs.Annotation.EventTime, "EventOccurredOn", "csharp");
 @@clientName(
-  ComponentAPIs.ApplicationInsightsComponentAPIKey.createdDate,
-  "CreatedOn",
-  "csharp"
-);
-@@clientName(
   ComponentAPIs.ApplicationInsightsComponentFeature.ResouceId,
   "ResourceId",
-  "csharp"
-);
-@@clientName(
-  ComponentAPIs.ApplicationInsightsComponentQuotaStatus.ExpirationTime,
-  "ExpireOn",
   "csharp"
 );
 @@clientName(
@@ -596,8 +581,6 @@ namespace ApplicationInsightsManagementClient;
   "WorkbookType",
   "csharp"
 );
-@@clientName(Components.ApplicationInsightsComponent.etag, "ETag", "csharp");
-@@clientName(WorkbooksApi.Workbook.etag, "ETag", "csharp");
 @@clientName(
   ComponentAPIs.ApplicationInsightsComponentAPIKey,
   "ApplicationInsightsComponentApiKey",
@@ -742,7 +725,6 @@ namespace ApplicationInsightsManagementClient;
   "csharp"
 );
 // [TYPE002] etag should surface as the Azure.ETag struct, matching the Component/Workbook etag.
-@@clientName(DeletedWorkbookApi.DeletedWorkbookResource.etag, "ETag", "csharp");
 @@alternateType(
   DeletedWorkbookApi.DeletedWorkbookResource.etag,
   Azure.Core.eTag,
