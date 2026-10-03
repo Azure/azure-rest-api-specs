@@ -43,6 +43,16 @@ interface Widgets {
   @doc("Fetch a Widget by name.")
   getWidget is ResourceRead<WidgetSuite>;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "The template doesn't work for this operation, we dont use api-version here"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "This operation doesn't use an api-version"
+  @doc("Fetch a Widget by name without using a standard Azure operation.")
+  @route("/widgets/{widgetName}/manual")
+  @get
+  getWidgetManually(
+    /** The name of the widget to fetch manually. */
+    @path widgetName: string,
+  ): WidgetSuite | Azure.Core.Foundations.ErrorResponse;
+
   @doc("Gets status of a Widget operation.")
   getWidgetOperationStatus is GetResourceOperationStatus<WidgetSuite>;
 
@@ -53,12 +63,4 @@ interface Widgets {
   @doc("Delete a Widget asynchronously.")
   @pollingOperation(Widgets.getWidgetOperationStatus)
   deleteWidget is LongRunningResourceDelete<WidgetSuite>;
-
-  @doc("List Widget resources")
-  listWidgets is ResourceList<
-    WidgetSuite,
-    {
-      parameters: StandardListQueryParameters;
-    }
-  >;
 }
