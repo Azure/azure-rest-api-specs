@@ -51,6 +51,7 @@ function createMockGithubImpl() {
       },
       pulls: {
         get: vi.fn(),
+        listFiles: vi.fn().mockResolvedValue({ data: [] }),
       },
       repos: {
         createCommitStatus: vi.fn(),

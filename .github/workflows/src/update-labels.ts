@@ -59,6 +59,7 @@ export async function updateLabelsImpl({
   });
 
   const artifactNames: string[] = artifacts.map((a) => a.name);
+  const hasHeadShaArtifact = artifactNames.some((name) => name.startsWith("head-sha="));
 
   core.info(`artifactNames: ${JSON.stringify(artifactNames)}`);
 
@@ -102,6 +103,24 @@ export async function updateLabelsImpl({
     throw new Error(
       `Invalid value for 'issue_number':${issue_number}. Expected an 'issue-number' artifact created by the workflow run.`,
     );
+  }
+
+  if (
+    (labelsToAdd.length > 0 || labelsToRemove.length > 0) &&
+    hasHeadShaArtifact &&
+    isFullGitSha(head_sha) &&
+    Number.isInteger(issue_number) &&
+    issue_number > 0
+  ) {
+    const { data: pullRequest } = await github.rest.pulls.get({
+      owner,
+      repo,
+      pull_number: issue_number,
+    });
+    if (pullRequest.state !== "open" || pullRequest.head.sha !== head_sha) {
+      core.info("Skipping label update because the pull request is closed or its head changed");
+      return;
+    }
   }
 
   const pullRequestUrl = `https://github.com/${owner}/${repo}/pull/${issue_number}`;

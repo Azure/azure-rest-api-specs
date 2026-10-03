@@ -1,3 +1,5 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { CommitStatusState } from "../../../shared/src/github.ts";
 import { ArmAutoSignoffLabel } from "../../src/arm-auto-signoff/arm-auto-signoff-labels.ts";
@@ -10,11 +12,19 @@ const owner = "TestOwner";
 const repo = "TestRepo";
 const issueNumber = 123;
 const headSha = "abc123";
+const GITHUB_ROOT = join(import.meta.dirname, "..", "..", "..");
 
-const successfulStatuses = [
+const semanticPassed = {
+  context: "ARM Semantic Review",
+  state: CommitStatusState.SUCCESS,
+  description: "Passed: full review completed with no Blocking findings",
+  updated_at: "2026-01-01",
+};
+const deterministicStatuses = [
   { context: "Swagger LintDiff", state: CommitStatusState.SUCCESS, updated_at: "2026-01-01" },
   { context: "Swagger Avocado", state: CommitStatusState.SUCCESS, updated_at: "2026-01-01" },
 ];
+const successfulStatuses = [semanticPassed, ...deterministicStatuses];
 
 function createMockGithub({
   labelNames = [],
@@ -23,7 +33,7 @@ function createMockGithub({
   pullRequestState = "open",
 }: {
   labelNames?: string[];
-  statuses?: { context: string; state: string; updated_at: string }[];
+  statuses?: { context: string; state: string; description?: string; updated_at: string }[];
   currentHeadSha?: string;
   pullRequestState?: "open" | "closed";
 } = {}) {
@@ -38,7 +48,6 @@ function createMockGithub({
     data: labelNames.map((name) => ({ name })),
   });
   github.rest.repos.listCommitStatusesForRef.mockResolvedValue({ data: statuses });
-
   return github;
 }
 
@@ -54,7 +63,7 @@ function run(github: ReturnType<typeof createMockGithub>) {
 }
 
 describe("getLabelActionImpl", () => {
-  it("adds the pilot label when the universal requirements pass", async () => {
+  it("adds the pilot label when all universal requirements pass", async () => {
     const github = createMockGithub({ labelNames: ["ARMReview"] });
 
     await expect(run(github)).resolves.toEqual({
@@ -62,6 +71,7 @@ describe("getLabelActionImpl", () => {
       issueNumber,
       labelActions: {
         [ArmAutoSignoffLabel.ArmAutoSignedOffTest]: LabelAction.Add,
+        [ArmAutoSignoffLabel.ArmManualSignoffRequired]: LabelAction.None,
       },
     });
   });
@@ -75,7 +85,7 @@ describe("getLabelActionImpl", () => {
     expect(result.labelActions[ArmAutoSignoffLabel.ArmAutoSignedOffTest]).toBe(LabelAction.None);
   });
 
-  it("removes the pilot label when manual signoff is required", async () => {
+  it("treats a manual signoff label as a hard stop without removing it", async () => {
     const github = createMockGithub({
       labelNames: [
         "ARMReview",
@@ -85,13 +95,136 @@ describe("getLabelActionImpl", () => {
     });
 
     const result = await run(github);
-    expect(result.labelActions[ArmAutoSignoffLabel.ArmAutoSignedOffTest]).toBe(LabelAction.Remove);
+    expect(result.labelActions).toEqual({
+      [ArmAutoSignoffLabel.ArmAutoSignedOffTest]: LabelAction.Remove,
+      [ArmAutoSignoffLabel.ArmManualSignoffRequired]: LabelAction.None,
+    });
   });
 
-  it("removes the pilot label while a mandatory status is pending", async () => {
+  describe("auto-signoff workflow correlation", () => {
+    it("always publishes live-head correlation artifacts", async () => {
+      const workflow = await readFile(
+        join(GITHUB_ROOT, "workflows", "arm-universal-auto-signoff.yaml"),
+        "utf8",
+      );
+      const headArtifact = workflow.indexOf("name: Upload artifact with head SHA");
+      const issueArtifact = workflow.indexOf("name: Upload artifact with issue number");
+
+      expect(headArtifact).toBeGreaterThan(-1);
+      expect(issueArtifact).toBeGreaterThan(headArtifact);
+      expect(workflow.slice(headArtifact - 180, headArtifact)).not.toContain(
+        "github.event_name ==",
+      );
+      expect(workflow.slice(issueArtifact - 180, issueArtifact)).not.toContain(
+        "github.event_name ==",
+      );
+    });
+  });
+
+  it("does not sign off while ARMChangesRequested is present", async () => {
+    const github = createMockGithub({
+      labelNames: ["ARMReview", "ARMChangesRequested", ArmAutoSignoffLabel.ArmAutoSignedOffTest],
+    });
+
+    const result = await run(github);
+    expect(result.labelActions).toEqual({
+      [ArmAutoSignoffLabel.ArmAutoSignedOffTest]: LabelAction.Remove,
+      [ArmAutoSignoffLabel.ArmManualSignoffRequired]: LabelAction.None,
+    });
+  });
+
+  it.each([
+    {
+      name: "missing",
+      status: undefined,
+    },
+    {
+      name: "pending",
+      status: {
+        context: "ARM Semantic Review",
+        state: CommitStatusState.PENDING,
+        description: "ARM API semantic review is pending",
+        updated_at: "2026-01-01",
+      },
+    },
+    {
+      name: "changes requested",
+      status: {
+        context: "ARM Semantic Review",
+        state: CommitStatusState.FAILURE,
+        description: "Changes requested: 1 Blocking finding(s)",
+        updated_at: "2026-01-01",
+      },
+    },
+    {
+      name: "review incomplete",
+      status: {
+        context: "ARM Semantic Review",
+        state: CommitStatusState.ERROR,
+        description: "Review incomplete: workflow concluded with failure",
+        updated_at: "2026-01-01",
+      },
+    },
+  ])(
+    "does not sign off or require manual signoff when semantic review is $name",
+    async ({ status }) => {
+      const github = createMockGithub({
+        labelNames: ["ARMReview"],
+        statuses: status ? [status, ...deterministicStatuses] : deterministicStatuses,
+      });
+
+      const result = await run(github);
+      expect(result.labelActions).toEqual({
+        [ArmAutoSignoffLabel.ArmAutoSignedOffTest]: LabelAction.None,
+        [ArmAutoSignoffLabel.ArmManualSignoffRequired]: LabelAction.None,
+      });
+    },
+  );
+
+  it("adds manual signoff only when automated coverage was scoped", async () => {
+    const github = createMockGithub({
+      labelNames: ["ARMReview"],
+      statuses: [
+        {
+          context: "ARM Semantic Review",
+          state: CommitStatusState.ERROR,
+          description: "Manual review required: automated review was scoped",
+          updated_at: "2026-01-01",
+        },
+        ...deterministicStatuses,
+      ],
+    });
+
+    const result = await run(github);
+    expect(result.labelActions).toEqual({
+      [ArmAutoSignoffLabel.ArmAutoSignedOffTest]: LabelAction.None,
+      [ArmAutoSignoffLabel.ArmManualSignoffRequired]: LabelAction.Add,
+    });
+  });
+
+  it("adds manual signoff for scoped coverage even when changes were requested", async () => {
+    const github = createMockGithub({
+      labelNames: ["ARMReview", "ARMChangesRequested"],
+      statuses: [
+        {
+          context: "ARM Semantic Review",
+          state: CommitStatusState.ERROR,
+          description: "Manual review required: automated review was scoped",
+          updated_at: "2026-01-01",
+        },
+        ...deterministicStatuses,
+      ],
+    });
+
+    const result = await run(github);
+    expect(result.labelActions[ArmAutoSignoffLabel.ArmManualSignoffRequired]).toBe(LabelAction.Add);
+  });
+
+  it("removes the pilot label while a deterministic status is pending", async () => {
     const github = createMockGithub({
       labelNames: ["ARMReview", ArmAutoSignoffLabel.ArmAutoSignedOffTest],
       statuses: [
+        semanticPassed,
         { context: "Swagger LintDiff", state: CommitStatusState.SUCCESS, updated_at: "2026-01-01" },
         { context: "Swagger Avocado", state: CommitStatusState.PENDING, updated_at: "2026-01-01" },
       ],
@@ -101,7 +234,7 @@ describe("getLabelActionImpl", () => {
     expect(result.labelActions[ArmAutoSignoffLabel.ArmAutoSignedOffTest]).toBe(LabelAction.Remove);
   });
 
-  it("removes the pilot label when a suppression lacks approval", async () => {
+  it("removes the pilot label when suppression approval is missing", async () => {
     const github = createMockGithub({
       labelNames: [
         "ARMReview",

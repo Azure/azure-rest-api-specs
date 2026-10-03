@@ -18,7 +18,12 @@ on: # zizmor: ignore[dangerous-triggers] Fork PR updates require this; only base
       - unlabeled
   workflow_run:
     # Re-evaluate as each mandatory status producer completes.
-    workflows: ["Swagger Avocado - Set Status", "Swagger LintDiff - Set Status"]
+    workflows:
+      [
+        "ARM API Review: Automated Workflow",
+        "Swagger Avocado - Set Status",
+        "Swagger LintDiff - Set Status",
+      ]
     types: [completed]
 
 permissions:
@@ -31,8 +36,8 @@ permissions:
   issues: read
   # issues.listLabelsOnIssue
   pull-requests: read
-  # repos.listCommitStatusesForRef
-  statuses: read
+  # repos.listCommitStatusesForRef, repos.createCommitStatus
+  statuses: write
 
 jobs:
   arm-universal-auto-signoff:
@@ -71,6 +76,17 @@ jobs:
           sparse-checkout: |
             .github
 
+      - if: |
+          github.event_name == 'workflow_run' &&
+          github.event.workflow_run.name == 'ARM API Review: Automated Workflow'
+        name: Finalize ARM Semantic Review
+        uses: actions/github-script@v9.0.0
+        with:
+          script: |
+            const { finalizeArmSemanticReview } =
+              await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-semantic-review-workflow.ts');
+            await finalizeArmSemanticReview({ github, context, core });
+
       - id: get-label-action
         name: ARM Universal Auto SignOff
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
@@ -88,10 +104,16 @@ jobs:
           name: "ARMAutoSignedOff-Test"
           value: "${{ fromJson(steps.get-label-action.outputs.result).labelActions['ARMAutoSignedOff-Test'] == 'add' }}"
 
+      - if: fromJson(steps.get-label-action.outputs.result).labelActions['ARMManualSignoffRequired'] == 'add'
+        name: Upload artifact for ARMManualSignoffRequired label
+        uses: ./.github/actions/add-label-artifact
+        with:
+          name: "ARMManualSignoffRequired"
+          value: "true"
+
       # The label updater uses these trusted artifacts to associate this workflow run with its PR.
       - if: |
           always() &&
-          github.event_name == 'workflow_run' &&
           fromJson(steps.get-label-action.outputs.result).headSha
         name: Upload artifact with head SHA
         uses: $/.github/actions/add-empty-artifact
@@ -101,7 +123,6 @@ jobs:
 
       - if: |
           always() &&
-          github.event_name == 'workflow_run' &&
           fromJson(steps.get-label-action.outputs.result).issueNumber > 0
         name: Upload artifact with issue number
         uses: $/.github/actions/add-empty-artifact

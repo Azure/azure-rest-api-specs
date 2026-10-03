@@ -5,6 +5,14 @@ import { fullGitSha } from "../../shared/test/examples.ts";
 import updateLabelsSrc, { updateLabelsImpl } from "../src/update-labels.ts";
 import { createMockCore, createMockGithub, createMockRequestError } from "./mocks.ts";
 
+function createLabelMockGithub(currentHeadSha = fullGitSha) {
+  const github = createMockGithub();
+  github.rest.pulls.get.mockResolvedValue({
+    data: { state: "open", head: { sha: currentHeadSha } },
+  });
+  return github;
+}
+
 function updateLabels(asyncFunctionArgs: unknown) {
   return updateLabelsSrc(asyncFunctionArgs as GitHubScriptArgs);
 }
@@ -13,7 +21,7 @@ describe("updateLabels", () => {
   it("loads inputs from context", async () => {
     const core = createMockCore();
 
-    const github = createMockGithub();
+    const github = createLabelMockGithub();
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
       data: {
         artifacts: [{ name: "label-foo=true" }],
@@ -62,7 +70,7 @@ describe("updateLabels", () => {
 
 describe("updateLabelsImpl", () => {
   it("throws if no run_id", async () => {
-    const github = createMockGithub();
+    const github = createLabelMockGithub();
 
     await expect(
       updateLabelsImpl({
@@ -83,7 +91,7 @@ describe("updateLabelsImpl", () => {
   });
 
   it("handles missing issue_number", async () => {
-    const github = createMockGithub();
+    const github = createLabelMockGithub();
 
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
       data: {
@@ -128,7 +136,7 @@ describe("updateLabelsImpl", () => {
   });
 
   it("adds and removes labels for artifacts", async () => {
-    const github = createMockGithub();
+    const github = createLabelMockGithub();
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
       data: {
         artifacts: [
@@ -183,7 +191,7 @@ describe("updateLabelsImpl", () => {
   });
 
   it("throws for invalid label value", async () => {
-    const github = createMockGithub();
+    const github = createLabelMockGithub();
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
       data: {
         artifacts: [
@@ -221,7 +229,7 @@ describe("updateLabelsImpl", () => {
   });
 
   it("throws for invalid label name", async () => {
-    const github = createMockGithub();
+    const github = createLabelMockGithub();
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
       data: {
         artifacts: [
@@ -257,7 +265,7 @@ describe("updateLabelsImpl", () => {
   });
 
   it.each([404, 500, 501])("handles error removing label (%s)", async (status) => {
-    const github = createMockGithub();
+    const github = createLabelMockGithub();
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
       data: {
         artifacts: [{ name: "label-foo=false" }],
@@ -294,5 +302,27 @@ describe("updateLabelsImpl", () => {
       issue_number: 123,
       name: "foo",
     });
+  });
+
+  it("does not apply labels for a stale pull request head", async () => {
+    const github = createLabelMockGithub("fedcba9876543210fedcba9876543210fedcba98");
+    github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+      data: {
+        artifacts: [{ name: "label-foo=true" }, { name: `head-sha=${fullGitSha}` }],
+      },
+    });
+
+    await updateLabelsImpl({
+      owner: "owner",
+      repo: "repo",
+      head_sha: fullGitSha,
+      issue_number: 123,
+      run_id: 456,
+      github,
+      core: createMockCore(),
+    });
+
+    expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
+    expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
   });
 });

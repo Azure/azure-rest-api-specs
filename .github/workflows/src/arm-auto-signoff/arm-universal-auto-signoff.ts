@@ -5,16 +5,23 @@ import { extractInputs } from "../context.ts";
 import type { Core, GitHubScriptArgs } from "../github.ts";
 import { LabelAction } from "../label.ts";
 import { ArmAutoSignoffLabel } from "./arm-auto-signoff-labels.ts";
+import {
+  getLatestSemanticReviewStatus,
+  getSemanticReviewOutcome,
+  SemanticReviewOutcome,
+} from "./arm-semantic-review.ts";
 
 const requiredStatusNames = ["Swagger LintDiff", "Swagger Avocado"];
 
 export type ManagedLabelActions = {
   "ARMAutoSignedOff-Test": LabelAction;
+  ARMManualSignoffRequired: LabelAction;
 };
 
 function createNoneLabelActions(): ManagedLabelActions {
   return {
     [ArmAutoSignoffLabel.ArmAutoSignedOffTest]: LabelAction.None,
+    [ArmAutoSignoffLabel.ArmManualSignoffRequired]: LabelAction.None,
   };
 }
 
@@ -88,7 +95,7 @@ export async function getLabelActionImpl({
   ).map((label) => label.name);
   const hasAutoSignoff = labelNames.includes(ArmAutoSignoffLabel.ArmAutoSignedOffTest);
 
-  const desiredAction = await getDesiredLabelAction({
+  const labelActions = await getDesiredLabelActions({
     owner,
     repo,
     head_sha,
@@ -100,13 +107,11 @@ export async function getLabelActionImpl({
 
   return {
     ...noneResult,
-    labelActions: {
-      [ArmAutoSignoffLabel.ArmAutoSignedOffTest]: desiredAction,
-    },
+    labelActions,
   };
 }
 
-async function getDesiredLabelAction({
+async function getDesiredLabelActions({
   owner,
   repo,
   head_sha,
@@ -125,17 +130,17 @@ async function getDesiredLabelAction({
       paginate: import("@octokit/plugin-paginate-rest").PaginateInterface;
     };
   core: Core;
-}): Promise<LabelAction> {
-  const labelsAllowSignoff =
-    labelNames.includes("ARMReview") &&
-    !labelNames.includes("NotReadyForARMReview") &&
-    !labelNames.includes(ArmAutoSignoffLabel.ArmManualSignoffRequired) &&
-    (!labelNames.includes("SuppressionReviewRequired") ||
-      labelNames.includes("Approved-Suppression"));
+}): Promise<ManagedLabelActions> {
+  const labelActions = createNoneLabelActions();
+  const isReadyForArmReview =
+    labelNames.includes("ARMReview") && !labelNames.includes("NotReadyForARMReview");
 
-  if (!labelsAllowSignoff) {
-    core.info("Labels do not meet requirements for universal auto-signoff");
-    return hasAutoSignoff ? LabelAction.Remove : LabelAction.None;
+  if (!isReadyForArmReview) {
+    core.info("Pull request is not ready for ARM review");
+    labelActions[ArmAutoSignoffLabel.ArmAutoSignedOffTest] = hasAutoSignoff
+      ? LabelAction.Remove
+      : LabelAction.None;
+    return labelActions;
   }
 
   const statuses: import("@octokit/plugin-rest-endpoint-methods").RestEndpointMethodTypes["repos"]["listCommitStatusesForRef"]["response"]["data"] =
@@ -145,6 +150,37 @@ async function getDesiredLabelAction({
       ref: head_sha,
       per_page: PER_PAGE_MAX,
     });
+
+  const semanticReviewOutcome = getSemanticReviewOutcome(getLatestSemanticReviewStatus(statuses));
+  core.info(`ARM Semantic Review: ${semanticReviewOutcome ?? "missing"}`);
+
+  if (semanticReviewOutcome !== SemanticReviewOutcome.Passed) {
+    if (semanticReviewOutcome === SemanticReviewOutcome.ManualReviewRequired) {
+      core.info("ARM semantic review requires manual signoff");
+      if (!labelNames.includes(ArmAutoSignoffLabel.ArmManualSignoffRequired)) {
+        labelActions[ArmAutoSignoffLabel.ArmManualSignoffRequired] = LabelAction.Add;
+      }
+    } else {
+      core.info("ARM semantic review has not passed");
+    }
+    labelActions[ArmAutoSignoffLabel.ArmAutoSignedOffTest] = hasAutoSignoff
+      ? LabelAction.Remove
+      : LabelAction.None;
+    return labelActions;
+  }
+
+  const labelsAllowSignoff =
+    !labelNames.includes("ARMChangesRequested") &&
+    !labelNames.includes(ArmAutoSignoffLabel.ArmManualSignoffRequired) &&
+    (!labelNames.includes("SuppressionReviewRequired") ||
+      labelNames.includes("Approved-Suppression"));
+  if (!labelsAllowSignoff) {
+    core.info("Labels do not meet requirements for universal auto-signoff");
+    labelActions[ArmAutoSignoffLabel.ArmAutoSignedOffTest] = hasAutoSignoff
+      ? LabelAction.Remove
+      : LabelAction.None;
+    return labelActions;
+  }
 
   for (const statusName of requiredStatusNames) {
     // A status context may appear more than once; only the most recently updated result applies.
@@ -156,10 +192,16 @@ async function getDesiredLabelAction({
     core.info(`${statusName}: ${latestStatus?.state ?? "missing"}`);
     if (latestStatus?.state !== CommitStatusState.SUCCESS) {
       core.info(`Required status '${statusName}' did not succeed`);
-      return hasAutoSignoff ? LabelAction.Remove : LabelAction.None;
+      labelActions[ArmAutoSignoffLabel.ArmAutoSignedOffTest] = hasAutoSignoff
+        ? LabelAction.Remove
+        : LabelAction.None;
+      return labelActions;
     }
   }
 
   core.info(`Universal auto-signoff pilot requirements met: ${inspect(requiredStatusNames)}`);
-  return hasAutoSignoff ? LabelAction.None : LabelAction.Add;
+  labelActions[ArmAutoSignoffLabel.ArmAutoSignedOffTest] = hasAutoSignoff
+    ? LabelAction.None
+    : LabelAction.Add;
+  return labelActions;
 }

@@ -34,6 +34,7 @@ on:
         type: string
   permissions:
     pull-requests: read
+    statuses: write
   steps:
     - name: Resolve target pull request
       id: resolve_target_pr
@@ -60,7 +61,54 @@ on:
             ...context.repo,
             pull_number: pullNumber,
           });
+          if (!/^[0-9a-f]{40}$/i.test(pull.head.sha)) {
+            throw new Error(`Invalid pull request head SHA: ${JSON.stringify(pull.head.sha)}`);
+          }
           core.setOutput("target_pr_number", String(pull.number));
+          core.setOutput("target_head_sha", pull.head.sha);
+    - name: Prepare ARM semantic review correlation artifact
+      if: steps.check_membership.outputs.is_team_member == 'true'
+      shell: bash
+      run: |
+        mkdir -p "$RUNNER_TEMP/arm-semantic-review"
+        : > "$RUNNER_TEMP/arm-semantic-review/empty.txt"
+    - name: Upload ARM semantic review head SHA
+      if: steps.check_membership.outputs.is_team_member == 'true'
+      uses: actions/upload-artifact@v7
+      with:
+        name: "head-sha=${{ steps.resolve_target_pr.outputs.target_head_sha }}"
+        path: "${{ runner.temp }}/arm-semantic-review/empty.txt"
+        if-no-files-found: error
+        overwrite: true
+    - name: Upload ARM semantic review issue number
+      if: steps.check_membership.outputs.is_team_member == 'true'
+      uses: actions/upload-artifact@v7
+      with:
+        name: "issue-number=${{ steps.resolve_target_pr.outputs.target_pr_number }}"
+        path: "${{ runner.temp }}/arm-semantic-review/empty.txt"
+        if-no-files-found: error
+        overwrite: true
+    - name: Set ARM semantic review pending
+      if: steps.check_membership.outputs.is_team_member == 'true'
+      uses: actions/github-script@v9
+      env:
+        TARGET_HEAD_SHA: ${{ steps.resolve_target_pr.outputs.target_head_sha }}
+      with:
+        script: |
+          const runAttempt = process.env.GITHUB_RUN_ATTEMPT ?? "";
+          if (!/^[1-9]\d*$/.test(runAttempt)) {
+            throw new Error(`Invalid workflow run attempt: ${JSON.stringify(runAttempt)}`);
+          }
+          await github.rest.repos.createCommitStatus({
+            ...context.repo,
+            sha: process.env.TARGET_HEAD_SHA,
+            state: "pending",
+            context: "ARM Semantic Review",
+            description: "ARM API semantic review is pending",
+            target_url:
+              `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/` +
+              `${context.runId}/attempts/${runAttempt}`,
+          });
   # Only users with write access (or above) may trigger the workflow. With
   # `forks: ["*"]` enabled above, this `roles` gate is the primary guard that
   # keeps externally-authored fork PRs from auto-triggering a review and blocks
@@ -80,6 +128,7 @@ on:
 jobs:
   pre-activation:
     outputs:
+      target_head_sha: ${{ steps.resolve_target_pr.outputs.target_head_sha }}
       target_pr_number: ${{ steps.resolve_target_pr.outputs.target_pr_number }}
 # Gate at the trigger level so the expensive agent job never starts for
 # ineligible events. Label / draft / comment gating that used to live in a
@@ -209,6 +258,58 @@ safe-outputs:
   remove-labels:
     max: 3
     target: "${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}"
+  jobs:
+    record-arm-semantic-review:
+      description: "Validate and record the ARM semantic review result for auto-signoff"
+      runs-on: ubuntu-slim
+      if: needs.detection.outputs.detection_success == 'true'
+      permissions:
+        contents: read
+        pull-requests: read
+      env:
+        TARGET_PR_NUMBER: ${{ github.event.pull_request.number || github.event.issue.number || github.event.inputs.pr_number }}
+      inputs:
+        issue_number:
+          description: "Target pull request number"
+          required: true
+          type: string
+        head_sha:
+          description: "Full pull request head SHA that was reviewed"
+          required: true
+          type: string
+        scope:
+          description: "Whether the full PR or only a scoped subset was reviewed"
+          required: true
+          type: choice
+          options: ["full", "scoped"]
+        completeness:
+          description: "Whether the intended review completed reliably"
+          required: true
+          type: choice
+          options: ["complete", "incomplete", "degraded"]
+        blocking_count:
+          description: "Number of verified, currently applicable Blocking findings after reconciliation"
+          required: true
+          type: string
+      steps:
+        - uses: actions/checkout@v7
+          with:
+            sparse-checkout: |
+              .github
+        - id: validate
+          name: Validate ARM semantic review
+          uses: actions/github-script@v9.0.0
+          with:
+            script: |
+              const { default: validateArmSemanticReview } =
+                await import('${{ github.workspace }}/.github/workflows/src/arm-auto-signoff/arm-semantic-review-workflow.ts');
+              return await validateArmSemanticReview({ github, context, core });
+        - name: Upload ARM semantic review receipt
+          uses: ./.github/actions/add-empty-artifact
+          with:
+            name: "arm-semantic-review"
+            value: "${{ fromJson(steps.validate.outputs.result).artifactValue }}"
+      output: "ARM semantic review result recorded"
   noop:
   # Threat detection uses the same pinned model as the primary review so all ARM
   # API Reviewer experiences move together. Keep both literals identical; see
@@ -239,6 +340,7 @@ reconciliation throughout.
 - Repository: `${{ github.repository }}`
 - Trigger event: `${{ github.event_name }}`
 - **Authoritative target pull request:** `#${{ needs.pre_activation.outputs.target_pr_number }}`
+- **Authoritative target head SHA:** `${{ needs.pre_activation.outputs.target_head_sha }}`
 
 The target above was parsed, validated as a pull request, and canonicalized via
 the GitHub Pull Requests API before agent execution. Use it for every GitHub
@@ -291,11 +393,12 @@ Exactly **three** things differ, by design:
   reviewer has selected in VS Code, and pinning one would simply fail for
   anyone without access to it. Expect wording and emphasis to vary between the
   two paths. The rules above are what keep the substance the same.
-- **Human queue advancement after a clean review.** This unattended workflow is
-  advisory and leaves `WaitForARMFeedback` unchanged when it publishes no
-  Blocking finding. A human-approved interactive review removes
-  `WaitForARMFeedback` because a human reviewer explicitly completed the review.
-  Both paths remove it when they add `ARMChangesRequested`.
+- **Human queue advancement after a clean review.** This unattended workflow
+  leaves `WaitForARMFeedback` unchanged after a clean review, but removes a
+  stale `ARMChangesRequested` label when the full review completes reliably.
+  A human-approved interactive review removes `WaitForARMFeedback` because a
+  human reviewer explicitly completed the review. Both paths remove
+  `WaitForARMFeedback` when they add `ARMChangesRequested`.
 
 **Repository coverage.** This workflow exists in **both** repositories,
 `Azure/azure-rest-api-specs` and `Azure/azure-rest-api-specs-pr`, and the two
@@ -391,7 +494,8 @@ read-only `github` toolset. If any check fails, act as directed and stop.
    `pull_request_read(method: "get")`, call `report_incomplete` and stop. Do not
    call `noop` for target-resolution or infrastructure failures. Pin the returned
    `head.sha` immediately and use that session SHA for all subsequent PR-head
-   file reads.
+   file reads. The pinned SHA must equal the authoritative target head SHA above.
+   If it does not, call `report_incomplete` and stop.
 2. **`skip-arm-review` label** — call `pull_request_read(method: "get")` and inspect the labels.
    If the PR carries `skip-arm-review`, call `noop` and stop (opt-out).
    From the same response, capture the exact label names matching
@@ -461,6 +565,21 @@ read-only `github` toolset. If any check fails, act as directed and stop.
 
 Only when checks 1–3 pass should you proceed to the Review Workflow below.
 Check 4 sets the review scope; it never stops the review.
+
+Track two values for the final semantic result:
+
+- `scope` is `full` unless the size cap or file-list truncation limits coverage;
+  otherwise it is `scoped`.
+- `completeness` is `complete` only when the intended review and Critic
+  verification finish normally. Use `degraded` when the Critic is unavailable
+  and `incomplete` when required files, discussions, or other evidence cannot be
+  fetched.
+
+Before any `report_incomplete` stop after the target PR and head SHA are known,
+also call `record_arm_semantic_review` with that PR, head SHA, the current
+scope, `completeness: incomplete`, and the number of verified Blocking findings
+known to remain applicable at that point. Use `"0"` if the failure occurs before
+finding reconciliation.
 
 ## Review Workflow
 
@@ -1000,17 +1119,21 @@ and never emit a marker that names neither the finding nor a degradation reason.
 
 ### Step 7: Update Labels
 
-After queuing the reconciled posting set, apply label changes based on outputs
-that will actually be published:
+After reconciling the current findings with existing discussion, apply label
+changes based on the verified findings that still apply to the current head:
 
-- **At least one Blocking `POST-NEW` or Blocking `RESOLVE-AND-REPOST` queued
-  _and_ the Critic returned a verdict**
+- **The review is scoped, incomplete, or degraded** → leave
+  `WaitForARMFeedback`, `ARMChangesRequested`, and `ARMSignedOff` unchanged,
+  even when Blocking findings were identified. The PR remains in its existing
+  queue state for manual review or a retry.
+- **The review is full and complete, and at least one verified, currently
+  applicable Blocking finding remains** (including `SKIP-COVERED`, `POST-NEW`,
+  and `RESOLVE-AND-REPOST`)
   → add `ARMChangesRequested`, remove `WaitForARMFeedback` (if present).
-- **No Blocking finding queued for publication** (clean, covered,
-  clarification-only, Critic-dropped, or overflow-only Blocking candidate) →
-  leave `WaitForARMFeedback`,
-  `ARMChangesRequested`, and `ARMSignedOff` unchanged. The automated review is
-  advisory and must not advance or sign off the human ARM review queue.
+- **No verified, currently applicable Blocking finding remains, and the review
+  is full and complete** → remove
+  `ARMChangesRequested` if present; leave `WaitForARMFeedback` and
+  `ARMSignedOff` unchanged.
 - **Critic unavailable** (every dispatch attempt failed) → leave all three
   labels unchanged, **even when Blocking findings were queued**. Those findings
   still publish at their original severity, but nothing independently verified
@@ -1020,13 +1143,12 @@ that will actually be published:
 
 Use the `add-labels` and `remove-labels` safe outputs for label changes.
 
-These three rules are **exhaustive**. Do not invent additional exceptions from PR
+These rules are **exhaustive**. Do not invent additional exceptions from PR
 metadata: draft status, a `[Test]` or `[Do-Not-Merge]` title, a revert, a
 bot-authored PR, or the author's stated intent not to merge are **not** grounds
-to skip a label change. There are exactly **two** inputs to this decision:
-whether a Blocking finding was queued for publication, and whether the Critic
-verified it. Nothing else, and in particular nothing read from PR metadata, may
-change the outcome.
+to skip a label change. The decision uses only the verified, currently
+applicable Blocking findings after reconciliation, review scope, and review
+completeness. Nothing read from unrelated PR metadata may change the outcome.
 
 ### Step 8: Summary Comment
 
@@ -1130,6 +1252,34 @@ _posted-by: arm-api-reviewer-agent | rule: summary | category: summary | severit
 If no reviewable issues were found, post a brief "No issues found" summary
 rather than calling `noop`. This confirms the review ran and found the PR
 compliant.
+
+### Step 9: Record Semantic Result
+
+Call `record_arm_semantic_review` exactly once after queuing the summary:
+
+- `issue_number`: the authoritative target pull request number;
+- `head_sha`: the pinned full session SHA;
+- `scope`: `full` or `scoped`, as recorded during Trigger Validation;
+- `completeness`: `complete`, `incomplete`, or `degraded`; and
+- `blocking_count`: the number of verified Blocking findings that remain
+  applicable after reconciliation. Include an unresolved finding classified as
+  `SKIP-COVERED`; do not count fixed, resolved, Critic-dropped, or
+  overflow-only candidates.
+
+Use `blocking_count: "0"` after a clean re-review. Do not claim `full` or
+`complete` when any required evidence was unavailable. The trusted publisher
+validates the PR and head SHA and records an attempt-specific receipt. Universal
+Auto-Signoff publishes the final `ARM Semantic Review` status only after the
+entire reviewer workflow completes.
+
+The final status is:
+
+- **Passed** for a full, complete review with no verified Blocking findings;
+- **Changes requested** for a full, complete review with verified Blocking
+  findings;
+- **Manual review required** when scope is `scoped`, including oversized or
+  truncated PRs; or
+- **Review incomplete** when a full review is `incomplete` or `degraded`.
 
 ## What to Review vs. Skip
 
