@@ -81,7 +81,7 @@ interface Services {
     Response = ArmResponse<ServiceResourceList>
   >;
 
-  @doc("A long-running resource action.")
+  @doc("Restarts one or more replicas of a Service Fabric managed service.")
   @added(Versions.v2025_10_01_preview)
   restartReplica is ArmResourceActionAsync<
     ServiceResource,
