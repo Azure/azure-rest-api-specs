@@ -71,6 +71,22 @@ alias VpnLinkConnectionSharedKeyOps = Azure.ResourceManager.Legacy.LegacyOperati
   }
 >;
 
+/**
+ * The response of the VpnLink connection ListDefaultSharedKey operation.
+ * The underlying Network Resource Provider implementation completes this
+ * operation asynchronously and returns HTTP 202 (Accepted) with the shared
+ * key in the response body. The status code is declared here so that spec
+ * generated SDKs (e.g. the Terraform azurerm provider) expect 202 instead of
+ * the previously (incorrectly) documented 200.
+ */
+model ConnectionSharedKeyAcceptedResponse {
+  @statusCode
+  statusCode: 202;
+
+  @bodyRoot
+  body: ConnectionSharedKeyResult;
+}
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.feature(Features.virtualWAN)
 @armResourceOperations(#{ omitTags: true })
@@ -107,7 +123,7 @@ interface ConnectionSharedKeyResults {
   listDefaultSharedKey is VpnLinkConnectionSharedKeyOps.ActionSync<
     ConnectionSharedKeyResult,
     void,
-    ArmResponse<ConnectionSharedKeyResult>,
+    ConnectionSharedKeyAcceptedResponse,
     OverrideErrorType = CloudError
   >;
 }
