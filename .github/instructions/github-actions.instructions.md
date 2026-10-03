@@ -254,6 +254,23 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
 - **Caching**: Use appropriate caching strategies (e.g., pnpm cache in setup-node)
 - **Early exits**: Return early when conditions aren't met
 
+### GitHub API Efficiency
+
+- Minimize requests across the entire workflow, including downstream workflows, not just within
+  individual helpers. Prefer trustworthy event payloads and reuse already-fetched responses when
+  their freshness is sufficient. Do not separately fetch labels or other fields already returned
+  by a required PR lookup.
+- Apply cheap eligibility checks before API calls. Use endpoint filters and `PER_PAGE_MAX` where
+  supported. Stop pagination once sufficient evidence determines the result; retain complete
+  pagination when the decision requires an exhaustive list.
+- Avoid redundant status, label, and comment writes when the desired state is already known.
+  Do not introduce an extra read merely to avoid a write without considering the total call cost.
+- Preserve head SHA and run-attempt correlation, trust boundaries, and necessary freshness checks.
+  Never substitute the live PR head for a missing reviewed SHA or cache mutable state across
+  boundaries where it must be revalidated.
+- For changes intended to reduce requests, add focused mock call-count assertions alongside
+  behavior tests, including relevant pagination and stale-result cases.
+
 ## Common Tasks
 
 ### Adding a New Shared Utility
