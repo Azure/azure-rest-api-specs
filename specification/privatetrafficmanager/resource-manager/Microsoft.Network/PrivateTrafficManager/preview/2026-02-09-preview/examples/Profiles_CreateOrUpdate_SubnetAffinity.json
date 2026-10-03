@@ -1,0 +1,121 @@
+{
+  "title": "Profiles_CreateOrUpdate_SubnetAffinity",
+  "operationId": "Profiles_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-02-09-preview",
+    "subscriptionId": "10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA",
+    "resourceGroupName": "rgprivateTrafficManager",
+    "privateTrafficManagerProfileName": "subnet-affinity-profile",
+    "resource": {
+      "location": "eastus",
+      "properties": {
+        "customTopologyMapMode": "Disabled",
+        "profileStatus": "Enabled",
+        "trafficRoutingMethod": "Subnet",
+        "endpoints": [
+          {
+            "name": "matched-endpoint",
+            "target": "10.0.0.10",
+            "endpointStatus": "Enabled",
+            "subnets": [
+              {
+                "first": "10.1.0.0",
+                "scope": 16
+              },
+              {
+                "first": "10.2.0.1",
+                "last": "10.2.0.255"
+              }
+            ]
+          },
+          {
+            "name": "fallback-endpoint",
+            "target": "10.0.0.20",
+            "endpointStatus": "Enabled"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/resourceGroups/rgprivateTrafficManager/providers/Microsoft.Network/privateTrafficManagerProfiles/subnet-affinity-profile",
+        "name": "subnet-affinity-profile",
+        "type": "Microsoft.Network/privateTrafficManagerProfiles",
+        "location": "eastus",
+        "properties": {
+          "customTopologyMapMode": "Disabled",
+          "profileStatus": "Enabled",
+          "trafficRoutingMethod": "Subnet",
+          "endpoints": [
+            {
+              "name": "matched-endpoint",
+              "target": "10.0.0.10",
+              "endpointStatus": "Enabled",
+              "subnets": [
+                {
+                  "first": "10.1.0.0",
+                  "scope": 16
+                },
+                {
+                  "first": "10.2.0.1",
+                  "last": "10.2.0.255"
+                }
+              ],
+              "provisioningState": "Succeeded"
+            },
+            {
+              "name": "fallback-endpoint",
+              "target": "10.0.0.20",
+              "endpointStatus": "Enabled",
+              "provisioningState": "Succeeded"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "id": "/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/resourceGroups/rgprivateTrafficManager/providers/Microsoft.Network/privateTrafficManagerProfiles/subnet-affinity-profile",
+        "name": "subnet-affinity-profile",
+        "type": "Microsoft.Network/privateTrafficManagerProfiles",
+        "location": "eastus",
+        "properties": {
+          "customTopologyMapMode": "Disabled",
+          "profileStatus": "Enabled",
+          "trafficRoutingMethod": "Subnet",
+          "endpoints": [
+            {
+              "name": "matched-endpoint",
+              "target": "10.0.0.10",
+              "endpointStatus": "Enabled",
+              "subnets": [
+                {
+                  "first": "10.1.0.0",
+                  "scope": 16
+                },
+                {
+                  "first": "10.2.0.1",
+                  "last": "10.2.0.255"
+                }
+              ],
+              "provisioningState": "Succeeded"
+            },
+            {
+              "name": "fallback-endpoint",
+              "target": "10.0.0.20",
+              "endpointStatus": "Enabled",
+              "provisioningState": "Succeeded"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

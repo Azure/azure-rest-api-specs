@@ -1,0 +1,100 @@
+{
+  "title": "Profiles_CreateOrUpdate_VNetAffinity",
+  "operationId": "Profiles_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2026-02-09-preview",
+    "subscriptionId": "10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA",
+    "resourceGroupName": "rgprivateTrafficManager",
+    "privateTrafficManagerProfileName": "vnet-affinity-profile",
+    "resource": {
+      "location": "eastus",
+      "properties": {
+        "customTopologyMapMode": "Disabled",
+        "profileStatus": "Enabled",
+        "trafficRoutingMethod": "VNet",
+        "endpoints": [
+          {
+            "name": "matched-endpoint",
+            "target": "10.0.0.10",
+            "endpointStatus": "Enabled",
+            "virtualNetworkIds": [
+              "/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/resourceGroups/rgprivateTrafficManager/providers/Microsoft.Network/virtualNetworks/vnet-east"
+            ]
+          },
+          {
+            "name": "fallback-endpoint",
+            "target": "10.0.0.20",
+            "endpointStatus": "Enabled"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/resourceGroups/rgprivateTrafficManager/providers/Microsoft.Network/privateTrafficManagerProfiles/vnet-affinity-profile",
+        "name": "vnet-affinity-profile",
+        "type": "Microsoft.Network/privateTrafficManagerProfiles",
+        "location": "eastus",
+        "properties": {
+          "customTopologyMapMode": "Disabled",
+          "profileStatus": "Enabled",
+          "trafficRoutingMethod": "VNet",
+          "endpoints": [
+            {
+              "name": "matched-endpoint",
+              "target": "10.0.0.10",
+              "endpointStatus": "Enabled",
+              "virtualNetworkIds": [
+                "/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/resourceGroups/rgprivateTrafficManager/providers/Microsoft.Network/virtualNetworks/vnet-east"
+              ],
+              "provisioningState": "Succeeded"
+            },
+            {
+              "name": "fallback-endpoint",
+              "target": "10.0.0.20",
+              "endpointStatus": "Enabled",
+              "provisioningState": "Succeeded"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "https://contoso.com/operationstatus"
+      },
+      "body": {
+        "id": "/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/resourceGroups/rgprivateTrafficManager/providers/Microsoft.Network/privateTrafficManagerProfiles/vnet-affinity-profile",
+        "name": "vnet-affinity-profile",
+        "type": "Microsoft.Network/privateTrafficManagerProfiles",
+        "location": "eastus",
+        "properties": {
+          "customTopologyMapMode": "Disabled",
+          "profileStatus": "Enabled",
+          "trafficRoutingMethod": "VNet",
+          "endpoints": [
+            {
+              "name": "matched-endpoint",
+              "target": "10.0.0.10",
+              "endpointStatus": "Enabled",
+              "virtualNetworkIds": [
+                "/subscriptions/10B6D88D-ADF4-4281-B3D0-B5A6702DEEDA/resourceGroups/rgprivateTrafficManager/providers/Microsoft.Network/virtualNetworks/vnet-east"
+              ],
+              "provisioningState": "Succeeded"
+            },
+            {
+              "name": "fallback-endpoint",
+              "target": "10.0.0.20",
+              "endpointStatus": "Enabled",
+              "provisioningState": "Succeeded"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}
