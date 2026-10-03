@@ -15,8 +15,8 @@ configuration:
         filters:
           - isPullRequest
           - isOpen
-          - targetsBranch:
-              branch: typespec-next
+          - hasLabel:
+              label: typespec-next-pr
           - created:
               before: 14
         actions:
@@ -82,6 +82,16 @@ configuration:
                 This PR has been closed since it had no activity for 28 days. If you still need this change, please reopen the PR and @mention the assignee for review.
 
     eventResponderTasks:
+      - description: Label PRs targeting typespec-next so the schedule above can find them
+        if:
+          - payloadType: Pull_Request
+          - isOpen
+          - targetsBranch:
+              branch: typespec-next
+        then:
+          - addLabel:
+              label: typespec-next-pr
+
       - description: Remove the stale label when the PR author updates the PR
         if:
           - payloadType: Pull_Request
