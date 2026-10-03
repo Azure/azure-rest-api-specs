@@ -1,0 +1,51 @@
+{
+  "operationId": "CarbonService_QueryCarbonEmissionReportsByBillingAccount",
+  "title": "QueryCarbonEmission By BillingAccount Subscription Item Details Report",
+  "parameters": {
+    "api-version": "2026-05-01-preview",
+    "scope": "providers/Microsoft.Billing/billingAccounts/12345678",
+    "queryParameters": {
+      "reportType": "ItemDetailsReport",
+      "carbonScopeList": [
+        "Scope1",
+        "Scope3"
+      ],
+      "dateRange": {
+        "start": "2024-05-01",
+        "end": "2024-05-01"
+      },
+      "categoryType": "Subscription",
+      "orderBy": "LatestMonthEmissions",
+      "sortDirection": "Desc",
+      "pageSize": 100
+    }
+  },
+  "responses": {
+    "200": {
+      "description": "Returns data for subscription item details report scoped to a billing account.",
+      "body": {
+        "value": [
+          {
+            "dataType": "ItemDetailsData",
+            "latestMonthEmissions": 1.2,
+            "previousMonthEmissions": 1.0,
+            "monthOverMonthEmissionsChangeRatio": 0.2,
+            "monthlyEmissionsChangeValue": 0.2,
+            "itemName": "00000000-0000-0000-0000-000000000000",
+            "categoryType": "Subscription"
+          },
+          {
+            "dataType": "ItemDetailsData",
+            "latestMonthEmissions": 0.95,
+            "previousMonthEmissions": 0.9,
+            "monthOverMonthEmissionsChangeRatio": 0.0556,
+            "monthlyEmissionsChangeValue": 0.05,
+            "itemName": "00000000-0000-0000-0000-000000000001",
+            "categoryType": "Subscription"
+          }
+        ],
+        "skipToken": "dGVzdF9za2lwX3Rva2Vu"
+      }
+    }
+  }
+}
