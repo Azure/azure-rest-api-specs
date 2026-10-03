@@ -7,6 +7,11 @@ using Azure.ClientGenerator.Core;
 
 namespace Microsoft.RecoveryServices;
 
+@@doc(
+  RegionOfChoiceSettings,
+  "Region of choice settings at the vault level. This setting allows customers to configure backups for data sources from a different region."
+);
+
 @@clientLocation(getOperationStatus, Operations, "go");
 @@clientLocation(getOperationResult, Operations, "go");
 @@clientName(getOperationStatus, "OperationStatusGet", "go");
