@@ -6,6 +6,7 @@ namespace Microsoft.Sovereign;
 
 @added(Versions.Preview20250227)
 @doc("The properties of landing zone configuration resource type.")
+@removed(Versions.Preview20261031)
 model LandingZoneConfigurationResourceProperties {
   @visibility(Lifecycle.Read)
   @doc("The state that reflects the current stage in the creation, updating, or deletion process of the landing zone configuration.")
@@ -115,6 +116,7 @@ model LandingZoneConfigurationResourceProperties {
 
 @added(Versions.Preview20250227)
 @doc("The properties of managed identity, specifically including type and resource ID.")
+@removed(Versions.Preview20261031)
 model ManagedIdentityProperties {
   @doc("The type of managed identity.")
   type: ManagedIdentityResourceType;
@@ -129,6 +131,7 @@ model ManagedIdentityProperties {
 
 @added(Versions.Preview20250227)
 @doc("The managed identity resource.")
+@removed(Versions.Preview20261031)
 union ManagedIdentityResourceType {
   @doc("System assigned managed identity.")
   SystemAssigned: "SystemAssigned",
@@ -140,6 +143,7 @@ union ManagedIdentityResourceType {
 }
 
 @doc("Key-value pairs that can be assigned to this resource.")
+@removed(Versions.Preview20261031)
 model Tags {
   @doc("A tag name.")
   name: string;
@@ -150,6 +154,7 @@ model Tags {
 }
 
 @doc("The 'Landing Zones' management group properties..")
+@removed(Versions.Preview20261031)
 model LandingZoneManagementGroupProperties {
   ...ManagementGroupProperties;
 
@@ -158,6 +163,7 @@ model LandingZoneManagementGroupProperties {
 }
 
 @doc("The properties of policy initiatives applied to the management group.")
+@removed(Versions.Preview20261031)
 model ManagementGroupProperties {
   @doc("Array of policy initiatives applied to the management group.")
   @identifiers(#[])
@@ -165,6 +171,7 @@ model ManagementGroupProperties {
 }
 
 @doc("The properties of assigned policy initiatives.")
+@removed(Versions.Preview20261031)
 model PolicyInitiativeAssignmentProperties {
   @doc("The fully qualified id of the policy initiative.")
   policyInitiativeId: string;
@@ -176,6 +183,7 @@ model PolicyInitiativeAssignmentProperties {
 }
 
 @doc("The 'Decommissioned' management group properties.")
+@removed(Versions.Preview20261031)
 model DecommissionedManagementGroupProperties {
   ...ManagementGroupProperties;
 
@@ -184,6 +192,7 @@ model DecommissionedManagementGroupProperties {
 }
 
 @doc("The 'Sandbox' management group properties.")
+@removed(Versions.Preview20261031)
 model SandboxManagementGroupProperties {
   ...ManagementGroupProperties;
 
@@ -192,6 +201,7 @@ model SandboxManagementGroupProperties {
 }
 
 @doc("The request to generate Infrastructure as Code (IaC) for a landing zone.")
+@removed(Versions.Preview20261031)
 model GenerateLandingZoneRequest {
   @doc("The export options available for code generation.")
   infrastructureAsCodeOutputOptions: InfrastructureAsCodeOutputOptions;
@@ -255,6 +265,7 @@ model GenerateLandingZoneRequest {
 }
 
 @doc("The response payload for generating infrastructure-as-code for the landing zone.")
+@removed(Versions.Preview20261031)
 model GenerateLandingZoneResponse {
   @doc("The parent management group name of the landing zone deployment.")
   topLevelMgDisplayName: string;
@@ -284,12 +295,14 @@ model GenerateLandingZoneResponse {
 }
 
 @doc("The request to update the authoring status of a configuration.")
+@removed(Versions.Preview20261031)
 model UpdateAuthoringStatusRequest {
   @doc("The authoring status value to be updated. Possible values include: 'Authoring', 'ReadyForUse' and 'Disabled'.")
   authoringStatus: AuthoringStatus;
 }
 
 @doc("The response for authoring status update request.")
+@removed(Versions.Preview20261031)
 model UpdateAuthoringStatusResponse {
   @doc("The name of the landing zone configuration resource.")
   landingZoneConfigurationName: string;
@@ -299,6 +312,7 @@ model UpdateAuthoringStatusResponse {
 }
 
 @doc("The authoring status for a landing zone configuration.")
+@removed(Versions.Preview20261031)
 union AuthoringStatus {
   @doc("'Authoring' is the default status when a create configuration request is made. In this state, the Landing zone configuration can be modified.")
   Authoring: "Authoring",
@@ -313,6 +327,7 @@ union AuthoringStatus {
 }
 
 @doc("Output options for landing zone code generation.")
+@removed(Versions.Preview20261031)
 union InfrastructureAsCodeOutputOptions {
   @doc("Value when generating Landing zone code in Bicep format.")
   Bicep: "Bicep",
@@ -324,6 +339,7 @@ union InfrastructureAsCodeOutputOptions {
 }
 
 @doc("Parameter used for deploying or not a Firewall resource.")
+@removed(Versions.Preview20261031)
 union FirewallCreationOptions {
   @doc("Select 'None' value to skip Firewall deployment.")
   None: "None",
@@ -338,6 +354,7 @@ union FirewallCreationOptions {
 }
 
 @doc("Options for resource creation.")
+@removed(Versions.Preview20261031)
 union ResourceCreationOptions {
   @doc("Value to create a new resource.")
   Yes: "Yes",
@@ -352,6 +369,7 @@ union ResourceCreationOptions {
 }
 
 @doc("The request for duplicate landing zone configuration.")
+@removed(Versions.Preview20261031)
 model CreateCopyRequest {
   @doc("The name of the duplicate landing zone configuration resource.")
   @pattern("^[a-zA-Z0-9-]{3,24}$")
@@ -359,6 +377,7 @@ model CreateCopyRequest {
 }
 
 @doc("The response of the request for duplicate landing zone configuration.")
+@removed(Versions.Preview20261031)
 model CreateCopyResponse {
   @doc("The ID of the duplicate landing zone configuration resource.")
   copiedLandingZoneConfigurationId: armResourceIdentifier<[
@@ -369,6 +388,7 @@ model CreateCopyResponse {
 }
 
 @doc("The request for create duplicate landing zone configuration.")
+@removed(Versions.Preview20261031)
 model CreateLandingZoneConfigurationCopyRequest {
   @doc("The name of the duplicate landing zone configuration resource.")
   @pattern("^[a-zA-Z0-9-]{3,64}$")
@@ -376,6 +396,7 @@ model CreateLandingZoneConfigurationCopyRequest {
 }
 
 @doc("The response of the create duplicate landing zone configuration.")
+@removed(Versions.Preview20261031)
 model CreateLandingZoneConfigurationCopyResponse {
   @doc("The ID of the duplicate landing zone configuration resource.")
   copiedLandingZoneConfigurationId: armResourceIdentifier<[
@@ -387,6 +408,7 @@ model CreateLandingZoneConfigurationCopyResponse {
 
 @doc("The details for the custom naming convention override for a specific resource type.")
 @added(Versions.Preview20250227)
+@removed(Versions.Preview20261031)
 model CustomNamingConvention {
   @doc("The type of the resource.")
   resourceType: ResourceType;
@@ -397,6 +419,7 @@ model CustomNamingConvention {
 
 @doc("The input values for resource types for custom naming conventions.")
 @added(Versions.Preview20250227)
+@removed(Versions.Preview20261031)
 union ResourceType {
   @doc("Value when customer wants to provide a custom naming convention for Azure Firewall.")
   azureFirewalls: "azureFirewalls",
@@ -433,6 +456,7 @@ union ResourceType {
 
 @added(Versions.Preview20250227)
 @doc("The 'Platform' management group properties.")
+@removed(Versions.Preview20261031)
 model PlatformManagementGroupProperties {
   ...ManagementGroupProperties;
 

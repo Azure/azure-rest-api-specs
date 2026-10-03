@@ -6,6 +6,7 @@ namespace Microsoft.Sovereign;
 
 @added(Versions.Preview20250227)
 @doc("The properties of landing zone account resource type.")
+@removed(Versions.Preview20261031)
 model LandingZoneAccountResourceProperties {
   @visibility(Lifecycle.Read)
   @doc("The state that reflects the current stage in the creation, updating, or deletion process of the landing zone account.")

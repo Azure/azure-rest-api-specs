@@ -1,0 +1,36 @@
+{
+  "title": "SovereignViewOperations_RemediationResult",
+  "operationId": "SovereignViewOperations_RemediationResult",
+  "parameters": {
+    "api-version": "2026-10-31-preview",
+    "subscriptionId": "22b62f96-c8d5-4131-97f8-f820a5a3c55f",
+    "resourceGroupName": "ExampleResourceGroup",
+    "sovereignViewName": "ExampleSV",
+    "body": {
+      "remediationId": "2f30c9e8-1b4d-4b4f-a17d-54db32e132f4"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "remediationId": "2f30c9e8-1b4d-4b4f-a17d-54db32e132f4",
+        "dimensionType": "DataResidency",
+        "status": "Succeeded",
+        "results": [
+          {
+            "resourceIds": [
+              "/subscriptions/22b62f96-c8d5-4131-97f8-f820a5a3c55f/resourceGroups/ExampleResourceGroup/providers/Microsoft.Storage/storageAccounts/examplestorage"
+            ],
+            "type": "ArmTemplateBundle",
+            "result": {
+              "template": "{\"$schema\":\"https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#\",\"contentVersion\":\"1.0.0.0\",\"parameters\":{\"storageAccountName\":{\"type\":\"string\"}},\"resources\":[{\"type\":\"Microsoft.Storage/storageAccounts\",\"apiVersion\":\"2025-01-01\",\"name\":\"[parameters('storageAccountName')]\",\"location\":\"swedencentral\",\"sku\":{\"name\":\"Standard_LRS\"},\"kind\":\"StorageV2\",\"properties\":{}}]}",
+              "parameters": "{\"storageAccountName\":{\"value\":\"examplestorage\"}}"
+            }
+          }
+        ],
+        "createdAt": "2026-10-15T10:00:00Z",
+        "expiresAt": "2026-10-22T10:00:00Z"
+      }
+    }
+  }
+}
