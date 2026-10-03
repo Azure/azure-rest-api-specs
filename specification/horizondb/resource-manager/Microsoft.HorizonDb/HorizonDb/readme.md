@@ -55,21 +55,6 @@ suppressions:
       Customers cannot create additional instances.
   - code: ConsistentPatchProperties
     from: openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/authentications/passwordMethod"].patch.parameters[4].schema
-    reason: >-
-      administratorLogin and administratorLoginPassword are write-only
-      credentials accepted only by PATCH and are never returned in the
-      Authentication resource model.
-  - code: PutRequestResponseSchemeArm
-    from: openapi.json
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/microsoftEntraAdministrators/{objectId}"].put
-    reason: >-
-      The administrator create (PUT) accepts a dedicated add model
-      (HorizonDbAdministratorAdd) whose properties are a subset of the resource
-      read model. objectId are read-only fields returned by GET but not accepted on PUT.
-      The resource has no updatable fields beyond create, so no PATCH operation is provided.
-  - code: ConsistentPatchProperties
-    from: openapi.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/pools/{poolName}"].patch.parameters[5].schema
     reason: >-
       The PATCH model exposes computeModel.vCores for the Provisioned compute
