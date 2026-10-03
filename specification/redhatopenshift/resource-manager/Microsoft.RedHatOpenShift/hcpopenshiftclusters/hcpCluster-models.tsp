@@ -40,7 +40,6 @@ model NodePool is TrackedResource<NodePoolProperties> {
     NodePool,
     NamePattern = "^[a-zA-Z]([-a-zA-Z0-9]{0,13}[a-zA-Z0-9])?$"
   >;
-  ...ManagedServiceIdentityProperty;
 }
 
 /** ExternalAuth resource */
