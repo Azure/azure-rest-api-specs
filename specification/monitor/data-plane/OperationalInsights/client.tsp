@@ -35,6 +35,9 @@ interface MonitorQueryLogsClient {
   executeWithResourceId is MonitorQueryLogs.Query.executeWithResourceId;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  search is MonitorQueryLogs.Search.execute;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   batch is MonitorQueryLogs.Query.batch;
 }
 
@@ -52,6 +55,9 @@ interface Client {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   queryResource is MonitorQueryLogs.Query.executeWithResourceId;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  searchWorkspace is MonitorQueryLogs.Search.execute;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   queryBatch is MonitorQueryLogs.Query.batch;

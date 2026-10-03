@@ -1,0 +1,39 @@
+{
+  "description": "A search query that returns workspace data.",
+  "parameters": {
+    "body": {
+      "query": "Usage | take 1",
+      "timespan": "PT12H"
+    },
+    "workspaceId": "63613592-b6f7-4c3d-a390-22ba13102111"
+  },
+  "title": "A simple POST search query on a workspace",
+  "responses": {
+    "200": {
+      "body": {
+        "tables": [
+          {
+            "name": "PrimaryResult",
+            "columns": [
+              {
+                "name": "TimeGenerated",
+                "type": "datetime"
+              },
+              {
+                "name": "Type",
+                "type": "string"
+              }
+            ],
+            "rows": [
+              [
+                "2026-03-01T00:00:00Z",
+                "Usage"
+              ]
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Search_Execute"
+}
