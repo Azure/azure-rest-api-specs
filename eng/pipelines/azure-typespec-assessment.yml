@@ -1,0 +1,51 @@
+# NOTE: Please refer to https://aka.ms/azsdk/engsys/ci-yaml before editing this file.
+# This pipeline runs evaluations WITHOUT loading the azure-typespec-author skill,
+# testing the agent's baseline capability with the selected live or mock MCP tool surface.
+trigger: none
+pr: none
+
+parameters:
+  - name: SkillBranch
+    displayName: Branch containing the azure-typespec-author skill source (SKILL.md + references/) to evaluate. Defaults to the full source branch ref.
+    type: string
+    default: $(Build.SourceBranch)
+
+variables:
+  - template: /eng/pipelines/templates/variables/image.yml
+  - group: AzSDK_Eval_Variable_group
+  - name: SkillBranch
+    value: ${{ parameters.SkillBranch }}
+
+extends:
+  template: /eng/pipelines/templates/stages/1es-redirect.yml
+  parameters:
+    Use1ESOfficial: true
+    stages:
+      - stage: Prepare
+        displayName: Prepare track
+        jobs:
+          - template: /eng/common/pipelines/templates/jobs/generate-eval-matrix.yml
+            parameters:
+              vallyRoot: /.github/skills/azure-typespec-assessment/evals
+              evalGlobs:
+                - 'assessment.eval.yaml'
+
+      - stage: Eval
+        displayName: Run Eval
+        dependsOn: Prepare
+        jobs:
+          - template: /.github/skills/azure-typespec-assessment/evals/pipeline/typespec-assessment-eval.yml
+            parameters:
+              vallyRoot: $(Build.SourcesDirectory)/.github/skills/azure-typespec-assessment/evals
+              evalInvokeTemplate: /.github/skills/azure-typespec-assessment/evals/pipeline/typespec-assessment-eval-invoke.yml
+              preEvalTemplate: /.github/skills/azure-typespec-assessment/evals/pipeline/typespec-assessment-preeval.yml
+              shardTimeoutInMinutes: 50
+      
+      - stage: Summary
+        displayName: 'Summarize results'
+        dependsOn: Eval
+        condition: always()
+        jobs:
+          - template: /eng/common/pipelines/templates/jobs/eval-summarize.yml
+            parameters:
+              failOnFailedTests: false
