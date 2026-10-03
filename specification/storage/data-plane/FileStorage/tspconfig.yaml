@@ -33,10 +33,17 @@ options:
       name: "@azure/storage-file-share"
       description: "Azure.Storage.File Service"
     flavor: azure
-  # "@azure-tools/typespec-java":
-  #   emitter-output-dir: "{output-dir}/{service-dir}/azure-storage-file"
-  #   namespace: com.azure.storage.file
-  #   flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-storage-file-share"
+    namespace: com.azure.storage.file.share
+    model-namespace: true
+    flavor: azure
+    max-overload: model
+    customization-class: customization/src/main/java/ShareStorageCustomization.java
+    models-subpackage: "implementation.models"
+    custom-types-subpackage: "models"
+    generate-tests: false
+    custom-types: "ShareFileHttpHeaders,ShareServiceProperties,ShareCorsRule,Range,FileRange,ClearRange,ShareFileRangeList,CopyStatusType,ShareSignedIdentifier,SourceModifiedAccessConditions,ShareErrorCode,StorageServiceProperties,ShareMetrics,ShareAccessPolicy,LeaseDurationType,LeaseStateType,LeaseStatusType,PermissionCopyModeType,ShareAccessTier,ShareRootSquash,ShareRetentionPolicy,ShareProtocolSettings,ShareSmbSettings,SmbMultichannel,FileLastWrittenMode,ShareTokenIntent,ShareFileHandleAccessRights,FilePermissionFormat,NfsFileType,ModeCopyMode,OwnerCopyMode,ShareNfsSettingsEncryptionInTransit,ShareSmbSettingsEncryptionInTransit,ShareNfsSettings,FilePropertySemantics,UserDelegationKey"
   # "@azure-tools/typespec-rust":
   #   package-dir: "azure_storage_file"
   #   crate-name: "azure_storage_file"
