@@ -412,6 +412,7 @@ catalogs:
       version: 4.4.3
 
 overrides:
+  '@azure-tools/typespec-suppressions>@typespec/compiler': https://pkg.pr.new/@typespec/compiler@e7a1c615059a4eb065838d051c04111040ea9178
   '@typespec/asset-emitter': 0.79.1
   get-uri: ^6.0.5
   js-yaml@^4.0.0: ^4.3.0
@@ -1016,14 +1017,11 @@ importers:
   eng/tools/typespec-suppressions:
     dependencies:
       '@typespec/compiler':
-        specifier: 'catalog:'
-        version: 1.16.0(@types/node@24.13.1)
+        specifier: https://pkg.pr.new/@typespec/compiler@e7a1c615059a4eb065838d051c04111040ea9178
+        version: https://pkg.pr.new/@typespec/compiler@e7a1c615059a4eb065838d051c04111040ea9178(@types/node@24.13.1)
       simple-git:
         specifier: 'catalog:'
         version: 3.36.0
-      yaml:
-        specifier: 'catalog:'
-        version: 2.9.0
     devDependencies:
       '@types/node':
         specifier: 'catalog:'
@@ -1321,6 +1319,10 @@ packages:
     resolution: {integrity: sha512-Aup7aUOfpbAUg2ROOJN6Iw5f9DMBlzu0mIkm/malLQFN/YQgO48wCj0Kxa3sEHJvPVFg7siR+qRInwXd2qhQKw==}
     engines: {node: '>=6.9.0'}
 
+  '@babel/code-frame@8.0.6':
+    resolution: {integrity: sha512-uMHhvmDmwFiLuiozaoRYTZHqMFuu3fem/X9JY78lohAuLoh8LSGGC8JqUzo2cVuBsBxkjMZNk56CE7ock8Xxkw==}
+    engines: {node: ^22.18.0 || >=24.11.0}
+
   '@babel/helper-string-parser@7.29.7':
     resolution: {integrity: sha512-Pb5ijPrZ89GDH8223L4UP8i6QApWxs04RbPQJTeWDV0/keR2E36MeKnyr6LYmUUvqRRI+Iv87SuF1W6ErINzYw==}
     engines: {node: '>=6.9.0'}
@@ -1328,6 +1330,10 @@ packages:
   '@babel/helper-validator-identifier@7.29.7':
     resolution: {integrity: sha512-qehxGkRj55h/ff8EMaJ+cYhyaKlHIxqYDn682wQD7RNp9UujOQsHog2uS0r2vzr4pW+sXf90NeeayjcNaX3fFg==}
     engines: {node: '>=6.9.0'}
+
+  '@babel/helper-validator-identifier@8.0.6':
+    resolution: {integrity: sha512-HYx0YmuchRxRSpnjvcNffnPS8DCauKNmnumIuHG3jnQAVewRA7kfJGwF13ayEpSZs7s4R/oBH4eppuXcAQd5JQ==}
+    engines: {node: ^22.18.0 || >=24.11.0}
 
   '@babel/parser@7.29.7':
     resolution: {integrity: sha512-hnORnjP/1P/zFEndoeX+n+t1RwWRJiJpM/jO7FW32Kn9r5+sJB2JWOdYo4L6k78j15eCwY3Gm/7364B1EMwtNg==}
@@ -2516,6 +2522,12 @@ packages:
 
   '@typespec/compiler@1.16.0':
     resolution: {integrity: sha512-pT4gN+OSEXZMLxIhtI3QgIUafeFktfIBKVb7p+X/rAzDymQSO8yAb+srMBQ43PIcmfrvMxCNaD1SKBa9AGhWtA==}
+    engines: {node: '>=22.0.0'}
+    hasBin: true
+
+  '@typespec/compiler@https://pkg.pr.new/@typespec/compiler@e7a1c615059a4eb065838d051c04111040ea9178':
+    resolution: {integrity: sha512-TOrYmg3l6tipKtFerK4bKJLos5lCPbOuOkQceaZsdGnCt/n2bL+0R/HoEbKOChDbjMXo3hv4P9x7Kzc7nGBDwA==, tarball: https://pkg.pr.new/@typespec/compiler@e7a1c615059a4eb065838d051c04111040ea9178}
+    version: 1.17.0-pr.12095.5859
     engines: {node: '>=22.0.0'}
     hasBin: true
 
@@ -4790,9 +4802,16 @@ snapshots:
       js-tokens: 4.0.0
       picocolors: 1.1.1
 
+  '@babel/code-frame@8.0.6':
+    dependencies:
+      '@babel/helper-validator-identifier': 8.0.6
+      js-tokens: 10.0.0
+
   '@babel/helper-string-parser@7.29.7': {}
 
   '@babel/helper-validator-identifier@7.29.7': {}
+
+  '@babel/helper-validator-identifier@8.0.6': {}
 
   '@babel/parser@7.29.7':
     dependencies:
@@ -5925,6 +5944,30 @@ snapshots:
     dependencies:
       '@babel/code-frame': 7.29.7
       '@inquirer/prompts': 8.7.2(@types/node@24.13.1)
+      ajv: 8.20.0
+      change-case: 5.4.4
+      env-paths: 4.0.0
+      is-unicode-supported: 2.1.0
+      mustache: 4.2.0
+      picocolors: 1.1.1
+      prettier: 3.9.9
+      semver: 7.8.5
+      tar: 7.5.22
+      temporal-polyfill: 1.0.4
+      vscode-languageserver: 10.1.0
+      vscode-languageserver-textdocument: 1.0.14
+      yaml: 2.9.0
+      yargs: 18.1.0
+    transitivePeerDependencies:
+      - '@types/node'
+
+  '@typespec/compiler@https://pkg.pr.new/@typespec/compiler@e7a1c615059a4eb065838d051c04111040ea9178(@types/node@24.13.1)':
+    dependencies:
+      '@babel/code-frame': 8.0.6
+      '@inquirer/checkbox': 5.2.5(@types/node@24.13.1)
+      '@inquirer/confirm': 6.3.2(@types/node@24.13.1)
+      '@inquirer/input': 5.1.6(@types/node@24.13.1)
+      '@inquirer/select': 5.2.5(@types/node@24.13.1)
       ajv: 8.20.0
       change-case: 5.4.4
       env-paths: 4.0.0
