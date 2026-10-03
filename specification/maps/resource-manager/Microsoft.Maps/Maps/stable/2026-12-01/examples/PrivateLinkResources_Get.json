@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "accountName": "myMapsAccount",
+    "api-version": "2026-12-01",
+    "privateLinkResourceName": "mapsAccount",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "mapsAccount",
+        "type": "Microsoft.Maps/accounts/privateLinkResources",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Maps/accounts/myMapsAccount/privateLinkResources/mapsAccount",
+        "properties": {
+          "groupId": "mapsAccount",
+          "requiredMembers": [
+            "myMapsAccount"
+          ],
+          "requiredZoneNames": [
+            "privatelink.account.maps.azure.com"
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "PrivateLinkResources_Get",
+  "title": "Get a private link resource."
+}

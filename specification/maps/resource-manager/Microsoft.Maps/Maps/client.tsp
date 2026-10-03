@@ -44,11 +44,6 @@ using Azure.ClientGenerator.Core;
 @@clientName(Microsoft.Maps.Kind, "MapsAccountKind", "csharp");
 @@clientName(Microsoft.Maps.Name, "MapsSkuName", "csharp");
 @@clientName(Microsoft.Maps.Sku, "MapsSku", "csharp");
-@@clientName(
-  Microsoft.Maps.InfrastructureEncryption,
-  "MapsInfrastructureEncryption",
-  "csharp"
-);
 @@clientName(Microsoft.Maps.SigningKey, "MapsSigningKey", "csharp");
 @@clientName(Microsoft.Maps.KeyType, "MapsKeyType", "csharp");
 @@clientName(Microsoft.Maps.LinkedResource, "MapsLinkedResource", "csharp");

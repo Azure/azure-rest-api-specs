@@ -1,13 +1,12 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Maps;
 /**
@@ -25,13 +24,13 @@ model MapsAccount
   /**
    * The SKU of this account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'sku' on the resource envelope for backward compatibility"
   sku: Sku;
 
   /**
    * Get or Set Kind property.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Existing API defines 'kind' on the resource envelope for backward compatibility"
   kind?: Kind;
 
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
@@ -47,21 +46,74 @@ interface Accounts {
   /**
    * Create or update a Maps Account. A Maps Account holds the keys which allow access to the Maps REST APIs.
    */
-  createOrUpdate is ArmResourceCreateOrReplaceSync<MapsAccount>;
+  @removed(Versions.v2026_12_01)
+  @renamedFrom(Versions.v2026_12_01, "createOrUpdate")
+  @sharedRoute
+  createOrUpdateV1 is ArmResourceCreateOrReplaceSync<MapsAccount>;
+
+  /**
+   * Create or update a Maps Account. A Maps Account holds the keys which allow access to the Maps REST APIs.
+   */
+  @added(Versions.v2026_12_01)
+  @sharedRoute
+  @Azure.Core.useFinalStateVia("location")
+  createOrUpdate is ArmResourceCreateOrReplaceAsync<
+    MapsAccount,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = MapsAccount> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
 
   /**
    * Updates a Maps Account. Only a subset of the parameters may be updated after creation, such as Sku, Tags, Properties.
    */
-  @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  @removed(Versions.v2026_12_01)
+  @renamedFrom(Versions.v2026_12_01, "update")
+  @sharedRoute
+  updateV1 is ArmCustomPatchSync<
     MapsAccount,
-    PatchModel = MapsAccountUpdateParameters
+    PatchModel = MapsAccountUpdateParametersV1
+  >;
+
+  /**
+   * Updates a Maps Account. Only a subset of the parameters may be updated after creation, such as Sku, Tags, Properties.
+   */
+  @added(Versions.v2026_12_01)
+  @sharedRoute
+  @Azure.Core.useFinalStateVia("location")
+  update is ArmCustomPatchAsync<
+    MapsAccount,
+    PatchModel = MapsAccountUpdateParameters,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = MapsAccount> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Delete a Maps Account.
    */
-  delete is ArmResourceDeleteSync<MapsAccount>;
+  @removed(Versions.v2026_12_01)
+  @renamedFrom(Versions.v2026_12_01, "delete")
+  @sharedRoute
+  deleteV1 is ArmResourceDeleteSync<MapsAccount>;
+
+  /**
+   * Delete a Maps Account.
+   */
+  @added(Versions.v2026_12_01)
+  @sharedRoute
+  @Azure.Core.useFinalStateVia("location")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "The RP returns 200 when deletion completes synchronously, 202 when deletion continues asynchronously, and 204 when the resource does not exist."
+  delete is ArmResourceDeleteWithoutOkAsync<
+    MapsAccount,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = void> &
+      Azure.Core.Foundations.RetryAfterHeader,
+    Response =
+      | ArmDeletedResponse
+      | ArmDeleteAcceptedLroResponse<
+          ArmCombinedLroHeaders<FinalResult = void> &
+            Azure.Core.Foundations.RetryAfterHeader
+        >
+      | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Get all Maps Accounts in a Resource Group
@@ -116,8 +168,16 @@ interface Accounts {
 @@doc(MapsAccount.name, "The name of the Maps Account.");
 @@doc(MapsAccount.properties, "The map account properties.");
 @@doc(
+  Accounts.createOrUpdateV1::parameters.resource,
+  "The new or updated parameters for the Maps Account."
+);
+@@doc(
   Accounts.createOrUpdate::parameters.resource,
   "The new or updated parameters for the Maps Account."
+);
+@@doc(
+  Accounts.updateV1::parameters.properties,
+  "The updated parameters for the Maps Account."
 );
 @@doc(
   Accounts.update::parameters.properties,
