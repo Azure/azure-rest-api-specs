@@ -1,43 +1,41 @@
 import { ConsoleLogger, defaultLogger } from "@azure-tools/specs-shared/logger";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { FormatRule } from "../src/rules/format.ts";
-import { gitDiffTopSpecFolder, runNodeBin } from "../src/utils.ts";
+import { formatTypeSpec } from "../src/typespec-compiler.ts";
+import { gitDiffTopSpecFolder } from "../src/utils.ts";
 import { diagnosticDetails } from "./diagnostics.ts";
 
 const mockFolder = "specification/foo/Foo";
+vi.mock("../src/typespec-compiler.ts", () => ({
+  formatTypeSpec: vi.fn(),
+}));
 vi.mock("../src/utils.ts", () => ({
-  runNodeBin: vi.fn(),
   gitDiffTopSpecFolder: vi.fn(),
 }));
 
 beforeEach(() => {
   vi.resetAllMocks();
-  vi.mocked(runNodeBin).mockResolvedValue([null, "", ""]);
+  vi.mocked(formatTypeSpec).mockResolvedValue([null, "", ""]);
   vi.mocked(gitDiffTopSpecFolder).mockResolvedValue({ success: true, files: [] });
 });
 
 describe("FormatRule", () => {
-  it("formats TypeSpec and tspconfig.yaml in one command and checks files afterward", async () => {
-    vi.mocked(runNodeBin).mockResolvedValueOnce([null, "", "- Formatting\n\u2714 5 unchanged\n"]);
+  it("formats TypeSpec and tspconfig.yaml in one pass and checks files afterward", async () => {
     const logger = new ConsoleLogger(true);
-    const debug = vi.spyOn(logger, "debug").mockImplementation(() => {});
     const result = await new FormatRule().execute(mockFolder, logger);
-    expect(runNodeBin).toHaveBeenCalledExactlyOnceWith(
-      "@typespec/compiler",
-      ["tsp", "format", "../**/*.tsp", "tspconfig.yaml"],
-      logger,
-      mockFolder,
-    );
+    expect(formatTypeSpec).toHaveBeenCalledExactlyOnceWith(mockFolder, [
+      "../**/*.tsp",
+      "tspconfig.yaml",
+    ]);
     expect(gitDiffTopSpecFolder).toHaveBeenCalledExactlyOnceWith(mockFolder, logger);
     expect(result).toEqual({ success: true });
-    expect(debug).toHaveBeenCalledWith("- Formatting\n\u2714 5 unchanged");
   });
 
-  it("preserves native formatter errors from both streams without repeating Error.message", async () => {
-    vi.mocked(runNodeBin).mockResolvedValueOnce([
-      new Error("Command failed: tsp\nnative stderr"),
-      "native stdout\n",
-      "native stderr\n",
+  it("preserves native formatter diagnostics without repeating Error.message", async () => {
+    vi.mocked(formatTypeSpec).mockResolvedValueOnce([
+      new Error("TypeSpec formatting failed"),
+      "native diagnostic\n",
+      "",
     ]);
     const result = await new FormatRule().execute(mockFolder, defaultLogger);
     expect(result.success).toBe(false);
@@ -47,8 +45,8 @@ describe("FormatRule", () => {
         code: "format",
       },
     ]);
-    expect(diagnosticDetails(result.diagnostics?.[0])).toBe("native stdout\nnative stderr");
-    expect(runNodeBin).toHaveBeenCalledTimes(1);
+    expect(diagnosticDetails(result.diagnostics?.[0])).toBe("native diagnostic");
+    expect(formatTypeSpec).toHaveBeenCalledTimes(1);
     expect(gitDiffTopSpecFolder).not.toHaveBeenCalled();
   });
 
@@ -78,7 +76,7 @@ describe("FormatRule", () => {
   });
 
   it("preserves unexpected successful output even when formatting also changes files", async () => {
-    vi.mocked(runNodeBin).mockResolvedValueOnce([null, "Formatter warning\n", ""]);
+    vi.mocked(formatTypeSpec).mockResolvedValueOnce([null, "Formatter warning\n", ""]);
     vi.mocked(gitDiffTopSpecFolder).mockResolvedValue({
       success: false,
       files: ["main.tsp"],
