@@ -18,6 +18,9 @@
       "name": "Agent Telephony"
     },
     {
+      "name": "CommandJob"
+    },
+    {
       "name": "Responses Root",
       "description": "Responses"
     },
@@ -31086,6 +31089,562 @@
           "description": "The MCP request body."
         }
       }
+    },
+    "/training_jobs": {
+      "get": {
+        "operationId": "Jobs_list",
+        "description": "List Jobs.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "jobType",
+            "in": "query",
+            "required": false,
+            "description": "Filter by job type (e.g. 'Command').",
+            "schema": {
+              "$ref": "#/components/schemas/JobType"
+            },
+            "explode": false
+          },
+          {
+            "name": "tag",
+            "in": "query",
+            "required": false,
+            "description": "Filter jobs by tag in the format 'key=value' (e.g., 'framework=pytorch').",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "listViewType",
+            "in": "query",
+            "required": false,
+            "description": "Specifies which view type to apply when listing jobs.",
+            "schema": {
+              "$ref": "#/components/schemas/ListViewType"
+            },
+            "explode": false
+          },
+          {
+            "name": "properties",
+            "in": "query",
+            "required": false,
+            "description": "Comma-separated user property names and optionally values. Example: prop1,prop2=value2.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PagedJob"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "CommandJob"
+        ]
+      }
+    },
+    "/training_jobs/{name}": {
+      "get": {
+        "operationId": "Jobs_get",
+        "description": "Get a Job by name.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the Job. This is case-sensitive.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "CommandJob"
+        ]
+      },
+      "put": {
+        "operationId": "Jobs_createOrUpdate",
+        "description": "Create and execute a Job. For update case, the Tags in the definition passed in will replace Tags in the existing job.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the Job. This is case-sensitive.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Job"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "CommandJob"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Job"
+              }
+            }
+          },
+          "description": "The job to create or update."
+        }
+      },
+      "delete": {
+        "operationId": "Jobs_beginDelete",
+        "description": "Delete a Job by name. Returns 202 Accepted with a Location header to poll for completion, or 204 if the job does not exist.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the Job. This is case-sensitive.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Response returned when a job delete operation is accepted asynchronously.",
+            "headers": {
+              "Location": {
+                "required": true,
+                "description": "URL to poll for the status of the delete operation.",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Retry-After": {
+                "required": false,
+                "description": "Suggested delay in seconds before polling.",
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "CommandJob"
+        ]
+      }
+    },
+    "/training_jobs/{name}/artifacts": {
+      "get": {
+        "operationId": "Jobs_listArtifacts",
+        "description": "List artifact descriptors for a job, including its log files, without returning download credentials. Logs are ordinary artifacts under the `azureml-logs/`, `user_logs/` and `system_logs/` directories. Follow `nextLink` unchanged to retrieve subsequent pages.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the Job.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": false,
+            "description": "Optional directory path relative to the job's artifact container. A non-empty path is treated as a directory prefix with a trailing slash; for example, `outputs` selects artifacts under `outputs/`, not `outputs-extra/`.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "required": false,
+            "description": "An opaque continuation token supplied in the preceding response's `nextLink`. Prefer following `nextLink` unchanged rather than constructing this parameter.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "maxpagesize",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of artifacts in one page, from 1 to 500. The service may return fewer items. Supported only for jobs routed to the Foundry Training Job backend, which uses 100 when omitted. Omit this parameter for legacy Run History jobs; specifying it on that route is rejected.",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "minimum": 1,
+              "maximum": 500
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtifactList"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "CommandJob"
+        ]
+      }
+    },
+    "/training_jobs/{name}/artifacts/contentinfo": {
+      "get": {
+        "operationId": "Jobs_getArtifactContentInformation",
+        "description": "Get content access information for one artifact identified by its exact path. Returns a download URI and the byte length when available; this operation does not list a directory or return a page of artifacts.",
+        "parameters": [
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "description": "The API version to use for this operation.",
+            "schema": {
+              "type": "string"
+            },
+            "explode": false
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the Job.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "description": "The required, case-sensitive path of one artifact relative to the job's artifact container, such as `user_logs/std_log.txt`. A directory prefix is not accepted.",
+            "schema": {
+              "type": "string",
+              "minLength": 1
+            },
+            "explode": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArtifactContentInformation"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "CommandJob"
+        ]
+      }
+    },
+    "/training_jobs/{name}/cancel": {
+      "post": {
+        "operationId": "Jobs_beginCancel",
+        "description": "Cancel a Job by name. Returns 200 if cancelled immediately, or 202 Accepted with a Location header to poll for completion.",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "required": true,
+            "description": "The name of the Job. This is case-sensitive.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Foundry-Features",
+            "in": "header",
+            "required": true,
+            "description": "A feature flag opt-in required when using preview operations or modifying persisted preview resources.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "Jobs=V1Preview"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "202": {
+            "description": "Response returned when a job cancel operation is accepted asynchronously.",
+            "headers": {
+              "Location": {
+                "required": true,
+                "description": "URL to poll for the status of the cancel operation.",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Retry-After": {
+                "required": false,
+                "description": "Suggested delay in seconds before polling.",
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "headers": {
+              "x-ms-error-code": {
+                "required": false,
+                "description": "String error code indicating what went wrong.",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Azure.Core.Foundations.ErrorResponse"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "CommandJob"
+        ]
+      }
     }
   },
   "security": [
@@ -34051,6 +34610,27 @@
         ],
         "description": "Agentic identity credential definition"
       },
+      "AllNodes": {
+        "type": "object",
+        "required": [
+          "nodesValueType"
+        ],
+        "properties": {
+          "nodesValueType": {
+            "type": "string",
+            "enum": [
+              "All"
+            ],
+            "description": "Type of the Nodes value."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/NodeCollection"
+          }
+        ],
+        "description": "All nodes means the service will be running on all of the nodes of the job."
+      },
       "ApiErrorResponse": {
         "type": "object",
         "required": [
@@ -34089,6 +34669,83 @@
           }
         ],
         "description": "API Key Credential definition"
+      },
+      "Artifact": {
+        "type": "object",
+        "required": [
+          "path"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "The case-sensitive artifact path relative to the job's artifact container."
+          },
+          "contentLength": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int64"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The artifact content length in bytes, when available. An omitted or null value means the length is unknown; zero identifies an empty file."
+          }
+        },
+        "description": "A job artifact descriptor. Listing artifacts does not return download credentials."
+      },
+      "ArtifactContentInformation": {
+        "type": "object",
+        "required": [
+          "path",
+          "contentUri"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "The case-sensitive artifact path relative to the job's artifact container."
+          },
+          "contentUri": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URI used to download the artifact content. Obtain a new URI from this operation when the current URI expires; storage network restrictions still apply."
+          },
+          "contentLength": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "format": "int64"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "The artifact content length in bytes, when available. An omitted or null value means the length is unknown; zero identifies an empty file."
+          }
+        },
+        "description": "Content access information for one job artifact."
+      },
+      "ArtifactList": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Artifact"
+            },
+            "description": "The artifacts in the page."
+          },
+          "nextLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "The URL to the next page, if more artifacts are available. Follow this URL unchanged rather than constructing a continuation request."
+          }
+        },
+        "description": "A page of artifacts."
       },
       "ArtifactProfile": {
         "type": "object",
@@ -34131,6 +34788,23 @@
       "AssetId": {
         "type": "string",
         "description": "Identifier of a saved asset."
+      },
+      "AssetTypes": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "uri_file",
+              "uri_folder",
+              "safetensors_model",
+              "literal"
+            ]
+          }
+        ],
+        "description": "Type of job input/output asset."
       },
       "AttackStrategy": {
         "anyOf": [
@@ -36312,6 +36986,164 @@
         ],
         "description": "A code interpreter tool stored in a toolbox."
       },
+      "CommandJob": {
+        "type": "object",
+        "required": [
+          "jobType",
+          "command",
+          "environmentImageReference",
+          "computeId"
+        ],
+        "properties": {
+          "jobType": {
+            "type": "string",
+            "enum": [
+              "Command"
+            ],
+            "description": "Job type."
+          },
+          "command": {
+            "type": "string",
+            "description": "The command to execute on startup of the job."
+          },
+          "environmentImageReference": {
+            "type": "string",
+            "description": "ACR path of environment."
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Display name of job."
+          },
+          "description": {
+            "type": "string",
+            "description": "The asset description text."
+          },
+          "experimentName": {
+            "type": "string",
+            "description": "The name of the experiment the job belongs to. If not set, the job is placed in the \"Default\" experiment."
+          },
+          "tags": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "type": "string"
+            },
+            "description": "Tag dictionary. Tags can be added, removed, and updated."
+          },
+          "properties": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "type": "string"
+            },
+            "description": "The asset property dictionary."
+          },
+          "codeId": {
+            "type": "string",
+            "description": "Code asset reference."
+          },
+          "computeId": {
+            "type": "string",
+            "description": "Compute resource ID."
+          },
+          "inputs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/Input"
+            },
+            "description": "Mapping of input data bindings used in the job."
+          },
+          "outputs": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/Output"
+            },
+            "description": "Mapping of output data bindings used in the job."
+          },
+          "environmentVariables": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "type": "string"
+            },
+            "description": "Environment variables included in the job."
+          },
+          "resources": {
+            "$ref": "#/components/schemas/JobResourceConfiguration",
+            "description": "Compute Resource configuration for the job."
+          },
+          "distribution": {
+            "$ref": "#/components/schemas/DistributionConfiguration",
+            "description": "Distribution configuration of the job."
+          },
+          "limits": {
+            "$ref": "#/components/schemas/CommandJobLimits",
+            "description": "Command Job limit."
+          },
+          "services": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "$ref": "#/components/schemas/JobService"
+            },
+            "description": "List of job services."
+          },
+          "queueSettings": {
+            "$ref": "#/components/schemas/QueueSettings",
+            "description": "Queue settings for the job."
+          },
+          "priority": {
+            "$ref": "#/components/schemas/JobPriority",
+            "description": "User-visible scheduling priority for the job."
+          },
+          "userAssignedIdentityId": {
+            "type": "string",
+            "description": "user-assigned managed identity"
+          },
+          "capacityUnitCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of capacity units to allocate for the job. When set, the service resolves the VM SKU from the compute target and calculates the required node count automatically. Virtual cluster targets must also specify `resources.instanceType`. Valid values are 1, 2, 4, 8, or any multiple of 8 for values greater than 8. `gpuCount` takes precedence over this property when both are supplied."
+          },
+          "gpuCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of GPUs to allocate for the job. Takes precedence over `capacityUnitCount` when both are supplied, and is used to resolve a partial (sub-node) VM SKU for GPU computes. Only applies to GPU computes; CPU computes always resolve to a full-node SKU and ignore this value. Valid values are 1, 2, 4, 8, or any multiple of 8 for values greater than 8."
+          },
+          "isArchived": {
+            "type": "boolean",
+            "description": "Is the asset archived?"
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of the job.",
+            "readOnly": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/JobProperties"
+          }
+        ],
+        "description": "Properties of a Command Job."
+      },
+      "CommandJobLimits": {
+        "type": "object",
+        "required": [
+          "jobLimitsType"
+        ],
+        "properties": {
+          "jobLimitsType": {
+            "type": "string",
+            "enum": [
+              "Command"
+            ],
+            "description": "JobLimit type."
+          },
+          "timeout": {
+            "type": "string",
+            "format": "duration",
+            "description": "The max run duration, after which the job will be cancelled."
+          }
+        },
+        "description": "Command Job limit class."
+      },
       "CompletionMessageToolCallChunk": {
         "type": "object",
         "required": [
@@ -38403,6 +39235,28 @@
             "Routines=V2Preview"
           ]
         }
+      },
+      "DistributionConfiguration": {
+        "type": "object",
+        "required": [
+          "distributionType"
+        ],
+        "properties": {
+          "distributionType": {
+            "type": "string",
+            "description": "Specifies the type of distribution framework."
+          }
+        },
+        "discriminator": {
+          "propertyName": "distributionType",
+          "mapping": {
+            "PyTorch": "#/components/schemas/PyTorchDistribution",
+            "Mpi": "#/components/schemas/MpiDistribution",
+            "TensorFlow": "#/components/schemas/TensorFlowDistribution",
+            "Ray": "#/components/schemas/RayDistribution"
+          }
+        },
+        "description": "Distribution configuration of the job."
       },
       "EndpointBasedEvaluatorDefinition": {
         "type": "object",
@@ -41826,6 +42680,49 @@
         },
         "description": "Run-wide estimated inference cost for the evaluation target.\n\nThe estimate is derived from reported token counts and list prices. It excludes evaluator\nand runtime usage and does not account for negotiated pricing, commitments, or discounts."
       },
+      "Input": {
+        "type": "object",
+        "required": [
+          "jobInputType"
+        ],
+        "properties": {
+          "jobInputType": {
+            "$ref": "#/components/schemas/AssetTypes",
+            "description": "Specifies the type of job input."
+          },
+          "uri": {
+            "type": "string",
+            "description": "Input Asset URI."
+          },
+          "mode": {
+            "$ref": "#/components/schemas/InputOutputModes",
+            "description": "Input Asset Delivery Mode."
+          },
+          "value": {
+            "type": "string",
+            "description": "Literal value for literal-type inputs."
+          }
+        },
+        "description": "Job input definition."
+      },
+      "InputOutputModes": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "ReadOnlyMount",
+              "ReadWriteMount",
+              "Download",
+              "Direct",
+              "Upload"
+            ]
+          }
+        ],
+        "description": "Enum to determine the input/output data delivery mode."
+      },
       "Insight": {
         "type": "object",
         "required": [
@@ -42356,6 +43253,143 @@
         ],
         "description": "Identifies how evaluation input items are prepared before evaluation."
       },
+      "Job": {
+        "type": "object",
+        "required": [
+          "name",
+          "properties"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the Job. This is case-sensitive.",
+            "readOnly": true
+          },
+          "id": {
+            "type": "string",
+            "description": "The resource ID.",
+            "readOnly": true
+          },
+          "type": {
+            "type": "string",
+            "description": "The resource type.",
+            "readOnly": true
+          },
+          "properties": {
+            "$ref": "#/components/schemas/JobProperties",
+            "description": "Properties of the job."
+          },
+          "systemData": {
+            "$ref": "#/components/schemas/SystemData",
+            "description": "Metadata pertaining to creation and last modification of the resource.",
+            "readOnly": true
+          }
+        },
+        "description": "Job resource."
+      },
+      "JobPriority": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Low",
+              "Mid",
+              "High"
+            ]
+          }
+        ],
+        "description": "User-visible scheduling priority for a job."
+      },
+      "JobProperties": {
+        "type": "object",
+        "required": [
+          "jobType"
+        ],
+        "properties": {
+          "jobType": {
+            "type": "string",
+            "description": "Job type."
+          }
+        },
+        "discriminator": {
+          "propertyName": "jobType",
+          "mapping": {
+            "Command": "#/components/schemas/CommandJob"
+          }
+        },
+        "description": "Base properties of a Job."
+      },
+      "JobResourceConfiguration": {
+        "type": "object",
+        "properties": {
+          "instanceCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Optional number of instances or nodes used by the compute target."
+          },
+          "instanceType": {
+            "type": "string",
+            "description": "Optional type of VM used as supported by the compute target."
+          },
+          "properties": {
+            "type": "object",
+            "unevaluatedProperties": {},
+            "description": "Additional properties bag."
+          },
+          "shmSize": {
+            "type": "string",
+            "description": "Size of the docker container's shared memory block."
+          },
+          "dockerArgs": {
+            "type": "string",
+            "description": "Extra arguments to pass to the Docker run command."
+          }
+        },
+        "description": "Compute Resource configuration for the job."
+      },
+      "JobService": {
+        "type": "object",
+        "properties": {
+          "jobServiceType": {
+            "type": "string",
+            "description": "Endpoint type."
+          },
+          "port": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Port for endpoint."
+          },
+          "endpoint": {
+            "type": "string",
+            "description": "Url for endpoint."
+          },
+          "properties": {
+            "type": "object",
+            "unevaluatedProperties": {
+              "type": "string"
+            },
+            "description": "Additional properties to set on the endpoint."
+          },
+          "nodes": {
+            "$ref": "#/components/schemas/AllNodes",
+            "description": "Nodes that user would like to start the service on."
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of endpoint.",
+            "readOnly": true
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "Any error in the service.",
+            "readOnly": true
+          }
+        },
+        "description": "Job endpoint definition."
+      },
       "JobStatus": {
         "anyOf": [
           {
@@ -42373,6 +43407,20 @@
           }
         ],
         "description": "Extensible status values shared by Foundry jobs."
+      },
+      "JobType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "Command"
+            ]
+          }
+        ],
+        "description": "Type of a job."
       },
       "LatencySummary": {
         "type": "object",
@@ -42402,6 +43450,22 @@
           }
         },
         "description": "Run-wide end-to-end latency percentiles for the evaluation target."
+      },
+      "ListViewType": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "string",
+            "enum": [
+              "ActiveOnly",
+              "ArchivedOnly",
+              "All"
+            ]
+          }
+        ],
+        "description": "Specifies which jobs to include in a list result based on their lifecycle state."
       },
       "LoraConfig": {
         "type": "object",
@@ -44056,6 +45120,32 @@
           ]
         }
       },
+      "MpiDistribution": {
+        "type": "object",
+        "required": [
+          "distributionType"
+        ],
+        "properties": {
+          "distributionType": {
+            "type": "string",
+            "enum": [
+              "Mpi"
+            ],
+            "description": "Specifies the type of distribution framework."
+          },
+          "processCountPerNode": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of processes per MPI node."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DistributionConfiguration"
+          }
+        ],
+        "description": "MPI distribution configuration."
+      },
       "NoAuthenticationCredentials": {
         "type": "object",
         "required": [
@@ -44077,6 +45167,25 @@
           }
         ],
         "description": "Credentials that do not require authentication"
+      },
+      "NodeCollection": {
+        "type": "object",
+        "required": [
+          "nodesValueType"
+        ],
+        "properties": {
+          "nodesValueType": {
+            "type": "string",
+            "description": "Type of the Nodes value."
+          }
+        },
+        "discriminator": {
+          "propertyName": "nodesValueType",
+          "mapping": {
+            "All": "#/components/schemas/AllNodes"
+          }
+        },
+        "description": "Nodes that user would like to start the service on."
       },
       "OAuthConsentRequestOutputItem": {
         "type": "object",
@@ -83413,6 +84522,43 @@
         ],
         "description": "An OTLP (OpenTelemetry Protocol) telemetry export endpoint."
       },
+      "Output": {
+        "type": "object",
+        "required": [
+          "jobOutputType"
+        ],
+        "properties": {
+          "jobOutputType": {
+            "$ref": "#/components/schemas/AssetTypes",
+            "description": "Specifies the type of job output."
+          },
+          "mode": {
+            "$ref": "#/components/schemas/InputOutputModes",
+            "description": "Output Asset Delivery Mode."
+          },
+          "assetName": {
+            "type": "string",
+            "description": "Name of the output data asset to register."
+          },
+          "assetVersion": {
+            "type": "string",
+            "description": "Version of the output data asset to register."
+          },
+          "uri": {
+            "type": "string",
+            "description": "Output Asset URI."
+          },
+          "baseModelId": {
+            "type": "string",
+            "description": "Base model ID."
+          },
+          "description": {
+            "type": "string",
+            "description": "Description for the output."
+          }
+        },
+        "description": "Job output definition."
+      },
       "PSTNTelephonyTransferDestination": {
         "type": "object",
         "required": [
@@ -83619,6 +84765,27 @@
           }
         },
         "description": "Paged collection of Insight items"
+      },
+      "PagedJob": {
+        "type": "object",
+        "required": [
+          "value"
+        ],
+        "properties": {
+          "value": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Job"
+            },
+            "description": "The Job items on this page"
+          },
+          "nextLink": {
+            "type": "string",
+            "format": "uri",
+            "description": "The link to the next page of items"
+          }
+        },
+        "description": "Paged collection of Job items"
       },
       "PagedModelVersion": {
         "type": "object",
@@ -84126,6 +85293,42 @@
         ],
         "description": "The Microsoft Agent Certification review status of the Microsoft 365 store title published for an agent."
       },
+      "PyTorchDistribution": {
+        "type": "object",
+        "required": [
+          "distributionType"
+        ],
+        "properties": {
+          "distributionType": {
+            "type": "string",
+            "enum": [
+              "PyTorch"
+            ],
+            "description": "Specifies the type of distribution framework."
+          },
+          "processCountPerInstance": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of processes per node."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DistributionConfiguration"
+          }
+        ],
+        "description": "PyTorch distribution configuration."
+      },
+      "QueueSettings": {
+        "type": "object",
+        "properties": {
+          "jobTier": {
+            "type": "string",
+            "description": "Controls the compute job tier."
+          }
+        },
+        "description": "Queue settings for the job."
+      },
       "RaiConfig": {
         "type": "object",
         "required": [
@@ -84235,6 +85438,53 @@
           }
         },
         "description": "An SSE event-type to text-field selector for streaming invocation output."
+      },
+      "RayDistribution": {
+        "type": "object",
+        "required": [
+          "distributionType"
+        ],
+        "properties": {
+          "distributionType": {
+            "type": "string",
+            "enum": [
+              "Ray"
+            ],
+            "description": "Specifies the type of distribution framework."
+          },
+          "port": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The port of the head Ray process."
+          },
+          "address": {
+            "type": "string",
+            "description": "The address of the Ray head node."
+          },
+          "includeDashboard": {
+            "type": "boolean",
+            "description": "Whether to start the Ray dashboard GUI."
+          },
+          "dashboardPort": {
+            "type": "integer",
+            "format": "int32",
+            "description": "The port to bind the dashboard server to."
+          },
+          "headNodeAdditionalArgs": {
+            "type": "string",
+            "description": "Additional arguments passed to ray start on the head node."
+          },
+          "workerNodeAdditionalArgs": {
+            "type": "string",
+            "description": "Additional arguments passed to ray start on worker nodes."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DistributionConfiguration"
+          }
+        ],
+        "description": "Ray distribution configuration."
       },
       "RecurrenceSchedule": {
         "type": "object",
@@ -86512,6 +87762,44 @@
         ],
         "description": "Represents the parameters for synthetic data generation item generation."
       },
+      "SystemData": {
+        "type": "object",
+        "properties": {
+          "createdBy": {
+            "type": "string",
+            "description": "The identity that created the resource.",
+            "readOnly": true
+          },
+          "createdByType": {
+            "type": "string",
+            "description": "The type of identity that created the resource.",
+            "readOnly": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The timestamp of resource creation (UTC).",
+            "readOnly": true
+          },
+          "lastModifiedBy": {
+            "type": "string",
+            "description": "The identity that last modified the resource.",
+            "readOnly": true
+          },
+          "lastModifiedByType": {
+            "type": "string",
+            "description": "The type of identity that last modified the resource.",
+            "readOnly": true
+          },
+          "lastModifiedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The timestamp of resource last modification (UTC).",
+            "readOnly": true
+          }
+        },
+        "description": "Metadata pertaining to creation and last modification of the resource."
+      },
       "TargetCompletionEvalRunDataSource": {
         "type": "object",
         "required": [
@@ -88286,6 +89574,37 @@
             "VoiceAgents=V1Preview"
           ]
         }
+      },
+      "TensorFlowDistribution": {
+        "type": "object",
+        "required": [
+          "distributionType"
+        ],
+        "properties": {
+          "distributionType": {
+            "type": "string",
+            "enum": [
+              "TensorFlow"
+            ],
+            "description": "Specifies the type of distribution framework."
+          },
+          "workerCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of workers."
+          },
+          "parameterServerCount": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Number of parameter server tasks."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/DistributionConfiguration"
+          }
+        ],
+        "description": "TensorFlow distribution configuration."
       },
       "TestingCriterionAzureAIEvaluator": {
         "type": "object",

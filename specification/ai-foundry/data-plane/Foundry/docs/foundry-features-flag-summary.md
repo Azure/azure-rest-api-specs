@@ -91,5 +91,12 @@ in order to successfully complete operations using these routes.
 | Agent Insight Monitors | List Insights | GET | `/agent_insight_monitors/{monitor_id}/insights` | Required: `AgentInsights=V1Preview` |
 | Agent Insight Monitors | Get Insight | GET | `/agent_insight_monitors/{monitor_id}/insights/{insight_id}` | Required: `AgentInsights=V1Preview` |
 | Agent Insight Monitors | Update Insight | PATCH | `/agent_insight_monitors/{monitor_id}/insights/{insight_id}` | Required: `AgentInsights=V1Preview` |
+| Training Jobs | List | GET | `/training_jobs` | Required: `Jobs=V1Preview` |
+| Training Jobs | CreateOrUpdate | PUT | `/training_jobs/{name}` | Required: `Jobs=V1Preview` |
+| Training Jobs | Get | GET | `/training_jobs/{name}` | Required: `Jobs=V1Preview` |
+| Training Jobs | Delete | DELETE | `/training_jobs/{name}` | Required: `Jobs=V1Preview` |
+| Training Jobs | Cancel | POST | `/training_jobs/{name}/cancel` | Required: `Jobs=V1Preview` |
+| Training Jobs | List Artifacts | GET | `/training_jobs/{name}/artifacts` | Required: `Jobs=V1Preview` |
+| Training Jobs | Get Artifact Content Information | GET | `/training_jobs/{name}/artifacts/contentinfo` | Required: `Jobs=V1Preview` |
 
 Note that only v1 operations are included in the above table. If an operation (or interface) is decorated with `@removed(Versions.v1)` the are not included here.
