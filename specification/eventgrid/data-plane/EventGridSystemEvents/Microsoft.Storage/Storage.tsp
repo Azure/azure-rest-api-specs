@@ -1,3 +1,4 @@
+import "./LifecyclePolicyProgressExample.tsp";
 import "@typespec/versioning";
 using TypeSpec.Versioning;
 /** Describes the schema of the Azure Storage events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent. */
@@ -203,6 +204,22 @@ namespace Microsoft.EventGrid.SystemEvents {
     tierToColdSummary: StorageLifecyclePolicyActionSummaryDetail;
   }
 
+  /** Schema of the Data property of an EventGridEvent for a Microsoft.Storage.LifecyclePolicyProgress event. */
+  @example(MicrosoftStorageLifecyclePolicyProgressExample)
+  model StorageLifecyclePolicyProgressEventData {
+    /** The earliest scan start time reported by the lifecycle policy tasks, formatted as a service-defined timestamp string. */
+    scheduleTime: string;
+
+    /** The current status of the lifecycle policy job. */
+    jobStatus: StorageLifecyclePolicyProgressStatus;
+
+    /** The reason why the lifecycle policy job was interrupted. */
+    interruptedCause?: StorageLifecyclePolicyProgressInterruptedCause;
+
+    /** The cumulative number of successful lifecycle policy action operations. */
+    objectProcessed?: int64;
+  }
+
   /** Execution statistics of a specific policy action in a Blob Management cycle. */
   model StorageLifecyclePolicyActionSummaryDetail {
     /** Total number of objects to be acted on by this action. */
@@ -383,6 +400,34 @@ namespace Microsoft.EventGrid.SystemEvents {
 
     /** Incomplete */
     "Incomplete",
+
+    string,
+  }
+
+  /** The status of a lifecycle policy progress event. */
+  union StorageLifecyclePolicyProgressStatus {
+    /** The lifecycle policy job started. */
+    "Started",
+
+    /** The lifecycle policy job is in progress. */
+    "InProgress",
+
+    /** The lifecycle policy job was interrupted. */
+    "Interrupted",
+
+    /** The lifecycle policy job completed. */
+    "Completed",
+
+    string,
+  }
+
+  /** The reason why a lifecycle policy job was interrupted. */
+  union StorageLifecyclePolicyProgressInterruptedCause {
+    /** The job grace period expired. */
+    "Grace time expired",
+
+    /** The lifecycle policy rule was updated. */
+    "Rule Updated",
 
     string,
   }
