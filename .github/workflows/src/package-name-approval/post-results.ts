@@ -1,3 +1,4 @@
+import { renderMarkdownDoc } from "@azure-tools/specs-shared/markdown";
 import { unlink, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { z } from "zod";
@@ -190,7 +191,7 @@ export async function resolveResetApprovers(
   return [...new Set(latestApproverByLabel.values())];
 }
 
-function buildCommentBody({
+export function buildCommentBody({
   approversConfig,
   namespacesFound,
   namespaces,
@@ -216,9 +217,10 @@ function buildCommentBody({
   allLanguages: string[];
 }) {
   const planeType = isMgmt ? "Management Plane" : "Data Plane";
-  let body = `## Package Name Review Required\n\n**Plane:** ${planeType}\n\n`;
-  body += `| Language | Package Name | Namespace | Format | Status | Approvers |\n`;
-  body += `|----------|--------------|-----------|--------|--------|----------|\n`;
+  const reviewTable = [
+    "| Language | Package Name | Namespace | Format | Status | Approvers |",
+    "|----------|--------------|-----------|--------|--------|----------|",
+  ];
 
   const formatMap: Map<string, z.infer<typeof FormatValidationResultSchema>> = new Map();
   for (const r of formatResults) {
@@ -265,29 +267,40 @@ function buildCommentBody({
     const approversCell = getApprovers(approversConfig, isMgmt, language);
     const approversText =
       approversCell === "unprotected" ? "_anyone_" : approversCell.map((a) => `@${a}`).join(", ");
-    body += `| ${language} | ${displayName} | ${displayNs} | ${formatStatus} | ${status} | ${approversText} |\n`;
+    reviewTable.push(
+      `| ${language} | ${displayName} | ${displayNs} | ${formatStatus} | ${status} | ${approversText} |`,
+    );
   }
 
   const formatErrors = formatResults.filter((result) => !result.valid);
-  if (formatErrors.length > 0) {
-    body += `\n> **⚠️ Format issues detected:**\n`;
-    for (const error of formatErrors) {
-      body += `> - **${error.language}:** ${error.error}\n`;
-    }
-    body += `>\n> _Format validation does not block approval but should be reviewed._\n`;
-  }
-
-  body += `\n**How to approve:**\n`;
-  body += `- Per language: apply \`package-name-<language>-approved\` label\n`;
-  body += `- All at once: apply \`package-name-approved-all\` label (shortcut for mgmt plane)\n\n`;
-  body += `Merge is blocked until all languages are approved.\n`;
-  if (resetLanguages && resetLanguages.length > 0) {
-    body += `\n> ⚠️ **Package name changed** -- approvals for ${resetLanguages.join(", ")} have been reset.\n`;
-  }
-  body += `\n_Approver list: [.github/protected-labels.yml](../blob/${baseRef}/.github/protected-labels.yml)_\n`;
-  body += `_Process: [.github/workflows/src/package-name-approval/PACKAGE-NAME-REVIEW-PROCESS.md](../blob/${baseRef}/.github/workflows/src/package-name-approval/PACKAGE-NAME-REVIEW-PROCESS.md)_\n`;
-  body += `_Package names extracted via tsp compile with typespec-metadata emitter_`;
-  return body;
+  return renderMarkdownDoc([
+    "## Package Name Review Required",
+    `**Plane:** ${planeType}`,
+    reviewTable.join("\n"),
+    formatErrors.length > 0
+      ? [
+          "> **⚠️ Format issues detected:**",
+          ...formatErrors.map((error) => `> - **${error.language}:** ${error.error}`),
+          ">",
+          "> _Format validation does not block approval but should be reviewed._",
+        ].join("\n")
+      : undefined,
+    [
+      "**How to approve:**",
+      "- Per language: apply `package-name-<language>-approved` label",
+      "- All at once: apply `package-name-approved-all` label (shortcut for mgmt plane)",
+      "",
+      "Merge is blocked until all languages are approved.",
+    ].join("\n"),
+    resetLanguages && resetLanguages.length > 0
+      ? `> ⚠️ **Package name changed** -- approvals for ${resetLanguages.join(", ")} have been reset.`
+      : undefined,
+    [
+      `_Approver list: [.github/protected-labels.yml](../blob/${baseRef}/.github/protected-labels.yml)_`,
+      `_Process: [.github/workflows/src/package-name-approval/PACKAGE-NAME-REVIEW-PROCESS.md](../blob/${baseRef}/.github/workflows/src/package-name-approval/PACKAGE-NAME-REVIEW-PROCESS.md)_`,
+      "_Package names extracted via tsp compile with typespec-metadata emitter_",
+    ].join("\n"),
+  ]);
 }
 
 export default async function postResults({ github, context, core }: GitHubScriptArgs) {

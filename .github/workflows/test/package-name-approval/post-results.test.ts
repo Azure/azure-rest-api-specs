@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import {
+  buildCommentBody,
   getApprovers,
   parseCommentTable,
   resolveResetApprovers,
@@ -341,6 +342,96 @@ describe("post-results", () => {
   });
 
   describe("comment body generation", () => {
+    const options: Parameters<typeof buildCommentBody>[0] = {
+      approversConfig: {
+        "data-plane": { java: ["java-approver"], dotnet: ["dotnet-approver"] },
+        "management-plane": { all: ["mgmt-approver"] },
+        unprotected: { "data-plane": ["python"] },
+      },
+      namespacesFound: { java: "azure-messaging-example" },
+      namespaces: { java: "com.azure.messaging.example" },
+      allConfiguredPackageNames: { dotnet: "Azure.Messaging.Example" },
+      allConfiguredNamespaces: { dotnet: "Azure.Messaging.Example" },
+      formatResults: [{ language: "java", namespace: "com.azure.messaging.example", valid: true }],
+      isMgmt: false,
+      baseRef: "main",
+      allLanguages: ["java", "dotnet", "python"],
+    };
+
+    it("renders guidance and references around changed, unchanged and missing package names", () => {
+      expect(buildCommentBody(options)).toMatchInlineSnapshot(`
+        "## Package Name Review Required
+
+        **Plane:** Data Plane
+
+        | Language | Package Name | Namespace | Format | Status | Approvers |
+        |----------|--------------|-----------|--------|--------|----------|
+        | java | \`azure-messaging-example\` | \`com.azure.messaging.example\` | ✅ | ⏳ Pending | @java-approver |
+        | dotnet | \`Azure.Messaging.Example\` | \`Azure.Messaging.Example\` | — | ⏳ Pending _(unchanged)_ | @dotnet-approver |
+        | python | _(not yet configured)_ | — | — | ⏳ Pending | _anyone_ |
+
+        **How to approve:**
+        - Per language: apply \`package-name-<language>-approved\` label
+        - All at once: apply \`package-name-approved-all\` label (shortcut for mgmt plane)
+
+        Merge is blocked until all languages are approved.
+
+        _Approver list: [.github/protected-labels.yml](../blob/main/.github/protected-labels.yml)_
+        _Process: [.github/workflows/src/package-name-approval/PACKAGE-NAME-REVIEW-PROCESS.md](../blob/main/.github/workflows/src/package-name-approval/PACKAGE-NAME-REVIEW-PROCESS.md)_
+        _Package names extracted via tsp compile with typespec-metadata emitter_"
+      `);
+    });
+
+    it("separates format issues and reset warnings without changing multiline diagnostics", () => {
+      expect(
+        buildCommentBody({
+          ...options,
+          isMgmt: true,
+          baseRef: "release/example",
+          formatResults: [
+            {
+              language: "java",
+              namespace: "com.azure.messaging.example",
+              valid: false,
+              error: "Invalid package name.\n    Preserve this indentation.",
+            },
+          ],
+          resetLanguages: ["java"],
+          preservedApprovals: new Map([
+            ["java", { namespace: "azure-messaging-example", status: "✅ Approved by @reviewer" }],
+          ]),
+        }),
+      ).toMatchInlineSnapshot(`
+        "## Package Name Review Required
+
+        **Plane:** Management Plane
+
+        | Language | Package Name | Namespace | Format | Status | Approvers |
+        |----------|--------------|-----------|--------|--------|----------|
+        | java | \`azure-messaging-example\` | \`com.azure.messaging.example\` | ⚠️ Invalid | ✅ Approved by @reviewer | @mgmt-approver |
+        | dotnet | \`Azure.Messaging.Example\` | \`Azure.Messaging.Example\` | — | ⏳ Pending _(unchanged)_ | @mgmt-approver |
+        | python | _(not yet configured)_ | — | — | ⏳ Pending | @mgmt-approver |
+
+        > **⚠️ Format issues detected:**
+        > - **java:** Invalid package name.
+            Preserve this indentation.
+        >
+        > _Format validation does not block approval but should be reviewed._
+
+        **How to approve:**
+        - Per language: apply \`package-name-<language>-approved\` label
+        - All at once: apply \`package-name-approved-all\` label (shortcut for mgmt plane)
+
+        Merge is blocked until all languages are approved.
+
+        > ⚠️ **Package name changed** -- approvals for java have been reset.
+
+        _Approver list: [.github/protected-labels.yml](../blob/release/example/.github/protected-labels.yml)_
+        _Process: [.github/workflows/src/package-name-approval/PACKAGE-NAME-REVIEW-PROCESS.md](../blob/release/example/.github/workflows/src/package-name-approval/PACKAGE-NAME-REVIEW-PROCESS.md)_
+        _Package names extracted via tsp compile with typespec-metadata emitter_"
+      `);
+    });
+
     it("should generate a 6-column table that matches validate-approval regex", () => {
       const body = [
         "## Package Name Review Required",
