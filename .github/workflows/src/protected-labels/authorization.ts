@@ -7,7 +7,7 @@ export const ALLOWED_BOT_LOGINS = ["github-actions[bot]", "azure-sdk"];
 // Reserved plane value that opts a plane out of enforcement (anyone may apply).
 // Must not collide with a GitHub login. An OMITTED plane stays fail-closed (global-only);
 // only this explicit keyword opens a plane. See #46728.
-export const UNPROTECTED_PLANE = "unprotected";
+export const UNPROTECTED_PLANE = "__unprotected__";
 
 // Plane is derived from resource-manager/data-plane, which summarize-checks reconciles
 // (adds and removes). "Mgmt" is intentionally excluded: it is written add-only by
@@ -15,7 +15,7 @@ export const UNPROTECTED_PLANE = "unprotected";
 const MGMT_LABELS = ["resource-manager"];
 const DP_LABELS = ["data-plane"];
 
-// A plane maps either to an approver list or to the literal "unprotected".
+// A plane maps either to an approver list or to the literal "__unprotected__".
 export type PlaneApprovers = string[] | typeof UNPROTECTED_PLANE;
 
 export type LabelEntry =

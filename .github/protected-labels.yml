@@ -51,12 +51,12 @@ data-plane-review-signoff: &data-plane-reviewers
 # `typespec-suppressions-approved` clears the suppression review on a data-plane spec PR.
 # Only the data-plane stewardship reviewers may apply it, mirroring the azure-data-plane-api-reviewers
 # team (same pool as `data-plane-review-signoff`); the alias keeps the two rosters in sync.
-# Management-plane is left `unprotected`: ARM runs its own suppression review process, and
-# this preserves today's behavior (the label was previously unprotected on all planes).
+# Management-plane is left open via the `__unprotected__` keyword: ARM runs its own suppression
+# review process, and this preserves today's behavior (the label was previously unprotected on all planes).
 # See the stewardship board member guide (aka.ms/azsdk/architect-guidance).
 typespec-suppressions-approved:
   data-plane: *data-plane-reviewers
-  management-plane: unprotected
+  management-plane: __unprotected__
 
 # Package name approval labels (plane-aware)
 package-name-dotnet-approved:

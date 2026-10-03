@@ -44,10 +44,10 @@ describe("post-results", () => {
       labels: {
         "package-name-go-approved": {
           "management-plane": ["mgmt-approver"],
-          "data-plane": "unprotected",
+          "data-plane": "__unprotected__",
         },
         "package-name-java-approved": {
-          "management-plane": "unprotected",
+          "management-plane": "__unprotected__",
           "data-plane": ["dp-approver"],
         },
       },

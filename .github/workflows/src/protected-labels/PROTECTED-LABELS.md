@@ -45,7 +45,7 @@ package-name-dotnet-approved:
 typespec-suppressions-approved:
   data-plane:
     - user3
-  management-plane: unprotected
+  management-plane: __unprotected__
 ```
 
 Values are GitHub handles (case-insensitive). Plane detection uses PR labels explicitly:
@@ -54,9 +54,9 @@ Values are GitHub handles (case-insensitive). Plane detection uses PR labels exp
 - `data-plane` → data-plane
 - Neither → plane-aware labels are not enforced (no action taken)
 
-A plane may be set to the literal `unprotected` instead of a list, which opts that
+A plane may be set to the literal `__unprotected__` instead of a list, which opts that
 plane out of enforcement (anyone may apply the label). An **omitted** plane stays
-fail-closed and resolves to `global-approvers` only; only the explicit `unprotected`
+fail-closed and resolves to `global-approvers` only; only the explicit `__unprotected__`
 keyword opens a plane.
 
 When several labels share one approver pool (for example the per-language SDK
