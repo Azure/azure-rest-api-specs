@@ -331,6 +331,25 @@ union TcpReset {
 }
 
 /**
+ * The firewall mode a Marketplace plan provisions. The value is derived by the service from the
+ * Marketplace plan the firewall is purchased under and is never supplied by the caller.
+ */
+@added(Versions.v2026_09_25_preview)
+union FirewallMode {
+  string,
+
+  /**
+   * Cloud Next-Generation Firewall.
+   */
+  CNGFW: "CNGFW",
+
+  /**
+   * Managed AI Runtime Security.
+   */
+  AIRSM: "AIRSM",
+}
+
+/**
  * Hash algorithm used to distribute inbound traffic
  */
 @added(Versions.v2026_08_27_preview)
@@ -1317,6 +1336,16 @@ model FirewallDeploymentProperties {
   strataCloudManagerConfig?: StrataCloudManagerConfig;
 
   /**
+   * The firewall mode this resource provisions, derived by the service from the Marketplace plan.
+   * This property is read-only: any caller-supplied value is discarded and replaced with the mode
+   * derived from the plan. It is absent on firewalls stored before this property was introduced,
+   * and a reader must treat an absent value as CNGFW.
+   */
+  @added(Versions.v2026_09_25_preview)
+  @visibility(Lifecycle.Read)
+  firewallMode?: FirewallMode;
+
+  /**
    * Associated Rulestack
    */
   associatedRulestack?: RulestackDetails;
@@ -1557,6 +1586,13 @@ model StrataCloudManagerConfig {
    * Strata Cloud Manager name which is intended to manage the policy for this firewall.
    */
   cloudManagerName: string;
+
+  /**
+   * The Strata Cloud Manager link code supplied by the customer and validated through the
+   * resolveStrataCloudManager provider action.
+   */
+  @added(Versions.v2026_09_25_preview)
+  scmLinkCode?: string;
 }
 
 /**
@@ -2512,4 +2548,112 @@ model CustomCaptureConfigurationsProperties {
   @doc("Human-readable status message for display in client UIs (Portal blade, CLI output, etc.). English only. Read-only.")
   @visibility(Lifecycle.Read)
   message?: string;
+}
+
+/**
+ * A single Marketplace plan, enriched with the firewall mode it provisions.
+ */
+@added(Versions.v2026_09_25_preview)
+model MarketplacePlanInfo {
+  /**
+   * The Marketplace plan identifier.
+   */
+  planId: string;
+
+  /**
+   * The plan display name shown to the customer. The property is omitted when the Marketplace
+   * catalogue does not publish a display name for the plan.
+   */
+  displayName?: string;
+
+  /**
+   * The plan description.
+   */
+  description?: string;
+
+  /**
+   * The firewall mode this plan provisions. The property is omitted when the plan cannot be
+   * classified into exactly one mode, in which case the mode is left out rather than guessed.
+   */
+  firewallMode?: FirewallMode;
+}
+
+/**
+ * A single Marketplace offer and the plans it exposes to the caller. The entry carries the standard
+ * Azure Resource Manager proxy-resource identity so that each catalogue entry is addressable by name
+ * within the marketplaceOffers collection.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "The catalogue entry returns the standard Azure Resource Manager proxy-resource envelope (readonly id/name/type/systemData) around its properties bag, so inheriting the common-types ProxyResource is the correct relation here rather than composition. ProxyResource is deliberately non-polymorphic and defines no discriminator, which is what trips this data-plane style rule."
+@added(Versions.v2026_09_25_preview)
+model OfferPlanGroup extends Azure.ResourceManager.CommonTypes.ProxyResource {
+  /**
+   * The plans belonging to this Marketplace offer.
+   */
+  properties?: OfferPlanGroupProperties;
+}
+
+/**
+ * The plans belonging to a single Marketplace offer.
+ */
+@added(Versions.v2026_09_25_preview)
+model OfferPlanGroupProperties {
+  /**
+   * The Marketplace publisher identifier.
+   */
+  publisherId: string;
+
+  /**
+   * The Marketplace offer identifier.
+   */
+  offerId: string;
+
+  /**
+   * The plans visible to the caller for this offer. The list may be empty.
+   */
+  @identifiers(#[])
+  plans: MarketplacePlanInfo[];
+}
+
+/**
+ * The Marketplace offers available to the subscription, each carrying the plans visible to the caller.
+ */
+@added(Versions.v2026_09_25_preview)
+model MarketplaceOffersResult {
+  /**
+   * The offer groups. An empty catalogue is returned as an empty list.
+   */
+  @identifiers(#[])
+  @TypeSpec.pageItems
+  value: OfferPlanGroup[];
+
+  /**
+   * The link to the next page of offer groups. The catalogue is returned in a single page today,
+   * so this is not populated; it is declared so that pagination can be introduced later without a
+   * breaking change. Clients must follow it when present and stop when it is absent.
+   */
+  @TypeSpec.nextLink
+  nextLink?: url;
+}
+
+/**
+ * The Strata Cloud Manager link code to resolve.
+ */
+@added(Versions.v2026_09_25_preview)
+model ScmLinkCodeRequest {
+  /**
+   * The Strata Cloud Manager link code supplied by the customer.
+   */
+  scmLinkCode: string;
+}
+
+/**
+ * The Strata Cloud Manager instance a link code is bound to.
+ */
+@added(Versions.v2026_09_25_preview)
+model StrataCloudManagerInstance {
+  /**
+   * The resolved Strata Cloud Manager instance name. This value feeds
+   * properties.strataCloudManagerConfig.cloudManagerName on the firewall create payload.
+   */
+  cloudManagerTenantName: string;
 }

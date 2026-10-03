@@ -220,6 +220,7 @@ using PaloAltoNetworks.Cloudngfw;
   Azure.Core.armResourceIdentifier,
   "csharp"
 );
+@@clientName(ScmLinkCodeRequest, "ScmLinkCodeContent", "csharp");
 @@clientName(ScopeType, "RulestackScopeType", "csharp");
 @@clientName(ScopeType.LOCAL, "Local", "csharp");
 @@clientName(ScopeType.GLOBAL, "Global", "csharp");
