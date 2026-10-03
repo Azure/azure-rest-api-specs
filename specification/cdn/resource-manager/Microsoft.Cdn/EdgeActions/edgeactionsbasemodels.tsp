@@ -27,7 +27,7 @@ model SkuType {
   tier: string;
 }
 
-/** The SKU type for update operations */
+/** The SKU fields in the update model. Do not include sku in PATCH requests; any supplied sku, including null or the existing value, is rejected. */
 model SkuTypeUpdate {
   /** The name of the SKU */
   name?: string;
@@ -159,11 +159,11 @@ model EdgeActionUpdate {
   @doc("The resource-specific properties for this resource.")
   properties?: EdgeActionPropertiesUpdate;
 
-  @doc("The sku type of the edge action")
+  @doc("The SKU of the Edge Action. Do not include sku in PATCH requests; any supplied sku, including null or the existing value, is rejected.")
   sku?: SkuTypeUpdate;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @doc("Resource tags.")
+  @doc("Resource tags. For PATCH requests, omitted tags are preserved, an empty tags object clears all tags, and null tags are rejected.")
   tags?: Record<string>;
 }
 
@@ -173,7 +173,7 @@ model EdgeActionPropertiesUpdate {}
 
 @doc("Represents an edge action version")
 model EdgeActionVersionProperties {
-  @doc("The deployment type")
+  @doc("The deployment type. If supplied in a version PATCH request, it must match the existing value. Version PATCH validates the request without changing the version.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   deploymentType: EdgeActionVersionDeploymentType;
 
@@ -186,7 +186,7 @@ model EdgeActionVersionProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
-  @doc("The active state")
+  @doc("Indicates whether this is the default version. If supplied in a version PATCH request, it must match the existing value. Use swapDefault to change the default version.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   isDefaultVersion: EdgeActionIsDefaultVersion;
 

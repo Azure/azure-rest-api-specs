@@ -25,6 +25,7 @@ namespace Microsoft.Cdn;
 enum Versions {
   `2025-09-01-preview`,
   `2025-12-01-preview`,
+  `2026-10-01`,
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "SKU property required at envelope level for backwards compatibility with 2024-07-22-preview"
@@ -91,6 +92,7 @@ model EdgeActionExecutionFilter
 interface EdgeActions {
   get is ArmResourceRead<EdgeAction>;
   create is ArmResourceCreateOrUpdateAsync<EdgeAction>;
+  @doc("Updates the tags of an Edge Action. Omitted tags are preserved, and an empty tags object clears all tags. Null tags are rejected. Do not include sku in PATCH requests; any supplied sku, including null or the existing value, is rejected.")
   update is ArmCustomPatchAsync<EdgeAction, EdgeActionUpdate>;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "Service returns 200 for successful delete operations"
   delete is ArmResourceDeleteWithoutOkAsync<
@@ -126,6 +128,7 @@ interface EdgeActions {
 interface EdgeActionVersions {
   get is ArmResourceRead<EdgeActionVersion>;
   create is ArmResourceCreateOrUpdateAsync<EdgeActionVersion>;
+  @doc("Validates an Edge Action version update request without changing the version. Version properties and tags are not updated. If deploymentType or isDefaultVersion is supplied, it must match the existing value; use swapDefault to change the default version.")
   update is ArmCustomPatchAsync<
     EdgeActionVersion,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
