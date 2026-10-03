@@ -34,6 +34,9 @@ model SandboxGroupProperties {
     }
   ]>;
 
+  /** Whether to publish per-sandbox detailed metrics. Defaults to false; group-level metrics are always published. Omitting this property on PUT resets it to false; omitting it on PATCH preserves the current value. */
+  enableDetailedMetrics?: boolean;
+
   /** The default domain of the linked Azure Container Apps environment. Sandbox endpoints use subdomains of this domain. This read-only property is populated by the service and is omitted when no environment is linked. */
   @visibility(Lifecycle.Read)
   defaultDomain?: string;
@@ -103,5 +106,8 @@ model SandboxGroupPatch {
 /** SandboxGroup resource specific properties for patch requests. */
 @added(Versions.v2026_07_01)
 model SandboxGroupPatchProperties {
-  ...PickProperties<SandboxGroupProperties, "environmentId">;
+  ...PickProperties<
+    SandboxGroupProperties,
+    "environmentId" | "enableDetailedMetrics"
+  >;
 }
