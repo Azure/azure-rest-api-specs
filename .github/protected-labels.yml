@@ -20,32 +20,10 @@ global-approvers:
   - timotheeguerin
   - xirzec
 
-# Data-plane REST stewardship reviewers. Gated here as the only users who may apply the
-# sign-off label, the approval that clears the merge gate.
-#
-# This list manually mirrors the GitHub team `azure-data-plane-api-reviewers`
-# (https://github.com/orgs/Azure/teams/azure-data-plane-api-reviewers/members). Finding
-# (#45487): the default Actions GITHUB_TOKEN cannot read org membership, so resolving the
-# team live would mean building up a purpose-built GitHub App with org Members:Read.
-# Since this low cost effort and the list changes rarely, the simpler path
-# fits better for now, so we mirror the members by hand. Keep this in sync when team
-# membership changes.
+# Data-plane REST stewardship reviewers. The Automation App resolves the live
+# `azure-data-plane-api-reviewers` roster with its Organization Members read permission.
 data-plane-review-signoff: &data-plane-reviewers
-  - alzimmermsft
-  - heaths
-  - jeremymeng
-  - jhendrixMSFT
-  - JonathanGiles
-  - JoshLove-msft
-  - kashifkhan
-  - LarryOsterman
-  - m-nash
-  - maorleger
-  - qiaozha
-  - samvaity
-  - tjprescott
-  - weidongxu-microsoft
-  - xirzec
+  team: azure-data-plane-api-reviewers
 
 # TypeSpec lint-suppression approval (data-plane stewardship review).
 # `typespec-suppressions-approved` clears the suppression review on a data-plane spec PR.
@@ -109,38 +87,20 @@ package-name-approved-all:
 # .github/workflows/src/summarize-checks/labelling.ts). Only authorized reviewers may apply
 # them; if anyone else does, the bot removes the label.
 #
-# The roster is the union of the Azure/azure-data-plane-api-reviewers team and the
-# contributors who actually apply these labels today (audited from recent PR label history).
-# It is hand-maintained as one flat list; keep it in sync when either pool changes.
+# The Automation App resolves the live `azure-sdk-team` roster. Explicit users
+# preserve access for current approvers who are not members of that team.
 #
 # Only the labels that currently exist in the repo are listed. The Java and Python-Track2
 # approval labels (BreakingChange-Java-Sdk-Approved, BreakingChange-Java-Sdk-Suppression-Approved,
 # BreakingChange-Python-Track2-Sdk-Approved) are defined in labelling.ts but not yet created
 # as repo labels; add them here once they exist.
 BreakingChange-Go-Sdk-Approved: &sdk-breaking-change-approvers
-  - alzimmermsft
-  - ArcturusZhang
-  - ArthurMa1978
-  - heaths
-  - jeremymeng
-  - jhendrixMSFT
-  - JonathanGiles
-  - JoshLove-msft
-  - kashifkhan
-  - kazrael2119
-  - LarryOsterman
-  - m-nash
-  - maorleger
-  - msyyc
-  - nasc17
-  - qiaozha
-  - samvaity
-  - tadelesh
-  - tjprescott
-  - v-jiaodi
-  - v-xuto
-  - weidongxu-microsoft
-  - xirzec
+  team: azure-sdk-team
+  users:
+    - kazrael2119
+    - nasc17
+    - v-jiaodi
+    - v-xuto
 BreakingChange-Go-Sdk-Suppression-Approved: *sdk-breaking-change-approvers
 BreakingChange-JavaScript-Sdk-Approved: *sdk-breaking-change-approvers
 BreakingChange-JavaScript-Sdk-Suppression-Approved: *sdk-breaking-change-approvers
