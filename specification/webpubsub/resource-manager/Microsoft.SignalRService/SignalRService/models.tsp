@@ -1273,6 +1273,12 @@ model ChatSettings {
    * Reference to the the persistent storage for perisisting chat states.
    */
   persistentStorage?: ResourceReference;
+
+  /**
+   * References to AI service subresources.
+   */
+  @added(Versions.v2026_03_01_preview)
+  aiServices?: ResourceReference[];
 }
 
 /**
