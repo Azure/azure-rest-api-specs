@@ -1,18 +1,17 @@
 # Protected Labels
 
-A system that enforces "only authorized people can apply this label."
+Protected labels can be applied only by their configured approvers.
 
 ## How it works
 
-1. A YAML config file maps labels to authorized GitHub handles
-2. A single workflow watches for `labeled` events
-3. If an unauthorized user applies a protected label, the bot removes it
-4. Supports plane-aware policies: different approvers for management-plane vs data-plane PRs
+1. `.github/protected-labels.yml` maps labels to authorized GitHub users or teams.
+2. The Azure SDK Automation App handles `pull_request.labeled` events for PRs targeting `main`.
+3. The App reads policy from the PR's immutable base commit.
+4. If an unauthorized user applies a protected label, the App removes it and posts a warning.
 
 Warning comments mention the unauthorized actor and direct them to the **Next Steps to Merge**
 comment and the [review and merge process](https://aka.ms/azsdk/specreview/merge).
-Authorized approvers' GitHub profile links are kept in a
-collapsed **See allowed approvers** section without `@mentions`.
+Authorized users appear in a collapsed **See allowed approvers** section without `@mentions`.
 
 ## Configuration
 
@@ -46,9 +45,19 @@ typespec-suppressions-approved:
   data-plane:
     - user3
   management-plane: unprotected
+
+# Team alias with explicit exceptions
+some-team-approved-label:
+  team: azure-sdk-team
+  users:
+    - user-outside-team
 ```
 
-Values are GitHub handles (case-insensitive). Plane detection uses PR labels explicitly:
+User values are GitHub handles and are matched case-insensitively. A team policy may use
+`team`, `teams`, and optional `users`, either for the complete label or within a plane.
+Team names are Azure organization team slugs, and membership is resolved live by the App.
+
+Plane detection uses PR labels explicitly:
 
 - `resource-manager` → management-plane
 - `data-plane` → data-plane
@@ -59,14 +68,17 @@ plane out of enforcement (anyone may apply the label). An **omitted** plane stay
 fail-closed and resolves to `global-approvers` only; only the explicit `unprotected`
 keyword opens a plane.
 
-When several labels share one approver pool (for example the per-language SDK
-breaking-change approval labels), define the roster once with a YAML anchor and reuse it
-with aliases so there is a single list to keep in sync:
+Package-name approval remains Actions-hosted and supports only login lists, plane-aware login
+lists, and `unprotected`. Team policy on a `package-name-*-approved` key is rejected until
+package-name approval moves to the App.
+
+When several labels share one policy, define it once with a YAML anchor:
 
 ```yaml
 BreakingChange-Go-Sdk-Approved: &sdk-breaking-change-approvers
-  - user1
-  - user2
+  team: azure-sdk-team
+  users:
+    - user-outside-team
 BreakingChange-Go-Sdk-Suppression-Approved: *sdk-breaking-change-approvers
 BreakingChange-Python-Sdk-Approved: *sdk-breaking-change-approvers
 ```
@@ -79,5 +91,5 @@ BreakingChange-Python-Sdk-Approved: *sdk-breaking-change-approvers
 
 ## Adopting
 
-1. Add your labels and authorized users to `.github/protected-labels.yml`
-2. Done - the shared workflow handles enforcement
+Add the label and its authorized users or teams to `.github/protected-labels.yml`. The
+Automation App handles enforcement without a repository workflow.

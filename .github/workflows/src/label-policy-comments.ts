@@ -1,8 +1,7 @@
 import { details, escapeMarkdown, inlineCode, link } from "@azure-tools/specs-shared/markdown";
 
-// Shared wording for label-enforcement feedback. Centralized so every "your label was
-// removed / reset" message reads identically across the protected-labels and package-name
-// approval paths, instead of each path inventing its own (or staying silent) (#46787).
+// Shared wording for label-enforcement feedback across the App-bound protected-label
+// workflow and the package-name workflow that remains in Actions.
 
 /**
  * Warning posted when an unauthorized actor applies a protected/approval label and it is
