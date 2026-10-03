@@ -1,0 +1,27 @@
+{
+  "title": "Waves_ValidateWorkloadConfiguration_MaximumSet",
+  "operationId": "Waves_ValidateWorkloadConfiguration",
+  "parameters": {
+    "api-version": "2026-09-01-preview",
+    "subscriptionId": "F628DFC8-CF82-400F-A6A9-ED3CEC3ECEAD",
+    "resourceGroupName": "rgwaves",
+    "projectName": "project1",
+    "waveName": "wave1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "status": "Failed",
+        "validationErrorFile": {
+          "sasUri": "https://contosostorage.blob.core.windows.net/waveplans/wave1-workloadconfiguration-errors.csv?sv=2026-01-01&se=2026-09-15T12%3A00%3A00Z&sr=b&sp=r&sig=redacted",
+          "expirationTime": "2026-09-15T12:00:00.000Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}
