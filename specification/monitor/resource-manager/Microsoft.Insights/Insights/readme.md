@@ -37,6 +37,38 @@ directive:
     reason: "There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off."
 ```
 
+### Tag: package-2026-09-01
+
+These settings apply only when `--tag=package-2026-09-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-09-01'
+input-file:
+  - stable/2026-09-01/actionGroups.json
+
+suppressions:
+  - code: AvoidAdditionalProperties
+    from: actionGroups.json
+    reason: Existing service design behavior. Fixing this causes breaking changes.
+  - code: BodyTopLevelProperties
+    from: actionGroups.json
+    reason: Existing service design behavior. Fixing this causes breaking changes.
+  - code: DefinitionsPropertiesNamesCamelCase
+    from: actionGroups.json
+    reason: Existing service design behavior. Fixing this causes breaking changes.
+  - code: OperationIdNounVerb
+    from: actionGroups.json
+    reason: Existing service design behavior. Fixing this causes breaking changes.
+  - code: OperationsAPIImplementation
+    from: actionGroups.json
+    reason: False positive. Operations API is defined in a separate swagger spec for Microsoft.Insights namespace (https://github.com/Azure/azure-rest-api-specs/blob/master/specification/monitor/resource-manager/Microsoft.Insights/Insights/stable/2015-04-01/operations_API.json)
+  - code: PatchBodyParametersSchema
+    from: actionGroups.json
+    reason: Existing service design behavior. Fixing this causes breaking changes.
+  - code: PostResponseCodes
+    from: actionGroups.json
+    reason: Existing service design behavior. Fixing this causes breaking changes.
+```
+
 ### Tag: package-2025-08
 
 These settings apply only when `--tag=package-2025-08` is specified on the command line.
