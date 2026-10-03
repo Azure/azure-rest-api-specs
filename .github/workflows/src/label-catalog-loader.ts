@@ -72,15 +72,17 @@ export async function resolveLabelCatalog(readSource: (path: string) => Promise<
     const own = new Map(document.labels.map((entry) => [entry.name.toLowerCase(), entry]));
     if (own.size !== document.labels.length) throw new Error(`Duplicate label name in ${path}`);
     const merged = new Map<string, Entry>();
-    const conflicts = new Map<string, Set<"color" | "description">>();
+    const conflicts = new Map<string, Set<"color" | "description" | "aliases">>();
     for (const reference of document.extends) {
       const base = await load(resolveReference(path, reference), [...chain, path]);
       for (const [key, entry] of base) {
         const previous = merged.get(key);
         if (previous) {
-          for (const field of ["color", "description"] as const) {
-            const left = field === "color" ? previous[field]?.toLowerCase() : previous[field];
-            const right = field === "color" ? entry[field]?.toLowerCase() : entry[field];
+          for (const field of ["color", "description", "aliases"] as const) {
+            const left =
+              field === "color" ? previous.color?.toLowerCase() : JSON.stringify(previous[field]);
+            const right =
+              field === "color" ? entry.color?.toLowerCase() : JSON.stringify(entry[field]);
             if (left !== undefined && right !== undefined && left !== right) {
               const fields = conflicts.get(key) ?? new Set();
               fields.add(field);

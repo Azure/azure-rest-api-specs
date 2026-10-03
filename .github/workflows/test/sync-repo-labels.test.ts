@@ -17,8 +17,8 @@ import { createMockContext, createMockCore } from "./mocks.ts";
 
 const repo = { owner: "Azure", repo: "azure-rest-api-specs" };
 const prefix = "/repos/Azure/azure-rest-api-specs";
-const marker: ExistingLabel = {
-  name: "label-deleted",
+const canonical: ExistingLabel = {
+  name: "canonical",
   color: "123456",
   description: "Removed label",
   id: 1,
@@ -58,14 +58,16 @@ afterEach(async () => {
 function fixture() {
   const catalog: LabelCatalog = {
     unconfiguredLabels: "preserve",
-    labels: [{ name: marker.name, color: marker.color, description: marker.description ?? "" }],
+    labels: [
+      { name: canonical.name, color: canonical.color, description: canonical.description ?? "" },
+    ],
   };
   const state = {
     catalog,
     rootContent: undefined as string | undefined,
     fragments: new Map<string, string>(),
     sourceSha: "a".repeat(40),
-    labels: [structuredClone(marker), structuredClone(extra)],
+    labels: [structuredClone(canonical), structuredClone(extra)],
     items: [] as Item[],
     failure: "",
     archiveUpdatesEnabled: true,
@@ -303,7 +305,7 @@ describe("native label archival", () => {
     const run = await f.prepare();
     expect(run.audit.plan.archive).toEqual([{ before: active, name: "archived: unconfigured" }]);
     expect(run.audit.plan.delete).toEqual([]);
-    expect(run.audit.replacements).toEqual([]);
+    expect(run.audit.deletions).toEqual([]);
     await run.apply();
     expect(f.state.labels[1]).toMatchObject({
       name: "archived: unconfigured",
@@ -461,6 +463,7 @@ describe("native label archival", () => {
   it("rechecks native archive state immediately before deletion", async () => {
     const f = fixture();
     f.state.catalog.unconfiguredLabels = "archive";
+    f.state.catalog.labels[0].aliases = [extra.name];
     f.state.items = [{ number: 1, kind: "issue", state: "OPEN", labels: new Set([extra.name]) }];
     const run = await f.prepare();
     f.state.afterMark = () => {
@@ -476,7 +479,7 @@ describe("native label archival", () => {
     f.state.labels[1].archived_at = new Date().toISOString();
     const run = await f.prepare();
     run.audit.plan.delete = [f.state.labels[1]];
-    run.audit.replacements = [{ label: f.state.labels[1], items: [] }];
+    run.audit.deletions = [{ label: f.state.labels[1], items: [] }];
     const content = JSON.stringify(run.audit);
     await writeFile(join(run.options.auditDirectory, "before.json"), content);
     run.options.auditHash = catalogHash(content);
@@ -567,7 +570,7 @@ describe("archive label names", () => {
     expect(f.mutations()).toHaveLength(1);
   });
 
-  it("deletes an expired prefixed label through the existing audited replacement path", async () => {
+  it("deletes an expired prefixed label without applying a replacement marker", async () => {
     const f = fixture();
     f.state.catalog.unconfiguredLabels = "archive";
     f.state.labels[1].name = "archived: unconfigured";
@@ -580,10 +583,11 @@ describe("archive label names", () => {
       },
     ];
     const run = await f.prepare();
-    expect(run.audit.replacements[0].label.name).toBe("archived: unconfigured");
+    expect(run.audit.deletions[0].label.name).toBe("archived: unconfigured");
     await run.apply();
-    expect(f.state.labels).toEqual([marker]);
-    expect(f.state.items[0].labels).toEqual(new Set(["keep", marker.name]));
+    expect(f.state.labels).toEqual([canonical]);
+    expect(f.state.items[0].labels).toEqual(new Set(["keep"]));
+    expect(f.mutations().some(({ method }) => method === "POST")).toBe(false);
     expect(f.mutations().at(-1)).toMatchObject({
       method: "DELETE",
       path: `${prefix}/labels/archived: unconfigured`,
@@ -607,7 +611,7 @@ describe("archive label names", () => {
     }
     const run = await f.prepare();
     const before = structuredClone(f.state.labels[1]);
-    f.state.labels.push({ ...marker, id: 99, node_id: "collision", name: target.toUpperCase() });
+    f.state.labels.push({ ...canonical, id: 99, node_id: "collision", name: target.toUpperCase() });
     await expect(run.apply()).rejects.toThrow("Label name collision");
     expect(f.state.labels[1]).toEqual(before);
     expect(f.mutations()).toEqual([]);
@@ -657,7 +661,7 @@ describe("repository label synchronization", () => {
   it("paginates the complete live label inventory", async () => {
     const f = fixture();
     f.state.labels = Array.from({ length: 205 }, (_, index) => ({
-      ...marker,
+      ...canonical,
       id: index + 1,
       node_id: `label-${index}`,
       name: `label-${index}`,
@@ -675,13 +679,13 @@ describe("repository label synchronization", () => {
     expect(f.mutations()).toEqual([]);
     expect(f.args.core.warning).toHaveBeenCalledWith(expect.stringContaining(extra.name));
     expect(f.state.items[0].labels).toEqual(new Set([extra.name]));
-    expect(run.audit.replacements).toEqual([]);
+    expect(run.audit.deletions).toEqual([]);
     expect(f.state.requests.some((request) => request.path === "/graphql")).toBe(false);
   });
 
   it("creates and updates configured labels, then becomes a no-op", async () => {
     const f = fixture();
-    f.state.labels = [{ ...marker, color: "ffffff" }];
+    f.state.labels = [{ ...canonical, color: "ffffff" }];
     f.state.catalog.labels.push({ name: "new", color: "123456", description: "New label" });
     await (await f.prepare()).apply();
     expect(f.mutations().map(({ method }) => method)).toEqual(["POST", "PATCH"]);
@@ -697,7 +701,7 @@ describe("repository label synchronization", () => {
     const run = await f.prepare(true);
     await run.apply();
     expect(run.audit.plan.create).toHaveLength(1);
-    expect(run.audit.replacements).toHaveLength(1);
+    expect(run.audit.deletions).toHaveLength(1);
     expect(f.mutations()).toEqual([]);
     expect(await run.outcome()).toMatchObject({ dryRun: true, operations: [] });
   });
@@ -759,7 +763,84 @@ describe("repository label synchronization", () => {
   });
 });
 
-describe("expired archive replacement", () => {
+describe("explicit alias migrations", () => {
+  it("adds the canonical label to open and closed items before archiving the alias", async () => {
+    const f = fixture();
+    f.state.catalog.unconfiguredLabels = "archive";
+    f.state.catalog.labels[0].aliases = [extra.name];
+    f.state.labels[1].archived_at = null;
+    f.state.items = [
+      { number: 1, kind: "pull_request", state: "OPEN", labels: new Set([extra.name, "keep"]) },
+      { number: 2, kind: "issue", state: "CLOSED", labels: new Set([extra.name]) },
+    ];
+    const run = await f.prepare();
+    expect(run.audit.migrations[0].items).toHaveLength(2);
+    expect(run.audit.deletions).toEqual([]);
+    await run.apply();
+    expect(f.state.items.map(({ labels }) => [...labels].sort())).toEqual([
+      ["archived: unconfigured", canonical.name, "keep"],
+      ["archived: unconfigured", canonical.name],
+    ]);
+    expect(f.mutations().map(({ method }) => method)).toEqual(["POST", "POST", "PATCH"]);
+    expect(f.state.labels[1].archived_at).not.toBeNull();
+    f.state.requests = [];
+    await (await f.prepare()).apply();
+    expect(f.mutations()).toEqual([]);
+  });
+  it("never archives an active alias when canonical assignment fails", async () => {
+    const f = fixture();
+    f.state.catalog.unconfiguredLabels = "archive";
+    f.state.catalog.labels[0].aliases = [extra.name];
+    f.state.labels[1].archived_at = null;
+    f.state.items = [
+      { number: 1, kind: "pull_request", state: "OPEN", labels: new Set([extra.name]) },
+    ];
+    const run = await f.prepare();
+    f.state.failure = `POST ${prefix}/issues/1/labels`;
+    await expect(run.apply()).rejects.toThrow("Injected failure");
+    expect(f.state.labels[1].name).toBe(extra.name);
+    expect(f.state.labels[1].archived_at).toBeNull();
+  });
+  it("does not migrate in a dry run", async () => {
+    const f = fixture();
+    f.state.catalog.unconfiguredLabels = "archive";
+    f.state.catalog.labels[0].aliases = [extra.name];
+    f.state.items = [
+      { number: 1, kind: "pull_request", state: "OPEN", labels: new Set([extra.name]) },
+    ];
+    const run = await f.prepare(true);
+    expect(run.audit.migrations).toHaveLength(1);
+    await run.apply();
+    expect(f.mutations()).toEqual([]);
+  });
+  it("does not send alias metadata to GitHub when creating the canonical label", async () => {
+    const f = fixture();
+    f.state.catalog.unconfiguredLabels = "archive";
+    f.state.catalog.labels[0].aliases = [extra.name];
+    f.state.labels = [structuredClone(extra)];
+    await (await f.prepare()).apply();
+    expect(f.mutations()[0].body).toEqual({
+      name: canonical.name,
+      color: canonical.color,
+      description: canonical.description,
+    });
+  });
+  it("refuses deletion when a new unaudited item appears even without alias migration", async () => {
+    const f = fixture();
+    f.state.catalog.unconfiguredLabels = "archive";
+    const run = await f.prepare();
+    f.state.items.push({
+      number: 1,
+      kind: "issue",
+      state: "CLOSED",
+      labels: new Set([extra.name]),
+    });
+    await expect(run.apply()).rejects.toThrow("New unaudited assignment");
+    expect(f.mutations()).toEqual([]);
+  });
+});
+
+describe("expired archive deletion and alias migrations", () => {
   it("paginates issues and PRs in all states and preserves unrelated labels without comments", async () => {
     const f = fixture();
     f.state.catalog.unconfiguredLabels = "archive";
@@ -769,14 +850,15 @@ describe("expired archive replacement", () => {
       state: i % 2 ? "CLOSED" : i < 102 ? "OPEN" : "MERGED",
       labels: new Set([extra.name, "keep"]),
     }));
-    f.state.items[0].labels.add(marker.name);
+    f.state.items[0].labels.add(canonical.name);
     const run = await f.prepare();
-    expect(run.audit.replacements[0].items).toHaveLength(205);
+    expect(run.audit.deletions[0].items).toHaveLength(205);
     expect(f.state.requests.filter(({ path }) => path === "/graphql")).toHaveLength(4);
     await run.apply();
-    expect(f.state.labels).toEqual([marker]);
-    for (const item of f.state.items) expect(item.labels).toEqual(new Set([marker.name, "keep"]));
-    expect(f.mutations().filter(({ path }) => path.includes("/issues/"))).toHaveLength(204);
+    expect(f.state.labels).toEqual([canonical]);
+    expect(f.state.items[0].labels).toEqual(new Set([canonical.name, "keep"]));
+    for (const item of f.state.items.slice(1)) expect(item.labels).toEqual(new Set(["keep"]));
+    expect(f.mutations().filter(({ path }) => path.includes("/issues/"))).toHaveLength(0);
     expect(f.mutations().at(-1)).toMatchObject({
       method: "DELETE",
       path: `${prefix}/labels/${extra.name}`,
@@ -789,11 +871,11 @@ describe("expired archive replacement", () => {
     expect(queries.some((query) => query?.includes("states: [OPEN, CLOSED, MERGED]"))).toBe(true);
   });
 
-  it("audits and deletes an unused label without adding a marker to any item", async () => {
+  it("audits and deletes an unused label without adding a canonical to any item", async () => {
     const f = fixture();
     f.state.catalog.unconfiguredLabels = "archive";
     const run = await f.prepare();
-    expect(run.audit.replacements).toEqual([{ label: extra, items: [] }]);
+    expect(run.audit.deletions).toEqual([{ label: extra, items: [] }]);
     await run.apply();
     expect(f.mutations()).toHaveLength(1);
     expect(f.mutations()[0].method).toBe("DELETE");
@@ -803,9 +885,10 @@ describe("expired archive replacement", () => {
     });
   });
 
-  it("keeps the original on marker failure and safely resumes without re-marking items", async () => {
+  it("keeps the original on canonical failure and safely resumes without re-marking items", async () => {
     const f = fixture();
     f.state.catalog.unconfiguredLabels = "archive";
+    f.state.catalog.labels[0].aliases = [extra.name];
     f.state.items = [1, 2].map((number) => ({
       number,
       kind: "issue",
@@ -816,26 +899,27 @@ describe("expired archive replacement", () => {
     const run = await f.prepare();
     await expect(run.apply()).rejects.toThrow("Injected failure");
     expect(f.state.labels).toContainEqual(extra);
-    expect(f.state.items[0].labels).toEqual(new Set([extra.name, marker.name]));
+    expect(f.state.items[0].labels).toEqual(new Set([extra.name, canonical.name]));
     expect(f.mutations().some(({ method }) => method === "DELETE")).toBe(false);
     expect(await run.outcome()).toMatchObject({
       error: "Injected failure",
       operations: [
-        { action: "mark", number: 1, status: "completed" },
-        { action: "mark", number: 2, status: "failed" },
+        { action: "migrate", number: 1, status: "completed" },
+        { action: "migrate", number: 2, status: "failed" },
       ],
     });
     f.state.failure = "";
     f.state.requests = [];
     await (await f.prepare()).apply();
     expect(f.mutations().filter(({ method }) => method === "POST")).toHaveLength(1);
-    expect(f.state.labels).toEqual([marker]);
+    expect(f.state.labels).toEqual([canonical]);
   });
 
   it("preserves each original association when several labels affect one item", async () => {
     const f = fixture();
     f.state.catalog.unconfiguredLabels = "archive";
     const other = { ...extra, id: 3, node_id: "label-3", name: "other" };
+    f.state.catalog.labels[0].aliases = [extra.name, other.name];
     f.state.labels.push(other);
     f.state.items = [
       {
@@ -846,7 +930,7 @@ describe("expired archive replacement", () => {
       },
     ];
     const run = await f.prepare();
-    expect(run.audit.replacements.map(({ items }) => items.map(({ number }) => number))).toEqual([
+    expect(run.audit.deletions.map(({ items }) => items.map(({ number }) => number))).toEqual([
       [1],
       [1],
     ]);
@@ -867,6 +951,7 @@ describe("expired archive replacement", () => {
   it("stops when a new unaudited association appears during replacement", async () => {
     const f = fixture();
     f.state.catalog.unconfiguredLabels = "archive";
+    f.state.catalog.labels[0].aliases = [extra.name];
     f.state.items = [{ number: 1, kind: "issue", state: "OPEN", labels: new Set([extra.name]) }];
     const run = await f.prepare();
     f.state.afterMark = () => {
@@ -881,13 +966,14 @@ describe("expired archive replacement", () => {
     expect(f.state.labels).toContainEqual(extra);
   });
 
-  it("does not delete if the marker disappears after it was applied", async () => {
+  it("does not delete if the canonical disappears after it was applied", async () => {
     const f = fixture();
     f.state.catalog.unconfiguredLabels = "archive";
+    f.state.catalog.labels[0].aliases = [extra.name];
     f.state.items = [{ number: 1, kind: "issue", state: "OPEN", labels: new Set([extra.name]) }];
     const run = await f.prepare();
-    f.state.afterMark = () => f.state.items[0].labels.delete(marker.name);
-    await expect(run.apply()).rejects.toThrow("Replacement marker missing");
+    f.state.afterMark = () => f.state.items[0].labels.delete(canonical.name);
+    await expect(run.apply()).rejects.toThrow("Canonical label canonical missing");
     expect(f.state.labels).toContainEqual(extra);
   });
 
@@ -920,6 +1006,7 @@ describe("expired archive replacement", () => {
   it("stops deletion if policy changes during replacement", async () => {
     const f = fixture();
     f.state.catalog.unconfiguredLabels = "archive";
+    f.state.catalog.labels[0].aliases = [extra.name];
     f.state.items = [{ number: 1, kind: "issue", state: "OPEN", labels: new Set([extra.name]) }];
     const run = await f.prepare();
     f.state.afterMark = () => {
