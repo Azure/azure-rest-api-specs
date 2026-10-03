@@ -8790,6 +8790,130 @@
         "storageDiagnostics"
       ]
     },
+    "StorageDeltaSnapSnapshotGenerationStatus": {
+      "type": "string",
+      "description": "The status of a DeltaSnap snapshot generation operation.",
+      "enum": [
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "StorageDeltaSnapSnapshotGenerationStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The snapshot was generated successfully."
+          }
+        ]
+      }
+    },
+    "StorageDeltaSnapSnapshotGenerationSucceededEventData": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Storage.DeltaSnapSnapshotGenerationSucceeded event.",
+      "properties": {
+        "jobId": {
+          "type": "string",
+          "description": "The identifier of the DeltaSnap job. The value is an empty string when no job identifier is assigned."
+        },
+        "accountName": {
+          "type": "string",
+          "description": "The name of the storage account for which the snapshot was generated."
+        },
+        "status": {
+          "$ref": "#/definitions/StorageDeltaSnapSnapshotGenerationStatus",
+          "description": "The status of the snapshot generation operation."
+        },
+        "dataRecordCount": {
+          "type": "string",
+          "description": "The number of records in data files added by the snapshot operation, encoded as a decimal string."
+        },
+        "totalSizeBytes": {
+          "type": "string",
+          "description": "The total size, in bytes, of data files added by the snapshot operation, encoded as a decimal string."
+        },
+        "snapshotCommitDurationMs": {
+          "type": "string",
+          "description": "The elapsed time, in milliseconds, between the logical snapshot creation time and finalization time, encoded as a decimal string."
+        },
+        "snapshotCreateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The logical creation time of the snapshot."
+        },
+        "snapshotFinalizeTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time at which the snapshot was finalized and published."
+        },
+        "snapshotId": {
+          "type": "string",
+          "description": "The decimal identifier of the generated snapshot."
+        },
+        "operationType": {
+          "$ref": "#/definitions/StorageDeltaSnapSnapshotOperationType",
+          "description": "The Iceberg operation used to generate the snapshot."
+        },
+        "dataFileCount": {
+          "type": "string",
+          "description": "The number of data files added by the snapshot operation, encoded as a decimal string."
+        },
+        "manifestCount": {
+          "type": "string",
+          "description": "The number of manifests attributed to data files added by the snapshot operation, encoded as a decimal string."
+        }
+      },
+      "required": [
+        "jobId",
+        "accountName",
+        "status",
+        "dataRecordCount",
+        "totalSizeBytes",
+        "snapshotCommitDurationMs",
+        "snapshotCreateTime",
+        "snapshotFinalizeTime",
+        "snapshotId",
+        "operationType",
+        "dataFileCount",
+        "manifestCount"
+      ]
+    },
+    "StorageDeltaSnapSnapshotOperationType": {
+      "type": "string",
+      "description": "The Iceberg operation used to generate a DeltaSnap snapshot.",
+      "enum": [
+        "APPEND",
+        "OVERWRITE",
+        "FULL_OVERWRITE",
+        "UNKNOWN"
+      ],
+      "x-ms-enum": {
+        "name": "StorageDeltaSnapSnapshotOperationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "APPEND",
+            "value": "APPEND",
+            "description": "Appends data files to create the initial snapshot."
+          },
+          {
+            "name": "OVERWRITE",
+            "value": "OVERWRITE",
+            "description": "Replaces selected data files in an existing snapshot."
+          },
+          {
+            "name": "FULL_OVERWRITE",
+            "value": "FULL_OVERWRITE",
+            "description": "Replaces all data files in an existing snapshot."
+          },
+          {
+            "name": "UNKNOWN",
+            "value": "UNKNOWN",
+            "description": "The snapshot operation is not recognized."
+          }
+        ]
+      }
+    },
     "StorageDirectoryCreatedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Storage.DirectoryCreated event.",
