@@ -542,8 +542,6 @@ interface Authentications {
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "Authentication method instances are service-created with the cluster and cannot be deleted independently."
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-list-operation" "The Authentications resource operations interface defines the shared authentications collection list operation and returns both service-created authentication method instances."
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-put-operation" "Authentication method instances are service-created with the cluster; customers update an existing instance through PATCH and cannot create additional instances."
 @added(Versions.v2026_10_01_preview)
 @doc("Operations for the service-created PostgreSQL username-and-password authentication method of a HorizonDB cluster.")
 @armResourceOperations
@@ -551,22 +549,20 @@ interface PasswordAuthentications {
   @doc("Gets the service-created PostgreSQL username-and-password authentication method.")
   @autoRoute
   @get
-  @armResourceRead(Authentication)
-  get is Azure.ResourceManager.Foundations.ArmReadOperation<
-    ResourceInstanceParameters<PasswordAuthentication>,
-    ArmResponse<Authentication>,
-    ErrorResponse
-  >;
+  get is ArmResourceRead<PasswordAuthentication>;
 
-  @doc("Updates the service-created PostgreSQL username-and-password authentication method. The request is sparse and omitted properties preserve their current values. A state-only request enables or disables the authentication mechanism; disabling cannot include credentials and does not remove or modify existing database users or roles. Login-only, password-only, and combined credential updates require this method to already be Enabled unless this request also sets state to Enabled. PostgreSQL is the sole source of truth; no administrator identity or credentials are stored. Both authentication methods may be Disabled.")
+  @doc("Creates or replaces the service-created PostgreSQL username-and-password authentication method.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrReplace is ArmResourceCreateOrReplaceAsync<PasswordAuthentication>;
+
+  @doc("Updates the service-created PostgreSQL username-and-password authentication method. The request is sparse and omitted properties preserve their current values. This API version supports enabling or disabling the method, initially setting the administrator login, and resetting its password; supported changes can be combined. Disabling cannot include credentials and does not remove or modify existing database users or roles. Credential updates require this method to already be Enabled unless the same request sets state to Enabled. Administrator rename is not supported in this API version. Both authentication methods may be Disabled.")
   @autoRoute
-  @armResourceUpdate(Authentication)
-  @patch(#{ implicitOptionality: false })
-  update is Azure.ResourceManager.Foundations.ArmUpdateOperation<
-    ResourceInstanceParameters<PasswordAuthentication>,
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  update is ArmCustomPatchAsync<
+    PasswordAuthentication,
     PasswordAuthenticationForPatchUpdate,
-    ArmResponse<Authentication>,
-    ErrorResponse
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = PasswordAuthentication> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 
@@ -591,10 +587,14 @@ interface MicrosoftEntraAuthentications {
   @autoRoute
   @armResourceUpdate(Authentication)
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is Azure.ResourceManager.Foundations.ArmUpdateOperation<
     ResourceInstanceParameters<MicrosoftEntraAuthentication>,
     MicrosoftEntraAuthenticationForPatchUpdate,
-    ArmResponse<Authentication>,
-    ErrorResponse
+    Response =
+      | ArmResponse<Authentication>
+      | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = Authentication> &
+          Azure.Core.Foundations.RetryAfterHeader>,
+    ErrorResponse = ErrorResponse
   >;
 }

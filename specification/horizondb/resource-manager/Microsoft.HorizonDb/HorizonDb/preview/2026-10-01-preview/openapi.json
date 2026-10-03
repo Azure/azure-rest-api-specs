@@ -653,11 +653,11 @@
           }
         },
         "x-ms-examples": {
-          "Rename the PostgreSQL administrator role and reset its password while updating a HorizonDB cluster": {
-            "$ref": "./examples/Clusters_Update.json"
-          },
           "Rotate the customer-managed keys used by a HorizonDB cluster": {
             "$ref": "./examples/Clusters_UpdateDataEncryption.json"
+          },
+          "Update a HorizonDB cluster": {
+            "$ref": "./examples/Clusters_Update.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -877,6 +877,25 @@
               "$ref": "#/definitions/Authentication"
             }
           },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -888,10 +907,15 @@
           "Disable Microsoft Entra authentication without modifying existing database roles": {
             "$ref": "./examples/MicrosoftEntraAuthentications_Disable.json"
           },
-          "Enable Microsoft Entra authentication": {
+          "Start enabling Microsoft Entra authentication": {
             "$ref": "./examples/MicrosoftEntraAuthentications_Enable.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/Authentication"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/authentications/passwordMethod": {
@@ -926,7 +950,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Authentication"
+              "$ref": "#/definitions/PasswordAuthentication"
             }
           },
           "default": {
@@ -942,12 +966,90 @@
           }
         }
       },
+      "put": {
+        "operationId": "PasswordAuthentications_CreateOrReplace",
+        "tags": [
+          "PasswordAuthentications"
+        ],
+        "description": "Creates or replaces the service-created PostgreSQL username-and-password authentication method.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the HorizonDB cluster.",
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 63,
+            "pattern": "^[a-z0-9](?:[-a-z0-9]*[a-z0-9])?$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PasswordAuthentication"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'PasswordAuthentication' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PasswordAuthentication"
+            }
+          },
+          "201": {
+            "description": "Resource 'PasswordAuthentication' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PasswordAuthentication"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Enable password authentication and set the administrator login and password during initial setup": {
+            "$ref": "./examples/PasswordAuthentications_CreateOrReplace.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/PasswordAuthentication"
+        },
+        "x-ms-long-running-operation": true
+      },
       "patch": {
         "operationId": "PasswordAuthentications_Update",
         "tags": [
           "PasswordAuthentications"
         ],
-        "description": "Updates the service-created PostgreSQL username-and-password authentication method. The request is sparse and omitted properties preserve their current values. A state-only request enables or disables the authentication mechanism; disabling cannot include credentials and does not remove or modify existing database users or roles. Login-only, password-only, and combined credential updates require this method to already be Enabled unless this request also sets state to Enabled. PostgreSQL is the sole source of truth; no administrator identity or credentials are stored. Both authentication methods may be Disabled.",
+        "description": "Updates the service-created PostgreSQL username-and-password authentication method. The request is sparse and omitted properties preserve their current values. This API version supports enabling or disabling the method, initially setting the administrator login, and resetting its password; supported changes can be combined. Disabling cannot include credentials and does not remove or modify existing database users or roles. Credential updates require this method to already be Enabled unless the same request sets state to Enabled. Administrator rename is not supported in this API version. Both authentication methods may be Disabled.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -982,7 +1084,26 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Authentication"
+              "$ref": "#/definitions/PasswordAuthentication"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -993,40 +1114,18 @@
           }
         },
         "x-ms-examples": {
-          "Create the administrator when password authentication is enabled and no special-group member exists": {
-            "$ref": "./examples/PasswordAuthentications_CreateAdministrator.json"
-          },
           "Disable password authentication": {
             "$ref": "./examples/PasswordAuthentications_Disable.json"
-          },
-          "Enable password authentication and create the administrator when no special-group member exists": {
-            "$ref": "./examples/PasswordAuthentications_CreateAdministratorAndEnable.json"
-          },
-          "Enable password authentication and rename the existing administrator": {
-            "$ref": "./examples/PasswordAuthentications_RenameAdministratorAndEnable.json"
-          },
-          "Enable password authentication and reset the existing administrator password": {
-            "$ref": "./examples/PasswordAuthentications_ResetPasswordAndEnable.json"
-          },
-          "Enable password authentication without changing database roles": {
-            "$ref": "./examples/PasswordAuthentications_Enable.json"
-          },
-          "Enable password authentication, rename the administrator, and reset its password": {
-            "$ref": "./examples/PasswordAuthentications_RenameAndResetPasswordAndEnable.json"
-          },
-          "Rename a differently named PostgreSQL administrator role and reset its password": {
-            "$ref": "./examples/PasswordAuthentications_RenameAndResetPassword.json"
-          },
-          "Rename the sole PostgreSQL administrator role": {
-            "$ref": "./examples/PasswordAuthentications_RenameAdministrator.json"
-          },
-          "Reset the password when the requested and current administrator names match": {
-            "$ref": "./examples/PasswordAuthentications_ResetMatchingAdministratorPassword.json"
           },
           "Reset the sole PostgreSQL administrator role password": {
             "$ref": "./examples/PasswordAuthentications_ResetPassword.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/PasswordAuthentication"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HorizonDb/clusters/{clusterName}/changeDataCapture": {
@@ -9168,6 +9267,21 @@
         ]
       }
     },
+    "PasswordAuthentication": {
+      "type": "object",
+      "description": "The service-created PostgreSQL username-and-password authentication method for a HorizonDB cluster. This resource configures the authentication mechanism, including its enabled state and administrator login credentials; it is not a password-only resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PasswordAuthenticationProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "PasswordAuthenticationForPatchUpdate": {
       "type": "object",
       "description": "A sparse update request for PostgreSQL username-and-password authentication.",
@@ -9178,32 +9292,66 @@
         }
       }
     },
-    "PasswordAuthenticationPropertiesForPatchUpdate": {
+    "PasswordAuthenticationProperties": {
       "type": "object",
-      "description": "Properties for updating PostgreSQL username-and-password authentication. Omitted properties preserve their current values. State-only requests enable or disable the authentication mechanism. Credentials are secrets and are never returned or stored by the control plane. Login-only, password-only, and combined credential updates require this authentication method to already be Enabled unless the request also sets state to Enabled.",
+      "description": "Properties of the service-created PostgreSQL username-and-password authentication method.",
       "properties": {
         "state": {
           "$ref": "#/definitions/AuthenticationState",
-          "description": "The target password-authentication state. Enabled or Disabled can be supplied without credentials to toggle the feature. Disabled cannot be combined with administratorLogin or administratorLoginPassword. Disabling password authentication does not remove or modify existing database users or roles.",
+          "description": "The state of PostgreSQL username-and-password authentication.",
           "x-ms-mutability": [
-            "update"
+            "read",
+            "update",
+            "create"
           ]
         },
         "administratorLogin": {
           "type": "string",
-          "format": "password",
-          "description": "The PostgreSQL administrator role name. A login-only update requires password authentication to already be Enabled unless state is set to Enabled in this request, and requires exactly one member in the AzureSU-owned special group. The current name is an idempotent no-op; a different name renames the current member only when that target role does not already exist. When supplied together with administratorLoginPassword, this value can create the administrator if the special group has no member, reset the matching member's password, or rename a differently named member and reset its password.",
+          "description": "The PostgreSQL administrator login name. After it is set, renaming is not supported. Setting the login requires password authentication state to be Enabled in the same request.",
           "minLength": 1,
           "maxLength": 63,
           "x-ms-mutability": [
-            "update"
-          ],
-          "x-ms-secret": true
+            "read",
+            "create"
+          ]
         },
         "administratorLoginPassword": {
           "type": "string",
           "format": "password",
-          "description": "The PostgreSQL administrator password. A password-only update requires password authentication to already be Enabled unless state is set to Enabled in this request, and requires exactly one member in the AzureSU-owned special group. When supplied together with administratorLogin, it can create the administrator if the special group has no member, reset the matching member's password, or rename a differently named member and reset its password.",
+          "description": "The PostgreSQL administrator password. Setting the password requires password authentication state to be Enabled in the same request.",
+          "minLength": 8,
+          "maxLength": 128,
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ],
+          "x-ms-secret": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state of the PostgreSQL username-and-password authentication method.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "state"
+      ]
+    },
+    "PasswordAuthenticationPropertiesForPatchUpdate": {
+      "type": "object",
+      "description": "Properties for updating PostgreSQL username-and-password authentication. Omitted properties preserve their current values. This API version supports enabling or disabling the authentication method, and resetting its password. Supported changes can be combined. Credentials are secrets and are never returned.",
+      "properties": {
+        "state": {
+          "$ref": "#/definitions/AuthenticationState",
+          "description": "The target password-authentication state. Disabling password authentication does not remove or modify existing database users or roles. Disabled cannot be combined with administratorLoginPassword. ",
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "administratorLoginPassword": {
+          "type": "string",
+          "format": "password",
+          "description": "The PostgreSQL administrator password. Supplying this property resets the configured administrator's password. Resetting the password requires password authentication to already be Enabled. This property can be supplied with administratorLogin during initial login setup.",
           "minLength": 8,
           "maxLength": 128,
           "x-ms-mutability": [
