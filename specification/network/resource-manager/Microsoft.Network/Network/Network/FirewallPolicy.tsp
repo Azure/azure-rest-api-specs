@@ -99,6 +99,14 @@ interface FirewallPolicies {
   @tag("FirewallPolicies")
   delete is ArmResourceDeleteWithoutOkAsync<
     FirewallPolicy,
+    Parameters = {
+      /**
+       * Indicates that the write originates from AFC (Azure Firewall for Containers) and is permitted to modify an AFC-managed Firewall Policy.
+       */
+      @added(Versions.v2026_01_01)
+      @query("afcManagedSync")
+      afcManagedSync?: boolean;
+    },
     Response =
       | ArmDeletedResponse
       | ArmDeleteAcceptedLroResponse
