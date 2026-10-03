@@ -21540,6 +21540,12 @@ model VpnClientConfiguration {
   vpnClientIpsecPolicies?: IpsecPolicy[];
 
   /**
+   * Whether FIPS compliance is enabled for point-to-site VPN connections.
+   */
+  @added(Versions.v2025_07_01)
+  enableFipsCompliance?: boolean;
+
+  /**
    * The radius server address property of the VirtualNetworkGateway resource for vpn client connection.
    */
   radiusServerAddress?: string;
@@ -22094,6 +22100,12 @@ model VirtualNetworkGatewayConnectionListEntityPropertiesFormat {
    * EnableBgp flag.
    */
   enableBgp?: boolean;
+
+  /**
+   * Whether Federal Information Processing Standards (FIPS) compliance is enabled for site-to-site VPN connections.
+   */
+  @added(Versions.v2025_07_01)
+  enableFipsCompliance?: boolean;
 
   /**
    * GatewayCustomBgpIpAddresses to be used for virtual network gateway Connection.
@@ -23329,6 +23341,12 @@ model VirtualNetworkGatewayConnectionPropertiesFormat {
    * EnableBgp flag.
    */
   enableBgp?: boolean;
+
+  /**
+   * Whether Federal Information Processing Standards (FIPS) compliance is enabled for site-to-site VPN connections.
+   */
+  @added(Versions.v2025_07_01)
+  enableFipsCompliance?: boolean;
 
   /**
    * GatewayCustomBgpIpAddresses to be used for virtual network gateway Connection.
