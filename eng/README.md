@@ -90,14 +90,50 @@ changed tips. API and deletion failures fail the workflow.
 
 ## Repository labels
 
-Repository label definitions live in [`.github/labels.yaml`](../.github/labels.yaml).
-Keep service and team labels in their own section, separate from repository and
-workflow labels, and sort entries alphabetically within each section.
+Repository label configuration starts at [`.github/labels.yaml`](../.github/labels.yaml).
+It extends local definition files under `.github/labels/`: `common.yaml` contains
+shared process/triage labels, `services.yaml` contains service/team labels
+(both shared and repository-specific), and `workflow.yaml` contains
+repository-specific process labels. Shared labels follow the SDK registry's
+classification: color `e99695` identifies its service/area labels. These are
+checked-in definitions, not live imports from another repository.
+Sort entries alphabetically within each file.
 Add or edit labels through a pull request, keeping names unchanged unless a
 separate migration is intended. Names, six-digit hex colors, and descriptions are
 validated before synchronization. Empty descriptions are allowed. Label
 authorization remains separate in `.github/protected-labels.yml`; defining a
 label does not grant permission to apply it.
+
+### Extending label catalogs
+
+```yaml
+unconfiguredLabels: archive
+extends:
+  - ./labels/common.yaml
+  - ./labels/services.yaml
+  - ./labels/workflow.yaml
+labels:
+  - name: example
+    color: "123456"
+    description: A repository-specific label
+```
+
+Each base file can also contain `extends` and `labels`. Paths are relative to
+the declaring file and must resolve within `.github/labels/` (or to the root
+catalog). URLs and cross-repository imports are not supported. Only the root
+defines `unconfiguredLabels`; reusable files contain definitions, not cleanup
+policy.
+
+Labels merge by case-insensitive name. An extending file can override individual
+fields while inheriting the rest. Conflicting fields from sibling bases must be
+overridden explicitly in the extending file; file order does not silently decide
+them. Duplicate names in one file, cycles, invalid paths, missing files, and
+incomplete resolved labels fail the entire load before any mutation.
+
+The CLI and workflow use the same loader. Audits record every loaded source and
+its hash. Before applying changes, the workflow resolves the complete catalog
+from one default-branch commit and compares all source hashes, so a change to an
+inherited file invalidates the plan just like a change to the root.
 
 After installing dependencies from the repository root, validate or preview:
 

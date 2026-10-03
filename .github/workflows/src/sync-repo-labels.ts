@@ -13,13 +13,18 @@ import {
   labelCatalogSchema,
   labelPlanSchema,
   originalLabelName,
-  parseLabelCatalog,
   planLabels,
   sameLabel,
 } from "./label-catalog.ts";
 import type { ExistingLabel } from "./label-catalog.ts";
+import {
+  catalogSourcesSchema,
+  LABEL_CATALOG_PATH,
+  loadLabelCatalog,
+  resolveLabelCatalog,
+} from "./label-catalog-loader.ts";
 
-const CATALOG_PATH = ".github/labels.yaml";
+const CATALOG_PATH = LABEL_CATALOG_PATH;
 const LABEL_API_HEADERS = { "X-GitHub-Api-Version": "2026-03-10" };
 const itemSchema = z.strictObject({
   number: z.number().int().positive(),
@@ -33,6 +38,7 @@ const auditSchema = z.strictObject({
   defaultBranch: z.string().min(1),
   sourceSha: z.string().regex(/^[0-9a-f]{40}$/),
   catalogHash: z.string(),
+  catalogSources: catalogSourcesSchema,
   runId: z.number().int().positive(),
   runAttempt: z.number().int().positive(),
   dryRun: z.boolean(),
@@ -83,19 +89,30 @@ async function verifyCatalog(
   branch: string,
   expectedHash: string,
 ) {
-  const { data } = await github.rest.repos.getContent({
+  const { data: head } = await github.rest.repos.getCommit({
     ...context.repo,
-    path: CATALOG_PATH,
     ref: branch,
   });
-  if (Array.isArray(data) || data.type !== "file" || data.encoding !== "base64") {
-    throw new Error("Cannot read the default-branch label catalog");
-  }
-  const content = Buffer.from(data.content, "base64").toString("utf8");
-  if (catalogHash(content) !== expectedHash) {
+  const resolved = await resolveLabelCatalog(async (path) => {
+    const { data } = await github.rest.repos.getContent({
+      ...context.repo,
+      path,
+      ref: head.sha,
+    });
+    if (
+      Array.isArray(data) ||
+      data.type !== "file" ||
+      data.encoding !== "base64" ||
+      "target" in data ||
+      "submodule_git_url" in data
+    ) {
+      throw new Error(`Cannot read default-branch label catalog file: ${path}`);
+    }
+    return Buffer.from(data.content, "base64").toString("utf8");
+  });
+  if (resolved.hash !== expectedHash) {
     throw new Error("The default-branch catalog changed; rerun label synchronization");
   }
-  parseLabelCatalog(content);
 }
 
 const connectionSchema = z.object({
@@ -170,9 +187,7 @@ export async function prepareLabelSync(
   options: { catalogPath: string; auditDirectory: string; sourceSha: string; dryRun: boolean },
 ): Promise<Audit> {
   const defaultBranch = trustedRepository(args);
-  const content = await readFile(options.catalogPath, "utf8");
-  const catalog = parseLabelCatalog(content);
-  const hash = catalogHash(content);
+  const { catalog, hash, sources } = await loadLabelCatalog(options.catalogPath);
   await verifyCatalog(args, defaultBranch, hash);
   const plan = planLabels(catalog, await listRepositoryLabels(args.github, args.context.repo));
   const replacements: Audit["replacements"] = [];
@@ -190,6 +205,7 @@ export async function prepareLabelSync(
     defaultBranch,
     sourceSha: options.sourceSha,
     catalogHash: hash,
+    catalogSources: sources,
     runId: args.context.runId,
     runAttempt: args.context.runAttempt,
     dryRun: options.dryRun,
