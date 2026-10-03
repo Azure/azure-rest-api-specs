@@ -5,6 +5,7 @@
   "required": ["schemaVersion", "comparison", "confidence", "safety", "dimensions", "blockers"],
   "properties": {
     "schemaVersion": { "const": 1 },
+    "assessmentMode": { "enum": ["full", "fast"] },
     "pullRequest": {
       "type": "object",
       "additionalProperties": false,
@@ -50,7 +51,7 @@
             "blockers"
           ],
           "properties": {
-            "status": { "enum": ["passed", "failed", "not-assessed"] },
+            "status": { "enum": ["passed", "failed", "not-assessed", "skipped"] },
             "summary": { "type": "string", "minLength": 1 },
             "coverage": {
               "type": "object",

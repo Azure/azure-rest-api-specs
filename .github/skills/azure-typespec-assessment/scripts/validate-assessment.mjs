@@ -109,7 +109,7 @@ function validateLegacy(assessment) {
  * @param {string[]} errors
  */
 function validateComplianceDimension(compliance, semanticItems, errors) {
-  if (!["passed", "failed", "not-assessed"].includes(compliance?.status)) {
+  if (!["passed", "failed", "not-assessed", "skipped"].includes(compliance?.status)) {
     errors.push("Azure Guidelines status is invalid.");
     return;
   }
@@ -124,6 +124,28 @@ function validateComplianceDimension(compliance, semanticItems, errors) {
   }
   if (!compliance.coverage || typeof compliance.coverage !== "object") {
     errors.push("Azure Guidelines coverage is required.");
+    return;
+  }
+  if (compliance.status === "skipped") {
+    const semanticIntentCount = semanticItems.filter((item) => !item.informational).length;
+    if (
+      compliance.intentAssessments.length ||
+      compliance.findings.length ||
+      compliance.retrievalFailures.length ||
+      compliance.blockers.length
+    ) {
+      errors.push("Skipped Azure Guidelines assessment must not contain results or blockers.");
+    }
+    if (
+      compliance.coverage.assessedIntentCount !== 0 ||
+      compliance.coverage.selectedDocumentCount !== 0 ||
+      (compliance.coverage.unassessedIntentIds ?? []).length
+    ) {
+      errors.push("Skipped Azure Guidelines coverage is inconsistent.");
+    }
+    if (compliance.coverage.semanticIntentCount !== semanticIntentCount) {
+      errors.push("Skipped Azure Guidelines semantic intent count is inconsistent.");
+    }
     return;
   }
   const catalog = readComplianceCatalog();
@@ -431,6 +453,12 @@ export function validateAssessment(assessment) {
   if (assessment?.schemaVersion !== 1) return validateLegacy(assessment);
   /** @type {string[]} */
   const errors = [];
+  if (
+    assessment.assessmentMode !== undefined &&
+    !["full", "fast"].includes(assessment.assessmentMode)
+  ) {
+    errors.push("assessmentMode is invalid.");
+  }
   if (!assessment.comparison?.baseCommit) errors.push("comparison.baseCommit is required.");
   if (!assessment.comparison?.headCommit) errors.push("comparison.headCommit is required.");
   if (assessment.pullRequest) {
@@ -581,6 +609,12 @@ export function validateAssessment(assessment) {
   uniqueIds(methodGroups, "downstream method groups", errors);
   uniqueIds(typeImpacts, "SDK type impacts", errors);
   validateComplianceDimension(dimensions.compliance, dimensions.semantic?.items ?? [], errors);
+  if (assessment.assessmentMode === "fast" && dimensions.compliance?.status !== "skipped") {
+    errors.push("Fast assessment must mark Azure Guidelines as skipped.");
+  }
+  if (assessment.assessmentMode !== "fast" && dimensions.compliance?.status === "skipped") {
+    errors.push("Only fast assessment may skip Azure Guidelines.");
+  }
   for (const impact of typeImpacts) {
     downstreamGroupIds.add(impact.id);
   }

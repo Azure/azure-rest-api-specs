@@ -321,6 +321,55 @@ void test("assembler restores API-version-wide intents without candidate decisio
   }
 });
 
+void test("fast assessment renders only breaking and documentation dimensions", () => {
+  const work = fixture();
+  try {
+    writeJson(path.join(work, "model-input.json"), {
+      assessmentMode: "fast",
+      semanticReviewUnits: [{ reviewUnitId: "semantic-1" }],
+      informationalSemanticIntentIds: [],
+      restCandidates: [],
+      downstreamCandidates: [],
+      inferenceRequests: [],
+      complianceSearchRequests: [],
+      inputAccounting: {},
+    });
+
+    const assessment = assembleTestAssessment({
+      work,
+      judgment: {
+        schemaVersion: 1,
+        overallConfidence: "high",
+        blockers: [],
+        semanticIntents: [
+          {
+            reviewUnitId: "semantic-1",
+            title: "Update Widget",
+            summary: "Updates the Widget contract.",
+          },
+        ],
+        restDecisions: [],
+        downstreamDecisions: [],
+        complianceDecisions: [],
+      },
+    });
+
+    assert.equal(assessment.assessmentMode, "fast");
+    assert.equal(assessment.dimensions.compliance.status, "skipped");
+    assert.deepEqual(validateAssessment(assessment), []);
+    const html = renderAssessmentHtml(assessment);
+    assert.match(html, /Assessment mode: <strong>fast<\/strong>/);
+    assert.match(html, /Skipped: Semantic intents and Azure Guidelines/);
+    assert.doesNotMatch(html, /id="semantic-intents"/);
+    assert.doesNotMatch(html, /id="azure-compliance"/);
+    assert.match(html, /id="rest-breaking"/);
+    assert.match(html, /id="downstream-breaking"/);
+    assert.match(html, /id="document-quality"/);
+  } finally {
+    fs.rmSync(work, { recursive: true, force: true });
+  }
+});
+
 /** @param {string} work @returns {ComplianceDecision[]} */
 function addComplianceInput(work) {
   const request = {

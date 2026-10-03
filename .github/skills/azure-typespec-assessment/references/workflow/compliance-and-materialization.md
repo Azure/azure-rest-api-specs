@@ -17,6 +17,9 @@ When there are no compliance search requests, skip catalog scoring and document
 retrieval. Leave catalog scores, retrieval results, search blockers, and
 compliance judgments empty.
 
+Fast mode intentionally produces no compliance search requests. This is a
+completed skipped dimension, not a passing guideline assessment or a blocker.
+
 Do not place declaration IDs on guidance excerpts or reconstruct opaque IDs.
 Declaration linkage uses the prefilled qualified `declarationNames` in the
 intent-owned compliance judgment that cites the catalog ID and section.
