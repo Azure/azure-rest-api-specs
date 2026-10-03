@@ -336,17 +336,21 @@ using Microsoft.EventHub;
 @@usage(ClusterQuotaConfigurationProperties, Usage.input, "csharp");
 @@usage(CheckNameAvailabilityParameter, Usage.input | Usage.output, "csharp");
 @@usage(FailOver, Usage.input | Usage.output, "csharp");
+@@usage(Cluster, Usage.input, "csharp");
+@@usage(EHNamespace, Usage.input, "csharp");
 @@usage(
   NspAccessRulePropertiesSubscriptionsItem,
   Usage.input | Usage.output,
   "csharp"
 );
+@@clientName(Cluster, "EventHubsCluster", "csharp");
+@@clientName(EHNamespace, "EventHubsNamespace", "csharp");
 
 // Preserve the resource name constraints emitted by the reflection-based provisioning generator.
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
 #suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
 @@clientOption(
-  EventHubsCluster,
+  Cluster,
   "resource-name-constraint",
   #{ minLength: 6, maxLength: 50, pattern: "^[a-zA-Z0-9-]+$" },
   "csharp"
@@ -354,7 +358,7 @@ using Microsoft.EventHub;
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "Name constraints for provisioning compatibility"
 #suppress "@azure-tools/typespec-client-generator-core/client-option-requires-scope" "Name constraints for provisioning compatibility"
 @@clientOption(
-  EventHubsNamespace,
+  EHNamespace,
   "resource-name-constraint",
   #{ minLength: 1, maxLength: 256, pattern: "^[a-zA-Z0-9._-]+$" },
   "csharp"
@@ -477,11 +481,6 @@ using Microsoft.EventHub;
   Azure.Core.azureLocation,
   "csharp"
 );
-@@alternateType(
-  EHNamespaceIdListResult.value,
-  Azure.ResourceManager.Models.SubResource[],
-  "csharp"
-);
 @@clientName(NetworkRuleSetProperties.ipRules, "IPRules", "csharp");
 @@clientName(IpAddressType, "EventHubsIPAddressType", "csharp");
 @@clientName(EHNamespaceProperties.ipAddressType, "IPAddressType", "csharp");
@@ -503,13 +502,6 @@ using Microsoft.EventHub;
 );
 @@alternateType(PrivateEndpoint.id, Azure.Core.armResourceIdentifier, "csharp");
 @@alternateType(Subnet.id, Azure.Core.armResourceIdentifier, "csharp");
-@@alternateType(
-  NspAccessRuleProperties.subscriptions,
-  Azure.ResourceManager.Models.SubResource[],
-  "csharp"
-);
-@@alternateType(Cluster, EventHubsCluster, "csharp");
-@@alternateType(EHNamespace, EventHubsNamespace, "csharp");
 @@alternateType(EntityStatus, EventHubEntityStatus, "csharp");
 @@alternateType(NspAccessRule, EventHubsNspAccessRule, "csharp");
 @@alternateType(
@@ -521,63 +513,16 @@ using Microsoft.EventHub;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility - flatten properties for C# SDK"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  EventHubsCluster.properties,
+  Cluster.properties,
   "csharp"
 );
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Required for backward compatibility - flatten properties for C# SDK"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(
-  EventHubsNamespace.properties,
+  EHNamespace.properties,
   "csharp"
 );
 
-// Custom models to ensure C# resource classes inherit TrackedResourceData
 namespace Microsoft.EventHub {
-  /**
-   * Single Event Hubs Cluster resource in List or Get operations.
-   */
-  model EventHubsCluster
-    is Azure.ResourceManager.TrackedResource<ClusterProperties> {
-    ...Azure.ResourceManager.ResourceNameParameter<
-      Resource = Cluster,
-      KeyName = "clusterName",
-      SegmentName = "clusters",
-      NamePattern = ""
-    >;
-    ...OmitProperties<
-      Cluster,
-      "id" | "name" | "type" | "properties" | "location"
-    >;
-  }
-
-  /**
-   * Single Namespace item in List or Get Operation
-   */
-  model EventHubsNamespace
-    is Azure.ResourceManager.TrackedResource<EHNamespaceProperties> {
-    ...Azure.ResourceManager.ResourceNameParameter<
-      Resource = EHNamespace,
-      KeyName = "namespaceName",
-      SegmentName = "namespaces",
-      NamePattern = "^[a-zA-Z][a-zA-Z0-9-]{6,50}[a-zA-Z0-9]$"
-    >;
-    ...OmitProperties<
-      Cluster,
-      "id" | "name" | "type" | "properties" | "location" | "identity" | "sku"
-    >;
-
-    /**
-     * Properties of sku resource
-     */
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This property is an existing envelope property from the original OpenAPI specification and cannot be changed without breaking compatibility."
-    sku?: Sku;
-
-    /**
-     * Properties of BYOK Identity description
-     */
-    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "This property is an existing envelope property from the original OpenAPI specification and cannot be changed without breaking compatibility."
-    identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
-  }
-
   /**
    * Information of Access Rule in Network Profile
    */
@@ -659,7 +604,7 @@ namespace Microsoft.EventHub {
 
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
 @@clientOption(
-  EventHubsCluster,
+  Cluster,
   "resource-rbac-roles",
   #{
     AzureEventHubsDataOwner: "f526a384-b230-433a-b45c-95f59c4a2dec",
@@ -672,7 +617,7 @@ namespace Microsoft.EventHub {
 );
 #suppress "@azure-tools/typespec-client-generator-core/client-option" "RBAC roles for provisioning"
 @@clientOption(
-  EventHubsNamespace,
+  EHNamespace,
   "resource-rbac-roles",
   #{
     AzureEventHubsDataOwner: "f526a384-b230-433a-b45c-95f59c4a2dec",
@@ -683,12 +628,3 @@ namespace Microsoft.EventHub {
   },
   "csharp"
 );
-
-// We add this model in this namespace in order to replace some models with this model via alternateType decorator
-namespace Azure.ResourceManager.Models {
-  /** Represents a reference to an existing resource by its id. */
-  model SubResource {
-    /** The resource id. */
-    id?: Azure.Core.armResourceIdentifier;
-  }
-}
