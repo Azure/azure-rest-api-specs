@@ -557,9 +557,12 @@ interface PasswordAuthentications {
 
   @doc("Updates the service-created PostgreSQL username-and-password authentication method. The request is sparse and omitted properties preserve their current values. This API version supports enabling or disabling the method, initially setting the administrator login, and resetting its password; supported changes can be combined. Disabling cannot include credentials and does not remove or modify existing database users or roles. Credential updates require this method to already be Enabled unless the same request sets state to Enabled. Administrator rename is not supported in this API version. Both authentication methods may be Disabled.")
   @autoRoute
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is ArmCustomPatchAsync<
     PasswordAuthentication,
-    PasswordAuthenticationForPatchUpdate
+    PasswordAuthenticationForPatchUpdate,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = PasswordAuthentication> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 }
 
