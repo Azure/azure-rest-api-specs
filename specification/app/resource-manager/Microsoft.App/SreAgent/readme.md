@@ -26,7 +26,7 @@ These are the global settings for the SRE Agent.
 
 ``` yaml
 openapi-type: arm
-tag: package-2026-01-01
+tag: package-2026-07-01
 
 suppressions:
   - code: OperationsAPIImplementation
@@ -36,6 +36,22 @@ suppressions:
     reason: The parent resource Get call is defined in a separate file.
     from: sreagent.json
     
+```
+
+### Tag: package-2026-07-01
+These settings apply only when `--tag=package-2026-07-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2026-07-01'
+input-file:
+  - stable/2026-07-01/sreagent.json
+directive:
+  - suppress: AvoidAdditionalProperties
+    from: sreagent.json
+    reason: A dictionary allow passing through various key-value pairs
+    where:
+    - $.definitions.AgentConnectorProperties.properties.extendedProperties
+    - $.definitions.Connector.properties.extendedProperties
+
 ```
 
 ### Tag: package-2026-01-01
