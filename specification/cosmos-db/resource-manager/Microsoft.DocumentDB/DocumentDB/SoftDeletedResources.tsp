@@ -20,7 +20,7 @@ namespace Microsoft.DocumentDB;
 /**
  * The kind of soft delete action to perform.
  */
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_07_15)
 union SoftDeleteActionKind {
   string,
 
@@ -34,7 +34,7 @@ union SoftDeleteActionKind {
 /**
  * Metadata about the soft deletion of a resource.
  */
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_07_15)
 model SoftDeletionMetadata {
   /**
    * Indicates whether the resource is soft deleted.
@@ -55,7 +55,7 @@ model SoftDeletionMetadata {
 /**
  * The database account resource information for a soft-deleted account.
  */
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_07_15)
 model SoftDeletedDatabaseAccountResource {
   /**
    * An array that contains all of the locations enabled for the Cosmos DB account.
@@ -80,7 +80,7 @@ model SoftDeletedDatabaseAccountResource {
  * The properties of a soft-deleted database account.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Soft-deleted resources are read-only views of previously-deleted resources; they have no provisioning lifecycle and provisioningState is not applicable."
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_07_15)
 model SoftDeletedDatabaseAccountProperties {
   /**
    * The name of the database account.
@@ -106,7 +106,7 @@ model SoftDeletedDatabaseAccountProperties {
 /**
  * A Azure Cosmos DB soft-deleted database account.
  */
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_07_15)
 model SoftDeletedDatabaseAccountGetResult
   is Azure.ResourceManager.ProxyResource<SoftDeletedDatabaseAccountProperties> {
   ...ResourceNameParameter<
@@ -120,14 +120,14 @@ model SoftDeletedDatabaseAccountGetResult
 /**
  * The List operation response, that contains the soft-deleted database accounts and their properties.
  */
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_07_15)
 model SoftDeletedDatabaseAccountsListResult
   is Azure.Core.Page<SoftDeletedDatabaseAccountGetResult>;
 
 /**
  * Cosmos DB SQL database resource object
  */
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_07_15)
 model SoftDeletedSqlDatabaseResource {
   /**
    * Name of the Cosmos DB SQL database
@@ -146,7 +146,7 @@ model SoftDeletedSqlDatabaseResource {
  * The properties of a soft-deleted SQL database.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Soft-deleted resources are read-only views of previously-deleted resources; they have no provisioning lifecycle and provisioningState is not applicable."
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_07_15)
 model SoftDeletedSqlDatabaseProperties {
   /**
    * Metadata related to the soft deletion of the SQL database.
@@ -162,7 +162,7 @@ model SoftDeletedSqlDatabaseProperties {
 /**
  * An Azure Cosmos DB soft-deleted SQL database.
  */
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_07_15)
 model SoftDeletedSqlDatabaseGetResult
   is Azure.ResourceManager.ProxyResource<SoftDeletedSqlDatabaseProperties> {
   ...ResourceNameParameter<
@@ -176,14 +176,14 @@ model SoftDeletedSqlDatabaseGetResult
 /**
  * The List operation response, that contains the soft-deleted SQL databases and their properties.
  */
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_07_15)
 model SoftDeletedSqlDatabasesListResult
   is Azure.Core.Page<SoftDeletedSqlDatabaseGetResult>;
 
 /**
  * Cosmos DB SQL container resource object
  */
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_07_15)
 model SoftDeletedSqlContainerResource {
   /**
    * Name of the Cosmos DB SQL container
@@ -212,7 +212,7 @@ model SoftDeletedSqlContainerResource {
  * The properties of a soft-deleted SQL container.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Soft-deleted resources are read-only views of previously-deleted resources; they have no provisioning lifecycle and provisioningState is not applicable."
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_07_15)
 model SoftDeletedSqlContainerProperties {
   /**
    * Metadata related to the soft deletion of the SQL container.
@@ -228,7 +228,7 @@ model SoftDeletedSqlContainerProperties {
 /**
  * An Azure Cosmos DB soft-deleted SQL container.
  */
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_07_15)
 model SoftDeletedSqlContainerGetResult
   is Azure.ResourceManager.ProxyResource<SoftDeletedSqlContainerProperties> {
   ...ResourceNameParameter<
@@ -242,7 +242,7 @@ model SoftDeletedSqlContainerGetResult
 /**
  * The List operation response, that contains the soft-deleted SQL containers and their properties.
  */
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_07_15)
 model SoftDeletedSqlContainersListResult
   is Azure.Core.Page<SoftDeletedSqlContainerGetResult>;
 
@@ -252,7 +252,7 @@ model SoftDeletedSqlContainersListResult
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom routes for soft-deleted resources"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom routes for soft-deleted resources"
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_07_15)
 interface SoftDeletedDatabaseAccounts {
   /**
    * Retrieves the properties of a soft-deleted Azure Cosmos DB database account by location and accountName. This call requires 'Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/read' permission.
@@ -386,7 +386,7 @@ interface SoftDeletedDatabaseAccounts {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom routes for soft-deleted resources"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom routes for soft-deleted resources"
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_07_15)
 interface SoftDeletedSqlDatabases {
   /**
    * Retrieves the properties of a soft-deleted Azure Cosmos DB SQL database. This call requires 'Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/softDeletedSqlDatabases/read' permission.
@@ -531,7 +531,7 @@ interface SoftDeletedSqlDatabases {
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "Custom routes for soft-deleted resources"
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom routes for soft-deleted resources"
-@added(Versions.v2026_04_01_preview)
+@added(Versions.v2026_07_15)
 interface SoftDeletedSqlContainers {
   /**
    * Retrieves the properties of a soft-deleted Azure Cosmos DB SQL container. This call requires 'Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/softDeletedSqlDatabases/softDeletedSqlContainers/read' permission.
