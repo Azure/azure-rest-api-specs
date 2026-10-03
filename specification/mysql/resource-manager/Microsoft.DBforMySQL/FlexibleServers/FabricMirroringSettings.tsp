@@ -16,7 +16,7 @@ namespace Microsoft.DBforMySQL;
  * State of Fabric Mirroring.
  * Extensible string-based union per Azure guidelines.
  */
-@added(Versions.v2025_12_01_preview)
+@added(Versions.v2025_12_30)
 union FabricMirroringState {
   /** Fabric Mirroring is enabled. */
   Enabled: "Enabled",
@@ -33,7 +33,7 @@ union FabricMirroringState {
  * Extends the standard Azure.ResourceManager.ResourceProvisioningState with the
  * non-terminal `Updating` state used by this resource.
  */
-@added(Versions.v2025_12_01_preview)
+@added(Versions.v2025_12_30)
 union FabricMirroringProvisioningState {
   Azure.ResourceManager.ResourceProvisioningState,
 
@@ -44,7 +44,7 @@ union FabricMirroringProvisioningState {
 /**
  * Properties of the Fabric Mirroring settings resource.
  */
-@added(Versions.v2025_12_01_preview)
+@added(Versions.v2025_12_30)
 model FabricMirroringSettingsProperties {
   /** State of Fabric Mirroring (Enabled or Disabled). */
   state?: FabricMirroringState;
@@ -60,7 +60,7 @@ model FabricMirroringSettingsProperties {
 /**
  * The name of the Fabric Mirroring settings resource (singleton: only "default" is allowed).
  */
-@added(Versions.v2025_12_01_preview)
+@added(Versions.v2025_12_30)
 union FabricMirroringSettingsName {
   /** The default Fabric Mirroring settings instance. */
   Default: "Default",
@@ -85,7 +85,7 @@ model FabricMirroringSetting
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FabricMirroringSettings is a server-intrinsic singleton whose lifecycle is tied to the parent server. Settings are toggled via PUT with state Enabled/Disabled rather than created or deleted independently."
 @armResourceOperations
-@added(Versions.v2025_12_01_preview)
+@added(Versions.v2025_12_30)
 interface FabricMirroringSettings {
   @doc("Get Fabric Mirroring settings.")
   get is ArmResourceRead<FabricMirroringSetting>;
