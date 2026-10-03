@@ -2,7 +2,7 @@ import { inspect } from "node:util";
 import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { equals } from "../../../shared/src/set.ts";
 import { byDate, invert } from "../../../shared/src/sort.ts";
-import { extractInputs } from "../context.ts";
+import { extractInputs, getOpenPullRequest } from "../context.ts";
 import type { Core, GitHub, GitHubScriptArgs } from "../github.ts";
 import { LabelAction } from "../label.ts";
 import { ArmAutoSignoffLabel } from "./arm-auto-signoff-labels.ts";
@@ -63,6 +63,9 @@ export default async function getLabelAction({ github, context, core }: GitHubSc
   labelActions: ManagedLabelActions;
 }> {
   const { owner, repo, issue_number, head_sha } = await extractInputs(github, context, core);
+  if (!(await getOpenPullRequest(github, core, { owner, repo, issue_number }))) {
+    return { headSha: "", issueNumber: NaN, labelActions: createNoneLabelActions() };
+  }
 
   return await getLabelActionImpl({
     owner,

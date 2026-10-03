@@ -30,7 +30,7 @@ import { CheckConclusion, PER_PAGE_MAX } from "../../../shared/src/github.ts";
 import { intersect } from "../../../shared/src/set.ts";
 import { byDate, invert } from "../../../shared/src/sort.ts";
 import { commentOrUpdate } from "../comment.ts";
-import { extractInputs } from "../context.ts";
+import { extractInputs, getOpenPullRequest } from "../context.ts";
 import { TYPESPEC_SUPPRESSIONS_APPROVED_LABEL } from "../label.ts";
 import {
   ImpactAssessmentSchema,
@@ -270,10 +270,7 @@ export default async function summarizeChecks({
 }: GitHubScriptArgs): Promise<void> {
   const { owner, repo, issue_number, head_sha } = await extractInputs(github, context, core);
 
-  if (!issue_number) {
-    core.warning(`No issue number found for this event. Exiting summarize-checks.js early.`);
-    return;
-  }
+  if (!(await getOpenPullRequest(github, core, { owner, repo, issue_number }))) return;
 
   // Publish PR identity as step outputs so the workflow can upload issue-number / head-sha
   // handoff artifacts. Downstream workflow_run consumers (e.g. data-plane review assignment)

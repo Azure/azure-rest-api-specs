@@ -12,6 +12,25 @@ export type PullRequest =
 export type RestEndpointMethodTypes =
   import("@octokit/plugin-rest-endpoint-methods").RestEndpointMethodTypes;
 
+/** Re-read PR state because a queued workflow's event payload can be stale. */
+export async function getOpenPullRequest(
+  github: Pick<GitHub, "rest">,
+  core: Core,
+  { owner, repo, issue_number }: { owner: string; repo: string; issue_number: number },
+) {
+  if (!Number.isInteger(issue_number) || issue_number <= 0) {
+    core.info("No PR number resolved; skipping PR updates.");
+    return;
+  }
+
+  const { data: pr } = await github.rest.pulls.get({ owner, repo, pull_number: issue_number });
+  if (pr.state !== "open") {
+    core.info(`PR ${owner}/${repo}#${issue_number} is closed; skipping PR updates.`);
+    return;
+  }
+  return pr;
+}
+
 /**
  * Extracts inputs from context based on event name and properties.
  * run_id is only defined for "workflow_run:completed" events.
