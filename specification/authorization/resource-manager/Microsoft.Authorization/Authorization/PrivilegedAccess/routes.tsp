@@ -59,11 +59,14 @@ interface PrivilegedResources {
 
     /**
      * Advisory maximum page-size hint. The server may return fewer items than
-     * `maxpagesize` and still include a `nextLink`. Server cap: 1000. Name
-     * follows the standard Azure pagination convention (`maxpagesize`)
-     * rather than the strict-maximum `$top` to signal the advisory semantics.
+     * `maxpagesize` and still include a `nextLink`. Accepted range: 1 through
+     * 1000. Name follows the standard Azure pagination convention
+     * (`maxpagesize`) rather than the strict-maximum `$top` to signal the
+     * advisory semantics.
      */
     @query("maxpagesize")
+    @minValue(1)
+    @maxValue(1000)
     maxpagesize?: int32,
 
     /**
@@ -105,11 +108,16 @@ interface PrivilegedResources {
      * OR-composed and matched case-insensitively; separate clauses remain
      * AND-composed.
      *
+     * The decoded expression cannot exceed 4096 characters, and each decoded
+     * string literal cannot exceed 1024 characters. The combined resource-type,
+     * scope, and predicate input count cannot exceed 50.
+     *
      * A role assignment status predicate selects resource rows that have at
      * least one matching role; it does not filter the contents of `roles`.
      * Every matching resource returns its complete roles collection.
      */
     @query("$filter")
+    @maxLength(4096)
     filter?: string,
 
     /**

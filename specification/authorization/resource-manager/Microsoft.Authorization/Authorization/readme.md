@@ -184,6 +184,17 @@ directive:
       `allowUnauthorizedActions` and do not bypass standard Azure RBAC.
 ```
 
+### Tag: package-2026-06-01-preview-only
+
+These settings apply only when `--tag=package-2026-06-01-preview-only` is specified on the command line.
+This opt-in PrivilegedAccess-only tag contains only the `2026-06-01-preview` PrivilegedAccess Swagger.
+The shared Authorization default remains the composite `package-2026-06-01-preview` tag.
+
+```yaml $(tag) == 'package-2026-06-01-preview-only'
+input-file:
+  - preview/2026-06-01-preview/authorization-PrivilegedAccess.json
+```
+
 ### Tag: package-2026-06-01-preview
 
 These settings apply only when `--tag=package-2026-06-01-preview` is specified on the command line.
