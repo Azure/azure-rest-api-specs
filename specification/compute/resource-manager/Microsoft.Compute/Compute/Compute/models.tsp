@@ -487,6 +487,20 @@ union AllocationStrategy {
   Prioritized: "Prioritized",
 }
 
+/**
+ * Specifies how VM SKUs are distributed across instances in the virtual machine scale set.
+ */
+@added(Versions.v2026_09_01)
+union SkuDistributionMode {
+  string,
+
+  /** VMs may use different SKUs from the SkuProfile list (multi-SKU). This is the default behavior. */
+  Heterogeneous: "Heterogeneous",
+
+  /** All VMs use a single SKU selected from the SkuProfile list. */
+  Homogeneous: "Homogeneous",
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union ExpandTypesForGetVMScaleSets {
   string,
@@ -1242,6 +1256,10 @@ union LifecycleHookActionState {
 
   /** The lifecycle hook for the target resource is rejected. */
   Rejected: "Rejected",
+
+  /** A terminal state that indicates the lifecycle hook for the target resource is no longer relevant & was abandoned by the platform. No further action on the target is expected from the customer. */
+  @added(Versions.v2026_09_01)
+  Abandoned: "Abandoned",
 }
 
 /**
@@ -1256,6 +1274,10 @@ union VMScaleSetLifecycleHookEventState {
 
   /** The lifecycle hook event is completed. i.e., all the target resources in the event have moved to a terminal state. */
   Completed: "Completed",
+
+  /** A terminal state that indicates the lifecycle hook event is no longer relevant & was abandoned by the platform. No further action on the event is expected from the customer. */
+  @added(Versions.v2026_09_01)
+  Abandoned: "Abandoned",
 }
 
 /**
@@ -3087,6 +3109,14 @@ model VirtualMachineScaleSetIPConfigurationProperties {
   privateIPAddressVersion?: IPVersion;
 
   /**
+   * The private IP address prefix length. If specified and the allocation method is dynamic, the service will allocate a CIDR block instead of a single IP address.
+   */
+  @added(Versions.v2026_09_01)
+  @minValue(1)
+  @maxValue(128)
+  privateIPAddressPrefixLength?: int32;
+
+  /**
    * Specifies an array of references to backend address pools of application gateways. A scale set can reference backend address pools of multiple application gateways. Multiple scale sets cannot use the same application gateway.
    */
   applicationGatewayBackendAddressPools?: SubResource[];
@@ -3885,6 +3915,12 @@ model SkuProfile {
   allocationStrategy?: AllocationStrategy;
 
   /**
+   * Specifies how VM SKUs are distributed across instances. Heterogeneous (default) allows multiple SKUs; Homogeneous pins all VMs to a single selected SKU from the SkuProfile list.
+   */
+  @added(Versions.v2026_09_01)
+  skuDistributionMode?: SkuDistributionMode;
+
+  /**
    * Specifies the policy that controls whether the platform may automatically migrate scale set instances to a different VM size from the SKU profile depending on platform demands. When omitted, automatic SKU migration is disabled.
    */
   @added(Versions.v2026_03_01)
@@ -4412,6 +4448,15 @@ model VirtualMachineScaleSetUpdateIPConfigurationProperties {
    * Available from Api-Version 2017-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4.  Possible values are: 'IPv4' and 'IPv6'.
    */
   privateIPAddressVersion?: IPVersion;
+
+  /**
+   * The private IP address prefix length. If specified and the allocation method is dynamic, the service will allocate a CIDR block instead of a single IP address.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "Nullable only on the update (PATCH) model so callers can explicitly clear an allocated prefix; the create/read models use a plain optional int32."
+  @added(Versions.v2026_09_01)
+  @minValue(1)
+  @maxValue(128)
+  privateIPAddressPrefixLength?: int32 | null;
 
   /**
    * The application gateway backend address pools.
@@ -5565,6 +5610,19 @@ model BootDiagnosticsInstanceView {
 }
 
 /**
+ * Specifies a FlexProfile for VM size. Azure may deploy a compatible alternative VM size based on
+ * capacity and placement considerations. The deployed size is returned in hardwareProfile.vmSize.
+ */
+@added(Versions.v2026_09_01)
+model FlexProfile {
+  /**
+   * Specifies the preferred VM size. Azure may deploy a compatible alternative size based on capacity
+   * and placement considerations. Supported VM families for FlexProfile may vary by region.
+   */
+  preferredVMSize: VirtualMachineSizeTypes;
+}
+
+/**
  * Specifies the hardware settings for the virtual machine.
  */
 model HardwareProfile {
@@ -6218,6 +6276,14 @@ model VirtualMachineNetworkInterfaceIPConfigurationProperties {
   privateIPAddressVersion?: IPVersions;
 
   /**
+   * The private IP address prefix length. If specified and the allocation method is dynamic, the service will allocate a CIDR block instead of a single IP address.
+   */
+  @added(Versions.v2026_09_01)
+  @minValue(1)
+  @maxValue(128)
+  privateIPAddressPrefixLength?: int32;
+
+  /**
    * Specifies an array of references to application security group.
    */
   applicationSecurityGroups?: SubResource[];
@@ -6677,6 +6743,18 @@ model VirtualMachineProperties {
    * Specifies the hardware settings for the virtual machine.
    */
   hardwareProfile?: HardwareProfile;
+
+  /**
+   * Specifies a FlexProfile for VM size. Create and update requests that include flexProfile must omit
+   * hardwareProfile.vmSize, even when it matches the currently deployed size. Azure may deploy a
+   * compatible alternative VM size based on capacity and placement considerations. Responses for a VM
+   * with FlexProfile include both flexProfile.preferredVMSize, which records the requested preferred size,
+   * and hardwareProfile.vmSize, which reports the deployed size. When using a GET response to construct
+   * a PUT or PATCH request, remove hardwareProfile.vmSize if the request includes flexProfile.
+   * FlexProfile may not be supported with VM properties that constrain placement.
+   */
+  @added(Versions.v2026_09_01)
+  flexProfile?: FlexProfile;
 
   /**
    * Specifies Redeploy, Reboot and ScheduledEventsAdditionalPublishingTargets Scheduled Event related configurations for the virtual machine.
