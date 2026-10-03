@@ -26,7 +26,7 @@ These are the global settings for the Authorization API.
 
 ```yaml
 openapi-type: arm
-tag: package-2025-12-01-preview
+tag: package-2026-09-01
 modelerfour:
   lenient-model-deduplication: true
 ```
@@ -104,14 +104,14 @@ directive:
     reason: The scope property in DenyAssignmentProperties is readOnly and returned in responses only. It does not repeat the path parameter in requests.
 ```
 
-### Tag: package-2025-12-01-preview
+### Tag: package-2026-09-01
 
-These settings apply only when `--tag=package-2025-12-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2026-09-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2025-12-01-preview'
+```yaml $(tag) == 'package-2026-09-01'
 input-file:
   - stable/2015-07-01/ClassicAdmin.json
-  - preview/2024-07-01-preview/authorization-DenyAssignmentCalls.json
+  - stable/2026-09-01/authorization-DenyAssignmentCalls.json
   - stable/2022-04-01/authorization-ProviderOperationsCalls.json
   - stable/2022-04-01/authorization-RoleAssignmentsCalls.json
   - preview/2022-05-01-preview/authorization-RoleDefinitionsCalls.json
