@@ -11,6 +11,18 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const workflowsDir = resolve(__dirname, "..");
 
 describe("workflow files", () => {
+  it("does not update labels for skipped producers, but allows failed producers with artifacts", async () => {
+    const workflow = z
+      .object({
+        jobs: z.object({ "update-labels": z.object({ if: z.string() }) }),
+      })
+      .parse(load(await readFile(resolve(workflowsDir, "update-labels.yaml"), "utf8")));
+
+    expect(workflow.jobs["update-labels"].if).toBe(
+      "${{ github.event.workflow_run.conclusion != 'skipped' }}",
+    );
+  });
+
   it("publishes the TypeSpec suppressions markdown as a job-summary artifact", async () => {
     const workflow = z
       .object({

@@ -10,6 +10,74 @@ function updateLabels(asyncFunctionArgs: unknown) {
 }
 
 describe("updateLabels", () => {
+  it.each(["check_run", "workflow_run", "issue_comment"])(
+    "reuses the artifacts used to resolve a trusted %s producer",
+    async (event) => {
+      const github = createMockGithub();
+      const core = createMockCore();
+      github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+        data: {
+          artifacts: [
+            { name: `head-sha=${fullGitSha}` },
+            { name: "issue-number=123" },
+            { name: "label-foo=true" },
+          ],
+        },
+      });
+      const context = {
+        eventName: "workflow_run",
+        payload: {
+          action: "completed",
+          workflow_run: {
+            event,
+            conclusion: "failure",
+            id: 456,
+            repository: { name: "repo", owner: { login: "owner" } },
+          },
+        },
+      };
+
+      await updateLabels({ github, context, core });
+
+      expect(github.rest.actions.listWorkflowRunArtifacts).toHaveBeenCalledExactlyOnceWith({
+        owner: "owner",
+        repo: "repo",
+        run_id: 456,
+        per_page: PER_PAGE_MAX,
+      });
+      expect(github.rest.issues.addLabels).toHaveBeenCalledWith({
+        owner: "owner",
+        repo: "repo",
+        issue_number: 123,
+        labels: ["foo"],
+      });
+      expect(core.setOutput).toHaveBeenCalledWith("head_sha", fullGitSha);
+    },
+  );
+
+  it("does not reload an empty artifact collection", async () => {
+    const github = createMockGithub();
+    await updateLabels({
+      github,
+      core: createMockCore(),
+      context: {
+        eventName: "workflow_run",
+        payload: {
+          action: "completed",
+          workflow_run: {
+            event: "check_run",
+            id: 456,
+            repository: { name: "repo", owner: { login: "owner" } },
+          },
+        },
+      },
+    });
+
+    expect(github.rest.actions.listWorkflowRunArtifacts).toHaveBeenCalledTimes(1);
+    expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
+    expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
+  });
+
   it("loads inputs from context", async () => {
     const core = createMockCore();
 
@@ -44,7 +112,7 @@ describe("updateLabels", () => {
     expect(core.setOutput).toBeCalledWith("head_sha", fullGitSha);
     expect(core.setOutput).toBeCalledWith("issue_number", 123);
 
-    expect(github.rest.actions.listWorkflowRunArtifacts).toBeCalledWith({
+    expect(github.rest.actions.listWorkflowRunArtifacts).toHaveBeenCalledExactlyOnceWith({
       owner: "TestRepoOwnerLogin",
       repo: "TestRepoName",
       run_id: 456,
@@ -61,6 +129,25 @@ describe("updateLabels", () => {
 });
 
 describe("updateLabelsImpl", () => {
+  it("propagates artifact lookup failures without changing labels", async () => {
+    const github = createMockGithub();
+    github.rest.actions.listWorkflowRunArtifacts.mockRejectedValue(new Error("rate limited"));
+
+    await expect(
+      updateLabelsImpl({
+        owner: "owner",
+        repo: "repo",
+        head_sha: fullGitSha,
+        issue_number: 123,
+        run_id: 456,
+        github,
+        core: createMockCore(),
+      }),
+    ).rejects.toThrow("rate limited");
+    expect(github.rest.issues.addLabels).not.toHaveBeenCalled();
+    expect(github.rest.issues.removeLabel).not.toHaveBeenCalled();
+  });
+
   it("throws if no run_id", async () => {
     const github = createMockGithub();
 
