@@ -1083,11 +1083,24 @@ model AuthenticationProperties {
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("Properties of the service-created PostgreSQL username-and-password authentication method. Administrator credentials are accepted only on update and are never returned.")
+@doc("Properties of the service-created PostgreSQL username-and-password authentication method.")
 model PasswordAuthenticationProperties {
   @doc("The state of PostgreSQL username-and-password authentication.")
-  @visibility(Lifecycle.Read)
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   state: AuthenticationState;
+
+  @doc("The PostgreSQL administrator login name. After it is set, renaming is not supported. Setting the login requires password authentication state to be Enabled in the same request.")
+  @minLength(1)
+  @maxLength(63)
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  administratorLogin?: string;
+
+  @doc("The PostgreSQL administrator password. Setting the password requires password authentication state to be Enabled in the same request.")
+  @secret
+  @minLength(8)
+  @maxLength(128)
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  administratorLoginPassword?: string;
 
   @doc("The provisioning state of the PostgreSQL username-and-password authentication method.")
   @visibility(Lifecycle.Read)
@@ -1107,20 +1120,13 @@ model MicrosoftEntraAuthenticationProperties {
 }
 
 @added(Versions.v2026_10_01_preview)
-@doc("Properties for updating PostgreSQL username-and-password authentication. Omitted properties preserve their current values. This API version supports enabling or disabling the authentication method, initially setting the administrator login, and resetting its password. Supported changes can be combined. Credentials are secrets and are never returned.")
+@doc("Properties for updating PostgreSQL username-and-password authentication. Omitted properties preserve their current values. This API version supports enabling or disabling the authentication method, and resetting its password. Supported changes can be combined. Credentials are secrets and are never returned.")
 model PasswordAuthenticationPropertiesForPatchUpdate {
-  @doc("The target password-authentication state. Enabled or Disabled can be supplied without credentials to toggle the feature. Disabled cannot be combined with administratorLogin or administratorLoginPassword. Disabling password authentication does not remove or modify existing database users or roles.")
+  @doc("The target password-authentication state. Disabling password authentication does not remove or modify existing database users or roles. Disabled cannot be combined with administratorLoginPassword. ")
   @visibility(Lifecycle.Update)
   state?: AuthenticationState;
 
-  @doc("The PostgreSQL administrator login name. In this API version, this property initially sets the login name. After it is set, supplying the current value is an idempotent no-op and supplying a different value is rejected because renaming is not supported. A future API version may support renaming through this property. Setting the login requires password authentication to already be Enabled unless state is set to Enabled in the same request.")
-  @secret
-  @minLength(1)
-  @maxLength(63)
-  @visibility(Lifecycle.Update)
-  administratorLogin?: string;
-
-  @doc("The PostgreSQL administrator password. Supplying this property resets the configured administrator's password. Resetting the password requires password authentication to already be Enabled unless state is set to Enabled in the same request. This property can be supplied with administratorLogin during initial login setup.")
+  @doc("The PostgreSQL administrator password. Supplying this property resets the configured administrator's password. Resetting the password requires password authentication to already be Enabled. This property can be supplied with administratorLogin during initial login setup.")
   @secret
   @minLength(8)
   @maxLength(128)
