@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   buildApprovalResetComment,
   buildUnauthorizedApplyComment,
-} from "../../src/protected-labels/label-comments.ts";
+} from "../../src/label-policy-comments.ts";
 
 describe("buildUnauthorizedApplyComment (#46787)", () => {
   it("names the actor, label, and allowed approvers", () => {

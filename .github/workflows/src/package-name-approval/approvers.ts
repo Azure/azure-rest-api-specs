@@ -1,8 +1,4 @@
-import {
-  loadProtectedLabelsConfig,
-  UNPROTECTED_PLANE,
-  type ProtectedLabelsConfig,
-} from "../protected-labels/authorization.ts";
+import { loadPackageNamePolicy, UNPROTECTED_PLANE, type PackageNamePolicy } from "./policy.ts";
 
 export type ApproversConfig = {
   "data-plane"?: Record<string, string[]>;
@@ -32,7 +28,7 @@ const PROTECTED_LABELS_PATH = ".github/protected-labels.yml";
  *   data-plane: { dotnet: [...], java: [...], global: [...] }
  *   management-plane: { all: [...] }
  */
-export function createApproversConfig(config: ProtectedLabelsConfig): ApproversConfig {
+export function createApproversConfig(config: PackageNamePolicy): ApproversConfig {
   const dataPlane: Record<string, string[]> = {};
 
   let mgmtAll: string[] = [];
@@ -99,25 +95,12 @@ export function createApproversConfig(config: ProtectedLabelsConfig): ApproversC
 
   // Parse tier1 configuration. Plane values are language lists; ignore any
   // "unprotected" literal so the union type does not leak into string[] fields.
-  const tier1Entry = config.labels["tier1"];
-  const tier1Config: { "management-plane"?: string[]; "data-plane"?: string[] } =
-    tier1Entry && !Array.isArray(tier1Entry)
-      ? {
-          ...(Array.isArray(tier1Entry["management-plane"])
-            ? { "management-plane": tier1Entry["management-plane"] }
-            : {}),
-          ...(Array.isArray(tier1Entry["data-plane"])
-            ? { "data-plane": tier1Entry["data-plane"] }
-            : {}),
-        }
-      : {};
-
   return {
     "data-plane": dataPlane,
     // Intentionally unions all mgmt approvers into one list - any mgmt approver
     // for any language can approve any other language on mgmt plane.
     "management-plane": { all: mgmtAll },
-    tier1: tier1Config,
+    tier1: config.tier1,
     unprotected: {
       "data-plane": unprotectedDataPlane,
       "management-plane": unprotectedMgmt,
@@ -128,5 +111,5 @@ export function createApproversConfig(config: ProtectedLabelsConfig): ApproversC
 export async function loadApproversConfig(
   path: string = PROTECTED_LABELS_PATH,
 ): Promise<ApproversConfig> {
-  return createApproversConfig(await loadProtectedLabelsConfig(path));
+  return createApproversConfig(await loadPackageNamePolicy(path));
 }
