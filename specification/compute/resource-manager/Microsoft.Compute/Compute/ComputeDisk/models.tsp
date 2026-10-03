@@ -2,6 +2,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using Versioning;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Common;
 
@@ -185,6 +186,12 @@ union DiskState {
    * A disk is created for upload and a write token has been issued for uploading to it.
    */
   ActiveUpload: "ActiveUpload",
+
+  /**
+   * The disk has been claimed by an owner resource.
+   */
+  @added(Versions.v2026_10_02)
+  Claimed: "Claimed",
 }
 
 /**
@@ -495,6 +502,24 @@ model AvailabilityPolicy {
 }
 
 /**
+ * Values for the scheduler type when the supported virtualization type is Direct.
+ */
+@added(Versions.v2026_10_02)
+union DirectVirtualizationSchedulerType {
+  string,
+
+  /**
+   * Azure managed direct virtualization scheduler
+   */
+  AzureManaged: "AzureManaged",
+
+  /**
+   * Guest managed direct virtualization scheduler
+   */
+  GuestManaged: "GuestManaged",
+}
+
+/**
  * Disk resource properties.
  */
 model DiskProperties {
@@ -679,6 +704,13 @@ model DiskProperties {
    */
   @added(Versions.v2025_01_02)
   availabilityPolicy?: AvailabilityPolicy;
+
+  /**
+   * Contains the claim identifier for a disk claimed by an ownerResource.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2026_10_02)
+  claimIdentifier?: string;
 }
 
 /**
@@ -730,6 +762,20 @@ model SupportedCapabilities {
    */
   @added(Versions.v2025_01_02)
   supportedSecurityOption?: SupportedSecurityOption;
+
+  /**
+   * The virtualization types supported by the disk. If set it can be Undefined or Direct.
+   */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @added(Versions.v2026_10_02)
+  supportedVirtualizationTypes?: string;
+
+  /**
+   * The direct virtualization scheduler type supported by the disk.
+   */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  @added(Versions.v2026_10_02)
+  directVirtualizationSchedulerType?: DirectVirtualizationSchedulerType;
 }
 
 /**
@@ -1112,6 +1158,33 @@ model DiskUpdateProperties {
    */
   @added(Versions.v2025_01_02)
   availabilityPolicy?: AvailabilityPolicy;
+}
+
+/**
+ * Request body for disk claim operation.
+ */
+@added(Versions.v2026_10_02)
+model ClaimRequest {
+  /**
+   * The Azure resource ID of the resource claiming ownership of this disk.
+   */
+  ownerResourceId: Azure.Core.armResourceIdentifier;
+}
+
+/**
+ * Request body for disk unclaim operation.
+ */
+@added(Versions.v2026_10_02)
+model UnclaimRequest {
+  /**
+   * The Azure resource ID of the resource releasing ownership of this disk.
+   */
+  ownerResourceId: Azure.Core.armResourceIdentifier;
+
+  /**
+   * Indicates whether the unclaim operation should be forced.
+   */
+  force?: boolean;
 }
 
 /**
