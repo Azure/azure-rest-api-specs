@@ -15,6 +15,7 @@ namespace Microsoft.Chaos;
 @armResourceOperations
 @removed(Microsoft.Chaos.Versions.v2025_01_01)
 @added(Microsoft.Chaos.Versions.v2026_05_01_preview)
+@removed(Microsoft.Chaos.Versions.v2026_11_01)
 interface PrivateAccesses {
   /**
    * Get a private access resource
