@@ -51,7 +51,7 @@
       "name": "Insights"
     },
     {
-      "name": "CommandJob"
+      "name": "Jobs"
     },
     {
       "name": "Models"
@@ -9406,7 +9406,7 @@
             "name": "jobType",
             "in": "query",
             "required": false,
-            "description": "Filter by job type (e.g. 'Command').",
+            "description": "Filter by job type (e.g. 'Command' or 'Pipeline').",
             "schema": {
               "$ref": "#/components/schemas/JobType"
             },
@@ -9487,7 +9487,7 @@
           }
         },
         "tags": [
-          "CommandJob"
+          "Jobs"
         ]
       }
     },
@@ -9553,7 +9553,7 @@
           }
         },
         "tags": [
-          "CommandJob"
+          "Jobs"
         ]
       },
       "put": {
@@ -9627,7 +9627,7 @@
           }
         },
         "tags": [
-          "CommandJob"
+          "Jobs"
         ],
         "requestBody": {
           "required": true,
@@ -9715,7 +9715,7 @@
           }
         },
         "tags": [
-          "CommandJob"
+          "Jobs"
         ]
       }
     },
@@ -9794,7 +9794,7 @@
           }
         },
         "tags": [
-          "CommandJob"
+          "Jobs"
         ]
       }
     },
@@ -9897,7 +9897,7 @@
           }
         },
         "tags": [
-          "CommandJob"
+          "Jobs"
         ]
       }
     },
@@ -9989,7 +9989,7 @@
           }
         },
         "tags": [
-          "CommandJob"
+          "Jobs"
         ]
       }
     },
@@ -10052,7 +10052,7 @@
           }
         },
         "tags": [
-          "CommandJob"
+          "Jobs"
         ]
       }
     },
@@ -10115,7 +10115,7 @@
           }
         },
         "tags": [
-          "CommandJob"
+          "Jobs"
         ]
       }
     },
@@ -10188,7 +10188,7 @@
           }
         },
         "tags": [
-          "CommandJob"
+          "Jobs"
         ]
       }
     },
@@ -29671,7 +29671,8 @@
         "discriminator": {
           "propertyName": "jobType",
           "mapping": {
-            "Command": "#/components/schemas/CommandJob"
+            "Command": "#/components/schemas/CommandJob",
+            "Pipeline": "#/components/schemas/PipelineJob"
           }
         },
         "description": "Base properties of a Job."
@@ -29778,7 +29779,8 @@
           {
             "type": "string",
             "enum": [
-              "Command"
+              "Command",
+              "Pipeline"
             ]
           }
         ],
@@ -52023,6 +52025,106 @@
           }
         },
         "description": "Represents the response for a pending upload request"
+      },
+      "PipelineJob": {
+        "type": "object",
+        "required": [
+          "jobType"
+        ],
+        "properties": {
+          "jobType": {
+            "type": "string",
+            "enum": [
+              "Pipeline"
+            ],
+            "description": "Job type."
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Display name of the job."
+          },
+          "description": {
+            "type": "string",
+            "description": "The asset description text."
+          },
+          "tags": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Tag dictionary. Tags can be added, removed, and updated."
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "The asset property dictionary."
+          },
+          "experimentName": {
+            "type": "string",
+            "description": "Name of the experiment the job belongs to. If omitted, the service uses \"Default\"."
+          },
+          "services": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/JobService"
+            },
+            "description": "Services exposed by the job."
+          },
+          "computeId": {
+            "type": "string",
+            "description": "Compute resource ID."
+          },
+          "settings": {
+            "type": "object",
+            "additionalProperties": {},
+            "description": "Pipeline settings."
+          },
+          "jobs": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": {}
+            },
+            "description": "Pipeline nodes keyed by name. Node objects preserve their original field names."
+          },
+          "inputs": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": {}
+            },
+            "description": "Graph inputs keyed by name."
+          },
+          "outputs": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": {}
+            },
+            "description": "Graph outputs keyed by name."
+          },
+          "sourceJobId": {
+            "type": "string",
+            "description": "ARM resource ID of the source job."
+          },
+          "isArchived": {
+            "type": "boolean",
+            "description": "Is the job archived?"
+          },
+          "status": {
+            "type": "string",
+            "description": "Status of the job.",
+            "readOnly": true
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/JobProperties"
+          }
+        ],
+        "description": "Properties of a Pipeline Job."
       },
       "ProceduralMemoryItem": {
         "type": "object",

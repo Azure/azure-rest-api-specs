@@ -18,7 +18,7 @@ tags:
   - name: EvaluatorGenerationJobs
   - name: Indexes
   - name: Insights
-  - name: CommandJob
+  - name: Jobs
   - name: Models
   - name: Memory Stores
   - name: Conversations
@@ -6269,7 +6269,7 @@ paths:
         - name: jobType
           in: query
           required: false
-          description: Filter by job type (e.g. 'Command').
+          description: Filter by job type (e.g. 'Command' or 'Pipeline').
           schema:
             $ref: '#/components/schemas/JobType'
           explode: false
@@ -6322,7 +6322,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
       tags:
-        - CommandJob
+        - Jobs
   /jobs/{name}:
     get:
       operationId: Jobs_get
@@ -6363,7 +6363,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
       tags:
-        - CommandJob
+        - Jobs
     put:
       operationId: Jobs_createOrUpdate
       description: Create and execute a Job. For update case, the Tags in the definition passed in will replace Tags in the existing job.
@@ -6409,7 +6409,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
       tags:
-        - CommandJob
+        - Jobs
       requestBody:
         required: true
         content:
@@ -6466,7 +6466,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
       tags:
-        - CommandJob
+        - Jobs
   /jobs/{name}/cancel:
     post:
       operationId: Jobs_beginCancel
@@ -6517,7 +6517,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Azure.Core.Foundations.ErrorResponse'
       tags:
-        - CommandJob
+        - Jobs
   /jobs/{name}/history/experimentids/{experimentId}/runs/{runId}/artifacts:
     get:
       operationId: Jobs_listArtifacts
@@ -6586,7 +6586,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ArtifactList'
       tags:
-        - CommandJob
+        - Jobs
   /jobs/{name}/history/experimentids/{experimentId}/runs/{runId}/artifacts/prefix/contentinfo:
     get:
       operationId: Jobs_getArtifactContentInformation
@@ -6647,7 +6647,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ArtifactContentInformationList'
       tags:
-        - CommandJob
+        - Jobs
   /jobs/{name}/history/runs/{runId}:
     get:
       operationId: Jobs_getRun
@@ -6688,7 +6688,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Run'
       tags:
-        - CommandJob
+        - Jobs
   /jobs/{name}/history/runs/{runId}/details:
     get:
       operationId: Jobs_getRunDetails
@@ -6729,7 +6729,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/RunDetails'
       tags:
-        - CommandJob
+        - Jobs
   /jobs/{name}/history/runs/{runId}/serviceinstances/{nodeId}:
     get:
       operationId: Jobs_showServices
@@ -6777,7 +6777,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/RunServiceInstances'
       tags:
-        - CommandJob
+        - Jobs
   /managedAgentIdentityBlueprints:
     get:
       operationId: ManagedAgentIdentityBlueprints_listManagedAgentIdentityBlueprints
@@ -20096,6 +20096,7 @@ components:
         propertyName: jobType
         mapping:
           Command: '#/components/schemas/CommandJob'
+          Pipeline: '#/components/schemas/PipelineJob'
       description: Base properties of a Job.
     JobResourceConfiguration:
       type: object
@@ -20170,6 +20171,7 @@ components:
         - type: string
           enum:
             - Command
+            - Pipeline
       description: Type of a job.
     ListViewType:
       anyOf:
@@ -36642,6 +36644,78 @@ components:
             - BlobReference
           description: The type of pending upload.
       description: Represents the response for a pending upload request
+    PipelineJob:
+      type: object
+      required:
+        - jobType
+      properties:
+        jobType:
+          type: string
+          enum:
+            - Pipeline
+          description: Job type.
+        displayName:
+          type: string
+          description: Display name of the job.
+        description:
+          type: string
+          description: The asset description text.
+        tags:
+          type: object
+          additionalProperties:
+            type: string
+          description: Tag dictionary. Tags can be added, removed, and updated.
+        properties:
+          type: object
+          additionalProperties:
+            type: string
+          description: The asset property dictionary.
+        experimentName:
+          type: string
+          description: Name of the experiment the job belongs to. If omitted, the service uses "Default".
+        services:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/JobService'
+          description: Services exposed by the job.
+        computeId:
+          type: string
+          description: Compute resource ID.
+        settings:
+          type: object
+          additionalProperties: {}
+          description: Pipeline settings.
+        jobs:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties: {}
+          description: Pipeline nodes keyed by name. Node objects preserve their original field names.
+        inputs:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties: {}
+          description: Graph inputs keyed by name.
+        outputs:
+          type: object
+          additionalProperties:
+            type: object
+            additionalProperties: {}
+          description: Graph outputs keyed by name.
+        sourceJobId:
+          type: string
+          description: ARM resource ID of the source job.
+        isArchived:
+          type: boolean
+          description: Is the job archived?
+        status:
+          type: string
+          description: Status of the job.
+          readOnly: true
+      allOf:
+        - $ref: '#/components/schemas/JobProperties'
+      description: Properties of a Pipeline Job.
     ProceduralMemoryItem:
       type: object
       required:
