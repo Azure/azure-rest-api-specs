@@ -1,0 +1,59 @@
+{
+  "operationId": "EdgeActionExecutionFilters_Create",
+  "title": "CreateEdgeActionExecutionFilters",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2026-10-01",
+    "edgeActionName": "edgeAction1",
+    "executionFilter": "executionFilter1",
+    "resource": {
+      "location": "global",
+      "properties": {
+        "versionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/testrg/providers/Microsoft.Cdn/EdgeActions/edgeAction1/versions/version1",
+        "executionFilterIdentifierHeaderName": "header-key",
+        "executionFilterIdentifierHeaderValue": "header-value"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Cdn/edgeActions/edgeAction1/executionFilters/executionFilter1",
+        "name": "executionFilter1",
+        "type": "Microsoft.Cdn/edgeActions/executionFilters",
+        "location": "global",
+        "properties": {
+          "versionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/testrg/providers/Microsoft.Cdn/EdgeActions/edgeAction1/versions/version1",
+          "executionFilterIdentifierHeaderName": "header-key",
+          "executionFilterIdentifierHeaderValue": "header-value",
+          "provisioningState": "Provisioning",
+          "lastUpdateTime": "2024-04-25T15:19:23Z"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Cdn/edgeActionOperations/11111111-1111-1111-1111-111111111111?api-version=2026-10-01",
+        "Retry-After": 60
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Cdn/edgeActions/edgeAction1/executionFilters/executionFilter1",
+        "name": "executionFilter1",
+        "type": "Microsoft.Cdn/edgeActions/executionFilters",
+        "location": "global",
+        "properties": {
+          "versionId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/testrg/providers/Microsoft.Cdn/EdgeActions/edgeAction1/versions/version1",
+          "executionFilterIdentifierHeaderName": "header-key",
+          "executionFilterIdentifierHeaderValue": "header-value",
+          "provisioningState": "Succeeded",
+          "lastUpdateTime": "2024-04-25T15:19:23Z"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Cdn/edgeActionOperations/11111111-1111-1111-1111-111111111111?api-version=2026-10-01",
+        "Retry-After": 10
+      }
+    }
+  }
+}
