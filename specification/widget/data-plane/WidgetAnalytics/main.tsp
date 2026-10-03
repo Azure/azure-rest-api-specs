@@ -22,6 +22,10 @@ enum Versions {
 
   @doc("The 2022-12-01 version.")
   v2022_12_01: "2022-12-01",
+
+  @doc("The 2026-08-01-preview version.")
+  @previewVersion
+  v2026_08_01_Preview: "2026-08-01-preview",
 }
 
 @doc("A widget.")
@@ -39,9 +43,42 @@ model WidgetSuite {
   sharedModel?: FakedSharedModel;
 }
 
+/** The fixed size categories available for a widget. */
+#suppress "@azure-tools/typespec-azure-core/no-enum" "This example intentionally demonstrates the enum keyword with a fixed set of widget sizes."
+@added(Versions.v2026_08_01_Preview)
+enum WidgetSize {
+  /** A small widget. */
+  Small: "Small",
+
+  /** A medium widget. */
+  Medium: "Medium",
+
+  /** A large widget. */
+  Large: "Large",
+}
+
+/** The size category assigned to a widget. */
+@added(Versions.v2026_08_01_Preview)
+model WidgetSizeResult {
+  /** The widget's size category. */
+  size: WidgetSize;
+}
+
 interface Widgets {
   @doc("Fetch a Widget by name.")
   getWidget is ResourceRead<WidgetSuite>;
+
+  /** Gets the size category of a widget. */
+  @added(Versions.v2026_08_01_Preview)
+  @get
+  @route("/widget-size")
+  getWidgetSize is RpcOperation<
+    {
+      /** The widget name. */
+      @query widgetName: string;
+    },
+    WidgetSizeResult
+  >;
 
   @doc("Gets status of a Widget operation.")
   getWidgetOperationStatus is GetResourceOperationStatus<WidgetSuite>;
