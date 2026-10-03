@@ -14,12 +14,12 @@ using Azure.ResourceManager;
 @armProviderNamespace("Microsoft.AzureResilienceManagement")
 namespace Microsoft.AzureResilienceManagement;
 
-@doc("The Service level resource model")
+@doc("A service-level resource associated with a goal assignment.")
 model ServiceLevelResource {
-  @doc("The arm id of the service level indicator resource")
+  @doc("The ARM resource ID of the service-level indicator resource.")
   serviceLevelIndicatorResourceId: armResourceIdentifier;
 
-  @doc("The arm id of the service level object resource")
+  @doc("The ARM resource ID of the service-level objective resource.")
   @madeOptional(Versions.v2026_06_01_preview)
   @removed(Versions.v2026_09_30_preview)
   serviceLevelObjectiveResourceId?: armResourceIdentifier;
@@ -36,7 +36,7 @@ model RegionalObjectives {
 }
 
 // Define the main model
-@doc("Definition of goal assignment property.")
+@doc("Properties of a goal assignment.")
 model GoalAssignmentProperties {
   @doc("Arm id of the goal template.")
   @madeOptional(Versions.v2026_06_01_preview)
@@ -65,7 +65,7 @@ model GoalAssignmentProperties {
   @identifiers(#[])
   serviceLevelResources?: ServiceLevelResource[];
 
-  @doc("Provisioning state")
+  @doc("The provisioning state of the goal assignment.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
@@ -75,9 +75,9 @@ model GoalAssignmentProperties {
 }
 
 @tenantResource
-@doc("Goal assignment a AzureResilienceProviderHub resource")
+@doc("A goal assignment resource in the Azure Resilience Management provider.")
 model GoalAssignment is ProxyResource<GoalAssignmentProperties> {
-  @doc("The name of the GoalAssignment")
+  @doc("The name of the goal assignment.")
   @pattern("^[a-zA-Z0-9-]{3,24}$")
   @key("goalAssignmentName")
   @segment("goalAssignments")
