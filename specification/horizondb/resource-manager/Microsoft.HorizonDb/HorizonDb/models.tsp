@@ -215,6 +215,7 @@ model MicrosoftEntraAdministrator
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The resource has the fixed literal name passwordMethod, which is more restrictive than a pattern."
 @added(Versions.v2026_10_01_preview)
 @doc("The service-created PostgreSQL username-and-password authentication method for a HorizonDB cluster. This resource configures the authentication mechanism, including its enabled state and administrator login credentials; it is not a password-only resource.")
+@singleton("passwordMethod")
 @parentResource(Cluster)
 model PasswordAuthentication
   is Azure.ResourceManager.ProxyResource<PasswordAuthenticationProperties> {
@@ -228,6 +229,7 @@ model PasswordAuthentication
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-name-pattern" "The resource has the fixed literal name microsoftEntra, which is more restrictive than a pattern."
 @added(Versions.v2026_10_01_preview)
 @doc("The service-created Microsoft Entra authentication method for a HorizonDB cluster.")
+@singleton("microsoftEntra")
 @parentResource(Cluster)
 model MicrosoftEntraAuthentication
   is Azure.ResourceManager.ProxyResource<MicrosoftEntraAuthenticationProperties> {
