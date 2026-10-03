@@ -7,8 +7,8 @@ import { commentOrUpdate, parseExistingComments } from "../comment.ts";
 import { extractInputs } from "../context.ts";
 import type { Core, GitHub, GitHubScriptArgs } from "../github.ts";
 import { loadApproversConfig } from "./approvers.ts";
-import { buildApprovalResetComment } from "../protected-labels/label-comments.ts";
-import { ALLOWED_BOT_LOGINS } from "../protected-labels/authorization.ts";
+import { buildApprovalResetComment } from "../label-policy-comments.ts";
+import { ALLOWED_BOT_LOGINS } from "./policy.ts";
 import { removeLabelIfPresent } from "./labels.ts";
 
 const FormatValidationResultSchema = z.object({
