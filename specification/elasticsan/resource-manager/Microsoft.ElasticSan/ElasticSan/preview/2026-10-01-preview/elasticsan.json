@@ -1856,6 +1856,13 @@
                 }
               ]
             }
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Optional, filters the volumes that are returned. Specify `creationData/sourceId eq '<source volume ARM id>'` to list the thin clones of a source volume, optionally combined with ` and creationData/createSource eq 'Volume'`. creationData/sourceId is required when this parameter is used, and the source volume must be in the same volume group as the listed scope.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1873,6 +1880,9 @@
           }
         },
         "x-ms-examples": {
+          "Volumes_ListByVolumeGroup_FilterByCloneSource": {
+            "$ref": "./examples/Volumes_ListByVolumeGroup_FilterByCloneSource.json"
+          },
           "Volumes_ListByVolumeGroup_MaximumSet_Gen": {
             "$ref": "./examples/Volumes_ListByVolumeGroup_MaximumSet_Gen.json"
           },
