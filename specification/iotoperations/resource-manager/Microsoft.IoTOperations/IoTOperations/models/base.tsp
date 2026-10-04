@@ -175,7 +175,7 @@ model LocalKubernetesReference {
 @doc("Cert-Manager issuerRef properties")
 model CertManagerIssuerRef {
   @doc("group of issuer.")
-  @madeOptional(Versions.`2026-11-01-preview`)
+  @madeOptional(Versions.`2026-10-01`)
   group?: string = "cert-manager.io";
 
   @doc("kind of issuer (Issuer or ClusterIssuer).")

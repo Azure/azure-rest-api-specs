@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v7
+      - uses: $/.github/actions/checkout
         with:
           sparse-checkout-cone-mode: false
           sparse-checkout: |
@@ -34,7 +34,7 @@ jobs:
             !/specification/
             !/eng/common/
 
-      - uses: ./.github/actions/setup-node-install-deps
+      - uses: $/.github/actions/setup-node-install-deps
         with:
           install-command: pnpm ci
 

@@ -1,5 +1,5 @@
-import { readdir } from "fs/promises";
-import { inspect } from "util";
+import { readdir } from "node:fs/promises";
+import { inspect } from "node:util";
 import { flatMapAsync, mapAsync } from "./array.ts";
 import { readme } from "./changed-files.ts";
 import { resolveCached, resolvePairCached } from "./path.ts";
