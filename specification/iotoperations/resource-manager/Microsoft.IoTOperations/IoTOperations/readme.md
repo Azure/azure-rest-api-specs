@@ -109,6 +109,36 @@ suppressions:
       MCP tools can define arbitrary parameters, so authorization policy
       context values are intentionally modeled as a free-form object whose
       properties cannot be known when the API is authored.
+  - code: AvoidAdditionalProperties
+    from: iotoperations.json
+    where: $.definitions.AioApplicationConfigurationProperties.properties.configuration
+    reason: >-
+      Customers bring their own applications and define each application's
+      configuration parameters and structure, so the resource provider cannot
+      define a fixed schema.
+  - code: AvoidAdditionalProperties
+    from: iotoperations.json
+    where: $.definitions.AioConnectorApplicationConfigurationProperties.properties.configuration
+    reason: >-
+      Customers bring their own applications and define each application's
+      configuration parameters and structure, so the resource provider cannot
+      define a fixed schema.
+  - code: AvoidAdditionalProperties
+    from: iotoperations.json
+    where: $.definitions.AioConnectorConfigurationProperties.properties.configuration
+    reason: >-
+      Customers bring their own applications and define each application's
+      configuration parameters and structure, so the resource provider cannot
+      define a fixed schema.
+  - code: AvoidAdditionalProperties
+    from: iotoperations.json
+    where: $.definitions.AioApplicationImageConfigurationSettings.properties.persistentVolumeClaimTemplates.items
+    reason: >-
+      The resource provider forwards complete Kubernetes PersistentVolumeClaim
+      templates without interpreting their contents. The schema varies across
+      supported Kubernetes versions and may contain Kubernetes extension
+      fields, so the API must preserve fields that are not known when this API
+      version is authored.
   - code: PatchSkuProperty
     from: iotoperations.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.IoTOperations/instances/{instanceName}"].patch.parameters[4]
@@ -122,6 +152,13 @@ suppressions:
       File-store access is inherently binary: the volume is mounted either
       read-only or writable. A boolean directly represents these two states,
       and an extensible string enum would advertise unsupported values.
+  - code: XMSSecretInResponse
+    from: iotoperations.json
+    where: $.definitions.AkriConnectorsSecret.properties.secretKey
+    reason: >-
+      secretKey is a non-sensitive key name used to select one value from a
+      Kubernetes secret; it never contains the secret value itself and is safe
+      to return in a response.
 ```
 
 ### Basic Information
