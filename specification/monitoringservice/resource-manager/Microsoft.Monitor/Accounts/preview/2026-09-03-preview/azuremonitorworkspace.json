@@ -3068,7 +3068,14 @@
         "azureMonitorWorkspaceResourceId": {
           "type": "string",
           "format": "arm-id",
-          "description": "The resource ID of the Azure Monitor Workspace that receives traces from the target scope."
+          "description": "The resource ID of the Azure Monitor Workspace that receives traces from the target scope.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Monitor/accounts"
+              }
+            ]
+          }
         }
       },
       "required": [

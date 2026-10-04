@@ -18,7 +18,11 @@ namespace Microsoft.Monitor {
     /**
      * The resource ID of the Azure Monitor Workspace that receives traces from the target scope.
      */
-    azureMonitorWorkspaceResourceId: armResourceIdentifier;
+    azureMonitorWorkspaceResourceId: armResourceIdentifier<[
+      {
+        type: "Microsoft.Monitor/accounts";
+      }
+    ]>;
   }
 
   /**
