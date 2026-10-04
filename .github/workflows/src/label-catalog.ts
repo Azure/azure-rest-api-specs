@@ -1,7 +1,6 @@
 import { parseDocument } from "yaml";
 import { z } from "zod";
 
-export const DELETED_LABEL = "label-deleted";
 export const ARCHIVE_PREFIX = "archived: ";
 export const ARCHIVE_RETENTION_DAYS = 14;
 export const ARCHIVE_DESCRIPTION = `Archived by label sync: absent from .github/labels.yaml. Eligible for deletion after ${ARCHIVE_RETENTION_DAYS} days.`;
@@ -14,6 +13,15 @@ export const labelDefinitionSchema = z.strictObject({
     .regex(/^[^\r\n]+$/),
   color: z.string().regex(/^[0-9a-fA-F]{6}$/),
   description: z.string().max(100),
+  aliases: z
+    .array(
+      z
+        .string()
+        .min(1)
+        .max(50)
+        .regex(/^[^\r\n]+$/),
+    )
+    .optional(),
 });
 
 export const labelCatalogSchema = z
@@ -41,16 +49,24 @@ export const labelCatalogSchema = z
       }
       names.add(name);
     }
-    if (!catalog.labels.some((label) => label.name === DELETED_LABEL)) {
-      ctx.addIssue({
-        code: "custom",
-        path: ["labels"],
-        message: `The ${DELETED_LABEL} marker must be defined`,
-      });
+    const aliases = new Set<string>();
+    for (const [index, label] of catalog.labels.entries()) {
+      for (const alias of label.aliases ?? []) {
+        const key = alias.toLowerCase();
+        if (names.has(key) || aliases.has(key) || key.startsWith(ARCHIVE_PREFIX)) {
+          ctx.addIssue({
+            code: "custom",
+            path: ["labels", index, "aliases"],
+            message: `Alias must be unique, unconfigured, and not archived: ${alias}`,
+          });
+        }
+        aliases.add(key);
+      }
     }
   });
 
 export const existingLabelSchema = labelDefinitionSchema
+  .omit({ aliases: true })
   .extend({
     id: z.number().int().positive(),
     node_id: z.string().min(1),
@@ -66,6 +82,7 @@ export const labelPlanSchema = z.strictObject({
     z.strictObject({ before: existingLabelSchema, name: labelDefinitionSchema.shape.name }),
   ),
   delete: z.array(existingLabelSchema),
+  migrate: z.array(z.strictObject({ before: existingLabelSchema, target: z.string() })),
   unconfigured: z.array(existingLabelSchema),
   unchanged: z.number().int().nonnegative(),
 });
@@ -157,6 +174,7 @@ export function planLabels(
     update: [],
     archive: [],
     delete: [],
+    migrate: [],
     unconfigured: [],
     unchanged: 0,
   };
@@ -173,6 +191,17 @@ export function planLabels(
   }
   plan.unconfigured = [...remaining.values()].sort((a, b) => a.name.localeCompare(b.name, "en"));
   if (catalog.unconfiguredLabels === "archive") {
+    const targets = new Map(
+      catalog.labels.flatMap((label) =>
+        (label.aliases ?? []).map((alias) => [alias.toLowerCase(), label.name] as const),
+      ),
+    );
+    for (const before of plan.unconfigured) {
+      const target = targets.get(originalLabelName(before).toLowerCase());
+      if (target && (before.archived_at === null || before.description === ARCHIVE_DESCRIPTION)) {
+        plan.migrate.push({ before, target });
+      }
+    }
     plan.delete = plan.unconfigured.filter((label) => isArchivedLabelExpired(label, now));
     for (const before of plan.unconfigured) {
       if (
