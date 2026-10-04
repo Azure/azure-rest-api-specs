@@ -1953,6 +1953,9 @@
           },
           "Volumes_Get_MinimumSet_Gen": {
             "$ref": "./examples/Volumes_Get_MinimumSet_Gen.json"
+          },
+          "Volumes_Get_SourceVolumeWithClones": {
+            "$ref": "./examples/Volumes_Get_SourceVolumeWithClones.json"
           }
         }
       },
@@ -2049,6 +2052,9 @@
           },
           "Volumes_Create_MinimumSet_Gen": {
             "$ref": "./examples/Volumes_Create_MinimumSet_Gen.json"
+          },
+          "Volumes_Create_ThinClone": {
+            "$ref": "./examples/Volumes_Create_ThinClone.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2146,6 +2152,9 @@
           },
           "Volumes_Update_MinimumSet_Gen": {
             "$ref": "./examples/Volumes_Update_MinimumSet_Gen.json"
+          },
+          "Volumes_Update_PromoteThinClone": {
+            "$ref": "./examples/Volumes_Update_PromoteThinClone.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2439,6 +2448,63 @@
           "$ref": "#/definitions/ScaleUpProperties",
           "description": "Scale up settings on Elastic San Appliance.",
           "x-ms-client-name": "ScaleUpProperties"
+        }
+      }
+    },
+    "BackfillStatus": {
+      "type": "string",
+      "description": "The backfill (independence) status of a volume clone.",
+      "enum": [
+        "NotStarted",
+        "InProgress",
+        "Complete"
+      ],
+      "x-ms-enum": {
+        "name": "BackfillStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The backfill has not been started."
+          },
+          {
+            "name": "InProgress",
+            "value": "InProgress",
+            "description": "The backfill is currently copying data from the source volume."
+          },
+          {
+            "name": "Complete",
+            "value": "Complete",
+            "description": "The backfill has finished and the clone is fully independent of its source volume."
+          }
+        ]
+      }
+    },
+    "CloneDetails": {
+      "type": "object",
+      "description": "Clone details for a volume. Present only for clone volumes (createSource == Volume).",
+      "properties": {
+        "replicaType": {
+          "$ref": "#/definitions/ReplicaType",
+          "description": "The replica type of the clone. Writable on create and on promote (Thin to Full)."
+        },
+        "backfillStatus": {
+          "$ref": "#/definitions/BackfillStatus",
+          "description": "The backfill status of the clone. Independence is reached when this is Complete.",
+          "readOnly": true
+        },
+        "backfillStartedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the data copy for the promote/backfill started. Null before promote, and may remain null briefly after a promote is accepted until the underlying data copy begins.",
+          "readOnly": true
+        },
+        "backfillCompletedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the backfill completed. Null until backfillStatus is Complete.",
+          "readOnly": true
         }
       }
     },
@@ -3346,6 +3412,30 @@
         ]
       }
     },
+    "ReplicaType": {
+      "type": "string",
+      "description": "The replica type of a volume clone. Thin shares blocks with the source; Full is an independent copy.",
+      "enum": [
+        "Thin",
+        "Full"
+      ],
+      "x-ms-enum": {
+        "name": "ReplicaType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Thin",
+            "value": "Thin",
+            "description": "The clone shares data blocks with its source volume and remains dependent on it."
+          },
+          {
+            "name": "Full",
+            "value": "Full",
+            "description": "The clone holds an independent copy of the data and no longer depends on its source volume."
+          }
+        ]
+      }
+    },
     "SKUCapability": {
       "type": "object",
       "description": "The capability information in the specified SKU.",
@@ -3825,7 +3915,8 @@
         "VolumeSnapshot",
         "DiskSnapshot",
         "Disk",
-        "DiskRestorePoint"
+        "DiskRestorePoint",
+        "Volume"
       ],
       "x-ms-enum": {
         "name": "VolumeCreateOption",
@@ -3850,6 +3941,11 @@
           {
             "name": "DiskRestorePoint",
             "value": "DiskRestorePoint"
+          },
+          {
+            "name": "Volume",
+            "value": "Volume",
+            "description": "Create a thin clone from an existing Elastic SAN volume."
           }
         ]
       }
@@ -4108,6 +4204,16 @@
           },
           "x-ms-identifiers": []
         },
+        "cloneDetails": {
+          "$ref": "#/definitions/CloneDetails",
+          "description": "Clone details for the volume. Present only for clone volumes (createSource == Volume)."
+        },
+        "activeCloneCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of live dependent thin clones sourced from this volume.",
+          "readOnly": true
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningStates",
           "description": "State of the operation on the resource.",
@@ -4145,6 +4251,10 @@
             "$ref": "#/definitions/ManagedByResources"
           },
           "x-ms-identifiers": []
+        },
+        "cloneDetails": {
+          "$ref": "#/definitions/CloneDetails",
+          "description": "Clone details for the volume. On update, replicaType may be set to Full to promote a thin clone."
         }
       }
     }
