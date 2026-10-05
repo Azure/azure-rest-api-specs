@@ -615,32 +615,27 @@ model AgentBlueprintAuthorizationScheme
   token_validation_rules?: TokenValidationRules;
 }
 
-@doc("The source used to derive user and chat isolation keys for Azure RBAC authorization.")
-@discriminator("kind")
-model AzureRbacIsolationKeySource {
-  kind: IsolationKeySourceKind;
+@doc("Derives isolation keys from the authenticated Entra identity.")
+model EntraIsolationKeySource {
+  kind: "Entra";
 }
 
-@doc("Derives Azure RBAC isolation keys from the authenticated Entra identity.")
-model AzureRbacEntraIsolationKeySource extends AzureRbacIsolationKeySource {
-  kind: IsolationKeySourceKind.Entra;
+@doc("Derives isolation keys from trusted request headers.")
+model HeaderIsolationKeySource {
+  kind: "Header";
 }
 
-@doc("Derives Azure RBAC isolation keys from trusted request headers. Header authorization remains governed by the Azure RBAC data action.")
-model AzureRbacHeaderIsolationKeySource extends AzureRbacIsolationKeySource {
-  kind: IsolationKeySourceKind.Header;
+@doc("An isolation key source kind not recognized by this API version.")
+model UnknownIsolationKeySource {
+  kind: string;
 }
 
-@doc("The source used to derive user and chat isolation keys for Agent Blueprint authorization.")
-@discriminator("kind")
-model AgentBlueprintIsolationKeySource {
-  kind: IsolationKeySourceKind;
-}
-
-@doc("Derives Agent Blueprint isolation keys from the authenticated Entra identity.")
-model AgentBlueprintEntraIsolationKeySource
-  extends AgentBlueprintIsolationKeySource {
-  kind: IsolationKeySourceKind.Entra;
+@doc("The supported isolation key sources for Azure RBAC authorization.")
+@discriminated(#{ envelope: "none", discriminatorPropertyName: "kind" })
+union AzureRbacIsolationKeySource {
+  Entra: EntraIsolationKeySource,
+  Header: HeaderIsolationKeySource,
+  UnknownIsolationKeySource,
 }
 
 @doc("""
@@ -649,9 +644,8 @@ model AgentBlueprintEntraIsolationKeySource
   `token_validation_rules.allowed_clients`. A Header configuration without both nonempty lists cannot
   authorize a caller and is rejected during configuration validation.
   """)
-model AgentBlueprintHeaderIsolationKeySource
-  extends AgentBlueprintIsolationKeySource {
-  kind: IsolationKeySourceKind.Header;
+model AgentBlueprintHeaderIsolationKeySource {
+  ...HeaderIsolationKeySource;
 
   @doc("The trusted client applications allowed to supply isolation key headers. At least one client application is required.")
   @minItems(1)
@@ -659,15 +653,12 @@ model AgentBlueprintHeaderIsolationKeySource
   allowed_clients: Azure.Core.uuid[];
 }
 
-@doc("The supported sources for deriving user and chat isolation keys.")
-union IsolationKeySourceKind {
-  string,
-
-  @doc("Derive isolation keys from the authenticated Entra identity.")
-  Entra: "Entra",
-
-  @doc("Derive isolation keys from trusted request headers.")
-  Header: "Header",
+@doc("The supported isolation key sources for Agent Blueprint authorization.")
+@discriminated(#{ envelope: "none", discriminatorPropertyName: "kind" })
+union AgentBlueprintIsolationKeySource {
+  Entra: EntraIsolationKeySource,
+  Header: AgentBlueprintHeaderIsolationKeySource,
+  UnknownIsolationKeySource,
 }
 
 @doc("""

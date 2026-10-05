@@ -38075,18 +38075,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
       description: Authorizes callers presenting a token for the backing Agent Blueprint audience.
-    AgentBlueprintEntraIsolationKeySource:
-      type: object
-      required:
-        - kind
-      properties:
-        kind:
-          type: string
-          enum:
-            - Entra
-      allOf:
-        - $ref: '#/components/schemas/AgentBlueprintIsolationKeySource'
-      description: Derives Agent Blueprint isolation keys from the authenticated Entra identity.
     AgentBlueprintHeaderIsolationKeySource:
       type: object
       required:
@@ -38104,8 +38092,6 @@ components:
           minItems: 1
           maxItems: 10
           description: The trusted client applications allowed to supply isolation key headers. At least one client application is required.
-      allOf:
-        - $ref: '#/components/schemas/AgentBlueprintIsolationKeySource'
       description: |-
         Derives Agent Blueprint isolation keys from trusted request headers. The caller must use an app-only
         token, and its application ID must appear in both this source's `allowed_clients` list and
@@ -38113,17 +38099,17 @@ components:
         authorize a caller and is rejected during configuration validation.
     AgentBlueprintIsolationKeySource:
       type: object
-      required:
-        - kind
-      properties:
-        kind:
-          $ref: '#/components/schemas/IsolationKeySourceKind'
+      oneOf:
+        - $ref: '#/components/schemas/EntraIsolationKeySource'
+        - $ref: '#/components/schemas/AgentBlueprintHeaderIsolationKeySource'
+        - $ref: '#/components/schemas/UnknownIsolationKeySource'
       discriminator:
         propertyName: kind
         mapping:
-          Entra: '#/components/schemas/AgentBlueprintEntraIsolationKeySource'
+          Entra: '#/components/schemas/EntraIsolationKeySource'
           Header: '#/components/schemas/AgentBlueprintHeaderIsolationKeySource'
-      description: The source used to derive user and chat isolation keys for Agent Blueprint authorization.
+        defaultMapping: '#/components/schemas/UnknownIsolationKeySource'
+      description: The supported isolation key sources for Agent Blueprint authorization.
     AgentBlueprintReference:
       type: object
       required:
@@ -39654,43 +39640,19 @@ components:
       allOf:
         - $ref: '#/components/schemas/AgentEndpointAuthorizationScheme'
       description: Authorizes Foundry-audience callers through Azure RBAC.
-    AzureRbacEntraIsolationKeySource:
-      type: object
-      required:
-        - kind
-      properties:
-        kind:
-          type: string
-          enum:
-            - Entra
-      allOf:
-        - $ref: '#/components/schemas/AzureRbacIsolationKeySource'
-      description: Derives Azure RBAC isolation keys from the authenticated Entra identity.
-    AzureRbacHeaderIsolationKeySource:
-      type: object
-      required:
-        - kind
-      properties:
-        kind:
-          type: string
-          enum:
-            - Header
-      allOf:
-        - $ref: '#/components/schemas/AzureRbacIsolationKeySource'
-      description: Derives Azure RBAC isolation keys from trusted request headers. Header authorization remains governed by the Azure RBAC data action.
     AzureRbacIsolationKeySource:
       type: object
-      required:
-        - kind
-      properties:
-        kind:
-          $ref: '#/components/schemas/IsolationKeySourceKind'
+      oneOf:
+        - $ref: '#/components/schemas/EntraIsolationKeySource'
+        - $ref: '#/components/schemas/HeaderIsolationKeySource'
+        - $ref: '#/components/schemas/UnknownIsolationKeySource'
       discriminator:
         propertyName: kind
         mapping:
-          Entra: '#/components/schemas/AzureRbacEntraIsolationKeySource'
-          Header: '#/components/schemas/AzureRbacHeaderIsolationKeySource'
-      description: The source used to derive user and chat isolation keys for Azure RBAC authorization.
+          Entra: '#/components/schemas/EntraIsolationKeySource'
+          Header: '#/components/schemas/HeaderIsolationKeySource'
+        defaultMapping: '#/components/schemas/UnknownIsolationKeySource'
+      description: The supported isolation key sources for Azure RBAC authorization.
     AzureUserSecurityContext:
       type: object
       properties:
@@ -41746,6 +41708,16 @@ components:
       allOf:
         - $ref: '#/components/schemas/BaseCredentials'
       description: Entra ID credential definition
+    EntraIsolationKeySource:
+      type: object
+      required:
+        - kind
+      properties:
+        kind:
+          type: string
+          enum:
+            - Entra
+      description: Derives isolation keys from the authenticated Entra identity.
     Eval:
       type: object
       required:
@@ -43780,6 +43752,16 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V1Preview
+    HeaderIsolationKeySource:
+      type: object
+      required:
+        - kind
+      properties:
+        kind:
+          type: string
+          enum:
+            - Header
+      description: Derives isolation keys from trusted request headers.
     HeaderTelemetryEndpointAuth:
       type: object
       required:
@@ -44295,14 +44277,6 @@ components:
       x-ms-foundry-meta:
         conditional_previews:
           - Routines=V1Preview
-    IsolationKeySourceKind:
-      anyOf:
-        - type: string
-        - type: string
-          enum:
-            - Entra
-            - Header
-      description: The supported sources for deriving user and chat isolation keys.
     ItemGenerationParams:
       type: object
       required:
@@ -74426,6 +74400,14 @@ components:
       x-ms-foundry-meta:
         required_previews:
           - Schedules=V1Preview
+    UnknownIsolationKeySource:
+      type: object
+      required:
+        - kind
+      properties:
+        kind:
+          type: string
+      description: An isolation key source kind not recognized by this API version.
     UpdateAgentFromManifestRequest:
       type: object
       required:
