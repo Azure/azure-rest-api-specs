@@ -612,14 +612,14 @@ model NodeTypeProperties {
   /**
    * Specifies the Read-Write IOPS for the primary Service Fabric data disk.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "IOPS is a well known abbreviation"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matches the Microsoft.Compute diskIOPSReadWrite wire property"
   @added(Versions.v2026_09_01_preview)
   dataDiskIOPSReadWrite?: int32;
 
   /**
    * Specifies the bandwidth in MB per second for the primary Service Fabric data disk.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "MBps is a well known abbreviation"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matches the Microsoft.Compute diskMBpsReadWrite wire property"
   @added(Versions.v2026_09_01_preview)
   dataDiskMBpsReadWrite?: int32;
 }
@@ -1126,14 +1126,14 @@ model VmssDataDisk {
   /**
    * Specifies the Read-Write IOPS for the managed data disk.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "IOPS is a well known abbreviation"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matches the Microsoft.Compute diskIOPSReadWrite wire property"
   @added(Versions.v2026_09_01_preview)
   diskIOPSReadWrite?: int32;
 
   /**
    * Specifies the bandwidth in MB per second for the managed data disk.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "MBps is a well known abbreviation"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "Matches the Microsoft.Compute diskMBpsReadWrite wire property"
   @added(Versions.v2026_09_01_preview)
   diskMBpsReadWrite?: int32;
 }
@@ -1493,6 +1493,7 @@ model SkuProfile {
   /**
    * Specifies the VM sizes for the node type.
    */
+  @identifiers(#["name"])
   @minItems(1)
   vmSizes: SkuProfileVmSize[];
 
