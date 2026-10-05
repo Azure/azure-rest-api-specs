@@ -49,8 +49,9 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
-      - uses: $/.github/actions/checkout
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           # Keep every manifest so new workspace locations are checked too.
           sparse-checkout-cone-mode: false
           sparse-checkout: |
@@ -61,7 +62,7 @@ jobs:
             /.github/shared/
             /.github/workflows/src/validate-workspace.ts
 
-      - uses: $/.github/actions/setup-node-install-deps
+      - uses: ./.github/actions/setup-node-install-deps # zizmor: ignore[self-repository]
         with:
           install-command: "pnpm install --frozen-lockfile --prod --prefer-offline --filter=azure-rest-api-specs-github..."
           cache-name: workspace-validation
@@ -74,14 +75,15 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
-      - uses: $/.github/actions/checkout
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           sparse-checkout: |
             .github
             eng
             libs
 
-      - uses: $/.github/actions/setup-node-install-deps
+      - uses: ./.github/actions/setup-node-install-deps # zizmor: ignore[self-repository]
 
       - run: pnpm run build
 
@@ -103,13 +105,14 @@ jobs:
       - if: runner.os == 'Windows'
         run: git config --global core.longpaths true
 
-      - uses: $/.github/actions/checkout
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           sparse-checkout: |
             .github
             eng
             libs
 
-      - uses: $/.github/actions/setup-node-install-deps
+      - uses: ./.github/actions/setup-node-install-deps # zizmor: ignore[self-repository]
 
       - run: pnpm run test:ci

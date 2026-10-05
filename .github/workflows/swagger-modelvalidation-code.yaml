@@ -20,12 +20,13 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: $/.github/actions/checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           fetch-depth: 2
 
       - name: Setup Node and install deps
-        uses: $/.github/actions/setup-node-install-deps
+        uses: ./.github/actions/setup-node-install-deps # zizmor: ignore[self-repository]
 
       - name: Swagger Model Validation
         id: swagger-model-validation

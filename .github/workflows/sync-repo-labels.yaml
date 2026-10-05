@@ -44,10 +44,11 @@ jobs:
     if: github.event_name == 'pull_request'
     runs-on: ubuntu-24.04
     steps:
-      - uses: $/.github/actions/checkout
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
+          persist-credentials: false
           sparse-checkout: .github
-      - uses: $/.github/actions/install-deps-github-script
+      - uses: ./.github/actions/install-deps-github-script # zizmor: ignore[self-repository]
       - run: node .github/workflows/cmd/labels.ts
 
   sync:
@@ -65,12 +66,13 @@ jobs:
       group: sync-repo-labels
       cancel-in-progress: false
     steps:
-      - uses: $/.github/actions/checkout
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         id: checkout
         with:
+          persist-credentials: false
           ref: ${{ github.event.repository.default_branch }}
           sparse-checkout: .github
-      - uses: $/.github/actions/install-deps-github-script
+      - uses: ./.github/actions/install-deps-github-script # zizmor: ignore[self-repository]
 
       - name: Prepare label changes
         id: prepare

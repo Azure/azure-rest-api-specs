@@ -11,6 +11,61 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const workflowsDir = resolve(__dirname, "..");
 
 describe("workflow files", () => {
+  it("bootstraps local actions without downloading a second copy of the repository", async () => {
+    const stepSchema = z.object({
+      uses: z.string().optional(),
+      with: z.record(z.string(), z.unknown()).optional(),
+    });
+    const workflowSchema = z.object({
+      jobs: z.record(z.string(), z.object({ steps: z.array(stepSchema).optional() })),
+    });
+    const files = (await readdir(workflowsDir)).filter(
+      (file) =>
+        /\.ya?ml$/.test(file) && !file.endsWith(".lock.yml") && file !== "agentics-maintenance.yml",
+    );
+    for (const file of files) {
+      const workflow = workflowSchema.parse(
+        load(await readFile(resolve(workflowsDir, file), "utf8")),
+      );
+      for (const [jobName, job] of Object.entries(workflow.jobs)) {
+        let rootCheckout = false;
+        for (const step of job.steps ?? []) {
+          if (!step.uses) continue;
+          const context = `${file}: ${jobName}`;
+          expect(step.uses, context).not.toMatch(/^\$\/\.github\/actions\//);
+          if (step.uses?.startsWith("actions/checkout@")) {
+            expect(step.uses, context).toMatch(/^actions\/checkout@[0-9a-f]{40}$/);
+            expect(step.with?.["persist-credentials"], context).toBe(
+              file === "arm-auto-signoff-code.yaml",
+            );
+            rootCheckout ||= !step.with?.path && !step.with?.repository;
+          }
+          if (step.uses?.startsWith("./.github/actions/")) {
+            expect(rootCheckout, `${context}: local actions require a root checkout`).toBe(true);
+          }
+        }
+      }
+    }
+  });
+
+  it.each(["add-label-artifact", "install-deps-github-script"])(
+    "%s does not trigger a transitive self-repository action download",
+    async (action) => {
+      const metadata = z
+        .object({
+          runs: z.object({
+            steps: z.array(z.object({ uses: z.string().optional() })),
+          }),
+        })
+        .parse(
+          load(await readFile(resolve(workflowsDir, "../actions", action, "action.yaml"), "utf8")),
+        );
+      for (const step of metadata.runs.steps) {
+        if (step.uses) expect(step.uses).not.toMatch(/^\$\/\.github\/actions\//);
+      }
+    },
+  );
+
   it("publishes the TypeSpec suppressions markdown as a job-summary artifact", async () => {
     const workflow = z
       .object({

@@ -237,8 +237,8 @@ Scripts in `.github/workflows/src/` are typically used with `actions/github-scri
 - **Permissions**: Define minimal `permissions` in workflow files
 - **Token usage**: Use `GITHUB_TOKEN` with least privilege
 - **Action references**: Pin external actions to a full commit SHA and retain a version comment for dependency updates.
-- **Repository references**: Use `$/...` for actions and reusable workflows at the running commit. Retain `./...` only when an action intentionally comes from a different checkout.
-- **Checkout**: Use `$/.github/actions/checkout` in handwritten workflows. It centralizes the upstream SHA pin and defaults to `persist-credentials: false`; explicitly enable credentials only for later authenticated Git operations.
+- **Repository references**: After checkout, use `./...` for local composite actions and preserve the intended checkout revision. Privileged workflows must only execute actions from a trusted base/default-branch checkout, never a PR-head checkout. Use narrowly scoped `# zizmor: ignore[self-repository]` annotations for these local references. Keep `$/...` for reusable workflows, which do not download an action archive.
+- **Checkout**: Use direct SHA-pinned `actions/checkout` with a version comment and explicit `persist-credentials: false`; enable credentials only for later authenticated Git operations. Do not wrap the initial checkout in a self-repository action: preparing it downloads and extracts the entire specs repository before the actual checkout, adding minutes to every job (see [actions/runner#4631](https://github.com/actions/runner/issues/4631)).
 
 ### Code Quality
 
