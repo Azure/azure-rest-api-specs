@@ -198,7 +198,7 @@ model ResourceTargetingCriteria {
 
   /**
    * Array of tag key-value pairs for filtering by Azure resource tags.
-   * Key and value are matched case-insensitively. Use "*" as value to match any value for a key.
+   * Key and value are matched case-insensitively. Values are matched literally; "*" matches only a tag whose value is "*".
    */
   @identifiers(#["key"])
   tags?: KeyValuePair[];
