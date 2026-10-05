@@ -100,7 +100,7 @@ model CostControlConnections {
   appInsightsConnectionId?:
     | Azure.Core.armResourceIdentifier<[
         {
-          type: "Microsoft.MachineLearningServices/workspaces/connections";
+          type: "Microsoft.CognitiveServices/accounts/connections";
         }
       ]>
     | null;
@@ -112,7 +112,7 @@ model CostControlConnections {
   eventGridConnectionId?:
     | Azure.Core.armResourceIdentifier<[
         {
-          type: "Microsoft.MachineLearningServices/workspaces/connections";
+          type: "Microsoft.CognitiveServices/accounts/connections";
         }
       ]>
     | null;
@@ -138,7 +138,7 @@ model CostControlRule {
   @minItems(1)
   @maxItems(1)
   @identifiers(#["type"])
-  counterKey: CostControlDimension[];
+  counterKey: CostControlDimension[]; // Change to counterKeys . Do we need an array at all?
 
   /**
    * The unit used for the cost control amount and absolute thresholds.
@@ -173,7 +173,7 @@ model CostControlRule {
   @maxItems(10)
   // @identifiers does not accept nullable array unions.
   @TypeSpec.OpenAPI.extension("x-ms-identifiers", #[])
-  thresholds?: CostControlThreshold[] | null;
+  thresholds?: CostControlThreshold[] | null;  // PUT and PATCH have separate behaviour . null only for PATH
 }
 
 /**
@@ -334,7 +334,7 @@ model CostControlThreshold {
   /**
    * How the threshold value is interpreted.
    */
-  type: CostControlThresholdType;
+  type: CostControlThresholdType; // == Percentage or Absolute
 
   /**
    * The threshold value. Audit thresholds must use zero. Block and alert thresholds must be greater than zero. Percentage values cannot exceed 100, and absolute values cannot exceed the rule amount.
@@ -345,7 +345,7 @@ model CostControlThreshold {
   /**
    * The action taken when the threshold is reached. Omitted actions default to audit and therefore require a value of zero.
    */
-  action?: CostControlThresholdAction = CostControlThresholdAction.Audit;
+  action?: CostControlThresholdAction = CostControlThresholdAction.Audit;   // = Alert or Block
 }
 
 /**
@@ -376,7 +376,7 @@ union CostControlThresholdAction {
   /**
    * Audits every applied usage update. Authored audit thresholds must use zero. This action is retained in the current preview for compatibility; audit-only rules may omit thresholds.
    */
-  Audit: "audit",
+  Audit: "audit",  // Remove
 
   /**
    * Emits a customer-facing alert without blocking requests.
@@ -398,14 +398,14 @@ model CostControlListResult {
    * The link used to get the next page of cost controls.
    */
   @nextLink
-  nextLink?: string;
+  nextLink?: string; // url
 
   /**
    * The cost controls in this page.
    */
   @pageItems
   @identifiers(#["name"])
-  value?: CostControl[];
+  value?: CostControl[]; // change to mandatory
 }
 
 /**
