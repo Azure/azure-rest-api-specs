@@ -1,5 +1,6 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-azure-core";
 
@@ -8,6 +9,7 @@ using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using Azure.Core;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ResourceHealth;
 
@@ -775,6 +777,13 @@ model EventProperties {
   eventSubType?: EventSubTypeValues;
 
   /**
+   * Operation for listing Advisor recommendations associated with this event's tracking ID in the response subscription.
+   */
+  @added(Versions.v2026_07_01)
+  @visibility(Lifecycle.Read)
+  advisorRecommendations?: ApiOperationLink;
+
+  /**
    * Source of event.
    */
   eventSource?: EventSourceValues;
@@ -949,6 +958,30 @@ model EventProperties {
    * Billing identifier information.
    */
   billingId?: string;
+}
+
+/**
+ * An API operation associated with an event.
+ */
+@added(Versions.v2026_07_01)
+model ApiOperationLink {
+  /**
+   * HTTP method to use. Resource Health returns GET for Advisor recommendations.
+   */
+  @visibility(Lifecycle.Read)
+  httpMethod: string;
+
+  /**
+   * Opaque absolute ARM URL for the associated API operation.
+   */
+  @visibility(Lifecycle.Read)
+  url: url;
+
+  /**
+   * Human-readable description of the operation. Clients must not parse this value.
+   */
+  @visibility(Lifecycle.Read)
+  description?: string;
 }
 
 /**
