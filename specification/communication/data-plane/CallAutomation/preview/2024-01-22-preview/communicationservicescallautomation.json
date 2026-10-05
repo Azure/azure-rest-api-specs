@@ -939,6 +939,119 @@
         }
       }
     },
+    "/calling/callConnections/{callConnectionId}:createHoldGroup": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Creates a hold group with a pre-created PE and looping play prompt.",
+        "operationId": "CallMedia_CreateHoldGroup",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "callConnectionId",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "createHoldGroupRequest",
+            "description": "The create hold group request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateHoldGroupRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "202": {
+            "description": "Group creation started asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/CreateHoldGroupResponse"
+            }
+          },
+          "200": {
+            "description": "Group already exists (idempotent).",
+            "schema": {
+              "$ref": "#/definitions/CreateHoldGroupResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CallMedia_CreateHoldGroup": {
+            "$ref": "./examples/CallMedia_CreateHoldGroup.json"
+          }
+        }
+      }
+    },
+    "/calling/callConnections/{callConnectionId}:deleteHoldGroup": {
+      "post": {
+        "tags": [
+          "MidConnections"
+        ],
+        "summary": "Deletes a hold group, terminating its PE and releasing all held participants.",
+        "operationId": "CallMedia_DeleteHoldGroup",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "path",
+            "name": "callConnectionId",
+            "description": "The call connection id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "deleteHoldGroupRequest",
+            "description": "The delete hold group request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteHoldGroupRequest"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/CommunicationErrorResponse"
+            }
+          },
+          "200": {
+            "description": "The hold group was deleted successfully."
+          }
+        },
+        "x-ms-examples": {
+          "CallMedia_DeleteHoldGroup": {
+            "$ref": "./examples/CallMedia_DeleteHoldGroup.json"
+          }
+        }
+      }
+    },
     "/calling/callConnections/{callConnectionId}:sendDtmfTones": {
       "post": {
         "tags": [
@@ -2304,6 +2417,9 @@
         "dtmfOptions": {
           "$ref": "#/definitions/DtmfConfigurationOptions",
           "description": "DTMF (Dual-Tone Multi-Frequency) configuration for the call."
+        },
+        "holdGroupOptions": {
+          "$ref": "#/definitions/HoldGroupOptions"
         }
       }
     },
@@ -2876,6 +2992,36 @@
         }
       }
     },
+    "CreateHoldGroupRequest": {
+      "description": "The request payload for creating a hold group.",
+      "type": "object",
+      "properties": {
+        "playSourceInfo": {
+          "$ref": "#/definitions/PlaySource"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "CreateHoldGroupResponse": {
+      "description": "The response for creating a hold group.\r\nPer design doc: holdGroupId is internal - bot doesn't see it.\r\nThe 200 response confirms the request was accepted; HoldGroupCreated callback fires when ready.",
+      "type": "object",
+      "additionalProperties": false
+    },
+    "DeleteHoldGroupRequest": {
+      "description": "The request payload for deleting a hold group.\r\nPer design doc: single group per call, no holdGroupId needed.\r\nNote: DeleteHoldGroup is marked as \"Future Addition\" in design doc,\r\nbut kept for testing purposes.",
+      "type": "object",
+      "properties": {
+        "operationContext": {
+          "description": "Optional operation context for correlation.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
     "HoldRequest": {
       "description": "The request payload for holding participant from the call.",
       "required": [
@@ -2945,6 +3091,20 @@
           "type": "string"
         }
       }
+    },
+    "HoldGroupOptions": {
+      "description": "Options for creating a hold group at call answer time.\r\nWhen provided with AnswerCall, a hold group (Platform Endpoint + Audio Routing Group)\nis created asynchronously to enable fast hold operations (~200ms vs ~5s legacy path).\r\nHoldGroup creation does not block the AnswerCall response; HoldGroupCreated / HoldGroupFailed\r\ncallback events are emitted when the operation completes.",
+      "type": "object",
+      "properties": {
+        "playSourceInfo": {
+          "$ref": "#/definitions/PlaySource"
+        },
+        "operationContext": {
+          "description": "Used by customers to correlate the hold group creation request with callback events.\r\nThis context will be included in HoldGroupCreated, HoldGroupFailed,\r\nHoldGroupAudioStarted, and HoldGroupAudioFailed callback events.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
     },
     "SendDtmfTonesResult": {
       "type": "object",
@@ -4351,6 +4511,110 @@
           "readOnly": true
         }
       }
+    },
+    "HoldGroupAudioFailed": {
+      "description": "HoldGroup audio failed event - music download/playback failed (group still usable).",
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation"
+        }
+      },
+      "additionalProperties": false
+    },
+    "HoldGroupAudioStarted": {
+      "description": "HoldGroup audio started event - music playing in the hold group.",
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation"
+        }
+      },
+      "additionalProperties": false
+    },
+    "HoldGroupCreated": {
+      "description": "HoldGroup created event - PE+ARG ready for fast hold operations.",
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation"
+        }
+      },
+      "additionalProperties": false
+    },
+    "HoldGroupFailed": {
+      "description": "HoldGroup creation failed event.",
+      "type": "object",
+      "properties": {
+        "callConnectionId": {
+          "description": "Call connection ID.",
+          "type": "string"
+        },
+        "serverCallId": {
+          "description": "Server call ID.",
+          "type": "string"
+        },
+        "correlationId": {
+          "description": "Correlation ID for event to call correlation.",
+          "type": "string"
+        },
+        "operationContext": {
+          "description": "Used by customers when calling mid-call actions to correlate the request to the response event.",
+          "type": "string"
+        },
+        "resultInformation": {
+          "$ref": "#/definitions/ResultInformation"
+        }
+      },
+      "additionalProperties": false
     },
     "RecognitionType": {
       "description": "Determines the sub-type of the recognize operation.\r\nIn case of cancel operation the this field is not set and is returned empty",
