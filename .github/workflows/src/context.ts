@@ -261,28 +261,6 @@ export async function extractInputs(
       );
     }
 
-    if (
-      payload.workflow_run.name === ARM_API_REVIEW_WORKFLOW_NAME &&
-      (!Number.isSafeInteger(issue_number) || issue_number <= 0 || !isFullGitSha(head_sha))
-    ) {
-      const match = /^ARM API Review #([1-9]\d*) \(/.exec(payload.workflow_run.display_title ?? "");
-      const fallbackIssueNumber = match ? Number(match[1]) : NaN;
-      const resolvedIssueNumber =
-        Number.isSafeInteger(issue_number) && issue_number > 0 ? issue_number : fallbackIssueNumber;
-      if (Number.isSafeInteger(resolvedIssueNumber) && resolvedIssueNumber > 0) {
-        const { owner, repo } = getRepositoryInfo(payload.workflow_run.repository);
-        const { data: pullRequest } = await github.rest.pulls.get({
-          owner,
-          repo,
-          pull_number: resolvedIssueNumber,
-        });
-        issue_number = resolvedIssueNumber;
-        if (!isFullGitSha(head_sha)) {
-          head_sha = pullRequest.head.sha;
-        }
-      }
-    }
-
     inputs = {
       ...getRepositoryInfo(payload.workflow_run.repository),
       head_sha,
@@ -343,7 +321,13 @@ async function extractWorkflowRunArtifactInputs({
   });
   const artifactNames = artifacts.map((artifact) => artifact.name);
   core.info(`artifactNames: ${JSON.stringify(artifactNames)}`);
+  return parseWorkflowRunArtifactInputs(artifactNames, core);
+}
 
+export function parseWorkflowRunArtifactInputs(
+  artifactNames: string[],
+  core: Core,
+): { headSha: string; issueNumber: number } {
   let headSha = "";
   let issueNumber = NaN;
   for (const artifactName of artifactNames) {

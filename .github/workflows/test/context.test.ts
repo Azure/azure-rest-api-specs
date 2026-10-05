@@ -297,13 +297,10 @@ describe("extractInputs", () => {
     });
   });
 
-  it("recovers ARM API review correlation when pre-activation artifacts are missing", async () => {
+  it("does not substitute the current head when ARM API review artifacts are missing", async () => {
     const github = createMockGithub();
     github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
       data: { artifacts: [] },
-    });
-    github.rest.pulls.get.mockResolvedValue({
-      data: { head: { sha: fullGitSha } },
     });
     const context = {
       eventName: "workflow_run",
@@ -329,15 +326,11 @@ describe("extractInputs", () => {
     await expect(extractInputs(github, context, createMockCore())).resolves.toEqual({
       owner: "TestRepoOwnerLogin",
       repo: "TestRepoName",
-      head_sha: fullGitSha,
-      issue_number: 123,
+      head_sha: "",
+      issue_number: NaN,
       run_id: 456,
     });
-    expect(github.rest.pulls.get).toHaveBeenCalledWith({
-      owner: "TestRepoOwnerLogin",
-      repo: "TestRepoName",
-      pull_number: 123,
-    });
+    expect(github.rest.pulls.get).not.toHaveBeenCalled();
   });
 
   it("rejects conflicting workflow correlation artifacts", async () => {

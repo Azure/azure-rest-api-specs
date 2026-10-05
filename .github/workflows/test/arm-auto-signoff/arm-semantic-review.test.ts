@@ -12,9 +12,11 @@ import {
   type SemanticReviewResult,
 } from "../../src/arm-auto-signoff/arm-semantic-review.ts";
 import {
+  finalizeArmSemanticReview,
   finalizeSemanticReviewWorkflow,
   validateSemanticReviewResult,
 } from "../../src/arm-auto-signoff/arm-semantic-review-workflow.ts";
+import type { GitHubScriptArgs } from "../../src/github.ts";
 import { createMockCore, createMockGithub } from "../mocks.ts";
 
 const owner = "Azure";
@@ -314,6 +316,55 @@ describe("finalizeSemanticReviewWorkflow", () => {
         description: "Manual review required: automated review was scoped",
       }),
     );
+  });
+
+  describe("finalizeArmSemanticReview", () => {
+    it("reuses the exact reviewer artifact listing for correlation and finalization", async () => {
+      const github = createFinalizeGithub();
+      github.rest.actions.listWorkflowRunArtifacts.mockResolvedValue({
+        data: {
+          artifacts: [
+            { name: `head-sha=${headSha}` },
+            { name: `issue-number=${issueNumber}` },
+            { name: receiptName() },
+          ],
+        },
+      });
+      const context = {
+        payload: {
+          workflow_run: {
+            name: "ARM API Review: Automated Workflow",
+            conclusion: "success",
+            id: runId,
+            run_attempt: runAttempt,
+            html_url: "https://github.com/Azure/azure-rest-api-specs/actions/runs/456",
+            repository: {
+              name: repo,
+              owner: { login: owner },
+            },
+          },
+        },
+      };
+
+      await expect(
+        finalizeArmSemanticReview({
+          github,
+          context,
+          core: createMockCore(),
+        } as unknown as GitHubScriptArgs),
+      ).resolves.toEqual({
+        headSha,
+        issueNumber,
+        statusPublished: true,
+      });
+      expect(github.rest.actions.listWorkflowRunArtifacts).toHaveBeenCalledOnce();
+      expect(github.rest.actions.listWorkflowRunArtifacts).toHaveBeenCalledWith({
+        owner,
+        repo,
+        run_id: runId,
+        per_page: PER_PAGE_MAX,
+      });
+    });
   });
 
   it("requires manual review when trusted size checks find limited coverage", async () => {

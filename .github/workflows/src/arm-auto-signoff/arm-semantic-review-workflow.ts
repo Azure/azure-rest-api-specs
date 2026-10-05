@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { isFullGitSha } from "../../../shared/src/git.ts";
 import { CommitStatusState, PER_PAGE_MAX } from "../../../shared/src/github.ts";
-import { ARM_API_REVIEW_WORKFLOW_NAME, extractInputs } from "../context.ts";
+import { ARM_API_REVIEW_WORKFLOW_NAME, parseWorkflowRunArtifactInputs } from "../context.ts";
 import type { Core, GitHub, GitHubScriptArgs, WebhookEvent } from "../github.ts";
 import {
   ARM_SEMANTIC_REVIEW_STATUS,
@@ -321,12 +321,12 @@ export async function finalizeArmSemanticReview({
     return emptyResult;
   }
 
-  const { owner, repo, head_sha, issue_number } = await extractInputs(github, context, core);
+  const { headSha, issueNumber } = parseWorkflowRunArtifactInputs(artifactNames, core);
   const statusPublished = await finalizeSemanticReviewWorkflow({
-    owner,
-    repo,
-    issueNumber: issue_number,
-    headSha: head_sha,
+    owner: repositoryOwner,
+    repo: workflowRun.repository.name,
+    issueNumber,
+    headSha,
     runId: workflowRun.id,
     runAttempt: workflowRun.run_attempt,
     workflowConclusion: workflowRun.conclusion,
@@ -337,8 +337,8 @@ export async function finalizeArmSemanticReview({
     core,
   });
   return {
-    headSha: isFullGitSha(head_sha) ? head_sha : "",
-    issueNumber: Number.isSafeInteger(issue_number) && issue_number > 0 ? issue_number : 0,
+    headSha: isFullGitSha(headSha) ? headSha : "",
+    issueNumber: Number.isSafeInteger(issueNumber) && issueNumber > 0 ? issueNumber : 0,
     statusPublished,
   };
 }

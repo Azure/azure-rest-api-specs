@@ -341,6 +341,8 @@ reviewer run. It calls `finalizeArmSemanticReview`.
 
 It verifies:
 
+- the reviewer run's artifacts are listed once and reused for both correlation
+  and receipt finalization;
 - the reviewer actually executed;
 - the PR number and head SHA are valid;
 - the PR is still open;
@@ -701,16 +703,12 @@ This uses the same three-level `workflow_run` chain pattern as LintDiff and
 Avocado and reaches GitHub's supported chaining limit. Do not insert another
 downstream `workflow_run` workflow after Update Labels; it may not run.
 
-### Low or medium: fallback can block a newer head
+### Missing correlation artifacts
 
-When trusted correlation artifacts are missing after a failed reviewer run,
-correlation falls back to the PR number in the workflow title and fetches the
-current head.
-
-An old failed run could therefore mark a newer head Review incomplete.
-
-This fails closed; it cannot incorrectly authorize signoff. It can cause a false
-block and require another review.
+If the reviewer run does not contain trusted PR and head-SHA artifacts, the
+status workflow leaves semantic status unchanged. It does not substitute the
+PR's current head because that could attach an older run's result to a newer
+commit.
 
 ### Low: timestamp ordering
 
