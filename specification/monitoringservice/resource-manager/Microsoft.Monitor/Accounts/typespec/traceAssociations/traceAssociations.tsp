@@ -23,7 +23,10 @@ namespace Microsoft.Monitor {
     /**
      * Creates or replaces the trace association at the scope.
      */
-    createOrUpdate is Extension.CreateOrReplaceSync<Scope, TraceAssociationResource>;
+    createOrUpdate is Extension.CreateOrReplaceSync<
+      Scope,
+      TraceAssociationResource
+    >;
 
     /**
      * Deletes the trace association at the scope.

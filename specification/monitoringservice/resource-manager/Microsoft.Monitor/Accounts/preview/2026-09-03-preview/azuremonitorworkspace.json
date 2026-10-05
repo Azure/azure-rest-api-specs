@@ -2208,10 +2208,6 @@
           "description": "Query endpoints for the Azure Monitor Workspace.",
           "readOnly": true
         },
-        "logs": {
-          "$ref": "#/definitions/AzureMonitorWorkspaceLogs",
-          "description": "Log configuration for the Azure Monitor Workspace."
-        },
         "privateEndpointConnections": {
           "type": "array",
           "description": "List of private endpoint connections",
@@ -2280,18 +2276,6 @@
           "type": "string",
           "format": "uri",
           "description": "The query endpoint for the Azure Monitor Workspace.",
-          "readOnly": true
-        }
-      }
-    },
-    "AzureMonitorWorkspaceLogs": {
-      "type": "object",
-      "description": "Log configuration for an Azure Monitor Workspace.",
-      "properties": {
-        "logAnalyticsWorkspaceResourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "The resource ID of the default Log Analytics workspace linked to the Azure Monitor Workspace.",
           "readOnly": true
         }
       }
@@ -2757,8 +2741,7 @@
       "properties": {
         "enableAutoScale": {
           "type": "boolean",
-          "description": "Indicates whether automatic scaling of ingestion limits is enabled.\nOmit this property or specify null to preserve the existing automatic scaling mode.",
-          "x-nullable": true
+          "description": "Indicates whether automatic scaling of ingestion limits is enabled.\nOmit this property to preserve the existing automatic scaling mode."
         },
         "maxActiveTimeSeries": {
           "type": "integer",

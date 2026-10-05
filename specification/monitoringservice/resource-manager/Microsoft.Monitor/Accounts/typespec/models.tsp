@@ -42,18 +42,6 @@ namespace Microsoft.Monitor {
   }
 
   /**
-   * Log configuration for an Azure Monitor Workspace.
-   */
-  @added(Versions.v2026_09_03_preview)
-  model AzureMonitorWorkspaceLogs {
-    /**
-     * The resource ID of the default Log Analytics workspace linked to the Azure Monitor Workspace.
-     */
-    @visibility(Lifecycle.Read)
-    logAnalyticsWorkspaceResourceId?: armResourceIdentifier;
-  }
-
-  /**
    * A reference to an Azure Monitor action group.
    */
   @added(Versions.v2026_09_03_preview)
@@ -108,12 +96,6 @@ namespace Microsoft.Monitor {
     @added(Versions.v2026_09_03_preview)
     @visibility(Lifecycle.Read)
     endpoints?: AzureMonitorWorkspaceEndpoints;
-
-    /**
-     * Log configuration for the Azure Monitor Workspace.
-     */
-    @added(Versions.v2026_09_03_preview)
-    logs?: AzureMonitorWorkspaceLogs;
 
     /**
      * List of private endpoint connections
